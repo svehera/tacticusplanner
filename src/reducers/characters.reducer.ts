@@ -135,6 +135,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                         const rank: Rank = tacticusUnit.rank + 1;
 
                         const upgrades: string[] = TacticusIntegrationService.convertUpgrades(
+                            char.snowprintId ?? '',
                             char.id,
                             rank,
                             tacticusUnit.upgrades

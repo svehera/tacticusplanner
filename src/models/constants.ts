@@ -31,6 +31,7 @@ export const rankToLevel: Record<Rank, number> = {
     [Rank.Diamond1]: 47,
     [Rank.Diamond2]: 50,
     [Rank.Diamond3]: 50,
+    [Rank.Adamantine1]: 55,
 };
 
 export const rankToRarity: Record<Rank, Rarity> = {
@@ -53,6 +54,7 @@ export const rankToRarity: Record<Rank, Rarity> = {
     [Rank.Diamond1]: Rarity.Legendary,
     [Rank.Diamond2]: Rarity.Legendary,
     [Rank.Diamond3]: Rarity.Legendary,
+    [Rank.Adamantine1]: Rarity.Mythic,
 };
 
 export const charsProgression: Record<number, ICharProgression> = {
@@ -75,7 +77,9 @@ export const charsProgression: Record<number, ICharProgression> = {
 
     [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 150, orbs: 10, rarity: Rarity.Legendary },
     [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 250, orbs: 15, rarity: Rarity.Legendary },
-    [Rarity.Legendary + RarityStars.BlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.OneBlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
+
+    [Rarity.Mythic + RarityStars.MythicWings]: { shards: 900, orbs: 45, rarity: Rarity.Mythic },
 };
 
 const defaultCampaignsProgress: ICampaignsProgress = {

@@ -4,7 +4,7 @@
         "snowprintId": "upgArmC001",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmC001.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC001.png",
         "craftable": false
     },
     "upgArmC002": {
@@ -12,7 +12,7 @@
         "snowprintId": "upgArmC002",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmC002.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC002.png",
         "craftable": false
     },
     "upgArmC003": {
@@ -20,7 +20,7 @@
         "snowprintId": "upgArmC003",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmC003.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC003.png",
         "craftable": false
     },
     "upgArmC004": {
@@ -28,7 +28,7 @@
         "snowprintId": "upgArmC004",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmC004.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC004.png",
         "craftable": false
     },
     "upgArmC005": {
@@ -36,7 +36,7 @@
         "snowprintId": "upgArmC005",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmC005.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC005.png",
         "craftable": false
     },
     "upgArmC006": {
@@ -44,7 +44,7 @@
         "snowprintId": "upgArmC006",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmC006.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC006.png",
         "craftable": false
     },
     "upgArmC007": {
@@ -52,7 +52,7 @@
         "snowprintId": "upgArmC007",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmC007.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC007.png",
         "craftable": false
     },
     "upgArmC011": {
@@ -60,7 +60,7 @@
         "snowprintId": "upgArmC011",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmC011.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC011.png",
         "craftable": false
     },
     "upgArmC012": {
@@ -68,7 +68,7 @@
         "snowprintId": "upgArmC012",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmC012.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC012.png",
         "craftable": false
     },
     "upgArmC013": {
@@ -76,7 +76,7 @@
         "snowprintId": "upgArmC013",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmC013.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmC013.png",
         "craftable": false
     },
     "upgArmCS": {
@@ -84,7 +84,7 @@
         "snowprintId": "upgArmCS",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmCS.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmCS.png",
         "craftable": false
     },
     "upgArmE001C": {
@@ -92,7 +92,7 @@
         "snowprintId": "upgArmE001C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE001C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -114,7 +114,7 @@
         "snowprintId": "upgArmE002C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE002C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -136,7 +136,7 @@
         "snowprintId": "upgArmE003C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE003C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE003C.png",
         "craftable": true,
         "recipe": [
             {
@@ -158,7 +158,7 @@
         "snowprintId": "upgArmE004C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE004C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -180,7 +180,7 @@
         "snowprintId": "upgArmE005C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE005C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -202,7 +202,7 @@
         "snowprintId": "upgArmE006C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE006C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -224,7 +224,7 @@
         "snowprintId": "upgArmE007C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE007C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -238,7 +238,7 @@
         "snowprintId": "upgArmE008",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE008.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE008.png",
         "craftable": false
     },
     "upgArmE009": {
@@ -246,7 +246,7 @@
         "snowprintId": "upgArmE009",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE009.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE009.png",
         "craftable": false
     },
     "upgArmE010": {
@@ -254,7 +254,7 @@
         "snowprintId": "upgArmE010",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE010.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE010.png",
         "craftable": false
     },
     "upgArmE011C": {
@@ -262,7 +262,7 @@
         "snowprintId": "upgArmE011C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE011C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE011C.png",
         "craftable": true,
         "recipe": [
             {
@@ -284,7 +284,7 @@
         "snowprintId": "upgArmE012C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE012C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -306,7 +306,7 @@
         "snowprintId": "upgArmE013",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE013.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE013.png",
         "craftable": false
     },
     "upgArmE014C": {
@@ -314,7 +314,7 @@
         "snowprintId": "upgArmE014C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE014C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE014C.png",
         "craftable": true,
         "recipe": [
             {
@@ -336,7 +336,7 @@
         "snowprintId": "upgArmE021C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE021C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -350,7 +350,7 @@
         "snowprintId": "upgArmE022C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE022C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -364,7 +364,7 @@
         "snowprintId": "upgArmE023C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE023C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -378,7 +378,7 @@
         "snowprintId": "upgArmE025C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE025C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -392,7 +392,7 @@
         "snowprintId": "upgArmE026C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE026C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE026C.png",
         "craftable": true,
         "recipe": [
             {
@@ -406,7 +406,7 @@
         "snowprintId": "upgArmE027C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE027C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -420,7 +420,7 @@
         "snowprintId": "upgArmE028C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE028C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -434,7 +434,7 @@
         "snowprintId": "upgArmE029C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE029C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -448,7 +448,7 @@
         "snowprintId": "upgArmE031C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE031C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -462,7 +462,7 @@
         "snowprintId": "upgArmE032C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE032C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -476,7 +476,7 @@
         "snowprintId": "upgArmE033C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE033C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -490,7 +490,7 @@
         "snowprintId": "upgArmE034C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE034C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -504,7 +504,7 @@
         "snowprintId": "upgArmE035C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE035C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -518,7 +518,7 @@
         "snowprintId": "upgArmE036C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE036C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -532,7 +532,7 @@
         "snowprintId": "upgArmE037C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE037C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -546,7 +546,7 @@
         "snowprintId": "upgArmE038C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE038C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -560,7 +560,7 @@
         "snowprintId": "upgArmE039C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmE039C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -574,7 +574,7 @@
         "snowprintId": "upgArmECS",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmECS.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmECS.png",
         "craftable": false
     },
     "upgArmL001": {
@@ -582,7 +582,7 @@
         "snowprintId": "upgArmL001",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL001.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL001.png",
         "craftable": false
     },
     "upgArmL002C": {
@@ -590,7 +590,7 @@
         "snowprintId": "upgArmL002C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL002C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -608,7 +608,7 @@
         "snowprintId": "upgArmL003C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL003C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL003C.png",
         "craftable": true,
         "recipe": [
             {
@@ -626,7 +626,7 @@
         "snowprintId": "upgArmL004C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL004C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -644,7 +644,7 @@
         "snowprintId": "upgArmL005C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL005C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -662,7 +662,7 @@
         "snowprintId": "upgArmL006C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL006C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -680,7 +680,7 @@
         "snowprintId": "upgArmL007C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL007C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -698,7 +698,7 @@
         "snowprintId": "upgArmL008",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL008.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL008.png",
         "craftable": false
     },
     "upgArmL008C": {
@@ -706,7 +706,7 @@
         "snowprintId": "upgArmL008C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL008C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -724,7 +724,7 @@
         "snowprintId": "upgArmL009C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL009C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -742,7 +742,7 @@
         "snowprintId": "upgArmL010C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL010C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL010C.png",
         "craftable": true,
         "recipe": [
             {
@@ -760,7 +760,7 @@
         "snowprintId": "upgArmL011C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL011C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL011C.png",
         "craftable": true,
         "recipe": [
             {
@@ -778,7 +778,7 @@
         "snowprintId": "upgArmL021C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL021C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -796,7 +796,7 @@
         "snowprintId": "upgArmL022C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL022C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -814,7 +814,7 @@
         "snowprintId": "upgArmL023C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL023C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -832,7 +832,7 @@
         "snowprintId": "upgArmL025C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL025C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -850,7 +850,7 @@
         "snowprintId": "upgArmL026C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL026C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL026C.png",
         "craftable": true,
         "recipe": [
             {
@@ -868,7 +868,7 @@
         "snowprintId": "upgArmL027C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL027C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -886,7 +886,7 @@
         "snowprintId": "upgArmL028C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL028C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -904,7 +904,7 @@
         "snowprintId": "upgArmL029C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL029C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -922,7 +922,7 @@
         "snowprintId": "upgArmL031C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL031C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -940,7 +940,7 @@
         "snowprintId": "upgArmL032C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL032C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -958,7 +958,7 @@
         "snowprintId": "upgArmL033C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL033C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -976,7 +976,7 @@
         "snowprintId": "upgArmL034C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL034C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -994,7 +994,7 @@
         "snowprintId": "upgArmL035C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL035C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1012,7 +1012,7 @@
         "snowprintId": "upgArmL036C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL036C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1030,7 +1030,7 @@
         "snowprintId": "upgArmL037C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL037C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1048,7 +1048,7 @@
         "snowprintId": "upgArmL038C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL038C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1066,7 +1066,7 @@
         "snowprintId": "upgArmL039C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL039C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1084,7 +1084,7 @@
         "snowprintId": "upgArmL120C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL120C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL120C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1106,7 +1106,7 @@
         "snowprintId": "upgArmL121C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL121C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL121C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1128,7 +1128,7 @@
         "snowprintId": "upgArmL122C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL122C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL122C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1150,7 +1150,7 @@
         "snowprintId": "upgArmL123C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL123C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL123C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1172,7 +1172,7 @@
         "snowprintId": "upgArmL124C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL124C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL124C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1194,7 +1194,7 @@
         "snowprintId": "upgArmL125C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL125C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL125C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1216,7 +1216,7 @@
         "snowprintId": "upgArmL126C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL126C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL126C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1238,7 +1238,7 @@
         "snowprintId": "upgArmL127C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL127C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL127C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1260,7 +1260,7 @@
         "snowprintId": "upgArmL128C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL128C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL128C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1282,7 +1282,7 @@
         "snowprintId": "upgArmL129C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL129C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL129C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1304,7 +1304,7 @@
         "snowprintId": "upgArmL130C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL130C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL130C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1326,7 +1326,7 @@
         "snowprintId": "upgArmL131C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL131C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL131C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1348,7 +1348,7 @@
         "snowprintId": "upgArmL132C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL132C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL132C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1370,7 +1370,7 @@
         "snowprintId": "upgArmL133C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL133C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL133C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1392,7 +1392,7 @@
         "snowprintId": "upgArmL134C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL134C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL134C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1414,7 +1414,7 @@
         "snowprintId": "upgArmL135C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL135C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL135C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1436,7 +1436,7 @@
         "snowprintId": "upgArmL136C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL136C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL136C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1458,7 +1458,7 @@
         "snowprintId": "upgArmL137C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL137C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL137C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1480,7 +1480,7 @@
         "snowprintId": "upgArmL138C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL138C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL138C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1502,7 +1502,7 @@
         "snowprintId": "upgArmL139C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL139C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL139C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1524,7 +1524,7 @@
         "snowprintId": "upgArmL202",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL202.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL202.png",
         "craftable": false
     },
     "upgArmL203": {
@@ -1532,7 +1532,7 @@
         "snowprintId": "upgArmL203",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL203.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL203.png",
         "craftable": false
     },
     "upgArmL204": {
@@ -1540,7 +1540,7 @@
         "snowprintId": "upgArmL204",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL204.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL204.png",
         "craftable": false
     },
     "upgArmL211C": {
@@ -1548,7 +1548,7 @@
         "snowprintId": "upgArmL211C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL211C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL211C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1570,7 +1570,7 @@
         "snowprintId": "upgArmL212C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL212C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL212C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1592,7 +1592,7 @@
         "snowprintId": "upgArmL213C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL213C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL213C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1614,7 +1614,7 @@
         "snowprintId": "upgArmL214C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmL214C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL214C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1636,7 +1636,7 @@
         "snowprintId": "upgArmM211C",
         "rarity": "Mythic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmM211C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmM211C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1658,7 +1658,7 @@
         "snowprintId": "upgArmM212C",
         "rarity": "Mythic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmM212C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmM212C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1680,7 +1680,7 @@
         "snowprintId": "upgArmM213C",
         "rarity": "Mythic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmM213C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmM213C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1702,7 +1702,7 @@
         "snowprintId": "upgArmM214C",
         "rarity": "Mythic",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmM214C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmM214C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1724,7 +1724,7 @@
         "snowprintId": "upgArmR001C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR001C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1746,7 +1746,7 @@
         "snowprintId": "upgArmR002C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR002C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1764,7 +1764,7 @@
         "snowprintId": "upgArmR003C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR003C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR003C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1782,7 +1782,7 @@
         "snowprintId": "upgArmR004C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR004C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1804,7 +1804,7 @@
         "snowprintId": "upgArmR005",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR005.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR005.png",
         "craftable": false
     },
     "upgArmR006": {
@@ -1812,7 +1812,7 @@
         "snowprintId": "upgArmR006",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR006.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR006.png",
         "craftable": false
     },
     "upgArmR007C": {
@@ -1820,7 +1820,7 @@
         "snowprintId": "upgArmR007C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR007C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1838,7 +1838,7 @@
         "snowprintId": "upgArmR008C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR008C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1856,7 +1856,7 @@
         "snowprintId": "upgArmR009",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR009.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR009.png",
         "craftable": false
     },
     "upgArmR010": {
@@ -1864,7 +1864,7 @@
         "snowprintId": "upgArmR010",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR010.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR010.png",
         "craftable": false
     },
     "upgArmR012C": {
@@ -1872,7 +1872,7 @@
         "snowprintId": "upgArmR012C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR012C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1894,7 +1894,7 @@
         "snowprintId": "upgArmR013C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR013C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR013C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1916,7 +1916,7 @@
         "snowprintId": "upgArmR014C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR014C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR014C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1938,7 +1938,7 @@
         "snowprintId": "upgArmR015",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR015.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR015.png",
         "craftable": false
     },
     "upgArmR021": {
@@ -1946,7 +1946,7 @@
         "snowprintId": "upgArmR021",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR021.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR021.png",
         "craftable": false
     },
     "upgArmR022": {
@@ -1954,7 +1954,7 @@
         "snowprintId": "upgArmR022",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR022.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR022.png",
         "craftable": false
     },
     "upgArmR023": {
@@ -1962,7 +1962,7 @@
         "snowprintId": "upgArmR023",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR023.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR023.png",
         "craftable": false
     },
     "upgArmR025": {
@@ -1970,7 +1970,7 @@
         "snowprintId": "upgArmR025",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR025.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR025.png",
         "craftable": false
     },
     "upgArmR026": {
@@ -1978,7 +1978,7 @@
         "snowprintId": "upgArmR026",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR026.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR026.png",
         "craftable": false
     },
     "upgArmR027": {
@@ -1986,7 +1986,7 @@
         "snowprintId": "upgArmR027",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR027.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR027.png",
         "craftable": false
     },
     "upgArmR028": {
@@ -1994,7 +1994,7 @@
         "snowprintId": "upgArmR028",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR028.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR028.png",
         "craftable": false
     },
     "upgArmR029": {
@@ -2002,7 +2002,7 @@
         "snowprintId": "upgArmR029",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR029.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR029.png",
         "craftable": false
     },
     "upgArmR031": {
@@ -2010,7 +2010,7 @@
         "snowprintId": "upgArmR031",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR031.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR031.png",
         "craftable": false
     },
     "upgArmR032": {
@@ -2018,7 +2018,7 @@
         "snowprintId": "upgArmR032",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR032.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR032.png",
         "craftable": false
     },
     "upgArmR033": {
@@ -2026,7 +2026,7 @@
         "snowprintId": "upgArmR033",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR033.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR033.png",
         "craftable": false
     },
     "upgArmR034": {
@@ -2034,7 +2034,7 @@
         "snowprintId": "upgArmR034",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR034.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR034.png",
         "craftable": false
     },
     "upgArmR035": {
@@ -2042,7 +2042,7 @@
         "snowprintId": "upgArmR035",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR035.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR035.png",
         "craftable": false
     },
     "upgArmR036": {
@@ -2050,7 +2050,7 @@
         "snowprintId": "upgArmR036",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR036.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR036.png",
         "craftable": false
     },
     "upgArmR037": {
@@ -2058,7 +2058,7 @@
         "snowprintId": "upgArmR037",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR037.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR037.png",
         "craftable": false
     },
     "upgArmR038": {
@@ -2066,7 +2066,7 @@
         "snowprintId": "upgArmR038",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR038.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR038.png",
         "craftable": false
     },
     "upgArmR039": {
@@ -2074,7 +2074,7 @@
         "snowprintId": "upgArmR039",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmR039.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR039.png",
         "craftable": false
     },
     "upgArmRCS": {
@@ -2082,7 +2082,7 @@
         "snowprintId": "upgArmRCS",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmRCS.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmRCS.png",
         "craftable": false
     },
     "upgArmU001": {
@@ -2090,7 +2090,7 @@
         "snowprintId": "upgArmU001",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU001.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU001.png",
         "craftable": false
     },
     "upgArmU002": {
@@ -2098,7 +2098,7 @@
         "snowprintId": "upgArmU002",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU002.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU002.png",
         "craftable": false
     },
     "upgArmU003C": {
@@ -2106,7 +2106,7 @@
         "snowprintId": "upgArmU003C",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU003C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU003C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2120,7 +2120,7 @@
         "snowprintId": "upgArmU004C",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU004C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2134,7 +2134,7 @@
         "snowprintId": "upgArmU005",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU005.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU005.png",
         "craftable": false
     },
     "upgArmU006": {
@@ -2142,7 +2142,7 @@
         "snowprintId": "upgArmU006",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU006.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU006.png",
         "craftable": false
     },
     "upgArmU007": {
@@ -2150,7 +2150,7 @@
         "snowprintId": "upgArmU007",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU007.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU007.png",
         "craftable": false
     },
     "upgArmU008": {
@@ -2158,7 +2158,7 @@
         "snowprintId": "upgArmU008",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU008.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU008.png",
         "craftable": false
     },
     "upgArmU009": {
@@ -2166,7 +2166,7 @@
         "snowprintId": "upgArmU009",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU009.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU009.png",
         "craftable": false
     },
     "upgArmU010C": {
@@ -2174,7 +2174,7 @@
         "snowprintId": "upgArmU010C",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU010C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU010C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2188,7 +2188,7 @@
         "snowprintId": "upgArmU012",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU012.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU012.png",
         "craftable": false
     },
     "upgArmU012C": {
@@ -2196,7 +2196,7 @@
         "snowprintId": "upgArmU012C",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU012C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2210,7 +2210,7 @@
         "snowprintId": "upgArmU013",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU013.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU013.png",
         "craftable": false
     },
     "upgArmU014": {
@@ -2218,7 +2218,7 @@
         "snowprintId": "upgArmU014",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/upgArmU014.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmU014.png",
         "craftable": false
     },
     "upgDmgC001": {
@@ -2226,7 +2226,7 @@
         "snowprintId": "upgDmgC001",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC001.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC001.png",
         "craftable": false
     },
     "upgDmgC002": {
@@ -2234,7 +2234,7 @@
         "snowprintId": "upgDmgC002",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC002.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC002.png",
         "craftable": false
     },
     "upgDmgC003": {
@@ -2242,7 +2242,7 @@
         "snowprintId": "upgDmgC003",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC003.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC003.png",
         "craftable": false
     },
     "upgDmgC004": {
@@ -2250,7 +2250,7 @@
         "snowprintId": "upgDmgC004",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC004.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC004.png",
         "craftable": false
     },
     "upgDmgC005": {
@@ -2258,7 +2258,7 @@
         "snowprintId": "upgDmgC005",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC005.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC005.png",
         "craftable": false
     },
     "upgDmgC006": {
@@ -2266,7 +2266,7 @@
         "snowprintId": "upgDmgC006",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC006.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC006.png",
         "craftable": false
     },
     "upgDmgC007": {
@@ -2274,7 +2274,7 @@
         "snowprintId": "upgDmgC007",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC007.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC007.png",
         "craftable": false
     },
     "upgDmgC008": {
@@ -2282,7 +2282,7 @@
         "snowprintId": "upgDmgC008",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC008.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC008.png",
         "craftable": false
     },
     "upgDmgC009": {
@@ -2290,7 +2290,7 @@
         "snowprintId": "upgDmgC009",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC009.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC009.png",
         "craftable": false
     },
     "upgDmgC010": {
@@ -2298,7 +2298,7 @@
         "snowprintId": "upgDmgC010",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC010.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC010.png",
         "craftable": false
     },
     "upgDmgC011": {
@@ -2306,7 +2306,7 @@
         "snowprintId": "upgDmgC011",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC011.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC011.png",
         "craftable": false
     },
     "upgDmgC012": {
@@ -2314,7 +2314,7 @@
         "snowprintId": "upgDmgC012",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC012.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC012.png",
         "craftable": false
     },
     "upgDmgC013": {
@@ -2322,7 +2322,7 @@
         "snowprintId": "upgDmgC013",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC013.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC013.png",
         "craftable": false
     },
     "upgDmgC014": {
@@ -2330,7 +2330,7 @@
         "snowprintId": "upgDmgC014",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC014.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC014.png",
         "craftable": false
     },
     "upgDmgC015": {
@@ -2338,7 +2338,7 @@
         "snowprintId": "upgDmgC015",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgC015.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgC015.png",
         "craftable": false
     },
     "upgDmgCS": {
@@ -2346,7 +2346,7 @@
         "snowprintId": "upgDmgCS",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgCS.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgCS.png",
         "craftable": false
     },
     "upgDmgE001": {
@@ -2354,7 +2354,7 @@
         "snowprintId": "upgDmgE001",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE001.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE001.png",
         "craftable": false
     },
     "upgDmgE002C": {
@@ -2362,7 +2362,7 @@
         "snowprintId": "upgDmgE002C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE002C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2384,7 +2384,7 @@
         "snowprintId": "upgDmgE003",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE003.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE003.png",
         "craftable": false
     },
     "upgDmgE004": {
@@ -2392,7 +2392,7 @@
         "snowprintId": "upgDmgE004",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE004.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE004.png",
         "craftable": false
     },
     "upgDmgE005": {
@@ -2400,7 +2400,7 @@
         "snowprintId": "upgDmgE005",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE005.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE005.png",
         "craftable": false
     },
     "upgDmgE006C": {
@@ -2408,7 +2408,7 @@
         "snowprintId": "upgDmgE006C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE006C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2430,7 +2430,7 @@
         "snowprintId": "upgDmgE007C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE007C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2452,7 +2452,7 @@
         "snowprintId": "upgDmgE008C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE008C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2474,7 +2474,7 @@
         "snowprintId": "upgDmgE009C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE009C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2496,7 +2496,7 @@
         "snowprintId": "upgDmgE010",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE010.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE010.png",
         "craftable": false
     },
     "upgDmgE011": {
@@ -2504,7 +2504,7 @@
         "snowprintId": "upgDmgE011",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE011.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE011.png",
         "craftable": false
     },
     "upgDmgE021C": {
@@ -2512,7 +2512,7 @@
         "snowprintId": "upgDmgE021C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE021C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2526,7 +2526,7 @@
         "snowprintId": "upgDmgE022C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE022C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2540,7 +2540,7 @@
         "snowprintId": "upgDmgE023C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE023C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2554,7 +2554,7 @@
         "snowprintId": "upgDmgE024C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE024C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE024C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2568,7 +2568,7 @@
         "snowprintId": "upgDmgE025C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE025C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2582,7 +2582,7 @@
         "snowprintId": "upgDmgE026C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE026C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE026C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2596,7 +2596,7 @@
         "snowprintId": "upgDmgE027C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE027C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2610,7 +2610,7 @@
         "snowprintId": "upgDmgE028C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE028C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2624,7 +2624,7 @@
         "snowprintId": "upgDmgE029C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE029C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2638,7 +2638,7 @@
         "snowprintId": "upgDmgE031C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE031C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2652,7 +2652,7 @@
         "snowprintId": "upgDmgE032C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE032C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2666,7 +2666,7 @@
         "snowprintId": "upgDmgE033C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE033C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2680,7 +2680,7 @@
         "snowprintId": "upgDmgE034C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE034C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2694,7 +2694,7 @@
         "snowprintId": "upgDmgE035C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE035C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2708,7 +2708,7 @@
         "snowprintId": "upgDmgE036C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE036C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2722,7 +2722,7 @@
         "snowprintId": "upgDmgE037C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE037C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2736,7 +2736,7 @@
         "snowprintId": "upgDmgE038C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE038C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2750,7 +2750,7 @@
         "snowprintId": "upgDmgE039C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgE039C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2764,7 +2764,7 @@
         "snowprintId": "upgDmgECS",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgECS.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgECS.png",
         "craftable": false
     },
     "upgDmgL001": {
@@ -2772,7 +2772,7 @@
         "snowprintId": "upgDmgL001",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL001.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL001.png",
         "craftable": false
     },
     "upgDmgL002C": {
@@ -2780,7 +2780,7 @@
         "snowprintId": "upgDmgL002C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL002C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2802,7 +2802,7 @@
         "snowprintId": "upgDmgL003",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL003.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL003.png",
         "craftable": false
     },
     "upgDmgL004C": {
@@ -2810,7 +2810,7 @@
         "snowprintId": "upgDmgL004C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL004C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2832,7 +2832,7 @@
         "snowprintId": "upgDmgL005C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL005C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2850,7 +2850,7 @@
         "snowprintId": "upgDmgL006C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL006C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2868,7 +2868,7 @@
         "snowprintId": "upgDmgL007C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL007C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2890,7 +2890,7 @@
         "snowprintId": "upgDmgL008C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL008C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2912,7 +2912,7 @@
         "snowprintId": "upgDmgL009C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL009C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2934,7 +2934,7 @@
         "snowprintId": "upgDmgL010C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL010C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL010C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2956,7 +2956,7 @@
         "snowprintId": "upgDmgL012C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL012C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2974,7 +2974,7 @@
         "snowprintId": "upgDmgL015C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL015C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL015C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2992,7 +2992,7 @@
         "snowprintId": "upgDmgL016C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL016C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL016C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3010,7 +3010,7 @@
         "snowprintId": "upgDmgL017C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL017C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL017C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3028,7 +3028,7 @@
         "snowprintId": "upgDmgL021C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL021C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3046,7 +3046,7 @@
         "snowprintId": "upgDmgL022C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL022C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3064,7 +3064,7 @@
         "snowprintId": "upgDmgL023C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL023C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3082,7 +3082,7 @@
         "snowprintId": "upgDmgL024C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL024C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL024C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3100,7 +3100,7 @@
         "snowprintId": "upgDmgL025C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL025C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3118,7 +3118,7 @@
         "snowprintId": "upgDmgL026C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL026C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL026C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3136,7 +3136,7 @@
         "snowprintId": "upgDmgL027C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL027C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3154,7 +3154,7 @@
         "snowprintId": "upgDmgL028C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL028C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3172,7 +3172,7 @@
         "snowprintId": "upgDmgL029C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL029C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3190,7 +3190,7 @@
         "snowprintId": "upgDmgL030C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL030C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL030C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3208,7 +3208,7 @@
         "snowprintId": "upgDmgL031C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL031C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3226,7 +3226,7 @@
         "snowprintId": "upgDmgL032C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL032C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3244,7 +3244,7 @@
         "snowprintId": "upgDmgL033C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL033C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3262,7 +3262,7 @@
         "snowprintId": "upgDmgL034C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL034C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3280,7 +3280,7 @@
         "snowprintId": "upgDmgL035C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL035C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3298,7 +3298,7 @@
         "snowprintId": "upgDmgL036C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL036C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3316,7 +3316,7 @@
         "snowprintId": "upgDmgL037C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL037C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3334,7 +3334,7 @@
         "snowprintId": "upgDmgL038C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL038C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3352,7 +3352,7 @@
         "snowprintId": "upgDmgL039C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL039C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3370,7 +3370,7 @@
         "snowprintId": "upgDmgL120C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL120C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL120C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3392,7 +3392,7 @@
         "snowprintId": "upgDmgL121C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL121C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL121C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3414,7 +3414,7 @@
         "snowprintId": "upgDmgL122C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL122C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL122C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3436,7 +3436,7 @@
         "snowprintId": "upgDmgL123C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL123C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL123C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3458,7 +3458,7 @@
         "snowprintId": "upgDmgL124C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL124C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL124C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3480,7 +3480,7 @@
         "snowprintId": "upgDmgL125C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL125C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL125C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3502,7 +3502,7 @@
         "snowprintId": "upgDmgL126C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL126C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL126C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3524,7 +3524,7 @@
         "snowprintId": "upgDmgL127C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL127C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL127C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3546,7 +3546,7 @@
         "snowprintId": "upgDmgL128C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL128C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL128C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3568,7 +3568,7 @@
         "snowprintId": "upgDmgL129C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL129C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL129C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3590,7 +3590,7 @@
         "snowprintId": "upgDmgL130C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL130C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL130C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3612,7 +3612,7 @@
         "snowprintId": "upgDmgL131C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL131C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL131C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3634,7 +3634,7 @@
         "snowprintId": "upgDmgL132C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL132C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL132C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3656,7 +3656,7 @@
         "snowprintId": "upgDmgL133C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL133C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL133C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3678,7 +3678,7 @@
         "snowprintId": "upgDmgL134C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL134C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL134C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3700,7 +3700,7 @@
         "snowprintId": "upgDmgL135C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL135C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL135C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3722,7 +3722,7 @@
         "snowprintId": "upgDmgL136C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL136C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL136C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3744,7 +3744,7 @@
         "snowprintId": "upgDmgL137C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL137C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL137C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3766,7 +3766,7 @@
         "snowprintId": "upgDmgL138C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL138C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL138C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3788,7 +3788,7 @@
         "snowprintId": "upgDmgL139C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL139C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL139C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3810,7 +3810,7 @@
         "snowprintId": "upgDmgL202",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL202.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL202.png",
         "craftable": false
     },
     "upgDmgL204": {
@@ -3818,7 +3818,7 @@
         "snowprintId": "upgDmgL204",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL204.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL204.png",
         "craftable": false
     },
     "upgDmgL211C": {
@@ -3826,7 +3826,7 @@
         "snowprintId": "upgDmgL211C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL211C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL211C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3848,7 +3848,7 @@
         "snowprintId": "upgDmgL212C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL212C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL212C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3870,7 +3870,7 @@
         "snowprintId": "upgDmgL213C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL213C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL213C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3892,7 +3892,7 @@
         "snowprintId": "upgDmgL214C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgL214C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL214C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3914,7 +3914,7 @@
         "snowprintId": "upgDmgM211C",
         "rarity": "Mythic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgM211C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgM211C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3936,7 +3936,7 @@
         "snowprintId": "upgDmgM212C",
         "rarity": "Mythic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgM212C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgM212C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3958,7 +3958,7 @@
         "snowprintId": "upgDmgM213C",
         "rarity": "Mythic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgM213C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgM213C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3980,7 +3980,7 @@
         "snowprintId": "upgDmgM214C",
         "rarity": "Mythic",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgM214C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgM214C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4002,7 +4002,7 @@
         "snowprintId": "upgDmgR001C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR001C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4020,7 +4020,7 @@
         "snowprintId": "upgDmgR002",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR002.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR002.png",
         "craftable": false
     },
     "upgDmgR003": {
@@ -4028,7 +4028,7 @@
         "snowprintId": "upgDmgR003",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR003.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR003.png",
         "craftable": false
     },
     "upgDmgR004C": {
@@ -4036,7 +4036,7 @@
         "snowprintId": "upgDmgR004C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR004C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4054,7 +4054,7 @@
         "snowprintId": "upgDmgR005",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR005.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR005.png",
         "craftable": false
     },
     "upgDmgR006": {
@@ -4062,7 +4062,7 @@
         "snowprintId": "upgDmgR006",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR006.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR006.png",
         "craftable": false
     },
     "upgDmgR007": {
@@ -4070,7 +4070,7 @@
         "snowprintId": "upgDmgR007",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR007.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR007.png",
         "craftable": false
     },
     "upgDmgR008C": {
@@ -4078,7 +4078,7 @@
         "snowprintId": "upgDmgR008C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR008C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4096,7 +4096,7 @@
         "snowprintId": "upgDmgR009",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR009.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR009.png",
         "craftable": false
     },
     "upgDmgR010C": {
@@ -4104,7 +4104,7 @@
         "snowprintId": "upgDmgR010C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR010C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR010C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4126,7 +4126,7 @@
         "snowprintId": "upgDmgR011C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR011C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR011C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4148,7 +4148,7 @@
         "snowprintId": "upgDmgR012C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR012C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4166,7 +4166,7 @@
         "snowprintId": "upgDmgR015C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR015C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR015C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4184,7 +4184,7 @@
         "snowprintId": "upgDmgR016C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR016C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR016C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4202,7 +4202,7 @@
         "snowprintId": "upgDmgR017C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR017C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR017C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4220,7 +4220,7 @@
         "snowprintId": "upgDmgR021",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR021.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR021.png",
         "craftable": false
     },
     "upgDmgR022": {
@@ -4228,7 +4228,7 @@
         "snowprintId": "upgDmgR022",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR022.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR022.png",
         "craftable": false
     },
     "upgDmgR023": {
@@ -4236,7 +4236,7 @@
         "snowprintId": "upgDmgR023",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR023.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR023.png",
         "craftable": false
     },
     "upgDmgR024": {
@@ -4244,7 +4244,7 @@
         "snowprintId": "upgDmgR024",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR024.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR024.png",
         "craftable": false
     },
     "upgDmgR025": {
@@ -4252,7 +4252,7 @@
         "snowprintId": "upgDmgR025",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR025.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR025.png",
         "craftable": false
     },
     "upgDmgR026": {
@@ -4260,7 +4260,7 @@
         "snowprintId": "upgDmgR026",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR026.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR026.png",
         "craftable": false
     },
     "upgDmgR027": {
@@ -4268,7 +4268,7 @@
         "snowprintId": "upgDmgR027",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR027.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR027.png",
         "craftable": false
     },
     "upgDmgR028": {
@@ -4276,7 +4276,7 @@
         "snowprintId": "upgDmgR028",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR028.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR028.png",
         "craftable": false
     },
     "upgDmgR029": {
@@ -4284,7 +4284,7 @@
         "snowprintId": "upgDmgR029",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR029.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR029.png",
         "craftable": false
     },
     "upgDmgR031": {
@@ -4292,7 +4292,7 @@
         "snowprintId": "upgDmgR031",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR031.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR031.png",
         "craftable": false
     },
     "upgDmgR032": {
@@ -4300,7 +4300,7 @@
         "snowprintId": "upgDmgR032",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR032.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR032.png",
         "craftable": false
     },
     "upgDmgR033": {
@@ -4308,7 +4308,7 @@
         "snowprintId": "upgDmgR033",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR033.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR033.png",
         "craftable": false
     },
     "upgDmgR034": {
@@ -4316,7 +4316,7 @@
         "snowprintId": "upgDmgR034",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR034.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR034.png",
         "craftable": false
     },
     "upgDmgR035": {
@@ -4324,7 +4324,7 @@
         "snowprintId": "upgDmgR035",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR035.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR035.png",
         "craftable": false
     },
     "upgDmgR036": {
@@ -4332,7 +4332,7 @@
         "snowprintId": "upgDmgR036",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR036.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR036.png",
         "craftable": false
     },
     "upgDmgR037": {
@@ -4340,7 +4340,7 @@
         "snowprintId": "upgDmgR037",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR037.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR037.png",
         "craftable": false
     },
     "upgDmgR038": {
@@ -4348,7 +4348,7 @@
         "snowprintId": "upgDmgR038",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR038.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR038.png",
         "craftable": false
     },
     "upgDmgR039": {
@@ -4356,7 +4356,7 @@
         "snowprintId": "upgDmgR039",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR039.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR039.png",
         "craftable": false
     },
     "upgDmgR13C": {
@@ -4364,7 +4364,7 @@
         "snowprintId": "upgDmgR13C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR13C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR13C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4386,7 +4386,7 @@
         "snowprintId": "upgDmgR14C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgR14C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR14C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4408,7 +4408,7 @@
         "snowprintId": "upgDmgRCS",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgRCS.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgRCS.png",
         "craftable": false
     },
     "upgDmgU001C": {
@@ -4416,7 +4416,7 @@
         "snowprintId": "upgDmgU001C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU001C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4430,7 +4430,7 @@
         "snowprintId": "upgDmgU002C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU002C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4444,7 +4444,7 @@
         "snowprintId": "upgDmgU003",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU003.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU003.png",
         "craftable": false
     },
     "upgDmgU004": {
@@ -4452,7 +4452,7 @@
         "snowprintId": "upgDmgU004",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU004.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU004.png",
         "craftable": false
     },
     "upgDmgU005": {
@@ -4460,7 +4460,7 @@
         "snowprintId": "upgDmgU005",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU005.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU005.png",
         "craftable": false
     },
     "upgDmgU006": {
@@ -4468,7 +4468,7 @@
         "snowprintId": "upgDmgU006",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU006.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU006.png",
         "craftable": false
     },
     "upgDmgU007C": {
@@ -4476,7 +4476,7 @@
         "snowprintId": "upgDmgU007C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU007C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4490,7 +4490,7 @@
         "snowprintId": "upgDmgU008C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU008C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4504,7 +4504,7 @@
         "snowprintId": "upgDmgU009",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU009.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU009.png",
         "craftable": false
     },
     "upgDmgU010": {
@@ -4512,7 +4512,7 @@
         "snowprintId": "upgDmgU010",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU010.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU010.png",
         "craftable": false
     },
     "upgDmgU011": {
@@ -4520,7 +4520,7 @@
         "snowprintId": "upgDmgU011",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU011.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU011.png",
         "craftable": false
     },
     "upgDmgU012": {
@@ -4528,7 +4528,7 @@
         "snowprintId": "upgDmgU012",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU012.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU012.png",
         "craftable": false
     },
     "upgDmgU013C": {
@@ -4536,7 +4536,7 @@
         "snowprintId": "upgDmgU013C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU013C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU013C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4550,7 +4550,7 @@
         "snowprintId": "upgDmgU014",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU014.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU014.png",
         "craftable": false
     },
     "upgDmgU015C": {
@@ -4558,7 +4558,7 @@
         "snowprintId": "upgDmgU015C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU015C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU015C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4576,7 +4576,7 @@
         "snowprintId": "upgDmgU016C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU016C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU016C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4594,7 +4594,7 @@
         "snowprintId": "upgDmgU017C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU017C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU017C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4612,7 +4612,7 @@
         "snowprintId": "upgDmgU018C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU018C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU018C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4630,7 +4630,7 @@
         "snowprintId": "upgDmgU019",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint_assets/upgrade_materials/upgDmgU019.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgU019.png",
         "craftable": false
     },
     "upgHpC001": {
@@ -4638,7 +4638,7 @@
         "snowprintId": "upgHpC001",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC001.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC001.png",
         "craftable": false
     },
     "upgHpC002": {
@@ -4646,7 +4646,7 @@
         "snowprintId": "upgHpC002",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC002.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC002.png",
         "craftable": false
     },
     "upgHpC003": {
@@ -4654,7 +4654,7 @@
         "snowprintId": "upgHpC003",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC003.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC003.png",
         "craftable": false
     },
     "upgHpC004": {
@@ -4662,7 +4662,7 @@
         "snowprintId": "upgHpC004",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC004.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC004.png",
         "craftable": false
     },
     "upgHpC005": {
@@ -4670,7 +4670,7 @@
         "snowprintId": "upgHpC005",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC005.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC005.png",
         "craftable": false
     },
     "upgHpC006": {
@@ -4678,7 +4678,7 @@
         "snowprintId": "upgHpC006",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC006.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC006.png",
         "craftable": false
     },
     "upgHpC007": {
@@ -4686,7 +4686,7 @@
         "snowprintId": "upgHpC007",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC007.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC007.png",
         "craftable": false
     },
     "upgHpC008": {
@@ -4694,7 +4694,7 @@
         "snowprintId": "upgHpC008",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC008.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC008.png",
         "craftable": false
     },
     "upgHpC009": {
@@ -4702,7 +4702,7 @@
         "snowprintId": "upgHpC009",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC009.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC009.png",
         "craftable": false
     },
     "upgHpC010": {
@@ -4710,7 +4710,7 @@
         "snowprintId": "upgHpC010",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC010.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC010.png",
         "craftable": false
     },
     "upgHpC013": {
@@ -4718,7 +4718,7 @@
         "snowprintId": "upgHpC013",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC013.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC013.png",
         "craftable": false
     },
     "upgHpC014": {
@@ -4726,7 +4726,7 @@
         "snowprintId": "upgHpC014",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC014.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC014.png",
         "craftable": false
     },
     "upgHpC015": {
@@ -4734,7 +4734,7 @@
         "snowprintId": "upgHpC015",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC015.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC015.png",
         "craftable": false
     },
     "upgHpC016": {
@@ -4742,7 +4742,7 @@
         "snowprintId": "upgHpC016",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC016.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC016.png",
         "craftable": false
     },
     "upgHpC017": {
@@ -4750,7 +4750,7 @@
         "snowprintId": "upgHpC017",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpC017.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpC017.png",
         "craftable": false
     },
     "upgHpCS": {
@@ -4758,7 +4758,7 @@
         "snowprintId": "upgHpCS",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpCS.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpCS.png",
         "craftable": false
     },
     "upgHpE001C": {
@@ -4766,7 +4766,7 @@
         "snowprintId": "upgHpE001C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE001C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4788,7 +4788,7 @@
         "snowprintId": "upgHpE002C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE002C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4810,7 +4810,7 @@
         "snowprintId": "upgHpE003",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE003.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE003.png",
         "craftable": false
     },
     "upgHpE004C": {
@@ -4818,7 +4818,7 @@
         "snowprintId": "upgHpE004C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE004C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4840,7 +4840,7 @@
         "snowprintId": "upgHpE005C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE005C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4854,7 +4854,7 @@
         "snowprintId": "upgHpE006C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE006C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4876,7 +4876,7 @@
         "snowprintId": "upgHpE007C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE007C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4898,7 +4898,7 @@
         "snowprintId": "upgHpE008C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE008C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4920,7 +4920,7 @@
         "snowprintId": "upgHpE009C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE009C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4934,7 +4934,7 @@
         "snowprintId": "upgHpE011C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE011C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE011C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4948,7 +4948,7 @@
         "snowprintId": "upgHpE012",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE012.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE012.png",
         "craftable": false
     },
     "upgHpE013C": {
@@ -4956,7 +4956,7 @@
         "snowprintId": "upgHpE013C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE013C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE013C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4978,7 +4978,7 @@
         "snowprintId": "upgHpE014C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE014C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE014C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5000,7 +5000,7 @@
         "snowprintId": "upgHpE015",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE015.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE015.png",
         "craftable": false
     },
     "upgHpE017": {
@@ -5008,7 +5008,7 @@
         "snowprintId": "upgHpE017",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE017.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE017.png",
         "craftable": false
     },
     "upgHpE021C": {
@@ -5016,7 +5016,7 @@
         "snowprintId": "upgHpE021C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE021C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5030,7 +5030,7 @@
         "snowprintId": "upgHpE022C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE022C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5044,7 +5044,7 @@
         "snowprintId": "upgHpE023C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE023C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5058,7 +5058,7 @@
         "snowprintId": "upgHpE024C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE024C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE024C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5072,7 +5072,7 @@
         "snowprintId": "upgHpE025C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE025C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5086,7 +5086,7 @@
         "snowprintId": "upgHpE027C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE027C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5100,7 +5100,7 @@
         "snowprintId": "upgHpE028C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE028C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5114,7 +5114,7 @@
         "snowprintId": "upgHpE029C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE029C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5128,7 +5128,7 @@
         "snowprintId": "upgHpE031C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE031C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5142,7 +5142,7 @@
         "snowprintId": "upgHpE032C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE032C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5156,7 +5156,7 @@
         "snowprintId": "upgHpE033C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE033C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5170,7 +5170,7 @@
         "snowprintId": "upgHpE034C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE034C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5184,7 +5184,7 @@
         "snowprintId": "upgHpE035C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE035C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5198,7 +5198,7 @@
         "snowprintId": "upgHpE036C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE036C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5212,7 +5212,7 @@
         "snowprintId": "upgHpE037C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE037C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5226,7 +5226,7 @@
         "snowprintId": "upgHpE038C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE038C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5240,7 +5240,7 @@
         "snowprintId": "upgHpE039C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpE039C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5254,7 +5254,7 @@
         "snowprintId": "upgHpECS",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpECS.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpECS.png",
         "craftable": false
     },
     "upgHpL001C": {
@@ -5262,7 +5262,7 @@
         "snowprintId": "upgHpL001C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL001C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5284,7 +5284,7 @@
         "snowprintId": "upgHpL002C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL002C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5306,7 +5306,7 @@
         "snowprintId": "upgHpL005C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL005C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5324,7 +5324,7 @@
         "snowprintId": "upgHpL006C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL006C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5342,7 +5342,7 @@
         "snowprintId": "upgHpL007C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL007C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5360,7 +5360,7 @@
         "snowprintId": "upgHpL008C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL008C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5382,7 +5382,7 @@
         "snowprintId": "upgHpL009C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL009C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5404,7 +5404,7 @@
         "snowprintId": "upgHpL010",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL010.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL010.png",
         "craftable": false
     },
     "upgHpL011C": {
@@ -5412,7 +5412,7 @@
         "snowprintId": "upgHpL011C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL011C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL011C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5434,7 +5434,7 @@
         "snowprintId": "upgHpL012C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL012C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5456,7 +5456,7 @@
         "snowprintId": "upgHpL013C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL013C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL013C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5478,7 +5478,7 @@
         "snowprintId": "upgHpL014C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL014C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL014C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5500,7 +5500,7 @@
         "snowprintId": "upgHpL017C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL017C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL017C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5522,7 +5522,7 @@
         "snowprintId": "upgHpL021C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL021C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5540,7 +5540,7 @@
         "snowprintId": "upgHpL022C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL022C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5558,7 +5558,7 @@
         "snowprintId": "upgHpL023C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL023C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5576,7 +5576,7 @@
         "snowprintId": "upgHpL024C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL024C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL024C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5594,7 +5594,7 @@
         "snowprintId": "upgHpL025C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL025C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5612,7 +5612,7 @@
         "snowprintId": "upgHpL027C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL027C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5630,7 +5630,7 @@
         "snowprintId": "upgHpL028C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL028C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5648,7 +5648,7 @@
         "snowprintId": "upgHpL029C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL029C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5666,7 +5666,7 @@
         "snowprintId": "upgHpL031C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL031C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5684,7 +5684,7 @@
         "snowprintId": "upgHpL032C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL032C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5702,7 +5702,7 @@
         "snowprintId": "upgHpL033C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL033C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5720,7 +5720,7 @@
         "snowprintId": "upgHpL034C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL034C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5738,7 +5738,7 @@
         "snowprintId": "upgHpL035C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL035C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5756,7 +5756,7 @@
         "snowprintId": "upgHpL036C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL036C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5774,7 +5774,7 @@
         "snowprintId": "upgHpL037C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL037C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5792,7 +5792,7 @@
         "snowprintId": "upgHpL038C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL038C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5810,7 +5810,7 @@
         "snowprintId": "upgHpL039C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL039C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5828,7 +5828,7 @@
         "snowprintId": "upgHpL100",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL100.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL100.png",
         "craftable": false
     },
     "upgHpL101": {
@@ -5836,7 +5836,7 @@
         "snowprintId": "upgHpL101",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL101.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL101.png",
         "craftable": false
     },
     "upgHpL102": {
@@ -5844,7 +5844,7 @@
         "snowprintId": "upgHpL102",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL102.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL102.png",
         "craftable": false
     },
     "upgHpL103": {
@@ -5852,7 +5852,7 @@
         "snowprintId": "upgHpL103",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL103.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL103.png",
         "craftable": false
     },
     "upgHpL104": {
@@ -5860,7 +5860,7 @@
         "snowprintId": "upgHpL104",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL104.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL104.png",
         "craftable": false
     },
     "upgHpL105": {
@@ -5868,7 +5868,7 @@
         "snowprintId": "upgHpL105",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL105.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL105.png",
         "craftable": false
     },
     "upgHpL106": {
@@ -5876,7 +5876,7 @@
         "snowprintId": "upgHpL106",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL106.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL106.png",
         "craftable": false
     },
     "upgHpL107": {
@@ -5884,7 +5884,7 @@
         "snowprintId": "upgHpL107",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL107.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL107.png",
         "craftable": false
     },
     "upgHpL108": {
@@ -5892,7 +5892,7 @@
         "snowprintId": "upgHpL108",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL108.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL108.png",
         "craftable": false
     },
     "upgHpL109": {
@@ -5900,7 +5900,7 @@
         "snowprintId": "upgHpL109",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL109.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL109.png",
         "craftable": false
     },
     "upgHpL111": {
@@ -5908,7 +5908,7 @@
         "snowprintId": "upgHpL111",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL111.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL111.png",
         "craftable": false
     },
     "upgHpL112": {
@@ -5916,7 +5916,7 @@
         "snowprintId": "upgHpL112",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL112.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL112.png",
         "craftable": false
     },
     "upgHpL113": {
@@ -5924,7 +5924,7 @@
         "snowprintId": "upgHpL113",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL113.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL113.png",
         "craftable": false
     },
     "upgHpL114": {
@@ -5932,7 +5932,7 @@
         "snowprintId": "upgHpL114",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL114.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL114.png",
         "craftable": false
     },
     "upgHpL115": {
@@ -5940,7 +5940,7 @@
         "snowprintId": "upgHpL115",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL115.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL115.png",
         "craftable": false
     },
     "upgHpL116": {
@@ -5948,7 +5948,7 @@
         "snowprintId": "upgHpL116",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL116.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL116.png",
         "craftable": false
     },
     "upgHpL117": {
@@ -5956,7 +5956,7 @@
         "snowprintId": "upgHpL117",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL117.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL117.png",
         "craftable": false
     },
     "upgHpL118": {
@@ -5964,7 +5964,7 @@
         "snowprintId": "upgHpL118",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL118.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL118.png",
         "craftable": false
     },
     "upgHpL119": {
@@ -5972,7 +5972,7 @@
         "snowprintId": "upgHpL119",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL119.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL119.png",
         "craftable": false
     },
     "upgHpL120C": {
@@ -5980,7 +5980,7 @@
         "snowprintId": "upgHpL120C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL120C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL120C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6002,7 +6002,7 @@
         "snowprintId": "upgHpL121C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL121C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL121C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6024,7 +6024,7 @@
         "snowprintId": "upgHpL122C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL122C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL122C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6046,7 +6046,7 @@
         "snowprintId": "upgHpL123C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL123C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL123C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6068,7 +6068,7 @@
         "snowprintId": "upgHpL124C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL124C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL124C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6090,7 +6090,7 @@
         "snowprintId": "upgHpL125C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL125C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL125C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6112,7 +6112,7 @@
         "snowprintId": "upgHpL126C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL126C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL126C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6134,7 +6134,7 @@
         "snowprintId": "upgHpL127C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL127C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL127C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6156,7 +6156,7 @@
         "snowprintId": "upgHpL128C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL128C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL128C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6178,7 +6178,7 @@
         "snowprintId": "upgHpL129C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL129C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL129C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6200,7 +6200,7 @@
         "snowprintId": "upgHpL131C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL131C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL131C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6222,7 +6222,7 @@
         "snowprintId": "upgHpL132C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL132C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL132C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6244,7 +6244,7 @@
         "snowprintId": "upgHpL133C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL133C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL133C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6266,7 +6266,7 @@
         "snowprintId": "upgHpL134C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL134C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL134C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6288,7 +6288,7 @@
         "snowprintId": "upgHpL135C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL135C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL135C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6310,7 +6310,7 @@
         "snowprintId": "upgHpL136C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL136C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL136C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6332,7 +6332,7 @@
         "snowprintId": "upgHpL137C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL137C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL137C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6354,7 +6354,7 @@
         "snowprintId": "upgHpL138C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL138C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL138C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6376,7 +6376,7 @@
         "snowprintId": "upgHpL139C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL139C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL139C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6398,7 +6398,7 @@
         "snowprintId": "upgHpL211C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL211C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL211C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6420,7 +6420,7 @@
         "snowprintId": "upgHpL212C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL212C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL212C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6442,7 +6442,7 @@
         "snowprintId": "upgHpL213C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL213C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL213C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6464,7 +6464,7 @@
         "snowprintId": "upgHpL214C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpL214C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL214C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6486,7 +6486,7 @@
         "snowprintId": "upgHpM001",
         "rarity": "Mythic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpM001.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM001.png",
         "craftable": false
     },
     "upgHpM002": {
@@ -6494,7 +6494,7 @@
         "snowprintId": "upgHpM002",
         "rarity": "Mythic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpM002.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM002.png",
         "craftable": false
     },
     "upgHpM003": {
@@ -6502,7 +6502,7 @@
         "snowprintId": "upgHpM003",
         "rarity": "Mythic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpM003.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM003.png",
         "craftable": false
     },
     "upgHpM004": {
@@ -6510,7 +6510,7 @@
         "snowprintId": "upgHpM004",
         "rarity": "Mythic",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpM004.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM004.png",
         "craftable": false
     },
     "upgHpR001": {
@@ -6518,7 +6518,7 @@
         "snowprintId": "upgHpR001",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR001.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR001.png",
         "craftable": false
     },
     "upgHpR002": {
@@ -6526,7 +6526,7 @@
         "snowprintId": "upgHpR002",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR002.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR002.png",
         "craftable": false
     },
     "upgHpR003C": {
@@ -6534,7 +6534,7 @@
         "snowprintId": "upgHpR003C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR003C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR003C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6552,7 +6552,7 @@
         "snowprintId": "upgHpR004C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR004C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6570,7 +6570,7 @@
         "snowprintId": "upgHpR005",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR005.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR005.png",
         "craftable": false
     },
     "upgHpR006C": {
@@ -6578,7 +6578,7 @@
         "snowprintId": "upgHpR006C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR006C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6596,7 +6596,7 @@
         "snowprintId": "upgHpR007",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR007.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR007.png",
         "craftable": false
     },
     "upgHpR008": {
@@ -6604,7 +6604,7 @@
         "snowprintId": "upgHpR008",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR008.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR008.png",
         "craftable": false
     },
     "upgHpR009C": {
@@ -6612,7 +6612,7 @@
         "snowprintId": "upgHpR009C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR009C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6630,7 +6630,7 @@
         "snowprintId": "upgHpR010",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR010.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR010.png",
         "craftable": false
     },
     "upgHpR011": {
@@ -6638,7 +6638,7 @@
         "snowprintId": "upgHpR011",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR011.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR011.png",
         "craftable": false
     },
     "upgHpR012C": {
@@ -6646,7 +6646,7 @@
         "snowprintId": "upgHpR012C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR012C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6664,7 +6664,7 @@
         "snowprintId": "upgHpR013C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR013C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR013C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6682,7 +6682,7 @@
         "snowprintId": "upgHpR014",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR014.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR014.png",
         "craftable": false
     },
     "upgHpR015C": {
@@ -6690,7 +6690,7 @@
         "snowprintId": "upgHpR015C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR015C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR015C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6712,7 +6712,7 @@
         "snowprintId": "upgHpR016C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR016C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR016C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6734,7 +6734,7 @@
         "snowprintId": "upgHpR017C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR017C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR017C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6752,7 +6752,7 @@
         "snowprintId": "upgHpR018",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR018.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR018.png",
         "craftable": false
     },
     "upgHpR019": {
@@ -6760,7 +6760,7 @@
         "snowprintId": "upgHpR019",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR019.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR019.png",
         "craftable": false
     },
     "upgHpR020C": {
@@ -6768,7 +6768,7 @@
         "snowprintId": "upgHpR020C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR020C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR020C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6786,7 +6786,7 @@
         "snowprintId": "upgHpR021",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR021.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR021.png",
         "craftable": false
     },
     "upgHpR022": {
@@ -6794,7 +6794,7 @@
         "snowprintId": "upgHpR022",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR022.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR022.png",
         "craftable": false
     },
     "upgHpR023": {
@@ -6802,7 +6802,7 @@
         "snowprintId": "upgHpR023",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR023.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR023.png",
         "craftable": false
     },
     "upgHpR024": {
@@ -6810,7 +6810,7 @@
         "snowprintId": "upgHpR024",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR024.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR024.png",
         "craftable": false
     },
     "upgHpR027": {
@@ -6818,7 +6818,7 @@
         "snowprintId": "upgHpR027",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR027.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR027.png",
         "craftable": false
     },
     "upgHpR028": {
@@ -6826,7 +6826,7 @@
         "snowprintId": "upgHpR028",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR028.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR028.png",
         "craftable": false
     },
     "upgHpR029": {
@@ -6834,7 +6834,7 @@
         "snowprintId": "upgHpR029",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR029.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR029.png",
         "craftable": false
     },
     "upgHpR031": {
@@ -6842,7 +6842,7 @@
         "snowprintId": "upgHpR031",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR031.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR031.png",
         "craftable": false
     },
     "upgHpR032": {
@@ -6850,7 +6850,7 @@
         "snowprintId": "upgHpR032",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR032.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR032.png",
         "craftable": false
     },
     "upgHpR033": {
@@ -6858,7 +6858,7 @@
         "snowprintId": "upgHpR033",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR033.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR033.png",
         "craftable": false
     },
     "upgHpR035": {
@@ -6866,7 +6866,7 @@
         "snowprintId": "upgHpR035",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR035.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR035.png",
         "craftable": false
     },
     "upgHpR036": {
@@ -6874,7 +6874,7 @@
         "snowprintId": "upgHpR036",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR036.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR036.png",
         "craftable": false
     },
     "upgHpR037": {
@@ -6882,7 +6882,7 @@
         "snowprintId": "upgHpR037",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR037.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR037.png",
         "craftable": false
     },
     "upgHpR038": {
@@ -6890,7 +6890,7 @@
         "snowprintId": "upgHpR038",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR038.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR038.png",
         "craftable": false
     },
     "upgHpR039": {
@@ -6898,7 +6898,7 @@
         "snowprintId": "upgHpR039",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpR039.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR039.png",
         "craftable": false
     },
     "upgHpRCS": {
@@ -6906,7 +6906,7 @@
         "snowprintId": "upgHpRCS",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpRCS.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpRCS.png",
         "craftable": false
     },
     "upgHpU001": {
@@ -6914,7 +6914,7 @@
         "snowprintId": "upgHpU001",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU001.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU001.png",
         "craftable": false
     },
     "upgHpU002": {
@@ -6922,7 +6922,7 @@
         "snowprintId": "upgHpU002",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU002.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU002.png",
         "craftable": false
     },
     "upgHpU003": {
@@ -6930,7 +6930,7 @@
         "snowprintId": "upgHpU003",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU003.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU003.png",
         "craftable": false
     },
     "upgHpU004C": {
@@ -6938,7 +6938,7 @@
         "snowprintId": "upgHpU004C",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU004C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6952,7 +6952,7 @@
         "snowprintId": "upgHpU005C",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU005C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6966,7 +6966,7 @@
         "snowprintId": "upgHpU006",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU006.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU006.png",
         "craftable": false
     },
     "upgHpU007": {
@@ -6974,7 +6974,7 @@
         "snowprintId": "upgHpU007",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU007.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU007.png",
         "craftable": false
     },
     "upgHpU008": {
@@ -6982,7 +6982,7 @@
         "snowprintId": "upgHpU008",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU008.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU008.png",
         "craftable": false
     },
     "upgHpU009": {
@@ -6990,7 +6990,7 @@
         "snowprintId": "upgHpU009",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU009.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU009.png",
         "craftable": false
     },
     "upgHpU010C": {
@@ -6998,7 +6998,7 @@
         "snowprintId": "upgHpU010C",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU010C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU010C.png",
         "craftable": true,
         "recipe": [
             {
@@ -7012,7 +7012,7 @@
         "snowprintId": "upgHpU012",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU012.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU012.png",
         "craftable": false
     },
     "upgHpU013": {
@@ -7020,7 +7020,7 @@
         "snowprintId": "upgHpU013",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU013.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU013.png",
         "craftable": false
     },
     "upgHpU014": {
@@ -7028,7 +7028,7 @@
         "snowprintId": "upgHpU014",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU014.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU014.png",
         "craftable": false
     },
     "upgHpU015": {
@@ -7036,7 +7036,7 @@
         "snowprintId": "upgHpU015",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU015.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU015.png",
         "craftable": false
     },
     "upgHpU016": {
@@ -7044,7 +7044,7 @@
         "snowprintId": "upgHpU016",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU016.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU016.png",
         "craftable": false
     },
     "upgHpU017": {
@@ -7052,7 +7052,7 @@
         "snowprintId": "upgHpU017",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU017.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU017.png",
         "craftable": false
     },
     "upgHpU018C": {
@@ -7060,7 +7060,7 @@
         "snowprintId": "upgHpU018C",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint_assets/upgrade_materials/upgHpU018C.png",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpU018C.png",
         "craftable": true,
         "recipe": [
             {

@@ -67,10 +67,13 @@ export const DesktopHome = () => {
         return timeDifference >= 0 ? result : 'Finished';
     }
 
-    const nextLeDateStart = new Date(nextLeMenuItem.lre!.nextEventDateUtc!);
-    const nextLeDateEnd = new Date(
-        new Date(nextLeMenuItem.lre!.nextEventDateUtc!).setDate(nextLeDateStart.getDate() + 7)
-    );
+    // TODO(mythic): fix LRE dates
+    const nextLeDateStart = new Date('2024-01-01T00:00:00Z'); // Placeholder date
+    const nextLeDateEnd = new Date('2024-01-08T00:00:00Z');
+    // const nextLeDateStart = new Date(nextLeMenuItem.lre!.nextEventDateUtc!);
+    // const nextLeDateEnd = new Date(
+    //     new Date(nextLeMenuItem.lre!.nextEventDateUtc!).setDate(nextLeDateStart.getDate() + 7)
+    // );
     const timeToStart = timeLeftToFutureDate(nextLeDateStart);
     const timeToEnd = timeLeftToFutureDate(nextLeDateEnd);
     const isEventStarted = timeToStart === 'Finished';
@@ -164,8 +167,8 @@ export const DesktopHome = () => {
                         <CardHeader
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <UnitShardIcon icon={nextLeMenuItem.icon} height={50} width={50} />{' '}
-                                    {nextLeMenuItem.name}
+                                    (<UnitShardIcon icon={'broken'} height={50} width={50} />{' '}
+                                    <span>TODO(mythic): LEs are currently not working</span>)
                                 </div>
                             }
                             subheader={formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}

@@ -11,8 +11,36 @@ import { StatCell, DamageCell, StatsCalculatorService } from '@/fsd/4-entities/u
 
 export const useCharacters = () => {
     const [targetRarity, setTargetRarity] = useState<Rarity>(Rarity.Legendary);
-    const [targetStars, setTargetStars] = useState<RarityStars>(RarityStars.BlueStar);
-    const [targetRank, setTargetRank] = useState<Rank>(Rank.Diamond3);
+    const [targetStars, setTargetStars] = useState<RarityStars>(RarityStars.MythicWings);
+    const [targetRank, setTargetRank] = useState<Rank>(Rank.Adamantine1);
+
+    const resolveEquipment = (equipment: string | undefined): string => {
+        if (!equipment) {
+            return 'None';
+        }
+        switch (equipment) {
+            case 'I_Crit':
+                return 'Crit';
+            case 'I_Block':
+                return 'Block';
+            case 'I_Booster_Crit':
+                return 'Crit Booster';
+            case 'I_Booster_Block':
+                return 'Block Booster';
+            case 'I_Defensive':
+                return 'Defensive';
+            default:
+                return equipment;
+        }
+    };
+
+    const normalizeTrait = (trait: string): string => {
+        if (trait === 'DeathToTheFalseEmperor') return 'Let The Galaxy Burn';
+        if (trait === 'TeleportStrike') return 'Deep Strike';
+        if (trait === 'BeastSnagga') return 'Beast Slayer';
+        const text = trait.replace(/([A-Z])/g, ' $1');
+        return text.charAt(0).toUpperCase() + text.slice(1);
+    };
 
     const minStarsMap: Map<Rarity, RarityStars> = new Map([
         [Rarity.Common, RarityStars.None],
@@ -20,6 +48,7 @@ export const useCharacters = () => {
         [Rarity.Rare, RarityStars.FourStars],
         [Rarity.Epic, RarityStars.RedOneStar],
         [Rarity.Legendary, RarityStars.RedThreeStars],
+        [Rarity.Mythic, RarityStars.OneBlueStar],
     ]);
 
     const minRank = useMemo(() => {
@@ -35,7 +64,7 @@ export const useCharacters = () => {
     }, [targetRarity]);
 
     const maxStars = useMemo(() => {
-        return minStarsMap.get(targetRarity + 1) ?? RarityStars.BlueStar;
+        return minStarsMap.get(targetRarity + 1) ?? RarityStars.MythicWings;
     }, [targetRarity]);
 
     const rankValues = useMemo(() => {
@@ -50,7 +79,7 @@ export const useCharacters = () => {
         if (rarity < targetRarity) {
             const maxRank = RarityMapper.toMaxRank[rarity];
             setTargetRarity(rarity);
-            setTargetStars(minStarsMap.get(rarity + 1) ?? RarityStars.BlueStar);
+            setTargetStars(minStarsMap.get(rarity + 1) ?? RarityStars.MythicWings);
             if (targetRank > maxRank) {
                 setTargetRank(maxRank);
             }
@@ -89,6 +118,7 @@ export const useCharacters = () => {
                         pinned: !isMobile,
                         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                             const character = props.data;
+                            console.log('character:\n', character);
                             return (
                                 character && (
                                     <CharacterTitle
@@ -311,7 +341,7 @@ export const useCharacters = () => {
                     return (
                         <ul style={{ margin: 0, paddingInlineStart: 20 }}>
                             {traits.map(x => (
-                                <li key={x}> {x} </li>
+                                <li key={x}> {normalizeTrait(x)} </li>
                             ))}
                         </ul>
                     );
@@ -377,9 +407,9 @@ export const useCharacters = () => {
                             return (
                                 data && (
                                     <ul style={{ margin: 0, paddingInlineStart: 20 }}>
-                                        <li>Slot 1 - {data.equipment1} </li>
-                                        <li> Slot 2 - {data.equipment2} </li>
-                                        <li> Slot 3 - {data.equipment3} </li>
+                                        <li>Slot 1 - {resolveEquipment(data.equipment1)} </li>
+                                        <li> Slot 2 - {resolveEquipment(data.equipment2)} </li>
+                                        <li> Slot 3 - {resolveEquipment(data.equipment3)} </li>
                                     </ul>
                                 )
                             );

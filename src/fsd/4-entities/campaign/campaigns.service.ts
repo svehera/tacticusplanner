@@ -23,8 +23,8 @@ export class CampaignsService {
 
     /**
      * @returns for each upgrade, a list of all nodes from which it can be
-     *          farmed. The key is the material name (e.g. "Classified Data-Slate") or,
-     *          for character shards, the character name (e.g. "Aleph-Null").
+     *          farmed. The key is the material ID or, for character shards,
+     *          the character name (e.g. "Aleph-Null").
      *          The map value is ICampaignBattle.shortName (e.g. SHME31 for
      *          Saim-Hann Mirror Elite 31).
      */
@@ -35,13 +35,36 @@ export class CampaignsService {
             battles.push({ ...battleData[battleDataKey], shortName: battleDataKey });
         }
 
-        const groupedData = groupBy(battles, 'reward');
-
-        for (const key in groupedData) {
-            result[key] = groupedData[key].map(x => x.shortName ?? '');
+        for (const battle of battles) {
+            for (const reward of battle.rewards.guaranteed) {
+                if (reward.id === 'gold') continue;
+                const rewardId = reward.id;
+                if (!result[rewardId]) result[rewardId] = [];
+                result[rewardId].push(battle.shortName ?? '');
+            }
+            for (const reward of battle.rewards.potential) {
+                if (reward.id === 'gold') continue;
+                const rewardId = reward.id;
+                if (!result[rewardId]) result[rewardId] = [];
+                result[rewardId].push(battle.shortName ?? '');
+            }
         }
 
         return result;
+    }
+
+    private static getReward(battle: ICampaignBattle): string {
+        // Elite battles give a guaranteed material, so return that.
+        for (const reward of battle.rewards.guaranteed) {
+            if (reward.id === 'gold') continue;
+            return reward.id;
+        }
+        // Otherwise, return the first potential reward that is not gold.
+        for (const reward of battle.rewards.potential) {
+            if (reward.id === 'gold') continue;
+            return reward.id;
+        }
+        return '';
     }
 
     /**
@@ -54,11 +77,11 @@ export class CampaignsService {
             const battle = battleData[battleDataKey];
 
             const config = campaignConfigs[battle.campaignType as CampaignType];
-            const recipe = recipeDataByName[battle.reward];
+            const recipe = recipeDataByName[this.getReward(battle)];
             if (!recipe) {
                 if (battle.campaignType !== CampaignType.SuperEarly) {
                     console.error(
-                        'no recipe for ' + battle.reward + ' from ' + battle.campaign + ' ' + battle.nodeNumber
+                        'no recipe for ' + this.getReward(battle) + ' from ' + battle.campaign + ' ' + battle.nodeNumber
                     );
                 }
             }
@@ -84,8 +107,7 @@ export class CampaignsService {
                 nodeNumber: battle.nodeNumber,
                 rarity: recipe?.rarity,
                 rarityEnum: Rarity[recipe?.rarity as unknown as number] as unknown as Rarity,
-                reward: battle.reward,
-                expectedGold: battle.expectedGold,
+                rewards: battle.rewards,
                 slots: battle.slots,
                 enemiesAlliances: (battle.enemiesAlliances ?? [enemies.alliance]) as Alliance[],
                 enemiesFactions: (battle.enemiesFactions ?? enemies.factions) as Faction[],

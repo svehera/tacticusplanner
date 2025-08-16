@@ -4,6 +4,7 @@ export enum RarityString {
     Rare = 'Rare',
     Epic = 'Epic',
     Legendary = 'Legendary',
+    Mythic = 'Mythic',
 }
 
 export enum Rarity {
@@ -12,4 +13,5 @@ export enum Rarity {
     Rare,
     Epic,
     Legendary,
+    Mythic,
 }

@@ -7,6 +7,7 @@ export class RarityMapper {
         [Rarity.Rare]: RarityStars.FourStars,
         [Rarity.Epic]: RarityStars.RedOneStar,
         [Rarity.Legendary]: RarityStars.RedThreeStars,
+        [Rarity.Mythic]: RarityStars.OneBlueStar,
     };
 
     public static toMaxStars: Record<Rarity, RarityStars> = {
@@ -14,7 +15,8 @@ export class RarityMapper {
         [Rarity.Uncommon]: RarityStars.FourStars,
         [Rarity.Rare]: RarityStars.RedOneStar,
         [Rarity.Epic]: RarityStars.RedThreeStars,
-        [Rarity.Legendary]: RarityStars.BlueStar,
+        [Rarity.Legendary]: RarityStars.OneBlueStar,
+        [Rarity.Mythic]: RarityStars.MythicWings,
     };
 
     public static toMaxRank: Record<Rarity, Rank> = {
@@ -23,6 +25,7 @@ export class RarityMapper {
         [Rarity.Rare]: Rank.Silver1,
         [Rarity.Epic]: Rank.Gold1,
         [Rarity.Legendary]: Rank.Diamond3,
+        [Rarity.Mythic]: Rank.Adamantine1,
     };
 
     public static stringToNumber: Record<RarityString, Rarity> = {
@@ -31,6 +34,7 @@ export class RarityMapper {
         [RarityString.Rare]: Rarity.Rare,
         [RarityString.Epic]: Rarity.Epic,
         [RarityString.Legendary]: Rarity.Legendary,
+        [RarityString.Mythic]: Rarity.Mythic,
     };
 
     public static getRarityFromLevel(level: number): Rarity {
@@ -49,7 +53,10 @@ export class RarityMapper {
         if (level <= 35) {
             return Rarity.Epic;
         }
+        if (level <= 50) {
+            return Rarity.Legendary;
+        }
 
-        return Rarity.Legendary;
+        return Rarity.Mythic;
     }
 }

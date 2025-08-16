@@ -16,8 +16,8 @@ export const UnitShardIcon = ({
     height?: number;
     width?: number;
 }) => {
-    if (!icon) return null;
-    const imageUrl = getImageUrl(`characters/resized/${icon.replace('.webp', '.png')}`);
+    if (!icon) return;
+    const imageUrl = getImageUrl(`${icon.replace('.webp', '.png')}`);
 
     const image = (
         <img

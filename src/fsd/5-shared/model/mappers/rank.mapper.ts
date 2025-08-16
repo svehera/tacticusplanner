@@ -38,6 +38,8 @@ export const stringToRank = (rankString: string): Rank => {
             return Rank.Diamond2;
         case 'Diamond III':
             return Rank.Diamond3;
+        case 'Adamantine I':
+            return Rank.Adamantine1;
         default:
             throw new Error('Invalid rank string');
     }

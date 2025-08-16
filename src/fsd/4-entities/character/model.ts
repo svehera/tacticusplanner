@@ -138,6 +138,7 @@ export interface ICharacterData {
     requiredInCampaign: boolean;
     campaignsRequiredIn?: string[];
     icon: string;
+    roundIcon: string;
     legendaryEvents: ICharLegendaryEvents;
     lre?: ILreCharacterStaticData;
     releaseRarity?: CharacterReleaseRarity;
@@ -180,6 +181,7 @@ export interface IUnitUpgradeRank {
  * first.
  */
 export interface IRankLookup {
+    unitId: string;
     unitName: string;
     rankStart: Rank;
     rankEnd: Rank;

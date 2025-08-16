@@ -10,6 +10,8 @@ import { useFitGridOnWindowResize, useQueryState } from '@/fsd/5-shared/lib';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { Campaign, ICampaignBattleComposed, CampaignLocation, CampaignsService } from '@/fsd/4-entities/campaign';
+// eslint-disable-next-line import-x/no-internal-modules
+import { IRewards } from '@/fsd/4-entities/campaign/model';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { FactionImage } from '@/fsd/4-entities/faction';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
@@ -19,6 +21,23 @@ import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
 export const Campaigns = () => {
     const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
+
+    /**
+     * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
+     */
+    const getReward = (rewards: IRewards): string => {
+        // Elite battles give a guaranteed material, so return that.
+        for (const reward of rewards.guaranteed) {
+            if (reward.id === 'gold') continue;
+            return reward.id;
+        }
+        // Otherwise, return the first potential reward that is not gold.
+        for (const reward of rewards.potential) {
+            if (reward.id === 'gold') continue;
+            return reward.id;
+        }
+        return '';
+    };
 
     const [mobileColumnDefs] = useState<Array<ColDef>>([
         {
@@ -88,19 +107,28 @@ export const Campaigns = () => {
             headerName: 'Reward',
             minWidth: 170,
             cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const { reward } = params.data ?? {};
-                if (!reward) return undefined;
+                const { rewards } = params.data ?? {};
+                if (!rewards) return undefined;
+                const reward = getReward(rewards);
                 const upgrade = UpgradesService.getUpgrade(reward);
-                if (!upgrade) return reward;
-
-                if (upgrade.stat !== 'Shard') {
-                    return <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} />;
+                if (!upgrade) {
+                    console.log('reward: ', reward, upgrade);
+                    if (reward.startsWith('shards_')) {
+                        const char = CharactersService.getUnit(reward.substring(7));
+                        console.log('char: ', reward.substring(7), char);
+                        if (char) return <UnitShardIcon name={reward} icon={char.icon} />;
+                        return reward.substring(7);
+                    }
+                    if (reward.startsWith('mythicShards_')) {
+                        const char = CharactersService.getUnit(reward.substring(13));
+                        console.log('char: ', reward.substring(13), char);
+                        if (char) return <UnitShardIcon name={reward} icon={char.icon} />;
+                        return reward.substring(13);
+                    }
+                    return reward;
                 }
 
-                const char = upgrade.stat === 'Shard' && CharactersService.getUnit(reward);
-                if (char) return <UnitShardIcon name={reward} icon={char.icon} />;
-
-                return reward;
+                return <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} />;
             },
         },
         {

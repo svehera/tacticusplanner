@@ -433,8 +433,9 @@ export class CharactersValueService {
                 return ShardBS * 425 + LegendaryOrbBS * 10;
             case RarityStars.RedFiveStars:
                 return ShardBS * 675 + LegendaryOrbBS * 15;
-            case RarityStars.BlueStar:
+            case RarityStars.OneBlueStar:
                 return ShardBS * 1175 + LegendaryOrbBS * 20;
+            // TODO(mythic): Implement other blue stars and Mythic Wings value
             default: {
                 console.warn('Stars value unknown');
                 return 0;

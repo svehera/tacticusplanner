@@ -23,6 +23,7 @@ import {
     IMaterialRecipeIngredientFull,
     UpgradeImage,
     IMaterialEstimated2,
+    UpgradesService,
 } from '@/fsd/4-entities/upgrade';
 
 import { RankLookupService } from './rank-lookup.service';
@@ -71,6 +72,7 @@ export const RankLookup = () => {
         }
 
         return RankLookupService.getUpgradeMaterialsToRankUp({
+            unitId: character.snowprintId ?? '',
             unitName: character.id,
             rankStart,
             rankEnd,
@@ -96,7 +98,7 @@ export const RankLookup = () => {
         }> = [];
 
         let currRank = rankStart < Rank.Stone1 ? Rank.Stone1 : rankStart;
-        const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Diamond3 ? Rank.Diamond3 : rankEnd;
+        const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Adamantine1 ? Rank.Adamantine1 : rankEnd;
         const upgradesCopy = upgrades.slice();
 
         while (currRank !== endRank) {
@@ -165,20 +167,6 @@ export const RankLookup = () => {
         {
             field: 'count',
             maxWidth: 75,
-        },
-        {
-            valueGetter: params => {
-                return inventory.upgrades[params.data!.id] ?? 0;
-            },
-            headerName: 'Inventory',
-            maxWidth: 90,
-        },
-        {
-            valueGetter: params => {
-                return params.data ? Math.max(params.data.count - (inventory.upgrades[params.data.id] ?? 0), 0) : 0;
-            },
-            headerName: 'Remaining',
-            maxWidth: 90,
         },
         {
             field: 'rarity',

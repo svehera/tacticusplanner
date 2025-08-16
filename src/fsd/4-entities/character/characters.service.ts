@@ -29,6 +29,9 @@ export class CharactersService {
     static readonly activeLre: ICharacterData = (() => {
         const now = new Date();
         const eightDays = 8;
+        // TODO(mythic): fix LRE dates
+        return this.lreCharacters[0];
+
         const currentLreDate = new Date(this.lreCharacters[0]!.lre!.nextEventDateUtc!);
         currentLreDate.setDate(currentLreDate.getDate() + eightDays);
 
@@ -49,7 +52,7 @@ export class CharactersService {
      * @returns An ICharacterData representation, or null.
      */
     public static getUnit(id: string): ICharacterData | undefined {
-        return this.charactersData.find(x => x.id === id);
+        return this.charactersData.find(x => x.id === id || x.snowprintId === id);
     }
 
     /**
@@ -60,6 +63,8 @@ export class CharactersService {
      */
     private static convertSnowprintDamageProfile(rawData: string): DamageType {
         const ret: DamageType = DamageType[rawData as keyof typeof DamageType] || DamageType.Physical;
+        if (rawData === 'DirectDamage') return DamageType.Direct;
+        if (rawData === 'Gauss') return DamageType.Molecular;
         if (ret == DamageType.Physical && rawData !== 'Physical') {
             console.warn(`Unknown damage profile: ${rawData}`);
         }
@@ -95,9 +100,10 @@ export class CharactersService {
             legendaryEvents: {} as ICharLegendaryEvents,
             traits: rawData.Traits as Trait[],
             icon: rawData.Icon,
+            roundIcon: rawData.RoundIcon,
             damageTypes: {
-                all: [this.convertSnowprintDamageProfile(rawData['Melee Damage'])],
-                melee: this.convertSnowprintDamageProfile(rawData['Melee Damage']),
+                all: [CharactersService.convertSnowprintDamageProfile(rawData['Melee Damage'])],
+                melee: CharactersService.convertSnowprintDamageProfile(rawData['Melee Damage']),
                 activeAbility: [],
                 passiveAbility: [],
             },
@@ -107,19 +113,19 @@ export class CharactersService {
         };
 
         if (rawData['Ranged Damage']) {
-            unitData.damageTypes.all.push(this.convertSnowprintDamageProfile(rawData['Ranged Damage']));
-            unitData.damageTypes.range = this.convertSnowprintDamageProfile(rawData['Ranged Damage']);
+            unitData.damageTypes.all.push(CharactersService.convertSnowprintDamageProfile(rawData['Ranged Damage']));
+            unitData.damageTypes.range = CharactersService.convertSnowprintDamageProfile(rawData['Ranged Damage']);
         }
         if (rawData['Active Ability']) {
             rawData['Active Ability'].forEach(x => {
-                const damageType = this.convertSnowprintDamageProfile(x);
+                const damageType = CharactersService.convertSnowprintDamageProfile(x);
                 unitData.damageTypes.all.push(damageType);
                 unitData.damageTypes.activeAbility.push(damageType);
             });
         }
         if (rawData['Passive Ability']) {
             rawData['Passive Ability'].forEach(x => {
-                const damageType = this.convertSnowprintDamageProfile(x);
+                const damageType = CharactersService.convertSnowprintDamageProfile(x);
                 unitData.damageTypes.all.push(damageType);
                 unitData.damageTypes.passiveAbility.push(damageType);
             });

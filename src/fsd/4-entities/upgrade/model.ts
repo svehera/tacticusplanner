@@ -12,6 +12,7 @@ export interface IUpgradeRecipe {
 
 export interface ICraftedUpgrade {
     id: string;
+    snowprintId: string; // The ID from snowprint assets.
     label: string;
     rarity: Rarity;
     iconPath: string;
@@ -125,6 +126,7 @@ export interface IMaterialRecipeIngredient {
  */
 export interface IRecipeExpandedUpgrade {
     id: string;
+    snowprintId: string; // The ID from snowprint assets.
     label: string;
     rarity: Rarity;
     iconPath: string;

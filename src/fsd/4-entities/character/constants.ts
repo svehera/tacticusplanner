@@ -8,6 +8,7 @@ export const charsUnlockShards: Record<Rarity, number> = {
     [Rarity.Rare]: 130,
     [Rarity.Epic]: 250,
     [Rarity.Legendary]: 500,
+    [Rarity.Mythic]: 1400,
 };
 
 export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {

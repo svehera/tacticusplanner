@@ -18,6 +18,7 @@ export enum Rank {
     Diamond1,
     Diamond2,
     Diamond3,
+    Adamantine1,
 }
 
 export const rankToString = (rank: Rank): string => {
@@ -58,6 +59,8 @@ export const rankToString = (rank: Rank): string => {
             return 'Diamond II';
         case Rank.Diamond3:
             return 'Diamond III';
+        case Rank.Adamantine1:
+            return 'Adamantine I';
         default:
             return '';
     }

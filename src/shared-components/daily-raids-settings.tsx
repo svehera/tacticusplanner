@@ -37,6 +37,7 @@ import { ICustomDailyRaidsSettings, IDailyRaidsPreferences } from '../models/int
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 
 const defaultCustomSettings: ICustomDailyRaidsSettings = {
+    [Rarity.Mythic]: [CampaignType.Extremis],
     [Rarity.Legendary]: [CampaignType.Elite, CampaignType.Mirror],
     [Rarity.Epic]: [CampaignType.Elite, CampaignType.Mirror],
     [Rarity.Rare]: [CampaignType.Elite, CampaignType.Mirror],

@@ -56,6 +56,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
     const possibleUpgrades: Array<IBaseUpgrade | ICraftedUpgrade> = useMemo(() => {
         const [rankUpgrades] = CharacterUpgradesService.getCharacterUpgradeRank({
+            unitId: character.snowprintId ?? '',
             unitName: character.name,
             rankStart: rank,
             rankEnd: rank + 1,
@@ -117,6 +118,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             upgradesToConsider = newUpgrades;
         } else {
             const previousRankUpgradesList = CharacterUpgradesService.getCharacterUpgradeRank({
+                unitId: character.snowprintId ?? '',
                 unitName: character.name,
                 rankStart: formData.originalRank,
                 rankEnd: rank,

@@ -232,6 +232,10 @@ export class CharactersService {
     }
 
     public static groupByRarityPools(availableCharacters: IPersonalCharacterData2[]): Record<Rarity, number> {
+        // TODO(mythic): is rank right? what is this for?
+        const mythicPool = availableCharacters.filter(
+            x => x.rarity === Rarity.Mythic && x.rank >= Rank.Diamond1
+        ).length;
         const legendaryPool = availableCharacters.filter(
             x => x.rarity === Rarity.Legendary && x.rank >= Rank.Gold1
         ).length;
@@ -242,6 +246,7 @@ export class CharactersService {
         ).length;
 
         return {
+            [Rarity.Mythic]: mythicPool,
             [Rarity.Legendary]: legendaryPool,
             [Rarity.Epic]: epicPool,
             [Rarity.Rare]: rarePool,

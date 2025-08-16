@@ -1,6 +1,12 @@
+// TODO(mythic): Change the location of a few things, but automate copying via datamine_tacticus
+
+// eslint-disable-next-line import-x/no-internal-modules, no-restricted-imports
+import blueStar from '../../../../../assets/images/snowprint_assets/stars/ui_icon_star_legendary_large.png';
+// eslint-disable-next-line import-x/no-internal-modules, no-restricted-imports
+import mythicWings from '../../../../../assets/images/snowprint_assets/stars/ui_icon_star_mythic.png';
+
 import armourIcon from './armour.webp';
 import blackstoneIcon from './blackstone.png';
-import blueStar from './blue star.png';
 import deploymentIcon from './deployment.png';
 import damageIcon from './dmg.webp';
 import energyIcon from './energy.png';
@@ -66,6 +72,7 @@ export const tacticusIcons = {
 };
 
 export const starsIcons = {
+    mythicWings,
     blueStar,
     redStar,
     goldStar,

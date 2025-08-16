@@ -36,8 +36,9 @@ export class TacticusIntegrationService {
         return xp - currLevel.totalXp;
     }
 
-    static convertUpgrades(unitName: string, rank: Rank, upgradesIndexes: number[]): string[] {
+    static convertUpgrades(unitId: string, unitName: string, rank: Rank, upgradesIndexes: number[]): string[] {
         const [rankUp] = CharacterUpgradesService.getCharacterUpgradeRank({
+            unitId,
             unitName,
             rankStart: rank,
             rankEnd: rank + 1,

@@ -15,8 +15,7 @@ export interface ICampaignBattleComposed {
     nodeNumber: number;
     rarity: string;
     rarityEnum: Rarity;
-    reward: string; // material name or hero name in case farming shards
-    expectedGold: number;
+    rewards: IRewards;
     slots?: number;
     enemiesFactions: Faction[];
     enemiesAlliances: Alliance[];
@@ -33,12 +32,30 @@ export interface ICampaignBattleComposed {
     isStarted?: boolean;
 }
 
+export interface IRewards {
+    guaranteed: IGuaranteedReward[];
+    potential: IPotentialReward[];
+}
+
+export interface IGuaranteedReward {
+    id: string;
+    min: number;
+    max: number;
+}
+
+export interface IPotentialReward {
+    id: string;
+    chance_numerator: number;
+    chance_denominator: number;
+}
+
 /**
  * When we have more detailed information about a campaign battle, this holds
  * the information on a particular type of enemy. If @rarity is specified, it
  * means that the enemy is a character, not an NPC.
  */
 export interface IDetailedEnemy {
+    id: string;
     count: number;
     name: string;
     rank: string;
@@ -55,8 +72,7 @@ export interface ICampaignBattle {
     campaign: Campaign | string;
     campaignType: CampaignType | string;
     nodeNumber: number;
-    reward: string; // material name or hero name in case farming shards
-    expectedGold: number;
+    rewards: IRewards;
     slots?: number;
     enemiesAlliances?: string[];
     enemiesFactions?: string[];

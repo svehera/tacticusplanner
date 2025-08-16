@@ -17,7 +17,7 @@ export const UpgradeImage = ({
     const width = size ?? 50;
     const height = size ?? 50;
     const imagePath = iconPath || material.toLowerCase() + '.png';
-    const image = getImageUrl(`upgrades/${imagePath}`);
+    const image = getImageUrl(imagePath);
 
     return (
         <AccessibleTooltip title={tooltip ?? material}>
@@ -29,7 +29,10 @@ export const UpgradeImage = ({
                         height={height}
                         width={width}
                         alt={material}
-                        onError={() => setImgError(true)}
+                        onError={() => {
+                            console.error(`Image not found: ${imagePath}`);
+                            setImgError(true);
+                        }}
                     />
                 ) : (
                     <div

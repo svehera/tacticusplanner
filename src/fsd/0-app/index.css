@@ -110,6 +110,7 @@
         --rarity-rare: #efefef;
         --rarity-epic: #ffe599;
         --rarity-legendary: #cfe2f3;
+        --rarity-mythic: #d84300;
 
         /*Ranks*/
         --rank-stone1: #cdb3a0;
@@ -135,6 +136,8 @@
         --rank-diamond1: #cfe2f3;
         --rank-diamond2: #9fc5e8;
         --rank-diamond3: #6fa8dc;
+
+        --rank-adamantine1: #d9886c;
     }
 
     .dark {
@@ -187,6 +190,7 @@
         --rarity-rare: #6b6b6b;
         --rarity-epic: #a88a48;
         --rarity-legendary: #5a7892;
+        --rarity-mythic: #d9886c;
 
         /*Ranks*/
         --rank-stone1: #8a705d;
@@ -212,6 +216,8 @@
         --rank-diamond1: #5a7892;
         --rank-diamond2: #3e678d;
         --rank-diamond3: #2b4b71;
+
+        --rank-adamantine1: #d9886c;
     }
 
     h2 {
@@ -349,6 +355,10 @@ code {
     background-color: var(--rank-diamond3);
 }
 
+.adamantine1 {
+    background-color: var(--rank-adamantine1);
+}
+
 .ag-theme-material {
     --ag-grid-size: 5px;
     --ag-row-hover-color: transparent;
@@ -390,6 +400,10 @@ code {
     background-color: var(--rarity-legendary);
 }
 
+.mythic {
+    background-color: var(--rarity-mythic);
+}
+
 .upgrade {
     background-color: #012a41;
 }
@@ -412,6 +426,10 @@ code {
 
 .legendary-upgrade {
     border: 2px solid #cfe2f3;
+}
+
+.mythic-upgrade {
+    border: 2px solid #d9886c;
 }
 
 .flex-box {
