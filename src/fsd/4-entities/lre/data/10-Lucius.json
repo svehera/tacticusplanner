@@ -1,10 +1,12 @@
 {
     "id": 12,
+    "unitSnowprintId": "emperLucius",
     "name": "Lucius",
     "wikiLink": "https://tacticus.wiki.gg/wiki/Legendary_Character_Events",
     "eventStage": 1,
     "nextEventDate": "August 10",
     "nextEventDateUtc": "Sun, 10 August 2025 00:00:00 GMT",
+    "finished": false,
     "regularMissions": [
         "Defeat 5 waves of enemies in any wave-based game mode, Deal 1000 damage",
         "Defeat 30 Aeldari",

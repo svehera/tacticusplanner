@@ -11,40 +11,27 @@ import {
     DamageType,
 } from '@/fsd/5-shared/model';
 
+// eslint-disable-next-line boundaries/element-types
+import { LegendaryEventService } from '@/fsd/4-entities/lre';
+
 import { charactersData } from './data';
 import { UnitDataRaw, ICharacterData, ICharLegendaryEvents } from './model';
 
 export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
 
-    static readonly lreCharacters: ICharacterData[] = orderBy(
-        this.charactersData.filter(unit => !!unit.lre),
-        ['lre.finished', x => new Date(x.lre?.nextEventDateUtc ?? '').getTime()],
-        ['asc', 'asc']
-    );
+    static readonly lreCharacters: ICharacterData[] =
+        LegendaryEventService.getUnfinishedLegendaryEventCharacterSnowprintIds()
+            .map((id: string) => {
+                return this.charactersData.find(unit => unit.snowprintId === id);
+            })
+            .filter(Boolean) as ICharacterData[];
 
     static readonly activeLres = this.lreCharacters.filter(x => !x.lre?.finished);
     static readonly inactiveLres = this.lreCharacters.filter(x => !!x.lre?.finished);
 
     static readonly activeLre: ICharacterData = (() => {
-        const now = new Date();
-        const eightDays = 8;
-        // TODO(mythic): fix LRE dates
-        return this.lreCharacters[0];
-
-        const currentLreDate = new Date(this.lreCharacters[0]!.lre!.nextEventDateUtc!);
-        currentLreDate.setDate(currentLreDate.getDate() + eightDays);
-
-        if (now < currentLreDate) {
-            return this.lreCharacters[0];
-        } else {
-            return (
-                this.lreCharacters.find(x => {
-                    const eventDate = new Date(x.lre?.nextEventDateUtc ?? '');
-                    return eventDate > now;
-                }) ?? this.lreCharacters[0]
-            );
-        }
+        return this.charactersData.find(unit => unit.snowprintId === LegendaryEventService.getActiveLreUnitId())!;
     })();
 
     /**

@@ -1,0 +1,33 @@
+// eslint-disable-next-line import-x/no-internal-modules
+import { allLegendaryEvents } from './data/index';
+import { ILegendaryEventStatic } from './static-data.model';
+
+export class LegendaryEventService {
+    public static getActiveEvent(): ILegendaryEventStatic {
+        let ret: ILegendaryEventStatic | undefined = undefined;
+        for (const event of allLegendaryEvents.filter(e => !e.finished)) {
+            if (event.finished) continue;
+            if (event.nextEventDateUtc) {
+                const nextEventDate = new Date(event.nextEventDateUtc);
+                if (nextEventDate > new Date()) {
+                    if (!ret || nextEventDate < new Date(ret.nextEventDateUtc!)) {
+                        ret = event;
+                    }
+                }
+            }
+        }
+        return ret!;
+    }
+
+    public static getEventByCharacterSnowprintId(snowprintId: string): ILegendaryEventStatic | undefined {
+        return allLegendaryEvents.find(e => e.unitSnowprintId === snowprintId);
+    }
+
+    public static getUnfinishedLegendaryEventCharacterSnowprintIds(): string[] {
+        return allLegendaryEvents.filter(e => !e.finished).map(e => e.unitSnowprintId);
+    }
+
+    public static getActiveLreUnitId(): string | undefined {
+        return this.getActiveEvent().unitSnowprintId;
+    }
+}

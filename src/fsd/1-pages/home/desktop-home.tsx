@@ -17,7 +17,7 @@ import { getImageUrl } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { Thanks } from '@/fsd/3-features/thank-you';
 
@@ -28,7 +28,7 @@ export const DesktopHome = () => {
     const navigate = useNavigate();
     const { userInfo } = useAuth();
     const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = CharactersService.activeLre;
+    const nextLeMenuItem = LegendaryEventService.getActiveEvent();
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
@@ -44,7 +44,7 @@ export const DesktopHome = () => {
     const upgradeRankGoals = goals.filter(x => x.type === PersonalGoalType.UpgradeRank).length;
 
     const navigateToNextLre = () => {
-        const route = `/plan/lre?character=${LegendaryEventEnum[nextLeMenuItem.lre!.id]}`;
+        const route = `/plan/lre?character=${LegendaryEventEnum[LegendaryEventService.getActiveEvent().id]}`;
         navigate(isMobile ? '/mobile' + route : route);
     };
 
@@ -67,13 +67,8 @@ export const DesktopHome = () => {
         return timeDifference >= 0 ? result : 'Finished';
     }
 
-    // TODO(mythic): fix LRE dates
-    const nextLeDateStart = new Date('2024-01-01T00:00:00Z'); // Placeholder date
-    const nextLeDateEnd = new Date('2024-01-08T00:00:00Z');
-    // const nextLeDateStart = new Date(nextLeMenuItem.lre!.nextEventDateUtc!);
-    // const nextLeDateEnd = new Date(
-    //     new Date(nextLeMenuItem.lre!.nextEventDateUtc!).setDate(nextLeDateStart.getDate() + 7)
-    // );
+    const nextLeDateStart = new Date(nextLeMenuItem.nextEventDateUtc!);
+    const nextLeDateEnd = new Date(new Date(nextLeMenuItem.nextEventDateUtc!).setDate(nextLeDateStart.getDate() + 7));
     const timeToStart = timeLeftToFutureDate(nextLeDateStart);
     const timeToEnd = timeLeftToFutureDate(nextLeDateEnd);
     const isEventStarted = timeToStart === 'Finished';
@@ -167,8 +162,15 @@ export const DesktopHome = () => {
                         <CardHeader
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    (<UnitShardIcon icon={'broken'} height={50} width={50} />{' '}
-                                    <span>TODO(mythic): LEs are currently not working</span>)
+                                    <UnitShardIcon
+                                        icon={
+                                            CharactersService.charactersData.find(
+                                                x => x.snowprintId === LegendaryEventService.getActiveLreUnitId()
+                                            )?.icon ?? ''
+                                        }
+                                        height={50}
+                                        width={50}
+                                    />{' '}
                                 </div>
                             }
                             subheader={formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}

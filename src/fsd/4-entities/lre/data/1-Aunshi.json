@@ -1,9 +1,10 @@
 ﻿{
     "id": 2,
+    "unitSnowprintId": "tauAunShi",
     "name": "Aun'Shi",
     "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Aun%27Shi",
     "eventStage": 3,
-    "nextEventDate": "Finished",
+    "finished": true,
     "battlesCount": 12,
     "constraintsCount": 7,
     "regularMissions": [

@@ -19,6 +19,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     suggestedTeams: Array<Record<string, ICharacter2 | string>> = [];
 
     readonly id: LegendaryEventEnum;
+    readonly unitSnowprintId: string; // The snowprint ID for the unit.
     readonly name: string;
     readonly wikiLink: string;
     readonly eventStage: number;
@@ -43,6 +44,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
 
     protected constructor(unitsData: Array<ICharacter2>, staticData: ILegendaryEventStatic) {
         this.id = staticData.id;
+        this.unitSnowprintId = staticData.unitSnowprintId;
         this.name = staticData.name;
         this.wikiLink = staticData.wikiLink;
 

@@ -1,9 +1,10 @@
 ﻿{
     "id": 8,
+    "unitSnowprintId": "bloodMephiston",
     "name": "Mephiston",
     "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Mephiston",
     "eventStage": 3,
-    "nextEventDate": "Finished",
+    "finished": true,
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
         "Defeat 30 Astra Militarum",

@@ -21,3 +21,16 @@ export const shadowsun: ILegendaryEventStatic = shadowsunJson;
 export const trajann: ILegendaryEventStatic = trajannJson;
 export const vitruvius: ILegendaryEventStatic = vitruviusJson;
 export const lucius: ILegendaryEventStatic = luciusJson;
+
+export const allLegendaryEvents: ILegendaryEventStatic[] = [
+    aunshi,
+    shadowsun,
+    ragnar,
+    vitruvius,
+    kharn,
+    mephiston,
+    patermine,
+    dante,
+    trajann,
+    lucius,
+];
