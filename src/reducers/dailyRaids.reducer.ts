@@ -70,16 +70,25 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                     );
                     if (campaignShortId) {
                         for (const battle of completedBattles) {
-                            const campaignComposed =
-                                CampaignsService.campaignsComposed[campaignShortId + (battle.battleIndex + 1)];
-                            raidedLocations.push({
-                                ...campaignComposed,
-                                raidsCount: battle.attemptsUsed,
-                                energySpent: battle.attemptsUsed * campaignComposed.energyCost,
-                                farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
-                                isShardsLocation: false,
-                                isCompleted: battle.attemptsLeft < battle.attemptsUsed,
-                            });
+                            const campaignKey = campaignShortId + (battle.battleIndex + 1);
+                            const campaignComposed = CampaignsService.campaignsComposed[campaignKey];
+
+                            if (campaignComposed) {
+                                raidedLocations.push({
+                                    ...campaignComposed,
+                                    raidsCount: battle.attemptsUsed,
+                                    energySpent: battle.attemptsUsed * campaignComposed.energyCost,
+                                    farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
+                                    isShardsLocation: false,
+                                    isCompleted: battle.attemptsLeft < battle.attemptsUsed,
+                                });
+                            } else {
+                                console.warn(`Campaign composed data not found for key: ${campaignKey}`);
+                                console.warn(
+                                    `Available campaigns:`,
+                                    Object.keys(CampaignsService.campaignsComposed).slice(0, 10)
+                                );
+                            }
                         }
                     }
                 }
