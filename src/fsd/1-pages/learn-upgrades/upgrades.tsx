@@ -137,7 +137,6 @@ export const Upgrades = () => {
                         cellRenderer: (params: ICellRendererParams<IBaseUpgrade>) => {
                             const { data } = params;
                             if (!data || !data.locations) {
-                                console.error(data);
                                 return <span>Unknown</span>;
                             } else {
                                 return (

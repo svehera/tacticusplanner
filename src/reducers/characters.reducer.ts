@@ -110,6 +110,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     const tacticusUnit = action.units.find(
                         unit =>
                             unit.id.toLowerCase() === char.id.toLowerCase() ||
+                            unit.id.toLowerCase() === (char.snowprintId?.toLowerCase() ?? '') ||
                             unit.name.toLowerCase() === char.name.toLowerCase() ||
                             unit.name.toLowerCase() === char.shortName.toLowerCase() ||
                             unit.name.toLowerCase() === char.fullName.toLowerCase()

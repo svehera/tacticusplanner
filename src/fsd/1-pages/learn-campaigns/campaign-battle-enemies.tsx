@@ -22,7 +22,6 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
     // The total number of enemies in this battle.
     const numEnemies = useMemo(() => enemies.reduce((acc, enemy) => acc + enemy.count, 0), [enemies]);
 
-    console.log('numEnemies:', numEnemies, 'enemies:', enemies);
     // How many enemies we show in each row, based on how many enemies we have
     // in total. Faster than doing the math.
     const enemiesInCols = [

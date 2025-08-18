@@ -28,11 +28,9 @@ import { needToLevelCharacter } from './functions/need-to-level';
 
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
-        console.trace();
         const filteredCharactersByName = nameFilter
             ? characters.filter(x => x.name.toLowerCase().includes(nameFilter.toLowerCase()))
             : characters;
-        console.log('Filtered characters by name:', filteredCharactersByName);
 
         let farmableChars: Set<IMaterialFull['id']> | undefined;
 
@@ -182,7 +180,7 @@ export class CharactersService {
 
     static capCharacterAtRarity(character: ICharacter2, rarity: Rarity): ICharacter2 {
         const capped = rarityCaps[rarity];
-
+        console.log('character', character, capped);
         return {
             ...character,
             rarity: Math.min(character.rarity, capped.rarity),

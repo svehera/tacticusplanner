@@ -47,7 +47,9 @@ export class CharactersService {
      * @returns An ICharacterData representation, or null.
      */
     public static getUnit(id: string): ICharacterData | undefined {
-        return this.charactersData.find(x => x.id === id || x.snowprintId === id);
+        return this.charactersData.find(
+            x => x.id === id || x.snowprintId === id || x.fullName === id || x.shortName === id
+        );
     }
 
     /**
@@ -133,6 +135,10 @@ export class CharactersService {
 
         unitData.icon = isReleased ? unitData.icon : 'comingSoon.webp';
 
+        if (unitData.snowprintId === 'worldTerminator') {
+            console.trace(unitData.snowprintId, unitData);
+        }
+
         return unitData;
     }
 
@@ -142,12 +148,15 @@ export class CharactersService {
     }
 
     static canonicalName(identifier: string): string {
+        const unit = this.getUnit(identifier);
+        if (unit) return unit.snowprintId!;
         if (identifier === "Sho'Syl") return 'tauMarksman';
         if (identifier === "Re'Vas") return 'tauCrisis';
         if (identifier === 'PoM') return 'tyranParasite';
         if (identifier === 'Abaddon The Despoiler') return 'blackAbaddon';
         if (identifier === 'Winged Tyrant Prime') return 'tyranWingedPrime';
         if (identifier === "Tan Gi'Da") return 'admecMarshall';
+        if (identifier === 'Nauseous Rotbone') return 'deathRotbone';
         return this.getUnit(identifier)?.snowprintId || identifier;
     }
 
@@ -156,7 +165,7 @@ export class CharactersService {
             x => x.snowprintId! == CharactersService.canonicalName(identifier)
         );
         if (ret === undefined) {
-            console.error(`Character not found for identifier: ${identifier}`);
+            console.trace(`Character not found for identifier: ${identifier}`);
         }
         return ret!;
     }

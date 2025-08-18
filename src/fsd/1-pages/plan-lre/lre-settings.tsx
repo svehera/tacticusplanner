@@ -2,6 +2,7 @@
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Dialog from '@mui/material/Dialog';
+import { XCircle } from 'lucide-react';
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 

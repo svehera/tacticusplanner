@@ -52,6 +52,19 @@ export const MasterTable = () => {
     );
 
     const { leSelectedTeams, characters, leProgress } = useContext(StoreContext);
+
+    const resolvedCharacters = useMemo(() => {
+        return characters.map(x => {
+            const ret: ICharacter2 = { ...x };
+            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
+            ret.name = staticChar?.snowprintId ?? x.name;
+            if (ret.name === 'worldTerminator') {
+                console.trace('resolving', x, staticChar, ret);
+            }
+            return ret;
+        });
+    }, [characters]);
+
     const getSelectedTeams = (eventId: LegendaryEventEnum): ILreTeam[] => {
         const { teams } = leSelectedTeams[eventId] ?? { teams: [] };
         return teams;
@@ -80,7 +93,7 @@ export const MasterTable = () => {
             slots: number;
         }> = [];
         activeLegendaryEvents.forEach(eventId => {
-            const legendaryEvent = getLre(eventId, characters);
+            const legendaryEvent = getLre(eventId, resolvedCharacters);
             const legendaryEventProgress = LreService.mapProgressDtoToModel(
                 leProgress[legendaryEvent.id],
                 legendaryEvent
@@ -340,7 +353,7 @@ export const MasterTable = () => {
         }> = [];
 
         activeLegendaryEvents.forEach(eventId => {
-            const legendaryEvent = getLre(eventId, characters);
+            const legendaryEvent = getLre(eventId, resolvedCharacters);
             const chars =
                 selection === 'all'
                     ? legendaryEvent.allowedUnits

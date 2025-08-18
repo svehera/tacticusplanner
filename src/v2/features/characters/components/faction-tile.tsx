@@ -73,7 +73,6 @@ export const FactionsTile = ({
             <div className={`characters-box ${factionClass}`}>
                 {faction.units.map(unit => {
                     if (unit.unitType === UnitType.character) {
-                        console.log('unit', unit);
                         return (
                             <CharacterTile
                                 key={unit.snowprintId!}
