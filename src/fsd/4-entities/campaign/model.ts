@@ -127,6 +127,11 @@ export interface ICampaignModel {
     faction: Faction;
 
     /**
+     * The characters required to beat campaign.
+     */
+    coreCharacters: string[];
+
+    /**
      * The release type of the campaign, indicating how and when it was made available.
      */
     releaseType: CampaignReleaseType;
