@@ -7,6 +7,7 @@ import { IUnit } from '@/fsd/4-entities/unit';
 export interface IFactionStatic {
     alliance: string;
     name: string;
+    snowprintId: string;
     icon: string;
     color: string;
 }

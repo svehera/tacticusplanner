@@ -35,18 +35,26 @@ export class CampaignsService {
             battles.push({ ...battleData[battleDataKey], shortName: battleDataKey });
         }
 
+        const foundLocs: string[] = [];
         for (const battle of battles) {
+            const name = battle.shortName ?? '';
             for (const reward of battle.rewards.guaranteed) {
                 if (reward.id === 'gold') continue;
                 const rewardId = reward.id;
                 if (!result[rewardId]) result[rewardId] = [];
-                result[rewardId].push(battle.shortName ?? '');
+                if (!foundLocs.includes(name)) {
+                    foundLocs.push(name);
+                    result[rewardId].push(name);
+                }
             }
             for (const reward of battle.rewards.potential) {
                 if (reward.id === 'gold') continue;
                 const rewardId = reward.id;
                 if (!result[rewardId]) result[rewardId] = [];
-                result[rewardId].push(battle.shortName ?? '');
+                if (!foundLocs.includes(name)) {
+                    foundLocs.push(name);
+                    result[rewardId].push(name);
+                }
             }
         }
 

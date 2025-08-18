@@ -2,120 +2,140 @@
     {
         "alliance": "Imperial",
         "name": "Ultramarines",
+        "snowprintId": "Ultramarines",
         "icon": "Ultramarines.png",
         "color": "#194486"
     },
     {
         "alliance": "Imperial",
         "name": "Adepta Sororitas",
+        "snowprintId": "Sisterhood",
         "icon": "ADEPTA_SORORITAS.png",
         "color": "#962C38"
     },
     {
         "alliance": "Xenos",
         "name": "Necrons",
+        "snowprintId": "Necrons",
         "icon": "Necrons.png",
         "color": "#007E59"
     },
     {
         "alliance": "Imperial",
         "name": "Astra Militarum",
+        "snowprintId": "AstraMilitarum",
         "icon": "Astra_militarum.png",
         "color": "#717838"
     },
     {
         "alliance": "Chaos",
         "name": "Black Legion",
+        "snowprintId": "BlackLegion",
         "icon": "Black_Legion.png",
         "color": "#1C0F10"
     },
     {
         "alliance": "Chaos",
         "name": "Death guard",
+        "snowprintId": "DeathGuard",
         "icon": "Death_Guard.png",
         "color": "#65540C"
     },
     {
         "alliance": "Xenos",
         "name": "Orks",
+        "snowprintId": "Orks",
         "icon": "Orks.png",
         "color": "#DC901E"
     },
     {
         "alliance": "Imperial",
         "name": "Black Templars",
+        "snowprintId": "BlackTemplars",
         "icon": "Black_Templars.png",
         "color": "#929395"
     },
     {
         "alliance": "Xenos",
         "name": "Aeldari",
+        "snowprintId": "Aeldari",
         "icon": "Aeldari.png",
         "color": "#ac1b1a"
     },
     {
         "alliance": "Xenos",
         "name": "T'au Empire",
+        "snowprintId": "Tau",
         "icon": "T_Au.png",
         "color": "#CE7140"
     },
     {
         "alliance": "Imperial",
         "name": "Space Wolves",
+        "snowprintId": "SpaceWolves",
         "icon": "Space_Wolves.png",
         "color": "#084A92"
     },
     {
         "alliance": "Chaos",
         "name": "Thousand Sons",
+        "snowprintId": "ThousandSons",
         "icon": "Thousand_Sons.png",
         "color": "#084A92"
     },
     {
         "alliance": "Imperial",
         "name": "Dark Angels",
+        "snowprintId": "DarkAngels",
         "icon": "Dark_Angels.png",
         "color": "#18542B"
     },
     {
         "alliance": "Xenos",
         "name": "Tyranids",
+        "snowprintId": "Tyranids",
         "icon": "Tyranids.png",
         "color": "#7f5283"
     },
     {
         "alliance": "Imperial",
         "name": "Adeptus Mechanicus",
+        "snowprintId": "AdeptusMechanicus",
         "icon": "AdeptusMechanicus.png",
         "color": "#781e2e"
     },
     {
         "alliance": "Chaos",
         "name": "World Eaters",
+        "snowprintId": "WorldEaters",
         "icon": "worldeaters.png",
         "color": "#511011"
     },
     {
         "alliance": "Imperial",
         "name": "Blood Angels",
+        "snowprintId": "BloodAngels",
         "icon": "blood_angels.png",
         "color": "#ac1b1a"
     },
     {
         "alliance": "Xenos",
         "name": "Genestealer Cults",
+        "snowprintId": "Genestealers",
         "icon": "Genestealer Cults.png",
         "color": "#CE7140"
     },
     {
         "alliance": "Imperial",
         "name": "Adeptus Custodes",
+        "snowprintId": "Custodes",
         "icon": "Adeptus Custodes.png",
         "color": "#652129"
     },
     {
         "alliance": "Chaos",
         "name": "Emperor's Children",
+        "snowprintId": "EmperorsChildren",
         "icon": "Emperor's Children.png",
         "color": "#874470"
     }

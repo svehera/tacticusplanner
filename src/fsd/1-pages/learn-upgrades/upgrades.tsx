@@ -143,7 +143,6 @@ export const Upgrades = () => {
                                 return (
                                     <div className="flex-box gap5 wrap">
                                         {data.locations.map(location => {
-                                            console.log('Location', location);
                                             if (!location) {
                                                 return <></>;
                                             }
@@ -182,63 +181,65 @@ export const Upgrades = () => {
         const upgradesLocations = CampaignsService.getUpgradesLocations();
         const upgrades = Object.values(UpgradesService.recipeDataByName);
 
-        const result: IUpgradesTableRow[] = upgrades.map(x => {
-            const characters: Array<{
-                id: string;
-                icon: string;
-                ranks: Rank[];
-            }> = [];
+        const result: IUpgradesTableRow[] = upgrades
+            .filter(x => x.label !== 'Coming soon' && x.material !== 'Coming soon')
+            .map(x => {
+                const characters: Array<{
+                    id: string;
+                    icon: string;
+                    ranks: Rank[];
+                }> = [];
 
-            for (const character in rankUpData) {
-                const ranks = rankUpData[character];
+                for (const character in rankUpData) {
+                    const ranks = rankUpData[character];
 
-                for (const rank in ranks) {
-                    const upgrades = ranks[rank];
-                    if (upgrades.includes(x.snowprintId)) {
-                        const charData = CharactersService.charactersData.find(x => x.name === character);
-                        const existingChar = characters.find(x => x.id === character);
-                        if (existingChar) {
-                            existingChar.ranks.push(stringToRank(rank));
-                        } else {
-                            characters.push({
-                                id: character,
-                                icon: charData?.icon ?? '',
-                                ranks: [stringToRank(rank)],
-                            });
+                    for (const rank in ranks) {
+                        const upgrades = ranks[rank];
+                        if (upgrades.includes(x.snowprintId)) {
+                            const charData = CharactersService.charactersData.find(x => x.name === character);
+                            const existingChar = characters.find(x => x.id === character);
+                            if (existingChar) {
+                                existingChar.ranks.push(stringToRank(rank));
+                            } else {
+                                characters.push({
+                                    id: character,
+                                    icon: charData?.icon ?? '',
+                                    ranks: [stringToRank(rank)],
+                                });
+                            }
                         }
                     }
                 }
-            }
 
-            const locations = upgradesLocations[x.snowprintId]?.map(
-                (locationId: string) => CampaignsService.campaignsComposed[locationId]
-            );
-            const partOf = upgrades
-                .filter(m => m.recipe?.some(u => u.material === x.material) ?? false)
-                .map(u => u.label ?? u.material)
-                .join('\r\n');
-            return {
-                upgradeLabel: x.label ?? x.material,
-                upgradeId: x.snowprintId,
-                upgradeIcon: x.icon ?? '',
-                faction: x.faction ?? '',
-                rarity: RarityMapper.stringToNumber[x.rarity as unknown as RarityString],
-                type: x.stat,
-                locations,
-                partOf,
-                recipe:
-                    x.recipe
-                        ?.map(
-                            x =>
-                                (UpgradesService.getUpgradeMaterial(x.material)?.material ?? x.material) +
-                                ' - ' +
-                                x.count
-                        )
-                        .join('\r\n') ?? '',
-                characters: characters,
-                craftable: x.craftable,
-            };
-        });
+                const locations = upgradesLocations[x.snowprintId]?.map(
+                    (locationId: string) => CampaignsService.campaignsComposed[locationId]
+                );
+                const partOf = upgrades
+                    .filter(m => m.recipe?.some(u => u.material === x.material) ?? false)
+                    .map(u => u.label ?? u.material)
+                    .join('\r\n');
+                return {
+                    upgradeLabel: x.label ?? x.material,
+                    upgradeId: x.snowprintId,
+                    upgradeIcon: x.icon ?? '',
+                    faction: x.faction ?? '',
+                    rarity: RarityMapper.stringToNumber[x.rarity as unknown as RarityString],
+                    type: x.stat,
+                    locations,
+                    partOf,
+                    recipe:
+                        x.recipe
+                            ?.map(
+                                x =>
+                                    (UpgradesService.getUpgradeMaterial(x.material)?.material ?? x.material) +
+                                    ' - ' +
+                                    x.count
+                            )
+                            .join('\r\n') ?? '',
+                    characters: characters,
+                    craftable: x.craftable,
+                };
+            });
 
         return result;
     }, []);

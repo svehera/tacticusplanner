@@ -4,7 +4,7 @@ import { isMobile } from 'react-device-detect';
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { ICharacter2 } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEvent, ILreTeam } from '@/fsd/3-features/lre';
@@ -16,7 +16,7 @@ import { LreEditTeam } from './lre-edit-team';
 import { LreService } from './lre.service';
 
 export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
-    const { characters, viewPreferences, leSelectedTeams } = useContext(StoreContext);
+    const { viewPreferences, leSelectedTeams } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { model: lreProgress } = useLreProgress(legendaryEvent);
 
@@ -35,7 +35,10 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
         }
 
         team.characters = team.charactersIds.map(id => {
-            const character = characters.find(x => x.id === id);
+            const character = CharactersService.resolveCharacter(id);
+            if (!character) {
+                console.log('id character', id, character);
+            }
 
             return { ...character, teamId: team.id };
         }) as ICharacter2[];

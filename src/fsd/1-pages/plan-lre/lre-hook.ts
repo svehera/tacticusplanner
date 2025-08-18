@@ -7,7 +7,7 @@ import { useQueryState } from '@/fsd/5-shared/lib';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { getLre } from '@/fsd/3-features/lre';
 
@@ -39,17 +39,25 @@ export const useLre = () => {
     const changeTab = (_: React.SyntheticEvent, value: LreSection) => setSection(value);
 
     useEffect(() => {
-        const relatedLre = CharactersService.lreCharacters.find(x => x.lre!.id === legendaryEventId);
-        if (relatedLre) {
+        const lreChar = CharactersService.getLreCharacter(legendaryEventId);
+        if (lreChar) {
+            const relatedLre = LegendaryEventService.getEventByCharacterSnowprintId(lreChar!.snowprintId!);
             setHeaderTitle(
-                relatedLre.lre!.finished
-                    ? `${relatedLre.name} (Finished)`
-                    : `${relatedLre.name} ${relatedLre.lre!.eventStage}/3 (${relatedLre.lre!.nextEventDate})`
+                relatedLre
+                    ? `${lreChar.name} (Finished)`
+                    : `${lreChar.name} ${relatedLre!.eventStage}/3 (${relatedLre!.nextEventDate})`
             );
         }
     }, [legendaryEventId]);
 
-    const legendaryEvent = useMemo(() => getLre(legendaryEventId, characters), [legendaryEventId]);
+    const legendaryEvent = useMemo(
+        () =>
+            getLre(
+                legendaryEventId,
+                characters.map(c => CharactersService.resolveCharacter(c.snowprintId ?? c.name))
+            ),
+        [legendaryEventId]
+    );
 
     return { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab };
 };

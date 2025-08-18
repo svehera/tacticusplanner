@@ -133,10 +133,12 @@ export const Goals = () => {
         if (upgradeRankOrMowGoals.length) {
             const goalsEstimate = upgradeRankOrMowGoals.map(goal => {
                 const goalEstimate = estimatedUpgradesTotal.byCharactersPriority.find(x => x.goalId === goal.goalId);
+                console.log('estimatedUpgradesTotal', estimatedUpgradesTotal);
                 const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x => {
                     const relatedGoals = x.raids.flatMap(raid => raid.relatedGoals);
                     return relatedGoals.includes(goal.goalId);
                 });
+                console.log('First farm day', firstFarmDay, goal.goalId, estimatedUpgradesTotal.upgradesRaids);
 
                 const daysTotal = estimatedUpgradesTotal.upgradesRaids.filter(x => {
                     const relatedGoals = x.raids.flatMap(raid => raid.relatedGoals);
@@ -175,6 +177,7 @@ export const Goals = () => {
             });
 
             result.push(...goalsEstimate);
+            console.log('Upgrade rank/MoW goals estimates', result);
         }
 
         if (upgradeAbilities.length) {

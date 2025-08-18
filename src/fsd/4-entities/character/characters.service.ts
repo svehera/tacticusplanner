@@ -12,7 +12,7 @@ import {
 } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line boundaries/element-types
-import { LegendaryEventService } from '@/fsd/4-entities/lre';
+import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { charactersData } from './data';
 import { UnitDataRaw, ICharacterData, ICharLegendaryEvents } from './model';
@@ -33,6 +33,14 @@ export class CharactersService {
     static readonly activeLre: ICharacterData = (() => {
         return this.charactersData.find(unit => unit.snowprintId === LegendaryEventService.getActiveLreUnitId())!;
     })();
+
+    public static getLreCharacter(id: LegendaryEventEnum): ICharacterData | undefined {
+        return this.lreCharacters.find(unit => {
+            const event = LegendaryEventService.getEventByCharacterSnowprintId(unit.snowprintId!);
+            return event?.id === id;
+        });
+        return undefined;
+    }
 
     /**
      * @param id The unit ID of the character or MoW.
@@ -131,6 +139,26 @@ export class CharactersService {
     public static parseEquipmentType(equip: string): Equipment {
         const e = equip === 'Defense' ? 'Defensive' : equip;
         return e as Equipment;
+    }
+
+    static canonicalName(identifier: string): string {
+        if (identifier === "Sho'Syl") return 'tauMarksman';
+        if (identifier === "Re'Vas") return 'tauCrisis';
+        if (identifier === 'PoM') return 'tyranParasite';
+        if (identifier === 'Abaddon The Despoiler') return 'blackAbaddon';
+        if (identifier === 'Winged Tyrant Prime') return 'tyranWingedPrime';
+        if (identifier === "Tan Gi'Da") return 'admecMarshall';
+        return this.getUnit(identifier)?.snowprintId || identifier;
+    }
+
+    public static resolveCharacter(identifier: string): ICharacterData {
+        const ret = CharactersService.charactersData.find(
+            x => x.snowprintId! == CharactersService.canonicalName(identifier)
+        );
+        if (ret === undefined) {
+            console.error(`Character not found for identifier: ${identifier}`);
+        }
+        return ret!;
     }
 
     static isAtLeast3DaysBefore(releaseDate: Date): boolean {

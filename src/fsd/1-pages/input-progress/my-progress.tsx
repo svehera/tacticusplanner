@@ -5,6 +5,7 @@ import React, { useCallback, useContext } from 'react';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { CampaignsService, Campaign, ICampaignModel } from '@/fsd/4-entities/campaign';
+import { CharactersService } from '@/fsd/4-entities/character';
 
 import { ViewSettings } from '@/fsd/3-features/view-settings';
 
@@ -35,7 +36,11 @@ export const MyProgress = () => {
             return (
                 <CampaignProgress
                     key={campaign.id}
-                    characters={viewPreferences.myProgressShowCoreCharacters ? characters : []}
+                    characters={
+                        viewPreferences.myProgressShowCoreCharacters
+                            ? characters.map(x => CharactersService.resolveCharacter(x.snowprintId ?? x.id))
+                            : []
+                    }
                     campaign={campaign}
                     progress={campaignsProgress[campaign.id]}
                     changeProgress={value => updateCampaignProgress(campaign.id, value)}

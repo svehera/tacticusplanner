@@ -10,7 +10,7 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
     // Determine the correct path based on whether it's a snowprint asset or a simple filename
     const imagePath = props.icon.includes('snowprint_assets/')
         ? props.icon // Use full snowprint path as-is
-        : `portraits/resized/${props.icon}`; // Prepend portraits/resized/ for simple filenames
+        : props.icon; // Prepend portraits/resized/ for simple filenames
 
     const imageUrl = getImageUrl(imagePath);
 

@@ -262,6 +262,9 @@ export class UpgradesService {
     }
 
     public static getUpgrade(upgradeId: string): IBaseUpgrade | ICraftedUpgrade {
+        if (!this.baseUpgradesData[upgradeId] && !this.craftedUpgradesData[upgradeId]) {
+            console.warn('Upgrade not found:', upgradeId);
+        }
         return this.baseUpgradesData[upgradeId] ?? this.craftedUpgradesData[upgradeId];
     }
 
@@ -287,7 +290,7 @@ export class UpgradesService {
             }
 
             // Get all the locations where this particular upgrade can be farmed.
-            const locations = upgradeLocationsShort[upgrade.material] ?? [];
+            const locations = upgradeLocationsShort[upgrade.snowprintId] ?? [];
             const locationsComposed = orderBy(
                 locations.map(location => CampaignsService.campaignsComposed[location]),
                 ['dropRate', 'nodeNumber'],
@@ -295,7 +298,7 @@ export class UpgradesService {
             );
 
             result[upgradeName] = {
-                id: upgrade.material,
+                id: upgrade.snowprintId,
                 snowprintId: upgrade.snowprintId,
                 label: upgrade.label ?? upgrade.material,
                 rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],

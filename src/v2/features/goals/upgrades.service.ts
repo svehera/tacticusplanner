@@ -17,6 +17,7 @@ import {
     IMaterial,
     UpgradesService as FsdUpgradesService,
 } from '@/fsd/4-entities/upgrade';
+import { recipeDataByName } from '@/fsd/4-entities/upgrade/data';
 
 import {
     ICharacterUpgradeEstimate,
@@ -35,11 +36,25 @@ export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
+
+    public static canonicalizeInventoryUpgrades(inventoryUpgrades: Record<string, number>): Record<string, number> {
+        return Object.fromEntries(
+            Object.entries(inventoryUpgrades).map(([key, value]) => {
+                return [
+                    recipeDataByName[key]
+                        ? key
+                        : (Object.values(recipeDataByName).find(x => x.material === key)?.snowprintId ?? key),
+                    value,
+                ];
+            })
+        );
+    }
+
     static getUpgradesEstimatedDays(
         settings: IEstimatedRanksSettings,
         ...goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
     ): IEstimatedUpgrades {
-        const inventoryUpgrades = cloneDeep(settings.upgrades);
+        const inventoryUpgrades = this.canonicalizeInventoryUpgrades(cloneDeep(settings.upgrades));
 
         const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals);
 
@@ -52,8 +67,10 @@ export class UpgradesService {
         if (settings.preferences.farmByPriorityOrder) {
             byCharactersPriority = this.getEstimatesByPriority(goals, combinedBaseMaterials, inventoryUpgrades);
             allMaterials = byCharactersPriority.flatMap(x => x.upgrades);
+            console.log('All materials', allMaterials);
         } else {
             allMaterials = this.getTotalEstimates(combinedBaseMaterials, inventoryUpgrades);
+            console.log('All materials', allMaterials);
 
             if (settings.preferences.farmStrategy === DailyRaidsStrategy.leastTime) {
                 allMaterials = this.improveEstimates(allMaterials, combinedBaseMaterials, inventoryUpgrades);
@@ -247,15 +264,13 @@ export class UpgradesService {
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
     ): IUnitUpgrade[] {
         const result: IUnitUpgrade[] = [];
+        const canonUpgrades = this.canonicalizeInventoryUpgrades(inventoryUpgrades);
         for (const goal of goals) {
             const upgradeRanks =
                 goal.type === PersonalGoalType.UpgradeRank
                     ? CharacterUpgradesService.getCharacterUpgradeRank(goal)
                     : this.getMowUpgradeRank(goal);
-            const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(
-                upgradeRanks,
-                inventoryUpgrades
-            );
+            const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(upgradeRanks, canonUpgrades);
 
             if (goal.upgradesRarity.length) {
                 // remove upgrades that do not match to selected rarities
@@ -383,6 +398,8 @@ export class UpgradesService {
         acquiredCount: number
     ): ICharacterUpgradeEstimate {
         const { id, snowprintId, label, rarity, iconPath, locations, relatedCharacters, relatedGoals } = upgrade;
+
+        // console.trace('upgrade', upgrade, requiredCount, acquiredCount);
 
         const selectedLocations = locations.filter(x => x.isSuggested);
 

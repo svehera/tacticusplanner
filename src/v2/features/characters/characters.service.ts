@@ -134,7 +134,7 @@ export class CharactersService {
 
         // Derive relevant faction data in one pass
         const result: IFaction[] = factionsData.reduce((acc: IFaction[], faction) => {
-            const characters = factionCharacters[faction.name];
+            const characters = factionCharacters[faction.snowprintId];
             if (!characters) return acc;
 
             let bsValue = 0,
