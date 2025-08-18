@@ -51,24 +51,36 @@ const energyMarks = [
         label: '',
     },
     {
-        value: 288 + 50,
+        value: 288 + 30,
+        label: 'Daily Mission',
+    },
+    {
+        value: 288 + 30 + 60,
+        label: 'Ad',
+    },
+    {
+        value: 288 + 30 + 60 + 60,
         label: '25 BS',
     },
     {
-        value: 288 + 50 + 100,
+        value: 288 + 30 + 60 + 60 + 100,
         label: '50 BS',
     },
     {
-        value: 288 + 50 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100,
         label: '110 BS',
     },
     {
-        value: 288 + 50 + 100 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100,
         label: '250 BS',
     },
     {
-        value: 288 + 50 + 100 + 100 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100,
         label: '500 BS',
+    },
+    {
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100,
+        label: '1000 BS',
     },
     {
         value: 888888,

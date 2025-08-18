@@ -43,8 +43,6 @@ export const LreTeamsCard: React.FC<Props> = ({
         [autoTeamsPreferences, restrictions, viewPreferences.onlyUnlocked]
     );
 
-    console.log('gridTeam', gridTeam);
-
     useEffect(() => {
         gridRef.current?.api?.sizeColumnsToFit();
     }, [

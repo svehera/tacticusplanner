@@ -61,6 +61,8 @@ export const LegendaryEventTrack: React.FC<Props> = ({
         return result;
     }, [leSelectedRequirements]);
 
+    console.trace('selectedTeams', selectedTeams);
+
     return viewPreferences.lreGridView ? (
         <div style={{ flex: 1 }}>
             <LreTeamsCard

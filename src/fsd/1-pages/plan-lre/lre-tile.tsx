@@ -24,10 +24,6 @@ interface Props {
 export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => {} }) => {
     const { goals, characters, mows, viewPreferences } = useContext(StoreContext);
 
-    if (character.snowprintId === 'worldTerminator') {
-        console.trace(character);
-    }
-
     // We use the current goals of the tactician, as well as the current state
     // of the character, to determine which rank to show. We also take into
     // account if the tactician has enabled goal previews.

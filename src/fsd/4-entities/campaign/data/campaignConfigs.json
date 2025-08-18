@@ -17,12 +17,12 @@
         "energyCost": 5,
         "dailyBattleCount": 10,
         "dropRate": {
-            "common": 0.75,
-            "uncommon": 0.6,
-            "rare": 0.33,
-            "epic": 0.25,
-            "legendary": 0.15,
-            "shard": 0.347
+            "common": 0.8517,
+            "uncommon": 0.666,
+            "rare": 0.4,
+            "epic": 0.167,
+            "legendary": 0.1,
+            "shard": 0.333
         }
     },
     "EarlyChars": {
@@ -30,12 +30,12 @@
         "energyCost": 5,
         "dailyBattleCount": 7,
         "dropRate": {
-            "common": 0.75,
-            "uncommon": 0.6,
-            "rare": 0.33,
-            "epic": 0.25,
-            "legendary": 0.15,
-            "shard": 0.347
+            "common": 0.8517,
+            "uncommon": 0.666,
+            "rare": 0.4,
+            "epic": 0.167,
+            "legendary": 0.1,
+            "shard": 0.333
         }
     },
     "EarlyMirrorChars": {
@@ -43,12 +43,12 @@
         "energyCost": 6,
         "dailyBattleCount": 3,
         "dropRate": {
-            "common": 0.83,
-            "uncommon": 0.71,
-            "rare": 0.4,
-            "epic": 0.33,
-            "legendary": 0.17,
-            "shard": 0.347
+            "common": 0.9,
+            "uncommon": 0.75,
+            "rare": 0.5,
+            "epic": 0.25,
+            "legendary": 0.111,
+            "shard": 0.3333
         }
     },
     "Normal": {
@@ -56,12 +56,12 @@
         "energyCost": 6,
         "dailyBattleCount": 10,
         "dropRate": {
-            "common": 0.75,
-            "uncommon": 0.6,
-            "rare": 0.33,
-            "epic": 0.25,
-            "legendary": 0.15,
-            "shard": 0.347
+            "common": 0.8517,
+            "uncommon": 0.666,
+            "rare": 0.4,
+            "epic": 0.167,
+            "legendary": 0.1,
+            "shard": 0.333
         }
     },
     "Mirror": {
@@ -69,18 +69,18 @@
         "energyCost": 6,
         "dailyBattleCount": 10,
         "dropRate": {
-            "common": 0.83,
-            "uncommon": 0.71,
-            "rare": 0.41,
-            "epic": 0.33,
-            "legendary": 0.17,
-            "shard": 0.347
+            "common": 0.9,
+            "uncommon": 0.75,
+            "rare": 0.5,
+            "epic": 0.25,
+            "legendary": 0.111,
+            "shard": 0.3333
         }
     },
     "Elite": {
         "type": "Elite",
         "energyCost": 10,
-        "dailyBattleCount": 3,
+        "dailyBattleCount": 6,
         "dropRate": {
             "common": 1.54,
             "uncommon": 1.3,

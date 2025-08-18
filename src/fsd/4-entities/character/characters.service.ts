@@ -157,6 +157,7 @@ export class CharactersService {
         if (identifier === 'Winged Tyrant Prime') return 'tyranWingedPrime';
         if (identifier === "Tan Gi'Da") return 'admecMarshall';
         if (identifier === 'Nauseous Rotbone') return 'deathRotbone';
+        if (identifier === 'Sy-Gex') return 'admecDestroyer';
         return this.getUnit(identifier)?.snowprintId || identifier;
     }
 

@@ -67,10 +67,8 @@ export class UpgradesService {
         if (settings.preferences.farmByPriorityOrder) {
             byCharactersPriority = this.getEstimatesByPriority(goals, combinedBaseMaterials, inventoryUpgrades);
             allMaterials = byCharactersPriority.flatMap(x => x.upgrades);
-            console.log('All materials', allMaterials);
         } else {
             allMaterials = this.getTotalEstimates(combinedBaseMaterials, inventoryUpgrades);
-            console.log('All materials', allMaterials);
 
             if (settings.preferences.farmStrategy === DailyRaidsStrategy.leastTime) {
                 allMaterials = this.improveEstimates(allMaterials, combinedBaseMaterials, inventoryUpgrades);

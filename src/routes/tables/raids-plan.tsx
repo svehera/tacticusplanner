@@ -36,7 +36,6 @@ export const RaidsPlan: React.FC<Props> = ({
     upgrades,
     updateInventory,
 }) => {
-    console.log(upgrades);
     const [upgradesPaging, setUpgradesPaging] = React.useState<{
         start: number;
         end: number;

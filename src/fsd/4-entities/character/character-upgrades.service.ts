@@ -24,7 +24,6 @@ export class CharacterUpgradesService {
 
         for (const rank of ranksRange) {
             const upgrades = characterRankUpData[rankToString(rank)] ?? [];
-            console.log('processing rank', rank, rankToString(rank), 'with upgrades', upgrades);
             upgradeRanks.push({
                 rankStart: rank,
                 rankEnd: rank + 1,
