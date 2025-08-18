@@ -71,15 +71,15 @@ const energyMarks = [
         label: '110 BS',
     },
     {
-        value: 288 + 30 + 60 + 60 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100,
         label: '250 BS',
     },
     {
-        value: 288 + 30 + 60 + 60 + 100 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100,
         label: '500 BS',
     },
     {
-        value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100 + 100,
         label: '1000 BS',
     },
     {
@@ -97,9 +97,10 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const dispatch = useContext(DispatchContext);
     const { dailyRaidsPreferences } = useContext(StoreContext);
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
-    const [dailyEnergy, setDailyEnergy] = React.useState(() =>
-        energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy)
-    );
+    const [dailyEnergy, setDailyEnergy] = React.useState(() => {
+        const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
+        return index >= 0 ? index : 0; // Default to first option if not found
+    });
     const [shardsEnergy, setShardsEnergy] = React.useState<number | string>(dailyRaidsPreferences.shardsEnergy);
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
