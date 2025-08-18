@@ -98,7 +98,9 @@ export interface IDropRate {
     rare: number;
     epic: number;
     legendary: number;
+    mythic?: number;
     shard: number;
+    mythicShard?: number;
 }
 
 /**

@@ -56,7 +56,7 @@
         "energyCost": 6,
         "dailyBattleCount": 10,
         "dropRate": {
-            "common": 0.8517,
+            "common": 0.857,
             "uncommon": 0.666,
             "rare": 0.4,
             "epic": 0.167,
@@ -82,11 +82,11 @@
         "energyCost": 10,
         "dailyBattleCount": 6,
         "dropRate": {
-            "common": 1.54,
-            "uncommon": 1.3,
-            "rare": 1.15,
-            "epic": 0.69,
-            "legendary": 0.41,
+            "common": 1.5,
+            "uncommon": 1.25,
+            "rare": 1.083,
+            "epic": 0.667,
+            "legendary": 0.33,
             "shard": 1.08
         }
     },
@@ -108,12 +108,14 @@
         "energyCost": 6,
         "dailyBattleCount": 10,
         "dropRate": {
-            "common": 0.941,
+            "common": 0.9375,
             "uncommon": 0.8,
-            "rare": 0.692,
-            "epic": 0.428,
-            "legendary": 0.249,
-            "shard": 0.643
+            "rare": 0.666,
+            "epic": 0.333,
+            "legendary": 0.142,
+            "mythic": 0.12,
+            "shard": 0.615,
+            "mythicShard": 214
         }
     }
 }
