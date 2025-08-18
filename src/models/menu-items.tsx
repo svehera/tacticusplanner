@@ -52,7 +52,8 @@ export const menuItemById = {
     leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
     npcs: new MenuItemTP('NPCs', <Diversity3Icon />, '/learn/npcs'),
-    versus: new MenuItemTP('Versus', <Diversity3Icon />, '/learn/versus'),
+    // TODO: re-enable versus at later date
+    // versus: new MenuItemTP('Versus', <Diversity3Icon />, '/learn/versus'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
     learnEquipment: new MenuItemTP('Equipment', <ListIcon />, '/learn/equipment'),
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
@@ -112,7 +113,8 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['guides'],
     menuItemById['characters'],
     menuItemById['npcs'],
-    menuItemById['versus'],
+    // TODO: re-enable versus at later date
+    //menuItemById['versus'],
     menuItemById['upgrades'],
     menuItemById['learnEquipment'],
     menuItemById['rankLookup'],
@@ -135,7 +137,8 @@ export const learnSubMenu: MenuItemTP[] = [
         menuItemById['campaigns'],
     ]),
     menuItemById['guides'],
-    menuItemById['versus'],
+    // TODO: re-enable versus at later date
+    //menuItemById['versus'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildApi'],

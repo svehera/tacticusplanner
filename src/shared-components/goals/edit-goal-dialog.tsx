@@ -136,7 +136,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
 
     const maxRank = useMemo(() => {
-        return ignoreRankRarity ? Rank.Diamond3 : RarityMapper.toMaxRank[unit?.rarity ?? 0];
+        return ignoreRankRarity ? Rank.Adamantine1 : RarityMapper.toMaxRank[unit?.rarity ?? 0];
     }, [unit?.rarity, ignoreRankRarity]);
 
     let currentRankValues: number[] = [];

@@ -87,7 +87,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     };
 
     const maxRank = useMemo(() => {
-        return ignoreRankRarity ? Rank.Diamond3 : rarityToMaxRank[unit?.rarity ?? 0];
+        return ignoreRankRarity ? Rank.Adamantine1 : rarityToMaxRank[unit?.rarity ?? 0];
     }, [unit?.rarity, ignoreRankRarity]);
 
     const rankValues = useMemo(() => {
