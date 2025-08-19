@@ -84,13 +84,12 @@ export class CampaignsService {
         for (const battleDataKey in battleData) {
             const battle = battleData[battleDataKey];
 
+            const reward = this.getReward(battle);
             const config = campaignConfigs[battle.campaignType as CampaignType];
-            const recipe = recipeDataByName[this.getReward(battle)];
+            const recipe = recipeDataByName[reward];
             if (!recipe) {
-                if (battle.campaignType !== CampaignType.SuperEarly) {
-                    console.error(
-                        'no recipe for ' + this.getReward(battle) + ' from ' + battle.campaign + ' ' + battle.nodeNumber
-                    );
+                if (reward.length > 0 && !reward.startsWith('shards_') && !reward.startsWith('mythicShards_')) {
+                    console.warn('no recipe found', reward, battle);
                 }
             }
             const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;

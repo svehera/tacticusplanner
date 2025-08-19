@@ -51,10 +51,12 @@ export const useLre = () => {
         const lreChar = CharactersService.getLreCharacter(legendaryEventId);
         if (lreChar) {
             const relatedLre = LegendaryEventService.getEventByCharacterSnowprintId(lreChar!.snowprintId!);
+            console.trace('relatedLre', relatedLre);
+            const nextDate = relatedLre?.nextEventDate ?? 'TBA';
             setHeaderTitle(
-                relatedLre
+                !relatedLre || relatedLre.finished
                     ? `${lreChar.name} (Finished)`
-                    : `${lreChar.name} ${relatedLre!.eventStage}/3 (${relatedLre!.nextEventDate})`
+                    : `${lreChar.name} ${relatedLre!.eventStage}/3 (${nextDate})`
             );
         }
     }, [legendaryEventId]);

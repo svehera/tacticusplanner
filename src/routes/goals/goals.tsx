@@ -175,7 +175,6 @@ export const Goals = () => {
             });
 
             result.push(...goalsEstimate);
-            console.log('Upgrade rank/MoW goals estimates', result);
         }
 
         if (upgradeAbilities.length) {

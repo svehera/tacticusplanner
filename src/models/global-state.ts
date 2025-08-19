@@ -83,15 +83,9 @@ export class GlobalState implements IGlobalState {
         totalUsers?: number
     ): Array<ICharacter2> {
         return CharactersService.charactersData.map(staticData => {
-            if (staticData.snowprintId! === 'worldTerminator') {
-                console.log(staticData);
-            }
             const personalCharData = chars.find(c => {
                 return CharactersService.canonicalName(c.name!) === staticData.snowprintId!;
             });
-            if (staticData.snowprintId! === 'worldTerminator' && personalCharData) {
-                console.log('Found personal data for World Terminator:', personalCharData);
-            }
             const rank = personalCharData?.rank ?? Rank.Locked;
             const rankLevel = rankToLevel[(rank - 1) as Rank];
             const rankRarity = rankToRarity[rank];
@@ -117,10 +111,6 @@ export class GlobalState implements IGlobalState {
                 xp: personalCharData?.xp ?? 0,
                 shards: personalCharData?.shards ?? 0,
             };
-
-            if (staticData.snowprintId! === 'worldTerminator') {
-                console.log(combinedData);
-            }
 
             const result: ICharacter2 = {
                 ...staticData,

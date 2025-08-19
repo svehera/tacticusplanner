@@ -96,7 +96,6 @@ export const LreTeamsTable: React.FC<Props> = ({
             // For each team, map charactersIds to either ICharacter2 or keep as string if not found
             team.restrictionsIds.forEach(id => {
                 const existingCharacters = teamRecord[id] ?? [];
-                console.log('existingCharacters', existingCharacters);
                 const newTeam = Array.from({ length: 5 }, (_, index) => {
                     return team.characters?.[index] ?? '';
                 });

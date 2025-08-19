@@ -17,7 +17,7 @@ import {
 } from '@/fsd/4-entities/campaign';
 import { CharacterBias, ICharacter2, ICharLegendaryEvent } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
-import { IMow, IMowDb } from '@/fsd/4-entities/mow';
+import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
 import { IMaterialFull, IMaterialRecipeIngredientFull, IMaterialEstimated2 } from '@/fsd/4-entities/upgrade';
 
 import { IAutoTeamsPreferences, ILegendaryEventSelectedRequirements, ILreTeam } from '@/fsd/3-features/lre';
@@ -70,7 +70,7 @@ export interface IGlobalState {
     viewPreferences: IViewPreferences;
     dailyRaidsPreferences: IDailyRaidsPreferences;
     characters: Array<ICharacter2>;
-    mows: Array<IMow>;
+    mows: Array<IMow | IMow2>;
     goals: IPersonalGoal[];
     teams: IPersonalTeam[];
     selectedTeamOrder: ISelectedTeamsOrdering;

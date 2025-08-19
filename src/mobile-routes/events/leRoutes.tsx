@@ -31,6 +31,7 @@ export const PlanLeRoutes = () => {
             </Card>
 
             {CharactersService.lreCharacters.map(le => {
+                console.trace(le.lre);
                 const isFinished = !!le.lre?.finished;
                 return (
                     <Card

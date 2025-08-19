@@ -263,7 +263,7 @@ export class UpgradesService {
 
     public static getUpgrade(upgradeId: string): IBaseUpgrade | ICraftedUpgrade {
         if (!this.baseUpgradesData[upgradeId] && !this.craftedUpgradesData[upgradeId]) {
-            console.warn('Upgrade not found:', upgradeId);
+            console.trace('Upgrade not found:', upgradeId);
         }
         return this.baseUpgradesData[upgradeId] ?? this.craftedUpgradesData[upgradeId];
     }

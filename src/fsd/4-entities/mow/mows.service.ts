@@ -6,6 +6,13 @@ import { mowLevelUpCommonData, mowUpgradesData } from './data';
 import { IMowLevelMaterials, IMowLevelUpgrades } from './model';
 
 export class MowsService {
+    public static getMaterialsList2(
+        mowId: string,
+        mowLabel: string,
+        mowAlliance: Alliance,
+        levels: number[] = []
+    ): IMowLevelMaterials[] {}
+
     public static getMaterialsList(
         mowId: string,
         mowLabel: string,

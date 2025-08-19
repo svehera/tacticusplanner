@@ -16,6 +16,40 @@ export interface IMowStatic {
     initialRarity: RarityString;
 }
 
+export interface IMowStaticAbility {
+    name: string;
+    recipes: string[][];
+}
+
+export interface IMowStatic2 {
+    snowprintId: string;
+    name: string;
+    factionId: string;
+    alliance: string;
+    icon: string;
+    roundIcon: string;
+    primaryAbility: IMowStaticAbility;
+    secondaryAbility: IMowStaticAbility;
+}
+
+export interface IMowBadgeCost {
+    rarity: Rarity;
+    amount: number;
+}
+
+export interface IMowUpgradeCosts {
+    gold: number;
+    salvage: number;
+    components: number;
+    badges: IMowBadgeCost;
+    forgeBadges?: IMowBadgeCost;
+}
+
+export interface IMowsAndUpgradeCosts {
+    mows: IMowStatic2[];
+    upgradeCosts: IMowUpgradeCosts[];
+}
+
 export interface IMowDb {
     id: string;
     unlocked: boolean;
@@ -29,6 +63,10 @@ export interface IMowDb {
 export interface IMow extends IMowStatic, IMowDb, DynamicProps {
     portraitIcon: string;
     badgeIcon: string;
+    unitType: UnitType.mow;
+}
+
+export interface IMow2 extends IMowStatic2, IMowDb, DynamicProps {
     unitType: UnitType.mow;
 }
 

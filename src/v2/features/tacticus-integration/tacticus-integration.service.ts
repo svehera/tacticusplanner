@@ -37,6 +37,7 @@ export class TacticusIntegrationService {
     }
 
     static convertUpgrades(unitId: string, unitName: string, rank: Rank, upgradesIndexes: number[]): string[] {
+        console.log('Converting upgrades for', unitId, unitName, rank, upgradesIndexes);
         const [rankUp] = CharacterUpgradesService.getCharacterUpgradeRank({
             unitId,
             unitName,
@@ -55,6 +56,7 @@ export class TacticusIntegrationService {
     }
 
     static getUpgradeId(upgrade: TacticusUpgrade): string | null {
+        console.log('looking for upgrade', upgrade.id, UpgradesService.findUpgrade(upgrade));
         return UpgradesService.findUpgrade(upgrade);
     }
 }

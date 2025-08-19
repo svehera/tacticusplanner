@@ -58,9 +58,6 @@ export const MasterTable = () => {
             const ret: ICharacter2 = { ...x };
             const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
             ret.name = staticChar?.snowprintId ?? x.name;
-            if (ret.name === 'worldTerminator') {
-                console.trace('resolving', x, staticChar, ret);
-            }
             return ret;
         });
     }, [characters]);

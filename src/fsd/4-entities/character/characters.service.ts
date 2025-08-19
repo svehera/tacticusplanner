@@ -135,10 +135,6 @@ export class CharactersService {
 
         unitData.icon = isReleased ? unitData.icon : 'comingSoon.webp';
 
-        if (unitData.snowprintId === 'worldTerminator') {
-            console.trace(unitData.snowprintId, unitData);
-        }
-
         return unitData;
     }
 

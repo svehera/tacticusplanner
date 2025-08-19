@@ -725,8 +725,8 @@ export class UpgradesService {
 
         for (const materialName in FsdUpgradesService.recipeDataByName) {
             const material = FsdUpgradesService.recipeDataByName[materialName];
-            if (material.tacticusId) {
-                result[material.tacticusId] = material;
+            if (material.snowprintId) {
+                result[material.snowprintId] = material;
             }
         }
 

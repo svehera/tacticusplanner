@@ -24,6 +24,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     readonly wikiLink: string;
     readonly eventStage: number;
     readonly nextEventDate: string;
+    readonly finished: boolean;
 
     readonly regularMissions: string[];
     readonly premiumMissions: string[];
@@ -51,7 +52,8 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
         this.regularMissions = staticData.regularMissions ?? [];
         this.premiumMissions = staticData.premiumMissions ?? [];
         this.eventStage = staticData.eventStage;
-        this.nextEventDate = staticData.nextEventDate;
+        this.nextEventDate = staticData.nextEventDate ?? '';
+        this.finished = staticData.finished ?? false;
 
         this.pointsMilestones = staticData.pointsMilestones;
         this.chestsMilestones = staticData.chestsMilestones;
