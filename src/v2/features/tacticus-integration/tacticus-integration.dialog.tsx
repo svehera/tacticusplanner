@@ -50,7 +50,10 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
             const response = await updateTacticusApiKey(apiKey, guildApiKey, userId);
 
             if (!response.data) {
-                enqueueSnackbar('Failed to update settings', { variant: 'error' });
+                const baseMsg = 'Failed to update settings';
+                let errMsg = typeof response.error === 'string' ? response.error : response.error?.message;
+                if (errMsg) errMsg = `${baseMsg}: ${errMsg}`;
+                enqueueSnackbar(errMsg, { variant: 'error' });
                 return;
             }
 
