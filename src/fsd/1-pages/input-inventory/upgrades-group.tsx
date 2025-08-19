@@ -26,7 +26,7 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
                                         <div className="text-2xl font-bold">{group.letter}</div>
                                         {group.subItems.map(item => (
                                             <InventoryItem
-                                                key={item.material}
+                                                key={item.snowprintId}
                                                 data={item}
                                                 showIncDec={showPlusMinus}
                                                 dataUpdate={dataUpdate}
