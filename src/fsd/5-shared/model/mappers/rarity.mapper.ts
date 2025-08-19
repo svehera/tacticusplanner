@@ -59,4 +59,12 @@ export class RarityMapper {
 
         return Rarity.Mythic;
     }
+
+    public static stringToRarityString(value: string): RarityString | undefined {
+        return (Object.values(RarityString) as string[]).includes(value) ? (value as RarityString) : undefined;
+    }
+
+    public static rarityToRarityString(rarity: Rarity): RarityString {
+        return RarityString[Rarity[rarity] as keyof typeof RarityString];
+    }
 }
