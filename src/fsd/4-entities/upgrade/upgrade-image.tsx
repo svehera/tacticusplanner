@@ -1,6 +1,6 @@
 ﻿import React, { useState, CSSProperties } from 'react';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { RarityString } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 
 export const UpgradeImage = ({
@@ -14,7 +14,7 @@ export const UpgradeImage = ({
     iconPath: string;
     size?: number;
     tooltip?: React.ReactNode;
-    rarity: Rarity;
+    rarity?: RarityString;
 }) => {
     const [imgError, setImgError] = useState(false);
     const width = size ?? 50;
@@ -25,19 +25,19 @@ export const UpgradeImage = ({
     const bgImgUrl = getImageUrl(`${frameImageDir}/ui_underlay_upgrades.png`);
     const upgradeHeightRatio = 0.78;
 
-    function getFrameUrl(rarity: Rarity) {
+    function getFrameUrl(rarity?: RarityString) {
         switch (rarity) {
-            case Rarity.Mythic:
+            case RarityString.Mythic:
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_mythic.png`);
-            case Rarity.Legendary:
+            case RarityString.Legendary:
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_legendary.png`);
-            case Rarity.Epic:
+            case RarityString.Epic:
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_epic.png`);
-            case Rarity.Rare:
+            case RarityString.Rare:
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_rare.png`);
-            case Rarity.Uncommon:
+            case RarityString.Uncommon:
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_uncommon.png`);
-            case Rarity.Common:
+            case RarityString.Common:
             default:
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_common.png`);
         }
