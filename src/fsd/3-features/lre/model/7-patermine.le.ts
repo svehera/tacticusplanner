@@ -142,7 +142,7 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Final Vengeance',
                     points: 40,
-                    units: filter(noChaos).byTrait(Trait.FinalVengeance, true),
+                    units: filter(noChaos).byTrait(Trait.FinalJustice, true),
                     selected: true,
                     iconId: 'no_finalVengeance',
                     index: 2,

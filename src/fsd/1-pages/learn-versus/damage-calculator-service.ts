@@ -29,7 +29,7 @@ export interface DamageUnitData {
  */
 export class DamageCalculatorService {
     static readonly relevantTraits: Trait[] = [
-        Trait.BeastSlayer,
+        Trait.BeastSnagga,
         Trait.BigTarget,
         Trait.Camouflage,
         Trait.CloseCombatWeakness,
@@ -39,8 +39,8 @@ export class DamageCalculatorService {
         Trait.Emplacement,
         Trait.GetStuckIn,
         Trait.Immune,
-        Trait.LetTheGalaxyBurn,
-        Trait.MKXGravis,
+        Trait.DeathToTheFalseEmperor,
+        Trait.MkXGravis,
         Trait.Parry,
         Trait.Resilient,
         Trait.Swarm,
@@ -53,14 +53,14 @@ export class DamageCalculatorService {
         const ret = { ...attacker };
 
         if (
-            attackerTraits.includes(Trait.BeastSlayer) &&
+            attackerTraits.includes(Trait.BeastSnagga) &&
             (defenderTraits.includes(Trait.BigTarget) || defenderTraits.includes(Trait.Vehicle))
         ) {
-            ret.meleeModifiers *= 1.1;
+            ret.meleeModifiers *= 1.2;
         }
         if (defenderTraits.includes(Trait.Camouflage)) {
-            if (attacker.rangeHits != undefined) {
-                ret.rangeHits = Math.max(attacker.rangeHits - 1, 1);
+            if (ret.rangeHits) {
+                ret.rangeHits = Math.max(ret.rangeHits - 1, 1);
             }
         }
         if (attackerTraits.includes(Trait.CloseCombatWeakness)) {
@@ -68,15 +68,12 @@ export class DamageCalculatorService {
         }
         if (defenderTraits.includes(Trait.Diminutive)) {
             ret.meleeHits = Math.max(attacker.meleeHits - 1, 1);
-            if (ret.rangeHits != undefined) {
+            if (ret.rangeHits) {
                 ret.meleeHits = Math.max(ret.rangeHits - 1, 1);
             }
         }
         if (attackerTraits.includes(Trait.Emplacement)) {
             ret.meleeModifiers *= 0.5;
-        }
-        if (defenderTraits.includes(Trait.Diminutive)) {
-            ret.meleeHits = Math.max(attacker.meleeHits - 1, 1);
         }
         if (defenderTraits.includes(Trait.Terrifying)) {
             ret.meleeModifiers *= 0.7;
@@ -87,9 +84,9 @@ export class DamageCalculatorService {
 
     static modifyDefender(defender: DamageUnitData, attackerTraits: Trait[], defenderTraits: Trait[]): DamageUnitData {
         const ret = { ...defender };
-        if (defenderTraits.includes(Trait.BeastSlayer)) {
+        if (defenderTraits.includes(Trait.BeastSnagga)) {
             ret.blockChances.push(10);
-            ret.blockChances.push(defender.health / 5);
+            ret.blockChances.push(defender.health * 0.2);
         }
         if (!attackerTraits.includes(Trait.Immune)) {
             if (attackerTraits.includes(Trait.ContagionsOfNurgle)) {
@@ -108,7 +105,7 @@ export class DamageCalculatorService {
         });
         if (ret == undefined) {
             if (trait == 'Battle fatigue') return Trait.BattleFatigue;
-            if (trait == 'Mk X Gravis') return Trait.MKXGravis;
+            if (trait == 'Mk X Gravis') return Trait.MkXGravis;
             if (trait == 'Suppressive fire') return Trait.SuppressiveFire;
             if (trait == '2-man Team') return Trait.TwoManTeam;
         }
@@ -139,9 +136,9 @@ export class DamageCalculatorService {
             data.blockChances.push(25);
             data.blockDamages.push(data.health / 2);
         }
-        if (traits.includes(Trait.BeastSlayer)) {
+        if (traits.includes(Trait.BeastSnagga)) {
             data.blockChances.push(10);
-            data.blockChances.push(data.health / 5);
+            data.blockChances.push(data.health * 0.2);
         }
         return data;
     }
@@ -248,7 +245,7 @@ export class DamageCalculatorService {
                     Math.max(0, damage * 0.8 - blockDamage * 1.2),
                     type,
                     defender.armor,
-                    defender.relevantTraits.includes(Trait.MKXGravis)
+                    defender.relevantTraits.includes(Trait.MkXGravis)
                 )
         );
         const maxDamage = Math.max(
@@ -275,7 +272,7 @@ export class DamageCalculatorService {
                         (damage + (isCrit ? critDamage : 0)) * rng1,
                         type,
                         defender.armor,
-                        !isCrit && defender.relevantTraits.includes(Trait.MKXGravis)
+                        !isCrit && defender.relevantTraits.includes(Trait.MkXGravis)
                     )
                 );
                 const blockedDamage = blockDamage * rng2;

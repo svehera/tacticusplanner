@@ -116,7 +116,7 @@ export const LearnCharacters = () => {
         .map(x => x.toString());
 
     const damageTypesOptions = uniq(resolvedCharacters.flatMap(x => x.damageTypes.all)).map(x => x.toString());
-    const traitsOptions = uniq(resolvedCharacters.flatMap(x => x.traits)).map(x => x.toString());
+    const traitsOptions = Object.values(Trait);
 
     const rows = useMemo(
         () =>

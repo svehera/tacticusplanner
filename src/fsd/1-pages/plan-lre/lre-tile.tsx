@@ -106,9 +106,9 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
     const rankBackgroundCssClass =
         settings.lreTileShowUnitRankBackground && rank !== undefined ? ` ${Rank[rank]?.toLowerCase()}` : '';
     const showHealTrait =
-        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait['Healer']);
+        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait.Healer);
     const showMechanicTrait =
-        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait['Mechanic']);
+        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait.Mechanic);
     const showShardIcon = settings.lreTileShowUnitIcon && character.name && character.icon;
     const showRarity = settings.lreTileShowUnitRarity && typeof rarity !== 'undefined';
     return (
@@ -133,14 +133,14 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             {showHealTrait && (
                 <Tooltip placement="top" title="Healer">
                     <span>
-                        <TraitImage trait={Trait['Healer']} width={20} height={20} />
+                        <TraitImage trait={Trait.Healer} width={20} height={20} />
                     </span>
                 </Tooltip>
             )}
             {showMechanicTrait && (
                 <Tooltip placement="top" title="Mechanic">
                     <span>
-                        <TraitImage trait={Trait['Mechanic']} width={20} height={20} />
+                        <TraitImage trait={Trait.Mechanic} width={20} height={20} />
                     </span>
                 </Tooltip>
             )}

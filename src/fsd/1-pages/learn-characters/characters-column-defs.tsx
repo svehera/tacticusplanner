@@ -8,6 +8,7 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2, CharacterTitle, RankIcon } from '@/fsd/4-entities/character';
 import { StatCell, DamageCell, StatsCalculatorService } from '@/fsd/4-entities/unit';
+import { getLabelFromTraitString } from '@/fsd/5-shared/model/enums/trait.enum';
 
 export const useCharacters = () => {
     const [targetRarity, setTargetRarity] = useState<Rarity>(Rarity.Legendary);
@@ -32,14 +33,6 @@ export const useCharacters = () => {
             default:
                 return equipment;
         }
-    };
-
-    const normalizeTrait = (trait: string): string => {
-        if (trait === 'DeathToTheFalseEmperor') return 'Let The Galaxy Burn';
-        if (trait === 'TeleportStrike') return 'Deep Strike';
-        if (trait === 'BeastSnagga') return 'Beast Slayer';
-        const text = trait.replace(/([A-Z])/g, ' $1');
-        return text.charAt(0).toUpperCase() + text.slice(1);
     };
 
     const minStarsMap: Map<Rarity, RarityStars> = new Map([
@@ -118,7 +111,6 @@ export const useCharacters = () => {
                         pinned: !isMobile,
                         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                             const character = props.data;
-                            console.log('character:\n', character);
                             return (
                                 character && (
                                     <CharacterTitle
@@ -341,7 +333,7 @@ export const useCharacters = () => {
                     return (
                         <ul style={{ margin: 0, paddingInlineStart: 20 }}>
                             {traits.map(x => (
-                                <li key={x}> {normalizeTrait(x)} </li>
+                                <li key={x}> {getLabelFromTraitString(x)} </li>
                             ))}
                         </ul>
                     );
