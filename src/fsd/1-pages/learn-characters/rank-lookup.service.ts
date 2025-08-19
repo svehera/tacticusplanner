@@ -150,6 +150,7 @@ export class RankLookupService {
 
         while (farmedItems < leftCount) {
             let leftToFarm = leftCount - farmedItems;
+            if (selectedLocations.length === 0) break;
             for (const loc of selectedLocations) {
                 const dailyEnergy = loc.dailyBattleCount * loc.energyCost;
                 const dailyFarmedItems = dailyEnergy / loc.energyPerItem;
