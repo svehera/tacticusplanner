@@ -9,16 +9,20 @@ export const UnitShardIcon = ({
     height,
     width,
     tooltip,
+    mythic,
 }: {
     icon: string;
     name?: string;
     tooltip?: string;
     height?: number;
     width?: number;
+    mythic?: boolean;
 }) => {
     const hasIconUrl = icon && icon !== '';
     const imageUrl = hasIconUrl ? getImageUrl(`${icon.replace('.webp', '.png')}`) : '';
-    const borderImageUrl = getImageUrl('snowprint_assets/frames/ui_icon_character_shard_empty.png');
+    const borderImageUrl = mythic
+        ? getImageUrl('snowprint_assets/frames/ui_icon_character_shard_mythic.png')
+        : getImageUrl('snowprint_assets/frames/ui_icon_character_shard_empty.png');
     const defaultWidth = 50;
     width = width ?? defaultWidth;
     height = height ?? defaultWidth;
