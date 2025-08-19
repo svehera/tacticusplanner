@@ -162,7 +162,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
             <DialogTitle className="flex gap3 items-center">
-                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <UnitShardIcon icon={goal.unitIcon} />
+                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <UnitShardIcon icon={goal.unitRoundIcon} />
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20 }}>
                 <Box id="edit-goal-form" className="flex flex-col gap-5">

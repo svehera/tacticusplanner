@@ -34,7 +34,7 @@ export const CharacterTitleShort = ({
                 <span style={{ height: imageSize }}>
                     <UnitShardIcon
                         key={character.name}
-                        icon={character.icon}
+                        icon={character.roundIcon}
                         name={character.name}
                         height={imageSize}
                         width={imageSize}

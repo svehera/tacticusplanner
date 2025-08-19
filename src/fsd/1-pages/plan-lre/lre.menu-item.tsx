@@ -9,7 +9,7 @@ import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre'
 const createMenuItem = (character: ICharacterData) =>
     new MenuItemTP(
         character.name,
-        <UnitShardIcon icon={character.icon} height={24} />,
+        <UnitShardIcon icon={character.roundIcon} height={24} />,
         `/plan/lre?character=${LegendaryEventEnum[LegendaryEventService.getEventByCharacterSnowprintId(character.snowprintId!)!.id]}`
     );
 

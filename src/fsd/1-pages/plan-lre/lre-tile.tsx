@@ -119,7 +119,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             {showShardIcon && (
                 <UnitShardIcon
                     key={character.name}
-                    icon={character.icon}
+                    icon={character.roundIcon}
                     name={character.name}
                     height={30}
                     width={30}

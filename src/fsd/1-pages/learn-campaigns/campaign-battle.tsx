@@ -1,8 +1,6 @@
 import { Tooltip } from '@mui/material';
 import React from 'react';
 
-import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
-
 import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { UpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade';

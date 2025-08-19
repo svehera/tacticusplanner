@@ -26,10 +26,10 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
                     return [
                         <td key={'missing_material-' + material + '-character-' + unitId}>
                             <UnitShardIcon
-                                icon={CharactersService.getUnit(unitId)?.icon ?? '(undefined)'}
+                                icon={CharactersService.getUnit(unitId)?.roundIcon ?? '(undefined)'}
                                 height={30}
                                 width={30}
-                                tooltip={CharactersService.getUnit(unitId)?.icon}
+                                tooltip={CharactersService.getUnit(unitId)?.name}
                             />
                         </td>,
                     ];

@@ -116,13 +116,13 @@ export const Campaigns = () => {
                     if (reward.startsWith('shards_')) {
                         const char = CharactersService.getUnit(reward.substring(7));
                         console.log('char: ', reward.substring(7), char);
-                        if (char) return <UnitShardIcon name={reward} icon={char.icon} />;
+                        if (char) return <UnitShardIcon name={reward} icon={char.roundIcon} />;
                         return reward.substring(7);
                     }
                     if (reward.startsWith('mythicShards_')) {
                         const char = CharactersService.getUnit(reward.substring(13));
                         console.log('char: ', reward.substring(13), char);
-                        if (char) return <UnitShardIcon name={reward} icon={char.icon} />;
+                        if (char) return <UnitShardIcon name={reward} icon={char.roundIcon} />;
                         return reward.substring(13);
                     }
                     return reward;

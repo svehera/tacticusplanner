@@ -166,7 +166,7 @@ export const DesktopHome = () => {
                                         icon={
                                             CharactersService.charactersData.find(
                                                 x => x.snowprintId === LegendaryEventService.getActiveLreUnitId()
-                                            )?.icon ?? ''
+                                            )?.roundIcon ?? ''
                                         }
                                         height={50}
                                         width={50}

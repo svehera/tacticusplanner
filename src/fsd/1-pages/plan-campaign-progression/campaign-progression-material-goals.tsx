@@ -136,7 +136,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                             return (
                                 <UnitShardIcon
                                     name={reward.material}
-                                    icon={char.icon}
+                                    icon={char.roundIcon}
                                     height={30}
                                     width={30}
                                     tooltip={`${reward.material} shards`}
@@ -275,7 +275,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                             return (
                                 <UnitShardIcon
                                     name={reward.material}
-                                    icon={char.icon}
+                                    icon={char.roundIcon}
                                     height={30}
                                     width={30}
                                     tooltip={`${reward.material} shards`}
@@ -386,10 +386,10 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                                             savings.battle.id
                                         }>
                                         <UnitShardIcon
-                                            icon={CharactersService.getUnit(unitId)?.icon ?? '(undefined)'}
+                                            icon={CharactersService.getUnit(unitId)?.roundIcon ?? '(undefined)'}
                                             height={30}
                                             width={30}
-                                            tooltip={CharactersService.getUnit(unitId)?.icon}
+                                            tooltip={CharactersService.getUnit(unitId)?.name}
                                         />
                                     </span>
                                 );

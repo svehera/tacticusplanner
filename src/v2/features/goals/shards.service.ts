@@ -216,7 +216,7 @@ export class ShardsService {
             label: goal.unitName,
             acquiredCount: goal.shards,
             requiredCount: targetShards,
-            iconPath: goal.unitIcon,
+            iconPath: goal.unitRoundIcon,
             relatedCharacters: [goal.unitName],
             possibleLocations,
             onslaughtShards: goal.type === PersonalGoalType.Ascend ? goal.onslaughtShards : 0,
