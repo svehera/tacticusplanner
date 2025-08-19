@@ -51,9 +51,9 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
 
             if (!response.data) {
                 const baseMsg = 'Failed to update settings';
-                let errMsg = typeof response.error === 'string' ? response.error : response.error?.message;
-                if (errMsg) errMsg = `${baseMsg}: ${errMsg}`;
-                enqueueSnackbar(errMsg, { variant: 'error' });
+                const detail = typeof response.error === 'string' ? response.error : response.error?.message;
+                const message = detail ? `${baseMsg}: ${detail}` : baseMsg;
+                enqueueSnackbar(message, { variant: 'error' });
                 return;
             }
 
