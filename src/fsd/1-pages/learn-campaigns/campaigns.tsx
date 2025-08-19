@@ -7,6 +7,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { useFitGridOnWindowResize, useQueryState } from '@/fsd/5-shared/lib';
+import { RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { Campaign, ICampaignBattleComposed, CampaignLocation, CampaignsService } from '@/fsd/4-entities/campaign';
@@ -128,7 +129,13 @@ export const Campaigns = () => {
                     return reward;
                 }
 
-                return <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} />;
+                return (
+                    <UpgradeImage
+                        material={upgrade.label}
+                        iconPath={upgrade.iconPath}
+                        rarity={RarityMapper.rarityToRarityString(upgrade.rarity)}
+                    />
+                );
             },
         },
         {

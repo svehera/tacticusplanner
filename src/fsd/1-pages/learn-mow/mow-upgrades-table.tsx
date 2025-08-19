@@ -2,7 +2,7 @@
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign';
@@ -31,7 +31,13 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows, upgrades }) => {
             cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {
                 const { data } = params;
                 if (data) {
-                    return <UpgradeImage material={data.label} iconPath={data.iconPath} />;
+                    return (
+                        <UpgradeImage
+                            material={data.label}
+                            iconPath={data.iconPath}
+                            rarity={RarityMapper.rarityToRarityString(data.rarity)}
+                        />
+                    );
                 }
             },
             sortable: false,

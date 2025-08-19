@@ -3,7 +3,6 @@ import React from 'react';
 
 import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character';
-import { UpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 

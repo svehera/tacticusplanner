@@ -2,6 +2,8 @@
 import Button from '@mui/material/Button';
 import React, { useEffect } from 'react';
 
+import { RarityMapper } from '@/fsd/5-shared/model';
+
 import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { IInventoryUpgrade } from './inventory-models';
@@ -43,7 +45,11 @@ export const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate 
     return (
         <div key={data.material} className="flex flex-col max-w-[60px]">
             <div style={{ padding: '0 5px' }}>
-                <UpgradeImage material={data.label} iconPath={data.iconPath} />
+                <UpgradeImage
+                    material={data.label}
+                    iconPath={data.iconPath}
+                    rarity={RarityMapper.rarityToRarityString(data.rarity)}
+                />
             </div>
             <Input
                 style={{ justifyContent: 'center' }}

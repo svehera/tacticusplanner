@@ -8,7 +8,7 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { findAndRemoveItem } from '@/fsd/5-shared/lib';
-import { Rank } from '@/fsd/5-shared/model';
+import { Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2, CharacterUpgradesService } from '@/fsd/4-entities/character';
@@ -253,7 +253,11 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                                     gap: 10,
                                     paddingBottom: 10,
                                 }}>
-                                <UpgradeImage material={x.label} iconPath={x.iconPath} />{' '}
+                                <UpgradeImage
+                                    material={x.label}
+                                    iconPath={x.iconPath}
+                                    rarity={RarityMapper.rarityToRarityString(x.rarity)}
+                                />{' '}
                                 {inventory.upgrades[x.snowprintId] ?? 0} - {inventoryUpdate[x.snowprintId]} ={' '}
                                 {(inventory.upgrades[x.snowprintId] ?? 0) - inventoryUpdate[x.snowprintId] < 0
                                     ? 0

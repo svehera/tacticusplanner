@@ -86,7 +86,13 @@ export const Upgrades = () => {
                 cellRenderer: (params: ICellRendererParams<IUpgradesTableRow>) => {
                     const { data } = params;
                     if (data) {
-                        return <UpgradeImage material={data.upgradeLabel} iconPath={data.upgradeIcon} />;
+                        return (
+                            <UpgradeImage
+                                material={data.upgradeLabel}
+                                iconPath={data.upgradeIcon}
+                                rarity={RarityMapper.rarityToRarityString(data.rarity)}
+                            />
+                        );
                     }
                 },
                 equals: () => true,
