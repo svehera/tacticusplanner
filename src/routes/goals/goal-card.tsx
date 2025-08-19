@@ -330,7 +330,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                     <div className="flex-box gap5">
                         <span>#{goal.priority}</span>
                         <UnitShardIcon icon={goal.unitRoundIcon} height={30} />
-                        <span style={{ fontSize: '1.2rem' }}>{goal.unitName}</span>
+                        <span style={{ fontSize: '1.2rem' }}>{goal.unitId}</span>
                     </div>
                 }
                 subheader={calendarDate}
