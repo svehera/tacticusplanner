@@ -16,8 +16,8 @@ export const UnitShardIcon = ({
     height?: number;
     width?: number;
 }) => {
-    if (!icon) return;
-    const imageUrl = getImageUrl(`${icon.replace('.webp', '.png')}`);
+    const hasIconUrl = icon && icon !== '';
+    const imageUrl = hasIconUrl ? getImageUrl(`${icon.replace('.webp', '.png')}`) : '';
     const borderImageUrl = getImageUrl('snowprint_assets/frames/ui_icon_character_shard_empty.png');
     const defaultWidth = 50;
     width = width ?? defaultWidth;
@@ -42,28 +42,30 @@ export const UnitShardIcon = ({
                 src={borderImageUrl}
                 alt="character border"
             />
-            <div
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    pointerEvents: 'none',
-                }}>
-                <img
-                    loading={'lazy'}
+            {hasIconUrl && (
+                <div
                     style={{
-                        width: overlaySize,
-                        height: overlaySize,
-                    }}
-                    src={imageUrl}
-                    alt={name ?? icon}
-                />
-            </div>
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        pointerEvents: 'none',
+                    }}>
+                    <img
+                        loading={'lazy'}
+                        style={{
+                            width: overlaySize,
+                            height: overlaySize,
+                        }}
+                        src={imageUrl}
+                        alt={name ?? icon}
+                    />
+                </div>
+            )}
         </div>
     );
 
