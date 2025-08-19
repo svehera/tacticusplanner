@@ -24,6 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # IDE
-.idea
+/.idea/
 
-tmp/
+/tmp/
