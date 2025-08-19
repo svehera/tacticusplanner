@@ -8,7 +8,9 @@ import React, { useContext, useMemo, useState } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
-import { MowsService } from '@/fsd/4-entities/mow';
+import { DynamicProps } from '@/fsd/5-shared/model';
+
+import { mows2Data, MowsService, IMow, IMow2, IMowDb, IMowStatic, IMowStatic2 } from '@/fsd/4-entities/mow';
 
 import { IMowLookupInputs } from './lookup.models';
 import { MowLookupInputs } from './mow-lookup-inputs';
@@ -27,6 +29,18 @@ export const MowLookup = () => {
         primaryAbilityEnd: 1,
         secondaryAbilityStart: 1,
         secondaryAbilityEnd: 1,
+    });
+
+    const resolvedMows: IMow2[] = mows.map(mow => {
+        let mow2: IMowStatic2 | undefined = mow as IMowStatic2;
+
+        if (mow2 !== undefined) return mow as IMow2;
+
+        const mow1: IMowStatic | undefined = mow as IMowStatic;
+        const db: IMowDb = mow as IMowDb;
+        const props: DynamicProps = mow as DynamicProps;
+        mow2 = mows2Data.mows.find(x => x.snowprintId === mow1.tacticusId);
+        return { ...mow2, ...db, ...props };
     });
 
     const mowMaterials = useMemo(

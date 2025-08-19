@@ -2,17 +2,10 @@ import { Alliance, RarityMapper } from '@/fsd/5-shared/model';
 
 import { IBaseUpgrade, ICraftedUpgrade, UpgradesService } from '@/fsd/4-entities/upgrade/@x/mow';
 
-import { mowLevelUpCommonData, mowUpgradesData } from './data';
+import { mowLevelUpCommonData, mowUpgradesData, mows2Data } from './data';
 import { IMowLevelMaterials, IMowLevelUpgrades } from './model';
 
 export class MowsService {
-    public static getMaterialsList2(
-        mowId: string,
-        mowLabel: string,
-        mowAlliance: Alliance,
-        levels: number[] = []
-    ): IMowLevelMaterials[] {}
-
     public static getMaterialsList(
         mowId: string,
         mowLabel: string,
@@ -47,6 +40,11 @@ export class MowsService {
         }
 
         return result;
+    }
+
+    public static resolveId(id: string): string {
+        const mow = mows2Data.mows.find(x => x.snowprintId === id);
+        if (mow) return mow.snowprintId;
     }
 
     public static getUpgradesRaw(

@@ -4,6 +4,7 @@ import { IPersonalGoal } from 'src/models/interfaces';
 
 import { Rank } from '@/fsd/5-shared/model';
 
+import { CharactersService } from '@/fsd/4-entities/character';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
@@ -31,7 +32,8 @@ export class GoalsService {
     } {
         const allGoals = goals
             .map(g => {
-                const relatedCharacter = characters.find(x => x.id === g.character);
+                const resolvedChar = CharactersService.resolveCharacter(g.character);
+                const relatedCharacter = characters.find(x => x.snowprintId === resolvedChar.snowprintId);
                 if (
                     ![
                         PersonalGoalType.UpgradeRank,
