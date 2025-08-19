@@ -18,8 +18,8 @@ interface Props {
 export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange }) => {
     const [mow, setMow] = useQueryState<IMow2 | null>(
         'mow',
-        mowQueryParam => mows.find(x => x.id === mowQueryParam) ?? inputs.mow,
-        mow => mow?.id
+        mowQueryParam => mows.find(x => x.name === mowQueryParam) ?? inputs.mow,
+        mow => mow?.name
     );
 
     const [primaryAbilityStart, setPrimaryAbilityStart] = useQueryState<number>(
@@ -57,9 +57,11 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
         });
     }, [mow, primaryAbilityStart, primaryAbilityEnd, secondaryAbilityStart, secondaryAbilityEnd]);
 
+    console.trace('MowLookupInputs', mow);
+
     return (
         <div className="flex-box gap20 wrap">
-            {mow && <UnitShardIcon icon={mow.badgeIcon} />}
+            {mow && <UnitShardIcon icon={mow.icon} />}
             <UnitsAutocomplete style={{ maxWidth: 250 }} unit={mow} options={mows} onUnitChange={setMow} />
             <div className="flex-box gap15 p10">
                 <span>Primary:</span>
