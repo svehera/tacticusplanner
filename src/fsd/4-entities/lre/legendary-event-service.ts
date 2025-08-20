@@ -19,6 +19,10 @@ export class LegendaryEventService {
         return ret!;
     }
 
+    public static getUnfinishedEvents(): ILegendaryEventStatic[] {
+        return allLegendaryEvents.filter(e => !e.finished);
+    }
+
     public static getEventByCharacterSnowprintId(snowprintId: string): ILegendaryEventStatic | undefined {
         return allLegendaryEvents.find(e => e.unitSnowprintId === snowprintId);
     }
