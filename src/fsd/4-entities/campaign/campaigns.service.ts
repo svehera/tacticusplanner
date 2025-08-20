@@ -1,4 +1,5 @@
 import { groupBy, orderBy, sortBy, uniq } from 'lodash';
+import { X } from 'lucide-react';
 
 import { Alliance, Faction, Rarity } from '@/fsd/5-shared/model';
 
@@ -92,9 +93,25 @@ export class CampaignsService {
                     console.warn('no recipe found', reward, battle);
                 }
             }
-            const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
+            const useEmbeddedDropRates = true;
+            let dropRate = 0;
+            if (useEmbeddedDropRates) {
+                const guaranteed = battle.rewards.guaranteed.find(x => x.id == reward);
+                const potential = battle.rewards.potential.find(x => x.id == reward);
+                if (guaranteed) dropRate = 1;
+                if (potential) {
+                    dropRate += potential.chance_numerator / potential.chance_denominator;
+                    console.log('dropRate', dropRate, potential);
+                }
+            } else {
+                const dropRateKey: keyof IDropRate = Rarity[
+                    recipe?.rarity as unknown as number
+                ].toLowerCase() as keyof IDropRate;
+                dropRate =
+                    config.dropRate && config.dropRate[dropRateKey] !== undefined ? config.dropRate[dropRateKey] : 0;
+            }
+            dropRate = dropRate.toFixed(3) === 'NaN' ? 0 : parseFloat(dropRate.toFixed(3));
 
-            const dropRate = config.dropRate ? config.dropRate[dropRateKey] : 0;
             const energyPerItem = parseFloat((1 / (dropRate / config.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
