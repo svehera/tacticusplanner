@@ -3,12 +3,19 @@ import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-import { RarityStars, Rarity, DamageType, Rank, Trait, RarityMapper } from '@/fsd/5-shared/model';
+import {
+    RarityStars,
+    Rarity,
+    DamageType,
+    Rank,
+    Trait,
+    RarityMapper,
+    getLabelFromTraitString,
+} from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2, CharacterTitle, RankIcon } from '@/fsd/4-entities/character';
 import { StatCell, DamageCell, StatsCalculatorService } from '@/fsd/4-entities/unit';
-import { getLabelFromTraitString } from '@/fsd/5-shared/model/enums/trait.enum';
 
 export const useCharacters = () => {
     const [targetRarity, setTargetRarity] = useState<Rarity>(Rarity.Legendary);
