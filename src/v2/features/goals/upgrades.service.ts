@@ -533,9 +533,6 @@ export class UpgradesService {
                     location.isPassFilter &&
                     (!isCampaignEventLocation || isCampaignEventLocationAvailable);
             }
-            if (combinedUpgrade.label.indexOf('Attack') != -1) {
-                combinedUpgrade.locations.forEach(x => console.log('location', x));
-            }
             const minEnergy = Math.min(
                 ...combinedUpgrade.locations.filter(x => x.isSuggested).map(x => x.energyPerItem)
             );
@@ -554,7 +551,15 @@ export class UpgradesService {
                 settings.preferences.farmStrategy === DailyRaidsStrategy.custom &&
                 settings.preferences.customSettings
             ) {
-                let locationTypes = [...settings.preferences.customSettings[combinedUpgrade.rarity]];
+                let locationTypes = [
+                    ...(settings.preferences.customSettings[combinedUpgrade.rarity] ?? [
+                        CampaignType.Normal,
+                        CampaignType.Early,
+                        CampaignType.Mirror,
+                        CampaignType.Elite,
+                        CampaignType.Extremis,
+                    ]),
+                ];
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
                 let ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
                 if (ignoredLocations.length !== selectedLocations.length) {
