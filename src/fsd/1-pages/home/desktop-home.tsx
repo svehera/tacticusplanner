@@ -33,9 +33,9 @@ export const DesktopHome = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_20250713.png'),
-        // Battle Pass Season 30 (17 Aug) calendar image not yet available
-        // next: getImageUrl('calendar/calendar_20250817.png'),
+        current: getImageUrl('calendar/calendar_20250817.png'),
+        // Battle Pass Season 31 (21 Sep) calendar image not yet available
+        // next: getImageUrl('calendar/calendar_20250921.png'),
     };
 
     const topPriorityGoal = goals[0];
