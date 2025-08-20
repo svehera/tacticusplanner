@@ -33,16 +33,16 @@ export interface IMowStatic2 {
 }
 
 export interface IMowBadgeCost {
-    rarity: Rarity;
+    rarity: string;
     amount: number;
 }
 
 export interface IMowUpgradeCosts {
     gold: number;
     salvage: number;
-    components: number;
     badges: IMowBadgeCost;
     forgeBadges?: IMowBadgeCost;
+    components: number;
 }
 
 export interface IMowsAndUpgradeCosts {

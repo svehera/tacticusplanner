@@ -2,7 +2,7 @@
 
 import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow, IMowDb, IMowStatic, mowsData } from '@/fsd/4-entities/mow';
+import { IMow, IMow2, IMowDb, IMowStatic, mows2Data, mowsData, MowsService } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
@@ -48,7 +48,7 @@ export class GlobalState implements IGlobalState {
     readonly dailyRaids: IDailyRaids;
     readonly guildWar: IGuildWar;
     readonly guild: IGuild;
-    readonly mows: IMow[];
+    readonly mows: Array<IMow | IMow2>;
 
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
@@ -158,7 +158,13 @@ export class GlobalState implements IGlobalState {
                 statsByOwner: dbMow?.statsByOwner ?? [],
             };
 
-            result.power = CharactersPowerService.getCharacterAbilityPower(result);
+            const newStaticData = MowsService.resolveToStatic(staticData.id)!;
+            const mow2: IMow2 = {
+                ...newStaticData,
+                ...result,
+            };
+
+            result.power = CharactersPowerService.getCharacterAbilityPower(mow2);
 
             return result;
         });

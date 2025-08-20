@@ -1,7 +1,7 @@
 ﻿import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow, IMowDb } from '@/fsd/4-entities/mow';
+import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 export interface IFactionStatic {
@@ -70,4 +70,4 @@ export interface ICharacterAbilitiesMaterialsTotal {
 }
 
 // Re-export types from FSD entities
-export type { ICharacter2, IMow, IMowDb, IUnit };
+export type { ICharacter2, IMow, IMow2, IMowDb, IUnit };

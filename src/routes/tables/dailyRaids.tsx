@@ -9,7 +9,7 @@ import { TodayRaids } from 'src/routes/tables/todayRaids';
 
 import { useAuth } from '@/fsd/5-shared/model';
 
-import { IMow2 } from '@/fsd/4-entities/mow';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
 import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 import { IUnit } from 'src/v2/features/characters/characters.models';
@@ -45,7 +45,7 @@ export const DailyRaids = () => {
     const resolvedMows = useMemo(() => {
         return storeMows.map(mow => {
             if ('snowprintId' in mow) return mow as IMow2;
-            return { ...mow, snowprintId: mow.tacticusId } as IMow2;
+            return { ...mow, ...MowsService.resolveToStatic(mow.tacticusId)! } as IMow2;
         });
     }, [storeMows]);
 
@@ -126,7 +126,7 @@ export const DailyRaids = () => {
 
     const refresh = () => {
         setUpgrades({ ...inventory.upgrades });
-        setUnits([...storeCharacters, ...storeMows]);
+        setUnits([...storeCharacters, ...resolvedMows]);
         setRaidedLocations([...dailyRaids.raidedLocations]);
         setHasChanges(false);
     };
@@ -141,7 +141,7 @@ export const DailyRaids = () => {
         setHasChanges(false);
         setTimeout(() => {
             setUpgrades({ ...inventory.upgrades });
-            setUnits([...storeCharacters, ...storeMows]);
+            setUnits([...storeCharacters, ...resolvedMows]);
             setRaidedLocations([]);
         }, 100);
     };
