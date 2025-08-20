@@ -8,7 +8,7 @@ import { isMobile } from 'react-device-detect';
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { getEnumValues } from 'src/shared-logic/functions';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { RarityStars, Rarity, Alliance } from '@/fsd/5-shared/model';
 import { StarsSelect, RaritySelect } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
@@ -139,7 +139,7 @@ export const EditMowDialog: React.FC<Props> = ({
                             <Grid item xs={12}>
                                 <MowUpgrades
                                     mowId={editedMow.snowprintId}
-                                    alliance={editedMow.alliance}
+                                    alliance={editedMow.alliance as Alliance}
                                     primaryLevel={editedMow.primaryAbilityLevel}
                                     secondaryLevel={editedMow.secondaryAbilityLevel}
                                 />

@@ -24,7 +24,7 @@ export const TeamSlotView: React.FC<Props> = ({ slot, units, expanded = false })
             return <></>;
         }
 
-        const portraitIcon = isCharacter(unit) ? unit.icon : unit.portraitIcon;
+        const portraitIcon = isCharacter(unit) ? unit.icon : unit.roundIcon;
 
         return (
             <Tooltip placement={'top'} title={unit.name} key={unitId}>

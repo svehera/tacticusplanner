@@ -19,7 +19,7 @@ import './character-tile.css';
 
 interface Props {
     mow: IMow2;
-    onClick?: (mow: IMow) => void;
+    onClick?: (mow: IMow2) => void;
     disableClick?: boolean;
 }
 

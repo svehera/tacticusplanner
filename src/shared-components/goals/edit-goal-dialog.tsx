@@ -16,7 +16,7 @@ import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
-import { Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { Alliance, Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
@@ -291,7 +291,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
                             <MowUpgrades
                                 mowId={unit.id}
-                                alliance={unit.alliance}
+                                alliance={unit.alliance as Alliance}
                                 primaryLevel={form.primaryStart}
                                 secondaryLevel={form.secondaryStart}
                             />

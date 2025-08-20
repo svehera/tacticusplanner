@@ -68,6 +68,15 @@ export class CharactersService {
         }
     }
 
+    private static getFaction(unit: IUnit): string {
+        if ('faction' in unit) return unit.faction;
+        return unit.factionId;
+    }
+
+    private static haveSameFaction(unit1: IUnit, unit2: IUnit): boolean {
+        return this.getFaction(unit1) === this.getFaction(unit2);
+    }
+
     static orderUnits(units: IUnit[], charactersOrderBy: CharactersOrderBy): IUnit[] {
         switch (charactersOrderBy) {
             case CharactersOrderBy.CharacterValue:
@@ -104,7 +113,7 @@ export class CharactersService {
                         } else {
                             return !isUnlocked(unit)
                                 ? Math.ceil((unit.shards / charsUnlockShards[unit.rarity]) * 100)
-                                : units.filter(x => x.faction === unit.faction && isUnlocked(x)).length;
+                                : units.filter(x => this.haveSameFaction(x, unit) && isUnlocked(x)).length;
                         }
                     },
                     ['asc']
