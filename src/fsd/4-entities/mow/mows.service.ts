@@ -91,7 +91,6 @@ export class MowsService {
     ): Array<string> {
         const mow = this.resolveToStatic(mowId);
         if (mow === undefined) {
-            console.trace('Mow not found for ID:', mowId);
             return [];
         }
         const upgrades = key === 'primary' ? mow.primaryAbility : mow.secondaryAbility;

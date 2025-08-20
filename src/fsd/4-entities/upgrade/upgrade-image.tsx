@@ -1,7 +1,9 @@
-﻿import React, { useState, CSSProperties } from 'react';
+﻿import React, { useState, CSSProperties, useMemo } from 'react';
 
 import { RarityString } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
+
+import { UpgradesService } from './upgrades.service';
 
 export const UpgradeImage = ({
     material,
@@ -67,8 +69,15 @@ export const UpgradeImage = ({
         lineHeight: '0.9',
     };
 
+    const tooltipText = useMemo(() => {
+        if (tooltip) {
+            return tooltip;
+        }
+        return UpgradesService.getUpgradeMaterial(material)?.material ?? material;
+    }, [material, tooltip]);
+
     return (
-        <AccessibleTooltip title={tooltip ?? material}>
+        <AccessibleTooltip title={tooltipText}>
             <div style={{ width, height }} className={'upgrade'}>
                 {!imgError ? (
                     <div style={{ position: 'relative', display: 'block', margin: '0 auto', width, height }}>
