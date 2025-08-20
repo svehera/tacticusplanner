@@ -18,4 +18,5 @@ export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
     [CharacterReleaseRarity.Epic]: 400,
     [CharacterReleaseRarity.LegendaryOld]: 150,
     [CharacterReleaseRarity.Legendary]: 400,
+    [CharacterReleaseRarity.Legendary]: 900,
 };
