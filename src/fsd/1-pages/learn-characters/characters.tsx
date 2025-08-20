@@ -100,7 +100,10 @@ export const LearnCharacters = () => {
     const { characters } = useContext(StoreContext);
 
     const resolvedCharacters = useMemo(() => {
-        return characters.map(x => CharactersService.resolveCharacter(x.snowprintId ?? x.name));
+        return characters.map(c => ({
+            ...c,
+            ...CharactersService.resolveCharacter(c.snowprintId ?? c.name),
+        })) as ICharacter2[];
     }, [characters]);
 
     const hitsOptions = uniq(resolvedCharacters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
