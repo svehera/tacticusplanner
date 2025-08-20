@@ -7,6 +7,11 @@ on:
       - develop
       - master
 
+# Cancel prior runs for the same PR when new commits arrive
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   build_and_deploy_job:
     runs-on: ubuntu-latest
