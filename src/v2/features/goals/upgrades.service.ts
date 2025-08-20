@@ -9,7 +9,7 @@ import { Rank } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
-import { CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
+import { CharactersService, CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 import {
     IBaseUpgrade,
@@ -690,8 +690,7 @@ export class UpgradesService {
                 const acquiredCount = inventoryUpgrades[upgradeId] ?? 0;
                 inventoryUpgrades[upgradeId] = Math.max(acquiredCount - requiredCount, 0);
                 const estimate = this.getUpgradeEstimate(upgrade, requiredCount, acquiredCount);
-
-                estimate.relatedCharacters = [goal.unitName];
+                estimate.relatedCharacters = [CharactersService.resolveCharacter(goal.unitName)?.name ?? goal.unitName];
                 estimate.relatedGoals = [goal.goalId];
                 goalUpgrades.push(estimate);
             }
