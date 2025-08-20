@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 
-import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
+import { getImageUrl } from '../get-image-url';
+import { AccessibleTooltip } from '../tooltip';
 
 export const UnitShardIcon = ({
     icon,
@@ -15,7 +16,7 @@ export const UnitShardIcon = ({
     height?: number;
     width?: number;
 }) => {
-    if (!icon) return;
+    if (!icon) return null;
     const imageUrl = getImageUrl(`characters/resized/${icon.replace('.webp', '.png')}`);
 
     const image = (

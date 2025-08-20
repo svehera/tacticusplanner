@@ -2,7 +2,8 @@ import React from 'react';
 
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 
-import { EquipmentService, EquipmentType } from '@/fsd/4-entities/equipment';
+import type { EquipmentType } from '../enums';
+import { EquipmentService } from '../equipment.service';
 
 export const EquipmentTypeIcon = ({
     equipmentType,
