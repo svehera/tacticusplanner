@@ -63,7 +63,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
         setOpenAutocomplete(open);
     };
 
-    const getOptionText = (option: IUnit) => ('fullName' in option ? option.fullName : option.name);
+    const getOptionText = (option: IUnit) => option.name;
 
     return (
         <Autocomplete
