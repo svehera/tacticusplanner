@@ -1,8 +1,10 @@
+import type { AxiosError } from 'axios';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
 import { DialogProps } from 'src/v2/models/dialog.props';
 
+import type { IErrorResponse } from '@/fsd/5-shared/api';
 import { updateTacticusApiKey } from '@/fsd/5-shared/lib/tacticus-api';
 import { useAuth } from '@/fsd/5-shared/model';
 import { Button } from '@/fsd/5-shared/ui/button';
@@ -44,13 +46,19 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
         await syncWithTacticus(syncOptions);
     }
 
+    function buildErrMsg(error: string | Error | null): string {
+        const baseMsg = 'Failed to update settings';
+        const detail = typeof error === 'string' ? error : error?.message;
+        return detail ? `${baseMsg}: ${detail}` : baseMsg;
+    }
+
     async function updateApiKey() {
         loader.startLoading('Updating settings. Please wait...');
         try {
             const response = await updateTacticusApiKey(apiKey, guildApiKey, userId);
 
             if (!response.data) {
-                enqueueSnackbar('Failed to update settings', { variant: 'error' });
+                enqueueSnackbar(buildErrMsg(response.error), { variant: 'error' });
                 return;
             }
 
@@ -67,7 +75,9 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
             enqueueSnackbar('Settings updated', { variant: 'success' });
         } catch (error) {
             console.error(error);
-            enqueueSnackbar('Failed to update settings', { variant: 'error' });
+            const parsedError =
+                typeof error === 'string' || error instanceof Error || error === null ? error : String(error);
+            enqueueSnackbar(buildErrMsg(parsedError), { variant: 'error' });
         } finally {
             loader.endLoading();
         }

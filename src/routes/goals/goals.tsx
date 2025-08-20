@@ -206,9 +206,7 @@ export const Goals = () => {
     );
 
     const totalGoldAbilities = sum(
-        goalsEstimate
-            .filter(x => !!x.abilitiesEstimate && !!x.xpEstimateAbilities)
-            .map(x => x.abilitiesEstimate!.gold + x.xpEstimateAbilities!.gold)
+        goalsEstimate.map(x => (x.abilitiesEstimate?.gold ?? 0) + (x.xpEstimateAbilities?.gold ?? 0))
     );
 
     return (

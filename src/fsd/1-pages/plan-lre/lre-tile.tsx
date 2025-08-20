@@ -92,8 +92,8 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
     }, [rank]);
 
     const rarity = useMemo(() => {
-        return Math.max(character.rarity, rarityFromRank);
-    }, [character]);
+        return viewPreferences.lreGoalsPreview ? Math.max(character.rarity, rarityFromRank) : character.rarity;
+    }, [character.rarity, rarityFromRank, viewPreferences.lreGoalsPreview]);
 
     const emoji =
         character.bias === CharacterBias.recommendFirst
@@ -123,7 +123,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
                     width={30}
                 />
             )}
-            {showRarity && <RarityIcon rarity={rarityFromRank} />}
+            {showRarity && <RarityIcon rarity={rarity} />}
             {settings.lreTileShowUnitRank && <RankIcon key={rank} rank={rank} />}
             {settings.lreTileShowUnitName && <span>{character.shortName || 'Invalid Unit'}</span>}
             {settings.lreTileShowUnitActiveAbility && <span>A{character.activeAbilityLevel}</span>}
