@@ -85,7 +85,7 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Deep Strike',
                     points: 75,
-                    units: filter(noChaos).byTrait(Trait.DeepStrike),
+                    units: filter(noChaos).byTrait(Trait.TeleportStrike),
                     iconId: 'deep strike',
                     index: 2,
                 },

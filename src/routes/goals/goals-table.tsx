@@ -238,7 +238,9 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
                     if (data) {
-                        return <UnitShardIcon icon={data.unitIcon} height={30} width={30} tooltip={data.unitName} />;
+                        return (
+                            <UnitShardIcon icon={data.unitRoundIcon} height={30} width={30} tooltip={data.unitName} />
+                        );
                     }
                 },
                 sortable: false,

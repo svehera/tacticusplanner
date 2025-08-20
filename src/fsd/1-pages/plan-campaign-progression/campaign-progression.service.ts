@@ -155,6 +155,23 @@ export class CampaignsProgressionService {
     }
 
     /**
+     * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
+     */
+    public static getReward(battle: ICampaignBattleComposed): string {
+        // Elite battles give a guaranteed material, so return that.
+        for (const reward of battle.rewards.guaranteed) {
+            if (reward.id === 'gold') continue;
+            return reward.id;
+        }
+        // Otherwise, return the first potential reward that is not gold.
+        for (const reward of battle.rewards.potential) {
+            if (reward.id === 'gold') continue;
+            return reward.id;
+        }
+        return '';
+    }
+
+    /**
      * Analyzes all existing goals and campaign progress, and computes, for each
      * campaign, how much each related character goal costs, and how much we would
      * save on all other goals if we were to beat other nodes in the campaign.
@@ -191,17 +208,17 @@ export class CampaignsProgressionService {
             // savings we achieve by being able to farm the node. If we don't save anything,
             // then we omit the node from the results.
             for (const battle of nodes) {
-                if (!result.materialFarmData.has(battle.reward)) {
+                if (!result.materialFarmData.has(this.getReward(battle))) {
                     // This is a character shard.
                     continue;
                 }
-                const farmData = result.materialFarmData.get(battle.reward)!;
+                const farmData = result.materialFarmData.get(this.getReward(battle))!;
                 const newEnergyCost: number = this.getCostToFarmMaterial(
                     battle.campaignType,
                     farmData.count,
                     battle.rarityEnum
                 );
-                const oldEnergy = newMaterialEnergy.get(battle.reward) ?? farmData.totalEnergy;
+                const oldEnergy = newMaterialEnergy.get(this.getReward(battle)) ?? farmData.totalEnergy;
                 if (oldEnergy - farmData.count / 2 > newEnergyCost || !farmData.canFarm) {
                     cumulativeSavings += farmData.totalEnergy - newEnergyCost;
                     result.data
@@ -214,7 +231,7 @@ export class CampaignsProgressionService {
                                 farmData.canFarm
                             )
                         );
-                    newMaterialEnergy.set(battle.reward, newEnergyCost);
+                    newMaterialEnergy.set(this.getReward(battle), newEnergyCost);
                 }
             }
         }
@@ -528,7 +545,7 @@ export class CampaignsProgressionService {
 
         Object.entries(CampaignsService.campaignsComposed).forEach(([_, battle]) => {
             if (
-                this.getMaterialId(battle.reward) === this.getMaterialId(material) &&
+                this.getMaterialId(this.getReward(battle)) === this.getMaterialId(material) &&
                 CampaignsService.hasCompletedBattle(battle, campaignProgress)
             ) {
                 result.push(battle);
@@ -555,7 +572,7 @@ export class CampaignsProgressionService {
         let count = 0;
         Object.entries(CampaignsService.campaignsComposed).forEach(([_, battle]) => {
             if (
-                this.getMaterialId(battle.reward) == this.getMaterialId(material) &&
+                this.getMaterialId(this.getReward(battle)) == this.getMaterialId(material) &&
                 !CampaignsService.hasCompletedBattle(battle, campaignProgress)
             ) {
                 result.push(battle);
@@ -581,7 +598,7 @@ export class CampaignsProgressionService {
         const baseCampaign = battle.campaign.substring(0, battle.campaign.length - 6);
         let result: ICampaignBattleComposed | undefined = undefined;
         farmData.unfarmableLocations.forEach(x => {
-            if (x.campaign == baseCampaign && x.reward == battle.reward) result = x;
+            if (x.campaign == baseCampaign && this.getReward(x) == this.getReward(battle)) result = x;
         });
         return result;
     }

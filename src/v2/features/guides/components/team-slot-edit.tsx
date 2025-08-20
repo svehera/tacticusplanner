@@ -56,7 +56,7 @@ export const TeamSlotEdit: React.FC<Props> = ({
             );
         }
 
-        const portraitIcon = isCharacter(unit) ? unit.icon : unit.portraitIcon;
+        const portraitIcon = isCharacter(unit) ? unit.icon : unit.roundIcon;
 
         return (
             <Tooltip placement={'top'} title={unit.name} key={unitId}>

@@ -112,7 +112,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                     </IconButton>
                     <AccessibleTooltip title={goal.unitName}>
                         <div>
-                            <UnitShardIcon icon={goal.unitIcon} name={goal.unitName} />
+                            <UnitShardIcon icon={goal.unitRoundIcon} name={goal.unitName} />
                         </div>
                     </AccessibleTooltip>
                     {getGoalInfo(goal)}

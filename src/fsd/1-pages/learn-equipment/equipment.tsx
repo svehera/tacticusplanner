@@ -164,7 +164,7 @@ export const Equipment = () => {
                             {characters.map(char => (
                                 <Tooltip title={char.id} key={char.id}>
                                     <span>
-                                        <UnitShardIcon icon={char.icon} name={char.id} height={30} />
+                                        <UnitShardIcon icon={char.roundIcon} name={char.id} height={30} />
                                     </span>
                                 </Tooltip>
                             ))}

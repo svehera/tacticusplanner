@@ -9,7 +9,7 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { useAuth, UnitType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow } from '@/fsd/4-entities/mow';
+import { IMow2, mows2Data } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
@@ -27,6 +27,15 @@ import { ShareRoster } from 'src/v2/features/share/share-roster';
 
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);
+    const resolvedMows = useMemo(
+        () =>
+            mows.map(mow => {
+                if ('snowprintId' in mow) return mow as IMow2;
+                const mow2 = mows2Data.mows.find(m => m.snowprintId === mow.tacticusId);
+                return { ...mow2, ...mow } as IMow2;
+            }),
+        [mows]
+    );
     const dispatch = useContext(DispatchContext);
     const navigate = useNavigate();
 
@@ -39,7 +48,7 @@ export const WhoYouOwn = () => {
     const [nameFilter, setNameFilter] = useState<string | null>(null);
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
     const [editedInventory, setEditedInventory] = React.useState<Record<string, number>>({});
-    const [editedMow, setEditedMow] = React.useState<IMow | null>(null);
+    const [editedMow, setEditedMow] = React.useState<IMow2 | null>(null);
 
     const [searchParams] = useSearchParams();
 
@@ -57,8 +66,12 @@ export const WhoYouOwn = () => {
     const charactersView = isCharactersView(viewControls.orderBy);
 
     const charactersFiltered = useMemo(() => {
-        return CharactersService.filterUnits([...charactersDefault, ...mows], viewControls.filterBy, nameFilter);
-    }, [viewControls.filterBy, nameFilter, mows, charactersDefault]);
+        return CharactersService.filterUnits(
+            [...charactersDefault, ...resolvedMows],
+            viewControls.filterBy,
+            nameFilter
+        );
+    }, [viewControls.filterBy, nameFilter, resolvedMows, charactersDefault]);
 
     const factions = useMemo(() => {
         return CharactersService.orderByFaction(
@@ -85,7 +98,7 @@ export const WhoYouOwn = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'wyoFilter', value: value.filterBy });
     }, []);
 
-    const updateMow = useCallback((mow: IMow) => {
+    const updateMow = useCallback((mow: IMow2) => {
         endEditUnit();
         dispatch.inventory({
             type: 'DecrementUpgradeQuantity',
@@ -155,7 +168,7 @@ export const WhoYouOwn = () => {
 
                 {editedMow && (
                     <EditMowDialog
-                        key={editedMow.id}
+                        key={editedMow.snowprintId}
                         mow={editedMow}
                         saveChanges={updateMow}
                         isOpen={!!editedMow}

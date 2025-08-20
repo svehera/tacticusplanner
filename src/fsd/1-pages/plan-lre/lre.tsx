@@ -3,13 +3,15 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Divider, Switch, Tab, Tabs } from '@mui/material';
 import Button from '@mui/material/Button';
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 // eslint-disable-next-line import-x/no-internal-modules
 import { SetGoalDialog } from '@/shared-components/goals/set-goal-dialog';
+
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 
 import { IAutoTeamsPreferences } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings';
@@ -28,6 +30,15 @@ export const Lre: React.FC = () => {
     const updatePreferencesOption = (setting: keyof ILreViewSettings, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
+
+    const resolvedCharacters = useMemo(() => {
+        return characters.map(x => {
+            const ret: ICharacter2 = { ...x };
+            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
+            ret.name = staticChar?.snowprintId ?? x.name;
+            return ret;
+        });
+    }, [characters]);
 
     const updateSettings = (
         settings: ILreViewSettings,
@@ -126,7 +137,7 @@ export const Lre: React.FC = () => {
                     onClose={closeSettings}
                     lreViewSettings={viewPreferences}
                     autoTeamsSettings={autoTeamsPreferences}
-                    characters={characters}
+                    characters={resolvedCharacters}
                     save={updateSettings}
                 />
             )}

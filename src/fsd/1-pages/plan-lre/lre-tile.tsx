@@ -10,6 +10,7 @@ import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fs
 
 import { CharacterBias, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeRankGoal, ICharacterUpgradeMow, PersonalGoalType } from '@/fsd/4-entities/goal';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
 import { ILreTileSettings } from '@/fsd/3-features/view-settings';
 // eslint-disable-next-line import-x/no-internal-modules
@@ -24,13 +25,20 @@ interface Props {
 export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => {} }) => {
     const { goals, characters, mows, viewPreferences } = useContext(StoreContext);
 
+    const resolvedMows = useMemo(() => {
+        return mows.map(mow => {
+            if ('snowprintId' in mow) return mow as IMow2;
+            return { ...mow, ...MowsService.resolveToStatic(mow.tacticusId) } as IMow2;
+        });
+    }, [mows]);
+
     // We use the current goals of the tactician, as well as the current state
     // of the character, to determine which rank to show. We also take into
     // account if the tactician has enabled goal previews.
     const rank = useMemo(() => {
         // If we don't have goal previews enabled, return the character's current rank.
         if (!viewPreferences.lreGoalsPreview) return character.rank;
-        const { upgradeRankOrMowGoals } = GoalsService.prepareGoals(goals, characters, false);
+        const { upgradeRankOrMowGoals } = GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false);
         // We allow partial goals (Based on upgrade-material rarity), so figure
         // out the maximum rank for each rarity of upgrade material.
         let maxCommonRank: Rank = character.rank;
@@ -79,7 +87,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             Math.min(maxCommonRank, maxUncommonRank, maxRareRank, maxEpicRank, maxLegendaryRank)
         );
         return ret;
-    }, [goals, characters, mows, viewPreferences, character]);
+    }, [goals, characters, resolvedMows, viewPreferences, character]);
 
     // Determine the rarity icon to display based on the goal rank and current
     // character rank.
@@ -88,12 +96,13 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
         if (rank <= Rank.Bronze1) return Rarity.Uncommon;
         if (rank <= Rank.Silver1) return Rarity.Rare;
         if (rank <= Rank.Gold1) return Rarity.Epic;
-        return Rarity.Legendary;
+        if (rank <= Rank.Diamond3) return Rarity.Legendary;
+        return Rarity.Mythic;
     }, [rank]);
 
     const rarity = useMemo(() => {
-        return viewPreferences.lreGoalsPreview ? Math.max(character.rarity, rarityFromRank) : character.rarity;
-    }, [character.rarity, rarityFromRank, viewPreferences.lreGoalsPreview]);
+        return Math.max(character.rarity, rarityFromRank);
+    }, [character]);
 
     const emoji =
         character.bias === CharacterBias.recommendFirst
@@ -104,9 +113,9 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
     const rankBackgroundCssClass =
         settings.lreTileShowUnitRankBackground && rank !== undefined ? ` ${Rank[rank]?.toLowerCase()}` : '';
     const showHealTrait =
-        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait['Healer']);
+        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait.Healer);
     const showMechanicTrait =
-        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait['Mechanic']);
+        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait.Mechanic);
     const showShardIcon = settings.lreTileShowUnitIcon && character.name && character.icon;
     const showRarity = settings.lreTileShowUnitRarity && typeof rarity !== 'undefined';
     return (
@@ -117,7 +126,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             {showShardIcon && (
                 <UnitShardIcon
                     key={character.name}
-                    icon={character.icon}
+                    icon={character.roundIcon}
                     name={character.name}
                     height={30}
                     width={30}
@@ -131,14 +140,14 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             {showHealTrait && (
                 <Tooltip placement="top" title="Healer">
                     <span>
-                        <TraitImage trait={Trait['Healer']} width={20} height={20} />
+                        <TraitImage trait={Trait.Healer} width={20} height={20} />
                     </span>
                 </Tooltip>
             )}
             {showMechanicTrait && (
                 <Tooltip placement="top" title="Mechanic">
                     <span>
-                        <TraitImage trait={Trait['Mechanic']} width={20} height={20} />
+                        <TraitImage trait={Trait.Mechanic} width={20} height={20} />
                     </span>
                 </Tooltip>
             )}

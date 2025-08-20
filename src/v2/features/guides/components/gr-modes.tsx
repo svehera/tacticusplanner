@@ -23,9 +23,14 @@ export const GuildRaidsModes: React.FC<Props> = ({ selectedModes, updateSelectio
 
     const bannedFaction: Faction = useMemo(() => grEncounterToFaction[grEncounter], [grEncounter]);
 
+    const getFaction = (unit: IUnit): Faction => {
+        if ('faction' in unit) return unit.faction;
+        return unit.factionId as Faction;
+    };
+
     const allowedUnits = useMemo(() => {
         if (bannedFaction) {
-            return units.filter(x => x.faction !== bannedFaction);
+            return units.filter(x => getFaction(x) !== bannedFaction);
         }
         return units;
     }, [bannedFaction]);

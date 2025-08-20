@@ -7,7 +7,7 @@
         "shortName": "Malleus RL",
         "fullName": "Malleus Rocket Launcher",
         "alliance": "Imperial",
-        "faction": "Astra Militarum",
+        "faction": "AstraMilitarum",
         "initialRarity": "Common",
         "deployableAlliance": "Xenos"
     },
@@ -19,7 +19,7 @@
         "shortName": "Forgefiend",
         "fullName": "Forgefiend",
         "alliance": "Chaos",
-        "faction": "Black Legion",
+        "faction": "BlackLegion",
         "initialRarity": "Common",
         "deployableAlliance": "Imperial"
     },
@@ -56,7 +56,7 @@
         "shortName": "Tson",
         "fullName": "Shas'vre Vior'la Tson'ji",
         "alliance": "Xenos",
-        "faction": "T'au Empire",
+        "faction": "Tau",
         "initialRarity": "Common",
         "deployableAlliance": "Imperial",
         "releaseDate": "2024-12-02T00:00:00Z"
@@ -69,7 +69,7 @@
         "shortName": "Plagueburst",
         "fullName": "Plagueburst Crawler",
         "alliance": "Chaos",
-        "faction": "Death guard",
+        "faction": "DeathGuard",
         "initialRarity": "Common",
         "deployableAlliance": "Xenos",
         "releaseDate": "2025-03-17T00:00:00Z"
@@ -82,7 +82,7 @@
         "shortName": "Exorcist",
         "fullName": "Exorcist",
         "alliance": "Imperial",
-        "faction": "Adepta Sororitas",
+        "faction": "Sisterhood",
         "initialRarity": "Common",
         "deployableAlliance": "Xenos",
         "releaseDate": "2025-06-30T00:00:00Z"

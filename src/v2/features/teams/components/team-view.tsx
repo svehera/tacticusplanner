@@ -4,7 +4,7 @@ import { isMobile } from 'react-device-detect';
 
 import { ICharacter2 } from 'src/models/interfaces';
 
-import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
+import { IMow2, IUnit } from 'src/v2/features/characters/characters.models';
 import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
 import { EmptyTile } from 'src/v2/features/characters/components/empty-tile';
 import { MowTile } from 'src/v2/features/characters/components/mow-tile';
@@ -13,12 +13,12 @@ interface Props {
     characters: ICharacter2[];
     onClick?: (unit: IUnit) => void;
     onEmptyClick?: (isMow: boolean) => void;
-    mow?: IMow | null;
+    mow?: IMow2 | null;
     withMow?: boolean;
 }
 
 export const TeamView: React.FC<Props> = ({ characters, mow, withMow = false, onClick, onEmptyClick }) => {
-    const onMowClick = (relatedMow: IMow) => {
+    const onMowClick = (relatedMow: IMow2) => {
         if (onClick) {
             onClick(relatedMow);
         }

@@ -1,2 +1,2 @@
 export { RankIcon } from '../ui';
-export { CharactersService } from '../chracters.service';
+export { CharactersService } from '../characters.service';

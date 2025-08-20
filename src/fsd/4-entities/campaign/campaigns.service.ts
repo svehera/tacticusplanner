@@ -1,4 +1,5 @@
 import { groupBy, orderBy, sortBy, uniq } from 'lodash';
+import { X } from 'lucide-react';
 
 import { Alliance, Faction, Rarity } from '@/fsd/5-shared/model';
 
@@ -23,8 +24,8 @@ export class CampaignsService {
 
     /**
      * @returns for each upgrade, a list of all nodes from which it can be
-     *          farmed. The key is the material name (e.g. "Classified Data-Slate") or,
-     *          for character shards, the character name (e.g. "Aleph-Null").
+     *          farmed. The key is the material ID or, for character shards,
+     *          the character name (e.g. "Aleph-Null").
      *          The map value is ICampaignBattle.shortName (e.g. SHME31 for
      *          Saim-Hann Mirror Elite 31).
      */
@@ -35,13 +36,44 @@ export class CampaignsService {
             battles.push({ ...battleData[battleDataKey], shortName: battleDataKey });
         }
 
-        const groupedData = groupBy(battles, 'reward');
-
-        for (const key in groupedData) {
-            result[key] = groupedData[key].map(x => x.shortName ?? '');
+        const foundLocs: string[] = [];
+        for (const battle of battles) {
+            const name = battle.shortName ?? '';
+            for (const reward of battle.rewards.guaranteed) {
+                if (reward.id === 'gold') continue;
+                const rewardId = reward.id;
+                if (!result[rewardId]) result[rewardId] = [];
+                if (!foundLocs.includes(name)) {
+                    foundLocs.push(name);
+                    result[rewardId].push(name);
+                }
+            }
+            for (const reward of battle.rewards.potential) {
+                if (reward.id === 'gold') continue;
+                const rewardId = reward.id;
+                if (!result[rewardId]) result[rewardId] = [];
+                if (!foundLocs.includes(name)) {
+                    foundLocs.push(name);
+                    result[rewardId].push(name);
+                }
+            }
         }
 
         return result;
+    }
+
+    private static getReward(battle: ICampaignBattle): string {
+        // Elite battles give a guaranteed material, so return that.
+        for (const reward of battle.rewards.guaranteed) {
+            if (reward.id === 'gold') continue;
+            return reward.id;
+        }
+        // Otherwise, return the first potential reward that is not gold.
+        for (const reward of battle.rewards.potential) {
+            if (reward.id === 'gold') continue;
+            return reward.id;
+        }
+        return '';
     }
 
     /**
@@ -53,29 +85,43 @@ export class CampaignsService {
         for (const battleDataKey in battleData) {
             const battle = battleData[battleDataKey];
 
+            const reward = this.getReward(battle);
             const config = campaignConfigs[battle.campaignType as CampaignType];
-            const recipe = recipeDataByName[battle.reward];
+            const recipe = recipeDataByName[reward];
             if (!recipe) {
-                if (battle.campaignType !== CampaignType.SuperEarly) {
-                    console.error(
-                        'no recipe for ' + battle.reward + ' from ' + battle.campaign + ' ' + battle.nodeNumber
-                    );
+                if (reward.length > 0 && !reward.startsWith('shards_') && !reward.startsWith('mythicShards_')) {
+                    console.warn('no recipe found', reward, battle);
                 }
             }
-            const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
+            const useEmbeddedDropRates = true;
+            let dropRate = 0;
+            if (useEmbeddedDropRates) {
+                const guaranteed = battle.rewards.guaranteed.find(x => x.id == reward);
+                const potential = battle.rewards.potential.find(x => x.id == reward);
+                if (guaranteed) dropRate = 1;
+                if (potential) {
+                    dropRate += potential.chance_numerator / potential.chance_denominator;
+                }
+            } else {
+                const dropRateKey: keyof IDropRate = Rarity[
+                    recipe?.rarity as unknown as number
+                ].toLowerCase() as keyof IDropRate;
+                dropRate =
+                    config.dropRate && config.dropRate[dropRateKey] !== undefined ? config.dropRate[dropRateKey] : 0;
+            }
+            dropRate = dropRate.toFixed(3) === 'NaN' ? 0 : parseFloat(dropRate.toFixed(3));
 
-            const dropRate = config.dropRate ? config.dropRate[dropRateKey] : 0;
-            const energyPerItem = parseFloat((1 / (dropRate / config.energyCost)).toFixed(2));
+            const energyPerItem = parseFloat((1 / (dropRate / battle.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
-            const energyPerDay = config.dailyBattleCount * config.energyCost;
+            const energyPerDay = config.dailyBattleCount * battle.energyCost;
             const itemsPerDay = energyPerDay / energyPerItem;
 
             result[battleDataKey] = {
                 id: battle.campaign + battle.nodeNumber,
                 campaign: battle.campaign as Campaign,
                 campaignType: battle.campaignType as CampaignType,
-                energyCost: config.energyCost,
+                energyCost: battle.energyCost,
                 dailyBattleCount: config.dailyBattleCount,
                 dropRate,
                 energyPerItem,
@@ -84,8 +130,7 @@ export class CampaignsService {
                 nodeNumber: battle.nodeNumber,
                 rarity: recipe?.rarity,
                 rarityEnum: Rarity[recipe?.rarity as unknown as number] as unknown as Rarity,
-                reward: battle.reward,
-                expectedGold: battle.expectedGold,
+                rewards: battle.rewards,
                 slots: battle.slots,
                 enemiesAlliances: (battle.enemiesAlliances ?? [enemies.alliance]) as Alliance[],
                 enemiesFactions: (battle.enemiesFactions ?? enemies.factions) as Faction[],
@@ -174,6 +219,7 @@ export class CampaignsService {
 
         if (campaignTypes.length) {
             if (!campaignTypes.includes(location.campaignType)) {
+                console.log("doesn't pass campaignTypes filter", campaignTypes, location.campaign);
                 return false;
             }
         }

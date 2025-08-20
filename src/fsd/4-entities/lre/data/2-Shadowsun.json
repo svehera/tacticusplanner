@@ -1,9 +1,10 @@
 ﻿{
     "id": 4,
+    "unitSnowprintId": "tauShadowsun",
     "name": "Shadowsun",
     "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Shadowsun",
     "eventStage": 3,
-    "nextEventDate": "Finished",
+    "finished": true,
     "regularMissions": [
         "Play one Philosophy of War Battle, Deal 1000 damage",
         "Defeat 30 Necrons",

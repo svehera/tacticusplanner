@@ -25,7 +25,7 @@ import { useQueryState, getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance, DamageType, Trait, Rank } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
-import { ICharacter2, RankSelect } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacter2, RankSelect } from '@/fsd/4-entities/character';
 
 import { useCharacters } from './characters-column-defs';
 
@@ -99,24 +99,31 @@ export const LearnCharacters = () => {
 
     const { characters } = useContext(StoreContext);
 
-    const hitsOptions = uniq(characters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
+    const resolvedCharacters = useMemo(() => {
+        return characters.map(c => ({
+            ...c,
+            ...CharactersService.resolveCharacter(c.snowprintId ?? c.name),
+        })) as ICharacter2[];
+    }, [characters]);
+
+    const hitsOptions = uniq(resolvedCharacters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
         .sort((a, b) => a - b)
         .map(x => x.toString());
 
-    const movementOptions = uniq(characters.map(x => x.movement))
+    const movementOptions = uniq(resolvedCharacters.map(x => x.movement))
         .sort((a, b) => a - b)
         .map(x => x.toString());
 
-    const distanceOptions = uniq(characters.filter(x => !!x.rangeDistance).map(x => x.rangeDistance ?? 1))
+    const distanceOptions = uniq(resolvedCharacters.filter(x => !!x.rangeDistance).map(x => x.rangeDistance ?? 1))
         .sort((a, b) => a - b)
         .map(x => x.toString());
 
-    const damageTypesOptions = uniq(characters.flatMap(x => x.damageTypes.all)).map(x => x.toString());
-    const traitsOptions = uniq(characters.flatMap(x => x.traits)).map(x => x.toString());
+    const damageTypesOptions = uniq(resolvedCharacters.flatMap(x => x.damageTypes.all)).map(x => x.toString());
+    const traitsOptions = Object.values(Trait);
 
     const rows = useMemo(
         () =>
-            characters.filter(
+            resolvedCharacters.filter(
                 c => c.name.toLowerCase().includes(nameFilter.toLowerCase()) && (!onlyUnlocked || c.rank > Rank.Locked)
             ),
         [nameFilter, onlyUnlocked]

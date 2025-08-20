@@ -8,6 +8,7 @@ export const charsUnlockShards: Record<Rarity, number> = {
     [Rarity.Rare]: 130,
     [Rarity.Epic]: 250,
     [Rarity.Legendary]: 500,
+    [Rarity.Mythic]: 1400,
 };
 
 export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
@@ -17,4 +18,5 @@ export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
     [CharacterReleaseRarity.Epic]: 400,
     [CharacterReleaseRarity.LegendaryOld]: 150,
     [CharacterReleaseRarity.Legendary]: 400,
+    [CharacterReleaseRarity.Mythic]: 900, // TODO(mythic): find the real value and fix.
 };

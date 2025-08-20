@@ -14,7 +14,7 @@ import { isMobile } from 'react-device-detect';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
@@ -44,7 +44,13 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                         const { data } = params;
                         if (data) {
-                            return <UpgradeImage material={data.label} iconPath={data.iconPath} />;
+                            return (
+                                <UpgradeImage
+                                    material={data.label}
+                                    iconPath={data.iconPath}
+                                    rarity={RarityMapper.rarityToRarityString(data.rarity)}
+                                />
+                            );
                         }
                     },
                     valueFormatter: () => {

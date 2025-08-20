@@ -34,8 +34,8 @@ export interface IDamageTypes {
     all: DamageType[];
     melee: DamageType;
     range?: DamageType;
-    activeAbility?: DamageType;
-    passiveAbility?: DamageType;
+    activeAbility: DamageType[];
+    passiveAbility: DamageType[];
 }
 
 export interface ILreCharacterStaticData {
@@ -63,12 +63,15 @@ export interface ICharLegendaryEvent {
 }
 
 export interface UnitDataRaw {
+    id: string;
     Name: string;
+    Title: string;
     Faction: string;
     Alliance: string;
     Health: number;
     Damage: number;
     Armour: number;
+    'Extra Short Name': string;
     'Short Name': string;
     'Full Name': string;
     'Initial rarity': string;
@@ -83,14 +86,14 @@ export interface UnitDataRaw {
     'Trait 3'?: string;
     'Trait 4'?: string;
     Traits: string[];
-    'Active Ability'?: string;
-    'Passive Ability'?: string;
+    'Active Ability'?: string[];
+    'Passive Ability'?: string[];
     Equipment1: string;
     Equipment2: string;
     Equipment3: string;
     Number: number;
-    ForcedSummons: boolean;
-    RequiredInCampaign: boolean;
+    ForcedSummons?: boolean;
+    RequiredInCampaign?: boolean;
     /**
      * The prefix of each campaign in which this character is required. Some examples:
      * - 'Maladus' would be ['Adeptus Mechanicus']
@@ -101,16 +104,16 @@ export interface UnitDataRaw {
      */
     CampaignsRequiredIn?: string[];
     Icon: string;
+    RoundIcon: string;
     ReleaseRarity?: number;
     releaseDate?: string;
-    tacticusId?: string;
     lre?: ILreCharacterStaticData;
 }
 
 export interface ICharacterData {
     unitType: UnitType.character;
     id: string;
-    tacticusId?: string;
+    snowprintId?: string;
     alliance: Alliance;
     faction: Faction;
     name: string;
@@ -135,6 +138,7 @@ export interface ICharacterData {
     requiredInCampaign: boolean;
     campaignsRequiredIn?: string[];
     icon: string;
+    roundIcon: string;
     legendaryEvents: ICharLegendaryEvents;
     lre?: ILreCharacterStaticData;
     releaseRarity?: CharacterReleaseRarity;
@@ -177,6 +181,7 @@ export interface IUnitUpgradeRank {
  * first.
  */
 export interface IRankLookup {
+    unitId: string;
     unitName: string;
     rankStart: Rank;
     rankEnd: Rank;

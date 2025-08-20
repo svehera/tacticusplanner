@@ -4,22 +4,22 @@ import { useQueryState } from '@/fsd/5-shared/lib';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input';
 
-import { IMow } from '@/fsd/4-entities/mow';
+import { IMow2, IMowStatic2 } from '@/fsd/4-entities/mow';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit';
 
 import { IMowLookupInputs } from './lookup.models';
 
 interface Props {
-    mows: IMow[];
+    mows: IMow2[];
     inputs: IMowLookupInputs;
     inputsChange: (value: IMowLookupInputs) => void;
 }
 
 export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange }) => {
-    const [mow, setMow] = useQueryState<IMow | null>(
+    const [mow, setMow] = useQueryState<IMow2 | null>(
         'mow',
-        mowQueryParam => mows.find(x => x.id === mowQueryParam) ?? inputs.mow,
-        mow => mow?.id
+        mowQueryParam => mows.find(x => x.name === mowQueryParam) ?? inputs.mow,
+        mow => mow?.name
     );
 
     const [primaryAbilityStart, setPrimaryAbilityStart] = useQueryState<number>(
@@ -59,7 +59,7 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
 
     return (
         <div className="flex-box gap20 wrap">
-            {mow && <UnitShardIcon icon={mow.badgeIcon} />}
+            {mow && <UnitShardIcon icon={mow.icon} />}
             <UnitsAutocomplete style={{ maxWidth: 250 }} unit={mow} options={mows} onUnitChange={setMow} />
             <div className="flex-box gap15 p10">
                 <span>Primary:</span>

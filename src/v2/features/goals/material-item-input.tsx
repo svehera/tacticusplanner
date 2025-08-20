@@ -1,6 +1,8 @@
 ﻿import Button from '@mui/material/Button';
 import React from 'react';
 
+import { RarityMapper } from '@/fsd/5-shared/model';
+
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
@@ -24,6 +26,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                 <UpgradeImage
                     material={upgradeRaid.label}
                     iconPath={upgradeRaid.iconPath}
+                    rarity={RarityMapper.rarityToRarityString(upgradeRaid.rarity)}
                     tooltip={
                         <div>
                             {upgradeRaid.label}

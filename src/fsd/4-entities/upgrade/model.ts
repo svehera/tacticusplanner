@@ -12,6 +12,7 @@ export interface IUpgradeRecipe {
 
 export interface ICraftedUpgrade {
     id: string;
+    snowprintId: string; // The ID from snowprint assets.
     label: string;
     rarity: Rarity;
     iconPath: string;
@@ -24,6 +25,7 @@ export interface ICraftedUpgrade {
 
 export interface IBaseUpgrade {
     id: string;
+    snowprintId: string;
     label: string;
     rarity: Rarity;
     iconPath: string;
@@ -38,6 +40,7 @@ export interface IRecipeDataFull {
 
 export interface IMaterialFull {
     id: string;
+    snowprintId: string;
     label: string;
     rarity: Rarity;
     craftable: boolean;
@@ -52,6 +55,7 @@ export interface IMaterialFull {
 
 export interface IMaterialRecipeIngredientFull {
     id: string;
+    snowprintId: string;
     label: string | 'Gold';
     count: number;
     rarity: Rarity;
@@ -97,6 +101,7 @@ export interface IRecipeData {
 
 export interface IMaterial {
     material: string;
+    snowprintId: string; // The ID from snowprint assets.
     label?: string;
     tacticusId?: string;
     rarity: string;
@@ -121,6 +126,7 @@ export interface IMaterialRecipeIngredient {
  */
 export interface IRecipeExpandedUpgrade {
     id: string;
+    snowprintId: string; // The ID from snowprint assets.
     label: string;
     rarity: Rarity;
     iconPath: string;

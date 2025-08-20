@@ -5,4 +5,5 @@ export enum CharacterReleaseRarity {
     Epic,
     LegendaryOld,
     Legendary,
+    Mythic,
 }

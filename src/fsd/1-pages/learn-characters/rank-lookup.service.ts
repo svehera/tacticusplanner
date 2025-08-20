@@ -24,7 +24,7 @@ export class RankLookupService {
         let priority = 0;
         for (const character of characters) {
             priority++;
-            const characterUpgrades = rankUpData[character.unitName];
+            const characterUpgrades = rankUpData[character.unitId];
             if (!characterUpgrades) {
                 continue;
             }
@@ -59,6 +59,7 @@ export class RankLookupService {
                     // console.error('Recipe for ' + upgrade + ' is not found');
 
                     return {
+                        snowprintId: '',
                         rarity: 0,
                         craftable: false,
                         iconPath: upgrade,
@@ -131,15 +132,15 @@ export class RankLookupService {
         });
         const selectedLocations = bestLocations?.length ? bestLocations : (material.locationsComposed ?? []);
 
-        const ownedCount = ownedUpgrades[material.id] ?? 0;
-        const craftedCount = craftedBasedUpgrades[material.id] ?? 0;
+        const ownedCount = ownedUpgrades[material.snowprintId] ?? 0;
+        const craftedCount = craftedBasedUpgrades[material.snowprintId] ?? 0;
         const neededCount = material.count - craftedCount;
         material.count = neededCount > 0 ? neededCount : 0;
         const leftCount = ownedCount >= material.count ? 0 : material.count - ownedCount;
         if (updateInventory) {
             const updatedCount = ownedCount - material.count;
-            ownedUpgrades[material.id] = updatedCount > 0 ? updatedCount : 0;
-            craftedBasedUpgrades[material.id] = neededCount > 0 ? 0 : Math.abs(neededCount);
+            ownedUpgrades[material.snowprintId] = updatedCount > 0 ? updatedCount : 0;
+            craftedBasedUpgrades[material.snowprintId] = neededCount > 0 ? 0 : Math.abs(neededCount);
         }
 
         let expectedEnergy = 0;
@@ -149,6 +150,7 @@ export class RankLookupService {
 
         while (farmedItems < leftCount) {
             let leftToFarm = leftCount - farmedItems;
+            if (selectedLocations.length === 0) break;
             for (const loc of selectedLocations) {
                 const dailyEnergy = loc.dailyBattleCount * loc.energyCost;
                 const dailyFarmedItems = dailyEnergy / loc.energyPerItem;
@@ -192,7 +194,7 @@ export class RankLookupService {
             dailyEnergy,
             daysOfBattles,
             dailyBattles,
-            id: material.id,
+            id: material.snowprintId,
             label: material.label,
             locations: selectedLocations,
             unlockedLocations: unlockedLocations.map(x => x.id),

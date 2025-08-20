@@ -11,7 +11,7 @@ import { Rarity } from '@/fsd/5-shared/model';
 import { RaritySelect } from '@/fsd/5-shared/ui';
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
-import { IMow } from 'src/v2/features/characters/characters.models';
+import { IMow2 } from 'src/v2/features/characters/characters.models';
 import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';
 import { TeamView } from 'src/v2/features/teams/components/team-view';
 import { guildRaidBosses, guildRaidPrimes, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
@@ -23,7 +23,7 @@ interface Props {
     saveTeam: (team: IPersonalTeam) => void;
     team: IPersonalTeam;
     characters: ICharacter2[];
-    mows: IMow[];
+    mows: IMow2[];
 }
 
 export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, team, saveTeam }) => {
@@ -32,12 +32,12 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
     const [teamName, setTeamName] = useState<string>(team.name);
     const [rarityCap, setRarityCap] = useState(team.rarityCap);
     const [lineup, setLineup] = useState<ICharacter2[]>(team.lineup.map(id => characters.find(x => x.id === id)!));
-    const [mow, setMow] = useState<IMow | null>(team.mowId ? mows.find(x => x.id === team.mowId)! : null);
+    const [mow, setMow] = useState<IMow2 | null>(team.mowId ? mows.find(x => x.id === team.mowId)! : null);
 
     const [isOpenSelectDialog, setIsOpenSelectDialog] = useState<boolean>(false);
 
     const openSelectDialog = () => setIsOpenSelectDialog(true);
-    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow | null) => {
+    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | null) => {
         setLineup(selectedTeam);
         setMow(mow);
         setIsOpenSelectDialog(false);

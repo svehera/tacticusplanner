@@ -37,6 +37,7 @@ import { ICustomDailyRaidsSettings, IDailyRaidsPreferences } from '../models/int
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 
 const defaultCustomSettings: ICustomDailyRaidsSettings = {
+    [Rarity.Mythic]: [CampaignType.Extremis],
     [Rarity.Legendary]: [CampaignType.Elite, CampaignType.Mirror],
     [Rarity.Epic]: [CampaignType.Elite, CampaignType.Mirror],
     [Rarity.Rare]: [CampaignType.Elite, CampaignType.Mirror],
@@ -50,24 +51,36 @@ const energyMarks = [
         label: '',
     },
     {
-        value: 288 + 50,
+        value: 288 + 30,
+        label: 'Daily Mission',
+    },
+    {
+        value: 288 + 30 + 60,
+        label: 'Ad',
+    },
+    {
+        value: 288 + 30 + 60 + 60,
         label: '25 BS',
     },
     {
-        value: 288 + 50 + 100,
+        value: 288 + 30 + 60 + 60 + 100,
         label: '50 BS',
     },
     {
-        value: 288 + 50 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100,
         label: '110 BS',
     },
     {
-        value: 288 + 50 + 100 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100,
         label: '250 BS',
     },
     {
-        value: 288 + 50 + 100 + 100 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100,
         label: '500 BS',
+    },
+    {
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100 + 100,
+        label: '1000 BS',
     },
     {
         value: 888888,
@@ -84,9 +97,10 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const dispatch = useContext(DispatchContext);
     const { dailyRaidsPreferences } = useContext(StoreContext);
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
-    const [dailyEnergy, setDailyEnergy] = React.useState(() =>
-        energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy)
-    );
+    const [dailyEnergy, setDailyEnergy] = React.useState(() => {
+        const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
+        return index >= 0 ? index : 0; // Default to first option if not found
+    });
     const [shardsEnergy, setShardsEnergy] = React.useState<number | string>(dailyRaidsPreferences.shardsEnergy);
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings

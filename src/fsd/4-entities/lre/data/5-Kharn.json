@@ -1,9 +1,10 @@
 ﻿{
     "id": 7,
+    "unitSnowprintId": "worldKharn",
     "name": "Kharn",
     "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Kharn",
     "eventStage": 3,
-    "nextEventDate": "Finished",
+    "finished": true,
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
         "Defeat 30 Ultramarines",

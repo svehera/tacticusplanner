@@ -8,7 +8,7 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { findAndRemoveItem } from '@/fsd/5-shared/lib';
-import { Rank } from '@/fsd/5-shared/model';
+import { Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2, CharacterUpgradesService } from '@/fsd/4-entities/character';
@@ -56,6 +56,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
     const possibleUpgrades: Array<IBaseUpgrade | ICraftedUpgrade> = useMemo(() => {
         const [rankUpgrades] = CharacterUpgradesService.getCharacterUpgradeRank({
+            unitId: character.snowprintId ?? '',
             unitName: character.name,
             rankStart: rank,
             rankEnd: rank + 1,
@@ -117,6 +118,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             upgradesToConsider = newUpgrades;
         } else {
             const previousRankUpgradesList = CharacterUpgradesService.getCharacterUpgradeRank({
+                unitId: character.snowprintId ?? '',
                 unitName: character.name,
                 rankStart: formData.originalRank,
                 rankEnd: rank,
@@ -251,11 +253,15 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                                     gap: 10,
                                     paddingBottom: 10,
                                 }}>
-                                <UpgradeImage material={x.label} iconPath={x.iconPath} />{' '}
-                                {inventory.upgrades[x.id] ?? 0} - {inventoryUpdate[x.id]} ={' '}
-                                {(inventory.upgrades[x.id] ?? 0) - inventoryUpdate[x.id] < 0
+                                <UpgradeImage
+                                    material={x.label}
+                                    iconPath={x.iconPath}
+                                    rarity={RarityMapper.rarityToRarityString(x.rarity)}
+                                />{' '}
+                                {inventory.upgrades[x.snowprintId] ?? 0} - {inventoryUpdate[x.snowprintId]} ={' '}
+                                {(inventory.upgrades[x.snowprintId] ?? 0) - inventoryUpdate[x.snowprintId] < 0
                                     ? 0
-                                    : (inventory.upgrades[x.id] ?? 0) - inventoryUpdate[x.id]}
+                                    : (inventory.upgrades[x.snowprintId] ?? 0) - inventoryUpdate[x.snowprintId]}
                             </li>
                         ))}
                     </ul>

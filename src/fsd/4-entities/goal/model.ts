@@ -11,6 +11,7 @@ export interface ICharacterRaidGoalSelectBase {
     unitId: string;
     unitName: string;
     unitIcon: string;
+    unitRoundIcon: string;
     unitAlliance: Alliance;
     notes: string;
 }

@@ -45,7 +45,7 @@ export const PlanLeRoutes = () => {
                         <CardHeader
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <UnitShardIcon icon={le.icon} name={le.name} /> {le.name}
+                                    <UnitShardIcon icon={le.roundIcon} name={le.name} /> {le.name}
                                 </div>
                             }
                             subheader={'Legendary Event'}

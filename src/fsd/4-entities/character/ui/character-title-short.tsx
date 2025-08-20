@@ -21,7 +21,7 @@ export const CharacterTitleShort = ({
     fullName?: boolean;
     imageSize?: number;
 }) => {
-    const name = fullName ? character.fullName : character.name;
+    const name = fullName ? character.fullName : character.shortName;
 
     const isUnlocked = character.rank > Rank.Locked;
 
@@ -34,7 +34,7 @@ export const CharacterTitleShort = ({
                 <span style={{ height: imageSize }}>
                     <UnitShardIcon
                         key={character.name}
-                        icon={character.icon}
+                        icon={character.roundIcon}
                         name={character.name}
                         height={imageSize}
                         width={imageSize}

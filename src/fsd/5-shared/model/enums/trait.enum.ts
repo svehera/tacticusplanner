@@ -2,19 +2,20 @@ export enum Trait {
     ActOfFaith = 'Act of Faith',
     Ambush = 'Ambush',
     BattleFatigue = 'Battle Fatigue',
-    BeastSlayer = 'Beast Slayer',
+    BeastSnagga = 'Beast Slayer',
     BigTarget = 'Big Target',
+    BlessingsOfKhorne = 'Blessings of Khorne',
     Camouflage = 'Camouflage',
     CloseCombatWeakness = 'Close Combat Weakness',
     ContagionsOfNurgle = 'Contagions of Nurgle',
     CrushingStrike = 'Crushing Strike',
     Daemon = 'Daemon',
     Dakka = 'Dakka',
-    DeepStrike = 'Deep Strike',
+    TeleportStrike = 'Deep Strike',
     Diminutive = 'Diminutive',
     Emplacement = 'Emplacement',
     Explodes = 'Explodes',
-    FinalVengeance = 'Final Vengeance',
+    FinalJustice = 'Final Vengeance',
     Flying = 'Flying',
     GetStuckIn = 'Get Stuck In',
     Healer = 'Healer',
@@ -24,12 +25,12 @@ export enum Trait {
     IndirectFire = 'Indirect Fire',
     Infiltrate = 'Infiltrate',
     InstinctiveBehaviour = 'Instinctive Behaviour',
-    LetTheGalaxyBurn = 'Let the Galaxy Burn',
+    DeathToTheFalseEmperor = 'Let the Galaxy Burn',
     LivingMetal = 'Living Metal',
     MartialKaTah = "Martial Ka'tah",
     Mechanic = 'Mechanic',
     Mechanical = 'Mechanical',
-    MKXGravis = 'MK X Gravis',
+    MkXGravis = 'MK X Gravis',
     Mounted = 'Mounted',
     Overwatch = 'Overwatch',
     Parry = 'Parry',
@@ -48,17 +49,21 @@ export enum Trait {
     TwoManTeam = 'Two-Man Team',
     Unstoppable = 'Unstoppable',
     Vehicle = 'Vehicle',
-    WeaverOfFates = 'Weaver of Fates',
+    WeaverOfFate = 'Weaver of Fates',
 }
 
-const labelToTraitMap: Record<string, Trait> = Object.entries(Trait).reduce(
+const labelToTraitStringMap: Record<string, string> = Object.entries(Trait).reduce(
     (acc, [key, value]) => {
-        acc[value] = Trait[key as keyof typeof Trait];
+        acc[value] = key;
         return acc;
     },
-    {} as Record<string, Trait>
+    {} as Record<string, string>
 );
 
-export function getTraitFromLabel(label: string): Trait | undefined {
-    return labelToTraitMap[label];
+export function getTraitStringFromLabel(label: string): string | undefined {
+    return labelToTraitStringMap[label];
+}
+
+export function getLabelFromTraitString(traitString: string) {
+    return Trait[traitString as keyof typeof Trait];
 }

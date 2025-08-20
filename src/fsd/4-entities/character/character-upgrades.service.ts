@@ -1,6 +1,7 @@
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rank, rankToString } from '@/fsd/5-shared/model';
 
+import { CharactersService } from './characters.service';
 import { rankUpData } from './data';
 import { IRankLookup, IUnitUpgradeRank } from './model';
 
@@ -14,7 +15,9 @@ export class CharacterUpgradesService {
      *          upgrade rank.
      */
     public static getCharacterUpgradeRank(rankLookup: IRankLookup): IUnitUpgradeRank[] {
-        const characterRankUpData = rankUpData[rankLookup.unitName] ?? {};
+        // The goal could have an old character ID (name), let's try to convert it to the snowprint ID.
+        const unitId = CharactersService.canonicalName(rankLookup.unitId);
+        const characterRankUpData = rankUpData[unitId] ?? {};
 
         const ranksRange = this.rankEntries.filter(r => r >= rankLookup.rankStart && r < rankLookup.rankEnd);
         const upgradeRanks: IUnitUpgradeRank[] = [];

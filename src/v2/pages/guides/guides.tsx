@@ -15,6 +15,9 @@ import { useQueryState } from '@/fsd/5-shared/lib';
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
 import { LoaderWithText } from '@/fsd/5-shared/ui';
 
+import { MowsService } from '@/fsd/4-entities/mow';
+import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
+
 import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
 import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
 import { GuideCard } from 'src/v2/features/guides/components/guide-card';
@@ -37,6 +40,13 @@ export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);
     const { userInfo, isAuthenticated } = useAuth();
     const [_, setSearchParams] = useSearchParams();
+
+    const resolvedMows = useMemo(() => {
+        return mows.map(mow => {
+            if ('snowprintId' in mow) return mow;
+            return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
+        }) as IMow2[];
+    }, [mows]);
 
     const isModerator = [UserRole.admin, UserRole.moderator].includes(userInfo.role);
     const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);
@@ -447,7 +457,7 @@ export const Guides: React.FC = () => {
                     <GuideCard
                         key={team.teamId}
                         team={team}
-                        units={[...characters, ...mows]}
+                        units={[...characters, ...resolvedMows]}
                         onView={() => setViewGuide(team)}
                         onShare={() => handleShare(team.teamId)}
                         onViewOriginal={() => handleViewOriginal(team.originalTeamId)}
@@ -498,7 +508,7 @@ export const Guides: React.FC = () => {
                 <>
                     <br />
                     <GuidesFilter
-                        units={[...characters, ...mows]}
+                        units={[...characters, ...resolvedMows]}
                         filter={guidesFilter}
                         applyFilters={handleApplyFilters}
                     />
@@ -520,7 +530,7 @@ export const Guides: React.FC = () => {
             {loading && <LoaderWithText loading={true} />}
             {openCreateTeamDialog && (
                 <CreateGuideDialog
-                    units={[...characters, ...mows]}
+                    units={[...characters, ...resolvedMows]}
                     onClose={() => setOpenCreateTeamDialog(false)}
                     addTeam={createTeam}
                 />
@@ -535,7 +545,7 @@ export const Guides: React.FC = () => {
             {!!viewGuide && (
                 <GuideView
                     team={viewGuide}
-                    units={[...characters, ...mows]}
+                    units={[...characters, ...resolvedMows]}
                     moderate={status => handleTeamModeration(viewGuide!.teamId, status)}
                     onClose={() => setViewGuide(null)}
                     onShare={() => handleShare(viewGuide.teamId)}
@@ -548,7 +558,7 @@ export const Guides: React.FC = () => {
             {!!editGuide && (
                 <EditGuideDialog
                     guide={editGuide}
-                    units={[...characters, ...mows]}
+                    units={[...characters, ...resolvedMows]}
                     saveGuide={updated => updateGuide(editGuide?.teamId, updated)}
                     onClose={() => setEditGuide(null)}
                 />

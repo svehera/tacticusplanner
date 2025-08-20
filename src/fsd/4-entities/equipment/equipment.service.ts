@@ -24,7 +24,7 @@ export class EquipmentService {
             equipment.factions.forEach((faction: string) => {
                 const parsedFaction = parseFaction(faction);
                 if (parsedFaction == undefined) {
-                    console.log("couldn't parse faction: " + faction);
+                    console.error("couldn't parse faction: " + faction);
                 } else {
                     factions.push(parsedFaction!);
                 }

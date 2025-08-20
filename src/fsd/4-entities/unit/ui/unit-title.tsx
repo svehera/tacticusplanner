@@ -44,7 +44,7 @@ export const UnitTitle = ({
     }
 
     if (isMow(character)) {
-        return <MowTitle mow={character} onClick={onClick} fullName={fullName} />;
+        return <MowTitle mow={character} onClick={onClick} />;
     }
 
     return <></>;

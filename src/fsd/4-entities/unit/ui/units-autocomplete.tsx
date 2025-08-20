@@ -1,5 +1,6 @@
 ﻿import { Autocomplete, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import { get } from 'lodash';
+import React, { useMemo, useState } from 'react';
 
 import { IUnit } from '../model';
 
@@ -50,7 +51,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
             const char = options.find(
                 x =>
                     x.name.toLowerCase().includes(value.toLowerCase()) ||
-                    x.fullName.toLowerCase().includes(value.toLowerCase())
+                    ('fullName' in x ? x.fullName.toLowerCase().includes(value.toLowerCase()) : false)
             );
             if (char) {
                 updateValue(char);
@@ -62,6 +63,8 @@ export const UnitsAutocomplete = <T extends IUnit>({
         setOpenAutocomplete(open);
     };
 
+    const getOptionText = (option: IUnit) => ('fullName' in option ? option.fullName : option.name);
+
     return (
         <Autocomplete
             fullWidth
@@ -72,7 +75,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
             open={openAutocomplete}
             onFocus={() => handleAutocompleteChange(true)}
             onBlur={() => handleAutocompleteChange(false)}
-            getOptionLabel={option => option.name}
+            getOptionLabel={option => getOptionText(option)}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderOption={(props, option) => (
                 <UnitTitle

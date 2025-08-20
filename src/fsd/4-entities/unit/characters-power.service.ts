@@ -179,7 +179,7 @@ export class CharactersPowerService {
                     return 1.9;
                 case RarityStars.RedFiveStars:
                     return 2.0;
-                case RarityStars.BlueStar:
+                case RarityStars.OneBlueStar:
                     return 2.1;
 
                 case RarityStars.None:
@@ -208,7 +208,7 @@ export class CharactersPowerService {
                     return 0.45;
                 case RarityStars.RedFiveStars:
                     return 0.5;
-                case RarityStars.BlueStar:
+                case RarityStars.OneBlueStar:
                     return 0.6;
 
                 case RarityStars.None:

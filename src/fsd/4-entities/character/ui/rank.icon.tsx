@@ -14,15 +14,18 @@ export const RankIcon = ({
     size?: number;
     resized?: boolean;
 }) => {
-    if (!rank || rank > Rank.Diamond3) {
+    if (!rank || rank > Rank.Adamantine1) {
         return <span>{Rank[Rank.Locked]}</span>;
     }
 
     const rankTextValue = Rank[rank];
 
-    const image = resized
-        ? getImageUrl(`ranks/resized/${rankTextValue.toLowerCase()}.png`)
-        : getImageUrl(`ranks/${rankTextValue.toLowerCase()}.png`);
+    const image =
+        rank >= Rank.Adamantine1
+            ? getImageUrl('snowprint_assets/ranks/ui_icon_rank_mythical_0' + (rank - Rank.Adamantine1 + 1) + '.png')
+            : resized
+              ? getImageUrl(`ranks/resized/${rankTextValue.toLowerCase()}.png`)
+              : getImageUrl(`ranks/${rankTextValue.toLowerCase()}.png`);
     return (
         <>
             <img

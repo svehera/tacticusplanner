@@ -23,7 +23,7 @@ export const UnitsGrid: React.FC<Props> = ({ units, onUnitClick, selectedUnits }
             return <CharacterPortraitImage icon={'unset.webp'} key={index} />;
         }
 
-        const portraitIcon = isCharacter(unit) ? unit.icon : unit.portraitIcon;
+        const portraitIcon = isCharacter(unit) ? unit.icon : unit.roundIcon;
         const isSelected = selectedUnits.includes(unit.id);
 
         return (
