@@ -13,9 +13,10 @@ export interface IMowLookupInputs {
 
 export interface IMowMaterialsTotal {
     components: number;
+    salvage: number;
     gold: number;
-    badges: Record<Rarity, number>;
-    forgeBadges: Record<Rarity, number>;
+    badges: Map<Rarity, number>;
+    forgeBadges: Map<Rarity, number>;
 }
 
 export interface IMowUpgrade extends IBaseUpgrade {

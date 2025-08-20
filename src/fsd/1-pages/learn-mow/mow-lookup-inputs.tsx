@@ -4,7 +4,7 @@ import { useQueryState } from '@/fsd/5-shared/lib';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input';
 
-import { IMow2 } from '@/fsd/4-entities/mow';
+import { IMow2, IMowStatic2 } from '@/fsd/4-entities/mow';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit';
 
 import { IMowLookupInputs } from './lookup.models';
@@ -56,8 +56,6 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
             secondaryAbilityEnd,
         });
     }, [mow, primaryAbilityStart, primaryAbilityEnd, secondaryAbilityStart, secondaryAbilityEnd]);
-
-    console.trace('MowLookupInputs', mow);
 
     return (
         <div className="flex-box gap20 wrap">

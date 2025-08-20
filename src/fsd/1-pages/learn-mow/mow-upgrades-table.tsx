@@ -49,20 +49,6 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows, upgrades }) => {
             maxWidth: 75,
         },
         {
-            valueGetter: params => {
-                return upgrades[params.data!.id] ?? 0;
-            },
-            headerName: 'Inventory',
-            maxWidth: 90,
-        },
-        {
-            valueGetter: params => {
-                return params.data ? Math.max(params.data.requiredTotal - upgrades[params.data.id], 0) : 0;
-            },
-            headerName: 'Remaining',
-            maxWidth: 90,
-        },
-        {
             field: 'rarity',
             maxWidth: 70,
             cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {

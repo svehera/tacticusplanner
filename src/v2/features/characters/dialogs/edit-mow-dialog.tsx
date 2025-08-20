@@ -17,15 +17,15 @@ import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
 import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
 
-import { IMow } from 'src/v2/features/characters/characters.models';
+import { IMow2 } from 'src/v2/features/characters/characters.models';
 
 interface Props {
-    mow: IMow;
-    saveChanges: (mow: IMow) => void;
+    mow: IMow2;
+    saveChanges: (mow: IMow2) => void;
     isOpen: boolean;
     onClose: () => void;
-    showNextUnit?: (mow: IMow) => void;
-    showPreviousUnit?: (mow: IMow) => void;
+    showNextUnit?: (mow: IMow2) => void;
+    showPreviousUnit?: (mow: IMow2) => void;
     inventory: Record<string, number>;
     inventoryUpdate: (value: Record<string, number>) => void;
 }
@@ -43,15 +43,15 @@ export const EditMowDialog: React.FC<Props> = ({
     const [editedMow, setEditedMow] = useState(() => ({ ...mow }));
 
     const starsEntries = useMemo(() => {
-        const minStars = rarityToStars[editedMow.rarity];
-        const maxStars = rarityToMaxStars[editedMow.rarity];
+        const minStars = rarityToStars[editedMow.rarity as Rarity];
+        const maxStars = rarityToMaxStars[editedMow.rarity as Rarity];
 
         return getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
     }, [editedMow.rarity]);
 
     const rarityEntries: number[] = getEnumValues(Rarity);
 
-    const handleInputChange = (name: keyof IMow, value: boolean | number) => {
+    const handleInputChange = (name: keyof IMow2, value: boolean | number) => {
         setEditedMow(curr => ({
             ...curr,
             [name]: value,
@@ -67,7 +67,7 @@ export const EditMowDialog: React.FC<Props> = ({
                     </IconButton>
                 )}
                 <div className="flex-box gap10">
-                    <UnitShardIcon icon={mow.badgeIcon} />
+                    <UnitShardIcon icon={mow.roundIcon} />
                     <span>{mow.name}</span>
                     <RarityIcon rarity={mow.rarity} />
                     <MiscIcon icon={'mow'} width={22} height={25} />
@@ -138,13 +138,13 @@ export const EditMowDialog: React.FC<Props> = ({
                             </Grid>
                             <Grid item xs={12}>
                                 <MowUpgrades
-                                    mowId={editedMow.id}
+                                    mowId={editedMow.snowprintId}
                                     alliance={editedMow.alliance}
                                     primaryLevel={editedMow.primaryAbilityLevel}
                                     secondaryLevel={editedMow.secondaryAbilityLevel}
                                 />
                                 <MowUpgradesUpdate
-                                    mowId={editedMow.id}
+                                    mowId={editedMow.snowprintId}
                                     inventory={inventory}
                                     currPrimaryLevel={editedMow.primaryAbilityLevel}
                                     currSecondaryLevel={editedMow.secondaryAbilityLevel}

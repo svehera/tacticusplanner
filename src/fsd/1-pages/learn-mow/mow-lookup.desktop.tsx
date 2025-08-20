@@ -8,9 +8,9 @@ import React, { useContext, useMemo, useState } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
-import { DynamicProps } from '@/fsd/5-shared/model';
+import { Alliance } from '@/fsd/5-shared/model';
 
-import { mows2Data, MowsService, IMow, IMow2, IMowDb, IMowStatic, IMowStatic2 } from '@/fsd/4-entities/mow';
+import { mows2Data, MowsService, IMow2 } from '@/fsd/4-entities/mow';
 
 import { IMowLookupInputs } from './lookup.models';
 import { MowLookupInputs } from './mow-lookup-inputs';
@@ -20,8 +20,18 @@ import { MowMaterialsTotal } from './mow-materials-total';
 import { MowUpgradesTable } from './mow-upgrades-table';
 
 export const MowLookup = () => {
-    const { mows, inventory } = useContext(StoreContext);
-    const autocompleteOptions = sortBy(mows, 'name');
+    const { inventory, mows } = useContext(StoreContext);
+
+    const resolvedMows = useMemo(
+        () =>
+            mows.map(mow => {
+                if ('snowprintId' in mow) return mow as IMow2;
+                return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
+            }),
+        [mows]
+    );
+
+    const autocompleteOptions = sortBy(resolvedMows, 'name');
 
     const [inputs, setInputs] = useState<IMowLookupInputs>({
         mow: autocompleteOptions[0],
@@ -31,21 +41,12 @@ export const MowLookup = () => {
         secondaryAbilityEnd: 1,
     });
 
-    const resolvedMows: IMow2[] = mows.map(mow => {
-        let mow2: IMowStatic2 | undefined = mow as IMowStatic2;
-
-        if (mow2 !== undefined) return mow as IMow2;
-
-        const mow1: IMowStatic | undefined = mow as IMowStatic;
-        const db: IMowDb = mow as IMowDb;
-        const props: DynamicProps = mow as DynamicProps;
-        mow2 = mows2Data.mows.find(x => x.snowprintId === mow1.tacticusId);
-        return { ...mow2, ...db, ...props };
-    });
-
     const mowMaterials = useMemo(
-        () => (inputs.mow ? MowsService.getMaterialsList(inputs.mow.id, inputs.mow.name, inputs.mow.alliance) : []),
-        [inputs.mow?.id]
+        () =>
+            inputs.mow
+                ? MowsService.getMaterialsList(inputs.mow.snowprintId, inputs.mow.name, inputs.mow.alliance as Alliance)
+                : [],
+        [inputs.mow]
     );
 
     const maxedTotal = useMemo(() => MowLookupService.getTotals(mowMaterials, 2), [mowMaterials]);
@@ -69,6 +70,8 @@ export const MowLookup = () => {
         ]);
     }, [primaryAbility, secondaryAbility]);
 
+    console.log('MowLookup', inputs, mowMaterials, customTotal, customUpgrades);
+
     return (
         <>
             <MowLookupInputs mows={autocompleteOptions} inputs={inputs} inputsChange={setInputs} />
@@ -79,7 +82,7 @@ export const MowLookup = () => {
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <MowMaterialsTotal
                                 label="Upgrades Needed for Selected Levels:"
-                                mowAlliance={inputs.mow.alliance}
+                                mowAlliance={inputs.mow.alliance as Alliance}
                                 total={customTotal}
                             />
                         </AccordionSummary>
@@ -92,7 +95,7 @@ export const MowLookup = () => {
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <MowMaterialsTotal
                                 label="Complete Upgrade Table:"
-                                mowAlliance={inputs.mow.alliance}
+                                mowAlliance={inputs.mow.alliance as Alliance}
                                 total={maxedTotal}
                             />
                         </AccordionSummary>

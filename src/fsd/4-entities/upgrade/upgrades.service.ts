@@ -280,6 +280,7 @@ export class UpgradesService {
         const result: IBaseUpgradeData = {};
         const upgrades = Object.keys(recipeDataByName);
         const upgradeLocationsShort = CampaignsService.getUpgradesLocations();
+        console.log('composed campaigns has key ', 'upgHpU018C', 'upgHpU018C' in upgradeLocationsShort);
 
         for (const upgradeName of upgrades) {
             const upgrade = recipeDataByName[upgradeName];
@@ -335,7 +336,7 @@ export class UpgradesService {
             const recipeDetails = upgrade.recipe?.map(item => this.getRecipe(item)) ?? [];
 
             result[upgradeName] = {
-                id,
+                id: upgrade.snowprintId,
                 snowprintId: upgrade.snowprintId,
                 label: upgrade.label ?? id,
                 rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],

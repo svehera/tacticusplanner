@@ -50,7 +50,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
             const char = options.find(
                 x =>
                     x.name.toLowerCase().includes(value.toLowerCase()) ||
-                    x.fullName.toLowerCase().includes(value.toLowerCase())
+                    ('fullName' in x ? x.fullName.toLowerCase().includes(value.toLowerCase()) : false)
             );
             if (char) {
                 updateValue(char);
