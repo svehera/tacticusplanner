@@ -72,6 +72,7 @@ export interface ICampaignBattle {
     campaign: Campaign | string;
     campaignType: CampaignType | string;
     nodeNumber: number;
+    energyCost: number;
     rewards: IRewards;
     slots?: number;
     enemiesAlliances?: string[];

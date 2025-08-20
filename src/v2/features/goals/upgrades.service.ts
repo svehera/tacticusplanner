@@ -533,6 +533,9 @@ export class UpgradesService {
                     location.isPassFilter &&
                     (!isCampaignEventLocation || isCampaignEventLocationAvailable);
             }
+            if (combinedUpgrade.label.indexOf('Attack') != -1) {
+                combinedUpgrade.locations.forEach(x => console.log('location', x));
+            }
             const minEnergy = Math.min(
                 ...combinedUpgrade.locations.filter(x => x.isSuggested).map(x => x.energyPerItem)
             );

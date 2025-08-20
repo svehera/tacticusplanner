@@ -111,17 +111,17 @@ export class CampaignsService {
             }
             dropRate = dropRate.toFixed(3) === 'NaN' ? 0 : parseFloat(dropRate.toFixed(3));
 
-            const energyPerItem = parseFloat((1 / (dropRate / config.energyCost)).toFixed(2));
+            const energyPerItem = parseFloat((1 / (dropRate / battle.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
-            const energyPerDay = config.dailyBattleCount * config.energyCost;
+            const energyPerDay = config.dailyBattleCount * battle.energyCost;
             const itemsPerDay = energyPerDay / energyPerItem;
 
             result[battleDataKey] = {
                 id: battle.campaign + battle.nodeNumber,
                 campaign: battle.campaign as Campaign,
                 campaignType: battle.campaignType as CampaignType,
-                energyCost: config.energyCost,
+                energyCost: battle.energyCost,
                 dailyBattleCount: config.dailyBattleCount,
                 dropRate,
                 energyPerItem,
@@ -219,6 +219,7 @@ export class CampaignsService {
 
         if (campaignTypes.length) {
             if (!campaignTypes.includes(location.campaignType)) {
+                console.log("doesn't pass campaignTypes filter", campaignTypes, location.campaign);
                 return false;
             }
         }
