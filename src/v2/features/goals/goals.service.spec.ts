@@ -19,8 +19,9 @@ describe('Goal service', () => {
         it('should convert to Upgrade rank object', () => {
             const characterMock: ICharacter2 = {
                 unitType: UnitType.character,
-                id: 'Character',
-                name: 'Character name',
+                id: 'spaceBlackmane',
+                name: 'Ragnar Blackmane',
+                shortName: 'Ragnar',
                 alliance: Alliance.Imperial,
                 icon: 'path',
                 rank: Rank.Bronze1,
@@ -32,7 +33,7 @@ describe('Goal service', () => {
 
             const goalMock: IPersonalGoal = {
                 id: '124124',
-                character: 'Character',
+                character: 'spaceBlackmane',
                 type: PersonalGoalType.UpgradeRank,
                 priority: 1,
                 dailyRaids: false,
@@ -47,7 +48,7 @@ describe('Goal service', () => {
                 include: goalMock.dailyRaids,
                 unitId: characterMock.id,
                 unitAlliance: characterMock.alliance,
-                unitName: characterMock.name,
+                unitName: characterMock.shortName,
                 unitIcon: characterMock.icon,
                 unitRoundIcon: characterMock.roundIcon,
                 notes: goalMock.notes!,
@@ -70,8 +71,9 @@ describe('Goal service', () => {
         it('should convert to Unlock object', () => {
             const characterMock: ICharacter2 = {
                 unitType: UnitType.character,
-                id: 'Character',
-                name: 'Character name',
+                id: 'spaceBlackmane',
+                name: 'Ragnar Blackmane',
+                shortName: 'Ragnar',
                 alliance: Alliance.Chaos,
                 faction: Faction.Thousand_Sons,
                 icon: 'path',
@@ -95,7 +97,7 @@ describe('Goal service', () => {
                 include: goalMock.dailyRaids,
                 unitId: characterMock.id,
                 unitAlliance: characterMock.alliance,
-                unitName: characterMock.name,
+                unitName: characterMock.shortName,
                 unitIcon: characterMock.icon,
                 unitRoundIcon: characterMock.roundIcon,
                 faction: characterMock.faction,
