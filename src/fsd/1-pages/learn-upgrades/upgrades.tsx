@@ -11,7 +11,7 @@ import { MiscIcon, UnitShardIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignsService, CampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 import { CharactersService, RankIcon, rankUpData } from '@/fsd/4-entities/character';
-import { UpgradesService, UpgradeImage, IBaseUpgrade } from '@/fsd/4-entities/upgrade';
+import { UpgradesService, UpgradeImage, IBaseUpgrade, IMaterial } from '@/fsd/4-entities/upgrade';
 
 type Selection = 'Craftable' | 'Base Upgrades';
 
@@ -50,8 +50,8 @@ export const Upgrades = () => {
             hide: !showCharacters,
             cellRenderer: (params: ICellRendererParams<IUpgradesTableRow>) => {
                 const characters = params.data?.characters;
+                console.debug(params.data);
                 if (characters) {
-                    console.debug({ characters });
                     return characters.map(x => (
                         <div key={x.id} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             <Tooltip title={x.id}>
@@ -184,6 +184,32 @@ export const Upgrades = () => {
         }
     }, [selection, showCharacters]);
 
+    /**
+     * @returns If the material is a craftable upgrade, returns all the unique
+     * materials needed to craft it. Otherwise just returns the material.
+     */
+    const expandMaterial = (material: string): string[] => {
+        const upgrade = UpgradesService.getUpgradeMaterial(material);
+        if (!upgrade) return [material];
+        const queue: IMaterial[] = [upgrade];
+        const seen = new Set<string>();
+        while (queue.length > 0) {
+            const current = queue.shift();
+            if (!current) continue;
+            if (seen.has(current.snowprintId)) continue;
+            seen.add(current.snowprintId);
+            if (current.recipe) {
+                for (const item of current.recipe) {
+                    const material = UpgradesService.getUpgradeMaterial(item.material);
+                    if (material && !seen.has(material.snowprintId)) {
+                        queue.push(material);
+                    }
+                }
+            }
+        }
+        return Array.from(seen.keys());
+    };
+
     const rowsData = useMemo(() => {
         const upgradesLocations = CampaignsService.getUpgradesLocations();
         const upgrades = Object.values(UpgradesService.recipeDataByName);
@@ -200,11 +226,16 @@ export const Upgrades = () => {
 
                 for (const character in rankUpData) {
                     const ranks = rankUpData[character];
+                    if (ranks === undefined) continue;
 
                     for (const rank in ranks) {
                         const upgrades = ranks[rank];
-                        if (upgrades.includes(x.snowprintId)) {
-                            const charData = CharactersService.charactersData.find(x => x.name === character);
+                        const allMats = Object.values(upgrades)
+                            .filter(x => x !== undefined)
+                            .flat()
+                            .flatMap(x => expandMaterial(x));
+                        if (allMats.includes(x.snowprintId)) {
+                            const charData = CharactersService.charactersData.find(x => x.snowprintId! === character);
                             const existingChar = characters.find(x => x.id === character);
                             if (existingChar) {
                                 existingChar.ranks.push(stringToRank(rank));
@@ -218,6 +249,9 @@ export const Upgrades = () => {
                             }
                         }
                     }
+                }
+                if (x.snowprintId === 'upgArmC001') {
+                    console.log(characters);
                 }
 
                 const locations = upgradesLocations[x.snowprintId]?.map(

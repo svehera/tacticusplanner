@@ -70,7 +70,9 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                     );
                     if (campaignShortId) {
                         for (const battle of completedBattles) {
-                            const campaignKey = campaignShortId + (battle.battleIndex + 1);
+                            // The dataminer emits battle IDs always with two digits so they're sorted in the
+                            // resulting JSON.
+                            const campaignKey = campaignShortId + String(battle.battleIndex + 1).padStart(2, '0');
                             const campaignComposed = CampaignsService.campaignsComposed[campaignKey];
 
                             if (campaignComposed) {

@@ -101,7 +101,6 @@ export class CampaignsService {
                 if (guaranteed) dropRate = 1;
                 if (potential) {
                     dropRate += potential.chance_numerator / potential.chance_denominator;
-                    console.log('dropRate', dropRate, potential);
                 }
             } else {
                 const dropRateKey: keyof IDropRate = Rarity[
