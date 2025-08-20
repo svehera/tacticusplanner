@@ -10,7 +10,7 @@ import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 export class TacticusIntegrationService {
     static convertProgressionIndex(progressionIndex: number): [Rarity, RarityStars] {
-        if (progressionIndex < 0 || progressionIndex > 15) {
+        if (progressionIndex < 0 || progressionIndex > 18) {
             throw new Error('Invalid progression index');
         }
 
