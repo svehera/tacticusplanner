@@ -21,7 +21,7 @@ export type MowsAction =
           units: TacticusUnit[];
           shards: TacticusShard[];
       }
-    | SetStateAction<IMow[]>;
+    | SetStateAction<Array<IMow | IMow2>>;
 
 export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
     switch (action.type) {

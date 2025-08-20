@@ -50,7 +50,7 @@ export const GuildInsights = () => {
     const resolvedAverageMows = unresolvedAverageMows.map(mow => {
         if ('snowprintId' in mow) return mow;
         return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
-    });
+    }) as IMow2[];
 
     const charactersFiltered = CharactersService.filterUnits(
         [...averageCharacters, ...resolvedAverageMows],

@@ -28,7 +28,7 @@ export const Teams = () => {
     const resolvedMows = mows.map(mow => {
         if ('snowprintId' in mow) return mow as IMow2;
         return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow };
-    });
+    }) as IMow2[];
 
     const addTeam = (team: IPersonalTeam) => {
         dispatch.teams({ type: 'Add', team });
