@@ -1,0 +1,3 @@
+# Ensure Github Workflow YAML files use LF, not CRLF, to avoid lint errors
+.github/workflows/*.yml text eol=lf
+.github/workflows/*.yaml text eol=lf
