@@ -84,7 +84,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (goal) {
             goal.dailyRaids = [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(goal.type);
             dispatch.goals({ type: 'Add', goal });
-            enqueueSnackbar(`Goal for ${goal.character} is added`, { variant: 'success' });
+            const character = characters.find(c => c.snowprintId === goal.character);
+            enqueueSnackbar(`Goal for ${character?.shortName ?? goal.character} is added`, { variant: 'success' });
         }
         setOpenDialog(false);
         setUnit(null);
