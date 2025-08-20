@@ -9,6 +9,8 @@ import { useDebounceValue } from 'usehooks-ts';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { AddTeamDialog } from 'src/v2/features/teams/components/add-team.dialog';
 import { EditTeamDialog } from 'src/v2/features/teams/components/edit-team.dialog';
@@ -22,6 +24,11 @@ export const Teams = () => {
     const [quickFilter, setQuickFilter] = useDebounceValue('', 300);
     const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);
     const [editTeam, setEditTeam] = React.useState<IPersonalTeam | null>(null);
+
+    const resolvedMows = mows.map(mow => {
+        if ('snowprintId' in mow) return mow as IMow2;
+        return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow };
+    });
 
     const addTeam = (team: IPersonalTeam) => {
         dispatch.teams({ type: 'Add', team });
@@ -90,7 +97,7 @@ export const Teams = () => {
                 <TeamsGrid
                     teams={filteredTeams}
                     characters={characters}
-                    mows={mows}
+                    mows={resolvedMows}
                     editTeam={setEditTeam}
                     deleteTeam={deleteTeam}
                 />
@@ -99,7 +106,7 @@ export const Teams = () => {
                     <AddTeamDialog
                         onClose={() => setOpenCreateTeamDialog(false)}
                         characters={characters}
-                        mows={mows}
+                        mows={resolvedMows}
                         addTeam={addTeam}
                     />
                 )}
@@ -109,7 +116,7 @@ export const Teams = () => {
                         team={editTeam}
                         onClose={() => setEditTeam(null)}
                         characters={characters}
-                        mows={mows}
+                        mows={resolvedMows}
                         saveTeam={updateTeam}
                     />
                 )}

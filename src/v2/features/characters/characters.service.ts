@@ -7,7 +7,7 @@ import factionsData from 'src/v2/data/factions.json';
 import { Rank, Rarity, UnitType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow } from '@/fsd/4-entities/mow';
+import { IMow, IMow2 } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow, isUnlocked } from '@/fsd/4-entities/unit/units.functions';
 import { IMaterialFull, UpgradesService } from '@/fsd/4-entities/upgrade';
@@ -200,7 +200,7 @@ export class CharactersService {
         };
     }
 
-    static capMowAtRarity(mow: IMow, rarity: Rarity): IMow {
+    static capMowAtRarity(mow: IMow2, rarity: Rarity): IMow2 {
         const capped = rarityCaps[rarity];
 
         return {

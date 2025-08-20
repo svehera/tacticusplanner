@@ -14,7 +14,7 @@ import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
-import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
+import { IMow2, IUnit } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { TeamView } from 'src/v2/features/teams/components/team-view';
@@ -22,9 +22,9 @@ import { TeamView } from 'src/v2/features/teams/components/team-view';
 type Props = {
     units: IUnit[];
     team: ICharacter2[];
-    activeMow: IMow | null;
+    activeMow: IMow2 | null;
     rarityCap: Rarity;
-    onClose: (team: ICharacter2[], mow: IMow | null) => void;
+    onClose: (team: ICharacter2[], mow: IMow2 | null) => void;
 };
 
 type OrderBy = 'rank' | 'faction' | 'power';

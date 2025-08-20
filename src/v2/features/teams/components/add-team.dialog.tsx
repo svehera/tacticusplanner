@@ -13,7 +13,7 @@ import { Rarity } from '@/fsd/5-shared/model';
 import { RaritySelect } from '@/fsd/5-shared/ui';
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
-import { IMow } from 'src/v2/features/characters/characters.models';
+import { IMow2 } from 'src/v2/features/characters/characters.models';
 import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';
 import { TeamView } from 'src/v2/features/teams/components/team-view';
 import {
@@ -30,7 +30,7 @@ interface Props {
     onClose: () => void;
     addTeam: (team: IPersonalTeam) => void;
     characters: ICharacter2[];
-    mows: IMow[];
+    mows: IMow2[];
 }
 
 export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addTeam }) => {
@@ -40,12 +40,12 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
     const [teamName, setTeamName] = useState<string>('Team');
     const [rarityCap, setRarityCap] = useState(Rarity.Legendary);
     const [team, setTeam] = useState<ICharacter2[]>([]);
-    const [mow, setMow] = useState<IMow | null>(null);
+    const [mow, setMow] = useState<IMow2 | null>(null);
 
     const [isOpenSelectDialog, setIsOpenSelectDialog] = useState<boolean>(false);
 
     const openSelectDialog = () => setIsOpenSelectDialog(true);
-    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow | null) => {
+    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | null) => {
         setTeam(selectedTeam);
         setMow(mow);
         setIsOpenSelectDialog(false);
