@@ -33,9 +33,13 @@ export class GoalsService {
     } {
         const allGoals = goals
             .map(g => {
-                console.log('Preparing goal', g);
                 const resolvedChar = CharactersService.resolveCharacter(g.character);
-                const relatedCharacter = characters.find(x => x.snowprintId === resolvedChar.snowprintId);
+                const resolvedMow = MowsService.resolveToStatic(g.character);
+                const relatedCharacter = characters.find(
+                    x =>
+                        x.snowprintId === (resolvedChar?.snowprintId ?? '') ||
+                        x.snowprintId === (resolvedMow?.snowprintId ?? '')
+                );
                 if (
                     ![
                         PersonalGoalType.UpgradeRank,
@@ -46,6 +50,7 @@ export class GoalsService {
                     ].includes(g.type) ||
                     !relatedCharacter
                 ) {
+                    console.warn('Goal not applicable for character or mow:', g);
                     return null;
                 }
                 return this.convertToTypedGoal(g, relatedCharacter);
@@ -83,7 +88,7 @@ export class GoalsService {
                 priority: g.priority,
                 goalId: g.id,
                 include: g.dailyRaids,
-                unitId: unit.id,
+                unitId: unit.snowprintId!,
                 unitName: unit.name,
                 unitIcon: unit.icon,
                 unitRoundIcon: unit.roundIcon,

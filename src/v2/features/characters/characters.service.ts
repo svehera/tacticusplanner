@@ -180,7 +180,6 @@ export class CharactersService {
 
     static capCharacterAtRarity(character: ICharacter2, rarity: Rarity): ICharacter2 {
         const capped = rarityCaps[rarity];
-        console.log('character', character, capped);
         return {
             ...character,
             rarity: Math.min(character.rarity, capped.rarity),

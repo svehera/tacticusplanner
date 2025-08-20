@@ -37,8 +37,7 @@ export class UpgradesService {
     private static createMaterialByLabelLookup(): Record<string, string> {
         const result: Record<string, string> = {};
 
-        Object.entries(this.recipeExpandedUpgradeData).forEach(data => {
-            const [_, upgradeData] = data;
+        Object.entries(this.recipeExpandedUpgradeData).forEach(([, upgradeData]) => {
             result[upgradeData.label] = upgradeData.id;
             result[upgradeData.id] = upgradeData.id;
         });
@@ -116,7 +115,7 @@ export class UpgradesService {
                 const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(material.snowprintId, result);
                 if (!expandedRecipe) {
                     if (passes >= kNumExpectedPasses) {
-                        console.log(
+                        console.error(
                             passes + ": still haven't expanded base ingredient: '" + material.snowprintId + "'"
                         );
                     }
@@ -126,7 +125,7 @@ export class UpgradesService {
                 result[material.snowprintId] = expandedRecipe;
             });
             if (passes > 10) {
-                console.log('Infinite loop in expandRecipeData');
+                console.error('Infinite loop in expandRecipeData');
                 break;
             }
         }
@@ -280,7 +279,6 @@ export class UpgradesService {
         const result: IBaseUpgradeData = {};
         const upgrades = Object.keys(recipeDataByName);
         const upgradeLocationsShort = CampaignsService.getUpgradesLocations();
-        console.log('composed campaigns has key ', 'upgHpU018C', 'upgHpU018C' in upgradeLocationsShort);
 
         for (const upgradeName of upgrades) {
             const upgrade = recipeDataByName[upgradeName];

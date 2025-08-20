@@ -59,7 +59,6 @@ export class MowsService {
     public static resolveId(id: string): string {
         const mow = mows2Data.mows.find(x => x.snowprintId === id);
         if (mow) return mow.snowprintId;
-        console.error('Mow not found for ID:', id);
         return id;
     }
 
@@ -92,7 +91,7 @@ export class MowsService {
     ): Array<string> {
         const mow = this.resolveToStatic(mowId);
         if (mow === undefined) {
-            console.error('Mow not found for ID:', mowId);
+            console.trace('Mow not found for ID:', mowId);
             return [];
         }
         const upgrades = key === 'primary' ? mow.primaryAbility : mow.secondaryAbility;

@@ -30,9 +30,16 @@ import { CampaignsProgressionService } from './campaign-progression.service';
 export const CampaignProgression = () => {
     const { goals, characters, mows, campaignsProgress } = useContext(StoreContext);
 
+    const resolvedMows = useMemo(() => {
+        return mows.map(mow => {
+            if ('snowprintId' in mow) return mow;
+            return { ...mow, snowprintId: mow.tacticusId };
+        });
+    }, [mows]);
+
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, [...characters, ...mows], false);
-    }, [goals, characters, mows]);
+        return GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false);
+    }, [goals, characters, resolvedMows]);
 
     const progression = useMemo(() => {
         const allGoals: Array<

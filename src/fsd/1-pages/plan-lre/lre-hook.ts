@@ -51,7 +51,6 @@ export const useLre = () => {
         const lreChar = CharactersService.getLreCharacter(legendaryEventId);
         if (lreChar) {
             const relatedLre = LegendaryEventService.getEventByCharacterSnowprintId(lreChar!.snowprintId!);
-            console.trace('relatedLre', relatedLre);
             const nextDate = relatedLre?.nextEventDate ?? 'TBA';
             setHeaderTitle(
                 !relatedLre || relatedLre.finished

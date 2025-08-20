@@ -10,6 +10,7 @@ import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fs
 
 import { CharacterBias, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeRankGoal, ICharacterUpgradeMow, PersonalGoalType } from '@/fsd/4-entities/goal';
+import { IMow2 } from '@/fsd/4-entities/mow';
 
 import { ILreTileSettings } from '@/fsd/3-features/view-settings';
 // eslint-disable-next-line import-x/no-internal-modules
@@ -24,13 +25,20 @@ interface Props {
 export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => {} }) => {
     const { goals, characters, mows, viewPreferences } = useContext(StoreContext);
 
+    const resolvedMows = useMemo(() => {
+        return mows.map(mow => {
+            if ('snowprintId' in mow) return mow as IMow2;
+            return { ...mow, snowprintId: mow.tacticusId } as IMow2;
+        });
+    }, [mows]);
+
     // We use the current goals of the tactician, as well as the current state
     // of the character, to determine which rank to show. We also take into
     // account if the tactician has enabled goal previews.
     const rank = useMemo(() => {
         // If we don't have goal previews enabled, return the character's current rank.
         if (!viewPreferences.lreGoalsPreview) return character.rank;
-        const { upgradeRankOrMowGoals } = GoalsService.prepareGoals(goals, characters, false);
+        const { upgradeRankOrMowGoals } = GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false);
         // We allow partial goals (Based on upgrade-material rarity), so figure
         // out the maximum rank for each rarity of upgrade material.
         let maxCommonRank: Rank = character.rank;
@@ -79,7 +87,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             Math.min(maxCommonRank, maxUncommonRank, maxRareRank, maxEpicRank, maxLegendaryRank)
         );
         return ret;
-    }, [goals, characters, mows, viewPreferences, character]);
+    }, [goals, characters, resolvedMows, viewPreferences, character]);
 
     // Determine the rarity icon to display based on the goal rank and current
     // character rank.
@@ -93,7 +101,6 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
     }, [rank]);
 
     const rarity = useMemo(() => {
-        // if (!character || !character.rarity) console.trace('Character has undefined rarity', character);
         return Math.max(character.rarity, rarityFromRank);
     }, [character]);
 

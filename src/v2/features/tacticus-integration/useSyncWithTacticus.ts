@@ -9,7 +9,6 @@ import { useLoader } from '@/fsd/5-shared/ui';
 export const useSyncWithTacticus = () => {
     const dispatch = useContext(DispatchContext);
     const loader = useLoader();
-    console.log('useSyncWithTacticus hook initialized');
     async function syncWithTacticus(syncOptions: string[]) {
         dispatch.viewPreferences({ type: 'Update', setting: 'apiIntegrationSyncOptions', value: syncOptions });
         try {

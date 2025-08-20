@@ -14,13 +14,6 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
 
     const imageUrl = getImageUrl(imagePath);
 
-    // Debug logging for image loading
-    console.log('🖼️ CharacterPortraitImage loading:', {
-        icon: props.icon,
-        imagePath: imagePath,
-        resolvedUrl: imageUrl,
-    });
-
     return (
         <img
             {...props}
@@ -39,9 +32,7 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
                     error: e,
                 });
             }}
-            onLoad={() => {
-                console.log('✅ Successfully loaded image:', props.icon);
-            }}
+            onLoad={() => {}}
         />
     );
 });

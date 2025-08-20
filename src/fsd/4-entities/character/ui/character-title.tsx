@@ -40,7 +40,7 @@ export const CharacterTitle = ({
 
     return (
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
-            <UnitShardIcon key={character.name} icon={character.roundIcon} name={character.name} height={imageSize} />
+            <UnitShardIcon key={character.name} icon={character.icon} name={character.name} height={imageSize} />
             {!hideName && <span>{name}</span>}
             <RarityIcon rarity={character.rarity} />
             {isUnlocked ? <RankIcon key={character.rank} rank={character.rank} /> : undefined}

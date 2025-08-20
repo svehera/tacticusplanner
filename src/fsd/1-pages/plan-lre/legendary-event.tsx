@@ -47,7 +47,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
             const name = CharactersService.resolveCharacter(id)?.snowprintId ?? id;
             const character = resolvedCharacters.find(x => x.snowprintId === name);
             if (!character) {
-                console.log('unknown character', name, id, character);
+                console.warn('unknown character', name, id, character);
             }
 
             return { ...character, teamId: team.id };

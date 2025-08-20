@@ -9,6 +9,8 @@ import { TodayRaids } from 'src/routes/tables/todayRaids';
 
 import { useAuth } from '@/fsd/5-shared/model';
 
+import { IMow2 } from '@/fsd/4-entities/mow';
+
 import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { ActiveGoalsDialog } from 'src/v2/features/goals/active-goals-dialog';
@@ -40,9 +42,16 @@ export const DailyRaids = () => {
         inventory,
     } = useContext(StoreContext);
 
+    const resolvedMows = useMemo(() => {
+        return storeMows.map(mow => {
+            if ('snowprintId' in mow) return mow as IMow2;
+            return { ...mow, snowprintId: mow.tacticusId } as IMow2;
+        });
+    }, [storeMows]);
+
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
     const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);
-    const [units, setUnits] = React.useState<IUnit[]>([...storeCharacters, ...storeMows]);
+    const [units, setUnits] = React.useState<IUnit[]>([...storeCharacters, ...resolvedMows]);
     const [raidedLocations, setRaidedLocations] = React.useState<IItemRaidLocation[]>(dailyRaids.raidedLocations);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {

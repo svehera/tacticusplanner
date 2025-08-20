@@ -70,8 +70,6 @@ export const MowLookup = () => {
         ]);
     }, [primaryAbility, secondaryAbility]);
 
-    console.log('MowLookup', inputs, mowMaterials, customTotal, customUpgrades);
-
     return (
         <>
             <MowLookupInputs mows={autocompleteOptions} inputs={inputs} inputsChange={setInputs} />

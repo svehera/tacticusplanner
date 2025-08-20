@@ -397,8 +397,6 @@ export class UpgradesService {
     ): ICharacterUpgradeEstimate {
         const { id, snowprintId, label, rarity, iconPath, locations, relatedCharacters, relatedGoals } = upgrade;
 
-        // console.trace('upgrade', upgrade, requiredCount, acquiredCount);
-
         const selectedLocations = locations.filter(x => x.isSuggested);
 
         const leftCount = Math.max(requiredCount - acquiredCount, 0);

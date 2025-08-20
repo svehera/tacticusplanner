@@ -161,9 +161,6 @@ export class CharactersService {
         const ret = CharactersService.charactersData.find(
             x => x.snowprintId! == CharactersService.canonicalName(identifier)
         );
-        if (ret === undefined) {
-            console.trace(`Character not found for identifier: ${identifier}`);
-        }
         return ret!;
     }
 

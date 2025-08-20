@@ -33,6 +33,8 @@ import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
+import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { UnitTitle } from '@/fsd/4-entities/unit/ui/unit-title';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
@@ -58,6 +60,16 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
     const { characters, mows, goals, campaignsProgress } = useContext(StoreContext);
+
+    const resolvedMows = useMemo(
+        () =>
+            mows.map(mow => {
+                if ('snowprintId' in mow) return mow as IMow2;
+                return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
+            }),
+        [mows]
+    );
+
     const dispatch = useContext(DispatchContext);
 
     const [openDialog, setOpenDialog] = React.useState(false);
@@ -113,7 +125,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 return characters.filter(x => x.rank === Rank.Locked);
             }
             case PersonalGoalType.MowAbilities: {
-                return ignoreRankRarity ? mows : mows.filter(x => x.unlocked);
+                return ignoreRankRarity ? resolvedMows : resolvedMows.filter(x => x.unlocked);
             }
             default: {
                 return characters;
@@ -404,7 +416,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => handleClose()}>Cancel</Button>
-                    <Button disabled={isDisabled()} onClick={() => handleClose({ ...form, character: unit?.id ?? '' })}>
+                    <Button
+                        disabled={isDisabled()}
+                        onClick={() => handleClose({ ...form, character: unit?.snowprintId ?? '' })}>
                         Set
                     </Button>
                 </DialogActions>
