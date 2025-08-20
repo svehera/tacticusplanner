@@ -189,25 +189,9 @@ export const Upgrades = () => {
      * materials needed to craft it. Otherwise just returns the material.
      */
     const expandMaterial = (material: string): string[] => {
-        const upgrade = UpgradesService.getUpgradeMaterial(material);
+        const upgrade = UpgradesService.recipeExpandedUpgradeData[material];
         if (!upgrade) return [material];
-        const queue: IMaterial[] = [upgrade];
-        const seen = new Set<string>();
-        while (queue.length > 0) {
-            const current = queue.shift();
-            if (!current) continue;
-            if (seen.has(current.snowprintId)) continue;
-            seen.add(current.snowprintId);
-            if (current.recipe) {
-                for (const item of current.recipe) {
-                    const material = UpgradesService.getUpgradeMaterial(item.material);
-                    if (material && !seen.has(material.snowprintId)) {
-                        queue.push(material);
-                    }
-                }
-            }
-        }
-        return Array.from(seen.keys());
+        return Object.keys(upgrade.expandedRecipe);
     };
 
     const rowsData = useMemo(() => {
@@ -249,9 +233,6 @@ export const Upgrades = () => {
                             }
                         }
                     }
-                }
-                if (x.snowprintId === 'upgArmC001') {
-                    console.log(characters);
                 }
 
                 const locations = upgradesLocations[x.snowprintId]?.map(
