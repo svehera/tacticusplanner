@@ -10,7 +10,7 @@ import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fs
 
 import { CharacterBias, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeRankGoal, ICharacterUpgradeMow, PersonalGoalType } from '@/fsd/4-entities/goal';
-import { IMow2 } from '@/fsd/4-entities/mow';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
 import { ILreTileSettings } from '@/fsd/3-features/view-settings';
 // eslint-disable-next-line import-x/no-internal-modules
@@ -28,7 +28,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
     const resolvedMows = useMemo(() => {
         return mows.map(mow => {
             if ('snowprintId' in mow) return mow as IMow2;
-            return { ...mow, snowprintId: mow.tacticusId } as IMow2;
+            return { ...mow, ...MowsService.resolveToStatic(mow.tacticusId) } as IMow2;
         });
     }, [mows]);
 
