@@ -123,7 +123,7 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     points: 65,
                     units: filter(noImperials).byAttackType('rangeOnly'),
                     selected: true,
-                    iconId: 'melee',
+                    iconId: 'ranged',
                 },
                 {
                     name: 'Min 3 hits',
