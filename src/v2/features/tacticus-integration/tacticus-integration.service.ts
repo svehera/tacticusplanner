@@ -14,7 +14,7 @@ export class TacticusIntegrationService {
             throw new Error('Invalid progression index');
         }
 
-        const rarityThresholds = [0, 3, 6, 9, 12, 15];
+        const rarityThresholds = [0, 3, 6, 9, 12, 16];
         let rarity: Rarity = Rarity.Common;
 
         for (let i = rarityThresholds.length - 1; i >= 0; i--) {
