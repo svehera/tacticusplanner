@@ -52,7 +52,7 @@ const energyMarks = [
     },
     {
         value: 288 + 30,
-        label: 'Daily Mission',
+        label: 'Daily',
     },
     {
         value: 288 + 30 + 60,
