@@ -175,7 +175,7 @@ export const GuildWarOffense = () => {
                             </Conditional>
                         </>
                     }
-                    onEdit={() => () => startEditTeam(currTeam)}
+                    onEdit={() => startEditTeam(currTeam)}
                     teamPotential={teamsPotential[i].total}
                     onCharacterClick={startEditCharacter}
                     teamPotentialBreakdown={

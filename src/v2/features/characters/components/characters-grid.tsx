@@ -27,7 +27,7 @@ const CharactersGridFn = ({
     onlyBlocked?: boolean;
 }) => {
     const unlockedCharacters = characters
-        .filter(unit => isUnlocked(unit) && !blockedCharacters.includes(unit.id))
+        .filter(unit => isUnlocked(unit) && !blockedCharacters.includes(unit.name))
         .map(unit => {
             if (unit.unitType === UnitType.character) {
                 return <CharacterTile key={unit.id} character={unit} onCharacterClick={onAvailableCharacterClick} />;

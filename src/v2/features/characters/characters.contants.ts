@@ -7,7 +7,7 @@ import { IRarityCap } from 'src/v2/features/characters/characters.models';
 export const unsetCharacter: Partial<ICharacter2> = {
     unitType: UnitType.character,
     name: '',
-    icon: 'unset.webp',
+    icon: 'portraits/unset.webp',
     rank: Rank.Stone1,
     upgrades: [],
     stars: RarityStars.None,

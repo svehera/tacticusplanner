@@ -24,7 +24,7 @@ export const EmptyTile: React.FC<Props> = ({ onClick, isMow = false }) => {
             onClick={onClick ? () => onClick!() : undefined}>
             <StarsIcon stars={RarityStars.None} />
             <div>
-                <CharacterPortraitImage icon={'unset.webp'} />
+                <CharacterPortraitImage icon={'portraits/unset.webp'} />
 
                 <div className="abilities" style={{ visibility: 'hidden' }}>
                     <div className="ability-level">1</div>

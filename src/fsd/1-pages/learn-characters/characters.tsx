@@ -22,7 +22,7 @@ import React, { ChangeEvent, useCallback, useContext, useMemo, useRef, useState 
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { useQueryState, getEnumValues } from '@/fsd/5-shared/lib';
-import { Rarity, Alliance, DamageType, Trait, Rank } from '@/fsd/5-shared/model';
+import { Rarity, Alliance, DamageType, Trait, Rank, getTraitStringFromLabel } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
 import { CharactersService, ICharacter2, RankSelect } from '@/fsd/4-entities/character';
@@ -244,14 +244,20 @@ export const LearnCharacters = () => {
                 if (!traitsFilter.length) {
                     return true;
                 }
-                return traitsFilter.every(type => {
-                    if (type !== Trait.Mechanical) {
-                        return node.data?.traits.includes(type);
+
+                const nodeTraits = (node.data?.traits ?? []) as unknown as string[]; // stored as enum keys
+                return traitsFilter.every(label => {
+                    const key = getTraitStringFromLabel(label);
+                    if (!key) return false;
+                    if (key !== 'Mechanical') {
+                        const includes = nodeTraits.includes(key);
+                        return includes;
                     } else {
-                        return (
-                            node.data?.traits.includes(Trait.Mechanical) ||
-                            node.data?.traits.includes(Trait.LivingMetal)
-                        );
+                        const includesMech = nodeTraits.includes('Mechanical');
+                        const includesLiving = nodeTraits.includes('LivingMetal');
+                        const result = includesMech || includesLiving;
+
+                        return result;
                     }
                 });
             };
