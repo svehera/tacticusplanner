@@ -102,7 +102,7 @@ export const Goals = () => {
 
         if (item === 'edit') {
             const goal = allGoals.find(x => x.goalId === goalId);
-            const relatedUnit = [...characters, ...resolvedMows].find(x => x.id === goal?.unitId);
+            const relatedUnit = [...characters, ...resolvedMows].find(x => x.snowprintId === goal?.unitId);
             if (relatedUnit && goal) {
                 setEditUnit(relatedUnit);
                 setEditGoal(goal);
