@@ -2,7 +2,7 @@ import { Alliance, DynamicProps, RarityMapper } from '@/fsd/5-shared/model';
 
 import { IBaseUpgrade, ICraftedUpgrade, UpgradesService } from '@/fsd/4-entities/upgrade/@x/mow';
 
-import { mowLevelUpCommonData, mows2Data } from './data';
+import { mowLevelUpCommonData, mows2Data, mowsData } from './data';
 import { IMow, IMow2, IMowDb, IMowLevelMaterials, IMowLevelUpgrades, IMowStatic, IMowStatic2 } from './model';
 
 export class MowsService {
@@ -77,6 +77,12 @@ export class MowsService {
      */
     public static resolveToStatic(id: string): IMowStatic2 | undefined {
         return mows2Data.mows.find(x => x.snowprintId === this.resolveId(id));
+    }
+
+    public static resolveOldIdToStatic(id: string): IMowStatic2 | undefined {
+        const oldMow = mowsData.find(x => x.id == id);
+        if (!oldMow) return undefined;
+        return mows2Data.mows.find(x => x.snowprintId === oldMow.tacticusId);
     }
 
     /**
