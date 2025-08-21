@@ -182,9 +182,19 @@ export class CharactersService {
         id,
         eventStage,
         finished,
-        nextEventDate,
         nextEventDateUtc,
     }: ILegendaryEventStatic): ILreCharacterStaticData {
-        return { id, eventStage, finished, nextEventDate: nextEventDate ?? 'TBA', nextEventDateUtc };
+        return {
+            id: id as LegendaryEventEnum,
+            eventStage,
+            finished,
+            nextEventDate: nextEventDateUtc
+                ? new Date(nextEventDateUtc).toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                  })
+                : 'TBA',
+            nextEventDateUtc,
+        };
     }
 }
