@@ -6,9 +6,9 @@ import { UpgradesService } from '@/fsd/4-entities/upgrade';
 export class StaticDataService {
     static getItemLocations = (itemId: string): ICampaignBattleComposed[] => {
         const possibleLocations: ICampaignBattleComposed[] = [];
-        const characterShardsData = UpgradesService.recipeDataFull[itemId];
-        if (characterShardsData) {
-            const fullData = characterShardsData.allMaterials && characterShardsData.allMaterials[0];
+        const recipeData = UpgradesService.recipeDataFull[itemId];
+        if (recipeData) {
+            const fullData = recipeData.allMaterials && recipeData.allMaterials[0];
             if (fullData) {
                 possibleLocations.push(...(fullData.locationsComposed ?? []));
             }
