@@ -121,7 +121,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                 });
             }
 
-            enqueueSnackbar(`Goal for ${updatedGoal.unitId} is updated`, { variant: 'success' });
+            enqueueSnackbar(`Goal for ${updatedGoal.unitName} is updated`, { variant: 'success' });
         }
         setOpenDialog(false);
         if (onClose) {
