@@ -693,14 +693,6 @@
             }
         ]
     },
-    "upgArmL008": {
-        "material": "Transdimensional Sanctum",
-        "snowprintId": "upgArmL008",
-        "rarity": "Legendary",
-        "stat": "Armour",
-        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL008.png",
-        "craftable": false
-    },
     "upgArmL008C": {
         "material": "Sturdy Plates",
         "snowprintId": "upgArmL008C",
