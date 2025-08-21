@@ -159,6 +159,7 @@ export class GoalsService {
             }
 
             if (g.type === PersonalGoalType.CharacterAbilities) {
+                console.trace(g);
                 const result: ICharacterUpgradeAbilities = {
                     type: PersonalGoalType.CharacterAbilities,
                     level: unit.level,

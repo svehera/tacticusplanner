@@ -30,6 +30,7 @@ import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
 
 import { CharacterUpgrades } from '@/fsd/3-features/character-details';
+import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
 import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
@@ -233,6 +234,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Primary current level"
                                     min={unit.primaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.primaryStart}
                                     valueChange={primaryStart => {
                                         setForm(curr => ({
@@ -245,6 +247,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Primary target level"
                                     min={unit.primaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.primaryEnd}
                                     valueChange={primaryEnd => {
                                         setForm(curr => ({
@@ -259,6 +262,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Secondary current level"
                                     min={unit.secondaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.secondaryStart}
                                     valueChange={secondaryStart => {
                                         setForm(curr => ({
@@ -271,6 +275,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Secondary target level"
                                     min={unit.secondaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.secondaryEnd}
                                     valueChange={secondaryEnd => {
                                         setForm(curr => ({
