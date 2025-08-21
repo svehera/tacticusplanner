@@ -62,7 +62,7 @@ export const PlanLeRoutes = () => {
                 />
             </Card>
 
-            {CharactersService.lreCharacters.sort(sortCharsByLreDate).map(le => {
+            {CharactersService.activeLres.sort(sortCharsByLreDate).map(le => {
                 const isFinished = !!le.lre?.finished;
                 return (
                     <Card

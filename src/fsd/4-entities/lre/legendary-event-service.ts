@@ -35,6 +35,10 @@ export class LegendaryEventService {
         return allLegendaryEvents.filter(e => !e.finished);
     }
 
+    public static getLegendaryEvents() {
+        return allLegendaryEvents;
+    }
+
     public static getActiveLreUnitId(): string | undefined {
         return this.getActiveEvent().unitSnowprintId;
     }
