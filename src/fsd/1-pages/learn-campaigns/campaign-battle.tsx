@@ -72,7 +72,14 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
                                     return (
                                         <span key={index}>
                                             Potential: {reward.id}
-                                            {' ' + reward.chance_numerator + ' / ' + reward.chance_denominator}
+                                            {' ' +
+                                                reward.chance_numerator +
+                                                ' / ' +
+                                                reward.chance_denominator +
+                                                ' (eff: ' +
+                                                (reward.effective_rate * 100).toFixed(2) +
+                                                '%)'}
+                                            )
                                         </span>
                                     );
                                 })}

@@ -100,7 +100,7 @@ export class CampaignsService {
                 const potential = battle.rewards.potential.find(x => x.id == reward);
                 if (guaranteed) dropRate = 1;
                 if (potential) {
-                    dropRate += potential.chance_numerator / potential.chance_denominator;
+                    dropRate += potential.effective_rate;
                 }
             } else {
                 const dropRateKey: keyof IDropRate = Rarity[

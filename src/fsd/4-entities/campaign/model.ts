@@ -47,6 +47,7 @@ export interface IPotentialReward {
     id: string;
     chance_numerator: number;
     chance_denominator: number;
+    effective_rate: number;
 }
 
 /**
