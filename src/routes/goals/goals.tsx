@@ -102,7 +102,14 @@ export const Goals = () => {
 
         if (item === 'edit') {
             const goal = allGoals.find(x => x.goalId === goalId);
-            const relatedUnit = [...characters, ...resolvedMows].find(x => x.id === goal?.unitId);
+            const relatedUnit = [...characters, ...resolvedMows].find(
+                // August 2025: we're transitioning between IDs for characters. Previously be used a short version
+                // of the character's name (i.e. Ragnar, Darkstrider). Now we're moving to IDs from snowprints internal data (datamined).
+                // During this transition, it's possibly for legacy goals to have legacy IDs, which are then overwritten with
+                // Snowprint IDs. For this reason, we cater to both IDs for lookup here, with the expectation we can consolidate
+                // on snowprintIDs down the track.
+                x => x.snowprintId === goal?.unitId || x.id === goal?.unitId
+            );
             if (relatedUnit && goal) {
                 setEditUnit(relatedUnit);
                 setEditGoal(goal);
