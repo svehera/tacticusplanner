@@ -12,20 +12,21 @@ import {
 } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line boundaries/element-types
-import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
+import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { charactersData } from './data';
-import { UnitDataRaw, ICharacterData, ICharLegendaryEvents } from './model';
+import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData } from './model';
 
 export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
 
-    static readonly lreCharacters: ICharacterData[] =
-        LegendaryEventService.getUnfinishedLegendaryEventCharacterSnowprintIds()
-            .map((id: string) => {
-                return this.charactersData.find(unit => unit.snowprintId === id);
-            })
-            .filter(Boolean) as ICharacterData[];
+    static readonly lreCharacters: ICharacterData[] = LegendaryEventService.getUnfinishedLegendaryEvents()
+        .map((lre: ILegendaryEventStatic) => {
+            const character = this.charactersData.find(unit => unit.snowprintId === lre.unitSnowprintId);
+            if (character) character.lre = this.toILreCharacterStaticData(lre);
+            return character;
+        })
+        .filter(Boolean) as ICharacterData[];
 
     static readonly activeLres = this.lreCharacters.filter(x => !x.lre?.finished);
     static readonly inactiveLres = this.lreCharacters.filter(x => !!x.lre?.finished);
@@ -175,5 +176,15 @@ export class CharactersService {
 
         // Check if the day difference is less than or equal to 2
         return dayDifference <= 3;
+    }
+
+    static toILreCharacterStaticData({
+        id,
+        eventStage,
+        finished,
+        nextEventDate,
+        nextEventDateUtc,
+    }: ILegendaryEventStatic): ILreCharacterStaticData {
+        return { id, eventStage, finished, nextEventDate: nextEventDate ?? 'TBA', nextEventDateUtc };
     }
 }
