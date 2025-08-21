@@ -10,11 +10,11 @@ import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 export class TacticusIntegrationService {
     static convertProgressionIndex(progressionIndex: number): [Rarity, RarityStars] {
-        if (progressionIndex < 0 || progressionIndex > 15) {
+        if (progressionIndex < 0 || progressionIndex > 18) {
             throw new Error('Invalid progression index');
         }
 
-        const rarityThresholds = [0, 3, 6, 9, 12];
+        const rarityThresholds = [0, 3, 6, 9, 12, 15];
         let rarity: Rarity = Rarity.Common;
 
         for (let i = rarityThresholds.length - 1; i >= 0; i--) {

@@ -6,7 +6,7 @@ import { uniq } from 'lodash';
 import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { useFitGridOnWindowResize, useQueryState } from '@/fsd/5-shared/lib';
+import { FactionsService, useFitGridOnWindowResize, useQueryState } from '@/fsd/5-shared/lib';
 import { RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -235,7 +235,7 @@ export const Campaigns = () => {
                 <div>
                     <span className="bold"> Enemies factions:</span>{' '}
                     {uniqEnemiesFactions.map(x => (
-                        <FactionImage key={x} faction={x} />
+                        <FactionImage key={x} faction={FactionsService.snowprintFactionToFaction(x)} />
                     ))}
                 </div>
 

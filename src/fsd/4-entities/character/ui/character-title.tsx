@@ -25,7 +25,7 @@ export const CharacterTitle = ({
     fullName?: boolean;
     imageSize?: number;
 }) => {
-    const name = fullName ? character.fullName : character.id;
+    const name = fullName ? character.fullName : character.shortName;
 
     const isUnlocked = character.rank > Rank.Locked;
 
@@ -37,10 +37,16 @@ export const CharacterTitle = ({
               : '';
     const opacity = showLockedWithOpacity ? (isUnlocked ? 1 : 0.5) : 1;
     const cursor = onClick ? 'pointer' : undefined;
+    console.log('isUnlocked', isUnlocked, name, character);
 
     return (
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
-            <UnitShardIcon key={character.name} icon={character.roundIcon} name={character.id} height={imageSize} />
+            <UnitShardIcon
+                key={character.name}
+                icon={character.roundIcon}
+                name={character.shortName}
+                height={imageSize}
+            />
             {!hideName && <span>{name}</span>}
             <RarityIcon rarity={character.rarity} />
             {isUnlocked ? <RankIcon key={character.rank} rank={character.rank} /> : undefined}

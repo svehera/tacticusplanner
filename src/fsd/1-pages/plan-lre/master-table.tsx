@@ -38,7 +38,7 @@ import { Rank } from '@/fsd/5-shared/model';
 import { UnitShardIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService, CharacterTitle, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
-import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { getLre, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
 
@@ -48,7 +48,7 @@ import { LreService } from './lre.service';
 
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
-        CharactersService.activeLres.map(x => x.lre!.id)
+        LegendaryEventService.getUnfinishedEvents().map(x => x.id)
     );
 
     const { leSelectedTeams, characters, leProgress } = useContext(StoreContext);
@@ -477,11 +477,14 @@ export const MasterTable = () => {
                                 })
                                 .join(', ')
                         }>
-                        {CharactersService.activeLres.map(x => (
-                            <MenuItem key={x.lre!.id} value={x.lre!.id}>
-                                <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
+                        {LegendaryEventService.getUnfinishedEvents().map(x => (
+                            <MenuItem key={x.id} value={x.id}>
+                                <Checkbox checked={activeLegendaryEvents.indexOf(x.id) > -1} />
                                 <ListItemIcon>
-                                    <UnitShardIcon icon={x.roundIcon} height={30} />
+                                    <UnitShardIcon
+                                        icon={CharactersService.resolveCharacter(x.unitSnowprintId).roundIcon}
+                                        height={30}
+                                    />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>

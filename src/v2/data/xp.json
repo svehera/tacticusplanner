@@ -252,8 +252,28 @@
         },
         {
             "level": 50,
-            "xpToNextLevel": 0,
-            "totalXp": 2485200
+            "xpToNextLevel": 290000,
+            "totalXp": 2775200
+        },
+        {
+            "level": 51,
+            "xpToNextLevel": 295000,
+            "totalXp": 3065200
+        },
+        {
+            "level": 52,
+            "xpToNextLevel": 300000,
+            "totalXp": 3360200
+        },
+        {
+            "level": 53,
+            "xpToNextLevel": 305000,
+            "totalXp": 3660200
+        },
+        {
+            "level": 54,
+            "xpToNextLevel": 310000,
+            "totalXp": 3965200
         }
     ]
 }
