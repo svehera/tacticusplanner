@@ -9,6 +9,7 @@ import { TodayRaids } from 'src/routes/tables/todayRaids';
 
 import { useAuth } from '@/fsd/5-shared/model';
 
+import { CharactersService } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { UpgradesService as FsdUpgradesService } from '@/fsd/4-entities/upgrade';
 
@@ -99,7 +100,8 @@ export const DailyRaids = () => {
                 character: characterId,
                 value: value,
             });
-            enqueueSnackbar(`Added ${value} shards for ${characterId}`, {
+            const character = CharactersService.getUnit(characterId);
+            enqueueSnackbar(`Added ${value} shards for ${character?.shortName ?? characterId}`, {
                 variant: 'success',
             });
         }
