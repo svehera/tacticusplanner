@@ -244,7 +244,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
         }
 
         case 'IncrementShards': {
-            const existingCharIndex = state.findIndex(char => char.name === action.character);
+            const existingCharIndex = state.findIndex(char => char.snowprintId === action.character);
 
             if (existingCharIndex !== -1) {
                 const updatedCharacter = {
