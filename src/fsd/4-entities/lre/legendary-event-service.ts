@@ -1,6 +1,6 @@
-// eslint-disable-next-line import-x/no-internal-modules
-import { allLegendaryEvents } from './data/index';
 import { ILegendaryEventStatic } from './static-data.model';
+
+import { allLegendaryEvents } from './index';
 
 export class LegendaryEventService {
     public static getActiveEvent(): ILegendaryEventStatic {
@@ -29,6 +29,10 @@ export class LegendaryEventService {
 
     public static getUnfinishedLegendaryEventCharacterSnowprintIds(): string[] {
         return allLegendaryEvents.filter(e => !e.finished).map(e => e.unitSnowprintId);
+    }
+
+    public static getLegendaryEvents() {
+        return allLegendaryEvents;
     }
 
     public static getActiveLreUnitId(): string | undefined {

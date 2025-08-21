@@ -12,20 +12,21 @@ import {
 } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line boundaries/element-types
-import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
+import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { charactersData } from './data';
-import { UnitDataRaw, ICharacterData, ICharLegendaryEvents } from './model';
+import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData } from './model';
 
 export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
 
-    static readonly lreCharacters: ICharacterData[] =
-        LegendaryEventService.getUnfinishedLegendaryEventCharacterSnowprintIds()
-            .map((id: string) => {
-                return this.charactersData.find(unit => unit.snowprintId === id);
-            })
-            .filter(Boolean) as ICharacterData[];
+    static readonly lreCharacters: ICharacterData[] = LegendaryEventService.getLegendaryEvents()
+        .map((lre: ILegendaryEventStatic) => {
+            const character = this.charactersData.find(unit => unit.snowprintId === lre.unitSnowprintId);
+            if (character) return { ...character, lre: this.toILreCharacterStaticData(lre) };
+            return character;
+        })
+        .filter(Boolean) as ICharacterData[];
 
     static readonly activeLres = this.lreCharacters.filter(x => !x.lre?.finished);
     static readonly inactiveLres = this.lreCharacters.filter(x => !!x.lre?.finished);
@@ -175,5 +176,26 @@ export class CharactersService {
 
         // Check if the day difference is less than or equal to 2
         return dayDifference <= 3;
+    }
+
+    static toILreCharacterStaticData({
+        id,
+        eventStage,
+        finished,
+        nextEventDateUtc,
+    }: ILegendaryEventStatic): ILreCharacterStaticData {
+        return {
+            id: id as LegendaryEventEnum,
+            eventStage,
+            finished,
+            nextEventDate: nextEventDateUtc
+                ? new Date(nextEventDateUtc).toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      timeZone: 'UTC',
+                  })
+                : 'TBA',
+            nextEventDateUtc,
+        };
     }
 }
