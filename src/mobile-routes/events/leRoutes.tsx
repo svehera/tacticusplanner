@@ -1,5 +1,5 @@
 ﻿import { Card, CardContent, CardHeader } from '@mui/material';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { menuItemById } from 'src/models/menu-items';
@@ -44,6 +44,10 @@ function sortCharsByLreDate(a: ICharacterData, b: ICharacterData) {
 export const PlanLeRoutes = () => {
     const navigate = useNavigate();
     const leMasterTableMenuItem = menuItemById['leMasterTable'];
+    const sortedActiveLres: ICharacterData[] = useMemo(
+        () => [...CharactersService.activeLres].sort(sortCharsByLreDate),
+        [CharactersService.activeLres]
+    );
     return (
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
             <Card
@@ -62,7 +66,7 @@ export const PlanLeRoutes = () => {
                 />
             </Card>
 
-            {CharactersService.activeLres.sort(sortCharsByLreDate).map(le => {
+            {sortedActiveLres.map(le => {
                 const isFinished = !!le.lre?.finished;
                 return (
                     <Card
