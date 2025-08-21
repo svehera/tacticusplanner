@@ -7,7 +7,39 @@ import { menuItemById } from 'src/models/menu-items';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
+import { ICharacterData } from '@/fsd/4-entities/character/model';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+
+function sortCharsByLreDate(a: ICharacterData, b: ICharacterData) {
+    function isValidLreDate(date: unknown): date is string {
+        return (
+            date !== null &&
+            typeof date === 'string' &&
+            date !== 'TBA' &&
+            date !== '' &&
+            !isNaN(new Date(date).getTime())
+        );
+    }
+    const aDate = a.lre?.nextEventDateUtc;
+    const bDate = b.lre?.nextEventDateUtc;
+
+    const aHasValidDate = isValidLreDate(aDate);
+    const bHasValidDate = isValidLreDate(bDate);
+
+    // If both have valid dates, sort by date (earliest first)
+    if (aHasValidDate && bHasValidDate) {
+        return new Date(aDate).getTime() - new Date(bDate).getTime();
+    }
+
+    // Valid dates come before invalid/missing ones including "TBA"
+    if (aHasValidDate && !bHasValidDate) return -1;
+    if (!aHasValidDate && bHasValidDate) return 1;
+
+    // When both have invalid dates - sort by eventStage (descending)
+    const aStage = a.lre?.eventStage || 0;
+    const bStage = b.lre?.eventStage || 0;
+    return bStage - aStage;
+}
 
 export const PlanLeRoutes = () => {
     const navigate = useNavigate();
@@ -30,7 +62,7 @@ export const PlanLeRoutes = () => {
                 />
             </Card>
 
-            {CharactersService.lreCharacters.map(le => {
+            {CharactersService.lreCharacters.sort(sortCharsByLreDate).map(le => {
                 const isFinished = !!le.lre?.finished;
                 return (
                     <Card
