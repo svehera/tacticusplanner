@@ -89,11 +89,9 @@ export const PlanRoutes = () => {
                         <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
                             <ul>
                                 <li>Master Table</li>
-                                {CharactersService.activeLres
-                                    .filter(x => !x.lre?.finished)
-                                    .map(le => (
-                                        <li key={le.name}>{le.name}</li>
-                                    ))}
+                                {CharactersService.activeLres.map(le => (
+                                    <li key={le.name}>{le.name}</li>
+                                ))}
                             </ul>
                         </CardContent>
                     </Card>
