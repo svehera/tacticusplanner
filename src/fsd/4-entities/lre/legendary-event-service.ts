@@ -31,10 +31,6 @@ export class LegendaryEventService {
         return allLegendaryEvents.filter(e => !e.finished).map(e => e.unitSnowprintId);
     }
 
-    public static getUnfinishedLegendaryEvents(): ILegendaryEventStatic[] {
-        return allLegendaryEvents.filter(e => !e.finished);
-    }
-
     public static getLegendaryEvents() {
         return allLegendaryEvents;
     }
