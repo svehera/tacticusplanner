@@ -33,7 +33,7 @@ export class VitruviusLegendaryEvent extends LegendaryEventBase {
                     points: 75,
                     units: filter(noNecrons).byAttackType('rangeOnly'),
                     selected: true,
-                    iconId: 'melee',
+                    iconId: 'ranged',
                 },
                 {
                     name: 'Max 1 hit',
