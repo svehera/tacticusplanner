@@ -1,6 +1,6 @@
-// eslint-disable-next-line import-x/no-internal-modules
-import { allLegendaryEvents } from './data/index';
 import { ILegendaryEventStatic } from './static-data.model';
+
+import { allLegendaryEvents } from './index';
 
 export class LegendaryEventService {
     public static getActiveEvent(): ILegendaryEventStatic {
