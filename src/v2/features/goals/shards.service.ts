@@ -208,7 +208,7 @@ export class ShardsService {
     private static convertGoalToMaterial(goal: ICharacterAscendGoal | ICharacterUnlockGoal): IShardMaterial {
         const targetShards =
             goal.type === PersonalGoalType.Ascend ? this.getTargetShards(goal) : charsUnlockShards[goal.rarity];
-        const possibleLocations = StaticDataService.getItemLocations(goal.unitId);
+        const possibleLocations = StaticDataService.getItemLocations(`shards_${goal.unitId}`);
 
         return {
             goalId: goal.goalId,

@@ -417,7 +417,23 @@ export class UpgradesService {
             const upgrade = recipeDataByName[materialId];
             const locations = upgradeLocations[materialId] ?? [];
 
-            if (!upgrade || !upgrade.recipe?.length) {
+            if (!upgrade) {
+                console.error('Unknown upgrade material:', materialId);
+                const item: IMaterialRecipeIngredientFull = {
+                    id: materialId,
+                    snowprintId: materialId,
+                    label: materialId,
+                    count: count,
+                    stat: '',
+                    craftable: false,
+                    locations: locations,
+                    iconPath: '',
+                    characters: [],
+                    priority: 0,
+                    rarity: RarityMapper.stringToNumber[RarityString.Common],
+                };
+                return item;
+            } else if (!upgrade.recipe?.length) {
                 const item: IMaterialRecipeIngredientFull = {
                     id: materialId,
                     snowprintId: upgrade.snowprintId,
@@ -515,7 +531,7 @@ export class UpgradesService {
                     label: upgradeName,
                     count: 1,
                     rarity: type == kMythic ? Rarity.Mythic : Rarity.Common,
-                    stat: '',
+                    stat: type == kRegular ? 'Shard' : 'MythicShard',
                     locations: locations,
                     craftable: false,
                     locationsComposed: locations.map(x => CampaignsService.campaignsComposed[x]),

@@ -1,7 +1,7 @@
 {
     "I01": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 0,
         "nodeNumber": 1,
         "slots": 1,
@@ -37,7 +37,7 @@
     },
     "I02": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 0,
         "nodeNumber": 2,
         "slots": 1,
@@ -73,7 +73,7 @@
     },
     "I03": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 0,
         "nodeNumber": 3,
         "slots": 2,
@@ -109,7 +109,7 @@
     },
     "I04": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 0,
         "nodeNumber": 4,
         "slots": 2,
@@ -152,7 +152,7 @@
     },
     "I05": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 0,
         "nodeNumber": 5,
         "slots": 3,
@@ -195,7 +195,7 @@
     },
     "I06": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 3,
         "nodeNumber": 6,
         "slots": 5,
@@ -238,7 +238,7 @@
     },
     "I07": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 3,
         "nodeNumber": 7,
         "slots": 3,
@@ -281,7 +281,7 @@
     },
     "I08": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 3,
         "nodeNumber": 8,
         "slots": 3,
@@ -324,7 +324,7 @@
     },
     "I09": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 3,
         "nodeNumber": 9,
         "slots": 5,
@@ -367,7 +367,7 @@
     },
     "I10": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 3,
         "nodeNumber": 10,
         "slots": 5,
@@ -410,7 +410,7 @@
     },
     "I11": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 3,
         "nodeNumber": 11,
         "slots": 5,
@@ -453,7 +453,7 @@
     },
     "I12": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 3,
         "nodeNumber": 12,
         "slots": 5,
@@ -496,7 +496,7 @@
     },
     "I13": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 3,
         "nodeNumber": 13,
         "slots": 5,
@@ -539,7 +539,7 @@
     },
     "I14": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "SuperEarly",
         "energyCost": 3,
         "nodeNumber": 14,
         "slots": 5,
@@ -582,7 +582,7 @@
     },
     "I15": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 15,
         "slots": 5,
@@ -632,7 +632,7 @@
     },
     "I16": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 16,
         "slots": 5,
@@ -675,7 +675,7 @@
     },
     "I17": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 17,
         "slots": 5,
@@ -718,7 +718,7 @@
     },
     "I18": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 18,
         "slots": 5,
@@ -761,7 +761,7 @@
     },
     "I19": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 19,
         "slots": 5,
@@ -818,7 +818,7 @@
     },
     "I20": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 20,
         "slots": 5,
@@ -868,7 +868,7 @@
     },
     "I21": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 21,
         "slots": 5,
@@ -925,7 +925,7 @@
     },
     "I22": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 22,
         "slots": 5,
@@ -982,7 +982,7 @@
     },
     "I23": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 23,
         "slots": 5,
@@ -1032,7 +1032,7 @@
     },
     "I24": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 24,
         "slots": 5,
@@ -1082,7 +1082,7 @@
     },
     "I25": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 25,
         "slots": 5,
@@ -1139,7 +1139,7 @@
     },
     "I26": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 26,
         "slots": 5,
@@ -1189,7 +1189,7 @@
     },
     "I27": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 27,
         "slots": 5,
@@ -1246,7 +1246,7 @@
     },
     "I28": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 28,
         "slots": 3,
@@ -1282,7 +1282,7 @@
     },
     "I29": {
         "campaign": "Indomitus",
-        "campaignType": "Normal",
+        "campaignType": "Early",
         "energyCost": 5,
         "nodeNumber": 29,
         "slots": 5,
