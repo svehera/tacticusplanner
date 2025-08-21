@@ -2,7 +2,7 @@
 import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControlLabel } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { PersonalGoalType } from 'src/models/enums';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
@@ -18,11 +18,11 @@ interface Props {
 }
 
 export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelectChange }) => {
-    const [openGoals, setOpenGoals] = React.useState<boolean>(false);
+    const [openGoals, setOpenGoals] = useState<boolean>(false);
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit | null>(null);
 
-    const [currentGoalsSelect, setCurrentGoalsSelect] = React.useState<CharacterRaidGoalSelect[]>(goals);
+    const [currentGoalsSelect, setCurrentGoalsSelect] = useState<CharacterRaidGoalSelect[]>(goals);
 
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentGoalsSelect(value => value.map(x => ({ ...x, include: event.target.checked })));
