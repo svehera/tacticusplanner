@@ -48,14 +48,14 @@ export const SelectTeamDialog: React.FC<Props> = ({
 
     const handleCharacterSelect = (character: IUnit) => {
         setLineup(curr => {
-            if (curr.some(x => x.name === character.name)) {
-                return curr.filter(x => x.name !== character.name);
+            if (curr.some(x => x.id === character.id)) {
+                return curr.filter(x => x.id !== character.id);
             } else {
-                if (lineup.length === size) {
+                if (curr.length === size) {
                     return curr;
                 }
 
-                const newChar = characters.find(x => x.name === character.id);
+                const newChar = characters.find(x => x.id === character.id);
 
                 if (newChar) {
                     return [...curr, newChar];
@@ -112,8 +112,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
                     value={{
                         ...charactersViewContext,
                         getOpacity: character =>
-                            lineup.some(x => x.name === character.name) ||
-                            blockedCharacters.some(x => x === character.name)
+                            lineup.some(x => x.id === character.id) || blockedCharacters.some(x => x === character.name)
                                 ? 0.5
                                 : 1,
                     }}>

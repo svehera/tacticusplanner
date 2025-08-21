@@ -49,7 +49,7 @@ export const TeamSlotEdit: React.FC<Props> = ({
                     style={{ cursor: editSlot ? 'pointer' : 'default' }}
                     onClick={() => editUnitSlot(index)}>
                     <CharacterPortraitImage
-                        icon={slot.unitType === UnitType.character ? 'unset.webp' : 'unsetMow.webp'}
+                        icon={slot.unitType === UnitType.character ? 'portraits/unset.webp' : 'unsetMow.webp'}
                         key={index}
                     />
                 </div>
