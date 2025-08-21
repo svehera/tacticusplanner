@@ -37,7 +37,6 @@ export const CharacterTitle = ({
               : '';
     const opacity = showLockedWithOpacity ? (isUnlocked ? 1 : 0.5) : 1;
     const cursor = onClick ? 'pointer' : undefined;
-    console.log('isUnlocked', isUnlocked, name, character);
 
     return (
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>

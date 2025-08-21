@@ -134,7 +134,7 @@ export class GoalsService {
                 priority: g.priority,
                 goalId: g.id,
                 include: g.dailyRaids,
-                unitId: unit.id,
+                unitId: unit.snowprintId!,
                 unitName: unit.shortName,
                 unitIcon: unit.icon,
                 unitRoundIcon: unit.roundIcon,

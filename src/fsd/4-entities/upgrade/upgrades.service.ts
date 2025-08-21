@@ -3,6 +3,8 @@
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 
 import { CampaignsService } from '@/fsd/4-entities/campaign/@x/upgrade';
+// eslint-disable-next-line boundaries/element-types
+import { CharactersService } from '@/fsd/4-entities/character';
 
 import { recipeDataByName } from './data';
 import {
@@ -401,7 +403,7 @@ export class UpgradesService {
         };
     }
 
-    // Converts the static JSON in recipeData to an IRecipeDataFull object.
+    // Converts the static JSON in recipeData, and shards in charData, to an IRecipeDataFull object.
     static convertRecipeData(): IRecipeDataFull {
         const result: IRecipeDataFull = {};
         const upgrades = Object.keys(recipeDataByName);
@@ -415,7 +417,23 @@ export class UpgradesService {
             const upgrade = recipeDataByName[materialId];
             const locations = upgradeLocations[materialId] ?? [];
 
-            if (!upgrade || !upgrade.recipe?.length) {
+            if (!upgrade) {
+                console.error('Unknown upgrade material:', materialId);
+                const item: IMaterialRecipeIngredientFull = {
+                    id: materialId,
+                    snowprintId: materialId,
+                    label: materialId,
+                    count: count,
+                    stat: '',
+                    craftable: false,
+                    locations: locations,
+                    iconPath: '',
+                    characters: [],
+                    priority: 0,
+                    rarity: RarityMapper.stringToNumber[RarityString.Common],
+                };
+                return item;
+            } else if (!upgrade.recipe?.length) {
                 const item: IMaterialRecipeIngredientFull = {
                     id: materialId,
                     snowprintId: upgrade.snowprintId,
@@ -496,6 +514,45 @@ export class UpgradesService {
                     priority: 0,
                 }));
             }
+        }
+
+        for (const character of CharactersService.charactersData) {
+            const kRegular = 0;
+            const kMythic = 1;
+            const addShards = (type: number) => {
+                const upgradeId =
+                    type === kMythic ? 'mythicShards_' + character.snowprintId : 'shards_' + character.snowprintId;
+                const upgradeName = (type === kMythic ? 'Mythic Shards' : 'Shards') + ' for ' + character.name;
+                const locations = upgradeLocations[upgradeId] ?? [];
+
+                const item: IMaterialRecipeIngredientFull = {
+                    id: upgradeId,
+                    snowprintId: upgradeId,
+                    label: upgradeName,
+                    count: 1,
+                    rarity: type == kMythic ? Rarity.Mythic : Rarity.Common,
+                    stat: type == kRegular ? 'Shard' : 'MythicShard',
+                    locations: locations,
+                    craftable: false,
+                    locationsComposed: locations.map(x => CampaignsService.campaignsComposed[x]),
+                    iconPath: character.roundIcon,
+                    characters: [],
+                    priority: 0,
+                };
+
+                result[upgradeId] = {
+                    id: item.id,
+                    snowprintId: item.snowprintId,
+                    label: item.label,
+                    stat: item.stat,
+                    rarity: item.rarity,
+                    craftable: item.craftable,
+                    allMaterials: [item],
+                    iconPath: item.iconPath ?? '',
+                };
+            };
+            addShards(kRegular);
+            addShards(kMythic);
         }
 
         return result;

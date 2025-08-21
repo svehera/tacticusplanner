@@ -10,6 +10,7 @@ import { TodayRaids } from 'src/routes/tables/todayRaids';
 import { useAuth } from '@/fsd/5-shared/model';
 
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { UpgradesService as FsdUpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 import { IUnit } from 'src/v2/features/characters/characters.models';
@@ -70,7 +71,8 @@ export const DailyRaids = () => {
                     upgrade: upgradeId,
                     value,
                 });
-                enqueueSnackbar(`Added ${value} items for ${upgradeId}`, {
+                const upgradeName = FsdUpgradesService.recipeDataFull[upgradeId]?.label ?? upgradeId;
+                enqueueSnackbar(`Added ${value} items for ${upgradeName}`, {
                     variant: 'success',
                 });
             }
