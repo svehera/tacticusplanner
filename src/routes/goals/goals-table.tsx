@@ -493,7 +493,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
 
                         if (data.type === PersonalGoalType.UpgradeRank) {
                             linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
-                            params = `?character=${data.unitName}&rankStart=${Rank[data.rankStart]}&rankEnd=${
+                            params = `?character=${data.unitId}&rankStart=${Rank[data.rankStart]}&rankEnd=${
                                 Rank[data.rankEnd]
                             }&rankPoint5=${data.rankPoint5}`;
                         }
