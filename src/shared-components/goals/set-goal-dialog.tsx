@@ -83,7 +83,6 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     const disableNewGoals = useMemo(() => goals.length === goalsLimit, [goals.length]);
 
     const handleClose = (goal?: IPersonalGoal | undefined): void => {
-        console.trace('setting goal', goal);
         if (goal) {
             goal.dailyRaids = [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(goal.type);
             dispatch.goals({ type: 'Add', goal });

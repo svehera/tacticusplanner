@@ -20,23 +20,25 @@ export const MowMaterialsTotal: React.FC<Props> = ({ total, mowAlliance, label, 
             {label && <b>{label}</b>}
             <div className="flex-box gap20 wrap">
                 <div className="flex-box gap5">
-                    {[Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon, Rarity.Common].map(rarity => {
-                        const badgesCount = total.badges.get(rarity) ?? 0;
-                        return (
-                            badgesCount > 0 && (
-                                <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
-                                    <BadgeImage alliance={mowAlliance} rarity={rarity} size={size} />
-                                </Badge>
-                            )
-                        );
-                    })}
+                    {[Rarity.Mythic, Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon, Rarity.Common].map(
+                        rarity => {
+                            const badgesCount = total.badges.get(rarity) ?? 0;
+                            return (
+                                badgesCount > 0 && (
+                                    <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
+                                        <BadgeImage alliance={mowAlliance} rarity={rarity} size={size} />
+                                    </Badge>
+                                )
+                            );
+                        }
+                    )}
                 </div>
                 <div className="flex-box gap5">
                     <b>{total.components}</b>
                     <ComponentImage alliance={mowAlliance} size={size} />
                 </div>
                 <div className="flex-box gap5">
-                    {[Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
+                    {[Rarity.Mythic, Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
                         const forgeBadgesCount = total.forgeBadges.get(rarity) ?? 0;
                         return (
                             forgeBadgesCount > 0 && (
