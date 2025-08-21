@@ -44,10 +44,19 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
         }
 
         team.characters = team.charactersIds.map(id => {
-            const name = CharactersService.resolveCharacter(id)?.snowprintId ?? id;
+            let name = CharactersService.resolveCharacter(id)?.snowprintId ?? id;
+            if (name == 'Patermine') {
+                name = CharactersService.resolveCharacter('The Patermine')?.snowprintId ?? id;
+            }
             const character = resolvedCharacters.find(x => x.snowprintId === name);
             if (!character) {
-                console.warn('unknown character', name, id, character);
+                console.warn(
+                    'unknown character. if you have imported goals from a pre-mythic ',
+                    'instance of the planner, please remove the unit and add it back.',
+                    name,
+                    id,
+                    character
+                );
             }
 
             return { ...character, teamId: team.id };
