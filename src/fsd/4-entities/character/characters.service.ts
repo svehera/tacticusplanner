@@ -192,6 +192,7 @@ export class CharactersService {
                 ? new Date(nextEventDateUtc).toLocaleDateString('en-US', {
                       month: 'long',
                       day: 'numeric',
+                      timeZone: 'UTC',
                   })
                 : 'TBA',
             nextEventDateUtc,
