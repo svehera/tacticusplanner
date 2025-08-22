@@ -81,6 +81,7 @@ export interface ICampaignBattle {
     enemiesTotal?: number;
     enemiesTypes?: string[];
     detailedEnemyTypes?: IDetailedEnemy[];
+    requiredCharacterSnowprintIds?: string[];
 }
 
 export type ICampaignConfigs = {

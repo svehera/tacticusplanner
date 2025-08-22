@@ -99,7 +99,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                         <td>
                             <div className="bg-cyan-500/50">
                                 {StatsCalculatorService.calculateDamage(
-                                    character.id,
+                                    character.snowprintId!,
                                     rarity,
                                     rarityStars,
                                     rank,
@@ -111,7 +111,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                             <div className="bg-cyan-500/25">
                                 {computeDamvarInfArmour(
                                     StatsCalculatorService.calculateDamage(
-                                        character.id,
+                                        character.snowprintId!,
                                         rarity,
                                         rarityStars,
                                         rank,
@@ -133,7 +133,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                                     <>N/A</>
                                 ) : (
                                     StatsCalculatorService.calculateDamage(
-                                        character.id,
+                                        character.snowprintId!,
                                         rarity,
                                         rarityStars,
                                         rank,
@@ -146,7 +146,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                             <div className="bg-cyan-500/50">
                                 {computeDamvarInfArmour(
                                     StatsCalculatorService.calculateDamage(
-                                        character.id,
+                                        character.snowprintId!,
                                         rarity,
                                         rarityStars,
                                         rank,

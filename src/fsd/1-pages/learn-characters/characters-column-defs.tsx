@@ -174,7 +174,7 @@ export const useCharacters = () => {
                         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                             return (
                                 <StatCell
-                                    characterId={props.data?.id ?? ''}
+                                    characterId={props.data?.snowprintId ?? ''}
                                     rank={props.data?.rank ?? Rank.Stone1}
                                     rarity={props.data?.rarity ?? Rarity.Common}
                                     rarityStars={props.data?.stars ?? RarityStars.None}
@@ -240,7 +240,7 @@ export const useCharacters = () => {
                         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                             return (
                                 <StatCell
-                                    characterId={props.data?.id ?? ''}
+                                    characterId={props.data?.snowprintId ?? ''}
                                     rank={targetRank}
                                     rarity={targetRarity}
                                     rarityStars={targetStars}
@@ -263,7 +263,7 @@ export const useCharacters = () => {
                         headerName: 'Health',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                             StatsCalculatorService.calculateHealth(
-                                props.data?.id ?? '',
+                                props.data?.snowprintId ?? '',
                                 targetRarity,
                                 targetStars,
                                 targetRank,
@@ -277,7 +277,7 @@ export const useCharacters = () => {
                         headerName: 'Damage',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                             StatsCalculatorService.calculateDamage(
-                                props.data?.id ?? '',
+                                props.data?.snowprintId ?? '',
                                 targetRarity,
                                 targetStars,
                                 targetRank,
@@ -291,7 +291,7 @@ export const useCharacters = () => {
                         headerName: 'Armour',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                             StatsCalculatorService.calculateArmor(
-                                props.data?.id ?? '',
+                                props.data?.snowprintId ?? '',
                                 targetRarity,
                                 targetStars,
                                 targetRank,
