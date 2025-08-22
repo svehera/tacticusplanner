@@ -337,6 +337,19 @@ export class UpgradesService {
         ];
     }
 
+    private static resolveUnitIdToShortName(id: string): string {
+        const char = CharactersService.getUnit(id);
+        if (char?.shortName) return char.shortName;
+        const mow2 = MowsService.resolveToStatic(id);
+        if (mow2) {
+            // Prefer legacy shortName if available, else use new static name
+            const mowLegacy = MowsService.resolveOldIdToStatic(id);
+            const legacyShort = (mowLegacy as any)?.shortName as string | undefined;
+            return legacyShort ?? mow2.name;
+        }
+        return id;
+    }
+
     private static getTotalEstimates(
         upgrades: Record<string, ICombinedUpgrade>,
         inventoryUpgrades: Record<string, number>
@@ -353,6 +366,9 @@ export class UpgradesService {
             result.push(estimate);
         }
 
+        for (const est of result) {
+            est.relatedCharacters = est.relatedCharacters.map(id => this.resolveUnitIdToShortName(id));
+        }
         return orderBy(result, ['daysTotal', 'energyTotal'], ['desc', 'desc']);
     }
 
