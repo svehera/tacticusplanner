@@ -23,22 +23,27 @@ describe('TacticusIntegrationService', () => {
                 [12, Rarity.Legendary, RarityStars.RedThreeStars],
                 [13, Rarity.Legendary, RarityStars.RedFourStars],
                 [14, Rarity.Legendary, RarityStars.RedFiveStars],
-                [15, Rarity.Legendary, RarityStars.BlueStar],
+                [15, Rarity.Legendary, RarityStars.OneBlueStar],
+                [16, Rarity.Mythic, RarityStars.OneBlueStar],
+                [17, Rarity.Mythic, RarityStars.TwoBlueStars],
+                [18, Rarity.Mythic, RarityStars.ThreeBlueStars],
+                [19, Rarity.Mythic, RarityStars.MythicWings],
             ];
             for (const [idx, rarity, stars] of cases) {
-                expect(TacticusIntegrationService.convertProgressionIndex(idx)).toEqual([rarity, stars]);
+                expect(
+                    TacticusIntegrationService.convertProgressionIndex(idx),
+                    `index ${idx} should return Rarity ${rarity} Stars ${stars}`
+                ).toEqual([rarity, stars]);
             }
         });
 
-        it('should clamp higher indices to Legendary Blue Wings', () => {
-            // Indices 16-19 are being incrementally rolled out for Mythic, so we
-            // can expect them to show up in Tacticus API responses in future.
-            // These test expectations will need to be modified as we add support for them.
-            const highVals = [16, 17, 18, 19, 20, 999];
+        it('should clamp higher indices to Mythic Wings', () => {
+            const maxSupportedIndex = 19;
+            const highVals = [maxSupportedIndex, maxSupportedIndex + 1, 999];
             for (let i = 0; i < highVals.length; i++) {
                 const result = TacticusIntegrationService.convertProgressionIndex(highVals[i]);
 
-                expect(result).toEqual([Rarity.Legendary, RarityStars.BlueStar]);
+                expect(result).toEqual([Rarity.Mythic, RarityStars.MythicWings]);
             }
         });
 
