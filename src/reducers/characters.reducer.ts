@@ -3,6 +3,7 @@ import { Rarity, Rank } from '@/fsd/5-shared/model';
 
 import { CharacterBias } from '@/fsd/4-entities/character';
 
+import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 import { rankToLevel, rankToRarity, rarityToStars } from '../models/constants';
@@ -74,7 +75,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                 const rankRarity = rankToRarity[existingChar.rank];
                 const rarityStars = rarityToStars[existingChar.rarity];
                 const updatedLevel =
-                    updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 50 ? 50 : updatedCharacter.level;
+                    updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 55 ? 55 : updatedCharacter.level;
 
                 const updatedCharacterData = {
                     ...existingChar,
@@ -85,8 +86,20 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     stars: updatedCharacter.stars <= rarityStars ? rarityStars : updatedCharacter.stars,
                     xp: updatedCharacter.xp,
                     shards: updatedCharacter.shards,
-                    activeAbilityLevel: Math.max(0, Math.min(50, updatedCharacter.activeAbilityLevel)),
-                    passiveAbilityLevel: Math.max(0, Math.min(50, updatedCharacter.passiveAbilityLevel)),
+                    activeAbilityLevel: Math.max(
+                        0,
+                        Math.min(
+                            CharactersAbilitiesService.getMaximumAbilityLevel(),
+                            updatedCharacter.activeAbilityLevel
+                        )
+                    ),
+                    passiveAbilityLevel: Math.max(
+                        0,
+                        Math.min(
+                            CharactersAbilitiesService.getMaximumAbilityLevel(),
+                            updatedCharacter.passiveAbilityLevel
+                        )
+                    ),
                     level: Math.max(
                         updatedLevel,
                         rankToLevel[(existingChar.rank - 1) as Rank],

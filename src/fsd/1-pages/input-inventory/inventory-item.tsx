@@ -43,10 +43,10 @@ export const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate 
     }, [data.quantity]);
 
     return (
-        <div key={data.material} className="flex flex-col max-w-[60px]">
+        <div key={data.snowprintId} className="flex flex-col max-w-[60px]">
             <div style={{ padding: '0 5px' }}>
                 <UpgradeImage
-                    material={data.label}
+                    material={data.material}
                     iconPath={data.iconPath}
                     rarity={RarityMapper.rarityToRarityString(data.rarity)}
                 />
@@ -56,7 +56,7 @@ export const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate 
                 value={amount}
                 size="small"
                 onFocus={event => event.target.select()}
-                onChange={event => handleInputChange(event, data.material)}
+                onChange={event => handleInputChange(event, data.snowprintId)}
                 inputProps={{
                     step: 1,
                     min: 0,
@@ -71,13 +71,13 @@ export const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate 
                     <Button
                         size="small"
                         className="w-[30px] !min-w-0"
-                        onClick={() => decrement(data.material, +amount)}>
+                        onClick={() => decrement(data.snowprintId, +amount)}>
                         -
                     </Button>
                     <Button
                         size="small"
                         className="w-[30px] !min-w-0"
-                        onClick={() => increment(data.material, +amount)}>
+                        onClick={() => increment(data.snowprintId, +amount)}>
                         +
                     </Button>
                 </div>

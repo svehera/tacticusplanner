@@ -18,9 +18,9 @@ interface Props {
 
 export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mowId, alliance }) => {
     const size = 'medium';
-    const name = MowsService.resolveToStatic(mowId)!.name;
-    const [primary] = MowsService.getMaterialsList(mowId, name, alliance, [primaryLevel + 1]);
-    const [secondary] = MowsService.getMaterialsList(mowId, name, alliance, [secondaryLevel + 1]);
+    const mow = MowsService.resolveToStatic(mowId);
+    const [primary] = MowsService.getMaterialsList(mowId, mow?.name ?? '', alliance, [primaryLevel + 1]);
+    const [secondary] = MowsService.getMaterialsList(mowId, mow?.name ?? '', alliance, [secondaryLevel + 1]);
 
     const renderAbility = (
         label: string,

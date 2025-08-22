@@ -34,7 +34,8 @@ export class GoalsService {
         const allGoals = goals
             .map(g => {
                 const resolvedChar = CharactersService.resolveCharacter(g.character);
-                const resolvedMow = MowsService.resolveToStatic(g.character);
+                const resolvedMow =
+                    MowsService.resolveToStatic(g.character) ?? MowsService.resolveOldIdToStatic(g.character);
                 const relatedCharacter = characters.find(
                     x =>
                         x.snowprintId === (resolvedChar?.snowprintId ?? '') ||
