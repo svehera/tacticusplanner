@@ -56,12 +56,6 @@ export class CharactersService {
                 return filteredCharactersByName.filter(filterXenos);
             case CharactersFilterBy.MoW:
                 return filteredCharactersByName.filter(isMow);
-            case CharactersFilterBy.Unfarmable:
-                if (typeof farmableChars === 'undefined') farmableChars = new Set(UpgradesService.farmableCharacters);
-
-                return filteredCharactersByName.filter(char => {
-                    return !isMow(char) && !farmableChars?.has(char.id);
-                });
             case CharactersFilterBy.None:
             default:
                 return filteredCharactersByName;
