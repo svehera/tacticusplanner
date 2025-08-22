@@ -6,25 +6,26 @@ import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
 import { CharacterUpgradesService } from '@/fsd/4-entities/character';
 
 import { IXpLevel } from 'src/v2/features/characters/characters.models';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+
+// Mythic Wings
+export const MAX_PROGRESSION_INDEX = 19;
 
 export class TacticusIntegrationService {
     static convertProgressionIndex(progressionIndex: number): [Rarity, RarityStars] {
-        if (progressionIndex < 0 || progressionIndex > 18) {
-            throw new Error('Invalid progression index');
-        }
-
+        // Clamp negative indices to 0 (Common No Stars) and out-of-range positive indices to
+        // highest supported level.
+        const clampedIndex = Math.min(Math.max(progressionIndex, 0), MAX_PROGRESSION_INDEX);
         const rarityThresholds = [0, 3, 6, 9, 12, 16];
         let rarity: Rarity = Rarity.Common;
 
         for (let i = rarityThresholds.length - 1; i >= 0; i--) {
-            if (progressionIndex >= rarityThresholds[i]) {
+            if (clampedIndex >= rarityThresholds[i]) {
                 rarity = i as Rarity;
                 break;
             }
         }
 
-        const rarityStars: RarityStars = (progressionIndex - rarity) as RarityStars;
+        const rarityStars: RarityStars = (clampedIndex - rarity) as RarityStars;
 
         return [rarity, rarityStars];
     }
