@@ -33,11 +33,12 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                 .filter(item => item.stat !== 'Shard' && (!itemsFilter.length || itemsFilter.includes(item.material)))
                 .map(x => ({
                     material: x.material,
+                    snowprintId: x.snowprintId,
                     label: x.label ?? x.material,
                     rarity: Rarity[x.rarity as unknown as number] as unknown as Rarity,
                     craftable: x.craftable,
                     stat: x.stat,
-                    quantity: inventory.upgrades[x.material] ?? 0,
+                    quantity: inventory.upgrades[x.snowprintId] ?? 0,
                     iconPath: x.icon ?? '',
                     faction: x.faction ?? '',
                     visible: true,

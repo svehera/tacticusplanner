@@ -2,6 +2,8 @@
 import { Tooltip } from '@mui/material';
 import React from 'react';
 
+import { RarityMapper } from '@/fsd/5-shared/model';
+
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { IUpgradeRaid } from 'src/v2/features/goals/goals.models';
@@ -14,7 +16,11 @@ export const MaterialItemTitle: React.FC<Props> = ({ upgradeRaid }) => {
     return (
         <div className="flex-box gap10">
             <div className="flex-box column">
-                <UpgradeImage material={upgradeRaid.label} iconPath={upgradeRaid.iconPath} />
+                <UpgradeImage
+                    material={upgradeRaid.label}
+                    iconPath={upgradeRaid.iconPath}
+                    rarity={RarityMapper.rarityToRarityString(upgradeRaid.rarity)}
+                />
                 <span>
                     {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}
                 </span>

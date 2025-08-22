@@ -2,7 +2,7 @@
 
 import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow, IMowDb, IMowStatic, mowsData } from '@/fsd/4-entities/mow';
+import { IMow, IMow2, IMowDb, IMowStatic, mows2Data, mowsData, MowsService } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
@@ -48,7 +48,7 @@ export class GlobalState implements IGlobalState {
     readonly dailyRaids: IDailyRaids;
     readonly guildWar: IGuildWar;
     readonly guild: IGuild;
-    readonly mows: IMow[];
+    readonly mows: Array<IMow | IMow2>;
 
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
@@ -83,7 +83,9 @@ export class GlobalState implements IGlobalState {
         totalUsers?: number
     ): Array<ICharacter2> {
         return CharactersService.charactersData.map(staticData => {
-            const personalCharData = chars.find(c => c.name === staticData.name);
+            const personalCharData = chars.find(c => {
+                return CharactersService.canonicalName(c.name!) === staticData.snowprintId!;
+            });
             const rank = personalCharData?.rank ?? Rank.Locked;
             const rankLevel = rankToLevel[(rank - 1) as Rank];
             const rankRarity = rankToRarity[rank];
@@ -97,7 +99,7 @@ export class GlobalState implements IGlobalState {
                 : [];
 
             const combinedData: IPersonalCharacterData2 = {
-                name: staticData.name,
+                name: staticData.snowprintId!,
                 rank: rank,
                 rarity: rarity,
                 bias: personalCharData?.bias ?? CharacterBias.None,
@@ -156,7 +158,13 @@ export class GlobalState implements IGlobalState {
                 statsByOwner: dbMow?.statsByOwner ?? [],
             };
 
-            result.power = CharactersPowerService.getCharacterAbilityPower(result);
+            const newStaticData = MowsService.resolveToStatic(staticData.id)!;
+            const mow2: IMow2 = {
+                ...newStaticData,
+                ...result,
+            };
+
+            result.power = CharactersPowerService.getCharacterAbilityPower(mow2);
 
             return result;
         });

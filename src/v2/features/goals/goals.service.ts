@@ -2,8 +2,10 @@
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { IPersonalGoal } from 'src/models/interfaces';
 
-import { Rank } from '@/fsd/5-shared/model';
+import { Alliance, Rank } from '@/fsd/5-shared/model';
 
+import { CharactersService } from '@/fsd/4-entities/character';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
@@ -31,7 +33,14 @@ export class GoalsService {
     } {
         const allGoals = goals
             .map(g => {
-                const relatedCharacter = characters.find(x => x.id === g.character);
+                const resolvedChar = CharactersService.resolveCharacter(g.character);
+                const resolvedMow =
+                    MowsService.resolveToStatic(g.character) ?? MowsService.resolveOldIdToStatic(g.character);
+                const relatedCharacter = characters.find(
+                    x =>
+                        x.snowprintId === (resolvedChar?.snowprintId ?? '') ||
+                        x.snowprintId === (resolvedMow?.snowprintId ?? '')
+                );
                 if (
                     ![
                         PersonalGoalType.UpgradeRank,
@@ -42,6 +51,7 @@ export class GoalsService {
                     ].includes(g.type) ||
                     !relatedCharacter
                 ) {
+                    console.warn('Goal not applicable for character or mow:', g);
                     return null;
                 }
                 return this.convertToTypedGoal(g, relatedCharacter);
@@ -79,20 +89,22 @@ export class GoalsService {
                 priority: g.priority,
                 goalId: g.id,
                 include: g.dailyRaids,
-                unitId: unit.id,
+                unitId: unit.snowprintId!,
                 unitName: unit.name,
-                unitIcon: unit.badgeIcon,
+                unitIcon: unit.icon,
+                unitRoundIcon: unit.roundIcon,
                 notes: g.notes ?? '',
-                unitAlliance: unit.alliance,
+                unitAlliance: unit.alliance as Alliance,
             };
 
             if (g.type === PersonalGoalType.MowAbilities) {
+                const mow = unit as IMow2;
                 const result: ICharacterUpgradeMow = {
                     type: PersonalGoalType.MowAbilities,
-                    primaryStart: unit.primaryAbilityLevel,
-                    primaryEnd: g.firstAbilityLevel ?? unit.primaryAbilityLevel,
-                    secondaryStart: unit.secondaryAbilityLevel,
-                    secondaryEnd: g.secondAbilityLevel ?? unit.secondaryAbilityLevel,
+                    primaryStart: mow.primaryAbilityLevel,
+                    primaryEnd: g.firstAbilityLevel ?? mow.primaryAbilityLevel,
+                    secondaryStart: mow.secondaryAbilityLevel,
+                    secondaryEnd: g.secondAbilityLevel ?? mow.secondaryAbilityLevel,
                     upgradesRarity: g.upgradesRarity ?? [],
                     rarity: unit.rarity,
                     stars: unit.stars,
@@ -123,9 +135,10 @@ export class GoalsService {
                 priority: g.priority,
                 goalId: g.id,
                 include: g.dailyRaids,
-                unitId: unit.id,
-                unitName: unit.name,
+                unitId: unit.snowprintId!,
+                unitName: unit.shortName,
                 unitIcon: unit.icon,
+                unitRoundIcon: unit.roundIcon,
                 unitAlliance: unit.alliance,
                 notes: g.notes ?? '',
             };

@@ -3,7 +3,7 @@
 import { ICharacter2 } from 'src/models/interfaces';
 import { IMenuOption } from 'src/v2/models/menu-option';
 
-import { mowsData } from '@/fsd/4-entities/mow';
+import { mows2Data } from '@/fsd/4-entities/mow';
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
@@ -89,7 +89,7 @@ export const getDisplayName = (gameMode: GameMode, subModes: string[]): string =
         const lre = getLreGuideData(subModes, []);
         return lre.name;
     } else if (gameMode === GameMode.incursion) {
-        const mowName = mowsData.find(x => x.id === subModes[0])?.name ?? 'NA';
+        const mowName = mows2Data.mows.find(x => x.name === subModes[0])?.name ?? 'NA';
         return `Incursion - ${mowName}`;
     } else {
         const gameModeDisplay = gameModesForGuides.find(x => x.value === gameMode)?.label ?? 'NA';

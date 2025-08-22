@@ -2,6 +2,7 @@
 
 import { Rank } from '@/fsd/5-shared/model';
 
+import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
 import { getLre } from '@/fsd/3-features/lre';
@@ -180,6 +181,16 @@ export class PersonalDataLocalStorage {
         const value = JSON.stringify(item);
 
         localStorage.setItem(this.storePrefix + key, value);
+    }
+
+    public static fixGoals(data: IPersonalData2): void {
+        for (const goal of data.goals) {
+            const resolvedChar = CharactersService.resolveCharacter(goal.character);
+            if (!resolvedChar) {
+                console.error('could not resolve character in goal', goal);
+            }
+            goal.character = resolvedChar.name;
+        }
     }
 }
 

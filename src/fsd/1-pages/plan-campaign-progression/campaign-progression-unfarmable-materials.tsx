@@ -9,6 +9,7 @@ import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { CharactersService } from '@/fsd/4-entities/character';
 
 import { CampaignData, CampaignsProgressData } from './campaign-progression.models';
+import { CampaignsProgressionService } from './campaign-progression.service';
 
 interface Props {
     progression: CampaignsProgressData;
@@ -25,10 +26,10 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
                     return [
                         <td key={'missing_material-' + material + '-character-' + unitId}>
                             <UnitShardIcon
-                                icon={CharactersService.getUnit(unitId)?.icon ?? '(undefined)'}
+                                icon={CharactersService.getUnit(unitId)?.roundIcon ?? '(undefined)'}
                                 height={30}
                                 width={30}
-                                tooltip={CharactersService.getUnit(unitId)?.icon}
+                                tooltip={CharactersService.getUnit(unitId)?.name}
                             />
                         </td>,
                     ];
@@ -43,7 +44,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
         campaignDataArray.forEach((entry, ignored) => {
             for (const savings of entry[1].savings) {
                 if (!savings.canFarmPrior) {
-                    missingMaterials.add(savings.battle.reward);
+                    missingMaterials.add(CampaignsProgressionService.getReward(savings.battle));
                 }
             }
         });

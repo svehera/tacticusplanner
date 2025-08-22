@@ -3,7 +3,7 @@ import { Checkbox, FormControlLabel, Popover } from '@mui/material';
 import Button from '@mui/material/Button';
 import React, { useEffect, useMemo } from 'react';
 
-import { Alliance } from '@/fsd/5-shared/model';
+import { Alliance, RarityMapper } from '@/fsd/5-shared/model';
 
 import { UpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade/@x/mow';
 
@@ -113,8 +113,12 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                                     gap: 10,
                                     paddingBottom: 10,
                                 }}>
-                                <UpgradeImage material={x.label} iconPath={x.iconPath} /> {inventory[x.id] ?? 0} -{' '}
-                                {inventoryUpdate[x.id]} ={' '}
+                                <UpgradeImage
+                                    material={x.label}
+                                    iconPath={x.iconPath}
+                                    rarity={RarityMapper.rarityToRarityString(x.rarity)}
+                                />{' '}
+                                {inventory[x.id] ?? 0} - {inventoryUpdate[x.id]} ={' '}
                                 {(inventory[x.id] ?? 0) - inventoryUpdate[x.id] < 0
                                     ? 0
                                     : (inventory[x.id] ?? 0) - inventoryUpdate[x.id]}

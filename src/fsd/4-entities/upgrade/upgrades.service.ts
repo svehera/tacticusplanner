@@ -3,6 +3,8 @@
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 
 import { CampaignsService } from '@/fsd/4-entities/campaign/@x/upgrade';
+// eslint-disable-next-line boundaries/element-types
+import { CharactersService } from '@/fsd/4-entities/character';
 
 import { recipeDataByName } from './data';
 import {
@@ -28,7 +30,6 @@ export class UpgradesService {
     static readonly recipeDataFull: IRecipeDataFull = this.convertRecipeData();
     static readonly recipeExpandedUpgradeData: IRecipeExpandedUpgradeData = this.expandRecipeData();
     public static readonly materialByLabel: Record<string, string> = this.createMaterialByLabelLookup();
-    public static readonly farmableCharacters: IMaterialFull['id'][] = this.getFarmableCharacters();
 
     /**
      * @returns a lookup table keyed by material ID or material label pointing
@@ -37,8 +38,7 @@ export class UpgradesService {
     private static createMaterialByLabelLookup(): Record<string, string> {
         const result: Record<string, string> = {};
 
-        Object.entries(this.recipeExpandedUpgradeData).forEach(data => {
-            const [_, upgradeData] = data;
+        Object.entries(this.recipeExpandedUpgradeData).forEach(([, upgradeData]) => {
             result[upgradeData.label] = upgradeData.id;
             result[upgradeData.id] = upgradeData.id;
         });
@@ -54,8 +54,9 @@ export class UpgradesService {
     private static expandRecipeData(): IRecipeExpandedUpgradeData {
         const result: IRecipeExpandedUpgradeData = {};
 
-        result['Gold'] = {
-            id: 'Gold',
+        result['gold'] = {
+            id: 'gold',
+            snowprintId: 'gold',
             label: 'Gold',
             rarity: Rarity.Common,
             iconPath: 'gold',
@@ -66,8 +67,9 @@ export class UpgradesService {
         // First fill in all of the base upgrades.
         Object.entries(UpgradesService.baseUpgradesData).forEach(upgrade => {
             const baseUpgrade = upgrade[1];
-            result[baseUpgrade.id] = {
+            result[baseUpgrade.snowprintId] = {
                 id: baseUpgrade.id,
+                snowprintId: baseUpgrade.snowprintId,
                 label: baseUpgrade.label,
                 rarity: baseUpgrade.rarity,
                 iconPath: baseUpgrade.iconPath,
@@ -88,8 +90,9 @@ export class UpgradesService {
             craftedUpgrade.recipe.forEach(recipeItem => {
                 expandedRecipe[recipeItem.id] = recipeItem.count;
             });
-            result[craftedUpgrade.id] = {
+            result[craftedUpgrade.snowprintId] = {
                 id: craftedUpgrade.id,
+                snowprintId: craftedUpgrade.snowprintId,
                 label: craftedUpgrade.label,
                 rarity: craftedUpgrade.rarity,
                 iconPath: craftedUpgrade.iconPath,
@@ -104,24 +107,26 @@ export class UpgradesService {
         //
         // As of 2025-01-01, it takes three passes (one of which is above) to fully expand all recipe data.
         let passes: number = 0;
-        const kNumExpectedPasses = 2;
+        const kNumExpectedPasses = 9;
         for (let moreToExpand: boolean = true; moreToExpand; ) {
             ++passes;
             moreToExpand = false;
             Object.entries(UpgradesService.craftedUpgradesData).forEach(data => {
                 const material: ICraftedUpgrade = data[1];
-                const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(material.id, result);
+                const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(material.snowprintId, result);
                 if (!expandedRecipe) {
                     if (passes >= kNumExpectedPasses) {
-                        console.log(passes + ": still haven't expanded base ingredient: '" + material.id + "'");
+                        console.error(
+                            passes + ": still haven't expanded base ingredient: '" + material.snowprintId + "'"
+                        );
                     }
                     moreToExpand = true;
                     return;
                 }
-                result[material.id] = expandedRecipe;
+                result[material.snowprintId] = expandedRecipe;
             });
-            if (passes > 100) {
-                console.log('Infinite loop in expandRecipeData');
+            if (passes > 10) {
+                console.error('Infinite loop in expandRecipeData');
                 break;
             }
         }
@@ -162,10 +167,11 @@ export class UpgradesService {
     ): IRecipeExpandedUpgrade | null {
         const upgrade = UpgradesService.craftedUpgradesData[key];
         if (!upgrade) {
-            console.log("null upgrade: '" + key + "'");
+            console.trace("null upgrade: '" + key + "'");
             return null;
         }
         const expandedRecipe: IRecipeExpandedUpgrade = {
+            snowprintId: upgrade.snowprintId,
             id: upgrade.id,
             label: upgrade.label,
             rarity: upgrade.rarity,
@@ -256,6 +262,9 @@ export class UpgradesService {
     }
 
     public static getUpgrade(upgradeId: string): IBaseUpgrade | ICraftedUpgrade {
+        if (!this.baseUpgradesData[upgradeId] && !this.craftedUpgradesData[upgradeId]) {
+            console.error('Upgrade not found:', upgradeId);
+        }
         return this.baseUpgradesData[upgradeId] ?? this.craftedUpgradesData[upgradeId];
     }
 
@@ -281,7 +290,7 @@ export class UpgradesService {
             }
 
             // Get all the locations where this particular upgrade can be farmed.
-            const locations = upgradeLocationsShort[upgrade.material] ?? [];
+            const locations = upgradeLocationsShort[upgrade.snowprintId] ?? [];
             const locationsComposed = orderBy(
                 locations.map(location => CampaignsService.campaignsComposed[location]),
                 ['dropRate', 'nodeNumber'],
@@ -289,7 +298,8 @@ export class UpgradesService {
             );
 
             result[upgradeName] = {
-                id: upgrade.material,
+                id: upgrade.snowprintId,
+                snowprintId: upgrade.snowprintId,
                 label: upgrade.label ?? upgrade.material,
                 rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
                 locations: locationsComposed,
@@ -325,7 +335,8 @@ export class UpgradesService {
             const recipeDetails = upgrade.recipe?.map(item => this.getRecipe(item)) ?? [];
 
             result[upgradeName] = {
-                id,
+                id: upgrade.snowprintId,
+                snowprintId: upgrade.snowprintId,
                 label: upgrade.label ?? id,
                 rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
                 iconPath: upgrade.icon!,
@@ -391,7 +402,7 @@ export class UpgradesService {
         };
     }
 
-    // Converts the static JSON in recipeData to an IRecipeDataFull object.
+    // Converts the static JSON in recipeData, and shards in charData, to an IRecipeDataFull object.
     static convertRecipeData(): IRecipeDataFull {
         const result: IRecipeDataFull = {};
         const upgrades = Object.keys(recipeDataByName);
@@ -405,9 +416,26 @@ export class UpgradesService {
             const upgrade = recipeDataByName[materialId];
             const locations = upgradeLocations[materialId] ?? [];
 
-            if (!upgrade || !upgrade.recipe?.length) {
+            if (!upgrade) {
+                console.error('Unknown upgrade material:', materialId);
                 const item: IMaterialRecipeIngredientFull = {
                     id: materialId,
+                    snowprintId: materialId,
+                    label: materialId,
+                    count: count,
+                    stat: '',
+                    craftable: false,
+                    locations: locations,
+                    iconPath: '',
+                    characters: [],
+                    priority: 0,
+                    rarity: RarityMapper.stringToNumber[RarityString.Common],
+                };
+                return item;
+            } else if (!upgrade.recipe?.length) {
+                const item: IMaterialRecipeIngredientFull = {
+                    id: materialId,
+                    snowprintId: upgrade.snowprintId,
                     label: upgrade?.label ?? upgrade?.material ?? materialId,
                     count,
                     rarity: RarityMapper.stringToNumber[upgrade?.rarity as RarityString],
@@ -424,6 +452,7 @@ export class UpgradesService {
             } else {
                 return {
                     id: materialId,
+                    snowprintId: upgrade.snowprintId,
                     label: upgrade.label ?? upgrade.material,
                     count,
                     stat: upgrade.stat,
@@ -444,17 +473,19 @@ export class UpgradesService {
             if (!upgrade.craftable) {
                 result[upgradeName] = {
                     id: upgrade.material,
+                    snowprintId: upgrade.snowprintId,
                     label: upgrade.label ?? upgrade.material,
                     stat: upgrade.stat,
                     rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
                     craftable: upgrade.craftable,
-                    allMaterials: [getRecipe(upgrade.material, 1, [])],
+                    allMaterials: [getRecipe(upgrade.snowprintId, 1, [])],
                     iconPath: upgrade.icon ?? '',
                 };
             } else {
                 const allMaterials: IMaterialRecipeIngredientFull[] = [];
                 result[upgradeName] = {
                     id: upgrade.material,
+                    snowprintId: upgrade.snowprintId,
                     label: upgrade.label ?? upgrade.material,
                     stat: upgrade.stat,
                     rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
@@ -467,6 +498,7 @@ export class UpgradesService {
 
                 result[upgradeName].allMaterials = map(groupedData, (items, material) => ({
                     id: material,
+                    snowprintId: items[0].snowprintId,
                     count: sumBy(items, 'count'),
                     quantity: 0,
                     countLeft: 0,
@@ -481,6 +513,45 @@ export class UpgradesService {
                     priority: 0,
                 }));
             }
+        }
+
+        for (const character of CharactersService.charactersData) {
+            const kRegular = 0;
+            const kMythic = 1;
+            const addShards = (type: number) => {
+                const upgradeId =
+                    type === kMythic ? 'mythicShards_' + character.snowprintId : 'shards_' + character.snowprintId;
+                const upgradeName = (type === kMythic ? 'Mythic Shards' : 'Shards') + ' for ' + character.name;
+                const locations = upgradeLocations[upgradeId] ?? [];
+
+                const item: IMaterialRecipeIngredientFull = {
+                    id: upgradeId,
+                    snowprintId: upgradeId,
+                    label: upgradeName,
+                    count: 1,
+                    rarity: type == kMythic ? Rarity.Mythic : Rarity.Common,
+                    stat: type == kRegular ? 'Shard' : 'MythicShard',
+                    locations: locations,
+                    craftable: false,
+                    locationsComposed: locations.map(x => CampaignsService.campaignsComposed[x]),
+                    iconPath: character.roundIcon,
+                    characters: [],
+                    priority: 0,
+                };
+
+                result[upgradeId] = {
+                    id: item.id,
+                    snowprintId: item.snowprintId,
+                    label: item.label,
+                    stat: item.stat,
+                    rarity: item.rarity,
+                    craftable: item.craftable,
+                    allMaterials: [item],
+                    iconPath: item.iconPath ?? '',
+                };
+            };
+            addShards(kRegular);
+            addShards(kMythic);
         }
 
         return result;
@@ -511,6 +582,7 @@ export class UpgradesService {
         const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => {
             return {
                 id: material,
+                snowprintId: items[0].snowprintId,
                 count: sumBy(items, 'count'),
                 label: items[0].label,
                 rarity: items[0].rarity,
@@ -528,13 +600,5 @@ export class UpgradesService {
 
     static isValidUpgrade(upgrade: string): boolean {
         return Object.hasOwn(recipeDataByName, upgrade);
-    }
-
-    private static getFarmableCharacters(): IMaterialFull['id'][] {
-        const chars: IMaterialFull['id'][] = [];
-        return Object.values(UpgradesService.recipeDataFull).reduce((acc, upgrade) => {
-            if (upgrade.stat === 'Shard') acc.push(upgrade.id);
-            return acc;
-        }, chars);
     }
 }

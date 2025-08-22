@@ -1,5 +1,8 @@
 ﻿import { groupBy, mapValues, orderBy, sum } from 'lodash';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import { rarityStringToNumber } from '@/models/constants';
+
 import { Rarity } from '@/fsd/5-shared/model';
 
 import { IMowLevelMaterials } from '@/fsd/4-entities/mow';
@@ -11,18 +14,17 @@ export class MowLookupService {
     public static getTotals(materials: IMowLevelMaterials[], multiplier: 1 | 2 = 1): IMowMaterialsTotal {
         const components = sum(materials.map(x => x.components)) * multiplier;
         const gold = sum(materials.map(x => x.gold)) * multiplier;
+        const salvage = sum(materials.map(x => x.salvage)) * multiplier;
 
-        const badges = mapValues(groupBy(materials, 'rarity'), x => sum(x.map(y => y.badges)) * multiplier) as Record<
-            Rarity,
-            number
-        >;
-
-        const forgeBadges = mapValues(
-            groupBy(materials, 'rarity'),
-            x => sum(x.map(y => y.forgeBadges)) * multiplier
-        ) as Record<Rarity, number>;
+        const badges = new Map<Rarity, number>();
+        const forgeBadges = new Map<Rarity, number>();
+        for (const material of materials) {
+            badges.set(material.rarity, (badges.get(material.rarity) ?? 0) + material.badges);
+            forgeBadges.set(material.rarity, (forgeBadges.get(material.rarity) ?? 0) + material.forgeBadges);
+        }
 
         return {
+            salvage,
             components,
             gold,
             badges,

@@ -1,9 +1,10 @@
 ﻿{
     "id": 5,
+    "unitSnowprintId": "spaceBlackmane",
     "name": "Ragnar",
     "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Ragnar",
     "eventStage": 3,
-    "nextEventDate": "Finished",
+    "finished": true,
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
         "Defeat 30 Orks",

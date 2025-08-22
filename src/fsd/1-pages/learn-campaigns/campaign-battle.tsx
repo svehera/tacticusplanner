@@ -1,11 +1,8 @@
 import { Tooltip } from '@mui/material';
 import React from 'react';
 
-import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
-
 import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character';
-import { UpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
@@ -15,6 +12,7 @@ interface Props {
 }
 
 export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
+    /*
     const getReward = () => {
         const upgrade = UpgradesService.recipeDataFull[battle.reward];
         if (upgrade) {
@@ -42,6 +40,7 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
         }
         return <></>;
     };
+    */
 
     return (
         <div style={{ alignContent: 'center' }}>
@@ -57,10 +56,35 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
                     <tr>
                         <td align="center">
                             <div>
-                                {getReward()}
-                                {battle.dropRate ? `${(battle.dropRate * 100).toFixed(2)}%` : '(N/A)'}
+                                {battle.rewards.guaranteed.map((reward, index) => {
+                                    return (
+                                        <span key={index}>
+                                            Guaranteed: {reward.id}{' '}
+                                            {reward.min !== reward.max
+                                                ? reward.min + ' - ' + reward.max
+                                                : ': ' + reward.min}
+                                        </span>
+                                    );
+                                })}
                             </div>
-                            <div>Character Slots: {battle.slots ?? 5}</div>
+                            <div>
+                                {battle.rewards.potential.map((reward, index) => {
+                                    return (
+                                        <span key={index}>
+                                            Potential: {reward.id}
+                                            {' ' +
+                                                reward.chance_numerator +
+                                                ' / ' +
+                                                reward.chance_denominator +
+                                                ' (eff: ' +
+                                                (reward.effective_rate * 100).toFixed(2) +
+                                                '%)'}
+                                            )
+                                        </span>
+                                    );
+                                })}
+                            </div>
+                            <div>Character Slots: {battle.slots!}</div>
                         </td>
                     </tr>
                 </tbody>

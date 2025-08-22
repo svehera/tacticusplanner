@@ -1,9 +1,10 @@
 ﻿{
     "id": 6,
+    "unitSnowprintId": "admecDominus",
     "name": "Vitruvius",
     "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Vitruvius",
     "eventStage": 3,
-    "nextEventDate": "Finished",
+    "finished": true,
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
         "Defeat 30 Necron",

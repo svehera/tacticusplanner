@@ -2,6 +2,7 @@
 
 export interface IInventoryUpgrade {
     material: string;
+    snowprintId: string;
     label: string;
     rarity: Rarity;
     craftable: boolean;

@@ -1,7 +1,7 @@
 ﻿import { Badge } from '@mui/material';
 import React from 'react';
 
-import { Alliance } from '@/fsd/5-shared/model';
+import { Alliance, RarityMapper } from '@/fsd/5-shared/model';
 import { BadgeImage, ComponentImage, ForgeBadgeImage } from '@/fsd/5-shared/ui/icons';
 
 import { IBaseUpgrade, ICraftedUpgrade, UpgradeImage } from '@/fsd/4-entities/upgrade/@x/mow';
@@ -18,8 +18,9 @@ interface Props {
 
 export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mowId, alliance }) => {
     const size = 'medium';
-    const [primary] = MowsService.getMaterialsList(mowId, mowId, alliance, [primaryLevel + 1]);
-    const [secondary] = MowsService.getMaterialsList(mowId, mowId, alliance, [secondaryLevel + 1]);
+    const mow = MowsService.resolveToStatic(mowId);
+    const [primary] = MowsService.getMaterialsList(mowId, mow?.name ?? '', alliance, [primaryLevel + 1]);
+    const [secondary] = MowsService.getMaterialsList(mowId, mow?.name ?? '', alliance, [secondaryLevel + 1]);
 
     const renderAbility = (
         label: string,
@@ -55,7 +56,13 @@ export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mow
                 <div className="flex items-center">
                     <div className="flex gap-1">
                         {upgrades.map((x, index) => (
-                            <UpgradeImage key={x.id + index} material={x.label} iconPath={x.iconPath} size={40} />
+                            <UpgradeImage
+                                key={x.id + index}
+                                material={x.label}
+                                iconPath={x.iconPath}
+                                rarity={RarityMapper.rarityToRarityString(x.rarity)}
+                                size={40}
+                            />
                         ))}
                     </div>
                 </div>

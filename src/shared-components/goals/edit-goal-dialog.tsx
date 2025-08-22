@@ -16,7 +16,7 @@ import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
-import { Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { Alliance, Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
@@ -30,6 +30,7 @@ import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
 
 import { CharacterUpgrades } from '@/fsd/3-features/character-details';
+import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
 import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
@@ -121,7 +122,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                 });
             }
 
-            enqueueSnackbar(`Goal for ${updatedGoal.unitName} is updated`, { variant: 'success' });
+            enqueueSnackbar(`Goal for ${updatedGoal.unitName ?? updatedGoal.unitId} was updated`, {
+                variant: 'success',
+            });
         }
         setOpenDialog(false);
         if (onClose) {
@@ -136,7 +139,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
 
     const maxRank = useMemo(() => {
-        return ignoreRankRarity ? Rank.Diamond3 : RarityMapper.toMaxRank[unit?.rarity ?? 0];
+        return ignoreRankRarity ? Rank.Adamantine1 : RarityMapper.toMaxRank[unit?.rarity ?? 0];
     }, [unit?.rarity, ignoreRankRarity]);
 
     let currentRankValues: number[] = [];
@@ -149,7 +152,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
     const possibleLocations =
         [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
-            ? StaticDataService.getItemLocations(unit.id)
+            ? StaticDataService.getItemLocations(`shards_${unit.id}`)
             : [];
 
     const unlockedLocations = possibleLocations
@@ -162,7 +165,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
             <DialogTitle className="flex gap3 items-center">
-                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <UnitShardIcon icon={goal.unitIcon} />
+                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <UnitShardIcon icon={goal.unitRoundIcon} />
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20 }}>
                 <Box id="edit-goal-form" className="flex flex-col gap-5">
@@ -231,6 +234,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Primary current level"
                                     min={unit.primaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.primaryStart}
                                     valueChange={primaryStart => {
                                         setForm(curr => ({
@@ -243,6 +247,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Primary target level"
                                     min={unit.primaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.primaryEnd}
                                     valueChange={primaryEnd => {
                                         setForm(curr => ({
@@ -257,6 +262,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Secondary current level"
                                     min={unit.secondaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.secondaryStart}
                                     valueChange={secondaryStart => {
                                         setForm(curr => ({
@@ -269,6 +275,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Secondary target level"
                                     min={unit.secondaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.secondaryEnd}
                                     valueChange={secondaryEnd => {
                                         setForm(curr => ({
@@ -291,7 +298,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
                             <MowUpgrades
                                 mowId={unit.id}
-                                alliance={unit.alliance}
+                                alliance={unit.alliance as Alliance}
                                 primaryLevel={form.primaryStart}
                                 secondaryLevel={form.secondaryStart}
                             />

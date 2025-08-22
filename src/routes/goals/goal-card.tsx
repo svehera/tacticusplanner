@@ -119,7 +119,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
             case PersonalGoalType.UpgradeRank: {
                 const { xpEstimate } = goalEstimate;
                 const linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
-                const params = `?character=${goal.unitName}&rankStart=${Rank[goal.rankStart]}&rankEnd=${
+                const params = `?character=${goal.unitId}&rankStart=${Rank[goal.rankStart]}&rankEnd=${
                     Rank[goal.rankEnd]
                 }&rankPoint5=${goal.rankPoint5}`;
 
@@ -329,8 +329,8 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 title={
                     <div className="flex-box gap5">
                         <span>#{goal.priority}</span>
-                        <UnitShardIcon icon={goal.unitIcon} height={30} />
-                        <span style={{ fontSize: '1.2rem' }}>{goal.unitName}</span>
+                        <UnitShardIcon icon={goal.unitRoundIcon} height={30} />
+                        <span style={{ fontSize: '1.2rem' }}>{goal.unitName ?? goal.unitId}</span>
                     </div>
                 }
                 subheader={calendarDate}

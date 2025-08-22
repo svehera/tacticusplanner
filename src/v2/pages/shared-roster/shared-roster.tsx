@@ -8,11 +8,12 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { LoaderWithText, Conditional } from '@/fsd/5-shared/ui';
 
+import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { CharactersPowerService, CharactersValueService } from '@/fsd/4-entities/unit';
 
 import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { IUnit } from 'src/v2/features/characters/characters.models';
+import { IMow2, IUnit } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
@@ -56,7 +57,12 @@ export const SharedRoster = () => {
         return <div>Failed to fetch shared roster. Try again later.</div>;
     }
 
-    const sharedRoster: IUnit[] = [...GlobalState.initCharacters(data.characters), ...GlobalState.initMows(data.mows)];
+    const resolvedMows = GlobalState.initMows(data.mows).map(mow => {
+        if ('snowprintId' in mow) return mow;
+        return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
+    }) as IMow2[];
+
+    const sharedRoster: IUnit[] = [...GlobalState.initCharacters(data.characters), ...resolvedMows];
 
     const charactersFiltered = CharactersService.filterUnits(sharedRoster, viewControls.filterBy, nameFilter);
     const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));

@@ -1,9 +1,11 @@
 export interface ILegendaryEventStatic {
     id: number;
+    unitSnowprintId: string; // The snowprint ID for the unit.
     name: string;
     wikiLink: string;
     eventStage: number;
-    nextEventDate: string;
+    finished: boolean;
+    nextEventDate?: string;
     nextEventDateUtc?: string;
 
     regularMissions: string[];

@@ -109,9 +109,9 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                     return (
                         <a href={getRankLookupHref(goalData.goalId)}>
                             <UnitShardIcon
-                                icon={getGoalUnit(goalData.goalId)?.icon ?? '(undefined)'}
+                                icon={getGoalUnit(goalData.goalId)?.roundIcon ?? '(undefined)'}
                                 height={30}
-                                tooltip={getGoalUnit(goalData.goalId)?.icon}
+                                tooltip={getGoalUnit(goalData.goalId)?.name}
                             />
                         </a>
                     );

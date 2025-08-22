@@ -24,7 +24,7 @@ export const CharacterSelect: React.FC<Props> = ({ label, idsAndNames, value, va
     const getImageComponent = (id: string) => {
         const unit = CharactersService.charactersData.find(unit => unit.id === id);
         if (unit != undefined) {
-            return <UnitShardIcon icon={unit.icon} name={unit.name} height={30} width={30} tooltip={unit.name} />;
+            return <UnitShardIcon icon={unit.roundIcon} name={unit.name} height={30} width={30} tooltip={unit.name} />;
         } else {
             return getNpcPortrait(id);
         }

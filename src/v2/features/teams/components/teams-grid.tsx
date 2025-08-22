@@ -12,7 +12,7 @@ import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
-import { IMow } from 'src/v2/features/characters/characters.models';
+import { IMow2 } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { TeamView } from 'src/v2/features/teams/components/team-view';
 import { allModes } from 'src/v2/features/teams/teams.constants';
@@ -22,7 +22,7 @@ import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 interface Props {
     teams: IPersonalTeam[];
     characters: ICharacter2[];
-    mows: IMow[];
+    mows: IMow2[];
     deleteTeam: (teamId: string) => void;
     editTeam: (team: IPersonalTeam) => void;
 }
@@ -35,7 +35,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
 
     const renderTeam = (team: IPersonalTeam) => {
         const teamCharacters = team.lineup.map(id => characters.find(character => id === character.id)!);
-        const teamMow = mows.find(x => x.id === team.mowId);
+        const teamMow = mows.find(x => x.snowprintId === team.mowId);
         const withMow = !!teamMow;
         const subModes = team.subModes.map(value => allModes.find(x => x.value === value)?.label ?? '').join(', ');
 

@@ -6,8 +6,8 @@ import { StoreContext } from '@/reducers/store.provider';
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
 
-import { CharactersService } from '@/fsd/4-entities/character';
-import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { getLre } from '@/fsd/3-features/lre';
 
@@ -16,6 +16,15 @@ import { LreSection } from './lre.models';
 export const useLre = () => {
     const { setHeaderTitle } = useTitle();
     const { characters } = useContext(StoreContext);
+    const resolvedCharacters = useMemo(() => {
+        return characters.map(x => {
+            const ret: ICharacter2 = { ...x };
+            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
+            ret.name = staticChar?.snowprintId ?? x.name;
+            return ret;
+        });
+    }, [characters]);
+
     const [legendaryEventId] = useQueryState<LegendaryEventEnum>(
         'character',
         initQueryParam =>
@@ -39,17 +48,19 @@ export const useLre = () => {
     const changeTab = (_: React.SyntheticEvent, value: LreSection) => setSection(value);
 
     useEffect(() => {
-        const relatedLre = CharactersService.lreCharacters.find(x => x.lre!.id === legendaryEventId);
-        if (relatedLre) {
+        const lreChar = CharactersService.getLreCharacter(legendaryEventId);
+        if (lreChar) {
+            const relatedLre = LegendaryEventService.getEventByCharacterSnowprintId(lreChar!.snowprintId!);
+            const nextDate = relatedLre?.nextEventDate ?? 'TBA';
             setHeaderTitle(
-                relatedLre.lre!.finished
-                    ? `${relatedLre.name} (Finished)`
-                    : `${relatedLre.name} ${relatedLre.lre!.eventStage}/3 (${relatedLre.lre!.nextEventDate})`
+                !relatedLre || relatedLre.finished
+                    ? `${lreChar.name} (Finished)`
+                    : `${lreChar.name} ${relatedLre!.eventStage}/3 (${nextDate})`
             );
         }
     }, [legendaryEventId]);
 
-    const legendaryEvent = useMemo(() => getLre(legendaryEventId, characters), [legendaryEventId]);
+    const legendaryEvent = useMemo(() => getLre(legendaryEventId, resolvedCharacters), [legendaryEventId]);
 
     return { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab };
 };

@@ -73,7 +73,13 @@ export const FactionsTile = ({
             <div className={`characters-box ${factionClass}`}>
                 {faction.units.map(unit => {
                     if (unit.unitType === UnitType.character) {
-                        return <CharacterTile key={unit.id} character={unit} onCharacterClick={onCharacterClick} />;
+                        return (
+                            <CharacterTile
+                                key={unit.snowprintId!}
+                                character={unit}
+                                onCharacterClick={onCharacterClick}
+                            />
+                        );
                     }
                     if (unit.unitType === UnitType.mow) {
                         return <MowTile key={unit.id} mow={unit} onClick={onCharacterClick} />;

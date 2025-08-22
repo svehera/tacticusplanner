@@ -9,7 +9,7 @@ import { Rank } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
-import { CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
+import { CharactersService, CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 import {
     IBaseUpgrade,
@@ -17,6 +17,7 @@ import {
     IMaterial,
     UpgradesService as FsdUpgradesService,
 } from '@/fsd/4-entities/upgrade';
+import { recipeDataByName } from '@/fsd/4-entities/upgrade/data';
 
 import {
     ICharacterUpgradeEstimate,
@@ -35,11 +36,25 @@ export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
+
+    public static canonicalizeInventoryUpgrades(inventoryUpgrades: Record<string, number>): Record<string, number> {
+        return Object.fromEntries(
+            Object.entries(inventoryUpgrades).map(([key, value]) => {
+                return [
+                    recipeDataByName[key]
+                        ? key
+                        : (Object.values(recipeDataByName).find(x => x.material === key)?.snowprintId ?? key),
+                    value,
+                ];
+            })
+        );
+    }
+
     static getUpgradesEstimatedDays(
         settings: IEstimatedRanksSettings,
         ...goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
     ): IEstimatedUpgrades {
-        const inventoryUpgrades = cloneDeep(settings.upgrades);
+        const inventoryUpgrades = this.canonicalizeInventoryUpgrades(cloneDeep(settings.upgrades));
 
         const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals);
 
@@ -247,15 +262,13 @@ export class UpgradesService {
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
     ): IUnitUpgrade[] {
         const result: IUnitUpgrade[] = [];
+        const canonUpgrades = this.canonicalizeInventoryUpgrades(inventoryUpgrades);
         for (const goal of goals) {
             const upgradeRanks =
                 goal.type === PersonalGoalType.UpgradeRank
                     ? CharacterUpgradesService.getCharacterUpgradeRank(goal)
                     : this.getMowUpgradeRank(goal);
-            const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(
-                upgradeRanks,
-                inventoryUpgrades
-            );
+            const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(upgradeRanks, canonUpgrades);
 
             if (goal.upgradesRarity.length) {
                 // remove upgrades that do not match to selected rarities
@@ -382,7 +395,7 @@ export class UpgradesService {
         requiredCount: number,
         acquiredCount: number
     ): ICharacterUpgradeEstimate {
-        const { id, label, rarity, iconPath, locations, relatedCharacters, relatedGoals } = upgrade;
+        const { id, snowprintId, label, rarity, iconPath, locations, relatedCharacters, relatedGoals } = upgrade;
 
         const selectedLocations = locations.filter(x => x.isSuggested);
 
@@ -390,6 +403,7 @@ export class UpgradesService {
 
         const estimate: ICharacterUpgradeEstimate = {
             id,
+            snowprintId,
             label,
             rarity,
             iconPath,
@@ -537,7 +551,15 @@ export class UpgradesService {
                 settings.preferences.farmStrategy === DailyRaidsStrategy.custom &&
                 settings.preferences.customSettings
             ) {
-                let locationTypes = [...settings.preferences.customSettings[combinedUpgrade.rarity]];
+                let locationTypes = [
+                    ...(settings.preferences.customSettings[combinedUpgrade.rarity] ?? [
+                        CampaignType.Normal,
+                        CampaignType.Early,
+                        CampaignType.Mirror,
+                        CampaignType.Elite,
+                        CampaignType.Extremis,
+                    ]),
+                ];
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
                 let ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
                 if (ignoredLocations.length !== selectedLocations.length) {
@@ -676,8 +698,7 @@ export class UpgradesService {
                 const acquiredCount = inventoryUpgrades[upgradeId] ?? 0;
                 inventoryUpgrades[upgradeId] = Math.max(acquiredCount - requiredCount, 0);
                 const estimate = this.getUpgradeEstimate(upgrade, requiredCount, acquiredCount);
-
-                estimate.relatedCharacters = [goal.unitName];
+                estimate.relatedCharacters = [CharactersService.resolveCharacter(goal.unitName)?.name ?? goal.unitName];
                 estimate.relatedGoals = [goal.goalId];
                 goalUpgrades.push(estimate);
             }
@@ -709,8 +730,8 @@ export class UpgradesService {
 
         for (const materialName in FsdUpgradesService.recipeDataByName) {
             const material = FsdUpgradesService.recipeDataByName[materialName];
-            if (material.tacticusId) {
-                result[material.tacticusId] = material;
+            if (material.snowprintId) {
+                result[material.snowprintId] = material;
             }
         }
 

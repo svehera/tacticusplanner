@@ -7,7 +7,7 @@ import factionsData from 'src/v2/data/factions.json';
 import { Rank, Rarity, UnitType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow } from '@/fsd/4-entities/mow';
+import { IMow, IMow2 } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow, isUnlocked } from '@/fsd/4-entities/unit/units.functions';
 import { IMaterialFull, UpgradesService } from '@/fsd/4-entities/upgrade';
@@ -56,16 +56,19 @@ export class CharactersService {
                 return filteredCharactersByName.filter(filterXenos);
             case CharactersFilterBy.MoW:
                 return filteredCharactersByName.filter(isMow);
-            case CharactersFilterBy.Unfarmable:
-                if (typeof farmableChars === 'undefined') farmableChars = new Set(UpgradesService.farmableCharacters);
-
-                return filteredCharactersByName.filter(char => {
-                    return !isMow(char) && !farmableChars?.has(char.id);
-                });
             case CharactersFilterBy.None:
             default:
                 return filteredCharactersByName;
         }
+    }
+
+    private static getFaction(unit: IUnit): string {
+        if ('faction' in unit) return unit.faction;
+        return unit.factionId;
+    }
+
+    private static haveSameFaction(unit1: IUnit, unit2: IUnit): boolean {
+        return this.getFaction(unit1) === this.getFaction(unit2);
     }
 
     static orderUnits(units: IUnit[], charactersOrderBy: CharactersOrderBy): IUnit[] {
@@ -104,7 +107,7 @@ export class CharactersService {
                         } else {
                             return !isUnlocked(unit)
                                 ? Math.ceil((unit.shards / charsUnlockShards[unit.rarity]) * 100)
-                                : units.filter(x => x.faction === unit.faction && isUnlocked(x)).length;
+                                : units.filter(x => this.haveSameFaction(x, unit) && isUnlocked(x)).length;
                         }
                     },
                     ['asc']
@@ -132,7 +135,7 @@ export class CharactersService {
 
         // Derive relevant faction data in one pass
         const result: IFaction[] = factionsData.reduce((acc: IFaction[], faction) => {
-            const characters = factionCharacters[faction.name];
+            const characters = factionCharacters[faction.snowprintId];
             if (!characters) return acc;
 
             let bsValue = 0,
@@ -180,7 +183,6 @@ export class CharactersService {
 
     static capCharacterAtRarity(character: ICharacter2, rarity: Rarity): ICharacter2 {
         const capped = rarityCaps[rarity];
-
         return {
             ...character,
             rarity: Math.min(character.rarity, capped.rarity),
@@ -192,7 +194,7 @@ export class CharactersService {
         };
     }
 
-    static capMowAtRarity(mow: IMow, rarity: Rarity): IMow {
+    static capMowAtRarity(mow: IMow2, rarity: Rarity): IMow2 {
         const capped = rarityCaps[rarity];
 
         return {
@@ -230,6 +232,10 @@ export class CharactersService {
     }
 
     public static groupByRarityPools(availableCharacters: IPersonalCharacterData2[]): Record<Rarity, number> {
+        // TODO(mythic): is rank right? what is this for?
+        const mythicPool = availableCharacters.filter(
+            x => x.rarity === Rarity.Mythic && x.rank >= Rank.Diamond1
+        ).length;
         const legendaryPool = availableCharacters.filter(
             x => x.rarity === Rarity.Legendary && x.rank >= Rank.Gold1
         ).length;
@@ -240,6 +246,7 @@ export class CharactersService {
         ).length;
 
         return {
+            [Rarity.Mythic]: mythicPool,
             [Rarity.Legendary]: legendaryPool,
             [Rarity.Epic]: epicPool,
             [Rarity.Rare]: rarePool,

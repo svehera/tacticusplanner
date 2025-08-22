@@ -57,6 +57,7 @@ export class CharactersValueService {
                 const recipe = UpgradesService.recipeDataFull[upgrade];
                 if (!recipe) {
                     return {
+                        snowprintId: '',
                         rarity: 0,
                         craftable: false,
                         iconPath: upgrade,
@@ -89,6 +90,8 @@ export class CharactersValueService {
             2: 25, // Rare
             3: 60, // Epic
             4: 150, // Legendary
+            // Mythic value estimated with AI, unsure of original source
+            5: 375, // Mythic
         };
 
         const upgrades = CharactersValueService.getUpgrades({
@@ -432,8 +435,9 @@ export class CharactersValueService {
                 return ShardBS * 425 + LegendaryOrbBS * 10;
             case RarityStars.RedFiveStars:
                 return ShardBS * 675 + LegendaryOrbBS * 15;
-            case RarityStars.BlueStar:
+            case RarityStars.OneBlueStar:
                 return ShardBS * 1175 + LegendaryOrbBS * 20;
+            // TODO(mythic): Implement other blue stars and Mythic Wings value
             default: {
                 console.warn('Stars value unknown');
                 return 0;
@@ -468,6 +472,8 @@ export class CharactersValueService {
         const RareOrbBS = 490 / 3;
         const EpicOrbBS = 1143 / 3;
         const LegendaryOrbBS = 2800 / 3;
+        // Mythic value estimated via AI, unsure of original source of values
+        const MythicOrbBS = 6720 / 3;
 
         switch (rarity) {
             case Rarity.Common:
@@ -480,6 +486,10 @@ export class CharactersValueService {
                 return ShardBS * 50 + EpicOrbBS * 10;
             case Rarity.Legendary:
                 return ShardBS * 100 + LegendaryOrbBS * 10;
+            case Rarity.Mythic:
+                // Mythic values were invented to get a rough idea. I have no idea where the pre-Mythic
+                // value calcs come from, so unable to replicate the same logic here.
+                return ShardBS * 200 + MythicOrbBS * 10;
             default: {
                 console.warn('Rarity value unknown');
                 return 0;

@@ -26,7 +26,7 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
                                         <div className="text-2xl font-bold">{group.letter}</div>
                                         {group.subItems.map(item => (
                                             <InventoryItem
-                                                key={item.material}
+                                                key={item.snowprintId}
                                                 data={item}
                                                 showIncDec={showPlusMinus}
                                                 dataUpdate={dataUpdate}
@@ -47,7 +47,7 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
                                             <div className="text-2xl font-bold">{group.letter}</div>
                                             {group.subItems.map(item => (
                                                 <InventoryItem
-                                                    key={item.material}
+                                                    key={item.snowprintId}
                                                     data={item}
                                                     showIncDec={showPlusMinus}
                                                     dataUpdate={dataUpdate}
@@ -68,7 +68,7 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
                             <div className="flex gap-5 flex-wrap justify-center">
                                 {group.itemsAll.map(item => (
                                     <InventoryItem
-                                        key={item.material}
+                                        key={item.snowprintId}
                                         data={item}
                                         showIncDec={showPlusMinus}
                                         dataUpdate={dataUpdate}
@@ -82,7 +82,7 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
                                 <div className="flex gap-5 flex-wrap justify-center">
                                     {group.itemsAllCrafted.map(item => (
                                         <InventoryItem
-                                            key={item.material}
+                                            key={item.snowprintId}
                                             data={item}
                                             showIncDec={showPlusMinus}
                                             dataUpdate={dataUpdate}

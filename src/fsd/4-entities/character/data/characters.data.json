@@ -1296,14 +1296,7 @@
         "Number": 51,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Aun-shi.webp",
-        "lre": {
-            "id": 2,
-            "finished": true,
-            "eventStage": 3,
-            "nextEventDate": "",
-            "nextEventDateUtc": ""
-        }
+        "Icon": "Aun-shi.webp"
     },
     {
         "Name": "Shadowsun",
@@ -1330,14 +1323,7 @@
         "Number": 52,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "ShadowSun.webp",
-        "lre": {
-            "id": 4,
-            "finished": true,
-            "eventStage": 3,
-            "nextEventDate": "",
-            "nextEventDateUtc": ""
-        }
+        "Icon": "ShadowSun.webp"
     },
     {
         "Name": "Ulf",
@@ -1461,14 +1447,7 @@
         "Number": 66,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Ragnar.webp",
-        "lre": {
-            "id": 5,
-            "finished": true,
-            "eventStage": 3,
-            "nextEventDate": "",
-            "nextEventDateUtc": ""
-        }
+        "Icon": "Ragnar.webp"
     },
     {
         "Name": "Yazaghor",
@@ -1884,14 +1863,7 @@
         "Number": 67,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "vitruvius.webp",
-        "lre": {
-            "id": 6,
-            "finished": true,
-            "eventStage": 3,
-            "nextEventDate": "",
-            "nextEventDateUtc": ""
-        }
+        "Icon": "vitruvius.webp"
     },
     {
         "Name": "Actus",
@@ -2117,14 +2089,7 @@
         "ForcedSummons": false,
         "RequiredInCampaign": false,
         "Icon": "kharn.webp",
-        "ReleaseRarity": 6,
-        "lre": {
-            "id": 7,
-            "finished": true,
-            "eventStage": 3,
-            "nextEventDate": "",
-            "nextEventDateUtc": ""
-        }
+        "ReleaseRarity": 6
     },
     {
         "Name": "Mataneo",
@@ -2229,14 +2194,7 @@
         "RequiredInCampaign": false,
         "Icon": "mephiston.webp",
         "ReleaseRarity": 6,
-        "releaseDate": "2024-08-25T00:00:00Z",
-        "lre": {
-            "id": 8,
-            "finished": true,
-            "eventStage": 3,
-            "nextEventDate": "",
-            "nextEventDateUtc": ""
-        }
+        "releaseDate": "2024-08-25T00:00:00Z"
     },
     {
         "tacticusId": "bloodDante",
@@ -2263,14 +2221,7 @@
         "RequiredInCampaign": false,
         "Icon": "dante.webp",
         "releaseDate": "2025-03-23T00:00:00Z",
-        "ReleaseRarity": 6,
-        "lre": {
-            "id": 10,
-            "finished": false,
-            "eventStage": 2,
-            "nextEventDate": "TBA",
-            "nextEventDateUtc": ""
-        }
+        "ReleaseRarity": 6
     },
     {
         "Name": "Hollan",
@@ -2403,14 +2354,7 @@
         "RequiredInCampaign": false,
         "Icon": "patermine.webp",
         "releaseDate": "2024-11-03T00:00:00Z",
-        "ReleaseRarity": 6,
-        "lre": {
-            "id": 9,
-            "finished": false,
-            "eventStage": 3,
-            "nextEventDate": "TBA",
-            "nextEventDateUtc": ""
-        }
+        "ReleaseRarity": 6
     },
     {
         "Name": "Aesoth",
@@ -2489,14 +2433,7 @@
         "RequiredInCampaign": false,
         "Icon": "trajann.webp",
         "releaseDate": "",
-        "ReleaseRarity": 6,
-        "lre": {
-            "id": 11,
-            "finished": false,
-            "eventStage": 2,
-            "nextEventDate": "TBA",
-            "nextEventDateUtc": ""
-        }
+        "ReleaseRarity": 6
     },
     {
         "Name": "Lucius",
@@ -2522,14 +2459,7 @@
         "RequiredInCampaign": false,
         "Icon": "lucius.webp",
         "releaseDate": "2025-08-10T00:00:00Z",
-        "ReleaseRarity": 6,
-        "lre": {
-            "id": 12,
-            "finished": false,
-            "eventStage": 1,
-            "nextEventDate": "10 August",
-            "nextEventDateUtc": "Sun, 10 August 2025 00:00:00 GMT"
-        }
+        "ReleaseRarity": 6
     },
     {
         "Name": "Atlacoya",

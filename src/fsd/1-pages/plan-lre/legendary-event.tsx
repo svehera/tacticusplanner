@@ -1,10 +1,10 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { ICharacter2 } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEvent, ILreTeam } from '@/fsd/3-features/lre';
@@ -16,7 +16,7 @@ import { LreEditTeam } from './lre-edit-team';
 import { LreService } from './lre.service';
 
 export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
-    const { characters, viewPreferences, leSelectedTeams } = useContext(StoreContext);
+    const { viewPreferences, leSelectedTeams, characters } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { model: lreProgress } = useLreProgress(legendaryEvent);
 
@@ -27,6 +27,15 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
 
     const selectedTeams: ILreTeam[] = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
+    const resolvedCharacters = useMemo(() => {
+        return characters.map(x => {
+            const ret: ICharacter2 = { ...x };
+            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
+            ret.name = staticChar?.snowprintId ?? x.name;
+            return ret;
+        });
+    }, [characters]);
+
     // Compute virtual attributes (not saved in JSON) for display on LRE team cards.
     selectedTeams.forEach(team => {
         team.points = 0;
@@ -35,7 +44,20 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
         }
 
         team.characters = team.charactersIds.map(id => {
-            const character = characters.find(x => x.id === id);
+            let name = CharactersService.resolveCharacter(id)?.snowprintId ?? id;
+            if (name == 'Patermine') {
+                name = CharactersService.resolveCharacter('The Patermine')?.snowprintId ?? id;
+            }
+            const character = resolvedCharacters.find(x => x.snowprintId === name);
+            if (!character) {
+                console.warn(
+                    'unknown character. if you have imported goals from a pre-mythic ',
+                    'instance of the planner, please remove the unit and add it back.',
+                    name,
+                    id,
+                    character
+                );
+            }
 
             return { ...character, teamId: team.id };
         }) as ICharacter2[];

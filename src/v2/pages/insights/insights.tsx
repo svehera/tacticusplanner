@@ -8,6 +8,8 @@ import { StoreContext } from 'src/reducers/store.provider';
 import { LoaderWithText, Conditional } from '@/fsd/5-shared/ui';
 
 import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
+import { MowsService } from '@/fsd/4-entities/mow';
+import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 import { CharactersPowerService, CharactersValueService } from '@/fsd/4-entities/unit';
 
 import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
@@ -59,7 +61,11 @@ export const Insights = () => {
     }
 
     const averageCharacters = GlobalState.initCharacters(data.userData, data.activeLast30Days);
-    const averageMows = GlobalState.initMows(data.mows, data.activeLast30Days);
+    const unresolvedAverageMows = GlobalState.initMows(data.mows, data.activeLast30Days);
+    const averageMows = unresolvedAverageMows.map(mow => {
+        if ('snowprintId' in mow) return mow;
+        return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow };
+    }) as IMow2[];
 
     const unitsFiltered = CharactersService.filterUnits(
         [...averageCharacters, ...averageMows],

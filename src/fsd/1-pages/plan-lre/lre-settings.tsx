@@ -2,6 +2,7 @@
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Dialog from '@mui/material/Dialog';
+import { XCircle } from 'lucide-react';
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
@@ -32,10 +33,10 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
     const [viewSettings, setViewSettings] = useState<ILreViewSettings & ILreTileSettings>(lreViewSettings);
     const [teamsSettings, setTeamsSettings] = useState<IAutoTeamsPreferences>(autoTeamsSettings);
     const [recommendFirst, setRecommendFirst] = useState<string[]>(
-        characters.filter(x => x.bias === CharacterBias.recommendFirst).map(x => x.name)
+        characters.filter(x => x.bias === CharacterBias.recommendFirst).map(x => x.snowprintId!)
     );
     const [recommendLast, setRecommendLast] = useState<string[]>(
-        characters.filter(x => x.bias === CharacterBias.recommendLast).map(x => x.name)
+        characters.filter(x => x.bias === CharacterBias.recommendLast).map(x => x.snowprintId!)
     );
 
     const updatePreferences = (

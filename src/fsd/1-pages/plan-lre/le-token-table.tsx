@@ -176,7 +176,7 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                                 {token.team.map((charId: string) => (
                                     <UnitShardIcon
                                         key={charId + index}
-                                        icon={CharactersService.getUnit(charId)?.icon ?? 'null'}
+                                        icon={CharactersService.getUnit(charId)?.roundIcon ?? ''}
                                         height={20}
                                         tooltip={charId}
                                     />

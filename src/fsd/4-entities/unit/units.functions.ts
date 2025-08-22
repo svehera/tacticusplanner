@@ -1,7 +1,7 @@
 ﻿import { Rank, UnitType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character/@x/unit';
-import { IMow } from '@/fsd/4-entities/mow/@x/unit';
+import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 
 import { IUnit } from './model';
 
@@ -9,7 +9,7 @@ export function isCharacter(unit: IUnit | null): unit is ICharacter2 {
     return !!unit && unit.unitType === UnitType.character;
 }
 
-export function isMow(unit: IUnit | null): unit is IMow {
+export function isMow(unit: IUnit | null): unit is IMow2 {
     return !!unit && unit.unitType === UnitType.mow;
 }
 

@@ -68,7 +68,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
     }, [rarity]);
 
     const maxStars = useMemo(() => {
-        return minStarsMap.get(rarity + 1) ?? RarityStars.BlueStar;
+        return minStarsMap.get(rarity + 1) ?? RarityStars.MythicWings;
     }, [rarity]);
 
     const starValues = useMemo(
@@ -96,7 +96,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         const maxRank = RarityMapper.toMaxRank[newRarity];
         if (newRarity < rarity) {
             setRarity(newRarity);
-            setStars(minStarsMap.get(newRarity + 1) ?? RarityStars.BlueStar);
+            setStars(minStarsMap.get(newRarity + 1) ?? RarityStars.MythicWings);
             if (rank > maxRank) {
                 setRank(maxRank);
             }

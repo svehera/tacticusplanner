@@ -9,6 +9,7 @@ import { numberToThousandsStringOld } from '@/fsd/5-shared/lib';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
+import { IMow2 } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit';
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
@@ -17,8 +18,8 @@ import { IMow } from 'src/v2/features/characters/characters.models';
 import './character-tile.css';
 
 interface Props {
-    mow: IMow;
-    onClick?: (mow: IMow) => void;
+    mow: IMow2;
+    onClick?: (mow: IMow2) => void;
     disableClick?: boolean;
 }
 
@@ -49,7 +50,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                         </span>
                     }>
                     <div>
-                        <CharacterPortraitImage icon={mow.portraitIcon} />
+                        <CharacterPortraitImage icon={mow.icon} />
                     </div>
                 </Tooltip>
 

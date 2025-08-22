@@ -179,14 +179,22 @@ export class ShardsService {
             dailyBattleCount: onslaughtTokensPerDay / onslaughtMaxTokens,
             rarity: 'Shard',
             rarityEnum: Rarity.Legendary,
-            reward: material.characterId,
+            rewards: {
+                guaranteed: [
+                    {
+                        id: material.characterId,
+                        min: material.onslaughtShards,
+                        max: material.onslaughtShards,
+                    },
+                ],
+                potential: [],
+            },
             nodeNumber,
             campaign: Campaign.Onslaught,
             campaignType: CampaignType.Onslaught,
             energyCost: 0,
             energyPerDay: 0,
             energyPerItem: 0,
-            expectedGold: 0,
             enemiesFactions: [],
             enemiesAlliances: [],
             alliesFactions: [],
@@ -200,15 +208,15 @@ export class ShardsService {
     private static convertGoalToMaterial(goal: ICharacterAscendGoal | ICharacterUnlockGoal): IShardMaterial {
         const targetShards =
             goal.type === PersonalGoalType.Ascend ? this.getTargetShards(goal) : charsUnlockShards[goal.rarity];
-        const possibleLocations = StaticDataService.getItemLocations(goal.unitName);
+        const possibleLocations = StaticDataService.getItemLocations(`shards_${goal.unitId}`);
 
         return {
             goalId: goal.goalId,
-            characterId: goal.unitName,
+            characterId: goal.unitId,
             label: goal.unitName,
             acquiredCount: goal.shards,
             requiredCount: targetShards,
-            iconPath: goal.unitIcon,
+            iconPath: goal.unitRoundIcon,
             relatedCharacters: [goal.unitName],
             possibleLocations,
             onslaughtShards: goal.type === PersonalGoalType.Ascend ? goal.onslaughtShards : 0,

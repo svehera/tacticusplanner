@@ -69,10 +69,10 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
         );
     };
 
-    const getBlueStar = () => {
-        const blueStarWidth = 256;
-        const blueStarHeight = 82;
-        const blueStarTop = -35;
+    const getMythicWings = () => {
+        const mythicWingsWidth = 256;
+        const mythicWingsHeight = 82;
+        const mythicWingsTop = -35;
         return (
             <img
                 src={blueStar}
@@ -80,9 +80,9 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
                     pointerEvents: 'none',
                     position: 'absolute',
                     left: 0,
-                    top: blueStarTop,
+                    top: mythicWingsTop,
                     width: frameWidth,
-                    height: (blueStarHeight * frameWidth) / blueStarWidth,
+                    height: (mythicWingsHeight * frameWidth) / mythicWingsWidth,
                     zIndex: 2,
                 }}
             />
@@ -123,7 +123,7 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
 
     const getStars = (stars: RarityStars) => {
         if (stars === RarityStars.None) return <></>;
-        if (stars === RarityStars.BlueStar) return getBlueStar();
+        if (stars === RarityStars.MythicWings) return getMythicWings();
         let numStars = stars as number;
         let star = goldStar;
         const overlap = 15;

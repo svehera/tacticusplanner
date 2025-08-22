@@ -11,7 +11,7 @@ import { MiscIcon, UnitShardIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignsService, CampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 import { CharactersService, RankIcon, rankUpData } from '@/fsd/4-entities/character';
-import { UpgradesService, UpgradeImage, IBaseUpgrade } from '@/fsd/4-entities/upgrade';
+import { UpgradesService, UpgradeImage, IBaseUpgrade, IMaterial } from '@/fsd/4-entities/upgrade';
 
 type Selection = 'Craftable' | 'Base Upgrades';
 
@@ -28,6 +28,7 @@ interface IUpgradesTableRow {
     characters: Array<{
         id: string;
         icon: string;
+        roundIcon: string;
         ranks: Rank[];
     }>;
     craftable: boolean;
@@ -49,12 +50,13 @@ export const Upgrades = () => {
             hide: !showCharacters,
             cellRenderer: (params: ICellRendererParams<IUpgradesTableRow>) => {
                 const characters = params.data?.characters;
+                console.debug(params.data);
                 if (characters) {
                     return characters.map(x => (
                         <div key={x.id} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             <Tooltip title={x.id}>
                                 <span>
-                                    <UnitShardIcon icon={x.icon} name={x.id} height={30} />
+                                    <UnitShardIcon icon={x.roundIcon} name={x.id} height={30} />
                                 </span>
                             </Tooltip>
                             <div>
@@ -84,7 +86,13 @@ export const Upgrades = () => {
                 cellRenderer: (params: ICellRendererParams<IUpgradesTableRow>) => {
                     const { data } = params;
                     if (data) {
-                        return <UpgradeImage material={data.upgradeLabel} iconPath={data.upgradeIcon} />;
+                        return (
+                            <UpgradeImage
+                                material={data.upgradeLabel}
+                                iconPath={data.upgradeIcon}
+                                rarity={RarityMapper.rarityToRarityString(data.rarity)}
+                            />
+                        );
                     }
                 },
                 equals: () => true,
@@ -92,9 +100,9 @@ export const Upgrades = () => {
                 maxWidth: 80,
             },
             {
-                field: 'faction',
-                headerName: 'Faction',
-                maxWidth: 150,
+                headerName: 'Name',
+                field: 'upgradeLabel',
+                minWidth: 150,
             },
             {
                 field: 'rarity',
@@ -136,17 +144,24 @@ export const Upgrades = () => {
                         headerName: 'Locations',
                         cellRenderer: (params: ICellRendererParams<IBaseUpgrade>) => {
                             const { data } = params;
-                            if (data) {
+                            if (!data || !data.locations) {
+                                return <span>Unknown</span>;
+                            } else {
                                 return (
                                     <div className="flex-box gap5 wrap">
-                                        {data.locations.map(location => (
-                                            <CampaignLocation
-                                                key={location.id}
-                                                location={location}
-                                                short={true}
-                                                unlocked={true}
-                                            />
-                                        ))}
+                                        {data.locations.map(location => {
+                                            if (!location) {
+                                                return <></>;
+                                            }
+                                            return (
+                                                <CampaignLocation
+                                                    key={location.id}
+                                                    location={location}
+                                                    short={true}
+                                                    unlocked={true}
+                                                />
+                                            );
+                                        })}
                                     </div>
                                 );
                             }
@@ -169,59 +184,86 @@ export const Upgrades = () => {
         }
     }, [selection, showCharacters]);
 
+    /**
+     * @returns If the material is a craftable upgrade, returns all the unique
+     * materials needed to craft it. Otherwise just returns the material.
+     */
+    const expandMaterial = (material: string): string[] => {
+        const upgrade = UpgradesService.recipeExpandedUpgradeData[material];
+        if (!upgrade) return [material];
+        return Object.keys(upgrade.expandedRecipe);
+    };
+
     const rowsData = useMemo(() => {
         const upgradesLocations = CampaignsService.getUpgradesLocations();
         const upgrades = Object.values(UpgradesService.recipeDataByName);
 
-        const result: IUpgradesTableRow[] = upgrades.map(x => {
-            const characters: Array<{
-                id: string;
-                icon: string;
-                ranks: Rank[];
-            }> = [];
+        const result: IUpgradesTableRow[] = upgrades
+            .filter(x => x.label !== 'Coming soon' && x.material !== 'Coming soon')
+            .map(x => {
+                const characters: Array<{
+                    id: string;
+                    icon: string;
+                    roundIcon: string;
+                    ranks: Rank[];
+                }> = [];
 
-            for (const character in rankUpData) {
-                const ranks = rankUpData[character];
+                for (const character in rankUpData) {
+                    const ranks = rankUpData[character];
+                    if (ranks === undefined) continue;
 
-                for (const rank in ranks) {
-                    const upgrades = ranks[rank];
-                    if (upgrades.includes(x.material)) {
-                        const charData = CharactersService.charactersData.find(x => x.name === character);
-                        const existingChar = characters.find(x => x.id === character);
-                        if (existingChar) {
-                            existingChar.ranks.push(stringToRank(rank));
-                        } else {
-                            characters.push({
-                                id: character,
-                                icon: charData?.icon ?? '',
-                                ranks: [stringToRank(rank)],
-                            });
+                    for (const rank in ranks) {
+                        const upgrades = ranks[rank];
+                        const allMats = Object.values(upgrades)
+                            .filter(x => x !== undefined)
+                            .flat()
+                            .flatMap(x => expandMaterial(x));
+                        if (allMats.includes(x.snowprintId)) {
+                            const charData = CharactersService.charactersData.find(x => x.snowprintId! === character);
+                            const existingChar = characters.find(x => x.id === character);
+                            if (existingChar) {
+                                existingChar.ranks.push(stringToRank(rank));
+                            } else {
+                                characters.push({
+                                    id: character,
+                                    icon: charData?.icon ?? '',
+                                    roundIcon: charData?.roundIcon ?? '',
+                                    ranks: [stringToRank(rank)],
+                                });
+                            }
                         }
                     }
                 }
-            }
 
-            const locations = upgradesLocations[x.material]?.map(
-                (locationId: string) => CampaignsService.campaignsComposed[locationId]
-            );
-            const partOf = upgrades
-                .filter(m => m.recipe?.some(u => u.material === x.material) ?? false)
-                .map(u => u.label ?? u.material)
-                .join('\r\n');
-            return {
-                upgradeLabel: x.label ?? x.material,
-                upgradeId: x.material,
-                upgradeIcon: x.icon ?? '',
-                faction: x.faction ?? '',
-                rarity: RarityMapper.stringToNumber[x.rarity as unknown as RarityString],
-                type: x.stat,
-                locations,
-                partOf,
-                recipe: x.recipe?.map(x => x.material + ' - ' + x.count).join('\r\n') ?? '',
-                characters: characters,
-                craftable: x.craftable,
-            };
-        });
+                const locations = upgradesLocations[x.snowprintId]?.map(
+                    (locationId: string) => CampaignsService.campaignsComposed[locationId]
+                );
+                const partOf = upgrades
+                    .filter(m => m.recipe?.some(u => u.material === x.material) ?? false)
+                    .map(u => u.label ?? u.material)
+                    .join('\r\n');
+                return {
+                    upgradeLabel: x.label ?? x.material,
+                    upgradeId: x.snowprintId,
+                    upgradeIcon: x.icon ?? '',
+                    faction: x.faction ?? '',
+                    rarity: RarityMapper.stringToNumber[x.rarity as unknown as RarityString],
+                    type: x.stat,
+                    locations,
+                    partOf,
+                    recipe:
+                        x.recipe
+                            ?.map(
+                                x =>
+                                    (UpgradesService.getUpgradeMaterial(x.material)?.material ?? x.material) +
+                                    ' - ' +
+                                    x.count
+                            )
+                            .join('\r\n') ?? '',
+                    characters: characters,
+                    craftable: x.craftable,
+                };
+            });
 
         return result;
     }, []);

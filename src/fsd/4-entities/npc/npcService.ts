@@ -63,7 +63,7 @@ export class NpcService {
         if (unit != undefined) {
             return 'portraits/' + unit.icon;
         }
-        console.log('unknown npc - ' + name);
+        console.error('unknown npc - ' + name);
         return 'unknown-' + name;
     }
 

@@ -5,6 +5,7 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignLocation, CampaignType, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
@@ -13,7 +14,6 @@ import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { BattleSavings, CampaignData, CampaignsProgressData } from './campaign-progression.models';
 import { CampaignsProgressionService } from './campaign-progression.service';
-
 interface Props {
     campaignData: CampaignData;
     progression: CampaignsProgressData;
@@ -127,14 +127,16 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return '';
                     const savings: BattleSavings = savingsData[0].savings;
-                    const reward = UpgradesService.getUpgradeMaterial(savings.battle.reward);
+                    const reward = UpgradesService.getUpgradeMaterial(
+                        CampaignsProgressionService.getReward(savings.battle)
+                    );
                     if (reward && reward.stat === 'Shard') {
                         const char = CharactersService.getUnit(reward.material);
                         if (char)
                             return (
                                 <UnitShardIcon
                                     name={reward.material}
-                                    icon={char.icon}
+                                    icon={char.roundIcon}
                                     height={30}
                                     width={30}
                                     tooltip={`${reward.material} shards`}
@@ -142,7 +144,12 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                             );
                     } else if (reward) {
                         return (
-                            <UpgradeImage material={savings.battle.reward} iconPath={reward?.icon ?? ''} size={30} />
+                            <UpgradeImage
+                                material={CampaignsProgressionService.getReward(savings.battle)}
+                                iconPath={reward?.icon ?? ''}
+                                rarity={RarityMapper.stringToRarityString(reward.rarity)}
+                                size={30}
+                            />
                         );
                     }
                     return <div></div>;
@@ -156,7 +163,9 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
-                    return <span>{getRequiredMaterialCount(savings.battle.reward)}x</span>;
+                    return (
+                        <span>{getRequiredMaterialCount(CampaignsProgressionService.getReward(savings.battle))}x</span>
+                    );
                 },
             },
             {
@@ -171,7 +180,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                         let tooltipText: string = '';
                         const battle = CampaignsProgressionService.getBattleFromBaseCampaignWithSameReward(
                             savings.battle,
-                            progression.materialFarmData.get(savings.battle.reward)
+                            progression.materialFarmData.get(CampaignsProgressionService.getReward(savings.battle))
                         );
                         if (battle != undefined) {
                             tooltipText =
@@ -186,7 +195,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                         );
                     } else {
                         return (
-                            <Tooltip title={getSavingsTooltipText(savings.battle.reward)}>
+                            <Tooltip
+                                title={getSavingsTooltipText(CampaignsProgressionService.getReward(savings.battle))}>
                                 <span>
                                     {savings.savings} <MiscIcon icon={'energy'} height={15} width={15} />
                                 </span>
@@ -257,14 +267,16 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return '';
                     const savings: BattleSavings = savingsData[0].savings;
-                    const reward = UpgradesService.getUpgradeMaterial(savings.battle.reward);
+                    const reward = UpgradesService.getUpgradeMaterial(
+                        CampaignsProgressionService.getReward(savings.battle)
+                    );
                     if (reward && reward.stat === 'Shard') {
                         const char = CharactersService.getUnit(reward.material);
                         if (char)
                             return (
                                 <UnitShardIcon
                                     name={reward.material}
-                                    icon={char.icon}
+                                    icon={char.roundIcon}
                                     height={30}
                                     width={30}
                                     tooltip={`${reward.material} shards`}
@@ -272,7 +284,12 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                             );
                     } else if (reward) {
                         return (
-                            <UpgradeImage material={savings.battle.reward} iconPath={reward?.icon ?? ''} size={30} />
+                            <UpgradeImage
+                                material={CampaignsProgressionService.getReward(savings.battle)}
+                                iconPath={reward?.icon ?? ''}
+                                rarity={RarityMapper.stringToRarityString(reward.rarity)}
+                                size={30}
+                            />
                         );
                     }
                     return <div></div>;
@@ -285,7 +302,12 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
-                    return <span>Goals require {getRequiredMaterialCount(savings.battle.reward)}x</span>;
+                    return (
+                        <span>
+                            Goals require{' '}
+                            {getRequiredMaterialCount(CampaignsProgressionService.getReward(savings.battle))}x
+                        </span>
+                    );
                 },
             },
             {
@@ -299,7 +321,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                         let tooltipText: string = '';
                         const battle = CampaignsProgressionService.getBattleFromBaseCampaignWithSameReward(
                             savings.battle,
-                            progression.materialFarmData.get(savings.battle.reward)
+                            progression.materialFarmData.get(CampaignsProgressionService.getReward(savings.battle))
                         );
                         if (battle != undefined) {
                             tooltipText =
@@ -314,7 +336,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                         );
                     } else {
                         return (
-                            <Tooltip title={getSavingsTooltipText(savings.battle.reward)}>
+                            <Tooltip
+                                title={getSavingsTooltipText(CampaignsProgressionService.getReward(savings.battle))}>
                                 <span>
                                     Saves {savings.savings} <MiscIcon icon={'energy'} height={15} width={15} />
                                 </span>
@@ -348,18 +371,27 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
-                    const characters = getCharactersNeedingMaterial(savings.battle.reward);
+                    const characters = getCharactersNeedingMaterial(
+                        CampaignsProgressionService.getReward(savings.battle)
+                    );
                     if (characters.length == 0) return <span></span>;
                     return (
-                        <div className="flex-box gap5 wrap" key={savings.battle.reward + '-' + savings.battle.id}>
+                        <div className="flex-box gap5 wrap" key={CampaignsProgressionService.getReward(savings.battle)}>
                             {characters.map((unitId, ignoredIndex) => {
                                 return (
-                                    <span key={unitId + '-' + savings.battle.reward + '-' + savings.battle.id}>
+                                    <span
+                                        key={
+                                            unitId +
+                                            '-' +
+                                            CampaignsProgressionService.getReward(savings.battle) +
+                                            '-' +
+                                            savings.battle.id
+                                        }>
                                         <UnitShardIcon
-                                            icon={CharactersService.getUnit(unitId)?.icon ?? '(undefined)'}
+                                            icon={CharactersService.getUnit(unitId)?.roundIcon ?? '(undefined)'}
                                             height={30}
                                             width={30}
-                                            tooltip={CharactersService.getUnit(unitId)?.icon}
+                                            tooltip={CharactersService.getUnit(unitId)?.name}
                                         />
                                     </span>
                                 );

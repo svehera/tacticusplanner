@@ -39,9 +39,30 @@ export const StarsIcon = ({ stars }: { stars: RarityStars }) => {
         return <div className="flex items-end h-[15px]">{starsImages}</div>;
     }
 
-    if (stars === RarityStars.BlueStar) {
+    if (stars <= RarityStars.ThreeBlueStars) {
+        const starsImages = Array.from({ length: stars - 10 }, (_, index) => (
+            <img
+                key={index}
+                style={{ pointerEvents: 'none', marginLeft: index > 0 ? -2 : 0 }}
+                src={starsIcons.blueStar}
+                height={stars === 10 && index === 2 ? 18 : 12}
+                width={stars === 10 && index === 2 ? 18 : 12}
+                alt="Blue Star"
+            />
+        ));
+
+        return <div className="flex items-end h-[15px]">{starsImages}</div>;
+    }
+
+    if (stars === RarityStars.MythicWings) {
         return (
-            <img style={{ pointerEvents: 'none' }} src={starsIcons.blueStar} height={15} width={50} alt="Blue star" />
+            <img
+                style={{ pointerEvents: 'none' }}
+                src={starsIcons.mythicWings}
+                height={15}
+                width={50}
+                alt="Mythic Wings"
+            />
         );
     }
 

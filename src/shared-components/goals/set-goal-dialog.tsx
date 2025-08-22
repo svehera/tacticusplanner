@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import InputLabel from '@mui/material/InputLabel';
+import { first } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
@@ -33,10 +34,13 @@ import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
+import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { UnitTitle } from '@/fsd/4-entities/unit/ui/unit-title';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
+import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
@@ -58,6 +62,16 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
     const { characters, mows, goals, campaignsProgress } = useContext(StoreContext);
+
+    const resolvedMows = useMemo(
+        () =>
+            mows.map(mow => {
+                if ('snowprintId' in mow) return mow as IMow2;
+                return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
+            }),
+        [mows]
+    );
+
     const dispatch = useContext(DispatchContext);
 
     const [openDialog, setOpenDialog] = React.useState(false);
@@ -72,7 +86,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (goal) {
             goal.dailyRaids = [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(goal.type);
             dispatch.goals({ type: 'Add', goal });
-            enqueueSnackbar(`Goal for ${goal.character} is added`, { variant: 'success' });
+            const character = characters.find(c => c.snowprintId === goal.character);
+            enqueueSnackbar(`Goal for ${character?.shortName ?? goal.character} is added`, { variant: 'success' });
         }
         setOpenDialog(false);
         setUnit(null);
@@ -87,7 +102,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     };
 
     const maxRank = useMemo(() => {
-        return ignoreRankRarity ? Rank.Diamond3 : rarityToMaxRank[unit?.rarity ?? 0];
+        return ignoreRankRarity ? Rank.Adamantine1 : rarityToMaxRank[unit?.rarity ?? 0];
     }, [unit?.rarity, ignoreRankRarity]);
 
     const rankValues = useMemo(() => {
@@ -113,7 +128,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 return characters.filter(x => x.rank === Rank.Locked);
             }
             case PersonalGoalType.MowAbilities: {
-                return ignoreRankRarity ? mows : mows.filter(x => x.unlocked);
+                return ignoreRankRarity ? resolvedMows : resolvedMows.filter(x => x.unlocked);
             }
             default: {
                 return characters;
@@ -121,9 +136,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
     }, [form.type, ignoreRankRarity]);
 
+    const getAscenscionShardsName = (unit: IUnit | null): string => {
+        if (!unit) return '';
+        return 'shards_' + unit.snowprintId;
+    };
+
     const possibleLocations =
         [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
-            ? StaticDataService.getItemLocations(unit.name)
+            ? StaticDataService.getItemLocations(getAscenscionShardsName(unit))
             : [];
 
     const unlockedLocations = possibleLocations
@@ -329,6 +349,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         fullWidth
                                         label="Active target level"
                                         min={unit.activeAbilityLevel}
+                                        max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.firstAbilityLevel!}
                                         valueChange={primaryAbilityLevel => {
                                             setForm(curr => ({
@@ -342,6 +363,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         fullWidth
                                         label="Passive target level"
                                         min={unit.passiveAbilityLevel}
+                                        max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.secondAbilityLevel!}
                                         valueChange={secondaryAbilityLevel => {
                                             setForm(curr => ({
@@ -404,7 +426,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => handleClose()}>Cancel</Button>
-                    <Button disabled={isDisabled()} onClick={() => handleClose({ ...form, character: unit?.id ?? '' })}>
+                    <Button
+                        disabled={isDisabled()}
+                        onClick={() => handleClose({ ...form, character: unit?.snowprintId ?? '' })}>
                         Set
                     </Button>
                 </DialogActions>

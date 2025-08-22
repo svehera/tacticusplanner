@@ -6,15 +6,20 @@ import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
+import { ICharacter2 } from '@/models/interfaces';
+// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { CampaignImage } from '@/fsd/4-entities/campaign';
+// eslint-disable-next-line boundaries/element-types
+import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
 import {
     ICharacterUpgradeRankGoal,
     ICharacterUpgradeMow,
     ICharacterUnlockGoal,
     ICharacterAscendGoal,
 } from '@/fsd/4-entities/goal';
+import { IMow2 } from '@/fsd/4-entities/mow';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { GoalsService } from 'src/v2/features/goals/goals.service';
@@ -30,9 +35,23 @@ import { CampaignsProgressionService } from './campaign-progression.service';
 export const CampaignProgression = () => {
     const { goals, characters, mows, campaignsProgress } = useContext(StoreContext);
 
+    const resolvedMows = useMemo(() => {
+        return mows.map(mow => {
+            if ('snowprintId' in mow) return mow;
+            return { ...mow, snowprintId: mow.tacticusId };
+        }) as IMow2[];
+    }, [mows]);
+
+    const resolvedCharacters = useMemo(() => {
+        return characters.map(c => ({
+            ...c,
+            ...CharactersService.resolveCharacter(c.snowprintId ?? c.name),
+        })) as ICharacter2[];
+    }, [characters]);
+
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, [...characters, ...mows], false);
-    }, [goals, characters, mows]);
+        return GoalsService.prepareGoals(goals, [...resolvedCharacters, ...resolvedMows], false);
+    }, [goals, resolvedCharacters, resolvedMows]);
 
     const progression = useMemo(() => {
         const allGoals: Array<

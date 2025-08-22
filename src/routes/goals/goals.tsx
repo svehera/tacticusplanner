@@ -20,7 +20,7 @@ import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-
 import { Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { MowsService } from '@/fsd/4-entities/mow';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
@@ -48,9 +48,16 @@ export const Goals = () => {
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
 
+    const resolvedMows = useMemo(() => {
+        return mows.map(mow => {
+            if ('snowprintId' in mow) return mow as IMow2;
+            return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
+        });
+    }, [mows]);
+
     const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, [...characters, ...mows], false);
-    }, [goals, characters, mows]);
+        return GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false);
+    }, [goals, characters, resolvedMows]);
 
     const estimatedShardsTotal = useMemo(() => {
         return ShardsService.getShardsEstimatedDays(
@@ -95,7 +102,14 @@ export const Goals = () => {
 
         if (item === 'edit') {
             const goal = allGoals.find(x => x.goalId === goalId);
-            const relatedUnit = [...characters, ...mows].find(x => x.id === goal?.unitId);
+            const relatedUnit = [...characters, ...resolvedMows].find(
+                // August 2025: we're transitioning between IDs for characters. Previously be used a short version
+                // of the character's name (i.e. Ragnar, Darkstrider). Now we're moving to IDs from snowprints internal data (datamined).
+                // During this transition, it's possibly for legacy goals to have legacy IDs, which are then overwritten with
+                // Snowprint IDs. For this reason, we cater to both IDs for lookup here, with the expectation we can consolidate
+                // on snowprintIDs down the track.
+                x => x.snowprintId === goal?.unitId || x.id === goal?.unitId
+            );
             if (relatedUnit && goal) {
                 setEditUnit(relatedUnit);
                 setEditGoal(goal);

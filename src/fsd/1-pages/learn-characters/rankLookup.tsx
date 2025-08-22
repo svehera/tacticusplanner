@@ -11,7 +11,7 @@ import { useSearchParams } from 'react-router-dom';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-import { Rarity, Rank } from '@/fsd/5-shared/model';
+import { Rarity, Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -23,6 +23,7 @@ import {
     IMaterialRecipeIngredientFull,
     UpgradeImage,
     IMaterialEstimated2,
+    UpgradesService,
 } from '@/fsd/4-entities/upgrade';
 
 import { RankLookupService } from './rank-lookup.service';
@@ -71,6 +72,7 @@ export const RankLookup = () => {
         }
 
         return RankLookupService.getUpgradeMaterialsToRankUp({
+            unitId: character.snowprintId ?? '',
             unitName: character.id,
             rankStart,
             rankEnd,
@@ -96,7 +98,7 @@ export const RankLookup = () => {
         }> = [];
 
         let currRank = rankStart < Rank.Stone1 ? Rank.Stone1 : rankStart;
-        const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Diamond3 ? Rank.Diamond3 : rankEnd;
+        const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Adamantine1 ? Rank.Adamantine1 : rankEnd;
         const upgradesCopy = upgrades.slice();
 
         while (currRank !== endRank) {
@@ -134,8 +136,13 @@ export const RankLookup = () => {
                 <li key={item.id}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                         <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
-                        <UpgradeImage material={item.label} iconPath={item.iconPath} size={30} /> -{' '}
-                        <span style={{ fontWeight: 'bold' }}>{item.count}</span>
+                        <UpgradeImage
+                            material={item.label}
+                            iconPath={item.iconPath}
+                            rarity={RarityMapper.rarityToRarityString(item.rarity)}
+                            size={30}
+                        />{' '}
+                        - <span style={{ fontWeight: 'bold' }}>{item.count}</span>
                     </div>
                     {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
                 </li>
@@ -155,7 +162,13 @@ export const RankLookup = () => {
             cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
                 const { data } = params;
                 if (data) {
-                    return <UpgradeImage material={data.label} iconPath={data.iconPath} />;
+                    return (
+                        <UpgradeImage
+                            material={data.label}
+                            iconPath={data.iconPath}
+                            rarity={RarityMapper.rarityToRarityString(data.rarity)}
+                        />
+                    );
                 }
             },
             equals: () => true,
@@ -165,20 +178,6 @@ export const RankLookup = () => {
         {
             field: 'count',
             maxWidth: 75,
-        },
-        {
-            valueGetter: params => {
-                return inventory.upgrades[params.data!.id] ?? 0;
-            },
-            headerName: 'Inventory',
-            maxWidth: 90,
-        },
-        {
-            valueGetter: params => {
-                return params.data ? Math.max(params.data.count - (inventory.upgrades[params.data.id] ?? 0), 0) : 0;
-            },
-            headerName: 'Remaining',
-            maxWidth: 90,
         },
         {
             field: 'rarity',
@@ -268,7 +267,11 @@ export const RankLookup = () => {
                     {healthUpgrades.map((x, index) => {
                         return (
                             <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
-                                <UpgradeImage material={x.label} iconPath={x.iconPath} />
+                                <UpgradeImage
+                                    material={x.label}
+                                    iconPath={x.iconPath}
+                                    rarity={RarityMapper.rarityToRarityString(x.rarity)}
+                                />
                             </div>
                         );
                     })}
@@ -277,7 +280,11 @@ export const RankLookup = () => {
                     <MiscIcon icon={'damage'} height={30} />
                     {damageUpgrades.map((x, index) => (
                         <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
-                            <UpgradeImage material={x.label} iconPath={x.iconPath} />
+                            <UpgradeImage
+                                material={x.label}
+                                iconPath={x.iconPath}
+                                rarity={RarityMapper.rarityToRarityString(x.rarity)}
+                            />
                         </div>
                     ))}
                 </div>
@@ -285,7 +292,11 @@ export const RankLookup = () => {
                     <MiscIcon icon={'armour'} height={30} />
                     {armourUpgrades.map((x, index) => (
                         <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
-                            <UpgradeImage material={x.label} iconPath={x.iconPath} />
+                            <UpgradeImage
+                                material={x.label}
+                                iconPath={x.iconPath}
+                                rarity={RarityMapper.rarityToRarityString(x.rarity)}
+                            />
                         </div>
                     ))}
                 </div>
@@ -433,6 +444,7 @@ export const RankLookup = () => {
                                     <UpgradeImage
                                         material={materialRecipe.label}
                                         iconPath={materialRecipe.iconPath}
+                                        rarity={RarityMapper.rarityToRarityString(materialRecipe.rarity)}
                                         size={30}
                                     />
                                 </div>
