@@ -18,6 +18,9 @@ export class TacticusIntegrationService {
         const rarityThresholds = [0, 3, 6, 9, 12, 16];
         let rarity: Rarity = Rarity.Common;
 
+        // We count down from rarest to most-common, so any progressionIndex values higher than maxSupportedIndex
+        // will be clamped to the rarest we currently support. This is relevant to the 2025 staged rollout of Mythic
+        // rarity, which adds a new rarity with 4 new ranks (but only 1 rank was released initially)
         for (let i = rarityThresholds.length - 1; i >= 0; i--) {
             if (clampedIndex >= rarityThresholds[i]) {
                 rarity = i as Rarity;
