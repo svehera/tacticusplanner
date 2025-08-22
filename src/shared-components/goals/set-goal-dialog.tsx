@@ -307,6 +307,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         fullWidth
                                         label="Primary target level"
                                         min={unit.primaryAbilityLevel}
+                                        max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.firstAbilityLevel!}
                                         valueChange={primaryAbilityLevel => {
                                             setForm(curr => ({
@@ -320,6 +321,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         fullWidth
                                         label="Secondary target level"
                                         min={unit.secondaryAbilityLevel}
+                                        max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.secondAbilityLevel!}
                                         valueChange={secondaryAbilityLevel => {
                                             setForm(curr => ({
