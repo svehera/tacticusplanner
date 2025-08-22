@@ -139,12 +139,23 @@ export class StatsCalculatorService {
         rank: Rank,
         numAppliedUpgrades: number
     ): number {
-        const rankValue: number = StatsCalculatorService.getRankForComputation(rank);
+        const preMythicRankValue: number = StatsCalculatorService.getRankForComputation(Math.max(Rank.Diamond3, rank));
+        const postMythicRankValue: number = StatsCalculatorService.getRankForComputation(
+            rank >= Rank.Adamantine1 ? rank - Rank.Adamantine1 : 0
+        );
         const rarityValue: number = rarityStars as number;
-        const upgradeBoost =
-            (baseStat * Math.pow(1.25205, rankValue + 1) - baseStat * Math.pow(1.25205, rankValue)) / 2.0;
+        const preMythicUpgradeBoost =
+            (baseStat * Math.pow(1.25205, preMythicRankValue + 1) - baseStat * Math.pow(1.25205, preMythicRankValue)) /
+            2.0;
+        const postMythicUpgradeBoost =
+            (baseStat * Math.pow(1.1091, postMythicRankValue + 1) - baseStat * Math.pow(1.1091, postMythicRankValue)) /
+            2.0;
+        const upgradeBoost = rank <= Rank.Diamond3 ? preMythicUpgradeBoost : postMythicUpgradeBoost;
+        const preMythicRankCoef = Math.pow(1.25205, preMythicRankValue);
+        const postMythicRankCoef = Math.pow(1.1091, postMythicRankValue);
         return Math.round(
-            upgradeBoost * numAppliedUpgrades + baseStat * Math.pow(1.25205, rankValue) * (1 + 0.1 * rarityValue)
+            upgradeBoost * numAppliedUpgrades +
+                baseStat * (preMythicRankCoef + postMythicRankCoef) * (1 + 0.1 * rarityValue)
         );
     }
 
