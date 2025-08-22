@@ -82,7 +82,7 @@ describe('TacticusIntegrationService', () => {
             // These test expectations will need to be modified as we add support for them.
             const highVals = [16, 17, 18, 19, 20, 999];
             for (let i = 0; i < highVals.length; i++) {
-                const result = TacticusIntegrationService.convertProgressionIndex(16);
+                const result = TacticusIntegrationService.convertProgressionIndex(highVals[i]);
 
                 expect(result).toEqual([Rarity.Legendary, RarityStars.BlueStar]);
             }
