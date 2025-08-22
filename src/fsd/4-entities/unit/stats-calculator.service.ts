@@ -159,7 +159,7 @@ export class StatsCalculatorService {
         rank: Rank,
         numAppliedUpgrades: number
     ): number {
-        const unit = CharactersService.charactersData.find(u => u.id === unitId);
+        const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
         return StatsCalculatorService.calculateStat(unit?.health ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
     }
 
@@ -174,7 +174,7 @@ export class StatsCalculatorService {
         rank: Rank,
         numAppliedUpgrades: number
     ): number {
-        const unit = CharactersService.charactersData.find(u => u.id === unitId);
+        const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
         return StatsCalculatorService.calculateStat(unit?.damage ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
     }
 
@@ -189,7 +189,7 @@ export class StatsCalculatorService {
         rank: Rank,
         numAppliedUpgrades: number
     ): number {
-        const unit = CharactersService.charactersData.find(u => u.id === unitId);
+        const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
         return StatsCalculatorService.calculateStat(unit?.armour ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
     }
 
