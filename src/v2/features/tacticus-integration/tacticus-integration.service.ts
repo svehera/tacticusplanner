@@ -6,37 +6,37 @@ import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
 import { CharacterUpgradesService } from '@/fsd/4-entities/character';
 
 import { IXpLevel } from 'src/v2/features/characters/characters.models';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+
+// Mythic Wings
+export const MAX_PROGRESSION_INDEX = 19;
 
 export class TacticusIntegrationService {
     static convertProgressionIndex(progressionIndex: number): [Rarity, RarityStars] {
-        // Mythic Wings
-        const maxSupportedIndex = 19;
+        let validatedIndex = progressionIndex;
 
         if (progressionIndex < 0) {
             console.warn(`API returned invalid progressionIndex ${progressionIndex}, setting to 0`);
             // Clamp negative invalid values to Common No Stars
-            progressionIndex = 0;
-        }
-        if (progressionIndex > maxSupportedIndex) {
+            validatedIndex = 0;
+        } else if (progressionIndex > MAX_PROGRESSION_INDEX) {
             console.warn(
-                `API returned unsupported progressionIndex ${progressionIndex}, setting to ${maxSupportedIndex}`
+                `API returned unsupported progressionIndex ${progressionIndex}, setting to ${MAX_PROGRESSION_INDEX}`
             );
             // Clamp positive invalid values to highest we handle
-            progressionIndex = maxSupportedIndex;
+            validatedIndex = MAX_PROGRESSION_INDEX;
         }
 
         const rarityThresholds = [0, 3, 6, 9, 12, 16];
         let rarity: Rarity = Rarity.Common;
 
         for (let i = rarityThresholds.length - 1; i >= 0; i--) {
-            if (progressionIndex >= rarityThresholds[i]) {
+            if (validatedIndex >= rarityThresholds[i]) {
                 rarity = i as Rarity;
                 break;
             }
         }
 
-        const rarityStars: RarityStars = (progressionIndex - rarity) as RarityStars;
+        const rarityStars: RarityStars = (validatedIndex - rarity) as RarityStars;
 
         return [rarity, rarityStars];
     }
