@@ -7,73 +7,27 @@ import { TacticusIntegrationService } from './tacticus-integration.service';
 describe('TacticusIntegrationService', () => {
     describe('convertProgressionIndex', () => {
         it('should convert index to correct Rarity/RarityStars', () => {
-            expect(TacticusIntegrationService.convertProgressionIndex(0)).toEqual([Rarity.Common, RarityStars.None]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(1)).toEqual([Rarity.Common, RarityStars.OneStar]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(2)).toEqual([
-                Rarity.Common,
-                RarityStars.TwoStars,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(3)).toEqual([
-                Rarity.Uncommon,
-                RarityStars.TwoStars,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(4)).toEqual([
-                Rarity.Uncommon,
-                RarityStars.ThreeStars,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(5)).toEqual([
-                Rarity.Uncommon,
-                RarityStars.FourStars,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(6)).toEqual([Rarity.Rare, RarityStars.FourStars]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(7)).toEqual([Rarity.Rare, RarityStars.FiveStars]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(8)).toEqual([
-                Rarity.Rare,
-                RarityStars.RedOneStar,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(9)).toEqual([
-                Rarity.Epic,
-                RarityStars.RedOneStar,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(10)).toEqual([
-                Rarity.Epic,
-                RarityStars.RedTwoStars,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(11)).toEqual([
-                Rarity.Epic,
-                RarityStars.RedThreeStars,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(12)).toEqual([
-                Rarity.Legendary,
-                RarityStars.RedThreeStars,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(13)).toEqual([
-                Rarity.Legendary,
-                RarityStars.RedFourStars,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(14)).toEqual([
-                Rarity.Legendary,
-                RarityStars.RedFiveStars,
-            ]);
-
-            expect(TacticusIntegrationService.convertProgressionIndex(15)).toEqual([
-                Rarity.Legendary,
-                RarityStars.BlueStar,
-            ]);
+            const cases: Array<[number, Rarity, RarityStars]> = [
+                [0, Rarity.Common, RarityStars.None],
+                [1, Rarity.Common, RarityStars.OneStar],
+                [2, Rarity.Common, RarityStars.TwoStars],
+                [3, Rarity.Uncommon, RarityStars.TwoStars],
+                [4, Rarity.Uncommon, RarityStars.ThreeStars],
+                [5, Rarity.Uncommon, RarityStars.FourStars],
+                [6, Rarity.Rare, RarityStars.FourStars],
+                [7, Rarity.Rare, RarityStars.FiveStars],
+                [8, Rarity.Rare, RarityStars.RedOneStar],
+                [9, Rarity.Epic, RarityStars.RedOneStar],
+                [10, Rarity.Epic, RarityStars.RedTwoStars],
+                [11, Rarity.Epic, RarityStars.RedThreeStars],
+                [12, Rarity.Legendary, RarityStars.RedThreeStars],
+                [13, Rarity.Legendary, RarityStars.RedFourStars],
+                [14, Rarity.Legendary, RarityStars.RedFiveStars],
+                [15, Rarity.Legendary, RarityStars.BlueStar],
+            ];
+            for (const [idx, rarity, stars] of cases) {
+                expect(TacticusIntegrationService.convertProgressionIndex(idx)).toEqual([rarity, stars]);
+            }
         });
 
         it('should clamp higher indices to Legendary Blue Wings', () => {
