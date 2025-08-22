@@ -90,6 +90,8 @@ export class CharactersValueService {
             2: 25, // Rare
             3: 60, // Epic
             4: 150, // Legendary
+            // Mythic value estimated with AI, unsure of original source
+            5: 375, // Mythic
         };
 
         const upgrades = CharactersValueService.getUpgrades({
@@ -470,6 +472,8 @@ export class CharactersValueService {
         const RareOrbBS = 490 / 3;
         const EpicOrbBS = 1143 / 3;
         const LegendaryOrbBS = 2800 / 3;
+        // Mythic value estimated via AI, unsure of original source of values
+        const MythicOrbBS = 6720 / 3;
 
         switch (rarity) {
             case Rarity.Common:
@@ -482,6 +486,10 @@ export class CharactersValueService {
                 return ShardBS * 50 + EpicOrbBS * 10;
             case Rarity.Legendary:
                 return ShardBS * 100 + LegendaryOrbBS * 10;
+            case Rarity.Mythic:
+                // Mythic values were invented to get a rough idea. I have no idea where the pre-Mythic
+                // value calcs come from, so unable to replicate the same logic here.
+                return ShardBS * 200 + MythicOrbBS * 10;
             default: {
                 console.warn('Rarity value unknown');
                 return 0;

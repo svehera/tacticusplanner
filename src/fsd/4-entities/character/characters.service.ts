@@ -155,6 +155,7 @@ export class CharactersService {
         if (identifier === "Tan Gi'Da") return 'admecMarshall';
         if (identifier === 'Nauseous Rotbone') return 'deathRotbone';
         if (identifier === 'Sy-Gex') return 'admecDestroyer';
+        if (identifier === 'Patermine') return 'genesPatriarch';
         return this.getUnit(identifier)?.snowprintId || identifier;
     }
 
