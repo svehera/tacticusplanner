@@ -39,7 +39,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
         saveTeam({
             ...team,
             name: teamName,
-            charactersIds: selectedTeam.map(x => x.id),
+            charactersIds: selectedTeam.map(x => x.snowprintId!),
             expectedBattleClears: expectedBattleClears,
         });
     };

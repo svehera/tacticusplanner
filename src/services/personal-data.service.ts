@@ -255,6 +255,13 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
         return arr1.length === arr2.length && arr1.every(char => arr2.includes(char));
     }
 
+    function doTeamsMatch(team1: string[], team2: string[]) {
+        return areArraysEqual(
+            team1.map(id => CharactersService.resolveCharacter(id)?.snowprintId || id),
+            team2.map(id => CharactersService.resolveCharacter(id)?.snowprintId || id)
+        );
+    }
+
     sections.forEach(section => {
         const selectedTeams: SelectedTeams = data[section];
 
