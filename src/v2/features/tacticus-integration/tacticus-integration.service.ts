@@ -12,31 +12,20 @@ export const MAX_PROGRESSION_INDEX = 19;
 
 export class TacticusIntegrationService {
     static convertProgressionIndex(progressionIndex: number): [Rarity, RarityStars] {
-        let validatedIndex = progressionIndex;
-
-        if (progressionIndex < 0) {
-            console.warn(`API returned invalid progressionIndex ${progressionIndex}, setting to 0`);
-            // Clamp negative invalid values to Common No Stars
-            validatedIndex = 0;
-        } else if (progressionIndex > MAX_PROGRESSION_INDEX) {
-            console.warn(
-                `API returned unsupported progressionIndex ${progressionIndex}, setting to ${MAX_PROGRESSION_INDEX}`
-            );
-            // Clamp positive invalid values to highest we handle
-            validatedIndex = MAX_PROGRESSION_INDEX;
-        }
-
+        // Clamp negative indices to 0 (Common No Stars) and out-of-range positive indices to
+        // highest supported level.
+        const clampedIndex = Math.min(Math.max(progressionIndex, 0), MAX_PROGRESSION_INDEX);
         const rarityThresholds = [0, 3, 6, 9, 12, 16];
         let rarity: Rarity = Rarity.Common;
 
         for (let i = rarityThresholds.length - 1; i >= 0; i--) {
-            if (validatedIndex >= rarityThresholds[i]) {
+            if (clampedIndex >= rarityThresholds[i]) {
                 rarity = i as Rarity;
                 break;
             }
         }
 
-        const rarityStars: RarityStars = (validatedIndex - rarity) as RarityStars;
+        const rarityStars: RarityStars = (clampedIndex - rarity) as RarityStars;
 
         return [rarity, rarityStars];
     }
