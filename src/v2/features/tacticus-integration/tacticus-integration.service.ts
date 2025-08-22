@@ -55,6 +55,6 @@ export class TacticusIntegrationService {
     }
 
     static getUpgradeId(upgrade: TacticusUpgrade): string | null {
-        return UpgradesService.findUpgrade(upgrade);
+        return upgrade.id;
     }
 }

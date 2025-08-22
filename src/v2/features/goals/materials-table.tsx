@@ -89,10 +89,10 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
         },
         {
             valueGetter: params => {
-                return inventory[params.data!.id] ?? 0;
+                return inventory[params.data!.snowprintId] ?? 0;
             },
             valueSetter: event => {
-                updateMaterialQuantity(event.data.id, event.newValue);
+                updateMaterialQuantity(event.data.snowprintId, event.newValue);
                 return true;
             },
             headerName: 'Inventory',
@@ -113,7 +113,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
             valueGetter: params => {
                 const { data } = params;
                 if (data) {
-                    const actualAcquired = inventory[params.data!.id] ?? 0;
+                    const actualAcquired = inventory[params.data!.snowprintId] ?? 0;
                     return Math.max(0, data.requiredCount - actualAcquired);
                 }
             },
@@ -264,7 +264,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
 
     const saveChanges = (event: CellEditingStoppedEvent<ICharacterUpgradeEstimate>): void => {
         if (event.data && event.newValue !== event.oldValue) {
-            updateMaterialQuantity(event.data.id, event.newValue);
+            updateMaterialQuantity(event.data.snowprintId, event.newValue);
         }
     };
     return (
