@@ -51,6 +51,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
             const char = options.find(
                 x =>
                     x.name.toLowerCase().includes(value.toLowerCase()) ||
+                    ('shortName' in x ? (x as any).shortName.toLowerCase().includes(value.toLowerCase()) : false) ||
                     ('fullName' in x ? x.fullName.toLowerCase().includes(value.toLowerCase()) : false)
             );
             if (char) {
@@ -75,6 +76,14 @@ export const UnitsAutocomplete = <T extends IUnit>({
             open={openAutocomplete}
             onFocus={() => handleAutocompleteChange(true)}
             onBlur={() => handleAutocompleteChange(false)}
+            filterOptions={(opts, state) => {
+                const q = state.inputValue?.toLowerCase?.().trim() ?? '';
+                if (!q) return opts;
+                return opts.filter(x => {
+                    const short = 'shortName' in x ? ((x as any).shortName?.toLowerCase?.() ?? '') : '';
+                    return short.includes(q);
+                });
+            }}
             getOptionLabel={option => getOptionText(option)}
             isOptionEqualToValue={(option, value) => option.snowprintId === value.snowprintId}
             renderOption={(props, option) => (
