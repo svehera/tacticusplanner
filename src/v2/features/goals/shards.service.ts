@@ -260,7 +260,7 @@ export class ShardsService {
 
         for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
             const progressionRequirements = charsProgression[i];
-            targetShards += progressionRequirements.shards;
+            targetShards += progressionRequirements.shards ?? 0;
         }
 
         return targetShards;
@@ -275,7 +275,7 @@ export class ShardsService {
 
         for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
             const progressionRequirements = charsProgression[i];
-            targetShards += progressionRequirements.shards;
+            targetShards += progressionRequirements.shards ?? 0;
         }
 
         return targetShards;

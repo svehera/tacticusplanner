@@ -233,7 +233,8 @@ export interface IInsightsData {
     }>;
 }
 export interface ICharProgression {
-    shards: number;
+    shards?: number;
+    mythicShards?: number;
     orbs?: number;
     rarity?: Rarity;
 }

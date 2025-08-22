@@ -3,6 +3,8 @@ import { cloneDeep } from 'lodash';
 // eslint-disable-next-line import-x/no-internal-modules
 import { ILreTeam } from '@/models/interfaces';
 
+import { CharactersService } from '@/fsd/4-entities/character';
+
 import { ILreBattleProgress, ILreRequirements, ILreTrackProgress } from './lre.models';
 
 export class TokenUse {
@@ -186,10 +188,14 @@ export class TokenEstimationService {
                     battle.requirementsProgress.length;
             });
         });
+        const resolvedTeams = teams.map((team, index) => ({
+            ...team,
+            charactersIds: team.charactersIds.map(id => CharactersService.resolveCharacter(id)?.snowprintId || id),
+        }));
         while (true) {
             const token: TokenUse = this.computeNextToken(
                 tracks,
-                teams,
+                resolvedTeams,
                 tokens.length > 0 ? tokens[tokens.length - 1] : undefined
             );
             if (token.team === undefined) break;
