@@ -12,13 +12,14 @@ export class TacticusIntegrationService {
     static convertProgressionIndex(progressionIndex: number): [Rarity, RarityStars] {
         const maxSupportedIndex = 18;
         if (progressionIndex < 0) {
-            console.error(`API returned invalid progressionIndex ${progressionIndex}, setting to 0 (Common No Stars)`);
+            console.warn(`API returned invalid progressionIndex ${progressionIndex}, setting to 0`);
             progressionIndex = 0;
         }
         if (progressionIndex > maxSupportedIndex) {
             console.warn(
                 `API returned unsupported progressionIndex ${progressionIndex}, setting to ${maxSupportedIndex}`
             );
+            progressionIndex = maxSupportedIndex;
         }
 
         const rarityThresholds = [0, 3, 6, 9, 12, 16];
@@ -37,7 +38,7 @@ export class TacticusIntegrationService {
         // As above, we clamp the rarity stars to the rarest we support. While this is inaccurate, it allows
         // the planner to absorb unsupported values in the period between their appearance in the Tacticus API,
         // and the planner adding support.
-        const rarityStars: RarityStars = (maxSupportedIndex - rarity) as RarityStars;
+        const rarityStars: RarityStars = (progressionIndex - rarity) as RarityStars;
 
         return [rarity, rarityStars];
     }
