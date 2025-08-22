@@ -78,9 +78,9 @@ export const charsProgression: Record<number, ICharProgression> = {
     [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 150, orbs: 10, rarity: Rarity.Legendary },
     [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 250, orbs: 15, rarity: Rarity.Legendary },
     [Rarity.Legendary + RarityStars.OneBlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
-    [Rarity.Mythic + RarityStars.OneBlueStar]: { mythicSshards: 20, orbs: 10, rarity: Rarity.Mythic },
+    [Rarity.Mythic + RarityStars.OneBlueStar]: { mythicShards: 20, orbs: 10, rarity: Rarity.Mythic },
 
-    [Rarity.Mythic + RarityStars.TwoBlueStars]: { mythicSshards: 30, orbs: 10, rarity: Rarity.Mythic },
+    [Rarity.Mythic + RarityStars.TwoBlueStars]: { mythicShards: 30, orbs: 10, rarity: Rarity.Mythic },
     [Rarity.Mythic + RarityStars.ThreeBlueStars]: { mythicShards: 50, orbs: 15, rarity: Rarity.Mythic },
     [Rarity.Mythic + RarityStars.MythicWings]: { mythicShards: 100, orbs: 20, rarity: Rarity.Mythic },
 };
