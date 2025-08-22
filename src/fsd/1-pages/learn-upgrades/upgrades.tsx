@@ -214,10 +214,10 @@ export const Upgrades = () => {
 
                     for (const rank in ranks) {
                         const upgrades = ranks[rank];
-                        const allMats = Object.values(upgrades)
+                        const allMats = upgrades
                             .filter(x => x !== undefined)
                             .flat()
-                            .flatMap(x => expandMaterial(x));
+                            .flatMap(x => [x, expandMaterial(x)].flat());
                         if (allMats.includes(x.snowprintId)) {
                             const charData = CharactersService.charactersData.find(x => x.snowprintId! === character);
                             const existingChar = characters.find(x => x.id === character);
