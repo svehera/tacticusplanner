@@ -8,7 +8,7 @@ import { StoreContext } from '@/reducers/store.provider';
 import { Trait, Rank, Rarity } from '@/fsd/5-shared/model';
 import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterBias, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
+import { CharacterBias, CharactersService, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeRankGoal, ICharacterUpgradeMow, PersonalGoalType } from '@/fsd/4-entities/goal';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
@@ -51,7 +51,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             if (rawGoal.type !== PersonalGoalType.UpgradeRank) return;
             const goal = rawGoal as ICharacterUpgradeRankGoal;
             // If this goal isn't for this character, skip it.
-            if (goal.unitId !== character.id) return;
+            if (!CharactersService.matchesAnyCharacterId(goal.unitId, character)) return;
 
             // Go through each upgrade-material rarity in the goal and update
             // max ranks accordingly.
