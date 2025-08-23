@@ -15,7 +15,7 @@ import {
 import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { charactersData } from './data';
-import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData } from './model';
+import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData, ICharacter2 } from './model';
 
 export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
@@ -198,5 +198,24 @@ export class CharactersService {
                 : 'TBA',
             nextEventDateUtc,
         };
+    }
+
+    /**
+     * Takes a character id and character object, and returns true if the id matches the object.
+     *
+     * The app has multiple "id" concepts for looking up characters, and different parts of the app
+     * have used different concepts in the past.
+     *
+     * This function helps consolidate those concepts.
+     */
+    public static matchesAnyCharacterId(id: string, character: ICharacter2): boolean {
+        const lowered = id.toLowerCase();
+
+        return (
+            id === character.snowprintId ||
+            lowered === character.id.toLowerCase() ||
+            lowered === character.shortName.toLowerCase() ||
+            lowered === character.fullName.toLowerCase()
+        );
     }
 }
