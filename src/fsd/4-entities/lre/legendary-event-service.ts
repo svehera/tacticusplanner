@@ -1,6 +1,5 @@
+import { allLegendaryEvents } from './data';
 import { ILegendaryEventStatic } from './static-data.model';
-
-import { allLegendaryEvents } from './index';
 
 export class LegendaryEventService {
     public static getActiveEvent(): ILegendaryEventStatic {
