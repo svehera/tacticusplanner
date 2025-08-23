@@ -38,6 +38,7 @@ export class CampaignsService {
 
         const foundLocs: string[] = [];
         for (const battle of battles) {
+            if (battle.energyCost == 0) continue;
             const name = battle.shortName ?? '';
             for (const reward of battle.rewards.guaranteed) {
                 if (reward.id === 'gold') continue;
@@ -84,6 +85,10 @@ export class CampaignsService {
         const result: Record<string, ICampaignBattleComposed> = {};
         for (const battleDataKey in battleData) {
             const battle = battleData[battleDataKey];
+            if (battle.energyCost == 0) {
+                // Indomitus 1-5 don't cost anything but can't be raided.
+                continue;
+            }
 
             const reward = this.getReward(battle);
             const config = campaignConfigs[battle.campaignType as CampaignType];
