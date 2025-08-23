@@ -10,7 +10,7 @@ import { EmptyTile } from 'src/v2/features/characters/components/empty-tile';
 import { MowTile } from 'src/v2/features/characters/components/mow-tile';
 
 interface Props {
-    characters: ICharacter2[];
+    characters: (ICharacter2 | undefined)[];
     onClick?: (unit: IUnit) => void;
     onEmptyClick?: (isMow: boolean) => void;
     mow?: IMow2 | null;
