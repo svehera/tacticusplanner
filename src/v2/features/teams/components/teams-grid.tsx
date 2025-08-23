@@ -12,7 +12,7 @@ import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
-import { matchesAnyCharacterId } from '@/fsd/4-entities/character/utils/matches-any-character-id';
+import { CharactersService as NewCharService } from '@/fsd/4-entities/character';
 
 import { IMow2 } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
@@ -37,7 +37,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
 
     const renderTeam = (team: IPersonalTeam) => {
         const teamCharacters = team.lineup.map(id => {
-            return characters.find(character => matchesAnyCharacterId(id, character));
+            return characters.find(character => NewCharService.matchesAnyCharacterId(id, character));
         });
         const teamMow = mows.find(x => x.snowprintId === team.mowId);
         const withMow = !!teamMow;
@@ -76,7 +76,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
 
     const renderCappedTeam = (team: IPersonalTeam) => {
         const teamCharacters = team.lineup.map(
-            id => characters.find(character => matchesAnyCharacterId(id, character))!
+            id => characters.find(character => NewCharService.matchesAnyCharacterId(id, character))!
         );
         const cappedCharacters = teamCharacters.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap));
         const teamMow = mows.find(x => x.id === team.mowId);

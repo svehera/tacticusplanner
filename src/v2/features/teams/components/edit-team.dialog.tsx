@@ -11,7 +11,7 @@ import { Rarity } from '@/fsd/5-shared/model';
 import { RaritySelect } from '@/fsd/5-shared/ui';
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
-import { matchesAnyCharacterId } from '@/fsd/4-entities/character/utils/matches-any-character-id';
+import { CharactersService } from '@/fsd/4-entities/character';
 
 import { IMow2 } from 'src/v2/features/characters/characters.models';
 import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';
@@ -34,7 +34,7 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
     const [teamName, setTeamName] = useState<string>(team.name);
     const [rarityCap, setRarityCap] = useState(team.rarityCap);
     const [lineup, setLineup] = useState<ICharacter2[]>(
-        team.lineup.map(id => characters.find(x => matchesAnyCharacterId(id, x))!)
+        team.lineup.map(id => characters.find(x => CharactersService.matchesAnyCharacterId(id, x))!)
     );
     const [mow, setMow] = useState<IMow2 | null>(team.mowId ? mows.find(x => x.id === team.mowId)! : null);
 
