@@ -18,9 +18,9 @@ export const Equipment = () => {
         (): IEquipment[] =>
             EquipmentService.equipmentData.filter(
                 item =>
-                    item.name.search('I_Block_[CURELM]005') == -1 &&
-                    item.name.search('I_Booster_Block_[CURELM]001') == -1 &&
-                    item.name.search('I_Defensive_[CURELM]001') == -1
+                    item.id.search('I_Block_[CURELM]005') == -1 &&
+                    item.id.search('I_Booster_Block_[CURELM]001') == -1 &&
+                    item.id.search('I_Defensive_[CURELM]001') == -1
             ) || [],
         []
     );
