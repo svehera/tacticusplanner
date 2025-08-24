@@ -330,7 +330,7 @@ export const defaultData: IPersonalData2 = {
     },
 };
 
-export const goalsLimit = 50;
+export const goalsLimit = 100;
 
 export const idToCampaign: Record<string, Campaign> = {
     campaign1: Campaign.I,
