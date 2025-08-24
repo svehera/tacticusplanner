@@ -680,7 +680,7 @@
                     "id": "upgHpC004",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -725,7 +725,7 @@
                     "id": "upgDmgC002",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -815,7 +815,7 @@
                     "id": "upgArmC001",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -985,7 +985,7 @@
                     "id": "upgDmgC009",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -1318,7 +1318,7 @@
                     "id": "upgArmC003",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -1526,7 +1526,7 @@
                     "id": "upgArmC002",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -1592,7 +1592,7 @@
                     "id": "upgHpC003",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -1828,7 +1828,7 @@
                     "id": "upgHpC001",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -1901,7 +1901,7 @@
                     "id": "upgDmgC001",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -1960,7 +1960,7 @@
                     "id": "upgHpC006",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2269,7 +2269,7 @@
                     "id": "upgHpC014",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2387,7 +2387,7 @@
                     "id": "upgDmgC003",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2446,7 +2446,7 @@
                     "id": "upgDmgC005",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2505,7 +2505,7 @@
                     "id": "upgArmC004",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2578,7 +2578,7 @@
                     "id": "upgHpC002",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2637,7 +2637,7 @@
                     "id": "upgDmgC004",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2703,7 +2703,7 @@
                     "id": "upgDmgC006",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2755,7 +2755,7 @@
                     "id": "upgDmgC011",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2814,7 +2814,7 @@
                     "id": "upgHpC007",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2932,7 +2932,7 @@
                     "id": "upgDmgC007",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -2991,7 +2991,7 @@
                     "id": "upgDmgC008",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -3043,7 +3043,7 @@
                     "id": "upgArmC005",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -3147,7 +3147,7 @@
                     "id": "upgHpC008",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -3456,7 +3456,7 @@
                     "id": "upgArmC007",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -3647,7 +3647,7 @@
                     "id": "upgHpC009",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -3942,7 +3942,7 @@
                     "id": "upgDmgC015",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4001,7 +4001,7 @@
                     "id": "upgArmE013",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -4067,7 +4067,7 @@
                     "id": "upgHpL010",
                     "chance_numerator": 1,
                     "chance_denominator": 10,
-                    "effective_rate": 0.182
+                    "effective_rate": 0.181
                 }
             ]
         },
@@ -4192,7 +4192,7 @@
                     "id": "upgHpC010",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4230,7 +4230,7 @@
                     "id": "upgDmgC014",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4275,7 +4275,7 @@
                     "id": "upgHpC014",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4379,7 +4379,7 @@
                     "id": "upgHpC015",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4417,7 +4417,7 @@
                     "id": "upgHpC013",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4462,7 +4462,7 @@
                     "id": "upgArmC013",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4514,7 +4514,7 @@
                     "id": "upgDmgC013",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4566,7 +4566,7 @@
                     "id": "upgArmC007",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4611,7 +4611,7 @@
                     "id": "upgHpC002",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4708,7 +4708,7 @@
                     "id": "upgHpC006",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4760,7 +4760,7 @@
                     "id": "upgDmgC012",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4805,7 +4805,7 @@
                     "id": "upgArmC004",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -4916,7 +4916,7 @@
                     "id": "upgArmC003",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -5006,7 +5006,7 @@
                     "id": "upgHpC007",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -5051,7 +5051,7 @@
                     "id": "upgDmgC010",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -5096,7 +5096,7 @@
                     "id": "upgDmgC001",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -5134,7 +5134,7 @@
                     "id": "upgDmgC015",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -5276,7 +5276,7 @@
                     "id": "upgDmgC003",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -5321,7 +5321,7 @@
                     "id": "upgHpC016",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -5373,7 +5373,7 @@
                     "id": "upgArmC012",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -5425,7 +5425,7 @@
                     "id": "upgHpC003",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -5515,7 +5515,7 @@
                     "id": "upgDmgC002",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -5671,7 +5671,7 @@
                     "id": "upgDmgC009",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -6274,7 +6274,7 @@
                     "id": "upgDmgC011",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -6378,7 +6378,7 @@
                     "id": "upgArmC001",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -6430,7 +6430,7 @@
                     "id": "upgDmgC004",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -6482,7 +6482,7 @@
                     "id": "upgArmC011",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -6527,7 +6527,7 @@
                     "id": "upgHpC005",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -6586,7 +6586,7 @@
                     "id": "upgHpC001",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -6676,7 +6676,7 @@
                     "id": "upgHpC017",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -6825,7 +6825,7 @@
                     "id": "upgDmgC005",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -7109,7 +7109,7 @@
                     "id": "upgHpE017",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -7618,7 +7618,7 @@
                     "id": "upgHpE012",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -7663,7 +7663,7 @@
                     "id": "upgDmgE003",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -7715,7 +7715,7 @@
                     "id": "upgArmE009",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -7819,7 +7819,7 @@
                     "id": "upgHpC015",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -7857,7 +7857,7 @@
                     "id": "upgHpC014",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -7895,7 +7895,7 @@
                     "id": "upgHpC013",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -7933,7 +7933,7 @@
                     "id": "upgDmgC014",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -7971,7 +7971,7 @@
                     "id": "upgArmC011",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -8009,7 +8009,7 @@
                     "id": "upgArmC012",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -8047,7 +8047,7 @@
                     "id": "upgHpC008",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -8085,7 +8085,7 @@
                     "id": "upgDmgC012",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -8227,7 +8227,7 @@
                     "id": "upgArmC013",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -8331,7 +8331,7 @@
                     "id": "upgHpC017",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -8369,7 +8369,7 @@
                     "id": "upgDmgC013",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -8452,7 +8452,7 @@
                     "id": "upgHpC016",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -8490,7 +8490,7 @@
                     "id": "upgArmC006",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -9588,7 +9588,7 @@
                     "id": "upgDmgE001",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -9678,7 +9678,7 @@
                     "id": "upgHpE003",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -9730,7 +9730,7 @@
                     "id": "upgDmgE004",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -10493,7 +10493,7 @@
                     "id": "upgArmC003",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -10597,7 +10597,7 @@
                     "id": "upgHpC006",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -10767,7 +10767,7 @@
                     "id": "upgHpC002",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -10812,7 +10812,7 @@
                     "id": "upgHpC005",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -10878,7 +10878,7 @@
                     "id": "upgDmgC010",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -10930,7 +10930,7 @@
                     "id": "upgDmgC011",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -10982,7 +10982,7 @@
                     "id": "upgDmgC009",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -11027,7 +11027,7 @@
                     "id": "upgHpE015",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -11079,7 +11079,7 @@
                     "id": "upgDmgC007",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -11263,7 +11263,7 @@
                     "id": "upgArmC004",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -11374,7 +11374,7 @@
                     "id": "upgArmE010",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -11587,7 +11587,7 @@
                     "id": "upgHpC008",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -11625,7 +11625,7 @@
                     "id": "upgHpC016",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -11663,22 +11663,15 @@
                     "id": "upgDmgC015",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Xenos"],
-        "enemiesFactions": ["Aeldari", "ThousandSons"],
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Rubric Marine"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["ThousandSons"],
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Rubric Marine"],
         "detailedEnemyTypes": [
-            {
-                "id": "eldarNpc1Guardian",
-                "name": "Guardian",
-                "count": 2,
-                "stars": 0,
-                "rank": "Stone 2"
-            },
             {
                 "id": "thousNpc3RubricMarine",
                 "name": "Rubric Marine",
@@ -11708,22 +11701,15 @@
                     "id": "upgDmgC013",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Xenos"],
-        "enemiesFactions": ["Aeldari", "ThousandSons"],
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Rubric Marine"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["ThousandSons"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Rubric Marine"],
         "detailedEnemyTypes": [
-            {
-                "id": "eldarNpc1Guardian",
-                "name": "Guardian",
-                "count": 4,
-                "stars": 1,
-                "rank": "Stone 2"
-            },
             {
                 "id": "thousNpc3RubricMarine",
                 "name": "Rubric Marine",
@@ -11753,7 +11739,7 @@
                     "id": "upgArmC013",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -11798,7 +11784,7 @@
                     "id": "upgArmC005",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -11843,7 +11829,7 @@
                     "id": "upgHpC010",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -11888,7 +11874,7 @@
                     "id": "upgHpC015",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -11933,22 +11919,15 @@
                     "id": "upgDmgC014",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion", "ThousandSons"],
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman", "Rubric Marine", "Traitor Guardsman"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "ThousandSons"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "stars": 1,
-                "rank": "Stone 2"
-            },
             {
                 "id": "blackNpc3TraitorGuardsman",
                 "name": "Traitor Guardsman",
@@ -11985,22 +11964,15 @@
                     "id": "upgDmgC004",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion", "ThousandSons"],
-        "enemiesTotal": 16,
-        "enemiesTypes": ["Cadian Guardsman", "Rubric Marine", "Traitor Guardsman"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "ThousandSons"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 5,
-                "stars": 1,
-                "rank": "Stone 2"
-            },
             {
                 "id": "blackNpc3TraitorGuardsman",
                 "name": "Traitor Guardsman",
@@ -12044,36 +12016,15 @@
                     "id": "upgArmC007",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion", "ThousandSons"],
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Rubric Marine", "Traitor Guardsman"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "ThousandSons"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 1,
-                "stars": 0,
-                "rank": "Stone 2"
-            },
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 1,
-                "stars": 1,
-                "rank": "Stone 2"
-            },
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 1,
-                "stars": 1,
-                "rank": "Stone 3"
-            },
             {
                 "id": "blackNpc3TraitorGuardsman",
                 "name": "Traitor Guardsman",
@@ -12110,7 +12061,7 @@
                     "id": "upgArmC004",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -12148,7 +12099,7 @@
                     "id": "upgHpC017",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -12425,7 +12376,7 @@
                     "id": "upgHpC003",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -12515,7 +12466,7 @@
                     "id": "upgDmgC011",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -12681,7 +12632,7 @@
                     "id": "upgArmC002",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -13035,18 +12986,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Xenos"],
-        "enemiesFactions": ["Aeldari", "ThousandSons"],
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian", "Screamer"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["ThousandSons"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Screamer"],
         "detailedEnemyTypes": [
-            {
-                "id": "eldarNpc1Guardian",
-                "name": "Guardian",
-                "count": 3,
-                "stars": 1,
-                "rank": "Iron 1"
-            },
             {
                 "id": "thousNpc2Screamer",
                 "name": "Screamer",
@@ -13080,18 +13024,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Xenos"],
-        "enemiesFactions": ["Aeldari", "ThousandSons"],
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian", "Screamer"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["ThousandSons"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Screamer"],
         "detailedEnemyTypes": [
-            {
-                "id": "eldarNpc1Guardian",
-                "name": "Guardian",
-                "count": 2,
-                "stars": 1,
-                "rank": "Iron 1"
-            },
             {
                 "id": "thousNpc2Screamer",
                 "name": "Screamer",
@@ -13530,18 +13467,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Xenos"],
-        "enemiesFactions": ["Aeldari", "ThousandSons"],
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Guardian", "Pink Horror", "Rubric Marine", "Screamer"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["ThousandSons"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Pink Horror", "Rubric Marine", "Screamer"],
         "detailedEnemyTypes": [
-            {
-                "id": "eldarNpc1Guardian",
-                "name": "Guardian",
-                "count": 3,
-                "stars": 2,
-                "rank": "Iron 1"
-            },
             {
                 "id": "thousNpc1PinkHorror",
                 "name": "Pink Horror",
@@ -13748,7 +13678,7 @@
                     "id": "upgHpC001",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -13838,7 +13768,7 @@
                     "id": "upgHpC007",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -13928,7 +13858,7 @@
                     "id": "upgDmgC008",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -14281,7 +14211,7 @@
                     "id": "upgArmE008",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -14378,7 +14308,7 @@
                     "id": "upgHpC009",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -14610,7 +14540,7 @@
                     "id": "upgArmC006",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -14648,7 +14578,7 @@
                     "id": "upgDmgE010",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -14731,7 +14661,7 @@
                     "id": "upgArmC001",
                     "chance_numerator": 6,
                     "chance_denominator": 7,
-                    "effective_rate": 0.875
+                    "effective_rate": 0.874
                 }
             ]
         },
@@ -14925,7 +14855,7 @@
                     "id": "upgHpE012",
                     "chance_numerator": 1,
                     "chance_denominator": 6,
-                    "effective_rate": 0.286
+                    "effective_rate": 0.285
                 }
             ]
         },
@@ -15067,7 +14997,7 @@
                     "id": "upgArmC006",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -15112,7 +15042,7 @@
                     "id": "upgDmgC012",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -15157,7 +15087,7 @@
                     "id": "upgHpC010",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -15209,7 +15139,7 @@
                     "id": "upgHpC014",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -16086,7 +16016,7 @@
                     "id": "upgHpC009",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -16242,7 +16172,7 @@
                     "id": "upgHpC013",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -16308,7 +16238,7 @@
                     "id": "upgDmgE005",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -16360,7 +16290,7 @@
                     "id": "upgDmgE003",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -16419,7 +16349,7 @@
                     "id": "upgHpC006",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -16464,7 +16394,7 @@
                     "id": "upgDmgE001",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -16523,7 +16453,7 @@
                     "id": "upgHpC015",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -16627,7 +16557,7 @@
                     "id": "upgHpE003",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -17213,7 +17143,7 @@
                     "id": "upgArmC007",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -17480,7 +17410,7 @@
                     "id": "upgHpC008",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -17591,7 +17521,7 @@
                     "id": "upgArmC005",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -17643,7 +17573,7 @@
                     "id": "upgDmgC008",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -17695,7 +17625,7 @@
                     "id": "upgDmgC007",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -17799,7 +17729,7 @@
                     "id": "upgHpC007",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -17934,7 +17864,7 @@
                     "id": "upgDmgC004",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -17979,7 +17909,7 @@
                     "id": "upgHpC002",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -18031,7 +17961,7 @@
                     "id": "upgArmC004",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -18083,7 +18013,7 @@
                     "id": "upgDmgC010",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -18454,7 +18384,7 @@
                     "id": "upgHpC005",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -18863,7 +18793,7 @@
                     "id": "upgArmE008",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -18988,7 +18918,7 @@
                     "id": "upgDmgC001",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19026,7 +18956,7 @@
                     "id": "upgHpC001",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19206,7 +19136,7 @@
                     "id": "upgHpC003",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19244,7 +19174,7 @@
                     "id": "upgArmC002",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19327,7 +19257,7 @@
                     "id": "upgArmC003",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19535,7 +19465,7 @@
                     "id": "upgHpC016",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19698,7 +19628,7 @@
                     "id": "upgArmC001",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19750,7 +19680,7 @@
                     "id": "upgDmgC002",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19802,7 +19732,7 @@
                     "id": "upgHpC004",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19847,7 +19777,7 @@
                     "id": "upgDmgC009",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19885,7 +19815,7 @@
                     "id": "upgDmgC015",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19937,7 +19867,7 @@
                     "id": "upgDmgC014",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -19989,7 +19919,7 @@
                     "id": "upgArmC006",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -20027,7 +19957,7 @@
                     "id": "upgDmgC012",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -20079,7 +20009,7 @@
                     "id": "upgHpC010",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -20124,7 +20054,7 @@
                     "id": "upgDmgE010",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -20169,7 +20099,7 @@
                     "id": "upgArmE010",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -20221,7 +20151,7 @@
                     "id": "upgHpE012",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -20273,7 +20203,7 @@
                     "id": "upgDmgE011",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -20325,7 +20255,7 @@
                     "id": "upgDmgE004",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -20436,7 +20366,7 @@
                     "id": "upgHpE003",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -20682,7 +20612,7 @@
                     "id": "upgDmgE001",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -21351,18 +21281,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion"],
-        "enemiesTotal": 14,
-        "enemiesTypes": ["Bloodletter", "Cadian Guardsman", "Chaos Terminator", "Traitor Guardsman"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 5,
-                "stars": 7,
-                "rank": "Bronze 3"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -21410,18 +21333,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion"],
-        "enemiesTotal": 13,
-        "enemiesTypes": ["Bloodletter", "Cadian Guardsman", "Chaos Terminator", "Traitor Guardsman"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 4,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -21469,18 +21385,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion"],
-        "enemiesTotal": 16,
-        "enemiesTypes": ["Bloodletter", "Cadian Guardsman", "Traitor Guardsman"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 4,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -21521,38 +21430,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion"],
-        "enemiesTotal": 13,
-        "enemiesTypes": [
-            "Bloodletter",
-            "Cadian Guardsman",
-            "Cadian Lascannon Team",
-            "Chaos Terminator",
-            "Traitor Guardsman"
-        ],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 2,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
-            {
-                "id": "astraNpc2Lascannon",
-                "name": "Cadian Lascannon Team",
-                "count": 1,
-                "stars": 5,
-                "rank": "Bronze 3"
-            },
-            {
-                "id": "astraNpc2Lascannon",
-                "name": "Cadian Lascannon Team",
-                "count": 1,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -21600,31 +21482,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion"],
-        "enemiesTotal": 13,
-        "enemiesTypes": [
-            "Bloodletter",
-            "Cadian Guardsman",
-            "Cadian Lascannon Team",
-            "Chaos Terminator",
-            "Traitor Guardsman"
-        ],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
-            {
-                "id": "astraNpc2Lascannon",
-                "name": "Cadian Lascannon Team",
-                "count": 2,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -21873,31 +21735,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion"],
-        "enemiesTotal": 15,
-        "enemiesTypes": [
-            "Bloodletter",
-            "Cadian Guardsman",
-            "Cadian Lascannon Team",
-            "Chaos Terminator",
-            "Traitor Guardsman"
-        ],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 5,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
-            {
-                "id": "astraNpc2Lascannon",
-                "name": "Cadian Lascannon Team",
-                "count": 2,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -22347,18 +22189,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion"],
-        "enemiesTotal": 15,
-        "enemiesTypes": ["Bloodletter", "Cadian Guardsman", "Chaos Terminator", "Traitor Guardsman"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 5,
-                "stars": 7,
-                "rank": "Silver 1"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -22413,18 +22248,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion"],
-        "enemiesTotal": 13,
-        "enemiesTypes": ["Bloodletter", "Cadian Guardsman", "Chaos Terminator", "Traitor Guardsman"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 5,
-                "stars": 7,
-                "rank": "Silver 1"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -22472,31 +22300,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion"],
-        "enemiesTotal": 14,
-        "enemiesTypes": [
-            "Bloodletter",
-            "Cadian Guardsman",
-            "Cadian Lascannon Team",
-            "Chaos Terminator",
-            "Traitor Guardsman"
-        ],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 1,
-                "stars": 9,
-                "rank": "Silver 1"
-            },
-            {
-                "id": "astraNpc2Lascannon",
-                "name": "Cadian Lascannon Team",
-                "count": 3,
-                "stars": 7,
-                "rank": "Silver 1"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -22544,10 +22352,10 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["BlackLegion", "Ultramarines"],
-        "enemiesTotal": 15,
-        "enemiesTypes": ["Bloodletter", "Inceptor", "Traitor Guardsman"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
         "detailedEnemyTypes": [
             {
                 "id": "blackNpc1Bloodletter",
@@ -22562,13 +22370,6 @@
                 "count": 5,
                 "stars": 9,
                 "rank": "Silver 1"
-            },
-            {
-                "id": "ultraNpc1Inceptor",
-                "name": "Inceptor",
-                "count": 4,
-                "stars": 9,
-                "rank": "Bronze 3"
             }
         ]
     },
@@ -22596,18 +22397,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion", "Ultramarines"],
-        "enemiesTotal": 15,
-        "enemiesTypes": ["Bloodletter", "Cadian Guardsman", "Chaos Terminator", "Inceptor", "Traitor Guardsman"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator", "Traitor Guardsman"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "stars": 9,
-                "rank": "Silver 1"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -22625,13 +22419,6 @@
             {
                 "id": "blackNpc3TraitorGuardsman",
                 "name": "Traitor Guardsman",
-                "count": 2,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
-            {
-                "id": "ultraNpc1Inceptor",
-                "name": "Inceptor",
                 "count": 2,
                 "stars": 9,
                 "rank": "Bronze 3"
@@ -22658,7 +22445,7 @@
                     "id": "upgHpE015",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -22703,7 +22490,7 @@
                     "id": "upgDmgE005",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -22793,7 +22580,7 @@
                     "id": "upgArmC001",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -22838,7 +22625,7 @@
                     "id": "upgDmgC003",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -22883,7 +22670,7 @@
                     "id": "upgDmgC012",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -22928,7 +22715,7 @@
                     "id": "upgDmgC002",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -22973,7 +22760,7 @@
                     "id": "upgHpC006",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23018,7 +22805,7 @@
                     "id": "upgHpC007",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23063,7 +22850,7 @@
                     "id": "upgArmC006",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23101,7 +22888,7 @@
                     "id": "upgHpC014",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23146,7 +22933,7 @@
                     "id": "upgDmgC007",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23184,7 +22971,7 @@
                     "id": "upgDmgC011",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23236,7 +23023,7 @@
                     "id": "upgHpC002",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23288,7 +23075,7 @@
                     "id": "upgHpC017",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23340,7 +23127,7 @@
                     "id": "upgHpC015",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23378,7 +23165,7 @@
                     "id": "upgDmgC009",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23475,7 +23262,7 @@
                     "id": "upgHpC013",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23520,7 +23307,7 @@
                     "id": "upgHpC001",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23572,7 +23359,7 @@
                     "id": "upgArmC003",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23624,7 +23411,7 @@
                     "id": "upgDmgC010",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23676,7 +23463,7 @@
                     "id": "upgHpC003",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23728,7 +23515,7 @@
                     "id": "upgDmgC013",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23773,7 +23560,7 @@
                     "id": "upgArmC013",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23960,7 +23747,7 @@
                     "id": "upgDmgC001",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -23998,7 +23785,7 @@
                     "id": "upgArmC004",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -24206,7 +23993,7 @@
                     "id": "upgArmC002",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -24258,7 +24045,7 @@
                     "id": "upgDmgC004",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -24421,7 +24208,7 @@
                     "id": "upgArmC012",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -24923,7 +24710,7 @@
                     "id": "upgDmgC005",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -25090,18 +24877,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["BlackTemplars", "Tyranids"],
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Hormagaunt", "Initiate with Pyreblaster", "Ripper Swarm", "Termagant"],
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Hormagaunt", "Ripper Swarm", "Termagant"],
         "detailedEnemyTypes": [
-            {
-                "id": "templNpc3InitiatePyreblaster",
-                "name": "Initiate with Pyreblaster",
-                "count": 2,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
             {
                 "id": "tyranNpc1Hormagaunt",
                 "name": "Hormagaunt",
@@ -25953,7 +25733,7 @@
                     "id": "upgDmgC015",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26120,18 +25900,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Orks"],
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Grot Tank", "Ork Boy"],
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Grot Tank", "Ork Boy"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "stars": 7,
-                "rank": "Silver 1"
-            },
             {
                 "id": "orksNpc2OrkBoy",
                 "name": "Ork Boy",
@@ -26231,18 +26004,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Tyranids"],
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman", "Hormagaunt", "Ripper Swarm", "Termagant"],
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Hormagaunt", "Ripper Swarm", "Termagant"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "stars": 7,
-                "rank": "Silver 1"
-            },
             {
                 "id": "tyranNpc1Hormagaunt",
                 "name": "Hormagaunt",
@@ -26376,36 +26142,15 @@
                     "id": "upgArmE013",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "BlackTemplars", "Tyranids"],
-        "enemiesTotal": 11,
-        "enemiesTypes": [
-            "Cadian Lascannon Team",
-            "Hormagaunt",
-            "Neophyte",
-            "Ripper Swarm",
-            "Termagant",
-            "Tyranid Warrior"
-        ],
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Hormagaunt", "Ripper Swarm", "Termagant", "Tyranid Warrior"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc2Lascannon",
-                "name": "Cadian Lascannon Team",
-                "count": 1,
-                "stars": 7,
-                "rank": "Silver 1"
-            },
-            {
-                "id": "templNpc2Neophyte",
-                "name": "Neophyte",
-                "count": 2,
-                "stars": 7,
-                "rank": "Bronze 3"
-            },
             {
                 "id": "tyranNpc1Hormagaunt",
                 "name": "Hormagaunt",
@@ -26460,18 +26205,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "BlackTemplars", "Orks"],
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Lascannon Team", "Grot", "Grot Tank", "Initiate", "Ork Boy"],
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Grot", "Grot Tank", "Ork Boy"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc2Lascannon",
-                "name": "Cadian Lascannon Team",
-                "count": 1,
-                "stars": 7,
-                "rank": "Silver 1"
-            },
             {
                 "id": "orksNpc1Grot",
                 "name": "Grot",
@@ -26492,13 +26230,6 @@
                 "count": 2,
                 "stars": 7,
                 "rank": "Silver 1"
-            },
-            {
-                "id": "templNpc1Initiate",
-                "name": "Initiate",
-                "count": 2,
-                "stars": 7,
-                "rank": "Bronze 3"
             }
         ]
     },
@@ -26581,7 +26312,7 @@
                     "id": "upgHpC010",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26619,7 +26350,7 @@
                     "id": "upgDmgC014",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26657,7 +26388,7 @@
                     "id": "upgArmC005",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26695,7 +26426,7 @@
                     "id": "upgDmgC004",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26733,7 +26464,7 @@
                     "id": "upgArmC013",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26771,7 +26502,7 @@
                     "id": "upgHpC016",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26816,7 +26547,7 @@
                     "id": "upgHpC017",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26854,7 +26585,7 @@
                     "id": "upgHpC008",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26899,7 +26630,7 @@
                     "id": "upgArmC011",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26944,7 +26675,7 @@
                     "id": "upgDmgC015",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -26982,7 +26713,7 @@
                     "id": "upgDmgC007",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -27027,7 +26758,7 @@
                     "id": "upgArmC004",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -27207,7 +26938,7 @@
                     "id": "upgArmC003",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -27252,7 +26983,7 @@
                     "id": "upgDmgC011",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -27297,7 +27028,7 @@
                     "id": "upgHpC013",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -27349,7 +27080,7 @@
                     "id": "upgHpC004",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -27439,7 +27170,7 @@
                     "id": "upgArmC012",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -27491,7 +27222,7 @@
                     "id": "upgDmgC001",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -27543,7 +27274,7 @@
                     "id": "upgHpC009",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -27588,7 +27319,7 @@
                     "id": "upgDmgC002",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -28035,7 +27766,7 @@
                     "id": "upgArmC007",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -28087,7 +27818,7 @@
                     "id": "upgHpC005",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -28125,7 +27856,7 @@
                     "id": "upgHpC003",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -28170,7 +27901,7 @@
                     "id": "upgDmgC005",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -28222,7 +27953,7 @@
                     "id": "upgDmgC003",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -28312,7 +28043,7 @@
                     "id": "upgArmC006",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -28766,7 +28497,7 @@
                     "id": "upgHpC006",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -29147,7 +28878,7 @@
                     "id": "upgArmC001",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -29289,7 +29020,7 @@
                     "id": "upgArmE009",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -29746,7 +29477,7 @@
                     "id": "upgDmgE003",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -29933,7 +29664,7 @@
                     "id": "upgHpE017",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -30461,7 +30192,7 @@
                     "id": "upgHpR002",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -30525,7 +30256,7 @@
                     "id": "shards_necroWarden",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -30660,7 +30391,7 @@
                     "id": "upgHpR022",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -30724,7 +30455,7 @@
                     "id": "upgHpR027",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -30838,7 +30569,7 @@
                     "id": "upgHpR001",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -30952,7 +30683,7 @@
                     "id": "upgDmgR002",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -31016,7 +30747,7 @@
                     "id": "shards_necroDestroyer",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -31087,7 +30818,7 @@
                     "id": "upgDmgR022",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -31144,7 +30875,7 @@
                     "id": "upgDmgR027",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -31265,7 +30996,7 @@
                     "id": "upgDmgR034",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -31400,7 +31131,7 @@
                     "id": "upgArmR022",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -31471,7 +31202,7 @@
                     "id": "upgArmR027",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -31535,7 +31266,7 @@
                     "id": "shards_necroSpyder",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -31663,7 +31394,7 @@
                     "id": "upgArmR034",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -32020,7 +31751,7 @@
                     "id": "shards_necroPlasmancer",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -32141,7 +31872,7 @@
                     "id": "upgHpR005",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -32198,7 +31929,7 @@
                     "id": "upgArmR015",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -32262,7 +31993,7 @@
                     "id": "upgHpR011",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -32326,7 +32057,7 @@
                     "id": "upgDmgR009",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -32506,7 +32237,7 @@
                     "id": "shards_necroOverlord",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -32634,7 +32365,7 @@
                     "id": "upgHpR023",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -32691,7 +32422,7 @@
                     "id": "upgDmgR023",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -32741,7 +32472,7 @@
                     "id": "upgArmR023",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -32886,7 +32617,7 @@
                     "id": "upgHpR018",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -32943,7 +32674,7 @@
                     "id": "shards_astraBullgryn",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -33064,7 +32795,7 @@
                     "id": "upgHpR024",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -33121,7 +32852,7 @@
                     "id": "upgHpR038",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -33342,7 +33073,7 @@
                     "id": "upgDmgR003",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -33406,7 +33137,7 @@
                     "id": "shards_astraPrimarisPsy",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -33470,7 +33201,7 @@
                     "id": "upgDmgR024",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -33527,7 +33258,7 @@
                     "id": "upgDmgR038",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -33634,7 +33365,7 @@
                     "id": "upgDmgR007",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -33748,7 +33479,7 @@
                     "id": "upgArmR009",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -33805,7 +33536,7 @@
                     "id": "upgArmR038",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -33862,7 +33593,7 @@
                     "id": "shards_astraOrdnance",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -34296,7 +34027,7 @@
                     "id": "shards_adeptCelestine",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -34410,7 +34141,7 @@
                     "id": "upgHpR008",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -34467,7 +34198,7 @@
                     "id": "upgArmR005",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -34524,7 +34255,7 @@
                     "id": "upgHpR007",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -34581,7 +34312,7 @@
                     "id": "upgDmgR025",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -34638,7 +34369,7 @@
                     "id": "upgArmR025",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -34733,7 +34464,7 @@
                     "id": "shards_astraCreed",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -34874,7 +34605,7 @@
                     "id": "upgHpR010",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -34938,7 +34669,7 @@
                     "id": "upgDmgR026",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -34988,7 +34719,7 @@
                     "id": "upgArmR026",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35147,7 +34878,7 @@
                     "id": "upgHpR019",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35225,7 +34956,7 @@
                     "id": "shards_templAggressor",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -35346,7 +35077,7 @@
                     "id": "upgHpR032",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35410,7 +35141,7 @@
                     "id": "upgHpR036",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35467,7 +35198,7 @@
                     "id": "upgHpR035",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35524,7 +35255,7 @@
                     "id": "upgHpR033",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35638,7 +35369,7 @@
                     "id": "upgDmgR006",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35702,7 +35433,7 @@
                     "id": "shards_templSwordBrother",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -35759,7 +35490,7 @@
                     "id": "upgDmgR032",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35809,7 +35540,7 @@
                     "id": "upgDmgR036",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35866,7 +35597,7 @@
                     "id": "upgDmgR035",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35930,7 +35661,7 @@
                     "id": "upgDmgR033",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -36037,7 +35768,7 @@
                     "id": "upgArmR032",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -36101,7 +35832,7 @@
                     "id": "upgArmR036",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -36158,7 +35889,7 @@
                     "id": "shards_templAncient",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -36229,7 +35960,7 @@
                     "id": "upgArmR035",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -36279,7 +36010,7 @@
                     "id": "upgArmR033",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -36575,7 +36306,7 @@
                     "id": "shards_templChampion",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -36767,7 +36498,7 @@
                     "id": "upgArmR006",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -36824,7 +36555,7 @@
                     "id": "upgHpR021",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -36895,7 +36626,7 @@
                     "id": "upgDmgR021",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -36952,7 +36683,7 @@
                     "id": "upgArmR021",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -37068,7 +36799,7 @@
                     "id": "shards_templHelbrecht",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -37189,7 +36920,7 @@
                     "id": "upgHpR028",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -37232,7 +36963,7 @@
                     "id": "upgDmgR028",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -37282,7 +37013,7 @@
                     "id": "upgArmR028",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -37434,7 +37165,7 @@
                     "id": "upgHpR014",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -37498,7 +37229,7 @@
                     "id": "shards_thousTerminator",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -37655,7 +37386,7 @@
                     "id": "upgHpR037",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -37712,7 +37443,7 @@
                     "id": "upgHpR031",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -37762,7 +37493,7 @@
                     "id": "upgHpR039",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -37876,7 +37607,7 @@
                     "id": "upgDmgR005",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -37926,7 +37657,7 @@
                     "id": "shards_thousInfernalMaster",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -38033,7 +37764,7 @@
                     "id": "upgDmgR037",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -38083,7 +37814,7 @@
                     "id": "upgDmgR031",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -38140,7 +37871,7 @@
                     "id": "upgDmgR039",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -38290,7 +38021,7 @@
                     "id": "upgArmR037",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -38347,7 +38078,7 @@
                     "id": "shards_thousTzaangor",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -38411,7 +38142,7 @@
                     "id": "upgArmR031",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -38468,7 +38199,7 @@
                     "id": "upgArmR039",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -38769,7 +38500,7 @@
                     "id": "shards_thousSorcerer",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -38940,7 +38671,7 @@
                     "id": "upgArmR010",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -38983,7 +38714,7 @@
                     "id": "upgHpR029",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -39033,7 +38764,7 @@
                     "id": "upgDmgR029",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -39083,7 +38814,7 @@
                     "id": "upgArmR029",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -39185,7 +38916,7 @@
                     "id": "shards_thousAhriman",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -39306,7 +39037,7 @@
                     "id": "upgHpR011",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -39363,7 +39094,7 @@
                     "id": "upgDmgR009",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -39626,7 +39357,7 @@
                     "id": "shards_adeptRetributor",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -39754,7 +39485,7 @@
                     "id": "upgHpR001",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -39818,7 +39549,7 @@
                     "id": "upgHpR035",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -39882,7 +39613,7 @@
                     "id": "upgHpR037",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -39939,7 +39670,7 @@
                     "id": "upgHpR027",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -40114,7 +39845,7 @@
                     "id": "shards_ultraInceptorSgt",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -40171,7 +39902,7 @@
                     "id": "upgDmgR034",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -40228,7 +39959,7 @@
                     "id": "upgDmgR035",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -40292,7 +40023,7 @@
                     "id": "upgDmgR037",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -40356,7 +40087,7 @@
                     "id": "upgDmgR027",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -40463,7 +40194,7 @@
                     "id": "upgArmR034",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -40527,7 +40258,7 @@
                     "id": "upgArmR035",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -40591,7 +40322,7 @@
                     "id": "shards_ultraEliminatorSgt",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -40662,7 +40393,7 @@
                     "id": "upgArmR037",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -40726,7 +40457,7 @@
                     "id": "upgArmR027",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -41076,7 +40807,7 @@
                     "id": "shards_ultraTigurius",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -41140,7 +40871,7 @@
                     "id": "upgArmR006",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -41519,7 +41250,7 @@
                     "id": "shards_ultraCalgar",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -41626,7 +41357,7 @@
                     "id": "upgHpR007",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -41683,7 +41414,7 @@
                     "id": "upgDmgR025",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -41740,7 +41471,7 @@
                     "id": "upgArmR025",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -41939,7 +41670,7 @@
                     "id": "shards_blackTerminator",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -42060,7 +41791,7 @@
                     "id": "upgHpR022",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -42117,7 +41848,7 @@
                     "id": "upgHpR032",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -42167,7 +41898,7 @@
                     "id": "upgHpR036",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -42217,7 +41948,7 @@
                     "id": "upgHpR024",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -42371,7 +42102,7 @@
                     "id": "shards_blackPossession",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -42435,22 +42166,15 @@
                     "id": "upgDmgR022",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AstraMilitarum", "BlackLegion"],
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Cadian Guardsman", "Chaos Terminator"],
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "stars": 8,
-                "rank": "Silver 2"
-            },
             {
                 "id": "blackNpc1Bloodletter",
                 "name": "Bloodletter",
@@ -42492,7 +42216,7 @@
                     "id": "upgDmgR032",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -42549,7 +42273,7 @@
                     "id": "upgDmgR036",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -42606,7 +42330,7 @@
                     "id": "upgDmgR024",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -42699,7 +42423,7 @@
                     "id": "upgArmR022",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -42756,7 +42480,7 @@
                     "id": "upgArmR032",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -42806,7 +42530,7 @@
                     "id": "shards_blackObliterator",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -42870,7 +42594,7 @@
                     "id": "upgArmR036",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -42920,7 +42644,7 @@
                     "id": "upgArmR009",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -43221,7 +42945,7 @@
                     "id": "shards_blackHaarken",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -43285,7 +43009,7 @@
                     "id": "upgDmgR005",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -43328,7 +43052,7 @@
                     "id": "upgHpR023",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -43385,7 +43109,7 @@
                     "id": "upgDmgR023",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -43442,7 +43166,7 @@
                     "id": "upgArmR023",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -43634,7 +43358,7 @@
                     "id": "shards_blackAbaddon",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -43755,7 +43479,7 @@
                     "id": "upgHpR021",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -43812,7 +43536,7 @@
                     "id": "upgDmgR021",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -43869,7 +43593,7 @@
                     "id": "upgArmR021",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -44075,7 +43799,7 @@
                     "id": "shards_orksKillaKan",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -44196,7 +43920,7 @@
                     "id": "upgHpR033",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -44253,7 +43977,7 @@
                     "id": "upgHpR031",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -44521,7 +44245,7 @@
                     "id": "shards_orksBigMek",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -44585,7 +44309,7 @@
                     "id": "upgDmgR033",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -44642,7 +44366,7 @@
                     "id": "upgDmgR031",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -44884,7 +44608,7 @@
                     "id": "upgArmR033",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -44934,7 +44658,7 @@
                     "id": "upgArmR031",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -44991,7 +44715,7 @@
                     "id": "shards_orksRuntherd",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -45451,7 +45175,7 @@
                     "id": "shards_orksNob",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -45515,7 +45239,7 @@
                     "id": "upgHpR002",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -45586,7 +45310,7 @@
                     "id": "upgHpR010",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -45650,7 +45374,7 @@
                     "id": "upgDmgR026",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -45714,7 +45438,7 @@
                     "id": "upgArmR026",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -45962,7 +45686,7 @@
                     "id": "shards_orksWarboss",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -46076,7 +45800,7 @@
                     "id": "upgHpR029",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -46126,7 +45850,7 @@
                     "id": "upgDmgR029",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -46176,7 +45900,7 @@
                     "id": "upgArmR029",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -46382,7 +46106,7 @@
                     "id": "shards_eldarRanger",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -46553,7 +46277,7 @@
                     "id": "upgHpR039",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -46660,7 +46384,7 @@
                     "id": "upgHpR038",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -46814,7 +46538,7 @@
                     "id": "shards_eldarAutarch",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -46878,7 +46602,7 @@
                     "id": "upgDmgR007",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -46928,7 +46652,7 @@
                     "id": "upgDmgR039",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -47035,7 +46759,7 @@
                     "id": "upgDmgR038",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -47192,7 +46916,7 @@
                     "id": "upgArmR039",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -47235,7 +46959,7 @@
                     "id": "shards_eldarFarseer",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -47349,7 +47073,7 @@
                     "id": "upgArmR038",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -47655,7 +47379,7 @@
                     "id": "shards_eldarJainZar",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -47726,7 +47450,7 @@
                     "id": "upgDmgR003",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -47776,7 +47500,7 @@
                     "id": "upgHpR028",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -47826,7 +47550,7 @@
                     "id": "upgDmgR028",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -47883,7 +47607,7 @@
                     "id": "upgArmR028",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -48089,7 +47813,7 @@
                     "id": "shards_eldarMauganRa",
                     "chance_numerator": 1,
                     "chance_denominator": 24,
-                    "effective_rate": 0.08
+                    "effective_rate": 0.079
                 }
             ]
         },
@@ -48155,7 +47879,7 @@
                     "id": "upgHpC015",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -48193,7 +47917,7 @@
                     "id": "upgDmgC009",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -48238,7 +47962,7 @@
                     "id": "upgArmC004",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -48342,7 +48066,7 @@
                     "id": "upgHpC014",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -48387,14 +48111,14 @@
                     "id": "upgDmgC010",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AdeptusMechanicus", "BlackLegion"],
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Skitarii Vanguard", "Traitor Guardsman"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Skitarii Vanguard"],
         "detailedEnemyTypes": [
             {
                 "id": "admecNpc1Vanguard",
@@ -48402,13 +48126,6 @@
                 "count": 9,
                 "stars": 2,
                 "rank": "Iron 2"
-            },
-            {
-                "id": "blackNpc3TraitorGuardsman",
-                "name": "Traitor Guardsman",
-                "count": 2,
-                "stars": 3,
-                "rank": "Iron 3"
             }
         ]
     },
@@ -48477,7 +48194,7 @@
                     "id": "upgArmC001",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -48515,7 +48232,7 @@
                     "id": "upgHpC002",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -48560,7 +48277,7 @@
                     "id": "upgDmgC013",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -48702,7 +48419,7 @@
                     "id": "upgArmC006",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -48778,7 +48495,7 @@
                     "id": "upgHpE012",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -49066,10 +48783,10 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AdeptusMechanicus", "BlackLegion"],
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Electro-priest", "Skitarii Vanguard", "Tech-Priest Enginseer", "Traitor Guardsman"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Electro-priest", "Skitarii Vanguard", "Tech-Priest Enginseer"],
         "detailedEnemyTypes": [
             {
                 "id": "admecNpc1Vanguard",
@@ -49091,13 +48808,6 @@
                 "count": 3,
                 "stars": 5,
                 "rank": "Bronze 3"
-            },
-            {
-                "id": "blackNpc3TraitorGuardsman",
-                "name": "Traitor Guardsman",
-                "count": 2,
-                "stars": 7,
-                "rank": "Silver 1"
             }
         ]
     },
@@ -49170,10 +48880,10 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AdeptusMechanicus", "BlackLegion"],
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Electro-priest", "Skitarii Vanguard", "Tech-Priest Enginseer", "Traitor Guardsman"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Electro-priest", "Skitarii Vanguard", "Tech-Priest Enginseer"],
         "detailedEnemyTypes": [
             {
                 "id": "admecNpc1Vanguard",
@@ -49194,13 +48904,6 @@
                 "name": "Electro-priest",
                 "count": 5,
                 "stars": 5,
-                "rank": "Bronze 3"
-            },
-            {
-                "id": "blackNpc3TraitorGuardsman",
-                "name": "Traitor Guardsman",
-                "count": 2,
-                "stars": 9,
                 "rank": "Bronze 3"
             }
         ]
@@ -49468,7 +49171,7 @@
                     "id": "upgDmgE004",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -50078,10 +49781,10 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AdeptusMechanicus", "BlackLegion"],
-        "enemiesTotal": 13,
-        "enemiesTypes": ["Skitarii Vanguard", "Traitor Guardsman"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Skitarii Vanguard"],
         "detailedEnemyTypes": [
             {
                 "id": "admecNpc1Vanguard",
@@ -50089,13 +49792,6 @@
                 "count": 10,
                 "stars": 10,
                 "rank": "Silver 3"
-            },
-            {
-                "id": "blackNpc3TraitorGuardsman",
-                "name": "Traitor Guardsman",
-                "count": 3,
-                "stars": 9,
-                "rank": "Silver 2"
             }
         ]
     },
@@ -50119,7 +49815,7 @@
                     "id": "shards_admecMarshall",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -50337,7 +50033,7 @@
                     "id": "shards_admecRuststalker",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -50465,7 +50161,7 @@
                     "id": "upgArmL203",
                     "chance_numerator": 1,
                     "chance_denominator": 7,
-                    "effective_rate": 0.25
+                    "effective_rate": 0.249
                 }
             ]
         },
@@ -50666,7 +50362,7 @@
                     "id": "shards_admecManipulus",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -50871,10 +50567,10 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Chaos", "Imperial"],
-        "enemiesFactions": ["AdeptusMechanicus", "BlackLegion"],
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Electro-priest", "Skitarii Vanguard", "Tech-Priest Enginseer", "Traitor Guardsman"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Electro-priest", "Skitarii Vanguard", "Tech-Priest Enginseer"],
         "detailedEnemyTypes": [
             {
                 "id": "admecNpc1Vanguard",
@@ -50896,13 +50592,6 @@
                 "count": 3,
                 "stars": 10,
                 "rank": "Diamond 3"
-            },
-            {
-                "id": "blackNpc3TraitorGuardsman",
-                "name": "Traitor Guardsman",
-                "count": 3,
-                "stars": 11,
-                "rank": "Diamond 1"
             }
         ]
     },
@@ -50926,7 +50615,7 @@
                     "id": "shards_admecDominus",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -50992,7 +50681,7 @@
                     "id": "upgHpL114",
                     "chance_numerator": 1,
                     "chance_denominator": 7,
-                    "effective_rate": 0.25
+                    "effective_rate": 0.249
                 }
             ]
         },
@@ -51051,7 +50740,7 @@
                     "id": "shards_admecDestroyer",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -51110,7 +50799,7 @@
                     "id": "mythicShards_admecMarshall",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -51169,7 +50858,7 @@
                     "id": "upgDmgL003",
                     "chance_numerator": 1,
                     "chance_denominator": 7,
-                    "effective_rate": 0.25
+                    "effective_rate": 0.249
                 }
             ]
         },
@@ -51249,7 +50938,7 @@
                     "id": "mythicShards_admecRuststalker",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -51321,7 +51010,7 @@
                     "id": "mythicShards_admecManipulus",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -51373,7 +51062,7 @@
                     "id": "mythicShards_admecDominus",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -51425,7 +51114,7 @@
                     "id": "mythicShards_admecDestroyer",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -51497,7 +51186,7 @@
                     "id": "upgHpM001",
                     "chance_numerator": 3,
                     "chance_denominator": 25,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -51549,7 +51238,7 @@
                     "id": "upgHpC009",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -51587,7 +51276,7 @@
                     "id": "upgDmgC003",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -51625,29 +51314,15 @@
                     "id": "upgArmC005",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Tyranids"],
-        "enemiesTotal": 14,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster", "Hormagaunt", "Termagant"],
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Hormagaunt", "Termagant"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "stars": 2,
-                "rank": "Iron 3"
-            },
-            {
-                "id": "astraNpc3Voxcaster",
-                "name": "Cadian Vox-caster",
-                "count": 2,
-                "stars": 2,
-                "rank": "Iron 3"
-            },
             {
                 "id": "tyranNpc1Hormagaunt",
                 "name": "Hormagaunt",
@@ -51736,7 +51411,7 @@
                     "id": "upgHpC010",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -51781,7 +51456,7 @@
                     "id": "upgDmgC008",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -51837,25 +51512,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Tyranids"],
-        "enemiesTotal": 16,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster", "Deathleaper", "Hormagaunt", "Termagant"],
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Deathleaper", "Hormagaunt", "Termagant"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "stars": 2,
-                "rank": "Iron 3"
-            },
-            {
-                "id": "astraNpc3Voxcaster",
-                "name": "Cadian Vox-caster",
-                "count": 1,
-                "stars": 2,
-                "rank": "Iron 3"
-            },
             {
                 "id": "tyranBossDeathleaperCE",
                 "name": "Deathleaper",
@@ -51899,7 +51560,7 @@
                     "id": "upgArmC007",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -51944,7 +51605,7 @@
                     "id": "upgHpC001",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -51996,7 +51657,7 @@
                     "id": "upgDmgC014",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -52045,18 +51706,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Tyranids"],
-        "enemiesTotal": 18,
-        "enemiesTypes": ["Cadian Guardsman", "Hormagaunt", "Termagant", "Tyranid Warrior"],
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Hormagaunt", "Termagant", "Tyranid Warrior"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 6,
-                "stars": 2,
-                "rank": "Iron 1"
-            },
             {
                 "id": "tyranNpc1Hormagaunt",
                 "name": "Hormagaunt",
@@ -52145,7 +51799,7 @@
                     "id": "upgArmC003",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -52235,7 +51889,7 @@
                     "id": "upgHpE015",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -52904,7 +52558,7 @@
                     "id": "upgDmgE010",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -53500,22 +53154,15 @@
                     "id": "shards_tyranDeathleaper",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Tyranids"],
-        "enemiesTotal": 14,
-        "enemiesTypes": ["Cadian Guardsman", "Deathleaper", "Hormagaunt", "Termagant"],
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Deathleaper", "Hormagaunt", "Termagant"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 4,
-                "stars": 9,
-                "rank": "Silver 2"
-            },
             {
                 "id": "tyranBossDeathleaperCE",
                 "name": "Deathleaper",
@@ -53705,18 +53352,11 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Tyranids"],
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman", "Hormagaunt", "Termagant", "Tyranid Warrior"],
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Hormagaunt", "Termagant", "Tyranid Warrior"],
         "detailedEnemyTypes": [
-            {
-                "id": "astraNpc1Guardsman",
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "stars": 9,
-                "rank": "Silver 1"
-            },
             {
                 "id": "tyranNpc1Hormagaunt",
                 "name": "Hormagaunt",
@@ -53760,7 +53400,7 @@
                     "id": "shards_tyranWingedPrime",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -53902,7 +53542,7 @@
                     "id": "upgArmL202",
                     "chance_numerator": 1,
                     "chance_denominator": 7,
-                    "effective_rate": 0.25
+                    "effective_rate": 0.249
                 }
             ]
         },
@@ -54110,7 +53750,7 @@
                     "id": "shards_tyranNeurothrope",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -54363,7 +54003,7 @@
                     "id": "shards_tyranParasite",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -54415,7 +54055,7 @@
                     "id": "upgHpL113",
                     "chance_numerator": 1,
                     "chance_denominator": 7,
-                    "effective_rate": 0.25
+                    "effective_rate": 0.249
                 }
             ]
         },
@@ -54453,7 +54093,7 @@
                     "id": "shards_tyranTyrantGuard",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -54505,7 +54145,7 @@
                     "id": "mythicShards_tyranDeathleaper",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -54564,7 +54204,7 @@
                     "id": "upgDmgL202",
                     "chance_numerator": 1,
                     "chance_denominator": 7,
-                    "effective_rate": 0.25
+                    "effective_rate": 0.249
                 }
             ]
         },
@@ -54630,7 +54270,7 @@
                     "id": "mythicShards_tyranWingedPrime",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -54682,7 +54322,7 @@
                     "id": "mythicShards_tyranNeurothrope",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -54734,7 +54374,7 @@
                     "id": "mythicShards_tyranParasite",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -54807,7 +54447,7 @@
                     "id": "mythicShards_tyranTyrantGuard",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -54859,7 +54499,7 @@
                     "id": "upgHpM002",
                     "chance_numerator": 3,
                     "chance_denominator": 25,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -54911,7 +54551,7 @@
                     "id": "upgHpC017",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -54949,14 +54589,14 @@
                     "id": "upgDmgC015",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Genestealers"],
-        "enemiesTotal": 14,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Neophyte Hybrid"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
         "detailedEnemyTypes": [
             {
                 "id": "astraNpc1Guardsman",
@@ -54971,13 +54611,6 @@
                 "count": 2,
                 "stars": 2,
                 "rank": "Iron 3"
-            },
-            {
-                "id": "genesNpc3Neophyte",
-                "name": "Neophyte Hybrid",
-                "count": 6,
-                "stars": 1,
-                "rank": "Stone 3"
             }
         ]
     },
@@ -55001,14 +54634,14 @@
                     "id": "upgArmC012",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Genestealers"],
-        "enemiesTotal": 14,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster", "Neophyte Hybrid"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster"],
         "detailedEnemyTypes": [
             {
                 "id": "astraNpc1Guardsman",
@@ -55023,13 +54656,6 @@
                 "count": 4,
                 "stars": 3,
                 "rank": "Iron 3"
-            },
-            {
-                "id": "genesNpc3Neophyte",
-                "name": "Neophyte Hybrid",
-                "count": 6,
-                "stars": 1,
-                "rank": "Stone 3"
             }
         ]
     },
@@ -55112,14 +54738,14 @@
                     "id": "upgHpC014",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Genestealers"],
-        "enemiesTotal": 15,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-caster", "Neophyte Hybrid"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-caster"],
         "detailedEnemyTypes": [
             {
                 "id": "astraNpc1Guardsman",
@@ -55141,13 +54767,6 @@
                 "count": 4,
                 "stars": 3,
                 "rank": "Iron 3"
-            },
-            {
-                "id": "genesNpc3Neophyte",
-                "name": "Neophyte Hybrid",
-                "count": 5,
-                "stars": 1,
-                "rank": "Stone 3"
             }
         ]
     },
@@ -55171,22 +54790,15 @@
                     "id": "upgDmgC009",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
         "enemiesAlliances": ["Xenos"],
-        "enemiesFactions": ["Genestealers", "Tau"],
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Fire Warrior", "Purestrain Genestealer"],
+        "enemiesFactions": ["Tau"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Fire Warrior"],
         "detailedEnemyTypes": [
-            {
-                "id": "genesNpc2Genestealer",
-                "name": "Purestrain Genestealer",
-                "count": 3,
-                "stars": 1,
-                "rank": "Iron 1"
-            },
             {
                 "id": "tauNpc1FireWarrior",
                 "name": "Fire Warrior",
@@ -55221,17 +54833,10 @@
             ]
         },
         "enemiesAlliances": ["Xenos"],
-        "enemiesFactions": ["Genestealers", "Tau"],
-        "enemiesTotal": 13,
-        "enemiesTypes": ["Fire Warrior", "Neophyte Hybrid", "Re'vas"],
+        "enemiesFactions": ["Tau"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Fire Warrior", "Re'vas"],
         "detailedEnemyTypes": [
-            {
-                "id": "genesNpc3Neophyte",
-                "name": "Neophyte Hybrid",
-                "count": 5,
-                "stars": 1,
-                "rank": "Stone 2"
-            },
             {
                 "id": "tauNpc1FireWarrior",
                 "name": "Fire Warrior",
@@ -55268,7 +54873,7 @@
                     "id": "upgArmC005",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -55306,7 +54911,7 @@
                     "id": "upgHpC008",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -55351,7 +54956,7 @@
                     "id": "upgDmgC007",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -55493,7 +55098,7 @@
                     "id": "upgArmC004",
                     "chance_numerator": 12,
                     "chance_denominator": 13,
-                    "effective_rate": 0.929
+                    "effective_rate": 0.928
                 }
             ]
         },
@@ -55569,7 +55174,7 @@
                     "id": "upgHpE017",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -56266,7 +55871,7 @@
                     "id": "upgDmgE004",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "effective_rate": 0.399
                 }
             ]
         },
@@ -56728,10 +56333,10 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Genestealers"],
-        "enemiesTotal": 16,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Neophyte Hybrid"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
         "detailedEnemyTypes": [
             {
                 "id": "astraNpc1Guardsman",
@@ -56746,13 +56351,6 @@
                 "count": 4,
                 "stars": 10,
                 "rank": "Gold 1"
-            },
-            {
-                "id": "genesNpc3Neophyte",
-                "name": "Neophyte Hybrid",
-                "count": 4,
-                "stars": 5,
-                "rank": "Bronze 3"
             }
         ]
     },
@@ -56780,10 +56378,10 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Genestealers"],
-        "enemiesTotal": 14,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster", "Neophyte Hybrid"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-caster"],
         "detailedEnemyTypes": [
             {
                 "id": "astraNpc1Guardsman",
@@ -56798,13 +56396,6 @@
                 "count": 3,
                 "stars": 11,
                 "rank": "Gold 2"
-            },
-            {
-                "id": "genesNpc3Neophyte",
-                "name": "Neophyte Hybrid",
-                "count": 4,
-                "stars": 7,
-                "rank": "Bronze 3"
             }
         ]
     },
@@ -56891,10 +56482,10 @@
                 }
             ]
         },
-        "enemiesAlliances": ["Imperial", "Xenos"],
-        "enemiesFactions": ["AstraMilitarum", "Genestealers"],
-        "enemiesTotal": 15,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-caster", "Neophyte Hybrid"],
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-caster"],
         "detailedEnemyTypes": [
             {
                 "id": "astraNpc1Guardsman",
@@ -56916,13 +56507,6 @@
                 "count": 3,
                 "stars": 10,
                 "rank": "Gold 2"
-            },
-            {
-                "id": "genesNpc3Neophyte",
-                "name": "Neophyte Hybrid",
-                "count": 5,
-                "stars": 7,
-                "rank": "Bronze 3"
             }
         ]
     },
@@ -56951,17 +56535,10 @@
             ]
         },
         "enemiesAlliances": ["Xenos"],
-        "enemiesFactions": ["Genestealers", "Tau"],
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Fire Warrior", "Purestrain Genestealer"],
+        "enemiesFactions": ["Tau"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Fire Warrior"],
         "detailedEnemyTypes": [
-            {
-                "id": "genesNpc2Genestealer",
-                "name": "Purestrain Genestealer",
-                "count": 4,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
             {
                 "id": "tauNpc1FireWarrior",
                 "name": "Fire Warrior",
@@ -56991,22 +56568,15 @@
                     "id": "shards_tauCrisis",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
         "enemiesAlliances": ["Xenos"],
-        "enemiesFactions": ["Genestealers", "Tau"],
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Fire Warrior", "Neophyte Hybrid", "Re'vas"],
+        "enemiesFactions": ["Tau"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Fire Warrior", "Re'vas"],
         "detailedEnemyTypes": [
-            {
-                "id": "genesNpc3Neophyte",
-                "name": "Neophyte Hybrid",
-                "count": 4,
-                "stars": 9,
-                "rank": "Bronze 3"
-            },
             {
                 "id": "tauNpc1FireWarrior",
                 "name": "Fire Warrior",
@@ -57216,7 +56786,7 @@
                     "id": "shards_tauMarksman",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -57351,7 +56921,7 @@
                     "id": "upgArmL203",
                     "chance_numerator": 1,
                     "chance_denominator": 7,
-                    "effective_rate": 0.25
+                    "effective_rate": 0.249
                 }
             ]
         },
@@ -57566,7 +57136,7 @@
                     "id": "shards_tauDarkstrider",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -57805,7 +57375,7 @@
                     "id": "shards_tauShadowsun",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -57864,7 +57434,7 @@
                     "id": "upgHpL107",
                     "chance_numerator": 1,
                     "chance_denominator": 7,
-                    "effective_rate": 0.25
+                    "effective_rate": 0.249
                 }
             ]
         },
@@ -57909,7 +57479,7 @@
                     "id": "shards_tauAunShi",
                     "chance_numerator": 8,
                     "chance_denominator": 13,
-                    "effective_rate": 0.643
+                    "effective_rate": 0.642
                 }
             ]
         },
@@ -57961,7 +57531,7 @@
                     "id": "mythicShards_tauCrisis",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -58020,7 +57590,7 @@
                     "id": "upgDmgL001",
                     "chance_numerator": 1,
                     "chance_denominator": 7,
-                    "effective_rate": 0.25
+                    "effective_rate": 0.249
                 }
             ]
         },
@@ -58108,7 +57678,7 @@
                     "id": "mythicShards_tauMarksman",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -58174,7 +57744,7 @@
                     "id": "mythicShards_tauDarkstrider",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -58246,7 +57816,7 @@
                     "id": "mythicShards_tauShadowsun",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -58284,7 +57854,7 @@
                     "id": "mythicShards_tauAunShi",
                     "chance_numerator": 3,
                     "chance_denominator": 14,
-                    "effective_rate": 0.267
+                    "effective_rate": 0.266
                 }
             ]
         },
@@ -58343,7 +57913,7 @@
                     "id": "upgHpM003",
                     "chance_numerator": 3,
                     "chance_denominator": 25,
-                    "effective_rate": 0.154
+                    "effective_rate": 0.153
                 }
             ]
         },

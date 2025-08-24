@@ -16,16 +16,11 @@ export const EquipmentIcon = ({
     width?: number;
     tooltip?: boolean;
 }) => {
-    const imageUrl = getImageUrl(EquipmentService.getEquipmentIconPath(equipment));
+    const imageUrl = getImageUrl(equipment.icon);
 
     const image = (
-        <img
-            loading={'lazy'}
-            style={{ pointerEvents: 'none', width, height }}
-            src={imageUrl}
-            alt={equipment.displayName}
-        />
+        <img loading={'lazy'} style={{ pointerEvents: 'none', width, height }} src={imageUrl} alt={equipment.name} />
     );
 
-    return tooltip ? <AccessibleTooltip title={equipment.displayName}>{image}</AccessibleTooltip> : image;
+    return tooltip ? <AccessibleTooltip title={equipment.name}>{image}</AccessibleTooltip> : image;
 };

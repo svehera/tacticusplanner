@@ -7,6 +7,9 @@ import mythicWings from '../../../../../assets/images/snowprint_assets/stars/ui_
 
 import armourIcon from './armour.webp';
 import blackstoneIcon from './blackstone.png';
+import blockIcon from './block.png';
+import chanceIcon from './chance.png';
+import critDamageIcon from './crit_dmg.png';
 import deploymentIcon from './deployment.png';
 import damageIcon from './dmg.webp';
 import energyIcon from './energy.png';
@@ -24,6 +27,18 @@ export const tacticusIcons = {
     armour: {
         file: armourIcon,
         label: 'Armour',
+    },
+    block: {
+        file: blockIcon,
+        label: 'Block',
+    },
+    chance: {
+        file: chanceIcon,
+        label: 'Chance',
+    },
+    critDamage: {
+        file: critDamageIcon,
+        label: 'CritDamage',
     },
     damage: {
         file: damageIcon,

@@ -4,7 +4,6 @@ import { RouteObject } from 'react-router-dom';
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
-import { versusLazyRoute } from '@/fsd/1-pages/learn-versus';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { lreLazyRoute } from '@/fsd/1-pages/plan-lre';
 import { guildApiLazyRoute } from '@/v2/pages/guild-api/guild-api.route';
@@ -80,7 +79,6 @@ export const globalLearnRoutes: RouteObject[] = [
             return { Component: NpcInfo };
         },
     },
-    versusLazyRoute,
     {
         path: 'learn/upgrades',
         async lazy() {
