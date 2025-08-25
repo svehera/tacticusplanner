@@ -41,8 +41,23 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                 milestoneIndex = currentMilestoneIndex;
                 currentMilestoneIndex++;
             }
+            const chars = [];
+            if (token.team) {
+                if (token.team.charSnowprintIds) {
+                    chars.push(...token.team.charSnowprintIds);
+                } else if (token.team.charactersIds) {
+                    chars.push(
+                        ...token.team.charactersIds.map(
+                            name => CharactersService.resolveCharacter(name)?.snowprintId ?? name
+                        )
+                    );
+                } else {
+                    // Skip the team
+                    continue;
+                }
+            }
             ret.push({
-                team: token.team!.charactersIds,
+                team: chars,
                 restricts: token.restrictionsCleared,
                 battleNumber: token.battleNumber,
                 track: token.team!.section,
@@ -173,12 +188,12 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                             <td className="px-4">{token.incrementalPoints}</td>
                             <td className="px-4 text-right">{token.totalPoints}</td>
                             <td className="px-4">
-                                {token.team.map((charId: string) => (
+                                {token.team.map((snowprintId: string) => (
                                     <UnitShardIcon
-                                        key={charId + index}
-                                        icon={CharactersService.getUnit(charId)?.roundIcon ?? ''}
+                                        key={snowprintId + index}
+                                        icon={CharactersService.getUnit(snowprintId)?.roundIcon ?? ''}
                                         height={20}
-                                        tooltip={charId}
+                                        tooltip={CharactersService.getUnit(snowprintId)?.name ?? snowprintId}
                                     />
                                 ))}
                             </td>

@@ -33,10 +33,7 @@ export const Lre: React.FC = () => {
 
     const resolvedCharacters = useMemo(() => {
         return characters.map(x => {
-            const ret: ICharacter2 = { ...x };
-            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
-            ret.name = staticChar?.snowprintId ?? x.name;
-            return ret;
+            return { ...x, ...CharactersService.resolveCharacter(x.snowprintId ?? x.name) };
         });
     }, [characters]);
 

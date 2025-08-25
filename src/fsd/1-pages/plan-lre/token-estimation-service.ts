@@ -37,7 +37,7 @@ export class TokenUse {
             ' points=' +
             this.incrementalPoints +
             ' {' +
-            this.team.charactersIds.join(',') +
+            (this.team.charSnowprintIds ?? this.team.charactersIds ?? []).join(',') +
             '} { ' +
             this.restrictionsCleared.map(x => x.id).join(',') +
             ' }'
@@ -188,9 +188,12 @@ export class TokenEstimationService {
                     battle.requirementsProgress.length;
             });
         });
+        const resolve = (char: string) => {
+            return CharactersService.resolveCharacter(char)?.snowprintId ?? char;
+        };
         const resolvedTeams = teams.map((team, index) => ({
             ...team,
-            charactersIds: team.charactersIds.map(id => CharactersService.resolveCharacter(id)?.snowprintId || id),
+            charSnowprintIds: (team.charSnowprintIds ?? team.charactersIds ?? []).map(id => resolve(id)),
         }));
         while (true) {
             const token: TokenUse = this.computeNextToken(

@@ -265,10 +265,12 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
     sections.forEach(section => {
         const selectedTeams: SelectedTeams = data[section];
 
-        Object.entries(selectedTeams).forEach(([restriction, characters]) => {
+        Object.entries(selectedTeams).forEach(([restriction, charSnowprintIds]) => {
             // Check if there's already a team with the same set of characters
             const existingTeam = teams.find(
-                team => areArraysEqual(team.charactersIds, characters) && team.section === section
+                team =>
+                    areArraysEqual(team.charSnowprintIds ?? team.charactersIds ?? [], charSnowprintIds) &&
+                    team.section === section
             );
 
             if (existingTeam) {
@@ -276,14 +278,14 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
                 if (!existingTeam.restrictionsIds.includes(restriction)) {
                     existingTeam.restrictionsIds.push(restriction);
                 }
-            } else if (characters?.length) {
+            } else if (charSnowprintIds?.length) {
                 // If not found, create a new team
                 const team: ILreTeam = {
                     id: v4(), // Replace with your UUID generation logic
                     name: `Team ${teams.length + 1} - ${section}`, // Assigning Team 1, 2, 3, etc.
                     section: section as LreTrackId,
                     restrictionsIds: [restriction], // Initial restriction,
-                    charactersIds: characters, // Characters associated with this team
+                    charSnowprintIds: charSnowprintIds, // Characters associated with this team
                 };
                 teams.push(team);
             }

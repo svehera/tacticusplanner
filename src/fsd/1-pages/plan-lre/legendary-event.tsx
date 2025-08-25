@@ -29,10 +29,8 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
 
     const resolvedCharacters = useMemo(() => {
         return characters.map(x => {
-            const ret: ICharacter2 = { ...x };
             const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
-            ret.name = staticChar?.snowprintId ?? x.name;
-            return ret;
+            return { ...staticChar, ...x };
         });
     }, [characters]);
 
@@ -43,17 +41,29 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
             team.points += legendaryEvent[team.section].getRestrictionPoints(id);
         }
 
-        team.characters = team.charactersIds.map(id => {
-            let name = CharactersService.resolveCharacter(id)?.snowprintId ?? id;
-            if (name == 'Patermine') {
-                name = CharactersService.resolveCharacter('The Patermine')?.snowprintId ?? id;
-            }
-            const character = resolvedCharacters.find(x => x.snowprintId === name);
+        // Old team pre mythic, need to convert it.
+        if (
+            team.charactersIds !== undefined &&
+            team.charactersIds.length > 0 &&
+            (team.charSnowprintIds === undefined || team.charSnowprintIds.length === 0)
+        ) {
+            team.charSnowprintIds = team.charactersIds.map(oldId => {
+                let spId = CharactersService.resolveCharacter(oldId)?.snowprintId ?? oldId;
+                if (spId == 'Patermine') {
+                    spId = CharactersService.resolveCharacter('The Patermine')?.snowprintId ?? oldId;
+                }
+                return spId;
+            });
+            team.charactersIds = [];
+        }
+
+        team.characters = (team.charSnowprintIds ?? team.charactersIds ?? []).map(id => {
+            const character = resolvedCharacters.find(x => x.snowprintId === id);
             if (!character) {
                 console.warn(
                     'unknown character. if you have imported goals from a pre-mythic ',
                     'instance of the planner, please remove the unit and add it back.',
-                    name,
+                    id,
                     id,
                     character
                 );
@@ -77,7 +87,8 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                 id: '',
                 name: section,
                 section: section,
-                charactersIds: team.map(x => x.id),
+                charactersIds: team.map(x => x.name),
+                charSnowprintIds: team.map(x => x.snowprintId!),
                 restrictionsIds: restrictions,
             },
         });
@@ -94,7 +105,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
             eventId: legendaryEvent.id,
             teamId: team.id,
             name: team.name,
-            charactersIds: team.charactersIds,
+            charSnowprintIds: team.charSnowprintIds ?? [],
             expectedBattleClears: team.expectedBattleClears,
         });
         setEditTeam(null);

@@ -6,7 +6,7 @@ import { StoreContext } from '@/reducers/store.provider';
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
 
-import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
+import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { getLre } from '@/fsd/3-features/lre';
@@ -16,14 +16,6 @@ import { LreSection } from './lre.models';
 export const useLre = () => {
     const { setHeaderTitle } = useTitle();
     const { characters } = useContext(StoreContext);
-    const resolvedCharacters = useMemo(() => {
-        return characters.map(x => {
-            const ret: ICharacter2 = { ...x };
-            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
-            ret.name = staticChar?.snowprintId ?? x.name;
-            return ret;
-        });
-    }, [characters]);
 
     const [legendaryEventId] = useQueryState<LegendaryEventEnum>(
         'character',
@@ -60,7 +52,7 @@ export const useLre = () => {
         }
     }, [legendaryEventId]);
 
-    const legendaryEvent = useMemo(() => getLre(legendaryEventId, resolvedCharacters), [legendaryEventId]);
+    const legendaryEvent = useMemo(() => getLre(legendaryEventId, characters), [legendaryEventId]);
 
     return { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab };
 };
