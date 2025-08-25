@@ -37,7 +37,9 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     const { teams } = leSelectedTeams[legendaryEvent.id] ?? { teams: [] };
 
     const selectedChars = useMemo(() => {
-        return uniq(teams.flatMap(t => t.charSnowprintIds));
+        return uniq(
+            teams.flatMap(t => t.charSnowprintIds ?? t.charactersIds ?? []).map(x => CharactersService.canonicalName(x))
+        );
     }, [legendaryEvent.id]);
     const [pointsCalculation, setPointsCalculation] = useQueryState<PointsCalculation>(
         'pointsCalculation',

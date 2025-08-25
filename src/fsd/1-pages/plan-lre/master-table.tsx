@@ -78,7 +78,9 @@ export const MasterTable = () => {
 
     const getSelectedChars = (eventId: LegendaryEventEnum) => {
         const teams = getSelectedTeams(eventId);
-        return uniq(teams.flatMap(t => t.charSnowprintIds));
+        return uniq(
+            teams.flatMap(t => t.charSnowprintIds ?? t.charactersIds ?? []).map(x => CharactersService.canonicalName(x))
+        );
     };
 
     const selectedCharsRows: ITableRow[] = useMemo(() => {

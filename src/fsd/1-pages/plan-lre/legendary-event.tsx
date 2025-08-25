@@ -28,10 +28,12 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
     const selectedTeams: ILreTeam[] = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
     const resolvedCharacters = useMemo(() => {
-        return characters.map(x => {
-            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
-            return { ...staticChar, ...x };
-        });
+        return characters
+            .filter(x => CharactersService.resolveCharacter(x.snowprintId ?? x.name) !== undefined)
+            .map(x => {
+                const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
+                return { ...staticChar!, ...x };
+            });
     }, [characters]);
 
     // Compute virtual attributes (not saved in JSON) for display on LRE team cards.
@@ -47,13 +49,10 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
             team.charactersIds.length > 0 &&
             (team.charSnowprintIds === undefined || team.charSnowprintIds.length === 0)
         ) {
-            team.charSnowprintIds = team.charactersIds.map(oldId => {
-                let spId = CharactersService.resolveCharacter(oldId)?.snowprintId ?? oldId;
-                if (spId == 'Patermine') {
-                    spId = CharactersService.resolveCharacter('The Patermine')?.snowprintId ?? oldId;
-                }
-                return spId;
-            });
+            team.charSnowprintIds = team.charactersIds.map(
+                oldId =>
+                    CharactersService.resolveCharacter(CharactersService.canonicalName(oldId))?.snowprintId ?? oldId
+            );
             team.charactersIds = [];
         }
 

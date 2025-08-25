@@ -50,7 +50,7 @@ export const useLre = () => {
                     : `${lreChar.name} ${relatedLre!.eventStage}/3 (${nextDate})`
             );
         }
-    }, [legendaryEventId]);
+    }, [characters, legendaryEventId]);
 
     const legendaryEvent = useMemo(() => getLre(legendaryEventId, characters), [legendaryEventId]);
 

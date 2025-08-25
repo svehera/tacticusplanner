@@ -257,8 +257,8 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
 
     function doTeamsMatch(team1: string[], team2: string[]) {
         return areArraysEqual(
-            team1.map(id => CharactersService.resolveCharacter(id)?.snowprintId || id),
-            team2.map(id => CharactersService.resolveCharacter(id)?.snowprintId || id)
+            team1.map(id => CharactersService.canonicalName(id)),
+            team2.map(id => CharactersService.canonicalName(id))
         );
     }
 
@@ -266,11 +266,14 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
         const selectedTeams: SelectedTeams = data[section];
 
         Object.entries(selectedTeams).forEach(([restriction, charSnowprintIds]) => {
+            const resolve = (char: string) => CharactersService.canonicalName(char);
             // Check if there's already a team with the same set of characters
             const existingTeam = teams.find(
                 team =>
-                    areArraysEqual(team.charSnowprintIds ?? team.charactersIds ?? [], charSnowprintIds) &&
-                    team.section === section
+                    doTeamsMatch(
+                        (team.charSnowprintIds ?? team.charactersIds ?? []).map(x => resolve(x)),
+                        charSnowprintIds.map(x => resolve(x))
+                    ) && team.section === section
             );
 
             if (existingTeam) {
@@ -285,7 +288,7 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
                     name: `Team ${teams.length + 1} - ${section}`, // Assigning Team 1, 2, 3, etc.
                     section: section as LreTrackId,
                     restrictionsIds: [restriction], // Initial restriction,
-                    charSnowprintIds: charSnowprintIds, // Characters associated with this team
+                    charSnowprintIds: charSnowprintIds.map(x => CharactersService.canonicalName(x)), // Characters associated with this team
                 };
                 teams.push(team);
             }

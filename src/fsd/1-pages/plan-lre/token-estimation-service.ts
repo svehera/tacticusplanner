@@ -188,12 +188,11 @@ export class TokenEstimationService {
                     battle.requirementsProgress.length;
             });
         });
-        const resolve = (char: string) => {
-            return CharactersService.resolveCharacter(char)?.snowprintId ?? char;
-        };
         const resolvedTeams = teams.map((team, index) => ({
             ...team,
-            charSnowprintIds: (team.charSnowprintIds ?? team.charactersIds ?? []).map(id => resolve(id)),
+            charSnowprintIds: (team.charSnowprintIds ?? team.charactersIds ?? []).map(char =>
+                CharactersService.canonicalName(char)
+            ),
         }));
         while (true) {
             const token: TokenUse = this.computeNextToken(
