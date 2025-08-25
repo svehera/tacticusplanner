@@ -83,11 +83,10 @@ export class CampaignsService {
      */
     private static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
         const result: Record<string, ICampaignBattleComposed> = {};
-        for (const battleDataKey in battleData) {
-            const battle = battleData[battleDataKey];
+        Object.entries(battleData).forEach(([battleDataKey, battle]) => {
             if (battle.energyCost == 0) {
-                // Indomitus 1-5 don't cost anything but can't be raided.
-                continue;
+                // Indomitus battles 1-5 don't cost anything and can't be raided.
+                return;
             }
 
             const reward = this.getReward(battle);
@@ -145,7 +144,7 @@ export class CampaignsService {
                 enemiesTypes: battle.enemiesTypes ?? [],
                 detailedEnemyTypes: battle.detailedEnemyTypes ?? [],
             };
-        }
+        });
 
         return result;
     }
