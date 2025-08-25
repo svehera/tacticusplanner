@@ -52,6 +52,10 @@ export class EquipmentService {
     }
 
     private static getEquipmentIconPathFromId(id: string): string {
+        if (id == 'R_Crit_Dw02AdvancedBurstCannon') {
+            // Re'vas's relic icon path is broken for some reason.
+            return 'snowprint_assets/equipment/ui_icon_item_R_Crit_DW02AdvancedBurstCannon.png';
+        }
         return `snowprint_assets/equipment/ui_icon_item_${id}.png`;
     }
 
