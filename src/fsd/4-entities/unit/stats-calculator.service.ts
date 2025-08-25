@@ -140,9 +140,7 @@ export class StatsCalculatorService {
         numAppliedUpgrades: number
     ): number {
         const preMythicRankValue: number = StatsCalculatorService.getRankForComputation(Math.min(Rank.Diamond3, rank));
-        const postMythicRankValue: number = StatsCalculatorService.getRankForComputation(
-            rank >= Rank.Adamantine1 ? rank - Rank.Adamantine1 : 0
-        );
+        const postMythicRankValue: number = rank >= Rank.Adamantine1 ? rank : 0;
         const rarityValue: number = rarityStars as number;
         const upgradeBoost =
             rank < Rank.Diamond3
