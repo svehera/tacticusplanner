@@ -1,5 +1,5 @@
-import { IEquipmentRaw } from '../model';
+import { IEquipmentStatic } from '../model';
 
-import equipmentDataJson from './EquipmentData.json';
+import newEquipmentDataJson from './newEquipmentData.json';
 
-export const equipmentData: Record<string, IEquipmentRaw> = equipmentDataJson;
+export const newEquipmentData: Record<string, IEquipmentStatic> = newEquipmentDataJson;

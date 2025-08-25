@@ -1,82 +1,85 @@
 import { Rarity, Faction } from '@/fsd/5-shared/model';
 
-import { EquipmentClass, EquipmentType } from './enums';
+/** Stats about an equipment. */
+export interface IEquipmentStats {
+    blockChance?: number;
+    blockDamage?: number;
+    /** Used by booster items. */
+    blockChanceBonus?: number;
+    /** Used by booster items. */
+    blockDamageBonus?: number;
+    critChance?: number;
+    critDamage?: number;
+    /** Used by booster items. */
+    critChanceBonus?: number;
+    /** Used by booster items. */
+    critDamageBonus?: number;
+    armor?: number;
+    hp?: number;
+}
+
+/**
+ * Information about the level of equipment (e.g. the 9 when you say epic 9 knife). This
+ * tells you how much it costs to get here from the previous level by forging (or
+ * ascending).
+ */
+export interface IEquipmentLevel {
+    goldCost: number;
+    salvageCost: number;
+    mythicSalvageCost: number;
+    stats: IEquipmentStats;
+}
 
 /**
  * Information about equipment coming directly from a spreadsheet, with a tiny
  * bit of massaging into JSON. Most of this was gathered by Towen (thanks so
  * much).
  */
-export interface IEquipmentRaw {
-    /** What kind of equipment this is (e.g. Crit). */
-    slot: string;
+export interface IEquipmentStatic {
+    /** The in-game, human-readable name of the item. */
+    name: string;
 
-    /** The class of equipment, e.g. Greaves, VoidBlade. */
-    clazz: string;
-
-    /**
-     * The ID that SP uses to identify this object. You can use this ID to
-     * determine the icon path.
-     */
-    snowprintId: number;
-
-    /** The in-game name of the item. */
-    displayName: string;
-
-    /** The rarity of the item. */
+    /** The rarity of the item (e.g. epic). */
     rarity: string;
 
-    /** For equipment with RNG, the chance (or boost to chance) they provide. */
-    chance: number;
+    /** The type of the item (e.g. I_Crit). */
+    type: string;
 
-    /** The factions that can equip this item. */
-    factions: string[];
+    /** The ability of the relic. Empty string if none. */
+    abilityId: string;
 
-    /**
-     * The primary boost this item gives. For defensive items, this is health.
-     * So it's expected that this can be empty (e.g. for greaves).
-     *
-     * The index represents the level of the item.
-     */
-    boost1: number[];
+    /** True if this is a relic, shared or not. */
+    isRelic: boolean;
+
+    /** True if this is a relic unique to one character. */
+    isUniqueRelic: boolean;
 
     /**
-     * The secondary boost this item gives. For defensive items, this is armor.
-     * Most items do not yield two boosts, so this is often empty.
-     *
-     * The index represents the level of the item.
+     * The units allowed to equip this item. If this is empty, consult
+     * allowedFactions.
      */
-    boost2: number[];
+    allowedUnits: string[];
+
+    /**
+     * Which factions can equip this item. You also need to check the equipment
+     * slot types of each character in the faction to determine who can use it.
+     */
+    allowedFactions: string[];
+
+    /** The stats and cost of the equipment at various levels. */
+    levels: IEquipmentLevel[];
 }
 
-/**
- * Similar to IEquipmentRaw, but with the types converted to enums.
- */
 export interface IEquipment {
-    /** See @IEquipmentRaw.slot. */
-    slot: EquipmentType;
-
-    /** See @IEquipmentRaw.clazz. */
-    clazz: EquipmentClass;
-
-    /** See @IEquipmentRaw.snowprintId. */
-    snowprintId: number;
-
-    /** See @IEquipmentRaw.displayName. */
-    displayName: string;
-
-    /** See @IEquipmentRaw.rarity. */
+    id: string;
+    name: string;
     rarity: Rarity;
-
-    /** See @IEquipmentRaw.chance. */
-    chance?: number;
-
-    /** See @IEquipmentRaw.factions. */
-    factions: Faction[];
-
-    /** See @IEquipmentRaw.boost1. */
-    boost1: number[];
-
-    /** See @IEquipmentRaw.boost2. */
-    boost2: number[];
+    type: string;
+    abilityId: string;
+    isRelic: boolean;
+    isUniqueRelic: boolean;
+    /** The snowprint IDs of all characters that can equip this item. */
+    allowedUnits: string[];
+    levels: IEquipmentLevel[];
+    icon: string;
 }

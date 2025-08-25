@@ -37,7 +37,7 @@ import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank } from '@/fsd/5-shared/model';
 import { UnitShardIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService, CharacterTitle, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
+import { CharactersService, CharacterTitleShort, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { getLre, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
@@ -78,7 +78,9 @@ export const MasterTable = () => {
 
     const getSelectedChars = (eventId: LegendaryEventEnum) => {
         const teams = getSelectedTeams(eventId);
-        return uniq(teams.flatMap(t => t.charactersIds));
+        return uniq(
+            teams.flatMap(t => t.charSnowprintIds ?? t.charactersIds ?? []).map(x => CharactersService.canonicalName(x))
+        );
     };
 
     const selectedCharsRows: ITableRow[] = useMemo(() => {
@@ -115,24 +117,34 @@ export const MasterTable = () => {
             );
 
             const eventCharacters = legendaryEvent.allowedUnits
-                .filter(x => selectedChars.includes(x.name))
+                .filter(x => selectedChars.includes(x.snowprintId!))
                 .sort((a, b) => {
                     const aTotal =
-                        (alpha[a.name]?.points ?? 0) + (beta[a.name]?.points ?? 0) + (gamma[a.name]?.points ?? 0);
+                        (alpha[a.snowprintId!]?.points ?? 0) +
+                        (beta[a.snowprintId!]?.points ?? 0) +
+                        (gamma[a.snowprintId!]?.points ?? 0);
                     const bTotal =
-                        (alpha[b.name]?.points ?? 0) + (beta[b.name]?.points ?? 0) + (gamma[b.name]?.points ?? 0);
+                        (alpha[b.snowprintId!]?.points ?? 0) +
+                        (beta[b.snowprintId!]?.points ?? 0) +
+                        (gamma[b.snowprintId!]?.points ?? 0);
 
                     return bTotal - aTotal;
                 })
                 .filter(x => (filter ? x.name.toLowerCase().includes(filter.toLowerCase()) : true))
                 .map(x => ({
                     character: x,
-                    characterId: x.name,
+                    characterId: x.snowprintId!,
                     eventId,
                     // className: Rank[x.rank].toLowerCase(),
                     // tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
-                    points: (alpha[x.name]?.points ?? 0) + (beta[x.name]?.points ?? 0) + (gamma[x.name]?.points ?? 0),
-                    slots: (alpha[x.name]?.slots ?? 0) + (beta[x.name]?.slots ?? 0) + (gamma[x.name]?.slots ?? 0),
+                    points:
+                        (alpha[x.snowprintId!]?.points ?? 0) +
+                        (beta[x.snowprintId!]?.points ?? 0) +
+                        (gamma[x.snowprintId!]?.points ?? 0),
+                    slots:
+                        (alpha[x.snowprintId!]?.slots ?? 0) +
+                        (beta[x.snowprintId!]?.slots ?? 0) +
+                        (gamma[x.snowprintId!]?.slots ?? 0),
                 }));
 
             temp.push(...eventCharacters);
@@ -164,7 +176,13 @@ export const MasterTable = () => {
             const result: Record<string, string[]> = {};
 
             for (const team of selectedTeams) {
-                team.charactersIds.forEach(character => {
+                let chars = team.charSnowprintIds ?? [];
+                if (chars.length === 0) {
+                    chars = (team.charactersIds ?? []).map(
+                        x => CharactersService.resolveCharacter(x)?.snowprintId ?? x
+                    );
+                }
+                chars.forEach(character => {
                     if (!result[character]) {
                         result[character] = [];
                     }
@@ -258,14 +276,7 @@ export const MasterTable = () => {
                         cellRenderer: (props: ICellRendererParams<ITableRow>) => {
                             const character = props.data?.character;
                             if (character) {
-                                return (
-                                    <CharacterTitle
-                                        character={character}
-                                        hideName={isMobile}
-                                        short={true}
-                                        imageSize={30}
-                                    />
-                                );
+                                return <CharacterTitleShort character={character} hideName={isMobile} imageSize={30} />;
                             }
                         },
                         cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
