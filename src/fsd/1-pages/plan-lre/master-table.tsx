@@ -130,7 +130,7 @@ export const MasterTable = () => {
 
                     return bTotal - aTotal;
                 })
-                .filter(x => (filter ? x.name.toLowerCase().includes(filter.toLowerCase()) : true))
+                .filter(x => (filter ? x.shortName.toLowerCase().includes(filter.toLowerCase()) : true))
                 .map(x => ({
                     character: x,
                     characterId: x.snowprintId!,
