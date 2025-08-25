@@ -77,7 +77,6 @@ export class LETrack implements ILegendaryEventTrack {
                 ? [...coreSuggestedTeams]
                 : this.suggestTeam(settings, onlyUnlocked, [x.name]);
         });
-        console.log('', name, 'result', result);
 
         if (!this.isAutoTeams(settings)) {
             const result2: Record<string, Array<ICharacter2 | undefined>> = {};
@@ -116,7 +115,6 @@ export class LETrack implements ILegendaryEventTrack {
                 ...this.unitsRestrictions.filter(x => restrictions.includes(x.name)).map(x => x.units),
                 'name'
             );
-            console.log('allowedChars', allowedChars);
         }
         const sortChars = allowedChars
             .filter(x => (onlyUnlocked ? x.rank > Rank.Locked : true))

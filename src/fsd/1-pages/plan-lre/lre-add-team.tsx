@@ -72,7 +72,7 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
             name: teamName,
             section: trackId,
             characters: selectedTeam,
-            charactersIds: selectedTeam.map(x => x.snowprintId!),
+            charSnowprintIds: selectedTeam.map(x => x.snowprintId!),
             expectedBattleClears: expectedBattleClears,
             restrictionsIds: restrictions,
         });

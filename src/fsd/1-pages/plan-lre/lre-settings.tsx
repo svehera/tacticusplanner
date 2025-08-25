@@ -173,17 +173,7 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         );
     };
 
-    const lreTileCharacter = {
-        name: 'Isabella',
-        shortName: 'Isabella',
-        icon: 'Isabella-removebg-preview.webp',
-        bias: CharacterBias.recommendFirst,
-        rank: Rank.Gold1,
-        rarity: Rarity.Legendary,
-        activeAbilityLevel: 35,
-        passiveAbilityLevel: 35,
-        traits: ['Act of Faith', 'Healer'],
-    } as ICharacter2;
+    const lreTileCharacter = characters[0];
 
     return (
         <Dialog open={true} fullWidth onClose={onClose} maxWidth="md" fullScreen={isMobile}>
@@ -201,15 +191,30 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                 <div className="flex-box gap10 start mobile-wrap">
                     <MultipleSelectCheckmarks
                         values={characters.map(x => x.name)}
-                        selectedValues={recommendFirst}
+                        selectedValues={recommendFirst.map(x => characters.find(c => c.snowprintId === x)!.name)}
                         placeholder="Recommend First"
-                        selectionChanges={setRecommendFirst}
+                        selectionChanges={(chars: string[]) =>
+                            setRecommendFirst(
+                                chars
+                                    .map(x => characters.find(c => c.name === x))
+                                    .filter(x => x !== undefined)
+                                    .map(x => x!.snowprintId!)
+                            )
+                        }
                     />
                     <MultipleSelectCheckmarks
                         values={characters.map(x => x.name)}
-                        selectedValues={recommendLast}
+                        selectedValues={recommendLast.map(x => characters.find(c => c.snowprintId === x)!.name)}
                         placeholder="Recommend Last"
-                        selectionChanges={setRecommendLast}
+                        selectionChanges={(chars: string[]) => {
+                            console.log(chars);
+                            setRecommendLast(
+                                chars
+                                    .map(x => characters.find(c => c.name === x || c.snowprintId! == x))
+                                    .filter(x => x !== undefined)
+                                    .map(x => x!.snowprintId!)
+                            );
+                        }}
                     />
                 </div>
                 <Divider orientation="horizontal" />

@@ -71,7 +71,10 @@ export interface ILreTeam {
      */
     restrictionsIds: string[];
 
-    charactersIds: string[];
+    /** DO NOT USE. KEPT AROUND FOR USERS THAT HAVEN'T MIGRATED TO MYTHIC YET. */
+    charactersIds?: string[];
+
+    charSnowprintIds?: string[];
     /**
      * The number of battles this team is expected to clear against the
      * given restrictions in the specified track.

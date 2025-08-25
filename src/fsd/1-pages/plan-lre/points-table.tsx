@@ -21,7 +21,7 @@ import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterTitle, RankIcon } from '@/fsd/4-entities/character';
+import { CharactersService, CharacterTitleShort, RankIcon } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
 
@@ -37,7 +37,9 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     const { teams } = leSelectedTeams[legendaryEvent.id] ?? { teams: [] };
 
     const selectedChars = useMemo(() => {
-        return uniq(teams.flatMap(t => t.charactersIds));
+        return uniq(
+            teams.flatMap(t => t.charSnowprintIds ?? t.charactersIds ?? []).map(x => CharactersService.canonicalName(x))
+        );
     }, [legendaryEvent.id]);
     const [pointsCalculation, setPointsCalculation] = useQueryState<PointsCalculation>(
         'pointsCalculation',
@@ -78,14 +80,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         cellRenderer: (props: ICellRendererParams<ITableRow>) => {
                             const character = props.data?.character;
                             if (character) {
-                                return (
-                                    <CharacterTitle
-                                        character={character}
-                                        hideName={isMobile}
-                                        short={true}
-                                        imageSize={30}
-                                    />
-                                );
+                                return <CharacterTitleShort character={character} hideName={isMobile} imageSize={30} />;
                             }
                         },
                         cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
@@ -205,7 +200,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
         );
 
         return legendaryEvent.allowedUnits
-            .filter(x => selectedChars.includes(x.name))
+            .filter(x => selectedChars.includes(x.snowprintId!))
             .sort((a, b) => {
                 const aTotal =
                     (alpha[a.name]?.points ?? 0) + (beta[a.name]?.points ?? 0) + (gamma[a.name]?.points ?? 0);
@@ -214,7 +209,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
 
                 return bTotal - aTotal;
             })
-            .filter(x => (filter ? x.name.toLowerCase().includes(filter.toLowerCase()) : true))
+            .filter(x => (filter ? x.shortName.toLowerCase().includes(filter.toLowerCase()) : true))
             .map((x, index) => ({
                 character: x,
                 position: index + 1,
@@ -234,7 +229,13 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
             const result: Record<string, string[]> = {};
 
             for (const team of selectedTeams) {
-                team.charactersIds.forEach(character => {
+                let chars = team.charSnowprintIds ?? [];
+                if (chars.length === 0) {
+                    chars = (team.charactersIds ?? []).map(
+                        x => CharactersService.resolveCharacter(x)?.snowprintId ?? x
+                    );
+                }
+                chars.forEach(character => {
                     if (!result[character]) {
                         result[character] = [];
                     }

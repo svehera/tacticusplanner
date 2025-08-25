@@ -33,10 +33,15 @@ export const Lre: React.FC = () => {
 
     const resolvedCharacters = useMemo(() => {
         return characters.map(x => {
-            const ret: ICharacter2 = { ...x };
-            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
-            ret.name = staticChar?.snowprintId ?? x.name;
-            return ret;
+            const resolved = CharactersService.getUnit(x.snowprintId ?? x.name);
+            // Only override identity/display fields; keep player-specific data intact
+            return resolved
+                ? {
+                      ...x,
+                      name: resolved.name ?? x.name,
+                      snowprintId: resolved.snowprintId ?? x.snowprintId,
+                  }
+                : x;
         });
     }, [characters]);
 
