@@ -1,5 +1,5 @@
 import { groupBy } from 'lodash';
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
@@ -22,6 +22,34 @@ export const MyProgress = () => {
 
     const standardCampaignsByGroup = Object.entries(groupBy(CampaignsService.standardCampaigns, 'groupType'));
     const campaignEventsByGroup = Object.entries(groupBy(CampaignsService.campaignEvents, 'groupType'));
+
+    const eventCampaignIds = useMemo(() => new Set(CampaignsService.campaignEvents.map(x => x.id)), []);
+
+    useEffect(() => {
+        try {
+            const eventCampaigns = CampaignsService.campaignEvents;
+            const inputs = eventCampaigns.map(c => ({
+                id: c.id,
+                name: c.displayName,
+                group: c.groupType,
+                difficulty: c.difficulty,
+            }));
+            const outputs = Object.fromEntries(eventCampaigns.map(c => [c.id, campaignsProgress[c.id]]));
+            const missingIds = inputs
+                .filter(c => outputs[(c as unknown as { id: string | number }).id] === undefined)
+                .map(c => c.id);
+
+            // Debug logs for selector inputs/outputs specific to campaign events
+            console.groupCollapsed('MyProgress: Campaign Events selector');
+            if (missingIds.length) {
+                console.warn('Missing progress keys for event campaign ids:', missingIds);
+            }
+            console.groupEnd();
+        } catch (err) {
+            console.error('MyProgress: error logging event campaign selector data', err);
+        }
+        // Log whenever progress map changes, which affects selector output
+    }, [campaignsProgress]);
 
     const updateCampaignProgress = (id: Campaign, value: number) => {
         dispatch.campaignsProgress({

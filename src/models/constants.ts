@@ -352,6 +352,13 @@ export const idToCampaign: Record<string, Campaign> = {
     eliteMirror2: Campaign.FoCME,
     eliteMirror3: Campaign.OME,
     eliteMirror4: Campaign.SHME,
+
+    eventCampaign1: Campaign.AMS,
+    eventCampaign2: Campaign.AME,
+    eventCampaign3: Campaign.TS,
+    eventCampaign4: Campaign.TE,
+    eventCampaign5: Campaign.TAS,
+    eventCampaign6: Campaign.TAE,
 };
 
 // Re-export from RarityMapper for backward compatibility
