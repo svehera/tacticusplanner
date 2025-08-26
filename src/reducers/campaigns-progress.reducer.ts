@@ -3,7 +3,7 @@ import { ICampaignsProgress, SetStateAction } from '@/models/interfaces';
 
 import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 
-import { mapTacticusCampaignToLocal, mapTacticusCampaignToUpdates } from '@/fsd/4-entities/campaign/campaign-mapper';
+import { CampaignMapperService } from '@/fsd/4-entities/campaign/campaign-mapper-service';
 
 export type CampaignsProgressAction =
     | {
@@ -32,7 +32,7 @@ export const campaignsProgressReducer = (
             const result: Partial<ICampaignsProgress> = {};
             for (const campaign of action.campaigns) {
                 // First, try event campaign split (base + challenge)
-                const updates = mapTacticusCampaignToUpdates(campaign);
+                const updates = CampaignMapperService.mapTacticusCampaignToUpdates(campaign);
                 if (updates && (updates.baseKey || updates.challengeKey)) {
                     if (updates.baseKey !== undefined && updates.baseBattles !== undefined) {
                         result[updates.baseKey] = updates.baseBattles;
@@ -44,7 +44,7 @@ export const campaignsProgressReducer = (
                 }
 
                 // Otherwise, use single-key mapping (event or legacy campaigns)
-                const mapped = mapTacticusCampaignToLocal(campaign);
+                const mapped = CampaignMapperService.mapTacticusCampaignToLocal(campaign);
                 const fallback = idToCampaign[campaign.id];
                 const campaignKey = mapped ?? fallback;
                 if (campaignKey) {
