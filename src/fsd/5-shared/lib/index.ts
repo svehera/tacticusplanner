@@ -7,4 +7,3 @@ export { numberToThousandsString, numberToThousandsStringOld } from './number-to
 export { useQueryState } from './query-state';
 export { useFitGridOnWindowResize } from './resize-grid';
 export { getCompletionRateColor } from './get-completion-color';
-

@@ -23,7 +23,6 @@ export const MyProgress = () => {
     const standardCampaignsByGroup = Object.entries(groupBy(CampaignsService.standardCampaigns, 'groupType'));
     const campaignEventsByGroup = Object.entries(groupBy(CampaignsService.campaignEvents, 'groupType'));
 
-
     const updateCampaignProgress = (id: Campaign, value: number) => {
         dispatch.campaignsProgress({
             type: 'Update',
