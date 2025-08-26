@@ -67,8 +67,8 @@ export type CampaignProgressSplit = {
 
 /**
  * Split an event campaign into base and challenge progress updates (without mutating the input).
- * - Base: standard/extremis nodes excluding challenge indices (4, 14, 26)
- * - Challenge: only challenge indices (4, 14, 26)
+ * - Base: standard/extremis nodes excluding challenge indices (3, 13, 25)
+ * - Challenge: only challenge indices (3, 13, 25)
  */
 export function mapTacticusCampaignToUpdates(c: TacticusCampaignProgress): CampaignProgressSplit | undefined {
     const id = (c.id || '').toLowerCase();
