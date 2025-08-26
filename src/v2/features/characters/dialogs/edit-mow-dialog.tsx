@@ -97,7 +97,7 @@ export const EditMowDialog: React.FC<Props> = ({
                         />
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                         <FormControlLabel
                             label="Unlocked"
                             control={
@@ -115,6 +115,15 @@ export const EditMowDialog: React.FC<Props> = ({
                             max={1000}
                             value={editedMow.shards}
                             valueChange={value => handleInputChange('shards', value)}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <NumberInput
+                            fullWidth
+                            label="Mythic Shards"
+                            max={1000}
+                            value={editedMow.mythicShards}
+                            valueChange={value => handleInputChange('mythicShards', value)}
                         />
                     </Grid>
 
