@@ -1,7 +1,7 @@
 ﻿import { defaultData, idToCampaign } from '@/models/constants';
 import { ICampaignsProgress, SetStateAction } from '@/models/interfaces';
 
-import { TacticusCampaignProgress } from '@/fsd/5-shared/lib';
+import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 
 import { mapTacticusCampaignToLocal, mapTacticusCampaignToUpdates } from '@/fsd/4-entities/campaign/campaign-mapper';
 

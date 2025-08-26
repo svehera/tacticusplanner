@@ -1,4 +1,4 @@
-import { TacticusCampaignProgress } from '@/fsd/5-shared/lib';
+import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 
 import { Campaign } from './enums';
 
