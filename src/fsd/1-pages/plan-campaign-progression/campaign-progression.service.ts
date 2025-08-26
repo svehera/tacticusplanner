@@ -58,7 +58,10 @@ export class CampaignsProgressionService {
             });
         }
         Object.entries(battleData).forEach(([battleId, battle]) => {
+            if (!(battleId in CampaignsService.campaignsComposed)) return;
+            // Early indomitus battles are sparse.
             CampaignsService.campaignsComposed[battleId].alliesFactions.forEach(faction => {
+                if (!battle.campaign) return; // Early indomitus doesn't have most of this info.
                 result.campaignFactions.get(battle.campaign)?.add(faction);
                 if (!result.factionCampaigns.get(faction)) {
                     result.factionCampaigns.set(faction, new Set<string>());

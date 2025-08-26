@@ -44,7 +44,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
     const { characters } = useContext(StoreContext);
 
     const getUnit = (unitId: string): ICharacter2 | undefined => {
-        return characters.find(x => x.id === unitId);
+        return characters.find(x => x.snowprintId! === unitId);
     };
     const getUnitStars = (unitId: string): RarityStars => {
         return getUnit(unitId)?.stars ?? 0;
