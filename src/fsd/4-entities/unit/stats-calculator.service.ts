@@ -124,6 +124,15 @@ export class StatsCalculatorService {
         );
     }
 
+    private static getRankCoefficient(rank: Rank): number {
+        const rankValue = StatsCalculatorService.getRankForComputation(rank);
+        const d3Value = StatsCalculatorService.getRankForComputation(Rank.Diamond3);
+        if (rank < Rank.Adamantine1) {
+            return Math.pow(1.25205, rankValue);
+        }
+        return Math.pow(1.25205, d3Value) * Math.pow(1.1091, rankValue - d3Value);
+    }
+
     /**
      * @param baseStat the value of the stat at common, no-stars, stone 1.
      * @param unitId the ID of the unit.
@@ -139,26 +148,10 @@ export class StatsCalculatorService {
         rank: Rank,
         numAppliedUpgrades: number
     ): number {
-        const preMythicRankValue: number = StatsCalculatorService.getRankForComputation(Math.min(Rank.Diamond3, rank));
-        const postMythicRankValue: number = StatsCalculatorService.getRankForComputation(
-            rank >= Rank.Adamantine1 ? rank - Rank.Adamantine1 : 0
+        return Math.floor(
+            baseStat * this.getRankCoefficient(rank) * (1 + 0.1 * (rarityStars as number)) +
+                baseStat * this.getRankCoefficient(rank - 1) * numAppliedUpgrades
         );
-        const rarityValue: number = rarityStars as number;
-        const upgradeBoost =
-            rank < Rank.Diamond3
-                ? (baseStat * Math.pow(1.25205, preMythicRankValue + 1) -
-                      baseStat * Math.pow(1.25205, preMythicRankValue)) /
-                  2.0
-                : (baseStat * Math.pow(1.1091, postMythicRankValue + 1) -
-                      baseStat * Math.pow(1.1091, postMythicRankValue)) /
-                  2.0;
-        const preMythicRankCoef = Math.pow(1.25205, preMythicRankValue);
-        const postMythicRankCoef = rank >= Rank.Adamantine1 ? Math.pow(1.1091, postMythicRankValue) : 0;
-        const result = Math.round(
-            upgradeBoost * numAppliedUpgrades +
-                baseStat * (preMythicRankCoef + postMythicRankCoef) * (1 + 0.1 * rarityValue)
-        );
-        return result;
     }
 
     /**
