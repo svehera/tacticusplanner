@@ -1,5 +1,7 @@
 ﻿import xpData from 'src/v2/data/xp.json';
 
+import { Rank } from '@/fsd/5-shared/model';
+
 import { IXpEstimate, IXpLevel } from 'src/v2/features/characters/characters.models';
 
 export class CharactersXpService {
@@ -8,7 +10,12 @@ export class CharactersXpService {
     static xpLevelThresholds: IXpLevel[] = xpData.xpLevelThresholds;
 
     static getLegendaryTomesCount(currLevel: number, currXp: number, targetLevel: number): IXpEstimate | null {
-        if (currLevel === 55 || targetLevel > 55 || targetLevel < 2 || currLevel === targetLevel) {
+        if (
+            currLevel === this.xpLevelThresholds.length ||
+            targetLevel > this.xpLevelThresholds.length ||
+            targetLevel < Rank.Stone2 ||
+            currLevel >= targetLevel
+        ) {
             return null;
         }
 
