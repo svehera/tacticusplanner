@@ -27,6 +27,7 @@ export const CharacterDetails = ({
         bias: character.bias,
         level: character.level,
         shards: character.shards,
+        mythicShards: character.mythicShards,
         xp: character.xp,
         activeAbilityLevel: character.activeAbilityLevel,
         passiveAbilityLevel: character.passiveAbilityLevel,
@@ -121,11 +122,13 @@ export const CharacterDetails = ({
             </Grid>
 
             <Grid container spacing={2} alignItems="center">
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                     {getNativeSelectControl(formData.rank, 'Rank', 'rank', rankEntries, rankToString, value => (
                         <RankIcon rank={value} />
                     ))}
                 </Grid>
+            </Grid>
+            <Grid container spacing={2} alignItems="center">
                 <Grid item xs={6}>
                     <FormControl variant={'outlined'} fullWidth>
                         <InputLabel>Shards</InputLabel>
@@ -142,6 +145,28 @@ export const CharacterDetails = ({
                                 step: 1,
                                 min: 0,
                                 max: 10000,
+                                type: 'number',
+                                'aria-labelledby': 'input-slider',
+                            }}
+                        />
+                    </FormControl>
+                </Grid>
+                <Grid item xs={6}>
+                    <FormControl variant={'outlined'} fullWidth>
+                        <InputLabel>Mythic Shards</InputLabel>
+                        <Input
+                            value={formData.mythicShards}
+                            onChange={event =>
+                                handleInputChange(
+                                    'mythicShards',
+                                    event.target.value === '' ? '' : (Number(event.target.value) as any),
+                                    Number(event.target.value)
+                                )
+                            }
+                            inputProps={{
+                                step: 1,
+                                min: 0,
+                                max: 500,
                                 type: 'number',
                                 'aria-labelledby': 'input-slider',
                             }}

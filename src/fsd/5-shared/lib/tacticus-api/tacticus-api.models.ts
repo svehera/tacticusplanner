@@ -72,6 +72,11 @@ export interface TacticusUnit {
      * Owned shards of the unit.
      */
     shards: number;
+
+    /**
+     * Owned mythic shards of the unit.
+     */
+    mythicShards: number;
 }
 
 export interface TacticusUpgrade {
