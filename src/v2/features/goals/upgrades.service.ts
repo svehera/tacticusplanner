@@ -257,6 +257,17 @@ export class UpgradesService {
         return resultDays;
     }
 
+    /**
+     * Computes and returns a list of unit upgrades based on the provided inventory and goal definitions.
+     *
+     * This method processes each goal, determines the required upgrade ranks, filters upgrades by rarity if specified,
+     * and aggregates related upgrades for each goal. The result is an array of unit upgrade objects, each containing
+     * details about the goal, the unit, the required upgrades, and related upgrades.
+     *
+     * @param inventoryUpgrades - A record mapping upgrade IDs to their quantities in the user's inventory.
+     * @param goals - An array of character upgrade rank or mow upgrade goals to process.
+     * @returns An array of `IUnitUpgrade` objects, each representing the upgrade requirements and related data for a goal.
+     */
     public static getUpgrades(
         inventoryUpgrades: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
