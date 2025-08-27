@@ -1,7 +1,5 @@
 ﻿import xpData from 'src/v2/data/xp.json';
 
-import { Rank } from '@/fsd/5-shared/model';
-
 import { IXpEstimate, IXpLevel } from 'src/v2/features/characters/characters.models';
 
 export class CharactersXpService {
@@ -13,7 +11,7 @@ export class CharactersXpService {
         if (
             currLevel === this.xpLevelThresholds.length ||
             targetLevel > this.xpLevelThresholds.length ||
-            targetLevel < Rank.Stone2 ||
+            targetLevel < 2 ||
             currLevel >= targetLevel
         ) {
             return null;
