@@ -166,7 +166,7 @@ export const CharacterDetails = ({
                             inputProps={{
                                 step: 1,
                                 min: 0,
-                                max: 10000,
+                                max: 500,
                                 type: 'number',
                                 'aria-labelledby': 'input-slider',
                             }}
