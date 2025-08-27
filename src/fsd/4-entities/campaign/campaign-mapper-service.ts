@@ -1,5 +1,6 @@
-import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
+import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/';
 
+import { battleData } from './data';
 import { Campaign } from './enums';
 
 export type CampaignProgressSplit = {
@@ -10,6 +11,19 @@ export type CampaignProgressSplit = {
 };
 
 export class CampaignMapperService {
+    /**
+     * Derive challenge node indices for a given base campaign name by scanning battleData.
+     * Challenge nodes are encoded with keys ending in "B" while keeping the base campaign name.
+     */
+    private static getChallengeIndicesForBaseCampaign(baseCampaignName: string): Set<number> {
+        const indices = new Set<number>();
+        for (const [key, battle] of Object.entries(battleData)) {
+            if (battle.campaign === baseCampaignName && key.endsWith('B')) {
+                indices.add(battle.nodeNumber);
+            }
+        }
+        return indices;
+    }
     /**
      * Map a Tacticus API campaign progress entry to a local Campaign key.
      * - For event campaigns, prefer name + type (Standard/Extremis) rather than id.
@@ -25,7 +39,7 @@ export class CampaignMapperService {
 
         if (isEventId) {
             // Adeptus Mechanicus
-            if (id==='eventcampaign1') {
+            if (id === 'eventcampaign1') {
                 if (isStandard) {
                     return Campaign.AMS;
                 }
@@ -36,7 +50,7 @@ export class CampaignMapperService {
             }
 
             // Tyranids
-            if (id==='eventcampaign2') {
+            if (id === 'eventcampaign2') {
                 if (isStandard) {
                     return Campaign.TS;
                 }
@@ -47,7 +61,7 @@ export class CampaignMapperService {
             }
 
             // T'au Empire
-            if (id==='eventcampaign3') {
+            if (id === 'eventcampaign3') {
                 if (isStandard) {
                     return Campaign.TAS;
                 }
@@ -82,15 +96,10 @@ export class CampaignMapperService {
             return undefined;
         }
 
-        const challengeIndices = new Set([3, 13, 25]);
-        const challengeBattles = c.battles.filter(b => challengeIndices.has(b.battleIndex)).length;
-        const baseBattles = c.battles.length - challengeBattles;
-
         const result: CampaignProgressSplit = {};
 
         // Adeptus Mechanicus
-        if (id === 'eventcampaign1')
-        {
+        if (id === 'eventcampaign1') {
             if (isStandard) {
                 result.baseKey = Campaign.AMS;
                 result.challengeKey = Campaign.AMSC;
@@ -101,8 +110,7 @@ export class CampaignMapperService {
         }
 
         // Tyranids
-        else if ( id === 'eventcampaign2') 
-        {
+        else if (id === 'eventcampaign2') {
             if (isStandard) {
                 result.baseKey = Campaign.TS;
                 result.challengeKey = Campaign.TSC;
@@ -127,10 +135,14 @@ export class CampaignMapperService {
             return undefined;
         }
 
+        // Derive challenge indices from battleData for the identified base campaign
+        const baseCampaignName = String(result.baseKey);
+        const challengeIndices = this.getChallengeIndicesForBaseCampaign(baseCampaignName);
+        const challengeBattles = c.battles.filter(b => challengeIndices.has(b.battleIndex)).length;
+        const baseBattles = c.battles.length - challengeBattles;
+
         result.baseBattles = baseBattles;
         result.challengeBattles = challengeBattles;
         return result;
     }
 }
-
-
