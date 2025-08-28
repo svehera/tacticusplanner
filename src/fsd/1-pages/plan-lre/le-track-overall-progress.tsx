@@ -48,7 +48,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
         const completedBattles = track.battles
             .map(battle => battle.requirementsProgress.filter(req => req.completed).length)
             .reduce((a, b) => a + b, 0);
-        const state = completedBattles === 8 * 14 ? ProgressState.none : ProgressState.completed;
+        const state = completedBattles === 8 * track.battles.length ? ProgressState.none : ProgressState.completed;
 
         track.battles.forEach(battle => {
             battle.requirementsProgress.forEach(req => {

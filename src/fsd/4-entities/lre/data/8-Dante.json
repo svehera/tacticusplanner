@@ -348,6 +348,16 @@
             "milestone": 58,
             "cumulativePoints": 21000,
             "engramPayout": 590
+        },
+        {
+            "milestone": 59,
+            "cumulativePoints": 21250,
+            "engramPayout": 600
+        },
+        {
+            "milestone": 56,
+            "cumulativePoints": 21500,
+            "engramPayout": 605
         }
     ],
     "chestsMilestones": [
@@ -526,15 +536,57 @@
         {
             "chestLevel": 44,
             "engramCost": 1500
+        },
+        {
+            "chestLevel": 45,
+            "engramCost": 400
+        },
+        {
+            "chestLevel": 46,
+            "engramCost": 400
+        },
+        {
+            "chestLevel": 47,
+            "engramCost": 800
+        },
+        {
+            "chestLevel": 48,
+            "engramCost": 900
+        },
+        {
+            "chestLevel": 49,
+            "engramCost": 1000
+        },
+        {
+            "chestLevel": 50,
+            "engramCost": 1100
+        },
+        {
+            "chestLevel": 51,
+            "engramCost": 1200
+        },
+        {
+            "chestLevel": 52,
+            "engramCost": 1300
+        },
+        {
+            "chestLevel": 53,
+            "engramCost": 1400
+        },
+        {
+            "chestLevel": 54,
+            "engramCost": 1500
         }
     ],
     "shardsPerChest": 25,
-    "battlesCount": 14,
+    "battlesCount": 18,
     "constraintsCount": 7,
     "progression": {
         "unlock": 400,
         "fourStars": 120,
         "fiveStars": 180,
-        "blueStar": 200
+        "blueStar": 200,
+        "mythic": 250,
+        "twoBlueStars": 150
     }
 }

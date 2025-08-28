@@ -6,12 +6,18 @@ import { StoreContext } from '@/reducers/store.provider';
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { LreTrackId, LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
-import { ILegendaryEventSelectedRequirements, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
+import {
+    ILegendaryEvent,
+    ILegendaryEventSelectedRequirements,
+    ILegendaryEventTrack,
+    ILreTeam,
+} from '@/fsd/3-features/lre';
 
 import { LreTeamsCard } from './lre-teams-card';
 import { LreTeamsTable } from './lre-teams-table';
 
 interface Props {
+    legendaryEvent: ILegendaryEvent;
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
     autoAddTeam: (section: LreTrackId, requirements: string[], characters: ICharacter2[]) => void;
@@ -22,6 +28,7 @@ interface Props {
 }
 
 export const LegendaryEventTrack: React.FC<Props> = ({
+    legendaryEvent,
     track,
     startAddTeam,
     progress,
@@ -34,7 +41,7 @@ export const LegendaryEventTrack: React.FC<Props> = ({
 
     if (viewPreferences.hideCompleted) {
         track.unitsRestrictions.forEach(restriction => {
-            restriction.hide = progress[restriction.name] === 14;
+            restriction.hide = progress[restriction.name] === legendaryEvent.battlesCount;
         });
     }
 
@@ -64,6 +71,7 @@ export const LegendaryEventTrack: React.FC<Props> = ({
     return viewPreferences.lreGridView ? (
         <div style={{ flex: 1 }}>
             <LreTeamsCard
+                legendaryEvent={legendaryEvent}
                 track={track}
                 teams={selectedTeams}
                 startAddTeam={startAddTeam}
@@ -76,6 +84,7 @@ export const LegendaryEventTrack: React.FC<Props> = ({
     ) : (
         <div style={{ width: '100%', height: '100%', overflow: 'auto' }}>
             <LreTeamsTable
+                legendaryEvent={legendaryEvent}
                 track={track}
                 teams={selectedTeams}
                 autoAddTeam={autoAddTeam}
