@@ -158,7 +158,8 @@ export const Goals = () => {
                 }).length;
 
                 if (goal.type === PersonalGoalType.UpgradeRank) {
-                    const targetRank = ((goal.rankEnd ?? 1) - 1) as Rank;
+                    const rankEnd = goal.rankEnd ?? Rank.Stone1;
+                    const targetRank = (rankEnd - 1) as Rank;
                     const targetLevel = rankToLevel[targetRank];
                     const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
 
