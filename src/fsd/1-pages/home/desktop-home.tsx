@@ -29,6 +29,7 @@ export const DesktopHome = () => {
     const { userInfo } = useAuth();
     const { goals, dailyRaids } = useContext(StoreContext);
     const nextLeMenuItem = LegendaryEventService.getActiveEvent();
+    const nextLeUnit = CharactersService.charactersData.find(x => x.snowprintId === nextLeMenuItem.unitSnowprintId);
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
@@ -162,15 +163,8 @@ export const DesktopHome = () => {
                         <CardHeader
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <UnitShardIcon
-                                        icon={
-                                            CharactersService.charactersData.find(
-                                                x => x.snowprintId === LegendaryEventService.getActiveLreUnitId()
-                                            )?.roundIcon ?? ''
-                                        }
-                                        height={50}
-                                        width={50}
-                                    />{' '}
+                                    <UnitShardIcon icon={nextLeUnit?.roundIcon ?? ''} height={50} width={50} />
+                                    {nextLeUnit?.shortName}
                                 </div>
                             }
                             subheader={formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}

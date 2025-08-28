@@ -39,7 +39,8 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
         const teamCharacters = team.lineup.map(id => {
             return characters.find(character => NewCharService.matchesAnyCharacterId(id, character));
         });
-        const teamMow = mows.find(x => x.snowprintId === team.mowId);
+        const teamMowId = typeof team.mowId === 'string' ? team.mowId : undefined;
+        const teamMow = teamMowId ? mows.find(x => [x.snowprintId, x.id].includes(teamMowId)) : undefined;
         const withMow = !!teamMow;
         const subModes = team.subModes.map(value => allModes.find(x => x.value === value)?.label ?? '').join(', ');
 
