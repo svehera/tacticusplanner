@@ -29,7 +29,7 @@ export const rankToLevel: Record<Rank, number> = {
     [Rank.Gold2]: 38,
     [Rank.Gold3]: 41,
     [Rank.Diamond1]: 44,
-    [Rank.Diamond2]: 57,
+    [Rank.Diamond2]: 47,
     [Rank.Diamond3]: 50,
     [Rank.Adamantine1]: 55,
 };
