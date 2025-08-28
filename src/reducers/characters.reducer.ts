@@ -102,7 +102,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     ),
                     level: Math.max(
                         updatedLevel,
-                        rankToLevel[(existingChar.rank - 1) as Rank],
+                        rankToLevel[existingChar.rank as Rank],
                         updatedCharacter.activeAbilityLevel,
                         updatedCharacter.passiveAbilityLevel
                     ),

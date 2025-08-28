@@ -71,4 +71,8 @@ export interface ILreRequirements {
     pointsPerBattle: number;
     totalPoints: number;
     completed: boolean;
+
+    // The total number of battles in each track. Pre-mythic, this was always
+    // 14. Now, it can be 18. So don't want to hardcode it.
+    totalBattles?: number;
 }
