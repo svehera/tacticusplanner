@@ -44,7 +44,7 @@ export interface ILreTrackProgress {
     battlesPoints: number[];
     requirements: ILreRequirements[];
 
-    /** The battles in this track. In reverse order, e.g. battle 14 is the first. */
+    /** The battles in this track. In reverse order, e.g. battle 0 is the hardest and final battle. */
     battles: ILreBattleProgress[];
 }
 
@@ -71,4 +71,8 @@ export interface ILreRequirements {
     pointsPerBattle: number;
     totalPoints: number;
     completed: boolean;
+
+    // The total number of battles in each track. Pre-mythic, this was always
+    // 14. Now, it can be 18. So don't want to hardcode it.
+    totalBattles?: number;
 }

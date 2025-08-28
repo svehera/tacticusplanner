@@ -87,7 +87,7 @@ export class GlobalState implements IGlobalState {
                 return CharactersService.canonicalName(c.name!) === staticData.snowprintId!;
             });
             const rank = personalCharData?.rank ?? Rank.Locked;
-            const rankLevel = rankToLevel[(rank - 1) as Rank];
+            const rankLevel = rankToLevel[rank as Rank];
             const rankRarity = rankToRarity[rank];
             const rarity = Math.max(personalCharData?.rarity ?? staticData.initialRarity, rankRarity) as Rarity;
             const stars = Math.max(personalCharData?.stars ?? 0, RarityMapper.toStars[rarity]);
