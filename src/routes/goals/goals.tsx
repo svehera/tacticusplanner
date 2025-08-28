@@ -158,16 +158,6 @@ export const Goals = () => {
                 }).length;
 
                 if (goal.type === PersonalGoalType.UpgradeRank) {
-                    if (goal.unitId === 'necroSpyder') {
-                        console.log(goal);
-                        console.log('rankToLevel[Bronze1]:', rankToLevel[Rank.Bronze1]);
-                        console.log('rankToLevel[Silver1]:', rankToLevel[Rank.Silver1]);
-                        console.log('rankToLevel[Gold1]:', rankToLevel[Rank.Gold1]);
-                        console.log('rankToLevel[Diamond1]:', rankToLevel[Rank.Diamond1]);
-                        console.log('rankToLevel[Diamond3]:', rankToLevel[Rank.Diamond3]);
-                        console.log('rankToLevel[Adamantine1]:', rankToLevel[Rank.Adamantine1]);
-                        console.log('rankToLevel[', Rank[goal.rankEnd], ']:', rankToLevel[goal.rankEnd]);
-                    }
                     const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
                     const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
 
