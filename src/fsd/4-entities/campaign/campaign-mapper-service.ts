@@ -33,7 +33,6 @@ export class CampaignMapperService {
         });
         return indices;
     }
-    // mapTacticusCampaignToLocal removed; reducer falls back to idToCampaign for legacy campaigns
 
     /**
      * Split an event campaign into base and challenge progress updates (without mutating the input).
