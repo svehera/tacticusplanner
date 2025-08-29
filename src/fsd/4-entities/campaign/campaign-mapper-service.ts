@@ -8,9 +8,9 @@ import { Campaign } from './enums';
 // Split of base vs challenge progress for an event campaign
 export type CampaignProgressSplit = {
     baseCampaignEventId?: Campaign;
-    baseBattles?: number;
+    baseBattleCount?: number;
     challengeCampaignEventId?: Campaign;
-    challengeBattles?: number;
+    challengeBattleCount?: number;
 };
 
 export class CampaignMapperService {
@@ -142,8 +142,8 @@ export class CampaignMapperService {
             .filter(b => !challengeIndices.includes(b.battleIndex))
             .map(b => b.battleIndex);
 
-        result.baseBattles = completedBaseIndices.length;
-        result.challengeBattles = completedChallengeIndices.length;
+        result.baseBattleCount = completedBaseIndices.length;
+        result.challengeBattleCount = completedChallengeIndices.length;
         return result;
     }
 }
