@@ -8,9 +8,9 @@ import { Campaign } from './enums';
 // Split of base vs challenge progress for an event campaign
 export type CampaignProgressSplit = {
     baseCampaignEventId?: Campaign;
-    baseBattles?: number;
+    baseBattleCount?: number;
     challengeCampaignEventId?: Campaign;
-    challengeBattles?: number;
+    challengeBattleCount?: number;
 };
 
 export class CampaignMapperService {
@@ -33,58 +33,7 @@ export class CampaignMapperService {
         });
         return indices;
     }
-    /**
-     * Map a Tacticus API campaign progress entry to a local Campaign key.
-     * - legacy/non-event campaigns this will return undefined and the reducer will fall back to the existing idToCampaign map.
-     */
-    static mapTacticusCampaignToLocal(c: TacticusCampaignProgress): Campaign | undefined {
-        const id = (c.id || '').toLowerCase();
-        const type = (c.type || '').toLowerCase();
-
-        const isEventId = id.startsWith('eventcampaign');
-        const isStandard = type.includes('standard');
-        const isExtremis = type.includes('extremis');
-
-        if (!isEventId) {
-            return undefined;
-        }
-
-        // Adeptus Mechanicus
-        if (id === 'eventcampaign1') {
-            if (isStandard) {
-                return Campaign.AMS;
-            }
-            if (isExtremis) {
-                return Campaign.AME;
-            }
-            return undefined;
-        }
-
-        // Tyranids
-        if (id === 'eventcampaign2') {
-            if (isStandard) {
-                return Campaign.TS;
-            }
-            if (isExtremis) {
-                return Campaign.TE;
-            }
-            return undefined;
-        }
-
-        // T'au Empire
-        if (id === 'eventcampaign3') {
-            if (isStandard) {
-                return Campaign.TAS;
-            }
-            if (isExtremis) {
-                return Campaign.TAE;
-            }
-            return undefined;
-        }
-
-        // Non-event campaigns are handled by reducer fallback
-        return undefined;
-    }
+    // mapTacticusCampaignToLocal removed; reducer falls back to idToCampaign for legacy campaigns
 
     /**
      * Split an event campaign into base and challenge progress updates (without mutating the input).
@@ -92,7 +41,7 @@ export class CampaignMapperService {
      * - Challenge: only challenge indices
      * * - legacy/non-event campaigns this will return undefined and the reducer will fall back to the existing idToCampaign map.
      */
-    static mapTacticusCampaignToUpdates(c: TacticusCampaignProgress): CampaignProgressSplit | undefined {
+    static mapTacticusCampaignToCampaignEvent(c: TacticusCampaignProgress): CampaignProgressSplit | undefined {
         const id = (c.id || '').toLowerCase();
         const type = (c.type || '').toLowerCase();
 
@@ -142,8 +91,8 @@ export class CampaignMapperService {
             .filter(b => !challengeIndices.includes(b.battleIndex))
             .map(b => b.battleIndex);
 
-        result.baseBattles = completedBaseIndices.length;
-        result.challengeBattles = completedChallengeIndices.length;
+        result.baseBattleCount = completedBaseIndices.length;
+        result.challengeBattleCount = completedChallengeIndices.length;
         return result;
     }
 }
