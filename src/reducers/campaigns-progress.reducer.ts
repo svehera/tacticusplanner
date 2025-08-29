@@ -33,12 +33,12 @@ export const campaignsProgressReducer = (
             for (const campaign of action.campaigns) {
                 // First, try event campaign split (base + challenge)
                 const updates = CampaignMapperService.mapTacticusCampaignToUpdates(campaign);
-                if (updates && (updates.baseKey || updates.challengeKey)) {
-                    if (updates.baseKey !== undefined && updates.baseBattles !== undefined) {
-                        result[updates.baseKey] = updates.baseBattles;
+                if (updates && (updates.baseCampaignEventId || updates.challengeCampaignEventId)) {
+                    if (updates.baseCampaignEventId !== undefined && updates.baseBattles !== undefined) {
+                        result[updates.baseCampaignEventId] = updates.baseBattles;
                     }
-                    if (updates.challengeKey !== undefined && updates.challengeBattles !== undefined) {
-                        result[updates.challengeKey] = updates.challengeBattles;
+                    if (updates.challengeCampaignEventId !== undefined && updates.challengeBattles !== undefined) {
+                        result[updates.challengeCampaignEventId] = updates.challengeBattles;
                     }
                     continue;
                 }
