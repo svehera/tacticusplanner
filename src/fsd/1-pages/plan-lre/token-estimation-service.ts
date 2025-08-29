@@ -215,7 +215,7 @@ export class TokenEstimationService {
             console.error('Cannot mark restrictions as cleared, token is invalid: ' + token.toString());
             return;
         }
-        const battle = track.battles[13 - token.battleNumber];
+        const battle = track.battles[track.battles.length - 1 - token.battleNumber];
         if (battle.completed) {
             console.error('Cannot mark restrictions as cleared, battle is already completed: ' + battle.battleIndex);
             return;
@@ -252,7 +252,7 @@ export class TokenEstimationService {
      */
     public static computeLowestAvailableBattle(track: ILreTrackProgress): number {
         for (let i = 0; i < track.battles.length; ++i) {
-            if (!track.battles[13 - i].completed) return i;
+            if (!track.battles[track.battles.length - 1 - i].completed) return i;
         }
         return -1;
     }
@@ -269,7 +269,9 @@ export class TokenEstimationService {
 
         // Find the first battle where we don't have the kill points requirement completed.
         for (let i = 0; i < track.battles.length; ++i) {
-            const req = track.battles[13 - i].requirementsProgress.find(req => req.id === killPointsId);
+            const req = track.battles[track.battles.length - 1 - i].requirementsProgress.find(
+                req => req.id === killPointsId
+            );
             if (req === undefined) {
                 console.error("couldn't find a kill-points requirement");
                 return -1;
@@ -280,7 +282,7 @@ export class TokenEstimationService {
         // We can play every battle, but we haven't completed every battle.
         // Work backwards to find the first battle we have not completed.
         for (let i = track.battles.length - 1; i >= 0; --i) {
-            if (!track.battles[13 - i].completed) return i;
+            if (!track.battles[track.battles.length - 1 - i].completed) return i;
         }
         return -1;
     }
@@ -300,7 +302,7 @@ export class TokenEstimationService {
         const nextToken: TokenUse = new TokenUse();
         if (lowestBattle == -1 || highestBattle == -1) return undefined;
         for (let battleNumber = lowestBattle; battleNumber <= highestBattle; ++battleNumber) {
-            const battle = track.battles[13 - battleNumber];
+            const battle = track.battles[track.battles.length - 1 - battleNumber];
             if (battle.completed) continue;
             teams.forEach(team => {
                 const restrictionsCleared: ILreRequirements[] = this.computeIncrementalRestrictionsCleared(
@@ -331,7 +333,7 @@ export class TokenEstimationService {
         team: ILreTeam
     ): ILreRequirements[] {
         if (battle.completed) return [];
-        if ((team.expectedBattleClears ?? 13) <= battle.battleIndex) {
+        if ((team.expectedBattleClears ?? 1) <= battle.battleIndex) {
             return [];
         }
         const clearedRestrictions: ILreRequirements[] = [];

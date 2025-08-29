@@ -214,6 +214,7 @@ export class CharactersService {
         return (
             id === character.snowprintId ||
             lowered === character.id.toLowerCase() ||
+            lowered === character.name.toLowerCase() ||
             lowered === character.shortName.toLowerCase() ||
             lowered === character.fullName.toLowerCase()
         );

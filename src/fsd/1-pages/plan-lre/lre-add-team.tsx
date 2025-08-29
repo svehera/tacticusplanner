@@ -47,7 +47,7 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
             selected: false,
         },
     ];
-    const [expectedBattleClears, setExpectedBattleClears] = useState<number>(14);
+    const [expectedBattleClears, setExpectedBattleClears] = useState<number>(1);
     const [teamName, setTeamName] = useState<string>(preselectedTrackId);
     const [trackId, setTrackId] = useState<LreTrackId>(preselectedTrackId);
     const [restrictions, setRestrictions] = useState<string[]>(preselectedRequirements);
@@ -141,7 +141,7 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                                 setExpectedBattleClears(value);
                             }
                         }}
-                        inputProps={{ min: 1, max: 14 }}
+                        inputProps={{ min: 1, max: lre.battlesCount }}
                     />
                 </div>
                 <div className="flex-box wrap" style={{ paddingTop: '10px' }}>

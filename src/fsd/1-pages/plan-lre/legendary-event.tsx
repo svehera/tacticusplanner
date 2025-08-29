@@ -126,6 +126,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
             <div style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, marginBottom: 10 }}>
                 {viewPreferences.showAlpha && (
                     <LegendaryEventTrack
+                        legendaryEvent={legendaryEvent}
                         track={legendaryEvent.alpha}
                         startAddTeam={startAddTeam}
                         editTeam={setEditTeam}
@@ -139,6 +140,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                 )}
                 {viewPreferences.showBeta && (
                     <LegendaryEventTrack
+                        legendaryEvent={legendaryEvent}
                         track={legendaryEvent.beta}
                         startAddTeam={startAddTeam}
                         editTeam={setEditTeam}
@@ -152,6 +154,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                 )}
                 {viewPreferences.showGamma && (
                     <LegendaryEventTrack
+                        legendaryEvent={legendaryEvent}
                         track={legendaryEvent.gamma}
                         startAddTeam={startAddTeam}
                         editTeam={setEditTeam}

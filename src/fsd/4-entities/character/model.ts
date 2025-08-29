@@ -2,7 +2,6 @@ import {
     Alliance,
     DamageType,
     DynamicProps,
-    Equipment,
     Faction,
     Rank,
     Rarity,
@@ -28,6 +27,7 @@ export interface IPersonalCharacterData2 {
     activeAbilityLevel: number;
     passiveAbilityLevel: number;
     shards: number;
+    mythicShards: number;
 }
 
 export interface IDamageTypes {

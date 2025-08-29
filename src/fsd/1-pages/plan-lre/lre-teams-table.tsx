@@ -21,7 +21,7 @@ import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
-import { ILegendaryEventTrack, ILegendaryEventTrackRequirement, ILreTeam } from '@/fsd/3-features/lre';
+import { ILegendaryEvent, ILegendaryEventTrack, ILegendaryEventTrackRequirement, ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
 import { ITableRow } from './lre.models';
@@ -29,6 +29,7 @@ import { SelectedTeamsTable } from './selected-teams-table';
 import { TrackRequirementCheck } from './track-requirement-check';
 
 interface Props {
+    legendaryEvent: ILegendaryEvent;
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
     startAddTeam: (section: LreTrackId, requirements: string[]) => void;
@@ -39,6 +40,7 @@ interface Props {
 }
 
 export const LreTeamsTable: React.FC<Props> = ({
+    legendaryEvent,
     track,
     startAddTeam,
     progress,
@@ -160,7 +162,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                 onCheckboxChange: (selected: boolean) => handleChange(selected, u.name),
                 checked: selectedRequirements.includes(u.name),
                 restriction: u,
-                progress: `${progress[u.name]}/14`,
+                progress: `${progress[u.name]}/${legendaryEvent.battlesCount}`,
             },
         }));
 

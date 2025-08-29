@@ -58,6 +58,7 @@ export interface IMowDb {
     primaryAbilityLevel: number;
     secondaryAbilityLevel: number;
     shards: number;
+    mythicShards: number;
 }
 
 export interface IMow extends IMowStatic, IMowDb, DynamicProps {
