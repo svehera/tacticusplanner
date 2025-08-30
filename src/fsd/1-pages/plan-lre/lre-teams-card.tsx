@@ -8,13 +8,14 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
-import { ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
+import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
 import { SelectedTeamCard } from './selected-teams-card';
 import { TrackRequirementCheck } from './track-requirement-check';
 
 interface Props {
+    legendaryEvent: ILegendaryEvent;
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
     startAddTeam: (section: LreTrackId, requirements: string[]) => void;
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export const LreTeamsCard: React.FC<Props> = ({
+    legendaryEvent,
     track,
     progress,
     startAddTeam,
@@ -99,7 +101,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                                 checked={restrictions.includes(restriction.name)}
                                 restriction={restriction}
                                 onCheckboxChange={value => handleChange(value, restriction.name)}
-                                progress={`${progress[restriction.name]}/14`}
+                                progress={`${progress[restriction.name]}/${legendaryEvent.battlesCount}`}
                             />
                         ))}
                 </div>
