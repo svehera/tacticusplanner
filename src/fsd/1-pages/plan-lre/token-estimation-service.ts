@@ -125,7 +125,6 @@ export class TokenEstimationService {
         const highestAvailableBattles: number[] = tracksProgress.map(track =>
             this.computeHighestAvailableBattle(track)
         );
-        console.error('lowest avail: ', lowestAvailableBattles, ' highest avail: ', highestAvailableBattles);
         const nextBestTokens: TokenUse[] = [];
         for (let i = 0; i < tracksProgress.length; i++) {
             const token = this.computeNextBestTokenInTrack(
@@ -134,7 +133,6 @@ export class TokenEstimationService {
                 lowestAvailableBattles[i],
                 highestAvailableBattles[i]
             );
-            console.error('track ', tracksProgress[i].trackId, ' has potential token ', token);
             if (token !== undefined) nextBestTokens.push(token);
         }
         if (nextBestTokens.length === 0) {
@@ -196,18 +194,15 @@ export class TokenEstimationService {
      */
     static markRestrictionsAsCleared(token: TokenUse, track: ILreTrackProgress): void {
         if (token.team === undefined || token.battleNumber < 0) {
-            console.error('Cannot mark restrictions as cleared, token is invalid: ' + token.toString());
             return;
         }
         const battle = track.battles[track.battles.length - 1 - token.battleNumber];
         if (battle.completed) {
-            console.error('Cannot mark restrictions as cleared, battle is already completed: ' + battle.battleIndex);
             return;
         }
         for (const restriction of token.restrictionsCleared) {
             const requirement = battle.requirementsProgress.find(req => req.id === restriction.id);
             if (requirement === undefined) {
-                console.error('Could not find requirement with id ' + restriction + ' in battle ' + battle.battleIndex);
                 continue;
             }
             requirement.completed = true;
@@ -287,7 +282,6 @@ export class TokenEstimationService {
         if (lowestBattle == -1 || highestBattle == -1) return undefined;
         for (let battleNumber = lowestBattle; battleNumber <= highestBattle; ++battleNumber) {
             const battle = track.battles[track.battles.length - 1 - battleNumber];
-            console.error('in the ', track.trackId, ' track, considering battle ', battle);
             if (battle.completed) continue;
             teams.forEach(team => {
                 const restrictionsCleared: ILreRequirements[] = this.computeIncrementalRestrictionsCleared(
@@ -298,7 +292,6 @@ export class TokenEstimationService {
                     battle,
                     restrictionsCleared
                 );
-                console.error('team ', team, ' restrictionsCleared ', restrictionsCleared, ' points ', points);
                 if (points > 0 && points > nextToken.incrementalPoints) {
                     nextToken.incrementalPoints = points;
                     nextToken.team = team;
@@ -323,12 +316,6 @@ export class TokenEstimationService {
         const completionRequirementIds = ['_killPoints', '_highScore', '_defeatAll'];
         for (const requirement of battle.requirementsProgress) {
             if (requirement.completed) continue;
-            console.error(
-                'computing incremental restrictions cleared with requirement',
-                requirement.id,
-                'and team restricts ',
-                team.restrictionsIds
-            );
             if (team.restrictionsIds.includes(requirement.id) || completionRequirementIds.includes(requirement.id)) {
                 clearedRestrictions.push({
                     id: requirement.id,
@@ -340,7 +327,6 @@ export class TokenEstimationService {
                 });
             }
         }
-        console.error('cleared restrictions are ', clearedRestrictions);
         return clearedRestrictions;
     }
 
@@ -372,6 +358,7 @@ export class TokenEstimationService {
     public static computeMinimumTokensToClearBattle(teams: ILreTeam[]): number | undefined {
         if (teams.length === 0) return undefined;
         const restrictions = this.computeRestrictions(teams);
+        // TODO: we're hardcoding five restrictions per battle, we should instead read this from the event.
         if (restrictions.length < 5) return undefined;
         let minimum: number = 6;
         const foundRestrictions: string[] = [];

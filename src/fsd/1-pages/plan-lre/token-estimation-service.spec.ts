@@ -2,15 +2,9 @@ import { describe, it, expect } from 'vitest';
 
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
-import { ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
+import { ILreTeam } from '@/fsd/3-features/lre';
 
-import type {
-    ILreTrackProgress,
-    ILreTeam,
-    ILreRequirements,
-    ILreBattleProgress,
-    ILreBattleRequirementsProgress,
-} from './lre.models';
+import { ILreTrackProgress, ILreRequirements, ILreBattleProgress, ILreBattleRequirementsProgress } from './lre.models';
 import { TokenEstimationService, TokenUse, milestonesAndPoints } from './token-estimation-service';
 
 function createRequirementsProgress(reqs: ILreRequirements[]): ILreBattleRequirementsProgress[] {
@@ -53,13 +47,6 @@ function createTrack(id: LreTrackId, numBattles: number, reqs: ILreRequirements[
         requirements: reqs,
         battles: Array.from({ length: numBattles }, (_, index) => createBattleProgress(numBattles - index - 1, reqs)),
     };
-}
-
-function recomputeTrack(track: ILreTrackProgress): ILreTrackProgress {
-    // Recompute the total points and battles points for the track
-    track.totalPoints = track.battles.reduce((acc, battle) => acc + battle.totalPoints, 0);
-    track.battlesPoints = track.battles.map(battle => battle.totalPoints);
-    return track;
 }
 
 // '_killPoints', '_highScore', '_defeatAll']
@@ -698,34 +685,228 @@ describe('TokenEstimationService', () => {
                 return total;
             }
 
-            const points1 = computePoints(track1);
-            const points2 = computePoints(track2);
-            const points3 = computePoints(track3);
+            const points1 = TokenEstimationService.computeCurrentPoints(track1);
+            const points2 = TokenEstimationService.computeCurrentPoints(track2);
+            const points3 = TokenEstimationService.computeCurrentPoints(track3);
 
             // Track 1: nothing cleared, so 0
             expect(points1).toBe(0);
-
-            // All modifications above, now do the expects at the end
-            expect(points1).toBe(0);
             expect(points2).toBe(500 + 100);
-            // Track 3: all battles fully cleared, so both count (2*500)
             expect(points3).toBe(1000);
         });
 
-        it('should return 0 if no requirements are completed', () => {});
+        it('should return 0 if no requirements are completed', () => {
+            // Create requirements for three tracks, each with 3 default + 5 other restrictions
+            const reqsAlpha = [
+                createRequirement('_killPoints', 40),
+                createRequirement('_highScore', 40),
+                createRequirement('_defeatAll', 60),
+                createRequirement('AlphaA', 50),
+                createRequirement('AlphaB', 55),
+                createRequirement('AlphaC', 60),
+                createRequirement('AlphaD', 65),
+                createRequirement('AlphaE', 70),
+            ];
+            const reqsBeta = [
+                createRequirement('_killPoints', 41),
+                createRequirement('_highScore', 41),
+                createRequirement('_defeatAll', 61),
+                createRequirement('BetaA', 51),
+                createRequirement('BetaB', 56),
+                createRequirement('BetaC', 61),
+                createRequirement('BetaD', 66),
+                createRequirement('BetaE', 71),
+            ];
+            const reqsGamma = [
+                createRequirement('_killPoints', 42),
+                createRequirement('_highScore', 42),
+                createRequirement('_defeatAll', 62),
+                createRequirement('GammaA', 52),
+                createRequirement('GammaB', 57),
+                createRequirement('GammaC', 62),
+                createRequirement('GammaD', 67),
+                createRequirement('GammaE', 72),
+            ];
+
+            const alphaTrack = createTrack('alpha', 3, reqsAlpha);
+            const betaTrack = createTrack('beta', 3, reqsBeta);
+            const gammaTrack = createTrack('gamma', 3, reqsGamma);
+
+            // No requirements are completed in any battle
+            alphaTrack.battles.forEach(battle => {
+                battle.requirementsProgress.forEach(req => (req.completed = false));
+                battle.completed = false;
+            });
+            betaTrack.battles.forEach(battle => {
+                battle.requirementsProgress.forEach(req => (req.completed = false));
+                battle.completed = false;
+            });
+            gammaTrack.battles.forEach(battle => {
+                battle.requirementsProgress.forEach(req => (req.completed = false));
+                battle.completed = false;
+            });
+
+            expect(TokenEstimationService.computeCurrentPoints(alphaTrack)).toBe(0);
+            expect(TokenEstimationService.computeCurrentPoints(betaTrack)).toBe(0);
+            expect(TokenEstimationService.computeCurrentPoints(gammaTrack)).toBe(0);
+        });
     });
 
     describe('computeMinimumTokensToClearBattle', () => {
-        it('return undefined if not all restrictions can be cleared', () => {});
+        it('returns undefined if not all restrictions can be cleared in a battle', () => {
+            expect(
+                TokenEstimationService.computeMinimumTokensToClearBattle([
+                    {
+                        id: 'team4',
+                        name: 'Team 4',
+                        section: 'alpha',
+                        restrictionsIds: ['SpecialA', 'SpecialB', 'SpecialC', 'SpecialD'],
+                        charSnowprintIds: ['char10', 'char11', 'char12'],
+                        expectedBattleClears: 3,
+                    },
+                ] as ILreTeam[])
+            ).toBeUndefined();
+        });
 
-        it('returns 5 if all teams each clear one restriction', () => {});
+        it('returns 5 if all teams each clear one restriction', () => {
+            expect(
+                TokenEstimationService.computeMinimumTokensToClearBattle([
+                    {
+                        id: 'team1',
+                        name: 'Team 1',
+                        section: 'alpha',
+                        restrictionsIds: ['Flame'],
+                        charSnowprintIds: ['char1'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team2',
+                        name: 'Team 2',
+                        section: 'alpha',
+                        restrictionsIds: ['Physical'],
+                        charSnowprintIds: ['char2'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team3',
+                        name: 'Team 3',
+                        section: 'alpha',
+                        restrictionsIds: ['Psychic'],
+                        charSnowprintIds: ['char3'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team4',
+                        name: 'Team 4',
+                        section: 'alpha',
+                        restrictionsIds: ['Bolter'],
+                        charSnowprintIds: ['char4'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team5',
+                        name: 'Team 5',
+                        section: 'alpha',
+                        restrictionsIds: ['Direct'],
+                        charSnowprintIds: ['char5'],
+                        expectedBattleClears: 1,
+                    },
+                ] as ILreTeam[])
+            ).toBe(5);
+        });
 
-        it('considers and respects overlapping coverage, but still returns the minimum number of battles to clear', () => {});
+        it('considers and respects overlapping coverage, but still returns the minimum number of battles to clear', () => {
+            expect(
+                TokenEstimationService.computeMinimumTokensToClearBattle([
+                    {
+                        id: 'team1',
+                        name: 'Team 1',
+                        section: 'alpha',
+                        restrictionsIds: ['Flame'],
+                        charSnowprintIds: ['char1'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team2',
+                        name: 'Team 2',
+                        section: 'alpha',
+                        restrictionsIds: ['Physical', 'Flame'],
+                        charSnowprintIds: ['char2'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team3',
+                        name: 'Team 3',
+                        section: 'alpha',
+                        restrictionsIds: ['Psychic', 'Flame'],
+                        charSnowprintIds: ['char3'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team4',
+                        name: 'Team 4',
+                        section: 'alpha',
+                        restrictionsIds: ['Bolter', 'Flame'],
+                        charSnowprintIds: ['char4'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team5',
+                        name: 'Team 5',
+                        section: 'alpha',
+                        restrictionsIds: ['Direct', 'Flame'],
+                        charSnowprintIds: ['char5'],
+                        expectedBattleClears: 1,
+                    },
+                ] as ILreTeam[])
+            ).toBe(4);
+        });
 
-        it(
-            'returns less than 5 if some teams can clear multiple restrictions ' +
-                'and all restrictions can be cleared',
-            () => {}
-        );
+        it('recognizes that some teams are unnecessary because other teams cover their restrictions plus more', () => {
+            expect(
+                TokenEstimationService.computeMinimumTokensToClearBattle([
+                    {
+                        id: 'team1',
+                        name: 'Team 1',
+                        section: 'alpha',
+                        restrictionsIds: ['Flame', 'Physical', 'Piercing'],
+                        charSnowprintIds: ['char1'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team2',
+                        name: 'Team 2',
+                        section: 'alpha',
+                        restrictionsIds: ['Direct', 'Psychic'],
+                        charSnowprintIds: ['char2'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team3',
+                        name: 'Team 3',
+                        section: 'alpha',
+                        restrictionsIds: ['Psychic', 'Flame'],
+                        charSnowprintIds: ['char3'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team4',
+                        name: 'Team 4',
+                        section: 'alpha',
+                        restrictionsIds: ['Piercing', 'Flame'],
+                        charSnowprintIds: ['char4'],
+                        expectedBattleClears: 1,
+                    },
+                    {
+                        id: 'team5',
+                        name: 'Team 5',
+                        section: 'alpha',
+                        restrictionsIds: ['Piercing'],
+                        charSnowprintIds: ['char5'],
+                        expectedBattleClears: 1,
+                    },
+                ] as ILreTeam[])
+            ).toBe(2); // the first two teams clear everything, the other three are unnecessary.
+        });
     });
 });
