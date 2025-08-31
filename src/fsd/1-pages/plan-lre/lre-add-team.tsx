@@ -137,8 +137,8 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                         value={expectedBattleClears}
                         onChange={event => {
                             const value = parseInt(event.target.value, 10);
-                            if (!isNaN(value) && value > 0) {
-                                setExpectedBattleClears(value);
+                            if (!isNaN(value)) {
+                                setExpectedBattleClears(Math.max(1, Math.min(value, lre.battlesCount)));
                             }
                         }}
                         inputProps={{ min: 1, max: lre.battlesCount }}
