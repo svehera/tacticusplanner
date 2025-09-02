@@ -25,24 +25,6 @@ export class TokenUse {
 
     /** The restrictions/requirements that this token clears. */
     public restrictionsCleared: ILreRequirements[] = [];
-
-    public toString(): string {
-        if (this.team === undefined) {
-            return 'No team, battle ' + this.battleNumber + ', points ' + this.incrementalPoints;
-        }
-        return (
-            this.team.section +
-            ' ' +
-            (this.battleNumber + 1) +
-            ' points=' +
-            this.incrementalPoints +
-            ' {' +
-            (this.team.charSnowprintIds ?? this.team.charactersIds ?? []).join(',') +
-            '} { ' +
-            this.restrictionsCleared.map(x => x.id).join(',') +
-            ' }'
-        );
-    }
 }
 
 /**
@@ -158,7 +140,7 @@ export class TokenEstimationService {
             return new TokenUse();
         }
         // Find the token with the highest points, and if there is a tie, the lowest
-        // battle number.
+        // (real) battle number.
         return nextBestTokens.reduce((best, current) => {
             if (best === undefined) return current;
             if (current === undefined) return best;
@@ -212,18 +194,15 @@ export class TokenEstimationService {
      */
     static markRestrictionsAsCleared(token: TokenUse, track: ILreTrackProgress): void {
         if (token.team === undefined || token.battleNumber < 0) {
-            console.error('Cannot mark restrictions as cleared, token is invalid: ' + token.toString());
             return;
         }
         const battle = track.battles[track.battles.length - 1 - token.battleNumber];
         if (battle.completed) {
-            console.error('Cannot mark restrictions as cleared, battle is already completed: ' + battle.battleIndex);
             return;
         }
         for (const restriction of token.restrictionsCleared) {
             const requirement = battle.requirementsProgress.find(req => req.id === restriction.id);
             if (requirement === undefined) {
-                console.error('Could not find requirement with id ' + restriction + ' in battle ' + battle.battleIndex);
                 continue;
             }
             requirement.completed = true;
@@ -250,9 +229,9 @@ export class TokenEstimationService {
      * track. If the track is complete, returns -1. The first battle in a
      * track is battle 0.
      */
-    public static computeLowestAvailableBattle(track: ILreTrackProgress): number {
+    static computeLowestAvailableBattle(track: ILreTrackProgress): number {
         for (let i = 0; i < track.battles.length; ++i) {
-            if (!track.battles[track.battles.length - 1 - i].completed) return i;
+            if (!track.battles[track.battles.length - i - 1].completed) return i;
         }
         return -1;
     }
@@ -262,7 +241,7 @@ export class TokenEstimationService {
      * track. If the track is complete, returns -1. The first battle in a
      * track is battle 0.
      */
-    public static computeHighestAvailableBattle(track: ILreTrackProgress): number {
+    static computeHighestAvailableBattle(track: ILreTrackProgress): number {
         const killPointsId = '_killPoints';
         // If we've cleared the track, then obviously there are no available battles.
         if (track.battles.every(battle => battle.completed)) return -1;
@@ -293,7 +272,7 @@ export class TokenEstimationService {
      * tie, the battle lowest in its track is chosen. If there is a tie again,
      * then one is picked arbitrarily.
      */
-    public static computeNextBestTokenInTrack(
+    static computeNextBestTokenInTrack(
         track: ILreTrackProgress,
         teams: ILreTeam[],
         lowestBattle: number,
@@ -328,12 +307,9 @@ export class TokenEstimationService {
      * @returns the restrictions cleared by the team in the given battle, given
      * the already-cleared restrictions in the given battle.
      */
-    public static computeIncrementalRestrictionsCleared(
-        battle: ILreBattleProgress,
-        team: ILreTeam
-    ): ILreRequirements[] {
+    static computeIncrementalRestrictionsCleared(battle: ILreBattleProgress, team: ILreTeam): ILreRequirements[] {
         if (battle.completed) return [];
-        if ((team.expectedBattleClears ?? 1) <= battle.battleIndex) {
+        if ((team.expectedBattleClears ?? 0) <= battle.battleIndex) {
             return [];
         }
         const clearedRestrictions: ILreRequirements[] = [];
@@ -358,7 +334,7 @@ export class TokenEstimationService {
      * @returns the total number of points earned by clearing the specified
      * restrictions in the battle, given that already-cleared restrictions.
      */
-    public static computeIncrementalPointsForClearingRestrictions(
+    static computeIncrementalPointsForClearingRestrictions(
         battle: ILreBattleProgress,
         restrictions: ILreRequirements[]
     ): number {
@@ -374,7 +350,7 @@ export class TokenEstimationService {
     }
 
     /**
-     * Returns the estimated of tokens required to clear all restrictions in a
+     * Returns the estimated number of tokens required to clear all restrictions in a
      * given battle. If the user has not predicted a full clear of a battle,
      * returns undefined. All teams passed to this function are expected to be able
      * to clear this particular battle.
@@ -382,6 +358,7 @@ export class TokenEstimationService {
     public static computeMinimumTokensToClearBattle(teams: ILreTeam[]): number | undefined {
         if (teams.length === 0) return undefined;
         const restrictions = this.computeRestrictions(teams);
+        // TODO: we're hardcoding five restrictions per battle, we should instead read this from the event.
         if (restrictions.length < 5) return undefined;
         let minimum: number = 6;
         const foundRestrictions: string[] = [];

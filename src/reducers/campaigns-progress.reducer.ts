@@ -32,21 +32,18 @@ export const campaignsProgressReducer = (
             const result: Partial<ICampaignsProgress> = {};
             for (const campaign of action.campaigns) {
                 // First, try event campaign split (base + challenge)
-                const updates = CampaignMapperService.mapTacticusCampaignToUpdates(campaign);
+                const updates = CampaignMapperService.mapTacticusCampaignToCampaignEvent(campaign);
                 if (updates && (updates.baseCampaignEventId || updates.challengeCampaignEventId)) {
-                    if (updates.baseCampaignEventId !== undefined && updates.baseBattles !== undefined) {
-                        result[updates.baseCampaignEventId] = updates.baseBattles;
+                    if (updates.baseCampaignEventId !== undefined && updates.baseBattleCount !== undefined) {
+                        result[updates.baseCampaignEventId] = updates.baseBattleCount;
                     }
-                    if (updates.challengeCampaignEventId !== undefined && updates.challengeBattles !== undefined) {
-                        result[updates.challengeCampaignEventId] = updates.challengeBattles;
+                    if (updates.challengeCampaignEventId !== undefined && updates.challengeBattleCount !== undefined) {
+                        result[updates.challengeCampaignEventId] = updates.challengeBattleCount;
                     }
                     continue;
                 }
 
-                // Otherwise, use single-key mapping (event or legacy campaigns)
-                const mapped = CampaignMapperService.mapTacticusCampaignToLocal(campaign);
-                const fallback = idToCampaign[campaign.id];
-                const campaignKey = mapped ?? fallback;
+                const campaignKey = idToCampaign[campaign.id];
                 if (campaignKey) {
                     result[campaignKey] = campaign.battles.length - 1;
                 }

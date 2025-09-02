@@ -162,7 +162,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                 onCheckboxChange: (selected: boolean) => handleChange(selected, u.name),
                 checked: selectedRequirements.includes(u.name),
                 restriction: u,
-                progress: `${progress[u.name]}/${legendaryEvent.battlesCount}`,
+                progress: `${progress[u.name] ?? 0}/${legendaryEvent.battlesCount}`,
             },
         }));
 

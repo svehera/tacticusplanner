@@ -32,7 +32,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
 
     const gridTeam = useMemo(
         () => lre[team.section].suggestTeam(autoTeamsPreferences, viewPreferences.onlyUnlocked, team.restrictionsIds),
-        []
+        [lre, team, autoTeamsPreferences, viewPreferences]
     );
 
     const saveChanges = () => {

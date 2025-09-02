@@ -33,58 +33,7 @@ export class CampaignMapperService {
         });
         return indices;
     }
-    /**
-     * Map a Tacticus API campaign progress entry to a local Campaign key.
-     * - legacy/non-event campaigns this will return undefined and the reducer will fall back to the existing idToCampaign map.
-     */
-    static mapTacticusCampaignToLocal(c: TacticusCampaignProgress): Campaign | undefined {
-        const id = (c.id || '').toLowerCase();
-        const type = (c.type || '').toLowerCase();
-
-        const isEventId = id.startsWith('eventcampaign');
-        const isStandard = type.includes('standard');
-        const isExtremis = type.includes('extremis');
-
-        if (!isEventId) {
-            return undefined;
-        }
-
-        // Adeptus Mechanicus
-        if (id === 'eventcampaign1') {
-            if (isStandard) {
-                return Campaign.AMS;
-            }
-            if (isExtremis) {
-                return Campaign.AME;
-            }
-            return undefined;
-        }
-
-        // Tyranids
-        if (id === 'eventcampaign2') {
-            if (isStandard) {
-                return Campaign.TS;
-            }
-            if (isExtremis) {
-                return Campaign.TE;
-            }
-            return undefined;
-        }
-
-        // T'au Empire
-        if (id === 'eventcampaign3') {
-            if (isStandard) {
-                return Campaign.TAS;
-            }
-            if (isExtremis) {
-                return Campaign.TAE;
-            }
-            return undefined;
-        }
-
-        // Non-event campaigns are handled by reducer fallback
-        return undefined;
-    }
+    // mapTacticusCampaignToLocal removed; reducer falls back to idToCampaign for legacy campaigns
 
     /**
      * Split an event campaign into base and challenge progress updates (without mutating the input).
@@ -92,7 +41,7 @@ export class CampaignMapperService {
      * - Challenge: only challenge indices
      * * - legacy/non-event campaigns this will return undefined and the reducer will fall back to the existing idToCampaign map.
      */
-    static mapTacticusCampaignToUpdates(c: TacticusCampaignProgress): CampaignProgressSplit | undefined {
+    static mapTacticusCampaignToCampaignEvent(c: TacticusCampaignProgress): CampaignProgressSplit | undefined {
         const id = (c.id || '').toLowerCase();
         const type = (c.type || '').toLowerCase();
 
@@ -113,6 +62,9 @@ export class CampaignMapperService {
             result.baseCampaignEventId = isStandard ? Campaign.TS : isExtremis ? Campaign.TE : undefined;
         } else if (id === 'eventcampaign3') {
             result.baseCampaignEventId = isStandard ? Campaign.TAS : isExtremis ? Campaign.TAE : undefined;
+        } else {
+            // in case we get a new campaign event id we don't know about yet
+            result.baseCampaignEventId = undefined;
         }
 
         // Derive challenge key from base key to avoid duplication and ease future maintenance
@@ -125,11 +77,12 @@ export class CampaignMapperService {
             [Campaign.TAE]: Campaign.TAEC,
         };
 
-        if (!result.baseCampaignEventId) {
+        if (result.baseCampaignEventId === undefined) {
+            console.error(`CampaignMapperService: Unable to determine base campaign for id=${c.id} type=${c.type}`);
             return undefined;
-        } else {
-            result.challengeCampaignEventId = challengeByBase[result.baseCampaignEventId];
         }
+
+        result.challengeCampaignEventId = challengeByBase[result.baseCampaignEventId];
 
         // Derive challenge indices from battleData for the identified base campaign
         const baseCampaignName = String(result.baseCampaignEventId);
