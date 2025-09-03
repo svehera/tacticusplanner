@@ -94,7 +94,7 @@ export const GuildWarDefense = () => {
     const teamsPotential = useMemo(() => {
         return teamsWithCharacters.map((team, teamIndex) => {
             const lineup = team.lineup.map(x => ({
-                id: x.name,
+                id: x.shortName,
                 potential: CharactersService.calculateCharacterPotential(
                     CharactersService.capCharacterAtRarity(x, team.rarityCap),
                     team.rarityCap
