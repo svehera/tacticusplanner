@@ -47995,7 +47995,7 @@
         ]
     },
     "AMSC03B": {
-        "campaign": "Adeptus Mechanicus Standard",
+        "campaign": "Adeptus Mechanicus Standard Challenge",
         "campaignType": "Normal",
         "energyCost": 6,
         "nodeNumber": 3,
@@ -48476,7 +48476,7 @@
         ]
     },
     "AMSC13B": {
-        "campaign": "Adeptus Mechanicus Standard",
+        "campaign": "Adeptus Mechanicus Standard Challenge",
         "campaignType": "Normal",
         "energyCost": 6,
         "nodeNumber": 13,
@@ -49152,7 +49152,7 @@
         ]
     },
     "AMSC25B": {
-        "campaign": "Adeptus Mechanicus Standard",
+        "campaign": "Adeptus Mechanicus Standard Challenge",
         "campaignType": "Normal",
         "energyCost": 6,
         "nodeNumber": 25,
@@ -49647,7 +49647,7 @@
         ]
     },
     "AMEC03B": {
-        "campaign": "Adeptus Mechanicus Extremis",
+        "campaign": "Adeptus Mechanicus Extremis Challenge",
         "campaignType": "Extremis",
         "energyCost": 6,
         "nodeNumber": 3,
@@ -50142,7 +50142,7 @@
         ]
     },
     "AMEC13B": {
-        "campaign": "Adeptus Mechanicus Extremis",
+        "campaign": "Adeptus Mechanicus Extremis Challenge",
         "campaignType": "Extremis",
         "energyCost": 6,
         "nodeNumber": 13,
@@ -50839,7 +50839,7 @@
         ]
     },
     "AMEC25B": {
-        "campaign": "Adeptus Mechanicus Extremis",
+        "campaign": "Adeptus Mechanicus Extremis Challenge",
         "campaignType": "Extremis",
         "energyCost": 6,
         "nodeNumber": 25,
@@ -51340,7 +51340,7 @@
         ]
     },
     "TSC03B": {
-        "campaign": "Tyranids Standard",
+        "campaign": "Tyranids Standard Challenge",
         "campaignType": "Normal",
         "energyCost": 6,
         "nodeNumber": 3,
@@ -51870,7 +51870,7 @@
         ]
     },
     "TSC13B": {
-        "campaign": "Tyranids Standard",
+        "campaign": "Tyranids Standard Challenge",
         "campaignType": "Normal",
         "energyCost": 6,
         "nodeNumber": 13,
@@ -52539,7 +52539,7 @@
         ]
     },
     "TSC25B": {
-        "campaign": "Tyranids Standard",
+        "campaign": "Tyranids Standard Challenge",
         "campaignType": "Normal",
         "energyCost": 6,
         "nodeNumber": 25,
@@ -52979,7 +52979,7 @@
         ]
     },
     "TEC03B": {
-        "campaign": "Tyranids Extremis",
+        "campaign": "Tyranids Extremis Challenge",
         "campaignType": "Extremis",
         "energyCost": 6,
         "nodeNumber": 3,
@@ -53523,7 +53523,7 @@
         ]
     },
     "TEC13B": {
-        "campaign": "Tyranids Extremis",
+        "campaign": "Tyranids Extremis Challenge",
         "campaignType": "Extremis",
         "energyCost": 6,
         "nodeNumber": 13,
@@ -54185,7 +54185,7 @@
         ]
     },
     "TEC25B": {
-        "campaign": "Tyranids Extremis",
+        "campaign": "Tyranids Extremis Challenge",
         "campaignType": "Extremis",
         "energyCost": 6,
         "nodeNumber": 25,
@@ -54660,7 +54660,7 @@
         ]
     },
     "TASC03B": {
-        "campaign": "T'au Empire Standard",
+        "campaign": "T'au Empire Standard Challenge",
         "campaignType": "Normal",
         "energyCost": 6,
         "nodeNumber": 3,
@@ -55155,7 +55155,7 @@
         ]
     },
     "TASC13B": {
-        "campaign": "T'au Empire Standard",
+        "campaign": "T'au Empire Standard Challenge",
         "campaignType": "Normal",
         "energyCost": 6,
         "nodeNumber": 13,
@@ -55852,7 +55852,7 @@
         ]
     },
     "TASC25B": {
-        "campaign": "T'au Empire Standard",
+        "campaign": "T'au Empire Standard Challenge",
         "campaignType": "Normal",
         "energyCost": 6,
         "nodeNumber": 25,
@@ -56400,7 +56400,7 @@
         ]
     },
     "TAEC03B": {
-        "campaign": "T'au Empire Extremis",
+        "campaign": "T'au Empire Extremis Challenge",
         "campaignType": "Extremis",
         "energyCost": 6,
         "nodeNumber": 3,
@@ -56902,7 +56902,7 @@
         ]
     },
     "TAEC13B": {
-        "campaign": "T'au Empire Extremis",
+        "campaign": "T'au Empire Extremis Challenge",
         "campaignType": "Extremis",
         "energyCost": 6,
         "nodeNumber": 13,
@@ -57571,7 +57571,7 @@
         ]
     },
     "TAEC25B": {
-        "campaign": "T'au Empire Extremis",
+        "campaign": "T'au Empire Extremis Challenge",
         "campaignType": "Extremis",
         "energyCost": 6,
         "nodeNumber": 25,

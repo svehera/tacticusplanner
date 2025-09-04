@@ -170,7 +170,10 @@ export const DailyRaids = () => {
     }, [shardsGoals, dailyRaidsPreferences, dailyRaids.filters]);
 
     const actualEnergy = useMemo(() => {
-        return dailyRaidsPreferences.dailyEnergy - estimatedShards.energyPerDay - dailyRaidsPreferences.shardsEnergy;
+        return (
+            dailyRaidsPreferences.dailyEnergy -
+            Math.min(estimatedShards.energyPerDay, dailyRaidsPreferences.shardsEnergy)
+        );
     }, [dailyRaidsPreferences.dailyEnergy, dailyRaidsPreferences.shardsEnergy, estimatedShards.energyPerDay]);
 
     const estimatedRanks: IEstimatedUpgrades = useMemo(() => {
@@ -189,9 +192,7 @@ export const DailyRaids = () => {
 
     const hasShardsEnergy = dailyRaidsPreferences.shardsEnergy > 0 || estimatedShards.energyPerDay > 0;
     const energyDescription = hasShardsEnergy
-        ? `${actualEnergy} = ${dailyRaidsPreferences.dailyEnergy} - ${
-              estimatedShards.energyPerDay + dailyRaidsPreferences.shardsEnergy
-          }`
+        ? `${actualEnergy} = ${dailyRaidsPreferences.dailyEnergy} - ${Math.min(estimatedShards.energyPerDay, dailyRaidsPreferences.shardsEnergy)}`
         : actualEnergy.toString();
 
     return (
