@@ -7,5 +7,6 @@
     AbilitiesLevel,
     Rank,
     Rarity,
+    Shards,
     UnlockPercentage,
 }
