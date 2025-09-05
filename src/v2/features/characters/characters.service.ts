@@ -98,6 +98,8 @@ export class CharactersService {
                 return orderBy(units, unit => (isMow(unit) ? Rank.Locked : unit.rank), ['desc']);
             case CharactersOrderBy.Rarity:
                 return orderBy(units, ['rarity', 'stars'], ['desc', 'desc']);
+            case CharactersOrderBy.Shards:
+                return orderBy(units, ['shards', 'rarity', 'stars'], ['desc', 'desc', 'desc']);
             case CharactersOrderBy.UnlockPercentage:
                 return orderBy(
                     units,
