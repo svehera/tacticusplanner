@@ -111,6 +111,23 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
             model.progression.fiveStars +
             model.progression.blueStar) /
         model.shardsPerChest;
+    const chestsForMythic =
+        (model.progression.unlock +
+            model.progression.fourStars +
+            model.progression.fiveStars +
+            model.progression.blueStar +
+            // If we don't have info for mythic, we assume it's unattainable.
+            (model.progression.mythic ?? Infinity)) /
+        model.shardsPerChest;
+    const chestsForTwoBlueStars =
+        (model.progression.unlock +
+            model.progression.fourStars +
+            model.progression.fiveStars +
+            model.progression.blueStar +
+            // If we don't have info for mythic, we assume it's unattainable.
+            (model.progression.mythic ?? Infinity) +
+            (model.progression.twoBlueStars ?? Infinity)) /
+        model.shardsPerChest;
 
     const chestsForNextGoal = useMemo(() => {
         if (currentChests < chestsForUnlock) {
@@ -119,9 +136,12 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
             return Math.ceil(chestsFor4Stars);
         } else if (currentChests < chestsFor5Stars) {
             return Math.ceil(chestsFor5Stars);
+        } else if (currentChests < chestsForBlueStar) {
+            return Math.ceil(chestsForBlueStar);
+        } else if (currentChests < chestsForMythic) {
+            return Math.ceil(chestsForMythic);
         }
-
-        return Math.ceil(chestsForBlueStar);
+        return Math.ceil(chestsForTwoBlueStars);
     }, [currentChests]);
 
     const goal = (function () {
@@ -131,9 +151,12 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
             return '4 stars';
         } else if (currentChests < chestsFor5Stars) {
             return '5 stars';
+        } else if (currentChests < chestsForBlueStar) {
+            return 'blue star';
+        } else if (currentChests < chestsForMythic) {
+            return 'mythic';
         }
-
-        return 'blue star';
+        return 'two blue stars';
     })();
 
     const currencyForUnlock = useMemo(() => {
