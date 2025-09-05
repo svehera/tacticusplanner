@@ -154,12 +154,15 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
         } else if (currentChests < chestsForBlueStar) {
             return 'blue star';
         } else if (currentChests < chestsForMythic) {
+            if (chestsForMythic === Infinity) {
+                return 'full clear';
+            }
             return 'mythic';
         }
         return 'two blue stars';
     })();
 
-    const currencyForUnlock = useMemo(() => {
+    const currencyForNextMilestone = useMemo(() => {
         return model.chestsMilestones
             .filter(x => x.chestLevel <= chestsForNextGoal)
             .map(x => x.engramCost)
@@ -168,7 +171,8 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
 
     const pointsForNextMilestone = useMemo(() => {
         const additionalPayout = premiumMissions > 0 ? 15 : 0;
-        let currencyLeft = currencyForUnlock - regularMissionsCurrency - premiumMissionsCurrency - bundleCurrency;
+        let currencyLeft =
+            currencyForNextMilestone - regularMissionsCurrency - premiumMissionsCurrency - bundleCurrency;
 
         for (const chestMilestone of model.pointsMilestones) {
             currencyLeft -= chestMilestone.engramPayout + additionalPayout;
@@ -178,7 +182,7 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
         }
 
         return model.pointsMilestones[model.pointsMilestones.length - 1].cumulativePoints;
-    }, [currencyForUnlock, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
+    }, [currencyForNextMilestone, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
 
     const averageBattles = useMemo(() => {
         return (pointsForNextMilestone / 3 / 500).toFixed(2);
@@ -200,7 +204,7 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
                 Currency to {goal}:
                 <span style={{ fontWeight: 700 }}>
                     {' '}
-                    {currentCurrency} / {currencyForUnlock}
+                    {currentCurrency} / {currencyForNextMilestone}
                 </span>
                 <Tooltip title={totalCurrency + ' in total'}>
                     <InfoIcon />
