@@ -44,6 +44,8 @@ export const CharactersViewControls = ({
                 return 'By Faction';
             case CharactersOrderBy.UnlockPercentage:
                 return 'By Unlock Percentage';
+            case CharactersOrderBy.Shards:
+                return 'By Shards';
             default:
                 return '';
         }
