@@ -405,31 +405,33 @@ export const Guides: React.FC = () => {
 
         setSearchParams(
             curr => {
+                const next = new URLSearchParams(curr);
+
                 if (filter.subMods) {
-                    curr.set('subModes', filter.subMods.join(','));
+                    next.set('subModes', filter.subMods.join(','));
                 } else {
-                    curr.delete('subModes');
+                    next.delete('subModes');
                 }
 
                 if (filter.primaryMod) {
-                    curr.set('primaryModes', filter.primaryMod);
+                    next.set('primaryModes', filter.primaryMod);
                 } else {
-                    curr.delete('primaryModes');
+                    next.delete('primaryModes');
                 }
 
                 if (filter.unitIds) {
-                    curr.set('unitIds', filter.unitIds.join(','));
+                    next.set('unitIds', filter.unitIds.join(','));
                 } else {
-                    curr.delete('unitIds');
+                    next.delete('unitIds');
                 }
 
                 if (filter.createdBy) {
-                    curr.set('createdBy', filter.createdBy);
+                    next.set('createdBy', filter.createdBy);
                 } else {
-                    curr.delete('createdBy');
+                    next.delete('createdBy');
                 }
 
-                return curr;
+                return next;
             },
             { replace: true }
         );
