@@ -68,6 +68,7 @@ export interface IMow extends IMowStatic, IMowDb, DynamicProps {
 }
 
 export interface IMow2 extends IMowStatic2, IMowDb, DynamicProps {
+    shortName?: string;
     unitType: UnitType.mow;
 }
 
