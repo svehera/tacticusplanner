@@ -2,7 +2,7 @@
 import { Card, CardActions, CardContent, CardHeader } from '@mui/material';
 import Button from '@mui/material/Button';
 import { orderBy, sum } from 'lodash';
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
@@ -31,11 +31,11 @@ export const GuildWarDefense = () => {
     const { guildWar, characters, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const [openSelectTeamDialog, setOpenSelectTeamDialog] = React.useState(false);
-    const [editedTeam, setEditedTeam] = React.useState<IGWTeamWithCharacters | null>(null);
+    const [openSelectTeamDialog, setOpenSelectTeamDialog] = useState(false);
+    const [editedTeam, setEditedTeam] = useState<IGWTeamWithCharacters | null>(null);
 
-    const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
-    const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
+    const [openCharacterItemDialog, setOpenCharacterItemDialog] = useState(false);
+    const [editedCharacter, setEditedCharacter] = useState<ICharacter2 | null>(null);
 
     useEffect(() => {
         const rarityCaps = GuildWarService.getDifficultyRarityCaps(guildWar.zoneDifficulty);
@@ -96,7 +96,7 @@ export const GuildWarDefense = () => {
     }, [guildWar.teams, characters]);
 
     const teamsPotential = useMemo(() => {
-        return teamsWithCharacters.map((team, teamIndex) => {
+        return teamsWithCharacters.map(team => {
             const lineup = team.lineup.map(x => ({
                 id: x.shortName,
                 potential: CharactersService.calculateCharacterPotential(
