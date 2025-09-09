@@ -2,7 +2,7 @@
 import { Card, CardActions, CardContent, CardHeader, Input } from '@mui/material';
 import Button from '@mui/material/Button';
 import { groupBy, mapValues, orderBy, sum } from 'lodash';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
@@ -35,11 +35,11 @@ export const GuildWarOffense = () => {
     const { guild, guildWar, characters, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const [openSelectTeamDialog, setOpenSelectTeamDialog] = React.useState(false);
-    const [editedTeam, setEditedTeam] = React.useState<IGWTeamWithCharacters | null>(null);
+    const [openSelectTeamDialog, setOpenSelectTeamDialog] = useState(false);
+    const [editedTeam, setEditedTeam] = useState<IGWTeamWithCharacters | null>(null);
 
-    const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
-    const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
+    const [openCharacterItemDialog, setOpenCharacterItemDialog] = useState(false);
+    const [editedCharacter, setEditedCharacter] = useState<ICharacter2 | null>(null);
 
     const { data, loading } = useGetGuildRosters({ members: guild.members });
 
@@ -123,7 +123,7 @@ export const GuildWarOffense = () => {
     }, [guildWar.teams, characters, guildWar.deployedCharacters]);
 
     const teamsPotential = useMemo(() => {
-        return teamsWithCharacters.map((team, teamIndex) => {
+        return teamsWithCharacters.map(team => {
             const lineup = team.lineup.map(x => ({
                 id: x.name,
                 potential: CharactersService.calculateCharacterPotential(
