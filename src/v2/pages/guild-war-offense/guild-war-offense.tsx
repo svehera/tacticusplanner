@@ -15,6 +15,8 @@ import { AccessibleTooltip, Conditional, FlexBox } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
+import { CharactersService as CharacterEntityService } from '@/fsd/4-entities/character';
+
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
@@ -104,7 +106,9 @@ export const GuildWarOffense = () => {
         const teams = guildWar.teams
             .filter(x => x.type === GuildWarTeamType.Offense)
             .map(team => {
-                const teamWithChars = team.lineup.map(name => characters.find(char => char.name === name)!);
+                const teamWithChars = team.lineup.map(name =>
+                    characters.find(char => CharacterEntityService.matchesAnyCharacterId(name, char))
+                );
                 return { ...team, lineup: teamWithChars.filter(x => !!x) };
             });
         return orderBy(
