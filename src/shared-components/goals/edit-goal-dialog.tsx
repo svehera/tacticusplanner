@@ -152,7 +152,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
     const possibleLocations =
         [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
-            ? StaticDataService.getItemLocations(`shards_${unit.id}`)
+            ? StaticDataService.getItemLocations(`shards_${unit.snowprintId}`)
             : [];
 
     const unlockedLocations = possibleLocations
