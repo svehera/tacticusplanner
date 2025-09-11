@@ -11,6 +11,7 @@ import { Campaign, CampaignReleaseType, CampaignType } from './enums';
 import { ICampaignBattle, ICampaignBattleComposed, ICampaignsProgress, ICampaingsFilters, IDropRate } from './model';
 
 export class CampaignsService {
+    public static readonly rawBattleData = battleData;
     public static readonly allCampaigns = campaignsList;
     public static readonly standardCampaigns = campaignsList.filter(
         campaign => campaign.releaseType === CampaignReleaseType.standard
@@ -97,21 +98,12 @@ export class CampaignsService {
                     console.warn('no recipe found', reward, battle);
                 }
             }
-            const useEmbeddedDropRates = true;
             let dropRate = 0;
-            if (useEmbeddedDropRates) {
-                const guaranteed = battle.rewards.guaranteed.find(x => x.id == reward);
-                const potential = battle.rewards.potential.find(x => x.id == reward);
-                if (guaranteed) dropRate = 1;
-                if (potential) {
-                    dropRate += potential.effective_rate;
-                }
-            } else {
-                const dropRateKey: keyof IDropRate = Rarity[
-                    recipe?.rarity as unknown as number
-                ].toLowerCase() as keyof IDropRate;
-                dropRate =
-                    config.dropRate && config.dropRate[dropRateKey] !== undefined ? config.dropRate[dropRateKey] : 0;
+            const guaranteed = battle.rewards.guaranteed.find(x => x.id == reward);
+            const potential = battle.rewards.potential.find(x => x.id == reward);
+            if (guaranteed) dropRate = 1;
+            if (potential) {
+                dropRate += potential.effective_rate;
             }
             dropRate = dropRate.toFixed(3) === 'NaN' ? 0 : parseFloat(dropRate.toFixed(3));
 
@@ -223,7 +215,6 @@ export class CampaignsService {
 
         if (campaignTypes.length) {
             if (!campaignTypes.includes(location.campaignType)) {
-                console.log("doesn't pass campaignTypes filter", campaignTypes, location.campaign);
                 return false;
             }
         }

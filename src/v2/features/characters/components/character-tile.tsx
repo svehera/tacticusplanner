@@ -113,6 +113,8 @@ const CharacterTileFn = ({
                 Power: {numberToThousandsStringOld(CharactersPowerService.getCharacterPower(character))}
                 <br />
                 Blackstone: {numberToThousandsStringOld(CharactersValueService.getCharacterValue(character))}
+                <br />
+                Shards: {character.shards}
             </span>
         );
     }, [character]);
