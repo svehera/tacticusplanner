@@ -63,7 +63,7 @@ export class MowsService {
     }
 
     public static toMow2(mow: IMow | IMow2): IMow2 {
-        if ('snowprintId' in mow) return mow as IMow2;
+        if ('snowprintId' in mow) return { ...(mow as IMow2), shortName: mow.name } as IMow2;
 
         const mow1 = mow as IMowStatic;
         const db: IMowDb = mow as IMowDb;

@@ -27,14 +27,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
 
     const selectedTeams: ILreTeam[] = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
-    const resolvedCharacters = useMemo(() => {
-        return characters
-            .filter(x => CharactersService.resolveCharacter(x.snowprintId ?? x.name) !== undefined)
-            .map(x => {
-                const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
-                return { ...staticChar!, ...x };
-            });
-    }, [characters]);
+    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     // Compute virtual attributes (not saved in JSON) for display on LRE team cards.
     selectedTeams.forEach(team => {

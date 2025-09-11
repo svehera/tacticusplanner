@@ -99,12 +99,7 @@ export const LearnCharacters = () => {
 
     const { characters } = useContext(StoreContext);
 
-    const resolvedCharacters = useMemo(() => {
-        return characters.map(c => ({
-            ...c,
-            ...CharactersService.resolveCharacter(c.snowprintId ?? c.name),
-        })) as ICharacter2[];
-    }, [characters]);
+    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const hitsOptions = uniq(resolvedCharacters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
         .sort((a, b) => a - b)
@@ -123,9 +118,13 @@ export const LearnCharacters = () => {
 
     const rows = useMemo(
         () =>
-            resolvedCharacters.filter(
-                c => c.name.toLowerCase().includes(nameFilter.toLowerCase()) && (!onlyUnlocked || c.rank > Rank.Locked)
-            ),
+            resolvedCharacters.filter(c => {
+                return (
+                    (c.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                        c.shortName.toLowerCase().includes(nameFilter.toLowerCase())) &&
+                    (!onlyUnlocked || c.rank > Rank.Locked)
+                );
+            }),
         [nameFilter, onlyUnlocked]
     );
 

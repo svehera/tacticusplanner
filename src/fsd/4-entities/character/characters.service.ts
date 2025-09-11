@@ -166,6 +166,25 @@ export class CharactersService {
         return ret!;
     }
 
+    /**
+     * Takes characters stored in the users account and resolves them to the (potentially) new
+     * character data we have from data mines. Characters that we cannot resolve are logged to
+     * the developer console and then removed.
+     */
+    public static resolveStoredCharacters(charactersFromStorage: ICharacter2[]): ICharacter2[] {
+        return charactersFromStorage
+            .filter(x => this.resolveCharacter(x.snowprintId ?? x.name) !== undefined)
+            .map(x => {
+                const staticChar = this.resolveCharacter(x.snowprintId ?? x.name);
+                if (staticChar === undefined) {
+                    console.error('Could not resolve character ', x.snowprintId ?? x.name);
+                    return undefined;
+                }
+                return { ...x, ...staticChar };
+            })
+            .filter(x => x !== undefined) as ICharacter2[];
+    }
+
     static isAtLeast3DaysBefore(releaseDate: Date): boolean {
         const today = new Date();
 

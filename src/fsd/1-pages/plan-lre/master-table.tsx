@@ -53,14 +53,7 @@ export const MasterTable = () => {
 
     const { leSelectedTeams, characters, leProgress } = useContext(StoreContext);
 
-    const resolvedCharacters = useMemo(() => {
-        return characters.map(x => {
-            const ret: ICharacter2 = { ...x };
-            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
-            ret.name = staticChar?.snowprintId ?? x.name;
-            return ret;
-        });
-    }, [characters]);
+    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const getSelectedTeams = (eventId: LegendaryEventEnum): ILreTeam[] => {
         const { teams } = leSelectedTeams[eventId] ?? { teams: [] };
@@ -80,6 +73,14 @@ export const MasterTable = () => {
         const teams = getSelectedTeams(eventId);
         return uniq(
             teams.flatMap(t => t.charSnowprintIds ?? t.charactersIds ?? []).map(x => CharactersService.canonicalName(x))
+        );
+    };
+
+    const passesNameFilter = (filter: string, character: ICharacter2) => {
+        if (!filter) return true;
+        return (
+            character.name.toLowerCase().includes(filter.toLowerCase()) ||
+            ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
         );
     };
 
@@ -130,7 +131,7 @@ export const MasterTable = () => {
 
                     return bTotal - aTotal;
                 })
-                .filter(x => (filter ? x.shortName.toLowerCase().includes(filter.toLowerCase()) : true))
+                .filter(x => passesNameFilter(filter, x))
                 .map(x => ({
                     character: x,
                     characterId: x.snowprintId!,
@@ -246,7 +247,7 @@ export const MasterTable = () => {
             }
             return result;
         }
-    }, [filter, activeLegendaryEvents, pointsCalculation]);
+    }, [filter, activeLegendaryEvents, pointsCalculation, resolvedCharacters, leProgress, leSelectedTeams]);
 
     const [selection, setSelection] = useState<CharactersSelection>(
         selectedCharsRows.length ? CharactersSelection.Selected : CharactersSelection.All
@@ -374,7 +375,7 @@ export const MasterTable = () => {
                         b.legendaryEvents[legendaryEvent.id].totalPoints -
                         a.legendaryEvents[legendaryEvent.id].totalPoints
                 )
-                .filter(x => (filter ? x.name.toLowerCase().includes(filter.toLowerCase()) : true))
+                .filter(x => passesNameFilter(filter, x))
                 .map((x, index) => ({
                     character: x,
                     characterId: x.name,
