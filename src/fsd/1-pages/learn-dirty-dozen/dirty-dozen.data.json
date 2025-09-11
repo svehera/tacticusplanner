@@ -1,5 +1,281 @@
 [
     {
+        "version": "1.31 - September 2025",
+        "youtubeLink": "https://www.youtube.com/watch?v=kRxqdRjImUo",
+        "columns": [
+            ["ModifiedScore", "Score"],
+            ["Horde", "Horde"],
+            ["War", "War"],
+            ["Raid", "Raid"]
+        ],
+        "characters": [
+            {
+                "Name": "Tan Gi'Da",
+                "Position": 1,
+                "Horde": 5.0,
+                "War": 4.5,
+                "Raid": 3.8,
+                "ModifiedScore": 4.18,
+                "GRTeam": "Mech (Core)"
+            },
+            {
+                "Name": "Kariyan",
+                "Position": 2,
+                "Horde": 4.0,
+                "War": 4.0,
+                "Raid": 4.0,
+                "ModifiedScore": 3.97,
+                "GRTeam": "Custodes (Core)"
+            },
+            {
+                "Name": "Boss Gulgortz",
+                "Position": 2,
+                "Horde": 4.5,
+                "War": 5.0,
+                "Raid": 3.5,
+                "ModifiedScore": 3.97,
+                "GRTeam": "Mech / Multi-Hit"
+            },
+            {
+                "Name": "Trajann",
+                "Position": 4,
+                "Horde": 2.5,
+                "War": 3.5,
+                "Raid": 4.6,
+                "ModifiedScore": 3.96,
+                "GRTeam": "Custodes (Core)"
+            },
+            {
+                "Name": "Kharn",
+                "Position": 5,
+                "Horde": 3.0,
+                "War": 4.5,
+                "Raid": 4.0,
+                "ModifiedScore": 3.9,
+                "GRTeam": "Multi-Hit (Core) / Custodes (Core)"
+            },
+            {
+                "Name": "Sho'Syl",
+                "Position": 6,
+                "Horde": 4.5,
+                "War": 5.0,
+                "Raid": 3.3,
+                "ModifiedScore": 3.85,
+                "GRTeam": "Mech"
+            },
+            {
+                "Name": "Dante",
+                "Position": 7,
+                "Horde": 3.0,
+                "War": 4.0,
+                "Raid": 4.0,
+                "ModifiedScore": 3.8,
+                "GRTeam": "Custodes (Core)"
+            },
+            {
+                "Name": "Ragnar Blackmane",
+                "Position": 8,
+                "Horde": 2.0,
+                "War": 4.5,
+                "Raid": 4.2,
+                "ModifiedScore": 3.79,
+                "GRTeam": "Multi-Hit (Core) / Custodes"
+            },
+            {
+                "Name": "Forcas",
+                "Position": 9,
+                "Horde": 4.5,
+                "War": 4.0,
+                "Raid": 3.5,
+                "ModifiedScore": 3.77,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Name": "Actus",
+                "Position": 10,
+                "Horde": 4.0,
+                "War": 3.5,
+                "Raid": 3.7,
+                "ModifiedScore": 3.69,
+                "GRTeam": "Mech (Core)"
+            },
+            {
+                "Position": 11,
+                "Name": "Mephiston",
+                "ModifiedScore": 3.58,
+                "Horde": 3.0,
+                "War": 5.0,
+                "Raid": 3.3,
+                "GRTeam": "Custodes / Psyker"
+            },
+            {
+                "Name": "Snotflogga",
+                "Position": 12,
+                "Horde": 5.0,
+                "War": 5.0,
+                "Raid": 2.6,
+                "ModifiedScore": 3.53,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Name": "Vitruvius",
+                "Position": 13,
+                "Horde": 2.5,
+                "War": 3.0,
+                "Raid": 4.0,
+                "ModifiedScore": 3.47,
+                "GRTeam": "Mech (Core)"
+            },
+            {
+                "Name": "Exitor-Rho",
+                "Position": 14,
+                "Horde": 2.0,
+                "War": 3.0,
+                "Raid": 3.9,
+                "ModifiedScore": 3.34,
+                "GRTeam": "Mech (Core)"
+            },
+            {
+                "Name": "Abraxas",
+                "Position": 15,
+                "Horde": 4.0,
+                "War": 4.0,
+                "Raid": 2.6,
+                "ModifiedScore": 3.16,
+                "GRTeam": "Psyker (Core)"
+            },
+            {
+                "Name": "Marneus Calgar",
+                "Position": 16,
+                "Horde": 3.5,
+                "War": 3.5,
+                "Raid": 2.9,
+                "ModifiedScore": 3.14,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Position": 17,
+                "Name": "Bellator",
+                "Horde": 5.0,
+                "War": 3.5,
+                "Raid": 2.3,
+                "ModifiedScore": 3.08,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Position": 18,
+                "Name": "Aleph-Null",
+                "ModifiedScore": 3.02,
+                "Horde": 4.5,
+                "War": 4.0,
+                "Raid": 2.2,
+                "GRTeam": "Mech"
+            },
+            {
+                "Name": "Aun'Shi",
+                "Position": 19,
+                "Horde": 2.5,
+                "War": 4.0,
+                "Raid": 2.9,
+                "ModifiedScore": 3.01,
+                "GRTeam": "Multi-Hit (Core)"
+            },
+            {
+                "Name": "Anuphet",
+                "Position": 20,
+                "Horde": 3.0,
+                "War": 3.0,
+                "Raid": 3.0,
+                "ModifiedScore": 2.97,
+                "GRTeam": "Mech"
+            },
+            {
+                "Position": 20,
+                "Name": "Archimatos",
+                "ModifiedScore": 2.97,
+                "Horde": 4.5,
+                "War": 4.5,
+                "Raid": 2.0,
+                "GRTeam": "Psyker"
+            },
+            {
+                "Position": 22,
+                "Name": "Re'Vas",
+                "ModifiedScore": 2.92,
+                "Horde": 4.0,
+                "War": 4.0,
+                "Raid": 2.2,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Position": 23,
+                "Name": "High Marshal Helbrecht",
+                "ModifiedScore": 2.84,
+                "Horde": 2.5,
+                "War": 3.0,
+                "Raid": 2.9,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Position": 24,
+                "Name": "Judh",
+                "ModifiedScore": 2.8,
+                "Horde": 3.0,
+                "War": 5.0,
+                "Raid": 2.0
+            },
+            {
+                "Position": 24,
+                "Name": "Lucien",
+                "ModifiedScore": 2.8,
+                "Horde": 4.0,
+                "War": 4.0,
+                "Raid": 2.0
+            },
+            {
+                "Position": 26,
+                "Name": "Isabella",
+                "ModifiedScore": 2.77,
+                "Horde": 5.0,
+                "War": 4.5,
+                "Raid": 1.5
+            },
+            {
+                "Name": "Eldryon",
+                "Position": 27,
+                "Horde": 2.5,
+                "War": 3.0,
+                "Raid": 2.8,
+                "ModifiedScore": 2.75,
+                "GRTeam": "Multi-Hit / Psyker"
+            },
+            {
+                "Position": 28,
+                "Name": "Isaak",
+                "ModifiedScore": 2.72,
+                "Horde": 4.0,
+                "War": 4.5,
+                "Raid": 1.7
+            },
+            {
+                "Position": 29,
+                "Name": "Lucius",
+                "ModifiedScore": 2.7,
+                "Horde": 3.5,
+                "War": 4.0,
+                "Raid": 2.0
+            },
+            {
+                "Position": 29,
+                "Name": "Brother Jaeger",
+                "ModifiedScore": 2.7,
+                "Horde": 4.5,
+                "War": 4.5,
+                "Raid": 1.5
+            }
+        ]
+    },
+    {
         "version": "1.26 - February 2025",
         "youtubeLink": "https://www.youtube.com/watch?v=-dLelwx08vc",
         "columns": [

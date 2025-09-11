@@ -101,7 +101,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                                 checked={restrictions.includes(restriction.name)}
                                 restriction={restriction}
                                 onCheckboxChange={value => handleChange(value, restriction.name)}
-                                progress={`${progress[restriction.name]}/${legendaryEvent.battlesCount}`}
+                                progress={`${progress[restriction.name] ?? 0}/${legendaryEvent.battlesCount}`}
                             />
                         ))}
                 </div>

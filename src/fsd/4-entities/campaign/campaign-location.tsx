@@ -23,14 +23,7 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
             Campaign.TAEC,
         ];
         if (challengeCampaigns.includes(location.campaign)) {
-            switch (location.nodeNumber) {
-                case 1:
-                    return '3B';
-                case 2:
-                    return '13B';
-                case 3:
-                    return '25B';
-            }
+            return location.nodeNumber + 'B';
         }
         return location.nodeNumber;
     }, []);

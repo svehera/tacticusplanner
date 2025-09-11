@@ -136,14 +136,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
     }, [form.type, ignoreRankRarity]);
 
-    const getAscenscionShardsName = (unit: IUnit | null): string => {
+    const getAscensionShardsName = (unit: IUnit | null): string => {
         if (!unit) return '';
         return 'shards_' + unit.snowprintId;
     };
 
     const possibleLocations =
         [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
-            ? StaticDataService.getItemLocations(getAscenscionShardsName(unit))
+            ? StaticDataService.getItemLocations(getAscensionShardsName(unit))
             : [];
 
     const unlockedLocations = possibleLocations
