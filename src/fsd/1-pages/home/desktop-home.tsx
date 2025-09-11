@@ -35,8 +35,7 @@ export const DesktopHome = () => {
 
     const calendarUrls: { current?: string; next?: string } = {
         current: getImageUrl('calendar/calendar_20250817.png'),
-        // Battle Pass Season 31 (21 Sep) calendar image not yet available
-        // next: getImageUrl('calendar/calendar_20250921.png'),
+        next: getImageUrl('calendar/calendar_20250921.png'),
     };
 
     const topPriorityGoal = goals[0];
