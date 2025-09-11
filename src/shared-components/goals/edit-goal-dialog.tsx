@@ -20,7 +20,7 @@ import { Alliance, Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
-import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
+import { ICampaignBattleComposed, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { RankSelect } from '@/fsd/4-entities/character';
 import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
@@ -150,10 +150,14 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
         targetRankValues = getEnumValues(Rank).filter(x => x > 0 && x >= form.rankStart && x <= maxRank);
     }
 
-    const possibleLocations =
-        [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
-            ? StaticDataService.getItemLocations(`shards_${unit.id}`)
-            : [];
+    let possibleLocations: ICampaignBattleComposed[] = [];
+    // Support for both IDs for characters. Previously be used a short version (i.e. Ragnar, Darkstrider).
+    if ([PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit) {
+        possibleLocations = StaticDataService.getItemLocations(`shards_${unit.id}`);
+        if (!possibleLocations.length) {
+            possibleLocations = StaticDataService.getItemLocations(`shards_${unit.snowprintId}`);
+        }
+    }
 
     const unlockedLocations = possibleLocations
         .filter(location => {
