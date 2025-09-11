@@ -32,7 +32,6 @@ export const TeamGraph: React.FC<Props> = ({ units }) => {
     const teamPowerData: { x: string; y: number }[] = [];
     const teamAttributeData: { x: string; y: number }[] = [];
     const teamAbilityData: { x: string; y: number }[] = [];
-    console.log(units);
     units.forEach(character => {
         const power = CharactersPowerService.getCharacterPower(character);
         const attributePower = CharactersPowerService.getCharacterAttributePower(character);

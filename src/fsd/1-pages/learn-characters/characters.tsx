@@ -118,9 +118,13 @@ export const LearnCharacters = () => {
 
     const rows = useMemo(
         () =>
-            resolvedCharacters.filter(
-                c => c.name.toLowerCase().includes(nameFilter.toLowerCase()) && (!onlyUnlocked || c.rank > Rank.Locked)
-            ),
+            resolvedCharacters.filter(c => {
+                return (
+                    (c.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                        c.shortName.toLowerCase().includes(nameFilter.toLowerCase())) &&
+                    (!onlyUnlocked || c.rank > Rank.Locked)
+                );
+            }),
         [nameFilter, onlyUnlocked]
     );
 

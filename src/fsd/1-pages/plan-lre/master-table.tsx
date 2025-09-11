@@ -76,6 +76,14 @@ export const MasterTable = () => {
         );
     };
 
+    const passesNameFilter = (filter: string, character: ICharacter2) => {
+        if (!filter) return true;
+        return (
+            character.name.toLowerCase().includes(filter.toLowerCase()) ||
+            ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
+        );
+    };
+
     const selectedCharsRows: ITableRow[] = useMemo(() => {
         const temp: Array<{
             character: ICharacter2;
@@ -123,7 +131,7 @@ export const MasterTable = () => {
 
                     return bTotal - aTotal;
                 })
-                .filter(x => (filter ? x.shortName.toLowerCase().includes(filter.toLowerCase()) : true))
+                .filter(x => passesNameFilter(filter, x))
                 .map(x => ({
                     character: x,
                     characterId: x.snowprintId!,
@@ -239,7 +247,7 @@ export const MasterTable = () => {
             }
             return result;
         }
-    }, [filter, activeLegendaryEvents, pointsCalculation]);
+    }, [filter, activeLegendaryEvents, pointsCalculation, resolvedCharacters, leProgress, leSelectedTeams]);
 
     const [selection, setSelection] = useState<CharactersSelection>(
         selectedCharsRows.length ? CharactersSelection.Selected : CharactersSelection.All
@@ -367,7 +375,7 @@ export const MasterTable = () => {
                         b.legendaryEvents[legendaryEvent.id].totalPoints -
                         a.legendaryEvents[legendaryEvent.id].totalPoints
                 )
-                .filter(x => (filter ? x.name.toLowerCase().includes(filter.toLowerCase()) : true))
+                .filter(x => passesNameFilter(filter, x))
                 .map((x, index) => ({
                     character: x,
                     characterId: x.name,
