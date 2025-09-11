@@ -99,12 +99,7 @@ export const LearnCharacters = () => {
 
     const { characters } = useContext(StoreContext);
 
-    const resolvedCharacters = useMemo(() => {
-        return characters.map(c => ({
-            ...c,
-            ...CharactersService.resolveCharacter(c.snowprintId ?? c.name),
-        })) as ICharacter2[];
-    }, [characters]);
+    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const hitsOptions = uniq(resolvedCharacters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
         .sort((a, b) => a - b)

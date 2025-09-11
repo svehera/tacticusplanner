@@ -9,6 +9,7 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { useAuth, UnitType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
+import { CharactersService as FsdCharactersService } from '@/fsd/4-entities/character/characters.service';
 import { IMow2, mows2Data } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
@@ -35,6 +36,10 @@ export const WhoYouOwn = () => {
                 return { ...mow2, ...mow } as IMow2;
             }),
         [mows]
+    );
+    const resolvedCharacters = useMemo(
+        () => FsdCharactersService.resolveStoredCharacters(charactersDefault),
+        [charactersDefault]
     );
     const dispatch = useContext(DispatchContext);
     const navigate = useNavigate();
@@ -67,11 +72,11 @@ export const WhoYouOwn = () => {
 
     const charactersFiltered = useMemo(() => {
         return CharactersService.filterUnits(
-            [...charactersDefault, ...resolvedMows],
+            [...resolvedCharacters, ...resolvedMows],
             viewControls.filterBy,
             nameFilter
         );
-    }, [viewControls.filterBy, nameFilter, resolvedMows, charactersDefault]);
+    }, [viewControls.filterBy, nameFilter, resolvedMows, resolvedCharacters]);
 
     const factions = useMemo(() => {
         return CharactersService.orderByFaction(

@@ -32,14 +32,15 @@ export const TeamGraph: React.FC<Props> = ({ units }) => {
     const teamPowerData: { x: string; y: number }[] = [];
     const teamAttributeData: { x: string; y: number }[] = [];
     const teamAbilityData: { x: string; y: number }[] = [];
+    console.log(units);
     units.forEach(character => {
         const power = CharactersPowerService.getCharacterPower(character);
         const attributePower = CharactersPowerService.getCharacterAttributePower(character);
         const abilityPower = CharactersPowerService.getCharacterAbilityPower(character);
 
-        teamPowerData.push({ x: character.shortName, y: power });
-        teamAttributeData.push({ x: character.shortName, y: attributePower });
-        teamAbilityData.push({ x: character.shortName, y: abilityPower });
+        teamPowerData.push({ x: character.name, y: power });
+        teamAttributeData.push({ x: character.name, y: attributePower });
+        teamAbilityData.push({ x: character.name, y: abilityPower });
     });
 
     const sortByPower = (a: { x: string; y: number }, b: { x: string; y: number }) => b.y - a.y;

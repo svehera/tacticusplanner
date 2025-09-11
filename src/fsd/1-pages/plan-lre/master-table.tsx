@@ -53,14 +53,7 @@ export const MasterTable = () => {
 
     const { leSelectedTeams, characters, leProgress } = useContext(StoreContext);
 
-    const resolvedCharacters = useMemo(() => {
-        return characters.map(x => {
-            const ret: ICharacter2 = { ...x };
-            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
-            ret.name = staticChar?.snowprintId ?? x.name;
-            return ret;
-        });
-    }, [characters]);
+    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const getSelectedTeams = (eventId: LegendaryEventEnum): ILreTeam[] => {
         const { teams } = leSelectedTeams[eventId] ?? { teams: [] };
