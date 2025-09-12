@@ -42,12 +42,7 @@ export const CampaignProgression = () => {
         }) as IMow2[];
     }, [mows]);
 
-    const resolvedCharacters = useMemo(() => {
-        return characters.map(c => ({
-            ...c,
-            ...CharactersService.resolveCharacter(c.snowprintId ?? c.name),
-        })) as ICharacter2[];
-    }, [characters]);
+    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
         return GoalsService.prepareGoals(goals, [...resolvedCharacters, ...resolvedMows], false);

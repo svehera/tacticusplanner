@@ -41,12 +41,12 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
         {
             headerName: '#',
             field: 'Position',
-            maxWidth: 30,
+            maxWidth: 32,
         },
         {
             field: 'Name',
             headerName: 'Name',
-            width: 150,
+            width: 200,
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
                 const characterId = props.data?.Name ?? '';
                 const character = characters.find(char => CharactersService.matchesAnyCharacterId(characterId, char));

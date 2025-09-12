@@ -29,10 +29,12 @@ import { needToLevelCharacter } from './functions/need-to-level';
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
         const filteredCharactersByName = nameFilter
-            ? characters.filter(x => x.name.toLowerCase().includes(nameFilter.toLowerCase()))
+            ? characters.filter(
+                  x =>
+                      x.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                      ('shortName' in x && x.shortName?.toLowerCase().includes(nameFilter.toLowerCase()))
+              )
             : characters;
-
-        let farmableChars: Set<IMaterialFull['id']> | undefined;
 
         switch (filterBy) {
             case CharactersFilterBy.NeedToAscend:

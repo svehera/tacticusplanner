@@ -87,7 +87,10 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             goal.dailyRaids = [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(goal.type);
             dispatch.goals({ type: 'Add', goal });
             const character = characters.find(c => c.snowprintId === goal.character);
-            enqueueSnackbar(`Goal for ${character?.shortName ?? goal.character} is added`, { variant: 'success' });
+            const mow = resolvedMows.find(m => m.snowprintId === goal.character);
+            enqueueSnackbar(`Goal for ${character?.shortName ?? mow?.name ?? goal.character} is added`, {
+                variant: 'success',
+            });
         }
         setOpenDialog(false);
         setUnit(null);
@@ -136,14 +139,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
     }, [form.type, ignoreRankRarity]);
 
-    const getAscenscionShardsName = (unit: IUnit | null): string => {
+    const getAscensionShardsName = (unit: IUnit | null): string => {
         if (!unit) return '';
         return 'shards_' + unit.snowprintId;
     };
 
     const possibleLocations =
         [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
-            ? StaticDataService.getItemLocations(getAscenscionShardsName(unit))
+            ? StaticDataService.getItemLocations(getAscensionShardsName(unit))
             : [];
 
     const unlockedLocations = possibleLocations
