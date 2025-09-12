@@ -44,12 +44,7 @@ export const DailyRaids = () => {
         inventory,
     } = useContext(StoreContext);
 
-    const resolvedMows = useMemo(() => {
-        return storeMows.map(mow => {
-            if ('snowprintId' in mow) return mow as IMow2;
-            return { ...mow, ...MowsService.resolveToStatic(mow.tacticusId)! } as IMow2;
-        });
-    }, [storeMows]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
 
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
     const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);

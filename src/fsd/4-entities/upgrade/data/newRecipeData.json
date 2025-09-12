@@ -2838,7 +2838,7 @@
         ]
     },
     "upgDmgL006C": {
-        "material": "Optimal Relic Auxiliary Core",
+        "material": "Optimal Auxiliary Core",
         "snowprintId": "upgDmgL006C",
         "rarity": "Legendary",
         "stat": "Damage",
@@ -6540,7 +6540,7 @@
         ]
     },
     "upgHpR004C": {
-        "material": "Purifier",
+        "material": "Refined Bionics",
         "snowprintId": "upgHpR004C",
         "rarity": "Rare",
         "stat": "Health",
@@ -6962,7 +6962,7 @@
         "craftable": false
     },
     "upgHpU007": {
-        "material": "Advanced Filaments",
+        "material": "Purifier",
         "snowprintId": "upgHpU007",
         "rarity": "Uncommon",
         "stat": "Health",

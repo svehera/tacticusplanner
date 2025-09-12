@@ -25,12 +25,7 @@ interface Props {
 export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => {} }) => {
     const { goals, characters, mows, viewPreferences } = useContext(StoreContext);
 
-    const resolvedMows = useMemo(() => {
-        return mows.map(mow => {
-            if ('snowprintId' in mow) return mow as IMow2;
-            return { ...mow, ...MowsService.resolveToStatic(mow.tacticusId) } as IMow2;
-        });
-    }, [mows]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
     // We use the current goals of the tactician, as well as the current state
     // of the character, to determine which rank to show. We also take into

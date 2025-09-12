@@ -19,7 +19,7 @@ import {
     ICharacterUnlockGoal,
     ICharacterAscendGoal,
 } from '@/fsd/4-entities/goal';
-import { IMow2 } from '@/fsd/4-entities/mow';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { GoalsService } from 'src/v2/features/goals/goals.service';
@@ -35,12 +35,7 @@ import { CampaignsProgressionService } from './campaign-progression.service';
 export const CampaignProgression = () => {
     const { goals, characters, mows, campaignsProgress } = useContext(StoreContext);
 
-    const resolvedMows = useMemo(() => {
-        return mows.map(mow => {
-            if ('snowprintId' in mow) return mow;
-            return { ...mow, snowprintId: mow.tacticusId };
-        }) as IMow2[];
-    }, [mows]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
