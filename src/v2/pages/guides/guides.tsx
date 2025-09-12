@@ -41,12 +41,7 @@ export const Guides: React.FC = () => {
     const { userInfo, isAuthenticated } = useAuth();
     const [_, setSearchParams] = useSearchParams();
 
-    const resolvedMows = useMemo(() => {
-        return mows.map(mow => {
-            if ('snowprintId' in mow) return mow;
-            return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
-        }) as IMow2[];
-    }, [mows]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
     const isModerator = [UserRole.admin, UserRole.moderator].includes(userInfo.role);
     const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);

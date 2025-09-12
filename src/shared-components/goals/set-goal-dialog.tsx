@@ -63,14 +63,7 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
     const { characters, mows, goals, campaignsProgress } = useContext(StoreContext);
 
-    const resolvedMows = useMemo(
-        () =>
-            mows.map(mow => {
-                if ('snowprintId' in mow) return mow as IMow2;
-                return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
-            }),
-        [mows]
-    );
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
     const dispatch = useContext(DispatchContext);
 
@@ -137,7 +130,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 return characters;
             }
         }
-    }, [form.type, ignoreRankRarity]);
+    }, [form.type, ignoreRankRarity, resolvedMows, characters]);
 
     const getAscensionShardsName = (unit: IUnit | null): string => {
         if (!unit) return '';

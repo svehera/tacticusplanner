@@ -23,7 +23,7 @@ export const NumberInput: React.FC<Props> = ({
     step = 1,
     style = {},
 }) => {
-    const [inputValue, setInputValue] = useState(value.toString());
+    const [inputValue, setInputValue] = useState((value ?? '').toString());
 
     return (
         <FormControl fullWidth={fullWidth} style={style}>

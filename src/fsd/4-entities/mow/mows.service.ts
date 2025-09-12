@@ -1,4 +1,6 @@
-import { Alliance, DynamicProps, RarityMapper } from '@/fsd/5-shared/model';
+import { stat } from 'fs';
+
+import { Alliance, DynamicProps, Rarity, RarityMapper, RarityStars, UnitType } from '@/fsd/5-shared/model';
 
 import { IBaseUpgrade, ICraftedUpgrade, UpgradesService } from '@/fsd/4-entities/upgrade/@x/mow';
 
@@ -77,6 +79,36 @@ export class MowsService {
      */
     public static resolveToStatic(id: string): IMowStatic2 | undefined {
         return mows2Data.mows.find(x => x.snowprintId === this.resolveId(id));
+    }
+
+    /**
+     * @returns All mow data as IMow2 objects. Statically-known MoWs not in `mows` are added as
+     * locked units.
+     */
+    public static resolveAllFromStorage(mows: Array<IMow | IMow2>): IMow2[] {
+        const ret = mows.map(mow => {
+            if ('snowprintId' in mow) return mow as IMow2;
+            return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
+        });
+        // If the user's server data is missing any MoWs, merge them in as locked units.
+        mows2Data.mows.forEach(staticMow => {
+            if (!ret.find(x => x.snowprintId === staticMow.snowprintId)) {
+                ret.push({
+                    ...staticMow,
+                    id: staticMow.snowprintId,
+                    unlocked: false,
+                    primaryAbilityLevel: 1,
+                    secondaryAbilityLevel: 1,
+                    level: 1,
+                    rarity: Rarity.Common,
+                    stars: RarityStars.None,
+                    shards: 0,
+                    mythicShards: 0,
+                    unitType: UnitType.mow,
+                } as IMow2);
+            }
+        });
+        return ret;
     }
 
     public static resolveOldIdToStatic(id: string): IMowStatic2 | undefined {

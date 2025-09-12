@@ -57,10 +57,12 @@ export const SharedRoster = () => {
         return <div>Failed to fetch shared roster. Try again later.</div>;
     }
 
-    const resolvedMows = GlobalState.initMows(data.mows).map(mow => {
-        if ('snowprintId' in mow) return mow;
-        return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
-    }) as IMow2[];
+    const resolvedMows = MowsService.resolveAllFromStorage(
+        GlobalState.initMows(data.mows).map(mow => {
+            if ('snowprintId' in mow) return mow;
+            return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
+        }) as IMow2[]
+    );
 
     const sharedRoster: IUnit[] = [...GlobalState.initCharacters(data.characters), ...resolvedMows];
 
