@@ -25,10 +25,7 @@ export const Teams = () => {
     const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);
     const [editTeam, setEditTeam] = React.useState<IPersonalTeam | null>(null);
 
-    const resolvedMows = mows.map(mow => {
-        if ('snowprintId' in mow) return mow as IMow2;
-        return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow };
-    }) as IMow2[];
+    const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
     const addTeam = (team: IPersonalTeam) => {
         dispatch.teams({ type: 'Add', team });

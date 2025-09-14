@@ -66,6 +66,8 @@ export const UnitsAutocomplete = <T extends IUnit>({
 
     const getOptionText = (option: IUnit) => ('fullName' in option ? option.fullName : option.name);
 
+    console.log('options: ', options);
+
     return (
         <Autocomplete
             fullWidth
@@ -81,7 +83,9 @@ export const UnitsAutocomplete = <T extends IUnit>({
                 if (!q) return opts;
                 return opts.filter(x => {
                     const short = 'shortName' in x ? ((x as any).shortName?.toLowerCase?.() ?? '') : '';
-                    return short.includes(q);
+                    const normal = x.name?.toLowerCase?.() ?? '';
+                    const full = 'fullName' in x ? (x.fullName?.toLowerCase?.() ?? '') : '';
+                    return full.includes(q) || normal.includes(q) || short.includes(q);
                 });
             }}
             getOptionLabel={option => getOptionText(option)}

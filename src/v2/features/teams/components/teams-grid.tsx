@@ -76,9 +76,9 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
     };
 
     const renderCappedTeam = (team: IPersonalTeam) => {
-        const teamCharacters = team.lineup.map(
-            id => characters.find(character => NewCharService.matchesAnyCharacterId(id, character))!
-        );
+        const teamCharacters = team.lineup
+            .map(id => characters.find(character => NewCharService.matchesAnyCharacterId(id, character))!)
+            .filter(x => x !== undefined);
         const cappedCharacters = teamCharacters.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap));
         const teamMow = mows.find(x => x.id === team.mowId);
         const withMow = !!teamMow;

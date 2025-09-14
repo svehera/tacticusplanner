@@ -1,6 +1,13 @@
-import { Faction } from '../model';
+// eslint-disable-next-line import-x/no-internal-modules
+import factionsData from 'src/v2/data/factions.json';
+
+import { Alliance, Faction } from '../model';
 
 export class FactionsService {
+    /** @returns the snowprint IDs of the factions belonging to the alliance. */
+    public static getFactions(alliance: Alliance): string[] {
+        return factionsData.filter(x => x.alliance === alliance).map(x => x.snowprintId);
+    }
     /**
      * @param faction The faction to convert.
      * @returns the string representation of the faction.
@@ -10,43 +17,43 @@ export class FactionsService {
             case Faction.Ultramarines:
                 return 'Ultramarines';
             case Faction.Black_Legion:
-                return 'BlackLegion';
+                return 'Black Legion';
             case Faction.Orks:
                 return 'Orks';
             case Faction.ADEPTA_SORORITAS:
-                return 'Sisterhood';
+                return 'Adepta Sororitas';
             case Faction.Necrons:
                 return 'Necrons';
             case Faction.Astra_militarum:
-                return 'AstraMilitarum';
+                return 'Astra Militarum';
             case Faction.Death_Guard:
-                return 'DeathGuard';
+                return 'Death Guard';
             case Faction.Black_Templars:
-                return 'BlackTemplars';
+                return 'Black Templars';
             case Faction.Aeldari:
                 return 'Aeldari';
             case Faction.Space_Wolves:
-                return 'SpaceWolves';
+                return 'Space Wolves';
             case Faction.T_Au:
-                return 'Tau';
+                return "T'au";
             case Faction.Dark_Angels:
-                return 'DarkAngels';
+                return 'Dark Angels';
             case Faction.Thousand_Sons:
-                return 'ThousandSons';
+                return 'Thousand Sons';
             case Faction.Tyranids:
                 return 'Tyranids';
             case Faction.AdeptusMechanicus:
-                return 'AdeptusMechanicus';
+                return 'Adeptus Mechanicus';
             case Faction.WorldEaters:
-                return 'WorldEaters';
+                return 'World Eaters';
             case Faction.BloodAngels:
-                return 'BloodAngels';
+                return 'Blood Angels';
             case Faction.GenestealerCults:
-                return 'Genestealers';
+                return 'Genestealer Cults';
             case Faction.AdeptusCustodes:
                 return 'Custodes';
             case Faction.EmperorsChildren:
-                return 'EmperorsChildren';
+                return 'Emperors Children';
             default:
                 return '';
         }
@@ -100,6 +107,57 @@ export class FactionsService {
                 return Faction.EmperorsChildren;
             default:
                 throw new Error(`Unknown faction: ${snowprintFaction}`);
+        }
+    };
+
+    /**
+     * @param faction The Faction enum value.
+     * @returns the snowprint ID of the faction.
+     */
+    public static getFactionSnowprintId = (faction: Faction): string => {
+        switch (faction) {
+            case Faction.Ultramarines:
+                return 'Ultramarines';
+            case Faction.Black_Legion:
+                return 'BlackLegion';
+            case Faction.Orks:
+                return 'Orks';
+            case Faction.ADEPTA_SORORITAS:
+                return 'Sisterhood';
+            case Faction.Necrons:
+                return 'Necrons';
+            case Faction.Astra_militarum:
+                return 'AstraMilitarum';
+            case Faction.Death_Guard:
+                return 'DeathGuard';
+            case Faction.Black_Templars:
+                return 'BlackTemplars';
+            case Faction.Aeldari:
+                return 'Aeldari';
+            case Faction.Space_Wolves:
+                return 'SpaceWolves';
+            case Faction.T_Au:
+                return 'Tau';
+            case Faction.Dark_Angels:
+                return 'DarkAngels';
+            case Faction.Thousand_Sons:
+                return 'ThousandSons';
+            case Faction.Tyranids:
+                return 'Tyranids';
+            case Faction.AdeptusMechanicus:
+                return 'AdeptusMechanicus';
+            case Faction.WorldEaters:
+                return 'WorldEaters';
+            case Faction.BloodAngels:
+                return 'BloodAngels';
+            case Faction.GenestealerCults:
+                return 'Genestealers';
+            case Faction.AdeptusCustodes:
+                return 'Custodes';
+            case Faction.EmperorsChildren:
+                return 'EmperorsChildren';
+            default:
+                throw new Error(`Unknown Faction enum: ${faction}`);
         }
     };
 }
