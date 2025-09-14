@@ -102,4 +102,55 @@ export class FactionsService {
                 throw new Error(`Unknown faction: ${snowprintFaction}`);
         }
     };
+
+    /**
+     * @param faction The Faction enum value.
+     * @returns the snowprint ID of the faction.
+     */
+    public static getFactionSnowprintId = (faction: Faction): string => {
+        switch (faction) {
+            case Faction.Ultramarines:
+                return 'Ultramarines';
+            case Faction.Black_Legion:
+                return 'BlackLegion';
+            case Faction.Orks:
+                return 'Orks';
+            case Faction.ADEPTA_SORORITAS:
+                return 'Sisterhood';
+            case Faction.Necrons:
+                return 'Necrons';
+            case Faction.Astra_militarum:
+                return 'AstraMilitarum';
+            case Faction.Death_Guard:
+                return 'DeathGuard';
+            case Faction.Black_Templars:
+                return 'BlackTemplars';
+            case Faction.Aeldari:
+                return 'Aeldari';
+            case Faction.Space_Wolves:
+                return 'SpaceWolves';
+            case Faction.T_Au:
+                return 'Tau';
+            case Faction.Dark_Angels:
+                return 'DarkAngels';
+            case Faction.Thousand_Sons:
+                return 'ThousandSons';
+            case Faction.Tyranids:
+                return 'Tyranids';
+            case Faction.AdeptusMechanicus:
+                return 'AdeptusMechanicus';
+            case Faction.WorldEaters:
+                return 'WorldEaters';
+            case Faction.BloodAngels:
+                return 'BloodAngels';
+            case Faction.GenestealerCults:
+                return 'Genestealers';
+            case Faction.AdeptusCustodes:
+                return 'Custodes';
+            case Faction.EmperorsChildren:
+                return 'EmperorsChildren';
+            default:
+                throw new Error(`Unknown Faction enum: ${faction}`);
+        }
+    };
 }

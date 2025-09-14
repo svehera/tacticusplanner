@@ -22,7 +22,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
 
     const allFactions = useMemo(
         () => factionsData.map(x => ({ alliance: x.alliance as Alliance, faction: x.name as Faction })),
-        []
+        [factionsData]
     );
 
     const enemiesTypeOptions = useMemo(() => CampaignsService.getPossibleEnemiesTypes(), []);

@@ -1,6 +1,7 @@
 import { groupBy, orderBy, sortBy, uniq } from 'lodash';
 import { X } from 'lucide-react';
 
+import { FactionsService } from '@/fsd/5-shared/lib';
 import { Alliance, Faction, Rarity } from '@/fsd/5-shared/model';
 
 import { recipeDataByName } from '@/fsd/4-entities/upgrade/@x/campaign';
@@ -178,16 +179,19 @@ export class CampaignsService {
         materialRarity?: Rarity
     ): boolean {
         const {
-            alliesFactions,
+            alliesFactions: alliesFactionsRaw,
             alliesAlliance,
             enemiesAlliance,
-            enemiesFactions,
+            enemiesFactions: enemiesFactionsRaw,
             campaignTypes,
             upgradesRarity,
             slotsCount,
             enemiesTypes,
             enemiesCount,
         } = filters;
+
+        const enemiesFactions = enemiesFactionsRaw.map(faction => FactionsService.getFactionSnowprintId(faction));
+        const alliesFactions = alliesFactionsRaw.map(faction => FactionsService.getFactionSnowprintId(faction));
 
         if (enemiesCount?.length) {
             if (!enemiesCount.includes(location.enemiesTotal)) {
