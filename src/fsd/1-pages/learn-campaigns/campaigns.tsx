@@ -154,7 +154,9 @@ export const Campaigns = () => {
             valueGetter: (params: ValueGetterParams<ICampaignBattleComposed>) => {
                 const battle = params.data;
                 if (battle) {
-                    return battle.enemiesFactions;
+                    return battle.enemiesFactions.map(x =>
+                        FactionsService.factionToString(FactionsService.snowprintFactionToFaction(x))
+                    );
                 }
             },
             cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
@@ -217,6 +219,11 @@ export const Campaigns = () => {
 
     return (
         <div>
+            <div>
+                <table>
+                    <thead></thead>
+                </table>
+            </div>
             <div className="flex-box gap10 wrap">
                 <FormControl style={{ width: 250, margin: 20 }}>
                     <InputLabel>Campaign</InputLabel>

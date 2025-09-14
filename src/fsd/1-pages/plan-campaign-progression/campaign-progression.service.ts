@@ -1,5 +1,7 @@
 import { uniq } from 'lodash';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import { FactionsService } from '@/fsd/5-shared/lib/factions.service';
 import { Rank, Rarity } from '@/fsd/5-shared/model';
 
 import {
@@ -60,8 +62,9 @@ export class CampaignsProgressionService {
         Object.entries(battleData).forEach(([battleId, battle]) => {
             if (!(battleId in CampaignsService.campaignsComposed)) return;
             // Early indomitus battles are sparse.
-            CampaignsService.campaignsComposed[battleId].alliesFactions.forEach(faction => {
+            CampaignsService.campaignsComposed[battleId].alliesFactions.forEach(factionId => {
                 if (!battle.campaign) return; // Early indomitus doesn't have most of this info.
+                const faction = FactionsService.snowprintFactionToFaction(factionId);
                 result.campaignFactions.get(battle.campaign)?.add(faction);
                 if (!result.factionCampaigns.get(faction)) {
                     result.factionCampaigns.set(faction, new Set<string>());

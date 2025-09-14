@@ -1,6 +1,7 @@
 import { groupBy, orderBy, sortBy, uniq } from 'lodash';
 import { X } from 'lucide-react';
 
+import { FactionsService } from '@/fsd/5-shared/lib';
 import { Alliance, Faction, Rarity } from '@/fsd/5-shared/model';
 
 import { recipeDataByName } from '@/fsd/4-entities/upgrade/@x/campaign';
@@ -129,7 +130,7 @@ export class CampaignsService {
                 rewards: battle.rewards,
                 slots: battle.slots,
                 enemiesAlliances: (battle.enemiesAlliances ?? [enemies.alliance]) as Alliance[],
-                enemiesFactions: (battle.enemiesFactions ?? enemies.factions) as Faction[],
+                enemiesFactions: battle.enemiesFactions ?? enemies.factions,
                 alliesAlliance: allies.alliance,
                 alliesFactions: allies.factions,
                 enemiesTotal: battle.enemiesTotal ?? 0,
@@ -178,16 +179,19 @@ export class CampaignsService {
         materialRarity?: Rarity
     ): boolean {
         const {
-            alliesFactions,
+            alliesFactions: alliesFactionsRaw,
             alliesAlliance,
             enemiesAlliance,
-            enemiesFactions,
+            enemiesFactions: enemiesFactionsRaw,
             campaignTypes,
             upgradesRarity,
             slotsCount,
             enemiesTypes,
             enemiesCount,
         } = filters;
+
+        const enemiesFactions = enemiesFactionsRaw.map(faction => FactionsService.getFactionSnowprintId(faction));
+        const alliesFactions = alliesFactionsRaw.map(faction => FactionsService.getFactionSnowprintId(faction));
 
         if (enemiesCount?.length) {
             if (!enemiesCount.includes(location.enemiesTotal)) {
@@ -264,26 +268,11 @@ export class CampaignsService {
      * allies are usable in the campaign when enough deployment slots are available.
      */
     public static getEnemiesAndAllies(campaign: Campaign): {
-        enemies: { alliance: Alliance; factions: Faction[] };
-        allies: { alliance: Alliance; factions: Faction[] };
+        enemies: { alliance: Alliance; factions: string[] };
+        allies: { alliance: Alliance; factions: string[] };
     } {
-        const ImperialFactions: Faction[] = [
-            Faction.Ultramarines,
-            Faction.Astra_militarum,
-            Faction.Black_Templars,
-            Faction.ADEPTA_SORORITAS,
-            Faction.AdeptusMechanicus,
-            Faction.Space_Wolves,
-            Faction.Dark_Angels,
-            Faction.BloodAngels,
-        ];
-
-        const ChaosFactions: Faction[] = [
-            Faction.Black_Legion,
-            Faction.Death_Guard,
-            Faction.Thousand_Sons,
-            Faction.WorldEaters,
-        ];
+        const ImperialFactions: string[] = FactionsService.getFactions(Alliance.Imperial);
+        const ChaosFactions: string[] = FactionsService.getFactions(Alliance.Chaos);
 
         switch (campaign) {
             case Campaign.I:
@@ -291,7 +280,7 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Xenos,
-                        factions: [Faction.Necrons],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Necrons)],
                     },
                     allies: {
                         alliance: Alliance.Imperial,
@@ -304,11 +293,14 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Imperial,
-                        factions: [Faction.Astra_militarum, Faction.Ultramarines],
+                        factions: [
+                            FactionsService.getFactionSnowprintId(Faction.Astra_militarum),
+                            FactionsService.getFactionSnowprintId(Faction.Ultramarines),
+                        ],
                     },
                     allies: {
                         alliance: Alliance.Xenos,
-                        factions: [Faction.Necrons],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Necrons)],
                     },
                 };
             }
@@ -317,7 +309,7 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Imperial,
-                        factions: [Faction.Astra_militarum],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Astra_militarum)],
                     },
                     allies: {
                         alliance: Alliance.Chaos,
@@ -330,7 +322,7 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Chaos,
-                        factions: [Faction.Black_Legion],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Black_Legion)],
                     },
                     allies: {
                         alliance: Alliance.Imperial,
@@ -343,11 +335,11 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Imperial,
-                        factions: [Faction.Black_Templars],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Black_Templars)],
                     },
                     allies: {
                         alliance: Alliance.Xenos,
-                        factions: [Faction.Orks],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Orks)],
                     },
                 };
             }
@@ -356,7 +348,7 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Xenos,
-                        factions: [Faction.Orks],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Orks)],
                     },
                     allies: {
                         alliance: Alliance.Imperial,
@@ -369,11 +361,11 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Chaos,
-                        factions: [Faction.Thousand_Sons],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Thousand_Sons)],
                     },
                     allies: {
                         alliance: Alliance.Xenos,
-                        factions: [Faction.Aeldari],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Aeldari)],
                     },
                 };
             }
@@ -382,7 +374,7 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Xenos,
-                        factions: [Faction.Aeldari],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Aeldari)],
                     },
                     allies: {
                         alliance: Alliance.Chaos,
