@@ -80,7 +80,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
         const node = getCheapestNode(material);
         if (!node) return '(unfarmable)';
         return (
-            material +
+            UpgradesService.getUpgrade(material).label +
             ' is currently farmable from ' +
             node.id +
             '. You need ' +
