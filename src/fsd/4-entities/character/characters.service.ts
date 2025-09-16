@@ -40,7 +40,6 @@ export class CharactersService {
             const event = LegendaryEventService.getEventByCharacterSnowprintId(unit.snowprintId!);
             return event?.id === id;
         });
-        return undefined;
     }
 
     /**
