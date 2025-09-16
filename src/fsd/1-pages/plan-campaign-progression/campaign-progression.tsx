@@ -6,9 +6,7 @@ import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { ICharacter2 } from '@/models/interfaces';
-// eslint-disable-next-line import-x/no-internal-modules
-import { StoreContext } from 'src/reducers/store.provider';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { CampaignImage } from '@/fsd/4-entities/campaign';
 // eslint-disable-next-line boundaries/element-types
@@ -19,8 +17,13 @@ import {
     ICharacterUnlockGoal,
     ICharacterAscendGoal,
 } from '@/fsd/4-entities/goal';
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { MowsService } from '@/fsd/4-entities/mow';
+import { IUnit } from '@/fsd/4-entities/unit';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import { ActiveGoalsDialog } from '@/v2/features/goals/active-goals-dialog';
+// eslint-disable-next-line import-x/no-internal-modules
+import { CharacterRaidGoalSelect } from '@/v2/features/goals/goals.models';
 // eslint-disable-next-line import-x/no-internal-modules
 import { GoalsService } from 'src/v2/features/goals/goals.service';
 
@@ -33,25 +36,45 @@ import { CampaignData } from './campaign-progression.models';
 import { CampaignsProgressionService } from './campaign-progression.service';
 
 export const CampaignProgression = () => {
-    const { goals, characters, mows, campaignsProgress } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
+    const { characters: storeCharacters, mows: storeMows, goals, campaignsProgress } = useContext(StoreContext);
 
-    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
 
-    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
+    const resolvedCharacters = useMemo(
+        () => CharactersService.resolveStoredCharacters(storeCharacters),
+        [storeCharacters]
+    );
+
+    const [units] = React.useState<IUnit[]>([...resolvedCharacters, ...resolvedMows]);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, [...resolvedCharacters, ...resolvedMows], false);
+        const { allGoals, shardsGoals, upgradeRankOrMowGoals } = GoalsService.prepareGoals(
+            goals,
+            [...resolvedCharacters, ...resolvedMows],
+            false
+        );
+        const filteredShardsGoals = shardsGoals.filter(goal => goal.include);
+        const filteredUpgradeRankOrMowGoals = upgradeRankOrMowGoals.filter(goal => goal.include);
+        return { allGoals, shardsGoals: filteredShardsGoals, upgradeRankOrMowGoals: filteredUpgradeRankOrMowGoals };
     }, [goals, resolvedCharacters, resolvedMows]);
+
+    const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
+        dispatch.goals({
+            type: 'UpdateDailyRaids',
+            value: selection.map(x => ({ goalId: x.goalId, include: x.include })),
+        });
+    };
 
     const progression = useMemo(() => {
         const allGoals: Array<
             ICharacterUpgradeMow | ICharacterUpgradeRankGoal | ICharacterUnlockGoal | ICharacterAscendGoal
-        > = shardsGoals;
-        for (const goal of upgradeRankOrMowGoals) {
-            allGoals.push(goal);
-        }
+        > = shardsGoals.filter(goal => goal.include);
+        upgradeRankOrMowGoals.forEach(goal => {
+            if (goal.include) allGoals.push(goal);
+        });
         return CampaignsProgressionService.computeCampaignsProgress(allGoals, campaignsProgress);
-    }, [allGoals, campaignsProgress]);
+    }, [shardsGoals, upgradeRankOrMowGoals, allGoals, campaignsProgress]);
 
     const campaignDataArray = useMemo(() => {
         const result: CampaignData[] = [];
@@ -159,6 +182,7 @@ export const CampaignProgression = () => {
     return (
         <div key="root">
             <CampaignProgressionHeader />
+            <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
             <CampaignProgressionUnfarmableMaterials progression={progression} campaignDataArray={campaignDataArray} />
             <h1>Campaign Progression</h1>
             {campaignDataArray.map((entry, ignored) => {

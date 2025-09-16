@@ -36,26 +36,6 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
         return progression.materialFarmData.get(material)?.count ?? 0;
     }
 
-    function campaignTypeToNumber(type: CampaignType): number {
-        switch (type) {
-            case CampaignType.Elite:
-                return 0;
-            case CampaignType.Early:
-                return 1;
-            case CampaignType.Mirror:
-                return 2;
-            case CampaignType.Normal:
-                return 3;
-            default:
-                return 4;
-        }
-    }
-
-    /** @returns true iff typeA is more cost-efficient at farming than typeB.  */
-    function isCampaignTypeMoreEfficient(typeA: CampaignType, typeB: CampaignType): boolean {
-        return campaignTypeToNumber(typeA) < campaignTypeToNumber(typeB);
-    }
-
     /**
      * @param material The material to farm.
      * @returns The battle representing the best node to farm (picked
@@ -63,13 +43,14 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
      *          material.
      */
     function getCheapestNode(material: string): ICampaignBattleComposed | undefined {
-        let result: ICampaignBattleComposed | undefined = undefined;
-        for (const loc of progression.materialFarmData.get(material)?.farmableLocations ?? []) {
-            if (!result || isCampaignTypeMoreEfficient(loc.campaignType, result.campaignType)) {
-                result = loc;
-            }
+        const count = getRequiredMaterialCount(material);
+        const farmable = progression.materialFarmData.get(material)?.farmableLocations ?? [];
+        let best: { node: ICampaignBattleComposed; cost: number } | undefined;
+        for (const loc of farmable) {
+            const cost = CampaignsProgressionService.getCostToFarmMaterial(loc, count);
+            if (!best || cost < best.cost) best = { node: loc, cost };
         }
-        return result;
+        return best?.node;
     }
 
     /**
@@ -86,11 +67,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
             '. You need ' +
             getRequiredMaterialCount(material) +
             ' to complete your goals, which costs ' +
-            CampaignsProgressionService.getCostToFarmMaterial(
-                node.campaignType,
-                getRequiredMaterialCount(material),
-                node.rarityEnum
-            ) +
+            CampaignsProgressionService.getCostToFarmMaterial(node, getRequiredMaterialCount(material)) +
             ' energy, before beating this node.'
         );
     }
