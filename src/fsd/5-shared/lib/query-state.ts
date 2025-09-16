@@ -20,15 +20,18 @@ export const useQueryState = <T>(
             setValue(newValue);
             const newQueryParam = valueToString(newValue);
 
+            // Clone the current URLSearchParams before mutating to ensure
+            // existing keys (e.g., activeTab) are preserved across updates.
             setSearchParams(
                 curr => {
+                    const next = new URLSearchParams(curr);
                     if (newQueryParam) {
-                        curr.set(queryParam, newQueryParam);
+                        next.set(queryParam, newQueryParam);
                     } else {
-                        curr.delete(queryParam);
+                        next.delete(queryParam);
                     }
 
-                    return curr;
+                    return next;
                 },
                 { replace: true }
             );
