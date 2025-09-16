@@ -393,7 +393,10 @@ export class CampaignsService {
                     },
                     allies: {
                         alliance: Alliance.Chaos,
-                        factions: [Faction.Death_Guard, Faction.WorldEaters],
+                        factions: [
+                            FactionsService.getFactionSnowprintId(Faction.Death_Guard),
+                            FactionsService.getFactionSnowprintId(Faction.WorldEaters),
+                        ],
                     },
                 };
             }
@@ -404,11 +407,14 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Xenos,
-                        factions: [Faction.Tyranids],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Tyranids)],
                     },
                     allies: {
                         alliance: Alliance.Imperial,
-                        factions: [Faction.Ultramarines, Faction.BloodAngels],
+                        factions: [
+                            FactionsService.getFactionSnowprintId(Faction.Ultramarines),
+                            FactionsService.getFactionSnowprintId(Faction.BloodAngels),
+                        ],
                     },
                 };
             }
@@ -419,11 +425,17 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Xenos,
-                        factions: [Faction.T_Au, Faction.Astra_militarum],
+                        factions: [
+                            FactionsService.getFactionSnowprintId(Faction.T_Au),
+                            FactionsService.getFactionSnowprintId(Faction.Astra_militarum),
+                        ],
                     },
                     allies: {
                         alliance: Alliance.Xenos,
-                        factions: [Faction.GenestealerCults, Faction.Tyranids],
+                        factions: [
+                            FactionsService.getFactionSnowprintId(Faction.GenestealerCults),
+                            FactionsService.getFactionSnowprintId(Faction.Tyranids),
+                        ],
                     },
                 };
             }
@@ -431,7 +443,7 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Xenos,
-                        factions: [Faction.Necrons],
+                        factions: [FactionsService.getFactionSnowprintId(Faction.Necrons)],
                     },
                     allies: {
                         alliance: Alliance.Imperial,
