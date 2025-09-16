@@ -1,27 +1,24 @@
 import { allLegendaryEvents } from './data';
 import { ILegendaryEventStatic } from './static-data.model';
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+
 type UnfinishedScheduledEvent = Required<Pick<ILegendaryEventStatic, 'nextEventDateUtc'>> & ILegendaryEventStatic;
 
-function unfishedScheduledEvent(e: ILegendaryEventStatic): e is UnfinishedScheduledEvent {
-    return !e.finished && e.nextEventDateUtc !== undefined;
+function isUnfinishedScheduledEvent(event: ILegendaryEventStatic): event is UnfinishedScheduledEvent {
+    return !event.finished && !!event.nextEventDateUtc;
 }
 
 export class LegendaryEventService {
     public static getActiveEvent(events?: ILegendaryEventStatic[]): ILegendaryEventStatic | undefined {
-        const now = new Date();
-        const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        const sevenDaysAgoTs = Date.now() - 7 * DAY_MS;
         const sortedEvents = (events ?? allLegendaryEvents)
-            .filter(unfishedScheduledEvent)
-            // Consider events which have started in the last 7 days or will start in the future
-            .filter(e => new Date(e.nextEventDateUtc) > sevenDaysAgo)
-            .sort((a, b) => {
-                return new Date(a.nextEventDateUtc).getTime() - new Date(b.nextEventDateUtc).getTime();
-            });
-        if (sortedEvents.length > 0) {
-            return sortedEvents[0];
-        }
-        return undefined;
+            .filter(isUnfinishedScheduledEvent)
+            .map(event => ({ event, startDate: Date.parse(event.nextEventDateUtc) }))
+            // started in the last 7 days (exclusive) or any future date
+            .filter(({ startDate }) => Number.isFinite(startDate) && startDate > sevenDaysAgoTs)
+            .sort((a, b) => a.startDate - b.startDate);
+        return sortedEvents[0]?.event;
     }
 
     public static getUnfinishedEvents(): ILegendaryEventStatic[] {
