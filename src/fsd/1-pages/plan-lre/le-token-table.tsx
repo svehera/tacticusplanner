@@ -3,7 +3,8 @@ import React, { useContext, useMemo } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
-import { StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { Rarity } from '@/fsd/5-shared/model';
+import { RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { LreReqImage } from '@/fsd/4-entities/lre';
@@ -111,7 +112,17 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                 <tbody>
                     <tr>
                         <td className="flex justify-center items-center">
-                            {milestone.points >= 21000 ? <span>100%</span> : <StarsIcon stars={milestone.stars + 5} />}
+                            {milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1].points ? (
+                                '100%'
+                            ) : (
+                                <>
+                                    {milestone.stars == 7 ? (
+                                        <RarityIcon rarity={Rarity.Mythic} />
+                                    ) : (
+                                        <StarsIcon stars={milestone.stars + 5 - (milestone.stars >= 7 ? 1 : 0)} />
+                                    )}
+                                </>
+                            )}
                         </td>
                     </tr>
                     <tr>
