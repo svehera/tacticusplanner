@@ -219,11 +219,7 @@ export class CampaignsProgressionService {
                     continue;
                 }
                 const farmData = result.materialFarmData.get(this.getReward(battle))!;
-                const newEnergyCost: number = this.getCostToFarmMaterial(
-                    battle.campaignType,
-                    farmData.count,
-                    battle.rarityEnum
-                );
+                const newEnergyCost: number = this.getCostToFarmMaterial(battle, farmData.count);
                 const oldEnergy = newMaterialEnergy.get(this.getReward(battle)) ?? farmData.totalEnergy;
                 if (oldEnergy - farmData.count / 2 > newEnergyCost || !farmData.canFarm) {
                     cumulativeSavings += farmData.totalEnergy - newEnergyCost;
@@ -401,37 +397,21 @@ export class CampaignsProgressionService {
             farmableLocations: this.getFarmableLocations(material, campaignProgress),
             unfarmableLocations: this.getUnfarmableLocations(material, campaignProgress),
         };
-        const hasExtremis = result.farmableLocations.filter(x => x.campaignType == CampaignType.Extremis).length > 0;
-        const hasElite = result.farmableLocations.filter(x => x.campaignType == CampaignType.Elite).length > 0;
-        const hasEarly =
-            result.farmableLocations.filter(
-                x => x.campaign == 'Indomitus' && x.campaignType == CampaignType.Normal && x.nodeNumber < 30
-            ).length > 0;
-        const hasMirror = result.farmableLocations.filter(x => x.campaignType == CampaignType.Mirror).length > 0;
-        const hasNormal = result.farmableLocations.filter(x => x.campaignType == CampaignType.Normal).length > 0;
-        const rarity = UpgradesService.recipeExpandedUpgradeData[material]?.rarity ?? undefined;
-        if (hasExtremis) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Extremis, count, rarity!);
-            result.campaignType = CampaignType.Extremis;
-        } else if (hasElite) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Elite, count, rarity!);
-            result.campaignType = CampaignType.Elite;
-        } else if (hasEarly) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Early, count, rarity!);
-            result.campaignType = CampaignType.Early;
-        } else if (hasMirror) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Mirror, count, rarity!);
-            result.campaignType = CampaignType.Mirror;
-        } else if (hasNormal) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Normal, count, rarity!);
-            result.campaignType = CampaignType.Normal;
-        } else if (result.farmableLocations.length == 0) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Normal, count, rarity!);
-            result.canFarm = false;
-        } else {
-            console.error('Unknown node type ' + CampaignType[result.farmableLocations[0].campaignType]);
-            result.totalEnergy = -1;
-        }
+        let bestBattle: ICampaignBattleComposed | undefined = undefined;
+        result.farmableLocations.forEach(battle => {
+            if (!bestBattle) {
+                bestBattle = battle;
+                result.campaignType = battle.campaignType;
+                result.totalEnergy = this.getCostToFarmMaterial(battle, count);
+                return;
+            }
+            const energyCost = this.getCostToFarmMaterial(battle, count);
+            if (energyCost < result.totalEnergy) {
+                bestBattle = battle;
+                result.campaignType = battle.campaignType;
+                result.totalEnergy = energyCost;
+            }
+        });
         return result;
     }
 
@@ -506,28 +486,15 @@ export class CampaignsProgressionService {
     }
 
     /**
-     * @param type The campaign type from which to farm.
-     * @param rarity The rarity of the material to farm.
+     * @param battle The campaign battle to farm.
      * @param count The number of items to farm.
      * @returns The total expected energy cost using the ideal strategy to minimize
      *          energy spent.
      */
-    public static getCostToFarmMaterial(type: CampaignType, count: number, rarity: Rarity): number {
-        if (rarity === undefined) {
-            // For character shards, elite nodes drop 25 shards per 24 pulls. Extermis nodes drop at
-            // a rate of 61.54%. All other nodes drop 3 shards per 10 pulls.
-            if (type == CampaignType.Extremis) {
-                return 6 * Math.ceil(count * 0.6154);
-            } else if (type == CampaignType.Elite) {
-                return 10 * Math.ceil((count * 24) / 25.0);
-            } else if (type == CampaignType.Early) {
-                return 5 * Math.ceil((count * 10) / 3.0);
-            } else {
-                return 6 * Math.ceil((count * 10) / 3.0);
-            }
-        }
-
-        return Math.ceil(count / this.getDropRate(type, rarity)) * this.getEnergyCost(type);
+    public static getCostToFarmMaterial(battle: ICampaignBattleComposed, count: number): number {
+        // The drop rate is calculated in drops per raid, so it doesn't take into account energy.
+        // The effective energy cost to farm a single item is energyCost / dropRate.
+        return Math.ceil((battle.energyCost * count) / battle.dropRate);
     }
 
     /** @returns the material ID of the material with the given label. */

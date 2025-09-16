@@ -86,11 +86,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
             '. You need ' +
             getRequiredMaterialCount(material) +
             ' to complete your goals, which costs ' +
-            CampaignsProgressionService.getCostToFarmMaterial(
-                node.campaignType,
-                getRequiredMaterialCount(material),
-                node.rarityEnum
-            ) +
+            CampaignsProgressionService.getCostToFarmMaterial(node, getRequiredMaterialCount(material)) +
             ' energy, before beating this node.'
         );
     }
