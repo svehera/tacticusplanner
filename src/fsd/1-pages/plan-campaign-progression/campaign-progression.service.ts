@@ -97,10 +97,8 @@ export class CampaignsProgressionService {
         result: CampaignsProgressData,
         nodesToBeat: Map<string, ICampaignBattleComposed[]>
     ): void {
-        let totalCost: number = 0;
         for (const goal of goals) {
             const goalData: GoalData = this.computeGoalCost(goal, campaignProgress, inventoryUpgrades);
-            totalCost += goalData.totalEnergy;
             goalData.unfarmableLocations.forEach(x => {
                 nodesToBeat.get(x.campaign)?.push(x);
             });
@@ -221,6 +219,8 @@ export class CampaignsProgressionService {
                 const farmData = result.materialFarmData.get(this.getReward(battle))!;
                 const newEnergyCost: number = this.getCostToFarmMaterial(battle, farmData.count);
                 const oldEnergy = newMaterialEnergy.get(this.getReward(battle)) ?? farmData.totalEnergy;
+                // If we need X instances of an upgrade material, only suggest beating a node if we
+                // save at least X/2 energy by doing so (or if we can't farm the item).
                 if (oldEnergy - farmData.count / 2 > newEnergyCost || !farmData.canFarm) {
                     cumulativeSavings += farmData.totalEnergy - newEnergyCost;
                     result.data
@@ -284,9 +284,9 @@ export class CampaignsProgressionService {
                     : CampaignsProgressionService.getMowUpgradeRank(goal as ICharacterUpgradeMow);
 
             for (const unitUpgrade of upgradeRanks) {
-                for (const upgradeMaterial of unitUpgrade.upgrades) {
+                for (const upgradeMaterialId of unitUpgrade.upgrades) {
                     const expandedRecipe: IRecipeExpandedUpgrade =
-                        UpgradesService.recipeExpandedUpgradeData[upgradeMaterial];
+                        UpgradesService.recipeExpandedUpgradeData[upgradeMaterialId];
                     if (Object.entries(expandedRecipe.expandedRecipe).length == 0) {
                         this.addToMaterials(materialReqs, expandedRecipe.id, 1);
                     } else {
@@ -308,7 +308,7 @@ export class CampaignsProgressionService {
                     newCount -= inventoryUpgrades[material];
                 }
                 if (newCount > 0) {
-                    newMaterials[material] = count;
+                    newMaterials[material] = newCount;
                 }
             }
             materialReqs.materials = newMaterials;
@@ -318,12 +318,12 @@ export class CampaignsProgressionService {
                 UpgradesService.recipeExpandedUpgradeData[b].rarity -
                 UpgradesService.recipeExpandedUpgradeData[a].rarity
         );
-        for (const material of sortedMaterials) {
-            const count: number = materialReqs.materials[material];
-            const farmData: FarmData = this.getCostToFarm(goal, material, count, campaignProgress, inventoryUpgrades);
+        for (const materialId of sortedMaterials) {
+            const count: number = materialReqs.materials[materialId];
+            const farmData: FarmData = this.getCostToFarm(goal, materialId, count, campaignProgress, inventoryUpgrades);
             result.canFarm = result.canFarm && farmData.canFarm;
             result.totalEnergy = result.totalEnergy + farmData.totalEnergy;
-            result.farmData.set(material, farmData);
+            result.farmData.set(materialId, farmData);
             farmData.farmableLocations.forEach(x => {
                 result.farmableLocations.push(x);
             });
@@ -372,7 +372,7 @@ export class CampaignsProgressionService {
      * so the results are always an approximation.
      *
      * @goal goal The goal for which we need to farm the material.
-     * @param material The ID of the material to farm.
+     * @param materialId The ID of the material to farm.
      * @param count The number of this material we need.
      * @param campaignProgress Our progress in the campaigns, dictating the nodes from
      *                         which we can farm.
@@ -383,19 +383,19 @@ export class CampaignsProgressionService {
      */
     public static getCostToFarm(
         goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal,
-        material: string,
+        materialId: string,
         count: number,
         campaignProgress: ICampaignsProgress,
         inventoryUpgrades: Record<string, number>
     ): FarmData {
         const result: FarmData = {
-            material: material,
+            material: materialId,
             totalEnergy: 0,
             canFarm: true,
             count: count,
             campaignType: CampaignType.Normal,
-            farmableLocations: this.getFarmableLocations(material, campaignProgress),
-            unfarmableLocations: this.getUnfarmableLocations(material, campaignProgress),
+            farmableLocations: this.getFarmableLocations(materialId, campaignProgress),
+            unfarmableLocations: this.getUnfarmableLocations(materialId, campaignProgress),
         };
         let bestBattle: ICampaignBattleComposed | undefined = undefined;
         result.farmableLocations.forEach(battle => {
@@ -511,14 +511,14 @@ export class CampaignsProgressionService {
      * @returns The locations from which we can currently farm a specific material.
      */
     public static getFarmableLocations(
-        material: string,
+        materialId: string,
         campaignProgress: ICampaignsProgress
     ): ICampaignBattleComposed[] {
         const result: ICampaignBattleComposed[] = [];
 
         Object.entries(CampaignsService.campaignsComposed).forEach(([_, battle]) => {
             if (
-                this.getMaterialId(this.getReward(battle)) === this.getMaterialId(material) &&
+                this.getReward(battle) === materialId &&
                 CampaignsService.hasCompletedBattle(battle, campaignProgress)
             ) {
                 result.push(battle);

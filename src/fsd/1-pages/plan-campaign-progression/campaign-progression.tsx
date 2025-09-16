@@ -6,13 +6,9 @@ import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { ICharacter2 } from '@/models/interfaces';
-// eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
-import { useAuth } from '@/fsd/5-shared/model';
-
-import { CampaignImage, ICampaingsFilters } from '@/fsd/4-entities/campaign';
+import { CampaignImage } from '@/fsd/4-entities/campaign';
 // eslint-disable-next-line boundaries/element-types
 import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
 import {
@@ -21,13 +17,13 @@ import {
     ICharacterUnlockGoal,
     ICharacterAscendGoal,
 } from '@/fsd/4-entities/goal';
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { ActiveGoalsDialog } from '@/v2/features/goals/active-goals-dialog';
 // eslint-disable-next-line import-x/no-internal-modules
-import { CharacterRaidGoalSelect, IItemRaidLocation } from '@/v2/features/goals/goals.models';
+import { CharacterRaidGoalSelect } from '@/v2/features/goals/goals.models';
 // eslint-disable-next-line import-x/no-internal-modules
 import { GoalsService } from 'src/v2/features/goals/goals.service';
 
@@ -78,7 +74,7 @@ export const CampaignProgression = () => {
             if (goal.include) allGoals.push(goal);
         });
         return CampaignsProgressionService.computeCampaignsProgress(allGoals, campaignsProgress);
-    }, [allGoals, campaignsProgress]);
+    }, [shardsGoals, upgradeRankOrMowGoals, allGoals, campaignsProgress]);
 
     const campaignDataArray = useMemo(() => {
         const result: CampaignData[] = [];
