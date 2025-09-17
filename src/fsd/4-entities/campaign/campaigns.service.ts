@@ -111,8 +111,9 @@ export class CampaignsService {
             const energyPerItem = parseFloat((1 / (dropRate / battle.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
-            enemies.factions = enemies.factions.filter(faction => faction !== undefined) as string[];
-            allies.factions = allies.factions.filter(faction => faction !== undefined) as string[];
+            const isString = (v: unknown): v is string => typeof v === 'string';
+            enemies.factions = enemies.factions.filter(isString);
+            allies.factions = allies.factions.filter(isString);
             if (enemies.factions.length === 0) {
                 console.warn('no enemy factions found for', battle.campaign, battle);
             }
@@ -198,12 +199,13 @@ export class CampaignsService {
             enemiesCount,
         } = filters;
 
+        const isString = (v: unknown): v is string => typeof v === 'string';
         const enemiesFactions = enemiesFactionsRaw
             .map(faction => FactionsService.getFactionSnowprintId(faction))
-            .filter(faction => faction !== undefined) as string[];
+            .filter(isString);
         const alliesFactions = alliesFactionsRaw
             .map(faction => FactionsService.getFactionSnowprintId(faction))
-            .filter(faction => faction !== undefined) as string[];
+            .filter(isString);
 
         if (enemiesCount?.length) {
             if (!enemiesCount.includes(location.enemiesTotal)) {
@@ -401,7 +403,10 @@ export class CampaignsService {
                 return {
                     enemies: {
                         alliance: Alliance.Imperial,
-                        factions: [Faction.Astra_militarum, Faction.AdeptusMechanicus],
+                        factions: [
+                            FactionsService.getFactionSnowprintId(Faction.Astra_militarum)!,
+                            FactionsService.getFactionSnowprintId(Faction.AdeptusMechanicus)!,
+                        ],
                     },
                     allies: {
                         alliance: Alliance.Chaos,
