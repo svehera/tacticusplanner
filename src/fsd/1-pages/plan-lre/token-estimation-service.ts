@@ -52,7 +52,7 @@ export const milestonesAndPoints = [
     { points: 16000, stars: 5, round: 3, packsPerRound: 0 },
     { points: 16250, stars: 5, round: 2, packsPerRound: 0 },
     { points: 16500, stars: 5, round: 1, packsPerRound: 0 },
-    { points: 18000, stars: 6, round: 2, packsPerRound: 0 },
+    { points: 18000, stars: 6, round: 3, packsPerRound: 0 },
     { points: 18250, stars: 6, round: 1, packsPerRound: 0 },
     { points: 22500, stars: 7, round: 2, packsPerRound: 0 },
     { points: 22750, stars: 7, round: 1, packsPerRound: 0 },
