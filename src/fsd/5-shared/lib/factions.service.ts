@@ -114,7 +114,7 @@ export class FactionsService {
      * @param faction The Faction enum value.
      * @returns the snowprint ID of the faction.
      */
-    public static getFactionSnowprintId = (faction: Faction): string => {
+    public static getFactionSnowprintId = (faction: Faction): string | undefined => {
         switch (faction) {
             case Faction.Ultramarines:
                 return 'Ultramarines';
@@ -157,7 +157,7 @@ export class FactionsService {
             case Faction.EmperorsChildren:
                 return 'EmperorsChildren';
             default:
-                throw new Error(`Unknown Faction enum: ${faction}`);
+                return undefined;
         }
     };
 }
