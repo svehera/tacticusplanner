@@ -1,4 +1,4 @@
-﻿import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
+﻿import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import {
     AllCommunityModule,
     CellClassParams,
@@ -18,8 +18,9 @@ import { isMobile } from 'react-device-detect';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
-import { Rank } from '@/fsd/5-shared/model';
+import { Rank, rankToString, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { Link } from '@/fsd/5-shared/ui/link';
 
 import { CharactersService, CharacterTitleShort, RankIcon } from '@/fsd/4-entities/character';
 
@@ -75,6 +76,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                     },
                     {
                         headerName: 'Name',
+                        colId: 'name',
                         width: isMobile ? 75 : 180,
                         pinned: !isMobile,
                         cellRenderer: (props: ICellRendererParams<ITableRow>) => {
@@ -83,11 +85,13 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                                 return <CharacterTitleShort character={character} hideName={isMobile} imageSize={30} />;
                             }
                         },
+                        valueGetter: (params: ValueGetterParams<ITableRow>) => params.data?.character?.shortName,
                         cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
                         tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
                     },
                     {
                         headerName: 'Rarity',
+                        colId: 'rarity',
                         width: 80,
                         columnGroupShow: 'open',
                         pinned: !isMobile,
@@ -95,12 +99,13 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                             return props.data?.character.rarity;
                         },
                         cellRenderer: (props: ICellRendererParams<ITableRow>) => {
-                            const rarity = props.value ?? 0;
+                            const rarity = props.value ?? Rarity.Common;
                             return <RarityIcon rarity={rarity} />;
                         },
                     },
                     {
                         headerName: 'Rank',
+                        colId: 'rank',
                         width: 80,
                         columnGroupShow: 'open',
                         pinned: !isMobile,
@@ -118,6 +123,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 headerName: 'Total',
                 children: [
                     {
+                        colId: 'totalPoints',
                         field: 'totalPoints',
                         headerName: 'Points',
                         width: 100,
@@ -267,7 +273,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
 
             let progressByRequirement: Record<string, number> = {};
 
-            if (pointsCalculation === PointsCalculation.unearned) {
+            if (pointsCalculation === PointsCalculation.unearned || pointsCalculation === PointsCalculation.estimated) {
                 const trackProgress = leProgress.tracksProgress.filter(x => x.trackId === track.section)[0];
                 if (trackProgress) {
                     progressByRequirement = LreService.getReqProgressPerTrack(trackProgress);
@@ -288,6 +294,31 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                             if (pointsCalculation === PointsCalculation.unearned) {
                                 const progress = progressByRequirement[requirement] ?? 0;
                                 const battlesLeft = track.battlesPoints.length - progress;
+                                return track.getRestrictionPoints(requirement) * battlesLeft;
+                            }
+
+                            if (pointsCalculation === PointsCalculation.estimated) {
+                                const progress = progressByRequirement[requirement] ?? 0;
+                                // Use the user's estimated clears for this team/restriction if available
+                                // Find the team that includes this character and restriction
+                                let battlesLeft = track.battlesPoints.length - progress;
+                                const expectedClears = teams
+                                    .filter(t => t.section === track.section)
+                                    .find(
+                                        t =>
+                                            (t.charSnowprintIds ?? t.charactersIds ?? []).some(
+                                                id =>
+                                                    CharactersService.canonicalName(id) === key ||
+                                                    CharactersService.resolveCharacter(id)?.snowprintId === key
+                                            ) && t.restrictionsIds.includes(requirement)
+                                    )?.expectedBattleClears;
+                                if (
+                                    typeof expectedClears === 'number' &&
+                                    expectedClears >= 0 &&
+                                    expectedClears < track.battlesPoints.length
+                                ) {
+                                    battlesLeft = Math.max(0, expectedClears - progress);
+                                }
                                 return track.getRestrictionPoints(requirement) * battlesLeft;
                             }
 
@@ -343,6 +374,29 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                     variant="outlined"
                     onChange={event => setFilter(event.target.value)}
                 />
+                <Button
+                    size="small"
+                    variant={'contained'}
+                    onClick={() => {
+                        const gridApi = gridRef.current?.api;
+                        if (gridApi) {
+                            const csv = gridApi.getDataAsCsv({
+                                columnKeys: ['name', 'rarity', 'rank', 'totalPoints'],
+                                processCellCallback: params => {
+                                    if (params.column.getColId() === 'rarity') {
+                                        return RarityMapper.rarityToRarityString(params.value) ?? 'Common';
+                                    }
+                                    if (params.column.getColId() === 'rank') {
+                                        return rankToString(params.value) ?? 'Locked';
+                                    }
+                                    return params.value;
+                                },
+                            });
+                            navigator.clipboard.writeText(csv ?? '');
+                        }
+                    }}>
+                    Copy To Clipboard
+                </Button>
                 <FormControl>
                     <FormLabel id="demo-radio-buttons-group-label" style={{ fontWeight: 700 }}>
                         Characters Selection
@@ -383,6 +437,11 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                                 label="Unearned Points Only"
                             />
                             <FormControlLabel value={PointsCalculation.all} control={<Radio />} label="All Points" />
+                            <FormControlLabel
+                                value={PointsCalculation.estimated}
+                                control={<Radio />}
+                                label="Estimated Points"
+                            />
                         </RadioGroup>
                     </FormControl>
                 ) : (

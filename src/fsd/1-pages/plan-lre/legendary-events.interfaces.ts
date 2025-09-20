@@ -9,6 +9,7 @@ export enum CharactersSelection {
 export enum PointsCalculation {
     unearned = 'unearned',
     all = 'all',
+    estimated = 'estimated',
 }
 
 export interface ITableRow extends ICharLegendaryEvent {
