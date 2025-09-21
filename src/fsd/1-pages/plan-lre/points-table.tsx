@@ -329,7 +329,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
             }
             return result;
         }
-    }, [legendaryEvent.id, filter, pointsCalculation]);
+    }, [legendaryEvent.id, filter, pointsCalculation, teams, leProgress]);
 
     const rows = useMemo<ITableRow[]>(() => {
         const chars =
@@ -362,7 +362,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 totalPoints: x.legendaryEvents[legendaryEvent.id].totalPoints,
                 totalSlots: x.legendaryEvents[legendaryEvent.id].totalSlots,
             }));
-    }, [selection, filter, pointsCalculation]);
+    }, [selection, filter, legendaryEvent]);
 
     return (
         <div>
