@@ -119,7 +119,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
             case PersonalGoalType.UpgradeRank: {
                 const { xpEstimate } = goalEstimate;
                 const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-                const params = `?charSnowprintId=${goal.unitId}`;
+                const params = `?charSnowprintId=${encodeURIComponent(goal.unitId)}`;
 
                 return (
                     <div>
@@ -162,7 +162,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
             }
             case PersonalGoalType.MowAbilities: {
                 const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-                const params = `?charSnowprintId=${goal.unitId}`;
+                const params = `?charSnowprintId=${encodeURIComponent(goal.unitId)}`;
                 const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
                 const targetShards = ShardsService.getTargetShardsForMow(goal);

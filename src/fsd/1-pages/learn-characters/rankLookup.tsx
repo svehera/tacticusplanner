@@ -122,10 +122,6 @@ export const RankLookup = () => {
         return orderBy(RankLookupService.getAllMaterials(campaignsProgress, {}, upgrades), ['rarity'], ['desc']);
     }, [upgrades]);
 
-    const totalEnergy = useMemo<number>(() => {
-        return Math.ceil(sum(totalMaterials.map(x => x.expectedEnergy)));
-    }, [totalMaterials]);
-
     const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>) => (
         <ul>
             {materials.map(item => (

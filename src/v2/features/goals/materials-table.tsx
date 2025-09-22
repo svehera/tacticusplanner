@@ -315,7 +315,7 @@ export const MaterialsTable: React.FC<Props> = ({
                 remainingAfter: remaining,
             };
         }) as IRaidMaterialRow[];
-    }, [rows, inventory]);
+    }, [rows, inventory, alreadyUsedMaterials]);
 
     const onGridReadyInternal = (params: GridReadyEvent) => {
         if (!params.api) return;
@@ -323,7 +323,6 @@ export const MaterialsTable: React.FC<Props> = ({
         let name: string = CharactersService.resolveCharacter(scrollToCharSnowprintId)?.name ?? '';
         if (name.length === 0) {
             const mow = MowsService.resolveToStatic(scrollToCharSnowprintId);
-            console.log(mow);
             name = mow?.name ?? '';
         }
         if (name.length === 0) {

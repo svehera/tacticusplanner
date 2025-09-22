@@ -41,7 +41,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
         return uniq(
             teams.flatMap(t => t.charSnowprintIds ?? t.charactersIds ?? []).map(x => CharactersService.canonicalName(x))
         );
-    }, [legendaryEvent.id]);
+    }, [legendaryEvent.id, teams]);
     const [pointsCalculation, setPointsCalculation] = useQueryState<PointsCalculation>(
         'pointsCalculation',
         stringValue => (stringValue as PointsCalculation) ?? PointsCalculation.unearned,
