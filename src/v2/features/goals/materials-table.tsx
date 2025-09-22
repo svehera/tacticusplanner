@@ -7,6 +7,7 @@ import {
     ValueFormatterParams,
     CellEditingStoppedEvent,
     themeBalham,
+    GridReadyEvent,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo } from 'react';
@@ -17,6 +18,8 @@ import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { CharactersService } from '@/fsd/4-entities/character';
+import { MowsService } from '@/fsd/4-entities/mow';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
@@ -26,12 +29,31 @@ interface Props {
     updateMaterialQuantity: (materialId: string, quantity: number) => void;
     onGridReady: () => void;
     inventory: Record<string, number>;
+    /**
+     * If set, tells the grid to scroll to the first material used by this character. If the
+     * character does not need any materials, does not scroll the grid.
+     */
+    scrollToCharSnowprintId?: string;
+    alreadyUsedMaterials?: ICharacterUpgradeEstimate[];
 }
 
-export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, onGridReady, inventory }) => {
-    const columnDefs: Array<ColDef<ICharacterUpgradeEstimate> | ColGroupDef<ICharacterUpgradeEstimate>> = [
+export interface IRaidMaterialRow extends ICharacterUpgradeEstimate {
+    inventoryAfter: number;
+    remainingAfter: number;
+}
+
+export const MaterialsTable: React.FC<Props> = ({
+    rows,
+    updateMaterialQuantity,
+    onGridReady,
+    inventory,
+    scrollToCharSnowprintId,
+    alreadyUsedMaterials,
+}) => {
+    const columnDefs: Array<ColDef<IRaidMaterialRow> | ColGroupDef<IRaidMaterialRow>> = [
         {
             headerName: 'Upgrade',
+            groupId: 'upgrade',
             children: [
                 {
                     headerName: '#',
@@ -41,7 +63,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                 },
                 {
                     headerName: 'Icon',
-                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                    cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) => {
                         const { data } = params;
                         if (data) {
                             return (
@@ -69,7 +91,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     field: 'rarity',
                     maxWidth: 120,
                     columnGroupShow: 'open',
-                    valueFormatter: (params: ValueFormatterParams<ICharacterUpgradeEstimate>) =>
+                    valueFormatter: (params: ValueFormatterParams<IRaidMaterialRow>) =>
                         Rarity[params.data?.rarity ?? 0],
                     cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
                 },
@@ -89,13 +111,13 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
         },
         {
             valueGetter: params => {
-                return inventory[params.data!.snowprintId] ?? 0;
+                return params.data?.inventoryAfter ?? 0;
             },
             valueSetter: event => {
                 updateMaterialQuantity(event.data.snowprintId, event.newValue);
                 return true;
             },
-            headerName: 'Inventory',
+            headerName: 'Inventory (after higher-priority goals)',
             editable: true,
             cellEditorPopup: false,
             cellDataType: 'number',
@@ -105,7 +127,6 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                 max: 1000,
                 precision: 0,
             },
-            maxWidth: 90,
         },
         {
             headerName: 'Remaining',
@@ -113,8 +134,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
             valueGetter: params => {
                 const { data } = params;
                 if (data) {
-                    const actualAcquired = inventory[params.data!.snowprintId] ?? 0;
-                    return Math.max(0, data.requiredCount - actualAcquired);
+                    return Math.max(0, data.requiredCount - (data.inventoryAfter ?? 0));
                 }
             },
         },
@@ -267,6 +287,62 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
             updateMaterialQuantity(event.data.snowprintId, event.newValue);
         }
     };
+    // Compute rolling inventory consumption by higher-priority goals
+    const processedRows = useMemo(() => {
+        // Map from material snowprintId to running inventory count
+        const inventoryTracker: Record<string, number> = { ...inventory };
+        // Remove any inventory consumed by already-completed, but not applied, goals (e.g. you got
+        // an LRE homey prefarmed to D3 but havne't unlocked the unit yet).
+        if (alreadyUsedMaterials) {
+            for (const used of alreadyUsedMaterials) {
+                if (used.snowprintId && typeof used.requiredCount === 'number') {
+                    inventoryTracker[used.snowprintId] = Math.max(
+                        0,
+                        (inventoryTracker[used.snowprintId] ?? 0) - used.requiredCount
+                    );
+                }
+            }
+        }
+        // Array to hold processed rows with adjusted inventory and remaining inventory.
+        return rows.map(row => {
+            const currentInventory = inventoryTracker[row.snowprintId] ?? 0;
+            const remaining = Math.max(0, row.requiredCount - currentInventory);
+            // Update inventory tracker for next rows (simulate consumption)
+            inventoryTracker[row.snowprintId] = Math.max(0, currentInventory - row.requiredCount);
+            return {
+                ...row,
+                inventoryAfter: currentInventory,
+                remainingAfter: remaining,
+            };
+        }) as IRaidMaterialRow[];
+    }, [rows, inventory]);
+
+    const onGridReadyInternal = (params: GridReadyEvent) => {
+        if (!params.api) return;
+        if (scrollToCharSnowprintId === undefined) return;
+        let name: string = CharactersService.resolveCharacter(scrollToCharSnowprintId)?.name ?? '';
+        if (name.length === 0) {
+            const mow = MowsService.resolveToStatic(scrollToCharSnowprintId);
+            console.log(mow);
+            name = mow?.name ?? '';
+        }
+        if (name.length === 0) {
+            console.error('Character or MOW not found for snowprintId:', scrollToCharSnowprintId);
+            onGridReady();
+            return;
+        }
+        // Find the first row that uses this character as a material
+        const targetIndex = processedRows.findIndex(row => row.relatedCharacters?.includes(name));
+        if (targetIndex !== -1) {
+            const rowNode = params.api.getDisplayedRowAtIndex(targetIndex);
+            if (rowNode) {
+                params.api.ensureIndexVisible(rowNode.rowIndex ?? 0, 'top');
+                params.api.setColumnGroupOpened('upgrade', true);
+            }
+        }
+        onGridReady();
+    };
+
     return (
         <div
             className="ag-theme-material"
@@ -295,8 +371,8 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     autoHeight: true,
                 }}
                 columnDefs={columnDefs}
-                rowData={rows}
-                onGridReady={onGridReady}
+                rowData={processedRows}
+                onGridReady={onGridReadyInternal}
             />
         </div>
     );
