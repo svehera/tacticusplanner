@@ -41,7 +41,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
         return uniq(
             teams.flatMap(t => t.charSnowprintIds ?? t.charactersIds ?? []).map(x => CharactersService.canonicalName(x))
         );
-    }, [legendaryEvent.id]);
+    }, [legendaryEvent.id, teams]);
     const [pointsCalculation, setPointsCalculation] = useQueryState<PointsCalculation>(
         'pointsCalculation',
         stringValue => (stringValue as PointsCalculation) ?? PointsCalculation.unearned,
@@ -329,7 +329,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
             }
             return result;
         }
-    }, [legendaryEvent.id, filter, pointsCalculation]);
+    }, [legendaryEvent.id, filter, pointsCalculation, teams, leProgress]);
 
     const rows = useMemo<ITableRow[]>(() => {
         const chars =
@@ -362,7 +362,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 totalPoints: x.legendaryEvents[legendaryEvent.id].totalPoints,
                 totalSlots: x.legendaryEvents[legendaryEvent.id].totalSlots,
             }));
-    }, [selection, filter, pointsCalculation]);
+    }, [selection, filter, legendaryEvent]);
 
     return (
         <div>
