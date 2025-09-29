@@ -38,7 +38,7 @@
             "link": "https://tacticus.wiki.gg/wiki/Orks#NPC_Units"
         },
         "killPoints": 36,
-        "battlesPoints": [27, 31, 38, 41, 40, 53, 51, 45, 43, 58, 43, 48, 58, 47]
+        "battlesPoints": [27, 31, 38, 41, 40, 53, 51, 45, 43, 58, 43, 48, 58, 47, 56, 46, 37, 36]
     },
     "beta": {
         "name": "Beta (No Imperials)",
@@ -47,7 +47,7 @@
             "link": "https://tacticus.wiki.gg/wiki/Black_Templars#NPC_Units"
         },
         "killPoints": 47,
-        "battlesPoints": [24, 31, 33, 37, 40, 34, 39, 37, 44, 42, 47, 45, 41, 52]
+        "battlesPoints": [24, 31, 33, 37, 40, 34, 39, 37, 44, 42, 47, 45, 41, 52, 40, 44, 36, 42]
     },
     "gamma": {
         "name": "Gamma (No Chaos)",
@@ -56,7 +56,7 @@
             "link": "https://tacticus.wiki.gg/wiki/Black_Legion#NPC_Units"
         },
         "killPoints": 25,
-        "battlesPoints": [33, 49, 44, 46, 42, 53, 52, 56, 53, 50, 50, 50, 57, 65]
+        "battlesPoints": [33, 49, 44, 46, 42, 53, 52, 56, 53, 50, 50, 50, 57, 65, 43, 48, 49, 60]
     },
     "pointsMilestones": [
         {
@@ -348,6 +348,126 @@
             "milestone": 58,
             "cumulativePoints": 21000,
             "engramPayout": 590
+        },
+        {
+            "milestone": 59,
+            "cumulativePoints": 21250,
+            "engramPayout": 600
+        },
+        {
+            "milestone": 60,
+            "cumulativePoints": 21500,
+            "engramPayout": 605
+        },
+        {
+            "milestone": 61,
+            "cumulativePoints": 21750,
+            "engramPayout": 610
+        },
+        {
+            "milestone": 62,
+            "cumulativePoints": 22000,
+            "engramPayout": 615
+        },
+        {
+            "milestone": 63,
+            "cumulativePoints": 22250,
+            "engramPayout": 620
+        },
+        {
+            "milestone": 64,
+            "cumulativePoints": 22500,
+            "engramPayout": 625
+        },
+        {
+            "milestone": 65,
+            "cumulativePoints": 22750,
+            "engramPayout": 630
+        },
+        {
+            "milestone": 66,
+            "cumulativePoints": 23000,
+            "engramPayout": 635
+        },
+        {
+            "milestone": 67,
+            "cumulativePoints": 23250,
+            "engramPayout": 640
+        },
+        {
+            "milestone": 68,
+            "cumulativePoints": 23500,
+            "engramPayout": 645
+        },
+        {
+            "milestone": 69,
+            "cumulativePoints": 23750,
+            "engramPayout": 650
+        },
+        {
+            "milestone": 70,
+            "cumulativePoints": 24000,
+            "engramPayout": 655
+        },
+        {
+            "milestone": 71,
+            "cumulativePoints": 24250,
+            "engramPayout": 660
+        },
+        {
+            "milestone": 72,
+            "cumulativePoints": 24500,
+            "engramPayout": 665
+        },
+        {
+            "milestone": 73,
+            "cumulativePoints": 24750,
+            "engramPayout": 670
+        },
+        {
+            "milestone": 74,
+            "cumulativePoints": 25000,
+            "engramPayout": 675
+        },
+        {
+            "milestone": 75,
+            "cumulativePoints": 25250,
+            "engramPayout": 680
+        },
+        {
+            "milestone": 76,
+            "cumulativePoints": 25500,
+            "engramPayout": 685
+        },
+        {
+            "milestone": 77,
+            "cumulativePoints": 25750,
+            "engramPayout": 690
+        },
+        {
+            "milestone": 78,
+            "cumulativePoints": 26000,
+            "engramPayout": 695
+        },
+        {
+            "milestone": 79,
+            "cumulativePoints": 26250,
+            "engramPayout": 700
+        },
+        {
+            "milestone": 80,
+            "cumulativePoints": 26500,
+            "engramPayout": 705
+        },
+        {
+            "milestone": 81,
+            "cumulativePoints": 26750,
+            "engramPayout": 710
+        },
+        {
+            "milestone": 82,
+            "cumulativePoints": 27000,
+            "engramPayout": 715
         }
     ],
     "chestsMilestones": [
@@ -526,15 +646,57 @@
         {
             "chestLevel": 44,
             "engramCost": 1500
+        },
+        {
+            "chestLevel": 45,
+            "engramCost": 1500
+        },
+        {
+            "chestLevel": 46,
+            "engramCost": 1500
+        },
+        {
+            "chestLevel": 47,
+            "engramCost": 1500
+        },
+        {
+            "chestLevel": 48,
+            "engramCost": 1500
+        },
+        {
+            "chestLevel": 49,
+            "engramCost": 1500
+        },
+        {
+            "chestLevel": 50,
+            "engramCost": 1500
+        },
+        {
+            "chestLevel": 51,
+            "engramCost": 1500
+        },
+        {
+            "chestLevel": 52,
+            "engramCost": 1500
+        },
+        {
+            "chestLevel": 53,
+            "engramCost": 1500
+        },
+        {
+            "chestLevel": 54,
+            "engramCost": 1500
         }
     ],
     "shardsPerChest": 25,
-    "battlesCount": 14,
+    "battlesCount": 18,
     "constraintsCount": 7,
     "progression": {
         "unlock": 400,
         "fourStars": 120,
         "fiveStars": 180,
-        "blueStar": 200
+        "blueStar": 200,
+        "mythic": 250,
+        "twoBlueStars": 150
     }
 }
