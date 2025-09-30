@@ -270,7 +270,7 @@ export const LearnCharacters = () => {
 
     const resetFilters = () => {
         setFilter({
-            nameFilter: '',
+            nameFilter: filter.nameFilter, //keep current quickfilter name
             onlyUnlocked: false,
             minHitsFilter: '',
             maxHitsFilter: '',
@@ -336,7 +336,7 @@ export const LearnCharacters = () => {
                                 label="Min Hits"
                                 value={filter.minHitsFilter}
                                 onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange('minHitsFilter', value.target.value)
+                                    handleFilterChange('minHitsFilter', Number(value.target.value))
                                 }>
                                 <MenuItem value="">
                                     <span>Any</span>
@@ -355,7 +355,7 @@ export const LearnCharacters = () => {
                                 label="Max Hits"
                                 value={filter.maxHitsFilter}
                                 onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange('maxHitsFilter', value.target.value)
+                                    handleFilterChange('maxHitsFilter', Number(value.target.value))
                                 }>
                                 <MenuItem value="">
                                     <span>Any</span>
@@ -394,7 +394,7 @@ export const LearnCharacters = () => {
                                 label="Movement"
                                 value={filter.movementFilter}
                                 onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange('movementFilter', value.target.value)
+                                    handleFilterChange('movementFilter', Number(value.target.value))
                                 }>
                                 <MenuItem value="">
                                     <span>Any</span>
@@ -413,7 +413,7 @@ export const LearnCharacters = () => {
                                 label="Distance"
                                 value={filter.distanceFilter}
                                 onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange('distanceFilter', value.target.value)
+                                    handleFilterChange('distanceFilter', Number(value.target.value))
                                 }>
                                 <MenuItem value="">
                                     <span>Any</span>
