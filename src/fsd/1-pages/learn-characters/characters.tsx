@@ -21,7 +21,7 @@ import React, { ChangeEvent, useCallback, useContext, useMemo, useRef, useState 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
-import { useQueryState, getEnumValues } from '@/fsd/5-shared/lib';
+import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance, DamageType, Trait, Rank, getTraitStringFromLabel } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
@@ -44,51 +44,41 @@ export const LearnCharacters = () => {
         onTargetRankChanged,
     } = useCharacters();
 
-    const [nameFilter, setNameFilter] = useState<string>('');
     const [onlyUnlocked, setOnlyUnlocked] = useState<boolean>(false);
     const [rowCount, setRowCount] = useState(0);
-    const [showFilters, setShowFilters] = React.useState(false);
+    const [showFilters, setShowFilters] = useState(false);
 
-    const [damageTypesFilter, setDamageTypesFilter] = useQueryState<DamageType[]>(
-        'damage',
-        filterParam => (filterParam?.split(',') as DamageType[]) ?? [],
-        queryParam => queryParam?.join(',')
-    );
-    const [traitsFilter, setTraitsFilter] = useQueryState<Trait[]>(
-        'trait',
-        filterParam => (filterParam?.split(',') as Trait[]) ?? [],
-        queryParam => queryParam?.join(',')
-    );
-    const [allianceFilter, setAllianceFilter] = useQueryState<Alliance[]>(
-        'alliance',
-        filterParam => (filterParam?.split(',') as Alliance[]) ?? [],
-        queryParam => queryParam?.join(',')
-    );
-    const [minHitsFilter, setMinHitsFilter] = useQueryState<number | ''>(
-        'minHits',
-        filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
-        queryParam => (queryParam && queryParam > 0 ? queryParam?.toString() : '')
-    );
-    const [maxHitsFilter, setMaxHitsFilter] = useQueryState<number | ''>(
-        'maxHits',
-        filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
-        queryParam => (queryParam && queryParam > 0 ? queryParam?.toString() : '')
-    );
-    const [movementFilter, setMovementFilter] = useQueryState<number | ''>(
-        'movement',
-        filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
-        queryParam => (queryParam && queryParam > 0 ? queryParam?.toString() : '')
-    );
-    const [distanceFilter, setDistanceFilter] = useQueryState<number | ''>(
-        'distance',
-        filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
-        queryParam => (queryParam && queryParam > 0 ? queryParam?.toString() : '')
-    );
-    const [attackTypeFilter, setAttackTypeFilter] = useQueryState<string | ''>(
-        'attackType',
-        filterParam => filterParam ?? '',
-        queryParam => queryParam
-    );
+    type Filter = {
+        nameFilter: string;
+        onlyUnlocked: boolean;
+        minHitsFilter: number | '';
+        maxHitsFilter: number | '';
+        attackTypeFilter: string;
+        movementFilter: number | '';
+        distanceFilter: number | '';
+        damageTypesFilter: DamageType[];
+        traitsFilter: string[];
+        allianceFilter: string[];
+    };
+
+    const [filter, setFilter] = useState<Filter>({
+        nameFilter: '',
+        onlyUnlocked: false,
+        minHitsFilter: '',
+        maxHitsFilter: '',
+        attackTypeFilter: '',
+        movementFilter: '',
+        distanceFilter: '',
+        damageTypesFilter: [],
+        traitsFilter: [],
+        allianceFilter: [],
+    });
+
+    const handleFilterChange = (name: string, value: string | boolean | number | string[]) => {
+        console.log('name: ', name);
+        console.log('value: ', value);
+        setFilter({ ...filter, [name]: value });
+    };
 
     const defaultColDef: ColDef<ICharacter2> = {
         sortable: true,
@@ -120,83 +110,23 @@ export const LearnCharacters = () => {
         () =>
             resolvedCharacters.filter(c => {
                 return (
-                    (c.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
-                        c.shortName.toLowerCase().includes(nameFilter.toLowerCase())) &&
+                    (c.name.toLowerCase().includes(filter.nameFilter.toLowerCase()) ||
+                        c.shortName.toLowerCase().includes(filter.nameFilter.toLowerCase())) &&
                     (!onlyUnlocked || c.rank > Rank.Locked)
                 );
             }),
-        [nameFilter, onlyUnlocked]
+        [filter, onlyUnlocked]
     );
 
-    const onFilterTextBoxChanged = useCallback((change: ChangeEvent<HTMLInputElement>) => {
-        setNameFilter(change.target.value);
-    }, []);
-
-    const damageTypeFilterChanged = useCallback((newValue: string[]) => {
-        setDamageTypesFilter(newValue as DamageType[]);
-        requestAnimationFrame(() => {
-            gridRef.current?.api.onFilterChanged();
-        });
-    }, []);
-
-    const traitsFilterChanged = useCallback((newValue: string[]) => {
-        setTraitsFilter(newValue as Trait[]);
-        requestAnimationFrame(() => {
-            gridRef.current?.api.onFilterChanged();
-        });
-    }, []);
-
-    const allianceFilterChanged = useCallback((newValue: string[]) => {
-        setAllianceFilter(newValue as Alliance[]);
-        requestAnimationFrame(() => {
-            gridRef.current?.api.onFilterChanged();
-        });
-    }, []);
-
-    const minHitsFilterChange = useCallback((event: SelectChangeEvent<number>) => {
-        setMinHitsFilter(+event.target.value);
-        requestAnimationFrame(() => {
-            gridRef.current?.api.onFilterChanged();
-        });
-    }, []);
-
-    const maxHitsFilterChange = useCallback((event: SelectChangeEvent<number>) => {
-        setMaxHitsFilter(+event.target.value);
-        requestAnimationFrame(() => {
-            gridRef.current?.api.onFilterChanged();
-        });
-    }, []);
-
-    const movementFilterChange = useCallback((event: SelectChangeEvent<number>) => {
-        setMovementFilter(+event.target.value);
-        requestAnimationFrame(() => {
-            gridRef.current?.api.onFilterChanged();
-        });
-    }, []);
-
-    const distanceFilterChange = useCallback((event: SelectChangeEvent<number>) => {
-        setDistanceFilter(+event.target.value);
-        requestAnimationFrame(() => {
-            gridRef.current?.api.onFilterChanged();
-        });
-    }, []);
-
-    const attackTypeFilterChange = useCallback((event: SelectChangeEvent) => {
-        setAttackTypeFilter(event.target.value);
-        requestAnimationFrame(() => {
-            gridRef.current?.api.onFilterChanged();
-        });
-    }, []);
-
     const isExternalFilterPresent = useCallback(() => {
-        const hasDamageTypeFilter = damageTypesFilter.length > 0;
-        const hasTraitsFilter = traitsFilter.length > 0;
-        const hasAllianceFilter = allianceFilter.length > 0;
-        const hasMinHitsFilter = !!minHitsFilter && minHitsFilter > 0;
-        const hasMaxHitsFilter = !!maxHitsFilter && maxHitsFilter > 0;
-        const hasMovementFilter = !!movementFilter && movementFilter > 0;
-        const hasDistanceFilter = !!distanceFilter && distanceFilter > 0;
-        const hasAttackTypeFilter = !!attackTypeFilter;
+        const hasDamageTypeFilter = filter.damageTypesFilter.length > 0;
+        const hasTraitsFilter = filter.traitsFilter.length > 0;
+        const hasAllianceFilter = filter.allianceFilter.length > 0;
+        const hasMinHitsFilter = !!filter.minHitsFilter && filter.minHitsFilter > 0;
+        const hasMaxHitsFilter = !!filter.maxHitsFilter && filter.maxHitsFilter > 0;
+        const hasMovementFilter = !!filter.movementFilter && filter.movementFilter > 0;
+        const hasDistanceFilter = !!filter.distanceFilter && filter.distanceFilter > 0;
+        const hasAttackTypeFilter = !!filter.attackTypeFilter;
         return (
             hasMovementFilter ||
             hasDistanceFilter ||
@@ -207,17 +137,17 @@ export const LearnCharacters = () => {
             hasMaxHitsFilter ||
             hasAttackTypeFilter
         );
-    }, [damageTypesFilter, traitsFilter, allianceFilter, minHitsFilter, maxHitsFilter]);
+    }, [filter]);
 
     const filtersCount = useMemo(() => {
-        const hasDamageTypeFilter = damageTypesFilter.length > 0;
-        const hasTraitsFilter = traitsFilter.length > 0;
-        const hasAllianceFilter = allianceFilter.length > 0;
-        const hasMinHitsFilter = !!minHitsFilter && minHitsFilter > 0;
-        const hasMaxHitsFilter = !!maxHitsFilter && maxHitsFilter > 0;
-        const hasMovementFilter = !!movementFilter && movementFilter > 0;
-        const hasDistanceFilter = !!distanceFilter && distanceFilter > 0;
-        const hasAttackTypeFilter = !!attackTypeFilter;
+        const hasDamageTypeFilter = filter.damageTypesFilter.length > 0;
+        const hasTraitsFilter = filter.traitsFilter.length > 0;
+        const hasAllianceFilter = filter.allianceFilter.length > 0;
+        const hasMinHitsFilter = !!filter.minHitsFilter && filter.minHitsFilter > 0;
+        const hasMaxHitsFilter = !!filter.maxHitsFilter && filter.maxHitsFilter > 0;
+        const hasMovementFilter = !!filter.movementFilter && filter.movementFilter > 0;
+        const hasDistanceFilter = !!filter.distanceFilter && filter.distanceFilter > 0;
+        const hasAttackTypeFilter = !!filter.attackTypeFilter;
         return (
             +hasMovementFilter +
             +hasDistanceFilter +
@@ -228,24 +158,24 @@ export const LearnCharacters = () => {
             +hasMaxHitsFilter +
             +hasAttackTypeFilter
         );
-    }, [damageTypesFilter, traitsFilter, allianceFilter, minHitsFilter, maxHitsFilter]);
+    }, [filter]);
 
     const doesExternalFilterPass = useCallback(
         (node: IRowNode<ICharacter2>) => {
             const doesDamageTypeFilterPass = () => {
-                if (!damageTypesFilter.length) {
+                if (!filter.damageTypesFilter.length) {
                     return true;
                 }
-                return damageTypesFilter.every(type => node.data?.damageTypes.all.includes(type));
+                return filter.damageTypesFilter.every(type => node.data?.damageTypes.all.includes(type));
             };
 
             const doesTraitsFilterPass = () => {
-                if (!traitsFilter.length) {
+                if (!filter.traitsFilter.length) {
                     return true;
                 }
 
                 const nodeTraits = (node.data?.traits ?? []) as unknown as string[]; // stored as enum keys
-                return traitsFilter.every(label => {
+                return filter.traitsFilter.every(label => {
                     const key = getTraitStringFromLabel(label);
                     if (!key) return false;
                     if (key !== 'Mechanical') {
@@ -262,45 +192,45 @@ export const LearnCharacters = () => {
             };
 
             const doesAllianceFilterPass = () => {
-                if (!allianceFilter.length) {
+                if (!filter.allianceFilter.length) {
                     return true;
                 }
-                return allianceFilter.some(alliance => node.data?.alliance.includes(alliance));
+                return filter.allianceFilter.some(alliance => node.data?.alliance.includes(alliance));
             };
 
             const doesMinHitsFilterPass = () => {
-                if (!minHitsFilter) {
+                if (!filter.minHitsFilter) {
                     return true;
                 }
                 const hits = node.data?.rangeHits ?? node.data?.meleeHits ?? 0;
 
-                return hits >= minHitsFilter;
+                return hits >= filter.minHitsFilter;
             };
 
             const doesMaxHitsFilterPass = () => {
-                if (!maxHitsFilter) {
+                if (!filter.maxHitsFilter) {
                     return true;
                 }
                 const hits = node.data?.rangeHits ?? node.data?.meleeHits ?? 0;
 
-                return hits <= maxHitsFilter;
+                return hits <= filter.maxHitsFilter;
             };
             const doesMovementFilterPass = () => {
-                if (!movementFilter) {
+                if (!filter.movementFilter) {
                     return true;
                 }
-                return node.data?.movement === movementFilter;
+                return node.data?.movement === filter.movementFilter;
             };
 
             const doesDistanceFilterPass = () => {
-                if (!distanceFilter) {
+                if (!filter.distanceFilter) {
                     return true;
                 }
-                return node.data?.rangeDistance === distanceFilter;
+                return node.data?.rangeDistance === filter.distanceFilter;
             };
 
             const doesAttackTypeFilterPass = () => {
-                switch (attackTypeFilter) {
+                switch (filter.attackTypeFilter) {
                     case 'melee': {
                         return !node.data?.rangeHits;
                     }
@@ -327,16 +257,7 @@ export const LearnCharacters = () => {
             }
             return true;
         },
-        [
-            damageTypesFilter,
-            traitsFilter,
-            allianceFilter,
-            minHitsFilter,
-            maxHitsFilter,
-            attackTypeFilter,
-            movementFilter,
-            distanceFilter,
-        ]
+        [filter]
     );
 
     const refreshRowNumberColumn = useCallback(() => {
@@ -348,17 +269,17 @@ export const LearnCharacters = () => {
     }, []);
 
     const resetFilters = () => {
-        setNameFilter('');
-        allianceFilterChanged([]);
-        damageTypeFilterChanged([]);
-        traitsFilterChanged([]);
-        minHitsFilterChange({ target: { value: '' } } as any);
-        maxHitsFilterChange({ target: { value: '' } } as any);
-        movementFilterChange({ target: { value: '' } } as any);
-        distanceFilterChange({ target: { value: '' } } as any);
-        attackTypeFilterChange({ target: { value: '' } } as any);
-        requestAnimationFrame(() => {
-            gridRef.current?.api.onFilterChanged();
+        setFilter({
+            nameFilter: '',
+            onlyUnlocked: false,
+            minHitsFilter: '',
+            maxHitsFilter: '',
+            attackTypeFilter: '',
+            movementFilter: '',
+            distanceFilter: '',
+            damageTypesFilter: [],
+            traitsFilter: [],
+            allianceFilter: [],
         });
     };
 
@@ -379,7 +300,9 @@ export const LearnCharacters = () => {
                     style={{ minWidth: 140 }}
                     label="Quick Filter"
                     variant="outlined"
-                    onChange={onFilterTextBoxChanged}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                        handleFilterChange('nameFilter', event.target.value)
+                    }
                 />
                 <div className="flex-box gap10">
                     {filtersCount > 0 ? (
@@ -409,7 +332,12 @@ export const LearnCharacters = () => {
                     <div className="flex-box gap10 wrap">
                         <FormControl style={{ minWidth: '110px' }}>
                             <InputLabel>Min Hits</InputLabel>
-                            <Select<number> label="Min Hits" value={minHitsFilter} onChange={minHitsFilterChange}>
+                            <Select<number>
+                                label="Min Hits"
+                                value={filter.minHitsFilter}
+                                onChange={(value: SelectChangeEvent<number>) =>
+                                    handleFilterChange('minHitsFilter', value.target.value)
+                                }>
                                 <MenuItem value="">
                                     <span>Any</span>
                                 </MenuItem>
@@ -423,7 +351,12 @@ export const LearnCharacters = () => {
 
                         <FormControl style={{ minWidth: '110px' }}>
                             <InputLabel>Max Hits</InputLabel>
-                            <Select<number> label="Max Hits" value={maxHitsFilter} onChange={maxHitsFilterChange}>
+                            <Select<number>
+                                label="Max Hits"
+                                value={filter.maxHitsFilter}
+                                onChange={(value: SelectChangeEvent<number>) =>
+                                    handleFilterChange('maxHitsFilter', value.target.value)
+                                }>
                                 <MenuItem value="">
                                     <span>Any</span>
                                 </MenuItem>
@@ -439,8 +372,10 @@ export const LearnCharacters = () => {
                             <InputLabel>Attack Type</InputLabel>
                             <Select<string>
                                 label="Attack Type"
-                                value={attackTypeFilter}
-                                onChange={attackTypeFilterChange}>
+                                value={filter.attackTypeFilter}
+                                onChange={(value: SelectChangeEvent<string>) =>
+                                    handleFilterChange('attackTypeFilter', value.target.value)
+                                }>
                                 <MenuItem value="">
                                     <span>Any</span>
                                 </MenuItem>
@@ -455,7 +390,12 @@ export const LearnCharacters = () => {
 
                         <FormControl style={{ minWidth: '120px' }}>
                             <InputLabel>Movement</InputLabel>
-                            <Select<number> label="Movement" value={movementFilter} onChange={movementFilterChange}>
+                            <Select<number>
+                                label="Movement"
+                                value={filter.movementFilter}
+                                onChange={(value: SelectChangeEvent<number>) =>
+                                    handleFilterChange('movementFilter', value.target.value)
+                                }>
                                 <MenuItem value="">
                                     <span>Any</span>
                                 </MenuItem>
@@ -469,7 +409,12 @@ export const LearnCharacters = () => {
 
                         <FormControl style={{ minWidth: '110px' }}>
                             <InputLabel>Distance</InputLabel>
-                            <Select<number> label="Distance" value={distanceFilter} onChange={distanceFilterChange}>
+                            <Select<number>
+                                label="Distance"
+                                value={filter.distanceFilter}
+                                onChange={(value: SelectChangeEvent<number>) =>
+                                    handleFilterChange('distanceFilter', value.target.value)
+                                }>
                                 <MenuItem value="">
                                     <span>Any</span>
                                 </MenuItem>
@@ -485,24 +430,24 @@ export const LearnCharacters = () => {
                             maxWidth={250}
                             groupByFirstLetter
                             placeholder="Damage Types"
-                            selectedValues={damageTypesFilter}
+                            selectedValues={filter.damageTypesFilter}
                             values={damageTypesOptions}
-                            selectionChanges={damageTypeFilterChanged}
+                            selectionChanges={(value: string[]) => handleFilterChange('damageTypesFilter', value)}
                         />
                         <MultipleSelectCheckmarks
                             maxWidth={250}
                             groupByFirstLetter
                             placeholder="Traits"
-                            selectedValues={traitsFilter}
+                            selectedValues={filter.traitsFilter}
                             values={traitsOptions}
-                            selectionChanges={traitsFilterChanged}
+                            selectionChanges={(value: string[]) => handleFilterChange('traitsFilter', value)}
                         />
                         <MultipleSelectCheckmarks
                             maxWidth={250}
                             placeholder="Alliance"
-                            selectedValues={allianceFilter}
+                            selectedValues={filter.allianceFilter}
                             values={Object.values(Alliance)}
-                            selectionChanges={allianceFilterChanged}
+                            selectionChanges={(value: string[]) => handleFilterChange('allianceFilter', value)}
                         />
                     </div>
                     <br />
