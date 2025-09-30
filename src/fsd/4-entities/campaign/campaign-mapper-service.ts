@@ -23,7 +23,7 @@ export class CampaignMapperService {
         const indices: number[] = [];
         let runningIndex = 0;
         Object.entries(battleData).forEach(([key, battle]) => {
-            if (battle.campaign !== baseCampaignName) return;
+            if (!battle.campaign.trim().toLowerCase().startsWith(baseCampaignName.trim().toLowerCase())) return;
             const isChallenge = key.endsWith('B');
             if (isChallenge) {
                 indices.push(runningIndex);
