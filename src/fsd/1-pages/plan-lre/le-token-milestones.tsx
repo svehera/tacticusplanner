@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { StarsIcon } from '@/fsd/5-shared/ui/icons';
+// eslint-disable-next-line import-x/no-internal-modules
+import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
+import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
 import { milestonesAndPoints } from './token-estimation-service';
 
@@ -29,7 +31,17 @@ export const LeTokenMilestones = ({ currentPoints }: { currentPoints: number }) 
                     <tr key={index}>
                         <td className="px-4 text-right">{milestone.points}</td>
                         <td className="px-4 flex justify-center">
-                            {milestone.points >= 21000 ? '100%' : <StarsIcon stars={milestone.stars + 5} />}
+                            {milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1].points ? (
+                                '100%'
+                            ) : (
+                                <>
+                                    {milestone.stars == 7 ? (
+                                        <RarityIcon rarity={Rarity.Mythic} />
+                                    ) : (
+                                        <StarsIcon stars={milestone.stars + 5 - (milestone.stars >= 7 ? 1 : 0)} />
+                                    )}
+                                </>
+                            )}
                         </td>
                         <td className="px-4 text-center">{milestone.round}</td>
                         <td className="px-4 text-center">{milestone.packsPerRound}</td>

@@ -32,7 +32,7 @@ export class TokenUse {
  */
 export class MilestoneAndPoints {
     public points: number = -1;
-    public stars: number = -1; // 3, 4, 5, or 6 (winged)
+    public stars: number = -1; // 3, 4, 5, or 6 (blue star), 7 (mythic), 8 (two blue stars)
     public round: number = -1; // 1, 2, or 3
     public packsPerRound: number = -1; // 0 for no packs, 1 for premium missions, 2 for currency pack
 }
@@ -52,9 +52,16 @@ export const milestonesAndPoints = [
     { points: 14750, stars: 4, round: 1, packsPerRound: 0 },
     { points: 16250, stars: 5, round: 3, packsPerRound: 0 },
     { points: 16500, stars: 5, round: 1, packsPerRound: 0 },
+    { points: 16750, stars: 6, round: 3, packsPerRound: 1 },
     { points: 18000, stars: 6, round: 3, packsPerRound: 0 },
     { points: 18250, stars: 6, round: 1, packsPerRound: 0 },
-    { points: 21000, stars: 6, round: 3, packsPerRound: 0 },
+    { points: 22000, stars: 7, round: 3, packsPerRound: 2 },
+    { points: 22500, stars: 7, round: 3, packsPerRound: 1 },
+    { points: 23500, stars: 7, round: 1, packsPerRound: 0 },
+    { points: 25500, stars: 8, round: 3, packsPerRound: 2 },
+    { points: 25750, stars: 8, round: 3, packsPerRound: 1 },
+    { points: 26750, stars: 8, round: 2, packsPerRound: 0 },
+    { points: 27000, stars: 8, round: 1, packsPerRound: 0 },
 ];
 
 /**

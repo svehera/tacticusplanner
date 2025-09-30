@@ -197,23 +197,19 @@ export const UserMenu = () => {
             <input ref={inputRef} style={{ display: 'none' }} type="file" accept=".json" onChange={handleFileUpload} />
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span style={{ fontSize: 16, fontWeight: 700 }}>Hi, {username}</span>
-                <Badge
-                    color={hasRejectedGuides ? 'error' : 'warning'}
-                    badgeContent={hasRejectedGuides ? userInfo.rejectedTeamsCount : userInfo.pendingTeamsCount}>
-                    <IconButton
-                        onClick={userMenuControls.handleClick}
-                        size="small"
-                        sx={{ ml: 2 }}
-                        aria-controls={userMenuControls.open ? 'account-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={userMenuControls.open ? 'true' : undefined}>
-                        {isAuthenticated ? (
-                            <Avatar {...stringAvatar(username)}></Avatar>
-                        ) : (
-                            <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
-                        )}
-                    </IconButton>
-                </Badge>
+                <IconButton
+                    onClick={userMenuControls.handleClick}
+                    size="small"
+                    sx={{ ml: 2 }}
+                    aria-controls={userMenuControls.open ? 'account-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={userMenuControls.open ? 'true' : undefined}>
+                    {isAuthenticated ? (
+                        <Avatar {...stringAvatar(username)}></Avatar>
+                    ) : (
+                        <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
+                    )}
+                </IconButton>
             </div>
             <Menu
                 anchorEl={userMenuControls.anchorEl}

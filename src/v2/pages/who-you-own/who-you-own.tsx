@@ -9,7 +9,8 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { useAuth, UnitType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow2, mows2Data } from '@/fsd/4-entities/mow';
+import { CharactersService as FsdCharactersService } from '@/fsd/4-entities/character/characters.service';
+import { IMow2, mows2Data, MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
@@ -27,14 +28,10 @@ import { ShareRoster } from 'src/v2/features/share/share-roster';
 
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);
-    const resolvedMows = useMemo(
-        () =>
-            mows.map(mow => {
-                if ('snowprintId' in mow) return mow as IMow2;
-                const mow2 = mows2Data.mows.find(m => m.snowprintId === mow.tacticusId);
-                return { ...mow2, ...mow } as IMow2;
-            }),
-        [mows]
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+    const resolvedCharacters = useMemo(
+        () => FsdCharactersService.resolveStoredCharacters(charactersDefault),
+        [charactersDefault]
     );
     const dispatch = useContext(DispatchContext);
     const navigate = useNavigate();
@@ -67,11 +64,11 @@ export const WhoYouOwn = () => {
 
     const charactersFiltered = useMemo(() => {
         return CharactersService.filterUnits(
-            [...charactersDefault, ...resolvedMows],
+            [...resolvedCharacters, ...resolvedMows],
             viewControls.filterBy,
             nameFilter
         );
-    }, [viewControls.filterBy, nameFilter, resolvedMows, charactersDefault]);
+    }, [viewControls.filterBy, nameFilter, resolvedMows, resolvedCharacters]);
 
     const factions = useMemo(() => {
         return CharactersService.orderByFaction(

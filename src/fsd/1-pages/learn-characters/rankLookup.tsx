@@ -119,16 +119,8 @@ export const RankLookup = () => {
     }, [upgrades, rankStart]);
 
     const totalMaterials = useMemo<IMaterialEstimated2[]>(() => {
-        return orderBy(
-            RankLookupService.getAllMaterials(campaignsProgress, inventory.upgrades, upgrades),
-            ['rarity', 'count', 'expectedEnergy'],
-            ['desc', 'desc', 'desc']
-        );
+        return orderBy(RankLookupService.getAllMaterials(campaignsProgress, {}, upgrades), ['rarity'], ['desc']);
     }, [upgrades]);
-
-    const totalEnergy = useMemo<number>(() => {
-        return Math.ceil(sum(totalMaterials.map(x => x.expectedEnergy)));
-    }, [totalMaterials]);
 
     const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>) => (
         <ul>
@@ -176,6 +168,16 @@ export const RankLookup = () => {
             width: 80,
         },
         {
+            headerName: 'Name',
+            cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
+                const { data } = params;
+                if (data) return data.label;
+            },
+            equals: () => true,
+            sortable: false,
+            width: 80,
+        },
+        {
             field: 'count',
             maxWidth: 75,
         },
@@ -184,20 +186,6 @@ export const RankLookup = () => {
             maxWidth: 120,
             valueFormatter: (params: ValueFormatterParams<IMaterialEstimated2>) => Rarity[params.data?.rarity ?? 0],
             cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
-        },
-        {
-            field: 'expectedEnergy',
-            maxWidth: 120,
-        },
-        {
-            headerName: '# Of Battles',
-            field: 'numberOfBattles',
-            maxWidth: 100,
-        },
-        {
-            headerName: 'Days Of Battles',
-            field: 'daysOfBattles',
-            maxWidth: 100,
         },
         {
             headerName: 'Locations',
@@ -382,16 +370,6 @@ export const RankLookup = () => {
             </div>
 
             <div>
-                <div style={{ display: 'flex' }}>
-                    <h3>Total</h3>
-                    {totalEnergy > 0 ? <h4 style={{ paddingInlineStart: 40 }}>Energy - {totalEnergy}</h4> : undefined}
-                    {totalEnergy > 0 ? (
-                        <h4 style={{ paddingInlineStart: 40 }}>
-                            Battles - {sum(totalMaterials.map(x => x.numberOfBattles))}
-                        </h4>
-                    ) : undefined}
-                </div>
-
                 <div
                     className="ag-theme-material"
                     style={{ height: 50 + totalMaterials.length * 30, maxHeight: '40vh', width: '100%' }}>

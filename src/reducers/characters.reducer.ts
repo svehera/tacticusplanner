@@ -68,7 +68,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
         }
         case 'Update': {
             const updatedCharacter = action.character;
-            const existingCharIndex = state.findIndex(char => char.name === updatedCharacter.name);
+            const existingCharIndex = state.findIndex(char => char.snowprintId === updatedCharacter.snowprintId);
             const existingChar = state[existingCharIndex];
 
             if (existingChar) {

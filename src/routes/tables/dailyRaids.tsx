@@ -1,5 +1,6 @@
 ﻿import { enqueueSnackbar } from 'notistack';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { ICampaingsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -44,12 +45,7 @@ export const DailyRaids = () => {
         inventory,
     } = useContext(StoreContext);
 
-    const resolvedMows = useMemo(() => {
-        return storeMows.map(mow => {
-            if ('snowprintId' in mow) return mow as IMow2;
-            return { ...mow, ...MowsService.resolveToStatic(mow.tacticusId)! } as IMow2;
-        });
-    }, [storeMows]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
 
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
     const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);
@@ -61,6 +57,14 @@ export const DailyRaids = () => {
     }, [goals, units]);
 
     const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
+
+    const location = useLocation();
+    const [searchParams] = useSearchParams();
+    const [charSnowprintId, setCharSnowprintId] = React.useState<string | null>(searchParams.get('charSnowprintId'));
+
+    useEffect(() => {
+        setCharSnowprintId(searchParams.get('charSnowprintId'));
+    }, [location]);
 
     const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation | null) => {
         setHasChanges(true);
@@ -170,7 +174,10 @@ export const DailyRaids = () => {
     }, [shardsGoals, dailyRaidsPreferences, dailyRaids.filters]);
 
     const actualEnergy = useMemo(() => {
-        return dailyRaidsPreferences.dailyEnergy - estimatedShards.energyPerDay - dailyRaidsPreferences.shardsEnergy;
+        return (
+            dailyRaidsPreferences.dailyEnergy -
+            Math.min(estimatedShards.energyPerDay, dailyRaidsPreferences.shardsEnergy)
+        );
     }, [dailyRaidsPreferences.dailyEnergy, dailyRaidsPreferences.shardsEnergy, estimatedShards.energyPerDay]);
 
     const estimatedRanks: IEstimatedUpgrades = useMemo(() => {
@@ -189,9 +196,7 @@ export const DailyRaids = () => {
 
     const hasShardsEnergy = dailyRaidsPreferences.shardsEnergy > 0 || estimatedShards.energyPerDay > 0;
     const energyDescription = hasShardsEnergy
-        ? `${actualEnergy} = ${dailyRaidsPreferences.dailyEnergy} - ${
-              estimatedShards.energyPerDay + dailyRaidsPreferences.shardsEnergy
-          }`
+        ? `${actualEnergy} = ${dailyRaidsPreferences.dailyEnergy} - ${Math.min(estimatedShards.energyPerDay, dailyRaidsPreferences.shardsEnergy)}`
         : actualEnergy.toString();
 
     return (
@@ -214,6 +219,7 @@ export const DailyRaids = () => {
                 upgrades={inventory.upgrades}
                 updateInventory={saveInventoryUpdateChanges}
                 updateInventoryAny={() => setHasChanges(true)}
+                scrollToCharSnowprintId={charSnowprintId ?? undefined}
             />
 
             <TodayRaids

@@ -2,7 +2,7 @@
 import { Card, CardActions, CardContent, CardHeader } from '@mui/material';
 import Button from '@mui/material/Button';
 import { orderBy, sum } from 'lodash';
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
@@ -13,6 +13,8 @@ import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { CharactersService as CharacterEntityService } from '@/fsd/4-entities/character';
 
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
@@ -29,11 +31,11 @@ export const GuildWarDefense = () => {
     const { guildWar, characters, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const [openSelectTeamDialog, setOpenSelectTeamDialog] = React.useState(false);
-    const [editedTeam, setEditedTeam] = React.useState<IGWTeamWithCharacters | null>(null);
+    const [openSelectTeamDialog, setOpenSelectTeamDialog] = useState(false);
+    const [editedTeam, setEditedTeam] = useState<IGWTeamWithCharacters | null>(null);
 
-    const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
-    const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
+    const [openCharacterItemDialog, setOpenCharacterItemDialog] = useState(false);
+    const [editedCharacter, setEditedCharacter] = useState<ICharacter2 | null>(null);
 
     useEffect(() => {
         const rarityCaps = GuildWarService.getDifficultyRarityCaps(guildWar.zoneDifficulty);
@@ -86,15 +88,17 @@ export const GuildWarDefense = () => {
         return guildWar.teams
             .filter(x => x.type === GuildWarTeamType.Defense)
             .map(team => {
-                const teamWithChars = team.lineup.map(name => characters.find(char => char.name === name)!);
+                const teamWithChars = team.lineup.map(name =>
+                    characters.find(char => CharacterEntityService.matchesAnyCharacterId(name, char))
+                );
                 return { ...team, lineup: teamWithChars.filter(x => !!x) };
             });
     }, [guildWar.teams, characters]);
 
     const teamsPotential = useMemo(() => {
-        return teamsWithCharacters.map((team, teamIndex) => {
+        return teamsWithCharacters.map(team => {
             const lineup = team.lineup.map(x => ({
-                id: x.name,
+                id: x.shortName,
                 potential: CharactersService.calculateCharacterPotential(
                     CharactersService.capCharacterAtRarity(x, team.rarityCap),
                     team.rarityCap

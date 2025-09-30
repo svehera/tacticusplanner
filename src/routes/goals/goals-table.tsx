@@ -492,15 +492,13 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                         let params: string = '';
 
                         if (data.type === PersonalGoalType.UpgradeRank) {
-                            linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
-                            params = `?character=${data.unitId}&rankStart=${Rank[data.rankStart]}&rankEnd=${
-                                Rank[data.rankEnd]
-                            }&rankPoint5=${data.rankPoint5}`;
+                            linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                            params = `?charSnowprintId=${data.unitId}`;
                         }
 
                         if (data.type === PersonalGoalType.MowAbilities) {
-                            linkBase = isMobile ? '/mobile/learn/mowLookup' : '/learn/mowLookup';
-                            params = `?mow=${data.unitId}&pStart=${data.primaryStart}&pEnd=${data.primaryEnd}&sStart=${data.secondaryStart}&sEnd=${data.secondaryEnd}`;
+                            linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                            params = `?charSnowprintId=${data.unitId}`;
                         }
                         return (
                             <Button
@@ -509,7 +507,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                                 component={Link}
                                 to={linkBase + params}
                                 target={'_self'}>
-                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
+                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
                             </Button>
                         );
                     }

@@ -17,42 +17,20 @@ import { getImageUrl } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
+import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { Thanks } from '@/fsd/3-features/thank-you';
 
 import { useBmcWidget } from './useBmcWidget';
 
-export const DesktopHome = () => {
-    useBmcWidget();
+function formatMonthAndDay(date: Date): string {
+    const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+
+function LreSection({ nextEvent }: { nextEvent: ILegendaryEventStatic }) {
     const navigate = useNavigate();
-    const { userInfo } = useAuth();
-    const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = LegendaryEventService.getActiveEvent();
-    const nextLeUnit = CharactersService.charactersData.find(x => x.snowprintId === nextLeMenuItem.unitSnowprintId);
-    const goalsMenuItem = menuItemById['goals'];
-    const dailyRaidsMenuItem = menuItemById['dailyRaids'];
-
-    const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_20250817.png'),
-        // Battle Pass Season 31 (21 Sep) calendar image not yet available
-        // next: getImageUrl('calendar/calendar_20250921.png'),
-    };
-
-    const topPriorityGoal = goals[0];
-    const unlockGoals = goals.filter(x => x.type === PersonalGoalType.Unlock).length;
-    const ascendGoals = goals.filter(x => x.type === PersonalGoalType.Ascend).length;
-    const upgradeRankGoals = goals.filter(x => x.type === PersonalGoalType.UpgradeRank).length;
-
-    const navigateToNextLre = () => {
-        const route = `/plan/lre?character=${LegendaryEventEnum[LegendaryEventService.getActiveEvent().id]}`;
-        navigate(isMobile ? '/mobile' + route : route);
-    };
-
-    function formatMonthAndDay(date: Date): string {
-        const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
-        return date.toLocaleDateString('en-US', options);
-    }
+    const nextLeUnit = CharactersService.charactersData.find(x => x.snowprintId === nextEvent.unitSnowprintId);
 
     function timeLeftToFutureDate(targetDate: Date): string {
         const currentDate = new Date();
@@ -68,11 +46,65 @@ export const DesktopHome = () => {
         return timeDifference >= 0 ? result : 'Finished';
     }
 
-    const nextLeDateStart = new Date(nextLeMenuItem.nextEventDateUtc!);
-    const nextLeDateEnd = new Date(new Date(nextLeMenuItem.nextEventDateUtc!).setDate(nextLeDateStart.getDate() + 7));
+    const navigateToNextLre = () => {
+        const route = `/plan/lre?character=${LegendaryEventEnum[nextEvent.id]}`;
+        navigate(isMobile ? '/mobile' + route : route);
+    };
+
+    const nextLeDateStart = new Date(nextEvent.nextEventDateUtc!);
+    const nextLeDateEnd = new Date(new Date(nextEvent.nextEventDateUtc!).setDate(nextLeDateStart.getDate() + 7));
     const timeToStart = timeLeftToFutureDate(nextLeDateStart);
     const timeToEnd = timeLeftToFutureDate(nextLeDateEnd);
     const isEventStarted = timeToStart === 'Finished';
+
+    return (
+        <div>
+            <h3 style={{ textAlign: 'center' }}>{isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event</h3>
+            <Card
+                variant="outlined"
+                classes="dark:bg-dark-navy"
+                onClick={navigateToNextLre}
+                sx={{
+                    width: 350,
+                    minHeight: 200,
+                    cursor: 'pointer',
+                }}>
+                <CardHeader
+                    title={
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                            <UnitShardIcon icon={nextLeUnit?.roundIcon ?? ''} height={50} width={50} />
+                            {nextLeUnit?.shortName}
+                        </div>
+                    }
+                    subheader={formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}
+                />
+                <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                    {isEventStarted ? timeToEnd : timeToStart}
+                </CardContent>
+            </Card>
+        </div>
+    );
+}
+
+export const DesktopHome = () => {
+    useBmcWidget();
+    const navigate = useNavigate();
+    const { userInfo } = useAuth();
+    const { goals, dailyRaids } = useContext(StoreContext);
+    const nextLeMenuItem = LegendaryEventService.getActiveEvent();
+
+    const goalsMenuItem = menuItemById['goals'];
+    const dailyRaidsMenuItem = menuItemById['dailyRaids'];
+
+    const calendarUrls: { current?: string; next?: string } = {
+        current: getImageUrl('calendar/calendar_20250817.png'),
+        next: getImageUrl('calendar/calendar_20250921.png'),
+    };
+
+    const topPriorityGoal = goals[0];
+    const unlockGoals = goals.filter(x => x.type === PersonalGoalType.Unlock).length;
+    const ascendGoals = goals.filter(x => x.type === PersonalGoalType.Ascend).length;
+    const upgradeRankGoals = goals.filter(x => x.type === PersonalGoalType.UpgradeRank).length;
 
     const announcements = () => {
         if (userInfo.tacticusApiKey) {
@@ -149,31 +181,7 @@ export const DesktopHome = () => {
                     </Card>
                 </div>
 
-                <div>
-                    <h3 style={{ textAlign: 'center' }}>{isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event</h3>
-                    <Card
-                        variant="outlined"
-                        classes="dark:bg-dark-navy"
-                        onClick={navigateToNextLre}
-                        sx={{
-                            width: 350,
-                            minHeight: 200,
-                            cursor: 'pointer',
-                        }}>
-                        <CardHeader
-                            title={
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <UnitShardIcon icon={nextLeUnit?.roundIcon ?? ''} height={50} width={50} />
-                                    {nextLeUnit?.shortName}
-                                </div>
-                            }
-                            subheader={formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}
-                        />
-                        <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
-                            {isEventStarted ? timeToEnd : timeToStart}
-                        </CardContent>
-                    </Card>
-                </div>
+                {nextLeMenuItem && <LreSection nextEvent={nextLeMenuItem} />}
 
                 {!!goals.length && (
                     <div>

@@ -17,9 +17,9 @@ export interface ICampaignBattleComposed {
     rarityEnum: Rarity;
     rewards: IRewards;
     slots?: number;
-    enemiesFactions: Faction[];
+    enemiesFactions: string[];
     enemiesAlliances: Alliance[];
-    alliesFactions: Faction[];
+    alliesFactions: string[];
     alliesAlliance: Alliance;
     enemiesTotal: number;
     enemiesTypes: string[];

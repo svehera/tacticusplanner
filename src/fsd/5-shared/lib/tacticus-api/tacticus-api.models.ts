@@ -13,6 +13,7 @@ export interface TacticusPlayer {
 export interface TacticusInventory {
     upgrades: TacticusUpgrade[];
     shards: TacticusShard[];
+    mythicShards: TacticusShard[];
 }
 
 export interface TacticusAbility {
