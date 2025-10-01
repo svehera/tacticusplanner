@@ -328,7 +328,7 @@ export const LearnCharacters = () => {
         params.delete('name');
         navigate({ search: params.toString() }, { replace: true });
     };
-    console.log(filter);
+
     return (
         <div>
             <div className="flex-box gap20 wrap">
