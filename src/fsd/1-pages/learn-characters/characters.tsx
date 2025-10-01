@@ -50,7 +50,6 @@ export const LearnCharacters = () => {
 
     type Filter = {
         nameFilter: string;
-        onlyUnlocked: boolean;
         minHitsFilter: number | '';
         maxHitsFilter: number | '';
         attackTypeFilter: string;
@@ -63,7 +62,6 @@ export const LearnCharacters = () => {
 
     const [filter, setFilter] = useState<Filter>({
         nameFilter: '',
-        onlyUnlocked: false,
         minHitsFilter: '',
         maxHitsFilter: '',
         attackTypeFilter: '',
@@ -75,8 +73,6 @@ export const LearnCharacters = () => {
     });
 
     const handleFilterChange = (name: string, value: string | boolean | number | string[]) => {
-        console.log('name: ', name);
-        console.log('value: ', value);
         setFilter({ ...filter, [name]: value });
     };
 
@@ -271,7 +267,6 @@ export const LearnCharacters = () => {
     const resetFilters = () => {
         setFilter({
             nameFilter: filter.nameFilter, //keep current quickfilter name
-            onlyUnlocked: false,
             minHitsFilter: '',
             maxHitsFilter: '',
             attackTypeFilter: '',
