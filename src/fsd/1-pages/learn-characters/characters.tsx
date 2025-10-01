@@ -85,8 +85,7 @@ export const LearnCharacters = () => {
         const distance = searchParams.get('distance');
         const traits = searchParams.getAll('trait');
         const alliance = searchParams.getAll('alliance');
-
-        setFilter({
+        const newFilter: Filter = {
             name: name ?? '',
             minHits: minHits ? Number(minHits) : '',
             maxHits: maxHits ? Number(maxHits) : '',
@@ -96,13 +95,14 @@ export const LearnCharacters = () => {
             damageTypes: damageTypes.length > 0 ? damageTypes.map(d => DamageType[d as keyof typeof DamageType]) : [],
             traits: traits,
             alliance: alliance,
-        });
-        if (Object.values(filter).some(v => v !== '')) setShowFilters(true);
+        };
+        setFilter(newFilter);
+        if (Object.values(newFilter).some(v => v !== '')) setShowFilters(true);
     }, []);
 
     const handleFilterChange = (name: keyof Filter, value: string | boolean | number | string[]) => {
         setFilter(prev => ({ ...prev, [name]: value }));
-        const params = new URLSearchParams(location.search);
+        const params = new URLSearchParams(searchParams);
         if (Array.isArray(value)) {
             params.delete(name);
             value.forEach(v => params.append(name, String(v)));
@@ -149,7 +149,7 @@ export const LearnCharacters = () => {
                     (!onlyUnlocked || c.rank > Rank.Locked)
                 );
             }),
-        [filter, onlyUnlocked]
+        [filter, onlyUnlocked, resolvedCharacters]
     );
 
     const isExternalFilterPresent = useCallback(() => {
@@ -316,7 +316,7 @@ export const LearnCharacters = () => {
             traits: [],
             alliance: [],
         });
-        const params = new URLSearchParams(location.search);
+        const params = new URLSearchParams(searchParams);
         params.delete('minHits');
         params.delete('maxHits');
         params.delete('attackType');
@@ -381,7 +381,10 @@ export const LearnCharacters = () => {
                                 label="Min Hits"
                                 value={filter.minHits}
                                 onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange('minHits', Number(value.target.value))
+                                    handleFilterChange(
+                                        'minHits',
+                                        value.target.value === '' ? '' : Number(value.target.value)
+                                    )
                                 }>
                                 <MenuItem value="">
                                     <span>Any</span>
@@ -400,7 +403,10 @@ export const LearnCharacters = () => {
                                 label="Max Hits"
                                 value={filter.maxHits}
                                 onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange('maxHits', Number(value.target.value))
+                                    handleFilterChange(
+                                        'maxHits',
+                                        value.target.value === '' ? '' : Number(value.target.value)
+                                    )
                                 }>
                                 <MenuItem value="">
                                     <span>Any</span>
@@ -439,7 +445,10 @@ export const LearnCharacters = () => {
                                 label="Movement"
                                 value={filter.movement}
                                 onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange('movement', Number(value.target.value))
+                                    handleFilterChange(
+                                        'movement',
+                                        value.target.value === '' ? '' : Number(value.target.value)
+                                    )
                                 }>
                                 <MenuItem value="">
                                     <span>Any</span>
@@ -458,7 +467,10 @@ export const LearnCharacters = () => {
                                 label="Distance"
                                 value={filter.distance}
                                 onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange('distance', Number(value.target.value))
+                                    handleFilterChange(
+                                        'distance',
+                                        value.target.value === '' ? '' : Number(value.target.value)
+                                    )
                                 }>
                                 <MenuItem value="">
                                     <span>Any</span>
