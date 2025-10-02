@@ -24,6 +24,7 @@ import { Inventory } from '@/fsd/1-pages/input-inventory';
 interface Props {
     estimatedShards: IEstimatedShards;
     estimatedRanks: IEstimatedUpgrades;
+    scrollToCharSnowprintId?: string;
     upgrades: Record<string, number>;
     updateInventory: (materialId: string, value: number) => void;
     updateInventoryAny: () => void;
@@ -32,6 +33,7 @@ interface Props {
 export const RaidsPlan: React.FC<Props> = ({
     estimatedShards,
     estimatedRanks,
+    scrollToCharSnowprintId,
     updateInventoryAny,
     upgrades,
     updateInventory,
@@ -87,7 +89,7 @@ export const RaidsPlan: React.FC<Props> = ({
     }, [daysTotal]);
 
     return (
-        <Accordion>
+        <Accordion defaultExpanded={scrollToCharSnowprintId !== undefined}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                     <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
@@ -123,7 +125,9 @@ export const RaidsPlan: React.FC<Props> = ({
                     </Accordion>
                 )}
                 {!!estimatedRanks.inProgressMaterials.length && (
-                    <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
+                    <Accordion
+                        defaultExpanded={scrollToCharSnowprintId !== undefined}
+                        TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <PendingIcon color={'primary'} />
@@ -136,6 +140,8 @@ export const RaidsPlan: React.FC<Props> = ({
                                 updateMaterialQuantity={updateInventory}
                                 onGridReady={() => setGrid1Loaded(true)}
                                 inventory={upgrades}
+                                scrollToCharSnowprintId={scrollToCharSnowprintId}
+                                alreadyUsedMaterials={estimatedRanks.finishedMaterials}
                             />
                         </AccordionDetails>
                     </Accordion>

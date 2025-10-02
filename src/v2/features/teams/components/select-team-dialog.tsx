@@ -42,14 +42,14 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
 
     const handleCharacterSelect = (unit: IUnit) => {
         setLineup(curr => {
-            if (curr.some(x => x.name === unit.name)) {
-                return curr.filter(x => x.name !== unit.name);
+            if (curr.some(x => x.id === unit.id)) {
+                return curr.filter(x => x.id !== unit.id);
             } else {
-                if (lineup.length === 5) {
+                if (curr.length === 5) {
                     return curr;
                 }
 
-                const newChar = units.find(x => x.name === unit.id);
+                const newChar = units.find(x => x.id === unit.id);
 
                 if (newChar && isCharacter(newChar)) {
                     return [...curr, newChar];

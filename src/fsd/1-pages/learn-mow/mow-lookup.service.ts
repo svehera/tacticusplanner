@@ -19,8 +19,8 @@ export class MowLookupService {
         const badges = new Map<Rarity, number>();
         const forgeBadges = new Map<Rarity, number>();
         for (const material of materials) {
-            badges.set(material.rarity, badges.get(material.rarity) ?? 0 + material.badges);
-            forgeBadges.set(material.rarity, forgeBadges.get(material.rarity) ?? 0 + material.forgeBadges);
+            badges.set(material.rarity, (badges.get(material.rarity) ?? 0) + material.badges);
+            forgeBadges.set(material.rarity, (forgeBadges.get(material.rarity) ?? 0) + material.forgeBadges);
         }
 
         return {

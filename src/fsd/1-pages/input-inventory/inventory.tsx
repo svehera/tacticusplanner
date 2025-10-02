@@ -30,7 +30,9 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
     const itemsList = useMemo<IInventoryUpgrade[]>(() => {
         return orderBy(
             Object.values(UpgradesService.recipeDataByName)
-                .filter(item => item.stat !== 'Shard' && (!itemsFilter.length || itemsFilter.includes(item.material)))
+                .filter(
+                    item => item.stat !== 'Shard' && (!itemsFilter.length || itemsFilter.includes(item.snowprintId))
+                )
                 .map(x => ({
                     material: x.material,
                     snowprintId: x.snowprintId,
@@ -38,7 +40,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                     rarity: Rarity[x.rarity as unknown as number] as unknown as Rarity,
                     craftable: x.craftable,
                     stat: x.stat,
-                    quantity: inventory.upgrades[x.material] ?? 0,
+                    quantity: inventory.upgrades[x.snowprintId] ?? 0,
                     iconPath: x.icon ?? '',
                     faction: x.faction ?? '',
                     visible: true,
@@ -65,7 +67,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                 rarity: +rarity,
                 items: map(
                     groupBy(
-                        items.filter(x => !x.craftable),
+                        items.filter(x => !x.craftable).filter(x => x.material.indexOf('Coming soon') === -1),
                         'alphabet'
                     ),
                     (subItems, letter) => ({

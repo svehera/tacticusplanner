@@ -255,13 +255,25 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
         return arr1.length === arr2.length && arr1.every(char => arr2.includes(char));
     }
 
+    function doTeamsMatch(team1: string[], team2: string[]) {
+        return areArraysEqual(
+            team1.map(id => CharactersService.canonicalName(id)),
+            team2.map(id => CharactersService.canonicalName(id))
+        );
+    }
+
     sections.forEach(section => {
         const selectedTeams: SelectedTeams = data[section];
 
-        Object.entries(selectedTeams).forEach(([restriction, characters]) => {
+        Object.entries(selectedTeams).forEach(([restriction, charSnowprintIds]) => {
+            const resolve = (char: string) => CharactersService.canonicalName(char);
             // Check if there's already a team with the same set of characters
             const existingTeam = teams.find(
-                team => areArraysEqual(team.charactersIds, characters) && team.section === section
+                team =>
+                    doTeamsMatch(
+                        (team.charSnowprintIds ?? team.charactersIds ?? []).map(x => resolve(x)),
+                        charSnowprintIds.map(x => resolve(x))
+                    ) && team.section === section
             );
 
             if (existingTeam) {
@@ -269,14 +281,14 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
                 if (!existingTeam.restrictionsIds.includes(restriction)) {
                     existingTeam.restrictionsIds.push(restriction);
                 }
-            } else if (characters?.length) {
+            } else if (charSnowprintIds?.length) {
                 // If not found, create a new team
                 const team: ILreTeam = {
                     id: v4(), // Replace with your UUID generation logic
                     name: `Team ${teams.length + 1} - ${section}`, // Assigning Team 1, 2, 3, etc.
                     section: section as LreTrackId,
                     restrictionsIds: [restriction], // Initial restriction,
-                    charactersIds: characters, // Characters associated with this team
+                    charSnowprintIds: charSnowprintIds.map(x => CharactersService.canonicalName(x)), // Characters associated with this team
                 };
                 teams.push(team);
             }

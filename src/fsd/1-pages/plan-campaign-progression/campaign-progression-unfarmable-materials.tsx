@@ -7,6 +7,7 @@ import React from 'react';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
+import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { CampaignData, CampaignsProgressData } from './campaign-progression.models';
 import { CampaignsProgressionService } from './campaign-progression.service';
@@ -21,7 +22,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
     function renderMissingMaterial(material: string): any {
         return (
             <tr key={'missing_material-' + material}>
-                <td>Cannot currently farm {material}, needed by</td>
+                <td>Cannot currently farm {UpgradesService.getUpgrade(material)?.label}, needed by</td>
                 {progression.charactersNeedingMaterials.get(material)?.map(unitId => {
                     return [
                         <td key={'missing_material-' + material + '-character-' + unitId}>

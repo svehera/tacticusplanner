@@ -1,6 +1,22 @@
 ﻿{
-    "currentVersion": "1.7.5",
+    "currentVersion": "1.8.0",
     "releaseNotes": [
+        {
+            "version": "1.8.0",
+            "date": "August 22",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Mythic",
+                    "subPoints": [
+                        "Initial support for Mythic rarity, ranks and abilities has arrived.",
+                        "There's likely to be bugs and some overlooked features. Please be patient and feel free report in the Tacticus Planner Discord, or in the main Tacticus Discord."
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.7.5",
             "date": "July 8",

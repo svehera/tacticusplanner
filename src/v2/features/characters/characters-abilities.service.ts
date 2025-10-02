@@ -22,7 +22,12 @@ export class CharactersAbilitiesService {
     static readonly legendaryTomeApplyCost = 500 as const;
     static xpLevelThresholds: IXpLevel[] = xpData.xpLevelThresholds;
 
+    public static getMaximumAbilityLevel(): number {
+        return this.abilitiesLvlUpRaw.length + 1;
+    }
+
     public static getMaterials(levelStart: number, levelEnd: number): ICharacterAbilityLevel[] {
+        // console.trace('Getting materials for levels:', levelStart, 'to', levelEnd);
         return this.abilitiesLvlUp.slice(levelStart - 1, levelEnd - 1);
     }
 
@@ -60,7 +65,10 @@ export class CharactersAbilitiesService {
         if (level <= 35) {
             return Rarity.Epic;
         }
+        if (level <= 50) {
+            return Rarity.Legendary;
+        }
 
-        return Rarity.Legendary;
+        return Rarity.Mythic;
     }
 }

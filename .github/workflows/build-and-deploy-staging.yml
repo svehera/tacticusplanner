@@ -13,6 +13,8 @@ concurrency:
 
 jobs:
   build_and_deploy_job:
+    # Only run for direct commits to develop, not for develop->master release PRs
+    if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:

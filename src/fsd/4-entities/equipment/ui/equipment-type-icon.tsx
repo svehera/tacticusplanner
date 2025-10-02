@@ -2,7 +2,6 @@ import React from 'react';
 
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 
-import type { EquipmentType } from '../enums';
 import { EquipmentService } from '../equipment.service';
 
 export const EquipmentTypeIcon = ({
@@ -11,12 +10,14 @@ export const EquipmentTypeIcon = ({
     width,
     tooltip,
 }: {
-    equipmentType: EquipmentType;
+    equipmentType: string;
     height?: number;
     width?: number;
     tooltip?: boolean;
 }) => {
-    const imageUrl = getImageUrl(EquipmentService.getEquipmentTypeIconPath(equipmentType));
+    const imageUrl = getImageUrl(
+        `snowprint_assets/equipment/ui_icon_itemtype_${equipmentType.substring(2).toLowerCase()}.png`
+    );
 
     const image = (
         <img loading={'lazy'} style={{ pointerEvents: 'none', width, height }} src={imageUrl} alt={equipmentType} />

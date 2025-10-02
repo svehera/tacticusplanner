@@ -20,7 +20,7 @@ import { Alliance, Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
-import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
+import { ICampaignBattleComposed, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { RankSelect } from '@/fsd/4-entities/character';
 import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
@@ -30,6 +30,7 @@ import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
 
 import { CharacterUpgrades } from '@/fsd/3-features/character-details';
+import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
 import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
@@ -149,10 +150,14 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
         targetRankValues = getEnumValues(Rank).filter(x => x > 0 && x >= form.rankStart && x <= maxRank);
     }
 
-    const possibleLocations =
-        [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
-            ? StaticDataService.getItemLocations(`shards_${unit.id}`)
-            : [];
+    let possibleLocations: ICampaignBattleComposed[] = [];
+    // Support for both IDs for characters. Previously be used a short version (i.e. Ragnar, Darkstrider).
+    if ([PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit) {
+        possibleLocations = StaticDataService.getItemLocations(`shards_${unit.id}`);
+        if (!possibleLocations.length) {
+            possibleLocations = StaticDataService.getItemLocations(`shards_${unit.snowprintId}`);
+        }
+    }
 
     const unlockedLocations = possibleLocations
         .filter(location => {
@@ -233,6 +238,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Primary current level"
                                     min={unit.primaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.primaryStart}
                                     valueChange={primaryStart => {
                                         setForm(curr => ({
@@ -245,6 +251,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Primary target level"
                                     min={unit.primaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.primaryEnd}
                                     valueChange={primaryEnd => {
                                         setForm(curr => ({
@@ -259,6 +266,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Secondary current level"
                                     min={unit.secondaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.secondaryStart}
                                     valueChange={secondaryStart => {
                                         setForm(curr => ({
@@ -271,6 +279,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Secondary target level"
                                     min={unit.secondaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.secondaryEnd}
                                     valueChange={secondaryEnd => {
                                         setForm(curr => ({

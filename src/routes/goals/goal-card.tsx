@@ -118,10 +118,8 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
             }
             case PersonalGoalType.UpgradeRank: {
                 const { xpEstimate } = goalEstimate;
-                const linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
-                const params = `?character=${goal.unitId}&rankStart=${Rank[goal.rankStart]}&rankEnd=${
-                    Rank[goal.rankEnd]
-                }&rankPoint5=${goal.rankPoint5}`;
+                const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                const params = `?charSnowprintId=${encodeURIComponent(goal.unitId)}`;
 
                 return (
                     <div>
@@ -157,14 +155,14 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             component={Link}
                             to={linkBase + params}
                             target={'_self'}>
-                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
+                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
                         </Button>
                     </div>
                 );
             }
             case PersonalGoalType.MowAbilities: {
-                const linkBase = isMobile ? '/mobile/learn/mowLookup' : '/learn/mowLookup';
-                const params = `?mow=${goal.unitId}&pStart=${goal.primaryStart}&pEnd=${goal.primaryEnd}&sStart=${goal.secondaryStart}&sEnd=${goal.secondaryEnd}`;
+                const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                const params = `?charSnowprintId=${encodeURIComponent(goal.unitId)}`;
                 const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
                 const targetShards = ShardsService.getTargetShardsForMow(goal);
@@ -227,7 +225,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             component={Link}
                             to={linkBase + params}
                             target={'_self'}>
-                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
+                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
                         </Button>
                     </div>
                 );

@@ -13,23 +13,23 @@ import { ICharProgression, IPersonalData2 } from './interfaces';
 export const rankToLevel: Record<Rank, number> = {
     [Rank.Locked - 1]: 0,
     [Rank.Locked]: 0,
-    [Rank.Stone1]: 3,
-    [Rank.Stone2]: 5,
-    [Rank.Stone3]: 8,
-    [Rank.Iron1]: 11,
-    [Rank.Iron2]: 14,
-    [Rank.Iron3]: 17,
-    [Rank.Bronze1]: 20,
-    [Rank.Bronze2]: 23,
-    [Rank.Bronze3]: 26,
-    [Rank.Silver1]: 29,
-    [Rank.Silver2]: 32,
-    [Rank.Silver3]: 35,
-    [Rank.Gold1]: 38,
-    [Rank.Gold2]: 41,
-    [Rank.Gold3]: 44,
-    [Rank.Diamond1]: 47,
-    [Rank.Diamond2]: 50,
+    [Rank.Stone1]: 1,
+    [Rank.Stone2]: 3,
+    [Rank.Stone3]: 5,
+    [Rank.Iron1]: 8,
+    [Rank.Iron2]: 11,
+    [Rank.Iron3]: 14,
+    [Rank.Bronze1]: 17,
+    [Rank.Bronze2]: 20,
+    [Rank.Bronze3]: 23,
+    [Rank.Silver1]: 26,
+    [Rank.Silver2]: 29,
+    [Rank.Silver3]: 32,
+    [Rank.Gold1]: 35,
+    [Rank.Gold2]: 38,
+    [Rank.Gold3]: 41,
+    [Rank.Diamond1]: 44,
+    [Rank.Diamond2]: 47,
     [Rank.Diamond3]: 50,
     [Rank.Adamantine1]: 55,
 };
@@ -78,11 +78,11 @@ export const charsProgression: Record<number, ICharProgression> = {
     [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 150, orbs: 10, rarity: Rarity.Legendary },
     [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 250, orbs: 15, rarity: Rarity.Legendary },
     [Rarity.Legendary + RarityStars.OneBlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
-    [Rarity.Mythic + RarityStars.OneBlueStar]: { shards: 150, orbs: 10, rarity: Rarity.Mythic },
+    [Rarity.Mythic + RarityStars.OneBlueStar]: { mythicShards: 20, orbs: 10, rarity: Rarity.Mythic },
 
-    [Rarity.Mythic + RarityStars.TwoBlueStars]: { shards: 150, orbs: 10, rarity: Rarity.Mythic },
-    [Rarity.Mythic + RarityStars.ThreeBlueStars]: { shards: 250, orbs: 15, rarity: Rarity.Mythic },
-    [Rarity.Mythic + RarityStars.MythicWings]: { shards: 900, orbs: 20, rarity: Rarity.Mythic },
+    [Rarity.Mythic + RarityStars.TwoBlueStars]: { mythicShards: 30, orbs: 10, rarity: Rarity.Mythic },
+    [Rarity.Mythic + RarityStars.ThreeBlueStars]: { mythicShards: 50, orbs: 15, rarity: Rarity.Mythic },
+    [Rarity.Mythic + RarityStars.MythicWings]: { mythicShards: 100, orbs: 20, rarity: Rarity.Mythic },
 };
 
 const defaultCampaignsProgress: ICampaignsProgress = {
@@ -330,7 +330,7 @@ export const defaultData: IPersonalData2 = {
     },
 };
 
-export const goalsLimit = 50;
+export const goalsLimit = 100;
 
 export const idToCampaign: Record<string, Campaign> = {
     campaign1: Campaign.I,

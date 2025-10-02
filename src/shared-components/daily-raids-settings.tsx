@@ -47,18 +47,6 @@ const defaultCustomSettings: ICustomDailyRaidsSettings = {
 
 const energyMarks = [
     {
-        value: 288,
-        label: '',
-    },
-    {
-        value: 288 + 30,
-        label: 'Daily',
-    },
-    {
-        value: 288 + 30 + 60,
-        label: 'Ad',
-    },
-    {
         value: 288 + 30 + 60 + 60,
         label: '25 BS',
     },

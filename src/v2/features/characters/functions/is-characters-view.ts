@@ -6,6 +6,7 @@ export const isCharactersView = (orderBy: CharactersOrderBy): boolean => {
         CharactersOrderBy.CharacterPower,
         CharactersOrderBy.Rank,
         CharactersOrderBy.Rarity,
+        CharactersOrderBy.Shards,
         CharactersOrderBy.AbilitiesLevel,
         CharactersOrderBy.UnlockPercentage,
     ].includes(orderBy);

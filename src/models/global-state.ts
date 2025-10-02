@@ -2,7 +2,7 @@
 
 import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow, IMow2, IMowDb, IMowStatic, mows2Data, mowsData, MowsService } from '@/fsd/4-entities/mow';
+import { IMow, IMow2, IMowDb, mowsData, MowsService } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
@@ -87,7 +87,7 @@ export class GlobalState implements IGlobalState {
                 return CharactersService.canonicalName(c.name!) === staticData.snowprintId!;
             });
             const rank = personalCharData?.rank ?? Rank.Locked;
-            const rankLevel = rankToLevel[(rank - 1) as Rank];
+            const rankLevel = rankToLevel[rank as Rank];
             const rankRarity = rankToRarity[rank];
             const rarity = Math.max(personalCharData?.rarity ?? staticData.initialRarity, rankRarity) as Rarity;
             const stars = Math.max(personalCharData?.stars ?? 0, RarityMapper.toStars[rarity]);
@@ -110,6 +110,7 @@ export class GlobalState implements IGlobalState {
                 level: level,
                 xp: personalCharData?.xp ?? 0,
                 shards: personalCharData?.shards ?? 0,
+                mythicShards: personalCharData?.mythicShards ?? 0,
             };
 
             const result: ICharacter2 = {
@@ -150,6 +151,7 @@ export class GlobalState implements IGlobalState {
                 secondaryAbilityLevel: dbMow?.secondaryAbilityLevel ?? 1,
                 unlocked: dbMow?.unlocked ?? false,
                 shards: dbMow?.shards ?? 0,
+                mythicShards: dbMow?.mythicShards ?? 0,
                 numberOfUnlocked:
                     totalUsers && dbMow?.numberOfUnlocked
                         ? Math.ceil((dbMow.numberOfUnlocked / totalUsers) * 100)
@@ -196,7 +198,8 @@ export class GlobalState implements IGlobalState {
                     x.stars !== RarityStars.None ||
                     x.level !== 1 ||
                     x.xp !== 0 ||
-                    x.shards !== 0
+                    x.shards !== 0 ||
+                    x.mythicShards !== 0
             )
             .map(x => ({
                 name: x.name,
@@ -210,6 +213,7 @@ export class GlobalState implements IGlobalState {
                 level: x.level,
                 xp: x.xp,
                 shards: x.shards,
+                mythicShards: x.mythicShards,
             }));
 
         const mowsToDb: IMowDb[] = value.mows.map(x => ({
@@ -219,6 +223,7 @@ export class GlobalState implements IGlobalState {
             secondaryAbilityLevel: x.secondaryAbilityLevel,
             stars: x.stars,
             shards: x.shards,
+            mythicShards: x.mythicShards ?? 0,
             unlocked: x.unlocked,
         }));
 

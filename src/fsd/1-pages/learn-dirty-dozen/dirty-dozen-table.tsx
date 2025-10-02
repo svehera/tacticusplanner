@@ -4,7 +4,7 @@ import React from 'react';
 
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterTitle, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
+import { CharactersService, CharacterTitle, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
 
 import { Score } from './dirty-dozen-score';
 import { IDirtyDozenChar } from './dirty-dozen.models';
@@ -41,15 +41,15 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
         {
             headerName: '#',
             field: 'Position',
-            maxWidth: 30,
+            maxWidth: 32,
         },
         {
             field: 'Name',
             headerName: 'Name',
-            width: 150,
+            width: 200,
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
-                const characterId = props.data?.Name;
-                const character = characters.find(x => x.name === characterId);
+                const characterId = props.data?.Name ?? '';
+                const character = characters.find(char => CharactersService.matchesAnyCharacterId(characterId, char));
                 if (character) {
                     return <CharacterTitle character={character} imageSize={30} short />;
                 } else {
@@ -61,8 +61,8 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
             headerName: 'Rarity',
             width: 60,
             valueGetter: (props: ValueGetterParams<IDirtyDozenChar>) => {
-                const characterId = props.data?.Name;
-                const character = characters.find(x => x.name === characterId);
+                const characterId = props.data?.Name ?? '';
+                const character = characters.find(char => CharactersService.matchesAnyCharacterId(characterId, char));
                 return character?.rarity;
             },
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
@@ -74,8 +74,8 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
             headerName: 'Rank',
             width: 60,
             valueGetter: (props: ValueGetterParams<IDirtyDozenChar>) => {
-                const characterId = props.data?.Name;
-                const character = characters.find(x => x.name === characterId);
+                const characterId = props.data?.Name ?? '';
+                const character = characters.find(char => CharactersService.matchesAnyCharacterId(characterId, char));
                 return character?.rank;
             },
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {

@@ -8,7 +8,12 @@ export class CharactersXpService {
     static xpLevelThresholds: IXpLevel[] = xpData.xpLevelThresholds;
 
     static getLegendaryTomesCount(currLevel: number, currXp: number, targetLevel: number): IXpEstimate | null {
-        if (currLevel === 50 || targetLevel > 50 || targetLevel < 2 || currLevel === targetLevel) {
+        if (
+            currLevel === this.xpLevelThresholds.length ||
+            targetLevel > this.xpLevelThresholds.length ||
+            targetLevel < 2 ||
+            currLevel >= targetLevel
+        ) {
             return null;
         }
 

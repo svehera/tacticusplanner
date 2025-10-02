@@ -1,74 +1,45 @@
 import { Faction, RarityString, Rarity, RarityMapper, parseFaction } from '@/fsd/5-shared/model';
 
-import { equipmentData } from './data';
-import { EquipmentClass, EquipmentType } from './enums';
-import { IEquipment } from './model';
+// eslint-disable-next-line boundaries/element-types
+import { CharactersService } from '../character';
+
+import { newEquipmentData } from './data';
+import { IEquipment, IEquipmentStatic } from './model';
 
 export class EquipmentService {
     static readonly equipmentData: IEquipment[] = this.convertEquipmentData();
 
     /**
-     * Converts the raw equipment data from JSON into something that more
+     * Converts the raw equipment data from JSON into something *slightly* more
      * strongly typed.
      */
     private static convertEquipmentData(): IEquipment[] {
-        const ret: IEquipment[] = [];
-        Object.entries(equipmentData).forEach(([_, equipment]) => {
-            const slot = this.parseEquipmentType(equipment.slot);
-            const clazz = this.parseEquipmentClass(equipment.clazz);
-            const snowprintId = equipment.snowprintId;
-            const displayName = equipment.displayName;
-            const rarity = this.parseEquipmentRarity(equipment.rarity);
-            const chance: number | undefined = equipment.chance;
-            const factions: Faction[] = [];
-            equipment.factions.forEach((faction: string) => {
-                const parsedFaction = parseFaction(faction);
-                if (parsedFaction == undefined) {
-                    console.error("couldn't parse faction: " + faction);
-                } else {
-                    factions.push(parsedFaction!);
-                }
-            });
-            const boost1: number[] = [];
-            equipment.boost1.forEach((boost: number) => {
-                boost1.push(boost);
-            });
-            const boost2: number[] = [];
-            equipment.boost2.forEach((boost: number) => {
-                boost2.push(boost);
-            });
-            ret.push({
-                slot,
-                clazz,
-                snowprintId,
-                displayName,
-                rarity,
-                chance,
-                factions,
-                boost1,
-                boost2,
-            } as IEquipment);
+        return Object.entries(newEquipmentData).map(([id, data]) => {
+            return {
+                id: id,
+                name: data.name,
+                rarity: this.parseEquipmentRarity(data.rarity),
+                type: data.type,
+                abilityId: data.abilityId,
+                isRelic: data.isRelic,
+                isUniqueRelic: data.isUniqueRelic,
+                allowedUnits: this.resolveUnits(data),
+                levels: data.levels,
+                icon: this.getEquipmentIconPathFromId(id),
+            };
         });
-        return ret;
     }
 
-    private static parseEquipmentType(type: string): EquipmentType {
-        const parsed = EquipmentType[type as keyof typeof EquipmentType];
-        if (parsed == undefined) {
-            if (type == 'Defense') return EquipmentType.Defensive;
-            console.error("Couldn't parse equipment type: " + type);
-            return EquipmentType.Block;
-        }
-        return parsed;
-    }
-
-    private static parseEquipmentClass(clazz: string): EquipmentClass {
-        const parsed = EquipmentClass[clazz as keyof typeof EquipmentClass];
-        if (parsed == undefined) {
-            console.error("Couldn't parse equipment class: " + clazz);
-            return EquipmentClass.BoltPistol;
-        }
-        return parsed;
+    private static resolveUnits(data: IEquipmentStatic): string[] {
+        if (data.allowedUnits.length > 0) return data.allowedUnits;
+        return CharactersService.charactersData
+            .filter(char => data.allowedFactions.includes(char.faction))
+            .filter(char =>
+                [char.equipment1, char.equipment2, char.equipment3].includes(
+                    CharactersService.parseEquipmentType(data.type)
+                )
+            )
+            .map(char => char.snowprintId!);
     }
 
     private static parseEquipmentRarity(rarity: string): Rarity {
@@ -80,42 +51,28 @@ export class EquipmentService {
         return parsed;
     }
 
-    private static getEquipmentTypeIconPathComponent(slot: EquipmentType): string {
-        switch (slot) {
-            case EquipmentType.Block:
-            case EquipmentType.Crit:
-            case EquipmentType.Defensive:
-                return EquipmentType[slot as keyof typeof EquipmentType];
-            case EquipmentType.BlockBooster:
-                return 'Booster_Block';
-            case EquipmentType.CritBooster:
-                return 'Booster_Crit';
+    private static getEquipmentIconPathFromId(id: string): string {
+        if (id == 'R_Crit_Dw02AdvancedBurstCannon') {
+            // Re'vas's relic icon path is broken for some reason.
+            return 'snowprint_assets/equipment/ui_icon_item_R_Crit_DW02AdvancedBurstCannon.png';
         }
+        return `snowprint_assets/equipment/ui_icon_item_${id}.png`;
     }
 
-    public static getEquipmentIconPath(equipment: IEquipment): string {
-        const prefix = 'equipment/ui_icon_item_I';
-        const type = this.getEquipmentTypeIconPathComponent(equipment.slot);
-        const rarity = RarityString[Rarity[equipment.rarity] as keyof typeof RarityString].substring(0, 1);
-        const id = equipment.snowprintId.toString().padStart(3, '0');
-        return [prefix, type, rarity].join('_') + id + '.png';
-    }
-
-    public static getEquipmentTypeIconPath(slot: EquipmentType): string {
-        let icon: string = '';
+    public static getEquipmentSlotDisplayName(slot: string): string {
         switch (slot) {
-            case EquipmentType.Block:
-            case EquipmentType.Crit:
-            case EquipmentType.Defensive:
-                icon = EquipmentType[slot as keyof typeof EquipmentType] + '_Item';
-                break;
-            case EquipmentType.BlockBooster:
-                icon = 'Block_Booster';
-                break;
-            case EquipmentType.CritBooster:
-                icon = 'Crit_Booster';
-                break;
+            case 'I_Block':
+                return 'Block';
+            case 'I_Booster_Block':
+                return 'Block Booster';
+            case 'I_Crit':
+                return 'Crit';
+            case 'I_Booster_Crit':
+                return 'Crit Booster';
+            case 'I_Defensive':
+                return 'Defense';
+            default:
+                return 'Unknown Slot';
         }
-        return 'equipment/' + icon + '_Icon.webp';
     }
 }

@@ -20,9 +20,8 @@ export const SelectedTeamCard: React.FC<Props> = ({ team, menuItemSelect }) => {
     let subheader = team.restrictionsIds.join(', ');
     if (team.points) subheader += ` (${team.points} points)`;
     if (subheader.length > 0) subheader += ' - ';
-    subheader += `${team.expectedBattleClears ?? 14} battles (`;
-    subheader += (team.points ?? 0) * (team.expectedBattleClears ?? 14) + ' points total)';
-    console.log('SelectedTeamCard', team, subheader);
+    subheader += `${team.expectedBattleClears ?? 1} battle(s) (`;
+    subheader += (team.points ?? 0) * (team.expectedBattleClears ?? 1) + ' points total)';
     return (
         <Card
             variant="outlined"

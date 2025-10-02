@@ -2,7 +2,6 @@ import {
     Alliance,
     DamageType,
     DynamicProps,
-    Equipment,
     Faction,
     Rank,
     Rarity,
@@ -28,6 +27,7 @@ export interface IPersonalCharacterData2 {
     activeAbilityLevel: number;
     passiveAbilityLevel: number;
     shards: number;
+    mythicShards: number;
 }
 
 export interface IDamageTypes {
@@ -127,9 +127,9 @@ export interface ICharacterData {
     rarityStars: RarityStars;
     damageTypes: IDamageTypes;
     traits: Trait[];
-    equipment1: Equipment;
-    equipment2: Equipment;
-    equipment3: Equipment;
+    equipment1: string;
+    equipment2: string;
+    equipment3: string;
     meleeHits: number;
     rangeHits?: number;
     rangeDistance?: number;

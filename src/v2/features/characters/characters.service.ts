@@ -29,10 +29,12 @@ import { needToLevelCharacter } from './functions/need-to-level';
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
         const filteredCharactersByName = nameFilter
-            ? characters.filter(x => x.name.toLowerCase().includes(nameFilter.toLowerCase()))
+            ? characters.filter(
+                  x =>
+                      x.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                      ('shortName' in x && x.shortName?.toLowerCase().includes(nameFilter.toLowerCase()))
+              )
             : characters;
-
-        let farmableChars: Set<IMaterialFull['id']> | undefined;
 
         switch (filterBy) {
             case CharactersFilterBy.NeedToAscend:
@@ -56,12 +58,6 @@ export class CharactersService {
                 return filteredCharactersByName.filter(filterXenos);
             case CharactersFilterBy.MoW:
                 return filteredCharactersByName.filter(isMow);
-            case CharactersFilterBy.Unfarmable:
-                if (typeof farmableChars === 'undefined') farmableChars = new Set(UpgradesService.farmableCharacters);
-
-                return filteredCharactersByName.filter(char => {
-                    return !isMow(char) && !farmableChars?.has(char.id);
-                });
             case CharactersFilterBy.None:
             default:
                 return filteredCharactersByName;
@@ -104,6 +100,8 @@ export class CharactersService {
                 return orderBy(units, unit => (isMow(unit) ? Rank.Locked : unit.rank), ['desc']);
             case CharactersOrderBy.Rarity:
                 return orderBy(units, ['rarity', 'stars'], ['desc', 'desc']);
+            case CharactersOrderBy.Shards:
+                return orderBy(units, ['shards', 'rarity', 'stars'], ['desc', 'desc', 'desc']);
             case CharactersOrderBy.UnlockPercentage:
                 return orderBy(
                     units,

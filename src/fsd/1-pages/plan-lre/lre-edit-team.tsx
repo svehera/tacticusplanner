@@ -26,20 +26,20 @@ interface Props {
 
 export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, deleteTeam }) => {
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
-    const [expectedBattleClears, setExpectedBattleClears] = useState<number>(team.expectedBattleClears ?? 14);
+    const [expectedBattleClears, setExpectedBattleClears] = useState<number>(team.expectedBattleClears ?? 1);
     const [teamName, setTeamName] = useState<string>(team.name);
     const [selectedTeam, setSelectedTeam] = useState<ICharacter2[]>(team.characters ?? []);
 
     const gridTeam = useMemo(
         () => lre[team.section].suggestTeam(autoTeamsPreferences, viewPreferences.onlyUnlocked, team.restrictionsIds),
-        []
+        [lre, team, autoTeamsPreferences, viewPreferences]
     );
 
     const saveChanges = () => {
         saveTeam({
             ...team,
             name: teamName,
-            charactersIds: selectedTeam.map(x => x.id),
+            charSnowprintIds: selectedTeam.map(x => x.snowprintId!),
             expectedBattleClears: expectedBattleClears,
         });
     };
@@ -72,7 +72,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
     };
 
     const clampExpectedBattles = (value: number) => {
-        return Math.max(1, Math.min(value, 14));
+        return Math.max(1, Math.min(value, lre.battlesCount));
     };
 
     return (
@@ -100,7 +100,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                                 setExpectedBattleClears(clampExpectedBattles(value));
                             }
                         }}
-                        // inputProps={{ min: 1, max: 14, step: 1 }}
+                        inputProps={{ min: 1, max: lre.battlesCount, step: 1 }}
                     />
                 </div>
                 <div className="flex-box wrap" style={{ paddingTop: '10px' }}>

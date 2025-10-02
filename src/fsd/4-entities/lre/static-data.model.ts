@@ -39,6 +39,8 @@ export interface ILEProgression {
     fourStars: number;
     fiveStars: number;
     blueStar: number;
+    mythic?: number; // Automatic mythic ascension
+    twoBlueStars?: number; // Mythic two blue stars
 }
 
 export interface IPointsMilestone {

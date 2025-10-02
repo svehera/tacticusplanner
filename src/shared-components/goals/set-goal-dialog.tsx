@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import InputLabel from '@mui/material/InputLabel';
+import { first } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
@@ -39,6 +40,7 @@ import { UnitTitle } from '@/fsd/4-entities/unit/ui/unit-title';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
+import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
@@ -61,14 +63,7 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
     const { characters, mows, goals, campaignsProgress } = useContext(StoreContext);
 
-    const resolvedMows = useMemo(
-        () =>
-            mows.map(mow => {
-                if ('snowprintId' in mow) return mow as IMow2;
-                return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
-            }),
-        [mows]
-    );
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
     const dispatch = useContext(DispatchContext);
 
@@ -85,7 +80,10 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             goal.dailyRaids = [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(goal.type);
             dispatch.goals({ type: 'Add', goal });
             const character = characters.find(c => c.snowprintId === goal.character);
-            enqueueSnackbar(`Goal for ${character?.shortName ?? goal.character} is added`, { variant: 'success' });
+            const mow = resolvedMows.find(m => m.snowprintId === goal.character);
+            enqueueSnackbar(`Goal for ${character?.shortName ?? mow?.name ?? goal.character} is added`, {
+                variant: 'success',
+            });
         }
         setOpenDialog(false);
         setUnit(null);
@@ -132,16 +130,16 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 return characters;
             }
         }
-    }, [form.type, ignoreRankRarity]);
+    }, [form.type, ignoreRankRarity, resolvedMows, characters]);
 
-    const getAscenscionShardsName = (unit: IUnit | null): string => {
+    const getAscensionShardsName = (unit: IUnit | null): string => {
         if (!unit) return '';
         return 'shards_' + unit.snowprintId;
     };
 
     const possibleLocations =
         [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
-            ? StaticDataService.getItemLocations(getAscenscionShardsName(unit))
+            ? StaticDataService.getItemLocations(getAscensionShardsName(unit))
             : [];
 
     const unlockedLocations = possibleLocations
@@ -305,6 +303,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         fullWidth
                                         label="Primary target level"
                                         min={unit.primaryAbilityLevel}
+                                        max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.firstAbilityLevel!}
                                         valueChange={primaryAbilityLevel => {
                                             setForm(curr => ({
@@ -318,6 +317,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         fullWidth
                                         label="Secondary target level"
                                         min={unit.secondaryAbilityLevel}
+                                        max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.secondAbilityLevel!}
                                         valueChange={secondaryAbilityLevel => {
                                             setForm(curr => ({
@@ -347,6 +347,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         fullWidth
                                         label="Active target level"
                                         min={unit.activeAbilityLevel}
+                                        max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.firstAbilityLevel!}
                                         valueChange={primaryAbilityLevel => {
                                             setForm(curr => ({
@@ -360,6 +361,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         fullWidth
                                         label="Passive target level"
                                         min={unit.passiveAbilityLevel}
+                                        max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.secondAbilityLevel!}
                                         valueChange={secondaryAbilityLevel => {
                                             setForm(curr => ({

@@ -72,8 +72,11 @@ export class CharactersPowerService {
             return 5.3 * (level - 39) + 86.6;
         } else if (level <= 44) {
             return 8.4 * (level - 40) + 91.9;
-        } else {
+        } else if (level <= 50) {
             return 17.3 * (level - 44) + 125.5;
+        } else {
+            // Mythic values estimated via AI, unsure of source of original values
+            return 35.0 * (level - 50) + 229.3;
         }
     }
 
@@ -91,6 +94,8 @@ export class CharactersPowerService {
                     return 1.6;
                 case Rarity.Legendary:
                     return 1.8;
+                case Rarity.Mythic:
+                    return 2.0;
             }
         } else if (isMow(unit)) {
             switch (rarity) {
@@ -105,6 +110,8 @@ export class CharactersPowerService {
                     return 0.15;
                 case Rarity.Legendary:
                     return 0.2;
+                case Rarity.Mythic:
+                    return 0.25;
             }
         } else {
             return 0;
@@ -149,6 +156,13 @@ export class CharactersPowerService {
                 return 1.25 ** 16;
             case Rank.Diamond3:
                 return 1.25 ** 17;
+            case Rank.Adamantine1:
+                return 1.25 ** 18;
+            // Uncomment once higher Adamantine ranks are supported
+            // case Rank.Adamantine2:
+            //     return 1.25 ** 19;
+            // case Rank.Adamantine3:
+            //     return 1.25 ** 20;
 
             case Rank.Locked:
             default:
@@ -181,7 +195,12 @@ export class CharactersPowerService {
                     return 2.0;
                 case RarityStars.OneBlueStar:
                     return 2.1;
-
+                case RarityStars.TwoBlueStars:
+                    return 2.2;
+                case RarityStars.ThreeBlueStars:
+                    return 2.3;
+                case RarityStars.MythicWings:
+                    return 2.4;
                 case RarityStars.None:
                 default:
                     return 1.0;
@@ -210,6 +229,12 @@ export class CharactersPowerService {
                     return 0.5;
                 case RarityStars.OneBlueStar:
                     return 0.6;
+                case RarityStars.TwoBlueStars:
+                    return 0.7;
+                case RarityStars.ThreeBlueStars:
+                    return 0.8;
+                case RarityStars.MythicWings:
+                    return 0.9;
 
                 case RarityStars.None:
                 default:

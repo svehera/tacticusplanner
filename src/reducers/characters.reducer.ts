@@ -1,8 +1,9 @@
 ﻿import { TacticusShard, TacticusUnit } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 
-import { CharacterBias } from '@/fsd/4-entities/character';
+import { CharacterBias, CharactersService } from '@/fsd/4-entities/character';
 
+import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 import { rankToLevel, rankToRarity, rarityToStars } from '../models/constants';
@@ -67,14 +68,14 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
         }
         case 'Update': {
             const updatedCharacter = action.character;
-            const existingCharIndex = state.findIndex(char => char.name === updatedCharacter.name);
+            const existingCharIndex = state.findIndex(char => char.snowprintId === updatedCharacter.snowprintId);
             const existingChar = state[existingCharIndex];
 
             if (existingChar) {
                 const rankRarity = rankToRarity[existingChar.rank];
                 const rarityStars = rarityToStars[existingChar.rarity];
                 const updatedLevel =
-                    updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 50 ? 50 : updatedCharacter.level;
+                    updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 55 ? 55 : updatedCharacter.level;
 
                 const updatedCharacterData = {
                     ...existingChar,
@@ -85,11 +86,23 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     stars: updatedCharacter.stars <= rarityStars ? rarityStars : updatedCharacter.stars,
                     xp: updatedCharacter.xp,
                     shards: updatedCharacter.shards,
-                    activeAbilityLevel: Math.max(0, Math.min(50, updatedCharacter.activeAbilityLevel)),
-                    passiveAbilityLevel: Math.max(0, Math.min(50, updatedCharacter.passiveAbilityLevel)),
+                    activeAbilityLevel: Math.max(
+                        0,
+                        Math.min(
+                            CharactersAbilitiesService.getMaximumAbilityLevel(),
+                            updatedCharacter.activeAbilityLevel
+                        )
+                    ),
+                    passiveAbilityLevel: Math.max(
+                        0,
+                        Math.min(
+                            CharactersAbilitiesService.getMaximumAbilityLevel(),
+                            updatedCharacter.passiveAbilityLevel
+                        )
+                    ),
                     level: Math.max(
                         updatedLevel,
-                        rankToLevel[(existingChar.rank - 1) as Rank],
+                        rankToLevel[existingChar.rank as Rank],
                         updatedCharacter.activeAbilityLevel,
                         updatedCharacter.passiveAbilityLevel
                     ),
@@ -109,22 +122,18 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                 ...state.map(char => {
                     const tacticusUnit = action.units.find(
                         unit =>
-                            unit.id.toLowerCase() === char.id.toLowerCase() ||
-                            unit.id.toLowerCase() === (char.snowprintId?.toLowerCase() ?? '') ||
-                            unit.name.toLowerCase() === char.name.toLowerCase() ||
-                            unit.name.toLowerCase() === char.shortName.toLowerCase() ||
-                            unit.name.toLowerCase() === char.fullName.toLowerCase()
+                            CharactersService.matchesAnyCharacterId(unit.id, char) ||
+                            CharactersService.matchesAnyCharacterId(unit.name, char)
                     );
 
                     const tacticusUnitShards = action.shards.find(
                         inventoryShard =>
-                            inventoryShard.id.toLowerCase() === char.id.toLowerCase() ||
-                            inventoryShard.name.toLowerCase().includes(char.name.toLowerCase()) ||
-                            inventoryShard.name.toLowerCase().includes(char.shortName.toLowerCase()) ||
-                            inventoryShard.name.toLowerCase().includes(char.fullName.toLowerCase())
+                            CharactersService.matchesAnyCharacterId(inventoryShard.id, char) ||
+                            CharactersService.matchesAnyCharacterId(inventoryShard.name, char)
                     );
 
                     if (tacticusUnit) {
+                        // If the unit is unlocked, we sync all available attributes
                         const [rarity, stars] = TacticusIntegrationService.convertProgressionIndex(
                             tacticusUnit.progressionIndex
                         );
@@ -144,6 +153,12 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
 
                         const shards = !char.lre || char.lre?.finished ? tacticusUnit.shards : char.shards;
 
+                        // Overwrite manually-edited shards with Tacticus API value. This caters for initial rollout for
+                        // mythic shards values, so this code can be deployed while allowing users to manually track their
+                        // mythic shards values. Once the API includes `mythicShards`, those manual values will be overwritten,
+                        // and this code can be simplified to only care about the Tacticus API value.
+                        const mythicShards = tacticusUnit.mythicShards ?? char.mythicShards;
+
                         return {
                             ...char,
                             rarity,
@@ -152,11 +167,13 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                             rank,
                             xp: currentLevelXp,
                             shards,
+                            mythicShards,
                             activeAbilityLevel: tacticusUnit.abilities[0].level,
                             passiveAbilityLevel: tacticusUnit.abilities[1].level,
                             level: tacticusUnit.xpLevel,
                         };
                     } else if (tacticusUnitShards) {
+                        // If the unit is locked we only have shards to sync, no other attributes
                         return {
                             ...char,
                             shards: tacticusUnitShards.amount,

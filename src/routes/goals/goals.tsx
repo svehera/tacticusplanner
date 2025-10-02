@@ -1,7 +1,8 @@
-﻿import GridViewIcon from '@mui/icons-material/GridView';
+﻿import { Info } from '@mui/icons-material';
+import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import { FormControlLabel, Switch } from '@mui/material';
+import { FormControlLabel, IconButton, Switch, Tooltip } from '@mui/material';
 import Button from '@mui/material/Button';
 import { sum } from 'lodash';
 import React, { useContext, useMemo, useState } from 'react';
@@ -18,6 +19,7 @@ import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Rank } from '@/fsd/5-shared/model';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
@@ -48,12 +50,7 @@ export const Goals = () => {
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
 
-    const resolvedMows = useMemo(() => {
-        return mows.map(mow => {
-            if ('snowprintId' in mow) return mow as IMow2;
-            return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
-        });
-    }, [mows]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(() => {
         return GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false);
@@ -91,6 +88,10 @@ export const Goals = () => {
 
     const updateView = (tableView: boolean): void => {
         dispatch.viewPreferences({ type: 'Update', setting: 'goalsTableView', value: tableView });
+    };
+
+    const updateBattlePassColorCoding = (colorCoding: boolean): void => {
+        dispatch.viewPreferences({ type: 'Update', setting: 'goalsBattlePassSeasonView', value: colorCoding });
     };
 
     const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete') => {
@@ -158,7 +159,7 @@ export const Goals = () => {
                 }).length;
 
                 if (goal.type === PersonalGoalType.UpgradeRank) {
-                    const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];
+                    const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
                     const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
 
                     return {
@@ -223,6 +224,14 @@ export const Goals = () => {
         goalsEstimate.map(x => (x.abilitiesEstimate?.gold ?? 0) + (x.xpEstimateAbilities?.gold ?? 0))
     );
 
+    const colorCodingTooltipText =
+        'When enabled, goals to be completed a week before the end of the current battle pass season will ' +
+        'be shown with a green background. Goals completed at least a week before the end of the next battle ' +
+        'pass season will be shown with a yellow background. And goals completed at least a week before the ' +
+        'end of the following battle pass season will be shown in red. Goals to be completed during the final ' +
+        'week of a battle pass season ending will have a background between the colors representing the ' +
+        'respective battle pass seasons.';
+
     return (
         <div>
             <div className="flex gap-5 flex-wrap items-center">
@@ -255,6 +264,21 @@ export const Goals = () => {
                         </div>
                     }
                 />
+                <AccessibleTooltip title={colorCodingTooltipText}>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={viewPreferences.goalsBattlePassSeasonView}
+                                onChange={event => updateBattlePassColorCoding(event.target.checked)}
+                            />
+                        }
+                        label={
+                            <div className="flex-box gap5">
+                                <span>Color Coding</span>
+                            </div>
+                        }
+                    />
+                </AccessibleTooltip>
             </div>
 
             {!!upgradeRankOrMowGoals.length && (
@@ -289,6 +313,7 @@ export const Goals = () => {
                             rows={upgradeRankOrMowGoals}
                             estimate={goalsEstimate}
                             menuItemSelect={handleMenuItemSelect}
+                            goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
                         />
                     )}
                 </div>
@@ -322,7 +347,12 @@ export const Goals = () => {
                     )}
 
                     {viewPreferences.goalsTableView && (
-                        <GoalsTable rows={shardsGoals} estimate={goalsEstimate} menuItemSelect={handleMenuItemSelect} />
+                        <GoalsTable
+                            rows={shardsGoals}
+                            estimate={goalsEstimate}
+                            menuItemSelect={handleMenuItemSelect}
+                            goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
+                        />
                     )}
                 </div>
             )}
@@ -355,6 +385,7 @@ export const Goals = () => {
                             rows={upgradeAbilities}
                             estimate={goalsEstimate}
                             menuItemSelect={handleMenuItemSelect}
+                            goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
                         />
                     )}
                 </div>

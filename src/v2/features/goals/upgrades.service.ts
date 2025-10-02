@@ -257,6 +257,17 @@ export class UpgradesService {
         return resultDays;
     }
 
+    /**
+     * Computes and returns a list of unit upgrades based on the provided inventory and goal definitions.
+     *
+     * This method processes each goal, determines the required upgrade ranks, filters upgrades by rarity if specified,
+     * and aggregates related upgrades for each goal. The result is an array of unit upgrade objects, each containing
+     * details about the goal, the unit, the required upgrades, and related upgrades.
+     *
+     * @param inventoryUpgrades - A record mapping upgrade IDs to their quantities in the user's inventory.
+     * @param goals - An array of character upgrade rank or mow upgrade goals to process.
+     * @returns An array of `IUnitUpgrade` objects, each representing the upgrade requirements and related data for a goal.
+     */
     public static getUpgrades(
         inventoryUpgrades: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
@@ -337,6 +348,19 @@ export class UpgradesService {
         ];
     }
 
+    private static resolveUnitIdToShortName(id: string): string {
+        const char = CharactersService.getUnit(id);
+        if (char?.shortName) return char.shortName;
+        const mow2 = MowsService.resolveToStatic(id);
+        if (mow2) {
+            // Prefer legacy shortName if available, else use new static name
+            const mowLegacy = MowsService.resolveOldIdToStatic(id);
+            const legacyShort = (mowLegacy as any)?.shortName as string | undefined;
+            return legacyShort ?? mow2.name;
+        }
+        return id;
+    }
+
     private static getTotalEstimates(
         upgrades: Record<string, ICombinedUpgrade>,
         inventoryUpgrades: Record<string, number>
@@ -353,6 +377,9 @@ export class UpgradesService {
             result.push(estimate);
         }
 
+        for (const est of result) {
+            est.relatedCharacters = est.relatedCharacters.map(id => this.resolveUnitIdToShortName(id));
+        }
         return orderBy(result, ['daysTotal', 'energyTotal'], ['desc', 'desc']);
     }
 

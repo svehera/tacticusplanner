@@ -87,7 +87,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, trackId, legend
         const numTokens = TokenEstimationService.computeMinimumTokensToClearBattle(
             selectedTeams
                 .filter(team => team.section === trackId)
-                .filter(team => (team.expectedBattleClears ?? 14) >= battle.battleIndex + 1)
+                .filter(team => (team.expectedBattleClears ?? 1) >= battle.battleIndex + 1)
         );
         return (
             <span className={'bold'} style={{ marginInlineEnd: '10px', minWidth: '42px' }}>

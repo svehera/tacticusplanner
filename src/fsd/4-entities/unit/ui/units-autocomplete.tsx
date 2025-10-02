@@ -51,6 +51,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
             const char = options.find(
                 x =>
                     x.name.toLowerCase().includes(value.toLowerCase()) ||
+                    ('shortName' in x ? (x as any).shortName.toLowerCase().includes(value.toLowerCase()) : false) ||
                     ('fullName' in x ? x.fullName.toLowerCase().includes(value.toLowerCase()) : false)
             );
             if (char) {
@@ -65,6 +66,8 @@ export const UnitsAutocomplete = <T extends IUnit>({
 
     const getOptionText = (option: IUnit) => ('fullName' in option ? option.fullName : option.name);
 
+    console.log('options: ', options);
+
     return (
         <Autocomplete
             fullWidth
@@ -75,6 +78,16 @@ export const UnitsAutocomplete = <T extends IUnit>({
             open={openAutocomplete}
             onFocus={() => handleAutocompleteChange(true)}
             onBlur={() => handleAutocompleteChange(false)}
+            filterOptions={(opts, state) => {
+                const q = state.inputValue?.toLowerCase?.().trim() ?? '';
+                if (!q) return opts;
+                return opts.filter(x => {
+                    const short = 'shortName' in x ? ((x as any).shortName?.toLowerCase?.() ?? '') : '';
+                    const normal = x.name?.toLowerCase?.() ?? '';
+                    const full = 'fullName' in x ? (x.fullName?.toLowerCase?.() ?? '') : '';
+                    return full.includes(q) || normal.includes(q) || short.includes(q);
+                });
+            }}
             getOptionLabel={option => getOptionText(option)}
             isOptionEqualToValue={(option, value) => option.snowprintId === value.snowprintId}
             renderOption={(props, option) => (

@@ -15,7 +15,7 @@ import {
 import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { charactersData } from './data';
-import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData } from './model';
+import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData, ICharacter2 } from './model';
 
 export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
@@ -40,7 +40,6 @@ export class CharactersService {
             const event = LegendaryEventService.getEventByCharacterSnowprintId(unit.snowprintId!);
             return event?.id === id;
         });
-        return undefined;
     }
 
     /**
@@ -85,9 +84,9 @@ export class CharactersService {
             armour: rawData.Armour,
             initialRarity: RarityMapper.stringToNumber[rawData['Initial rarity'] as RarityString],
             rarityStars: RarityMapper.toStars[RarityMapper.stringToNumber[rawData['Initial rarity'] as RarityString]],
-            equipment1: CharactersService.parseEquipmentType(rawData.Equipment1),
-            equipment2: CharactersService.parseEquipmentType(rawData.Equipment2),
-            equipment3: CharactersService.parseEquipmentType(rawData.Equipment3),
+            equipment1: rawData.Equipment1,
+            equipment2: rawData.Equipment2,
+            equipment3: rawData.Equipment3,
             meleeHits: rawData['Melee Hits'],
             rangeHits: rawData['Ranged Hits'],
             rangeDistance: rawData.Distance,
@@ -155,6 +154,7 @@ export class CharactersService {
         if (identifier === "Tan Gi'Da") return 'admecMarshall';
         if (identifier === 'Nauseous Rotbone') return 'deathRotbone';
         if (identifier === 'Sy-Gex') return 'admecDestroyer';
+        if (identifier === 'Patermine') return 'genesPatriarch';
         return this.getUnit(identifier)?.snowprintId || identifier;
     }
 
@@ -163,6 +163,25 @@ export class CharactersService {
             x => x.snowprintId! == CharactersService.canonicalName(identifier)
         );
         return ret!;
+    }
+
+    /**
+     * Takes characters stored in the users account and resolves them to the (potentially) new
+     * character data we have from data mines. Characters that we cannot resolve are logged to
+     * the developer console and then removed.
+     */
+    public static resolveStoredCharacters(charactersFromStorage: ICharacter2[]): ICharacter2[] {
+        return charactersFromStorage
+            .filter(x => this.resolveCharacter(x.snowprintId ?? x.name) !== undefined)
+            .map(x => {
+                const staticChar = this.resolveCharacter(x.snowprintId ?? x.name);
+                if (staticChar === undefined) {
+                    console.error('Could not resolve character ', x.snowprintId ?? x.name);
+                    return undefined;
+                }
+                return { ...x, ...staticChar };
+            })
+            .filter(x => x !== undefined) as ICharacter2[];
     }
 
     static isAtLeast3DaysBefore(releaseDate: Date): boolean {
@@ -197,5 +216,25 @@ export class CharactersService {
                 : 'TBA',
             nextEventDateUtc,
         };
+    }
+
+    /**
+     * Takes a character id and character object, and returns true if the id matches the object.
+     *
+     * The app has multiple "id" concepts for looking up characters, and different parts of the app
+     * have used different concepts in the past.
+     *
+     * This function helps consolidate those concepts.
+     */
+    public static matchesAnyCharacterId(id: string, character: ICharacter2): boolean {
+        const lowered = id.toLowerCase();
+
+        return (
+            id === character.snowprintId ||
+            lowered === character.id.toLowerCase() ||
+            lowered === character.name.toLowerCase() ||
+            lowered === character.shortName.toLowerCase() ||
+            lowered === character.fullName.toLowerCase()
+        );
     }
 }

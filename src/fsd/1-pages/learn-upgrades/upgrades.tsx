@@ -214,10 +214,10 @@ export const Upgrades = () => {
 
                     for (const rank in ranks) {
                         const upgrades = ranks[rank];
-                        const allMats = Object.values(upgrades)
+                        const allMats = upgrades
                             .filter(x => x !== undefined)
                             .flat()
-                            .flatMap(x => expandMaterial(x));
+                            .flatMap(x => [x, expandMaterial(x)].flat());
                         if (allMats.includes(x.snowprintId)) {
                             const charData = CharactersService.charactersData.find(x => x.snowprintId! === character);
                             const existingChar = characters.find(x => x.id === character);
@@ -239,7 +239,7 @@ export const Upgrades = () => {
                     (locationId: string) => CampaignsService.campaignsComposed[locationId]
                 );
                 const partOf = upgrades
-                    .filter(m => m.recipe?.some(u => u.material === x.material) ?? false)
+                    .filter(m => m.recipe?.some(u => u.material === x.snowprintId) ?? false)
                     .map(u => u.label ?? u.material)
                     .join('\r\n');
                 return {

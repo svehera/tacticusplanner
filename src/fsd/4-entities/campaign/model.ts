@@ -17,9 +17,9 @@ export interface ICampaignBattleComposed {
     rarityEnum: Rarity;
     rewards: IRewards;
     slots?: number;
-    enemiesFactions: Faction[];
+    enemiesFactions: string[];
     enemiesAlliances: Alliance[];
-    alliesFactions: Faction[];
+    alliesFactions: string[];
     alliesAlliance: Alliance;
     enemiesTotal: number;
     enemiesTypes: string[];
@@ -81,6 +81,7 @@ export interface ICampaignBattle {
     enemiesTotal?: number;
     enemiesTypes?: string[];
     detailedEnemyTypes?: IDetailedEnemy[];
+    requiredCharacterSnowprintIds?: string[];
 }
 
 export type ICampaignConfigs = {

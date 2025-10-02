@@ -44,6 +44,8 @@ export const CharactersViewControls = ({
                 return 'By Faction';
             case CharactersOrderBy.UnlockPercentage:
                 return 'By Unlock Percentage';
+            case CharactersOrderBy.Shards:
+                return 'By Shards';
             default:
                 return '';
         }
@@ -67,8 +69,6 @@ export const CharactersViewControls = ({
                 return 'MoW only';
             case CharactersFilterBy.None:
                 return 'None';
-            case CharactersFilterBy.Unfarmable:
-                return 'Unfarmable';
             default:
                 return '';
         }

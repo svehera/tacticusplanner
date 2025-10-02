@@ -5,7 +5,7 @@ import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { MowsAction } from 'src/reducers/mows.reducer';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 
-import { Alliance, Faction, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import {
     ICampaignsProgress,
@@ -16,7 +16,7 @@ import {
     IDetailedEnemy,
 } from '@/fsd/4-entities/campaign';
 import { CharacterBias, ICharacter2, ICharLegendaryEvent } from '@/fsd/4-entities/character';
-import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
 import { IMaterialFull, IMaterialRecipeIngredientFull, IMaterialEstimated2 } from '@/fsd/4-entities/upgrade';
 
@@ -218,6 +218,7 @@ export interface IPersonalCharacterData2 {
     activeAbilityLevel: number;
     passiveAbilityLevel: number;
     shards: number;
+    mythicShards: number;
 }
 
 export interface IInsightsData {
@@ -233,7 +234,8 @@ export interface IInsightsData {
     }>;
 }
 export interface ICharProgression {
-    shards: number;
+    shards?: number;
+    mythicShards?: number;
     orbs?: number;
     rarity?: Rarity;
 }

@@ -12,6 +12,8 @@ import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
+import { CharactersService as NewCharService } from '@/fsd/4-entities/character';
+
 import { IMow2 } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { TeamView } from 'src/v2/features/teams/components/team-view';
@@ -34,8 +36,11 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
     const survivalTeams = teams.filter(x => x.primaryGameMode === GameMode.survival);
 
     const renderTeam = (team: IPersonalTeam) => {
-        const teamCharacters = team.lineup.map(id => characters.find(character => id === character.id)!);
-        const teamMow = mows.find(x => x.snowprintId === team.mowId);
+        const teamCharacters = team.lineup.map(id => {
+            return characters.find(character => NewCharService.matchesAnyCharacterId(id, character));
+        });
+        const teamMowId = typeof team.mowId === 'string' ? team.mowId : undefined;
+        const teamMow = teamMowId ? mows.find(x => [x.snowprintId, x.id].includes(teamMowId)) : undefined;
         const withMow = !!teamMow;
         const subModes = team.subModes.map(value => allModes.find(x => x.value === value)?.label ?? '').join(', ');
 
@@ -71,7 +76,9 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
     };
 
     const renderCappedTeam = (team: IPersonalTeam) => {
-        const teamCharacters = team.lineup.map(id => characters.find(character => id === character.id)!);
+        const teamCharacters = team.lineup
+            .map(id => characters.find(character => NewCharService.matchesAnyCharacterId(id, character))!)
+            .filter(x => x !== undefined);
         const cappedCharacters = teamCharacters.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap));
         const teamMow = mows.find(x => x.id === team.mowId);
         const withMow = !!teamMow;

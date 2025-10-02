@@ -37,14 +37,26 @@ export interface ILreOccurrenceProgress {
     bundlePurchased: boolean;
 }
 
+/**
+ * Represents the progress state for a single LRE track, including metadata, requirements, and battle progress.
+ *
+ * A partial cache of the computed progress for a track. An aggregation of the user's current progress and
+ * requirements for the track. As a cache, most, but not all, of these fields can be/are computed from other
+ * objects.
+ *
+ * @property trackId - The unique identifier for the LRE track.
+ * @property trackName - The display name of the track.
+ * @property totalPoints - The total points accumulated in this track.
+ * @property battlesPoints - An array of points earned for each battle in the track.
+ * @property requirements - The list of requirements that must be met for this track.
+ * @property battles - The progress state for each battle in this track, ordered in reverse (battle 0 is the hardest/final).
+ */
 export interface ILreTrackProgress {
     trackId: LreTrackId;
     trackName: string;
     totalPoints: number;
     battlesPoints: number[];
     requirements: ILreRequirements[];
-
-    /** The battles in this track. In reverse order, e.g. battle 14 is the first. */
     battles: ILreBattleProgress[];
 }
 

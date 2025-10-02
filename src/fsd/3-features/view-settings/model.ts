@@ -17,6 +17,7 @@ export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IW
     inventoryShowAlphabet: boolean;
     inventoryShowPlusMinus: boolean;
     goalsTableView: boolean;
+    goalsBattlePassSeasonView?: boolean;
     myProgressShowCoreCharacters: boolean;
     apiIntegrationSyncOptions: string[];
 }

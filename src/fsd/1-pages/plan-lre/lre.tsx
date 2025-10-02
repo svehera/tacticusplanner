@@ -31,14 +31,7 @@ export const Lre: React.FC = () => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
 
-    const resolvedCharacters = useMemo(() => {
-        return characters.map(x => {
-            const ret: ICharacter2 = { ...x };
-            const staticChar = CharactersService.resolveCharacter(x.snowprintId ?? x.name);
-            ret.name = staticChar?.snowprintId ?? x.name;
-            return ret;
-        });
-    }, [characters]);
+    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const updateSettings = (
         settings: ILreViewSettings,

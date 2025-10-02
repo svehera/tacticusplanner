@@ -38,10 +38,11 @@ import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 interface Props {
     rows: CharacterRaidGoalSelect[];
     estimate: IGoalEstimate[];
+    goalsColorCoding: boolean;
     menuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
 }
 
-export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) => {
+export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, menuItemSelect }) => {
     /** An RGB Color with values between 0 and 255. */
     interface Color {
         r: number;
@@ -52,7 +53,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
     const { characters } = useContext(StoreContext);
 
     const getUnit = (unitId: string): ICharacter2 | undefined => {
-        return characters.find(x => x.id === unitId);
+        return characters.find(x => x.snowprintId! === unitId);
     };
     const getUnitStars = (unitId: string): RarityStars => {
         return getUnit(unitId)?.stars ?? 0;
@@ -500,15 +501,13 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                         let params: string = '';
 
                         if (data.type === PersonalGoalType.UpgradeRank) {
-                            linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
-                            params = `?character=${data.unitId}&rankStart=${Rank[data.rankStart]}&rankEnd=${
-                                Rank[data.rankEnd]
-                            }&rankPoint5=${data.rankPoint5}`;
+                            linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                            params = `?charSnowprintId=${data.unitId}`;
                         }
 
                         if (data.type === PersonalGoalType.MowAbilities) {
-                            linkBase = isMobile ? '/mobile/learn/mowLookup' : '/learn/mowLookup';
-                            params = `?mow=${data.unitId}&pStart=${data.primaryStart}&pEnd=${data.primaryEnd}&sStart=${data.secondaryStart}&sEnd=${data.secondaryEnd}`;
+                            linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                            params = `?charSnowprintId=${data.unitId}`;
                         }
                         return (
                             <Button
@@ -517,7 +516,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                                 component={Link}
                                 to={linkBase + params}
                                 target={'_self'}>
-                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
+                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
                             </Button>
                         );
                     }
@@ -550,12 +549,13 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
     };
 
     const getRowStyle = (params: any) => {
+        if (!goalsColorCoding) return '';
         const { data } = params;
         const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
         const kBgColors: Color[] = [
-            { r: 255, g: 0, b: 0 },
-            { r: 255, g: 255, b: 0 },
-            { r: 0, g: 255, b: 0 },
+            { r: 0, g: 64, b: 0 },
+            { r: 64, g: 64, b: 0 },
+            { r: 64, g: 0, b: 0 },
             { r: 0, g: 0, b: 0 },
             { r: 0, g: 0, b: 0 },
         ];
@@ -612,6 +612,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 rowHeight={60}
                 columnDefs={columnDefs}
                 rowData={rows}
+                getRowStyle={getRowStyle}
             />
         </div>
     );

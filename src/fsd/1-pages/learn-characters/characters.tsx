@@ -22,7 +22,7 @@ import React, { ChangeEvent, useCallback, useContext, useMemo, useRef, useState 
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { useQueryState, getEnumValues } from '@/fsd/5-shared/lib';
-import { Rarity, Alliance, DamageType, Trait, Rank } from '@/fsd/5-shared/model';
+import { Rarity, Alliance, DamageType, Trait, Rank, getTraitStringFromLabel } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
 import { CharactersService, ICharacter2, RankSelect } from '@/fsd/4-entities/character';
@@ -99,12 +99,7 @@ export const LearnCharacters = () => {
 
     const { characters } = useContext(StoreContext);
 
-    const resolvedCharacters = useMemo(() => {
-        return characters.map(c => ({
-            ...c,
-            ...CharactersService.resolveCharacter(c.snowprintId ?? c.name),
-        })) as ICharacter2[];
-    }, [characters]);
+    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const hitsOptions = uniq(resolvedCharacters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
         .sort((a, b) => a - b)
@@ -123,9 +118,13 @@ export const LearnCharacters = () => {
 
     const rows = useMemo(
         () =>
-            resolvedCharacters.filter(
-                c => c.name.toLowerCase().includes(nameFilter.toLowerCase()) && (!onlyUnlocked || c.rank > Rank.Locked)
-            ),
+            resolvedCharacters.filter(c => {
+                return (
+                    (c.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                        c.shortName.toLowerCase().includes(nameFilter.toLowerCase())) &&
+                    (!onlyUnlocked || c.rank > Rank.Locked)
+                );
+            }),
         [nameFilter, onlyUnlocked]
     );
 
@@ -244,14 +243,20 @@ export const LearnCharacters = () => {
                 if (!traitsFilter.length) {
                     return true;
                 }
-                return traitsFilter.every(type => {
-                    if (type !== Trait.Mechanical) {
-                        return node.data?.traits.includes(type);
+
+                const nodeTraits = (node.data?.traits ?? []) as unknown as string[]; // stored as enum keys
+                return traitsFilter.every(label => {
+                    const key = getTraitStringFromLabel(label);
+                    if (!key) return false;
+                    if (key !== 'Mechanical') {
+                        const includes = nodeTraits.includes(key);
+                        return includes;
                     } else {
-                        return (
-                            node.data?.traits.includes(Trait.Mechanical) ||
-                            node.data?.traits.includes(Trait.LivingMetal)
-                        );
+                        const includesMech = nodeTraits.includes('Mechanical');
+                        const includesLiving = nodeTraits.includes('LivingMetal');
+                        const result = includesMech || includesLiving;
+
+                        return result;
                     }
                 });
             };
