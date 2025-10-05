@@ -40,7 +40,7 @@ export class CampaignMapperService {
      * Split an event campaign into base and challenge progress updates (without mutating the input).
      * - Base: standard/extremis nodes excluding challenge indices
      * - Challenge: only challenge indices
-     * * - legacy/non-event campaigns this will return undefined and the reducer will fall back to the existing idToCampaign map.
+     * - legacy/non-event campaigns this will return undefined and the reducer will fall back to the existing idToCampaign map.
      */
     static mapTacticusCampaignToCampaignEvent(c: TacticusCampaignProgress): CampaignProgressSplit | undefined {
         const id = (c.id || '').toLowerCase();
