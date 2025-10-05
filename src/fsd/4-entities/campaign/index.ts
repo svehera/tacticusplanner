@@ -3,7 +3,7 @@ export type {
     IDetailedEnemy,
     ICampaignModel,
     ICampaignsProgress,
-    ICampaingsFilters,
+    ICampaignsFilters,
     ICampaignsData,
     ICampaignBattle,
 } from './model';

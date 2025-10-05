@@ -9,7 +9,7 @@ import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import {
     ICampaignsProgress,
-    ICampaingsFilters,
+    ICampaignsFilters,
     CampaignGroupType,
     CampaignType,
     ICampaignBattleComposed,
@@ -148,7 +148,7 @@ export interface IGuildWar {
 }
 
 export interface IDailyRaids {
-    filters: ICampaingsFilters;
+    filters: ICampaignsFilters;
     raidedLocations: IItemRaidLocation[];
     lastRefreshDateUTC: string;
 }
@@ -306,7 +306,7 @@ export interface IEstimatedRanksSettings {
     campaignsProgress: ICampaignsProgress;
     dailyEnergy: number;
     preferences: IDailyRaidsPreferences;
-    filters?: ICampaingsFilters;
+    filters?: ICampaignsFilters;
     upgrades: Record<string, number>;
 }
 
@@ -317,7 +317,7 @@ export interface IInventory {
 // Re-export types from FSD entities
 export type {
     ICampaignsProgress,
-    ICampaingsFilters,
+    ICampaignsFilters,
     ICampaignBattleComposed,
     IDetailedEnemy,
     ICharacter2,
