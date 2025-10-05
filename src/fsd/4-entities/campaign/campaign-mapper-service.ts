@@ -27,6 +27,7 @@ export class CampaignMapperService {
             const isChallenge = key.endsWith('B');
             if (isChallenge) {
                 indices.push(runningIndex);
+                runningIndex++;
                 return;
             }
             runningIndex++;
