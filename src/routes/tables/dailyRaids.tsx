@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useMemo } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
-import { ICampaingsFilters } from 'src/models/interfaces';
+import { ICampaignsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { RaidsPlan } from 'src/routes/tables/raids-plan';
@@ -154,7 +154,7 @@ export const DailyRaids = () => {
         }, 100);
     };
 
-    const saveFilterChanges = (filters: ICampaingsFilters) => {
+    const saveFilterChanges = (filters: ICampaignsFilters) => {
         dispatch.dailyRaids({
             type: 'UpdateFilters',
             value: filters,
