@@ -149,7 +149,6 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <div className="flex items-center gap-3" style={{ marginTop: 10 }}>
                         <Autocomplete
                             fullWidth
-                            freeSolo
                             size="small"
                             value={currFilter.enemiesMinCount?.toString() ?? null}
                             options={enemiesCountOptions}

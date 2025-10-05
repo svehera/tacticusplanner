@@ -163,5 +163,5 @@ export interface ICampaignsFilters {
     upgradesRarity: Rarity[];
     slotsCount?: number[];
     enemiesTypes?: string[];
-    enemiesMinCount?: number | null;
+    enemiesMinCount: number | null;
 }
