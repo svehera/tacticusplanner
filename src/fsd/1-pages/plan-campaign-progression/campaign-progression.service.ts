@@ -1,5 +1,7 @@
 import { uniq } from 'lodash';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import { FactionsService } from '@/fsd/5-shared/lib/factions.service';
 import { Rank, Rarity } from '@/fsd/5-shared/model';
 
 import {
@@ -60,8 +62,9 @@ export class CampaignsProgressionService {
         Object.entries(battleData).forEach(([battleId, battle]) => {
             if (!(battleId in CampaignsService.campaignsComposed)) return;
             // Early indomitus battles are sparse.
-            CampaignsService.campaignsComposed[battleId].alliesFactions.forEach(faction => {
+            CampaignsService.campaignsComposed[battleId].alliesFactions.forEach(factionId => {
                 if (!battle.campaign) return; // Early indomitus doesn't have most of this info.
+                const faction = FactionsService.snowprintFactionToFaction(factionId);
                 result.campaignFactions.get(battle.campaign)?.add(faction);
                 if (!result.factionCampaigns.get(faction)) {
                     result.factionCampaigns.set(faction, new Set<string>());
@@ -94,10 +97,8 @@ export class CampaignsProgressionService {
         result: CampaignsProgressData,
         nodesToBeat: Map<string, ICampaignBattleComposed[]>
     ): void {
-        let totalCost: number = 0;
         for (const goal of goals) {
             const goalData: GoalData = this.computeGoalCost(goal, campaignProgress, inventoryUpgrades);
-            totalCost += goalData.totalEnergy;
             goalData.unfarmableLocations.forEach(x => {
                 nodesToBeat.get(x.campaign)?.push(x);
             });
@@ -216,12 +217,10 @@ export class CampaignsProgressionService {
                     continue;
                 }
                 const farmData = result.materialFarmData.get(this.getReward(battle))!;
-                const newEnergyCost: number = this.getCostToFarmMaterial(
-                    battle.campaignType,
-                    farmData.count,
-                    battle.rarityEnum
-                );
+                const newEnergyCost: number = this.getCostToFarmMaterial(battle, farmData.count);
                 const oldEnergy = newMaterialEnergy.get(this.getReward(battle)) ?? farmData.totalEnergy;
+                // If we need X instances of an upgrade material, only suggest beating a node if we
+                // save at least X/2 energy by doing so (or if we can't farm the item).
                 if (oldEnergy - farmData.count / 2 > newEnergyCost || !farmData.canFarm) {
                     cumulativeSavings += farmData.totalEnergy - newEnergyCost;
                     result.data
@@ -285,9 +284,9 @@ export class CampaignsProgressionService {
                     : CampaignsProgressionService.getMowUpgradeRank(goal as ICharacterUpgradeMow);
 
             for (const unitUpgrade of upgradeRanks) {
-                for (const upgradeMaterial of unitUpgrade.upgrades) {
+                for (const upgradeMaterialId of unitUpgrade.upgrades) {
                     const expandedRecipe: IRecipeExpandedUpgrade =
-                        UpgradesService.recipeExpandedUpgradeData[upgradeMaterial];
+                        UpgradesService.recipeExpandedUpgradeData[upgradeMaterialId];
                     if (Object.entries(expandedRecipe.expandedRecipe).length == 0) {
                         this.addToMaterials(materialReqs, expandedRecipe.id, 1);
                     } else {
@@ -309,7 +308,7 @@ export class CampaignsProgressionService {
                     newCount -= inventoryUpgrades[material];
                 }
                 if (newCount > 0) {
-                    newMaterials[material] = count;
+                    newMaterials[material] = newCount;
                 }
             }
             materialReqs.materials = newMaterials;
@@ -319,12 +318,12 @@ export class CampaignsProgressionService {
                 UpgradesService.recipeExpandedUpgradeData[b].rarity -
                 UpgradesService.recipeExpandedUpgradeData[a].rarity
         );
-        for (const material of sortedMaterials) {
-            const count: number = materialReqs.materials[material];
-            const farmData: FarmData = this.getCostToFarm(goal, material, count, campaignProgress, inventoryUpgrades);
+        for (const materialId of sortedMaterials) {
+            const count: number = materialReqs.materials[materialId];
+            const farmData: FarmData = this.getCostToFarm(goal, materialId, count, campaignProgress, inventoryUpgrades);
             result.canFarm = result.canFarm && farmData.canFarm;
             result.totalEnergy = result.totalEnergy + farmData.totalEnergy;
-            result.farmData.set(material, farmData);
+            result.farmData.set(materialId, farmData);
             farmData.farmableLocations.forEach(x => {
                 result.farmableLocations.push(x);
             });
@@ -373,7 +372,7 @@ export class CampaignsProgressionService {
      * so the results are always an approximation.
      *
      * @goal goal The goal for which we need to farm the material.
-     * @param material The ID of the material to farm.
+     * @param materialId The ID of the material to farm.
      * @param count The number of this material we need.
      * @param campaignProgress Our progress in the campaigns, dictating the nodes from
      *                         which we can farm.
@@ -384,51 +383,35 @@ export class CampaignsProgressionService {
      */
     public static getCostToFarm(
         goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal,
-        material: string,
+        materialId: string,
         count: number,
         campaignProgress: ICampaignsProgress,
         inventoryUpgrades: Record<string, number>
     ): FarmData {
         const result: FarmData = {
-            material: material,
+            material: materialId,
             totalEnergy: 0,
             canFarm: true,
             count: count,
             campaignType: CampaignType.Normal,
-            farmableLocations: this.getFarmableLocations(material, campaignProgress),
-            unfarmableLocations: this.getUnfarmableLocations(material, campaignProgress),
+            farmableLocations: this.getFarmableLocations(materialId, campaignProgress),
+            unfarmableLocations: this.getUnfarmableLocations(materialId, campaignProgress),
         };
-        const hasExtremis = result.farmableLocations.filter(x => x.campaignType == CampaignType.Extremis).length > 0;
-        const hasElite = result.farmableLocations.filter(x => x.campaignType == CampaignType.Elite).length > 0;
-        const hasEarly =
-            result.farmableLocations.filter(
-                x => x.campaign == 'Indomitus' && x.campaignType == CampaignType.Normal && x.nodeNumber < 30
-            ).length > 0;
-        const hasMirror = result.farmableLocations.filter(x => x.campaignType == CampaignType.Mirror).length > 0;
-        const hasNormal = result.farmableLocations.filter(x => x.campaignType == CampaignType.Normal).length > 0;
-        const rarity = UpgradesService.recipeExpandedUpgradeData[material]?.rarity ?? undefined;
-        if (hasExtremis) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Extremis, count, rarity!);
-            result.campaignType = CampaignType.Extremis;
-        } else if (hasElite) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Elite, count, rarity!);
-            result.campaignType = CampaignType.Elite;
-        } else if (hasEarly) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Early, count, rarity!);
-            result.campaignType = CampaignType.Early;
-        } else if (hasMirror) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Mirror, count, rarity!);
-            result.campaignType = CampaignType.Mirror;
-        } else if (hasNormal) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Normal, count, rarity!);
-            result.campaignType = CampaignType.Normal;
-        } else if (result.farmableLocations.length == 0) {
-            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Normal, count, rarity!);
-            result.canFarm = false;
-        } else {
-            console.error('Unknown node type ' + CampaignType[result.farmableLocations[0].campaignType]);
-            result.totalEnergy = -1;
-        }
+        let bestBattle: ICampaignBattleComposed | undefined = undefined;
+        result.farmableLocations.forEach(battle => {
+            if (!bestBattle) {
+                bestBattle = battle;
+                result.campaignType = battle.campaignType;
+                result.totalEnergy = this.getCostToFarmMaterial(battle, count);
+                return;
+            }
+            const energyCost = this.getCostToFarmMaterial(battle, count);
+            if (energyCost < result.totalEnergy) {
+                bestBattle = battle;
+                result.campaignType = battle.campaignType;
+                result.totalEnergy = energyCost;
+            }
+        });
         return result;
     }
 
@@ -503,28 +486,15 @@ export class CampaignsProgressionService {
     }
 
     /**
-     * @param type The campaign type from which to farm.
-     * @param rarity The rarity of the material to farm.
+     * @param battle The campaign battle to farm.
      * @param count The number of items to farm.
      * @returns The total expected energy cost using the ideal strategy to minimize
      *          energy spent.
      */
-    public static getCostToFarmMaterial(type: CampaignType, count: number, rarity: Rarity): number {
-        if (rarity === undefined) {
-            // For character shards, elite nodes drop 25 shards per 24 pulls. Extermis nodes drop at
-            // a rate of 61.54%. All other nodes drop 3 shards per 10 pulls.
-            if (type == CampaignType.Extremis) {
-                return 6 * Math.ceil(count * 0.6154);
-            } else if (type == CampaignType.Elite) {
-                return 10 * Math.ceil((count * 24) / 25.0);
-            } else if (type == CampaignType.Early) {
-                return 5 * Math.ceil((count * 10) / 3.0);
-            } else {
-                return 6 * Math.ceil((count * 10) / 3.0);
-            }
-        }
-
-        return Math.ceil(count / this.getDropRate(type, rarity)) * this.getEnergyCost(type);
+    public static getCostToFarmMaterial(battle: ICampaignBattleComposed, count: number): number {
+        // The drop rate is calculated in drops per raid, so it doesn't take into account energy.
+        // The effective energy cost to farm a single item is energyCost / dropRate.
+        return Math.ceil((battle.energyCost * count) / battle.dropRate);
     }
 
     /** @returns the material ID of the material with the given label. */
@@ -541,14 +511,14 @@ export class CampaignsProgressionService {
      * @returns The locations from which we can currently farm a specific material.
      */
     public static getFarmableLocations(
-        material: string,
+        materialId: string,
         campaignProgress: ICampaignsProgress
     ): ICampaignBattleComposed[] {
         const result: ICampaignBattleComposed[] = [];
 
         Object.entries(CampaignsService.campaignsComposed).forEach(([_, battle]) => {
             if (
-                this.getMaterialId(this.getReward(battle)) === this.getMaterialId(material) &&
+                this.getReward(battle) === materialId &&
                 CampaignsService.hasCompletedBattle(battle, campaignProgress)
             ) {
                 result.push(battle);

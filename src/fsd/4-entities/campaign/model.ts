@@ -17,9 +17,9 @@ export interface ICampaignBattleComposed {
     rarityEnum: Rarity;
     rewards: IRewards;
     slots?: number;
-    enemiesFactions: Faction[];
+    enemiesFactions: string[];
     enemiesAlliances: Alliance[];
-    alliesFactions: Faction[];
+    alliesFactions: string[];
     alliesAlliance: Alliance;
     enemiesTotal: number;
     enemiesTypes: string[];
@@ -154,7 +154,7 @@ export interface ICampaignModel {
 
 export type ICampaignsProgress = Record<Campaign, number>;
 
-export interface ICampaingsFilters {
+export interface ICampaignsFilters {
     enemiesAlliance: Alliance[];
     enemiesFactions: Faction[];
     alliesAlliance: Alliance[];
@@ -163,5 +163,5 @@ export interface ICampaingsFilters {
     upgradesRarity: Rarity[];
     slotsCount?: number[];
     enemiesTypes?: string[];
-    enemiesCount?: number[];
+    enemiesMinCount?: number | null;
 }

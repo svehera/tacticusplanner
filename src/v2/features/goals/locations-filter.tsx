@@ -1,5 +1,5 @@
 ﻿import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import { Badge, DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material';
+import { Autocomplete, Badge, DialogActions, DialogContent, DialogTitle, IconButton, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import React, { useMemo } from 'react';
@@ -9,20 +9,20 @@ import factionsData from 'src/v2/data/factions.json';
 import { Alliance, Faction, Rarity, RarityString } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
 
-import { CampaignsService, CampaignType, ICampaingsFilters } from '@/fsd/4-entities/campaign';
+import { CampaignsService, CampaignType, ICampaignsFilters } from '@/fsd/4-entities/campaign';
 
 interface Props {
-    filter: ICampaingsFilters;
-    filtersChange: (value: ICampaingsFilters) => void;
+    filter: ICampaignsFilters;
+    filtersChange: (value: ICampaignsFilters) => void;
 }
 
 export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
-    const [currFilter, setCurrFilter] = React.useState<ICampaingsFilters>(filter);
+    const [currFilter, setCurrFilter] = React.useState<ICampaignsFilters>(filter);
     const [open, setOpen] = React.useState<boolean>(false);
 
     const allFactions = useMemo(
         () => factionsData.map(x => ({ alliance: x.alliance as Alliance, faction: x.name as Faction })),
-        []
+        [factionsData]
     );
 
     const enemiesTypeOptions = useMemo(() => CampaignsService.getPossibleEnemiesTypes(), []);
@@ -36,7 +36,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         +!!filter.upgradesRarity.length +
         +!!filter.slotsCount?.length +
         +!!filter.enemiesTypes?.length +
-        +!!filter.enemiesCount?.length +
+        +!!filter.enemiesMinCount +
         +!!filter.campaignTypes.length;
 
     const handleClick = () => {
@@ -63,7 +63,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesCount: [],
+            enemiesMinCount: null,
         });
         setCurrFilter({
             alliesFactions: [],
@@ -74,7 +74,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesCount: [],
+            enemiesMinCount: null,
         });
         setOpen(false);
     };
@@ -147,21 +147,22 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     {renderUnitsFilter('enemies', currFilter.enemiesAlliance, currFilter.enemiesFactions)}
 
                     <div className="flex items-center gap-3" style={{ marginTop: 10 }}>
-                        <MultipleSelectCheckmarks
+                        <Autocomplete
+                            fullWidth
                             size="small"
-                            placeholder="Enemies Count"
-                            selectedValues={currFilter.enemiesCount?.map(x => x.toString()) ?? []}
-                            values={enemiesCountOptions}
-                            selectionChanges={values => {
-                                setCurrFilter({ ...currFilter, enemiesCount: values.map(x => +x) });
+                            value={currFilter.enemiesMinCount?.toString() ?? null}
+                            options={enemiesCountOptions}
+                            onChange={(_, value) => {
+                                setCurrFilter({ ...currFilter, enemiesMinCount: value ? +value : null });
                             }}
-                            disableCloseOnSelect={false}
-                            minWidth={150}
+                            sx={{ minWidth: 150, maxWidth: 300 }}
+                            renderInput={params => <TextField {...params} label="Enemy Count" />}
+                            getOptionLabel={option => `${option}+`}
                         />
 
                         <MultipleSelectCheckmarks
                             size="small"
-                            placeholder="Enemies Types"
+                            placeholder="Enemy Types"
                             selectedValues={currFilter.enemiesTypes ?? []}
                             values={enemiesTypeOptions}
                             selectionChanges={values => {

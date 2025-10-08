@@ -22,14 +22,7 @@ import { MowUpgradesTable } from './mow-upgrades-table';
 export const MowLookup = () => {
     const { inventory, mows } = useContext(StoreContext);
 
-    const resolvedMows = useMemo(
-        () =>
-            mows.map(mow => {
-                if ('snowprintId' in mow) return mow as IMow2;
-                return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
-            }),
-        [mows]
-    );
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
     const autocompleteOptions = sortBy(resolvedMows, 'name');
 

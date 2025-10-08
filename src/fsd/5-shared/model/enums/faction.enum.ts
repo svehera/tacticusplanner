@@ -5,7 +5,7 @@ export enum Faction {
     ADEPTA_SORORITAS = 'Adepta Sororitas',
     Necrons = 'Necrons',
     Astra_militarum = 'Astra Militarum',
-    Death_Guard = 'Death guard',
+    Death_Guard = 'Death Guard',
     Black_Templars = 'Black Templars',
     Aeldari = 'Aeldari',
     Space_Wolves = 'Space Wolves',

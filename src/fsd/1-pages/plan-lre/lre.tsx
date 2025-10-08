@@ -31,19 +31,7 @@ export const Lre: React.FC = () => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
 
-    const resolvedCharacters = useMemo(() => {
-        return characters.map(x => {
-            const resolved = CharactersService.getUnit(x.snowprintId ?? x.name);
-            // Only override identity/display fields; keep player-specific data intact
-            return resolved
-                ? {
-                      ...x,
-                      name: resolved.name ?? x.name,
-                      snowprintId: resolved.snowprintId ?? x.snowprintId,
-                  }
-                : x;
-        });
-    }, [characters]);
+    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const updateSettings = (
         settings: ILreViewSettings,

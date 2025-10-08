@@ -48,12 +48,7 @@ export const Goals = () => {
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
 
-    const resolvedMows = useMemo(() => {
-        return mows.map(mow => {
-            if ('snowprintId' in mow) return mow as IMow2;
-            return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
-        });
-    }, [mows]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(() => {
         return GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false);
