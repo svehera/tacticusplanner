@@ -3,7 +3,7 @@ import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/';
 // Source-of-truth battle dataset used to derive challenge nodes
 import { battleData } from './data';
 // Canonical campaign identifiers (Standard/Extremis/Challenge variants)
-import { Campaign } from './enums';
+import { Campaign, CampaignGroupType } from './enums';
 
 // Split of base vs challenge progress for an event campaign
 export type CampaignProgressSplit = {
@@ -99,5 +99,19 @@ export class CampaignMapperService {
         result.baseBattleCount = completedBaseIndices.length;
         result.challengeBattleCount = completedChallengeIndices.length;
         return result;
+    }
+
+    /**
+     * Infer the Daily Raids campaign group (AdMech/Tyranids/T'au) purely by event id presence.
+     * - eventCampaign1 => AdMech
+     * - eventCampaign2 => Tyranids
+     * - eventCampaign3 => T'au
+     */
+    static inferDailyRaidsCampaignGroup(progressList: TacticusCampaignProgress[]): CampaignGroupType | 'none' {
+        const ids = new Set(progressList.map(p => (p.id || '').toLowerCase()));
+        if (ids.has('eventcampaign1')) return CampaignGroupType.adMechCE;
+        if (ids.has('eventcampaign2')) return CampaignGroupType.tyranidCE;
+        if (ids.has('eventcampaign3')) return CampaignGroupType.tauCE;
+        return 'none';
     }
 }

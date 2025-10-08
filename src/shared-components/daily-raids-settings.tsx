@@ -94,6 +94,11 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
     );
 
+    // Keep local form state in sync if preferences change externally (e.g., API auto-detect)
+    React.useEffect(() => {
+        setDailyRaidsPreferencesForm(dailyRaidsPreferences);
+    }, [dailyRaidsPreferences]);
+
     const updatePreferences = useCallback((setting: keyof IDailyRaidsPreferences, value: boolean) => {
         setDailyRaidsPreferencesForm(curr => ({ ...curr, [setting]: value }));
     }, []);
