@@ -56,10 +56,8 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             };
         }
         case 'SyncWithTacticus': {
-            // Workaround to not reset CE data automatically
-            const raidedLocations: IItemRaidLocation[] = state.raidedLocations.filter(x =>
-                campaignEventsLocations.includes(x.campaign)
-            );
+            // removed workaround for CE nodes
+            const raidedLocations: IItemRaidLocation[] = [];
 
             for (const campaign of action.progress) {
                 const completedBattles = campaign.battles.filter(battle => battle.attemptsUsed !== 0);
