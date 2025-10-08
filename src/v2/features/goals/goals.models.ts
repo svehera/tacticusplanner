@@ -2,7 +2,7 @@
 import {
     ICampaignBattleComposed,
     ICampaignsProgress,
-    ICampaingsFilters,
+    ICampaignsFilters,
     IDailyRaidsPreferences,
 } from 'src/models/interfaces';
 
@@ -57,7 +57,7 @@ export interface IEstimatedAscensionSettings {
     raidedLocations: IItemRaidLocation[];
     campaignsProgress: ICampaignsProgress;
     preferences: IDailyRaidsPreferences;
-    filters?: ICampaingsFilters;
+    filters?: ICampaignsFilters;
 }
 
 export interface IEstimatedShards {
