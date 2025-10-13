@@ -27,6 +27,7 @@ interface IUpgradesTableRow {
     partOf: string;
     characters: Array<{
         id: string;
+        name: string;
         icon: string;
         roundIcon: string;
         ranks: Rank[];
@@ -50,13 +51,12 @@ export const Upgrades = () => {
             hide: !showCharacters,
             cellRenderer: (params: ICellRendererParams<IUpgradesTableRow>) => {
                 const characters = params.data?.characters;
-                console.debug(params.data);
                 if (characters) {
                     return characters.map(x => (
                         <div key={x.id} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            <Tooltip title={x.id}>
+                            <Tooltip title={x.name}>
                                 <span>
-                                    <UnitShardIcon icon={x.roundIcon} name={x.id} height={30} />
+                                    <UnitShardIcon icon={x.roundIcon} name={x.name} height={30} />
                                 </span>
                             </Tooltip>
                             <div>
@@ -203,6 +203,7 @@ export const Upgrades = () => {
             .map(x => {
                 const characters: Array<{
                     id: string;
+                    name: string;
                     icon: string;
                     roundIcon: string;
                     ranks: Rank[];
@@ -226,6 +227,7 @@ export const Upgrades = () => {
                             } else {
                                 characters.push({
                                     id: character,
+                                    name: charData?.name ?? '',
                                     icon: charData?.icon ?? '',
                                     roundIcon: charData?.roundIcon ?? '',
                                     ranks: [stringToRank(rank)],
