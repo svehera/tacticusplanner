@@ -45,7 +45,7 @@ export interface IMaterialFull {
     rarity: Rarity;
     craftable: boolean;
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
-    faction?: string; // if not specifor to faction then this property can be omitted ("undefined");
+    faction?: string; // if not specific to faction then this property can be omitted ("undefined");
     recipe?: Array<IMaterialRecipeIngredientFull>; // if material is not craftable recipe can be omitted ("undefined")
     allMaterials?: IMaterialRecipeIngredientFull[];
     iconPath: string;
@@ -110,7 +110,7 @@ export interface IMaterial {
     icon?: string;
     faction?: string; // If not specific to a faction, this property can be omitted ("undefined").
     recipe?: Array<IMaterialRecipeIngredient>; // If material is not craftable, recipe can be omitted ("undefined").
-    locations?: Array<string>; // Campaign locations can be in short form (IM12) or long (Indomitus mirros) depedings how you decide to update battleData json.
+    locations?: Array<string>; // Campaign locations can be in short form (IM12) or long (Indomitus mirror) depending on how you decide to update battleData json.
 }
 
 export interface IMaterialRecipeIngredient {

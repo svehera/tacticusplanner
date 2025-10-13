@@ -315,7 +315,7 @@ export class UpgradesService {
     /**
      * Returns an ICraftedUpgradeData that holds craftable materials only. The
      * recipe contained is not expanded. For example, Infernal Armor Trim
-     * requires Daemonic Armor Trim, which requires Blasephemous Armor trim.
+     * requires Daemonic Armor Trim, which requires Blasphemous Armor trim.
      * Infernal Armor Trim's recipe only mentions the 2x Daemonic Armor Trim,
      * not the 18x Blasphemous Armor Trim.
      */

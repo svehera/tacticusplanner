@@ -134,7 +134,7 @@ export const DesktopHome = () => {
         <div>
             {announcements()}
             <Thanks sliderMode={true} />
-            {/*{announcments()}*/}
+            {/*{announcements()}*/}
             <div
                 style={{
                     display: 'flex',

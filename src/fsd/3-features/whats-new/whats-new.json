@@ -215,7 +215,7 @@
             ],
             "bugFixes": [
                 {
-                    "text": "Fixed issue with Exremis campaign raids being overridden. (Reported by František)"
+                    "text": "Fixed issue with Extremis campaign raids being overridden. (Reported by František)"
                 }
             ]
         },
@@ -307,7 +307,7 @@
                     "text": "Added new collectible characters",
                     "subPoints": [
                         "[Genestealer Cults] Isaak Starn, the Primus, unlockable in the ‘Path of Ascension’ event starting January 26.",
-                        "[Adeptus Mechanicus] Sy-Gex, Kathaphron Destroyer."
+                        "[Adeptus Mechanicus] Sy-Gex, Kataphron Destroyer."
                     ]
                 },
                 {
@@ -422,7 +422,7 @@
                     "text": "Updated Inventory to show basic and crafted upgrades in separate columns (Peuchy)"
                 },
                 {
-                    "text": "Updated Inventory sections to be expandable and collapsable"
+                    "text": "Updated Inventory sections to be expandable and collapsible"
                 }
             ],
             "bugFixes": [
@@ -1256,7 +1256,7 @@
                     ]
                 },
                 {
-                    "text": "Added link to guilmates' roster page",
+                    "text": "Added link to guildmates' roster page",
                     "images": [
                         {
                             "path": "guild.png"
@@ -1301,7 +1301,7 @@
                         "\"Refresh estimate\" button renamed to \"Refresh\" and moved to the top of the page",
                         "\"Clear completed raids\" button renamed to \"Reset day\" and moved to the top of the page",
                         "\"Selected characters\" section renamed to \"Selected goals\" and added characters' icons",
-                        "\"Materials\" section splited into 3 sections: \"In Progress materials\", \"Finished materials\", \"Blocked materials\"",
+                        "\"Materials\" section split into 3 sections: \"In Progress materials\", \"Finished materials\", \"Blocked materials\"",
                         "Added total number of raids and raids per day to the raids cards",
                         "Updated daily raids settings"
                     ],
@@ -1552,7 +1552,7 @@
                 {
                     "text": "General updates to align the planner with the 1.17 Tacticus update",
                     "subPoints": [
-                        "Added new cahracters - Macer and Asmodai",
+                        "Added new characters - Macer and Asmodai",
                         "Update Guild War battlefield zones",
                         "New Campaign Battles: ‘Mirror Saim-Hann’ Part 5 and ‘Elite Saim-Hann’ Part 1",
                         "Vitruvius Legendary event starting on May 12",
@@ -1707,7 +1707,7 @@
                     "text": "Added data about # of deployed characters in specific battle (ForgottenSaber, Szarekh)",
                     "subPoints": [
                         "Added \"Slots\" column. Which will be empty if there could be deployed 5 characters in a battle otherwise 3 or 4",
-                        "Some Mirror Elite campaigns (like Indomitus Mirror Elite and Ocatarius Mirror Elite) have 5 slots in all battles"
+                        "Some Mirror Elite campaigns (like Indomitus Mirror Elite and Octarius Mirror Elite) have 5 slots in all battles"
                     ],
                     "images": [
                         {
@@ -1986,7 +1986,7 @@
                     "text": "Fixed Sho'Syl Stone I upgrades (ChargingFurret)"
                 },
                 {
-                    "text": "Changed label of \"Blessing of Nurge\" to  \"Boon of Nurge\" (Tani)"
+                    "text": "Changed label of \"Blessing of Nurgle\" to  \"Boon of Nurgle\" (Tani)"
                 },
                 {
                     "text": "Fixed tooltip of \"Blessed Tabard\" (kanslerioikein)"
@@ -2011,7 +2011,7 @@
             ],
             "bugFixes": [
                 {
-                    "text": "Fixed issue with daily raids suggestions in case only \"Use More efficient nodes (Mirror)\" is selcted and there are only Mirror and regular campaigns available"
+                    "text": "Fixed issue with daily raids suggestions in case only \"Use More efficient nodes (Mirror)\" is selected and there are only Mirror and regular campaigns available"
                 },
                 {
                     "text": "Fixed \"Warpweave Robe\" upgrade icon (Hominus)"
@@ -2462,7 +2462,7 @@
                         "In daily raids algorithm craftable item will be break down into base upgrades so total for base upgrades will be less",
                         "Added \"Crafted count\" column to the Materials table to display count break from craftable upgrades",
                         "Added \"\nShow craftable items\" toggle on the inventory view",
-                        "WARNING: \"Update inventory\" will not work with cfratable items when check on character details dialog"
+                        "WARNING: \"Update inventory\" will not work with craftable items when check on character details dialog"
                     ],
                     "images": [
                         {
@@ -2483,7 +2483,7 @@
                     "text": "Fixed Calandis Bronze I rank upgrades (Sv. Jebem)"
                 },
                 {
-                    "text": "Abbadon is spelled wrong( Despoiler vs Despolier) (sonsonVallano)"
+                    "text": "Abbadon is spelled wrong ( Despoiler vs Despoilier) (sonsonVallano)"
                 },
                 {
                     "text": "Repair-Kit became Repair Tool (sonsonVallano)"
@@ -2498,7 +2498,7 @@
             "minor": [],
             "bugFixes": [
                 {
-                    "text": "Fixed missing/incorrect trait name for Snotglogga (MocarnyJoe)"
+                    "text": "Fixed missing/incorrect trait name for Snotflogga (MocarnyJoe)"
                 },
                 {
                     "text": "Fixed \"Duplicated Organ\" type from Damage to Armour (Trueborn JCT)"
@@ -2953,7 +2953,7 @@
             ],
             "bugFixes": [
                 {
-                    "text": "Fixed: order of Calandis and Aethena on \"Who You Own\" page (SergeDavid, Fonzoland)"
+                    "text": "Fixed: order of Calandis and Aethana on \"Who You Own\" page (SergeDavid, Fonzoland)"
                 },
                 {
                     "text": "Fixed: \"Recommend first/last\" not working correctly (SergeDavid)"

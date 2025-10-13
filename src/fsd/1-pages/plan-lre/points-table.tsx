@@ -422,12 +422,12 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 </FormControl>
                 {selection === CharactersSelection.Selected ? (
                     <FormControl>
-                        <FormLabel id="points-calcualtion-label" style={{ fontWeight: 700 }}>
+                        <FormLabel id="points-calculation-label" style={{ fontWeight: 700 }}>
                             Points Calculation
                         </FormLabel>
                         <RadioGroup
                             style={{ display: 'flex', flexDirection: 'row' }}
-                            aria-labelledby="points-calcualtion-label"
+                            aria-labelledby="points-calculation-label"
                             value={pointsCalculation}
                             onChange={(_, value) => setPointsCalculation(value as PointsCalculation)}
                             name="radio-buttons-group">

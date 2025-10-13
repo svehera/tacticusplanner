@@ -86,7 +86,7 @@ export class CampaignsProgressionService {
      * @param result The campaign progress data into which we should store
      *               the results. Should already have (empty) entries for
      *         every campaign.
-     * @param nodesToBeat The map into which we should store the unbeated
+     * @param nodesToBeat The map into which we should store the unbeaten
      *                    nodes, keyed by campaign. Should already have
      *                    (empty) sets for every campaign.
      */
@@ -141,7 +141,7 @@ export class CampaignsProgressionService {
      * @param nodes The nodes to beat, keyed by campaign.
      * @returns The set of nodes to beat, with duplicates removed.
      */
-    private static uniquifyNodesToBeat(
+    private static deduplicateNodesToBeat(
         nodes: Map<string, ICampaignBattleComposed[]>
     ): Map<string, ICampaignBattleComposed[]> {
         const ret = new Map<string, ICampaignBattleComposed[]>();
@@ -198,7 +198,7 @@ export class CampaignsProgressionService {
 
         this.computeGoalCostsAndUnbeatenNodes(goals, campaignProgress, {}, result, nodesToBeat);
 
-        nodesToBeat = this.uniquifyNodesToBeat(nodesToBeat);
+        nodesToBeat = this.deduplicateNodesToBeat(nodesToBeat);
 
         for (const campaign of nodesToBeat.keys()) {
             const newMaterialEnergy = new Map<string, number>();

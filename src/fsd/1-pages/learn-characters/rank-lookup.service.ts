@@ -95,16 +95,16 @@ export class RankLookupService {
     }
 
     public static getAllMaterials(
-        campaingsProgress: ICampaignsProgress,
+        campaignsProgress: ICampaignsProgress,
         ownedUpgrades: Record<string, number>,
         upgrades: IMaterialFull[]
     ): IMaterialEstimated2[] {
         const result = UpgradesService.groupBaseMaterials(upgrades)
             .map(x =>
                 this.calculateMaterialData(
-                    campaingsProgress,
+                    campaignsProgress,
                     x,
-                    this.selectBestLocations(campaingsProgress, x.locationsComposed ?? []),
+                    this.selectBestLocations(campaignsProgress, x.locationsComposed ?? []),
                     ownedUpgrades,
                     {}
                 )
@@ -214,11 +214,11 @@ export class RankLookupService {
     }
 
     private static selectBestLocations(
-        campaingsProgress: ICampaignsProgress,
+        campaignsProgress: ICampaignsProgress,
         locationsComposed: ICampaignBattleComposed[]
     ): ICampaignBattleComposed[] {
         const unlockedLocations = locationsComposed.filter(location => {
-            const campaignProgress = campaingsProgress[location.campaign as keyof ICampaignsProgress];
+            const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber <= campaignProgress;
         });
 

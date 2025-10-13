@@ -302,7 +302,7 @@ export const RankLookup = () => {
                     gap: '20px',
                 }}>
                 <UnitsAutocomplete
-                    label="Chracters"
+                    label="Characters"
                     style={{ maxWidth: 300 }}
                     unit={character}
                     options={characters}

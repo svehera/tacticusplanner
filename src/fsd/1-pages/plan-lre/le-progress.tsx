@@ -86,7 +86,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                     {model.occurrenceProgress.map(occurrence => (
                         <LeProgressOverviewMissions
                             key={occurrence.eventOccurrence}
-                            occurence={occurrence}
+                            occurrence={occurrence}
                             progressChange={updateOccurrenceProgress}
                         />
                     ))}
