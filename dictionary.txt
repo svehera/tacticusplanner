@@ -120,7 +120,7 @@ deathwing
 defences
 defensor
 demetrian
-Despoilier  # incorrect but retained due to whats-new.json
+Despolier  # incorrect but retained due to whats-new.json
 devine
 diagonalplane
 dishonoured

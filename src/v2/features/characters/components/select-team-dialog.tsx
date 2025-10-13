@@ -9,8 +9,8 @@ import { getEnumValues } from 'src/shared-logic/functions';
 import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox, Conditional, RaritySelect } from '@/fsd/5-shared/ui';
 
-import { unsetCharacter } from '@/v2/features/characters/characters.constants';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { unsetCharacter } from 'src/v2/features/characters/characters.constants';
 import { ICharacter2, IUnit } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharacterTile } from 'src/v2/features/characters/components/character-tile';

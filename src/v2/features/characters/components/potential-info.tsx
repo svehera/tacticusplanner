@@ -13,7 +13,7 @@ import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
-import { rarityCaps } from '@/v2/features/characters/characters.constants';
+import { rarityCaps } from 'src/v2/features/characters/characters.constants';
 import { IRarityCap } from 'src/v2/features/characters/characters.models';
 
 export const PotentialInfo: React.FC = () => {

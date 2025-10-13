@@ -15,9 +15,9 @@ import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
-import { getDisplayName } from '@/v2/features/guides/guides.constants';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { TeamView } from 'src/v2/features/guides/components/team-view';
+import { getDisplayName } from 'src/v2/features/guides/guides.constants';
 import { GuidesStatus } from 'src/v2/features/guides/guides.enums';
 import { IGuide } from 'src/v2/features/guides/guides.models';
 

@@ -2,7 +2,7 @@
 
 import { ICharacter2 } from 'src/models/interfaces';
 
-import { unsetCharacter } from '@/v2/features/characters/characters.constants';
+import { unsetCharacter } from 'src/v2/features/characters/characters.constants';
 import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
 
 import './team.scss';
