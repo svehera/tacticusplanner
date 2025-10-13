@@ -20,7 +20,7 @@ import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-
 import { Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';

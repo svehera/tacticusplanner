@@ -1,10 +1,8 @@
-import type { AxiosError } from 'axios';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
 import { DialogProps } from 'src/v2/models/dialog.props';
 
-import type { IErrorResponse } from '@/fsd/5-shared/api';
 import { updateTacticusApiKey } from '@/fsd/5-shared/lib/tacticus-api';
 import { useAuth } from '@/fsd/5-shared/model';
 import { Button } from '@/fsd/5-shared/ui/button';

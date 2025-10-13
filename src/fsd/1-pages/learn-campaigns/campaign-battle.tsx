@@ -1,8 +1,6 @@
-import { Tooltip } from '@mui/material';
 import React from 'react';
 
 import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
-import { CharactersService } from '@/fsd/4-entities/character';
 
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 

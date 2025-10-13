@@ -16,7 +16,6 @@ import { LoaderWithText } from '@/fsd/5-shared/ui';
 import { SearchParamsStateContext } from '@/fsd/5-shared/ui/contexts';
 
 import { MowsService } from '@/fsd/4-entities/mow';
-import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 
 import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
 import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';

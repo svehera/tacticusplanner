@@ -3,7 +3,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import { FormControlLabel, Popover, Switch } from '@mui/material';
 import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { orderBy, sum } from 'lodash';
+import { orderBy } from 'lodash';
 import React, { useContext, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -23,7 +23,6 @@ import {
     IMaterialRecipeIngredientFull,
     UpgradeImage,
     IMaterialEstimated2,
-    UpgradesService,
 } from '@/fsd/4-entities/upgrade';
 
 import { RankLookupService } from './rank-lookup.service';

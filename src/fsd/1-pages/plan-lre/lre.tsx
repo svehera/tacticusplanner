@@ -1,7 +1,7 @@
 ﻿import GridViewIcon from '@mui/icons-material/GridView';
 import SettingsIcon from '@mui/icons-material/Settings';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import { Divider, Switch, Tab, Tabs } from '@mui/material';
+import { Switch, Tab, Tabs } from '@mui/material';
 import Button from '@mui/material/Button';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -11,7 +11,7 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 // eslint-disable-next-line import-x/no-internal-modules
 import { SetGoalDialog } from '@/shared-components/goals/set-goal-dialog';
 
-import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
+import { CharactersService } from '@/fsd/4-entities/character';
 
 import { IAutoTeamsPreferences } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings';

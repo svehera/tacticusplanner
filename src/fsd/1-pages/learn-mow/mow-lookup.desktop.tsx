@@ -10,7 +10,7 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { Alliance } from '@/fsd/5-shared/model';
 
-import { mows2Data, MowsService, IMow2 } from '@/fsd/4-entities/mow';
+import { MowsService } from '@/fsd/4-entities/mow';
 
 import { IMowLookupInputs } from './lookup.models';
 import { MowLookupInputs } from './mow-lookup-inputs';
