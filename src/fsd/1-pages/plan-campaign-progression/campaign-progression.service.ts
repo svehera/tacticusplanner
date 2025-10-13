@@ -388,13 +388,14 @@ export class CampaignsProgressionService {
         campaignProgress: ICampaignsProgress,
         inventoryUpgrades: Record<string, number>
     ): FarmData {
+        const farmableLocs = this.getFarmableLocations(materialId, campaignProgress);
         const result: FarmData = {
             material: materialId,
             totalEnergy: 0,
-            canFarm: true,
+            canFarm: farmableLocs.length > 0,
             count: count,
             campaignType: CampaignType.Normal,
-            farmableLocations: this.getFarmableLocations(materialId, campaignProgress),
+            farmableLocations: farmableLocs,
             unfarmableLocations: this.getUnfarmableLocations(materialId, campaignProgress),
         };
         let bestBattle: ICampaignBattleComposed | undefined = undefined;
@@ -540,20 +541,14 @@ export class CampaignsProgressionService {
         material: string,
         campaignProgress: ICampaignsProgress
     ): ICampaignBattleComposed[] {
-        const result: ICampaignBattleComposed[] = [];
-
-        let count = 0;
-        Object.entries(CampaignsService.campaignsComposed).forEach(([_, battle]) => {
-            if (
-                this.getMaterialId(this.getReward(battle)) == this.getMaterialId(material) &&
-                !CampaignsService.hasCompletedBattle(battle, campaignProgress)
-            ) {
-                result.push(battle);
-                ++count;
-            }
-        });
-
-        return result;
+        return Object.entries(CampaignsService.campaignsComposed)
+            .filter(([_, battle]) => {
+                return (
+                    this.getReward(battle) === material &&
+                    !CampaignsService.hasCompletedBattle(battle, campaignProgress)
+                );
+            })
+            .map(([_, battle]) => battle);
     }
 
     /**
