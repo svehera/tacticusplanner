@@ -526,7 +526,7 @@
             "factionId": "Orks",
             "alliance": "Xenos",
             "icon": "snowprint_assets/characters/ui_image_portrait_orkss_rukkatruk_01.png",
-            "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_orkss_rukkatruk_01.png",
+            "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_orkss_rukkatrukk_01.png",
             "primaryAbility": {
                 "name": "SquigLaunchas",
                 "recipes": [
