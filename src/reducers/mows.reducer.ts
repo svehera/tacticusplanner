@@ -3,6 +3,8 @@ import { rarityToStars } from 'src/models/constants';
 
 import { TacticusShard, TacticusUnit } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 
+import { MowsService } from '@/fsd/4-entities/mow';
+
 import { IMow, IMow2, IMowDb } from '@/v2/features/characters/characters.models';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
@@ -24,6 +26,8 @@ export type MowsAction =
     | SetStateAction<Array<IMow | IMow2>>;
 
 export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
+    const resolvedMows = MowsService.resolveAllFromStorage(state);
+
     switch (action.type) {
         case 'Set': {
             return action.value;
@@ -51,9 +55,10 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
             const getId = (existingMow: IMow | IMow2) =>
                 'tacticusId' in existingMow ? existingMow.tacticusId : existingMow.snowprintId;
 
-            return state.map(existingMow => {
+            return resolvedMows.map(existingMow => {
                 const tacticusUnit = units.find(u => u.id === getId(existingMow));
                 const tacticusShards = shards.find(s => s.id === getId(existingMow));
+
                 if (tacticusUnit) {
                     const [rarity, stars] = TacticusIntegrationService.convertProgressionIndex(
                         tacticusUnit.progressionIndex
