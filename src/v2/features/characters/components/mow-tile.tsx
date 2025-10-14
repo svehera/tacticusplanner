@@ -13,7 +13,6 @@ import { IMow2 } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit';
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { IMow } from 'src/v2/features/characters/characters.models';
 
 import './character-tile.css';
 

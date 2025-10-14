@@ -5,10 +5,10 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { RarityMapper, RarityString } from '@/fsd/5-shared/model';
+import { RarityMapper } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CampaignLocation, CampaignType, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
+import { CampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 

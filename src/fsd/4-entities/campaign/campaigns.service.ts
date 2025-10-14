@@ -1,5 +1,4 @@
 import { groupBy, orderBy, sortBy, uniq } from 'lodash';
-import { X } from 'lucide-react';
 
 import { FactionsService } from '@/fsd/5-shared/lib';
 import { Alliance, Faction, Rarity } from '@/fsd/5-shared/model';

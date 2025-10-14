@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import type { IEquipmentStats } from '../model';

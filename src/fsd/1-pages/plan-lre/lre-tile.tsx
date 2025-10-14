@@ -1,5 +1,4 @@
 import { Tooltip } from '@mui/material';
-import { ContinuousColorLegend } from '@mui/x-charts';
 import React, { useContext, useMemo } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -9,8 +8,8 @@ import { Trait, Rank, Rarity } from '@/fsd/5-shared/model';
 import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharacterBias, CharactersService, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
-import { ICharacterUpgradeRankGoal, ICharacterUpgradeMow, PersonalGoalType } from '@/fsd/4-entities/goal';
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { ICharacterUpgradeRankGoal, PersonalGoalType } from '@/fsd/4-entities/goal';
+import { MowsService } from '@/fsd/4-entities/mow';
 
 import { ILreTileSettings } from '@/fsd/3-features/view-settings';
 // eslint-disable-next-line import-x/no-internal-modules

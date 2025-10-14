@@ -1,4 +1,4 @@
-import { orderBy, uniq } from 'lodash';
+import { uniq } from 'lodash';
 
 import {
     UnitType,

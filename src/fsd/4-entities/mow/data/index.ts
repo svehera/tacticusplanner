@@ -1,4 +1,4 @@
-import { IMowLevelUpgrade, IMowLevelUpgradesDictionary, IMowsAndUpgradeCosts, IMowStatic, IMowStatic2 } from '../model';
+import { IMowLevelUpgrade, IMowLevelUpgradesDictionary, IMowsAndUpgradeCosts, IMowStatic } from '../model';
 
 import mowLvlUpCommonJson from './mow-lvl-up-common.json';
 import mowUpgradesJson from './mows-upgrades.json';

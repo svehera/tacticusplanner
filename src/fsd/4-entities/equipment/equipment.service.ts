@@ -1,4 +1,4 @@
-import { Faction, RarityString, Rarity, RarityMapper, parseFaction } from '@/fsd/5-shared/model';
+import { RarityString, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line boundaries/element-types
 import { CharactersService } from '../character';

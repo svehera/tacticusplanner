@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { allLegendaryEvents, aunshi, LegendaryEventService } from '@/fsd/4-entities/lre';
+import { aunshi, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 describe('LegendaryEventService', () => {
     describe('getActiveEvent', () => {

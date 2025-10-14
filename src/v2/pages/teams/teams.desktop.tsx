@@ -9,7 +9,7 @@ import { useDebounceValue } from 'usehooks-ts';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { MowsService } from '@/fsd/4-entities/mow';
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { AddTeamDialog } from 'src/v2/features/teams/components/add-team.dialog';

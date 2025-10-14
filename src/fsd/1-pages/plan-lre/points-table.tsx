@@ -20,7 +20,6 @@ import { StoreContext } from '@/reducers/store.provider';
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank, rankToString, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
-import { Link } from '@/fsd/5-shared/ui/link';
 
 import { CharactersService, CharacterTitleShort, RankIcon } from '@/fsd/4-entities/character';
 

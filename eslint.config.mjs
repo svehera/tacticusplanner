@@ -11,6 +11,7 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -36,6 +37,7 @@ export default [
             'react-refresh': reactRefresh,
             'react-compiler': reactCompiler,
             boundaries,
+            "unused-imports": unusedImports,
         },
 
         languageOptions: {
@@ -143,6 +145,7 @@ export default [
                     ],
                 },
             ],
+            'unused-imports/no-unused-imports': 'error',
         },
     },
     {

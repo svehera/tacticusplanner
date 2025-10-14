@@ -1,11 +1,9 @@
-import { stat } from 'fs';
-
 import { Alliance, DynamicProps, Rarity, RarityMapper, RarityStars, UnitType } from '@/fsd/5-shared/model';
 
 import { IBaseUpgrade, ICraftedUpgrade, UpgradesService } from '@/fsd/4-entities/upgrade/@x/mow';
 
-import { mowLevelUpCommonData, mows2Data, mowsData } from './data';
-import { IMow, IMow2, IMowDb, IMowLevelMaterials, IMowLevelUpgrades, IMowStatic, IMowStatic2 } from './model';
+import { mows2Data, mowsData } from './data';
+import { IMow, IMow2, IMowDb, IMowLevelMaterials, IMowStatic, IMowStatic2 } from './model';
 
 export class MowsService {
     public static getMowMaterialsList(mow: IMow2): IMowLevelMaterials[] {
