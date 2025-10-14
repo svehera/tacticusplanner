@@ -95,6 +95,7 @@ export class MowsService {
             if (!ret.find(x => x.snowprintId === staticMow.snowprintId)) {
                 ret.push({
                     ...staticMow,
+                    faction: staticMow.factionId,
                     id: staticMow.snowprintId,
                     unlocked: false,
                     primaryAbilityLevel: 1,

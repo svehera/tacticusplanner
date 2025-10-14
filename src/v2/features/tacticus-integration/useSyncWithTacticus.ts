@@ -1,13 +1,16 @@
 import { enqueueSnackbar } from 'notistack';
 import { useContext } from 'react';
 
-import { DispatchContext } from '@/reducers/store.provider';
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { getTacticusPlayerData } from '@/fsd/5-shared/lib/tacticus-api';
 import { useLoader } from '@/fsd/5-shared/ui';
 
+import { CampaignMapperService } from '@/fsd/4-entities/campaign/campaign-mapper-service';
+
 export const useSyncWithTacticus = () => {
     const dispatch = useContext(DispatchContext);
+    const store = useContext(StoreContext);
     const loader = useLoader();
     async function syncWithTacticus(syncOptions: string[]) {
         dispatch.viewPreferences({ type: 'Update', setting: 'apiIntegrationSyncOptions', value: syncOptions });
@@ -40,6 +43,20 @@ export const useSyncWithTacticus = () => {
                         type: 'SyncWithTacticus',
                         campaigns: result.data.player.progress.campaigns,
                     });
+
+                    // Auto-detect Daily Raids campaign event group and update preferences if changed
+                    const detectedGroup = CampaignMapperService.inferDailyRaidsCampaignGroup(
+                        result.data.player.progress.campaigns
+                    );
+                    if (detectedGroup && detectedGroup !== 'none') {
+                        const current = store.dailyRaidsPreferences.campaignEvent ?? 'none';
+                        if (current !== detectedGroup) {
+                            dispatch.dailyRaidsPreferences({
+                                type: 'Set',
+                                value: { ...store.dailyRaidsPreferences, campaignEvent: detectedGroup },
+                            });
+                        }
+                    }
                 }
 
                 if (syncOptions.includes('raidedLocations')) {
