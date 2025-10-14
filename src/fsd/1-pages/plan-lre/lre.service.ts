@@ -39,15 +39,15 @@ export class LreService {
         const occurrenceProgress: ILreOccurrenceProgress[] = [];
         const tracksProgress: ILreTrackProgress[] = [];
 
-        const eventOccurence = [1, 2, 3];
-        for (const occurence of eventOccurence) {
-            const value: ILreOverviewDto = dto?.overview?.[occurence as 1 | 2 | 3] ?? {
+        const eventOccurrence = [1, 2, 3];
+        for (const occurrence of eventOccurrence) {
+            const value: ILreOverviewDto = dto?.overview?.[occurrence as 1 | 2 | 3] ?? {
                 premiumMissions: 0,
                 regularMissions: 0,
                 bundle: 0,
             };
             occurrenceProgress.push({
-                eventOccurrence: occurence as 1 | 2 | 3,
+                eventOccurrence: occurrence as 1 | 2 | 3,
                 premiumMissionsProgress: value.premiumMissions,
                 freeMissionsProgress: value.regularMissions,
                 bundlePurchased: !!value.bundle,

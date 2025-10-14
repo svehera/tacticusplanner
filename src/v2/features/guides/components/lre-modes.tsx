@@ -7,7 +7,7 @@ import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { getLre, getLreGuideData, lreCharacters } from 'src/v2/features/guides/guides.contstants';
+import { getLre, getLreGuideData, lreCharacters } from 'src/v2/features/guides/guides.constants';
 import { LreCharacter } from 'src/v2/features/guides/guides.enums';
 import { lreSections } from 'src/v2/features/teams/teams.constants';
 

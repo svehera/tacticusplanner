@@ -292,7 +292,7 @@ export const MaterialsTable: React.FC<Props> = ({
         // Map from material snowprintId to running inventory count
         const inventoryTracker: Record<string, number> = { ...inventory };
         // Remove any inventory consumed by already-completed, but not applied, goals (e.g. you got
-        // an LRE homey prefarmed to D3 but havne't unlocked the unit yet).
+        // an LRE homey prefarmed to D3 but haven't unlocked the unit yet).
         if (alreadyUsedMaterials) {
             for (const used of alreadyUsedMaterials) {
                 if (used.snowprintId && typeof used.requiredCount === 'number') {

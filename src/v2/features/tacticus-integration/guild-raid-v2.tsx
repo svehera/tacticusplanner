@@ -704,12 +704,12 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         // Number of available bombs at calculation time
         const availableBombs = summaryData.reduce(
-            (acc, userSummmary) => acc + (getTimeUntilNextBomb(userSummmary) === 0 ? 1 : 0),
+            (acc, userSummary) => acc + (getTimeUntilNextBomb(userSummary) === 0 ? 1 : 0),
             0
         );
 
         // Number of available tokens at calculation time
-        const availableTokens = summaryData.reduce((acc, userSummmary) => acc + userSummmary.tokenStatus.count, 0);
+        const availableTokens = summaryData.reduce((acc, userSummary) => acc + userSummary.tokenStatus.count, 0);
 
         return {
             totalDamage,
