@@ -4,27 +4,44 @@ import { Info } from '@mui/icons-material';
 import React from 'react';
 import { IXpEstimate } from 'src/v2/features/characters/characters.models';
 
-export const XpTotal: React.FC<IXpEstimate> = ({ legendaryBooks, currentLevel, targetLevel, xpLeft, gold }) => {
+export const XpTotal: React.FC<IXpEstimate> = ({
+    legendaryBooks,
+    mythicBooks,
+    currentLevel,
+    targetLevel,
+    xpLeft,
+    legendaryGold,
+    mythicGold,
+}) => {
     return (
-        <div className="flex-box gap5">
-            <span>
-                <b>{legendaryBooks}</b> Codex of War |
-            </span>
-            <span>
-                <b>{numberToThousandsString(gold)}</b> Gold
-            </span>
-            <AccessibleTooltip
-                title={
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ textAlign: 'left' }}>
                     <span>
-                        Current level: {currentLevel}
-                        <br />
-                        Target level: {targetLevel}
-                        <br />
-                        XP left: {numberToThousandsString(xpLeft)}
+                        <b>{legendaryBooks}</b> Codex of War | <b>{numberToThousandsString(legendaryGold)}</b> Gold
                     </span>
-                }>
-                <Info color="primary" />
-            </AccessibleTooltip>
+                </div>
+                <div style={{ textAlign: 'left' }}>
+                    <span>
+                        <b>{mythicBooks}</b> Grimoire of War | <b>{numberToThousandsString(mythicGold)}</b> Gold
+                    </span>
+                </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', paddingLeft: 10 }}>
+                <AccessibleTooltip
+                    title={
+                        <span>
+                            Current level: {currentLevel}
+                            <br />
+                            Target level: {targetLevel}
+                            <br />
+                            XP left: {numberToThousandsString(xpLeft)}
+                        </span>
+                    }>
+                    <Info color="primary" />
+                </AccessibleTooltip>
+            </div>
         </div>
     );
 };
