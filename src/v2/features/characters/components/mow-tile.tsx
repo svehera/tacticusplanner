@@ -1,26 +1,24 @@
-﻿import React, { useContext } from 'react';
-import { Tooltip } from '@mui/material';
-
-import { StarsImage } from 'src/v2/components/images/stars-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
+﻿import { Tooltip } from '@mui/material';
+import { orderBy } from 'lodash';
+import React, { useContext } from 'react';
 
 import { charsUnlockShards } from 'src/models/constants';
+import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+
+import { numberToThousandsStringOld } from '@/fsd/5-shared/lib';
+import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
+import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
+
+import { IMow2 } from '@/fsd/4-entities/mow';
+import { CharactersPowerService } from '@/fsd/4-entities/unit';
+
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 
 import './character-tile.css';
-import { Conditional } from 'src/v2/components/conditional';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-
-import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { IMow } from 'src/v2/features/characters/characters.models';
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { orderBy } from 'lodash';
 
 interface Props {
-    mow: IMow;
-    onClick?: (mow: IMow) => void;
+    mow: IMow2;
+    onClick?: (mow: IMow2) => void;
     disableClick?: boolean;
 }
 
@@ -39,7 +37,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                 cursor: onClick && !disableClick ? 'pointer' : undefined,
             }}
             onClick={onClick && !disableClick ? () => onClick!(mow) : undefined}>
-            <StarsImage stars={mow.stars} />
+            <StarsIcon stars={mow.stars} />
             <div>
                 <Tooltip
                     placement={'top'}
@@ -51,7 +49,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                         </span>
                     }>
                     <div>
-                        <CharacterPortraitImage icon={mow.portraitIcon} />
+                        <CharacterPortraitImage icon={mow.icon} />
                     </div>
                 </Tooltip>
 
@@ -76,7 +74,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                 </Conditional>
             </div>
             <div className="character-rarity-rank">
-                {viewContext.showCharacterRarity && <RarityImage rarity={mow.rarity} />}
+                {viewContext.showCharacterRarity && <RarityIcon rarity={mow.rarity} />}
                 <MiscIcon icon={'mow'} width={22} height={25} />
             </div>
             {!!mow.numberOfUnlocked && (

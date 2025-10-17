@@ -1,33 +1,32 @@
-﻿import React from 'react';
-
-import ListIcon from '@mui/icons-material/List';
-import InventoryIcon from '@mui/icons-material/Inventory';
-import HomeIcon from '@mui/icons-material/Home';
-import TrackChangesIcon from '@mui/icons-material/TrackChanges';
-import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+﻿import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
-import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import HomeIcon from '@mui/icons-material/Home';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import ListIcon from '@mui/icons-material/List';
+import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import TableChartIcon from '@mui/icons-material/TableChart';
+import TrackChangesIcon from '@mui/icons-material/TrackChanges';
+import React from 'react';
 
+import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
+import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
+import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
+import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
+import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
+import { guildApiMenuItem } from '@/v2/pages/guild-api/guild-api.menu-item';
 import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
-import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
-import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
-import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
-import { campaignProgressionMenuItem } from 'src/v2/pages/campaign-progression/campaign-progression.menu-item';
-import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
-import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-war-defense.menu-item';
-import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
+import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
 import { guildMenuItem } from 'src/v2/pages/guild/guild.menu-item';
 import { guildInsightsMenuItem } from 'src/v2/pages/guild-insights/guild-insights.menu-item';
+import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-war-defense.menu-item';
+import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
+import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
+import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
 import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
-import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item';
-import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
-import { activeLreMenuItems, inactiveLreMenuItems } from 'src/v2/pages/lre/lre.menu-item';
-import { myProgressMenuItem } from 'src/v2/pages/my-progress/my-progress.menu-item';
+import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -47,12 +46,13 @@ export const menuItemById = {
     wyo: wyoMenuItem,
     myProgress: myProgressMenuItem,
     inventory: new MenuItemTP('Inventory', <InventoryIcon />, '/input/inventory'),
-
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
     leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
+    npcs: new MenuItemTP('NPCs', <Diversity3Icon />, '/learn/npcs'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
+    learnEquipment: new MenuItemTP('Equipment', <ListIcon />, '/learn/equipment'),
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
     mowLookup: mowLookupMenuItem,
     campaigns: new MenuItemTP('Campaigns', <FormatListNumberedIcon />, '/learn/campaigns'),
@@ -68,6 +68,7 @@ export const menuItemById = {
     offense: guildWarOffenseMenuItem,
     zones: guildWarZonesMenuItem,
     guild: guildMenuItem,
+    guildApi: guildApiMenuItem,
     guildInsights: guildInsightsMenuItem,
     teams: teamsMenuItem,
     guides: guidesMenuItem,
@@ -105,15 +106,35 @@ export const planSubMenu: MenuItemTP[] = [
     ...activeLreMenuItems,
 ];
 
-export const learnSubMenu: MenuItemTP[] = [
+export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['guides'],
     menuItemById['characters'],
+    menuItemById['npcs'],
     menuItemById['upgrades'],
+    menuItemById['learnEquipment'],
     menuItemById['rankLookup'],
     menuItemById['mowLookup'],
     menuItemById['campaigns'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
+    menuItemById['guildApi'],
+    menuItemById['guildInsights'],
+];
+
+export const learnSubMenu: MenuItemTP[] = [
+    new MenuItemTP('Tacticus', <TableChartIcon />, '', '', '', [
+        menuItemById['rankLookup'],
+        menuItemById['mowLookup'],
+        menuItemById['characters'],
+        menuItemById['npcs'],
+        menuItemById['upgrades'],
+        menuItemById['learnEquipment'],
+        menuItemById['campaigns'],
+    ]),
+    menuItemById['guides'],
+    menuItemById['dirtyDozen'],
+    menuItemById['insights'],
+    menuItemById['guildApi'],
     menuItemById['guildInsights'],
 ];
 

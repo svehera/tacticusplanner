@@ -1,11 +1,11 @@
-﻿import React, { ChangeEvent, useRef } from 'react';
-import readXlsxFile, { Schema } from 'read-excel-file';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
+﻿import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
+import React, { ChangeEvent, useRef } from 'react';
+import readXlsxFile, { Schema } from 'read-excel-file';
+
 import { IGuildMember } from 'src/models/interfaces';
-import { ParseWithoutSchemaOptions } from 'read-excel-file/types';
 
 interface Props {
     onImport: (guildUsers: IGuildMember[]) => void;
@@ -34,6 +34,14 @@ export const ImportGuildExcel: React.FC<Props> = ({ onImport }) => {
                 },
                 ShareToken: {
                     prop: 'shareToken',
+                    type: String,
+                },
+                InGameName: {
+                    prop: 'inGameName',
+                    type: String,
+                },
+                InGameUserId: {
+                    prop: 'userId',
                     type: String,
                 },
             };

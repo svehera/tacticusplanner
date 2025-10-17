@@ -1,14 +1,15 @@
-﻿import React from 'react';
-import { Card, CardHeader } from '@mui/material';
+﻿import { Card, CardHeader } from '@mui/material';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { learnSubMenu } from '../../models/menu-items';
+
+import { learnSubMenuMobile } from '../../models/menu-items';
 
 export const LearnRoutes = () => {
     const navigate = useNavigate();
 
     return (
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
-            {learnSubMenu.map(item => (
+            {learnSubMenuMobile.map(item => (
                 <Card
                     variant="outlined"
                     key={item.label}

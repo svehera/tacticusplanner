@@ -1,7 +1,8 @@
-﻿import React, { useContext } from 'react';
-import { IconButton, Tooltip } from '@mui/material';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
+﻿import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import { IconButton, Tooltip } from '@mui/material';
+import React, { useContext } from 'react';
+
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 const ThemeSwitch = () => {

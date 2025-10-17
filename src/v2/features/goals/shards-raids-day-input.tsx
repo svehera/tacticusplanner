@@ -1,11 +1,15 @@
-﻿import React, { useMemo } from 'react';
-import { Card, CardContent, CardHeader } from '@mui/material';
+﻿import { Card, CardContent, CardHeader } from '@mui/material';
+import React, { useMemo } from 'react';
+
+import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { CampaignImage } from '@/fsd/4-entities/campaign/campaign.icon';
+
 import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
 import { ShardItemTitle } from 'src/v2/features/goals/shard-item-title';
-import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { CampaignImage } from 'src/v2/components/images/campaign-image';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
 interface Props {
     shardRaids: IShardsRaid;

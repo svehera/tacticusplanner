@@ -1,7 +1,17 @@
-﻿import {
+﻿import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
+
+import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
+import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
+import { IMow, IMow2, IMowDb, mowsData, MowsService } from '@/fsd/4-entities/mow';
+import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
+import { UpgradesService } from '@/fsd/4-entities/upgrade';
+
+import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+
+import { defaultData, rankToLevel, rankToRarity } from './constants';
+import {
     IAutoTeamsPreferences,
-    ICampaignsProgress,
-    ICharacter2,
     IDailyRaids,
     IDailyRaidsPreferences,
     IGlobalState,
@@ -18,15 +28,6 @@
     IViewPreferences,
     LegendaryEventData,
 } from './interfaces';
-import { StaticDataService } from '../services';
-import { CharacterBias, LegendaryEventEnum, Rank, Rarity, RarityStars } from './enums';
-import { defaultData, rankToLevel, rankToRarity, rarityStringToNumber, rarityToStars } from './constants';
-import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.models';
-import mowsData from 'src/v2/data/mows.json';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { ILreProgressDto } from 'src/models/dto.interfaces';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -47,7 +48,7 @@ export class GlobalState implements IGlobalState {
     readonly dailyRaids: IDailyRaids;
     readonly guildWar: IGuildWar;
     readonly guild: IGuild;
-    readonly mows: IMow[];
+    readonly mows: Array<IMow | IMow2>;
 
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
@@ -81,22 +82,24 @@ export class GlobalState implements IGlobalState {
         chars: Partial<IPersonalCharacterData2 & IInsightsData>[],
         totalUsers?: number
     ): Array<ICharacter2> {
-        return StaticDataService.unitsData.map(staticData => {
-            const personalCharData = chars.find(c => c.name === staticData.name);
+        return CharactersService.charactersData.map(staticData => {
+            const personalCharData = chars.find(c => {
+                return CharactersService.canonicalName(c.name!) === staticData.snowprintId!;
+            });
             const rank = personalCharData?.rank ?? Rank.Locked;
-            const rankLevel = rankToLevel[(rank - 1) as Rank];
+            const rankLevel = rankToLevel[rank as Rank];
             const rankRarity = rankToRarity[rank];
             const rarity = Math.max(personalCharData?.rarity ?? staticData.initialRarity, rankRarity) as Rarity;
-            const stars = Math.max(personalCharData?.stars ?? 0, rarityToStars[rarity]);
+            const stars = Math.max(personalCharData?.stars ?? 0, RarityMapper.toStars[rarity]);
             const activeLevel = Math.max(personalCharData?.activeAbilityLevel ?? 1, 1);
             const passiveLevel = Math.max(personalCharData?.passiveAbilityLevel ?? 1, 1);
             const level = Math.max(personalCharData?.level ?? 1, rankLevel, activeLevel, passiveLevel);
             const upgrades = personalCharData?.upgrades
-                ? personalCharData.upgrades.filter(StaticDataService.isValidaUpgrade)
+                ? personalCharData.upgrades.filter(UpgradesService.isValidUpgrade)
                 : [];
 
             const combinedData: IPersonalCharacterData2 = {
-                name: staticData.name,
+                name: staticData.snowprintId!,
                 rank: rank,
                 rarity: rarity,
                 bias: personalCharData?.bias ?? CharacterBias.None,
@@ -107,6 +110,7 @@ export class GlobalState implements IGlobalState {
                 level: level,
                 xp: personalCharData?.xp ?? 0,
                 shards: personalCharData?.shards ?? 0,
+                mythicShards: personalCharData?.mythicShards ?? 0,
             };
 
             const result: ICharacter2 = {
@@ -128,11 +132,10 @@ export class GlobalState implements IGlobalState {
     }
 
     static initMows(dbMows: Partial<IMowDb & IInsightsData>[], totalUsers?: number): Array<IMow> {
-        const mowsStatic = mowsData as IMowStatic[];
-        return mowsStatic.map(staticData => {
+        return mowsData.map(staticData => {
             const dbMow = dbMows?.find(c => c.id === staticData.id);
-            const initialRarity = rarityStringToNumber[staticData.initialRarity];
-            const initialRarityStars = rarityToStars[rarityStringToNumber[staticData.initialRarity]];
+            const initialRarity = RarityMapper.stringToNumber[staticData.initialRarity];
+            const initialRarityStars = RarityMapper.toStars[RarityMapper.stringToNumber[staticData.initialRarity]];
             const isReleased = staticData.releaseDate
                 ? this.isAtLeast3DaysBefore(new Date(staticData.releaseDate))
                 : true;
@@ -148,6 +151,7 @@ export class GlobalState implements IGlobalState {
                 secondaryAbilityLevel: dbMow?.secondaryAbilityLevel ?? 1,
                 unlocked: dbMow?.unlocked ?? false,
                 shards: dbMow?.shards ?? 0,
+                mythicShards: dbMow?.mythicShards ?? 0,
                 numberOfUnlocked:
                     totalUsers && dbMow?.numberOfUnlocked
                         ? Math.ceil((dbMow.numberOfUnlocked / totalUsers) * 100)
@@ -156,7 +160,13 @@ export class GlobalState implements IGlobalState {
                 statsByOwner: dbMow?.statsByOwner ?? [],
             };
 
-            result.power = CharactersPowerService.getCharacterAbilityPower(result);
+            const newStaticData = MowsService.resolveToStatic(staticData.id)!;
+            const mow2: IMow2 = {
+                ...newStaticData,
+                ...result,
+            };
+
+            result.power = CharactersPowerService.getCharacterAbilityPower(mow2);
 
             return result;
         });
@@ -188,7 +198,8 @@ export class GlobalState implements IGlobalState {
                     x.stars !== RarityStars.None ||
                     x.level !== 1 ||
                     x.xp !== 0 ||
-                    x.shards !== 0
+                    x.shards !== 0 ||
+                    x.mythicShards !== 0
             )
             .map(x => ({
                 name: x.name,
@@ -202,6 +213,7 @@ export class GlobalState implements IGlobalState {
                 level: x.level,
                 xp: x.xp,
                 shards: x.shards,
+                mythicShards: x.mythicShards,
             }));
 
         const mowsToDb: IMowDb[] = value.mows.map(x => ({
@@ -211,6 +223,7 @@ export class GlobalState implements IGlobalState {
             secondaryAbilityLevel: x.secondaryAbilityLevel,
             stars: x.stars,
             shards: x.shards,
+            mythicShards: x.mythicShards ?? 0,
             unlocked: x.unlocked,
         }));
 

@@ -1,30 +1,38 @@
-﻿import React, { useMemo } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+﻿import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
+import LinkIcon from '@mui/icons-material/Link';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
-import { PersonalGoalType, Rank } from 'src/models/enums';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useContext, useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
+
+import { charsUnlockShards } from 'src/models/constants';
+import { PersonalGoalType } from 'src/models/enums';
+import { StoreContext } from 'src/reducers/store.provider';
+import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+
+import { Rank, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
+
+import { ICharacter2 } from '@/fsd/4-entities/character';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
+import { StatsCalculatorService } from '@/fsd/4-entities/unit';
+
+import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import {
     CharacterRaidGoalSelect,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
     IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { charsUnlockShards, rarityToStars } from 'src/models/constants';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
-import { StarsImage } from 'src/v2/components/images/stars-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
-import LinkIcon from '@mui/icons-material/Link';
-import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import IconButton from '@mui/material/IconButton';
-import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
 import { XpTotal } from 'src/v2/features/goals/xp-total';
-import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
+
+import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
 interface Props {
     rows: CharacterRaidGoalSelect[];
@@ -33,11 +41,28 @@ interface Props {
 }
 
 export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) => {
+    const { characters } = useContext(StoreContext);
+
+    const getUnit = (unitId: string): ICharacter2 | undefined => {
+        return characters.find(x => x.snowprintId! === unitId);
+    };
+    const getUnitStars = (unitId: string): RarityStars => {
+        return getUnit(unitId)?.stars ?? 0;
+    };
+
+    const getUnitRank = (unitId: string): Rank => {
+        return getUnit(unitId)?.rank ?? Rank.Locked;
+    };
+
+    const getUnitRarity = (unitId: string): number => {
+        return getUnit(unitId)?.rarity ?? 0;
+    };
+
     const getGoalInfo = (goal: CharacterRaidGoalSelect, goalEstimate: IGoalEstimate) => {
         switch (goal.type) {
             case PersonalGoalType.Ascend: {
                 const isSameRarity = goal.rarityStart === goal.rarityEnd;
-                const minStars = rarityToStars[goal.rarityEnd];
+                const minStars = RarityMapper.toStars[goal.rarityEnd];
                 const isMinStars = minStars === goal.starsEnd;
 
                 const targetShards = ShardsService.getTargetShards(goal);
@@ -47,16 +72,16 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             <div className="flex-box gap5">
                                 {!isSameRarity && (
                                     <>
-                                        <RarityImage rarity={goal.rarityStart} /> <ArrowForward />
-                                        <RarityImage rarity={goal.rarityEnd} />
-                                        {!isMinStars && <StarsImage stars={goal.starsEnd} />}
+                                        <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
+                                        <RarityIcon rarity={goal.rarityEnd} />
+                                        {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
                                     </>
                                 )}
 
                                 {isSameRarity && (
                                     <>
-                                        <StarsImage stars={goal.starsStart} /> <ArrowForward />
-                                        <StarsImage stars={goal.starsEnd} />
+                                        <StarsIcon stars={goal.starsStart} /> <ArrowForward />
+                                        <StarsIcon stars={goal.starsEnd} />
                                     </>
                                 )}
                             </div>
@@ -76,12 +101,12 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                     <div>
                         <div className="flex-box between">
                             <div className="flex-box gap3">
-                                <RankImage rank={goal.rankStart} /> <ArrowForward />
-                                <RankImage rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
+                                <RankIcon rank={goal.rankStart} /> <ArrowForward />
+                                <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                                 {!!goal.upgradesRarity.length && (
                                     <div className="flex-box gap3">
                                         {goal.upgradesRarity.map(x => (
-                                            <RarityImage key={x} rarity={x} />
+                                            <RarityIcon key={x} rarity={x} />
                                         ))}
                                     </div>
                                 )}
@@ -115,7 +140,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             {!!goal.upgradesRarity.length && (
                                 <div className="flex-box gap3">
                                     {goal.upgradesRarity.map(x => (
-                                        <RarityImage key={x} rarity={x} />
+                                        <RarityIcon key={x} rarity={x} />
                                     ))}
                                 </div>
                             )}
@@ -213,7 +238,9 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
                     if (data) {
-                        return <CharacterImage icon={data.unitIcon} height={30} width={30} tooltip={data.unitName} />;
+                        return (
+                            <UnitShardIcon icon={data.unitRoundIcon} height={30} width={30} tooltip={data.unitName} />
+                        );
                     }
                 },
                 sortable: false,
@@ -248,6 +275,162 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                         return formatDateWithOrdinal(nextDate);
                     }
                 },
+            },
+            {
+                headerName: 'Health',
+                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = params;
+                    if (data) {
+                        if (data.type == PersonalGoalType.UpgradeRank) {
+                            return (
+                                <div className="flex gap-[3px] justify-left">
+                                    <MiscIcon icon="health" width={15} height={15} />
+                                    {StatsCalculatorService.calculateHealth(
+                                        data.unitId,
+                                        data.rarity,
+                                        getUnitStars(data.unitId),
+                                        data.rankStart,
+                                        StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
+                                    )}
+                                    <ArrowForward width={15} height={15} />
+                                    {StatsCalculatorService.calculateHealth(
+                                        data.unitId,
+                                        data.rarity,
+                                        getUnitStars(data.unitId),
+                                        data.rankEnd,
+                                        data.rankPoint5 ? 1 : 0
+                                    )}
+                                </div>
+                            );
+                        } else if (data.type == PersonalGoalType.Ascend) {
+                            return (
+                                <div className="flex gap-[3px] justify-left">
+                                    <MiscIcon icon="health" width={15} height={15} />
+                                    {StatsCalculatorService.calculateHealth(
+                                        data.unitId,
+                                        data.rarityStart,
+                                        data.starsStart,
+                                        getUnitRank(data.unitId),
+                                        StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
+                                    )}
+                                    <ArrowForward width={15} height={15} />
+                                    {StatsCalculatorService.calculateHealth(
+                                        data.unitId,
+                                        data.rarityEnd,
+                                        data.starsEnd,
+                                        getUnitRank(data.unitId),
+                                        StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
+                                    )}
+                                </div>
+                            );
+                        }
+                    }
+                },
+                maxWidth: 140,
+            },
+            {
+                headerName: 'Damage',
+                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = params;
+                    if (data) {
+                        if (data.type == PersonalGoalType.UpgradeRank) {
+                            return (
+                                <div className="flex gap-[3px] justify-left">
+                                    <MiscIcon icon="damage" width={15} height={15} />
+                                    {StatsCalculatorService.calculateDamage(
+                                        data.unitId,
+                                        data.rarity,
+                                        getUnitStars(data.unitId),
+                                        data.rankStart,
+                                        StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
+                                    )}
+                                    <ArrowForward width={15} height={15} />
+                                    {StatsCalculatorService.calculateDamage(
+                                        data.unitId,
+                                        data.rarity,
+                                        getUnitStars(data.unitId),
+                                        data.rankEnd,
+                                        data.rankPoint5 ? 1 : 0
+                                    )}
+                                </div>
+                            );
+                        } else if (data.type == PersonalGoalType.Ascend) {
+                            return (
+                                <div className="flex gap-[3px] justify-left">
+                                    <MiscIcon icon="damage" width={15} height={15} />
+                                    {StatsCalculatorService.calculateDamage(
+                                        data.unitId,
+                                        data.rarityStart,
+                                        data.starsStart,
+                                        getUnitRank(data.unitId),
+                                        StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
+                                    )}
+                                    <ArrowForward width={15} height={15} />
+                                    {StatsCalculatorService.calculateDamage(
+                                        data.unitId,
+                                        data.rarityEnd,
+                                        data.starsEnd,
+                                        getUnitRank(data.unitId),
+                                        StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
+                                    )}
+                                </div>
+                            );
+                        }
+                    }
+                },
+                maxWidth: 140,
+            },
+            {
+                headerName: 'Armor',
+                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = params;
+                    if (data) {
+                        if (data.type == PersonalGoalType.UpgradeRank) {
+                            return (
+                                <div className="flex gap-[3px] justify-left">
+                                    <MiscIcon icon="armour" width={15} height={15} />
+                                    {StatsCalculatorService.calculateArmor(
+                                        data.unitId,
+                                        data.rarity,
+                                        getUnitStars(data.unitId),
+                                        data.rankStart,
+                                        StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
+                                    )}
+                                    <ArrowForward width={15} height={15} />
+                                    {StatsCalculatorService.calculateArmor(
+                                        data.unitId,
+                                        data.rarity,
+                                        getUnitStars(data.unitId),
+                                        data.rankEnd,
+                                        data.rankPoint5 ? 1 : 0
+                                    )}
+                                </div>
+                            );
+                        } else if (data.type == PersonalGoalType.Ascend) {
+                            return (
+                                <div className="flex gap-[3px] justify-left">
+                                    <MiscIcon icon="armour" width={15} height={15} />
+                                    {StatsCalculatorService.calculateArmor(
+                                        data.unitId,
+                                        data.rarityStart,
+                                        data.starsStart,
+                                        getUnitRank(data.unitId),
+                                        StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
+                                    )}
+                                    <ArrowForward width={15} height={15} />
+                                    {StatsCalculatorService.calculateArmor(
+                                        data.unitId,
+                                        data.rarityEnd,
+                                        data.starsEnd,
+                                        getUnitRank(data.unitId),
+                                        StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
+                                    )}
+                                </div>
+                            );
+                        }
+                    }
+                },
+                maxWidth: 140,
             },
             {
                 headerName: 'Days left',
@@ -309,15 +492,13 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                         let params: string = '';
 
                         if (data.type === PersonalGoalType.UpgradeRank) {
-                            linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
-                            params = `?character=${data.unitName}&rankStart=${Rank[data.rankStart]}&rankEnd=${
-                                Rank[data.rankEnd]
-                            }&rankPoint5=${data.rankPoint5}`;
+                            linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                            params = `?charSnowprintId=${data.unitId}`;
                         }
 
                         if (data.type === PersonalGoalType.MowAbilities) {
-                            linkBase = isMobile ? '/mobile/learn/mowLookup' : '/learn/mowLookup';
-                            params = `?mow=${data.unitId}&pStart=${data.primaryStart}&pEnd=${data.primaryEnd}&sStart=${data.secondaryStart}&sEnd=${data.secondaryEnd}`;
+                            linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                            params = `?charSnowprintId=${data.unitId}`;
                         }
                         return (
                             <Button
@@ -326,7 +507,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                                 component={Link}
                                 to={linkBase + params}
                                 target={'_self'}>
-                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
+                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
                             </Button>
                         );
                     }

@@ -1,24 +1,24 @@
-﻿import React, { useCallback, useContext, useMemo } from 'react';
-import { Badge, Tooltip } from '@mui/material';
+﻿import { Badge, Tooltip } from '@mui/material';
+import { orderBy } from 'lodash';
+import React, { useCallback, useContext, useMemo } from 'react';
 
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { StarsImage } from 'src/v2/components/images/stars-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
-
-import { Rank } from 'src/models/enums';
 import { charsReleaseShards, charsUnlockShards } from 'src/models/constants';
+import { ICharacter2 } from 'src/models/interfaces';
 import { needToAscendCharacter, needToLevelCharacter } from 'src/shared-logic/functions';
+import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+
+import { numberToThousandsStringOld } from '@/fsd/5-shared/lib/number-to-thousands-string';
+import { Rank } from '@/fsd/5-shared/model';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
+
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
+import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
+import { CharactersValueService } from '@/fsd/4-entities/unit/characters-value.service';
+
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 
 import './character-tile.css';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-
-import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-import { ICharacter2 } from 'src/models/interfaces';
-import { orderBy } from 'lodash';
 
 const CharacterTileFn = ({
     character,
@@ -81,7 +81,7 @@ const CharacterTileFn = ({
                     {orderBy(character.statsByOwner, x => x.rank + x.activeAbilityLevel + x.passiveAbilityLevel).map(
                         x => (
                             <li key={x.owner} className="flex-box gap5">
-                                {x.owner} <RankImage rank={x.rank} size={20} /> A{x.activeAbilityLevel} P
+                                {x.owner} <RankIcon rank={x.rank} size={20} /> A{x.activeAbilityLevel} P
                                 {x.passiveAbilityLevel}
                             </li>
                         )
@@ -113,6 +113,8 @@ const CharacterTileFn = ({
                 Power: {numberToThousandsStringOld(CharactersPowerService.getCharacterPower(character))}
                 <br />
                 Blackstone: {numberToThousandsStringOld(CharactersValueService.getCharacterValue(character))}
+                <br />
+                Shards: {character.shards}
             </span>
         );
     }, [character]);
@@ -122,7 +124,7 @@ const CharacterTileFn = ({
             className="character-tile"
             style={{ opacity: tileOpacity, cursor: onCharacterClick && !disableClick ? 'pointer' : undefined }}
             onClick={!disableClick ? handleCharacterClick : undefined}>
-            <StarsImage stars={character.stars} />
+            <StarsIcon stars={character.stars} />
             <div>
                 <Tooltip placement="top" title={renderTooltipTitle}>
                     <Badge badgeContent={badgeContent} color={badgeColor} invisible={!viewContext.showBadges}>
@@ -139,8 +141,8 @@ const CharacterTileFn = ({
                 {viewContext.showCharacterLevel && renderCharacterLevel}
             </div>
             <div className="character-rarity-rank">
-                {viewContext.showCharacterRarity && <RarityImage rarity={character.rarity} />}
-                {isUnlocked && <RankImage rank={character.rank} />}
+                {viewContext.showCharacterRarity && <RarityIcon rarity={character.rarity} />}
+                {isUnlocked && <RankIcon rank={character.rank} />}
             </div>
             {!!character.numberOfUnlocked && (
                 <AccessibleTooltip title={renderUnlockStats}>

@@ -1,13 +1,16 @@
 ﻿import React, { useMemo } from 'react';
-import { RaritySelect } from 'src/shared-components/rarity-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
-import { CampaignsLocationsUsage, Rarity, RarityStars } from 'src/models/enums';
-import { NumbersInput } from 'src/shared-components/goals/numbers-input';
+
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
-import { getEnumValues } from 'src/shared-logic/functions';
+import { CampaignsLocationsUsage } from 'src/models/enums';
 import { ICampaignBattleComposed, IPersonalGoal } from 'src/models/interfaces';
+import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
+import { NumbersInput } from 'src/shared-components/goals/numbers-input';
+
+import { getEnumValues } from '@/fsd/5-shared/lib';
+import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
+
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 
 interface Props {
     currentRarity: Rarity;

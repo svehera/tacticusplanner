@@ -1,4 +1,5 @@
 ﻿import xpData from 'src/v2/data/xp.json';
+
 import { IXpEstimate, IXpLevel } from 'src/v2/features/characters/characters.models';
 
 export class CharactersXpService {
@@ -41,7 +42,12 @@ export class CharactersXpService {
     }
 
     static getLegendaryTomesCount(currLevel: number, currXp: number, targetLevel: number): IXpEstimate | null {
-        if (currLevel === 50 || targetLevel > 50 || targetLevel < 2 || currLevel === targetLevel) {
+        if (
+            currLevel === this.xpLevelThresholds.length ||
+            targetLevel > this.xpLevelThresholds.length ||
+            targetLevel < 2 ||
+            currLevel >= targetLevel
+        ) {
             return null;
         }
 

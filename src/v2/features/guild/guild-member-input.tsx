@@ -1,36 +1,42 @@
-﻿import React from 'react';
-import { IGuildMember } from 'src/models/interfaces';
-import { FlexBox } from 'src/v2/components/flex-box';
-import { TextField } from '@mui/material';
+﻿import { TextField } from '@mui/material';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { IGuildMember } from 'src/models/interfaces';
 
 interface Props {
     index: number;
     member: IGuildMember;
-    onUsernameChange: (value: string) => void;
-    onShareTokenChange: (value: string) => void;
+    onFieldChange: (field: keyof IGuildMember, value: string) => void;
 }
 
-export const GuildMemberInput: React.FC<Props> = ({ index, member, onShareTokenChange, onUsernameChange }) => {
+interface FieldConfig {
+    label: string;
+    field: keyof IGuildMember;
+}
+
+const MEMBER_FIELDS: FieldConfig[] = [
+    { field: 'username', label: 'Username' },
+    { field: 'shareToken', label: 'Share token' },
+    { field: 'inGameName', label: 'In-Game Name' },
+    { field: 'userId', label: 'In-Game UserId' },
+] as const;
+
+export const GuildMemberInput: React.FC<Props> = ({ index, member, onFieldChange }) => {
     return (
-        <FlexBox gap={5} style={{ minWidth: !isMobile ? 450 : 'unset' }}>
+        <div className="flex gap-3" style={{ minWidth: !isMobile ? 450 : 'unset' }}>
             <span style={{ minWidth: 25 }}>{index + 1}.</span>
-            <TextField
-                size={'small'}
-                label="Username"
-                value={member.username}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    onUsernameChange(event.target.value);
-                }}
-            />
-            <TextField
-                size={'small'}
-                label="Share token"
-                value={member.shareToken}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    onShareTokenChange(event.target.value);
-                }}
-            />
-        </FlexBox>
+            {MEMBER_FIELDS.map(({ field, label }) => (
+                <TextField
+                    key={field}
+                    size={'small'}
+                    label={label}
+                    value={member[field] ?? ''}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        onFieldChange(field, event.target.value);
+                    }}
+                />
+            ))}
+        </div>
     );
 };

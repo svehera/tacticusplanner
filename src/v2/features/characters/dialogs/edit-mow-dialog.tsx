@@ -1,32 +1,31 @@
-﻿import React, { useMemo, useState } from 'react';
-
+﻿import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, IconButton, Switch } from '@mui/material';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, IconButton, Switch } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import Button from '@mui/material/Button';
-
-import { IMow } from 'src/v2/features/characters/characters.models';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { Rarity, RarityStars } from 'src/models/enums';
-import { getEnumValues } from 'src/shared-logic/functions';
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { NumberInput } from 'src/v2/components/inputs/number-input';
-import { RaritySelect } from 'src/shared-components/rarity-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
-import { ArrowBack, ArrowForward } from '@mui/icons-material';
-import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
-import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
+import { getEnumValues } from 'src/shared-logic/functions';
+
+import { RarityStars, Rarity, Alliance } from '@/fsd/5-shared/model';
+import { StarsSelect, RaritySelect } from '@/fsd/5-shared/ui';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
+
+import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
+import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
+
+import { IMow2 } from 'src/v2/features/characters/characters.models';
 
 interface Props {
-    mow: IMow;
-    saveChanges: (mow: IMow) => void;
+    mow: IMow2;
+    saveChanges: (mow: IMow2) => void;
     isOpen: boolean;
     onClose: () => void;
-    showNextUnit?: (mow: IMow) => void;
-    showPreviousUnit?: (mow: IMow) => void;
+    showNextUnit?: (mow: IMow2) => void;
+    showPreviousUnit?: (mow: IMow2) => void;
     inventory: Record<string, number>;
     inventoryUpdate: (value: Record<string, number>) => void;
 }
@@ -44,15 +43,15 @@ export const EditMowDialog: React.FC<Props> = ({
     const [editedMow, setEditedMow] = useState(() => ({ ...mow }));
 
     const starsEntries = useMemo(() => {
-        const minStars = rarityToStars[editedMow.rarity];
-        const maxStars = rarityToMaxStars[editedMow.rarity];
+        const minStars = rarityToStars[editedMow.rarity as Rarity];
+        const maxStars = rarityToMaxStars[editedMow.rarity as Rarity];
 
         return getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
     }, [editedMow.rarity]);
 
     const rarityEntries: number[] = getEnumValues(Rarity);
 
-    const handleInputChange = (name: keyof IMow, value: boolean | number) => {
+    const handleInputChange = (name: keyof IMow2, value: boolean | number) => {
         setEditedMow(curr => ({
             ...curr,
             [name]: value,
@@ -68,9 +67,9 @@ export const EditMowDialog: React.FC<Props> = ({
                     </IconButton>
                 )}
                 <div className="flex-box gap10">
-                    <CharacterImage icon={mow.badgeIcon} />
+                    <UnitShardIcon icon={mow.roundIcon} />
                     <span>{mow.name}</span>
-                    <RarityImage rarity={mow.rarity} />
+                    <RarityIcon rarity={mow.rarity} />
                     <MiscIcon icon={'mow'} width={22} height={25} />
                 </div>
                 {showNextUnit && (
@@ -98,7 +97,7 @@ export const EditMowDialog: React.FC<Props> = ({
                         />
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                         <FormControlLabel
                             label="Unlocked"
                             control={
@@ -116,6 +115,15 @@ export const EditMowDialog: React.FC<Props> = ({
                             max={1000}
                             value={editedMow.shards}
                             valueChange={value => handleInputChange('shards', value)}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <NumberInput
+                            fullWidth
+                            label="Mythic Shards"
+                            max={1000}
+                            value={editedMow.mythicShards}
+                            valueChange={value => handleInputChange('mythicShards', value)}
                         />
                     </Grid>
 
@@ -139,13 +147,13 @@ export const EditMowDialog: React.FC<Props> = ({
                             </Grid>
                             <Grid item xs={12}>
                                 <MowUpgrades
-                                    mowId={editedMow.id}
-                                    alliance={editedMow.alliance}
+                                    mowId={editedMow.snowprintId}
+                                    alliance={editedMow.alliance as Alliance}
                                     primaryLevel={editedMow.primaryAbilityLevel}
                                     secondaryLevel={editedMow.secondaryAbilityLevel}
                                 />
                                 <MowUpgradesUpdate
-                                    mowId={editedMow.id}
+                                    mowId={editedMow.snowprintId}
                                     inventory={inventory}
                                     currPrimaryLevel={editedMow.primaryAbilityLevel}
                                     currSecondaryLevel={editedMow.secondaryAbilityLevel}

@@ -1,12 +1,8 @@
-﻿import {
-    ILegendaryEventSelectedTeams,
-    ILreTeam,
-    LegendaryEventData,
-    LreTrackId,
-    SetStateAction,
-} from '../models/interfaces';
-import { v4 } from 'uuid';
-import { LegendaryEventEnum } from '../models/enums';
+﻿import { v4 } from 'uuid';
+
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEventSelectedTeams, ILreTeam, LegendaryEventData, SetStateAction } from '../models/interfaces';
 
 export type LeSelectedTeamsAction =
     | {
@@ -24,7 +20,8 @@ export type LeSelectedTeamsAction =
           eventId: LegendaryEventEnum;
           teamId: string;
           name: string;
-          charactersIds: string[];
+          charSnowprintIds: string[];
+          expectedBattleClears?: number;
       }
     | SetStateAction<LegendaryEventData<ILegendaryEventSelectedTeams>>;
 
@@ -67,7 +64,7 @@ export const leSelectedTeamsReducer = (
             return { ...state, [eventId]: { ...legendaryEvent } };
         }
         case 'UpdateTeam': {
-            const { eventId, teamId, name, charactersIds } = action;
+            const { eventId, teamId, name, charSnowprintIds, expectedBattleClears } = action;
             const legendaryEvent = state[eventId];
 
             if (!legendaryEvent) {
@@ -82,7 +79,12 @@ export const leSelectedTeamsReducer = (
 
             legendaryEvent.teams = [...legendaryEvent.teams];
 
-            legendaryEvent.teams[currentTeamIndex] = { ...legendaryEvent.teams[currentTeamIndex], name, charactersIds };
+            legendaryEvent.teams[currentTeamIndex] = {
+                ...legendaryEvent.teams[currentTeamIndex],
+                name,
+                charSnowprintIds,
+                expectedBattleClears,
+            };
 
             return { ...state, [eventId]: { ...legendaryEvent } };
         }

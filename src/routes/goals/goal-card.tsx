@@ -1,31 +1,33 @@
-﻿import React, { useMemo } from 'react';
-import { PersonalGoalType, Rank } from 'src/models/enums';
-
+﻿import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LinkIcon from '@mui/icons-material/Link';
 import { Card, CardContent, CardHeader } from '@mui/material';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import React, { useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
 
-import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
 import { charsUnlockShards, rarityToStars } from 'src/models/constants';
+import { PersonalGoalType } from 'src/models/enums';
+import { StaticDataService } from 'src/services';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
+
+import { CampaignImage } from '@/fsd/4-entities/campaign/campaign.icon';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
+
+import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { StarsImage } from 'src/v2/components/images/stars-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { CampaignImage } from 'src/v2/components/images/campaign-image';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { isMobile } from 'react-device-detect';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import LinkIcon from '@mui/icons-material/Link';
-import { StaticDataService } from 'src/services';
-import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
-import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import { XpTotal } from 'src/v2/features/goals/xp-total';
+
+import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
 interface Props {
     goal: CharacterRaidGoalSelect;
@@ -68,16 +70,16 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             <div className="flex-box gap5">
                                 {!isSameRarity && (
                                     <>
-                                        <RarityImage rarity={goal.rarityStart} /> <ArrowForward />
-                                        <RarityImage rarity={goal.rarityEnd} />
-                                        {!isMinStars && <StarsImage stars={goal.starsEnd} />}
+                                        <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
+                                        <RarityIcon rarity={goal.rarityEnd} />
+                                        {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
                                     </>
                                 )}
 
                                 {isSameRarity && (
                                     <>
-                                        <StarsImage stars={goal.starsStart} /> <ArrowForward />
-                                        <StarsImage stars={goal.starsEnd} />
+                                        <StarsIcon stars={goal.starsStart} /> <ArrowForward />
+                                        <StarsIcon stars={goal.starsEnd} />
                                     </>
                                 )}
                             </div>
@@ -115,21 +117,19 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
             }
             case PersonalGoalType.UpgradeRank: {
                 const { xpEstimate } = goalEstimate;
-                const linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
-                const params = `?character=${goal.unitName}&rankStart=${Rank[goal.rankStart]}&rankEnd=${
-                    Rank[goal.rankEnd]
-                }&rankPoint5=${goal.rankPoint5}`;
+                const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                const params = `?charSnowprintId=${encodeURIComponent(goal.unitId)}`;
 
                 return (
                     <div>
                         <div className="flex-box between">
                             <div className="flex-box gap3">
-                                <RankImage rank={goal.rankStart} /> <ArrowForward />
-                                <RankImage rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
+                                <RankIcon rank={goal.rankStart} /> <ArrowForward />
+                                <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                                 {!!goal.upgradesRarity.length && (
                                     <div className="flex-box gap3">
                                         {goal.upgradesRarity.map(x => (
-                                            <RarityImage key={x} rarity={x} />
+                                            <RarityIcon key={x} rarity={x} />
                                         ))}
                                     </div>
                                 )}
@@ -154,14 +154,14 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             component={Link}
                             to={linkBase + params}
                             target={'_self'}>
-                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
+                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
                         </Button>
                     </div>
                 );
             }
             case PersonalGoalType.MowAbilities: {
-                const linkBase = isMobile ? '/mobile/learn/mowLookup' : '/learn/mowLookup';
-                const params = `?mow=${goal.unitId}&pStart=${goal.primaryStart}&pEnd=${goal.primaryEnd}&sStart=${goal.secondaryStart}&sEnd=${goal.secondaryEnd}`;
+                const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                const params = `?charSnowprintId=${encodeURIComponent(goal.unitId)}`;
                 const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
                 const targetShards = ShardsService.getTargetShardsForMow(goal);
@@ -186,7 +186,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             {!!goal.upgradesRarity.length && (
                                 <div className="flex-box gap3">
                                     {goal.upgradesRarity.map(x => (
-                                        <RarityImage key={x} rarity={x} />
+                                        <RarityIcon key={x} rarity={x} />
                                     ))}
                                 </div>
                             )}
@@ -224,7 +224,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             component={Link}
                             to={linkBase + params}
                             target={'_self'}>
-                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
+                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
                         </Button>
                     </div>
                 );
@@ -326,8 +326,8 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 title={
                     <div className="flex-box gap5">
                         <span>#{goal.priority}</span>
-                        <CharacterImage icon={goal.unitIcon} height={30} />
-                        <span style={{ fontSize: '1.2rem' }}>{goal.unitName}</span>
+                        <UnitShardIcon icon={goal.unitRoundIcon} height={30} />
+                        <span style={{ fontSize: '1.2rem' }}>{goal.unitName ?? goal.unitId}</span>
                     </div>
                 }
                 subheader={calendarDate}

@@ -1,13 +1,16 @@
-﻿import xpData from 'src/v2/data/xp.json';
+﻿import { groupBy, mapValues, sum } from 'lodash';
+
+import abilitiesLvlUpJson from 'src/v2/data/characters-lvl-up-abilities.json';
+import xpData from 'src/v2/data/xp.json';
+
+import { Rarity, Alliance } from '@/fsd/5-shared/model';
+
 import {
     ICharacterAbilitiesMaterialsTotal,
     ICharacterAbilityLevel,
     ICharacterAbilityLevelRaw,
     IXpLevel,
 } from 'src/v2/features/characters/characters.models';
-import abilitiesLvlUpJson from 'src/v2/data/characters-lvl-up-abilities.json';
-import { Alliance, Rarity } from 'src/models/enums';
-import { groupBy, mapValues, sum } from 'lodash';
 
 export class CharactersAbilitiesService {
     private static abilitiesLvlUpRaw: ICharacterAbilityLevelRaw[] = abilitiesLvlUpJson;
@@ -19,7 +22,12 @@ export class CharactersAbilitiesService {
     static readonly legendaryTomeApplyCost = 500 as const;
     static xpLevelThresholds: IXpLevel[] = xpData.xpLevelThresholds;
 
+    public static getMaximumAbilityLevel(): number {
+        return this.abilitiesLvlUpRaw.length + 1;
+    }
+
     public static getMaterials(levelStart: number, levelEnd: number): ICharacterAbilityLevel[] {
+        // console.trace('Getting materials for levels:', levelStart, 'to', levelEnd);
         return this.abilitiesLvlUp.slice(levelStart - 1, levelEnd - 1);
     }
 
@@ -57,7 +65,10 @@ export class CharactersAbilitiesService {
         if (level <= 35) {
             return Rarity.Epic;
         }
+        if (level <= 50) {
+            return Rarity.Legendary;
+        }
 
-        return Rarity.Legendary;
+        return Rarity.Mythic;
     }
 }

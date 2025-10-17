@@ -1,13 +1,15 @@
-﻿import React, { useEffect, useMemo, useState } from 'react';
+﻿import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControlLabel } from '@mui/material';
-import TrackChangesIcon from '@mui/icons-material/TrackChanges';
-import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
-import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
+import Dialog from '@mui/material/Dialog';
+import React, { useMemo, useState } from 'react';
+
 import { PersonalGoalType } from 'src/models/enums';
-import { CharactersRaidsGoal } from 'src/v2/features/goals/characters-raids-goal';
+import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
+import { CharactersRaidsGoal } from 'src/v2/features/goals/characters-raids-goal';
+import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
 
 interface Props {
     goals: CharacterRaidGoalSelect[];
@@ -16,11 +18,11 @@ interface Props {
 }
 
 export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelectChange }) => {
-    const [openGoals, setOpenGoals] = React.useState<boolean>(false);
+    const [openGoals, setOpenGoals] = useState<boolean>(false);
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit | null>(null);
 
-    const [currentGoalsSelect, setCurrentGoalsSelect] = React.useState<CharacterRaidGoalSelect[]>(goals);
+    const [currentGoalsSelect, setCurrentGoalsSelect] = useState<CharacterRaidGoalSelect[]>(goals);
 
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentGoalsSelect(value => value.map(x => ({ ...x, include: event.target.checked })));
@@ -37,7 +39,12 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
 
     const handleGoalEdit = (goalId: string) => {
         const goalToEdit = goals.find(x => x.goalId === goalId);
-        const characterToEdit = units.find(x => x.name === goalToEdit?.unitName);
+        // August 2025: we're transitioning between IDs for characters. Previously be used a short version
+        // of the character's name (i.e. Ragnar, Darkstrider). Now we're moving to IDs from snowprints internal data (datamined).
+        // During this transition, it's possibly for legacy goals to have legacy IDs, which are then overwritten with
+        // Snowprint IDs. For this reason, we cater to both IDs for lookup here, with the expectation we can consolidate
+        // on snowprintIDs down the track.
+        const characterToEdit = units.find(x => x.id === goalToEdit?.unitId || x.snowprintId === goalToEdit?.unitId);
 
         if (goalToEdit && characterToEdit) {
             setEditGoal(goalToEdit);

@@ -1,9 +1,11 @@
-﻿import { IMaterialRaid } from 'src/models/interfaces';
-import React from 'react';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import { Warning } from '@mui/icons-material';
+﻿import { Warning } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
+import React from 'react';
+
+import { RarityMapper } from '@/fsd/5-shared/model';
+
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
+
 import { IUpgradeRaid } from 'src/v2/features/goals/goals.models';
 
 interface Props {
@@ -16,8 +18,8 @@ export const MaterialItemTitle: React.FC<Props> = ({ upgradeRaid }) => {
             <div className="flex-box column">
                 <UpgradeImage
                     material={upgradeRaid.label}
-                    rarity={upgradeRaid.rarity}
                     iconPath={upgradeRaid.iconPath}
+                    rarity={RarityMapper.rarityToRarityString(upgradeRaid.rarity)}
                 />
                 <span>
                     {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}

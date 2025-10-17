@@ -1,14 +1,13 @@
-﻿import React, { useContext } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import Button from '@mui/material/Button';
-
+﻿import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Box from '@mui/material/Box';
-
-import { DispatchContext } from '../../reducers/store.provider';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
-import { GlobalState } from '../../models/global-state';
+import React, { useContext } from 'react';
+
 import { defaultData } from '../../models/constants';
+import { GlobalState } from '../../models/global-state';
+import { DispatchContext } from '../../reducers/store.provider';
 
 export const OverrideDataDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: (proceed: boolean) => void }) => {
     const { setStore } = useContext(DispatchContext);
@@ -25,12 +24,12 @@ export const OverrideDataDialog = ({ isOpen, onClose }: { isOpen: boolean; onClo
                 <Box>
                     <h3>Decide how to handle local changes</h3>
                     <p>
-                        <span style={{ fontWeight: 'bold' }}>Use Remote data</span> if you sure that remote data is more
-                        up to date than yuor local data
+                        <span style={{ fontWeight: 'bold' }}>Use Remote data</span> if you are sure that the remote data
+                        is more up to date than your local data
                     </p>
                     <p>
-                        <span style={{ fontWeight: 'bold' }}>Use Local data</span> if you sure there are changes that
-                        you want to preserve
+                        <span style={{ fontWeight: 'bold' }}>Use Local data</span> if you are sure that there are
+                        changes that you want to preserve
                     </p>
                     <p>
                         <span style={{ fontWeight: 'bold' }}>Backup</span> your data with{' '}

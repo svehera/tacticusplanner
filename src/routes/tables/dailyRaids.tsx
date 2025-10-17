@@ -1,28 +1,34 @@
-﻿import React, { useContext, useMemo } from 'react';
-import { enqueueSnackbar } from 'notistack';
+﻿import { enqueueSnackbar } from 'notistack';
+import React, { useContext, useEffect, useMemo } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
-import { IDailyRaidsFilters } from 'src/models/interfaces';
+import { ICampaignsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { RaidsHeader } from 'src/routes/tables/raids-header';
+import { RaidsPlan } from 'src/routes/tables/raids-plan';
+import { TodayRaids } from 'src/routes/tables/todayRaids';
+
+import { useAuth } from '@/fsd/5-shared/model';
+
+import { CharactersService } from '@/fsd/4-entities/character';
+import { MowsService } from '@/fsd/4-entities/mow';
+import { UpgradesService as FsdUpgradesService } from '@/fsd/4-entities/upgrade';
+
+import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { ActiveGoalsDialog } from 'src/v2/features/goals/active-goals-dialog';
 import {
     CharacterRaidGoalSelect,
     IEstimatedShards,
     IEstimatedUpgrades,
     IItemRaidLocation,
 } from 'src/v2/features/goals/goals.models';
+import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { LocationsFilter } from 'src/v2/features/goals/locations-filter';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
-import { TodayRaids } from 'src/routes/tables/todayRaids';
-import { ActiveGoalsDialog } from 'src/v2/features/goals/active-goals-dialog';
-import { RaidsPlan } from 'src/routes/tables/raids-plan';
-import { RaidsHeader } from 'src/routes/tables/raids-header';
-
 import './dailyRaids.scss';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { useAuth } from '@/contexts/auth';
-import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -39,9 +45,11 @@ export const DailyRaids = () => {
         inventory,
     } = useContext(StoreContext);
 
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
+
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
     const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);
-    const [units, setUnits] = React.useState<IUnit[]>([...storeCharacters, ...storeMows]);
+    const [units, setUnits] = React.useState<IUnit[]>([...storeCharacters, ...resolvedMows]);
     const [raidedLocations, setRaidedLocations] = React.useState<IItemRaidLocation[]>(dailyRaids.raidedLocations);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
@@ -49,6 +57,14 @@ export const DailyRaids = () => {
     }, [goals, units]);
 
     const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
+
+    const location = useLocation();
+    const [searchParams] = useSearchParams();
+    const [charSnowprintId, setCharSnowprintId] = React.useState<string | null>(searchParams.get('charSnowprintId'));
+
+    useEffect(() => {
+        setCharSnowprintId(searchParams.get('charSnowprintId'));
+    }, [location]);
 
     const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation | null) => {
         setHasChanges(true);
@@ -60,7 +76,8 @@ export const DailyRaids = () => {
                     upgrade: upgradeId,
                     value,
                 });
-                enqueueSnackbar(`Added ${value} items for ${upgradeId}`, {
+                const upgradeName = FsdUpgradesService.recipeDataFull[upgradeId]?.label ?? upgradeId;
+                enqueueSnackbar(`Added ${value} items for ${upgradeName}`, {
                     variant: 'success',
                 });
             }
@@ -87,7 +104,8 @@ export const DailyRaids = () => {
                 character: characterId,
                 value: value,
             });
-            enqueueSnackbar(`Added ${value} shards for ${characterId}`, {
+            const character = CharactersService.getUnit(characterId);
+            enqueueSnackbar(`Added ${value} shards for ${character?.shortName ?? characterId}`, {
                 variant: 'success',
             });
         }
@@ -116,17 +134,19 @@ export const DailyRaids = () => {
 
     const refresh = () => {
         setUpgrades({ ...inventory.upgrades });
-        setUnits([...storeCharacters, ...storeMows]);
+        setUnits([...storeCharacters, ...resolvedMows]);
         setRaidedLocations([...dailyRaids.raidedLocations]);
         setHasChanges(false);
     };
 
-    const sync = () => {
-        syncWithTacticus(viewPreferences.apiIntegrationSyncOptions).then(() => {
-            setTimeout(() => {
-                refresh();
-            }, 300);
-        });
+    const sync = async () => {
+        console.log('Syncing with Tacticus...');
+        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+        // Inline refresh after successful sync
+        setUpgrades({ ...inventory.upgrades });
+        setUnits([...storeCharacters, ...resolvedMows]);
+        setRaidedLocations([...raidedLocations]);
+        setHasChanges(false);
     };
 
     const resetDay = () => {
@@ -134,12 +154,12 @@ export const DailyRaids = () => {
         setHasChanges(false);
         setTimeout(() => {
             setUpgrades({ ...inventory.upgrades });
-            setUnits([...storeCharacters, ...storeMows]);
+            setUnits([...storeCharacters, ...resolvedMows]);
             setRaidedLocations([]);
         }, 100);
     };
 
-    const saveFilterChanges = (filters: IDailyRaidsFilters) => {
+    const saveFilterChanges = (filters: ICampaignsFilters) => {
         dispatch.dailyRaids({
             type: 'UpdateFilters',
             value: filters,
@@ -159,7 +179,10 @@ export const DailyRaids = () => {
     }, [shardsGoals, dailyRaidsPreferences, dailyRaids.filters]);
 
     const actualEnergy = useMemo(() => {
-        return dailyRaidsPreferences.dailyEnergy - estimatedShards.energyPerDay - dailyRaidsPreferences.shardsEnergy;
+        return (
+            dailyRaidsPreferences.dailyEnergy -
+            Math.min(estimatedShards.energyPerDay, dailyRaidsPreferences.shardsEnergy)
+        );
     }, [dailyRaidsPreferences.dailyEnergy, dailyRaidsPreferences.shardsEnergy, estimatedShards.energyPerDay]);
 
     const estimatedRanks: IEstimatedUpgrades = useMemo(() => {
@@ -178,9 +201,7 @@ export const DailyRaids = () => {
 
     const hasShardsEnergy = dailyRaidsPreferences.shardsEnergy > 0 || estimatedShards.energyPerDay > 0;
     const energyDescription = hasShardsEnergy
-        ? `${actualEnergy} = ${dailyRaidsPreferences.dailyEnergy} - ${
-              estimatedShards.energyPerDay + dailyRaidsPreferences.shardsEnergy
-          }`
+        ? `${actualEnergy} = ${dailyRaidsPreferences.dailyEnergy} - ${Math.min(estimatedShards.energyPerDay, dailyRaidsPreferences.shardsEnergy)}`
         : actualEnergy.toString();
 
     return (
@@ -203,6 +224,7 @@ export const DailyRaids = () => {
                 upgrades={inventory.upgrades}
                 updateInventory={saveInventoryUpdateChanges}
                 updateInventoryAny={() => setHasChanges(true)}
+                scrollToCharSnowprintId={charSnowprintId ?? undefined}
             />
 
             <TodayRaids

@@ -1,0 +1,1 @@
+export { recipeDataByName } from '../data';

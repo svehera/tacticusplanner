@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+
 import { getImageUrl } from 'src/shared-logic/functions';
 
 interface Props {
@@ -6,7 +7,11 @@ interface Props {
 }
 
 export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>((props, ref) => {
-    const imageUrl = getImageUrl(`portraits/resized/${props.icon}`);
+    const imagePath = props.icon.includes('snowprint_assets/')
+        ? props.icon // Use full snowprint path as-is
+        : props.icon; // Prepend portraits/resized/ for simple filenames
+
+    const imageUrl = getImageUrl(imagePath);
 
     return (
         <img
@@ -18,6 +23,15 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
             width={60}
             height={80}
             alt={props.icon}
+            onError={e => {
+                console.error('❌ Failed to load image:', {
+                    icon: props.icon,
+                    imagePath: imagePath,
+                    resolvedUrl: imageUrl,
+                    error: e,
+                });
+            }}
+            onLoad={() => {}}
         />
     );
 });

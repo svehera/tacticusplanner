@@ -1,5 +1,7 @@
-﻿import { Rarity } from 'src/models/enums';
-import { v4 } from 'uuid';
+﻿import { v4 } from 'uuid';
+
+import { Rarity } from '@/fsd/5-shared/model';
+
 import { GameMode } from 'src/v2/features/teams/teams.enums';
 
 export interface IPersonalTeam {

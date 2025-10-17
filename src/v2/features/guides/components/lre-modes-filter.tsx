@@ -1,7 +1,10 @@
 ﻿import React, { useMemo, useState } from 'react';
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+
 import { IMenuOption } from 'src/v2/models/menu-option';
-import { getLre, lreCharacters } from 'src/v2/features/guides/guides.contstants';
+
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
+
+import { getLre, lreCharacters } from 'src/v2/features/guides/guides.constants';
 import { LreCharacter } from 'src/v2/features/guides/guides.enums';
 import { anyOption, lreSections } from 'src/v2/features/teams/teams.constants';
 

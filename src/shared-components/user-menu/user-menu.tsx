@@ -1,34 +1,37 @@
-﻿import React, { ChangeEvent, useContext, useRef, useState } from 'react';
-import Box from '@mui/material/Box';
-import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
+﻿import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
+import DownloadIcon from '@mui/icons-material/Download';
+import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import RegisterIcon from '@mui/icons-material/PersonAdd';
-import UploadIcon from '@mui/icons-material/Upload';
-import SyncIcon from '@mui/icons-material/Sync';
 import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
-import { convertData, PersonalDataLocalStorage } from 'src/services';
-import DownloadIcon from '@mui/icons-material/Download';
-import { usePopUpControls } from 'src/hooks/pop-up-controls';
-import { RegisterUserDialog } from './register-user-dialog';
-import { LoginUserDialog } from './login-user-dialog';
-import { useAuth } from 'src/contexts/auth';
-import { enqueueSnackbar } from 'notistack';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { IPersonalData2 } from 'src/models/interfaces';
-import { GlobalState } from 'src/models/global-state';
-import { RestoreBackupDialog } from './restore-backup-dialog';
-import ListItemText from '@mui/material/ListItemText';
-import { OverrideDataDialog } from './override-data-dialog';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import GroupWorkIcon from '@mui/icons-material/GroupWork';
-import { UserRole } from 'src/models/enums';
-import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
+import SyncIcon from '@mui/icons-material/Sync';
+import UploadIcon from '@mui/icons-material/Upload';
+import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
+import Box from '@mui/material/Box';
+import ListItemText from '@mui/material/ListItemText';
+import { enqueueSnackbar } from 'notistack';
+import React, { ChangeEvent, useContext, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { usePopupManager } from 'react-popup-manager';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { GlobalState } from 'src/models/global-state';
+import { IPersonalData2 } from 'src/models/interfaces';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { convertData, PersonalDataLocalStorage } from 'src/services';
+import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
+
+import { useAuth, UserRole } from '@/fsd/5-shared/model';
+import { usePopUpControls } from '@/fsd/5-shared/ui';
+
 import { TacticusIntegrationDialog } from 'src/v2/features/tacticus-integration/tacticus-integration.dialog';
+
+import { LoginUserDialog } from './login-user-dialog';
+import { OverrideDataDialog } from './override-data-dialog';
+import { RegisterUserDialog } from './register-user-dialog';
+import { RestoreBackupDialog } from './restore-backup-dialog';
 
 export const UserMenu = () => {
     const store = useContext(StoreContext);
@@ -180,6 +183,8 @@ export const UserMenu = () => {
     function syncWithTacticus(): void {
         popupManager.open(TacticusIntegrationDialog, {
             tacticusApiKey: userInfo.tacticusApiKey,
+            tacticusUserId: userInfo.tacticusUserId,
+            tacticusGuildApiKey: userInfo.tacticusGuildApiKey,
             initialSyncOptions: store.viewPreferences.apiIntegrationSyncOptions,
             onClose: () => {},
         });
@@ -190,23 +195,19 @@ export const UserMenu = () => {
             <input ref={inputRef} style={{ display: 'none' }} type="file" accept=".json" onChange={handleFileUpload} />
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span style={{ fontSize: 16, fontWeight: 700 }}>Hi, {username}</span>
-                <Badge
-                    color={hasRejectedGuides ? 'error' : 'warning'}
-                    badgeContent={hasRejectedGuides ? userInfo.rejectedTeamsCount : userInfo.pendingTeamsCount}>
-                    <IconButton
-                        onClick={userMenuControls.handleClick}
-                        size="small"
-                        sx={{ ml: 2 }}
-                        aria-controls={userMenuControls.open ? 'account-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={userMenuControls.open ? 'true' : undefined}>
-                        {isAuthenticated ? (
-                            <Avatar {...stringAvatar(username)}></Avatar>
-                        ) : (
-                            <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
-                        )}
-                    </IconButton>
-                </Badge>
+                <IconButton
+                    onClick={userMenuControls.handleClick}
+                    size="small"
+                    sx={{ ml: 2 }}
+                    aria-controls={userMenuControls.open ? 'account-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={userMenuControls.open ? 'true' : undefined}>
+                    {isAuthenticated ? (
+                        <Avatar {...stringAvatar(username)}></Avatar>
+                    ) : (
+                        <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
+                    )}
+                </IconButton>
             </div>
             <Menu
                 anchorEl={userMenuControls.anchorEl}
@@ -289,7 +290,7 @@ export const UserMenu = () => {
 
                 <Divider />
 
-                {userInfo.role === UserRole.admin && (
+                {[UserRole.admin, UserRole.moderator].includes(userInfo.role) && (
                     <MenuItem onClick={() => setShowAdminTools(true)}>
                         <ListItemIcon>
                             <SupervisorAccountIcon />

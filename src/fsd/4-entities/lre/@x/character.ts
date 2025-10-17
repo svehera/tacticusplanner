@@ -1,0 +1,1 @@
+export { LegendaryEventEnum } from '../enums';

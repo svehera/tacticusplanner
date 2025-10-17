@@ -1,9 +1,13 @@
-﻿import React from 'react';
-import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
+﻿import Button from '@mui/material/Button';
+import React from 'react';
+
+import { RarityMapper } from '@/fsd/5-shared/model';
+
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
+
 import { IUpgradeRaid, IItemRaidLocation } from 'src/v2/features/goals/goals.models';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import Button from '@mui/material/Button';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
 
 interface Props {
     acquiredCount: number;
@@ -21,8 +25,8 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
             <div className="flex-box column">
                 <UpgradeImage
                     material={upgradeRaid.label}
-                    rarity={upgradeRaid.rarity}
                     iconPath={upgradeRaid.iconPath}
+                    rarity={RarityMapper.rarityToRarityString(upgradeRaid.rarity)}
                     tooltip={
                         <div>
                             {upgradeRaid.label}
@@ -49,10 +53,12 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
             <ul style={{ width: '100%', paddingInlineStart: 15 }}>
                 {upgradeRaid.raidLocations.map(location => {
                     const maxObtained = Math.round(location.farmedItems);
-                    const defaultItemsObtained =
+                    const defaultItemsObtained = Math.max(
                         maxObtained + acquiredCount > upgradeRaid.requiredCount
                             ? upgradeRaid.requiredCount - acquiredCount
-                            : maxObtained;
+                            : maxObtained,
+                        0
+                    );
 
                     return (
                         <li

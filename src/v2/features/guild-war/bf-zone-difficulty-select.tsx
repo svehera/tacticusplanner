@@ -1,11 +1,15 @@
-﻿import React, { useMemo } from 'react';
-import { FormControl, MenuItem, Select } from '@mui/material';
+﻿import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
-import { Difficulty, Rarity } from 'src/models/enums';
+import React from 'react';
+
+import { Difficulty } from 'src/models/enums';
 import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
-import { FlexBox } from 'src/v2/components/flex-box';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { Rarity } from '@/fsd/5-shared/model';
+import { FlexBox } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
 type Props = {
     value: Difficulty;
@@ -22,7 +26,7 @@ export const BfZoneDifficultySelect: React.FC<Props> = ({ value, valueChange }) 
                     if (slotsCount) {
                         return (
                             <FlexBox key={rarity} gap={3}>
-                                <RarityImage rarity={rarity} /> x{slotsCount}
+                                <RarityIcon rarity={rarity} /> x{slotsCount}
                             </FlexBox>
                         );
                     }

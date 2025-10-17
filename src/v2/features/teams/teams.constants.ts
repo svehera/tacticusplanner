@@ -1,6 +1,8 @@
 ﻿import { IMenuOption } from 'src/v2/models/menu-option';
+
+import { Faction } from '@/fsd/5-shared/model';
+
 import { GameMode, GuildRaidBoss, GwMode, TaMode } from 'src/v2/features/teams/teams.enums';
-import { Faction } from 'src/models/enums';
 
 export const anyOption: IMenuOption = { label: 'Any', selected: false, value: 'any' };
 
@@ -18,6 +20,11 @@ export const gameModes: IMenuOption[] = [
     {
         value: GameMode.guildWar,
         label: 'Guild War',
+        selected: false,
+    },
+    {
+        value: GameMode.survival,
+        label: 'Survival',
         selected: false,
     },
 ];
@@ -43,6 +50,11 @@ export const guildRaidBosses: IMenuOption[] = [
     {
         value: GuildRaidBoss.avatar,
         label: 'Avatar',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.cawl,
+        label: 'Belisarius Cawl',
         selected: false,
     },
     {
@@ -96,6 +108,16 @@ export const guildRaidPrimes: IMenuOption[] = [
     {
         value: GuildRaidBoss.avatar + rightSidePrimeSuffix,
         label: 'Eldryon (Avatar)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.cawl + leftSidePrimeSuffix,
+        label: "Tan Gi'da (Cawl)",
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.cawl + rightSidePrimeSuffix,
+        label: 'Actus (Cawl)',
         selected: false,
     },
     {
@@ -225,6 +247,9 @@ export const grEncounterToFaction: Record<string, Faction> = {
     [GuildRaidBoss.avatar]: Faction.Aeldari,
     [GuildRaidBoss.avatar + leftSidePrimeSuffix]: Faction.Aeldari,
     [GuildRaidBoss.avatar + rightSidePrimeSuffix]: Faction.Aeldari,
+    [GuildRaidBoss.cawl]: Faction.AdeptusMechanicus,
+    [GuildRaidBoss.cawl + leftSidePrimeSuffix]: Faction.AdeptusMechanicus,
+    [GuildRaidBoss.cawl + rightSidePrimeSuffix]: Faction.AdeptusMechanicus,
     [GuildRaidBoss.ghazghkull]: Faction.Orks,
     [GuildRaidBoss.ghazghkull + leftSidePrimeSuffix]: Faction.Orks,
     [GuildRaidBoss.ghazghkull + rightSidePrimeSuffix]: Faction.Orks,

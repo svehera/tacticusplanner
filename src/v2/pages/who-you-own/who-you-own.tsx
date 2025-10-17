@@ -1,44 +1,51 @@
-﻿import React, { useCallback, useContext, useMemo, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import { isMobile } from 'react-device-detect';
+﻿import Box from '@mui/material/Box';
 import { sum } from 'lodash';
-
-import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { ViewControls } from 'src/v2/features/characters/components/view-controls';
-import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
-import { IMow, IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
-import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
-import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
-
-import { ShareRoster } from 'src/v2/features/share/share-roster';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
-import { ICharacter2 } from 'src/models/interfaces';
-import { useAuth } from 'src/contexts/auth';
+
+import { useAuth, UnitType } from '@/fsd/5-shared/model';
+
+import { ICharacter2 } from '@/fsd/4-entities/character';
+import { CharactersService as FsdCharactersService } from '@/fsd/4-entities/character/characters.service';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { IUnit } from '@/fsd/4-entities/unit';
+
+import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
+import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { UnitType } from 'src/v2/features/characters/units.enums';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
+import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
+import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
+import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
 import { EditMowDialog } from 'src/v2/features/characters/dialogs/edit-mow-dialog';
+import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
+import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
+import { ShareRoster } from 'src/v2/features/share/share-roster';
 
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+    const resolvedCharacters = useMemo(
+        () => FsdCharactersService.resolveStoredCharacters(charactersDefault),
+        [charactersDefault]
+    );
     const dispatch = useContext(DispatchContext);
     const navigate = useNavigate();
 
     const { token: isLoggedIn, shareToken: isRosterShared } = useAuth();
 
-    const [viewControls, setViewControls] = useState<IViewControls>({
+    const [viewControls, setViewControls] = useState<ICharactersViewControls>({
         filterBy: viewPreferences.wyoFilter,
         orderBy: viewPreferences.wyoOrder,
     });
     const [nameFilter, setNameFilter] = useState<string | null>(null);
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
     const [editedInventory, setEditedInventory] = React.useState<Record<string, number>>({});
-    const [editedMow, setEditedMow] = React.useState<IMow | null>(null);
+    const [editedMow, setEditedMow] = React.useState<IMow2 | null>(null);
 
     const [searchParams] = useSearchParams();
 
@@ -56,8 +63,12 @@ export const WhoYouOwn = () => {
     const charactersView = isCharactersView(viewControls.orderBy);
 
     const charactersFiltered = useMemo(() => {
-        return CharactersService.filterUnits([...charactersDefault, ...mows], viewControls.filterBy, nameFilter);
-    }, [viewControls.filterBy, nameFilter, mows, charactersDefault]);
+        return CharactersService.filterUnits(
+            [...resolvedCharacters, ...resolvedMows],
+            viewControls.filterBy,
+            nameFilter
+        );
+    }, [viewControls.filterBy, nameFilter, resolvedMows, resolvedCharacters]);
 
     const factions = useMemo(() => {
         return CharactersService.orderByFaction(
@@ -78,13 +89,13 @@ export const WhoYouOwn = () => {
         );
     }, [factions, viewControls.orderBy]);
 
-    const updatePreferences = useCallback((value: IViewControls) => {
+    const updatePreferences = useCallback((value: ICharactersViewControls) => {
         setViewControls(value);
         dispatch.viewPreferences({ type: 'Update', setting: 'wyoOrder', value: value.orderBy });
         dispatch.viewPreferences({ type: 'Update', setting: 'wyoFilter', value: value.filterBy });
     }, []);
 
-    const updateMow = useCallback((mow: IMow) => {
+    const updateMow = useCallback((mow: IMow2) => {
         endEditUnit();
         dispatch.inventory({
             type: 'DecrementUpgradeQuantity',
@@ -129,7 +140,7 @@ export const WhoYouOwn = () => {
                     {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
                     <TeamGraph units={charactersFiltered} />
                 </RosterHeader>
-                <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
+                <CharactersViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
 
                 {factionsView && <FactionsGrid factions={factions} onCharacterClick={startEditUnit} />}
 
@@ -154,7 +165,7 @@ export const WhoYouOwn = () => {
 
                 {editedMow && (
                     <EditMowDialog
-                        key={editedMow.id}
+                        key={editedMow.snowprintId}
                         mow={editedMow}
                         saveChanges={updateMow}
                         isOpen={!!editedMow}

@@ -1,6 +1,7 @@
 ﻿import React from 'react';
-import { IFaqItem } from './faq.models';
+
 import { FaqItem } from './faq-item';
+import { IFaqItem } from './faq.models';
 
 export const FaqCategory = ({ categoryName, items }: { categoryName: string; items: IFaqItem[] }) => (
     <div>

@@ -1,10 +1,20 @@
-﻿import React, { useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle, Step, StepLabel, Stepper, TextField } from '@mui/material';
+﻿import { DialogActions, DialogContent, DialogTitle, Step, StepLabel, Stepper, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import { IPersonalTeam, PersonalTeam } from 'src/v2/features/teams/teams.models';
-import { GameMode } from 'src/v2/features/teams/teams.enums';
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+import Dialog from '@mui/material/Dialog';
+import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { ICharacter2 } from 'src/models/interfaces';
+import { getEnumValues } from 'src/shared-logic/functions';
+
+import { Rarity } from '@/fsd/5-shared/model';
+import { RaritySelect } from '@/fsd/5-shared/ui';
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
+
+import { IMow2 } from 'src/v2/features/characters/characters.models';
+import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';
+import { TeamView } from 'src/v2/features/teams/components/team-view';
 import {
     gameModes,
     guildRaidBosses,
@@ -12,22 +22,14 @@ import {
     gwSubModes,
     taSubModes,
 } from 'src/v2/features/teams/teams.constants';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { getEnumValues } from 'src/shared-logic/functions';
-import { Rarity } from 'src/models/enums';
-import { RaritySelect } from 'src/shared-components/rarity-select';
-import { ICharacter2 } from 'src/models/interfaces';
-import { IMow } from 'src/v2/features/characters/characters.models';
-import { TeamView } from 'src/v2/features/teams/components/team-view';
-import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';
-import { isMobile } from 'react-device-detect';
+import { GameMode } from 'src/v2/features/teams/teams.enums';
+import { IPersonalTeam, PersonalTeam } from 'src/v2/features/teams/teams.models';
 
 interface Props {
     onClose: () => void;
     addTeam: (team: IPersonalTeam) => void;
     characters: ICharacter2[];
-    mows: IMow[];
+    mows: IMow2[];
 }
 
 export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addTeam }) => {
@@ -37,12 +39,12 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
     const [teamName, setTeamName] = useState<string>('Team');
     const [rarityCap, setRarityCap] = useState(Rarity.Legendary);
     const [team, setTeam] = useState<ICharacter2[]>([]);
-    const [mow, setMow] = useState<IMow | null>(null);
+    const [mow, setMow] = useState<IMow2 | null>(null);
 
     const [isOpenSelectDialog, setIsOpenSelectDialog] = useState<boolean>(false);
 
     const openSelectDialog = () => setIsOpenSelectDialog(true);
-    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow | null) => {
+    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | null) => {
         setTeam(selectedTeam);
         setMow(mow);
         setIsOpenSelectDialog(false);

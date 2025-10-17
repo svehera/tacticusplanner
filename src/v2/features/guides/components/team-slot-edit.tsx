@@ -1,13 +1,17 @@
-﻿import React, { useState } from 'react';
-import { ITeamSlot } from 'src/v2/features/guides/guides.models';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { SlotType } from 'src/v2/features/guides/guides.enums';
-import { Tooltip } from '@mui/material';
+﻿import { Tooltip } from '@mui/material';
+import React, { useState } from 'react';
+
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { isCharacter } from 'src/v2/features/characters/units.functions';
+
+import { UnitType } from '@/fsd/5-shared/model';
+
+import { IUnit } from '@/fsd/4-entities/unit';
+import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
+
+import { SlotType } from 'src/v2/features/guides/guides.enums';
+import { ITeamSlot } from 'src/v2/features/guides/guides.models';
 
 import './team-slot-edit.scss';
-import { UnitType } from 'src/v2/features/characters/units.enums';
 
 interface Props {
     units: IUnit[];
@@ -45,14 +49,14 @@ export const TeamSlotEdit: React.FC<Props> = ({
                     style={{ cursor: editSlot ? 'pointer' : 'default' }}
                     onClick={() => editUnitSlot(index)}>
                     <CharacterPortraitImage
-                        icon={slot.unitType === UnitType.character ? 'unset.webp' : 'unsetMow.webp'}
+                        icon={slot.unitType === UnitType.character ? 'portraits/unset.webp' : 'unsetMow.webp'}
                         key={index}
                     />
                 </div>
             );
         }
 
-        const portraitIcon = isCharacter(unit) ? unit.icon : unit.portraitIcon;
+        const portraitIcon = isCharacter(unit) ? unit.icon : unit.roundIcon;
 
         return (
             <Tooltip placement={'top'} title={unit.name} key={unitId}>

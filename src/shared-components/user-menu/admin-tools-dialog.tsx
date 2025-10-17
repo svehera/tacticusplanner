@@ -1,18 +1,18 @@
-﻿import React, { useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle, FormControl, Input } from '@mui/material';
-import Button from '@mui/material/Button';
-
-import Box from '@mui/material/Box';
-
-import { enqueueSnackbar } from 'notistack';
-import InputLabel from '@mui/material/InputLabel';
-import { changeUserRoleApi, getUsersApi, resetUserPasswordApi } from 'src/api/api-functions';
-import { IGetUser } from 'src/api/api-interfaces';
-import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+﻿import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DownloadIcon from '@mui/icons-material/Download';
+import { DialogActions, DialogContent, DialogTitle, FormControl, Input } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
+import InputLabel from '@mui/material/InputLabel';
+import { enqueueSnackbar } from 'notistack';
+import React, { useState } from 'react';
+
+import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+
+import { resetUserPasswordApi, changeUserRoleApi, getUsersApi } from './admin.endpoints';
+import { IGetUser } from './admin.model';
 
 export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [resetPasswordForm, setResetPasswordForm] = useState({
@@ -46,10 +46,10 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
     const searchUsers = () => {
         getUsersApi(resetPasswordForm.username)
             .then(result => {
-                setUsersList(result.data);
-                if (!result.data.length) {
+                if (!result.data?.length) {
                     enqueueSnackbar('No users', { variant: 'warning' });
                 }
+                setUsersList(result.data ?? []);
             })
             .catch(() => enqueueSnackbar('Failed to find users', { variant: 'error' }));
     };

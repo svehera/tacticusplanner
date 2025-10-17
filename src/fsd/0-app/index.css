@@ -1,0 +1,586 @@
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme' layer(theme);
+@import 'tailwindcss/utilities' layer(utilities);
+/*@import 'tailwindcss';*/
+@plugin 'tailwindcss-animate';
+
+@theme {
+    --color-border: var(--border);
+    --color-input: var(--input);
+
+    --color-ring: var(--ring);
+
+    --color-bg: var(--bg);
+    --color-fg: var(--fg);
+
+    --color-primary: var(--primary);
+    --color-primary-fg: var(--primary-fg);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-fg: var(--secondary-fg);
+
+    --color-accent: var(--accent);
+    --color-accent-fg: var(--accent-fg);
+
+    --color-success: var(--success);
+    --color-success-fg: var(--success-fg);
+
+    --color-danger: var(--danger);
+    --color-danger-fg: var(--danger-fg);
+
+    --color-warning: var(--warning);
+    --color-warning-fg: var(--warning-fg);
+
+    --color-muted: var(--muted);
+    --color-muted-fg: var(--muted-fg);
+
+    --color-overlay: var(--overlay);
+    --color-overlay-fg: var(--overlay-fg);
+
+    --color-navbar: var(--navbar);
+    --color-navbar-fg: var(--navbar-fg);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-fg: var(--sidebar-fg);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+    :root {
+        --bg: var(--color-white);
+        --fg: var(--color-slate-950);
+
+        --primary: var(--color-blue-600);
+        --primary-fg: var(--color-white);
+
+        --secondary: var(--color-slate-100);
+        --secondary-fg: var(--color-slate-950);
+
+        --overlay: var(--color-white);
+        --overlay-fg: var(--color-slate-950);
+
+        --accent: var(--color-blue-600);
+        --accent-fg: var(--color-white);
+
+        --muted: var(--color-slate-100);
+        --muted-fg: var(--color-slate-600);
+
+        --success: var(--color-emerald-600);
+        --success-fg: var(--color-white);
+
+        --warning: var(--color-amber-400);
+        --warning-fg: var(--color-amber-950);
+
+        --danger: var(--color-red-600);
+        --danger-fg: var(--color-red-50);
+
+        --border: var(--color-slate-200);
+        --input: var(--color-slate-300);
+        --ring: var(--color-blue-600);
+
+        --navbar: #1976d2;
+        --navbar-fg: var(--color-slate-950);
+
+        --sidebar: var(--color-slate-50);
+        --sidebar-fg: var(--color-slate-950);
+
+        --chart-1: var(--color-blue-600);
+        --chart-2: var(--color-blue-400);
+        --chart-3: var(--color-blue-300);
+        --chart-4: var(--color-blue-200);
+        --chart-5: var(--color-blue-100);
+
+        --radius-lg: 0.5rem;
+        --radius-xs: calc(var(--radius-lg) * 0.5);
+        --radius-sm: calc(var(--radius-lg) * 0.75);
+        --radius-md: calc(var(--radius-lg) * 0.9);
+        --radius-xl: calc(var(--radius-lg) * 1.25);
+        --radius-2xl: calc(var(--radius-lg) * 1.5);
+        --radius-3xl: calc(var(--radius-lg) * 2);
+        --radius-4xl: calc(var(--radius-lg) * 3);
+
+        /*Rarity*/
+        --rarity-common: #cdb3a0;
+        --rarity-uncommon: #f9cb9c;
+        --rarity-rare: #efefef;
+        --rarity-epic: #ffe599;
+        --rarity-legendary: #cfe2f3;
+        --rarity-mythic: #d84300;
+
+        /*Ranks*/
+        --rank-stone1: #cdb3a0;
+        --rank-stone2: #b09a8a;
+        --rank-stone3: #8c827a;
+
+        --rank-iron1: #d9ead3;
+        --rank-iron2: #b6d7a8;
+        --rank-iron3: #93c47d;
+
+        --rank-bronze1: #f9cb9c;
+        --rank-bronze2: #f6b26b;
+        --rank-bronze3: #e69138;
+
+        --rank-silver1: #efefef;
+        --rank-silver2: #d9d9d9;
+        --rank-silver3: #cccccc;
+
+        --rank-gold1: #ffe599;
+        --rank-gold2: #ffd966;
+        --rank-gold3: #f1c232;
+
+        --rank-diamond1: #cfe2f3;
+        --rank-diamond2: #9fc5e8;
+        --rank-diamond3: #6fa8dc;
+
+        --rank-adamantine1: #d9886c;
+    }
+
+    .dark {
+        --bg: rgb(37, 38, 36);
+        --fg: rgba(214, 207, 195, 0.87);
+
+        --primary: var(--color-blue-600);
+        --primary-fg: var(--color-white);
+
+        --secondary: rgb(35, 35, 34);
+        --secondary-fg: var(--color-slate-50);
+
+        --accent: var(--color-blue-600);
+        --accent-fg: var(--color-white);
+
+        --muted: oklch(0.21 0.006 285.885);
+        --muted-fg: var(--color-slate-400);
+
+        --overlay: rgb(35, 35, 34);
+        --overlay-fg: var(--color-slate-50);
+
+        --success: var(--color-emerald-600);
+        --success-fg: var(--color-white);
+
+        --warning: var(--color-amber-400);
+        --warning-fg: var(--color-amber-950);
+
+        --danger: var(--color-red-600);
+        --danger-fg: var(--color-red-50);
+
+        --border: oklch(0.272 0.044 257.287);
+        --input: oklch(0.292 0.044 257.287);
+        --ring: var(--color-blue-600);
+
+        --navbar: rgb(45, 90, 134);
+        --navbar-fg: var(--color-slate-50);
+
+        --sidebar: oklch(0.158 0.042 265.755);
+        --sidebar-fg: var(--color-slate-50);
+
+        --chart-1: var(--color-blue-700);
+        --chart-2: var(--color-blue-500);
+        --chart-3: var(--color-blue-400);
+        --chart-4: var(--color-blue-300);
+        --chart-5: var(--color-blue-200);
+
+        /*Rarity*/
+        --rarity-common: #8a705d;
+        --rarity-uncommon: #b3845f;
+        --rarity-rare: #6b6b6b;
+        --rarity-epic: #a88a48;
+        --rarity-legendary: #5a7892;
+        --rarity-mythic: #d9886c;
+
+        /*Ranks*/
+        --rank-stone1: #8a705d;
+        --rank-stone2: #7a6455;
+        --rank-stone3: #5f554f;
+
+        --rank-iron1: #7a8c70;
+        --rank-iron2: #5c784d;
+        --rank-iron3: #466137;
+
+        --rank-bronze1: #b3845f;
+        --rank-bronze2: #a06a3d;
+        --rank-bronze3: #814a1c;
+
+        --rank-silver1: #6b6b6b;
+        --rank-silver2: #5a5a5a;
+        --rank-silver3: #4a4a4a;
+
+        --rank-gold1: #a88a48;
+        --rank-gold2: #96742e;
+        --rank-gold3: #7a5c20;
+
+        --rank-diamond1: #5a7892;
+        --rank-diamond2: #3e678d;
+        --rank-diamond3: #2b4b71;
+
+        --rank-adamantine1: #d9886c;
+    }
+
+    h2 {
+        @apply text-2xl font-bold mb-2 mt-2;
+    }
+
+    h3 {
+        @apply text-lg font-bold mb-2 mt-2;
+    }
+
+    /*!*Workaround for tailwind default styles reset. Need to do this partially to not break everything*!*/
+    *,
+    ::backdrop,
+    :after,
+    :before {
+        box-sizing: border-box;
+        border: 0 solid;
+        margin: 0;
+        padding: 0;
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+        font: inherit;
+        font-feature-settings: inherit;
+        font-variation-settings: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        opacity: 1;
+        background-color: #0000;
+        border-radius: 0;
+    }
+}
+
+html,
+body {
+    margin: 0;
+    font-family:
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @apply bg-[var(--bg)] text-[var(--fg)];
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+}
+
+.alpha {
+    background-color: #93c47d;
+}
+
+.beta {
+    background-color: #c9daf8;
+}
+
+.gamma {
+    background-color: #fce5cd;
+}
+.stone1 {
+    background-color: var(--rank-stone1);
+}
+.stone2 {
+    background-color: var(--rank-stone2);
+}
+.stone3 {
+    background-color: var(--rank-stone3);
+}
+
+.iron1 {
+    background-color: var(--rank-iron1);
+}
+.iron2 {
+    background-color: var(--rank-iron2);
+}
+.iron3 {
+    background-color: var(--rank-iron3);
+}
+
+.bronze1 {
+    background-color: var(--rank-bronze1);
+}
+.bronze2 {
+    background-color: var(--rank-bronze2);
+}
+.bronze3 {
+    background-color: var(--rank-bronze3);
+}
+
+.silver1 {
+    background-color: var(--rank-silver1);
+}
+.silver2 {
+    background-color: var(--rank-silver2);
+}
+.silver3 {
+    background-color: var(--rank-silver3);
+}
+
+.gold1 {
+    background-color: var(--rank-gold1);
+}
+.gold2 {
+    background-color: var(--rank-gold2);
+}
+.gold3 {
+    background-color: var(--rank-gold3);
+}
+
+.diamond1 {
+    background-color: var(--rank-diamond1);
+}
+.diamond2 {
+    background-color: var(--rank-diamond2);
+}
+.diamond3 {
+    background-color: var(--rank-diamond3);
+}
+
+.adamantine1 {
+    background-color: var(--rank-adamantine1);
+}
+
+.ag-theme-material {
+    --ag-grid-size: 5px;
+    --ag-row-hover-color: transparent;
+    --ag-colum-hover-color: transparent;
+
+    .ag-cell-wrap-text {
+        word-break: unset;
+        white-space: break-spaces;
+    }
+
+    &.auto-teams {
+        .ag-header-cell {
+            padding: 0;
+        }
+
+        .ag-cell {
+            padding: 0;
+        }
+    }
+}
+
+.common {
+    background-color: var(--rarity-common);
+}
+
+.uncommon {
+    background-color: var(--rarity-uncommon);
+}
+
+.rare {
+    background-color: var(--rarity-rare);
+}
+
+.epic {
+    background-color: var(--rarity-epic);
+}
+
+.legendary {
+    background-color: var(--rarity-legendary);
+}
+
+.mythic {
+    background-color: var(--rarity-mythic);
+}
+
+.upgrade {
+    background-color: #012a41;
+}
+
+.common-upgrade {
+    border: 2px solid #cdb3a0;
+}
+
+.uncommon-upgrade {
+    border: 2px solid #f9cb9c;
+}
+
+.rare-upgrade {
+    border: 2px solid #efefef;
+}
+
+.epic-upgrade {
+    border: 2px solid #ffe599;
+}
+
+.legendary-upgrade {
+    border: 2px solid #cfe2f3;
+}
+
+.mythic-upgrade {
+    border: 2px solid #d9886c;
+}
+
+.flex-box {
+    display: flex;
+    align-items: center;
+
+    &.column {
+        flex-direction: column;
+    }
+
+    &.start {
+        align-items: flex-start;
+    }
+
+    &.wrap {
+        flex-wrap: wrap;
+    }
+
+    &.mobile-wrap {
+        @media (max-width: 700px) {
+            flex-wrap: wrap;
+        }
+    }
+
+    &.between {
+        justify-content: space-between;
+    }
+
+    &.around {
+        justify-content: space-around;
+    }
+
+    &.center {
+        justify-content: center;
+    }
+
+    &.full-width {
+        width: 100%;
+    }
+
+    .gap1 {
+        gap: 1px;
+    }
+    .gap2 {
+        gap: 2px;
+    }
+    .gap3 {
+        gap: 3px;
+    }
+    .gap4 {
+        gap: 4px;
+    }
+    .gap5 {
+        gap: 5px;
+    }
+    .gap6 {
+        gap: 6px;
+    }
+    .gap7 {
+        gap: 7px;
+    }
+    .gap8 {
+        gap: 8px;
+    }
+    .gap9 {
+        gap: 9px;
+    }
+    .gap10 {
+        gap: 10px;
+    }
+    .gap11 {
+        gap: 11px;
+    }
+    .gap12 {
+        gap: 12px;
+    }
+    .gap13 {
+        gap: 13px;
+    }
+    .gap14 {
+        gap: 14px;
+    }
+    .gap15 {
+        gap: 15px;
+    }
+    .gap16 {
+        gap: 16px;
+    }
+    .gap17 {
+        gap: 17px;
+    }
+    .gap18 {
+        gap: 18px;
+    }
+    .gap19 {
+        gap: 19px;
+    }
+    .gap20 {
+        gap: 20px;
+    }
+
+    .p1 {
+        padding: 1px;
+    }
+    .p2 {
+        padding: 2px;
+    }
+    .p3 {
+        padding: 3px;
+    }
+    .p4 {
+        padding: 4px;
+    }
+    .p5 {
+        padding: 5px;
+    }
+    .p6 {
+        padding: 6px;
+    }
+    .p7 {
+        padding: 7px;
+    }
+    .p8 {
+        padding: 8px;
+    }
+    .p9 {
+        padding: 9px;
+    }
+    .p10 {
+        padding: 10px;
+    }
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+input.item-quantity-input::-webkit-outer-spin-button,
+input.item-quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input.item-quantity-input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+/* styles.css */
+.center-header-text .ag-header-cell-label {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}

@@ -1,18 +1,20 @@
-﻿import React, { useState } from 'react';
-import HelpIcon from '@mui/icons-material/Help';
+﻿import HelpIcon from '@mui/icons-material/Help';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { Rank, Rarity, RarityStars } from 'src/models/enums';
-import { FlexBox } from 'src/v2/components/flex-box';
-import { AgGridReact } from 'ag-grid-react';
-import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
-import { rarityCaps } from 'src/v2/features/characters/characters.contants';
-import { IRarityCap } from 'src/v2/features/characters/characters.models';
-import { StarsImage } from 'src/v2/components/images/stars-image';
 import IconButton from '@mui/material/IconButton';
+import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useState } from 'react';
+
+import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
+import { FlexBox } from '@/fsd/5-shared/ui';
+import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
+
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
+
+import { rarityCaps } from 'src/v2/features/characters/characters.constants';
+import { IRarityCap } from 'src/v2/features/characters/characters.models';
 
 export const PotentialInfo: React.FC = () => {
     const [open, setOpen] = React.useState(false);
@@ -36,7 +38,7 @@ export const PotentialInfo: React.FC = () => {
             cellRenderer: (params: ICellRendererParams<IRarityCap, Rarity>) => {
                 const { value } = params;
 
-                return <RarityImage rarity={value!} />;
+                return <RarityIcon rarity={value!} />;
             },
         },
         {
@@ -45,7 +47,7 @@ export const PotentialInfo: React.FC = () => {
             cellRenderer: (params: ICellRendererParams<IRarityCap, Rank>) => {
                 const { value } = params;
 
-                return <RankImage rank={value!} />;
+                return <RankIcon rank={value!} />;
             },
         },
         {
@@ -54,7 +56,7 @@ export const PotentialInfo: React.FC = () => {
             cellRenderer: (params: ICellRendererParams<IRarityCap, RarityStars>) => {
                 const { value } = params;
 
-                return <StarsImage stars={value!} />;
+                return <StarsIcon stars={value!} />;
             },
         },
         {
@@ -76,7 +78,7 @@ export const PotentialInfo: React.FC = () => {
                         {rarities.map(rarity => (
                             <li key={rarity}>
                                 <FlexBox gap={5}>
-                                    <RarityImage rarity={rarity} /> {Rarity[rarity]}
+                                    <RarityIcon rarity={rarity} /> {Rarity[rarity]}
                                 </FlexBox>
                             </li>
                         ))}

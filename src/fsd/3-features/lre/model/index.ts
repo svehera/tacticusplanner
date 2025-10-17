@@ -1,0 +1,10 @@
+export { AunShiLegendaryEvent } from './1-aun-shi.le';
+export { ShadowSunLegendaryEvent } from './2-shadow-sun.le';
+export { RagnarLegendaryEvent } from './3-ragnar.le';
+export { VitruviusLegendaryEvent } from './4-vitruvius.le';
+export { KharnLegendaryEvent } from './5-kharn.le';
+export { MephistonLegendaryEvent } from './6-mephiston.le';
+export { PatermineLegendaryEvent } from './7-patermine.le';
+export { DanteLegendaryEvent } from './8-dante.le';
+export { TrajannLegendaryEvent } from './9-trajann.le';
+export { LuciusLegendaryEvent } from './10-lucius.le';

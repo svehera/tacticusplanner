@@ -1,11 +1,14 @@
-﻿import React from 'react';
+﻿import { Tooltip } from '@mui/material';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+
+import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
 
 import './units-grid.scss';
-import { isMobile } from 'react-device-detect';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter } from 'src/v2/features/characters/units.functions';
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { Tooltip } from '@mui/material';
 
 interface Props {
     units: IUnit[];
@@ -17,10 +20,10 @@ export const UnitsGrid: React.FC<Props> = ({ units, onUnitClick, selectedUnits }
     const renderPortrait = (unitId: string, index: number) => {
         const unit = units.find(x => x.id === unitId);
         if (!unit) {
-            return <CharacterPortraitImage icon={'unset.webp'} key={index} />;
+            return <CharacterPortraitImage icon={'portraits/unset.webp'} key={index} />;
         }
 
-        const portraitIcon = isCharacter(unit) ? unit.icon : unit.portraitIcon;
+        const portraitIcon = isCharacter(unit) ? unit.icon : unit.roundIcon;
         const isSelected = selectedUnits.includes(unit.id);
 
         return (

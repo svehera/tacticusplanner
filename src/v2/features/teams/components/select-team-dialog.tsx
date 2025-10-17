@@ -1,27 +1,30 @@
-﻿import React, { useMemo, useState } from 'react';
-
-import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
+﻿import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import { ICharacter2 } from 'src/models/interfaces';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { Alliance, Rarity } from 'src/models/enums';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
-import { TeamView } from 'src/v2/features/teams/components/team-view';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
+import Dialog from '@mui/material/Dialog';
+import { orderBy } from 'lodash';
+import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useDebounceValue } from 'usehooks-ts';
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+
+import { ICharacter2 } from 'src/models/interfaces';
 import { IMenuOption } from 'src/v2/models/menu-option';
-import { orderBy } from 'lodash';
+
+import { Rarity, Alliance } from '@/fsd/5-shared/model';
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
+
+import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
+
+import { IMow2, IUnit } from 'src/v2/features/characters/characters.models';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
+import { TeamView } from 'src/v2/features/teams/components/team-view';
 
 type Props = {
     units: IUnit[];
     team: ICharacter2[];
-    activeMow: IMow | null;
+    activeMow: IMow2 | null;
     rarityCap: Rarity;
-    onClose: (team: ICharacter2[], mow: IMow | null) => void;
+    onClose: (team: ICharacter2[], mow: IMow2 | null) => void;
 };
 
 type OrderBy = 'rank' | 'faction' | 'power';
@@ -39,14 +42,14 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
 
     const handleCharacterSelect = (unit: IUnit) => {
         setLineup(curr => {
-            if (curr.some(x => x.name === unit.name)) {
-                return curr.filter(x => x.name !== unit.name);
+            if (curr.some(x => x.id === unit.id)) {
+                return curr.filter(x => x.id !== unit.id);
             } else {
-                if (lineup.length === 5) {
+                if (curr.length === 5) {
                     return curr;
                 }
 
-                const newChar = units.find(x => x.name === unit.id);
+                const newChar = units.find(x => x.id === unit.id);
 
                 if (newChar && isCharacter(newChar)) {
                     return [...curr, newChar];

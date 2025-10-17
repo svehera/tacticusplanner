@@ -1,81 +1,37 @@
-﻿import {
-    Campaign,
-    CharacterReleaseRarity,
-    DailyRaidsStrategy,
-    Difficulty,
-    LegendaryEventEnum,
-    PersonalGoalType,
-    Rank,
-    Rarity,
-    RarityStars,
-    RarityString,
-} from './enums';
-import { ICampaignsProgress, ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
-import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
-import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
-import { VitruviusLegendaryEvent } from './legendary-events/vitruvius.le';
-import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
-import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
-import { v4 } from 'uuid';
+﻿import { v4 } from 'uuid';
+
+import { Rank, Rarity, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
+
+import { ICampaignsProgress, Campaign } from '@/fsd/4-entities/campaign';
+import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
+
 import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
-import { KharnLegendaryEvent } from 'src/models/legendary-events/kharn.le';
-import { MephistonLegendaryEvent } from 'src/models/legendary-events/mephiston.le';
-import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
-import { DanteLegendaryEvent } from 'src/models/legendary-events/dante.le';
 
-export const rarityStringToNumber: Record<RarityString, Rarity> = {
-    [RarityString.Common]: Rarity.Common,
-    [RarityString.Uncommon]: Rarity.Uncommon,
-    [RarityString.Rare]: Rarity.Rare,
-    [RarityString.Epic]: Rarity.Epic,
-    [RarityString.Legendary]: Rarity.Legendary,
-};
-
-export const rarityToStars: Record<Rarity, RarityStars> = {
-    [Rarity.Common]: RarityStars.None,
-    [Rarity.Uncommon]: RarityStars.TwoStars,
-    [Rarity.Rare]: RarityStars.FourStars,
-    [Rarity.Epic]: RarityStars.RedOneStar,
-    [Rarity.Legendary]: RarityStars.RedThreeStars,
-};
-
-export const rarityToMaxStars: Record<Rarity, RarityStars> = {
-    [Rarity.Common]: RarityStars.TwoStars,
-    [Rarity.Uncommon]: RarityStars.FourStars,
-    [Rarity.Rare]: RarityStars.RedOneStar,
-    [Rarity.Epic]: RarityStars.RedThreeStars,
-    [Rarity.Legendary]: RarityStars.BlueStar,
-};
-
-export const rarityToMaxRank: Record<Rarity, Rank> = {
-    [Rarity.Common]: Rank.Iron1,
-    [Rarity.Uncommon]: Rank.Bronze1,
-    [Rarity.Rare]: Rank.Silver1,
-    [Rarity.Epic]: Rank.Gold1,
-    [Rarity.Legendary]: Rank.Diamond3,
-};
+import { DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
+import { ICharProgression, IPersonalData2 } from './interfaces';
 
 export const rankToLevel: Record<Rank, number> = {
     [Rank.Locked - 1]: 0,
     [Rank.Locked]: 0,
-    [Rank.Stone1]: 3,
-    [Rank.Stone2]: 5,
-    [Rank.Stone3]: 8,
-    [Rank.Iron1]: 11,
-    [Rank.Iron2]: 14,
-    [Rank.Iron3]: 17,
-    [Rank.Bronze1]: 20,
-    [Rank.Bronze2]: 23,
-    [Rank.Bronze3]: 26,
-    [Rank.Silver1]: 29,
-    [Rank.Silver2]: 32,
-    [Rank.Silver3]: 35,
-    [Rank.Gold1]: 38,
-    [Rank.Gold2]: 41,
-    [Rank.Gold3]: 44,
-    [Rank.Diamond1]: 47,
-    [Rank.Diamond2]: 50,
+    [Rank.Stone1]: 1,
+    [Rank.Stone2]: 3,
+    [Rank.Stone3]: 5,
+    [Rank.Iron1]: 8,
+    [Rank.Iron2]: 11,
+    [Rank.Iron3]: 14,
+    [Rank.Bronze1]: 17,
+    [Rank.Bronze2]: 20,
+    [Rank.Bronze3]: 23,
+    [Rank.Silver1]: 26,
+    [Rank.Silver2]: 29,
+    [Rank.Silver3]: 32,
+    [Rank.Gold1]: 35,
+    [Rank.Gold2]: 38,
+    [Rank.Gold3]: 41,
+    [Rank.Diamond1]: 44,
+    [Rank.Diamond2]: 47,
     [Rank.Diamond3]: 50,
+    [Rank.Adamantine1]: 55,
 };
 
 export const rankToRarity: Record<Rank, Rarity> = {
@@ -98,6 +54,7 @@ export const rankToRarity: Record<Rank, Rarity> = {
     [Rank.Diamond1]: Rarity.Legendary,
     [Rank.Diamond2]: Rarity.Legendary,
     [Rank.Diamond3]: Rarity.Legendary,
+    [Rank.Adamantine1]: Rarity.Mythic,
 };
 
 export const charsProgression: Record<number, ICharProgression> = {
@@ -120,55 +77,13 @@ export const charsProgression: Record<number, ICharProgression> = {
 
     [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 150, orbs: 10, rarity: Rarity.Legendary },
     [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 250, orbs: 15, rarity: Rarity.Legendary },
-    [Rarity.Legendary + RarityStars.BlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.OneBlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
+    [Rarity.Mythic + RarityStars.OneBlueStar]: { mythicShards: 20, orbs: 10, rarity: Rarity.Mythic },
+
+    [Rarity.Mythic + RarityStars.TwoBlueStars]: { mythicShards: 30, orbs: 10, rarity: Rarity.Mythic },
+    [Rarity.Mythic + RarityStars.ThreeBlueStars]: { mythicShards: 50, orbs: 15, rarity: Rarity.Mythic },
+    [Rarity.Mythic + RarityStars.MythicWings]: { mythicShards: 100, orbs: 20, rarity: Rarity.Mythic },
 };
-
-export const charsUnlockShards: Record<Rarity, number> = {
-    [Rarity.Common]: 40,
-    [Rarity.Uncommon]: 80,
-    [Rarity.Rare]: 130,
-    [Rarity.Epic]: 250,
-    [Rarity.Legendary]: 500,
-};
-
-export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
-    [CharacterReleaseRarity.Common]: 40,
-    [CharacterReleaseRarity.Uncommon]: 100,
-    [CharacterReleaseRarity.Rare]: 280,
-    [CharacterReleaseRarity.Epic]: 400,
-    [CharacterReleaseRarity.LegendaryOld]: 150,
-    [CharacterReleaseRarity.Legendary]: 400,
-};
-
-export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
-    switch (id) {
-        case LegendaryEventEnum.AunShi:
-            return new AunShiLegendaryEvent(characters);
-        case LegendaryEventEnum.Dante:
-            return new DanteLegendaryEvent(characters);
-        case LegendaryEventEnum.Kharn:
-            return new KharnLegendaryEvent(characters);
-        case LegendaryEventEnum.Mephiston:
-            return new MephistonLegendaryEvent(characters);
-        case LegendaryEventEnum.Patermine:
-            return new PatermineLegendaryEvent(characters);
-        case LegendaryEventEnum.Ragnar:
-            return new RagnarLegendaryEvent(characters);
-        case LegendaryEventEnum.Shadowsun:
-            return new ShadowSunLegendaryEvent(characters);
-        case LegendaryEventEnum.Vitruvius:
-            return new VitruviusLegendaryEvent(characters);
-        default:
-            return new ShadowSunLegendaryEvent(characters);
-    }
-};
-export const isTabletOrMobileMediaQuery = '(max-width: 1000px)';
-
-export const pooEmoji = String.fromCodePoint(parseInt('1F4A9', 16));
-export const starEmoji = String.fromCodePoint(parseInt('1F31F', 16));
-
-export const discordInvitationLink = 'https://discord.gg/8mcWKVAYZf';
-export const bmcLink = 'https://www.buymeacoffee.com/tacticusplanner';
 
 const defaultCampaignsProgress: ICampaignsProgress = {
     Indomitus: 75,
@@ -197,6 +112,17 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     'Adeptus Mechanicus Extremis Challenge': 0,
 
     Onslaught: 0,
+
+    [Campaign.TS]: 0,
+    [Campaign.TSC]: 0,
+    [Campaign.TE]: 0,
+    [Campaign.TEC]: 0,
+
+    // T'au Empire campaign event
+    [Campaign.TAS]: 0,
+    [Campaign.TASC]: 0,
+    [Campaign.TAE]: 0,
+    [Campaign.TAEC]: 0,
 };
 
 export const defaultGWLayout: IGWLayoutZone[] = [
@@ -231,7 +157,7 @@ export const defaultData: IPersonalData2 = {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesCount: [],
+            enemiesMinCount: null,
         },
         raidedLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
@@ -262,6 +188,7 @@ export const defaultData: IPersonalData2 = {
         inventoryShowPlusMinus: true,
         goalsTableView: false,
         lreGridView: false,
+        lreGoalsPreview: false,
         lreTileShowUnitIcon: true,
         lreTileShowUnitRarity: true,
         lreTileShowUnitRank: true,
@@ -270,6 +197,7 @@ export const defaultData: IPersonalData2 = {
         lreTileShowUnitBias: true,
         lreTileShowUnitActiveAbility: true,
         lreTileShowUnitPassiveAbility: true,
+        lreTileShowUnitHealTraits: true,
         myProgressShowCoreCharacters: true,
         apiIntegrationSyncOptions: ['roster', 'inventory', 'campaignProgress', 'raidedLocations'],
     },
@@ -402,7 +330,7 @@ export const defaultData: IPersonalData2 = {
     },
 };
 
-export const goalsLimit = 50;
+export const goalsLimit = 100;
 
 export const idToCampaign: Record<string, Campaign> = {
     campaign1: Campaign.I,
@@ -424,4 +352,16 @@ export const idToCampaign: Record<string, Campaign> = {
     eliteMirror2: Campaign.FoCME,
     eliteMirror3: Campaign.OME,
     eliteMirror4: Campaign.SHME,
+
+    eventCampaign1: Campaign.AMS,
+    eventCampaign2: Campaign.TS,
+    eventCampaign3: Campaign.TAS,
 };
+
+// Re-export from RarityMapper for backward compatibility
+export const rarityToStars = RarityMapper.toStars;
+export const rarityToMaxStars = RarityMapper.toMaxStars;
+export const rarityToMaxRank = RarityMapper.toMaxRank;
+export const rarityStringToNumber = RarityMapper.stringToNumber;
+
+export { charsUnlockShards, charsReleaseShards } from '@/fsd/4-entities/character';

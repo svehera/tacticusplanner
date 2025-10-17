@@ -1,10 +1,13 @@
-﻿import React from 'react';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { ITeamSlot } from 'src/v2/features/guides/guides.models';
+﻿import { Divider } from '@mui/material';
+import React from 'react';
+
+import { UnitType } from '@/fsd/5-shared/model';
+
+import { IUnit } from '@/fsd/4-entities/unit';
+
 import { TeamSlotView } from 'src/v2/features/guides/components/team-slot-view';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { Divider } from '@mui/material';
 import { SlotType } from 'src/v2/features/guides/guides.enums';
+import { ITeamSlot } from 'src/v2/features/guides/guides.models';
 
 interface Props {
     units: IUnit[];

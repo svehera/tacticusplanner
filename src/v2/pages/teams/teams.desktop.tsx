@@ -1,18 +1,22 @@
-﻿import React, { useContext, useMemo } from 'react';
-import AddIcon from '@mui/icons-material/Add';
-import { Fab, TextField } from '@mui/material';
-import { AddTeamDialog } from 'src/v2/features/teams/components/add-team.dialog';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { TeamsGrid } from 'src/v2/features/teams/components/teams-grid';
-import { EditTeamDialog } from 'src/v2/features/teams/components/edit-team.dialog';
-import { useDebounceValue } from 'usehooks-ts';
-import { allModes } from 'src/v2/features/teams/teams.constants';
-import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
+﻿import AddIcon from '@mui/icons-material/Add';
 import LinkIcon from '@mui/icons-material/Link';
+import { Fab, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
+import React, { useContext, useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
+import { useDebounceValue } from 'usehooks-ts';
+
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+
+import { MowsService } from '@/fsd/4-entities/mow';
+
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { AddTeamDialog } from 'src/v2/features/teams/components/add-team.dialog';
+import { EditTeamDialog } from 'src/v2/features/teams/components/edit-team.dialog';
+import { TeamsGrid } from 'src/v2/features/teams/components/teams-grid';
+import { allModes } from 'src/v2/features/teams/teams.constants';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 export const Teams = () => {
     const dispatch = useContext(DispatchContext);
@@ -20,6 +24,8 @@ export const Teams = () => {
     const [quickFilter, setQuickFilter] = useDebounceValue('', 300);
     const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);
     const [editTeam, setEditTeam] = React.useState<IPersonalTeam | null>(null);
+
+    const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
     const addTeam = (team: IPersonalTeam) => {
         dispatch.teams({ type: 'Add', team });
@@ -88,7 +94,7 @@ export const Teams = () => {
                 <TeamsGrid
                     teams={filteredTeams}
                     characters={characters}
-                    mows={mows}
+                    mows={resolvedMows}
                     editTeam={setEditTeam}
                     deleteTeam={deleteTeam}
                 />
@@ -97,7 +103,7 @@ export const Teams = () => {
                     <AddTeamDialog
                         onClose={() => setOpenCreateTeamDialog(false)}
                         characters={characters}
-                        mows={mows}
+                        mows={resolvedMows}
                         addTeam={addTeam}
                     />
                 )}
@@ -107,7 +113,7 @@ export const Teams = () => {
                         team={editTeam}
                         onClose={() => setEditTeam(null)}
                         characters={characters}
-                        mows={mows}
+                        mows={resolvedMows}
                         saveTeam={updateTeam}
                     />
                 )}

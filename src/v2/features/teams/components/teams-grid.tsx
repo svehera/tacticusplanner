@@ -1,25 +1,30 @@
-﻿import React from 'react';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { GameMode } from 'src/v2/features/teams/teams.enums';
-import { ICharacter2 } from 'src/models/interfaces';
-import { IMow } from 'src/v2/features/characters/characters.models';
+﻿import { DeleteForever, Edit } from '@mui/icons-material';
+import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import { DeleteForever, Edit } from '@mui/icons-material';
-import { TeamView } from 'src/v2/features/teams/components/team-view';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import InfoIcon from '@mui/icons-material/Info';
-import { getCompletionRateColor } from 'src/shared-logic/functions';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { sum } from 'lodash';
-import { allModes } from 'src/v2/features/teams/teams.constants';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { ICharacter2 } from 'src/models/interfaces';
+import { getCompletionRateColor } from 'src/shared-logic/functions';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { CharactersService as NewCharService } from '@/fsd/4-entities/character';
+
+import { IMow2 } from 'src/v2/features/characters/characters.models';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { TeamView } from 'src/v2/features/teams/components/team-view';
+import { allModes } from 'src/v2/features/teams/teams.constants';
+import { GameMode } from 'src/v2/features/teams/teams.enums';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 interface Props {
     teams: IPersonalTeam[];
     characters: ICharacter2[];
-    mows: IMow[];
+    mows: IMow2[];
     deleteTeam: (teamId: string) => void;
     editTeam: (team: IPersonalTeam) => void;
 }
@@ -28,10 +33,14 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
     const guildRaidTeams = teams.filter(x => x.primaryGameMode === GameMode.guildRaids);
     const taTeams = teams.filter(x => x.primaryGameMode === GameMode.tournamentArena);
     const gwTeams = teams.filter(x => x.primaryGameMode === GameMode.guildWar);
+    const survivalTeams = teams.filter(x => x.primaryGameMode === GameMode.survival);
 
     const renderTeam = (team: IPersonalTeam) => {
-        const teamCharacters = team.lineup.map(id => characters.find(character => id === character.id)!);
-        const teamMow = mows.find(x => x.id === team.mowId);
+        const teamCharacters = team.lineup.map(id => {
+            return characters.find(character => NewCharService.matchesAnyCharacterId(id, character));
+        });
+        const teamMowId = typeof team.mowId === 'string' ? team.mowId : undefined;
+        const teamMow = teamMowId ? mows.find(x => [x.snowprintId, x.id].includes(teamMowId)) : undefined;
         const withMow = !!teamMow;
         const subModes = team.subModes.map(value => allModes.find(x => x.value === value)?.label ?? '').join(', ');
 
@@ -67,7 +76,9 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
     };
 
     const renderCappedTeam = (team: IPersonalTeam) => {
-        const teamCharacters = team.lineup.map(id => characters.find(character => id === character.id)!);
+        const teamCharacters = team.lineup
+            .map(id => characters.find(character => NewCharService.matchesAnyCharacterId(id, character))!)
+            .filter(x => x !== undefined);
         const cappedCharacters = teamCharacters.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap));
         const teamMow = mows.find(x => x.id === team.mowId);
         const withMow = !!teamMow;
@@ -122,7 +133,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
                     title={
                         <span style={{ fontSize: '1.2rem' }}>
                             <div className="flex-box gap5" style={{ fontSize: 18 }}>
-                                <RarityImage rarity={team.rarityCap} />
+                                <RarityIcon rarity={team.rarityCap} />
                                 <span>{team.name}</span>
                             </div>
                         </span>
@@ -156,6 +167,13 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
                 <div>
                     <h2>Guild War</h2>
                     <div className="flex gap-3 flex-wrap items-center">{gwTeams.map(renderCappedTeam)}</div>
+                </div>
+            )}
+
+            {!!survivalTeams.length && (
+                <div>
+                    <h2>Survival</h2>
+                    <div className="flex gap-3 flex-wrap items-center">{survivalTeams.map(renderCappedTeam)}</div>
                 </div>
             )}
         </div>

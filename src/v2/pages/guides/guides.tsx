@@ -1,9 +1,28 @@
-﻿import { Badge, Fab, Tab, Tabs } from '@mui/material';
+﻿import AddIcon from '@mui/icons-material/Add';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import { Badge, Fab, Tab, Tabs } from '@mui/material';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { useQueryState } from 'src/v2/hooks/query-state';
-import { useAuth } from 'src/contexts/auth';
-import { UserRole } from 'src/models/enums';
-import { ICreateGuide, IGetGuidesQueryParams, IGuide, IGuideFilter } from 'src/v2/features/guides/guides.models';
+import { isMobile } from 'react-device-detect';
+
+import { StoreContext } from 'src/reducers/store.provider';
+
+import { useQueryState } from '@/fsd/5-shared/lib';
+import { useAuth, UserRole } from '@/fsd/5-shared/model';
+import { LoaderWithText } from '@/fsd/5-shared/ui';
+import { SearchParamsStateContext } from '@/fsd/5-shared/ui/contexts';
+
+import { MowsService } from '@/fsd/4-entities/mow';
+
+import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
+import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
+import { GuideCard } from 'src/v2/features/guides/components/guide-card';
+import { GuideView } from 'src/v2/features/guides/components/guide-view';
+import { GuidesFilter } from 'src/v2/features/guides/components/guides-filter';
+import { RejectReasonDialog } from 'src/v2/features/guides/components/reject-reason.dialog';
 import {
     approveTeamApi,
     createTeamApi,
@@ -13,28 +32,15 @@ import {
     removeHonorTeamApi,
     updateTeamApi,
 } from 'src/v2/features/guides/guides.endpoint';
-import { Loader } from 'src/v2/components/loader';
-import AddIcon from '@mui/icons-material/Add';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
-import { StoreContext } from 'src/reducers/store.provider';
-import { GuideCard } from 'src/v2/features/guides/components/guide-card';
-import { GuideView } from 'src/v2/features/guides/components/guide-view';
 import { GuidesGroup, GuidesStatus } from 'src/v2/features/guides/guides.enums';
-import { RejectReasonDialog } from 'src/v2/features/guides/components/reject-reason.dialog';
-import { enqueueSnackbar } from 'notistack';
-import { isMobile } from 'react-device-detect';
-import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
-import { GuidesFilter } from 'src/v2/features/guides/components/guides-filter';
-import { useSearchParams } from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
+import { ICreateGuide, IGetGuidesQueryParams, IGuide, IGuideFilter } from 'src/v2/features/guides/guides.models';
 
 export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);
     const { userInfo, isAuthenticated } = useAuth();
-    const [_, setSearchParams] = useSearchParams();
+    const [_, setSearchParams] = useContext(SearchParamsStateContext);
+
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
     const isModerator = [UserRole.admin, UserRole.moderator].includes(userInfo.role);
     const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);
@@ -107,7 +113,12 @@ export const Guides: React.FC = () => {
         return result;
     }, [guidesFilter]);
 
+    // Prevent overlapping loads (which can result in duplicate data/appends under StrictMode)
+    // and implement replace-on-first-page + dedupe-on-append to avoid duplicate key warnings.
     const loadTeams = async (queryParams: IGetGuidesQueryParams) => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         try {
             for (const queryParamsKey in queryParams) {
@@ -120,7 +131,18 @@ export const Guides: React.FC = () => {
             const params = new URLSearchParams(queryParams as Record<string, string>).toString();
             const { data: response } = await getTeamsApi(params);
             if (response) {
-                setTeams(prevTeams => [...prevTeams, ...response.teams]);
+                // Replace results on page 1 to avoid duplicating initial items (e.g., StrictMode double-effects)
+                if (queryParams.page === 1) {
+                    setTeams(response.teams);
+                } else {
+                    // On subsequent pages, append while deduplicating by teamId
+                    setTeams(prevTeams => {
+                        const map = new Map<number, IGuide>();
+                        prevTeams.forEach(t => map.set(t.teamId, t));
+                        response.teams.forEach(t => map.set(t.teamId, t));
+                        return Array.from(map.values());
+                    });
+                }
                 setNextQueryParams(response.next);
                 setTotal(response.total);
             }
@@ -131,6 +153,7 @@ export const Guides: React.FC = () => {
         }
     };
 
+    // Paginated load: append but dedupe by teamId to avoid duplicate React keys
     const loadNextTeams = async () => {
         if (!nextQueryParams || loading) {
             return;
@@ -139,7 +162,12 @@ export const Guides: React.FC = () => {
         try {
             const { data: response } = await getTeamsApi(nextQueryParams);
             if (response) {
-                setTeams(prev => [...prev, ...response.teams]);
+                setTeams(prev => {
+                    const map = new Map<number, IGuide>();
+                    prev.forEach(t => map.set(t.teamId, t));
+                    response.teams.forEach(t => map.set(t.teamId, t));
+                    return Array.from(map.values());
+                });
                 setNextQueryParams(response.next);
             }
         } catch (error) {
@@ -280,6 +308,8 @@ export const Guides: React.FC = () => {
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setTeams([]);
+        setNextQueryParams(null);
+        setTotal(0);
         setActiveTab(newValue);
     };
 
@@ -364,38 +394,41 @@ export const Guides: React.FC = () => {
 
     const handleApplyFilters = (filter: IGuideFilter) => {
         setTeams([]);
-        setNextQueryParams('');
+        setNextQueryParams(null);
         setGuidesFilter(filter);
 
-        setSearchParams(curr => {
-            const updatedParams = new URLSearchParams(curr);
+        setSearchParams(
+            curr => {
+                const next = new URLSearchParams(curr);
 
-            if (filter.subMods) {
-                updatedParams.set('subModes', filter.subMods.join(','));
-            } else {
-                updatedParams.delete('subModes');
-            }
+                if (filter.subMods) {
+                    next.set('subModes', filter.subMods.join(','));
+                } else {
+                    next.delete('subModes');
+                }
 
-            if (filter.primaryMod) {
-                updatedParams.set('primaryModes', filter.primaryMod);
-            } else {
-                updatedParams.delete('primaryModes');
-            }
+                if (filter.primaryMod) {
+                    next.set('primaryModes', filter.primaryMod);
+                } else {
+                    next.delete('primaryModes');
+                }
 
-            if (filter.unitIds) {
-                updatedParams.set('unitIds', filter.unitIds.join(','));
-            } else {
-                updatedParams.delete('unitIds');
-            }
+                if (filter.unitIds) {
+                    next.set('unitIds', filter.unitIds.join(','));
+                } else {
+                    next.delete('unitIds');
+                }
 
-            if (filter.createdBy) {
-                updatedParams.set('createdBy', filter.createdBy);
-            } else {
-                updatedParams.delete('createdBy');
-            }
+                if (filter.createdBy) {
+                    next.set('createdBy', filter.createdBy);
+                } else {
+                    next.delete('createdBy');
+                }
 
-            return updatedParams;
-        });
+                return next;
+            },
+            { replace: true }
+        );
 
         loadTeams({
             page: 1,
@@ -419,8 +452,12 @@ export const Guides: React.FC = () => {
             unitIds: unitIdsFilter,
             createdBy: createdByFilter,
         };
+        // Only clear guideId if it exists to avoid unnecessary query param writes
+        // that could drop activeTab and cause the UI to jump back to All
         loadTeams(initialQueryParams).then(() => {
-            setViewTeamId(null);
+            if (viewTeamId !== null) {
+                setViewTeamId(null);
+            }
         });
     }, [activeTab]);
 
@@ -445,7 +482,7 @@ export const Guides: React.FC = () => {
                     <GuideCard
                         key={team.teamId}
                         team={team}
-                        units={[...characters, ...mows]}
+                        units={[...characters, ...resolvedMows]}
                         onView={() => setViewGuide(team)}
                         onShare={() => handleShare(team.teamId)}
                         onViewOriginal={() => handleViewOriginal(team.originalTeamId)}
@@ -496,7 +533,7 @@ export const Guides: React.FC = () => {
                 <>
                     <br />
                     <GuidesFilter
-                        units={[...characters, ...mows]}
+                        units={[...characters, ...resolvedMows]}
                         filter={guidesFilter}
                         applyFilters={handleApplyFilters}
                     />
@@ -515,10 +552,10 @@ export const Guides: React.FC = () => {
                 {isModerator && <Tab label="Pending" />}
                 {isModerator && <Tab label="Rejected" />}
             </Tabs>
-            {loading && <Loader loading={true} />}
+            {loading && <LoaderWithText loading={true} />}
             {openCreateTeamDialog && (
                 <CreateGuideDialog
-                    units={[...characters, ...mows]}
+                    units={[...characters, ...resolvedMows]}
                     onClose={() => setOpenCreateTeamDialog(false)}
                     addTeam={createTeam}
                 />
@@ -533,7 +570,7 @@ export const Guides: React.FC = () => {
             {!!viewGuide && (
                 <GuideView
                     team={viewGuide}
-                    units={[...characters, ...mows]}
+                    units={[...characters, ...resolvedMows]}
                     moderate={status => handleTeamModeration(viewGuide!.teamId, status)}
                     onClose={() => setViewGuide(null)}
                     onShare={() => handleShare(viewGuide.teamId)}
@@ -546,7 +583,7 @@ export const Guides: React.FC = () => {
             {!!editGuide && (
                 <EditGuideDialog
                     guide={editGuide}
-                    units={[...characters, ...mows]}
+                    units={[...characters, ...resolvedMows]}
                     saveGuide={updated => updateGuide(editGuide?.teamId, updated)}
                     onClose={() => setEditGuide(null)}
                 />

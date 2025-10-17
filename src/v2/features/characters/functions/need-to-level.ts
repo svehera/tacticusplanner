@@ -1,10 +1,10 @@
-﻿import { ICharacter2 } from 'src/models/interfaces';
-import { Rank } from 'src/models/enums';
-import { rankToLevel } from 'src/models/constants';
+﻿import { rankToLevel } from 'src/models/constants';
+
+import { UnitType, Rank } from '@/fsd/5-shared/model';
+
+import { IUnit } from '@/fsd/4-entities/unit';
 
 import { needToAscendCharacter } from './need-to-ascend';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export const needToLevelCharacter = (unit: IUnit) => {
     if (unit.unitType === UnitType.mow) {

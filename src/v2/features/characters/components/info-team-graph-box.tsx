@@ -1,7 +1,6 @@
-﻿import React from 'react';
+﻿import InfoIcon from '@mui/icons-material/Info';
 import { Popover, IconButton } from '@mui/material';
-
-import InfoIcon from '@mui/icons-material/Info';
+import React from 'react';
 
 export const InfoTeamGraphBox = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);

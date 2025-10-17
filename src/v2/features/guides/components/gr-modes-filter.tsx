@@ -1,5 +1,7 @@
 ﻿import React from 'react';
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
+
 import { guildRaidBosses, guildRaidPrimes } from 'src/v2/features/teams/teams.constants';
 
 interface Props {

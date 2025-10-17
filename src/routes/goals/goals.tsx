@@ -1,30 +1,36 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
-import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
-import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
-import { PersonalGoalType, Rank } from 'src/models/enums';
-
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
-import Button from '@mui/material/Button';
+﻿import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
-import { GoalCard } from 'src/routes/goals/goal-card';
-import { GoalsService } from 'src/v2/features/goals/goals.service';
-import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
-import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { FormControlLabel, Switch } from '@mui/material';
-import GridViewIcon from '@mui/icons-material/GridView';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import { GoalsTable } from 'src/routes/goals/goals-table';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
-import { goalsLimit, rankToLevel } from 'src/models/constants';
+import { FormControlLabel, Switch } from '@mui/material';
+import Button from '@mui/material/Button';
 import { sum } from 'lodash';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
+import React, { useContext, useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
+
+import { goalsLimit, rankToLevel } from 'src/models/constants';
+import { PersonalGoalType } from 'src/models/enums';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { GoalCard } from 'src/routes/goals/goal-card';
+import { GoalsTable } from 'src/routes/goals/goals-table';
+import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
+import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
+
+import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
+import { Rank } from '@/fsd/5-shared/model';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { MowsService } from '@/fsd/4-entities/mow';
+import { IUnit } from '@/fsd/4-entities/unit';
+
 import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
-import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
+import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
+import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
+import { GoalsService } from 'src/v2/features/goals/goals.service';
+import { ShardsService } from 'src/v2/features/goals/shards.service';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+
+import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
 
 export const Goals = () => {
     const {
@@ -42,9 +48,11 @@ export const Goals = () => {
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
 
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+
     const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, [...characters, ...mows], false);
-    }, [goals, characters, mows]);
+        return GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false);
+    }, [goals, characters, resolvedMows]);
 
     const estimatedShardsTotal = useMemo(() => {
         return ShardsService.getShardsEstimatedDays(
@@ -89,7 +97,14 @@ export const Goals = () => {
 
         if (item === 'edit') {
             const goal = allGoals.find(x => x.goalId === goalId);
-            const relatedUnit = [...characters, ...mows].find(x => x.id === goal?.unitId);
+            const relatedUnit = [...characters, ...resolvedMows].find(
+                // August 2025: we're transitioning between IDs for characters. Previously be used a short version
+                // of the character's name (i.e. Ragnar, Darkstrider). Now we're moving to IDs from snowprints internal data (datamined).
+                // During this transition, it's possibly for legacy goals to have legacy IDs, which are then overwritten with
+                // Snowprint IDs. For this reason, we cater to both IDs for lookup here, with the expectation we can consolidate
+                // on snowprintIDs down the track.
+                x => x.snowprintId === goal?.unitId || x.id === goal?.unitId
+            );
             if (relatedUnit && goal) {
                 setEditUnit(relatedUnit);
                 setEditGoal(goal);
@@ -140,7 +155,7 @@ export const Goals = () => {
                 }).length;
 
                 if (goal.type === PersonalGoalType.UpgradeRank) {
-                    const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];
+                    const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
                     const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
 
                     return {
@@ -154,11 +169,7 @@ export const Goals = () => {
                         xpEstimate,
                     } as IGoalEstimate;
                 } else {
-                    const mowMaterials = MowLookupService.getMaterialsList(
-                        goal.unitId,
-                        goal.unitName,
-                        goal.unitAlliance
-                    );
+                    const mowMaterials = MowsService.getMaterialsList(goal.unitId, goal.unitName, goal.unitAlliance);
 
                     const primaryAbility = mowMaterials.slice(goal.primaryStart - 1, goal.primaryEnd - 1);
                     const secondaryAbility = mowMaterials.slice(goal.secondaryStart - 1, goal.secondaryEnd - 1);

@@ -1,7 +1,11 @@
 ﻿import { SetStateAction } from '@/models/interfaces';
-import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
 import { rarityToStars } from 'src/models/constants';
-import { TacticusShard, TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
+
+import { TacticusShard, TacticusUnit } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
+
+import { MowsService } from '@/fsd/4-entities/mow';
+
+import { IMow, IMow2, IMowDb } from '@/v2/features/characters/characters.models';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 export type MowsAction =
@@ -19,9 +23,11 @@ export type MowsAction =
           units: TacticusUnit[];
           shards: TacticusShard[];
       }
-    | SetStateAction<IMow[]>;
+    | SetStateAction<Array<IMow | IMow2>>;
 
-export const mowsReducer = (state: IMow[], action: MowsAction) => {
+export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
+    const resolvedMows = MowsService.resolveAllFromStorage(state);
+
     switch (action.type) {
         case 'Set': {
             return action.value;
@@ -46,10 +52,13 @@ export const mowsReducer = (state: IMow[], action: MowsAction) => {
         }
         case 'SyncWithTacticus': {
             const { units, shards } = action;
+            const getId = (existingMow: IMow | IMow2) =>
+                'tacticusId' in existingMow ? existingMow.tacticusId : existingMow.snowprintId;
 
-            return state.map(existingMow => {
-                const tacticusUnit = units.find(u => u.id === existingMow.tacticusId);
-                const tacticusShards = shards.find(s => s.id === existingMow.tacticusId);
+            return resolvedMows.map(existingMow => {
+                const tacticusUnit = units.find(u => u.id === getId(existingMow));
+                const tacticusShards = shards.find(s => s.id === getId(existingMow));
+
                 if (tacticusUnit) {
                     const [rarity, stars] = TacticusIntegrationService.convertProgressionIndex(
                         tacticusUnit.progressionIndex

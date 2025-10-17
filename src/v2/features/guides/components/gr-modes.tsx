@@ -1,8 +1,10 @@
 ﻿import React, { useEffect, useMemo, useState } from 'react';
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+
+import { Faction } from '@/fsd/5-shared/model';
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { grEncounterToFaction, guildRaidBosses, guildRaidPrimes } from 'src/v2/features/teams/teams.constants';
-import { Faction } from 'src/models/enums';
 
 interface Props {
     units: IUnit[];
@@ -21,9 +23,14 @@ export const GuildRaidsModes: React.FC<Props> = ({ selectedModes, updateSelectio
 
     const bannedFaction: Faction = useMemo(() => grEncounterToFaction[grEncounter], [grEncounter]);
 
+    const getFaction = (unit: IUnit): Faction => {
+        if ('faction' in unit) return unit.faction;
+        return unit.factionId as Faction;
+    };
+
     const allowedUnits = useMemo(() => {
         if (bannedFaction) {
-            return units.filter(x => x.faction !== bannedFaction);
+            return units.filter(x => getFaction(x) !== bannedFaction);
         }
         return units;
     }, [bannedFaction]);

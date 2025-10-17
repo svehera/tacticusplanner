@@ -1,9 +1,11 @@
-﻿import React, { useEffect, useState } from 'react';
-import { RankSelect } from 'src/shared-components/rank-select';
-import { Rank } from 'src/models/enums';
+﻿import { Info } from '@mui/icons-material';
 import { FormControlLabel, Switch } from '@mui/material';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { Info } from '@mui/icons-material';
+import React, { useEffect, useState } from 'react';
+
+import { Rank } from '@/fsd/5-shared/model';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+
+import { RankSelect } from '@/fsd/4-entities/character';
 
 interface Props {
     allowedValues: Rank[];

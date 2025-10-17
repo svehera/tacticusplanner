@@ -1,0 +1,2985 @@
+﻿{
+    "currentVersion": "1.8.0",
+    "releaseNotes": [
+        {
+            "version": "1.8.0",
+            "date": "August 22",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Mythic",
+                    "subPoints": [
+                        "Initial support for Mythic rarity, ranks and abilities has arrived.",
+                        "There's likely to be bugs and some overlooked features. Please be patient and feel free report in the Tacticus Planner Discord, or in the main Tacticus Discord."
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
+        {
+            "version": "1.7.5",
+            "date": "July 8",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "(laserian403) Added Emperor's Children faction to the planner",
+                    "subPoints": [
+                        "Added Lucius, the Eternal character with full LRE (Legendary Release Event) support",
+                        "Added Emperor's Children base upgrades and their campaign node locations"
+                    ]
+                },
+                {
+                    "text": "(laserian403) Added Atlacoya character to Adeptus Custodes faction"
+                },
+                {
+                    "text": "(laserian403) Added Learn > Equipment page",
+                    "subPoints": [
+                        "New comprehensive equipment reference page",
+                        "Shows equipment icons and types for better visualization"
+                    ],
+                    "route": "learn/equipment"
+                },
+                {
+                    "text": "(unrstuart) Enhanced LRE planner functionality",
+                    "subPoints": [
+                        "Added ability to toggle individual rows in a track or entire columns",
+                        "Improved user experience for LRE progress tracking"
+                    ]
+                },
+                {
+                    "text": "(laserian403) Updated events calendar with latest images",
+                    "subPoints": [
+                        "Added calendar images for June and July 2025",
+                        "Improved calendar display on home page"
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "(laserian403) Added tacticusId for Exorcist MOW to improve API sync compatibility"
+                },
+                {
+                    "text": "(laserian403) Updated LRE dates and stages for current events"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "(laserian403) Fixed LRE crash when invalid characters are selected"
+                }
+            ]
+        },
+        {
+            "version": "1.7.4",
+            "date": "May 24",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "(laserian403) Added Adeptus Custodes faction to the planner, and their 3 new units - Aesoth, Kariyan and Trajann"
+                },
+                {
+                    "text": "(laserian403) Added Healer/Mechanic trait icons to LRE planner",
+                    "images": [{ "path": "icons.png" }]
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "(Hecubha) Fixed React hooks error in learn > guild page"
+                }
+            ]
+        },
+        {
+            "version": "1.7.3",
+            "date": "April 29",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added 1.28 update data",
+                    "subPoints": [
+                        "(cpunerd) Significant shuffle of upgrade materials in elite nodes. Changes to normal/mirror nodes are not yet known/shown.",
+                        "(laserian403) Added [Dark Angels] Forcas Oathsworn, Inner Circle Companion, unlockable in the ‘Inner Circle’ event, starting on May 11",
+                        "(laserian403) Added Upcoming Legendary Release Event, starting on June 1"
+                    ]
+                },
+                {
+                    "text": "(cpunerd) Added 'Learn > Versus' page",
+                    "subPoints": [
+                        "This page is a major work in progress.",
+                        "Pick two characters/NPCs, select rank and rarity, see how much damage one does to the other."
+                    ],
+                    "route": "learn/versus"
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
+        {
+            "version": "1.7.2",
+            "date": "April 3",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "(cpunerd) Added 1.27 update data",
+                    "subPoints": [
+                        "Added [World Eaters] Tarvakh, Master of Executions, unlockable in the ‘For the Blood God’ event, starting on April 6",
+                        "Added [Genestealer Cults] Judh Lhaska, Kelermorph, unlockable via the Battle Pass starting on 30th of March",
+                        "Added New Campaign Event: ‘Tyranids’ — Starting April 3"
+                    ]
+                },
+                {
+                    "text": "(cpunerd) Added 'Learn > NPCs' page",
+                    "route": "learn/npcs",
+                    "images": [{ "path": "npcs.png" }]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
+        {
+            "version": "1.7.1",
+            "date": "March 21",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "(cpunerd) Improved 'Learn > Campaigns'",
+                    "subPoints": [
+                        "Added more details about enemies to 'Learn > Campaigns'. Currently Indomitus, Indomitus Mirror, and Fall of Cadia are complete. The rest are in progress. Thanks to Towen for the data collection.",
+                        "Made the page mobile friendly."
+                    ],
+                    "images": [{ "path": "enemy_details.png" }, { "path": "mobile_campaigns.png" }]
+                },
+                {
+                    "text": "(cpunerd) Improved Character Stats.",
+                    "subPoints": [
+                        "Added character stats in the details page under 'Input > Who You Own'. Equipment is not yet considered.",
+                        "Added character stats at configurable level under 'Learn > Characters'.",
+                        "Added DAMVAR against zero armor and infinite armor under expanded character stats at 'Learn > Characters.'"
+                    ],
+                    "images": [{ "path": "wyo_stats.png" }, { "path": "character_stats.png" }, { "path": "damvar.png" }]
+                },
+                {
+                    "text": "(cpunerd) Plan > Campaign Progression",
+                    "subPoints": [
+                        "Added 'Plan > Campaign Progression' to the mobile site.",
+                        "Fixed a bug with incorrectly calculated savings in campaign progression for extremis nodes in campaign events."
+                    ],
+                    "images": [{ "path": "mobile_campaign_progression.png" }]
+                },
+                {
+                    "text": "(laserian403) Added Plague Burst Crawler to the 'Who You Own' page."
+                }
+            ],
+            "minor": [
+                {
+                    "text": "(irvinesj) Updated duplicate upgrades handling."
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed upgrades syncing via Tacticus API for some crafted upgrades."
+                },
+                {
+                    "text": "Fixed bug with daily raids upgrades order while syncing with Tacticus API."
+                }
+            ]
+        },
+        {
+            "version": "1.7.0",
+            "date": "March 4",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated Nandi's Dirty Dozen to February 2025 data",
+                    "subPoints": [
+                        "Added possibility to switch between older versions of the Dirty Dozen",
+                        "Added Guild Raid team affiliation"
+                    ],
+                    "route": "learn/dirtyDozen",
+                    "images": [
+                        {
+                            "path": "dirty.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added Buy Me a coffee (trooper) widget to home screen",
+                    "images": [
+                        {
+                            "path": "bmc1.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with Extremis campaign raids being overridden. (Reported by František)"
+                }
+            ]
+        },
+        {
+            "version": "1.6.9",
+            "date": "February 21, 2025",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added Dante character and LRE. Thank to cpunerd (Kharnage) for helping.",
+                    "route": "plan/lre?character=Dante"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Extremis campaign event nodes drop rate. Thank to FMG for giving a hand."
+                },
+                {
+                    "text": "[cpunerd] Updated reward for Indomitus Mirror Elite 7 from Psychic Force Conduit to Archeo-Tech Remnant. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "Added \"Sync\" button to daily raids UI to simplify sync on mobile version. (Requested by Szarekh)"
+                },
+                {
+                    "text": "Updated daily raids settings custom locations selector to include Extremis and Indomitus early nodes",
+                    "images": [
+                        {
+                            "path": "daily.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with guides instances not opening and causing page go blank. (Reported by ImYaHuckleberry)"
+                },
+                {
+                    "text": "Fixed issue with API sync not updating locked characters shards"
+                },
+                {
+                    "text": "Fixed issue with API sync after which daily raids recommended to add values with negative numbers. (Reported by BlatantFix)"
+                },
+                {
+                    "text": "Fixed issue with API sync not updating inventory upgrades with zero values. (Reported by Janson)"
+                },
+                {
+                    "text": "[cpunerd] Fixed upgrades images are size on Campaign Progression page. (Reported by Juan)"
+                }
+            ]
+        },
+        {
+            "version": "1.6.8",
+            "date": "January 20, 2025",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Welcome to cpunerd, our newest Contributor, who made significant contributions in this update!"
+                },
+                {
+                    "text": "[cpunerd] Introduced the Campaign Progression feature to simplify campaign planning.",
+                    "subPoints": [
+                        "You can navigate to the page via Plan -> Campaign Progression.",
+                        "Found this page helpful? Consider using cpunerd's Refer-A-Friend code 'DUG-38-VAT'."
+                    ],
+                    "route": "plan/campaignprogression",
+                    "images": [
+                        {
+                            "path": "cp1.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "First Campaign Event: ‘Adeptus Mechanicus’",
+                    "subPoints": [
+                        "Track progress on the \"My Progress\" page. Campaign Progress is renamed to My Progress",
+                        "Added a 'Campaign Event' option in Daily Raids settings. Select your current Campaign Event for tailored raid suggestions."
+                    ],
+                    "route": "input/myProgress",
+                    "images": [
+                        {
+                            "path": "ce1.png"
+                        },
+                        {
+                            "path": "ce2.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added new collectible characters",
+                    "subPoints": [
+                        "[Genestealer Cults] Isaak Starn, the Primus, unlockable in the ‘Path of Ascension’ event starting January 26.",
+                        "[Adeptus Mechanicus] Sy-Gex, Kataphron Destroyer."
+                    ]
+                },
+                {
+                    "text": "Updated LRE dates",
+                    "subPoints": [
+                        "[Genestealer Cults] The Patermine, Genestealer Patriarch, unlockable in the second ‘Alien Majesty’ event starting February 16."
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added option to display core characters of each campaign on the My Progress page",
+                    "images": [
+                        {
+                            "path": "mp1.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Resolved issue with page redirection which should improve time of initial page load."
+                },
+                {
+                    "text": "Updated Learn Campaigns page to include new Campaign Event and some UI adjustments.",
+                    "route": "learn/campaigns?campaign=Adeptus+Mechanicus+Standard",
+                    "images": [
+                        {
+                            "path": "ce3.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added \"Points Calculations\" options to the LRE leaderboard and LRE master table",
+                    "subPoints": [
+                        "\"Unearned Points Only\" - works only for selected characters, calculates points that specific character can score based on number of battles that left uncompleted.",
+                        "\"All Points\" - works only for all characters, calculates points that specific character can score overall."
+                    ],
+                    "route": "plan/leMasterTable?pointsCalculation=unearned",
+                    "images": [
+                        {
+                            "path": "lre1.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "[cpunerd] Fixed LRE Leaderboard sorting by name issue. (Reported by Morpholine)"
+                },
+                {
+                    "text": "Corrected names for Tyranids: Parasite of Mortrex and Winged Tyranid Prime. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "[cpunerd] Resolved improper handling of rankStart=Locked in Rank Lookup. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "[cpunerd] Fixed issue with Raids filter suggesting common upgrades incorrectly. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "[cpunerd] Corrected a typo in Arjac's name. (Reported by WarAvatar)"
+                },
+                {
+                    "text": "[cpunerd] Fixed UI alignment issue where inventory section items were not centered. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "Resolved logic issue causing 'Conflict - server overwrite' spam on mobile. (Reported by Tani)"
+                },
+                {
+                    "text": "Fixed Patermine Limited Event missions. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "Updated the image for the Overcapacitator crafted upgrade. (Reported by Frenzy87)"
+                }
+            ]
+        },
+        {
+            "version": "1.6.7",
+            "date": "December 18",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new collectable character",
+                    "subPoints": [
+                        "[Blood Angels] Nicodemus, Sanguinary Priest, unlockable in the ‘Insanguination’ event, starting December 22"
+                    ]
+                },
+                {
+                    "text": "Updated LRE dates",
+                    "subPoints": [
+                        "[Blood Angels] Mephiston, Lord of Death, unlockable in the second ‘Angels of Death‘ event, starting January 12"
+                    ]
+                },
+                {
+                    "text": "Updates according to balancing changes",
+                    "subPoints": [
+                        "Morvenn Vahl, stats changes and changed melee attack hits from 5 to 2",
+                        "Azrael, stats changes",
+                        "Pestillian, stats changes, Normal melee attack changed from Direct Damage to Toxic and Replaced Putrid Explosion trait with Explodes trait"
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated LRE master table and leaderboard tables to not take into account extra points from the Defeat All enemies requirement (SeventhSun)"
+                },
+                {
+                    "text": "For mobile devices reduced server push debounce time to one second instead of 10 seconds (Tani)"
+                },
+                {
+                    "text": "Added LRE track names to LRE teams table (SeventhSun)"
+                },
+                {
+                    "text": "Updated Inventory to show basic and crafted upgrades in separate columns (Peuchy)"
+                },
+                {
+                    "text": "Updated Inventory sections to be expandable and collapsible"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Corrected Anuphet stats values (Medon)"
+                },
+                {
+                    "text": "Fixed issue with Shards campaign nodes not being filtered according to the filter settings on the Daily Raids page (Peuchy)"
+                },
+                {
+                    "text": "Fixed issue with LRE UI x/14 shows as undefined/14 (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue with LRE Completed Tracks not filtered from teams (Kinks)"
+                }
+            ]
+        },
+        {
+            "version": "1.6.6",
+            "date": "November 18",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated Daily Raids filter to recommend locations by enemies types and enemies count",
+                    "subPoints": [
+                        "Thanks to all volunteers that helped collect data: SeventhSun, VitaMorte, Unlucky☆SirEldricIV, Cody212501"
+                    ],
+                    "images": [
+                        {
+                            "path": "filter1.png"
+                        },
+                        {
+                            "path": "filter2.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Learn Campaigns table to include data about enemies types and enemies count",
+                    "route": "learn/campaigns",
+                    "images": [
+                        {
+                            "path": "campaigns.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with LRE planner when selection doesn't merge correctly on table view (SeventhSun)"
+                }
+            ]
+        },
+        {
+            "version": "1.6.5",
+            "date": "November 15",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new collectable units",
+                    "subPoints": [
+                        "Hollan, the Biophagus, unlockable in the ’Path of Ascension' event, starting November 17",
+                        "Shas'vre Vior'la Tson'ji, XV88 Broadside Battlesuit, unlockable in the Incursion event starting December 2",
+                        "Parasite of Mortrex (PoM), Invader Organism, unlockable in the (Epic!) Battle Pass season starting on December 15"
+                    ]
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Mirror Elite Saim-Hann’ part 5"
+                },
+                {
+                    "text": "Re-designed LRE planner UI/UX",
+                    "subPoints": [
+                        "Updated table view and added new card view",
+                        "Added possibility to have multiple teams per track",
+                        "Updated settings to have more granular LRE unit tile view settings",
+                        "Updated progress view to be more compact and added intermediate state"
+                    ],
+                    "images": [
+                        {
+                            "path": "teams.png"
+                        },
+                        {
+                            "path": "add.png"
+                        },
+                        {
+                            "path": "cards.png"
+                        },
+                        {
+                            "path": "progress.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Dirty Dozen table. Thanks ijriims for contribution"
+                },
+                {
+                    "text": "Updated characters icons that has been cropped. Thanks to Tech Priest Fred for providing icons"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with missing damage types and traits on the Characters page (Count Casual)"
+                },
+                {
+                    "text": "Fixed issue Vitruvius are still at 400 shards instead of 500 (Peuchy)"
+                },
+                {
+                    "text": "Fixed issue Wrong component for Morvenn Vahl (Iron II) (Gorgoth)"
+                }
+            ]
+        },
+        {
+            "version": "1.6.4",
+            "date": "October 15",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added \"Infinity\" energy option to daily raids settings",
+                    "images": [
+                        {
+                            "path": "energy.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added more filters to Characters page and filter state is preserved in query params (Amenis, FMG, mason240)",
+                    "subPoints": ["Added Min Hits, Max Hits, Attack Type, Movement, Distance filters"],
+                    "images": [
+                        {
+                            "path": "filter.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added stats of each owner to Guild Insights tooltips",
+                    "images": [
+                        {
+                            "path": "stats.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added Inventory and Remaining columns to Rank Lookup and MoW Lookup pages. Thanks to ijriims for contribution"
+                },
+                {
+                    "text": "Added another column to the Plan/Goals overview in the table view that show the number of days it takes for a character alone (trick010)",
+                    "images": [
+                        {
+                            "path": "days.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Included MoWs and characters shards on the shared roster page"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with energy needed to unlock a char is not shown on goal card (Babidy04)"
+                },
+                {
+                    "text": "Fixed issue when on the Goals page, the character abilities list does not grow (Cyrus)"
+                },
+                {
+                    "text": "Fixed issue with blank screen while editing Goals for locked chars (HZM, Kinks)"
+                },
+                {
+                    "text": "Fixed issue when goals page calculates 3 days remaining for 1 onslaught token (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue on Who You Own: when sorting By Rank, MoWs come first (SeventhSun)"
+                }
+            ]
+        },
+        {
+            "version": "1.6.3",
+            "date": "October 4",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new collectable characters",
+                    "subPoints": [
+                        "Xybia, Magus, unlockable in the ’Path of Ascension' event, starting October 13",
+                        "Patermine, Genestealer Patriarch, unlockable in the first ‘Alien Majesty‘ event, starting November 3"
+                    ]
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Mirror Elite Saim-Hann’ part 4"
+                },
+                {
+                    "text": "Adjusted drop rate for Campaign random rewards to take into account the Mercy system"
+                },
+                {
+                    "text": "Added Genestealer Upgrades",
+                    "route": "learn/upgrades"
+                },
+                {
+                    "text": "Updated Snappa and Boss G stats after the rewORK"
+                },
+                {
+                    "text": "Added The Patermine LRE",
+                    "route": "plan/lre?character=Patermine"
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed Incorrect damage upgrade listed for Kharn (ZHovtiyLitsar)"
+                },
+                {
+                    "text": "Fixed Incorrect Visage of Death recipe (SeventhSun)"
+                }
+            ]
+        },
+        {
+            "version": "1.6.2",
+            "date": "August 26",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updates for learn Guides feature",
+                    "subPoints": [
+                        "Added new game modes: Legendary Event and Incursion",
+                        "Prohibited Factions are filtered out automatically in the Guild Raids mode",
+                        "Added total guides counter near the filter button"
+                    ],
+                    "images": [
+                        {
+                            "path": "guides.png"
+                        },
+                        {
+                            "path": "guides2.png"
+                        },
+                        {
+                            "path": "guides3.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
+        {
+            "version": "1.6.1",
+            "date": "August 23",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added learn Guides feature. This is the first iteration for the feature so please share your feedback",
+                    "subPoints": [
+                        "Find or create guides for specific game modes (Guild Raids, Tournament Arena, Guild Wars)",
+                        "Anyone can view/share guides but only logged in users can create a guide",
+                        "Guide will be moderated before being publicly available",
+                        "Team in the guide can consist of 5 characters and 1 mow. Each slot can be turned into \"flex\" and fit up to 3 characters. MoW slot is optional"
+                    ],
+                    "images": [
+                        {
+                            "path": "guides.png"
+                        },
+                        {
+                            "path": "guides2.png"
+                        },
+                        {
+                            "path": "guides3.png"
+                        },
+                        {
+                            "path": "guides4.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added new collectable characters",
+                    "subPoints": [
+                        "Titus, Primaris Lieutenant, unlockable in the first ‘Survival‘ event, starting September 1",
+                        "Lucien, Death Company Intercessor, unlockable in the ‘Insanguination’ event, starting September 8"
+                    ]
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Mirror Elite Saim-Hann’ part 3"
+                },
+                {
+                    "text": "Added new logic to the server side that sure track conflict updates. It should resolve issue when you use planner on multiple devices and should prevent accidental data override"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added popup that shows up when user is not logged in. You can still use app without account"
+                },
+                {
+                    "text": "Included MoWs data into Insights and Guild Insights",
+                    "route": "learn/insights",
+                    "images": [
+                        {
+                            "path": "insights.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Updated icon for Multi-Spectrum Sensor Suite (falxnox)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue when Daily Raids not accounting for Nested Crafted Components (ChargingFurret, Ardonomus)"
+                },
+                {
+                    "text": "Fixed issue when MoW in the \"Who you own\" keep resetting (RotoR, falxnox)"
+                },
+                {
+                    "text": "Fixed issue when Deamon trait not selectable (MocarnyJoe)"
+                },
+                {
+                    "text": "Fixed issue when Deed points are not updated correctly on the LRE progress (NoxTempest)"
+                }
+            ]
+        },
+        {
+            "version": "1.6.0",
+            "date": "July 26",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added plan Teams Beta. Not polished feature"
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with Who You Own layout"
+                }
+            ]
+        },
+        {
+            "version": "1.5.9",
+            "date": "July 24",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new Blood Angels faction",
+                    "subPoints": [
+                        "Mataneo, the Jump Pack Intercessor Sergeant, unlockable in the ‘Insanguination’ event, starting August 4",
+                        "Mephiston, Lord of Death, unlockable in the first ‘Angels of Death‘ event, starting August 25"
+                    ]
+                },
+                {
+                    "text": "Added Ultramarine's MoW: Galatian"
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Mirror Elite Saim-Hann’ parts 1-2"
+                },
+                {
+                    "text": "Updated data for Mephiston LRE",
+                    "route": "plan/le/mephiston"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added new upgrades for Blood Angels faction"
+                },
+                {
+                    "text": "Added \"MoW only\" filter"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed portrait icons for some characters"
+                },
+                {
+                    "text": "Fixed shard cap at 50 shards for MOW (LordLancelot)"
+                },
+                {
+                    "text": "Fixed \"Tabard\" spelling (Heruwulfar)"
+                },
+                {
+                    "text": "Fixed issue with X.5 Goals showing as complete (Kinks)"
+                },
+                {
+                    "text": "Fixed Upgrades reference page: Characters column doesn't appear under condition (SeventhSun)"
+                },
+                {
+                    "text": "Fixed Baraqiel Upgrade Material (falxnox)"
+                },
+                {
+                    "text": "Fixed Who You Own page - Dark Angels Faction Order (falxnox)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.8",
+            "date": "June 26",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added possibility to update inventory after changing MoW abilities levels",
+                    "images": [
+                        {
+                            "path": "mow.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added new Dark Angels character - Baraqiel, Deathwing Terminator, unlockable in the ‘Inner Circle’ event, starting on June 30"
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Elite Saim-Hann’ Part 4 and ‘Elite Saim-Hann’ Part 5"
+                },
+                {
+                    "text": "Adjusted rarity caps for the Guild War"
+                },
+                {
+                    "text": "Added datamined LRE for Blood Angels???. *Some data can change",
+                    "route": "plan/le/mephiston"
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed Corrodius \"No psychic\" issue in Kharn LRE"
+                },
+                {
+                    "text": "Fixed issue when typing in the Notes panel in LRE -> My Progress crashes the app (SeventhSun)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.7",
+            "date": "June 9",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added dark mode",
+                    "images": [
+                        {
+                            "path": "t.png"
+                        },
+                        {
+                            "path": "d.png"
+                        },
+                        {
+                            "path": "m.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Sort by rarity now takes into account stars (Ginrikuzuma)"
+                },
+                {
+                    "text": "Added amount of shards required for MoW",
+                    "images": [
+                        {
+                            "path": "sh.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with Goals Detail list doesn't use all of your resolution space (Ginrikuzuma)"
+                },
+                {
+                    "text": "Fixed issue with Arrow Navigation Buttons do not save changes (Morpholine)"
+                },
+                {
+                    "text": "Fixed issue with Character's level is not auto-updated when editing rank or abilities via goal edit"
+                },
+                {
+                    "text": "Fixed issue with MoW doesn't show time taken for upgrades properly on the goals page (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue with recommended locations are not prioritizing higher nodes (Kinks)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.6",
+            "date": "June 4",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added MoWs to Who You Own page",
+                    "route": "input/wyo",
+                    "images": [
+                        {
+                            "path": "wyo.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added new goal types:\"MoW abilities\" and \"Character abilities\"",
+                    "route": "plan/goals",
+                    "images": [
+                        {
+                            "path": "goals.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added MoW Lookup",
+                    "route": "learn/mowLookup",
+                    "images": [
+                        {
+                            "path": "lookup.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated images for some crafted upgrades. Thanks to KIVIY for contribution."
+                },
+                {
+                    "text": "Updated stars visual to not extend beyond the character portrait and make the 5th one bigger in the middle like in the game. Thanks to Lëonaica for contribution. (LordLancelot)"
+                },
+                {
+                    "text": "Updated columns order in the material table on the Daily Raids to be: Goal/Inventory/Remaining (SeventhSun)"
+                },
+                {
+                    "text": "Added possibility to search for upgrade component of craftable upgrade in the Upgrade page (ijriims)",
+                    "route": "learn/upgrades",
+                    "images": [
+                        {
+                            "path": "upgrades.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added option to navigate Who You Own screen using back and forward arrows on the edit unit dialog (Hadoopalot)",
+                    "images": [
+                        {
+                            "path": "wyo2.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added \"Component for\" column to the upgrades table (KTA)"
+                },
+                {
+                    "text": "Added an indicator to display what the highest rarity cap is on the war zones (murky)",
+                    "images": [
+                        {
+                            "path": "zones.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added events calendar to home page (Mattias)",
+                    "images": [
+                        {
+                            "path": "home.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with \"Shards per Onslaught\" translates to default shard count on raid card at only half value (SeventhSun, Tani)"
+                },
+                {
+                    "text": "Fixed issue with staged upgrades as goals (Xenoblight)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.5",
+            "date": "May 19",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Update the Daily Raids UI. Thanks to Tani and SeventhSun for ideas and feedback",
+                    "subPoints": [
+                        "New view is more compact and provides better experience on mobile",
+                        "Active goals moved to a dialog which is open by clicking button next to the filters icon",
+                        "All details about raids are hidden in the 'Raids plan' expandable section",
+                        "Added inventory section which will show only upgrades related to your active goals"
+                    ],
+                    "images": [
+                        {
+                            "path": "dr1.png"
+                        },
+                        {
+                            "path": "dr3.png"
+                        },
+                        {
+                            "path": "dr4.png"
+                        },
+                        {
+                            "path": "dr5.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Update the Daily Raids settings",
+                    "subPoints": [
+                        "Added back the 'Characters shards energy' setting (ZHovtiyLitsar)",
+                        "Added 'Locations selection' option",
+                        "The 'Least energy' option will prioritize Elite campaigns locations",
+                        "The 'Least time' option will prioritize Elite campaigns locations but will also try to add 'lower' locations if it improves overall time. This feature is not stable yet so please report any issue you'll notice while using it.",
+                        "The 'All locations' option just recommend all locations you have unlocked",
+                        "The 'Custom' option allows you to define locations priority based on upgrades rarity"
+                    ],
+                    "images": [
+                        {
+                            "path": "dr2.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Tani and KIVIY \"promoted\" to Contributors",
+                    "subPoints": [
+                        "Tani thank you for supporting the app with your time and ideas",
+                        "KIVIY thank you for finding upgrades images and promoting exitor for me\uD83D\uDE05"
+                    ],
+                    "route": "ty"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added team power visualization. Thanks to Lëonaica for contribution.",
+                    "subPoints": [
+                        "You can open this dialog by clicking on the new button that beside 'Share' on Who You Own page and other similar pages"
+                    ],
+                    "images": [
+                        {
+                            "path": "tpower.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Updated upgrades tables in the Daily Raids plan (SeventhSun)",
+                    "subPoints": [
+                        "Added back 'Left' column",
+                        "Removed 'Go to inventory' button",
+                        "Estimates are expanded by default"
+                    ],
+                    "images": [
+                        {
+                            "path": "dr6.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added increment(+) and decrement(-) options to the inventory page (Tani)",
+                    "subPoints": ["Enabled by default. Can be turned off by \"Show -/+\" toggle"],
+                    "images": [
+                        {
+                            "path": "in.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with daily Raids continually adding more energy (BlatantFix, RotoR, Tani, diagonalplane)"
+                },
+                {
+                    "text": "Fixed Jain Zar G1 rank upgrades (Serious_w_Bear)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.4",
+            "date": "May 15",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added Kharn LRE planner"
+                },
+                {
+                    "text": "Updated Nandi's Dirty Dozen to May 2024 data",
+                    "route": "learn/dirtyDozen"
+                },
+                {
+                    "text": "New Campaign Battles: ‘Elite Saim-Hann’ Part 2 and ‘Elite Saim-Hann’ Part 3"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Refactored daily raids and character upgrades for a better support of crafted upgrades"
+                },
+                {
+                    "text": "Update Tanksmasha according with rewORK"
+                }
+            ],
+            "bugFixes": []
+        },
+        {
+            "version": "1.5.3",
+            "date": "May 8",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated goals grid view and added list view",
+                    "images": [
+                        {
+                            "path": "grid.png"
+                        },
+                        {
+                            "path": "list.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added more flexibility when setting \"Ascend\" or \"Unlock\" goals",
+                    "subPoints": [
+                        "You can set goal to promote to specific stars e.g. to Blue star",
+                        "You can specify whether you want to use only campaigns, only onslaught or both for farming shards"
+                    ],
+                    "images": [
+                        {
+                            "path": "ascend.png"
+                        },
+                        {
+                            "path": "unlock.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added Shards raids section to the daily raids and updated \"Active goals section\" to include ascend/unlock goals",
+                    "images": [
+                        {
+                            "path": "active.png"
+                        },
+                        {
+                            "path": "shards.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Goals limit increased to 30"
+                },
+                {
+                    "text": "Added possibility to limit upgrades rarity for \"Upgrade rank\" goal (diagonalplane)",
+                    "images": [
+                        {
+                            "path": "rank.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Updated rank lookup page",
+                    "images": [
+                        {
+                            "path": "lookup.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue when adding guild members and deleting them makes the 'Import Link' feature leave blank slots (Vexen)"
+                },
+                {
+                    "text": "Fixed wrong upgrades count in the daily raids (ZHovtiyLitsar)"
+                },
+                {
+                    "text": "Fixed when applying upgrades after upgrading multiple ranks doesn't work on edit goal dialog (BlatantFix)"
+                },
+                {
+                    "text": "Fixed vindicta's upgrade item is incorrect for Iron III rank (Hadoopalot)"
+                },
+                {
+                    "text": "Fixed save Changes button is inactive if # of goals doesn't change on daily raids (SeventhSun)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.2",
+            "date": "April 25",
+            "type": "Update",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Added warning message that duplicated upgrades will be applied both at once"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed mobile layout issue, for daily raid UI (Tani)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.1",
+            "date": "April 24",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added amount of unused energy to the Raids section of the Daily raids page",
+                    "images": [
+                        {
+                            "path": "en.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added back possibility to edit goals on daily raids page (Kortesch)"
+                },
+                {
+                    "text": "Added back daily raids setting that are used to combined different campaigns types (RotoR, James V)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed incorrect drop for Saim-Hann Mirror 63 (Sort of Purple)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.0",
+            "date": "April 23",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added \"Slots\" filter to the Daily Raids filter",
+                    "subPoints": ["You can use it to filter locations by amount (3,4,5) of deployable characters"],
+                    "images": [
+                        {
+                            "path": "filter.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added link to guildmates' roster page",
+                    "images": [
+                        {
+                            "path": "guild.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated more upgrades icons. Thanks to KIVIY"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with 'i' not showing tooltip on daily raids settings on mobile (RotoR)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.9",
+            "date": "April 22",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added daily raids filter",
+                    "subPoints": [
+                        "You can use it to tweak recommended locations based on your needs (e.g. you want to show only nodes that have Chaos as deployable factions)",
+                        "You can filter by alliances (Chaos, Xenos, Imperial) and factions(Necrons, etc.) of allies or enemies",
+                        "You can filter by campaign types (Elite, Mirror, etc.)",
+                        "You can filter by upgrades rarity (Legendary, Epic, etc.)"
+                    ],
+                    "images": [
+                        {
+                            "path": "raids1.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "UI adjustments for the Daily Raids page (await for more)",
+                    "subPoints": [
+                        "Added navigation shortcut between goals and daily raids views",
+                        "\"Refresh estimate\" button renamed to \"Refresh\" and moved to the top of the page",
+                        "\"Clear completed raids\" button renamed to \"Reset day\" and moved to the top of the page",
+                        "\"Selected characters\" section renamed to \"Selected goals\" and added characters' icons",
+                        "\"Materials\" section split into 3 sections: \"In Progress materials\", \"Finished materials\", \"Blocked materials\"",
+                        "Added total number of raids and raids per day to the raids cards",
+                        "Updated daily raids settings"
+                    ],
+                    "images": [
+                        {
+                            "path": "raids2.png"
+                        },
+                        {
+                            "path": "raids3.png"
+                        },
+                        {
+                            "path": "raids4.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
+        {
+            "version": "1.4.8",
+            "date": "April 19",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added guild war attack tokens tracking and guild overall data.",
+                    "subPoints": [
+                        "Track how many war tokens you have left to use for attack enemy defences",
+                        "This data is automatically shared with your guildmates",
+                        "You can manually tweak wat tokens count on the \"Deployment status\" dialog or just rely on automatic decrement by 1 after deploying a team"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild3.png"
+                        },
+                        {
+                            "path": "guild2.png"
+                        },
+                        {
+                            "path": "guild4.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added guild members \"Username\" and \"Share Token\" validation",
+                    "subPoints": [
+                        "You will be able to see the reason why user is invalid and ask your guildmates to provide proper data"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild1.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added new \"Import link\" option on the guild page",
+                    "subPoints": [
+                        "The username and share token will be automatically parsed from the share link",
+                        "It should help to deal with human error when manually entering username and share token"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild5.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated upgrades icons. Thanks to KIVIY"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed guild view/edit on mobile"
+                },
+                {
+                    "text": "Fixed issue with \"Starts\" on the character's stats screen (SeventhSun)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.7",
+            "date": "April 18",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated Thank You cards with \"Buy me a coffee\" supporters",
+                    "subPoints": [
+                        "You can get one for you but supporting the planner on https://www.buymeacoffee.com/tacticusplanner",
+                        "Added discord server roles for supporters. Contact me if you are missing the role"
+                    ],
+                    "images": [
+                        {
+                            "path": "bmc.png"
+                        }
+                    ],
+                    "route": "ty"
+                },
+                {
+                    "text": "Added possibly to access guildmates Tacticus planner data",
+                    "subPoints": [
+                        "Your guildmates should enable roster sharing and share with you username and sharetoken which you should populate on the Input Guild page",
+                        "You can populate guildmates data by importing Excel file",
+                        "Your account data is not included automatically so make sure to populate your username and sharetoken as well"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild1.png"
+                        },
+                        {
+                            "path": "guild2.png"
+                        }
+                    ],
+                    "route": "input/guild"
+                },
+                {
+                    "text": "Added Guild Insights page",
+                    "subPoints": ["You can view guild averaged roster data and who own which characters"],
+                    "images": [
+                        {
+                            "path": "guild3.png"
+                        },
+                        {
+                            "path": "guild4.png"
+                        }
+                    ],
+                    "route": "learn/guildInsights"
+                },
+                {
+                    "text": "Added Guild Waz zones page",
+                    "subPoints": [
+                        "War zones layout is updated according to changes announced for the next season of guild wars",
+                        "War zones can be reordered in the same fashion how it is done in the game",
+                        "You can have up to 3 war zones layout",
+                        "You can view guildmates potential for each difficult and assign them to specific zones"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild5.png"
+                        },
+                        {
+                            "path": "guild6.png"
+                        }
+                    ],
+                    "route": "plan/guildWar/zones"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "On the character's details dialog when rarity is changed the stars will be auto-adjusted accordingly. Thanks to NickReinlein for contribution",
+                    "route": "https://github.com/svehera/tacticusplanner/pull/184"
+                },
+                {
+                    "text": "Refined \"power/potential\" calculation formula to scale better for rank upgrades. Thanks to Lëonaica for contribution",
+                    "subPoints": [
+                        "40k is ultimate power now and is a maximum for each character when character has Diamond III rank, Blue star and both abilities at level 50"
+                    ],
+                    "images": [
+                        {
+                            "path": "40k.png"
+                        }
+                    ],
+                    "route": "https://github.com/svehera/tacticusplanner/pull/188"
+                },
+                {
+                    "text": "Updated icon for Righteous Candle (SeventhSun)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed Indomitus Mirror Elite 4 reward (SeventhSun)"
+                },
+                {
+                    "text": "Fixed Saim-Hann Elite 5 reward (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue with calendar days are wrong by 1 day too many (Tani)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.6",
+            "date": "April 6",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added option to support the planner with the \"Buy me a coffee\" service",
+                    "route": "https://www.buymeacoffee.com/tacticusplanner",
+                    "subPoints": [
+                        "Consider supporting the Planner with some \"troopers\". It will help make the Planner a better place for everyone"
+                    ],
+                    "images": [
+                        {
+                            "path": "qr.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "On the \"Campaigns Progress\" page maxed out campaigns will be greyed out",
+                    "images": [
+                        {
+                            "path": "cp.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed teams reordering on the guild war offense planner (Kinks)"
+                },
+                {
+                    "text": "Fixed bug on the daily raids with selected character when rank point 5 was not accounted after refreshing estimate"
+                },
+                {
+                    "text": "Fixed Thad S2-S3 upgrade (BlatantFix)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.5",
+            "date": "April 6",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added deployment status tracking for Guild War offense teams and specific characters",
+                    "images": [
+                        {
+                            "path": "1.png"
+                        },
+                        {
+                            "path": "2.png"
+                        },
+                        {
+                            "path": "3.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Updated Guild War defense page",
+                    "subPoints": [
+                        "Added \"Zone difficulty\" selector instead of BF level and Section selectors",
+                        "Moved total teams to the battle field levels info table"
+                    ]
+                },
+                {
+                    "text": "General updates to align the planner with the 1.17 Tacticus update",
+                    "subPoints": [
+                        "Added new characters - Macer and Asmodai",
+                        "Update Guild War battlefield zones",
+                        "New Campaign Battles: ‘Mirror Saim-Hann’ Part 5 and ‘Elite Saim-Hann’ Part 1",
+                        "Vitruvius Legendary event starting on May 12",
+                        "Upgrades locations changes"
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added possibility to add \"Locked\" character to a team on the \"Edit team dialog\". The character will be automatically removed from other teams"
+                },
+                {
+                    "text": "Fixed Ad Mechs upgrades order (Cody212501, TuffNuts)"
+                },
+                {
+                    "text": "Updated upgrades icons. Thanks to Illidan, Avalon1204, KIVIY, Adj, Rydai, Balask83, Anigav, Tani, Cody212501 for help"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fix issue with inventory items being cropped when alphabet letters are displayed in mobile (Tani)"
+                },
+                {
+                    "text": "Fixed Month language on goals/daily raids pages (markRom)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.4",
+            "date": "March 26",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added Guild War planner for Offense and Defense",
+                    "subPoints": [
+                        "The planner are meant to be used each guild player. The planner for a Guild Leaders to plan battlefield layout and players positions will be added later",
+                        "On the Defense planner player can setup up to 5 teams with rarity caps based on selected battlefield level and section",
+                        "On the Offense planner player can setup up to 10 teams with custom rarity caps"
+                    ],
+                    "images": [
+                        {
+                            "path": "def.png"
+                        },
+                        {
+                            "path": "off.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated nav for mobile",
+                    "images": [
+                        {
+                            "path": "nav.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": []
+        },
+        {
+            "version": "1.4.3",
+            "date": "March 20",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "New thank you card for SeventhSun's contribution"
+                },
+                {
+                    "text": "Added \"Rank Point Five\" toggle when setting/editing an upgrade rank goal (Edward H)",
+                    "subPoints": [
+                        "When you reach a target upgrade rank, you are immediately able to apply the top row of three upgrades.\nIf you toggle on the \"Rank Point Five\" switch then these upgrades will be included in your daily raids plan"
+                    ],
+                    "images": [
+                        {
+                            "path": "rankpoint5.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added \"Ignore Rank/Rarity restrictions\" toggle when setting an upgrade rank goal",
+                    "subPoints": [
+                        "If you toggle on this switch then you will be able to set Upgrade Rank goal for a character you have not unlocked or ascended to required rarity yet"
+                    ],
+                    "images": [
+                        {
+                            "path": "rankignore.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added \"Show alphabet\" toggle on the Inventory page (Adj)",
+                    "images": [
+                        {
+                            "path": "alpha.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added XP Books calculations to a goals cards (Tornagides)",
+                    "images": [
+                        {
+                            "path": "xp.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added text auto select for Quick Filter Search on the Inventory page (Tani)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed Corrodius # of hits to be 1 (熊翊呈)"
+                },
+                {
+                    "text": "Fixed issue with \"Update Inventory\" not working correctly if you make any upgrade-unrelated change afterwards before submit (SeventhSun)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.2",
+            "date": "March 13",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added possibility to customize Who You Own view (Tani, Lobo)",
+                    "images": [
+                        {
+                            "path": "max.png"
+                        },
+                        {
+                            "path": "min.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added enemy factions to LRE tracks (GhostHobbit)",
+                    "subPoints": [
+                        "Click on the 'i' icon navigate user to the Wiki page of respective faction (NPC units block)"
+                    ],
+                    "images": [
+                        {
+                            "path": "lre.png"
+                        }
+                    ]
+                },
+                {
+                    "route": "learn/campaigns",
+                    "text": "Added data about # of deployed characters in specific battle (ForgottenSaber, Szarekh)",
+                    "subPoints": [
+                        "Added \"Slots\" column. Which will be empty if there could be deployed 5 characters in a battle otherwise 3 or 4",
+                        "Some Mirror Elite campaigns (like Indomitus Mirror Elite and Octarius Mirror Elite) have 5 slots in all battles"
+                    ],
+                    "images": [
+                        {
+                            "path": "slots.png"
+                        }
+                    ]
+                },
+                {
+                    "route": "learn/characters",
+                    "text": "Updated the Learn Characters page",
+                    "subPoints": [
+                        "Added units D3 stats for Health, Damage, Armour. Thanks Ganko for contribution",
+                        "Added Rank and Rarity columns of owned characters (Corusame)",
+                        "Added Alliance filter",
+                        "Added columns grouping to make table more compact",
+                        "Better experience on the mobile (but still not the best)"
+                    ],
+                    "images": [
+                        {
+                            "path": "characters.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Changed options names in Order dropdown on the Who You Own page to be \"BS Value\" (sasquach)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed Fall of Cadia Elite 5 node reward (Farfalafel)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.1",
+            "date": "March 11",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added calendar days for Goals and Daily Raids (Tani)",
+                    "images": [
+                        {
+                            "path": "goals.png"
+                        },
+                        {
+                            "path": "dr.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Add new colors to progress (SergeDavid)"
+                },
+                {
+                    "text": "Removed Snotflogga from \"No Summons\" track after his rewORK (xenomorphslayer, Solar7809)"
+                },
+                {
+                    "text": "Removed tooltip from the rank image (SeventhSun)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed additional payout for points milestones on LRE progress (Balask83, Tani)"
+                },
+                {
+                    "text": "Fixed Diamond II->III upgrades for Necrons"
+                },
+                {
+                    "text": "Fixed issue when energy is allocated for Blocked materials (RotoR)"
+                },
+                {
+                    "text": "Fixed issue with strange data when mark every space as complete in LRE tracker (Mehal)"
+                },
+                {
+                    "text": "Fixed Fall of Cadia Elite 5 node reward (Farfalafel)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.0",
+            "date": "March 6",
+            "type": "Patch",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed UI issue with factions layout on the Who You Own page (Maverick007, ijriims)"
+                },
+                {
+                    "text": "Fixed issue with LRE progress reset (Tani, SergeDavid, RotoR)"
+                }
+            ]
+        },
+        {
+            "version": "1.3.9",
+            "date": "March 5",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new World Eaters character - Wrask"
+                },
+                {
+                    "text": "Added ‘Mirror Saim-Hann’ Part 3 - 4 nodes"
+                },
+                {
+                    "text": "Added the World Eaters upgrades",
+                    "subPoints": [
+                        "(Rare) Chainaxe Teeth",
+                        "(Rare) Brazen Jaws",
+                        "(Rare) Cadaere Renissum",
+                        "(Epic) Blessed Chainaxe Teeth",
+                        "(Epic) Blessed Brazen Jaws",
+                        "(Epic) Blessed Cadaere Renissum",
+                        "(Legendary) Exalted Chainaxe Teeth",
+                        "(Legendary) Exalted Brazen Jaws",
+                        "(Legendary) Exalted Cadaere Renissum",
+                        "(Legendary) Boon of Khorne",
+                        "(Legendary) Mark of Khorne",
+                        "(Legendary) Butcher's Nails",
+                        "(Legendary) Collar of Khorne"
+                    ]
+                },
+                {
+                    "text": "Added Diamond II Upgrades",
+                    "subPoints": [
+                        "(Legendary) Superaugmented Constitution",
+                        "(Legendary) Superaugmented Strength",
+                        "(Legendary) Superaugmented Defences",
+                        "(Legendary) Monstrous Constitution",
+                        "(Legendary) Monstrous Strength",
+                        "(Legendary) Monstrous Defences",
+                        "(Legendary) Preternatural Constitution",
+                        "(Legendary) Preternatural Strength",
+                        "(Legendary) Preternatural Defences",
+                        "(Legendary) Technocrafted Constitution",
+                        "(Legendary) Technocrafted Strength",
+                        "(Legendary) Technocrafted Defences"
+                    ]
+                },
+                {
+                    "text": "Added feature to keep track of the missions done in each instance of the LRE (Solar7809, Dyl4n)",
+                    "images": [
+                        {
+                            "path": "events.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Corrected factions order on the Who You Own page (SeventhSun)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed recipe for 'Regenerating Nano Swarm' upgrade (Cody212501)"
+                },
+                {
+                    "text": "Fixed reward for Fall of Cadia ME 30 to have Slicing Claws (SeventhSun)"
+                }
+            ]
+        },
+        {
+            "version": "1.3.8",
+            "date": "February 28",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated logo and added it to the page title",
+                    "images": [
+                        {
+                            "path": "icon.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added orange badge for maxed-out rank. Thanks Lëonaica for contribution",
+                    "images": [
+                        {
+                            "path": "wyo_info.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed copy of the share link in the mobile (thean)"
+                },
+                {
+                    "text": "Fixed inventory search and misnamed legendary Chaos Boons (Dark Gods, Nurgle, Tzeentch) materials (kanslerioikein)"
+                },
+                {
+                    "text": "Fixed recipe for \"Candelabrum of Burning Wrath\" the Black Templars upgrade (Agarn)"
+                },
+                {
+                    "text": "Fixed the \"Range\" stat for Toth (MocarnyJoe)"
+                }
+            ]
+        },
+        {
+            "version": "1.3.7",
+            "date": "February 20",
+            "type": "Patch",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Reverted changes related to What's new popup being shown automatically",
+                    "subPoints": [
+                        "After closing the What's New popup some data saved is to local storage to mark the What New as seen for the current version and if a user tries to login on new device the user will be prompted with the \"Override\" warning and choose wrong(depending on case) option."
+                    ]
+                },
+                {
+                    "text": "Fixed issue with the app going blank after making the Level input empty.",
+                    "subPoints": [
+                        "There was an issue in how invalid values were handled in the calculations for BS value"
+                    ]
+                }
+            ]
+        },
+        {
+            "version": "1.3.6",
+            "date": "February 19",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added characters value (in blackstone) calculations. Thanks Lëonaica for contribution.",
+                    "images": [
+                        {
+                            "path": "bsvalue.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added indication of materials that don't have any locations unlocked on the Daily Raids screen (UnknownSolarEvent)",
+                    "images": [
+                        {
+                            "path": "blocked.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Legendary events tables now available on mobile view by default (SoilBurn)",
+                    "images": [
+                        {
+                            "path": "lemobile.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added alliance filters to Who You Own page. Thanks Lëonaica for contribution.",
+                    "images": [
+                        {
+                            "path": "alliance.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "The \"What's new \" popup will be displayed automatically in 3 seconds after app with new version is opened."
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with invalid upgrades being applied to a character (SeventhSun)"
+                },
+                {
+                    "text": "Fixed Sibyll Ascend/Unlock goals (Szarekh)"
+                },
+                {
+                    "text": "Fixed Sho'Syl Stone I upgrades (ChargingFurret)"
+                },
+                {
+                    "text": "Changed label of \"Blessing of Nurgle\" to  \"Boon of Nurgle\" (Tani)"
+                },
+                {
+                    "text": "Fixed tooltip of \"Blessed Tabard\" (kanslerioikein)"
+                },
+                {
+                    "text": "Added missing user's name on the Shared Roster page"
+                }
+            ]
+        },
+        {
+            "version": "1.3.5",
+            "date": "February 8",
+            "type": "Update",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Updated Tan Gi'Da and Exitor-Rho portraits on the Who You Own page"
+                },
+                {
+                    "text": "Added upgrades for Exitor-Rho"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with daily raids suggestions in case only \"Use More efficient nodes (Mirror)\" is selected and there are only Mirror and regular campaigns available"
+                },
+                {
+                    "text": "Fixed \"Warpweave Robe\" upgrade icon (Hominus)"
+                },
+                {
+                    "text": "Fixed issue on daily raids when amount of items that will be added to inventory is higher by 1 then needed"
+                },
+                {
+                    "text": "Added missing \"Crushing strike\" trait for Brother Burchard (MocarnyJoe)"
+                }
+            ]
+        },
+        {
+            "version": "1.3.4",
+            "date": "February 6",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added Averaged Roster insights",
+                    "route": "/learn/insights",
+                    "mobileRoute": "/mobile/learn/insights",
+                    "subPoints": ["NOTE: This feature is not very stable yet so there might be an issues"]
+                },
+                {
+                    "text": "Added Saim-Hann mirror 1-30 nodes and Campaign progress"
+                },
+                {
+                    "text": "Added Exitor-Rho data"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated LRE dates and Aunshi unlock shards"
+                },
+                {
+                    "text": "Refactored Who You Own pages. Only backstage updates nothing should change from UI/logic perspective"
+                },
+                {
+                    "text": "Handled error of \"Failed to load dynamically imported modules\"",
+                    "subPoints": [
+                        "It happens after app has been updated. The error handling will take affect in further updates. In this version (1.3.4) you will still see and error"
+                    ]
+                },
+                {
+                    "text": "Renamed the \"Bias\" to \"LRE Bias\" for more clarity (SeventhSun)"
+                },
+                {
+                    "text": "Removed hover tip from the daily raids input (SeventhSun)"
+                },
+                {
+                    "text": "Added auto value select when starting editing inputs on the Inventory, Campaigns Progress and Daily raids pages"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed redirects on mobile version"
+                },
+                {
+                    "text": "Fixed issue with inventory update when going from Bronze 1 Aun'shi with full upgrades to Bronze 2 Aun'shi  (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue when using priority raid planning, the lowest priority items from the next character fill the last few energy uses (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue with completed daily raids icons after completing raids for Unlock.Ascend raids (Arvanes)"
+                }
+            ]
+        },
+        {
+            "version": "1.3.3",
+            "date": "January 23",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added F.A.Q (Frequently Asked Questions) page",
+                    "route": "/faq",
+                    "mobileRoute": "/mobile/faq"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Nandi's Dirty Dozen to January 2024 data",
+                    "route": "learn/dirtyDozen"
+                }
+            ],
+            "bugFixes": []
+        },
+        {
+            "version": "1.3.2",
+            "date": "January 14",
+            "type": "Update",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Updated info box on the Who You Own. Thanks Lëonaica for contribution."
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed special release characters shards count for unlock (xenomorphslayer)"
+                },
+                {
+                    "text": "Fixed tooltip placement for upgrades to be displayed at the top (Tani)"
+                },
+                {
+                    "text": "Fixed issue with daily raids when there are some Ascend/Unlock goal with blank energy field (Tani)"
+                }
+            ]
+        },
+        {
+            "version": "1.3.1",
+            "date": "January 12",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "New UI for the inventory (Tani)",
+                    "images": [
+                        {
+                            "path": "inventory.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added possibility to track character's shards count on the Who You Own page",
+                    "images": [
+                        {
+                            "path": "shards1.png"
+                        },
+                        {
+                            "path": "shards2.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Updated Unlock and Ascend goals to display estimated days left",
+                    "images": [
+                        {
+                            "path": "goals.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "New power calculation formula. Thanks Lëonaica for contribution."
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed Tan Gi'da upgrades for Bronze 1 rank (Kinks)"
+                }
+            ]
+        },
+        {
+            "version": "1.3.0",
+            "date": "January 10",
+            "type": "Patch",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Maugan Ra upgrades for Gold 2 rank (EthAllaran)"
+                },
+                {
+                    "text": "Tan Gi'da upgrades fixes Stone 1 - Diamond 1 ranks (Szarekh, Trueborn JCT)"
+                }
+            ]
+        },
+        {
+            "version": "1.2.9",
+            "date": "January 4",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new filter and order options on Who You Own page",
+                    "images": [
+                        {
+                            "path": "wyoOrder.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added LE Master Table pages which aggregates the \"Data Tables\" from all Legendary events (SergeDavid, NoxTempest)",
+                    "images": [
+                        {
+                            "path": "leMaster.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "New thank you card for Lëonaica contribution"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Tan Gi'Da icons"
+                },
+                {
+                    "text": "Added info popup on the Who You Own (Lëonaica)"
+                },
+                {
+                    "text": "Added \"Need to level\" badge in purple color on Who You Own (Lëonaica)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed upgrades order for Actus (CM Fluffy Honey Badger)"
+                }
+            ]
+        },
+        {
+            "version": "1.2.8",
+            "date": "December 28",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added option to share Who You Own page in readonly mode",
+                    "images": [
+                        {
+                            "path": "share1.png"
+                        },
+                        {
+                            "path": "share2.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Vitruvius kill points"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed stat for \"Secret Agenda\" upgrade from Damage to Health (Szarekh)"
+                },
+                {
+                    "text": "Fixed icon for \"Tome of arcane knowledge\" upgrade (KIVIY)"
+                },
+                {
+                    "text": "Fixed issue with abilities icons appear above the menu icons at the bottom of the screen (Juan)"
+                },
+                {
+                    "text": "Fixed event points for LRE to add up for 18000 point (CryptecCultist)"
+                }
+            ]
+        },
+        {
+            "version": "1.2.7",
+            "date": "December 24",
+            "type": "Patch",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Small UI adjustments on the Who You Own page (SergeDavid)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed Vitruvius missions list (Hominus, SergeDavid)"
+                },
+                {
+                    "text": "Fixed issue with Quick filter doesn't work in LE Data Tables (Juan)"
+                }
+            ]
+        },
+        {
+            "version": "1.2.6",
+            "date": "December 23",
+            "type": "Patch",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Added option to hide characters names on LE planner tables",
+                    "images": [
+                        {
+                            "path": "hidenames.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with character level not being correspond to rank (Lëonaica, Hominus)"
+                },
+                {
+                    "text": "Fixed issue with \"need to ascend to upgrade rank\" not updated without refresh when character's rarity changed (Mehal)"
+                }
+            ]
+        },
+        {
+            "version": "1.2.5",
+            "date": "December 23",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Merry Christmas!"
+                },
+                {
+                    "text": "Added power level benchmark: total, faction, character. Disclaimer: Doesn't represent in-game power",
+                    "images": [
+                        {
+                            "path": "power.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "New UI for the \"Who You Own\" screen that targets to match in-game Characters screen. For each character you can see:",
+                    "subPoints": [
+                        "Stars level",
+                        "Character's in-game portraits",
+                        "Badge with amount of upgrades applied or indicator that character needs to be ascended to progress",
+                        "Active and passive abilities levels",
+                        "Character's level",
+                        "Character's rarity(new) and rank icons"
+                    ],
+                    "images": [
+                        {
+                            "path": "wyo.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "New character's details to input and track",
+                    "subPoints": ["Stars level", "Character's level", "Character's xp"],
+                    "images": [
+                        {
+                            "path": "details.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added a limit for ranks in the \"Goals\" and the \"Who You Own\" based on the character's rarity (Arvanes)"
+                },
+                {
+                    "text": "Added a username and updated datetime format in the exported file name when using the Export feature"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with characters icons not being loaded on upgrades lookup table (Corusame)"
+                }
+            ]
+        },
+        {
+            "version": "1.2.4",
+            "date": "December 19",
+            "type": "Patch",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with error on home page/daily raids (UnderChromey, Ozymandias)"
+                },
+                {
+                    "text": "Fixed Thaddeus Noble Silver II rank upgrades (KIVIY)"
+                }
+            ]
+        },
+        {
+            "version": "1.2.3",
+            "date": "December 18",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added an ability to register the level of the skills for each character (saTchymoto)",
+                    "images": [
+                        {
+                            "path": "abilities.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Updated character's applied upgrades to be display like in game order",
+                    "images": [
+                        {
+                            "path": "upgrades.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Corrected spelling for \"Blessed Tabbard\" and \"Repair Tool\" (KIVIY)"
+                }
+            ],
+            "bugFixes": []
+        },
+        {
+            "version": "1.2.2",
+            "date": "December 15",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added Octarius Mirror Elite 16-40 nodes. Thanks sonsonVallano for contribution"
+                },
+                {
+                    "text": "Added icons for crafted materials for Tyranids and Ad Mech. Thanks YourAdHere for contribution"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated characters details to display upgrade icons for crafted materials.",
+                    "subPoints": ["Rank lookup and Upgrades page are updated too"],
+                    "images": [
+                        {
+                            "path": "upgrades.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed Yazaghor Bronze III rank upgrades (CM Fluffy Honey Badger)"
+                }
+            ]
+        },
+        {
+            "version": "1.2.1",
+            "date": "December 12",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added icons for health, armour and damage on character's details dialog"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added upgrades for Actus (Sv. Jebem)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed Roswitha Iron II rank upgrades (xenomorphslayer)"
+                }
+            ]
+        },
+        {
+            "version": "1.2.0",
+            "date": "December 11",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added possibility to track crafted upgrades quantity. It will have effect on daily raids estimate (YourAdHere, Drewsophila)",
+                    "subPoints": [
+                        "In daily raids algorithm craftable item will be break down into base upgrades so total for base upgrades will be less",
+                        "Added \"Crafted count\" column to the Materials table to display count break from craftable upgrades",
+                        "Added \"\nShow craftable items\" toggle on the inventory view",
+                        "WARNING: \"Update inventory\" will not work with craftable items when check on character details dialog"
+                    ],
+                    "images": [
+                        {
+                            "path": "inventory.png"
+                        },
+                        {
+                            "path": "daily.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed Roswitha Iron I rank upgrades (xenomorphslayer)"
+                },
+                {
+                    "text": "Fixed Calandis Bronze I rank upgrades (Sv. Jebem)"
+                },
+                {
+                    "text": "Abbadon is spelled wrong (Despoiler vs Despolier) (sonsonVallano)"
+                },
+                {
+                    "text": "Repair-Kit became Repair Tool (sonsonVallano)"
+                }
+            ]
+        },
+        {
+            "version": "1.1.9",
+            "date": "December 5",
+            "type": "Update",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed missing/incorrect trait name for Snotflogga (MocarnyJoe)"
+                },
+                {
+                    "text": "Fixed \"Duplicated Organ\" type from Damage to Armour (Trueborn JCT)"
+                },
+                {
+                    "text": "Fixed recipe for \"Advanced Combat Stimms\" (xenomorphslayer)"
+                },
+                {
+                    "text": "Fixed error on Who You Own when trying to filter characters (Somberlord)"
+                },
+                {
+                    "text": "Fixed Traits filter on the Characters screen to include Necrons when Mechanical is selected (sasquach)"
+                }
+            ]
+        },
+        {
+            "version": "1.1.8",
+            "date": "November 28",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated the Upgrades table from the Learn section to display characters and their rank that use specific upgrade (Corusame)",
+                    "images": [
+                        {
+                            "path": "noncraftable.png"
+                        },
+                        {
+                            "path": "craftable.png"
+                        }
+                    ],
+                    "route": "/learn/upgrades",
+                    "mobileRoute": "/mobile/learn/upgrades"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Increased inventory item count limit to 1000 from 100 (YourAdHere)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with materials that contains \"Gold\" in name are not showing up in daily raids (NobleDoc OG Roster Gremlin, Argent Dawn)"
+                }
+            ]
+        },
+        {
+            "version": "1.1.7",
+            "date": "November 27",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added datamined Vitruvius LE. Beware that data may change"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated LE progress overview calculate points for 4, 5 and blue star (Krogarth)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed days left calculations on the goals screen (Krogarth)"
+                }
+            ]
+        },
+        {
+            "version": "1.1.6",
+            "date": "November 23",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added possibility to hide completed tracks for legendary planner (sasquach)",
+                    "images": [
+                        {
+                            "path": "hideCompleted.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Add icons for the new non-craftable Adeptus Mechanicus upgrades",
+                    "subPoints": ["Blessed Cogitator", "Motive Force Capacitator", "Cogwheel Crest"]
+                },
+                {
+                    "text": "Added recipes for new crafted materials (sonsonVallano)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with \"X Energy Needed\" is not being updated after completing raids"
+                },
+                {
+                    "text": "Fixed issue with incorrect estimate of daily raids when using \"Farm by priority order\" (xNobleDoc)"
+                },
+                {
+                    "text": "Fixed upgrades for Ragnar rank Silver I and other (Drewsophila, sonsonVallano)"
+                },
+                {
+                    "text": "Fixed issue with inventory not being updated correctly after rank change"
+                },
+                {
+                    "text": "Fixed issue in character selection of Daily Raids when character's current rank shown as Stone I though it is not (Somberlord)"
+                }
+            ]
+        },
+        {
+            "version": "1.1.5",
+            "date": "November 22",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added Octarius Mirror Elite battles 1-16"
+                },
+                {
+                    "text": "Added new Upgrades for the Adeptus Mechanicus and updated locations according to 1.3 patch notes",
+                    "subPoints": [
+                        "Octarius Battle 73: Divinator Class Auspex → Unyielding Rivets",
+                        "Fall of Cadia Mirror Battle 38: Mutation: Scaly Skin --> Valuable Fabric",
+                        "Indomitus Mirror Battle 34: Repair Kit → Motive Force Condenser",
+                        "Fall of Cadia Mirror Battle 37: Repair Kit → Cogwheel Crest",
+                        "Indomitus Mirror Battle 69: Standard-Issue Tourniquet → Blessed Cogitator",
+                        "Indomitus Elite Battle 39: Sororitas legendary → Blessed Cogitator",
+                        "Octarius Elite Battle 35: Satchel → Unyielding Rivets",
+                        "Fall of Cadia Mirror Battle 5: Silver Scope --> Mutation: Scaly Skin",
+                        "Indomitus Mirror Battle 27:  Golden Ornamental Skull  --> Standard-Issue Tourniquet"
+                    ]
+                },
+                {
+                    "text": "Updated rank up data according to 1.3 patch notes",
+                    "subPoints": [
+                        "Thaddeus Rank 6 and 9: Repair Kit → Metal Decorative Skull",
+                        "Pestillian Rank 9: Repair Kit → Battle Scar",
+                        "Isabella Rank 6: Repair Kit → Metal Decorative Skull",
+                        "All T’au (apart from Aun’shi) Rank 9: Repair Kit → Kill Count"
+                    ]
+                },
+                {
+                    "text": "Updated recipe data",
+                    "subPoints": [
+                        "Advanced Exospine is now using “Subdermal Plating” instead of the “Repair Kit” for crafting",
+                        "Advanced Combat Stims now use “First Aid Kits” instead of “Medical Supply Crate” for crafting "
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
+        {
+            "version": "1.1.4",
+            "date": "November 21",
+            "type": "Update",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Updated \"My progress\" to checking a prerequisite that cannot be completed without completing other ones would automatically check those ones as well (Vexen)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed the issue with points calculations to unlock character on \"My Progress\" (ZHovtiyLitsar)"
+                },
+                {
+                    "text": "Fixed issue with goals order is not being updated after delete a goal (ZHovtiyLitsar)"
+                }
+            ]
+        },
+        {
+            "version": "1.1.3",
+            "date": "November 20",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated \"My Progress\" to take into account additional currency payouts for those who bought the bonus crates. Thanks NoxTempest for creating a vid that made it easier to breakdown and implement. Check out his vid by clicking on",
+                    "route": "https://www.youtube.com/watch?v=8VPI8I0A4Xc",
+                    "images": [
+                        {
+                            "path": "myprogress.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Changed home page items order to be \"Daily Raids\", \"Legendary Event\", \"Goals\""
+                },
+                {
+                    "text": "Updated top section in \"My progress\" to display data required for unlock. Total is moved to hovertip"
+                },
+                {
+                    "text": "Added kill points for the \"Ragnar\" LE battles"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed error after first login for some users that appeared after November 18 update"
+                }
+            ]
+        },
+        {
+            "version": "1.1.2",
+            "date": "November 18",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added option to the Daily Raids settings to \"Farm by priority order\". Daily raids will be suggested in order of characters on goals page. (Somberlord)",
+                    "images": [
+                        {
+                            "path": "farm.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added upgrades data for Njal, Ragnar, Deathleaper, Winged Tyrant Prime"
+                },
+                {
+                    "text": "Small UI updates for daily raids feature"
+                },
+                {
+                    "text": "Small UI updates for Dirty Dozen table (Razielesaint)",
+                    "route": "learn/dirtyDozen"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issues with completed raid still appears in today's list and is not proposed in Day 2 for the final material (Somberlord)"
+                },
+                {
+                    "text": "Fixed issues with app hang when lookup rank for Calgar Silver 3 or more (WolfLord 5's, Corusame)"
+                },
+                {
+                    "text": "Fixed issues with goals priority when setting goals from LE screen (Juanjo)"
+                }
+            ]
+        },
+        {
+            "version": "1.1.1",
+            "date": "November 16",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated Thank You section"
+                },
+                {
+                    "text": "Added \"Rank End\" selector on Rank lookup page (ZHovtiyLitsar)"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Black Templar hits and traits data"
+                },
+                {
+                    "text": "Change Auto-Teams to prioritize Rank over Rarity by default"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with daily raids items missing selected characters (Vexen)"
+                },
+                {
+                    "text": "Fixed Sho'Syl Silver 2 upgrades mismatch (Szarekh)"
+                }
+            ]
+        },
+        {
+            "version": "1.1.0",
+            "date": "November 13",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Daily Raids Planner",
+                    "subPoints": [
+                        "Plan daily raids for the characters you've set goals for",
+                        "Set yours campaigns progress to get better estimate",
+                        "Populate your inventory to have even more precise estimate",
+                        "Mark applied gear on characters to improve estimate further"
+                    ],
+                    "images": [
+                        {
+                            "path": "dailyRaids.png"
+                        },
+                        {
+                            "path": "dailyRaids2.png"
+                        },
+                        {
+                            "path": "dailyRaids3.png"
+                        },
+                        {
+                            "path": "dailyRaids4.png"
+                        },
+                        {
+                            "path": "dailyRaids5.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Home page update",
+                    "subPoints": [
+                        "Added upcoming legendary event. Shortcut to the Ragnar LE",
+                        "Added top priority goal. Shortcut to the Goals",
+                        "Added completed raids locations. Shortcut to the Daily Raids"
+                    ],
+                    "images": [
+                        {
+                            "path": "home.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Navigation update",
+                    "subPoints": [
+                        "Input features: Who You Own, Campaigns Progress(new*), Inventory(new*)",
+                        "Plan features: Goals, Daily Raids(new*), Ragnar LE, Aun Shi LE, Shadowsun LE",
+                        "Learn features: Characters, Upgrades(new*), Rank Lookup(new*), Campaigns(new*), Dirty Dozen"
+                    ],
+                    "images": [
+                        {
+                            "path": "navigation-web.png"
+                        },
+                        {
+                            "path": "navigation-mobile.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated characters order on Who You Own to be the same as in the game"
+                },
+                {
+                    "text": "Updated Nandi's Dirty Dozen to October 2023 data",
+                    "route": "learn/dirtyDozen"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed: issue with Unlock goal not appear as completed after character unlock"
+                }
+            ]
+        },
+        {
+            "version": "1.0.2",
+            "date": "October 23",
+            "type": "Patch",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Updated \"Restore Backup\" logic in user menu"
+                },
+                {
+                    "text": "Updated new characters(Winged Tyrant Prime, Deathleaper, Njal Stormcaller, Ragnar Blackmane) stats and added icons",
+                    "route": "learn/characters"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed: issue with exporting JSON data not working in some cases"
+                }
+            ]
+        },
+        {
+            "version": "1.0.1",
+            "date": "October 20",
+            "type": "Patch",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed data display after sync with server"
+                },
+                {
+                    "text": "Added \"Restore data\" option to user menu. If you've experienced data loss try to use this option. Apologies for any inconvenience."
+                },
+                {
+                    "text": "Added missing \"Only unlocked\" option on the mobile legendary events"
+                }
+            ]
+        },
+        {
+            "version": "1.0.0",
+            "date": "October 20",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added \"What's New\" dialog"
+                },
+                {
+                    "text": "Added placeholders for new characters - Winged Tyrant Prime, Deathleaper, Njal Stormcaller, Ragnar Blackmane"
+                },
+                {
+                    "text": "Added LRE for Ragnar Blackmane. *Some data can change",
+                    "route": "plan/le/ragnar"
+                },
+                {
+                    "text": "Technical improvements for better stability"
+                },
+                {
+                    "text": "Desktop: Updated UI for Legendary Events page",
+                    "subPoints": [
+                        "Removed LRE tabs. Each event now have its own URL",
+                        "Changed position of the view preferences. Now it top left corner",
+                        "Added \"Auto-team\" option to  view preferences. When unchecked characters in the tables will be aligned by name and \"Auto-teams\" settings will be disabled"
+                    ],
+                    "images": [
+                        {
+                            "path": "le1.png"
+                        },
+                        {
+                            "path": "le2.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Mobile: Updated UI for Legendary Events page",
+                    "images": [
+                        {
+                            "path": "le3.png"
+                        },
+                        {
+                            "path": "le4.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Removed \"Unlocked\" checkbox on characters details. Whether character is unlocked now is determined by the Rank value."
+                },
+                {
+                    "text": "Added timestamp of last modified date to the file name when exporting data"
+                },
+                {
+                    "text": "Updated top navigation and \"hamburger\" menu"
+                },
+                {
+                    "text": "Added separate URL for each legendary event"
+                },
+                {
+                    "text": "Click on title navigates to home page"
+                },
+                {
+                    "text": "For new users pre-populated default characters (Varro, Certus, Bellator, Vindicta) on \"Who you Own\" and added goals for them"
+                },
+                {
+                    "text": "Added sortable \"Rank\" and \"Rarity\" columns to the \"Data Tables\" on LRE page (SergeDavid)"
+                },
+                {
+                    "text": "Added notes to the \"My Progress\" on LRE page (xenoblight+)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed: order of Calandis and Aethana on \"Who You Own\" page (SergeDavid, Fonzoland)"
+                },
+                {
+                    "text": "Fixed: \"Recommend first/last\" not working correctly (SergeDavid)"
+                },
+                {
+                    "text": "Fixed: \"Tactician\" spelling is not correct (Fonzoland)"
+                },
+                {
+                    "text": "Fixed: on LRE \"My Progress\" regular and premium missions are not accounted for the owned currency (SergeDavid)"
+                },
+                {
+                    "text": "Fixed: on mobile toast message is duplicated after first open"
+                },
+                {
+                    "text": "Fixed: page title is not correct when navigate by link"
+                },
+                {
+                    "text": "Fixed: username is not set for a short time when first load  with already logged in user"
+                },
+                {
+                    "text": "Fixed: \"Unlock\" goal type is missing when editing goal"
+                },
+                {
+                    "text": "Fixed: \"undefined\" tooltip on empty cell in selected teams on LRE page"
+                }
+            ]
+        }
+    ]
+}

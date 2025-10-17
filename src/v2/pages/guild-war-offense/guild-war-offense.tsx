@@ -1,43 +1,45 @@
-﻿import React, { useContext, useMemo } from 'react';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { BattlefieldInfo } from 'src/v2/features/guild-war/battlefield-info';
-import { Team } from 'src/v2/features/characters/components/team';
-import { ICharacter2 } from 'src/models/interfaces';
-import { Conditional } from 'src/v2/components/conditional';
-import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { SelectTeamDialog } from 'src/v2/features/characters/components/select-team-dialog';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { groupBy, mapValues, orderBy, sum } from 'lodash';
-import InfoIcon from '@mui/icons-material/Info';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
-import { Rank, Rarity } from 'src/models/enums';
-import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
-import Button from '@mui/material/Button';
+﻿import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardActions, CardContent, CardHeader, Input } from '@mui/material';
-import { getCompletionRateColor } from 'src/shared-logic/functions';
-import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import { groupBy, mapValues, orderBy, sum } from 'lodash';
+import React, { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { DeploymentStatus } from 'src/v2/features/guild-war/deployment-status';
+import { Link } from 'react-router-dom';
+
+import { ICharacter2 } from 'src/models/interfaces';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { getCompletionRateColor } from 'src/shared-logic/functions';
+
+import { Rarity, Rank } from '@/fsd/5-shared/model';
+import { AccessibleTooltip, Conditional, FlexBox } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { CharactersService as CharacterEntityService } from '@/fsd/4-entities/character';
+
+import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { FlexBox } from 'src/v2/components/flex-box';
+import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
+import { SelectTeamDialog } from 'src/v2/features/characters/components/select-team-dialog';
+import { Team } from 'src/v2/features/characters/components/team';
 import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
-import { Loader } from 'src/v2/components/loader';
 import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
 import { ViewGuildOffense } from 'src/v2/features/guild/view-guild-offense';
+import { BattlefieldInfo } from 'src/v2/features/guild-war/battlefield-info';
+import { DeploymentStatus } from 'src/v2/features/guild-war/deployment-status';
+import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
 
 export const GuildWarOffense = () => {
     const { guild, guildWar, characters, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const [openSelectTeamDialog, setOpenSelectTeamDialog] = React.useState(false);
-    const [editedTeam, setEditedTeam] = React.useState<IGWTeamWithCharacters | null>(null);
+    const [openSelectTeamDialog, setOpenSelectTeamDialog] = useState(false);
+    const [editedTeam, setEditedTeam] = useState<IGWTeamWithCharacters | null>(null);
 
-    const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
-    const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
+    const [openCharacterItemDialog, setOpenCharacterItemDialog] = useState(false);
+    const [editedCharacter, setEditedCharacter] = useState<ICharacter2 | null>(null);
 
     const { data, loading } = useGetGuildRosters({ members: guild.members });
 
@@ -104,7 +106,9 @@ export const GuildWarOffense = () => {
         const teams = guildWar.teams
             .filter(x => x.type === GuildWarTeamType.Offense)
             .map(team => {
-                const teamWithChars = team.lineup.map(name => characters.find(char => char.name === name)!);
+                const teamWithChars = team.lineup.map(name =>
+                    characters.find(char => CharacterEntityService.matchesAnyCharacterId(name, char))
+                );
                 return { ...team, lineup: teamWithChars.filter(x => !!x) };
             });
         return orderBy(
@@ -119,7 +123,7 @@ export const GuildWarOffense = () => {
     }, [guildWar.teams, characters, guildWar.deployedCharacters]);
 
     const teamsPotential = useMemo(() => {
-        return teamsWithCharacters.map((team, teamIndex) => {
+        return teamsWithCharacters.map(team => {
             const lineup = team.lineup.map(x => ({
                 id: x.name,
                 potential: CharactersService.calculateCharacterPotential(
@@ -175,7 +179,7 @@ export const GuildWarOffense = () => {
                             </Conditional>
                         </>
                     }
-                    onEdit={() => () => startEditTeam(currTeam)}
+                    onEdit={() => startEditTeam(currTeam)}
                     teamPotential={teamsPotential[i].total}
                     onCharacterClick={startEditCharacter}
                     teamPotentialBreakdown={
@@ -237,7 +241,7 @@ export const GuildWarOffense = () => {
             if (slotsCount) {
                 return (
                     <div key={rarity} className="flex-box gap3">
-                        <RarityImage rarity={rarity} /> x{slotsCount}
+                        <RarityIcon rarity={rarity} /> x{slotsCount}
                     </div>
                 );
             }
@@ -258,7 +262,7 @@ export const GuildWarOffense = () => {
             if (slotsCount) {
                 return (
                     <div key={rarity} className="flex-box gap3">
-                        <RarityImage rarity={rarity} /> x{slotsCount}
+                        <RarityIcon rarity={rarity} /> x{slotsCount}
                     </div>
                 );
             }
@@ -399,7 +403,7 @@ const TeamCard: React.FC<{
                 title={
                     <FlexBox justifyContent={'space-between'}>
                         <div className="flex-box gap5" style={{ fontSize: 18 }}>
-                            <RarityImage rarity={team.rarityCap} />
+                            <RarityIcon rarity={team.rarityCap} />
                             <span>{team.name}</span>
                         </div>
                         <div className="flex-box gap5" style={{ fontSize: 16 }}>

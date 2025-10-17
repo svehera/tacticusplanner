@@ -1,9 +1,4 @@
-﻿import React, { useContext, useMemo } from 'react';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { FlexBox } from 'src/v2/components/flex-box';
-
-import { IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
-import {
+﻿import {
     Badge,
     Card,
     CardContent,
@@ -16,24 +11,31 @@ import {
     Tooltip,
 } from '@mui/material';
 import Button from '@mui/material/Button';
-import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
-import { BfLevelSelect } from 'src/v2/features/guild-war/bf-level-select';
-import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
-import { isMobile } from 'react-device-detect';
-import './guild-war-zones.scss';
-import { CommonProps } from '@mui/material/OverridableComponent';
-import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
-import { Loader } from 'src/v2/components/loader';
-import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
-import { Difficulty, Rank } from 'src/models/enums';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
 import Dialog from '@mui/material/Dialog';
-import { PlayersTable } from 'src/v2/features/guild/players-table';
+import { CommonProps } from '@mui/material/OverridableComponent';
+import React, { useContext, useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { Difficulty } from 'src/models/enums';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
+import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { Rank } from '@/fsd/5-shared/model';
+import { LoaderWithText, AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
+import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
+import { PlayersTable } from 'src/v2/features/guild/players-table';
 import { ViewGuild } from 'src/v2/features/guild/view-guild';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { BfLevelSelect } from 'src/v2/features/guild-war/bf-level-select';
+import { IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
+import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
+
+import './guild-war-zones.scss';
 
 export const GuildWarZones = () => {
     const { guildWar, guild } = useContext(StoreContext);
@@ -172,7 +174,7 @@ export const GuildWarZones = () => {
                 <FlexBox gap={5} style={{ fontSize: '1.1rem' }}>
                     <div className="flex-box gap3">
                         {caps.map((rarity, index) => (
-                            <RarityImage key={index} rarity={rarity} />
+                            <RarityIcon key={index} rarity={rarity} />
                         ))}
                     </div>
                     <span>{zoneStats.warScore.toString().slice(0, 2)}K</span>
@@ -195,7 +197,7 @@ export const GuildWarZones = () => {
 
     return (
         <>
-            {loading && <Loader loading={true} />}
+            {loading && <LoaderWithText loading={true} />}
             <FlexBox justifyContent={'center'} gap={10}>
                 <BfLevelSelect value={activeLayout.bfLevel} valueChange={handleBfLevelChange} />
 
@@ -365,7 +367,7 @@ const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, play
                     <FlexBox gap={5}>
                         <DifficultyImage difficulty={difficultyEnum} withColor />
                         <Badge badgeContent={maxRarityCount}>
-                            <RarityImage rarity={maxRarity} />
+                            <RarityIcon rarity={maxRarity} />
                         </Badge>
                         <span>{zoneStats.warScore.toString().slice(0, 2)}K</span>
                         <span>{difficulty}</span>

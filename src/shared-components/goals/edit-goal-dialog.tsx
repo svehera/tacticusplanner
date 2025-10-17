@@ -1,33 +1,39 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import Button from '@mui/material/Button';
-
+﻿import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
-import { ICampaignsProgress } from 'src/models/interfaces';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
-import { getEnumValues } from 'src/shared-logic/functions';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
+import React, { useContext, useMemo, useState } from 'react';
+
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { RankSelect } from '../rank-select';
-import { CharacterUpgrades } from '../character-upgrades';
-import { rarityToMaxRank } from 'src/models/constants';
-import { IgnoreRankRarity } from './ignore-rank-rarity';
-import { PrioritySelect } from 'src/shared-components/goals/priority-select';
-import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { StaticDataService } from 'src/services';
+import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
-import { CharacterRaidGoalSelect, ICharacterAscendGoal, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
-import { NumberInput } from 'src/v2/components/inputs/number-input';
+import { PrioritySelect } from 'src/shared-components/goals/priority-select';
+import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
-import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
-import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
+import { getEnumValues } from 'src/shared-logic/functions';
+
+import { Alliance, Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
+
+import { ICampaignBattleComposed, ICampaignsProgress } from '@/fsd/4-entities/campaign';
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { RankSelect } from '@/fsd/4-entities/character';
+import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
+import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
+import { IUnit } from '@/fsd/4-entities/unit';
+import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
+import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
+
+import { CharacterUpgrades } from '@/fsd/3-features/character-details';
+import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
+import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
+
+import { IgnoreRankRarity } from './ignore-rank-rarity';
 
 interface Props {
     isOpen: boolean;
@@ -116,7 +122,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                 });
             }
 
-            enqueueSnackbar(`Goal for ${updatedGoal.unitName} is updated`, { variant: 'success' });
+            enqueueSnackbar(`Goal for ${updatedGoal.unitName ?? updatedGoal.unitId} was updated`, {
+                variant: 'success',
+            });
         }
         setOpenDialog(false);
         if (onClose) {
@@ -131,7 +139,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
 
     const maxRank = useMemo(() => {
-        return ignoreRankRarity ? Rank.Diamond3 : rarityToMaxRank[unit?.rarity ?? 0];
+        return ignoreRankRarity ? Rank.Adamantine1 : RarityMapper.toMaxRank[unit?.rarity ?? 0];
     }, [unit?.rarity, ignoreRankRarity]);
 
     let currentRankValues: number[] = [];
@@ -142,10 +150,14 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
         targetRankValues = getEnumValues(Rank).filter(x => x > 0 && x >= form.rankStart && x <= maxRank);
     }
 
-    const possibleLocations =
-        [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
-            ? StaticDataService.getItemLocations(unit.id)
-            : [];
+    let possibleLocations: ICampaignBattleComposed[] = [];
+    // Support for both IDs for characters. Previously be used a short version (i.e. Ragnar, Darkstrider).
+    if ([PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit) {
+        possibleLocations = StaticDataService.getItemLocations(`shards_${unit.id}`);
+        if (!possibleLocations.length) {
+            possibleLocations = StaticDataService.getItemLocations(`shards_${unit.snowprintId}`);
+        }
+    }
 
     const unlockedLocations = possibleLocations
         .filter(location => {
@@ -157,7 +169,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
             <DialogTitle className="flex gap3 items-center">
-                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <CharacterImage icon={goal.unitIcon} />
+                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <UnitShardIcon icon={goal.unitRoundIcon} />
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20 }}>
                 <Box id="edit-goal-form" className="flex flex-col gap-5">
@@ -202,9 +214,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 }}
                             />
 
-                            {form.rankStart > Rank.Locked && (
+                            {isCharacter(unit) && form.rankStart > Rank.Locked && (
                                 <CharacterUpgrades
-                                    characterName={unit.id}
+                                    character={unit}
                                     upgrades={form.appliedUpgrades}
                                     rank={form.rankStart}
                                     upgradesChanges={(upgrades, updateInventory) => {
@@ -226,6 +238,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Primary current level"
                                     min={unit.primaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.primaryStart}
                                     valueChange={primaryStart => {
                                         setForm(curr => ({
@@ -238,6 +251,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Primary target level"
                                     min={unit.primaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.primaryEnd}
                                     valueChange={primaryEnd => {
                                         setForm(curr => ({
@@ -252,6 +266,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Secondary current level"
                                     min={unit.secondaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.secondaryStart}
                                     valueChange={secondaryStart => {
                                         setForm(curr => ({
@@ -264,6 +279,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     fullWidth
                                     label="Secondary target level"
                                     min={unit.secondaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.secondaryEnd}
                                     valueChange={secondaryEnd => {
                                         setForm(curr => ({
@@ -286,7 +302,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
                             <MowUpgrades
                                 mowId={unit.id}
-                                alliance={unit.alliance}
+                                alliance={unit.alliance as Alliance}
                                 primaryLevel={form.primaryStart}
                                 secondaryLevel={form.secondaryStart}
                             />

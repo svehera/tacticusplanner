@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { ZoneId } from 'src/v2/features/guild-war/guild-war.models';
+
 import { getImageUrl } from 'src/shared-logic/functions';
 
 export const WarZoneBuffImage = ({ zoneId }: { zoneId: string }) => {

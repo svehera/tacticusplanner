@@ -1,28 +1,38 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
-import { ICharacter2, IPersonalCharacterData2 } from 'src/models/interfaces';
-import { Rank, Rarity } from 'src/models/enums';
-import { CharactersFilterBy } from './enums/characters-filter-by';
-import { needToAscendCharacter } from './functions/need-to-ascend';
-import { needToLevelCharacter } from './functions/need-to-level';
+import { charsUnlockShards } from 'src/models/constants';
+import { IPersonalCharacterData2 } from 'src/models/interfaces';
+import factionsData from 'src/v2/data/factions.json';
+
+import { Rank, Rarity, UnitType } from '@/fsd/5-shared/model';
+
+import { ICharacter2 } from '@/fsd/4-entities/character';
+import { IMow2 } from '@/fsd/4-entities/mow';
+import { IUnit } from '@/fsd/4-entities/unit';
+import { isCharacter, isMow, isUnlocked } from '@/fsd/4-entities/unit/units.functions';
+
+import { rarityCaps } from 'src/v2/features/characters/characters.constants';
+
+import { CharactersFilterBy } from '../../../fsd/4-entities/character/characters-filter-by.enum';
+import { CharactersOrderBy } from '../../../fsd/4-entities/character/characters-order-by.enum';
+import { CharactersPowerService } from '../../../fsd/4-entities/unit/characters-power.service';
+import { CharactersValueService } from '../../../fsd/4-entities/unit/characters-value.service';
+
+import { IFaction } from './characters.models';
 import { filterChaos } from './functions/filter-by-chaos';
 import { filterImperial } from './functions/filter-by-imperial';
 import { filterXenos } from './functions/filter-by-xenos';
-import { CharactersOrderBy } from './enums/characters-order-by';
-import { IFaction, IMow, IUnit } from './characters.models';
-
-import factionsData from 'src/v2/data/factions.json';
-import { CharactersPowerService } from './characters-power.service';
-import { CharactersValueService } from './characters-value.service';
-import { rarityCaps } from 'src/v2/features/characters/characters.contants';
-import { isCharacter, isMow, isUnlocked } from 'src/v2/features/characters/units.functions';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { charsUnlockShards } from 'src/models/constants';
+import { needToAscendCharacter } from './functions/need-to-ascend';
+import { needToLevelCharacter } from './functions/need-to-level';
 
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
         const filteredCharactersByName = nameFilter
-            ? characters.filter(x => x.name.toLowerCase().includes(nameFilter.toLowerCase()))
+            ? characters.filter(
+                  x =>
+                      x.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                      ('shortName' in x && x.shortName?.toLowerCase().includes(nameFilter.toLowerCase()))
+              )
             : characters;
 
         switch (filterBy) {
@@ -53,6 +63,15 @@ export class CharactersService {
         }
     }
 
+    private static getFaction(unit: IUnit): string {
+        if ('faction' in unit) return unit.faction;
+        return unit.factionId;
+    }
+
+    private static haveSameFaction(unit1: IUnit, unit2: IUnit): boolean {
+        return this.getFaction(unit1) === this.getFaction(unit2);
+    }
+
     static orderUnits(units: IUnit[], charactersOrderBy: CharactersOrderBy): IUnit[] {
         switch (charactersOrderBy) {
             case CharactersOrderBy.CharacterValue:
@@ -80,6 +99,8 @@ export class CharactersService {
                 return orderBy(units, unit => (isMow(unit) ? Rank.Locked : unit.rank), ['desc']);
             case CharactersOrderBy.Rarity:
                 return orderBy(units, ['rarity', 'stars'], ['desc', 'desc']);
+            case CharactersOrderBy.Shards:
+                return orderBy(units, ['shards', 'rarity', 'stars'], ['desc', 'desc', 'desc']);
             case CharactersOrderBy.UnlockPercentage:
                 return orderBy(
                     units,
@@ -89,7 +110,7 @@ export class CharactersService {
                         } else {
                             return !isUnlocked(unit)
                                 ? Math.ceil((unit.shards / charsUnlockShards[unit.rarity]) * 100)
-                                : units.filter(x => x.faction === unit.faction && isUnlocked(x)).length;
+                                : units.filter(x => this.haveSameFaction(x, unit) && isUnlocked(x)).length;
                         }
                     },
                     ['asc']
@@ -117,7 +138,7 @@ export class CharactersService {
 
         // Derive relevant faction data in one pass
         const result: IFaction[] = factionsData.reduce((acc: IFaction[], faction) => {
-            const characters = factionCharacters[faction.name];
+            const characters = factionCharacters[faction.snowprintId];
             if (!characters) return acc;
 
             let bsValue = 0,
@@ -165,7 +186,6 @@ export class CharactersService {
 
     static capCharacterAtRarity(character: ICharacter2, rarity: Rarity): ICharacter2 {
         const capped = rarityCaps[rarity];
-
         return {
             ...character,
             rarity: Math.min(character.rarity, capped.rarity),
@@ -177,7 +197,7 @@ export class CharactersService {
         };
     }
 
-    static capMowAtRarity(mow: IMow, rarity: Rarity): IMow {
+    static capMowAtRarity(mow: IMow2, rarity: Rarity): IMow2 {
         const capped = rarityCaps[rarity];
 
         return {
@@ -215,6 +235,10 @@ export class CharactersService {
     }
 
     public static groupByRarityPools(availableCharacters: IPersonalCharacterData2[]): Record<Rarity, number> {
+        // TODO(mythic): is rank right? what is this for?
+        const mythicPool = availableCharacters.filter(
+            x => x.rarity === Rarity.Mythic && x.rank >= Rank.Diamond1
+        ).length;
         const legendaryPool = availableCharacters.filter(
             x => x.rarity === Rarity.Legendary && x.rank >= Rank.Gold1
         ).length;
@@ -225,6 +249,7 @@ export class CharactersService {
         ).length;
 
         return {
+            [Rarity.Mythic]: mythicPool,
             [Rarity.Legendary]: legendaryPool,
             [Rarity.Epic]: epicPool,
             [Rarity.Rare]: rarePool,

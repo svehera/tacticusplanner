@@ -1,45 +1,15 @@
-﻿import { DynamicProps, ICharacter2 } from 'src/models/interfaces';
-import { CharactersOrderBy } from './enums/characters-order-by';
-import { CharactersFilterBy } from './enums/characters-filter-by';
-import { Alliance, Faction, Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
-import { UnitType } from 'src/v2/features/characters/units.enums';
+﻿import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
-export type IUnit = ICharacter2 | IMow;
+import { ICharacter2 } from '@/fsd/4-entities/character';
+import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
+import { IUnit } from '@/fsd/4-entities/unit';
 
 export interface IFactionStatic {
     alliance: string;
     name: string;
+    snowprintId: string;
     icon: string;
     color: string;
-}
-
-export interface IMowStatic {
-    id: string;
-    tacticusId: string;
-    name: string;
-    title: string;
-    shortName: string;
-    fullName: string;
-    releaseDate?: string;
-    alliance: Alliance;
-    faction: Faction;
-    initialRarity: RarityString;
-}
-
-export interface IMowDb {
-    id: string;
-    unlocked: boolean;
-    rarity: Rarity;
-    stars: RarityStars;
-    primaryAbilityLevel: number;
-    secondaryAbilityLevel: number;
-    shards: number;
-}
-
-export interface IMow extends IMowStatic, IMowDb, DynamicProps {
-    portraitIcon: string;
-    badgeIcon: string;
-    unitType: UnitType.mow;
 }
 
 export interface IRarityCap {
@@ -54,11 +24,6 @@ export interface IFaction extends IFactionStatic {
     bsValue: number;
     unlockedCharacters: number;
     units: IUnit[];
-}
-
-export interface IViewControls {
-    orderBy: CharactersOrderBy;
-    filterBy: CharactersFilterBy;
 }
 
 export interface ICharactersContext {
@@ -105,3 +70,6 @@ export interface ICharacterAbilitiesMaterialsTotal {
     alliance: Alliance;
     badges: Record<Rarity, number>;
 }
+
+// Re-export types from FSD entities
+export type { ICharacter2, IMow, IMow2, IMowDb, IUnit };

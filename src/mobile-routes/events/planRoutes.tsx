@@ -1,12 +1,16 @@
-﻿import React, { useState } from 'react';
+﻿import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Card, CardContent, CardHeader } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { StaticDataService } from 'src/services';
-import { menuItemById } from 'src/models/menu-items';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import { PlanLeRoutes } from 'src/mobile-routes/events/leRoutes';
 import Button from '@mui/material/Button';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { PlanGuildWarRoutes } from 'src/mobile-routes/events/guildWarRoutes';
+import { PlanLeRoutes } from 'src/mobile-routes/events/leRoutes';
+import { menuItemById } from 'src/models/menu-items';
+
+import { CharactersService } from '@/fsd/4-entities/character';
+
+import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 
 enum SelectedRoutes {
     all,
@@ -26,7 +30,7 @@ export const PlanRoutes = () => {
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
             {selectedRoutes === SelectedRoutes.all ? (
                 <>
-                    {[goalsMenuItem, dailyRaidsMenuItem, teamsMenuItem].map(menuItem => (
+                    {[goalsMenuItem, dailyRaidsMenuItem, teamsMenuItem, campaignProgressionMenuItem].map(menuItem => (
                         <Card
                             variant="outlined"
                             key={menuItem.label}
@@ -85,11 +89,9 @@ export const PlanRoutes = () => {
                         <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
                             <ul>
                                 <li>Master Table</li>
-                                {StaticDataService.lreCharacters
-                                    .filter(x => !x.lre?.finished)
-                                    .map(le => (
-                                        <li key={le.name}>{le.name}</li>
-                                    ))}
+                                {CharactersService.activeLres.map(le => (
+                                    <li key={le.name}>{le.name}</li>
+                                ))}
                             </ul>
                         </CardContent>
                     </Card>

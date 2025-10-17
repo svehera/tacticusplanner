@@ -1,4 +1,22 @@
-﻿import {
+﻿import { orderBy, sum } from 'lodash';
+
+import { charsProgression, charsUnlockShards } from 'src/models/constants';
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+import { StaticDataService } from 'src/services';
+
+import { Alliance, Rarity, RarityMapper } from '@/fsd/5-shared/model';
+
+import {
+    CampaignsService,
+    ICampaignBattleComposed,
+    CampaignType,
+    Campaign,
+    campaignEventsLocations,
+    campaignsByGroup,
+    ICampaignsProgress,
+} from '@/fsd/4-entities/campaign';
+
+import {
     ICharacterAscendGoal,
     ICharacterShardsEstimate,
     ICharacterUnlockGoal,
@@ -9,23 +27,77 @@
     IShardMaterial,
     IShardsRaid,
 } from 'src/v2/features/goals/goals.models';
-import { ICampaignBattleComposed, ICampaignsProgress } from 'src/models/interfaces';
-import { charsProgression, charsUnlockShards, rarityToStars } from 'src/models/constants';
-import { Alliance, Campaign, CampaignsLocationsUsage, CampaignType, PersonalGoalType, Rarity } from 'src/models/enums';
-import { StaticDataService } from 'src/services';
-import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { orderBy, sum } from 'lodash';
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
 
 export class ShardsService {
+    /**
+     * Calculates and aggregates shard acquisition estimates for a set of character goals,
+     * based on provided ascension settings and optional raided locations.
+     *
+     * This function:
+     * - Converts the provided character goals into a list of required materials.
+     * - Determines which shards can be obtained from today's available raids, filtered by
+     *   `settings.raidedLocations`.
+     * - Sums up total and per-day energy requirements, total onslaught tokens, and total raids
+     *   needed across all materials.
+     * - Calculates the total number of days required to achieve all goals, taking the maximum of:
+     *   - The longest individual material's days-to-completion estimate.
+     *   - The number of days required to accumulate enough onslaught tokens, assuming a daily gain
+     *     of 1.5 tokens (rounded up).
+     *
+     * Subtle behavior:
+     * - The `daysTotal` is not simply the sum of days for each material, but the maximum of all
+     *   individual requirements and the onslaught token constraint. This ensures the estimate
+     *   reflects the true bottleneck.
+     * - The function assumes that onslaught tokens are earned at a fixed rate (1.5 per day), which
+     *   may not match actual in-game rates if bonuses or events apply.
+     *
+     * @param settings - User-defined settings affecting ascension and resource calculation.
+     * @param goals - One or more character ascend or unlock goals to estimate for.
+     * @returns An object summarizing all relevant shard acquisition estimates and requirements.
+     */
     static getShardsEstimatedDays(
         settings: IEstimatedAscensionSettings,
         ...goals: Array<ICharacterAscendGoal | ICharacterUnlockGoal>
     ): IEstimatedShards {
         const materials = this.convertGoalsToMaterials(settings, goals);
 
-        const shardsRaids = this.getTodayRaids(materials, settings.raidedLocations);
+        // Respect user's daily energy preference for farming shards
+        // Sort materials by priority (e.g., daysTotal ascending, or as-is)
+        // Then, only include as many as can fit in the user's daily energy budget for shards
+        const energyBudget = settings.preferences.shardsEnergy ?? 0;
+        let runningEnergy = 0;
+        const allowedMaterials: typeof materials = [];
+
+        for (const material of materials) {
+            if (runningEnergy + material.energyPerDay <= energyBudget) {
+                allowedMaterials.push(material);
+                runningEnergy += material.energyPerDay;
+            } else if (energyBudget > runningEnergy && material.energyPerDay > 0) {
+                // Partial allocation: allow as much as possible for this material
+                // Clone the material and adjust energyPerDay to fit remaining budget
+                const fraction = (energyBudget - runningEnergy) / material.energyPerDay;
+                if (fraction > 0) {
+                    allowedMaterials.push({
+                        ...material,
+                        // Scale down energyPerDay and itemsPerDay for this partial allocation
+                        energyPerDay: energyBudget - runningEnergy,
+                        raidsLocations: material.raidsLocations.map(loc => ({
+                            ...loc,
+                            energyPerDay: loc.energyPerDay * fraction,
+                            itemsPerDay: loc.itemsPerDay * fraction,
+                            dailyBattleCount: loc.dailyBattleCount * fraction,
+                        })),
+                    });
+                }
+                runningEnergy = energyBudget;
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // Only pass the allowedMaterials to getTodayRaids
+        const shardsRaids = this.getTodayRaids(allowedMaterials, settings.raidedLocations);
 
         const energyTotal = sum(materials.map(material => material.energyTotal));
         const energyPerDay = sum(materials.map(material => material.energyPerDay));
@@ -169,14 +241,22 @@ export class ShardsService {
             dailyBattleCount: onslaughtTokensPerDay / onslaughtMaxTokens,
             rarity: 'Shard',
             rarityEnum: Rarity.Legendary,
-            reward: material.characterId,
+            rewards: {
+                guaranteed: [
+                    {
+                        id: material.characterId,
+                        min: material.onslaughtShards,
+                        max: material.onslaughtShards,
+                    },
+                ],
+                potential: [],
+            },
             nodeNumber,
             campaign: Campaign.Onslaught,
             campaignType: CampaignType.Onslaught,
             energyCost: 0,
             energyPerDay: 0,
             energyPerItem: 0,
-            expectedGold: 0,
             enemiesFactions: [],
             enemiesAlliances: [],
             alliesFactions: [],
@@ -190,15 +270,15 @@ export class ShardsService {
     private static convertGoalToMaterial(goal: ICharacterAscendGoal | ICharacterUnlockGoal): IShardMaterial {
         const targetShards =
             goal.type === PersonalGoalType.Ascend ? this.getTargetShards(goal) : charsUnlockShards[goal.rarity];
-        const possibleLocations = StaticDataService.getItemLocations(goal.unitName);
+        const possibleLocations = StaticDataService.getItemLocations(`shards_${goal.unitId}`);
 
         return {
             goalId: goal.goalId,
-            characterId: goal.unitName,
+            characterId: goal.unitId,
             label: goal.unitName,
             acquiredCount: goal.shards,
             requiredCount: targetShards,
-            iconPath: goal.unitIcon,
+            iconPath: goal.unitRoundIcon,
             relatedCharacters: [goal.unitName],
             possibleLocations,
             onslaughtShards: goal.type === PersonalGoalType.Ascend ? goal.onslaughtShards : 0,
@@ -206,6 +286,33 @@ export class ShardsService {
         };
     }
 
+    /**
+     * Processes a list of character shard estimates and their associated raid locations, returning
+     * a list of raid plans for today.
+     *
+     * For each material, this function:
+     * - Maps its raid locations, augmenting each with calculated properties:
+     *   - `raidsCount` is the ceiling of `dailyBattleCount` (note: this may round up fractional
+     *      battles).
+     *   - `isCompleted` is set if the location's ID is present in `completedLocations`.
+     *   - Other properties (`farmedItems`, `energySpent`, `isShardsLocation`) are copied or set as
+     *     appropriate.
+     * - Orders the locations so incomplete ones come first (`isCompleted: false` before `true`).
+     * - Marks the material as completed only if all its locations are completed.
+     *
+     * The final result is a list of these material raid plans, also ordered so incomplete
+     * materials come first.
+     *
+     * **Subtle behaviors:**
+     * - Locations with fractional `dailyBattleCount` are always rounded up, which may overestimate
+     *   required raids.
+     * - The `isCompleted` status for both locations and materials is determined solely by presence
+     *   in `completedLocations`, not by any progress or partial completion.
+     * - The function mutates the structure of each location, so downstream consumers should not
+     *   expect the original shape.
+     * - Both the locations within each material and the overall result are sorted by completion
+     *   status, which may affect UI or further processing order.
+     */
     private static getTodayRaids(
         materials: ICharacterShardsEstimate[],
         completedLocations: IItemRaidLocation[]
@@ -218,7 +325,7 @@ export class ShardsService {
                 raidsCount: Math.ceil(location.dailyBattleCount),
                 farmedItems: location.itemsPerDay,
                 energySpent: location.energyPerDay,
-                isCompleted: completedLocations.some(clocation => clocation.id === location.id),
+                isCompleted: completedLocations.some(cLocation => cLocation.id === location.id),
                 isShardsLocation: true,
             }));
 
@@ -236,13 +343,13 @@ export class ShardsService {
 
     public static getTargetShards(goal: ICharacterAscendGoal): number {
         const currentCharProgression = goal.rarityStart + goal.starsStart;
-        const targetProgression = goal.rarityEnd + (goal.starsEnd || rarityToStars[goal.rarityEnd]);
+        const targetProgression = goal.rarityEnd + (goal.starsEnd || RarityMapper.toStars[goal.rarityEnd]);
 
         let targetShards = 0;
 
         for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
             const progressionRequirements = charsProgression[i];
-            targetShards += progressionRequirements.shards;
+            targetShards += progressionRequirements.shards ?? 0;
         }
 
         return targetShards;
@@ -250,14 +357,14 @@ export class ShardsService {
 
     public static getTargetShardsForMow(goal: ICharacterUpgradeMow): number {
         const currentCharProgression = goal.rarity + goal.stars;
-        const targetRarity = MowLookupService.getRarityFromLevel(Math.max(goal.primaryEnd, goal.secondaryEnd));
-        const targetProgression = targetRarity + rarityToStars[targetRarity];
+        const targetRarity = RarityMapper.getRarityFromLevel(Math.max(goal.primaryEnd, goal.secondaryEnd));
+        const targetProgression = targetRarity + RarityMapper.toStars[targetRarity];
 
         let targetShards = 0;
 
         for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
             const progressionRequirements = charsProgression[i];
-            targetShards += progressionRequirements.shards;
+            targetShards += progressionRequirements.shards ?? 0;
         }
 
         return targetShards;

@@ -1,13 +1,16 @@
-﻿import React, { useMemo, useState } from 'react';
-import { CampaignType, Rarity } from 'src/models/enums';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import Checkbox from '@mui/material/Checkbox';
-import { ICustomDailyRaidsSettings } from 'src/models/interfaces';
-import { uniq } from 'lodash';
-import { CampaignsService } from '@/v2/features/goals/campaigns.service';
+﻿import { Info } from '@mui/icons-material';
 import { Badge, FormControlLabel, Switch } from '@mui/material';
-import { Info } from '@mui/icons-material';
-import { AccessibleTooltip } from '@/v2/components/tooltip';
+import Checkbox from '@mui/material/Checkbox';
+import { uniq } from 'lodash';
+import React, { useMemo, useState } from 'react';
+
+import { ICustomDailyRaidsSettings } from 'src/models/interfaces';
+
+import { Rarity } from '@/fsd/5-shared/model';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { CampaignType, CampaignsService } from '@/fsd/4-entities/campaign';
 
 interface Props {
     hasCE: boolean;
@@ -17,7 +20,14 @@ interface Props {
 
 export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsChange, hasCE }) => {
     const [showDroprates, setShowDroprates] = useState<boolean>(false);
-    const rarities: Rarity[] = [Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon, Rarity.Common];
+    const rarities: Rarity[] = [
+        Rarity.Mythic,
+        Rarity.Legendary,
+        Rarity.Epic,
+        Rarity.Rare,
+        Rarity.Uncommon,
+        Rarity.Common,
+    ];
 
     const handleChange = (rarity: Rarity, checked: boolean, campaignTypes: CampaignType[]) => {
         const currentValue = settings[rarity];
@@ -71,11 +81,17 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
 
             <div className="flex">
                 {rarities.map(rarity => {
-                    const value = settings[rarity];
+                    const value = settings[rarity] ?? [
+                        CampaignType.Normal,
+                        CampaignType.Early,
+                        CampaignType.Mirror,
+                        CampaignType.Elite,
+                        CampaignType.Extremis,
+                    ];
 
                     return (
                         <div key={rarity} className="flex flex-col items-center mx-2">
-                            <RarityImage rarity={rarity} />
+                            <RarityIcon rarity={rarity} />
                             {campaignTypes.map(type => (
                                 <div
                                     key={type}

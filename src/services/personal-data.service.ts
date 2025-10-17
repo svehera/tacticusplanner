@@ -1,4 +1,22 @@
-﻿import {
+﻿import { v4 } from 'uuid';
+
+import { Rank } from '@/fsd/5-shared/model';
+
+import { CharactersService } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
+
+import { getLre } from '@/fsd/3-features/lre';
+import {
+    ILreProgressDto,
+    ILreBattleProgressDto,
+    ILreRequirementsProgressDto,
+    LrePointsCategoryId,
+} from '@/fsd/3-features/lre-progress';
+import { IMowDb } from 'src/v2/features/characters/characters.models';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+
+import { defaultData } from '../models/constants';
+import {
     IAutoTeamsPreferences,
     ICampaignsProgress,
     IDailyRaids,
@@ -15,16 +33,9 @@
     IViewPreferences,
     LegendaryEventData,
     IGuild,
-    LreTrackId,
     ILreTeam,
     SelectedTeams,
 } from '../models/interfaces';
-import { v4 } from 'uuid';
-import { defaultData, getLegendaryEvent } from '../models/constants';
-import { LegendaryEventEnum, LrePointsCategoryId, Rank } from '../models/enums';
-import { IMowDb } from 'src/v2/features/characters/characters.models';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { ILreBattleProgressDto, ILreProgressDto, ILreRequirementsProgressDto } from 'src/models/dto.interfaces';
 
 export class PersonalDataLocalStorage {
     private readonly storePrefix = 'tp-';
@@ -171,6 +182,16 @@ export class PersonalDataLocalStorage {
 
         localStorage.setItem(this.storePrefix + key, value);
     }
+
+    public static fixGoals(data: IPersonalData2): void {
+        for (const goal of data.goals) {
+            const resolvedChar = CharactersService.resolveCharacter(goal.character);
+            if (!resolvedChar) {
+                console.error('could not resolve character in goal', goal);
+            }
+            goal.character = resolvedChar.name;
+        }
+    }
 }
 
 export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalData2 => {
@@ -234,13 +255,25 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
         return arr1.length === arr2.length && arr1.every(char => arr2.includes(char));
     }
 
+    function doTeamsMatch(team1: string[], team2: string[]) {
+        return areArraysEqual(
+            team1.map(id => CharactersService.canonicalName(id)),
+            team2.map(id => CharactersService.canonicalName(id))
+        );
+    }
+
     sections.forEach(section => {
         const selectedTeams: SelectedTeams = data[section];
 
-        Object.entries(selectedTeams).forEach(([restriction, characters]) => {
+        Object.entries(selectedTeams).forEach(([restriction, charSnowprintIds]) => {
+            const resolve = (char: string) => CharactersService.canonicalName(char);
             // Check if there's already a team with the same set of characters
             const existingTeam = teams.find(
-                team => areArraysEqual(team.charactersIds, characters) && team.section === section
+                team =>
+                    doTeamsMatch(
+                        (team.charSnowprintIds ?? team.charactersIds ?? []).map(x => resolve(x)),
+                        charSnowprintIds.map(x => resolve(x))
+                    ) && team.section === section
             );
 
             if (existingTeam) {
@@ -248,14 +281,14 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
                 if (!existingTeam.restrictionsIds.includes(restriction)) {
                     existingTeam.restrictionsIds.push(restriction);
                 }
-            } else if (characters?.length) {
+            } else if (charSnowprintIds?.length) {
                 // If not found, create a new team
                 const team: ILreTeam = {
                     id: v4(), // Replace with your UUID generation logic
                     name: `Team ${teams.length + 1} - ${section}`, // Assigning Team 1, 2, 3, etc.
                     section: section as LreTrackId,
                     restrictionsIds: [restriction], // Initial restriction,
-                    charactersIds: characters, // Characters associated with this team
+                    charSnowprintIds: charSnowprintIds.map(x => CharactersService.canonicalName(x)), // Characters associated with this team
                 };
                 teams.push(team);
             }
@@ -278,7 +311,7 @@ function migrateLreProgress(progressByEvent: LegendaryEventData<ILreProgressDto>
 function populateProgress(data: ILreProgressDto) {
     const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
     const battlesProgress: ILreBattleProgressDto[] = [];
-    const lre = getLegendaryEvent(data.id, []);
+    const lre = getLre(data.id, []);
     const killPointsIndex = 0;
     const highScoreAndDefeatAllIndex = 1;
 

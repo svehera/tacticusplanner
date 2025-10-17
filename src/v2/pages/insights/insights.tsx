@@ -1,33 +1,31 @@
-﻿import React, { useContext, useState } from 'react';
-import Box from '@mui/material/Box';
+﻿import Box from '@mui/material/Box';
 import { sum } from 'lodash';
+import React, { useContext, useState } from 'react';
 
-import { Conditional } from 'src/v2/components/conditional';
-
-import { useGetInsights } from 'src/v2/features/insights/insights.endpoint';
-
-import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
-import { ViewControls } from 'src/v2/features/characters/components/view-controls';
-import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-import { IViewControls } from 'src/v2/features/characters/characters.models';
-import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
-import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
-
-import { Loader } from 'src/v2/components/loader';
 import { GlobalState } from 'src/models/global-state';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { StoreContext } from 'src/reducers/store.provider';
+
+import { LoaderWithText, Conditional } from '@/fsd/5-shared/ui';
+
+import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
+import { MowsService } from '@/fsd/4-entities/mow';
+import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
+import { CharactersPowerService, CharactersValueService } from '@/fsd/4-entities/unit';
+
+import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
+import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
+import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
+import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
+import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
+import { useGetInsights } from 'src/v2/features/insights/insights.endpoint';
 
 export const Insights = () => {
     const { viewPreferences } = useContext(StoreContext);
-    const [viewControls, setViewControls] = useState<IViewControls>({
+    const [viewControls, setViewControls] = useState<ICharactersViewControls>({
         filterBy: CharactersFilterBy.None,
         orderBy: CharactersOrderBy.Faction,
     });
@@ -35,7 +33,7 @@ export const Insights = () => {
     const { data, loading } = useGetInsights();
 
     if (loading) {
-        return <Loader loading={true} />;
+        return <LoaderWithText loading={true} />;
     }
 
     if (!data) {
@@ -63,7 +61,11 @@ export const Insights = () => {
     }
 
     const averageCharacters = GlobalState.initCharacters(data.userData, data.activeLast30Days);
-    const averageMows = GlobalState.initMows(data.mows, data.activeLast30Days);
+    const unresolvedAverageMows = GlobalState.initMows(data.mows, data.activeLast30Days);
+    const averageMows = unresolvedAverageMows.map(mow => {
+        if ('snowprintId' in mow) return mow;
+        return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow };
+    }) as IMow2[];
 
     const unitsFiltered = CharactersService.filterUnits(
         [...averageCharacters, ...averageMows],
@@ -107,7 +109,7 @@ export const Insights = () => {
                 <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
                     <TeamGraph units={unitsFiltered} />
                 </RosterHeader>
-                <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
+                <CharactersViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 
                 <Conditional condition={isFactionsView(viewControls.orderBy)}>
                     <FactionsGrid factions={factions} />

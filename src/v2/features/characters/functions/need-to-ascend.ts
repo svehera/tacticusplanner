@@ -1,6 +1,6 @@
-﻿import { Rank, Rarity } from 'src/models/enums';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { UnitType } from 'src/v2/features/characters/units.enums';
+﻿import { Rank, Rarity, UnitType } from '@/fsd/5-shared/model';
+
+import { IUnit } from '@/fsd/4-entities/unit';
 
 export const needToAscendCharacter = (unit: IUnit) => {
     if (unit.unitType === UnitType.mow) {

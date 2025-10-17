@@ -1,5 +1,5 @@
-﻿import { IGuild, IGuildMember, SetStateAction } from '../models/interfaces';
-import { defaultData } from '../models/constants';
+﻿import { defaultData } from '../models/constants';
+import { IGuild, IGuildMember, SetStateAction } from '../models/interfaces';
 
 export type GuildAction =
     | SetStateAction<IGuild>
@@ -16,7 +16,7 @@ export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
 
         case 'SaveGuildMembers': {
             const newMembers = action.members
-                .filter(x => !!x.username.length)
+                .filter(x => !!x.username.length || (!!x.userId?.length && !!x.inGameName?.length))
                 .slice(0, 30)
                 .map((x, i) => ({ ...x, index: i }));
             return {

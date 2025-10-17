@@ -1,10 +1,6 @@
-﻿import {
-    ILegendaryEventSelectedRequirements,
-    LegendaryEventData,
-    LreTrackId,
-    SetStateAction,
-} from '../models/interfaces';
-import { LegendaryEventEnum } from '../models/enums';
+﻿import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEventSelectedRequirements, LegendaryEventData, SetStateAction } from '../models/interfaces';
 
 export type LeSelectedRequirementsAction =
     | {

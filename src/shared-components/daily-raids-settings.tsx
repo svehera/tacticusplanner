@@ -1,4 +1,5 @@
-﻿import React, { useCallback, useContext } from 'react';
+﻿import { Warning } from '@mui/icons-material';
+import InfoIcon from '@mui/icons-material/Info';
 import {
     DialogActions,
     DialogContent,
@@ -17,21 +18,26 @@ import {
     SelectChangeEvent,
     Slider,
 } from '@mui/material';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import Typography from '@mui/material/Typography';
+import React, { useCallback, useContext } from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { DailyRaidsStrategy } from 'src/models/enums';
+import { DailyRaidsCustomLocations } from 'src/shared-components/daily-raids-custom-locations';
+
+import { Rarity } from '@/fsd/5-shared/model';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CampaignType, CampaignGroupType } from '@/fsd/4-entities/campaign';
+
 import { ICustomDailyRaidsSettings, IDailyRaidsPreferences } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import InfoIcon from '@mui/icons-material/Info';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { CampaignType, DailyRaidsStrategy, Rarity } from 'src/models/enums';
-import { Warning } from '@mui/icons-material';
-import { DailyRaidsCustomLocations } from 'src/shared-components/daily-raids-custom-locations';
-import Dialog from '@mui/material/Dialog';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { isMobile } from 'react-device-detect';
-import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
 
 const defaultCustomSettings: ICustomDailyRaidsSettings = {
+    [Rarity.Mythic]: [CampaignType.Extremis],
     [Rarity.Legendary]: [CampaignType.Elite, CampaignType.Mirror],
     [Rarity.Epic]: [CampaignType.Elite, CampaignType.Mirror],
     [Rarity.Rare]: [CampaignType.Elite, CampaignType.Mirror],
@@ -41,28 +47,28 @@ const defaultCustomSettings: ICustomDailyRaidsSettings = {
 
 const energyMarks = [
     {
-        value: 288,
-        label: '',
-    },
-    {
-        value: 288 + 50,
+        value: 288 + 30 + 60 + 60,
         label: '25 BS',
     },
     {
-        value: 288 + 50 + 100,
+        value: 288 + 30 + 60 + 60 + 100,
         label: '50 BS',
     },
     {
-        value: 288 + 50 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100,
         label: '110 BS',
     },
     {
-        value: 288 + 50 + 100 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100,
         label: '250 BS',
     },
     {
-        value: 288 + 50 + 100 + 100 + 100 + 100,
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100,
         label: '500 BS',
+    },
+    {
+        value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100 + 100,
+        label: '1000 BS',
     },
     {
         value: 888888,
@@ -79,13 +85,19 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const dispatch = useContext(DispatchContext);
     const { dailyRaidsPreferences } = useContext(StoreContext);
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
-    const [dailyEnergy, setDailyEnergy] = React.useState(() =>
-        energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy)
-    );
+    const [dailyEnergy, setDailyEnergy] = React.useState(() => {
+        const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
+        return index >= 0 ? index : 0; // Default to first option if not found
+    });
     const [shardsEnergy, setShardsEnergy] = React.useState<number | string>(dailyRaidsPreferences.shardsEnergy);
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
     );
+
+    // Keep local form state in sync if preferences change externally (e.g., API auto-detect)
+    React.useEffect(() => {
+        setDailyRaidsPreferencesForm(dailyRaidsPreferences);
+    }, [dailyRaidsPreferences]);
 
     const updatePreferences = useCallback((setting: keyof IDailyRaidsPreferences, value: boolean) => {
         setDailyRaidsPreferencesForm(curr => ({ ...curr, [setting]: value }));
@@ -255,7 +267,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     label={
                                         <AccessibleTooltip
                                             title="Experimental/unstable feature. 
-                                Please report any issues you have while using this feature in the Dicord. 
+                                Please report any issues you have while using this feature in the Discord. 
                                 It doesn't work yet with 'By goals priority'.">
                                             <div className="flex-box gap2">
                                                 <Warning color="warning" /> Least time
@@ -302,6 +314,12 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             <MenuItem value={'none'}>None</MenuItem>
                             <MenuItem value={CampaignGroupType.adMechCE} className="flex-box gap10">
                                 <span>Adeptus Mechanicus</span>
+                            </MenuItem>
+                            <MenuItem value={CampaignGroupType.tyranidCE} className="flex-box gap10">
+                                <span>Tyranids</span>
+                            </MenuItem>
+                            <MenuItem value={CampaignGroupType.tauCE} className="flex-box gap10">
+                                <span>T&apos;au Empire</span>
                             </MenuItem>
                         </Select>
                         <FormHelperText>

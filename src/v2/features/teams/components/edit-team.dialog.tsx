@@ -1,26 +1,31 @@
-﻿import React, { useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+﻿import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import { IPersonalTeam, PersonalTeam } from 'src/v2/features/teams/teams.models';
-import { GameMode } from 'src/v2/features/teams/teams.enums';
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
-import { guildRaidBosses, guildRaidPrimes, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
-import { getEnumValues } from 'src/shared-logic/functions';
-import { Rarity } from 'src/models/enums';
-import { RaritySelect } from 'src/shared-components/rarity-select';
-import { ICharacter2 } from 'src/models/interfaces';
-import { IMow } from 'src/v2/features/characters/characters.models';
-import { TeamView } from 'src/v2/features/teams/components/team-view';
-import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';
+import Dialog from '@mui/material/Dialog';
+import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { ICharacter2 } from 'src/models/interfaces';
+import { getEnumValues } from 'src/shared-logic/functions';
+
+import { Rarity } from '@/fsd/5-shared/model';
+import { RaritySelect } from '@/fsd/5-shared/ui';
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
+
+import { CharactersService } from '@/fsd/4-entities/character';
+
+import { IMow2 } from 'src/v2/features/characters/characters.models';
+import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';
+import { TeamView } from 'src/v2/features/teams/components/team-view';
+import { guildRaidBosses, guildRaidPrimes, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
+import { GameMode } from 'src/v2/features/teams/teams.enums';
+import { IPersonalTeam, PersonalTeam } from 'src/v2/features/teams/teams.models';
 
 interface Props {
     onClose: () => void;
     saveTeam: (team: IPersonalTeam) => void;
     team: IPersonalTeam;
     characters: ICharacter2[];
-    mows: IMow[];
+    mows: IMow2[];
 }
 
 export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, team, saveTeam }) => {
@@ -28,13 +33,15 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
     const [notes, setNotes] = useState<string>(team.notes);
     const [teamName, setTeamName] = useState<string>(team.name);
     const [rarityCap, setRarityCap] = useState(team.rarityCap);
-    const [lineup, setLineup] = useState<ICharacter2[]>(team.lineup.map(id => characters.find(x => x.id === id)!));
-    const [mow, setMow] = useState<IMow | null>(team.mowId ? mows.find(x => x.id === team.mowId)! : null);
+    const [lineup, setLineup] = useState<ICharacter2[]>(
+        team.lineup.map(id => characters.find(x => CharactersService.matchesAnyCharacterId(id, x))!)
+    );
+    const [mow, setMow] = useState<IMow2 | null>(team.mowId ? mows.find(x => x.id === team.mowId)! : null);
 
     const [isOpenSelectDialog, setIsOpenSelectDialog] = useState<boolean>(false);
 
     const openSelectDialog = () => setIsOpenSelectDialog(true);
-    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow | null) => {
+    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | null) => {
         setLineup(selectedTeam);
         setMow(mow);
         setIsOpenSelectDialog(false);

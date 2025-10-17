@@ -1,12 +1,11 @@
-﻿import React from 'react';
-import { Popover, IconButton } from '@mui/material';
-
-import InfoIcon from '@mui/icons-material/Info';
+﻿import InfoIcon from '@mui/icons-material/Info';
 import WarningIcon from '@mui/icons-material/Warning';
-
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { Popover, IconButton } from '@mui/material';
+import React from 'react';
 
 import wyoInfo from 'src/assets/images/wyo_info.png';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 export const InfoBox = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);

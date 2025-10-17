@@ -1,8 +1,8 @@
-﻿import React from 'react';
-import { Card, CardContent, CardHeader } from '@mui/material';
-import { IDailyRaid } from 'src/models/interfaces';
-import { MaterialItemView } from 'src/v2/features/goals/material-item-view';
+﻿import { Card, CardContent, CardHeader } from '@mui/material';
+import React from 'react';
+
 import { IUpgradesRaidsDay } from 'src/v2/features/goals/goals.models';
+import { MaterialItemView } from 'src/v2/features/goals/material-item-view';
 
 interface Props {
     day: IUpgradesRaidsDay;

@@ -1,28 +1,28 @@
-﻿import { GoalsService } from 'src/v2/features/goals/goals.service';
-import {
-    Alliance,
-    CampaignsLocationsUsage,
-    Faction,
-    PersonalGoalType,
-    Rank,
-    Rarity,
-    RarityStars,
-} from 'src/models/enums';
-import { ICharacter2, IPersonalGoal } from 'src/models/interfaces';
-import { UnitType } from 'src/v2/features/characters/units.enums';
+﻿import { describe, it, expect } from 'vitest';
+
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+import { IPersonalGoal } from 'src/models/interfaces';
+
+import { Alliance, Faction, Rank, Rarity, RarityStars, UnitType } from '@/fsd/5-shared/model';
+
+import { ICharacter2 } from '@/fsd/4-entities/character';
+
 import {
     ICharacterAscendGoal,
     ICharacterUnlockGoal,
     ICharacterUpgradeRankGoal,
 } from 'src/v2/features/goals/goals.models';
+import { GoalsService } from 'src/v2/features/goals/goals.service';
 
 describe('Goal service', () => {
     describe('convertToTypedGoal', () => {
         it('should convert to Upgrade rank object', () => {
             const characterMock: ICharacter2 = {
                 unitType: UnitType.character,
-                id: 'Character',
-                name: 'Character name',
+                id: 'spaceBlackmane',
+                snowprintId: 'spaceBlackmane',
+                name: 'Ragnar Blackmane',
+                shortName: 'Ragnar',
                 alliance: Alliance.Imperial,
                 icon: 'path',
                 rank: Rank.Bronze1,
@@ -34,11 +34,11 @@ describe('Goal service', () => {
 
             const goalMock: IPersonalGoal = {
                 id: '124124',
-                character: 'Character',
+                character: 'spaceBlackmane',
                 type: PersonalGoalType.UpgradeRank,
                 priority: 1,
                 dailyRaids: false,
-                notes: '1fasfqwf',
+                notes: 'myNotes',
                 targetRank: Rank.Silver1,
                 rankPoint5: true,
             };
@@ -47,10 +47,11 @@ describe('Goal service', () => {
                 priority: goalMock.priority,
                 goalId: goalMock.id,
                 include: goalMock.dailyRaids,
-                unitId: characterMock.id,
+                unitId: characterMock.snowprintId!,
                 unitAlliance: characterMock.alliance,
-                unitName: characterMock.name,
+                unitName: characterMock.shortName,
                 unitIcon: characterMock.icon,
+                unitRoundIcon: characterMock.roundIcon,
                 notes: goalMock.notes!,
                 rankStart: characterMock.rank,
                 rankEnd: goalMock.targetRank!,
@@ -71,8 +72,10 @@ describe('Goal service', () => {
         it('should convert to Unlock object', () => {
             const characterMock: ICharacter2 = {
                 unitType: UnitType.character,
-                id: 'Character',
-                name: 'Character name',
+                id: 'spaceBlackmane',
+                snowprintId: 'spaceBlackmane',
+                name: 'Ragnar Blackmane',
+                shortName: 'Ragnar',
                 alliance: Alliance.Chaos,
                 faction: Faction.Thousand_Sons,
                 icon: 'path',
@@ -87,17 +90,18 @@ describe('Goal service', () => {
                 type: PersonalGoalType.Unlock,
                 priority: 1,
                 dailyRaids: false,
-                notes: '1fasfqwf',
+                notes: 'myNotes',
             };
 
             const expectedResult: ICharacterUnlockGoal = {
                 priority: goalMock.priority,
                 goalId: goalMock.id,
                 include: goalMock.dailyRaids,
-                unitId: characterMock.id,
+                unitId: characterMock.snowprintId!,
                 unitAlliance: characterMock.alliance,
-                unitName: characterMock.name,
+                unitName: characterMock.shortName,
                 unitIcon: characterMock.icon,
+                unitRoundIcon: characterMock.roundIcon,
                 faction: characterMock.faction,
                 notes: goalMock.notes!,
                 shards: characterMock.shards,
@@ -115,8 +119,10 @@ describe('Goal service', () => {
         it('should convert to Ascend object', () => {
             const characterMock: ICharacter2 = {
                 unitType: UnitType.character,
-                id: 'Character',
-                icon: 'path',
+                id: 'spaceBlackmane',
+                snowprintId: 'spaceBlackmane',
+                name: 'Ragnar Blackmane',
+                shortName: 'Ragnar',
                 shards: 10,
                 rarity: Rarity.Epic,
                 stars: RarityStars.FiveStars,
@@ -128,7 +134,7 @@ describe('Goal service', () => {
                 type: PersonalGoalType.Ascend,
                 priority: 1,
                 dailyRaids: false,
-                notes: '1fasfqwf',
+                notes: 'myNotes',
                 targetRarity: Rarity.Legendary,
             };
 
@@ -136,10 +142,11 @@ describe('Goal service', () => {
                 priority: goalMock.priority,
                 goalId: goalMock.id,
                 include: goalMock.dailyRaids,
-                unitId: characterMock.id,
+                unitId: characterMock.snowprintId!,
                 unitAlliance: characterMock.alliance,
-                unitName: characterMock.name,
+                unitName: characterMock.shortName,
                 unitIcon: characterMock.icon,
+                unitRoundIcon: characterMock.roundIcon,
                 notes: goalMock.notes!,
                 rarityStart: characterMock.rarity,
                 rarityEnd: goalMock.targetRarity!,
