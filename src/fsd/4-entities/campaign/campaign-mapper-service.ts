@@ -74,6 +74,8 @@ export class CampaignMapperService {
             [Campaign.AME]: Campaign.AMEC,
             [Campaign.TS]: Campaign.TSC,
             [Campaign.TE]: Campaign.TEC,
+            [Campaign.DGS]: Campaign.DGSC,
+            [Campaign.DGE]: Campaign.DGEC,
             [Campaign.TAS]: Campaign.TASC,
             [Campaign.TAE]: Campaign.TAEC,
         };

@@ -17,6 +17,8 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
         const challengeCampaigns = [
             Campaign.AMSC,
             Campaign.AMEC,
+            Campaign.DGSC,
+            Campaign.DGEC,
             Campaign.TSC,
             Campaign.TEC,
             Campaign.TASC,
