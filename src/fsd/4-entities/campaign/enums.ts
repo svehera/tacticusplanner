@@ -39,6 +39,10 @@ export enum Campaign {
     TASC = "T'au Empire Standard Challenge",
     TAE = "T'au Empire Extremis",
     TAEC = "T'au Empire Extremis Challenge",
+    DGS = 'Death Guard Standard',
+    DGSC = 'Death Guard Standard Challenge',
+    DGE = 'Death Guard Extremis',
+    DGEC = 'Death Guard Extremis Challenge',
     Onslaught = 'Onslaught',
 }
 
@@ -87,6 +91,11 @@ export enum CampaignGroupType {
      * Campaign Event: Adeptus Mechanicus storyline.
      */
     adMechCE = 'AdMech',
+
+    /**
+     * Campaign Event: Death Guard storyline.
+     */
+    deathGuardCE = 'Death Guard',
 
     /**
      * Campaign Event: Tyranids storyline.

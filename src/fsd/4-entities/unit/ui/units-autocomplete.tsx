@@ -1,6 +1,5 @@
 ﻿import { Autocomplete, TextField } from '@mui/material';
-import { get } from 'lodash';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
 import { IUnit } from '../model';
 

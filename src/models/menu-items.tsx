@@ -1,5 +1,4 @@
-﻿import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
+﻿import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';

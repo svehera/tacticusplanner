@@ -57951,5 +57951,3178 @@
                 "rank": "Diamond 3"
             }
         ]
+    },
+    "DGS01": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 1,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC013",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "DGS02": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 2,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC013",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "DGS03": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC013",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DGSC03B": {
+        "campaign": "Death Guard Standard Challenge",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR008",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 6,
+                "stars": 2,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "DGS04": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 4,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC006",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DGS05": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 5,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC012",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 5,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DGS06": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 6,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_deathBlightlord",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Maladus", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 5,
+                "stars": 2,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "deathNpcBlightlord",
+                "name": "Maladus",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DGS07": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 7,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC003",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Nurglings"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 7,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DGS08": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 8,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC010",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Nurglings", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 1,
+                "rank": "Stone 3"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 1,
+                "rank": "Stone 3"
+            }
+        ]
+    },
+    "DGS09": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 9,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC014",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Nurglings", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DGS10": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 10,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR024",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DGS11": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 11,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_deathPutrifier",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Nurglings", "Pestillian", "Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "deathNpcPutrifier",
+                "name": "Pestillian",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DGS12": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 12,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC007",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 8,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "DGS13": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU016",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 7,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "DGSC13B": {
+        "campaign": "Death Guard Standard Challenge",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpE015",
+                    "chance_numerator": 1,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.4
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 5,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 7,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "DGS14": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 14,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU011",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "DGS15": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 15,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU002",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 3,
+                "stars": 5,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "DGS16": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 16,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR024",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "DGS17": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 17,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_deathBlightbringer",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Corrodius", "Nurglings", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 7,
+                "stars": 5,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "deathNpcBlightbringer",
+                "name": "Corrodius",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DGS18": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 18,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU009",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Blightlord Terminator", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 8,
+                "stars": 5,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "DGS19": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 19,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU012",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Blightlord Terminator", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 3,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 2,
+                "stars": 3,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "DGS20": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 20,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU008",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 10,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "DGS21": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 21,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR009",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Blightlord Terminator", "Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "DGS22": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 22,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_deathTyphus",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Poxwalker", "Typhus"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 3,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "deathNpcTyphus",
+                "name": "Typhus",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DGS23": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 23,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU009",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Nurglings", "Poxwalker", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 9,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "DGS24": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 24,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU019",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 9,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "DGS25": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU007",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Nurglings", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 2,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 6,
+                "stars": 9,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "DGSC25B": {
+        "campaign": "Death Guard Standard Challenge",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgE003",
+                    "chance_numerator": 1,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.4
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Corrodius", "Maladus", "Nauseous", "Nurglings", "Pestillian", "Plague Marine", "Typhus"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 2,
+                "stars": 9,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 9,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "deathNpcBlightbringer",
+                "name": "Corrodius",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "deathNpcBlightlord",
+                "name": "Maladus",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "deathNpcPutrifier",
+                "name": "Pestillian",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "deathNpcRotbone",
+                "name": "Nauseous",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "deathNpcTyphus",
+                "name": "Typhus",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DGS26": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 26,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR019",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "DGS27": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 27,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR003",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Blightlord Terminator", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 5,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 1,
+                "stars": 9,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DGS28": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 28,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR006",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Blightlord Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 4,
+                "stars": 9,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "DGS29": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 29,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpL104",
+                    "chance_numerator": 1,
+                    "chance_denominator": 9,
+                    "effective_rate": 0.199
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Blightlord Terminator", "Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 4,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 1,
+                "stars": 9,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "DGS30": {
+        "campaign": "Death Guard Standard",
+        "campaignType": "Normal",
+        "energyCost": 6,
+        "nodeNumber": 30,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_deathRotbone",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Mortarion", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathBossMortarion",
+                "name": "Mortarion",
+                "count": 1,
+                "stars": 6,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 9,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DGE01": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 1,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC013",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "stars": 10,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "DGE02": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 2,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC013",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Poxwalker", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "stars": 10,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "DGE03": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC013",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "stars": 10,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 8,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "DGEC03B": {
+        "campaign": "Death Guard Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmE010",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 7,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DGE04": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 4,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC006",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 8,
+                "stars": 10,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "DGE05": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 5,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC012",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 6,
+                "stars": 10,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "DGE06": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 6,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_deathBlightlord",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Maladus", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 6,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "deathNpcBlightlord",
+                "name": "Maladus",
+                "count": 1,
+                "stars": 10,
+                "rank": "Gold 3"
+            }
+        ]
+    },
+    "DGE07": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 7,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC003",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Nurglings"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 9,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DGE08": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 8,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC010",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Nurglings", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 5,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DGE09": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 9,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC014",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Nurglings", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 10,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DGE10": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 10,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC007",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 10,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DGE11": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 11,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_deathPutrifier",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Nurglings", "Pestillian", "Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 10,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "deathNpcPutrifier",
+                "name": "Pestillian",
+                "count": 1,
+                "stars": 10,
+                "rank": "Gold 3"
+            }
+        ]
+    },
+    "DGE12": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 12,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU008",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 8,
+                "stars": 10,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "DGE13": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU016",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Nurglings", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 6,
+                "stars": 10,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 5,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "DGEC13B": {
+        "campaign": "Death Guard Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmL203",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 11,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 11,
+                "rank": "Diamond 3"
+            }
+        ]
+    },
+    "DGE14": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 14,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU011",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 6,
+                "stars": 11,
+                "rank": "Diamond 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 3"
+            }
+        ]
+    },
+    "DGE15": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 15,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR019",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 11,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 10,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 10,
+                "rank": "Diamond 2"
+            }
+        ]
+    },
+    "DGE16": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 16,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR003",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 3,
+                "stars": 11,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 10,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 10,
+                "rank": "Diamond 3"
+            }
+        ]
+    },
+    "DGE17": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 17,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_deathBlightbringer",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Corrodius", "Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 8,
+                "stars": 11,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 1,
+                "stars": 10,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 2,
+                "stars": 10,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "deathNpcBlightbringer",
+                "name": "Corrodius",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGE18": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 18,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR006",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Blightlord Terminator", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 8,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 2,
+                "stars": 11,
+                "rank": "Diamond 2"
+            }
+        ]
+    },
+    "DGE19": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 19,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR024",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Blightlord Terminator", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 7,
+                "stars": 11,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 1,
+                "stars": 10,
+                "rank": "Diamond 3"
+            }
+        ]
+    },
+    "DGE20": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 20,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR024",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 11,
+                "stars": 10,
+                "rank": "Diamond 3"
+            }
+        ]
+    },
+    "DGE21": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 21,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR009",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Blightlord Terminator", "Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 1,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGE22": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 22,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_deathTyphus",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Poxwalker", "Typhus"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 4,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 4,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpcTyphus",
+                "name": "Typhus",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGE23": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 23,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpL104",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Nurglings", "Poxwalker", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "stars": 14,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 11,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGE24": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 24,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_deathRotbone",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "stars": 14,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 4,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGE25": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_deathBlightlord",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Nurglings", "Plague Marine"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 7,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGEC25B": {
+        "campaign": "Death Guard Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 90,
+                    "max": 155
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgL003",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Corrodius", "Maladus", "Nauseous", "Pestillian", "Poxwalker", "Typhus"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 6,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpcBlightbringer",
+                "name": "Corrodius",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpcBlightlord",
+                "name": "Maladus",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpcPutrifier",
+                "name": "Pestillian",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpcRotbone",
+                "name": "Nauseous",
+                "count": 1,
+                "stars": 11,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "deathNpcTyphus",
+                "name": "Typhus",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGE26": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 26,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_deathPutrifier",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 5,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 2,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGE27": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 27,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_deathBlightbringer",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["BlackLegion", "DeathGuard"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Blightlord Terminator", "Plague Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "id": "blackNpc3TraitorGuardsman",
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "stars": 14,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 4,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGE28": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 28,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_deathTyphus",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Blightlord Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 4,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGE29": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 29,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_deathRotbone",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Blightlord Terminator", "Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 4,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 2,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 3,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc4BlightlordTerminator",
+                "name": "Blightlord Terminator",
+                "count": 1,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DGE30": {
+        "campaign": "Death Guard Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 30,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["adeptRetributor", "adeptHospitaller", "adeptCanoness"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 90,
+                    "max": 155
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpM004",
+                    "chance_numerator": 3,
+                    "chance_denominator": 25,
+                    "effective_rate": 0.153
+                }
+            ]
+        },
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["DeathGuard"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Mortarion", "Nurglings", "Plague Marine", "Poxwalker"],
+        "detailedEnemyTypes": [
+            {
+                "id": "deathBossMortarion",
+                "name": "Mortarion",
+                "count": 1,
+                "stars": 11,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "deathNpc1Poxwalker",
+                "name": "Poxwalker",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "deathNpc2PlagueMarine",
+                "name": "Plague Marine",
+                "count": 2,
+                "stars": 11,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "deathNpc3Nurglings",
+                "name": "Nurglings",
+                "count": 1,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
     }
 }

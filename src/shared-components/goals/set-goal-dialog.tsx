@@ -12,7 +12,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import InputLabel from '@mui/material/InputLabel';
-import { first } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
@@ -34,7 +33,6 @@ import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
-import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { UnitTitle } from '@/fsd/4-entities/unit/ui/unit-title';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
