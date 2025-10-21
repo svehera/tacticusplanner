@@ -106,12 +106,17 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     'Saim-Hann Elite': 0,
     'Saim-Hann Mirror Elite': 0,
 
+    Onslaught: 0,
+
     'Adeptus Mechanicus Standard': 0,
     'Adeptus Mechanicus Standard Challenge': 0,
     'Adeptus Mechanicus Extremis': 0,
     'Adeptus Mechanicus Extremis Challenge': 0,
 
-    Onslaught: 0,
+    [Campaign.DGS]: 0,
+    [Campaign.DGSC]: 0,
+    [Campaign.DGE]: 0,
+    [Campaign.DGEC]: 0,
 
     [Campaign.TS]: 0,
     [Campaign.TSC]: 0,
