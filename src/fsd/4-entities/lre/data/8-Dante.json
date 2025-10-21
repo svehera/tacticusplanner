@@ -3,9 +3,7 @@
     "unitSnowprintId": "bloodDante",
     "name": "Dante",
     "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Dante",
-    "eventStage": 2,
-    "nextEventDate": "September 14, 2025",
-    "nextEventDateUtc": "Sun, 14 September 2025 00:00:00 GMT",
+    "eventStage": 3,
     "finished": false,
     "regularMissions": [
         "Defeat 5 waves of enemies in any wave-based game mode, Deal 1000 damage",
