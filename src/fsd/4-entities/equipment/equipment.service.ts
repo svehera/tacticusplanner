@@ -56,6 +56,9 @@ export class EquipmentService {
             // Re'vas's relic icon path is broken for some reason.
             return 'snowprint_assets/equipment/ui_icon_item_R_Crit_DW02AdvancedBurstCannon.png';
         }
+        if (id == 'R_Block_DaemonfleshPlate') {
+            return 'snowprint_assets/equipment/ui_icon_item_R_Block_DaemonFleshPlate.png';
+        }
         return `snowprint_assets/equipment/ui_icon_item_${id}.png`;
     }
 
