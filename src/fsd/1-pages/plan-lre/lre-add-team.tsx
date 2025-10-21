@@ -48,6 +48,7 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
         },
     ];
     const [expectedBattleClears, setExpectedBattleClears] = useState<number>(1);
+    const [expectedBattleClearsInput, setExpectedBattleClearsInput] = useState<string>('1');
     const [teamName, setTeamName] = useState<string>(preselectedTrackId);
     const [trackId, setTrackId] = useState<LreTrackId>(preselectedTrackId);
     const [restrictions, setRestrictions] = useState<string[]>(preselectedRequirements);
@@ -106,8 +107,13 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
         return (
             selectedTeam.length !== 0 &&
             !!teamName.length &&
-            selectedTeam.every(character => availableCharacters.includes(character.id))
+            selectedTeam.every(character => availableCharacters.includes(character.id)) &&
+            clampExpectedBattles(expectedBattleClears) === expectedBattleClears
         );
+    };
+
+    const clampExpectedBattles = (value: number) => {
+        return Math.max(1, Math.min(value, lre.battlesCount));
     };
 
     return (
@@ -134,11 +140,29 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                         label="Tokenomics: Expected Battles Cleared"
                         variant="outlined"
                         type="number"
-                        value={expectedBattleClears}
+                        value={expectedBattleClearsInput}
                         onChange={event => {
-                            const value = parseInt(event.target.value, 10);
-                            if (!isNaN(value)) {
-                                setExpectedBattleClears(Math.max(1, Math.min(value, lre.battlesCount)));
+                            const v = event.target.value;
+                            // allow empty or numeric input only
+                            if (/^\d*$/.test(v)) {
+                                setExpectedBattleClearsInput(v);
+                                const parsed = parseInt(v, 10);
+                                if (!isNaN(parsed)) {
+                                    setExpectedBattleClears(clampExpectedBattles(parsed));
+                                }
+                            }
+                        }}
+                        onBlur={() => {
+                            // ensure the input is populated with a clamped numeric value after leaving the field
+                            if (expectedBattleClearsInput === '') {
+                                const clamped = clampExpectedBattles(expectedBattleClears);
+                                setExpectedBattleClearsInput(clamped.toString());
+                            } else {
+                                const parsed = parseInt(expectedBattleClearsInput, 10);
+                                const final = isNaN(parsed) ? expectedBattleClears : parsed;
+                                const clamped = clampExpectedBattles(final);
+                                setExpectedBattleClears(clamped);
+                                setExpectedBattleClearsInput(clamped.toString());
                             }
                         }}
                         inputProps={{ min: 1, max: lre.battlesCount }}

@@ -27,6 +27,9 @@ interface Props {
 export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, deleteTeam }) => {
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const [expectedBattleClears, setExpectedBattleClears] = useState<number>(team.expectedBattleClears ?? 1);
+    const [expectedBattleClearsInput, setExpectedBattleClearsInput] = useState<string>(
+        (team.expectedBattleClears ?? 1).toString()
+    );
     const [teamName, setTeamName] = useState<string>(team.name);
     const [selectedTeam, setSelectedTeam] = useState<ICharacter2[]>(team.characters ?? []);
 
@@ -92,12 +95,29 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                         style={{ width: 200 }}
                         label="Battle Clears"
                         variant="outlined"
-                        type="number"
-                        value={clampExpectedBattles(expectedBattleClears)}
+                        value={expectedBattleClearsInput}
                         onChange={event => {
-                            const value = parseInt(event.target.value, 10);
-                            if (!isNaN(value)) {
-                                setExpectedBattleClears(clampExpectedBattles(value));
+                            const v = event.target.value;
+                            // allow empty or numeric input only
+                            if (/^\d*$/.test(v)) {
+                                setExpectedBattleClearsInput(v);
+                                const parsed = parseInt(v, 10);
+                                if (!isNaN(parsed)) {
+                                    setExpectedBattleClears(clampExpectedBattles(parsed));
+                                }
+                            }
+                        }}
+                        onBlur={() => {
+                            // ensure the input is populated with a clamped numeric value after leaving the field
+                            if (expectedBattleClearsInput === '') {
+                                const clamped = clampExpectedBattles(expectedBattleClears);
+                                setExpectedBattleClearsInput(clamped.toString());
+                            } else {
+                                const parsed = parseInt(expectedBattleClearsInput, 10);
+                                const final = isNaN(parsed) ? expectedBattleClears : parsed;
+                                const clamped = clampExpectedBattles(final);
+                                setExpectedBattleClears(clamped);
+                                setExpectedBattleClearsInput(clamped.toString());
                             }
                         }}
                         inputProps={{ min: 1, max: lre.battlesCount, step: 1 }}
