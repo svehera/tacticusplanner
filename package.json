@@ -104,9 +104,8 @@
     "test:coverage": "vitest run --coverage",
     "analyze": "vite-bundle-visualizer -c ./vite.config.mts",
     "preview": "vite preview",
-    "spellcheck": "cspell .",
-    "lint-ci": "eslint src --quiet && npm run spellcheck",
-    "lint": "eslint src --quiet --fix && npm run spellcheck",
+    "lint-ci": "eslint src --quiet",
+    "lint": "eslint src --quiet --fix",
     "format": "prettier src --write",
     "format-ci": "prettier src --check",
     "knip": "knip"
