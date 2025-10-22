@@ -106,12 +106,17 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     'Saim-Hann Elite': 0,
     'Saim-Hann Mirror Elite': 0,
 
+    Onslaught: 0,
+
     'Adeptus Mechanicus Standard': 0,
     'Adeptus Mechanicus Standard Challenge': 0,
     'Adeptus Mechanicus Extremis': 0,
     'Adeptus Mechanicus Extremis Challenge': 0,
 
-    Onslaught: 0,
+    [Campaign.DGS]: 0,
+    [Campaign.DGSC]: 0,
+    [Campaign.DGE]: 0,
+    [Campaign.DGEC]: 0,
 
     [Campaign.TS]: 0,
     [Campaign.TSC]: 0,
@@ -157,7 +162,7 @@ export const defaultData: IPersonalData2 = {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesCount: [],
+            enemiesMinCount: null,
         },
         raidedLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
@@ -352,6 +357,10 @@ export const idToCampaign: Record<string, Campaign> = {
     eliteMirror2: Campaign.FoCME,
     eliteMirror3: Campaign.OME,
     eliteMirror4: Campaign.SHME,
+
+    eventCampaign1: Campaign.AMS,
+    eventCampaign2: Campaign.TS,
+    eventCampaign3: Campaign.TAS,
 };
 
 // Re-export from RarityMapper for backward compatibility

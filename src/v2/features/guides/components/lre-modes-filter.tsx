@@ -4,7 +4,7 @@ import { IMenuOption } from 'src/v2/models/menu-option';
 
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
-import { getLre, lreCharacters } from 'src/v2/features/guides/guides.contstants';
+import { getLre, lreCharacters } from 'src/v2/features/guides/guides.constants';
 import { LreCharacter } from 'src/v2/features/guides/guides.enums';
 import { anyOption, lreSections } from 'src/v2/features/teams/teams.constants';
 

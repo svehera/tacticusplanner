@@ -13,7 +13,6 @@ import { PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
-import { Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';

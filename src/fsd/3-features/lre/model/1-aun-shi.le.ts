@@ -1,7 +1,7 @@
 ﻿import { Alliance, DamageType, Trait, Faction } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
-import { LegendaryEventEnum, aunshi as staticData } from '@/fsd/4-entities/lre';
+import { aunshi as staticData } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEventTrack } from '../lre.model';
 

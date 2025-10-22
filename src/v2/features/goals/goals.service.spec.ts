@@ -38,7 +38,7 @@ describe('Goal service', () => {
                 type: PersonalGoalType.UpgradeRank,
                 priority: 1,
                 dailyRaids: false,
-                notes: '1fasfqwf',
+                notes: 'myNotes',
                 targetRank: Rank.Silver1,
                 rankPoint5: true,
             };
@@ -90,7 +90,7 @@ describe('Goal service', () => {
                 type: PersonalGoalType.Unlock,
                 priority: 1,
                 dailyRaids: false,
-                notes: '1fasfqwf',
+                notes: 'myNotes',
             };
 
             const expectedResult: ICharacterUnlockGoal = {
@@ -134,7 +134,7 @@ describe('Goal service', () => {
                 type: PersonalGoalType.Ascend,
                 priority: 1,
                 dailyRaids: false,
-                notes: '1fasfqwf',
+                notes: 'myNotes',
                 targetRarity: Rarity.Legendary,
             };
 

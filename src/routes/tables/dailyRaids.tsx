@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useMemo } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
-import { ICampaingsFilters } from 'src/models/interfaces';
+import { ICampaignsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { RaidsPlan } from 'src/routes/tables/raids-plan';
@@ -11,7 +11,7 @@ import { TodayRaids } from 'src/routes/tables/todayRaids';
 import { useAuth } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { MowsService } from '@/fsd/4-entities/mow';
 import { UpgradesService as FsdUpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
@@ -142,6 +142,11 @@ export const DailyRaids = () => {
     const sync = async () => {
         console.log('Syncing with Tacticus...');
         await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+        // Inline refresh after successful sync
+        setUpgrades({ ...inventory.upgrades });
+        setUnits([...storeCharacters, ...resolvedMows]);
+        setRaidedLocations([...raidedLocations]);
+        setHasChanges(false);
     };
 
     const resetDay = () => {
@@ -154,7 +159,7 @@ export const DailyRaids = () => {
         }, 100);
     };
 
-    const saveFilterChanges = (filters: ICampaingsFilters) => {
+    const saveFilterChanges = (filters: ICampaignsFilters) => {
         dispatch.dailyRaids({
             type: 'UpdateFilters',
             value: filters,

@@ -1,5 +1,4 @@
 import { groupBy, orderBy, sortBy, uniq } from 'lodash';
-import { X } from 'lucide-react';
 
 import { FactionsService } from '@/fsd/5-shared/lib';
 import { Alliance, Faction, Rarity } from '@/fsd/5-shared/model';
@@ -9,7 +8,7 @@ import { recipeDataByName } from '@/fsd/4-entities/upgrade/@x/campaign';
 import { campaignsList } from './campaigns.constants';
 import { battleData, campaignConfigs } from './data';
 import { Campaign, CampaignReleaseType, CampaignType } from './enums';
-import { ICampaignBattle, ICampaignBattleComposed, ICampaignsProgress, ICampaingsFilters, IDropRate } from './model';
+import { ICampaignBattle, ICampaignBattleComposed, ICampaignsProgress, ICampaignsFilters, IDropRate } from './model';
 
 export class CampaignsService {
     public static readonly rawBattleData = battleData;
@@ -184,7 +183,7 @@ export class CampaignsService {
 
     public static passLocationFilter(
         location: ICampaignBattleComposed,
-        filters: ICampaingsFilters,
+        filters: ICampaignsFilters,
         materialRarity?: Rarity
     ): boolean {
         const {
@@ -196,7 +195,7 @@ export class CampaignsService {
             upgradesRarity,
             slotsCount,
             enemiesTypes,
-            enemiesCount,
+            enemiesMinCount,
         } = filters;
 
         const isString = (v: unknown): v is string => typeof v === 'string';
@@ -207,10 +206,8 @@ export class CampaignsService {
             .map(faction => FactionsService.getFactionSnowprintId(faction))
             .filter(isString);
 
-        if (enemiesCount?.length) {
-            if (!enemiesCount.includes(location.enemiesTotal)) {
-                return false;
-            }
+        if (enemiesMinCount && enemiesMinCount > location.enemiesTotal) {
+            return false;
         }
 
         if (enemiesTypes?.length) {

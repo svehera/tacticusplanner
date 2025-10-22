@@ -39,7 +39,7 @@ export class NpcService {
             'Grot Tank': 'grot_tank.png',
             'Storm Boy': 'storm_boy.png',
             Hormagaunt: 'hormagaunt.png',
-            Termagant: 'termagaunt.png',
+            Termagant: 'termagant.png',
             'Ripper Swarm': 'ripper_swarm.png',
             'Tyranid Warrior': 'tyranid_warrior.png',
             'Rubric Marine': 'rubric_marine.webp',
@@ -108,7 +108,7 @@ export class NpcService {
 
     private static parseAlliance(alliance: string): Alliance | undefined {
         switch (alliance) {
-            // Towen gave us this data, and he wasn't consistent in capitalizizing xenos. /shrug.
+            // Towen gave us this data, and he wasn't consistent in capitalizing xenos. /shrug.
             case 'xenos':
                 return Alliance.Xenos;
             case 'Xenos':

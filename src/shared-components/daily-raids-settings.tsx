@@ -94,6 +94,11 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
     );
 
+    // Keep local form state in sync if preferences change externally (e.g., API auto-detect)
+    React.useEffect(() => {
+        setDailyRaidsPreferencesForm(dailyRaidsPreferences);
+    }, [dailyRaidsPreferences]);
+
     const updatePreferences = useCallback((setting: keyof IDailyRaidsPreferences, value: boolean) => {
         setDailyRaidsPreferencesForm(curr => ({ ...curr, [setting]: value }));
     }, []);
@@ -262,7 +267,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     label={
                                         <AccessibleTooltip
                                             title="Experimental/unstable feature. 
-                                Please report any issues you have while using this feature in the Dicord. 
+                                Please report any issues you have while using this feature in the Discord. 
                                 It doesn't work yet with 'By goals priority'.">
                                             <div className="flex-box gap2">
                                                 <Warning color="warning" /> Least time

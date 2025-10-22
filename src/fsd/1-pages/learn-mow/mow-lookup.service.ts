@@ -1,8 +1,5 @@
 ﻿import { groupBy, mapValues, orderBy, sum } from 'lodash';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import { rarityStringToNumber } from '@/models/constants';
-
 import { Rarity } from '@/fsd/5-shared/model';
 
 import { IMowLevelMaterials } from '@/fsd/4-entities/mow';

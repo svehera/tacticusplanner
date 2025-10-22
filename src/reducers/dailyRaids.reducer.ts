@@ -1,7 +1,6 @@
 ﻿import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 
-import { Campaign, CampaignsService, ICampaingsFilters } from '@/fsd/4-entities/campaign';
-import { campaignEventsLocations } from '@/fsd/4-entities/campaign/campaigns.constants';
+import { Campaign, CampaignsService, ICampaignsFilters } from '@/fsd/4-entities/campaign';
 
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 
@@ -21,7 +20,7 @@ export type DailyRaidsAction =
       }
     | {
           type: 'UpdateFilters';
-          value: ICampaingsFilters;
+          value: ICampaignsFilters;
       }
     | {
           type: 'SyncWithTacticus';
@@ -56,10 +55,8 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             };
         }
         case 'SyncWithTacticus': {
-            // Workaround to not reset CE data automatically
-            const raidedLocations: IItemRaidLocation[] = state.raidedLocations.filter(x =>
-                campaignEventsLocations.includes(x.campaign)
-            );
+            // removed workaround for CE nodes
+            const raidedLocations: IItemRaidLocation[] = [];
 
             for (const campaign of action.progress) {
                 const completedBattles = campaign.battles.filter(battle => battle.attemptsUsed !== 0);
