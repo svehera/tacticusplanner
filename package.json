@@ -111,11 +111,6 @@
     "format-ci": "prettier src --check",
     "knip": "knip"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
   "lint-staged": {
     "src/**/*.{ts,tsx,css,scss,json}": [
       "prettier --write"

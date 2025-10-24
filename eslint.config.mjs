@@ -37,7 +37,7 @@ export default [
             'react-refresh': reactRefresh,
             'react-compiler': reactCompiler,
             boundaries,
-            "unused-imports": unusedImports,
+            'unused-imports': unusedImports,
         },
 
         languageOptions: {
