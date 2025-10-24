@@ -27,17 +27,32 @@ export class TokenUse {
     public restrictionsCleared: ILreRequirements[] = [];
 }
 
+/** 
+   * A type that represents positive integers (1, 2, 3, ...).
+  @source https://mvasilkov.animuchan.net/typescript-positive-integer-type
+*/
+type PositiveInteger<T extends number> = `${T}` extends '0' | `-${never}` | `${never}.${never}` ? never : T;
+
 /**
  * LE milestones such as 12,500 points for a first round unlock with no packs.
  */
-export class MilestoneAndPoints {
-    public points: number = -1;
-    public stars: number = -1; // 3, 4, 5, or 6 (blue star), 7 (mythic), 8 (two blue stars)
-    public round: number = -1; // 1, 2, or 3
-    public packsPerRound: number = -1; // 0 for no packs, 1 for premium missions, 2 for currency pack
-}
+type MilestoneAndPoints = {
+    points: PositiveInteger<number>;
+    stars:
+        | 3
+        | 4
+        | 5
+        | 6 // blue star
+        | 7 // mythic
+        | 8; // two blue stars
+    round: 1 | 2 | 3;
+    packsPerRound:
+        | 0 // no packs
+        | 1 // premium missions
+        | 2; // currency pack
+};
 
-export const milestonesAndPoints = [
+export const milestonesAndPoints: readonly MilestoneAndPoints[] = [
     { points: 100, stars: 3, round: 3, packsPerRound: 2 },
     { points: 6000, stars: 3, round: 3, packsPerRound: 1 },
     { points: 6500, stars: 3, round: 2, packsPerRound: 2 },
