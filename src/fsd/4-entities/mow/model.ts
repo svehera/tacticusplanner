@@ -80,14 +80,6 @@ export interface IMowLevelUpgrade {
     forgeBadges?: number;
 }
 
-export interface IMowLevelUpgrades {
-    lvl: number;
-    primary: string[];
-    secondary?: string[];
-}
-
-export type IMowLevelUpgradesDictionary = Record<string, Array<IMowLevelUpgrades>>;
-
 export interface IMowLevelMaterials {
     mowId: string;
     mowLabel: string;

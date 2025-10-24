@@ -12,7 +12,6 @@ export type {
     IUnitUpgradeRank,
 } from './model';
 export { CharacterBias } from './bias.enum';
-export { CharacterReleaseRarity } from './character-release-rarity.enum';
 export { CharacterUpgradesService } from './character-upgrades.service';
 export { CharactersService } from './characters.service';
 export { CharactersFilterBy } from './characters-filter-by.enum';
