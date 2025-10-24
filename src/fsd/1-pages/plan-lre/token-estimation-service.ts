@@ -27,11 +27,19 @@ export class TokenUse {
     public restrictionsCleared: ILreRequirements[] = [];
 }
 
-/** 
-   * A type that represents positive integers (1, 2, 3, ...).
-  @source https://mvasilkov.animuchan.net/typescript-positive-integer-type
-*/
-type PositiveInteger<T extends number> = `${T}` extends '0' | `-${never}` | `${never}.${never}` ? never : T;
+/**
+ * A type that represents positive integers (1, 2, 3, ...).
+ * Unfortunately it doesn't work on object literals.
+ * e.g. `const foo: PositiveInteger<number> = -1;` won't error
+ * It does work with function signatures though.
+ * e.g. `function test<T extends number>(n: PositiveInteger<T>) {}` will error
+ * e.g. `test(-1);` will error
+ * e.g. ` n = -1; test(n);` will error
+ * Tbh it's mostly useful for documenting intent.
+ *
+ * @source https://mvasilkov.animuchan.net/typescript-positive-integer-type
+ */
+type PositiveInteger<T extends number> = `${T}` extends '0' | `-${any}` | `${any}.${any}` ? never : T;
 
 /**
  * LE milestones such as 12,500 points for a first round unlock with no packs.
