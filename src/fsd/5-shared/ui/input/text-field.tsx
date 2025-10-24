@@ -1,12 +1,10 @@
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { ComponentPropsWithoutRef, useState } from 'react';
 import {
     Button as ButtonPrimitive,
     TextField as TextFieldPrimitive,
     type TextFieldProps as TextFieldPrimitiveProps,
 } from 'react-aria-components';
-
-import type { TextInputDOMProps } from '@react-types/shared';
 
 import { Loader } from '../loader';
 import { composeTailwindRenderProps } from '../primitive';
@@ -14,8 +12,7 @@ import { composeTailwindRenderProps } from '../primitive';
 import type { FieldProps } from './field';
 import { Description, FieldError, FieldGroup, Input, Label } from './field';
 
-type InputType = Exclude<TextInputDOMProps['type'], 'password'>;
-
+type InputType = Exclude<ComponentPropsWithoutRef<typeof TextFieldPrimitive>['type'], 'password'>;
 interface BaseTextFieldProps extends TextFieldPrimitiveProps, FieldProps {
     prefix?: React.ReactNode;
     suffix?: React.ReactNode;
