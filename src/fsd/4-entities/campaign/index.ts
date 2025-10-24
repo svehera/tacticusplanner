@@ -4,8 +4,6 @@ export type {
     ICampaignModel,
     ICampaignsProgress,
     ICampaignsFilters,
-    ICampaignsData,
-    ICampaignBattle,
 } from './model';
 export { battleData } from './data';
 export { CampaignsService } from './campaigns.service';

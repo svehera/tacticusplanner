@@ -99,5 +99,4 @@ const TextField = ({
     );
 };
 
-export type { TextFieldProps };
 export { TextField };

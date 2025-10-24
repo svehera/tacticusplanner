@@ -21,5 +21,4 @@ const LinkButton = ({ className, ref, ...props }: LinkProps) => {
     );
 };
 
-export type { LinkProps };
 export { LinkButton };
