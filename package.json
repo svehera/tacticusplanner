@@ -101,6 +101,8 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
+    "tsc": "tsc --noEmit",
+    "tsc:watch": "tsc --noEmit --watch",
     "analyze": "vite-bundle-visualizer -c ./vite.config.mts",
     "preview": "vite preview",
     "lint-ci": "eslint src --quiet",
