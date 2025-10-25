@@ -257,7 +257,6 @@ export const useCharacters = () => {
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                             StatsCalculatorService.calculateHealth(
                                 props.data?.snowprintId ?? '',
-                                targetRarity,
                                 targetStars,
                                 targetRank,
                                 0

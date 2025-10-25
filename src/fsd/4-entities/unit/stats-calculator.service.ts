@@ -87,7 +87,6 @@ export class StatsCalculatorService {
         if (unit == null) return 0;
         return this.calculateHealth(
             unit!.snowprintId!,
-            unit!.rarity,
             unit!.stars,
             unit!.rank,
             StatsCalculatorService.countHealthUpgrades(unit)
@@ -155,13 +154,7 @@ export class StatsCalculatorService {
      * @returns the calculated health for the given unit at the given rarity
      *          and rank. -1 if the unit can't be found.
      */
-    static calculateHealth(
-        unitId: string,
-        rarity: Rarity,
-        rarityStars: RarityStars,
-        rank: Rank,
-        numAppliedUpgrades: number
-    ): number {
+    static calculateHealth(unitId: string, rarityStars: RarityStars, rank: Rank, numAppliedUpgrades: number): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
         return StatsCalculatorService.calculateStat(unit?.health ?? -1, rarityStars, rank, numAppliedUpgrades);
     }

@@ -27,13 +27,7 @@ export const StatCell: React.FC<Props> = ({
     numArmorUpgrades,
 }) => {
     const health = characterId
-        ? StatsCalculatorService.calculateHealth(
-              characterId,
-              rarity ?? Rarity.Common,
-              rarityStars,
-              rank,
-              numHealthUpgrades
-          )
+        ? StatsCalculatorService.calculateHealth(characterId, rarityStars, rank, numHealthUpgrades)
         : npc
           ? StatsCalculatorService.calculateNpcHealth(npc, rarityStars, rank)
           : -1;
