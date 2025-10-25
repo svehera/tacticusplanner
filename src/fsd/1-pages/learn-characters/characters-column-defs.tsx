@@ -169,7 +169,6 @@ export const useCharacters = () => {
                                 <StatCell
                                     characterId={props.data?.snowprintId ?? ''}
                                     rank={props.data?.rank ?? Rank.Stone1}
-                                    rarity={props.data?.rarity ?? Rarity.Common}
                                     rarityStars={props.data?.stars ?? RarityStars.None}
                                     numHealthUpgrades={StatsCalculatorService.countHealthUpgrades(
                                         props.data as ICharacter2
@@ -213,7 +212,6 @@ export const useCharacters = () => {
                                 <DamageCell
                                     character={props.data as ICharacter2}
                                     rank={props.data?.rank ?? Rank.Stone1}
-                                    rarity={props.data?.rarity ?? Rarity.Common}
                                     rarityStars={props.data?.stars ?? RarityStars.None}
                                     numDamageUpgrades={StatsCalculatorService.countDamageUpgrades(
                                         props.data as ICharacter2
@@ -235,7 +233,6 @@ export const useCharacters = () => {
                                 <StatCell
                                     characterId={props.data?.snowprintId ?? ''}
                                     rank={targetRank}
-                                    rarity={targetRarity}
                                     rarityStars={targetStars}
                                     numHealthUpgrades={StatsCalculatorService.countHealthUpgrades(
                                         props.data as ICharacter2
@@ -297,7 +294,6 @@ export const useCharacters = () => {
                                 <DamageCell
                                     character={props.data as ICharacter2}
                                     rank={targetRank}
-                                    rarity={targetRarity}
                                     rarityStars={targetStars}
                                     numDamageUpgrades={0}
                                 />

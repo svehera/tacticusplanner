@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
+import { RarityStars, Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { StatsCalculatorService } from '../stats-calculator.service';
@@ -9,7 +9,6 @@ interface Props {
     characterId?: string;
     npc?: string;
     rank: Rank;
-    rarity?: Rarity;
     rarityStars: RarityStars;
     numHealthUpgrades: number;
     numDamageUpgrades: number;
@@ -20,7 +19,6 @@ export const StatCell: React.FC<Props> = ({
     characterId,
     npc,
     rank,
-    rarity,
     rarityStars,
     numHealthUpgrades,
     numDamageUpgrades,

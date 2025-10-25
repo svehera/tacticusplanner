@@ -1,4 +1,4 @@
-import { RarityStars, Rarity, Rank, rankToString } from '@/fsd/5-shared/model';
+import { RarityStars, Rank, rankToString } from '@/fsd/5-shared/model';
 
 import { ICharacter2, CharactersService, rankUpData } from '@/fsd/4-entities/character/@x/unit';
 import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
