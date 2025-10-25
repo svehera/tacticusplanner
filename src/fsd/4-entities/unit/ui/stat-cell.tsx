@@ -51,13 +51,7 @@ export const StatCell: React.FC<Props> = ({
           : -1;
 
     const armor = characterId
-        ? StatsCalculatorService.calculateArmor(
-              characterId,
-              rarity ?? Rarity.Common,
-              rarityStars,
-              rank,
-              numArmorUpgrades
-          )
+        ? StatsCalculatorService.calculateArmor(characterId, rarityStars, rank, numArmorUpgrades)
         : npc
           ? StatsCalculatorService.calculateNpcArmor(npc, rarityStars, rank)
           : -1;

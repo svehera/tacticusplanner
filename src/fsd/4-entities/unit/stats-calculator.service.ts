@@ -117,7 +117,6 @@ export class StatsCalculatorService {
         if (unit == null) return 0;
         return this.calculateArmor(
             unit!.snowprintId!,
-            unit!.rarity,
             unit!.stars,
             unit!.rank,
             StatsCalculatorService.countArmorUpgrades(unit)
@@ -188,13 +187,7 @@ export class StatsCalculatorService {
      * @returns the calculated armor for the given unit at the given rarity
      *          and rank. -1 if the unit can't be found.
      */
-    static calculateArmor(
-        unitId: string,
-        rarity: Rarity,
-        rarityStars: RarityStars,
-        rank: Rank,
-        numAppliedUpgrades: number
-    ): number {
+    static calculateArmor(unitId: string, rarityStars: RarityStars, rank: Rank, numAppliedUpgrades: number): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
         return StatsCalculatorService.calculateStat(unit?.armour ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
     }
