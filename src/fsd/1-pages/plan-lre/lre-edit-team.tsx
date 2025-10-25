@@ -169,7 +169,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                         <div
                             className="flex-box column start gap3"
                             style={{ minHeight: 300, maxHeight: 300, overflow: 'auto' }}>
-                            {gridTeam.map((character, index) => (
+                            {gridTeam.map(character => (
                                 <div
                                     key={character.id}
                                     onClick={() => addCharacter(character)}

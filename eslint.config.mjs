@@ -86,7 +86,15 @@ export default [
             semi: ['error', 'always'],
             'object-curly-spacing': ['error', 'always'],
             '@typescript-eslint/no-explicit-any': ['warn'],
-            '@typescript-eslint/no-unused-vars': ['warn'],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                {
+                    argsIgnorePattern: '^_',
+                    varsIgnorePattern: '^_',
+                    destructuredArrayIgnorePattern: '^_',
+                    caughtErrorsIgnorePattern: '^_',
+                },
+            ],
             'react-refresh/only-export-components': 'error',
             'react-compiler/react-compiler': 'error',
             'import-x/order': [

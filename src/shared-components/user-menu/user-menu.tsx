@@ -94,7 +94,7 @@ export const UserMenu = () => {
 
                     dispatch.setStore(new GlobalState(personalData), true, false);
                     enqueueSnackbar('Import successful', { variant: 'success' });
-                } catch (error) {
+                } catch (_error) {
                     enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
                 }
             };

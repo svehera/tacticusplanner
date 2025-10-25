@@ -108,7 +108,6 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
     };
 
     const get5Stars = (star: string, top: number, overlap: number) => {
-        const totalWidth = fifthStarSize + (starSize - overlap) * 4;
         let left = frameWidth / 2 - fifthStarSize / 2 - starSize * 2 + overlap * 2;
         const sizeDiff = fifthStarSize - starSize;
         const starImages = [];

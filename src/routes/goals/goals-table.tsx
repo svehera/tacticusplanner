@@ -54,10 +54,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
         return getUnit(unitId)?.rank ?? Rank.Locked;
     };
 
-    const getUnitRarity = (unitId: string): number => {
-        return getUnit(unitId)?.rarity ?? 0;
-    };
-
     const getGoalInfo = (goal: CharacterRaidGoalSelect, goalEstimate: IGoalEstimate) => {
         switch (goal.type) {
             case PersonalGoalType.Ascend: {

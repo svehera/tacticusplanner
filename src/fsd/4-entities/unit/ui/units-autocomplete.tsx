@@ -90,14 +90,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
             getOptionLabel={option => getOptionText(option)}
             isOptionEqualToValue={(option, value) => option.snowprintId === value.snowprintId}
             renderOption={(props, option) => (
-                <UnitTitle
-                    {...props}
-                    key={option.name}
-                    character={option}
-                    short
-                    fullName
-                    onClick={() => updateValue(option)}
-                />
+                <UnitTitle {...props} key={option.name} character={option} short onClick={() => updateValue(option)} />
             )}
             onChange={(_, value) => updateValue(value)}
             renderInput={params => (

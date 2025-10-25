@@ -3,7 +3,7 @@ import { Fab } from '@mui/material';
 import React from 'react';
 
 export const Teams = () => {
-    const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);
+    const [_openCreateTeamDialog, _setOpenCreateTeamDialog] = React.useState(false);
     return (
         <>
             Teams mobile

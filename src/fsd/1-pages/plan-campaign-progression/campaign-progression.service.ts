@@ -320,7 +320,7 @@ export class CampaignsProgressionService {
         );
         for (const materialId of sortedMaterials) {
             const count: number = materialReqs.materials[materialId];
-            const farmData: FarmData = this.getCostToFarm(goal, materialId, count, campaignProgress, inventoryUpgrades);
+            const farmData: FarmData = this.getCostToFarm(goal, materialId, count, campaignProgress);
             result.canFarm = result.canFarm && farmData.canFarm;
             result.totalEnergy = result.totalEnergy + farmData.totalEnergy;
             result.farmData.set(materialId, farmData);
@@ -376,8 +376,6 @@ export class CampaignsProgressionService {
      * @param count The number of this material we need.
      * @param campaignProgress Our progress in the campaigns, dictating the nodes from
      *                         which we can farm.
-     * @param inventoryUpgrades Our current inventory, allowing us to skip farming some
-     *                         or all materials if we already have them.
      * @returns The total cost in energy to farm `count` of `material`, as well as the
      *          nodes we can use now, and in the future.
      */
@@ -385,8 +383,7 @@ export class CampaignsProgressionService {
         goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal,
         materialId: string,
         count: number,
-        campaignProgress: ICampaignsProgress,
-        inventoryUpgrades: Record<string, number>
+        campaignProgress: ICampaignsProgress
     ): FarmData {
         const farmableLocs = this.getFarmableLocations(materialId, campaignProgress);
         const result: FarmData = {

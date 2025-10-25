@@ -368,7 +368,7 @@ export const Guides: React.FC = () => {
     const handleShare = (teamId: number) => {
         const shareRoute = (isMobile ? '/mobile' : '') + `/learn/guides?guideId=${teamId}`;
         const shareLink = location.origin + shareRoute;
-        navigator.clipboard.writeText(shareLink).then(r => enqueueSnackbar('Link Copied', { variant: 'success' }));
+        navigator.clipboard.writeText(shareLink).then(_ => enqueueSnackbar('Link Copied', { variant: 'success' }));
     };
 
     const handleViewOriginal = (teamId: number | null) => {

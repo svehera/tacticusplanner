@@ -13,14 +13,12 @@ export const UnitTitle = ({
     hideName,
     short,
     imageSize,
-    fullName,
 }: {
     character: IUnit;
     showLockedWithOpacity?: boolean;
     hideName?: boolean;
     onClick?: () => void;
     short?: boolean;
-    fullName?: boolean;
     imageSize?: number;
 }) => {
     if (isCharacter(character)) {

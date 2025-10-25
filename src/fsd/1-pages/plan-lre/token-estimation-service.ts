@@ -200,7 +200,7 @@ export class TokenEstimationService {
                     battle.requirementsProgress.length;
             });
         });
-        const resolvedTeams = teams.map((team, index) => ({
+        const resolvedTeams = teams.map(team => ({
             ...team,
             charSnowprintIds: (team.charSnowprintIds ?? team.charactersIds ?? []).map(char =>
                 CharactersService.canonicalName(char)

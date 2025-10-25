@@ -9,13 +9,11 @@ export const EquipmentBoost = ({
     stats,
     height,
     width,
-    tooltip,
 }: {
     type: string;
     stats: IEquipmentStats;
     height?: number;
     width?: number;
-    tooltip?: boolean;
 }) => {
     let icon1 = undefined;
     let icon2 = undefined;
