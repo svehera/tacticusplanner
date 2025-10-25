@@ -52,7 +52,7 @@ export class CampaignsProgressionService {
         }
 
         for (const [campaign, factions] of result.campaignFactions.entries()) {
-            factions.forEach((key: string, faction: string) => {
+            factions.forEach((_key: string, faction: string) => {
                 if (!result.factionCampaigns.get(faction)) {
                     result.factionCampaigns.set(faction, new Set<string>());
                 }

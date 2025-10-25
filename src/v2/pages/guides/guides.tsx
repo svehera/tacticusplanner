@@ -306,7 +306,7 @@ export const Guides: React.FC = () => {
         );
     };
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setTeams([]);
         setNextQueryParams(null);
         setTotal(0);
