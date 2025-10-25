@@ -1,1 +1,1 @@
-export { NpcService } from '../npcService';
+export { NpcService } from '../npc-service';

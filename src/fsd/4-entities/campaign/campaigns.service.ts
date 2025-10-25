@@ -114,10 +114,18 @@ export class CampaignsService {
             enemies.factions = enemies.factions.filter(isString);
             allies.factions = allies.factions.filter(isString);
             if (enemies.factions.length === 0) {
-                console.warn('no enemy factions found for', battle.campaign, battle);
+                console.warn(
+                    'no enemy factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured. ',
+                    battle.campaign,
+                    battle
+                );
             }
             if (allies.factions.length === 0) {
-                console.warn('no ally factions found for', battle.campaign, battle);
+                console.warn(
+                    'no ally factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured. ',
+                    battle.campaign,
+                    battle
+                );
             }
             const energyPerDay = config.dailyBattleCount * battle.energyCost;
             const itemsPerDay = energyPerDay / energyPerItem;
@@ -449,6 +457,27 @@ export class CampaignsService {
                         factions: [
                             FactionsService.getFactionSnowprintId(Faction.GenestealerCults)!,
                             FactionsService.getFactionSnowprintId(Faction.Tyranids)!,
+                        ],
+                    },
+                };
+            }
+            case Campaign.DGS:
+            case Campaign.DGSC:
+            case Campaign.DGE:
+            case Campaign.DGEC: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Chaos,
+                        factions: [
+                            FactionsService.getFactionSnowprintId(Faction.Death_Guard)!,
+                            FactionsService.getFactionSnowprintId(Faction.Black_Legion)!,
+                        ],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: [
+                            FactionsService.getFactionSnowprintId(Faction.ADEPTA_SORORITAS)!,
+                            FactionsService.getFactionSnowprintId(Faction.Black_Templars)!,
                         ],
                     },
                 };
