@@ -1,12 +1,17 @@
-﻿import { FormControl, MenuItem, Select } from '@mui/material';
+﻿import GridViewIcon from '@mui/icons-material/GridView';
+import TableRowsIcon from '@mui/icons-material/TableRows';
+import { FormControl, FormControlLabel, MenuItem, Select, Switch } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useContext, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { FactionsService, useFitGridOnWindowResize, useQueryState } from '@/fsd/5-shared/lib';
+// eslint-disable-next-line import-x/no-internal-modules
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
+
+import { FactionsService, useQueryState } from '@/fsd/5-shared/lib';
 import { RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -14,14 +19,16 @@ import { Campaign, ICampaignBattleComposed, CampaignLocation, CampaignsService }
 // eslint-disable-next-line import-x/no-internal-modules
 import { IRewards } from '@/fsd/4-entities/campaign/model';
 import { CharactersService } from '@/fsd/4-entities/character';
-import { FactionImage } from '@/fsd/4-entities/faction';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { CampaignBattle } from './campaign-battle';
+import { CampaignBattleCard } from './campaign-battle-card';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
 export const Campaigns = () => {
     const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
+    const { viewPreferences } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
 
     /**
      * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
@@ -186,7 +193,12 @@ export const Campaigns = () => {
                     return (
                         <center>
                             <div style={{ position: 'relative' }}>
-                                <CampaignBattleEnemies enemies={battle.detailedEnemyTypes} scale={0.2} />
+                                <CampaignBattleEnemies
+                                    keyPrefix="table"
+                                    battleId={battle.id}
+                                    enemies={battle.detailedEnemyTypes}
+                                    scale={0.2}
+                                />
                             </div>
                         </center>
                     );
@@ -213,9 +225,11 @@ export const Campaigns = () => {
 
     const rows = useMemo(() => CampaignsService.campaignsGrouped[campaign], [campaign]);
 
-    const uniqEnemiesFactions = uniq(rows.flatMap(x => x.enemiesFactions));
-    const uniqEnemiesTypes = uniq(rows.flatMap(x => x.enemiesTypes));
     const threeSlotsNodes = uniq(rows.filter(x => x.slots === 3));
+
+    const updateView = (tableView: boolean): void => {
+        dispatch.viewPreferences({ type: 'Update', setting: 'campaignsTableView', value: tableView });
+    };
 
     return (
         <div>
@@ -239,17 +253,24 @@ export const Campaigns = () => {
                     </Select>
                 </FormControl>
 
-                <div>
-                    <span className="bold"> Enemies factions:</span>{' '}
-                    {uniqEnemiesFactions.map(x => (
-                        <FactionImage key={x} faction={FactionsService.snowprintFactionToFaction(x)} />
-                    ))}
-                </div>
-
-                <div>
-                    <span className="bold"> Enemies types:</span>{' '}
-                    <span style={{ fontSize: 11 }}>{uniqEnemiesTypes.join(', ')}</span>
-                </div>
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={viewPreferences.campaignsTableView ?? true}
+                            onChange={event => updateView(event.target.checked)}
+                        />
+                    }
+                    label={
+                        <div className="flex-box gap5">
+                            {viewPreferences.campaignsTableView ? (
+                                <TableRowsIcon color="primary" />
+                            ) : (
+                                <GridViewIcon color="primary" />
+                            )}{' '}
+                            view
+                        </div>
+                    }
+                />
 
                 {!!threeSlotsNodes.length && (
                     <div className="flex-box gap10 wrap">
@@ -260,18 +281,24 @@ export const Campaigns = () => {
                     </div>
                 )}
             </div>
-
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
-                <AgGridReact
-                    modules={[AllCommunityModule]}
-                    theme={themeBalham}
-                    ref={gridRef}
-                    suppressCellFocus={true}
-                    defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
-                    columnDefs={isMobile ? mobileColumnDefs : columnDefs}
-                    rowData={rows}
-                    onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
-            </div>
+            {viewPreferences.campaignsTableView ? (
+                <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
+                    <AgGridReact
+                        modules={[AllCommunityModule]}
+                        theme={themeBalham}
+                        ref={gridRef}
+                        suppressCellFocus={true}
+                        defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
+                        columnDefs={isMobile ? mobileColumnDefs : columnDefs}
+                        rowData={rows}></AgGridReact>
+                </div>
+            ) : (
+                <div className="flex gap-3 flex-wrap">
+                    {rows.map(x => (
+                        <CampaignBattleCard key={x.id} battle={x} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
