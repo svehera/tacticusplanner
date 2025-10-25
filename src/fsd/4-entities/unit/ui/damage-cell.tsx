@@ -100,7 +100,6 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                             <div className="bg-cyan-500/50">
                                 {StatsCalculatorService.calculateDamage(
                                     character.snowprintId!,
-                                    rarity,
                                     rarityStars,
                                     rank,
                                     numDamageUpgrades
@@ -112,7 +111,6 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                                 {computeDamvarInfArmour(
                                     StatsCalculatorService.calculateDamage(
                                         character.snowprintId!,
-                                        rarity,
                                         rarityStars,
                                         rank,
                                         numDamageUpgrades
@@ -134,7 +132,6 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                                 ) : (
                                     StatsCalculatorService.calculateDamage(
                                         character.snowprintId!,
-                                        rarity,
                                         rarityStars,
                                         rank,
                                         numDamageUpgrades
@@ -147,7 +144,6 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                                 {computeDamvarInfArmour(
                                     StatsCalculatorService.calculateDamage(
                                         character.snowprintId!,
-                                        rarity,
                                         rarityStars,
                                         rank,
                                         numDamageUpgrades

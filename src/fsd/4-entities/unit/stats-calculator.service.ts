@@ -102,7 +102,6 @@ export class StatsCalculatorService {
         if (unit == null) return 0;
         return this.calculateDamage(
             unit!.snowprintId!,
-            unit!.rarity,
             unit!.stars,
             unit!.rank,
             StatsCalculatorService.countDamageUpgrades(unit)
@@ -171,13 +170,7 @@ export class StatsCalculatorService {
      * @returns the calculated damage for the given unit at the given rarity
      *          and rank. -1 if the unit can't be found.
      */
-    static calculateDamage(
-        unitId: string,
-        rarity: Rarity,
-        rarityStars: RarityStars,
-        rank: Rank,
-        numAppliedUpgrades: number
-    ): number {
+    static calculateDamage(unitId: string, rarityStars: RarityStars, rank: Rank, numAppliedUpgrades: number): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
         return StatsCalculatorService.calculateStat(unit?.damage ?? -1, rarityStars, rank, numAppliedUpgrades);
     }

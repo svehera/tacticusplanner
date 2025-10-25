@@ -335,7 +335,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                                     <MiscIcon icon="damage" width={15} height={15} />
                                     {StatsCalculatorService.calculateDamage(
                                         data.unitId,
-                                        data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankStart,
                                         StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
@@ -343,7 +342,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                                     <ArrowForward width={15} height={15} />
                                     {StatsCalculatorService.calculateDamage(
                                         data.unitId,
-                                        data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankEnd,
                                         data.rankPoint5 ? 1 : 0
@@ -356,7 +354,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                                     <MiscIcon icon="damage" width={15} height={15} />
                                     {StatsCalculatorService.calculateDamage(
                                         data.unitId,
-                                        data.rarityStart,
                                         data.starsStart,
                                         getUnitRank(data.unitId),
                                         StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
@@ -364,7 +361,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                                     <ArrowForward width={15} height={15} />
                                     {StatsCalculatorService.calculateDamage(
                                         data.unitId,
-                                        data.rarityEnd,
                                         data.starsEnd,
                                         getUnitRank(data.unitId),
                                         StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))

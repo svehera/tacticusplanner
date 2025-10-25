@@ -39,13 +39,7 @@ export const StatCell: React.FC<Props> = ({
           : -1;
 
     const damage = characterId
-        ? StatsCalculatorService.calculateDamage(
-              characterId,
-              rarity ?? Rarity.Common,
-              rarityStars,
-              rank,
-              numDamageUpgrades
-          )
+        ? StatsCalculatorService.calculateDamage(characterId, rarityStars, rank, numDamageUpgrades)
         : npc
           ? StatsCalculatorService.calculateNpcDamage(npc, rarityStars, rank)
           : -1;
