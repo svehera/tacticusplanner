@@ -1,4 +1,4 @@
-﻿import { getEnumValues, useFitGridOnWindowResize, getCompletionRateColor } from '@/fsd/5-shared/lib';
+﻿import { getEnumValues, getCompletionRateColor } from '@/fsd/5-shared/lib';
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 
 import { rankToLevel } from '../models/constants';
@@ -52,4 +52,4 @@ function getDaySuffix(day: number) {
 }
 
 // Re-export from shared lib
-export { getEnumValues, useFitGridOnWindowResize, getCompletionRateColor };
+export { getEnumValues, getCompletionRateColor };

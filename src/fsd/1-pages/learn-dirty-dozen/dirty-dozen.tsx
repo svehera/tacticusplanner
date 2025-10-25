@@ -1,6 +1,6 @@
 ﻿import Info from '@mui/icons-material/Info';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line import-x/no-internal-modules

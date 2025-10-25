@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { getImageUrl } from '@/fsd/5-shared/ui';
+﻿import { getImageUrl } from '@/fsd/5-shared/ui';
 
 export const ContributorImage = ({
     iconPath,

@@ -1,5 +1,5 @@
 import { groupBy } from 'lodash';
-import React, { useCallback, useContext } from 'react';
+import { useCallback, useContext } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';

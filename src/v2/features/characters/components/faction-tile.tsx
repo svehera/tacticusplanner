@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo } from 'react';
+﻿import { useContext, useMemo } from 'react';
 
 import { numberToThousandsString, numberToThousandsStringOld } from '@/fsd/5-shared/lib';
 import { UnitType } from '@/fsd/5-shared/model';

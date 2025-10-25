@@ -3,4 +3,4 @@ import { SetURLSearchParams } from 'react-router-dom';
 
 export const SearchParamsStateContext = createContext<
     [searchParams: URLSearchParams, setSearchParams: SetURLSearchParams]
->([new URLSearchParams(''), (search: unknown) => {}]);
+>([new URLSearchParams(''), (_search: unknown) => {}]);

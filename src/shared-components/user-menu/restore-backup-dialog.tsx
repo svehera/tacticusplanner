@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { GlobalState } from '../../models/global-state';
 import { IPersonalData2 } from '../../models/interfaces';

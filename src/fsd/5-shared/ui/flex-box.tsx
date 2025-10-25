@@ -1,5 +1,4 @@
-﻿import { Property } from 'csstype';
-import React, { CSSProperties, MouseEventHandler } from 'react';
+﻿import React, { CSSProperties, MouseEventHandler } from 'react';
 import { isMobile } from 'react-device-detect';
 
 export const FlexBox = ({
@@ -12,16 +11,16 @@ export const FlexBox = ({
     onClick,
     style = {},
 }: React.PropsWithChildren<{
-    alignItems?: Property.AlignItems;
-    justifyContent?: Property.JustifyContent;
-    gap?: Property.Gap<string | number>;
+    alignItems?: CSSProperties['alignItems'];
+    justifyContent?: CSSProperties['justifyContent'];
+    gap?: CSSProperties['gap'];
     useColumnForMobile?: boolean;
     wrap?: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
     style?: CSSProperties;
 }>) => {
-    const flexDirection: Property.FlexDirection = isMobile && useColumnForMobile ? 'column' : 'row';
-    const flexWrap: Property.FlexWrap = wrap ? 'wrap' : 'nowrap';
+    const flexDirection = isMobile && useColumnForMobile ? 'column' : 'row';
+    const flexWrap = wrap ? 'wrap' : 'nowrap';
     return (
         <div
             onClick={onClick}

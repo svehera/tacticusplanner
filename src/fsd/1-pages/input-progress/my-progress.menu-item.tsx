@@ -1,5 +1,4 @@
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-import React from 'react';
 
 import { MenuItemTP } from '@/fsd/5-shared/ui';
 

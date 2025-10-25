@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 

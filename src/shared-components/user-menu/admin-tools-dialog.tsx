@@ -7,7 +7,7 @@ import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import { enqueueSnackbar } from 'notistack';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 

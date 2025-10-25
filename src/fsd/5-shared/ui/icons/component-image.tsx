@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { Alliance } from '@/fsd/5-shared/model';
+﻿import { Alliance } from '@/fsd/5-shared/model';
 
 import { getImageUrl } from '../get-image-url';
 

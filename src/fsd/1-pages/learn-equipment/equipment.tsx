@@ -1,7 +1,7 @@
 import { FormControlLabel, Switch, TextField, Tooltip } from '@mui/material';
 import { ColDef, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import React, { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 

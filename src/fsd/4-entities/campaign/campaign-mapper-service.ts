@@ -6,7 +6,7 @@ import { battleData } from './data';
 import { Campaign, CampaignGroupType } from './enums';
 
 // Split of base vs challenge progress for an event campaign
-export type CampaignProgressSplit = {
+type CampaignProgressSplit = {
     baseCampaignEventId?: Campaign;
     baseBattleCount?: number;
     challengeCampaignEventId?: Campaign;

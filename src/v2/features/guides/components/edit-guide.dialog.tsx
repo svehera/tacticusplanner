@@ -117,7 +117,7 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
                 <br />
 
                 <div key={+isOpenSelectDialog} className="flex gap-[5px]" onClick={() => setIsOpenSelectDialog(true)}>
-                    {teamSlots.map((slot, index) => (
+                    {teamSlots.map(slot => (
                         <TeamSlotEdit key={slot.slotNumber} units={units} slot={slot} editable={false} />
                     ))}
                 </div>

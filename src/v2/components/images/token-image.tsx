@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { getImageUrl } from 'src/shared-logic/functions';
+﻿import { getImageUrl } from 'src/shared-logic/functions';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 

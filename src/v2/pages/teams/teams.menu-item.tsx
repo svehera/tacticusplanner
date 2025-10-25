@@ -1,5 +1,4 @@
 ﻿import GroupsIcon from '@mui/icons-material/Groups';
-import React from 'react';
 
 import { MenuItem } from 'src/v2/models/menu-item';
 

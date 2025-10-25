@@ -28,7 +28,7 @@ import {
 import { RankLookupService } from './rank-lookup.service';
 
 export const RankLookup = () => {
-    const { characters, campaignsProgress, inventory } = useContext(StoreContext);
+    const { characters, campaignsProgress } = useContext(StoreContext);
     const [searchParams, setSearchParams] = useSearchParams();
 
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);

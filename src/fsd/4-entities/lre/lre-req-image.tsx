@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
+﻿import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 
 export const LreReqImage = ({ iconId, tooltip }: { iconId: string; tooltip?: string }) => {
     const imageUrl = getImageUrl(`lre/${iconId}.png`);

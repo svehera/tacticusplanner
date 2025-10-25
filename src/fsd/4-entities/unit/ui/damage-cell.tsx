@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RarityStars, Rarity, DamageType, Rank } from '@/fsd/5-shared/model';
+import { RarityStars, DamageType, Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2 } from '@/fsd/4-entities/character/@x/unit';
@@ -10,12 +10,11 @@ import { StatsCalculatorService } from '../stats-calculator.service';
 interface Props {
     character: ICharacter2;
     rank: Rank;
-    rarity: Rarity;
     rarityStars: RarityStars;
     numDamageUpgrades: number;
 }
 
-export const DamageCell: React.FC<Props> = ({ character, rank, rarity, rarityStars, numDamageUpgrades }) => {
+export const DamageCell: React.FC<Props> = ({ character, rank, rarityStars, numDamageUpgrades }) => {
     /** @returns the computed damage with this attack against infinite armor. */
     const computeDamvarInfArmour = (damage: number, hits: number, damageType: DamageType | undefined) => {
         if (damageType == undefined) return <>N/A</>;
@@ -100,7 +99,6 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                             <div className="bg-cyan-500/50">
                                 {StatsCalculatorService.calculateDamage(
                                     character.snowprintId!,
-                                    rarity,
                                     rarityStars,
                                     rank,
                                     numDamageUpgrades
@@ -112,7 +110,6 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                                 {computeDamvarInfArmour(
                                     StatsCalculatorService.calculateDamage(
                                         character.snowprintId!,
-                                        rarity,
                                         rarityStars,
                                         rank,
                                         numDamageUpgrades
@@ -134,7 +131,6 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                                 ) : (
                                     StatsCalculatorService.calculateDamage(
                                         character.snowprintId!,
-                                        rarity,
                                         rarityStars,
                                         rank,
                                         numDamageUpgrades
@@ -147,7 +143,6 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                                 {computeDamvarInfArmour(
                                     StatsCalculatorService.calculateDamage(
                                         character.snowprintId!,
-                                        rarity,
                                         rarityStars,
                                         rank,
                                         numDamageUpgrades

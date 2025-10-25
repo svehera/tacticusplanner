@@ -188,7 +188,6 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                     <>
                         {gameMode === GameMode.guildRaids && (
                             <GuildRaidsModes
-                                selectedModes={selectedSubModes}
                                 updateSelection={setSelectedSubModes}
                                 units={units}
                                 filterUnits={setUnitsFiltered}

@@ -8,7 +8,7 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { CampaignImage } from '@/fsd/4-entities/campaign/campaign.icon';
 
-import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
+import { IShardsRaid } from 'src/v2/features/goals/goals.models';
 import { ShardItemTitle } from 'src/v2/features/goals/shard-item-title';
 
 interface Props {
@@ -24,11 +24,6 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids }) => {
         return formatDateWithOrdinal(nextDate);
     }, [shardRaids.daysTotal]);
 
-    const handleAddCount = (value: number, location: IItemRaidLocation) => {
-        // handleAdd(shardRaids.characterId, value, location);
-        shardRaids.acquiredCount += value;
-        location.isCompleted = true;
-    };
     return (
         <Card
             variant="outlined"

@@ -160,12 +160,4 @@ Dialog.Footer = Footer;
 Dialog.Close = Close;
 Dialog.CloseIndicator = CloseIndicator;
 
-export type {
-    DialogHeaderProps,
-    DialogTitleProps,
-    DialogBodyProps,
-    DialogFooterProps,
-    DialogDescriptionProps,
-    CloseButtonIndicatorProps,
-};
 export { Dialog };

@@ -13,7 +13,7 @@ export interface IInventoryUpgrade {
     alphabet: string;
 }
 
-export interface IUpgradesAlphabetGroup {
+interface IUpgradesAlphabetGroup {
     letter: string;
     subItems: IInventoryUpgrade[];
 }

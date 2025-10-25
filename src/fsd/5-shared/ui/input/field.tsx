@@ -123,5 +123,5 @@ const Input = ({ className, ref, ...props }: InputProps) => {
     );
 };
 
-export type { FieldProps, InputProps, FieldErrorProps };
+export type { FieldProps };
 export { Description, FieldError, FieldGroup, Input, Label };

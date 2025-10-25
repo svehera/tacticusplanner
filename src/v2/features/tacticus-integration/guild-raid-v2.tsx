@@ -20,7 +20,6 @@ import {
     getTacticusGuildRaidData,
     TacticusGuildRaidUnit,
 } from '@/fsd/5-shared/lib/tacticus-api';
-import { Rarity } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 // Type for aggregated user data
@@ -48,23 +47,6 @@ const getEncounterTypeLabel = (type: TacticusEncounterType): string => {
 
 const getDamageTypeLabel = (type: TacticusDamageType): string => {
     return type === TacticusDamageType.Battle ? 'Battle' : 'Bomb';
-};
-
-const getRarityLabel = (rarity: Rarity): string => {
-    switch (rarity) {
-        case Rarity.Common:
-            return 'Common';
-        case Rarity.Uncommon:
-            return 'Uncommon';
-        case Rarity.Rare:
-            return 'Rare';
-        case Rarity.Epic:
-            return 'Epic';
-        case Rarity.Legendary:
-            return 'Legendary';
-        default:
-            return 'Unknown';
-    }
 };
 
 const MAX_TOKEN = 3;
@@ -95,7 +77,7 @@ const updateTokenTo = (tokenState: TokenStatus, time: number): void => {
 };
 
 // Component for rendering HP bar
-const HPBarRenderer: React.FC<{ value: number; data: TacticusGuildRaidEntry }> = ({ value, data }) => {
+const HPBarRenderer: React.FC<{ value: number; data: TacticusGuildRaidEntry }> = ({ data }) => {
     const percentage = ((data.maxHp - data.remainingHp) / data.maxHp) * 100;
     const damagePercentage = (data.damageDealt / data.maxHp) * 100;
 
@@ -175,8 +157,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     const [raidData, setRaidData] = useState<TacticusGuildRaidResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [userFilters, setUserFilters] = useState<string[]>([]);
-    const [selectedUnitType, setSelectedUnitType] = useState<string | null>(null);
     const [filteredEntries, setFilteredEntries] = useState<TacticusGuildRaidEntry[]>([]);
 
     // Simulating data fetch
@@ -187,8 +167,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 setRaidData(response.data ?? null);
                 setLoading(false);
 
-                const uniqueUsers = [...new Set(response.data?.entries.map(entry => entry.userId))];
-                setUserFilters(uniqueUsers);
                 setFilteredEntries(response.data?.entries ?? []);
             })
             .catch(error => {
@@ -202,14 +180,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     useEffect(() => {
         if (!raidData) return;
 
-        let filtered = [...raidData.entries];
-
-        if (selectedUnitType !== null) {
-            filtered = filtered.filter(entry => entry.unitId === selectedUnitType);
-        }
-
-        setFilteredEntries(filtered);
-    }, [raidData, selectedUnitType]);
+        setFilteredEntries([...raidData.entries]);
+    }, [raidData]);
 
     // AG Grid column definitions
     const columnDefs: ColDef<TacticusGuildRaidEntry>[] = [
@@ -338,9 +310,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 180,
         },
     ];
-
-    // Get unique tiers for filter dropdown
-    const units = raidData === null ? [] : [...new Set(raidData.entries.map(entry => entry.unitId))].sort();
 
     const getTimeUntilNextBomb = (userSummary: UserSummary) => {
         const BOMB_COOLDOWN_HOURS = 18;
@@ -742,7 +711,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         navigator.clipboard
             .writeText(usersWithBomb.join(' '))
-            .then(r => enqueueSnackbar('Copied', { variant: 'success' }));
+            .then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
     };
 
     const copyUsersWithToken = () => {
@@ -752,7 +721,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         navigator.clipboard
             .writeText(usersWithTokens.join(' '))
-            .then(r => enqueueSnackbar('Copied', { variant: 'success' }));
+            .then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
     };
 
     if (loading) {
@@ -796,27 +765,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                     </div>
                 </div>
             </div>
-
-            {/* Filters */}
-            {/* <div className="bg-white rounded-lg shadow p-4 mb-6">
-                <h2 className="text-lg font-semibold mb-3">Filters</h2>
-                <div className="flex flex-wrap gap-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Unit ID</label>
-                        <select
-                            className="block w-32 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                            value={selectedUnitType === null ? '' : selectedUnitType}
-                            onChange={e => setSelectedUnitType(e.target.value === '' ? null : e.target.value)}>
-                            <option value="">All Units</option>
-                            {units.map(unitId => (
-                                <option key={unitId} value={unitId}>
-                                    {unitId}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
-            </div> */}
 
             {/* Stats Dashboard */}
             {stats && (
@@ -959,7 +907,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                             control={
                                 <Checkbox
                                     checked={usePrefixForCopyUser}
-                                    onChange={event => setSePrefixForCopyUser(!usePrefixForCopyUser)}
+                                    onChange={_event => setSePrefixForCopyUser(!usePrefixForCopyUser)}
                                     inputProps={{ 'aria-label': 'controlled' }}
                                 />
                             }

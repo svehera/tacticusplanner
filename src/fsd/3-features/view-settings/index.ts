@@ -4,7 +4,6 @@ export type {
     IViewPreferences,
     IViewOption,
     ILreViewSettings,
-    IWyoViewSettings,
     ILreTileSettings,
     ICharactersViewControls,
 } from './model';

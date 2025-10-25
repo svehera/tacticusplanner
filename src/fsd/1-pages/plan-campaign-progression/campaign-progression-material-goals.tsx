@@ -354,7 +354,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     if (characters.length == 0) return <span></span>;
                     return (
                         <div className="flex-box gap5 wrap" key={CampaignsProgressionService.getReward(savings.battle)}>
-                            {characters.map((unitId, ignoredIndex) => {
+                            {characters.map(unitId => {
                                 return (
                                     <span
                                         key={

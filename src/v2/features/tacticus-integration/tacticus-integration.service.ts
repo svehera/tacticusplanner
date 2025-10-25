@@ -8,7 +8,7 @@ import { CharacterUpgradesService } from '@/fsd/4-entities/character';
 import { IXpLevel } from 'src/v2/features/characters/characters.models';
 
 // Mythic Wings
-export const MAX_PROGRESSION_INDEX = 19;
+const MAX_PROGRESSION_INDEX = 19;
 
 export class TacticusIntegrationService {
     static convertProgressionIndex(progressionIndex: number): [Rarity, RarityStars] {

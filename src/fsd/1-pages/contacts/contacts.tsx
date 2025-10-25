@@ -1,5 +1,4 @@
 ﻿import IconButton from '@mui/material/IconButton';
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { discordInvitationLink, bmcLink } from '@/fsd/5-shared/ui';

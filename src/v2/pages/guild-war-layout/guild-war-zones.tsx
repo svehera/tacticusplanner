@@ -52,7 +52,7 @@ export const GuildWarZones = () => {
     const [editZonePlayer1, setEditZonePlayer1] = React.useState(false);
     const [editZonePlayer2, setEditZonePlayer2] = React.useState(false);
 
-    const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
         setTab(newValue);
         setActiveLayout(guildWar.layouts[newValue]);
     };

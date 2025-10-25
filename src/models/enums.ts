@@ -14,5 +14,5 @@ export enum DailyRaidsStrategy {
 }
 
 // Re-export from FSD entities
-export { Campaign, CampaignType } from '@/fsd/4-entities/campaign';
+export { CampaignType } from '@/fsd/4-entities/campaign';
 export { PersonalGoalType, CampaignsLocationsUsage } from '@/fsd/4-entities/goal';

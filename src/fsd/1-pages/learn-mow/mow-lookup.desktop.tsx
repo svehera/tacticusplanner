@@ -3,7 +3,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import { sortBy } from 'lodash';
-import React, { useContext, useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
@@ -20,7 +20,7 @@ import { MowMaterialsTotal } from './mow-materials-total';
 import { MowUpgradesTable } from './mow-upgrades-table';
 
 export const MowLookup = () => {
-    const { inventory, mows } = useContext(StoreContext);
+    const { mows } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
@@ -78,7 +78,7 @@ export const MowLookup = () => {
                             />
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MowUpgradesTable rows={customUpgrades} upgrades={inventory.upgrades} />
+                            <MowUpgradesTable rows={customUpgrades} />
                         </AccordionDetails>
                     </Accordion>
 
@@ -92,7 +92,7 @@ export const MowLookup = () => {
                         </AccordionSummary>
                         <AccordionDetails className="flex-box gap20">
                             <MowMaterialsTable rows={mowMaterials} />
-                            <MowUpgradesTable rows={upgradesTotal} upgrades={inventory.upgrades} />
+                            <MowUpgradesTable rows={upgradesTotal} />
                         </AccordionDetails>
                     </Accordion>
                 </>

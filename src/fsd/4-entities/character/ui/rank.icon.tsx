@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { Rank } from '@/fsd/5-shared/model';
+﻿import { Rank } from '@/fsd/5-shared/model';
 import { getImageUrl } from '@/fsd/5-shared/ui';
 
 export const RankIcon = ({

@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { MenuItemTP } from '@/fsd/5-shared/ui';
+﻿import { MenuItemTP } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService, ICharacterData } from '@/fsd/4-entities/character';

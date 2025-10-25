@@ -24,7 +24,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
 
     const copyLink = () => {
         if (shareLink) {
-            navigator.clipboard.writeText(shareLink).then(r => enqueueSnackbar('Copied', { variant: 'success' }));
+            navigator.clipboard.writeText(shareLink).then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
         }
     };
 

@@ -4,7 +4,7 @@ import TableRowsIcon from '@mui/icons-material/TableRows';
 import { FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import { sum } from 'lodash';
-import React, { useContext, useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 

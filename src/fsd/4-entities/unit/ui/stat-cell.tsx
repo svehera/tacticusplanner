@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
+import { RarityStars, Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { StatsCalculatorService } from '../stats-calculator.service';
@@ -9,7 +9,6 @@ interface Props {
     characterId?: string;
     npc?: string;
     rank: Rank;
-    rarity?: Rarity;
     rarityStars: RarityStars;
     numHealthUpgrades: number;
     numDamageUpgrades: number;
@@ -20,44 +19,25 @@ export const StatCell: React.FC<Props> = ({
     characterId,
     npc,
     rank,
-    rarity,
     rarityStars,
     numHealthUpgrades,
     numDamageUpgrades,
     numArmorUpgrades,
 }) => {
     const health = characterId
-        ? StatsCalculatorService.calculateHealth(
-              characterId,
-              rarity ?? Rarity.Common,
-              rarityStars,
-              rank,
-              numHealthUpgrades
-          )
+        ? StatsCalculatorService.calculateHealth(characterId, rarityStars, rank, numHealthUpgrades)
         : npc
           ? StatsCalculatorService.calculateNpcHealth(npc, rarityStars, rank)
           : -1;
 
     const damage = characterId
-        ? StatsCalculatorService.calculateDamage(
-              characterId,
-              rarity ?? Rarity.Common,
-              rarityStars,
-              rank,
-              numDamageUpgrades
-          )
+        ? StatsCalculatorService.calculateDamage(characterId, rarityStars, rank, numDamageUpgrades)
         : npc
           ? StatsCalculatorService.calculateNpcDamage(npc, rarityStars, rank)
           : -1;
 
     const armor = characterId
-        ? StatsCalculatorService.calculateArmor(
-              characterId,
-              rarity ?? Rarity.Common,
-              rarityStars,
-              rank,
-              numArmorUpgrades
-          )
+        ? StatsCalculatorService.calculateArmor(characterId, rarityStars, rank, numArmorUpgrades)
         : npc
           ? StatsCalculatorService.calculateNpcArmor(npc, rarityStars, rank)
           : -1;

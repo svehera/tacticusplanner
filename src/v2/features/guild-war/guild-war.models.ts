@@ -2,7 +2,7 @@
 
 import { Rarity } from '@/fsd/5-shared/model';
 
-export type ZoneId =
+type ZoneId =
     | 'armoury'
     | 'troopGarrison'
     | 'frontline'
@@ -44,7 +44,7 @@ export interface IGWZone {
     iconId?: string;
 }
 
-export interface IGWZoneRaw {
+interface IGWZoneRaw {
     id: string;
     name: string;
     warScore: number;

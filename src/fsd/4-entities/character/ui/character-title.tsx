@@ -1,5 +1,4 @@
 ﻿import { Tooltip } from '@mui/material';
-import React from 'react';
 
 import { Rank } from '@/fsd/5-shared/model';
 import { pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fsd/5-shared/ui/icons';

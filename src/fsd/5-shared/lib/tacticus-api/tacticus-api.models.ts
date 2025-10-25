@@ -4,7 +4,7 @@ export interface TacticusPlayerResponse {
     player: TacticusPlayer;
 }
 
-export interface TacticusPlayer {
+interface TacticusPlayer {
     units: TacticusUnit[];
     inventory: TacticusInventory;
     progress: TacticusProgress;
@@ -16,7 +16,7 @@ export interface TacticusInventory {
     mythicShards: TacticusShard[];
 }
 
-export interface TacticusAbility {
+interface TacticusAbility {
     /**
      * Unique identifier for the ability.
      */
@@ -92,7 +92,7 @@ export interface TacticusShard {
     amount: number;
 }
 
-export interface TacticusProgress {
+interface TacticusProgress {
     campaigns: TacticusCampaignProgress[]; // List of CampaignProgress objects
 }
 
@@ -103,7 +103,7 @@ export interface TacticusCampaignProgress {
     battles: TacticusCampaignLevel[]; // List of CampaignLevel objects
 }
 
-export interface TacticusCampaignLevel {
+interface TacticusCampaignLevel {
     battleIndex: number; // Example: 10
     attemptsLeft: number; // Example: 2
     attemptsUsed: number; // Example: 3

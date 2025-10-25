@@ -2,7 +2,7 @@
 import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { mapValues, sum } from 'lodash';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Difficulty } from 'src/models/enums';
 

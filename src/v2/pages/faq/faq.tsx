@@ -1,6 +1,5 @@
 ﻿import Box from '@mui/material/Box';
 import { groupBy, map } from 'lodash';
-import React from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 

@@ -37,7 +37,7 @@ interface Props {
     alreadyUsedMaterials?: ICharacterUpgradeEstimate[];
 }
 
-export interface IRaidMaterialRow extends ICharacterUpgradeEstimate {
+interface IRaidMaterialRow extends ICharacterUpgradeEstimate {
     inventoryAfter: number;
     remainingAfter: number;
 }

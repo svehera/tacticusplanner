@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import difficultyHardImg from 'src/assets/images/icons/difficulty-hard.png';
+﻿import difficultyHardImg from 'src/assets/images/icons/difficulty-hard.png';
 import difficultyNormalImg from 'src/assets/images/icons/difficulty-normal.png';
 import difficultyVeryImg from 'src/assets/images/icons/difficulty-very-hard.png';
 import difficultyImg from 'src/assets/images/icons/difficulty.png';

@@ -52,7 +52,7 @@ export class CampaignsProgressionService {
         }
 
         for (const [campaign, factions] of result.campaignFactions.entries()) {
-            factions.forEach((key: string, faction: string) => {
+            factions.forEach((_key: string, faction: string) => {
                 if (!result.factionCampaigns.get(faction)) {
                     result.factionCampaigns.set(faction, new Set<string>());
                 }
@@ -320,7 +320,7 @@ export class CampaignsProgressionService {
         );
         for (const materialId of sortedMaterials) {
             const count: number = materialReqs.materials[materialId];
-            const farmData: FarmData = this.getCostToFarm(goal, materialId, count, campaignProgress, inventoryUpgrades);
+            const farmData: FarmData = this.getCostToFarm(materialId, count, campaignProgress);
             result.canFarm = result.canFarm && farmData.canFarm;
             result.totalEnergy = result.totalEnergy + farmData.totalEnergy;
             result.farmData.set(materialId, farmData);
@@ -376,18 +376,10 @@ export class CampaignsProgressionService {
      * @param count The number of this material we need.
      * @param campaignProgress Our progress in the campaigns, dictating the nodes from
      *                         which we can farm.
-     * @param inventoryUpgrades Our current inventory, allowing us to skip farming some
-     *                         or all materials if we already have them.
      * @returns The total cost in energy to farm `count` of `material`, as well as the
      *          nodes we can use now, and in the future.
      */
-    public static getCostToFarm(
-        goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal,
-        materialId: string,
-        count: number,
-        campaignProgress: ICampaignsProgress,
-        inventoryUpgrades: Record<string, number>
-    ): FarmData {
+    public static getCostToFarm(materialId: string, count: number, campaignProgress: ICampaignsProgress): FarmData {
         const farmableLocs = this.getFarmableLocations(materialId, campaignProgress);
         const result: FarmData = {
             material: materialId,
@@ -496,11 +488,6 @@ export class CampaignsProgressionService {
         // The drop rate is calculated in drops per raid, so it doesn't take into account energy.
         // The effective energy cost to farm a single item is energyCost / dropRate.
         return Math.ceil((battle.energyCost * count) / battle.dropRate);
-    }
-
-    /** @returns the material ID of the material with the given label. */
-    private static getMaterialId(materialLabel: string): string {
-        return UpgradesService.materialByLabel[materialLabel];
     }
 
     /**

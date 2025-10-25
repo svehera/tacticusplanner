@@ -22,7 +22,7 @@ export interface INpcData {
     passiveAbilities: string[];
 }
 
-export interface INpcDataRaw {
+interface INpcDataRaw {
     name: string;
     faction: string;
     alliance: string;

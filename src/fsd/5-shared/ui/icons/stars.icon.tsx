@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { RarityStars } from '@/fsd/5-shared/model';
+﻿import { RarityStars } from '@/fsd/5-shared/model';
 
 import { starsIcons } from './assets';
 

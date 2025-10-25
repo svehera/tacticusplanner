@@ -1,5 +1,5 @@
 ﻿import { Card, CardContent, CardHeader } from '@mui/material';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { menuItemById } from 'src/models/menu-items';
