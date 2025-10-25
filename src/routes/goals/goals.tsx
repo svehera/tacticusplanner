@@ -133,6 +133,8 @@ export const Goals = () => {
                         daysTotal: x.daysTotal,
                         oTokensTotal: x.onslaughtTokensTotal,
                         daysLeft: x.daysTotal,
+                        legendaryXpBooksTotal: 0,
+                        mythicXpBooksTotal: 0,
                     }) as IGoalEstimate
             );
 
@@ -162,6 +164,8 @@ export const Goals = () => {
                         daysTotal: daysTotal,
                         daysLeft: firstFarmDay + daysTotal,
                         oTokensTotal: 0,
+                        legendaryXpBooksTotal: xpEstimate?.legendaryBooks ?? 0,
+                        mythicXpBooksTotal: xpEstimate?.mythicBooks ?? 0,
                         xpEstimate,
                     } as IGoalEstimate;
                 } else {
@@ -178,6 +182,8 @@ export const Goals = () => {
                         daysTotal: daysTotal,
                         daysLeft: firstFarmDay + daysTotal,
                         oTokensTotal: 0,
+                        legendaryXpBooksTotal: 0,
+                        mythicXpBooksTotal: 0,
                         mowEstimate,
                     } as IGoalEstimate;
                 }
@@ -200,6 +206,8 @@ export const Goals = () => {
 
                 result.push({
                     goalId: goal.goalId,
+                    legendaryXpBooksTotal: xpEstimate?.legendaryBooks ?? 0,
+                    mythicXpBooksTotal: xpEstimate?.mythicBooks ?? 0,
                     abilitiesEstimate,
                     xpEstimateAbilities: xpEstimate!,
                 } as IGoalEstimate);
@@ -214,8 +222,15 @@ export const Goals = () => {
         goalsEstimate.filter(x => !!x.xpEstimateAbilities).map(x => x.xpEstimateAbilities!.legendaryBooks)
     );
 
+    const totalMythicXpUpgrades = sum(goalsEstimate.filter(x => !!x.xpEstimate).map(x => x.xpEstimate!.mythicBooks));
+    const totalMythicXpAbilities = sum(
+        goalsEstimate.filter(x => !!x.xpEstimateAbilities).map(x => x.xpEstimateAbilities!.mythicBooks)
+    );
+
     const totalGoldAbilities = sum(
-        goalsEstimate.map(x => (x.abilitiesEstimate?.gold ?? 0) + (x.xpEstimateAbilities?.gold ?? 0))
+        goalsEstimate
+            .filter(x => !!x.abilitiesEstimate && !!x.xpEstimateAbilities)
+            .map(x => x.abilitiesEstimate!.gold + x.xpEstimateAbilities!.legendaryGold)
     );
 
     return (
