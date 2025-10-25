@@ -12,7 +12,7 @@ import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from
 import Box from '@mui/material/Box';
 import ListItemText from '@mui/material/ListItemText';
 import { enqueueSnackbar } from 'notistack';
-import React, { ChangeEvent, useContext, useRef, useState } from 'react';
+import { ChangeEvent, useContext, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { usePopupManager } from 'react-popup-manager';
 import { useLocation, useNavigate } from 'react-router-dom';

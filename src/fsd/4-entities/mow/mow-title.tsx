@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IMow2 } from './model';

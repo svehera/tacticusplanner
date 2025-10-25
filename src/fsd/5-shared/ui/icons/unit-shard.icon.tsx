@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { getImageUrl } from '../get-image-url';
+﻿import { getImageUrl } from '../get-image-url';
 import { AccessibleTooltip } from '../tooltip';
 
 export const UnitShardIcon = ({

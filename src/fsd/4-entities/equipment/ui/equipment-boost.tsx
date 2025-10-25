@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import type { IEquipmentStats } from '../model';

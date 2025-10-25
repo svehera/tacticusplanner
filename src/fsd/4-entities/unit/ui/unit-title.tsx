@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CharacterTitleShort, CharacterTitle } from '@/fsd/4-entities/character/@x/unit';
 import { MowTitle } from '@/fsd/4-entities/mow/@x/unit';
 

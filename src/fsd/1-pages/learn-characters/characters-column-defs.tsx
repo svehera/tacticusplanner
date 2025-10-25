@@ -1,5 +1,5 @@
 import { ColDef, ColGroupDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';

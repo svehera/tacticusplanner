@@ -27,7 +27,12 @@ const FS_LAYERS = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
 const REVERSED_FS_LAYERS = [...FS_LAYERS].reverse();
 
 export default [
-    ...compat.extends('eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react/recommended'),
+    ...compat.extends(
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react/recommended',
+        'plugin:react/jsx-runtime' // In React 17+, the new JSX transform doesn't require 'React' to be in scope
+    ),
     pluginImportX.flatConfigs.recommended,
     pluginImportX.flatConfigs.typescript,
     {
