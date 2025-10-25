@@ -95,6 +95,7 @@ export default [
                 'error',
                 {
                     argsIgnorePattern: '^_',
+                    args: 'all',
                     varsIgnorePattern: '^_',
                     destructuredArrayIgnorePattern: '^_',
                     caughtErrorsIgnorePattern: '^_',
