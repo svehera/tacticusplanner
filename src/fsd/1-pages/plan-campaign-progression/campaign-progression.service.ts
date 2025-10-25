@@ -490,11 +490,6 @@ export class CampaignsProgressionService {
         return Math.ceil((battle.energyCost * count) / battle.dropRate);
     }
 
-    /** @returns the material ID of the material with the given label. */
-    private static getMaterialId(materialLabel: string): string {
-        return UpgradesService.materialByLabel[materialLabel];
-    }
-
     /**
      *
      * @param material The ID of the material to farm.

@@ -4,36 +4,6 @@ import { ICharacter2, CharactersService, rankUpData } from '@/fsd/4-entities/cha
 import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 
 export class StatsCalculatorService {
-    // The following NPC ability levels were gathered by Towen. They map to
-    // ranks Stone 1 ... Diamond 3. Gathered by Towen.
-    private readonly npcAbilityLevel = [
-        1, // Stone 1
-        3,
-        5,
-        8, // Iron 1
-        11,
-        14,
-        17, // Bronze 1
-        20,
-        23,
-        26, // Silver 1
-        29,
-        32,
-        35, // Gold 1
-        38,
-        41,
-        44, // Diamond 1
-        47,
-        50,
-    ];
-
-    // This represents the power curve of an ability, which works for all but
-    // a very select few. Again, very graciously gathered by Towen.
-    private readonly abilityPowerCurve = [
-        1, 1.2, 1.4, 1.6, 1.82, 2.04, 2.27, 2.5, 2.73, 2.96, 3.19, 3.42, 3.65, 3.88, 4.1, 4.33, 4.56, 4.79, 5.02, 5.25,
-        5.55, 6.0, 6.91, 7.82, 8.72, 9.63, 10.54, 11.45, 12.36, 13.27, 14.18, 15.09, 16.0, 16.9, 17.81, 18.72, 19.63,
-        20.54, 21.45, 22.75, 24.55, 26.45, 28.45, 30.74, 34.85, 38.95, 43.06, 47.17, 51.28, 55.39,
-    ];
     /**
      * @returns the integral value used in stat computations for the given rank.
      *          -1 if `rank` is invalid or `Locked` (for locked characters,
