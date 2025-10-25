@@ -113,7 +113,7 @@ export const NpcInfo: React.FC = () => {
                             <li>Chance: {npc.critChance! * 100}%</li>
                             <li>
                                 Damage:
-                                {StatsCalculatorService.calculateStat(npc.critDamage!, npc.name, stars, rank, 0)}
+                                {StatsCalculatorService.calculateStat(npc.critDamage!, stars, rank, 0)}
                             </li>
                         </ul>
                     );
@@ -130,7 +130,7 @@ export const NpcInfo: React.FC = () => {
                             <li>Chance: {npc.blockChance! * 100}%</li>
                             <li>
                                 Damage:
-                                {StatsCalculatorService.calculateStat(npc.blockDamage!, npc.name, stars, rank, 0)}
+                                {StatsCalculatorService.calculateStat(npc.blockDamage!, stars, rank, 0)}
                             </li>
                         </ul>
                     );

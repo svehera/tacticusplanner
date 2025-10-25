@@ -142,7 +142,6 @@ export class StatsCalculatorService {
      */
     public static calculateStat(
         baseStat: number,
-        unitId: string,
         rarityStars: RarityStars,
         rank: Rank,
         numAppliedUpgrades: number
@@ -165,7 +164,7 @@ export class StatsCalculatorService {
         numAppliedUpgrades: number
     ): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
-        return StatsCalculatorService.calculateStat(unit?.health ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
+        return StatsCalculatorService.calculateStat(unit?.health ?? -1, rarityStars, rank, numAppliedUpgrades);
     }
 
     /**
@@ -180,7 +179,7 @@ export class StatsCalculatorService {
         numAppliedUpgrades: number
     ): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
-        return StatsCalculatorService.calculateStat(unit?.damage ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
+        return StatsCalculatorService.calculateStat(unit?.damage ?? -1, rarityStars, rank, numAppliedUpgrades);
     }
 
     /**
@@ -189,7 +188,7 @@ export class StatsCalculatorService {
      */
     static calculateArmor(unitId: string, rarityStars: RarityStars, rank: Rank, numAppliedUpgrades: number): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
-        return StatsCalculatorService.calculateStat(unit?.armour ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
+        return StatsCalculatorService.calculateStat(unit?.armour ?? -1, rarityStars, rank, numAppliedUpgrades);
     }
 
     /**
@@ -198,7 +197,7 @@ export class StatsCalculatorService {
     static calculateNpcArmor(npc: string, stars: RarityStars, rank: Rank): number {
         const unit = NpcService.npcDataFull.find(u => u.name === npc);
         if (unit == undefined) return -1;
-        return StatsCalculatorService.calculateStat(unit.armor, npc, stars, rank, 0);
+        return StatsCalculatorService.calculateStat(unit.armor, stars, rank, 0);
     }
 
     /**
@@ -207,7 +206,7 @@ export class StatsCalculatorService {
     static calculateNpcDamage(npc: string, stars: RarityStars, rank: Rank): number {
         const unit = NpcService.npcDataFull.find(u => u.name === npc);
         if (unit == undefined) return -1;
-        return StatsCalculatorService.calculateStat(unit.damage, npc, stars, rank, 0);
+        return StatsCalculatorService.calculateStat(unit.damage, stars, rank, 0);
     }
 
     /**
@@ -216,6 +215,6 @@ export class StatsCalculatorService {
     static calculateNpcHealth(npc: string, stars: RarityStars, rank: Rank): number {
         const unit = NpcService.npcDataFull.find(u => u.name == npc);
         if (unit == undefined) return -1;
-        return StatsCalculatorService.calculateStat(unit.health, npc, stars, rank, 0);
+        return StatsCalculatorService.calculateStat(unit.health, stars, rank, 0);
     }
 }
