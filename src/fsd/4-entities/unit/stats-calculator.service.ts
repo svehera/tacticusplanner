@@ -1,7 +1,6 @@
 import { RarityStars, Rarity, Rank, rankToString } from '@/fsd/5-shared/model';
 
 import { ICharacter2, CharactersService, rankUpData } from '@/fsd/4-entities/character/@x/unit';
-import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 
 export class StatsCalculatorService {
     // The following NPC ability levels were gathered by Towen. They map to
@@ -197,32 +196,5 @@ export class StatsCalculatorService {
     ): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
         return StatsCalculatorService.calculateStat(unit?.armour ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
-    }
-
-    /**
-     * @returns the calculated armor for the given NPC. -1 if the unit can't be found.
-     */
-    static calculateNpcArmor(npc: string, stars: RarityStars, rank: Rank): number {
-        const unit = NpcService.npcDataFull.find(u => u.name === npc);
-        if (unit == undefined) return -1;
-        return StatsCalculatorService.calculateStat(unit.armor, npc, stars, rank, 0);
-    }
-
-    /**
-     * @returns the calculated armor for the given NPC. -1 if the unit can't be found.
-     */
-    static calculateNpcDamage(npc: string, stars: RarityStars, rank: Rank): number {
-        const unit = NpcService.npcDataFull.find(u => u.name === npc);
-        if (unit == undefined) return -1;
-        return StatsCalculatorService.calculateStat(unit.damage, npc, stars, rank, 0);
-    }
-
-    /**
-     * @returns the calculated armor for the given NPC. -1 if the unit can't be found.
-     */
-    static calculateNpcHealth(npc: string, stars: RarityStars, rank: Rank): number {
-        const unit = NpcService.npcDataFull.find(u => u.name == npc);
-        if (unit == undefined) return -1;
-        return StatsCalculatorService.calculateStat(unit.health, npc, stars, rank, 0);
     }
 }
