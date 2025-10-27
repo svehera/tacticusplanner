@@ -1,217 +1,97 @@
-import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
-import { AgGridReact } from 'ag-grid-react';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
-import { getEnumValues, useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
-import { Rank, RarityStars } from '@/fsd/5-shared/model';
-import { getImageUrl, StarsSelect } from '@/fsd/5-shared/ui';
+import { Faction } from '@/fsd/5-shared/model';
+import { getImageUrl } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { RankSelect } from '@/fsd/4-entities/character';
-import { FactionImage } from '@/fsd/4-entities/faction';
-import { INpcData, NpcService } from '@/fsd/4-entities/npc';
-import { StatsCalculatorService, StatCell } from '@/fsd/4-entities/unit';
+import { FactionSelect } from '@/fsd/4-entities/faction';
+import { INpcData, NpcService, NpcSelect, ProgressionIndexSelect } from '@/fsd/4-entities/npc';
 
 export const NpcInfo: React.FC = () => {
-    const gridRef = useRef<AgGridReact<INpcData>>(null);
-    const [stars, setStars] = useState<RarityStars>(RarityStars.None);
-    const [rank, setRank] = useState<Rank>(Rank.Stone1);
+    const [faction, setFaction] = useState<Faction>(Faction.Necrons);
+    const [npc, setNpc] = useState<INpcData>(NpcService.npcDataFull.find(npc => npc.faction === faction)!);
+    const [progressionIndex, setProgressionIndex] = useState<number>(0);
 
-    const onStarsChange = (value: RarityStars) => {
-        setStars(value);
+    const factions = useMemo(() => {
+        return NpcService.npcDataFull
+            .map(npc => npc.faction)
+            .filter(faction => faction !== undefined)
+            .reduce((acc: Faction[], faction: Faction) => {
+                if (!acc.includes(faction)) {
+                    acc.push(faction);
+                }
+                return acc;
+            }, []);
+    }, [NpcService.npcDataFull]);
+
+    const npcs = useMemo(() => {
+        return NpcService.npcDataFull.filter(npc => npc.faction === faction);
+    }, [faction, NpcService.npcDataFull]);
+
+    const onFactionChange = (newFaction: Faction) => {
+        setFaction(newFaction);
+        const npcs = NpcService.npcDataFull.filter(npc => npc.faction === newFaction);
+        setNpc(npcs[0]);
+        setProgressionIndex(0);
     };
 
-    const onRankChange = (value: Rank) => {
-        setRank(value);
+    const onNpcChange = (newNpc: INpcData) => {
+        setNpc(newNpc);
+        setProgressionIndex(0);
     };
 
-    const columnDefs = useMemo(
-        (): Array<ColDef> => [
-            {
-                headerName: 'Icon',
-                maxWidth: 80,
-                cellRenderer: (params: ICellRendererParams<INpcData>) => {
-                    const npc = params.data;
-                    if (npc == undefined) return <></>;
-                    const imageUrl = getImageUrl(NpcService.getNpcIconPath(npc.name));
-                    return <img src={imageUrl} width={60} height={80} />;
-                },
-            },
-            { headerName: 'Name', field: 'name', maxWidth: 200 },
-            { headerName: 'Alliance', field: 'alliance', maxWidth: 80 },
-            {
-                headerName: 'Faction',
-                maxWidth: 150,
-                cellRenderer: (params: ICellRendererParams<INpcData>) => {
-                    const npc = params.data;
-                    if (npc == undefined) return <></>;
-                    return (
-                        <div className={'inline-block align-middle'}>
-                            <FactionImage faction={npc.faction} />
-                            <span className={'inline-block align-middle'}>{npc.faction}</span>
-                        </div>
-                    );
-                },
-            },
-            {
-                headerName: 'Stats',
-                colId: 'Stats',
-                maxWidth: 100,
-                cellRenderer: (params: ICellRendererParams<INpcData>) => {
-                    const npc = params.data;
-                    if (npc == undefined) return <></>;
-                    return (
-                        <div>
-                            <StatCell
-                                npc={npc.name}
-                                rank={rank}
-                                rarityStars={stars}
-                                numHealthUpgrades={0}
-                                numDamageUpgrades={0}
-                                numArmorUpgrades={0}
-                            />
-                        </div>
-                    );
-                },
-            },
-            {
-                headerName: 'Melee',
-                maxWidth: 150,
-                cellRenderer: (params: ICellRendererParams<INpcData>) => {
-                    const npc = params.data;
-                    if (npc == undefined) return <></>;
-                    return (
-                        <ul>
-                            <li>Type: {npc.meleeType}</li>
-                            <li>Hits: {npc.meleeHits}</li>
-                        </ul>
-                    );
-                },
-            },
-            {
-                headerName: 'Range',
-                maxWidth: 150,
-                cellRenderer: (params: ICellRendererParams<INpcData>) => {
-                    const npc = params.data;
-                    if (npc == undefined || npc.range == undefined) return <></>;
-                    return (
-                        <ul>
-                            <li>Type: {npc.rangeType!}</li>
-                            <li>Hits: {npc.rangeHits!}</li>
-                            <li>Range: {npc.range!}</li>
-                        </ul>
-                    );
-                },
-            },
-            {
-                headerName: 'Crit',
-                maxWidth: 100,
-                cellRenderer: (params: ICellRendererParams<INpcData>) => {
-                    const npc = params.data;
-                    if (npc == undefined || npc.critChance == undefined) return <></>;
-                    return (
-                        <ul>
-                            <li>Chance: {npc.critChance! * 100}%</li>
-                            <li>
-                                Damage:
-                                {StatsCalculatorService.calculateStat(npc.critDamage!, stars, rank, 0)}
-                            </li>
-                        </ul>
-                    );
-                },
-            },
-            {
-                headerName: 'Block',
-                maxWidth: 100,
-                cellRenderer: (params: ICellRendererParams<INpcData>) => {
-                    const npc = params.data;
-                    if (npc == undefined || npc.blockChance == undefined) return <></>;
-                    return (
-                        <ul>
-                            <li>Chance: {npc.blockChance! * 100}%</li>
-                            <li>
-                                Damage:
-                                {StatsCalculatorService.calculateStat(npc.blockDamage!, stars, rank, 0)}
-                            </li>
-                        </ul>
-                    );
-                },
-            },
-            {
-                headerName: 'Traits',
-                maxWidth: 100,
-                cellRenderer: (params: ICellRendererParams<INpcData>) => {
-                    const npc = params.data;
-                    if (npc == undefined || npc.traits.length == 0) return <></>;
-                    return (
-                        <ul key={npc.name + ' traits'}>
-                            {npc.traits && npc!.traits.map(trait => <li key={npc.name + ' ' + trait}>{trait}</li>)}
-                        </ul>
-                    );
-                },
-            },
-            {
-                headerName: 'Active Abilities',
-                maxWidth: 200,
-                cellRenderer: (params: ICellRendererParams<INpcData>) => {
-                    const npc = params.data;
-                    if (npc == undefined || npc.activeAbilities.length == 0) return <></>;
-                    return (
-                        <ul key={npc.name + ' active abilities'}>
-                            {npc.activeAbilities &&
-                                npc!.activeAbilities.map(ability => <li key={npc.name + ' ' + ability}>{ability}</li>)}
-                        </ul>
-                    );
-                },
-            },
-            {
-                headerName: 'Passive Abilities',
-                maxWidth: 200,
-                cellRenderer: (params: ICellRendererParams<INpcData>) => {
-                    const npc = params.data;
-                    if (npc == undefined || npc.passiveAbilities.length == 0) return <></>;
-                    return (
-                        <ul key={npc.name + ' passive abilities'}>
-                            {npc.passiveAbilities &&
-                                npc!.passiveAbilities.map(ability => <li key={npc.name + ' ' + ability}>{ability}</li>)}
-                        </ul>
-                    );
-                },
-            },
-        ],
-        [rank, stars]
-    );
+    const onProgressionIndexChange = (newIndex: number) => {
+        setProgressionIndex(newIndex);
+    };
 
     return (
         <div>
             <div className="flex gap-[3px] justify-left">
-                <div style={{ width: 100 }}>
-                    <StarsSelect
-                        label={'Target Stars'}
-                        starsValues={getEnumValues(RarityStars)}
-                        value={stars}
-                        valueChanges={value => onStarsChange(value)}
-                    />
-                </div>
-                <div style={{ width: 200 }}>
-                    <RankSelect
-                        label={'Target Rank'}
-                        rankValues={getEnumValues(Rank).filter(x => x !== Rank.Locked)}
-                        value={rank}
-                        valueChanges={value => onRankChange(value)}
-                    />
-                </div>
+                <FactionSelect
+                    label={'Faction'}
+                    factions={factions}
+                    faction={faction}
+                    factionChanges={value => onFactionChange(value)}
+                />
             </div>
-
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
-                <AgGridReact
-                    modules={[AllCommunityModule]}
-                    theme={themeBalham}
-                    ref={gridRef}
-                    suppressCellFocus={true}
-                    defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
-                    columnDefs={columnDefs}
-                    rowData={NpcService.npcDataFull}
-                    onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
+            <div className="h-5 w-auto"></div>
+            <div className="flex gap-[3px] justify-left">
+                <NpcSelect label={'NPC'} npcs={npcs} npc={npc} npcChanges={value => onNpcChange(value)} />
+            </div>
+            <div className="h-5 w-auto"></div>
+            <div className="flex gap-[3px] justify-left"></div>
+            <ProgressionIndexSelect
+                label={'NPC Level'}
+                npc={npc}
+                index={progressionIndex}
+                indexChanges={value => onProgressionIndexChange(value)}
+            />
+            <div className="flex gap-[3px] justify-left items-center">
+                <MiscIcon icon="health" />
+                <span>{npc.stats[progressionIndex]?.health}</span>
+            </div>
+            <div className="flex gap-[3px] justify-left items-center">
+                <MiscIcon icon="armour" />
+                <span>{npc.stats[progressionIndex]?.armor}</span>
+            </div>
+            <div className="flex gap-[3px] justify-left items-center">
+                <MiscIcon icon="damage" />
+                <span>{npc.stats[progressionIndex]?.damage}</span>
+            </div>
+            <div>
+                {npc.traits.map(trait => {
+                    const icon = NpcService.getTraitIcon(trait);
+                    if (!icon) return null;
+                    return (
+                        <img
+                            key={trait}
+                            src={getImageUrl(icon)}
+                            alt={trait}
+                            title={trait}
+                            style={{ height: 32, marginRight: 8 }}
+                        />
+                    );
+                })}
             </div>
         </div>
     );

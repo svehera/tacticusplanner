@@ -12,7 +12,8 @@ export const RankIcon = ({
     size?: number;
     resized?: boolean;
 }) => {
-    if (!rank || rank > Rank.Adamantine1) {
+    if (!rank || rank > Rank.Adamantine3) {
+        console.trace('bad rank: ', rank);
         return <span>{Rank[Rank.Locked]}</span>;
     }
 
@@ -24,6 +25,7 @@ export const RankIcon = ({
             : resized
               ? getImageUrl(`ranks/resized/${rankTextValue.toLowerCase()}.png`)
               : getImageUrl(`ranks/${rankTextValue.toLowerCase()}.png`);
+
     return (
         <>
             <img

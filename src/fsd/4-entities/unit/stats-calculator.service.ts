@@ -1,7 +1,6 @@
 import { RarityStars, Rank, rankToString } from '@/fsd/5-shared/model';
 
 import { ICharacter2, CharactersService, rankUpData } from '@/fsd/4-entities/character/@x/unit';
-import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 
 export class StatsCalculatorService {
     /**
@@ -145,32 +144,5 @@ export class StatsCalculatorService {
     static calculateArmor(unitId: string, rarityStars: RarityStars, rank: Rank, numAppliedUpgrades: number): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
         return StatsCalculatorService.calculateStat(unit?.armour ?? -1, rarityStars, rank, numAppliedUpgrades);
-    }
-
-    /**
-     * @returns the calculated armor for the given NPC. -1 if the unit can't be found.
-     */
-    static calculateNpcArmor(npc: string, stars: RarityStars, rank: Rank): number {
-        const unit = NpcService.npcDataFull.find(u => u.name === npc);
-        if (unit == undefined) return -1;
-        return StatsCalculatorService.calculateStat(unit.armor, stars, rank, 0);
-    }
-
-    /**
-     * @returns the calculated armor for the given NPC. -1 if the unit can't be found.
-     */
-    static calculateNpcDamage(npc: string, stars: RarityStars, rank: Rank): number {
-        const unit = NpcService.npcDataFull.find(u => u.name === npc);
-        if (unit == undefined) return -1;
-        return StatsCalculatorService.calculateStat(unit.damage, stars, rank, 0);
-    }
-
-    /**
-     * @returns the calculated armor for the given NPC. -1 if the unit can't be found.
-     */
-    static calculateNpcHealth(npc: string, stars: RarityStars, rank: Rank): number {
-        const unit = NpcService.npcDataFull.find(u => u.name == npc);
-        if (unit == undefined) return -1;
-        return StatsCalculatorService.calculateStat(unit.health, stars, rank, 0);
     }
 }

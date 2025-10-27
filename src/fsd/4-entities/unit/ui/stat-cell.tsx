@@ -7,7 +7,6 @@ import { StatsCalculatorService } from '../stats-calculator.service';
 
 interface Props {
     characterId?: string;
-    npc?: string;
     rank: Rank;
     rarityStars: RarityStars;
     numHealthUpgrades: number;
@@ -17,7 +16,6 @@ interface Props {
 
 export const StatCell: React.FC<Props> = ({
     characterId,
-    npc,
     rank,
     rarityStars,
     numHealthUpgrades,
@@ -26,21 +24,15 @@ export const StatCell: React.FC<Props> = ({
 }) => {
     const health = characterId
         ? StatsCalculatorService.calculateHealth(characterId, rarityStars, rank, numHealthUpgrades)
-        : npc
-          ? StatsCalculatorService.calculateNpcHealth(npc, rarityStars, rank)
-          : -1;
+        : -1;
 
     const damage = characterId
         ? StatsCalculatorService.calculateDamage(characterId, rarityStars, rank, numDamageUpgrades)
-        : npc
-          ? StatsCalculatorService.calculateNpcDamage(npc, rarityStars, rank)
-          : -1;
+        : -1;
 
     const armor = characterId
         ? StatsCalculatorService.calculateArmor(characterId, rarityStars, rank, numArmorUpgrades)
-        : npc
-          ? StatsCalculatorService.calculateNpcArmor(npc, rarityStars, rank)
-          : -1;
+        : -1;
 
     return (
         <table>
