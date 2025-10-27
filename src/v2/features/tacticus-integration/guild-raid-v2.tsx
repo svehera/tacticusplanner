@@ -36,6 +36,7 @@ interface UserSummary {
     totalDamageDealt: number;
     battleBossCount: number;
     battleSideBossCount: number;
+    totalBattleCount: number;
     bombCount: number;
     highestDamage: number;
     bossDamage: number; // Changed from legendaryBossDamage
@@ -511,6 +512,11 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 80,
         },
         {
+            field: 'totalBattleCount',
+            headerName: 'Total Battles',
+            width: 80,
+        },
+        {
             field: 'bombCount',
             headerName: 'Bomb Attacks',
             width: 80,
@@ -633,6 +639,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                     battleBossCount: 0,
                     battleSideBossCount: 0,
                     bombCount: 0,
+                    totalBattleCount: 0,
                     highestDamage: 0,
                     bossDamage: 0,
                     sideBossDamage: 0,
@@ -653,6 +660,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 }
             } else {
                 // Battle attacks
+                userSummary.totalBattleCount += 1;
                 if (entry.encounterType === TacticusEncounterType.Boss) {
                     userSummary.battleBossCount += 1;
                     userSummary.bossDamage += entry.damageDealt;
