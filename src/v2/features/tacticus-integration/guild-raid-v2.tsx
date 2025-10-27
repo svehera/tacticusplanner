@@ -21,7 +21,12 @@ import {
     TacticusGuildRaidUnit,
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity } from '@/fsd/5-shared/model';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharactersService } from '@/fsd/4-entities/character/characters.service';
+import { ICharacterData } from '@/fsd/4-entities/character/model';
+import { IMowStatic2 } from '@/fsd/4-entities/mow/model';
+import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 
 // Type for aggregated user data
 interface UserSummary {
@@ -169,6 +174,26 @@ const DateRenderer: React.FC<{ value: number | null | undefined }> = ({ value })
     return <span>{date.toLocaleString()}</span>;
 };
 
+// Component for rendering unit icons
+const UnitIconRenderer: React.FC<{ value: ICharacterData[] | IMowStatic2[] }> = ({ value }) => {
+    return (
+        <span className="flex items-center gap-1 h-full">
+            {value.map((unit, i) => {
+                return (
+                    <UnitShardIcon
+                        key={i}
+                        icon={unit?.roundIcon ?? ''}
+                        name={unit?.name ?? ''}
+                        height={22}
+                        width={22}
+                        tooltip={unit?.name ?? ''}
+                    />
+                );
+            })}
+        </span>
+    );
+};
+
 export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: string) => string }> = ({
     userIdMapper,
 }) => {
@@ -294,6 +319,12 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: false,
             filter: true,
             width: 150,
+            cellRenderer: (params: ICellRendererParams<TacticusGuildRaidEntry>) => {
+                const heroes = params.data?.heroDetails
+                    .map((unit: TacticusGuildRaidUnit) => CharactersService.getUnit(unit.unitId))
+                    .filter((character): character is ICharacterData => character !== undefined);
+                return <UnitIconRenderer value={heroes ?? []} />;
+            },
             valueFormatter: params => params.value?.map((unit: TacticusGuildRaidUnit) => unit.unitId).join(', '),
         },
         {
@@ -301,7 +332,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             field: 'machineOfWarDetails',
             sortable: false,
             filter: true,
-            width: 150,
+            width: 80,
+            cellRenderer: (params: ICellRendererParams<TacticusGuildRaidEntry>) => {
+                const mow = params.data?.machineOfWarDetails?.unitId
+                    ? MowsService.resolveToStatic(params.data.machineOfWarDetails.unitId)
+                    : undefined;
+                const mowArray = mow ? [mow] : [];
+                return <UnitIconRenderer value={mowArray} />;
+            },
             valueFormatter: params => params.value?.unitId,
         },
         {
@@ -498,11 +536,19 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         {
             headerName: 'Most Used Heroes',
             field: 'topHeroes',
-            width: 200,
+            width: 160,
+            cellRenderer: (params: ICellRendererParams<UserSummary>) => {
+                const topHeroes = [...params.value.entries()]
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5)
+                    .map(([key]) => CharactersService.getUnit(key))
+                    .filter((character): character is ICharacterData => character !== undefined);
+                return <UnitIconRenderer value={topHeroes} />;
+            },
             valueFormatter: params => {
                 const topHeroes = [...params.value.entries()]
                     .sort((a, b) => b[1] - a[1])
-                    .slice(0, 3)
+                    .slice(0, 5)
                     .map(([key]) => key);
                 return topHeroes.join(', ');
             },
@@ -510,11 +556,19 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         {
             headerName: 'Most Used MoW',
             field: 'topMachinesOfWar',
-            width: 200,
-            valueFormatter: params => {
+            width: 120,
+            cellRenderer: (params: ICellRendererParams<UserSummary>) => {
                 const topMoW = [...params.value.entries()]
                     .sort((a, b) => b[1] - a[1])
                     .slice(0, 3)
+                    .map(([key]) => MowsService.resolveToStatic(key))
+                    .filter((mow): mow is IMowStatic2 => mow !== undefined);
+                return <UnitIconRenderer value={topMoW} />;
+            },
+            valueFormatter: params => {
+                const topMoW = [...params.value.entries()]
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5)
                     .map(([key]) => key);
                 return topMoW.join(', ');
             },
