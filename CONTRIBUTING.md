@@ -16,12 +16,14 @@ Control was handed off to `cpunerd` (a.k.a. Kharnage, GitHub name _?_).
 
 ## Project Architecture
 
-A lot of the project is built using [FSD Architecture - Feature Sliced Design](https://feature-sliced.design/).
+A lot of the project was migrated by `Severyn` to use [FSD Architecture - Feature Sliced Design](https://feature-sliced.design/).
 This is an architecture that splits code by feature and avoids having much cross boundaries between features.
-
-Before leaving, `Severyn` started work on a v2 directory.
-Unfortunately he left before that was completed and the plans were written down.
+There's also a `src/v2` directory that's actually older than the `src/fsd` stuff.
+Unfortunately `Severyn` left before the architecture was unified and the plans to do so weren't written down.
 That's in limbo for now.
+
+> [!INFORMATION]
+> ToDo: Let's fill this out with an explanation of the directory structure as we decide how we want it to look.
 
 ## Hosting
 
