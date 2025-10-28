@@ -1,5 +1,3 @@
-import React from 'react';
-
 // eslint-disable-next-line import-x/no-internal-modules
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';

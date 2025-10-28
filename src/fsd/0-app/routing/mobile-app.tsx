@@ -2,7 +2,7 @@
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { menuItemById } from 'src/models/menu-items';

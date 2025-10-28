@@ -32,6 +32,8 @@ export const rankToLevel: Record<Rank, number> = {
     [Rank.Diamond2]: 47,
     [Rank.Diamond3]: 50,
     [Rank.Adamantine1]: 55,
+    [Rank.Adamantine2]: 60,
+    [Rank.Adamantine3]: 65,
 };
 
 export const rankToRarity: Record<Rank, Rarity> = {
@@ -55,6 +57,8 @@ export const rankToRarity: Record<Rank, Rarity> = {
     [Rank.Diamond2]: Rarity.Legendary,
     [Rank.Diamond3]: Rarity.Legendary,
     [Rank.Adamantine1]: Rarity.Mythic,
+    [Rank.Adamantine2]: Rarity.Mythic,
+    [Rank.Adamantine3]: Rarity.Mythic,
 };
 
 export const charsProgression: Record<number, ICharProgression> = {
@@ -130,7 +134,7 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     [Campaign.TAEC]: 0,
 };
 
-export const defaultGWLayout: IGWLayoutZone[] = [
+const defaultGWLayout: IGWLayoutZone[] = [
     { id: 'medicaeStation', players: [] },
     { id: 'headQuarters', players: [] },
     { id: 'voxStation', players: [] },
@@ -367,6 +371,5 @@ export const idToCampaign: Record<string, Campaign> = {
 export const rarityToStars = RarityMapper.toStars;
 export const rarityToMaxStars = RarityMapper.toMaxStars;
 export const rarityToMaxRank = RarityMapper.toMaxRank;
-export const rarityStringToNumber = RarityMapper.stringToNumber;
 
 export { charsUnlockShards, charsReleaseShards } from '@/fsd/4-entities/character';

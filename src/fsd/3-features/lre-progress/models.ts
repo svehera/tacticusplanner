@@ -13,7 +13,7 @@ export interface ILreProgressDto {
     notes: string;
 }
 
-export interface ILreTrackProgressLegacyDto {
+interface ILreTrackProgressLegacyDto {
     section: LreTrackId;
     battles: Array<boolean[]>;
 }
