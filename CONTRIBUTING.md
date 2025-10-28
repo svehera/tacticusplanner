@@ -22,7 +22,7 @@ There's also a `src/v2` directory that's actually older than the `src/fsd` stuff
 Unfortunately `Severyn` left before the architecture was unified and the plans to do so weren't written down.
 That's in limbo for now.
 
-> [!INFORMATION]
+> [!NOTE]
 > ToDo: Let's fill this out with an explanation of the directory structure as we decide how we want it to look.
 
 ## Hosting
