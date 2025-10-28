@@ -6,13 +6,13 @@ We'll help you get started there but here are the most important bits.
 ## Project Planning
 
 We use a combination of Discord and a Trello board for planning what's going on.
-The Trello board is managed by Redwyne (Github name _?_).
+The Trello board is managed by Redwyne.
 Link here: https://trello.com/b/VA20QPHI/tacticus-planner
 
 ## Project Status
 
 `Severyn` originally created the project but has since stepped back for personal reasons.
-Control was handed off to `cpunerd` (a.k.a. Kharnage, GitHub name _?_).
+Control was handed off to `cpunerd` (a.k.a. Kharnage, GitHub name @unrstuart).
 
 ## Project Architecture
 
@@ -28,13 +28,14 @@ That's in limbo for now.
 ## Hosting
 
 The project is deployed to Azure as a static web app.
-The staging environment is hosted at: _url?_
+The dev environment is hosted at: [https://dev.tacticusplanner.app/](https://dev.tacticusplanner.app/)
 The production environment is hosted at: [https://tacticusplanner.app/](https://tacticusplanner.app/)
 
 ## Conventions
 
-> [!WARNING]
-> ToDo: This needs someone more experienced on the project to fill it out.
+- Use [TailwindCSS](https://tailwindcss.com/) for styling all new code
+- Use [AG Grid](https://www.ag-grid.com/) for data grids
+- Use [Material UI](https://mui.com/) for other components
 
 ## Significant Pain Points
 
@@ -69,7 +70,8 @@ There are also multiple different component libraries:
 - [Lucide React](https://lucide.dev/guide/packages/lucide-react) for icons
 - [AG Grid](https://www.ag-grid.com/) for data grids
 
-At some point we should review our choices on these to minimize overlapping solutions.
+We have listed the preferred options in the [conventions section](#conventions) but there's a fair amount of code that doesn't currently comply with them.
+At some point we should start moving the older code to follow the current conventions.
 This will make both the UI and the code more consistent.
 
 ### Expansive Code
