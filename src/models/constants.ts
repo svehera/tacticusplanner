@@ -134,7 +134,7 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     [Campaign.TAEC]: 0,
 };
 
-export const defaultGWLayout: IGWLayoutZone[] = [
+const defaultGWLayout: IGWLayoutZone[] = [
     { id: 'medicaeStation', players: [] },
     { id: 'headQuarters', players: [] },
     { id: 'voxStation', players: [] },
@@ -371,6 +371,5 @@ export const idToCampaign: Record<string, Campaign> = {
 export const rarityToStars = RarityMapper.toStars;
 export const rarityToMaxStars = RarityMapper.toMaxStars;
 export const rarityToMaxRank = RarityMapper.toMaxRank;
-export const rarityStringToNumber = RarityMapper.stringToNumber;
 
 export { charsUnlockShards, charsReleaseShards } from '@/fsd/4-entities/character';

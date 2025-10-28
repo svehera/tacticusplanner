@@ -49,7 +49,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, trackId, legend
         }
     };
 
-    const handleTouchStart = (event: React.TouchEvent, req: ILreBattleRequirementsProgress) => {
+    const handleTouchStart = (_event: React.TouchEvent, req: ILreBattleRequirementsProgress) => {
         if (isMobile) {
             const timer = setTimeout(() => {
                 toggleState(req, ProgressState.blocked); // Trigger block state on long press

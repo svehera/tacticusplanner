@@ -25,12 +25,12 @@ export interface IGuildMembersValidationResponse {
     invalidUsers: Array<{ username: string; reason: string }>;
 }
 
-export interface IGuildUserData {
+interface IGuildUserData {
     characters: IPersonalCharacterData2[];
     offense: IGuildUserOffense;
 }
 
-export interface IGuildUserOffense {
+interface IGuildUserOffense {
     deployedCharacters: string[];
     tokensLeft: number;
 }

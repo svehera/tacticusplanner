@@ -12,10 +12,9 @@ import { IMowUpgrade } from './lookup.models';
 
 interface Props {
     rows: IMowUpgrade[];
-    upgrades: Record<string, number>;
 }
 
-export const MowUpgradesTable: React.FC<Props> = ({ rows, upgrades }) => {
+export const MowUpgradesTable: React.FC<Props> = ({ rows }) => {
     const [columnDefs] = useState<Array<ColDef<IMowUpgrade>>>([
         {
             headerName: '#',

@@ -9,11 +9,10 @@ import { grEncounterToFaction, guildRaidBosses, guildRaidPrimes } from 'src/v2/f
 interface Props {
     units: IUnit[];
     filterUnits: (filtered: IUnit[]) => void;
-    selectedModes: string[];
     updateSelection: (value: string[]) => void;
 }
 
-export const GuildRaidsModes: React.FC<Props> = ({ selectedModes, updateSelection, units, filterUnits }) => {
+export const GuildRaidsModes: React.FC<Props> = ({ updateSelection, units, filterUnits }) => {
     const [grEncounter, setGrEncounter] = useState<string>('');
 
     const updateEncounter = (values: string[]) => {

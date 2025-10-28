@@ -37,13 +37,13 @@ export interface IRewards {
     potential: IPotentialReward[];
 }
 
-export interface IGuaranteedReward {
+interface IGuaranteedReward {
     id: string;
     min: number;
     max: number;
 }
 
-export interface IPotentialReward {
+interface IPotentialReward {
     id: string;
     chance_numerator: number;
     chance_denominator: number;
@@ -88,7 +88,7 @@ export type ICampaignConfigs = {
     [campaignType in `${CampaignType}`]: ICampaignConfig;
 };
 
-export interface ICampaignConfig {
+interface ICampaignConfig {
     type: CampaignType | string;
     energyCost: number;
     dailyBattleCount: number;

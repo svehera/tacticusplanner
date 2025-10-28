@@ -1,6 +1,6 @@
 ﻿import Box from '@mui/material/Box';
 import { sum } from 'lodash';
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { GlobalState } from 'src/models/global-state';
 import { StoreContext } from 'src/reducers/store.provider';

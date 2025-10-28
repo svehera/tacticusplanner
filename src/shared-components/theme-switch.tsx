@@ -1,7 +1,7 @@
 ﻿import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { IconButton, Tooltip } from '@mui/material';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 

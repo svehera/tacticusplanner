@@ -7,11 +7,3 @@ export const teamsDesktopLazyRoute: RouteObject = {
         return { Component: Teams };
     },
 };
-
-export const teamsMobileLazyRoute: RouteObject = {
-    path: 'plan/teams',
-    async lazy() {
-        const { Teams } = await import('./teams.desktop');
-        return { Component: Teams };
-    },
-};
