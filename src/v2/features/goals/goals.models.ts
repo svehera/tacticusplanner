@@ -46,7 +46,8 @@ export interface IGoalEstimate {
     daysLeft: number;
     energyTotal: number;
     oTokensTotal: number;
-    xpBooksTotal: number;
+    legendaryXpBooksTotal: number;
+    mythicXpBooksTotal: number;
     xpEstimate?: IXpEstimate;
     xpEstimateAbilities?: IXpEstimate;
     mowEstimate?: IMowMaterialsTotal;

@@ -44,7 +44,9 @@ export type IXpLevel = {
 
 export interface IXpEstimate {
     legendaryBooks: number;
-    gold: number;
+    mythicBooks: number;
+    legendaryGold: number;
+    mythicGold: number;
     currentLevel: number;
     targetLevel: number;
     xpLeft: number;
