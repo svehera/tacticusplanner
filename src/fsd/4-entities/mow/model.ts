@@ -16,7 +16,7 @@ export interface IMowStatic {
     initialRarity: RarityString;
 }
 
-export interface IMowStaticAbility {
+interface IMowStaticAbility {
     name: string;
     recipes: string[][];
 }
@@ -32,12 +32,12 @@ export interface IMowStatic2 {
     secondaryAbility: IMowStaticAbility;
 }
 
-export interface IMowBadgeCost {
+interface IMowBadgeCost {
     rarity: string;
     amount: number;
 }
 
-export interface IMowUpgradeCosts {
+interface IMowUpgradeCosts {
     gold: number;
     salvage: number;
     badges: IMowBadgeCost;
@@ -70,23 +70,6 @@ export interface IMow extends IMowStatic, IMowDb, DynamicProps {
 export interface IMow2 extends IMowStatic2, IMowDb, DynamicProps {
     unitType: UnitType.mow;
 }
-
-export interface IMowLevelUpgrade {
-    lvl: number;
-    components: number;
-    gold: number;
-    badges: number;
-    salvage?: number;
-    forgeBadges?: number;
-}
-
-export interface IMowLevelUpgrades {
-    lvl: number;
-    primary: string[];
-    secondary?: string[];
-}
-
-export type IMowLevelUpgradesDictionary = Record<string, Array<IMowLevelUpgrades>>;
 
 export interface IMowLevelMaterials {
     mowId: string;

@@ -15,7 +15,7 @@ import { LegendaryEventEnum } from '@/fsd/4-entities/lre/@x/character';
 import { CharacterBias } from './bias.enum';
 import { CharacterReleaseRarity } from './character-release-rarity.enum';
 
-export interface IPersonalCharacterData2 {
+interface IPersonalCharacterData2 {
     name: string;
     rank: Rank;
     rarity: Rarity;
@@ -30,7 +30,7 @@ export interface IPersonalCharacterData2 {
     mythicShards: number;
 }
 
-export interface IDamageTypes {
+interface IDamageTypes {
     all: DamageType[];
     melee: DamageType;
     range?: DamageType;
@@ -157,7 +157,7 @@ export interface IRankUpData {
     [character: string]: IRankUpData2 | undefined;
 }
 
-export interface IRankUpData2 {
+interface IRankUpData2 {
     [rank: string]: string[];
 }
 

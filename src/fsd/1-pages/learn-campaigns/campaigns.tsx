@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
-import React, { useContext, useMemo, useRef, useState } from 'react';
+import { useContext, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules

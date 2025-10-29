@@ -1,5 +1,4 @@
-﻿import React from 'react';
-import { createBrowserRouter, useRouteError } from 'react-router-dom';
+﻿import { createBrowserRouter, useRouteError } from 'react-router-dom';
 
 import { App } from './app';
 import { appRoutes } from './desktop-routes';

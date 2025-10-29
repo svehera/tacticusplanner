@@ -2,7 +2,7 @@
 import InputLabel from '@mui/material/InputLabel';
 import { ColDef, ValueFormatterParams, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import React, { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';

@@ -4,7 +4,7 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
-export interface IFactionStatic {
+interface IFactionStatic {
     alliance: string;
     name: string;
     snowprintId: string;

@@ -6,7 +6,8 @@ const config: KnipConfig = {
         css: (text: string) => [...text.replaceAll('plugin', 'import').matchAll(/(?<=@)import[^;]+/g)].join('\n'),
     },
     entry: ['src/fsd/0-app/index.tsx'],
-    project: ['**/*.{js,ts,jsx,tsx,css}'],
+    project: ['src/**/*.{js,ts,jsx,tsx,css}'],
+    ignoreDependencies: ['svgo', 'sharp'], // see https://github.com/FatehAK/vite-plugin-image-optimizer#installation
 };
 
 export default config;

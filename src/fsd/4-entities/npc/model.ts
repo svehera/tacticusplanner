@@ -59,7 +59,3 @@ export interface INpcDataRaw {
     'Passive Abilities'?: string[];
     Icon: string;
 }
-
-export interface INpcsRaw {
-    npcs: INpcDataRaw[];
-}

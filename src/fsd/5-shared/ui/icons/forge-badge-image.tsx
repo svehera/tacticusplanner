@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { Rarity } from '@/fsd/5-shared/model';
+﻿import { Rarity } from '@/fsd/5-shared/model';
 
 import { getImageUrl } from '../get-image-url';
 

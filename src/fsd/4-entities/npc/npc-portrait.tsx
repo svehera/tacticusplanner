@@ -6,7 +6,7 @@ import mythicWings from 'src/assets/images/snowprint_assets/stars/ui_icon_star_m
 import redStar from 'src/assets/images/stars/red star small.png';
 import goldStar from 'src/assets/images/stars/star small.png';
 
-import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
+import { RarityStars, Rank } from '@/fsd/5-shared/model';
 import { getImageUrl } from '@/fsd/5-shared/ui';
 
 import { RankIcon } from '@/fsd/4-entities/character/@x/npc';
@@ -37,8 +37,7 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
     const starSize = 45;
     const fifthStarSize = 52;
 
-    const getFrame = (rarity: Rarity) => {
-        const icons = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
+    const getFrame = () => {
         const imageUrl = getImageUrl('rarity_frames/common.png');
         return (
             <img
@@ -55,7 +54,7 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
         );
     };
 
-    const getNpcPortrait = (name: string) => {
+    const getNpcPortrait = () => {
         const imageUrl = getImageUrl(NpcService.getNpcById(id)?.icon ?? '');
         return (
             <img
@@ -106,7 +105,6 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
     };
 
     const get5Stars = (star: string, top: number, overlap: number) => {
-        const totalWidth = fifthStarSize + (starSize - overlap) * 4;
         let left = frameWidth / 2 - fifthStarSize / 2 - starSize * 2 + overlap * 2;
         const sizeDiff = fifthStarSize - starSize;
         const starImages = [];
@@ -164,8 +162,8 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
     return (
         <div style={{ width: frameWidth + 40, height: frameHeight + 40 }}>
             <div style={{ position: 'relative', top: 20, left: 20 }}>
-                {getFrame(Rarity.Common)}
-                {getNpcPortrait(id)}
+                {getFrame()}
+                {getNpcPortrait()}
                 {getStars(stars)}
                 {getRank()}
             </div>
