@@ -350,6 +350,7 @@ const campaignEvents: CampaignGroupType[] = [
     CampaignGroupType.adMechCE,
     CampaignGroupType.tyranidCE,
     CampaignGroupType.tauCE,
+    CampaignGroupType.deathGuardCE,
 ];
 
 export const campaignEventsLocations: Campaign[] = campaignsList
