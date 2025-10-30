@@ -1,13 +1,17 @@
 ﻿import ClearIcon from '@mui/icons-material/Clear';
+import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SyncIcon from '@mui/icons-material/Sync';
+import TableRowsIcon from '@mui/icons-material/TableRows';
+import { FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import DailyRaidsSettings from 'src/shared-components/daily-raids-settings';
 
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
@@ -32,7 +36,13 @@ export const RaidsHeader: React.FC<Props> = ({
     hasSync,
     syncHandle,
 }) => {
-    const [openSettings, setOpenSettings] = React.useState<boolean>(false);
+    const { viewPreferences } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
+    const [openSettings, setOpenSettings] = useState<boolean>(false);
+
+    const updateView = (tableView: boolean): void => {
+        dispatch.viewPreferences({ type: 'Update', setting: 'raidsTableView', value: tableView });
+    };
 
     return (
         <>
@@ -53,6 +63,25 @@ export const RaidsHeader: React.FC<Props> = ({
                         <MiscIcon icon={'energy'} height={15} width={15} /> {actualDailyEnergy}
                     </span>
                 </div>
+
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={viewPreferences.raidsTableView}
+                            onChange={event => updateView(event.target.checked)}
+                        />
+                    }
+                    label={
+                        <div className="flex-box gap5">
+                            {viewPreferences.goalsTableView ? (
+                                <TableRowsIcon color="primary" />
+                            ) : (
+                                <GridViewIcon color="primary" />
+                            )}{' '}
+                            view
+                        </div>
+                    }
+                />
 
                 <div className="flex-box gap10" style={{ paddingBottom: 10 }}>
                     {hasSync && (
