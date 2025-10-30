@@ -666,25 +666,6 @@ describe('TokenEstimationService', () => {
                 battle.completed = true;
             });
 
-            // Compute points for each track, considering _killPoints gating
-            function computePoints(track: ILreTrackProgress): number {
-                let total = 0;
-                for (let i = 0; i < track.battles.length; i++) {
-                    // For battle 0, always allowed
-                    if (i > 0) {
-                        // Previous battle must have _killPoints completed
-                        const prevBattle = track.battles[i - 1];
-                        const prevKillPoints = prevBattle.requirementsProgress.find(r => r.id === '_killPoints');
-                        if (!prevKillPoints?.completed) break;
-                    }
-                    // Sum points for completed requirements in this battle
-                    total += track.battles[i].requirementsProgress
-                        .filter(r => r.completed)
-                        .reduce((sum, r) => sum + r.points, 0);
-                }
-                return total;
-            }
-
             const points1 = TokenEstimationService.computeCurrentPoints(track1);
             const points2 = TokenEstimationService.computeCurrentPoints(track2);
             const points3 = TokenEstimationService.computeCurrentPoints(track3);

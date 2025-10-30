@@ -77,7 +77,7 @@ export const CampaignProgress: React.FC<Props> = ({
         debounceProgressChange(value);
     };
 
-    const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    const handleSliderChange = (_event: Event, newValue: number | number[]) => {
         updateProgress(newValue as number);
     };
 

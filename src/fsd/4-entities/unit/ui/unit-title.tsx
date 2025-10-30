@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CharacterTitleShort, CharacterTitle } from '@/fsd/4-entities/character/@x/unit';
 import { MowTitle } from '@/fsd/4-entities/mow/@x/unit';
 
@@ -13,14 +11,12 @@ export const UnitTitle = ({
     hideName,
     short,
     imageSize,
-    fullName,
 }: {
     character: IUnit;
     showLockedWithOpacity?: boolean;
     hideName?: boolean;
     onClick?: () => void;
     short?: boolean;
-    fullName?: boolean;
     imageSize?: number;
 }) => {
     if (isCharacter(character)) {

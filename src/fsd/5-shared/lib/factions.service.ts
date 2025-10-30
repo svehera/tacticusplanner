@@ -59,6 +59,15 @@ export class FactionsService {
         }
     };
 
+    /** @returns the Faction enum corresponding to the Snowprint faction, or undefined if the string doesn't map. */
+    public static safeSnowprintFactionToFaction = (snowprintFaction: string): Faction | undefined => {
+        try {
+            return this.snowprintFactionToFaction(snowprintFaction);
+        } catch {
+            return undefined;
+        }
+    };
+
     /**
      * @param snowprintFaction The faction string from Snowprint.
      * @returns the Faction enum corresponding to the Snowprint faction.

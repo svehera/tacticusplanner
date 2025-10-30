@@ -1,6 +1,5 @@
 ﻿import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import React from 'react';
 
 import { Rank, rankToString } from '@/fsd/5-shared/model';
 

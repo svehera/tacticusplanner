@@ -6,7 +6,7 @@ import {
     LreTrackId,
 } from '@/fsd/4-entities/lre';
 
-export type ILreTableRow<T = ICharacter2 | string> = Record<string, T>;
+type ILreTableRow<T = ICharacter2 | string> = Record<string, T>;
 
 export interface ILegendaryEvent extends ILegendaryEventStatic {
     id: LegendaryEventEnum;
@@ -95,7 +95,7 @@ export interface ILegendaryEventSelectedRequirements {
     gamma: SelectedRequirements;
 }
 
-export type SelectedRequirements = Record<string, boolean>;
+type SelectedRequirements = Record<string, boolean>;
 
 export interface IAutoTeamsPreferences {
     preferCampaign: boolean;
@@ -104,7 +104,7 @@ export interface IAutoTeamsPreferences {
     ignoreRecommendedFirst: boolean; // ignore Bias
 }
 
-export interface ISelectedTeamsOrdering {
+interface ISelectedTeamsOrdering {
     orderBy: 'name' | 'rank' | 'rarity';
     direction: 'asc' | 'desc';
 }

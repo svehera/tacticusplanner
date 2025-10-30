@@ -13,12 +13,10 @@ import {
     CampaignGroupType,
     CampaignType,
     ICampaignBattleComposed,
-    IDetailedEnemy,
 } from '@/fsd/4-entities/campaign';
-import { CharacterBias, ICharacter2, ICharLegendaryEvent } from '@/fsd/4-entities/character';
+import { CharacterBias, ICharacter2 } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
-import { IMaterialFull, IMaterialRecipeIngredientFull, IMaterialEstimated2 } from '@/fsd/4-entities/upgrade';
 
 import { IAutoTeamsPreferences, ILegendaryEventSelectedRequirements, ILreTeam } from '@/fsd/3-features/lre';
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
@@ -42,7 +40,7 @@ import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
 
 import { CampaignsLocationsUsage, DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
 
-export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
+type ITableRow<T = ICharacter2 | string> = Record<string, T>;
 
 export interface IPersonalData {
     version?: string;
@@ -153,13 +151,13 @@ export interface IDailyRaids {
     lastRefreshDateUTC: string;
 }
 
-export interface ILegendaryEventsData {
+interface ILegendaryEventsData {
     jainZar: ILegendaryEventData;
     aunShi: ILegendaryEventData;
     shadowSun: ILegendaryEventData;
 }
 
-export type ILegendaryEventsData3 = Record<LegendaryEventEnum, ILegendaryEventSelectedTeams>;
+type ILegendaryEventsData3 = Record<LegendaryEventEnum, ILegendaryEventSelectedTeams>;
 
 export type SelectedTeams = Record<string, string[]>;
 
@@ -172,7 +170,7 @@ export interface ILegendaryEventSelectedTeams {
     gamma: SelectedTeams;
 }
 
-export interface ILegendaryEventData {
+interface ILegendaryEventData {
     selectedTeams: ITableRow<string>[];
 }
 
@@ -192,9 +190,9 @@ export interface ISelectedTeamsOrdering {
     direction: 'asc' | 'desc';
 }
 
-export type IPersonalCharacter = IPersonalCharacterData;
+type IPersonalCharacter = IPersonalCharacterData;
 
-export interface IPersonalCharacterData {
+interface IPersonalCharacterData {
     name: string;
     unlocked: boolean;
     progress: boolean;
@@ -265,42 +263,6 @@ export interface IPersonalGoal {
     secondAbilityLevel?: number;
 }
 
-export interface IDailyRaid {
-    raids: IMaterialRaid[];
-    energyLeft: number;
-    raidsCount: number;
-}
-
-export interface IMaterialRaid {
-    materialId: string;
-    materialLabel: string;
-    materialRarity: Rarity;
-    totalCount: number;
-    materialIconPath: string;
-    characterIconPath?: string;
-    characters: string[];
-    locations: Array<IRaidLocation>;
-    materialRef?: IMaterialEstimated2;
-}
-
-export interface IRaidLocation {
-    id: string;
-    campaign: string;
-    battleNumber: number;
-    raidsCount: number;
-    farmedItems: number;
-    energySpent: number;
-}
-
-export interface IEstimatedRanks {
-    raids: IDailyRaid[];
-    upgrades: IMaterialFull[];
-    materials: IMaterialEstimated2[];
-    totalEnergy: number;
-    totalUnusedEnergy: number;
-    totalRaids: number;
-}
-
 export interface IEstimatedRanksSettings {
     completedLocations: IItemRaidLocation[];
     campaignsProgress: ICampaignsProgress;
@@ -319,22 +281,10 @@ export type {
     ICampaignsProgress,
     ICampaignsFilters,
     ICampaignBattleComposed,
-    IDetailedEnemy,
     ICharacter2,
-    ICharLegendaryEvent,
-    IMow,
-    IMowDb,
-    IMaterialFull,
-    IMaterialRecipeIngredientFull,
     ILreTeam,
     ILegendaryEventSelectedRequirements,
     IAutoTeamsPreferences,
 };
 
-export type {
-    IViewPreferences,
-    IViewOption,
-    ILreViewSettings,
-    IWyoViewSettings,
-    ILreTileSettings,
-} from '@/fsd/3-features/view-settings';
+export type { IViewPreferences } from '@/fsd/3-features/view-settings';

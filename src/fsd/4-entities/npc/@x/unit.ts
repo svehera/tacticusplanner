@@ -1,1 +1,0 @@
-export { NpcService } from '../npcService';

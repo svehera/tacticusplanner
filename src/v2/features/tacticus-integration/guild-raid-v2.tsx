@@ -20,8 +20,12 @@ import {
     getTacticusGuildRaidData,
     TacticusGuildRaidUnit,
 } from '@/fsd/5-shared/lib/tacticus-api';
-import { Rarity } from '@/fsd/5-shared/model';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharactersService } from '@/fsd/4-entities/character/characters.service';
+import { ICharacterData } from '@/fsd/4-entities/character/model';
+import { IMowStatic2 } from '@/fsd/4-entities/mow/model';
+import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 
 // Type for aggregated user data
 interface UserSummary {
@@ -31,6 +35,7 @@ interface UserSummary {
     totalDamageDealt: number;
     battleBossCount: number;
     battleSideBossCount: number;
+    totalBattleCount: number;
     bombCount: number;
     highestDamage: number;
     bossDamage: number; // Changed from legendaryBossDamage
@@ -48,23 +53,6 @@ const getEncounterTypeLabel = (type: TacticusEncounterType): string => {
 
 const getDamageTypeLabel = (type: TacticusDamageType): string => {
     return type === TacticusDamageType.Battle ? 'Battle' : 'Bomb';
-};
-
-const getRarityLabel = (rarity: Rarity): string => {
-    switch (rarity) {
-        case Rarity.Common:
-            return 'Common';
-        case Rarity.Uncommon:
-            return 'Uncommon';
-        case Rarity.Rare:
-            return 'Rare';
-        case Rarity.Epic:
-            return 'Epic';
-        case Rarity.Legendary:
-            return 'Legendary';
-        default:
-            return 'Unknown';
-    }
 };
 
 const MAX_TOKEN = 3;
@@ -95,7 +83,7 @@ const updateTokenTo = (tokenState: TokenStatus, time: number): void => {
 };
 
 // Component for rendering HP bar
-const HPBarRenderer: React.FC<{ value: number; data: TacticusGuildRaidEntry }> = ({ value, data }) => {
+const HPBarRenderer: React.FC<{ value: number; data: TacticusGuildRaidEntry }> = ({ data }) => {
     const percentage = ((data.maxHp - data.remainingHp) / data.maxHp) * 100;
     const damagePercentage = (data.damageDealt / data.maxHp) * 100;
 
@@ -169,14 +157,32 @@ const DateRenderer: React.FC<{ value: number | null | undefined }> = ({ value })
     return <span>{date.toLocaleString()}</span>;
 };
 
+// Component for rendering unit icons
+const UnitIconRenderer: React.FC<{ value: ICharacterData[] | IMowStatic2[] }> = ({ value }) => {
+    return (
+        <span className="flex items-center gap-1 h-full">
+            {value.map((unit, i) => {
+                return (
+                    <UnitShardIcon
+                        key={i}
+                        icon={unit?.roundIcon ?? ''}
+                        name={unit?.name ?? ''}
+                        height={22}
+                        width={22}
+                        tooltip={unit?.name ?? ''}
+                    />
+                );
+            })}
+        </span>
+    );
+};
+
 export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: string) => string }> = ({
     userIdMapper,
 }) => {
     const [raidData, setRaidData] = useState<TacticusGuildRaidResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [userFilters, setUserFilters] = useState<string[]>([]);
-    const [selectedUnitType, setSelectedUnitType] = useState<string | null>(null);
     const [filteredEntries, setFilteredEntries] = useState<TacticusGuildRaidEntry[]>([]);
 
     // Simulating data fetch
@@ -187,8 +193,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 setRaidData(response.data ?? null);
                 setLoading(false);
 
-                const uniqueUsers = [...new Set(response.data?.entries.map(entry => entry.userId))];
-                setUserFilters(uniqueUsers);
                 setFilteredEntries(response.data?.entries ?? []);
             })
             .catch(error => {
@@ -202,14 +206,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     useEffect(() => {
         if (!raidData) return;
 
-        let filtered = [...raidData.entries];
-
-        if (selectedUnitType !== null) {
-            filtered = filtered.filter(entry => entry.unitId === selectedUnitType);
-        }
-
-        setFilteredEntries(filtered);
-    }, [raidData, selectedUnitType]);
+        setFilteredEntries([...raidData.entries]);
+    }, [raidData]);
 
     // AG Grid column definitions
     const columnDefs: ColDef<TacticusGuildRaidEntry>[] = [
@@ -294,6 +292,12 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: false,
             filter: true,
             width: 150,
+            cellRenderer: (params: ICellRendererParams<TacticusGuildRaidEntry>) => {
+                const heroes = params.data?.heroDetails
+                    .map((unit: TacticusGuildRaidUnit) => CharactersService.getUnit(unit.unitId))
+                    .filter((character): character is ICharacterData => character !== undefined);
+                return <UnitIconRenderer value={heroes ?? []} />;
+            },
             valueFormatter: params => params.value?.map((unit: TacticusGuildRaidUnit) => unit.unitId).join(', '),
         },
         {
@@ -301,7 +305,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             field: 'machineOfWarDetails',
             sortable: false,
             filter: true,
-            width: 150,
+            width: 80,
+            cellRenderer: (params: ICellRendererParams<TacticusGuildRaidEntry>) => {
+                const mow = params.data?.machineOfWarDetails?.unitId
+                    ? MowsService.resolveToStatic(params.data.machineOfWarDetails.unitId)
+                    : undefined;
+                const mowArray = mow ? [mow] : [];
+                return <UnitIconRenderer value={mowArray} />;
+            },
             valueFormatter: params => params.value?.unitId,
         },
         {
@@ -338,9 +349,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 180,
         },
     ];
-
-    // Get unique tiers for filter dropdown
-    const units = raidData === null ? [] : [...new Set(raidData.entries.map(entry => entry.unitId))].sort();
 
     const getTimeUntilNextBomb = (userSummary: UserSummary) => {
         const BOMB_COOLDOWN_HOURS = 18;
@@ -473,6 +481,11 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 80,
         },
         {
+            field: 'totalBattleCount',
+            headerName: 'Total Battles',
+            width: 80,
+        },
+        {
             field: 'bombCount',
             headerName: 'Bomb Attacks',
             width: 80,
@@ -498,11 +511,19 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         {
             headerName: 'Most Used Heroes',
             field: 'topHeroes',
-            width: 200,
+            width: 160,
+            cellRenderer: (params: ICellRendererParams<UserSummary>) => {
+                const topHeroes = [...params.value.entries()]
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5)
+                    .map(([key]) => CharactersService.getUnit(key))
+                    .filter((character): character is ICharacterData => character !== undefined);
+                return <UnitIconRenderer value={topHeroes} />;
+            },
             valueFormatter: params => {
                 const topHeroes = [...params.value.entries()]
                     .sort((a, b) => b[1] - a[1])
-                    .slice(0, 3)
+                    .slice(0, 5)
                     .map(([key]) => key);
                 return topHeroes.join(', ');
             },
@@ -510,11 +531,19 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         {
             headerName: 'Most Used MoW',
             field: 'topMachinesOfWar',
-            width: 200,
-            valueFormatter: params => {
+            width: 120,
+            cellRenderer: (params: ICellRendererParams<UserSummary>) => {
                 const topMoW = [...params.value.entries()]
                     .sort((a, b) => b[1] - a[1])
                     .slice(0, 3)
+                    .map(([key]) => MowsService.resolveToStatic(key))
+                    .filter((mow): mow is IMowStatic2 => mow !== undefined);
+                return <UnitIconRenderer value={topMoW} />;
+            },
+            valueFormatter: params => {
+                const topMoW = [...params.value.entries()]
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5)
                     .map(([key]) => key);
                 return topMoW.join(', ');
             },
@@ -579,6 +608,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                     battleBossCount: 0,
                     battleSideBossCount: 0,
                     bombCount: 0,
+                    totalBattleCount: 0,
                     highestDamage: 0,
                     bossDamage: 0,
                     sideBossDamage: 0,
@@ -599,6 +629,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 }
             } else {
                 // Battle attacks
+                userSummary.totalBattleCount += 1;
                 if (entry.encounterType === TacticusEncounterType.Boss) {
                     userSummary.battleBossCount += 1;
                     userSummary.bossDamage += entry.damageDealt;
@@ -742,7 +773,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         navigator.clipboard
             .writeText(usersWithBomb.join(' '))
-            .then(r => enqueueSnackbar('Copied', { variant: 'success' }));
+            .then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
     };
 
     const copyUsersWithToken = () => {
@@ -752,7 +783,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         navigator.clipboard
             .writeText(usersWithTokens.join(' '))
-            .then(r => enqueueSnackbar('Copied', { variant: 'success' }));
+            .then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
     };
 
     if (loading) {
@@ -796,27 +827,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                     </div>
                 </div>
             </div>
-
-            {/* Filters */}
-            {/* <div className="bg-white rounded-lg shadow p-4 mb-6">
-                <h2 className="text-lg font-semibold mb-3">Filters</h2>
-                <div className="flex flex-wrap gap-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Unit ID</label>
-                        <select
-                            className="block w-32 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                            value={selectedUnitType === null ? '' : selectedUnitType}
-                            onChange={e => setSelectedUnitType(e.target.value === '' ? null : e.target.value)}>
-                            <option value="">All Units</option>
-                            {units.map(unitId => (
-                                <option key={unitId} value={unitId}>
-                                    {unitId}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
-            </div> */}
 
             {/* Stats Dashboard */}
             {stats && (
@@ -959,7 +969,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                             control={
                                 <Checkbox
                                     checked={usePrefixForCopyUser}
-                                    onChange={event => setSePrefixForCopyUser(!usePrefixForCopyUser)}
+                                    onChange={_event => setSePrefixForCopyUser(!usePrefixForCopyUser)}
                                     inputProps={{ 'aria-label': 'controlled' }}
                                 />
                             }

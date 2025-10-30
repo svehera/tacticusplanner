@@ -42,7 +42,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
     /** Renders a table showing all materials currently unfarmable. */
     function renderMissingMaterials(): any {
         const missingMaterials: Set<string> = new Set<string>();
-        campaignDataArray.forEach((entry, ignored) => {
+        campaignDataArray.forEach(entry => {
             for (const savings of entry[1].savings) {
                 if (!savings.canFarmPrior) {
                     missingMaterials.add(CampaignsProgressionService.getReward(savings.battle));

@@ -1,5 +1,4 @@
 ﻿import HelpIcon from '@mui/icons-material/Help';
-import React from 'react';
 
 import { MenuItem } from 'src/v2/models/menu-item';
 
