@@ -11,8 +11,6 @@ import { MowTile } from 'src/v2/features/characters/components/mow-tile';
 
 import { CharacterTile } from './character-tile';
 
-import './characters-grid.scss';
-
 const CharactersGridFn = ({
     characters,
     blockedCharacters = [],
@@ -50,13 +48,17 @@ const CharactersGridFn = ({
     return (
         <div>
             <h4>Available ({unlockedCharacters.length})</h4>
-            <div className="characters-box mixed" style={{ zoom: isMobile ? 0.8 : 1 }}>
+            <div
+                className="[box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)] flex flex-wrap"
+                style={{ zoom: isMobile ? 0.8 : 1 }}>
                 {unlockedCharacters}
             </div>
 
             <Conditional condition={!!lockedCharacters.length}>
                 <h4>Locked ({lockedCharacters.length})</h4>
-                <div className="characters-box mixed" style={{ zoom: isMobile ? 0.8 : 1 }}>
+                <div
+                    className="[box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)] flex flex-wrap"
+                    style={{ zoom: isMobile ? 0.8 : 1 }}>
                     {lockedCharacters}
                 </div>
             </Conditional>
