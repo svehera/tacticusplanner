@@ -114,6 +114,7 @@ export class CampaignMapperService {
         if (ids.has('eventcampaign1')) return CampaignGroupType.adMechCE;
         if (ids.has('eventcampaign2')) return CampaignGroupType.tyranidCE;
         if (ids.has('eventcampaign3')) return CampaignGroupType.tauCE;
+        if (ids.has('eventcampaign4')) return CampaignGroupType.deathGuardCE;
         return 'none';
     }
 }
