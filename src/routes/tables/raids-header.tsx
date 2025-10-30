@@ -73,7 +73,7 @@ export const RaidsHeader: React.FC<Props> = ({
                     }
                     label={
                         <div className="flex-box gap5">
-                            {viewPreferences.goalsTableView ? (
+                            {viewPreferences.raidsTableView ? (
                                 <TableRowsIcon color="primary" />
                             ) : (
                                 <GridViewIcon color="primary" />
