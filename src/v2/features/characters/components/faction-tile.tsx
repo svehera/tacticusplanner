@@ -32,14 +32,14 @@ export const FactionsTile = ({
         const isMow = faction.units.length > 5;
 
         if (isComplete) {
-            return 'complete-faction';
+            return 'justify-start';
         }
         if (isIncomplete) {
-            return 'incomplete-faction';
+            return 'justify-start ps-[5px]';
         }
 
         if (isMow) {
-            return 'mow-faction';
+            return 'justify-start';
         }
         return '';
     }, [faction.units.length]);
@@ -70,7 +70,8 @@ export const FactionsTile = ({
                     </AccessibleTooltip>
                 </Conditional>
             </h4>
-            <div className={`characters-box ${factionClass}`}>
+            <div
+                className={`flex items-center [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)] [@media(max-width:500px)]:flex-wrap ${factionClass}`}>
                 {faction.units.map(unit => {
                     if (unit.unitType === UnitType.character) {
                         return (
