@@ -239,7 +239,7 @@ export const Goals = () => {
         }
 
         return badgeCounts;
-    }, [upgradeAbilities]);
+    }, [goalsEstimate]);
 
     return (
         <div>
@@ -355,7 +355,7 @@ export const Goals = () => {
                             <b>{totalXpAbilities}</b> XP Books)
                         </span>
                     </div>
-                    <div>
+                    <div style={{ width: '350px' }}>
                         <Accordion defaultExpanded={false}>
                             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                 <span>Total Ability Badges</span>
