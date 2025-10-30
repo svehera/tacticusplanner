@@ -321,7 +321,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             <MenuItem value={CampaignGroupType.tauCE} className="flex-box gap10">
                                 <span>T&apos;au Empire</span>
                             </MenuItem>
-                            <MenuItem value={CampaignGroupType.dgCE} className="flex-box gap10">
+                            <MenuItem value={CampaignGroupType.deathGuardCE} className="flex-box gap10">
                                 <span>Death Guard</span>
                             </MenuItem>
                         </Select>
