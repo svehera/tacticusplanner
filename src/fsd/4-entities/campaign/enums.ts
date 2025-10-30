@@ -106,6 +106,11 @@ export enum CampaignGroupType {
      * Campaign Event: T'au Empire storyline.
      */
     tauCE = "T'au Empire",
+
+    /**
+     * Campaign Event: Death Guard storyline.
+     */
+    dgCE = 'Death Guard',
 }
 
 /**
