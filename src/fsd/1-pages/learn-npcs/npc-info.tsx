@@ -32,7 +32,7 @@ export const NpcInfo: React.FC = () => {
                 cellRenderer: (params: ICellRendererParams<INpcData>) => {
                     const npc = params.data;
                     if (npc == undefined) return <></>;
-                    const imageUrl = getImageUrl(NpcService.getNpcIconPath(npc.name));
+                    const imageUrl = getImageUrl(npc.icon);
                     return <img src={imageUrl} width={60} height={80} />;
                 },
             },

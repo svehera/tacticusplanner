@@ -5,26 +5,23 @@ import blueStar from 'src/assets/images/stars/blue star.png';
 import redStar from 'src/assets/images/stars/red star small.png';
 import goldStar from 'src/assets/images/stars/star small.png';
 
-import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
+import { RarityStars, Rank } from '@/fsd/5-shared/model';
 import { getImageUrl } from '@/fsd/5-shared/ui';
 
 import { RankIcon } from '@/fsd/4-entities/character/@x/npc';
 
-import { NpcService } from './npcService';
-
 interface Props {
     name: string;
+    icon: string;
     rank: Rank;
-    rarity: Rarity;
     stars: RarityStars;
 }
 
 /**
- *
  * @param name The name of the NPC. Can be a boss, in which case the character
  *        portrait is used and @rarity is considered.
+ * @param icon The path to the NPC icon.
  * @param rank The rank (e.g. Rank.Stone1). Should never be Rank.Locked.
- * @param rarity The rarity of the NPC. Only used if @name is a boss.
  * @param stars The number of stars to display. If 0, no stars are displayed.
  * @returns An NPC portrait very similar to what you'd get in game. The portrait
  *          frame is 202(width) x 267(height) pixels. There is some overhang
@@ -32,16 +29,15 @@ interface Props {
  *          rank ribbon sticks out to the left as much as 15 pixels, and to the
  *          bottom as much as 7 pixels.
  */
-export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
+export const NpcPortrait: React.FC<Props> = ({ name, icon, rank, stars }) => {
     // All coordinates here are relative to the top-left corner (0, 0).
     const frameWidth = 202;
     const frameHeight = 267;
     const starSize = 45;
     const fifthStarSize = 52;
 
-    const getFrame = (rarity: Rarity) => {
-        const icons = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
-        const imageUrl = getImageUrl('rarity_frames/' + icons[rarity as number] + '.png');
+    const getFrame = () => {
+        const imageUrl = getImageUrl('rarity_frames/common.png');
         return (
             <img
                 src={imageUrl}
@@ -57,8 +53,9 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
         );
     };
 
-    const getNpcPortrait = (name: string) => {
-        const imageUrl = getImageUrl(NpcService.getNpcIconPath(name));
+    const getNpcPortrait = () => {
+        console.trace(`name: ${name}, icon: ${icon}`);
+        const imageUrl = getImageUrl(icon);
         return (
             <img
                 src={imageUrl}
@@ -121,7 +118,7 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
         return <>{starImages}</>;
     };
 
-    const getStars = (stars: RarityStars) => {
+    const getStars = () => {
         if (stars === RarityStars.None) return <></>;
         if (stars === RarityStars.MythicWings) return getMythicWings();
         let numStars = stars as number;
@@ -131,6 +128,10 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
         if (numStars > 5) {
             numStars -= 5;
             star = redStar;
+        }
+        if (numStars > 5) {
+            numStars -= 5;
+            star = blueStar;
         }
         if (numStars == 5) {
             return get5Stars(star, starTop, overlap);
@@ -162,9 +163,8 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
     return (
         <div style={{ width: frameWidth + 40, height: frameHeight + 40 }}>
             <div style={{ position: 'relative', top: 20, left: 20 }}>
-                {getFrame(rarity)}
-                {getNpcPortrait(name)}
-                {getStars(stars)}
+                {getNpcPortrait()}
+                {getStars()}
                 {getRank()}
             </div>
         </div>

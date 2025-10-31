@@ -1,9 +1,9 @@
 import React, { JSX, useMemo } from 'react';
 
-import { Rarity, Rank } from '@/fsd/5-shared/model';
+import { Rank } from '@/fsd/5-shared/model';
 
 import { IDetailedEnemy } from '@/fsd/4-entities/campaign';
-import { NpcPortrait } from '@/fsd/4-entities/npc';
+import { NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
 
 interface Props {
     enemies: IDetailedEnemy[];
@@ -70,16 +70,6 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
         return Rank.Locked;
     };
 
-    /** @returns The enum rep of a rarity. Defaults to Common. */
-    const parseRarity = (rarity: string): Rarity => {
-        if (rarity == 'Common') return Rarity.Common;
-        if (rarity == 'Uncommon') return Rarity.Uncommon;
-        if (rarity == 'Rare') return Rarity.Rare;
-        if (rarity == 'Epic') return Rarity.Epic;
-        if (rarity == 'Legendary') return Rarity.Legendary;
-        return Rarity.Common;
-    };
-
     /** @returns The grid of enemies, as an array without any scaling. */
     const getEnemies = () => {
         let row = 0;
@@ -88,15 +78,17 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
         let enemiesInRow = 0;
         const elems: JSX.Element[] = [];
         enemies.forEach(enemy => {
+            const enemyIcon = NpcService.getNpcById(enemy.id)?.icon ?? 'npc_icons/missing.png';
+            console.log(`enemy: ${enemy.name}, icon: ${enemyIcon}`);
             for (let i = 0; i < enemy.count; i++) {
                 elems.push(
                     <div
-                        key={row * maxPerRow + i + enemy.name + enemy.rank + enemy.rarity}
+                        key={row * maxPerRow + i + enemy.name + enemy.rank}
                         style={{ position: 'absolute', left: left, top: top }}>
                         <NpcPortrait
                             name={enemy.name}
+                            icon={enemyIcon}
                             rank={parseRank(enemy.rank)}
-                            rarity={parseRarity(enemy.rarity ?? 'Common')}
                             stars={enemy.stars}
                         />
                     </div>
