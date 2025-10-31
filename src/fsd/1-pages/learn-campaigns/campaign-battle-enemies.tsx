@@ -90,12 +90,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
                     <div
                         key={keyPrefix + battleId + (row * maxPerRow + i) + enemy.name + enemy.rank}
                         style={{ position: 'absolute', left: left, top: top }}>
-                        <NpcPortrait
-                            name={enemy.name}
-                            icon={enemyIcon}
-                            rank={parseRank(enemy.rank)}
-                            stars={enemy.stars}
-                        />
+                        <NpcPortrait id={enemy.id} rank={parseRank(enemy.rank)} stars={enemy.stars} />
                     </div>
                 );
                 left += frameWidth + horizontalMargin;

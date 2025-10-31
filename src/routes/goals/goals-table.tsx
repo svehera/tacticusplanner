@@ -50,7 +50,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
         b: number;
     }
 
-    const { characters } = useContext(StoreContext);
+    const { characters, viewPreferences } = useContext(StoreContext);
 
     const getUnit = (unitId: string): ICharacter2 | undefined => {
         return characters.find(x => x.snowprintId! === unitId);
@@ -533,19 +533,35 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
     };
 
     const getRowStyle = (params: any) => {
-        if (!goalsColorCoding) return '';
+        const isDarkMode: boolean = viewPreferences.theme === 'dark';
+        if (!goalsColorCoding)
+            return {
+                background: getColorString({
+                    r: isDarkMode ? 0 : 255,
+                    g: isDarkMode ? 0 : 255,
+                    b: isDarkMode ? 0 : 255,
+                }),
+            };
         const { data } = params;
         const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
-        const kBgColors: Color[] = [
-            { r: 0, g: 64, b: 0 },
-            { r: 64, g: 64, b: 0 },
-            { r: 64, g: 0, b: 0 },
-            { r: 0, g: 0, b: 0 },
-            { r: 0, g: 0, b: 0 },
-        ];
+        const kBgColors: Color[] = isDarkMode
+            ? [
+                  { r: 0, g: 64, b: 0 },
+                  { r: 64, g: 64, b: 0 },
+                  { r: 64, g: 0, b: 0 },
+                  { r: 0, g: 0, b: 0 },
+                  { r: 0, g: 0, b: 0 },
+              ]
+            : [
+                  { r: 0, g: 196, b: 0 },
+                  { r: 196, g: 196, b: 0 },
+                  { r: 196, g: 0, b: 0 },
+                  { r: 0, g: 0, b: 0 },
+                  { r: 0, g: 0, b: 0 },
+              ];
         if (goalEstimate) {
             if (!goalEstimate.daysLeft) {
-                return '';
+                return { background: getColorString(kBgColors[kBgColors.length - 1]) };
             }
 
             const nextDate = new Date();
