@@ -48,6 +48,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
         r: number;
         g: number;
         b: number;
+        a: number;
     }
 
     const { characters, viewPreferences } = useContext(StoreContext);
@@ -525,71 +526,67 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             r: color1.r + factor * (color2.r - color1.r),
             g: color1.g + factor * (color2.g - color1.g),
             b: color1.b + factor * (color2.b - color1.b),
+            a: color1.a + factor * (color2.a - color1.a),
         };
     };
 
     const getColorString = (color: Color): string => {
-        return `rgb(${Math.round(color.r)}, ${Math.round(color.g)}, ${Math.round(color.b)})`;
+        return `rgba(${Math.round(color.r)}, ${Math.round(color.g)}, ${Math.round(color.b)}, ${color.a})`;
     };
 
-    const getRowStyle = (params: any) => {
-        const isDarkMode: boolean = viewPreferences.theme === 'dark';
-        if (!goalsColorCoding)
-            return {
-                background: getColorString({
-                    r: isDarkMode ? 0 : 255,
-                    g: isDarkMode ? 0 : 255,
-                    b: isDarkMode ? 0 : 255,
-                }),
-            };
-        const { data } = params;
-        const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
-        const kBgColors: Color[] = isDarkMode
-            ? [
-                  { r: 0, g: 64, b: 0 },
-                  { r: 64, g: 64, b: 0 },
-                  { r: 64, g: 0, b: 0 },
-                  { r: 0, g: 0, b: 0 },
-                  { r: 0, g: 0, b: 0 },
-              ]
-            : [
-                  { r: 0, g: 196, b: 0 },
-                  { r: 196, g: 196, b: 0 },
-                  { r: 196, g: 0, b: 0 },
-                  { r: 0, g: 0, b: 0 },
-                  { r: 0, g: 0, b: 0 },
-              ];
-        if (goalEstimate) {
-            if (!goalEstimate.daysLeft) {
-                return { background: getColorString(kBgColors[kBgColors.length - 1]) };
-            }
+    const getRowStyle = useMemo(
+        () => (params: any) => {
+            if (!goalsColorCoding)
+                return {
+                    background: getColorString({
+                        r: 0,
+                        g: 0,
+                        b: 0,
+                        a: 0,
+                    }),
+                };
+            const { data } = params;
+            const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
+            const kBgColors: Color[] = [
+                { r: 0, g: 255, b: 0, a: 0.25 },
+                { r: 255, g: 255, b: 0, a: 0.25 },
+                { r: 255, g: 0, b: 0, a: 0.25 },
+                { r: 0, g: 0, b: 0, a: 0.25 },
+                { r: 0, g: 0, b: 0, a: 0.25 },
+            ];
+            if (goalEstimate) {
+                if (!goalEstimate.daysLeft) {
+                    return { background: getColorString(kBgColors[kBgColors.length - 1]) };
+                }
 
-            const nextDate = new Date();
-            nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
-            const kStartDates = LegendaryEventService.getLegendaryEventStartDates();
-            for (let i: number = 0; i < kStartDates.length && i < kBgColors.length - 1; ++i) {
-                if (nextDate < kStartDates[i]) {
-                    return { background: getColorString(kBgColors[i]) };
-                }
-                if (
-                    nextDate <
-                    new Date(kStartDates[i].getTime() + LegendaryEventService.getLegendaryEventDurationMillis())
-                ) {
-                    return {
-                        background: getColorString(
-                            interpolateColor(
-                                kBgColors[i],
-                                kBgColors[i + 1],
-                                (nextDate.getTime() - kStartDates[i].getTime()) /
-                                    LegendaryEventService.getLegendaryEventDurationMillis()
-                            )
-                        ),
-                    };
+                const nextDate = new Date();
+                nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
+                const kStartDates = LegendaryEventService.getLegendaryEventStartDates();
+                for (let i: number = 0; i < kStartDates.length && i < kBgColors.length - 1; ++i) {
+                    if (nextDate < kStartDates[i]) {
+                        return { background: getColorString(kBgColors[i]) };
+                    }
+                    if (
+                        nextDate <
+                        new Date(kStartDates[i].getTime() + LegendaryEventService.getLegendaryEventDurationMillis())
+                    ) {
+                        return {
+                            background: getColorString(
+                                interpolateColor(
+                                    kBgColors[i],
+                                    kBgColors[i + 1],
+                                    (nextDate.getTime() - kStartDates[i].getTime()) /
+                                        LegendaryEventService.getLegendaryEventDurationMillis()
+                                )
+                            ),
+                        };
+                    }
                 }
             }
-        }
-        return { background: getColorString(kBgColors[kBgColors.length - 1]) };
-    };
+            return { background: getColorString(kBgColors[kBgColors.length - 1]) };
+        },
+        [estimate, goalsColorCoding, viewPreferences]
+    );
 
     const baseRowHeight = !rows.some(row => [PersonalGoalType.CharacterAbilities].includes(row.type)) ? 60 : 90;
 
