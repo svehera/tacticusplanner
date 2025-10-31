@@ -4,8 +4,6 @@ import { IFaction, IUnit } from '../characters.models';
 
 import { FactionsTile } from './faction-tile';
 
-import './factions-grid.scss';
-
 const FactionsGridFn = ({
     factions,
     onCharacterClick,
@@ -14,7 +12,7 @@ const FactionsGridFn = ({
     onCharacterClick?: (character: IUnit) => void;
 }) => {
     return (
-        <div className="factions-grid">
+        <div className="grid place-content-around gap-x-6 grid-cols-[repeat(auto-fill,525px)]">
             {factions.map(x => (
                 <FactionsTile key={x.name} faction={x} onCharacterClick={onCharacterClick} />
             ))}

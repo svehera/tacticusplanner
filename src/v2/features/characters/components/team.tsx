@@ -5,8 +5,6 @@ import { ICharacter2 } from 'src/models/interfaces';
 import { unsetCharacter } from 'src/v2/features/characters/characters.constants';
 import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
 
-import './team.scss';
-
 type Props = {
     characters: ICharacter2[];
     size?: 5 | 7;
@@ -18,7 +16,7 @@ export const Team: React.FC<Props> = ({ characters, size = 5, onSetSlotClick, on
     const fallbackCharacter = unsetCharacter as ICharacter2;
 
     return (
-        <div className="team-characters-box">
+        <div className="flex items-center justify-center">
             {Array.from({ length: size }, (_, i) => {
                 const char = characters[i];
 
