@@ -43,7 +43,7 @@ export const FactionsTile = ({
     }, [faction.units.length]);
     const { showBsValue, showPower } = useContext(CharactersViewContext);
     return (
-        <div className="min-w-[375px] max-w-[525px] [@media(max-width:500px)]:max-w-[375px]">
+        <div className="min-w-[375px] max-w-[525px] max-[500px]:max-w-[375px]">
             <h4
                 className="text-[white] mb-0 mt-[5px] border-t-[2px_solid_gold] font-medium flex items-center justify-between"
                 style={{ backgroundColor: faction.color }}>
@@ -71,7 +71,7 @@ export const FactionsTile = ({
                 </Conditional>
             </h4>
             <div
-                className={`flex items-center [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)] [@media(max-width:500px)]:flex-wrap ${factionClass}`}>
+                className={`flex items-center [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)] max-[500px]:flex-wrap ${factionClass}`}>
                 {faction.units.map(unit => {
                     if (unit.unitType === UnitType.character) {
                         return (
