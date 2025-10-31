@@ -1,11 +1,10 @@
-﻿import { Info } from '@mui/icons-material';
-import GridViewIcon from '@mui/icons-material/GridView';
+﻿import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import { FormControlLabel, IconButton, Switch, Tooltip } from '@mui/material';
+import { FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import { sum } from 'lodash';
-import React, { useContext, useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 

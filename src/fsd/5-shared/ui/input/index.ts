@@ -1,4 +1,4 @@
-export { Checkbox, type CheckboxProps, CheckboxGroup, type CheckboxGroupProps } from './checkbox';
-export { TextField, type TextFieldProps } from './text-field';
+export { Checkbox, CheckboxGroup } from './checkbox';
+export { TextField } from './text-field';
 export { NumberInput } from './number-input';
 export { MultipleSelect } from './multiple-select';

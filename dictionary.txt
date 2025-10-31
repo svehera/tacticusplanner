@@ -120,7 +120,6 @@ deathwing
 defences
 defensor
 demetrian
-Despolier  # incorrect but retained due to whats-new.json
 devine
 diagonalplane
 dishonoured
@@ -360,6 +359,7 @@ rankup
 razielesaint
 razorsharp
 redemptor
+Redwyne
 regen
 reinlein
 reliquant

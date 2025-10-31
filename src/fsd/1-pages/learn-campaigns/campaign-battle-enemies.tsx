@@ -6,6 +6,8 @@ import { IDetailedEnemy } from '@/fsd/4-entities/campaign';
 import { NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
 
 interface Props {
+    battleId: string;
+    keyPrefix: string;
     enemies: IDetailedEnemy[];
     scale: number;
 }
@@ -14,11 +16,13 @@ interface Props {
  * Displays a grid of enemies, similar to what you see in game when you open a
  * campaign-battle dialog.
  *
+ * @param keyPrefix A prefix to use for keys only.
+ * @param battleId The ID of the battle. Used for keys only.
  * @param enemies The enemies to display. Each enemy must have a name, rank,
  *                and stars. Bosses can also have a rarity.
  * @param scale The scale of the grid. 1 is full size (which can be very large).
  */
-export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
+export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, enemies, scale }) => {
     // The total number of enemies in this battle.
     const numEnemies = useMemo(() => enemies.reduce((acc, enemy) => acc + enemy.count, 0), [enemies]);
 
@@ -67,6 +71,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
         if (rank.startsWith('Silver')) return Rank.Silver1 + parseInt(rank[7]) - 1;
         if (rank.startsWith('Gold')) return Rank.Gold1 + parseInt(rank[5]) - 1;
         if (rank.startsWith('Diamond')) return Rank.Diamond1 + parseInt(rank[8]) - 1;
+        if (rank.startsWith('Adamantine')) return Rank.Adamantine1 + parseInt(rank[11]) - 1;
         return Rank.Locked;
     };
 
@@ -83,7 +88,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
             for (let i = 0; i < enemy.count; i++) {
                 elems.push(
                     <div
-                        key={row * maxPerRow + i + enemy.name + enemy.rank}
+                        key={keyPrefix + battleId + (row * maxPerRow + i) + enemy.name + enemy.rank}
                         style={{ position: 'absolute', left: left, top: top }}>
                         <NpcPortrait
                             name={enemy.name}

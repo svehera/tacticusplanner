@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { FaqItem } from './faq-item';
+﻿import { FaqItem } from './faq-item';
 import { IFaqItem } from './faq.models';
 
 export const FaqCategory = ({ categoryName, items }: { categoryName: string; items: IFaqItem[] }) => (

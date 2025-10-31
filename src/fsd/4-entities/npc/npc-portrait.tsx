@@ -1,7 +1,8 @@
 /* eslint-disable import-x/no-internal-modules */
 import React from 'react';
 
-import blueStar from 'src/assets/images/stars/blue star.png';
+import blueStar from 'src/assets/images/snowprint_assets/stars/ui_icon_star_legendary_large.png';
+import mythicWings from 'src/assets/images/snowprint_assets/stars/ui_icon_star_mythic.png';
 import redStar from 'src/assets/images/stars/red star small.png';
 import goldStar from 'src/assets/images/stars/star small.png';
 
@@ -10,17 +11,16 @@ import { getImageUrl } from '@/fsd/5-shared/ui';
 
 import { RankIcon } from '@/fsd/4-entities/character/@x/npc';
 
+import { NpcService } from './npc-service';
+
 interface Props {
-    name: string;
-    icon: string;
+    id: string;
     rank: Rank;
     stars: RarityStars;
 }
 
 /**
- * @param name The name of the NPC. Can be a boss, in which case the character
- *        portrait is used and @rarity is considered.
- * @param icon The path to the NPC icon.
+ * @param id The snowprint ID of the NPC.
  * @param rank The rank (e.g. Rank.Stone1). Should never be Rank.Locked.
  * @param stars The number of stars to display. If 0, no stars are displayed.
  * @returns An NPC portrait very similar to what you'd get in game. The portrait
@@ -29,33 +29,15 @@ interface Props {
  *          rank ribbon sticks out to the left as much as 15 pixels, and to the
  *          bottom as much as 7 pixels.
  */
-export const NpcPortrait: React.FC<Props> = ({ name, icon, rank, stars }) => {
+export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
     // All coordinates here are relative to the top-left corner (0, 0).
     const frameWidth = 202;
     const frameHeight = 267;
     const starSize = 45;
     const fifthStarSize = 52;
 
-    const getFrame = () => {
-        const imageUrl = getImageUrl('rarity_frames/common.png');
-        return (
-            <img
-                src={imageUrl}
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: frameWidth,
-                    height: frameHeight,
-                    zIndex: 1,
-                }}
-            />
-        );
-    };
-
     const getNpcPortrait = () => {
-        console.trace(`name: ${name}, icon: ${icon}`);
-        const imageUrl = getImageUrl(icon);
+        const imageUrl = getImageUrl(NpcService.getNpcById(id)?.icon ?? '');
         return (
             <img
                 src={imageUrl}
@@ -72,7 +54,7 @@ export const NpcPortrait: React.FC<Props> = ({ name, icon, rank, stars }) => {
         const mythicWingsTop = -35;
         return (
             <img
-                src={blueStar}
+                src={mythicWings}
                 style={{
                     pointerEvents: 'none',
                     position: 'absolute',
@@ -105,7 +87,6 @@ export const NpcPortrait: React.FC<Props> = ({ name, icon, rank, stars }) => {
     };
 
     const get5Stars = (star: string, top: number, overlap: number) => {
-        const totalWidth = fifthStarSize + (starSize - overlap) * 4;
         let left = frameWidth / 2 - fifthStarSize / 2 - starSize * 2 + overlap * 2;
         const sizeDiff = fifthStarSize - starSize;
         const starImages = [];
@@ -135,6 +116,10 @@ export const NpcPortrait: React.FC<Props> = ({ name, icon, rank, stars }) => {
         }
         if (numStars == 5) {
             return get5Stars(star, starTop, overlap);
+        }
+        if (numStars > 5) {
+            star = blueStar;
+            numStars -= 5;
         }
         const totalWidth = starSize * numStars - overlap * (numStars - 1);
         let left = frameWidth / 2 - totalWidth / 2;

@@ -1,6 +1,6 @@
 ﻿import { Card, CardContent, CardHeader } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 import Zoom from 'react-medium-image-zoom';
 import { useNavigate } from 'react-router-dom';

@@ -10,6 +10,7 @@
         "strict": true,
         "forceConsistentCasingInFileNames": true,
         "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
         "module": "esnext",
         "moduleResolution": "node",
         "resolveJsonModule": true,
@@ -19,7 +20,7 @@
         "jsx": "react-jsx",
         "paths": {
             "@/*": ["./src/*"],
-            "src/*": ["./src/*"],
+            "src/*": ["./src/*"]
         }
     },
     "include": ["src"]

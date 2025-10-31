@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { tacticusIcons } from './assets';
+﻿import { tacticusIcons } from './assets';
 
 export const MiscIcon = ({
     icon,

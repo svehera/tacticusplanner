@@ -11,7 +11,6 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.1",
     "@mui/material": "^6.4.1",
-    "@mui/x-charts": "^7.28.0",
     "@nivo/line": "^0.88.0",
     "ag-grid-community": "^33.1.1",
     "ag-grid-react": "^33.1.1",
@@ -45,10 +44,7 @@
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
     "@tailwindcss/postcss": "^4.0.0",
-    "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
     "@types/lodash": "^4.17.14",
     "@types/node": "^18.19.130",
     "@types/react": "^19.0.7",
@@ -81,10 +77,9 @@
     "postcss": "^8.5.1",
     "prettier": "^3.5.3",
     "sass": "^1.83.4",
-    "sharp": "^0.33.5",
-    "svgo": "^3.3.2",
+    "sharp": "^0.34.4",
+    "svgo": "^4.0.0",
     "tailwindcss": "^4.0.0",
-    "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "vite": "^5.4.14",
     "vite-bundle-visualizer": "^1.2.1",
@@ -102,18 +97,16 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
+    "tsc": "tsc --noEmit",
+    "tsc:watch": "tsc --noEmit --watch",
     "analyze": "vite-bundle-visualizer -c ./vite.config.mts",
     "preview": "vite preview",
     "lint-ci": "eslint src --quiet",
     "lint": "eslint src --quiet --fix",
     "format": "prettier src --write",
     "format-ci": "prettier src --check",
-    "knip": "knip"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
+    "knip": "knip",
+    "spellcheck": "cspell ."
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,css,scss,json}": [

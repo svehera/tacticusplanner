@@ -1,5 +1,4 @@
-﻿import React from 'react';
-import './dirty-dozen-score.css';
+﻿import './dirty-dozen-score.css';
 
 export const Score = ({ value }: { value: number }) => {
     let backgroundColor: string;

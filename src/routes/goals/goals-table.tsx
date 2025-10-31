@@ -63,10 +63,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
         return getUnit(unitId)?.rank ?? Rank.Locked;
     };
 
-    const getUnitRarity = (unitId: string): number => {
-        return getUnit(unitId)?.rarity ?? 0;
-    };
-
     const getGoalInfo = (goal: CharacterRaidGoalSelect, goalEstimate: IGoalEstimate) => {
         switch (goal.type) {
             case PersonalGoalType.Ascend: {
@@ -296,7 +292,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <MiscIcon icon="health" width={15} height={15} />
                                     {StatsCalculatorService.calculateHealth(
                                         data.unitId,
-                                        data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankStart,
                                         StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
@@ -304,7 +299,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <ArrowForward width={15} height={15} />
                                     {StatsCalculatorService.calculateHealth(
                                         data.unitId,
-                                        data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankEnd,
                                         data.rankPoint5 ? 1 : 0
@@ -317,7 +311,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <MiscIcon icon="health" width={15} height={15} />
                                     {StatsCalculatorService.calculateHealth(
                                         data.unitId,
-                                        data.rarityStart,
                                         data.starsStart,
                                         getUnitRank(data.unitId),
                                         StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
@@ -325,7 +318,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <ArrowForward width={15} height={15} />
                                     {StatsCalculatorService.calculateHealth(
                                         data.unitId,
-                                        data.rarityEnd,
                                         data.starsEnd,
                                         getUnitRank(data.unitId),
                                         StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
@@ -348,7 +340,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <MiscIcon icon="damage" width={15} height={15} />
                                     {StatsCalculatorService.calculateDamage(
                                         data.unitId,
-                                        data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankStart,
                                         StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
@@ -356,7 +347,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <ArrowForward width={15} height={15} />
                                     {StatsCalculatorService.calculateDamage(
                                         data.unitId,
-                                        data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankEnd,
                                         data.rankPoint5 ? 1 : 0
@@ -369,7 +359,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <MiscIcon icon="damage" width={15} height={15} />
                                     {StatsCalculatorService.calculateDamage(
                                         data.unitId,
-                                        data.rarityStart,
                                         data.starsStart,
                                         getUnitRank(data.unitId),
                                         StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
@@ -377,7 +366,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <ArrowForward width={15} height={15} />
                                     {StatsCalculatorService.calculateDamage(
                                         data.unitId,
-                                        data.rarityEnd,
                                         data.starsEnd,
                                         getUnitRank(data.unitId),
                                         StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
@@ -400,7 +388,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <MiscIcon icon="armour" width={15} height={15} />
                                     {StatsCalculatorService.calculateArmor(
                                         data.unitId,
-                                        data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankStart,
                                         StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
@@ -408,7 +395,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <ArrowForward width={15} height={15} />
                                     {StatsCalculatorService.calculateArmor(
                                         data.unitId,
-                                        data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankEnd,
                                         data.rankPoint5 ? 1 : 0
@@ -421,7 +407,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <MiscIcon icon="armour" width={15} height={15} />
                                     {StatsCalculatorService.calculateArmor(
                                         data.unitId,
-                                        data.rarityStart,
                                         data.starsStart,
                                         getUnitRank(data.unitId),
                                         StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
@@ -429,7 +414,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     <ArrowForward width={15} height={15} />
                                     {StatsCalculatorService.calculateArmor(
                                         data.unitId,
-                                        data.rarityEnd,
                                         data.starsEnd,
                                         getUnitRank(data.unitId),
                                         StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))

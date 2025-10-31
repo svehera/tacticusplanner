@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { LeTokenMilestones } from './le-token-milestones';
 import { LeTokenTable } from './le-token-table';
 import { TokenUse } from './token-estimation-service';

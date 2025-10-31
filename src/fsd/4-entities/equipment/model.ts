@@ -23,7 +23,7 @@ export interface IEquipmentStats {
  * tells you how much it costs to get here from the previous level by forging (or
  * ascending).
  */
-export interface IEquipmentLevel {
+interface IEquipmentLevel {
     goldCost: number;
     salvageCost: number;
     mythicSalvageCost: number;

@@ -10,5 +10,5 @@
         }
     ],
     "dictionaries": ["dictionary"],
-    "ignorePaths": ["node_modules", "./dictionary.txt"]
+    "ignorePaths": ["node_modules", "./dictionary.txt", "dist/assets/**"]
 }

@@ -5,6 +5,5 @@ export type {
     ILegendaryEventTrackRequirement,
     ILreTeam,
     ILegendaryEventSelectedRequirements,
-    SelectedRequirements,
     IAutoTeamsPreferences,
 } from './lre.model';
