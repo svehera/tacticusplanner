@@ -20,8 +20,7 @@ interface Props {
 }
 
 /**
- *
- * @param iod The snowprint ID of the NPC.
+ * @param id The snowprint ID of the NPC.
  * @param rank The rank (e.g. Rank.Stone1). Should never be Rank.Locked.
  * @param stars The number of stars to display. If 0, no stars are displayed.
  * @returns An NPC portrait very similar to what you'd get in game. The portrait
@@ -36,23 +35,6 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
     const frameHeight = 267;
     const starSize = 45;
     const fifthStarSize = 52;
-
-    const getFrame = () => {
-        const imageUrl = getImageUrl('rarity_frames/common.png');
-        return (
-            <img
-                src={imageUrl}
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: frameWidth,
-                    height: frameHeight,
-                    zIndex: 1,
-                }}
-            />
-        );
-    };
 
     const getNpcPortrait = () => {
         const imageUrl = getImageUrl(NpcService.getNpcById(id)?.icon ?? '');
@@ -117,7 +99,7 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
         return <>{starImages}</>;
     };
 
-    const getStars = (stars: RarityStars) => {
+    const getStars = () => {
         if (stars === RarityStars.None) return <></>;
         if (stars === RarityStars.MythicWings) return getMythicWings();
         let numStars = stars as number;
@@ -127,6 +109,10 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
         if (numStars > 5) {
             numStars -= 5;
             star = redStar;
+        }
+        if (numStars > 5) {
+            numStars -= 5;
+            star = blueStar;
         }
         if (numStars == 5) {
             return get5Stars(star, starTop, overlap);
@@ -162,9 +148,8 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
     return (
         <div style={{ width: frameWidth + 40, height: frameHeight + 40 }}>
             <div style={{ position: 'relative', top: 20, left: 20 }}>
-                {getFrame()}
                 {getNpcPortrait()}
-                {getStars(stars)}
+                {getStars()}
                 {getRank()}
             </div>
         </div>

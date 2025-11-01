@@ -10,6 +10,33 @@ function isUnfinishedScheduledEvent(event: ILegendaryEventStatic): event is Unfi
 }
 
 export class LegendaryEventService {
+    /**
+     * @returns the start dates of the active event (if there is one in progress at the moment) and
+     *          the next several events.
+     */
+    public static getLegendaryEventStartDates(): Date[] {
+        const kMaxEventsToReturn = 3;
+        const activeEvent = this.getActiveEvent();
+        const startDates: Date[] = [];
+        if (activeEvent && activeEvent.nextEventDateUtc) {
+            startDates.push(new Date(activeEvent.nextEventDateUtc));
+        }
+        for (let i = 1; i < kMaxEventsToReturn; i++) {
+            startDates.push(new Date(startDates[i - 1].getTime() + this.getTimeBetweenLegendaryEvents()));
+        }
+        return startDates;
+    }
+
+    /** @returns the number of milliseconds in a legendary event. */
+    public static getLegendaryEventDurationMillis(): number {
+        return 7 * 24 * 60 * 60 * 1000; // 7 days
+    }
+
+    /** @returns the number of milliseconds in a legendary event. */
+    public static getTimeBetweenLegendaryEvents(): number {
+        return 5 * 7 * 24 * 60 * 60 * 1000; // 5 weeks
+    }
+
     public static getActiveEvent(events?: ILegendaryEventStatic[]): ILegendaryEventStatic | undefined {
         const sevenDaysAgoTs = Date.now() - 7 * DAY_MS;
         const sortedEvents = (events ?? allLegendaryEvents)
