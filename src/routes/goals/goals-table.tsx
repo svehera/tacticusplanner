@@ -20,7 +20,6 @@ import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
-import { LegendaryEventService } from '@/fsd/4-entities/lre';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
@@ -35,6 +34,8 @@ import { XpTotal } from 'src/v2/features/goals/xp-total';
 
 import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
+import { GoalService } from './goal-service';
+
 interface Props {
     rows: CharacterRaidGoalSelect[];
     estimate: IGoalEstimate[];
@@ -43,14 +44,6 @@ interface Props {
 }
 
 export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, menuItemSelect }) => {
-    /** An RGB Color with values between 0 and 255. */
-    interface Color {
-        r: number;
-        g: number;
-        b: number;
-        a: number;
-    }
-
     const { characters, viewPreferences } = useContext(StoreContext);
 
     const getUnit = (unitId: string): ICharacter2 | undefined => {
@@ -515,75 +508,14 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
         ];
     }, [rows]);
 
-    /**
-     * @color1 the first color. Returned when factor = 0.
-     * @color2 the second color. Returned when factor = 1.
-     * @factor the interpolation factor in the range [0, 1].
-     * @returns an RGB color (a tuple with, r, g, b) linearly interpolated between color1 and color2 based on factor.
-     */
-    const interpolateColor = (color1: Color, color2: Color, factor: number) => {
-        return {
-            r: color1.r + factor * (color2.r - color1.r),
-            g: color1.g + factor * (color2.g - color1.g),
-            b: color1.b + factor * (color2.b - color1.b),
-            a: color1.a + factor * (color2.a - color1.a),
-        };
-    };
-
-    const getColorString = (color: Color): string => {
-        return `rgba(${Math.round(color.r)}, ${Math.round(color.g)}, ${Math.round(color.b)}, ${color.a})`;
-    };
-
     const getRowStyle = useMemo(
         () => (params: any) => {
-            if (!goalsColorCoding)
-                return {
-                    background: getColorString({
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 0,
-                    }),
-                };
-            const { data } = params;
-            const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
-            const kBgColors: Color[] = [
-                { r: 0, g: 255, b: 0, a: 0.25 },
-                { r: 255, g: 255, b: 0, a: 0.25 },
-                { r: 255, g: 0, b: 0, a: 0.25 },
-                { r: 0, g: 0, b: 0, a: 0.25 },
-                { r: 0, g: 0, b: 0, a: 0.25 },
-            ];
-            if (goalEstimate) {
-                if (!goalEstimate.daysLeft) {
-                    return { background: getColorString(kBgColors[kBgColors.length - 1]) };
-                }
-
-                const nextDate = new Date();
-                nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
-                const kStartDates = LegendaryEventService.getLegendaryEventStartDates();
-                for (let i: number = 0; i < kStartDates.length && i < kBgColors.length - 1; ++i) {
-                    if (nextDate < kStartDates[i]) {
-                        return { background: getColorString(kBgColors[i]) };
-                    }
-                    if (
-                        nextDate <
-                        new Date(kStartDates[i].getTime() + LegendaryEventService.getLegendaryEventDurationMillis())
-                    ) {
-                        return {
-                            background: getColorString(
-                                interpolateColor(
-                                    kBgColors[i],
-                                    kBgColors[i + 1],
-                                    (nextDate.getTime() - kStartDates[i].getTime()) /
-                                        LegendaryEventService.getLegendaryEventDurationMillis()
-                                )
-                            ),
-                        };
-                    }
-                }
-            }
-            return { background: getColorString(kBgColors[kBgColors.length - 1]) };
+            return {
+                background: GoalService.getBackgroundColor(
+                    goalsColorCoding,
+                    estimate.find(x => x.goalId === params.data?.goalId)
+                ),
+            };
         },
         [estimate, goalsColorCoding, viewPreferences]
     );

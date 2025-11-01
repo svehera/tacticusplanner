@@ -33,6 +33,8 @@ import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
 
+import { GoalService } from './goal-service';
+
 export const Goals = () => {
     const {
         goals,
@@ -302,6 +304,10 @@ export const Goals = () => {
                                     goal={goal}
                                     goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                    bgColor={GoalService.getBackgroundColor(
+                                        viewPreferences.goalsBattlePassSeasonView ?? false,
+                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                    )}
                                 />
                             ))}
                         </div>
@@ -340,6 +346,10 @@ export const Goals = () => {
                                     goal={goal}
                                     goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                    bgColor={GoalService.getBackgroundColor(
+                                        viewPreferences.goalsBattlePassSeasonView ?? false,
+                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                    )}
                                 />
                             ))}
                         </div>
@@ -374,6 +384,10 @@ export const Goals = () => {
                                     goal={goal}
                                     goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                    bgColor={GoalService.getBackgroundColor(
+                                        viewPreferences.goalsBattlePassSeasonView ?? false,
+                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                    )}
                                 />
                             ))}
                         </div>
