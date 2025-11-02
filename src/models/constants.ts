@@ -198,6 +198,7 @@ export const defaultData: IPersonalData2 = {
         goalsTableView: false,
         campaignsTableView: false,
         goalsBattlePassSeasonView: false,
+        raidsTableView: false,
         lreGridView: false,
         lreGoalsPreview: false,
         lreTileShowUnitIcon: true,
