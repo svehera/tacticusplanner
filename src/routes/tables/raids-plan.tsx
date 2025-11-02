@@ -65,12 +65,6 @@ export const RaidsPlan: React.FC<Props> = ({
         []
     );
 
-    interface Material {
-        id: number;
-        name: string;
-        relatedCharacters: string[];
-    }
-
     type CharacterToMaterialIndexMap = Record<string, number>;
 
     const characterToMaterialMap: CharacterToMaterialIndexMap = useMemo(() => {

@@ -19,6 +19,7 @@ import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Alliance, Rank } from '@/fsd/5-shared/model';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { MowsService } from '@/fsd/4-entities/mow';
@@ -33,6 +34,8 @@ import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
+
+import { GoalService } from './goal-service';
 
 export const Goals = () => {
     const {
@@ -88,6 +91,10 @@ export const Goals = () => {
 
     const updateView = (tableView: boolean): void => {
         dispatch.viewPreferences({ type: 'Update', setting: 'goalsTableView', value: tableView });
+    };
+
+    const updateBattlePassColorCoding = (colorCoding: boolean): void => {
+        dispatch.viewPreferences({ type: 'Update', setting: 'goalsBattlePassSeasonView', value: colorCoding });
     };
 
     const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete') => {
@@ -220,6 +227,13 @@ export const Goals = () => {
         goalsEstimate.map(x => (x.abilitiesEstimate?.gold ?? 0) + (x.xpEstimateAbilities?.gold ?? 0))
     );
 
+    const colorCodingTooltipText =
+        'When enabled, goals to be completed a week before the end of the current battle pass season will ' +
+        'be shown with a green background. Goals completed at least a week before the end of the next battle ' +
+        'pass season will be shown with a yellow background. And goals completed at least a week before the ' +
+        'end of the following battle pass season will be shown in red. Goals to be completed during the final ' +
+        'week of a battle pass season ending will have a background between the colors representing the ' +
+        'respective battle pass seasons.';
     const totalAbilityBadges = useMemo((): Record<Alliance, Record<number, number>> => {
         const badgeCounts: Record<Alliance, Record<number, number>> = {
             [Alliance.Chaos]: {},
@@ -273,6 +287,21 @@ export const Goals = () => {
                         </div>
                     }
                 />
+                <AccessibleTooltip title={colorCodingTooltipText}>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={viewPreferences.goalsBattlePassSeasonView}
+                                onChange={event => updateBattlePassColorCoding(event.target.checked)}
+                            />
+                        }
+                        label={
+                            <div className="flex-box gap5">
+                                <span>Color Coding</span>
+                            </div>
+                        }
+                    />
+                </AccessibleTooltip>
             </div>
 
             {!!upgradeRankOrMowGoals.length && (
@@ -297,6 +326,10 @@ export const Goals = () => {
                                     goal={goal}
                                     goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                    bgColor={GoalService.getBackgroundColor(
+                                        viewPreferences.goalsBattlePassSeasonView ?? false,
+                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                    )}
                                 />
                             ))}
                         </div>
@@ -307,6 +340,7 @@ export const Goals = () => {
                             rows={upgradeRankOrMowGoals}
                             estimate={goalsEstimate}
                             menuItemSelect={handleMenuItemSelect}
+                            goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
                         />
                     )}
                 </div>
@@ -334,13 +368,22 @@ export const Goals = () => {
                                     goal={goal}
                                     goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                    bgColor={GoalService.getBackgroundColor(
+                                        viewPreferences.goalsBattlePassSeasonView ?? false,
+                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                    )}
                                 />
                             ))}
                         </div>
                     )}
 
                     {viewPreferences.goalsTableView && (
-                        <GoalsTable rows={shardsGoals} estimate={goalsEstimate} menuItemSelect={handleMenuItemSelect} />
+                        <GoalsTable
+                            rows={shardsGoals}
+                            estimate={goalsEstimate}
+                            menuItemSelect={handleMenuItemSelect}
+                            goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
+                        />
                     )}
                 </div>
             )}
@@ -379,6 +422,10 @@ export const Goals = () => {
                                     goal={goal}
                                     goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                    bgColor={GoalService.getBackgroundColor(
+                                        viewPreferences.goalsBattlePassSeasonView ?? false,
+                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                    )}
                                 />
                             ))}
                         </div>
@@ -389,6 +436,7 @@ export const Goals = () => {
                             rows={upgradeAbilities}
                             estimate={goalsEstimate}
                             menuItemSelect={handleMenuItemSelect}
+                            goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
                         />
                     )}
                 </div>
