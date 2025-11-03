@@ -9,8 +9,6 @@ import { IUnit } from 'src/v2/features/characters/characters.models';
 import { SlotType } from 'src/v2/features/guides/guides.enums';
 import { ITeamSlot } from 'src/v2/features/guides/guides.models';
 
-import './team-slot-edit.scss';
-
 interface Props {
     units: IUnit[];
     slot: ITeamSlot;
