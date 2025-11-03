@@ -36,7 +36,7 @@ export const UnitsGrid: React.FC<Props> = ({ units, onUnitClick, selectedUnits }
     return (
         <div
             className="[box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)] flex flex-wrap gap-[15px]"
-            style={{ zoom: isMobile ? 0.5 : 1 }}>
+            style={{ transform: isMobile ? 'scale(0.5)' : 'scale(1)', transformOrigin: 'top left' }}>
             {units.map((unit, index) => renderPortrait(unit.id, index))}
         </div>
     );
