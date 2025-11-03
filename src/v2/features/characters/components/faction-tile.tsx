@@ -45,7 +45,7 @@ export const FactionsTile = ({
     return (
         <div className="min-w-[375px] max-w-[525px] max-[500px]:max-w-[375px]">
             <h4
-                className="text-[white] mb-0 mt-[5px] border-t-[2px_solid_gold] font-medium flex items-center justify-between"
+                className="text-white mb-0 mt-[5px] border-t-2 border-solid border-[gold] font-medium flex items-center justify-between"
                 style={{ backgroundColor: faction.color }}>
                 <div className="flex items-center gap-[5px]">
                     <FactionImage faction={faction.name} />
