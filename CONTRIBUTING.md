@@ -60,7 +60,6 @@ Right now there are multiple different competing styling solutions:
 - Inline Styles
 - [TailwindCSS](https://tailwindcss.com/) for styling using atomic utility classes
 - [Emotion](https://emotion.sh/docs/introduction) for styling using CSS-in-JS
-- [SASS](https://sass-lang.com/) for a cleaner alternative syntax to regular CSS
 
 There are also multiple different component libraries:
 
