@@ -108,7 +108,7 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, editTeam, deleteTeam
         <div
             className="ag-theme-material auto-teams"
             style={{
-                height: rows.length * 35,
+                height: rows.length * 35 * 1.1,
                 minHeight: '230px',
                 width: '100%',
                 minWidth: isMobile ? '750px' : '',
