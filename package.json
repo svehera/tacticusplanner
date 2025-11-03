@@ -76,7 +76,6 @@
     "lint-staged": "^15.4.1",
     "postcss": "^8.5.1",
     "prettier": "^3.5.3",
-    "sass": "^1.83.4",
     "sharp": "^0.34.4",
     "svgo": "^4.0.0",
     "tailwindcss": "^4.0.0",
