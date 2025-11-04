@@ -97,9 +97,8 @@ export const DesktopHome = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
     const calendarUrls: { current?: string; next?: string } = {
-        // TODO rotate after 2025/10/26
-        current: getImageUrl('calendar/calendar_20250921.png'),
-        next: getImageUrl('calendar/calendar_20251026.png'),
+        current: getImageUrl('calendar/calendar_20251026.png'),
+        // next: getImageUrl('calendar/calendar_20251130.png'),
     };
 
     const topPriorityGoal = goals[0];
