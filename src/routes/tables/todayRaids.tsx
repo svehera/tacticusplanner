@@ -42,12 +42,16 @@ export const TodayRaids: React.FC<Props> = ({
             </p>
             <div className="flex items-center flex-wrap gap-2" style={{ marginTop: 10, justifyContent: 'center' }}>
                 {unStartedShardsRaids.map(shardsRaid => (
-                    <div className="item-raids" key={shardsRaid.characterId}>
+                    <div
+                        className="w-full max-w-[400px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
+                        key={shardsRaid.characterId}>
                         <ShardsItemInput shardsRaid={shardsRaid} handleAdd={addShards} />
                     </div>
                 ))}
                 {upgradesRaids.map((raid, index) => (
-                    <div className="item-raids" key={raid.id + index}>
+                    <div
+                        className="w-full max-w-[400px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
+                        key={raid.id + index}>
                         <MaterialItemInput
                             acquiredCount={raid.acquiredCount ?? 0}
                             upgradeRaid={raid}
@@ -68,7 +72,9 @@ export const TodayRaids: React.FC<Props> = ({
                     </div>
                 ))}
                 {startedShardsRaids.map(shardsRaid => (
-                    <div className="item-raids" key={shardsRaid.characterId}>
+                    <div
+                        className="w-full max-w-[400px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
+                        key={shardsRaid.characterId}>
                         <ShardsItemInput shardsRaid={shardsRaid} handleAdd={addShards} />
                     </div>
                 ))}

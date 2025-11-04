@@ -217,6 +217,16 @@ export default [
                                 'Relative parent imports are not allowed. Use absolute imports with layer names instead.',
                         },
                     ],
+                    paths: [
+                        {
+                            name: '@emotion/react',
+                            message: 'Please use TailwindCSS. Emotion is only included as a dependency of MUI.',
+                        },
+                        {
+                            name: '@emotion/styled',
+                            message: 'Please use TailwindCSS. Emotion is only included as a dependency of MUI.',
+                        },
+                    ],
                 },
             ],
         },

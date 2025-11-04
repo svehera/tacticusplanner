@@ -11,6 +11,16 @@ const createMenuItem = (character: ICharacterData) =>
         `/plan/lre?character=${LegendaryEventEnum[LegendaryEventService.getEventByCharacterSnowprintId(character.snowprintId!)!.id]}`
     );
 
-export const activeLreMenuItems = CharactersService.lreCharacters.filter(x => !x.lre?.finished).map(createMenuItem);
+const activeLreChars = CharactersService.lreCharacters.filter(x => !x.lre?.finished);
+
+function utcStringToMilliseconds(utcStr?: string): number {
+    return utcStr ? Date.parse(utcStr) : Number.POSITIVE_INFINITY;
+}
+
+activeLreChars.sort(
+    (a, b) => utcStringToMilliseconds(a.lre?.nextEventDateUtc) - utcStringToMilliseconds(b.lre?.nextEventDateUtc)
+);
+
+export const activeLreMenuItems = activeLreChars.map(createMenuItem);
 
 export const inactiveLreMenuItems = CharactersService.lreCharacters.filter(x => !!x.lre?.finished).map(createMenuItem);

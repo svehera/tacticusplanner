@@ -4,9 +4,9 @@
     "name": "Patermine",
     "wikiLink": "https://tacticus.wiki.gg/wiki/LE-The_Patermine",
     "eventStage": 3,
-    "nextEventDate": "October 19, 2025",
-    "nextEventDateUtc": "Sun, 19 October 2025 00:00:00 GMT",
-    "finished": false,
+    "nextEventDate": "",
+    "nextEventDateUtc": "",
+    "finished": true,
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
         "Defeat 30 Orks",

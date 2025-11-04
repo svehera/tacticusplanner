@@ -28,8 +28,6 @@ import { LocationsFilter } from 'src/v2/features/goals/locations-filter';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
-import './dailyRaids.scss';
-
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
     const { userInfo } = useAuth();
