@@ -13,7 +13,7 @@ Major dependencies for this project include:
 
 Major DEV dependencies:
 - **typescript**
-- **sass**
+- **tailwindcss**
 - **vite**
 
 ## Getting Started

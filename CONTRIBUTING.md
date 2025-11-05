@@ -59,7 +59,6 @@ Right now there are multiple different competing styling solutions:
 - Vanilla CSS
 - Inline Styles
 - [TailwindCSS](https://tailwindcss.com/) for styling using atomic utility classes
-- [SASS](https://sass-lang.com/) for a cleaner alternative syntax to regular CSS
 
 There are also multiple different component libraries:
 
