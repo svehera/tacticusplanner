@@ -9,8 +9,6 @@ import { CharactersViewContext } from 'src/v2/features/characters/characters-vie
 
 import { InfoBox } from './info-box';
 
-import './roster-header.scss';
-
 export const RosterHeader = ({
     children,
     totalValue,
@@ -27,7 +25,7 @@ export const RosterHeader = ({
             <InfoBox />
             <Conditional condition={showBsValue}>
                 <AccessibleTooltip title={numberToThousandsStringOld(totalValue)}>
-                    <div className="value-score-container">
+                    <div className="flex items-center text-[20px] font-bold min-w-[fit-content]">
                         <MiscIcon icon={'blackstone'} height={40} width={30} />
                         {numberToThousandsString(totalValue)}
                     </div>
@@ -35,7 +33,7 @@ export const RosterHeader = ({
             </Conditional>
             <Conditional condition={showPower}>
                 <AccessibleTooltip title={numberToThousandsStringOld(totalPower)}>
-                    <div className="power-score-container">
+                    <div className="flex items-center text-[20px] font-bold min-w-[fit-content]">
                         <MiscIcon icon={'power'} height={40} width={30} />
                         {numberToThousandsString(totalPower)}
                     </div>

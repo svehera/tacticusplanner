@@ -65,8 +65,6 @@ export const UnitsAutocomplete = <T extends IUnit>({
 
     const getOptionText = (option: IUnit) => ('fullName' in option ? option.fullName : option.name);
 
-    console.log('options: ', options);
-
     return (
         <Autocomplete
             fullWidth
