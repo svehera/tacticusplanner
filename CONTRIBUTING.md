@@ -54,9 +54,8 @@ At some point we should decide on what we want to go with for future development
 
 ### Styling & Components
 
-Right now there are multiple different competing styling solutions:
+Right now there's a split between styling solutions:
 
-- Vanilla CSS
 - Inline Styles
 - [TailwindCSS](https://tailwindcss.com/) for styling using atomic utility classes
 
