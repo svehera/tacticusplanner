@@ -22,8 +22,6 @@ import {
     UpgradeImage,
 } from '@/fsd/4-entities/upgrade';
 
-import './character-upgrades.css';
-
 interface Props {
     character: ICharacter2;
     rank: Rank;
@@ -170,7 +168,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
     return (
         <div>
             <div style={{ display: 'flex' }}>
-                <div className="upgrades-column">
+                <div className="flex flex-col items-center justify-center gap-[5px]">
                     <MiscIcon icon={'health'} height={30} />
                     {StatsCalculatorService.getHealth(character)}
                     {healthUpgrades.map((x, index) => (
@@ -182,7 +180,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                         />
                     ))}
                 </div>
-                <div className="upgrades-column">
+                <div className="flex flex-col items-center justify-center gap-[5px]">
                     <MiscIcon icon={'damage'} />
                     {StatsCalculatorService.getDamage(character)}
                     {damageUpgrades.map((x, index) => (
@@ -194,7 +192,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                         />
                     ))}
                 </div>
-                <div className="upgrades-column">
+                <div className="flex flex-col items-center justify-center gap-[5px]">
                     <MiscIcon icon={'armour'} height={30} />
                     {StatsCalculatorService.getArmor(character)}
                     {armourUpgrades.map((x, index) => (
