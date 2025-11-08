@@ -7,8 +7,6 @@ import { MiscIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
-import './character-tile.css';
-
 interface Props {
     onClick?: () => void;
     isMow?: boolean;
@@ -17,7 +15,7 @@ interface Props {
 export const EmptyTile: React.FC<Props> = ({ onClick, isMow = false }) => {
     return (
         <div
-            className="character-tile"
+            className="flex flex-col items-center min-w-[75px]"
             style={{
                 cursor: onClick ? 'pointer' : undefined,
             }}
@@ -26,13 +24,21 @@ export const EmptyTile: React.FC<Props> = ({ onClick, isMow = false }) => {
             <div>
                 <CharacterPortraitImage icon={'portraits/unset.webp'} />
 
-                <div className="abilities" style={{ visibility: 'hidden' }}>
-                    <div className="ability-level">1</div>
-                    <div className="ability-level">1</div>
+                <div
+                    className="relative top-[-7px] flex items-center justify-between z-10"
+                    style={{ visibility: 'hidden' }}>
+                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                        1
+                    </div>
+                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                        1
+                    </div>
                 </div>
-                <div className="character-level">1</div>
+                <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                    1
+                </div>
             </div>
-            <div className="character-rarity-rank">
+            <div className="min-h-[30px] flex items-center mt-[-15px] justify-center">
                 {isMow ? <MiscIcon icon={'mow'} width={22} height={25} /> : <RankIcon rank={Rank.Stone1} />}
             </div>
         </div>
