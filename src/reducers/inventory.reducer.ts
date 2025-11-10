@@ -1,4 +1,5 @@
 ﻿import { TacticusInventory } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
@@ -56,8 +57,29 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
             return { ...state, upgrades: {} };
         }
         case 'SyncWithTacticus': {
-            const { upgrades } = action.inventory;
+            const {
+                upgrades,
+                xpBooks,
+                abilityBadges: { Imperial, Xenos, Chaos },
+            } = action.inventory;
             const result: Record<string, number> = {};
+            const books: Record<Rarity, number> = {};
+            const imperialBadges: Record<Rarity, number> = {};
+            const xenosBadges: Record<Rarity, number> = {};
+            const chaosBadges: Record<Rarity, number> = {};
+
+            xpBooks.forEach(book => {
+                books[RarityMapper.stringToRarity(book.rarity) ?? Rarity.Common] = book.amount;
+            });
+            Imperial.forEach(badge => {
+                imperialBadges[RarityMapper.stringToRarity(badge.rarity) ?? Rarity.Common] = badge.amount;
+            });
+            Xenos.forEach(badge => {
+                xenosBadges[RarityMapper.stringToRarity(badge.rarity) ?? Rarity.Common] = badge.amount;
+            });
+            Chaos.forEach(badge => {
+                chaosBadges[RarityMapper.stringToRarity(badge.rarity) ?? Rarity.Common] = badge.amount;
+            });
 
             for (const upgrade of upgrades) {
                 const upgradeId: string | null = TacticusIntegrationService.getUpgradeId(upgrade);
@@ -65,7 +87,14 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
                     result[upgradeId] = upgrade.amount;
                 }
             }
-            return { ...state, upgrades: result };
+            return {
+                ...state,
+                xpBooks: { ...books },
+                imperialAbilityBadges: { ...imperialBadges },
+                xenosAbilityBadges: { ...xenosBadges },
+                chaosAbilityBadges: { ...chaosBadges },
+                upgrades: result,
+            };
         }
         default: {
             throw new Error();
