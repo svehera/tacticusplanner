@@ -27,7 +27,6 @@ export class CharactersAbilitiesService {
     }
 
     public static getMaterials(levelStart: number, levelEnd: number): ICharacterAbilityLevel[] {
-        // console.trace('Getting materials for levels:', levelStart, 'to', levelEnd);
         return this.abilitiesLvlUp.slice(levelStart - 1, levelEnd - 1);
     }
 
@@ -50,7 +49,6 @@ export class CharactersAbilitiesService {
     }
 
     private static getRarityFromLevel(level: number): Rarity {
-        console.log('Getting rarity for ability level:', level);
         if (level <= 8) {
             return Rarity.Common;
         }
