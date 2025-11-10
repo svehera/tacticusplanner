@@ -50,6 +50,7 @@ export class CharactersAbilitiesService {
     }
 
     private static getRarityFromLevel(level: number): Rarity {
+        console.log('Getting rarity for ability level:', level);
         if (level <= 8) {
             return Rarity.Common;
         }

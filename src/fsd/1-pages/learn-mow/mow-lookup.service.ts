@@ -13,10 +13,10 @@ export class MowLookupService {
         const gold = sum(materials.map(x => x.gold)) * multiplier;
         const salvage = sum(materials.map(x => x.salvage)) * multiplier;
 
-        const badges = new Map<Rarity, number>();
+        const badges: Record<Rarity, number> = {};
         const forgeBadges = new Map<Rarity, number>();
         for (const material of materials) {
-            badges.set(material.rarity, (badges.get(material.rarity) ?? 0) + material.badges);
+            badges[material.rarity] = (badges[material.rarity] ?? 0) + material.badges;
             forgeBadges.set(material.rarity, (forgeBadges.get(material.rarity) ?? 0) + material.forgeBadges);
         }
 
