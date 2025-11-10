@@ -9,8 +9,6 @@ import { CharactersService, CharacterTitle, ICharacter2, RankIcon } from '@/fsd/
 import { Score } from './dirty-dozen-score';
 import { IDirtyDozenChar } from './dirty-dozen.models';
 
-import './dirty-dozen-table.css';
-
 interface Props {
     characters: ICharacter2[];
     rows: IDirtyDozenChar[];
@@ -32,7 +30,7 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
                 const { value } = params;
                 return <Score value={value ?? 0} />;
             },
-            headerClass: 'score',
+            headerClass: '[&_.ag-header-cell-text]:w-full [&_.ag-header-cell-text]:text-center',
             sortingOrder: ['desc', null],
         } as ColDef<IDirtyDozenChar>;
     };
@@ -93,7 +91,7 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
     ];
 
     return (
-        <div className="ag-theme-material dirty-dozen-table">
+        <div className="ag-theme-material h-[calc(100vh_-_130px)] w-full">
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}
