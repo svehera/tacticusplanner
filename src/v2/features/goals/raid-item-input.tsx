@@ -1,7 +1,6 @@
 ﻿import { Input, Tooltip } from '@mui/material';
 import Button from '@mui/material/Button';
 import React, { useState } from 'react';
-import './raid-item-input.scss';
 
 interface Props {
     defaultItemsObtained: number;
@@ -46,7 +45,7 @@ export const RaidItemInput: React.FC<Props> = ({ defaultItemsObtained, isDisable
                         step: 1,
                         min: 0,
                         type: 'number',
-                        className: 'raid-item-input',
+                        className: 'text-center !w-[30px]',
                     }}
                 />
                 <Button size="small" className="w-[30px] !min-w-0" onClick={increment} disabled={isDisabled}>

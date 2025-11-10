@@ -3,7 +3,7 @@ import React, { JSX, useMemo } from 'react';
 import { Rank } from '@/fsd/5-shared/model';
 
 import { IDetailedEnemy } from '@/fsd/4-entities/campaign';
-import { NpcPortrait } from '@/fsd/4-entities/npc';
+import { NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
 
 interface Props {
     battleId: string;
@@ -83,9 +83,13 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
         let enemiesInRow = 0;
         const elems: JSX.Element[] = [];
         enemies.forEach(enemy => {
+            const enemyIcon = NpcService.getNpcById(enemy.id)?.icon ?? 'npc_icons/missing.png';
+            console.log(`enemy: ${enemy.name}, icon: ${enemyIcon}`);
             for (let i = 0; i < enemy.count; i++) {
                 elems.push(
-                    <div key={`${keyPrefix}-${battleId}-${i}`} style={{ position: 'absolute', left: left, top: top }}>
+                    <div
+                        key={keyPrefix + battleId + (row * maxPerRow + i) + enemy.name + enemy.rank}
+                        style={{ position: 'absolute', left: left, top: top }}>
                         <NpcPortrait id={enemy.id} rank={parseRank(enemy.rank)} stars={enemy.stars} />
                     </div>
                 );
