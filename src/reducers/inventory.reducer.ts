@@ -63,11 +63,18 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
                 abilityBadges: { Imperial, Xenos, Chaos },
             } = action.inventory;
             const result: Record<string, number> = {};
-            const books: Record<Rarity, number> = {};
-            const imperialBadges: Record<Rarity, number> = {};
-            const xenosBadges: Record<Rarity, number> = {};
-            const chaosBadges: Record<Rarity, number> = {};
-
+            const createEmptyRarityRecord = (): Record<Rarity, number> => ({
+                [Rarity.Common]: 0,
+                [Rarity.Uncommon]: 0,
+                [Rarity.Rare]: 0,
+                [Rarity.Epic]: 0,
+                [Rarity.Legendary]: 0,
+                [Rarity.Mythic]: 0,
+            });
+            const books: Record<Rarity, number> = createEmptyRarityRecord();
+            const imperialBadges: Record<Rarity, number> = createEmptyRarityRecord();
+            const xenosBadges: Record<Rarity, number> = createEmptyRarityRecord();
+            const chaosBadges: Record<Rarity, number> = createEmptyRarityRecord();
             xpBooks.forEach(book => {
                 books[RarityMapper.stringToRarity(book.rarity) ?? Rarity.Common] = book.amount;
             });

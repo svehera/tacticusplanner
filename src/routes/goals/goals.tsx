@@ -235,7 +235,11 @@ export const Goals = () => {
         'week of a battle pass season ending will have a background between the colors representing the ' +
         'respective battle pass seasons.';
 
-    const totalAbilityBadges = useMemo((): Record<Alliance, Record<number, number>> => {
+    /**
+     * This computes the total number of remaining ability badges needed AND adjusts all goals to use as
+     * many possible badges from our existing inventory.
+     */
+    const adjustGoalBadgesAndComputeRemaining = useMemo((): Record<Alliance, Record<number, number>> => {
         const neededBadges: Record<Alliance, Record<number, number>> = {
             [Alliance.Chaos]: {},
             [Alliance.Imperial]: {},
@@ -433,7 +437,10 @@ export const Goals = () => {
                                 <div>
                                     {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                         <div key={alliance} className="my-2 flex-box gap20">
-                                            <BadgesTotal badges={totalAbilityBadges[alliance]} alliance={alliance} />
+                                            <BadgesTotal
+                                                badges={adjustGoalBadgesAndComputeRemaining[alliance]}
+                                                alliance={alliance}
+                                            />
                                         </div>
                                     ))}
                                 </div>
