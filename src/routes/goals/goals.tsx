@@ -273,18 +273,6 @@ export const Goals = () => {
                 }
             }
         }
-        Object.entries(inventory.imperialAbilityBadges).forEach(([rarity, count]) => {
-            const rarityNum = RarityMapper.stringToRarity(rarity) ?? 0;
-            neededBadges[Alliance.Imperial][rarityNum] = (neededBadges[Alliance.Imperial][rarityNum] ?? 0) - count;
-        });
-        Object.entries(inventory.xenosAbilityBadges).forEach(([rarity, count]) => {
-            const rarityNum = RarityMapper.stringToRarity(rarity) ?? 0;
-            neededBadges[Alliance.Xenos][rarityNum] = (neededBadges[Alliance.Xenos][rarityNum] ?? 0) - count;
-        });
-        Object.entries(inventory.chaosAbilityBadges).forEach(([rarity, count]) => {
-            const rarityNum = RarityMapper.stringToRarity(rarity) ?? 0;
-            neededBadges[Alliance.Chaos][rarityNum] = (neededBadges[Alliance.Chaos][rarityNum] ?? 0) - count;
-        });
 
         return neededBadges;
     }, [goalsEstimate, inventory]);
