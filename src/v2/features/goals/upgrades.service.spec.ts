@@ -5,7 +5,7 @@ import { IEstimatedRanksSettings } from 'src/models/interfaces';
 
 import { Rarity } from '@/fsd/5-shared/model';
 
-import { Campaign, CampaignsService } from '@/fsd/4-entities/campaign';
+import { Campaign, CampaignsService, CampaignGroupType } from '@/fsd/4-entities/campaign';
 
 import { ICombinedUpgrade } from './goals.models';
 import { UpgradesService } from './upgrades.service';
@@ -51,7 +51,7 @@ describe('UpgradesService - CE challenge unlocks based on base progress', () => 
                 shardsEnergy: 0,
                 farmByPriorityOrder: false,
                 farmStrategy: DailyRaidsStrategy.leastEnergy,
-                campaignEvent: 'deathGuardCE',
+                campaignEvent: CampaignGroupType.deathGuardCE,
             },
             upgrades: {},
         };
