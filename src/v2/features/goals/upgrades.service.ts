@@ -7,7 +7,7 @@ import { getEnumValues } from '@/fsd/5-shared/lib';
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Rank } from '@/fsd/5-shared/model';
 
-import { ICampaignsProgress, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
+import { ICampaignsProgress, CampaignsService, CampaignType, Campaign } from '@/fsd/4-entities/campaign';
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import { CharactersService, CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
@@ -523,6 +523,34 @@ export class UpgradesService {
         return result;
     }
 
+    /**
+     * @returns the mapping from the campaign number to the canonical node number. The node number
+     * is directly provided by snowprint, so extremis node numbers come out as e.g. 13 instead of 2.
+     */
+    private static mapNodeNumber(campaign: Campaign, nodeNumber: number): number {
+        switch (campaign) {
+            case Campaign.AMSC:
+            case Campaign.AMEC:
+            case Campaign.TEC:
+            case Campaign.TSC:
+            case Campaign.TAEC:
+            case Campaign.TASC:
+            case Campaign.DGEC:
+            case Campaign.DGSC:
+                if (nodeNumber === 3) {
+                    nodeNumber = 1;
+                } else if (nodeNumber === 13) {
+                    nodeNumber = 2;
+                } else {
+                    nodeNumber = 3;
+                }
+                break;
+            default:
+                break;
+        }
+        return nodeNumber;
+    }
+
     private static populateLocationsData(
         upgrades: Record<string, ICombinedUpgrade>,
         settings: IEstimatedRanksSettings
@@ -538,7 +566,7 @@ export class UpgradesService {
                 const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign);
                 const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
 
-                location.isUnlocked = location.nodeNumber <= campaignProgress;
+                location.isUnlocked = this.mapNodeNumber(location.campaign, location.nodeNumber) <= campaignProgress;
                 location.isPassFilter =
                     !settings.filters ||
                     CampaignsService.passLocationFilter(location, settings.filters, combinedUpgrade.rarity);
