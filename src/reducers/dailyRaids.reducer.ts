@@ -78,22 +78,27 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
 
                 // First try Campaign Event mapping
                 const eventSplit = CampaignMapperService.mapTacticusCampaignToCampaignEvent(progressItem);
-                if (eventSplit && eventSplit.baseCampaignEventId) {
+                if (eventSplit && eventSplit.baseCampaignEventId !== undefined) {
                     const baseCampaignName = String(eventSplit.baseCampaignEventId);
                     const orderedKeys = getOrderedKeysForBaseCampaign(baseCampaignName);
 
                     for (const battle of completedBattles) {
                         const campaignKey = orderedKeys[battle.battleIndex];
-                        if (!campaignKey) {
+                        if (campaignKey === undefined) {
                             console.warn(
                                 `CE mapping: No battle key for index ${battle.battleIndex} in base '${baseCampaignName}'`
                             );
                             continue;
                         }
                         const campaignComposed = CampaignsService.campaignsComposed[campaignKey];
-                        if (!campaignComposed) {
+                        if (campaignComposed === undefined) {
                             console.warn(`CE mapping: Campaign composed not found for key: ${campaignKey}`);
                             continue;
+                        }
+                        // Ensure we don't duplicate an existing location entry for this campaign
+                        const existingIndex = raidedLocations.findIndex(x => x.id === campaignComposed.id);
+                        if (existingIndex !== -1) {
+                            raidedLocations.splice(existingIndex, 1);
                         }
                         raidedLocations.push({
                             ...campaignComposed,
@@ -112,12 +117,17 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                 const campaignShortId = Object.keys(Campaign).find(
                     key => Campaign[key as keyof typeof Campaign] === campaignName
                 );
-                if (!campaignShortId) continue;
+                if (campaignShortId === undefined) continue;
 
                 for (const battle of completedBattles) {
                     const campaignKey = campaignShortId + String(battle.battleIndex + 1).padStart(2, '0');
                     const campaignComposed = CampaignsService.campaignsComposed[campaignKey];
-                    if (campaignComposed) {
+                    if (campaignComposed !== undefined) {
+                        // Ensure we don't duplicate an existing location entry for this campaign
+                        const existingIndex = raidedLocations.findIndex(x => x.id === campaignComposed.id);
+                        if (existingIndex !== -1) {
+                            raidedLocations.splice(existingIndex, 1);
+                        }
                         raidedLocations.push({
                             ...campaignComposed,
                             raidsCount: battle.attemptsUsed,

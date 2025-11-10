@@ -7,7 +7,7 @@ import { getEnumValues } from '@/fsd/5-shared/lib';
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Rank } from '@/fsd/5-shared/model';
 
-import { ICampaignsProgress, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
+import { ICampaignsProgress, CampaignsService, CampaignType, Campaign } from '@/fsd/4-entities/campaign';
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import { CharactersService, CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
@@ -534,8 +534,23 @@ export class UpgradesService {
             const combinedUpgrade = upgrades[upgradeId];
 
             for (const location of combinedUpgrade.locations) {
-                const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
-                const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign);
+                // Challenge CE campaigns should unlock based on their corresponding base campaign progress
+                const challengeToBase: Partial<Record<Campaign, Campaign>> = {
+                    [Campaign.AMSC]: Campaign.AMS,
+                    [Campaign.AMEC]: Campaign.AME,
+                    [Campaign.TSC]: Campaign.TS,
+                    [Campaign.TEC]: Campaign.TE,
+                    [Campaign.TASC]: Campaign.TAS,
+                    [Campaign.TAEC]: Campaign.TAE,
+                    [Campaign.DGSC]: Campaign.DGS,
+                    [Campaign.DGEC]: Campaign.DGE,
+                };
+                const unlockCampaign =
+                    (challengeToBase[location.campaign as Campaign] as keyof ICampaignsProgress | undefined) ??
+                    (location.campaign as keyof ICampaignsProgress);
+
+                const campaignProgress = settings.campaignsProgress[unlockCampaign];
+                const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign as Campaign);
                 const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
 
                 location.isUnlocked = location.nodeNumber <= campaignProgress;
