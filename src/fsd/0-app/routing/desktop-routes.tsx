@@ -1,6 +1,7 @@
 ﻿import { RouteObject } from 'react-router-dom';
 
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
+import { resourcesLazyRoute } from '@/fsd/1-pages/input-resources/resources.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
@@ -30,6 +31,7 @@ export const globalInputRoutes: RouteObject[] = [
             return { Component: Inventory };
         },
     },
+    resourcesLazyRoute,
     guildLazyRoute,
 ];
 
