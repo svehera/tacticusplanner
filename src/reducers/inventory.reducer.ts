@@ -1,4 +1,6 @@
-﻿import { TacticusInventory } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
+﻿import { cloneDeep } from 'lodash';
+
+import { TacticusInventory } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Alliance, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
@@ -80,7 +82,7 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
                 [Alliance.Xenos]: createEmptyRarityRecord(),
                 [Alliance.Chaos]: createEmptyRarityRecord(),
             };
-            const orbs = { ...badges };
+            const orbs = cloneDeep(badges);
             const forgeBadges = createEmptyRarityRecord();
             const components = { [Alliance.Imperial]: 0, [Alliance.Xenos]: 0, [Alliance.Chaos]: 0 };
             xpBooks.forEach(book => {
@@ -144,10 +146,10 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
                 ...state,
                 xpBooks: { ...books },
                 abilityBadges: { ...badges },
-                upgrades: result,
                 orbs: { ...orbs },
                 forgeBadges: { ...forgeBadges },
                 components: { ...components },
+                upgrades: result,
             };
         }
         default: {

@@ -1,9 +1,7 @@
 // TODO(mythic): Change the location of a few things, but automate copying via datamine_tacticus
 
-// eslint-disable-next-line import-x/no-internal-modules, no-restricted-imports
-import blueStar from '../../../../../assets/images/snowprint_assets/stars/ui_icon_star_legendary_large.png';
-// eslint-disable-next-line import-x/no-internal-modules, no-restricted-imports
-import mythicWings from '../../../../../assets/images/snowprint_assets/stars/ui_icon_star_mythic.png';
+import { snowprintIcons, snowprintStarsIcons } from '@/fsd/5-shared/assets';
+export { OrbIcon } from './orb-image';
 
 import armourIcon from './armour.webp';
 import blackstoneIcon from './blackstone.png';
@@ -23,7 +21,12 @@ import redStar from './red star small.png';
 import goldStar from './star small.png';
 import warTokenIcon from './warToken.png';
 
-export const tacticusIcons = {
+export interface TacticusIcon {
+    file: string;
+    label: string;
+}
+
+export const tacticusIcons: Record<string, TacticusIcon> = {
     armour: {
         file: armourIcon,
         label: 'Armour',
@@ -84,11 +87,45 @@ export const tacticusIcons = {
         file: hitsIcon,
         label: 'Hits',
     },
+    survivalCurrencyHalloween2025: snowprintIcons.eventCurrencyHalloween2025Icon,
+    checkmark: snowprintIcons.checkmark,
+    legendaryEventToken: snowprintIcons.legendaryEventToken,
+    onslaughtToken: snowprintIcons.onslaughtToken,
+    salvageRunToken: snowprintIcons.salvageRunToken,
+    arenaToken: snowprintIcons.arenaToken,
+    survivalToken: snowprintIcons.survivalToken,
+    coin: snowprintIcons.coin,
+    reqOrder: snowprintIcons.reqOrder,
+    blessedReqOrder: snowprintIcons.blessedReqOrder,
+    defeatWaves: snowprintIcons.defeatWaves,
+    commonBook: snowprintIcons.commonBook,
+    uncommonBook: snowprintIcons.uncommonBook,
+    rareBook: snowprintIcons.rareBook,
+    epicBook: snowprintIcons.epicBook,
+    legendaryBook: snowprintIcons.legendaryBook,
+    mythicBook: snowprintIcons.mythicBook,
+    uncommonOrb: snowprintIcons.uncommonOrb,
+    rareOrb: snowprintIcons.rareOrb,
+    epicOrb: snowprintIcons.epicOrb,
+    legendaryOrb: snowprintIcons.legendaryOrb,
+    mythicOrb: snowprintIcons.mythicOrb,
+    imperialOrb: snowprintIcons.imperialOrb,
+    xenosOrb: snowprintIcons.xenosOrb,
+    chaosOrb: snowprintIcons.chaosOrb,
+    commonForgeBadge: snowprintIcons.commonForgeBadge,
+    uncommonForgeBadge: snowprintIcons.uncommonForgeBadge,
+    rareForgeBadge: snowprintIcons.rareForgeBadge,
+    epicForgeBadge: snowprintIcons.epicForgeBadge,
+    legendaryForgeBadge: snowprintIcons.legendaryForgeBadge,
+    mythicForgeBadge: snowprintIcons.mythicForgeBadge,
+    imperialComponent: snowprintIcons.imperialComponent,
+    xenosComponent: snowprintIcons.xenosComponent,
+    chaosComponent: snowprintIcons.chaosComponent,
 };
 
 export const starsIcons = {
-    mythicWings,
-    blueStar,
-    redStar,
-    goldStar,
+    mythicWings: snowprintStarsIcons.mythicWings,
+    blueStar: snowprintStarsIcons.blueStar,
+    redStar: redStar,
+    goldStar: goldStar,
 };
