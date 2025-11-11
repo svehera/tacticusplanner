@@ -14,6 +14,8 @@ export interface TacticusInventory {
     upgrades: TacticusUpgrade[];
     shards: TacticusShard[];
     mythicShards: TacticusShard[];
+    xpBooks: TacticusXpBook[];
+    abilityBadges: TacticusAbilityBadges;
 }
 
 interface TacticusAbility {
@@ -26,6 +28,34 @@ interface TacticusAbility {
      * 0 = ability is locked
      */
     level: number;
+}
+
+export interface TacticusXpBook {
+    /** Unique identifier for the xp book.*/
+    id: string;
+
+    /** Rarity of the book. */
+    rarity: string;
+
+    /** Amount of XP books owned. */
+    amount: number;
+}
+
+export interface TacticusAbilityBadge {
+    /** Unique identifier for ability badge.*/
+    id: string;
+
+    /** Rarity of the ability badge. */
+    rarity: string;
+
+    /** Amount of this badge owned. */
+    amount: number;
+}
+
+export interface TacticusAbilityBadges {
+    Imperial: TacticusAbilityBadge[];
+    Xenos: TacticusAbilityBadge[];
+    Chaos: TacticusAbilityBadge[];
 }
 
 export interface TacticusUnit {

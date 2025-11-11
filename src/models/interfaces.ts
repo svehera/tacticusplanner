@@ -273,6 +273,10 @@ export interface IEstimatedRanksSettings {
 }
 
 export interface IInventory {
+    xpBooks: Record<Rarity, number>;
+    imperialAbilityBadges: Record<Rarity, number>;
+    xenosAbilityBadges: Record<Rarity, number>;
+    chaosAbilityBadges: Record<Rarity, number>;
     upgrades: Record<string, number>;
 }
 

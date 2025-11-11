@@ -13,7 +13,6 @@ export const RankIcon = ({
     resized?: boolean;
 }) => {
     if (!rank || rank > Rank.Adamantine3) {
-        console.trace('bad rank: ', rank);
         return <span>{Rank[Rank.Locked]}</span>;
     }
 

@@ -18,7 +18,7 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
-import { Alliance, Rank } from '@/fsd/5-shared/model';
+import { Alliance, Rank, Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -234,26 +234,56 @@ export const Goals = () => {
         'end of the following battle pass season will be shown in red. Goals to be completed during the final ' +
         'week of a battle pass season ending will have a background between the colors representing the ' +
         'respective battle pass seasons.';
-    const totalAbilityBadges = useMemo((): Record<Alliance, Record<number, number>> => {
-        const badgeCounts: Record<Alliance, Record<number, number>> = {
+
+    /**
+     * This computes the total number of remaining ability badges needed AND adjusts all goals to use as
+     * many possible badges from our existing inventory.
+     */
+    const adjustGoalBadgesAndComputeRemaining = useMemo((): Record<Alliance, Record<number, number>> => {
+        const neededBadges: Record<Alliance, Record<number, number>> = {
             [Alliance.Chaos]: {},
             [Alliance.Imperial]: {},
             [Alliance.Xenos]: {},
         };
 
-        for (const goal of goalsEstimate.filter(x => x.abilitiesEstimate)) {
-            for (const [rarityStr, count] of Object.entries(goal.abilitiesEstimate!.badges)) {
-                const rarity = Number(rarityStr);
-                const alliance = goal.abilitiesEstimate!.alliance;
-                if (!badgeCounts[alliance][rarity]) {
-                    badgeCounts[alliance][rarity] = 0;
+        const heldBadges: Record<Alliance, Record<number, number>> = {
+            [Alliance.Chaos]: {},
+            [Alliance.Imperial]: {},
+            [Alliance.Xenos]: {},
+        };
+        Object.entries(inventory.imperialAbilityBadges).forEach(([rarity, count]) => {
+            heldBadges[Alliance.Imperial][Number(rarity)] = count;
+        });
+        Object.entries(inventory.xenosAbilityBadges).forEach(([rarity, count]) => {
+            heldBadges[Alliance.Xenos][Number(rarity)] = count;
+        });
+        Object.entries(inventory.chaosAbilityBadges).forEach(([rarity, count]) => {
+            heldBadges[Alliance.Chaos][Number(rarity)] = count;
+        });
+
+        for (const goal of goalsEstimate.filter(x => x.abilitiesEstimate || x.mowEstimate)) {
+            const badges = goal.mowEstimate?.badges ?? goal.abilitiesEstimate!.badges;
+            for (const [rarityStr, count] of Object.entries(badges)) {
+                const rarity = Number(rarityStr) as Rarity;
+                const alliance =
+                    goal.abilitiesEstimate?.alliance ??
+                    GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
+                if (!neededBadges[alliance][rarity]) {
+                    neededBadges[alliance][rarity] = 0;
                 }
-                badgeCounts[alliance][rarity] += count;
+                if (heldBadges[alliance][rarity]) {
+                    const toRemove = Math.min(heldBadges[alliance][rarity], count);
+                    heldBadges[alliance][rarity] -= toRemove;
+                    neededBadges[alliance][rarity] += count - toRemove;
+                    badges[rarity] = count - toRemove;
+                } else {
+                    neededBadges[alliance][rarity] += count;
+                }
             }
         }
 
-        return badgeCounts;
-    }, [goalsEstimate]);
+        return neededBadges;
+    }, [goalsEstimate, inventory]);
 
     return (
         <div>
@@ -401,13 +431,16 @@ export const Goals = () => {
                     <div style={{ width: '350px' }}>
                         <Accordion defaultExpanded={false}>
                             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                <span>Total Ability Badges</span>
+                                <span>Total Ability Badges Missing</span>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <div>
-                                    {[Alliance.Chaos, Alliance.Imperial, Alliance.Xenos].map(alliance => (
+                                    {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                         <div key={alliance} className="my-2 flex-box gap20">
-                                            <BadgesTotal badges={totalAbilityBadges[alliance]} alliance={alliance} />
+                                            <BadgesTotal
+                                                badges={adjustGoalBadgesAndComputeRemaining[alliance]}
+                                                alliance={alliance}
+                                            />
                                         </div>
                                     ))}
                                 </div>
