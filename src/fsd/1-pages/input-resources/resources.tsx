@@ -1,7 +1,7 @@
 /* eslint-disable import-x/no-internal-modules */
 import SyncIcon from '@mui/icons-material/Sync';
 import Button from '@mui/material/Button';
-import { useContext } from 'react';
+import { JSX, useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { StoreContext } from '@/reducers/store.provider';

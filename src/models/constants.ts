@@ -314,9 +314,7 @@ export const defaultData: IPersonalData2 = {
     campaignsProgress: defaultCampaignsProgress,
     inventory: {
         xpBooks: createRarityRecord(0),
-        imperialAbilityBadges: createRarityRecord(0),
-        xenosAbilityBadges: createRarityRecord(0),
-        chaosAbilityBadges: createRarityRecord(0),
+        abilityBadges: createAllianceRecord(createRarityRecord(0)),
         components: createAllianceRecord(0),
         forgeBadges: createRarityRecord(0),
         orbs: createAllianceRecord(createRarityRecord(0)),
