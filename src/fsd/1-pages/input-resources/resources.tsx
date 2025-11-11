@@ -34,105 +34,108 @@ export const Resources = () => {
         await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
     };
 
-    // --- Helper function for rendering a single resource item ---
     const renderResourceItem = (key: string, icon: JSX.Element, quantity: number) => (
-        <div key={key} className="flex flex-col items-center justify-start min-w-[70px] p-1">
-            <div className="h-[60px] w-[60px] flex items-center justify-center">{icon}</div>
-            <span className="text-sm font-semibold text-white/90 mt-1">{quantity}</span>
+        <div key={key} className="flex flex-col items-center justify-start min-w-[55px] p-1">
+            <div className="h-[45px] w-[45px] flex items-center justify-center">{icon}</div>
+            <span className="text-sm font-semibold text-white mt-1">{quantity}</span>
         </div>
     );
 
     return (
-        <div className="flex flex-col gap-y-6 p-4 bg-gray-900 rounded-lg shadow-xl">
+        <div className="flex flex-col gap-y-4 p-2">
             {hasSync && (
-                <div className="mb-4">
+                <div className="flex justify-end p-2 border-b border-gray-600">
                     <Button size="small" variant="contained" color="primary" onClick={sync}>
                         <SyncIcon className="mr-1" />
-                        {!isMobile && 'Sync Inventory'}
+                        {!isMobile && 'Sync'}
                     </Button>
                 </div>
             )}
-
-            <div className="flex flex-col gap-y-3">
-                <h3 className="text-xl font-bold text-yellow-400 border-b border-yellow-800 pb-2">XP Books</h3>
-                <div className="flex flex-wrap gap-x-2">
-                    {rarities.map(rarity => {
-                        const icon = RarityMapper.rarityToRarityString(rarity).toLowerCase() + 'Book';
-                        return renderResourceItem(
-                            'book-' + rarity,
-                            <MiscIcon icon={icon} width={60} height={60} />,
-                            inventory.xpBooks[rarity]
-                        );
-                    })}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="flex flex-col p-3 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
+                    <h4 className="text-md font-bold text-gray-300 border-b border-gray-600 pb-2 mb-2 uppercase tracking-wide">
+                        XP Books
+                    </h4>
+                    <div className="flex flex-wrap justify-start gap-x-1">
+                        {rarities.map(rarity => {
+                            const icon = RarityMapper.rarityToRarityString(rarity).toLowerCase() + 'Book';
+                            return renderResourceItem(
+                                'book-' + rarity,
+                                <MiscIcon icon={icon} width={45} height={45} />,
+                                inventory.xpBooks[rarity]
+                            );
+                        })}
+                    </div>
                 </div>
-            </div>
 
-            <div className="flex flex-col gap-y-4">
-                <h3 className="text-xl font-bold text-blue-400 border-b border-blue-800 pb-2">
-                    Alliance Resources (Badges & Orbs)
+                <div className="flex flex-col p-3 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
+                    <h4 className="text-md font-bold text-gray-300 border-b border-gray-600 pb-2 mb-2 uppercase tracking-wide">
+                        Forge Badges
+                    </h4>
+                    <div className="flex flex-wrap justify-start gap-x-1">
+                        {rarities.map(rarity => {
+                            const quantity = inventory.forgeBadges[rarity] || 0;
+                            const icon = RarityMapper.rarityToRarityString(rarity).toLowerCase() + 'ForgeBadge';
+                            return renderResourceItem(
+                                'forge-' + rarity,
+                                <MiscIcon icon={icon} width={45} height={45} />,
+                                quantity
+                            );
+                        })}
+                    </div>
+                </div>
+
+                <div className="flex flex-col p-3 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
+                    <h4 className="text-md font-bold text-gray-300 border-b border-gray-600 pb-2 mb-2 uppercase tracking-wide">
+                        Machine Components
+                    </h4>
+                    <div className="flex flex-wrap justify-start gap-x-1">
+                        {Object.entries(inventory.components).map(([alliance, quantity]) => {
+                            return renderResourceItem(
+                                'component-' + alliance,
+                                <MiscIcon icon={alliance.toLowerCase() + 'Component'} width={45} height={45} />,
+                                quantity as number
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>{' '}
+            <div className="flex flex-col p-3 bg-gray-800 border border-gray-700 rounded-lg shadow-lg mt-4">
+                <h3 className="text-lg font-bold text-gray-300 border-b border-gray-600 pb-2 mb-3 uppercase tracking-wider">
+                    Alliance Resources
                 </h3>
 
-                <div className="flex flex-col gap-y-5">
+                <div className="flex flex-col divide-y divide-gray-700">
                     {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
-                        <div key={alliance} className="flex flex-col">
-                            <h4 className="text-lg font-semibold text-white mb-2 uppercase border-b border-gray-700 w-full">
-                                {alliance}
-                            </h4>
+                        <div key={alliance} className="py-3">
+                            <h4 className="text-sm font-semibold text-gray-400 mb-2 uppercase">{alliance}</h4>
 
-                            <div className="flex flex-wrap gap-x-2">
-                                {rarities.map(rarity => {
-                                    const quantity = inventory.abilityBadges[alliance][rarity as number as Rarity];
-                                    return renderResourceItem(
-                                        alliance + '-badge-' + rarity,
-                                        <BadgeImage alliance={alliance} rarity={rarity} />,
-                                        quantity
-                                    );
-                                })}
-                            </div>
+                            <div className="grid grid-cols-2 gap-x-4">
+                                <div className="flex flex-wrap justify-start">
+                                    {rarities.map(rarity => {
+                                        const quantity = inventory.abilityBadges[alliance][rarity as number as Rarity];
+                                        return renderResourceItem(
+                                            alliance + '-badge-' + rarity,
+                                            <BadgeImage alliance={alliance} rarity={rarity} />,
+                                            quantity
+                                        );
+                                    })}
+                                </div>
 
-                            <div className="flex flex-wrap gap-x-2 mt-3">
-                                {rarities.map(rarity => {
-                                    if (rarity === Rarity.Common) return null; // Skip Common Orbs
-                                    const quantity = inventory.orbs[alliance][rarity as number as Rarity];
-                                    return renderResourceItem(
-                                        alliance + '-orb-' + rarity,
-                                        <OrbIcon alliance={alliance} rarity={rarity} size={60} />,
-                                        quantity
-                                    );
-                                })}
+                                <div className="flex flex-wrap justify-start">
+                                    {rarities.map(rarity => {
+                                        if (rarity === Rarity.Common) return null; // Skip Common Orbs
+                                        const quantity = inventory.orbs[alliance][rarity as number as Rarity];
+                                        return renderResourceItem(
+                                            alliance + '-orb-' + rarity,
+                                            <OrbIcon alliance={alliance} rarity={rarity} size={45} />,
+                                            quantity
+                                        );
+                                    })}
+                                </div>
                             </div>
                         </div>
                     ))}
-                </div>
-            </div>
-
-            <div className="flex flex-col gap-y-4">
-                <h3 className="text-xl font-bold text-green-400 border-b border-green-800 pb-2">
-                    Generic Components & Parts
-                </h3>
-
-                <h4 className="text-md font-semibold text-gray-400 mt-2">Forge Badges</h4>
-                <div className="flex flex-wrap gap-x-2">
-                    {rarities.map(rarity => {
-                        const quantity = inventory.forgeBadges[rarity] || 0;
-                        const icon = RarityMapper.rarityToRarityString(rarity).toLowerCase() + 'ForgeBadge';
-                        return renderResourceItem(
-                            'forge-' + rarity,
-                            <MiscIcon icon={icon} width={60} height={60} />,
-                            quantity
-                        );
-                    })}
-                </div>
-
-                <h4 className="text-md font-semibold text-gray-400 mt-2">Machine Components</h4>
-                <div className="flex flex-wrap gap-x-2">
-                    {Object.entries(inventory.components).map(([alliance, quantity]) => {
-                        return renderResourceItem(
-                            'component-' + alliance,
-                            <MiscIcon icon={alliance.toLowerCase() + 'Component'} width={60} height={60} />,
-                            quantity as number
-                        );
-                    })}
                 </div>
             </div>
         </div>
