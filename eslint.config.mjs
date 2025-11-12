@@ -206,7 +206,7 @@ export default [
                                 '2-widgets/*/*/**',
                                 '3-features/*/*/**',
                                 '4-entities/*/*/**',
-                                '5-shared/*/*/**',
+                                '5-shared/*/*/*/*/**',
                             ],
                             message:
                                 'Import only from public API (index.ts). Direct imports from implementation files are not allowed.',

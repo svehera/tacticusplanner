@@ -18,9 +18,10 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
-import { Alliance, Rank, Rarity } from '@/fsd/5-shared/model';
+import { Alliance, Rank, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/assets';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
@@ -39,7 +40,10 @@ import { GoalService } from './goal-service';
 
 interface RevisedGoals {
     goalEstimates: IGoalEstimate[];
-    neededBadges: Record<Alliance, Record<number, number>>;
+    neededBadges: Record<Alliance, Record<Rarity, number>>;
+    neededForgeBadges: Record<Rarity, number>;
+    neededComponents: Record<Alliance, number>;
+    neededXp: number;
 }
 
 export const Goals = () => {
@@ -223,7 +227,6 @@ export const Goals = () => {
         return result;
     }, [shardsGoals, upgradeRankOrMowGoals]);
 
-    const totalXpUpgrades = sum(goalsEstimate.filter(x => !!x.xpEstimate).map(x => x.xpEstimate!.legendaryBooks));
     const totalXpAbilities = sum(
         goalsEstimate.filter(x => !!x.xpEstimateAbilities).map(x => x.xpEstimateAbilities!.legendaryBooks)
     );
@@ -245,25 +248,56 @@ export const Goals = () => {
      * many possible badges from our existing inventory.
      */
     const adjustedGoalsEstimates = useMemo((): RevisedGoals => {
-        const neededBadges: Record<Alliance, Record<number, number>> = {
-            [Alliance.Chaos]: {},
-            [Alliance.Imperial]: {},
-            [Alliance.Xenos]: {},
+        const createRarityRecord = (): Record<Rarity, number> => ({
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 0,
+            [Rarity.Mythic]: 0,
+        });
+
+        const heldBooks = { ...inventory.xpBooks };
+
+        const neededBadges: Record<Alliance, Record<Rarity, number>> = {
+            [Alliance.Chaos]: createRarityRecord(),
+            [Alliance.Imperial]: createRarityRecord(),
+            [Alliance.Xenos]: createRarityRecord(),
         };
 
-        const heldBadges: Record<Alliance, Record<number, number>> = {
-            [Alliance.Chaos]: {},
-            [Alliance.Imperial]: {},
-            [Alliance.Xenos]: {},
+        const neededForgeBadges: Record<Rarity, number> = createRarityRecord();
+        const neededComponents: Record<Alliance, number> = {
+            [Alliance.Chaos]: 0,
+            [Alliance.Imperial]: 0,
+            [Alliance.Xenos]: 0,
+        };
+        const heldBadges: Record<Alliance, Record<Rarity, number>> = {
+            [Alliance.Chaos]: createRarityRecord(),
+            [Alliance.Imperial]: createRarityRecord(),
+            [Alliance.Xenos]: createRarityRecord(),
         };
         Object.entries(inventory.abilityBadges[Alliance.Imperial] ?? []).forEach(([rarity, count]) => {
-            heldBadges[Alliance.Imperial][Number(rarity)] = count;
+            heldBadges[Alliance.Imperial][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
         });
         Object.entries(inventory.abilityBadges[Alliance.Xenos] ?? []).forEach(([rarity, count]) => {
-            heldBadges[Alliance.Xenos][Number(rarity)] = count;
+            heldBadges[Alliance.Xenos][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
         });
         Object.entries(inventory.abilityBadges[Alliance.Chaos] ?? []).forEach(([rarity, count]) => {
-            heldBadges[Alliance.Chaos][Number(rarity)] = count;
+            heldBadges[Alliance.Chaos][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
+        });
+
+        const heldForgeBadges: Record<number, number> = createRarityRecord();
+        Object.entries(inventory.forgeBadges ?? []).forEach(([rarity, count]) => {
+            heldForgeBadges[Number(rarity)] = count;
+        });
+
+        const heldComponents: Record<Alliance, number> = {
+            [Alliance.Chaos]: 0,
+            [Alliance.Imperial]: 0,
+            [Alliance.Xenos]: 0,
+        };
+        Object.entries(inventory.components ?? []).forEach(([alliance, count]) => {
+            heldComponents[alliance as Alliance] = count;
         });
 
         const newGoalsEstimates: IGoalEstimate[] = cloneDeep(goalsEstimate);
@@ -272,12 +306,53 @@ export const Goals = () => {
             ['priority'],
             ['asc']
         );
+        let totalXpNeeded = 0;
         for (const goalIdAndPriority of goalsByPrio) {
             const goal = newGoalsEstimates.find(x => x.goalId === goalIdAndPriority.id);
+
             if (goal === undefined) {
                 console.error('could not find goal estimate for goal id ' + goalIdAndPriority.id);
                 continue;
             }
+            if (goal.xpEstimate || goal.xpEstimateAbilities) {
+                console.log(goal);
+                let xpNeeded = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
+                while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
+                    xpNeeded -= 62500;
+                    heldBooks[Rarity.Mythic] -= 1;
+                }
+                while (xpNeeded >= 12500 && heldBooks[Rarity.Legendary] > 0) {
+                    xpNeeded -= 12500;
+                    heldBooks[Rarity.Legendary] -= 1;
+                }
+                while (xpNeeded >= 2500 && heldBooks[Rarity.Epic] > 0) {
+                    xpNeeded -= 2500;
+                    heldBooks[Rarity.Epic] -= 1;
+                }
+                while (xpNeeded >= 500 && heldBooks[Rarity.Rare] > 0) {
+                    xpNeeded -= 500;
+                    heldBooks[Rarity.Rare] -= 1;
+                }
+                while (xpNeeded >= 100 && heldBooks[Rarity.Uncommon] > 0) {
+                    xpNeeded -= 100;
+                    heldBooks[Rarity.Uncommon] -= 1;
+                }
+                while (xpNeeded >= 20 && heldBooks[Rarity.Common] > 0) {
+                    xpNeeded -= 20;
+                    heldBooks[Rarity.Common] -= 1;
+                }
+                console.log('xpNeeded: ' + xpNeeded);
+                totalXpNeeded += xpNeeded;
+                goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
+                if (goal.xpEstimate) {
+                    goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
+                    goal.xpEstimate.xpLeft = xpNeeded;
+                } else {
+                    goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
+                    goal.xpEstimateAbilities!.xpLeft = xpNeeded;
+                }
+            }
+
             if (goal.abilitiesEstimate === undefined && goal.mowEstimate === undefined) continue;
             const badges = goal.mowEstimate?.badges ?? goal.abilitiesEstimate!.badges;
             for (const [rarityStr, count] of Object.entries(badges)) {
@@ -297,9 +372,30 @@ export const Goals = () => {
                     neededBadges[alliance][rarity] += count;
                 }
             }
+            if (goal.mowEstimate === undefined) continue;
+            const forgeBadges = goal.mowEstimate.forgeBadges;
+            forgeBadges.entries().forEach(([rarity, count]) => {
+                const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
+                goal.mowEstimate!.forgeBadges.set(rarity, count - toRemove);
+                heldForgeBadges[rarity] = (heldForgeBadges[rarity] ?? 0) - toRemove;
+                neededForgeBadges[rarity] = goal.mowEstimate!.forgeBadges.get(rarity) ?? 0;
+            });
+            const components = goal.mowEstimate.components;
+            const alliance = GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
+            const held = heldComponents[alliance] ?? 0;
+            const toRemove = Math.min(components, held);
+            goal.mowEstimate!.components = components - toRemove;
+            heldComponents[alliance] -= toRemove;
+            neededComponents[alliance] = (neededComponents[alliance] ?? 0) + goal.mowEstimate!.components;
         }
 
-        return { neededBadges, goalEstimates: newGoalsEstimates };
+        return {
+            neededBadges,
+            neededForgeBadges,
+            neededComponents,
+            goalEstimates: newGoalsEstimates,
+            neededXp: totalXpNeeded,
+        };
     }, [goals, goalsEstimate, inventory]);
 
     return (
@@ -350,6 +446,44 @@ export const Goals = () => {
                     />
                 </AccessibleTooltip>
             </div>
+            <div style={{ width: '350px' }} className="my-2 flex-box gap20">
+                <Accordion defaultExpanded={false}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <span>Total Resources Missing</span>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <div className="my-2 gap20">
+                            <div className="flex flex-wrap items-center gap20 my-2">
+                                <MiscIcon icon={'energy'} height={35} width={35} />{' '}
+                                <b>{estimatedUpgradesTotal.energyTotal}</b>
+                            </div>
+                            <div>
+                                <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
+                            </div>
+                            <div>
+                                {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
+                                    <div key={alliance} className="my-2 flex-box gap20">
+                                        <BadgesTotal
+                                            badges={adjustedGoalsEstimates.neededBadges[alliance]}
+                                            alliance={alliance}
+                                            size={'medium'}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="my-2 gap20">
+                                <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
+                            </div>
+                            <div className="my-2 gap20">
+                                <MoWComponentsTotal
+                                    components={adjustedGoalsEstimates.neededComponents}
+                                    size={'medium'}
+                                />
+                            </div>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+            </div>
 
             {!!upgradeRankOrMowGoals.length && (
                 <div>
@@ -362,7 +496,7 @@ export const Goals = () => {
                             <MiscIcon icon={'energy'} height={15} width={15} /> |
                         </span>
                         <span>
-                            <b>{totalXpUpgrades}</b> XP Books)
+                            <b>{Math.ceil(adjustedGoalsEstimates.neededXp / 12500)}</b> XP Books)
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
@@ -448,25 +582,6 @@ export const Goals = () => {
                         <span>
                             <b>{totalXpAbilities}</b> XP Books)
                         </span>
-                    </div>
-                    <div style={{ width: '350px' }}>
-                        <Accordion defaultExpanded={false}>
-                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                <span>Total Ability Badges Missing</span>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <div>
-                                    {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
-                                        <div key={alliance} className="my-2 flex-box gap20">
-                                            <BadgesTotal
-                                                badges={adjustedGoalsEstimates.neededBadges[alliance]}
-                                                alliance={alliance}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </AccordionDetails>
-                        </Accordion>
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex gap-3 flex-wrap">
