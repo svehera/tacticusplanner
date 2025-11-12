@@ -27,10 +27,15 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
     // Sync currentGoalsSelect with goals prop when goals change while dialog is open
     useEffect(() => {
         if (openGoals) {
-            setCurrentGoalsSelect(goals);
+            setCurrentGoalsSelect(prevGoals =>
+                goals.map(goal => {
+                    const prevGoal = prevGoals.find(g => g.goalId === goal.goalId);
+                    // Preserve include state if goal exists, otherwise use the new goal's include value
+                    return prevGoal ? { ...goal, include: prevGoal.include } : goal;
+                })
+            );
         }
     }, [goals, openGoals]);
-
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentGoalsSelect(value => value.map(x => ({ ...x, include: event.target.checked })));
     };
