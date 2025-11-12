@@ -64,7 +64,7 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
                     </span>
 
                     <span className="text-xs text-gray-400">
-                        {isSufficient ? 'Needed' : `${neededQuantity} Missing`}
+                        {isSufficient ? 'Completed' : `${neededQuantity} Missing`}
                     </span>
                 </div>
 

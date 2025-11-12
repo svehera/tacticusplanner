@@ -418,12 +418,12 @@ export class GoalsService {
                     heldBooks[Rarity.Common] -= 1;
                 }
                 totalXpNeeded += xpNeeded;
-                goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
+                goal.xpBooksTotal = Math.ceil(xpNeeded / 12500);
                 if (goal.xpEstimate) {
-                    goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
+                    goal.xpEstimate.legendaryBooks = Math.ceil(xpNeeded / 12500);
                     goal.xpEstimate.xpLeft = xpNeeded;
                 } else {
-                    goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
+                    goal.xpEstimateAbilities!.legendaryBooks = Math.ceil(xpNeeded / 12500);
                     goal.xpEstimateAbilities!.xpLeft = xpNeeded;
                 }
             }
@@ -453,7 +453,7 @@ export class GoalsService {
                 const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
                 goal.mowEstimate!.forgeBadges.set(rarity, count - toRemove);
                 heldForgeBadges[rarity] = (heldForgeBadges[rarity] ?? 0) - toRemove;
-                neededForgeBadges[rarity] = goal.mowEstimate!.forgeBadges.get(rarity) ?? 0;
+                neededForgeBadges[rarity] += goal.mowEstimate!.forgeBadges.get(rarity) ?? 0;
             });
             const components = goal.mowEstimate.components;
             const alliance = GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
