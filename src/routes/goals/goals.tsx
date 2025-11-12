@@ -4,7 +4,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
-import { sum } from 'lodash';
+import { cloneDeep, orderBy, sum } from 'lodash';
 import { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
@@ -36,6 +36,11 @@ import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
 
 import { GoalService } from './goal-service';
+
+interface RevisedGoals {
+    goalEstimates: IGoalEstimate[];
+    neededBadges: Record<Alliance, Record<number, number>>;
+}
 
 export const Goals = () => {
     const {
@@ -239,7 +244,7 @@ export const Goals = () => {
      * This computes the total number of remaining ability badges needed AND adjusts all goals to use as
      * many possible badges from our existing inventory.
      */
-    const adjustGoalBadgesAndComputeRemaining = useMemo((): Record<Alliance, Record<number, number>> => {
+    const adjustedGoalsEstimates = useMemo((): RevisedGoals => {
         const neededBadges: Record<Alliance, Record<number, number>> = {
             [Alliance.Chaos]: {},
             [Alliance.Imperial]: {},
@@ -251,17 +256,29 @@ export const Goals = () => {
             [Alliance.Imperial]: {},
             [Alliance.Xenos]: {},
         };
-        Object.entries(inventory.imperialAbilityBadges).forEach(([rarity, count]) => {
+        Object.entries(inventory.abilityBadges[Alliance.Imperial] ?? []).forEach(([rarity, count]) => {
             heldBadges[Alliance.Imperial][Number(rarity)] = count;
         });
-        Object.entries(inventory.xenosAbilityBadges).forEach(([rarity, count]) => {
+        Object.entries(inventory.abilityBadges[Alliance.Xenos] ?? []).forEach(([rarity, count]) => {
             heldBadges[Alliance.Xenos][Number(rarity)] = count;
         });
-        Object.entries(inventory.chaosAbilityBadges).forEach(([rarity, count]) => {
+        Object.entries(inventory.abilityBadges[Alliance.Chaos] ?? []).forEach(([rarity, count]) => {
             heldBadges[Alliance.Chaos][Number(rarity)] = count;
         });
 
-        for (const goal of goalsEstimate.filter(x => x.abilitiesEstimate || x.mowEstimate)) {
+        const newGoalsEstimates: IGoalEstimate[] = cloneDeep(goalsEstimate);
+        const goalsByPrio = orderBy(
+            goals.map(x => ({ id: x.id, priority: x.priority })),
+            ['priority'],
+            ['asc']
+        );
+        for (const goalIdAndPriority of goalsByPrio) {
+            const goal = newGoalsEstimates.find(x => x.goalId === goalIdAndPriority.id);
+            if (goal === undefined) {
+                console.error('could not find goal estimate for goal id ' + goalIdAndPriority.id);
+                continue;
+            }
+            if (goal.abilitiesEstimate === undefined && goal.mowEstimate === undefined) continue;
             const badges = goal.mowEstimate?.badges ?? goal.abilitiesEstimate!.badges;
             for (const [rarityStr, count] of Object.entries(badges)) {
                 const rarity = Number(rarityStr) as Rarity;
@@ -282,8 +299,8 @@ export const Goals = () => {
             }
         }
 
-        return neededBadges;
-    }, [goalsEstimate, inventory]);
+        return { neededBadges, goalEstimates: newGoalsEstimates };
+    }, [goals, goalsEstimate, inventory]);
 
     return (
         <div>
@@ -354,11 +371,13 @@ export const Goals = () => {
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
-                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
+                                    goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
+                                        x => x.goalId === goal.goalId
+                                    )}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                     bgColor={GoalService.getBackgroundColor(
                                         viewPreferences.goalsBattlePassSeasonView ?? false,
-                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
                                     )}
                                 />
                             ))}
@@ -368,7 +387,7 @@ export const Goals = () => {
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
                             rows={upgradeRankOrMowGoals}
-                            estimate={goalsEstimate}
+                            estimate={adjustedGoalsEstimates.goalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
                         />
@@ -396,11 +415,13 @@ export const Goals = () => {
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
-                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
+                                    goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
+                                        x => x.goalId === goal.goalId
+                                    )}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                     bgColor={GoalService.getBackgroundColor(
                                         viewPreferences.goalsBattlePassSeasonView ?? false,
-                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
                                     )}
                                 />
                             ))}
@@ -410,7 +431,7 @@ export const Goals = () => {
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
                             rows={shardsGoals}
-                            estimate={goalsEstimate}
+                            estimate={adjustedGoalsEstimates.goalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
                         />
@@ -438,7 +459,7 @@ export const Goals = () => {
                                     {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                         <div key={alliance} className="my-2 flex-box gap20">
                                             <BadgesTotal
-                                                badges={adjustGoalBadgesAndComputeRemaining[alliance]}
+                                                badges={adjustedGoalsEstimates.neededBadges[alliance]}
                                                 alliance={alliance}
                                             />
                                         </div>
@@ -453,11 +474,13 @@ export const Goals = () => {
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
-                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
+                                    goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
+                                        x => x.goalId === goal.goalId
+                                    )}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                     bgColor={GoalService.getBackgroundColor(
                                         viewPreferences.goalsBattlePassSeasonView ?? false,
-                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
                                     )}
                                 />
                             ))}
@@ -467,7 +490,7 @@ export const Goals = () => {
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
                             rows={upgradeAbilities}
-                            estimate={goalsEstimate}
+                            estimate={adjustedGoalsEstimates.goalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
                         />

@@ -16,6 +16,32 @@ export interface TacticusInventory {
     mythicShards: TacticusShard[];
     xpBooks: TacticusXpBook[];
     abilityBadges: TacticusAbilityBadges;
+    orbs: TacticusOrbs;
+    forgeBadges: TacticusForgeBadge[];
+    components: TacticusComponents[];
+}
+
+export interface TacticusOrb {
+    rarity: string;
+    amount: number;
+}
+
+export interface TacticusOrbs {
+    Imperial: TacticusOrb[];
+    Xenos: TacticusOrb[];
+    Chaos: TacticusOrb[];
+}
+
+export interface TacticusForgeBadge {
+    name: string;
+    rarity: string;
+    amount: number;
+}
+
+export interface TacticusComponents {
+    name: string;
+    grandAlliance: string;
+    amount: number;
 }
 
 interface TacticusAbility {

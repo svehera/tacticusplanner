@@ -12,6 +12,7 @@ import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import React from 'react';
 
 import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
+import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
@@ -46,6 +47,7 @@ export const menuItemById = {
     wyo: wyoMenuItem,
     myProgress: myProgressMenuItem,
     inventory: new MenuItemTP('Inventory', <InventoryIcon />, '/input/inventory'),
+    resources: resourcesMenuItem,
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
     leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
@@ -78,6 +80,7 @@ export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
     menuItemById['myProgress'],
     menuItemById['inventory'],
+    menuItemById['resources'],
     menuItemById['guild'],
 ];
 

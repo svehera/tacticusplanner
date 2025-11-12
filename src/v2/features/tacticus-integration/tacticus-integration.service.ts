@@ -1,7 +1,7 @@
 import xpData from 'src/v2/data/xp.json';
 
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api';
-import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
+import { RarityStars, Rarity, Rank, Alliance } from '@/fsd/5-shared/model';
 
 import { CharacterUpgradesService } from '@/fsd/4-entities/character';
 
@@ -38,6 +38,19 @@ export class TacticusIntegrationService {
         const currLevel = xpLevelThresholds[xpLevel - 1];
 
         return xp - currLevel.totalXp;
+    }
+
+    public static getAllianceFromString(allianceStr: string): Alliance | undefined {
+        switch (allianceStr.toLowerCase()) {
+            case 'imperial':
+                return Alliance.Imperial;
+            case 'xenos':
+                return Alliance.Xenos;
+            case 'chaos':
+                return Alliance.Chaos;
+            default:
+                return undefined;
+        }
     }
 
     static convertUpgrades(unitId: string, unitName: string, rank: Rank, upgradesIndexes: number[]): string[] {

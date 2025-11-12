@@ -1,6 +1,6 @@
 ﻿import { v4 } from 'uuid';
 
-import { Rank, Rarity, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityStars, RarityMapper, Alliance } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress, Campaign } from '@/fsd/4-entities/campaign';
 import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
@@ -152,6 +152,25 @@ const defaultGWLayout: IGWLayoutZone[] = [
     { id: 'frontline', players: [] },
 ];
 
+function createRarityRecord<T>(initialValue: T): Record<Rarity, T> {
+    return {
+        [Rarity.Common]: initialValue,
+        [Rarity.Uncommon]: initialValue,
+        [Rarity.Rare]: initialValue,
+        [Rarity.Epic]: initialValue,
+        [Rarity.Legendary]: initialValue,
+        [Rarity.Mythic]: initialValue,
+    };
+}
+
+function createAllianceRecord<T>(initialValue: T): Record<Alliance, T> {
+    return {
+        [Alliance.Imperial]: initialValue,
+        [Alliance.Xenos]: initialValue,
+        [Alliance.Chaos]: initialValue,
+    };
+}
+
 export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
     modifiedDate: undefined,
@@ -294,38 +313,11 @@ export const defaultData: IPersonalData2 = {
     leSelectedRequirements: {},
     campaignsProgress: defaultCampaignsProgress,
     inventory: {
-        xpBooks: {
-            [Rarity.Common]: 0,
-            [Rarity.Uncommon]: 0,
-            [Rarity.Rare]: 0,
-            [Rarity.Epic]: 0,
-            [Rarity.Legendary]: 0,
-            [Rarity.Mythic]: 0,
-        },
-        imperialAbilityBadges: {
-            [Rarity.Common]: 0,
-            [Rarity.Uncommon]: 0,
-            [Rarity.Rare]: 0,
-            [Rarity.Epic]: 0,
-            [Rarity.Legendary]: 0,
-            [Rarity.Mythic]: 0,
-        },
-        xenosAbilityBadges: {
-            [Rarity.Common]: 0,
-            [Rarity.Uncommon]: 0,
-            [Rarity.Rare]: 0,
-            [Rarity.Epic]: 0,
-            [Rarity.Legendary]: 0,
-            [Rarity.Mythic]: 0,
-        },
-        chaosAbilityBadges: {
-            [Rarity.Common]: 0,
-            [Rarity.Uncommon]: 0,
-            [Rarity.Rare]: 0,
-            [Rarity.Epic]: 0,
-            [Rarity.Legendary]: 0,
-            [Rarity.Mythic]: 0,
-        },
+        xpBooks: createRarityRecord(0),
+        abilityBadges: createAllianceRecord(createRarityRecord(0)),
+        components: createAllianceRecord(0),
+        forgeBadges: createRarityRecord(0),
+        orbs: createAllianceRecord(createRarityRecord(0)),
         upgrades: {},
     },
     guildWar: {
