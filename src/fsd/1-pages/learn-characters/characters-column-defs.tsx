@@ -1,5 +1,5 @@
 import { ColDef, ColGroupDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
@@ -169,7 +169,6 @@ export const useCharacters = () => {
                                 <StatCell
                                     characterId={props.data?.snowprintId ?? ''}
                                     rank={props.data?.rank ?? Rank.Stone1}
-                                    rarity={props.data?.rarity ?? Rarity.Common}
                                     rarityStars={props.data?.stars ?? RarityStars.None}
                                     numHealthUpgrades={StatsCalculatorService.countHealthUpgrades(
                                         props.data as ICharacter2
@@ -213,7 +212,6 @@ export const useCharacters = () => {
                                 <DamageCell
                                     character={props.data as ICharacter2}
                                     rank={props.data?.rank ?? Rank.Stone1}
-                                    rarity={props.data?.rarity ?? Rarity.Common}
                                     rarityStars={props.data?.stars ?? RarityStars.None}
                                     numDamageUpgrades={StatsCalculatorService.countDamageUpgrades(
                                         props.data as ICharacter2
@@ -235,7 +233,6 @@ export const useCharacters = () => {
                                 <StatCell
                                     characterId={props.data?.snowprintId ?? ''}
                                     rank={targetRank}
-                                    rarity={targetRarity}
                                     rarityStars={targetStars}
                                     numHealthUpgrades={StatsCalculatorService.countHealthUpgrades(
                                         props.data as ICharacter2
@@ -257,7 +254,6 @@ export const useCharacters = () => {
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                             StatsCalculatorService.calculateHealth(
                                 props.data?.snowprintId ?? '',
-                                targetRarity,
                                 targetStars,
                                 targetRank,
                                 0
@@ -271,7 +267,6 @@ export const useCharacters = () => {
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                             StatsCalculatorService.calculateDamage(
                                 props.data?.snowprintId ?? '',
-                                targetRarity,
                                 targetStars,
                                 targetRank,
                                 0
@@ -285,7 +280,6 @@ export const useCharacters = () => {
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                             StatsCalculatorService.calculateArmor(
                                 props.data?.snowprintId ?? '',
-                                targetRarity,
                                 targetStars,
                                 targetRank,
                                 0
@@ -300,7 +294,6 @@ export const useCharacters = () => {
                                 <DamageCell
                                     character={props.data as ICharacter2}
                                     rank={targetRank}
-                                    rarity={targetRarity}
                                     rarityStars={targetStars}
                                     numDamageUpgrades={0}
                                 />

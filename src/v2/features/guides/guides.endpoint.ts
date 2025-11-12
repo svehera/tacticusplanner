@@ -1,6 +1,6 @@
 ﻿import { makeApiCall } from '@/fsd/5-shared/api';
 
-import { ICreateGuide, IGetGuidesResponse, IGuide } from './guides.models';
+import { ICreateGuide, IGetGuidesResponse } from './guides.models';
 
 export const getTeamsApi = (queryParams: string) => {
     return makeApiCall<IGetGuidesResponse>('get', `guides?${queryParams}`);

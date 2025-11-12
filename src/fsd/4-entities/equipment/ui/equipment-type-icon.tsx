@@ -1,8 +1,4 @@
-import React from 'react';
-
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
-
-import { EquipmentService } from '../equipment.service';
 
 export const EquipmentTypeIcon = ({
     equipmentType,

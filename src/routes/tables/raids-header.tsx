@@ -4,7 +4,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SyncIcon from '@mui/icons-material/Sync';
 import Button from '@mui/material/Button';
-import React from 'react';
+import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
@@ -32,7 +32,7 @@ export const RaidsHeader: React.FC<Props> = ({
     hasSync,
     syncHandle,
 }) => {
-    const [openSettings, setOpenSettings] = React.useState<boolean>(false);
+    const [openSettings, setOpenSettings] = useState<boolean>(false);
 
     return (
         <>

@@ -1,11 +1,9 @@
-import { stat } from 'fs';
-
 import { Alliance, DynamicProps, Rarity, RarityMapper, RarityStars, UnitType } from '@/fsd/5-shared/model';
 
-import { IBaseUpgrade, ICraftedUpgrade, UpgradesService } from '@/fsd/4-entities/upgrade/@x/mow';
+import { UpgradesService } from '@/fsd/4-entities/upgrade/@x/mow';
 
-import { mowLevelUpCommonData, mows2Data, mowsData } from './data';
-import { IMow, IMow2, IMowDb, IMowLevelMaterials, IMowLevelUpgrades, IMowStatic, IMowStatic2 } from './model';
+import { mows2Data, mowsData } from './data';
+import { IMow, IMow2, IMowDb, IMowLevelMaterials, IMowStatic, IMowStatic2 } from './model';
 
 export class MowsService {
     public static getMowMaterialsList(mow: IMow2): IMowLevelMaterials[] {
@@ -95,6 +93,7 @@ export class MowsService {
             if (!ret.find(x => x.snowprintId === staticMow.snowprintId)) {
                 ret.push({
                     ...staticMow,
+                    faction: staticMow.factionId,
                     id: staticMow.snowprintId,
                     unlocked: false,
                     primaryAbilityLevel: 1,
@@ -133,9 +132,5 @@ export class MowsService {
         }
         const upgrades = key === 'primary' ? mow.primaryAbility : mow.secondaryAbility;
         return upgrades.recipes.slice(levelStart - 1, levelEnd - 1).flatMap(upgrades => upgrades);
-    }
-
-    private static getUpgrades(upgrades: string[]): Array<IBaseUpgrade | ICraftedUpgrade> {
-        return upgrades.map(upgrade => UpgradesService.getUpgrade(upgrade)).filter(x => !!x);
     }
 }

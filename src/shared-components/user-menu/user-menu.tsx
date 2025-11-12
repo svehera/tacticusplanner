@@ -12,7 +12,7 @@ import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from
 import Box from '@mui/material/Box';
 import ListItemText from '@mui/material/ListItemText';
 import { enqueueSnackbar } from 'notistack';
-import React, { ChangeEvent, useContext, useRef, useState } from 'react';
+import { ChangeEvent, useContext, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { usePopupManager } from 'react-popup-manager';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -25,8 +25,6 @@ import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-di
 
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
 import { usePopUpControls } from '@/fsd/5-shared/ui';
-
-import { CharactersService } from '@/fsd/4-entities/character';
 
 import { TacticusIntegrationDialog } from 'src/v2/features/tacticus-integration/tacticus-integration.dialog';
 
@@ -96,7 +94,7 @@ export const UserMenu = () => {
 
                     dispatch.setStore(new GlobalState(personalData), true, false);
                     enqueueSnackbar('Import successful', { variant: 'success' });
-                } catch (error) {
+                } catch (_error) {
                     enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
                 }
             };

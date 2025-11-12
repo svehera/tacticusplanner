@@ -20,9 +20,9 @@ const InventoryControlsFn: React.FC<Props> = ({ resetUpgrades, nameFilter, setNa
     return (
         <div className="flex items-center justify-center flex-wrap gap-5 m-5">
             <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="queick-filter-input">Quick Filter</InputLabel>
+                <InputLabel htmlFor="quick-filter-input">Quick Filter</InputLabel>
                 <OutlinedInput
-                    id="queick-filter-input"
+                    id="quick-filter-input"
                     value={nameFilterRaw}
                     onFocus={event => event.target.select()}
                     onChange={change => {

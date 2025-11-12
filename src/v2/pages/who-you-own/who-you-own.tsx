@@ -10,7 +10,7 @@ import { useAuth, UnitType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { CharactersService as FsdCharactersService } from '@/fsd/4-entities/character/characters.service';
-import { IMow2, mows2Data, MowsService } from '@/fsd/4-entities/mow';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';

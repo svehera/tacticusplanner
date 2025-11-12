@@ -3,7 +3,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import { FormControlLabel, Popover, Switch } from '@mui/material';
 import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { orderBy, sum } from 'lodash';
+import { orderBy } from 'lodash';
 import React, { useContext, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -23,13 +23,12 @@ import {
     IMaterialRecipeIngredientFull,
     UpgradeImage,
     IMaterialEstimated2,
-    UpgradesService,
 } from '@/fsd/4-entities/upgrade';
 
 import { RankLookupService } from './rank-lookup.service';
 
 export const RankLookup = () => {
-    const { characters, campaignsProgress, inventory } = useContext(StoreContext);
+    const { characters, campaignsProgress } = useContext(StoreContext);
     const [searchParams, setSearchParams] = useSearchParams();
 
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
@@ -302,7 +301,7 @@ export const RankLookup = () => {
                     gap: '20px',
                 }}>
                 <UnitsAutocomplete
-                    label="Chracters"
+                    label="Characters"
                     style={{ maxWidth: 300 }}
                     unit={character}
                     options={characters}

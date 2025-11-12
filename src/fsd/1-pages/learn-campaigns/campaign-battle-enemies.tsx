@@ -1,11 +1,13 @@
 import React, { JSX, useMemo } from 'react';
 
-import { Rarity, Rank } from '@/fsd/5-shared/model';
+import { Rank } from '@/fsd/5-shared/model';
 
 import { IDetailedEnemy } from '@/fsd/4-entities/campaign';
-import { NpcPortrait } from '@/fsd/4-entities/npc';
+import { NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
 
 interface Props {
+    battleId: string;
+    keyPrefix: string;
     enemies: IDetailedEnemy[];
     scale: number;
 }
@@ -14,11 +16,13 @@ interface Props {
  * Displays a grid of enemies, similar to what you see in game when you open a
  * campaign-battle dialog.
  *
+ * @param keyPrefix A prefix to use for keys only.
+ * @param battleId The ID of the battle. Used for keys only.
  * @param enemies The enemies to display. Each enemy must have a name, rank,
  *                and stars. Bosses can also have a rarity.
  * @param scale The scale of the grid. 1 is full size (which can be very large).
  */
-export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
+export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, enemies, scale }) => {
     // The total number of enemies in this battle.
     const numEnemies = useMemo(() => enemies.reduce((acc, enemy) => acc + enemy.count, 0), [enemies]);
 
@@ -67,17 +71,8 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
         if (rank.startsWith('Silver')) return Rank.Silver1 + parseInt(rank[7]) - 1;
         if (rank.startsWith('Gold')) return Rank.Gold1 + parseInt(rank[5]) - 1;
         if (rank.startsWith('Diamond')) return Rank.Diamond1 + parseInt(rank[8]) - 1;
+        if (rank.startsWith('Adamantine')) return Rank.Adamantine1 + parseInt(rank[11]) - 1;
         return Rank.Locked;
-    };
-
-    /** @returns The enum rep of a rarity. Defaults to Common. */
-    const parseRarity = (rarity: string): Rarity => {
-        if (rarity == 'Common') return Rarity.Common;
-        if (rarity == 'Uncommon') return Rarity.Uncommon;
-        if (rarity == 'Rare') return Rarity.Rare;
-        if (rarity == 'Epic') return Rarity.Epic;
-        if (rarity == 'Legendary') return Rarity.Legendary;
-        return Rarity.Common;
     };
 
     /** @returns The grid of enemies, as an array without any scaling. */
@@ -88,17 +83,14 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
         let enemiesInRow = 0;
         const elems: JSX.Element[] = [];
         enemies.forEach(enemy => {
+            const enemyIcon = NpcService.getNpcById(enemy.id)?.icon ?? 'npc_icons/missing.png';
+            console.log(`enemy: ${enemy.name}, icon: ${enemyIcon}`);
             for (let i = 0; i < enemy.count; i++) {
                 elems.push(
                     <div
-                        key={row * maxPerRow + i + enemy.name + enemy.rank + enemy.rarity}
+                        key={keyPrefix + battleId + (row * maxPerRow + i) + enemy.name + enemy.rank}
                         style={{ position: 'absolute', left: left, top: top }}>
-                        <NpcPortrait
-                            name={enemy.name}
-                            rank={parseRank(enemy.rank)}
-                            rarity={parseRarity(enemy.rarity ?? 'Common')}
-                            stars={enemy.stars}
-                        />
+                        <NpcPortrait id={enemy.id} rank={parseRank(enemy.rank)} stars={enemy.stars} />
                     </div>
                 );
                 left += frameWidth + horizontalMargin;

@@ -1,5 +1,4 @@
-﻿import { GoalsService } from 'src/v2/features/goals/goals.service';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+﻿import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 import { SetStateAction } from '../models/interfaces';
 

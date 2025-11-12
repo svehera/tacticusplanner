@@ -17,11 +17,14 @@ export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IW
     inventoryShowAlphabet: boolean;
     inventoryShowPlusMinus: boolean;
     goalsTableView: boolean;
+    goalsBattlePassSeasonView: boolean;
+    campaignsTableView: boolean;
+    raidsTableView: boolean;
     myProgressShowCoreCharacters: boolean;
     apiIntegrationSyncOptions: string[];
 }
 
-export interface IWyoViewSettings {
+interface IWyoViewSettings {
     showBadges: boolean;
     showAbilitiesLevel: boolean;
     showBsValue: boolean;

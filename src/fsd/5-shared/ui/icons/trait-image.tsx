@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import { getTraitStringFromLabel, Trait } from '@/fsd/5-shared/model';
+﻿import { getTraitStringFromLabel, Trait } from '@/fsd/5-shared/model';
 
 import { getImageUrl } from '../get-image-url';
 

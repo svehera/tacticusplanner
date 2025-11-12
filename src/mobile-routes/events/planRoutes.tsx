@@ -1,7 +1,7 @@
 ﻿import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import Button from '@mui/material/Button';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { PlanGuildWarRoutes } from 'src/mobile-routes/events/guildWarRoutes';

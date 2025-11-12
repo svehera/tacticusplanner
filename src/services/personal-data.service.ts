@@ -351,7 +351,7 @@ function populateProgress(data: ILreProgressDto) {
     data.battlesProgress = battlesProgress; // Populate the teams field
 }
 
-export const isV1Data = (data: IPersonalData | IPersonalData2): data is IPersonalData => {
+const isV1Data = (data: IPersonalData | IPersonalData2): data is IPersonalData => {
     const versionKey: keyof IPersonalData2 = 'schemaVersion';
     return !Object.hasOwn(data, versionKey);
 };

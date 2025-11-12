@@ -11,7 +11,7 @@ import { TodayRaids } from 'src/routes/tables/todayRaids';
 import { useAuth } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { MowsService } from '@/fsd/4-entities/mow';
 import { UpgradesService as FsdUpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
@@ -27,8 +27,6 @@ import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { LocationsFilter } from 'src/v2/features/goals/locations-filter';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
-
-import './dailyRaids.scss';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);

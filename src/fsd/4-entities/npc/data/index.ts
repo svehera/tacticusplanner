@@ -1,5 +1,5 @@
-import { INpcsRaw } from '../model';
+import { INpcDataRaw } from '../model';
 
-import npcDataJson from './NpcData.json';
+import npcDataJson from './newNpcData.json';
 
-export const npcData: INpcsRaw = npcDataJson;
+export const npcData: INpcDataRaw[] = npcDataJson;

@@ -17,7 +17,7 @@ export const ThirdPartyProviders: React.FC = () => {
             <SnackbarProvider
                 autoHideDuration={5000}
                 anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
-                onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
+                onEntered={(node, _isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
             />
 
             {/* 

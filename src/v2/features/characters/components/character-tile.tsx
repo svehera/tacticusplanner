@@ -18,8 +18,6 @@ import { CharactersValueService } from '@/fsd/4-entities/unit/characters-value.s
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 
-import './character-tile.css';
-
 const CharacterTileFn = ({
     character,
     disableClick,
@@ -93,10 +91,12 @@ const CharacterTileFn = ({
 
     const renderCharacterLevel = useMemo(() => {
         return isUnlocked ? (
-            <div className="character-level">{character.level}</div>
+            <div className="relative top-[-15px] flex items-center justify-center border text-[white] text-xs border-solid border-[gold] bg-[#012a41]">
+                {character.level}
+            </div>
         ) : (
             <div
-                className="character-level"
+                className="relative top-[-15px] flex items-center justify-center border text-[white] text-xs border-solid border-[gold] bg-[#012a41]"
                 style={{
                     background: `linear-gradient(to right, green ${unlockProgress}%, #012A41 ${unlockProgress}%)`,
                 }}>
@@ -121,7 +121,7 @@ const CharacterTileFn = ({
 
     return (
         <div
-            className="character-tile"
+            className="flex flex-col items-center min-w-[75px]"
             style={{ opacity: tileOpacity, cursor: onCharacterClick && !disableClick ? 'pointer' : undefined }}
             onClick={!disableClick ? handleCharacterClick : undefined}>
             <StarsIcon stars={character.stars} />
@@ -133,21 +133,25 @@ const CharacterTileFn = ({
                 </Tooltip>
 
                 <div
-                    className="abilities"
+                    className="relative top-[-7px] flex items-center justify-between z-10"
                     style={{ visibility: hasAbilities && viewContext.showAbilitiesLevel ? 'visible' : 'hidden' }}>
-                    <div className="ability-level">{character.activeAbilityLevel}</div>
-                    <div className="ability-level">{character.passiveAbilityLevel}</div>
+                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                        {character.activeAbilityLevel}
+                    </div>
+                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                        {character.passiveAbilityLevel}
+                    </div>
                 </div>
                 {viewContext.showCharacterLevel && renderCharacterLevel}
             </div>
-            <div className="character-rarity-rank">
+            <div className="min-h-[30px] flex items-center mt-[-15px] justify-center">
                 {viewContext.showCharacterRarity && <RarityIcon rarity={character.rarity} />}
                 {isUnlocked && <RankIcon rank={character.rank} />}
             </div>
             {!!character.numberOfUnlocked && (
                 <AccessibleTooltip title={renderUnlockStats}>
                     <div
-                        className="character-unlock"
+                        className="bg-[#012a41] w-[60px] flex items-center justify-center border text-[white] text-xs mb-[5px] border-solid border-[gold]"
                         style={{
                             background: `linear-gradient(to right, green ${character.numberOfUnlocked}%, #012A41 ${character.numberOfUnlocked}%)`,
                         }}>

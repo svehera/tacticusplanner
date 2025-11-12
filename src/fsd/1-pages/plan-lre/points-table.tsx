@@ -11,7 +11,7 @@ import {
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { sum, uniq } from 'lodash';
-import React, { useContext, useMemo, useRef, useState } from 'react';
+import { useContext, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -20,7 +20,6 @@ import { StoreContext } from '@/reducers/store.provider';
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank, rankToString, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
-import { Link } from '@/fsd/5-shared/ui/link';
 
 import { CharactersService, CharacterTitleShort, RankIcon } from '@/fsd/4-entities/character';
 
@@ -422,12 +421,12 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 </FormControl>
                 {selection === CharactersSelection.Selected ? (
                     <FormControl>
-                        <FormLabel id="points-calcualtion-label" style={{ fontWeight: 700 }}>
+                        <FormLabel id="points-calculation-label" style={{ fontWeight: 700 }}>
                             Points Calculation
                         </FormLabel>
                         <RadioGroup
                             style={{ display: 'flex', flexDirection: 'row' }}
-                            aria-labelledby="points-calcualtion-label"
+                            aria-labelledby="points-calculation-label"
                             value={pointsCalculation}
                             onChange={(_, value) => setPointsCalculation(value as PointsCalculation)}
                             name="radio-buttons-group">

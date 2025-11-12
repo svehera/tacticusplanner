@@ -11,6 +11,7 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,7 +27,12 @@ const FS_LAYERS = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
 const REVERSED_FS_LAYERS = [...FS_LAYERS].reverse();
 
 export default [
-    ...compat.extends('eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react/recommended'),
+    ...compat.extends(
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react/recommended',
+        'plugin:react/jsx-runtime' // In React 17+, the new JSX transform doesn't require 'React' to be in scope
+    ),
     pluginImportX.flatConfigs.recommended,
     pluginImportX.flatConfigs.typescript,
     {
@@ -36,6 +42,7 @@ export default [
             'react-refresh': reactRefresh,
             'react-compiler': reactCompiler,
             boundaries,
+            'unused-imports': unusedImports,
         },
 
         languageOptions: {
@@ -84,7 +91,16 @@ export default [
             semi: ['error', 'always'],
             'object-curly-spacing': ['error', 'always'],
             '@typescript-eslint/no-explicit-any': ['warn'],
-            '@typescript-eslint/no-unused-vars': ['warn'],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                {
+                    argsIgnorePattern: '^_',
+                    args: 'all',
+                    varsIgnorePattern: '^_',
+                    destructuredArrayIgnorePattern: '^_',
+                    caughtErrorsIgnorePattern: '^_',
+                },
+            ],
             'react-refresh/only-export-components': 'error',
             'react-compiler/react-compiler': 'error',
             'import-x/order': [
@@ -143,6 +159,7 @@ export default [
                     ],
                 },
             ],
+            'unused-imports/no-unused-imports': 'error',
         },
     },
     {
@@ -198,6 +215,16 @@ export default [
                             group: ['../../*'],
                             message:
                                 'Relative parent imports are not allowed. Use absolute imports with layer names instead.',
+                        },
+                    ],
+                    paths: [
+                        {
+                            name: '@emotion/react',
+                            message: 'Please use TailwindCSS. Emotion is only included as a dependency of MUI.',
+                        },
+                        {
+                            name: '@emotion/styled',
+                            message: 'Please use TailwindCSS. Emotion is only included as a dependency of MUI.',
                         },
                     ],
                 },

@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo } from 'react';
+﻿import { useContext, useMemo } from 'react';
 
 import { numberToThousandsString, numberToThousandsStringOld } from '@/fsd/5-shared/lib';
 import { UnitType } from '@/fsd/5-shared/model';
@@ -15,8 +15,6 @@ import { IFaction } from '../characters.models';
 
 import { CharacterTile } from './character-tile';
 
-import './faction-tile.scss';
-
 export const FactionsTile = ({
     faction,
     onCharacterClick,
@@ -32,28 +30,30 @@ export const FactionsTile = ({
         const isMow = faction.units.length > 5;
 
         if (isComplete) {
-            return 'complete-faction';
+            return 'justify-start';
         }
         if (isIncomplete) {
-            return 'incomplete-faction';
+            return 'justify-start ps-[5px]';
         }
 
         if (isMow) {
-            return 'mow-faction';
+            return 'justify-start';
         }
         return '';
     }, [faction.units.length]);
     const { showBsValue, showPower } = useContext(CharactersViewContext);
     return (
-        <div className="faction">
-            <h4 className="faction-title" style={{ backgroundColor: faction.color }}>
-                <div className="faction-icon">
+        <div className="min-w-[375px] max-w-[525px] max-[500px]:max-w-[375px]">
+            <h4
+                className="text-white mb-0 mt-[5px] border-t-2 border-solid border-[gold] font-medium flex items-center justify-between"
+                style={{ backgroundColor: faction.color }}>
+                <div className="flex items-center gap-[5px]">
                     <FactionImage faction={faction.name} />
                     <span>{faction.name.toUpperCase()}</span>
                 </div>
                 <Conditional condition={showBsValue}>
                     <AccessibleTooltip title={numberToThousandsStringOld(faction.bsValue)}>
-                        <div className="faction-value">
+                        <div className="flex">
                             <MiscIcon icon={'blackstone'} height={20} width={15} />
                             {''}
                             {factionValue}
@@ -62,7 +62,7 @@ export const FactionsTile = ({
                 </Conditional>
                 <Conditional condition={showPower}>
                     <AccessibleTooltip title={numberToThousandsStringOld(faction.power)}>
-                        <div className="faction-power">
+                        <div className="flex">
                             <MiscIcon icon={'power'} height={20} width={15} />
                             {''}
                             {factionPower}
@@ -70,7 +70,8 @@ export const FactionsTile = ({
                     </AccessibleTooltip>
                 </Conditional>
             </h4>
-            <div className={`characters-box ${factionClass}`}>
+            <div
+                className={`flex items-center [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)] max-[500px]:flex-wrap ${factionClass}`}>
                 {faction.units.map(unit => {
                     if (unit.unitType === UnitType.character) {
                         return (

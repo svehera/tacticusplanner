@@ -28,16 +28,39 @@ export class TokenUse {
 }
 
 /**
+ * A type that represents positive integers (1, 2, 3, ...).
+ * Unfortunately it doesn't work on object literals.
+ * e.g. `const foo: PositiveInteger<number> = -1;` won't error
+ * It does work with function signatures though.
+ * e.g. `function test<T extends number>(n: PositiveInteger<T>) {}` will error
+ * e.g. `test(-1);` will error
+ * e.g. ` n = -1; test(n);` will error
+ * Tbh it's mostly useful for documenting intent.
+ *
+ * @source https://mvasilkov.animuchan.net/typescript-positive-integer-type
+ */
+type PositiveInteger<T extends number> = `${T}` extends '0' | `-${any}` | `${any}.${any}` ? never : T;
+
+/**
  * LE milestones such as 12,500 points for a first round unlock with no packs.
  */
-export class MilestoneAndPoints {
-    public points: number = -1;
-    public stars: number = -1; // 3, 4, 5, or 6 (blue star), 7 (mythic), 8 (two blue stars)
-    public round: number = -1; // 1, 2, or 3
-    public packsPerRound: number = -1; // 0 for no packs, 1 for premium missions, 2 for currency pack
-}
+type MilestoneAndPoints = {
+    points: PositiveInteger<number>;
+    stars:
+        | 3
+        | 4
+        | 5
+        | 6 // blue star
+        | 7 // mythic
+        | 8; // two blue stars
+    round: 1 | 2 | 3;
+    packsPerRound:
+        | 0 // no packs
+        | 1 // premium missions
+        | 2; // currency pack
+};
 
-export const milestonesAndPoints = [
+export const milestonesAndPoints: readonly MilestoneAndPoints[] = [
     { points: 100, stars: 3, round: 3, packsPerRound: 2 },
     { points: 6000, stars: 3, round: 3, packsPerRound: 1 },
     { points: 6500, stars: 3, round: 2, packsPerRound: 2 },
@@ -177,7 +200,7 @@ export class TokenEstimationService {
                     battle.requirementsProgress.length;
             });
         });
-        const resolvedTeams = teams.map((team, index) => ({
+        const resolvedTeams = teams.map(team => ({
             ...team,
             charSnowprintIds: (team.charSnowprintIds ?? team.charactersIds ?? []).map(char =>
                 CharactersService.canonicalName(char)

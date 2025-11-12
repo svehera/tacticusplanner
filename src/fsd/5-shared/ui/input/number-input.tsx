@@ -18,7 +18,7 @@ export const NumberInput: React.FC<Props> = ({
     value,
     valueChange,
     fullWidth = false,
-    max = 50,
+    max = 55,
     min = 1,
     step = 1,
     style = {},

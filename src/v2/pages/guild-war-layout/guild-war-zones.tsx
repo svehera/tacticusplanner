@@ -35,8 +35,6 @@ import { BfLevelSelect } from 'src/v2/features/guild-war/bf-level-select';
 import { IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
-import './guild-war-zones.scss';
-
 export const GuildWarZones = () => {
     const { guildWar, guild } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -52,7 +50,7 @@ export const GuildWarZones = () => {
     const [editZonePlayer1, setEditZonePlayer1] = React.useState(false);
     const [editZonePlayer2, setEditZonePlayer2] = React.useState(false);
 
-    const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
         setTab(newValue);
         setActiveLayout(guildWar.layouts[newValue]);
     };
@@ -254,7 +252,7 @@ export const GuildWarZones = () => {
                     </>
                 )}
             </FlexBox>
-            <div className="guild-war-layout-grid">
+            <div className="gap-x-[5px] gap-y-[10px] grid grid-flow-row justify-center mt-[10px] grid-rows-[repeat(5,_1fr)] grid-cols-[repeat(3,_minmax(180px,_400px))] max-[800]:grid-cols-[repeat(3,_minmax(33%,_400px))]">
                 {activeLayout.zones.map((zone, index) => (
                     <ZoneCard
                         key={index}

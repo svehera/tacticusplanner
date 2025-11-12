@@ -1,4 +1,4 @@
-import { orderBy, uniq } from 'lodash';
+import { uniq } from 'lodash';
 
 import {
     UnitType,
@@ -16,6 +16,15 @@ import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from
 
 import { charactersData } from './data';
 import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData, ICharacter2 } from './model';
+
+const equipmentTypeMapping = {
+    Crit: Equipment.Crit,
+    Block: Equipment.Block,
+    'Crit Booster': Equipment.CritBooster,
+    'Block Booster': Equipment.BlockBooster,
+    Defensive: Equipment.Defensive,
+    Defense: Equipment.Defensive,
+} as const;
 
 export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
@@ -138,9 +147,12 @@ export class CharactersService {
         return unitData;
     }
 
-    public static parseEquipmentType(equip: string): Equipment {
-        const e = equip === 'Defense' ? 'Defensive' : equip;
-        return e as Equipment;
+    public static parseEquipmentType(equip: string) {
+        // ToDo: consider using `Zod.enum` for this kind of parsing/validation
+        // Ref: https://zod.dev/api#enum
+        const equipmentType = equipmentTypeMapping[equip as keyof typeof equipmentTypeMapping];
+        if (!equipmentType) throw new Error(`Unknown equipment type: ${equip}`);
+        return equipmentType;
     }
 
     static canonicalName(identifier: string): string {

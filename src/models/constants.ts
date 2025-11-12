@@ -32,6 +32,8 @@ export const rankToLevel: Record<Rank, number> = {
     [Rank.Diamond2]: 47,
     [Rank.Diamond3]: 50,
     [Rank.Adamantine1]: 55,
+    [Rank.Adamantine2]: 60,
+    [Rank.Adamantine3]: 65,
 };
 
 export const rankToRarity: Record<Rank, Rarity> = {
@@ -55,6 +57,8 @@ export const rankToRarity: Record<Rank, Rarity> = {
     [Rank.Diamond2]: Rarity.Legendary,
     [Rank.Diamond3]: Rarity.Legendary,
     [Rank.Adamantine1]: Rarity.Mythic,
+    [Rank.Adamantine2]: Rarity.Mythic,
+    [Rank.Adamantine3]: Rarity.Mythic,
 };
 
 export const charsProgression: Record<number, ICharProgression> = {
@@ -106,12 +110,17 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     'Saim-Hann Elite': 0,
     'Saim-Hann Mirror Elite': 0,
 
+    Onslaught: 0,
+
     'Adeptus Mechanicus Standard': 0,
     'Adeptus Mechanicus Standard Challenge': 0,
     'Adeptus Mechanicus Extremis': 0,
     'Adeptus Mechanicus Extremis Challenge': 0,
 
-    Onslaught: 0,
+    [Campaign.DGS]: 0,
+    [Campaign.DGSC]: 0,
+    [Campaign.DGE]: 0,
+    [Campaign.DGEC]: 0,
 
     [Campaign.TS]: 0,
     [Campaign.TSC]: 0,
@@ -125,7 +134,7 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     [Campaign.TAEC]: 0,
 };
 
-export const defaultGWLayout: IGWLayoutZone[] = [
+const defaultGWLayout: IGWLayoutZone[] = [
     { id: 'medicaeStation', players: [] },
     { id: 'headQuarters', players: [] },
     { id: 'voxStation', players: [] },
@@ -187,6 +196,9 @@ export const defaultData: IPersonalData2 = {
         inventoryShowAlphabet: true,
         inventoryShowPlusMinus: true,
         goalsTableView: false,
+        campaignsTableView: false,
+        goalsBattlePassSeasonView: false,
+        raidsTableView: false,
         lreGridView: false,
         lreGoalsPreview: false,
         lreTileShowUnitIcon: true,
@@ -282,6 +294,38 @@ export const defaultData: IPersonalData2 = {
     leSelectedRequirements: {},
     campaignsProgress: defaultCampaignsProgress,
     inventory: {
+        xpBooks: {
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 0,
+            [Rarity.Mythic]: 0,
+        },
+        imperialAbilityBadges: {
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 0,
+            [Rarity.Mythic]: 0,
+        },
+        xenosAbilityBadges: {
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 0,
+            [Rarity.Mythic]: 0,
+        },
+        chaosAbilityBadges: {
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 0,
+            [Rarity.Mythic]: 0,
+        },
         upgrades: {},
     },
     guildWar: {
@@ -362,6 +406,5 @@ export const idToCampaign: Record<string, Campaign> = {
 export const rarityToStars = RarityMapper.toStars;
 export const rarityToMaxStars = RarityMapper.toMaxStars;
 export const rarityToMaxRank = RarityMapper.toMaxRank;
-export const rarityStringToNumber = RarityMapper.stringToNumber;
 
 export { charsUnlockShards, charsReleaseShards } from '@/fsd/4-entities/character';

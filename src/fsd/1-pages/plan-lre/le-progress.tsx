@@ -24,7 +24,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
     const { leSelectedTeams } = useContext(StoreContext);
     const [accordionExpanded, setAccordionExpanded] = React.useState<string | false>('tracks');
 
-    const handleAccordionChange = (section: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    const handleAccordionChange = (section: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
         setAccordionExpanded(isExpanded ? section : false);
     };
 
@@ -86,7 +86,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                     {model.occurrenceProgress.map(occurrence => (
                         <LeProgressOverviewMissions
                             key={occurrence.eventOccurrence}
-                            occurence={occurrence}
+                            occurrence={occurrence}
                             progressChange={updateOccurrenceProgress}
                         />
                     ))}

@@ -7,12 +7,11 @@ import factionsData from 'src/v2/data/factions.json';
 import { Rank, Rarity, UnitType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow, IMow2 } from '@/fsd/4-entities/mow';
+import { IMow2 } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow, isUnlocked } from '@/fsd/4-entities/unit/units.functions';
-import { IMaterialFull, UpgradesService } from '@/fsd/4-entities/upgrade';
 
-import { rarityCaps } from 'src/v2/features/characters/characters.contants';
+import { rarityCaps } from 'src/v2/features/characters/characters.constants';
 
 import { CharactersFilterBy } from '../../../fsd/4-entities/character/characters-filter-by.enum';
 import { CharactersOrderBy } from '../../../fsd/4-entities/character/characters-order-by.enum';

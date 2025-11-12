@@ -1,7 +1,7 @@
 import { ArrowForward } from '@mui/icons-material';
 import { ColDef, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 
 import { UnitShardIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -137,7 +137,11 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
         ];
     }
 
-    const [goalDefs, setGoalDefs] = useState(getColumnDefs());
+    // Note: this was previously a useState, but since the column defs are
+    // static `setGoalDefs` is never called. I switched it to useMemo to keep
+    // it more similar but it's probably best left as a simple constant where
+    // React compiler handles the optimization.
+    const goalDefs = useMemo(() => getColumnDefs(), []);
 
     return (
         <AgGridReact

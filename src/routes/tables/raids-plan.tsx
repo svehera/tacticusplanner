@@ -1,18 +1,23 @@
 ﻿import { Warning } from '@mui/icons-material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import GridViewIcon from '@mui/icons-material/GridView';
 import InfoIcon from '@mui/icons-material/Info';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PendingIcon from '@mui/icons-material/Pending';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import TableRowsIcon from '@mui/icons-material/TableRows';
+import { Accordion, AccordionDetails, AccordionSummary, Box, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
 import { AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharactersService } from '@/fsd/4-entities/character';
 
 import { IEstimatedShards, IEstimatedUpgrades } from 'src/v2/features/goals/goals.models';
 import { MaterialsTable } from 'src/v2/features/goals/materials-table';
@@ -20,6 +25,8 @@ import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
 import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-input';
 
 import { Inventory } from '@/fsd/1-pages/input-inventory';
+
+import { RaidUpgradeMaterialCard } from './raid-upgrade-material-card';
 
 interface Props {
     estimatedShards: IEstimatedShards;
@@ -30,6 +37,9 @@ interface Props {
     updateInventoryAny: () => void;
 }
 
+type RefElem = HTMLDivElement | null;
+type RefMap = { [key: string]: RefElem };
+
 export const RaidsPlan: React.FC<Props> = ({
     estimatedShards,
     estimatedRanks,
@@ -38,15 +48,75 @@ export const RaidsPlan: React.FC<Props> = ({
     upgrades,
     updateInventory,
 }) => {
-    const [upgradesPaging, setUpgradesPaging] = React.useState<{
+    const { viewPreferences } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
+    const [upgradesPaging, setUpgradesPaging] = useState<{
         start: number;
         end: number;
         completed: boolean;
     }>({ start: 0, end: 3, completed: true });
 
-    const [grid1Loaded, setGrid1Loaded] = React.useState<boolean>(false);
-    const [grid2Loaded, setGrid2Loaded] = React.useState<boolean>(false);
-    const [grid3Loaded, setGrid3Loaded] = React.useState<boolean>(false);
+    const [grid1Loaded, setGrid1Loaded] = useState<boolean>(false);
+    const [grid2Loaded, setGrid2Loaded] = useState<boolean>(false);
+    const [grid3Loaded, setGrid3Loaded] = useState<boolean>(false);
+
+    const itemRefs = useRef<RefMap>({});
+    const setCardRef = useCallback(
+        (id: number) => (element: RefElem) => {
+            itemRefs.current[id] = element;
+        },
+        []
+    );
+
+    type CharacterToMaterialIndexMap = Record<string, number>;
+
+    const updateView = (tableView: boolean): void => {
+        dispatch.viewPreferences({ type: 'Update', setting: 'raidsTableView', value: tableView });
+    };
+
+    const characterToMaterialMap: CharacterToMaterialIndexMap = useMemo(() => {
+        const characterIndexMap: CharacterToMaterialIndexMap = {};
+
+        estimatedRanks.inProgressMaterials.forEach((material, materialIndex) => {
+            // Iterate over the related characters for the current material
+            material.relatedCharacters.forEach(fullName => {
+                const unit = CharactersService.getUnit(fullName);
+                if (!unit || !unit.snowprintId) return;
+                // Check if this snowprintId has ALREADY been recorded.
+                // If it hasn't, this is the FIRST time we've seen it, so record the index.
+                if (!(unit.snowprintId in characterIndexMap)) {
+                    characterIndexMap[unit.snowprintId] = materialIndex;
+                }
+            });
+        });
+
+        return characterIndexMap;
+    }, [estimatedRanks.inProgressMaterials]);
+
+    const scrollToTarget = useCallback(() => {
+        if (scrollToCharSnowprintId === undefined) return;
+        if (!Object.keys(characterToMaterialMap).includes(scrollToCharSnowprintId)) return;
+        const targetElement = itemRefs.current[characterToMaterialMap[scrollToCharSnowprintId]];
+        if (targetElement) {
+            // 3. Call the native DOM method: scrollIntoView
+            targetElement.scrollIntoView({
+                behavior: 'smooth', // Makes the scroll transition smooth
+                block: 'center', // Aligns the element to the vertical center of the container
+            });
+        }
+    }, [itemRefs, scrollToCharSnowprintId]);
+
+    useEffect(() => {
+        if (scrollToCharSnowprintId) {
+            // Use a brief delay to ensure the scrollable parent container and its content
+            // have finished rendering and measurement.
+            const timer = setTimeout(() => {
+                scrollToTarget();
+            }, 100);
+
+            return () => clearTimeout(timer); // Cleanup timer on unmount
+        }
+    }, [scrollToCharSnowprintId, scrollToTarget]); // Rerun if the ID changes
 
     useEffect(() => {
         if (estimatedRanks.upgradesRaids.length > 3) {
@@ -132,17 +202,67 @@ export const RaidsPlan: React.FC<Props> = ({
                             <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <PendingIcon color={'primary'} />
                                 <b>{estimatedRanks.inProgressMaterials.length}</b> in progress upgrades
+                                <FormControlLabel
+                                    control={
+                                        <Switch
+                                            checked={viewPreferences.raidsTableView}
+                                            onChange={event => updateView(event.target.checked)}
+                                        />
+                                    }
+                                    label={
+                                        <div className="flex-box gap5">
+                                            {viewPreferences.raidsTableView ? (
+                                                <div className="flex-box gap5">
+                                                    <TableRowsIcon color="primary" /> <span>Table View</span>
+                                                </div>
+                                            ) : (
+                                                <div className="flex-box gap5">
+                                                    <GridViewIcon color="primary" /> <span>Cards View</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    }
+                                />
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MaterialsTable
-                                rows={estimatedRanks.inProgressMaterials}
-                                updateMaterialQuantity={updateInventory}
-                                onGridReady={() => setGrid1Loaded(true)}
-                                inventory={upgrades}
-                                scrollToCharSnowprintId={scrollToCharSnowprintId}
-                                alreadyUsedMaterials={estimatedRanks.finishedMaterials}
-                            />
+                            {viewPreferences.raidsTableView === true ? (
+                                <MaterialsTable
+                                    rows={estimatedRanks.inProgressMaterials}
+                                    updateMaterialQuantity={updateInventory}
+                                    onGridReady={() => setGrid1Loaded(true)}
+                                    inventory={upgrades}
+                                    scrollToCharSnowprintId={scrollToCharSnowprintId}
+                                    alreadyUsedMaterials={estimatedRanks.finishedMaterials}
+                                />
+                            ) : (
+                                <Box
+                                    sx={{
+                                        height: 300, // Required: Defines the viewable area height
+                                        overflowY: 'scroll', // Required: Enables vertical scrolling
+                                        p: 2,
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        gap: 1,
+                                        width: '100%',
+                                    }}>
+                                    <div className="flex flex-wrap gap-x-4 gap-y-4">
+                                        {estimatedRanks.inProgressMaterials.length > 0 &&
+                                            estimatedRanks.inProgressMaterials.map((material, index) => (
+                                                <div className="item-raids w-64" key={index} ref={setCardRef(index)}>
+                                                    <RaidUpgradeMaterialCard
+                                                        index={index}
+                                                        upgradeMaterialSnowprintId={material.id}
+                                                        currentQuantity={material.acquiredCount}
+                                                        desiredQuantity={material.requiredCount}
+                                                        relatedCharacterSnowprintIds={material.relatedCharacters}
+                                                        locations={material.locations}
+                                                    />
+                                                </div>
+                                            ))}
+                                    </div>
+                                </Box>
+                            )}
                         </AccordionDetails>
                     </Accordion>
                 )}

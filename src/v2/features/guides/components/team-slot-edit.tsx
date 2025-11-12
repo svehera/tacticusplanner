@@ -11,8 +11,6 @@ import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 import { SlotType } from 'src/v2/features/guides/guides.enums';
 import { ITeamSlot } from 'src/v2/features/guides/guides.models';
 
-import './team-slot-edit.scss';
-
 interface Props {
     units: IUnit[];
     slot: ITeamSlot;
@@ -45,7 +43,11 @@ export const TeamSlotEdit: React.FC<Props> = ({
         if (!unit) {
             return (
                 <div
-                    className={selectedIndex === index ? 'glow-border' : ''}
+                    className={
+                        selectedIndex === index
+                            ? 'border-solid border-2 border-[#0000ff] [transition:box-shadow_0.3s_ease-in-out]'
+                            : ''
+                    }
                     style={{ cursor: editSlot ? 'pointer' : 'default' }}
                     onClick={() => editUnitSlot(index)}>
                     <CharacterPortraitImage
@@ -61,7 +63,11 @@ export const TeamSlotEdit: React.FC<Props> = ({
         return (
             <Tooltip placement={'top'} title={unit.name} key={unitId}>
                 <div
-                    className={selectedIndex === index ? 'glow-border' : ''}
+                    className={
+                        selectedIndex === index
+                            ? 'border-solid border-2 border-[#0000ff] [transition:box-shadow_0.3s_ease-in-out]'
+                            : ''
+                    }
                     style={{ cursor: editSlot ? 'pointer' : 'default' }}
                     onClick={() => editUnitSlot(index)}>
                     <CharacterPortraitImage icon={portraitIcon} />

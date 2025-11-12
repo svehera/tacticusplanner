@@ -2,7 +2,7 @@
 import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { sum } from 'lodash';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox } from '@/fsd/5-shared/ui';
@@ -11,8 +11,6 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
 import { IGWZone } from './guild-war.models';
-
-import './bf-level-table.css';
 
 export const BfLevelTable = ({ rows }: { rows: IGWZone[] }) => {
     const [columnDefs] = useState<Array<ColDef>>([
@@ -80,7 +78,7 @@ export const BfLevelTable = ({ rows }: { rows: IGWZone[] }) => {
     };
 
     return (
-        <div className="ag-theme-material bf-table">
+        <div className="ag-theme-material w-full h-[350px] [&_.ag-header-cell-label]:justify-center">
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}

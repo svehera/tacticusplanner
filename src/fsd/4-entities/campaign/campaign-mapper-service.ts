@@ -6,7 +6,7 @@ import { battleData } from './data';
 import { Campaign, CampaignGroupType } from './enums';
 
 // Split of base vs challenge progress for an event campaign
-export type CampaignProgressSplit = {
+type CampaignProgressSplit = {
     baseCampaignEventId?: Campaign;
     baseBattleCount?: number;
     challengeCampaignEventId?: Campaign;
@@ -63,6 +63,8 @@ export class CampaignMapperService {
             result.baseCampaignEventId = isStandard ? Campaign.TS : isExtremis ? Campaign.TE : undefined;
         } else if (id === 'eventcampaign3') {
             result.baseCampaignEventId = isStandard ? Campaign.TAS : isExtremis ? Campaign.TAE : undefined;
+        } else if (id === 'eventcampaign4') {
+            result.baseCampaignEventId = isStandard ? Campaign.DGS : isExtremis ? Campaign.DGE : undefined;
         } else {
             // in case we get a new campaign event id we don't know about yet
             result.baseCampaignEventId = undefined;
@@ -74,6 +76,8 @@ export class CampaignMapperService {
             [Campaign.AME]: Campaign.AMEC,
             [Campaign.TS]: Campaign.TSC,
             [Campaign.TE]: Campaign.TEC,
+            [Campaign.DGS]: Campaign.DGSC,
+            [Campaign.DGE]: Campaign.DGEC,
             [Campaign.TAS]: Campaign.TASC,
             [Campaign.TAE]: Campaign.TAEC,
         };
@@ -106,12 +110,14 @@ export class CampaignMapperService {
      * - eventCampaign1 => AdMech
      * - eventCampaign2 => Tyranids
      * - eventCampaign3 => T'au
+     * - eventCampaign4 => Death Guard
      */
     static inferDailyRaidsCampaignGroup(progressList: TacticusCampaignProgress[]): CampaignGroupType | 'none' {
         const ids = new Set(progressList.map(p => (p.id || '').toLowerCase()));
         if (ids.has('eventcampaign1')) return CampaignGroupType.adMechCE;
         if (ids.has('eventcampaign2')) return CampaignGroupType.tyranidCE;
         if (ids.has('eventcampaign3')) return CampaignGroupType.tauCE;
+        if (ids.has('eventcampaign4')) return CampaignGroupType.deathGuardCE;
         return 'none';
     }
 }

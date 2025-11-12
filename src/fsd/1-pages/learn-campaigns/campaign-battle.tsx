@@ -1,8 +1,6 @@
-import { Tooltip } from '@mui/material';
 import React from 'react';
 
 import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
-import { CharactersService } from '@/fsd/4-entities/character';
 
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
@@ -49,7 +47,12 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
                     <tr>
                         <td>
                             {battle.detailedEnemyTypes && battle.detailedEnemyTypes.length > 0 && (
-                                <CampaignBattleEnemies enemies={battle.detailedEnemyTypes} scale={scale} />
+                                <CampaignBattleEnemies
+                                    keyPrefix="battle"
+                                    battleId={battle.id}
+                                    enemies={battle.detailedEnemyTypes}
+                                    scale={scale}
+                                />
                             )}
                         </td>
                     </tr>

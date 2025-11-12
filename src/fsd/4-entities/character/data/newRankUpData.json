@@ -587,6 +587,27 @@
         "Diamond III": ["upgHpL137C", "upgHpL213C", "upgDmgM213C", "upgDmgL213C", "upgArmM214C", "upgArmL213C"],
         "Adamantine I": ["upgHpECS", "upgHpCS", "upgDmgECS", "upgDmgCS", "upgArmECS", "upgArmCS"]
     },
+    "custoKyrus": {
+        "Stone I": ["upgHpC015", "upgHpC004", "upgDmgC009", "upgDmgC011", "upgArmC005", "upgArmC013"],
+        "Stone II": ["upgHpC003", "upgHpC002", "upgDmgU012", "upgDmgU015C", "upgArmC013", "upgArmC001"],
+        "Stone III": ["upgHpU002", "upgHpU004C", "upgDmgC001", "upgDmgC010", "upgArmU006", "upgArmU009"],
+        "Iron I": ["upgHpU018C", "upgHpU017", "upgDmgU012", "upgDmgU010", "upgArmU009", "upgArmU004C"],
+        "Iron II": ["upgHpU002", "upgHpR017C", "upgDmgU001C", "upgDmgU011", "upgArmR005", "upgArmU001"],
+        "Iron III": ["upgHpR020C", "upgHpU006", "upgDmgR037", "upgDmgR010C", "upgArmU004C", "upgArmR015"],
+        "Bronze I": ["upgHpR037", "upgHpR005", "upgDmgR001C", "upgDmgR002", "upgArmR002C", "upgArmR012C"],
+        "Bronze II": ["upgHpE037C", "upgHpR004C", "upgDmgR005", "upgDmgE006C", "upgArmR037", "upgArmR001C"],
+        "Bronze III": ["upgHpR005", "upgHpE001C", "upgDmgE037C", "upgDmgR015C", "upgArmE037C", "upgArmE013"],
+        "Silver I": ["upgHpE037C", "upgHpE017", "upgDmgE037C", "upgDmgE001", "upgArmE037C", "upgArmE003C"],
+        "Silver II": ["upgHpL117", "upgHpE002C", "upgDmgL037C", "upgDmgE006C", "upgArmE037C", "upgArmE006C"],
+        "Silver III": ["upgHpE037C", "upgHpL017C", "upgDmgE037C", "upgDmgL015C", "upgArmL203", "upgArmL003C"],
+        "Gold I": ["upgHpL037C", "upgHpL001C", "upgDmgL001", "upgDmgL005C", "upgArmL037C", "upgArmL006C"],
+        "Gold II": ["upgHpL137C", "upgHpL002C", "upgDmgL037C", "upgDmgL015C", "upgArmL037C", "upgArmL010C"],
+        "Gold III": ["upgHpL037C", "upgHpL009C", "upgDmgL137C", "upgDmgL007C", "upgArmL137C", "upgArmL006C"],
+        "Diamond I": ["upgHpL137C", "upgHpL002C", "upgDmgL137C", "upgDmgL006C", "upgArmL137C", "upgArmL003C"],
+        "Diamond II": ["upgHpL137C", "upgHpL213C", "upgDmgL137C", "upgDmgL213C", "upgArmL137C", "upgArmL213C"],
+        "Diamond III": ["upgHpL137C", "upgHpL213C", "upgDmgM213C", "upgDmgL213C", "upgArmM211C", "upgArmL213C"],
+        "Adamantine I": ["upgHpECS", "upgHpCS", "upgDmgECS", "upgDmgCS", "upgArmECS", "upgArmCS"]
+    },
     "custoTrajann": {
         "Stone I": ["upgHpC015", "upgHpC004", "upgDmgC009", "upgDmgC011", "upgArmC013", "upgArmC005"],
         "Stone II": ["upgHpC003", "upgHpC002", "upgDmgU012", "upgDmgU015C", "upgArmC001", "upgArmC006"],

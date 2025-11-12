@@ -52,7 +52,7 @@ export class CampaignsProgressionService {
         }
 
         for (const [campaign, factions] of result.campaignFactions.entries()) {
-            factions.forEach((key: string, faction: string) => {
+            factions.forEach((_key: string, faction: string) => {
                 if (!result.factionCampaigns.get(faction)) {
                     result.factionCampaigns.set(faction, new Set<string>());
                 }
@@ -86,7 +86,7 @@ export class CampaignsProgressionService {
      * @param result The campaign progress data into which we should store
      *               the results. Should already have (empty) entries for
      *         every campaign.
-     * @param nodesToBeat The map into which we should store the unbeated
+     * @param nodesToBeat The map into which we should store the unbeaten
      *                    nodes, keyed by campaign. Should already have
      *                    (empty) sets for every campaign.
      */
@@ -141,7 +141,7 @@ export class CampaignsProgressionService {
      * @param nodes The nodes to beat, keyed by campaign.
      * @returns The set of nodes to beat, with duplicates removed.
      */
-    private static uniquifyNodesToBeat(
+    private static deduplicateNodesToBeat(
         nodes: Map<string, ICampaignBattleComposed[]>
     ): Map<string, ICampaignBattleComposed[]> {
         const ret = new Map<string, ICampaignBattleComposed[]>();
@@ -198,7 +198,7 @@ export class CampaignsProgressionService {
 
         this.computeGoalCostsAndUnbeatenNodes(goals, campaignProgress, {}, result, nodesToBeat);
 
-        nodesToBeat = this.uniquifyNodesToBeat(nodesToBeat);
+        nodesToBeat = this.deduplicateNodesToBeat(nodesToBeat);
 
         for (const campaign of nodesToBeat.keys()) {
             const newMaterialEnergy = new Map<string, number>();
@@ -320,7 +320,7 @@ export class CampaignsProgressionService {
         );
         for (const materialId of sortedMaterials) {
             const count: number = materialReqs.materials[materialId];
-            const farmData: FarmData = this.getCostToFarm(goal, materialId, count, campaignProgress, inventoryUpgrades);
+            const farmData: FarmData = this.getCostToFarm(materialId, count, campaignProgress);
             result.canFarm = result.canFarm && farmData.canFarm;
             result.totalEnergy = result.totalEnergy + farmData.totalEnergy;
             result.farmData.set(materialId, farmData);
@@ -376,25 +376,18 @@ export class CampaignsProgressionService {
      * @param count The number of this material we need.
      * @param campaignProgress Our progress in the campaigns, dictating the nodes from
      *                         which we can farm.
-     * @param inventoryUpgrades Our current inventory, allowing us to skip farming some
-     *                         or all materials if we already have them.
      * @returns The total cost in energy to farm `count` of `material`, as well as the
      *          nodes we can use now, and in the future.
      */
-    public static getCostToFarm(
-        goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal,
-        materialId: string,
-        count: number,
-        campaignProgress: ICampaignsProgress,
-        inventoryUpgrades: Record<string, number>
-    ): FarmData {
+    public static getCostToFarm(materialId: string, count: number, campaignProgress: ICampaignsProgress): FarmData {
+        const farmableLocs = this.getFarmableLocations(materialId, campaignProgress);
         const result: FarmData = {
             material: materialId,
             totalEnergy: 0,
-            canFarm: true,
+            canFarm: farmableLocs.length > 0,
             count: count,
             campaignType: CampaignType.Normal,
-            farmableLocations: this.getFarmableLocations(materialId, campaignProgress),
+            farmableLocations: farmableLocs,
             unfarmableLocations: this.getUnfarmableLocations(materialId, campaignProgress),
         };
         let bestBattle: ICampaignBattleComposed | undefined = undefined;
@@ -497,11 +490,6 @@ export class CampaignsProgressionService {
         return Math.ceil((battle.energyCost * count) / battle.dropRate);
     }
 
-    /** @returns the material ID of the material with the given label. */
-    private static getMaterialId(materialLabel: string): string {
-        return UpgradesService.materialByLabel[materialLabel];
-    }
-
     /**
      *
      * @param material The ID of the material to farm.
@@ -540,20 +528,14 @@ export class CampaignsProgressionService {
         material: string,
         campaignProgress: ICampaignsProgress
     ): ICampaignBattleComposed[] {
-        const result: ICampaignBattleComposed[] = [];
-
-        let count = 0;
-        Object.entries(CampaignsService.campaignsComposed).forEach(([_, battle]) => {
-            if (
-                this.getMaterialId(this.getReward(battle)) == this.getMaterialId(material) &&
-                !CampaignsService.hasCompletedBattle(battle, campaignProgress)
-            ) {
-                result.push(battle);
-                ++count;
-            }
-        });
-
-        return result;
+        return Object.entries(CampaignsService.campaignsComposed)
+            .filter(([_, battle]) => {
+                return (
+                    this.getReward(battle) === material &&
+                    !CampaignsService.hasCompletedBattle(battle, campaignProgress)
+                );
+            })
+            .map(([_, battle]) => battle);
     }
 
     /**

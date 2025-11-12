@@ -1,5 +1,4 @@
-﻿import React from 'react';
-import { RouteObject } from 'react-router-dom';
+﻿import { RouteObject } from 'react-router-dom';
 
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';

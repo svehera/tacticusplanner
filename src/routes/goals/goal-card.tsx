@@ -13,7 +13,6 @@ import { PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
-import { Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
@@ -34,9 +33,10 @@ interface Props {
     goal: CharacterRaidGoalSelect;
     goalEstimate?: IGoalEstimate;
     menuItemSelect?: (item: 'edit' | 'delete') => void;
+    bgColor: string;
 }
 
-export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: passed }) => {
+export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: passed, bgColor }) => {
     const goalEstimate: IGoalEstimate = passed ?? {
         daysLeft: 0,
         daysTotal: 0,
@@ -308,6 +308,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
             sx={{
                 width: 350,
                 minHeight: 200,
+                background: bgColor,
             }}>
             <CardHeader
                 action={

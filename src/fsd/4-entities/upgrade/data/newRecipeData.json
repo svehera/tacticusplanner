@@ -5896,7 +5896,7 @@
         "craftable": false
     },
     "upgHpL111": {
-        "material": "Mjod",
+        "material": "Mjød",
         "snowprintId": "upgHpL111",
         "rarity": "Legendary",
         "stat": "Health",
@@ -5990,7 +5990,7 @@
         ]
     },
     "upgHpL121C": {
-        "material": "Tannhauser's Bones",
+        "material": "Tännhauser's Bones",
         "snowprintId": "upgHpL121C",
         "rarity": "Legendary",
         "stat": "Health",

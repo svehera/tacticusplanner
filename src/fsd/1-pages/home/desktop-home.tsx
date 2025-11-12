@@ -1,6 +1,6 @@
 ﻿import { Card, CardContent, CardHeader } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 import Zoom from 'react-medium-image-zoom';
 import { useNavigate } from 'react-router-dom';
@@ -97,9 +97,8 @@ export const DesktopHome = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_20250921.png'),
-        // Calendar image not yet available
-        // next: getImageUrl('calendar/calendar_20251026.png'),
+        current: getImageUrl('calendar/calendar_20251026.png'),
+        // next: getImageUrl('calendar/calendar_20251130.png'),
     };
 
     const topPriorityGoal = goals[0];
@@ -134,7 +133,7 @@ export const DesktopHome = () => {
         <div>
             {announcements()}
             <Thanks sliderMode={true} />
-            {/*{announcments()}*/}
+            {/*{announcements()}*/}
             <div
                 style={{
                     display: 'flex',

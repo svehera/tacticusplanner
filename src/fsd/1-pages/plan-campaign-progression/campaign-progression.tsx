@@ -182,7 +182,7 @@ export const CampaignProgression = () => {
             <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
             <CampaignProgressionUnfarmableMaterials progression={progression} campaignDataArray={campaignDataArray} />
             <h1>Campaign Progression</h1>
-            {campaignDataArray.map((entry, ignored) => {
+            {campaignDataArray.map(entry => {
                 return (
                     <div key={'accordion_' + entry[0]}>
                         {entry[1].savings.length > 0 && (

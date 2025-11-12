@@ -325,7 +325,7 @@ export class ShardsService {
                 raidsCount: Math.ceil(location.dailyBattleCount),
                 farmedItems: location.itemsPerDay,
                 energySpent: location.energyPerDay,
-                isCompleted: completedLocations.some(clocation => clocation.id === location.id),
+                isCompleted: completedLocations.some(cLocation => cLocation.id === location.id),
                 isShardsLocation: true,
             }));
 

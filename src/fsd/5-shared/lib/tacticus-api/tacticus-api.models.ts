@@ -4,7 +4,7 @@ export interface TacticusPlayerResponse {
     player: TacticusPlayer;
 }
 
-export interface TacticusPlayer {
+interface TacticusPlayer {
     units: TacticusUnit[];
     inventory: TacticusInventory;
     progress: TacticusProgress;
@@ -14,9 +14,11 @@ export interface TacticusInventory {
     upgrades: TacticusUpgrade[];
     shards: TacticusShard[];
     mythicShards: TacticusShard[];
+    xpBooks: TacticusXpBook[];
+    abilityBadges: TacticusAbilityBadges;
 }
 
-export interface TacticusAbility {
+interface TacticusAbility {
     /**
      * Unique identifier for the ability.
      */
@@ -26,6 +28,34 @@ export interface TacticusAbility {
      * 0 = ability is locked
      */
     level: number;
+}
+
+export interface TacticusXpBook {
+    /** Unique identifier for the xp book.*/
+    id: string;
+
+    /** Rarity of the book. */
+    rarity: string;
+
+    /** Amount of XP books owned. */
+    amount: number;
+}
+
+export interface TacticusAbilityBadge {
+    /** Unique identifier for ability badge.*/
+    id: string;
+
+    /** Rarity of the ability badge. */
+    rarity: string;
+
+    /** Amount of this badge owned. */
+    amount: number;
+}
+
+export interface TacticusAbilityBadges {
+    Imperial: TacticusAbilityBadge[];
+    Xenos: TacticusAbilityBadge[];
+    Chaos: TacticusAbilityBadge[];
 }
 
 export interface TacticusUnit {
@@ -92,7 +122,7 @@ export interface TacticusShard {
     amount: number;
 }
 
-export interface TacticusProgress {
+interface TacticusProgress {
     campaigns: TacticusCampaignProgress[]; // List of CampaignProgress objects
 }
 
@@ -103,7 +133,7 @@ export interface TacticusCampaignProgress {
     battles: TacticusCampaignLevel[]; // List of CampaignLevel objects
 }
 
-export interface TacticusCampaignLevel {
+interface TacticusCampaignLevel {
     battleIndex: number; // Example: 10
     attemptsLeft: number; // Example: 2
     attemptsUsed: number; // Example: 3

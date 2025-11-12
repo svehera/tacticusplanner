@@ -27,7 +27,6 @@ export class CharactersAbilitiesService {
     }
 
     public static getMaterials(levelStart: number, levelEnd: number): ICharacterAbilityLevel[] {
-        // console.trace('Getting materials for levels:', levelStart, 'to', levelEnd);
         return this.abilitiesLvlUp.slice(levelStart - 1, levelEnd - 1);
     }
 

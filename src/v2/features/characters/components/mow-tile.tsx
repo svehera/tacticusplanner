@@ -13,9 +13,6 @@ import { IMow2 } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit';
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { IMow } from 'src/v2/features/characters/characters.models';
-
-import './character-tile.css';
 
 interface Props {
     mow: IMow2;
@@ -32,7 +29,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
 
     return (
         <div
-            className="character-tile"
+            className="flex flex-col items-center min-w-[75px]"
             style={{
                 opacity: viewContext.getOpacity ? viewContext.getOpacity(mow) : mow.unlocked ? 1 : 0.5,
                 cursor: onClick && !disableClick ? 'pointer' : undefined,
@@ -55,17 +52,23 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                 </Tooltip>
 
                 <div
-                    className="abilities"
+                    className="relative top-[-7px] flex items-center justify-between z-10"
                     style={{ visibility: hasAbilities && viewContext.showAbilitiesLevel ? 'visible' : 'hidden' }}>
-                    <div className="ability-level">{mow.primaryAbilityLevel}</div>
-                    <div className="ability-level">{mow.secondaryAbilityLevel}</div>
+                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                        {mow.primaryAbilityLevel}
+                    </div>
+                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                        {mow.secondaryAbilityLevel}
+                    </div>
                 </div>
                 <Conditional condition={viewContext.showCharacterLevel}>
                     {mow.unlocked ? (
-                        <div className="character-level">{mow.shards}</div>
+                        <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                            {mow.shards}
+                        </div>
                     ) : (
                         <div
-                            className="character-level"
+                            className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]"
                             style={{
                                 background: `linear-gradient(to right, green ${unlockProgress}%, #012A41 ${unlockProgress}%)`,
                             }}>
@@ -74,7 +77,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                     )}
                 </Conditional>
             </div>
-            <div className="character-rarity-rank">
+            <div className="min-h-[30px] flex items-center mt-[-15px] justify-center">
                 {viewContext.showCharacterRarity && <RarityIcon rarity={mow.rarity} />}
                 <MiscIcon icon={'mow'} width={22} height={25} />
             </div>
@@ -100,7 +103,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                         )
                     }>
                     <div
-                        className="character-unlock"
+                        className="w-[60px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs mb-[5px] border-solid border-[gold]"
                         style={{
                             background: `linear-gradient(to right, green ${mow.numberOfUnlocked}%, #012A41 ${mow.numberOfUnlocked}%)`,
                         }}>

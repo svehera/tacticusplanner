@@ -1,6 +1,5 @@
 ﻿import { Autocomplete, TextField } from '@mui/material';
-import { get } from 'lodash';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
 import { IUnit } from '../model';
 
@@ -66,8 +65,6 @@ export const UnitsAutocomplete = <T extends IUnit>({
 
     const getOptionText = (option: IUnit) => ('fullName' in option ? option.fullName : option.name);
 
-    console.log('options: ', options);
-
     return (
         <Autocomplete
             fullWidth
@@ -91,14 +88,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
             getOptionLabel={option => getOptionText(option)}
             isOptionEqualToValue={(option, value) => option.snowprintId === value.snowprintId}
             renderOption={(props, option) => (
-                <UnitTitle
-                    {...props}
-                    key={option.name}
-                    character={option}
-                    short
-                    fullName
-                    onClick={() => updateValue(option)}
-                />
+                <UnitTitle {...props} key={option.name} character={option} short onClick={() => updateValue(option)} />
             )}
             onChange={(_, value) => updateValue(value)}
             renderInput={params => (

@@ -16,7 +16,6 @@ import { LoaderWithText } from '@/fsd/5-shared/ui';
 import { SearchParamsStateContext } from '@/fsd/5-shared/ui/contexts';
 
 import { MowsService } from '@/fsd/4-entities/mow';
-import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 
 import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
 import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
@@ -307,7 +306,7 @@ export const Guides: React.FC = () => {
         );
     };
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setTeams([]);
         setNextQueryParams(null);
         setTotal(0);
@@ -369,7 +368,7 @@ export const Guides: React.FC = () => {
     const handleShare = (teamId: number) => {
         const shareRoute = (isMobile ? '/mobile' : '') + `/learn/guides?guideId=${teamId}`;
         const shareLink = location.origin + shareRoute;
-        navigator.clipboard.writeText(shareLink).then(r => enqueueSnackbar('Link Copied', { variant: 'success' }));
+        navigator.clipboard.writeText(shareLink).then(_ => enqueueSnackbar('Link Copied', { variant: 'success' }));
     };
 
     const handleViewOriginal = (teamId: number | null) => {

@@ -3,9 +3,7 @@
     "unitSnowprintId": "bloodDante",
     "name": "Dante",
     "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Dante",
-    "eventStage": 2,
-    "nextEventDate": "September 14, 2025",
-    "nextEventDateUtc": "Sun, 14 September 2025 00:00:00 GMT",
+    "eventStage": 3,
     "finished": false,
     "regularMissions": [
         "Defeat 5 waves of enemies in any wave-based game mode, Deal 1000 damage",
@@ -38,7 +36,8 @@
             "link": "https://tacticus.wiki.gg/wiki/Necrons#NPC_Units"
         },
         "killPoints": 40,
-        "battlesPoints": [27, 32, 38, 41, 40, 43, 42, 50, 44, 40, 47, 48, 59, 44, 34, 44, 43, 48]
+        "battlesPoints": [27, 32, 38, 41, 40, 43, 42, 50, 44, 40, 47, 48, 59, 44, 34, 44, 43, 48],
+        "defeatAll": [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 42]
     },
     "beta": {
         "name": "Beta (No Chaos)",
@@ -47,7 +46,8 @@
             "link": "https://tacticus.wiki.gg/wiki/Black_Legion#NPC_Units"
         },
         "killPoints": 26,
-        "battlesPoints": [36, 44, 42, 45, 45, 46, 58, 50, 64, 42, 49, 51, 54, 61, 48, 55, 49, 47]
+        "battlesPoints": [36, 44, 42, 45, 45, 46, 58, 50, 64, 42, 49, 51, 54, 61, 48, 55, 49, 47],
+        "defeatAll": [26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 36]
     },
     "gamma": {
         "name": "Gamma (No Imperial)",
@@ -56,7 +56,8 @@
             "link": "https://tacticus.wiki.gg/wiki/Astra_Militarum#NPC_Units"
         },
         "killPoints": 28,
-        "battlesPoints": [39, 36, 44, 50, 47, 44, 48, 52, 48, 48, 50, 56, 56, 56, 48, 46, 47, 56]
+        "battlesPoints": [39, 36, 44, 50, 47, 44, 48, 52, 48, 48, 50, 56, 56, 56, 48, 46, 47, 56],
+        "defeatAll": [28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 32]
     },
     "pointsMilestones": [
         {

@@ -11,7 +11,6 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.1",
     "@mui/material": "^6.4.1",
-    "@mui/x-charts": "^7.28.0",
     "@nivo/line": "^0.88.0",
     "ag-grid-community": "^33.1.1",
     "ag-grid-react": "^33.1.1",
@@ -45,12 +44,9 @@
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
     "@tailwindcss/postcss": "^4.0.0",
-    "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
     "@types/lodash": "^4.17.14",
-    "@types/node": "^18.19.71",
+    "@types/node": "^18.19.130",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@types/use-analytics": "^0.0.3",
@@ -62,6 +58,7 @@
     "@vitest/ui": "^3.1.2",
     "babel-plugin-react-compiler": "^19.0.0-beta-714736e-20250131",
     "browserslist-to-esbuild": "^2.1.1",
+    "cspell": "^9.2.1",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-import-resolver-typescript": "^4.3.4",
@@ -71,18 +68,18 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-compiler": "^19.0.0-beta-714736e-20250131",
     "eslint-plugin-react-refresh": "^0.4.18",
+    "eslint-plugin-unused-imports": "^4.2.0",
     "globals": "^15.14.0",
     "husky": "^4.3.8",
     "jsdom": "^26.1.0",
+    "knip": "^5.65.0",
     "lint-staged": "^15.4.1",
     "postcss": "^8.5.1",
     "prettier": "^3.5.3",
-    "sass": "^1.83.4",
-    "sharp": "^0.33.5",
-    "svgo": "^3.3.2",
+    "sharp": "^0.34.4",
+    "svgo": "^4.0.0",
     "tailwindcss": "^4.0.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.7.3",
+    "typescript": "^5.9.3",
     "vite": "^5.4.14",
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-image-optimizer": "^1.1.8",
@@ -99,20 +96,19 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
+    "tsc": "tsc --noEmit",
+    "tsc:watch": "tsc --noEmit --watch",
     "analyze": "vite-bundle-visualizer -c ./vite.config.mts",
     "preview": "vite preview",
     "lint-ci": "eslint src --quiet",
     "lint": "eslint src --quiet --fix",
     "format": "prettier src --write",
-    "format-ci": "prettier src --check"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
+    "format-ci": "prettier src --check",
+    "knip": "knip",
+    "spellcheck": "cspell ."
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx,css,scss,json}": [
+    "src/**/*.{ts,tsx,css,json}": [
       "prettier --write"
     ],
     "src/**/*.{ts,tsx}": [

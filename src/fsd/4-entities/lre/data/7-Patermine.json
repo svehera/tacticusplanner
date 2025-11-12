@@ -4,9 +4,9 @@
     "name": "Patermine",
     "wikiLink": "https://tacticus.wiki.gg/wiki/LE-The_Patermine",
     "eventStage": 3,
-    "nextEventDate": "October 19, 2025",
-    "nextEventDateUtc": "Sun, 19 October 2025 00:00:00 GMT",
-    "finished": false,
+    "nextEventDate": "",
+    "nextEventDateUtc": "",
+    "finished": true,
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
         "Defeat 30 Orks",
@@ -38,7 +38,8 @@
             "link": "https://tacticus.wiki.gg/wiki/Orks#NPC_Units"
         },
         "killPoints": 36,
-        "battlesPoints": [27, 31, 38, 41, 40, 53, 51, 45, 43, 58, 43, 48, 58, 47, 56, 46, 37, 36]
+        "battlesPoints": [27, 31, 38, 41, 40, 53, 51, 45, 43, 58, 43, 48, 58, 47, 56, 46, 37, 36],
+        "defeatAll": [36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 42]
     },
     "beta": {
         "name": "Beta (No Imperials)",
@@ -47,7 +48,8 @@
             "link": "https://tacticus.wiki.gg/wiki/Black_Templars#NPC_Units"
         },
         "killPoints": 47,
-        "battlesPoints": [24, 31, 33, 37, 40, 34, 39, 37, 44, 42, 47, 45, 41, 52, 40, 44, 36, 42]
+        "battlesPoints": [24, 31, 33, 37, 40, 34, 39, 37, 44, 42, 47, 45, 41, 52, 40, 44, 36, 42],
+        "defeatAll": [47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 49]
     },
     "gamma": {
         "name": "Gamma (No Chaos)",
@@ -56,7 +58,8 @@
             "link": "https://tacticus.wiki.gg/wiki/Black_Legion#NPC_Units"
         },
         "killPoints": 25,
-        "battlesPoints": [33, 49, 44, 46, 42, 53, 52, 56, 53, 50, 50, 50, 57, 65, 43, 48, 49, 60]
+        "battlesPoints": [33, 49, 44, 46, 42, 53, 52, 56, 53, 50, 50, 50, 57, 65, 43, 48, 49, 60],
+        "defeatAll": [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 29]
     },
     "pointsMilestones": [
         {

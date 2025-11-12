@@ -1,5 +1,5 @@
 ﻿import { createTheme, ThemeProvider } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { StoreContext } from 'src/reducers/store.provider';

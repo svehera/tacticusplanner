@@ -2,15 +2,13 @@
 import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { mapValues, sum } from 'lodash';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox } from '@/fsd/5-shared/ui';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
-
-import './players-table.css';
 
 export const GuildOffenseTable = ({
     rows,
@@ -79,7 +77,7 @@ export const GuildOffenseTable = ({
     ]);
 
     return (
-        <div className="ag-theme-material bf-table">
+        <div className="ag-theme-material w-full h-[350px] [&_.ag-header-cell-label]:justify-center">
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}

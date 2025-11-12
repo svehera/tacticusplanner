@@ -289,4 +289,14 @@ export class GoalsService {
 
         return false;
     }
+
+    public static getGoalAlliance(goalId: string, goals: CharacterRaidGoalSelect[]): Alliance | undefined {
+        const goal = goals.find(g => g.goalId === goalId);
+        return goal?.unitAlliance;
+    }
+
+    public static getGoalUnitName(goalId: string, goals: CharacterRaidGoalSelect[]): string | undefined {
+        const goal = goals.find(g => g.goalId === goalId);
+        return goal?.unitName;
+    }
 }

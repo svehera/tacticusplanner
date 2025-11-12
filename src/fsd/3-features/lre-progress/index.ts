@@ -1,8 +1,2 @@
-export type {
-    ILreProgressDto,
-    ILreRequirementsProgressDto,
-    ILreTrackProgressLegacyDto,
-    ILreOverviewDto,
-    ILreBattleProgressDto,
-} from './models';
+export type { ILreProgressDto, ILreRequirementsProgressDto, ILreOverviewDto, ILreBattleProgressDto } from './models';
 export { LrePointsCategoryId, ProgressState } from './enums';

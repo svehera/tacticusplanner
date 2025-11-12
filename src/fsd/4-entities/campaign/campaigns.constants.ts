@@ -216,6 +216,48 @@ export const campaignsList: ICampaignModel[] = [
         difficulty: CampaignDifficulty.eventChallenge,
     },
 
+    // Death Guard Campaign Events
+    {
+        id: Campaign.DGS,
+        name: 'Death Guard Standard',
+        displayName: 'Death Guard Standard',
+        faction: Faction.ADEPTA_SORORITAS,
+        coreCharacters: ['adeptCanoness', 'adeptHospitaller', 'adeptRetributor'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.deathGuardCE,
+        difficulty: CampaignDifficulty.eventStandard,
+    },
+    {
+        id: Campaign.DGSC,
+        name: 'Death Guard Standard Challenge',
+        displayName: 'Death Guard Standard Challenge',
+        faction: Faction.ADEPTA_SORORITAS,
+        coreCharacters: ['adeptCanoness', 'adeptHospitaller', 'adeptRetributor'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.deathGuardCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
+    {
+        id: Campaign.DGE,
+        name: 'Death Guard Extremis',
+        displayName: 'Death Guard Extremis',
+        faction: Faction.ADEPTA_SORORITAS,
+        coreCharacters: ['adeptCanoness', 'adeptHospitaller', 'adeptRetributor'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.deathGuardCE,
+        difficulty: CampaignDifficulty.eventExtremis,
+    },
+    {
+        id: Campaign.DGEC,
+        name: 'Death Guard Extremis Challenge',
+        displayName: 'Death Guard Extremis Challenge',
+        faction: Faction.ADEPTA_SORORITAS,
+        coreCharacters: ['adeptCanoness', 'adeptHospitaller', 'adeptRetributor'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.deathGuardCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
+
     // Tyranids Campaign Events
     {
         id: Campaign.TS,
@@ -308,6 +350,7 @@ const campaignEvents: CampaignGroupType[] = [
     CampaignGroupType.adMechCE,
     CampaignGroupType.tyranidCE,
     CampaignGroupType.tauCE,
+    CampaignGroupType.deathGuardCE,
 ];
 
 export const campaignEventsLocations: Campaign[] = campaignsList

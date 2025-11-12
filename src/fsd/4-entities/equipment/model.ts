@@ -1,4 +1,4 @@
-import { Rarity, Faction } from '@/fsd/5-shared/model';
+import { Rarity } from '@/fsd/5-shared/model';
 
 /** Stats about an equipment. */
 export interface IEquipmentStats {
@@ -23,7 +23,7 @@ export interface IEquipmentStats {
  * tells you how much it costs to get here from the previous level by forging (or
  * ascending).
  */
-export interface IEquipmentLevel {
+interface IEquipmentLevel {
     goldCost: number;
     salvageCost: number;
     mythicSalvageCost: number;
