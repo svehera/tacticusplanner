@@ -2,7 +2,7 @@ import { ArrowForward } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import { AllCommunityModule, themeBalham, ColDef } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
@@ -20,8 +20,8 @@ interface Props {
 }
 
 export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData, progression }) => {
-    const [colDefs] = useState(getColumnDefs());
-    const [mobileColDefs] = useState(getMobileColumnDefs());
+    const colDefs = useMemo(() => getColumnDefs(), [progression]);
+    const mobileColDefs = useMemo(() => getMobileColumnDefs(), [progression]);
 
     /**
      * Returns the unit ID of each character that has a goal requiring at least
