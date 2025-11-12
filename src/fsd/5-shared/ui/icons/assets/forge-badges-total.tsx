@@ -19,7 +19,7 @@ export const ForgeBadgesTotal: React.FC<Props> = ({ badges, size = 'small' }) =>
                 const badgesCount = badges[rarity];
                 const badgeName = Rarity[rarity].toLowerCase() + 'ForgeBadge';
                 return (
-                    badgesCount > 0 && (
+                    badgesCount >= 0 && (
                         <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
                             <MiscIcon icon={badgeName} width={sizePx} height={sizePx} />
                         </Badge>

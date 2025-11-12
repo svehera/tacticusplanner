@@ -1,8 +1,10 @@
-﻿import { rarityToStars } from 'src/models/constants';
-import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
-import { IPersonalGoal } from 'src/models/interfaces';
+﻿import { cloneDeep, orderBy } from 'lodash';
 
-import { Alliance, Rank } from '@/fsd/5-shared/model';
+import { rarityToStars } from 'src/models/constants';
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+import { IInventory, IPersonalGoal } from 'src/models/interfaces';
+
+import { Alliance, Rank, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
@@ -19,6 +21,19 @@ import {
     ICharacterUpgradeRankGoal,
     IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
+
+export interface RevisedGoals {
+    goalEstimates: IGoalEstimate[];
+    neededBadges: Record<Alliance, Record<Rarity, number>>;
+    neededForgeBadges: Record<Rarity, number>;
+    neededComponents: Record<Alliance, number>;
+    neededXp: number;
+}
+
+export interface IXpLevel {
+    currentLevel: number;
+    xpAtLevel: number;
+}
 
 export class GoalsService {
     static prepareGoals(
@@ -298,5 +313,163 @@ export class GoalsService {
     public static getGoalUnitName(goalId: string, goals: CharacterRaidGoalSelect[]): string | undefined {
         const goal = goals.find(g => g.goalId === goalId);
         return goal?.unitName;
+    }
+
+    /**
+     * Computes the total number of remaining resources needed AND adjusts all goals to use as
+     * many possible badges from our existing inventory.
+     */
+    public static adjustGoalEstimates(
+        goals: IPersonalGoal[],
+        goalsEstimate: IGoalEstimate[],
+        inventory: IInventory,
+        upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[]
+    ): RevisedGoals {
+        const createRarityRecord = (): Record<Rarity, number> => ({
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 0,
+            [Rarity.Mythic]: 0,
+        });
+
+        const heldBooks = { ...inventory.xpBooks };
+
+        const neededBadges: Record<Alliance, Record<Rarity, number>> = {
+            [Alliance.Chaos]: createRarityRecord(),
+            [Alliance.Imperial]: createRarityRecord(),
+            [Alliance.Xenos]: createRarityRecord(),
+        };
+
+        const neededForgeBadges: Record<Rarity, number> = createRarityRecord();
+        const neededComponents: Record<Alliance, number> = {
+            [Alliance.Chaos]: 0,
+            [Alliance.Imperial]: 0,
+            [Alliance.Xenos]: 0,
+        };
+        const heldBadges: Record<Alliance, Record<Rarity, number>> = {
+            [Alliance.Chaos]: createRarityRecord(),
+            [Alliance.Imperial]: createRarityRecord(),
+            [Alliance.Xenos]: createRarityRecord(),
+        };
+        Object.entries(inventory.abilityBadges[Alliance.Imperial] ?? []).forEach(([rarity, count]) => {
+            heldBadges[Alliance.Imperial][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
+        });
+        Object.entries(inventory.abilityBadges[Alliance.Xenos] ?? []).forEach(([rarity, count]) => {
+            heldBadges[Alliance.Xenos][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
+        });
+        Object.entries(inventory.abilityBadges[Alliance.Chaos] ?? []).forEach(([rarity, count]) => {
+            heldBadges[Alliance.Chaos][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
+        });
+
+        const heldForgeBadges: Record<number, number> = createRarityRecord();
+        Object.entries(inventory.forgeBadges ?? []).forEach(([rarity, count]) => {
+            heldForgeBadges[Number(rarity)] = count;
+        });
+
+        const heldComponents: Record<Alliance, number> = {
+            [Alliance.Chaos]: 0,
+            [Alliance.Imperial]: 0,
+            [Alliance.Xenos]: 0,
+        };
+        Object.entries(inventory.components ?? []).forEach(([alliance, count]) => {
+            heldComponents[alliance as Alliance] = count;
+        });
+
+        const newGoalsEstimates: IGoalEstimate[] = cloneDeep(goalsEstimate);
+        const goalsByPrio = orderBy(
+            goals.map(x => ({ id: x.id, priority: x.priority })),
+            ['priority'],
+            ['asc']
+        );
+        let totalXpNeeded = 0;
+        for (const goalIdAndPriority of goalsByPrio) {
+            const goal = newGoalsEstimates.find(x => x.goalId === goalIdAndPriority.id);
+
+            if (goal === undefined) {
+                console.error('could not find goal estimate for goal id ' + goalIdAndPriority.id);
+                continue;
+            }
+            if (goal.xpEstimate || goal.xpEstimateAbilities) {
+                let xpNeeded = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
+                while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
+                    xpNeeded -= 62500;
+                    heldBooks[Rarity.Mythic] -= 1;
+                }
+                while (xpNeeded >= 12500 && heldBooks[Rarity.Legendary] > 0) {
+                    xpNeeded -= 12500;
+                    heldBooks[Rarity.Legendary] -= 1;
+                }
+                while (xpNeeded >= 2500 && heldBooks[Rarity.Epic] > 0) {
+                    xpNeeded -= 2500;
+                    heldBooks[Rarity.Epic] -= 1;
+                }
+                while (xpNeeded >= 500 && heldBooks[Rarity.Rare] > 0) {
+                    xpNeeded -= 500;
+                    heldBooks[Rarity.Rare] -= 1;
+                }
+                while (xpNeeded >= 100 && heldBooks[Rarity.Uncommon] > 0) {
+                    xpNeeded -= 100;
+                    heldBooks[Rarity.Uncommon] -= 1;
+                }
+                while (xpNeeded >= 20 && heldBooks[Rarity.Common] > 0) {
+                    xpNeeded -= 20;
+                    heldBooks[Rarity.Common] -= 1;
+                }
+                totalXpNeeded += xpNeeded;
+                goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
+                if (goal.xpEstimate) {
+                    goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
+                    goal.xpEstimate.xpLeft = xpNeeded;
+                } else {
+                    goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
+                    goal.xpEstimateAbilities!.xpLeft = xpNeeded;
+                }
+            }
+
+            if (goal.abilitiesEstimate === undefined && goal.mowEstimate === undefined) continue;
+            const badges = goal.mowEstimate?.badges ?? goal.abilitiesEstimate!.badges;
+            for (const [rarityStr, count] of Object.entries(badges)) {
+                const rarity = Number(rarityStr) as Rarity;
+                const alliance =
+                    goal.abilitiesEstimate?.alliance ??
+                    GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
+                if (!neededBadges[alliance][rarity]) {
+                    neededBadges[alliance][rarity] = 0;
+                }
+                if (heldBadges[alliance][rarity]) {
+                    const toRemove = Math.min(heldBadges[alliance][rarity], count);
+                    heldBadges[alliance][rarity] -= toRemove;
+                    neededBadges[alliance][rarity] += count - toRemove;
+                    badges[rarity] = count - toRemove;
+                } else {
+                    neededBadges[alliance][rarity] += count;
+                }
+            }
+            if (goal.mowEstimate === undefined) continue;
+            const forgeBadges = goal.mowEstimate.forgeBadges;
+            forgeBadges.entries().forEach(([rarity, count]) => {
+                const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
+                goal.mowEstimate!.forgeBadges.set(rarity, count - toRemove);
+                heldForgeBadges[rarity] = (heldForgeBadges[rarity] ?? 0) - toRemove;
+                neededForgeBadges[rarity] = goal.mowEstimate!.forgeBadges.get(rarity) ?? 0;
+            });
+            const components = goal.mowEstimate.components;
+            const alliance = GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
+            const held = heldComponents[alliance] ?? 0;
+            const toRemove = Math.min(components, held);
+            goal.mowEstimate!.components = components - toRemove;
+            heldComponents[alliance] -= toRemove;
+            neededComponents[alliance] = (neededComponents[alliance] ?? 0) + goal.mowEstimate!.components;
+        }
+
+        return {
+            neededBadges,
+            neededForgeBadges,
+            neededComponents,
+            goalEstimates: newGoalsEstimates,
+            neededXp: totalXpNeeded,
+        };
     }
 }

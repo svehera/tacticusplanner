@@ -49,31 +49,55 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
         );
     };
 
+    const neededQuantity = desiredQuantity - currentQuantity;
+    const isSufficient = neededQuantity <= 0;
+    const characterIconHeight = 28;
+
     return (
-        <div className="w-full max-w-[400px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]">
-            <div className="flex-box item-start">
-                <div className="flex-box column">
+        <div className="w-full max-w-[400px] bg-gray-900 rounded-md border border-gray-700 p-3 flex flex-col gap-3 shadow-lg">
+            <div className="grid grid-cols-[auto_1fr] gap-3">
+                <div className="flex flex-col items-center justify-start pt-1">
                     {rewardIcon()}
-                    <span>
+
+                    <span className={`font-bold mt-1 text-sm ${isSufficient ? 'text-green-400' : 'text-red-400'}`}>
                         {currentQuantity}/{desiredQuantity}
                     </span>
+
+                    <span className="text-xs text-gray-400">
+                        {isSufficient ? 'Needed' : `${neededQuantity} Missing`}
+                    </span>
                 </div>
-                <div className="flex flex-col gap-2">
-                    <div className="flex flex-wrap gap-1">
+
+                <div className="flex flex-col">
+                    <h4 className="text-xs font-semibold uppercase text-gray-400 mb-1 border-b border-gray-700 pb-1">
+                        Upgrading Characters
+                    </h4>
+                    <div className="flex flex-wrap gap-1 max-h-[84px] overflow-y-auto pr-1">
                         {relatedCharacterSnowprintIds.map(id => (
-                            <div key={id}>
-                                <UnitShardIcon icon={CharactersService.getUnit(id)?.roundIcon ?? id} height={30} />
+                            <div
+                                key={id}
+                                className="w-[28px] h-[28px] rounded-full overflow-hidden border border-gray-600"
+                                title={CharactersService.getUnit(id)?.name ?? id}>
+                                <UnitShardIcon
+                                    icon={CharactersService.getUnit(id)?.roundIcon ?? id}
+                                    height={characterIconHeight}
+                                    width={characterIconHeight}
+                                />
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
-            <div className="flex-box gap2 wrap">
-                {locations
-                    .filter(x => x.isSuggested && x.isUnlocked)
-                    .map(loc => {
-                        return <CampaignLocation key={loc.id} location={loc} short={true} unlocked={true} />;
-                    })}
+
+            <div className="pt-2 border-t border-gray-800">
+                <h4 className="text-xs font-semibold uppercase text-gray-400 mb-1">Suggested Raids</h4>
+                <div className="flex flex-wrap gap-2">
+                    {locations
+                        .filter(x => x.isSuggested && x.isUnlocked)
+                        .map(loc => (
+                            <CampaignLocation key={loc.id} location={loc} short={true} unlocked={true} />
+                        ))}
+                </div>
             </div>
         </div>
     );

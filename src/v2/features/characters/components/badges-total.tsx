@@ -16,7 +16,7 @@ export const BadgesTotal: React.FC<Props> = ({ badges, alliance, size = 'small' 
             {[Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Legendary, Rarity.Mythic].map(rarity => {
                 const badgesCount = badges[rarity];
                 return (
-                    badgesCount > 0 && (
+                    badgesCount >= 0 && (
                         <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
                             <BadgeImage alliance={alliance} rarity={rarity} size={size} />
                         </Badge>
