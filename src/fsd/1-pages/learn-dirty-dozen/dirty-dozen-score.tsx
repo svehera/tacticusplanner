@@ -1,6 +1,4 @@
-﻿import './dirty-dozen-score.css';
-
-export const Score = ({ value }: { value: number }) => {
+﻿export const Score = ({ value }: { value: number }) => {
     let backgroundColor: string;
     if (value <= 5 && value > 4.5) {
         backgroundColor = '#01BE64';
@@ -23,8 +21,10 @@ export const Score = ({ value }: { value: number }) => {
     }
 
     return (
-        <div className="dirty-dozen-score-container">
-            <div className="dirty-dozen-score" style={{ backgroundColor }}>
+        <div className="w-full flex justify-center">
+            <div
+                className="h-8 aspect-square rounded-full text-center font-bold border text-[#181d1f]"
+                style={{ backgroundColor }}>
                 {value}
             </div>
         </div>

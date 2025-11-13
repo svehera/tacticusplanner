@@ -1,6 +1,88 @@
 ﻿{
-    "currentVersion": "1.8.0",
+    "currentVersion": "1.33.1",
     "releaseNotes": [
+        {
+            "version": "1.33.1",
+            "date": "November 13",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Patch 1.33",
+                    "subPoints": [
+                        "Added Tyrith to the planner.",
+                        "Added the Death Guard Campaign Event",
+                        "Updated Trajann's legendary event to include 18 battles, and updated Kill Points (Thanks @rilak)."
+                    ]
+                },
+                {
+                    "text": "Player Resources Now Synced via the API",
+                    "subPoints": [
+                        "Player resources (badges, forge badges, MoW components, as well as arena, salvage, and onslaught tokens) are now synced via the API. You can see your current resources in Input > Resources."
+                    ],
+                    "route": "input/resources"
+                },
+                {
+                    "text": "Mobile-Friendly Campaigns",
+                    "subPoints": [
+                        "The 'Learn > Campaigns' page now supports cards as opposed to only tables, making it usable on mobile screens."
+                    ],
+                    "route": "learn/campaigns"
+                },
+                {
+                    "text": "Added 'Total Missing Resources' to the goals page.",
+                    "subPoints": [
+                        "This new feature provides a quick overview of the total books, badges, forge badges, energy, and MoW components needed to achieve all your goals.",
+                        "This does not include coins because coins are not available via the API",
+                        "We saw some clients crash the very first time they viewed the refreshed goals page, but after that, it behaved normally. If you see any crashes/bugs, please report them on discord."
+                    ],
+                    "route": "plan/goals"
+                },
+                {
+                    "text": "Added a feature to color-code goals based on when they'll complete",
+                    "subPoints": [
+                        "This feature can be toggled directly in the goals page",
+                        "Goals that will complete before the end of the current battle-pass season are green.",
+                        "Goals that will complete before the end of the next battle-pass season are yellow.",
+                        "Goals that will complete before the end of the 'next next' battle-pass season are red.",
+                        "All other goals are as they are."
+                    ]
+                },
+                {
+                    "text": "Added mobile-friendly in-progress upgrades to the raids page.",
+                    "subPoints": [
+                        "The 'In-Progress Upgrades' section on the raids page now supports cards as well as tables, making it usable on mobile screens. You can toggle this feature on and off directly in the raids screen."
+                    ],
+                    "route": "plan/raids"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Backend CSS streamlining.",
+                    "route": "learn/characters"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Multiple goals for the same character will not double count XP books needed",
+                    "subPoints": [
+                        "Previously, if you had multiple goals for the same character, say either ranking up but splitting material rarities, or ranking up and abilities, book requirements would be double counted. Now, book requirements are tallied as the planner walks through goals in priority order."
+                    ],
+                    "route": "plan/goals"
+                },
+                {
+                    "text": "Fixed an issue where the campaign progression page would should show negative energy.",
+                    "route": "plan/campaignprogression"
+                },
+                {
+                    "text": "Fixed an issue where the campaign progression page would show phantom savings.",
+                    "route": "plan/campaignprogression"
+                },
+                {
+                    "text": "Fixed an issue where the campaign progression page would not update after adjusting goals.",
+                    "route": "plan/campaignprogression"
+                }
+            ]
+        },
         {
             "version": "1.8.0",
             "date": "August 22",

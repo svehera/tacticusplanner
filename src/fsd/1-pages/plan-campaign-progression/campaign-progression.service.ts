@@ -222,16 +222,15 @@ export class CampaignsProgressionService {
                 // If we need X instances of an upgrade material, only suggest beating a node if we
                 // save at least X/2 energy by doing so (or if we can't farm the item).
                 if (oldEnergy - farmData.count / 2 > newEnergyCost || !farmData.canFarm) {
-                    cumulativeSavings += farmData.totalEnergy - newEnergyCost;
+                    const individualSavings = farmData.totalEnergy - newEnergyCost;
+                    // Only add to cumulative savings if this is actually a savings (not an unlock)
+                    if (farmData.canFarm) {
+                        cumulativeSavings += individualSavings;
+                    }
                     result.data
                         .get(campaign)
                         ?.savings.push(
-                            new BattleSavings(
-                                battle,
-                                farmData.totalEnergy - newEnergyCost,
-                                cumulativeSavings,
-                                farmData.canFarm
-                            )
+                            new BattleSavings(battle, individualSavings, cumulativeSavings, farmData.canFarm)
                         );
                     newMaterialEnergy.set(this.getReward(battle), newEnergyCost);
                 }

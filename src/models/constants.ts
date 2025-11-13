@@ -1,6 +1,7 @@
-﻿import { v4 } from 'uuid';
+﻿import { cloneDeep } from 'lodash';
+import { v4 } from 'uuid';
 
-import { Rank, Rarity, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityStars, RarityMapper, Alliance } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress, Campaign } from '@/fsd/4-entities/campaign';
 import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
@@ -152,6 +153,25 @@ const defaultGWLayout: IGWLayoutZone[] = [
     { id: 'frontline', players: [] },
 ];
 
+function createRarityRecord<T>(initialValue: T): Record<Rarity, T> {
+    return {
+        [Rarity.Common]: cloneDeep(initialValue),
+        [Rarity.Uncommon]: cloneDeep(initialValue),
+        [Rarity.Rare]: cloneDeep(initialValue),
+        [Rarity.Epic]: cloneDeep(initialValue),
+        [Rarity.Legendary]: cloneDeep(initialValue),
+        [Rarity.Mythic]: cloneDeep(initialValue),
+    };
+}
+
+function createAllianceRecord<T>(initialValue: T): Record<Alliance, T> {
+    return {
+        [Alliance.Imperial]: cloneDeep(initialValue),
+        [Alliance.Xenos]: cloneDeep(initialValue),
+        [Alliance.Chaos]: cloneDeep(initialValue),
+    };
+}
+
 export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
     modifiedDate: undefined,
@@ -294,6 +314,11 @@ export const defaultData: IPersonalData2 = {
     leSelectedRequirements: {},
     campaignsProgress: defaultCampaignsProgress,
     inventory: {
+        xpBooks: createRarityRecord(0),
+        abilityBadges: createAllianceRecord(createRarityRecord(0)),
+        components: createAllianceRecord(0),
+        forgeBadges: createRarityRecord(0),
+        orbs: createAllianceRecord(createRarityRecord(0)),
         upgrades: {},
     },
     guildWar: {

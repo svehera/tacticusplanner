@@ -15,7 +15,7 @@ export interface IMowMaterialsTotal {
     components: number;
     salvage: number;
     gold: number;
-    badges: Map<Rarity, number>;
+    badges: Record<Rarity, number>;
     forgeBadges: Map<Rarity, number>;
 }
 

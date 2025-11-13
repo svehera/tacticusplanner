@@ -10,8 +10,6 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
 
-import './players-table.css';
-
 export const GuildOffenseTable = ({
     rows,
     onRowClick,
@@ -79,7 +77,7 @@ export const GuildOffenseTable = ({
     ]);
 
     return (
-        <div className="ag-theme-material bf-table">
+        <div className="ag-theme-material w-full h-[350px] [&_.ag-header-cell-label]:justify-center">
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}

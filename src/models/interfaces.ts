@@ -5,7 +5,7 @@ import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { MowsAction } from 'src/reducers/mows.reducer';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 
-import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import {
     ICampaignsProgress,
@@ -273,6 +273,11 @@ export interface IEstimatedRanksSettings {
 }
 
 export interface IInventory {
+    xpBooks: Record<Rarity, number>;
+    abilityBadges: Record<Alliance, Record<Rarity, number>>;
+    components: Record<Alliance, number>;
+    forgeBadges: Record<Rarity, number>;
+    orbs: Record<Alliance, Record<Rarity, number>>;
     upgrades: Record<string, number>;
 }
 

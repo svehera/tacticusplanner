@@ -69,12 +69,9 @@ export const CampaignProgression = () => {
     const progression = useMemo(() => {
         const allGoals: Array<
             ICharacterUpgradeMow | ICharacterUpgradeRankGoal | ICharacterUnlockGoal | ICharacterAscendGoal
-        > = shardsGoals.filter(goal => goal.include);
-        upgradeRankOrMowGoals.forEach(goal => {
-            if (goal.include) allGoals.push(goal);
-        });
+        > = [...shardsGoals, ...upgradeRankOrMowGoals];
         return CampaignsProgressionService.computeCampaignsProgress(allGoals, campaignsProgress);
-    }, [shardsGoals, upgradeRankOrMowGoals, allGoals, campaignsProgress]);
+    }, [shardsGoals, upgradeRankOrMowGoals, campaignsProgress]);
 
     const campaignDataArray = useMemo(() => {
         const result: CampaignData[] = [];

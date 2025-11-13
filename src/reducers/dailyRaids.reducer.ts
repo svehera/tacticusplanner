@@ -1,6 +1,7 @@
 ﻿import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 
 import { Campaign, CampaignsService, ICampaignsFilters } from '@/fsd/4-entities/campaign';
+import { CampaignMapperService } from '@/fsd/4-entities/campaign/campaign-mapper-service';
 
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 
@@ -55,40 +56,88 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             };
         }
         case 'SyncWithTacticus': {
-            // removed workaround for CE nodes
+            // Build locations from Tacticus progress. Handle both legacy campaigns and Campaign Events (CE).
             const raidedLocations: IItemRaidLocation[] = [];
 
-            for (const campaign of action.progress) {
-                const completedBattles = campaign.battles.filter(battle => battle.attemptsUsed !== 0);
-                if (completedBattles.length > 0) {
-                    const campaignName = idToCampaign[campaign.id];
-                    const campaignShortId = Object.keys(Campaign).find(
-                        key => Campaign[key as keyof typeof Campaign] === campaignName
-                    );
-                    if (campaignShortId) {
-                        for (const battle of completedBattles) {
-                            // The dataminer emits battle IDs always with two digits so they're sorted in the
-                            // resulting JSON.
-                            const campaignKey = campaignShortId + String(battle.battleIndex + 1).padStart(2, '0');
-                            const campaignComposed = CampaignsService.campaignsComposed[campaignKey];
+            // Helper: get ordered short keys for a base campaign name (includes challenge keys in correct order)
+            const getOrderedKeysForBaseCampaign = (baseCampaignName: string): string[] => {
+                const ordered: string[] = [];
+                // Preserve insertion order from raw battle data
+                Object.entries(CampaignsService.rawBattleData).forEach(([shortKey, battle]) => {
+                    const name = String(battle.campaign ?? '');
+                    if (name.trim().toLowerCase().startsWith(baseCampaignName.trim().toLowerCase())) {
+                        ordered.push(shortKey);
+                    }
+                });
+                return ordered;
+            };
 
-                            if (campaignComposed) {
-                                raidedLocations.push({
-                                    ...campaignComposed,
-                                    raidsCount: battle.attemptsUsed,
-                                    energySpent: battle.attemptsUsed * campaignComposed.energyCost,
-                                    farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
-                                    isShardsLocation: false,
-                                    isCompleted: battle.attemptsLeft < battle.attemptsUsed,
-                                });
-                            } else {
-                                console.warn(`Campaign composed data not found for key: ${campaignKey}`);
-                                console.warn(
-                                    `Available campaigns:`,
-                                    Object.keys(CampaignsService.campaignsComposed).slice(0, 10)
-                                );
-                            }
+            for (const progressItem of action.progress) {
+                const completedBattles = progressItem.battles.filter(battle => battle.attemptsUsed !== 0);
+                if (completedBattles.length === 0) continue;
+
+                // First try Campaign Event mapping
+                const eventSplit = CampaignMapperService.mapTacticusCampaignToCampaignEvent(progressItem);
+                if (eventSplit && eventSplit.baseCampaignEventId !== undefined) {
+                    const baseCampaignName = String(eventSplit.baseCampaignEventId);
+                    const orderedKeys = getOrderedKeysForBaseCampaign(baseCampaignName);
+
+                    for (const battle of completedBattles) {
+                        const campaignKey = orderedKeys[battle.battleIndex];
+                        if (campaignKey === undefined) {
+                            console.warn(
+                                `CE mapping: No battle key for index ${battle.battleIndex} in base '${baseCampaignName}'`
+                            );
+                            continue;
                         }
+                        const campaignComposed = CampaignsService.campaignsComposed[campaignKey];
+                        if (campaignComposed === undefined) {
+                            console.warn(`CE mapping: Campaign composed not found for key: ${campaignKey}`);
+                            continue;
+                        }
+                        // Ensure we don't duplicate an existing location entry for this campaign
+                        const existingIndex = raidedLocations.findIndex(x => x.id === campaignComposed.id);
+                        if (existingIndex !== -1) {
+                            raidedLocations.splice(existingIndex, 1);
+                        }
+                        raidedLocations.push({
+                            ...campaignComposed,
+                            raidsCount: battle.attemptsUsed,
+                            energySpent: battle.attemptsUsed * campaignComposed.energyCost,
+                            farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
+                            isShardsLocation: false,
+                            isCompleted: battle.attemptsLeft < battle.attemptsUsed,
+                        });
+                    }
+                    continue; // Done with this progress item
+                }
+
+                // Legacy/standard campaigns mapping (fallback)
+                const campaignName = idToCampaign[progressItem.id];
+                const campaignShortId = Object.keys(Campaign).find(
+                    key => Campaign[key as keyof typeof Campaign] === campaignName
+                );
+                if (campaignShortId === undefined) continue;
+
+                for (const battle of completedBattles) {
+                    const campaignKey = campaignShortId + String(battle.battleIndex + 1).padStart(2, '0');
+                    const campaignComposed = CampaignsService.campaignsComposed[campaignKey];
+                    if (campaignComposed !== undefined) {
+                        // Ensure we don't duplicate an existing location entry for this campaign
+                        const existingIndex = raidedLocations.findIndex(x => x.id === campaignComposed.id);
+                        if (existingIndex !== -1) {
+                            raidedLocations.splice(existingIndex, 1);
+                        }
+                        raidedLocations.push({
+                            ...campaignComposed,
+                            raidsCount: battle.attemptsUsed,
+                            energySpent: battle.attemptsUsed * campaignComposed.energyCost,
+                            farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
+                            isShardsLocation: false,
+                            isCompleted: battle.attemptsLeft < battle.attemptsUsed,
+                        });
+                    } else {
+                        console.warn(`Campaign composed data not found for key: ${campaignKey}`);
                     }
                 }
             }

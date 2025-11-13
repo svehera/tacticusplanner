@@ -1,15 +1,17 @@
 ﻿import { Warning } from '@mui/icons-material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import GridViewIcon from '@mui/icons-material/GridView';
 import InfoIcon from '@mui/icons-material/Info';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PendingIcon from '@mui/icons-material/Pending';
-import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/material';
+import TableRowsIcon from '@mui/icons-material/TableRows';
+import { Accordion, AccordionDetails, AccordionSummary, Box, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { StoreContext } from '@/reducers/store.provider';
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
 import { AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
@@ -47,6 +49,7 @@ export const RaidsPlan: React.FC<Props> = ({
     updateInventory,
 }) => {
     const { viewPreferences } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
     const [upgradesPaging, setUpgradesPaging] = useState<{
         start: number;
         end: number;
@@ -66,6 +69,10 @@ export const RaidsPlan: React.FC<Props> = ({
     );
 
     type CharacterToMaterialIndexMap = Record<string, number>;
+
+    const updateView = (tableView: boolean): void => {
+        dispatch.viewPreferences({ type: 'Update', setting: 'raidsTableView', value: tableView });
+    };
 
     const characterToMaterialMap: CharacterToMaterialIndexMap = useMemo(() => {
         const characterIndexMap: CharacterToMaterialIndexMap = {};
@@ -195,6 +202,27 @@ export const RaidsPlan: React.FC<Props> = ({
                             <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <PendingIcon color={'primary'} />
                                 <b>{estimatedRanks.inProgressMaterials.length}</b> in progress upgrades
+                                <FormControlLabel
+                                    control={
+                                        <Switch
+                                            checked={viewPreferences.raidsTableView}
+                                            onChange={event => updateView(event.target.checked)}
+                                        />
+                                    }
+                                    label={
+                                        <div className="flex-box gap5">
+                                            {viewPreferences.raidsTableView ? (
+                                                <div className="flex-box gap5">
+                                                    <TableRowsIcon color="primary" /> <span>Table View</span>
+                                                </div>
+                                            ) : (
+                                                <div className="flex-box gap5">
+                                                    <GridViewIcon color="primary" /> <span>Cards View</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    }
+                                />
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -218,18 +246,21 @@ export const RaidsPlan: React.FC<Props> = ({
                                         gap: 1,
                                         width: '100%',
                                     }}>
-                                    {estimatedRanks.inProgressMaterials.length > 0 &&
-                                        estimatedRanks.inProgressMaterials.map((material, index) => (
-                                            <div className="item-raids w-64" key={index} ref={setCardRef(index)}>
-                                                <RaidUpgradeMaterialCard
-                                                    index={index}
-                                                    upgradeMaterialSnowprintId={material.id}
-                                                    currentQuantity={material.acquiredCount}
-                                                    desiredQuantity={material.requiredCount}
-                                                    relatedCharacterSnowprintIds={material.relatedCharacters}
-                                                />
-                                            </div>
-                                        ))}
+                                    <div className="flex flex-wrap gap-x-4 gap-y-4">
+                                        {estimatedRanks.inProgressMaterials.length > 0 &&
+                                            estimatedRanks.inProgressMaterials.map((material, index) => (
+                                                <div className="item-raids w-64" key={index} ref={setCardRef(index)}>
+                                                    <RaidUpgradeMaterialCard
+                                                        index={index}
+                                                        upgradeMaterialSnowprintId={material.id}
+                                                        currentQuantity={material.acquiredCount}
+                                                        desiredQuantity={material.requiredCount}
+                                                        relatedCharacterSnowprintIds={material.relatedCharacters}
+                                                        locations={material.locations}
+                                                    />
+                                                </div>
+                                            ))}
+                                    </div>
                                 </Box>
                             )}
                         </AccordionDetails>

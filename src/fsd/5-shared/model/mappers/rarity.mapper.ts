@@ -67,4 +67,14 @@ export class RarityMapper {
     public static rarityToRarityString(rarity: Rarity): RarityString {
         return RarityString[Rarity[rarity] as keyof typeof RarityString];
     }
+
+    public static stringToRarity(rarity: string): Rarity | undefined {
+        if (rarity === 'Common') return Rarity.Common;
+        if (rarity === 'Uncommon') return Rarity.Uncommon;
+        if (rarity === 'Rare') return Rarity.Rare;
+        if (rarity === 'Epic') return Rarity.Epic;
+        if (rarity === 'Legendary') return Rarity.Legendary;
+        if (rarity === 'Mythic') return Rarity.Mythic;
+        return undefined;
+    }
 }

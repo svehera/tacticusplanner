@@ -12,8 +12,6 @@ import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
 import { IGWZone } from './guild-war.models';
 
-import './bf-level-table.css';
-
 export const BfLevelTable = ({ rows }: { rows: IGWZone[] }) => {
     const [columnDefs] = useState<Array<ColDef>>([
         {
@@ -80,7 +78,7 @@ export const BfLevelTable = ({ rows }: { rows: IGWZone[] }) => {
     };
 
     return (
-        <div className="ag-theme-material bf-table">
+        <div className="ag-theme-material w-full h-[350px] [&_.ag-header-cell-label]:justify-center">
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}

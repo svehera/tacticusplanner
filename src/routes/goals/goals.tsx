@@ -1,10 +1,11 @@
 ﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
+import SyncIcon from '@mui/icons-material/Sync';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
-import { sum } from 'lodash';
+import { cloneDeep, sum } from 'lodash';
 import { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
@@ -18,18 +19,27 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
-import { Alliance, Rank } from '@/fsd/5-shared/model';
+import { Alliance, Rank, useAuth } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/assets';
 
+import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { BadgesTotal } from '@/v2/features/characters/components/badges-total';
+import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
-import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
-import { GoalsService } from 'src/v2/features/goals/goals.service';
+import {
+    CharacterRaidGoalSelect,
+    ICharacterUpgradeAbilities,
+    ICharacterUpgradeMow,
+    ICharacterUpgradeRankGoal,
+    IGoalEstimate,
+} from 'src/v2/features/goals/goals.models';
+import { GoalsService, IXpLevel } from 'src/v2/features/goals/goals.service';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
@@ -40,7 +50,7 @@ import { GoalService } from './goal-service';
 export const Goals = () => {
     const {
         goals,
-        characters,
+        characters: unresolvedCharacters,
         mows,
         campaignsProgress,
         dailyRaidsPreferences,
@@ -49,7 +59,10 @@ export const Goals = () => {
         viewPreferences,
     } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
+    const { userInfo } = useAuth();
+    const { syncWithTacticus } = useSyncWithTacticus();
 
+    const characters = CharactersService.resolveStoredCharacters(unresolvedCharacters);
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
 
@@ -121,6 +134,40 @@ export const Goals = () => {
         }
     };
 
+    /**
+     * Returns the maximum XP level needed for the character with the given goal priority to meet
+     * all prior goals (if any). If there are no prior goals, returns the character's current
+     * level.
+     */
+    const currentCharacterXp = (
+        characterId: string,
+        goals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUpgradeAbilities)[],
+        currentGoalPriority: number
+    ): IXpLevel => {
+        const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
+        const character = characters.find(c => c.snowprintId! === characterId);
+        const ret: IXpLevel = { currentLevel: character?.level ?? 1, xpAtLevel: character?.xp ?? 0 };
+        for (const goal of priorGoals) {
+            if (goal.type === PersonalGoalType.UpgradeRank) {
+                const upgradeGoal = goal as ICharacterUpgradeRankGoal;
+                const targetLevel = rankToLevel[(upgradeGoal.rankEnd ?? Rank.Stone2) as Rank];
+                if (targetLevel > ret.currentLevel) {
+                    ret.currentLevel = targetLevel;
+                    ret.xpAtLevel = 0;
+                }
+            } else if (goal.type === PersonalGoalType.CharacterAbilities) {
+                const abilityGoal = goal as ICharacterUpgradeAbilities;
+                const targetLevel = Math.max(abilityGoal.activeEnd, abilityGoal.passiveEnd);
+                if (targetLevel > ret.currentLevel) {
+                    ret.currentLevel = targetLevel;
+                    ret.xpAtLevel = 0;
+                }
+            }
+        }
+
+        return ret;
+    };
+
     const goalsEstimate = useMemo<IGoalEstimate[]>(() => {
         const result: IGoalEstimate[] = [];
 
@@ -163,7 +210,16 @@ export const Goals = () => {
 
                 if (goal.type === PersonalGoalType.UpgradeRank) {
                     const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
-                    const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
+                    const currentXp = currentCharacterXp(
+                        goal.unitId,
+                        [...upgradeRankOrMowGoals, ...upgradeAbilities],
+                        goal.priority
+                    );
+                    const xpEstimate = CharactersXpService.getLegendaryTomesCount(
+                        currentXp.currentLevel,
+                        currentXp.xpAtLevel,
+                        targetLevel
+                    );
 
                     return {
                         goalId: goal.goalId,
@@ -198,7 +254,16 @@ export const Goals = () => {
         if (upgradeAbilities.length) {
             for (const goal of upgradeAbilities) {
                 const targetLevel = Math.max(goal.activeEnd, goal.passiveEnd);
-                const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
+                const currentXp = currentCharacterXp(
+                    goal.unitId,
+                    [...upgradeRankOrMowGoals, ...upgradeAbilities],
+                    goal.priority
+                );
+                const xpEstimate = CharactersXpService.getLegendaryTomesCount(
+                    currentXp.currentLevel,
+                    currentXp.xpAtLevel,
+                    targetLevel
+                );
                 const activeAbility = CharactersAbilitiesService.getMaterials(goal.activeStart, goal.activeEnd);
                 const passiveAbility = CharactersAbilitiesService.getMaterials(goal.passiveStart, goal.passiveEnd);
 
@@ -218,14 +283,18 @@ export const Goals = () => {
         return result;
     }, [shardsGoals, upgradeRankOrMowGoals]);
 
-    const totalXpUpgrades = sum(goalsEstimate.filter(x => !!x.xpEstimate).map(x => x.xpEstimate!.legendaryBooks));
-    const totalXpAbilities = sum(
-        goalsEstimate.filter(x => !!x.xpEstimateAbilities).map(x => x.xpEstimateAbilities!.legendaryBooks)
-    );
-
     const totalGoldAbilities = sum(
         goalsEstimate.map(x => (x.abilitiesEstimate?.gold ?? 0) + (x.xpEstimateAbilities?.gold ?? 0))
     );
+
+    const adjustedGoalsEstimates = useMemo(() => {
+        return GoalsService.adjustGoalEstimates(
+            cloneDeep(goals),
+            cloneDeep(goalsEstimate),
+            inventory,
+            upgradeRankOrMowGoals
+        );
+    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals]);
 
     const colorCodingTooltipText =
         'When enabled, goals to be completed a week before the end of the current battle pass season will ' +
@@ -234,26 +303,13 @@ export const Goals = () => {
         'end of the following battle pass season will be shown in red. Goals to be completed during the final ' +
         'week of a battle pass season ending will have a background between the colors representing the ' +
         'respective battle pass seasons.';
-    const totalAbilityBadges = useMemo((): Record<Alliance, Record<number, number>> => {
-        const badgeCounts: Record<Alliance, Record<number, number>> = {
-            [Alliance.Chaos]: {},
-            [Alliance.Imperial]: {},
-            [Alliance.Xenos]: {},
-        };
 
-        for (const goal of goalsEstimate.filter(x => x.abilitiesEstimate)) {
-            for (const [rarityStr, count] of Object.entries(goal.abilitiesEstimate!.badges)) {
-                const rarity = Number(rarityStr);
-                const alliance = goal.abilitiesEstimate!.alliance;
-                if (!badgeCounts[alliance][rarity]) {
-                    badgeCounts[alliance][rarity] = 0;
-                }
-                badgeCounts[alliance][rarity] += count;
-            }
-        }
+    const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
 
-        return badgeCounts;
-    }, [goalsEstimate]);
+    const sync = async () => {
+        console.log('Syncing with Tacticus...');
+        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+    };
 
     return (
         <div>
@@ -303,7 +359,61 @@ export const Goals = () => {
                     />
                 </AccessibleTooltip>
             </div>
+            <div style={{ width: '350px' }} className="my-2 flex-box gap20">
+                <Accordion defaultExpanded={false} className="!shadow-none !bg-transparent !border-none">
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon className="text-gray-400" />}
+                        className="!p-0 min-h-0 !bg-transparent hover:!bg-gray-800 rounded-lg"
+                        aria-controls="resources-content"
+                        id="resources-header">
+                        <span className="text-white text-base font-semibold">Total Resources Missing</span>
+                    </AccordionSummary>
 
+                    <AccordionDetails className="!p-0 !bg-transparent">
+                        <div className="flex flex-col gap-y-2 p-2 bg-gray-900 rounded-lg border border-gray-700 mt-2">
+                            {hasSync && (
+                                <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
+                                    <SyncIcon /> Sync
+                                </Button>
+                            )}
+                            <div className="p-2 bg-gray-800 rounded-md border border-gray-700 flex items-center justify-start gap-x-4">
+                                <MiscIcon icon={'energy'} height={35} width={35} />{' '}
+                                <b className="text-lg text-white">{estimatedUpgradesTotal.energyTotal}</b>
+                            </div>
+
+                            <div className="p-2 bg-gray-800 rounded-md border border-gray-700">
+                                <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
+                            </div>
+
+                            <div className="p-2 bg-gray-800 rounded-md border border-gray-700 flex flex-col gap-y-2">
+                                <h4 className="text-sm font-semibold text-gray-400 uppercase border-b border-gray-700 pb-1 mb-1">
+                                    Ability Badges
+                                </h4>
+                                {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
+                                    <div key={alliance} className="flex-box">
+                                        <BadgesTotal
+                                            badges={adjustedGoalsEstimates.neededBadges[alliance]}
+                                            alliance={alliance}
+                                            size={'medium'}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="p-2 bg-gray-800 rounded-md border border-gray-700">
+                                <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
+                            </div>
+
+                            <div className="p-2 bg-gray-800 rounded-md border border-gray-700">
+                                <MoWComponentsTotal
+                                    components={adjustedGoalsEstimates.neededComponents}
+                                    size={'medium'}
+                                />
+                            </div>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+            </div>
             {!!upgradeRankOrMowGoals.length && (
                 <div>
                     <div className="flex gap5 flex-wrap items-center" style={{ fontSize: 20, margin: '20px 0' }}>
@@ -312,10 +422,7 @@ export const Goals = () => {
                         </span>
                         <span>
                             <b>{estimatedUpgradesTotal.energyTotal}</b>{' '}
-                            <MiscIcon icon={'energy'} height={15} width={15} /> |
-                        </span>
-                        <span>
-                            <b>{totalXpUpgrades}</b> XP Books)
+                            <MiscIcon icon={'energy'} height={15} width={15} />)
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
@@ -324,11 +431,13 @@ export const Goals = () => {
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
-                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
+                                    goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
+                                        x => x.goalId === goal.goalId
+                                    )}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                     bgColor={GoalService.getBackgroundColor(
                                         viewPreferences.goalsBattlePassSeasonView ?? false,
-                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
                                     )}
                                 />
                             ))}
@@ -338,14 +447,13 @@ export const Goals = () => {
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
                             rows={upgradeRankOrMowGoals}
-                            estimate={goalsEstimate}
+                            estimate={adjustedGoalsEstimates.goalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
                         />
                     )}
                 </div>
             )}
-
             {!!shardsGoals.length && (
                 <div>
                     <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
@@ -366,11 +474,13 @@ export const Goals = () => {
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
-                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
+                                    goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
+                                        x => x.goalId === goal.goalId
+                                    )}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                     bgColor={GoalService.getBackgroundColor(
                                         viewPreferences.goalsBattlePassSeasonView ?? false,
-                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
                                     )}
                                 />
                             ))}
@@ -380,39 +490,19 @@ export const Goals = () => {
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
                             rows={shardsGoals}
-                            estimate={goalsEstimate}
+                            estimate={adjustedGoalsEstimates.goalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
                         />
                     )}
                 </div>
             )}
-
             {!!upgradeAbilities.length && (
                 <div>
                     <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
                         <span>
-                            Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold |
+                            Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold)
                         </span>
-                        <span>
-                            <b>{totalXpAbilities}</b> XP Books)
-                        </span>
-                    </div>
-                    <div style={{ width: '350px' }}>
-                        <Accordion defaultExpanded={false}>
-                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                <span>Total Ability Badges</span>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <div>
-                                    {[Alliance.Chaos, Alliance.Imperial, Alliance.Xenos].map(alliance => (
-                                        <div key={alliance} className="my-2 flex-box gap20">
-                                            <BadgesTotal badges={totalAbilityBadges[alliance]} alliance={alliance} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </AccordionDetails>
-                        </Accordion>
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex gap-3 flex-wrap">
@@ -420,11 +510,13 @@ export const Goals = () => {
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
-                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
+                                    goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
+                                        x => x.goalId === goal.goalId
+                                    )}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                     bgColor={GoalService.getBackgroundColor(
                                         viewPreferences.goalsBattlePassSeasonView ?? false,
-                                        goalsEstimate.find(x => x.goalId === goal.goalId)
+                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
                                     )}
                                 />
                             ))}
@@ -434,14 +526,13 @@ export const Goals = () => {
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
                             rows={upgradeAbilities}
-                            estimate={goalsEstimate}
+                            estimate={adjustedGoalsEstimates.goalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalsBattlePassSeasonView ?? false}
                         />
                     )}
                 </div>
             )}
-
             {!!editGoal && !!editUnit && (
                 <EditGoalDialog
                     isOpen={true}
