@@ -56,7 +56,33 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
             return { ...state, upgrades: newUpgrades };
         }
         case 'ResetUpgrades': {
-            return { ...state, upgrades: {} };
+            const upgrades: Record<string, number> = {};
+            const createEmptyRarityRecord = (): Record<Rarity, number> => ({
+                [Rarity.Common]: 0,
+                [Rarity.Uncommon]: 0,
+                [Rarity.Rare]: 0,
+                [Rarity.Epic]: 0,
+                [Rarity.Legendary]: 0,
+                [Rarity.Mythic]: 0,
+            });
+            const books: Record<Rarity, number> = createEmptyRarityRecord();
+            const badges: Record<Alliance, Record<Rarity, number>> = {
+                [Alliance.Imperial]: createEmptyRarityRecord(),
+                [Alliance.Xenos]: createEmptyRarityRecord(),
+                [Alliance.Chaos]: createEmptyRarityRecord(),
+            };
+            const orbs = cloneDeep(badges);
+            const forgeBadges = createEmptyRarityRecord();
+            const components = { [Alliance.Imperial]: 0, [Alliance.Xenos]: 0, [Alliance.Chaos]: 0 };
+            return {
+                ...state,
+                xpBooks: { ...books },
+                abilityBadges: { ...badges },
+                orbs: { ...orbs },
+                forgeBadges: { ...forgeBadges },
+                components: { ...components },
+                upgrades: upgrades,
+            };
         }
         case 'SyncWithTacticus': {
             const {
