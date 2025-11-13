@@ -1,6 +1,7 @@
 ﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
+import SyncIcon from '@mui/icons-material/Sync';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -18,7 +19,7 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
-import { Alliance, Rank } from '@/fsd/5-shared/model';
+import { Alliance, Rank, useAuth } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/assets';
@@ -28,6 +29,7 @@ import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { BadgesTotal } from '@/v2/features/characters/components/badges-total';
+import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
 import {
@@ -57,6 +59,8 @@ export const Goals = () => {
         viewPreferences,
     } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
+    const { userInfo } = useAuth();
+    const { syncWithTacticus } = useSyncWithTacticus();
 
     const characters = CharactersService.resolveStoredCharacters(unresolvedCharacters);
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
@@ -300,6 +304,13 @@ export const Goals = () => {
         'week of a battle pass season ending will have a background between the colors representing the ' +
         'respective battle pass seasons.';
 
+    const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
+
+    const sync = async () => {
+        console.log('Syncing with Tacticus...');
+        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+    };
+
     return (
         <div>
             <div className="flex gap-5 flex-wrap items-center">
@@ -360,6 +371,11 @@ export const Goals = () => {
 
                     <AccordionDetails className="!p-0 !bg-transparent">
                         <div className="flex flex-col gap-y-2 p-2 bg-gray-900 rounded-lg border border-gray-700 mt-2">
+                            {hasSync && (
+                                <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
+                                    <SyncIcon /> Sync
+                                </Button>
+                            )}
                             <div className="p-2 bg-gray-800 rounded-md border border-gray-700 flex items-center justify-start gap-x-4">
                                 <MiscIcon icon={'energy'} height={35} width={35} />{' '}
                                 <b className="text-lg text-white">{estimatedUpgradesTotal.energyTotal}</b>
@@ -394,10 +410,10 @@ export const Goals = () => {
                                     size={'medium'}
                                 />
                             </div>
-                        </div>{' '}
+                        </div>
                     </AccordionDetails>
                 </Accordion>
-            </div>{' '}
+            </div>
             {!!upgradeRankOrMowGoals.length && (
                 <div>
                     <div className="flex gap5 flex-wrap items-center" style={{ fontSize: 20, margin: '20px 0' }}>
