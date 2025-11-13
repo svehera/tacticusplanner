@@ -87,7 +87,7 @@ export const Resources = () => {
 
                 <div className="flex flex-col p-3 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
                     <h4 className="text-md font-bold text-gray-300 border-b border-gray-600 pb-2 mb-2 uppercase tracking-wide">
-                        Machine Components
+                        Machine of War Components
                     </h4>
                     <div className="flex flex-wrap justify-start gap-x-1">
                         {Object.entries(inventory.components).map(([alliance, quantity]) => {

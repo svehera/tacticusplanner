@@ -1,4 +1,5 @@
-﻿import { v4 } from 'uuid';
+﻿import { cloneDeep } from 'lodash';
+import { v4 } from 'uuid';
 
 import { Rank, Rarity, RarityStars, RarityMapper, Alliance } from '@/fsd/5-shared/model';
 
@@ -154,20 +155,20 @@ const defaultGWLayout: IGWLayoutZone[] = [
 
 function createRarityRecord<T>(initialValue: T): Record<Rarity, T> {
     return {
-        [Rarity.Common]: initialValue,
-        [Rarity.Uncommon]: initialValue,
-        [Rarity.Rare]: initialValue,
-        [Rarity.Epic]: initialValue,
-        [Rarity.Legendary]: initialValue,
-        [Rarity.Mythic]: initialValue,
+        [Rarity.Common]: cloneDeep(initialValue),
+        [Rarity.Uncommon]: cloneDeep(initialValue),
+        [Rarity.Rare]: cloneDeep(initialValue),
+        [Rarity.Epic]: cloneDeep(initialValue),
+        [Rarity.Legendary]: cloneDeep(initialValue),
+        [Rarity.Mythic]: cloneDeep(initialValue),
     };
 }
 
 function createAllianceRecord<T>(initialValue: T): Record<Alliance, T> {
     return {
-        [Alliance.Imperial]: initialValue,
-        [Alliance.Xenos]: initialValue,
-        [Alliance.Chaos]: initialValue,
+        [Alliance.Imperial]: cloneDeep(initialValue),
+        [Alliance.Xenos]: cloneDeep(initialValue),
+        [Alliance.Chaos]: cloneDeep(initialValue),
     };
 }
 

@@ -2,6 +2,9 @@
 
 import { snowprintIcons, snowprintStarsIcons } from '@/fsd/5-shared/assets';
 export { OrbIcon } from './orb-image';
+export { ForgeBadgesTotal } from './forge-badges-total';
+export { XpBooksTotal } from './xp-books-total';
+export { MoWComponentsTotal } from './mow-components-total';
 
 import armourIcon from './armour.webp';
 import blackstoneIcon from './blackstone.png';
