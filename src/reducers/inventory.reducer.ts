@@ -94,14 +94,16 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
                 components: syncComponents,
             } = action.inventory;
             const result: Record<string, number> = {};
-            const createEmptyRarityRecord = (): Record<Rarity, number> => ({
-                [Rarity.Common]: 0,
-                [Rarity.Uncommon]: 0,
-                [Rarity.Rare]: 0,
-                [Rarity.Epic]: 0,
-                [Rarity.Legendary]: 0,
-                [Rarity.Mythic]: 0,
-            });
+            const createEmptyRarityRecord = (): Record<Rarity, number> => {
+                return {
+                    [Rarity.Common]: 0,
+                    [Rarity.Uncommon]: 0,
+                    [Rarity.Rare]: 0,
+                    [Rarity.Epic]: 0,
+                    [Rarity.Legendary]: 0,
+                    [Rarity.Mythic]: 0,
+                };
+            };
             const books: Record<Rarity, number> = createEmptyRarityRecord();
             const badges: Record<Alliance, Record<Rarity, number>> = {
                 [Alliance.Imperial]: createEmptyRarityRecord(),

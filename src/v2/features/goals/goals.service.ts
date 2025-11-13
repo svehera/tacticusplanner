@@ -4,7 +4,7 @@ import { rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { IInventory, IPersonalGoal } from 'src/models/interfaces';
 
-import { Alliance, Rank, Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { Alliance, Rank, Rarity } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
@@ -348,34 +348,9 @@ export class GoalsService {
             [Alliance.Imperial]: 0,
             [Alliance.Xenos]: 0,
         };
-        const heldBadges: Record<Alliance, Record<Rarity, number>> = {
-            [Alliance.Chaos]: createRarityRecord(),
-            [Alliance.Imperial]: createRarityRecord(),
-            [Alliance.Xenos]: createRarityRecord(),
-        };
-        Object.entries(inventory.abilityBadges[Alliance.Imperial] ?? []).forEach(([rarity, count]) => {
-            heldBadges[Alliance.Imperial][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
-        });
-        Object.entries(inventory.abilityBadges[Alliance.Xenos] ?? []).forEach(([rarity, count]) => {
-            heldBadges[Alliance.Xenos][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
-        });
-        Object.entries(inventory.abilityBadges[Alliance.Chaos] ?? []).forEach(([rarity, count]) => {
-            heldBadges[Alliance.Chaos][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
-        });
-
-        const heldForgeBadges: Record<number, number> = createRarityRecord();
-        Object.entries(inventory.forgeBadges ?? []).forEach(([rarity, count]) => {
-            heldForgeBadges[Number(rarity)] = count;
-        });
-
-        const heldComponents: Record<Alliance, number> = {
-            [Alliance.Chaos]: 0,
-            [Alliance.Imperial]: 0,
-            [Alliance.Xenos]: 0,
-        };
-        Object.entries(inventory.components ?? []).forEach(([alliance, count]) => {
-            heldComponents[alliance as Alliance] = count;
-        });
+        const heldBadges = cloneDeep(inventory.abilityBadges);
+        const heldForgeBadges = cloneDeep(inventory.forgeBadges);
+        const heldComponents = cloneDeep(inventory.components);
 
         const newGoalsEstimates: IGoalEstimate[] = cloneDeep(goalsEstimate);
         const goalsByPrio = orderBy(

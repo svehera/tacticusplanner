@@ -233,8 +233,8 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
     return {
         ...v1Data,
         inventory: {
-            ...defaultData.inventory,
             ...v1Data.inventory,
+            ...defaultData.inventory,
         },
     };
 };
