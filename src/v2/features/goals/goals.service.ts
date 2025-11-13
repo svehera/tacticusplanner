@@ -393,12 +393,12 @@ export class GoalsService {
                     heldBooks[Rarity.Common] -= 1;
                 }
                 totalXpNeeded += xpNeeded;
-                goal.xpBooksTotal = Math.ceil(xpNeeded / 12500);
+                goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
                 if (goal.xpEstimate) {
-                    goal.xpEstimate.legendaryBooks = Math.ceil(xpNeeded / 12500);
+                    goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
                     goal.xpEstimate.xpLeft = xpNeeded;
                 } else {
-                    goal.xpEstimateAbilities!.legendaryBooks = Math.ceil(xpNeeded / 12500);
+                    goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
                     goal.xpEstimateAbilities!.xpLeft = xpNeeded;
                 }
             }
