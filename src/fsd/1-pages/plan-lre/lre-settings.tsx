@@ -151,6 +151,12 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
             value: viewSettings.lreTileShowUnitHealTraits,
             disabled: false,
         },
+        {
+            label: 'Relic',
+            key: 'lreTileShowUnitRelic',
+            value: viewSettings.lreTileShowUnitRelic,
+            disabled: false,
+        },
     ];
 
     const renderOption = (option: IViewOption<ILreViewSettings & ILreTileSettings & IAutoTeamsPreferences>) => {
@@ -220,8 +226,20 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                 <div className="flex-box gap5 wrap">{lreAutoTeamsOptions.map(renderOption)}</div>
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose}>Cancel</Button>
-                <Button onClick={saveChanges}>Save</Button>
+                <Button
+                    onClick={() => {
+                        console.log('closing');
+                        onClose();
+                    }}>
+                    Cancel
+                </Button>
+                <Button
+                    onClick={() => {
+                        console.log('saving');
+                        saveChanges();
+                    }}>
+                    Save
+                </Button>
             </DialogActions>
         </Dialog>
     );

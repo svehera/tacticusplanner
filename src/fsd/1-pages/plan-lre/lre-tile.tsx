@@ -8,6 +8,7 @@ import { Trait, Rank, Rarity } from '@/fsd/5-shared/model';
 import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharacterBias, CharactersService, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
+import { EquipmentIcon, EquipmentService } from '@/fsd/4-entities/equipment';
 import { ICharacterUpgradeRankGoal, PersonalGoalType } from '@/fsd/4-entities/goal';
 import { MowsService } from '@/fsd/4-entities/mow';
 
@@ -110,8 +111,11 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
         settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait.Healer);
     const showMechanicTrait =
         settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait.Mechanic);
+    const showRelic = settings.lreTileShowUnitRelic && character.equipment?.some(x => EquipmentService.isRelic(x.id));
     const showShardIcon = settings.lreTileShowUnitIcon && character.name && character.icon;
     const showRarity = settings.lreTileShowUnitRarity && typeof rarity !== 'undefined';
+    const characterRelic = character.equipment.find(x => EquipmentService.isRelic(x.id));
+
     return (
         <div
             className={'flex-box gap10 full-width ' + rankBackgroundCssClass}
@@ -142,6 +146,17 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
                 <Tooltip placement="top" title="Mechanic">
                     <span>
                         <TraitImage trait={Trait.Mechanic} width={20} height={20} />
+                    </span>
+                </Tooltip>
+            )}
+            {showRelic && (
+                <Tooltip placement="top" title="Relic Equipped">
+                    <span>
+                        <EquipmentIcon
+                            equipment={EquipmentService.equipmentData.find(eq => eq.id === characterRelic!.id)!}
+                            width={20}
+                            height={20}
+                        />
                     </span>
                 </Tooltip>
             )}

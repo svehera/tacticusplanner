@@ -25,12 +25,11 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
     const [preselectedTrackId, setPreselectedTrackId] = useState<LreTrackId>('alpha');
     const [preselectedRequirements, setPreselectedRequirements] = useState<string[]>([]);
 
-    const selectedTeams: ILreTeam[] = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
-
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     // Compute virtual attributes (not saved in JSON) for display on LRE team cards.
-    selectedTeams.forEach(team => {
+    const selectedTeams = (leSelectedTeams[legendaryEvent.id]?.teams ?? []).map(rawTeam => {
+        const team = { ...rawTeam };
         team.points = 0;
         for (const id of team.restrictionsIds) {
             team.points += legendaryEvent[team.section].getRestrictionPoints(id);
@@ -63,6 +62,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
 
             return { ...character, teamId: team.id };
         }) as ICharacter2[];
+        return team;
     });
 
     const startAddTeam = (section: LreTrackId, restrictions: string[]) => {

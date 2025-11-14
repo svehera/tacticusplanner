@@ -54,6 +54,7 @@ export interface ILreTileSettings {
     lreTileShowUnitActiveAbility: boolean;
     lreTileShowUnitPassiveAbility: boolean;
     lreTileShowUnitHealTraits: boolean;
+    lreTileShowUnitRelic: boolean;
 }
 
 export interface ICharactersViewControls {
