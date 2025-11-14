@@ -88,7 +88,6 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
 
     return (
         <div className="flex flex-col gap-4">
-            {/* 1. View Toggle Header */}
             <div className="flex justify-end items-center bg-gray-800/50 p-2 rounded-lg border border-gray-700">
                 <FormControlLabel
                     control={
@@ -114,9 +113,7 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                 />
             </div>
 
-            {/* 2. Conditional Rendering */}
             {isTableView ? (
-                // --- Existing Table View ---
                 <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-700/50">
                     <table
                         key="tokensTable"
@@ -173,7 +170,6 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                     </table>
                 </div>
             ) : (
-                // --- New Card View ---
                 <div className="flex flex-wrap gap-4 justify-center">
                     {rowData.map((token, index) => (
                         <LeTokenCard
@@ -181,7 +177,6 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                             index={index}
                             renderMode={LeTokenCardRenderMode.kInGrid}
                             token={token}
-                            // Pass rendering helpers down
                             renderMilestone={x => renderMilestone(x, isDark)}
                             renderRestrictions={x => renderRestrictions(x, token.track, token.battleNumber, 35)}
                             renderTeam={x => renderTeam(x, 35)}

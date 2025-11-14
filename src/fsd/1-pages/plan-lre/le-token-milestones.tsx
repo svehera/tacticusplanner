@@ -17,27 +17,22 @@ export const LeTokenMilestones = ({ currentPoints }: { currentPoints: number }) 
     return rowData.length === 0 ? (
         <div className="text-center py-4 text-gray-500 dark:text-gray-400">No milestones achieved yet.</div>
     ) : (
-        // Changed from scrollable table wrapper to a flexible, wrapping container
         <div className="flex flex-wrap gap-3 justify-center w-full">
             {rowData.map((milestone, index) => {
                 const isFinalMilestone =
                     milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1]?.points;
 
                 return (
-                    // Each milestone is now a small, styled card/chip
                     <div
                         key={index}
-                        // Styling for light/dark mode card appearance
                         className="p-3 w-40 flex flex-col items-center rounded-lg shadow-md 
                                    bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 
                                    transition duration-150 ease-in-out hover:shadow-lg">
-                        {/* 1. Points */}
                         <div className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Points</div>
                         <div className="text-xl font-extrabold font-mono text-blue-600 dark:text-blue-400 mb-2">
                             {milestone.points}
                         </div>
 
-                        {/* 2. Stars / 100% */}
                         <div className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Reward</div>
                         <div className="flex justify-center items-center h-full text-lg font-bold">
                             {isFinalMilestone ? (
@@ -53,7 +48,6 @@ export const LeTokenMilestones = ({ currentPoints }: { currentPoints: number }) 
                             )}
                         </div>
 
-                        {/* 3. Round & Packs Per Round (Combined into smaller labels) */}
                         <div className="mt-3 text-center">
                             <span className="text-xs font-semibold text-gray-700 dark:text-gray-200">
                                 Round {milestone.round}

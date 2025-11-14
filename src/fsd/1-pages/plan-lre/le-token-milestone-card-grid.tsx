@@ -10,13 +10,12 @@ interface Props {
 }
 
 export const LeTokenMilestoneCardGrid = ({ milestonesToList, emptyMessage, isMissedVariant = false }: Props) => {
-    // Base styles for the card
     const baseCardClasses =
         'p-3 w-40 flex flex-col items-center rounded-lg shadow-md border transition duration-150 ease-in-out hover:shadow-lg';
 
     const variantClasses = isMissedVariant
-        ? 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 opacity-75 grayscale-[30%]' // Slightly muted look for missed
-        : 'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600'; // Original look for achieved
+        ? 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 opacity-75 grayscale-[30%]'
+        : 'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600';
 
     return milestonesToList.length === 0 ? (
         <div className="text-center py-4 text-gray-500 dark:text-gray-400">{emptyMessage}</div>
