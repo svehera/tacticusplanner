@@ -1,32 +1,38 @@
-import { useContext, useMemo } from 'react';
+/* eslint-disable import-x/no-internal-modules */
+import GridViewIcon from '@mui/icons-material/GridView';
+import TableRowsIcon from '@mui/icons-material/TableRows';
+import { FormControlLabel, Switch } from '@mui/material';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import { StoreContext } from '@/reducers/store.provider';
-
-import { Rarity } from '@/fsd/5-shared/model';
-import { RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { LreReqImage } from '@/fsd/4-entities/lre';
 
-import { ILreRequirements } from './lre.models';
-import { milestonesAndPoints, TokenEstimationService, TokenUse } from './token-estimation-service';
+import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
 
-class TokenDisplay {
-    public team: string[] = [];
-    public restricts: ILreRequirements[] = [];
-    public battleNumber: number = -1;
-    public track: string = '(null track)';
-    public incrementalPoints: number = -1;
-    public totalPoints: number = -1;
-    public milestoneAchievedIndex: number = -1;
-}
+import { LeTokenCard } from './le-token-card';
+import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
+import { LeTokenCardRenderMode } from './lre.models';
+import { milestonesAndPoints, TokenDisplay, TokenEstimationService, TokenUse } from './token-estimation-service';
 
 /**
  * Displays the tokens to be used by the player in optimal order, along with
  * various statistics about each milestone.
  */
 export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; currentPoints: number }) => {
+    const { viewPreferences } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
+
+    const [isTableView, setIsTableView] = useState<boolean>(viewPreferences.tokenomicsTableView);
+
+    useEffect(() => {
+        const setting = 'tokenomicsTableView';
+        const value = isTableView;
+        dispatch.viewPreferences({ type: 'Update', setting: setting as keyof ILreViewSettings, value });
+    }, [isTableView, dispatch]);
+
+    const isDark = viewPreferences.theme === 'dark';
+
     const rowData = useMemo(() => {
         let totalPoints = currentPoints;
         const ret: TokenDisplay[] = [];
@@ -53,7 +59,6 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                         )
                     );
                 } else {
-                    // Skip the team
                     continue;
                 }
             }
@@ -70,148 +75,120 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
         return ret;
     }, [tokens, currentPoints]);
 
-    const { viewPreferences } = useContext(StoreContext);
-
     const isDarkMode = viewPreferences.theme === 'dark';
 
     const getBgColor = (index: number) => {
         const lightBg = ['#f0f0f0', '#e0e0e0'];
-        const darkBg = ['#101010', '#202020'];
+        const darkBg = ['#1f2937', '#111827'];
         if (isDarkMode) {
             return darkBg[index % darkBg.length];
         }
         return lightBg[index % lightBg.length];
     };
 
-    const getTextColor = (severity: number) => {
-        const lightText = ['#b00', '#bb0', '#0b0'];
-        const darkText = ['#f00', '#ff0', '#0f0'];
-        if (isDarkMode) {
-            return darkText[severity];
-        }
-        return lightText[severity];
-    };
-
-    const getOrdinal = (num: number) => {
-        if (num == 1) return '1st';
-        if (num == 2) return '2nd';
-        if (num == 3) return '3rd';
-        return num + 'th';
-    };
-
-    const getMilestone = (milestoneIndex: number) => {
-        if (milestoneIndex === -1) {
-            return <></>;
-        }
-        if (milestoneIndex >= milestonesAndPoints.length) {
-            return <></>;
-        }
-        const milestone = milestonesAndPoints[milestoneIndex];
-        return (
-            <table>
-                <tbody>
-                    <tr>
-                        <td className="flex justify-center items-center">
-                            {milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1].points ? (
-                                '100%'
+    return (
+        <div className="flex flex-col gap-4">
+            {/* 1. View Toggle Header */}
+            <div className="flex justify-end items-center bg-gray-800/50 p-2 rounded-lg border border-gray-700">
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={isTableView}
+                            onChange={event => setIsTableView(event.target.checked)}
+                            color="primary" // Or your theme color
+                        />
+                    }
+                    label={
+                        <div className="flex items-center gap-2 text-gray-300">
+                            {isTableView ? (
+                                <>
+                                    <TableRowsIcon fontSize="small" /> <span>Table View</span>
+                                </>
                             ) : (
                                 <>
-                                    {milestone.stars == 7 ? (
-                                        <RarityIcon rarity={Rarity.Mythic} />
-                                    ) : (
-                                        <StarsIcon stars={milestone.stars + 5 - (milestone.stars >= 7 ? 1 : 0)} />
-                                    )}
+                                    <GridViewIcon fontSize="small" /> <span>Cards View</span>
                                 </>
                             )}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="text-center justify-center">
-                            <span style={{ color: getTextColor(3 - milestone.round) }}>
-                                {getOrdinal(milestone.round)} Round
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="text-center justify-center">
-                            <span style={{ color: getTextColor(2 - milestone.packsPerRound) }}>
-                                {milestone.packsPerRound == 2
-                                    ? 'with both packs'
-                                    : milestone.packsPerRound == 1
-                                      ? 'with premium missions'
-                                      : 'with free missions'}
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        );
-        const ret = [];
-        ret.push();
-        ret.push();
-        if (milestone.packsPerRound == 2) {
-            ret.push();
-        } else if (milestone.packsPerRound == 1) {
-            ret.push(<span className="text-yellow-500">with premium missions</span>);
-        } else {
-            ret.push(<span className="text-green-500">with free missions</span>);
-        }
-        return <div key={'milestone' + milestoneIndex}>{ret}</div>;
-    };
+                        </div>
+                    }
+                />
+            </div>
 
-    return (
-        <table key="tokensTable">
-            <thead>
-                <tr>
-                    <th className="px-4">Token</th>
-                    <th className="px-4">Milestone Achieved</th>
-                    <th className="px-4">Track</th>
-                    <th className="px-4">Battle</th>
-                    <th className="px-4">Restrictions Cleared</th>
-                    <th className="px-4">Incremental Points</th>
-                    <th className="px-4">Total Points</th>
-                    <th className="px-4">Team</th>
-                </tr>
-            </thead>
-            <tbody>
-                {rowData.map((token: TokenDisplay, index: number) => {
-                    return (
-                        <tr key={index} style={{ backgroundColor: getBgColor(index) }}>
-                            <td className="px-4">{index + 1}</td>
-                            <td align="center" className="px-4 flex justify-center">
-                                {getMilestone(token.milestoneAchievedIndex)}
-                            </td>
-                            <td className="px-4">{token.track}</td>
-                            <td className="px-4 text-right">{token.battleNumber + 1}</td>
-                            <td className="px-4 flex justify-center">
-                                {token.restricts.map(restrict =>
-                                    restrict.id === '_killPoints' || restrict.id === '_highScore' ? (
-                                        <span key={token.track + token.battleNumber + restrict.id}> </span>
-                                    ) : (
-                                        <LreReqImage
-                                            key={restrict.iconId + index}
-                                            iconId={restrict.iconId}
-                                            tooltip={restrict.name}
-                                        />
-                                    )
-                                )}
-                            </td>
-                            <td className="px-4">{token.incrementalPoints}</td>
-                            <td className="px-4 text-right">{token.totalPoints}</td>
-                            <td className="px-4">
-                                {token.team.map((snowprintId: string) => (
-                                    <UnitShardIcon
-                                        key={snowprintId + index}
-                                        icon={CharactersService.getUnit(snowprintId)?.roundIcon ?? ''}
-                                        height={20}
-                                        tooltip={CharactersService.getUnit(snowprintId)?.name ?? snowprintId}
-                                    />
-                                ))}
-                            </td>
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </table>
+            {/* 2. Conditional Rendering */}
+            {isTableView ? (
+                // --- Existing Table View ---
+                <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-700/50">
+                    <table
+                        key="tokensTable"
+                        className="min-w-full table-auto border-separate border-spacing-0 bg-gray-900 text-sm text-gray-200">
+                        <thead>
+                            <tr className="bg-gray-700 text-gray-100 uppercase sticky top-0">
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Token</th>
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
+                                    Milestone
+                                    <br />
+                                    Achieved
+                                </th>
+                                <th className="px-3 py-3 text-left font-semibold whitespace-nowrap">Track</th>
+                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">Battle</th>
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
+                                    Restrictions
+                                    <br />
+                                    Cleared
+                                </th>
+                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">
+                                    Incremental
+                                    <br />
+                                    Points
+                                </th>
+                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">Total Points</th>
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Team</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rowData.map((token: TokenDisplay, index: number) => {
+                                return (
+                                    <tr
+                                        key={index}
+                                        style={{ backgroundColor: getBgColor(index) }}
+                                        className="border-t border-gray-700/50 hover:bg-gray-700 transition duration-150 ease-in-out">
+                                        <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
+                                        <td className="px-3 py-2 flex justify-center items-center h-full">
+                                            {renderMilestone(token.milestoneAchievedIndex, isDark)}
+                                        </td>
+                                        <td className="px-3 py-2">{token.track}</td>
+                                        <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
+                                        <td className="px-3 py-2 h-full flex items-center justify-center">
+                                            {renderRestrictions(token.restricts, token.track, token.battleNumber, 25)}
+                                        </td>
+                                        <td className="px-3 py-2 text-right font-mono">{token.incrementalPoints}</td>
+                                        <td className="px-3 py-2 text-right font-bold font-mono text-blue-400">
+                                            {token.totalPoints}
+                                        </td>
+                                        <td className="px-3 py-2 text-center">{renderTeam(token.team, 25)}</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                // --- New Card View ---
+                <div className="flex flex-wrap gap-4 justify-center">
+                    {rowData.map((token, index) => (
+                        <LeTokenCard
+                            key={index}
+                            index={index}
+                            renderMode={LeTokenCardRenderMode.kInGrid}
+                            token={token}
+                            // Pass rendering helpers down
+                            renderMilestone={x => renderMilestone(x, isDark)}
+                            renderRestrictions={x => renderRestrictions(x, token.track, token.battleNumber, 35)}
+                            renderTeam={x => renderTeam(x, 35)}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
     );
 };

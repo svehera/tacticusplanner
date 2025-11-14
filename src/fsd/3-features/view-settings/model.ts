@@ -22,6 +22,7 @@ export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IW
     raidsTableView: boolean;
     myProgressShowCoreCharacters: boolean;
     apiIntegrationSyncOptions: string[];
+    tokenomicsTableView: boolean;
 }
 
 interface IWyoViewSettings {
