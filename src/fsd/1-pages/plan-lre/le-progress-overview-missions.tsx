@@ -24,7 +24,7 @@ export const LeProgressOverviewMissions: React.FC<Props> = ({ occurrence, progre
     return (
         <div style={{ flex: 1, minWidth: 450 }} className="mr-2">
             <h3>
-                <span className="bold">{getEventName()}</span>
+                <span className="font-bold">{getEventName()}</span>
                 <span className="italic">
                     ({occurrence.freeMissionsProgress}-{occurrence.premiumMissionsProgress}-
                     {+occurrence.bundlePurchased})

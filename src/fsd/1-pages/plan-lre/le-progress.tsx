@@ -66,7 +66,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                 onChange={handleAccordionChange('missionAndNotes')}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <span>
-                        Notes & Missions Progress <span className="bold">({missionsTotalProgress})</span>
+                        Notes & Missions Progress <span className="font-bold">({missionsTotalProgress})</span>
                     </span>
                 </AccordionSummary>
 
@@ -120,7 +120,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <div className="flex-box gap5">
                         <span>
-                            Tracks Progress <span className="bold">({tracksTotalProgress})</span>
+                            Tracks Progress <span className="font-bold">({tracksTotalProgress})</span>
                         </span>
                         {isMobile ? (
                             <span>Use Long press to put requirement in intermediate state</span>

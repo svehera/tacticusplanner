@@ -149,7 +149,7 @@ export const MaterialsTable: React.FC<Props> = ({
                     cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                         const { daysTotal, energyTotal, raidsTotal } = props.data!;
                         return (
-                            <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                            <ul className="m-0 ps-5">
                                 <li>{daysTotal} - days</li>
                                 <li>{energyTotal} - energy</li>
                                 <li>{raidsTotal} - raids</li>
@@ -191,7 +191,7 @@ export const MaterialsTable: React.FC<Props> = ({
                         const canBeUsedLocations = locations.filter(x => x.isUnlocked && x.isPassFilter).length;
                         const lockedLocations = locations.filter(x => !x.isUnlocked).length;
                         return (
-                            <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                            <ul className="m-0 ps-5">
                                 <li>
                                     {usedLocations}/{canBeUsedLocations} - used
                                 </li>

@@ -87,7 +87,7 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
 
     return (
         <FlexBox style={{ flexDirection: 'column' }}>
-            <Button style={{ textAlign: 'center' }} component={Link} to={isMobile ? '/mobile/ty' : '/ty'}>
+            <Button className="text-center" component={Link} to={isMobile ? '/mobile/ty' : '/ty'}>
                 Thank you cards
             </Button>
 

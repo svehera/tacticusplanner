@@ -9,7 +9,7 @@ export const PlanGuildWarRoutes = () => {
     const offenseItem = menuItemById['offense'];
     const layoutItem = menuItemById['zones'];
     return (
-        <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
+        <div className="flex gap-2.5 flex-col items-center">
             <Card
                 variant="outlined"
                 onClick={() => navigate(defenseItem.routeMobile)}
@@ -19,7 +19,7 @@ export const PlanGuildWarRoutes = () => {
                 }}>
                 <CardHeader
                     title={
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div className="flex items-center gap-2.5">
                             {defenseItem.icon} {defenseItem.label}
                         </div>
                     }
@@ -35,7 +35,7 @@ export const PlanGuildWarRoutes = () => {
                 }}>
                 <CardHeader
                     title={
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div className="flex items-center gap-2.5">
                             {offenseItem.icon} {offenseItem.label}
                         </div>
                     }
@@ -50,7 +50,7 @@ export const PlanGuildWarRoutes = () => {
                 }}>
                 <CardHeader
                     title={
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div className="flex items-center gap-2.5">
                             {layoutItem.icon} {layoutItem.label}
                         </div>
                     }

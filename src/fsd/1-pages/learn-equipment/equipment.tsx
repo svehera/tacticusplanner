@@ -35,7 +35,7 @@ export const Equipment = () => {
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     const equipment = params.data;
                     return equipment ? (
-                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                        <span className="flex items-center">
                             <EquipmentIcon equipment={equipment} width={60} height={60} />
                             {equipment?.name}
                         </span>
@@ -63,7 +63,7 @@ export const Equipment = () => {
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     const equipment = params.data;
                     return equipment ? (
-                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                        <span className="flex items-center">
                             <EquipmentTypeIcon equipmentType={equipment.type} width={25} height={25} />
                             <span> </span>
                             <span>{EquipmentService.getEquipmentSlotDisplayName(equipment.type)}</span>

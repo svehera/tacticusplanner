@@ -133,7 +133,7 @@ export const RankLookup = () => {
                             rarity={RarityMapper.rarityToRarityString(item.rarity)}
                             size={30}
                         />{' '}
-                        - <span style={{ fontWeight: 'bold' }}>{item.count}</span>
+                        - <span className="font-bold">{item.count}</span>
                     </div>
                     {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
                 </li>
@@ -248,7 +248,7 @@ export const RankLookup = () => {
         };
 
         return (
-            <div style={{ display: 'flex' }}>
+            <div className="flex">
                 <div className="flex-box column gap5">
                     <MiscIcon icon={'health'} height={30} />
                     {healthUpgrades.map((x, index) => {
@@ -320,7 +320,7 @@ export const RankLookup = () => {
                     }}
                 />
 
-                <div style={{ width: 200 }}>
+                <div className="w-50">
                     <RankSelect
                         label={'Rank Start'}
                         rankValues={rankEntries.slice(0, rankEntries.length - 1)}
@@ -334,7 +334,7 @@ export const RankLookup = () => {
                     />
                 </div>
                 <div className="flex gap-5 items-center flex-wrap">
-                    <div style={{ width: 200 }}>
+                    <div className="w-50">
                         <RankSelect
                             label={'Rank End'}
                             rankValues={rankEntries.slice(1)}

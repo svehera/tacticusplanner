@@ -167,7 +167,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
     return (
         <div>
-            <div style={{ display: 'flex' }}>
+            <div className="flex">
                 <div className="flex flex-col items-center justify-center gap-[5px]">
                     <MiscIcon icon={'health'} height={30} />
                     {StatsCalculatorService.getHealth(character)}
@@ -205,7 +205,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                     ))}
                 </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="flex flex-col">
                 {unknownUpgrades.map((x, index) => (
                     <UpgradeControl
                         key={x.id + index}
@@ -240,7 +240,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 }}>
                 <div style={{ padding: 15 }}>
                     <p>Inventory after update:</p>
-                    <ul style={{ padding: 0 }}>
+                    <ul className="p-0">
                         {inventoryUpgrades.map((x, index) => (
                             <li
                                 key={x.id + index}

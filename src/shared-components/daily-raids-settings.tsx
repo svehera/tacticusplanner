@@ -162,7 +162,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
 
                     <div className="flex flex-wrap gap-10" style={{ alignItems: 'unset' }}>
                         <FormControl>
-                            <FormLabel id="radio-buttons-group" style={{ fontWeight: 'bold' }}>
+                            <FormLabel id="radio-buttons-group" className="font-bold">
                                 Raids order/grouping:
                             </FormLabel>
                             <RadioGroup
@@ -222,7 +222,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                         </FormControl>
 
                         <FormControl>
-                            <FormLabel htmlFor="shardsEnergy" style={{ fontWeight: 'bold' }}>
+                            <FormLabel htmlFor="shardsEnergy" className="font-bold">
                                 Characters shards energy
                             </FormLabel>
                             <Input
@@ -243,7 +243,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
 
                     <div className="flex flex-wrap gap-10">
                         <FormControl>
-                            <FormLabel id="radio-buttons-group2" style={{ fontWeight: 'bold' }}>
+                            <FormLabel id="radio-buttons-group2" className="font-bold">
                                 Locations selection:
                             </FormLabel>
                             <RadioGroup
@@ -269,7 +269,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                             title="Experimental/unstable feature. 
                                 Please report any issues you have while using this feature in the Discord. 
                                 It doesn't work yet with 'By goals priority'.">
-                                            <div className="flex-box gap2">
+                                            <div className="flex-box gap-0.5">
                                                 <Warning color="warning" /> Least time
                                             </div>
                                         </AccessibleTooltip>

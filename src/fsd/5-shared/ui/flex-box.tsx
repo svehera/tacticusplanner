@@ -10,6 +10,7 @@ export const FlexBox = ({
     wrap,
     onClick,
     style = {},
+    className = '',
 }: React.PropsWithChildren<{
     alignItems?: CSSProperties['alignItems'];
     justifyContent?: CSSProperties['justifyContent'];
@@ -18,12 +19,14 @@ export const FlexBox = ({
     wrap?: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
     style?: CSSProperties;
+    className?: string;
 }>) => {
     const flexDirection = isMobile && useColumnForMobile ? 'column' : 'row';
     const flexWrap = wrap ? 'wrap' : 'nowrap';
     return (
         <div
             onClick={onClick}
+            className={className}
             style={{ display: 'flex', alignItems, gap, justifyContent, flexDirection, flexWrap, ...style }}>
             {children}
         </div>

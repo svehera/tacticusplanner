@@ -274,7 +274,7 @@ export const Campaigns = () => {
 
                 {!!threeSlotsNodes.length && (
                     <div className="flex-box gap10 wrap">
-                        <span className="bold"> 3 Slots nodes:</span>
+                        <span className="font-bold"> 3 Slots nodes:</span>
                         {threeSlotsNodes.map(x => (
                             <CampaignLocation key={x.id} location={x} unlocked={true} short={true} />
                         ))}

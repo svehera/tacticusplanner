@@ -22,7 +22,7 @@ export const RankSelect = ({
             <Select<Rank> label={label} value={value} onChange={event => valueChanges(+event.target.value)}>
                 {rankValues.map(rank => (
                     <MenuItem key={rank} value={rank}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                        <div className="flex items-center gap-[15px]">
                             <span>{rankToString(rank)}</span>
                             <RankIcon rank={rank} />
                         </div>

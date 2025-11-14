@@ -30,12 +30,12 @@ export const ThankYouCard = ({
             }}>
             <CardHeader
                 title={
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+                    <div className="flex items-center gap-2.5 cursor-pointer">
                         {isContentMaker(contributor) ? (
                             <Link
                                 to={contributor.youtubeLink}
                                 target={'_blank'}
-                                style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
+                                className="flex items-center gap-2.5"
                                 onClick={event => event.stopPropagation()}>
                                 <ContributorImage
                                     iconPath={contributor.avatarIcon}
@@ -62,10 +62,7 @@ export const ThankYouCard = ({
                             <>
                                 <img
                                     loading={'lazy'}
-                                    style={{
-                                        contentVisibility: 'auto',
-                                        borderRadius: '50%',
-                                    }}
+                                    className="rounded-[50%] [content-visibility:auto]"
                                     src={contributor.avatarLink}
                                     height={50}
                                     width={50}
@@ -84,13 +81,13 @@ export const ThankYouCard = ({
                           : ''
                 }
             />
-            <CardContent style={{ paddingTop: 0 }}>
+            <CardContent className="pt-0">
                 {isContentMaker(contributor) ? (
                     <>
                         <p>{contributor.thankYou}</p>
                         <Link
                             to={contributor.resourceLink}
-                            style={{ display: 'block', width: '100%', textAlign: 'center' }}
+                            className="block w-full text-center"
                             target={'_blank'}
                             onClick={event => event.stopPropagation()}>
                             <ContributorImage
@@ -119,7 +116,7 @@ export const ThankYouCard = ({
                     <>
                         <Link
                             to={`https://www.youtube.com/watch?v=${contributor.youtubeVideoId}`}
-                            style={{ display: 'block', width: '100%', textAlign: 'center' }}
+                            className="block w-full text-center"
                             target={'_blank'}
                             onClick={event => event.stopPropagation()}>
                             <img

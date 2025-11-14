@@ -240,7 +240,7 @@ export const GuildWarOffense = () => {
             const slotsCount = slots[rarity];
             if (slotsCount) {
                 return (
-                    <div key={rarity} className="flex-box gap3">
+                    <div key={rarity} className="flex-box gap-[3px]">
                         <RarityIcon rarity={rarity} /> x{slotsCount}
                     </div>
                 );
@@ -261,7 +261,7 @@ export const GuildWarOffense = () => {
             const slotsCount = slots[rarity];
             if (slotsCount) {
                 return (
-                    <div key={rarity} className="flex-box gap3">
+                    <div key={rarity} className="flex-box gap-[3px]">
                         <RarityIcon rarity={rarity} /> x{slotsCount}
                     </div>
                 );
@@ -314,7 +314,7 @@ export const GuildWarOffense = () => {
                         Go to: Defense
                     </Button>
                     <DeploymentStatus charactersLeft={availableCharacters.length} onClearAll={clearDeployedCharacters}>
-                        <div className="flex-box gap3">
+                        <div className="flex-box gap-[3px]">
                             <MiscIcon icon={'warToken'} />
                             <Input
                                 value={guildWar.attackTokens}
@@ -348,7 +348,7 @@ export const GuildWarOffense = () => {
                     </DeploymentStatus>
 
                     <AccessibleTooltip title={'War tokens. Deploy/withdraw team to decrement/increment by 1'}>
-                        <div className="flex-box gap3">
+                        <div className="flex-box gap-[3px]">
                             <MiscIcon icon={'warToken'} /> {guildWar.attackTokens}/10
                         </div>
                     </AccessibleTooltip>

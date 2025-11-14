@@ -98,10 +98,10 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, trackId, legend
 
     return (
         <div className="flex-box">
-            <span className="bold" style={{ marginInlineEnd: 10, minWidth: 18 }}>
+            <span className="font-bold" style={{ marginInlineEnd: 10, minWidth: 18 }}>
                 {battle.battleIndex + 1}
             </span>
-            <div className="flex-box gap1">
+            <div className="flex-box gap-[1px]">
                 {battle.requirementsProgress.map(x => (
                     <Checkbox
                         key={x.id + x.completed}
