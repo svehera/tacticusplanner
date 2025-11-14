@@ -27,13 +27,11 @@ export const LeTokenomics = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
     const missedMilestones = milestonesAndPoints
         .filter(milestone => milestone.points > finalProjectedPoints)
         .sort((a, b) => a.points - b.points);
-    // 2. Calculate Token Data using the shared utility
     const tokenDisplays = useMemo(
         () => TokenEstimationService.getTokenDisplays(tokens, currentPoints),
         [tokens, currentPoints]
     );
 
-    // 3. Get the FIRST token to display
     const firstToken = tokenDisplays.length > 0 ? tokenDisplays[0] : null;
     const isDarkMode = viewPreferences.theme === 'dark';
 
@@ -73,7 +71,7 @@ export const LeTokenomics = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
             </div>
 
             <div key="tokens" className="flex flex-col gap-2 w-full">
-                <LeTokenTable tokens={tokens} currentPoints={currentPoints} />
+                <LeTokenTable tokenDisplays={tokenDisplays} />
             </div>
             {missedMilestones.length > 0 && (
                 <div className="w-full flex flex-col items-center gap-y-4 mt-4 pt-6 border-t-2 border-gray-200 dark:border-gray-700">

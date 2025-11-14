@@ -8,6 +8,7 @@ import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
 import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
 import { LreReqImage } from '@/fsd/4-entities/lre/lre-req-image';
 
+import { ILreRequirements } from './lre.models';
 import { milestonesAndPoints } from './token-estimation-service';
 
 const getOrdinal = (num: number) => {
@@ -20,7 +21,8 @@ const getOrdinal = (num: number) => {
 const getTextColor = (severity: number, isDarkMode: boolean) => {
     const lightText = ['#b00', '#bb0', '#0b0'];
     const darkText = ['#f87171', '#facc15', '#4ade80'];
-    return isDarkMode ? darkText[severity] : lightText[severity];
+    const index = severity < 0 ? 0 : severity > 2 ? 2 : severity;
+    return isDarkMode ? darkText[index] : lightText[index];
 };
 
 export const renderMilestone = (milestoneIndex: number, isDarkMode: boolean) => {
@@ -61,7 +63,12 @@ export const renderMilestone = (milestoneIndex: number, isDarkMode: boolean) => 
     );
 };
 
-export const renderRestrictions = (restricts: any[], track: string, battleNumber: number, sizePx?: number) => (
+export const renderRestrictions = (
+    restricts: ILreRequirements[],
+    track: string,
+    battleNumber: number,
+    sizePx?: number
+) => (
     <div className="flex items-center gap-1">
         {restricts.map((restrict, i) =>
             restrict.id === '_killPoints' || restrict.id === '_highScore' ? (
@@ -80,13 +87,16 @@ export const renderRestrictions = (restricts: any[], track: string, battleNumber
 
 export const renderTeam = (team: string[], sizePx?: number) => (
     <div className="flex flex-wrap justify-center gap-1">
-        {team.map((snowprintId: string, i) => (
-            <UnitShardIcon
-                key={snowprintId + i}
-                icon={CharactersService.getUnit(snowprintId)?.roundIcon ?? ''}
-                height={sizePx ?? 25}
-                tooltip={CharactersService.getUnit(snowprintId)?.name ?? snowprintId}
-            />
-        ))}
+        {team.map((snowprintId: string, i) => {
+            const unit = CharactersService.getUnit(snowprintId);
+            return (
+                <UnitShardIcon
+                    key={snowprintId + i}
+                    icon={unit?.roundIcon ?? ''}
+                    height={sizePx ?? 25}
+                    tooltip={unit?.name ?? snowprintId}
+                />
+            );
+        })}
     </div>
 );

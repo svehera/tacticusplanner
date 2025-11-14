@@ -23,14 +23,13 @@ export const LeTokenCard: React.FC<CardProps> = ({
 }: CardProps) => {
     const hasMilestone =
         token.milestoneAchievedIndex !== -1 && token.milestoneAchievedIndex < milestonesAndPoints.length;
-    const constrainedWidth = renderMode === LeTokenCardRenderMode.kInGrid ? '32%' : '100%';
-    // Conditional classes for background and border
+    const widthClass = renderMode === LeTokenCardRenderMode.kInGrid ? 'lg:w-[32%]' : 'lg:w-full';
     const bgClass = hasMilestone ? 'bg-gray-800/80' : 'bg-gray-900';
     const borderClass = hasMilestone ? 'border-blue-500/30' : 'border-gray-700/50';
 
     return (
         <div
-            className={`w-full sm:w-[48%] lg:w-[${constrainedWidth}] ${bgClass} rounded-xl border ${borderClass} p-4 flex flex-col gap-3 shadow-lg relative overflow-hidden transition-colors duration-200`}>
+            className={`w-full sm:w-[48%] ${widthClass} ${bgClass} rounded-xl border ${borderClass} p-4 flex flex-col gap-3 shadow-lg relative overflow-hidden transition-colors duration-200`}>
             <div className="flex justify-between items-center border-b border-gray-800 pb-2">
                 <div className="flex items-center gap-2">
                     <span className="bg-gray-700 text-gray-200 text-xs font-bold px-2 py-1 rounded-md">

@@ -2,24 +2,22 @@
 import GridViewIcon from '@mui/icons-material/GridView';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { FormControlLabel, Switch } from '@mui/material';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
-
-import { CharactersService } from '@/fsd/4-entities/character';
 
 import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
 
 import { LeTokenCard } from './le-token-card';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenCardRenderMode } from './lre.models';
-import { milestonesAndPoints, TokenDisplay, TokenEstimationService, TokenUse } from './token-estimation-service';
+import { TokenDisplay } from './token-estimation-service';
 
 /**
  * Displays the tokens to be used by the player in optimal order, along with
  * various statistics about each milestone.
  */
-export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; currentPoints: number }) => {
+export const LeTokenTable = ({ tokenDisplays }: { tokenDisplays: TokenDisplay[] }) => {
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -32,48 +30,6 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
     }, [isTableView, dispatch]);
 
     const isDark = viewPreferences.theme === 'dark';
-
-    const rowData = useMemo(() => {
-        let totalPoints = currentPoints;
-        const ret: TokenDisplay[] = [];
-        let currentMilestoneIndex: number = TokenEstimationService.getFurthestMilestoneAchieved(totalPoints) + 1;
-        for (let i = 0; i < tokens.length; ++i) {
-            const token = tokens[i];
-            totalPoints += token.incrementalPoints;
-            let milestoneIndex = -1;
-            if (
-                currentMilestoneIndex < milestonesAndPoints.length &&
-                totalPoints >= milestonesAndPoints[currentMilestoneIndex].points
-            ) {
-                milestoneIndex = currentMilestoneIndex;
-                currentMilestoneIndex++;
-            }
-            const chars = [];
-            if (token.team) {
-                if (token.team.charSnowprintIds) {
-                    chars.push(...token.team.charSnowprintIds);
-                } else if (token.team.charactersIds) {
-                    chars.push(
-                        ...token.team.charactersIds.map(
-                            name => CharactersService.resolveCharacter(name)?.snowprintId ?? name
-                        )
-                    );
-                } else {
-                    continue;
-                }
-            }
-            ret.push({
-                team: chars,
-                restricts: token.restrictionsCleared,
-                battleNumber: token.battleNumber,
-                track: token.team!.section,
-                incrementalPoints: token.incrementalPoints,
-                totalPoints: totalPoints,
-                milestoneAchievedIndex: milestoneIndex,
-            });
-        }
-        return ret;
-    }, [tokens, currentPoints]);
 
     const isDarkMode = viewPreferences.theme === 'dark';
 
@@ -143,7 +99,7 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                             </tr>
                         </thead>
                         <tbody>
-                            {rowData.map((token: TokenDisplay, index: number) => {
+                            {tokenDisplays.map((token: TokenDisplay, index: number) => {
                                 return (
                                     <tr
                                         key={index}
@@ -171,7 +127,7 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                 </div>
             ) : (
                 <div className="flex flex-wrap gap-4 justify-center">
-                    {rowData.map((token, index) => (
+                    {tokenDisplays.map((token, index) => (
                         <LeTokenCard
                             key={index}
                             index={index}
