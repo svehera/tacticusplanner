@@ -48,20 +48,23 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
             team.charactersIds = [];
         }
 
-        team.characters = (team.charSnowprintIds ?? team.charactersIds ?? []).map(id => {
-            const character = resolvedCharacters.find(x => x.snowprintId === id);
-            if (!character) {
-                console.warn(
-                    'unknown character. if you have imported goals from a pre-mythic ',
-                    'instance of the planner, please remove the unit and add it back.',
-                    id,
-                    id,
-                    character
-                );
-            }
+        team.characters = (team.charSnowprintIds ?? team.charactersIds ?? [])
+            .map(id => {
+                const character = resolvedCharacters.find(x => x.snowprintId === id);
+                if (!character) {
+                    console.warn(
+                        'unknown character. if you have imported teams from a pre-mythic ',
+                        'instance of the planner, please remove the unit from the team and ',
+                        'add it back.',
+                        id,
+                        character
+                    );
+                    return undefined;
+                }
 
-            return { ...character, teamId: team.id };
-        }) as ICharacter2[];
+                return { ...character, teamId: team.id };
+            })
+            .filter(x => x !== undefined) as ICharacter2[];
         return team;
     });
 

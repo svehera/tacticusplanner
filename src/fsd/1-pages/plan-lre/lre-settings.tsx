@@ -211,7 +211,6 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                         selectedValues={recommendLast.map(x => characters.find(c => c.snowprintId === x)!.name)}
                         placeholder="Recommend Last"
                         selectionChanges={(chars: string[]) => {
-                            console.log(chars);
                             setRecommendLast(
                                 chars
                                     .map(x => characters.find(c => c.name === x || c.snowprintId! == x))
@@ -226,20 +225,8 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                 <div className="flex-box gap5 wrap">{lreAutoTeamsOptions.map(renderOption)}</div>
             </DialogContent>
             <DialogActions>
-                <Button
-                    onClick={() => {
-                        console.log('closing');
-                        onClose();
-                    }}>
-                    Cancel
-                </Button>
-                <Button
-                    onClick={() => {
-                        console.log('saving');
-                        saveChanges();
-                    }}>
-                    Save
-                </Button>
+                <Button onClick={onClose}>Cancel</Button>
+                <Button onClick={saveChanges}>Save</Button>
             </DialogActions>
         </Dialog>
     );

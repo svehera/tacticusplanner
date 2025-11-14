@@ -121,7 +121,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
             return state;
         }
         case 'SyncWithTacticus': {
-            const ret = [
+            return [
                 ...state.map(char => {
                     const tacticusUnit = action.units.find(
                         unit =>
@@ -182,7 +182,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                             activeAbilityLevel: tacticusUnit.abilities[0].level,
                             passiveAbilityLevel: tacticusUnit.abilities[1].level,
                             level: tacticusUnit.xpLevel,
-                            equipment: equipment,
+                            equipment,
                         };
                     } else if (tacticusUnitShards) {
                         // If the unit is locked we only have shards to sync, no other attributes
@@ -195,7 +195,6 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     return char;
                 }),
             ];
-            return ret;
         }
         case 'UpdateAbilities': {
             const { characterId, abilities } = action;
