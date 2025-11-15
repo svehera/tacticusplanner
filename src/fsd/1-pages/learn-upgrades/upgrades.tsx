@@ -53,7 +53,7 @@ export const Upgrades = () => {
                 const characters = params.data?.characters;
                 if (characters) {
                     return characters.map(x => (
-                        <div key={x.id} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div key={x.id} className="flex items-center gap-2.5">
                             <Tooltip title={x.name}>
                                 <span>
                                     <UnitShardIcon icon={x.roundIcon} name={x.name} height={30} />

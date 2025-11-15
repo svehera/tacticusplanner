@@ -170,7 +170,7 @@ export const GuildWarZones = () => {
             <div>
                 {zoneStats.name}
                 <FlexBox gap={5} style={{ fontSize: '1.1rem' }}>
-                    <div className="flex-box gap3">
+                    <div className="flex-box gap-[3px]">
                         {caps.map((rarity, index) => (
                             <RarityIcon key={index} rarity={rarity} />
                         ))}

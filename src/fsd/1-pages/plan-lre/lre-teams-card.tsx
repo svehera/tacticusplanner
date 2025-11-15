@@ -107,7 +107,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                 </div>
                 <br />
                 <div
-                    className="flex-box column gap1 start"
+                    className="flex-box column gap-[1px] start"
                     style={{ minHeight: 300, maxHeight: 300, overflow: 'auto' }}>
                     {gridTeam.map(character => (
                         <LreTile

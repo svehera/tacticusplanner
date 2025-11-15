@@ -39,5 +39,5 @@ export const DifficultyImage = ({ difficulty, withColor = false }: { difficulty:
         <img key={index} style={{ pointerEvents: 'none' }} src={difficultyImg} height={15} alt="Difficulty" />
     ));
 
-    return <div style={{ display: 'flex' }}>{difficultyImages}</div>;
+    return <div className="flex">{difficultyImages}</div>;
 };

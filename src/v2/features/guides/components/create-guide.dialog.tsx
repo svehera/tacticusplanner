@@ -330,8 +330,8 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                         </Typography>
 
                         <Typography variant="body2" color="text.primary">
-                            Please be patient, it could take <span className="bold">up to 24 hours</span> before it will
-                            be reviewed
+                            Please be patient, it could take <span className="font-bold">up to 24 hours</span> before it
+                            will be reviewed
                         </Typography>
                     </>
                 )}

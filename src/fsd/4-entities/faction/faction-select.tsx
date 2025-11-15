@@ -23,7 +23,7 @@ export const FactionSelect: React.FC<Props> = ({ label, factions, faction, facti
                 onChange={event => factionChanges(event.target.value as Faction)}>
                 {factions.map(faction => (
                     <MenuItem key={faction} value={faction}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                        <div className="flex items-center gap-[15px]">
                             <span>{faction}</span>
                             <FactionImage faction={faction} />
                         </div>

@@ -82,7 +82,7 @@ export const LegendaryEventTrack: React.FC<Props> = ({
             />
         </div>
     ) : (
-        <div style={{ width: '100%', height: '100%', overflow: 'auto' }}>
+        <div className="size-full overflow-auto">
             <LreTeamsTable
                 legendaryEvent={legendaryEvent}
                 track={track}

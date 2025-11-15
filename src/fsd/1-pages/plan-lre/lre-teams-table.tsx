@@ -216,10 +216,10 @@ export const LreTeamsTable: React.FC<Props> = ({
     };
 
     return (
-        <div style={{ width: '100%', height: '100%', overflow: 'auto' }}>
+        <div className="size-full overflow-auto">
             <div className="flex-box between">
                 <div className="flex-box gap10">
-                    <span style={{ fontWeight: 700, fontSize: '1rem' }}>{track.name}</span>
+                    <span className="font-bold text-base">{track.name}</span>
                     <div className="flex-box gap5">
                         <span style={{ fontStyle: 'italic', fontSize: '1rem' }}> vs {track.enemies.label}</span>
                         <a href={track.enemies.link} target={'_blank'} rel="noreferrer">

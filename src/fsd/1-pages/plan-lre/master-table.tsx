@@ -431,11 +431,11 @@ export const MasterTable = () => {
                     onChange={event => setFilter(event.target.value)}
                 />
                 <FormControl>
-                    <FormLabel id="demo-radio-buttons-group-label" style={{ fontWeight: 700 }}>
+                    <FormLabel id="demo-radio-buttons-group-label" className="font-bold">
                         Characters Selection
                     </FormLabel>
                     <RadioGroup
-                        style={{ display: 'flex', flexDirection: 'row' }}
+                        className="flex flex-row"
                         aria-labelledby="demo-radio-buttons-group-label"
                         value={selection}
                         onChange={(_, value) => {
@@ -457,11 +457,11 @@ export const MasterTable = () => {
                 </FormControl>
                 {selection === CharactersSelection.Selected && (
                     <FormControl>
-                        <FormLabel id="points-calculation-label" style={{ fontWeight: 700 }}>
+                        <FormLabel id="points-calculation-label" className="font-bold">
                             Points Calculation
                         </FormLabel>
                         <RadioGroup
-                            style={{ display: 'flex', flexDirection: 'row' }}
+                            className="flex flex-row"
                             aria-labelledby="points-calculation-label"
                             value={pointsCalculation}
                             onChange={(_, value) => setPointsCalculation(value as PointsCalculation)}

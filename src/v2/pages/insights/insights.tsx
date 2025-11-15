@@ -42,7 +42,7 @@ export const Insights = () => {
 
     if (!data.averageRosterDataCreationTime) {
         return (
-            <Box style={{ margin: 'auto' }}>
+            <Box className="m-auto">
                 <p>
                     Registered users: <b>{data.registeredUsers}</b>{' '}
                 </p>
@@ -55,7 +55,7 @@ export const Insights = () => {
                 <p>
                     Active users last 7 days: <b>{data.activeLast7Days}</b>{' '}
                 </p>
-                <p style={{ textAlign: 'center' }}>Averaged roster data is missing. Something went wrong</p>
+                <p className="text-center">Averaged roster data is missing. Something went wrong</p>
             </Box>
         );
     }
@@ -79,7 +79,7 @@ export const Insights = () => {
     const units = CharactersService.orderUnits(unitsFiltered, viewControls.orderBy);
 
     return (
-        <Box style={{ margin: 'auto' }}>
+        <Box className="m-auto">
             <p>
                 Registered users: <b>{data.registeredUsers}</b>
             </p>
@@ -92,7 +92,7 @@ export const Insights = () => {
             <p>
                 Active users last 7 days: <b>{data.activeLast7Days}</b>
             </p>
-            <p style={{ textAlign: 'center' }}>
+            <p className="text-center">
                 Averaged roster data. Last updated on{' '}
                 <b>{new Date(data.averageRosterDataCreationTime).toDateString()}</b>
             </p>

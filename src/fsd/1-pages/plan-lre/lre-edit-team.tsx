@@ -81,7 +81,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
     return (
         <Dialog open={true} fullWidth onClose={onClose} maxWidth="md" fullScreen={isMobile}>
             <DialogTitle>Edit LRE Team</DialogTitle>
-            <DialogContent style={{ paddingTop: '10px' }}>
+            <DialogContent className="pt-2.5">
                 <div className="flex-box gap10">
                     {lre[team.section].name}
                     <TextField
@@ -92,7 +92,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                         onChange={event => setTeamName(event.target.value.slice(0, 50))}
                     />
                     <TextField
-                        style={{ width: 200 }}
+                        className="w-50"
                         label="Battle Clears"
                         variant="outlined"
                         value={expectedBattleClearsInput}
@@ -123,7 +123,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                         inputProps={{ min: 1, max: lre.battlesCount, step: 1 }}
                     />
                 </div>
-                <div className="flex-box wrap" style={{ paddingTop: '10px' }}>
+                <div className="flex-box wrap pt-2.5">
                     {lre[team.section].unitsRestrictions.map(requirement => (
                         <FormControlLabel
                             key={requirement.name}
@@ -134,7 +134,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                 </div>
 
                 <div className="flex-box full-width wrap start space-between">
-                    <div style={{ minWidth: 400 }}>
+                    <div className="min-w-[400px]">
                         <div className="flex-box gap20 space-between">
                             <h3>Selected Team ({selectedTeam.length}/5)</h3>
                             {!!selectedTeam.length && (
@@ -143,14 +143,13 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                                 </Button>
                             )}
                         </div>
-                        <div className="flex-box column start gap3 pointer">
+                        <div className="flex-box column start gap-[3px] pointer">
                             {selectedTeam.length ? (
                                 selectedTeam.map(character => (
                                     <div
                                         key={character.id}
                                         onClick={() => removeCharacter(character)}
-                                        className="flex-box gap5"
-                                        style={{ width: 350 }}>
+                                        className="flex-box gap5 w-[350px]">
                                         {!gridTeam.some(x => x.id === character.id) && <WarningIcon color="error" />}
                                         <CloseIcon />
                                         <LreTile character={character} settings={viewPreferences} />
@@ -164,11 +163,9 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                         </div>
                     </div>
 
-                    <div style={{ minWidth: 400 }}>
+                    <div className="min-w-[400px]">
                         <h3>Available Characters ({gridTeam.length})</h3>
-                        <div
-                            className="flex-box column start gap3"
-                            style={{ minHeight: 300, maxHeight: 300, overflow: 'auto' }}>
+                        <div className="flex-box column start gap-[3px] size-[300px] overflow-auto">
                             {gridTeam.map(character => (
                                 <div
                                     key={character.id}

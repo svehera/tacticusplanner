@@ -190,9 +190,9 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
 
     return (
         <div className="flex-box wrap gap15" style={{ margin: 10 }}>
-            <div style={{ display: 'flex', gap: 5 }}>
+            <div className="flex gap-[5px]">
                 Deed Points to {goal}:
-                <span style={{ fontWeight: 700 }}>
+                <span className="font-bold">
                     {currentPoints} / {pointsForNextMilestone}
                 </span>
                 <Tooltip title={totalPoints + ' in total. Battles per track: ' + averageBattles}>
@@ -200,9 +200,9 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
                 </Tooltip>
             </div>
 
-            <div style={{ display: 'flex', gap: 5 }}>
+            <div className="flex gap-[5px]">
                 Currency to {goal}:
-                <span style={{ fontWeight: 700 }}>
+                <span className="font-bold">
                     {' '}
                     {currentCurrency} / {currencyForNextMilestone}
                 </span>
@@ -211,9 +211,9 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
                 </Tooltip>
             </div>
 
-            <div style={{ display: 'flex', gap: 5 }}>
+            <div className="flex gap-[5px]">
                 Shards to {goal}:
-                <span style={{ fontWeight: 700 }}>
+                <span className="font-bold">
                     {' '}
                     {currentChests * model.shardsPerChest} / {chestsForNextGoal * model.shardsPerChest}
                 </span>

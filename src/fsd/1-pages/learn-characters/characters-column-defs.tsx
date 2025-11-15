@@ -309,7 +309,7 @@ export const useCharacters = () => {
                 cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                     const damageTypes: DamageType[] = props.value ?? [];
                     return (
-                        <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                        <ul className="m-0 ps-5">
                             {damageTypes.map(x => (
                                 <li key={x}> {x} </li>
                             ))}
@@ -324,7 +324,7 @@ export const useCharacters = () => {
                 cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                     const traits: Trait[] = props.value ?? [];
                     return (
-                        <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                        <ul className="m-0 ps-5">
                             {traits.map(x => (
                                 <li key={x}> {getLabelFromTraitString(x)} </li>
                             ))}
@@ -344,7 +344,7 @@ export const useCharacters = () => {
                             const data = props.data;
                             return (
                                 data && (
-                                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    <ul className="m-0 ps-5">
                                         <li>Movement - {data.movement} </li>
                                         <li> Melee - {data.meleeHits} </li>
                                         {data.rangeHits && <li>Range - {data.rangeHits} </li>}
@@ -391,7 +391,7 @@ export const useCharacters = () => {
                             const data = props.data;
                             return (
                                 data && (
-                                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    <ul className="m-0 ps-5">
                                         <li>Slot 1 - {resolveEquipment(data.equipment1)} </li>
                                         <li> Slot 2 - {resolveEquipment(data.equipment2)} </li>
                                         <li> Slot 3 - {resolveEquipment(data.equipment3)} </li>
@@ -431,7 +431,7 @@ export const useCharacters = () => {
                             const data = props.data;
                             return (
                                 data && (
-                                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    <ul className="m-0 ps-5">
                                         {data.requiredInCampaign && <li>Required for Campaigns </li>}
                                         {data.forcedSummons && <li>Forced summons</li>}
                                     </ul>

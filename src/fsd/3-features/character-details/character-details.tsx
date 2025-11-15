@@ -82,7 +82,7 @@ export const CharacterDetails = ({
             <Select label={label} value={value} onChange={event => handleInputChange(name, +event.target.value)}>
                 {entries.map(value => (
                     <MenuItem key={value} value={value}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div className="flex items-center gap-2.5">
                             <span>{getName(value)}</span>
                             {icon ? icon(value) : undefined}
                         </div>

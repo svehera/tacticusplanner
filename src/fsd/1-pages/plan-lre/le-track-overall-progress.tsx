@@ -73,15 +73,15 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
                                 borderRadius: 50,
                             }}
                         />
-                        <span className="bold" style={{ minWidth: 50 }}>
+                        <span className="font-bold min-w-[50px]">
                             {getReqProgress(req.id)}/{track.battles.length}
                         </span>
 
-                        <span className="bold" style={{ minWidth: 80 }}>
+                        <span className="font-bold min-w-[80px]">
                             {getReqProgressPoints(req.id)}/{req.totalPoints}
                         </span>
                         <LreReqImage iconId={req.iconId} />
-                        <span style={{ minWidth: 25 }}>{req.pointsPerBattle || 'x'}</span>
+                        <span className="min-w-[25px]">{req.pointsPerBattle || 'x'}</span>
                         <span>{req.name}</span>
                     </div>
                 ))}
@@ -89,7 +89,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
             <Accordion defaultExpanded={!isMobile}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <span style={{ paddingInlineEnd: 5 }}>Battles Progress</span>
-                    <span className="bold">
+                    <span className="font-bold">
                         {currentPoints}/{track.totalPoints}
                     </span>
                 </AccordionSummary>

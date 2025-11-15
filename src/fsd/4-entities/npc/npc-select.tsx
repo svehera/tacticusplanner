@@ -26,7 +26,7 @@ export const NpcSelect: React.FC<Props> = ({ label, npcs, npc, npcChanges }) => 
                 }}>
                 {npcs.map(npc => (
                     <MenuItem key={npc.snowprintId} value={npc.snowprintId}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                        <div className="flex items-center gap-[15px]">
                             <CharacterPortraitImage icon={npc.icon} />
                             <span>
                                 {npc.name} ({npc.snowprintId})

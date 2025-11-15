@@ -63,7 +63,7 @@ export const TeamGraph: React.FC<Props> = ({ units }) => {
     return (
         <>
             <IconButton onClick={handleClickOpen}>
-                <BarChartIcon style={{ cursor: 'pointer' }} color="primary" />
+                <BarChartIcon className="cursor-pointer" color="primary" />
             </IconButton>
             <Dialog open={open} onClose={handleClose} maxWidth={isMobile ? 'xl' : 'lg'} fullWidth>
                 <DialogTitle>

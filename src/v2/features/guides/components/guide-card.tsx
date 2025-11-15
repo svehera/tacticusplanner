@@ -98,7 +98,7 @@ export const GuideCard: React.FC<Props> = ({
                             </AccessibleTooltip>
                         </IconButton>
                     )}
-                    <span className="bold">{guide.likes}</span>
+                    <span className="font-bold">{guide.likes}</span>
                 </div>
 
                 <IconButton aria-label="share" onClick={onShare}>

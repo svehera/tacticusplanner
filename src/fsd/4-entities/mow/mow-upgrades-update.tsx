@@ -102,7 +102,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                 }}>
                 <div style={{ padding: 15 }}>
                     <p>Inventory after update:</p>
-                    <ul style={{ padding: 0 }}>
+                    <ul className="p-0">
                         {inventoryUpgrades.map((x, index) => (
                             <li
                                 key={x.id + index}

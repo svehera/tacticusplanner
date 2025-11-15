@@ -22,7 +22,7 @@ export const DeploymentStatus: React.FC<
 
     return (
         <>
-            <IconButton onClick={handleClickOpen} style={{ cursor: 'pointer' }}>
+            <IconButton onClick={handleClickOpen} className="cursor-pointer">
                 <Badge badgeContent={charactersLeft}>
                     <MiscIcon icon={'deployment'} height={30} width={30} />
                 </Badge>
@@ -35,7 +35,7 @@ export const DeploymentStatus: React.FC<
                         available for deployment
                     </DialogContentText>
                 </div>
-                <DialogContent style={{ paddingTop: 0 }}>{children}</DialogContent>
+                <DialogContent className="pt-0">{children}</DialogContent>
                 <DialogActions>
                     <Button variant="contained" color="error" onClick={onClearAll}>
                         Reset All
