@@ -169,10 +169,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             return;
         }
 
-        console.log(
-            'in useEffect, characters=',
-            characters.find(c => c.snowprintId === 'orksRuntherd')
-        );
         const newValue: IGlobalState = {
             characters,
             mows,

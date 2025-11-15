@@ -12,6 +12,7 @@ export const MiscIcon = ({
     const details = tacticusIcons[icon] ?? { file: '', label: icon };
     return (
         <img
+            loading="lazy"
             style={{ pointerEvents: 'none', height, width }}
             src={details.file}
             width={width}
