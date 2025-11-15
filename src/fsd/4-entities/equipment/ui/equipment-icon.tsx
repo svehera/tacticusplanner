@@ -43,31 +43,25 @@ const ImageLayer = ({
     size: Size;
     zIndex: number;
 }) => {
-    // Styles for the individual image layer
     const imageStyle = {
-        // 1. Absolute positioning to stack the images
-        position: 'absolute',
-
-        // 2. Set the image to its native dimensions
         width: size.width,
         height: size.height,
 
-        // 3. Perfect horizontal and vertical centering within the parent container (iconStack)
-        //    top/left 50% moves the top-left corner to the center of the parent.
         top: '50%',
         left: '50%',
-        //    translate(-50%, -50%) shifts the element back by half of its own size,
-        //    making its center point align with the parent's center point.
         transform: 'translate(-50%, -50%) scale(' + scaleFactor + '%, ' + scaleFactor + '%)',
 
-        // 4. Set stacking order
         zIndex: zIndex,
-
-        // Aesthetic: Prevent mouse interactions
-        pointerEvents: 'none',
     };
 
-    return <img src={url} alt={`Layer ${zIndex}`} style={imageStyle} loading="lazy" />;
+    return (
+        <img
+            src={url}
+            alt={`Layer ${zIndex}`}
+            style={{ ...imageStyle, position: 'absolute', pointerEvents: 'none' }}
+            loading="lazy"
+        />
+    );
 };
 
 export const EquipmentIcon = ({
@@ -138,7 +132,6 @@ export const EquipmentIcon = ({
         return <div style={{ color: 'red' }}>Error loading image: {relicError.message}</div>;
     }
 
-    // Use useMemo to calculate the necessary container dimensions only when the sizes change.
     const containerDimensions = useMemo(() => {
         const maxWidth = width;
         const maxHeight = height;
@@ -146,9 +139,7 @@ export const EquipmentIcon = ({
         return { width: maxWidth, height: maxHeight };
     }, [equipSize, frameSize, relicSize]);
 
-    // Styles for the main stacking container (the bounding box)
     const stackStyle = {
-        position: 'relative',
         width: containerDimensions.width,
         height: containerDimensions.height,
         overflow: 'hidden',
@@ -169,10 +160,9 @@ export const EquipmentIcon = ({
         height: (relicSize.height / Math.max(relicSize.width, relicSize.height)) * containerDimensions.height,
     };
 
-    // We render the layers, giving them explicit z-indexes for stacking order (A=bottom, C=top)
     return (
         <AccessibleTooltip title={tooltip ? equipment.name : ''}>
-            <div className="layered-image-stack" style={stackStyle}>
+            <div className="layered-image-stack" style={{ ...stackStyle, position: 'relative' }}>
                 <ImageLayer url={getImageUrl(equipment.icon)} size={adjustedEquipSize} zIndex={1} scaleFactor={85} />
                 <ImageLayer url={frameDetails.file} size={adjustedFrameSize} zIndex={2} scaleFactor={100} />
                 {equipment.isRelic && (
