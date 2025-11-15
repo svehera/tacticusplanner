@@ -5,6 +5,37 @@ import rareBook from './snowprint/books/ui_icon_consumable_xp_book_2.png';
 import epicBook from './snowprint/books/ui_icon_consumable_xp_book_3.png';
 import legendaryBook from './snowprint/books/ui_icon_consumable_xp_book_4.png';
 import mythicBook from './snowprint/books/ui_icon_consumable_xp_book_5.png';
+import damageAcid from './snowprint/damage_icons/ui_icon_damage_profile2_Acid.png';
+import damageBio from './snowprint/damage_icons/ui_icon_damage_profile2_Bio.png';
+import damageBlast from './snowprint/damage_icons/ui_icon_damage_profile2_Blast.png';
+import damageBolter from './snowprint/damage_icons/ui_icon_damage_profile2_Bolter.png';
+import damageChain from './snowprint/damage_icons/ui_icon_damage_profile2_Chain.png';
+import damageDirectDamage from './snowprint/damage_icons/ui_icon_damage_profile2_DirectDamage.png';
+import damageEnergy from './snowprint/damage_icons/ui_icon_damage_profile2_Energy.png';
+import damageEnmitic from './snowprint/damage_icons/ui_icon_damage_profile2_Enmitic.png';
+import damageEviscerate from './snowprint/damage_icons/ui_icon_damage_profile2_Eviscerate.png';
+import damageFlame from './snowprint/damage_icons/ui_icon_damage_profile2_Flame.png';
+import damageGauss from './snowprint/damage_icons/ui_icon_damage_profile2_Gauss.png';
+import damageHeavyRound from './snowprint/damage_icons/ui_icon_damage_profile2_HeavyRound.png';
+import damageLas from './snowprint/damage_icons/ui_icon_damage_profile2_Las.png';
+import damageMelta from './snowprint/damage_icons/ui_icon_damage_profile2_Melta.png';
+import damageNone from './snowprint/damage_icons/ui_icon_damage_profile2_None.png';
+import damageParticle from './snowprint/damage_icons/ui_icon_damage_profile2_Particle.png';
+import damagePhysical from './snowprint/damage_icons/ui_icon_damage_profile2_Physical.png';
+import damagePiercing from './snowprint/damage_icons/ui_icon_damage_profile2_Piercing.png';
+import damagePlasma from './snowprint/damage_icons/ui_icon_damage_profile2_Plasma.png';
+import damagePower from './snowprint/damage_icons/ui_icon_damage_profile2_Power.png';
+import damageProjectile from './snowprint/damage_icons/ui_icon_damage_profile2_Projectile.png';
+import damagePsychic from './snowprint/damage_icons/ui_icon_damage_profile2_Psychic.png';
+import damagePulse from './snowprint/damage_icons/ui_icon_damage_profile2_Pulse.png';
+import damageToxic from './snowprint/damage_icons/ui_icon_damage_profile2_Toxic.png';
+import commonEquipmentFrame from './snowprint/misc/ui_frame_items_common.png';
+import epicEquipmentFrame from './snowprint/misc/ui_frame_items_epic.png';
+import legendaryEquipmentFrame from './snowprint/misc/ui_frame_items_legendary.png';
+import mythicEquipmentFrame from './snowprint/misc/ui_frame_items_mythic.png';
+import rareEquipmentFrame from './snowprint/misc/ui_frame_items_rare.png';
+import relicEquipmentFrame from './snowprint/misc/ui_frame_items_relic.png';
+import uncommonEquipmentFrame from './snowprint/misc/ui_frame_items_uncommon.png';
 import checkmark from './snowprint/misc/ui_icon_checkmark_default.png';
 import blessedReqOrder from './snowprint/misc/ui_icon_resource_blessed_req_order.png';
 import coin from './snowprint/misc/ui_icon_resource_coin.png';
@@ -35,6 +66,9 @@ import imperialComponent from './snowprint/resources/ui_machines_of_war_tokens_i
 import xenosComponent from './snowprint/resources/ui_machines_of_war_tokens_xenos.png';
 import blueStar from './snowprint/stars/ui_icon_star_legendary_large.png';
 import mythicWings from './snowprint/stars/ui_icon_star_mythic.png';
+import hitsIcon from './snowprint/stat_icons/ui_icon_stat_hit_01.png';
+import meleeAttack from './snowprint/stat_icons/ui_icon_stat_melee_01.png';
+import rangedAttack from './snowprint/stat_icons/ui_icon_stat_rangedattack_01.png';
 
 export interface SnowprintIcon {
     file: string;
@@ -185,6 +219,142 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     chaosComponent: {
         file: chaosComponent,
         label: 'Chaos Component',
+    },
+    commonEquipmentFrame: {
+        file: commonEquipmentFrame,
+        label: 'Common Equipment Frame',
+    },
+    uncommonEquipmentFrame: {
+        file: uncommonEquipmentFrame,
+        label: 'Uncommon Equipment Frame',
+    },
+    rareEquipmentFrame: {
+        file: rareEquipmentFrame,
+        label: 'Rare Equipment Frame',
+    },
+    epicEquipmentFrame: {
+        file: epicEquipmentFrame,
+        label: 'Epic Equipment Frame',
+    },
+    legendaryEquipmentFrame: {
+        file: legendaryEquipmentFrame,
+        label: 'Legendary Equipment Frame',
+    },
+    mythicEquipmentFrame: {
+        file: mythicEquipmentFrame,
+        label: 'Mythic Equipment Frame',
+    },
+    relicEquipmentFrame: {
+        file: relicEquipmentFrame,
+        label: 'Relic Equipment Frame',
+    },
+    meleeAttack: {
+        file: meleeAttack,
+        label: 'Melee Attack',
+    },
+    rangedAttack: {
+        file: rangedAttack,
+        label: 'Ranged Attack',
+    },
+    hitsIcon: {
+        file: hitsIcon,
+        label: 'Hits',
+    },
+    damageAcid: {
+        file: damageAcid,
+        label: 'Acid Damage',
+    },
+    damageBio: {
+        file: damageBio,
+        label: 'Bio Damage',
+    },
+    damageBlast: {
+        file: damageBlast,
+        label: 'Blast Damage',
+    },
+    damageBolter: {
+        file: damageBolter,
+        label: 'Bolter Damage',
+    },
+    damageChain: {
+        file: damageChain,
+        label: 'Chain Damage',
+    },
+    damageDirectDamage: {
+        file: damageDirectDamage,
+        label: 'Direct Damage',
+    },
+    damageEnergy: {
+        file: damageEnergy,
+        label: 'Energy Damage',
+    },
+    damageEnmitic: {
+        file: damageEnmitic,
+        label: 'Enmitic Damage',
+    },
+    damageEviscerate: {
+        file: damageEviscerate,
+        label: 'Eviscerate Damage',
+    },
+    damageFlame: {
+        file: damageFlame,
+        label: 'Flame Damage',
+    },
+    damageGauss: {
+        file: damageGauss,
+        label: 'Gauss Damage',
+    },
+    damageHeavyRound: {
+        file: damageHeavyRound,
+        label: 'Heavy Round Damage',
+    },
+    damageLas: {
+        file: damageLas,
+        label: 'Las Damage',
+    },
+    damageMelta: {
+        file: damageMelta,
+        label: 'Melta Damage',
+    },
+    damageNone: {
+        file: damageNone,
+        label: 'No Damage',
+    },
+    damageParticle: {
+        file: damageParticle,
+        label: 'Particle Damage',
+    },
+    damagePhysical: {
+        file: damagePhysical,
+        label: 'Physical Damage',
+    },
+    damagePiercing: {
+        file: damagePiercing,
+        label: 'Piercing Damage',
+    },
+    damagePlasma: {
+        file: damagePlasma,
+        label: 'Plasma Damage',
+    },
+    damagePower: {
+        file: damagePower,
+        label: 'Power Damage',
+    },
+    damageProjectile: {
+        file: damageProjectile,
+        label: 'Projectile Damage',
+    },
+    damagePsychic: {
+        file: damagePsychic,
+        label: 'Psychic Damage',
+    },
+    damagePulse: {
+        file: damagePulse,
+        label: 'Pulse Damage',
+    },
+    damageToxic: {
+        file: damageToxic,
+        label: 'Toxic Damage',
     },
 };
 
