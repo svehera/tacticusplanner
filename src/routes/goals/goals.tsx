@@ -362,7 +362,7 @@ export const Goals = () => {
             <div style={{ width: '350px' }} className="my-2 flex-box gap20">
                 <Accordion
                     defaultExpanded={false}
-                    className="!shadow-none !bg-transparent border border-gray-700 px-2 hover:!bg-[var(--secondary)]">
+                    className="!shadow-none !bg-transparent border border-[var(--border)] px-2 hover:!bg-[var(--secondary)]">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-[var(--muted-fg)]" />}
                         className="!p-0 min-h-0 !bg-transparent rounded-lg"
