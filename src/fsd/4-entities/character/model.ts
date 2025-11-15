@@ -1,3 +1,6 @@
+// eslint-disable-next-line import-x/no-internal-modules
+import { IPersonalCharacterDataEquipment } from '@/models/interfaces';
+
 import {
     Alliance,
     DamageType,
@@ -28,6 +31,7 @@ interface IPersonalCharacterData2 {
     passiveAbilityLevel: number;
     shards: number;
     mythicShards: number;
+    equipment: IPersonalCharacterDataEquipment[];
 }
 
 interface IDamageTypes {

@@ -12,6 +12,7 @@ export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
 export enum LreSection {
     teams,
     progress,
+    tokenomics,
     leaderboard,
 }
 
@@ -83,4 +84,9 @@ export interface ILreRequirements {
     pointsPerBattle: number;
     totalPoints: number;
     completed: boolean;
+}
+
+export enum LeTokenCardRenderMode {
+    kStandalone, // The card is rendered standalone, typically to show the next token to be used.
+    kInGrid, // The card is rendered in a grid, typically to show multiple tokens.
 }
