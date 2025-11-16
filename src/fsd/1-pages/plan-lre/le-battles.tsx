@@ -30,7 +30,7 @@ const LeBattlesDesktop: React.FC<Props> = ({ battles }) => {
 
 const LeBattlesMobile: React.FC<Props> = ({ battles }) => {
     const [track, setTrack] = useState<'ALPHA' | 'BETA' | 'GAMMA'>('ALPHA');
-    const [battleIndex, setBattleIndex] = useState<number>(1);
+    const [battleIndex, setBattleIndex] = useState<number>(0);
 
     const battle = useMemo(() => {
         switch (track) {

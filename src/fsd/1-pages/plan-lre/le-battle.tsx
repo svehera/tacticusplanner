@@ -34,7 +34,9 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex }) => {
         const id = getEnemyId(enemy);
         const progressionIndex = getEnemyProgressionIndex(enemy) - 1;
         const npc = NpcService.getNpcById(id);
-        if (!npc) return <span>{`Unknown Enemy: ${id}`}</span>;
+        if (!npc || progressionIndex < 0 || progressionIndex >= npc.stats.length) {
+            return <span>{`Unknown Enemy/Progression Index: ${id}`}</span>;
+        }
         return (
             <NpcPortrait
                 id={id}

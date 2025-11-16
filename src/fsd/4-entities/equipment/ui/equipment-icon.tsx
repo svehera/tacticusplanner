@@ -117,6 +117,13 @@ export const EquipmentIcon = ({
         // only when the imageUrl prop changes.
     }, [equipment]);
 
+    const containerDimensions = useMemo(() => {
+        const maxWidth = width;
+        const maxHeight = height;
+
+        return { width: maxWidth, height: maxHeight };
+    }, [equipSize, frameSize, relicSize]);
+
     // 3. Render based on the state
     if (equipIsLoading || frameIsLoading || relicIsLoading) {
         return <div>Loading...</div>;
@@ -131,13 +138,6 @@ export const EquipmentIcon = ({
     if (relicError) {
         return <div style={{ color: 'red' }}>Error loading image: {relicError.message}</div>;
     }
-
-    const containerDimensions = useMemo(() => {
-        const maxWidth = width;
-        const maxHeight = height;
-
-        return { width: maxWidth, height: maxHeight };
-    }, [equipSize, frameSize, relicSize]);
 
     const stackStyle = {
         width: containerDimensions.width,

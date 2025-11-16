@@ -58,11 +58,12 @@ export class LeBattleService {
 
     public static getBattleFromToken(token: TokenDisplay, battles: ILeBattles | undefined): ILeBattle | undefined {
         if (battles === undefined) return undefined;
-        if (token.track == 'alpha' && token.battleNumber < battles.alpha.battles.length) {
+        if (token.battleNumber < 0) return undefined;
+        if (token.track === 'alpha' && token.battleNumber < battles.alpha.battles.length) {
             return battles.alpha.battles[token.battleNumber];
-        } else if (token.track == 'beta' && token.battleNumber < battles.beta.battles.length) {
+        } else if (token.track === 'beta' && token.battleNumber < battles.beta.battles.length) {
             return battles.beta.battles[token.battleNumber];
-        } else if (token.track == 'gamma' && token.battleNumber < battles.gamma.battles.length) {
+        } else if (token.track === 'gamma' && token.battleNumber < battles.gamma.battles.length) {
             return battles.gamma.battles[token.battleNumber];
         }
         return undefined;
