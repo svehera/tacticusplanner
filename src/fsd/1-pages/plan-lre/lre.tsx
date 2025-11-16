@@ -16,6 +16,8 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { IAutoTeamsPreferences } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings';
 
+import { LeBattleService } from './le-battle.service';
+import { LeBattles } from './le-battles';
 import { LeProgress } from './le-progress';
 import { useLreProgress } from './le-progress.hooks';
 import { LeTokenomics } from './le-tokenomics';
@@ -76,6 +78,8 @@ export const Lre: React.FC = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'lreGoalsPreview', value: preview });
     };
 
+    const battles = LeBattleService.getBattleSetForCharacter(legendaryEvent.id);
+
     const renderTabContent = () => {
         switch (section) {
             case LreSection.teams:
@@ -83,7 +87,11 @@ export const Lre: React.FC = () => {
             case LreSection.progress:
                 return <LeProgress legendaryEvent={legendaryEvent} />;
             case LreSection.tokenomics:
-                return <LeTokenomics key="tokenomics" tokens={tokens} currentPoints={currentPoints} />;
+                return (
+                    <LeTokenomics key="tokenomics" battles={battles} tokens={tokens} currentPoints={currentPoints} />
+                );
+            case LreSection.battles:
+                return battles !== undefined && <LeBattles key="battles" battles={battles} />;
             case LreSection.leaderboard:
                 return <PointsTable legendaryEvent={legendaryEvent} />;
             default:
@@ -111,6 +119,7 @@ export const Lre: React.FC = () => {
                     <Tab label="Teams" value={LreSection.teams} />
                     <Tab label="My Progress" value={LreSection.progress} />
                     <Tab label="Tokenomics" value={LreSection.tokenomics} />
+                    <Tab label="Battles" value={LreSection.battles} />
                     <Tab label="Leaderboard" value={LreSection.leaderboard} />
                 </Tabs>
                 {[LreSection.teams].includes(section) && (

@@ -1,10 +1,12 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
 
+import { LeBattle } from './le-battle';
+import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
 import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
@@ -12,13 +14,20 @@ import { LeTokenTable } from './le-token-table';
 import { LeTokenCardRenderMode } from './lre.models';
 import { milestonesAndPoints, TokenEstimationService, TokenUse } from './token-estimation-service';
 
+interface Props {
+    battles: ILeBattles | undefined;
+    tokens: TokenUse[];
+    currentPoints: number;
+}
+
 /**
  * Displays the tokenomics of a Legendary Event (LE), including milestones
  * already achieved, and a table of tokens to use, and which milestones they
  * achieve.
  */
-export const LeTokenomics = ({ tokens, currentPoints }: { tokens: TokenUse[]; currentPoints: number }) => {
+export const LeTokenomics: React.FC<Props> = ({ battles, tokens, currentPoints }: Props) => {
     const { viewPreferences } = useContext(StoreContext);
+    const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
 
@@ -42,7 +51,7 @@ export const LeTokenomics = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                     <div>
                         <h3 className="text-lg font-bold">Next Token</h3>
                     </div>
-                    <div className="flex justify-center w-full md:w-2/3 lg:w-1/2">
+                    <div className="justify-center w-full md:w-2/3 lg:w-1/2">
                         <LeTokenCard
                             token={firstToken}
                             index={0}
@@ -52,7 +61,24 @@ export const LeTokenomics = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                                 renderRestrictions(x, firstToken.track, firstToken.battleNumber, 35)
                             }
                             renderTeam={x => renderTeam(x, 35)}
+                            isBattleVisible={isFirstTokenBattleVisible}
+                            onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
                         />
+                        {isFirstTokenBattleVisible &&
+                            LeBattleService.getBattleFromToken(firstToken, battles) !== undefined && (
+                                <div className="w-full mt-4">
+                                    <LeBattle
+                                        battle={LeBattleService.getBattleFromToken(firstToken, battles)!}
+                                        trackName={firstToken.track}
+                                    />
+                                </div>
+                            )}
+                        {isFirstTokenBattleVisible &&
+                            LeBattleService.getBattleFromToken(firstToken, battles) === undefined && (
+                                <div className="w-full text-center text-gray-500 p-4 border border-gray-700 rounded-xl mt-4">
+                                    Battle data not available.
+                                </div>
+                            )}
                     </div>
                 </div>
             )}
@@ -71,7 +97,7 @@ export const LeTokenomics = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
             </div>
 
             <div key="tokens" className="flex flex-col gap-2 w-full">
-                <LeTokenTable tokenDisplays={tokenDisplays} />
+                <LeTokenTable battles={battles} tokenDisplays={tokenDisplays} />
             </div>
             {missedMilestones.length > 0 && (
                 <div className="w-full flex flex-col items-center gap-y-4 mt-4 pt-6 border-t-2 border-gray-200 dark:border-gray-700">
