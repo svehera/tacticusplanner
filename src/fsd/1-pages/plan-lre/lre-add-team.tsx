@@ -120,53 +120,56 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
         <Dialog open={true} fullWidth onClose={onClose} maxWidth="md" fullScreen={isMobile}>
             <DialogTitle>Add LRE Team</DialogTitle>
             <DialogContent style={{ paddingTop: '10px' }}>
-                <div className="flex-box gap10">
-                    <MultipleSelect
-                        label="Track"
-                        selected={[trackId]}
-                        options={trackOptions}
-                        multiple={false}
-                        optionsChange={updateSelectedTrack}
-                    />
-                    <TextField
-                        fullWidth
-                        label="Team name"
-                        variant="outlined"
-                        value={teamName}
-                        onChange={event => setTeamName(event.target.value.slice(0, 50))}
-                    />
-                    <TextField
-                        fullWidth
-                        label="Tokenomics: Expected Battles Cleared"
-                        variant="outlined"
-                        type="number"
-                        value={expectedBattleClearsInput}
-                        onChange={event => {
-                            const v = event.target.value;
-                            // allow empty or numeric input only
-                            if (/^\d*$/.test(v)) {
-                                setExpectedBattleClearsInput(v);
-                                const parsed = parseInt(v, 10);
-                                if (!isNaN(parsed)) {
-                                    setExpectedBattleClears(clampExpectedBattles(parsed));
+                <div>
+                    <div className="flex-box gap10">
+                        <MultipleSelect
+                            label="Track"
+                            selected={[trackId]}
+                            options={trackOptions}
+                            multiple={false}
+                            optionsChange={updateSelectedTrack}
+                        />
+                    </div>
+                    <div className="flex-box gap10" style={{ paddingTop: '10px' }}>
+                        <TextField
+                            label="Team name"
+                            variant="outlined"
+                            value={teamName}
+                            onChange={event => setTeamName(event.target.value.slice(0, 50))}
+                        />
+                        <TextField
+                            fullWidth
+                            label="Battles Clears"
+                            variant="outlined"
+                            type="number"
+                            value={expectedBattleClearsInput}
+                            onChange={event => {
+                                const v = event.target.value;
+                                // allow empty or numeric input only
+                                if (/^\d*$/.test(v)) {
+                                    setExpectedBattleClearsInput(v);
+                                    const parsed = parseInt(v, 10);
+                                    if (!isNaN(parsed)) {
+                                        setExpectedBattleClears(clampExpectedBattles(parsed));
+                                    }
                                 }
-                            }
-                        }}
-                        onBlur={() => {
-                            // ensure the input is populated with a clamped numeric value after leaving the field
-                            if (expectedBattleClearsInput === '') {
-                                const clamped = clampExpectedBattles(expectedBattleClears);
-                                setExpectedBattleClearsInput(clamped.toString());
-                            } else {
-                                const parsed = parseInt(expectedBattleClearsInput, 10);
-                                const final = isNaN(parsed) ? expectedBattleClears : parsed;
-                                const clamped = clampExpectedBattles(final);
-                                setExpectedBattleClears(clamped);
-                                setExpectedBattleClearsInput(clamped.toString());
-                            }
-                        }}
-                        inputProps={{ min: 1, max: lre.battlesCount }}
-                    />
+                            }}
+                            onBlur={() => {
+                                // ensure the input is populated with a clamped numeric value after leaving the field
+                                if (expectedBattleClearsInput === '') {
+                                    const clamped = clampExpectedBattles(expectedBattleClears);
+                                    setExpectedBattleClearsInput(clamped.toString());
+                                } else {
+                                    const parsed = parseInt(expectedBattleClearsInput, 10);
+                                    const final = isNaN(parsed) ? expectedBattleClears : parsed;
+                                    const clamped = clampExpectedBattles(final);
+                                    setExpectedBattleClears(clamped);
+                                    setExpectedBattleClearsInput(clamped.toString());
+                                }
+                            }}
+                            inputProps={{ min: 1, max: lre.battlesCount }}
+                        />
+                    </div>
                 </div>
                 <div className="flex-box wrap" style={{ paddingTop: '10px' }}>
                     {lre[trackId].unitsRestrictions.map(requirement => (

@@ -1,13 +1,13 @@
 ﻿import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 
-export const LreReqImage = ({ iconId, tooltip }: { iconId: string; tooltip?: string }) => {
+export const LreReqImage = ({ iconId, tooltip, sizePx }: { iconId: string; tooltip?: string; sizePx?: number }) => {
     const imageUrl = getImageUrl(`lre/${iconId}.png`);
     const img = (
         <img
             loading={'lazy'}
             style={{ pointerEvents: 'none', contentVisibility: 'auto' }}
-            width={25}
-            height={25}
+            width={sizePx ?? 25}
+            height={sizePx ?? 25}
             src={imageUrl}
             alt={iconId}
         />

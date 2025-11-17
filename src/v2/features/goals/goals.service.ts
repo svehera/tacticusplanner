@@ -4,7 +4,7 @@ import { rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { IInventory, IPersonalGoal } from 'src/models/interfaces';
 
-import { Alliance, Rank, Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { Alliance, Rank, Rarity } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
@@ -33,6 +33,7 @@ export interface RevisedGoals {
 export interface IXpLevel {
     currentLevel: number;
     xpAtLevel: number;
+    xpFromPriorGoalApplied?: boolean;
 }
 
 export class GoalsService {
@@ -348,34 +349,9 @@ export class GoalsService {
             [Alliance.Imperial]: 0,
             [Alliance.Xenos]: 0,
         };
-        const heldBadges: Record<Alliance, Record<Rarity, number>> = {
-            [Alliance.Chaos]: createRarityRecord(),
-            [Alliance.Imperial]: createRarityRecord(),
-            [Alliance.Xenos]: createRarityRecord(),
-        };
-        Object.entries(inventory.abilityBadges[Alliance.Imperial] ?? []).forEach(([rarity, count]) => {
-            heldBadges[Alliance.Imperial][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
-        });
-        Object.entries(inventory.abilityBadges[Alliance.Xenos] ?? []).forEach(([rarity, count]) => {
-            heldBadges[Alliance.Xenos][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
-        });
-        Object.entries(inventory.abilityBadges[Alliance.Chaos] ?? []).forEach(([rarity, count]) => {
-            heldBadges[Alliance.Chaos][RarityMapper.stringToRarity(rarity) ?? Rarity.Common] = count;
-        });
-
-        const heldForgeBadges: Record<number, number> = createRarityRecord();
-        Object.entries(inventory.forgeBadges ?? []).forEach(([rarity, count]) => {
-            heldForgeBadges[Number(rarity)] = count;
-        });
-
-        const heldComponents: Record<Alliance, number> = {
-            [Alliance.Chaos]: 0,
-            [Alliance.Imperial]: 0,
-            [Alliance.Xenos]: 0,
-        };
-        Object.entries(inventory.components ?? []).forEach(([alliance, count]) => {
-            heldComponents[alliance as Alliance] = count;
-        });
+        const heldBadges = cloneDeep(inventory.abilityBadges);
+        const heldForgeBadges = cloneDeep(inventory.forgeBadges);
+        const heldComponents = cloneDeep(inventory.components);
 
         const newGoalsEstimates: IGoalEstimate[] = cloneDeep(goalsEstimate);
         const goalsByPrio = orderBy(
@@ -417,13 +393,44 @@ export class GoalsService {
                     xpNeeded -= 20;
                     heldBooks[Rarity.Common] -= 1;
                 }
+                if (xpNeeded > 0) {
+                    while (xpNeeded > 0 && heldBooks[Rarity.Common] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 20);
+                        heldBooks[Rarity.Common] -= 1;
+                    }
+                    while (xpNeeded > 0 && heldBooks[Rarity.Uncommon] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 100);
+                        heldBooks[Rarity.Uncommon] -= 1;
+                    }
+                    while (xpNeeded > 0 && heldBooks[Rarity.Rare] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 500);
+                        heldBooks[Rarity.Rare] -= 1;
+                    }
+                    while (xpNeeded > 0 && heldBooks[Rarity.Epic] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 2500);
+                        heldBooks[Rarity.Epic] -= 1;
+                    }
+                    while (xpNeeded > 0 && heldBooks[Rarity.Legendary] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 12500);
+                        heldBooks[Rarity.Legendary] -= 1;
+                    }
+                    while (xpNeeded > 0 && heldBooks[Rarity.Mythic] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 62500);
+                        heldBooks[Rarity.Mythic] -= 1;
+                    }
+                }
                 totalXpNeeded += xpNeeded;
-                goal.xpBooksTotal = Math.ceil(xpNeeded / 12500);
+                goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
+                if (totalXpNeeded === 0) {
+                    goal.xpEstimate = undefined;
+                    goal.xpEstimateAbilities = undefined;
+                    continue;
+                }
                 if (goal.xpEstimate) {
-                    goal.xpEstimate.legendaryBooks = Math.ceil(xpNeeded / 12500);
+                    goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
                     goal.xpEstimate.xpLeft = xpNeeded;
                 } else {
-                    goal.xpEstimateAbilities!.legendaryBooks = Math.ceil(xpNeeded / 12500);
+                    goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
                     goal.xpEstimateAbilities!.xpLeft = xpNeeded;
                 }
             }

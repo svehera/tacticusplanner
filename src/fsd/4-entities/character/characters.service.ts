@@ -147,11 +147,11 @@ export class CharactersService {
         return unitData;
     }
 
-    public static parseEquipmentType(equip: string) {
+    public static parseEquipmentType(equip: string): Equipment | undefined {
         // ToDo: consider using `Zod.enum` for this kind of parsing/validation
         // Ref: https://zod.dev/api#enum
         const equipmentType = equipmentTypeMapping[equip as keyof typeof equipmentTypeMapping];
-        if (!equipmentType) throw new Error(`Unknown equipment type: ${equip}`);
+        if (!equipmentType) return undefined;
         return equipmentType;
     }
 

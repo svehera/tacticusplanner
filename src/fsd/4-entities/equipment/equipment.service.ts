@@ -1,3 +1,5 @@
+// eslint-disable-next-line import-x/no-internal-modules
+import { TacticusEquipment } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { RarityString, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line boundaries/element-types
@@ -8,6 +10,15 @@ import { IEquipment, IEquipmentStatic } from './model';
 
 export class EquipmentService {
     static readonly equipmentData: IEquipment[] = this.convertEquipmentData();
+
+    public static isRelic(equipmentId: string): boolean {
+        const equipment = this.equipmentData.find(eq => eq.id === equipmentId);
+        if (!equipment) {
+            console.error("Couldn't find equipment data for ID: " + equipmentId);
+            return false;
+        }
+        return equipment.isRelic;
+    }
 
     /**
      * Converts the raw equipment data from JSON into something *slightly* more
@@ -30,13 +41,25 @@ export class EquipmentService {
         });
     }
 
+    public static convertTacticusEquipmentData(tacticusData: TacticusEquipment): IEquipment | null {
+        const equipment = this.equipmentData.find(eq => eq.id === tacticusData.id);
+        if (!equipment) {
+            console.error("Couldn't find equipment data for ID: " + tacticusData.id);
+            return null;
+        }
+        return {
+            ...equipment,
+        };
+    }
+
+    // Returns the characters that can use this equipment.
     private static resolveUnits(data: IEquipmentStatic): string[] {
         if (data.allowedUnits.length > 0) return data.allowedUnits;
         return CharactersService.charactersData
             .filter(char => data.allowedFactions.includes(char.faction))
             .filter(char =>
                 [char.equipment1, char.equipment2, char.equipment3].includes(
-                    CharactersService.parseEquipmentType(data.type)
+                    CharactersService.parseEquipmentType(data.type) || ''
                 )
             )
             .map(char => char.snowprintId!);
