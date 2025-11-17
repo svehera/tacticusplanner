@@ -8,26 +8,41 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
 
+import { LeBattle } from './le-battle';
+import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenCardRenderMode } from './lre.models';
 import { TokenDisplay } from './token-estimation-service';
 
+interface Props {
+    battles: ILeBattles | undefined;
+    tokenDisplays: TokenDisplay[];
+}
+
 /**
  * Displays the tokens to be used by the player in optimal order, along with
  * various statistics about each milestone.
  */
-export const LeTokenTable = ({ tokenDisplays }: { tokenDisplays: TokenDisplay[] }) => {
+export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays }: Props) => {
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [isTableView, setIsTableView] = useState<boolean>(viewPreferences.tokenomicsTableView);
+    const [battleVisibility, setBattleVisibility] = useState<Record<number, boolean>>({});
 
     useEffect(() => {
         const setting = 'tokenomicsTableView';
         const value = isTableView;
         dispatch.viewPreferences({ type: 'Update', setting: setting as keyof ILreViewSettings, value });
     }, [isTableView, dispatch]);
+
+    const onToggleBattle = (index: number) => {
+        setBattleVisibility(prev => ({
+            ...prev,
+            [index]: !prev[index],
+        }));
+    };
 
     const isDark = viewPreferences.theme === 'dark';
 
@@ -126,18 +141,41 @@ export const LeTokenTable = ({ tokenDisplays }: { tokenDisplays: TokenDisplay[] 
                     </table>
                 </div>
             ) : (
-                <div className="flex flex-wrap gap-4 justify-center">
-                    {tokenDisplays.map((token, index) => (
-                        <LeTokenCard
-                            key={index}
-                            index={index}
-                            renderMode={LeTokenCardRenderMode.kInGrid}
-                            token={token}
-                            renderMilestone={x => renderMilestone(x, isDark)}
-                            renderRestrictions={x => renderRestrictions(x, token.track, token.battleNumber, 35)}
-                            renderTeam={x => renderTeam(x, 35)}
-                        />
-                    ))}
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4">
+                    {tokenDisplays.map((token, index) => {
+                        const isVisible = !!battleVisibility[index];
+
+                        return (
+                            <div key={index}>
+                                <LeTokenCard
+                                    index={index}
+                                    renderMode={LeTokenCardRenderMode.kInGrid}
+                                    token={token}
+                                    renderMilestone={x => renderMilestone(x, isDark)}
+                                    renderRestrictions={x => renderRestrictions(x, token.track, token.battleNumber, 35)}
+                                    renderTeam={x => renderTeam(x, 35)}
+                                    // 🪄 PASS NEW PROPS
+                                    isBattleVisible={isVisible}
+                                    onToggleBattle={onToggleBattle}
+                                />
+
+                                {isVisible && LeBattleService.getBattleFromToken(token, battles) ? (
+                                    <div className="w-full">
+                                        <LeBattle
+                                            battle={LeBattleService.getBattleFromToken(token, battles)!}
+                                            trackName={token.track}
+                                        />
+                                    </div>
+                                ) : (
+                                    isVisible && (
+                                        <div className="w-full text-center text-gray-500 p-4 border border-gray-700 rounded-xl">
+                                            Battle data not available.
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
             )}
         </div>

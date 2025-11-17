@@ -169,10 +169,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             return;
         }
 
-        console.log(
-            'in useEffect, characters=',
-            characters.find(c => c.snowprintId === 'orksRuntherd')
-        );
         const newValue: IGlobalState = {
             characters,
             mows,
@@ -193,10 +189,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             guildWar,
             guild,
         };
-        console.log(
-            'newValue characters=',
-            newValue.characters.find(c => c.snowprintId === 'orksRuntherd')
-        );
         const storeValue = GlobalState.toStore(newValue);
 
         setGlobalState(newValue);

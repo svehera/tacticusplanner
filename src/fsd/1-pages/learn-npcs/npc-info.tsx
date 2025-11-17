@@ -78,6 +78,20 @@ export const NpcInfo: React.FC = () => {
                 <MiscIcon icon="damage" />
                 <span>{npc.stats[progressionIndex]?.damage}</span>
             </div>
+            <div className="flex gap-[3px] justify-left items-center">
+                <MiscIcon icon="meleeAttack" />
+                <MiscIcon icon={'damage' + npc.meleeDamage!} />
+                <MiscIcon icon="hits" />
+                <span>{npc.meleeHits!}</span>
+            </div>
+            {npc.rangeDamage !== undefined && (
+                <div className="flex gap-[3px] justify-left items-center">
+                    <MiscIcon icon="rangedAttack" />
+                    <MiscIcon icon={'damage' + npc.rangeDamage!} />
+                    <MiscIcon icon="hits" />
+                    <span>{npc.rangeHits!}</span>
+                </div>
+            )}
             <div>
                 {npc.traits.map(trait => {
                     const icon = NpcService.getTraitIcon(trait);

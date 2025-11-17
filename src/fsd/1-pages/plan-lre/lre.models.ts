@@ -13,6 +13,7 @@ export enum LreSection {
     teams,
     progress,
     tokenomics,
+    battles,
     leaderboard,
 }
 
