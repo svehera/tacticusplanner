@@ -154,6 +154,7 @@ export const Goals = () => {
                 if (targetLevel > ret.currentLevel) {
                     ret.currentLevel = targetLevel;
                     ret.xpAtLevel = 0;
+                    ret.xpFromPriorGoalApplied = true;
                 }
             } else if (goal.type === PersonalGoalType.CharacterAbilities) {
                 const abilityGoal = goal as ICharacterUpgradeAbilities;
@@ -161,6 +162,7 @@ export const Goals = () => {
                 if (targetLevel > ret.currentLevel) {
                     ret.currentLevel = targetLevel;
                     ret.xpAtLevel = 0;
+                    ret.xpFromPriorGoalApplied = true;
                 }
             }
         }
@@ -220,6 +222,9 @@ export const Goals = () => {
                         currentXp.xpAtLevel,
                         targetLevel
                     );
+                    if (xpEstimate) {
+                        xpEstimate!.xpFromPreviousGoalApplied = currentXp.xpFromPriorGoalApplied;
+                    }
 
                     return {
                         goalId: goal.goalId,

@@ -33,6 +33,7 @@ export interface RevisedGoals {
 export interface IXpLevel {
     currentLevel: number;
     xpAtLevel: number;
+    xpFromPriorGoalApplied?: boolean;
 }
 
 export class GoalsService {
@@ -392,8 +393,39 @@ export class GoalsService {
                     xpNeeded -= 20;
                     heldBooks[Rarity.Common] -= 1;
                 }
+                if (xpNeeded > 0) {
+                    while (xpNeeded > 0 && heldBooks[Rarity.Common] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 20);
+                        heldBooks[Rarity.Common] -= 1;
+                    }
+                    while (xpNeeded > 0 && heldBooks[Rarity.Uncommon] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 100);
+                        heldBooks[Rarity.Uncommon] -= 1;
+                    }
+                    while (xpNeeded > 0 && heldBooks[Rarity.Rare] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 500);
+                        heldBooks[Rarity.Rare] -= 1;
+                    }
+                    while (xpNeeded > 0 && heldBooks[Rarity.Epic] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 2500);
+                        heldBooks[Rarity.Epic] -= 1;
+                    }
+                    while (xpNeeded > 0 && heldBooks[Rarity.Legendary] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 12500);
+                        heldBooks[Rarity.Legendary] -= 1;
+                    }
+                    while (xpNeeded > 0 && heldBooks[Rarity.Mythic] > 0) {
+                        xpNeeded = Math.max(0, xpNeeded - 62500);
+                        heldBooks[Rarity.Mythic] -= 1;
+                    }
+                }
                 totalXpNeeded += xpNeeded;
                 goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
+                if (totalXpNeeded === 0) {
+                    goal.xpEstimate = undefined;
+                    goal.xpEstimateAbilities = undefined;
+                    continue;
+                }
                 if (goal.xpEstimate) {
                     goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
                     goal.xpEstimate.xpLeft = xpNeeded;
