@@ -54,10 +54,10 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                 <div
                     className="relative top-[-7px] flex items-center justify-between z-10"
                     style={{ visibility: hasAbilities && viewContext.showAbilitiesLevel ? 'visible' : 'hidden' }}>
-                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                    <div className="relative top-[-10px] w-5 h-5 flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold] rounded-full">
                         {mow.primaryAbilityLevel}
                     </div>
-                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                    <div className="relative top-[-10px] w-5 h-5 flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold] rounded-full">
                         {mow.secondaryAbilityLevel}
                     </div>
                 </div>

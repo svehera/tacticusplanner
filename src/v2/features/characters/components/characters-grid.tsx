@@ -50,7 +50,7 @@ const CharactersGridFn = ({
             <h4>Available ({unlockedCharacters.length})</h4>
             <div
                 className="[box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)] flex flex-wrap"
-                style={{ transform: isMobile ? 'scale(0.8)' : 'scale(1)', transformOrigin: 'top left' }}>
+                style={{ zoom: isMobile ? 0.8 : 1 }}>
                 {unlockedCharacters}
             </div>
 
