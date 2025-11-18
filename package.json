@@ -46,7 +46,7 @@
     "@tailwindcss/postcss": "^4.1.17",
     "@testing-library/jest-dom": "^6.9.1",
     "@types/lodash": "^4.17.20",
-    "@types/node": "^18.19.130",
+    "@types/node": "^20.19.25",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
     "@types/use-analytics": "^0.0.3",
