@@ -53,6 +53,9 @@ export class LeBattleService {
         if (characterId === LegendaryEventEnum.Dante) {
             return this.battles.find(battle => battle.id === '10');
         }
+        if (characterId === LegendaryEventEnum.Farsight) {
+            return this.battles.find(battle => battle.id === '13');
+        }
         return undefined;
     }
 

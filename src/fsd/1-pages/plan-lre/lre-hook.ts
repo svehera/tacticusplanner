@@ -40,6 +40,12 @@ export const useLre = () => {
     const changeTab = (_: React.SyntheticEvent, value: LreSection) => setSection(value);
 
     useEffect(() => {
+        console.log('legendaryEventId farsight:', LegendaryEventEnum[legendaryEventId], LegendaryEventEnum.Farsight);
+        if (LegendaryEventEnum[legendaryEventId] === LegendaryEventEnum.Farsight) {
+            console.log('setting to Farsight');
+            setHeaderTitle('Farsight');
+            return;
+        }
         const lreChar = CharactersService.getLreCharacter(legendaryEventId);
         if (lreChar) {
             const relatedLre = LegendaryEventService.getEventByCharacterSnowprintId(lreChar!.snowprintId!);
@@ -53,6 +59,7 @@ export const useLre = () => {
     }, [characters, legendaryEventId]);
 
     const legendaryEvent = useMemo(() => getLre(legendaryEventId, characters), [legendaryEventId]);
+    console.log(legendaryEvent);
 
     return { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab };
 };
