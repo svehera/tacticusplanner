@@ -19,12 +19,12 @@ interface Props {
 }
 
 export const WhatsNewDialog: React.FC<Props> = ({ isOpen, onClose }) => {
-    const { t } = useTranslation();
+    const { t: tr } = useTranslation();
     return (
         <Dialog open={isOpen} fullWidth>
-            <DialogTitle>{t('whatsNew.title')}</DialogTitle>
+            <DialogTitle>{tr('whatsNew.title')}</DialogTitle>
             <IconButton
-                aria-label={t('common.close')}
+                aria-label={tr('common.close')}
                 onClick={onClose}
                 sx={{
                     position: 'absolute',
@@ -43,7 +43,7 @@ export const WhatsNewDialog: React.FC<Props> = ({ isOpen, onClose }) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose} variant={'contained'}>
-                    {t('common.ok')}
+                    {tr('common.ok')}
                 </Button>
             </DialogActions>
         </Dialog>
