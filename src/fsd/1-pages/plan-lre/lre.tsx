@@ -38,6 +38,8 @@ export const Lre: React.FC = () => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
 
+    console.log(legendaryEvent);
+
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const tokens = useMemo(() => {

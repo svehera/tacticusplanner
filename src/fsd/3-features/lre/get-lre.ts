@@ -5,6 +5,7 @@ import {
     AunShiLegendaryEvent,
     TrajannLegendaryEvent,
     DanteLegendaryEvent,
+    FarsightLegendaryEvent,
     KharnLegendaryEvent,
     MephistonLegendaryEvent,
     PatermineLegendaryEvent,
@@ -15,6 +16,12 @@ import {
 } from './model';
 
 export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
+    console.log(
+        'id LegendaryEventEnum.Farsight ==:',
+        id,
+        LegendaryEventEnum.Farsight,
+        id === LegendaryEventEnum.Farsight
+    );
     switch (id) {
         case LegendaryEventEnum.AunShi:
             return new AunShiLegendaryEvent(characters);
@@ -24,6 +31,8 @@ export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
             return new TrajannLegendaryEvent(characters);
         case LegendaryEventEnum.Dante:
             return new DanteLegendaryEvent(characters);
+        case LegendaryEventEnum.Farsight:
+            return new FarsightLegendaryEvent(characters);
         case LegendaryEventEnum.Kharn:
             return new KharnLegendaryEvent(characters);
         case LegendaryEventEnum.Mephiston:
