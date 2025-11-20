@@ -189,7 +189,7 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
     }, [pointsForNextMilestone]);
 
     return (
-        <div className="flex-box wrap gap15" style={{ margin: 10 }}>
+        <div className="flex-box wrap gap15 m-2.5">
             <div className="flex gap-[5px]">
                 Deed Points to {goal}:
                 <span className="font-bold">

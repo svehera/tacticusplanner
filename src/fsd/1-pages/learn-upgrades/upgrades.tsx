@@ -293,20 +293,13 @@ export const Upgrades = () => {
 
     return (
         <div>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: isMobile ? 'column' : 'row',
-                    alignItems: 'center',
-                    gap: '20px',
-                    margin: '0 20px',
-                }}>
+            <div className="flex items-center gap-5 my-0 mx-5" style={{ flexDirection: isMobile ? 'column' : 'row' }}>
                 <TextField
                     label="Quick Filter"
                     variant="outlined"
                     onChange={change => setNameFilter(change.target.value)}
                 />
-                <FormControl style={{ width: 250, margin: 20 }}>
+                <FormControl className="w-[250px] m-5">
                     <InputLabel>Selection</InputLabel>
                     <Select
                         label={'Selection'}
@@ -333,7 +326,7 @@ export const Upgrades = () => {
                 />
             </div>
 
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
+            <div className="ag-theme-material w-full h-[calc(100vh-220px)]">
                 <AgGridReact
                     key={selection}
                     ref={gridRef}

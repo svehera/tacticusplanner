@@ -69,7 +69,7 @@ export const LegendaryEventTrack: React.FC<Props> = ({
     }, [leSelectedRequirements]);
 
     return viewPreferences.lreGridView ? (
-        <div style={{ flex: 1 }}>
+        <div className="flex-1">
             <LreTeamsCard
                 legendaryEvent={legendaryEvent}
                 track={track}

@@ -168,7 +168,7 @@ export const Campaigns = () => {
             },
             cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
                 return (
-                    <ul style={{ margin: 0, paddingLeft: 20 }}>
+                    <ul className="m-0 pl-5">
                         {(params.value as string[]).map(x => (
                             <li key={x}>{x}</li>
                         ))}
@@ -192,7 +192,7 @@ export const Campaigns = () => {
                 if (battle.detailedEnemyTypes && battle.detailedEnemyTypes.length > 0) {
                     return (
                         <center>
-                            <div style={{ position: 'relative' }}>
+                            <div className="relative">
                                 <CampaignBattleEnemies
                                     keyPrefix="table"
                                     battleId={battle.id}
@@ -204,7 +204,7 @@ export const Campaigns = () => {
                     );
                 } else {
                     return (
-                        <ul style={{ margin: 0, paddingLeft: 20 }}>
+                        <ul className="m-0 pl-5">
                             {(params.value as string[]).map(x => (
                                 <li key={x}>{x}</li>
                             ))}
@@ -239,7 +239,7 @@ export const Campaigns = () => {
                 </table>
             </div>
             <div className="flex-box gap10 wrap">
-                <FormControl style={{ width: 250, margin: 20 }}>
+                <FormControl className="w-[250px] m-5">
                     <InputLabel>Campaign</InputLabel>
                     <Select
                         label={'Campaign'}
@@ -282,7 +282,7 @@ export const Campaigns = () => {
                 )}
             </div>
             {viewPreferences.campaignsTableView ? (
-                <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
+                <div className="ag-theme-material w-full h-[calc(100vh-220px)]">
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}

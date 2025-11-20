@@ -22,7 +22,7 @@ export const LeProgressOverviewMissions: React.FC<Props> = ({ occurrence, progre
         }
     };
     return (
-        <div style={{ flex: 1, minWidth: 450 }} className="mr-2">
+        <div className="mr-2 min-w-[450px] flex-1">
             <h3>
                 <span className="font-bold">{getEventName()}</span>
                 <span className="italic">

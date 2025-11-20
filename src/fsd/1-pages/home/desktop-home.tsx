@@ -132,14 +132,7 @@ export const DesktopHome = () => {
             {announcements()}
             <Thanks sliderMode={true} />
             {/*{announcements()}*/}
-            <div
-                style={{
-                    display: 'flex',
-                    gap: 10,
-                    flexWrap: 'wrap',
-                    alignItems: 'flex-start',
-                    justifyContent: 'center',
-                }}>
+            <div className="flex gap-2.5 flex-wrap justify-center items-start">
                 <div>
                     <h3 className="text-center">Daily Raids</h3>
                     <Card
@@ -227,13 +220,7 @@ export const DesktopHome = () => {
 
                 <div>
                     <h3 className="text-center">Events calendar</h3>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            justifyContent: 'center',
-                            gap: 10,
-                        }}>
+                    <div className="flex flex-wrap justify-center gap-2.5">
                         {!!calendarUrls.current && (
                             <div>
                                 {!!calendarUrls.next && <h4 className="text-center">Current Season</h4>}

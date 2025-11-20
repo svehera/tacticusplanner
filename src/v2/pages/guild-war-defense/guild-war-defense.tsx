@@ -158,8 +158,8 @@ export const GuildWarDefense = () => {
     };
 
     return (
-        <FlexBox style={{ flexDirection: 'column', gap: 10 }}>
-            <FlexBox gap={10}>
+        <FlexBox className="flex-col gap-2.5">
+            <FlexBox className="gap-2.5">
                 <BattlefieldInfo />
                 <Button
                     variant={'contained'}

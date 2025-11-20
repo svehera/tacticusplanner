@@ -166,7 +166,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 Raids order/grouping:
                             </FormLabel>
                             <RadioGroup
-                                style={{ paddingInlineStart: 20 }}
+                                className="ps-5"
                                 aria-labelledby="radio-buttons-group"
                                 name="controlled-radio-buttons-group"
                                 value={dailyRaidsPreferencesForm.farmByPriorityOrder + ''}
@@ -226,7 +226,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 Characters shards energy
                             </FormLabel>
                             <Input
-                                style={{ marginInlineStart: 20 }}
+                                className="ms-5"
                                 value={shardsEnergy}
                                 size="small"
                                 id="shardsEnergy"
@@ -247,7 +247,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 Locations selection:
                             </FormLabel>
                             <RadioGroup
-                                style={{ paddingInlineStart: 20 }}
+                                className="ps-5"
                                 aria-labelledby="radio-buttons-group2"
                                 name="controlled-radio-buttons-group"
                                 value={dailyRaidsPreferencesForm.farmStrategy}

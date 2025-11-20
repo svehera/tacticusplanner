@@ -537,7 +537,7 @@ export const LearnCharacters = () => {
                     />
                 </div>
             </div>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
+            <div className="ag-theme-material w-full h-[calc(100vh-180px)]">
                 <AgGridReact
                     ref={gridRef}
                     modules={[AllCommunityModule]}

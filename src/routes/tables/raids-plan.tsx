@@ -350,7 +350,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 {!!estimatedRanks.upgradesRaids.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                            <FlexBox className="flex-col items-start">
                                 <div className="flex-box gap5 wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <span>
                                         Upgrades raids (<b>{estimatedRanks.upgradesRaids.length}</b> Days |

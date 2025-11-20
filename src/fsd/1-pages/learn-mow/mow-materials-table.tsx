@@ -131,14 +131,7 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
     }, []);
 
     return (
-        <div
-            className="ag-theme-material"
-            style={{
-                height: 50 + rows.length * 45,
-                minHeight: 150,
-                maxHeight: '50vh',
-                width: '100%',
-            }}>
+        <div className="ag-theme-material min-h-[150px] max-h-[50vh] w-full" style={{ height: 50 + rows.length * 45 }}>
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}

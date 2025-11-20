@@ -44,7 +44,7 @@ const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
 
     return (
         <div key={data.snowprintId} className="flex flex-col max-w-[60px]">
-            <div style={{ padding: '0 5px' }}>
+            <div className="py-0 px-[5px]">
                 <UpgradeImage
                     material={data.material}
                     iconPath={data.iconPath}
@@ -52,7 +52,7 @@ const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
                 />
             </div>
             <Input
-                style={{ justifyContent: 'center' }}
+                className="justify-center"
                 value={amount}
                 size="small"
                 onFocus={event => event.target.select()}

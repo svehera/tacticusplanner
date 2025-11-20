@@ -138,7 +138,7 @@ export const GuideCard: React.FC<Props> = ({
             }}
             variant="outlined">
             <CardHeader
-                style={{ paddingBottom: 0 }}
+                className="pb-0"
                 avatar={<TokenImage gameMode={guide.primaryMode} />}
                 action={
                     <>
