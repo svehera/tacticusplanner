@@ -9,6 +9,8 @@ import { UpgradesService } from '@/fsd/4-entities/upgrade';
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
+import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
+
 import { defaultData, rankToLevel, rankToRarity } from './constants';
 import {
     IAutoTeamsPreferences,
@@ -48,6 +50,7 @@ export class GlobalState implements IGlobalState {
     readonly dailyRaids: IDailyRaids;
     readonly guildWar: IGuildWar;
     readonly guild: IGuild;
+    readonly xpIncomeState: XpIncomeState;
     readonly mows: Array<IMow | IMow2>;
 
     constructor(personalData: IPersonalData2) {
@@ -76,6 +79,7 @@ export class GlobalState implements IGlobalState {
         this.guildWar = personalData.guildWar ?? defaultData.guildWar;
         this.guild = personalData.guild ?? defaultData.guild;
         this.teams = personalData.teams ?? defaultData.teams;
+        this.xpIncomeState = personalData.xpIncomeState ?? defaultData.xpIncomeState;
     }
 
     static initCharacters(
@@ -246,6 +250,7 @@ export class GlobalState implements IGlobalState {
             dailyRaids: value.dailyRaids,
             guildWar: value.guildWar,
             guild: value.guild,
+            xpIncomeState: value.xpIncomeState,
             teams: value.teams,
         };
     }
