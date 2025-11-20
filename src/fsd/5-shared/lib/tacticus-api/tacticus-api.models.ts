@@ -10,6 +10,14 @@ interface TacticusPlayer {
     progress: TacticusProgress;
 }
 
+export interface TacticusEquipment {
+    id: string; // I_Crit_M007
+    level: number; // 1-3/11.
+    name: string; // Supa-Killy Slugga
+    rarity: string; // Mythic
+    slotId: string; // Slot1
+}
+
 export interface TacticusInventory {
     upgrades: TacticusUpgrade[];
     shards: TacticusShard[];
@@ -134,6 +142,11 @@ export interface TacticusUnit {
      * Owned mythic shards of the unit.
      */
     mythicShards: number;
+
+    /**
+     * Equipment the unit currently has on.
+     */
+    items: TacticusEquipment[];
 }
 
 export interface TacticusUpgrade {

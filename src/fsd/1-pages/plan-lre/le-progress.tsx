@@ -1,45 +1,26 @@
 ﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useContext, useMemo } from 'react';
+import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
-
-// eslint-disable-next-line import-x/no-internal-modules
-import { StoreContext } from '@/reducers/store.provider';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 
 import { LeNextGoalProgress } from './le-next-goal-progress';
 import { LeProgressOverviewMissions } from './le-progress-overview-missions';
 import { useLreProgress } from './le-progress.hooks';
-import { LeTokenomics } from './le-tokenomics';
 import { LreTrackOverallProgress } from './le-track-overall-progress';
-import { TokenEstimationService } from './token-estimation-service';
 
 /**
  * UI Element to display the progress of missions and tracks in a legendary event.
  */
 export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
     const { model, updateNotes, updateOccurrenceProgress, toggleBattleState } = useLreProgress(legendaryEvent);
-    const { leSelectedTeams } = useContext(StoreContext);
-    const [accordionExpanded, setAccordionExpanded] = React.useState<string | false>('tracks');
+    const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
 
     const handleAccordionChange = (section: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
         setAccordionExpanded(isExpanded ? section : false);
     };
-
-    const tokens = useMemo(() => {
-        return TokenEstimationService.computeAllTokenUsage(
-            model.tracksProgress,
-            leSelectedTeams[legendaryEvent.id]?.teams ?? []
-        );
-    }, [model, leSelectedTeams, legendaryEvent]);
-
-    const currentPoints = useMemo(() => {
-        return model.tracksProgress
-            .map(track => TokenEstimationService.computeCurrentPoints(track))
-            .reduce((a, b) => a + b, 0);
-    }, [model, legendaryEvent]);
 
     const missionsTotalProgress = model.occurrenceProgress.map(x => x.freeMissionsProgress.toString()).join('-');
     const tracksTotalProgress = model.tracksProgress
@@ -139,16 +120,6 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                             toggleBattleState={toggleBattleState}
                         />
                     ))}
-                </AccordionDetails>
-            </Accordion>
-            <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <div className="flex-box gap5">
-                        <span>Tokenomics</span>
-                    </div>
-                </AccordionSummary>
-                <AccordionDetails className="flex-box column start">
-                    <LeTokenomics key="tokenomics" tokens={tokens} currentPoints={currentPoints} />
                 </AccordionDetails>
             </Accordion>
         </div>

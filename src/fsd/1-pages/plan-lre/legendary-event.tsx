@@ -25,12 +25,11 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
     const [preselectedTrackId, setPreselectedTrackId] = useState<LreTrackId>('alpha');
     const [preselectedRequirements, setPreselectedRequirements] = useState<string[]>([]);
 
-    const selectedTeams: ILreTeam[] = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
-
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     // Compute virtual attributes (not saved in JSON) for display on LRE team cards.
-    selectedTeams.forEach(team => {
+    const selectedTeams = (leSelectedTeams[legendaryEvent.id]?.teams ?? []).map(rawTeam => {
+        const team = { ...rawTeam };
         team.points = 0;
         for (const id of team.restrictionsIds) {
             team.points += legendaryEvent[team.section].getRestrictionPoints(id);
@@ -49,20 +48,24 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
             team.charactersIds = [];
         }
 
-        team.characters = (team.charSnowprintIds ?? team.charactersIds ?? []).map(id => {
-            const character = resolvedCharacters.find(x => x.snowprintId === id);
-            if (!character) {
-                console.warn(
-                    'unknown character. if you have imported goals from a pre-mythic ',
-                    'instance of the planner, please remove the unit and add it back.',
-                    id,
-                    id,
-                    character
-                );
-            }
+        team.characters = (team.charSnowprintIds ?? team.charactersIds ?? [])
+            .map(id => {
+                const character = resolvedCharacters.find(x => x.snowprintId === id);
+                if (!character) {
+                    console.warn(
+                        'unknown character. if you have imported teams from a pre-mythic ',
+                        'instance of the planner, please remove the unit from the team and ',
+                        'add it back.',
+                        id,
+                        character
+                    );
+                    return undefined;
+                }
 
-            return { ...character, teamId: team.id };
-        }) as ICharacter2[];
+                return { ...character, teamId: team.id };
+            })
+            .filter(x => x !== undefined) as ICharacter2[];
+        return team;
     });
 
     const startAddTeam = (section: LreTrackId, restrictions: string[]) => {

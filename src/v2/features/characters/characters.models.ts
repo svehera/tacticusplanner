@@ -44,6 +44,7 @@ export type IXpLevel = {
 
 export interface IXpEstimate {
     legendaryBooks: number;
+    xpFromPreviousGoalApplied?: boolean;
     gold: number;
     currentLevel: number;
     targetLevel: number;

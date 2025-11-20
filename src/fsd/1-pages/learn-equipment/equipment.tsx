@@ -28,7 +28,7 @@ export const Equipment = () => {
     const columnDefs = useMemo<Array<ColDef<IEquipment>>>(() => {
         return [
             {
-                field: 'name',
+                field: 'icon',
                 headerName: 'Equipment',
                 minWidth: 120,
                 flex: 1,
@@ -37,8 +37,22 @@ export const Equipment = () => {
                     return equipment ? (
                         <span className="flex items-center">
                             <EquipmentIcon equipment={equipment} width={60} height={60} />
-                            {equipment?.name}
+                            {equipment.name}
                         </span>
+                    ) : (
+                        ''
+                    );
+                },
+            },
+            {
+                field: 'name',
+                headerName: 'Equipment',
+                minWidth: 120,
+                flex: 1,
+                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
+                    const equipment = params.data;
+                    return equipment ? (
+                        <span style={{ display: 'flex', alignItems: 'center' }}>{equipment?.name}</span>
                     ) : (
                         ''
                     );

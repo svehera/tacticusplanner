@@ -2,12 +2,13 @@
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 
 import { CharacterBias, CharactersService } from '@/fsd/4-entities/character';
+import { EquipmentService } from '@/fsd/4-entities/equipment';
 
 import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 import { rankToLevel, rankToRarity, rarityToStars } from '../models/constants';
-import { ICharacter2, SetStateAction } from '../models/interfaces';
+import { ICharacter2, IPersonalCharacterDataEquipment, SetStateAction } from '../models/interfaces';
 
 export type CharactersAction =
     | {
@@ -86,6 +87,8 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     stars: updatedCharacter.stars <= rarityStars ? rarityStars : updatedCharacter.stars,
                     xp: updatedCharacter.xp,
                     shards: updatedCharacter.shards,
+                    equipment: updatedCharacter.equipment,
+                    mythicShards: updatedCharacter.mythicShards,
                     activeAbilityLevel: Math.max(
                         0,
                         Math.min(
@@ -159,6 +162,14 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                         // and this code can be simplified to only care about the Tacticus API value.
                         const mythicShards = tacticusUnit.mythicShards ?? char.mythicShards;
 
+                        const equipment: IPersonalCharacterDataEquipment[] = [];
+                        tacticusUnit.items.forEach(equip => {
+                            const equipmentData = EquipmentService.convertTacticusEquipmentData(equip);
+                            if (equipmentData) {
+                                equipment.push({ id: equipmentData.id, level: equip.level });
+                            }
+                        });
+
                         return {
                             ...char,
                             rarity,
@@ -171,6 +182,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                             activeAbilityLevel: tacticusUnit.abilities[0].level,
                             passiveAbilityLevel: tacticusUnit.abilities[1].level,
                             level: tacticusUnit.xpLevel,
+                            equipment,
                         };
                     } else if (tacticusUnitShards) {
                         // If the unit is locked we only have shards to sync, no other attributes
