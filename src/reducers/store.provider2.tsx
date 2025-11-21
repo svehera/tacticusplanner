@@ -30,6 +30,7 @@ import { selectedTeamsOrderReducer } from './selected-teams-order.reducer';
 import { DispatchContext, StoreContext } from './store.provider';
 import { setUserDataApi, getUserDataApi } from './user.endpoints';
 import { viewPreferencesReducer } from './view-settings.reducer';
+import { xpIncomeActionReducer } from './xp-income-reducer';
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const { isAuthenticated, setUser, setUserInfo, logout } = useAuth();
@@ -86,6 +87,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [dailyRaids, dispatchDailyRaids] = React.useReducer(dailyRaidsReducer, globalState.dailyRaids);
     const [guildWar, dispatchGuildWar] = React.useReducer(guildWarReducer, globalState.guildWar);
     const [guild, dispatchGuild] = React.useReducer(guildReducer, globalState.guild);
+    const [xpIncomeState, dispatchXpIncomeState] = React.useReducer(xpIncomeActionReducer, globalState.xpIncomeState);
 
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
         return (action: T) => {
@@ -115,6 +117,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dailyRaids: wrapDispatch(dispatchDailyRaids),
             guildWar: wrapDispatch(dispatchGuildWar),
             guild: wrapDispatch(dispatchGuild),
+            xpIncomeState: wrapDispatch(dispatchXpIncomeState),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
                 dispatchMows({ type: 'Set', value: data.mows });
@@ -188,6 +191,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dailyRaids,
             guildWar,
             guild,
+            xpIncomeState,
         };
         const storeValue = GlobalState.toStore(newValue);
 

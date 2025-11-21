@@ -148,7 +148,23 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                 </div>
                             </AccessibleTooltip>
                         </div>
-                        {xpEstimate && <XpTotal {...xpEstimate} />}
+                        {goalEstimate.xpDaysLeft !== undefined && (
+                            <div className="flex-box gap10 wrap">
+                                <AccessibleTooltip
+                                    title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                                    <div className="flex-box gap3">
+                                        <CalendarMonthIcon /> {goalEstimate.xpDaysLeft}
+                                    </div>
+                                </AccessibleTooltip>
+                                <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
+                                    <div className="flex-box gap3">
+                                        <MiscIcon icon={'legendaryBook'} height={18} width={15} />{' '}
+                                        {goalEstimate.xpBooksTotal}
+                                    </div>
+                                </AccessibleTooltip>
+                            </div>
+                        )}
+                        {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
                         <Button
                             size="small"
                             variant={'outlined'}
@@ -233,6 +249,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
             case PersonalGoalType.CharacterAbilities: {
                 const hasActiveGoal = goal.activeEnd > goal.activeStart;
                 const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
+                const { xpEstimateAbilities: xpEstimate } = goalEstimate;
                 return (
                     <div>
                         <div className="flex-box gap10">
@@ -252,12 +269,29 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                 )}
                             </div>
                         </div>
-                        {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
+                        {goalEstimate.xpDaysLeft !== undefined && (
+                            <div className="flex-box gap10 wrap">
+                                <AccessibleTooltip
+                                    title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                                    <div className="flex-box gap3">
+                                        <CalendarMonthIcon /> {goalEstimate.xpDaysLeft}
+                                    </div>
+                                </AccessibleTooltip>
+                                <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
+                                    <div className="flex-box gap3">
+                                        <MiscIcon icon={'legendaryBook'} height={18} width={15} />{' '}
+                                        {goalEstimate.xpBooksTotal}
+                                    </div>
+                                </AccessibleTooltip>
+                            </div>
+                        )}
+                        {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
                         {goalEstimate.abilitiesEstimate && (
                             <div style={{ padding: '10px 0' }}>
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
+                        {goalEstimate.xpDaysLeft !== undefined && <span> (XP in {goalEstimate.xpDaysLeft} days)</span>}
                     </div>
                 );
             }

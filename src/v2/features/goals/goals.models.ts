@@ -74,6 +74,7 @@ export interface IGoalEstimate {
     goalId: string;
     daysTotal: number;
     daysLeft: number;
+    xpDaysLeft?: number;
     energyTotal: number;
     oTokensTotal: number;
     xpBooksTotal: number;
