@@ -16,22 +16,42 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { IAutoTeamsPreferences } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings';
 
+import { LeBattleService } from './le-battle.service';
+import { LeBattles } from './le-battles';
 import { LeProgress } from './le-progress';
+import { useLreProgress } from './le-progress.hooks';
+import { LeTokenomics } from './le-tokenomics';
 import { LegendaryEvent } from './legendary-event';
 import { useLre } from './lre-hook';
 import { LreSectionsSettings } from './lre-sections-settings';
 import { LreSettings } from './lre-settings';
 import { LreSection } from './lre.models';
 import PointsTable from './points-table';
+import { TokenEstimationService } from './token-estimation-service';
 
 export const Lre: React.FC = () => {
-    const { viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
+    const { leSelectedTeams, viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
+    const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
+    const { model } = useLreProgress(legendaryEvent);
     const dispatch = useContext(DispatchContext);
     const updatePreferencesOption = (setting: keyof ILreViewSettings, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
 
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
+
+    const tokens = useMemo(() => {
+        return TokenEstimationService.computeAllTokenUsage(
+            model.tracksProgress,
+            leSelectedTeams[legendaryEvent.id]?.teams ?? []
+        );
+    }, [model, leSelectedTeams, legendaryEvent]);
+
+    const currentPoints = useMemo(() => {
+        return model.tracksProgress
+            .map(track => TokenEstimationService.computeCurrentPoints(track))
+            .reduce((a, b) => a + b, 0);
+    }, [model, legendaryEvent]);
 
     const updateSettings = (
         settings: ILreViewSettings,
@@ -58,7 +78,7 @@ export const Lre: React.FC = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'lreGoalsPreview', value: preview });
     };
 
-    const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
+    const battles = LeBattleService.getBattleSetForCharacter(legendaryEvent.id);
 
     const renderTabContent = () => {
         switch (section) {
@@ -66,6 +86,12 @@ export const Lre: React.FC = () => {
                 return <LegendaryEvent legendaryEvent={legendaryEvent} />;
             case LreSection.progress:
                 return <LeProgress legendaryEvent={legendaryEvent} />;
+            case LreSection.tokenomics:
+                return (
+                    <LeTokenomics key="tokenomics" battles={battles} tokens={tokens} currentPoints={currentPoints} />
+                );
+            case LreSection.battles:
+                return battles !== undefined && <LeBattles key="battles" battles={battles} />;
             case LreSection.leaderboard:
                 return <PointsTable legendaryEvent={legendaryEvent} />;
             default:
@@ -92,6 +118,8 @@ export const Lre: React.FC = () => {
                     aria-label="scrollable auto tabs example">
                     <Tab label="Teams" value={LreSection.teams} />
                     <Tab label="My Progress" value={LreSection.progress} />
+                    <Tab label="Tokenomics" value={LreSection.tokenomics} />
+                    <Tab label="Battles" value={LreSection.battles} />
                     <Tab label="Leaderboard" value={LreSection.leaderboard} />
                 </Tabs>
                 {[LreSection.teams].includes(section) && (

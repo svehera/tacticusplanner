@@ -115,6 +115,7 @@ export class GlobalState implements IGlobalState {
                 xp: personalCharData?.xp ?? 0,
                 shards: personalCharData?.shards ?? 0,
                 mythicShards: personalCharData?.mythicShards ?? 0,
+                equipment: personalCharData?.equipment ?? [],
             };
 
             const result: ICharacter2 = {
@@ -203,7 +204,8 @@ export class GlobalState implements IGlobalState {
                     x.level !== 1 ||
                     x.xp !== 0 ||
                     x.shards !== 0 ||
-                    x.mythicShards !== 0
+                    x.mythicShards !== 0 ||
+                    x.equipment?.length
             )
             .map(x => ({
                 name: x.name,
@@ -218,6 +220,7 @@ export class GlobalState implements IGlobalState {
                 xp: x.xp,
                 shards: x.shards,
                 mythicShards: x.mythicShards,
+                equipment: x.equipment,
             }));
 
         const mowsToDb: IMowDb[] = value.mows.map(x => ({

@@ -12,25 +12,31 @@ export const LeTokenMilestones = ({ currentPoints }: { currentPoints: number }) 
         return milestonesAndPoints.filter(milestone => currentPoints >= milestone.points);
     }
 
-    return getRowData().length === 0 ? (
-        <></>
+    const rowData = getRowData();
+
+    return rowData.length === 0 ? (
+        <div className="text-center py-4 text-gray-500 dark:text-gray-400">No milestones achieved yet.</div>
     ) : (
-        <table key="le-milestones-table" style={{ paddingLeft: 2, paddingRight: 2 }}>
-            <thead>
-                <tr>
-                    <th className="px-4">Points</th>
-                    <th className="px-4">Stars</th>
-                    <th className="px-4">Round</th>
-                    <th className="px-4">Packs Per Round</th>
-                </tr>
-            </thead>
-            <tbody>
-                {getRowData().map((milestone, index) => (
-                    <tr key={index}>
-                        <td className="px-4 text-right">{milestone.points}</td>
-                        <td className="px-4 flex justify-center">
-                            {milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1].points ? (
-                                '100%'
+        <div className="flex flex-wrap gap-3 justify-center w-full">
+            {rowData.map((milestone, index) => {
+                const isFinalMilestone =
+                    milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1]?.points;
+
+                return (
+                    <div
+                        key={index}
+                        className="p-3 w-40 flex flex-col items-center rounded-lg shadow-md 
+                                   bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 
+                                   transition duration-150 ease-in-out hover:shadow-lg">
+                        <div className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Points</div>
+                        <div className="text-xl font-extrabold font-mono text-blue-600 dark:text-blue-400 mb-2">
+                            {milestone.points}
+                        </div>
+
+                        <div className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Reward</div>
+                        <div className="flex justify-center items-center h-full text-lg font-bold">
+                            {isFinalMilestone ? (
+                                <span className="text-green-500 dark:text-green-400">100%</span>
                             ) : (
                                 <>
                                     {milestone.stars == 7 ? (
@@ -40,12 +46,23 @@ export const LeTokenMilestones = ({ currentPoints }: { currentPoints: number }) 
                                     )}
                                 </>
                             )}
-                        </td>
-                        <td className="px-4 text-center">{milestone.round}</td>
-                        <td className="px-4 text-center">{milestone.packsPerRound}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+                        </div>
+
+                        <div className="mt-3 text-center">
+                            <span className="text-xs font-semibold text-gray-700 dark:text-gray-200">
+                                Round {milestone.round}
+                            </span>
+                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                                {milestone.packsPerRound == 2
+                                    ? ' (Both Packs)'
+                                    : milestone.packsPerRound == 1
+                                      ? ' (Premium)'
+                                      : ' (Free)'}
+                            </span>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
     );
 };

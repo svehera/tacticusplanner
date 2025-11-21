@@ -151,6 +151,12 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
             value: viewSettings.lreTileShowUnitHealTraits,
             disabled: false,
         },
+        {
+            label: 'Relic',
+            key: 'lreTileShowUnitRelic',
+            value: viewSettings.lreTileShowUnitRelic,
+            disabled: false,
+        },
     ];
 
     const renderOption = (option: IViewOption<ILreViewSettings & ILreTileSettings & IAutoTeamsPreferences>) => {
@@ -205,7 +211,6 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                         selectedValues={recommendLast.map(x => characters.find(c => c.snowprintId === x)!.name)}
                         placeholder="Recommend Last"
                         selectionChanges={(chars: string[]) => {
-                            console.log(chars);
                             setRecommendLast(
                                 chars
                                     .map(x => characters.find(c => c.name === x || c.snowprintId! == x))

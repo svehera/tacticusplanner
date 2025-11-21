@@ -320,7 +320,7 @@ export const Goals = () => {
 
     return (
         <div>
-            <div className="flex gap-5 flex-wrap items-center">
+            <div className="flex flex-wrap items-center gap-5">
                 <Button
                     size="small"
                     variant={'contained'}
@@ -367,35 +367,39 @@ export const Goals = () => {
                 </AccessibleTooltip>
             </div>
             <div style={{ width: '350px' }} className="my-2 flex-box gap20">
-                <Accordion defaultExpanded={false} className="!shadow-none !bg-transparent !border-none">
+                <Accordion
+                    defaultExpanded={false}
+                    className="!shadow-none !bg-transparent border border-[var(--border)] px-2 hover:!bg-[var(--secondary)]">
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-gray-400" />}
-                        className="!p-0 min-h-0 !bg-transparent hover:!bg-gray-800 rounded-lg"
+                        expandIcon={<ExpandMoreIcon className="text-[var(--muted-fg)]" />}
+                        className="!p-0 min-h-0 !bg-transparent rounded-lg"
                         aria-controls="resources-content"
                         id="resources-header">
-                        <span className="text-white text-base font-semibold">Total Resources Missing</span>
+                        <span className="text-[var(--fg)] text-base font-semibold">Total Resources Missing</span>
                     </AccordionSummary>
 
                     <AccordionDetails className="!p-0 !bg-transparent">
-                        <div className="flex flex-col gap-y-2 p-2 bg-gray-900 rounded-lg border border-gray-700 mt-2">
+                        <div className="flex flex-col gap-y-2 p-2 bg-[var(--overlay)] rounded-lg border border-[var(--border)] mt-2">
                             {hasSync && (
                                 <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
                                     <SyncIcon /> Sync
                                 </Button>
                             )}
-                            <div className="p-2 bg-gray-800 rounded-md border border-gray-700 flex items-center justify-start gap-x-4">
+
+                            <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)] flex items-center justify-start gap-x-4">
                                 <MiscIcon icon={'energy'} height={35} width={35} />{' '}
-                                <b className="text-lg text-white">{estimatedUpgradesTotal.energyTotal}</b>
+                                <b className="text-lg text-[var(--fg)]">{estimatedUpgradesTotal.energyTotal}</b>
                             </div>
 
-                            <div className="p-2 bg-gray-800 rounded-md border border-gray-700">
+                            <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)]">
                                 <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
                             </div>
 
-                            <div className="p-2 bg-gray-800 rounded-md border border-gray-700 flex flex-col gap-y-2">
-                                <h4 className="text-sm font-semibold text-gray-400 uppercase border-b border-gray-700 pb-1 mb-1">
+                            <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)] flex flex-col gap-y-2">
+                                <h4 className="text-sm font-semibold text-[var(--muted-fg)] uppercase border-b border-[var(--border)] pb-1 mb-1">
                                     Ability Badges
                                 </h4>
+
                                 {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                     <div key={alliance} className="flex-box">
                                         <BadgesTotal
@@ -407,11 +411,11 @@ export const Goals = () => {
                                 ))}
                             </div>
 
-                            <div className="p-2 bg-gray-800 rounded-md border border-gray-700">
+                            <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)]">
                                 <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
                             </div>
 
-                            <div className="p-2 bg-gray-800 rounded-md border border-gray-700">
+                            <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)]">
                                 <MoWComponentsTotal
                                     components={adjustedGoalsEstimates.neededComponents}
                                     size={'medium'}
@@ -423,7 +427,7 @@ export const Goals = () => {
             </div>
             {!!upgradeRankOrMowGoals.length && (
                 <div>
-                    <div className="flex gap5 flex-wrap items-center" style={{ fontSize: 20, margin: '20px 0' }}>
+                    <div className="flex flex-wrap items-center gap5" style={{ fontSize: 20, margin: '20px 0' }}>
                         <span>
                             Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
                         </span>
@@ -433,7 +437,7 @@ export const Goals = () => {
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
-                        <div className="flex gap-3 flex-wrap">
+                        <div className="flex flex-wrap gap-3">
                             {upgradeRankOrMowGoals.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}
@@ -476,7 +480,7 @@ export const Goals = () => {
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
-                        <div className="flex gap-3 flex-wrap">
+                        <div className="flex flex-wrap gap-3">
                             {shardsGoals.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}
@@ -512,7 +516,7 @@ export const Goals = () => {
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
-                        <div className="flex gap-3 flex-wrap">
+                        <div className="flex flex-wrap gap-3">
                             {upgradeAbilities.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}

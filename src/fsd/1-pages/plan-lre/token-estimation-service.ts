@@ -27,6 +27,16 @@ export class TokenUse {
     public restrictionsCleared: ILreRequirements[] = [];
 }
 
+export class TokenDisplay {
+    public team: string[] = [];
+    public restricts: ILreRequirements[] = [];
+    public battleNumber: number = -1;
+    public track: string = '(null track)';
+    public incrementalPoints: number = -1;
+    public totalPoints: number = -1;
+    public milestoneAchievedIndex: number = -1;
+}
+
 /**
  * A type that represents positive integers (1, 2, 3, ...).
  * Unfortunately it doesn't work on object literals.
@@ -489,5 +499,46 @@ export class TokenEstimationService {
             }
         }
         return restrictions;
+    }
+
+    public static getTokenDisplays(tokens: TokenUse[], currentPoints: number): TokenDisplay[] {
+        let totalPoints = currentPoints;
+        const ret: TokenDisplay[] = [];
+        let currentMilestoneIndex: number = TokenEstimationService.getFurthestMilestoneAchieved(totalPoints) + 1;
+
+        for (let i = 0; i < tokens.length; ++i) {
+            const token = tokens[i];
+            totalPoints += token.incrementalPoints;
+            let milestoneIndex = -1;
+            if (
+                currentMilestoneIndex < milestonesAndPoints.length &&
+                totalPoints >= milestonesAndPoints[currentMilestoneIndex].points
+            ) {
+                milestoneIndex = currentMilestoneIndex;
+                currentMilestoneIndex++;
+            }
+            const chars = [];
+            if (token.team) {
+                if (token.team.charSnowprintIds) {
+                    chars.push(...token.team.charSnowprintIds);
+                } else if (token.team.charactersIds) {
+                    chars.push(
+                        ...token.team.charactersIds.map(
+                            name => CharactersService.resolveCharacter(name)?.snowprintId ?? name
+                        )
+                    );
+                }
+            }
+            ret.push({
+                team: chars,
+                restricts: token.restrictionsCleared,
+                battleNumber: token.battleNumber,
+                track: token.team!.section,
+                incrementalPoints: token.incrementalPoints,
+                totalPoints: totalPoints,
+                milestoneAchievedIndex: milestoneIndex,
+            });
+        }
+        return ret;
     }
 }

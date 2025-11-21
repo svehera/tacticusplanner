@@ -22,6 +22,7 @@ export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IW
     raidsTableView: boolean;
     myProgressShowCoreCharacters: boolean;
     apiIntegrationSyncOptions: string[];
+    tokenomicsTableView: boolean;
 }
 
 interface IWyoViewSettings {
@@ -53,6 +54,7 @@ export interface ILreTileSettings {
     lreTileShowUnitActiveAbility: boolean;
     lreTileShowUnitPassiveAbility: boolean;
     lreTileShowUnitHealTraits: boolean;
+    lreTileShowUnitRelic: boolean;
 }
 
 export interface ICharactersViewControls {

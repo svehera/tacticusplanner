@@ -210,6 +210,11 @@ interface IPersonalCharacterData {
     bias: CharacterBias;
 }
 
+export interface IPersonalCharacterDataEquipment {
+    id: string;
+    level: number;
+}
+
 export interface IPersonalCharacterData2 {
     name: string;
     rank: Rank;
@@ -223,6 +228,7 @@ export interface IPersonalCharacterData2 {
     passiveAbilityLevel: number;
     shards: number;
     mythicShards: number;
+    equipment: IPersonalCharacterDataEquipment[];
 }
 
 export interface IInsightsData {
