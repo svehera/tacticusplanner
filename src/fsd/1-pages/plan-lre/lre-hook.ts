@@ -40,9 +40,7 @@ export const useLre = () => {
     const changeTab = (_: React.SyntheticEvent, value: LreSection) => setSection(value);
 
     useEffect(() => {
-        console.log('legendaryEventId farsight:', LegendaryEventEnum[legendaryEventId], LegendaryEventEnum.Farsight);
         if (LegendaryEventEnum[legendaryEventId] === LegendaryEventEnum.Farsight) {
-            console.log('setting to Farsight');
             setHeaderTitle('Farsight');
             return;
         }
