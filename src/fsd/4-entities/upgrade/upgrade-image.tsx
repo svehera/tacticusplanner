@@ -80,8 +80,8 @@ export const UpgradeImage = ({
         <AccessibleTooltip title={tooltipText}>
             <div style={{ width, height }} className={'upgrade'}>
                 {!imgError ? (
-                    <div style={{ position: 'relative', display: 'block', margin: '0 auto', width, height }}>
-                        <img style={{ ...centeredImageStackStyles }} src={bgImgUrl} alt={`${rarity} upgrade`} />
+                    <div className="relative block my-0 mx-auto" style={{ width, height }}>
+                        <img style={centeredImageStackStyles} src={bgImgUrl} alt={`${rarity} upgrade`} />
                         <img
                             loading={'lazy'}
                             style={{
@@ -95,7 +95,7 @@ export const UpgradeImage = ({
                                 setImgError(true);
                             }}
                         />
-                        <img loading={'lazy'} style={{ ...centeredImageStackStyles }} src={frameImgUrl} />
+                        <img loading={'lazy'} style={centeredImageStackStyles} src={frameImgUrl} />
                     </div>
                 ) : (
                     <div style={imageMissingStyles}>{material}</div>

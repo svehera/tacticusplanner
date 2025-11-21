@@ -69,7 +69,7 @@ export const GuildInsights = () => {
                 Guild averaged roster data for{' '}
                 <AccessibleTooltip
                     title={
-                        <ul style={{ paddingInlineStart: 20 }}>
+                        <ul className="ps-5">
                             {data.guildUsers.map(username => (
                                 <li key={username}>{username}</li>
                             ))}

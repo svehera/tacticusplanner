@@ -195,7 +195,7 @@ export const MaterialsTable: React.FC<Props> = ({
                                 <li>
                                     {usedLocations}/{canBeUsedLocations} - used
                                 </li>
-                                {lockedLocations > 0 && <li style={{ color: 'red' }}>{lockedLocations} - locked</li>}
+                                {lockedLocations > 0 && <li className="text-red-500">{lockedLocations} - locked</li>}
                             </ul>
                         );
                     },
@@ -343,14 +343,7 @@ export const MaterialsTable: React.FC<Props> = ({
     };
 
     return (
-        <div
-            className="ag-theme-material"
-            style={{
-                height: 50 + rows.length * 30,
-                minHeight: 150,
-                maxHeight: '40vh',
-                width: '100%',
-            }}>
+        <div className="ag-theme-material w-full max-h-[40vh] min-h-[150px]" style={{ height: 50 + rows.length * 30 }}>
             <div className="flex-box gap5">
                 <InfoIcon color="primary" />
                 <span>

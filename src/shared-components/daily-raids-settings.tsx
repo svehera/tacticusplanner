@@ -139,7 +139,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         <Dialog open={open} onClose={close} fullWidth maxWidth={'md'} fullScreen={isMobile}>
             <DialogTitle>Raids settings</DialogTitle>
             <DialogContent>
-                <FormGroup style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: '0 20px' }}>
+                <FormGroup className="flex flex-col gap-5 py-0 px-5">
                     <div>
                         <Typography className="flex items-center gap-1">
                             <b>{energyMarks[dailyEnergy].value}</b> <MiscIcon icon={'energy'} width={20} height={20} />{' '}
@@ -160,7 +160,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                         />
                     </div>
 
-                    <div className="flex flex-wrap gap-10" style={{ alignItems: 'unset' }}>
+                    <div className="flex flex-wrap gap-10 items-[unset]">
                         <FormControl>
                             <FormLabel id="radio-buttons-group" className="font-bold">
                                 Raids order/grouping:

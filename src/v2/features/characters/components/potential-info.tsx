@@ -74,7 +74,7 @@ export const PotentialInfo: React.FC = () => {
                 <DialogTitle>Character potential</DialogTitle>
                 <DialogContent>
                     <p>The potential(0-100) is calculated based on specific rarity cap:</p>
-                    <ul style={{ paddingInlineStart: 20, listStyleType: 'none' }}>
+                    <ul className="ps-5 list-none">
                         {rarities.map(rarity => (
                             <li key={rarity}>
                                 <FlexBox gap={5}>
@@ -95,7 +95,7 @@ export const PotentialInfo: React.FC = () => {
                         If mentioned character&apos;s stats are above or equal to stats defined by rarity caps (see
                         table below) then character has maximum potential (100)
                     </p>
-                    <div className="ag-theme-material" style={{ height: 220 }}>
+                    <div className="ag-theme-material h-55">
                         <AgGridReact
                             modules={[AllCommunityModule]}
                             theme={themeBalham}

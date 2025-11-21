@@ -8,12 +8,12 @@ export const DifficultyImage = ({ difficulty, withColor = false }: { difficulty:
     if (withColor) {
         switch (difficulty) {
             case Difficulty.Easy:
-                return <img style={{ pointerEvents: 'none' }} src={difficultyImg} height={15} alt="Difficulty Easy" />;
+                return <img className="pointer-events-none" src={difficultyImg} height={15} alt="Difficulty Easy" />;
 
             case Difficulty.Normal:
                 return (
                     <img
-                        style={{ pointerEvents: 'none' }}
+                        className="pointer-events-none"
                         src={difficultyNormalImg}
                         height={15}
                         alt="Difficulty Normal"
@@ -21,12 +21,12 @@ export const DifficultyImage = ({ difficulty, withColor = false }: { difficulty:
                 );
             case Difficulty.Hard:
                 return (
-                    <img style={{ pointerEvents: 'none' }} src={difficultyHardImg} height={15} alt="Difficulty Hard" />
+                    <img className="pointer-events-none" src={difficultyHardImg} height={15} alt="Difficulty Hard" />
                 );
             case Difficulty.VeryHard:
                 return (
                     <img
-                        style={{ pointerEvents: 'none' }}
+                        className="pointer-events-none"
                         src={difficultyVeryImg}
                         height={15}
                         alt="Difficulty Very Hard"
@@ -36,7 +36,7 @@ export const DifficultyImage = ({ difficulty, withColor = false }: { difficulty:
     }
 
     const difficultyImages = Array.from({ length: difficulty }, (_, index) => (
-        <img key={index} style={{ pointerEvents: 'none' }} src={difficultyImg} height={15} alt="Difficulty" />
+        <img key={index} className="pointer-events-none" src={difficultyImg} height={15} alt="Difficulty" />
     ));
 
     return <div className="flex">{difficultyImages}</div>;

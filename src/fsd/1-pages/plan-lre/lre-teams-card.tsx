@@ -84,7 +84,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                 title={track.name}
                 subheader={
                     <div className="flex-box gap5">
-                        <span style={{ fontStyle: 'italic', fontSize: '1rem' }}> vs {track.enemies.label}</span>
+                        <span className="italic text-base"> vs {track.enemies.label}</span>
                         <a href={track.enemies.link} target={'_blank'} rel="noreferrer">
                             <InfoIcon color={'primary'} />
                         </a>
@@ -106,9 +106,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                         ))}
                 </div>
                 <br />
-                <div
-                    className="flex-box column gap-[1px] start"
-                    style={{ minHeight: 300, maxHeight: 300, overflow: 'auto' }}>
+                <div className="flex-box column gap-[1px] start min-h-[300px] max-h-[300px] overflow-auto">
                     {gridTeam.map(character => (
                         <LreTile
                             key={character.id}

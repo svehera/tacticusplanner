@@ -44,7 +44,7 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
                     <span>
                         Battle <span className="font-bold">{locationNumber}</span>
                     </span>
-                    <span style={{ fontSize: 12 }}>{location.campaign}</span>
+                    <span className="text-xs">{location.campaign}</span>
                 </div>
             )}
         </div>

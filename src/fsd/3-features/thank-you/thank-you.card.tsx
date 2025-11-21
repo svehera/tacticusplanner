@@ -121,9 +121,7 @@ export const ThankYouCard = ({
                             onClick={event => event.stopPropagation()}>
                             <img
                                 loading={'lazy'}
-                                style={{
-                                    contentVisibility: 'auto',
-                                }}
+                                className="[content-visibility:auto]"
                                 src={`https://i3.ytimg.com/vi/${contributor.youtubeVideoId}/mqdefault.jpg`}
                                 height={200}
                                 width={320}

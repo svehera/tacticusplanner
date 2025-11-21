@@ -155,7 +155,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             component={Link}
                             to={linkBase + params}
                             target={'_self'}>
-                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
+                            <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
                         </Button>
                     </div>
                 );
@@ -199,7 +199,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             Shards
                         </div>
                         {goalEstimate.mowEstimate && (
-                            <div style={{ padding: '10px 0' }}>
+                            <div className="py-2.5 px-0">
                                 <MowMaterialsTotal
                                     size="small"
                                     mowAlliance={goal.unitAlliance}
@@ -225,7 +225,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             component={Link}
                             to={linkBase + params}
                             target={'_self'}>
-                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
+                            <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
                         </Button>
                     </div>
                 );
@@ -254,7 +254,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                         </div>
                         {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
                         {goalEstimate.abilitiesEstimate && (
-                            <div style={{ padding: '10px 0' }}>
+                            <div className="py-2.5 px-0">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
@@ -329,7 +329,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                     <div className="flex-box gap5">
                         <span>#{goal.priority}</span>
                         <UnitShardIcon icon={goal.unitRoundIcon} height={30} />
-                        <span style={{ fontSize: '1.2rem' }}>{goal.unitName ?? goal.unitId}</span>
+                        <span className="text-[1.2rem]">{goal.unitName ?? goal.unitId}</span>
                     </div>
                 }
                 subheader={calendarDate}

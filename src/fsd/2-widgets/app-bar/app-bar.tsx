@@ -71,7 +71,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
     }, [location.pathname, headerTitle]);
 
     const nav = isTabletOrMobile ? undefined : (
-        <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
+        <div className="flex items-center me-5">
             <AppBarSubMenu rootLabel={'Input'} options={inputSubMenu} />
 
             <AppBarSubMenu rootLabel={'Plan'} options={planSubMenuWeb} />

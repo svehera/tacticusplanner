@@ -29,7 +29,8 @@ export const RankIcon = ({
         <>
             <img
                 loading={'lazy'}
-                style={{ pointerEvents: 'none', width: 'auto', height: 'auto', maxWidth: size, maxHeight: size }}
+                className="pointer-events-none w-auto h-auto"
+                style={{ maxWidth: size, maxHeight: size }}
                 src={image}
                 alt={rankTextValue}
             />

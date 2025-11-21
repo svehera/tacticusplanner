@@ -172,9 +172,8 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                                     onClick={() => addCharacter(character)}
                                     style={{
                                         opacity: selectedTeam.some(x => x.id === character.id) ? 0.3 : 1,
-                                        width: 350,
                                     }}
-                                    className="flex-box gap5 pointer">
+                                    className="flex-box gap5 pointer w-[350px]">
                                     <AddIcon />
                                     <LreTile character={character} settings={viewPreferences} />
                                 </div>

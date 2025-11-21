@@ -1,5 +1,6 @@
 ﻿import React, { CSSProperties, MouseEventHandler } from 'react';
 import { isMobile } from 'react-device-detect';
+import { twMerge } from 'tailwind-merge';
 
 export const FlexBox = ({
     alignItems = 'center',
@@ -21,13 +22,14 @@ export const FlexBox = ({
     style?: CSSProperties;
     className?: string;
 }>) => {
-    const flexDirection = isMobile && useColumnForMobile ? 'column' : 'row';
-    const flexWrap = wrap ? 'wrap' : 'nowrap';
+    const combinedClassName = twMerge(
+        'flex',
+        wrap ? 'flex-wrap' : 'flex-nowrap',
+        isMobile && useColumnForMobile ? 'flex-col' : 'flex-row',
+        className
+    );
     return (
-        <div
-            onClick={onClick}
-            className={className}
-            style={{ display: 'flex', alignItems, gap, justifyContent, flexDirection, flexWrap, ...style }}>
+        <div onClick={onClick} className={combinedClassName} style={{ alignItems, gap, justifyContent, ...style }}>
             {children}
         </div>
     );

@@ -73,7 +73,7 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
             />
             <UnitsAutocomplete
                 label="Characters & MoWs"
-                style={{ maxWidth: 250 }}
+                className="max-w-[250px]"
                 unit={selectedUnits}
                 options={units}
                 onUnitsChange={updateSelectedUnits}

@@ -450,7 +450,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                     </span>
                 )}
             </div>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 250px)', width: '100%' }}>
+            <div className="ag-theme-material w-full h-[calc(100vh-250px)]">
                 <AgGridReact
                     modules={[AllCommunityModule]}
                     theme={themeBalham}

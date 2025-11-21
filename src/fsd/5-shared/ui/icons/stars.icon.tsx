@@ -4,14 +4,15 @@ import { starsIcons } from './assets';
 
 export const StarsIcon = ({ stars }: { stars: RarityStars }) => {
     if (stars === RarityStars.None) {
-        return <img style={{ visibility: 'hidden' }} src={starsIcons.blueStar} height={15} width={1} alt="none" />;
+        return <img className="[visibility: hidden]" src={starsIcons.blueStar} height={15} width={1} alt="none" />;
     }
 
     if (stars <= RarityStars.FiveStars) {
         const starsImages = Array.from({ length: stars }, (_, index) => (
             <img
                 key={index}
-                style={{ pointerEvents: 'none', marginLeft: index > 0 ? -2 : 0 }}
+                className="pointer-events-none"
+                style={{ marginLeft: index > 0 ? -2 : 0 }}
                 src={starsIcons.goldStar}
                 height={stars === 5 && index === 2 ? 18 : 12}
                 width={stars === 5 && index === 2 ? 18 : 12}
@@ -26,7 +27,8 @@ export const StarsIcon = ({ stars }: { stars: RarityStars }) => {
         const starsImages = Array.from({ length: stars - 5 }, (_, index) => (
             <img
                 key={index}
-                style={{ pointerEvents: 'none', marginLeft: index > 0 ? -2 : 0 }}
+                className="pointer-events-none"
+                style={{ marginLeft: index > 0 ? -2 : 0 }}
                 src={starsIcons.redStar}
                 height={stars === 10 && index === 2 ? 18 : 12}
                 width={stars === 10 && index === 2 ? 18 : 12}
@@ -41,7 +43,8 @@ export const StarsIcon = ({ stars }: { stars: RarityStars }) => {
         const starsImages = Array.from({ length: stars - 10 }, (_, index) => (
             <img
                 key={index}
-                style={{ pointerEvents: 'none', marginLeft: index > 0 ? -2 : 0 }}
+                className="pointer-events-none"
+                style={{ marginLeft: index > 0 ? -2 : 0 }}
                 src={starsIcons.blueStar}
                 height={stars === 10 && index === 2 ? 18 : 12}
                 width={stars === 10 && index === 2 ? 18 : 12}
@@ -55,7 +58,7 @@ export const StarsIcon = ({ stars }: { stars: RarityStars }) => {
     if (stars === RarityStars.MythicWings) {
         return (
             <img
-                style={{ pointerEvents: 'none' }}
+                className="pointer-events-none"
                 src={starsIcons.mythicWings}
                 height={15}
                 width={50}

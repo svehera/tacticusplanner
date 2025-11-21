@@ -6,7 +6,7 @@ export const LreTokenImage = () => {
             <span>
                 <img
                     loading={'lazy'}
-                    style={{ pointerEvents: 'none', contentVisibility: 'auto' }}
+                    className="pointer-events-none [content-visibility:auto]"
                     width={25}
                     height={25}
                     src={getImageUrl(`lre/token.png`)}

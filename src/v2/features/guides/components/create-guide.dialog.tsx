@@ -158,8 +158,8 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
     return (
         <Dialog open={true} onClose={onClose} fullWidth fullScreen={isMobile}>
             <DialogTitle>Create team guide</DialogTitle>
-            <DialogContent style={{ paddingTop: 10 }}>
-                <Stepper activeStep={activeStep} orientation="horizontal" style={{ paddingBottom: 25 }}>
+            <DialogContent className="pt-2.5">
+                <Stepper activeStep={activeStep} orientation="horizontal" className="pb-[25px]">
                     <Step>
                         <StepLabel>Game mode</StepLabel>
                     </Step>
@@ -276,7 +276,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                         <br />
                         <br />
 
-                        <Typography variant="subtitle1" style={{ marginLeft: 10 }}>
+                        <Typography variant="subtitle1" className="ml-2.5">
                             Guide* (supports rich text)
                         </Typography>
                         <RichTextEditor

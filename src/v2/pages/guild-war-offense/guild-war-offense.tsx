@@ -402,11 +402,11 @@ const TeamCard: React.FC<{
             <CardHeader
                 title={
                     <FlexBox justifyContent={'space-between'}>
-                        <div className="flex-box gap5" style={{ fontSize: 18 }}>
+                        <div className="flex-box gap5 text-lg">
                             <RarityIcon rarity={team.rarityCap} />
                             <span>{team.name}</span>
                         </div>
-                        <div className="flex-box gap5" style={{ fontSize: 16 }}>
+                        <div className="flex-box gap5 text-base">
                             {teamPotential}
                             <AccessibleTooltip
                                 title={
@@ -425,7 +425,7 @@ const TeamCard: React.FC<{
                 }
                 subheader={Rarity[team.rarityCap]}
             />
-            <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
+            <CardContent className="py-0">
                 <Team
                     characters={team.lineup.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap))}
                     onSetSlotClick={onCharacterClick}

@@ -119,8 +119,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
 
     return (
         <div
-            className={'flex-box gap10 full-width ' + rankBackgroundCssClass}
-            style={{ columnGap: '10px' }}
+            className={'flex-box gap10 full-width gap-x-2.5' + rankBackgroundCssClass}
             onClick={() => onClick(character)}>
             {showShardIcon && (
                 <UnitShardIcon

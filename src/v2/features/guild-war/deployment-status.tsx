@@ -29,7 +29,7 @@ export const DeploymentStatus: React.FC<
             </IconButton>
             <Dialog open={open} onClose={handleClose} maxWidth={'lg'} fullWidth fullScreen={isMobile}>
                 <DialogTitle>Deployment status</DialogTitle>
-                <div style={{ padding: '20px 24px' }}>
+                <div className="py-5 px-6">
                     <DialogContentText>
                         Track what characters you have deployed already in your attacks and what characters are still
                         available for deployment

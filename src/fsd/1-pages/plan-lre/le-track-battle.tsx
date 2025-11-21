@@ -90,7 +90,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, trackId, legend
                 .filter(team => (team.expectedBattleClears ?? 1) >= battle.battleIndex + 1)
         );
         return (
-            <span className={'bold'} style={{ marginInlineEnd: '10px', minWidth: '42px' }}>
+            <span className="bold me-2.5 min-w-[42px]">
                 <center>{numTokens === undefined ? '-' : numTokens}</center>
             </span>
         );
@@ -98,9 +98,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, trackId, legend
 
     return (
         <div className="flex-box">
-            <span className="font-bold" style={{ marginInlineEnd: 10, minWidth: 18 }}>
-                {battle.battleIndex + 1}
-            </span>
+            <span className="font-bold me-2.5 min-w-[18px]">{battle.battleIndex + 1}</span>
             <div className="flex-box gap-[1px]">
                 {battle.requirementsProgress.map(x => (
                     <Checkbox

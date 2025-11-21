@@ -16,7 +16,13 @@ export const EquipmentTypeIcon = ({
     );
 
     const image = (
-        <img loading={'lazy'} style={{ pointerEvents: 'none', width, height }} src={imageUrl} alt={equipmentType} />
+        <img
+            loading={'lazy'}
+            className="pointer-events-none"
+            style={{ width, height }}
+            src={imageUrl}
+            alt={equipmentType}
+        />
     );
 
     return tooltip ? <AccessibleTooltip title={equipmentType}>{image}</AccessibleTooltip> : image;

@@ -123,7 +123,7 @@ export const GuildWarDefense = () => {
                     teamPotential={teamsPotential[i].total}
                     onCharacterClick={startEditCharacter}
                     teamPotentialBreakdown={
-                        <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                        <FlexBox className="flex-col items-start">
                             {teamsPotential[i].lineup.map(char => (
                                 <span key={char.id}>
                                     {char.potential} - {char.id}
@@ -223,11 +223,11 @@ const TeamCard: React.FC<{
             <CardHeader
                 title={
                     <FlexBox justifyContent={'space-between'}>
-                        <FlexBox gap={5} style={{ fontSize: 18 }}>
+                        <FlexBox gap={5} className="text-lg">
                             <RarityIcon rarity={team.rarityCap} />
                             <span>{team.name}</span>
                         </FlexBox>
-                        <FlexBox gap={5} style={{ fontSize: 16 }}>
+                        <FlexBox gap={5} className="text-base">
                             {teamPotential}
                             <AccessibleTooltip
                                 title={
@@ -246,7 +246,7 @@ const TeamCard: React.FC<{
                 }
                 subheader={Rarity[team.rarityCap]}
             />
-            <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
+            <CardContent className="py-0">
                 <Team
                     characters={team.lineup.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap))}
                     onSetSlotClick={onCharacterClick}

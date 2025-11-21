@@ -423,7 +423,7 @@ export const MasterTable = () => {
 
     return (
         <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 15, flexDirection: isMobile ? 'column' : 'row' }}>
+            <div className="flex items-center gap-[15px]" style={{ flexDirection: isMobile ? 'column' : 'row' }}>
                 <TextField
                     sx={{ margin: '10px', width: '300px' }}
                     label="Quick Filter"
@@ -475,7 +475,7 @@ export const MasterTable = () => {
                         </RadioGroup>
                     </FormControl>
                 )}
-                <FormControl style={{ width: 300 }}>
+                <FormControl className="w-[300px]">
                     <InputLabel>Legendary Events</InputLabel>
                     <Select
                         value={activeLegendaryEvents}
@@ -522,7 +522,7 @@ export const MasterTable = () => {
                     </span>
                 )}
             </div>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 150px)', width: '100%' }}>
+            <div className="ag-theme-material w-full h-[calc(100vh-150px)]">
                 <AgGridReact
                     ref={gridRef}
                     modules={[AllCommunityModule]}

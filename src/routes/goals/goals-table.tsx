@@ -145,7 +145,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                             )}
                         </div>
                         {goalEstimate.mowEstimate && (
-                            <div style={{ padding: '10px 0' }}>
+                            <div className="py-2.5 px-0">
                                 <MowMaterialsTotal
                                     size="small"
                                     mowAlliance={goal.unitAlliance}
@@ -180,7 +180,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                         </div>
                         {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
                         {goalEstimate.abilitiesEstimate && (
-                            <div style={{ padding: '10px 0' }}>
+                            <div className="py-2.5 px-0">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
@@ -494,7 +494,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 component={Link}
                                 to={linkBase + params}
                                 target={'_self'}>
-                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
+                                <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
                             </Button>
                         );
                     }
@@ -524,11 +524,9 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
 
     return (
         <div
-            className="ag-theme-material"
+            className="ag-theme-material w-full min-h-[150px]"
             style={{
                 height: baseRowHeight + rows.length * baseRowHeight,
-                minHeight: 150,
-                width: '100%',
             }}>
             <AgGridReact
                 modules={[AllCommunityModule]}

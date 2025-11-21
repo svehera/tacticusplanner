@@ -38,7 +38,7 @@ export const CharacterTitle = ({
     const cursor = onClick ? 'pointer' : undefined;
 
     return (
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
+        <div className="flex items-center gap-2.5" style={{ opacity, cursor }} onClick={onClick}>
             <UnitShardIcon
                 key={character.name}
                 icon={character.roundIcon}

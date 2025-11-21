@@ -169,7 +169,7 @@ export const GuildWarZones = () => {
         return (
             <div>
                 {zoneStats.name}
-                <FlexBox gap={5} style={{ fontSize: '1.1rem' }}>
+                <FlexBox className="text-lg" gap={5}>
                     <div className="flex-box gap-[3px]">
                         {caps.map((rarity, index) => (
                             <RarityIcon key={index} rarity={rarity} />
@@ -182,7 +182,7 @@ export const GuildWarZones = () => {
                 {zoneStats.buff && (
                     <FlexBox gap={5}>
                         <WarZoneBuffImage zoneId={zoneStats.iconId ?? zoneStats.id} />
-                        <span style={{ fontSize: '1rem' }}>{zoneStats.buff}</span>
+                        <span className="text-base">{zoneStats.buff}</span>
                     </FlexBox>
                 )}
             </div>
@@ -205,7 +205,7 @@ export const GuildWarZones = () => {
                     })}
                 </Tabs>
             </FlexBox>
-            <FlexBox justifyContent={'center'} gap={5} style={{ marginTop: 10 }}>
+            <FlexBox className="mt-2.5" justifyContent={'center'} gap={5}>
                 <Tooltip
                     title={'Select 2 war zones whose positions you want to swap'}
                     open={editZonesMode}
@@ -229,14 +229,14 @@ export const GuildWarZones = () => {
                             title={
                                 <div>
                                     <span>Assigned players:</span>
-                                    <ul style={{ paddingInlineStart: 20 }}>
+                                    <ul className="ps-5">
                                         {assignedPlayers.map(username => (
                                             <li key={username}>{username}</li>
                                         ))}
                                     </ul>
 
                                     <span>Vacant players:</span>
-                                    <ul style={{ paddingInlineStart: 20 }}>
+                                    <ul className="ps-5">
                                         {guildWarPlayers
                                             .filter(x => !assignedPlayers.includes(x.username))
                                             .map(player => (
@@ -383,8 +383,8 @@ const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, play
                     )
                 }
             />
-            <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
-                <FlexBox style={{ flexDirection: 'column', alignItems: 'start' }}>
+            <CardContent className="py-0">
+                <FlexBox className="flex-col items-start">
                     <div>1: {player1 ? `${player1.username} - ${player1Potential}` : ''}</div>
                     <div>2: {player2 ? `${player2.username} - ${player2Potential}` : ''}</div>
                 </FlexBox>

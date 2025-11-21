@@ -100,8 +100,8 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
     return (
         <Dialog open={true} onClose={onClose} fullWidth fullScreen={isMobile}>
             <DialogTitle>Add team</DialogTitle>
-            <DialogContent style={{ paddingTop: 10 }}>
-                <Stepper activeStep={activeStep} orientation="horizontal" style={{ paddingBottom: 25 }}>
+            <DialogContent className="pt-2.5">
+                <Stepper activeStep={activeStep} orientation="horizontal" className="pb-[25px]">
                     <Step>
                         <StepLabel>Game mode</StepLabel>
                     </Step>
