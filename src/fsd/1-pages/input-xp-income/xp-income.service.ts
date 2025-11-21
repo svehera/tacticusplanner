@@ -91,6 +91,7 @@ export class XpIncomeService {
                 kBlueStarCharacters
                     .filter(char => blueStarCharIds.includes(char.id))
                     .reduce((sum, char) => sum + char.shardsPerWeek, 0) + mowWeeklyShards;
+            console.log('Total Weekly AT from Blue Star chars and MoW:', totalWeeklyAt);
 
             weeklyEstimate += (totalWeeklyAt / 57) * 5;
 

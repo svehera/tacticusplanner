@@ -34,7 +34,6 @@ export const XpIncome: React.FC = () => {
         loopsRaids,
         clearRarity,
         useAtForBooks,
-        blueStarCharIds,
         hasBlueStarMoW,
         additionalBooksPerWeek,
         onslaughtBlueStar,
@@ -88,7 +87,13 @@ export const XpIncome: React.FC = () => {
                 clearRarity,
                 additionalBosses,
                 useAtForBooks,
-                blueStarCharIds,
+                kBlueStarCharacters
+                    .filter(
+                        char =>
+                            (resolvedCharacters.find(c => c.snowprintId! === char.id)?.stars ?? RarityStars.None) >=
+                            RarityStars.OneBlueStar
+                    )
+                    .map(char => char.id),
                 hasBlueStarMoW,
                 incursionLegendaryLevel,
                 onslaughtBlueStar,
@@ -105,7 +110,6 @@ export const XpIncome: React.FC = () => {
             additionalBooksPerWeek,
             onslaughtBlueStar,
             incursionLegendaryLevel,
-            blueStarCharIds,
             raidLoops,
             extraBossesAfterLoop,
             additionalBosses,
@@ -264,7 +268,7 @@ export const XpIncome: React.FC = () => {
 
                 {useAtForBooks === 'yes' && (
                     <div className="p-3 mt-3 rounded-md border-l-4 border-yellow-500 bg-gray-100 dark:bg-gray-700">
-                        <p className="mb-2 font-medium">Static AT Sources (Select characters for farming):</p>
+                        <p className="mb-2 font-medium">Residual AT Sources:</p>
                         <div className="flex flex-wrap gap-4">
                             {kBlueStarCharacters.map(char => {
                                 const isStarred =
@@ -363,7 +367,7 @@ export const XpIncome: React.FC = () => {
                                             onChange={() => dispatchUpdate('incursionLegendaryLevel', 'M')}
                                             className="mr-2"
                                         />
-                                        Legendary 12
+                                        Mythic
                                     </label>
                                 </div>
                             </div>
@@ -458,7 +462,7 @@ export const XpIncome: React.FC = () => {
                 <p className="mt-3 text-lg font-bold">
                     TOTAL Books/Day:{' '}
                     <span className="text-3xl font-extrabold text-green-600 dark:text-green-400 block">
-                        {(manualBooksPerDay + estimatedBooksPerDay).toFixed(2)}
+                        {estimatedBooksPerDay.toFixed(2)}
                     </span>
                 </p>
             </div>
