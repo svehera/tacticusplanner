@@ -60,7 +60,7 @@ export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
                     vertical: 'bottom',
                     horizontal: 'left',
                 }}>
-                <div style={{ margin: 20, width: 300 }}>{children}</div>
+                <div className="m-5 w-[300px]">{children}</div>
             </Popover>
         </>
     );
@@ -135,7 +135,7 @@ export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
     ];
 
     return (
-        <FormGroup style={{ display: 'flex', flexDirection: 'row', height: preset === 'wyo' ? '55px' : 'unset' }}>
+        <FormGroup className="flex flex-row" style={{ height: preset === 'wyo' ? '55px' : 'unset' }}>
             {preset === 'wyo' && renderPopover(wyoOptions.map(renderOption))}
             {preset === 'inventory' && inventoryOptions.map(renderOption)}
             {preset === 'myProgress' && myProgressOptions.map(renderOption)}

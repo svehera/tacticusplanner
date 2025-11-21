@@ -72,7 +72,7 @@ export const LreSectionsSettings: React.FC<Props> = ({ lreViewSettings, save }) 
     return !isMobile ? (
         <div className="flex-box gap5 wrap">{lreSectionOptions.map(renderOption)}</div>
     ) : (
-        <FormControl style={{ paddingLeft: 16 }}>
+        <FormControl className="pl-4">
             <RadioGroup
                 row
                 aria-labelledby="demo-radio-buttons-group-label"

@@ -32,19 +32,19 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
 
     return (
         <div
-            className="flex-box gap2"
+            className="flex-box gap-0.5"
             style={{
                 opacity: unlocked ? 1 : 0.5,
             }}>
             <CampaignImage campaign={location.campaign} size={30} />
             {short ? (
-                <span className="bold">{locationNumber}</span>
+                <span className="font-bold">{locationNumber}</span>
             ) : (
                 <div className="flex-box column start">
                     <span>
-                        Battle <span className="bold">{locationNumber}</span>
+                        Battle <span className="font-bold">{locationNumber}</span>
                     </span>
-                    <span style={{ fontSize: 12 }}>{location.campaign}</span>
+                    <span className="text-xs">{location.campaign}</span>
                 </div>
             )}
         </div>

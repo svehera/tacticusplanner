@@ -28,7 +28,7 @@ export const ProgressionIndexSelect: React.FC<Props> = ({ label, npc, index, ind
                 }}>
                 {npc.stats.map((stats, index) => (
                     <MenuItem key={index} value={index}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                        <div className="flex items-center gap-[15px]">
                             <StarsIcon stars={stats.rarityStars} />
                             <RankIcon rank={stats.rank} size={32} />
                         </div>

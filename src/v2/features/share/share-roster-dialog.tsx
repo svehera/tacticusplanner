@@ -77,7 +77,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
                         <TextField disabled={true} value={shareToken} fullWidth></TextField>
                         <span>Your share link:</span>{' '}
                         <TextField disabled={true} value={shareLink} fullWidth></TextField>{' '}
-                        <div style={{ marginTop: 5 }}>
+                        <div className="mt-[5px]">
                             <Button onClick={() => copyLink()} color={'inherit'}>
                                 <ContentCopyIcon /> Copy
                             </Button>

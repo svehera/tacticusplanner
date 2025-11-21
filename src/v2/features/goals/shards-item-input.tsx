@@ -26,13 +26,13 @@ export const ShardsItemInput: React.FC<Props> = ({ shardsRaid, handleAdd }) => {
 
     return (
         <div className="flex-box" style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
-            <div className="flex-box column" style={{ fontSize: 16 }}>
+            <div className="flex-box column text-base">
                 <UnitShardIcon icon={shardsRaid.iconPath} />
                 <span>
                     {shardsRaid.acquiredCount}/{shardsRaid.requiredCount}
                 </span>
             </div>
-            <ul style={{ width: '100%', paddingInlineStart: 15 }}>
+            <ul className="w-full ps-[15px]">
                 {shardsRaid.locations.map(location => {
                     const maxObtained =
                         location.campaignType === CampaignType.Onslaught

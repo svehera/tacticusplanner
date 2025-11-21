@@ -59,7 +59,7 @@ export const GuildOffenseTable = ({
                 const slots = params.data!.rarityPool;
 
                 return (
-                    <FlexBox gap={10} style={{ height: '100%' }}>
+                    <FlexBox gap={10} className="h-full">
                         {[Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
                             const slotsCount = slots[rarity];
                             if (slotsCount) {

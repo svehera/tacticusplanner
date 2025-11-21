@@ -87,7 +87,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
     const renderGoalsGroup = (name: string, goals: CharacterRaidGoalSelect[]) => {
         return (
             <div className="flex-box column gap5 start">
-                <h5 style={{ marginTop: 0 }}>{name}</h5>
+                <h5 className="mt-0">{name}</h5>
                 {goals.map(goal => (
                     <CharactersRaidsGoal
                         key={goal.goalId}
@@ -121,7 +121,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                     setOpenGoals(false);
                 }}>
                 <DialogTitle className="flex-box between">
-                    <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                    <div className="flex-box gap5 text-[20px]">
                         <TrackChangesIcon />
                         <span>
                             <b>{currentSelectedGoalsCount}</b> of {goals.length} active goals

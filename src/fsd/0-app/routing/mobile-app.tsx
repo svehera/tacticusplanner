@@ -42,15 +42,15 @@ const MobileApp = () => {
     return (
         <Box sx={{ margin: 'auto', padding: 1, paddingBottom: 7 }}>
             <Conditional condition={!!title}>
-                <FlexBox onClick={() => navigate('/mobile/home')} style={{ cursor: 'pointer' }}>
+                <FlexBox onClick={() => navigate('/mobile/home')} className="cursor-pointer">
                     <img src="/android-chrome-192x192.png" height="50px" width="50px" alt="logo" />
-                    <Typography style={{ cursor: 'pointer' }} variant={'h5'} component="div">
+                    <Typography className="cursor-pointer" variant={'h5'} component="div">
                         {title}
                     </Typography>
                 </FlexBox>
             </Conditional>
 
-            <div style={{ marginTop: 10 }}>
+            <div className="mt-2.5">
                 <Outlet />
             </div>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto', zIndex: 100 }} elevation={3}>

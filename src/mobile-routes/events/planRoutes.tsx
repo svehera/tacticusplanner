@@ -27,7 +27,7 @@ export const PlanRoutes = () => {
     const [selectedRoutes, setSelectedRoutes] = useState<SelectedRoutes>(SelectedRoutes.all);
 
     return (
-        <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
+        <div className="flex gap-2.5 flex-col items-center">
             {selectedRoutes === SelectedRoutes.all ? (
                 <>
                     {[goalsMenuItem, dailyRaidsMenuItem, teamsMenuItem, campaignProgressionMenuItem].map(menuItem => (
@@ -41,7 +41,7 @@ export const PlanRoutes = () => {
                             }}>
                             <CardHeader
                                 title={
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                    <div className="flex items-center gap-2.5">
                                         {menuItem.icon} {menuItem.label}
                                     </div>
                                 }
@@ -58,12 +58,12 @@ export const PlanRoutes = () => {
                         }}>
                         <CardHeader
                             title={
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <div className="flex items-center gap-2.5">
                                     <FormatListBulletedIcon /> Guild War
                                 </div>
                             }
                         />
-                        <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                        <CardContent className="flex flex-col">
                             <ul>
                                 <li>Defense</li>
                                 <li>Offense</li>
@@ -81,12 +81,12 @@ export const PlanRoutes = () => {
                         }}>
                         <CardHeader
                             title={
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <div className="flex items-center gap-2.5">
                                     <FormatListBulletedIcon /> LRE
                                 </div>
                             }
                         />
-                        <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                        <CardContent className="flex flex-col">
                             <ul>
                                 <li>Master Table</li>
                                 {CharactersService.activeLres.map(le => (

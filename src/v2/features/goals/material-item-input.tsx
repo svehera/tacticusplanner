@@ -30,7 +30,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                     tooltip={
                         <div>
                             {upgradeRaid.label}
-                            <ul style={{ paddingInlineStart: 15 }}>
+                            <ul className="ps-[15px]">
                                 {upgradeRaid.relatedCharacters.map(x => (
                                     <li key={x}>{x}</li>
                                 ))}
@@ -50,7 +50,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                     </Button>
                 </div>
             </div>
-            <ul style={{ width: '100%', paddingInlineStart: 15 }}>
+            <ul className="w-full ps-[15px]">
                 {upgradeRaid.raidLocations.map(location => {
                     const maxObtained = Math.round(location.farmedItems);
                     const defaultItemsObtained = Math.max(
@@ -64,9 +64,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                         <li
                             key={location.id}
                             className="flex-box between"
-                            style={{
-                                opacity: location.isCompleted ? 0.5 : 1,
-                            }}>
+                            style={{ opacity: location.isCompleted ? 0.5 : 1 }}>
                             <CampaignLocation location={location} unlocked={true} />
                             <RaidItemInput
                                 defaultItemsObtained={defaultItemsObtained}

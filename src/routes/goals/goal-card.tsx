@@ -93,13 +93,13 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                         </div>
                         <div className="flex-box gap10 wrap">
                             <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
-                                <div className="flex-box gap3">
+                                <div className="flex-box gap-[3px]">
                                     <CalendarMonthIcon /> {goalEstimate.daysLeft}
                                 </div>
                             </AccessibleTooltip>
                             {!!goalEstimate.energyTotal && (
                                 <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
                                     </div>
                                 </AccessibleTooltip>
@@ -107,7 +107,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
 
                             {!!goalEstimate.oTokensTotal && (
                                 <AccessibleTooltip title={`${goalEstimate.oTokensTotal} Onslaught tokens`}>
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         <CampaignImage campaign={'Onslaught'} size={18} /> {goalEstimate.oTokensTotal}
                                     </div>
                                 </AccessibleTooltip>
@@ -124,11 +124,11 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 return (
                     <div>
                         <div className="flex-box between">
-                            <div className="flex-box gap3">
+                            <div className="flex-box gap-[3px]">
                                 <RankIcon rank={goal.rankStart} /> <ArrowForward />
                                 <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                                 {!!goal.upgradesRarity.length && (
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         {goal.upgradesRarity.map(x => (
                                             <RarityIcon key={x} rarity={x} />
                                         ))}
@@ -138,12 +138,12 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                         </div>
                         <div className="flex-box gap10 wrap">
                             <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
-                                <div className="flex-box gap3">
+                                <div className="flex-box gap-[3px]">
                                     <CalendarMonthIcon /> {goalEstimate.daysLeft}
                                 </div>
                             </AccessibleTooltip>
                             <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
-                                <div className="flex-box gap3">
+                                <div className="flex-box gap-[3px]">
                                     <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
                                 </div>
                             </AccessibleTooltip>
@@ -155,7 +155,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             component={Link}
                             to={linkBase + params}
                             target={'_self'}>
-                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
+                            <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
                         </Button>
                     </div>
                 );
@@ -171,21 +171,21 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                         <div className="flex-box gap10">
                             <div className="flex-box column start">
                                 {hasPrimaryGoal && (
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         <span>Primary:</span> <b>{goal.primaryStart}</b> <ArrowForward />
                                         <b>{goal.primaryEnd}</b>
                                     </div>
                                 )}
 
                                 {hasSecondaryGoal && (
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         <span>Secondary:</span> <b>{goal.secondaryStart}</b> <ArrowForward />
                                         <b>{goal.secondaryEnd}</b>
                                     </div>
                                 )}
                             </div>
                             {!!goal.upgradesRarity.length && (
-                                <div className="flex-box gap3">
+                                <div className="flex-box gap-[3px]">
                                     {goal.upgradesRarity.map(x => (
                                         <RarityIcon key={x} rarity={x} />
                                     ))}
@@ -199,7 +199,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             Shards
                         </div>
                         {goalEstimate.mowEstimate && (
-                            <div style={{ padding: '10px 0' }}>
+                            <div className="py-2.5 px-0">
                                 <MowMaterialsTotal
                                     size="small"
                                     mowAlliance={goal.unitAlliance}
@@ -209,12 +209,12 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                         )}
                         <div className="flex-box gap10 wrap">
                             <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
-                                <div className="flex-box gap3">
+                                <div className="flex-box gap-[3px]">
                                     <CalendarMonthIcon /> {goalEstimate.daysLeft}
                                 </div>
                             </AccessibleTooltip>
                             <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
-                                <div className="flex-box gap3">
+                                <div className="flex-box gap-[3px]">
                                     <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
                                 </div>
                             </AccessibleTooltip>
@@ -225,7 +225,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             component={Link}
                             to={linkBase + params}
                             target={'_self'}>
-                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
+                            <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
                         </Button>
                     </div>
                 );
@@ -238,14 +238,14 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                         <div className="flex-box gap10">
                             <div className="flex-box column start">
                                 {hasActiveGoal && (
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         <span>Active:</span> <b>{goal.activeStart}</b> <ArrowForward />
                                         <b>{goal.activeEnd}</b>
                                     </div>
                                 )}
 
                                 {hasPassiveGoal && (
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         <span>Passive:</span> <b>{goal.passiveStart}</b> <ArrowForward />
                                         <b>{goal.passiveEnd}</b>
                                     </div>
@@ -254,7 +254,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                         </div>
                         {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
                         {goalEstimate.abilitiesEstimate && (
-                            <div style={{ padding: '10px 0' }}>
+                            <div className="py-2.5 px-0">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
@@ -282,12 +282,12 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                 <>
                                     <AccessibleTooltip
                                         title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
-                                        <div className="flex-box gap3">
+                                        <div className="flex-box gap-[3px]">
                                             <CalendarMonthIcon /> {goalEstimate.daysLeft}
                                         </div>
                                     </AccessibleTooltip>
                                     <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
-                                        <div className="flex-box gap3">
+                                        <div className="flex-box gap-[3px]">
                                             <MiscIcon icon={'energy'} height={18} width={15} />{' '}
                                             {goalEstimate.energyTotal}
                                         </div>
@@ -329,7 +329,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                     <div className="flex-box gap5">
                         <span>#{goal.priority}</span>
                         <UnitShardIcon icon={goal.unitRoundIcon} height={30} />
-                        <span style={{ fontSize: '1.2rem' }}>{goal.unitName ?? goal.unitId}</span>
+                        <span className="text-[1.2rem]">{goal.unitName ?? goal.unitId}</span>
                     </div>
                 }
                 subheader={calendarDate}

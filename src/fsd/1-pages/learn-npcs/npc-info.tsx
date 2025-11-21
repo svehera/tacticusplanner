@@ -96,15 +96,7 @@ export const NpcInfo: React.FC = () => {
                 {npc.traits.map(trait => {
                     const icon = NpcService.getTraitIcon(trait);
                     if (!icon) return null;
-                    return (
-                        <img
-                            key={trait}
-                            src={getImageUrl(icon)}
-                            alt={trait}
-                            title={trait}
-                            style={{ height: 32, marginRight: 8 }}
-                        />
-                    );
+                    return <img key={trait} src={getImageUrl(icon)} alt={trait} title={trait} className="h-8 mr-2" />;
                 })}
             </div>
         </div>

@@ -49,7 +49,7 @@ export const PlanLeRoutes = () => {
         [CharactersService.activeLres]
     );
     return (
-        <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
+        <div className="flex gap-2.5 flex-col items-center">
             <Card
                 variant="outlined"
                 onClick={() => navigate(leMasterTableMenuItem.routeMobile)}
@@ -59,7 +59,7 @@ export const PlanLeRoutes = () => {
                 }}>
                 <CardHeader
                     title={
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div className="flex items-center gap-2.5">
                             {leMasterTableMenuItem.icon} {leMasterTableMenuItem.label}
                         </div>
                     }
@@ -80,13 +80,13 @@ export const PlanLeRoutes = () => {
                         }}>
                         <CardHeader
                             title={
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <div className="flex items-center gap-2.5">
                                     <UnitShardIcon icon={le.roundIcon} name={le.name} /> {le.name}
                                 </div>
                             }
                             subheader={'Legendary Event'}
                         />
-                        <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                        <CardContent className="flex flex-col">
                             {isFinished ? (
                                 <span>Finished</span>
                             ) : (

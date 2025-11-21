@@ -74,9 +74,9 @@ export const SharedRoster = () => {
     const characters = CharactersService.orderUnits(charactersFiltered, viewControls.orderBy);
 
     return (
-        <Box style={{ margin: 'auto' }}>
+        <Box className="m-auto">
             {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <h3 style={{ textAlign: 'center' }}>{sharedUser}'s Roster</h3>
+            <h3 className="text-center">{sharedUser}'s Roster</h3>
             <CharactersViewContext.Provider
                 value={{
                     showAbilitiesLevel: viewPreferences.showAbilitiesLevel,

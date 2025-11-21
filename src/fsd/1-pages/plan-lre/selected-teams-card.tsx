@@ -43,10 +43,8 @@ export const SelectedTeamCard: React.FC<Props> = ({ team, menuItemSelect }) => {
                 title={team.name}
                 subheader={subheader}
             />
-            <CardContent className="flex-box column gap1 start" style={{ minHeight: 150 }}>
-                {team.characters?.map(x => (
-                    <LreTile key={x.id} character={x} settings={viewPreferences} />
-                ))}
+            <CardContent className="flex-box column gap1 start min-h-[150]">
+                {team.characters?.map(x => <LreTile key={x.id} character={x} settings={viewPreferences} />)}
             </CardContent>
         </Card>
     );

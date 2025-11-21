@@ -1,5 +1,6 @@
 ﻿import { Autocomplete, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import { IUnit } from '../model';
 
@@ -10,19 +11,19 @@ interface Props<T extends IUnit> {
     options: T[];
     onUnitChange?: (value: T | null) => void;
     onUnitsChange?: (value: T[]) => void;
-    style?: React.CSSProperties;
     multiple?: boolean;
     label?: string;
+    className?: string;
 }
 
 export const UnitsAutocomplete = <T extends IUnit>({
     options,
     unit,
-    style = {},
     multiple = false,
     onUnitChange = () => {},
     onUnitsChange = () => {},
     label = 'Unit',
+    className = '',
 }: Props<T>) => {
     const [openAutocomplete, setOpenAutocomplete] = useState(false);
 
@@ -69,7 +70,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
         <Autocomplete
             fullWidth
             multiple={multiple}
-            style={{ minWidth: 200, ...style }}
+            className={twMerge('min-w-[200px]', className)}
             options={options}
             value={unit}
             open={openAutocomplete}

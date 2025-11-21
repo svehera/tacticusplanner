@@ -98,7 +98,7 @@ export const GuideCard: React.FC<Props> = ({
                             </AccessibleTooltip>
                         </IconButton>
                     )}
-                    <span className="bold">{guide.likes}</span>
+                    <span className="font-bold">{guide.likes}</span>
                 </div>
 
                 <IconButton aria-label="share" onClick={onShare}>
@@ -138,7 +138,7 @@ export const GuideCard: React.FC<Props> = ({
             }}
             variant="outlined">
             <CardHeader
-                style={{ paddingBottom: 0 }}
+                className="pb-0"
                 avatar={<TokenImage gameMode={guide.primaryMode} />}
                 action={
                     <>

@@ -99,11 +99,11 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 return (
                     <div>
                         <div className="flex-box between">
-                            <div className="flex-box gap3">
+                            <div className="flex-box gap-[3px]">
                                 <RankIcon rank={goal.rankStart} /> <ArrowForward />
                                 <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                                 {!!goal.upgradesRarity.length && (
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         {goal.upgradesRarity.map(x => (
                                             <RarityIcon key={x} rarity={x} />
                                         ))}
@@ -123,21 +123,21 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                         <div className="flex-box gap10">
                             <div className="flex-box column start">
                                 {hasPrimaryGoal && (
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         <span>Primary:</span> <b>{goal.primaryStart}</b> <ArrowForward />
                                         <b>{goal.primaryEnd}</b>
                                     </div>
                                 )}
 
                                 {hasSecondaryGoal && (
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         <span>Secondary:</span> <b>{goal.secondaryStart}</b> <ArrowForward />
                                         <b>{goal.secondaryEnd}</b>
                                     </div>
                                 )}
                             </div>
                             {!!goal.upgradesRarity.length && (
-                                <div className="flex-box gap3">
+                                <div className="flex-box gap-[3px]">
                                     {goal.upgradesRarity.map(x => (
                                         <RarityIcon key={x} rarity={x} />
                                     ))}
@@ -145,7 +145,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                             )}
                         </div>
                         {goalEstimate.mowEstimate && (
-                            <div style={{ padding: '10px 0' }}>
+                            <div className="py-2.5 px-0">
                                 <MowMaterialsTotal
                                     size="small"
                                     mowAlliance={goal.unitAlliance}
@@ -164,14 +164,14 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                         <div className="flex-box gap10">
                             <div className="flex-box column start">
                                 {hasActiveGoal && (
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         <span>Active:</span> <b>{goal.activeStart}</b> <ArrowForward />
                                         <b>{goal.activeEnd}</b>
                                     </div>
                                 )}
 
                                 {hasPassiveGoal && (
-                                    <div className="flex-box gap3">
+                                    <div className="flex-box gap-[3px]">
                                         <span>Passive:</span> <b>{goal.passiveStart}</b> <ArrowForward />
                                         <b>{goal.passiveEnd}</b>
                                     </div>
@@ -180,7 +180,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                         </div>
                         {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
                         {goalEstimate.abilitiesEstimate && (
-                            <div style={{ padding: '10px 0' }}>
+                            <div className="py-2.5 px-0">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
@@ -494,7 +494,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 component={Link}
                                 to={linkBase + params}
                                 target={'_self'}>
-                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids Table</span>
+                                <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
                             </Button>
                         );
                     }
@@ -524,11 +524,9 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
 
     return (
         <div
-            className="ag-theme-material"
+            className="ag-theme-material w-full min-h-[150px]"
             style={{
                 height: baseRowHeight + rows.length * baseRowHeight,
-                minHeight: 150,
-                width: '100%',
             }}>
             <AgGridReact
                 modules={[AllCommunityModule]}

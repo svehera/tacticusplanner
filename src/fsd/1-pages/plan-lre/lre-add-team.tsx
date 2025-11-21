@@ -119,7 +119,7 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
     return (
         <Dialog open={true} fullWidth onClose={onClose} maxWidth="md" fullScreen={isMobile}>
             <DialogTitle>Add LRE Team</DialogTitle>
-            <DialogContent style={{ paddingTop: '10px' }}>
+            <DialogContent className="pt-2.5">
                 <div>
                     <div className="flex-box gap10">
                         <MultipleSelect
@@ -130,7 +130,7 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                             optionsChange={updateSelectedTrack}
                         />
                     </div>
-                    <div className="flex-box gap10" style={{ paddingTop: '10px' }}>
+                    <div className="flex-box gap10 pt-2.5">
                         <TextField
                             label="Team name"
                             variant="outlined"
@@ -171,7 +171,7 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                         />
                     </div>
                 </div>
-                <div className="flex-box wrap" style={{ paddingTop: '10px' }}>
+                <div className="flex-box wrap pt-2.5">
                     {lre[trackId].unitsRestrictions.map(requirement => (
                         <FormControlLabel
                             key={requirement.name}
@@ -188,7 +188,7 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                 </div>
 
                 <div className="flex-box full-width wrap start space-between">
-                    <div style={{ minWidth: 400 }}>
+                    <div className="min-w-[400px]">
                         <div className="flex-box gap20 space-between">
                             <h3>Selected Team ({selectedTeam.length}/5)</h3>
                             {!!selectedTeam.length && (
@@ -197,14 +197,13 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                                 </Button>
                             )}
                         </div>
-                        <div className="flex-box column start gap3 pointer">
+                        <div className="flex-box column start gap-[3px] pointer">
                             {selectedTeam.length ? (
                                 selectedTeam.map(character => (
                                     <div
                                         key={character.id}
                                         onClick={() => removeCharacter(character)}
-                                        className="flex-box gap5"
-                                        style={{ width: 350 }}>
+                                        className="flex-box gap5 w-[350px]">
                                         {!gridTeam.some(c => selectedTeam.some(x => x.id === c.id)) && (
                                             <WarningIcon color="error" />
                                         )}
@@ -220,20 +219,17 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                         </div>
                     </div>
 
-                    <div style={{ minWidth: 400 }}>
+                    <div className="min-w-[400px]">
                         <h3>Available Characters ({gridTeam.length})</h3>
-                        <div
-                            className="flex-box column start gap3"
-                            style={{ minHeight: 300, maxHeight: 300, overflow: 'auto' }}>
+                        <div className="flex-box column start gap-[3px] min-h-[300px] max-h-[300px] overflow-auto">
                             {gridTeam.map(character => (
                                 <div
                                     key={character.id}
                                     onClick={() => addCharacter(character)}
                                     style={{
                                         opacity: selectedTeam.some(x => x.id === character.id) ? 0.3 : 1,
-                                        width: 350,
                                     }}
-                                    className="flex-box gap5 pointer">
+                                    className="flex-box gap5 pointer w-[350px]">
                                     <AddIcon />
                                     <LreTile character={character} settings={viewPreferences} />
                                 </div>

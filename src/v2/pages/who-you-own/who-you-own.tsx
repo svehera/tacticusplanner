@@ -134,7 +134,7 @@ export const WhoYouOwn = () => {
     }, []);
 
     return (
-        <Box style={{ margin: 'auto' }}>
+        <Box className="m-auto">
             <CharactersViewContext.Provider value={viewPreferences}>
                 <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
                     {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}

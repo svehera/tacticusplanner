@@ -51,10 +51,7 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex }) => {
     const renderEnemies = (enemies: string[]) => (
         <div className="flex flex-wrap gap-x-3 gap-y-6 items-start">
             {enemies.map((enemy, idx) => (
-                <div
-                    className="relative w-[80px] h-[100px]"
-                    style={{ transform: 'scale(0.4)', transformOrigin: 'top left' }}
-                    key={idx}>
+                <div className="relative w-[80px] h-[100px] origin-top-left transform-[scale(0.4)]" key={idx}>
                     {getEnemyPortrait(enemy)}
                 </div>
             ))}

@@ -23,7 +23,7 @@ export const BattlefieldInfo: React.FC = () => {
     return (
         <>
             <IconButton onClick={handleClickOpen}>
-                <HelpIcon style={{ cursor: 'pointer' }} color="primary" />
+                <HelpIcon className="cursor-pointer" color="primary" />
             </IconButton>
             <Dialog open={open} onClose={handleClose} maxWidth={isMobile ? 'xl' : 'lg'} fullWidth>
                 <DialogTitle>Battlefield levels</DialogTitle>

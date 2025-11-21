@@ -18,5 +18,5 @@ export const BadgeImage = ({
     }
     const image = getImageUrl(`badges/resized/${alliance.toLowerCase()}-${rarityString.toLowerCase()}.png`);
 
-    return <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={sizePx} alt={alliance} />;
+    return <img loading={'lazy'} className="pointer-events-none" src={image} height={sizePx} alt={alliance} />;
 };

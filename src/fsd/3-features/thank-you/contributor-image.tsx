@@ -1,4 +1,6 @@
-﻿import { getImageUrl } from '@/fsd/5-shared/ui';
+﻿import { twMerge } from 'tailwind-merge';
+
+import { getImageUrl } from '@/fsd/5-shared/ui';
 
 export const ContributorImage = ({
     iconPath,
@@ -13,17 +15,7 @@ export const ContributorImage = ({
 }) => {
     const image = getImageUrl(`contributors/${iconPath}`);
 
-    return (
-        <img
-            loading={'lazy'}
-            style={{
-                contentVisibility: 'auto',
-                borderRadius: borderRadius ? '50%' : undefined,
-            }}
-            src={image}
-            height={height}
-            width={width}
-            alt={iconPath}
-        />
-    );
+    const className = twMerge('[content-visibility:auto]', borderRadius ? 'rounded-[50%]' : '');
+
+    return <img loading={'lazy'} className={className} src={image} height={height} width={width} alt={iconPath} />;
 };
