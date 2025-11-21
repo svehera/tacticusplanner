@@ -316,6 +316,60 @@ export class GoalsService {
         return goal?.unitName;
     }
 
+    private static adjustNeededXp(xpNeeded: number, heldBooks: Record<Rarity, number>): number {
+        while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
+            xpNeeded -= 62500;
+            heldBooks[Rarity.Mythic] -= 1;
+        }
+        while (xpNeeded >= 12500 && heldBooks[Rarity.Legendary] > 0) {
+            xpNeeded -= 12500;
+            heldBooks[Rarity.Legendary] -= 1;
+        }
+        while (xpNeeded >= 2500 && heldBooks[Rarity.Epic] > 0) {
+            xpNeeded -= 2500;
+            heldBooks[Rarity.Epic] -= 1;
+        }
+        while (xpNeeded >= 500 && heldBooks[Rarity.Rare] > 0) {
+            xpNeeded -= 500;
+            heldBooks[Rarity.Rare] -= 1;
+        }
+        while (xpNeeded >= 100 && heldBooks[Rarity.Uncommon] > 0) {
+            xpNeeded -= 100;
+            heldBooks[Rarity.Uncommon] -= 1;
+        }
+        while (xpNeeded >= 20 && heldBooks[Rarity.Common] > 0) {
+            xpNeeded -= 20;
+            heldBooks[Rarity.Common] -= 1;
+        }
+        if (xpNeeded > 0) {
+            while (xpNeeded > 0 && heldBooks[Rarity.Common] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 20);
+                heldBooks[Rarity.Common] -= 1;
+            }
+            while (xpNeeded > 0 && heldBooks[Rarity.Uncommon] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 100);
+                heldBooks[Rarity.Uncommon] -= 1;
+            }
+            while (xpNeeded > 0 && heldBooks[Rarity.Rare] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 500);
+                heldBooks[Rarity.Rare] -= 1;
+            }
+            while (xpNeeded > 0 && heldBooks[Rarity.Epic] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 2500);
+                heldBooks[Rarity.Epic] -= 1;
+            }
+            while (xpNeeded > 0 && heldBooks[Rarity.Legendary] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 12500);
+                heldBooks[Rarity.Legendary] -= 1;
+            }
+            while (xpNeeded > 0 && heldBooks[Rarity.Mythic] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 62500);
+                heldBooks[Rarity.Mythic] -= 1;
+            }
+        }
+        return xpNeeded;
+    }
+
     /**
      * Computes the total number of remaining resources needed AND adjusts all goals to use as
      * many possible badges from our existing inventory.
@@ -355,7 +409,7 @@ export class GoalsService {
 
         const newGoalsEstimates: IGoalEstimate[] = cloneDeep(goalsEstimate);
         const goalsByPrio = orderBy(
-            goals.map(x => ({ id: x.id, priority: x.priority })),
+            goals.map(x => ({ id: x.id, priority: x.priority, unit: x.character })),
             ['priority'],
             ['asc']
         );
@@ -367,71 +421,25 @@ export class GoalsService {
                 console.error('could not find goal estimate for goal id ' + goalIdAndPriority.id);
                 continue;
             }
+            const xpNeeded = this.adjustNeededXp(
+                goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0,
+                heldBooks
+            );
+
             if (goal.xpEstimate || goal.xpEstimateAbilities) {
-                let xpNeeded = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
-                while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
-                    xpNeeded -= 62500;
-                    heldBooks[Rarity.Mythic] -= 1;
-                }
-                while (xpNeeded >= 12500 && heldBooks[Rarity.Legendary] > 0) {
-                    xpNeeded -= 12500;
-                    heldBooks[Rarity.Legendary] -= 1;
-                }
-                while (xpNeeded >= 2500 && heldBooks[Rarity.Epic] > 0) {
-                    xpNeeded -= 2500;
-                    heldBooks[Rarity.Epic] -= 1;
-                }
-                while (xpNeeded >= 500 && heldBooks[Rarity.Rare] > 0) {
-                    xpNeeded -= 500;
-                    heldBooks[Rarity.Rare] -= 1;
-                }
-                while (xpNeeded >= 100 && heldBooks[Rarity.Uncommon] > 0) {
-                    xpNeeded -= 100;
-                    heldBooks[Rarity.Uncommon] -= 1;
-                }
-                while (xpNeeded >= 20 && heldBooks[Rarity.Common] > 0) {
-                    xpNeeded -= 20;
-                    heldBooks[Rarity.Common] -= 1;
-                }
-                if (xpNeeded > 0) {
-                    while (xpNeeded > 0 && heldBooks[Rarity.Common] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 20);
-                        heldBooks[Rarity.Common] -= 1;
-                    }
-                    while (xpNeeded > 0 && heldBooks[Rarity.Uncommon] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 100);
-                        heldBooks[Rarity.Uncommon] -= 1;
-                    }
-                    while (xpNeeded > 0 && heldBooks[Rarity.Rare] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 500);
-                        heldBooks[Rarity.Rare] -= 1;
-                    }
-                    while (xpNeeded > 0 && heldBooks[Rarity.Epic] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 2500);
-                        heldBooks[Rarity.Epic] -= 1;
-                    }
-                    while (xpNeeded > 0 && heldBooks[Rarity.Legendary] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 12500);
-                        heldBooks[Rarity.Legendary] -= 1;
-                    }
-                    while (xpNeeded > 0 && heldBooks[Rarity.Mythic] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 62500);
-                        heldBooks[Rarity.Mythic] -= 1;
-                    }
-                }
                 totalXpNeeded += xpNeeded;
                 goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
                 if (totalXpNeeded === 0) {
                     goal.xpEstimate = undefined;
                     goal.xpEstimateAbilities = undefined;
-                    continue;
-                }
-                if (goal.xpEstimate) {
-                    goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
-                    goal.xpEstimate.xpLeft = xpNeeded;
                 } else {
-                    goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
-                    goal.xpEstimateAbilities!.xpLeft = xpNeeded;
+                    if (goal.xpEstimate) {
+                        goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
+                        goal.xpEstimate.xpLeft = xpNeeded;
+                    } else {
+                        goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
+                        goal.xpEstimateAbilities!.xpLeft = xpNeeded;
+                    }
                 }
             }
 
