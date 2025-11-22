@@ -1,4 +1,4 @@
-export type { INpcData } from './model';
+export type { INpcData, INpcStats } from './model';
 export { NpcService } from './npc-service';
 export { NpcPortrait } from './npc-portrait';
 export { NpcSelect } from './npc-select';
