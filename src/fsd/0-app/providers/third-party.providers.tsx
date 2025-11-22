@@ -19,6 +19,7 @@ export const ThirdPartyProviders: React.FC = () => {
                 anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
                 onEntered={(node, _isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
             />
+            {/* @ts-expect-error: Library types incompatible with React 18 */}
             <PopupProvider>
                 <RouterProvider router={routes} />
             </PopupProvider>
