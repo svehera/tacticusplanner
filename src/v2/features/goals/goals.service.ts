@@ -367,7 +367,7 @@ export class GoalsService {
             booksAccrued: newBooksAccrued,
         };
     }
-  
+
     private static adjustNeededXp(xpNeeded: number, heldBooks: Record<Rarity, number>): number {
         while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
             xpNeeded -= 62500;
