@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import { isMobile } from 'react-device-detect';
 
 import { LeBattle } from './le-battle';
 import { ILeBattles } from './le-battle.service';
@@ -8,27 +7,7 @@ interface Props {
     battles: ILeBattles;
 }
 
-const LeBattlesDesktop: React.FC<Props> = ({ battles }) => {
-    return (
-        <div className="flex flex-col gap-8">
-            {battles.alpha.battles.map((_, index) => (
-                <div key={index} className="grid grid-cols-3 gap-4 items-start">
-                    <div className="h-full border border-dashed border-gray-700 rounded-xl p-4 flex items-start justify-center text-gray-500">
-                        <LeBattle battle={battles.alpha.battles[index]} trackName={'ALPHA'} />
-                    </div>
-                    <div className="h-full border border-dashed border-gray-700 rounded-xl p-4 flex items-start justify-center text-gray-500">
-                        <LeBattle battle={battles.beta.battles[index]} trackName={'BETA'} />
-                    </div>
-                    <div className="h-full border border-dashed border-gray-700 rounded-xl p-4 flex items-start justify-center text-gray-500">
-                        <LeBattle battle={battles.gamma.battles[index]} trackName={'GAMMA'} />
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
-};
-
-const LeBattlesMobile: React.FC<Props> = ({ battles }) => {
+export const LeBattles: React.FC<Props> = ({ battles }) => {
     const [track, setTrack] = useState<'ALPHA' | 'BETA' | 'GAMMA'>('ALPHA');
     const [battleIndex, setBattleIndex] = useState<number>(0);
 
@@ -87,8 +66,4 @@ const LeBattlesMobile: React.FC<Props> = ({ battles }) => {
             <LeBattle battle={battle} trackName={track} />
         </div>
     );
-};
-
-export const LeBattles: React.FC<Props> = ({ battles }) => {
-    return isMobile ? <LeBattlesMobile battles={battles} /> : <LeBattlesDesktop battles={battles} />;
 };

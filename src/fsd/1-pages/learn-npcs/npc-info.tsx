@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react';
 
 import { Faction } from '@/fsd/5-shared/model';
-import { getImageUrl } from '@/fsd/5-shared/ui';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { FactionSelect } from '@/fsd/4-entities/faction';
-import { INpcData, NpcService, NpcSelect, ProgressionIndexSelect } from '@/fsd/4-entities/npc';
+import { INpcData, NpcSelect, NpcService, ProgressionIndexSelect } from '@/fsd/4-entities/npc';
+
+import { NpcStats } from './npc-stats';
 
 export const NpcInfo: React.FC = () => {
     const [faction, setFaction] = useState<Faction>(Faction.Necrons);
@@ -22,11 +22,11 @@ export const NpcInfo: React.FC = () => {
                 }
                 return acc;
             }, []);
-    }, [NpcService.npcDataFull]);
+    }, []);
 
     const npcs = useMemo(() => {
         return NpcService.npcDataFull.filter(npc => npc.faction === faction);
-    }, [faction, NpcService.npcDataFull]);
+    }, [faction]);
 
     const onFactionChange = (newFaction: Faction) => {
         setFaction(newFaction);
@@ -40,72 +40,39 @@ export const NpcInfo: React.FC = () => {
         setProgressionIndex(0);
     };
 
-    const onProgressionIndexChange = (newIndex: number) => {
-        setProgressionIndex(newIndex);
-    };
+    const currentStats = npc.stats[progressionIndex];
 
     return (
-        <div>
-            <div className="flex gap-[3px] justify-left">
-                <FactionSelect
-                    label={'Faction'}
-                    factions={factions}
-                    faction={faction}
-                    factionChanges={value => onFactionChange(value)}
-                />
-            </div>
-            <div className="h-5 w-auto"></div>
-            <div className="flex gap-[3px] justify-left">
-                <NpcSelect label={'NPC'} npcs={npcs} npc={npc} npcChanges={value => onNpcChange(value)} />
-            </div>
-            <div className="h-5 w-auto"></div>
-            <div className="flex gap-[3px] justify-left"></div>
-            <ProgressionIndexSelect
-                label={'NPC Level'}
-                npc={npc}
-                index={progressionIndex}
-                indexChanges={value => onProgressionIndexChange(value)}
-            />
-            <div className="flex gap-[3px] justify-left items-center">
-                <MiscIcon icon="health" />
-                <span>{npc.stats[progressionIndex]?.health}</span>
-            </div>
-            <div className="flex gap-[3px] justify-left items-center">
-                <MiscIcon icon="armour" />
-                <span>{npc.stats[progressionIndex]?.armor}</span>
-            </div>
-            <div className="flex gap-[3px] justify-left items-center">
-                <MiscIcon icon="damage" />
-                <span>{npc.stats[progressionIndex]?.damage}</span>
-            </div>
-            <div className="flex gap-[3px] justify-left items-center">
-                <MiscIcon icon="meleeAttack" />
-                <MiscIcon icon={'damage' + npc.meleeDamage!} />
-                <MiscIcon icon="hits" />
-                <span>{npc.meleeHits!}</span>
-            </div>
-            {npc.rangeDamage !== undefined && (
-                <div className="flex gap-[3px] justify-left items-center">
-                    <MiscIcon icon="rangedAttack" />
-                    <MiscIcon icon={'damage' + npc.rangeDamage!} />
-                    <MiscIcon icon="hits" />
-                    <span>{npc.rangeHits!}</span>
+        <div className="w-full max-w-4xl mx-auto p-4">
+            {/* Main Card Container */}
+            <div className="bg-white dark:bg-[#1a2234] rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
+                {/* Header / Controls Section */}
+                <div className="p-5 bg-gray-50 dark:bg-[#1e293b] border-b border-gray-200 dark:border-slate-700">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="flex flex-col">
+                            <FactionSelect
+                                label={'Faction'}
+                                factions={factions}
+                                faction={faction}
+                                factionChanges={onFactionChange}
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <NpcSelect label={'NPC'} npcs={npcs} npc={npc} npcChanges={onNpcChange} />
+                        </div>
+                        <div className="flex flex-col">
+                            <ProgressionIndexSelect
+                                label={'NPC Level'}
+                                npc={npc}
+                                index={progressionIndex}
+                                indexChanges={setProgressionIndex}
+                            />
+                        </div>
+                    </div>
                 </div>
-            )}
+            </div>
             <div>
-                {npc.traits.map(trait => {
-                    const icon = NpcService.getTraitIcon(trait);
-                    if (!icon) return null;
-                    return (
-                        <img
-                            key={trait}
-                            src={getImageUrl(icon)}
-                            alt={trait}
-                            title={trait}
-                            style={{ height: 32, marginRight: 8 }}
-                        />
-                    );
-                })}
+                <NpcStats npc={npc} currentStats={currentStats} />
             </div>
         </div>
     );
