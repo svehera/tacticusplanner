@@ -15,6 +15,8 @@ import {
 import { IMowDb } from 'src/v2/features/characters/characters.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
+import { XpIncomeState } from '@/fsd/1-pages/input-xp-income/models';
+
 import { defaultData } from '../models/constants';
 import {
     IAutoTeamsPreferences,
@@ -101,6 +103,10 @@ export class PersonalDataLocalStorage {
                 guild: {
                     ...defaultData.guild,
                     ...(this.getItem<IGuild>('guild') ?? {}),
+                },
+                xpIncomeState: {
+                    ...defaultData.xpIncomeState,
+                    ...(this.getItem<XpIncomeState>('xpIncomeState') ?? {}),
                 },
             };
         } else {
@@ -226,6 +232,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             guildWar: defaultData.guildWar,
             guild: defaultData.guild,
             mows: defaultData.mows,
+            xpIncomeState: defaultData.xpIncomeState,
             teams: defaultData.teams,
         };
     }

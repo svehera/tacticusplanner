@@ -22,6 +22,8 @@ import {
     IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
 
+import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
+
 export interface RevisedGoals {
     goalEstimates: IGoalEstimate[];
     neededBadges: Record<Alliance, Record<Rarity, number>>;
@@ -34,6 +36,11 @@ export interface IXpLevel {
     currentLevel: number;
     xpAtLevel: number;
     xpFromPriorGoalApplied?: boolean;
+}
+
+interface XpBookAccrual {
+    accruedDate: Date;
+    booksAccrued: number;
 }
 
 export class GoalsService {
@@ -316,6 +323,51 @@ export class GoalsService {
         return goal?.unitName;
     }
 
+    private static daysDifference(dateA: Date, dateB: Date): number {
+        const msPerDay = 1000 * 60 * 60 * 24;
+        return (dateA.getTime() - dateB.getTime()) / msPerDay;
+    }
+
+    private static addDays(date: Date, days: number): Date {
+        const msPerDay = 1000 * 60 * 60 * 24;
+        return new Date(date.getTime() + days * msPerDay);
+    }
+
+    /**
+     * Calculates the new XpBookAccrual state after using books for a single goal.
+     * The process determines the goal's final completion date ONLY based on the book requirement
+     * and calculates the resulting surplus/deficit.
+     *
+     * @param goal The GoalEstimate being completed.
+     * @param currentAccrual The current balance of books and the date it was last calculated.
+     * @param booksPerDay The constant daily income of books (floating point).
+     * @returns A new XpBookAccrual object reflecting the state after the goal is completed.
+     */
+    private static processGoalAccrual(
+        booksNeeded: number,
+        currentAccrual: XpBookAccrual,
+        booksPerDay: number
+    ): XpBookAccrual {
+        const netBooksNeeded = booksNeeded - currentAccrual.booksAccrued;
+
+        let bookCompletionDate: Date;
+
+        if (netBooksNeeded <= 0) {
+            bookCompletionDate = currentAccrual.accruedDate;
+        } else {
+            const daysToAccrueFractional = netBooksNeeded / booksPerDay;
+            const daysToWaitWhole = Math.ceil(daysToAccrueFractional);
+            bookCompletionDate = this.addDays(currentAccrual.accruedDate, daysToWaitWhole);
+        }
+        const totalDaysElapsed = this.daysDifference(bookCompletionDate, currentAccrual.accruedDate);
+        const totalAccruedBooks = currentAccrual.booksAccrued + totalDaysElapsed * booksPerDay;
+        const newBooksAccrued = totalAccruedBooks - booksNeeded;
+        return {
+            accruedDate: bookCompletionDate,
+            booksAccrued: newBooksAccrued,
+        };
+    }
+
     private static adjustNeededXp(xpNeeded: number, heldBooks: Record<Rarity, number>): number {
         while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
             xpNeeded -= 62500;
@@ -378,7 +430,8 @@ export class GoalsService {
         goals: IPersonalGoal[],
         goalsEstimate: IGoalEstimate[],
         inventory: IInventory,
-        upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[]
+        upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[],
+        xpIncomeState: XpIncomeState
     ): RevisedGoals {
         const createRarityRecord = (): Record<Rarity, number> => ({
             [Rarity.Common]: 0,
@@ -414,6 +467,8 @@ export class GoalsService {
             ['asc']
         );
         let totalXpNeeded = 0;
+        const today = new Date();
+        let xpBooksAccrual = { accruedDate: today, booksAccrued: 0 } as XpBookAccrual;
         for (const goalIdAndPriority of goalsByPrio) {
             const goal = newGoalsEstimates.find(x => x.goalId === goalIdAndPriority.id);
 
@@ -436,9 +491,31 @@ export class GoalsService {
                     if (goal.xpEstimate) {
                         goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
                         goal.xpEstimate.xpLeft = xpNeeded;
+                        if (xpIncomeState.manualBooksPerDay > 0) {
+                            const newAccrual = this.processGoalAccrual(
+                                Math.ceil(xpNeeded / 12500),
+                                xpBooksAccrual,
+                                xpIncomeState.manualBooksPerDay
+                            );
+                            goal.xpDaysLeft = Math.ceil(
+                                (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
+                            );
+                            xpBooksAccrual = newAccrual;
+                        }
                     } else {
                         goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
                         goal.xpEstimateAbilities!.xpLeft = xpNeeded;
+                        if (xpIncomeState.manualBooksPerDay > 0) {
+                            const newAccrual = this.processGoalAccrual(
+                                Math.ceil(xpNeeded / 12500),
+                                xpBooksAccrual,
+                                xpIncomeState.manualBooksPerDay
+                            );
+                            goal.xpDaysLeft = Math.ceil(
+                                (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
+                            );
+                            xpBooksAccrual = newAccrual;
+                        }
                     }
                 }
             }
