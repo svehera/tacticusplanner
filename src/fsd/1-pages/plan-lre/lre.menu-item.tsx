@@ -21,9 +21,6 @@ activeLreChars.sort(
     (a, b) => utcStringToMilliseconds(a.lre?.nextEventDateUtc) - utcStringToMilliseconds(b.lre?.nextEventDateUtc)
 );
 
-export const activeLreMenuItems = [
-    activeLreChars.map(createMenuItem),
-    [new MenuItemTP('Farsight', <UnitShardIcon icon={'blah'} height={24} />, `/plan/lre?character=Farsight`)],
-].flat();
+export const activeLreMenuItems = [activeLreChars.map(createMenuItem)].flat();
 
 export const inactiveLreMenuItems = CharactersService.lreCharacters.filter(x => !!x.lre?.finished).map(createMenuItem);
