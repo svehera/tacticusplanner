@@ -19,13 +19,6 @@ export const ThirdPartyProviders: React.FC = () => {
                 anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
                 onEntered={(node, _isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
             />
-
-            {/* 
-                TypeScript is unable to infer the correct types for PopupProvider here.
-                This might be due to a mismatch between the PopupProvider's type definitions and its usage.
-                TODO: Investigate the type definitions for PopupProvider and resolve this error if possible.
-            */}
-            {/* @ts-expect-error Ts being weird */}
             <PopupProvider>
                 <RouterProvider router={routes} />
             </PopupProvider>

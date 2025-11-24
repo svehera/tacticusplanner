@@ -91,12 +91,12 @@ const CharacterTileFn = ({
 
     const renderCharacterLevel = useMemo(() => {
         return isUnlocked ? (
-            <div className="relative top-[-15px] flex items-center justify-center border text-[white] text-xs border-solid border-[gold] bg-[#012a41]">
+            <div className="relative top-[-20px] flex items-center justify-center border text-[white] text-xs border-solid border-[gold] bg-[#012a41]">
                 {character.level}
             </div>
         ) : (
             <div
-                className="relative top-[-15px] flex items-center justify-center border text-[white] text-xs border-solid border-[gold] bg-[#012a41]"
+                className="relative top-[-20px] flex items-center justify-center border text-[white] text-xs border-solid border-[gold] bg-[#012a41]"
                 style={{
                     background: `linear-gradient(to right, green ${unlockProgress}%, #012A41 ${unlockProgress}%)`,
                 }}>
@@ -133,12 +133,12 @@ const CharacterTileFn = ({
                 </Tooltip>
 
                 <div
-                    className="relative top-[-7px] flex items-center justify-between z-10"
+                    className="relative top-[-10px] flex items-center justify-between z-10"
                     style={{ visibility: hasAbilities && viewContext.showAbilitiesLevel ? 'visible' : 'hidden' }}>
-                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                    <div className="relative top-[-10px] w-5 h-5 flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold] rounded-full">
                         {character.activeAbilityLevel}
                     </div>
-                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                    <div className="relative top-[-10px] w-5 h-5 flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold] rounded-full">
                         {character.passiveAbilityLevel}
                     </div>
                 </div>

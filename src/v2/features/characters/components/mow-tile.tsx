@@ -54,21 +54,21 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                 <div
                     className="relative top-[-7px] flex items-center justify-between z-10"
                     style={{ visibility: hasAbilities && viewContext.showAbilitiesLevel ? 'visible' : 'hidden' }}>
-                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                    <div className="relative top-[-16px] w-5 h-5 flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold] rounded-full">
                         {mow.primaryAbilityLevel}
                     </div>
-                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                    <div className="relative top-[-16px] w-5 h-5 flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold] rounded-full">
                         {mow.secondaryAbilityLevel}
                     </div>
                 </div>
                 <Conditional condition={viewContext.showCharacterLevel}>
                     {mow.unlocked ? (
-                        <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                        <div className="relative top-[-24px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
                             {mow.shards}
                         </div>
                     ) : (
                         <div
-                            className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]"
+                            className="relative top-[-23px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]"
                             style={{
                                 background: `linear-gradient(to right, green ${unlockProgress}%, #012A41 ${unlockProgress}%)`,
                             }}>
@@ -77,7 +77,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                     )}
                 </Conditional>
             </div>
-            <div className="min-h-[30px] flex items-center mt-[-15px] justify-center">
+            <div className="min-h-[30px] flex items-center mt-[-19px] justify-center">
                 {viewContext.showCharacterRarity && <RarityIcon rarity={mow.rarity} />}
                 <MiscIcon icon={'mow'} width={22} height={25} />
             </div>
