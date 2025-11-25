@@ -9,27 +9,27 @@
     "finished": false,
     "regularMissions": [
         "Defeat 5 waves of enemies in any wave-based game mode, Deal 1000 damage",
-        "Defeat 30 Aeldari",
-        "Defeat 75 Tyranids",
-        "Defeat 75 Ultramarines",
-        "Use abilities 15 times with Chaos units, Deal 10k damage with Abilities",
+        "Defeat 30 AdMechs",
+        "Defeat 75 T'au",
+        "Defeat 100 Orks",
+        "Use abilities 15 times with Xenos units, Deal 10k damage with Abilities",
         "Use abilities 20 times with Imperial units, Deal 15k damage with Abilities",
-        "Use abilities 25 times with Xenos units, Deal 20k damage with Abilities",
+        "Use abilities 25 times with Chaos units, Deal 20k damage with Abilities",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Power damage",
         "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Bolter damage",
-        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Piercing damage",
-        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Psychic damage"
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Piercing damage"
     ],
     "premiumMissions": [
         "Win 1 battle without Summoning any units",
-        "Defeat 30 enemies with Imperial units",
-        "Defeat 75 enemies with Xenos units",
-        "Defeat 100 enemies with Chaos units",
-        "Win 5 battles without deploying any Infiltrate characters",
-        "Win 5 battles without deploying any Mechanical characters",
+        "Defeat 30 enemies with Chaos units",
+        "Defeat 75 enemies with Imperial units",
+        "Defeat 100 enemies with Xenos units",
+        "Win 5 battles without deploying any Big Target characters",
         "Win 5 battles without deploying any Resilient characters",
-        "Defeat 75 enemies with Piercing Damage",
+        "Win 5 battles without deploying any Ambush characters",
+        "Defeat 75 enemies with Bolter Damage",
         "Defeat 75 enemies with Power Damage",
-        "Defeat 75 enemies with Chain Damage"
+        "Defeat 75 enemies with Piercing Damage"
     ],
     "alpha": {
         "name": "Alpha (No Imperials)",
