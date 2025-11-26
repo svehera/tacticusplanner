@@ -3,9 +3,9 @@
     "unitSnowprintId": "tauFarsight",
     "name": "Farsight",
     "wikiLink": "https://tacticus.wiki.gg/wiki/Legendary_Character_Events",
-    "eventStage": 2,
-    "nextEventDate": "TBA",
-    "nextEventDateUtc": "",
+    "eventStage": 1,
+    "nextEventDate": "December 28, 2025",
+    "nextEventDateUtc": "Sun, 28 December 2025 00:00:00 GMT",
     "finished": false,
     "regularMissions": [
         "Defeat 5 waves of enemies in any wave-based game mode, Deal 1000 damage",
