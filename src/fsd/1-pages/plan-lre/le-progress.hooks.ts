@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDebounceCallback } from 'usehooks-ts';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -17,6 +17,10 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     const dispatch = useContext(DispatchContext);
 
     const [model, setModel] = useState(LreService.mapProgressDtoToModel(leProgress[legendaryEvent.id], legendaryEvent));
+
+    useEffect(() => {
+        setModel(LreService.mapProgressDtoToModel(leProgress[legendaryEvent.id], legendaryEvent));
+    }, [leProgress, legendaryEvent]);
 
     const updateDto = (newModel: ILreProgressModel): ILreProgressModel => {
         dispatch.leProgress({

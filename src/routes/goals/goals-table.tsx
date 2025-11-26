@@ -270,8 +270,18 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
 
                         const nextDate = new Date();
                         nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
+                        let ret = formatDateWithOrdinal(nextDate);
+                        if (goalEstimate.xpDaysLeft !== undefined) {
+                            ret +=
+                                '\n' +
+                                '(XP by ' +
+                                formatDateWithOrdinal(
+                                    new Date(new Date().getTime() + goalEstimate.xpDaysLeft * 86400000)
+                                ) +
+                                ')';
+                        }
 
-                        return formatDateWithOrdinal(nextDate);
+                        return ret;
                     }
                 },
             },
