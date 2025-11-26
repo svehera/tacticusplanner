@@ -64,7 +64,8 @@
                     ["upgHpM003", "upgArmL001", "upgHpL102"],
                     ["upgHpM003", "upgDmgL001", "upgHpL102"],
                     ["upgHpM001", "upgArmL001", "upgHpL102"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL102"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL102"],
+                    ["upgHpM003", "upgArmL001", "upgDmgL022C"]
                 ]
             },
             "secondaryAbility": {
@@ -124,7 +125,8 @@
                     ["upgHpM003", "upgArmL001", "upgHpL102"],
                     ["upgHpM003", "upgDmgL001", "upgHpL102"],
                     ["upgHpM001", "upgArmL001", "upgHpL102"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL102"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL102"],
+                    ["upgHpM003", "upgArmL001", "upgArmL022C"]
                 ]
             }
         },
@@ -192,7 +194,8 @@
                     ["upgHpM004", "upgArmL001", "upgHpL105"],
                     ["upgHpM004", "upgDmgL001", "upgHpL105"],
                     ["upgHpM001", "upgArmL001", "upgHpL105"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL105"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL105"],
+                    ["upgHpM004", "upgArmL001", "upgDmgL025C"]
                 ]
             },
             "secondaryAbility": {
@@ -252,7 +255,8 @@
                     ["upgHpM004", "upgArmL001", "upgHpL105"],
                     ["upgHpM004", "upgDmgL001", "upgHpL105"],
                     ["upgHpM001", "upgArmL001", "upgHpL105"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL105"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL105"],
+                    ["upgHpM004", "upgArmL001", "upgArmL025C"]
                 ]
             }
         },
@@ -320,7 +324,8 @@
                     ["upgHpM004", "upgArmL202", "upgHpL103"],
                     ["upgHpM004", "upgDmgL202", "upgHpL103"],
                     ["upgHpM002", "upgArmL202", "upgHpL103"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL103"]
+                    ["upgHpM002", "upgDmgL202", "upgHpL103"],
+                    ["upgHpM004", "upgArmL202", "upgDmgL023C"]
                 ]
             },
             "secondaryAbility": {
@@ -380,7 +385,8 @@
                     ["upgHpM004", "upgArmL202", "upgHpL103"],
                     ["upgHpM004", "upgDmgL202", "upgHpL103"],
                     ["upgHpM002", "upgArmL202", "upgHpL103"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL103"]
+                    ["upgHpM002", "upgDmgL202", "upgHpL103"],
+                    ["upgHpM004", "upgArmL202", "upgArmL023C"]
                 ]
             }
         },
@@ -448,7 +454,8 @@
                     ["upgHpM002", "upgArmL203", "upgHpL104"],
                     ["upgHpM002", "upgDmgL202", "upgHpL104"],
                     ["upgHpM004", "upgArmL203", "upgHpL104"],
-                    ["upgHpM004", "upgDmgL202", "upgHpL104"]
+                    ["upgHpM004", "upgDmgL202", "upgHpL104"],
+                    ["upgHpM002", "upgArmL203", "upgDmgL024C"]
                 ]
             },
             "secondaryAbility": {
@@ -508,7 +515,8 @@
                     ["upgHpM002", "upgArmL203", "upgHpL104"],
                     ["upgHpM002", "upgDmgL202", "upgHpL104"],
                     ["upgHpM004", "upgArmL203", "upgHpL104"],
-                    ["upgHpM004", "upgDmgL202", "upgHpL104"]
+                    ["upgHpM004", "upgDmgL202", "upgHpL104"],
+                    ["upgHpM002", "upgArmL203", "upgArmL007C"]
                 ]
             }
         },
@@ -525,20 +533,20 @@
                     ["upgHpC015", "upgDmgC001", "upgArmC004"],
                     ["upgHpC001", "upgDmgC009", "upgArmC012"],
                     ["upgHpC008", "upgHpC015", "upgHpC001"],
-                    ["upgDmgC014", "upgDmgC001", "upgArmC012"],
-                    ["upgArmC012", "upgArmC004", "upgDmgC009"],
+                    ["upgDmgC014", "upgDmgC001", "upgDmgC009"],
+                    ["upgArmC012", "upgArmC004", "upgArmC012"],
                     ["upgHpC015", "upgHpC001", "upgHpC008"],
-                    ["upgDmgC001", "upgArmC012", "upgDmgC014"],
-                    ["upgArmC004", "upgDmgC009", "upgArmC012"],
+                    ["upgDmgC001", "upgDmgC009", "upgDmgC014"],
+                    ["upgArmC004", "upgArmC012", "upgArmC012"],
                     ["upgHpC001", "upgHpC008", "upgArmU006"],
-                    ["upgDmgC009", "upgArmC012", "upgDmgU019"],
-                    ["upgArmC012", "upgDmgC014", "upgArmU008"],
+                    ["upgDmgC009", "upgDmgC014", "upgDmgU019"],
+                    ["upgArmC012", "upgArmC012", "upgArmU008"],
                     ["upgHpC008", "upgHpU001", "upgHpU018C"],
                     ["upgDmgC014", "upgDmgU012", "upgDmgU001C"],
                     ["upgArmC012", "upgArmU008", "upgArmU003C"],
                     ["upgHpU001", "upgArmU006", "upgHpU018C"],
-                    ["upgDmgU012", "upgArmU002", "upgDmgU016C"],
-                    ["upgArmU002", "upgDmgU019", "upgArmU003C"],
+                    ["upgDmgU012", "upgDmgU019", "upgDmgU016C"],
+                    ["upgArmU002", "upgArmU002", "upgArmU003C"],
                     ["upgArmU006", "upgHpU001", "upgHpR010"],
                     ["upgDmgU019", "upgDmgU012", "upgDmgR026"],
                     ["upgArmU002", "upgArmU008", "upgArmR026"],
@@ -576,7 +584,8 @@
                     ["upgHpM004", "upgArmL203", "upgHpL106"],
                     ["upgHpM004", "upgDmgL003", "upgHpL106"],
                     ["upgHpM004", "upgArmL203", "upgHpL106"],
-                    ["upgHpM004", "upgDmgL003", "upgHpL106"]
+                    ["upgHpM004", "upgDmgL003", "upgHpL106"],
+                    ["upgHpM004", "upgArmL203", "upgDmgL026C"]
                 ]
             },
             "secondaryAbility": {
@@ -585,20 +594,20 @@
                     ["upgHpC015", "upgDmgC001", "upgArmC004"],
                     ["upgHpC001", "upgDmgC009", "upgArmC012"],
                     ["upgHpC008", "upgHpC015", "upgHpC001"],
-                    ["upgDmgC014", "upgDmgC001", "upgArmC012"],
-                    ["upgArmC012", "upgArmC004", "upgDmgC009"],
+                    ["upgDmgC014", "upgDmgC001", "upgDmgC009"],
+                    ["upgArmC012", "upgArmC004", "upgArmC012"],
                     ["upgHpC015", "upgHpC001", "upgHpC008"],
-                    ["upgDmgC001", "upgArmC012", "upgDmgC014"],
-                    ["upgArmC004", "upgDmgC009", "upgArmC012"],
+                    ["upgDmgC001", "upgDmgC009", "upgDmgC014"],
+                    ["upgArmC004", "upgArmC012", "upgArmC012"],
                     ["upgHpC001", "upgHpC008", "upgArmU006"],
-                    ["upgDmgC009", "upgArmC012", "upgDmgU019"],
-                    ["upgArmC012", "upgDmgC014", "upgArmU008"],
+                    ["upgDmgC009", "upgDmgC014", "upgDmgU019"],
+                    ["upgArmC012", "upgArmC012", "upgArmU008"],
                     ["upgHpC008", "upgHpU001", "upgHpU018C"],
                     ["upgDmgC014", "upgDmgU012", "upgDmgU001C"],
                     ["upgArmC012", "upgArmU008", "upgArmU003C"],
                     ["upgHpU001", "upgArmU006", "upgHpU018C"],
-                    ["upgDmgU012", "upgArmU002", "upgDmgU016C"],
-                    ["upgArmU002", "upgDmgU019", "upgArmU003C"],
+                    ["upgDmgU012", "upgDmgU019", "upgDmgU016C"],
+                    ["upgArmU002", "upgArmU002", "upgArmU003C"],
                     ["upgArmU006", "upgHpU001", "upgHpR010"],
                     ["upgDmgU019", "upgDmgU012", "upgDmgR026"],
                     ["upgArmU002", "upgArmU008", "upgArmR026"],
@@ -636,7 +645,8 @@
                     ["upgHpM004", "upgArmL203", "upgHpL106"],
                     ["upgHpM004", "upgDmgL003", "upgHpL106"],
                     ["upgHpM004", "upgArmL203", "upgHpL106"],
-                    ["upgHpM004", "upgDmgL003", "upgHpL106"]
+                    ["upgHpM004", "upgDmgL003", "upgHpL106"],
+                    ["upgHpM004", "upgArmL203", "upgArmL026C"]
                 ]
             }
         },
@@ -704,7 +714,8 @@
                     ["upgHpM003", "upgArmL203", "upgHpL107"],
                     ["upgHpM003", "upgDmgL003", "upgHpL107"],
                     ["upgHpM004", "upgArmL203", "upgHpL107"],
-                    ["upgHpM004", "upgDmgL003", "upgHpL107"]
+                    ["upgHpM004", "upgDmgL003", "upgHpL107"],
+                    ["upgHpM003", "upgArmL203", "upgDmgL027C"]
                 ]
             },
             "secondaryAbility": {
@@ -764,135 +775,8 @@
                     ["upgHpM003", "upgArmL203", "upgHpL107"],
                     ["upgHpM003", "upgDmgL003", "upgHpL107"],
                     ["upgHpM004", "upgArmL203", "upgHpL107"],
-                    ["upgHpM004", "upgDmgL003", "upgHpL107"]
-                ]
-            }
-        },
-        {
-            "snowprintId": "thousDaemonPrince",
-            "name": "Z'Kar",
-            "factionId": "ThousandSons",
-            "alliance": "Chaos",
-            "icon": "snowprint_assets/characters/ui_image_portrait_thous_daemonprince_01.png",
-            "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_thous_daemonprince_01.png",
-            "primaryAbility": {
-                "name": "AetherStride",
-                "recipes": [
-                    ["upgHpC009", "upgDmgC008", "upgArmC003"],
-                    ["upgHpC016", "upgDmgC004", "upgArmC013"],
-                    ["upgHpC010", "upgHpC009", "upgHpC016"],
-                    ["upgDmgC014", "upgDmgC008", "upgDmgC004"],
-                    ["upgArmC013", "upgArmC003", "upgArmC007"],
-                    ["upgHpC009", "upgHpC016", "upgHpC010"],
-                    ["upgDmgC008", "upgDmgC004", "upgDmgC014"],
-                    ["upgArmC003", "upgArmC007", "upgArmC013"],
-                    ["upgHpC016", "upgHpC010", "upgHpU009"],
-                    ["upgDmgC004", "upgDmgC014", "upgDmgU019"],
-                    ["upgArmC007", "upgArmC013", "upgArmU005"],
-                    ["upgHpC010", "upgHpU016", "upgHpU010C"],
-                    ["upgDmgC014", "upgDmgU003", "upgDmgU008C"],
-                    ["upgArmC013", "upgArmU005", "upgArmU010C"],
-                    ["upgHpU016", "upgHpU009", "upgHpU010C"],
-                    ["upgDmgU003", "upgDmgU019", "upgDmgU016C"],
-                    ["upgArmU007", "upgArmU009", "upgArmU010C"],
-                    ["upgHpU009", "upgHpU016", "upgHpR029"],
-                    ["upgDmgU019", "upgDmgU003", "upgDmgR029"],
-                    ["upgArmU009", "upgArmU005", "upgArmR029"],
-                    ["upgHpU016", "upgHpR029", "upgHpR009C"],
-                    ["upgDmgU003", "upgDmgR029", "upgDmgR14C"],
-                    ["upgArmU007", "upgArmR029", "upgArmR012C"],
-                    ["upgHpR029", "upgHpR008", "upgHpR016C"],
-                    ["upgDmgR029", "upgDmgR003", "upgDmgR012C"],
-                    ["upgArmR029", "upgArmR015", "upgArmR003C"],
-                    ["upgHpR008", "upgDmgR003", "upgHpE017"],
-                    ["upgDmgR003", "upgArmR015", "upgDmgE010"],
-                    ["upgArmR005", "upgHpR008", "upgArmE010"],
-                    ["upgHpR008", "upgDmgE010", "upgHpE029C"],
-                    ["upgDmgR003", "upgArmE013", "upgDmgE029C"],
-                    ["upgArmR005", "upgHpE017", "upgArmE029C"],
-                    ["upgHpE017", "upgDmgE011", "upgHpE013C"],
-                    ["upgDmgE010", "upgArmE013", "upgDmgE002C"],
-                    ["upgArmE010", "upgHpE012", "upgArmE004C"],
-                    ["upgHpE017", "upgDmgE011", "upgHpL109"],
-                    ["upgDmgE010", "upgArmE013", "upgDmgL202"],
-                    ["upgArmE010", "upgHpE012", "upgArmL202"],
-                    ["upgHpE012", "upgHpL109", "upgHpL029C"],
-                    ["upgDmgE011", "upgHpL109", "upgDmgL029C"],
-                    ["upgArmE010", "upgHpL109", "upgArmL029C"],
-                    ["upgHpE012", "upgHpL109", "upgHpL012C"],
-                    ["upgDmgE011", "upgHpL109", "upgDmgL016C"],
-                    ["upgArmE013", "upgHpL109", "upgArmL006C"],
-                    ["upgHpL109", "upgDmgL202", "upgHpL129C"],
-                    ["upgDmgL202", "upgArmL202", "upgDmgL129C"],
-                    ["upgArmL202", "upgDmgL202", "upgArmL129C"],
-                    ["upgHpL109", "upgArmL202", "upgHpL011C"],
-                    ["upgDmgL202", "upgHpL109", "upgDmgL002C"],
-                    ["upgArmL202", "upgHpL109", "upgArmL006C"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL109"],
-                    ["upgHpM003", "upgArmL202", "upgHpL109"],
-                    ["upgHpM003", "upgDmgL202", "upgHpL109"],
-                    ["upgHpM002", "upgArmL202", "upgHpL109"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL109"]
-                ]
-            },
-            "secondaryAbility": {
-                "name": "InfernalCannon",
-                "recipes": [
-                    ["upgHpC009", "upgDmgC008", "upgArmC003"],
-                    ["upgHpC016", "upgDmgC004", "upgArmC013"],
-                    ["upgHpC010", "upgHpC009", "upgHpC016"],
-                    ["upgDmgC014", "upgDmgC008", "upgDmgC004"],
-                    ["upgArmC013", "upgArmC003", "upgArmC007"],
-                    ["upgHpC009", "upgHpC016", "upgHpC010"],
-                    ["upgDmgC008", "upgDmgC004", "upgDmgC014"],
-                    ["upgArmC003", "upgArmC007", "upgArmC013"],
-                    ["upgHpC016", "upgHpC010", "upgHpU009"],
-                    ["upgDmgC004", "upgDmgC014", "upgDmgU019"],
-                    ["upgArmC007", "upgArmC013", "upgArmU005"],
-                    ["upgHpC010", "upgHpU016", "upgHpU010C"],
-                    ["upgDmgC014", "upgDmgU003", "upgDmgU008C"],
-                    ["upgArmC013", "upgArmU005", "upgArmU010C"],
-                    ["upgHpU016", "upgHpU009", "upgHpU010C"],
-                    ["upgDmgU003", "upgDmgU019", "upgDmgU016C"],
-                    ["upgArmU007", "upgArmU009", "upgArmU010C"],
-                    ["upgHpU009", "upgHpU016", "upgHpR029"],
-                    ["upgDmgU019", "upgDmgU003", "upgDmgR029"],
-                    ["upgArmU009", "upgArmU005", "upgArmR029"],
-                    ["upgHpU016", "upgHpR029", "upgHpR009C"],
-                    ["upgDmgU003", "upgDmgR029", "upgDmgR14C"],
-                    ["upgArmU007", "upgArmR029", "upgArmR012C"],
-                    ["upgHpR029", "upgHpR008", "upgHpR016C"],
-                    ["upgDmgR029", "upgDmgR003", "upgDmgR012C"],
-                    ["upgArmR029", "upgArmR015", "upgArmR003C"],
-                    ["upgHpR008", "upgDmgR003", "upgHpE017"],
-                    ["upgDmgR003", "upgArmR015", "upgDmgE010"],
-                    ["upgArmR005", "upgHpR008", "upgArmE010"],
-                    ["upgHpR008", "upgDmgE010", "upgHpE029C"],
-                    ["upgDmgR003", "upgArmE013", "upgDmgE029C"],
-                    ["upgArmR005", "upgHpE017", "upgArmE029C"],
-                    ["upgHpE017", "upgDmgE011", "upgHpE013C"],
-                    ["upgDmgE010", "upgArmE013", "upgDmgE002C"],
-                    ["upgArmE010", "upgHpE012", "upgArmE004C"],
-                    ["upgHpE017", "upgDmgE011", "upgHpL109"],
-                    ["upgDmgE010", "upgArmE013", "upgDmgL202"],
-                    ["upgArmE010", "upgHpE012", "upgArmL202"],
-                    ["upgHpE012", "upgHpL109", "upgHpL029C"],
-                    ["upgDmgE011", "upgHpL109", "upgDmgL029C"],
-                    ["upgArmE010", "upgHpL109", "upgArmL029C"],
-                    ["upgHpE012", "upgHpL109", "upgHpL012C"],
-                    ["upgDmgE011", "upgHpL109", "upgDmgL016C"],
-                    ["upgArmE013", "upgHpL109", "upgArmL006C"],
-                    ["upgHpL109", "upgDmgL202", "upgHpL129C"],
-                    ["upgDmgL202", "upgArmL202", "upgDmgL129C"],
-                    ["upgArmL202", "upgDmgL202", "upgArmL129C"],
-                    ["upgHpL109", "upgArmL202", "upgHpL212C"],
-                    ["upgDmgL202", "upgHpL109", "upgDmgL212C"],
-                    ["upgArmL202", "upgHpL109", "upgArmL212C"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL109"],
-                    ["upgHpM003", "upgArmL202", "upgHpL109"],
-                    ["upgHpM003", "upgDmgL202", "upgHpL109"],
-                    ["upgHpM002", "upgArmL202", "upgHpL109"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL109"]
+                    ["upgHpM004", "upgDmgL003", "upgHpL107"],
+                    ["upgHpM003", "upgArmL203", "upgArmL027C"]
                 ]
             }
         },
@@ -960,7 +844,8 @@
                     ["upgHpM004", "upgArmL202", "upgHpL113"],
                     ["upgHpM004", "upgDmgL202", "upgHpL113"],
                     ["upgHpM002", "upgArmL202", "upgHpL113"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL113"]
+                    ["upgHpM002", "upgDmgL202", "upgHpL113"],
+                    ["upgHpM004", "upgArmL202", "upgDmgL033C"]
                 ]
             },
             "secondaryAbility": {
@@ -1020,7 +905,8 @@
                     ["upgHpM004", "upgArmL202", "upgHpL113"],
                     ["upgHpM004", "upgDmgL202", "upgHpL113"],
                     ["upgHpM002", "upgArmL202", "upgHpL113"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL113"]
+                    ["upgHpM002", "upgDmgL202", "upgHpL113"],
+                    ["upgHpM004", "upgArmL202", "upgArmL033C"]
                 ]
             }
         },
@@ -1088,7 +974,8 @@
                     ["upgHpM004", "upgArmL001", "upgHpL100"],
                     ["upgHpM004", "upgDmgL001", "upgHpL100"],
                     ["upgHpM001", "upgArmL001", "upgHpL100"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL100"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
+                    ["upgHpM004", "upgArmL001", "upgDmgL004C"]
                 ]
             },
             "secondaryAbility": {
@@ -1148,7 +1035,8 @@
                     ["upgHpM004", "upgArmL001", "upgHpL100"],
                     ["upgHpM004", "upgDmgL001", "upgHpL100"],
                     ["upgHpM001", "upgArmL001", "upgHpL100"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL100"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
+                    ["upgHpM004", "upgArmL001", "upgDmgL012C"]
                 ]
             }
         }
