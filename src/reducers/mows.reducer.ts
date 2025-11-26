@@ -34,11 +34,17 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
         }
         case 'Update': {
             const { mow } = action;
-            const existingMowIndex = state.findIndex(x => x.id === mow.id);
-            const existingMow = state[existingMowIndex];
+            const existingMowIndex = state.findIndex(
+                x =>
+                    x.id === mow.id ||
+                    ('tacticusId' in x && x.tacticusId === mow.id) ||
+                    ('snowprintId' in x && x.snowprintId !== undefined && x.snowprintId === mow.id)
+            );
+            let existingMow = state[existingMowIndex];
 
             if (!existingMow) {
-                return state;
+                state.push({ ...MowsService.resolveToStatic(mow.id), ...mow } as IMow | IMow2);
+                existingMow = state[state.length - 1];
             }
             const rarityStars = rarityToStars[mow.rarity];
 
