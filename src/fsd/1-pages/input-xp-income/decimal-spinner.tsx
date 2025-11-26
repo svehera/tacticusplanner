@@ -8,10 +8,14 @@ interface DecimalSpinnerProps {
 
 /** Decimal spinner component for numeric input with two points of decimal precision. */
 export const DecimalSpinner: React.FC<DecimalSpinnerProps> = ({ value, onChange, label }) => {
+    const [stringValue, setStringValue] = React.useState(value.toFixed(2));
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const numericValue = parseFloat(e.target.value);
         if (!isNaN(numericValue)) {
             onChange(numericValue);
+            setStringValue(e.target.value);
+        } else if (e.target.value === '') {
+            setStringValue('');
         }
     };
 
@@ -20,7 +24,7 @@ export const DecimalSpinner: React.FC<DecimalSpinnerProps> = ({ value, onChange,
             <label className="font-bold">{label}:</label>
             <input
                 type="number"
-                value={value.toFixed(2)}
+                value={stringValue}
                 onChange={handleChange}
                 min="0"
                 step="0.01"
