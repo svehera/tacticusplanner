@@ -7,7 +7,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Sisterhood", "AstraMilitarum", "AdeptusMechanicus", "Custodes"],
+        "allowedFactions": [
+            "Sisterhood",
+            "AstraMilitarum",
+            "AdeptusMechanicus",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -105,7 +110,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "BlackTemplars", "SpaceWolves", "DarkAngels", "BloodAngels"],
+        "allowedFactions": [
+            "Ultramarines",
+            "BlackTemplars",
+            "SpaceWolves",
+            "DarkAngels",
+            "BloodAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -183,7 +194,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -261,7 +278,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -300,7 +320,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Sisterhood", "AstraMilitarum", "AdeptusMechanicus", "Custodes"],
+        "allowedFactions": [
+            "Sisterhood",
+            "AstraMilitarum",
+            "AdeptusMechanicus",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -506,7 +531,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "BlackTemplars", "SpaceWolves", "DarkAngels", "BloodAngels"],
+        "allowedFactions": [
+            "Ultramarines",
+            "BlackTemplars",
+            "SpaceWolves",
+            "DarkAngels",
+            "BloodAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -692,7 +723,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -878,7 +915,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -971,7 +1011,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Sisterhood", "AstraMilitarum", "AdeptusMechanicus", "Custodes"],
+        "allowedFactions": [
+            "Sisterhood",
+            "AstraMilitarum",
+            "AdeptusMechanicus",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -1213,7 +1258,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "BlackTemplars", "SpaceWolves", "DarkAngels", "BloodAngels"],
+        "allowedFactions": [
+            "Ultramarines",
+            "BlackTemplars",
+            "SpaceWolves",
+            "DarkAngels",
+            "BloodAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -1435,7 +1486,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -1657,7 +1714,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -1890,7 +1950,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Sisterhood", "AstraMilitarum", "AdeptusMechanicus", "Custodes"],
+        "allowedFactions": [
+            "Sisterhood",
+            "AstraMilitarum",
+            "AdeptusMechanicus",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2060,7 +2125,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "BlackTemplars", "SpaceWolves", "DarkAngels", "BloodAngels"],
+        "allowedFactions": [
+            "Ultramarines",
+            "BlackTemplars",
+            "SpaceWolves",
+            "DarkAngels",
+            "BloodAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2135,7 +2206,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["AstraMilitarum"],
+        "allowedFactions": [
+            "AstraMilitarum"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2210,7 +2283,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2360,7 +2439,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2435,7 +2517,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Sisterhood", "AstraMilitarum", "AdeptusMechanicus", "Custodes"],
+        "allowedFactions": [
+            "Sisterhood",
+            "AstraMilitarum",
+            "AdeptusMechanicus",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2569,7 +2656,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "BlackTemplars", "SpaceWolves", "DarkAngels", "BloodAngels"],
+        "allowedFactions": [
+            "Ultramarines",
+            "BlackTemplars",
+            "SpaceWolves",
+            "DarkAngels",
+            "BloodAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2683,7 +2776,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2797,7 +2896,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -3875,7 +3977,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -3914,7 +4018,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -3953,7 +4063,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -3992,7 +4104,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -4031,7 +4146,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -4173,7 +4291,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -4266,7 +4386,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -4359,7 +4485,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -4452,7 +4580,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -4545,7 +4676,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -4759,7 +4893,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -4870,7 +5006,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -4981,7 +5123,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -5092,7 +5236,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -5203,7 +5350,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -5426,7 +5576,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -5528,7 +5680,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -5630,7 +5788,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -5732,7 +5892,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -5834,7 +5997,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6021,7 +6187,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6096,7 +6264,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6171,7 +6345,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6246,7 +6422,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6321,7 +6500,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6463,7 +6645,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6520,7 +6704,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6577,7 +6767,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6634,7 +6826,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": [
+            "Aeldari",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6691,7 +6886,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6851,7 +7049,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6890,7 +7090,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6929,7 +7131,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6968,7 +7176,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7007,7 +7217,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari"],
+        "allowedFactions": [
+            "Aeldari"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7046,7 +7258,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tau"],
+        "allowedFactions": [
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7085,7 +7299,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["AstraMilitarum", "Aeldari", "Tau", "ThousandSons", "Custodes"],
+        "allowedFactions": [
+            "AstraMilitarum",
+            "Aeldari",
+            "Tau",
+            "ThousandSons",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7124,7 +7344,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7374,7 +7597,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7467,7 +7692,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7560,7 +7787,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7653,7 +7886,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7746,7 +7981,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari"],
+        "allowedFactions": [
+            "Aeldari"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7839,7 +8076,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tau"],
+        "allowedFactions": [
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -7932,7 +8171,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["AstraMilitarum", "Aeldari", "Tau", "ThousandSons", "Custodes"],
+        "allowedFactions": [
+            "AstraMilitarum",
+            "Aeldari",
+            "Tau",
+            "ThousandSons",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -8025,7 +8270,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -8365,7 +8613,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -8476,7 +8726,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -8587,7 +8839,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -8698,7 +8956,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -8809,7 +9069,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari"],
+        "allowedFactions": [
+            "Aeldari"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -8920,7 +9182,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tau"],
+        "allowedFactions": [
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -9031,7 +9295,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["AstraMilitarum", "Aeldari", "Tau", "ThousandSons", "Custodes"],
+        "allowedFactions": [
+            "AstraMilitarum",
+            "Aeldari",
+            "Tau",
+            "ThousandSons",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -9142,7 +9412,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -9253,7 +9526,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["DarkAngels"],
+        "allowedFactions": [
+            "DarkAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -9475,7 +9750,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -9577,7 +9854,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -9679,7 +9962,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -9781,7 +10066,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari"],
+        "allowedFactions": [
+            "Aeldari"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -9883,7 +10170,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tau"],
+        "allowedFactions": [
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -9985,7 +10274,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["AstraMilitarum", "Aeldari", "Tau", "ThousandSons", "Custodes"],
+        "allowedFactions": [
+            "AstraMilitarum",
+            "Aeldari",
+            "Tau",
+            "ThousandSons",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10087,7 +10382,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10364,7 +10662,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10439,7 +10739,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10514,7 +10816,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10589,7 +10897,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10664,7 +10974,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari"],
+        "allowedFactions": [
+            "Aeldari"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10739,7 +11051,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tau"],
+        "allowedFactions": [
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10814,7 +11128,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["AstraMilitarum", "Aeldari", "Tau", "ThousandSons", "Custodes"],
+        "allowedFactions": [
+            "AstraMilitarum",
+            "Aeldari",
+            "Tau",
+            "ThousandSons",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10889,7 +11209,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11103,7 +11426,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11160,7 +11485,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "Sisterhood", "AstraMilitarum", "BlackTemplars"],
+        "allowedFactions": [
+            "Ultramarines",
+            "Sisterhood",
+            "AstraMilitarum",
+            "BlackTemplars"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11217,7 +11547,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons"],
+        "allowedFactions": [
+            "Necrons"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11274,7 +11606,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11331,7 +11669,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Orks"],
+        "allowedFactions": [
+            "Orks"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11388,7 +11728,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari"],
+        "allowedFactions": [
+            "Aeldari"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11445,7 +11787,9 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tau"],
+        "allowedFactions": [
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11502,7 +11846,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["AstraMilitarum", "Aeldari", "Tau", "ThousandSons", "Custodes"],
+        "allowedFactions": [
+            "AstraMilitarum",
+            "Aeldari",
+            "Tau",
+            "ThousandSons",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11559,7 +11909,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11655,7 +12008,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "BlackTemplars", "SpaceWolves", "DarkAngels", "BloodAngels"],
+        "allowedFactions": [
+            "Ultramarines",
+            "BlackTemplars",
+            "SpaceWolves",
+            "DarkAngels",
+            "BloodAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11750,7 +12109,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Sisterhood", "AstraMilitarum", "AdeptusMechanicus", "Custodes"],
+        "allowedFactions": [
+            "Sisterhood",
+            "AstraMilitarum",
+            "AdeptusMechanicus",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11789,7 +12153,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons", "Tau"],
+        "allowedFactions": [
+            "Necrons",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11828,7 +12195,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11867,7 +12237,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "Orks", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11999,7 +12376,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "BlackTemplars", "SpaceWolves", "DarkAngels", "BloodAngels"],
+        "allowedFactions": [
+            "Ultramarines",
+            "BlackTemplars",
+            "SpaceWolves",
+            "DarkAngels",
+            "BloodAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -12196,7 +12579,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Sisterhood", "AstraMilitarum", "AdeptusMechanicus", "Custodes"],
+        "allowedFactions": [
+            "Sisterhood",
+            "AstraMilitarum",
+            "AdeptusMechanicus",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -12289,7 +12677,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons", "Tau"],
+        "allowedFactions": [
+            "Necrons",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -12382,7 +12773,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -12475,7 +12869,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "Orks", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -12679,7 +13080,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "BlackTemplars", "SpaceWolves", "DarkAngels", "BloodAngels"],
+        "allowedFactions": [
+            "Ultramarines",
+            "BlackTemplars",
+            "SpaceWolves",
+            "DarkAngels",
+            "BloodAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -12910,7 +13317,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Sisterhood", "AstraMilitarum", "AdeptusMechanicus", "Custodes"],
+        "allowedFactions": [
+            "Sisterhood",
+            "AstraMilitarum",
+            "AdeptusMechanicus",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -13021,7 +13433,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons", "Tau"],
+        "allowedFactions": [
+            "Necrons",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -13132,7 +13547,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -13243,7 +13661,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "Orks", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -13466,7 +13891,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons", "Tau"],
+        "allowedFactions": [
+            "Necrons",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -13568,7 +13996,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -13745,7 +14176,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "BlackTemplars", "SpaceWolves", "DarkAngels", "BloodAngels"],
+        "allowedFactions": [
+            "Ultramarines",
+            "BlackTemplars",
+            "SpaceWolves",
+            "DarkAngels",
+            "BloodAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -13908,7 +14345,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Sisterhood", "AstraMilitarum", "AdeptusMechanicus", "Custodes"],
+        "allowedFactions": [
+            "Sisterhood",
+            "AstraMilitarum",
+            "AdeptusMechanicus",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -13983,7 +14425,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons", "Tau"],
+        "allowedFactions": [
+            "Necrons",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -14058,7 +14503,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -14133,7 +14581,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "Orks", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -14265,7 +14720,13 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Ultramarines", "BlackTemplars", "SpaceWolves", "DarkAngels", "BloodAngels"],
+        "allowedFactions": [
+            "Ultramarines",
+            "BlackTemplars",
+            "SpaceWolves",
+            "DarkAngels",
+            "BloodAngels"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -14394,7 +14855,12 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Sisterhood", "AstraMilitarum", "AdeptusMechanicus", "Custodes"],
+        "allowedFactions": [
+            "Sisterhood",
+            "AstraMilitarum",
+            "AdeptusMechanicus",
+            "Custodes"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -14451,7 +14917,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Necrons", "Tau"],
+        "allowedFactions": [
+            "Necrons",
+            "Tau"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -14508,7 +14977,10 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Tyranids", "Genestealers"],
+        "allowedFactions": [
+            "Tyranids",
+            "Genestealers"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -14565,7 +15037,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "Orks", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -14621,7 +15100,12 @@
         "abilityId": "DaemonfleshPlate",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["blackTerminator", "deathBlightlord", "thousTerminator", "worldTerminator"],
+        "allowedUnits": [
+            "blackTerminator",
+            "deathBlightlord",
+            "thousTerminator",
+            "worldTerminator"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -14723,7 +15207,9 @@
         "abilityId": "NornCrown",
         "isRelic": true,
         "isUniqueRelic": true,
-        "allowedUnits": ["tyranNeurothrope"],
+        "allowedUnits": [
+            "tyranNeurothrope"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -14825,7 +15311,9 @@
         "abilityId": "PhoenixGem",
         "isRelic": true,
         "isUniqueRelic": true,
-        "allowedUnits": ["eldarAutarch"],
+        "allowedUnits": [
+            "eldarAutarch"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -14927,7 +15415,11 @@
         "abilityId": "AmuletOfTheVoidwyrm",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["genesBiophagus", "genesPrimus", "genesKelermorph"],
+        "allowedUnits": [
+            "genesBiophagus",
+            "genesPrimus",
+            "genesKelermorph"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -15029,7 +15521,11 @@
         "abilityId": "BookOfFate",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["blackPossession", "thousInfernalMaster", "thousSorcerer"],
+        "allowedUnits": [
+            "blackPossession",
+            "thousInfernalMaster",
+            "thousSorcerer"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -15131,7 +15627,10 @@
         "abilityId": "IntoxicatingElixir",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["emperNoiseMarine", "emperKakophonist", "emperFlawlessBlade", "emperExultant"],
+        "allowedUnits": [
+            "emperNoiseMarine",
+            "emperKakophonist"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -15233,7 +15732,11 @@
         "abilityId": "KardiocoreGalvanus",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["admecDestroyer", "admecRuststalker", "admecMarshall"],
+        "allowedUnits": [
+            "admecDestroyer",
+            "admecRuststalker",
+            "admecMarshall"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -15335,7 +15838,11 @@
         "abilityId": "NetherRealmCasket",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["necroWarden", "necroSpyder", "necroDestroyer"],
+        "allowedUnits": [
+            "necroWarden",
+            "necroSpyder",
+            "necroDestroyer"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -15437,7 +15944,11 @@
         "abilityId": "OrbsOfDecay",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["deathRotbone", "deathPutrifier", "deathBlightbringer"],
+        "allowedUnits": [
+            "deathRotbone",
+            "deathPutrifier",
+            "deathBlightbringer"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -15539,7 +16050,11 @@
         "abilityId": "TalismanOfRage",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["worldJakhal", "worldEightbound", "worldExecutions"],
+        "allowedUnits": [
+            "worldJakhal",
+            "worldEightbound",
+            "worldExecutions"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -15634,108 +16149,6 @@
             }
         ]
     },
-    "R_Crit_DawnBlade": {
-        "name": "Dawn Blade",
-        "rarity": "Mythic",
-        "type": "I_Crit",
-        "abilityId": "DawnBlade",
-        "isRelic": true,
-        "isUniqueRelic": true,
-        "allowedUnits": ["tauFarsight"],
-        "allowedFactions": [],
-        "levels": [
-            {
-                "goldCost": 0,
-                "salvageCost": 0,
-                "mythicSalvageCost": 100,
-                "stats": {
-                    "critChance": 25,
-                    "critDamage": 1470
-                }
-            },
-            {
-                "goldCost": 50000,
-                "salvageCost": 0,
-                "mythicSalvageCost": 50,
-                "stats": {
-                    "critChance": 25,
-                    "critDamage": 1550
-                }
-            },
-            {
-                "goldCost": 60000,
-                "salvageCost": 0,
-                "mythicSalvageCost": 75,
-                "stats": {
-                    "critChance": 25,
-                    "critDamage": 1629
-                }
-            },
-            {
-                "goldCost": 70000,
-                "salvageCost": 0,
-                "mythicSalvageCost": 100,
-                "stats": {
-                    "critChance": 25,
-                    "critDamage": 1709
-                }
-            },
-            {
-                "goldCost": 85000,
-                "salvageCost": 0,
-                "mythicSalvageCost": 125,
-                "stats": {
-                    "critChance": 25,
-                    "critDamage": 1788
-                }
-            },
-            {
-                "goldCost": 100000,
-                "salvageCost": 0,
-                "mythicSalvageCost": 150,
-                "stats": {
-                    "critChance": 25,
-                    "critDamage": 1867
-                }
-            },
-            {
-                "goldCost": 125000,
-                "salvageCost": 0,
-                "mythicSalvageCost": 200,
-                "stats": {
-                    "critChance": 25,
-                    "critDamage": 1947
-                }
-            },
-            {
-                "goldCost": 150000,
-                "salvageCost": 0,
-                "mythicSalvageCost": 300,
-                "stats": {
-                    "critChance": 25,
-                    "critDamage": 2026
-                }
-            },
-            {
-                "goldCost": 175000,
-                "salvageCost": 0,
-                "mythicSalvageCost": 500,
-                "stats": {
-                    "critChance": 25,
-                    "critDamage": 2105
-                }
-            },
-            {
-                "goldCost": 200000,
-                "salvageCost": 0,
-                "mythicSalvageCost": 1000,
-                "stats": {
-                    "critChance": 25,
-                    "critDamage": 2185
-                }
-            }
-        ]
-    },
     "R_Crit_Dw02AdvancedBurstCannon": {
         "name": "DW-02 Advanced Burst Cannon",
         "rarity": "Mythic",
@@ -15743,7 +16156,9 @@
         "abilityId": "Dw02AdvancedBurstCannon",
         "isRelic": true,
         "isUniqueRelic": true,
-        "allowedUnits": ["tauCrisis"],
+        "allowedUnits": [
+            "tauCrisis"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -15845,7 +16260,9 @@
         "abilityId": "Maugetar",
         "isRelic": true,
         "isUniqueRelic": true,
-        "allowedUnits": ["eldarMauganRa"],
+        "allowedUnits": [
+            "eldarMauganRa"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -15947,7 +16364,12 @@
         "abilityId": "MawClawsOfThyrax",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["tyranTyrantGuard", "tyranWingedPrime", "tyranParasite", "genesPatriarch"],
+        "allowedUnits": [
+            "tyranTyrantGuard",
+            "tyranWingedPrime",
+            "tyranParasite",
+            "genesPatriarch"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -16049,7 +16471,9 @@
         "abilityId": "ParagonSpear",
         "isRelic": true,
         "isUniqueRelic": true,
-        "allowedUnits": ["custoKyrus"],
+        "allowedUnits": [
+            "custoKyrus"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -16151,7 +16575,13 @@
         "abilityId": "RelicBoltPistol",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["ultraInceptorSgt", "ultraTitus", "templSwordBrother", "darkaHellblaster", "spaceHound"],
+        "allowedUnits": [
+            "ultraInceptorSgt",
+            "ultraTitus",
+            "templSwordBrother",
+            "darkaHellblaster",
+            "spaceHound"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -16253,7 +16683,11 @@
         "abilityId": "RelicPowerFist",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["templAggressor", "bloodIntercessor", "darkaTerminator"],
+        "allowedUnits": [
+            "templAggressor",
+            "bloodIntercessor",
+            "darkaTerminator"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -16355,7 +16789,9 @@
         "abilityId": "TalonOfHorus",
         "isRelic": true,
         "isUniqueRelic": true,
-        "allowedUnits": ["blackAbaddon"],
+        "allowedUnits": [
+            "blackAbaddon"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -16457,7 +16893,9 @@
         "abilityId": "TheArdentBlade",
         "isRelic": true,
         "isUniqueRelic": true,
-        "allowedUnits": ["adeptCelestine"],
+        "allowedUnits": [
+            "adeptCelestine"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -16559,7 +16997,9 @@
         "abilityId": "Vitarus",
         "isRelic": true,
         "isUniqueRelic": true,
-        "allowedUnits": ["bloodMephiston"],
+        "allowedUnits": [
+            "bloodMephiston"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -16661,7 +17101,11 @@
         "abilityId": "RelicOfLostCadia",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["astraPrimarisPsy", "astraBullgryn", "astraOrdnance"],
+        "allowedUnits": [
+            "astraPrimarisPsy",
+            "astraBullgryn",
+            "astraOrdnance"
+        ],
         "allowedFactions": [],
         "levels": [
             {
@@ -16763,7 +17207,11 @@
         "abilityId": "SupaCyborkBody",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["orksRuntherd", "orksBigMek", "orksNob"],
+        "allowedUnits": [
+            "orksRuntherd",
+            "orksBigMek",
+            "orksNob"
+        ],
         "allowedFactions": [],
         "levels": [
             {
