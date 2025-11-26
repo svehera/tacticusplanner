@@ -21,12 +21,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "ActOfFaith"
-        ],
-        "Active Ability": [
-            "Flame"
-        ],
+        "Traits": ["ActOfFaith"],
+        "Active Ability": ["Flame"],
         "Number": 9,
         "Icon": "snowprint_assets/characters/ui_image_portrait_adept_canoness_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_adept_canoness_01.png"
@@ -50,10 +46,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "ActOfFaith",
-            "Flying"
-        ],
+        "Traits": ["ActOfFaith", "Flying"],
         "Number": 10,
         "Icon": "snowprint_assets/characters/ui_image_portrait_adept_celestine_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_adept_celestine_01.png"
@@ -77,10 +70,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "ActOfFaith",
-            "Healer"
-        ],
+        "Traits": ["ActOfFaith", "Healer"],
         "Number": 7,
         "Icon": "snowprint_assets/characters/ui_image_portrait_adept_hospitaller_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_adept_hospitaller_01.png"
@@ -107,18 +97,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "ActOfFaith",
-            "BigTarget",
-            "Explodes",
-            "Mechanical"
-        ],
-        "Active Ability": [
-            "Blast"
-        ],
-        "Passive Ability": [
-            "Power"
-        ],
+        "Traits": ["ActOfFaith", "BigTarget", "Explodes", "Mechanical"],
+        "Active Ability": ["Blast"],
+        "Passive Ability": ["Power"],
         "Number": 8,
         "Icon": "snowprint_assets/characters/ui_image_portrait_adept_morvenn_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_adept_morvenn_01.png"
@@ -145,16 +126,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "ActOfFaith",
-            "HeavyWeapon"
-        ],
-        "Active Ability": [
-            "Flame"
-        ],
-        "Passive Ability": [
-            "Flame"
-        ],
+        "Traits": ["ActOfFaith", "HeavyWeapon"],
+        "Active Ability": ["Flame"],
+        "Passive Ability": ["Flame"],
         "Number": 6,
         "Icon": "snowprint_assets/characters/ui_image_portrait_adept_retributor_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_adept_retributor_01.png"
@@ -181,15 +155,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Mechanical",
-            "HeavyWeapon",
-            "Overwatch",
-            "Vehicle"
-        ],
-        "Active Ability": [
-            "Physical"
-        ],
+        "Traits": ["Mechanical", "HeavyWeapon", "Overwatch", "Vehicle"],
+        "Active Ability": ["Physical"],
         "Number": 79,
         "Icon": "snowprint_assets/characters/ui_image_portrait_admec_destroyer_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_admec_destroyer_01.png"
@@ -216,13 +183,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Mechanical",
-            "Mechanic"
-        ],
-        "Active Ability": [
-            "Toxic"
-        ],
+        "Traits": ["Mechanical", "Mechanic"],
+        "Active Ability": ["Toxic"],
         "Number": 75,
         "Icon": "snowprint_assets/characters/ui_image_portrait_admec_dominus_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_admec_dominus_01.png"
@@ -249,11 +211,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "Mechanical",
-            "Mechanic",
-            "Flying"
-        ],
+        "Traits": ["Mechanical", "Mechanic", "Flying"],
         "Number": 76,
         "Icon": "snowprint_assets/characters/ui_image_portrait_admec_manipulus_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_admec_manipulus_01.png"
@@ -280,9 +238,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Mechanical"
-        ],
+        "Traits": ["Mechanical"],
         "Number": 77,
         "Icon": "snowprint_assets/characters/ui_image_portrait_admec_marshall_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_admec_marshall_01.png"
@@ -306,18 +262,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Mechanical",
-            "Camouflage",
-            "Infiltrate",
-            "Unstoppable"
-        ],
-        "Active Ability": [
-            "DirectDamage"
-        ],
-        "Passive Ability": [
-            "Energy"
-        ],
+        "Traits": ["Mechanical", "Camouflage", "Infiltrate", "Unstoppable"],
+        "Active Ability": ["DirectDamage"],
+        "Passive Ability": ["Energy"],
         "Number": 78,
         "Icon": "snowprint_assets/characters/ui_image_portrait_admec_ruststalker_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_admec_ruststalker_01.png"
@@ -341,12 +288,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Defensive",
-        "Traits": [
-            "BigTarget"
-        ],
-        "Active Ability": [
-            "Blast"
-        ],
+        "Traits": ["BigTarget"],
+        "Active Ability": ["Blast"],
         "Number": 22,
         "Icon": "snowprint_assets/characters/ui_image_portrait_astra_bullgryn_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_astra_bullgryn_01.png"
@@ -394,13 +337,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "Resilient",
-            "Unstoppable"
-        ],
-        "Active Ability": [
-            "Power"
-        ],
+        "Traits": ["Resilient", "Unstoppable"],
+        "Active Ability": ["Power"],
         "Number": 113,
         "Icon": "snowprint_assets/characters/ui_image_portrait_astra_dreir_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_astra_dreir_01.png"
@@ -427,13 +365,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "SuppressiveFire",
-            "IndirectFire"
-        ],
-        "Active Ability": [
-            "Blast"
-        ],
+        "Traits": ["SuppressiveFire", "IndirectFire"],
+        "Active Ability": ["Blast"],
         "Number": 24,
         "Icon": "snowprint_assets/characters/ui_image_portrait_astra_ordnance_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_astra_ordnance_01.png"
@@ -460,12 +393,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Psyker"
-        ],
-        "Active Ability": [
-            "Psychic"
-        ],
+        "Traits": ["Psyker"],
+        "Active Ability": ["Psychic"],
         "Number": 23,
         "Icon": "snowprint_assets/characters/ui_image_portrait_astra_psyker_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_astra_psyker_01.png"
@@ -492,9 +421,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "Resilient"
-        ],
+        "Traits": ["Resilient"],
         "Number": 25,
         "Icon": "snowprint_assets/characters/ui_image_portrait_astra_yarrick_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_astra_yarrick_01.png"
@@ -521,14 +448,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "LetTheGalaxyBurn",
-            "Resilient",
-            "TerminatorArmour"
-        ],
-        "Active Ability": [
-            "Piercing"
-        ],
+        "Traits": ["LetTheGalaxyBurn", "Resilient", "TerminatorArmour"],
+        "Active Ability": ["Piercing"],
         "Number": 20,
         "Icon": "snowprint_assets/characters/ui_image_portrait_black_abaddon_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_black_abaddon_01.png"
@@ -552,14 +473,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "LetTheGalaxyBurn",
-            "Flying",
-            "Terrifying"
-        ],
-        "Active Ability": [
-            "Piercing"
-        ],
+        "Traits": ["LetTheGalaxyBurn", "Flying", "Terrifying"],
+        "Active Ability": ["Piercing"],
         "Number": 19,
         "Icon": "snowprint_assets/characters/ui_image_portrait_black_haarken_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_black_haarken_01.png"
@@ -586,15 +501,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "LetTheGalaxyBurn",
-            "BigTarget",
-            "Daemon",
-            "SuppressiveFire"
-        ],
-        "Active Ability": [
-            "HeavyRound"
-        ],
+        "Traits": ["LetTheGalaxyBurn", "BigTarget", "Daemon", "SuppressiveFire"],
+        "Active Ability": ["HeavyRound"],
         "Number": 17,
         "Icon": "snowprint_assets/characters/ui_image_portrait_black_obliterator_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_black_obliterator_01.png"
@@ -621,10 +529,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "LetTheGalaxyBurn",
-            "Psyker"
-        ],
+        "Traits": ["LetTheGalaxyBurn", "Psyker"],
         "Number": 18,
         "Icon": "snowprint_assets/characters/ui_image_portrait_black_possession_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_black_possession_01.png"
@@ -648,14 +553,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "LetTheGalaxyBurn",
-            "TeleportStrike",
-            "TerminatorArmour"
-        ],
-        "Active Ability": [
-            "Power"
-        ],
+        "Traits": ["LetTheGalaxyBurn", "TeleportStrike", "TerminatorArmour"],
+        "Active Ability": ["Power"],
         "Number": 16,
         "Icon": "snowprint_assets/characters/ui_image_portrait_black_terminator_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_black_terminator_01.png"
@@ -679,16 +578,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "TeleportStrike",
-            "FinalJustice",
-            "Flying",
-            "RapidAssault",
-            "Terrifying"
-        ],
-        "Active Ability": [
-            "Melta"
-        ],
+        "Traits": ["TeleportStrike", "FinalJustice", "Flying", "RapidAssault", "Terrifying"],
+        "Active Ability": ["Melta"],
         "Number": 101,
         "Icon": "snowprint_assets/characters/ui_image_portrait_blood_dante_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_blood_dante_01.png"
@@ -715,14 +606,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "RapidAssault",
-            "Resilient",
-            "Unstoppable"
-        ],
-        "Passive Ability": [
-            "Bolter"
-        ],
+        "Traits": ["RapidAssault", "Resilient", "Unstoppable"],
+        "Passive Ability": ["Bolter"],
         "Number": 89,
         "Icon": "snowprint_assets/characters/ui_image_portrait_blood_deathcompany_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_blood_deathcompany_01.png"
@@ -746,15 +631,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "TeleportStrike",
-            "Flying",
-            "RapidAssault"
-        ],
-        "Active Ability": [
-            "Physical",
-            "Power"
-        ],
+        "Traits": ["TeleportStrike", "Flying", "RapidAssault"],
+        "Active Ability": ["Physical", "Power"],
         "Number": 72,
         "Icon": "snowprint_assets/characters/ui_image_portrait_blood_intercessor_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_blood_intercessor_01.png"
@@ -781,14 +659,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Psyker",
-            "RapidAssault",
-            "Terrifying"
-        ],
-        "Passive Ability": [
-            "Psychic"
-        ],
+        "Traits": ["Psyker", "RapidAssault", "Terrifying"],
+        "Passive Ability": ["Psychic"],
         "Number": 73,
         "Icon": "snowprint_assets/characters/ui_image_portrait_blood_mephiston_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_blood_mephiston_01.png"
@@ -812,10 +684,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Healer",
-            "RapidAssault"
-        ],
+        "Traits": ["Healer", "RapidAssault"],
         "Number": 99,
         "Icon": "snowprint_assets/characters/ui_image_portrait_blood_sanguinary_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_blood_sanguinary_01.png"
@@ -839,14 +708,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Parry",
-            "Terrifying"
-        ],
-        "Active Ability": [
-            "DirectDamage",
-            "Power"
-        ],
+        "Traits": ["Parry", "Terrifying"],
+        "Active Ability": ["DirectDamage", "Power"],
         "Number": 110,
         "Icon": "snowprint_assets/characters/ui_image_portrait_custo_atlacoya_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_custo_atlacoya_01.png"
@@ -870,20 +733,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "MartialKatah",
-            "BeastSnagga",
-            "RapidAssault",
-            "Parry",
-            "Resilient"
-        ],
-        "Active Ability": [
-            "Eviscerate"
-        ],
-        "Passive Ability": [
-            "Piercing",
-            "Power"
-        ],
+        "Traits": ["MartialKatah", "BeastSnagga", "RapidAssault", "Parry", "Resilient"],
+        "Active Ability": ["Eviscerate"],
+        "Passive Ability": ["Piercing", "Power"],
         "Number": 107,
         "Icon": "snowprint_assets/characters/ui_image_portrait_custo_bladechampion_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_custo_bladechampion_01.png"
@@ -910,16 +762,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "MartialKatah",
-            "Resilient"
-        ],
-        "Active Ability": [
-            "Power"
-        ],
-        "Passive Ability": [
-            "Bolter"
-        ],
+        "Traits": ["MartialKatah", "Resilient"],
+        "Active Ability": ["Power"],
+        "Passive Ability": ["Bolter"],
         "Number": 118,
         "Icon": "snowprint_assets/characters/ui_image_portrait_custo_kyrus_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_custo_kyrus_01.png"
@@ -943,14 +788,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "MartialKatah",
-            "CrushingStrike",
-            "Resilient"
-        ],
-        "Active Ability": [
-            "Bolter"
-        ],
+        "Traits": ["MartialKatah", "CrushingStrike", "Resilient"],
+        "Active Ability": ["Bolter"],
         "Number": 105,
         "Icon": "snowprint_assets/characters/ui_image_portrait_custo_trajann_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_custo_trajann_01.png"
@@ -974,14 +813,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "MartialKatah",
-            "BigTarget",
-            "Resilient"
-        ],
-        "Active Ability": [
-            "Physical"
-        ],
+        "Traits": ["MartialKatah", "BigTarget", "Resilient"],
+        "Active Ability": ["Physical"],
         "Number": 106,
         "Icon": "snowprint_assets/characters/ui_image_portrait_custo_vexilus_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_custo_vexilus_01.png"
@@ -1005,9 +838,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Terrifying"
-        ],
+        "Traits": ["Terrifying"],
         "Number": 60,
         "Icon": "snowprint_assets/characters/ui_image_portrait_darka_asmodai_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_darka_asmodai_01.png"
@@ -1034,14 +865,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "FinalJustice",
-            "Overwatch"
-        ],
-        "Active Ability": [
-            "Bolter",
-            "DirectDamage"
-        ],
+        "Traits": ["FinalJustice", "Overwatch"],
+        "Active Ability": ["Bolter", "DirectDamage"],
         "Number": 58,
         "Icon": "snowprint_assets/characters/ui_image_portrait_darka_azrael_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_darka_azrael_01.png"
@@ -1065,13 +890,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Camouflage",
-            "Parry"
-        ],
-        "Active Ability": [
-            "Power"
-        ],
+        "Traits": ["Camouflage", "Parry"],
+        "Active Ability": ["Power"],
         "Number": 104,
         "Icon": "snowprint_assets/characters/ui_image_portrait_darka_companion_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_darka_companion_01.png"
@@ -1098,17 +918,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "FinalJustice",
-            "Overwatch",
-            "HeavyWeapon"
-        ],
-        "Active Ability": [
-            "Plasma"
-        ],
-        "Passive Ability": [
-            "Plasma"
-        ],
+        "Traits": ["FinalJustice", "Overwatch", "HeavyWeapon"],
+        "Active Ability": ["Plasma"],
+        "Passive Ability": ["Plasma"],
         "Number": 61,
         "Icon": "snowprint_assets/characters/ui_image_portrait_darka_hellblaster_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_darka_hellblaster_01.png"
@@ -1132,15 +944,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "TeleportStrike",
-            "CrushingStrike",
-            "HeavyWeapon",
-            "TerminatorArmour"
-        ],
-        "Active Ability": [
-            "Plasma"
-        ],
+        "Traits": ["TeleportStrike", "CrushingStrike", "HeavyWeapon", "TerminatorArmour"],
+        "Active Ability": ["Plasma"],
         "Number": 59,
         "Icon": "snowprint_assets/characters/ui_image_portrait_darka_terminator_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_darka_terminator_01.png"
@@ -1164,10 +969,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "ContagionsOfNurgle",
-            "Resilient"
-        ],
+        "Traits": ["ContagionsOfNurgle", "Resilient"],
         "Number": 30,
         "Icon": "snowprint_assets/characters/ui_image_portrait_death_blightbringer_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_death_blightbringer_01.png"
@@ -1191,17 +993,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "ContagionsOfNurgle",
-            "Resilient",
-            "TerminatorArmour"
-        ],
-        "Active Ability": [
-            "Power"
-        ],
-        "Passive Ability": [
-            "Toxic"
-        ],
+        "Traits": ["ContagionsOfNurgle", "Resilient", "TerminatorArmour"],
+        "Active Ability": ["Power"],
+        "Passive Ability": ["Toxic"],
         "Number": 29,
         "Icon": "snowprint_assets/characters/ui_image_portrait_death_blightlord_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_death_blightlord_01.png"
@@ -1225,14 +1019,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "ContagionsOfNurgle",
-            "Resilient",
-            "PutridExplosion"
-        ],
-        "Active Ability": [
-            "Toxic"
-        ],
+        "Traits": ["ContagionsOfNurgle", "Resilient", "PutridExplosion"],
+        "Active Ability": ["Toxic"],
         "Number": 31,
         "Icon": "snowprint_assets/characters/ui_image_portrait_death_putrifier_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_death_putrifier_01.png"
@@ -1256,11 +1044,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "ContagionsOfNurgle",
-            "Resilient",
-            "Healer"
-        ],
+        "Traits": ["ContagionsOfNurgle", "Resilient", "Healer"],
         "Number": 32,
         "Icon": "snowprint_assets/characters/ui_image_portrait_death_rotbone_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_death_rotbone_01.png"
@@ -1287,18 +1071,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "ContagionsOfNurgle",
-            "Resilient",
-            "Psyker",
-            "TerminatorArmour"
-        ],
-        "Active Ability": [
-            "Psychic"
-        ],
-        "Passive Ability": [
-            "DirectDamage"
-        ],
+        "Traits": ["ContagionsOfNurgle", "Resilient", "Psyker", "TerminatorArmour"],
+        "Active Ability": ["Psychic"],
+        "Passive Ability": ["DirectDamage"],
         "Number": 28,
         "Icon": "snowprint_assets/characters/ui_image_portrait_death_typhus_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_death_typhus_01.png"
@@ -1322,13 +1097,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "Flying",
-            "TeleportStrike"
-        ],
-        "Active Ability": [
-            "Piercing"
-        ],
+        "Traits": ["Flying", "TeleportStrike"],
+        "Active Ability": ["Piercing"],
         "Number": 44,
         "Icon": "snowprint_assets/characters/ui_image_portrait_aelda_autarch_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_aelda_autarch_01.png"
@@ -1355,9 +1125,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "Psyker"
-        ],
+        "Traits": ["Psyker"],
         "Number": 46,
         "Icon": "snowprint_assets/characters/ui_image_portrait_aelda_farseer_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_aelda_farseer_01.png"
@@ -1381,12 +1149,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "Infiltrate"
-        ],
-        "Active Ability": [
-            "Piercing"
-        ],
+        "Traits": ["Infiltrate"],
+        "Active Ability": ["Piercing"],
         "Number": 47,
         "Icon": "snowprint_assets/characters/ui_image_portrait_aelda_jainzar_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_aelda_jainzar_01.png"
@@ -1413,11 +1177,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "Terrifying",
-            "HeavyWeapon",
-            "Overwatch"
-        ],
+        "Traits": ["Terrifying", "HeavyWeapon", "Overwatch"],
         "Number": 45,
         "Icon": "snowprint_assets/characters/ui_image_portrait_aelda_maugan_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_aelda_maugan_01.png"
@@ -1444,13 +1204,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Crit",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "HeavyWeapon",
-            "Overwatch"
-        ],
-        "Passive Ability": [
-            "Piercing"
-        ],
+        "Traits": ["HeavyWeapon", "Overwatch"],
+        "Passive Ability": ["Piercing"],
         "Number": 43,
         "Icon": "snowprint_assets/characters/ui_image_portrait_aelda_ranger_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_aelda_ranger_01.png"
@@ -1474,12 +1229,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "ThrillSeekers"
-        ],
-        "Active Ability": [
-            "DirectDamage"
-        ],
+        "Traits": ["ThrillSeekers"],
+        "Active Ability": ["DirectDamage"],
         "Number": 115,
         "Icon": "snowprint_assets/characters/ui_image_portrait_emper_kakophonist_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_emper_kakophonist_01.png"
@@ -1503,13 +1254,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "ThrillSeekers",
-            "Parry"
-        ],
-        "Active Ability": [
-            "Eviscerate"
-        ],
+        "Traits": ["ThrillSeekers", "Parry"],
+        "Active Ability": ["Eviscerate"],
         "Number": 111,
         "Icon": "snowprint_assets/characters/ui_image_portrait_emper_lucius_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_emper_lucius_01.png"
@@ -1536,14 +1282,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "ThrillSeekers",
-            "HeavyWeapon",
-            "SuppressiveFire"
-        ],
-        "Active Ability": [
-            "Blast"
-        ],
+        "Traits": ["ThrillSeekers", "HeavyWeapon", "SuppressiveFire"],
+        "Active Ability": ["Blast"],
         "Number": 112,
         "Icon": "snowprint_assets/characters/ui_image_portrait_emper_noisemarine_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_emper_noisemarine_01.png"
@@ -1567,10 +1307,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Ambush",
-            "Healer"
-        ],
+        "Traits": ["Ambush", "Healer"],
         "Number": 96,
         "Icon": "snowprint_assets/characters/ui_image_portrait_genes_biophagus_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_genes_biophagus_01.png"
@@ -1597,16 +1334,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Crit",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Ambush",
-            "BeastSnagga"
-        ],
-        "Active Ability": [
-            "Projectile"
-        ],
-        "Passive Ability": [
-            "Projectile"
-        ],
+        "Traits": ["Ambush", "BeastSnagga"],
+        "Active Ability": ["Projectile"],
+        "Passive Ability": ["Projectile"],
         "Number": 100,
         "Icon": "snowprint_assets/characters/ui_image_portrait_genes_kelermorph_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_genes_kelermorph_01.png"
@@ -1633,10 +1363,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "Ambush",
-            "Psyker"
-        ],
+        "Traits": ["Ambush", "Psyker"],
         "Number": 92,
         "Icon": "snowprint_assets/characters/ui_image_portrait_genes_magus_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_genes_magus_01.png"
@@ -1660,15 +1387,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Infiltrate",
-            "Synapse",
-            "Terrifying",
-            "Unstoppable"
-        ],
-        "Active Ability": [
-            "Psychic"
-        ],
+        "Traits": ["Infiltrate", "Synapse", "Terrifying", "Unstoppable"],
+        "Active Ability": ["Psychic"],
         "Number": 94,
         "Icon": "snowprint_assets/characters/ui_image_portrait_genes_patriarch_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_genes_patriarch_01.png"
@@ -1695,12 +1415,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Ambush"
-        ],
-        "Passive Ability": [
-            "Blast"
-        ],
+        "Traits": ["Ambush"],
+        "Passive Ability": ["Blast"],
         "Number": 95,
         "Icon": "snowprint_assets/characters/ui_image_portrait_genes_primus_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_genes_primus_01.png"
@@ -1727,14 +1443,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Overwatch",
-            "LivingMetal",
-            "Mechanical"
-        ],
-        "Active Ability": [
-            "Gauss"
-        ],
+        "Traits": ["Overwatch", "LivingMetal", "Mechanical"],
+        "Active Ability": ["Gauss"],
         "Number": 12,
         "Icon": "snowprint_assets/characters/ui_image_portrait_necro_hexmark_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_necro_hexmark_01.png"
@@ -1761,13 +1471,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "LivingMetal",
-            "Mechanical"
-        ],
-        "Passive Ability": [
-            "Energy"
-        ],
+        "Traits": ["LivingMetal", "Mechanical"],
+        "Passive Ability": ["Energy"],
         "Number": 15,
         "Icon": "snowprint_assets/characters/ui_image_portrait_necro_overlord_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_necro_overlord_01.png"
@@ -1794,17 +1499,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "LivingMetal",
-            "Mechanical",
-            "Flying"
-        ],
-        "Active Ability": [
-            "DirectDamage"
-        ],
-        "Passive Ability": [
-            "DirectDamage"
-        ],
+        "Traits": ["LivingMetal", "Mechanical", "Flying"],
+        "Active Ability": ["DirectDamage"],
+        "Passive Ability": ["DirectDamage"],
         "Number": 14,
         "Icon": "snowprint_assets/characters/ui_image_portrait_necro_plasmancer_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_necro_plasmancer_01.png"
@@ -1828,13 +1525,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "LivingMetal",
-            "Explodes",
-            "Mechanical",
-            "Flying",
-            "Mechanic"
-        ],
+        "Traits": ["LivingMetal", "Explodes", "Mechanical", "Flying", "Mechanic"],
         "Number": 13,
         "Icon": "snowprint_assets/characters/ui_image_portrait_necro_spyder_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_necro_spyder_01.png"
@@ -1861,10 +1552,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "LivingMetal",
-            "Mechanical"
-        ],
+        "Traits": ["LivingMetal", "Mechanical"],
         "Number": 11,
         "Icon": "snowprint_assets/characters/ui_image_portrait_necro_warden_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_necro_warden_01.png"
@@ -1888,10 +1576,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "GetStuckIn",
-            "Mechanic"
-        ],
+        "Traits": ["GetStuckIn", "Mechanic"],
         "Number": 39,
         "Icon": "snowprint_assets/characters/ui_image_portrait_orkss_mek_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_orkss_mek_01.png"
@@ -1918,15 +1603,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "GetStuckIn",
-            "BigTarget",
-            "Explodes",
-            "Mechanical"
-        ],
-        "Active Ability": [
-            "Projectile"
-        ],
+        "Traits": ["GetStuckIn", "BigTarget", "Explodes", "Mechanical"],
+        "Active Ability": ["Projectile"],
         "Number": 40,
         "Icon": "snowprint_assets/characters/ui_image_portrait_orkss_killakan_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_orkss_killakan_01.png"
@@ -1950,14 +1628,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "GetStuckIn",
-            "BeastSnagga",
-            "Unstoppable"
-        ],
-        "Active Ability": [
-            "DirectDamage"
-        ],
+        "Traits": ["GetStuckIn", "BeastSnagga", "Unstoppable"],
+        "Active Ability": ["DirectDamage"],
         "Number": 41,
         "Icon": "snowprint_assets/characters/ui_image_portrait_orkss_nob_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_orkss_nob_01.png"
@@ -1981,13 +1653,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "GetStuckIn",
-            "BeastSnagga"
-        ],
-        "Passive Ability": [
-            "Physical"
-        ],
+        "Traits": ["GetStuckIn", "BeastSnagga"],
+        "Passive Ability": ["Physical"],
         "Number": 38,
         "Icon": "snowprint_assets/characters/ui_image_portrait_orkss_runtherd_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_orkss_runtherd_01.png"
@@ -2014,16 +1681,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "GetStuckIn",
-            "BigTarget",
-            "CrushingStrike",
-            "FinalJustice",
-            "Mechanical"
-        ],
-        "Passive Ability": [
-            "Projectile"
-        ],
+        "Traits": ["GetStuckIn", "BigTarget", "CrushingStrike", "FinalJustice", "Mechanical"],
+        "Passive Ability": ["Projectile"],
         "Number": 42,
         "Icon": "snowprint_assets/characters/ui_image_portrait_orkss_warboss_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_orkss_warboss_01.png"
@@ -2047,11 +1706,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "BeastSnagga",
-            "FinalJustice",
-            "RapidAssault"
-        ],
+        "Traits": ["BeastSnagga", "FinalJustice", "RapidAssault"],
         "Number": 57,
         "Icon": "snowprint_assets/characters/ui_image_portrait_space_ragnar_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_space_ragnar_01.png"
@@ -2075,13 +1730,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Infiltrate",
-            "Terrifying"
-        ],
-        "Active Ability": [
-            "Physical"
-        ],
+        "Traits": ["Infiltrate", "Terrifying"],
+        "Active Ability": ["Physical"],
         "Number": 54,
         "Icon": "snowprint_assets/characters/ui_image_portrait_space_hound_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_space_hound_01.png"
@@ -2105,15 +1755,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "Resilient",
-            "TeleportStrike",
-            "TerminatorArmour",
-            "Unstoppable"
-        ],
-        "Active Ability": [
-            "Power"
-        ],
+        "Traits": ["Resilient", "TeleportStrike", "TerminatorArmour", "Unstoppable"],
+        "Active Ability": ["Power"],
         "Number": 55,
         "Icon": "snowprint_assets/characters/ui_image_portrait_space_arjac_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_space_arjac_01.png"
@@ -2140,14 +1783,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "Psyker",
-            "TerminatorArmour",
-            "Unstoppable"
-        ],
-        "Active Ability": [
-            "Psychic"
-        ],
+        "Traits": ["Psyker", "TerminatorArmour", "Unstoppable"],
+        "Active Ability": ["Psychic"],
         "Number": 56,
         "Icon": "snowprint_assets/characters/ui_image_portrait_space_njal_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_space_stormcaller_01.png"
@@ -2171,16 +1808,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "FinalJustice",
-            "Unstoppable"
-        ],
-        "Active Ability": [
-            "Piercing"
-        ],
-        "Passive Ability": [
-            "Power"
-        ],
+        "Traits": ["FinalJustice", "Unstoppable"],
+        "Active Ability": ["Piercing"],
+        "Passive Ability": ["Power"],
         "Number": 53,
         "Icon": "snowprint_assets/characters/ui_image_portrait_space_wulfen_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_space_wulfen_01.png"
@@ -2231,15 +1861,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "CloseCombatWeakness",
-            "BigTarget",
-            "Flying",
-            "Mechanical"
-        ],
-        "Passive Ability": [
-            "Particle"
-        ],
+        "Traits": ["CloseCombatWeakness", "BigTarget", "Flying", "Mechanical"],
+        "Passive Ability": ["Particle"],
         "Number": 49,
         "Icon": "snowprint_assets/characters/ui_image_portrait_tauta_crisis_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tauta_crisis_01.png"
@@ -2266,11 +1889,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "CloseCombatWeakness",
-            "Infiltrate",
-            "SuppressiveFire"
-        ],
+        "Traits": ["CloseCombatWeakness", "Infiltrate", "SuppressiveFire"],
         "Number": 51,
         "Icon": "snowprint_assets/characters/ui_image_portrait_tauta_darkstrider_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tauta_darkstrider_01.png"
@@ -2297,13 +1916,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "CloseCombatWeakness",
-            "Camouflage"
-        ],
-        "Active Ability": [
-            "HeavyRound"
-        ],
+        "Traits": ["CloseCombatWeakness", "Camouflage"],
+        "Active Ability": ["HeavyRound"],
         "Number": 48,
         "Icon": "snowprint_assets/characters/ui_image_portrait_tauta_marksman_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tauta_marksman_01.png"
@@ -2330,15 +1944,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "CloseCombatWeakness",
-            "Camouflage",
-            "Flying",
-            "Infiltrate"
-        ],
-        "Active Ability": [
-            "Blast"
-        ],
+        "Traits": ["CloseCombatWeakness", "Camouflage", "Flying", "Infiltrate"],
+        "Active Ability": ["Blast"],
         "Number": 52,
         "Icon": "snowprint_assets/characters/ui_image_portrait_tauta_shadowsun_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tauta_shadowsun_01.png"
@@ -2365,17 +1972,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "CrushingStrike",
-            "MkXGravis",
-            "SuppressiveFire"
-        ],
-        "Active Ability": [
-            "Blast"
-        ],
-        "Passive Ability": [
-            "Bolter"
-        ],
+        "Traits": ["CrushingStrike", "MkXGravis", "SuppressiveFire"],
+        "Active Ability": ["Blast"],
+        "Passive Ability": ["Bolter"],
         "Number": 34,
         "Icon": "snowprint_assets/characters/ui_image_portrait_templ_aggressor_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_templ_aggressor_01.png"
@@ -2399,10 +1998,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "FinalJustice",
-            "Parry"
-        ],
+        "Traits": ["FinalJustice", "Parry"],
         "Number": 36,
         "Icon": "snowprint_assets/characters/ui_image_portrait_templ_ancient_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_templ_ancient_01.png"
@@ -2426,14 +2022,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "FinalJustice",
-            "Parry",
-            "RapidAssault"
-        ],
-        "Passive Ability": [
-            "Power"
-        ],
+        "Traits": ["FinalJustice", "Parry", "RapidAssault"],
+        "Passive Ability": ["Power"],
         "Number": 35,
         "Icon": "snowprint_assets/characters/ui_image_portrait_templ_champion_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_templ_champion_01.png"
@@ -2460,10 +2050,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "FinalJustice",
-            "Parry"
-        ],
+        "Traits": ["FinalJustice", "Parry"],
         "Number": 37,
         "Icon": "snowprint_assets/characters/ui_image_portrait_templ_helbrecht_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_templ_helbrecht_01.png"
@@ -2487,16 +2074,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Parry",
-            "RapidAssault"
-        ],
-        "Active Ability": [
-            "Power"
-        ],
-        "Passive Ability": [
-            "Power"
-        ],
+        "Traits": ["Parry", "RapidAssault"],
+        "Active Ability": ["Power"],
+        "Passive Ability": ["Power"],
         "Number": 33,
         "Icon": "snowprint_assets/characters/ui_image_portrait_templ_brother_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_templ_brother_01.png"
@@ -2523,14 +2103,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "WeaverOfFate",
-            "Flying",
-            "Psyker"
-        ],
-        "Active Ability": [
-            "Psychic"
-        ],
+        "Traits": ["WeaverOfFate", "Flying", "Psyker"],
+        "Active Ability": ["Psychic"],
         "Number": 66,
         "Icon": "snowprint_assets/characters/ui_image_portrait_thous_ahriman_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_thous_ahriman_01.png"
@@ -2557,10 +2131,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "WeaverOfFate",
-            "Psyker"
-        ],
+        "Traits": ["WeaverOfFate", "Psyker"],
         "Number": 64,
         "Icon": "snowprint_assets/characters/ui_image_portrait_thous_infernal_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_thous_infernal_01.png"
@@ -2587,11 +2158,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "WeaverOfFate",
-            "Flying",
-            "Psyker"
-        ],
+        "Traits": ["WeaverOfFate", "Flying", "Psyker"],
         "Number": 65,
         "Icon": "snowprint_assets/characters/ui_image_portrait_thous_sorcerer_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_thous_sorcerer_01.png"
@@ -2618,14 +2185,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "WeaverOfFate",
-            "SuppressiveFire",
-            "TerminatorArmour"
-        ],
-        "Active Ability": [
-            "HeavyRound"
-        ],
+        "Traits": ["WeaverOfFate", "SuppressiveFire", "TerminatorArmour"],
+        "Active Ability": ["HeavyRound"],
         "Number": 63,
         "Icon": "snowprint_assets/characters/ui_image_portrait_thous_terminator_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_thous_terminator_01.png"
@@ -2652,13 +2213,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "WeaverOfFate",
-            "Flying"
-        ],
-        "Active Ability": [
-            "Psychic"
-        ],
+        "Traits": ["WeaverOfFate", "Flying"],
+        "Active Ability": ["Psychic"],
         "Number": 62,
         "Icon": "snowprint_assets/characters/ui_image_portrait_thous_tzaangor_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_thous_tzaangor_01.png"
@@ -2682,15 +2238,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Camouflage",
-            "TeleportStrike",
-            "Infiltrate",
-            "Terrifying"
-        ],
-        "Active Ability": [
-            "DirectDamage"
-        ],
+        "Traits": ["Camouflage", "TeleportStrike", "Infiltrate", "Terrifying"],
+        "Active Ability": ["DirectDamage"],
         "Number": 70,
         "Icon": "snowprint_assets/characters/ui_image_portrait_tyran_deathleaper_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tyran_deathleaper_01.png"
@@ -2717,16 +2266,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "CloseCombatWeakness",
-            "Flying",
-            "Psyker",
-            "ShadowInTheWarp",
-            "Synapse"
-        ],
-        "Active Ability": [
-            "Psychic"
-        ],
+        "Traits": ["CloseCombatWeakness", "Flying", "Psyker", "ShadowInTheWarp", "Synapse"],
+        "Active Ability": ["Psychic"],
         "Number": 67,
         "Icon": "snowprint_assets/characters/ui_image_portrait_tyran_neurothrope_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tyran_neurothrope_01.png"
@@ -2750,10 +2291,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Flying",
-            "Synapse"
-        ],
+        "Traits": ["Flying", "Synapse"],
         "Number": 74,
         "Icon": "snowprint_assets/characters/ui_image_portrait_tyran_parasite_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tyran_parasite_01.png"
@@ -2777,14 +2315,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Defensive",
-        "Traits": [
-            "BigTarget",
-            "CrushingStrike"
-        ],
-        "Active Ability": [
-            "Physical",
-            "Piercing"
-        ],
+        "Traits": ["BigTarget", "CrushingStrike"],
+        "Active Ability": ["Physical", "Piercing"],
         "Number": 68,
         "Icon": "snowprint_assets/characters/ui_image_portrait_tyran_tyrantguard_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tyran_tyrantguard_01.png"
@@ -2808,11 +2340,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Synapse",
-            "Flying",
-            "FinalJustice"
-        ],
+        "Traits": ["Synapse", "Flying", "FinalJustice"],
         "Number": 69,
         "Icon": "snowprint_assets/characters/ui_image_portrait_tyran_wingedprime_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tyran_wingedprime_01.png"
@@ -2836,9 +2364,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Healer"
-        ],
+        "Traits": ["Healer"],
         "Number": 3,
         "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_apothecary_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_ultra_apothecary_01.png"
@@ -2862,13 +2388,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "MkXGravis",
-            "FinalJustice"
-        ],
-        "Active Ability": [
-            "Bolter"
-        ],
+        "Traits": ["MkXGravis", "FinalJustice"],
+        "Active Ability": ["Bolter"],
         "Number": 4,
         "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_calgar_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_ultra_calgar_01.png"
@@ -2895,17 +2416,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Overwatch",
-            "HeavyWeapon",
-            "Infiltrate"
-        ],
-        "Active Ability": [
-            "HeavyRound"
-        ],
-        "Passive Ability": [
-            "Bolter"
-        ],
+        "Traits": ["Overwatch", "HeavyWeapon", "Infiltrate"],
+        "Active Ability": ["HeavyRound"],
+        "Passive Ability": ["Bolter"],
         "Number": 1,
         "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_eliminator_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_ultra_eliminator_01.png"
@@ -2929,10 +2442,7 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Flying",
-            "MkXGravis"
-        ],
+        "Traits": ["Flying", "MkXGravis"],
         "Number": 2,
         "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_inceptor_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_ultra_inceptor_01.png"
@@ -2959,12 +2469,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "Psyker"
-        ],
-        "Active Ability": [
-            "Psychic"
-        ],
+        "Traits": ["Psyker"],
+        "Active Ability": ["Psychic"],
         "Number": 0,
         "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_tigurius_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_ultra_tigurius_01.png"
@@ -2988,14 +2494,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "BeastSnagga",
-            "FinalJustice"
-        ],
-        "Active Ability": [
-            "Bolter",
-            "Chain"
-        ],
+        "Traits": ["BeastSnagga", "FinalJustice"],
+        "Active Ability": ["Bolter", "Chain"],
         "Number": 90,
         "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_titus_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_ultra_titus_01.png"
@@ -3019,16 +2519,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "BlessingsOfKhorne",
-            "Daemon",
-            "Resilient",
-            "Terrifying",
-            "Unstoppable"
-        ],
-        "Active Ability": [
-            "Eviscerate"
-        ],
+        "Traits": ["BlessingsOfKhorne", "Daemon", "Resilient", "Terrifying", "Unstoppable"],
+        "Active Ability": ["Eviscerate"],
         "Number": 82,
         "Icon": "snowprint_assets/characters/ui_image_portrait_world_eightbound_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_world_eightbound_01.png"
@@ -3052,13 +2544,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Crit",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "BlessingsOfKhorne",
-            "RapidAssault"
-        ],
-        "Active Ability": [
-            "Piercing"
-        ],
+        "Traits": ["BlessingsOfKhorne", "RapidAssault"],
+        "Active Ability": ["Piercing"],
         "Number": 103,
         "Icon": "snowprint_assets/characters/ui_image_portrait_world_executions_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_world_executions_01.png"
@@ -3082,13 +2569,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Defensive",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "BlessingsOfKhorne",
-            "Resilient"
-        ],
-        "Active Ability": [
-            "Physical"
-        ],
+        "Traits": ["BlessingsOfKhorne", "Resilient"],
+        "Active Ability": ["Physical"],
         "Number": 81,
         "Icon": "snowprint_assets/characters/ui_image_portrait_world_jakhal_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_world_jakhal_01.png"
@@ -3112,19 +2594,9 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Crit",
-        "Traits": [
-            "BlessingsOfKhorne",
-            "RapidAssault",
-            "FinalJustice"
-        ],
-        "Active Ability": [
-            "Eviscerate",
-            "Piercing",
-            "Plasma"
-        ],
-        "Passive Ability": [
-            "Eviscerate"
-        ],
+        "Traits": ["BlessingsOfKhorne", "RapidAssault", "FinalJustice"],
+        "Active Ability": ["Eviscerate", "Piercing", "Plasma"],
+        "Passive Ability": ["Eviscerate"],
         "Number": 83,
         "Icon": "snowprint_assets/characters/ui_image_portrait_world_kharn_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_world_kharn_01.png"
@@ -3148,16 +2620,8 @@
         "Equipment1": "I_Crit",
         "Equipment2": "I_Block",
         "Equipment3": "I_Booster_Block",
-        "Traits": [
-            "BlessingsOfKhorne",
-            "TeleportStrike",
-            "RapidAssault",
-            "TerminatorArmour",
-            "Unstoppable"
-        ],
-        "Active Ability": [
-            "Chain"
-        ],
+        "Traits": ["BlessingsOfKhorne", "TeleportStrike", "RapidAssault", "TerminatorArmour", "Unstoppable"],
+        "Active Ability": ["Chain"],
         "Number": 80,
         "Icon": "snowprint_assets/characters/ui_image_portrait_world_terminator_01.png",
         "RoundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_world_terminator_01.png"
