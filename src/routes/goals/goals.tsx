@@ -58,6 +58,7 @@ export const Goals = () => {
         dailyRaids,
         viewPreferences,
         xpIncomeState,
+        xpUseState,
     } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { userInfo } = useAuth();
@@ -298,6 +299,7 @@ export const Goals = () => {
             cloneDeep(goals),
             cloneDeep(goalsEstimate),
             inventory,
+            xpUseState,
             upgradeRankOrMowGoals,
             xpIncomeState
         );
