@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
@@ -12,12 +12,14 @@ import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenTable } from './le-token-table';
 import { LeTokenCardRenderMode } from './lre.models';
-import { milestonesAndPoints, TokenEstimationService, TokenUse } from './token-estimation-service';
+import { milestonesAndPoints, TokenDisplay, TokenUse } from './token-estimation-service';
 
 interface Props {
     battles: ILeBattles | undefined;
     tokens: TokenUse[];
     currentPoints: number;
+    tokenDisplays: TokenDisplay[];
+    nextTokenCompleted: () => void;
 }
 
 /**
@@ -25,7 +27,13 @@ interface Props {
  * already achieved, and a table of tokens to use, and which milestones they
  * achieve.
  */
-export const LeTokenomics: React.FC<Props> = ({ battles, tokens, currentPoints }: Props) => {
+export const LeTokenomics: React.FC<Props> = ({
+    battles,
+    tokens,
+    currentPoints,
+    tokenDisplays,
+    nextTokenCompleted,
+}: Props) => {
     const { viewPreferences } = useContext(StoreContext);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
@@ -36,10 +44,6 @@ export const LeTokenomics: React.FC<Props> = ({ battles, tokens, currentPoints }
     const missedMilestones = milestonesAndPoints
         .filter(milestone => milestone.points > finalProjectedPoints)
         .sort((a, b) => a.points - b.points);
-    const tokenDisplays = useMemo(
-        () => TokenEstimationService.getTokenDisplays(tokens, currentPoints),
-        [tokens, currentPoints]
-    );
 
     const firstToken = tokenDisplays.length > 0 ? tokenDisplays[0] : null;
     const isDarkMode = viewPreferences.theme === 'dark';
@@ -63,6 +67,7 @@ export const LeTokenomics: React.FC<Props> = ({ battles, tokens, currentPoints }
                             renderTeam={x => renderTeam(x, 35)}
                             isBattleVisible={isFirstTokenBattleVisible}
                             onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
+                            onCompleteBattle={nextTokenCompleted}
                         />
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) !== undefined && (
