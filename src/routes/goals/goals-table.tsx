@@ -34,12 +34,13 @@ import { XpTotal } from 'src/v2/features/goals/xp-total';
 
 import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
+import { GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
 
 interface Props {
     rows: CharacterRaidGoalSelect[];
     estimate: IGoalEstimate[];
-    goalsColorCoding: boolean;
+    goalsColorCoding: GoalColorMode;
     menuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
 }
 
