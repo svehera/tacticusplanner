@@ -33,7 +33,7 @@ export const GoalColorCodingToggle: React.FC<ColorCodingToggleProps> = ({ curren
     const tooltipText = useMemo(() => {
         const nextMode = getNextMode(currentMode);
         if (currentMode === 'None') {
-            return `Currently disabled. Click to enable by ${nextMode}.`;
+            return `Currently disabled. Click to enable ${nextMode}.`;
         }
         return `Currently colored by ${currentMode}. Click to switch to ${nextMode}.`;
     }, [currentMode, getNextMode]);
