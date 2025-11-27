@@ -82,6 +82,8 @@ export interface IGoalEstimate {
     xpEstimateAbilities?: IXpEstimate;
     mowEstimate?: IMowMaterialsTotal;
     abilitiesEstimate?: ICharacterAbilitiesMaterialsTotal;
+    xpBooksApplied?: number;
+    xpBooksRequired?: number;
 }
 
 export interface IEstimatedAscensionSettings {

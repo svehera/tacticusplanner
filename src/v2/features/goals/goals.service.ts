@@ -489,10 +489,10 @@ export class GoalsService {
                 console.error('could not find goal estimate for goal id ' + goalIdAndPriority.id);
                 continue;
             }
-            const xpNeeded = this.adjustNeededXp(
-                goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0,
-                heldBooks
-            );
+            const remainingXp = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
+            goal.xpBooksRequired = Math.floor(remainingXp / 12500);
+            const xpNeeded = this.adjustNeededXp(remainingXp, heldBooks);
+            goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / 12500);
 
             if (goal.xpEstimate || goal.xpEstimateAbilities) {
                 totalXpNeeded += xpNeeded;
@@ -552,6 +552,7 @@ export class GoalsService {
                     neededBadges[alliance][rarity] += count;
                 }
             }
+
             if (goal.mowEstimate === undefined) continue;
             const forgeBadges = goal.mowEstimate.forgeBadges;
             forgeBadges.entries().forEach(([rarity, count]) => {
