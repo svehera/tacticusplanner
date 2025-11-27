@@ -22,6 +22,7 @@ import {
     IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
 
+import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 
 export interface RevisedGoals {
@@ -422,6 +423,17 @@ export class GoalsService {
         return xpNeeded;
     }
 
+    private static computeHeldBooks(inventory: IInventory, xpUseState: XpUseState): Record<Rarity, number> {
+        const heldBooks = { ...inventory.xpBooks };
+        if (!xpUseState.useCommon) heldBooks[Rarity.Common] = 0;
+        if (!xpUseState.useUncommon) heldBooks[Rarity.Uncommon] = 0;
+        if (!xpUseState.useRare) heldBooks[Rarity.Rare] = 0;
+        if (!xpUseState.useEpic) heldBooks[Rarity.Epic] = 0;
+        if (!xpUseState.useLegendary) heldBooks[Rarity.Legendary] = 0;
+        if (!xpUseState.useMythic) heldBooks[Rarity.Mythic] = 0;
+        return heldBooks;
+    }
+
     /**
      * Computes the total number of remaining resources needed AND adjusts all goals to use as
      * many possible badges from our existing inventory.
@@ -430,6 +442,7 @@ export class GoalsService {
         goals: IPersonalGoal[],
         goalsEstimate: IGoalEstimate[],
         inventory: IInventory,
+        xpUseState: XpUseState,
         upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[],
         xpIncomeState: XpIncomeState
     ): RevisedGoals {
@@ -442,7 +455,7 @@ export class GoalsService {
             [Rarity.Mythic]: 0,
         });
 
-        const heldBooks = { ...inventory.xpBooks };
+        const heldBooks = this.computeHeldBooks(inventory, xpUseState);
 
         const neededBadges: Record<Alliance, Record<Rarity, number>> = {
             [Alliance.Chaos]: createRarityRecord(),

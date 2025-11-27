@@ -399,6 +399,14 @@ export const defaultData: IPersonalData2 = {
         // Additional Sources
         additionalBooksPerWeek: 0,
     },
+    xpUseState: {
+        useCommon: true,
+        useUncommon: true,
+        useRare: true,
+        useEpic: true,
+        useLegendary: true,
+        useMythic: true,
+    },
 };
 
 export const goalsLimit = 100;
