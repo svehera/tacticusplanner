@@ -13,6 +13,8 @@ interface CardProps {
 
     isBattleVisible: boolean;
     onToggleBattle: (index: number) => void;
+    // If this is provided, show a complete battle button.
+    onCompleteBattle?: () => void;
 }
 
 export const LeTokenCard: React.FC<CardProps> = ({
@@ -24,6 +26,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
     renderTeam,
     isBattleVisible,
     onToggleBattle,
+    onCompleteBattle,
 }: CardProps) => {
     const hasMilestone =
         token.milestoneAchievedIndex !== -1 && token.milestoneAchievedIndex < milestonesAndPoints.length;
@@ -51,6 +54,14 @@ export const LeTokenCard: React.FC<CardProps> = ({
                         <div className="font-bold font-mono text-blue-400 text-lg">{token.totalPoints}</div>
                     </div>
 
+                    {onCompleteBattle && (
+                        <button
+                            onClick={() => onCompleteBattle()}
+                            className="text-green-400 text-xs font-semibold uppercase hover:text-green-300 transition-colors duration-150 focus:outline-none"
+                            title="Mark this battle as completed">
+                            Mark Complete
+                        </button>
+                    )}
                     <button
                         onClick={() => onToggleBattle(index)}
                         className="text-blue-400 text-xs font-semibold uppercase hover:text-blue-300 transition-colors duration-150 focus:outline-none"
