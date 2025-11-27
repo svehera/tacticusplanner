@@ -34,7 +34,6 @@ import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
 import { GoalService } from './goal-service';
-import { XpGoalProgressBar } from './xp-book-progress-bar';
 
 interface Props {
     rows: CharacterRaidGoalSelect[];
@@ -189,10 +188,12 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                         {goalEstimate.xpBooksApplied !== undefined &&
                             goalEstimate.xpBooksRequired !== undefined &&
                             goalEstimate.xpBooksRequired > 0 && (
-                                <XpGoalProgressBar
-                                    applied={goalEstimate.xpBooksApplied}
-                                    required={goalEstimate.xpBooksRequired}
-                                />
+                                <div>
+                                    XP Books Applied {goalEstimate.xpBooksApplied} / Required{' '}
+                                    {goalEstimate.xpBooksRequired} (
+                                    {Math.round((goalEstimate.xpBooksApplied / goalEstimate.xpBooksRequired!) * 100)}
+                                    %)
+                                </div>
                             )}
                         {goalEstimate.abilitiesEstimate && (
                             <div style={{ padding: '10px 0' }}>

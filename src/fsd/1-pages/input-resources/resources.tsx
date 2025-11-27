@@ -1,7 +1,7 @@
 /* eslint-disable import-x/no-internal-modules */
 import SyncIcon from '@mui/icons-material/Sync';
 import Button from '@mui/material/Button';
-import { useContext } from 'react';
+import { JSX, useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
@@ -37,6 +37,8 @@ export const Resources = () => {
         xpUseState.useMythic,
     ];
 
+    const getRarityIndex = (rarity: Rarity): number => rarities.indexOf(rarity);
+
     const newState = (rarity: Rarity): XpUseState => {
         const index = getRarityIndex(rarity);
         const updatedEnabled = [...enabled];
@@ -62,8 +64,6 @@ export const Resources = () => {
         Rarity.Legendary,
         Rarity.Mythic,
     ];
-
-    const getRarityIndex = (rarity: Rarity): number => rarities.indexOf(rarity);
 
     const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
 

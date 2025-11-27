@@ -257,6 +257,7 @@ export class GlobalState implements IGlobalState {
             guildWar: value.guildWar,
             guild: value.guild,
             xpIncomeState: value.xpIncomeState,
+            xpUseState: value.xpUseState,
             teams: value.teams,
         };
     }

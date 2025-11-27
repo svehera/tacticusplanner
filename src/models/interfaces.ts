@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
+import { XpUseAction } from '@/reducers/xp-use-reducer';
 import { GuildAction } from 'src/reducers/guildReducer';
 import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { MowsAction } from 'src/reducers/mows.reducer';
