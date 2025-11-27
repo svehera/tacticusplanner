@@ -16,12 +16,6 @@ import {
 } from './model';
 
 export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
-    console.log(
-        'id LegendaryEventEnum.Farsight ==:',
-        id,
-        LegendaryEventEnum.Farsight,
-        id === LegendaryEventEnum.Farsight
-    );
     switch (id) {
         case LegendaryEventEnum.AunShi:
             return new AunShiLegendaryEvent(characters);
