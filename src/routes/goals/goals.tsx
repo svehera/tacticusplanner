@@ -303,7 +303,7 @@ export const Goals = () => {
             upgradeRankOrMowGoals,
             xpIncomeState
         );
-    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals]);
+    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals, xpUseState, xpIncomeState]);
 
     const colorCodingTooltipText =
         'When enabled, goals to be completed a week before the end of the current battle pass season will ' +

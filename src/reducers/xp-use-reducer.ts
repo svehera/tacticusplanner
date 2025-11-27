@@ -6,7 +6,6 @@ import { defaultData } from '../models/constants';
 
 export type XpUseAction =
     | SetStateAction<XpUseState>
-    | { type: 'Set'; value: XpUseState }
     | {
           type: 'SaveXpUseState';
           value: XpUseState;
