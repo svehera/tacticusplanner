@@ -55,6 +55,7 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
     const createCompleteBattleHandler = (token: TokenDisplay) => {
         return () => {
             if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+            if (token.battleNumber == null || token.battleNumber < 0) return;
 
             // Mark only the restrictions included in this token as completed
             for (const restrict of token.restricts) {
