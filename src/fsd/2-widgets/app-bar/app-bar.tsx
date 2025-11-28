@@ -21,8 +21,6 @@ import {
     // eslint-disable-next-line import-x/no-internal-modules
 } from '@/models/menu-items'; // TODO refactor for FSD
 // eslint-disable-next-line import-x/no-internal-modules
-import ThemeSwitch from '@/shared-components/theme-switch'; // TODO refactor for FSD
-// eslint-disable-next-line import-x/no-internal-modules
 import { UserMenu } from '@/shared-components/user-menu/user-menu'; // TODO refactor for FSD
 
 import {
@@ -166,7 +164,6 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                         <IconButton color="inherit" onClick={() => navigate('./faq')}>
                             <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
                         </IconButton>
-                        <ThemeSwitch />
                         <Button
                             id="basic-button"
                             aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}

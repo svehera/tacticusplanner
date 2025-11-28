@@ -12,7 +12,6 @@ export interface IViewOption<T = IViewPreferences> {
 }
 
 export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IWyoViewSettings {
-    theme: 'light' | 'dark';
     // autoTeams: boolean;
     wyoFilter: CharactersFilterBy;
     wyoOrder: CharactersOrderBy;
