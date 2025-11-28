@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { JSX, useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { StoreContext } from '@/reducers/store.provider';
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Alliance, Rarity, RarityMapper, useAuth } from '@/fsd/5-shared/model';
 import { OrbIcon } from '@/fsd/5-shared/ui/icons/assets';
@@ -13,10 +13,48 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
 
 import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 
+import { XpUseState } from './models';
+
 export const Resources = () => {
-    const { inventory, viewPreferences } = useContext(StoreContext);
+    const { inventory, viewPreferences, xpUseState } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
     const { syncWithTacticus } = useSyncWithTacticus();
     const { userInfo } = useAuth();
+
+    const dispatchUpdate = (newState: XpUseState) => {
+        dispatch.xpUseState({
+            type: 'Set',
+            value: newState,
+        });
+    };
+
+    const enabled: boolean[] = [
+        xpUseState.useCommon,
+        xpUseState.useUncommon,
+        xpUseState.useRare,
+        xpUseState.useEpic,
+        xpUseState.useLegendary,
+        xpUseState.useMythic,
+    ];
+
+    const getRarityIndex = (rarity: Rarity): number => rarities.indexOf(rarity);
+
+    const newState = (rarity: Rarity): XpUseState => {
+        const index = getRarityIndex(rarity);
+        const updatedEnabled = [...enabled];
+        updatedEnabled[index] = !updatedEnabled[index];
+
+        return {
+            useCommon: updatedEnabled[0],
+            useUncommon: updatedEnabled[1],
+            useRare: updatedEnabled[2],
+            useEpic: updatedEnabled[3],
+            useLegendary: updatedEnabled[4],
+            useMythic: updatedEnabled[5],
+        };
+    };
+
+    const toggleState = (rarity: Rarity) => dispatchUpdate(newState(rarity));
 
     const rarities: Rarity[] = [
         Rarity.Common,
@@ -34,12 +72,28 @@ export const Resources = () => {
         await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
     };
 
-    const renderResourceItem = (key: string, icon: JSX.Element, quantity: number) => (
-        <div key={key} className="flex flex-col items-center justify-start min-w-[55px] p-1">
-            <div className="h-[45px] w-[45px] flex items-center justify-center">{icon}</div>
-            <span className="text-sm font-semibold text-white mt-1">{quantity}</span>
-        </div>
-    );
+    const renderResourceItem = (
+        key: string,
+        icon: JSX.Element,
+        quantity: number,
+        onClick?: () => void, // Optional click handler
+        isEnabled: boolean = true // Optional enabled state (default true)
+    ) => {
+        const clickableClass = onClick ? 'cursor-pointer transition-all duration-150' : '';
+        const hoverClass = onClick ? 'hover:scale-105 hover:bg-gray-700/50' : '';
+        const disabledClass = !isEnabled ? 'grayscale opacity-40' : '';
+
+        return (
+            <div
+                key={key}
+                className={`flex flex-col items-center justify-start min-w-[55px] p-1 ${clickableClass} ${disabledClass} ${hoverClass}`}
+                onClick={onClick}
+                title={onClick ? `Click to ${isEnabled ? 'disable' : 'enable'}` : undefined}>
+                <div className="h-[45px] w-[45px] flex items-center justify-center">{icon}</div>
+                <span className="text-sm font-semibold text-white mt-1">{quantity}</span>
+            </div>
+        );
+    };
 
     return (
         <div className="flex flex-col gap-y-4 p-2">
@@ -59,10 +113,16 @@ export const Resources = () => {
                     <div className="flex flex-wrap justify-start gap-x-1">
                         {rarities.map(rarity => {
                             const icon = RarityMapper.rarityToRarityString(rarity).toLowerCase() + 'Book';
+                            const index = getRarityIndex(rarity);
+                            const isEnabled = enabled[index];
+
                             return renderResourceItem(
                                 'book-' + rarity,
                                 <MiscIcon icon={icon} width={45} height={45} />,
-                                inventory.xpBooks[rarity]
+                                inventory.xpBooks[rarity],
+                                // Pass the click handler and enabled state only for XP Books
+                                () => toggleState(rarity),
+                                isEnabled
                             );
                         })}
                     </div>

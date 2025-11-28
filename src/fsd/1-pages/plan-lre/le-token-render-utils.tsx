@@ -86,7 +86,7 @@ export const renderRestrictions = (
 );
 
 export const renderTeam = (team: string[], sizePx?: number) => (
-    <div className="flex flex-wrap justify-center gap-1">
+    <div className="flex flex-row flex-nowrap justify-center -space-x-1">
         {team.map((snowprintId: string, i) => {
             const unit = CharactersService.getUnit(snowprintId);
             return (

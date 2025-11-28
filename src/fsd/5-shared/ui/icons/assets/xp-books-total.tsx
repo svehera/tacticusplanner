@@ -41,7 +41,7 @@ export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
                 const booksCount = xpBooks[rarity];
                 const bookName = Rarity[rarity].toLowerCase() + 'Book';
                 return (
-                    booksCount >= 0 && (
+                    booksCount > 0 && (
                         <Badge key={rarity} badgeContent={<b>{booksCount}</b>}>
                             <MiscIcon icon={bookName} width={sizePx} height={sizePx} />
                         </Badge>

@@ -30,16 +30,16 @@ import {
     IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { XpTotal } from 'src/v2/features/goals/xp-total';
 
 import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
+import { GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
 
 interface Props {
     rows: CharacterRaidGoalSelect[];
     estimate: IGoalEstimate[];
-    goalsColorCoding: boolean;
+    goalsColorCoding: GoalColorMode;
     menuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
 }
 
@@ -95,7 +95,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 );
             }
             case PersonalGoalType.UpgradeRank: {
-                const { xpEstimate } = goalEstimate;
                 return (
                     <div>
                         <div className="flex-box between">
@@ -111,7 +110,16 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 )}
                             </div>
                         </div>
-                        {xpEstimate && <XpTotal {...xpEstimate} />}
+                        {goalEstimate.xpBooksApplied !== undefined &&
+                            goalEstimate.xpBooksRequired !== undefined &&
+                            goalEstimate.xpBooksRequired > 0 && (
+                                <div>
+                                    XP Books Applied {goalEstimate.xpBooksApplied} / Required{' '}
+                                    {goalEstimate.xpBooksRequired} (
+                                    {Math.round((goalEstimate.xpBooksApplied / goalEstimate.xpBooksRequired!) * 100)}
+                                    %)
+                                </div>
+                            )}
                     </div>
                 );
             }
@@ -178,7 +186,16 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 )}
                             </div>
                         </div>
-                        {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
+                        {goalEstimate.xpBooksApplied !== undefined &&
+                            goalEstimate.xpBooksRequired !== undefined &&
+                            goalEstimate.xpBooksRequired > 0 && (
+                                <div>
+                                    XP Books Applied {goalEstimate.xpBooksApplied} / Required{' '}
+                                    {goalEstimate.xpBooksRequired} (
+                                    {Math.round((goalEstimate.xpBooksApplied / goalEstimate.xpBooksRequired!) * 100)}
+                                    %)
+                                </div>
+                            )}
                         {goalEstimate.abilitiesEstimate && (
                             <div style={{ padding: '10px 0' }}>
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />

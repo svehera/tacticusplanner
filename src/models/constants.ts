@@ -219,7 +219,7 @@ export const defaultData: IPersonalData2 = {
         inventoryShowPlusMinus: true,
         goalsTableView: false,
         campaignsTableView: false,
-        goalsBattlePassSeasonView: false,
+        goalColorMode: 'None',
         raidsTableView: false,
         lreGridView: false,
         lreGoalsPreview: false,
@@ -398,6 +398,14 @@ export const defaultData: IPersonalData2 = {
 
         // Additional Sources
         additionalBooksPerWeek: 0,
+    },
+    xpUseState: {
+        useCommon: true,
+        useUncommon: true,
+        useRare: true,
+        useEpic: true,
+        useLegendary: true,
+        useMythic: true,
     },
 };
 

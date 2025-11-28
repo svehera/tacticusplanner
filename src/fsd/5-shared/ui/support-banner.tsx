@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
 
 export const SupportSection: React.FC = () => {
+    const { viewPreferences } = useContext(StoreContext);
+    const isDarkMode = viewPreferences.theme === 'dark';
     const [copied, setCopied] = useState(false);
     const referralCode = 'DUG-38-VAT';
     const coffeeLink = 'https://buymeacoffee.com/tacticusplanner';
@@ -16,9 +21,11 @@ export const SupportSection: React.FC = () => {
     };
 
     return (
-        <div className="w-full p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div
+            className={`w-full p-6 rounded-2xl ${isDarkMode ? 'bg-gray-800 border-pink-500/50' : 'bg-white border-pink-400'} shadow-lg border-2 flex flex-col md:flex-row justify-between items-center gap-6`}>
             <div className="flex flex-col space-y-3 max-w-md">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                <h2
+                    className={`text-2xl font-bold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'} flex items-center gap-2`}>
                     Support Tacticus Planner
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -28,15 +35,19 @@ export const SupportSection: React.FC = () => {
                         <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.75 3c1.99 0 3.751 1.08 4.75 2.735a5.375 5.375 0 014.75-2.735c3.036 0 5.5 2.322 5.5 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.47 0l-.003-.001z" />
                     </svg>
                 </h2>
-                <p className="text-gray-600 dark:text-gray-300">Found this helpful? Use refer-a-friend code:</p>
+                <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    Found this helpful? Use refer-a-friend code:
+                </p>
 
-                <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-1 pl-4 w-full max-w-xs shadow-sm">
-                    <span className="font-mono font-bold text-gray-800 dark:text-gray-100 tracking-wider select-all">
+                <div
+                    className={`flex items-center justify-between ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} border rounded-lg p-1 pl-4 w-full max-w-xs shadow-sm`}>
+                    <span
+                        className={`font-mono font-bold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'} tracking-wider select-all`}>
                         {referralCode}
                     </span>
                     <button
                         onClick={handleCopy}
-                        className="p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none"
+                        className={`p-2 rounded-md text-gray-400 hover:text-gray-600 ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-200'} transition-colors focus:outline-none`}
                         title="Copy to clipboard">
                         {copied ? (
                             <svg
@@ -72,7 +83,7 @@ export const SupportSection: React.FC = () => {
                     href={coffeeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 shadow-sm hover:shadow-md transition-all duration-200 group">
+                    className={`flex items-center gap-3 ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'} border rounded-xl px-4 py-3 shadow-sm hover:shadow-md transition-all duration-200 group`}>
                     <div className="w-10 h-10 flex-shrink-0 relative">
                         <svg
                             viewBox="0 0 32 32"
@@ -101,10 +112,13 @@ export const SupportSection: React.FC = () => {
                         </svg>
                     </div>
                     <div className="flex flex-col">
-                        <span className="font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        <span
+                            className={`font-bold ${isDarkMode ? 'text-gray-100 group-hover:text-blue-400' : 'text-gray-800 group-hover:text-blue-600'} transition-colors`}>
                             Buy me a coffee
                         </span>
-                        <span className="text-sm text-gray-500 dark:text-gray-400">buymeacoffee.com</span>
+                        <span className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                            buymeacoffee.com
+                        </span>
                     </div>
                 </a>
             </div>
