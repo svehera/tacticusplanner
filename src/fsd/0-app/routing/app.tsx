@@ -1,8 +1,7 @@
 ﻿import { createTheme, ThemeProvider } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { StoreContext } from 'src/reducers/store.provider';
 import { LoginStatusDialog } from 'src/shared-components/user-menu/login-status-dialog';
 import { LoginUserDialog } from 'src/shared-components/user-menu/login-user-dialog';
 import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';
@@ -59,12 +58,12 @@ const darkTheme = createTheme({
 
 export const App = () => {
     const { isAuthenticated } = useAuth();
-    const { viewPreferences } = useContext(StoreContext);
     const { loading, loadingText } = useLoader();
 
     const [showLoginStatus, setShowLoginStatus] = useState(false);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches);
 
     useEffect(() => {
         localStorage.setItem('appVersion', currentVersion);
@@ -78,15 +77,24 @@ export const App = () => {
         }
     }, []);
 
+    // System theme detection
     useEffect(() => {
-        if (viewPreferences.theme === 'dark') {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const handler = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
+        mediaQuery.addEventListener('change', handler);
+        return () => mediaQuery.removeEventListener('change', handler);
+    }, []);
+
+    // Apply dark class to html element
+    useEffect(() => {
+        if (isDarkMode) {
             document.documentElement.classList.add('dark');
             document.documentElement.setAttribute('data-ag-theme-mode', 'dark');
         } else {
             document.documentElement.classList.remove('dark');
             document.documentElement.removeAttribute('data-ag-theme-mode');
         }
-    }, [viewPreferences.theme]);
+    }, [isDarkMode]);
 
     const handleContinue = () => {
         localStorage.setItem('lastVisit', new Date().toISOString());
@@ -108,7 +116,7 @@ export const App = () => {
     };
 
     return (
-        <ThemeProvider theme={viewPreferences.theme === 'dark' ? darkTheme : lightTheme}>
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             {showLoginStatus && (
                 <LoginStatusDialog
                     onClose={handleClose}

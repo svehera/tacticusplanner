@@ -69,21 +69,14 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
         };
     };
 
-    const isDarkMode = viewPreferences.theme === 'dark';
-
-    const getBgColor = (index: number) => {
-        const lightBg = ['#f0f0f0', '#e0e0e0'];
-        const darkBg = ['#1f2937', '#111827'];
-        if (isDarkMode) {
-            return darkBg[index % darkBg.length];
-        }
-        return lightBg[index % lightBg.length];
+    const getRowClassName = (index: number) => {
+        // Alternate between two sets of colors for striping
+        return index % 2 === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-900';
     };
 
     return (
         <div className="flex flex-col gap-4">
-            <div
-                className={`flex justify-end items-center ${isDarkMode ? 'bg-gray-800/50 border-gray-700' : 'bg-gray-200 border-gray-300'} p-2 rounded-lg border`}>
+            <div className="flex justify-end items-center bg-gray-200 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700 p-2 rounded-lg border">
                 <FormControlLabel
                     control={
                         <Switch
@@ -93,7 +86,7 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
                         />
                     }
                     label={
-                        <div className={`flex items-center gap-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                        <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                             {isTableView ? (
                                 <>
                                     <TableRowsIcon fontSize="small" /> <span>Table View</span>
@@ -109,14 +102,12 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
             </div>
 
             {isTableView ? (
-                <div
-                    className={`overflow-x-auto rounded-xl shadow-2xl border ${isDarkMode ? 'border-gray-700/50' : 'border-gray-300'}`}>
+                <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-300 dark:border-gray-700/50">
                     <table
                         key="tokensTable"
-                        className={`min-w-full table-auto border-separate border-spacing-0 ${isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-white text-gray-800'} text-sm`}>
+                        className="min-w-full table-auto border-separate border-spacing-0 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 text-sm">
                         <thead>
-                            <tr
-                                className={`${isDarkMode ? 'bg-gray-700 text-gray-100' : 'bg-gray-300 text-gray-800'} uppercase sticky top-0`}>
+                            <tr className="bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-100 uppercase sticky top-0">
                                 <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Token</th>
                                 <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
                                     Milestone
@@ -149,11 +140,10 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
                                 return (
                                     <tr
                                         key={index}
-                                        style={{ backgroundColor: getBgColor(index) }}
-                                        className={`border-t ${isDarkMode ? 'border-gray-700/50 hover:bg-gray-700' : 'border-gray-300 hover:bg-gray-300'} transition duration-150 ease-in-out`}>
+                                        className={`${getRowClassName(index)} border-t border-gray-300 dark:border-gray-700/50 hover:bg-gray-300 dark:hover:bg-gray-700 transition duration-150 ease-in-out`}>
                                         <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
                                         <td className="px-3 py-2 flex justify-center items-center h-full">
-                                            {renderMilestone(token.milestoneAchievedIndex, isDarkMode)}
+                                            {renderMilestone(token.milestoneAchievedIndex)}
                                         </td>
                                         <td className="px-3 py-2">{token.track}</td>
                                         <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
@@ -191,13 +181,12 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
                                     index={index}
                                     renderMode={LeTokenCardRenderMode.kInGrid}
                                     token={token}
-                                    renderMilestone={x => renderMilestone(x, isDarkMode)}
+                                    renderMilestone={x => renderMilestone(x)}
                                     renderRestrictions={x => renderRestrictions(x, token.track, token.battleNumber, 35)}
                                     renderTeam={x => renderTeam(x, 30)}
                                     isBattleVisible={isVisible}
                                     onToggleBattle={onToggleBattle}
                                     onCompleteBattle={createCompleteBattleHandler(token)}
-                                    isDarkMode={isDarkMode}
                                 />
 
                                 {isVisible && LeBattleService.getBattleFromToken(token, battles) ? (
@@ -205,13 +194,11 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
                                         <LeBattle
                                             battle={LeBattleService.getBattleFromToken(token, battles)!}
                                             trackName={token.track}
-                                            isDarkMode={isDarkMode}
                                         />
                                     </div>
                                 ) : (
                                     isVisible && (
-                                        <div
-                                            className={`w-full text-center ${isDarkMode ? 'text-gray-500 border-gray-700' : 'text-gray-600 border-gray-300'} p-4 border rounded-xl`}>
+                                        <div className="w-full text-center text-gray-600 dark:text-gray-500 border-gray-300 dark:border-gray-700 p-4 border rounded-xl">
                                             Battle data not available.
                                         </div>
                                     )
