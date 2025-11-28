@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
+import { XpUseAction } from '@/reducers/xp-use-reducer';
 import { GuildAction } from 'src/reducers/guildReducer';
 import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { MowsAction } from 'src/reducers/mows.reducer';
@@ -26,6 +27,7 @@ import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
+import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 
 import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
@@ -84,6 +86,7 @@ export interface IGlobalState {
     guildWar: IGuildWar;
     guild: IGuild;
     xpIncomeState: XpIncomeState;
+    xpUseState: XpUseState;
 }
 
 export interface IDispatchContext {
@@ -104,6 +107,7 @@ export interface IDispatchContext {
     guildWar: React.Dispatch<GuildWarAction>;
     guild: React.Dispatch<GuildAction>;
     xpIncomeState: React.Dispatch<XpIncomeAction>;
+    xpUseState: React.Dispatch<XpUseAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -129,6 +133,7 @@ export interface IPersonalData2 {
     guildWar: IGuildWar;
     guild: IGuild;
     xpIncomeState: XpIncomeState;
+    xpUseState: XpUseState;
 }
 
 export interface IGuild {
