@@ -15,6 +15,7 @@ import {
 import { IMowDb } from 'src/v2/features/characters/characters.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
+import { XpUseState } from '@/fsd/1-pages/input-resources/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income/models';
 
 import { defaultData } from '../models/constants';
@@ -107,6 +108,10 @@ export class PersonalDataLocalStorage {
                 xpIncomeState: {
                     ...defaultData.xpIncomeState,
                     ...(this.getItem<XpIncomeState>('xpIncomeState') ?? {}),
+                },
+                xpUseState: {
+                    ...defaultData.xpUseState,
+                    ...(this.getItem<XpUseState>('xpUseState') ?? {}),
                 },
             };
         } else {
@@ -233,6 +238,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             guild: defaultData.guild,
             mows: defaultData.mows,
             xpIncomeState: defaultData.xpIncomeState,
+            xpUseState: defaultData.xpUseState,
             teams: defaultData.teams,
         };
     }

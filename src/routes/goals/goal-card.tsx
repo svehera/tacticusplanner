@@ -29,6 +29,8 @@ import { XpTotal } from 'src/v2/features/goals/xp-total';
 
 import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
+import { XpGoalProgressBar } from './xp-book-progress-bar';
+
 interface Props {
     goal: CharacterRaidGoalSelect;
     goalEstimate?: IGoalEstimate;
@@ -156,12 +158,13 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                         <CalendarMonthIcon /> {goalEstimate.xpDaysLeft}
                                     </div>
                                 </AccessibleTooltip>
-                                <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
-                                    <div className="flex-box gap3">
-                                        <MiscIcon icon={'legendaryBook'} height={18} width={15} />{' '}
-                                        {goalEstimate.xpBooksTotal}
-                                    </div>
-                                </AccessibleTooltip>
+                                {goalEstimate.xpBooksApplied !== undefined &&
+                                    goalEstimate.xpBooksRequired !== undefined && (
+                                        <XpGoalProgressBar
+                                            applied={goalEstimate.xpBooksApplied}
+                                            required={goalEstimate.xpBooksRequired}
+                                        />
+                                    )}
                             </div>
                         )}
                         {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
@@ -277,12 +280,13 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                         <CalendarMonthIcon /> {goalEstimate.xpDaysLeft}
                                     </div>
                                 </AccessibleTooltip>
-                                <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
-                                    <div className="flex-box gap3">
-                                        <MiscIcon icon={'legendaryBook'} height={18} width={15} />{' '}
-                                        {goalEstimate.xpBooksTotal}
-                                    </div>
-                                </AccessibleTooltip>
+                                {goalEstimate.xpBooksApplied !== undefined &&
+                                    goalEstimate.xpBooksRequired !== undefined && (
+                                        <XpGoalProgressBar
+                                            applied={goalEstimate.xpBooksApplied}
+                                            required={goalEstimate.xpBooksRequired}
+                                        />
+                                    )}
                             </div>
                         )}
                         {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
