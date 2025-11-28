@@ -122,6 +122,7 @@ export const Lre: React.FC = () => {
                         tokenDisplays={tokenDisplays}
                         currentPoints={currentPoints}
                         nextTokenCompleted={nextTokenCompleted}
+                        toggleBattleState={toggleBattleState}
                     />
                 );
             case LreSection.battles:
