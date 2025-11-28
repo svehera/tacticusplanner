@@ -170,7 +170,7 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
                                             <IconButton
                                                 size="small"
                                                 onClick={createCompleteBattleHandler(token)}
-                                                sx={{ color: 'gray' }}
+                                                sx={{ color: 'text.secondary' }}
                                                 title="Mark this battle as completed">
                                                 <CheckIcon fontSize="small" />
                                             </IconButton>
