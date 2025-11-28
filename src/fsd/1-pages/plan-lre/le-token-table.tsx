@@ -68,8 +68,6 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
         };
     };
 
-    const isDark = viewPreferences.theme === 'dark';
-
     const isDarkMode = viewPreferences.theme === 'dark';
 
     const getBgColor = (index: number) => {
@@ -154,7 +152,7 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
                                         className={`border-t ${isDarkMode ? 'border-gray-700/50 hover:bg-gray-700' : 'border-gray-300 hover:bg-gray-300'} transition duration-150 ease-in-out`}>
                                         <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
                                         <td className="px-3 py-2 flex justify-center items-center h-full">
-                                            {renderMilestone(token.milestoneAchievedIndex, isDark)}
+                                            {renderMilestone(token.milestoneAchievedIndex, isDarkMode)}
                                         </td>
                                         <td className="px-3 py-2">{token.track}</td>
                                         <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
@@ -192,13 +190,13 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
                                     index={index}
                                     renderMode={LeTokenCardRenderMode.kInGrid}
                                     token={token}
-                                    renderMilestone={x => renderMilestone(x, isDark)}
+                                    renderMilestone={x => renderMilestone(x, isDarkMode)}
                                     renderRestrictions={x => renderRestrictions(x, token.track, token.battleNumber, 35)}
                                     renderTeam={x => renderTeam(x, 30)}
                                     isBattleVisible={isVisible}
                                     onToggleBattle={onToggleBattle}
                                     onCompleteBattle={createCompleteBattleHandler(token)}
-                                    isDarkMode={isDark}
+                                    isDarkMode={isDarkMode}
                                 />
 
                                 {isVisible && LeBattleService.getBattleFromToken(token, battles) ? (
