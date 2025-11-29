@@ -200,7 +200,6 @@ export const defaultData: IPersonalData2 = {
         ignoreRecommendedFirst: false,
     },
     viewPreferences: {
-        theme: 'light',
         showAlpha: true,
         showBeta: true,
         showGamma: true,

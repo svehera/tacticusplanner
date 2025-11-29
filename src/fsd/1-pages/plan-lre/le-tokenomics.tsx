@@ -1,7 +1,4 @@
-import { useContext, useState } from 'react';
-
-// eslint-disable-next-line import-x/no-internal-modules
-import { StoreContext } from '@/reducers/store.provider';
+import { useState } from 'react';
 
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
 
@@ -44,7 +41,6 @@ export const LeTokenomics: React.FC<Props> = ({
     nextTokenCompleted,
     toggleBattleState,
 }: Props) => {
-    const { viewPreferences } = useContext(StoreContext);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
@@ -56,7 +52,6 @@ export const LeTokenomics: React.FC<Props> = ({
         .sort((a, b) => a.points - b.points);
 
     const firstToken = tokenDisplays.length > 0 ? tokenDisplays[0] : null;
-    const isDarkMode = viewPreferences.theme === 'dark';
 
     return (
         <div className="flex flex-col gap-y-8 w-full">
@@ -70,7 +65,7 @@ export const LeTokenomics: React.FC<Props> = ({
                             token={firstToken}
                             index={0}
                             renderMode={LeTokenCardRenderMode.kStandalone}
-                            renderMilestone={index => renderMilestone(index, isDarkMode)}
+                            renderMilestone={index => renderMilestone(index)}
                             renderRestrictions={x =>
                                 renderRestrictions(x, firstToken.track, firstToken.battleNumber, 35)
                             }
@@ -78,7 +73,6 @@ export const LeTokenomics: React.FC<Props> = ({
                             isBattleVisible={isFirstTokenBattleVisible}
                             onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
                             onCompleteBattle={nextTokenCompleted}
-                            isDarkMode={isDarkMode}
                         />
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) !== undefined && (
@@ -86,14 +80,12 @@ export const LeTokenomics: React.FC<Props> = ({
                                     <LeBattle
                                         battle={LeBattleService.getBattleFromToken(firstToken, battles)!}
                                         trackName={firstToken.track}
-                                        isDarkMode={isDarkMode}
                                     />
                                 </div>
                             )}
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) === undefined && (
-                                <div
-                                    className={`w-full text-center ${isDarkMode ? 'text-gray-500 border-gray-700' : 'text-gray-600 border-gray-300'} p-4 border rounded-xl mt-4`}>
+                                <div className="w-full text-center text-gray-600 dark:text-gray-500 border-gray-300 dark:border-gray-700 p-4 border rounded-xl mt-4">
                                     Battle data not available.
                                 </div>
                             )}
