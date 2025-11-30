@@ -182,6 +182,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                             values={[
                                 CampaignType.Elite,
                                 CampaignType.Extremis,
+                                CampaignType.Standard,
                                 CampaignType.Mirror,
                                 CampaignType.Normal,
                                 CampaignType.Early,

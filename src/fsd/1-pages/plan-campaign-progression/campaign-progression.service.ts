@@ -2,7 +2,7 @@ import { uniq } from 'lodash';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { FactionsService } from '@/fsd/5-shared/lib/factions.service';
-import { Rank, Rarity } from '@/fsd/5-shared/model';
+import { Rank } from '@/fsd/5-shared/model';
 
 import {
     battleData,
@@ -423,56 +423,10 @@ export class CampaignsProgressionService {
                 return 3;
             case CampaignType.Elite:
                 return 10;
+            case CampaignType.Standard:
+                return 6;
             case CampaignType.Extremis:
                 return 6;
-        }
-        return -1;
-    }
-
-    /**
-     * @param type The campaign type of the node.
-     * @param rarity The rarity of the reward material from the battle.
-     * @returns The drop rate of the item (e.g. 0.3 = 3 times out of ten).
-     */
-    public static getDropRate(type: CampaignType, rarity: Rarity): number {
-        const normalDropRates = new Map<Rarity, number>([
-            [Rarity.Common, 3 / 4.0],
-            [Rarity.Uncommon, 4 / 7.0],
-            [Rarity.Rare, 1 / 5.0],
-            [Rarity.Epic, 1 / 7.0],
-            [Rarity.Legendary, 1 / 12.0],
-        ]);
-        const mirrorDropRates = new Map<Rarity, number>([
-            [Rarity.Common, 4 / 5.0],
-            [Rarity.Uncommon, 7 / 10.0],
-            [Rarity.Rare, 1 / 3.0],
-            [Rarity.Epic, 1 / 5.0],
-            [Rarity.Legendary, 1 / 11.0],
-        ]);
-        const eliteDropRates = new Map<Rarity, number>([
-            [Rarity.Common, 3 / 2.0],
-            [Rarity.Uncommon, 1.25],
-            [Rarity.Rare, 13 / 12.0],
-            [Rarity.Epic, 2 / 3.0],
-            [Rarity.Legendary, 1 / 3.0],
-        ]);
-        const extremisDropRates = new Map<Rarity, number>([
-            [Rarity.Common, 0.9375],
-            [Rarity.Uncommon, 0.75],
-            [Rarity.Rare, 2 / 3.0],
-            [Rarity.Epic, 1 / 3.0],
-            [Rarity.Legendary, 1 / 7.0],
-        ]);
-        switch (type) {
-            case CampaignType.Normal:
-            case CampaignType.Early:
-                return normalDropRates.get(rarity) ?? -1;
-            case CampaignType.Mirror:
-                return mirrorDropRates.get(rarity) ?? -1;
-            case CampaignType.Elite:
-                return eliteDropRates.get(rarity) ?? -1;
-            case CampaignType.Extremis:
-                return extremisDropRates.get(rarity) ?? -1;
         }
         return -1;
     }
