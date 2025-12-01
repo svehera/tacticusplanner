@@ -1,12 +1,18 @@
 export enum CampaignType {
+    // No-reward-from-raids Indomitus
     SuperEarly = 'SuperEarly',
+    // 5-energy Indomitus
     Early = 'Early',
+    // 5-energy Indomitus that give character shards
     EarlyChars = 'EarlyChars',
     EarlyMirrorChars = 'EarlyMirrorChars',
     Normal = 'Normal',
     Mirror = 'Mirror',
     Elite = 'Elite',
     Onslaught = 'Onslaught',
+    // CE Standard
+    Standard = 'Standard',
+    // CE Extremis
     Extremis = 'Extremis',
 }
 

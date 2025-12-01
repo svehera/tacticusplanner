@@ -626,6 +626,7 @@ export class UpgradesService {
                         CampaignType.Normal,
                         CampaignType.Early,
                         CampaignType.Mirror,
+                        CampaignType.Standard,
                         CampaignType.Elite,
                         CampaignType.Extremis,
                     ]),
