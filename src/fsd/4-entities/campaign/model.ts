@@ -164,4 +164,5 @@ export interface ICampaignsFilters {
     slotsCount?: number[];
     enemiesTypes?: string[];
     enemiesMinCount?: number | null;
+    enemiesMaxCount?: number | null;
 }
