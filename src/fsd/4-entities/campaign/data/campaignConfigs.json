@@ -103,6 +103,19 @@
             "shard": 0
         }
     },
+    "Standard": {
+        "type": "Standard",
+        "energyCost": 6,
+        "dailyBattleCount": 10,
+        "dropRate": {
+            "common": 0.9,
+            "uncommon": 0.75,
+            "rare": 0.5,
+            "epic": 0.25,
+            "legendary": 0.111,
+            "shard": 0.3333
+        }
+    },
     "Extremis": {
         "type": "Extremis",
         "energyCost": 6,
