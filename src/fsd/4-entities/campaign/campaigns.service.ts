@@ -204,6 +204,7 @@ export class CampaignsService {
             slotsCount,
             enemiesTypes,
             enemiesMinCount,
+            enemiesMaxCount,
         } = filters;
 
         const isString = (v: unknown): v is string => typeof v === 'string';
@@ -215,6 +216,10 @@ export class CampaignsService {
             .filter(isString);
 
         if (enemiesMinCount && enemiesMinCount > location.enemiesTotal) {
+            return false;
+        }
+
+        if (enemiesMaxCount && enemiesMaxCount <= location.enemiesTotal) {
             return false;
         }
 
