@@ -160,7 +160,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                             }}
                             sx={{ minWidth: 150, maxWidth: 300 }}
                             renderInput={params => <TextField {...params} label="Min Enemy" />}
-                            getOptionLabel={option => `${option}+`}
+                            getOptionLabel={option => `>=${option}`}
                         />
                         <Autocomplete
                             fullWidth
@@ -172,7 +172,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                             }}
                             sx={{ minWidth: 150, maxWidth: 300 }}
                             renderInput={params => <TextField {...params} label="Max Enemy" />}
-                            getOptionLabel={option => `${option}+`}
+                            getOptionLabel={option => `<=${option}`}
                         />
 
                         <MultipleSelectCheckmarks
