@@ -215,7 +215,7 @@ export class CampaignsService {
             .map(faction => FactionsService.getFactionSnowprintId(faction))
             .filter(isString);
 
-        if (enemiesMinCount !== null && enemiesMinCount > location.enemiesTotal) {
+        if (enemiesMinCount !== null && enemiesMinCount >= location.enemiesTotal) {
             return false;
         }
 
