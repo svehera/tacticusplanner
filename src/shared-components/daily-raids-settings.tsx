@@ -38,11 +38,17 @@ import { DispatchContext, StoreContext } from '../reducers/store.provider';
 
 const defaultCustomSettings: ICustomDailyRaidsSettings = {
     [Rarity.Mythic]: [CampaignType.Extremis],
-    [Rarity.Legendary]: [CampaignType.Elite, CampaignType.Mirror],
-    [Rarity.Epic]: [CampaignType.Elite, CampaignType.Mirror],
-    [Rarity.Rare]: [CampaignType.Elite, CampaignType.Mirror],
-    [Rarity.Uncommon]: [CampaignType.Elite, CampaignType.Early, CampaignType.Mirror],
-    [Rarity.Common]: [CampaignType.Elite, CampaignType.Early, CampaignType.Mirror],
+    [Rarity.Legendary]: [CampaignType.Elite, CampaignType.Extremis, CampaignType.Mirror, CampaignType.Standard],
+    [Rarity.Epic]: [CampaignType.Elite, CampaignType.Extremis, CampaignType.Mirror, CampaignType.Standard],
+    [Rarity.Rare]: [CampaignType.Elite, CampaignType.Extremis, CampaignType.Mirror, CampaignType.Standard],
+    [Rarity.Uncommon]: [
+        CampaignType.Elite,
+        CampaignType.Extremis,
+        CampaignType.Early,
+        CampaignType.Mirror,
+        CampaignType.Standard,
+    ],
+    [Rarity.Common]: [CampaignType.Elite, CampaignType.Extremis, CampaignType.Mirror, CampaignType.Standard],
 };
 
 const energyMarks = [

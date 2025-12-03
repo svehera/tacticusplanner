@@ -352,11 +352,9 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 action={
                     menuItemSelect ? (
                         <>
-                            {!isGoalCompleted ? (
-                                <IconButton onClick={() => menuItemSelect('edit')}>
-                                    <Edit fontSize="small" />
-                                </IconButton>
-                            ) : undefined}
+                            <IconButton onClick={() => menuItemSelect('edit')}>
+                                <Edit fontSize="small" />
+                            </IconButton>
                             <IconButton onClick={() => menuItemSelect('delete')}>
                                 <DeleteForever fontSize="small" />
                             </IconButton>
