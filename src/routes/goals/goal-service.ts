@@ -27,7 +27,7 @@ export class GoalService {
 
     public static getBackgroundColor(goalsColorCoding: GoalColorMode, goalEstimate: IGoalEstimate | undefined): string {
         if (goalsColorCoding === 'None') {
-            return GoalService.getColorString({
+            return this.getColorString({
                 r: 0,
                 g: 0,
                 b: 0,
@@ -81,13 +81,13 @@ export class GoalService {
                 const nextDateMs = nextDate.getTime();
                 const msDifference = nextDateMs - raidSeasonStart;
 
-                const nextDateSeasonIndex = Math.floor(msDifference / msPerRaidSeason);
+                const nextDateSeasonIndex = Math.max(0, Math.floor(msDifference / msPerRaidSeason));
 
                 const currentMs = new Date().getTime();
                 const msDifferenceCurrent = currentMs - raidSeasonStart;
                 const currentSeasonIndex = Math.floor(msDifferenceCurrent / msPerRaidSeason);
 
-                const colorIndex = Math.min(3, nextDateSeasonIndex - currentSeasonIndex);
+                const colorIndex = Math.max(0, Math.min(3, nextDateSeasonIndex - currentSeasonIndex));
 
                 return GoalService.getColorString(
                     GoalService.interpolateColor(kBgColors[colorIndex], kBgColors[colorIndex + 1], /*factor=*/ 0)
