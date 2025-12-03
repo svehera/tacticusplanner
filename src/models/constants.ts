@@ -407,6 +407,7 @@ export const defaultData: IPersonalData2 = {
         useLegendary: true,
         useMythic: true,
     },
+    rosterSnapshots: { base: undefined, diffs: [] },
 };
 
 export const goalsLimit = 100;

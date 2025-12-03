@@ -18,6 +18,7 @@ import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
+import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/plan-roster-snapshots/roster-snapshots.menu-item';
 import { guildApiMenuItem } from '@/v2/pages/guild-api/guild-api.menu-item';
 import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
@@ -62,6 +63,7 @@ export const menuItemById = {
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
     campaignProgression: campaignProgressionMenuItem,
+    rosterSnapshots: rosterSnapshotsMenuItem,
 
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
@@ -80,6 +82,7 @@ export const menuItemById = {
 
 export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
+    menuItemById['rosterSnapshots'],
     menuItemById['myProgress'],
     menuItemById['inventory'],
     menuItemById['xpIncome'],

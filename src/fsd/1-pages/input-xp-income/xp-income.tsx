@@ -66,7 +66,7 @@ export const XpIncome: React.FC = () => {
 
     const dispatchUpdate = useCallback(
         (key: keyof XpIncomeState, value: XpIncomeState[keyof XpIncomeState]) => {
-            dispatch.xpIncomeState({
+            dispatch.xpIncome({
                 type: 'SaveXpIncomeState',
                 value: {
                     ...xpIncomeState,
