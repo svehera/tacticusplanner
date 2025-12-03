@@ -1,0 +1,9 @@
+import { RouteObject } from 'react-router-dom';
+
+export const rosterSnapshotsLazyRoute: RouteObject = {
+    path: 'plan/rostersnapshots',
+    async lazy() {
+        const { RosterSnapshots } = await import('./roster-snapshots');
+        return { Component: RosterSnapshots };
+    },
+};

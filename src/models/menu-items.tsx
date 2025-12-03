@@ -28,6 +28,7 @@ import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
+import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/plan-roster-snapshots/roster-snapshots.menu-item';
 import { teamsMenuItem } from '@/fsd/1-pages/teams/teams.menu-item';
 import { wyoMenuItem } from '@/fsd/1-pages/who-you-own/who-you-own.menu-item';
 

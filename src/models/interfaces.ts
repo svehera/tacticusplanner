@@ -31,6 +31,7 @@ import { IViewPreferences } from '@/fsd/3-features/view-settings';
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
+import { IRosterSnapshotsState } from '@/fsd/1-pages/plan-roster-snapshots/models';
 
 import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
 import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
@@ -87,6 +88,9 @@ export interface IGlobalState {
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
+    xpIncome: XpIncomeState;
+    xpUse: XpUseState;
+    rosterSnapshots: IRosterSnapshotsState;
     xpIncome: XpIncomeState;
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
