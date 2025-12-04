@@ -2,6 +2,7 @@ import { ILegendaryEventStatic } from '../static-data.model';
 
 import aunshiJson from './1-Aunshi.json';
 import luciusJson from './10-Lucius.json';
+import farsightJson from './11-Farsight.json';
 import shadowsunJson from './2-Shadowsun.json';
 import ragnarJson from './3-Ragnar.json';
 import vitruviusJson from './4-Vitruvius.json';
@@ -21,6 +22,7 @@ export const shadowsun: ILegendaryEventStatic = shadowsunJson;
 export const trajann: ILegendaryEventStatic = trajannJson;
 export const vitruvius: ILegendaryEventStatic = vitruviusJson;
 export const lucius: ILegendaryEventStatic = luciusJson;
+export const farsight: ILegendaryEventStatic = farsightJson;
 
 export const allLegendaryEvents: ILegendaryEventStatic[] = [
     aunshi,
@@ -33,4 +35,5 @@ export const allLegendaryEvents: ILegendaryEventStatic[] = [
     dante,
     trajann,
     lucius,
+    farsight,
 ];

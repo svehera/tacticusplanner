@@ -22,6 +22,9 @@ import {
     IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
 
+import { XpUseState } from '@/fsd/1-pages/input-resources';
+import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
+
 export interface RevisedGoals {
     goalEstimates: IGoalEstimate[];
     neededBadges: Record<Alliance, Record<Rarity, number>>;
@@ -34,6 +37,11 @@ export interface IXpLevel {
     currentLevel: number;
     xpAtLevel: number;
     xpFromPriorGoalApplied?: boolean;
+}
+
+interface XpBookAccrual {
+    accruedDate: Date;
+    booksAccrued: number;
 }
 
 export class GoalsService {
@@ -316,6 +324,116 @@ export class GoalsService {
         return goal?.unitName;
     }
 
+    private static daysDifference(dateA: Date, dateB: Date): number {
+        const msPerDay = 1000 * 60 * 60 * 24;
+        return (dateA.getTime() - dateB.getTime()) / msPerDay;
+    }
+
+    private static addDays(date: Date, days: number): Date {
+        const msPerDay = 1000 * 60 * 60 * 24;
+        return new Date(date.getTime() + days * msPerDay);
+    }
+
+    /**
+     * Calculates the new XpBookAccrual state after using books for a single goal.
+     * The process determines the goal's final completion date ONLY based on the book requirement
+     * and calculates the resulting surplus/deficit.
+     *
+     * @param goal The GoalEstimate being completed.
+     * @param currentAccrual The current balance of books and the date it was last calculated.
+     * @param booksPerDay The constant daily income of books (floating point).
+     * @returns A new XpBookAccrual object reflecting the state after the goal is completed.
+     */
+    private static processGoalAccrual(
+        booksNeeded: number,
+        currentAccrual: XpBookAccrual,
+        booksPerDay: number
+    ): XpBookAccrual {
+        const netBooksNeeded = booksNeeded - currentAccrual.booksAccrued;
+
+        let bookCompletionDate: Date;
+
+        if (netBooksNeeded <= 0) {
+            bookCompletionDate = currentAccrual.accruedDate;
+        } else {
+            const daysToAccrueFractional = netBooksNeeded / booksPerDay;
+            const daysToWaitWhole = Math.ceil(daysToAccrueFractional);
+            bookCompletionDate = this.addDays(currentAccrual.accruedDate, daysToWaitWhole);
+        }
+        const totalDaysElapsed = this.daysDifference(bookCompletionDate, currentAccrual.accruedDate);
+        const totalAccruedBooks = currentAccrual.booksAccrued + totalDaysElapsed * booksPerDay;
+        const newBooksAccrued = totalAccruedBooks - booksNeeded;
+        return {
+            accruedDate: bookCompletionDate,
+            booksAccrued: newBooksAccrued,
+        };
+    }
+
+    private static adjustNeededXp(xpNeeded: number, heldBooks: Record<Rarity, number>): number {
+        while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
+            xpNeeded -= 62500;
+            heldBooks[Rarity.Mythic] -= 1;
+        }
+        while (xpNeeded >= 12500 && heldBooks[Rarity.Legendary] > 0) {
+            xpNeeded -= 12500;
+            heldBooks[Rarity.Legendary] -= 1;
+        }
+        while (xpNeeded >= 2500 && heldBooks[Rarity.Epic] > 0) {
+            xpNeeded -= 2500;
+            heldBooks[Rarity.Epic] -= 1;
+        }
+        while (xpNeeded >= 500 && heldBooks[Rarity.Rare] > 0) {
+            xpNeeded -= 500;
+            heldBooks[Rarity.Rare] -= 1;
+        }
+        while (xpNeeded >= 100 && heldBooks[Rarity.Uncommon] > 0) {
+            xpNeeded -= 100;
+            heldBooks[Rarity.Uncommon] -= 1;
+        }
+        while (xpNeeded >= 20 && heldBooks[Rarity.Common] > 0) {
+            xpNeeded -= 20;
+            heldBooks[Rarity.Common] -= 1;
+        }
+        if (xpNeeded > 0) {
+            while (xpNeeded > 0 && heldBooks[Rarity.Common] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 20);
+                heldBooks[Rarity.Common] -= 1;
+            }
+            while (xpNeeded > 0 && heldBooks[Rarity.Uncommon] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 100);
+                heldBooks[Rarity.Uncommon] -= 1;
+            }
+            while (xpNeeded > 0 && heldBooks[Rarity.Rare] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 500);
+                heldBooks[Rarity.Rare] -= 1;
+            }
+            while (xpNeeded > 0 && heldBooks[Rarity.Epic] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 2500);
+                heldBooks[Rarity.Epic] -= 1;
+            }
+            while (xpNeeded > 0 && heldBooks[Rarity.Legendary] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 12500);
+                heldBooks[Rarity.Legendary] -= 1;
+            }
+            while (xpNeeded > 0 && heldBooks[Rarity.Mythic] > 0) {
+                xpNeeded = Math.max(0, xpNeeded - 62500);
+                heldBooks[Rarity.Mythic] -= 1;
+            }
+        }
+        return xpNeeded;
+    }
+
+    private static computeHeldBooks(inventory: IInventory, xpUseState: XpUseState): Record<Rarity, number> {
+        const heldBooks = { ...inventory.xpBooks };
+        if (!xpUseState.useCommon) heldBooks[Rarity.Common] = 0;
+        if (!xpUseState.useUncommon) heldBooks[Rarity.Uncommon] = 0;
+        if (!xpUseState.useRare) heldBooks[Rarity.Rare] = 0;
+        if (!xpUseState.useEpic) heldBooks[Rarity.Epic] = 0;
+        if (!xpUseState.useLegendary) heldBooks[Rarity.Legendary] = 0;
+        if (!xpUseState.useMythic) heldBooks[Rarity.Mythic] = 0;
+        return heldBooks;
+    }
+
     /**
      * Computes the total number of remaining resources needed AND adjusts all goals to use as
      * many possible badges from our existing inventory.
@@ -324,7 +442,9 @@ export class GoalsService {
         goals: IPersonalGoal[],
         goalsEstimate: IGoalEstimate[],
         inventory: IInventory,
-        upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[]
+        xpUseState: XpUseState,
+        upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[],
+        xpIncomeState: XpIncomeState
     ): RevisedGoals {
         const createRarityRecord = (): Record<Rarity, number> => ({
             [Rarity.Common]: 0,
@@ -335,7 +455,7 @@ export class GoalsService {
             [Rarity.Mythic]: 0,
         });
 
-        const heldBooks = { ...inventory.xpBooks };
+        const heldBooks = this.computeHeldBooks(inventory, xpUseState);
 
         const neededBadges: Record<Alliance, Record<Rarity, number>> = {
             [Alliance.Chaos]: createRarityRecord(),
@@ -355,11 +475,13 @@ export class GoalsService {
 
         const newGoalsEstimates: IGoalEstimate[] = cloneDeep(goalsEstimate);
         const goalsByPrio = orderBy(
-            goals.map(x => ({ id: x.id, priority: x.priority })),
+            goals.map(x => ({ id: x.id, priority: x.priority, unit: x.character })),
             ['priority'],
             ['asc']
         );
         let totalXpNeeded = 0;
+        const today = new Date();
+        let xpBooksAccrual = { accruedDate: today, booksAccrued: 0 } as XpBookAccrual;
         for (const goalIdAndPriority of goalsByPrio) {
             const goal = newGoalsEstimates.find(x => x.goalId === goalIdAndPriority.id);
 
@@ -367,71 +489,47 @@ export class GoalsService {
                 console.error('could not find goal estimate for goal id ' + goalIdAndPriority.id);
                 continue;
             }
+            const remainingXp = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
+            goal.xpBooksRequired = Math.floor(remainingXp / 12500);
+            const xpNeeded = this.adjustNeededXp(remainingXp, heldBooks);
+            goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / 12500);
+
             if (goal.xpEstimate || goal.xpEstimateAbilities) {
-                let xpNeeded = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
-                while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
-                    xpNeeded -= 62500;
-                    heldBooks[Rarity.Mythic] -= 1;
-                }
-                while (xpNeeded >= 12500 && heldBooks[Rarity.Legendary] > 0) {
-                    xpNeeded -= 12500;
-                    heldBooks[Rarity.Legendary] -= 1;
-                }
-                while (xpNeeded >= 2500 && heldBooks[Rarity.Epic] > 0) {
-                    xpNeeded -= 2500;
-                    heldBooks[Rarity.Epic] -= 1;
-                }
-                while (xpNeeded >= 500 && heldBooks[Rarity.Rare] > 0) {
-                    xpNeeded -= 500;
-                    heldBooks[Rarity.Rare] -= 1;
-                }
-                while (xpNeeded >= 100 && heldBooks[Rarity.Uncommon] > 0) {
-                    xpNeeded -= 100;
-                    heldBooks[Rarity.Uncommon] -= 1;
-                }
-                while (xpNeeded >= 20 && heldBooks[Rarity.Common] > 0) {
-                    xpNeeded -= 20;
-                    heldBooks[Rarity.Common] -= 1;
-                }
-                if (xpNeeded > 0) {
-                    while (xpNeeded > 0 && heldBooks[Rarity.Common] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 20);
-                        heldBooks[Rarity.Common] -= 1;
-                    }
-                    while (xpNeeded > 0 && heldBooks[Rarity.Uncommon] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 100);
-                        heldBooks[Rarity.Uncommon] -= 1;
-                    }
-                    while (xpNeeded > 0 && heldBooks[Rarity.Rare] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 500);
-                        heldBooks[Rarity.Rare] -= 1;
-                    }
-                    while (xpNeeded > 0 && heldBooks[Rarity.Epic] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 2500);
-                        heldBooks[Rarity.Epic] -= 1;
-                    }
-                    while (xpNeeded > 0 && heldBooks[Rarity.Legendary] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 12500);
-                        heldBooks[Rarity.Legendary] -= 1;
-                    }
-                    while (xpNeeded > 0 && heldBooks[Rarity.Mythic] > 0) {
-                        xpNeeded = Math.max(0, xpNeeded - 62500);
-                        heldBooks[Rarity.Mythic] -= 1;
-                    }
-                }
                 totalXpNeeded += xpNeeded;
                 goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
                 if (totalXpNeeded === 0) {
                     goal.xpEstimate = undefined;
                     goal.xpEstimateAbilities = undefined;
-                    continue;
-                }
-                if (goal.xpEstimate) {
-                    goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
-                    goal.xpEstimate.xpLeft = xpNeeded;
                 } else {
-                    goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
-                    goal.xpEstimateAbilities!.xpLeft = xpNeeded;
+                    if (goal.xpEstimate) {
+                        goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
+                        goal.xpEstimate.xpLeft = xpNeeded;
+                        if (xpIncomeState.manualBooksPerDay > 0) {
+                            const newAccrual = this.processGoalAccrual(
+                                Math.ceil(xpNeeded / 12500),
+                                xpBooksAccrual,
+                                xpIncomeState.manualBooksPerDay
+                            );
+                            goal.xpDaysLeft = Math.ceil(
+                                (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
+                            );
+                            xpBooksAccrual = newAccrual;
+                        }
+                    } else {
+                        goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
+                        goal.xpEstimateAbilities!.xpLeft = xpNeeded;
+                        if (xpIncomeState.manualBooksPerDay > 0) {
+                            const newAccrual = this.processGoalAccrual(
+                                Math.ceil(xpNeeded / 12500),
+                                xpBooksAccrual,
+                                xpIncomeState.manualBooksPerDay
+                            );
+                            goal.xpDaysLeft = Math.ceil(
+                                (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
+                            );
+                            xpBooksAccrual = newAccrual;
+                        }
+                    }
                 }
             }
 
@@ -454,6 +552,7 @@ export class GoalsService {
                     neededBadges[alliance][rarity] += count;
                 }
             }
+
             if (goal.mowEstimate === undefined) continue;
             const forgeBadges = goal.mowEstimate.forgeBadges;
             forgeBadges.entries().forEach(([rarity, count]) => {

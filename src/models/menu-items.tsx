@@ -13,6 +13,7 @@ import React from 'react';
 
 import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
 import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-item';
+import { xpIncomeMenuItem } from '@/fsd/1-pages/input-xp-income/xp-income.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
@@ -74,12 +75,14 @@ export const menuItemById = {
     guildInsights: guildInsightsMenuItem,
     teams: teamsMenuItem,
     guides: guidesMenuItem,
+    xpIncome: xpIncomeMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
     menuItemById['myProgress'],
     menuItemById['inventory'],
+    menuItemById['xpIncome'],
     menuItemById['resources'],
     menuItemById['guild'],
 ];

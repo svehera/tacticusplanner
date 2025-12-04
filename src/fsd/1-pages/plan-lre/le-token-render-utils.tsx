@@ -18,21 +18,24 @@ const getOrdinal = (num: number) => {
     return num + 'th';
 };
 
-const getTextColor = (severity: number, isDarkMode: boolean) => {
-    const lightText = ['#b00', '#bb0', '#0b0'];
-    const darkText = ['#f87171', '#facc15', '#4ade80'];
+const getSeverityClass = (severity: number) => {
     const index = severity < 0 ? 0 : severity > 2 ? 2 : severity;
-    return isDarkMode ? darkText[index] : lightText[index];
+    const classes = [
+        'text-[#b00] dark:text-red-400',
+        'text-[#bb0] dark:text-yellow-400',
+        'text-[#0b0] dark:text-green-400',
+    ];
+    return classes[index];
 };
 
-export const renderMilestone = (milestoneIndex: number, isDarkMode: boolean) => {
+export const renderMilestone = (milestoneIndex: number) => {
     if (milestoneIndex === -1 || milestoneIndex >= milestonesAndPoints.length) {
         return <></>;
     }
     const milestone = milestonesAndPoints[milestoneIndex];
     return (
-        <div className="flex flex-col items-center justify-center p-1 border border-gray-600 rounded-lg bg-gray-700/50 min-w-[70px]">
-            <div className="flex items-center text-lg font-bold">
+        <div className="flex flex-col items-center justify-center p-1 border border-gray-400 dark:border-gray-600 rounded-lg bg-blue-100 dark:bg-gray-700/50 min-w-[70px]">
+            <div className="flex items-center text-lg font-bold text-gray-800 dark:text-white">
                 {milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1]?.points ? (
                     '100%'
                 ) : (
@@ -46,12 +49,10 @@ export const renderMilestone = (milestoneIndex: number, isDarkMode: boolean) => 
                 )}
             </div>
             <div className="text-xs font-medium mt-0.5 whitespace-nowrap">
-                <span style={{ color: getTextColor(3 - milestone.round, isDarkMode) }}>
-                    {getOrdinal(milestone.round)} Round
-                </span>
+                <span className={getSeverityClass(3 - milestone.round)}>{getOrdinal(milestone.round)} Round</span>
             </div>
             <div className="text-[10px] whitespace-nowrap">
-                <span style={{ color: getTextColor(2 - milestone.packsPerRound, isDarkMode) }}>
+                <span className={getSeverityClass(2 - milestone.packsPerRound)}>
                     {milestone.packsPerRound == 2
                         ? 'w/ both packs'
                         : milestone.packsPerRound == 1
@@ -86,7 +87,7 @@ export const renderRestrictions = (
 );
 
 export const renderTeam = (team: string[], sizePx?: number) => (
-    <div className="flex flex-wrap justify-center gap-1">
+    <div className="flex flex-row flex-nowrap justify-center -space-x-1">
         {team.map((snowprintId: string, i) => {
             const unit = CharactersService.getUnit(snowprintId);
             return (

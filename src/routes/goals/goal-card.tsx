@@ -29,6 +29,8 @@ import { XpTotal } from 'src/v2/features/goals/xp-total';
 
 import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
+import { XpGoalProgressBar } from './xp-book-progress-bar';
+
 interface Props {
     goal: CharacterRaidGoalSelect;
     goalEstimate?: IGoalEstimate;
@@ -148,7 +150,24 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                 </div>
                             </AccessibleTooltip>
                         </div>
-                        {xpEstimate && <XpTotal {...xpEstimate} />}
+                        {goalEstimate.xpDaysLeft !== undefined && (
+                            <div className="flex-box gap10 wrap">
+                                <AccessibleTooltip
+                                    title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                                    <div className="flex-box gap3">
+                                        <CalendarMonthIcon /> {goalEstimate.xpDaysLeft}
+                                    </div>
+                                </AccessibleTooltip>
+                                {goalEstimate.xpBooksApplied !== undefined &&
+                                    goalEstimate.xpBooksRequired !== undefined && (
+                                        <XpGoalProgressBar
+                                            applied={goalEstimate.xpBooksApplied}
+                                            required={goalEstimate.xpBooksRequired}
+                                        />
+                                    )}
+                            </div>
+                        )}
+                        {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
                         <Button
                             size="small"
                             variant={'outlined'}
@@ -233,6 +252,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
             case PersonalGoalType.CharacterAbilities: {
                 const hasActiveGoal = goal.activeEnd > goal.activeStart;
                 const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
+                const { xpEstimateAbilities: xpEstimate } = goalEstimate;
                 return (
                     <div>
                         <div className="flex-box gap10">
@@ -252,12 +272,30 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                 )}
                             </div>
                         </div>
-                        {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
+                        {goalEstimate.xpDaysLeft !== undefined && (
+                            <div className="flex-box gap10 wrap">
+                                <AccessibleTooltip
+                                    title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                                    <div className="flex-box gap3">
+                                        <CalendarMonthIcon /> {goalEstimate.xpDaysLeft}
+                                    </div>
+                                </AccessibleTooltip>
+                                {goalEstimate.xpBooksApplied !== undefined &&
+                                    goalEstimate.xpBooksRequired !== undefined && (
+                                        <XpGoalProgressBar
+                                            applied={goalEstimate.xpBooksApplied}
+                                            required={goalEstimate.xpBooksRequired}
+                                        />
+                                    )}
+                            </div>
+                        )}
+                        {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
                         {goalEstimate.abilitiesEstimate && (
                             <div className="py-2.5 px-0">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
+                        {goalEstimate.xpDaysLeft !== undefined && <span> (XP in {goalEstimate.xpDaysLeft} days)</span>}
                     </div>
                 );
             }
@@ -314,11 +352,9 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 action={
                     menuItemSelect ? (
                         <>
-                            {!isGoalCompleted ? (
-                                <IconButton onClick={() => menuItemSelect('edit')}>
-                                    <Edit fontSize="small" />
-                                </IconButton>
-                            ) : undefined}
+                            <IconButton onClick={() => menuItemSelect('edit')}>
+                                <Edit fontSize="small" />
+                            </IconButton>
                             <IconButton onClick={() => menuItemSelect('delete')}>
                                 <DeleteForever fontSize="small" />
                             </IconButton>

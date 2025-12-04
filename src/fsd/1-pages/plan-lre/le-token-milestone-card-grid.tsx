@@ -29,7 +29,7 @@ export const LeTokenMilestoneCardGrid = ({ milestonesToList, emptyMessage, isMis
                     <div key={index} className={`${baseCardClasses} ${variantClasses}`}>
                         <div className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Points</div>
                         <div
-                            className={`text-xl font-extrabold font-mono mb-2 ${isMissedVariant ? 'text-gray-500 dark:text-gray-500' : 'text-blue-600 dark:text-blue-400'}`}>
+                            className={`text-xl font-extrabold font-mono mb-2 ${isMissedVariant ? 'text-gray-500' : 'text-blue-600 dark:text-blue-400'}`}>
                             {milestone.points}
                         </div>
 

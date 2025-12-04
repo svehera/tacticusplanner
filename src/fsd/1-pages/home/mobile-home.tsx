@@ -9,8 +9,6 @@ import { Link, useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 // eslint-disable-next-line import-x/no-internal-modules
-import ThemeSwitch from '@/shared-components/theme-switch';
-// eslint-disable-next-line import-x/no-internal-modules
 import { UserMenu } from '@/shared-components/user-menu/user-menu';
 // eslint-disable-next-line import-x/no-internal-modules
 import { menuItemById } from 'src/models/menu-items';
@@ -49,7 +47,6 @@ export const MobileHome = () => {
         <div>
             <div className="flex justify-between">
                 <div className="flex gap-2.5 items-center">
-                    <ThemeSwitch />
                     <IconButton color="inherit" onClick={() => navigate('/mobile/faq')}>
                         <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
                     </IconButton>

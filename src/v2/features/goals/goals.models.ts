@@ -74,6 +74,7 @@ export interface IGoalEstimate {
     goalId: string;
     daysTotal: number;
     daysLeft: number;
+    xpDaysLeft?: number;
     energyTotal: number;
     oTokensTotal: number;
     xpBooksTotal: number;
@@ -81,6 +82,8 @@ export interface IGoalEstimate {
     xpEstimateAbilities?: IXpEstimate;
     mowEstimate?: IMowMaterialsTotal;
     abilitiesEstimate?: ICharacterAbilitiesMaterialsTotal;
+    xpBooksApplied?: number;
+    xpBooksRequired?: number;
 }
 
 export interface IEstimatedAscensionSettings {

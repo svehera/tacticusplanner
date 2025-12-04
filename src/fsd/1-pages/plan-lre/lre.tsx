@@ -14,6 +14,8 @@ import { SetGoalDialog } from '@/shared-components/goals/set-goal-dialog';
 import { CharactersService } from '@/fsd/4-entities/character';
 
 import { IAutoTeamsPreferences } from '@/fsd/3-features/lre';
+// eslint-disable-next-line import-x/no-internal-modules
+import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings';
 
 import { LeBattleService } from './le-battle.service';
@@ -32,6 +34,7 @@ import { TokenEstimationService } from './token-estimation-service';
 export const Lre: React.FC = () => {
     const { leSelectedTeams, viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
+    const { toggleBattleState } = useLreProgress(legendaryEvent);
     const { model } = useLreProgress(legendaryEvent);
     const dispatch = useContext(DispatchContext);
     const updatePreferencesOption = (setting: keyof ILreViewSettings, value: boolean) => {
@@ -78,6 +81,30 @@ export const Lre: React.FC = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'lreGoalsPreview', value: preview });
     };
 
+    const tokenDisplays = useMemo(
+        () => TokenEstimationService.getTokenDisplays(tokens, currentPoints),
+        [tokens, currentPoints]
+    );
+
+    const nextTokenCompleted = (): void => {
+        if (tokenDisplays.length === 0) return;
+        const token = tokenDisplays[0];
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+
+        // Used to handle the "Mark Completed" option in tokenomics.
+        // trackId -> track;
+        // battleIndex -> battleNumber.
+        // reqId -> restricts
+        for (const restrict of token.restricts) {
+            toggleBattleState(
+                token.track as 'alpha' | 'beta' | 'gamma',
+                token.battleNumber,
+                restrict.id,
+                ProgressState.completed
+            );
+        }
+    };
+
     const battles = LeBattleService.getBattleSetForCharacter(legendaryEvent.id);
 
     const renderTabContent = () => {
@@ -88,7 +115,15 @@ export const Lre: React.FC = () => {
                 return <LeProgress legendaryEvent={legendaryEvent} />;
             case LreSection.tokenomics:
                 return (
-                    <LeTokenomics key="tokenomics" battles={battles} tokens={tokens} currentPoints={currentPoints} />
+                    <LeTokenomics
+                        key="tokenomics"
+                        battles={battles}
+                        tokens={tokens}
+                        tokenDisplays={tokenDisplays}
+                        currentPoints={currentPoints}
+                        nextTokenCompleted={nextTokenCompleted}
+                        toggleBattleState={toggleBattleState}
+                    />
                 );
             case LreSection.battles:
                 return battles !== undefined && <LeBattles key="battles" battles={battles} />;

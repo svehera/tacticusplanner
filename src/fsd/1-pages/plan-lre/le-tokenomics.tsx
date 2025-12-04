@@ -1,9 +1,9 @@
-import { useContext, useMemo, useState } from 'react';
-
-// eslint-disable-next-line import-x/no-internal-modules
-import { StoreContext } from '@/reducers/store.provider';
+import { useState } from 'react';
 
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
 
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
@@ -12,12 +12,20 @@ import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenTable } from './le-token-table';
 import { LeTokenCardRenderMode } from './lre.models';
-import { milestonesAndPoints, TokenEstimationService, TokenUse } from './token-estimation-service';
+import { milestonesAndPoints, TokenDisplay, TokenUse } from './token-estimation-service';
 
 interface Props {
     battles: ILeBattles | undefined;
     tokens: TokenUse[];
     currentPoints: number;
+    tokenDisplays: TokenDisplay[];
+    nextTokenCompleted: () => void;
+    toggleBattleState: (
+        trackId: 'alpha' | 'beta' | 'gamma',
+        battleIndex: number,
+        reqId: string,
+        state: ProgressState
+    ) => void;
 }
 
 /**
@@ -25,8 +33,14 @@ interface Props {
  * already achieved, and a table of tokens to use, and which milestones they
  * achieve.
  */
-export const LeTokenomics: React.FC<Props> = ({ battles, tokens, currentPoints }: Props) => {
-    const { viewPreferences } = useContext(StoreContext);
+export const LeTokenomics: React.FC<Props> = ({
+    battles,
+    tokens,
+    currentPoints,
+    tokenDisplays,
+    nextTokenCompleted,
+    toggleBattleState,
+}: Props) => {
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
@@ -36,13 +50,8 @@ export const LeTokenomics: React.FC<Props> = ({ battles, tokens, currentPoints }
     const missedMilestones = milestonesAndPoints
         .filter(milestone => milestone.points > finalProjectedPoints)
         .sort((a, b) => a.points - b.points);
-    const tokenDisplays = useMemo(
-        () => TokenEstimationService.getTokenDisplays(tokens, currentPoints),
-        [tokens, currentPoints]
-    );
 
     const firstToken = tokenDisplays.length > 0 ? tokenDisplays[0] : null;
-    const isDarkMode = viewPreferences.theme === 'dark';
 
     return (
         <div className="flex flex-col gap-y-8 w-full">
@@ -56,13 +65,14 @@ export const LeTokenomics: React.FC<Props> = ({ battles, tokens, currentPoints }
                             token={firstToken}
                             index={0}
                             renderMode={LeTokenCardRenderMode.kStandalone}
-                            renderMilestone={index => renderMilestone(index, isDarkMode)}
+                            renderMilestone={index => renderMilestone(index)}
                             renderRestrictions={x =>
                                 renderRestrictions(x, firstToken.track, firstToken.battleNumber, 35)
                             }
-                            renderTeam={x => renderTeam(x, 35)}
+                            renderTeam={x => renderTeam(x, 30)}
                             isBattleVisible={isFirstTokenBattleVisible}
                             onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
+                            onCompleteBattle={nextTokenCompleted}
                         />
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) !== undefined && (
@@ -75,7 +85,7 @@ export const LeTokenomics: React.FC<Props> = ({ battles, tokens, currentPoints }
                             )}
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) === undefined && (
-                                <div className="w-full text-center text-gray-500 p-4 border border-gray-700 rounded-xl mt-4">
+                                <div className="w-full text-center text-gray-600 dark:text-gray-500 border-gray-300 dark:border-gray-700 p-4 border rounded-xl mt-4">
                                     Battle data not available.
                                 </div>
                             )}
@@ -97,7 +107,7 @@ export const LeTokenomics: React.FC<Props> = ({ battles, tokens, currentPoints }
             </div>
 
             <div key="tokens" className="flex flex-col gap-2 w-full">
-                <LeTokenTable battles={battles} tokenDisplays={tokenDisplays} />
+                <LeTokenTable battles={battles} tokenDisplays={tokenDisplays} toggleBattleState={toggleBattleState} />
             </div>
             {missedMilestones.length > 0 && (
                 <div className="w-full flex flex-col items-center gap-y-4 mt-4 pt-6 border-t-2 border-gray-200 dark:border-gray-700">

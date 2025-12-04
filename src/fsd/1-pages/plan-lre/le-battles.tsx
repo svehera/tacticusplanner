@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import { isMobile } from 'react-device-detect';
 
 import { LeBattle } from './le-battle';
 import { ILeBattles } from './le-battle.service';
@@ -8,27 +7,7 @@ interface Props {
     battles: ILeBattles;
 }
 
-const LeBattlesDesktop: React.FC<Props> = ({ battles }) => {
-    return (
-        <div className="flex flex-col gap-8">
-            {battles.alpha.battles.map((_, index) => (
-                <div key={index} className="grid grid-cols-3 gap-4 items-start">
-                    <div className="h-full border border-dashed border-gray-700 rounded-xl p-4 flex items-start justify-center text-gray-500">
-                        <LeBattle battle={battles.alpha.battles[index]} trackName={'ALPHA'} />
-                    </div>
-                    <div className="h-full border border-dashed border-gray-700 rounded-xl p-4 flex items-start justify-center text-gray-500">
-                        <LeBattle battle={battles.beta.battles[index]} trackName={'BETA'} />
-                    </div>
-                    <div className="h-full border border-dashed border-gray-700 rounded-xl p-4 flex items-start justify-center text-gray-500">
-                        <LeBattle battle={battles.gamma.battles[index]} trackName={'GAMMA'} />
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
-};
-
-const LeBattlesMobile: React.FC<Props> = ({ battles }) => {
+export const LeBattles: React.FC<Props> = ({ battles }) => {
     const [track, setTrack] = useState<'ALPHA' | 'BETA' | 'GAMMA'>('ALPHA');
     const [battleIndex, setBattleIndex] = useState<number>(0);
 
@@ -47,7 +26,7 @@ const LeBattlesMobile: React.FC<Props> = ({ battles }) => {
 
     return (
         <div>
-            <div className="mb-4 flex justify-around p-1 rounded-lg bg-gray-800 border border-gray-700">
+            <div className="mb-4 flex justify-around p-1 rounded-lg bg-gray-200 dark:bg-gray-800 border-gray-300 dark:border-gray-700 border">
                 {['ALPHA', 'BETA', 'GAMMA'].map(t => (
                     <React.Fragment key={t}>
                         <input
@@ -61,17 +40,24 @@ const LeBattlesMobile: React.FC<Props> = ({ battles }) => {
                         />
                         <label
                             htmlFor={`track-${t}`}
-                            className={`flex-1 text-center py-2 px-3 text-sm font-semibold rounded-md cursor-pointer transition-colors duration-200
-                    ${track === t ? 'bg-blue-600 text-white shadow-md' : 'text-gray-400 hover:bg-gray-700'}`}>
+                            className={`flex-1 text-center py-2 px-3 text-sm font-semibold rounded-md cursor-pointer transition-colors duration-200 ${
+                                track === t
+                                    ? 'bg-blue-600 text-white shadow-md'
+                                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700'
+                            }`}>
                             {t}
                         </label>
                     </React.Fragment>
                 ))}
             </div>
-            <div className="mb-6 p-4 rounded-lg bg-gray-800 border border-gray-700 shadow-md">
+            <div className="mb-6 p-4 rounded-lg bg-gray-200 dark:bg-gray-800 border-gray-300 dark:border-gray-700 border shadow-md">
                 <div className="flex justify-between items-center mb-3">
-                    <h4 className="text-sm font-semibold uppercase text-gray-400">Battle Selection</h4>
-                    <span className="text-2xl font-mono font-bold text-blue-400">Battle {battleIndex + 1}</span>
+                    <h4 className="text-sm font-semibold uppercase text-gray-600 dark:text-gray-400">
+                        Battle Selection
+                    </h4>
+                    <span className="text-2xl font-mono font-bold text-blue-600 dark:text-blue-400">
+                        Battle {battleIndex + 1}
+                    </span>
                 </div>
                 <input
                     type="range"
@@ -80,15 +66,10 @@ const LeBattlesMobile: React.FC<Props> = ({ battles }) => {
                     value={battleIndex}
                     onChange={e => setBattleIndex(Number(e.target.value))}
                     step="1"
-                    // Basic slider styling for the dark theme
-                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full"
+                    className="w-full h-2 bg-gray-400 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full"
                 />
             </div>
             <LeBattle battle={battle} trackName={track} />
         </div>
     );
-};
-
-export const LeBattles: React.FC<Props> = ({ battles }) => {
-    return isMobile ? <LeBattlesMobile battles={battles} /> : <LeBattlesDesktop battles={battles} />;
 };

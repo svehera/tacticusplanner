@@ -1,3 +1,6 @@
+// eslint-disable-next-line import-x/no-internal-modules
+import { GoalColorMode } from '@/routes/goals/goal-color-coding-toggle';
+
 import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
 
 export interface IViewOption<T = IViewPreferences> {
@@ -9,7 +12,6 @@ export interface IViewOption<T = IViewPreferences> {
 }
 
 export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IWyoViewSettings {
-    theme: 'light' | 'dark';
     // autoTeams: boolean;
     wyoFilter: CharactersFilterBy;
     wyoOrder: CharactersOrderBy;
@@ -17,7 +19,7 @@ export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IW
     inventoryShowAlphabet: boolean;
     inventoryShowPlusMinus: boolean;
     goalsTableView: boolean;
-    goalsBattlePassSeasonView: boolean;
+    goalColorMode: GoalColorMode;
     campaignsTableView: boolean;
     raidsTableView: boolean;
     myProgressShowCoreCharacters: boolean;

@@ -16,7 +16,7 @@ export const SupportSection: React.FC = () => {
     };
 
     return (
-        <div className="w-full p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="w-full p-6 rounded-2xl bg-white dark:bg-gray-800 border-pink-400 dark:border-pink-500/50 shadow-lg border-2 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col space-y-3 max-w-md">
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
                     Support Tacticus Planner
@@ -30,7 +30,7 @@ export const SupportSection: React.FC = () => {
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300">Found this helpful? Use refer-a-friend code:</p>
 
-                <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-1 pl-4 w-full max-w-xs shadow-sm">
+                <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 border rounded-lg p-1 pl-4 w-full max-w-xs shadow-sm">
                     <span className="font-mono font-bold text-gray-800 dark:text-gray-100 tracking-wider select-all">
                         {referralCode}
                     </span>
@@ -72,7 +72,7 @@ export const SupportSection: React.FC = () => {
                     href={coffeeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 shadow-sm hover:shadow-md transition-all duration-200 group">
+                    className="flex items-center gap-3 bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 border rounded-xl px-4 py-3 shadow-sm hover:shadow-md transition-all duration-200 group">
                     <div className="w-10 h-10 flex-shrink-0 relative">
                         <svg
                             viewBox="0 0 32 32"

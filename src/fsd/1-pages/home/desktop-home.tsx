@@ -96,7 +96,7 @@ export const DesktopHome = () => {
 
     const calendarUrls: { current?: string; next?: string } = {
         current: getImageUrl('calendar/calendar_20251026.png'),
-        // next: getImageUrl('calendar/calendar_20251130.png'),
+        next: getImageUrl('calendar/calendar_20251130.png'),
     };
 
     const topPriorityGoal = goals[0];

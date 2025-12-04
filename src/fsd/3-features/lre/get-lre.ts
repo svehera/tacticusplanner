@@ -5,6 +5,7 @@ import {
     AunShiLegendaryEvent,
     TrajannLegendaryEvent,
     DanteLegendaryEvent,
+    FarsightLegendaryEvent,
     KharnLegendaryEvent,
     MephistonLegendaryEvent,
     PatermineLegendaryEvent,
@@ -24,6 +25,8 @@ export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
             return new TrajannLegendaryEvent(characters);
         case LegendaryEventEnum.Dante:
             return new DanteLegendaryEvent(characters);
+        case LegendaryEventEnum.Farsight:
+            return new FarsightLegendaryEvent(characters);
         case LegendaryEventEnum.Kharn:
             return new KharnLegendaryEvent(characters);
         case LegendaryEventEnum.Mephiston:

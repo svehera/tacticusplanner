@@ -22,6 +22,7 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
+import { XpTooltip } from '@/v2/features/goals/xp-tooltip';
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import {
     CharacterRaidGoalSelect,
@@ -30,16 +31,16 @@ import {
     IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { XpTotal } from 'src/v2/features/goals/xp-total';
 
 import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
+import { GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
 
 interface Props {
     rows: CharacterRaidGoalSelect[];
     estimate: IGoalEstimate[];
-    goalsColorCoding: boolean;
+    goalsColorCoding: GoalColorMode;
     menuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
 }
 
@@ -95,7 +96,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 );
             }
             case PersonalGoalType.UpgradeRank: {
-                const { xpEstimate } = goalEstimate;
                 return (
                     <div>
                         <div className="flex-box between">
@@ -111,7 +111,23 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 )}
                             </div>
                         </div>
-                        {xpEstimate && <XpTotal {...xpEstimate} />}
+                        {goalEstimate.xpBooksApplied !== undefined &&
+                            goalEstimate.xpBooksRequired !== undefined &&
+                            goalEstimate.xpBooksRequired > 0 && (
+                                <>
+                                    <div className="flex flex-row">
+                                        <div className="mr-0.5">
+                                            XP Books Applied {goalEstimate.xpBooksApplied} / Required{' '}
+                                            {goalEstimate.xpBooksRequired} (
+                                            {Math.round(
+                                                (goalEstimate.xpBooksApplied / goalEstimate.xpBooksRequired!) * 100
+                                            )}
+                                            %)
+                                        </div>
+                                        {goalEstimate.xpEstimate && <XpTooltip {...goalEstimate.xpEstimate} />}
+                                    </div>
+                                </>
+                            )}
                     </div>
                 );
             }
@@ -178,7 +194,16 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 )}
                             </div>
                         </div>
-                        {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
+                        {goalEstimate.xpBooksApplied !== undefined &&
+                            goalEstimate.xpBooksRequired !== undefined &&
+                            goalEstimate.xpBooksRequired > 0 && (
+                                <div>
+                                    XP Books Applied {goalEstimate.xpBooksApplied} / Required{' '}
+                                    {goalEstimate.xpBooksRequired} (
+                                    {Math.round((goalEstimate.xpBooksApplied / goalEstimate.xpBooksRequired!) * 100)}
+                                    %)
+                                </div>
+                            )}
                         {goalEstimate.abilitiesEstimate && (
                             <div className="py-2.5 px-0">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
@@ -270,8 +295,18 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
 
                         const nextDate = new Date();
                         nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
+                        let ret = formatDateWithOrdinal(nextDate);
+                        if (goalEstimate.xpDaysLeft !== undefined) {
+                            ret +=
+                                '\n' +
+                                '(XP by ' +
+                                formatDateWithOrdinal(
+                                    new Date(new Date().getTime() + goalEstimate.xpDaysLeft * 86400000)
+                                ) +
+                                ')';
+                        }
 
-                        return formatDateWithOrdinal(nextDate);
+                        return ret;
                     }
                 },
             },

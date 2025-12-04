@@ -1,11 +1,13 @@
 /* eslint-disable import-x/no-internal-modules */
+import CheckIcon from '@mui/icons-material/Check';
 import GridViewIcon from '@mui/icons-material/GridView';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import { FormControlLabel, Switch } from '@mui/material';
+import { FormControlLabel, IconButton, Switch } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
+import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
 
 import { LeBattle } from './le-battle';
@@ -18,13 +20,19 @@ import { TokenDisplay } from './token-estimation-service';
 interface Props {
     battles: ILeBattles | undefined;
     tokenDisplays: TokenDisplay[];
+    toggleBattleState: (
+        trackId: 'alpha' | 'beta' | 'gamma',
+        battleIndex: number,
+        reqId: string,
+        state: ProgressState
+    ) => void;
 }
 
 /**
  * Displays the tokens to be used by the player in optimal order, along with
  * various statistics about each milestone.
  */
-export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays }: Props) => {
+export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBattleState }: Props) => {
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -44,32 +52,41 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays }: Props)
         }));
     };
 
-    const isDark = viewPreferences.theme === 'dark';
+    const createCompleteBattleHandler = (token: TokenDisplay) => {
+        return () => {
+            if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+            if (token.battleNumber == null || token.battleNumber < 0) return;
 
-    const isDarkMode = viewPreferences.theme === 'dark';
+            // Mark only the restrictions included in this token as completed
+            for (const restrict of token.restricts) {
+                toggleBattleState(
+                    token.track as 'alpha' | 'beta' | 'gamma',
+                    token.battleNumber,
+                    restrict.id,
+                    ProgressState.completed
+                );
+            }
+        };
+    };
 
-    const getBgColor = (index: number) => {
-        const lightBg = ['#f0f0f0', '#e0e0e0'];
-        const darkBg = ['#1f2937', '#111827'];
-        if (isDarkMode) {
-            return darkBg[index % darkBg.length];
-        }
-        return lightBg[index % lightBg.length];
+    const getRowClassName = (index: number) => {
+        // Alternate between two sets of colors for striping
+        return index % 2 === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-900';
     };
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex justify-end items-center bg-gray-800/50 p-2 rounded-lg border border-gray-700">
+            <div className="flex justify-end items-center bg-gray-200 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700 p-2 rounded-lg border">
                 <FormControlLabel
                     control={
                         <Switch
                             checked={isTableView}
                             onChange={event => setIsTableView(event.target.checked)}
-                            color="primary" // Or your theme color
+                            color="primary"
                         />
                     }
                     label={
-                        <div className="flex items-center gap-2 text-gray-300">
+                        <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                             {isTableView ? (
                                 <>
                                     <TableRowsIcon fontSize="small" /> <span>Table View</span>
@@ -85,12 +102,12 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays }: Props)
             </div>
 
             {isTableView ? (
-                <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-700/50">
+                <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-300 dark:border-gray-700/50">
                     <table
                         key="tokensTable"
-                        className="min-w-full table-auto border-separate border-spacing-0 bg-gray-900 text-sm text-gray-200">
+                        className="min-w-full table-auto border-separate border-spacing-0 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 text-sm">
                         <thead>
-                            <tr className="bg-gray-700 text-gray-100 uppercase sticky top-0">
+                            <tr className="bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-100 uppercase sticky top-0">
                                 <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Token</th>
                                 <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
                                     Milestone
@@ -111,6 +128,11 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays }: Props)
                                 </th>
                                 <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">Total Points</th>
                                 <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Team</th>
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
+                                    Mark
+                                    <br />
+                                    Complete
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -118,11 +140,10 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays }: Props)
                                 return (
                                     <tr
                                         key={index}
-                                        style={{ backgroundColor: getBgColor(index) }}
-                                        className="border-t border-gray-700/50 hover:bg-gray-700 transition duration-150 ease-in-out">
+                                        className={`${getRowClassName(index)} border-t border-gray-300 dark:border-gray-700/50 hover:bg-gray-300 dark:hover:bg-gray-700 transition duration-150 ease-in-out`}>
                                         <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
                                         <td className="px-3 py-2 flex justify-center items-center h-full">
-                                            {renderMilestone(token.milestoneAchievedIndex, isDark)}
+                                            {renderMilestone(token.milestoneAchievedIndex)}
                                         </td>
                                         <td className="px-3 py-2">{token.track}</td>
                                         <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
@@ -134,6 +155,15 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays }: Props)
                                             {token.totalPoints}
                                         </td>
                                         <td className="px-3 py-2 text-center">{renderTeam(token.team, 25)}</td>
+                                        <td className="px-3 py-2 text-center">
+                                            <IconButton
+                                                size="small"
+                                                onClick={createCompleteBattleHandler(token)}
+                                                sx={{ color: 'text.secondary' }}
+                                                title="Mark this battle as completed">
+                                                <CheckIcon fontSize="small" />
+                                            </IconButton>
+                                        </td>
                                     </tr>
                                 );
                             })}
@@ -151,12 +181,12 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays }: Props)
                                     index={index}
                                     renderMode={LeTokenCardRenderMode.kInGrid}
                                     token={token}
-                                    renderMilestone={x => renderMilestone(x, isDark)}
+                                    renderMilestone={x => renderMilestone(x)}
                                     renderRestrictions={x => renderRestrictions(x, token.track, token.battleNumber, 35)}
-                                    renderTeam={x => renderTeam(x, 35)}
-                                    // 🪄 PASS NEW PROPS
+                                    renderTeam={x => renderTeam(x, 30)}
                                     isBattleVisible={isVisible}
                                     onToggleBattle={onToggleBattle}
+                                    onCompleteBattle={createCompleteBattleHandler(token)}
                                 />
 
                                 {isVisible && LeBattleService.getBattleFromToken(token, battles) ? (
@@ -168,7 +198,7 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays }: Props)
                                     </div>
                                 ) : (
                                     isVisible && (
-                                        <div className="w-full text-center text-gray-500 p-4 border border-gray-700 rounded-xl">
+                                        <div className="w-full text-center text-gray-600 dark:text-gray-500 border-gray-300 dark:border-gray-700 p-4 border rounded-xl">
                                             Battle data not available.
                                         </div>
                                     )

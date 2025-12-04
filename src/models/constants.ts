@@ -8,6 +8,8 @@ import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/characte
 
 import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 
+import { ArenaLeague } from '@/fsd/1-pages/input-xp-income/models';
+
 import { DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
 import { ICharProgression, IPersonalData2 } from './interfaces';
 
@@ -198,7 +200,6 @@ export const defaultData: IPersonalData2 = {
         ignoreRecommendedFirst: false,
     },
     viewPreferences: {
-        theme: 'light',
         showAlpha: true,
         showBeta: true,
         showGamma: true,
@@ -217,7 +218,7 @@ export const defaultData: IPersonalData2 = {
         inventoryShowPlusMinus: true,
         goalsTableView: false,
         campaignsTableView: false,
-        goalsBattlePassSeasonView: false,
+        goalColorMode: 'None',
         raidsTableView: false,
         lreGridView: false,
         lreGoalsPreview: false,
@@ -366,6 +367,44 @@ export const defaultData: IPersonalData2 = {
     },
     guild: {
         members: [],
+    },
+    xpIncomeState: {
+        // Manual Input
+        manualBooksPerDay: 0,
+
+        // Arena
+        arenaLeague: ArenaLeague.kHonorGuard,
+
+        // Guild Raid
+        loopsRaids: 'no',
+        clearRarity: Rarity.Epic,
+        additionalBosses: 0,
+        raidLoops: 1,
+        extraBossesAfterLoop: 0,
+
+        // AT Purchases (Base)
+        useAtForBooks: 'no',
+        blueStarCharIds: [],
+
+        // AT Farming (Incursion MoW)
+        hasBlueStarMoW: 'no',
+        incursionLegendaryLevel: 'L12', // Defaults to the highest level
+
+        // AT Farming (Nodes)
+        onslaughtBlueStar: 'no',
+        eliteEnergyPerDay: 0,
+        nonEliteEnergyPerDay: 0,
+
+        // Additional Sources
+        additionalBooksPerWeek: 0,
+    },
+    xpUseState: {
+        useCommon: true,
+        useUncommon: true,
+        useRare: true,
+        useEpic: true,
+        useLegendary: true,
+        useMythic: true,
     },
 };
 

@@ -47861,7 +47861,7 @@
     },
     "AMS01": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 1,
         "slots": 3,
@@ -47899,7 +47899,7 @@
     },
     "AMS02": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 2,
         "slots": 3,
@@ -47944,7 +47944,7 @@
     },
     "AMS03": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 3,
         "slots": 4,
@@ -47996,7 +47996,7 @@
     },
     "AMSC03B": {
         "campaign": "Adeptus Mechanicus Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 3,
         "slots": 5,
@@ -48048,7 +48048,7 @@
     },
     "AMS04": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 4,
         "slots": 4,
@@ -48093,7 +48093,7 @@
     },
     "AMS05": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 5,
         "slots": 4,
@@ -48131,7 +48131,7 @@
     },
     "AMS06": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 6,
         "slots": 5,
@@ -48176,7 +48176,7 @@
     },
     "AMS07": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 7,
         "slots": 3,
@@ -48214,7 +48214,7 @@
     },
     "AMS08": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 8,
         "slots": 3,
@@ -48259,7 +48259,7 @@
     },
     "AMS09": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 9,
         "slots": 4,
@@ -48304,7 +48304,7 @@
     },
     "AMS10": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 10,
         "slots": 4,
@@ -48349,7 +48349,7 @@
     },
     "AMS11": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 11,
         "slots": 5,
@@ -48401,7 +48401,7 @@
     },
     "AMS12": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 12,
         "slots": 4,
@@ -48439,7 +48439,7 @@
     },
     "AMS13": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 13,
         "slots": 4,
@@ -48477,7 +48477,7 @@
     },
     "AMSC13B": {
         "campaign": "Adeptus Mechanicus Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 13,
         "slots": 5,
@@ -48529,7 +48529,7 @@
     },
     "AMS14": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 14,
         "slots": 4,
@@ -48574,7 +48574,7 @@
     },
     "AMS15": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 15,
         "slots": 4,
@@ -48619,7 +48619,7 @@
     },
     "AMS16": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 16,
         "slots": 4,
@@ -48664,7 +48664,7 @@
     },
     "AMS17": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 17,
         "slots": 5,
@@ -48716,7 +48716,7 @@
     },
     "AMS18": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 18,
         "slots": 5,
@@ -48761,7 +48761,7 @@
     },
     "AMS19": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 19,
         "slots": 5,
@@ -48813,7 +48813,7 @@
     },
     "AMS20": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 20,
         "slots": 5,
@@ -48858,7 +48858,7 @@
     },
     "AMS21": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 21,
         "slots": 5,
@@ -48910,7 +48910,7 @@
     },
     "AMS22": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 22,
         "slots": 5,
@@ -48976,7 +48976,7 @@
     },
     "AMS23": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 23,
         "slots": 5,
@@ -49035,7 +49035,7 @@
     },
     "AMS24": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 24,
         "slots": 5,
@@ -49094,7 +49094,7 @@
     },
     "AMS25": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 25,
         "slots": 5,
@@ -49153,7 +49153,7 @@
     },
     "AMSC25B": {
         "campaign": "Adeptus Mechanicus Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 25,
         "slots": 5,
@@ -49205,7 +49205,7 @@
     },
     "AMS26": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 26,
         "slots": 5,
@@ -49277,7 +49277,7 @@
     },
     "AMS27": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 27,
         "slots": 3,
@@ -49315,7 +49315,7 @@
     },
     "AMS28": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 28,
         "slots": 3,
@@ -49367,7 +49367,7 @@
     },
     "AMS29": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 29,
         "slots": 5,
@@ -49447,7 +49447,7 @@
     },
     "AMS30": {
         "campaign": "Adeptus Mechanicus Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 30,
         "slots": 5,
@@ -51220,7 +51220,7 @@
     },
     "TS01": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 1,
         "slots": 3,
@@ -51258,7 +51258,7 @@
     },
     "TS02": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 2,
         "slots": 3,
@@ -51296,7 +51296,7 @@
     },
     "TS03": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 3,
         "slots": 3,
@@ -51341,7 +51341,7 @@
     },
     "TSC03B": {
         "campaign": "Tyranids Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 3,
         "slots": 5,
@@ -51393,7 +51393,7 @@
     },
     "TS04": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 4,
         "slots": 4,
@@ -51438,7 +51438,7 @@
     },
     "TS05": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 5,
         "slots": 4,
@@ -51490,7 +51490,7 @@
     },
     "TS06": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 6,
         "slots": 5,
@@ -51542,7 +51542,7 @@
     },
     "TS07": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 7,
         "slots": 4,
@@ -51587,7 +51587,7 @@
     },
     "TS08": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 8,
         "slots": 4,
@@ -51639,7 +51639,7 @@
     },
     "TS09": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 9,
         "slots": 4,
@@ -51684,7 +51684,7 @@
     },
     "TS10": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 10,
         "slots": 4,
@@ -51736,7 +51736,7 @@
     },
     "TS11": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 11,
         "slots": 5,
@@ -51781,7 +51781,7 @@
     },
     "TS12": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 12,
         "slots": 5,
@@ -51826,7 +51826,7 @@
     },
     "TS13": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 13,
         "slots": 5,
@@ -51871,7 +51871,7 @@
     },
     "TSC13B": {
         "campaign": "Tyranids Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 13,
         "slots": 5,
@@ -51930,7 +51930,7 @@
     },
     "TS14": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 14,
         "slots": 5,
@@ -51975,7 +51975,7 @@
     },
     "TS15": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 15,
         "slots": 5,
@@ -52027,7 +52027,7 @@
     },
     "TS16": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 16,
         "slots": 5,
@@ -52079,7 +52079,7 @@
     },
     "TS17": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 17,
         "slots": 5,
@@ -52138,7 +52138,7 @@
     },
     "TS18": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 18,
         "slots": 5,
@@ -52183,7 +52183,7 @@
     },
     "TS19": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 19,
         "slots": 5,
@@ -52228,7 +52228,7 @@
     },
     "TS20": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 20,
         "slots": 5,
@@ -52280,7 +52280,7 @@
     },
     "TS21": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 21,
         "slots": 3,
@@ -52332,7 +52332,7 @@
     },
     "TS22": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 22,
         "slots": 5,
@@ -52384,7 +52384,7 @@
     },
     "TS23": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 23,
         "slots": 5,
@@ -52422,7 +52422,7 @@
     },
     "TS24": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 24,
         "slots": 5,
@@ -52474,7 +52474,7 @@
     },
     "TS25": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 25,
         "slots": 5,
@@ -52540,7 +52540,7 @@
     },
     "TSC25B": {
         "campaign": "Tyranids Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 25,
         "slots": 5,
@@ -52606,7 +52606,7 @@
     },
     "TS26": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 26,
         "slots": 4,
@@ -52651,7 +52651,7 @@
     },
     "TS27": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 27,
         "slots": 4,
@@ -52703,7 +52703,7 @@
     },
     "TS28": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 28,
         "slots": 5,
@@ -52755,7 +52755,7 @@
     },
     "TS29": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 29,
         "slots": 5,
@@ -52807,7 +52807,7 @@
     },
     "TS30": {
         "campaign": "Tyranids Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 30,
         "slots": 5,
@@ -54533,7 +54533,7 @@
     },
     "TAS01": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 1,
         "slots": 3,
@@ -54571,7 +54571,7 @@
     },
     "TAS02": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 2,
         "slots": 5,
@@ -54616,7 +54616,7 @@
     },
     "TAS03": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 3,
         "slots": 5,
@@ -54661,7 +54661,7 @@
     },
     "TASC03B": {
         "campaign": "T'au Empire Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 3,
         "slots": 5,
@@ -54720,7 +54720,7 @@
     },
     "TAS04": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 4,
         "slots": 5,
@@ -54772,7 +54772,7 @@
     },
     "TAS05": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 5,
         "slots": 4,
@@ -54810,7 +54810,7 @@
     },
     "TAS06": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 6,
         "slots": 5,
@@ -54855,7 +54855,7 @@
     },
     "TAS07": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 7,
         "slots": 4,
@@ -54893,7 +54893,7 @@
     },
     "TAS08": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 8,
         "slots": 3,
@@ -54938,7 +54938,7 @@
     },
     "TAS09": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 9,
         "slots": 3,
@@ -54983,7 +54983,7 @@
     },
     "TAS10": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 10,
         "slots": 4,
@@ -55028,7 +55028,7 @@
     },
     "TAS11": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 11,
         "slots": 5,
@@ -55080,7 +55080,7 @@
     },
     "TAS12": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 12,
         "slots": 3,
@@ -55118,7 +55118,7 @@
     },
     "TAS13": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 13,
         "slots": 4,
@@ -55156,7 +55156,7 @@
     },
     "TASC13B": {
         "campaign": "T'au Empire Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 13,
         "slots": 3,
@@ -55236,7 +55236,7 @@
     },
     "TAS14": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 14,
         "slots": 5,
@@ -55281,7 +55281,7 @@
     },
     "TAS15": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 15,
         "slots": 5,
@@ -55326,7 +55326,7 @@
     },
     "TAS16": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 16,
         "slots": 5,
@@ -55378,7 +55378,7 @@
     },
     "TAS17": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 17,
         "slots": 5,
@@ -55437,7 +55437,7 @@
     },
     "TAS18": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 18,
         "slots": 5,
@@ -55475,7 +55475,7 @@
     },
     "TAS19": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 19,
         "slots": 5,
@@ -55527,7 +55527,7 @@
     },
     "TAS20": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 20,
         "slots": 5,
@@ -55579,7 +55579,7 @@
     },
     "TAS21": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 21,
         "slots": 5,
@@ -55638,7 +55638,7 @@
     },
     "TAS22": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 22,
         "slots": 5,
@@ -55704,7 +55704,7 @@
     },
     "TAS23": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 23,
         "slots": 4,
@@ -55749,7 +55749,7 @@
     },
     "TAS24": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 24,
         "slots": 5,
@@ -55801,7 +55801,7 @@
     },
     "TAS25": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 25,
         "slots": 5,
@@ -55853,7 +55853,7 @@
     },
     "TASC25B": {
         "campaign": "T'au Empire Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 25,
         "slots": 5,
@@ -55957,7 +55957,7 @@
     },
     "TAS26": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 26,
         "slots": 3,
@@ -56023,7 +56023,7 @@
     },
     "TAS27": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 27,
         "slots": 5,
@@ -56103,7 +56103,7 @@
     },
     "TAS28": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 28,
         "slots": 3,
@@ -56155,7 +56155,7 @@
     },
     "TAS29": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 29,
         "slots": 5,
@@ -56214,7 +56214,7 @@
     },
     "TAS30": {
         "campaign": "T'au Empire Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 30,
         "slots": 5,
@@ -57954,7 +57954,7 @@
     },
     "DGS01": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 1,
         "slots": 3,
@@ -57992,7 +57992,7 @@
     },
     "DGS02": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 2,
         "slots": 3,
@@ -58030,7 +58030,7 @@
     },
     "DGS03": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 3,
         "slots": 3,
@@ -58075,7 +58075,7 @@
     },
     "DGSC03B": {
         "campaign": "Death Guard Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 3,
         "slots": 5,
@@ -58113,7 +58113,7 @@
     },
     "DGS04": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 4,
         "slots": 4,
@@ -58158,7 +58158,7 @@
     },
     "DGS05": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 5,
         "slots": 4,
@@ -58196,7 +58196,7 @@
     },
     "DGS06": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 6,
         "slots": 5,
@@ -58241,7 +58241,7 @@
     },
     "DGS07": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 7,
         "slots": 4,
@@ -58279,7 +58279,7 @@
     },
     "DGS08": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 8,
         "slots": 4,
@@ -58324,7 +58324,7 @@
     },
     "DGS09": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 9,
         "slots": 4,
@@ -58369,7 +58369,7 @@
     },
     "DGS10": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 10,
         "slots": 4,
@@ -58421,7 +58421,7 @@
     },
     "DGS11": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 11,
         "slots": 5,
@@ -58480,7 +58480,7 @@
     },
     "DGS12": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 12,
         "slots": 3,
@@ -58518,7 +58518,7 @@
     },
     "DGS13": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 13,
         "slots": 4,
@@ -58556,7 +58556,7 @@
     },
     "DGSC13B": {
         "campaign": "Death Guard Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 13,
         "slots": 5,
@@ -58608,7 +58608,7 @@
     },
     "DGS14": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 14,
         "slots": 5,
@@ -58653,7 +58653,7 @@
     },
     "DGS15": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 15,
         "slots": 5,
@@ -58705,7 +58705,7 @@
     },
     "DGS16": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 16,
         "slots": 5,
@@ -58757,7 +58757,7 @@
     },
     "DGS17": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 17,
         "slots": 5,
@@ -58809,7 +58809,7 @@
     },
     "DGS18": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 18,
         "slots": 5,
@@ -58854,7 +58854,7 @@
     },
     "DGS19": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 19,
         "slots": 5,
@@ -58899,7 +58899,7 @@
     },
     "DGS20": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 20,
         "slots": 3,
@@ -58937,7 +58937,7 @@
     },
     "DGS21": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 21,
         "slots": 5,
@@ -58996,7 +58996,7 @@
     },
     "DGS22": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 22,
         "slots": 5,
@@ -59055,7 +59055,7 @@
     },
     "DGS23": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 23,
         "slots": 5,
@@ -59107,7 +59107,7 @@
     },
     "DGS24": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 24,
         "slots": 5,
@@ -59159,7 +59159,7 @@
     },
     "DGS25": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 25,
         "slots": 3,
@@ -59204,7 +59204,7 @@
     },
     "DGSC25B": {
         "campaign": "Death Guard Standard Challenge",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 25,
         "slots": 5,
@@ -59284,7 +59284,7 @@
     },
     "DGS26": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 26,
         "slots": 3,
@@ -59336,7 +59336,7 @@
     },
     "DGS27": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 27,
         "slots": 5,
@@ -59381,7 +59381,7 @@
     },
     "DGS28": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 28,
         "slots": 5,
@@ -59419,7 +59419,7 @@
     },
     "DGS29": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 29,
         "slots": 5,
@@ -59478,7 +59478,7 @@
     },
     "DGS30": {
         "campaign": "Death Guard Standard",
-        "campaignType": "Normal",
+        "campaignType": "Standard",
         "energyCost": 6,
         "nodeNumber": 30,
         "slots": 5,

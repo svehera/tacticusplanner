@@ -204,6 +204,7 @@ export class CampaignsService {
             slotsCount,
             enemiesTypes,
             enemiesMinCount,
+            enemiesMaxCount,
         } = filters;
 
         const isString = (v: unknown): v is string => typeof v === 'string';
@@ -214,7 +215,11 @@ export class CampaignsService {
             .map(faction => FactionsService.getFactionSnowprintId(faction))
             .filter(isString);
 
-        if (enemiesMinCount && enemiesMinCount > location.enemiesTotal) {
+        if (enemiesMinCount !== null && enemiesMinCount >= location.enemiesTotal) {
+            return false;
+        }
+
+        if (enemiesMaxCount !== null && enemiesMaxCount <= location.enemiesTotal) {
             return false;
         }
 
