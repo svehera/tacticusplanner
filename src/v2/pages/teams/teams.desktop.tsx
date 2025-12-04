@@ -70,7 +70,7 @@ export const Teams = () => {
                     variant={'contained'}
                     component={Link}
                     to={isMobile ? '/mobile/learn/guides' : '/learn/guides'}>
-                    <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Guides</span>
+                    <LinkIcon /> <span className="pl-[5px]">Go to Guides</span>
                 </Button>
 
                 <Fab

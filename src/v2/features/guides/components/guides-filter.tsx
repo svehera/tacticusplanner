@@ -66,14 +66,14 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
     return (
         <div className="flex-box gap10 wrap">
             <TextField
-                style={{ minWidth: 200 }}
+                className="min-w-[200px]"
                 label="Created By"
                 variant="outlined"
                 onChange={onFilterTextBoxChanged}
             />
             <UnitsAutocomplete
                 label="Characters & MoWs"
-                style={{ maxWidth: 250 }}
+                className="max-w-[250px]"
                 unit={selectedUnits}
                 options={units}
                 onUnitsChange={updateSelectedUnits}

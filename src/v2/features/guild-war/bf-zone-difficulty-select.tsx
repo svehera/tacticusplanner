@@ -36,7 +36,7 @@ export const BfZoneDifficultySelect: React.FC<Props> = ({ value, valueChange }) 
         return {
             difficultyValue: (index + 1) as Difficulty,
             difficultyLabel: (
-                <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                <FlexBox className="flex-col items-start">
                     <FlexBox gap={5}>
                         {difficulty} <DifficultyImage difficulty={(index + 1) as Difficulty} />
                     </FlexBox>
@@ -47,7 +47,7 @@ export const BfZoneDifficultySelect: React.FC<Props> = ({ value, valueChange }) 
     });
 
     return (
-        <FormControl style={{ width: 120 }}>
+        <FormControl className="w-30">
             <InputLabel>Zone difficulty</InputLabel>
             <Select<Difficulty>
                 label="Zone difficulty"

@@ -38,14 +38,7 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
 
     const getNpcPortrait = () => {
         const imageUrl = getImageUrl(NpcService.getNpcById(id)?.icon ?? '');
-        return (
-            <img
-                src={imageUrl}
-                width={frameWidth}
-                height={frameHeight}
-                style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }}
-            />
-        );
+        return <img src={imageUrl} width={frameWidth} height={frameHeight} className="absolute top-0 left-0 z-0" />;
     };
 
     const getMythicWings = () => {
@@ -55,14 +48,11 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
         return (
             <img
                 src={mythicWings}
+                className="pointer-events-none absolute left-0 z-2"
                 style={{
-                    pointerEvents: 'none',
-                    position: 'absolute',
-                    left: 0,
                     top: mythicWingsTop,
                     width: frameWidth,
                     height: (mythicWingsHeight * frameWidth) / mythicWingsWidth,
-                    zIndex: 2,
                 }}
             />
         );
@@ -73,15 +63,8 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
             <img
                 key={left}
                 src={star}
-                style={{
-                    pointerEvents: 'none',
-                    position: 'absolute',
-                    left: left,
-                    top: top,
-                    width: width,
-                    height: height,
-                    zIndex: zIndex,
-                }}
+                className="pointer-events-none absolute"
+                style={{ left, top, width, height, zIndex }}
             />
         );
     };
@@ -134,12 +117,11 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
     };
 
     const getRank = () => {
-        const left = -15;
         const overhang = 15;
         const size = 70;
         const top = frameHeight - size + overhang;
         return (
-            <div style={{ position: 'absolute', top: top, left: left, zIndex: 4 }}>
+            <div className="absolute left-[-15px] z-4" style={{ top }}>
                 <RankIcon rank={rank} size={size} resized={false} />
             </div>
         );
@@ -147,7 +129,7 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
 
     return (
         <div style={{ width: frameWidth + 40, height: frameHeight + 40 }}>
-            <div style={{ position: 'relative', top: 20, left: 20 }}>
+            <div className="relative top-5 left-5">
                 {getNpcPortrait()}
                 {getStars()}
                 {getRank()}

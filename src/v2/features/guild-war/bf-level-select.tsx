@@ -12,7 +12,7 @@ type Props = {
 
 export const BfLevelSelect: React.FC<Props> = ({ value, valueChange }) => {
     return (
-        <FormControl style={{ width: 100 }} size={isMobile ? 'small' : 'medium'}>
+        <FormControl className="w-25" size={isMobile ? 'small' : 'medium'}>
             <InputLabel>BF Level</InputLabel>
             <Select<number> label="BF Level" value={value} onChange={event => valueChange(+event.target.value)}>
                 {GuildWarService.gwData.bfLevels.map(level => (

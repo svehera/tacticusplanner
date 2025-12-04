@@ -89,7 +89,8 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
                 elems.push(
                     <div
                         key={keyPrefix + battleId + (row * maxPerRow + i) + enemy.name + enemy.rank}
-                        style={{ position: 'absolute', left: left, top: top }}>
+                        className="absolute"
+                        style={{ left, top }}>
                         <NpcPortrait id={enemy.id} rank={parseRank(enemy.rank)} stars={enemy.stars} />
                     </div>
                 );
@@ -114,7 +115,9 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
                 width: scale * (frameWidth * maxPerRow + horizontalMargin * (maxPerRow + 1)),
                 height: scale * (frameHeight * numRows + verticalMargin * (numRows + 1)),
             }}>
-            <div style={{ scale: scale, position: 'absolute' }}>{getEnemies()}</div>
+            <div className="absolute" style={{ scale }}>
+                {getEnemies()}
+            </div>
         </div>
     );
 };

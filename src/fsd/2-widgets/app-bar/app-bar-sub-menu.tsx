@@ -19,7 +19,7 @@ export const AppBarSubMenu = ({ rootLabel, options }: { rootLabel: string; optio
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}>
             <ListItemButton onClick={handleClick}>
-                <ListItemText primary={rootLabel} style={{ fontWeight: 500 }} />
+                <ListItemText primary={rootLabel} className="font-medium" />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse

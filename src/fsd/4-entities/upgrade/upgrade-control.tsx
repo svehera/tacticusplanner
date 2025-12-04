@@ -23,13 +23,7 @@ export const UpgradeControl: React.FC<Props> = ({ upgrade, checked, checkedChang
                 />
             }
             label={
-                <div
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 10,
-                        opacity: checked ? 1 : 0.5,
-                    }}>
+                <div className="flex items-center gap-2.5" style={{ opacity: checked ? 1 : 0.5 }}>
                     <UpgradeImage
                         material={upgrade.label}
                         iconPath={upgrade.iconPath}

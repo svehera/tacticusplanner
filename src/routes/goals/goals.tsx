@@ -328,10 +328,10 @@ export const Goals = () => {
                     variant={'contained'}
                     component={Link}
                     to={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
-                    <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids</span>
+                    <LinkIcon /> <span className="pl-[5px]">Go to Raids</span>
                 </Button>
                 <SetGoalDialog key={goals.length} />
-                <span style={{ fontSize: 20 }}>
+                <span className="text-xl">
                     {goals.length}/{goalsLimit}
                 </span>
                 <FormControlLabel
@@ -357,7 +357,7 @@ export const Goals = () => {
                     onToggle={updateColorCodingMode}
                 />
             </div>
-            <div style={{ width: '350px' }} className="my-2 flex-box gap20">
+            <div className="my-2 flex-box gap20 w-[350px]">
                 <Accordion
                     defaultExpanded={false}
                     className="!shadow-none !bg-transparent border border-[var(--border)] px-2 hover:!bg-[var(--secondary)]">
@@ -418,7 +418,7 @@ export const Goals = () => {
             </div>
             {!!upgradeRankOrMowGoals.length && (
                 <div>
-                    <div className="flex flex-wrap items-center gap5" style={{ fontSize: 20, margin: '20px 0' }}>
+                    <div className="flex flex-wrap items-center gap5 text-xl my-5 mx-0">
                         <span>
                             Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
                         </span>
@@ -458,7 +458,7 @@ export const Goals = () => {
             )}
             {!!shardsGoals.length && (
                 <div>
-                    <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
+                    <div className="flex-box gap5 wrap text-xl my-5 mx-0">
                         <span>
                             Ascend/Promote/Unlock (<b>{estimatedShardsTotal.daysTotal}</b> Days |
                         </span>
@@ -501,7 +501,7 @@ export const Goals = () => {
             )}
             {!!upgradeAbilities.length && (
                 <div>
-                    <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
+                    <div className="flex-box gap5 wrap text-xl my-5 mx-0">
                         <span>
                             Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold)
                         </span>

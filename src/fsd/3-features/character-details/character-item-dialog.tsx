@@ -70,7 +70,7 @@ const CharacterItemDialogFn: React.FC<Props> = props => {
                     <CharacterTitle character={character} />
                     <Conditional condition={viewPreferences.showBsValue}>
                         <AccessibleTooltip title={numberToThousandsStringOld(bsValue)}>
-                            <div style={{ display: 'flex' }}>
+                            <div className="flex">
                                 <MiscIcon icon={'blackstone'} height={20} width={15} />{' '}
                                 {numberToThousandsString(bsValue)}
                             </div>
@@ -78,7 +78,7 @@ const CharacterItemDialogFn: React.FC<Props> = props => {
                     </Conditional>
                     <Conditional condition={viewPreferences.showPower}>
                         <AccessibleTooltip title={numberToThousandsStringOld(power)}>
-                            <div style={{ display: 'flex' }}>
+                            <div className="flex">
                                 <MiscIcon icon={'power'} height={20} width={15} /> {numberToThousandsString(power)}
                             </div>
                         </AccessibleTooltip>
@@ -94,7 +94,7 @@ const CharacterItemDialogFn: React.FC<Props> = props => {
                     </IconButton>
                 )}
             </DialogTitle>
-            <DialogContent style={{ paddingTop: 20 }}>
+            <DialogContent className="pt-5">
                 <CharacterDetails
                     character={character}
                     updateInventoryChanges={setInventoryUpdate}

@@ -79,9 +79,7 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows }) => {
 
     return (
         <>
-            <div
-                className="ag-theme-material"
-                style={{ height: 50 + rows.length * 60, maxHeight: '50vh', width: '100%' }}>
+            <div className="ag-theme-material max-h-[50vh] w-full" style={{ height: 50 + rows.length * 60 }}>
                 <AgGridReact
                     modules={[AllCommunityModule]}
                     theme={themeBalham}

@@ -24,9 +24,7 @@ export const EmptyTile: React.FC<Props> = ({ onClick, isMow = false }) => {
             <div>
                 <CharacterPortraitImage icon={'portraits/unset.webp'} />
 
-                <div
-                    className="relative top-[-7px] flex items-center justify-between z-10"
-                    style={{ visibility: 'hidden' }}>
+                <div className="relative top-[-7px] flex items-center justify-between z-10 [visibility:hidden]">
                     <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
                         1
                     </div>

@@ -78,14 +78,14 @@ export const SetAscendGoal: React.FC<Props> = ({
 
             {!!possibleLocations.length && (
                 <div className="flex gap-3 items-center">
-                    <div style={{ width: '50%' }}>
+                    <div className="w-1/2">
                         <CampaignsUsageSelect
                             disabled={!unlockedLocations.length}
                             value={campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
                             valueChange={value => onChange('campaignsUsage', value)}
                         />
                     </div>
-                    <div style={{ width: '50%' }}>
+                    <div className="w-1/2">
                         <NumbersInput
                             title="Shards per onslaught"
                             helperText="Put 0 to ignore Onslaught raids"

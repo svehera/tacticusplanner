@@ -64,12 +64,12 @@ export const GuildInsights = () => {
     const units = CharactersService.orderUnits(charactersFiltered, viewControls.orderBy);
 
     return (
-        <Box style={{ margin: 'auto' }}>
-            <p style={{ textAlign: 'center' }}>
+        <Box className="m-auto">
+            <p className="text-center">
                 Guild averaged roster data for{' '}
                 <AccessibleTooltip
                     title={
-                        <ul style={{ paddingInlineStart: 20 }}>
+                        <ul className="ps-5">
                             {data.guildUsers.map(username => (
                                 <li key={username}>{username}</li>
                             ))}

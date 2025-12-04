@@ -70,9 +70,9 @@ export const Guild: React.FC = () => {
     };
 
     return (
-        <FlexBox style={{ flexDirection: 'column' }} gap={10}>
+        <FlexBox className="flex-col" gap={10}>
             {loading && <LoaderWithText loading={true} />}
-            <FlexBox justifyContent={'center'} gap={10} style={{ marginTop: 10 }}>
+            <FlexBox className="mt-2.5" justifyContent={'center'} gap={10}>
                 <ImportGuildExcel onImport={saveGuildMembers} />
                 <ImportUserLink onImport={importViaLink} />
                 <Tooltip

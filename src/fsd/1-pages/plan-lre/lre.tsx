@@ -160,7 +160,6 @@ export const Lre: React.FC = () => {
                 {[LreSection.teams].includes(section) && (
                     <>
                         <LreSectionsSettings lreViewSettings={viewPreferences} save={updatePreferencesOption} />
-                        {/*<Divider style={{ height: 42, margin: '0 10px' }} orientation={'vertical'} />*/}
                     </>
                 )}
 
@@ -184,7 +183,7 @@ export const Lre: React.FC = () => {
                 )}
             </div>
 
-            <div style={{ marginTop: 10 }} key={legendaryEvent.id}>
+            <div className="mt-2.5" key={legendaryEvent.id}>
                 {renderTabContent()}
             </div>
 

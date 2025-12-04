@@ -47,13 +47,13 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                 onChange={handleAccordionChange('missionAndNotes')}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <span>
-                        Notes & Missions Progress <span className="bold">({missionsTotalProgress})</span>
+                        Notes & Missions Progress <span className="font-bold">({missionsTotalProgress})</span>
                     </span>
                 </AccordionSummary>
 
                 <AccordionDetails className="flex-box wrap gap20">
                     <TextField
-                        style={{ marginTop: 20 }}
+                        className="mt-5"
                         fullWidth
                         id="outlined-textarea"
                         label="Notes"
@@ -72,8 +72,8 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                         />
                     ))}
 
-                    <div className="flex-box wrap" style={{ columnGap: 50 }}>
-                        <div className="flex-box column start" style={{ flex: 1, minWidth: 450 }}>
+                    <div className="flex-box wrap gap-x-[50px]">
+                        <div className="flex-box column start flex-1 min-w-[450px]">
                             <h4>Free missions</h4>
                             {model.regularMissions.map((mission, index) => (
                                 <span key={index}>
@@ -82,7 +82,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                             ))}
                         </div>
 
-                        <div className="flex-box column start" style={{ flex: 1, minWidth: 450 }}>
+                        <div className="flex-box column start flex-1 min-w-[450px]">
                             <h4>Premium missions</h4>
                             {model.premiumMissions.map((mission, index) => (
                                 <span key={index}>
@@ -101,7 +101,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <div className="flex-box gap5">
                         <span>
-                            Tracks Progress <span className="bold">({tracksTotalProgress})</span>
+                            Tracks Progress <span className="font-bold">({tracksTotalProgress})</span>
                         </span>
                         {isMobile ? (
                             <span>Use Long press to put requirement in intermediate state</span>

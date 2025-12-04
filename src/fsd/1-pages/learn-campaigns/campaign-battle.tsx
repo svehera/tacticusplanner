@@ -41,7 +41,7 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
     */
 
     return (
-        <div style={{ alignContent: 'center' }}>
+        <div className="content-center">
             <table>
                 <tbody>
                     <tr>
