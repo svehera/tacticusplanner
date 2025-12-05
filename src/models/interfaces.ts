@@ -185,10 +185,24 @@ interface ILegendaryEventData {
     selectedTeams: ITableRow<string>[];
 }
 
+export enum IDailyRaidsFarmOrder {
+    goalPriority,
+    totalMaterials,
+    homeScreenEvent,
+}
+
+export interface IPurgeOrderPreferences {
+    minimumTyranidCount: number;
+}
+
+export interface IDailyRaidsFarmPreferences {
+    order: IDailyRaidsFarmOrder;
+}
+
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
     shardsEnergy: number;
-    farmByPriorityOrder: boolean;
+    farmPreferences: IDailyRaidsFarmPreferences;
     farmStrategy: DailyRaidsStrategy;
     customSettings?: ICustomDailyRaidsSettings;
     campaignEvent?: CampaignGroupType | 'none';

@@ -1,7 +1,7 @@
 ﻿import { cloneDeep, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 
 import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
-import { IEstimatedRanksSettings } from 'src/models/interfaces';
+import { IDailyRaidsFarmOrder, IEstimatedRanksSettings } from 'src/models/interfaces';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
@@ -64,7 +64,11 @@ export class UpgradesService {
         let allMaterials: ICharacterUpgradeEstimate[];
         let byCharactersPriority: ICharacterUpgradeRankEstimate[] = [];
 
-        if (settings.preferences.farmByPriorityOrder) {
+        if (
+            settings.preferences.farmPreferences.order === IDailyRaidsFarmOrder.goalPriority ||
+            // DO NOT SUBMIT - fix this for HSEs
+            settings.preferences.farmPreferences.order === IDailyRaidsFarmOrder.homeScreenEvent
+        ) {
             byCharactersPriority = this.getEstimatesByPriority(goals, combinedBaseMaterials, inventoryUpgrades);
             allMaterials = byCharactersPriority.flatMap(x => x.upgrades);
         } else {

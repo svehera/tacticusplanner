@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import { DailyRaidsStrategy } from 'src/models/enums';
-import { IEstimatedRanksSettings } from 'src/models/interfaces';
+import { IDailyRaidsFarmOrder, IEstimatedRanksSettings } from 'src/models/interfaces';
 
 import { Rarity } from '@/fsd/5-shared/model';
 
@@ -49,7 +49,9 @@ describe('UpgradesService - CE challenge unlocks based on base progress', () => 
             preferences: {
                 dailyEnergy: 288,
                 shardsEnergy: 0,
-                farmByPriorityOrder: false,
+                farmPreferences: {
+                    order: IDailyRaidsFarmOrder.goalPriority,
+                },
                 farmStrategy: DailyRaidsStrategy.leastEnergy,
                 campaignEvent: CampaignGroupType.deathGuardCE,
             },

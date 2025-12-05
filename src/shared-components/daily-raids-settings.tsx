@@ -33,7 +33,7 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignType, CampaignGroupType } from '@/fsd/4-entities/campaign';
 
-import { ICustomDailyRaidsSettings, IDailyRaidsPreferences } from '../models/interfaces';
+import { ICustomDailyRaidsSettings, IDailyRaidsFarmOrder } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 
 const defaultCustomSettings: ICustomDailyRaidsSettings = {
@@ -105,8 +105,11 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         setDailyRaidsPreferencesForm(dailyRaidsPreferences);
     }, [dailyRaidsPreferences]);
 
-    const updatePreferences = useCallback((setting: keyof IDailyRaidsPreferences, value: boolean) => {
-        setDailyRaidsPreferencesForm(curr => ({ ...curr, [setting]: value }));
+    const updatePreferences = useCallback((value: IDailyRaidsFarmOrder) => {
+        setDailyRaidsPreferencesForm(curr => ({
+            ...curr,
+            farmPreferences: { ...curr.farmPreferences, order: value },
+        }));
     }, []);
 
     const handleEnergyChange = (_: any, value: number | number[]) => {
@@ -175,12 +178,12 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 style={{ paddingInlineStart: 20 }}
                                 aria-labelledby="radio-buttons-group"
                                 name="controlled-radio-buttons-group"
-                                value={dailyRaidsPreferencesForm.farmByPriorityOrder + ''}
+                                value={dailyRaidsPreferencesForm.farmPreferences.order}
                                 onChange={change =>
-                                    updatePreferences('farmByPriorityOrder', change.target.value === 'true')
+                                    updatePreferences(parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder)
                                 }>
                                 <FormControlLabel
-                                    value="false"
+                                    value={IDailyRaidsFarmOrder.totalMaterials}
                                     control={<Radio />}
                                     label={
                                         <div className="flex-box start gap5">
@@ -203,7 +206,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     }
                                 />
                                 <FormControlLabel
-                                    value="true"
+                                    value={IDailyRaidsFarmOrder.goalPriority}
                                     control={<Radio />}
                                     label={
                                         <div className="flex-box start gap5">
@@ -217,6 +220,24 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                                         <br /> Cons: Overall it will take more time to accomplish all
                                                         selected goals. It is especially noticeable when you need to
                                                         farm Legendary upgrades for characters of different factions
+                                                    </p>
+                                                }>
+                                                <InfoIcon color="primary" />
+                                            </AccessibleTooltip>
+                                        </div>
+                                    }
+                                />
+                                <FormControlLabel
+                                    value={IDailyRaidsFarmOrder.homeScreenEvent}
+                                    control={<Radio />}
+                                    label={
+                                        <div className="flex-box start gap5">
+                                            Home Screen Event{' '}
+                                            <AccessibleTooltip
+                                                title={
+                                                    <p>
+                                                        Battles to raid are selected based on your selected home screen
+                                                        event and the preferences you select for it.
                                                     </p>
                                                 }>
                                                 <InfoIcon color="primary" />
@@ -268,7 +289,10 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 />
                                 <FormControlLabel
                                     value={DailyRaidsStrategy.leastTime}
-                                    disabled={dailyRaidsPreferencesForm.farmByPriorityOrder}
+                                    disabled={
+                                        dailyRaidsPreferencesForm.farmPreferences.order !==
+                                        IDailyRaidsFarmOrder.totalMaterials
+                                    }
                                     control={<Radio />}
                                     label={
                                         <AccessibleTooltip
