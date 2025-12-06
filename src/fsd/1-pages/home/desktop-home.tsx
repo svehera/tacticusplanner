@@ -97,8 +97,9 @@ export const DesktopHome = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_20251026.png'),
-        next: getImageUrl('calendar/calendar_20251130.png'),
+        current: getImageUrl('calendar/calendar_20251130.png'),
+        // Jan 4 Season 34 calendar not yet available
+        // next: getImageUrl('calendar/calendar_20260104.png'),
     };
 
     const topPriorityGoal = goals[0];
