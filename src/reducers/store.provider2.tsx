@@ -149,7 +149,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 if (reset) {
                     setModifiedDate(undefined);
                 }
-
                 setGlobalState(data);
             },
             seenAppVersion: wrapDispatch(setSeenAppVersion),
