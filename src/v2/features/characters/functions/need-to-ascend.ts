@@ -11,5 +11,7 @@ export const needToAscendCharacter = (unit: IUnit) => {
     const maxUncommon = unit.rarity === Rarity.Uncommon && unit.rank === Rank.Bronze1;
     const maxRare = unit.rarity === Rarity.Rare && unit.rank === Rank.Silver1;
     const maxEpic = unit.rarity === Rarity.Epic && unit.rank === Rank.Gold1;
-    return maxCommon || maxUncommon || maxRare || maxEpic;
+    const maxLegendary = unit.rarity === Rarity.Legendary && unit.rank === Rank.Diamond3;
+
+    return maxCommon || maxUncommon || maxRare || maxEpic || maxLegendary;
 };
