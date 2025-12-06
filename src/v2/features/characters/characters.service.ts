@@ -24,6 +24,7 @@ import { filterImperial } from './functions/filter-by-imperial';
 import { filterXenos } from './functions/filter-by-xenos';
 import { needToAscendCharacter } from './functions/need-to-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
+import { wingReady } from './functions/wing-ready';
 
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
@@ -49,6 +50,8 @@ export class CharactersService {
                         !needToLevelCharacter(char) &&
                         !needToAscendCharacter(char)
                 );
+            case CharactersFilterBy.WingReady:
+                return filteredCharactersByName.filter(wingReady);
             case CharactersFilterBy.Chaos:
                 return filteredCharactersByName.filter(filterChaos);
             case CharactersFilterBy.Imperial:

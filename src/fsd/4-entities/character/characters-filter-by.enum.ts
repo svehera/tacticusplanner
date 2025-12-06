@@ -3,6 +3,7 @@
     NeedToAscend,
     NeedToLevel,
     CanUpgrade,
+    WingReady,
     Chaos,
     Imperial,
     Xenos,
