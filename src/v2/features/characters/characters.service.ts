@@ -46,7 +46,7 @@ export class CharactersService {
                     char =>
                         isCharacter(char) &&
                         char.rank !== Rank.Locked &&
-                        char.rank !== Rank.Diamond3 &&
+                        char.rank !== Rank.Adamantine3 &&
                         !needToLevelCharacter(char) &&
                         !needToAscendCharacter(char)
                 );
