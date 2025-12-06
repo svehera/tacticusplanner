@@ -64,8 +64,7 @@ export class CharactersService {
     }
 
     private static getFaction(unit: IUnit): string {
-        if ('faction' in unit) return unit.faction;
-        return unit.factionId;
+        return unit.faction;
     }
 
     private static haveSameFaction(unit1: IUnit, unit2: IUnit): boolean {
