@@ -40,7 +40,14 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
     };
 
     const campaignTypes = useMemo(() => {
-        const defaultList = [CampaignType.Elite, CampaignType.Early, CampaignType.Mirror, CampaignType.Normal];
+        const defaultList = [
+            CampaignType.Extremis,
+            CampaignType.Elite,
+            CampaignType.Early,
+            CampaignType.Standard,
+            CampaignType.Mirror,
+            CampaignType.Normal,
+        ];
         if (!hasCE) {
             return defaultList;
         }
@@ -53,6 +60,7 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
         [CampaignType.Elite]: 'Elite',
         [CampaignType.Mirror]: 'Mirror',
         [CampaignType.Normal]: 'Normal',
+        [CampaignType.Standard]: 'Standard CE',
         [CampaignType.Extremis]: 'Extremis CE',
     };
 
@@ -86,6 +94,7 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
                         CampaignType.Early,
                         CampaignType.Mirror,
                         CampaignType.Elite,
+                        CampaignType.Standard,
                         CampaignType.Extremis,
                     ];
 

@@ -22,6 +22,7 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
+import { XpTooltip } from '@/v2/features/goals/xp-tooltip';
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import {
     CharacterRaidGoalSelect,
@@ -113,12 +114,19 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                         {goalEstimate.xpBooksApplied !== undefined &&
                             goalEstimate.xpBooksRequired !== undefined &&
                             goalEstimate.xpBooksRequired > 0 && (
-                                <div>
-                                    XP Books Applied {goalEstimate.xpBooksApplied} / Required{' '}
-                                    {goalEstimate.xpBooksRequired} (
-                                    {Math.round((goalEstimate.xpBooksApplied / goalEstimate.xpBooksRequired!) * 100)}
-                                    %)
-                                </div>
+                                <>
+                                    <div className="flex flex-row">
+                                        <div className="mr-0.5">
+                                            XP Books Applied {goalEstimate.xpBooksApplied} / Required{' '}
+                                            {goalEstimate.xpBooksRequired} (
+                                            {Math.round(
+                                                (goalEstimate.xpBooksApplied / goalEstimate.xpBooksRequired!) * 100
+                                            )}
+                                            %)
+                                        </div>
+                                        {goalEstimate.xpEstimate && <XpTooltip {...goalEstimate.xpEstimate} />}
+                                    </div>
+                                </>
                             )}
                     </div>
                 );

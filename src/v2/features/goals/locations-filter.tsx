@@ -37,6 +37,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         +!!filter.slotsCount?.length +
         +!!filter.enemiesTypes?.length +
         +!!filter.enemiesMinCount +
+        +!!filter.enemiesMaxCount +
         +!!filter.campaignTypes.length;
 
     const handleClick = () => {
@@ -63,7 +64,6 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesMinCount: null,
         });
         setCurrFilter({
             alliesFactions: [],
@@ -74,7 +74,6 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesMinCount: null,
         });
         setOpen(false);
     };
@@ -153,11 +152,23 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                             value={currFilter.enemiesMinCount?.toString() ?? null}
                             options={enemiesCountOptions}
                             onChange={(_, value) => {
-                                setCurrFilter({ ...currFilter, enemiesMinCount: value ? +value : null });
+                                setCurrFilter({ ...currFilter, enemiesMinCount: value ? +value : undefined });
                             }}
                             sx={{ minWidth: 150, maxWidth: 300 }}
-                            renderInput={params => <TextField {...params} label="Enemy Count" />}
-                            getOptionLabel={option => `${option}+`}
+                            renderInput={params => <TextField {...params} label="Min Enemy" />}
+                            getOptionLabel={option => `>=${option}`}
+                        />
+                        <Autocomplete
+                            fullWidth
+                            size="small"
+                            value={currFilter.enemiesMaxCount?.toString() ?? null}
+                            options={enemiesCountOptions}
+                            onChange={(_, value) => {
+                                setCurrFilter({ ...currFilter, enemiesMaxCount: value ? +value : undefined });
+                            }}
+                            sx={{ minWidth: 150, maxWidth: 300 }}
+                            renderInput={params => <TextField {...params} label="Max Enemy" />}
+                            getOptionLabel={option => `<=${option}`}
                         />
 
                         <MultipleSelectCheckmarks
@@ -182,6 +193,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                             values={[
                                 CampaignType.Elite,
                                 CampaignType.Extremis,
+                                CampaignType.Standard,
                                 CampaignType.Mirror,
                                 CampaignType.Normal,
                                 CampaignType.Early,

@@ -19,11 +19,10 @@ interface WaveDisplayProps {
     wave: ILeWave;
     waveIndex: number;
     onEnemyClick: (data: ResolvedEnemyData) => void;
-    isDarkMode: boolean;
 }
 
 // Helper component to render a single wave's enemies
-const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick, isDarkMode }) => {
+const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick }) => {
     // Determine if enemies are present. Use a simple text placeholder for enemy rendering.
     const hasEnemies = wave.enemies.length > 0;
 
@@ -83,38 +82,26 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
     );
 
     return (
-        <div
-            className={`flex flex-col gap-1 p-2 border-l-2 ${isDarkMode ? 'border-gray-700 hover:bg-gray-800/50' : 'border-gray-400 hover:bg-gray-200'} transition-colors duration-150`}>
+        <div className="flex flex-col gap-1 p-2 border-l-2 border-gray-400 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800/50 transition-colors duration-150">
             <div className="flex justify-between items-start">
                 <div className="flex items-center gap-2">
-                    <span className={`text-sm font-bold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
-                        Wave {waveIndex + 1}
-                    </span>
-                    <span className={`text-xs ${isDarkMode ? 'text-gray-500' : 'text-gray-600'}`}>
-                        | Round {wave.round}
-                    </span>
+                    <span className="text-sm font-bold text-blue-600 dark:text-blue-400">Wave {waveIndex + 1}</span>
+                    <span className="text-xs text-gray-600 dark:text-gray-500">| Round {wave.round}</span>
                 </div>
                 <div className="text-right">
-                    <div className={`text-[10px] uppercase ${isDarkMode ? 'text-gray-500' : 'text-gray-600'}`}>
-                        Power
-                    </div>
-                    <div className={`text-xs font-mono ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-                        {wave.power}
-                    </div>
+                    <div className="text-[10px] uppercase text-gray-600 dark:text-gray-500">Power</div>
+                    <div className="text-xs font-mono text-gray-800 dark:text-gray-300">{wave.power}</div>
                 </div>
             </div>
 
             <div className="mt-1">
-                <h5
-                    className={`text-[10px] font-semibold uppercase ${isDarkMode ? 'text-gray-500' : 'text-gray-600'} mb-1`}>
+                <h5 className="text-[10px] font-semibold uppercase text-gray-600 dark:text-gray-500 mb-1">
                     {hasEnemies ? 'Enemy Deployment' : 'No Enemies This Wave'}
                 </h5>
                 {hasEnemies ? (
                     renderEnemies(wave.enemies)
                 ) : (
-                    <span className={`text-xs italic ${isDarkMode ? 'text-gray-600' : 'text-gray-500'}`}>
-                        The battle continues...
-                    </span>
+                    <span className="text-xs italic text-gray-500 dark:text-gray-600">The battle continues...</span>
                 )}
             </div>
         </div>
@@ -123,10 +110,9 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
 interface LeBattleProps {
     battle: ILeBattle;
     trackName: string;
-    isDarkMode?: boolean;
 }
 
-export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName, isDarkMode = false }) => {
+export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
     const [selectedEnemy, setSelectedEnemy] = React.useState<ResolvedEnemyData | null>(null);
 
     // Handler to open modal
@@ -144,49 +130,35 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName, isDarkMod
     return (
         <>
             {/* The Main Battle Card */}
-            <div
-                className={`w-full ${isDarkMode ? 'bg-gray-900' : 'bg-gray-100'} rounded-xl border ${isDarkMode ? 'border-gray-700/50' : 'border-gray-300'} p-4 shadow-lg`}>
-                <div
-                    className={`flex justify-between items-center border-b ${isDarkMode ? 'border-gray-800' : 'border-gray-300'} pb-3 mb-4`}>
+            <div className="w-full bg-gray-100 dark:bg-gray-900 rounded-xl border border-gray-300 dark:border-gray-700/50 p-4 shadow-lg">
+                <div className="flex justify-between items-center border-b border-gray-300 dark:border-gray-800 pb-3 mb-4">
                     <div className="flex items-center gap-3">
                         <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-md uppercase">
                             {trackName}
                         </span>
-                        <span className={`text-lg font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                        <span className="text-lg font-bold text-gray-800 dark:text-gray-200">
                             Battle {battle.number}
                         </span>
                     </div>
                     <div className="text-right">
-                        <div className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                            Total Enemy Power
-                        </div>
-                        <div
-                            className={`font-bold font-mono ${isDarkMode ? 'text-green-400' : 'text-green-600'} text-xl`}>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">Total Enemy Power</div>
+                        <div className="font-bold font-mono text-green-600 dark:text-green-400 text-xl">
                             {battle.power}
                         </div>
                     </div>
                 </div>
 
-                <h3
-                    className={`text-sm font-semibold uppercase ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mb-3 ml-2`}>
+                <h3 className="text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-3 ml-2">
                     Deployment Schedule
                 </h3>
 
                 <div className="flex flex-col gap-2">
                     {sortedWaves.length > 0 ? (
                         sortedWaves.map((wave, index) => (
-                            <WaveDisplay
-                                key={index}
-                                wave={wave}
-                                waveIndex={index}
-                                onEnemyClick={handleEnemyClick}
-                                isDarkMode={isDarkMode}
-                            />
+                            <WaveDisplay key={index} wave={wave} waveIndex={index} onEnemyClick={handleEnemyClick} />
                         ))
                     ) : (
-                        <div className={`text-center py-4 ${isDarkMode ? 'text-gray-500' : 'text-gray-600'}`}>
-                            No wave data found.
-                        </div>
+                        <div className="text-center py-4 text-gray-600 dark:text-gray-500">No wave data found.</div>
                     )}
                 </div>
             </div>

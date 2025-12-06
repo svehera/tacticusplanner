@@ -188,7 +188,6 @@ export const defaultData: IPersonalData2 = {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesMinCount: null,
         },
         raidedLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
@@ -200,7 +199,6 @@ export const defaultData: IPersonalData2 = {
         ignoreRecommendedFirst: false,
     },
     viewPreferences: {
-        theme: 'light',
         showAlpha: true,
         showBeta: true,
         showGamma: true,
