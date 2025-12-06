@@ -24,7 +24,7 @@ interface IMowStaticAbility {
 export interface IMowStatic2 {
     snowprintId: string;
     name: string;
-    factionId: string;
+    faction: string;
     alliance: string;
     icon: string;
     roundIcon: string;
