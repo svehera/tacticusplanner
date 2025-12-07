@@ -7,5 +7,5 @@
     Chaos,
     Imperial,
     Xenos,
-    MoW
+    MoW,
 }
