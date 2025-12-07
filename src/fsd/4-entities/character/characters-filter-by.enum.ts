@@ -3,9 +3,9 @@
     NeedToAscend,
     CanAscend,
     NeedToLevel,
+    BlueStarReady,
     Chaos,
     Imperial,
     Xenos,
-    MoW,
-    BlueStarReady,
+    MoW
 }
