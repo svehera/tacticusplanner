@@ -331,6 +331,18 @@ export class CharactersService {
         return (sum(charactersByPotentialValue) / (charactersCount * 5 * 100)) * 100;
     }
 
+    /**
+     * Calculates the total progression of character resources (shards, orbs, and mythic shards)
+     * up to a specified rarity and star level.
+     *
+     * @param rarity - The rarity level of the character.
+     * @param stars - The star level of the character.
+     * @returns An object containing the total counts of shards, orbs, and mythic shards.
+     *
+     * @example
+     * const totalProgression = CharactersService.getTotalProgressionUntil(Rarity.RARE, RarityStars.THREE);
+     * console.log(totalProgression); // { shards: 100, orbs: 50, mythicShards: 10 }
+     */
     public static getTotalProgressionUntil(rarity: Rarity, stars: RarityStars) {
         const key = rarity + stars;
         const totals: ICharProgression = {
@@ -351,6 +363,17 @@ export class CharactersService {
         return totals;
     }
 
+    /**
+     * Retrieves the next rarity in the progression based on the current rarity.
+     *
+     * @param current - The current rarity for which the next rarity is to be determined.
+     * @returns The next rarity in the progression, or undefined if the current rarity is the last one.
+     *
+     * @remarks
+     * This method collects all unique rarities from the character progression data,
+     * sorts them in ascending order, and returns the rarity that follows the provided
+     * current rarity. If the current rarity is the highest, the method will return undefined.
+     */
     public static getNextRarity(current: Rarity): Rarity {
         const rarities = new Set<Rarity>();
 
@@ -367,6 +390,11 @@ export class CharactersService {
         return sorted[index + 1];
     }
 
+    /**
+     * Gets the minimum number of stars required for a given rarity level.
+     * @param rarity - The rarity level to find the minimum stars for.
+     * @returns The minimum number of stars needed to achieve the specified rarity.
+     */
     public static getMinimumStarsForRarity(rarity: Rarity): RarityStars {
         const matches: number[] = [];
 

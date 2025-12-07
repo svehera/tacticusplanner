@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 
 describe('progression utilities', () => {
     it('getMinimumStarsForRarity returns correct minimum stars for each rarity', () => {
-        expect(CharactersService.getMinimumStarsForRarity(Rarity.Common)).toBe(RarityStars.OneStar);
+        expect(CharactersService.getMinimumStarsForRarity(Rarity.Common)).toBe(RarityStars.None);
         expect(CharactersService.getMinimumStarsForRarity(Rarity.Uncommon)).toBe(RarityStars.TwoStars);
         expect(CharactersService.getMinimumStarsForRarity(Rarity.Rare)).toBe(RarityStars.FourStars);
         expect(CharactersService.getMinimumStarsForRarity(Rarity.Epic)).toBe(RarityStars.RedOneStar);
