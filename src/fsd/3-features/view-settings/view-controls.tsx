@@ -54,10 +54,10 @@ export const CharactersViewControls = ({
         switch (filter) {
             case CharactersFilterBy.NeedToAscend:
                 return 'Need to Ascend';
+            case CharactersFilterBy.CanAscend:
+                return 'Can Ascend';
             case CharactersFilterBy.NeedToLevel:
                 return 'Need to Level';
-            case CharactersFilterBy.CanUpgrade:
-                return 'Can Upgrade';
             case CharactersFilterBy.WingReady:
                 return 'Ready to be Winged';
             case CharactersFilterBy.Chaos:

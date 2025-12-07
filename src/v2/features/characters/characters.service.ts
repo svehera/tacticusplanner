@@ -23,6 +23,7 @@ import { filterChaos } from './functions/filter-by-chaos';
 import { filterImperial } from './functions/filter-by-imperial';
 import { filterXenos } from './functions/filter-by-xenos';
 import { needToAscendCharacter } from './functions/need-to-ascend';
+import { canAscendCharacter } from './functions/can-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
 import { wingReady } from './functions/wing-ready';
 
@@ -39,17 +40,10 @@ export class CharactersService {
         switch (filterBy) {
             case CharactersFilterBy.NeedToAscend:
                 return filteredCharactersByName.filter(needToAscendCharacter);
+            case CharactersFilterBy.CanAscend:
+                return filteredCharactersByName.filter(canAscendCharacter);
             case CharactersFilterBy.NeedToLevel:
                 return filteredCharactersByName.filter(needToLevelCharacter);
-            case CharactersFilterBy.CanUpgrade:
-                return filteredCharactersByName.filter(
-                    char =>
-                        isCharacter(char) &&
-                        char.rank !== Rank.Locked &&
-                        char.rank !== Rank.Adamantine3 &&
-                        !needToLevelCharacter(char) &&
-                        !needToAscendCharacter(char)
-                );
             case CharactersFilterBy.WingReady:
                 return filteredCharactersByName.filter(wingReady);
             case CharactersFilterBy.Chaos:

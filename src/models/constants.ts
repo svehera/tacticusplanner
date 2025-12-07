@@ -92,6 +92,57 @@ export const charsProgression: Record<number, ICharProgression> = {
     [Rarity.Mythic + RarityStars.MythicWings]: { mythicShards: 100, orbs: 20, rarity: Rarity.Mythic },
 };
 
+export function getTotalProgressionUntil(rarity: Rarity, stars: RarityStars) {
+  const key = rarity + stars;
+  const totals: ICharProgression = {
+    shards: 0,
+    orbs: 0,
+    mythicShards: 0,
+  };
+
+  for (const [kString, value] of Object.entries(charsProgression)) {
+    const k = Number(kString);
+    if (k <= key) {
+      totals.shards! += value.shards ?? 0;
+      totals.orbs! += value.orbs ?? 0;
+      totals.mythicShards! += value.mythicShards ?? 0;
+    }
+  }
+
+  return totals;
+}
+
+export function getNextRarity(current: Rarity): Rarity {
+  const rarities = new Set<Rarity>();
+
+  for (const value of Object.values(charsProgression)) {
+    if (value.rarity !== undefined) {
+      rarities.add(value.rarity);
+    }
+  }
+
+  const sorted = Array.from(rarities).sort((a, b) => a - b);
+
+  const index = sorted.indexOf(current);
+
+  return sorted[index + 1];
+}
+
+export function getMinimumStarsForRarity(rarity: Rarity): RarityStars {
+  const matches: number[] = [];
+
+  for (const [kString, value] of Object.entries(charsProgression)) {
+    const key = Number(kString);
+
+    if (value.rarity === rarity) {
+      const stars = key - rarity;
+      matches.push(stars);
+    }
+  }
+
+  return matches.sort((a, b) => a - b)[0] as RarityStars;
+}
+
 const defaultCampaignsProgress: ICampaignsProgress = {
     Indomitus: 75,
     'Indomitus Mirror': 75,

@@ -1,8 +1,8 @@
 ﻿export enum CharactersFilterBy {
     None,
     NeedToAscend,
+    CanAscend,
     NeedToLevel,
-    CanUpgrade,
     WingReady,
     Chaos,
     Imperial,
