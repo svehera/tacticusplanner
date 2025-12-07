@@ -1,10 +1,10 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
-import { charsUnlockShards } from 'src/models/constants';
-import { IPersonalCharacterData2 } from 'src/models/interfaces';
+import { charsUnlockShards, charsProgression } from 'src/models/constants';
+import { IPersonalCharacterData2, ICharProgression } from 'src/models/interfaces';
 import factionsData from 'src/v2/data/factions.json';
 
-import { Rank, Rarity, UnitType } from '@/fsd/5-shared/model';
+import { Rank, Rarity, UnitType, RarityStars } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2 } from '@/fsd/4-entities/mow';
@@ -25,7 +25,7 @@ import { filterXenos } from './functions/filter-by-xenos';
 import { needToAscendCharacter } from './functions/need-to-ascend';
 import { canAscendCharacter } from './functions/can-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
-import { blueStarReady } from './functions/wing-ready';
+import { blueStarReady } from './functions/blue-star-ready';
 
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
@@ -329,5 +329,56 @@ export class CharactersService {
         const charactersByPotentialValue = charactersByPotential.map(x => x.potential);
 
         return (sum(charactersByPotentialValue) / (charactersCount * 5 * 100)) * 100;
+    }
+
+    public static getTotalProgressionUntil(rarity: Rarity, stars: RarityStars) {
+        const key = rarity + stars;
+        const totals: ICharProgression = {
+            shards: 0,
+            orbs: 0,
+            mythicShards: 0,
+        };
+
+        for (const [kString, value] of Object.entries(charsProgression)) {
+            const k = Number(kString);
+            if (k <= key) {
+                totals.shards! += value.shards ?? 0;
+                totals.orbs! += value.orbs ?? 0;
+                totals.mythicShards! += value.mythicShards ?? 0;
+            }
+        }
+
+        return totals;
+    }
+
+    public static getNextRarity(current: Rarity): Rarity {
+        const rarities = new Set<Rarity>();
+
+        for (const value of Object.values(charsProgression)) {
+            if (value.rarity !== undefined) {
+                rarities.add(value.rarity);
+            }
+        }
+
+        const sorted = Array.from(rarities).sort((a, b) => a - b);
+
+        const index = sorted.indexOf(current);
+
+        return sorted[index + 1];
+    }
+
+    public static getMinimumStarsForRarity(rarity: Rarity): RarityStars {
+        const matches: number[] = [];
+
+        for (const [kString, value] of Object.entries(charsProgression)) {
+            const key = Number(kString);
+
+            if (value.rarity === rarity) {
+                const stars = key - rarity;
+                matches.push(stars);
+            }
+        }
+
+        return matches.sort((a, b) => a - b)[0] as RarityStars;
     }
 }

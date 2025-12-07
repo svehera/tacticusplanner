@@ -1,7 +1,7 @@
 ﻿import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { IUnit } from '@/fsd/4-entities/unit';
-import { getTotalProgressionUntil } from '@/models/constants';
+import { CharactersService } from '@/v2/features/characters/characters.service';
 
 export const blueStarReady = (unit: IUnit) => {
     const isAlreadyBlueStar = unit.rarity === Rarity.Legendary && unit.stars === RarityStars.OneBlueStar;
@@ -9,8 +9,11 @@ export const blueStarReady = (unit: IUnit) => {
 
     if (isAlreadyMythic || isAlreadyBlueStar) return false;
 
-    const totalShardsCurrent = getTotalProgressionUntil(unit.rarity, unit.stars);
-    const totalShardsForNextRarity = getTotalProgressionUntil(Rarity.Legendary, RarityStars.OneBlueStar);
+    const totalShardsCurrent = CharactersService.getTotalProgressionUntil(unit.rarity, unit.stars);
+    const totalShardsForNextRarity = CharactersService.getTotalProgressionUntil(
+        Rarity.Legendary,
+        RarityStars.OneBlueStar
+    );
     const neededShards = (totalShardsForNextRarity.shards ?? 0) - (totalShardsCurrent.shards ?? 0);
 
     return neededShards - unit.shards <= 0;
