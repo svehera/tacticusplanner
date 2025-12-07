@@ -17,29 +17,24 @@ export const needToLevelCharacter = (unit: IUnit) => {
     var maxRank;
     switch (unit.rarity) {
         case Rarity.Common:
-            maxRank  = Rank.Iron1;
-            break;  
+            maxRank = Rank.Iron1;
+            break;
         case Rarity.Uncommon:
-            maxRank  = Rank.Bronze1;
-            break;  
+            maxRank = Rank.Bronze1;
+            break;
         case Rarity.Rare:
-            maxRank  = Rank.Silver1;
+            maxRank = Rank.Silver1;
             break;
         case Rarity.Epic:
-            maxRank  = Rank.Gold1;
-            break;  
+            maxRank = Rank.Gold1;
+            break;
         case Rarity.Legendary:
-            maxRank  = Rank.Diamond3;
-            break; 
+            maxRank = Rank.Diamond3;
+            break;
         case Rarity.Mythic:
-            maxRank  = Rank.Adamantine3;
-            break; 
+            maxRank = Rank.Adamantine3;
+            break;
     }
 
-
-    return (
-        isUnlocked &&
-        !needToAscend &&
-        unit.level < rankToLevel[maxRank] 
-    );
+    return isUnlocked && !needToAscend && unit.level < rankToLevel[maxRank];
 };

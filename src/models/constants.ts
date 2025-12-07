@@ -93,54 +93,54 @@ export const charsProgression: Record<number, ICharProgression> = {
 };
 
 export function getTotalProgressionUntil(rarity: Rarity, stars: RarityStars) {
-  const key = rarity + stars;
-  const totals: ICharProgression = {
-    shards: 0,
-    orbs: 0,
-    mythicShards: 0,
-  };
+    const key = rarity + stars;
+    const totals: ICharProgression = {
+        shards: 0,
+        orbs: 0,
+        mythicShards: 0,
+    };
 
-  for (const [kString, value] of Object.entries(charsProgression)) {
-    const k = Number(kString);
-    if (k <= key) {
-      totals.shards! += value.shards ?? 0;
-      totals.orbs! += value.orbs ?? 0;
-      totals.mythicShards! += value.mythicShards ?? 0;
+    for (const [kString, value] of Object.entries(charsProgression)) {
+        const k = Number(kString);
+        if (k <= key) {
+            totals.shards! += value.shards ?? 0;
+            totals.orbs! += value.orbs ?? 0;
+            totals.mythicShards! += value.mythicShards ?? 0;
+        }
     }
-  }
 
-  return totals;
+    return totals;
 }
 
 export function getNextRarity(current: Rarity): Rarity {
-  const rarities = new Set<Rarity>();
+    const rarities = new Set<Rarity>();
 
-  for (const value of Object.values(charsProgression)) {
-    if (value.rarity !== undefined) {
-      rarities.add(value.rarity);
+    for (const value of Object.values(charsProgression)) {
+        if (value.rarity !== undefined) {
+            rarities.add(value.rarity);
+        }
     }
-  }
 
-  const sorted = Array.from(rarities).sort((a, b) => a - b);
+    const sorted = Array.from(rarities).sort((a, b) => a - b);
 
-  const index = sorted.indexOf(current);
+    const index = sorted.indexOf(current);
 
-  return sorted[index + 1];
+    return sorted[index + 1];
 }
 
 export function getMinimumStarsForRarity(rarity: Rarity): RarityStars {
-  const matches: number[] = [];
+    const matches: number[] = [];
 
-  for (const [kString, value] of Object.entries(charsProgression)) {
-    const key = Number(kString);
+    for (const [kString, value] of Object.entries(charsProgression)) {
+        const key = Number(kString);
 
-    if (value.rarity === rarity) {
-      const stars = key - rarity;
-      matches.push(stars);
+        if (value.rarity === rarity) {
+            const stars = key - rarity;
+            matches.push(stars);
+        }
     }
-  }
 
-  return matches.sort((a, b) => a - b)[0] as RarityStars;
+    return matches.sort((a, b) => a - b)[0] as RarityStars;
 }
 
 const defaultCampaignsProgress: ICampaignsProgress = {
