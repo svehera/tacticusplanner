@@ -17,5 +17,5 @@ export const blueStarReady = (unit: IUnit) => {
     );
     const neededShards = (totalShardsForNextRarity.shards ?? 0) - (totalShardsCurrent.shards ?? 0);
 
-    return neededShards - unit.shards <= 0;
+    return unit.shards >= neededShards;
 };
