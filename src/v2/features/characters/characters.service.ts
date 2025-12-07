@@ -19,13 +19,13 @@ import { CharactersPowerService } from '../../../fsd/4-entities/unit/characters-
 import { CharactersValueService } from '../../../fsd/4-entities/unit/characters-value.service';
 
 import { IFaction } from './characters.models';
+import { blueStarReady } from './functions/blue-star-ready';
+import { canAscendCharacter } from './functions/can-ascend';
 import { filterChaos } from './functions/filter-by-chaos';
 import { filterImperial } from './functions/filter-by-imperial';
 import { filterXenos } from './functions/filter-by-xenos';
 import { needToAscendCharacter } from './functions/need-to-ascend';
-import { canAscendCharacter } from './functions/can-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
-import { blueStarReady } from './functions/blue-star-ready';
 
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {

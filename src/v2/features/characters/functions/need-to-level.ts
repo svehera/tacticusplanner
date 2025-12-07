@@ -14,7 +14,7 @@ export const needToLevelCharacter = (unit: IUnit) => {
     const isUnlocked = unit.rank > Rank.Locked;
     const needToAscend = needToAscendCharacter(unit);
 
-    var maxRank;
+    let maxRank;
     switch (unit.rarity) {
         case Rarity.Common:
             maxRank = Rank.Iron1;

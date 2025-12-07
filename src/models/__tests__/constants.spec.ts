@@ -1,8 +1,10 @@
 // tests/constants.test.ts
 
-import { CharactersService } from '@/v2/features/characters/characters.service';
-import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { describe, expect, it } from 'vitest';
+
+import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+
+import { CharactersService } from '@/v2/features/characters/characters.service';
 
 describe('progression utilities', () => {
     it('getMinimumStarsForRarity returns correct minimum stars for each rarity', () => {

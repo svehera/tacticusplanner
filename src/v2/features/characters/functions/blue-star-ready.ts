@@ -1,6 +1,7 @@
 ﻿import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { IUnit } from '@/fsd/4-entities/unit';
+
 import { CharactersService } from '@/v2/features/characters/characters.service';
 
 export const blueStarReady = (unit: IUnit) => {
