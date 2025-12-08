@@ -33,6 +33,7 @@ import {
 } from '@/fsd/5-shared/ui';
 import { DiscordIcon, BmcIcon } from '@/fsd/5-shared/ui/icons';
 
+import { ThemeSwitch } from '@/fsd/3-features/theme-switch';
 import { WhatsNewDialog } from 'src/fsd/3-features/whats-new';
 
 import { AppBarSubMenu } from './app-bar-sub-menu';
@@ -164,6 +165,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                         <IconButton color="inherit" onClick={() => navigate('./faq')}>
                             <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
                         </IconButton>
+                        <ThemeSwitch />
                         <Button
                             id="basic-button"
                             aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}
