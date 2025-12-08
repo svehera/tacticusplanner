@@ -65,7 +65,9 @@ export const rankToRarity: Record<Rank, Rarity> = {
 };
 
 export const charsProgression: Record<number, ICharProgression> = {
-    0: { shards: 0 },
+    //Originally it was this, i changed for coherency but kept the comment for safety (Redwyne)
+    //0: { shards: 0 },
+    [Rarity.Common + RarityStars.None]: { shards: 0 },
     [Rarity.Common + RarityStars.OneStar]: { shards: 10 },
     [Rarity.Common + RarityStars.TwoStars]: { shards: 15 },
     [Rarity.Uncommon + RarityStars.TwoStars]: { shards: 15, orbs: 10, rarity: Rarity.Uncommon },
@@ -188,7 +190,6 @@ export const defaultData: IPersonalData2 = {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesMinCount: null,
         },
         raidedLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),

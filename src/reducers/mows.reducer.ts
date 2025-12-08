@@ -61,7 +61,7 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
             const getId = (existingMow: IMow | IMow2) =>
                 'tacticusId' in existingMow ? existingMow.tacticusId : existingMow.snowprintId;
 
-            return resolvedMows.map(existingMow => {
+            const resolved = resolvedMows.map(existingMow => {
                 const tacticusUnit = units.find(u => u.id === getId(existingMow));
                 const tacticusShards = shards.find(s => s.id === getId(existingMow));
 
@@ -88,6 +88,8 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
 
                 return existingMow;
             });
+
+            return resolved;
         }
         case 'UpdateAbilities': {
             const { mowId, abilities } = action;

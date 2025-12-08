@@ -3,7 +3,7 @@
         {
             "snowprintId": "adeptExorcist",
             "name": "Exorcist",
-            "factionId": "Sisterhood",
+            "faction": "Sisterhood",
             "alliance": "Imperial",
             "icon": "snowprint_assets/characters/ui_image_portrait_adept_exorcist_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_adept_exorcist_01.png",
@@ -131,7 +131,7 @@
         {
             "snowprintId": "astraOrdnanceBattery",
             "name": "Malleus Rocket Launcher",
-            "factionId": "AstraMilitarum",
+            "faction": "AstraMilitarum",
             "alliance": "Imperial",
             "icon": "snowprint_assets/characters/ui_image_portrait_astra_ordnancebattery_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_astra_ordnancebattery_01.png",
@@ -259,7 +259,7 @@
         {
             "snowprintId": "blackForgefiend",
             "name": "Forgefiend",
-            "factionId": "BlackLegion",
+            "faction": "BlackLegion",
             "alliance": "Chaos",
             "icon": "snowprint_assets/characters/ui_image_portrait_black_forgefiend_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_black_forgefiend_01.png",
@@ -387,7 +387,7 @@
         {
             "snowprintId": "deathCrawler",
             "name": "Plagueburst Crawler",
-            "factionId": "DeathGuard",
+            "faction": "DeathGuard",
             "alliance": "Chaos",
             "icon": "snowprint_assets/characters/ui_image_portrait_death_crawler_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_death_crawler_01.png",
@@ -515,7 +515,7 @@
         {
             "snowprintId": "orksRukkatrukk",
             "name": "Rukkatrukk",
-            "factionId": "Orks",
+            "faction": "Orks",
             "alliance": "Xenos",
             "icon": "snowprint_assets/characters/ui_image_portrait_orkss_rukkatruk_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_orkss_rukkatrukk_01.png",
@@ -643,7 +643,7 @@
         {
             "snowprintId": "tauBroadside",
             "name": "Tson'ji",
-            "factionId": "Tau",
+            "faction": "Tau",
             "alliance": "Xenos",
             "icon": "snowprint_assets/characters/ui_image_portrait_tauta_broadside_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tauta_broadside_01.png",
@@ -771,7 +771,7 @@
         {
             "snowprintId": "thousDaemonPrince",
             "name": "Z'Kar",
-            "factionId": "ThousandSons",
+            "faction": "ThousandSons",
             "alliance": "Chaos",
             "icon": "snowprint_assets/characters/ui_image_portrait_thous_daemonprince_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_thous_daemonprince_01.png",
@@ -899,7 +899,7 @@
         {
             "snowprintId": "tyranBiovore",
             "name": "Biovore",
-            "factionId": "Tyranids",
+            "faction": "Tyranids",
             "alliance": "Xenos",
             "icon": "snowprint_assets/characters/ui_image_portrait_tyran_biovore_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tyran_biovore_01.png",
@@ -1027,7 +1027,7 @@
         {
             "snowprintId": "ultraDreadnought",
             "name": "Galatian",
-            "factionId": "Ultramarines",
+            "faction": "Ultramarines",
             "alliance": "Imperial",
             "icon": "snowprint_assets/characters/ui_image_portrait_ultra_dreadnought_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_ultra_dreadnought_01.png",

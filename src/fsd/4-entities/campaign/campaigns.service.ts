@@ -215,11 +215,11 @@ export class CampaignsService {
             .map(faction => FactionsService.getFactionSnowprintId(faction))
             .filter(isString);
 
-        if (typeof enemiesMinCount === 'number' && enemiesMinCount >= location.enemiesTotal) {
+        if (enemiesMinCount !== undefined && enemiesMinCount >= location.enemiesTotal) {
             return false;
         }
 
-        if (typeof enemiesMaxCount === 'number' && enemiesMaxCount <= location.enemiesTotal) {
+        if (enemiesMaxCount !== undefined && enemiesMaxCount <= location.enemiesTotal) {
             return false;
         }
 
