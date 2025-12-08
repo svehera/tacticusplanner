@@ -14,10 +14,14 @@ export const AppThemeProvider: FC<PropsWithChildren> = ({ children }) => {
             window.addEventListener('storage', callback);
             return () => window.removeEventListener('storage', callback);
         },
-        () => (localStorage.getItem(LOCAL_STORAGE_KEY) as Theme) || Theme.Device
+        () => {
+            const stored = localStorage.getItem(LOCAL_STORAGE_KEY) as Theme;
+            return stored && Object.values(Theme).includes(stored) ? stored : Theme.Device;
+        }
     );
     const setUserThemePreference = (theme: Theme) => {
         localStorage.setItem(LOCAL_STORAGE_KEY, theme);
+        // Native storage event only fires in other tabs/windows.
         window.dispatchEvent(new Event('storage'));
     };
     const isDarkMode =
