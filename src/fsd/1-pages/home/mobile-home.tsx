@@ -16,6 +16,7 @@ import { menuItemById } from 'src/models/menu-items';
 import { discordInvitationLink, bmcLink } from '@/fsd/5-shared/ui';
 import { DiscordIcon, BmcIcon } from '@/fsd/5-shared/ui/icons';
 
+import { ThemeSwitch } from '@/fsd/3-features/theme-switch';
 import { WhatsNewDialog } from 'src/fsd/3-features/whats-new';
 
 import { AddToHomeScreen } from './addToHomeScreen';
@@ -47,6 +48,7 @@ export const MobileHome = () => {
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                    <ThemeSwitch />
                     <IconButton color="inherit" onClick={() => navigate('/mobile/faq')}>
                         <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
                     </IconButton>
