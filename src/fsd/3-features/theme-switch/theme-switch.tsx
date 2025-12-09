@@ -1,6 +1,6 @@
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import MonitorIcon from '@mui/icons-material/Monitor';
+import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';
 import { IconButton, Tooltip } from '@mui/material';
 
 import { Theme, useTheme } from '@/fsd/5-shared/model';
@@ -13,7 +13,7 @@ export const ThemeSwitch = () => {
             return (
                 <Tooltip title="Switch to light mode">
                     <IconButton color="inherit" onClick={() => setUserThemePreference(Theme.Light)}>
-                        <MonitorIcon />
+                        <SettingsBrightnessIcon />
                     </IconButton>
                 </Tooltip>
             );
