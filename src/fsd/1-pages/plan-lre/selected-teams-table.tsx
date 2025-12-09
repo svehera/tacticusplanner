@@ -106,14 +106,8 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, editTeam, deleteTeam
 
     return (
         <div
-            className="ag-theme-material auto-teams"
-            style={{
-                height: rows.length * 35,
-                minHeight: '230px',
-                width: '100%',
-                minWidth: isMobile ? '750px' : '',
-                border: '2px solid black',
-            }}>
+            className="ag-theme-material auto-teams min-h-[230px] w-full border-2 border-black border-solid"
+            style={{ height: rows.length * 35, minWidth: isMobile ? '750px' : '' }}>
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}

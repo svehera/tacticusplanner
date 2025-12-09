@@ -28,7 +28,7 @@ export const CharacterTitleShort = ({
     const cursor = onClick ? 'pointer' : undefined;
 
     return (
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
+        <div className="flex items-center gap-2.5" style={{ opacity, cursor }} onClick={onClick}>
             <Tooltip title={character.name} leaveDelay={1000} placement="top">
                 <span style={{ height: imageSize }}>
                     <UnitShardIcon

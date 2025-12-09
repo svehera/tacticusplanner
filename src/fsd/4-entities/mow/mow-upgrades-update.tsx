@@ -100,19 +100,11 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                     vertical: 'bottom',
                     horizontal: 'left',
                 }}>
-                <div style={{ padding: 15 }}>
+                <div className="p-[15px]">
                     <p>Inventory after update:</p>
-                    <ul style={{ padding: 0 }}>
+                    <ul className="p-0">
                         {inventoryUpgrades.map((x, index) => (
-                            <li
-                                key={x.id + index}
-                                style={{
-                                    listStyleType: 'none',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 10,
-                                    paddingBottom: 10,
-                                }}>
+                            <li key={x.id + index} className="list-none flex items-center gap-2.5 pb-2.5">
                                 <UpgradeImage
                                     material={x.label}
                                     iconPath={x.iconPath}

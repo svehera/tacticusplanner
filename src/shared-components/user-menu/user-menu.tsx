@@ -192,9 +192,9 @@ export const UserMenu = () => {
 
     return (
         <Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
-            <input ref={inputRef} style={{ display: 'none' }} type="file" accept=".json" onChange={handleFileUpload} />
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <span style={{ fontSize: 16, fontWeight: 700 }}>Hi, {username}</span>
+            <input ref={inputRef} className="hidden" type="file" accept=".json" onChange={handleFileUpload} />
+            <div className="flex items-center">
+                <span className="text-base font-bold">Hi, {username}</span>
                 <IconButton
                     onClick={userMenuControls.handleClick}
                     size="small"

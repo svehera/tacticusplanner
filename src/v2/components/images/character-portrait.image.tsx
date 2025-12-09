@@ -18,7 +18,7 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
             {...props}
             ref={ref}
             loading="lazy"
-            style={{ pointerEvents: 'none' }}
+            className="pointer-events-none"
             src={imageUrl}
             width={60}
             height={80}

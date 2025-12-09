@@ -216,12 +216,12 @@ export const LreTeamsTable: React.FC<Props> = ({
     };
 
     return (
-        <div style={{ width: '100%', height: '100%', overflow: 'auto' }}>
+        <div className="size-full overflow-auto">
             <div className="flex-box between">
                 <div className="flex-box gap10">
-                    <span style={{ fontWeight: 700, fontSize: '1rem' }}>{track.name}</span>
+                    <span className="font-bold text-base">{track.name}</span>
                     <div className="flex-box gap5">
-                        <span style={{ fontStyle: 'italic', fontSize: '1rem' }}> vs {track.enemies.label}</span>
+                        <span className="italic text-base"> vs {track.enemies.label}</span>
                         <a href={track.enemies.link} target={'_blank'} rel="noreferrer">
                             <InfoIcon color={'primary'} />
                         </a>
@@ -234,12 +234,10 @@ export const LreTeamsTable: React.FC<Props> = ({
                 )}
             </div>
             <div
-                className="ag-theme-material auto-teams"
+                className="ag-theme-material auto-teams w-full border-2 border-solid border-black"
                 style={{
                     height: isMobile ? '350px' : 'calc((100vh - 100px) / 2)',
-                    width: '100%',
                     minWidth: isMobile ? '750px' : '',
-                    border: '2px solid black',
                 }}>
                 <AgGridReact
                     modules={[AllCommunityModule]}

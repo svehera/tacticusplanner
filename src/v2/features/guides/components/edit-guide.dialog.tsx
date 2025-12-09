@@ -60,7 +60,7 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
     return (
         <Dialog open={true} onClose={onClose} fullWidth fullScreen={isMobile}>
             <DialogTitle>Edit team guide</DialogTitle>
-            <DialogContent style={{ paddingTop: 10 }}>
+            <DialogContent className="pt-2.5">
                 <TextField
                     fullWidth
                     required
@@ -104,7 +104,7 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
                 <br />
                 <br />
 
-                <Typography variant="subtitle1" style={{ marginLeft: 10 }}>
+                <Typography variant="subtitle1" className="ml-2.5">
                     Guide* (supports rich text)
                 </Typography>
                 <RichTextEditor

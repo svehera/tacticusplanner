@@ -365,7 +365,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
 
     return (
         <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+            <div className="flex items-center gap-[15px]">
                 <TextField
                     size="small"
                     sx={{ margin: '10px', width: '300px' }}
@@ -397,11 +397,11 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                     Copy To Clipboard
                 </Button>
                 <FormControl>
-                    <FormLabel id="demo-radio-buttons-group-label" style={{ fontWeight: 700 }}>
+                    <FormLabel id="demo-radio-buttons-group-label" className="font-bold">
                         Characters Selection
                     </FormLabel>
                     <RadioGroup
-                        style={{ display: 'flex', flexDirection: 'row' }}
+                        className="flex flex-row"
                         aria-labelledby="demo-radio-buttons-group-label"
                         value={selection}
                         onChange={(_, value) => setSelection(value as CharactersSelection)}
@@ -421,11 +421,11 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 </FormControl>
                 {selection === CharactersSelection.Selected ? (
                     <FormControl>
-                        <FormLabel id="points-calculation-label" style={{ fontWeight: 700 }}>
+                        <FormLabel id="points-calculation-label" className="font-bold">
                             Points Calculation
                         </FormLabel>
                         <RadioGroup
-                            style={{ display: 'flex', flexDirection: 'row' }}
+                            className="flex flex-row"
                             aria-labelledby="points-calculation-label"
                             value={pointsCalculation}
                             onChange={(_, value) => setPointsCalculation(value as PointsCalculation)}
@@ -450,7 +450,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                     </span>
                 )}
             </div>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 250px)', width: '100%' }}>
+            <div className="ag-theme-material w-full h-[calc(100vh-250px)]">
                 <AgGridReact
                     modules={[AllCommunityModule]}
                     theme={themeBalham}

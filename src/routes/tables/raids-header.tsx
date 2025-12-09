@@ -37,13 +37,13 @@ export const RaidsHeader: React.FC<Props> = ({
     return (
         <>
             <div className="flex-box between wrap">
-                <div className="flex-box gap10" style={{ paddingBottom: 10 }}>
+                <div className="flex-box gap10 pb-2.5">
                     <Button
                         variant={'contained'}
                         size="small"
                         component={Link}
                         to={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
-                        <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Goals</span>
+                        <LinkIcon /> <span className="pl-[5px]">Go to Goals</span>
                     </Button>
 
                     <Button variant="outlined" size="small" onClick={() => setOpenSettings(true)}>
@@ -54,7 +54,7 @@ export const RaidsHeader: React.FC<Props> = ({
                     </span>
                 </div>
 
-                <div className="flex-box gap10" style={{ paddingBottom: 10 }}>
+                <div className="flex-box gap10 pb-2.5">
                     {hasSync && (
                         <Button size="small" variant={'contained'} color={'primary'} onClick={syncHandle}>
                             {isMobile ? (
