@@ -11,7 +11,7 @@ import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild
 import { ArenaLeague } from '@/fsd/1-pages/input-xp-income/models';
 
 import { DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
-import { ICharProgression, IDailyRaidsFarmOrder, IPersonalData2 } from './interfaces';
+import { ICharProgression, IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent, IPersonalData2 } from './interfaces';
 
 export const rankToLevel: Record<Rank, number> = {
     [Rank.Locked - 1]: 0,
@@ -240,7 +240,7 @@ export const defaultData: IPersonalData2 = {
     dailyRaidsPreferences: {
         dailyEnergy: 288,
         shardsEnergy: 0,
-        farmPreferences: { order: IDailyRaidsFarmOrder.goalPriority },
+        farmPreferences: { order: IDailyRaidsFarmOrder.goalPriority, homeScreenEvent: IDailyRaidsHomeScreenEvent.none },
         farmStrategy: DailyRaidsStrategy.leastEnergy,
         campaignEvent: 'none',
     },

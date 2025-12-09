@@ -10,7 +10,7 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-import { IDailyRaidsFarmOrder } from '@/models/interfaces';
+import { IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent } from '@/models/interfaces';
 import { goalsLimit, rankToLevel } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -107,7 +107,10 @@ export const Goals = () => {
                 campaignsProgress: campaignsProgress,
                 preferences: {
                     ...dailyRaidsPreferences,
-                    farmPreferences: { order: IDailyRaidsFarmOrder.goalPriority },
+                    farmPreferences: {
+                        order: IDailyRaidsFarmOrder.goalPriority,
+                        homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
+                    },
                 },
                 upgrades: inventory.upgrades,
                 completedLocations: [],
