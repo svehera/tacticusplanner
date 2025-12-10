@@ -213,9 +213,10 @@ export class GoalsService {
             if (g.type === PersonalGoalType.UpgradeRank) {
                 const result: ICharacterUpgradeRankGoal = {
                     type: PersonalGoalType.UpgradeRank,
-                    rankStart: unit.rank,
+                    rankStart: Math.max(g.startingRank ?? unit.rank, unit.rank),
                     rankEnd: g.targetRank!,
                     rankPoint5: g.rankPoint5!,
+                    rankStartPoint5: g.startingRankPoint5 ?? false,
                     upgradesRarity: g.upgradesRarity ?? [],
                     appliedUpgrades: unit.upgrades,
                     level: unit.level,
@@ -249,6 +250,8 @@ export class GoalsService {
             case PersonalGoalType.UpgradeRank: {
                 return {
                     ...base,
+                    startingRank: goal.rankStart,
+                    startingRankPoint5: goal.rankStartPoint5,
                     targetRank: goal.rankEnd,
                     rankPoint5: goal.rankPoint5,
                     upgradesRarity: goal.upgradesRarity,

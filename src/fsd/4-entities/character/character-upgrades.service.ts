@@ -22,11 +22,26 @@ export class CharacterUpgradesService {
         const ranksRange = this.rankEntries.filter(r => r >= rankLookup.rankStart && r < rankLookup.rankEnd);
         const upgradeRanks: IUnitUpgradeRank[] = [];
 
+        if (rankLookup.rankStartPoint5) {
+            const rank = ranksRange.shift()!;
+            const upgrades = characterRankUpData[rankToString(rank)] ?? [];
+            // select every odd upgrade (bottom row in game)
+            const rankPoint5Upgrades = upgrades.filter((_, index) => (index + 1) % 2 === 0);
+            console.log('rank: ', rank, ' upgrades: ', upgrades, ' rankPoint5Upgrades: ', rankPoint5Upgrades);
+            upgradeRanks.push({
+                rankStart: rank,
+                rankEnd: rank + 1,
+                startRankPoint5: true,
+                rankPoint5: false,
+                upgrades: rankPoint5Upgrades,
+            });
+        }
         for (const rank of ranksRange) {
             const upgrades = characterRankUpData[rankToString(rank)] ?? [];
             upgradeRanks.push({
                 rankStart: rank,
                 rankEnd: rank + 1,
+                startRankPoint5: false,
                 rankPoint5: false,
                 upgrades: upgrades,
             });
@@ -40,6 +55,7 @@ export class CharacterUpgradesService {
             upgradeRanks.push({
                 rankStart: rankLookup.rankEnd,
                 rankEnd: rankLookup.rankEnd,
+                startRankPoint5: false,
                 rankPoint5: true,
                 upgrades: rankPoint5Upgrades,
             });
