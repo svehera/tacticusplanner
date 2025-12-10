@@ -3,6 +3,9 @@ import { Tooltip } from '@mui/material';
 import { sum } from 'lodash';
 import React, { useMemo } from 'react';
 
+import { RequirementStatus } from '@/fsd/3-features/lre';
+import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
+
 import { ILreProgressModel, ILreTrackProgress } from './lre.models';
 
 interface Props {
@@ -22,13 +25,38 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
         return model.chestsMilestones.length;
     }, []);
 
+    // Helper to get points from a requirement, accounting for partial kill scores
+    const getRequirementPoints = (req: {
+        completed: boolean;
+        status?: number;
+        killScore?: number;
+        points: number;
+        id: string;
+    }) => {
+        // Check if new status system is being used
+        if (req.status !== undefined) {
+            const status = req.status as RequirementStatus;
+
+            // Only Cleared and PartiallyCleared contribute points
+            if (status === RequirementStatus.Cleared) {
+                return req.points;
+            }
+            if (
+                status === RequirementStatus.PartiallyCleared &&
+                req.id === LrePointsCategoryId.killScore &&
+                req.killScore
+            ) {
+                return req.killScore;
+            }
+            return 0;
+        }
+
+        // Legacy: use completed flag
+        return req.completed ? req.points : 0;
+    };
+
     const getCurrentPoints = (track: ILreTrackProgress) => {
-        return sum(
-            track.battles
-                .flatMap(x => x.requirementsProgress)
-                .filter(x => x.completed)
-                .map(x => x.points)
-        );
+        return sum(track.battles.flatMap(x => x.requirementsProgress).map(req => getRequirementPoints(req)));
     };
 
     const currentPoints = sum(model.tracksProgress.map(getCurrentPoints));

@@ -74,8 +74,10 @@ export interface ILreBattleRequirementsProgress {
     iconId: string;
     name: string;
     points: number;
-    completed: boolean;
-    blocked: boolean;
+    completed: boolean; // Legacy - keep for backward compatibility
+    blocked: boolean; // Legacy - keep for backward compatibility
+    status?: number; // New: RequirementStatus enum value (0-4)
+    killScore?: number; // New: For partial kill score tracking
 }
 
 export interface ILreRequirements {

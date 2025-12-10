@@ -49,7 +49,13 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
         });
     };
 
-    const setBattleState = (trackId: LreTrackId, battleIndex: number, reqId: string, state: ProgressState) => {
+    const setBattleState = (
+        trackId: LreTrackId,
+        battleIndex: number,
+        reqId: string,
+        state: ProgressState,
+        forceOverwrite = false
+    ) => {
         setModel(currModel => {
             const trackProgressIndex = currModel.tracksProgress.findIndex(x => x.trackId === trackId);
             if (trackProgressIndex === -1) return currModel;
@@ -74,22 +80,54 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
             let updatedRequirementsProgress = [...battleProgress.requirementsProgress];
 
             if (state === ProgressState.completed) {
-                updatedReqProgress = { ...reqProgress, completed: true, blocked: false };
+                updatedReqProgress = {
+                    ...reqProgress,
+                    completed: true,
+                    blocked: false,
+                    // When completed, always set to Cleared status (unless preserving PartiallyCleared for killScore)
+                    status:
+                        !forceOverwrite && reqProgress.status === 4 && reqProgress.id === LrePointsCategoryId.killScore
+                            ? 4 // Preserve PartiallyCleared for killScore
+                            : 1, // RequirementStatus.Cleared
+                    // Clear killScore when forcing to Cleared
+                    killScore: forceOverwrite ? undefined : reqProgress.killScore,
+                };
 
-                if (
-                    !autoCompleteReqs.includes(reqProgress.id as LrePointsCategoryId) ||
-                    reqProgress.id === LrePointsCategoryId.defeatAll
-                ) {
+                // If marking a non-auto requirement (restriction) as complete, auto-complete defeatAll, killScore, and highScore
+                if (!autoCompleteReqs.includes(reqProgress.id as LrePointsCategoryId)) {
                     updatedRequirementsProgress = updatedRequirementsProgress.map(req =>
                         autoCompleteReqs.includes(req.id as LrePointsCategoryId)
-                            ? { ...req, completed: true, blocked: false }
+                            ? { ...req, completed: true, blocked: false, status: 1, killScore: undefined }
+                            : req
+                    );
+                }
+                // If marking defeatAll as complete, also mark killScore and highScore as complete (but leave restrictions as-is)
+                else if (reqProgress.id === LrePointsCategoryId.defeatAll) {
+                    updatedRequirementsProgress = updatedRequirementsProgress.map(req =>
+                        autoCompleteReqs.includes(req.id as LrePointsCategoryId)
+                            ? { ...req, completed: true, blocked: false, status: 1, killScore: undefined }
                             : req
                     );
                 }
             } else if (state === ProgressState.blocked) {
-                updatedReqProgress = { ...reqProgress, completed: false, blocked: true };
+                updatedReqProgress = {
+                    ...reqProgress,
+                    completed: false,
+                    blocked: true,
+                    // If forceOverwrite, set to StopHere; otherwise preserve
+                    status: forceOverwrite ? 3 : (reqProgress.status ?? 3), // RequirementStatus.StopHere
+                    killScore: forceOverwrite ? undefined : reqProgress.killScore,
+                };
             } else {
-                updatedReqProgress = { ...reqProgress, completed: false, blocked: false };
+                // State is "none"
+                updatedReqProgress = {
+                    ...reqProgress,
+                    completed: false,
+                    blocked: false,
+                    // If forceOverwrite, set to NotCleared and clear killScore; otherwise preserve
+                    status: forceOverwrite ? 0 : (reqProgress.status ?? 0),
+                    killScore: forceOverwrite ? undefined : reqProgress.killScore,
+                };
             }
 
             updatedRequirementsProgress[reqProgressIndex] = updatedReqProgress;

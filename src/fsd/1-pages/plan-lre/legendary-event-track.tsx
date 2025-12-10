@@ -11,6 +11,7 @@ import {
     ILegendaryEventSelectedRequirements,
     ILegendaryEventTrack,
     ILreTeam,
+    RequirementStatus,
 } from '@/fsd/3-features/lre';
 
 import { LreTeamsCard } from './lre-teams-card';
@@ -59,7 +60,24 @@ export const LegendaryEventTrack: React.FC<Props> = ({
         track.unitsRestrictions
             .filter(x => !x.hide)
             .forEach(x => {
-                const selected = section[x.name] !== undefined ? section[x.name] : x.selected;
+                const saved = section[x.name];
+                let selected: boolean;
+
+                if (saved === undefined) {
+                    // Not set, use default
+                    selected = x.selected ?? false;
+                } else if (typeof saved === 'boolean') {
+                    // Legacy boolean format
+                    selected = saved;
+                } else if (typeof saved === 'object' && 'status' in saved) {
+                    // New IRequirementProgress format - only Cleared (1) and PartiallyCleared (4) count as "selected"
+                    selected =
+                        saved.status === RequirementStatus.Cleared ||
+                        saved.status === RequirementStatus.PartiallyCleared;
+                } else {
+                    selected = false;
+                }
+
                 if (selected) {
                     result.push(x.name);
                 }
