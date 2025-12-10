@@ -344,6 +344,7 @@ export class UpgradesService {
                 rankEnd: Rank.Diamond3,
                 upgrades: [...primaryUpgrades, ...secondaryUpgrades],
                 rankPoint5: false,
+                startRankPoint5: false,
             },
         ];
     }

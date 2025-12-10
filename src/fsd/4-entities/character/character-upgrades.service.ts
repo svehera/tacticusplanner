@@ -27,7 +27,6 @@ export class CharacterUpgradesService {
             const upgrades = characterRankUpData[rankToString(rank)] ?? [];
             // select every odd upgrade (bottom row in game)
             const rankPoint5Upgrades = upgrades.filter((_, index) => (index + 1) % 2 === 0);
-            console.log('rank: ', rank, ' upgrades: ', upgrades, ' rankPoint5Upgrades: ', rankPoint5Upgrades);
             upgradeRanks.push({
                 rankStart: rank,
                 rankEnd: rank + 1,

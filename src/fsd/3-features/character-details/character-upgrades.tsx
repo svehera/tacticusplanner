@@ -123,6 +123,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 rankEnd: rank,
                 appliedUpgrades: formData.originalUpgrades,
                 rankPoint5: false,
+                rankStartPoint5: false,
                 upgradesRarity: [],
             });
 
