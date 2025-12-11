@@ -39,8 +39,10 @@ describe('Goal service', () => {
                 priority: 1,
                 dailyRaids: false,
                 notes: 'myNotes',
+                startingRank: Rank.Bronze1,
                 targetRank: Rank.Silver1,
                 rankPoint5: true,
+                startingRankPoint5: false,
             };
 
             const expectedResult: ICharacterUpgradeRankGoal = {
@@ -56,6 +58,7 @@ describe('Goal service', () => {
                 rankStart: characterMock.rank,
                 rankEnd: goalMock.targetRank!,
                 rankPoint5: goalMock.rankPoint5!,
+                rankStartPoint5: goalMock.startingRankPoint5!,
                 appliedUpgrades: characterMock.upgrades,
                 level: characterMock.level,
                 xp: characterMock.xp,

@@ -39,7 +39,7 @@ import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
 import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
-import { IUnit } from 'src/v2/features/characters/characters.models';
+import { ICharacter2, IUnit } from 'src/v2/features/characters/characters.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 
@@ -47,6 +47,8 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
     character: '',
     type: PersonalGoalType.UpgradeRank,
+    startingRank: Rank.Stone1,
+    startingRankPoint5: false,
     targetRarity: Rarity.Common,
     targetRank: Rank.Stone1,
     targetStars: RarityStars.None,
@@ -191,7 +193,10 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
 
         if (form.type === PersonalGoalType.UpgradeRank && isCharacter(unit)) {
-            return unit.rank === form.targetRank && !form.rankPoint5;
+            const startRank =
+                ((form.startingRank ?? unit.rank ?? Rank.Stone1) as number) + (form.startingRankPoint5 ? 0.5 : 0);
+            const endRank = ((form.targetRank ?? unit.rank ?? Rank.Stone1) as number) + (form.rankPoint5 ? 0.5 : 0);
+            return (unit.rank === form.targetRank && !form.rankPoint5) || startRank >= endRank;
         }
 
         if (form.type === PersonalGoalType.Ascend) {
@@ -276,7 +281,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                         <Conditional condition={!!unit && form.type === PersonalGoalType.UpgradeRank}>
                             <RankGoalSelect
                                 allowedValues={rankValues}
-                                rank={form.targetRank}
+                                startingRank={form.startingRank ?? (unit as ICharacter2).rank ?? Rank.Stone1}
+                                startingPoint5={!!form.startingRankPoint5}
+                                onStartChange={(startingRank, startingRankPoint5) =>
+                                    setForm(curr => ({ ...curr, startingRank, startingRankPoint5 }))
+                                }
+                                rank={form.targetRank ?? (unit as ICharacter2).rank ?? Rank.Stone1}
                                 point5={!!form.rankPoint5}
                                 onChange={(targetRank, rankPoint5) =>
                                     setForm(curr => ({ ...curr, targetRank, rankPoint5 }))

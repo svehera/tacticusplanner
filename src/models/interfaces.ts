@@ -313,6 +313,8 @@ export interface IPersonalGoal {
     dailyRaids: boolean;
     notes?: string;
     // upgrade rank
+    startingRank?: Rank;
+    startingRankPoint5?: boolean;
     targetRank?: Rank;
     rankPoint5?: boolean;
     upgradesRarity?: Rarity[];
