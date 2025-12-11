@@ -10,6 +10,7 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
+import { IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent } from '@/models/interfaces';
 import { goalsLimit, rankToLevel } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -104,7 +105,13 @@ export const Goals = () => {
                     dailyRaidsPreferences.dailyEnergy -
                     Math.min(estimatedShardsTotal.energyPerDay + dailyRaidsPreferences.shardsEnergy, 90),
                 campaignsProgress: campaignsProgress,
-                preferences: { ...dailyRaidsPreferences, farmByPriorityOrder: true },
+                preferences: {
+                    ...dailyRaidsPreferences,
+                    farmPreferences: {
+                        order: IDailyRaidsFarmOrder.goalPriority,
+                        homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
+                    },
+                },
                 upgrades: inventory.upgrades,
                 completedLocations: [],
             },

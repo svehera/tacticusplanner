@@ -1,16 +1,34 @@
 ﻿import { cloneDeep, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 
 import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
-import { IEstimatedRanksSettings } from 'src/models/interfaces';
+import {
+    IDailyRaidsFarmOrder,
+    IDailyRaidsHomeScreenEvent,
+    IEstimatedRanksSettings,
+    ITrainingRushPreferences,
+    ITrainingRushStrategy,
+} from 'src/models/interfaces';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
-import { Rank } from '@/fsd/5-shared/model';
+import { Alliance, Faction, Rank } from '@/fsd/5-shared/model';
 
-import { ICampaignsProgress, CampaignsService, CampaignType, Campaign } from '@/fsd/4-entities/campaign';
+import {
+    ICampaignsProgress,
+    CampaignsService,
+    CampaignType,
+    Campaign,
+    ICampaignBattleComposed,
+} from '@/fsd/4-entities/campaign';
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
-import { CharactersService, CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
+import {
+    CharactersService,
+    CharacterUpgradesService,
+    ICharacterData,
+    IUnitUpgradeRank,
+} from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
+import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 import {
     IBaseUpgrade,
     ICraftedUpgrade,
@@ -50,6 +68,235 @@ export class UpgradesService {
         );
     }
 
+    /**
+     * Typically, a material is presented to the user as one raiding option with multiple locations.
+     * When optimizing for warp surge, we potentially split the material into two, one with
+     * locations with the minimum number of non-summon chaos enemies, and one with locations without.
+     *
+     * Returns the materials sorted first by descreasing number of chaos enemies in the location, then
+     * by the remaining materials in the original order.
+     *
+     * @param settings The estimated ranks settings.
+     * @param allMaterials The materials to split.
+     * @returns The split materials.
+     */
+    private static splitMaterials(
+        passesFilter: (location: ICampaignBattleComposed) => boolean,
+        getPriority: (location: ICampaignBattleComposed) => number,
+        allMaterials: ICharacterUpgradeEstimate[]
+    ): ICharacterUpgradeEstimate[] {
+        // Get the materials where at least one battle has the minimum number of chaos enemies.
+        const materialsPassingFilter = allMaterials.filter(material =>
+            material.locations.some(location => passesFilter(location))
+        );
+
+        const battlesWithPriority: Array<ICharacterUpgradeEstimate & { priority: number }> = [];
+        const locationsPassingFilter = new Set<string>();
+
+        // Find all the battle IDs that satisfy the minimum number of chaos enemies, noting that a material
+        // may be available from nodes that have chaos enemies, and also from nodes that do not.
+        for (const material of materialsPassingFilter) {
+            const chaosEnemyLocations = material.locations.filter(passesFilter);
+
+            for (const location of chaosEnemyLocations) {
+                const newMaterial = cloneDeep(material);
+                newMaterial.locations = [location];
+                battlesWithPriority.push({
+                    ...newMaterial,
+                    priority: getPriority(location),
+                });
+                locationsPassingFilter.add(location.id);
+            }
+        }
+
+        const sortedChaosEnemyMaterials = orderBy(battlesWithPriority, ['priority'], ['desc']);
+
+        const remainingMaterials = cloneDeep(allMaterials);
+
+        for (const material of remainingMaterials) {
+            material.locations = material.locations.filter(location => !locationsPassingFilter.has(location.id));
+        }
+
+        const finalMaterials = remainingMaterials.filter(material => material.locations.length > 0);
+
+        return [...sortedChaosEnemyMaterials, ...finalMaterials];
+    }
+
+    /**
+     * Typically, a material is presented to the user as one raiding option with multiple locations.
+     * When optimizing for purge order, we potentially split the material into two, one with
+     * locations with the minimum number of non-summon tyranids, and one with locations without.
+     *
+     * Returns the materials sorted first by descreasing number of tyranids in the location, then
+     * by the remaining materials in the original order.
+     *
+     * @param minNids The minimum number of non-summon tyranids a location must have to be event-relevant.
+     * @param allMaterials The materials to split.
+     * @returns The split materials.
+     */
+    private static splitMaterialsForPurgeOrder(
+        minNids: number,
+        allMaterials: ICharacterUpgradeEstimate[]
+    ): ICharacterUpgradeEstimate[] {
+        return this.splitMaterials(
+            location => this.getNonSummonTyranidCount(location) >= minNids,
+            location => this.getNonSummonTyranidCount(location),
+            allMaterials
+        );
+    }
+
+    /**
+     * Typically, a material is presented to the user as one raiding option with multiple locations.
+     * When optimizing for warp surge, we potentially split the material into two, one with
+     * locations with the minimum number of non-summon chaos enemies, and one with locations without.
+     *
+     * Returns the materials sorted first by descreasing number of chaos enemies in the location (when
+     * the location meets the minimum criterion), then by the remaining materials in the original order.
+     *
+     * @param minChaosEnemies The minimum number of non-summon chaos enemies a location must have to be event-relevant.
+     * @param allMaterials The materials to split.
+     * @returns The split materials.
+     */
+    private static splitMaterialsForWarpSurge(
+        minChaosEnemies: number,
+        allMaterials: ICharacterUpgradeEstimate[]
+    ): ICharacterUpgradeEstimate[] {
+        return this.splitMaterials(
+            location => this.getNonSummonChaosEnemyCount(location) >= minChaosEnemies,
+            location => this.getNonSummonChaosEnemyCount(location),
+            allMaterials
+        );
+    }
+
+    private static splitMaterialsForTrainingRush(
+        preferences: ITrainingRushPreferences | undefined,
+        allMaterials: ICharacterUpgradeEstimate[]
+    ): ICharacterUpgradeEstimate[] {
+        if (!preferences) return allMaterials;
+
+        switch (preferences.strategy) {
+            case ITrainingRushStrategy.maximizeRewards:
+                {
+                    const battlesWithPriority: Array<ICharacterUpgradeEstimate & { priority: number }> = [];
+
+                    for (const material of allMaterials) {
+                        for (const location of material.locations) {
+                            const newMaterial = cloneDeep(material);
+                            newMaterial.locations = [location];
+                            battlesWithPriority.push({
+                                ...newMaterial,
+                                priority: this.getNonSummonEnemyCount(location),
+                            });
+                        }
+                    }
+
+                    return orderBy(battlesWithPriority, ['priority'], ['desc']);
+                }
+                break;
+            case ITrainingRushStrategy.maximizeXpForCharacter:
+                {
+                    if (preferences === undefined || preferences.characterId === undefined) return allMaterials;
+                    const unit = CharactersService.getUnit(preferences.characterId);
+                    if (unit === undefined) {
+                        console.error('Unable to find unit: ', preferences.characterId);
+                        return allMaterials;
+                    }
+
+                    const battlesWithPriority: Array<ICharacterUpgradeEstimate & { priority: number }> = [];
+                    for (const material of allMaterials) {
+                        for (const location of material.locations) {
+                            const newMaterial = cloneDeep(material);
+                            newMaterial.locations = [location];
+                            battlesWithPriority.push({
+                                ...newMaterial,
+                                priority: this.canCharacterParticipateInBattle(unit, location)
+                                    ? location.enemyPower
+                                    : 0,
+                            });
+                        }
+                    }
+
+                    return orderBy(battlesWithPriority, ['priority'], ['desc']);
+                }
+                break;
+        }
+        return allMaterials;
+    }
+
+    /**
+     * Typically, a material is presented to the user as one raiding option with multiple locations.
+     * When optimizing for warp surge, we potentially split the material into two, one with
+     * locations with the minimum number of non-summon chaos enemies, and one with locations without.
+     *
+     * Returns the materials sorted first by descreasing number of chaos enemies in the location (when
+     * the location meets the minimum criterion), then by the remaining materials in the original order.
+     *
+     * @param minMechanicalEnemies The minimum number of non-summon mechanical enemies a location must
+     *                             have to be event-relevant.
+     * @param allMaterials The materials to split.
+     * @returns The split materials.
+     */
+    private static splitMaterialsForMachineHunt(
+        minMechanicalEnemies: number,
+        allMaterials: ICharacterUpgradeEstimate[]
+    ): ICharacterUpgradeEstimate[] {
+        return this.splitMaterials(
+            location => this.getNonSummonMechanicalEnemyCount(location) >= minMechanicalEnemies,
+            location => this.getNonSummonMechanicalEnemyCount(location),
+            allMaterials
+        );
+    }
+
+    private static canCharacterParticipateInBattle(unit: ICharacterData, location: ICampaignBattleComposed): boolean {
+        return location.alliesAlliance === unit.alliance || location.alliesFactions.includes(unit.faction as Faction);
+    }
+
+    /**
+     * Typically, a material is presented to the user as one raiding option with multiple locations.
+     * When optimizing for a home screen event, we potentially split the material into two, one with
+     * locations related to the event, and one with locations not related to the event.
+     *
+     * Returns the materials with event-related locations first, sorted in priority order, followed by
+     * the remaining materials in their original order.
+     *
+     * @param settings The estimated ranks settings.
+     * @param allMaterials The materials to split.
+     * @returns The split materials.
+     */
+    private static splitMaterialsForHomeScreenEvent(
+        settings: IEstimatedRanksSettings,
+        allMaterials: ICharacterUpgradeEstimate[]
+    ): ICharacterUpgradeEstimate[] {
+        const event = settings.preferences.farmPreferences?.homeScreenEvent ?? IDailyRaidsHomeScreenEvent.none;
+        switch (event) {
+            case IDailyRaidsHomeScreenEvent.purgeOrder:
+                return this.splitMaterialsForPurgeOrder(
+                    settings.preferences.farmPreferences.purgeOrderPreferences?.minimumTyranidCount ?? 1,
+                    allMaterials
+                );
+            case IDailyRaidsHomeScreenEvent.warpSurge:
+                return this.splitMaterialsForWarpSurge(
+                    settings.preferences.farmPreferences.warpSurgePreferences?.minimumChaosEnemyCount ?? 1,
+                    allMaterials
+                );
+            case IDailyRaidsHomeScreenEvent.trainingRush:
+                return this.splitMaterialsForTrainingRush(
+                    settings.preferences.farmPreferences.trainingRushPreferences,
+                    allMaterials
+                );
+            case IDailyRaidsHomeScreenEvent.machineHunt:
+                return this.splitMaterialsForMachineHunt(
+                    settings.preferences.farmPreferences.machineHuntPreferences?.minimumMechanicalEnemyCount ?? 1,
+                    allMaterials
+                );
+            case IDailyRaidsHomeScreenEvent.none:
+            default:
+                return allMaterials;
+        }
+
+        return allMaterials;
+    }
+
     static getUpgradesEstimatedDays(
         settings: IEstimatedRanksSettings,
         ...goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
@@ -61,19 +308,23 @@ export class UpgradesService {
         const combinedBaseMaterials = this.combineBaseMaterials(unitsUpgrades);
         this.populateLocationsData(combinedBaseMaterials, settings);
 
-        let allMaterials: ICharacterUpgradeEstimate[];
+        let allMaterials: ICharacterUpgradeEstimate[] = [];
         let byCharactersPriority: ICharacterUpgradeRankEstimate[] = [];
 
-        if (settings.preferences.farmByPriorityOrder) {
+        const order = settings.preferences.farmPreferences?.order ?? IDailyRaidsFarmOrder.goalPriority;
+        if (order === IDailyRaidsFarmOrder.goalPriority) {
             byCharactersPriority = this.getEstimatesByPriority(goals, combinedBaseMaterials, inventoryUpgrades);
             allMaterials = byCharactersPriority.flatMap(x => x.upgrades);
         } else {
+            // order === IDailyRaidsFarmOrder.totalMaterials
             allMaterials = this.getTotalEstimates(combinedBaseMaterials, inventoryUpgrades);
 
             if (settings.preferences.farmStrategy === DailyRaidsStrategy.leastTime) {
                 allMaterials = this.improveEstimates(allMaterials, combinedBaseMaterials, inventoryUpgrades);
             }
         }
+
+        allMaterials = this.splitMaterialsForHomeScreenEvent(settings, allMaterials);
 
         const upgradesRaids = this.generateDailyRaidsList(settings, allMaterials);
 
@@ -101,7 +352,28 @@ export class UpgradesService {
             freeEnergyDays,
         };
     }
-
+    /**
+     * Generates a day-by-day plan for raiding to acquire character upgrade materials.
+     *
+     * This function simulates the process of spending daily energy on raids to farm the
+     * necessary materials for a list of character upgrades. It iterates day by day,
+     * planning which raids to perform based on the available energy and the remaining
+     * material requirements. The simulation continues until all required materials for the
+     * provided upgrades are farmed.
+     *
+     * @remarks
+     * The order of the `allUpgrades` array is crucial as it dictates the priority of farming.
+     * Materials for upgrades that appear earlier in the array will be prioritized each day.
+     *
+     * The function has special logic for the "first day" (today) to account for any raids
+     * that the user has already completed, ensuring the plan is accurate from the start.
+     *
+     * A safeguard is in place to prevent infinite loops, terminating after 1000 simulated days.
+     *
+     * @param settings - The user's settings for the estimation, including available daily energy and any raids already completed on the first day.
+     * @param allUpgrades - A list of all character upgrades to be farmed. **The order of this array determines the farming priority.**
+     * @returns An array of `IUpgradesRaidsDay`, where each object represents a single day's raiding plan. Returns an empty array if daily energy is too low to perform any raids.
+     */
     private static generateDailyRaidsList(
         settings: IEstimatedRanksSettings,
         allUpgrades: ICharacterUpgradeEstimate[]
@@ -113,28 +385,16 @@ export class UpgradesService {
 
         let iteration = 0;
         let upgradesToFarm = allUpgrades.filter(x => !x.isBlocked && !x.isFinished && x.energyLeft > 0);
-        const raidedLocations = settings.completedLocations.filter(x => !x.isShardsLocation).map(x => x.id);
-        const raidedUpgrades = allUpgrades.filter(x =>
-            x.locations.filter(location => location.isSuggested).some(location => raidedLocations.includes(location.id))
-        );
+
         while (upgradesToFarm.length > 0) {
             const isFirstDay = iteration === 0;
-            const raids: IUpgradeRaid[] = [];
             let energyLeft = settings.dailyEnergy;
+            let raids: IUpgradeRaid[] = [];
 
-            if (isFirstDay && raidedUpgrades.length) {
-                for (const raidedUpgrade of uniqBy(raidedUpgrades, 'id')) {
-                    const raidLocations = settings.completedLocations.filter(
-                        x =>
-                            x.dailyBattleCount === x.raidsCount &&
-                            raidedUpgrade.locations.some(location => location.id === x.id)
-                    );
-                    raids.push({
-                        ...raidedUpgrade,
-                        raidLocations,
-                    });
-                }
-                energyLeft -= sum(settings.completedLocations.map(x => x.energySpent));
+            if (isFirstDay) {
+                const firstDayResult = this._handleFirstDayCompletedRaids(settings, allUpgrades);
+                raids = firstDayResult.raids;
+                energyLeft -= firstDayResult.energySpent;
             }
 
             for (const material of upgradesToFarm) {
@@ -142,93 +402,20 @@ export class UpgradesService {
                     break;
                 }
 
-                const plannedLocations = raids
-                    .filter(x => x.id === material.id)
-                    .flatMap(x => x.raidLocations)
-                    .map(x => x.id);
-                const selectedLocations = material.locations.filter(
-                    location => location.isSuggested && !plannedLocations.includes(location.id)
+                const { raidLocations, energySpent } = this._planRaidsForMaterial(
+                    material,
+                    energyLeft,
+                    isFirstDay,
+                    settings.completedLocations,
+                    raids
                 );
-
-                const raidLocations: IItemRaidLocation[] = [];
-
-                for (const location of selectedLocations) {
-                    const completedLocation = settings.completedLocations.find(x => x.id === location.id);
-                    if (isFirstDay && location.isCompleted) {
-                        if (completedLocation) {
-                            raidLocations.push(completedLocation);
-                        }
-                        continue;
-                    }
-
-                    const attemptsLeft = isFirstDay
-                        ? location.dailyBattleCount - (completedLocation?.raidsCount ?? 0)
-                        : location.dailyBattleCount;
-                    const locationDailyEnergy = location.energyCost * attemptsLeft;
-
-                    if (material.energyLeft > locationDailyEnergy) {
-                        if (energyLeft > locationDailyEnergy) {
-                            energyLeft -= locationDailyEnergy;
-                            material.energyLeft -= locationDailyEnergy;
-
-                            raidLocations.push({
-                                ...location,
-                                raidsCount: attemptsLeft,
-                                farmedItems: locationDailyEnergy / location.energyPerItem,
-                                energySpent: locationDailyEnergy,
-                                isShardsLocation: false,
-                            });
-                            continue;
-                        }
-                    }
-
-                    if (energyLeft > material.energyLeft) {
-                        const numberOfBattles = Math.floor(material.energyLeft / location.energyCost);
-                        const maxNumberOfBattles = numberOfBattles > attemptsLeft ? attemptsLeft : numberOfBattles;
-
-                        if (numberOfBattles <= 0) {
-                            continue;
-                        }
-                        const energySpent = maxNumberOfBattles * location.energyCost;
-
-                        energyLeft -= energySpent;
-                        material.energyLeft -= energySpent;
-
-                        raidLocations.push({
-                            ...location,
-                            raidsCount: maxNumberOfBattles,
-                            farmedItems: energySpent / location.energyPerItem,
-                            energySpent: energySpent,
-                            isShardsLocation: false,
-                        });
-                    } else if (energyLeft > location.energyCost) {
-                        const numberOfBattles = Math.floor(energyLeft / location.energyCost);
-                        const maxNumberOfBattles = numberOfBattles > attemptsLeft ? attemptsLeft : numberOfBattles;
-
-                        if (numberOfBattles <= 0) {
-                            continue;
-                        }
-
-                        const energySpent = maxNumberOfBattles * location.energyCost;
-
-                        energyLeft -= energySpent;
-                        material.energyLeft -= energySpent;
-
-                        raidLocations.push({
-                            ...location,
-                            raidsCount: maxNumberOfBattles,
-                            farmedItems: energySpent / location.energyPerItem,
-                            energySpent: energySpent,
-                            isShardsLocation: false,
-                        });
-                    }
-                }
 
                 if (raidLocations.length) {
                     raids.push({
                         ...material,
                         raidLocations,
                     });
+                    energyLeft -= energySpent;
                 }
             }
 
@@ -249,12 +436,121 @@ export class UpgradesService {
                 x => x.energyLeft > Math.min(...x.locations.filter(c => c.isSuggested).map(l => l.energyCost))
             );
             if (iteration > 1000) {
-                console.error('Infinite loop', resultDays);
+                console.error('Infinite loop detected in generateDailyRaidsList', resultDays);
                 break;
             }
         }
 
         return resultDays;
+    }
+
+    /**
+     * Handles the logic for the first day of raiding, accounting for any raids that have already been completed.
+     * @param settings - The user's estimated ranks settings, including completed locations.
+     * @param allUpgrades - The list of all upgrade estimates.
+     * @returns An object containing the initial list of raids and the total energy spent on them.
+     */
+    private static _handleFirstDayCompletedRaids(
+        settings: IEstimatedRanksSettings,
+        allUpgrades: ICharacterUpgradeEstimate[]
+    ): { raids: IUpgradeRaid[]; energySpent: number } {
+        const raids: IUpgradeRaid[] = [];
+        const completedRaids = settings.completedLocations.filter(x => !x.isShardsLocation);
+        const raidedLocationsIds = completedRaids.map(x => x.id);
+
+        const raidedUpgrades = allUpgrades.filter(x =>
+            x.locations
+                .filter(location => location.isSuggested)
+                .some(location => raidedLocationsIds.includes(location.id))
+        );
+
+        for (const raidedUpgrade of uniqBy(raidedUpgrades, 'id')) {
+            const raidLocations = completedRaids.filter(
+                x =>
+                    x.dailyBattleCount === x.raidsCount &&
+                    raidedUpgrade.locations.some(location => location.id === x.id)
+            );
+
+            if (raidLocations.length > 0) {
+                raids.push({
+                    ...raidedUpgrade,
+                    raidLocations,
+                });
+            }
+        }
+
+        const energySpent = sum(completedRaids.map(x => x.energySpent));
+        return { raids, energySpent };
+    }
+
+    /**
+     * Plans the raids for a single material for a given day based on available energy.
+     * @param material - The upgrade material to farm.
+     * @param energyLeft - The remaining energy for the day.
+     * @param isFirstDay - A flag indicating if it's the first day of farming.
+     * @param completedLocations - A list of already completed locations for the day.
+     * @param dailyRaids - The raids already planned for the day.
+     * @returns An object with the list of raid locations and the total energy spent.
+     */
+    private static _planRaidsForMaterial(
+        material: ICharacterUpgradeEstimate,
+        energyLeft: number,
+        isFirstDay: boolean,
+        completedLocations: IItemRaidLocation[],
+        dailyRaids: IUpgradeRaid[]
+    ): { raidLocations: IItemRaidLocation[]; energySpent: number } {
+        const raidLocations: IItemRaidLocation[] = [];
+        let totalEnergySpent = 0;
+
+        const plannedLocationIds = dailyRaids
+            .filter(x => x.id === material.id)
+            .flatMap(x => x.raidLocations)
+            .map(x => x.id);
+
+        const availableLocations = material.locations.filter(
+            location => location.isSuggested && !plannedLocationIds.includes(location.id)
+        );
+
+        for (const location of availableLocations) {
+            if (energyLeft <= 0) break;
+
+            const completedLocation = completedLocations.find(x => x.id === location.id);
+            if (isFirstDay && location.isCompleted) {
+                if (completedLocation) {
+                    raidLocations.push(completedLocation);
+                }
+                continue;
+            }
+
+            const attemptsLeft = isFirstDay
+                ? location.dailyBattleCount - (completedLocation?.raidsCount ?? 0)
+                : location.dailyBattleCount;
+
+            if (attemptsLeft <= 0) continue;
+
+            const energyForFullAttempts = attemptsLeft * location.energyCost;
+            const energyToFarmMaterial = Math.min(material.energyLeft, energyLeft);
+            const energyToSpend = Math.min(energyToFarmMaterial, energyForFullAttempts);
+
+            if (energyToSpend < location.energyCost) continue;
+
+            const battlesToRaid = Math.floor(energyToSpend / location.energyCost);
+            const energySpentOnLocation = battlesToRaid * location.energyCost;
+
+            energyLeft -= energySpentOnLocation;
+            material.energyLeft -= energySpentOnLocation;
+            totalEnergySpent += energySpentOnLocation;
+
+            raidLocations.push({
+                ...location,
+                raidsCount: battlesToRaid,
+                farmedItems: energySpentOnLocation / location.energyPerItem,
+                energySpent: energySpentOnLocation,
+                isShardsLocation: false,
+            });
+        }
+
+        return { raidLocations, energySpent: totalEnergySpent };
     }
 
     /**
@@ -344,6 +640,7 @@ export class UpgradesService {
                 rankEnd: Rank.Diamond3,
                 upgrades: [...primaryUpgrades, ...secondaryUpgrades],
                 rankPoint5: false,
+                startRankPoint5: false,
             },
         ];
     }
@@ -383,6 +680,24 @@ export class UpgradesService {
         return orderBy(result, ['daysTotal', 'energyTotal'], ['desc', 'desc']);
     }
 
+    /**
+     * Recursively refines upgrade time estimates by suggesting additional farming locations.
+     *
+     * This method identifies upgrades that are significant outliers (taking much longer than the average time to acquire).
+     * For each outlier, it suggests a new, unlocked, and valid farming location that isn't already suggested.
+     * After suggesting new locations, it recalculates all estimates and calls itself again with the new data.
+     * This process repeats until no more outlier upgrades can be improved.
+     *
+     * @remarks
+     * This is a pure function in terms of its inputs and outputs but has a side effect of mutating the `isSuggested` property
+     * on the locations within the `upgrades` object passed as a parameter. The recursion terminates when no more
+     * farming locations can be suggested for outlier upgrades. The final result is sorted by total days and total energy in descending order.
+     *
+     * @param estimates - The current array of character upgrade estimates.
+     * @param upgrades - A record of all available upgrades, which will be mutated by this function.
+     * @param inventoryUpgrades - A record of the user's current inventory of upgrade materials.
+     * @returns A new array of refined and sorted character upgrade estimates.
+     */
     private static improveEstimates(
         estimates: ICharacterUpgradeEstimate[],
         upgrades: Record<string, ICombinedUpgrade>,
@@ -417,6 +732,20 @@ export class UpgradesService {
         return orderBy(result, ['daysTotal', 'energyTotal'], ['desc', 'desc']);
     }
 
+    /**
+     * Calculates the estimated resources and time required to farm a specific upgrade material.
+     *
+     * This method simulates a daily farming process across user-selected locations to determine
+     * the total energy, number of raids, and days needed to acquire the required amount of an upgrade item.
+     * It handles cases where the goal is already met (`isFinished`) or cannot be progressed due to a lack of
+     * available farming locations (`isBlocked`).
+     *
+     * @param {ICombinedUpgrade} upgrade - The upgrade item to be estimated, containing its properties and potential farming locations.
+     * @param {number} requiredCount - The total number of the upgrade item needed.
+     * @param {number} acquiredCount - The number of the upgrade item the user already has.
+     * @returns {ICharacterUpgradeEstimate} An object containing the original upgrade data plus the calculated
+     * estimates for days, raids, and energy required to obtain the remaining items.
+     */
     private static getUpgradeEstimate(
         upgrade: ICombinedUpgrade,
         requiredCount: number,
@@ -551,6 +880,71 @@ export class UpgradesService {
         return nodeNumber;
     }
 
+    /** @returns the number of non-summon enemies you'll face in the battle. */
+    private static getNonSummonEnemyCount(battle: ICampaignBattleComposed): number {
+        let ret = 0;
+        for (const enemy of battle.detailedEnemyTypes ?? []) {
+            const npc = NpcService.getNpcById(enemy.id);
+            if (npc && !npc.traits.includes('Summon')) {
+                ret += enemy.count;
+            }
+        }
+        return ret;
+    }
+
+    /** @returns the number of non-summon tyranids you'll face in the battle. */
+    private static getNonSummonTyranidCount(battle: ICampaignBattleComposed): number {
+        let ret = 0;
+        for (const enemy of battle.detailedEnemyTypes ?? []) {
+            const npc = NpcService.getNpcById(enemy.id);
+            if (npc && npc.faction === Faction.Tyranids && !npc.traits.includes('Summon')) {
+                ret += enemy.count;
+            }
+        }
+        return ret;
+    }
+
+    /** @returns the number of non-summon chaos enemies you'll face in the battle. */
+    private static getNonSummonChaosEnemyCount(battle: ICampaignBattleComposed): number {
+        let ret = 0;
+        for (const enemy of battle.detailedEnemyTypes ?? []) {
+            const npc = NpcService.getNpcById(enemy.id);
+            if (npc && npc.alliance === Alliance.Chaos && !npc.traits.includes('Summon')) {
+                ret += enemy.count;
+            }
+        }
+        return ret;
+    }
+
+    /** @returns the number of non-summon chaos enemies you'll face in the battle. */
+    private static getNonSummonMechanicalEnemyCount(battle: ICampaignBattleComposed): number {
+        let ret = 0;
+        for (const enemy of battle.detailedEnemyTypes ?? []) {
+            const npc = NpcService.getNpcById(enemy.id);
+            if (npc && npc.traits.includes('Mechanical') && !npc.traits.includes('Summon')) {
+                ret += enemy.count;
+            }
+        }
+        return ret;
+    }
+
+    /**
+     * Populates location data for each upgrade based on user settings and game progress.
+     * This method mutates the `upgrades` object by enriching the `locations` array within each `ICombinedUpgrade`.
+     *
+     * @param upgrades - A record of combined upgrades to be processed. The `locations` property of each upgrade will be modified.
+     * @param settings - The user's settings, including campaign progress, filters, and farming preferences.
+     *
+     * The method performs the following actions for each location of each upgrade:
+     * 1.  **Unlocking:** Sets `isUnlocked` based on the player's progress in the relevant campaign. It correctly maps challenge campaigns to their base campaigns for progress checking.
+     * 2.  **Filtering:** Sets `isPassFilter` based on global location filters defined in `settings`.
+     * 3.  **Completion Status:** Sets `isCompleted` and `isStarted` by checking against the `completedLocations` list in settings.
+     * 4.  **Initial Suggestion:** Sets `isSuggested` if the location is unlocked, passes filters, and (if it's a campaign event) is part of the currently selected event.
+     * 5.  **Strategy-based Refinement:**
+     *     - For 'leastEnergy' or 'leastTime' strategies, it further filters suggested locations to only include those with the minimum energy cost per item.
+     *     - For 'custom' strategy, it filters suggested locations based on the user's preferred campaign types (`Normal`, `Elite`, etc.), with logic to handle dependencies (e.g., including `Extremis` if `Elite` is selected).
+     * 6.  **Sorting:** Finally, it sorts the `locations` array for each upgrade primarily by `isSelected`, then by `energyPerItem` (ascending), and `nodeNumber` (descending).
+     */
     private static populateLocationsData(
         upgrades: Record<string, ICombinedUpgrade>,
         settings: IEstimatedRanksSettings
@@ -613,7 +1007,9 @@ export class UpgradesService {
                 )
             ) {
                 for (const location of combinedUpgrade.locations) {
-                    location.isSuggested = location.isSuggested && location.energyPerItem === minEnergy;
+                    location.isSuggested =
+                        location.isSuggested &&
+                        (location.energyPerItem === minEnergy || this.shouldRaidForHomeScreenEvent(location, settings));
                 }
             }
 
@@ -632,33 +1028,36 @@ export class UpgradesService {
                     ]),
                 ];
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
-                let ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
+                const ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
                 if (ignoredLocations.length !== selectedLocations.length) {
-                    for (const ignoredLocation of ignoredLocations) {
-                        ignoredLocation.isSuggested = false;
-                    }
+                    // We have some nodes to raid, so don't suggest the others.
+                    ignoredLocations.forEach(location => (location.isSuggested = false));
                 } else {
-                    // Adjust for dependencies
+                    // No nodes available after initial filter, try to adjust for slightly worse nodes.
                     const needsUpdate = new Set<CampaignType>();
 
+                    // If the user selected some battle types, but they aren't available, try to use other types.
+                    // THIS FEELS WRONG, WE PROBABLY SHOULD NOT BE DOING THIS.
                     if (locationTypes.includes(CampaignType.Elite) && !locationTypes.includes(CampaignType.Extremis)) {
                         needsUpdate.add(CampaignType.Extremis);
                     }
-
                     if (locationTypes.includes(CampaignType.Extremis) && !locationTypes.includes(CampaignType.Mirror)) {
                         needsUpdate.add(CampaignType.Mirror);
+                    }
+                    if (
+                        locationTypes.includes(CampaignType.Extremis) &&
+                        !locationTypes.includes(CampaignType.Standard)
+                    ) {
+                        needsUpdate.add(CampaignType.Standard);
                     }
 
                     if (needsUpdate.size > 0) {
                         locationTypes = [...locationTypes, ...needsUpdate];
 
-                        ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
-
-                        if (ignoredLocations.length !== selectedLocations.length) {
-                            for (const ignoredLocation of ignoredLocations) {
-                                ignoredLocation.isSuggested = false;
-                            }
-                        }
+                        // Set all location types we aren't going to use to "not suggested".
+                        selectedLocations
+                            .filter(x => !locationTypes.includes(x.campaignType))
+                            .forEach(location => (location.isSuggested = false));
                     }
                 }
             }
@@ -668,6 +1067,36 @@ export class UpgradesService {
                 ['isSelected', 'energyPerItem', 'nodeNumber'],
                 ['desc', 'asc', 'desc']
             );
+        }
+    }
+
+    private static shouldRaidForHomeScreenEvent(
+        location: ICampaignBattleComposed,
+        settings: IEstimatedRanksSettings
+    ): boolean {
+        const event = settings.preferences.farmPreferences.homeScreenEvent;
+        switch (event) {
+            case IDailyRaidsHomeScreenEvent.purgeOrder: {
+                const minNids = settings.preferences.farmPreferences.purgeOrderPreferences?.minimumTyranidCount ?? 1;
+                return this.getNonSummonTyranidCount(location) >= minNids;
+            }
+            case IDailyRaidsHomeScreenEvent.warpSurge: {
+                const minChaos = settings.preferences.farmPreferences.warpSurgePreferences?.minimumChaosEnemyCount ?? 1;
+                return this.getNonSummonChaosEnemyCount(location) >= minChaos;
+            }
+            case IDailyRaidsHomeScreenEvent.trainingRush: {
+                const unit = CharactersService.getUnit(
+                    settings.preferences.farmPreferences.trainingRushPreferences?.characterId ?? ''
+                );
+                return unit !== undefined && this.canCharacterParticipateInBattle(unit, location);
+            }
+            case IDailyRaidsHomeScreenEvent.machineHunt: {
+                const minMechanical =
+                    settings.preferences.farmPreferences.machineHuntPreferences?.minimumMechanicalEnemyCount ?? 1;
+                return this.getNonSummonMechanicalEnemyCount(location) >= minMechanical;
+            }
+            case IDailyRaidsHomeScreenEvent.none:
+                return false;
         }
     }
 
@@ -754,6 +1183,19 @@ export class UpgradesService {
         return baseUpgradesTotal;
     }
 
+    /**
+     * Calculates upgrade estimates for a list of goals, processing them sequentially.
+     * This method assumes goals are provided in a priority order. As it processes each goal,
+     * it consumes items from the shared `inventoryUpgrades` pool. This means that items used
+     * for a higher-priority goal are no longer available for subsequent, lower-priority goals.
+     *
+     * @param goals - An array of character upgrade goals, sorted by priority.
+     * @param upgrades - A record of all possible upgrades, detailing their requirements for each goal.
+     * @param inventoryUpgrades - A record representing the user's current inventory of upgrade materials.
+     *                            **Note:** This object is mutated by the function to simulate the consumption of items.
+     * @returns An array of `ICharacterUpgradeRankEstimate`, each corresponding to a goal and containing
+     *          a list of the necessary upgrades sorted in descending order by total days and energy required.
+     */
     private static getEstimatesByPriority(
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
         upgrades: Record<string, ICombinedUpgrade>,

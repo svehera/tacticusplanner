@@ -100,7 +100,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                     <div>
                         <div className="flex-box between">
                             <div className="flex-box gap-[3px]">
-                                <RankIcon rank={goal.rankStart} /> <ArrowForward />
+                                <RankIcon rank={goal.rankStart} rankPoint5={goal.rankStartPoint5} /> <ArrowForward />
                                 <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                                 {!!goal.upgradesRarity.length && (
                                     <div className="flex-box gap-[3px]">

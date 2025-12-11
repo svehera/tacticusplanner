@@ -359,6 +359,7 @@ export class CampaignsProgressionService {
                 rankStart: Rank.Diamond3,
                 rankEnd: Rank.Diamond3,
                 upgrades: [...primaryUpgrades, ...secondaryUpgrades],
+                startRankPoint5: false,
                 rankPoint5: false,
             },
         ];
