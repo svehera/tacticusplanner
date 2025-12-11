@@ -6,5 +6,5 @@ export const ComponentImage = ({ alliance, size = 'medium' }: { alliance: Allian
     const sizePx = size === 'medium' ? 35 : 25;
     const image = getImageUrl(`mowComponents/resized/${alliance.toLowerCase()}.png`);
 
-    return <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={sizePx} alt={alliance} />;
+    return <img loading={'lazy'} className="pointer-events-none" src={image} height={sizePx} alt={alliance} />;
 };

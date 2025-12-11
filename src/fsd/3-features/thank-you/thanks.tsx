@@ -86,13 +86,13 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
     const currentContributor = contributorsList[activeContributorIndex];
 
     return (
-        <FlexBox style={{ flexDirection: 'column' }}>
-            <Button style={{ textAlign: 'center' }} component={Link} to={isMobile ? '/mobile/ty' : '/ty'}>
+        <FlexBox className="flex-col">
+            <Button className="text-center" component={Link} to={isMobile ? '/mobile/ty' : '/ty'}>
                 Thank you cards
             </Button>
 
             {sliderMode && currentContributor ? (
-                <div style={{ display: 'flex', justifyContent: 'center', minHeight: 400, gap: 10 }}>
+                <div className="flex justify-center min-h-[400px] gap-2.5">
                     {isMobile && <ThankYouCard contributor={currentContributor} hide={hide} />}
                     {!isMobile && (
                         <>
@@ -103,7 +103,7 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
                     )}
                 </div>
             ) : (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
+                <div className="flex flex-wrap gap-2.5 justify-center">
                     {contributorsList.map(x => (
                         <ThankYouCard key={x.name} contributor={x} />
                     ))}

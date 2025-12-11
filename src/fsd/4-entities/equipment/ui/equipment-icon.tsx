@@ -42,27 +42,20 @@ const ImageLayer = ({
     scaleFactor: number;
     size: Size;
     zIndex: number;
-}) => {
-    const imageStyle = {
-        width: size.width,
-        height: size.height,
-
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%) scale(' + scaleFactor + '%, ' + scaleFactor + '%)',
-
-        zIndex: zIndex,
-    };
-
-    return (
-        <img
-            src={url}
-            alt={`Layer ${zIndex}`}
-            style={{ ...imageStyle, position: 'absolute', pointerEvents: 'none' }}
-            loading="lazy"
-        />
-    );
-};
+}) => (
+    <img
+        src={url}
+        alt={`Layer ${zIndex}`}
+        className="absolute pointer-events-none top-1/2 left-1/2"
+        style={{
+            width: size.width,
+            height: size.height,
+            transform: 'translate(-50%, -50%) scale(' + scaleFactor + '%, ' + scaleFactor + '%)',
+            zIndex: zIndex,
+        }}
+        loading="lazy"
+    />
+);
 
 export const EquipmentIcon = ({
     equipment,
@@ -130,20 +123,14 @@ export const EquipmentIcon = ({
     }
 
     if (equipError) {
-        return <div style={{ color: 'red' }}>Error loading image: {equipError.message}</div>;
+        return <div className="text-red-500">Error loading image: {equipError.message}</div>;
     }
     if (frameError) {
-        return <div style={{ color: 'red' }}>Error loading image: {frameError.message}</div>;
+        return <div className="text-red-500">Error loading image: {frameError.message}</div>;
     }
     if (relicError) {
-        return <div style={{ color: 'red' }}>Error loading image: {relicError.message}</div>;
+        return <div className="text-red-500">Error loading image: {relicError.message}</div>;
     }
-
-    const stackStyle = {
-        width: containerDimensions.width,
-        height: containerDimensions.height,
-        overflow: 'hidden',
-    };
 
     const adjustedEquipSize = {
         width: (equipSize.width / Math.max(equipSize.width, equipSize.height)) * containerDimensions.width,
@@ -162,7 +149,7 @@ export const EquipmentIcon = ({
 
     return (
         <AccessibleTooltip title={tooltip ? equipment.name : ''}>
-            <div className="layered-image-stack" style={{ ...stackStyle, position: 'relative' }}>
+            <div className="layered-image-stack relative overflow-hidden" style={containerDimensions}>
                 <ImageLayer url={getImageUrl(equipment.icon)} size={adjustedEquipSize} zIndex={1} scaleFactor={85} />
                 <ImageLayer url={frameDetails.file} size={adjustedFrameSize} zIndex={2} scaleFactor={100} />
                 {equipment.isRelic && (

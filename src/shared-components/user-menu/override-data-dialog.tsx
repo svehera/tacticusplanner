@@ -24,17 +24,17 @@ export const OverrideDataDialog = ({ isOpen, onClose }: { isOpen: boolean; onClo
                 <Box>
                     <h3>Decide how to handle local changes</h3>
                     <p>
-                        <span style={{ fontWeight: 'bold' }}>Use Remote data</span> if you are sure that the remote data
-                        is more up to date than your local data
+                        <span className="font-bold">Use Remote data</span> if you are sure that the remote data is more
+                        up to date than your local data
                     </p>
                     <p>
-                        <span style={{ fontWeight: 'bold' }}>Use Local data</span> if you are sure that there are
-                        changes that you want to preserve
+                        <span className="font-bold">Use Local data</span> if you are sure that there are changes that
+                        you want to preserve
                     </p>
                     <p>
-                        <span style={{ fontWeight: 'bold' }}>Backup</span> your data with{' '}
-                        <span style={{ fontWeight: 'bold' }}>{'"Export"'}</span> option in user menu before proceed if
-                        you not sure which one to choose
+                        <span className="font-bold">Backup</span> your data with{' '}
+                        <span className="font-bold">{'"Export"'}</span> option in user menu before proceed if you not
+                        sure which one to choose
                     </p>
                 </Box>
             </DialogContent>

@@ -29,8 +29,8 @@ export const InfoTeamGraphBox = () => {
                     vertical: 'bottom',
                     horizontal: 'left',
                 }}>
-                <div style={{ padding: 10, maxWidth: 500 }}>
-                    <p style={{ fontWeight: 500 }}>
+                <div className="p-2.5 max-w-[500px]">
+                    <p className="font-medium">
                         This graph visualizes team power. Each vertical bar represent the power of a character with the
                         darker section contributed by attributes (armor, damage, and health) and the lighter section by
                         active and passive abilities. The horizontal lines are rough cutoffs between Common, Uncommon,

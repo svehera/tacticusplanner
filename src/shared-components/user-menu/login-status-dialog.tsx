@@ -20,16 +20,15 @@ export const LoginStatusDialog: React.FC<Props> = ({ onContinue, onClose, onRegi
             <DialogContent>
                 <h3></h3>
                 <p>
-                    <span style={{ fontWeight: 'bold' }}>{t('auth.notLoggedIn.useWithoutAccount')}</span>{' '}
+                    <span className="font-bold">{t('auth.notLoggedIn.useWithoutAccount')}</span>{' '}
                     {t('auth.notLoggedIn.continueExplanation')}
                 </p>
                 <p>
-                    <span style={{ fontWeight: 'bold' }}>{t('common.register')}</span>{' '}
+                    <span className="font-bold">{t('common.register')}</span>{' '}
                     {t('auth.notLoggedIn.registerExplanation')}
                 </p>
                 <p>
-                    <span style={{ fontWeight: 'bold' }}>{t('common.login')}</span>{' '}
-                    {t('auth.notLoggedIn.loginExplanation')}
+                    <span className="font-bold">{t('common.login')}</span> {t('auth.notLoggedIn.loginExplanation')}
                 </p>
             </DialogContent>
             <DialogActions>

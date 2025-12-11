@@ -35,7 +35,7 @@ export const Equipment = () => {
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     const equipment = params.data;
                     return equipment ? (
-                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                        <span className="flex items-center">
                             <EquipmentIcon equipment={equipment} width={60} height={60} />
                             {equipment.name}
                         </span>
@@ -51,11 +51,7 @@ export const Equipment = () => {
                 flex: 1,
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     const equipment = params.data;
-                    return equipment ? (
-                        <span style={{ display: 'flex', alignItems: 'center' }}>{equipment?.name}</span>
-                    ) : (
-                        ''
-                    );
+                    return equipment ? <span className="flex items-center">{equipment?.name}</span> : '';
                 },
             },
             {
@@ -77,7 +73,7 @@ export const Equipment = () => {
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     const equipment = params.data;
                     return equipment ? (
-                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                        <span className="flex items-center">
                             <EquipmentTypeIcon equipmentType={equipment.type} width={25} height={25} />
                             <span> </span>
                             <span>{EquipmentService.getEquipmentSlotDisplayName(equipment.type)}</span>
@@ -137,7 +133,7 @@ export const Equipment = () => {
                     const characterIds = params.data!.allowedUnits;
 
                     return (
-                        <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+                        <div className="flex gap-[5px] flex-wrap">
                             {characterIds.map(charId => {
                                 const character = CharactersService.resolveCharacter(charId);
                                 return character ? (
@@ -163,7 +159,7 @@ export const Equipment = () => {
 
     return (
         <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 20, margin: '0 20px' }}>
+            <div className="flex items-center gap-5 my-0 mx-5">
                 <TextField
                     label="Quick Filter"
                     variant="outlined"
@@ -180,9 +176,7 @@ export const Equipment = () => {
                     label="Show Characters"
                 />
             </div>
-            <div
-                className="ag-theme-material"
-                style={{ height: 'calc(100vh - 12rem)', minHeight: '400px', width: '100%' }}>
+            <div className="ag-theme-material min-h-[400px] w-full h-[calc(100vh - 12rem)]">
                 <AgGridReact
                     ref={gridRef}
                     modules={[AllCommunityModule]}

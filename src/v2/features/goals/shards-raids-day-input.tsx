@@ -34,7 +34,7 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids }) => {
                 title={
                     <div className="flex-box between">
                         <ShardItemTitle shardRaid={shardRaids} />
-                        <div className="flex-box column" style={{ fontSize: '1rem' }}>
+                        <div className="flex-box column text-base">
                             {!!shardRaids.energyTotal && (
                                 <div className="flex-box full-width between">
                                     <MiscIcon icon={'energy'} height={18} width={18} /> <b>{shardRaids.energyTotal}</b>
@@ -58,16 +58,13 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids }) => {
                 }
             />
             <CardContent>
-                <ul style={{ paddingInlineStart: 15 }}>
+                <ul className="ps-[15px]">
                     {shardRaids.locations.map(location => {
                         return (
                             <li
                                 key={location.campaign + location.nodeNumber}
-                                className="flex-box gap5"
-                                style={{
-                                    justifyContent: 'space-between',
-                                    opacity: location.isCompleted ? 0.5 : 1,
-                                }}>
+                                className="flex-box gap5 justify-between"
+                                style={{ opacity: location.isCompleted ? 0.5 : 1 }}>
                                 <CampaignLocation location={location} unlocked={true} />
                             </li>
                         );

@@ -58,7 +58,7 @@ export const GuildRaidsModes: React.FC<Props> = ({ updateSelection, units, filte
                     minWidth={150}
                 />
             </div>
-            Banned faction: <span className="bold">{bannedFaction}</span>
+            Banned faction: <span className="font-bold">{bannedFaction}</span>
         </>
     );
 };

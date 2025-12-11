@@ -227,7 +227,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         <Dialog open={open} onClose={close} fullWidth maxWidth={'md'} fullScreen={isMobile}>
             <DialogTitle>Raids settings</DialogTitle>
             <DialogContent>
-                <FormGroup style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: '0 20px' }}>
+                <FormGroup className="flex flex-col gap-5 py-0 px-5">
                     <div>
                         <Typography className="flex items-center gap-1">
                             <b>{energyMarks[dailyEnergy].value}</b> <MiscIcon icon={'energy'} width={20} height={20} />{' '}
@@ -248,13 +248,13 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                         />
                     </div>
 
-                    <div className="flex flex-wrap gap-10" style={{ alignItems: 'unset' }}>
+                    <div className="flex flex-wrap gap-10 items-[unset]">
                         <FormControl>
-                            <FormLabel id="radio-buttons-group" style={{ fontWeight: 'bold' }}>
+                            <FormLabel id="radio-buttons-group" className="font-bold">
                                 Raids order/grouping:
                             </FormLabel>
                             <RadioGroup
-                                style={{ paddingInlineStart: 20 }}
+                                className="ps-5"
                                 aria-labelledby="radio-buttons-group"
                                 name="controlled-radio-buttons-group"
                                 value={dailyRaidsPreferencesForm.farmPreferences.order}
@@ -310,11 +310,11 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                         </FormControl>
 
                         <FormControl>
-                            <FormLabel htmlFor="shardsEnergy" style={{ fontWeight: 'bold' }}>
-                                Shard energy
+                            <FormLabel htmlFor="shardsEnergy" className="font-bold">
+                                Characters shards energy
                             </FormLabel>
                             <Input
-                                style={{ marginInlineStart: 20 }}
+                                className="ms-5"
                                 value={shardsEnergy}
                                 size="small"
                                 id="shardsEnergy"
@@ -473,11 +473,11 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
 
                     <div className="flex flex-wrap gap-10">
                         <FormControl>
-                            <FormLabel id="radio-buttons-group2" style={{ fontWeight: 'bold' }}>
+                            <FormLabel id="radio-buttons-group2" className="font-bold">
                                 Locations selection:
                             </FormLabel>
                             <RadioGroup
-                                style={{ paddingInlineStart: 20 }}
+                                className="ps-5"
                                 aria-labelledby="radio-buttons-group2"
                                 name="controlled-radio-buttons-group"
                                 value={dailyRaidsPreferencesForm.farmStrategy}
@@ -502,7 +502,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                             title="Experimental/unstable feature. 
                                 Please report any issues you have while using this feature in the Discord. 
                                 It doesn't work yet with 'By goals priority'.">
-                                            <div className="flex-box gap2">
+                                            <div className="flex-box gap-0.5">
                                                 <Warning color="warning" /> Least time
                                             </div>
                                         </AccessibleTooltip>

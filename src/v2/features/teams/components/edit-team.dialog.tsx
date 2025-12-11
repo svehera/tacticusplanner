@@ -92,7 +92,7 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
     return (
         <Dialog open={true} onClose={onClose} fullWidth fullScreen={isMobile}>
             <DialogTitle>Edit team</DialogTitle>
-            <DialogContent style={{ paddingTop: 10 }}>
+            <DialogContent className="pt-2.5">
                 <>
                     {team.primaryGameMode === GameMode.guildRaids && (
                         <>

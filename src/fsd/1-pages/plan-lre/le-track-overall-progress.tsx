@@ -58,7 +58,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
     };
 
     return (
-        <div className="flex-box start column" style={{ flex: 1, minWidth: 450 }}>
+        <div className="flex-box start column flex-1 min-w-[450px]">
             <h3>
                 {completionPercentage}% {track.trackName}
             </h3>
@@ -66,30 +66,28 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
                 {track.requirements.map(req => (
                     <div key={req.id} className="flex-box gap5">
                         <div
+                            className="w-[15px] h-[15px] rounded-[50px]"
                             style={{
-                                width: 15,
-                                height: 15,
                                 backgroundColor: getCompletionRateColor(getReqProgress(req.id), track.battles.length),
-                                borderRadius: 50,
                             }}
                         />
-                        <span className="bold" style={{ minWidth: 50 }}>
+                        <span className="font-bold min-w-[50px]">
                             {getReqProgress(req.id)}/{track.battles.length}
                         </span>
 
-                        <span className="bold" style={{ minWidth: 80 }}>
+                        <span className="font-bold min-w-[80px]">
                             {getReqProgressPoints(req.id)}/{req.totalPoints}
                         </span>
                         <LreReqImage iconId={req.iconId} />
-                        <span style={{ minWidth: 25 }}>{req.pointsPerBattle || 'x'}</span>
+                        <span className="min-w-[25px]">{req.pointsPerBattle || 'x'}</span>
                         <span>{req.name}</span>
                     </div>
                 ))}
             </div>
             <Accordion defaultExpanded={!isMobile}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <span style={{ paddingInlineEnd: 5 }}>Battles Progress</span>
-                    <span className="bold">
+                    <span className="pe-[5px]">Battles Progress</span>
+                    <span className="font-bold">
                         {currentPoints}/{track.totalPoints}
                     </span>
                 </AccordionSummary>
@@ -99,7 +97,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
                             Toggle
                         </Button>
                     </div>
-                    <div className="flex-box gap18" style={{ marginInlineStart: 35 }}>
+                    <div className="flex-box gap18 ms-[35px]">
                         {track.requirements.map(req => (
                             <LreReqImage key={req.id} iconId={req.iconId} tooltip={req.name} />
                         ))}

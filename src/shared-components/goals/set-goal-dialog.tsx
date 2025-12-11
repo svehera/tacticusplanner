@@ -237,7 +237,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                     <span>Set Goal</span> {!!unit && <UnitTitle character={unit} />}
                 </DialogTitle>
 
-                <DialogContent style={{ paddingTop: 10 }}>
+                <DialogContent className="pt-2.5">
                     <Box id="set-goal-form" className="flex flex-col gap-5">
                         <Conditional
                             condition={[

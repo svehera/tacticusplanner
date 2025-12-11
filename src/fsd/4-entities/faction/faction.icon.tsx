@@ -6,7 +6,7 @@ export const FactionImage = ({ faction }: { faction: string }) => {
     return (
         <img
             loading={'lazy'}
-            style={{ pointerEvents: 'none', contentVisibility: 'auto' }}
+            className="pointer-events-none [content-visibility:auto]"
             src={imageUrl}
             width={25}
             alt={faction}

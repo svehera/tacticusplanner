@@ -25,7 +25,7 @@ const MEMBER_FIELDS: FieldConfig[] = [
 export const GuildMemberInput: React.FC<Props> = ({ index, member, onFieldChange }) => {
     return (
         <div className="flex gap-3" style={{ minWidth: !isMobile ? 450 : 'unset' }}>
-            <span style={{ minWidth: 25 }}>{index + 1}.</span>
+            <span className="min-w-[25px]">{index + 1}.</span>
             {MEMBER_FIELDS.map(({ field, label }) => (
                 <TextField
                     key={field}

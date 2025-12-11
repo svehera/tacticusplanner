@@ -18,13 +18,13 @@ interface Props {
 export const TrackRequirementCheck: React.FC<Props> = ({ restriction, checked, progress, onCheckboxChange }) => {
     return (
         <AccessibleTooltip title={restriction.name}>
-            <div style={{ cursor: 'pointer' }} className="flex-box column" onClick={() => onCheckboxChange(!checked)}>
+            <div className="cursor-pointer flex-box column" onClick={() => onCheckboxChange(!checked)}>
                 <Badge color={checked ? 'success' : 'default'} badgeContent={<Check fontSize="small" />}>
-                    <span style={{ width: 40 }}>{restriction.points}</span>
+                    <span className="w-10">{restriction.points}</span>
                 </Badge>
                 <LreReqImage iconId={restriction.iconId!} />
                 <span>{progress}</span>
-                <span style={{ fontSize: 10, maxHeight: 10 }}>{restriction.name}</span>
+                <span className="text-[10px] max-h-2.5">{restriction.name}</span>
             </div>
         </AccessibleTooltip>
     );

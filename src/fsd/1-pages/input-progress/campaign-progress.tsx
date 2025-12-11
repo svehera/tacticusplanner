@@ -99,8 +99,7 @@ export const CampaignProgress: React.FC<Props> = ({
     return (
         <Box sx={{ width: 250, opacity: currProgress === max ? 0.5 : 1 }}>
             <Typography id="input-slider" gutterBottom>
-                <CampaignImage campaign={campaign.id} />{' '}
-                <span style={{ display: 'inline-block' }}>{campaign.displayName}</span>
+                <CampaignImage campaign={campaign.id} /> <span className="inline-block">{campaign.displayName}</span>
             </Typography>
             <Grid container spacing={2} alignItems="center">
                 <Grid item xs>
