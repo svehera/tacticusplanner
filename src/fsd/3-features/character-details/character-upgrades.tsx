@@ -59,6 +59,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             rankStart: rank,
             rankEnd: rank + 1,
             appliedUpgrades: [],
+            rankStartPoint5: false,
             rankPoint5: false,
             upgradesRarity: [],
         });
@@ -122,6 +123,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 rankEnd: rank,
                 appliedUpgrades: formData.originalUpgrades,
                 rankPoint5: false,
+                rankStartPoint5: false,
                 upgradesRarity: [],
             });
 

@@ -60,6 +60,7 @@ export class TacticusIntegrationService {
             rankStart: rank,
             rankEnd: rank + 1,
             rankPoint5: false,
+            rankStartPoint5: false,
             upgradesRarity: [],
             appliedUpgrades: [],
         });
