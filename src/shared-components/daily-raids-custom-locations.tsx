@@ -52,7 +52,7 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
             return defaultList;
         }
 
-        return [CampaignType.Extremis, ...defaultList];
+        return [...defaultList];
     }, [hasCE]);
 
     const campaignLabels: Partial<Record<CampaignType, string>> = {

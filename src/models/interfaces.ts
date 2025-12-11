@@ -185,10 +185,60 @@ interface ILegendaryEventData {
     selectedTeams: ITableRow<string>[];
 }
 
+export enum IDailyRaidsFarmOrder {
+    goalPriority,
+    totalMaterials,
+    homeScreenEvent,
+}
+
+export enum IDailyRaidsHomeScreenEvent {
+    none,
+    purgeOrder,
+    trainingRush,
+    warpSurge,
+    machineHunt,
+}
+
+export enum ITrainingRushStrategy {
+    maximizeRewards,
+    maximizeXpForCharacter,
+}
+
+export interface IPurgeOrderPreferences {
+    // Only consider battles with at least this mean Tyranids worth rearranging for.
+    minimumTyranidCount: number;
+}
+
+export interface ITrainingRushPreferences {
+    strategy: ITrainingRushStrategy;
+
+    // Only matters when strategy is maximizeXpForCharacter
+    characterId?: string;
+}
+
+export interface IWarpSurgePreferences {
+    // Only consider battles with at least this mean chaos enemies worth rearranging for.
+    minimumChaosEnemyCount: number;
+}
+
+export interface IMachineHuntPreferences {
+    // Only consider battles with at least this mean mechanical enemies worth rearranging for.
+    minimumMechanicalEnemyCount: number;
+}
+
+export interface IDailyRaidsFarmPreferences {
+    order: IDailyRaidsFarmOrder;
+    homeScreenEvent: IDailyRaidsHomeScreenEvent;
+    purgeOrderPreferences?: IPurgeOrderPreferences;
+    trainingRushPreferences?: ITrainingRushPreferences;
+    warpSurgePreferences?: IWarpSurgePreferences;
+    machineHuntPreferences?: IMachineHuntPreferences;
+}
+
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
     shardsEnergy: number;
-    farmByPriorityOrder: boolean;
+    farmPreferences: IDailyRaidsFarmPreferences;
     farmStrategy: DailyRaidsStrategy;
     customSettings?: ICustomDailyRaidsSettings;
     campaignEvent?: CampaignGroupType | 'none';

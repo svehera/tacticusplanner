@@ -147,6 +147,7 @@ export class CampaignsService {
                 slots: battle.slots,
                 enemiesAlliances: (battle.enemiesAlliances ?? [enemies.alliance]) as Alliance[],
                 enemiesFactions: battle.enemiesFactions ?? enemies.factions,
+                enemyPower: battle.enemyPower,
                 alliesAlliance: allies.alliance,
                 alliesFactions: allies.factions,
                 enemiesTotal: battle.enemiesTotal ?? 0,
