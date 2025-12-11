@@ -1,5 +1,7 @@
 ﻿import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
+import { IRequirementProgress } from '@/fsd/3-features/lre';
+
 import { ILegendaryEventSelectedRequirements, LegendaryEventData, SetStateAction } from '../models/interfaces';
 
 export type LeSelectedRequirementsAction =
@@ -9,6 +11,13 @@ export type LeSelectedRequirementsAction =
           section: LreTrackId;
           restrictionName: string;
           selected: boolean;
+      }
+    | {
+          type: 'UpdateStatus';
+          eventId: LegendaryEventEnum;
+          section: LreTrackId;
+          restrictionName: string;
+          progress: IRequirementProgress;
       }
     | {
           type: 'ClearAll';
@@ -26,6 +35,7 @@ export const leSelectedRequirementsReducer = (
             return action.value;
         }
         case 'Update': {
+            // Legacy support for boolean values
             const { eventId, section, restrictionName, selected } = action;
             const legendaryEvent: ILegendaryEventSelectedRequirements = state[eventId] ?? {
                 id: eventId,
@@ -35,6 +45,18 @@ export const leSelectedRequirementsReducer = (
                 gamma: {},
             };
             legendaryEvent[section][restrictionName] = selected;
+            return { ...state, [action.eventId]: legendaryEvent };
+        }
+        case 'UpdateStatus': {
+            const { eventId, section, restrictionName, progress } = action;
+            const legendaryEvent: ILegendaryEventSelectedRequirements = state[eventId] ?? {
+                id: eventId,
+                name: LegendaryEventEnum[eventId],
+                alpha: {},
+                beta: {},
+                gamma: {},
+            };
+            legendaryEvent[section][restrictionName] = progress;
             return { ...state, [action.eventId]: legendaryEvent };
         }
         case 'ClearAll': {

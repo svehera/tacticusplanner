@@ -57,7 +57,7 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
             if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
             if (token.battleNumber == null || token.battleNumber < 0) return;
 
-            // Mark only the restrictions included in this token as completed
+            // Mark the restrictions included in this token as completed
             for (const restrict of token.restricts) {
                 toggleBattleState(
                     token.track as 'alpha' | 'beta' | 'gamma',
@@ -66,6 +66,26 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
                     ProgressState.completed
                 );
             }
+
+            // Also mark defeatAll, killScore, and highScore as completed
+            toggleBattleState(
+                token.track as 'alpha' | 'beta' | 'gamma',
+                token.battleNumber,
+                '_defeatAll',
+                ProgressState.completed
+            );
+            toggleBattleState(
+                token.track as 'alpha' | 'beta' | 'gamma',
+                token.battleNumber,
+                '_killPoints',
+                ProgressState.completed
+            );
+            toggleBattleState(
+                token.track as 'alpha' | 'beta' | 'gamma',
+                token.battleNumber,
+                '_highScore',
+                ProgressState.completed
+            );
         };
     };
 

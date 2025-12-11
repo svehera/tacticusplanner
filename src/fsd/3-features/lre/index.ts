@@ -6,4 +6,6 @@ export type {
     ILreTeam,
     ILegendaryEventSelectedRequirements,
     IAutoTeamsPreferences,
+    IRequirementProgress,
 } from './lre.model';
+export { RequirementStatus } from './lre.model';

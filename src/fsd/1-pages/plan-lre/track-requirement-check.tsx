@@ -1,31 +1,56 @@
-﻿import { Check } from '@mui/icons-material';
-import { Badge } from '@mui/material';
-import React from 'react';
+﻿import React from 'react';
 
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { ILegendaryEventTrackRequirement, IRequirementProgress, RequirementStatus } from '@/fsd/3-features/lre';
 
-import { LreReqImage } from '@/fsd/4-entities/lre';
-
-import { ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
+import { StatusCheckbox } from './status-checkbox';
 
 interface Props {
     checked: boolean;
     restriction: ILegendaryEventTrackRequirement;
     onCheckboxChange: (selected: boolean) => void;
+    onStatusChange?: (progress: IRequirementProgress) => void;
     progress: string;
+    requirementProgress?: IRequirementProgress;
+    isKillScore?: boolean;
 }
 
-export const TrackRequirementCheck: React.FC<Props> = ({ restriction, checked, progress, onCheckboxChange }) => {
+export const TrackRequirementCheck: React.FC<Props> = ({
+    restriction,
+    checked,
+    progress,
+    onCheckboxChange,
+    onStatusChange,
+    requirementProgress,
+    isKillScore,
+}) => {
+    // If new status system is being used
+    if (onStatusChange && requirementProgress) {
+        return (
+            <StatusCheckbox
+                restriction={restriction}
+                progress={requirementProgress}
+                onChange={onStatusChange}
+                displayProgress={progress}
+                isKillScore={isKillScore}
+            />
+        );
+    }
+
+    // Legacy fallback - convert boolean to status
+    const legacyProgress: IRequirementProgress = {
+        status: checked ? RequirementStatus.Cleared : RequirementStatus.NotCleared,
+    };
+
     return (
-        <AccessibleTooltip title={restriction.name}>
-            <div className="cursor-pointer flex-box column" onClick={() => onCheckboxChange(!checked)}>
-                <Badge color={checked ? 'success' : 'default'} badgeContent={<Check fontSize="small" />}>
-                    <span className="w-10">{restriction.points}</span>
-                </Badge>
-                <LreReqImage iconId={restriction.iconId!} />
-                <span>{progress}</span>
-                <span className="text-[10px] max-h-2.5">{restriction.name}</span>
-            </div>
-        </AccessibleTooltip>
+        <StatusCheckbox
+            restriction={restriction}
+            progress={legacyProgress}
+            onChange={newProgress => {
+                // Convert status back to boolean for legacy mode
+                onCheckboxChange(newProgress.status === RequirementStatus.Cleared);
+            }}
+            displayProgress={progress}
+            isKillScore={isKillScore}
+        />
     );
 };

@@ -2,7 +2,6 @@
 import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
 import { sum } from 'lodash';
 import React, { useState } from 'react';
-import { isMobile } from 'react-device-detect';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 
@@ -39,7 +38,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
         .join('-');
 
     return (
-        <div>
+        <div className="w-full">
             <LeNextGoalProgress model={model} />
             <Accordion
                 TransitionProps={{ unmountOnExit: true }}
@@ -103,15 +102,10 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                         <span>
                             Tracks Progress <span className="font-bold">({tracksTotalProgress})</span>
                         </span>
-                        {isMobile ? (
-                            <span>Use Long press to put requirement in intermediate state</span>
-                        ) : (
-                            <span>Use CTRL + Click to put requirement in intermediate state</span>
-                        )}
                     </div>
                 </AccordionSummary>
 
-                <AccordionDetails className="flex-box start wrap gap20">
+                <AccordionDetails className="box-border flex flex-wrap start">
                     {model.tracksProgress.map(track => (
                         <LreTrackOverallProgress
                             key={track.trackId}
