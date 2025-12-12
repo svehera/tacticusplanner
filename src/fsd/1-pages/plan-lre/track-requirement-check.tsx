@@ -1,56 +1,51 @@
-﻿import React from 'react';
+import { Check } from '@mui/icons-material';
+import { Badge } from '@mui/material';
+import React from 'react';
 
-import { ILegendaryEventTrackRequirement, IRequirementProgress, RequirementStatus } from '@/fsd/3-features/lre';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
-import { StatusCheckbox } from './status-checkbox';
+import { LreReqImage } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
 
 interface Props {
     checked: boolean;
     restriction: ILegendaryEventTrackRequirement;
     onCheckboxChange: (selected: boolean) => void;
-    onStatusChange?: (progress: IRequirementProgress) => void;
     progress: string;
-    requirementProgress?: IRequirementProgress;
-    isKillScore?: boolean;
 }
 
-export const TrackRequirementCheck: React.FC<Props> = ({
-    restriction,
-    checked,
-    progress,
-    onCheckboxChange,
-    onStatusChange,
-    requirementProgress,
-    isKillScore,
-}) => {
-    // If new status system is being used
-    if (onStatusChange && requirementProgress) {
-        return (
-            <StatusCheckbox
-                restriction={restriction}
-                progress={requirementProgress}
-                onChange={onStatusChange}
-                displayProgress={progress}
-                isKillScore={isKillScore}
-            />
-        );
-    }
+export const TrackRequirementCheck: React.FC<Props> = ({ restriction, checked, progress, onCheckboxChange }) => {
+    const handleToggle = () => {
+        onCheckboxChange(!checked);
+    };
 
-    // Legacy fallback - convert boolean to status
-    const legacyProgress: IRequirementProgress = {
-        status: checked ? RequirementStatus.Cleared : RequirementStatus.NotCleared,
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === ' ' || event.key === 'Enter') {
+            event.preventDefault();
+            handleToggle();
+        }
     };
 
     return (
-        <StatusCheckbox
-            restriction={restriction}
-            progress={legacyProgress}
-            onChange={newProgress => {
-                // Convert status back to boolean for legacy mode
-                onCheckboxChange(newProgress.status === RequirementStatus.Cleared);
-            }}
-            displayProgress={progress}
-            isKillScore={isKillScore}
-        />
+        <AccessibleTooltip title={restriction.name}>
+            <div
+                role="checkbox"
+                aria-checked={checked}
+                tabIndex={0}
+                style={{ cursor: 'pointer' }}
+                className="flex-box column"
+                onClick={handleToggle}
+                onKeyDown={handleKeyDown}>
+                <Badge
+                    color={checked ? 'success' : 'default'}
+                    badgeContent={checked ? <Check fontSize="small" /> : undefined}>
+                    <span style={{ width: 40 }}>{restriction.points}</span>
+                </Badge>
+                <LreReqImage iconId={restriction.iconId ?? ''} />
+                <span>{progress}</span>
+                <span style={{ fontSize: 10, maxHeight: 10 }}>{restriction.name}</span>
+            </div>
+        </AccessibleTooltip>
     );
 };

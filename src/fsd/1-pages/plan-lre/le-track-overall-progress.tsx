@@ -65,7 +65,15 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
     const currentPoints = sum(track.battles.flatMap(x => x.requirementsProgress).map(req => getRequirementPoints(req)));
 
     const getReqProgress = (reqId: string) => {
-        return track.battles.flatMap(x => x.requirementsProgress).filter(x => x.id === reqId && x.completed).length;
+        return track.battles
+            .flatMap(x => x.requirementsProgress)
+            .filter(x => {
+                if (x.id !== reqId) return false;
+                if (x.status !== undefined) {
+                    return x.status === RequirementStatus.Cleared;
+                }
+                return x.completed;
+            }).length;
     };
 
     const getReqProgressPoints = (reqId: string) => {
@@ -114,7 +122,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
                             {getReqProgressPoints(req.id)}/{req.totalPoints}
                         </span>
                         <LreReqImage iconId={req.iconId} />
-                        <span className="min-w-[25px]">{req.pointsPerBattle || 'x'}</span>
+                        <span className="min-w-[25px] p-1 md:p-1.5">{req.pointsPerBattle || 'x'}</span>
                         <span>{req.name}</span>
                     </div>
                 ))}

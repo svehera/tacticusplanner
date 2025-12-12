@@ -7,6 +7,8 @@ import {
     LreTrackId,
 } from '@/fsd/4-entities/lre';
 
+import { RequirementStatus } from '@/fsd/3-features/lre';
+
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
 
 export enum LreSection {
@@ -76,7 +78,7 @@ export interface ILreBattleRequirementsProgress {
     points: number;
     completed: boolean; // Legacy - keep for backward compatibility
     blocked: boolean; // Legacy - keep for backward compatibility
-    status?: number; // New: RequirementStatus enum value (0-4)
+    status?: RequirementStatus; // New: RequirementStatus enum value (0-4)
     killScore?: number; // New: For partial kill score tracking
 }
 
