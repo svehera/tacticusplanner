@@ -100,7 +100,7 @@ export const LreTeamsCard: React.FC<Props> = ({
         const saved = selectedRequirementsForEvent[restrictionName];
 
         // If it's already in new format
-        if (saved && typeof saved === 'object' && 'status' in saved) {
+        if (saved !== undefined && typeof saved === 'object' && 'status' in saved) {
             return saved as IRequirementProgress;
         }
 
