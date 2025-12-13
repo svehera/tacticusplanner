@@ -115,6 +115,8 @@ interface LeBattleProps {
 export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
     const [selectedEnemy, setSelectedEnemy] = React.useState<ResolvedEnemyData | null>(null);
 
+    const [isMapVisible, setIsMapVisible] = React.useState<boolean>(false);
+
     // Handler to open modal
     const handleEnemyClick = (data: ResolvedEnemyData) => {
         setSelectedEnemy(data);
@@ -129,7 +131,6 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
 
     return (
         <>
-            {/* The Main Battle Card */}
             <div className="w-full bg-gray-100 dark:bg-gray-900 rounded-xl border border-gray-300 dark:border-gray-700/50 p-4 shadow-lg">
                 <div className="flex justify-between items-center border-b border-gray-300 dark:border-gray-800 pb-3 mb-4">
                     <div className="flex items-center gap-3">
@@ -147,6 +148,27 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                         </div>
                     </div>
                 </div>
+                <div className="mb-4">
+                    <button
+                        onClick={() => setIsMapVisible(prev => !prev)}
+                        className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1 mb-2">
+                        {isMapVisible ? 'Hide Map' : 'Show Map'}
+                    </button>
+                    {isMapVisible && (
+                        <div className="overflow-hidden rounded-lg border border-gray-300 dark:border-gray-700/50">
+                            <img
+                                src={
+                                    new URL(
+                                        `../../5-shared/assets/snowprint/le_maps/${battle.mapId}_Visual.jpg`,
+                                        import.meta.url
+                                    ).href
+                                }
+                                alt={`Map for Battle ${battle.number}`}
+                                className="w-full h-auto object-cover"
+                            />
+                        </div>
+                    )}
+                </div>
 
                 <h3 className="text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-3 ml-2">
                     Deployment Schedule
@@ -163,7 +185,6 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                 </div>
             </div>
 
-            {/* The Popup / Modal */}
             <NpcDetailModal
                 isOpen={!!selectedEnemy}
                 onClose={handleCloseModal}
