@@ -138,7 +138,21 @@ export const LearnCharacters = () => {
         .map(x => x.toString());
 
     const damageTypesOptions = uniq(resolvedCharacters.flatMap(x => x.damageTypes.all)).map(x => x.toString());
-    const traitsOptions = Object.values(Trait);
+
+    const traitsOptions = useMemo(() => {
+        const activeTraits = new Set<string>();
+
+        resolvedCharacters.forEach(c => {
+            c.traits?.forEach(t => activeTraits.add(t));
+        });
+
+        return Object.values(Trait).filter(label => {
+            const key = getTraitStringFromLabel(label);
+            if (!key) return false;
+
+            return activeTraits.has(key);
+        });
+    }, [resolvedCharacters]);
 
     const rows = useMemo(
         () =>

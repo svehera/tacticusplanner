@@ -25,7 +25,7 @@ export enum Trait {
     IndirectFire = 'Indirect Fire',
     Infiltrate = 'Infiltrate',
     InstinctiveBehaviour = 'Instinctive Behaviour',
-    DeathToTheFalseEmperor = 'Let the Galaxy Burn',
+    LetTheGalaxyBurn = 'Let the Galaxy Burn',
     LivingMetal = 'Living Metal',
     MartialKatah = "Martial Ka'tah",
     Mechanic = 'Mechanic',
