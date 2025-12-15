@@ -37,6 +37,7 @@ export enum Trait {
     Psyker = 'Psyker',
     PutridExplosion = 'Putrid Explosion',
     RapidAssault = 'Rapid Assault',
+    RangedSpecialist = 'Ranged Specialist',
     Resilient = 'Resilient',
     ShadowInTheWarp = 'Shadow in the Warp',
     Summon = 'Summon',
