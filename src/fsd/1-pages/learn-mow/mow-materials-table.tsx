@@ -26,7 +26,7 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                     const { data } = params;
                     if (data) {
                         return (
-                            <div className="flex-box gap3">
+                            <div className="flex-box gap-[3px]">
                                 <span>{data.badges}</span>
                                 <BadgeImage alliance={data.mowAlliance} rarity={data.rarity} />
                             </div>
@@ -41,7 +41,7 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                     const { data } = params;
                     if (data) {
                         return (
-                            <div className="flex-box gap3">
+                            <div className="flex-box gap-[3px]">
                                 <span>{data.components}</span>
                                 <ComponentImage alliance={data.mowAlliance} />
                             </div>
@@ -56,7 +56,7 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                     const { data } = params;
                     if (data) {
                         return data.forgeBadges > 0 ? (
-                            <div className="flex-box gap3">
+                            <div className="flex-box gap-[3px]">
                                 <span>{data.forgeBadges}</span>
                                 <ForgeBadgeImage rarity={data.rarity} />
                             </div>
@@ -77,7 +77,7 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                     const { data } = params;
                     if (data) {
                         return (
-                            <div className="flex-box gap3">
+                            <div className="flex-box gap-[3px]">
                                 {data.primaryUpgrades.map((x, index) => (
                                     <UpgradeImage
                                         key={x.id + index}
@@ -111,7 +111,7 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                     const { data } = params;
                     if (data) {
                         return (
-                            <div className="flex-box gap3">
+                            <div className="flex-box gap-[3px]">
                                 {data.secondaryUpgrades.map((x, index) => (
                                     <UpgradeImage
                                         key={x.id + index}
@@ -131,14 +131,7 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
     }, []);
 
     return (
-        <div
-            className="ag-theme-material"
-            style={{
-                height: 50 + rows.length * 45,
-                minHeight: 150,
-                maxHeight: '50vh',
-                width: '100%',
-            }}>
+        <div className="ag-theme-material min-h-[150px] max-h-[50vh] w-full" style={{ height: 50 + rows.length * 45 }}>
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}

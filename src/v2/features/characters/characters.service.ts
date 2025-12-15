@@ -1,10 +1,10 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
-import { charsUnlockShards } from 'src/models/constants';
-import { IPersonalCharacterData2 } from 'src/models/interfaces';
+import { charsUnlockShards, charsProgression } from 'src/models/constants';
+import { IPersonalCharacterData2, ICharProgression } from 'src/models/interfaces';
 import factionsData from 'src/v2/data/factions.json';
 
-import { Rank, Rarity, UnitType } from '@/fsd/5-shared/model';
+import { Rank, Rarity, UnitType, RarityStars } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2 } from '@/fsd/4-entities/mow';
@@ -19,6 +19,8 @@ import { CharactersPowerService } from '../../../fsd/4-entities/unit/characters-
 import { CharactersValueService } from '../../../fsd/4-entities/unit/characters-value.service';
 
 import { IFaction } from './characters.models';
+import { blueStarReady } from './functions/blue-star-ready';
+import { canAscendCharacter } from './functions/can-ascend';
 import { filterChaos } from './functions/filter-by-chaos';
 import { filterImperial } from './functions/filter-by-imperial';
 import { filterXenos } from './functions/filter-by-xenos';
@@ -38,17 +40,12 @@ export class CharactersService {
         switch (filterBy) {
             case CharactersFilterBy.NeedToAscend:
                 return filteredCharactersByName.filter(needToAscendCharacter);
+            case CharactersFilterBy.CanAscend:
+                return filteredCharactersByName.filter(canAscendCharacter);
             case CharactersFilterBy.NeedToLevel:
                 return filteredCharactersByName.filter(needToLevelCharacter);
-            case CharactersFilterBy.CanUpgrade:
-                return filteredCharactersByName.filter(
-                    char =>
-                        isCharacter(char) &&
-                        char.rank !== Rank.Locked &&
-                        char.rank !== Rank.Diamond3 &&
-                        !needToLevelCharacter(char) &&
-                        !needToAscendCharacter(char)
-                );
+            case CharactersFilterBy.BlueStarReady:
+                return filteredCharactersByName.filter(blueStarReady);
             case CharactersFilterBy.Chaos:
                 return filteredCharactersByName.filter(filterChaos);
             case CharactersFilterBy.Imperial:
@@ -332,5 +329,84 @@ export class CharactersService {
         const charactersByPotentialValue = charactersByPotential.map(x => x.potential);
 
         return (sum(charactersByPotentialValue) / (charactersCount * 5 * 100)) * 100;
+    }
+
+    /**
+     * Calculates the total progression of character resources (shards, orbs, and mythic shards)
+     * up to a specified rarity and star level.
+     *
+     * @param rarity - The rarity level of the character.
+     * @param stars - The star level of the character.
+     * @returns An object containing the total counts of shards, orbs, and mythic shards.
+     *
+     * @example
+     * const totalProgression = CharactersService.getTotalProgressionUntil(Rarity.RARE, RarityStars.THREE);
+     * console.log(totalProgression); // { shards: 100, orbs: 50, mythicShards: 10 }
+     */
+    public static getTotalProgressionUntil(rarity: Rarity, stars: RarityStars) {
+        const key = rarity + stars;
+        const totals: ICharProgression = {
+            shards: 0,
+            orbs: 0,
+            mythicShards: 0,
+        };
+
+        for (const [kString, value] of Object.entries(charsProgression)) {
+            const k = Number(kString);
+            if (k <= key) {
+                totals.shards! += value.shards ?? 0;
+                totals.orbs! += value.orbs ?? 0;
+                totals.mythicShards! += value.mythicShards ?? 0;
+            }
+        }
+
+        return totals;
+    }
+
+    /**
+     * Retrieves the next rarity in the progression based on the current rarity.
+     *
+     * @param current - The current rarity for which the next rarity is to be determined.
+     * @returns The next rarity in the progression, or undefined if the current rarity is the last one.
+     *
+     * @remarks
+     * This method collects all unique rarities from the character progression data,
+     * sorts them in ascending order, and returns the rarity that follows the provided
+     * current rarity. If the current rarity is the highest, the method will return undefined.
+     */
+    public static getNextRarity(current: Rarity): Rarity {
+        const rarities = new Set<Rarity>();
+
+        for (const value of Object.values(charsProgression)) {
+            if (value.rarity !== undefined) {
+                rarities.add(value.rarity);
+            }
+        }
+
+        const sorted = Array.from(rarities).sort((a, b) => a - b);
+
+        const index = sorted.indexOf(current);
+
+        return sorted[index + 1];
+    }
+
+    /**
+     * Gets the minimum number of stars required for a given rarity level.
+     * @param rarity - The rarity level to find the minimum stars for.
+     * @returns The minimum number of stars needed to achieve the specified rarity.
+     */
+    public static getMinimumStarsForRarity(rarity: Rarity): RarityStars {
+        const matches: number[] = [];
+
+        for (const [kString, value] of Object.entries(charsProgression)) {
+            const key = Number(kString);
+
+            if (value.rarity === rarity) {
+                const stars = key - rarity;
+                matches.push(stars);
+            }
+        }
+
+        return matches.sort((a, b) => a - b)[0] as RarityStars;
     }
 }

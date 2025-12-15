@@ -22,14 +22,12 @@ import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
 import { ICampaignBattleComposed, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
-import { RankSelect } from '@/fsd/4-entities/character';
 import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
 import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
 
-import { CharacterUpgrades } from '@/fsd/3-features/character-details';
 import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
 import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 
@@ -51,6 +49,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     const [form, setForm] = useState<CharacterRaidGoalSelect>(goal);
     const [inventoryUpdate, setInventoryUpdate] = useState<Array<IUpgradeRecipe>>([]);
     const handleClose = (updatedGoal?: CharacterRaidGoalSelect | undefined): void => {
+        console.log('updatedGoal: ', updatedGoal);
         if (updatedGoal) {
             dispatch.goals({ type: 'Update', goal: updatedGoal });
 
@@ -84,16 +83,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                     break;
                 }
                 case PersonalGoalType.UpgradeRank: {
-                    dispatch.characters({
-                        type: 'UpdateRank',
-                        character: updatedGoal.unitId,
-                        value: updatedGoal.rankStart,
-                    });
-                    dispatch.characters({
-                        type: 'UpdateUpgrades',
-                        character: updatedGoal.unitId,
-                        value: updatedGoal.appliedUpgrades,
-                    });
+                    // Do nothing, users can sync if they want to update their characters.
                     break;
                 }
                 case PersonalGoalType.MowAbilities: {
@@ -142,11 +132,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
         return ignoreRankRarity ? Rank.Adamantine1 : RarityMapper.toMaxRank[unit?.rarity ?? 0];
     }, [unit?.rarity, ignoreRankRarity]);
 
-    let currentRankValues: number[] = [];
     let targetRankValues: number[] = [];
 
     if (form.type === PersonalGoalType.UpgradeRank) {
-        currentRankValues = getEnumValues(Rank).filter(x => x > 0 && x <= form.rankEnd!);
         targetRankValues = getEnumValues(Rank).filter(x => x > 0 && x >= form.rankStart && x <= maxRank);
     }
 
@@ -168,10 +156,10 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
-            <DialogTitle className="flex gap3 items-center">
+            <DialogTitle className="flex gap-[3px] items-center">
                 <span>Edit {PersonalGoalType[goal.type]} Goal</span> <UnitShardIcon icon={goal.unitRoundIcon} />
             </DialogTitle>
-            <DialogContent style={{ paddingTop: 20 }}>
+            <DialogContent className="pt-5">
                 <Box id="edit-goal-form" className="flex flex-col gap-5">
                     <PrioritySelect
                         value={form.priority}
@@ -185,18 +173,17 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 <IgnoreRankRarity value={ignoreRankRarity} onChange={setIgnoreRankRarity} />
                             </div>
                             <div className="flex gap-5">
-                                <RankSelect
-                                    label={'Current Rank'}
-                                    rankValues={currentRankValues}
-                                    value={form.rankStart}
-                                    valueChanges={value =>
-                                        setForm(curr => ({ ...curr, rankStart: value, upgrades: [] }))
-                                    }
-                                />
-                            </div>
-                            <div className="flex gap-5">
                                 <RankGoalSelect
                                     allowedValues={targetRankValues}
+                                    startingRank={form.rankStart}
+                                    startingPoint5={form.rankStartPoint5}
+                                    onStartChange={(startRank, startRankPoint5) =>
+                                        setForm(curr => ({
+                                            ...curr,
+                                            rankStart: startRank,
+                                            rankStartPoint5: startRankPoint5,
+                                        }))
+                                    }
                                     rank={form.rankEnd}
                                     point5={form.rankPoint5}
                                     onChange={(targetRank, rankPoint5) =>
@@ -213,21 +200,6 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     }));
                                 }}
                             />
-
-                            {isCharacter(unit) && form.rankStart > Rank.Locked && (
-                                <CharacterUpgrades
-                                    character={unit}
-                                    upgrades={form.appliedUpgrades}
-                                    rank={form.rankStart}
-                                    upgradesChanges={(upgrades, updateInventory) => {
-                                        setForm({
-                                            ...form,
-                                            appliedUpgrades: upgrades,
-                                        });
-                                        setInventoryUpdate(updateInventory);
-                                    }}
-                                />
-                            )}
                         </>
                     )}
 

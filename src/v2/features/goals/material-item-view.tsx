@@ -13,15 +13,10 @@ export const MaterialItemView: React.FC<Props> = ({ upgradeRaid }) => {
     return (
         <div style={{ opacity: upgradeRaid.isBlocked ? 0.5 : 1 }}>
             <MaterialItemTitle upgradeRaid={upgradeRaid} />
-            <ul style={{ paddingInlineStart: 15 }}>
+            <ul className="ps-[15px]">
                 {upgradeRaid.raidLocations.map(location => {
                     return (
-                        <li
-                            key={location.id}
-                            className="flex-box gap5"
-                            style={{
-                                justifyContent: 'space-between',
-                            }}>
+                        <li key={location.id} className="flex-box gap5 justify-between">
                             <CampaignLocation location={location} unlocked={true} />
                         </li>
                     );

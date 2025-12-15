@@ -60,7 +60,7 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
     return (
         <div className="flex-box gap20 wrap">
             {mow && <UnitShardIcon icon={mow.icon} />}
-            <UnitsAutocomplete style={{ maxWidth: 250 }} unit={mow} options={mows} onUnitChange={setMow} />
+            <UnitsAutocomplete className="max-w-[250px]" unit={mow} options={mows} onUnitChange={setMow} />
             <div className="flex-box gap15 p10">
                 <span>Primary:</span>
 

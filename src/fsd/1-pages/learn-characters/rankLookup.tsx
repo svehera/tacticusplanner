@@ -77,6 +77,7 @@ export const RankLookup = () => {
             rankEnd,
             appliedUpgrades: [],
             rankPoint5,
+            rankStartPoint5: false,
             upgradesRarity: [],
         });
     }, [character?.id, rankStart, rankEnd, rankPoint5]);
@@ -125,7 +126,7 @@ export const RankLookup = () => {
         <ul>
             {materials.map(item => (
                 <li key={item.id}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <div className="flex items-center gap-[5px]">
                         <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
                         <UpgradeImage
                             material={item.label}
@@ -133,7 +134,7 @@ export const RankLookup = () => {
                             rarity={RarityMapper.rarityToRarityString(item.rarity)}
                             size={30}
                         />{' '}
-                        - <span style={{ fontWeight: 'bold' }}>{item.count}</span>
+                        - <span className="font-bold">{item.count}</span>
                     </div>
                     {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
                 </li>
@@ -194,7 +195,7 @@ export const RankLookup = () => {
                 const { data } = params;
                 if (data) {
                     return (
-                        <div className="flex-box wrap" style={{ gap: '5px' }}>
+                        <div className="flex-box wrap gap-[5px]">
                             {data.possibleLocations.map(location => (
                                 <CampaignLocation
                                     key={location.id}
@@ -248,7 +249,7 @@ export const RankLookup = () => {
         };
 
         return (
-            <div style={{ display: 'flex' }}>
+            <div className="flex">
                 <div className="flex-box column gap5">
                     <MiscIcon icon={'health'} height={30} />
                     {healthUpgrades.map((x, index) => {
@@ -293,16 +294,10 @@ export const RankLookup = () => {
 
     return (
         <div>
-            <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    alignItems: 'center',
-                    gap: '20px',
-                }}>
+            <div className="flex flex-wrap items-center gap-5">
                 <UnitsAutocomplete
                     label="Characters"
-                    style={{ maxWidth: 300 }}
+                    className="max-w-[300px]"
                     unit={character}
                     options={characters}
                     onUnitChange={value => {
@@ -320,7 +315,7 @@ export const RankLookup = () => {
                     }}
                 />
 
-                <div style={{ width: 200 }}>
+                <div className="w-50">
                     <RankSelect
                         label={'Rank Start'}
                         rankValues={rankEntries.slice(0, rankEntries.length - 1)}
@@ -334,7 +329,7 @@ export const RankLookup = () => {
                     />
                 </div>
                 <div className="flex gap-5 items-center flex-wrap">
-                    <div style={{ width: 200 }}>
+                    <div className="w-50">
                         <RankSelect
                             label={'Rank End'}
                             rankValues={rankEntries.slice(1)}
@@ -370,8 +365,8 @@ export const RankLookup = () => {
 
             <div>
                 <div
-                    className="ag-theme-material"
-                    style={{ height: 50 + totalMaterials.length * 30, maxHeight: '40vh', width: '100%' }}>
+                    className="ag-theme-material max-h-[40vh] w-full"
+                    style={{ height: 50 + totalMaterials.length * 30 }}>
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}
@@ -411,8 +406,8 @@ export const RankLookup = () => {
                             horizontal: 'left',
                         }}>
                         {materialRecipe && (
-                            <div style={{ margin: 20, width: 300 }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                            <div className="m-5 w-[300px]">
+                                <div className="flex items-center gap-[5px]">
                                     <MiscIcon icon={materialRecipe.stat.toLowerCase() as any} />
                                     <span className={Rarity[materialRecipe.rarity]?.toLowerCase()}>
                                         {Rarity[materialRecipe.rarity]}

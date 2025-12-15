@@ -95,7 +95,21 @@ export interface ILegendaryEventSelectedRequirements {
     gamma: SelectedRequirements;
 }
 
-type SelectedRequirements = Record<string, boolean>;
+export enum RequirementStatus {
+    NotCleared = 0, // Gray - not yet cleared
+    Cleared = 1, // Green - cleared (adds points to progress)
+    MaybeClear = 2, // Yellow - maybe clear (reminder only)
+    StopHere = 3, // Red - stop here, don't attempt (reminder only)
+    PartiallyCleared = 4, // Blue - partially cleared with kill score (adds points to progress)
+}
+
+export interface IRequirementProgress {
+    status: RequirementStatus;
+    killScore?: number; // Only applicable for kill score requirements with PartiallyCleared status
+}
+
+// Supports both legacy boolean format and new status format
+type SelectedRequirements = Record<string, boolean | IRequirementProgress>;
 
 export interface IAutoTeamsPreferences {
     preferCampaign: boolean;

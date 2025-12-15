@@ -254,6 +254,7 @@ export class ShardsService {
             nodeNumber,
             campaign: Campaign.Onslaught,
             campaignType: CampaignType.Onslaught,
+            enemyPower: 0,
             energyCost: 0,
             energyPerDay: 0,
             energyPerItem: 0,

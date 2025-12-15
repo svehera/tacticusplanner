@@ -1,5 +1,4 @@
-﻿import { createTheme, ThemeProvider } from '@mui/material';
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { LoginStatusDialog } from 'src/shared-components/user-menu/login-status-dialog';
@@ -7,54 +6,13 @@ import { LoginUserDialog } from 'src/shared-components/user-menu/login-user-dial
 import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';
 
 import { initI18n } from '@/fsd/5-shared/i18n';
-import { useAuth } from '@/fsd/5-shared/model';
+import { useAuth, AppThemeProvider } from '@/fsd/5-shared/model';
 import { LoaderWithText } from '@/fsd/5-shared/ui';
 import { SearchParamsStateProvider, useLoader } from '@/fsd/5-shared/ui/contexts';
 
 import { currentVersion } from '@/fsd/3-features/whats-new';
 
 initI18n();
-
-const lightTheme = createTheme({
-    colorSchemes: {
-        light: true,
-    },
-    palette: {
-        mode: 'light', // Ensure the mode is set to dark for dark mode
-    },
-});
-
-const darkTheme = createTheme({
-    colorSchemes: {
-        dark: true,
-    },
-    palette: {
-        mode: 'dark', // Ensure the mode is set to dark for dark mode
-    },
-    components: {
-        MuiCard: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: 'var(--overlay)',
-                },
-            },
-        },
-        MuiAccordion: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: 'var(--secondary)',
-                },
-            },
-        },
-        MuiToolbar: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: 'var(--navbar)',
-                },
-            },
-        },
-    },
-});
 
 export const App = () => {
     const { isAuthenticated } = useAuth();
@@ -63,7 +21,6 @@ export const App = () => {
     const [showLoginStatus, setShowLoginStatus] = useState(false);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches);
 
     useEffect(() => {
         localStorage.setItem('appVersion', currentVersion);
@@ -76,25 +33,6 @@ export const App = () => {
             setShowLoginStatus(!isAuthenticated);
         }
     }, []);
-
-    // System theme detection
-    useEffect(() => {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const handler = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
-        mediaQuery.addEventListener('change', handler);
-        return () => mediaQuery.removeEventListener('change', handler);
-    }, []);
-
-    // Apply dark class to html element
-    useEffect(() => {
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark');
-            document.documentElement.setAttribute('data-ag-theme-mode', 'dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-            document.documentElement.removeAttribute('data-ag-theme-mode');
-        }
-    }, [isDarkMode]);
 
     const handleContinue = () => {
         localStorage.setItem('lastVisit', new Date().toISOString());
@@ -116,7 +54,7 @@ export const App = () => {
     };
 
     return (
-        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <AppThemeProvider>
             {showLoginStatus && (
                 <LoginStatusDialog
                     onClose={handleClose}
@@ -137,6 +75,6 @@ export const App = () => {
                 <Outlet />
             </SearchParamsStateProvider>
             <LoaderWithText loading={!!loading} loadingText={loadingText} />
-        </ThemeProvider>
+        </AppThemeProvider>
     );
 };

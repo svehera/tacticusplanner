@@ -7,7 +7,7 @@ export const LearnRoutes = () => {
     const navigate = useNavigate();
 
     return (
-        <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
+        <div className="flex gap-2.5 flex-col items-center">
             {learnSubMenuMobile.map(item => (
                 <Card
                     variant="outlined"
@@ -19,7 +19,7 @@ export const LearnRoutes = () => {
                     }}>
                     <CardHeader
                         title={
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                            <div className="flex items-center gap-2.5">
                                 {item.icon} {item.label}
                             </div>
                         }

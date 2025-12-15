@@ -30,7 +30,7 @@ export const TokenImage = ({ gameMode }: { gameMode: GameMode }) => {
     return (
         <AccessibleTooltip title={tooltipText}>
             <span>
-                <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={40} alt={gameMode} />
+                <img loading={'lazy'} className="pointer-events-none" src={image} height={40} alt={gameMode} />
             </span>
         </AccessibleTooltip>
     );
