@@ -175,6 +175,7 @@ export type ICharacter2 = ICharacterData & IPersonalCharacterData2 & DynamicProp
 export interface IUnitUpgradeRank {
     rankStart: Rank;
     rankEnd: Rank;
+    startRankPoint5: boolean;
     rankPoint5: boolean;
     upgrades: string[];
 }
@@ -190,6 +191,7 @@ export interface IRankLookup {
     rankStart: Rank;
     rankEnd: Rank;
     appliedUpgrades: string[];
+    rankStartPoint5: boolean;
     rankPoint5: boolean;
     upgradesRarity: Rarity[];
 }

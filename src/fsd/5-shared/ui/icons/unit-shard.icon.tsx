@@ -37,26 +37,16 @@ export const UnitShardIcon = ({
     const overlaySize = roundImgOriginal.width * borderImgScale * overlayScale;
 
     const image = (
-        <div style={{ position: 'relative', display: 'inline-block', width, height }}>
+        <div className="relative inline-block" style={{ width, height }}>
             <img
                 loading={'lazy'}
-                style={{ display: 'block', width, height, borderRadius: '50%', objectFit: 'contain' }}
+                className="block rounded-[50%] object-contain"
+                style={{ width, height }}
                 src={borderImageUrl}
                 alt="character border"
             />
             {hasIconUrl && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        pointerEvents: 'none',
-                    }}>
+                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none">
                     <img
                         loading={'lazy'}
                         style={{

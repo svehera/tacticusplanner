@@ -19,6 +19,7 @@ export interface ICampaignBattleComposed {
     slots?: number;
     enemiesFactions: string[];
     enemiesAlliances: Alliance[];
+    enemyPower: number;
     alliesFactions: string[];
     alliesAlliance: Alliance;
     enemiesTotal: number;
@@ -80,6 +81,7 @@ export interface ICampaignBattle {
     enemiesFactions?: string[];
     enemiesTotal?: number;
     enemiesTypes?: string[];
+    enemyPower: number;
     detailedEnemyTypes?: IDetailedEnemy[];
     requiredCharacterSnowprintIds?: string[];
 }
@@ -163,6 +165,6 @@ export interface ICampaignsFilters {
     upgradesRarity: Rarity[];
     slotsCount?: number[];
     enemiesTypes?: string[];
-    enemiesMinCount?: number | null;
-    enemiesMaxCount?: number | null;
+    enemiesMinCount?: number;
+    enemiesMaxCount?: number;
 }

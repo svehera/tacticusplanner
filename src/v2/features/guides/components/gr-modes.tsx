@@ -23,8 +23,7 @@ export const GuildRaidsModes: React.FC<Props> = ({ updateSelection, units, filte
     const bannedFaction: Faction = useMemo(() => grEncounterToFaction[grEncounter], [grEncounter]);
 
     const getFaction = (unit: IUnit): Faction => {
-        if ('faction' in unit) return unit.faction;
-        return unit.factionId as Faction;
+        return unit.faction as Faction;
     };
 
     const allowedUnits = useMemo(() => {
@@ -59,7 +58,7 @@ export const GuildRaidsModes: React.FC<Props> = ({ updateSelection, units, filte
                     minWidth={150}
                 />
             </div>
-            Banned faction: <span className="bold">{bannedFaction}</span>
+            Banned faction: <span className="font-bold">{bannedFaction}</span>
         </>
     );
 };

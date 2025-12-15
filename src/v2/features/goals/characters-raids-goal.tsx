@@ -51,11 +51,11 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
             case PersonalGoalType.UpgradeRank: {
                 return (
                     <AccessibleTooltip title={"Upgrade character's rank"}>
-                        <div className="flex-box gap3">
+                        <div className="flex-box gap-[3px]">
                             <RankIcon rank={goal.rankStart} /> <ArrowForward />
                             <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                             {!!goal.upgradesRarity.length && (
-                                <div className="flex-box gap3">
+                                <div className="flex-box gap-[3px]">
                                     {goal.upgradesRarity.map(x => (
                                         <RarityIcon key={x} rarity={x} />
                                     ))}
@@ -72,14 +72,14 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                     <div className="flex-box gap5">
                         <div className="flex-box start column">
                             {hasPrimaryGoal && (
-                                <div className="flex-box gap3">
+                                <div className="flex-box gap-[3px]">
                                     <span>P:</span> <b>{goal.primaryStart}</b> <ArrowForward />
                                     <b>{goal.primaryEnd}</b>
                                 </div>
                             )}
 
                             {hasSecondaryGoal && (
-                                <div className="flex-box gap3">
+                                <div className="flex-box gap-[3px]">
                                     <span>S:</span> <b>{goal.secondaryStart}</b> <ArrowForward />
                                     <b>{goal.secondaryEnd}</b>
                                 </div>
@@ -87,7 +87,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                         </div>
 
                         {!!goal.upgradesRarity.length && (
-                            <div className="flex-box gap3">
+                            <div className="flex-box gap-[3px]">
                                 {goal.upgradesRarity.map(x => (
                                     <RarityIcon key={x} rarity={x} />
                                 ))}

@@ -73,11 +73,11 @@ export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
                     <div className="flex-box gap5">
                         <div className="flex gap-x-5">
                             <CampaignLocation key={battle.id} location={battle} short={true} unlocked={true} />
-                            <span className="flex-box gap2">
+                            <span className="flex-box gap-0.5">
                                 <MiscIcon icon="deployment" width={24} height={24} />
                                 <span>{battle.slots ?? 0}</span>
                             </span>
-                            <span className="flex-box gap2">
+                            <span className="flex-box gap-0.5">
                                 <MiscIcon icon="energy" width={24} height={24} />
                                 <span>{battle.energyCost}</span>
                             </span>

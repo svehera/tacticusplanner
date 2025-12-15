@@ -161,7 +161,7 @@ export const RaidsPlan: React.FC<Props> = ({
     return (
         <Accordion defaultExpanded={scrollToCharSnowprintId !== undefined}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                <FlexBox className="flex-col items-start">
                     <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                         <span>
                             Raids plan (<b>{daysTotal}</b> Days |
@@ -316,7 +316,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 {!!estimatedShards.shardsRaids.length && (
                     <Accordion>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                            <FlexBox className="flex-col items-start">
                                 <div
                                     className="flex gap-2 items-center flex-wrap"
                                     style={{ fontSize: isMobile ? 16 : 20 }}>
@@ -350,7 +350,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 {!!estimatedRanks.upgradesRaids.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                            <FlexBox className="flex-col items-start">
                                 <div className="flex-box gap5 wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <span>
                                         Upgrades raids (<b>{estimatedRanks.upgradesRaids.length}</b> Days |
@@ -371,7 +371,7 @@ export const RaidsPlan: React.FC<Props> = ({
                             </FlexBox>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div style={{ display: 'flex', gap: 10, overflow: 'auto' }}>
+                            <div className="flex gap-2.5 overflow-auto">
                                 {estimatedRanks.upgradesRaids
                                     .slice(upgradesPaging.start, upgradesPaging.end)
                                     .map((day, index) => {
@@ -380,7 +380,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                 {!upgradesPaging.completed && (
                                     <Button
                                         variant={'outlined'}
-                                        style={{ minWidth: 300, alignItems: 'flex-start', paddingTop: 20 }}
+                                        className="min-w-[300px] items-start pt-5"
                                         onClick={() =>
                                             setUpgradesPaging({
                                                 start: 0,

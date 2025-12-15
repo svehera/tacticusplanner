@@ -105,13 +105,11 @@ export const TeamSlotEdit: React.FC<Props> = ({
     return (
         <div>
             <div
-                className="slot-type"
+                className="slot-type text-center mb-2.5"
                 style={{
-                    textAlign: 'center',
                     cursor: editable ? 'pointer' : 'default',
                     backgroundColor:
                         slotType === SlotType.core ? '#2e7d32' : slotType === SlotType.flex ? '#ed6c02' : '',
-                    marginBottom: 10,
                 }}
                 onClick={toggleSlotType}>
                 {SlotType[slotType].toUpperCase()}

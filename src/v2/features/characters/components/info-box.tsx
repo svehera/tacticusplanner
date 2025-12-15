@@ -34,8 +34,8 @@ export const InfoBox = () => {
                     vertical: 'bottom',
                     horizontal: 'left',
                 }}>
-                <div style={{ padding: 10, maxWidth: 500 }}>
-                    <p style={{ fontWeight: 500 }}>
+                <div className="p-2.5 max-w-125">
+                    <p className="font-medium">
                         <WarningIcon color={'warning'} fontSize={'medium'} /> Disclaimer: <br />
                         <MiscIcon icon={'blackstone'} height={20} width={15} /> represents blackstone cost
                         <br />

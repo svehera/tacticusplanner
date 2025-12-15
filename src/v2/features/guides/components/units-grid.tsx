@@ -26,7 +26,7 @@ export const UnitsGrid: React.FC<Props> = ({ units, onUnitClick, selectedUnits }
 
         return (
             <Tooltip placement={'top'} title={unit.name} key={unitId} onClick={() => onUnitClick(unit)}>
-                <div style={{ opacity: isSelected ? 0.2 : 1, cursor: 'pointer' }}>
+                <div className="cursor-pointer" style={{ opacity: isSelected ? 0.2 : 1 }}>
                     <CharacterPortraitImage icon={portraitIcon} />
                 </div>
             </Tooltip>
@@ -35,8 +35,8 @@ export const UnitsGrid: React.FC<Props> = ({ units, onUnitClick, selectedUnits }
 
     return (
         <div
-            className="[box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)] flex flex-wrap gap-[15px]"
-            style={{ transform: isMobile ? 'scale(0.5)' : 'scale(1)', transformOrigin: 'top left' }}>
+            className="[box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)] flex flex-wrap gap-[15px] origin-top-left"
+            style={{ transform: isMobile ? 'scale(0.5)' : 'scale(1)' }}>
             {units.map((unit, index) => renderPortrait(unit.id, index))}
         </div>
     );

@@ -31,26 +31,26 @@ export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mow
             <div className="flex flex-col gap-3">
                 <span>{label}</span>
                 <div className="flex gap-3">
-                    <div style={{ width: 40, height: 40 }}>
+                    <div className="size-10">
                         <Badge badgeContent={<b>{materials.badges}</b>}>
                             <BadgeImage alliance={alliance} rarity={materials.rarity} size={size} />
                         </Badge>
                     </div>
 
-                    <div style={{ width: 40, height: 40 }}>
+                    <div className="size-10">
                         <Badge badgeContent={<b>{materials.components}</b>}>
                             <ComponentImage alliance={alliance} size={size} />
                         </Badge>
                     </div>
 
                     {materials.forgeBadges ? (
-                        <div style={{ width: 40, height: 40 }}>
+                        <div className="size-10">
                             <Badge badgeContent={<b>{materials.forgeBadges}</b>}>
                                 <ForgeBadgeImage rarity={materials.rarity} size={size} />
                             </Badge>
                         </div>
                     ) : (
-                        <div style={{ width: 40, height: 40 }}></div>
+                        <div className="size-10"></div>
                     )}
                 </div>
                 <div className="flex items-center">

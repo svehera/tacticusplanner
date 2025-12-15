@@ -59,7 +59,7 @@ function LreSection({ nextEvent }: { nextEvent: ILegendaryEventStatic }) {
 
     return (
         <div>
-            <h3 style={{ textAlign: 'center' }}>{isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event</h3>
+            <h3 className="text-center">{isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event</h3>
             <Card
                 variant="outlined"
                 classes="dark:bg-dark-navy"
@@ -71,16 +71,14 @@ function LreSection({ nextEvent }: { nextEvent: ILegendaryEventStatic }) {
                 }}>
                 <CardHeader
                     title={
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div className="flex items-center gap-2.5">
                             <UnitShardIcon icon={nextLeUnit?.roundIcon ?? ''} height={50} width={50} />
                             {nextLeUnit?.shortName}
                         </div>
                     }
                     subheader={formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}
                 />
-                <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
-                    {isEventStarted ? timeToEnd : timeToStart}
-                </CardContent>
+                <CardContent className="flex flex-col">{isEventStarted ? timeToEnd : timeToStart}</CardContent>
             </Card>
         </div>
     );
@@ -97,8 +95,9 @@ export const DesktopHome = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_20251026.png'),
-        next: getImageUrl('calendar/calendar_20251130.png'),
+        current: getImageUrl('calendar/calendar_20251130.png'),
+        // Jan 4 Season 34 calendar not yet available
+        // next: getImageUrl('calendar/calendar_20260104.png'),
     };
 
     const topPriorityGoal = goals[0];
@@ -112,7 +111,7 @@ export const DesktopHome = () => {
         }
 
         return (
-            <div style={{ textAlign: 'center', padding: '25px 0 50px' }}>
+            <div className="text-center pt-[25px] pb-[50px] px-0">
                 <h2>Exciting News from WH40k Tacticus!</h2>
                 <p>
                     We&apos;re thrilled to announce that player API keys are now available! Use your key to effortlessly
@@ -134,16 +133,9 @@ export const DesktopHome = () => {
             {announcements()}
             <Thanks sliderMode={true} />
             {/*{announcements()}*/}
-            <div
-                style={{
-                    display: 'flex',
-                    gap: 10,
-                    flexWrap: 'wrap',
-                    alignItems: 'flex-start',
-                    justifyContent: 'center',
-                }}>
+            <div className="flex gap-2.5 flex-wrap justify-center items-start">
                 <div>
-                    <h3 style={{ textAlign: 'center' }}>Daily Raids</h3>
+                    <h3 className="text-center">Daily Raids</h3>
                     <Card
                         variant="outlined"
                         onClick={() =>
@@ -156,7 +148,7 @@ export const DesktopHome = () => {
                         }}>
                         <CardHeader
                             title={
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <div className="flex items-center gap-2.5">
                                     {dailyRaidsMenuItem.icon}{' '}
                                     {dailyRaids.raidedLocations?.length + ' locations raided today'}
                                 </div>
@@ -170,7 +162,7 @@ export const DesktopHome = () => {
                             }
                         />
                         <CardContent>
-                            <ul style={{ margin: 0 }}>
+                            <ul className="m-0">
                                 {dailyRaids.raidedLocations.map(x => (
                                     <li key={x.id}>
                                         {x.raidsCount}x {x.campaign} {x.nodeNumber}
@@ -185,7 +177,7 @@ export const DesktopHome = () => {
 
                 {!!goals.length && (
                     <div>
-                        <h3 style={{ textAlign: 'center' }}>Your Goals</h3>
+                        <h3 className="text-center">Your Goals</h3>
                         <Card
                             variant="outlined"
                             onClick={() => navigate(isMobile ? goalsMenuItem.routeMobile : goalsMenuItem.routeWeb)}
@@ -196,12 +188,12 @@ export const DesktopHome = () => {
                             }}>
                             <CardHeader
                                 title={
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                    <div className="flex items-center gap-2.5">
                                         {goalsMenuItem.icon} {goalsMenuItem.label}
                                     </div>
                                 }
                             />
-                            <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                            <CardContent className="flex flex-col">
                                 {!!unlockGoals && (
                                     <span>
                                         <b>Unlock</b> {unlockGoals} characters
@@ -228,17 +220,11 @@ export const DesktopHome = () => {
                 )}
 
                 <div>
-                    <h3 style={{ textAlign: 'center' }}>Events calendar</h3>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            justifyContent: 'center',
-                            gap: 10,
-                        }}>
+                    <h3 className="text-center">Events calendar</h3>
+                    <div className="flex flex-wrap justify-center gap-2.5">
                         {!!calendarUrls.current && (
                             <div>
-                                {!!calendarUrls.next && <h4 style={{ textAlign: 'center' }}>Current Season</h4>}
+                                {!!calendarUrls.next && <h4 className="text-center">Current Season</h4>}
                                 <Zoom>
                                     <img
                                         src={calendarUrls.current}
@@ -252,7 +238,7 @@ export const DesktopHome = () => {
 
                         {!!calendarUrls.next && (
                             <div>
-                                <h4 style={{ textAlign: 'center' }}>Next Season</h4>
+                                <h4 className="text-center">Next Season</h4>
                                 <Zoom>
                                     <img
                                         src={calendarUrls.next}

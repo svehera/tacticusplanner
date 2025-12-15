@@ -59,6 +59,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             rankStart: rank,
             rankEnd: rank + 1,
             appliedUpgrades: [],
+            rankStartPoint5: false,
             rankPoint5: false,
             upgradesRarity: [],
         });
@@ -122,6 +123,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 rankEnd: rank,
                 appliedUpgrades: formData.originalUpgrades,
                 rankPoint5: false,
+                rankStartPoint5: false,
                 upgradesRarity: [],
             });
 
@@ -167,7 +169,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
     return (
         <div>
-            <div style={{ display: 'flex' }}>
+            <div className="flex">
                 <div className="flex flex-col items-center justify-center gap-[5px]">
                     <MiscIcon icon={'health'} height={30} />
                     {StatsCalculatorService.getHealth(character)}
@@ -205,7 +207,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                     ))}
                 </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="flex flex-col">
                 {unknownUpgrades.map((x, index) => (
                     <UpgradeControl
                         key={x.id + index}
@@ -238,19 +240,11 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                     vertical: 'bottom',
                     horizontal: 'left',
                 }}>
-                <div style={{ padding: 15 }}>
+                <div className="p-[15px]">
                     <p>Inventory after update:</p>
-                    <ul style={{ padding: 0 }}>
+                    <ul className="p-0">
                         {inventoryUpgrades.map((x, index) => (
-                            <li
-                                key={x.id + index}
-                                style={{
-                                    listStyleType: 'none',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 10,
-                                    paddingBottom: 10,
-                                }}>
+                            <li key={x.id + index} className="flex items-center gap-2.5 pb-2.5 list-none">
                                 <UpgradeImage
                                     material={x.label}
                                     iconPath={x.iconPath}

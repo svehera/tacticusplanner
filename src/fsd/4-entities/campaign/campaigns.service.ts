@@ -147,6 +147,7 @@ export class CampaignsService {
                 slots: battle.slots,
                 enemiesAlliances: (battle.enemiesAlliances ?? [enemies.alliance]) as Alliance[],
                 enemiesFactions: battle.enemiesFactions ?? enemies.factions,
+                enemyPower: battle.enemyPower,
                 alliesAlliance: allies.alliance,
                 alliesFactions: allies.factions,
                 enemiesTotal: battle.enemiesTotal ?? 0,
@@ -215,11 +216,11 @@ export class CampaignsService {
             .map(faction => FactionsService.getFactionSnowprintId(faction))
             .filter(isString);
 
-        if (enemiesMinCount !== null && enemiesMinCount >= location.enemiesTotal) {
+        if (enemiesMinCount !== undefined && enemiesMinCount >= location.enemiesTotal) {
             return false;
         }
 
-        if (enemiesMaxCount !== null && enemiesMaxCount <= location.enemiesTotal) {
+        if (enemiesMaxCount !== undefined && enemiesMaxCount <= location.enemiesTotal) {
             return false;
         }
 

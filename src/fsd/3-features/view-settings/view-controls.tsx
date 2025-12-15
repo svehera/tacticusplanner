@@ -54,10 +54,12 @@ export const CharactersViewControls = ({
         switch (filter) {
             case CharactersFilterBy.NeedToAscend:
                 return 'Need to Ascend';
+            case CharactersFilterBy.CanAscend:
+                return 'Can Ascend';
             case CharactersFilterBy.NeedToLevel:
                 return 'Need to Level';
-            case CharactersFilterBy.CanUpgrade:
-                return 'Can Upgrade';
+            case CharactersFilterBy.BlueStarReady:
+                return 'Ready to Blue Star';
             case CharactersFilterBy.Chaos:
                 return 'Chaos Alliance';
             case CharactersFilterBy.Imperial:
@@ -80,7 +82,7 @@ export const CharactersViewControls = ({
         entries: Array<number>,
         getName: (value: number) => string
     ) => (
-        <FormControl style={{ width: '50%', maxWidth: '200px' }}>
+        <FormControl className="w-1/2 max-w-[200px]">
             <InputLabel>{label}</InputLabel>
             <Select label={name} value={value} onChange={event => updatePreferences(name, +event.target.value)}>
                 {entries.map(value => (

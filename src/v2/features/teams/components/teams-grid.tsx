@@ -64,7 +64,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
                             </IconButton>
                         </>
                     }
-                    title={<span style={{ fontSize: '1.2rem' }}>{team.name}</span>}
+                    title={<span className="text-[1.2rem]">{team.name}</span>}
                     subheader={subModes}
                 />
                 <CardContent>
@@ -107,7 +107,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
                             <IconButton onClick={() => deleteTeam(team.id)}>
                                 <DeleteForever fontSize="small" />
                             </IconButton>
-                            <div className="flex-box gap5" style={{ fontSize: 16 }}>
+                            <div className="flex-box gap5 text-base">
                                 {totalPotential}
                                 <AccessibleTooltip
                                     title={
@@ -131,8 +131,8 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
                         </div>
                     }
                     title={
-                        <span style={{ fontSize: '1.2rem' }}>
-                            <div className="flex-box gap5" style={{ fontSize: 18 }}>
+                        <span className="text-[1.2rem]">
+                            <div className="flex-box gap5 text-lg">
                                 <RarityIcon rarity={team.rarityCap} />
                                 <span>{team.name}</span>
                             </div>

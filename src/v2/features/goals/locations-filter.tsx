@@ -64,8 +64,6 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesMinCount: null,
-            enemiesMaxCount: null,
         });
         setCurrFilter({
             alliesFactions: [],
@@ -76,8 +74,6 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesMinCount: null,
-            enemiesMaxCount: null,
         });
         setOpen(false);
     };
@@ -149,14 +145,14 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <h5>Enemies</h5>
                     {renderUnitsFilter('enemies', currFilter.enemiesAlliance, currFilter.enemiesFactions)}
 
-                    <div className="flex items-center gap-3" style={{ marginTop: 10 }}>
+                    <div className="flex items-center gap-3 mt-2.5">
                         <Autocomplete
                             fullWidth
                             size="small"
                             value={currFilter.enemiesMinCount?.toString() ?? null}
                             options={enemiesCountOptions}
                             onChange={(_, value) => {
-                                setCurrFilter({ ...currFilter, enemiesMinCount: value ? +value : null });
+                                setCurrFilter({ ...currFilter, enemiesMinCount: value ? +value : undefined });
                             }}
                             sx={{ minWidth: 150, maxWidth: 300 }}
                             renderInput={params => <TextField {...params} label="Min Enemy" />}
@@ -168,7 +164,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                             value={currFilter.enemiesMaxCount?.toString() ?? null}
                             options={enemiesCountOptions}
                             onChange={(_, value) => {
-                                setCurrFilter({ ...currFilter, enemiesMaxCount: value ? +value : null });
+                                setCurrFilter({ ...currFilter, enemiesMaxCount: value ? +value : undefined });
                             }}
                             sx={{ minWidth: 150, maxWidth: 300 }}
                             renderInput={params => <TextField {...params} label="Max Enemy" />}

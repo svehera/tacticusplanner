@@ -138,7 +138,21 @@ export const LearnCharacters = () => {
         .map(x => x.toString());
 
     const damageTypesOptions = uniq(resolvedCharacters.flatMap(x => x.damageTypes.all)).map(x => x.toString());
-    const traitsOptions = Object.values(Trait);
+
+    const traitsOptions = useMemo(() => {
+        const activeTraits = new Set<string>();
+
+        resolvedCharacters.forEach(c => {
+            c.traits?.forEach(t => activeTraits.add(t));
+        });
+
+        return Object.values(Trait).filter(label => {
+            const key = getTraitStringFromLabel(label);
+            if (!key) return false;
+
+            return activeTraits.has(key);
+        });
+    }, [resolvedCharacters]);
 
     const rows = useMemo(
         () =>
@@ -343,7 +357,7 @@ export const LearnCharacters = () => {
                     }
                 />
                 <TextField
-                    style={{ minWidth: 140 }}
+                    className="min-w-[140px]"
                     label="Quick Filter"
                     variant="outlined"
                     onChange={(event: ChangeEvent<HTMLInputElement>) => handleFilterChange('name', event.target.value)}
@@ -375,7 +389,7 @@ export const LearnCharacters = () => {
             {showFilters && (
                 <>
                     <div className="flex-box gap10 wrap">
-                        <FormControl style={{ minWidth: '110px' }}>
+                        <FormControl className="min-w-[110px]">
                             <InputLabel>Min Hits</InputLabel>
                             <Select<number>
                                 label="Min Hits"
@@ -397,7 +411,7 @@ export const LearnCharacters = () => {
                             </Select>
                         </FormControl>
 
-                        <FormControl style={{ minWidth: '110px' }}>
+                        <FormControl className="min-w-[110px]">
                             <InputLabel>Max Hits</InputLabel>
                             <Select<number>
                                 label="Max Hits"
@@ -419,7 +433,7 @@ export const LearnCharacters = () => {
                             </Select>
                         </FormControl>
 
-                        <FormControl style={{ minWidth: '130px' }}>
+                        <FormControl className="min-w-[130px]">
                             <InputLabel>Attack Type</InputLabel>
                             <Select<string>
                                 label="Attack Type"
@@ -439,7 +453,7 @@ export const LearnCharacters = () => {
                             </Select>
                         </FormControl>
 
-                        <FormControl style={{ minWidth: '120px' }}>
+                        <FormControl className="min-w-[120px]">
                             <InputLabel>Movement</InputLabel>
                             <Select<number>
                                 label="Movement"
@@ -461,7 +475,7 @@ export const LearnCharacters = () => {
                             </Select>
                         </FormControl>
 
-                        <FormControl style={{ minWidth: '110px' }}>
+                        <FormControl className="min-w-[110px]">
                             <InputLabel>Distance</InputLabel>
                             <Select<number>
                                 label="Distance"
@@ -512,7 +526,7 @@ export const LearnCharacters = () => {
             )}
 
             <div className="flex gap-[3px] justify-left">
-                <div style={{ width: 200 }}>
+                <div className="w-50">
                     <RaritySelect
                         label={'Target Rarity'}
                         rarityValues={getEnumValues(Rarity)}
@@ -520,7 +534,7 @@ export const LearnCharacters = () => {
                         valueChanges={value => onTargetRarityChanged(value)}
                     />
                 </div>
-                <div style={{ width: 200 }}>
+                <div className="w-50">
                     <StarsSelect
                         label={'Target Stars'}
                         starsValues={starValues}
@@ -528,7 +542,7 @@ export const LearnCharacters = () => {
                         valueChanges={value => onTargetStarsChanged(value)}
                     />
                 </div>
-                <div style={{ width: 200 }}>
+                <div className="w-50">
                     <RankSelect
                         label={'Target Rank'}
                         rankValues={rankValues}
@@ -537,7 +551,7 @@ export const LearnCharacters = () => {
                     />
                 </div>
             </div>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
+            <div className="ag-theme-material w-full h-[calc(100vh-180px)]">
                 <AgGridReact
                     ref={gridRef}
                     modules={[AllCommunityModule]}

@@ -3,6 +3,9 @@ import { Tooltip } from '@mui/material';
 import { sum } from 'lodash';
 import React, { useMemo } from 'react';
 
+import { RequirementStatus } from '@/fsd/3-features/lre';
+import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
+
 import { ILreProgressModel, ILreTrackProgress } from './lre.models';
 
 interface Props {
@@ -22,13 +25,38 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
         return model.chestsMilestones.length;
     }, []);
 
+    // Helper to get points from a requirement, accounting for partial kill scores
+    const getRequirementPoints = (req: {
+        completed: boolean;
+        status?: number;
+        killScore?: number;
+        points: number;
+        id: string;
+    }) => {
+        // Check if new status system is being used
+        if (req.status !== undefined) {
+            const status = req.status as RequirementStatus;
+
+            // Only Cleared and PartiallyCleared contribute points
+            if (status === RequirementStatus.Cleared) {
+                return req.points;
+            }
+            if (
+                status === RequirementStatus.PartiallyCleared &&
+                req.id === LrePointsCategoryId.killScore &&
+                req.killScore
+            ) {
+                return req.killScore;
+            }
+            return 0;
+        }
+
+        // Legacy: use completed flag
+        return req.completed ? req.points : 0;
+    };
+
     const getCurrentPoints = (track: ILreTrackProgress) => {
-        return sum(
-            track.battles
-                .flatMap(x => x.requirementsProgress)
-                .filter(x => x.completed)
-                .map(x => x.points)
-        );
+        return sum(track.battles.flatMap(x => x.requirementsProgress).map(req => getRequirementPoints(req)));
     };
 
     const currentPoints = sum(model.tracksProgress.map(getCurrentPoints));
@@ -189,10 +217,10 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
     }, [pointsForNextMilestone]);
 
     return (
-        <div className="flex-box wrap gap15" style={{ margin: 10 }}>
-            <div style={{ display: 'flex', gap: 5 }}>
+        <div className="flex-box wrap gap15 m-2.5">
+            <div className="flex gap-[5px]">
                 Deed Points to {goal}:
-                <span style={{ fontWeight: 700 }}>
+                <span className="font-bold">
                     {currentPoints} / {pointsForNextMilestone}
                 </span>
                 <Tooltip title={totalPoints + ' in total. Battles per track: ' + averageBattles}>
@@ -200,9 +228,9 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
                 </Tooltip>
             </div>
 
-            <div style={{ display: 'flex', gap: 5 }}>
+            <div className="flex gap-[5px]">
                 Currency to {goal}:
-                <span style={{ fontWeight: 700 }}>
+                <span className="font-bold">
                     {' '}
                     {currentCurrency} / {currencyForNextMilestone}
                 </span>
@@ -211,9 +239,9 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
                 </Tooltip>
             </div>
 
-            <div style={{ display: 'flex', gap: 5 }}>
+            <div className="flex gap-[5px]">
                 Shards to {goal}:
-                <span style={{ fontWeight: 700 }}>
+                <span className="font-bold">
                     {' '}
                     {currentChests * model.shardsPerChest} / {chestsForNextGoal * model.shardsPerChest}
                 </span>

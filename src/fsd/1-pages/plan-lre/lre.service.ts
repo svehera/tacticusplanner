@@ -114,6 +114,8 @@ export class LreService {
                             : req.pointsPerBattle,
                         completed: reqProgress?.state === ProgressState.completed,
                         blocked: reqProgress?.state === ProgressState.blocked,
+                        status: reqProgress?.status, // Load new status field
+                        killScore: reqProgress?.scoredPoints, // Load kill score from scoredPoints
                     };
                 });
                 battles.push({
@@ -184,8 +186,10 @@ export class LreService {
                                 : requirement.blocked
                                   ? ProgressState.blocked
                                   : ProgressState.none,
+                            status: requirement.status, // Save new status field
+                            scoredPoints: requirement.killScore, // Save kill score as scoredPoints
                         }))
-                        .filter(x => x.state !== ProgressState.none),
+                        .filter(x => x.state !== ProgressState.none || x.status !== undefined),
                 }))
                 .filter(x => x.requirements.length)
         );

@@ -2,7 +2,7 @@
 
 import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow, IMow2, IMowDb, mowsData, MowsService } from '@/fsd/4-entities/mow';
+import { IMow, IMow2, IMowDb, mows2Data, mowsData, MowsService } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
@@ -139,8 +139,8 @@ export class GlobalState implements IGlobalState {
         });
     }
 
-    static initMows(dbMows: Partial<IMowDb & IInsightsData>[], totalUsers?: number): Array<IMow> {
-        return mowsData.map(staticData => {
+    static initMows(dbMows: Partial<IMowDb & IInsightsData>[], totalUsers?: number): Array<IMow | IMow2> {
+        const ret = mowsData.map(staticData => {
             const dbMow = dbMows?.find(c => c.id === staticData.id);
             const initialRarity = RarityMapper.stringToNumber[staticData.initialRarity];
             const initialRarityStars = RarityMapper.toStars[RarityMapper.stringToNumber[staticData.initialRarity]];
@@ -177,7 +177,46 @@ export class GlobalState implements IGlobalState {
             result.power = CharactersPowerService.getCharacterAbilityPower(mow2);
 
             return result;
+        }) as Array<IMow | IMow2>;
+        mows2Data.mows.forEach(staticMow => {
+            if (
+                ret.some(
+                    x =>
+                        ('tacticusId' in x && x.tacticusId === staticMow.snowprintId) ||
+                        ('snowprintId' in x && x.snowprintId === staticMow.snowprintId)
+                )
+            )
+                return;
+            const dbMow = dbMows?.find(c => c.id === staticMow.snowprintId);
+
+            const result: IMow2 = {
+                ...staticMow,
+                id: staticMow.snowprintId,
+                unitType: UnitType.mow,
+                icon: staticMow.icon,
+                rarity: dbMow?.rarity ?? Rarity.Common,
+                stars: dbMow?.stars ?? RarityStars.None,
+                primaryAbilityLevel: dbMow?.primaryAbilityLevel ?? 1,
+                secondaryAbilityLevel: dbMow?.secondaryAbilityLevel ?? 1,
+                unlocked: dbMow?.unlocked ?? false,
+                shards: dbMow?.shards ?? 0,
+                mythicShards: dbMow?.mythicShards ?? 0,
+                numberOfUnlocked:
+                    totalUsers && dbMow?.numberOfUnlocked
+                        ? Math.ceil((dbMow.numberOfUnlocked / totalUsers) * 100)
+                        : undefined,
+                ownedBy: dbMow?.ownedBy ?? [],
+                statsByOwner: dbMow?.statsByOwner ?? [],
+            };
+
+            result.power = CharactersPowerService.getCharacterAbilityPower({
+                ...staticMow,
+                ...result,
+            } as IMow2);
+
+            ret.push(result);
         });
+        return ret;
     }
 
     static isAtLeast3DaysBefore(releaseDate: Date): boolean {

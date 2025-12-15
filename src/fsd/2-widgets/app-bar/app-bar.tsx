@@ -33,6 +33,7 @@ import {
 } from '@/fsd/5-shared/ui';
 import { DiscordIcon, BmcIcon } from '@/fsd/5-shared/ui/icons';
 
+import { ThemeSwitch } from '@/fsd/3-features/theme-switch';
 import { WhatsNewDialog } from 'src/fsd/3-features/whats-new';
 
 import { AppBarSubMenu } from './app-bar-sub-menu';
@@ -69,7 +70,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
     }, [location.pathname, headerTitle]);
 
     const nav = isTabletOrMobile ? undefined : (
-        <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
+        <div className="flex items-center me-5">
             <AppBarSubMenu rootLabel={'Input'} options={inputSubMenu} />
 
             <AppBarSubMenu rootLabel={'Plan'} options={planSubMenuWeb} />
@@ -143,13 +144,13 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <FlexBox onClick={() => navigate('./home')} style={{ cursor: 'pointer' }}>
+                    <FlexBox onClick={() => navigate('./home')} className="cursor-pointer">
                         <img src="/android-chrome-192x192.png" height="50px" width="50px" alt="logo" />
                         <Typography variant={isTabletOrMobile ? 'h5' : 'h4'} component="div">
                             {title}
                         </Typography>
                     </FlexBox>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className="flex items-center">
                         {nav}
                         <Tooltip title="Join Tacticus Planner community on Discord">
                             <IconButton color="inherit" component={Link} to={discordInvitationLink} target={'_blank'}>
@@ -164,6 +165,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                         <IconButton color="inherit" onClick={() => navigate('./faq')}>
                             <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
                         </IconButton>
+                        <ThemeSwitch />
                         <Button
                             id="basic-button"
                             aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}

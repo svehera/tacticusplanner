@@ -50,13 +50,13 @@ const DesktopApp = () => {
     };
 
     return (
-        <div style={{ width: '100%', height: '100%' }}>
+        <div className="size-full">
             <TopAppBar
                 headerTitle={headerTitle}
                 seenAppVersion={seenAppVersion ?? ''}
                 onCloseWhatsNew={handleWhatsNewClose}
             />
-            <div style={{ margin: '10px 20px' }}>
+            <div className="my-2.5 mx-5">
                 <Outlet />
             </div>
         </div>

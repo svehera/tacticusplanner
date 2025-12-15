@@ -5,7 +5,7 @@ export const LreReqImage = ({ iconId, tooltip, sizePx }: { iconId: string; toolt
     const img = (
         <img
             loading={'lazy'}
-            style={{ pointerEvents: 'none', contentVisibility: 'auto' }}
+            className="pointer-events-none [content-visibility:auto]"
             width={sizePx ?? 25}
             height={sizePx ?? 25}
             src={imageUrl}

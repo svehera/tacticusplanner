@@ -11,7 +11,7 @@ import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild
 import { ArenaLeague } from '@/fsd/1-pages/input-xp-income/models';
 
 import { DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
-import { ICharProgression, IPersonalData2 } from './interfaces';
+import { ICharProgression, IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent, IPersonalData2 } from './interfaces';
 
 export const rankToLevel: Record<Rank, number> = {
     [Rank.Locked - 1]: 0,
@@ -65,7 +65,9 @@ export const rankToRarity: Record<Rank, Rarity> = {
 };
 
 export const charsProgression: Record<number, ICharProgression> = {
-    0: { shards: 0 },
+    //Originally it was this, i changed for coherency but kept the comment for safety (Redwyne)
+    //0: { shards: 0 },
+    [Rarity.Common + RarityStars.None]: { shards: 0 },
     [Rarity.Common + RarityStars.OneStar]: { shards: 10 },
     [Rarity.Common + RarityStars.TwoStars]: { shards: 15 },
     [Rarity.Uncommon + RarityStars.TwoStars]: { shards: 15, orbs: 10, rarity: Rarity.Uncommon },
@@ -188,7 +190,6 @@ export const defaultData: IPersonalData2 = {
             upgradesRarity: [],
             slotsCount: [],
             enemiesTypes: [],
-            enemiesMinCount: null,
         },
         raidedLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
@@ -239,7 +240,7 @@ export const defaultData: IPersonalData2 = {
     dailyRaidsPreferences: {
         dailyEnergy: 288,
         shardsEnergy: 0,
-        farmByPriorityOrder: false,
+        farmPreferences: { order: IDailyRaidsFarmOrder.goalPriority, homeScreenEvent: IDailyRaidsHomeScreenEvent.none },
         farmStrategy: DailyRaidsStrategy.leastEnergy,
         campaignEvent: 'none',
     },
