@@ -45,7 +45,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
             if (curr.some(x => x.id === unit.id)) {
                 return curr.filter(x => x.id !== unit.id);
             } else {
-                if (curr.length === 5) {
+                if (curr.length === units.length) {
                     return curr;
                 }
 

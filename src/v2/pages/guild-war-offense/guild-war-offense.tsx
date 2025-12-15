@@ -324,7 +324,7 @@ export const GuildWarOffense = () => {
                                 inputProps={{
                                     step: 1,
                                     min: 0,
-                                    max: 10,
+                                    max: 15,
                                     type: 'number',
                                     'aria-labelledby': 'input-slider',
                                 }}
