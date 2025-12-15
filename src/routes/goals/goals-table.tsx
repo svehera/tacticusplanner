@@ -254,7 +254,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                         );
                     }
                 },
-                maxWidth: 110,
+                maxWidth: 140,
             },
             {
                 field: 'unitIcon',
