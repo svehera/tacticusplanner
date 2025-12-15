@@ -3117,7 +3117,7 @@
                     {
                         "mapId": "LE2_tyranids_06",
                         "number": 11,
-                        "power": 756466,
+                        "power": 763896,
                         "tier": 1,
                         "disallowedFactions": ["Tyranids"],
                         "waves": [
@@ -3196,7 +3196,7 @@
                                     "tyranNpc5Barbgaunt:25",
                                     "tyranNpc5Barbgaunt:25"
                                 ],
-                                "power": 171368,
+                                "power": 178798,
                                 "round": 8
                             }
                         ],
@@ -3488,7 +3488,7 @@
                     {
                         "mapId": "LE2_tyranids_01",
                         "number": 14,
-                        "power": 2502755,
+                        "power": 2518739,
                         "tier": 1,
                         "disallowedFactions": ["Tyranids"],
                         "waves": [
@@ -3569,7 +3569,7 @@
                                     "tyranNpc1Hormagaunt:30",
                                     "tyranNpc1Hormagaunt:30"
                                 ],
-                                "power": 612586,
+                                "power": 628570,
                                 "round": 6
                             },
                             {
@@ -8983,7 +8983,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -9103,7 +9104,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -9223,7 +9225,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -9357,7 +9360,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -9488,7 +9492,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -9633,7 +9638,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -9769,7 +9775,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -9905,7 +9912,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -10042,7 +10050,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -10179,7 +10188,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -10317,7 +10327,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -10448,7 +10459,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -10588,7 +10600,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -10722,7 +10735,8 @@
                             "ThousandSons",
                             "WorldEaters",
                             "Genestealers",
-                            "EmperorsChildren"
+                            "EmperorsChildren",
+                            "LeaguesOfVotann"
                         ],
                         "waves": [
                             {
@@ -17687,7 +17701,15 @@
                         "number": 1,
                         "power": 1023,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -17791,7 +17813,15 @@
                         "number": 2,
                         "power": 3116,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -17900,7 +17930,15 @@
                         "number": 3,
                         "power": 8149,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -18015,7 +18053,15 @@
                         "number": 4,
                         "power": 20630,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -18133,7 +18179,15 @@
                         "number": 5,
                         "power": 40655,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -18250,7 +18304,15 @@
                         "number": 6,
                         "power": 76607,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -18370,7 +18432,15 @@
                         "number": 7,
                         "power": 137825,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -18489,7 +18559,15 @@
                         "number": 8,
                         "power": 224863,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -18616,7 +18694,15 @@
                         "number": 9,
                         "power": 349698,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -18737,7 +18823,15 @@
                         "number": 10,
                         "power": 511041,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -18854,7 +18948,15 @@
                         "number": 11,
                         "power": 761566,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -18978,7 +19080,15 @@
                         "number": 12,
                         "power": 1029685,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -19103,7 +19213,15 @@
                         "number": 13,
                         "power": 1520132,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -19239,7 +19357,15 @@
                         "number": 14,
                         "power": 2639835,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -19360,7 +19486,15 @@
                         "number": 15,
                         "power": 5113155,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -19471,7 +19605,15 @@
                         "number": 16,
                         "power": 10386441,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -19588,7 +19730,15 @@
                         "number": 17,
                         "power": 15084797,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -19708,7 +19858,15 @@
                         "number": 18,
                         "power": 20119276,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -29407,7 +29565,15 @@
                         "number": 1,
                         "power": 1042,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -29509,7 +29675,15 @@
                         "number": 2,
                         "power": 2996,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -29615,7 +29789,15 @@
                         "number": 3,
                         "power": 8108,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -29738,7 +29920,15 @@
                         "number": 4,
                         "power": 20133,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -29863,7 +30053,15 @@
                         "number": 5,
                         "power": 37856,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -29991,7 +30189,15 @@
                         "number": 6,
                         "power": 74726,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -30121,7 +30327,15 @@
                         "number": 7,
                         "power": 135639,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -30248,7 +30462,15 @@
                         "number": 8,
                         "power": 228269,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -30376,7 +30598,15 @@
                         "number": 9,
                         "power": 350393,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -30501,7 +30731,15 @@
                         "number": 10,
                         "power": 507277,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -30616,7 +30854,15 @@
                         "number": 11,
                         "power": 759368,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -30744,7 +30990,15 @@
                         "number": 12,
                         "power": 1012693,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -30868,7 +31122,15 @@
                         "number": 13,
                         "power": 1510614,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -30994,9 +31256,17 @@
                     {
                         "mapId": "LE3_06",
                         "number": 14,
-                        "power": 2553478,
+                        "power": 2590028,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -31084,7 +31354,7 @@
                                     "tyranNpc5Barbgaunt:28",
                                     "tyranNpc5Barbgaunt:28"
                                 ],
-                                "power": 491130,
+                                "power": 527680,
                                 "round": 8
                             }
                         ],
@@ -31126,7 +31396,15 @@
                         "number": 15,
                         "power": 5045214,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -31249,7 +31527,15 @@
                         "number": 16,
                         "power": 9993006,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -31375,7 +31661,15 @@
                         "number": 17,
                         "power": 15364826,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -31502,7 +31796,15 @@
                         "number": 18,
                         "power": 20778976,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -31629,7 +31931,15 @@
                         "number": 1,
                         "power": 1026,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -31723,7 +32033,15 @@
                         "number": 2,
                         "power": 3031,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -31836,7 +32154,15 @@
                         "number": 3,
                         "power": 8035,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -31946,7 +32272,15 @@
                         "number": 4,
                         "power": 20225,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -32072,7 +32406,15 @@
                         "number": 5,
                         "power": 40356,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -32194,7 +32536,15 @@
                         "number": 6,
                         "power": 75181,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -32318,7 +32668,15 @@
                         "number": 7,
                         "power": 136613,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -32432,7 +32790,15 @@
                         "number": 8,
                         "power": 226666,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -32554,7 +32920,15 @@
                         "number": 9,
                         "power": 334726,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -32675,7 +33049,15 @@
                         "number": 10,
                         "power": 525281,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -32797,7 +33179,15 @@
                         "number": 11,
                         "power": 755305,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -32916,7 +33306,15 @@
                         "number": 12,
                         "power": 1010428,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -33042,7 +33440,15 @@
                         "number": 13,
                         "power": 1502146,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -33166,7 +33572,15 @@
                         "number": 14,
                         "power": 2571291,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -33255,7 +33669,516 @@
                             {
                                 "type": "Acing",
                                 "target": "",
-                                "points": 50
+                                "points": 40
+                            },
+                            {
+                                "type": "Faction",
+                                "target": "BlackLegion",
+                                "points": 85
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Bolter",
+                                "points": 95
+                            },
+                            {
+                                "type": "MinHits",
+                                "target": "4",
+                                "points": 45
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "Flying",
+                                "points": 90
+                            },
+                            {
+                                "type": "NotDamageType",
+                                "target": "Bolter",
+                                "points": 60
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE1_19",
+                        "number": 15,
+                        "power": 5009272,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:28",
+                                    "eldarNpc4Wraithguard:28",
+                                    "eldarNpc4Wraithguard:28",
+                                    "eldarNpc4Wraithguard:28",
+                                    "eldarNpc1Guardian:30",
+                                    "eldarNpc1Guardian:30",
+                                    "eldarNpc1Guardian:30"
+                                ],
+                                "power": 957392,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc2Warlock:28",
+                                    "eldarNpc2Warlock:28",
+                                    "eldarNpc1Guardian:30",
+                                    "eldarNpc1Guardian:30",
+                                    "eldarNpc1Guardian:30"
+                                ],
+                                "power": 959350,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:28",
+                                    "eldarNpc4Wraithguard:28",
+                                    "eldarNpc4Wraithguard:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28"
+                                ],
+                                "power": 821160,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc2Warlock:28",
+                                    "eldarNpc2Warlock:28",
+                                    "eldarNpc2Warlock:28",
+                                    "eldarNpc2Warlock:28",
+                                    "eldarNpc1Guardian:30",
+                                    "eldarNpc1Guardian:30",
+                                    "eldarNpc1Guardian:30",
+                                    "eldarNpc1Guardian:30"
+                                ],
+                                "power": 900812,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28"
+                                ],
+                                "power": 793820,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc3Harlequin:28",
+                                    "eldarNpc2Warlock:28",
+                                    "eldarNpc2Warlock:28"
+                                ],
+                                "power": 576738,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 40
+                            },
+                            {
+                                "type": "Faction",
+                                "target": "BlackLegion",
+                                "points": 85
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Bolter",
+                                "points": 95
+                            },
+                            {
+                                "type": "MinHits",
+                                "target": "4",
+                                "points": 45
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "Flying",
+                                "points": 90
+                            },
+                            {
+                                "type": "NotDamageType",
+                                "target": "Bolter",
+                                "points": 60
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE1_26",
+                        "number": 16,
+                        "power": 10245118,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "eldarNpc2Warlock:31",
+                                    "eldarNpc2Warlock:31",
+                                    "eldarNpc2Warlock:31",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32"
+                                ],
+                                "power": 1817561,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:31",
+                                    "eldarNpc4Wraithguard:31",
+                                    "eldarNpc4Wraithguard:31",
+                                    "eldarNpc4Wraithguard:31",
+                                    "eldarNpc2Warlock:31",
+                                    "eldarNpc2Warlock:31"
+                                ],
+                                "power": 1735858,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc3Harlequin:31",
+                                    "eldarNpc3Harlequin:31",
+                                    "eldarNpc3Harlequin:31",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32"
+                                ],
+                                "power": 1829419,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:32",
+                                    "eldarNpc4Wraithguard:32",
+                                    "eldarNpc2Warlock:31",
+                                    "eldarNpc2Warlock:31"
+                                ],
+                                "power": 1444942,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc3Harlequin:31",
+                                    "eldarNpc3Harlequin:31",
+                                    "eldarNpc3Harlequin:31",
+                                    "eldarNpc3Harlequin:31",
+                                    "eldarNpc2Warlock:31",
+                                    "eldarNpc2Warlock:31",
+                                    "eldarNpc1Guardian:32",
+                                    "eldarNpc1Guardian:32"
+                                ],
+                                "power": 1580826,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:32",
+                                    "eldarNpc4Wraithguard:32",
+                                    "eldarNpc3Harlequin:31",
+                                    "eldarNpc3Harlequin:31",
+                                    "eldarNpc2Warlock:31",
+                                    "eldarNpc2Warlock:31"
+                                ],
+                                "power": 1836512,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 40
+                            },
+                            {
+                                "type": "Faction",
+                                "target": "BlackLegion",
+                                "points": 85
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Bolter",
+                                "points": 95
+                            },
+                            {
+                                "type": "MinHits",
+                                "target": "4",
+                                "points": 45
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "Flying",
+                                "points": 90
+                            },
+                            {
+                                "type": "NotDamageType",
+                                "target": "Bolter",
+                                "points": 60
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE4_03",
+                        "number": 17,
+                        "power": 14995556,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:33",
+                                    "eldarNpc4Wraithguard:33",
+                                    "eldarNpc2Warlock:34",
+                                    "eldarNpc2Warlock:34",
+                                    "eldarNpc1Guardian:34",
+                                    "eldarNpc1Guardian:34"
+                                ],
+                                "power": 2617230,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc1Guardian:34",
+                                    "eldarNpc1Guardian:34",
+                                    "eldarNpc1Guardian:34",
+                                    "eldarNpc1Guardian:34"
+                                ],
+                                "power": 2806766,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:33",
+                                    "eldarNpc4Wraithguard:33",
+                                    "eldarNpc4Wraithguard:33",
+                                    "eldarNpc2Warlock:34",
+                                    "eldarNpc2Warlock:34"
+                                ],
+                                "power": 2682086,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc2Warlock:34",
+                                    "eldarNpc2Warlock:34",
+                                    "eldarNpc1Guardian:34",
+                                    "eldarNpc1Guardian:34"
+                                ],
+                                "power": 2247144,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:33",
+                                    "eldarNpc4Wraithguard:33",
+                                    "eldarNpc2Warlock:34",
+                                    "eldarNpc2Warlock:34",
+                                    "eldarNpc1Guardian:34"
+                                ],
+                                "power": 2396737,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33",
+                                    "eldarNpc3Harlequin:33"
+                                ],
+                                "power": 2245593,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 40
+                            },
+                            {
+                                "type": "Faction",
+                                "target": "BlackLegion",
+                                "points": 85
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Bolter",
+                                "points": 95
+                            },
+                            {
+                                "type": "MinHits",
+                                "target": "4",
+                                "points": 45
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "Flying",
+                                "points": 90
+                            },
+                            {
+                                "type": "NotDamageType",
+                                "target": "Bolter",
+                                "points": 60
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE4_02",
+                        "number": 18,
+                        "power": 20346948,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:34",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc2Warlock:35",
+                                    "eldarNpc2Warlock:35",
+                                    "eldarNpc2Warlock:35"
+                                ],
+                                "power": 3822922,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:34",
+                                    "eldarNpc4Wraithguard:34",
+                                    "eldarNpc4Wraithguard:34",
+                                    "eldarNpc4Wraithguard:34"
+                                ],
+                                "power": 2985664,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc3Harlequin:35",
+                                    "eldarNpc3Harlequin:35",
+                                    "eldarNpc3Harlequin:35",
+                                    "eldarNpc3Harlequin:35",
+                                    "eldarNpc3Harlequin:35",
+                                    "eldarNpc3Harlequin:35"
+                                ],
+                                "power": 2947896,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc3Harlequin:35",
+                                    "eldarNpc3Harlequin:35",
+                                    "eldarNpc3Harlequin:35",
+                                    "eldarNpc3Harlequin:35",
+                                    "eldarNpc3Harlequin:35",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36"
+                                ],
+                                "power": 3180882,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:34",
+                                    "eldarNpc2Warlock:35",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36",
+                                    "eldarNpc1Guardian:36"
+                                ],
+                                "power": 3301000,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "eldarNpc4Wraithguard:34",
+                                    "eldarNpc4Wraithguard:34",
+                                    "eldarNpc4Wraithguard:34",
+                                    "eldarNpc2Warlock:35",
+                                    "eldarNpc2Warlock:35",
+                                    "eldarNpc2Warlock:35"
+                                ],
+                                "power": 4108584,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 52
                             },
                             {
                                 "type": "Faction",
@@ -34690,7 +35613,7 @@
                     {
                         "mapId": "LE2_tyranids_02",
                         "number": 12,
-                        "power": 1007747,
+                        "power": 1022643,
                         "tier": 1,
                         "disallowedFactions": [
                             "Tyranids",
@@ -34742,7 +35665,7 @@
                                     "tyranNpc3Termagant:24",
                                     "tyranNpc3Termagant:24"
                                 ],
-                                "power": 185936,
+                                "power": 200832,
                                 "round": 4
                             },
                             {
@@ -35065,7 +35988,524 @@
                             {
                                 "type": "Acing",
                                 "target": "",
-                                "points": 40
+                                "points": 34
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "HeavyWeapon",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Piercing",
+                                "points": 65
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "Unstoppable",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Physical",
+                                "points": 45
+                            },
+                            {
+                                "type": "MaxHits",
+                                "target": "2",
+                                "points": 75
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE2_tyranids_03",
+                        "number": 15,
+                        "power": 4998847,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Tyranids",
+                            "BlackLegion",
+                            "DeathGuard",
+                            "ThousandSons",
+                            "WorldEaters",
+                            "EmperorsChildren"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc6SporeMine:30",
+                                    "tyranNpc6SporeMine:30",
+                                    "tyranNpc6SporeMine:30",
+                                    "tyranNpc6SporeMine:30"
+                                ],
+                                "power": 918429,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:30",
+                                    "tyranNpc4Warrior:30",
+                                    "tyranNpc5Barbgaunt:32",
+                                    "tyranNpc5Barbgaunt:32",
+                                    "tyranNpc5Barbgaunt:32"
+                                ],
+                                "power": 831011,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc5Barbgaunt:32",
+                                    "tyranNpc5Barbgaunt:32",
+                                    "tyranNpc5Barbgaunt:32",
+                                    "tyranNpc5Barbgaunt:32",
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc1Hormagaunt:34"
+                                ],
+                                "power": 804809,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc1Hormagaunt:34",
+                                    "tyranNpc3Termagant:33",
+                                    "tyranNpc3Termagant:33",
+                                    "tyranNpc3Termagant:33",
+                                    "tyranNpc3Termagant:33",
+                                    "tyranNpc3Termagant:33",
+                                    "tyranNpc3Termagant:33"
+                                ],
+                                "power": 739575,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:30",
+                                    "tyranNpc3Termagant:33",
+                                    "tyranNpc3Termagant:33",
+                                    "tyranNpc3Termagant:33",
+                                    "tyranNpc3Termagant:33",
+                                    "tyranNpc2RipperSwarm:30",
+                                    "tyranNpc2RipperSwarm:30",
+                                    "tyranNpc2RipperSwarm:30",
+                                    "tyranNpc2RipperSwarm:30"
+                                ],
+                                "power": 733331,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:30",
+                                    "tyranNpc4Warrior:30",
+                                    "tyranNpc4Warrior:30",
+                                    "tyranNpc4Warrior:30"
+                                ],
+                                "power": 971692,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 34
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "HeavyWeapon",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Piercing",
+                                "points": 65
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "Unstoppable",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Physical",
+                                "points": 45
+                            },
+                            {
+                                "type": "MaxHits",
+                                "target": "2",
+                                "points": 75
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE2_tyranids_05",
+                        "number": 16,
+                        "power": 10066796,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Tyranids",
+                            "BlackLegion",
+                            "DeathGuard",
+                            "ThousandSons",
+                            "WorldEaters",
+                            "EmperorsChildren"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc2RipperSwarm:33",
+                                    "tyranNpc2RipperSwarm:33",
+                                    "tyranNpc2RipperSwarm:33"
+                                ],
+                                "power": 1961603,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc3Termagant:36",
+                                    "tyranNpc3Termagant:36"
+                                ],
+                                "power": 1663403,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc3Termagant:36",
+                                    "tyranNpc3Termagant:36",
+                                    "tyranNpc3Termagant:36",
+                                    "tyranNpc3Termagant:36",
+                                    "tyranNpc3Termagant:36",
+                                    "tyranNpc3Termagant:36"
+                                ],
+                                "power": 1473790,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc3Termagant:36",
+                                    "tyranNpc3Termagant:36",
+                                    "tyranNpc1Hormagaunt:36",
+                                    "tyranNpc1Hormagaunt:36",
+                                    "tyranNpc1Hormagaunt:36",
+                                    "tyranNpc1Hormagaunt:36",
+                                    "tyranNpc1Hormagaunt:36",
+                                    "tyranNpc1Hormagaunt:36"
+                                ],
+                                "power": 1802692,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc4Warrior:33",
+                                    "tyranNpc4Warrior:33"
+                                ],
+                                "power": 1670444,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc5Barbgaunt:36",
+                                    "tyranNpc1Hormagaunt:36",
+                                    "tyranNpc1Hormagaunt:36"
+                                ],
+                                "power": 1494864,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 34
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "HeavyWeapon",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Piercing",
+                                "points": 65
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "Unstoppable",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Physical",
+                                "points": 45
+                            },
+                            {
+                                "type": "MaxHits",
+                                "target": "2",
+                                "points": 75
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE2_tyranids_09",
+                        "number": 17,
+                        "power": 15153526,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Tyranids",
+                            "BlackLegion",
+                            "DeathGuard",
+                            "ThousandSons",
+                            "WorldEaters",
+                            "EmperorsChildren"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "tyranNpc5Barbgaunt:40",
+                                    "tyranNpc5Barbgaunt:40",
+                                    "tyranNpc5Barbgaunt:40",
+                                    "tyranNpc5Barbgaunt:40",
+                                    "tyranNpc3Termagant:40",
+                                    "tyranNpc3Termagant:40",
+                                    "tyranNpc3Termagant:40",
+                                    "tyranNpc3Termagant:40",
+                                    "tyranNpc3Termagant:40",
+                                    "tyranNpc3Termagant:40",
+                                    "tyranNpc3Termagant:40",
+                                    "tyranNpc3Termagant:40"
+                                ],
+                                "power": 2366412,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc1Hormagaunt:39",
+                                    "tyranNpc1Hormagaunt:39",
+                                    "tyranNpc1Hormagaunt:39"
+                                ],
+                                "power": 2660310,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc5Barbgaunt:40",
+                                    "tyranNpc5Barbgaunt:40",
+                                    "tyranNpc5Barbgaunt:40",
+                                    "tyranNpc5Barbgaunt:40",
+                                    "tyranNpc5Barbgaunt:40",
+                                    "tyranNpc5Barbgaunt:40",
+                                    "tyranNpc5Barbgaunt:40"
+                                ],
+                                "power": 2093427,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc1Hormagaunt:39",
+                                    "tyranNpc1Hormagaunt:39",
+                                    "tyranNpc1Hormagaunt:39",
+                                    "tyranNpc1Hormagaunt:39"
+                                ],
+                                "power": 2814268,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc6SporeMine:40",
+                                    "tyranNpc6SporeMine:40",
+                                    "tyranNpc6SporeMine:40"
+                                ],
+                                "power": 2451921,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc4Warrior:36",
+                                    "tyranNpc2RipperSwarm:38",
+                                    "tyranNpc2RipperSwarm:38",
+                                    "tyranNpc2RipperSwarm:38"
+                                ],
+                                "power": 2767188,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 34
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "HeavyWeapon",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Piercing",
+                                "points": 65
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "Unstoppable",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Physical",
+                                "points": 45
+                            },
+                            {
+                                "type": "MaxHits",
+                                "target": "2",
+                                "points": 75
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE2_tyranids_01",
+                        "number": 18,
+                        "power": 20136514,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Tyranids",
+                            "BlackLegion",
+                            "DeathGuard",
+                            "ThousandSons",
+                            "WorldEaters",
+                            "EmperorsChildren"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:40",
+                                    "tyranNpc4Warrior:40",
+                                    "tyranNpc4Warrior:40",
+                                    "tyranNpc6SporeMine:42",
+                                    "tyranNpc6SporeMine:42",
+                                    "tyranNpc6SporeMine:42",
+                                    "tyranNpc6SporeMine:42"
+                                ],
+                                "power": 3647103,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc2RipperSwarm:43",
+                                    "tyranNpc2RipperSwarm:43",
+                                    "tyranNpc2RipperSwarm:43"
+                                ],
+                                "power": 3513360,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:40",
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc3Termagant:44",
+                                    "tyranNpc3Termagant:44",
+                                    "tyranNpc3Termagant:44",
+                                    "tyranNpc3Termagant:44"
+                                ],
+                                "power": 3241616,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:40",
+                                    "tyranNpc4Warrior:40",
+                                    "tyranNpc1Hormagaunt:43",
+                                    "tyranNpc1Hormagaunt:43",
+                                    "tyranNpc1Hormagaunt:43",
+                                    "tyranNpc1Hormagaunt:43"
+                                ],
+                                "power": 2997266,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc5Barbgaunt:44",
+                                    "tyranNpc1Hormagaunt:44",
+                                    "tyranNpc1Hormagaunt:44",
+                                    "tyranNpc1Hormagaunt:44",
+                                    "tyranNpc1Hormagaunt:44",
+                                    "tyranNpc1Hormagaunt:44",
+                                    "tyranNpc1Hormagaunt:44",
+                                    "tyranNpc1Hormagaunt:44"
+                                ],
+                                "power": 2854221,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "tyranNpc4Warrior:40",
+                                    "tyranNpc4Warrior:40",
+                                    "tyranNpc4Warrior:40",
+                                    "tyranNpc3Termagant:44",
+                                    "tyranNpc3Termagant:44",
+                                    "tyranNpc3Termagant:44"
+                                ],
+                                "power": 3882948,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 42
                             },
                             {
                                 "type": "Trait",
@@ -35191,7 +36631,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -35314,7 +36754,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -35445,7 +36885,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -35579,7 +37019,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -35714,7 +37154,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -35846,7 +37286,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -35985,7 +37425,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -36119,7 +37559,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -36250,7 +37690,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -36388,7 +37828,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -36524,7 +37964,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -36665,7 +38105,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -36803,7 +38243,7 @@
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -36935,11 +38375,544 @@
                             {
                                 "type": "Acing",
                                 "target": "",
-                                "points": 38
+                                "points": 32
                             },
                             {
                                 "type": "Trait",
-                                "target": "CloseCombatWeakness",
+                                "target": "RangedSpecialist",
+                                "points": 105
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Psychic",
+                                "points": 80
+                            },
+                            {
+                                "type": "NotDamageType",
+                                "target": "Power",
+                                "points": 35
+                            },
+                            {
+                                "type": "MinHits",
+                                "target": "5",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Physical",
+                                "points": 60
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE3_19",
+                        "number": 15,
+                        "power": 5146014,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Ultramarines",
+                            "Sisterhood",
+                            "AstraMilitarum",
+                            "BlackTemplars",
+                            "SpaceWolves",
+                            "DarkAngels",
+                            "AdeptusMechanicus",
+                            "BloodAngels",
+                            "Custodes"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "templNpc1Initiate:30",
+                                    "templNpc1Initiate:30",
+                                    "templNpc1Initiate:30",
+                                    "templNpc1Initiate:30",
+                                    "templNpc1Initiate:30",
+                                    "templNpc1Initiate:30",
+                                    "templNpc1Initiate:30",
+                                    "ultraNpc1Inceptor:31",
+                                    "ultraNpc1Inceptor:31"
+                                ],
+                                "power": 817874,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc2Eliminator:32",
+                                    "ultraNpc2Eliminator:32",
+                                    "ultraNpc2Eliminator:32",
+                                    "ultraNpc2Eliminator:32"
+                                ],
+                                "power": 911022,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc4HeavyIntercessor:29",
+                                    "ultraNpc4HeavyIntercessor:29",
+                                    "ultraNpc4HeavyIntercessor:29",
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc1Inceptor:32"
+                                ],
+                                "power": 727410,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc2Eliminator:32",
+                                    "ultraNpc2Eliminator:32",
+                                    "ultraNpc2Eliminator:32",
+                                    "ultraNpc2Eliminator:32",
+                                    "ultraNpc2Eliminator:32",
+                                    "templNpc2Neophyte:31",
+                                    "templNpc2Neophyte:31"
+                                ],
+                                "power": 917774,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc1Inceptor:32",
+                                    "ultraNpc2Eliminator:32"
+                                ],
+                                "power": 841668,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc4HeavyIntercessor:29",
+                                    "ultraNpc4HeavyIntercessor:29",
+                                    "ultraNpc1Inceptor:31",
+                                    "ultraNpc1Inceptor:31",
+                                    "ultraNpc1Inceptor:31",
+                                    "ultraNpc1Inceptor:31",
+                                    "ultraNpc2Eliminator:31",
+                                    "ultraNpc2Eliminator:31",
+                                    "ultraNpc2Eliminator:31"
+                                ],
+                                "power": 930266,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 32
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "RangedSpecialist",
+                                "points": 105
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Psychic",
+                                "points": 80
+                            },
+                            {
+                                "type": "NotDamageType",
+                                "target": "Power",
+                                "points": 35
+                            },
+                            {
+                                "type": "MinHits",
+                                "target": "5",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Physical",
+                                "points": 60
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE3_23",
+                        "number": 16,
+                        "power": 10115278,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Ultramarines",
+                            "Sisterhood",
+                            "AstraMilitarum",
+                            "BlackTemplars",
+                            "SpaceWolves",
+                            "DarkAngels",
+                            "AdeptusMechanicus",
+                            "BloodAngels",
+                            "Custodes"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35"
+                                ],
+                                "power": 1677294,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc2Eliminator:36",
+                                    "ultraNpc2Eliminator:36",
+                                    "ultraNpc2Eliminator:36",
+                                    "ultraNpc2Eliminator:36",
+                                    "ultraNpc2Eliminator:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36"
+                                ],
+                                "power": 1526547,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc4HeavyIntercessor:32",
+                                    "ultraNpc4HeavyIntercessor:32"
+                                ],
+                                "power": 1682026,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc2Eliminator:35",
+                                    "ultraNpc2Eliminator:35",
+                                    "ultraNpc2Eliminator:35",
+                                    "ultraNpc2Eliminator:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35"
+                                ],
+                                "power": 1763300,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc4HeavyIntercessor:32",
+                                    "ultraNpc4HeavyIntercessor:32",
+                                    "ultraNpc4HeavyIntercessor:32",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36",
+                                    "astraNpc1Guardsman:36"
+                                ],
+                                "power": 1652631,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc1Inceptor:35",
+                                    "ultraNpc2Eliminator:35",
+                                    "ultraNpc2Eliminator:35"
+                                ],
+                                "power": 1813480,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 32
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "RangedSpecialist",
+                                "points": 105
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Psychic",
+                                "points": 80
+                            },
+                            {
+                                "type": "NotDamageType",
+                                "target": "Power",
+                                "points": 35
+                            },
+                            {
+                                "type": "MinHits",
+                                "target": "5",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Physical",
+                                "points": 60
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE3_20",
+                        "number": 17,
+                        "power": 15248249,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Ultramarines",
+                            "Sisterhood",
+                            "AstraMilitarum",
+                            "BlackTemplars",
+                            "SpaceWolves",
+                            "DarkAngels",
+                            "AdeptusMechanicus",
+                            "BloodAngels",
+                            "Custodes"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "ultraNpc2Eliminator:38",
+                                    "ultraNpc2Eliminator:38",
+                                    "ultraNpc2Eliminator:38",
+                                    "ultraNpc4HeavyIntercessor:35",
+                                    "ultraNpc4HeavyIntercessor:35"
+                                ],
+                                "power": 2568183,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc1Inceptor:38",
+                                    "ultraNpc1Inceptor:38",
+                                    "ultraNpc1Inceptor:38",
+                                    "ultraNpc1Inceptor:38",
+                                    "ultraNpc1Inceptor:38",
+                                    "ultraNpc1Inceptor:38"
+                                ],
+                                "power": 1597944,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc4HeavyIntercessor:35",
+                                    "templNpc2Neophyte:38",
+                                    "templNpc2Neophyte:38",
+                                    "templNpc2Neophyte:38",
+                                    "templNpc2Neophyte:38",
+                                    "templNpc2Neophyte:38",
+                                    "templNpc2Neophyte:38"
+                                ],
+                                "power": 2306955,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc4HeavyIntercessor:35",
+                                    "ultraNpc4HeavyIntercessor:35",
+                                    "ultraNpc1Inceptor:38",
+                                    "ultraNpc1Inceptor:38",
+                                    "ultraNpc1Inceptor:38",
+                                    "ultraNpc1Inceptor:38"
+                                ],
+                                "power": 2629514,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc2Eliminator:38",
+                                    "ultraNpc2Eliminator:38",
+                                    "ultraNpc2Eliminator:38",
+                                    "ultraNpc2Eliminator:38",
+                                    "ultraNpc2Eliminator:38",
+                                    "ultraNpc2Eliminator:38",
+                                    "templNpc1Initiate:38",
+                                    "templNpc1Initiate:38",
+                                    "templNpc1Initiate:38"
+                                ],
+                                "power": 3000354,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc4HeavyIntercessor:35",
+                                    "ultraNpc4HeavyIntercessor:35",
+                                    "ultraNpc4HeavyIntercessor:35",
+                                    "ultraNpc1Inceptor:38",
+                                    "ultraNpc1Inceptor:38",
+                                    "ultraNpc1Inceptor:38"
+                                ],
+                                "power": 3145299,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 32
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "RangedSpecialist",
+                                "points": 105
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Psychic",
+                                "points": 80
+                            },
+                            {
+                                "type": "NotDamageType",
+                                "target": "Power",
+                                "points": 35
+                            },
+                            {
+                                "type": "MinHits",
+                                "target": "5",
+                                "points": 95
+                            },
+                            {
+                                "type": "DamageType",
+                                "target": "Physical",
+                                "points": 60
+                            }
+                        ]
+                    },
+                    {
+                        "mapId": "LE3_22",
+                        "number": 18,
+                        "power": 20017855,
+                        "tier": 1,
+                        "disallowedFactions": [
+                            "Ultramarines",
+                            "Sisterhood",
+                            "AstraMilitarum",
+                            "BlackTemplars",
+                            "SpaceWolves",
+                            "DarkAngels",
+                            "AdeptusMechanicus",
+                            "BloodAngels",
+                            "Custodes"
+                        ],
+                        "waves": [
+                            {
+                                "enemies": [
+                                    "ultraNpc4HeavyIntercessor:39",
+                                    "ultraNpc4HeavyIntercessor:39",
+                                    "ultraNpc1Inceptor:40",
+                                    "ultraNpc1Inceptor:40",
+                                    "ultraNpc1Inceptor:40",
+                                    "ultraNpc1Inceptor:40",
+                                    "ultraNpc1Inceptor:40"
+                                ],
+                                "power": 3835375,
+                                "round": 1
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc2Eliminator:40",
+                                    "ultraNpc2Eliminator:40",
+                                    "ultraNpc2Eliminator:40",
+                                    "ultraNpc2Eliminator:40",
+                                    "ultraNpc2Eliminator:40",
+                                    "astraNpc1Guardsman:42",
+                                    "astraNpc1Guardsman:42",
+                                    "astraNpc1Guardsman:42",
+                                    "astraNpc1Guardsman:42",
+                                    "astraNpc1Guardsman:42"
+                                ],
+                                "power": 2222525,
+                                "round": 3
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc2Eliminator:40",
+                                    "ultraNpc2Eliminator:40",
+                                    "ultraNpc2Eliminator:40",
+                                    "ultraNpc2Eliminator:40",
+                                    "ultraNpc2Eliminator:40",
+                                    "templNpc2Neophyte:40",
+                                    "templNpc2Neophyte:40",
+                                    "templNpc2Neophyte:40",
+                                    "templNpc2Neophyte:40"
+                                ],
+                                "power": 3128686,
+                                "round": 4
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc4HeavyIntercessor:39",
+                                    "ultraNpc4HeavyIntercessor:39",
+                                    "templNpc1Initiate:40",
+                                    "templNpc1Initiate:40",
+                                    "templNpc1Initiate:40",
+                                    "templNpc1Initiate:40"
+                                ],
+                                "power": 3760568,
+                                "round": 5
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc4HeavyIntercessor:39",
+                                    "ultraNpc1Inceptor:40",
+                                    "ultraNpc1Inceptor:40",
+                                    "ultraNpc1Inceptor:40",
+                                    "ultraNpc1Inceptor:40",
+                                    "ultraNpc1Inceptor:40",
+                                    "templNpc2Neophyte:40",
+                                    "templNpc2Neophyte:40"
+                                ],
+                                "power": 3310133,
+                                "round": 6
+                            },
+                            {
+                                "enemies": [
+                                    "ultraNpc4HeavyIntercessor:39",
+                                    "ultraNpc4HeavyIntercessor:39",
+                                    "templNpc1Initiate:40",
+                                    "templNpc1Initiate:40",
+                                    "templNpc1Initiate:40",
+                                    "templNpc1Initiate:40"
+                                ],
+                                "power": 3760568,
+                                "round": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "type": "Acing",
+                                "target": "",
+                                "points": 40
+                            },
+                            {
+                                "type": "Trait",
+                                "target": "RangedSpecialist",
                                 "points": 105
                             },
                             {
@@ -39358,7 +41331,15 @@
                         "number": 1,
                         "power": 1083,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -39465,7 +41446,15 @@
                         "number": 2,
                         "power": 2996,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -39570,9 +41559,17 @@
                     {
                         "mapId": "LE2_13",
                         "number": 3,
-                        "power": 8227,
+                        "power": 8312,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -39584,7 +41581,7 @@
                                     "tauNpc6Carnivore:8",
                                     "tauNpc6Carnivore:8"
                                 ],
-                                "power": 1506,
+                                "power": 1504,
                                 "round": 1
                             },
                             {
@@ -39596,7 +41593,7 @@
                                     "tauNpc6Carnivore:9",
                                     "tauNpc6Carnivore:9"
                                 ],
-                                "power": 1269,
+                                "power": 1263,
                                 "round": 3
                             },
                             {
@@ -39608,7 +41605,7 @@
                                     "tauNpc6Carnivore:9",
                                     "tauNpc6Carnivore:9"
                                 ],
-                                "power": 1266,
+                                "power": 1303,
                                 "round": 4
                             },
                             {
@@ -39621,7 +41618,7 @@
                                     "tauNpc6Carnivore:8",
                                     "tauNpc6Carnivore:8"
                                 ],
-                                "power": 1378,
+                                "power": 1450,
                                 "round": 5
                             },
                             {
@@ -39647,7 +41644,7 @@
                                     "tauNpc1FireWarrior:9",
                                     "tauNpc1FireWarrior:9"
                                 ],
-                                "power": 1488,
+                                "power": 1472,
                                 "round": 8
                             }
                         ],
@@ -39687,9 +41684,17 @@
                     {
                         "mapId": "LE2_05",
                         "number": 4,
-                        "power": 19983,
+                        "power": 20758,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -39702,7 +41707,7 @@
                                     "tauNpc1FireWarrior:11",
                                     "tauNpc1FireWarrior:11"
                                 ],
-                                "power": 3384,
+                                "power": 3368,
                                 "round": 1
                             },
                             {
@@ -39716,7 +41721,7 @@
                                     "tauNpc2DroneSniper:11",
                                     "tauNpc2DroneSniper:11"
                                 ],
-                                "power": 3148,
+                                "power": 3472,
                                 "round": 3
                             },
                             {
@@ -39733,7 +41738,7 @@
                                     "tauNpc1FireWarrior:10",
                                     "tauNpc1FireWarrior:10"
                                 ],
-                                "power": 3113,
+                                "power": 3091,
                                 "round": 4
                             },
                             {
@@ -39747,7 +41752,7 @@
                                     "tauNpc2DroneSniper:11",
                                     "tauNpc2DroneSniper:11"
                                 ],
-                                "power": 3269,
+                                "power": 3510,
                                 "round": 5
                             },
                             {
@@ -39763,7 +41768,7 @@
                                     "tauNpc1FireWarrior:10",
                                     "tauNpc2DroneSniper:12"
                                 ],
-                                "power": 3066,
+                                "power": 3168,
                                 "round": 6
                             },
                             {
@@ -39776,7 +41781,7 @@
                                     "tauNpc2DroneSniper:11",
                                     "tauNpc2DroneSniper:11"
                                 ],
-                                "power": 4003,
+                                "power": 4149,
                                 "round": 8
                             }
                         ],
@@ -39816,9 +41821,17 @@
                     {
                         "mapId": "LE2_16",
                         "number": 5,
-                        "power": 40477,
+                        "power": 41112,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -39831,7 +41844,7 @@
                                     "tauNpc6Carnivore:12",
                                     "tauNpc1FireWarrior:13"
                                 ],
-                                "power": 5819,
+                                "power": 5816,
                                 "round": 1
                             },
                             {
@@ -39854,7 +41867,7 @@
                                     "tauNpc6Carnivore:13",
                                     "tauNpc5StealthSuit:12"
                                 ],
-                                "power": 6797,
+                                "power": 7096,
                                 "round": 4
                             },
                             {
@@ -39866,7 +41879,7 @@
                                     "tauNpc1FireWarrior:13",
                                     "tauNpc1FireWarrior:13"
                                 ],
-                                "power": 5952,
+                                "power": 5943,
                                 "round": 5
                             },
                             {
@@ -39895,7 +41908,7 @@
                                     "tauNpc2DroneSniper:12",
                                     "tauNpc2DroneSniper:12"
                                 ],
-                                "power": 8407,
+                                "power": 8755,
                                 "round": 8
                             }
                         ],
@@ -39935,9 +41948,17 @@
                     {
                         "mapId": "LE2_15",
                         "number": 6,
-                        "power": 75637,
+                        "power": 80521,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -39950,7 +41971,7 @@
                                     "tauNpc6Carnivore:13",
                                     "tauNpc6Carnivore:13"
                                 ],
-                                "power": 16165,
+                                "power": 17644,
                                 "round": 1
                             },
                             {
@@ -39977,7 +41998,7 @@
                                     "tauNpc1FireWarrior:13",
                                     "tauNpc2DroneSniper:12"
                                 ],
-                                "power": 9679,
+                                "power": 10779,
                                 "round": 4
                             },
                             {
@@ -39994,7 +42015,7 @@
                                     "tauNpc2DroneSniper:12",
                                     "tauNpc2DroneSniper:12"
                                 ],
-                                "power": 9305,
+                                "power": 9650,
                                 "round": 5
                             },
                             {
@@ -40009,7 +42030,7 @@
                                     "tauNpc1FireWarrior:13",
                                     "tauNpc1FireWarrior:13"
                                 ],
-                                "power": 13686,
+                                "power": 14173,
                                 "round": 6
                             },
                             {
@@ -40024,7 +42045,7 @@
                                     "tauNpc3DroneShield:13",
                                     "tauNpc3DroneShield:13"
                                 ],
-                                "power": 15942,
+                                "power": 17415,
                                 "round": 8
                             }
                         ],
@@ -40064,9 +42085,17 @@
                     {
                         "mapId": "LE2_14",
                         "number": 7,
-                        "power": 134794,
+                        "power": 142368,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -40091,7 +42120,7 @@
                                     "tauNpc2DroneSniper:17",
                                     "tauNpc2DroneSniper:17"
                                 ],
-                                "power": 20129,
+                                "power": 21863,
                                 "round": 3
                             },
                             {
@@ -40106,7 +42135,7 @@
                                     "tauNpc3DroneShield:15",
                                     "tauNpc3DroneShield:15"
                                 ],
-                                "power": 21925,
+                                "power": 23105,
                                 "round": 4
                             },
                             {
@@ -40121,7 +42150,7 @@
                                     "tauNpc2DroneSniper:17",
                                     "tauNpc2DroneSniper:17"
                                 ],
-                                "power": 21535,
+                                "power": 24461,
                                 "round": 5
                             },
                             {
@@ -40135,7 +42164,7 @@
                                     "tauNpc1FireWarrior:17",
                                     "tauNpc1FireWarrior:17"
                                 ],
-                                "power": 22860,
+                                "power": 22842,
                                 "round": 6
                             },
                             {
@@ -40151,7 +42180,7 @@
                                     "tauNpc3DroneShield:17",
                                     "tauNpc3DroneShield:17"
                                 ],
-                                "power": 25728,
+                                "power": 27480,
                                 "round": 8
                             }
                         ],
@@ -40191,9 +42220,17 @@
                     {
                         "mapId": "LE2_12",
                         "number": 8,
-                        "power": 223113,
+                        "power": 237951,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -40206,7 +42243,7 @@
                                     "tauNpc6Carnivore:18",
                                     "tauNpc6Carnivore:18"
                                 ],
-                                "power": 37670,
+                                "power": 39210,
                                 "round": 1
                             },
                             {
@@ -40222,7 +42259,7 @@
                                     "tauNpc2DroneSniper:19",
                                     "tauNpc2DroneSniper:19"
                                 ],
-                                "power": 34439,
+                                "power": 37295,
                                 "round": 3
                             },
                             {
@@ -40233,7 +42270,7 @@
                                     "tauNpc5StealthSuit:16",
                                     "tauNpc1FireWarrior:18"
                                 ],
-                                "power": 35419,
+                                "power": 40054,
                                 "round": 4
                             },
                             {
@@ -40267,7 +42304,7 @@
                                     "tauNpc1FireWarrior:18",
                                     "tauNpc2DroneSniper:17"
                                 ],
-                                "power": 36902,
+                                "power": 37465,
                                 "round": 6
                             },
                             {
@@ -40282,7 +42319,7 @@
                                     "tauNpc2DroneSniper:17",
                                     "tauNpc2DroneSniper:17"
                                 ],
-                                "power": 39911,
+                                "power": 45155,
                                 "round": 8
                             }
                         ],
@@ -40322,9 +42359,17 @@
                     {
                         "mapId": "LE2_03",
                         "number": 9,
-                        "power": 352372,
+                        "power": 368179,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -40333,7 +42378,7 @@
                                     "tauNpc1FireWarrior:24",
                                     "tauNpc1FireWarrior:24"
                                 ],
-                                "power": 59564,
+                                "power": 59492,
                                 "round": 1
                             },
                             {
@@ -40358,7 +42403,7 @@
                                     "tauNpc6Carnivore:20",
                                     "tauNpc6Carnivore:20"
                                 ],
-                                "power": 57757,
+                                "power": 61860,
                                 "round": 4
                             },
                             {
@@ -40373,7 +42418,7 @@
                                     "tauNpc1FireWarrior:21",
                                     "tauNpc2DroneSniper:20"
                                 ],
-                                "power": 55363,
+                                "power": 56492,
                                 "round": 5
                             },
                             {
@@ -40384,7 +42429,7 @@
                                     "tauNpc1FireWarrior:20",
                                     "tauNpc6Carnivore:20"
                                 ],
-                                "power": 59332,
+                                "power": 65392,
                                 "round": 6
                             },
                             {
@@ -40399,7 +42444,7 @@
                                     "tauNpc2DroneSniper:21",
                                     "tauNpc2DroneSniper:21"
                                 ],
-                                "power": 63207,
+                                "power": 67794,
                                 "round": 8
                             }
                         ],
@@ -40439,9 +42484,17 @@
                     {
                         "mapId": "LE2_06",
                         "number": 10,
-                        "power": 502841,
+                        "power": 530563,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -40471,7 +42524,7 @@
                                     "tauNpc2DroneSniper:22",
                                     "tauNpc2DroneSniper:22"
                                 ],
-                                "power": 86117,
+                                "power": 97332,
                                 "round": 3
                             },
                             {
@@ -40485,7 +42538,7 @@
                                     "tauNpc1FireWarrior:22",
                                     "tauNpc3DroneShield:21"
                                 ],
-                                "power": 82971,
+                                "power": 85931,
                                 "round": 4
                             },
                             {
@@ -40501,7 +42554,7 @@
                                     "tauNpc3DroneShield:20",
                                     "tauNpc2DroneSniper:21"
                                 ],
-                                "power": 79447,
+                                "power": 80906,
                                 "round": 5
                             },
                             {
@@ -40514,7 +42567,7 @@
                                     "tauNpc1FireWarrior:20",
                                     "tauNpc1FireWarrior:20"
                                 ],
-                                "power": 82878,
+                                "power": 88928,
                                 "round": 6
                             },
                             {
@@ -40530,7 +42583,7 @@
                                     "tauNpc2DroneSniper:21",
                                     "tauNpc2DroneSniper:21"
                                 ],
-                                "power": 86968,
+                                "power": 93006,
                                 "round": 8
                             }
                         ],
@@ -40570,9 +42623,17 @@
                     {
                         "mapId": "LE2_13",
                         "number": 11,
-                        "power": 757384,
+                        "power": 817410,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -40586,7 +42647,7 @@
                                     "tauNpc3DroneShield:21",
                                     "tauNpc3DroneShield:21"
                                 ],
-                                "power": 127891,
+                                "power": 136097,
                                 "round": 1
                             },
                             {
@@ -40602,7 +42663,7 @@
                                     "tauNpc2DroneSniper:23",
                                     "tauNpc2DroneSniper:23"
                                 ],
-                                "power": 124280,
+                                "power": 135905,
                                 "round": 3
                             },
                             {
@@ -40619,7 +42680,7 @@
                                     "tauNpc2DroneSniper:23",
                                     "tauNpc2DroneSniper:23"
                                 ],
-                                "power": 117191,
+                                "power": 126483,
                                 "round": 4
                             },
                             {
@@ -40634,7 +42695,7 @@
                                     "tauNpc3DroneShield:21",
                                     "tauNpc3DroneShield:21"
                                 ],
-                                "power": 118581,
+                                "power": 130741,
                                 "round": 5
                             },
                             {
@@ -40648,7 +42709,7 @@
                                     "tauNpc6Carnivore:24",
                                     "tauNpc2DroneSniper:23"
                                 ],
-                                "power": 121430,
+                                "power": 123737,
                                 "round": 6
                             },
                             {
@@ -40663,7 +42724,7 @@
                                     "tauNpc2DroneSniper:22",
                                     "tauNpc2DroneSniper:22"
                                 ],
-                                "power": 148011,
+                                "power": 164447,
                                 "round": 8
                             }
                         ],
@@ -40703,9 +42764,17 @@
                     {
                         "mapId": "LE2_05",
                         "number": 12,
-                        "power": 1006503,
+                        "power": 1031858,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -40719,7 +42788,7 @@
                                     "tauNpc6Carnivore:23",
                                     "tauNpc6Carnivore:23"
                                 ],
-                                "power": 170984,
+                                "power": 179846,
                                 "round": 1
                             },
                             {
@@ -40735,7 +42804,7 @@
                                     "tauNpc6Carnivore:24",
                                     "tauNpc6Carnivore:24"
                                 ],
-                                "power": 161373,
+                                "power": 164560,
                                 "round": 3
                             },
                             {
@@ -40748,7 +42817,7 @@
                                     "tauNpc2DroneSniper:24",
                                     "tauNpc2DroneSniper:24"
                                 ],
-                                "power": 172274,
+                                "power": 167422,
                                 "round": 4
                             },
                             {
@@ -40763,7 +42832,7 @@
                                     "tauNpc3DroneShield:24",
                                     "tauNpc2DroneSniper:24"
                                 ],
-                                "power": 141631,
+                                "power": 144800,
                                 "round": 5
                             },
                             {
@@ -40775,7 +42844,7 @@
                                     "tauNpc2DroneSniper:22",
                                     "tauNpc2DroneSniper:22"
                                 ],
-                                "power": 171373,
+                                "power": 194509,
                                 "round": 6
                             },
                             {
@@ -40791,7 +42860,7 @@
                                     "tauNpc2DroneSniper:22",
                                     "tauNpc2DroneSniper:22"
                                 ],
-                                "power": 188868,
+                                "power": 180721,
                                 "round": 8
                             }
                         ],
@@ -40831,9 +42900,17 @@
                     {
                         "mapId": "LE2_16",
                         "number": 13,
-                        "power": 1513001,
+                        "power": 1537869,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -40847,7 +42924,7 @@
                                     "tauNpc2DroneSniper:24",
                                     "tauNpc1FireWarrior:23"
                                 ],
-                                "power": 246452,
+                                "power": 270604,
                                 "round": 1
                             },
                             {
@@ -40863,7 +42940,7 @@
                                     "tauNpc3DroneShield:25",
                                     "tauNpc3DroneShield:25"
                                 ],
-                                "power": 198707,
+                                "power": 198623,
                                 "round": 3
                             },
                             {
@@ -40875,7 +42952,7 @@
                                     "tauNpc1FireWarrior:23",
                                     "tauNpc1FireWarrior:23"
                                 ],
-                                "power": 267326,
+                                "power": 270580,
                                 "round": 4
                             },
                             {
@@ -40891,7 +42968,7 @@
                                     "tauNpc1FireWarrior:23",
                                     "tauNpc1FireWarrior:23"
                                 ],
-                                "power": 256279,
+                                "power": 241485,
                                 "round": 5
                             },
                             {
@@ -40924,7 +43001,7 @@
                                     "tauNpc3DroneShield:25",
                                     "tauNpc3DroneShield:25"
                                 ],
-                                "power": 315997,
+                                "power": 328337,
                                 "round": 8
                             }
                         ],
@@ -40964,9 +43041,17 @@
                     {
                         "mapId": "LE2_15",
                         "number": 14,
-                        "power": 2521016,
+                        "power": 2689848,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -40983,7 +43068,7 @@
                                     "tauNpc3DroneShield:28",
                                     "tauNpc3DroneShield:28"
                                 ],
-                                "power": 410317,
+                                "power": 409932,
                                 "round": 1
                             },
                             {
@@ -40996,7 +43081,7 @@
                                     "tauNpc2DroneSniper:30",
                                     "tauNpc2DroneSniper:30"
                                 ],
-                                "power": 409385,
+                                "power": 451433,
                                 "round": 3
                             },
                             {
@@ -41006,7 +43091,7 @@
                                     "tauNpc5StealthSuit:27",
                                     "tauNpc5StealthSuit:27"
                                 ],
-                                "power": 404428,
+                                "power": 457512,
                                 "round": 4
                             },
                             {
@@ -41021,7 +43106,7 @@
                                     "tauNpc3DroneShield:28",
                                     "tauNpc3DroneShield:28"
                                 ],
-                                "power": 436371,
+                                "power": 435849,
                                 "round": 5
                             },
                             {
@@ -41036,7 +43121,7 @@
                                     "tauNpc3DroneShield:28",
                                     "tauNpc2DroneSniper:30"
                                 ],
-                                "power": 415075,
+                                "power": 442210,
                                 "round": 6
                             },
                             {
@@ -41054,7 +43139,7 @@
                                     "tauNpc2DroneSniper:29",
                                     "tauNpc2DroneSniper:29"
                                 ],
-                                "power": 445440,
+                                "power": 492912,
                                 "round": 8
                             }
                         ],
@@ -41094,9 +43179,17 @@
                     {
                         "mapId": "LE2_14",
                         "number": 15,
-                        "power": 5055772,
+                        "power": 5286317,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -41126,7 +43219,7 @@
                                     "tauNpc3DroneShield:32",
                                     "tauNpc1FireWarrior:31"
                                 ],
-                                "power": 897282,
+                                "power": 897171,
                                 "round": 3
                             },
                             {
@@ -41139,7 +43232,7 @@
                                     "tauNpc5StealthSuit:30",
                                     "tauNpc5StealthSuit:30"
                                 ],
-                                "power": 836126,
+                                "power": 911057,
                                 "round": 4
                             },
                             {
@@ -41154,7 +43247,7 @@
                                     "tauNpc2DroneSniper:32",
                                     "tauNpc2DroneSniper:32"
                                 ],
-                                "power": 846072,
+                                "power": 938733,
                                 "round": 5
                             },
                             {
@@ -41167,7 +43260,7 @@
                                     "tauNpc1FireWarrior:32",
                                     "tauNpc2DroneSniper:32"
                                 ],
-                                "power": 767403,
+                                "power": 790311,
                                 "round": 6
                             },
                             {
@@ -41185,7 +43278,7 @@
                                     "tauNpc2DroneSniper:31",
                                     "tauNpc2DroneSniper:31"
                                 ],
-                                "power": 853947,
+                                "power": 894103,
                                 "round": 8
                             }
                         ],
@@ -41225,9 +43318,17 @@
                     {
                         "mapId": "LE2_12",
                         "number": 16,
-                        "power": 9831883,
+                        "power": 10320383,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -41236,7 +43337,7 @@
                                     "tauNpc5StealthSuit:32",
                                     "tauNpc5StealthSuit:32"
                                 ],
-                                "power": 1687632,
+                                "power": 1937704,
                                 "round": 1
                             },
                             {
@@ -41253,7 +43354,7 @@
                                     "tauNpc2DroneSniper:34",
                                     "tauNpc2DroneSniper:34"
                                 ],
-                                "power": 1662506,
+                                "power": 1832840,
                                 "round": 3
                             },
                             {
@@ -41268,7 +43369,7 @@
                                     "tauNpc1FireWarrior:34",
                                     "tauNpc1FireWarrior:34"
                                 ],
-                                "power": 1656703,
+                                "power": 1656121,
                                 "round": 4
                             },
                             {
@@ -41285,7 +43386,7 @@
                                     "tauNpc3DroneShield:33",
                                     "tauNpc3DroneShield:33"
                                 ],
-                                "power": 1433696,
+                                "power": 1431950,
                                 "round": 5
                             },
                             {
@@ -41302,7 +43403,7 @@
                                     "tauNpc2DroneSniper:34",
                                     "tauNpc2DroneSniper:34"
                                 ],
-                                "power": 1651848,
+                                "power": 1720149,
                                 "round": 6
                             },
                             {
@@ -41317,7 +43418,7 @@
                                     "tauNpc1FireWarrior:34",
                                     "tauNpc1FireWarrior:34"
                                 ],
-                                "power": 1739498,
+                                "power": 1741619,
                                 "round": 8
                             }
                         ],
@@ -41357,9 +43458,17 @@
                     {
                         "mapId": "LE2_13",
                         "number": 17,
-                        "power": 15067499,
+                        "power": 16010457,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -41373,7 +43482,7 @@
                                     "tauNpc6Carnivore:37",
                                     "tauNpc6Carnivore:37"
                                 ],
-                                "power": 2492490,
+                                "power": 2679991,
                                 "round": 1
                             },
                             {
@@ -41387,7 +43496,7 @@
                                     "tauNpc2DroneSniper:40",
                                     "tauNpc2DroneSniper:40"
                                 ],
-                                "power": 2515410,
+                                "power": 2824161,
                                 "round": 3
                             },
                             {
@@ -41420,7 +43529,7 @@
                                     "tauNpc1FireWarrior:37",
                                     "tauNpc1FireWarrior:37"
                                 ],
-                                "power": 2430276,
+                                "power": 2426304,
                                 "round": 5
                             },
                             {
@@ -41433,7 +43542,7 @@
                                     "tauNpc6Carnivore:37",
                                     "tauNpc6Carnivore:37"
                                 ],
-                                "power": 2565721,
+                                "power": 2758511,
                                 "round": 6
                             },
                             {
@@ -41451,7 +43560,7 @@
                                     "tauNpc2DroneSniper:40",
                                     "tauNpc2DroneSniper:40"
                                 ],
-                                "power": 2523586,
+                                "power": 2781474,
                                 "round": 8
                             }
                         ],
@@ -41491,9 +43600,17 @@
                     {
                         "mapId": "LE2_16",
                         "number": 18,
-                        "power": 20145103,
+                        "power": 21679263,
                         "tier": 1,
-                        "disallowedFactions": ["Necrons", "Tyranids", "Orks", "Aeldari", "Tau", "Genestealers"],
+                        "disallowedFactions": [
+                            "Necrons",
+                            "Tyranids",
+                            "Orks",
+                            "Aeldari",
+                            "Tau",
+                            "Genestealers",
+                            "LeaguesOfVotann"
+                        ],
                         "waves": [
                             {
                                 "enemies": [
@@ -41506,7 +43623,7 @@
                                     "tauNpc3DroneShield:40",
                                     "tauNpc3DroneShield:40"
                                 ],
-                                "power": 3364061,
+                                "power": 3653246,
                                 "round": 1
                             },
                             {
@@ -41524,7 +43641,7 @@
                                     "tauNpc2DroneSniper:40",
                                     "tauNpc2DroneSniper:40"
                                 ],
-                                "power": 3055827,
+                                "power": 3313422,
                                 "round": 3
                             },
                             {
@@ -41540,7 +43657,7 @@
                                     "tauNpc3DroneShield:40",
                                     "tauNpc3DroneShield:40"
                                 ],
-                                "power": 3523907,
+                                "power": 3716697,
                                 "round": 4
                             },
                             {
@@ -41558,7 +43675,7 @@
                                     "tauNpc2DroneSniper:40",
                                     "tauNpc2DroneSniper:40"
                                 ],
-                                "power": 3431927,
+                                "power": 3534704,
                                 "round": 5
                             },
                             {
@@ -41568,7 +43685,7 @@
                                     "tauNpc5StealthSuit:37",
                                     "tauNpc5StealthSuit:37"
                                 ],
-                                "power": 3236496,
+                                "power": 3666788,
                                 "round": 6
                             },
                             {
@@ -41586,7 +43703,7 @@
                                     "tauNpc3DroneShield:40",
                                     "tauNpc3DroneShield:40"
                                 ],
-                                "power": 3532885,
+                                "power": 3794406,
                                 "round": 8
                             }
                         ],

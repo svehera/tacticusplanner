@@ -38,8 +38,8 @@
             "link": "https://tacticus.wiki.gg/wiki/Aeldari#NPC_Units"
         },
         "killPoints": 40,
-        "battlesPoints": [25, 36, 33, 49, 45, 47, 37, 45, 44, 45, 42, 49, 47, 46],
-        "defeatAll": [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 50]
+        "battlesPoints": [25, 36, 33, 49, 45, 47, 37, 45, 44, 45, 42, 49, 47, 46, 42, 45, 39, 43],
+        "defeatAll": [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 52]
     },
     "beta": {
         "name": "Beta (No Chaos or Tyranids)",
@@ -48,8 +48,8 @@
             "link": "https://tacticus.wiki.gg/wiki/Tyranids#NPC_Units"
         },
         "killPoints": 34,
-        "battlesPoints": [27, 34, 42, 41, 47, 44, 48, 44, 56, 46, 50, 50, 56, 49],
-        "defeatAll": [34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 40]
+        "battlesPoints": [27, 34, 42, 41, 47, 44, 48, 44, 56, 46, 50, 50, 56, 49, 45, 46, 44, 46],
+        "defeatAll": [34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 42]
     },
     "gamma": {
         "name": "Gamma (No Imperials)",
@@ -58,8 +58,8 @@
             "link": "https://tacticus.wiki.gg/wiki/Ultramarines#NPC_Units"
         },
         "killPoints": 32,
-        "battlesPoints": [31, 36, 44, 47, 48, 45, 52, 47, 44, 51, 49, 54, 51, 49],
-        "defeatAll": [32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 38]
+        "battlesPoints": [31, 36, 44, 47, 48, 45, 52, 47, 44, 51, 49, 54, 51, 49, 45, 55, 39, 46],
+        "defeatAll": [32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 40]
     },
     "pointsMilestones": [
         {
