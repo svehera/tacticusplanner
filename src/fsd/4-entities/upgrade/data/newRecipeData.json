@@ -569,6 +569,20 @@
             }
         ]
     },
+    "upgArmE040C": {
+        "material": "_upgArmE040C",
+        "snowprintId": "upgArmE040C",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE040C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR040",
+                "count": 9
+            }
+        ]
+    },
     "upgArmECS": {
         "material": "Coming soon",
         "snowprintId": "upgArmECS",
@@ -1071,6 +1085,24 @@
             }
         ]
     },
+    "upgArmL040C": {
+        "material": "Forge Wrought Plating",
+        "snowprintId": "upgArmL040C",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL040C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE040C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE005C",
+                "count": 1
+            }
+        ]
+    },
     "upgArmL120C": {
         "material": "Adamantine Mantle",
         "snowprintId": "upgArmL120C",
@@ -1506,7 +1538,29 @@
                 "count": 1
             },
             {
-                "material": "upgHpR002",
+                "material": "upgHpR018",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL140C": {
+        "material": "RAM Shield Technology",
+        "snowprintId": "upgArmL140C",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL140C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL099",
+                "count": 9
+            },
+            {
+                "material": "upgHpR012C",
+                "count": 1
+            },
+            {
+                "material": "upgArmR015",
                 "count": 9
             }
         ]
@@ -2067,6 +2121,14 @@
         "rarity": "Rare",
         "stat": "Armour",
         "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR039.png",
+        "craftable": false
+    },
+    "upgArmR040": {
+        "material": "Void Armour Plating",
+        "snowprintId": "upgArmR040",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR040.png",
         "craftable": false
     },
     "upgArmRCS": {
@@ -2751,6 +2813,20 @@
             }
         ]
     },
+    "upgDmgE040C": {
+        "material": "ECog Scanner",
+        "snowprintId": "upgDmgE040C",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE040C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR040",
+                "count": 9
+            }
+        ]
+    },
     "upgDmgECS": {
         "material": "Coming soon",
         "snowprintId": "upgDmgECS",
@@ -3357,6 +3433,24 @@
             }
         ]
     },
+    "upgDmgL040C": {
+        "material": "Panspectral Scanner",
+        "snowprintId": "upgDmgL040C",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL040C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE040C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR017C",
+                "count": 2
+            }
+        ]
+    },
     "upgDmgL120C": {
         "material": "Hellfury Bolts",
         "snowprintId": "upgDmgL120C",
@@ -3785,6 +3879,28 @@
         "recipe": [
             {
                 "material": "upgHpL119",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR012C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE004",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL140C": {
+        "material": "Experimental Kin Technology",
+        "snowprintId": "upgDmgL140C",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgL140C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL099",
                 "count": 9
             },
             {
@@ -4349,6 +4465,14 @@
         "rarity": "Rare",
         "stat": "Damage",
         "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR039.png",
+        "craftable": false
+    },
+    "upgDmgR040": {
+        "material": "Personel Scanner",
+        "snowprintId": "upgDmgR040",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgR040.png",
         "craftable": false
     },
     "upgDmgR13C": {
@@ -5241,6 +5365,20 @@
             }
         ]
     },
+    "upgHpE040C": {
+        "material": "Champion Wavefield Crest",
+        "snowprintId": "upgHpE040C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE040C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR040",
+                "count": 9
+            }
+        ]
+    },
     "upgHpECS": {
         "material": "Coming soon",
         "snowprintId": "upgHpECS",
@@ -5815,6 +5953,32 @@
             }
         ]
     },
+    "upgHpL040C": {
+        "material": "Ancestor Ward Crest",
+        "snowprintId": "upgHpL040C",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL040C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE040C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE002C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL099": {
+        "material": "Cyberstimm Infusion",
+        "snowprintId": "upgHpL099",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL099.png",
+        "craftable": false
+    },
     "upgHpL100": {
         "material": "Codex Astartes Page",
         "snowprintId": "upgHpL100",
@@ -6385,6 +6549,28 @@
             }
         ]
     },
+    "upgHpL140C": {
+        "material": "Foregewrought Maintainers Kit",
+        "snowprintId": "upgHpL140C",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL140C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL099",
+                "count": 9
+            },
+            {
+                "material": "upgHpR015C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE003",
+                "count": 6
+            }
+        ]
+    },
     "upgHpL211C": {
         "material": "Monstrous Constitution",
         "snowprintId": "upgHpL211C",
@@ -6891,6 +7077,14 @@
         "rarity": "Rare",
         "stat": "Health",
         "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR039.png",
+        "craftable": false
+    },
+    "upgHpR040": {
+        "material": "Kindred Wavefield Crest",
+        "snowprintId": "upgHpR040",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR040.png",
         "craftable": false
     },
     "upgHpRCS": {

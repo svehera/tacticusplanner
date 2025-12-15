@@ -22526,6 +22526,78 @@
         "Icon": "snowprint_assets/characters/ui_image_portrait_black_terminator_01.png"
     },
     {
+        "id": "blackPossession_LHE",
+        "Name": "Archimatos",
+        "Faction": "BlackLegion",
+        "Alliance": "Chaos",
+        "Melee Damage": "Psychic",
+        "Melee Hits": 2,
+        "Ranged Damage": "Psychic",
+        "Ranged Hits": 1,
+        "Distance": 2,
+        "Movement": 3,
+        "Traits": ["LetTheGalaxyBurn", "Psyker"],
+        "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 45,
+                "Armor": 50,
+                "Health": 226,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 104,
+                "Armor": 116,
+                "Health": 517,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 232,
+                "Armor": 261,
+                "Health": 1162,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 512,
+                "Armor": 577,
+                "Health": 2564,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 1840,
+                "Armor": 2069,
+                "Health": 9201,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 2794,
+                "Armor": 3142,
+                "Health": 13968,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Active Abilities": ["Incursion"],
+        "Passive Abilities": ["Possession"],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_black_possession_01.png"
+    },
+    {
         "id": "bloodNpc1Intercessor",
         "Name": "Jump Pack Intercessor",
         "Faction": "BloodAngels",
@@ -28918,76 +28990,6 @@
         "Icon": "snowprint_assets/characters/ui_image_portrait_emper_blade_01.png"
     },
     {
-        "id": "emperKakophonist_LHE",
-        "Name": "Adamatar",
-        "Faction": "EmperorsChildren",
-        "Alliance": "Chaos",
-        "Melee Damage": "Eviscerate",
-        "Melee Hits": 3,
-        "Movement": 3,
-        "Traits": ["ThrillSeekers"],
-        "Stats": [
-            {
-                "AbilityLevel": 8,
-                "Damage": 48,
-                "Armor": 65,
-                "Health": 338,
-                "ProgressionIndex": 2,
-                "Rank": 3,
-                "Stars": 2
-            },
-            {
-                "AbilityLevel": 17,
-                "Damage": 109,
-                "Armor": 150,
-                "Health": 785,
-                "ProgressionIndex": 5,
-                "Rank": 6,
-                "Stars": 4
-            },
-            {
-                "AbilityLevel": 26,
-                "Damage": 246,
-                "Armor": 334,
-                "Health": 1724,
-                "ProgressionIndex": 8,
-                "Rank": 9,
-                "Stars": 6
-            },
-            {
-                "AbilityLevel": 35,
-                "Damage": 544,
-                "Armor": 737,
-                "Health": 3835,
-                "ProgressionIndex": 11,
-                "Rank": 12,
-                "Stars": 8
-            },
-            {
-                "AbilityLevel": 50,
-                "Damage": 1956,
-                "Armor": 2646,
-                "Health": 13655,
-                "ProgressionIndex": 15,
-                "Rank": 17,
-                "Stars": 11
-            },
-            {
-                "AbilityLevel": 65,
-                "Damage": 2969,
-                "Armor": 4015,
-                "Health": 20735,
-                "ProgressionIndex": 19,
-                "Rank": 20,
-                "Stars": 14
-            }
-        ],
-        "Active Ability Damage": ["DirectDamage"],
-        "Active Abilities": ["DoomSiren"],
-        "Passive Abilities": ["ObsessiveAnnunciation"],
-        "Icon": "snowprint_assets/characters/ui_image_portrait_emper_kakophonist_01.png"
-    },
-    {
         "id": "genesBossBiophagus",
         "Name": "Hollan",
         "Faction": "Genestealers",
@@ -34813,6 +34815,15 @@
                 "ProgressionIndex": 2,
                 "Rank": 3,
                 "Stars": 2
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 278,
+                "Armor": 242,
+                "Health": 1088,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
             }
         ],
         "Active Ability Damage": ["Projectile"],
@@ -34899,6 +34910,15 @@
                 "ProgressionIndex": 8,
                 "Rank": 9,
                 "Stars": 6
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 57,
+                "Armor": 35,
+                "Health": 236,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
             }
         ],
         "Active Ability Damage": ["DirectDamage"],
@@ -35086,6 +35106,24 @@
                 "ProgressionIndex": 15,
                 "Rank": 16,
                 "Stars": 11
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 2492,
+                "Armor": 2492,
+                "Health": 9583,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 55,
+                "Damage": 3268,
+                "Armor": 3268,
+                "Health": 12569,
+                "ProgressionIndex": 17,
+                "Rank": 18,
+                "Stars": 12
             }
         ],
         "Passive Ability Damage": ["Projectile"],
@@ -40053,6 +40091,29 @@
         "Icon": "snowprint_assets/characters/ui_image_portrait_powup_heroSpawn_01.png"
     },
     {
+        "id": "powupHeroSpawn_Uthar",
+        "Name": "_powupHeroSpawn_Uthar",
+        "Faction": "",
+        "Alliance": "",
+        "Melee Damage": "",
+        "Melee Hits": 0,
+        "Movement": 0,
+        "Traits": ["Steppable", "Invincible", "Immune"],
+        "Stats": [
+            {
+                "AbilityLevel": 1,
+                "Damage": 0,
+                "Armor": 0,
+                "Health": 0,
+                "ProgressionIndex": 0,
+                "Rank": 0,
+                "Stars": 0
+            }
+        ],
+        "Passive Abilities": ["PowerUp_HeroSpawn_Uthar"],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_powup_heroSpawn_01.png"
+    },
+    {
         "id": "powupHeroSpawn_VexilusPraeto",
         "Name": "From Golden Light Power-up",
         "Faction": "",
@@ -40212,6 +40273,75 @@
         ],
         "Passive Abilities": ["PowerUp_Resurrect"],
         "Icon": "snowprint_assets/characters/ui_image_portrait_powup_resurrect_01.png"
+    },
+    {
+        "id": "spaceWolfPriest_LHE",
+        "Name": "Baldr",
+        "Faction": "SpaceWolves",
+        "Alliance": "Imperial",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Movement": 3,
+        "Traits": ["Healer", "FinalJustice", "Terrifying"],
+        "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 71,
+                "Armor": 59,
+                "Health": 255,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 161,
+                "Armor": 136,
+                "Health": 583,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 363,
+                "Armor": 305,
+                "Health": 1306,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 801,
+                "Armor": 674,
+                "Health": 2884,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 2875,
+                "Armor": 2414,
+                "Health": 10350,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 4366,
+                "Armor": 3666,
+                "Health": 15713,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Active Abilities": ["RitesOfMorkai"],
+        "Passive Abilities": ["HealingBalms"],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_space_wolfpriest_01.png"
     },
     {
         "id": "tauBossAunShi",
@@ -40429,7 +40559,7 @@
         "Stats": [
             {
                 "AbilityLevel": 5,
-                "Damage": 17,
+                "Damage": 12,
                 "Armor": 43,
                 "Health": 181,
                 "ProgressionIndex": 1,
@@ -40438,7 +40568,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 24,
+                "Damage": 16,
                 "Armor": 59,
                 "Health": 247,
                 "ProgressionIndex": 2,
@@ -40447,7 +40577,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 26,
+                "Damage": 18,
                 "Armor": 64,
                 "Health": 268,
                 "ProgressionIndex": 4,
@@ -40456,7 +40586,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 34,
+                "Damage": 24,
                 "Armor": 86,
                 "Health": 361,
                 "ProgressionIndex": 5,
@@ -40465,7 +40595,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 43,
+                "Damage": 30,
                 "Armor": 108,
                 "Health": 452,
                 "ProgressionIndex": 6,
@@ -40474,7 +40604,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 46,
+                "Damage": 32,
                 "Armor": 115,
                 "Health": 485,
                 "ProgressionIndex": 7,
@@ -40483,7 +40613,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 49,
+                "Damage": 34,
                 "Armor": 123,
                 "Health": 517,
                 "ProgressionIndex": 8,
@@ -40492,7 +40622,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 97,
+                "Damage": 68,
                 "Armor": 241,
                 "Health": 1014,
                 "ProgressionIndex": 9,
@@ -40501,7 +40631,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 128,
+                "Damage": 90,
                 "Armor": 321,
                 "Health": 1349,
                 "ProgressionIndex": 10,
@@ -40510,7 +40640,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 170,
+                "Damage": 119,
                 "Armor": 426,
                 "Health": 1789,
                 "ProgressionIndex": 11,
@@ -40519,7 +40649,7 @@
             },
             {
                 "AbilityLevel": 32,
-                "Damage": 213,
+                "Damage": 149,
                 "Armor": 533,
                 "Health": 2239,
                 "ProgressionIndex": 12,
@@ -40528,7 +40658,7 @@
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 282,
+                "Damage": 197,
                 "Armor": 705,
                 "Health": 2959,
                 "ProgressionIndex": 13,
@@ -40537,7 +40667,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 353,
+                "Damage": 247,
                 "Armor": 882,
                 "Health": 3705,
                 "ProgressionIndex": 13,
@@ -40546,7 +40676,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 465,
+                "Damage": 326,
                 "Armor": 1163,
                 "Health": 4883,
                 "ProgressionIndex": 14,
@@ -40555,7 +40685,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 582,
+                "Damage": 408,
                 "Armor": 1456,
                 "Health": 6113,
                 "ProgressionIndex": 14,
@@ -40583,7 +40713,7 @@
         "Stats": [
             {
                 "AbilityLevel": 3,
-                "Damage": 14,
+                "Damage": 10,
                 "Armor": 34,
                 "Health": 145,
                 "ProgressionIndex": 1,
@@ -40611,7 +40741,7 @@
         "Stats": [
             {
                 "AbilityLevel": 11,
-                "Damage": 32,
+                "Damage": 22,
                 "Armor": 80,
                 "Health": 335,
                 "ProgressionIndex": 4,
@@ -40620,7 +40750,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 43,
+                "Damage": 30,
                 "Armor": 108,
                 "Health": 452,
                 "ProgressionIndex": 5,
@@ -40629,7 +40759,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 54,
+                "Damage": 38,
                 "Armor": 135,
                 "Health": 566,
                 "ProgressionIndex": 5,
@@ -40638,7 +40768,7 @@
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 252,
+                "Damage": 177,
                 "Armor": 630,
                 "Health": 2648,
                 "ProgressionIndex": 10,
@@ -40647,7 +40777,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 371,
+                "Damage": 260,
                 "Armor": 929,
                 "Health": 3900,
                 "ProgressionIndex": 14,
@@ -40675,7 +40805,7 @@
         "Stats": [
             {
                 "AbilityLevel": 5,
-                "Damage": 60,
+                "Damage": 43,
                 "Armor": 29,
                 "Health": 129,
                 "ProgressionIndex": 1,
@@ -40684,7 +40814,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 82,
+                "Damage": 59,
                 "Armor": 40,
                 "Health": 177,
                 "ProgressionIndex": 2,
@@ -40693,7 +40823,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 89,
+                "Damage": 64,
                 "Armor": 43,
                 "Health": 191,
                 "ProgressionIndex": 4,
@@ -40702,7 +40832,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 120,
+                "Damage": 86,
                 "Armor": 58,
                 "Health": 258,
                 "ProgressionIndex": 5,
@@ -40711,7 +40841,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 151,
+                "Damage": 108,
                 "Armor": 73,
                 "Health": 323,
                 "ProgressionIndex": 6,
@@ -40720,7 +40850,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 202,
+                "Damage": 144,
                 "Armor": 98,
                 "Health": 433,
                 "ProgressionIndex": 7,
@@ -40729,7 +40859,7 @@
             },
             {
                 "AbilityLevel": 20,
-                "Damage": 270,
+                "Damage": 193,
                 "Armor": 131,
                 "Health": 579,
                 "ProgressionIndex": 8,
@@ -40738,7 +40868,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 338,
+                "Damage": 241,
                 "Armor": 164,
                 "Health": 724,
                 "ProgressionIndex": 9,
@@ -40747,7 +40877,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 450,
+                "Damage": 321,
                 "Armor": 218,
                 "Health": 964,
                 "ProgressionIndex": 10,
@@ -40756,7 +40886,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 596,
+                "Damage": 426,
                 "Armor": 290,
                 "Health": 1278,
                 "ProgressionIndex": 11,
@@ -40765,7 +40895,7 @@
             },
             {
                 "AbilityLevel": 32,
-                "Damage": 746,
+                "Damage": 533,
                 "Armor": 363,
                 "Health": 1599,
                 "ProgressionIndex": 12,
@@ -40774,7 +40904,7 @@
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 986,
+                "Damage": 705,
                 "Armor": 479,
                 "Health": 2114,
                 "ProgressionIndex": 13,
@@ -40783,7 +40913,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 1235,
+                "Damage": 882,
                 "Armor": 600,
                 "Health": 2646,
                 "ProgressionIndex": 13,
@@ -40792,7 +40922,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 1628,
+                "Damage": 1163,
                 "Armor": 791,
                 "Health": 3488,
                 "ProgressionIndex": 14,
@@ -40801,7 +40931,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 2038,
+                "Damage": 1456,
                 "Armor": 990,
                 "Health": 4367,
                 "ProgressionIndex": 14,
@@ -40828,7 +40958,7 @@
         "Stats": [
             {
                 "AbilityLevel": 3,
-                "Damage": 48,
+                "Damage": 34,
                 "Armor": 23,
                 "Health": 103,
                 "ProgressionIndex": 1,
@@ -40855,7 +40985,7 @@
         "Stats": [
             {
                 "AbilityLevel": 23,
-                "Damage": 317,
+                "Damage": 226,
                 "Armor": 154,
                 "Health": 679,
                 "ProgressionIndex": 7,
@@ -40864,7 +40994,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 423,
+                "Damage": 302,
                 "Armor": 206,
                 "Health": 907,
                 "ProgressionIndex": 8,
@@ -40873,7 +41003,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 1300,
+                "Damage": 929,
                 "Armor": 631,
                 "Health": 2786,
                 "ProgressionIndex": 14,
@@ -40900,7 +41030,7 @@
         "Stats": [
             {
                 "AbilityLevel": 5,
-                "Damage": 91,
+                "Damage": 69,
                 "Armor": 28,
                 "Health": 112,
                 "ProgressionIndex": 1,
@@ -40909,7 +41039,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 125,
+                "Damage": 94,
                 "Armor": 38,
                 "Health": 153,
                 "ProgressionIndex": 2,
@@ -40918,7 +41048,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 135,
+                "Damage": 102,
                 "Armor": 41,
                 "Health": 166,
                 "ProgressionIndex": 4,
@@ -40927,7 +41057,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 182,
+                "Damage": 138,
                 "Armor": 55,
                 "Health": 224,
                 "ProgressionIndex": 5,
@@ -40936,7 +41066,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 228,
+                "Damage": 172,
                 "Armor": 69,
                 "Health": 280,
                 "ProgressionIndex": 6,
@@ -40945,7 +41075,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 306,
+                "Damage": 231,
                 "Armor": 92,
                 "Health": 376,
                 "ProgressionIndex": 7,
@@ -40954,7 +41084,7 @@
             },
             {
                 "AbilityLevel": 20,
-                "Damage": 409,
+                "Damage": 309,
                 "Armor": 123,
                 "Health": 501,
                 "ProgressionIndex": 8,
@@ -40963,7 +41093,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 512,
+                "Damage": 386,
                 "Armor": 155,
                 "Health": 628,
                 "ProgressionIndex": 9,
@@ -40972,7 +41102,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 681,
+                "Damage": 514,
                 "Armor": 206,
                 "Health": 835,
                 "ProgressionIndex": 10,
@@ -40981,7 +41111,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 903,
+                "Damage": 681,
                 "Armor": 273,
                 "Health": 1107,
                 "ProgressionIndex": 11,
@@ -40990,7 +41120,7 @@
             },
             {
                 "AbilityLevel": 32,
-                "Damage": 1130,
+                "Damage": 853,
                 "Armor": 341,
                 "Health": 1386,
                 "ProgressionIndex": 12,
@@ -40999,7 +41129,7 @@
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 1494,
+                "Damage": 1127,
                 "Armor": 451,
                 "Health": 1832,
                 "ProgressionIndex": 13,
@@ -41008,7 +41138,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 1870,
+                "Damage": 1411,
                 "Armor": 565,
                 "Health": 2294,
                 "ProgressionIndex": 13,
@@ -41017,7 +41147,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 2465,
+                "Damage": 1860,
                 "Armor": 744,
                 "Health": 3023,
                 "ProgressionIndex": 14,
@@ -41026,7 +41156,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 3086,
+                "Damage": 2329,
                 "Armor": 932,
                 "Health": 3784,
                 "ProgressionIndex": 14,
@@ -41054,7 +41184,7 @@
         "Stats": [
             {
                 "AbilityLevel": 3,
-                "Damage": 73,
+                "Damage": 55,
                 "Armor": 22,
                 "Health": 90,
                 "ProgressionIndex": 1,
@@ -41082,7 +41212,7 @@
         "Stats": [
             {
                 "AbilityLevel": 11,
-                "Damage": 169,
+                "Damage": 128,
                 "Armor": 51,
                 "Health": 208,
                 "ProgressionIndex": 4,
@@ -41091,7 +41221,7 @@
             },
             {
                 "AbilityLevel": 5,
-                "Damage": 91,
+                "Damage": 69,
                 "Armor": 28,
                 "Health": 112,
                 "ProgressionIndex": 1,
@@ -41100,7 +41230,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 125,
+                "Damage": 94,
                 "Armor": 38,
                 "Health": 153,
                 "ProgressionIndex": 2,
@@ -41109,7 +41239,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 641,
+                "Damage": 484,
                 "Armor": 193,
                 "Health": 786,
                 "ProgressionIndex": 8,
@@ -41118,7 +41248,7 @@
             },
             {
                 "AbilityLevel": 32,
-                "Damage": 1005,
+                "Damage": 758,
                 "Armor": 303,
                 "Health": 1232,
                 "ProgressionIndex": 9,
@@ -41127,7 +41257,7 @@
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 5079,
+                "Damage": 3833,
                 "Armor": 1533,
                 "Health": 6229,
                 "ProgressionIndex": 15,
@@ -41211,7 +41341,7 @@
         "Stats": [
             {
                 "AbilityLevel": 5,
-                "Damage": 47,
+                "Damage": 43,
                 "Armor": 31,
                 "Health": 138,
                 "ProgressionIndex": 1,
@@ -41220,7 +41350,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 64,
+                "Damage": 59,
                 "Armor": 42,
                 "Health": 188,
                 "ProgressionIndex": 2,
@@ -41229,7 +41359,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 69,
+                "Damage": 64,
                 "Armor": 46,
                 "Health": 204,
                 "ProgressionIndex": 4,
@@ -41238,7 +41368,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 93,
+                "Damage": 86,
                 "Armor": 62,
                 "Health": 275,
                 "ProgressionIndex": 5,
@@ -41247,7 +41377,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 116,
+                "Damage": 108,
                 "Armor": 78,
                 "Health": 345,
                 "ProgressionIndex": 6,
@@ -41256,7 +41386,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 125,
+                "Damage": 115,
                 "Armor": 83,
                 "Health": 369,
                 "ProgressionIndex": 7,
@@ -41265,7 +41395,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 133,
+                "Damage": 123,
                 "Armor": 89,
                 "Health": 394,
                 "ProgressionIndex": 8,
@@ -41274,7 +41404,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 261,
+                "Damage": 241,
                 "Armor": 174,
                 "Health": 773,
                 "ProgressionIndex": 9,
@@ -41283,7 +41413,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 347,
+                "Damage": 321,
                 "Armor": 231,
                 "Health": 1028,
                 "ProgressionIndex": 10,
@@ -41292,7 +41422,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 460,
+                "Damage": 426,
                 "Armor": 307,
                 "Health": 1363,
                 "ProgressionIndex": 11,
@@ -41301,7 +41431,7 @@
             },
             {
                 "AbilityLevel": 32,
-                "Damage": 576,
+                "Damage": 533,
                 "Armor": 384,
                 "Health": 1706,
                 "ProgressionIndex": 12,
@@ -41310,7 +41440,7 @@
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 761,
+                "Damage": 705,
                 "Armor": 507,
                 "Health": 2255,
                 "ProgressionIndex": 13,
@@ -41319,7 +41449,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 953,
+                "Damage": 882,
                 "Armor": 635,
                 "Health": 2823,
                 "ProgressionIndex": 13,
@@ -41328,7 +41458,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 1256,
+                "Damage": 1163,
                 "Armor": 837,
                 "Health": 3720,
                 "ProgressionIndex": 14,
@@ -41337,7 +41467,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 1572,
+                "Damage": 1456,
                 "Armor": 1048,
                 "Health": 4658,
                 "ProgressionIndex": 14,
@@ -41365,7 +41495,7 @@
         "Stats": [
             {
                 "AbilityLevel": 60,
-                "Damage": 4442,
+                "Damage": 4113,
                 "Armor": 2961,
                 "Health": 13161,
                 "ProgressionIndex": 18,
@@ -41389,11 +41519,11 @@
         "Ranged Hits": 2,
         "Distance": 3,
         "Movement": 2,
-        "Traits": ["CloseCombatWeakness", "Overwatch", "SuppressiveFire"],
+        "Traits": ["RangedSpecialist", "Overwatch", "SuppressiveFire"],
         "Stats": [
             {
                 "AbilityLevel": 1,
-                "Damage": 28,
+                "Damage": 21,
                 "Armor": 16,
                 "Health": 40,
                 "ProgressionIndex": 0,
@@ -41402,7 +41532,7 @@
             },
             {
                 "AbilityLevel": 3,
-                "Damage": 35,
+                "Damage": 26,
                 "Armor": 20,
                 "Health": 50,
                 "ProgressionIndex": 0,
@@ -41411,7 +41541,7 @@
             },
             {
                 "AbilityLevel": 3,
-                "Damage": 39,
+                "Damage": 29,
                 "Armor": 22,
                 "Health": 55,
                 "ProgressionIndex": 1,
@@ -41420,7 +41550,7 @@
             },
             {
                 "AbilityLevel": 5,
-                "Damage": 49,
+                "Damage": 36,
                 "Armor": 28,
                 "Health": 69,
                 "ProgressionIndex": 1,
@@ -41429,7 +41559,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 61,
+                "Damage": 45,
                 "Armor": 35,
                 "Health": 86,
                 "ProgressionIndex": 1,
@@ -41438,7 +41568,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 67,
+                "Damage": 49,
                 "Armor": 38,
                 "Health": 94,
                 "ProgressionIndex": 2,
@@ -41447,7 +41577,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 84,
+                "Damage": 61,
                 "Armor": 48,
                 "Health": 118,
                 "ProgressionIndex": 3,
@@ -41456,7 +41586,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 105,
+                "Damage": 76,
                 "Armor": 60,
                 "Health": 148,
                 "ProgressionIndex": 3,
@@ -41465,7 +41595,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 114,
+                "Damage": 82,
                 "Armor": 65,
                 "Health": 160,
                 "ProgressionIndex": 4,
@@ -41474,7 +41604,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 143,
+                "Damage": 103,
                 "Armor": 81,
                 "Health": 200,
                 "ProgressionIndex": 4,
@@ -41483,7 +41613,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 176,
+                "Damage": 127,
                 "Armor": 100,
                 "Health": 246,
                 "ProgressionIndex": 8,
@@ -41492,7 +41622,7 @@
             },
             {
                 "AbilityLevel": 20,
-                "Damage": 220,
+                "Damage": 159,
                 "Armor": 125,
                 "Health": 308,
                 "ProgressionIndex": 8,
@@ -41501,7 +41631,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 258,
+                "Damage": 187,
                 "Armor": 147,
                 "Health": 362,
                 "ProgressionIndex": 7,
@@ -41510,7 +41640,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 292,
+                "Damage": 212,
                 "Armor": 167,
                 "Health": 410,
                 "ProgressionIndex": 10,
@@ -41519,7 +41649,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 326,
+                "Damage": 237,
                 "Armor": 187,
                 "Health": 458,
                 "ProgressionIndex": 13,
@@ -41528,7 +41658,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 365,
+                "Damage": 265,
                 "Armor": 209,
                 "Health": 513,
                 "ProgressionIndex": 10,
@@ -41537,7 +41667,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 408,
+                "Damage": 296,
                 "Armor": 234,
                 "Health": 573,
                 "ProgressionIndex": 13,
@@ -41546,7 +41676,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 484,
+                "Damage": 351,
                 "Armor": 278,
                 "Health": 680,
                 "ProgressionIndex": 11,
@@ -41555,7 +41685,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 511,
+                "Damage": 371,
                 "Armor": 293,
                 "Health": 718,
                 "ProgressionIndex": 13,
@@ -41564,7 +41694,7 @@
             },
             {
                 "AbilityLevel": 32,
-                "Damage": 606,
+                "Damage": 440,
                 "Armor": 348,
                 "Health": 852,
                 "ProgressionIndex": 11,
@@ -41573,7 +41703,7 @@
             },
             {
                 "AbilityLevel": 32,
-                "Damage": 673,
+                "Damage": 489,
                 "Armor": 387,
                 "Health": 947,
                 "ProgressionIndex": 14,
@@ -41582,7 +41712,7 @@
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 843,
+                "Damage": 612,
                 "Armor": 485,
                 "Health": 1186,
                 "ProgressionIndex": 14,
@@ -41591,7 +41721,7 @@
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 885,
+                "Damage": 643,
                 "Armor": 509,
                 "Health": 1245,
                 "ProgressionIndex": 15,
@@ -41600,7 +41730,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 1055,
+                "Damage": 767,
                 "Armor": 607,
                 "Health": 1485,
                 "ProgressionIndex": 14,
@@ -41609,7 +41739,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 1108,
+                "Damage": 805,
                 "Armor": 637,
                 "Health": 1559,
                 "ProgressionIndex": 15,
@@ -41618,7 +41748,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 1321,
+                "Damage": 960,
                 "Armor": 760,
                 "Health": 1859,
                 "ProgressionIndex": 14,
@@ -41627,7 +41757,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 1387,
+                "Damage": 1008,
                 "Armor": 798,
                 "Health": 1952,
                 "ProgressionIndex": 15,
@@ -41636,7 +41766,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 1654,
+                "Damage": 1202,
                 "Armor": 952,
                 "Health": 2328,
                 "ProgressionIndex": 14,
@@ -41645,7 +41775,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 1737,
+                "Damage": 1262,
                 "Armor": 1000,
                 "Health": 2444,
                 "ProgressionIndex": 15,
@@ -41654,7 +41784,7 @@
             },
             {
                 "AbilityLevel": 47,
-                "Damage": 2071,
+                "Damage": 1505,
                 "Armor": 1192,
                 "Health": 2914,
                 "ProgressionIndex": 14,
@@ -41663,7 +41793,7 @@
             },
             {
                 "AbilityLevel": 47,
-                "Damage": 2175,
+                "Damage": 1580,
                 "Armor": 1252,
                 "Health": 3060,
                 "ProgressionIndex": 15,
@@ -41672,7 +41802,7 @@
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 2593,
+                "Damage": 1884,
                 "Armor": 1493,
                 "Health": 3649,
                 "ProgressionIndex": 14,
@@ -41681,7 +41811,7 @@
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 2723,
+                "Damage": 1978,
                 "Armor": 1568,
                 "Health": 3831,
                 "ProgressionIndex": 15,
@@ -41690,7 +41820,7 @@
             },
             {
                 "AbilityLevel": 52,
-                "Damage": 3409,
+                "Damage": 2476,
                 "Armor": 1963,
                 "Health": 4796,
                 "ProgressionIndex": 16,
@@ -41699,7 +41829,7 @@
             },
             {
                 "AbilityLevel": 53,
-                "Damage": 3571,
+                "Damage": 2594,
                 "Armor": 2056,
                 "Health": 5024,
                 "ProgressionIndex": 17,
@@ -41708,7 +41838,7 @@
             },
             {
                 "AbilityLevel": 54,
-                "Damage": 3733,
+                "Damage": 2712,
                 "Armor": 2149,
                 "Health": 5252,
                 "ProgressionIndex": 18,
@@ -41717,7 +41847,7 @@
             },
             {
                 "AbilityLevel": 55,
-                "Damage": 3895,
+                "Damage": 2830,
                 "Armor": 2242,
                 "Health": 5480,
                 "ProgressionIndex": 19,
@@ -41726,7 +41856,7 @@
             },
             {
                 "AbilityLevel": 57,
-                "Damage": 4267,
+                "Damage": 3100,
                 "Armor": 2456,
                 "Health": 6003,
                 "ProgressionIndex": 16,
@@ -41735,7 +41865,7 @@
             },
             {
                 "AbilityLevel": 58,
-                "Damage": 4470,
+                "Damage": 3248,
                 "Armor": 2573,
                 "Health": 6289,
                 "ProgressionIndex": 17,
@@ -41744,7 +41874,7 @@
             },
             {
                 "AbilityLevel": 59,
-                "Damage": 4673,
+                "Damage": 3396,
                 "Armor": 2690,
                 "Health": 6575,
                 "ProgressionIndex": 18,
@@ -41753,7 +41883,7 @@
             },
             {
                 "AbilityLevel": 60,
-                "Damage": 4876,
+                "Damage": 3544,
                 "Armor": 2807,
                 "Health": 6861,
                 "ProgressionIndex": 19,
@@ -41762,7 +41892,7 @@
             },
             {
                 "AbilityLevel": 62,
-                "Damage": 5342,
+                "Damage": 3882,
                 "Armor": 3075,
                 "Health": 7516,
                 "ProgressionIndex": 16,
@@ -41771,7 +41901,7 @@
             },
             {
                 "AbilityLevel": 63,
-                "Damage": 5596,
+                "Damage": 4067,
                 "Armor": 3221,
                 "Health": 7874,
                 "ProgressionIndex": 17,
@@ -41780,7 +41910,7 @@
             },
             {
                 "AbilityLevel": 64,
-                "Damage": 5850,
+                "Damage": 4252,
                 "Armor": 3367,
                 "Health": 8232,
                 "ProgressionIndex": 18,
@@ -41789,7 +41919,7 @@
             },
             {
                 "AbilityLevel": 65,
-                "Damage": 6104,
+                "Damage": 4437,
                 "Armor": 3513,
                 "Health": 8590,
                 "ProgressionIndex": 19,
@@ -41810,7 +41940,7 @@
         "Ranged Hits": 1,
         "Distance": 4,
         "Movement": 3,
-        "Traits": ["Flying", "Mechanical", "CloseCombatWeakness"],
+        "Traits": ["Flying", "Mechanical", "RangedSpecialist"],
         "Stats": [
             {
                 "AbilityLevel": 1,
@@ -43070,11 +43200,11 @@
         "Ranged Hits": 4,
         "Distance": 2,
         "Movement": 3,
-        "Traits": ["CloseCombatWeakness", "Camouflage", "Infiltrate", "Flying"],
+        "Traits": ["Camouflage", "Infiltrate", "Flying", "RangedSpecialist"],
         "Stats": [
             {
                 "AbilityLevel": 1,
-                "Damage": 19,
+                "Damage": 15,
                 "Armor": 21,
                 "Health": 85,
                 "ProgressionIndex": 0,
@@ -43083,7 +43213,7 @@
             },
             {
                 "AbilityLevel": 3,
-                "Damage": 24,
+                "Damage": 19,
                 "Armor": 26,
                 "Health": 106,
                 "ProgressionIndex": 0,
@@ -43092,7 +43222,7 @@
             },
             {
                 "AbilityLevel": 3,
-                "Damage": 26,
+                "Damage": 21,
                 "Armor": 29,
                 "Health": 117,
                 "ProgressionIndex": 1,
@@ -43101,7 +43231,7 @@
             },
             {
                 "AbilityLevel": 5,
-                "Damage": 33,
+                "Damage": 26,
                 "Armor": 36,
                 "Health": 146,
                 "ProgressionIndex": 1,
@@ -43110,7 +43240,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 41,
+                "Damage": 33,
                 "Armor": 45,
                 "Health": 183,
                 "ProgressionIndex": 1,
@@ -43119,7 +43249,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 45,
+                "Damage": 36,
                 "Armor": 49,
                 "Health": 200,
                 "ProgressionIndex": 2,
@@ -43128,7 +43258,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 56,
+                "Damage": 45,
                 "Armor": 61,
                 "Health": 250,
                 "ProgressionIndex": 3,
@@ -43137,7 +43267,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 70,
+                "Damage": 56,
                 "Armor": 76,
                 "Health": 313,
                 "ProgressionIndex": 3,
@@ -43146,7 +43276,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 76,
+                "Damage": 61,
                 "Armor": 82,
                 "Health": 339,
                 "ProgressionIndex": 4,
@@ -43155,7 +43285,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 95,
+                "Damage": 76,
                 "Armor": 103,
                 "Health": 424,
                 "ProgressionIndex": 4,
@@ -43164,7 +43294,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 117,
+                "Damage": 94,
                 "Armor": 127,
                 "Health": 522,
                 "ProgressionIndex": 8,
@@ -43173,7 +43303,7 @@
             },
             {
                 "AbilityLevel": 20,
-                "Damage": 146,
+                "Damage": 118,
                 "Armor": 159,
                 "Health": 654,
                 "ProgressionIndex": 8,
@@ -43182,7 +43312,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 171,
+                "Damage": 139,
                 "Armor": 187,
                 "Health": 768,
                 "ProgressionIndex": 7,
@@ -43191,7 +43321,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 194,
+                "Damage": 158,
                 "Armor": 212,
                 "Health": 870,
                 "ProgressionIndex": 10,
@@ -43200,7 +43330,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 217,
+                "Damage": 177,
                 "Armor": 237,
                 "Health": 972,
                 "ProgressionIndex": 13,
@@ -43209,7 +43339,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 243,
+                "Damage": 198,
                 "Armor": 265,
                 "Health": 1089,
                 "ProgressionIndex": 10,
@@ -43218,7 +43348,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 272,
+                "Damage": 221,
                 "Armor": 296,
                 "Health": 1217,
                 "ProgressionIndex": 13,
@@ -43227,7 +43357,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 323,
+                "Damage": 262,
                 "Armor": 351,
                 "Health": 1443,
                 "ProgressionIndex": 11,
@@ -43236,7 +43366,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 341,
+                "Damage": 277,
                 "Armor": 371,
                 "Health": 1523,
                 "ProgressionIndex": 13,
@@ -43245,7 +43375,7 @@
             },
             {
                 "AbilityLevel": 32,
-                "Damage": 404,
+                "Damage": 329,
                 "Armor": 440,
                 "Health": 1806,
                 "ProgressionIndex": 11,
@@ -43254,7 +43384,7 @@
             },
             {
                 "AbilityLevel": 32,
-                "Damage": 449,
+                "Damage": 366,
                 "Armor": 489,
                 "Health": 2007,
                 "ProgressionIndex": 14,
@@ -43263,7 +43393,7 @@
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 562,
+                "Damage": 458,
                 "Armor": 612,
                 "Health": 2513,
                 "ProgressionIndex": 14,
@@ -43272,7 +43402,7 @@
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 590,
+                "Damage": 481,
                 "Armor": 643,
                 "Health": 2639,
                 "ProgressionIndex": 15,
@@ -43281,7 +43411,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 704,
+                "Damage": 574,
                 "Armor": 767,
                 "Health": 3147,
                 "ProgressionIndex": 14,
@@ -43290,7 +43420,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 739,
+                "Damage": 603,
                 "Armor": 805,
                 "Health": 3304,
                 "ProgressionIndex": 15,
@@ -43299,7 +43429,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 881,
+                "Damage": 719,
                 "Armor": 960,
                 "Health": 3940,
                 "ProgressionIndex": 14,
@@ -43308,7 +43438,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 925,
+                "Damage": 755,
                 "Armor": 1008,
                 "Health": 4137,
                 "ProgressionIndex": 15,
@@ -43317,7 +43447,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 1103,
+                "Damage": 900,
                 "Armor": 1202,
                 "Health": 4933,
                 "ProgressionIndex": 14,
@@ -43326,7 +43456,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 1158,
+                "Damage": 945,
                 "Armor": 1262,
                 "Health": 5180,
                 "ProgressionIndex": 15,
@@ -43335,7 +43465,7 @@
             },
             {
                 "AbilityLevel": 47,
-                "Damage": 1381,
+                "Damage": 1127,
                 "Armor": 1505,
                 "Health": 6177,
                 "ProgressionIndex": 14,
@@ -43344,7 +43474,7 @@
             },
             {
                 "AbilityLevel": 47,
-                "Damage": 1450,
+                "Damage": 1183,
                 "Armor": 1580,
                 "Health": 6486,
                 "ProgressionIndex": 15,
@@ -43353,7 +43483,7 @@
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 1729,
+                "Damage": 1411,
                 "Armor": 1884,
                 "Health": 7734,
                 "ProgressionIndex": 14,
@@ -43362,7 +43492,7 @@
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 1815,
+                "Damage": 1482,
                 "Armor": 1978,
                 "Health": 8121,
                 "ProgressionIndex": 15,
@@ -43371,7 +43501,7 @@
             },
             {
                 "AbilityLevel": 52,
-                "Damage": 2272,
+                "Damage": 1855,
                 "Armor": 2476,
                 "Health": 10167,
                 "ProgressionIndex": 16,
@@ -43380,7 +43510,7 @@
             },
             {
                 "AbilityLevel": 53,
-                "Damage": 2380,
+                "Damage": 1943,
                 "Armor": 2594,
                 "Health": 10651,
                 "ProgressionIndex": 17,
@@ -43389,7 +43519,7 @@
             },
             {
                 "AbilityLevel": 54,
-                "Damage": 2488,
+                "Damage": 2031,
                 "Armor": 2712,
                 "Health": 11135,
                 "ProgressionIndex": 18,
@@ -43398,7 +43528,7 @@
             },
             {
                 "AbilityLevel": 55,
-                "Damage": 2596,
+                "Damage": 2119,
                 "Armor": 2830,
                 "Health": 11619,
                 "ProgressionIndex": 19,
@@ -43407,7 +43537,7 @@
             },
             {
                 "AbilityLevel": 57,
-                "Damage": 2844,
+                "Damage": 2321,
                 "Armor": 3100,
                 "Health": 12729,
                 "ProgressionIndex": 16,
@@ -43416,7 +43546,7 @@
             },
             {
                 "AbilityLevel": 58,
-                "Damage": 2979,
+                "Damage": 2432,
                 "Armor": 3248,
                 "Health": 13335,
                 "ProgressionIndex": 17,
@@ -43425,7 +43555,7 @@
             },
             {
                 "AbilityLevel": 59,
-                "Damage": 3114,
+                "Damage": 2543,
                 "Armor": 3396,
                 "Health": 13941,
                 "ProgressionIndex": 18,
@@ -43434,7 +43564,7 @@
             },
             {
                 "AbilityLevel": 60,
-                "Damage": 3249,
+                "Damage": 2654,
                 "Armor": 3544,
                 "Health": 14547,
                 "ProgressionIndex": 19,
@@ -43443,7 +43573,7 @@
             },
             {
                 "AbilityLevel": 62,
-                "Damage": 3559,
+                "Damage": 2907,
                 "Armor": 3882,
                 "Health": 15936,
                 "ProgressionIndex": 16,
@@ -43452,7 +43582,7 @@
             },
             {
                 "AbilityLevel": 63,
-                "Damage": 3728,
+                "Damage": 3045,
                 "Armor": 4067,
                 "Health": 16695,
                 "ProgressionIndex": 17,
@@ -43461,7 +43591,7 @@
             },
             {
                 "AbilityLevel": 64,
-                "Damage": 3897,
+                "Damage": 3183,
                 "Armor": 4252,
                 "Health": 17454,
                 "ProgressionIndex": 18,
@@ -43470,7 +43600,7 @@
             },
             {
                 "AbilityLevel": 65,
-                "Damage": 4066,
+                "Damage": 3321,
                 "Armor": 4437,
                 "Health": 18213,
                 "ProgressionIndex": 19,
@@ -43492,7 +43622,7 @@
         "Ranged Hits": 2,
         "Distance": 2,
         "Movement": 3,
-        "Traits": ["RapidAssault", "Camouflage", "Infiltrate"],
+        "Traits": ["Camouflage", "Infiltrate", "RapidAssault"],
         "Stats": [
             {
                 "AbilityLevel": 1,
@@ -44086,7 +44216,7 @@
         "Stats": [
             {
                 "AbilityLevel": 3,
-                "Damage": 14,
+                "Damage": 10,
                 "Armor": 34,
                 "Health": 145,
                 "ProgressionIndex": 1,
@@ -44095,7 +44225,7 @@
             },
             {
                 "AbilityLevel": 5,
-                "Damage": 17,
+                "Damage": 12,
                 "Armor": 43,
                 "Health": 181,
                 "ProgressionIndex": 1,
@@ -44104,7 +44234,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 24,
+                "Damage": 16,
                 "Armor": 59,
                 "Health": 247,
                 "ProgressionIndex": 2,
@@ -44113,7 +44243,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 26,
+                "Damage": 18,
                 "Armor": 64,
                 "Health": 268,
                 "ProgressionIndex": 4,
@@ -44122,7 +44252,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 32,
+                "Damage": 22,
                 "Armor": 80,
                 "Health": 335,
                 "ProgressionIndex": 4,
@@ -44131,7 +44261,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 34,
+                "Damage": 24,
                 "Armor": 86,
                 "Health": 361,
                 "ProgressionIndex": 5,
@@ -44140,7 +44270,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 43,
+                "Damage": 30,
                 "Armor": 108,
                 "Health": 452,
                 "ProgressionIndex": 6,
@@ -44149,7 +44279,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 46,
+                "Damage": 32,
                 "Armor": 115,
                 "Health": 485,
                 "ProgressionIndex": 7,
@@ -44158,7 +44288,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 49,
+                "Damage": 34,
                 "Armor": 123,
                 "Health": 517,
                 "ProgressionIndex": 8,
@@ -44167,7 +44297,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 97,
+                "Damage": 68,
                 "Armor": 241,
                 "Health": 1014,
                 "ProgressionIndex": 9,
@@ -44176,7 +44306,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 128,
+                "Damage": 90,
                 "Armor": 321,
                 "Health": 1349,
                 "ProgressionIndex": 10,
@@ -44185,7 +44315,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 170,
+                "Damage": 119,
                 "Armor": 426,
                 "Health": 1789,
                 "ProgressionIndex": 11,
@@ -44194,7 +44324,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 353,
+                "Damage": 247,
                 "Armor": 882,
                 "Health": 3705,
                 "ProgressionIndex": 13,
@@ -44203,7 +44333,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 465,
+                "Damage": 326,
                 "Armor": 1163,
                 "Health": 4883,
                 "ProgressionIndex": 14,
@@ -44212,7 +44342,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 582,
+                "Damage": 408,
                 "Armor": 1456,
                 "Health": 6113,
                 "ProgressionIndex": 14,
@@ -44221,7 +44351,7 @@
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 958,
+                "Damage": 671,
                 "Armor": 2396,
                 "Health": 10062,
                 "ProgressionIndex": 15,
@@ -44230,7 +44360,7 @@
             },
             {
                 "AbilityLevel": 55,
-                "Damage": 1257,
+                "Damage": 880,
                 "Armor": 3142,
                 "Health": 13197,
                 "ProgressionIndex": 17,
@@ -44258,7 +44388,7 @@
         "Stats": [
             {
                 "AbilityLevel": 3,
-                "Damage": 48,
+                "Damage": 34,
                 "Armor": 23,
                 "Health": 103,
                 "ProgressionIndex": 1,
@@ -44267,7 +44397,7 @@
             },
             {
                 "AbilityLevel": 5,
-                "Damage": 60,
+                "Damage": 43,
                 "Armor": 29,
                 "Health": 129,
                 "ProgressionIndex": 1,
@@ -44276,7 +44406,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 82,
+                "Damage": 59,
                 "Armor": 40,
                 "Health": 177,
                 "ProgressionIndex": 2,
@@ -44285,7 +44415,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 89,
+                "Damage": 64,
                 "Armor": 43,
                 "Health": 191,
                 "ProgressionIndex": 4,
@@ -44294,7 +44424,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 112,
+                "Damage": 80,
                 "Armor": 54,
                 "Health": 240,
                 "ProgressionIndex": 4,
@@ -44303,7 +44433,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 120,
+                "Damage": 86,
                 "Armor": 58,
                 "Health": 258,
                 "ProgressionIndex": 5,
@@ -44312,7 +44442,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 151,
+                "Damage": 108,
                 "Armor": 73,
                 "Health": 323,
                 "ProgressionIndex": 6,
@@ -44321,7 +44451,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 202,
+                "Damage": 144,
                 "Armor": 98,
                 "Health": 433,
                 "ProgressionIndex": 7,
@@ -44330,7 +44460,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 216,
+                "Damage": 154,
                 "Armor": 105,
                 "Health": 462,
                 "ProgressionIndex": 8,
@@ -44339,7 +44469,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 338,
+                "Damage": 241,
                 "Armor": 164,
                 "Health": 724,
                 "ProgressionIndex": 9,
@@ -44348,7 +44478,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 450,
+                "Damage": 321,
                 "Armor": 218,
                 "Health": 964,
                 "ProgressionIndex": 10,
@@ -44357,7 +44487,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 596,
+                "Damage": 426,
                 "Armor": 290,
                 "Health": 1278,
                 "ProgressionIndex": 11,
@@ -44366,7 +44496,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 1235,
+                "Damage": 882,
                 "Armor": 600,
                 "Health": 2646,
                 "ProgressionIndex": 13,
@@ -44375,7 +44505,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 1628,
+                "Damage": 1163,
                 "Armor": 791,
                 "Health": 3488,
                 "ProgressionIndex": 14,
@@ -44384,7 +44514,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 2038,
+                "Damage": 1456,
                 "Armor": 990,
                 "Health": 4367,
                 "ProgressionIndex": 14,
@@ -44393,7 +44523,7 @@
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 3354,
+                "Damage": 2396,
                 "Armor": 1629,
                 "Health": 7187,
                 "ProgressionIndex": 15,
@@ -44402,7 +44532,7 @@
             },
             {
                 "AbilityLevel": 55,
-                "Damage": 4399,
+                "Damage": 3142,
                 "Armor": 2137,
                 "Health": 9427,
                 "ProgressionIndex": 17,
@@ -44600,7 +44730,7 @@
         "Stats": [
             {
                 "AbilityLevel": 3,
-                "Damage": 73,
+                "Damage": 55,
                 "Armor": 22,
                 "Health": 90,
                 "ProgressionIndex": 1,
@@ -44609,7 +44739,7 @@
             },
             {
                 "AbilityLevel": 5,
-                "Damage": 91,
+                "Damage": 69,
                 "Armor": 28,
                 "Health": 112,
                 "ProgressionIndex": 1,
@@ -44618,7 +44748,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 125,
+                "Damage": 94,
                 "Armor": 38,
                 "Health": 153,
                 "ProgressionIndex": 2,
@@ -44627,7 +44757,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 135,
+                "Damage": 102,
                 "Armor": 41,
                 "Health": 166,
                 "ProgressionIndex": 4,
@@ -44636,7 +44766,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 169,
+                "Damage": 128,
                 "Armor": 51,
                 "Health": 208,
                 "ProgressionIndex": 4,
@@ -44645,7 +44775,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 182,
+                "Damage": 138,
                 "Armor": 55,
                 "Health": 224,
                 "ProgressionIndex": 5,
@@ -44654,7 +44784,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 228,
+                "Damage": 172,
                 "Armor": 69,
                 "Health": 280,
                 "ProgressionIndex": 6,
@@ -44663,7 +44793,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 245,
+                "Damage": 185,
                 "Armor": 74,
                 "Health": 300,
                 "ProgressionIndex": 7,
@@ -44672,7 +44802,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 261,
+                "Damage": 197,
                 "Armor": 79,
                 "Health": 320,
                 "ProgressionIndex": 8,
@@ -44681,7 +44811,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 512,
+                "Damage": 386,
                 "Armor": 155,
                 "Health": 628,
                 "ProgressionIndex": 9,
@@ -44690,7 +44820,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 681,
+                "Damage": 514,
                 "Armor": 206,
                 "Health": 835,
                 "ProgressionIndex": 10,
@@ -44699,7 +44829,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 903,
+                "Damage": 681,
                 "Armor": 273,
                 "Health": 1107,
                 "ProgressionIndex": 11,
@@ -44708,7 +44838,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 1870,
+                "Damage": 1411,
                 "Armor": 565,
                 "Health": 2294,
                 "ProgressionIndex": 13,
@@ -44717,7 +44847,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 2465,
+                "Damage": 1860,
                 "Armor": 744,
                 "Health": 3023,
                 "ProgressionIndex": 14,
@@ -44726,7 +44856,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 3086,
+                "Damage": 2329,
                 "Armor": 932,
                 "Health": 3784,
                 "ProgressionIndex": 14,
@@ -44735,7 +44865,7 @@
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 5079,
+                "Damage": 3833,
                 "Armor": 1533,
                 "Health": 6229,
                 "ProgressionIndex": 15,
@@ -44744,7 +44874,7 @@
             },
             {
                 "AbilityLevel": 55,
-                "Damage": 6662,
+                "Damage": 5028,
                 "Armor": 2011,
                 "Health": 8170,
                 "ProgressionIndex": 17,
@@ -45165,7 +45295,7 @@
         "Stats": [
             {
                 "AbilityLevel": 3,
-                "Damage": 37,
+                "Damage": 34,
                 "Armor": 25,
                 "Health": 110,
                 "ProgressionIndex": 1,
@@ -45174,7 +45304,7 @@
             },
             {
                 "AbilityLevel": 5,
-                "Damage": 47,
+                "Damage": 43,
                 "Armor": 31,
                 "Health": 138,
                 "ProgressionIndex": 1,
@@ -45183,7 +45313,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 64,
+                "Damage": 59,
                 "Armor": 42,
                 "Health": 188,
                 "ProgressionIndex": 2,
@@ -45192,7 +45322,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 69,
+                "Damage": 64,
                 "Armor": 46,
                 "Health": 204,
                 "ProgressionIndex": 4,
@@ -45201,7 +45331,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 86,
+                "Damage": 80,
                 "Armor": 57,
                 "Health": 256,
                 "ProgressionIndex": 4,
@@ -45210,7 +45340,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 93,
+                "Damage": 86,
                 "Armor": 62,
                 "Health": 275,
                 "ProgressionIndex": 5,
@@ -45219,7 +45349,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 116,
+                "Damage": 108,
                 "Armor": 78,
                 "Health": 345,
                 "ProgressionIndex": 6,
@@ -45228,7 +45358,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 156,
+                "Damage": 144,
                 "Armor": 104,
                 "Health": 462,
                 "ProgressionIndex": 7,
@@ -45237,7 +45367,7 @@
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 166,
+                "Damage": 154,
                 "Armor": 111,
                 "Health": 493,
                 "ProgressionIndex": 8,
@@ -45246,7 +45376,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 261,
+                "Damage": 241,
                 "Armor": 174,
                 "Health": 773,
                 "ProgressionIndex": 9,
@@ -45255,7 +45385,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 347,
+                "Damage": 321,
                 "Armor": 231,
                 "Health": 1028,
                 "ProgressionIndex": 10,
@@ -45264,7 +45394,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 460,
+                "Damage": 426,
                 "Armor": 307,
                 "Health": 1363,
                 "ProgressionIndex": 11,
@@ -45273,7 +45403,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 953,
+                "Damage": 882,
                 "Armor": 635,
                 "Health": 2823,
                 "ProgressionIndex": 13,
@@ -45282,7 +45412,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 1256,
+                "Damage": 1163,
                 "Armor": 837,
                 "Health": 3720,
                 "ProgressionIndex": 14,
@@ -45291,7 +45421,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 1572,
+                "Damage": 1456,
                 "Armor": 1048,
                 "Health": 4658,
                 "ProgressionIndex": 14,
@@ -45300,7 +45430,7 @@
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 2587,
+                "Damage": 2396,
                 "Armor": 1725,
                 "Health": 7666,
                 "ProgressionIndex": 15,
@@ -45309,7 +45439,7 @@
             },
             {
                 "AbilityLevel": 55,
-                "Damage": 3394,
+                "Damage": 3142,
                 "Armor": 2262,
                 "Health": 10055,
                 "ProgressionIndex": 17,
@@ -45421,13 +45551,13 @@
         "Traits": ["CrushingStrike", "MkXGravis", "SuppressiveFire"],
         "Stats": [
             {
-                "AbilityLevel": 14,
-                "Damage": 78,
-                "Armor": 85,
-                "Health": 500,
-                "ProgressionIndex": 5,
-                "Rank": 5,
-                "Stars": 4
+                "AbilityLevel": 35,
+                "Damage": 454,
+                "Armor": 555,
+                "Health": 3026,
+                "ProgressionIndex": 10,
+                "Rank": 12,
+                "Stars": 7
             },
             {
                 "AbilityLevel": 38,
@@ -45522,13 +45652,13 @@
         "Traits": ["FinalJustice", "Parry"],
         "Stats": [
             {
-                "AbilityLevel": 26,
-                "Damage": 399,
-                "Armor": 266,
-                "Health": 1209,
-                "ProgressionIndex": 8,
-                "Rank": 9,
-                "Stars": 6
+                "AbilityLevel": 8,
+                "Damage": 78,
+                "Armor": 52,
+                "Health": 236,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
             }
         ],
         "Active Abilities": ["UnbreakableDuty"],
@@ -45605,12 +45735,12 @@
         "Traits": ["FinalJustice", "Parry", "RapidAssault"],
         "Stats": [
             {
-                "AbilityLevel": 35,
-                "Damage": 630,
-                "Armor": 630,
-                "Health": 2774,
+                "AbilityLevel": 29,
+                "Damage": 402,
+                "Armor": 402,
+                "Health": 1770,
                 "ProgressionIndex": 10,
-                "Rank": 12,
+                "Rank": 10,
                 "Stars": 7
             }
         ],
@@ -45669,13 +45799,22 @@
         "Traits": ["FinalJustice", "Parry"],
         "Stats": [
             {
-                "AbilityLevel": 44,
-                "Damage": 917,
-                "Armor": 1345,
-                "Health": 5808,
+                "AbilityLevel": 50,
+                "Damage": 1437,
+                "Armor": 2108,
+                "Health": 9104,
                 "ProgressionIndex": 15,
-                "Rank": 15,
+                "Rank": 17,
                 "Stars": 11
+            },
+            {
+                "AbilityLevel": 60,
+                "Damage": 2468,
+                "Armor": 3619,
+                "Health": 15629,
+                "ProgressionIndex": 18,
+                "Rank": 19,
+                "Stars": 13
             }
         ],
         "Active Abilities": ["CrusadeOfWrath"],
@@ -45781,13 +45920,13 @@
         "Traits": ["Parry", "RapidAssault"],
         "Stats": [
             {
-                "AbilityLevel": 8,
-                "Damage": 141,
-                "Armor": 57,
-                "Health": 224,
-                "ProgressionIndex": 2,
-                "Rank": 3,
-                "Stars": 2
+                "AbilityLevel": 17,
+                "Damage": 324,
+                "Armor": 129,
+                "Health": 512,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
             }
         ],
         "Active Ability Damage": ["Power"],
@@ -51312,11 +51451,11 @@
         "Ranged Hits": 1,
         "Distance": 3,
         "Movement": 2,
-        "Traits": ["CloseCombatWeakness", "Flying", "Psyker", "ShadowInTheWarp", "Synapse"],
+        "Traits": ["RangedSpecialist", "Flying", "Psyker", "ShadowInTheWarp", "Synapse"],
         "Stats": [
             {
                 "AbilityLevel": 29,
-                "Damage": 379,
+                "Damage": 303,
                 "Armor": 257,
                 "Health": 1287,
                 "ProgressionIndex": 9,
@@ -51325,7 +51464,7 @@
             },
             {
                 "AbilityLevel": 32,
-                "Damage": 592,
+                "Damage": 474,
                 "Armor": 403,
                 "Health": 2014,
                 "ProgressionIndex": 14,
@@ -51334,7 +51473,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 975,
+                "Damage": 780,
                 "Armor": 663,
                 "Health": 3315,
                 "ProgressionIndex": 15,
@@ -51343,7 +51482,7 @@
             },
             {
                 "AbilityLevel": 47,
-                "Damage": 1914,
+                "Damage": 1531,
                 "Armor": 1301,
                 "Health": 6506,
                 "ProgressionIndex": 15,
@@ -51367,11 +51506,11 @@
         "Ranged Hits": 1,
         "Distance": 3,
         "Movement": 2,
-        "Traits": ["CloseCombatWeakness", "Flying", "Psyker", "ShadowInTheWarp", "Synapse"],
+        "Traits": ["RangedSpecialist", "Flying", "Psyker", "ShadowInTheWarp", "Synapse"],
         "Stats": [
             {
                 "AbilityLevel": 17,
-                "Damage": 101,
+                "Damage": 81,
                 "Armor": 60,
                 "Health": 687,
                 "ProgressionIndex": 5,
@@ -51380,7 +51519,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 1037,
+                "Damage": 830,
                 "Armor": 621,
                 "Health": 7052,
                 "ProgressionIndex": 13,
@@ -51404,11 +51543,11 @@
         "Ranged Hits": 1,
         "Distance": 3,
         "Movement": 2,
-        "Traits": ["CloseCombatWeakness", "Flying", "Psyker", "ShadowInTheWarp", "Synapse"],
+        "Traits": ["RangedSpecialist", "Flying", "Psyker", "ShadowInTheWarp", "Synapse"],
         "Stats": [
             {
                 "AbilityLevel": 26,
-                "Damage": 302,
+                "Damage": 242,
                 "Armor": 206,
                 "Health": 1028,
                 "ProgressionIndex": 8,
@@ -51726,79 +51865,6 @@
         "Active Abilities": ["AlphaWarrior"],
         "Passive Abilities": ["SynapticLinchpin"],
         "Icon": "snowprint_assets/characters/ui_image_portrait_tyran_wingedprime_01.png"
-    },
-    {
-        "id": "tyranNeurothrope_LHE",
-        "Name": "Neurothrope",
-        "Faction": "Tyranids",
-        "Alliance": "Xenos",
-        "Melee Damage": "Physical",
-        "Melee Hits": 1,
-        "Ranged Damage": "Psychic",
-        "Ranged Hits": 1,
-        "Distance": 3,
-        "Movement": 2,
-        "Traits": ["CloseCombatWeakness", "Flying", "Psyker", "ShadowInTheWarp", "Synapse"],
-        "Stats": [
-            {
-                "AbilityLevel": 8,
-                "Damage": 71,
-                "Armor": 48,
-                "Health": 240,
-                "ProgressionIndex": 2,
-                "Rank": 3,
-                "Stars": 2
-            },
-            {
-                "AbilityLevel": 17,
-                "Damage": 161,
-                "Armor": 109,
-                "Health": 549,
-                "ProgressionIndex": 5,
-                "Rank": 6,
-                "Stars": 4
-            },
-            {
-                "AbilityLevel": 26,
-                "Damage": 363,
-                "Armor": 246,
-                "Health": 1233,
-                "ProgressionIndex": 8,
-                "Rank": 9,
-                "Stars": 6
-            },
-            {
-                "AbilityLevel": 35,
-                "Damage": 801,
-                "Armor": 544,
-                "Health": 2724,
-                "ProgressionIndex": 11,
-                "Rank": 12,
-                "Stars": 8
-            },
-            {
-                "AbilityLevel": 50,
-                "Damage": 2875,
-                "Armor": 1956,
-                "Health": 9775,
-                "ProgressionIndex": 15,
-                "Rank": 17,
-                "Stars": 11
-            },
-            {
-                "AbilityLevel": 65,
-                "Damage": 4366,
-                "Armor": 2969,
-                "Health": 14841,
-                "ProgressionIndex": 19,
-                "Rank": 20,
-                "Stars": 14
-            }
-        ],
-        "Active Ability Damage": ["Psychic"],
-        "Active Abilities": ["SpiritLeech"],
-        "Passive Abilities": ["Neuroparasite"],
-        "Icon": "snowprint_assets/characters/ui_image_portrait_tyran_neurothrope_01.png"
     },
     {
         "id": "tyranNpc1Hormagaunt",
@@ -59418,11 +59484,11 @@
         "Ranged Hits": 1,
         "Distance": 3,
         "Movement": 2,
-        "Traits": ["CloseCombatWeakness", "Flying", "Psyker", "ShadowInTheWarp", "Synapse"],
+        "Traits": ["RangedSpecialist", "Flying", "Psyker", "ShadowInTheWarp", "Synapse"],
         "Stats": [
             {
                 "AbilityLevel": 3,
-                "Damage": 34,
+                "Damage": 28,
                 "Armor": 23,
                 "Health": 117,
                 "ProgressionIndex": 1,
@@ -59431,7 +59497,7 @@
             },
             {
                 "AbilityLevel": 5,
-                "Damage": 43,
+                "Damage": 34,
                 "Armor": 29,
                 "Health": 147,
                 "ProgressionIndex": 1,
@@ -59440,7 +59506,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 59,
+                "Damage": 47,
                 "Armor": 40,
                 "Health": 200,
                 "ProgressionIndex": 2,
@@ -59449,7 +59515,7 @@
             },
             {
                 "AbilityLevel": 8,
-                "Damage": 64,
+                "Damage": 51,
                 "Armor": 43,
                 "Health": 217,
                 "ProgressionIndex": 4,
@@ -59458,7 +59524,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 80,
+                "Damage": 64,
                 "Armor": 54,
                 "Health": 272,
                 "ProgressionIndex": 4,
@@ -59467,7 +59533,7 @@
             },
             {
                 "AbilityLevel": 11,
-                "Damage": 86,
+                "Damage": 69,
                 "Armor": 58,
                 "Health": 292,
                 "ProgressionIndex": 5,
@@ -59476,7 +59542,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 108,
+                "Damage": 86,
                 "Armor": 73,
                 "Health": 366,
                 "ProgressionIndex": 6,
@@ -59485,7 +59551,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 115,
+                "Damage": 92,
                 "Armor": 78,
                 "Health": 392,
                 "ProgressionIndex": 7,
@@ -59494,7 +59560,7 @@
             },
             {
                 "AbilityLevel": 14,
-                "Damage": 123,
+                "Damage": 98,
                 "Armor": 84,
                 "Health": 418,
                 "ProgressionIndex": 8,
@@ -59503,7 +59569,7 @@
             },
             {
                 "AbilityLevel": 23,
-                "Damage": 241,
+                "Damage": 193,
                 "Armor": 164,
                 "Health": 821,
                 "ProgressionIndex": 9,
@@ -59512,7 +59578,7 @@
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 321,
+                "Damage": 257,
                 "Armor": 218,
                 "Health": 1092,
                 "ProgressionIndex": 10,
@@ -59521,7 +59587,7 @@
             },
             {
                 "AbilityLevel": 29,
-                "Damage": 426,
+                "Damage": 341,
                 "Armor": 290,
                 "Health": 1448,
                 "ProgressionIndex": 11,
@@ -59530,7 +59596,7 @@
             },
             {
                 "AbilityLevel": 38,
-                "Damage": 882,
+                "Damage": 706,
                 "Armor": 600,
                 "Health": 2999,
                 "ProgressionIndex": 13,
@@ -59539,7 +59605,7 @@
             },
             {
                 "AbilityLevel": 41,
-                "Damage": 1163,
+                "Damage": 930,
                 "Armor": 791,
                 "Health": 3953,
                 "ProgressionIndex": 14,
@@ -59548,7 +59614,7 @@
             },
             {
                 "AbilityLevel": 44,
-                "Damage": 1456,
+                "Damage": 1164,
                 "Armor": 990,
                 "Health": 4949,
                 "ProgressionIndex": 14,
@@ -59557,7 +59623,7 @@
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 2396,
+                "Damage": 1917,
                 "Armor": 1629,
                 "Health": 8145,
                 "ProgressionIndex": 15,
@@ -59566,7 +59632,7 @@
             },
             {
                 "AbilityLevel": 55,
-                "Damage": 3142,
+                "Damage": 2514,
                 "Armor": 2137,
                 "Health": 10684,
                 "ProgressionIndex": 17,
@@ -59575,7 +59641,7 @@
             },
             {
                 "AbilityLevel": 60,
-                "Damage": 3934,
+                "Damage": 3147,
                 "Armor": 2675,
                 "Health": 13376,
                 "ProgressionIndex": 17,
@@ -63280,5 +63346,424 @@
         "Active Abilities": ["StormOfWrath"],
         "Passive Abilities": ["PsychicFortress"],
         "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_tigurius_01.png"
+    },
+    {
+        "id": "votanNpc1Ecog",
+        "Name": "E-COG",
+        "Faction": "LeaguesOfVotann",
+        "Alliance": "Xenos",
+        "Melee Damage": "Plasma",
+        "Melee Hits": 1,
+        "Movement": 3,
+        "Traits": ["Flying", "Mechanical", "Mechanic"],
+        "Stats": [
+            {
+                "AbilityLevel": 1,
+                "Damage": 18,
+                "Armor": 16,
+                "Health": 40,
+                "ProgressionIndex": 0,
+                "Rank": 0,
+                "Stars": 0
+            },
+            {
+                "AbilityLevel": 3,
+                "Damage": 23,
+                "Armor": 20,
+                "Health": 50,
+                "ProgressionIndex": 0,
+                "Rank": 1,
+                "Stars": 0
+            },
+            {
+                "AbilityLevel": 3,
+                "Damage": 25,
+                "Armor": 22,
+                "Health": 55,
+                "ProgressionIndex": 1,
+                "Rank": 1,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 5,
+                "Damage": 31,
+                "Armor": 28,
+                "Health": 69,
+                "ProgressionIndex": 1,
+                "Rank": 2,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 39,
+                "Armor": 35,
+                "Health": 86,
+                "ProgressionIndex": 1,
+                "Rank": 3,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 43,
+                "Armor": 38,
+                "Health": 94,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 11,
+                "Damage": 54,
+                "Armor": 48,
+                "Health": 118,
+                "ProgressionIndex": 3,
+                "Rank": 4,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 14,
+                "Damage": 68,
+                "Armor": 60,
+                "Health": 148,
+                "ProgressionIndex": 3,
+                "Rank": 5,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 14,
+                "Damage": 79,
+                "Armor": 70,
+                "Health": 173,
+                "ProgressionIndex": 5,
+                "Rank": 5,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 92,
+                "Armor": 81,
+                "Health": 201,
+                "ProgressionIndex": 4,
+                "Rank": 6,
+                "Stars": 3
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 113,
+                "Armor": 100,
+                "Health": 247,
+                "ProgressionIndex": 8,
+                "Rank": 6,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 20,
+                "Damage": 141,
+                "Armor": 125,
+                "Health": 309,
+                "ProgressionIndex": 8,
+                "Rank": 7,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 165,
+                "Armor": 147,
+                "Health": 363,
+                "ProgressionIndex": 7,
+                "Rank": 8,
+                "Stars": 5
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 187,
+                "Armor": 167,
+                "Health": 411,
+                "ProgressionIndex": 10,
+                "Rank": 8,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 209,
+                "Armor": 187,
+                "Health": 459,
+                "ProgressionIndex": 13,
+                "Rank": 8,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 234,
+                "Armor": 209,
+                "Health": 514,
+                "ProgressionIndex": 10,
+                "Rank": 9,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 262,
+                "Armor": 234,
+                "Health": 574,
+                "ProgressionIndex": 13,
+                "Rank": 9,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 311,
+                "Armor": 278,
+                "Health": 681,
+                "ProgressionIndex": 11,
+                "Rank": 10,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 328,
+                "Armor": 293,
+                "Health": 719,
+                "ProgressionIndex": 13,
+                "Rank": 10,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 32,
+                "Damage": 389,
+                "Armor": 348,
+                "Health": 853,
+                "ProgressionIndex": 11,
+                "Rank": 11,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 32,
+                "Damage": 432,
+                "Armor": 387,
+                "Health": 948,
+                "ProgressionIndex": 14,
+                "Rank": 11,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 541,
+                "Armor": 485,
+                "Health": 1187,
+                "ProgressionIndex": 14,
+                "Rank": 12,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 568,
+                "Armor": 509,
+                "Health": 1246,
+                "ProgressionIndex": 15,
+                "Rank": 12,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 38,
+                "Damage": 677,
+                "Armor": 607,
+                "Health": 1486,
+                "ProgressionIndex": 14,
+                "Rank": 13,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 38,
+                "Damage": 711,
+                "Armor": 637,
+                "Health": 1560,
+                "ProgressionIndex": 15,
+                "Rank": 13,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 848,
+                "Armor": 760,
+                "Health": 1860,
+                "ProgressionIndex": 14,
+                "Rank": 14,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 890,
+                "Armor": 798,
+                "Health": 1953,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 44,
+                "Damage": 1061,
+                "Armor": 952,
+                "Health": 2329,
+                "ProgressionIndex": 14,
+                "Rank": 15,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 44,
+                "Damage": 1114,
+                "Armor": 1000,
+                "Health": 2445,
+                "ProgressionIndex": 15,
+                "Rank": 15,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 47,
+                "Damage": 1328,
+                "Armor": 1192,
+                "Health": 2915,
+                "ProgressionIndex": 14,
+                "Rank": 16,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 47,
+                "Damage": 1394,
+                "Armor": 1252,
+                "Health": 3061,
+                "ProgressionIndex": 15,
+                "Rank": 16,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 1662,
+                "Armor": 1493,
+                "Health": 3650,
+                "ProgressionIndex": 14,
+                "Rank": 17,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 1745,
+                "Armor": 1568,
+                "Health": 3833,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 52,
+                "Damage": 2185,
+                "Armor": 1963,
+                "Health": 4799,
+                "ProgressionIndex": 16,
+                "Rank": 18,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 53,
+                "Damage": 2289,
+                "Armor": 2056,
+                "Health": 5028,
+                "ProgressionIndex": 17,
+                "Rank": 18,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 54,
+                "Damage": 2393,
+                "Armor": 2149,
+                "Health": 5257,
+                "ProgressionIndex": 18,
+                "Rank": 18,
+                "Stars": 13
+            },
+            {
+                "AbilityLevel": 55,
+                "Damage": 2497,
+                "Armor": 2242,
+                "Health": 5486,
+                "ProgressionIndex": 19,
+                "Rank": 18,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 57,
+                "Damage": 2735,
+                "Armor": 2456,
+                "Health": 6010,
+                "ProgressionIndex": 16,
+                "Rank": 19,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 58,
+                "Damage": 2865,
+                "Armor": 2573,
+                "Health": 6296,
+                "ProgressionIndex": 17,
+                "Rank": 19,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 59,
+                "Damage": 2995,
+                "Armor": 2690,
+                "Health": 6582,
+                "ProgressionIndex": 18,
+                "Rank": 19,
+                "Stars": 13
+            },
+            {
+                "AbilityLevel": 60,
+                "Damage": 3125,
+                "Armor": 2807,
+                "Health": 6868,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 62,
+                "Damage": 3423,
+                "Armor": 3075,
+                "Health": 7524,
+                "ProgressionIndex": 16,
+                "Rank": 20,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 63,
+                "Damage": 3586,
+                "Armor": 3221,
+                "Health": 7882,
+                "ProgressionIndex": 17,
+                "Rank": 20,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 64,
+                "Damage": 3749,
+                "Armor": 3367,
+                "Health": 8240,
+                "ProgressionIndex": 18,
+                "Rank": 20,
+                "Stars": 13
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 3912,
+                "Armor": 3513,
+                "Health": 8598,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Passive Abilities": ["RepairEnthusiast"],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_votan_ecog_01.png"
     }
 ]
