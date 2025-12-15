@@ -118,10 +118,10 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
             noImperials,
             [
                 {
-                    name: 'Close Combat Weakness',
+                    name: 'Ranged Specialist',
                     points: 105,
                     units: filter(noImperials).byTrait(Trait.RangedSpecialist),
-                    iconId: 'close_combat_weakness',
+                    iconId: 'ranged_specialist',
                     index: 0,
                 },
                 {

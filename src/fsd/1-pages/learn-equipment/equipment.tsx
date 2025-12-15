@@ -176,7 +176,9 @@ export const Equipment = () => {
                     label="Show Characters"
                 />
             </div>
-            <div className="ag-theme-material min-h-[400px] w-full h-[calc(100vh - 12rem)]">
+            <div
+                className="ag-theme-material"
+                style={{ height: 'calc(100vh - 12rem)', minHeight: '400px', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
                     modules={[AllCommunityModule]}
