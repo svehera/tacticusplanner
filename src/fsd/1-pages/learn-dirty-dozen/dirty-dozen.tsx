@@ -4,10 +4,11 @@ import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line import-x/no-internal-modules
+import dirtyDozen from '@/data/dirty-dozen.json';
+// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
 import { DirtyDozenTable } from './dirty-dozen-table';
-import dirtyDozen from './dirty-dozen.data.json';
 import { IDirtyDozen } from './dirty-dozen.models';
 
 export const DirtyDozen = () => {
