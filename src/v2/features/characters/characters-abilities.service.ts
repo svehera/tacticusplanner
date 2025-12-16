@@ -1,7 +1,7 @@
 ﻿import { groupBy, mapValues, sum } from 'lodash';
 
-import abilitiesLvlUpJson from 'src/v2/data/characters-lvl-up-abilities.json';
-import xpData from 'src/v2/data/xp.json';
+import abilitiesLvlUpJson from 'src/data/characters-lvl-up-abilities.json';
+import xpData from 'src/data/xp.json';
 
 import { Rarity, Alliance } from '@/fsd/5-shared/model';
 

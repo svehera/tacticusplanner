@@ -1,5 +1,5 @@
 // eslint-disable-next-line import-x/no-internal-modules
-import factionsData from 'src/v2/data/factions.json';
+import factionsData from 'src/data/factions.json';
 
 import { Alliance, Faction } from '../model';
 

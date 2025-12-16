@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import React, { useMemo } from 'react';
 
-import factionsData from 'src/v2/data/factions.json';
+import factionsData from 'src/data/factions.json';
 
 import { Alliance, Faction, Rarity, RarityString } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
