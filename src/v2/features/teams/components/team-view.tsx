@@ -45,14 +45,21 @@ export const TeamView: React.FC<Props> = ({ characters, mow, withMow = false, on
     return (
         <div className="flex-box" style={{ zoom: isMobile ? '80%' : '100%' }}>
             <div className="flex-box gap5" style={{ display: 'flex', flexFlow: 'row wrap' }}>
-                {Array.from({ length: characters.length }).map((_, index) => {
-                    const character = characters[index];
-                    return character ? (
-                        <CharacterTile key={character.id} character={character} onCharacterClick={onCharacterClick} />
-                    ) : (
-                        <EmptyTile onClick={onEmptyCharacterClick} />
-                    );
-                })}
+                {(() => {
+                    const slotCount = Math.max(5, characters.length);
+                    return Array.from({ length: slotCount }).map((_, index) => {
+                        const character = characters[index];
+                        return character ? (
+                            <CharacterTile
+                                key={character.id}
+                                character={character}
+                                onCharacterClick={onCharacterClick}
+                            />
+                        ) : (
+                            <EmptyTile key={`empty-${index}`} onClick={onEmptyCharacterClick} />
+                        );
+                    });
+                })()}
             </div>
             {withMow && (
                 <>
