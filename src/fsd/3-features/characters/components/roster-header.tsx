@@ -1,10 +1,12 @@
 ﻿import { TextField } from '@mui/material';
 import React, { useContext } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { numberToThousandsString, numberToThousandsStringOld } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
 
 import { InfoBox } from './info-box';

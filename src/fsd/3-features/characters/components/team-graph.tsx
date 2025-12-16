@@ -7,8 +7,10 @@ import { ResponsiveLine } from '@nivo/line';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 
 import { InfoTeamGraphBox } from './info-team-graph-box';

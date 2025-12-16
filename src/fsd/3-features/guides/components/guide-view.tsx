@@ -4,9 +4,13 @@ import Dialog from '@mui/material/Dialog';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuideCard } from '@/fsd/3-features/guides/components/guide-card';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuidesStatus } from '@/fsd/3-features/guides/guides.enums';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuide } from '@/fsd/3-features/guides/guides.models';
 
 interface Props {

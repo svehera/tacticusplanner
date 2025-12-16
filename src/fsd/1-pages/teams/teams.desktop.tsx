@@ -7,15 +7,22 @@ import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 import { useDebounceValue } from 'usehooks-ts';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { AddTeamDialog } from '@/fsd/3-features/teams/components/add-team.dialog';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { EditTeamDialog } from '@/fsd/3-features/teams/components/edit-team.dialog';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TeamsGrid } from '@/fsd/3-features/teams/components/teams-grid';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { allModes } from '@/fsd/3-features/teams/teams.constants';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
 export const Teams = () => {

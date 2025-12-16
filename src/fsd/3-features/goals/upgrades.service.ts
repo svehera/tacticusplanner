@@ -1,5 +1,6 @@
 ﻿import { cloneDeep, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
 import {
     IDailyRaidsFarmOrder,
@@ -7,9 +8,11 @@ import {
     IEstimatedRanksSettings,
     ITrainingRushPreferences,
     ITrainingRushStrategy,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from 'src/models/interfaces';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Alliance, Faction, Rank } from '@/fsd/5-shared/model';
 
@@ -20,6 +23,7 @@ import {
     Campaign,
     ICampaignBattleComposed,
 } from '@/fsd/4-entities/campaign';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import {
     CharactersService,
@@ -28,6 +32,7 @@ import {
     IUnitUpgradeRank,
 } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
+// eslint-disable-next-line boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 import {
     IBaseUpgrade,
@@ -35,6 +40,7 @@ import {
     IMaterial,
     UpgradesService as FsdUpgradesService,
 } from '@/fsd/4-entities/upgrade';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { recipeDataByName } from '@/fsd/4-entities/upgrade/data';
 
 import {
@@ -48,6 +54,7 @@ import {
     IUnitUpgrade,
     IUpgradeRaid,
     IUpgradesRaidsDay,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/3-features/goals/goals.models';
 
 export class UpgradesService {

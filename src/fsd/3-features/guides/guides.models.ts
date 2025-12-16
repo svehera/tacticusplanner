@@ -1,5 +1,6 @@
 ﻿import { UnitType } from '@/fsd/5-shared/model';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 
 import { SlotType, GuidesGroup, GuidesStatus } from './guides.enums';

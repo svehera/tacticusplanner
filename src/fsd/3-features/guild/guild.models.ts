@@ -1,8 +1,11 @@
-﻿import { Difficulty } from 'src/models/enums';
+﻿// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { Difficulty } from 'src/models/enums';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuildMember, IInsightsData, IPersonalCharacterData2 } from 'src/models/interfaces';
 
 import { Rarity } from '@/fsd/5-shared/model';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMowDb } from '@/fsd/3-features/characters/characters.models';
 
 export interface IGuildInfoRequest {

@@ -1,5 +1,7 @@
-﻿import xpData from 'src/data/xp.json';
+﻿// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import xpData from 'src/data/xp.json';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IXpEstimate, IXpLevel } from '@/fsd/3-features/characters/characters.models';
 
 export class CharactersXpService {

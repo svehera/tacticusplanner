@@ -6,7 +6,9 @@ import IconButton from '@mui/material/IconButton';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { BfLevelTable } from '@/fsd/3-features/guild-war/bf-level-table';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuildWarService } from '@/fsd/3-features/guild-war/guild-war.service';
 
 export const BattlefieldInfo: React.FC = () => {

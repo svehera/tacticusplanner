@@ -2,16 +2,25 @@
 import Button from '@mui/material/Button';
 import React, { ChangeEvent, useCallback, useState } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuildRaidsModesFilter } from '@/fsd/3-features/guides/components/gr-modes-filter';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IncursionModesFilter } from '@/fsd/3-features/guides/components/incursion-modes-filter';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { LreModesFilter } from '@/fsd/3-features/guides/components/lre-modes-filter';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuideFilter } from '@/fsd/3-features/guides/guides.models';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { anyOption, gameModesForGuides, gwSubModes, taSubModes } from '@/fsd/3-features/teams/teams.constants';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 
 interface Props {

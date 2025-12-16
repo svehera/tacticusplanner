@@ -1,7 +1,10 @@
 ﻿import { orderBy, sum } from 'lodash';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { charsProgression, charsUnlockShards } from 'src/models/constants';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { StaticDataService } from 'src/services';
 
 import { Alliance, Rarity, RarityMapper } from '@/fsd/5-shared/model';
@@ -26,6 +29,7 @@ import {
     IItemRaidLocation,
     IShardMaterial,
     IShardsRaid,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/3-features/goals/goals.models';
 
 export class ShardsService {

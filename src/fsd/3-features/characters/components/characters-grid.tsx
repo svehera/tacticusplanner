@@ -5,8 +5,10 @@ import { UnitType } from '@/fsd/5-shared/model';
 import { Conditional } from '@/fsd/5-shared/ui';
 
 import { IUnit } from '@/fsd/4-entities/unit';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isUnlocked } from '@/fsd/4-entities/unit/units.functions';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MowTile } from '@/fsd/3-features/characters/components/mow-tile';
 
 import { CharacterTile } from './character-tile';

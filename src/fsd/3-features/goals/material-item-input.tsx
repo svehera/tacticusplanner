@@ -3,10 +3,14 @@ import React from 'react';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUpgradeRaid, IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RaidItemInput } from '@/fsd/3-features/goals/raid-item-input';
 
 interface Props {

@@ -1,7 +1,9 @@
 ﻿import { Card, CardContent, CardHeader } from '@mui/material';
 import React from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUpgradesRaidsDay } from '@/fsd/3-features/goals/goals.models';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MaterialItemView } from '@/fsd/3-features/goals/material-item-view';
 
 interface Props {

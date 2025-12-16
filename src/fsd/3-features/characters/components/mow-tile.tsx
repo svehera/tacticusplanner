@@ -2,7 +2,9 @@
 import { orderBy } from 'lodash';
 import React, { useContext } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { charsUnlockShards } from 'src/models/constants';
 
 import { numberToThousandsStringOld } from '@/fsd/5-shared/lib';
@@ -12,6 +14,7 @@ import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 import { IMow2 } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
 
 interface Props {

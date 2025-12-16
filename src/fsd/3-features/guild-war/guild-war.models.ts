@@ -1,4 +1,5 @@
-﻿import { ICharacter2 } from 'src/models/interfaces';
+﻿// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { ICharacter2 } from 'src/models/interfaces';
 
 import { Rarity } from '@/fsd/5-shared/model';
 

@@ -1,10 +1,12 @@
 ﻿import React from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
 
 import { RarityStars, Rank } from '@/fsd/5-shared/model';
 import { MiscIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 interface Props {

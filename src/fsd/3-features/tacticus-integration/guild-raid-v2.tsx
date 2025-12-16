@@ -19,12 +19,17 @@ import {
     TacticusGuildRaidResponse,
     getTacticusGuildRaidData,
     TacticusGuildRaidUnit,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacterData } from '@/fsd/4-entities/character/model';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMowStatic2 } from '@/fsd/4-entities/mow/model';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 
 // Type for aggregated user data

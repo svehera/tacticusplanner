@@ -6,22 +6,34 @@ import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RichTextEditor } from '@/shared-components/inputs/rich-text-editor';
 
 import { UnitType } from '@/fsd/5-shared/model';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
 import { IUnit } from '@/fsd/4-entities/unit';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuildRaidsModes } from '@/fsd/3-features/guides/components/gr-modes';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuidePreview } from '@/fsd/3-features/guides/components/guide-preview';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IncursionModes } from '@/fsd/3-features/guides/components/incursion-modes';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { LreModes } from '@/fsd/3-features/guides/components/lre-modes';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { SelectTeamDialog } from '@/fsd/3-features/guides/components/select-team-dialog';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TeamSlotEdit } from '@/fsd/3-features/guides/components/team-slot-edit';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { SlotType } from '@/fsd/3-features/guides/guides.enums';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICreateGuide, ITeamSlot } from '@/fsd/3-features/guides/guides.models';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { gameModesForGuides, gwSubModes, taSubModes } from '@/fsd/3-features/teams/teams.constants';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 
 interface Props {

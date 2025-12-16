@@ -3,6 +3,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 import { Popover, IconButton } from '@mui/material';
 import React from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import wyoInfo from 'src/assets/images/wyo_info.png';
 
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';

@@ -1,9 +1,12 @@
 ﻿import React, { useEffect, useMemo, useState } from 'react';
 
 import { Faction } from '@/fsd/5-shared/model';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { grEncounterToFaction, guildRaidBosses, guildRaidPrimes } from '@/fsd/3-features/teams/teams.constants';
 
 interface Props {

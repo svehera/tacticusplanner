@@ -8,6 +8,7 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
@@ -17,11 +18,17 @@ import { SearchParamsStateContext } from '@/fsd/5-shared/ui/contexts';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CreateGuideDialog } from '@/fsd/3-features/guides/components/create-guide.dialog';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { EditGuideDialog } from '@/fsd/3-features/guides/components/edit-guide.dialog';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuideCard } from '@/fsd/3-features/guides/components/guide-card';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuideView } from '@/fsd/3-features/guides/components/guide-view';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuidesFilter } from '@/fsd/3-features/guides/components/guides-filter';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RejectReasonDialog } from '@/fsd/3-features/guides/components/reject-reason.dialog';
 import {
     approveTeamApi,
@@ -31,8 +38,11 @@ import {
     rejectTeamApi,
     removeHonorTeamApi,
     updateTeamApi,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/3-features/guides/guides.endpoint';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuidesGroup, GuidesStatus } from '@/fsd/3-features/guides/guides.enums';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICreateGuide, IGetGuidesQueryParams, IGuide, IGuideFilter } from '@/fsd/3-features/guides/guides.models';
 
 export const Guides: React.FC = () => {

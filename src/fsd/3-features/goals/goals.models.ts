@@ -1,9 +1,11 @@
-﻿import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+﻿// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import {
     ICampaignBattleComposed,
     ICampaignsProgress,
     ICampaignsFilters,
     IDailyRaidsPreferences,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from 'src/models/interfaces';
 
 import { IUnitUpgradeRank } from '@/fsd/4-entities/character';
@@ -16,8 +18,10 @@ import {
 } from '@/fsd/4-entities/goal';
 import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacterAbilitiesMaterialsTotal, IXpEstimate } from '@/fsd/3-features/characters/characters.models';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMowMaterialsTotal } from '@/fsd/1-pages/learn-mow/lookup.models';
 
 export type CharacterRaidGoalSelect =

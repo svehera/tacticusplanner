@@ -2,6 +2,7 @@
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IRarityCap } from '@/fsd/3-features/characters/characters.models';
 
 export const unsetCharacter: Partial<ICharacter2> = {

@@ -12,6 +12,7 @@ import { EquipmentIcon, EquipmentService } from '@/fsd/4-entities/equipment';
 import { ICharacterUpgradeRankGoal, PersonalGoalType } from '@/fsd/4-entities/goal';
 import { MowsService } from '@/fsd/4-entities/mow';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ILreTileSettings } from '@/fsd/3-features/view-settings';
 

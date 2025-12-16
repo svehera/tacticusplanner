@@ -4,6 +4,7 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuildMember } from 'src/models/interfaces';
 
 import { FlexBox } from '@/fsd/5-shared/ui';

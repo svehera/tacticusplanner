@@ -2,6 +2,7 @@
 
 import { IUnit } from '@/fsd/4-entities/unit';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersService } from '@/fsd/3-features/characters/characters.service';
 
 export const canAscendCharacter = (unit: IUnit) => {
