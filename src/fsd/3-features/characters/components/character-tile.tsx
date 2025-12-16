@@ -2,10 +2,10 @@
 import { orderBy } from 'lodash';
 import React, { useCallback, useContext, useMemo } from 'react';
 
+import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
 import { charsReleaseShards, charsUnlockShards } from 'src/models/constants';
 import { ICharacter2 } from 'src/models/interfaces';
 import { needToAscendCharacter, needToLevelCharacter } from 'src/shared-logic/functions';
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
 
 import { numberToThousandsStringOld } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Rank } from '@/fsd/5-shared/model';

@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
 
-import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
+import { RichTextEditor } from '@/shared-components/inputs/rich-text-editor';
 
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import { SelectTeamDialog } from '@/fsd/3-features/guides/components/select-team-dialog';

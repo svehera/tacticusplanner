@@ -1,7 +1,7 @@
 ﻿import Typography from '@mui/material/Typography';
 import React from 'react';
 
-import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
+import { RichTextViewer } from '@/shared-components/inputs/rich-text-viewer';
 
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import { TeamView } from '@/fsd/3-features/guides/components/team-view';

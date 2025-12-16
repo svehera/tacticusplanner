@@ -2,8 +2,8 @@
 import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
+import { DifficultyImage } from '@/shared-components/images/difficulty-image';
 import { Difficulty } from 'src/models/enums';
-import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox } from '@/fsd/5-shared/ui';

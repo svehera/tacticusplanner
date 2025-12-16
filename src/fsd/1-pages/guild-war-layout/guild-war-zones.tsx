@@ -16,11 +16,11 @@ import { CommonProps } from '@mui/material/OverridableComponent';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { DifficultyImage } from '@/shared-components/images/difficulty-image';
+import { WarZoneBuffImage } from '@/shared-components/images/war-zone-buff-image';
 import { Difficulty } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
-import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
-import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
 
 import { Rank } from '@/fsd/5-shared/model';
 import { LoaderWithText, AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
