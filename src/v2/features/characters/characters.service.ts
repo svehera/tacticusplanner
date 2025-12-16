@@ -1,8 +1,8 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
+import factionsData from 'src/data/factions.json';
 import { charsUnlockShards, charsProgression } from 'src/models/constants';
 import { IPersonalCharacterData2, ICharProgression } from 'src/models/interfaces';
-import factionsData from 'src/v2/data/factions.json';
 
 import { Rank, Rarity, UnitType, RarityStars } from '@/fsd/5-shared/model';
 

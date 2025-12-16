@@ -1,4 +1,4 @@
-import xpData from 'src/v2/data/xp.json';
+import xpData from 'src/data/xp.json';
 
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api';
 import { RarityStars, Rarity, Rank, Alliance } from '@/fsd/5-shared/model';
