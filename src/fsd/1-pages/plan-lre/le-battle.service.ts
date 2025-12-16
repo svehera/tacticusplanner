@@ -1,6 +1,8 @@
+// eslint-disable-next-line import-x/no-internal-modules
+import battleData from '@/data/newLeBattleData.json';
+
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
-import battleData from './newLeBattleData.json';
 import { TokenDisplay } from './token-estimation-service';
 
 export interface ILeWave {
