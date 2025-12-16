@@ -14,7 +14,6 @@ import { MowsService } from '@/fsd/4-entities/mow';
 
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ILreTileSettings } from '@/fsd/3-features/view-settings';
-// eslint-disable-next-line import-x/no-internal-modules
 
 interface Props {
     character: ICharacter2;
