@@ -1,7 +1,7 @@
 ﻿import { capitalize, intersection } from 'lodash';
 
+import { IMenuOption } from '@/models/menu-option';
 import { ICharacter2 } from 'src/models/interfaces';
-import { IMenuOption } from 'src/v2/models/menu-option';
 
 import { mows2Data } from '@/fsd/4-entities/mow';
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';

@@ -1,4 +1,4 @@
-﻿import { IMenuOption } from 'src/v2/models/menu-option';
+﻿import { IMenuOption } from '@/models/menu-option';
 
 import { Faction } from '@/fsd/5-shared/model';
 

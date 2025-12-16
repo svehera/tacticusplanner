@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useMemo, useState } from 'react';
 
-import { IMenuOption } from 'src/v2/models/menu-option';
+import { IMenuOption } from '@/models/menu-option';
 
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
