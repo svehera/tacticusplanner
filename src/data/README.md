@@ -8,5 +8,5 @@ They were originally scattered throughout the codebase, but have been consolidat
 - There are 2 slightly different versions of the `newNpcData` file. We should figure out which one is the correct version and remove the other.
 - Figure out where these data files are coming from. If possible, add a script in `package.json` to regenerate them automatically.
 - A lot of the files have corresponding TypeScript types. Unfortunately the data is not necessarily validated against these types. Either
-  - 1) Make `zod` schemas for the data and validate when they are loaded, or
-  - 2) Convert the data files to TypeScript files and use `as const` so that TS can validate them at compile time.
+    -   1. Make `zod` schemas for the data and validate when they are loaded, or
+    -   2. Convert the data files to TypeScript files and use `as const` so that TS can validate them at compile time.
