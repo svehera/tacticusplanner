@@ -26,7 +26,7 @@ export interface ISnapshotUnitDiff {
     passive?: number;
 }
 
-export interface ISnapshot {
+export interface IRosterSnapshot {
     // The user provided name of the snapshot.
     name: string;
 
@@ -37,7 +37,7 @@ export interface ISnapshot {
     mows: ISnapshotMachineOfWar[];
 }
 
-export interface ISnapshotDiff {
+export interface IRosterSnapshotDiff {
     // The user provided name of the snapshot.
     name: string;
 
@@ -50,6 +50,6 @@ export interface ISnapshotDiff {
 
 export interface IRosterSnapshotsState {
     // The base snapshot state. If undefined, diffs is ignored.
-    base: ISnapshot | undefined;
-    diffs: ISnapshotDiff[];
+    base: IRosterSnapshot | undefined;
+    diffs: IRosterSnapshotDiff[];
 }

@@ -3,10 +3,32 @@ import { ICharacter2 } from '@/models/interfaces';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
 
-import { ISnapshot, ISnapshotCharacter, ISnapshotDiff, ISnapshotMachineOfWar, ISnapshotUnitDiff } from './models';
+import {
+    IRosterSnapshot,
+    ISnapshotCharacter,
+    IRosterSnapshotDiff,
+    ISnapshotMachineOfWar,
+    ISnapshotUnitDiff,
+} from './models';
 
 export class RosterSnapshotsService {
-    public static createSnapshot(name: string, timeMillisUtc: number, chars: ICharacter2[], mows: IMow2[]): ISnapshot {
+    /**
+     * Creates a new roster snapshot from detailed character and machine of war data.
+     * This method transforms the full character and machine of war objects into a more
+     * concise snapshot format, extracting only the essential properties for storage and comparison.
+     *
+     * @param name - The user-defined name for the snapshot.
+     * @param timeMillisUtc - The creation timestamp of the snapshot in UTC milliseconds.
+     * @param chars - An array of `ICharacter2` objects representing the user's characters.
+     * @param mows - An array of `IMow2` objects representing the user's machines of war.
+     * @returns A new `IRosterSnapshot` object containing the processed and condensed roster data.
+     */
+    public static createSnapshot(
+        name: string,
+        timeMillisUtc: number,
+        chars: ICharacter2[],
+        mows: IMow2[]
+    ): IRosterSnapshot {
         const snapshotChars: ISnapshotCharacter[] = chars.map(
             c =>
                 ({
@@ -36,7 +58,23 @@ export class RosterSnapshotsService {
         };
     }
 
-    public static resolveSnapshotDiff(base: ISnapshot, diff: ISnapshotDiff): ISnapshot {
+    /**
+     * Applies a set of changes (a diff) to a base roster snapshot to produce a new, resolved snapshot.
+     *
+     * This method does not mutate the base snapshot. It creates a new snapshot object
+     * by taking a deep copy of the base characters and machines of war, and then applying the changes
+     * specified in the diff.
+     *
+     * - If an entity (character or MoW) exists in the diff but not in the base, it is added to the roster.
+     * - If an entity exists in both, its properties are updated with the values from the diff. Any properties
+     *   not specified in the diff for an existing entity will retain their original values from the base snapshot.
+     * - The name and date for the resulting snapshot are taken directly from the diff object.
+     *
+     * @param base The base roster snapshot to which the diff will be applied.
+     * @param diff The diff object containing the changes to apply.
+     * @returns A new `IRosterSnapshot` instance representing the state of the roster after applying the diff.
+     */
+    public static resolveSnapshotDiff(base: IRosterSnapshot, diff: IRosterSnapshotDiff): IRosterSnapshot {
         const resolvedChars: ISnapshotCharacter[] = base.chars.map(c => ({ ...c }));
         const resolvedMows: ISnapshotMachineOfWar[] = base.mows.map(m => ({ ...m }));
 
@@ -94,7 +132,25 @@ export class RosterSnapshotsService {
         };
     }
 
-    public static diffSnapshots(base: ISnapshot, compare: ISnapshot): ISnapshotDiff {
+    /**
+     * Compares two roster snapshots and generates a diff object highlighting the changes.
+     *
+     * This method identifies differences between a `base` and a `compare` snapshot.
+     * It checks for newly added characters ('chars') and machines of war ('mows'). For units
+     * present in both snapshots, it compares the `rarity`, `stars`, `active`, and `passive`
+     * properties.
+     *
+     * The resulting diff object contains arrays of these changes. A new unit is represented
+     * by its full data. A modified unit is represented by an object containing its
+     * `id` and only the properties that have changed. Units that are unchanged are omitted
+     * from the diff.
+     *
+     * @param base The baseline roster snapshot to compare against.
+     * @param compare The newer roster snapshot to compare with the base.
+     * @returns An `IRosterSnapshotDiff` object detailing the differences,
+     *          including new units and changes to existing ones.
+     */
+    public static diffSnapshots(base: IRosterSnapshot, compare: IRosterSnapshot): IRosterSnapshotDiff {
         const name = compare.name;
         const dateMillisUtc = compare.dateMillisUtc;
 
