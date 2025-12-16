@@ -4,8 +4,8 @@ import { Rarity, Rank } from '@/fsd/5-shared/model';
 import { CharacterBias, CharactersService } from '@/fsd/4-entities/character';
 import { EquipmentService } from '@/fsd/4-entities/equipment';
 
-import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
-import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
+import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
+import { TacticusIntegrationService } from '@/fsd/3-features/tacticus-integration/tacticus-integration.service';
 
 import { rankToLevel, rankToRarity, rarityToStars } from '../models/constants';
 import { ICharacter2, IPersonalCharacterDataEquipment, SetStateAction } from '../models/interfaces';

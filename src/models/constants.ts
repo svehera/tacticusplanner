@@ -6,7 +6,7 @@ import { Rank, Rarity, RarityStars, RarityMapper, Alliance } from '@/fsd/5-share
 import { ICampaignsProgress, Campaign } from '@/fsd/4-entities/campaign';
 import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
 
-import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
+import { GuildWarTeamType, IGWLayoutZone } from '@/fsd/3-features/guild-war/guild-war.models';
 
 import { ArenaLeague } from '@/fsd/1-pages/input-xp-income/models';
 

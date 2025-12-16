@@ -17,15 +17,15 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { CharactersService as CharacterEntityService } from '@/fsd/4-entities/character';
 
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
-import { SelectTeamDialog } from 'src/v2/features/characters/components/select-team-dialog';
-import { Team } from 'src/v2/features/characters/components/team';
-import { BattlefieldInfo } from 'src/v2/features/guild-war/battlefield-info';
-import { BfZoneDifficultySelect } from 'src/v2/features/guild-war/bf-zone-difficulty-select';
-import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
-import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
+import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
+import { CharactersService } from '@/fsd/3-features/characters/characters.service';
+import { PotentialInfo } from '@/fsd/3-features/characters/components/potential-info';
+import { SelectTeamDialog } from '@/fsd/3-features/characters/components/select-team-dialog';
+import { Team } from '@/fsd/3-features/characters/components/team';
+import { BattlefieldInfo } from '@/fsd/3-features/guild-war/battlefield-info';
+import { BfZoneDifficultySelect } from '@/fsd/3-features/guild-war/bf-zone-difficulty-select';
+import { GuildWarTeamType, IGWTeamWithCharacters } from '@/fsd/3-features/guild-war/guild-war.models';
+import { GuildWarService } from '@/fsd/3-features/guild-war/guild-war.service';
 
 export const GuildWarDefense = () => {
     const { guildWar, characters, viewPreferences } = useContext(StoreContext);

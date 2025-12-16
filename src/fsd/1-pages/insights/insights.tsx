@@ -12,16 +12,16 @@ import { MowsService } from '@/fsd/4-entities/mow';
 import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 import { CharactersPowerService, CharactersValueService } from '@/fsd/4-entities/unit';
 
+import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
+import { CharactersService } from '@/fsd/3-features/characters/characters.service';
+import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
+import { FactionsGrid } from '@/fsd/3-features/characters/components/factions-grid';
+import { RosterHeader } from '@/fsd/3-features/characters/components/roster-header';
+import { TeamGraph } from '@/fsd/3-features/characters/components/team-graph';
+import { isCharactersView } from '@/fsd/3-features/characters/functions/is-characters-view';
+import { isFactionsView } from '@/fsd/3-features/characters/functions/is-factions-view';
+import { useGetInsights } from '@/fsd/3-features/insights/insights.endpoint';
 import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
-import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
-import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
-import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
-import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
-import { useGetInsights } from 'src/v2/features/insights/insights.endpoint';
 
 export const Insights = () => {
     const { viewPreferences } = useContext(StoreContext);

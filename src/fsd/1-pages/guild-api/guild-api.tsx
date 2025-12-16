@@ -4,9 +4,9 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { useAuth } from '@/fsd/5-shared/model';
 
-import { TacticusGuildVisualization } from '@/v2/features/tacticus-integration/guild-overview';
-import { TacticusGuildRaidVisualization } from '@/v2/features/tacticus-integration/guild-raid-v2';
-import { mapUserIdToName } from '@/v2/features/tacticus-integration/user-id-mapper';
+import { TacticusGuildVisualization } from '@/fsd/3-features/tacticus-integration/guild-overview';
+import { TacticusGuildRaidVisualization } from '@/fsd/3-features/tacticus-integration/guild-raid-v2';
+import { mapUserIdToName } from '@/fsd/3-features/tacticus-integration/user-id-mapper';
 
 export const GuildApi: React.FC = () => {
     const { guild } = useContext(StoreContext);

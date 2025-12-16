@@ -1,4 +1,4 @@
-﻿import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+﻿import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
 import { SetStateAction } from '../models/interfaces';
 

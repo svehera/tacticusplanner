@@ -5,8 +5,8 @@ import { TacticusShard, TacticusUnit } from '@/fsd/5-shared/lib/tacticus-api/tac
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
-import { IMow, IMow2, IMowDb } from '@/v2/features/characters/characters.models';
-import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
+import { IMow, IMow2, IMowDb } from '@/fsd/3-features/characters/characters.models';
+import { TacticusIntegrationService } from '@/fsd/3-features/tacticus-integration/tacticus-integration.service';
 
 export type MowsAction =
     | {
