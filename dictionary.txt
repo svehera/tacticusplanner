@@ -150,6 +150,7 @@ exospine
 falxnox
 farfalafel
 farseer
+Farsight
 fedreus
 ficklefate
 filigrane
