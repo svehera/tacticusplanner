@@ -24,8 +24,7 @@ import {
 
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
-
-export interface RevisedGoals {
+interface RevisedGoals {
     goalEstimates: IGoalEstimate[];
     neededBadges: Record<Alliance, Record<Rarity, number>>;
     neededForgeBadges: Record<Rarity, number>;
