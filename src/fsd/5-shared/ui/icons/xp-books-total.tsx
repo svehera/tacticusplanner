@@ -5,7 +5,7 @@ import React, { useMemo } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model/enums';
 
-import { MiscIcon } from '../misc.icon';
+import { MiscIcon } from './misc.icon';
 
 interface Props {
     xp: number;
