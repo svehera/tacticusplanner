@@ -62,8 +62,11 @@ export const RosterSnapshots = () => {
             const snapshot = RosterSnapshotsService.createSnapshot(name, new Date().getTime(), chars, mows);
             if (rosterSnapshots.base === undefined) {
                 dispatch.rosterSnapshots({
-                    base: snapshot,
-                    diffs: [],
+                    type: 'Set',
+                    value: {
+                        base: snapshot,
+                        diffs: [],
+                    },
                 });
                 return;
             }
@@ -82,11 +85,10 @@ export const RosterSnapshots = () => {
                 if (index == 0) return;
                 newSnapshots.diffs.push(RosterSnapshotsService.diffSnapshots(resolved[index - 1], snap));
             });
-            // Limit number of snapshots stored
             if (newSnapshots.diffs.length > MAX_SNAPSHOTS - 1) {
                 newSnapshots.diffs.splice(0, newSnapshots.diffs.length - (MAX_SNAPSHOTS - 1));
             }
-            dispatch.rosterSnapshots(newSnapshots);
+            dispatch.rosterSnapshots({ type: 'Set', value: newSnapshots });
         },
         [chars, mows, rosterSnapshots, dispatch]
     );

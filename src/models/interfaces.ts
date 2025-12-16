@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 
+import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
 import { XpUseAction } from '@/reducers/xp-use-reducer';
 import { GuildAction } from 'src/reducers/guildReducer';
@@ -110,7 +111,7 @@ export interface IDispatchContext {
     guild: React.Dispatch<GuildAction>;
     xpIncome: React.Dispatch<XpIncomeAction>;
     xpUse: React.Dispatch<XpUseAction>;
-    rosterSnapshots: React.Dispatch<React.SetStateAction<IRosterSnapshotsState | undefined>>;
+    rosterSnapshots: React.Dispatch<RosterSnapshotsAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }

@@ -15,6 +15,8 @@ export const rosterSnapshotsActionReducer = (
     state: IRosterSnapshotsState,
     action: RosterSnapshotsAction
 ): IRosterSnapshotsState => {
+    console.log('state before roster-snapshots action:', state);
+    console.log('roster-snapshots action:', action);
     switch (action.type) {
         case 'Set': {
             return action.value ?? defaultData.rosterSnapshots;
@@ -28,7 +30,7 @@ export const rosterSnapshotsActionReducer = (
         }
 
         default: {
-            throw new Error();
+            throw new Error('Unknown roster-snapshot action: ' + (action as any).type);
         }
     }
 };
