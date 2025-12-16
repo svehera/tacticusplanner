@@ -1,5 +1,5 @@
-﻿import GuildWarIcon from 'src/assets/images/icons/guildWarMono.png';
-import { MenuItem } from 'src/v2/models/menu-item';
+﻿import { MenuItem } from '@/models/menu-item';
+import GuildWarIcon from 'src/assets/images/icons/guildWarMono.png';
 
 export const guildWarZonesMenuItem = new MenuItem(
     'Zones',

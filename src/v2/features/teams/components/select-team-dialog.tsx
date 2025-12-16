@@ -6,8 +6,8 @@ import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useDebounceValue } from 'usehooks-ts';
 
+import { IMenuOption } from '@/models/menu-option';
 import { ICharacter2 } from 'src/models/interfaces';
-import { IMenuOption } from 'src/v2/models/menu-option';
 
 import { Rarity, Alliance } from '@/fsd/5-shared/model';
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
