@@ -87,7 +87,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
         const teamPotential = cappedCharacters.map(x =>
             CharactersService.calculateCharacterPotential(x, team.rarityCap)
         );
-        const totalPotential = Math.round(sum(teamPotential) / characters.length);
+        const totalPotential = Math.round(sum(teamPotential) / teamCharacters.length);
 
         return (
             <Card
