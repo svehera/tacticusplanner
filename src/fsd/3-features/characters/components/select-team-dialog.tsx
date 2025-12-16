@@ -1,0 +1,140 @@
+﻿import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import React, { useContext, useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { getEnumValues } from 'src/shared-logic/functions';
+
+import { Rarity } from '@/fsd/5-shared/model';
+import { FlexBox, Conditional, RaritySelect } from '@/fsd/5-shared/ui';
+
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { unsetCharacter } from '@/fsd/3-features/characters/characters.constants';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { ICharacter2, IUnit } from '@/fsd/3-features/characters/characters.models';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { CharactersService } from '@/fsd/3-features/characters/characters.service';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { CharacterTile } from '@/fsd/3-features/characters/components/character-tile';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
+
+type Props = {
+    teamName: string;
+    isOpen: boolean;
+    characters: ICharacter2[];
+    blockedCharacters: string[];
+    team: ICharacter2[];
+    rarityCap: Rarity;
+    onClose: (team?: ICharacter2[], rarityCap?: Rarity, teamName?: string) => void;
+    size?: 5 | 7;
+    allowPropsEdit?: boolean;
+};
+
+export const SelectTeamDialog: React.FC<Props> = ({
+    isOpen,
+    onClose,
+    team,
+    characters,
+    size = 5,
+    teamName: defaultTeamName,
+    rarityCap: defaultRarityCap,
+    blockedCharacters,
+    allowPropsEdit = false,
+}) => {
+    const fallbackCharacter = unsetCharacter as ICharacter2;
+    const charactersViewContext = useContext(CharactersViewContext);
+    const [lineup, setLineup] = useState(team);
+
+    const [rarityCap, setRarityCap] = useState(defaultRarityCap);
+    const [teamName, setTeamName] = useState(defaultTeamName);
+
+    const handleCharacterSelect = (character: IUnit) => {
+        setLineup(curr => {
+            if (curr.some(x => x.id === character.id)) {
+                return curr.filter(x => x.id !== character.id);
+            } else {
+                if (curr.length === size) {
+                    return curr;
+                }
+
+                const newChar = characters.find(x => x.id === character.id);
+
+                if (newChar) {
+                    return [...curr, newChar];
+                }
+
+                return curr;
+            }
+        });
+    };
+
+    const currentTeam = useMemo(() => {
+        return Array.from({ length: size }, (_, i) => {
+            const char = lineup[i];
+
+            if (char) {
+                return (
+                    <CharacterTile
+                        key={char.name}
+                        character={CharactersService.capCharacterAtRarity(char, rarityCap)}
+                        onCharacterClick={handleCharacterSelect}
+                    />
+                );
+            }
+
+            return <CharacterTile key={fallbackCharacter.name + i} character={fallbackCharacter} />;
+        });
+    }, [lineup, rarityCap]);
+
+    return (
+        <Dialog open={isOpen} onClose={() => onClose()} fullScreen={isMobile} fullWidth>
+            <DialogTitle>
+                Edit team
+                <Conditional condition={allowPropsEdit}>
+                    <FlexBox gap={10} className="mt-5">
+                        <TextField
+                            className="min-w-1/2"
+                            label="Team name"
+                            variant="outlined"
+                            value={teamName}
+                            onChange={event => setTeamName(event.target.value)}
+                        />
+                        <RaritySelect
+                            label={'Rarity Cap'}
+                            rarityValues={getEnumValues(Rarity)}
+                            value={rarityCap}
+                            valueChanges={setRarityCap}
+                        />
+                    </FlexBox>
+                </Conditional>
+                <FlexBox>{currentTeam}</FlexBox>
+            </DialogTitle>
+            <DialogContent>
+                <CharactersViewContext.Provider
+                    value={{
+                        ...charactersViewContext,
+                        getOpacity: character =>
+                            lineup.some(x => x.id === character.id) || blockedCharacters.some(x => x === character.name)
+                                ? 0.5
+                                : 1,
+                    }}>
+                    <CharactersGrid
+                        characters={characters.map(x => CharactersService.capCharacterAtRarity(x, rarityCap))}
+                        blockedCharacters={blockedCharacters}
+                        onAvailableCharacterClick={handleCharacterSelect}
+                        onLockedCharacterClick={handleCharacterSelect}
+                    />
+                </CharactersViewContext.Provider>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={() => onClose()}>Cancel</Button>
+                <Button onClick={() => onClose(lineup, rarityCap, teamName)}>Save</Button>
+            </DialogActions>
+        </Dialog>
+    );
+};

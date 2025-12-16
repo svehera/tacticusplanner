@@ -7,7 +7,7 @@ import { ICampaignModel, CampaignImage, CampaignDifficulty } from '@/fsd/4-entit
 import { ICharacter2 } from '@/fsd/4-entities/character';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
+import { CharacterTile } from '@/fsd/3-features/characters/components/character-tile';
 
 interface Props {
     characters: ICharacter2[];

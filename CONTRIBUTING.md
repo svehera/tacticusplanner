@@ -41,17 +41,6 @@ The production environment is hosted at: [https://tacticusplanner.app/](https://
 
 This section lists known tech debt issues that we'd like to improve over time.
 
-### Inconsistent Architecture
-
-Right now the code is split between the FSD Architecture in the `src/fsd` directory and a different architecture in `src/v2`.
-Of the two, the `src/v2` folder appears to be the older of the two.
-
-There are also quite a few folders in `src` for more general concerns (e.g. `routes`, `services`, `reducers`, etc...).
-
-This inconsistency makes it harder for people to jump in and contribute.
-
-At some point we should decide on what we want to go with for future development and then migrate to a single architecture.
-
 ### Styling & Components
 
 Right now there's a split between styling solutions:

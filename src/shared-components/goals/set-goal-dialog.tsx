@@ -38,8 +38,8 @@ import { UnitTitle } from '@/fsd/4-entities/unit/ui/unit-title';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
-import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
-import { ICharacter2, IUnit } from 'src/v2/features/characters/characters.models';
+import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
+import { ICharacter2, IUnit } from '@/fsd/3-features/characters/characters.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 

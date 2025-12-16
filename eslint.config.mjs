@@ -36,6 +36,11 @@ export default [
     pluginImportX.flatConfigs.recommended,
     pluginImportX.flatConfigs.typescript,
     {
+        linterOptions: {
+            reportUnusedDisableDirectives: 'error',
+        },
+    },
+    {
         plugins: {
             '@typescript-eslint': typescriptEslint,
             react,

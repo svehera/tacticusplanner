@@ -1,6 +1,6 @@
 import { LegendaryEventService } from '@/fsd/4-entities/lre/legendary-event-service';
 
-import { IGoalEstimate } from '@/v2/features/goals/goals.models';
+import { IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
 
 import { GoalColorMode } from './goal-color-coding-toggle';
 import { IGoalColor } from './models';

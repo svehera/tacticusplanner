@@ -28,8 +28,8 @@ import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
 
-import { CharactersAbilitiesService } from '@/v2/features/characters/characters-abilities.service';
-import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
+import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
+import { CharacterRaidGoalSelect, ICharacterAscendGoal } from '@/fsd/3-features/goals/goals.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 

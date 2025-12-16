@@ -26,7 +26,7 @@ import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-di
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
 import { usePopUpControls } from '@/fsd/5-shared/ui';
 
-import { TacticusIntegrationDialog } from 'src/v2/features/tacticus-integration/tacticus-integration.dialog';
+import { TacticusIntegrationDialog } from '@/fsd/3-features/tacticus-integration/tacticus-integration.dialog';
 
 import { LoginUserDialog } from './login-user-dialog';
 import { OverrideDataDialog } from './override-data-dialog';

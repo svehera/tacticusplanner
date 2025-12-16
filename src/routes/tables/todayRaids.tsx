@@ -4,9 +4,9 @@ import { isMobile } from 'react-device-detect';
 
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { IItemRaidLocation, IShardsRaid, IUpgradeRaid } from 'src/v2/features/goals/goals.models';
-import { MaterialItemInput } from 'src/v2/features/goals/material-item-input';
-import { ShardsItemInput } from 'src/v2/features/goals/shards-item-input';
+import { IItemRaidLocation, IShardsRaid, IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
+import { MaterialItemInput } from '@/fsd/3-features/goals/material-item-input';
+import { ShardsItemInput } from '@/fsd/3-features/goals/shards-item-input';
 
 interface Props {
     completedLocations: IItemRaidLocation[];
