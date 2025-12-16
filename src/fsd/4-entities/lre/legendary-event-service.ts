@@ -1,5 +1,5 @@
-import { allLegendaryEvents } from './static-lre-data';
 import { ILegendaryEventStatic } from './static-data.model';
+import { allLegendaryEvents } from './static-lre-data';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
