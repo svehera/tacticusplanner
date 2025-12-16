@@ -1,8 +1,11 @@
 ﻿import React from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacter2 } from 'src/models/interfaces';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { unsetCharacter } from '@/fsd/3-features/characters/characters.constants';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterTile } from '@/fsd/3-features/characters/components/character-tile';
 
 type Props = {

@@ -1,4 +1,5 @@
 /* eslint-disable import-x/no-internal-modules */
+
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';

@@ -1,8 +1,10 @@
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DialogProps } from '@/models/dialog.props';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { updateTacticusApiKey } from '@/fsd/5-shared/lib/tacticus-api';
 import { useAuth } from '@/fsd/5-shared/model';
 import { Button } from '@/fsd/5-shared/ui/button';

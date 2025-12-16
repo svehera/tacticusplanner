@@ -4,8 +4,10 @@ import React from 'react';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
 
 interface Props {

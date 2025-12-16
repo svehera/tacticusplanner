@@ -13,15 +13,19 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
 interface Props {

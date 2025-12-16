@@ -1,15 +1,20 @@
 ﻿import { cloneDeep, orderBy } from 'lodash';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { rarityToStars } from 'src/models/constants';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IInventory, IPersonalGoal } from 'src/models/interfaces';
 
 import { Alliance, Rank, Rarity } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import {
     CharacterRaidGoalSelect,
@@ -20,9 +25,12 @@ import {
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
     IGoalEstimate,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/3-features/goals/goals.models';
 
+// eslint-disable-next-line boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { XpUseState } from '@/fsd/1-pages/input-resources';
+// eslint-disable-next-line boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 
 export interface RevisedGoals {

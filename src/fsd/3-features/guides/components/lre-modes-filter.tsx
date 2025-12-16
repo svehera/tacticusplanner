@@ -1,11 +1,16 @@
 ﻿import React, { useMemo, useState } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMenuOption } from '@/models/menu-option';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { getLre, lreCharacters } from '@/fsd/3-features/guides/guides.constants';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { LreCharacter } from '@/fsd/3-features/guides/guides.enums';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { anyOption, lreSections } from '@/fsd/3-features/teams/teams.constants';
 
 interface Props {

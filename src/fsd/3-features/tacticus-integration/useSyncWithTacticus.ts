@@ -1,11 +1,14 @@
 import { enqueueSnackbar } from 'notistack';
 import { useContext } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { getTacticusPlayerData } from '@/fsd/5-shared/lib/tacticus-api';
 import { useLoader } from '@/fsd/5-shared/ui';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignMapperService } from '@/fsd/4-entities/campaign/campaign-mapper-service';
 
 export const useSyncWithTacticus = () => {

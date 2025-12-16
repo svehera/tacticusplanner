@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import React, { useMemo } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import factionsData from 'src/data/factions.json';
 
 import { Alliance, Faction, Rarity, RarityString } from '@/fsd/5-shared/model';

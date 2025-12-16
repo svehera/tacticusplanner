@@ -503,8 +503,8 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     control={<Radio />}
                                     label={
                                         <AccessibleTooltip
-                                            title="Experimental/unstable feature. 
-                                Please report any issues you have while using this feature in the Discord. 
+                                            title="Experimental/unstable feature.
+                                Please report any issues you have while using this feature in the Discord.
                                 It doesn't work yet with 'By goals priority'.">
                                             <div className="flex-box gap-0.5">
                                                 <Warning color="warning" /> Least time

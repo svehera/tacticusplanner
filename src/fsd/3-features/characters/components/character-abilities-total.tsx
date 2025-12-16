@@ -1,7 +1,9 @@
 ﻿import React from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacterAbilitiesMaterialsTotal } from '@/fsd/3-features/characters/characters.models';
 
 import { BadgesTotal } from './badges-total';

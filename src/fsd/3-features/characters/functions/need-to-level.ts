@@ -1,4 +1,5 @@
-﻿import { rankToLevel } from 'src/models/constants';
+﻿// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { rankToLevel } from 'src/models/constants';
 
 import { UnitType, Rank, Rarity } from '@/fsd/5-shared/model';
 

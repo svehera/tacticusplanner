@@ -1,14 +1,18 @@
 ﻿import { Tooltip } from '@mui/material';
 import React, { useState } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
 
 import { UnitType } from '@/fsd/5-shared/model';
 
 import { IUnit } from '@/fsd/4-entities/unit';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { SlotType } from '@/fsd/3-features/guides/guides.enums';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ITeamSlot } from '@/fsd/3-features/guides/guides.models';
 
 interface Props {

@@ -7,6 +7,7 @@ import {
     TacticusGuild,
     getTacticusGuildData,
     TacticusGuildMember,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/5-shared/lib/tacticus-api';
 
 // Helper function to convert role enum to readable string

@@ -5,6 +5,7 @@ import {
     IGuildInsightsResponse,
     IGuildMembersValidationResponse,
     IGuildRostersResponse,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/3-features/guild/guild.models';
 
 export const useGetGuildInsights = (request: IGuildInfoRequest) =>

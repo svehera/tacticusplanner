@@ -2,23 +2,34 @@
 import { sum } from 'lodash';
 import { useContext, useState } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GlobalState } from 'src/models/global-state';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { LoaderWithText, AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 
 import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
+// eslint-disable-next-line boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 import { CharactersPowerService, CharactersValueService } from '@/fsd/4-entities/unit';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersService } from '@/fsd/3-features/characters/characters.service';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { FactionsGrid } from '@/fsd/3-features/characters/components/factions-grid';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RosterHeader } from '@/fsd/3-features/characters/components/roster-header';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isCharactersView } from '@/fsd/3-features/characters/functions/is-characters-view';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isFactionsView } from '@/fsd/3-features/characters/functions/is-factions-view';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { useGetGuildInsights } from '@/fsd/3-features/guild/guild.endpoint';
 import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
 

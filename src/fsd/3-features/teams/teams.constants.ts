@@ -1,7 +1,9 @@
-﻿import { IMenuOption } from '@/models/menu-option';
+﻿// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { IMenuOption } from '@/models/menu-option';
 
 import { Faction } from '@/fsd/5-shared/model';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GameMode, GuildRaidBoss, GwMode, TaMode } from '@/fsd/3-features/teams/teams.enums';
 
 export const anyOption: IMenuOption = { label: 'Any', selected: false, value: 'any' };

@@ -3,9 +3,12 @@ import { groupBy, map } from 'lodash';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import faqData from 'src/data/faq.json';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { FaqCategory } from '@/fsd/3-features/faq/faq-category';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IFaqItem } from '@/fsd/3-features/faq/faq.models';
 
 export const Faq = () => {

@@ -11,9 +11,12 @@ import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
 import { FlexBox } from '@/fsd/5-shared/ui';
 import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { rarityCaps } from '@/fsd/3-features/characters/characters.constants';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IRarityCap } from '@/fsd/3-features/characters/characters.models';
 
 export const PotentialInfo: React.FC = () => {

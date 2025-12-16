@@ -2,20 +2,29 @@
 import { orderBy } from 'lodash';
 import React, { useCallback, useContext, useMemo } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { charsReleaseShards, charsUnlockShards } from 'src/models/constants';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacter2 } from 'src/models/interfaces';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { needToAscendCharacter, needToLevelCharacter } from 'src/shared-logic/functions';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { numberToThousandsStringOld } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersValueService } from '@/fsd/4-entities/unit/characters-value.service';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
 
 const CharacterTileFn = ({

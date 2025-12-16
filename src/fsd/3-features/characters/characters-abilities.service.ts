@@ -1,6 +1,8 @@
 ﻿import { groupBy, mapValues, sum } from 'lodash';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import abilitiesLvlUpJson from 'src/data/characters-lvl-up-abilities.json';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import xpData from 'src/data/xp.json';
 
 import { Rarity, Alliance } from '@/fsd/5-shared/model';
@@ -10,6 +12,7 @@ import {
     ICharacterAbilityLevel,
     ICharacterAbilityLevelRaw,
     IXpLevel,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/3-features/characters/characters.models';
 
 export class CharactersAbilitiesService {

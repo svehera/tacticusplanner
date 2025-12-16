@@ -1,6 +1,8 @@
 ﻿import { describe, it, expect } from 'vitest';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalGoal } from 'src/models/interfaces';
 
 import { Alliance, Faction, Rank, Rarity, RarityStars, UnitType } from '@/fsd/5-shared/model';
@@ -11,7 +13,9 @@ import {
     ICharacterAscendGoal,
     ICharacterUnlockGoal,
     ICharacterUpgradeRankGoal,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/3-features/goals/goals.models';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 
 describe('Goal service', () => {

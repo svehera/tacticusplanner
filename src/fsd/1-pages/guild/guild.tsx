@@ -7,15 +7,22 @@ import React, { useContext, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuildMember } from 'src/models/interfaces';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { LoaderWithText, AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuildMemberInput } from '@/fsd/3-features/guild/guild-member-input';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuildMemberView } from '@/fsd/3-features/guild/guild-member-view';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { useValidateGuildMembers } from '@/fsd/3-features/guild/guild.endpoint';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ImportGuildExcel } from '@/fsd/3-features/guild/read-guild-from-excel';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ImportUserLink } from '@/fsd/3-features/guild/read-user-from-link';
 
 export const Guild: React.FC = () => {

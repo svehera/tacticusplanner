@@ -5,18 +5,25 @@ import Dialog from '@mui/material/Dialog';
 import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { getEnumValues } from 'src/shared-logic/functions';
 
 import { RarityStars, Rarity, Alliance } from '@/fsd/5-shared/model';
 import { StarsSelect, RaritySelect } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMow2 } from '@/fsd/3-features/characters/characters.models';
 
 interface Props {

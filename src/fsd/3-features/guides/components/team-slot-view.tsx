@@ -1,12 +1,17 @@
 ﻿import { Badge, Tooltip } from '@mui/material';
 import React from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { SlotType } from '@/fsd/3-features/guides/guides.enums';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ITeamSlot } from '@/fsd/3-features/guides/guides.models';
 
 interface Props {

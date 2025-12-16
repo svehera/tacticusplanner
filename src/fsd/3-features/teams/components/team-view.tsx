@@ -2,11 +2,16 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacter2 } from 'src/models/interfaces';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMow2, IUnit } from '@/fsd/3-features/characters/characters.models';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterTile } from '@/fsd/3-features/characters/components/character-tile';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { EmptyTile } from '@/fsd/3-features/characters/components/empty-tile';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MowTile } from '@/fsd/3-features/characters/components/mow-tile';
 
 interface Props {

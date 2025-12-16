@@ -1,14 +1,19 @@
 ﻿import { Card, CardContent, CardHeader } from '@mui/material';
 import React, { useMemo } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignImage } from '@/fsd/4-entities/campaign/campaign.icon';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IShardsRaid } from '@/fsd/3-features/goals/goals.models';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ShardItemTitle } from '@/fsd/3-features/goals/shard-item-title';
 
 interface Props {
