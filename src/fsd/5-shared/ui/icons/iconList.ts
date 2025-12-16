@@ -1,5 +1,3 @@
-// TODO(mythic): Change the location of a few things, but automate copying via datamine_tacticus
-
 /* eslint-disable import-x/no-internal-modules */
 import armourIcon from '@/assets/images/icons/armour.webp';
 import blackstoneIcon from '@/assets/images/icons/blackstone.png';
@@ -18,8 +16,8 @@ import rangedIcon from '@/assets/images/icons/ranged.png';
 import redStar from '@/assets/images/icons/red star small.png';
 import goldStar from '@/assets/images/icons/star small.png';
 import warTokenIcon from '@/assets/images/icons/warToken.png';
-/* eslint-enable import-x/no-internal-modules */
 
+/* eslint-enable import-x/no-internal-modules */
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 export { OrbIcon } from './orb-image';
 export { ForgeBadgesTotal } from './forge-badges-total';
