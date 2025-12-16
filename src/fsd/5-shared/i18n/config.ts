@@ -1,8 +1,10 @@
 ﻿import { use } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import enTranslation from './en.json';
-import ukTranslation from './uk.json';
+// eslint-disable-next-line import-x/no-internal-modules
+import enTranslation from '@/data/i18n/en.json';
+// eslint-disable-next-line import-x/no-internal-modules
+import ukTranslation from '@/data/i18n/uk.json';
 
 export const initI18n = () => {
     use(initReactI18next).init({
