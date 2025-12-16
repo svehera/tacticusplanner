@@ -203,8 +203,7 @@ export enum ITrainingRushStrategy {
     maximizeRewards,
     maximizeXpForCharacter,
 }
-
-export interface IPurgeOrderPreferences {
+interface IPurgeOrderPreferences {
     // Only consider battles with at least this mean Tyranids worth rearranging for.
     minimumTyranidCount: number;
 }
@@ -215,18 +214,15 @@ export interface ITrainingRushPreferences {
     // Only matters when strategy is maximizeXpForCharacter
     characterId?: string;
 }
-
-export interface IWarpSurgePreferences {
+interface IWarpSurgePreferences {
     // Only consider battles with at least this mean chaos enemies worth rearranging for.
     minimumChaosEnemyCount: number;
 }
-
-export interface IMachineHuntPreferences {
+interface IMachineHuntPreferences {
     // Only consider battles with at least this mean mechanical enemies worth rearranging for.
     minimumMechanicalEnemyCount: number;
 }
-
-export interface IDailyRaidsFarmPreferences {
+interface IDailyRaidsFarmPreferences {
     order: IDailyRaidsFarmOrder;
     homeScreenEvent: IDailyRaidsHomeScreenEvent;
     purgeOrderPreferences?: IPurgeOrderPreferences;

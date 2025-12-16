@@ -29,24 +29,24 @@ export interface TacticusInventory {
     components: TacticusComponents[];
 }
 
-export interface TacticusOrb {
+interface TacticusOrb {
     rarity: string;
     amount: number;
 }
 
-export interface TacticusOrbs {
+interface TacticusOrbs {
     Imperial: TacticusOrb[];
     Xenos: TacticusOrb[];
     Chaos: TacticusOrb[];
 }
 
-export interface TacticusForgeBadge {
+interface TacticusForgeBadge {
     name: string;
     rarity: string;
     amount: number;
 }
 
-export interface TacticusComponents {
+interface TacticusComponents {
     name: string;
     grandAlliance: string;
     amount: number;
@@ -64,7 +64,7 @@ interface TacticusAbility {
     level: number;
 }
 
-export interface TacticusXpBook {
+interface TacticusXpBook {
     /** Unique identifier for the xp book.*/
     id: string;
 
@@ -75,7 +75,7 @@ export interface TacticusXpBook {
     amount: number;
 }
 
-export interface TacticusAbilityBadge {
+interface TacticusAbilityBadge {
     /** Unique identifier for ability badge.*/
     id: string;
 
@@ -86,7 +86,7 @@ export interface TacticusAbilityBadge {
     amount: number;
 }
 
-export interface TacticusAbilityBadges {
+interface TacticusAbilityBadges {
     Imperial: TacticusAbilityBadge[];
     Xenos: TacticusAbilityBadge[];
     Chaos: TacticusAbilityBadge[];
