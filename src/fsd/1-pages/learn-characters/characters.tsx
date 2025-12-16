@@ -1,4 +1,4 @@
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
+﻿import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import {
     Badge,
@@ -357,7 +357,7 @@ export const LearnCharacters = () => {
                     }
                 />
                 <TextField
-                    className="min-w-[140px]"
+                    style={{ minWidth: 140 }}
                     label="Quick Filter"
                     variant="outlined"
                     onChange={(event: ChangeEvent<HTMLInputElement>) => handleFilterChange('name', event.target.value)}
@@ -389,7 +389,7 @@ export const LearnCharacters = () => {
             {showFilters && (
                 <>
                     <div className="flex-box gap10 wrap">
-                        <FormControl className="min-w-[110px]">
+                        <FormControl style={{ minWidth: '110px' }}>
                             <InputLabel>Min Hits</InputLabel>
                             <Select<number>
                                 label="Min Hits"
@@ -411,7 +411,7 @@ export const LearnCharacters = () => {
                             </Select>
                         </FormControl>
 
-                        <FormControl className="min-w-[110px]">
+                        <FormControl style={{ minWidth: '110px' }}>
                             <InputLabel>Max Hits</InputLabel>
                             <Select<number>
                                 label="Max Hits"
@@ -433,7 +433,7 @@ export const LearnCharacters = () => {
                             </Select>
                         </FormControl>
 
-                        <FormControl className="min-w-[130px]">
+                        <FormControl style={{ minWidth: '130px' }}>
                             <InputLabel>Attack Type</InputLabel>
                             <Select<string>
                                 label="Attack Type"
@@ -453,7 +453,7 @@ export const LearnCharacters = () => {
                             </Select>
                         </FormControl>
 
-                        <FormControl className="min-w-[120px]">
+                        <FormControl style={{ minWidth: '120px' }}>
                             <InputLabel>Movement</InputLabel>
                             <Select<number>
                                 label="Movement"
@@ -475,7 +475,7 @@ export const LearnCharacters = () => {
                             </Select>
                         </FormControl>
 
-                        <FormControl className="min-w-[110px]">
+                        <FormControl style={{ minWidth: '110px' }}>
                             <InputLabel>Distance</InputLabel>
                             <Select<number>
                                 label="Distance"
@@ -526,7 +526,7 @@ export const LearnCharacters = () => {
             )}
 
             <div className="flex gap-[3px] justify-left">
-                <div className="w-50">
+                <div style={{ width: 200 }}>
                     <RaritySelect
                         label={'Target Rarity'}
                         rarityValues={getEnumValues(Rarity)}
@@ -534,7 +534,7 @@ export const LearnCharacters = () => {
                         valueChanges={value => onTargetRarityChanged(value)}
                     />
                 </div>
-                <div className="w-50">
+                <div style={{ width: 200 }}>
                     <StarsSelect
                         label={'Target Stars'}
                         starsValues={starValues}
@@ -542,7 +542,7 @@ export const LearnCharacters = () => {
                         valueChanges={value => onTargetStarsChanged(value)}
                     />
                 </div>
-                <div className="w-50">
+                <div style={{ width: 200 }}>
                     <RankSelect
                         label={'Target Rank'}
                         rankValues={rankValues}
@@ -551,7 +551,7 @@ export const LearnCharacters = () => {
                     />
                 </div>
             </div>
-            <div className="ag-theme-material w-full h-[calc(100vh-180px)]">
+            <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
                     modules={[AllCommunityModule]}
