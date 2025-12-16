@@ -12,7 +12,7 @@ import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 
-import { ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
+import { ICharacterAscendGoal } from '@/fsd/3-features/goals/goals.models';
 
 interface Props {
     goal: ICharacterAscendGoal;

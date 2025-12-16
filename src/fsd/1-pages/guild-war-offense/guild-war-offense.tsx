@@ -18,18 +18,18 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { CharactersService as CharacterEntityService } from '@/fsd/4-entities/character';
 
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
-import { SelectTeamDialog } from 'src/v2/features/characters/components/select-team-dialog';
-import { Team } from 'src/v2/features/characters/components/team';
-import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
-import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
-import { ViewGuildOffense } from 'src/v2/features/guild/view-guild-offense';
-import { BattlefieldInfo } from 'src/v2/features/guild-war/battlefield-info';
-import { DeploymentStatus } from 'src/v2/features/guild-war/deployment-status';
-import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
+import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
+import { CharactersService } from '@/fsd/3-features/characters/characters.service';
+import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
+import { PotentialInfo } from '@/fsd/3-features/characters/components/potential-info';
+import { SelectTeamDialog } from '@/fsd/3-features/characters/components/select-team-dialog';
+import { Team } from '@/fsd/3-features/characters/components/team';
+import { useGetGuildRosters } from '@/fsd/3-features/guild/guild.endpoint';
+import { IGuildWarOffensePlayer } from '@/fsd/3-features/guild/guild.models';
+import { ViewGuildOffense } from '@/fsd/3-features/guild/view-guild-offense';
+import { BattlefieldInfo } from '@/fsd/3-features/guild-war/battlefield-info';
+import { DeploymentStatus } from '@/fsd/3-features/guild-war/deployment-status';
+import { GuildWarTeamType, IGWTeamWithCharacters } from '@/fsd/3-features/guild-war/guild-war.models';
 
 export const GuildWarOffense = () => {
     const { guild, guildWar, characters, viewPreferences } = useContext(StoreContext);

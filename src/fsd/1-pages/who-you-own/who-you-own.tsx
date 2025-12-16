@@ -14,17 +14,17 @@ import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
+import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
+import { CharactersService } from '@/fsd/3-features/characters/characters.service';
+import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
+import { FactionsGrid } from '@/fsd/3-features/characters/components/factions-grid';
+import { RosterHeader } from '@/fsd/3-features/characters/components/roster-header';
+import { TeamGraph } from '@/fsd/3-features/characters/components/team-graph';
+import { EditMowDialog } from '@/fsd/3-features/characters/dialogs/edit-mow-dialog';
+import { isCharactersView } from '@/fsd/3-features/characters/functions/is-characters-view';
+import { isFactionsView } from '@/fsd/3-features/characters/functions/is-factions-view';
+import { ShareRoster } from '@/fsd/3-features/share/share-roster';
 import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
-import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
-import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
-import { EditMowDialog } from 'src/v2/features/characters/dialogs/edit-mow-dialog';
-import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
-import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
-import { ShareRoster } from 'src/v2/features/share/share-roster';
 
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);

@@ -14,19 +14,19 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { UpgradesService as FsdUpgradesService } from '@/fsd/4-entities/upgrade';
 
-import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { ActiveGoalsDialog } from 'src/v2/features/goals/active-goals-dialog';
+import { IUnit } from '@/fsd/3-features/characters/characters.models';
+import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
 import {
     CharacterRaidGoalSelect,
     IEstimatedShards,
     IEstimatedUpgrades,
     IItemRaidLocation,
-} from 'src/v2/features/goals/goals.models';
-import { GoalsService } from 'src/v2/features/goals/goals.service';
-import { LocationsFilter } from 'src/v2/features/goals/locations-filter';
-import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+} from '@/fsd/3-features/goals/goals.models';
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
+import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
+import { ShardsService } from '@/fsd/3-features/goals/shards.service';
+import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);

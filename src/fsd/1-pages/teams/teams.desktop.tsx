@@ -11,12 +11,12 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { AddTeamDialog } from 'src/v2/features/teams/components/add-team.dialog';
-import { EditTeamDialog } from 'src/v2/features/teams/components/edit-team.dialog';
-import { TeamsGrid } from 'src/v2/features/teams/components/teams-grid';
-import { allModes } from 'src/v2/features/teams/teams.constants';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
+import { AddTeamDialog } from '@/fsd/3-features/teams/components/add-team.dialog';
+import { EditTeamDialog } from '@/fsd/3-features/teams/components/edit-team.dialog';
+import { TeamsGrid } from '@/fsd/3-features/teams/components/teams-grid';
+import { allModes } from '@/fsd/3-features/teams/teams.constants';
+import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
 export const Teams = () => {
     const dispatch = useContext(DispatchContext);

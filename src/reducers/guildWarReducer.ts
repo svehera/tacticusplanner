@@ -2,7 +2,7 @@
 
 import { Rarity } from '@/fsd/5-shared/model';
 
-import { GuildWarTeamType } from 'src/v2/features/guild-war/guild-war.models';
+import { GuildWarTeamType } from '@/fsd/3-features/guild-war/guild-war.models';
 
 import { defaultData } from '../models/constants';
 import { IGuildWar, SetStateAction } from '../models/interfaces';

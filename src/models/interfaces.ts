@@ -21,12 +21,12 @@ import { CharacterBias, ICharacter2 } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
 
+import { IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
+import { IGWLayout, IGWTeam } from '@/fsd/3-features/guild-war/guild-war.models';
 import { IAutoTeamsPreferences, ILegendaryEventSelectedRequirements, ILreTeam } from '@/fsd/3-features/lre';
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
+import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 import { IViewPreferences } from '@/fsd/3-features/view-settings';
-import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
-import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';

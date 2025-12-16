@@ -22,15 +22,15 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
-import { XpTooltip } from '@/v2/features/goals/xp-tooltip';
-import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
+import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
 import {
     CharacterRaidGoalSelect,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
     IGoalEstimate,
-} from 'src/v2/features/goals/goals.models';
-import { ShardsService } from 'src/v2/features/goals/shards.service';
+} from '@/fsd/3-features/goals/goals.models';
+import { ShardsService } from '@/fsd/3-features/goals/shards.service';
+import { XpTooltip } from '@/fsd/3-features/goals/xp-tooltip';
 
 import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 

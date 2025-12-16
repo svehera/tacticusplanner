@@ -11,7 +11,7 @@ import { OrbIcon } from '@/fsd/5-shared/ui/icons/assets';
 import { BadgeImage } from '@/fsd/5-shared/ui/icons/badge-image';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
 
-import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 
 import { XpUseState } from './models';
 

@@ -1,5 +1,5 @@
-﻿import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
-import { GoalsService } from 'src/v2/features/goals/goals.service';
+﻿import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 
 import { IPersonalGoal, SetStateAction } from '../models/interfaces';
 

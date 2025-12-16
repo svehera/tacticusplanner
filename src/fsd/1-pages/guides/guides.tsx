@@ -17,12 +17,12 @@ import { SearchParamsStateContext } from '@/fsd/5-shared/ui/contexts';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
-import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
-import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
-import { GuideCard } from 'src/v2/features/guides/components/guide-card';
-import { GuideView } from 'src/v2/features/guides/components/guide-view';
-import { GuidesFilter } from 'src/v2/features/guides/components/guides-filter';
-import { RejectReasonDialog } from 'src/v2/features/guides/components/reject-reason.dialog';
+import { CreateGuideDialog } from '@/fsd/3-features/guides/components/create-guide.dialog';
+import { EditGuideDialog } from '@/fsd/3-features/guides/components/edit-guide.dialog';
+import { GuideCard } from '@/fsd/3-features/guides/components/guide-card';
+import { GuideView } from '@/fsd/3-features/guides/components/guide-view';
+import { GuidesFilter } from '@/fsd/3-features/guides/components/guides-filter';
+import { RejectReasonDialog } from '@/fsd/3-features/guides/components/reject-reason.dialog';
 import {
     approveTeamApi,
     createTeamApi,
@@ -31,9 +31,9 @@ import {
     rejectTeamApi,
     removeHonorTeamApi,
     updateTeamApi,
-} from 'src/v2/features/guides/guides.endpoint';
-import { GuidesGroup, GuidesStatus } from 'src/v2/features/guides/guides.enums';
-import { ICreateGuide, IGetGuidesQueryParams, IGuide, IGuideFilter } from 'src/v2/features/guides/guides.models';
+} from '@/fsd/3-features/guides/guides.endpoint';
+import { GuidesGroup, GuidesStatus } from '@/fsd/3-features/guides/guides.enums';
+import { ICreateGuide, IGetGuidesQueryParams, IGuide, IGuideFilter } from '@/fsd/3-features/guides/guides.models';
 
 export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);

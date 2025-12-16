@@ -3,7 +3,7 @@
 import { TacticusInventory } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Alliance, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
-import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
+import { TacticusIntegrationService } from '@/fsd/3-features/tacticus-integration/tacticus-integration.service';
 
 import { defaultData } from '../models/constants';
 import { IInventory, SetStateAction } from '../models/interfaces';

@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 import faqData from 'src/data/faq.json';
 
-import { FaqCategory } from 'src/v2/features/faq/faq-category';
-import { IFaqItem } from 'src/v2/features/faq/faq.models';
+import { FaqCategory } from '@/fsd/3-features/faq/faq-category';
+import { IFaqItem } from '@/fsd/3-features/faq/faq.models';
 
 export const Faq = () => {
     const data: IFaqItem[] = faqData.items;

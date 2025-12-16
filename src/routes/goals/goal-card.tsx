@@ -21,11 +21,11 @@ import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 import { CampaignImage } from '@/fsd/4-entities/campaign/campaign.icon';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
-import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
-import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
-import { GoalsService } from 'src/v2/features/goals/goals.service';
-import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { XpTotal } from 'src/v2/features/goals/xp-total';
+import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
+import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
+import { ShardsService } from '@/fsd/3-features/goals/shards.service';
+import { XpTotal } from '@/fsd/3-features/goals/xp-total';
 
 import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 

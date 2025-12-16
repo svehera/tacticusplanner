@@ -2,7 +2,7 @@
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
-import { GameMode } from 'src/v2/features/teams/teams.enums';
+import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 
 export const TokenImage = ({ gameMode }: { gameMode: GameMode }) => {
     const image = getImageUrl(`modes/${gameMode}.png`);

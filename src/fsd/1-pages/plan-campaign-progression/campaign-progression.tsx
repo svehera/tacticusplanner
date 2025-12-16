@@ -21,11 +21,11 @@ import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { ActiveGoalsDialog } from '@/v2/features/goals/active-goals-dialog';
+import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
 // eslint-disable-next-line import-x/no-internal-modules
-import { CharacterRaidGoalSelect } from '@/v2/features/goals/goals.models';
+import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
 // eslint-disable-next-line import-x/no-internal-modules
-import { GoalsService } from 'src/v2/features/goals/goals.service';
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 
 import { CampaignProgressionAscensionGoals } from './campaign-progression-ascension-goals';
 import { CampaignProgressionHeader } from './campaign-progression-header';

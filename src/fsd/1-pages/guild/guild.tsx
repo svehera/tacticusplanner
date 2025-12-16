@@ -12,11 +12,11 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { LoaderWithText, AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
 
-import { GuildMemberInput } from 'src/v2/features/guild/guild-member-input';
-import { GuildMemberView } from 'src/v2/features/guild/guild-member-view';
-import { useValidateGuildMembers } from 'src/v2/features/guild/guild.endpoint';
-import { ImportGuildExcel } from 'src/v2/features/guild/read-guild-from-excel';
-import { ImportUserLink } from 'src/v2/features/guild/read-user-from-link';
+import { GuildMemberInput } from '@/fsd/3-features/guild/guild-member-input';
+import { GuildMemberView } from '@/fsd/3-features/guild/guild-member-view';
+import { useValidateGuildMembers } from '@/fsd/3-features/guild/guild.endpoint';
+import { ImportGuildExcel } from '@/fsd/3-features/guild/read-guild-from-excel';
+import { ImportUserLink } from '@/fsd/3-features/guild/read-user-from-link';
 
 export const Guild: React.FC = () => {
     const guildMembersLimit = 30;

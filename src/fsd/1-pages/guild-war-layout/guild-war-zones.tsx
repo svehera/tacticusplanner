@@ -26,14 +26,14 @@ import { Rank } from '@/fsd/5-shared/model';
 import { LoaderWithText, AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
-import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
-import { PlayersTable } from 'src/v2/features/guild/players-table';
-import { ViewGuild } from 'src/v2/features/guild/view-guild';
-import { BfLevelSelect } from 'src/v2/features/guild-war/bf-level-select';
-import { IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
-import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
+import { CharactersService } from '@/fsd/3-features/characters/characters.service';
+import { useGetGuildRosters } from '@/fsd/3-features/guild/guild.endpoint';
+import { IGuildWarPlayer } from '@/fsd/3-features/guild/guild.models';
+import { PlayersTable } from '@/fsd/3-features/guild/players-table';
+import { ViewGuild } from '@/fsd/3-features/guild/view-guild';
+import { BfLevelSelect } from '@/fsd/3-features/guild-war/bf-level-select';
+import { IGWLayoutZone } from '@/fsd/3-features/guild-war/guild-war.models';
+import { GuildWarService } from '@/fsd/3-features/guild-war/guild-war.service';
 
 export const GuildWarZones = () => {
     const { guildWar, guild } = useContext(StoreContext);
