@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
 
 import { RarityStars, Rank } from '@/fsd/5-shared/model';
 import { MiscIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';

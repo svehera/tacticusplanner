@@ -1,7 +1,7 @@
 ﻿import { Tooltip } from '@mui/material';
 import React, { useState } from 'react';
 
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
 
 import { UnitType } from '@/fsd/5-shared/model';
 

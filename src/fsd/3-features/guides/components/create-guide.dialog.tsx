@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
 
-import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
+import { RichTextEditor } from '@/shared-components/inputs/rich-text-editor';
 
 import { UnitType } from '@/fsd/5-shared/model';
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';

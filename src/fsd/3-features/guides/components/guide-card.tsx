@@ -10,8 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { TokenImage } from 'src/v2/components/images/token-image';
-import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
+import { TokenImage } from '@/shared-components/images/token-image';
+import { RichTextViewer } from '@/shared-components/inputs/rich-text-viewer';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 

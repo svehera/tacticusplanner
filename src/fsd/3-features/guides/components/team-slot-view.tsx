@@ -1,7 +1,7 @@
 ﻿import { Badge, Tooltip } from '@mui/material';
 import React from 'react';
 
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
 
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 

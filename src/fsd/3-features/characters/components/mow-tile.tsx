@@ -2,8 +2,8 @@
 import { orderBy } from 'lodash';
 import React, { useContext } from 'react';
 
+import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
 import { charsUnlockShards } from 'src/models/constants';
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
 
 import { numberToThousandsStringOld } from '@/fsd/5-shared/lib';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
