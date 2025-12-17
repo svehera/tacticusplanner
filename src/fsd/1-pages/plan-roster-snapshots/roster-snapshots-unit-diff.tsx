@@ -41,7 +41,7 @@ interface AbilityRowProps {
 
 const AbilityRow: React.FC<AbilityRowProps> = ({ label, level1, level2, diffFlag }: AbilityRowProps) => (
     <div className="flex items-center space-x-2 text-sm">
-        <span className="w-8 text-right font-medium text-gray-600 dark:text-gray-400">{label}:</span>
+        <span className="w-6 text-right font-medium text-gray-600 dark:text-gray-400">{label}:</span>
         <div className="flex items-center space-x-1">
             {/* Before Level (only shown if different) */}
             {diffFlag && (
@@ -90,7 +90,7 @@ export const RosterSnapshotsUnitDiff: React.FC<Props> = ({ char, mow, diff }: Pr
     const showRank = char && rank1 !== undefined;
 
     return (
-        <div className="flex w-84 h-24 dark:bg-gray-800 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl hover:border-blue-500">
+        <div className="flex w-78 h-24 dark:bg-gray-800 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl hover:border-blue-500">
             <div className="w-18 h-full flex-shrink-0 relative p-1 dark:bg-gray-900 bg-gray-100 flex items-center justify-center">
                 {(staticChar || staticMow) && <CharacterPortraitImage icon={(staticChar || staticMow)!.icon} />}
             </div>
@@ -119,8 +119,8 @@ export const RosterSnapshotsUnitDiff: React.FC<Props> = ({ char, mow, diff }: Pr
                 <div className="mx-2 w-px bg-gray-200 dark:bg-gray-700"></div>
 
                 <div className="flex flex-col justify-center space-y-2">
-                    <AbilityRow label={char ? 'A' : 'Pri'} level1={active1} level2={active2} diffFlag={activeDiff} />
-                    <AbilityRow label={char ? 'P' : 'Sec'} level1={passive1} level2={passive2} diffFlag={passiveDiff} />
+                    <AbilityRow label={char ? 'A' : 'P'} level1={active1} level2={active2} diffFlag={activeDiff} />
+                    <AbilityRow label={char ? 'P' : 'S'} level1={passive1} level2={passive2} diffFlag={passiveDiff} />
                 </div>
             </div>
         </div>

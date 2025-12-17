@@ -15,6 +15,7 @@ export interface ISnapshotMachineOfWar {
     stars: RarityStars;
     active: number;
     passive: number;
+    locked: boolean;
 }
 
 export interface ISnapshotUnitDiff {

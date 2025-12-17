@@ -69,6 +69,18 @@ import mythicWings from './snowprint/stars/ui_icon_star_mythic.png';
 import hitsIcon from './snowprint/stat_icons/ui_icon_stat_hit_01.png';
 import meleeAttack from './snowprint/stat_icons/ui_icon_stat_melee_01.png';
 import rangedAttack from './snowprint/stat_icons/ui_icon_stat_rangedattack_01.png';
+import commonFrame from './snowprint/hero_frames/ui_frame_portrait_common.png';
+import uncommonFrame from './snowprint/hero_frames/ui_frame_portrait_uncommon.png';
+import rareFrame from './snowprint/hero_frames/ui_frame_portrait_rare.png';
+import epicFrame from './snowprint/hero_frames/ui_frame_portrait_epic.png';
+import legendaryFrame from './snowprint/hero_frames/ui_frame_portrait_legendary.png';
+import mythicFrame from './snowprint/hero_frames/ui_frame_portrait_mythic.png';
+import mowCommonFrame from './snowprint/hero_frames/ui_frame_portrait_mow_common.png';
+import mowUncommonFrame from './snowprint/hero_frames/ui_frame_portrait_mow_uncommon.png';
+import mowRareFrame from './snowprint/hero_frames/ui_frame_portrait_mow_rare.png';
+import mowEpicFrame from './snowprint/hero_frames/ui_frame_portrait_mow_epic.png';
+import mowLegendaryFrame from './snowprint/hero_frames/ui_frame_portrait_mow_legendary.png';
+import mowMythicFrame from './snowprint/hero_frames/ui_frame_portrait_mow_mythic.png';
 
 export interface SnowprintIcon {
     file: string;
@@ -355,6 +367,54 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     damageToxic: {
         file: damageToxic,
         label: 'Toxic Damage',
+    },
+    commonFrame: {
+        file: commonFrame,
+        label: 'Common Hero Frame',
+    },
+    uncommonFrame: {
+        file: uncommonFrame,
+        label: 'Uncommon Hero Frame',
+    },
+    rareFrame: {
+        file: rareFrame,
+        label: 'Rare Hero Frame',
+    },
+    epicFrame: {
+        file: epicFrame,
+        label: 'Epic Hero Frame',
+    },
+    legendaryFrame: {
+        file: legendaryFrame,
+        label: 'Legendary Hero Frame',
+    },
+    mythicFrame: {
+        file: mythicFrame,
+        label: 'Mythic Hero Frame',
+    },
+    mowCommonFrame: {
+        file: mowCommonFrame,
+        label: 'Machines of War Common Frame',
+    },
+    mowUncommonFrame: {
+        file: mowUncommonFrame,
+        label: 'Machines of War Uncommon Frame',
+    },
+    mowRareFrame: {
+        file: mowRareFrame,
+        label: 'Machines of War Rare Frame',
+    },
+    mowEpicFrame: {
+        file: mowEpicFrame,
+        label: 'Machines of War Epic Frame',
+    },
+    mowLegendaryFrame: {
+        file: mowLegendaryFrame,
+        label: 'Machines of War Legendary Frame',
+    },
+    mowMythicFrame: {
+        file: mowMythicFrame,
+        label: 'Machines of War Mythic Frame',
     },
 };
 
