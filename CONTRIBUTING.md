@@ -32,7 +32,7 @@ We still have a lot of legacy structure in place, but here is what we're aiming 
   - `3-features/`
   - `4-entities/` : The logical data units of the application.
     - [entity-name]/
-        - `@x`: Public interfaces for the entity
+        - `public.ts`: Public interfaces for the entity
         - [etc...]: Whatever else is needed for the entity
   - `5-shared/`
     - `0-components/` : Reusable UI components (e.g. buttons, inputs)
