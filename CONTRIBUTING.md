@@ -14,16 +14,73 @@ Link here: https://trello.com/b/VA20QPHI/tacticus-planner
 `Severyn` originally created the project but has since stepped back for personal reasons.
 Control was handed off to `cpunerd` (a.k.a. Kharnage, GitHub name @unrstuart).
 
-## Project Architecture
+## Directories
 
-A lot of the project was migrated by `Severyn` to use [FSD Architecture - Feature Sliced Design](https://feature-sliced.design/).
-This is an architecture that splits code by feature and avoids having much cross boundaries between features.
-There's also a `src/v2` directory that's actually older than the `src/fsd` stuff.
-Unfortunately `Severyn` left before the architecture was unified and the plans to do so weren't written down.
-That's in limbo for now.
+The directory structure is based on [FSD Architecture - Feature Sliced Design](https://feature-sliced.design/).
+This is an architecture that splits code into distinct layers that build on each other, and then into "slices" that are independent of each other.
+e.g. Your "User" data entity shouldn't depend on your "User Preferences Page" UI, nor on your "Notification" data entity.
 
-> [!NOTE]
-> ToDo: Let's fill this out with an explanation of the directory structure as we decide how we want it to look.
+We still have a lot of legacy structure in place, but here is what we're aiming for:
+
+### Project Structure
+
+- `src/`
+  - `main.tsx` : Application entry point.
+  - `0-routes/` : Application routing configuration. Used instead of `0-app` so we can transition to file-based routing.
+  - `1-pages/`
+  - `2-widgets/`
+  - `3-features/`
+  - `4-entities/` : The logical data units of the application.
+    - [entity-name]/
+        - `@x`: Public interfaces for the entity
+        - [etc...]: Whatever else is needed for the entity
+  - `5-shared/`
+    - `0-components/` : Reusable UI components (e.g. buttons, inputs)
+    - `1-lib/` : General purpose libraries and utilities.
+    - `2-constants/` : Application-wide constants.
+      - [constant-name].ts : Type safe constant file.
+    - `3-assets/` : Static assets like images, fonts, etc.
+      - images/
+      - fonts/
+      - [etc...]
+    - `4-mined-data/` : Mined static data from external sources.
+      - [foo].json : Static data file
+      - [foo].ts : Corresponding TS file that loads and validates the JSON data using Zod.
+
+### FSD-ish Rules
+- A file cannot import from a directory with a higher number.
+  - e.g., files in `4-entities` can import from `5-shared`, but not from `3-features`.
+  - e.g. files in `5-shared/1-lib` can import from `5-shared/2-constants`, but not from `5-shared/0-components`.
+- Within the same directory, imports can be made from siblings in the directory
+  - e.g., files in `3-features/[feature-name]/list.tsx` can import from `3-features/[feature-name]/list-item.ts`, but not from `3-features/[other-feature-name]/[etc...]`.
+- Entities are allowed to import from `public.ts` files in other entities in order to support relationships (e.g. a `Comment` belongs to a `User`).
+  - e.g., files in `4-entities/user/model.ts` can import from `4-entities/comments/public.ts`, but not from `4-entities/comments/model.ts`.
+  - Note: We do this instead of `index.ts` files since `public.ts` since it's easier to check for (i.e. `index.ts` can mask whether you're importing from a file or a directory, so it's harder to check that you're using the public interface).
+  - Note: We do this instead of the standard FSD approach of `@x` folders because it's clearer for people unfamiliar with FSD.
+
+### Related Rules
+- No circular dependencies.
+- "Barrel" files (i.e. `index.ts`) are generally discouraged due to causing issues
+  - See https://marvinh.dev/blog/speeding-up-javascript-ecosystem-part-7/
+  - See https://tkdodo.eu/blog/please-stop-using-barrel-files
+
+### Tooling
+
+To enforce the FSD rules without needing to manually create a bunch of ESLint rules, we should make a utility function that crawls the directory structure and generates the necessary ESLint configuration.
+
+This utility can be run as a pre-lint step to ensure that the ESLint rules are always up to date with the current directory structure.
+
+### Migration Plan
+
+The priority is to get the new structure in place first so it's clear to everyone where any piece of code belongs.
+Linter violations for existing code can be fixed gradually over time. It's more important to "stop the bleeding" of unclear structure.
+
+1) Figure out the tooling to enforce the FSD rules; turn them on in ESLint at the warning level first.
+2) Make the new directory structure under `src/`.
+3) Move the existing files from `src/services`, `src/reducers`, `src/assets`, etc. into their respective new directories.
+4) Move the code from `src/fsd` down into the new structure.
+5) Turn on the ESLint rules at the error level and suppress any existing violations with `// eslint-disable-next-line` comments.
+6) Gradually fix the violations over time.
 
 ## Hosting
 
