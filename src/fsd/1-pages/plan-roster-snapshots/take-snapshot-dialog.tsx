@@ -25,6 +25,20 @@ export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProps> = ({
     const formattedTimestamp: string = new Date(currentTimestamp).toLocaleString();
     const [snapshotName, setSnapshotName] = useState(`Snapshot ${formattedTimestamp}`);
 
+    const unitsByFaction: Record<string, Array<ICharacter2 | IMow2>> = {};
+    chars.forEach(char => {
+        if (!unitsByFaction[char.faction]) {
+            unitsByFaction[char.faction] = [];
+        }
+        unitsByFaction[char.faction].push(char);
+    });
+    mows.forEach(mow => {
+        if (!unitsByFaction[mow.faction]) {
+            unitsByFaction[mow.faction] = [];
+        }
+        unitsByFaction[mow.faction].push(mow);
+    });
+
     return (
         <Dialog open={isOpen} onClose={onCancel} fullWidth maxWidth="sm">
             <DialogTitle>Take Roster Snapshot</DialogTitle>
@@ -47,11 +61,18 @@ export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProps> = ({
                 </div>
 
                 <div className="mt-4 p-3 border rounded bg-gray-100 dark:bg-gray-800 h-20 overflow-y-auto">
-                    <strong>Current Roster Summary:</strong>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                        (Placeholder: This area would show a summary of your {chars.length} characters and {mows.length}{' '}
-                        Machines of War for confirmation)
-                    </p>
+                    {Object.entries(unitsByFaction).map(([faction, units]) => (
+                        <div key={faction} className="mb-2">
+                            <div className="font-bold mb-1">{faction}</div>
+                            <ul className="list-disc list-inside">
+                                {units.map(unit => (
+                                    <li key={unit.id}>
+                                        {unit.name} - Rank {'rank' in unit ? unit.rank : 'N/A'}, Stars {unit.stars}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
             </DialogContent>
             <DialogActions>
