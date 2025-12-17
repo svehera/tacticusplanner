@@ -55,7 +55,7 @@ We still have a lot of legacy structure in place, but here is what we're aiming 
   - e.g., files in `3-features/[feature-name]/list.tsx` can import from `3-features/[feature-name]/list-item.ts`, but not from `3-features/[other-feature-name]/[etc...]`.
 - Entities are allowed to import from `public.ts` files in other entities in order to support relationships (e.g. a `Comment` belongs to a `User`).
   - e.g., files in `4-entities/user/model.ts` can import from `4-entities/comments/public.ts`, but not from `4-entities/comments/model.ts`.
-  - Note: We do this instead of `index.ts` files since `public.ts` since it's easier to check for (i.e. `index.ts` can mask whether you're importing from a file or a directory, so it's harder to check that you're using the public interface).
+  - Note: We do this instead of `index.ts` files since `public.ts` is easier to check for using a simple glob pattern.
   - Note: We do this instead of the standard FSD approach of `@x` folders because it's clearer for people unfamiliar with FSD.
 
 ### Related Rules
