@@ -128,8 +128,9 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({ char, charData, mow, 
             <img src={frameIcon} alt="frame" className="absolute top-[14px] left-0 w-[96px] h-[126px] z-[2]" />
 
             {starCount > 0 && (
-                <div className="absolute top-[4px] left-[17px] w-full flex justify-center items-center z-[3]">
-                    <div className="flex items-center">
+                <div className="absolute top-[4px] left-0 w-full flex justify-center z-[3]">
+                    <div className="flex items-center justify-center -space-x-1">
+                        {/* -space-x-1 is the Tailwind way to do negative margins safely */}
                         {Array.from({ length: starCount }).map((_, index) => {
                             const isBigStar =
                                 starCount === 5 &&
@@ -141,12 +142,12 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({ char, charData, mow, 
                                     key={index}
                                     src={starIcon}
                                     alt="star"
-                                    className={`mx-[-3px] ${
+                                    className={`shrink-0 object-contain ${
                                         starIcon === starsIcons.mythicWings
-                                            ? 'h-[28px] w-auto'
+                                            ? 'h-[26px] w-auto'
                                             : isBigStar
-                                              ? 'w-[34px] h-[34px]'
-                                              : 'w-[22.5px] h-[22.5px]'
+                                              ? 'w-[32px] h-[32px]'
+                                              : 'w-[20px] h-[20px]'
                                     }`}
                                 />
                             );
@@ -154,10 +155,9 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({ char, charData, mow, 
                     </div>
                 </div>
             )}
-
-            <div className="absolute top-[105px] left-[-20px] w-full flex justify-center items-center z-[3]">
+            <div className="absolute top-[105px] left-0 w-[96px] pointer-events-none z-[3]">
                 {rank !== Rank.Locked && (
-                    <div className="flex justify-center">
+                    <div className="flex justify-center mr-[60px]">
                         <RankIcon rank={rank} size={42} />
                     </div>
                 )}
