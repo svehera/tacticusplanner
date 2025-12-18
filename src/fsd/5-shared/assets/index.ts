@@ -29,6 +29,18 @@ import damageProjectile from './snowprint/damage_icons/ui_icon_damage_profile2_P
 import damagePsychic from './snowprint/damage_icons/ui_icon_damage_profile2_Psychic.png';
 import damagePulse from './snowprint/damage_icons/ui_icon_damage_profile2_Pulse.png';
 import damageToxic from './snowprint/damage_icons/ui_icon_damage_profile2_Toxic.png';
+import commonFrame from './snowprint/hero_frames/ui_frame_portrait_common.png';
+import epicFrame from './snowprint/hero_frames/ui_frame_portrait_epic.png';
+import legendaryFrame from './snowprint/hero_frames/ui_frame_portrait_legendary.png';
+import mowCommonFrame from './snowprint/hero_frames/ui_frame_portrait_mow_common.png';
+import mowEpicFrame from './snowprint/hero_frames/ui_frame_portrait_mow_epic.png';
+import mowLegendaryFrame from './snowprint/hero_frames/ui_frame_portrait_mow_legendary.png';
+import mowMythicFrame from './snowprint/hero_frames/ui_frame_portrait_mow_mythic.png';
+import mowRareFrame from './snowprint/hero_frames/ui_frame_portrait_mow_rare.png';
+import mowUncommonFrame from './snowprint/hero_frames/ui_frame_portrait_mow_uncommon.png';
+import mythicFrame from './snowprint/hero_frames/ui_frame_portrait_mythic.png';
+import rareFrame from './snowprint/hero_frames/ui_frame_portrait_rare.png';
+import uncommonFrame from './snowprint/hero_frames/ui_frame_portrait_uncommon.png';
 import commonEquipmentFrame from './snowprint/misc/ui_frame_items_common.png';
 import epicEquipmentFrame from './snowprint/misc/ui_frame_items_epic.png';
 import legendaryEquipmentFrame from './snowprint/misc/ui_frame_items_legendary.png';
@@ -36,6 +48,8 @@ import mythicEquipmentFrame from './snowprint/misc/ui_frame_items_mythic.png';
 import rareEquipmentFrame from './snowprint/misc/ui_frame_items_rare.png';
 import relicEquipmentFrame from './snowprint/misc/ui_frame_items_relic.png';
 import uncommonEquipmentFrame from './snowprint/misc/ui_frame_items_uncommon.png';
+import shardIcon from './snowprint/misc/ui_icon_character_shard_empty.png';
+import mythicShardIcon from './snowprint/misc/ui_icon_character_shard_mythic_empty.png';
 import checkmark from './snowprint/misc/ui_icon_checkmark_default.png';
 import blessedReqOrder from './snowprint/misc/ui_icon_resource_blessed_req_order.png';
 import coin from './snowprint/misc/ui_icon_resource_coin.png';
@@ -69,18 +83,6 @@ import mythicWings from './snowprint/stars/ui_icon_star_mythic.png';
 import hitsIcon from './snowprint/stat_icons/ui_icon_stat_hit_01.png';
 import meleeAttack from './snowprint/stat_icons/ui_icon_stat_melee_01.png';
 import rangedAttack from './snowprint/stat_icons/ui_icon_stat_rangedattack_01.png';
-import commonFrame from './snowprint/hero_frames/ui_frame_portrait_common.png';
-import uncommonFrame from './snowprint/hero_frames/ui_frame_portrait_uncommon.png';
-import rareFrame from './snowprint/hero_frames/ui_frame_portrait_rare.png';
-import epicFrame from './snowprint/hero_frames/ui_frame_portrait_epic.png';
-import legendaryFrame from './snowprint/hero_frames/ui_frame_portrait_legendary.png';
-import mythicFrame from './snowprint/hero_frames/ui_frame_portrait_mythic.png';
-import mowCommonFrame from './snowprint/hero_frames/ui_frame_portrait_mow_common.png';
-import mowUncommonFrame from './snowprint/hero_frames/ui_frame_portrait_mow_uncommon.png';
-import mowRareFrame from './snowprint/hero_frames/ui_frame_portrait_mow_rare.png';
-import mowEpicFrame from './snowprint/hero_frames/ui_frame_portrait_mow_epic.png';
-import mowLegendaryFrame from './snowprint/hero_frames/ui_frame_portrait_mow_legendary.png';
-import mowMythicFrame from './snowprint/hero_frames/ui_frame_portrait_mow_mythic.png';
 
 export interface SnowprintIcon {
     file: string;
@@ -415,6 +417,14 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     mowMythicFrame: {
         file: mowMythicFrame,
         label: 'Machines of War Mythic Frame',
+    },
+    shard: {
+        file: shardIcon,
+        label: 'Unit Shard',
+    },
+    mythicShard: {
+        file: mythicShardIcon,
+        label: 'Mythic Unit Shard',
     },
 };
 

@@ -5,6 +5,8 @@ export interface ISnapshotCharacter {
     rank: Rank;
     rarity: Rarity;
     stars: RarityStars;
+    shards: number;
+    mythicShards: number;
     active: number;
     passive: number;
 }
@@ -14,6 +16,8 @@ export interface ISnapshotMachineOfWar {
     rarity: Rarity;
     stars: RarityStars;
     active: number;
+    shards: number;
+    mythicShards: number;
     passive: number;
     locked: boolean;
 }
@@ -23,8 +27,11 @@ export interface ISnapshotUnitDiff {
     rank?: Rank;
     rarity?: Rarity;
     stars?: RarityStars;
+    shards?: number;
+    mythicShards?: number;
     active?: number;
     passive?: number;
+    locked?: boolean;
 }
 
 export interface IRosterSnapshot {

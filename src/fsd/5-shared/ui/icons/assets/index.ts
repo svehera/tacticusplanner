@@ -170,6 +170,8 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     mowEpicFrame: snowprintIcons.mowEpicFrame,
     mowLegendaryFrame: snowprintIcons.mowLegendaryFrame,
     mowMythicFrame: snowprintIcons.mowMythicFrame,
+    shard: snowprintIcons.shard,
+    mythicShard: snowprintIcons.mythicShard,
 };
 
 export const starsIcons = {

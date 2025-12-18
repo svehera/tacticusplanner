@@ -1,7 +1,8 @@
-﻿import { tacticusIcons } from '@/fsd/5-shared/ui/icons/assets';
-import React from 'react';
+﻿import React from 'react';
 
 import { getImageUrl } from 'src/shared-logic/functions';
+
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/assets';
 
 interface Props {
     icon: string;
@@ -34,7 +35,7 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
                         error: e,
                     });
                 }}
-                onLoad={() => { }}
+                onLoad={() => {}}
             />
         );
     }
@@ -63,7 +64,7 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
                         error: e,
                     });
                 }}
-                onLoad={() => { }}
+                onLoad={() => {}}
             />
             <img
                 loading="lazy"

@@ -22,8 +22,8 @@ import { IRosterSnapshot, IRosterSnapshotsState } from './models';
 import { RosterSnapshotsService } from './roster-snapshots-service';
 import { RosterSnapshotsUnit } from './roster-snapshots-unit';
 import { RosterSnapshotsUnitDiff } from './roster-snapshots-unit-diff';
-import { TakeSnapshotDialog } from './take-snapshot-dialog';
 import { RosterSnapshotsUnitDiff2 } from './roster-snapshots-unit-diff2';
+import { TakeSnapshotDialog } from './take-snapshot-dialog';
 
 const MAX_SNAPSHOTS: number = 20;
 
@@ -36,7 +36,7 @@ export const RosterSnapshots = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [snapshotName, setSnapshotName] = useState('');
 
-    useEffect(() => { }, [rosterSnapshots]);
+    useEffect(() => {}, [rosterSnapshots]);
 
     const sync = async () => {
         console.log('Syncing with Tacticus...');
@@ -94,7 +94,7 @@ export const RosterSnapshots = () => {
         [chars, mows, rosterSnapshots, dispatch]
     );
 
-    const openSettings = () => { };
+    const openSettings = () => {};
 
     return (
         <div>
@@ -139,99 +139,111 @@ export const RosterSnapshots = () => {
                             stars: RarityStars.RedThreeStars,
                             active: 0,
                             passive: 0,
+                            shards: 1,
+                            mythicShards: 1,
                         }}
                     />
                 }
-                {
-                    [RarityStars.None, RarityStars.OneStar, RarityStars.TwoStars].map((stars) => (
-                        <RosterSnapshotsUnit
-                            key={`demo-common-${stars}`}
-                            char={{
-                                id: 'bloodDante',
-                                rarity: Rarity.Common,
-                                rank: Rank.Iron1,
-                                stars: stars,
-                                active: 1,
-                                passive: 8,
-                            }}
-                        />
-                    ))
-                }
-                {
-                    [RarityStars.TwoStars, RarityStars.ThreeStars, RarityStars.FourStars].map((stars) => (
-                        <RosterSnapshotsUnit
-                            key={`demo-uncommon-${stars}`}
-                            char={{
-                                id: 'custoTrajann',
-                                rarity: Rarity.Uncommon,
-                                rank: Rank.Bronze1,
-                                stars: stars,
-                                active: 9,
-                                passive: 17,
-                            }}
-                        />
-                    ))
-                }
-                {
-                    [RarityStars.FourStars, RarityStars.FiveStars, RarityStars.RedOneStar].map((stars) => (
-                        <RosterSnapshotsUnit
-                            key={`demo-rare-${stars}`}
-                            char={{
-                                id: 'blackAbaddon',
-                                rarity: Rarity.Rare,
-                                rank: Rank.Silver1,
-                                stars: stars,
-                                active: 18,
-                                passive: 26,
-                            }}
-                        />
-                    ))
-                }
-                {
-                    [RarityStars.RedOneStar, RarityStars.RedTwoStars, RarityStars.RedThreeStars].map((stars) => (
-                        <RosterSnapshotsUnit
-                            key={`demo-epic-${stars}`}
-                            char={{
-                                id: 'worldKharn',
-                                rarity: Rarity.Epic,
-                                rank: Rank.Gold1,
-                                stars: stars,
-                                active: 27,
-                                passive: 35,
-                            }}
-                        />
-                    ))
-                }
-                {
-                    [RarityStars.RedThreeStars, RarityStars.RedFourStars, RarityStars.RedFiveStars, RarityStars.OneBlueStar].map((stars) => (
-                        <RosterSnapshotsUnit
-                            key={`demo-legendary-${stars}`}
-                            char={{
-                                id: 'custoBladeChampion',
-                                rarity: Rarity.Legendary,
-                                rank: Rank.Diamond3,
-                                stars: stars,
-                                active: 36,
-                                passive: 50,
-                            }}
-                        />
-                    ))
-                }
-                {
-                    [RarityStars.OneBlueStar, RarityStars.TwoBlueStars, RarityStars.ThreeBlueStars, RarityStars.MythicWings].map((stars) => (
-                        <RosterSnapshotsUnit
-                            key={`demo-legendary-${stars}`}
-                            char={{
-                                id: 'thousAhriman',
-                                rarity: Rarity.Mythic,
-                                rank: Rank.Adamantine3,
-                                stars: stars,
-                                active: 51,
-                                passive: 55,
-                            }}
-                        />
-                    ))
-                }
+                {[RarityStars.None, RarityStars.OneStar, RarityStars.TwoStars].map(stars => (
+                    <RosterSnapshotsUnit
+                        key={`demo-common-${stars}`}
+                        char={{
+                            id: 'bloodDante',
+                            rarity: Rarity.Common,
+                            rank: Rank.Iron1,
+                            stars: stars,
+                            active: 1,
+                            passive: 8,
+                            shards: 10,
+                            mythicShards: 10,
+                        }}
+                    />
+                ))}
+                {[RarityStars.TwoStars, RarityStars.ThreeStars, RarityStars.FourStars].map(stars => (
+                    <RosterSnapshotsUnit
+                        key={`demo-uncommon-${stars}`}
+                        char={{
+                            id: 'custoTrajann',
+                            rarity: Rarity.Uncommon,
+                            rank: Rank.Bronze1,
+                            stars: stars,
+                            active: 9,
+                            passive: 17,
+                            shards: 100,
+                            mythicShards: 100,
+                        }}
+                    />
+                ))}
+                {[RarityStars.FourStars, RarityStars.FiveStars, RarityStars.RedOneStar].map(stars => (
+                    <RosterSnapshotsUnit
+                        key={`demo-rare-${stars}`}
+                        char={{
+                            id: 'blackAbaddon',
+                            rarity: Rarity.Rare,
+                            rank: Rank.Silver1,
+                            stars: stars,
+                            active: 18,
+                            passive: 26,
+                            shards: 1000,
+                            mythicShards: 1000,
+                        }}
+                    />
+                ))}
+                {[RarityStars.RedOneStar, RarityStars.RedTwoStars, RarityStars.RedThreeStars].map(stars => (
+                    <RosterSnapshotsUnit
+                        key={`demo-epic-${stars}`}
+                        char={{
+                            id: 'worldKharn',
+                            rarity: Rarity.Epic,
+                            rank: Rank.Gold1,
+                            stars: stars,
+                            active: 35,
+                            passive: 35,
+                            shards: 9999,
+                            mythicShards: 9999,
+                        }}
+                    />
+                ))}
+                {[
+                    RarityStars.RedThreeStars,
+                    RarityStars.RedFourStars,
+                    RarityStars.RedFiveStars,
+                    RarityStars.OneBlueStar,
+                ].map(stars => (
+                    <RosterSnapshotsUnit
+                        key={`demo-legendary-${stars}`}
+                        char={{
+                            id: 'custoBladeChampion',
+                            rarity: Rarity.Legendary,
+                            rank: Rank.Diamond3,
+                            stars: stars,
+                            active: 36,
+                            passive: 50,
+                            shards: 100000,
+                            mythicShards: 100000,
+                        }}
+                    />
+                ))}
+                {[
+                    RarityStars.OneBlueStar,
+                    RarityStars.TwoBlueStars,
+                    RarityStars.ThreeBlueStars,
+                    RarityStars.MythicWings,
+                ].map(stars => (
+                    <RosterSnapshotsUnit
+                        key={`demo-legendary-${stars}`}
+                        char={{
+                            id: 'thousAhriman',
+                            rarity: Rarity.Mythic,
+                            rank: Rank.Adamantine3,
+                            stars: stars,
+                            active: 51,
+                            passive: 55,
+                            shards: 100000,
+                            mythicShards: 100000,
+                        }}
+                    />
+                ))}
             </div>
             <div className="flex flex-wrap">
                 <RosterSnapshotsUnitDiff
@@ -242,6 +254,8 @@ export const RosterSnapshots = () => {
                         stars: RarityStars.FiveStars,
                         active: 36,
                         passive: 50,
+                        shards: 9999,
+                        mythicShards: 9999,
                     }}
                     diff={{
                         id: 'bloodDante',
@@ -249,6 +263,8 @@ export const RosterSnapshots = () => {
                         rank: Rank.Adamantine1,
                         stars: RarityStars.RedFiveStars,
                         active: 40,
+                        shards: 999,
+                        mythicShards: 999,
                     }}
                 />
                 <RosterSnapshotsUnitDiff
@@ -259,6 +275,8 @@ export const RosterSnapshots = () => {
                         stars: RarityStars.OneStar,
                         active: 55,
                         passive: 55,
+                        shards: 99,
+                        mythicShards: 99,
                     }}
                     diff={{
                         id: 'worldKharn',
@@ -267,6 +285,8 @@ export const RosterSnapshots = () => {
                         stars: RarityStars.MythicWings,
                         active: 65,
                         passive: 65,
+                        shards: 0,
+                        mythicShards: 999,
                     }}
                 />
                 <RosterSnapshotsUnitDiff
@@ -276,6 +296,9 @@ export const RosterSnapshots = () => {
                         stars: RarityStars.OneStar,
                         active: 55,
                         passive: 55,
+                        shards: 0,
+                        mythicShards: 999,
+                        locked: false,
                     }}
                     diff={{
                         id: 'adeptExorcist',
@@ -284,6 +307,9 @@ export const RosterSnapshots = () => {
                         stars: RarityStars.MythicWings,
                         active: 65,
                         passive: 65,
+                        shards: 0,
+                        mythicShards: 999,
+                        locked: true,
                     }}
                 />
             </div>
@@ -296,6 +322,8 @@ export const RosterSnapshots = () => {
                         stars: RarityStars.FiveStars,
                         active: 36,
                         passive: 50,
+                        shards: 0,
+                        mythicShards: 999,
                     }}
                     diff={{
                         id: 'bloodDante',
@@ -303,6 +331,8 @@ export const RosterSnapshots = () => {
                         rank: Rank.Adamantine1,
                         stars: RarityStars.RedFiveStars,
                         active: 40,
+                        shards: 0,
+                        mythicShards: 999,
                     }}
                 />
                 <RosterSnapshotsUnitDiff2
@@ -313,6 +343,8 @@ export const RosterSnapshots = () => {
                         stars: RarityStars.OneStar,
                         active: 1,
                         passive: 1,
+                        shards: 0,
+                        mythicShards: 999,
                     }}
                     diff={{
                         id: 'worldKharn',
@@ -321,6 +353,8 @@ export const RosterSnapshots = () => {
                         stars: RarityStars.MythicWings,
                         active: 65,
                         passive: 65,
+                        shards: 0,
+                        mythicShards: 999,
                     }}
                 />
                 <RosterSnapshotsUnitDiff2
@@ -331,6 +365,8 @@ export const RosterSnapshots = () => {
                         active: 0,
                         passive: 0,
                         locked: true,
+                        shards: 0,
+                        mythicShards: 999,
                     }}
                     diff={{
                         id: 'adeptExorcist',
@@ -339,6 +375,8 @@ export const RosterSnapshots = () => {
                         stars: RarityStars.MythicWings,
                         active: 65,
                         passive: 65,
+                        shards: 0,
+                        mythicShards: 999,
                     }}
                 />
             </div>

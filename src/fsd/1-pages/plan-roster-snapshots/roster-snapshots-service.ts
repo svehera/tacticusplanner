@@ -38,6 +38,8 @@ export class RosterSnapshotsService {
                     stars: c.stars,
                     active: c.activeAbilityLevel,
                     passive: c.passiveAbilityLevel,
+                    shards: c.shards,
+                    mythicShards: c.mythicShards,
                 }) as ISnapshotCharacter
         );
         const snapshotMows: ISnapshotMachineOfWar[] = mows.map(
@@ -48,6 +50,8 @@ export class RosterSnapshotsService {
                     stars: m.stars,
                     active: m.primaryAbilityLevel,
                     passive: m.secondaryAbilityLevel,
+                    shards: m.shards,
+                    mythicShards: m.mythicShards,
                 }) as ISnapshotMachineOfWar
         );
         return {
@@ -88,6 +92,8 @@ export class RosterSnapshotsService {
                     stars: charDiff.stars!,
                     active: charDiff.active!,
                     passive: charDiff.passive!,
+                    shards: charDiff.shards!,
+                    mythicShards: charDiff.mythicShards!,
                 });
             } else {
                 const baseChar = resolvedChars[baseCharIndex];
@@ -98,6 +104,8 @@ export class RosterSnapshotsService {
                     stars: charDiff.stars ?? baseChar.stars,
                     active: charDiff.active ?? baseChar.active,
                     passive: charDiff.passive ?? baseChar.passive,
+                    shards: charDiff.shards ?? baseChar.shards,
+                    mythicShards: charDiff.mythicShards ?? baseChar.mythicShards,
                 };
             }
         }
@@ -111,6 +119,9 @@ export class RosterSnapshotsService {
                     stars: mowDiff.stars!,
                     active: mowDiff.active!,
                     passive: mowDiff.passive!,
+                    shards: mowDiff.shards!,
+                    mythicShards: mowDiff.mythicShards!,
+                    locked: mowDiff.locked ?? false,
                 });
             } else {
                 const baseMow = resolvedMows[baseMowIndex];
@@ -120,6 +131,9 @@ export class RosterSnapshotsService {
                     stars: mowDiff.stars ?? baseMow.stars,
                     active: mowDiff.active ?? baseMow.active,
                     passive: mowDiff.passive ?? baseMow.passive,
+                    shards: mowDiff.shards ?? baseMow.shards,
+                    mythicShards: mowDiff.mythicShards ?? baseMow.mythicShards,
+                    locked: mowDiff.locked ?? baseMow.locked,
                 };
             }
         }

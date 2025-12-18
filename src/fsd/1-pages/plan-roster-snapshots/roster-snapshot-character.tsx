@@ -1,12 +1,16 @@
-import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/assets';
+/* eslint-disable import-x/no-internal-modules */
 import React from 'react';
 
 import { getImageUrl } from 'src/shared-logic/functions';
-import { ISnapshotCharacter, ISnapshotMachineOfWar } from './models';
-import { ICharacterData, RankIcon } from '@/fsd/4-entities/character';
-import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
+
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
+import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
+import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/assets';
+
+import { ICharacterData, RankIcon } from '@/fsd/4-entities/character';
 import { IMowStatic2 } from '@/fsd/4-entities/mow/model';
+
+import { ISnapshotCharacter, ISnapshotMachineOfWar } from './models';
 
 interface Props {
     char?: ISnapshotCharacter;
@@ -73,131 +77,117 @@ function getRank(rank: number): Rank {
     return Rank.Locked;
 }
 
+function formatShardCount(count: number): string {
+    if (count < 0) return '0';
+    if (count < 1000) return count.toString();
+    if (count < 10000) return `${Math.floor(count / 1000)}k`;
+    return '>10k';
+}
+
+interface AbilityBadgeProps {
+    value: number;
+    positionClasses: string;
+}
+
+const AbilityDisplay = ({ value, positionClasses }: AbilityBadgeProps) => {
+    return (
+        <div
+            className={`
+            absolute w-6 h-3 rounded-full flex items-center justify-center 
+            text-[11px] font-bold z-10 shadow-sm border-[1.5px]
+            dark:bg-[#272424] dark:text-white border-[#333]
+            bg-gray-100 text-gray-900 dark:border-white
+            ${positionClasses}
+        `}>
+            {value}
+        </div>
+    );
+};
+
 export const RosterSnapshotCharacter: React.FC<Props> = ({ char, charData, mow, mowData }) => {
     const charIcon = getImageUrl(charData?.icon ?? mowData?.icon ?? 'default-character-icon.png');
     const frameIcon = tacticusIcons[getFrame(mow !== undefined, char?.rarity ?? mow?.rarity ?? 0)]?.file || '';
     const starIcon = getStarIcon(char?.stars ?? mow?.stars ?? 0);
     const starCount = getStarCount(char?.stars ?? mow?.stars ?? 0);
+    const shardIcon = tacticusIcons.shard.file;
+    const mythicShardIcon = tacticusIcons.mythicShard.file;
     const rank = getRank(char?.rank ?? 0);
 
-    console.log('mow: ', mow);
-
     return (
-        <div style={{ position: 'relative', width: 64, height: 93 }}>
+        <div className="relative w-[96px] h-[170px]">
             <img
                 loading="lazy"
-                className="pointer-events-none"
+                className="pointer-events-none absolute left-[3px] top-[17px]"
                 src={charIcon}
-                width={60}
-                height={80}
+                width={90}
+                height={120}
                 alt={char?.id ?? mow?.id ?? 'character'}
-                style={{ left: 2, top: 11, position: 'absolute' }}
-                onError={e => {
-                    console.error('❌ Failed to load image:', {
-                        icon: charData?.icon ?? mowData?.icon,
-                        imagePath: charIcon,
-                        resolvedUrl: charIcon,
-                        error: e,
-                    });
-                }}
-                onLoad={() => { }}
+                onError={_ => console.error('❌ Icon failed', charIcon)}
             />
-            <img
-                src={frameIcon}
-                alt="frame"
-                style={{
-                    position: 'absolute',
-                    width: 64,
-                    height: 84,
-                    top: 9,
-                    left: 0,
-                    zIndex: 2,
-                }}
-            />
-            {starCount > 0 && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 2,
-                        left: 0,
-                        right: 0,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        zIndex: 3,
-                    }}>
-                    {Array.from({ length: starCount }).map((_, index) => {
-                        const isBigStar =
-                            starCount === 5 &&
-                            (starIcon === starsIcons.goldStar || starIcon === starsIcons.redStar) &&
-                            index === 2;
-                        const size = isBigStar ? 22.5 : 15;
 
-                        return (
-                            <img
-                                key={index}
-                                src={starIcon}
-                                alt="star"
-                                style={{
-                                    ...(starIcon === starsIcons.mythicWings
-                                        ? { height: 18.75, width: 'auto' }
-                                        : { width: size, height: size }),
-                                    marginLeft: index === 0 ? 0 : -4,
-                                }}
-                            />
-                        );
-                    })}
+            <img src={frameIcon} alt="frame" className="absolute top-[14px] left-0 w-[96px] h-[126px] z-[2]" />
+
+            {starCount > 0 && (
+                <div className="absolute top-[4px] left-[17px] w-full flex justify-center items-center z-[3]">
+                    <div className="flex items-center">
+                        {Array.from({ length: starCount }).map((_, index) => {
+                            const isBigStar =
+                                starCount === 5 &&
+                                (starIcon === starsIcons.goldStar || starIcon === starsIcons.redStar) &&
+                                index === 2;
+
+                            return (
+                                <img
+                                    key={index}
+                                    src={starIcon}
+                                    alt="star"
+                                    className={`mx-[-3px] ${
+                                        starIcon === starsIcons.mythicWings
+                                            ? 'h-[28px] w-auto'
+                                            : isBigStar
+                                              ? 'w-[34px] h-[34px]'
+                                              : 'w-[22.5px] h-[22.5px]'
+                                    }`}
+                                />
+                            );
+                        })}
+                    </div>
                 </div>
             )}
-            <div
-                style={{
-                    position: 'absolute',
-                    top: 70,
-                    left: -50,
-                    right: 0,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    zIndex: 3,
-                }}>
-                {rank !== Rank.Locked && <RankIcon rank={rank} size={28} />}
+
+            <div className="absolute top-[105px] left-[-20px] w-full flex justify-center items-center z-[3]">
+                {rank !== Rank.Locked && (
+                    <div className="flex justify-center">
+                        <RankIcon rank={rank} size={42} />
+                    </div>
+                )}
             </div>
-            {((rank !== Rank.Locked) || (mow !== undefined && !mow.locked)) && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        right: 2,
-                        zIndex: 3,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 2,
-                        alignItems: 'center',
-                    }}>
-                    <div
-                        style={{
-                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            color: 'white',
-                            borderRadius: 4,
-                            padding: '1px 3px',
-                            fontSize: 11,
-                            lineHeight: '1',
-                        }}>
-                        {char !== undefined ? 'A' : 'P'}: {char?.active ?? mow?.active}
-                    </div>
-                    <div
-                        style={{
-                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            color: 'white',
-                            borderRadius: 4,
-                            padding: '1px 3px',
-                            fontSize: 11,
-                            lineHeight: '1',
-                        }}>
-                        {char !== undefined ? 'P' : 'S'}: {char?.passive ?? mow?.passive}
-                    </div>
-                </div>
+
+            {(rank !== Rank.Locked || (mow !== undefined && !mow.locked)) && (
+                <>
+                    <AbilityDisplay value={char?.active ?? mow?.active ?? 0} positionClasses="-top-[-27px] -left-0" />
+                    <AbilityDisplay
+                        value={char?.passive ?? mow?.passive ?? 0}
+                        positionClasses="-top-[-27px] -right-[30px]"
+                    />
+                </>
             )}
+
+            <div className="absolute top-[140px] left-[4px] w-[88px] flex justify-between items-center z-[4]">
+                <div className="relative left-[15px] flex items-center justify-center">
+                    <img src={shardIcon} alt="shards" className="h-[22px] w-auto" />
+                    <span className="absolute text-[11px] font-bold text-white [text-shadow:1px_1px_2px_black] pointer-events-none">
+                        {formatShardCount(char?.shards ?? mow?.shards ?? 0)}
+                    </span>
+                </div>
+
+                <div className="relative right-[15px] flex items-center justify-center">
+                    <img src={mythicShardIcon} alt="mythic shards" className="h-[22px] w-auto" />
+                    <span className="absolute text-[11px] font-bold text-white [text-shadow:1px_1px_2px_black] pointer-events-none">
+                        {formatShardCount(char?.mythicShards ?? mow?.mythicShards ?? 0)}
+                    </span>
+                </div>
+            </div>
         </div>
     );
 };
