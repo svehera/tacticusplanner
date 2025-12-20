@@ -1,30 +1,22 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
-import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
+import { ConfirmationDialog } from '@/fsd/5-shared/ui';
 
 import { RequirementStatus } from '@/fsd/3-features/lre';
 import { LrePointsCategoryId, ProgressState } from '@/fsd/3-features/lre-progress';
 
 import { BattleStatusCheckbox } from './battle-status-checkbox';
 import { ILreBattleProgress, ILreBattleRequirementsProgress } from './lre.models';
+import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
 
 interface Props {
     battle: ILreBattleProgress;
-    trackId: LreTrackId;
-    legendaryEventId: LegendaryEventEnum;
     maxKillPoints: number;
     toggleState: (req: ILreBattleRequirementsProgress, state: ProgressState, forceOverwrite?: boolean) => void;
 }
 
-export const LreTrackBattleSummary: React.FC<Props> = ({
-    battle,
-    //trackId,
-    //legendaryEventId,
-    maxKillPoints,
-    toggleState,
-}) => {
-    //const { leSelectedTeams } = useContext(StoreContext);
-    //const selectedTeams: ILreTeam[] = leSelectedTeams[legendaryEventId]?.teams ?? [];
+export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, toggleState }) => {
+    const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
 
     // Convert legacy boolean flags to RequirementStatus
     const getRequirementStatus = (req: ILreBattleRequirementsProgress): RequirementStatus => {
@@ -41,6 +33,30 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
             return RequirementStatus.StopHere;
         }
         return RequirementStatus.NotCleared;
+    };
+
+    // Cycle through statuses for non-killScore requirements
+    // NotCleared (0) → Cleared (1) → MaybeClear (2) → StopHere (3) → NotCleared (0)
+    const getNextStatus = (currentStatus: RequirementStatus): RequirementStatus => {
+        switch (currentStatus) {
+            case RequirementStatus.NotCleared:
+                return RequirementStatus.Cleared;
+            case RequirementStatus.Cleared:
+                return RequirementStatus.MaybeClear;
+            case RequirementStatus.MaybeClear:
+                return RequirementStatus.StopHere;
+            case RequirementStatus.StopHere:
+                return RequirementStatus.NotCleared;
+            default:
+                return RequirementStatus.NotCleared;
+        }
+    };
+
+    // Handle cycling button click for non-killScore requirements
+    const handleCycleStatus = (req: ILreBattleRequirementsProgress) => {
+        const currentStatus = getRequirementStatus(req);
+        const nextStatus = getNextStatus(currentStatus);
+        handleStatusChange(req, nextStatus);
     };
 
     // Convert RequirementStatus back to ProgressState for toggleState
@@ -75,6 +91,26 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
         return battle.requirementsProgress.every(req => req.completed);
     }, [battle]);
 
+    const handleOpenConfirmDialog = () => {
+        setConfirmDialogOpen(true);
+    };
+
+    const handleCloseConfirmDialog = () => {
+        setConfirmDialogOpen(false);
+    };
+
+    const handleConfirmToggleAll = () => {
+        setConfirmDialogOpen(false);
+        handleToggleAll();
+    };
+
+    const handleBattleNumberKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === ' ' || event.key === 'Enter') {
+            event.preventDefault();
+            handleOpenConfirmDialog();
+        }
+    };
+
     const handleToggleAll = () => {
         battle.requirementsProgress.forEach(req => {
             // Use handleStatusChange to properly set status and clear killScore
@@ -83,43 +119,63 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
         });
     };
 
-    /*     const estimatedTokens = () => {
-        const numTokens = TokenEstimationService.computeMinimumTokensToClearBattle(
-            selectedTeams
-                .filter(team => team.section === trackId)
-                .filter(team => (team.expectedBattleClears ?? 1) >= battle.battleIndex + 1)
-        );
-        return (
-            <span className="bold me-2.5 min-w-[42px]">
-                <center>{numTokens === undefined ? '-' : numTokens}</center>
-            </span>
-        );
-    }; */
-
     return (
-        <div className="flex flex-row w-full">
-            <span
-                className="min-w-6 md:min-w-8 p-0.5 md:p-0.5 my-0.5 mr-1 md:mr-2 text-xs md:text-base font-bold text-center border-2 border-blue-300/75 size-6 md:size-8 rounded-xs flex-shrink-0"
-                onClick={handleToggleAll}>
-                {battle.battleIndex + 1}
-            </span>
-            <div className="flex flex-row justify-between flex-1">
-                {battle.requirementsProgress.map(req => {
-                    const isKillScore = req.id === LrePointsCategoryId.killScore;
-                    const status = getRequirementStatus(req);
+        <>
+            <div className="flex flex-row w-full">
+                <span
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Toggle all requirements for battle ${battle.battleIndex + 1}`}
+                    className="cursor-pointer min-w-6 md:min-w-8 p-0.5 md:p-0.5 my-0.5 mr-1 md:mr-2 text-xs md:text-base font-bold text-center border-2 border-blue-300/75 size-6 md:size-8 rounded-xs shrink-0"
+                    onClick={handleOpenConfirmDialog}
+                    onKeyDown={handleBattleNumberKeyDown}>
+                    {battle.battleIndex + 1}
+                </span>
+                <div className="flex flex-row justify-between flex-1">
+                    {battle.requirementsProgress.map(req => {
+                        const isKillScore = req.id === LrePointsCategoryId.killScore;
+                        const status = getRequirementStatus(req);
 
-                    return (
-                        <BattleStatusCheckbox
-                            key={req.id}
-                            status={status}
-                            killScore={req.killScore}
-                            isKillScore={isKillScore}
-                            maxKillPoints={maxKillPoints}
-                            onChange={(newStatus, newKillScore) => handleStatusChange(req, newStatus, newKillScore)}
-                        />
-                    );
-                })}
+                        // Use BattleStatusCheckbox with dropdown for killScore requirements
+                        if (isKillScore) {
+                            return (
+                                <BattleStatusCheckbox
+                                    key={req.id}
+                                    status={status}
+                                    killScore={req.killScore}
+                                    isKillScore={isKillScore}
+                                    maxKillPoints={maxKillPoints}
+                                    onChange={(newStatus, newKillScore) =>
+                                        handleStatusChange(req, newStatus, newKillScore)
+                                    }
+                                />
+                            );
+                        }
+
+                        // Use simple cycling button for non-killScore requirements
+                        return (
+                            <button
+                                key={req.id}
+                                onClick={() => handleCycleStatus(req)}
+                                className="p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
+                                style={{
+                                    color: STATUS_COLORS[status],
+                                    borderColor: `${STATUS_COLORS[status]}20`,
+                                }}>
+                                {STATUS_LABELS[status]}
+                            </button>
+                        );
+                    })}
+                </div>
             </div>
-        </div>
+
+            <ConfirmationDialog
+                open={confirmDialogOpen}
+                title="Confirm Action"
+                message="Are you sure you want to toggle all selections for this battle?"
+                onConfirm={handleConfirmToggleAll}
+                onCancel={handleCloseConfirmDialog}
+            />
+        </>
     );
 };
