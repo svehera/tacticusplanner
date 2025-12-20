@@ -5,11 +5,11 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Button from '@mui/material/Button';
 import { sum } from 'lodash';
 import { Grid2x2Check, Info } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { getCompletionRateColor } from '@/fsd/5-shared/lib';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, ConfirmationDialog } from '@/fsd/5-shared/ui';
 
 import { LegendaryEventEnum, LreReqImage, LreTrackId } from '@/fsd/4-entities/lre';
 
@@ -31,11 +31,17 @@ interface Props {
     ) => void;
 }
 
-export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEventId, toggleBattleState }) => {
+export const LreTrackOverallProgress: React.FC<Props> = ({
+    track,
+    legendaryEventId: _legendaryEventId,
+    toggleBattleState,
+}) => {
+    const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+
     // Helper to get points from a requirement, accounting for partial kill scores
     const getRequirementPoints = (req: {
         completed: boolean;
-        status?: number;
+        status?: RequirementStatus;
         killScore?: number;
         points: number;
         id: string;
@@ -87,11 +93,27 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
 
     const completionPercentage = Math.round((currentPoints / track.totalPoints) * 100);
 
+    const handleOpenConfirmDialog = () => {
+        setConfirmDialogOpen(true);
+    };
+
+    const handleCloseConfirmDialog = () => {
+        setConfirmDialogOpen(false);
+    };
+
+    const handleConfirmToggleAll = () => {
+        setConfirmDialogOpen(false);
+        setAll();
+    };
+
     const setAll = () => {
         const completedBattles = track.battles
             .map(battle => battle.requirementsProgress.filter(req => req.completed).length)
             .reduce((a, b) => a + b, 0);
-        const state = completedBattles === 8 * track.battles.length ? ProgressState.none : ProgressState.completed;
+        const state =
+            completedBattles === track.requirements.length * track.battles.length
+                ? ProgressState.none
+                : ProgressState.completed;
 
         track.battles.forEach(battle => {
             battle.requirementsProgress.forEach(req => {
@@ -118,7 +140,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
                             {getReqProgress(req.id)}/{track.battles.length}
                         </span>
 
-                        <span className="font-bold min-w-[80px]">
+                        <span className="font-bold min-w-20">
                             {getReqProgressPoints(req.id)}/{req.totalPoints}
                         </span>
                         <LreReqImage iconId={req.iconId} />
@@ -147,14 +169,14 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
                         flexDirection: 'column',
                         width: '100%',
                     }}>
-                    <div className="flex-box gap5 column pb-[10px]">
-                        <Button size="medium" variant="text" onClick={setAll}>
+                    <div className="flex-box gap5 column pb-2.5">
+                        <Button size="medium" variant="text" onClick={handleOpenConfirmDialog}>
                             <Grid2x2Check className="size-5 md:size-6" />
                         </Button>
                     </div>
                     <div className="flex-col w-full">
                         <div className="flex flex-row w-full mb-1">
-                            <div className="flex items-center justify-center flex-shrink-0 mr-0 min-w-8 md:min-w-10 md:mr-1.5">
+                            <div className="flex items-center justify-center shrink-0 mr-0 min-w-8 md:min-w-10 md:mr-1.5">
                                 <AccessibleTooltip title="Click on a battle number to mark all objectives complete">
                                     <Info className={isMobile ? 'size-5' : 'size-6'} />
                                 </AccessibleTooltip>
@@ -175,8 +197,6 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
                         {track.battles.map(battle => (
                             <LreTrackBattleSummary
                                 key={battle.battleIndex}
-                                legendaryEventId={legendaryEventId}
-                                trackId={track.trackId}
                                 battle={battle}
                                 maxKillPoints={track.battlesPoints[battle.battleIndex]}
                                 toggleState={(req, state, forceOverwrite) =>
@@ -187,6 +207,14 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEvent
                     </div>
                 </AccordionDetails>
             </Accordion>
+
+            <ConfirmationDialog
+                open={confirmDialogOpen}
+                title="Confirm Action"
+                message="Are you sure you want to toggle all battles?"
+                onConfirm={handleConfirmToggleAll}
+                onCancel={handleCloseConfirmDialog}
+            />
         </div>
     );
 };
