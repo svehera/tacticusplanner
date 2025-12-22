@@ -10,7 +10,9 @@ import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 import { LreReqImage } from '@/fsd/4-entities/lre/lre-req-image';
 
-import { getRequirementStatus } from './lre-requirement-status.utils';
+import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
+
+import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreRequirements, ILreTrackProgress } from './lre.models';
 import { STATUS_COLORS } from './requirement-status-constants';
 import { milestonesAndPoints } from './token-estimation-service';
@@ -77,11 +79,16 @@ export const renderRestrictions = (
 ) => (
     <div className="flex items-center gap-1">
         {restricts.map((restrict, i) => {
-            if (restrict.id === '_killPoints' || restrict.id === '_highScore') {
+            if (restrict.id === LrePointsCategoryId.killScore || restrict.id === LrePointsCategoryId.highScore) {
                 return <span key={`${track}-${battleNumber}-${restrict.id}`} />;
             }
 
-            const status = getRequirementStatus(tracksProgress, track, battleNumber, restrict.id);
+            const status = LreRequirementStatusService.getRequirementStatus(
+                tracksProgress,
+                track,
+                battleNumber,
+                restrict.id
+            );
             const borderColor = STATUS_COLORS[status];
 
             return (
