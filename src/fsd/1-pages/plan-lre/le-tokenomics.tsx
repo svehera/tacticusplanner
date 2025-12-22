@@ -12,7 +12,7 @@ import { LeTokenCard } from './le-token-card';
 import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenTable } from './le-token-table';
-import { getRequirementStatus } from './lre-requirement-status.utils';
+import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
 import { milestonesAndPoints, TokenDisplay, TokenUse } from './token-estimation-service';
 
@@ -58,7 +58,7 @@ export const LeTokenomics: React.FC<Props> = ({
     // Helper function to check if a token has yellow or red restrictions
     const hasWarningRestrictions = (token: TokenDisplay): boolean => {
         return token.restricts.some(restrict => {
-            const status = getRequirementStatus(
+            const status = LreRequirementStatusService.getRequirementStatus(
                 tracksProgress,
                 token.track as 'alpha' | 'beta' | 'gamma',
                 token.battleNumber,
