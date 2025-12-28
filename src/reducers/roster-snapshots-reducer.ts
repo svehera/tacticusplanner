@@ -1,6 +1,6 @@
 import { SetStateAction } from '@/models/interfaces';
 
-import { IRosterSnapshotsState } from '@/fsd/1-pages/plan-roster-snapshots/models';
+import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 
 import { defaultData } from '../models/constants';
 
@@ -15,8 +15,6 @@ export const rosterSnapshotsActionReducer = (
     state: IRosterSnapshotsState,
     action: RosterSnapshotsAction
 ): IRosterSnapshotsState => {
-    console.log('state before roster-snapshots action:', state);
-    console.log('roster-snapshots action:', action);
     switch (action.type) {
         case 'Set': {
             return action.value ?? defaultData.rosterSnapshots;

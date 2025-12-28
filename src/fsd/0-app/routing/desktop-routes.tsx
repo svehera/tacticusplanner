@@ -2,12 +2,12 @@
 
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
 import { resourcesLazyRoute } from '@/fsd/1-pages/input-resources/resources.route';
+import { rosterSnapshotsLazyRoute } from '@/fsd/1-pages/input-roster-snapshots';
 import { xpIncomeLazyRoute } from '@/fsd/1-pages/input-xp-income/xp-income.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { lreLazyRoute } from '@/fsd/1-pages/plan-lre';
-import { rosterSnapshotsLazyRoute } from '@/fsd/1-pages/plan-roster-snapshots';
 import { guildApiLazyRoute } from '@/v2/pages/guild-api/guild-api.route';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';

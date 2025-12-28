@@ -22,7 +22,7 @@ export const Resources = () => {
     const { userInfo } = useAuth();
 
     const dispatchUpdate = (newState: XpUseState) => {
-        dispatch.xpUseState({
+        dispatch.xpUse({
             type: 'Set',
             value: newState,
         });

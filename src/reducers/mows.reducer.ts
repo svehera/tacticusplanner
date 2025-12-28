@@ -2,6 +2,7 @@
 import { rarityToStars } from 'src/models/constants';
 
 import { TacticusShard, TacticusUnit } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
+import { Rarity, RarityStars } from '@/fsd/5-shared/model/enums';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
@@ -82,6 +83,10 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
                 } else if (tacticusShards) {
                     return {
                         ...existingMow,
+                        rarity: Rarity.Common,
+                        stars: RarityStars.None,
+                        primaryAbilityLevel: 0,
+                        secondaryAbilityLevel: 0,
                         shards: tacticusShards.amount,
                     };
                 }

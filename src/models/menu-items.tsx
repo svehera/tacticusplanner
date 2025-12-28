@@ -13,12 +13,12 @@ import React from 'react';
 
 import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
 import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-item';
+import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots.menu-item';
 import { xpIncomeMenuItem } from '@/fsd/1-pages/input-xp-income/xp-income.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
-import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/plan-roster-snapshots/roster-snapshots.menu-item';
 import { guildApiMenuItem } from '@/v2/pages/guild-api/guild-api.menu-item';
 import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';

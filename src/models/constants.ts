@@ -6,6 +6,7 @@ import { Rank, Rarity, RarityStars, RarityMapper, Alliance } from '@/fsd/5-share
 import { ICampaignsProgress, Campaign } from '@/fsd/4-entities/campaign';
 import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
 
+import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 
 import { ArenaLeague } from '@/fsd/1-pages/input-xp-income/models';
@@ -209,6 +210,10 @@ export const defaultData: IPersonalData2 = {
         craftableItemsInInventory: false,
         wyoFilter: CharactersFilterBy.None,
         wyoOrder: CharactersOrderBy.Faction,
+        showShardsInRosterSnapshots: RosterSnapshotShowVariableSettings.Always,
+        showMythicShardsInRosterSnapshots: RosterSnapshotShowVariableSettings.Always,
+        showXpLevelInRosterSnapshots: RosterSnapshotShowVariableSettings.Always,
+        rosterSnapshotsDiffStyle: RosterSnapshotDiffStyle.Detailed,
         showBadges: true,
         showAbilitiesLevel: true,
         showBsValue: false,
@@ -369,7 +374,7 @@ export const defaultData: IPersonalData2 = {
     guild: {
         members: [],
     },
-    xpIncomeState: {
+    xpIncome: {
         // Manual Input
         manualBooksPerDay: 0,
 
@@ -399,7 +404,7 @@ export const defaultData: IPersonalData2 = {
         // Additional Sources
         additionalBooksPerWeek: 0,
     },
-    xpUseState: {
+    xpUse: {
         useCommon: true,
         useUncommon: true,
         useRare: true,

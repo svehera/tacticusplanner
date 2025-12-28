@@ -58,8 +58,8 @@ export const Goals = () => {
         inventory,
         dailyRaids,
         viewPreferences,
-        xpIncomeState,
-        xpUseState,
+        xpIncome,
+        xpUse,
     } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { userInfo } = useAuth();
@@ -314,11 +314,11 @@ export const Goals = () => {
             cloneDeep(goals),
             cloneDeep(goalsEstimate),
             inventory,
-            xpUseState,
+            xpUse,
             upgradeRankOrMowGoals,
-            xpIncomeState
+            xpIncome
         );
-    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals, xpUseState, xpIncomeState]);
+    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals, xpUse, xpIncome]);
 
     const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
 
