@@ -1,7 +1,7 @@
 import { ArrowForward } from '@mui/icons-material';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { CharacterPortraitImage } from '@/v2/components/images/character-portrait.image';
+import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
 
 import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 

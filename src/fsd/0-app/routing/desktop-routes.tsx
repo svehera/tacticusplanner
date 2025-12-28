@@ -10,6 +10,7 @@ import { guildWarZonesLazyRoute } from '@/fsd/1-pages/guild-war-layout/guild-war
 import { guildWarOffenseLazyRoute } from '@/fsd/1-pages/guild-war-offense/guild-war-offense.route';
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
 import { resourcesLazyRoute } from '@/fsd/1-pages/input-resources/resources.route';
+import { rosterSnapshotsLazyRoute } from '@/fsd/1-pages/input-roster-snapshots';
 import { xpIncomeLazyRoute } from '@/fsd/1-pages/input-xp-income/xp-income.route';
 import { insightsLazyRoute } from '@/fsd/1-pages/insights/insights.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
@@ -17,14 +18,14 @@ import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { lreLazyRoute } from '@/fsd/1-pages/plan-lre';
 import { sharedRosterRoute } from '@/fsd/1-pages/shared-roster/shared-roster.route';
-import { teamsDesktopLazyRoute } from '@/fsd/1-pages/teams/teams.desktop.route';
+import { teamsDesktopLazyRoute } from '@/fsd/1-pages/teams/teams.route';
 import { wyoLazyRoute } from '@/fsd/1-pages/who-you-own/who-you-own.route';
 
 import DesktopApp from './desktop-app';
 
 export const globalInputRoutes: RouteObject[] = [
     wyoLazyRoute,
-    // rosterSnapshotsLazyRoute,
+    rosterSnapshotsLazyRoute,
     myProgressLazyRoute,
     {
         path: 'input/inventory',

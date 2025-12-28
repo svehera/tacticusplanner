@@ -19,9 +19,9 @@ import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 // eslint-disable-next-line import-x/no-internal-modules
-import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
+import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { ManageSnapshotsDialog } from './manage-snapshots-dalog';
 import { IRosterSnapshot, IRosterSnapshotsState } from './models';
