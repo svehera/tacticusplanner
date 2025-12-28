@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
-import { tacticusIcons } from '@/fsd/5-shared/ui/icons/assets';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
 
 import type { IEquipment } from '../model';
 

@@ -1,4 +1,4 @@
-﻿import { tacticusIcons } from './assets';
+﻿import { tacticusIcons } from './iconList';
 
 export const MiscIcon = ({
     icon,

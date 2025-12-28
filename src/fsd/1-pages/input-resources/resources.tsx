@@ -7,8 +7,8 @@ import { isMobile } from 'react-device-detect';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Alliance, Rarity, RarityMapper, useAuth } from '@/fsd/5-shared/model';
-import { OrbIcon } from '@/fsd/5-shared/ui/icons/assets';
 import { BadgeImage } from '@/fsd/5-shared/ui/icons/badge-image';
+import { OrbIcon } from '@/fsd/5-shared/ui/icons/iconList';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
 
 import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';

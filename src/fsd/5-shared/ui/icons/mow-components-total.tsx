@@ -5,7 +5,7 @@ import React from 'react';
 
 import { Alliance } from '@/fsd/5-shared/model/enums';
 
-import { MiscIcon } from '../misc.icon';
+import { MiscIcon } from './misc.icon';
 
 interface Props {
     components: Record<Alliance, number>;
