@@ -188,7 +188,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                         // If the unit is locked we only have shards to sync, no other attributes
                         return {
                             ...char,
-                            rarity: Rarity.Common,
+                            rarity: char.initialRarity,
                             stars: RarityStars.None,
                             rank: Rank.Locked,
                             xp: 0,
