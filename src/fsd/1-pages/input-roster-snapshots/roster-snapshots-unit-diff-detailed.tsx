@@ -70,6 +70,8 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
     const shards2 = diff.shards ?? shards1;
     const mythicShards1 = char ? char.mythicShards : mow!.mythicShards;
     const mythicShards2 = diff.mythicShards ?? mythicShards1;
+    const xp1 = char?.xpLevel ?? 0;
+    const xp2 = diff.xpLevel ?? xp1;
 
     // Difference flags
     const rarityDiff = rarity1 !== rarity2;
@@ -79,6 +81,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
     const passiveDiff = passive1 !== passive2;
     const shardsDiff = shards1 !== shards2;
     const mythicShardsDiff = mythicShards1 !== mythicShards2;
+    const xpDiff = xp1 !== xp2;
 
     const showRank = char && rank1 !== undefined;
 
@@ -186,14 +189,11 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                 <span className="w-6 text-right font-medium text-gray-600 dark:text-gray-400">XP:</span>
                                 <span
                                     className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${
-                                        (diff.xpLevel ?? char?.xpLevel ?? 0) !== char?.xpLevel ? '' : 'opacity-0'
+                                        xpDiff ? '' : 'opacity-0'
                                     }`}>
                                     {char?.xpLevel ?? 0}
                                 </span>
-                                <div
-                                    className={`w-4 flex justify-center ${
-                                        (diff.xpLevel ?? char?.xpLevel ?? 0) !== (char?.xpLevel ?? 0) ? '' : 'opacity-0'
-                                    }`}>
+                                <div className={`w-4 flex justify-center ${xpDiff ? '' : 'opacity-0'}`}>
                                     <ArrowForward fontSize="inherit" />
                                 </div>
                                 <span className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400">

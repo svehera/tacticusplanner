@@ -116,11 +116,11 @@ function getDisplay(
         const diffChar = diff.charDiffs.find(c => c.id === compareChar.id);
         const fullChar = chars.find(c => c.snowprintId === compareChar.id);
 
-        if (!fullChar) return;
+        if (fullChar === undefined) return;
 
-        if (diffChar && baseChar) {
-            const beforeChar = { ...fullChar, ...baseChar, id: fullChar.id };
-            const afterChar = { ...fullChar, ...compareChar, id: fullChar.id };
+        if (diffChar !== undefined && baseChar !== undefined) {
+            const beforeChar = { ...fullChar, ...baseChar, level: baseChar.xpLevel, id: fullChar.id };
+            const afterChar = { ...fullChar, ...compareChar, level: compareChar.xpLevel, id: fullChar.id };
             const powerBefore =
                 beforeChar.rank === Rank.Locked ? 0 : CharactersPowerService.getCharacterPower(beforeChar);
             const powerAfter = afterChar.rank === Rank.Locked ? 0 : CharactersPowerService.getCharacterPower(afterChar);
