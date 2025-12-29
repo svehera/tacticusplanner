@@ -7,9 +7,10 @@ import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.s
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
 import { XpUseState } from '@/fsd/1-pages/input-resources/models';
+import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 
 import { defaultData, rankToLevel, rankToRarity } from './constants';
@@ -51,8 +52,9 @@ export class GlobalState implements IGlobalState {
     readonly dailyRaids: IDailyRaids;
     readonly guildWar: IGuildWar;
     readonly guild: IGuild;
-    readonly xpIncomeState: XpIncomeState;
-    readonly xpUseState: XpUseState;
+    readonly xpIncome: XpIncomeState;
+    readonly xpUse: XpUseState;
+    readonly rosterSnapshots: IRosterSnapshotsState;
     readonly mows: Array<IMow | IMow2>;
 
     constructor(personalData: IPersonalData2) {
@@ -81,8 +83,9 @@ export class GlobalState implements IGlobalState {
         this.guildWar = personalData.guildWar ?? defaultData.guildWar;
         this.guild = personalData.guild ?? defaultData.guild;
         this.teams = personalData.teams ?? defaultData.teams;
-        this.xpIncomeState = personalData.xpIncomeState ?? defaultData.xpIncomeState;
-        this.xpUseState = personalData.xpUseState ?? defaultData.xpUseState;
+        this.xpIncome = personalData.xpIncome ?? defaultData.xpIncome;
+        this.xpUse = personalData.xpUse ?? defaultData.xpUse;
+        this.rosterSnapshots = personalData.rosterSnapshots ?? defaultData.rosterSnapshots;
     }
 
     static initCharacters(
@@ -295,8 +298,9 @@ export class GlobalState implements IGlobalState {
             dailyRaids: value.dailyRaids,
             guildWar: value.guildWar,
             guild: value.guild,
-            xpIncomeState: value.xpIncomeState,
-            xpUseState: value.xpUseState,
+            xpIncome: value.xpIncome,
+            xpUse: value.xpUse,
+            rosterSnapshots: value.rosterSnapshots,
             teams: value.teams,
         };
     }

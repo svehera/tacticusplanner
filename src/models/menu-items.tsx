@@ -11,24 +11,25 @@ import TableChartIcon from '@mui/icons-material/TableChart';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import React from 'react';
 
+import { faqMenuItem } from '@/fsd/1-pages/faq/faq.menu-item';
+import { guidesMenuItem } from '@/fsd/1-pages/guides/guides-menu.item';
+import { guildMenuItem } from '@/fsd/1-pages/guild/guild.menu-item';
+import { guildApiMenuItem } from '@/fsd/1-pages/guild-api/guild-api.menu-item';
+import { guildInsightsMenuItem } from '@/fsd/1-pages/guild-insights/guild-insights.menu-item';
+import { guildWarDefenseMenuItem } from '@/fsd/1-pages/guild-war-defense/guild-war-defense.menu-item';
+import { guildWarZonesMenuItem } from '@/fsd/1-pages/guild-war-layout/guild-war-zones-menu.item';
+import { guildWarOffenseMenuItem } from '@/fsd/1-pages/guild-war-offense/guild-war-offense.menu-item';
 import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
 import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-item';
+import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots.menu-item';
 import { xpIncomeMenuItem } from '@/fsd/1-pages/input-xp-income/xp-income.menu-item';
+import { insightsMenuItem } from '@/fsd/1-pages/insights/insights.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
-import { guildApiMenuItem } from '@/v2/pages/guild-api/guild-api.menu-item';
-import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
-import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
-import { guildMenuItem } from 'src/v2/pages/guild/guild.menu-item';
-import { guildInsightsMenuItem } from 'src/v2/pages/guild-insights/guild-insights.menu-item';
-import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-war-defense.menu-item';
-import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
-import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
-import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
-import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
-import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
+import { teamsMenuItem } from '@/fsd/1-pages/teams/teams.menu-item';
+import { wyoMenuItem } from '@/fsd/1-pages/who-you-own/who-you-own.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -62,6 +63,7 @@ export const menuItemById = {
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
     campaignProgression: campaignProgressionMenuItem,
+    rosterSnapshots: rosterSnapshotsMenuItem,
 
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
@@ -80,6 +82,7 @@ export const menuItemById = {
 
 export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
+    menuItemById['rosterSnapshots'],
     menuItemById['myProgress'],
     menuItemById['inventory'],
     menuItemById['xpIncome'],

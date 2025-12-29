@@ -120,6 +120,7 @@ export const Lre: React.FC = () => {
                         battles={battles}
                         tokens={tokens}
                         tokenDisplays={tokenDisplays}
+                        tracksProgress={model.tracksProgress}
                         currentPoints={currentPoints}
                         nextTokenCompleted={nextTokenCompleted}
                         toggleBattleState={toggleBattleState}

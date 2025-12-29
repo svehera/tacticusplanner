@@ -1,4 +1,4 @@
-﻿import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
+﻿import { ArrowForward, DeleteForever, Edit, ArrowUpward, ArrowDownward } from '@mui/icons-material';
 import LinkIcon from '@mui/icons-material/Link';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 import { charsUnlockShards } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
-import { StoreContext } from 'src/reducers/store.provider';
+import { StoreContext, DispatchContext } from 'src/reducers/store.provider';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
 import { Rank, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
@@ -22,15 +22,15 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
-import { XpTooltip } from '@/v2/features/goals/xp-tooltip';
-import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
+import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
 import {
     CharacterRaidGoalSelect,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
     IGoalEstimate,
-} from 'src/v2/features/goals/goals.models';
-import { ShardsService } from 'src/v2/features/goals/shards.service';
+} from '@/fsd/3-features/goals/goals.models';
+import { ShardsService } from '@/fsd/3-features/goals/shards.service';
+import { XpTooltip } from '@/fsd/3-features/goals/xp-tooltip';
 
 import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
@@ -46,6 +46,7 @@ interface Props {
 
 export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, menuItemSelect }) => {
     const { characters, viewPreferences } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
 
     const getUnit = (unitId: string): ICharacter2 | undefined => {
         return characters.find(x => x.snowprintId! === unitId);
@@ -235,7 +236,37 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
         return [
             {
                 field: 'priority',
-                maxWidth: 70,
+                maxWidth: 100,
+                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = params;
+                    if (!data) return;
+
+                    const moveUp = () => {
+                        if (data.priority <= 1) return;
+                        const updated = { ...data, priority: data.priority - 1 } as CharacterRaidGoalSelect;
+                        dispatch.goals({ type: 'Update', goal: updated });
+                    };
+
+                    const moveDown = () => {
+                        if (data.priority >= rows.length) return;
+                        const updated = { ...data, priority: data.priority + 1 } as CharacterRaidGoalSelect;
+                        dispatch.goals({ type: 'Update', goal: updated });
+                    };
+
+                    return (
+                        <div className="flex-box column center">
+                            <div className="flex-box gap5 items-center">
+                                <div>{data.priority}</div>
+                                <IconButton size="small" onClick={moveUp}>
+                                    <ArrowUpward fontSize="small" />
+                                </IconButton>
+                                <IconButton size="small" onClick={moveDown}>
+                                    <ArrowDownward fontSize="small" />
+                                </IconButton>
+                            </div>
+                        </div>
+                    );
+                },
             },
             {
                 headerName: 'Actions',
@@ -254,7 +285,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                         );
                     }
                 },
-                maxWidth: 110,
+                maxWidth: 90,
             },
             {
                 field: 'unitIcon',

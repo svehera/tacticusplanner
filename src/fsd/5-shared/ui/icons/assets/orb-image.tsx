@@ -56,7 +56,7 @@ export const OrbIcon: React.FC<OrbIconProps> = ({ alliance, rarity, size }) => {
     // Styles for the alliance image to ensure it's centered and scaled
     // The size here (e.g., w-3/4 h-3/4) is a heuristic. You might need to adjust
     // `w-3/4` and `h-3/4` based on the exact transparent padding of your alliance icons.
-    const allianceImageClasses = `absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+    const allianceImageClasses = `absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
                                 w-3/5 h-3/5 object-contain`;
 
     return (

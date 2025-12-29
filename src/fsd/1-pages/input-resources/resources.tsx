@@ -11,30 +11,30 @@ import { OrbIcon } from '@/fsd/5-shared/ui/icons/assets';
 import { BadgeImage } from '@/fsd/5-shared/ui/icons/badge-image';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
 
-import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 
 import { XpUseState } from './models';
 
 export const Resources = () => {
-    const { inventory, viewPreferences, xpUseState } = useContext(StoreContext);
+    const { inventory, viewPreferences, xpUse } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { syncWithTacticus } = useSyncWithTacticus();
     const { userInfo } = useAuth();
 
     const dispatchUpdate = (newState: XpUseState) => {
-        dispatch.xpUseState({
+        dispatch.xpUse({
             type: 'Set',
             value: newState,
         });
     };
 
     const enabled: boolean[] = [
-        xpUseState.useCommon,
-        xpUseState.useUncommon,
-        xpUseState.useRare,
-        xpUseState.useEpic,
-        xpUseState.useLegendary,
-        xpUseState.useMythic,
+        xpUse.useCommon,
+        xpUse.useUncommon,
+        xpUse.useRare,
+        xpUse.useEpic,
+        xpUse.useLegendary,
+        xpUse.useMythic,
     ];
 
     const getRarityIndex = (rarity: Rarity): number => rarities.indexOf(rarity);

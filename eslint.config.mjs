@@ -36,6 +36,11 @@ export default [
     pluginImportX.flatConfigs.recommended,
     pluginImportX.flatConfigs.typescript,
     {
+        linterOptions: {
+            reportUnusedDisableDirectives: 'error',
+        },
+    },
+    {
         plugins: {
             '@typescript-eslint': typescriptEslint,
             react,
@@ -80,15 +85,6 @@ export default [
         },
 
         rules: {
-            quotes: [
-                'error',
-                'single',
-                {
-                    avoidEscape: true,
-                },
-            ],
-
-            semi: ['error', 'always'],
             'object-curly-spacing': ['error', 'always'],
             '@typescript-eslint/no-explicit-any': ['warn'],
             '@typescript-eslint/no-unused-vars': [

@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 
+import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
 import { XpUseAction } from '@/reducers/xp-use-reducer';
 import { GuildAction } from 'src/reducers/guildReducer';
@@ -20,14 +21,15 @@ import { CharacterBias, ICharacter2 } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
 
+import { IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
+import { IGWLayout, IGWTeam } from '@/fsd/3-features/guild-war/guild-war.models';
 import { IAutoTeamsPreferences, ILegendaryEventSelectedRequirements, ILreTeam } from '@/fsd/3-features/lre';
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
+import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 import { IViewPreferences } from '@/fsd/3-features/view-settings';
-import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
-import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 import { XpUseState } from '@/fsd/1-pages/input-resources';
+import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 
 import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
@@ -85,8 +87,9 @@ export interface IGlobalState {
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
-    xpIncomeState: XpIncomeState;
-    xpUseState: XpUseState;
+    xpIncome: XpIncomeState;
+    xpUse: XpUseState;
+    rosterSnapshots: IRosterSnapshotsState;
 }
 
 export interface IDispatchContext {
@@ -106,8 +109,9 @@ export interface IDispatchContext {
     dailyRaids: React.Dispatch<DailyRaidsAction>;
     guildWar: React.Dispatch<GuildWarAction>;
     guild: React.Dispatch<GuildAction>;
-    xpIncomeState: React.Dispatch<XpIncomeAction>;
-    xpUseState: React.Dispatch<XpUseAction>;
+    xpIncome: React.Dispatch<XpIncomeAction>;
+    xpUse: React.Dispatch<XpUseAction>;
+    rosterSnapshots: React.Dispatch<RosterSnapshotsAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -132,8 +136,9 @@ export interface IPersonalData2 {
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
-    xpIncomeState: XpIncomeState;
-    xpUseState: XpUseState;
+    xpIncome: XpIncomeState;
+    xpUse: XpUseState;
+    rosterSnapshots: IRosterSnapshotsState;
 }
 
 export interface IGuild {

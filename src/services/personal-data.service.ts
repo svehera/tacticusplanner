@@ -5,6 +5,7 @@ import { Rank } from '@/fsd/5-shared/model';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
+import { IMowDb } from '@/fsd/3-features/characters/characters.models';
 import { getLre } from '@/fsd/3-features/lre';
 import {
     ILreProgressDto,
@@ -12,10 +13,10 @@ import {
     ILreRequirementsProgressDto,
     LrePointsCategoryId,
 } from '@/fsd/3-features/lre-progress';
-import { IMowDb } from 'src/v2/features/characters/characters.models';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
 import { XpUseState } from '@/fsd/1-pages/input-resources/models';
+import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income/models';
 
 import { defaultData } from '../models/constants';
@@ -105,13 +106,17 @@ export class PersonalDataLocalStorage {
                     ...defaultData.guild,
                     ...(this.getItem<IGuild>('guild') ?? {}),
                 },
-                xpIncomeState: {
-                    ...defaultData.xpIncomeState,
-                    ...(this.getItem<XpIncomeState>('xpIncomeState') ?? {}),
+                xpIncome: {
+                    ...defaultData.xpIncome,
+                    ...(this.getItem<XpIncomeState>('xpIncome') ?? {}),
                 },
-                xpUseState: {
-                    ...defaultData.xpUseState,
-                    ...(this.getItem<XpUseState>('xpUseState') ?? {}),
+                xpUse: {
+                    ...defaultData.xpUse,
+                    ...(this.getItem<XpUseState>('xpUse') ?? {}),
+                },
+                rosterSnapshots: {
+                    ...defaultData.rosterSnapshots,
+                    ...(this.getItem<IRosterSnapshotsState>('rosterSnapshots') ?? defaultData.rosterSnapshots),
                 },
             };
         } else {
@@ -237,9 +242,10 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             guildWar: defaultData.guildWar,
             guild: defaultData.guild,
             mows: defaultData.mows,
-            xpIncomeState: defaultData.xpIncomeState,
-            xpUseState: defaultData.xpUseState,
+            xpIncome: defaultData.xpIncome,
+            xpUse: defaultData.xpUse,
             teams: defaultData.teams,
+            rosterSnapshots: defaultData.rosterSnapshots,
         };
     }
 

@@ -1,4 +1,5 @@
 /* eslint-disable import-x/no-internal-modules */
+
 import { useEffect, useMemo, useState } from 'react';
 
 import { RarityMapper } from '@/fsd/5-shared/model';

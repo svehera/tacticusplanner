@@ -25,8 +25,8 @@ export const LeTokenMilestones = ({ currentPoints }: { currentPoints: number }) 
                 return (
                     <div
                         key={index}
-                        className="p-3 w-40 flex flex-col items-center rounded-lg shadow-md 
-                                   bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 
+                        className="p-3 w-40 flex flex-col items-center rounded-lg shadow-md
+                                   bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600
                                    transition duration-150 ease-in-out hover:shadow-lg">
                         <div className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Points</div>
                         <div className="text-xl font-extrabold font-mono text-blue-600 dark:text-blue-400 mb-2">

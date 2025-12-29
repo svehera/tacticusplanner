@@ -2,7 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { CharacterPortraitImage } from '@/v2/components/images/character-portrait.image';
+import { CharacterPortraitImage } from '@/shared-components/images/character-portrait.image';
 
 import { INpcData } from './model';
 

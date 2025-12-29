@@ -3,7 +3,7 @@
 import { Campaign, CampaignsService, ICampaignsFilters } from '@/fsd/4-entities/campaign';
 import { CampaignMapperService } from '@/fsd/4-entities/campaign/campaign-mapper-service';
 
-import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
+import { IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
 
 import { defaultData, idToCampaign } from '../models/constants';
 import { IDailyRaids, SetStateAction } from '../models/interfaces';

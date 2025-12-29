@@ -19,10 +19,10 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { IEstimatedShards, IEstimatedUpgrades } from 'src/v2/features/goals/goals.models';
-import { MaterialsTable } from 'src/v2/features/goals/materials-table';
-import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
-import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-input';
+import { IEstimatedShards, IEstimatedUpgrades } from '@/fsd/3-features/goals/goals.models';
+import { MaterialsTable } from '@/fsd/3-features/goals/materials-table';
+import { RaidsDayView } from '@/fsd/3-features/goals/raids-day-view';
+import { ShardsRaidsDayInput } from '@/fsd/3-features/goals/shards-raids-day-input';
 
 import { Inventory } from '@/fsd/1-pages/input-inventory';
 

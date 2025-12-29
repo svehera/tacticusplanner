@@ -25,7 +25,7 @@ const kEliteEnergyMax = 600;
 const kNonEliteEnergyMax = 600;
 
 export const XpIncome: React.FC = () => {
-    const { characters, xpIncomeState } = useContext(StoreContext);
+    const { characters, xpIncome } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const {
@@ -38,43 +38,43 @@ export const XpIncome: React.FC = () => {
         additionalBooksPerWeek,
         onslaughtBlueStar,
         incursionLegendaryLevel,
-    } = xpIncomeState;
+    } = xpIncome;
 
-    const [raidLoops, setRaidLoops] = useDebouncedState('raidLoops', xpIncomeState.raidLoops, xpIncomeState);
+    const [raidLoops, setRaidLoops] = useDebouncedState('raidLoops', xpIncome.raidLoops, xpIncome);
     const [extraBossesAfterLoop, setExtraBossesAfterLoop] = useDebouncedState(
         'extraBossesAfterLoop',
-        xpIncomeState.extraBossesAfterLoop,
-        xpIncomeState
+        xpIncome.extraBossesAfterLoop,
+        xpIncome
     );
     const [additionalBosses, setAdditionalBosses] = useDebouncedState(
         'additionalBosses',
-        xpIncomeState.additionalBosses,
-        xpIncomeState
+        xpIncome.additionalBosses,
+        xpIncome
     );
     const [eliteEnergyPerDay, setEliteEnergyPerDay] = useDebouncedState(
         'eliteEnergyPerDay',
-        xpIncomeState.eliteEnergyPerDay,
-        xpIncomeState
+        xpIncome.eliteEnergyPerDay,
+        xpIncome
     );
     const [nonEliteEnergyPerDay, setNonEliteEnergyPerDay] = useDebouncedState(
         'nonEliteEnergyPerDay',
-        xpIncomeState.nonEliteEnergyPerDay,
-        xpIncomeState
+        xpIncome.nonEliteEnergyPerDay,
+        xpIncome
     );
 
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const dispatchUpdate = useCallback(
         (key: keyof XpIncomeState, value: XpIncomeState[keyof XpIncomeState]) => {
-            dispatch.xpIncomeState({
+            dispatch.xpIncome({
                 type: 'SaveXpIncomeState',
                 value: {
-                    ...xpIncomeState,
+                    ...xpIncome,
                     [key]: value,
                 },
             });
         },
-        [dispatch, xpIncomeState]
+        [dispatch, xpIncome]
     );
 
     const estimatedBooksPerWeek = useMemo(
@@ -122,11 +122,11 @@ export const XpIncome: React.FC = () => {
 
     return (
         <div
-            className="p-5 rounded-lg max-w-2xl mx-auto font-sans 
-                        bg-white text-gray-800 shadow-lg 
+            className="p-5 rounded-lg max-w-2xl mx-auto font-sans
+                        bg-white text-gray-800 shadow-lg
                         dark:bg-gray-900 dark:text-white">
             <div
-                className="mb-5 p-4 rounded-lg border border-gray-200 
+                className="mb-5 p-4 rounded-lg border border-gray-200
                             bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                 <DecimalSpinner
                     label="Legendary Books / Day"
@@ -140,14 +140,14 @@ export const XpIncome: React.FC = () => {
             <h3 className="mb-4 text-lg font-semibold">Let Me Help You Estimate</h3>
 
             <div
-                className="p-4 rounded-lg border border-gray-200 
+                className="p-4 rounded-lg border border-gray-200
                             bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                 <h4 className="mb-2 font-semibold">Arena League</h4>
                 <select
                     value={arenaLeague}
                     onChange={e => dispatchUpdate('arenaLeague', e.target.value as unknown as ArenaLeague)}
-                    className="p-2 rounded-md border border-gray-300 bg-white 
-                               dark:bg-gray-700 dark:border-gray-600 dark:text-white 
+                    className="p-2 rounded-md border border-gray-300 bg-white
+                               dark:bg-gray-700 dark:border-gray-600 dark:text-white
                                focus:outline-none focus:ring-2 focus:ring-blue-500">
                     {Object.values(ArenaLeague)
                         .filter(league => typeof league === 'number')
@@ -184,8 +184,8 @@ export const XpIncome: React.FC = () => {
                 </div>
 
                 <div
-                    className={`p-3 mt-3 rounded-md border-l-4 
-                                ${loopsRaids === 'yes' ? 'border-orange-500' : 'border-green-500'} 
+                    className={`p-3 mt-3 rounded-md border-l-4
+                                ${loopsRaids === 'yes' ? 'border-orange-500' : 'border-green-500'}
                                 bg-gray-100 dark:bg-gray-700`}>
                     {loopsRaids === 'yes' ? (
                         <>
@@ -291,9 +291,9 @@ export const XpIncome: React.FC = () => {
                                         }
 
                                         <div
-                                            className={`absolute top-0 right-0 w-5 h-5 rounded-full border-2 
+                                            className={`absolute top-0 right-0 w-5 h-5 rounded-full border-2
                                                     flex items-center justify-center text-xs font-bold transition-all
-                                                    
+
                                                     // Appearance when starred (visible)
                                                     ${
                                                         isStarred
@@ -452,7 +452,7 @@ export const XpIncome: React.FC = () => {
             </div>
 
             <div
-                className="mt-5 p-4 rounded-lg border-2 border-green-600 
+                className="mt-5 p-4 rounded-lg border-2 border-green-600
                             bg-green-50 dark:bg-green-900 dark:border-green-400 text-center">
                 <h3 className="text-gray-900 dark:text-white">Daily Book Estimate</h3>
                 <p className="mt-2 text-gray-700 dark:text-gray-300">

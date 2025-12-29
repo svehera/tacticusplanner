@@ -28,20 +28,20 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
-import { BadgesTotal } from '@/v2/features/characters/components/badges-total';
-import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
-import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
-import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
+import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
+import { CharactersXpService } from '@/fsd/3-features/characters/characters-xp.service';
+import { BadgesTotal } from '@/fsd/3-features/characters/components/badges-total';
 import {
     CharacterRaidGoalSelect,
     ICharacterUpgradeAbilities,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
     IGoalEstimate,
-} from 'src/v2/features/goals/goals.models';
-import { GoalsService, IXpLevel } from 'src/v2/features/goals/goals.service';
-import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+} from '@/fsd/3-features/goals/goals.models';
+import { GoalsService, IXpLevel } from '@/fsd/3-features/goals/goals.service';
+import { ShardsService } from '@/fsd/3-features/goals/shards.service';
+import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 
 import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
 
@@ -58,8 +58,8 @@ export const Goals = () => {
         inventory,
         dailyRaids,
         viewPreferences,
-        xpIncomeState,
-        xpUseState,
+        xpIncome,
+        xpUse,
     } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { userInfo } = useAuth();
@@ -314,11 +314,11 @@ export const Goals = () => {
             cloneDeep(goals),
             cloneDeep(goalsEstimate),
             inventory,
-            xpUseState,
+            xpUse,
             upgradeRankOrMowGoals,
-            xpIncomeState
+            xpIncome
         );
-    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals, xpUseState, xpIncomeState]);
+    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals, xpUse, xpIncome]);
 
     const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
 
