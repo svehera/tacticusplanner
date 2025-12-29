@@ -383,16 +383,8 @@ export class RosterSnapshotsService {
                 });
             } else {
                 const diff: ISnapshotUnitDiff = this.diffCharacter(baseChar, char);
-                if (
-                    diff.active !== undefined ||
-                    diff.passive !== undefined ||
-                    diff.rarity !== undefined ||
-                    diff.stars !== undefined ||
-                    diff.rank !== undefined ||
-                    diff.xpLevel !== undefined ||
-                    diff.shards !== undefined ||
-                    diff.mythicShards !== undefined
-                ) {
+                if (Object.entries(diff).length > 1) {
+                    // If only id is present, no changes.
                     charDiffs.push(diff);
                 }
             }

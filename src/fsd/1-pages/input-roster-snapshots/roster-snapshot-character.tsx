@@ -142,7 +142,7 @@ function getCharTooltip(char: ISnapshotCharacter, charData: ICharacterData): Rea
             <br />
             Mythic Shards: {char.mythicShards}
             <br />
-            XP Level: {char.xpLevel}
+            XP Level: {char.level}
         </>
     );
 }
@@ -212,7 +212,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
     const shouldShowXpLevel = () => {
         if (showXpLevel === RosterSnapshotShowVariableSettings.Always) return true;
         if (showXpLevel === RosterSnapshotShowVariableSettings.Never) return false;
-        return (char?.xpLevel ?? 0) > 0;
+        return (char?.level ?? 0) > 0;
     };
 
     return (
@@ -277,7 +277,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
                             {shouldShowXpLevel() && (
                                 <div className="absolute bottom-[7px] left-1/2 -translate-x-1/2 z-[11] w-[32px] flex justify-center">
                                     <div className="w-[36px] flex justify-center">
-                                        <XpLevelDisplay value={char?.xpLevel ?? 0} positionClasses="relative" />
+                                        <XpLevelDisplay value={char?.level ?? 0} positionClasses="relative" />
                                     </div>
                                 </div>
                             )}
