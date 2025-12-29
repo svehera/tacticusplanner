@@ -31,8 +31,6 @@ export const RosterSnapshotsUnitDiffSideBySide: React.FC<Props> = ({
     const staticChar = char ? CharactersService.resolveCharacter(char.id) : undefined;
     const staticMow = mow ? MowsService.resolveToStatic(mow.id) : undefined;
 
-    console.log('xp level: ', showXpLevel);
-
     return (
         <div className="flex w-56 170px dark:bg-gray-800 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl hover:border-blue-500">
             <div className="w-1"></div>

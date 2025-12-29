@@ -1,14 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Tooltip } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import { ICharacter2 } from '@/models/interfaces';
-
-import { IMow2 } from '@/fsd/4-entities/mow';
-
 interface TakeSnapshotDialogProps {
-    chars: ICharacter2[];
-    mows: IMow2[];
     snapshotNames: string[];
     currentTimeMillis: number;
     isOpen: boolean;
@@ -17,8 +10,6 @@ interface TakeSnapshotDialogProps {
 }
 
 export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProps> = ({
-    chars,
-    mows,
     snapshotNames,
     currentTimeMillis,
     isOpen,
@@ -30,23 +21,10 @@ export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProps> = ({
     const [snapshotName, setSnapshotName] = useState<string>('');
 
     useEffect(() => {
-        setFormattedTime(new Date(currentTimestamp).toLocaleString());
-        setSnapshotName(`Snapshot ${formattedTime}`);
+        const formatted = new Date(currentTimestamp).toLocaleString();
+        setFormattedTime(formatted);
+        setSnapshotName(`Snapshot ${formatted}`);
     }, [isOpen, currentTimeMillis]);
-
-    const unitsByFaction: Record<string, Array<ICharacter2 | IMow2>> = {};
-    chars.forEach(char => {
-        if (!unitsByFaction[char.faction]) {
-            unitsByFaction[char.faction] = [];
-        }
-        unitsByFaction[char.faction].push(char);
-    });
-    mows.forEach(mow => {
-        if (!unitsByFaction[mow.faction]) {
-            unitsByFaction[mow.faction] = [];
-        }
-        unitsByFaction[mow.faction].push(mow);
-    });
 
     return (
         <Dialog open={isOpen} onClose={onCancel} fullWidth maxWidth="sm">

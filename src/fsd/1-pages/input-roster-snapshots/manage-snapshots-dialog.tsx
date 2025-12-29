@@ -14,7 +14,7 @@ import {
     Box,
     Typography,
 } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
@@ -64,23 +64,29 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
     const [error, setError] = useState<string>('');
 
     // Map snapshots to a flat array for easier indexing: -1 is base, 0+ are diffs
-    const allLiveSnapshots = [
-        ...(rosterSnapshots.base !== undefined && rosterSnapshots.base.deletedDateMillisUtc === undefined
-            ? [{ name: rosterSnapshots.base.name, index: -1 }]
-            : []),
-        ...rosterSnapshots.diffs
-            .map((d, i) => ({ name: d.name, index: i, deleted: d.deletedDateMillisUtc !== undefined }))
-            .filter(d => !d.deleted),
-    ];
+    const allLiveSnapshots = useMemo(
+        () => [
+            ...(rosterSnapshots.base !== undefined && rosterSnapshots.base.deletedDateMillisUtc === undefined
+                ? [{ name: rosterSnapshots.base.name, index: -1 }]
+                : []),
+            ...rosterSnapshots.diffs
+                .map((d, i) => ({ name: d.name, index: i, deleted: d.deletedDateMillisUtc !== undefined }))
+                .filter(d => !d.deleted),
+        ],
+        [rosterSnapshots]
+    );
 
-    const allDeletedSnapshots = [
-        ...(rosterSnapshots.base !== undefined && rosterSnapshots.base.deletedDateMillisUtc !== undefined
-            ? [{ name: rosterSnapshots.base.name, index: -1 }]
-            : []),
-        ...rosterSnapshots.diffs
-            .map((d, i) => ({ name: d.name, index: i, deleted: d.deletedDateMillisUtc !== undefined }))
-            .filter(d => d.deleted),
-    ];
+    const allDeletedSnapshots = useMemo(
+        () => [
+            ...(rosterSnapshots.base !== undefined && rosterSnapshots.base.deletedDateMillisUtc !== undefined
+                ? [{ name: rosterSnapshots.base.name, index: -1 }]
+                : []),
+            ...rosterSnapshots.diffs
+                .map((d, i) => ({ name: d.name, index: i, deleted: d.deletedDateMillisUtc !== undefined }))
+                .filter(d => d.deleted),
+        ],
+        [rosterSnapshots]
+    );
 
     // Reset local state when dialog opens or selection changes
     useEffect(() => {
@@ -170,7 +176,6 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                             <MenuItem value={RosterSnapshotDiffStyle.Detailed}>Detailed</MenuItem>
                         </Select>
                     </FormControl>
-                    {}
                 </div>
                 <div className="h-5"></div>
                 <div className="flex flex-col gap-4 rounded border border-gray-200 p-4 dark:border-gray-700">
@@ -230,7 +235,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                             variant="contained"
                             onClick={() => onRestoreSnapshot(selectedDeletedIndex)}
                             sx={{ mt: 1 }}
-                            disabled={allDeletedSnapshots.length === 0 || selectedDeletedIndex === -1}>
+                            disabled={allDeletedSnapshots.length === 0}>
                             Restore
                         </Button>
                     </Box>
@@ -240,7 +245,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                         </Typography>
                         <div>
                             <Button
-                                disabled={allLiveSnapshots.length === 0 || selectedIndex === -1}
+                                disabled={allLiveSnapshots.length === 0}
                                 color="error"
                                 startIcon={<DeleteIcon />}
                                 onClick={handleDelete}

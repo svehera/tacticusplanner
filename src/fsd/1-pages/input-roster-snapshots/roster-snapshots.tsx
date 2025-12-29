@@ -23,7 +23,7 @@ import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSy
 // eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
-import { ManageSnapshotsDialog } from './manage-snapshots-dalog';
+import { ManageSnapshotsDialog } from './manage-snapshots-dialog';
 import { IRosterSnapshot, IRosterSnapshotsState } from './models';
 import { RosterSnapshotsService } from './roster-snapshots-service';
 import { RosterSnapshotsUnit } from './roster-snapshots-unit';
@@ -365,6 +365,7 @@ export const RosterSnapshots = () => {
                 type: 'Set',
                 value: state,
             });
+            return;
         }
         state.diffs[index].name = newName;
         dispatch.rosterSnapshots({
@@ -452,8 +453,6 @@ export const RosterSnapshots = () => {
         <div>
             <div>
                 <TakeSnapshotDialog
-                    chars={chars}
-                    mows={mows}
                     snapshotNames={[rosterSnapshots.base?.name ?? '', ...rosterSnapshots.diffs.map(d => d.name)]}
                     isOpen={isTakeSnapshotDialogOpen}
                     currentTimeMillis={currentTimeMillis}

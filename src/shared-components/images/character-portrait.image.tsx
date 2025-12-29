@@ -16,10 +16,16 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
     const frame = tacticusIcons[props.frameIcon ?? '']?.file || '';
 
     const imageUrl = getImageUrl(imagePath);
+
+    // We need a div to stack the images, but the ref is for an HTMLImageElement.
+    // We'll pass the ref to the character image and other props to the container.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { icon, frameIcon, ...rest } = props;
+
     if (frame.length === 0) {
         return (
             <img
-                {...props}
+                {...rest}
                 ref={ref}
                 loading="lazy"
                 className="pointer-events-none"
@@ -39,11 +45,6 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
             />
         );
     }
-
-    // We need a div to stack the images, but the ref is for an HTMLImageElement.
-    // We'll pass the ref to the character image and other props to the container.
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { icon, frameIcon, ...rest } = props;
 
     return (
         <div {...rest} style={{ position: 'relative', width: 64, height: 84 }}>
