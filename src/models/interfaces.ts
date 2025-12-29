@@ -90,9 +90,6 @@ export interface IGlobalState {
     xpIncome: XpIncomeState;
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
-    xpIncome: XpIncomeState;
-    xpUse: XpUseState;
-    rosterSnapshots: IRosterSnapshotsState;
 }
 
 export interface IDispatchContext {
