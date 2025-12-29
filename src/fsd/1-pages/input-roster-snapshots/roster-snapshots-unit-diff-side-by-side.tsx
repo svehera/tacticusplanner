@@ -62,7 +62,7 @@ export const RosterSnapshotsUnitDiffSideBySide: React.FC<Props> = ({
                               rank: diff.rank ?? (char ? char.rank : Rank.Locked),
                               activeAbilityLevel: diff.active ?? char?.activeAbilityLevel ?? 1,
                               passiveAbilityLevel: diff.passive ?? char?.passiveAbilityLevel ?? 1,
-                              level: diff.level ?? (char ? char.level : 0),
+                              xpLevel: diff.xpLevel ?? (char ? char.xpLevel : 0),
                               shards: diff.shards ?? char!.shards,
                               mythicShards: diff.mythicShards ?? char!.mythicShards,
                           }
