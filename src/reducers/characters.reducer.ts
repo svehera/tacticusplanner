@@ -1,5 +1,5 @@
 ﻿import { TacticusShard, TacticusUnit } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
-import { Rarity, Rank } from '@/fsd/5-shared/model';
+import { Rarity, Rank, RarityStars } from '@/fsd/5-shared/model';
 
 import { CharacterBias, CharactersService } from '@/fsd/4-entities/character';
 import { EquipmentService } from '@/fsd/4-entities/equipment';
@@ -188,6 +188,13 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                         // If the unit is locked we only have shards to sync, no other attributes
                         return {
                             ...char,
+                            rarity: Rarity.Common,
+                            stars: RarityStars.None,
+                            rank: Rank.Locked,
+                            xp: 0,
+                            level: 0,
+                            activeAbilityLevel: 0,
+                            passiveAbilityLevel: 0,
                             shards: tacticusUnitShards.amount,
                         };
                     }
