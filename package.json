@@ -108,11 +108,11 @@
     "spellcheck": "cspell ."
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx,css,json}": [
-      "prettier --write"
-    ],
     "src/**/*.{ts,tsx}": [
       "eslint --fix"
+    ],
+    "src/**/*.{ts,tsx,css,json}": [
+      "prettier --write"
     ]
   },
   "husky": {
