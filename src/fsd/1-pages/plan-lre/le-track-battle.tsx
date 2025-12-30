@@ -63,12 +63,18 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
     const handleStatusChange = (
         req: ILreBattleRequirementsProgress,
         status: RequirementStatus,
-        killScore?: number,
+        score?: number,
         forceOverwrite?: boolean
     ) => {
         // Update the requirement with new status
         req.status = status;
-        req.killScore = killScore;
+
+        // Set the appropriate score field based on requirement type
+        if (req.id === LrePointsCategoryId.killScore) {
+            req.killScore = score;
+        } else if (req.id === LrePointsCategoryId.highScore) {
+            req.highScore = score;
+        }
 
         // Also update legacy fields for backward compatibility
         req.completed = status === RequirementStatus.Cleared;
@@ -134,25 +140,25 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                 <div className="flex flex-row justify-between flex-1">
                     {battle.requirementsProgress.map(req => {
                         const isKillScore = req.id === LrePointsCategoryId.killScore;
+                        const isHighScore = req.id === LrePointsCategoryId.highScore;
                         const status = getRequirementStatus(req);
 
-                        // Use BattleStatusCheckbox with dropdown for killScore requirements
-                        if (isKillScore) {
+                        // Use BattleStatusCheckbox with dropdown for score requirements (killScore or highScore)
+                        const isScoreRequirement = isKillScore || isHighScore;
+                        if (isScoreRequirement) {
                             return (
                                 <BattleStatusCheckbox
                                     key={req.id}
                                     status={status}
-                                    killScore={req.killScore}
-                                    isKillScore={isKillScore}
-                                    maxKillPoints={maxKillPoints}
-                                    onChange={(newStatus, newKillScore) =>
-                                        handleStatusChange(req, newStatus, newKillScore)
-                                    }
+                                    score={isKillScore ? req.killScore : req.highScore}
+                                    scoreType={isKillScore ? 'killScore' : 'highScore'}
+                                    maxScore={maxKillPoints}
+                                    onChange={(newStatus, newScore) => handleStatusChange(req, newStatus, newScore)}
                                 />
                             );
                         }
 
-                        // Use simple cycling button for non-killScore requirements
+                        // Use simple cycling button for other requirements
                         return (
                             <button
                                 key={req.id}
