@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { allLegendaryEvents } from './index';
+import { allLegendaryEvents } from './static-lre-data';
 
 // Helper function to check uniform length of arrays
 function allArraysSameLength(arrays: any[][]): boolean {

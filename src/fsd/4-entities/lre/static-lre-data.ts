@@ -1,16 +1,18 @@
-import { ILegendaryEventStatic } from '../static-data.model';
+/* eslint-disable import-x/no-internal-modules */
+import aunshiJson from '@/data/lre/1-Aunshi.json';
+import luciusJson from '@/data/lre/10-Lucius.json';
+import farsightJson from '@/data/lre/11-Farsight.json';
+import shadowsunJson from '@/data/lre/2-Shadowsun.json';
+import ragnarJson from '@/data/lre/3-Ragnar.json';
+import vitruviusJson from '@/data/lre/4-Vitruvius.json';
+import kharnJson from '@/data/lre/5-Kharn.json';
+import mephistonJson from '@/data/lre/6-Mephiston.json';
+import patermineJson from '@/data/lre/7-Patermine.json';
+import danteJson from '@/data/lre/8-Dante.json';
+import trajannJson from '@/data/lre/9-Trajann.json';
+/* eslint-enable import-x/no-internal-modules */
 
-import aunshiJson from './1-Aunshi.json';
-import luciusJson from './10-Lucius.json';
-import farsightJson from './11-Farsight.json';
-import shadowsunJson from './2-Shadowsun.json';
-import ragnarJson from './3-Ragnar.json';
-import vitruviusJson from './4-Vitruvius.json';
-import kharnJson from './5-Kharn.json';
-import mephistonJson from './6-Mephiston.json';
-import patermineJson from './7-Patermine.json';
-import danteJson from './8-Dante.json';
-import trajannJson from './9-Trajann.json';
+import { ILegendaryEventStatic } from './static-data.model';
 
 export const aunshi: ILegendaryEventStatic = aunshiJson;
 export const dante: ILegendaryEventStatic = danteJson;
