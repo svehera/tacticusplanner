@@ -9,7 +9,7 @@ export interface ILeWave {
     enemies: string[];
 }
 
-export interface ILeObjective {
+interface ILeObjective {
     type: string;
     target: string;
     points: number;
@@ -25,7 +25,7 @@ export interface ILeBattle {
     objectives: ILeObjective[];
 }
 
-export interface ILeBattleSet {
+interface ILeBattleSet {
     battles: ILeBattle[];
 }
 

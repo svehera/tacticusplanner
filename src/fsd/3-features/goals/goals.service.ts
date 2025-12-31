@@ -32,8 +32,7 @@ import {
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 // eslint-disable-next-line boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
-
-export interface RevisedGoals {
+interface RevisedGoals {
     goalEstimates: IGoalEstimate[];
     neededBadges: Record<Alliance, Record<Rarity, number>>;
     neededForgeBadges: Record<Rarity, number>;

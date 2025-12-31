@@ -9,5 +9,4 @@ export type {
 export { LegendaryEventEnum } from './enums';
 export * from './data';
 export { LreReqImage } from './lre-req-image';
-export { LreTokenImage } from './lre-token-image';
 export { LegendaryEventService } from './legendary-event-service';
