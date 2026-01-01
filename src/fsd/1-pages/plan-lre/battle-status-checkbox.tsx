@@ -7,36 +7,54 @@ import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
 
 interface Props {
     status: RequirementStatus;
-    killScore?: number;
-    isKillScore: boolean;
-    maxKillPoints: number;
-    onChange: (status: RequirementStatus, killScore?: number) => void;
+    score?: number;
+    scoreType: 'killScore' | 'highScore';
+    maxScore: number;
+    onChange: (status: RequirementStatus, score?: number) => void;
 }
 
-export const BattleStatusCheckbox: React.FC<Props> = ({ status, killScore, isKillScore, maxKillPoints, onChange }) => {
+export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType, maxScore, onChange }) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-    const [killScoreInput, setKillScoreInput] = useState<string>(String(killScore || ''));
+    const [scoreInput, setScoreInput] = useState<string>(String(score || ''));
     const [pendingStatus, setPendingStatus] = useState<RequirementStatus | null>(null);
+    const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+
+    const scoreLabel = scoreType === 'killScore' ? 'Kill Score' : 'High Score';
 
     const handleStatusClick = (newStatus: RequirementStatus) => {
         setShowDropdown(false);
 
-        // If switching to PartiallyCleared and it's kill score, show popover for input
-        if (newStatus === RequirementStatus.PartiallyCleared && isKillScore) {
+        // If switching to PartiallyCleared, show popover for input
+        if (newStatus === RequirementStatus.PartiallyCleared) {
             // Store the pending status and show popover
             setPendingStatus(newStatus);
             setAnchorEl(dropdownRef.current);
             return;
         }
 
-        // Clear killScore when switching away from PartiallyCleared
-        const newKillScore = newStatus === RequirementStatus.PartiallyCleared ? killScore : undefined;
-        onChange(newStatus, newKillScore);
+        // Clear score when switching to any other status
+        onChange(newStatus, undefined);
     };
 
     const toggleDropdown = () => {
+        if (!showDropdown && buttonRef.current) {
+            // Calculate if dropdown should open upwards or downwards
+            const buttonRect = buttonRef.current.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const spaceBelow = viewportHeight - buttonRect.bottom;
+            const spaceAbove = buttonRect.top;
+            const dropdownHeight = 200; // Estimated dropdown height
+
+            // Open upwards if there's not enough space below
+            if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
+                setDropdownPosition('top');
+            } else {
+                setDropdownPosition('bottom');
+            }
+        }
         setShowDropdown(!showDropdown);
     };
 
@@ -57,11 +75,11 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, killScore, isKil
         };
     }, [showDropdown]);
 
-    const handleKillScoreSubmit = () => {
-        const score = parseInt(killScoreInput);
-        if (!isNaN(score) && score >= 0) {
-            // Cap the score at maxKillPoints
-            const cappedScore = Math.min(score, maxKillPoints);
+    const handleScoreSubmit = () => {
+        const parsedScore = parseInt(scoreInput);
+        if (!isNaN(parsedScore) && parsedScore >= 0) {
+            // Cap the score at maxScore
+            const cappedScore = Math.min(parsedScore, maxScore);
             onChange(RequirementStatus.PartiallyCleared, cappedScore);
         }
         setPendingStatus(null);
@@ -72,10 +90,10 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, killScore, isKil
         // If they cancel, don't change the status
         setPendingStatus(null);
         setAnchorEl(null);
-        setKillScoreInput(String(killScore || ''));
+        setScoreInput(String(score || ''));
     };
 
-    // Build select options (exclude PartiallyCleared if not a kill score requirement)
+    // Build select options including PartiallyCleared for score requirements
     const getStatusOptions = () => {
         const options = [
             { value: RequirementStatus.NotCleared, label: STATUS_LABELS[RequirementStatus.NotCleared] },
@@ -84,12 +102,10 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, killScore, isKil
             { value: RequirementStatus.StopHere, label: STATUS_LABELS[RequirementStatus.StopHere] },
         ];
 
-        if (isKillScore) {
-            options.push({
-                value: RequirementStatus.PartiallyCleared,
-                label: killScore ? `${killScore}` : STATUS_LABELS[RequirementStatus.PartiallyCleared],
-            });
-        }
+        options.push({
+            value: RequirementStatus.PartiallyCleared,
+            label: score ? `${score}` : STATUS_LABELS[RequirementStatus.PartiallyCleared],
+        });
 
         return options;
     };
@@ -101,21 +117,28 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, killScore, isKil
         <>
             <div className="relative inline-block" ref={dropdownRef}>
                 <button
+                    ref={buttonRef}
                     onClick={toggleDropdown}
                     className="p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
                     style={{
                         color: STATUS_COLORS[displayStatus],
                         borderColor: `${STATUS_COLORS[displayStatus]}20`,
                     }}>
-                    {killScore && status === RequirementStatus.PartiallyCleared ? (
-                        <span className="text-xs md:text-sm">{killScore}</span>
+                    {score && status === RequirementStatus.PartiallyCleared ? (
+                        <span className="text-xs md:text-sm">{score}</span>
                     ) : (
                         STATUS_LABELS[displayStatus]
                     )}
                 </button>
 
                 {showDropdown && (
-                    <div className="absolute z-10 mt-1 bg-white border border-gray-300 rounded shadow-lg dark:bg-gray-800 dark:border-gray-600">
+                    <div
+                        className="absolute z-10 bg-white border border-gray-300 rounded shadow-lg dark:bg-gray-800 dark:border-gray-600"
+                        style={
+                            dropdownPosition === 'top'
+                                ? { bottom: '100%', marginBottom: '4px' }
+                                : { top: '100%', marginTop: '4px' }
+                        }>
                         {getStatusOptions().map(option => (
                             <button
                                 key={option.value}
@@ -124,7 +147,7 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, killScore, isKil
                                 style={{
                                     color: STATUS_COLORS[option.value],
                                 }}>
-                                {typeof option.label === 'string' ? option.label : option.label}
+                                {option.label}
                             </button>
                         ))}
                     </div>
@@ -144,28 +167,30 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, killScore, isKil
                     horizontal: 'center',
                 }}>
                 <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    <div style={{ fontSize: 14, fontWeight: 'bold' }}>Enter Kill Score (Max: {maxKillPoints})</div>
+                    <div style={{ fontSize: 14, fontWeight: 'bold' }}>
+                        Enter {scoreLabel} (Max: {maxScore})
+                    </div>
                     <TextField
                         autoFocus
                         size="small"
                         type="number"
-                        label="Kill Score"
-                        value={killScoreInput}
-                        onChange={e => setKillScoreInput(e.target.value)}
+                        label={scoreLabel}
+                        value={scoreInput}
+                        onChange={e => setScoreInput(e.target.value)}
                         onKeyDown={e => {
                             if (e.key === 'Enter') {
-                                handleKillScoreSubmit();
+                                handleScoreSubmit();
                             }
                         }}
-                        slotProps={{ htmlInput: { min: 0, max: maxKillPoints } }}
-                        helperText={`Maximum kill points for this battle: ${maxKillPoints}`}
+                        slotProps={{ htmlInput: { min: 0, max: maxScore } }}
+                        helperText={`Maximum points for this battle: ${maxScore}`}
                     />
                     <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
                         <button onClick={handlePopoverClose} style={{ padding: '4px 12px' }}>
                             Cancel
                         </button>
                         <button
-                            onClick={handleKillScoreSubmit}
+                            onClick={handleScoreSubmit}
                             style={{
                                 padding: '4px 12px',
                                 backgroundColor: '#2196f3',
