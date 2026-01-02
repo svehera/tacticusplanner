@@ -55,6 +55,7 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     shardsPerToken: 0,
     mythicShardsPerToken: 0,
     campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
+    mythicCampaignsUsage: CampaignsLocationsUsage.LeastEnergy,
     priority,
     dailyRaids: true,
     rankPoint5: false,
@@ -207,7 +208,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
     const hasNonMythicAscension = () => {
         if (form.type !== PersonalGoalType.Ascend) return false;
-        return unit !== undefined && unit!.stars < RarityStars.OneBlueStar;
+        return unit !== null && unit!.stars < RarityStars.OneBlueStar;
     };
     const hasMythicAscension = () => {
         if (form.type !== PersonalGoalType.Ascend) return false;

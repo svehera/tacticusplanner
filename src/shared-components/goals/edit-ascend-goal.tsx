@@ -141,8 +141,8 @@ export const EditAscendGoal: React.FC<Props> = ({
                         <div className="flex gap-3">
                             <div className="w-1/2">
                                 <CampaignsUsageSelect
-                                    disabled={!unlockedLocations.length}
-                                    value={goal.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
+                                    disabled={!unlockedMythicLocations.length}
+                                    value={goal.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
                                     valueChange={value => onChange('mythicCampaignsUsage', value)}
                                     mythic={true}
                                 />

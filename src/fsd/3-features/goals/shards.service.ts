@@ -151,7 +151,11 @@ export class ShardsService {
     ): ICharacterShardsEstimate[] {
         const materials = goals
             .flatMap(goal => [this.convertGoalToMaterial(goal), this.convertGoalToMythicMaterial(goal)])
-            .filter(x => x.acquiredCount < x.requiredCount || x.acquiredMythicCount < x.requiredMythicCount);
+            .filter(
+                x =>
+                    (x.requiredCount > 0 && x.acquiredCount < x.requiredCount) ||
+                    (x.requiredMythicCount > 0 && x.acquiredMythicCount < x.requiredMythicCount)
+            );
         const currCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
 
         const result: ICharacterShardsEstimate[] = [];
@@ -344,7 +348,8 @@ export class ShardsService {
             onslaughtMythicShards: goal.type === PersonalGoalType.Ascend ? goal.onslaughtMythicShards : 0,
             acquiredMythicCount: goal.mythicShards ?? 0,
             requiredMythicCount: targetMythicShards,
-            campaignsUsage: goal.campaignsUsage,
+            campaignsUsage:
+                'mythicCampaignsUsage' in goal ? goal.mythicCampaignsUsage : CampaignsLocationsUsage.LeastEnergy,
         };
     }
 

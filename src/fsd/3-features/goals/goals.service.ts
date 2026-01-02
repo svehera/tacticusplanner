@@ -152,7 +152,7 @@ export class GoalsService {
                     rarityStart: unit.rarity,
                     rarityEnd: g.targetRarity!,
                     shards: unit.shards,
-                    mythicShards: unit.mythicShards,
+                    mythicShards: unit.mythicShards ?? 0,
                     starsStart: unit.stars,
                     starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
                     onslaughtShards: g.shardsPerToken ?? 1,

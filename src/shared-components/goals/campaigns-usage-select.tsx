@@ -31,7 +31,7 @@ export const CampaignsUsageSelect: React.FC<Props> = ({ value, valueChange, disa
             {disabled && (
                 <FormHelperText>
                     You don&apos;t have any location unlocked to farm this character&apos;s
-                    {mythic ? 'mythic shards' : 'shards'}.
+                    {mythic ? ' mythic shards' : ' shards'}.
                 </FormHelperText>
             )}
         </FormControl>
