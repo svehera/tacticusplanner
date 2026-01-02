@@ -22,7 +22,7 @@ interface Props {
     currentPoints: number;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
-    nextTokenCompleted: () => void;
+    nextTokenCompleted: (tokenIndex: number) => void;
     toggleBattleState: (
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
@@ -97,7 +97,7 @@ export const LeTokenomics: React.FC<Props> = ({
                             renderTeam={x => renderTeam(x, 30)}
                             isBattleVisible={isFirstTokenBattleVisible}
                             onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
-                            onCompleteBattle={nextTokenCompleted}
+                            onCompleteBattle={() => nextTokenCompleted(firstTokenIndex)}
                         />
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) !== undefined && (
