@@ -59,8 +59,7 @@ const Modal = (props: DialogTriggerProps) => {
 };
 
 interface ModalContentProps
-    extends
-        Omit<ModalOverlayProps, 'className' | 'children'>,
+    extends Omit<ModalOverlayProps, 'className' | 'children'>,
         Pick<DialogProps, 'aria-label' | 'aria-labelledby' | 'role' | 'children'>,
         VariantProps<typeof modalContentStyles> {
     closeButton?: boolean;

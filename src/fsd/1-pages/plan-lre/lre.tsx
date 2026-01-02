@@ -86,9 +86,9 @@ export const Lre: React.FC = () => {
         [tokens, currentPoints]
     );
 
-    const nextTokenCompleted = (): void => {
-        if (tokenDisplays.length === 0) return;
-        const token = tokenDisplays[0];
+    const nextTokenCompleted = (tokenIndex: number): void => {
+        if (tokenDisplays.length === 0 || tokenIndex < 0 || tokenIndex >= tokenDisplays.length) return;
+        const token = tokenDisplays[tokenIndex];
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
 
         // Used to handle the "Mark Completed" option in tokenomics.

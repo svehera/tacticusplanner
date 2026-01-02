@@ -5,7 +5,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Button from '@mui/material/Button';
 import { sum } from 'lodash';
 import { Grid2x2Check, Info } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { getCompletionRateColor } from '@/fsd/5-shared/lib';
@@ -13,7 +13,7 @@ import { AccessibleTooltip, ConfirmationDialog } from '@/fsd/5-shared/ui';
 
 import { LegendaryEventEnum, LreReqImage, LreTrackId } from '@/fsd/4-entities/lre';
 
-import { RequirementStatus } from '@/fsd/3-features/lre';
+import { RequirementStatus, ILreTeam } from '@/fsd/3-features/lre';
 import { LrePointsCategoryId, ProgressState } from '@/fsd/3-features/lre-progress';
 
 import { LreTrackBattleSummary } from './le-track-battle';
@@ -22,6 +22,7 @@ import { ILreTrackProgress } from './lre.models';
 interface Props {
     track: ILreTrackProgress;
     legendaryEventId: LegendaryEventEnum;
+    teams: ILreTeam[];
     toggleBattleState: (
         trackId: LreTrackId,
         battleIndex: number,
@@ -34,8 +35,31 @@ interface Props {
 export const LreTrackOverallProgress: React.FC<Props> = ({
     track,
     legendaryEventId: _legendaryEventId,
+    teams,
     toggleBattleState,
 }) => {
+    // Calculate which restrictions are projected to be cleared for each battle
+    const projectedRestrictions = useMemo(() => {
+        const battleRestrictions = new Map<number, Set<string>>();
+
+        teams
+            .filter(team => team.section === track.trackId)
+            .forEach(team => {
+                const clears = team.expectedBattleClears ?? 0;
+                // For each battle this team is expected to clear
+                for (let battleIndex = 0; battleIndex < clears && battleIndex < track.battles.length; battleIndex++) {
+                    if (!battleRestrictions.has(battleIndex)) {
+                        battleRestrictions.set(battleIndex, new Set());
+                    }
+                    // Add all restrictions this team can clear
+                    team.restrictionsIds.forEach(restrictionId => {
+                        battleRestrictions.get(battleIndex)!.add(restrictionId);
+                    });
+                }
+            });
+
+        return battleRestrictions;
+    }, [teams, track.trackId, track.battles.length]);
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
 
     // Helper to get points from a requirement, accounting for partial kill scores
@@ -199,6 +223,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                 key={battle.battleIndex}
                                 battle={battle}
                                 maxKillPoints={track.battlesPoints[battle.battleIndex]}
+                                projectedRestrictions={projectedRestrictions.get(battle.battleIndex) ?? new Set()}
                                 toggleState={(req, state, forceOverwrite) =>
                                     toggleBattleState(track.trackId, battle.battleIndex, req.id, state, forceOverwrite)
                                 }

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { ConfirmationDialog } from '@/fsd/5-shared/ui';
 
@@ -12,11 +12,107 @@ import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
 interface Props {
     battle: ILreBattleProgress;
     maxKillPoints: number;
+    projectedRestrictions: Set<string>;
     toggleState: (req: ILreBattleRequirementsProgress, state: ProgressState, forceOverwrite?: boolean) => void;
 }
 
-export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, toggleState }) => {
+export const LreTrackBattleSummary: React.FC<Props> = ({
+    battle,
+    maxKillPoints,
+    projectedRestrictions,
+    toggleState,
+}) => {
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+    const [showDropdown, setShowDropdown] = useState<string | null>(null);
+    const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
+    const longPressTimer = useRef<NodeJS.Timeout | null>(null);
+    const longPressTriggered = useRef<boolean>(false);
+    const resetTriggerTimer = useRef<NodeJS.Timeout | null>(null);
+    const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+
+    // Cleanup timers on unmount
+    useEffect(() => {
+        return () => {
+            if (longPressTimer.current) {
+                clearTimeout(longPressTimer.current);
+            }
+            if (resetTriggerTimer.current) {
+                clearTimeout(resetTriggerTimer.current);
+            }
+        };
+    }, []);
+
+    // Click outside to close dropdown
+    useEffect(() => {
+        const handleClickOutside = (event: Event) => {
+            if (showDropdown) {
+                const button = buttonRefs.current.get(showDropdown);
+                const target = event.target as Node;
+                if (button && target && !button.contains(target)) {
+                    setShowDropdown(null);
+                }
+            }
+        };
+
+        if (showDropdown) {
+            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('touchstart', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+        };
+    }, [showDropdown]);
+
+    // Long press handlers for both mouse and touch
+    const handlePressStart = (req: ILreBattleRequirementsProgress) => {
+        longPressTriggered.current = false;
+        longPressTimer.current = setTimeout(() => {
+            longPressTriggered.current = true;
+            // Calculate dropdown position
+            const button = buttonRefs.current.get(req.id);
+            if (button) {
+                const buttonRect = button.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                const spaceBelow = viewportHeight - buttonRect.bottom;
+                const spaceAbove = buttonRect.top;
+                const dropdownHeight = 200; // Estimated dropdown height
+
+                if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
+                    setDropdownPosition('top');
+                } else {
+                    setDropdownPosition('bottom');
+                }
+                setShowDropdown(req.id);
+            }
+        }, 500); // 500ms for long press
+    };
+
+    const handlePressEnd = () => {
+        if (longPressTimer.current) {
+            clearTimeout(longPressTimer.current);
+            longPressTimer.current = null;
+        }
+
+        // Only reset the flag if a long press was actually triggered
+        if (longPressTriggered.current) {
+            // Clear any existing reset timer
+            if (resetTriggerTimer.current) {
+                clearTimeout(resetTriggerTimer.current);
+            }
+            // Reset the flag after a short delay to prevent immediate click
+            resetTriggerTimer.current = setTimeout(() => {
+                longPressTriggered.current = false;
+                resetTriggerTimer.current = null;
+            }, 100);
+        }
+    };
+
+    const handleDirectStatusChange = (req: ILreBattleRequirementsProgress, newStatus: RequirementStatus) => {
+        setShowDropdown(null);
+        handleStatusChange(req, newStatus);
+    };
 
     // Convert legacy boolean flags to RequirementStatus
     const getRequirementStatus = (req: ILreBattleRequirementsProgress): RequirementStatus => {
@@ -159,17 +255,74 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                         }
 
                         // Use simple cycling button for other requirements
+                        const isProjected = projectedRestrictions.has(req.id);
+                        const isNotSet = status === RequirementStatus.NotCleared;
+                        const shouldShowGreenBorder = isProjected && isNotSet;
+
                         return (
-                            <button
-                                key={req.id}
-                                onClick={() => handleCycleStatus(req)}
-                                className="p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
-                                style={{
-                                    color: STATUS_COLORS[status],
-                                    borderColor: `${STATUS_COLORS[status]}20`,
-                                }}>
-                                {STATUS_LABELS[status]}
-                            </button>
+                            <div key={req.id} className="relative inline-block">
+                                <button
+                                    ref={el => {
+                                        if (el) {
+                                            buttonRefs.current.set(req.id, el);
+                                        }
+                                    }}
+                                    onClick={() => {
+                                        // Don't cycle if dropdown is showing or long press was just triggered
+                                        if (showDropdown !== req.id && !longPressTriggered.current) {
+                                            handleCycleStatus(req);
+                                        }
+                                    }}
+                                    onMouseDown={() => handlePressStart(req)}
+                                    onMouseUp={handlePressEnd}
+                                    onMouseLeave={handlePressEnd}
+                                    onTouchStart={() => handlePressStart(req)}
+                                    onTouchEnd={handlePressEnd}
+                                    className="p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
+                                    style={{
+                                        color: shouldShowGreenBorder
+                                            ? `${STATUS_COLORS[RequirementStatus.Cleared]}60`
+                                            : STATUS_COLORS[status],
+                                        borderColor: `${STATUS_COLORS[status]}20`,
+                                    }}>
+                                    {STATUS_LABELS[status]}
+                                </button>
+
+                                {showDropdown === req.id && (
+                                    <div
+                                        className="absolute z-50 bg-white border border-gray-300 rounded shadow-lg dark:bg-gray-800 dark:border-gray-600"
+                                        style={
+                                            dropdownPosition === 'top'
+                                                ? { bottom: '100%', marginBottom: '4px' }
+                                                : { top: '100%', marginTop: '4px' }
+                                        }
+                                        onClick={e => e.stopPropagation()}
+                                        onMouseDown={e => e.stopPropagation()}
+                                        onMouseUp={e => e.stopPropagation()}
+                                        onTouchStart={e => e.stopPropagation()}
+                                        onTouchEnd={e => e.stopPropagation()}>
+                                        {[
+                                            RequirementStatus.NotCleared,
+                                            RequirementStatus.Cleared,
+                                            RequirementStatus.MaybeClear,
+                                            RequirementStatus.StopHere,
+                                        ].map(statusOption => (
+                                            <button
+                                                key={statusOption}
+                                                onClick={e => {
+                                                    e.stopPropagation();
+                                                    handleDirectStatusChange(req, statusOption);
+                                                }}
+                                                className="flex items-center justify-center w-full px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                style={{
+                                                    color: STATUS_COLORS[statusOption],
+                                                }}>
+                                                {STATUS_LABELS[statusOption]}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                         );
                     })}
                 </div>
