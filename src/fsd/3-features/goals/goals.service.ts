@@ -278,7 +278,9 @@ export class GoalsService {
                     targetRarity: goal.rarityEnd,
                     targetStars: goal.starsEnd,
                     campaignsUsage: goal.campaignsUsage,
+                    mythicCampaignsUsage: goal.mythicCampaignsUsage,
                     shardsPerToken: goal.onslaughtShards,
+                    mythicShardsPerToken: goal.onslaughtMythicShards,
                 };
             }
             case PersonalGoalType.MowAbilities: {

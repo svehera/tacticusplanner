@@ -274,11 +274,12 @@ export class ShardsService {
         const onslaughtMaxTokens = 3;
         const onslaughtTokenRefreshHours = 16;
         const onslaughtTokensPerDay = 24 / onslaughtTokenRefreshHours;
+        const shardCount = mythic ? material.onslaughtMythicShards : material.onslaughtShards;
 
         const onslaughtLocation: ICampaignBattleComposed = {
             id: 'Onslaught' + nodeNumber,
             itemsPerDay: (material.onslaughtShards * onslaughtTokensPerDay) / onslaughtMaxTokens,
-            dropRate: (material.onslaughtShards * onslaughtTokensPerDay) / onslaughtMaxTokens,
+            dropRate: (material.onslaughtMythicShards * onslaughtTokensPerDay) / onslaughtMaxTokens,
             dailyBattleCount: onslaughtTokensPerDay / onslaughtMaxTokens,
             rarity: 'Shard',
             rarityEnum: Rarity.Legendary,
@@ -286,8 +287,8 @@ export class ShardsService {
                 guaranteed: [
                     {
                         id: (mythic ? 'mythicShards_' : 'shards_') + material.characterId,
-                        min: mythic ? material.onslaughtMythicShards : material.onslaughtShards,
-                        max: mythic ? material.onslaughtMythicShards : material.onslaughtShards,
+                        min: shardCount,
+                        max: shardCount,
                     },
                 ],
                 potential: [],
