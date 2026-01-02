@@ -53,6 +53,7 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     targetRank: Rank.Stone1,
     targetStars: RarityStars.None,
     shardsPerToken: 0,
+    mythicShardsPerToken: 0,
     campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
     priority,
     dailyRaids: true,
@@ -137,12 +138,29 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         return 'shards_' + unit.snowprintId;
     };
 
+    const getAscensionMythicShardsName = (unit: IUnit | null): string => {
+        if (!unit) return '';
+        return 'mythicShards_' + unit.snowprintId;
+    };
+
     const possibleLocations =
         [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
             ? StaticDataService.getItemLocations(getAscensionShardsName(unit))
             : [];
 
     const unlockedLocations = possibleLocations
+        .filter(location => {
+            const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
+            return location.nodeNumber <= campaignProgress;
+        })
+        .map(x => x.id);
+
+    const possibleMythicLocations =
+        [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
+            ? StaticDataService.getItemLocations(getAscensionMythicShardsName(unit))
+            : [];
+
+    const unlockedMythicLocations = possibleMythicLocations
         .filter(location => {
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber <= campaignProgress;
@@ -187,6 +205,15 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
     };
 
+    const hasNonMythicAscension = () => {
+        if (form.type !== PersonalGoalType.Ascend) return false;
+        return unit !== undefined && unit!.stars < RarityStars.OneBlueStar;
+    };
+    const hasMythicAscension = () => {
+        if (form.type !== PersonalGoalType.Ascend) return false;
+        return (form.targetRarity ?? Rarity.Common) >= Rarity.Mythic;
+    };
+
     const isDisabled = () => {
         if (!unit) {
             return true;
@@ -202,7 +229,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (form.type === PersonalGoalType.Ascend) {
             return (
                 (unit.rarity === form.targetRarity && unit.stars === form.targetStars) ||
-                (!unlockedLocations.length && form.shardsPerToken! <= 0)
+                (hasNonMythicAscension() && unlockedLocations.length === 0 && form.shardsPerToken! <= 0) ||
+                (hasMythicAscension() && unlockedMythicLocations.length === 0 && form.mythicShardsPerToken! <= 0)
             );
         }
 
@@ -391,7 +419,11 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 possibleLocations={possibleLocations}
                                 unlockedLocations={unlockedLocations}
                                 campaignsUsage={form.campaignsUsage!}
+                                possibleMythicLocations={possibleMythicLocations}
+                                unlockedMythicLocations={unlockedMythicLocations}
+                                mythicCampaignsUsage={form.mythicCampaignsUsage!}
                                 shardsPerToken={form.shardsPerToken!}
+                                mythicShardsPerToken={form.mythicShardsPerToken!}
                                 onChange={handleAscendGoalChanges}
                             />
                         )}
@@ -411,6 +443,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 disabled={!unlockedLocations.length}
                                 value={form.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
                                 valueChange={value => setForm(curr => ({ ...curr, campaignsUsage: value }))}
+                                mythic={form.targetRarity! >= Rarity.Mythic}
                             />
                         </Conditional>
 

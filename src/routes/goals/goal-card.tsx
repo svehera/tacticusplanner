@@ -67,6 +67,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 const isMinStars = minStars === goal.starsEnd;
 
                 const targetShards = ShardsService.getTargetShards(goal);
+                const targetMythicShards = ShardsService.getTargetMythicShards(goal);
                 return (
                     <div>
                         <div className="flex-box between">
@@ -87,12 +88,22 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                 )}
                             </div>
                         </div>
-                        <div>
-                            <b>
-                                {goal.shards} of {targetShards}
-                            </b>{' '}
-                            Shards
-                        </div>
+                        {targetShards > 0 && (
+                            <div>
+                                <b>
+                                    {goal.shards} of {targetShards}
+                                </b>{' '}
+                                Shards
+                            </div>
+                        )}
+                        {targetMythicShards > 0 && (
+                            <div>
+                                <b>
+                                    {goal.mythicShards} of {targetMythicShards}
+                                </b>{' '}
+                                Mythic Shards
+                            </div>
+                        )}
                         <div className="flex-box gap10 wrap">
                             <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
                                 <div className="flex-box gap-[3px]">

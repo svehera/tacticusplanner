@@ -112,6 +112,7 @@ describe('Goal service', () => {
                 faction: characterMock.faction,
                 notes: goalMock.notes!,
                 shards: characterMock.shards,
+                mythicShards: 0,
                 rarity: characterMock.rarity,
                 rank: characterMock.rank,
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
@@ -158,10 +159,13 @@ describe('Goal service', () => {
                 rarityStart: characterMock.rarity,
                 rarityEnd: goalMock.targetRarity!,
                 shards: characterMock.shards,
+                mythicShards: 0,
                 starsStart: characterMock.stars,
                 starsEnd: RarityStars.RedThreeStars,
                 onslaughtShards: 1,
+                onslaughtMythicShards: 0,
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
+                mythicCampaignsUsage: CampaignsLocationsUsage.LeastEnergy,
                 type: PersonalGoalType.Ascend,
             };
 

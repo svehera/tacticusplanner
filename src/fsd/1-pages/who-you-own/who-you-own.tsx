@@ -126,7 +126,6 @@ export const WhoYouOwn = () => {
         if (unit.unitType === UnitType.mow) {
             setEditedMow(unit);
             setEditedCharacter(null);
-            console.log('editing mow', unit);
         }
     }, []);
 

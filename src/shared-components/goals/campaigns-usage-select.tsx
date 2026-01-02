@@ -9,9 +9,10 @@ interface Props {
     valueChange: (value: number) => void;
     disabled: boolean;
     allowIgnore?: boolean;
+    mythic: boolean;
 }
 
-export const CampaignsUsageSelect: React.FC<Props> = ({ value, valueChange, disabled, allowIgnore = true }) => {
+export const CampaignsUsageSelect: React.FC<Props> = ({ value, valueChange, disabled, allowIgnore = true, mythic }) => {
     return (
         <FormControl fullWidth disabled={disabled}>
             <InputLabel id="priority-label">Campaigns Usage</InputLabel>
@@ -29,7 +30,8 @@ export const CampaignsUsageSelect: React.FC<Props> = ({ value, valueChange, disa
             </Select>
             {disabled && (
                 <FormHelperText>
-                    You don&apos;t have any location unlocked to farm this characters&apos; shards
+                    You don&apos;t have any location unlocked to farm this character&apos;s
+                    {mythic ? 'mythic shards' : 'shards'}.
                 </FormHelperText>
             )}
         </FormControl>
