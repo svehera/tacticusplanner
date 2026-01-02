@@ -273,12 +273,13 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
                                             handleCycleStatus(req);
                                         }
                                     }}
+                                    onContextMenu={e => e.preventDefault()}
                                     onMouseDown={() => handlePressStart(req)}
                                     onMouseUp={handlePressEnd}
                                     onMouseLeave={handlePressEnd}
                                     onTouchStart={() => handlePressStart(req)}
                                     onTouchEnd={handlePressEnd}
-                                    className="p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
+                                    className="select-none p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
                                     style={{
                                         color: shouldShowGreenBorder
                                             ? `${STATUS_COLORS[RequirementStatus.Cleared]}60`
