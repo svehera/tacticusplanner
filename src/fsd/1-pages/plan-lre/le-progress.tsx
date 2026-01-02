@@ -1,7 +1,10 @@
 ﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 
@@ -14,8 +17,11 @@ import { LreTrackOverallProgress } from './le-track-overall-progress';
  * UI Element to display the progress of missions and tracks in a legendary event.
  */
 export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
+    const { leSelectedTeams } = useContext(StoreContext);
     const { model, updateNotes, updateOccurrenceProgress, toggleBattleState } = useLreProgress(legendaryEvent);
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
+
+    const teams = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
     const handleAccordionChange = (section: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
         setAccordionExpanded(isExpanded ? section : false);
@@ -111,6 +117,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                             key={track.trackId}
                             track={track}
                             legendaryEventId={legendaryEvent.id}
+                            teams={teams}
                             toggleBattleState={toggleBattleState}
                         />
                     ))}

@@ -80,6 +80,7 @@ export interface ILreBattleRequirementsProgress {
     blocked: boolean; // Legacy - keep for backward compatibility
     status?: RequirementStatus; // New: RequirementStatus enum value (0-4)
     killScore?: number; // New: For partial kill score tracking
+    highScore?: number; // New: For partial high score tracking
 }
 
 export interface ILreRequirements {
