@@ -327,9 +327,11 @@ export interface IPersonalGoal {
     targetRarity?: Rarity;
     targetStars?: RarityStars;
     shardsPerToken?: number;
+    mythicShardsPerToken?: number;
 
     // unlock
     campaignsUsage?: CampaignsLocationsUsage;
+    mythicCampaignsUsage?: CampaignsLocationsUsage;
 
     // upgrade mow
     unitId?: string;
