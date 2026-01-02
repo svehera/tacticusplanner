@@ -23,10 +23,7 @@ export enum RosterSnapshotDiffStyle {
 }
 
 export interface IViewPreferences
-    extends ILreViewSettings,
-        ILreTileSettings,
-        IWyoViewSettings,
-        IRosterSnapshotsViewSettings {
+    extends ILreViewSettings, ILreTileSettings, IWyoViewSettings, IRosterSnapshotsViewSettings {
     // autoTeams: boolean;
     wyoFilter: CharactersFilterBy;
     wyoOrder: CharactersOrderBy;
