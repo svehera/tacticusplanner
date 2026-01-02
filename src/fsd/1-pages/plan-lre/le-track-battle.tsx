@@ -279,6 +279,11 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
                                     onMouseLeave={handlePressEnd}
                                     onTouchStart={() => handlePressStart(req)}
                                     onTouchEnd={handlePressEnd}
+                                    aria-label={`${req.id} - ${STATUS_LABELS[status]}`}
+                                    aria-pressed={status === RequirementStatus.Cleared}
+                                    aria-haspopup="menu"
+                                    aria-expanded={showDropdown === req.id}
+                                    aria-controls={`dropdown-${req.id}`}
                                     className="select-none p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
                                     style={{
                                         color: shouldShowGreenBorder
@@ -291,6 +296,8 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
 
                                 {showDropdown === req.id && (
                                     <div
+                                        id={`dropdown-${req.id}`}
+                                        role="menu"
                                         className="absolute z-50 bg-white border border-gray-300 rounded shadow-lg dark:bg-gray-800 dark:border-gray-600"
                                         style={
                                             dropdownPosition === 'top'
@@ -310,6 +317,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
                                         ].map(statusOption => (
                                             <button
                                                 key={statusOption}
+                                                role="menuitem"
                                                 onClick={e => {
                                                     e.stopPropagation();
                                                     handleDirectStatusChange(req, statusOption);
