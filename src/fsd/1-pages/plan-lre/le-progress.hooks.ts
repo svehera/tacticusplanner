@@ -6,12 +6,11 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
-import { ILegendaryEvent } from '@/fsd/3-features/lre';
+import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 import { ProgressState, LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { ILreProgressModel, ILreOccurrenceProgress, ILreBattleRequirementsProgress } from './lre.models';
 import { LreService } from './lre.service';
-
 export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     const { leProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -84,20 +83,31 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
                     ...reqProgress,
                     completed: true,
                     blocked: false,
-                    // When completed, always set to Cleared status (unless preserving PartiallyCleared for killScore)
+                    // When completed, always set to Cleared status (unless preserving PartiallyCleared for killScore/highScore)
                     status:
-                        !forceOverwrite && reqProgress.status === 4 && reqProgress.id === LrePointsCategoryId.killScore
-                            ? 4 // Preserve PartiallyCleared for killScore
-                            : 1, // RequirementStatus.Cleared
-                    // Clear killScore when forcing to Cleared
+                        !forceOverwrite &&
+                        reqProgress.status === RequirementStatus.PartiallyCleared &&
+                        (reqProgress.id === LrePointsCategoryId.killScore ||
+                            reqProgress.id === LrePointsCategoryId.highScore)
+                            ? RequirementStatus.PartiallyCleared
+                            : RequirementStatus.Cleared,
+                    // Clear killScore/highScore when forcing to Cleared
                     killScore: forceOverwrite ? undefined : reqProgress.killScore,
+                    highScore: forceOverwrite ? undefined : reqProgress.highScore,
                 };
 
                 // If marking a non-auto requirement (restriction) as complete, auto-complete defeatAll, killScore, and highScore
                 if (!autoCompleteReqs.includes(reqProgress.id as LrePointsCategoryId)) {
                     updatedRequirementsProgress = updatedRequirementsProgress.map(req =>
                         autoCompleteReqs.includes(req.id as LrePointsCategoryId)
-                            ? { ...req, completed: true, blocked: false, status: 1, killScore: undefined }
+                            ? {
+                                  ...req,
+                                  completed: true,
+                                  blocked: false,
+                                  status: 1,
+                                  killScore: undefined,
+                                  highScore: undefined,
+                              }
                             : req
                     );
                 }
@@ -105,7 +115,14 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
                 else if (reqProgress.id === LrePointsCategoryId.defeatAll) {
                     updatedRequirementsProgress = updatedRequirementsProgress.map(req =>
                         autoCompleteReqs.includes(req.id as LrePointsCategoryId)
-                            ? { ...req, completed: true, blocked: false, status: 1, killScore: undefined }
+                            ? {
+                                  ...req,
+                                  completed: true,
+                                  blocked: false,
+                                  status: 1,
+                                  killScore: undefined,
+                                  highScore: undefined,
+                              }
                             : req
                     );
                 }
@@ -117,6 +134,7 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
                     // If forceOverwrite, set to StopHere; otherwise preserve
                     status: forceOverwrite ? 3 : (reqProgress.status ?? 3), // RequirementStatus.StopHere
                     killScore: forceOverwrite ? undefined : reqProgress.killScore,
+                    highScore: forceOverwrite ? undefined : reqProgress.highScore,
                 };
             } else {
                 // State is "none"
@@ -124,9 +142,10 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
                     ...reqProgress,
                     completed: false,
                     blocked: false,
-                    // If forceOverwrite, set to NotCleared and clear killScore; otherwise preserve
+                    // If forceOverwrite, set to NotCleared and clear killScore/highScore; otherwise preserve
                     status: forceOverwrite ? 0 : (reqProgress.status ?? 0),
                     killScore: forceOverwrite ? undefined : reqProgress.killScore,
+                    highScore: forceOverwrite ? undefined : reqProgress.highScore,
                 };
             }
 

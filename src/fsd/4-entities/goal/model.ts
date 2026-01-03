@@ -43,6 +43,7 @@ export interface ICharacterUnlockGoal extends ICharacterRaidGoalSelectBase {
     type: PersonalGoalType.Unlock;
 
     shards: number;
+    mythicShards: 0;
     rank: Rank;
     rarity: Rarity;
     faction: Faction;
@@ -57,6 +58,9 @@ export interface ICharacterAscendGoal extends ICharacterRaidGoalSelectBase {
     starsEnd: RarityStars;
     rarityEnd: Rarity;
     shards: number;
+    mythicShards: number;
     onslaughtShards: number;
+    onslaughtMythicShards: number;
     campaignsUsage: CampaignsLocationsUsage;
+    mythicCampaignsUsage: CampaignsLocationsUsage;
 }

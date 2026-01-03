@@ -48,8 +48,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
     const [form, setForm] = useState<CharacterRaidGoalSelect>(goal);
     const [inventoryUpdate, setInventoryUpdate] = useState<Array<IUpgradeRecipe>>([]);
+
     const handleClose = (updatedGoal?: CharacterRaidGoalSelect | undefined): void => {
-        console.log('updatedGoal: ', updatedGoal);
         if (updatedGoal) {
             dispatch.goals({ type: 'Update', goal: updatedGoal });
 
@@ -139,7 +139,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     }
 
     let possibleLocations: ICampaignBattleComposed[] = [];
-    // Support for both IDs for characters. Previously be used a short version (i.e. Ragnar, Darkstrider).
+    // Support for both IDs for characters. Previously we used a short version (i.e. Ragnar, Darkstrider).
     if ([PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit) {
         possibleLocations = StaticDataService.getItemLocations(`shards_${unit.id}`);
         if (!possibleLocations.length) {
@@ -147,7 +147,23 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
         }
     }
 
+    let possibleMythicLocations: ICampaignBattleComposed[] = [];
+    // Support for both IDs for characters. Previously we used a short version (i.e. Ragnar, Darkstrider).
+    if ([PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && unit !== undefined) {
+        possibleMythicLocations = StaticDataService.getItemLocations(`mythicShards_${unit.id}`);
+        if (possibleMythicLocations.length === 0) {
+            possibleMythicLocations = StaticDataService.getItemLocations(`mythicShards_${unit.snowprintId}`);
+        }
+    }
+
     const unlockedLocations = possibleLocations
+        .filter(location => {
+            const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
+            return location.nodeNumber <= campaignProgress;
+        })
+        .map(x => x.id);
+
+    const unlockedMythicLocations = possibleMythicLocations
         .filter(location => {
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber <= campaignProgress;
@@ -370,6 +386,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 disabled={!unlockedLocations.length}
                                 value={form.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
                                 valueChange={value => setForm(curr => ({ ...curr, campaignsUsage: value }))}
+                                mythic={false}
                             />
                         </>
                     )}
@@ -384,7 +401,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                             <EditAscendGoal
                                 goal={form}
                                 possibleLocations={possibleLocations}
+                                possibleMythicLocations={possibleMythicLocations}
                                 unlockedLocations={unlockedLocations}
+                                unlockedMythicLocations={unlockedMythicLocations}
                                 onChange={handleAscendGoalChanges}
                             />
                         </>

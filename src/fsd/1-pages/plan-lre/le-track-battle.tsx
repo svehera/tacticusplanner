@@ -6,8 +6,9 @@ import { RequirementStatus } from '@/fsd/3-features/lre';
 import { LrePointsCategoryId, ProgressState } from '@/fsd/3-features/lre-progress';
 
 import { BattleStatusCheckbox } from './battle-status-checkbox';
+import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreBattleProgress, ILreBattleRequirementsProgress } from './lre.models';
-import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
+import { STATUS_COLORS, STATUS_LABELS, STATUS_LABEL_TEXT } from './requirement-status-constants';
 
 interface Props {
     battle: ILreBattleProgress;
@@ -234,106 +235,117 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
                     {battle.battleIndex + 1}
                 </span>
                 <div className="flex flex-row justify-between flex-1">
-                    {battle.requirementsProgress.map(req => {
-                        const isKillScore = req.id === LrePointsCategoryId.killScore;
-                        const isHighScore = req.id === LrePointsCategoryId.highScore;
-                        const status = getRequirementStatus(req);
-
-                        // Use BattleStatusCheckbox with dropdown for score requirements (killScore or highScore)
-                        const isScoreRequirement = isKillScore || isHighScore;
-                        if (isScoreRequirement) {
-                            return (
-                                <BattleStatusCheckbox
-                                    key={req.id}
-                                    status={status}
-                                    score={isKillScore ? req.killScore : req.highScore}
-                                    scoreType={isKillScore ? 'killScore' : 'highScore'}
-                                    maxScore={maxKillPoints}
-                                    onChange={(newStatus, newScore) => handleStatusChange(req, newStatus, newScore)}
-                                />
-                            );
-                        }
-
-                        // Use simple cycling button for other requirements
-                        const isProjected = projectedRestrictions.has(req.id);
-                        const isNotSet = status === RequirementStatus.NotCleared;
-                        const shouldShowGreenBorder = isProjected && isNotSet;
-
-                        return (
-                            <div key={req.id} className="relative inline-block">
-                                <button
-                                    ref={el => {
-                                        if (el) {
-                                            buttonRefs.current.set(req.id, el);
-                                        }
-                                    }}
-                                    onClick={() => {
-                                        // Don't cycle if dropdown is showing or long press was just triggered
-                                        if (showDropdown !== req.id && !longPressTriggered.current) {
-                                            handleCycleStatus(req);
-                                        }
-                                    }}
-                                    onContextMenu={e => e.preventDefault()}
-                                    onMouseDown={() => handlePressStart(req)}
-                                    onMouseUp={handlePressEnd}
-                                    onMouseLeave={handlePressEnd}
-                                    onTouchStart={() => handlePressStart(req)}
-                                    onTouchEnd={handlePressEnd}
-                                    aria-label={`${req.id} - ${STATUS_LABELS[status]}`}
-                                    aria-pressed={status === RequirementStatus.Cleared}
-                                    aria-haspopup="menu"
-                                    aria-expanded={showDropdown === req.id}
-                                    aria-controls={`dropdown-${req.id}`}
-                                    className="select-none p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
-                                    style={{
-                                        color: shouldShowGreenBorder
-                                            ? `${STATUS_COLORS[RequirementStatus.Cleared]}60`
-                                            : STATUS_COLORS[status],
-                                        borderColor: `${STATUS_COLORS[status]}20`,
-                                    }}>
-                                    {STATUS_LABELS[status]}
-                                </button>
-
-                                {showDropdown === req.id && (
-                                    <div
-                                        id={`dropdown-${req.id}`}
-                                        role="menu"
-                                        className="absolute z-50 bg-white border border-gray-300 rounded shadow-lg dark:bg-gray-800 dark:border-gray-600"
-                                        style={
-                                            dropdownPosition === 'top'
-                                                ? { bottom: '100%', marginBottom: '4px' }
-                                                : { top: '100%', marginTop: '4px' }
-                                        }
-                                        onClick={e => e.stopPropagation()}
-                                        onMouseDown={e => e.stopPropagation()}
-                                        onMouseUp={e => e.stopPropagation()}
-                                        onTouchStart={e => e.stopPropagation()}
-                                        onTouchEnd={e => e.stopPropagation()}>
-                                        {[
-                                            RequirementStatus.NotCleared,
-                                            RequirementStatus.Cleared,
-                                            RequirementStatus.MaybeClear,
-                                            RequirementStatus.StopHere,
-                                        ].map(statusOption => (
-                                            <button
-                                                key={statusOption}
-                                                role="menuitem"
-                                                onClick={e => {
-                                                    e.stopPropagation();
-                                                    handleDirectStatusChange(req, statusOption);
-                                                }}
-                                                className="flex items-center justify-center w-full px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
-                                                style={{
-                                                    color: STATUS_COLORS[statusOption],
-                                                }}>
-                                                {STATUS_LABELS[statusOption]}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
+                    {(() => {
+                        const firstRestrictionIndex = LreRequirementStatusService.getFirstRestrictionIndex(
+                            battle.requirementsProgress
                         );
-                    })}
+                        return battle.requirementsProgress.map((req, index) => {
+                            const isKillScore = req.id === LrePointsCategoryId.killScore;
+                            const isHighScore = req.id === LrePointsCategoryId.highScore;
+                            const isFirstRestriction = index === firstRestrictionIndex;
+
+                            const status = getRequirementStatus(req);
+
+                            // Use BattleStatusCheckbox with dropdown for score requirements (killScore or highScore)
+                            const isScoreRequirement = isKillScore || isHighScore;
+                            if (isScoreRequirement) {
+                                return (
+                                    <BattleStatusCheckbox
+                                        key={req.id}
+                                        status={status}
+                                        score={isKillScore ? req.killScore : req.highScore}
+                                        scoreType={isKillScore ? 'killScore' : 'highScore'}
+                                        maxScore={maxKillPoints}
+                                        onChange={(newStatus, newScore) => handleStatusChange(req, newStatus, newScore)}
+                                    />
+                                );
+                            }
+
+                            // Use simple cycling button for other requirements
+                            const isProjected = projectedRestrictions.has(req.id);
+                            const isNotSet = status === RequirementStatus.NotCleared;
+                            const shouldShowGreenBorder = isProjected && isNotSet;
+
+                            return (
+                                <div
+                                    key={req.id}
+                                    className={`relative inline-block ${isFirstRestriction ? 'ml-4' : ''}`}>
+                                    <button
+                                        ref={el => {
+                                            if (el) {
+                                                buttonRefs.current.set(req.id, el);
+                                            } else {
+                                                buttonRefs.current.delete(req.id);
+                                            }
+                                        }}
+                                        onClick={() => {
+                                            // Don't cycle if dropdown is showing or long press was just triggered
+                                            if (showDropdown !== req.id && !longPressTriggered.current) {
+                                                handleCycleStatus(req);
+                                            }
+                                        }}
+                                        onContextMenu={e => e.preventDefault()}
+                                        onMouseDown={() => handlePressStart(req)}
+                                        onMouseUp={handlePressEnd}
+                                        onMouseLeave={handlePressEnd}
+                                        onTouchStart={() => handlePressStart(req)}
+                                        onTouchEnd={handlePressEnd}
+                                        aria-label={`${req.id} - ${STATUS_LABEL_TEXT[status] || 'Unknown'}`}
+                                        aria-pressed={status === RequirementStatus.Cleared}
+                                        aria-haspopup="menu"
+                                        aria-expanded={showDropdown === req.id}
+                                        aria-controls={`dropdown-${req.id}`}
+                                        className="select-none p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
+                                        style={{
+                                            color: shouldShowGreenBorder
+                                                ? `${STATUS_COLORS[RequirementStatus.Cleared]}60`
+                                                : STATUS_COLORS[status],
+                                            borderColor: `${STATUS_COLORS[status]}20`,
+                                        }}>
+                                        {STATUS_LABELS[status]}
+                                    </button>
+
+                                    {showDropdown === req.id && (
+                                        <div
+                                            id={`dropdown-${req.id}`}
+                                            role="menu"
+                                            className="absolute z-50 bg-white border border-gray-300 rounded shadow-lg dark:bg-gray-800 dark:border-gray-600"
+                                            style={
+                                                dropdownPosition === 'top'
+                                                    ? { bottom: '100%', marginBottom: '4px' }
+                                                    : { top: '100%', marginTop: '4px' }
+                                            }
+                                            onClick={e => e.stopPropagation()}
+                                            onMouseDown={e => e.stopPropagation()}
+                                            onMouseUp={e => e.stopPropagation()}
+                                            onTouchStart={e => e.stopPropagation()}
+                                            onTouchEnd={e => e.stopPropagation()}>
+                                            {[
+                                                RequirementStatus.NotCleared,
+                                                RequirementStatus.Cleared,
+                                                RequirementStatus.MaybeClear,
+                                                RequirementStatus.StopHere,
+                                            ].map(statusOption => (
+                                                <button
+                                                    key={statusOption}
+                                                    role="menuitem"
+                                                    onClick={e => {
+                                                        e.stopPropagation();
+                                                        handleDirectStatusChange(req, statusOption);
+                                                    }}
+                                                    className="flex items-center justify-center w-full px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                    style={{
+                                                        color: STATUS_COLORS[statusOption],
+                                                    }}>
+                                                    {STATUS_LABELS[statusOption]}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        });
+                    })()}
                 </div>
             </div>
 
