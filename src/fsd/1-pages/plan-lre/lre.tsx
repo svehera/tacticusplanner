@@ -12,6 +12,7 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { SetGoalDialog } from '@/shared-components/goals/set-goal-dialog';
 
 import { CharactersService } from '@/fsd/4-entities/character';
+import { LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { IAutoTeamsPreferences } from '@/fsd/3-features/lre';
 // eslint-disable-next-line import-x/no-internal-modules
@@ -107,6 +108,11 @@ export const Lre: React.FC = () => {
 
     const battles = LeBattleService.getBattleSetForCharacter(legendaryEvent.id);
 
+    const eventStartTime = () => {
+        if (LegendaryEventService.getActiveEvent()?.id !== legendaryEvent.id) return undefined;
+        return LegendaryEventService.getLegendaryEventStartDates()[0].getTime();
+    };
+
     const renderTabContent = () => {
         switch (section) {
             case LreSection.teams:
@@ -122,6 +128,7 @@ export const Lre: React.FC = () => {
                         tokenDisplays={tokenDisplays}
                         tracksProgress={model.tracksProgress}
                         currentPoints={currentPoints}
+                        eventStartTime={eventStartTime()}
                         nextTokenCompleted={nextTokenCompleted}
                         toggleBattleState={toggleBattleState}
                     />

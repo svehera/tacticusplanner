@@ -22,6 +22,7 @@ interface Props {
     currentPoints: number;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
+    eventStartTime: number | undefined;
     nextTokenCompleted: (tokenIndex: number) => void;
     toggleBattleState: (
         trackId: 'alpha' | 'beta' | 'gamma',
@@ -42,6 +43,7 @@ export const LeTokenomics: React.FC<Props> = ({
     currentPoints,
     tokenDisplays,
     tracksProgress,
+    eventStartTime,
     nextTokenCompleted,
     toggleBattleState,
 }: Props) => {
@@ -72,10 +74,20 @@ export const LeTokenomics: React.FC<Props> = ({
     const firstToken = tokenDisplays.find(token => !hasWarningRestrictions(token)) ?? null;
     const firstTokenIndex = firstToken ? tokenDisplays.indexOf(firstToken) : -1;
 
+    const millisRemaining = () => {
+        if (eventStartTime === undefined) return 0;
+        const now = Date.now();
+        const EVENT_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+        return Math.max(EVENT_DURATION - (now - eventStartTime), 0);
+    };
     return (
         <div className="flex flex-col w-full gap-y-8">
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
+                    <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
+                        <div>Free Tokens Remaining: {Math.floor(millisRemaining() / (3 * 60 * 60 * 1000))}</div>
+                        <div>Ad Tokens Remaining: {Math.floor(millisRemaining() / (24 * 60 * 60 * 1000))}</div>
+                    </div>
                     <div>
                         <h3 className="text-lg font-bold">Next Token</h3>
                     </div>
