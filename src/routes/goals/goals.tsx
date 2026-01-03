@@ -440,9 +440,19 @@ export const Goals = () => {
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
-                                    goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
-                                        x => x.goalId === goal.goalId
-                                    )}
+                                    goalEstimate={adjustedGoalsEstimates.goalEstimates
+                                        .filter(x => x.goalId === goal.goalId)
+                                        .reduce(
+                                            (prev, curr) =>
+                                                ({
+                                                    // We run this reduce solely to aggregate estimates for ascension goals that include
+                                                    // both non-mythic and mythic shards, that's why we ignore other fields.
+                                                    ...curr,
+                                                    oTokensTotal: (prev?.oTokensTotal ?? 0) + (curr.oTokensTotal ?? 0),
+                                                    daysLeft: Math.max(prev?.daysLeft ?? 0, curr.daysLeft ?? 0),
+                                                    daysTotal: (prev?.daysTotal ?? 0) + (curr.daysTotal ?? 0),
+                                                }) as IGoalEstimate
+                                        )}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                     bgColor={GoalService.getBackgroundColor(
                                         viewPreferences.goalColorMode,

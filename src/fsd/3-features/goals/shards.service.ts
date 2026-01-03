@@ -64,6 +64,7 @@ export class ShardsService {
         ...goals: Array<ICharacterAscendGoal | ICharacterUnlockGoal>
     ): IEstimatedShards {
         const materials = this.convertGoalsToMaterials(settings, goals);
+        console.log('Converted materials:', materials);
 
         // Respect user's daily energy preference for farming shards
         // Sort materials by priority (e.g., daysTotal ascending, or as-is)
@@ -205,12 +206,18 @@ export class ShardsService {
             }
 
             const isBlocked = !raidsLocations.length;
-            const shardsLeft = material.requiredCount - material.acquiredCount;
+            const shardsLeft =
+                material.requiredMythicCount > 0
+                    ? material.requiredMythicCount - material.acquiredMythicCount
+                    : material.requiredCount - material.acquiredCount;
             let energyTotal = 0;
             let raidsTotal = 0;
             let shardsCollected = 0;
             let daysTotal = 0;
             let onslaughtTokens = 0;
+            for (const location of raidsLocations) {
+                console.log('location: ', location);
+            }
             while (!isBlocked && shardsCollected < shardsLeft) {
                 let leftToCollect = shardsLeft - shardsCollected;
                 for (const location of raidsLocations) {
@@ -275,11 +282,14 @@ export class ShardsService {
         const onslaughtTokenRefreshHours = 16;
         const onslaughtTokensPerDay = 24 / onslaughtTokenRefreshHours;
         const shardCount = mythic ? material.onslaughtMythicShards : material.onslaughtShards;
+        const itemsPerDay =
+            ((mythic ? material.onslaughtMythicShards : material.onslaughtShards) * onslaughtTokensPerDay) /
+            onslaughtMaxTokens;
 
         const onslaughtLocation: ICampaignBattleComposed = {
             id: 'Onslaught' + nodeNumber,
-            itemsPerDay: (material.onslaughtShards * onslaughtTokensPerDay) / onslaughtMaxTokens,
-            dropRate: (material.onslaughtMythicShards * onslaughtTokensPerDay) / onslaughtMaxTokens,
+            itemsPerDay: itemsPerDay,
+            dropRate: itemsPerDay,
             dailyBattleCount: onslaughtTokensPerDay / onslaughtMaxTokens,
             rarity: 'Shard',
             rarityEnum: Rarity.Legendary,
