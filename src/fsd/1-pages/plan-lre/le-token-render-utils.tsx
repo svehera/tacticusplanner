@@ -101,7 +101,11 @@ export const renderRestrictions = (
                         borderRadius: '4px',
                         padding: '2px',
                     }}>
-                    <LreReqImage iconId={restrict.iconId} tooltip={restrict.name} sizePx={sizePx ?? 25} />
+                    <LreReqImage
+                        iconId={restrict.iconId}
+                        tooltip={`${restrict.name} - ${restrict.pointsPerBattle}`}
+                        sizePx={sizePx ?? 25}
+                    />
                 </div>
             );
         })}
