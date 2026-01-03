@@ -18,3 +18,11 @@ export const STATUS_COLORS: Record<RequirementStatus, string> = {
     [RequirementStatus.StopHere]: '#be123c', // Red
     [RequirementStatus.PartiallyCleared]: '#2196f3', // Blue
 };
+
+export const STATUS_LABEL_TEXT: Record<RequirementStatus, string> = {
+    [RequirementStatus.NotCleared]: 'Not Cleared',
+    [RequirementStatus.Cleared]: 'Cleared',
+    [RequirementStatus.MaybeClear]: 'Maybe Clear',
+    [RequirementStatus.StopHere]: 'Stop Here',
+    [RequirementStatus.PartiallyCleared]: 'Partially Cleared',
+};

@@ -84,6 +84,7 @@ export const LeTokenomics: React.FC<Props> = ({
                             token={firstToken}
                             index={firstTokenIndex}
                             renderMode={LeTokenCardRenderMode.kStandalone}
+                            currentPoints={currentPoints}
                             renderMilestone={index => renderMilestone(index)}
                             renderRestrictions={x =>
                                 renderRestrictions(
