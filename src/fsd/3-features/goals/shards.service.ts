@@ -64,7 +64,6 @@ export class ShardsService {
         ...goals: Array<ICharacterAscendGoal | ICharacterUnlockGoal>
     ): IEstimatedShards {
         const materials = this.convertGoalsToMaterials(settings, goals);
-        console.log('Converted materials:', materials);
 
         // Respect user's daily energy preference for farming shards
         // Sort materials by priority (e.g., daysTotal ascending, or as-is)
