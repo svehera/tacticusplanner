@@ -6,12 +6,11 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
-import { ILegendaryEvent } from '@/fsd/3-features/lre';
+import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 import { ProgressState, LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { ILreProgressModel, ILreOccurrenceProgress, ILreBattleRequirementsProgress } from './lre.models';
 import { LreService } from './lre.service';
-
 export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     const { leProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -87,11 +86,11 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
                     // When completed, always set to Cleared status (unless preserving PartiallyCleared for killScore/highScore)
                     status:
                         !forceOverwrite &&
-                        reqProgress.status === 4 &&
+                        reqProgress.status === RequirementStatus.PartiallyCleared &&
                         (reqProgress.id === LrePointsCategoryId.killScore ||
                             reqProgress.id === LrePointsCategoryId.highScore)
-                            ? 4 // Preserve PartiallyCleared for killScore/highScore
-                            : 1, // RequirementStatus.Cleared
+                            ? RequirementStatus.PartiallyCleared
+                            : RequirementStatus.Cleared,
                     // Clear killScore/highScore when forcing to Cleared
                     killScore: forceOverwrite ? undefined : reqProgress.killScore,
                     highScore: forceOverwrite ? undefined : reqProgress.highScore,

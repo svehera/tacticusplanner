@@ -8,7 +8,7 @@ import { LrePointsCategoryId, ProgressState } from '@/fsd/3-features/lre-progres
 import { BattleStatusCheckbox } from './battle-status-checkbox';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreBattleProgress, ILreBattleRequirementsProgress } from './lre.models';
-import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
+import { STATUS_COLORS, STATUS_LABELS, STATUS_LABEL_TEXT } from './requirement-status-constants';
 
 interface Props {
     battle: ILreBattleProgress;
@@ -274,6 +274,8 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
                                         ref={el => {
                                             if (el) {
                                                 buttonRefs.current.set(req.id, el);
+                                            } else {
+                                                buttonRefs.current.delete(req.id);
                                             }
                                         }}
                                         onClick={() => {
@@ -288,7 +290,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
                                         onMouseLeave={handlePressEnd}
                                         onTouchStart={() => handlePressStart(req)}
                                         onTouchEnd={handlePressEnd}
-                                        aria-label={`${req.id} - ${STATUS_LABELS[status]}`}
+                                        aria-label={`${req.id} - ${STATUS_LABEL_TEXT[status] || 'Unknown'}`}
                                         aria-pressed={status === RequirementStatus.Cleared}
                                         aria-haspopup="menu"
                                         aria-expanded={showDropdown === req.id}

@@ -190,7 +190,6 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                             key={req.id}
                                             className={`flex items-center justify-center ${index === firstRestrictionIndex ? 'ml-4' : ''}`}>
                                             <LreReqImage
-                                                key={req.id}
                                                 iconId={req.iconId}
                                                 tooltip={req.name}
                                                 sizePx={isMobile ? 25 : 30}
