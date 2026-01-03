@@ -15,6 +15,8 @@ interface CardProps {
     onToggleBattle: (index: number) => void;
     // If this is provided, show a complete battle button.
     onCompleteBattle?: () => void;
+    // Current progress points - used in standalone mode to show non-cumulative total
+    currentPoints?: number;
 }
 
 export const LeTokenCard: React.FC<CardProps> = ({
@@ -27,10 +29,18 @@ export const LeTokenCard: React.FC<CardProps> = ({
     isBattleVisible,
     onToggleBattle,
     onCompleteBattle,
+    currentPoints,
 }: CardProps) => {
     const hasMilestone =
         token.milestoneAchievedIndex !== -1 && token.milestoneAchievedIndex < milestonesAndPoints.length;
     const widthClass = renderMode === LeTokenCardRenderMode.kInGrid ? '' : 'lg:w-full';
+
+    // For standalone mode (Next Token card), show currentPoints + incrementalPoints
+    // For grid mode (table view), show cumulative totalPoints
+    const displayTotalPoints =
+        renderMode === LeTokenCardRenderMode.kStandalone && currentPoints !== undefined
+            ? currentPoints + token.incrementalPoints
+            : token.totalPoints;
 
     // Use Tailwind dark: classes for theme handling
     const bgClass = hasMilestone ? 'bg-blue-50 dark:bg-gray-800/80' : 'bg-gray-100 dark:bg-gray-900';
@@ -56,7 +66,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                     <div className="text-right">
                         <div className="text-xs text-gray-600 dark:text-gray-400">Total Points</div>
                         <div className="font-mono text-lg font-bold text-blue-600 dark:text-blue-400">
-                            {token.totalPoints}
+                            {displayTotalPoints}
                         </div>
                     </div>
 

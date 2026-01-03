@@ -14,9 +14,10 @@ import { AccessibleTooltip, ConfirmationDialog } from '@/fsd/5-shared/ui';
 import { LegendaryEventEnum, LreReqImage, LreTrackId } from '@/fsd/4-entities/lre';
 
 import { RequirementStatus, ILreTeam } from '@/fsd/3-features/lre';
-import { LrePointsCategoryId, ProgressState } from '@/fsd/3-features/lre-progress';
+import { ProgressState } from '@/fsd/3-features/lre-progress';
 
 import { LreTrackBattleSummary } from './le-track-battle';
+import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreTrackProgress } from './lre.models';
 
 interface Props {
@@ -62,37 +63,11 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
     }, [teams, track.trackId, track.battles.length]);
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
 
-    // Helper to get points from a requirement, accounting for partial kill scores
-    const getRequirementPoints = (req: {
-        completed: boolean;
-        status?: RequirementStatus;
-        killScore?: number;
-        points: number;
-        id: string;
-    }) => {
-        // Check if new status system is being used
-        if (req.status !== undefined) {
-            const status = req.status as RequirementStatus;
-
-            // Only Cleared and PartiallyCleared contribute points
-            if (status === RequirementStatus.Cleared) {
-                return req.points;
-            }
-            if (
-                status === RequirementStatus.PartiallyCleared &&
-                req.id === LrePointsCategoryId.killScore &&
-                req.killScore
-            ) {
-                return req.killScore;
-            }
-            return 0;
-        }
-
-        // Legacy: use completed flag
-        return req.completed ? req.points : 0;
-    };
-
-    const currentPoints = sum(track.battles.flatMap(x => x.requirementsProgress).map(req => getRequirementPoints(req)));
+    const currentPoints = sum(
+        track.battles
+            .flatMap(x => x.requirementsProgress)
+            .map(req => LreRequirementStatusService.getRequirementPoints(req))
+    );
 
     const getReqProgress = (reqId: string) => {
         return track.battles
@@ -111,7 +86,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
             track.battles
                 .flatMap(x => x.requirementsProgress)
                 .filter(x => x.id === reqId)
-                .map(req => getRequirementPoints(req))
+                .map(req => LreRequirementStatusService.getRequirementPoints(req))
         );
     };
 
@@ -206,16 +181,23 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                 </AccessibleTooltip>
                             </div>
                             <div className="flex flex-row justify-between flex-1">
-                                {track.requirements.map(req => (
-                                    <div key={req.id} className="flex items-center justify-center">
-                                        <LreReqImage
+                                {(() => {
+                                    const firstRestrictionIndex = LreRequirementStatusService.getFirstRestrictionIndex(
+                                        track.requirements
+                                    );
+                                    return track.requirements.map((req, index) => (
+                                        <div
                                             key={req.id}
-                                            iconId={req.iconId}
-                                            tooltip={req.name}
-                                            sizePx={isMobile ? 25 : 30}
-                                        />
-                                    </div>
-                                ))}
+                                            className={`flex items-center justify-center ${index === firstRestrictionIndex ? 'ml-4' : ''}`}>
+                                            <LreReqImage
+                                                key={req.id}
+                                                iconId={req.iconId}
+                                                tooltip={req.name}
+                                                sizePx={isMobile ? 25 : 30}
+                                            />
+                                        </div>
+                                    ));
+                                })()}
                             </div>
                         </div>
                         {track.battles.map(battle => (
