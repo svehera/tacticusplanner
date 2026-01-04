@@ -25,6 +25,7 @@ import { LeProgress } from './le-progress';
 import { useLreProgress } from './le-progress.hooks';
 import { LeTokenomics } from './le-tokenomics';
 import { LegendaryEvent } from './legendary-event';
+import { LegendaryEventSettings } from './legendary-event-settings';
 import { useLre } from './lre-hook';
 import { LreSectionsSettings } from './lre-sections-settings';
 import { LreSettings } from './lre-settings';
@@ -137,6 +138,8 @@ export const Lre: React.FC = () => {
                 return battles !== undefined && <LeBattles key="battles" battles={battles} />;
             case LreSection.leaderboard:
                 return <PointsTable legendaryEvent={legendaryEvent} />;
+            case LreSection.settings:
+                return <LegendaryEventSettings />;
             default:
                 return <div>Default Content</div>;
         }
@@ -164,6 +167,7 @@ export const Lre: React.FC = () => {
                     <Tab label="Tokenomics" value={LreSection.tokenomics} />
                     <Tab label="Battles" value={LreSection.battles} />
                     <Tab label="Leaderboard" value={LreSection.leaderboard} />
+                    <Tab label="Settings" value={LreSection.settings} />
                 </Tabs>
                 {[LreSection.teams].includes(section) && (
                     <>

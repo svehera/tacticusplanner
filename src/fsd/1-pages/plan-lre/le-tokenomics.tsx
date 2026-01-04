@@ -80,13 +80,17 @@ export const LeTokenomics: React.FC<Props> = ({
         const EVENT_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
         return Math.max(EVENT_DURATION - (now - eventStartTime), 0);
     };
+
+    const freeTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (3 * 60 * 60 * 1000));
+    const adTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (24 * 60 * 60 * 1000));
+
     return (
         <div className="flex flex-col w-full gap-y-8">
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        <div>Free Tokens Remaining: {Math.floor(millisRemaining() / (3 * 60 * 60 * 1000))}</div>
-                        <div>Ad Tokens Remaining: {Math.floor(millisRemaining() / (24 * 60 * 60 * 1000))}</div>
+                        <div>Free Tokens Remaining: {freeTokensRemaining}</div>
+                        <div>Ad Tokens Remaining: {adTokensRemaining}</div>
                     </div>
                     <div>
                         <h3 className="text-lg font-bold">Next Token</h3>
