@@ -7,13 +7,10 @@ export type LeSettingsAction =
       }
     | SetStateAction<ILegendaryEventSettings>;
 
-export const leSettingsReducer = (
-    state: ILegendaryEventSettings,
-    action: LeSettingsAction
-): ILegendaryEventSettings => {
+export const leSettingsReducer = (_: ILegendaryEventSettings, action: LeSettingsAction): ILegendaryEventSettings => {
     switch (action.type) {
         case 'Set': {
-            return state;
+            return action.value;
         }
         default: {
             throw new Error();

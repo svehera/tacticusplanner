@@ -34,7 +34,7 @@ import PointsTable from './points-table';
 import { TokenEstimationService } from './token-estimation-service';
 
 export const Lre: React.FC = () => {
-    const { leSelectedTeams, viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
+    const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
     const { toggleBattleState } = useLreProgress(legendaryEvent);
     const { model } = useLreProgress(legendaryEvent);
@@ -58,7 +58,7 @@ export const Lre: React.FC = () => {
             .reduce((a, b) => a + b, 0);
     }, [model, legendaryEvent]);
 
-    useEffect(() => {}, [section]);
+    useEffect(() => {}, [section, leSettings]);
 
     const updateSettings = (
         settings: ILreViewSettings,
@@ -131,6 +131,7 @@ export const Lre: React.FC = () => {
                         tokenDisplays={tokenDisplays}
                         tracksProgress={model.tracksProgress}
                         currentPoints={currentPoints}
+                        showP2P={leSettings.showP2POptions}
                         eventStartTime={eventStartTime()}
                         nextTokenCompleted={nextTokenCompleted}
                         toggleBattleState={toggleBattleState}
@@ -154,8 +155,6 @@ export const Lre: React.FC = () => {
     function toggleGoalsPreview() {
         updateGoalsPreview(!viewPreferences.lreGoalsPreview);
     }
-
-    console.log('section: ', section, ' - ', LreSection[section]);
 
     return (
         <>

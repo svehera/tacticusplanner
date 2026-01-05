@@ -23,6 +23,7 @@ interface Props {
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
     eventStartTime: number | undefined;
+    showP2P: boolean;
     nextTokenCompleted: (tokenIndex: number) => void;
     toggleBattleState: (
         trackId: 'alpha' | 'beta' | 'gamma',
@@ -44,6 +45,7 @@ export const LeTokenomics: React.FC<Props> = ({
     tokenDisplays,
     tracksProgress,
     eventStartTime,
+    showP2P,
     nextTokenCompleted,
     toggleBattleState,
 }: Props) => {
@@ -51,10 +53,12 @@ export const LeTokenomics: React.FC<Props> = ({
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
 
-    const achievedMilestones = milestonesAndPoints.filter(milestone => currentPoints >= milestone.points);
+    const achievedMilestones = milestonesAndPoints.filter(
+        milestone => currentPoints >= milestone.points && (showP2P || milestone.packsPerRound === 0)
+    );
 
     const missedMilestones = milestonesAndPoints
-        .filter(milestone => milestone.points > finalProjectedPoints)
+        .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
         .sort((a, b) => a.points - b.points);
 
     // Helper function to check if a token has yellow or red restrictions
@@ -101,7 +105,7 @@ export const LeTokenomics: React.FC<Props> = ({
                             index={firstTokenIndex}
                             renderMode={LeTokenCardRenderMode.kStandalone}
                             currentPoints={currentPoints}
-                            renderMilestone={index => renderMilestone(index)}
+                            renderMilestone={index => renderMilestone(index, showP2P)}
                             renderRestrictions={x =>
                                 renderRestrictions(
                                     x,

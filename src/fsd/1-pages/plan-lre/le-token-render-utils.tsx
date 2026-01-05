@@ -34,8 +34,12 @@ const getSeverityClass = (severity: number) => {
     return classes[index];
 };
 
-export const renderMilestone = (milestoneIndex: number) => {
-    if (milestoneIndex === -1 || milestoneIndex >= milestonesAndPoints.length) {
+export const renderMilestone = (milestoneIndex: number, showP2P: boolean) => {
+    if (
+        milestoneIndex === -1 ||
+        milestoneIndex >= milestonesAndPoints.length ||
+        (!showP2P && milestonesAndPoints[milestoneIndex].packsPerRound > 0)
+    ) {
         return <></>;
     }
     const milestone = milestonesAndPoints[milestoneIndex];

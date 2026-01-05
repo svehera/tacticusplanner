@@ -7,6 +7,7 @@ interface CardProps {
     token: TokenDisplay;
     index: number;
     renderMode: LeTokenCardRenderMode;
+    showP2P: boolean;
     renderMilestone: (milestoneIndex: number) => JSX.Element;
     renderRestrictions: (restricts: any[], track: string, battleNumber: number) => JSX.Element;
     renderTeam: (team: string[]) => JSX.Element;
