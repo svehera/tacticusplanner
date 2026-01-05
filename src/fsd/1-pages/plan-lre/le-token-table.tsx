@@ -14,12 +14,13 @@ import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
-import { LeTokenCardRenderMode } from './lre.models';
+import { ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
 import { TokenDisplay } from './token-estimation-service';
 
 interface Props {
     battles: ILeBattles | undefined;
     tokenDisplays: TokenDisplay[];
+    tracksProgress: ILreTrackProgress[];
     toggleBattleState: (
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
@@ -32,7 +33,7 @@ interface Props {
  * Displays the tokens to be used by the player in optimal order, along with
  * various statistics about each milestone.
  */
-export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBattleState }: Props) => {
+export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, tracksProgress, toggleBattleState }: Props) => {
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -168,7 +169,13 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
                                         <td className="px-3 py-2">{token.track}</td>
                                         <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
                                         <td className="px-3 py-2 h-full flex items-center justify-center">
-                                            {renderRestrictions(token.restricts, token.track, token.battleNumber, 25)}
+                                            {renderRestrictions(
+                                                token.restricts,
+                                                tracksProgress,
+                                                token.track as 'alpha' | 'beta' | 'gamma',
+                                                token.battleNumber,
+                                                25
+                                            )}
                                         </td>
                                         <td className="px-3 py-2 text-right font-mono">{token.incrementalPoints}</td>
                                         <td className="px-3 py-2 text-right font-bold font-mono text-blue-400">
@@ -202,7 +209,15 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, toggleBa
                                     renderMode={LeTokenCardRenderMode.kInGrid}
                                     token={token}
                                     renderMilestone={x => renderMilestone(x)}
-                                    renderRestrictions={x => renderRestrictions(x, token.track, token.battleNumber, 35)}
+                                    renderRestrictions={x =>
+                                        renderRestrictions(
+                                            x,
+                                            tracksProgress,
+                                            token.track as 'alpha' | 'beta' | 'gamma',
+                                            token.battleNumber,
+                                            35
+                                        )
+                                    }
                                     renderTeam={x => renderTeam(x, 30)}
                                     isBattleVisible={isVisible}
                                     onToggleBattle={onToggleBattle}

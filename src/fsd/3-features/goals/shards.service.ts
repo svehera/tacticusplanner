@@ -29,7 +29,7 @@ import {
     IItemRaidLocation,
     IShardMaterial,
     IShardsRaid,
-    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+    // eslint-disable-next-line import-x/no-internal-modules
 } from '@/fsd/3-features/goals/goals.models';
 
 export class ShardsService {
@@ -70,7 +70,7 @@ export class ShardsService {
         // Then, only include as many as can fit in the user's daily energy budget for shards
         const energyBudget = settings.preferences.shardsEnergy ?? 0;
         let runningEnergy = 0;
-        const allowedMaterials: typeof materials = [];
+        const allowedMaterials: ICharacterShardsEstimate[] = [];
 
         for (const material of materials) {
             if (runningEnergy + material.energyPerDay <= energyBudget) {
@@ -120,13 +120,42 @@ export class ShardsService {
         };
     }
 
+    /**
+     * Converts a list of character ascension or unlock goals into a detailed farming estimate for the required character shards.
+     *
+     * @description
+     * This method takes user settings and a list of character goals, then calculates the resources and time needed to acquire the necessary shards.
+     *
+     * The process involves several steps:
+     * 1. **Initial Conversion**: Each goal is converted into a base material requirement. Goals for characters that are already fully acquired are filtered out.
+     * 2. **Location Filtering**: For each character's shards, determines the available farming locations by filtering all possible locations based on:
+     *    - The user's current progress in each campaign (`settings.campaignsProgress`).
+     *    - Any active global filters (`settings.filters`).
+     *    - The user's selected campaign event, if a location is part of a limited-time event.
+     * 3. **Optimal Location Selection**: Based on the character's `campaignsUsage` strategy ('LeastEnergy' or 'BestTime'), it selects the most efficient set of `raidsLocations` from the available ones. It also adds Onslaught locations if applicable.
+     * 4. **Farming Simulation**: It simulates the farming process day-by-day to estimate:
+     *    - `daysTotal`: The total number of days required.
+     *    - `energyTotal`: The total energy cost.
+     *    - `raidsTotal`: The total number of battles (raids).
+     *    - `onslaughtTokensTotal`: The total number of Onslaught tokens needed.
+     *    The simulation accounts for daily energy limits on nodes and the unique mechanics of Onslaught, including token costs which are influenced by the farming order of other characters.
+     * 5. **Result Compilation**: Returns an array of `ICharacterShardsEstimate` objects, one for each character goal. Each object contains the detailed simulation results, the list of available and selected farming locations, and a flag (`isBlocked`) to indicate if farming is currently impossible due to no unlocked locations.
+     *
+     * @param settings - The user's settings, including campaign progress, preferences, and filters.
+     * @param goals - An array of character goals, which can be for ascending or unlocking characters.
+     * @returns An array of `ICharacterShardsEstimate`, each providing a detailed farming plan for a single character's shards.
+     */
     public static convertGoalsToMaterials(
         settings: IEstimatedAscensionSettings,
         goals: Array<ICharacterAscendGoal | ICharacterUnlockGoal>
     ): ICharacterShardsEstimate[] {
         const materials = goals
-            .map(goal => this.convertGoalToMaterial(goal))
-            .filter(x => x.acquiredCount < x.requiredCount);
+            .flatMap(goal => [this.convertGoalToMaterial(goal), this.convertGoalToMythicMaterial(goal)])
+            .filter(
+                x =>
+                    (x.requiredCount > 0 && x.acquiredCount < x.requiredCount) ||
+                    (x.requiredMythicCount > 0 && x.acquiredMythicCount < x.requiredMythicCount)
+            );
         const currCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
 
         const result: ICharacterShardsEstimate[] = [];
@@ -162,19 +191,32 @@ export class ShardsService {
 
             if (material.onslaughtShards > 0) {
                 raidsLocations.push(
-                    this.getOnslaughtLocation(material, 1),
-                    this.getOnslaughtLocation(material, 2),
-                    this.getOnslaughtLocation(material, 3)
+                    this.getOnslaughtLocation(material, /*mythic=*/ false, 1),
+                    this.getOnslaughtLocation(material, /*mythic=*/ false, 2),
+                    this.getOnslaughtLocation(material, /*mythic=*/ false, 3)
+                );
+            }
+            if (material.onslaughtMythicShards > 0) {
+                raidsLocations.push(
+                    this.getOnslaughtLocation(material, /*mythic=*/ true, 1),
+                    this.getOnslaughtLocation(material, /*mythic=*/ true, 2),
+                    this.getOnslaughtLocation(material, /*mythic=*/ true, 3)
                 );
             }
 
             const isBlocked = !raidsLocations.length;
-            const shardsLeft = material.requiredCount - material.acquiredCount;
+            const shardsLeft =
+                material.requiredMythicCount > 0
+                    ? material.requiredMythicCount - material.acquiredMythicCount
+                    : material.requiredCount - material.acquiredCount;
             let energyTotal = 0;
             let raidsTotal = 0;
             let shardsCollected = 0;
             let daysTotal = 0;
             let onslaughtTokens = 0;
+            for (const location of raidsLocations) {
+                console.log('location: ', location);
+            }
             while (!isBlocked && shardsCollected < shardsLeft) {
                 let leftToCollect = shardsLeft - shardsCollected;
                 for (const location of raidsLocations) {
@@ -230,27 +272,32 @@ export class ShardsService {
                 energyPerDay,
             });
         }
+
         return result;
     }
 
-    private static getOnslaughtLocation(material: IShardMaterial, nodeNumber: 1 | 2 | 3) {
+    private static getOnslaughtLocation(material: IShardMaterial, mythic: boolean, nodeNumber: 1 | 2 | 3) {
         const onslaughtMaxTokens = 3;
         const onslaughtTokenRefreshHours = 16;
         const onslaughtTokensPerDay = 24 / onslaughtTokenRefreshHours;
+        const shardCount = mythic ? material.onslaughtMythicShards : material.onslaughtShards;
+        const itemsPerDay =
+            ((mythic ? material.onslaughtMythicShards : material.onslaughtShards) * onslaughtTokensPerDay) /
+            onslaughtMaxTokens;
 
         const onslaughtLocation: ICampaignBattleComposed = {
             id: 'Onslaught' + nodeNumber,
-            itemsPerDay: (material.onslaughtShards * onslaughtTokensPerDay) / onslaughtMaxTokens,
-            dropRate: (material.onslaughtShards * onslaughtTokensPerDay) / onslaughtMaxTokens,
+            itemsPerDay: itemsPerDay,
+            dropRate: itemsPerDay,
             dailyBattleCount: onslaughtTokensPerDay / onslaughtMaxTokens,
             rarity: 'Shard',
             rarityEnum: Rarity.Legendary,
             rewards: {
                 guaranteed: [
                     {
-                        id: material.characterId,
-                        min: material.onslaughtShards,
-                        max: material.onslaughtShards,
+                        id: (mythic ? 'mythicShards_' : 'shards_') + material.characterId,
+                        min: shardCount,
+                        max: shardCount,
                     },
                 ],
                 potential: [],
@@ -265,7 +312,7 @@ export class ShardsService {
             enemiesFactions: [],
             enemiesAlliances: [],
             alliesFactions: [],
-            alliesAlliance: Alliance.Chaos,
+            alliesAlliance: Alliance.Chaos, // Doesn't matter, just need a placeholder.
             enemiesTypes: [],
             enemiesTotal: 0,
         };
@@ -287,7 +334,32 @@ export class ShardsService {
             relatedCharacters: [goal.unitName],
             possibleLocations,
             onslaughtShards: goal.type === PersonalGoalType.Ascend ? goal.onslaughtShards : 0,
+            onslaughtMythicShards: 0,
+            acquiredMythicCount: 0,
+            requiredMythicCount: 0,
             campaignsUsage: goal.campaignsUsage,
+        };
+    }
+
+    private static convertGoalToMythicMaterial(goal: ICharacterAscendGoal | ICharacterUnlockGoal): IShardMaterial {
+        const targetMythicShards = goal.type === PersonalGoalType.Ascend ? this.getTargetMythicShards(goal) : 0;
+        const possibleLocations = StaticDataService.getItemLocations(`mythicShards_${goal.unitId}`);
+
+        return {
+            goalId: goal.goalId,
+            characterId: goal.unitId,
+            label: goal.unitName,
+            acquiredCount: 0,
+            requiredCount: 0,
+            iconPath: goal.unitRoundIcon,
+            relatedCharacters: [goal.unitName],
+            possibleLocations,
+            onslaughtShards: 0,
+            onslaughtMythicShards: goal.type === PersonalGoalType.Ascend ? goal.onslaughtMythicShards : 0,
+            acquiredMythicCount: goal.mythicShards ?? 0,
+            requiredMythicCount: targetMythicShards,
+            campaignsUsage:
+                'mythicCampaignsUsage' in goal ? goal.mythicCampaignsUsage : CampaignsLocationsUsage.LeastEnergy,
         };
     }
 
@@ -355,6 +427,20 @@ export class ShardsService {
         for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
             const progressionRequirements = charsProgression[i];
             targetShards += progressionRequirements.shards ?? 0;
+        }
+
+        return targetShards;
+    }
+
+    public static getTargetMythicShards(goal: ICharacterAscendGoal): number {
+        const currentCharProgression = goal.rarityStart + goal.starsStart;
+        const targetProgression = goal.rarityEnd + (goal.starsEnd || RarityMapper.toStars[goal.rarityEnd]);
+
+        let targetShards = 0;
+
+        for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
+            const progressionRequirements = charsProgression[i];
+            targetShards += progressionRequirements.mythicShards ?? 0;
         }
 
         return targetShards;

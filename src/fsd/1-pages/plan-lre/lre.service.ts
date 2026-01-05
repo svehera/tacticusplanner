@@ -116,6 +116,7 @@ export class LreService {
                         blocked: reqProgress?.state === ProgressState.blocked,
                         status: reqProgress?.status, // Load new status field
                         killScore: reqProgress?.scoredPoints, // Load kill score from scoredPoints
+                        highScore: reqProgress?.highScoredPoints, // Load high score from highScoredPoints
                     };
                 });
                 battles.push({
@@ -188,6 +189,7 @@ export class LreService {
                                   : ProgressState.none,
                             status: requirement.status, // Save new status field
                             scoredPoints: requirement.killScore, // Save kill score as scoredPoints
+                            highScoredPoints: requirement.highScore, // Save high score as highScoredPoints
                         }))
                         .filter(x => x.state !== ProgressState.none || x.status !== undefined),
                 }))

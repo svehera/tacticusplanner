@@ -14,7 +14,7 @@ export type XpUseAction =
 export const xpUseActionReducer = (state: XpUseState, action: XpUseAction): XpUseState => {
     switch (action.type) {
         case 'Set': {
-            return action.value ?? defaultData.xpUseState;
+            return action.value ?? defaultData.xpUse;
         }
 
         case 'SaveXpUseState': {
