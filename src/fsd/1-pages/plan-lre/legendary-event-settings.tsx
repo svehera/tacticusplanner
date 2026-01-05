@@ -67,7 +67,6 @@ export const LegendaryEventSettings: React.FC = () => {
         setDefaultPageWhenEventIsActive(leSettings.defaultPageForActiveEvent);
         setDefaultPageWhenEventIsInactive(leSettings.defaultPageWhenEventNotActive);
         setShowP2P(leSettings.showP2POptions);
-        console.log('leSettings: ', leSettings);
     }, [leSettings]);
 
     const update = (settings: ILegendaryEventSettings) => {
