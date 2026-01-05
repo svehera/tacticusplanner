@@ -28,7 +28,15 @@ export const useLre = () => {
         value => LegendaryEventEnum[value]
     );
 
-    const isEventActive = LegendaryEventService.getActiveEvent()?.id === legendaryEventId;
+    const isEventActive = useMemo(() => {
+        const event = LegendaryEventService.getActiveEvent();
+        if (event === undefined) return false;
+        if (event.id !== legendaryEventId) return false;
+        const startDate = new Date(event.nextEventDateUtc ?? '');
+        const endDate = startDate.getTime() + 7 * 24 * 60 * 60 * 1000;
+        const now = new Date().getTime();
+        return now >= startDate.getTime() && now <= endDate;
+    }, [legendaryEventId]);
 
     const mapDefaultToPage = (page: LegendaryEventDefaultPage) => {
         switch (page) {
@@ -57,9 +65,7 @@ export const useLre = () => {
         if (!url.searchParams.has('section')) {
             setSection(getDefaultPage());
         }
-    }, [legendaryEventId]);
-
-    useEffect(() => {}, [leSettings]);
+    }, [legendaryEventId, leSettings]);
 
     const [showSettings, setShowSettings] = useState(false);
 

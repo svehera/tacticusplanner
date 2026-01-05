@@ -7,7 +7,6 @@ interface CardProps {
     token: TokenDisplay;
     index: number;
     renderMode: LeTokenCardRenderMode;
-    showP2P: boolean;
     renderMilestone: (milestoneIndex: number) => JSX.Element;
     renderRestrictions: (restricts: any[], track: string, battleNumber: number) => JSX.Element;
     renderTeam: (team: string[]) => JSX.Element;
@@ -65,7 +64,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                 transition-all ease-in-out
                 ${opacityClass} 
             `}
-            style={{ transitionDuration: `${COMPLETE_DELAY_MILLIS}ms` }}>
+            style={{ '--complete-delay': `${COMPLETE_DELAY_MILLIS}ms` } as React.CSSProperties}>
             <div className="flex items-center justify-between pb-2 border-b border-gray-300 dark:border-gray-800">
                 <div className="flex items-center gap-2">
                     <span className="px-2 py-1 text-xs font-bold text-gray-800 bg-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-200">
@@ -95,11 +94,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                                 }
                             }}
                             disabled={isCompleting}
-                            className={
-                                'text-xs font-semibold text-green-600 uppercase transition-colors duration-' +
-                                COMPLETE_DELAY_MILLIS +
-                                ' disabled:opacity-50 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 focus:outline-none'
-                            }
+                            className="text-xs font-semibold text-green-600 uppercase transition-colors duration-500 disabled:opacity-50 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 focus:outline-none"
                             title="Mark this battle as completed">
                             {isCompleting ? 'Completing...' : 'Mark Complete'}
                         </button>
