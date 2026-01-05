@@ -17,6 +17,7 @@ export enum LreSection {
     tokenomics,
     battles,
     leaderboard,
+    settings,
 }
 
 export interface ILreProgressModel {

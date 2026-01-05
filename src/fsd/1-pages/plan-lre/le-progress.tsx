@@ -17,7 +17,7 @@ import { LreTrackOverallProgress } from './le-track-overall-progress';
  * UI Element to display the progress of missions and tracks in a legendary event.
  */
 export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
-    const { leSelectedTeams } = useContext(StoreContext);
+    const { leSelectedTeams, leSettings } = useContext(StoreContext);
     const { model, updateNotes, updateOccurrenceProgress, toggleBattleState } = useLreProgress(legendaryEvent);
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
 
@@ -71,6 +71,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
 
                     {model.occurrenceProgress.map(occurrence => (
                         <LeProgressOverviewMissions
+                            showP2P={leSettings.showP2POptions}
                             key={occurrence.eventOccurrence}
                             occurrence={occurrence}
                             progressChange={updateOccurrenceProgress}
@@ -87,14 +88,16 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                             ))}
                         </div>
 
-                        <div className="flex-box column start flex-1 min-w-[450px]">
-                            <h4>Premium missions</h4>
-                            {model.premiumMissions.map((mission, index) => (
-                                <span key={index}>
-                                    {index + 1}. {mission}
-                                </span>
-                            ))}
-                        </div>
+                        {leSettings.showP2POptions && (
+                            <div className="flex-box column start flex-1 min-w-[450px]">
+                                <h4>Premium missions</h4>
+                                {model.premiumMissions.map((mission, index) => (
+                                    <span key={index}>
+                                        {index + 1}. {mission}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </AccordionDetails>
             </Accordion>
