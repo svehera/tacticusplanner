@@ -215,7 +215,6 @@ export const LeTokenTable: React.FC<Props> = ({
                                     index={index}
                                     renderMode={LeTokenCardRenderMode.kInGrid}
                                     token={token}
-                                    showP2P={showP2P}
                                     renderMilestone={x => renderMilestone(x, showP2P)}
                                     renderRestrictions={x =>
                                         renderRestrictions(
