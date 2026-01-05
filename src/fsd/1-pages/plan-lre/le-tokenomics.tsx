@@ -105,6 +105,7 @@ export const LeTokenomics: React.FC<Props> = ({
                             index={firstTokenIndex}
                             renderMode={LeTokenCardRenderMode.kStandalone}
                             currentPoints={currentPoints}
+                            showP2P={showP2P}
                             renderMilestone={index => renderMilestone(index, showP2P)}
                             renderRestrictions={x =>
                                 renderRestrictions(
@@ -157,6 +158,7 @@ export const LeTokenomics: React.FC<Props> = ({
                     battles={battles}
                     tokenDisplays={tokenDisplays}
                     tracksProgress={tracksProgress}
+                    showP2P={showP2P}
                     toggleBattleState={toggleBattleState}
                 />
             </div>

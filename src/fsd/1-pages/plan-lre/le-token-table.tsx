@@ -21,6 +21,7 @@ interface Props {
     battles: ILeBattles | undefined;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
+    showP2P: boolean;
     toggleBattleState: (
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
@@ -33,7 +34,13 @@ interface Props {
  * Displays the tokens to be used by the player in optimal order, along with
  * various statistics about each milestone.
  */
-export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, tracksProgress, toggleBattleState }: Props) => {
+export const LeTokenTable: React.FC<Props> = ({
+    battles,
+    tokenDisplays,
+    tracksProgress,
+    showP2P,
+    toggleBattleState,
+}: Props) => {
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -164,7 +171,7 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, tracksPr
                                         className={`${getRowClassName(index)} border-t border-gray-300 dark:border-gray-700/50 hover:bg-gray-300 dark:hover:bg-gray-700 transition duration-150 ease-in-out`}>
                                         <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
                                         <td className="px-3 py-2 flex justify-center items-center h-full">
-                                            {renderMilestone(token.milestoneAchievedIndex)}
+                                            {renderMilestone(token.milestoneAchievedIndex, showP2P)}
                                         </td>
                                         <td className="px-3 py-2">{token.track}</td>
                                         <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
@@ -208,7 +215,8 @@ export const LeTokenTable: React.FC<Props> = ({ battles, tokenDisplays, tracksPr
                                     index={index}
                                     renderMode={LeTokenCardRenderMode.kInGrid}
                                     token={token}
-                                    renderMilestone={x => renderMilestone(x)}
+                                    showP2P={showP2P}
+                                    renderMilestone={x => renderMilestone(x, showP2P)}
                                     renderRestrictions={x =>
                                         renderRestrictions(
                                             x,
