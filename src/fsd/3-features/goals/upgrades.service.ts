@@ -249,7 +249,7 @@ export class UpgradesService {
     ): ICharacterUpgradeEstimate[] {
         return this.splitMaterials(
             location => this.getNonSummonMechanicalEnemyCount(location) >= minMechanicalEnemies,
-            location => this.getNonSummonMechanicalEnemyCount(location),
+            location => this.getNonSummonMechanicalEnemyCount(location) / location.energyCost,
             allMaterials
         );
     }
