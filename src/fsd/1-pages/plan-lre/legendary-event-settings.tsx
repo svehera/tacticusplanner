@@ -22,12 +22,6 @@ export const LegendaryEventSettings: React.FC = () => {
     const [showP2P, setShowP2P] = useState<boolean>(leSettings.showP2POptions);
 
     useEffect(() => {
-        setDefaultPageWhenEventIsActive(leSettings.defaultPageForActiveEvent);
-        setDefaultPageWhenEventIsInactive(leSettings.defaultPageWhenEventNotActive);
-        setShowP2P(leSettings.showP2POptions);
-    }, [leSettings]);
-
-    useEffect(() => {
         const settings: ILegendaryEventSettings = {
             defaultPageForActiveEvent: defaultPageWhenEventIsActive,
             defaultPageWhenEventNotActive: defaultPageWhenEventIsInactive,

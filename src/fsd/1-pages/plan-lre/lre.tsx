@@ -3,7 +3,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Switch, Tab, Tabs } from '@mui/material';
 import Button from '@mui/material/Button';
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -57,8 +57,6 @@ export const Lre: React.FC = () => {
             .map(track => TokenEstimationService.computeCurrentPoints(track))
             .reduce((a, b) => a + b, 0);
     }, [model, legendaryEvent]);
-
-    useEffect(() => {}, [section, leSettings]);
 
     const updateSettings = (
         settings: ILreViewSettings,

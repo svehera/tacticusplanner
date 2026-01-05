@@ -57,9 +57,7 @@ export const useLre = () => {
         if (!url.searchParams.has('section')) {
             setSection(getDefaultPage());
         }
-    }, [legendaryEventId]);
-
-    useEffect(() => {}, [leSettings]);
+    }, [legendaryEventId, leSettings]);
 
     const [showSettings, setShowSettings] = useState(false);
 

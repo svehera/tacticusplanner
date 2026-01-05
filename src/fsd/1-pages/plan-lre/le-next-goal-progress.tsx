@@ -1,7 +1,7 @@
 import { Info as InfoIcon } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
@@ -27,8 +27,6 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
     const totalChests = useMemo(() => {
         return model.chestsMilestones.length;
     }, []);
-
-    useEffect(() => {}, [leSettings]);
 
     const useP2P = leSettings.showP2POptions;
 
@@ -62,7 +60,7 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
                 getMissionsCurrency(x.freeMissionsProgress, useP2P ? x.premiumMissionsProgress : 0)
             )
         );
-    }, [regularMissions, premiumMissions]);
+    }, [regularMissions, premiumMissions, useP2P]);
 
     const premiumMissionsCurrency = useMemo(() => {
         return sum(
@@ -70,7 +68,7 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
                 getMissionsCurrency(x.premiumMissionsProgress, useP2P ? x.premiumMissionsProgress : 0)
             )
         );
-    }, [premiumMissions]);
+    }, [premiumMissions, useP2P]);
 
     const getBundleCurrency = (bundle: number, premiumMissionsCount: number) => {
         const additionalPayout = premiumMissionsCount > 0 ? 15 : 0;
