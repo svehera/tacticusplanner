@@ -64,7 +64,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                 transition-all ease-in-out
                 ${opacityClass} 
             `}
-            style={{ transitionDuration: `${COMPLETE_DELAY_MILLIS}ms` }}>
+            style={{ '--complete-delay': `${COMPLETE_DELAY_MILLIS}ms` } as React.CSSProperties}>
             <div className="flex items-center justify-between pb-2 border-b border-gray-300 dark:border-gray-800">
                 <div className="flex items-center gap-2">
                     <span className="px-2 py-1 text-xs font-bold text-gray-800 bg-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-200">
