@@ -27,7 +27,7 @@ interface HseBattle {
 }
 
 export const HomeScreenEvent = () => {
-    const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
+    const gridRef = useRef<AgGridReact<HseBattle>>(null);
     /**
      * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
      */
@@ -53,10 +53,11 @@ export const HomeScreenEvent = () => {
                     battle.detailedEnemyTypes
                         ?.filter(x => {
                             const npc = NpcService.getNpcById(x.id);
-                            if (npc === undefined) {
-                                console.warn('battle ', battle.id, ' has undefined npc ', x);
-                            }
-                            return npc!.traits.includes('Mechanical') && !npc!.traits.includes('Summon');
+                            return (
+                                npc !== undefined &&
+                                npc!.traits.includes('Mechanical') &&
+                                !npc!.traits.includes('Summon')
+                            );
                         })
                         ?.map(x => x.count)
                         .reduce((a, b) => a + b, 0) ?? 0;
@@ -240,7 +241,7 @@ export const HomeScreenEvent = () => {
             default:
                 return [];
         }
-    }, [selectedEvent, bestMachineHunt, bestPurgeOrder]);
+    }, [selectedEvent, bestMachineHunt, bestPurgeOrder, bestWarpSurge, bestTrainingRush]);
 
     const [columnDefs] = useState<Array<ColDef>>([
         {
@@ -333,8 +334,6 @@ export const HomeScreenEvent = () => {
             valueFormatter: params => ((params.data?.dropChance ?? 0) * 100).toFixed(2) + '%',
         },
     ]);
-
-    console.log('event', selectedEvent, '\nrowData:', rowData);
 
     return (
         <div>
