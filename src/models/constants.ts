@@ -12,7 +12,13 @@ import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/f
 import { ArenaLeague } from '@/fsd/1-pages/input-xp-income/models';
 
 import { DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
-import { ICharProgression, IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent, IPersonalData2 } from './interfaces';
+import {
+    ICharProgression,
+    IDailyRaidsFarmOrder,
+    IDailyRaidsHomeScreenEvent,
+    IPersonalData2,
+    LegendaryEventDefaultPage,
+} from './interfaces';
 
 export const rankToLevel: Record<Rank, number> = {
     [Rank.Locked - 1]: 0,
@@ -321,6 +327,11 @@ export const defaultData: IPersonalData2 = {
     leTeams: {},
     leProgress: {},
     leSelectedRequirements: {},
+    leSettings: {
+        defaultPageForActiveEvent: LegendaryEventDefaultPage.TOKENOMICS,
+        defaultPageWhenEventNotActive: LegendaryEventDefaultPage.TEAMS,
+        showP2POptions: true,
+    },
     campaignsProgress: defaultCampaignsProgress,
     inventory: {
         xpBooks: createRarityRecord(0),

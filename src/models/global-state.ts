@@ -25,6 +25,7 @@ import {
     IInventory,
     ILegendaryEventSelectedRequirements,
     ILegendaryEventSelectedTeams,
+    ILegendaryEventSettings,
     IPersonalCharacterData2,
     IPersonalData2,
     IPersonalGoal,
@@ -47,6 +48,7 @@ export class GlobalState implements IGlobalState {
     readonly teams: IPersonalTeam[];
     readonly leProgress: LegendaryEventData<ILreProgressDto>;
     readonly leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
+    readonly leSettings: ILegendaryEventSettings;
     readonly campaignsProgress: ICampaignsProgress;
     readonly inventory: IInventory;
     readonly dailyRaids: IDailyRaids;
@@ -66,6 +68,7 @@ export class GlobalState implements IGlobalState {
         this.leSelectedRequirements = personalData.leSelectedRequirements;
         this.leSelectedTeams = personalData.leTeams;
         this.leProgress = personalData.leProgress;
+        this.leSettings = personalData.leSettings;
         const chars = personalData.characters;
         this.characters = GlobalState.initCharacters(chars);
         this.mows = GlobalState.initMows(personalData.mows);
@@ -287,6 +290,7 @@ export class GlobalState implements IGlobalState {
             selectedTeamOrder: value.selectedTeamOrder,
             leTeams: value.leSelectedTeams,
             leProgress: value.leProgress,
+            leSettings: value.leSettings,
             leSelectedRequirements: value.leSelectedRequirements,
             characters: charactersToStore,
             mows: mowsToDb,

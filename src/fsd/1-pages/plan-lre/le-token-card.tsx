@@ -1,4 +1,4 @@
-import React, { JSX } from 'react';
+import React, { JSX, useState } from 'react';
 
 import { LeTokenCardRenderMode } from './lre.models';
 import { milestonesAndPoints, TokenDisplay } from './token-estimation-service';
@@ -19,6 +19,8 @@ interface CardProps {
     currentPoints?: number;
 }
 
+const COMPLETE_DELAY_MILLIS: number = 500;
+
 export const LeTokenCard: React.FC<CardProps> = ({
     token,
     index,
@@ -31,6 +33,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
     onCompleteBattle,
     currentPoints,
 }: CardProps) => {
+    const [isCompleting, setIsCompleting] = useState<boolean>(false);
     const hasMilestone =
         token.milestoneAchievedIndex !== -1 && token.milestoneAchievedIndex < milestonesAndPoints.length;
     const widthClass = renderMode === LeTokenCardRenderMode.kInGrid ? '' : 'lg:w-full';
@@ -50,9 +53,18 @@ export const LeTokenCard: React.FC<CardProps> = ({
 
     const toggleText = isBattleVisible ? 'Hide Battle' : 'Show Battle';
 
+    // 1. Define the dynamic opacity and pointer-events classes
+    const opacityClass = isCompleting ? 'opacity-0 pointer-events-none' : 'opacity-100';
+
     return (
         <div
-            className={`w-full ${widthClass} ${bgClass} rounded-xl border ${borderClass} p-4 flex flex-col gap-3 shadow-lg relative overflow-hidden transition-colors duration-200`}>
+            className={`
+                w-full ${widthClass} ${bgClass} rounded-xl border ${borderClass} p-4 
+                flex flex-col gap-3 shadow-lg relative overflow-hidden 
+                transition-all ease-in-out
+                ${opacityClass} 
+            `}
+            style={{ '--complete-delay': `${COMPLETE_DELAY_MILLIS}ms` } as React.CSSProperties}>
             <div className="flex items-center justify-between pb-2 border-b border-gray-300 dark:border-gray-800">
                 <div className="flex items-center gap-2">
                     <span className="px-2 py-1 text-xs font-bold text-gray-800 bg-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-200">
@@ -72,10 +84,19 @@ export const LeTokenCard: React.FC<CardProps> = ({
 
                     {onCompleteBattle && (
                         <button
-                            onClick={() => onCompleteBattle()}
-                            className="text-xs font-semibold text-green-600 uppercase transition-colors duration-150 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 focus:outline-none"
+                            onClick={() => {
+                                if (onCompleteBattle !== undefined) {
+                                    setIsCompleting(true);
+                                    setTimeout(() => {
+                                        setIsCompleting(false);
+                                        onCompleteBattle();
+                                    }, COMPLETE_DELAY_MILLIS);
+                                }
+                            }}
+                            disabled={isCompleting}
+                            className="text-xs font-semibold text-green-600 uppercase transition-colors duration-500 disabled:opacity-50 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 focus:outline-none"
                             title="Mark this battle as completed">
-                            Mark Complete
+                            {isCompleting ? 'Completing...' : 'Mark Complete'}
                         </button>
                     )}
                     <button

@@ -1,7 +1,10 @@
 import { Info as InfoIcon } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
 
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreProgressModel, ILreTrackProgress } from './lre.models';
@@ -11,6 +14,8 @@ interface Props {
 }
 
 export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
+    const { leSettings } = useContext(StoreContext);
+
     const totalPoints = useMemo(() => {
         return sum(model.tracksProgress.map(x => x.totalPoints));
     }, []);
@@ -23,6 +28,8 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
         return model.chestsMilestones.length;
     }, []);
 
+    const useP2P = leSettings.showP2POptions;
+
     const getCurrentPoints = (track: ILreTrackProgress) => {
         return sum(
             track.battles
@@ -33,7 +40,7 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
 
     const currentPoints = sum(model.tracksProgress.map(getCurrentPoints));
 
-    const premiumMissions = sum(model.occurrenceProgress.map(x => x.premiumMissionsProgress));
+    const premiumMissions = useP2P ? sum(model.occurrenceProgress.map(x => x.premiumMissionsProgress)) : 0;
 
     const regularMissions = sum(model.occurrenceProgress.map(x => x.freeMissionsProgress));
 
@@ -49,24 +56,28 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
 
     const regularMissionsCurrency = useMemo(() => {
         return sum(
-            model.occurrenceProgress.map(x => getMissionsCurrency(x.freeMissionsProgress, x.premiumMissionsProgress))
+            model.occurrenceProgress.map(x =>
+                getMissionsCurrency(x.freeMissionsProgress, useP2P ? x.premiumMissionsProgress : 0)
+            )
         );
-    }, [regularMissions, premiumMissions]);
+    }, [regularMissions, premiumMissions, useP2P]);
 
     const premiumMissionsCurrency = useMemo(() => {
         return sum(
-            model.occurrenceProgress.map(x => getMissionsCurrency(x.premiumMissionsProgress, x.premiumMissionsProgress))
+            model.occurrenceProgress.map(x =>
+                getMissionsCurrency(x.premiumMissionsProgress, useP2P ? x.premiumMissionsProgress : 0)
+            )
         );
-    }, [premiumMissions]);
+    }, [premiumMissions, useP2P]);
 
     const getBundleCurrency = (bundle: number, premiumMissionsCount: number) => {
         const additionalPayout = premiumMissionsCount > 0 ? 15 : 0;
         return bundle ? bundle * 300 + additionalPayout : 0;
     };
 
-    const bundleCurrency = sum(
-        model.occurrenceProgress.map(x => getBundleCurrency(+x.bundlePurchased, x.premiumMissionsProgress))
-    );
+    const bundleCurrency = useP2P
+        ? sum(model.occurrenceProgress.map(x => getBundleCurrency(+x.bundlePurchased, x.premiumMissionsProgress)))
+        : 0;
 
     const currentCurrency = useMemo(() => {
         const currentMilestone = model.pointsMilestones.find(x => x.cumulativePoints >= currentPoints);
