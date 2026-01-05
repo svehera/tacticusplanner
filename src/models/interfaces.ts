@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 
+import { LeSettingsAction } from '@/reducers/le-settings.reducer';
 import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
 import { XpUseAction } from '@/reducers/xp-use-reducer';
@@ -82,6 +83,7 @@ export interface IGlobalState {
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
+    leSettings: ILegendaryEventSettings;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
     dailyRaids: IDailyRaids;
@@ -103,6 +105,7 @@ export interface IDispatchContext {
     leSelectedRequirements: React.Dispatch<LeSelectedRequirementsAction>;
     leSelectedTeams: React.Dispatch<LeSelectedTeamsAction>;
     leProgress: React.Dispatch<LeProgressAction>;
+    leSettings: React.Dispatch<LeSettingsAction>;
     campaignsProgress: React.Dispatch<CampaignsProgressAction>;
     goals: React.Dispatch<GoalsAction>;
     inventory: React.Dispatch<InventoryAction>;
@@ -131,6 +134,7 @@ export interface IPersonalData2 {
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
+    leSettings: ILegendaryEventSettings;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
     dailyRaids: IDailyRaids;
@@ -355,6 +359,18 @@ export interface IInventory {
     forgeBadges: Record<Rarity, number>;
     orbs: Record<Alliance, Record<Rarity, number>>;
     upgrades: Record<string, number>;
+}
+
+export interface ILegendaryEventSettings {
+    defaultPageForActiveEvent: LegendaryEventDefaultPage;
+    defaultPageWhenEventNotActive: LegendaryEventDefaultPage;
+    showP2POptions: boolean;
+}
+
+export enum LegendaryEventDefaultPage {
+    TEAMS,
+    PROGRESS,
+    TOKENOMICS,
 }
 
 // Re-export types from FSD entities

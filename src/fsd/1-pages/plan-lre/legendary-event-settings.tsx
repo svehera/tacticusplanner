@@ -1,20 +1,42 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import { ILegendaryEventSettings, LegendaryEventDefaultPage } from '@/models/interfaces';
+// eslint-disable-next-line import-x/no-internal-modules
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 interface SettingOption {
-    id: string;
+    id: LegendaryEventDefaultPage;
     label: string;
 }
 
 export const LegendaryEventSettings: React.FC = () => {
-    const [defaultPageWhenEventIsActive, setDefaultPageWhenEventIsActive] = useState('tokenomics');
-    const [defaultPageWhenEventIsInactive, setDefaultPageWhenEventIsInactive] = useState('teams');
-    const [showP2P, setShowP2P] = useState<boolean>(true);
+    const { leSettings } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
+    const [defaultPageWhenEventIsActive, setDefaultPageWhenEventIsActive] = useState<LegendaryEventDefaultPage>(
+        leSettings.defaultPageForActiveEvent
+    );
+    const [defaultPageWhenEventIsInactive, setDefaultPageWhenEventIsInactive] = useState<LegendaryEventDefaultPage>(
+        leSettings.defaultPageWhenEventNotActive
+    );
+    const [showP2P, setShowP2P] = useState<boolean>(leSettings.showP2POptions);
 
     const options: SettingOption[] = [
-        { id: 'teams', label: 'Teams' },
-        { id: 'progress', label: 'Progress' },
-        { id: 'tokenomics', label: 'Tokenomics' },
+        { id: LegendaryEventDefaultPage.TEAMS, label: 'Teams' },
+        { id: LegendaryEventDefaultPage.PROGRESS, label: 'Progress' },
+        { id: LegendaryEventDefaultPage.TOKENOMICS, label: 'Tokenomics' },
     ];
+
+    const runUpdate = () => {
+        dispatch.leSettings({
+            type: 'Set',
+            value: {
+                defaultPageForActiveEvent: defaultPageWhenEventIsActive,
+                defaultPageWhenEventNotActive: defaultPageWhenEventIsInactive,
+                showP2POptions: showP2P,
+            } as ILegendaryEventSettings,
+        });
+    };
 
     const SettingGroup = ({
         title,
@@ -22,8 +44,8 @@ export const LegendaryEventSettings: React.FC = () => {
         onChange,
     }: {
         title: string;
-        currentValue: string;
-        onChange: (val: string) => void;
+        currentValue: LegendaryEventDefaultPage;
+        onChange: (val: LegendaryEventDefaultPage) => void;
     }) => (
         <div className="flex flex-col gap-3 p-5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm">
             <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
@@ -41,7 +63,7 @@ export const LegendaryEventSettings: React.FC = () => {
               ${
                   isActive
                       ? 'bg-blue-600 border-blue-500 text-white shadow-md'
-                      : 'bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-750'
+                      : 'bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 hover:dark:bg-gray-850'
               }
                 `}>
                             {opt.label}
@@ -57,12 +79,18 @@ export const LegendaryEventSettings: React.FC = () => {
             <SettingGroup
                 title="Default Page During Event"
                 currentValue={defaultPageWhenEventIsActive}
-                onChange={setDefaultPageWhenEventIsActive}
+                onChange={val => {
+                    setDefaultPageWhenEventIsActive(val);
+                    runUpdate();
+                }}
             />
             <SettingGroup
                 title="Default Page Outside of Event"
                 currentValue={defaultPageWhenEventIsInactive}
-                onChange={setDefaultPageWhenEventIsInactive}
+                onChange={val => {
+                    setDefaultPageWhenEventIsInactive(val);
+                    runUpdate();
+                }}
             />
             <div className="flex flex-col gap-3 p-5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm">
                 <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
@@ -72,7 +100,10 @@ export const LegendaryEventSettings: React.FC = () => {
                     <input
                         type="checkbox"
                         checked={showP2P}
-                        onChange={e => setShowP2P(e.target.checked)}
+                        onChange={e => {
+                            setShowP2P(e.target.checked);
+                            runUpdate();
+                        }}
                         className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">Show Pay-to-Play (P2P) options</span>
