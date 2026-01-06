@@ -28,7 +28,7 @@ export const LeProgressOverviewMissions: React.FC<Props> = ({ showP2P, occurrenc
                 <span className="font-bold">{getEventName()}</span>
                 <span className="italic">
                     ({occurrence.freeMissionsProgress}-{occurrence.premiumMissionsProgress}-
-                    {+occurrence.bundlePurchased})
+                    {+occurrence.bundlePurchased}-{occurrence.ohSoCloseShards})
                 </span>
             </h3>
 
@@ -60,6 +60,23 @@ export const LeProgressOverviewMissions: React.FC<Props> = ({ showP2P, occurrenc
                         }
                         min={0}
                         max={10}
+                    />
+                )}
+
+                {showP2P && (
+                    <NumberInput
+                        fullWidth
+                        label={'Oh So Close Shards'}
+                        value={occurrence.ohSoCloseShards}
+                        valueChange={ohSoCloseShards =>
+                            progressChange({
+                                ...occurrence,
+                                ohSoCloseShards,
+                            })
+                        }
+                        min={0}
+                        max={75}
+                        step={25}
                     />
                 )}
 

@@ -112,65 +112,72 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
         return model.chestsMilestones.length;
     }, [currentCurrency]);
 
-    const chestsForUnlock = model.progression.unlock / model.shardsPerChest;
-    const chestsFor4Stars = (model.progression.unlock + model.progression.fourStars) / model.shardsPerChest;
-    const chestsFor5Stars =
-        (model.progression.unlock + model.progression.fourStars + model.progression.fiveStars) / model.shardsPerChest;
-    const chestsForBlueStar =
-        (model.progression.unlock +
-            model.progression.fourStars +
-            model.progression.fiveStars +
-            model.progression.blueStar) /
-        model.shardsPerChest;
-    const chestsForMythic =
-        (model.progression.unlock +
-            model.progression.fourStars +
-            model.progression.fiveStars +
-            model.progression.blueStar +
-            // If we don't have info for mythic, we assume it's unattainable.
-            (model.progression.mythic ?? Infinity)) /
-        model.shardsPerChest;
-    const chestsForTwoBlueStars =
-        (model.progression.unlock +
-            model.progression.fourStars +
-            model.progression.fiveStars +
-            model.progression.blueStar +
-            // If we don't have info for mythic, we assume it's unattainable.
-            (model.progression.mythic ?? Infinity) +
-            (model.progression.twoBlueStars ?? Infinity)) /
-        model.shardsPerChest;
+    const shardsForUnlock = model.progression.unlock;
+    const shardsFor4Stars = model.progression.unlock + model.progression.fourStars;
+    const shardsFor5Stars = model.progression.unlock + model.progression.fourStars + model.progression.fiveStars;
+    const shardsForBlueStar =
+        model.progression.unlock +
+        model.progression.fourStars +
+        model.progression.fiveStars +
+        model.progression.blueStar;
+    const shardsForMythic =
+        model.progression.unlock +
+        model.progression.fourStars +
+        model.progression.fiveStars +
+        model.progression.blueStar +
+        // If we don't have info for mythic, we assume it's unattainable.
+        (model.progression.mythic ?? Infinity);
+    const shardsForTwoBlueStars =
+        model.progression.unlock +
+        model.progression.fourStars +
+        model.progression.fiveStars +
+        model.progression.blueStar +
+        // If we don't have info for mythic, we assume it's unattainable.
+        (model.progression.mythic ?? Infinity) +
+        (model.progression.twoBlueStars ?? Infinity);
+
+    const ohSoCloseShards = model.occurrenceProgress.reduce((acc, x) => acc + x.ohSoCloseShards, 0);
+
+    const currentShards = currentChests * 25 + ohSoCloseShards;
 
     const chestsForNextGoal = useMemo(() => {
-        if (currentChests < chestsForUnlock) {
-            return Math.ceil(chestsForUnlock);
-        } else if (currentChests < chestsFor4Stars) {
-            return Math.ceil(chestsFor4Stars);
-        } else if (currentChests < chestsFor5Stars) {
-            return Math.ceil(chestsFor5Stars);
-        } else if (currentChests < chestsForBlueStar) {
-            return Math.ceil(chestsForBlueStar);
-        } else if (currentChests < chestsForMythic) {
-            return Math.ceil(chestsForMythic);
+        if (currentShards < shardsForUnlock) {
+            return Math.ceil((shardsForUnlock - ohSoCloseShards) / model.shardsPerChest);
+        } else if (currentShards < shardsFor4Stars) {
+            return Math.ceil((shardsFor4Stars - ohSoCloseShards) / model.shardsPerChest);
+        } else if (currentShards < shardsFor5Stars) {
+            return Math.ceil((shardsFor5Stars - ohSoCloseShards) / model.shardsPerChest);
+        } else if (currentShards < shardsForBlueStar) {
+            return Math.ceil((shardsForBlueStar - ohSoCloseShards) / model.shardsPerChest);
+        } else if (currentShards < shardsForMythic) {
+            return Math.ceil((shardsForMythic - ohSoCloseShards) / model.shardsPerChest);
+        } else if (currentShards < shardsForTwoBlueStars) {
+            return Math.ceil((shardsForTwoBlueStars - ohSoCloseShards) / model.shardsPerChest);
         }
-        return Math.ceil(chestsForTwoBlueStars);
-    }, [currentChests]);
+        return totalChests;
+    }, [currentShards]);
 
     const goal = (function () {
-        if (currentChests < chestsForUnlock) {
+        if (currentShards < shardsForUnlock) {
             return 'unlock';
-        } else if (currentChests < chestsFor4Stars) {
+        } else if (currentShards < shardsFor4Stars) {
             return '4 stars';
-        } else if (currentChests < chestsFor5Stars) {
+        } else if (currentShards < shardsFor5Stars) {
             return '5 stars';
-        } else if (currentChests < chestsForBlueStar) {
+        } else if (currentShards < shardsForBlueStar) {
             return 'blue star';
-        } else if (currentChests < chestsForMythic) {
-            if (chestsForMythic === Infinity) {
+        } else if (currentShards < shardsForMythic) {
+            if (shardsForMythic === Infinity) {
                 return 'full clear';
             }
             return 'mythic';
+        } else if (currentShards < shardsForTwoBlueStars) {
+            if (shardsForTwoBlueStars === Infinity) {
+                return 'full clear';
+            }
+            return 'two blue stars';
         }
-        return 'two blue stars';
+        return 'full clear';
     })();
 
     const currencyForNextMilestone = useMemo(() => {
