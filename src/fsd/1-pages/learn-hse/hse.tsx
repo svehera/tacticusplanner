@@ -31,6 +31,7 @@ export const HomeScreenEvent = () => {
     const [campaignsToConsider, setCampaignsToConsider] = useState<Campaign[]>(() => {
         return CampaignsService.allCampaigns.map(x => x.id);
     });
+    const [includeRewardlessBattles, setIncludeRewardlessBattles] = useState<boolean>(true);
 
     /**
      * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
@@ -48,165 +49,100 @@ export const HomeScreenEvent = () => {
         }
         return '';
     };
-
-    const bestMachineHunt = useMemo(() => {
+    const calculateBestBattles = (
+        campaigns: Campaign[],
+        includeRewardlessBattles: boolean,
+        enemyFilter: (npc: ReturnType<typeof NpcService.getNpcById>) => boolean,
+        applyEliteCampaignMultiplier: boolean
+    ): HseBattle[] => {
         const pointsPerEnergy: Record<number, HseBattle[]> = {};
-        Object.entries(CampaignsService.campaignsGrouped)
-            .filter(([campaignId]) => campaignsToConsider.includes(campaignId as Campaign))
-            .forEach(([, battles]) => {
-                battles.forEach(battle => {
-                    const points =
-                        battle.detailedEnemyTypes
-                            ?.filter(x => {
-                                const npc = NpcService.getNpcById(x.id);
-                                return (
-                                    npc !== undefined &&
-                                    npc!.traits.includes('Mechanical') &&
-                                    !npc!.traits.includes('Summon')
-                                );
-                            })
-                            ?.map(x => x.count)
-                            .reduce((a, b) => a + b, 0) ?? 0;
-                    const details: HseBattle = {
-                        id: battle.id,
-                        battle: battle,
-                        energyCost: battle.energyCost,
-                        points: points,
-                        pointsPerEnergy: points / battle.energyCost,
-                        reward: getReward(battle.rewards),
-                        dropChance: battle.dropRate,
-                    };
-                    if (points > 0) {
-                        const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
-                        arr.push(details);
-                        pointsPerEnergy[details.pointsPerEnergy] = arr;
-                    }
-                });
-            });
-        let arr = Object.values(pointsPerEnergy);
-        arr = arr.sort((a, b) => b[0].pointsPerEnergy - a[0].pointsPerEnergy);
-        return arr;
-    }, [campaignsToConsider]);
 
-    const bestPurgeOrder = useMemo(() => {
-        const pointsPerEnergy: Record<number, HseBattle[]> = {};
         Object.entries(CampaignsService.campaignsGrouped)
-            .filter(([campaignId]) => campaignsToConsider.includes(campaignId as Campaign))
+            .filter(([campaignId]) => campaigns.includes(campaignId as Campaign))
             .forEach(([, battles]) => {
                 battles.forEach(battle => {
                     let points =
                         battle.detailedEnemyTypes
                             ?.filter(x => {
                                 const npc = NpcService.getNpcById(x.id);
-                                if (npc === undefined) {
+                                if (!npc) {
                                     console.warn('battle ', battle.id, ' has undefined npc ', x);
+                                    return false;
                                 }
-                                return npc!.faction! === 'Tyranids' && !npc!.traits.includes('Summon');
+                                return !npc.traits.includes('Summon') && enemyFilter(npc);
                             })
-                            ?.map(x => x.count)
+                            .map(x => x.count)
                             .reduce((a, b) => a + b, 0) ?? 0;
-                    if (battle.campaignType === CampaignType.Elite) points *= 5;
-                    else points *= 3;
-                    const details: HseBattle = {
-                        id: battle.id,
-                        battle: battle,
-                        energyCost: battle.energyCost,
-                        points: points,
-                        pointsPerEnergy: points / battle.energyCost,
-                        reward: getReward(battle.rewards),
-                        dropChance: battle.dropRate,
-                    };
-                    if (points > 0) {
-                        const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
-                        arr.push(details);
-                        pointsPerEnergy[details.pointsPerEnergy] = arr;
-                    }
-                });
-            });
-        let arr = Object.values(pointsPerEnergy);
-        arr = arr.sort((a, b) => b[0].pointsPerEnergy - a[0].pointsPerEnergy);
-        return arr;
-    }, [campaignsToConsider]);
 
-    const bestTrainingRush = useMemo(() => {
-        const pointsPerEnergy: Record<number, HseBattle[]> = {};
-        Object.entries(CampaignsService.campaignsGrouped)
-            .filter(([campaignId]) => campaignsToConsider.includes(campaignId as Campaign))
-            .forEach(([, battles]) => {
-                battles.forEach(battle => {
-                    let points =
-                        battle.detailedEnemyTypes
-                            ?.filter(x => {
-                                const npc = NpcService.getNpcById(x.id);
-                                if (npc === undefined) {
-                                    console.warn('battle ', battle.id, ' has undefined npc ', x);
-                                }
-                                return !npc!.traits.includes('Summon');
-                            })
-                            ?.map(x => x.count)
-                            .reduce((a, b) => a + b, 0) ?? 0;
-                    if (battle.campaignType === CampaignType.Elite) points *= 5;
-                    else points *= 3;
-                    const details: HseBattle = {
-                        id: battle.id,
-                        battle: battle,
-                        energyCost: battle.energyCost,
-                        points: points,
-                        pointsPerEnergy: points / battle.energyCost,
-                        reward: getReward(battle.rewards),
-                        dropChance: battle.dropRate,
-                    };
-                    if (points > 0) {
-                        const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
-                        arr.push(details);
-                        pointsPerEnergy[details.pointsPerEnergy] = arr;
+                    if (applyEliteCampaignMultiplier) {
+                        points *= battle.campaignType === CampaignType.Elite ? 5 : 3;
                     }
-                });
-            });
-        let arr = Object.values(pointsPerEnergy);
-        arr = arr.sort((a, b) => b[0].pointsPerEnergy - a[0].pointsPerEnergy);
-        return arr;
-    }, [campaignsToConsider]);
 
-    const bestWarpSurge = useMemo(() => {
-        const pointsPerEnergy: Record<number, HseBattle[]> = {};
-        Object.entries(CampaignsService.campaignsGrouped)
-            .filter(([campaignId]) => campaignsToConsider.includes(campaignId as Campaign))
-            .forEach(([, battles]) => {
-                battles.forEach(battle => {
-                    let points =
-                        battle.detailedEnemyTypes
-                            ?.filter(x => {
-                                const npc = NpcService.getNpcById(x.id);
-                                if (npc === undefined) {
-                                    console.warn('battle ', battle.id, ' has undefined npc ', x);
-                                }
-                                return npc!.alliance! === 'Chaos' && !npc!.traits.includes('Summon');
-                            })
-                            ?.map(x => x.count)
-                            .reduce((a, b) => a + b, 0) ?? 0;
-                    if (battle.campaignType === CampaignType.Elite) points *= 5;
-                    else points *= 3;
-                    const details: HseBattle = {
-                        id: battle.id,
-                        battle: battle,
-                        energyCost: battle.energyCost,
-                        points: points,
-                        pointsPerEnergy: points / battle.energyCost,
-                        reward: getReward(battle.rewards),
-                        dropChance: battle.dropRate,
-                    };
-                    if (points > 0) {
+                    if (points > 0 && (includeRewardlessBattles || getReward(battle.rewards) !== '')) {
+                        const details: HseBattle = {
+                            id: battle.id,
+                            battle: battle,
+                            energyCost: battle.energyCost,
+                            points: points,
+                            pointsPerEnergy: points / battle.energyCost,
+                            reward: getReward(battle.rewards),
+                            dropChance: battle.dropRate,
+                        };
                         const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
                         arr.push(details);
                         pointsPerEnergy[details.pointsPerEnergy] = arr;
                     }
                 });
             });
-        let arr = Object.values(pointsPerEnergy);
-        arr = arr.sort((a, b) => b[0].pointsPerEnergy - a[0].pointsPerEnergy);
-        return arr;
-    }, [campaignsToConsider]);
+
+        return Object.values(pointsPerEnergy)
+            .flat()
+            .sort((a, b) => b.dropChance - a.dropChance)
+            .sort((a, b) => b.pointsPerEnergy - a.pointsPerEnergy);
+    };
+
+    const bestMachineHunt = useMemo(
+        () =>
+            calculateBestBattles(
+                campaignsToConsider,
+                includeRewardlessBattles,
+                npc => npc?.traits.includes('Mechanical') ?? false,
+                /*applyEliteCampaignMultiplier=*/ false
+            ),
+        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+    );
+
+    const bestPurgeOrder = useMemo(
+        () =>
+            calculateBestBattles(
+                campaignsToConsider,
+                includeRewardlessBattles,
+                npc => npc?.faction === 'Tyranids',
+                /*applyEliteCampaignMultiplier=*/ true
+            ),
+        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+    );
+
+    const bestTrainingRush = useMemo(
+        () =>
+            calculateBestBattles(
+                campaignsToConsider,
+                includeRewardlessBattles,
+                () => true,
+                /*applyEliteCampaignMultiplier=*/ true
+            ),
+        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+    );
+    const bestWarpSurge = useMemo(
+        () =>
+            calculateBestBattles(
+                campaignsToConsider,
+                includeRewardlessBattles,
+                npc => npc?.alliance === 'Chaos',
+                /*applyEliteCampaignMultiplier=*/ true
+            ),
+        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+    );
 
     const rewardIcon = (reward: string) => {
         const upgrade = UpgradesService.getUpgrade(reward);
@@ -243,13 +179,13 @@ export const HomeScreenEvent = () => {
     const rowData = useMemo(() => {
         switch (selectedEvent) {
             case IDailyRaidsHomeScreenEvent.machineHunt:
-                return bestMachineHunt.flat();
+                return bestMachineHunt;
             case IDailyRaidsHomeScreenEvent.purgeOrder:
-                return bestPurgeOrder.flat();
+                return bestPurgeOrder;
             case IDailyRaidsHomeScreenEvent.trainingRush:
-                return bestTrainingRush.flat();
+                return bestTrainingRush;
             case IDailyRaidsHomeScreenEvent.warpSurge:
-                return bestWarpSurge.flat();
+                return bestWarpSurge;
             default:
                 return [];
         }
@@ -399,6 +335,15 @@ export const HomeScreenEvent = () => {
                                 </MenuItem>
                             ))}
                         </Select>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <input
+                            type="checkbox"
+                            id="ignore-early-indom"
+                            checked={includeRewardlessBattles}
+                            onChange={e => setIncludeRewardlessBattles(e.target.checked)}
+                        />
+                        <label htmlFor="ignore-early-indom">Include battles with no rewards</label>
                     </div>
                 </div>
             </div>
