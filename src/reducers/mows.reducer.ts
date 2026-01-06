@@ -85,8 +85,8 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
                         ...existingMow,
                         rarity: Rarity.Common,
                         stars: RarityStars.None,
-                        primaryAbilityLevel: 0,
-                        secondaryAbilityLevel: 0,
+                        primaryAbilityLevel: 1,
+                        secondaryAbilityLevel: 1,
                         shards: tacticusShards.amount,
                     };
                 }

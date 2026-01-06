@@ -90,14 +90,14 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     equipment: updatedCharacter.equipment,
                     mythicShards: updatedCharacter.mythicShards,
                     activeAbilityLevel: Math.max(
-                        0,
+                        1,
                         Math.min(
                             CharactersAbilitiesService.getMaximumAbilityLevel(),
                             updatedCharacter.activeAbilityLevel
                         )
                     ),
                     passiveAbilityLevel: Math.max(
-                        0,
+                        1,
                         Math.min(
                             CharactersAbilitiesService.getMaximumAbilityLevel(),
                             updatedCharacter.passiveAbilityLevel

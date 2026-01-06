@@ -30,7 +30,7 @@ export class CharactersAbilitiesService {
     }
 
     public static getMaterials(levelStart: number, levelEnd: number): ICharacterAbilityLevel[] {
-        return this.abilitiesLvlUp.slice(levelStart - 1, levelEnd - 1);
+        return this.abilitiesLvlUp.slice(Math.max(levelStart, 1) - 1, Math.max(levelEnd, 1) - 1);
     }
 
     public static getTotals(
