@@ -350,6 +350,13 @@ export const HomeScreenEvent = () => {
     return (
         <div>
             <div>
+                <h1>
+                    This page is informational only. You most likely want the Daily Raids page instead, where you can go
+                    to settings and tell it to optimize for whichever home-screen event is ongoing, so you make progress
+                    on the event without derailing your goals.
+                </h1>
+            </div>
+            <div>
                 <div className="m-2 flex flex-wrap items-center gap-4">
                     <div className="flex items-center gap-2">
                         <label htmlFor="event-select">Choose an event:</label>
