@@ -40,6 +40,7 @@ export interface ILreOccurrenceProgress {
     freeMissionsProgress: number;
     premiumMissionsProgress: number;
     bundlePurchased: boolean;
+    ohSoCloseShards: number;
 }
 
 /**

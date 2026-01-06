@@ -27,7 +27,14 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
         setAccordionExpanded(isExpanded ? section : false);
     };
 
-    const missionsTotalProgress = model.occurrenceProgress.map(x => x.freeMissionsProgress.toString()).join('-');
+    const missionsTotalProgress = leSettings.showP2POptions
+        ? model.occurrenceProgress
+              .map(
+                  x =>
+                      `${x.freeMissionsProgress},${x.premiumMissionsProgress},${+x.bundlePurchased},${x.ohSoCloseShards}`
+              )
+              .join('-')
+        : model.occurrenceProgress.map(x => x.freeMissionsProgress.toString()).join('-');
     const tracksTotalProgress = model.tracksProgress
         .map(track =>
             Math.round(
