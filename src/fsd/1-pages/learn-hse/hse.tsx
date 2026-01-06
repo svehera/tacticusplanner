@@ -9,7 +9,7 @@ import { ICampaignBattleComposed, IDailyRaidsHomeScreenEvent } from '@/models/in
 import { RarityMapper } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CampaignLocation, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
+import { Campaign, CampaignImage, CampaignLocation, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
 // eslint-disable-next-line import-x/no-internal-modules
 import { IRewards } from '@/fsd/4-entities/campaign/model';
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -28,6 +28,10 @@ interface HseBattle {
 
 export const HomeScreenEvent = () => {
     const gridRef = useRef<AgGridReact<HseBattle>>(null);
+    const [campaignsToConsider, setCampaignsToConsider] = useState<Campaign[]>(() => {
+        return CampaignsService.allCampaigns.map(x => x.id);
+    });
+
     /**
      * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
      */
@@ -47,154 +51,162 @@ export const HomeScreenEvent = () => {
 
     const bestMachineHunt = useMemo(() => {
         const pointsPerEnergy: Record<number, HseBattle[]> = {};
-        Object.entries(CampaignsService.campaignsGrouped).forEach(([_, battles]) => {
-            battles.forEach(battle => {
-                const points =
-                    battle.detailedEnemyTypes
-                        ?.filter(x => {
-                            const npc = NpcService.getNpcById(x.id);
-                            return (
-                                npc !== undefined &&
-                                npc!.traits.includes('Mechanical') &&
-                                !npc!.traits.includes('Summon')
-                            );
-                        })
-                        ?.map(x => x.count)
-                        .reduce((a, b) => a + b, 0) ?? 0;
-                const details: HseBattle = {
-                    id: battle.id,
-                    battle: battle,
-                    energyCost: battle.energyCost,
-                    points: points,
-                    pointsPerEnergy: points / battle.energyCost,
-                    reward: getReward(battle.rewards),
-                    dropChance: battle.dropRate,
-                };
-                if (points > 0) {
-                    const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
-                    arr.push(details);
-                    pointsPerEnergy[details.pointsPerEnergy] = arr;
-                }
+        Object.entries(CampaignsService.campaignsGrouped)
+            .filter(([campaignId]) => campaignsToConsider.includes(campaignId as Campaign))
+            .forEach(([, battles]) => {
+                battles.forEach(battle => {
+                    const points =
+                        battle.detailedEnemyTypes
+                            ?.filter(x => {
+                                const npc = NpcService.getNpcById(x.id);
+                                return (
+                                    npc !== undefined &&
+                                    npc!.traits.includes('Mechanical') &&
+                                    !npc!.traits.includes('Summon')
+                                );
+                            })
+                            ?.map(x => x.count)
+                            .reduce((a, b) => a + b, 0) ?? 0;
+                    const details: HseBattle = {
+                        id: battle.id,
+                        battle: battle,
+                        energyCost: battle.energyCost,
+                        points: points,
+                        pointsPerEnergy: points / battle.energyCost,
+                        reward: getReward(battle.rewards),
+                        dropChance: battle.dropRate,
+                    };
+                    if (points > 0) {
+                        const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
+                        arr.push(details);
+                        pointsPerEnergy[details.pointsPerEnergy] = arr;
+                    }
+                });
             });
-        });
         let arr = Object.values(pointsPerEnergy);
         arr = arr.sort((a, b) => b[0].pointsPerEnergy - a[0].pointsPerEnergy);
         return arr;
-    }, []);
+    }, [campaignsToConsider]);
 
     const bestPurgeOrder = useMemo(() => {
         const pointsPerEnergy: Record<number, HseBattle[]> = {};
-        Object.entries(CampaignsService.campaignsGrouped).forEach(([_, battles]) => {
-            battles.forEach(battle => {
-                let points =
-                    battle.detailedEnemyTypes
-                        ?.filter(x => {
-                            const npc = NpcService.getNpcById(x.id);
-                            if (npc === undefined) {
-                                console.warn('battle ', battle.id, ' has undefined npc ', x);
-                            }
-                            return npc!.faction! === 'Tyranids' && !npc!.traits.includes('Summon');
-                        })
-                        ?.map(x => x.count)
-                        .reduce((a, b) => a + b, 0) ?? 0;
-                if (battle.campaignType === CampaignType.Elite) points *= 5;
-                else points *= 3;
-                const details: HseBattle = {
-                    id: battle.id,
-                    battle: battle,
-                    energyCost: battle.energyCost,
-                    points: points,
-                    pointsPerEnergy: points / battle.energyCost,
-                    reward: getReward(battle.rewards),
-                    dropChance: battle.dropRate,
-                };
-                if (points > 0) {
-                    const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
-                    arr.push(details);
-                    pointsPerEnergy[details.pointsPerEnergy] = arr;
-                }
+        Object.entries(CampaignsService.campaignsGrouped)
+            .filter(([campaignId]) => campaignsToConsider.includes(campaignId as Campaign))
+            .forEach(([, battles]) => {
+                battles.forEach(battle => {
+                    let points =
+                        battle.detailedEnemyTypes
+                            ?.filter(x => {
+                                const npc = NpcService.getNpcById(x.id);
+                                if (npc === undefined) {
+                                    console.warn('battle ', battle.id, ' has undefined npc ', x);
+                                }
+                                return npc!.faction! === 'Tyranids' && !npc!.traits.includes('Summon');
+                            })
+                            ?.map(x => x.count)
+                            .reduce((a, b) => a + b, 0) ?? 0;
+                    if (battle.campaignType === CampaignType.Elite) points *= 5;
+                    else points *= 3;
+                    const details: HseBattle = {
+                        id: battle.id,
+                        battle: battle,
+                        energyCost: battle.energyCost,
+                        points: points,
+                        pointsPerEnergy: points / battle.energyCost,
+                        reward: getReward(battle.rewards),
+                        dropChance: battle.dropRate,
+                    };
+                    if (points > 0) {
+                        const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
+                        arr.push(details);
+                        pointsPerEnergy[details.pointsPerEnergy] = arr;
+                    }
+                });
             });
-        });
         let arr = Object.values(pointsPerEnergy);
         arr = arr.sort((a, b) => b[0].pointsPerEnergy - a[0].pointsPerEnergy);
         return arr;
-    }, []);
+    }, [campaignsToConsider]);
 
     const bestTrainingRush = useMemo(() => {
         const pointsPerEnergy: Record<number, HseBattle[]> = {};
-        Object.entries(CampaignsService.campaignsGrouped).forEach(([_, battles]) => {
-            battles.forEach(battle => {
-                let points =
-                    battle.detailedEnemyTypes
-                        ?.filter(x => {
-                            const npc = NpcService.getNpcById(x.id);
-                            if (npc === undefined) {
-                                console.warn('battle ', battle.id, ' has undefined npc ', x);
-                            }
-                            return !npc!.traits.includes('Summon');
-                        })
-                        ?.map(x => x.count)
-                        .reduce((a, b) => a + b, 0) ?? 0;
-                if (battle.campaignType === CampaignType.Elite) points *= 5;
-                else points *= 3;
-                const details: HseBattle = {
-                    id: battle.id,
-                    battle: battle,
-                    energyCost: battle.energyCost,
-                    points: points,
-                    pointsPerEnergy: points / battle.energyCost,
-                    reward: getReward(battle.rewards),
-                    dropChance: battle.dropRate,
-                };
-                if (points > 0) {
-                    const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
-                    arr.push(details);
-                    pointsPerEnergy[details.pointsPerEnergy] = arr;
-                }
+        Object.entries(CampaignsService.campaignsGrouped)
+            .filter(([campaignId]) => campaignsToConsider.includes(campaignId as Campaign))
+            .forEach(([, battles]) => {
+                battles.forEach(battle => {
+                    let points =
+                        battle.detailedEnemyTypes
+                            ?.filter(x => {
+                                const npc = NpcService.getNpcById(x.id);
+                                if (npc === undefined) {
+                                    console.warn('battle ', battle.id, ' has undefined npc ', x);
+                                }
+                                return !npc!.traits.includes('Summon');
+                            })
+                            ?.map(x => x.count)
+                            .reduce((a, b) => a + b, 0) ?? 0;
+                    if (battle.campaignType === CampaignType.Elite) points *= 5;
+                    else points *= 3;
+                    const details: HseBattle = {
+                        id: battle.id,
+                        battle: battle,
+                        energyCost: battle.energyCost,
+                        points: points,
+                        pointsPerEnergy: points / battle.energyCost,
+                        reward: getReward(battle.rewards),
+                        dropChance: battle.dropRate,
+                    };
+                    if (points > 0) {
+                        const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
+                        arr.push(details);
+                        pointsPerEnergy[details.pointsPerEnergy] = arr;
+                    }
+                });
             });
-        });
         let arr = Object.values(pointsPerEnergy);
         arr = arr.sort((a, b) => b[0].pointsPerEnergy - a[0].pointsPerEnergy);
         return arr;
-    }, []);
+    }, [campaignsToConsider]);
 
     const bestWarpSurge = useMemo(() => {
         const pointsPerEnergy: Record<number, HseBattle[]> = {};
-        Object.entries(CampaignsService.campaignsGrouped).forEach(([_, battles]) => {
-            battles.forEach(battle => {
-                let points =
-                    battle.detailedEnemyTypes
-                        ?.filter(x => {
-                            const npc = NpcService.getNpcById(x.id);
-                            if (npc === undefined) {
-                                console.warn('battle ', battle.id, ' has undefined npc ', x);
-                            }
-                            return npc!.alliance! === 'Chaos' && !npc!.traits.includes('Summon');
-                        })
-                        ?.map(x => x.count)
-                        .reduce((a, b) => a + b, 0) ?? 0;
-                if (battle.campaignType === CampaignType.Elite) points *= 5;
-                else points *= 3;
-                const details: HseBattle = {
-                    id: battle.id,
-                    battle: battle,
-                    energyCost: battle.energyCost,
-                    points: points,
-                    pointsPerEnergy: points / battle.energyCost,
-                    reward: getReward(battle.rewards),
-                    dropChance: battle.dropRate,
-                };
-                if (points > 0) {
-                    const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
-                    arr.push(details);
-                    pointsPerEnergy[details.pointsPerEnergy] = arr;
-                }
+        Object.entries(CampaignsService.campaignsGrouped)
+            .filter(([campaignId]) => campaignsToConsider.includes(campaignId as Campaign))
+            .forEach(([, battles]) => {
+                battles.forEach(battle => {
+                    let points =
+                        battle.detailedEnemyTypes
+                            ?.filter(x => {
+                                const npc = NpcService.getNpcById(x.id);
+                                if (npc === undefined) {
+                                    console.warn('battle ', battle.id, ' has undefined npc ', x);
+                                }
+                                return npc!.alliance! === 'Chaos' && !npc!.traits.includes('Summon');
+                            })
+                            ?.map(x => x.count)
+                            .reduce((a, b) => a + b, 0) ?? 0;
+                    if (battle.campaignType === CampaignType.Elite) points *= 5;
+                    else points *= 3;
+                    const details: HseBattle = {
+                        id: battle.id,
+                        battle: battle,
+                        energyCost: battle.energyCost,
+                        points: points,
+                        pointsPerEnergy: points / battle.energyCost,
+                        reward: getReward(battle.rewards),
+                        dropChance: battle.dropRate,
+                    };
+                    if (points > 0) {
+                        const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
+                        arr.push(details);
+                        pointsPerEnergy[details.pointsPerEnergy] = arr;
+                    }
+                });
             });
-        });
         let arr = Object.values(pointsPerEnergy);
         arr = arr.sort((a, b) => b[0].pointsPerEnergy - a[0].pointsPerEnergy);
         return arr;
-    }, []);
+    }, [campaignsToConsider]);
 
     const rewardIcon = (reward: string) => {
         const upgrade = UpgradesService.getUpgrade(reward);
@@ -338,29 +350,49 @@ export const HomeScreenEvent = () => {
     return (
         <div>
             <div>
-                <div className="m-2">
-                    <label htmlFor="event-select" className="mr-2">
-                        Choose an event:
-                    </label>
-                    <Select
-                        name="events"
-                        id="event-select"
-                        value={selectedEvent}
-                        onChange={e => setSelectedEvent(e.target.value as IDailyRaidsHomeScreenEvent)}
-                        className="p-2 rounded-md bg-slate-700">
-                        <MenuItem value={IDailyRaidsHomeScreenEvent.purgeOrder} className="flex-box gap10">
-                            <span>Purge Order</span>
-                        </MenuItem>
-                        <MenuItem value={IDailyRaidsHomeScreenEvent.trainingRush} className="flex-box gap10">
-                            <span>Training Rush</span>
-                        </MenuItem>
-                        <MenuItem value={IDailyRaidsHomeScreenEvent.warpSurge} className="flex-box gap10">
-                            <span>Warp Surge</span>
-                        </MenuItem>
-                        <MenuItem value={IDailyRaidsHomeScreenEvent.machineHunt} className="flex-box gap10">
-                            <span>Machine Hunt</span>
-                        </MenuItem>
-                    </Select>
+                <div className="m-2 flex flex-wrap items-center gap-4">
+                    <div className="flex items-center gap-2">
+                        <label htmlFor="event-select">Choose an event:</label>
+                        <Select
+                            name="events"
+                            id="event-select"
+                            value={selectedEvent}
+                            onChange={e => setSelectedEvent(e.target.value as IDailyRaidsHomeScreenEvent)}
+                            size="small"
+                            className="rounded-md bg-slate-700">
+                            <MenuItem value={IDailyRaidsHomeScreenEvent.purgeOrder}>Purge Order</MenuItem>
+                            <MenuItem value={IDailyRaidsHomeScreenEvent.trainingRush}>Training Rush</MenuItem>
+                            <MenuItem value={IDailyRaidsHomeScreenEvent.warpSurge}>Warp Surge</MenuItem>
+                            <MenuItem value={IDailyRaidsHomeScreenEvent.machineHunt}>Machine Hunt</MenuItem>
+                        </Select>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <label htmlFor="campaign-select">Campaigns to consider:</label>
+                        <Select
+                            name="campaigns"
+                            id="campaign-select"
+                            multiple
+                            value={campaignsToConsider}
+                            onChange={e => {
+                                const {
+                                    target: { value },
+                                } = e;
+                                setCampaignsToConsider(
+                                    // On autofill we get a stringified value.
+                                    (typeof value === 'string' ? value.split(',') : value).map(id => id as Campaign)
+                                );
+                            }}
+                            size="small"
+                            className="rounded-md bg-slate-700"
+                            style={{ minWidth: 200, maxWidth: 500 }}>
+                            {CampaignsService.allCampaigns.map(campaign => (
+                                <MenuItem key={campaign.id} value={campaign.id} className="flex items-center gap-2">
+                                    <CampaignImage campaign={campaign.id} size={30} />
+                                    {campaign.name}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </div>
                 </div>
             </div>
             <div className="ag-theme-material w-full h-[calc(100vh-220px)]">
