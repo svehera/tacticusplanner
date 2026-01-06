@@ -470,7 +470,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                         </MenuItem>
                                     ))}
                                 </Select>
-                                <FormHelperText>Minimum chaos enemies to consider a battle.</FormHelperText>
+                                <FormHelperText>Minimum mechanical enemies to consider a battle.</FormHelperText>
                             </FormControl>
                         )}
                     </div>
