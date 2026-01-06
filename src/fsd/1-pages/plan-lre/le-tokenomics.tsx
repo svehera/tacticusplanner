@@ -53,10 +53,6 @@ export const LeTokenomics: React.FC<Props> = ({
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
 
-    const achievedMilestones = milestonesAndPoints.filter(
-        milestone => currentPoints >= milestone.points && (showP2P || milestone.packsPerRound === 0)
-    );
-
     const missedMilestones = milestonesAndPoints
         .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
         .sort((a, b) => a.points - b.points);
@@ -87,6 +83,10 @@ export const LeTokenomics: React.FC<Props> = ({
 
     const freeTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (3 * 60 * 60 * 1000));
     const adTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (24 * 60 * 60 * 1000));
+
+    const characterPortrait = () => {
+        return <span>character portrait goes here</span>;
+    };
 
     return (
         <div className="flex flex-col w-full gap-y-8">
@@ -142,15 +142,7 @@ export const LeTokenomics: React.FC<Props> = ({
                 <SupportSection />
             </div>
 
-            <div className="flex flex-col items-center w-full gap-y-4">
-                <div>
-                    <h3 className="text-lg font-bold">Milestones Already Achieved</h3>
-                </div>
-                <LeTokenMilestoneCardGrid
-                    milestonesToList={achievedMilestones}
-                    emptyMessage="No milestones achieved yet."
-                />
-            </div>
+            <div className="flex flex-col items-center w-full gap-y-4">{characterPortrait()}</div>
 
             <div key="tokens" className="flex flex-col w-full gap-2">
                 <LeTokenTable

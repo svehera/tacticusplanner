@@ -129,7 +129,7 @@ export const Lre: React.FC = () => {
                         tokenDisplays={tokenDisplays}
                         tracksProgress={model.tracksProgress}
                         currentPoints={currentPoints}
-                        showP2P={leSettings.showP2POptions}
+                        showP2P={leSettings.showP2POptions ?? true}
                         eventStartTime={eventStartTime()}
                         nextTokenCompleted={nextTokenCompleted}
                         toggleBattleState={toggleBattleState}
