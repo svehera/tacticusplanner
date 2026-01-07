@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
+
+import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
 
-import { RequirementStatus } from '@/fsd/3-features/lre';
+import { CharactersService } from '@/fsd/4-entities/character';
+
+import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 // eslint-disable-next-line import-x/no-internal-modules
 import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
+// eslint-disable-next-line import-x/no-internal-modules
+import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
+
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
+import { ISnapshotCharacter } from '../input-roster-snapshots/models';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
+import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
 
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
+import { useLreProgress } from './le-progress.hooks';
+import { LeProgressService } from './le-progress.service';
 import { LeTokenCard } from './le-token-card';
 import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
@@ -17,6 +33,7 @@ import { ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
 import { milestonesAndPoints, TokenDisplay, TokenUse } from './token-estimation-service';
 
 interface Props {
+    legendaryEvent: ILegendaryEvent;
     battles: ILeBattles | undefined;
     tokens: TokenUse[];
     currentPoints: number;
@@ -39,6 +56,7 @@ interface Props {
  * achieve.
  */
 export const LeTokenomics: React.FC<Props> = ({
+    legendaryEvent,
     battles,
     tokens,
     currentPoints,
@@ -49,9 +67,12 @@ export const LeTokenomics: React.FC<Props> = ({
     nextTokenCompleted,
     toggleBattleState,
 }: Props) => {
+    const { characters: unresolvedChars, leSettings } = useContext(StoreContext);
+    const { model } = useLreProgress(legendaryEvent);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
+    const characters = CharactersService.resolveStoredCharacters(unresolvedChars);
 
     const missedMilestones = milestonesAndPoints
         .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
@@ -84,8 +105,63 @@ export const LeTokenomics: React.FC<Props> = ({
     const freeTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (3 * 60 * 60 * 1000));
     const adTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (24 * 60 * 60 * 1000));
 
+    const progress = LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true);
+
+    const char = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
+    const rarity = char?.rarity ?? Rarity.Legendary;
+    const stars = char?.stars ?? RarityStars.None;
+
     const characterPortrait = () => {
-        return <span>character portrait goes here</span>;
+        return (
+            <div className="flex flex-col items-center">
+                {/* Character Icon Container */}
+                <div>
+                    {char !== undefined && (
+                        <RosterSnapshotCharacter
+                            showShards={RosterSnapshotShowVariableSettings.Never}
+                            showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                            showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                            showAbilities={false}
+                            char={
+                                {
+                                    id: char.snowprintId!,
+                                    rank: char.rank,
+                                    rarity: rarity,
+                                    stars: stars,
+                                    shards: 0,
+                                    mythicShards: 0,
+                                    activeAbilityLevel: 1,
+                                    passiveAbilityLevel: 1,
+                                    xpLevel: 1,
+                                } as ISnapshotCharacter
+                            }
+                            charData={char}
+                        />
+                    )}
+                </div>
+                <div className="flex items-center w-full justify-center gap-2">
+                    <div className="relative w-40 h-6 bg-gray-200 rounded-full dark:bg-gray-700 overflow-hidden">
+                        <div
+                            className="h-full bg-blue-600"
+                            style={{
+                                width: `${Math.min(
+                                    100,
+                                    (progress.incrementalShards / progress.incrementalShardsGoal) * 100
+                                )}%`,
+                                // Optional: adds a slight round to the leading edge as it grows
+                                borderTopRightRadius: '9999px',
+                                borderBottomRightRadius: '9999px',
+                            }}></div>
+                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-xs font-medium text-gray-800 dark:text-gray-100">
+                            {progress.incrementalShards} / {progress.incrementalShardsGoal}
+                        </span>
+                    </div>
+                </div>
+                <div className="flex mt-2">
+                    <MiscIcon icon="leShard" width={40} height={40} />
+                </div>
+            </div>
+        );
     };
 
     return (

@@ -55,6 +55,7 @@ import blessedReqOrder from '@/assets/images/snowprint_assets/misc/ui_icon_resou
 import coin from '@/assets/images/snowprint_assets/misc/ui_icon_resource_coin.png';
 import eventCurrencyHalloween2025Icon from '@/assets/images/snowprint_assets/misc/ui_icon_resource_event_currency_halloween_25.png';
 import defeatWaves from '@/assets/images/snowprint_assets/misc/ui_icon_resource_event_defeatwaves.png';
+import leShard from '@/assets/images/snowprint_assets/misc/ui_icon_resource_le_shards.png';
 import reqOrder from '@/assets/images/snowprint_assets/misc/ui_icon_resource_req_order.png';
 import arenaToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_arena.png';
 import legendaryEventToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_legendary_events.png';
@@ -430,5 +431,9 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     movement: {
         file: movement,
         label: 'Movement',
+    },
+    leShard: {
+        file: leShard,
+        label: 'Legendary-Event Shard',
     },
 };

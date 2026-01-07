@@ -17,7 +17,21 @@ export interface LeProgress {
     chestsForNextGoal: number;
     totalChests: number;
 
+    // The number of shards towards the next goal. E.g. 0 (out of 400)), 50 (out of 180).
+    incrementalShards: number;
+    // The number of shards to reach the next goal starting from the previous goal. E.g. 400 (to
+    // reach unlock), 180 (to reach 5 stars).
+    incrementalShardsGoal: number;
+
     goal: string;
+}
+
+interface ShardsGoal {
+    goal: string;
+    currentShards: number;
+    requiredShards: number;
+    currentIncrementalShards: number;
+    requiredIncrementalShards: number;
 }
 
 export class LeProgressService {
@@ -89,7 +103,10 @@ export class LeProgressService {
             chestsForNextGoal,
             totalChests: model.chestsMilestones.length,
 
-            goal,
+            incrementalShards: goal.currentIncrementalShards,
+            incrementalShardsGoal: goal.requiredIncrementalShards,
+
+            goal: goal.goal,
         };
     }
 
@@ -181,18 +198,38 @@ export class LeProgressService {
         return model.chestsMilestones.length;
     }
 
-    private static computeCurrentGoal(model: ILreProgressModel, currentShards: number): string {
+    private static computeCurrentGoal(model: ILreProgressModel, currentShards: number): ShardsGoal {
         const shardThresholds = this.getShardThresholds(model.progression);
 
+        let prevThreshold = 0;
         for (const goal of shardThresholds) {
             if (currentShards < goal.threshold) {
                 if (goal.threshold === Infinity) {
-                    return 'full clear';
+                    return {
+                        goal: 'full clear',
+                        currentShards: currentShards,
+                        requiredShards: Infinity,
+                        currentIncrementalShards: currentShards - prevThreshold,
+                        requiredIncrementalShards: Infinity,
+                    };
                 }
-                return goal.name;
+                return {
+                    goal: goal.name,
+                    currentShards: currentShards,
+                    requiredShards: goal.threshold,
+                    currentIncrementalShards: currentShards - prevThreshold,
+                    requiredIncrementalShards: goal.threshold - prevThreshold,
+                };
             }
+            prevThreshold = goal.threshold;
         }
-        return 'full clear';
+        return {
+            goal: 'full clear',
+            currentShards: currentShards,
+            requiredShards: Infinity,
+            currentIncrementalShards: currentShards - prevThreshold,
+            requiredIncrementalShards: Infinity,
+        };
     }
 
     private static computeCurrencyForNextMilestone(model: ILreProgressModel, chestsForNextGoal: number): number {

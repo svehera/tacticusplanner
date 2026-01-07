@@ -123,6 +123,7 @@ export const Lre: React.FC = () => {
             case LreSection.tokenomics:
                 return (
                     <LeTokenomics
+                        legendaryEvent={legendaryEvent}
                         key="tokenomics"
                         battles={battles}
                         tokens={tokens}
