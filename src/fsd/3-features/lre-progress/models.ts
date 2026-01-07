@@ -22,6 +22,7 @@ export interface ILreOverviewDto {
     regularMissions: number;
     premiumMissions: number;
     bundle: number;
+    ohSoCloseShards?: number;
 }
 
 export interface ILreBattleProgressDto {

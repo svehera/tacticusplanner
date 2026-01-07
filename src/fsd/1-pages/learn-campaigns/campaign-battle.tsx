@@ -10,36 +10,6 @@ interface Props {
 }
 
 export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
-    /*
-    const getReward = () => {
-        const upgrade = UpgradesService.recipeDataFull[battle.reward];
-        if (upgrade) {
-            const character = CharactersService.getUnit(upgrade.label);
-            if (character) {
-                return (
-                    <div>
-                        <Tooltip title={upgrade.label}>
-                            <UnitShardIcon
-                                icon={character.icon}
-                                name={upgrade.label}
-                                height={30}
-                                width={30}
-                                tooltip={upgrade.label}
-                            />
-                        </Tooltip>
-                    </div>
-                );
-            }
-            return (
-                <Tooltip title={upgrade.label}>
-                    <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} />
-                </Tooltip>
-            );
-        }
-        return <></>;
-    };
-    */
-
     return (
         <div className="content-center">
             <table>

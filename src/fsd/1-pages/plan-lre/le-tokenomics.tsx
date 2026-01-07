@@ -22,6 +22,8 @@ interface Props {
     currentPoints: number;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
+    eventStartTime: number | undefined;
+    showP2P: boolean;
     nextTokenCompleted: (tokenIndex: number) => void;
     toggleBattleState: (
         trackId: 'alpha' | 'beta' | 'gamma',
@@ -42,6 +44,8 @@ export const LeTokenomics: React.FC<Props> = ({
     currentPoints,
     tokenDisplays,
     tracksProgress,
+    eventStartTime,
+    showP2P,
     nextTokenCompleted,
     toggleBattleState,
 }: Props) => {
@@ -49,10 +53,12 @@ export const LeTokenomics: React.FC<Props> = ({
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
 
-    const achievedMilestones = milestonesAndPoints.filter(milestone => currentPoints >= milestone.points);
+    const achievedMilestones = milestonesAndPoints.filter(
+        milestone => currentPoints >= milestone.points && (showP2P || milestone.packsPerRound === 0)
+    );
 
     const missedMilestones = milestonesAndPoints
-        .filter(milestone => milestone.points > finalProjectedPoints)
+        .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
         .sort((a, b) => a.points - b.points);
 
     // Helper function to check if a token has yellow or red restrictions
@@ -72,10 +78,24 @@ export const LeTokenomics: React.FC<Props> = ({
     const firstToken = tokenDisplays.find(token => !hasWarningRestrictions(token)) ?? null;
     const firstTokenIndex = firstToken ? tokenDisplays.indexOf(firstToken) : -1;
 
+    const millisRemaining = () => {
+        if (eventStartTime === undefined) return 0;
+        const now = Date.now();
+        const EVENT_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+        return Math.max(EVENT_DURATION - (now - eventStartTime), 0);
+    };
+
+    const freeTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (3 * 60 * 60 * 1000));
+    const adTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (24 * 60 * 60 * 1000));
+
     return (
         <div className="flex flex-col w-full gap-y-8">
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
+                    <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
+                        <div>Free Tokens Remaining: {freeTokensRemaining}</div>
+                        <div>Ad Tokens Remaining: {adTokensRemaining}</div>
+                    </div>
                     <div>
                         <h3 className="text-lg font-bold">Next Token</h3>
                     </div>
@@ -85,7 +105,7 @@ export const LeTokenomics: React.FC<Props> = ({
                             index={firstTokenIndex}
                             renderMode={LeTokenCardRenderMode.kStandalone}
                             currentPoints={currentPoints}
-                            renderMilestone={index => renderMilestone(index)}
+                            renderMilestone={index => renderMilestone(index, showP2P)}
                             renderRestrictions={x =>
                                 renderRestrictions(
                                     x,
@@ -137,6 +157,7 @@ export const LeTokenomics: React.FC<Props> = ({
                     battles={battles}
                     tokenDisplays={tokenDisplays}
                     tracksProgress={tracksProgress}
+                    showP2P={showP2P}
                     toggleBattleState={toggleBattleState}
                 />
             </div>

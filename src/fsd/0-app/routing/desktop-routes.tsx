@@ -112,6 +112,13 @@ export const globalLearnRoutes: RouteObject[] = [
             return { Component: Campaigns };
         },
     },
+    {
+        path: 'learn/hse',
+        async lazy() {
+            const { HomeScreenEvent } = await import('@/fsd/1-pages/learn-hse/hse');
+            return { Component: HomeScreenEvent };
+        },
+    },
     dirtyDozenLazyRoute,
     insightsLazyRoute,
     guildInsightsLazyRoute,

@@ -14,11 +14,11 @@ import { AccessibleTooltip, ConfirmationDialog } from '@/fsd/5-shared/ui';
 import { LegendaryEventEnum, LreReqImage, LreTrackId } from '@/fsd/4-entities/lre';
 
 import { RequirementStatus, ILreTeam } from '@/fsd/3-features/lre';
-import { ProgressState } from '@/fsd/3-features/lre-progress';
+import { LrePointsCategoryId, ProgressState } from '@/fsd/3-features/lre-progress';
 
 import { LreTrackBattleSummary } from './le-track-battle';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
-import { ILreTrackProgress } from './lre.models';
+import { ILreRequirements, ILreTrackProgress } from './lre.models';
 
 interface Props {
     track: ILreTrackProgress;
@@ -91,6 +91,17 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
     };
 
     const completionPercentage = Math.round((currentPoints / track.totalPoints) * 100);
+
+    const getRestrictionTooltip = (req: ILreRequirements) => {
+        if (
+            req.id === LrePointsCategoryId.defeatAll ||
+            req.id === LrePointsCategoryId.killScore ||
+            req.id === LrePointsCategoryId.highScore
+        ) {
+            return req.name;
+        }
+        return `${req.name} - ${req.pointsPerBattle}`;
+    };
 
     const handleOpenConfirmDialog = () => {
         setConfirmDialogOpen(true);
@@ -191,7 +202,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                             className={`flex items-center justify-center ${index === firstRestrictionIndex ? 'ml-4' : ''}`}>
                                             <LreReqImage
                                                 iconId={req.iconId}
-                                                tooltip={req.name}
+                                                tooltip={getRestrictionTooltip(req)}
                                                 sizePx={isMobile ? 25 : 30}
                                             />
                                         </div>

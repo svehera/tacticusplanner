@@ -17,6 +17,7 @@ export enum LreSection {
     tokenomics,
     battles,
     leaderboard,
+    settings,
 }
 
 export interface ILreProgressModel {
@@ -39,6 +40,7 @@ export interface ILreOccurrenceProgress {
     freeMissionsProgress: number;
     premiumMissionsProgress: number;
     bundlePurchased: boolean;
+    ohSoCloseShards: number;
 }
 
 /**
