@@ -347,7 +347,7 @@ export const MaterialsTable: React.FC<Props> = ({
     };
 
     return (
-        <div className="ag-theme-material w-full max-h-[40vh] min-h-[150px]" style={{ height: 50 + rows.length * 30 }}>
+        <div className="ag-theme-material w-full h-full flex flex-col min-h-[150px]">
             <div className="flex-box gap5">
                 <InfoIcon color="primary" />
                 <span>

@@ -275,12 +275,33 @@ export const RaidsPlan: React.FC<Props> = ({
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MaterialsTable
-                                rows={estimatedRanks.finishedMaterials}
-                                updateMaterialQuantity={updateInventory}
-                                onGridReady={() => setGrid3Loaded(true)}
-                                inventory={upgrades}
-                            />
+                            <div className="flex-grow">
+                                {viewPreferences.raidsTableView === true ? (
+                                    <MaterialsTable
+                                        rows={estimatedRanks.finishedMaterials}
+                                        updateMaterialQuantity={updateInventory}
+                                        onGridReady={() => setGrid3Loaded(true)}
+                                        inventory={upgrades}
+                                    />
+                                ) : (
+                                    <div className="h-[300px] w-full overflow-y-scroll p-2 flex flex-wrap gap-1">
+                                        <div className="flex flex-wrap gap-x-4 gap-y-4">
+                                            {estimatedRanks.finishedMaterials.map((material, index) => (
+                                                <div className="item-raids w-64" key={index}>
+                                                    <RaidUpgradeMaterialCard
+                                                        index={index}
+                                                        upgradeMaterialSnowprintId={material.id}
+                                                        currentQuantity={material.acquiredCount}
+                                                        desiredQuantity={material.requiredCount}
+                                                        relatedCharacterSnowprintIds={material.relatedCharacters}
+                                                        locations={material.locations}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </AccordionDetails>
                     </Accordion>
                 )}
@@ -298,17 +319,40 @@ export const RaidsPlan: React.FC<Props> = ({
                             </AccessibleTooltip>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div className="flex-box">
-                                <InfoIcon color="primary" /> You don&apos;t have available campaigns nodes for the items
-                                listed in the table below
-                            </div>
+                            <div className="h-[400px] flex flex-col">
+                                <div className="flex-box p-2">
+                                    <InfoIcon color="primary" /> You don&apos;t have available campaigns nodes for the
+                                    items listed in the table below
+                                </div>
 
-                            <MaterialsTable
-                                rows={estimatedRanks.blockedMaterials}
-                                updateMaterialQuantity={updateInventory}
-                                onGridReady={() => setGrid2Loaded(true)}
-                                inventory={upgrades}
-                            />
+                                <div className="flex-grow">
+                                    {viewPreferences.raidsTableView === true ? (
+                                        <MaterialsTable
+                                            rows={estimatedRanks.blockedMaterials}
+                                            updateMaterialQuantity={updateInventory}
+                                            onGridReady={() => setGrid2Loaded(true)}
+                                            inventory={upgrades}
+                                        />
+                                    ) : (
+                                        <div className="h-[300px] w-full overflow-y-scroll p-2 flex flex-wrap gap-1">
+                                            <div className="flex flex-wrap gap-x-4 gap-y-4">
+                                                {estimatedRanks.blockedMaterials.map((material, index) => (
+                                                    <div className="item-raids w-64" key={index}>
+                                                        <RaidUpgradeMaterialCard
+                                                            index={index}
+                                                            upgradeMaterialSnowprintId={material.id}
+                                                            currentQuantity={material.acquiredCount}
+                                                            desiredQuantity={material.requiredCount}
+                                                            relatedCharacterSnowprintIds={material.relatedCharacters}
+                                                            locations={material.locations}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
                         </AccordionDetails>
                     </Accordion>
                 )}
