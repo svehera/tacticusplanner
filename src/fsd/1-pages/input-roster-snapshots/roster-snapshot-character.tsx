@@ -210,6 +210,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
     };
 
     const shouldShowXpLevel = () => {
+        if (mow !== undefined) return false;
         if (showXpLevel === RosterSnapshotShowVariableSettings.Always) return true;
         if (showXpLevel === RosterSnapshotShowVariableSettings.Never) return false;
         return (char?.xpLevel ?? 0) > 0;
