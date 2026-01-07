@@ -39,7 +39,10 @@ function getDisplay(
     diffStyle: RosterSnapshotDiffStyle,
     showShards: RosterSnapshotShowVariableSettings,
     showMythicShards: RosterSnapshotShowVariableSettings,
-    showXpLevel: RosterSnapshotShowVariableSettings
+    showXpLevel: RosterSnapshotShowVariableSettings,
+    showShardDiffs: RosterSnapshotShowVariableSettings,
+    showMythicShardsDiffs: RosterSnapshotShowVariableSettings,
+    showXpLevelDiffs: RosterSnapshotShowVariableSettings
 ) {
     let leftIndex = left;
     let rightIndex = right;
@@ -74,19 +77,31 @@ function getDisplay(
             </div>
         );
     }
-    let base = rosterSnapshots.base;
+    let base = RosterSnapshotsService.fixSnapshot(rosterSnapshots.base);
     for (let i = 0; i <= leftIndex; i++) {
-        base = RosterSnapshotsService.resolveSnapshotDiff(base, rosterSnapshots.diffs[i]);
+        base = RosterSnapshotsService.fixSnapshot(
+            RosterSnapshotsService.resolveSnapshotDiff(base, rosterSnapshots.diffs[i])
+        );
     }
     let compare: IRosterSnapshot = base;
     if (rightIndex < rosterSnapshots.diffs.length) {
         for (let i = leftIndex + 1; i <= rightIndex; i++) {
-            compare = RosterSnapshotsService.resolveSnapshotDiff(compare, rosterSnapshots.diffs[i]);
+            compare = RosterSnapshotsService.fixSnapshot(
+                RosterSnapshotsService.resolveSnapshotDiff(compare, rosterSnapshots.diffs[i])
+            );
         }
     } else {
-        compare = RosterSnapshotsService.createSnapshot('Current Roster', Date.now(), chars, mows);
+        compare = RosterSnapshotsService.fixSnapshot(
+            RosterSnapshotsService.createSnapshot('Current Roster', Date.now(), chars, mows)
+        );
     }
-    const diff = RosterSnapshotsService.diffSnapshots(base, compare);
+    const diff = RosterSnapshotsService.diffSnapshots(
+        base,
+        compare,
+        showShardDiffs !== RosterSnapshotShowVariableSettings.Never,
+        showMythicShardsDiffs !== RosterSnapshotShowVariableSettings.Never,
+        showXpLevelDiffs !== RosterSnapshotShowVariableSettings.Never
+    );
 
     interface CharDiff {
         before: ICharacter2;
@@ -252,6 +267,14 @@ export const RosterSnapshots = () => {
     const [showXpLevelSetting, setShowXpLevelSetting] = useState<RosterSnapshotShowVariableSettings>(
         viewPreferences.showXpLevelInRosterSnapshots
     );
+    const [showShardDiffsSetting, setShowShardDiffsSetting] = useState<RosterSnapshotShowVariableSettings>(
+        viewPreferences.showShardsInDiffs
+    );
+    const [showMythicShardsDiffsSetting, setShowMythicShardsDiffsSetting] =
+        useState<RosterSnapshotShowVariableSettings>(viewPreferences.showMythicShardsInDiffs);
+    const [showXpLevelDiffsSetting, setShowXpLevelDiffsSetting] = useState<RosterSnapshotShowVariableSettings>(
+        viewPreferences.showXpLevelInDiffs
+    );
 
     useEffect(() => {
         setLiveSnapshotIndices(RosterSnapshotsService.getLiveSnapshotInidices(rosterSnapshots));
@@ -259,6 +282,9 @@ export const RosterSnapshots = () => {
         setShowShardsSetting(viewPreferences.showShardsInRosterSnapshots);
         setShowMythicShardsSetting(viewPreferences.showMythicShardsInRosterSnapshots);
         setShowXpLevelSetting(viewPreferences.showXpLevelInRosterSnapshots);
+        setShowShardDiffsSetting(viewPreferences.showShardsInDiffs);
+        setShowMythicShardsDiffsSetting(viewPreferences.showMythicShardsInDiffs);
+        setShowXpLevelDiffsSetting(viewPreferences.showXpLevelInDiffs);
     }, [rosterSnapshots, viewPreferences]);
 
     const sync = async () => {
@@ -417,6 +443,14 @@ export const RosterSnapshots = () => {
         return 'Take a snapshot of your current roster state.';
     };
 
+    const handleDiffStyleChange = (value: RosterSnapshotDiffStyle) => {
+        dispatch.viewPreferences({
+            type: 'Update',
+            setting: 'rosterSnapshotsDiffStyle',
+            value,
+        });
+    };
+
     const handleShowShardsChange = (value: RosterSnapshotShowVariableSettings) => {
         dispatch.viewPreferences({
             type: 'Update',
@@ -433,18 +467,34 @@ export const RosterSnapshots = () => {
         });
     };
 
-    const handleDiffStyleChange = (value: RosterSnapshotDiffStyle) => {
-        dispatch.viewPreferences({
-            type: 'Update',
-            setting: 'rosterSnapshotsDiffStyle',
-            value,
-        });
-    };
-
     const handleShowXpLevelChange = (value: RosterSnapshotShowVariableSettings) => {
         dispatch.viewPreferences({
             type: 'Update',
             setting: 'showXpLevelInRosterSnapshots',
+            value,
+        });
+    };
+
+    const handleShowShardDiffsChange = (value: RosterSnapshotShowVariableSettings) => {
+        dispatch.viewPreferences({
+            type: 'Update',
+            setting: 'showShardsInDiffs',
+            value,
+        });
+    };
+
+    const handleShowMythicShardsDiffsChange = (value: RosterSnapshotShowVariableSettings) => {
+        dispatch.viewPreferences({
+            type: 'Update',
+            setting: 'showMythicShardsInDiffs',
+            value,
+        });
+    };
+
+    const handleShowXpLevelDiffsChange = (value: RosterSnapshotShowVariableSettings) => {
+        dispatch.viewPreferences({
+            type: 'Update',
+            setting: 'showXpLevelInDiffs',
             value,
         });
     };
@@ -468,9 +518,15 @@ export const RosterSnapshots = () => {
                     showMythicShards={showMythicShardsSetting}
                     showXpLevel={showXpLevelSetting}
                     diffStyle={viewPreferences.rosterSnapshotsDiffStyle}
+                    showShardDiffs={showShardDiffsSetting}
+                    showMythicShardsDiffs={showMythicShardsDiffsSetting}
+                    showXpLevelDiffs={showXpLevelDiffsSetting}
                     onShowShardsChange={handleShowShardsChange}
                     onShowMythicShardsChange={handleShowMythicShardsChange}
                     onDiffStyleChange={handleDiffStyleChange}
+                    onShowShardDiffsChange={handleShowShardDiffsChange}
+                    onShowMythicShardsDiffsChange={handleShowMythicShardsDiffsChange}
+                    onShowXpLevelDiffsChange={handleShowXpLevelDiffsChange}
                     onShowXpLevelChange={handleShowXpLevelChange}
                     onDeleteSnapshot={handleDeleteSnapshot}
                     onDeleteAllSnapshots={handleDeleteAllSnapshots}
@@ -560,7 +616,10 @@ export const RosterSnapshots = () => {
                 diffStyleSetting,
                 showShardsSetting,
                 showMythicShardsSetting,
-                showXpLevelSetting
+                showXpLevelSetting,
+                showShardDiffsSetting,
+                showMythicShardsDiffsSetting,
+                showXpLevelDiffsSetting
             )}
         </div>
     );

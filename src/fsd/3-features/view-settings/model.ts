@@ -75,6 +75,9 @@ export interface IRosterSnapshotsViewSettings {
     showXpLevelInRosterSnapshots: RosterSnapshotShowVariableSettings;
     showShardsInRosterSnapshots: RosterSnapshotShowVariableSettings;
     showMythicShardsInRosterSnapshots: RosterSnapshotShowVariableSettings;
+    showXpLevelInDiffs: RosterSnapshotShowVariableSettings;
+    showShardsInDiffs: RosterSnapshotShowVariableSettings;
+    showMythicShardsInDiffs: RosterSnapshotShowVariableSettings;
     rosterSnapshotsDiffStyle: RosterSnapshotDiffStyle;
 }
 
