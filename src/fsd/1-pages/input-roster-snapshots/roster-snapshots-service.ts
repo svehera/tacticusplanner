@@ -427,10 +427,11 @@ export class RosterSnapshotsService {
                     xpLevel: char.xpLevel,
                 });
             } else {
-                if (!diffShards) char.shards = baseChar.shards;
-                if (!diffMythicShards) char.mythicShards = baseChar.mythicShards;
-                if (!diffXpLevel) char.xpLevel = baseChar.xpLevel;
-                const diff: ISnapshotUnitDiff = this.diffCharacter(baseChar, char);
+                const fixedChar = cloneDeep(char);
+                if (!diffShards) fixedChar.shards = baseChar.shards;
+                if (!diffMythicShards) fixedChar.mythicShards = baseChar.mythicShards;
+                if (!diffXpLevel) fixedChar.xpLevel = baseChar.xpLevel;
+                const diff: ISnapshotUnitDiff = this.diffCharacter(baseChar, fixedChar);
                 if (Object.entries(diff).length > 1) {
                     // If only id is present, no changes.
                     charDiffs.push(diff);
@@ -452,9 +453,10 @@ export class RosterSnapshotsService {
                     locked: mow.locked,
                 });
             } else {
-                if (!diffShards) mow.shards = baseMow.shards;
-                if (!diffMythicShards) mow.mythicShards = baseMow.mythicShards;
-                const diff: ISnapshotUnitDiff = this.diffMachineOfWar(baseMow, mow);
+                const fixedMow = cloneDeep(mow);
+                if (!diffShards) fixedMow.shards = baseMow.shards;
+                if (!diffMythicShards) fixedMow.mythicShards = baseMow.mythicShards;
+                const diff: ISnapshotUnitDiff = this.diffMachineOfWar(baseMow, fixedMow);
                 if (
                     diff.active !== undefined ||
                     diff.passive !== undefined ||
