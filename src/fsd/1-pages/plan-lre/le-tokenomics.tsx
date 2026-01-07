@@ -78,6 +78,10 @@ export const LeTokenomics: React.FC<Props> = ({
         .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
         .sort((a, b) => a.points - b.points);
 
+    const achievedMilestones = milestonesAndPoints.filter(
+        milestone => currentPoints >= milestone.points && (showP2P || milestone.packsPerRound === 0)
+    );
+
     // Helper function to check if a token has yellow or red restrictions
     const hasWarningRestrictions = (token: TokenDisplay): boolean => {
         return token.restricts.some(restrict => {
@@ -219,6 +223,18 @@ export const LeTokenomics: React.FC<Props> = ({
             </div>
 
             <div className="flex flex-col items-center w-full gap-y-4">{characterPortrait()}</div>
+
+            {showP2P && (
+                <div className="flex flex-col items-center w-full gap-y-4">
+                    <div>
+                        <h3 className="text-lg font-bold">Milestones Already Achieved</h3>
+                    </div>
+                    <LeTokenMilestoneCardGrid
+                        milestonesToList={achievedMilestones}
+                        emptyMessage="No milestones achieved yet."
+                    />
+                </div>
+            )}
 
             <div key="tokens" className="flex flex-col w-full gap-2">
                 <LeTokenTable
