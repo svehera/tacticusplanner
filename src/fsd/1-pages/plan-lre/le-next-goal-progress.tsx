@@ -1,21 +1,15 @@
 import { Info as InfoIcon } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
-import React, { useContext } from 'react';
+import React from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import { StoreContext } from '@/reducers/store.provider';
-
-import { LeProgressService } from './le-progress.service';
-import { ILreProgressModel } from './lre.models';
+import { LeProgress } from './le-progress.service';
 
 interface Props {
-    model: ILreProgressModel;
+    progress: LeProgress;
+    shardsPerChest: number;
 }
 
-export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
-    const { leSettings } = useContext(StoreContext);
-    const progress = LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true);
-
+export const LeNextGoalProgress: React.FC<Props> = ({ progress, shardsPerChest }) => {
     return (
         <div className="flex-box wrap gap15 m-2.5">
             <div className="flex gap-[5px]">
@@ -47,8 +41,7 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
                 Shards to {progress.goal}:
                 <span className="font-bold">
                     {' '}
-                    {progress.currentChests * model.shardsPerChest} /{' '}
-                    {progress.chestsForNextGoal * model.shardsPerChest}
+                    {progress.currentChests * shardsPerChest} / {progress.chestsForNextGoal * shardsPerChest}
                 </span>
                 <Tooltip title={/*totalChests + ' in total'*/ `${progress.totalChests} in total`}>
                     <InfoIcon />
