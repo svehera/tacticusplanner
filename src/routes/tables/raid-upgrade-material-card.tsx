@@ -6,6 +6,7 @@ import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign/@x/upgrade';
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { CharactersService } from '@/fsd/4-entities/character';
+import { mows2Data } from '@/fsd/4-entities/mow';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 interface Props {
@@ -53,6 +54,8 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
     const isSufficient = neededQuantity <= 0;
     const characterIconHeight = 28;
 
+    console.log('relatedCharacterSnowprintIds', relatedCharacterSnowprintIds);
+
     return (
         <div className="w-full max-w-[400px] bg-gray-900 rounded-md border border-gray-700 p-3 flex flex-col gap-3 shadow-lg">
             <div className="grid grid-cols-[auto_1fr] gap-3">
@@ -77,9 +80,17 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
                             <div
                                 key={id}
                                 className="w-[28px] h-[28px] rounded-full overflow-hidden border border-gray-600"
-                                title={CharactersService.getUnit(id)?.name ?? id}>
+                                title={
+                                    CharactersService.getUnit(id)?.name ??
+                                    mows2Data.mows.find(m => id === m.name)?.name ??
+                                    id
+                                }>
                                 <UnitShardIcon
-                                    icon={CharactersService.getUnit(id)?.roundIcon ?? id}
+                                    icon={
+                                        CharactersService.getUnit(id)?.roundIcon ??
+                                        mows2Data.mows.find(m => id === m.name)?.roundIcon ??
+                                        id
+                                    }
                                     height={characterIconHeight}
                                     width={characterIconHeight}
                                 />
