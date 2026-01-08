@@ -364,9 +364,7 @@ export const RankLookup = () => {
             </div>
 
             <div>
-                <div
-                    className="ag-theme-material max-h-[40vh] w-full"
-                    style={{ height: 50 + totalMaterials.length * 30 }}>
+                <div className="ag-theme-material w-full h-[800px]">
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}
