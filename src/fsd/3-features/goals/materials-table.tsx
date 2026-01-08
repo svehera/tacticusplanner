@@ -1,5 +1,4 @@
-﻿import InfoIcon from '@mui/icons-material/Info';
-import {
+﻿import {
     AllCommunityModule,
     ColDef,
     ColGroupDef,
@@ -347,29 +346,21 @@ export const MaterialsTable: React.FC<Props> = ({
     };
 
     return (
-        <div className="ag-theme-material w-full h-full flex flex-col min-h-[150px]">
-            <div className="flex-box gap5">
-                <InfoIcon color="primary" />
-                <span>
-                    Click on the <b>Inventory</b> column cell to edit its value
-                </span>
-            </div>
-            <AgGridReact
-                modules={[AllCommunityModule]}
-                theme={themeBalham}
-                onCellEditingStopped={saveChanges}
-                suppressChangeDetection={true}
-                singleClickEdit={true}
-                defaultColDef={{
-                    suppressMovable: true,
-                    sortable: true,
-                    wrapText: true,
-                    autoHeight: true,
-                }}
-                columnDefs={columnDefs}
-                rowData={processedRows}
-                onGridReady={onGridReadyInternal}
-            />
-        </div>
+        <AgGridReact
+            modules={[AllCommunityModule]}
+            theme={themeBalham}
+            onCellEditingStopped={saveChanges}
+            suppressChangeDetection={true}
+            singleClickEdit={true}
+            defaultColDef={{
+                suppressMovable: true,
+                sortable: true,
+                wrapText: true,
+                autoHeight: true,
+            }}
+            columnDefs={columnDefs}
+            rowData={processedRows}
+            onGridReady={onGridReadyInternal}
+        />
     );
 };
