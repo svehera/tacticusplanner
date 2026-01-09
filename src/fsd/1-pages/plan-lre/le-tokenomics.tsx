@@ -27,6 +27,7 @@ import { LeProgressService } from './le-progress.service';
 import { LeTokenCard } from './le-token-card';
 import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
+import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
@@ -39,7 +40,6 @@ interface Props {
     currentPoints: number;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
-    eventStartTime: number | undefined;
     showP2P: boolean;
     nextTokenCompleted: (tokenIndex: number) => void;
     toggleBattleState: (
@@ -62,7 +62,6 @@ export const LeTokenomics: React.FC<Props> = ({
     currentPoints,
     tokenDisplays,
     tracksProgress,
-    eventStartTime,
     showP2P,
     nextTokenCompleted,
     toggleBattleState,
@@ -99,15 +98,16 @@ export const LeTokenomics: React.FC<Props> = ({
     const firstToken = tokenDisplays.find(token => !hasWarningRestrictions(token)) ?? null;
     const firstTokenIndex = firstToken ? tokenDisplays.indexOf(firstToken) : -1;
 
-    const millisRemaining = () => {
-        if (eventStartTime === undefined) return 0;
-        const now = Date.now();
-        const EVENT_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
-        return Math.max(EVENT_DURATION - (now - eventStartTime), 0);
-    };
-
-    const freeTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (3 * 60 * 60 * 1000));
-    const adTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (24 * 60 * 60 * 1000));
+    const totalFreeTokensRemainingInIteration = LeTokenService.getFreeTokensRemainingInIteration(
+        legendaryEvent,
+        Date.now()
+    );
+    const totalAdTokensRemainingInIteration = LeTokenService.getAdTokensRemainingInIteration(
+        legendaryEvent,
+        Date.now()
+    );
+    const totalFreeTokensRemaining = LeTokenService.getFreeTokensRemainingInEvent(legendaryEvent, Date.now());
+    const totalAdTokensRemaining = LeTokenService.getAdTokensRemainingInEvent(legendaryEvent, Date.now());
 
     const progress = LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true);
 
@@ -173,8 +173,14 @@ export const LeTokenomics: React.FC<Props> = ({
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        <div>Free Tokens Remaining: {freeTokensRemaining}</div>
-                        <div>Ad Tokens Remaining: {adTokensRemaining}</div>
+                        <div>
+                            Free Tokens Remaining: {totalFreeTokensRemaining} ({totalFreeTokensRemainingInIteration} in
+                            this iteration)
+                        </div>
+                        <div>
+                            Ad Tokens Remaining: {totalAdTokensRemaining} ({totalAdTokensRemainingInIteration} in this
+                            iteration)
+                        </div>
                     </div>
                     <div>
                         <h3 className="text-lg font-bold">Next Token</h3>
@@ -182,6 +188,17 @@ export const LeTokenomics: React.FC<Props> = ({
                     <div className="justify-center w-full md:w-2/3 lg:w-1/2">
                         <LeTokenCard
                             token={firstToken}
+                            tokenUsedDuringEventIteration={
+                                LeTokenService.getIterationForToken(
+                                    0,
+                                    /*currentTokensRemaining=*/ 0,
+                                    legendaryEvent,
+                                    model.occurrenceProgress[0].premiumMissionsProgress > 0,
+                                    model.occurrenceProgress[1].premiumMissionsProgress > 0,
+                                    model.occurrenceProgress[2].premiumMissionsProgress > 0,
+                                    Date.now()
+                                ) ?? 3
+                            }
                             index={firstTokenIndex}
                             renderMode={LeTokenCardRenderMode.kStandalone}
                             currentPoints={currentPoints}
@@ -239,6 +256,8 @@ export const LeTokenomics: React.FC<Props> = ({
             <div key="tokens" className="flex flex-col w-full gap-2">
                 <LeTokenTable
                     battles={battles}
+                    legendaryEvent={legendaryEvent}
+                    progress={model}
                     tokenDisplays={tokenDisplays}
                     tracksProgress={tracksProgress}
                     showP2P={showP2P}
