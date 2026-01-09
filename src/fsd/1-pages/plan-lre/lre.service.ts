@@ -45,12 +45,14 @@ export class LreService {
                 premiumMissions: 0,
                 regularMissions: 0,
                 bundle: 0,
+                ohSoCloseShards: 0,
             };
             occurrenceProgress.push({
                 eventOccurrence: occurrence as 1 | 2 | 3,
                 premiumMissionsProgress: value.premiumMissions,
                 freeMissionsProgress: value.regularMissions,
                 bundlePurchased: !!value.bundle,
+                ohSoCloseShards: value.ohSoCloseShards ?? 0,
             });
         }
 
@@ -171,6 +173,7 @@ export class LreService {
                 premiumMissions: occurrenceProgress.premiumMissionsProgress,
                 regularMissions: occurrenceProgress.freeMissionsProgress,
                 bundle: +occurrenceProgress.bundlePurchased,
+                ohSoCloseShards: occurrenceProgress.ohSoCloseShards,
             };
         }
 

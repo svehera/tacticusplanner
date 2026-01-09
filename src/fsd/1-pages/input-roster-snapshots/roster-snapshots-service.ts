@@ -3,6 +3,9 @@ import { cloneDeep } from 'lodash';
 // eslint-disable-next-line import-x/no-internal-modules
 import { ICharacter2 } from '@/models/interfaces';
 
+import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+
+import { CharactersService } from '@/fsd/4-entities/character';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import {
@@ -108,6 +111,42 @@ export class RosterSnapshotsService {
             chars: chars.map(c => this.snapshotCharacter(c)),
             mows: mows.map(m => this.snapshotMachineOfWar(m)),
         };
+    }
+
+    private static getMinimumStarsForRarity(rarity: Rarity): RarityStars {
+        switch (rarity) {
+            case Rarity.Common:
+                return RarityStars.None;
+            case Rarity.Uncommon:
+                return RarityStars.TwoStars;
+            case Rarity.Rare:
+                return RarityStars.FourStars;
+            case Rarity.Epic:
+                return RarityStars.RedOneStar;
+            case Rarity.Legendary:
+                return RarityStars.RedThreeStars;
+            case Rarity.Mythic:
+                return RarityStars.OneBlueStar;
+        }
+        return RarityStars.None;
+    }
+
+    public static fixSnapshot(snapshot: IRosterSnapshot): IRosterSnapshot {
+        const ret = cloneDeep(snapshot);
+        for (const char of ret.chars) {
+            char.activeAbilityLevel = Math.max(1, char.activeAbilityLevel);
+            char.passiveAbilityLevel = Math.max(1, char.passiveAbilityLevel);
+            char.xpLevel = Math.max(1, char.xpLevel);
+            char.rarity = Math.max(char.rarity, CharactersService.getInitialRarity(char.id) ?? Rarity.Common);
+            char.stars = Math.max(char.stars, this.getMinimumStarsForRarity(char.rarity));
+        }
+        for (const mow of ret.mows) {
+            mow.primaryAbilityLevel = Math.max(1, mow.primaryAbilityLevel);
+            mow.secondaryAbilityLevel = Math.max(1, mow.secondaryAbilityLevel);
+            mow.rarity = Math.max(mow.rarity, CharactersService.getInitialRarity(mow.id) ?? Rarity.Common);
+            mow.stars = Math.max(mow.stars, this.getMinimumStarsForRarity(mow.rarity));
+        }
+        return ret;
     }
 
     /**
@@ -360,7 +399,13 @@ export class RosterSnapshotsService {
      * @returns An `IRosterSnapshotDiff` object detailing the differences,
      *          including new units and changes to existing ones.
      */
-    public static diffSnapshots(base: IRosterSnapshot, compare: IRosterSnapshot): IRosterSnapshotDiff {
+    public static diffSnapshots(
+        base: IRosterSnapshot,
+        compare: IRosterSnapshot,
+        diffShards: boolean = false,
+        diffMythicShards: boolean = false,
+        diffXpLevel: boolean = false
+    ): IRosterSnapshotDiff {
         const name = compare.name;
         const dateMillisUtc = compare.dateMillisUtc;
 
@@ -382,7 +427,11 @@ export class RosterSnapshotsService {
                     xpLevel: char.xpLevel,
                 });
             } else {
-                const diff: ISnapshotUnitDiff = this.diffCharacter(baseChar, char);
+                const fixedChar = cloneDeep(char);
+                if (!diffShards) fixedChar.shards = baseChar.shards;
+                if (!diffMythicShards) fixedChar.mythicShards = baseChar.mythicShards;
+                if (!diffXpLevel) fixedChar.xpLevel = baseChar.xpLevel;
+                const diff: ISnapshotUnitDiff = this.diffCharacter(baseChar, fixedChar);
                 if (Object.entries(diff).length > 1) {
                     // If only id is present, no changes.
                     charDiffs.push(diff);
@@ -404,7 +453,10 @@ export class RosterSnapshotsService {
                     locked: mow.locked,
                 });
             } else {
-                const diff: ISnapshotUnitDiff = this.diffMachineOfWar(baseMow, mow);
+                const fixedMow = cloneDeep(mow);
+                if (!diffShards) fixedMow.shards = baseMow.shards;
+                if (!diffMythicShards) fixedMow.mythicShards = baseMow.mythicShards;
+                const diff: ISnapshotUnitDiff = this.diffMachineOfWar(baseMow, fixedMow);
                 if (
                     diff.active !== undefined ||
                     diff.passive !== undefined ||

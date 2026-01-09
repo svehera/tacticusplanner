@@ -9,6 +9,7 @@ import {
     Equipment,
     Trait,
     DamageType,
+    Rarity,
 } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line boundaries/element-types
@@ -39,6 +40,11 @@ export class CharactersService {
 
     static readonly activeLres = this.lreCharacters.filter(x => !x.lre?.finished);
     static readonly inactiveLres = this.lreCharacters.filter(x => !!x.lre?.finished);
+
+    public static getInitialRarity(snowprintId: string): Rarity | undefined {
+        const character = this.charactersData.find(unit => unit.snowprintId === snowprintId);
+        return character?.initialRarity;
+    }
 
     static readonly activeLre: ICharacterData = (() => {
         return this.charactersData.find(unit => unit.snowprintId === LegendaryEventService.getActiveLreUnitId())!;

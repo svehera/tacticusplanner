@@ -27,10 +27,16 @@ interface ManageSnapshotsDialogProps {
     showShards: RosterSnapshotShowVariableSettings;
     showMythicShards: RosterSnapshotShowVariableSettings;
     showXpLevel: RosterSnapshotShowVariableSettings;
+    showShardDiffs: RosterSnapshotShowVariableSettings;
+    showMythicShardsDiffs: RosterSnapshotShowVariableSettings;
+    showXpLevelDiffs: RosterSnapshotShowVariableSettings;
     diffStyle: RosterSnapshotDiffStyle;
     onShowShardsChange: (value: RosterSnapshotShowVariableSettings) => void;
     onShowMythicShardsChange: (value: RosterSnapshotShowVariableSettings) => void;
     onShowXpLevelChange: (value: RosterSnapshotShowVariableSettings) => void;
+    onShowShardDiffsChange: (value: RosterSnapshotShowVariableSettings) => void;
+    onShowMythicShardsDiffsChange: (value: RosterSnapshotShowVariableSettings) => void;
+    onShowXpLevelDiffsChange: (value: RosterSnapshotShowVariableSettings) => void;
     onDiffStyleChange: (value: RosterSnapshotDiffStyle) => void;
     onDeleteSnapshot: (index: number) => void;
     onDeleteAllSnapshots: () => void;
@@ -46,10 +52,16 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
     showShards,
     showMythicShards,
     showXpLevel,
+    showShardDiffs,
+    showMythicShardsDiffs,
+    showXpLevelDiffs,
     diffStyle,
     onShowShardsChange,
     onShowMythicShardsChange,
     onShowXpLevelChange,
+    onShowShardDiffsChange,
+    onShowMythicShardsDiffsChange,
+    onShowXpLevelDiffsChange,
     onDiffStyleChange,
     onDeleteSnapshot,
     onDeleteAllSnapshots,
@@ -132,50 +144,111 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                     <Typography variant="h6" gutterBottom>
                         Display Options
                     </Typography>
-                    <FormControl fullWidth>
-                        <InputLabel>Show Shards</InputLabel>
-                        <Select
-                            label="Show Shards"
-                            value={showShards}
-                            onChange={e => onShowShardsChange(e.target.value as RosterSnapshotShowVariableSettings)}>
-                            <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
-                            <MenuItem value={RosterSnapshotShowVariableSettings.WhenNonZero}>When Non-Zero</MenuItem>
-                            <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Always</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <FormControl fullWidth>
-                        <InputLabel>Show Mythic Shards</InputLabel>
-                        <Select
-                            label="Show Mythic Shards"
-                            value={showMythicShards}
-                            onChange={e =>
-                                onShowMythicShardsChange(e.target.value as RosterSnapshotShowVariableSettings)
-                            }>
-                            <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
-                            <MenuItem value={RosterSnapshotShowVariableSettings.WhenNonZero}>When Non-Zero</MenuItem>
-                            <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Always</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <FormControl fullWidth>
-                        <InputLabel>Show XP Level</InputLabel>
-                        <Select
-                            label="Show XP Level"
-                            value={showXpLevel}
-                            onChange={e => onShowXpLevelChange(e.target.value as RosterSnapshotShowVariableSettings)}>
-                            <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
-                            <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Always</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <FormControl fullWidth>
-                        <InputLabel>Diff Style</InputLabel>
-                        <Select
-                            label="Diff Style"
-                            value={diffStyle}
-                            onChange={e => onDiffStyleChange(e.target.value as RosterSnapshotDiffStyle)}>
-                            <MenuItem value={RosterSnapshotDiffStyle.SideBySide}>Side by Side</MenuItem>
-                            <MenuItem value={RosterSnapshotDiffStyle.Detailed}>Detailed</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <div className="flex flex-col gap-4">
+                        {/* Row 1: Shards */}
+                        <div className="flex gap-4">
+                            <FormControl fullWidth>
+                                <InputLabel>Show Shards</InputLabel>
+                                <Select
+                                    label="Show Shards"
+                                    value={showShards}
+                                    onChange={e =>
+                                        onShowShardsChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    }>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.WhenNonZero}>
+                                        When Non-Zero
+                                    </MenuItem>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Always</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth>
+                                <InputLabel>Diff Shards</InputLabel>
+                                <Select
+                                    label="Diff Shards"
+                                    value={showShardDiffs}
+                                    onChange={e =>
+                                        onShowShardDiffsChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    }>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Never}>No</MenuItem>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Yes</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+
+                        {/* Row 2: Mythic Shards */}
+                        <div className="flex gap-4">
+                            <FormControl fullWidth>
+                                <InputLabel>Show Mythic Shards</InputLabel>
+                                <Select
+                                    label="Show Mythic Shards"
+                                    value={showMythicShards}
+                                    onChange={e =>
+                                        onShowMythicShardsChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    }>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.WhenNonZero}>
+                                        When Non-Zero
+                                    </MenuItem>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Always</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth>
+                                <InputLabel>Diff Mythic Shards</InputLabel>
+                                <Select
+                                    label="Diff Mythic Shards"
+                                    value={showMythicShardsDiffs}
+                                    onChange={e =>
+                                        onShowMythicShardsDiffsChange(
+                                            e.target.value as RosterSnapshotShowVariableSettings
+                                        )
+                                    }>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Never}>No</MenuItem>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Yes</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+
+                        {/* Row 3: XP Level */}
+                        <div className="flex gap-4">
+                            <FormControl fullWidth>
+                                <InputLabel>Show XP Level</InputLabel>
+                                <Select
+                                    label="Show XP Level"
+                                    value={showXpLevel}
+                                    onChange={e =>
+                                        onShowXpLevelChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    }>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Always</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth>
+                                <InputLabel>Diff XP Level</InputLabel>
+                                <Select
+                                    label="Diff XP Level"
+                                    value={showXpLevelDiffs}
+                                    onChange={e =>
+                                        onShowXpLevelDiffsChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    }>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Never}>No</MenuItem>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Yes</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+
+                        {/* Single Row: Diff Style */}
+                        <FormControl fullWidth>
+                            <InputLabel>Diff Style</InputLabel>
+                            <Select
+                                label="Diff Style"
+                                value={diffStyle}
+                                onChange={e => onDiffStyleChange(e.target.value as RosterSnapshotDiffStyle)}>
+                                <MenuItem value={RosterSnapshotDiffStyle.SideBySide}>Side by Side</MenuItem>
+                                <MenuItem value={RosterSnapshotDiffStyle.Detailed}>Detailed</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
                 </div>
                 <div className="h-5"></div>
                 <div className="flex flex-col gap-4 rounded border border-gray-200 p-4 dark:border-gray-700">

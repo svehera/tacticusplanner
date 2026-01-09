@@ -214,9 +214,6 @@ export class ShardsService {
             let shardsCollected = 0;
             let daysTotal = 0;
             let onslaughtTokens = 0;
-            for (const location of raidsLocations) {
-                console.log('location: ', location);
-            }
             while (!isBlocked && shardsCollected < shardsLeft) {
                 let leftToCollect = shardsLeft - shardsCollected;
                 for (const location of raidsLocations) {
