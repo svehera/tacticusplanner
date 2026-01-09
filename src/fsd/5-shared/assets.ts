@@ -427,8 +427,3 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
         label: 'Mythic Unit Shard',
     },
 };
-
-export const snowprintStarsIcons = {
-    mythicWings,
-    blueStar,
-};
