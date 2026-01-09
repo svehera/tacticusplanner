@@ -32,7 +32,7 @@ export class LegendaryEventService {
         return 7 * 24 * 60 * 60 * 1000; // 7 days
     }
 
-    /** @returns the number of milliseconds in a legendary event. */
+    /** @returns the number of milliseconds between the start of two legendary events. */
     public static getTimeBetweenLegendaryEvents(): number {
         return 5 * 7 * 24 * 60 * 60 * 1000; // 5 weeks
     }

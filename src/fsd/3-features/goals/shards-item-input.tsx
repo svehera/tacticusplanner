@@ -28,12 +28,17 @@ export const ShardsItemInput: React.FC<Props> = ({ shardsRaid, handleAdd }) => {
         location.isCompleted = true;
     };
 
+    const isMythic = shardsRaid.requiredCount === 0 && shardsRaid.requiredMythicCount > 0;
+
+    const acquired = !isMythic ? shardsRaid.acquiredCount : shardsRaid.acquiredMythicCount;
+    const required = !isMythic ? shardsRaid.requiredCount : shardsRaid.requiredMythicCount;
+
     return (
         <div className="flex-box" style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
             <div className="flex-box column text-base">
-                <UnitShardIcon icon={shardsRaid.iconPath} />
+                <UnitShardIcon icon={shardsRaid.iconPath} mythic={isMythic} />
                 <span>
-                    {shardsRaid.acquiredCount}/{shardsRaid.requiredCount}
+                    {acquired}/{required}
                 </span>
             </div>
             <ul className="w-full ps-[15px]">

@@ -1,5 +1,7 @@
 ﻿import React from 'react';
 
+import { LeSettingsAction } from '@/reducers/le-settings.reducer';
+import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
 import { XpUseAction } from '@/reducers/xp-use-reducer';
 import { GuildAction } from 'src/reducers/guildReducer';
@@ -28,6 +30,7 @@ import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 import { IViewPreferences } from '@/fsd/3-features/view-settings';
 
 import { XpUseState } from '@/fsd/1-pages/input-resources';
+import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 
 import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
@@ -80,13 +83,15 @@ export interface IGlobalState {
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
+    leSettings: ILegendaryEventSettings;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
-    xpIncomeState: XpIncomeState;
-    xpUseState: XpUseState;
+    xpIncome: XpIncomeState;
+    xpUse: XpUseState;
+    rosterSnapshots: IRosterSnapshotsState;
 }
 
 export interface IDispatchContext {
@@ -100,14 +105,16 @@ export interface IDispatchContext {
     leSelectedRequirements: React.Dispatch<LeSelectedRequirementsAction>;
     leSelectedTeams: React.Dispatch<LeSelectedTeamsAction>;
     leProgress: React.Dispatch<LeProgressAction>;
+    leSettings: React.Dispatch<LeSettingsAction>;
     campaignsProgress: React.Dispatch<CampaignsProgressAction>;
     goals: React.Dispatch<GoalsAction>;
     inventory: React.Dispatch<InventoryAction>;
     dailyRaids: React.Dispatch<DailyRaidsAction>;
     guildWar: React.Dispatch<GuildWarAction>;
     guild: React.Dispatch<GuildAction>;
-    xpIncomeState: React.Dispatch<XpIncomeAction>;
-    xpUseState: React.Dispatch<XpUseAction>;
+    xpIncome: React.Dispatch<XpIncomeAction>;
+    xpUse: React.Dispatch<XpUseAction>;
+    rosterSnapshots: React.Dispatch<RosterSnapshotsAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -127,13 +134,15 @@ export interface IPersonalData2 {
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
+    leSettings: ILegendaryEventSettings;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
-    xpIncomeState: XpIncomeState;
-    xpUseState: XpUseState;
+    xpIncome: XpIncomeState;
+    xpUse: XpUseState;
+    rosterSnapshots: IRosterSnapshotsState;
 }
 
 export interface IGuild {
@@ -322,9 +331,11 @@ export interface IPersonalGoal {
     targetRarity?: Rarity;
     targetStars?: RarityStars;
     shardsPerToken?: number;
+    mythicShardsPerToken?: number;
 
     // unlock
     campaignsUsage?: CampaignsLocationsUsage;
+    mythicCampaignsUsage?: CampaignsLocationsUsage;
 
     // upgrade mow
     unitId?: string;
@@ -348,6 +359,18 @@ export interface IInventory {
     forgeBadges: Record<Rarity, number>;
     orbs: Record<Alliance, Record<Rarity, number>>;
     upgrades: Record<string, number>;
+}
+
+export interface ILegendaryEventSettings {
+    defaultPageForActiveEvent: LegendaryEventDefaultPage;
+    defaultPageWhenEventNotActive: LegendaryEventDefaultPage;
+    showP2POptions: boolean;
+}
+
+export enum LegendaryEventDefaultPage {
+    TEAMS,
+    PROGRESS,
+    TOKENOMICS,
 }
 
 // Re-export types from FSD entities

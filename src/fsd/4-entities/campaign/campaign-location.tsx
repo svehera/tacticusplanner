@@ -14,6 +14,7 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
     // Campaigns events has optional "Challenge" nodes 3B, 13B and 25B
     // this function converts linear progression to proper labels
     const locationNumber = useMemo(() => {
+        if (location === undefined) return 'undefined';
         const challengeCampaigns = [
             Campaign.AMSC,
             Campaign.AMEC,
@@ -30,7 +31,9 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
         return location.nodeNumber;
     }, []);
 
-    return (
+    return location === undefined ? (
+        <span>undefined</span>
+    ) : (
         <div
             className="flex-box gap-0.5"
             style={{

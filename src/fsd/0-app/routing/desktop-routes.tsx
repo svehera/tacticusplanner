@@ -10,6 +10,7 @@ import { guildWarZonesLazyRoute } from '@/fsd/1-pages/guild-war-layout/guild-war
 import { guildWarOffenseLazyRoute } from '@/fsd/1-pages/guild-war-offense/guild-war-offense.route';
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
 import { resourcesLazyRoute } from '@/fsd/1-pages/input-resources/resources.route';
+import { rosterSnapshotsLazyRoute } from '@/fsd/1-pages/input-roster-snapshots';
 import { xpIncomeLazyRoute } from '@/fsd/1-pages/input-xp-income/xp-income.route';
 import { insightsLazyRoute } from '@/fsd/1-pages/insights/insights.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
@@ -24,6 +25,7 @@ import DesktopApp from './desktop-app';
 
 export const globalInputRoutes: RouteObject[] = [
     wyoLazyRoute,
+    rosterSnapshotsLazyRoute,
     myProgressLazyRoute,
     {
         path: 'input/inventory',
@@ -108,6 +110,13 @@ export const globalLearnRoutes: RouteObject[] = [
         async lazy() {
             const { Campaigns } = await import('@/fsd/1-pages/learn-campaigns/campaigns');
             return { Component: Campaigns };
+        },
+    },
+    {
+        path: 'learn/hse',
+        async lazy() {
+            const { HomeScreenEvent } = await import('@/fsd/1-pages/learn-hse/hse');
+            return { Component: HomeScreenEvent };
         },
     },
     dirtyDozenLazyRoute,
