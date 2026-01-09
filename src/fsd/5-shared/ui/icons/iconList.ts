@@ -26,7 +26,7 @@ export { ForgeBadgesTotal } from './forge-badges-total';
 export { XpBooksTotal } from './xp-books-total';
 export { MoWComponentsTotal } from './mow-components-total';
 
-export interface TacticusIcon {
+interface TacticusIcon {
     file: string;
     label: string;
 }

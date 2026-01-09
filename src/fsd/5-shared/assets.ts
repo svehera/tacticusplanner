@@ -84,7 +84,7 @@ import hitsIcon from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_h
 import meleeAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_melee_01.png';
 import rangedAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_rangedattack_01.png';
 
-export interface SnowprintIcon {
+interface SnowprintIcon {
     file: string;
     label: string;
 }
