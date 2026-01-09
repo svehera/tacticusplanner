@@ -177,8 +177,8 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
 };
 
 export const starsIcons = {
-    mythicWings: snowprintIcons.mythicWings,
-    blueStar: snowprintIcons.blueStar,
+    mythicWings: snowprintIcons.mythicWings.file,
+    blueStar: snowprintIcons.blueStar.file,
     redStar: redStar,
     goldStar: goldStar,
 };
