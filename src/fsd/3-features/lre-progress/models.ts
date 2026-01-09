@@ -22,6 +22,7 @@ export interface ILreOverviewDto {
     regularMissions: number;
     premiumMissions: number;
     bundle: number;
+    ohSoCloseShards?: number;
 }
 
 export interface ILreBattleProgressDto {
@@ -34,5 +35,6 @@ export interface ILreRequirementsProgressDto {
     id: LrePointsCategoryId | string;
     state: ProgressState; // Legacy field for backward compatibility
     scoredPoints?: number; // Used for partial kill scores
+    highScoredPoints?: number; // Used for partial high scores
     status?: number; // New: RequirementStatus enum value (0-4)
 }

@@ -24,7 +24,7 @@ import redStar from './red star small.png';
 import goldStar from './star small.png';
 import warTokenIcon from './warToken.png';
 
-export interface TacticusIcon {
+interface TacticusIcon {
     file: string;
     label: string;
 }
@@ -158,6 +158,20 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     damagePsychic: snowprintIcons.damagePsychic,
     damagePulse: snowprintIcons.damagePulse,
     damageToxic: snowprintIcons.damageToxic,
+    commonFrame: snowprintIcons.commonFrame,
+    uncommonFrame: snowprintIcons.uncommonFrame,
+    rareFrame: snowprintIcons.rareFrame,
+    epicFrame: snowprintIcons.epicFrame,
+    legendaryFrame: snowprintIcons.legendaryFrame,
+    mythicFrame: snowprintIcons.mythicFrame,
+    mowCommonFrame: snowprintIcons.mowCommonFrame,
+    mowUncommonFrame: snowprintIcons.mowUncommonFrame,
+    mowRareFrame: snowprintIcons.mowRareFrame,
+    mowEpicFrame: snowprintIcons.mowEpicFrame,
+    mowLegendaryFrame: snowprintIcons.mowLegendaryFrame,
+    mowMythicFrame: snowprintIcons.mowMythicFrame,
+    shard: snowprintIcons.shard,
+    mythicShard: snowprintIcons.mythicShard,
 };
 
 export const starsIcons = {

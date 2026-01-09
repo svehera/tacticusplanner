@@ -172,8 +172,7 @@ const LOADERS = {
 const DEFAULT_SPINNER = 'spin';
 
 interface LoaderProps
-    extends Omit<React.ComponentPropsWithoutRef<'svg'>, 'display' | 'opacity' | 'intent'>,
-        LoaderVariantProps {
+    extends Omit<React.ComponentPropsWithoutRef<'svg'>, 'display' | 'opacity' | 'intent'>, LoaderVariantProps {
     variant?: keyof typeof LOADERS;
     percentage?: number;
     isIndeterminate?: boolean;

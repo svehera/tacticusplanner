@@ -20,7 +20,11 @@ interface Props {
     possibleLocations: ICampaignBattleComposed[];
     unlockedLocations: string[];
     campaignsUsage: CampaignsLocationsUsage;
+    possibleMythicLocations: ICampaignBattleComposed[];
+    unlockedMythicLocations: string[];
+    mythicCampaignsUsage: CampaignsLocationsUsage;
     shardsPerToken: number;
+    mythicShardsPerToken: number;
     onChange: (key: keyof IPersonalGoal, value: number) => void;
 }
 
@@ -32,7 +36,11 @@ export const SetAscendGoal: React.FC<Props> = ({
     possibleLocations,
     unlockedLocations,
     campaignsUsage,
+    possibleMythicLocations,
+    unlockedMythicLocations,
+    mythicCampaignsUsage,
     shardsPerToken,
+    mythicShardsPerToken,
     onChange,
 }) => {
     const rarityValues = useMemo(() => {
@@ -76,35 +84,76 @@ export const SetAscendGoal: React.FC<Props> = ({
                 ))}
             </div>
 
-            {!!possibleLocations.length && (
-                <div className="flex gap-3 items-center">
-                    <div className="w-1/2">
-                        <CampaignsUsageSelect
-                            disabled={!unlockedLocations.length}
-                            value={campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
-                            valueChange={value => onChange('campaignsUsage', value)}
-                        />
-                    </div>
-                    <div className="w-1/2">
-                        <NumbersInput
-                            title="Shards per onslaught"
-                            helperText="Put 0 to ignore Onslaught raids"
-                            value={shardsPerToken}
-                            valueChange={value => onChange('shardsPerToken', value)}
-                        />
-                    </div>
-                </div>
+            {(currentRarity < Rarity.Legendary || currentStars < RarityStars.OneBlueStar) && (
+                <>
+                    {possibleLocations.length !== 0 && (
+                        <>
+                            <div className="flex gap-3 items-center">
+                                <CampaignsUsageSelect
+                                    disabled={!unlockedLocations.length}
+                                    value={campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
+                                    valueChange={value => onChange('campaignsUsage', value)}
+                                    mythic={false}
+                                />
+                            </div>
+                            <div className="flex gap-3 items-center">
+                                <NumbersInput
+                                    title="Shards per onslaught"
+                                    helperText="Put 0 to ignore Onslaught raids"
+                                    value={shardsPerToken}
+                                    valueChange={value => onChange('shardsPerToken', value)}
+                                />
+                            </div>
+                        </>
+                    )}
+
+                    {possibleLocations.length === 0 && (
+                        <div className="flex-box gap10 full-width">
+                            <NumbersInput
+                                title="Shards per onslaught"
+                                helperText="You should put more than 0 to be able to create the goal"
+                                value={shardsPerToken}
+                                valueChange={value => onChange('shardsPerToken', value)}
+                            />
+                        </div>
+                    )}
+                </>
             )}
 
-            {!possibleLocations.length && (
-                <div className="flex-box gap10 full-width">
-                    <NumbersInput
-                        title="Shards per onslaught"
-                        helperText="You should put more than 0 to be able to create the goal"
-                        value={shardsPerToken}
-                        valueChange={value => onChange('shardsPerToken', value)}
-                    />
-                </div>
+            {targetRarity >= Rarity.Mythic && (
+                <>
+                    {!!possibleMythicLocations.length && (
+                        <div className="flex gap-3 items-center">
+                            <div className="w-1/2">
+                                <CampaignsUsageSelect
+                                    disabled={!unlockedMythicLocations.length}
+                                    value={mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
+                                    valueChange={value => onChange('mythicCampaignsUsage', value)}
+                                    mythic={true}
+                                />
+                            </div>
+                            <div className="w-1/2">
+                                <NumbersInput
+                                    title="Mythic shards per onslaught"
+                                    helperText="Put 0 to ignore Onslaught raids"
+                                    value={mythicShardsPerToken}
+                                    valueChange={value => onChange('mythicShardsPerToken', value)}
+                                />
+                            </div>
+                        </div>
+                    )}
+
+                    {possibleMythicLocations.length === 0 && (
+                        <div className="flex-box gap10 full-width">
+                            <NumbersInput
+                                title="Mythic shards per onslaught"
+                                helperText="You should put more than 0 to be able to create the goal"
+                                value={mythicShardsPerToken}
+                                valueChange={value => onChange('mythicShardsPerToken', value)}
+                            />
+                        </div>
+                    )}
+                </>
             )}
         </>
     );
