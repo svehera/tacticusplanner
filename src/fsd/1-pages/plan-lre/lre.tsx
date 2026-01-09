@@ -12,6 +12,7 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { SetGoalDialog } from '@/shared-components/goals/set-goal-dialog';
 
 import { CharactersService } from '@/fsd/4-entities/character';
+import { LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { IAutoTeamsPreferences } from '@/fsd/3-features/lre';
 // eslint-disable-next-line import-x/no-internal-modules
@@ -24,6 +25,7 @@ import { LeProgress } from './le-progress';
 import { useLreProgress } from './le-progress.hooks';
 import { LeTokenomics } from './le-tokenomics';
 import { LegendaryEvent } from './legendary-event';
+import { LegendaryEventSettings } from './legendary-event-settings';
 import { useLre } from './lre-hook';
 import { LreSectionsSettings } from './lre-sections-settings';
 import { LreSettings } from './lre-settings';
@@ -32,7 +34,7 @@ import PointsTable from './points-table';
 import { TokenEstimationService } from './token-estimation-service';
 
 export const Lre: React.FC = () => {
-    const { leSelectedTeams, viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
+    const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
     const { toggleBattleState } = useLreProgress(legendaryEvent);
     const { model } = useLreProgress(legendaryEvent);
@@ -86,9 +88,9 @@ export const Lre: React.FC = () => {
         [tokens, currentPoints]
     );
 
-    const nextTokenCompleted = (): void => {
-        if (tokenDisplays.length === 0) return;
-        const token = tokenDisplays[0];
+    const nextTokenCompleted = (tokenIndex: number): void => {
+        if (tokenDisplays.length === 0 || tokenIndex < 0 || tokenIndex >= tokenDisplays.length) return;
+        const token = tokenDisplays[tokenIndex];
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
 
         // Used to handle the "Mark Completed" option in tokenomics.
@@ -107,6 +109,11 @@ export const Lre: React.FC = () => {
 
     const battles = LeBattleService.getBattleSetForCharacter(legendaryEvent.id);
 
+    const eventStartTime = () => {
+        if (LegendaryEventService.getActiveEvent()?.id !== legendaryEvent.id) return undefined;
+        return LegendaryEventService.getLegendaryEventStartDates()[0].getTime();
+    };
+
     const renderTabContent = () => {
         switch (section) {
             case LreSection.teams:
@@ -120,7 +127,10 @@ export const Lre: React.FC = () => {
                         battles={battles}
                         tokens={tokens}
                         tokenDisplays={tokenDisplays}
+                        tracksProgress={model.tracksProgress}
                         currentPoints={currentPoints}
+                        showP2P={leSettings.showP2POptions}
+                        eventStartTime={eventStartTime()}
                         nextTokenCompleted={nextTokenCompleted}
                         toggleBattleState={toggleBattleState}
                     />
@@ -129,6 +139,8 @@ export const Lre: React.FC = () => {
                 return battles !== undefined && <LeBattles key="battles" battles={battles} />;
             case LreSection.leaderboard:
                 return <PointsTable legendaryEvent={legendaryEvent} />;
+            case LreSection.settings:
+                return <LegendaryEventSettings />;
             default:
                 return <div>Default Content</div>;
         }
@@ -156,6 +168,7 @@ export const Lre: React.FC = () => {
                     <Tab label="Tokenomics" value={LreSection.tokenomics} />
                     <Tab label="Battles" value={LreSection.battles} />
                     <Tab label="Leaderboard" value={LreSection.leaderboard} />
+                    <Tab label="Settings" value={LreSection.settings} />
                 </Tabs>
                 {[LreSection.teams].includes(section) && (
                     <>

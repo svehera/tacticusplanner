@@ -25,7 +25,7 @@ const kEliteEnergyMax = 600;
 const kNonEliteEnergyMax = 600;
 
 export const XpIncome: React.FC = () => {
-    const { characters, xpIncomeState } = useContext(StoreContext);
+    const { characters, xpIncome } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const {
@@ -38,43 +38,43 @@ export const XpIncome: React.FC = () => {
         additionalBooksPerWeek,
         onslaughtBlueStar,
         incursionLegendaryLevel,
-    } = xpIncomeState;
+    } = xpIncome;
 
-    const [raidLoops, setRaidLoops] = useDebouncedState('raidLoops', xpIncomeState.raidLoops, xpIncomeState);
+    const [raidLoops, setRaidLoops] = useDebouncedState('raidLoops', xpIncome.raidLoops, xpIncome);
     const [extraBossesAfterLoop, setExtraBossesAfterLoop] = useDebouncedState(
         'extraBossesAfterLoop',
-        xpIncomeState.extraBossesAfterLoop,
-        xpIncomeState
+        xpIncome.extraBossesAfterLoop,
+        xpIncome
     );
     const [additionalBosses, setAdditionalBosses] = useDebouncedState(
         'additionalBosses',
-        xpIncomeState.additionalBosses,
-        xpIncomeState
+        xpIncome.additionalBosses,
+        xpIncome
     );
     const [eliteEnergyPerDay, setEliteEnergyPerDay] = useDebouncedState(
         'eliteEnergyPerDay',
-        xpIncomeState.eliteEnergyPerDay,
-        xpIncomeState
+        xpIncome.eliteEnergyPerDay,
+        xpIncome
     );
     const [nonEliteEnergyPerDay, setNonEliteEnergyPerDay] = useDebouncedState(
         'nonEliteEnergyPerDay',
-        xpIncomeState.nonEliteEnergyPerDay,
-        xpIncomeState
+        xpIncome.nonEliteEnergyPerDay,
+        xpIncome
     );
 
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const dispatchUpdate = useCallback(
         (key: keyof XpIncomeState, value: XpIncomeState[keyof XpIncomeState]) => {
-            dispatch.xpIncomeState({
+            dispatch.xpIncome({
                 type: 'SaveXpIncomeState',
                 value: {
-                    ...xpIncomeState,
+                    ...xpIncome,
                     [key]: value,
                 },
             });
         },
-        [dispatch, xpIncomeState]
+        [dispatch, xpIncome]
     );
 
     const estimatedBooksPerWeek = useMemo(

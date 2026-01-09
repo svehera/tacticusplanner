@@ -1,11 +1,12 @@
 import { Info as InfoIcon } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
-import { RequirementStatus } from '@/fsd/3-features/lre';
-import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
 
+import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreProgressModel, ILreTrackProgress } from './lre.models';
 
 interface Props {
@@ -13,6 +14,8 @@ interface Props {
 }
 
 export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
+    const { leSettings } = useContext(StoreContext);
+
     const totalPoints = useMemo(() => {
         return sum(model.tracksProgress.map(x => x.totalPoints));
     }, []);
@@ -25,43 +28,19 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
         return model.chestsMilestones.length;
     }, []);
 
-    // Helper to get points from a requirement, accounting for partial kill scores
-    const getRequirementPoints = (req: {
-        completed: boolean;
-        status?: number;
-        killScore?: number;
-        points: number;
-        id: string;
-    }) => {
-        // Check if new status system is being used
-        if (req.status !== undefined) {
-            const status = req.status as RequirementStatus;
-
-            // Only Cleared and PartiallyCleared contribute points
-            if (status === RequirementStatus.Cleared) {
-                return req.points;
-            }
-            if (
-                status === RequirementStatus.PartiallyCleared &&
-                req.id === LrePointsCategoryId.killScore &&
-                req.killScore
-            ) {
-                return req.killScore;
-            }
-            return 0;
-        }
-
-        // Legacy: use completed flag
-        return req.completed ? req.points : 0;
-    };
+    const useP2P = leSettings.showP2POptions;
 
     const getCurrentPoints = (track: ILreTrackProgress) => {
-        return sum(track.battles.flatMap(x => x.requirementsProgress).map(req => getRequirementPoints(req)));
+        return sum(
+            track.battles
+                .flatMap(x => x.requirementsProgress)
+                .map(req => LreRequirementStatusService.getRequirementPoints(req))
+        );
     };
 
     const currentPoints = sum(model.tracksProgress.map(getCurrentPoints));
 
-    const premiumMissions = sum(model.occurrenceProgress.map(x => x.premiumMissionsProgress));
+    const premiumMissions = useP2P ? sum(model.occurrenceProgress.map(x => x.premiumMissionsProgress)) : 0;
 
     const regularMissions = sum(model.occurrenceProgress.map(x => x.freeMissionsProgress));
 
@@ -77,24 +56,28 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
 
     const regularMissionsCurrency = useMemo(() => {
         return sum(
-            model.occurrenceProgress.map(x => getMissionsCurrency(x.freeMissionsProgress, x.premiumMissionsProgress))
+            model.occurrenceProgress.map(x =>
+                getMissionsCurrency(x.freeMissionsProgress, useP2P ? x.premiumMissionsProgress : 0)
+            )
         );
-    }, [regularMissions, premiumMissions]);
+    }, [regularMissions, premiumMissions, useP2P]);
 
     const premiumMissionsCurrency = useMemo(() => {
         return sum(
-            model.occurrenceProgress.map(x => getMissionsCurrency(x.premiumMissionsProgress, x.premiumMissionsProgress))
+            model.occurrenceProgress.map(x =>
+                getMissionsCurrency(x.premiumMissionsProgress, useP2P ? x.premiumMissionsProgress : 0)
+            )
         );
-    }, [premiumMissions]);
+    }, [premiumMissions, useP2P]);
 
     const getBundleCurrency = (bundle: number, premiumMissionsCount: number) => {
         const additionalPayout = premiumMissionsCount > 0 ? 15 : 0;
         return bundle ? bundle * 300 + additionalPayout : 0;
     };
 
-    const bundleCurrency = sum(
-        model.occurrenceProgress.map(x => getBundleCurrency(+x.bundlePurchased, x.premiumMissionsProgress))
-    );
+    const bundleCurrency = useP2P
+        ? sum(model.occurrenceProgress.map(x => getBundleCurrency(+x.bundlePurchased, x.premiumMissionsProgress)))
+        : 0;
 
     const currentCurrency = useMemo(() => {
         const currentMilestone = model.pointsMilestones.find(x => x.cumulativePoints >= currentPoints);
@@ -129,65 +112,72 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
         return model.chestsMilestones.length;
     }, [currentCurrency]);
 
-    const chestsForUnlock = model.progression.unlock / model.shardsPerChest;
-    const chestsFor4Stars = (model.progression.unlock + model.progression.fourStars) / model.shardsPerChest;
-    const chestsFor5Stars =
-        (model.progression.unlock + model.progression.fourStars + model.progression.fiveStars) / model.shardsPerChest;
-    const chestsForBlueStar =
-        (model.progression.unlock +
-            model.progression.fourStars +
-            model.progression.fiveStars +
-            model.progression.blueStar) /
-        model.shardsPerChest;
-    const chestsForMythic =
-        (model.progression.unlock +
-            model.progression.fourStars +
-            model.progression.fiveStars +
-            model.progression.blueStar +
-            // If we don't have info for mythic, we assume it's unattainable.
-            (model.progression.mythic ?? Infinity)) /
-        model.shardsPerChest;
-    const chestsForTwoBlueStars =
-        (model.progression.unlock +
-            model.progression.fourStars +
-            model.progression.fiveStars +
-            model.progression.blueStar +
-            // If we don't have info for mythic, we assume it's unattainable.
-            (model.progression.mythic ?? Infinity) +
-            (model.progression.twoBlueStars ?? Infinity)) /
-        model.shardsPerChest;
+    const shardsForUnlock = model.progression.unlock;
+    const shardsFor4Stars = model.progression.unlock + model.progression.fourStars;
+    const shardsFor5Stars = model.progression.unlock + model.progression.fourStars + model.progression.fiveStars;
+    const shardsForBlueStar =
+        model.progression.unlock +
+        model.progression.fourStars +
+        model.progression.fiveStars +
+        model.progression.blueStar;
+    const shardsForMythic =
+        model.progression.unlock +
+        model.progression.fourStars +
+        model.progression.fiveStars +
+        model.progression.blueStar +
+        // If we don't have info for mythic, we assume it's unattainable.
+        (model.progression.mythic ?? Infinity);
+    const shardsForTwoBlueStars =
+        model.progression.unlock +
+        model.progression.fourStars +
+        model.progression.fiveStars +
+        model.progression.blueStar +
+        // If we don't have info for mythic, we assume it's unattainable.
+        (model.progression.mythic ?? Infinity) +
+        (model.progression.twoBlueStars ?? Infinity);
+
+    const ohSoCloseShards = model.occurrenceProgress.reduce((acc, x) => acc + x.ohSoCloseShards, 0);
+
+    const currentShards = currentChests * 25 + ohSoCloseShards;
 
     const chestsForNextGoal = useMemo(() => {
-        if (currentChests < chestsForUnlock) {
-            return Math.ceil(chestsForUnlock);
-        } else if (currentChests < chestsFor4Stars) {
-            return Math.ceil(chestsFor4Stars);
-        } else if (currentChests < chestsFor5Stars) {
-            return Math.ceil(chestsFor5Stars);
-        } else if (currentChests < chestsForBlueStar) {
-            return Math.ceil(chestsForBlueStar);
-        } else if (currentChests < chestsForMythic) {
-            return Math.ceil(chestsForMythic);
+        if (currentShards < shardsForUnlock) {
+            return Math.ceil((shardsForUnlock - ohSoCloseShards) / model.shardsPerChest);
+        } else if (currentShards < shardsFor4Stars) {
+            return Math.ceil((shardsFor4Stars - ohSoCloseShards) / model.shardsPerChest);
+        } else if (currentShards < shardsFor5Stars) {
+            return Math.ceil((shardsFor5Stars - ohSoCloseShards) / model.shardsPerChest);
+        } else if (currentShards < shardsForBlueStar) {
+            return Math.ceil((shardsForBlueStar - ohSoCloseShards) / model.shardsPerChest);
+        } else if (currentShards < shardsForMythic) {
+            return Math.ceil((shardsForMythic - ohSoCloseShards) / model.shardsPerChest);
+        } else if (currentShards < shardsForTwoBlueStars) {
+            return Math.ceil((shardsForTwoBlueStars - ohSoCloseShards) / model.shardsPerChest);
         }
-        return Math.ceil(chestsForTwoBlueStars);
-    }, [currentChests]);
+        return totalChests;
+    }, [currentShards]);
 
     const goal = (function () {
-        if (currentChests < chestsForUnlock) {
+        if (currentShards < shardsForUnlock) {
             return 'unlock';
-        } else if (currentChests < chestsFor4Stars) {
+        } else if (currentShards < shardsFor4Stars) {
             return '4 stars';
-        } else if (currentChests < chestsFor5Stars) {
+        } else if (currentShards < shardsFor5Stars) {
             return '5 stars';
-        } else if (currentChests < chestsForBlueStar) {
+        } else if (currentShards < shardsForBlueStar) {
             return 'blue star';
-        } else if (currentChests < chestsForMythic) {
-            if (chestsForMythic === Infinity) {
+        } else if (currentShards < shardsForMythic) {
+            if (shardsForMythic === Infinity) {
                 return 'full clear';
             }
             return 'mythic';
+        } else if (currentShards < shardsForTwoBlueStars) {
+            if (shardsForTwoBlueStars === Infinity) {
+                return 'full clear';
+            }
+            return 'two blue stars';
         }
-        return 'two blue stars';
+        return 'full clear';
     })();
 
     const currencyForNextMilestone = useMemo(() => {

@@ -5,6 +5,7 @@ import { ILreTeam } from '@/models/interfaces';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
+import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreBattleProgress, ILreRequirements, ILreTrackProgress } from './lre.models';
 
 export class TokenUse {
@@ -249,14 +250,11 @@ export class TokenEstimationService {
         }
     }
 
-    /** @returns the current points earned in this battle. Partial kill points are
-     * never computed, full kill points or nothing.
-     */
+    /** @returns the current points earned in this track, accounting for partial killScore and highScore inputs. */
     public static computeCurrentPoints(track: ILreTrackProgress): number {
         return track.battles.reduce((sum, battle) => {
             const battlePoints = battle.requirementsProgress
-                .filter(req => req.completed)
-                .map(x => x.points)
+                .map(req => LreRequirementStatusService.getRequirementPoints(req))
                 .reduce((innerSum, points) => {
                     return innerSum + points;
                 }, 0);

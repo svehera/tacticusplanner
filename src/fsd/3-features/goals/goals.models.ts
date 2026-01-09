@@ -113,10 +113,13 @@ export interface IShardMaterial {
     label: string;
     acquiredCount: number;
     requiredCount: number;
+    acquiredMythicCount: number;
+    requiredMythicCount: number;
     iconPath: string;
     relatedCharacters: string[];
     possibleLocations: ICampaignBattleComposed[];
     onslaughtShards: number;
+    onslaughtMythicShards: number;
     campaignsUsage: CampaignsLocationsUsage;
 }
 

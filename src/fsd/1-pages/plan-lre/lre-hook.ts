@@ -1,6 +1,8 @@
 ﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
+import { LegendaryEventDefaultPage } from '@/models/interfaces';
+// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
@@ -15,7 +17,7 @@ import { LreSection } from './lre.models';
 
 export const useLre = () => {
     const { setHeaderTitle } = useTitle();
-    const { characters } = useContext(StoreContext);
+    const { characters, leSettings } = useContext(StoreContext);
 
     const [legendaryEventId] = useQueryState<LegendaryEventEnum>(
         'character',
@@ -26,11 +28,44 @@ export const useLre = () => {
         value => LegendaryEventEnum[value]
     );
 
+    const isEventActive = useMemo(() => {
+        const event = LegendaryEventService.getActiveEvent();
+        if (event === undefined) return false;
+        if (event.id !== legendaryEventId) return false;
+        const startDate = new Date(event.nextEventDateUtc ?? '');
+        const endDate = startDate.getTime() + 7 * 24 * 60 * 60 * 1000;
+        const now = new Date().getTime();
+        return now >= startDate.getTime() && now <= endDate;
+    }, [legendaryEventId]);
+
+    const mapDefaultToPage = (page: LegendaryEventDefaultPage) => {
+        switch (page) {
+            case LegendaryEventDefaultPage.TEAMS:
+                return LreSection.teams;
+            case LegendaryEventDefaultPage.PROGRESS:
+                return LreSection.progress;
+            case LegendaryEventDefaultPage.TOKENOMICS:
+                return LreSection.tokenomics;
+        }
+        return LreSection.teams;
+    };
+
+    const getDefaultPage = () =>
+        isEventActive
+            ? mapDefaultToPage(leSettings.defaultPageForActiveEvent)
+            : mapDefaultToPage(leSettings.defaultPageWhenEventNotActive);
     const [section, setSection] = useQueryState<LreSection>(
         'section',
-        initQueryParam => (initQueryParam ? +initQueryParam : LreSection.teams),
+        initQueryParam => (initQueryParam ? +initQueryParam : getDefaultPage()),
         value => value.toString()
     );
+
+    useEffect(() => {
+        const url = new URL(window.location.href);
+        if (!url.searchParams.has('section')) {
+            setSection(getDefaultPage());
+        }
+    }, [legendaryEventId, leSettings]);
 
     const [showSettings, setShowSettings] = useState(false);
 

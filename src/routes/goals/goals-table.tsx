@@ -67,6 +67,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 const isMinStars = minStars === goal.starsEnd;
 
                 const targetShards = ShardsService.getTargetShards(goal);
+                const targetMythicShards = ShardsService.getTargetMythicShards(goal);
                 return (
                     <div>
                         <div className="flex-box between">
@@ -88,10 +89,22 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                             </div>
                         </div>
                         <div>
-                            <b>
-                                {goal.shards} of {targetShards}
-                            </b>{' '}
-                            Shards
+                            {targetShards > 0 && (
+                                <div>
+                                    <b>
+                                        {goal.shards} of {targetShards}
+                                    </b>{' '}
+                                    Shards
+                                </div>
+                            )}
+                            {targetMythicShards > 0 && (
+                                <div>
+                                    <b>
+                                        {goal.mythicShards} of {targetMythicShards}
+                                    </b>{' '}
+                                    Mythic Shards
+                                </div>
+                            )}
                         </div>
                     </div>
                 );

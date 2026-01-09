@@ -7,11 +7,18 @@ import { ICampaignsProgress, Campaign } from '@/fsd/4-entities/campaign';
 import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
 
 import { GuildWarTeamType, IGWLayoutZone } from '@/fsd/3-features/guild-war/guild-war.models';
+import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { ArenaLeague } from '@/fsd/1-pages/input-xp-income/models';
 
 import { DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
-import { ICharProgression, IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent, IPersonalData2 } from './interfaces';
+import {
+    ICharProgression,
+    IDailyRaidsFarmOrder,
+    IDailyRaidsHomeScreenEvent,
+    IPersonalData2,
+    LegendaryEventDefaultPage,
+} from './interfaces';
 
 export const rankToLevel: Record<Rank, number> = {
     [Rank.Locked - 1]: 0,
@@ -209,6 +216,13 @@ export const defaultData: IPersonalData2 = {
         craftableItemsInInventory: false,
         wyoFilter: CharactersFilterBy.None,
         wyoOrder: CharactersOrderBy.Faction,
+        showShardsInRosterSnapshots: RosterSnapshotShowVariableSettings.Always,
+        showMythicShardsInRosterSnapshots: RosterSnapshotShowVariableSettings.Always,
+        showXpLevelInRosterSnapshots: RosterSnapshotShowVariableSettings.Always,
+        showShardsInDiffs: RosterSnapshotShowVariableSettings.Always,
+        showMythicShardsInDiffs: RosterSnapshotShowVariableSettings.Always,
+        showXpLevelInDiffs: RosterSnapshotShowVariableSettings.Always,
+        rosterSnapshotsDiffStyle: RosterSnapshotDiffStyle.Detailed,
         showBadges: true,
         showAbilitiesLevel: true,
         showBsValue: false,
@@ -316,6 +330,11 @@ export const defaultData: IPersonalData2 = {
     leTeams: {},
     leProgress: {},
     leSelectedRequirements: {},
+    leSettings: {
+        defaultPageForActiveEvent: LegendaryEventDefaultPage.TOKENOMICS,
+        defaultPageWhenEventNotActive: LegendaryEventDefaultPage.TEAMS,
+        showP2POptions: true,
+    },
     campaignsProgress: defaultCampaignsProgress,
     inventory: {
         xpBooks: createRarityRecord(0),
@@ -369,7 +388,7 @@ export const defaultData: IPersonalData2 = {
     guild: {
         members: [],
     },
-    xpIncomeState: {
+    xpIncome: {
         // Manual Input
         manualBooksPerDay: 0,
 
@@ -399,7 +418,7 @@ export const defaultData: IPersonalData2 = {
         // Additional Sources
         additionalBooksPerWeek: 0,
     },
-    xpUseState: {
+    xpUse: {
         useCommon: true,
         useUncommon: true,
         useRare: true,
@@ -407,6 +426,7 @@ export const defaultData: IPersonalData2 = {
         useLegendary: true,
         useMythic: true,
     },
+    rosterSnapshots: { base: undefined, diffs: [] },
 };
 
 export const goalsLimit = 100;

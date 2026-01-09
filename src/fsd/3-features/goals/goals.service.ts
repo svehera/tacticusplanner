@@ -151,10 +151,13 @@ export class GoalsService {
                     rarityStart: unit.rarity,
                     rarityEnd: g.targetRarity!,
                     shards: unit.shards,
+                    mythicShards: unit.mythicShards ?? 0,
                     starsStart: unit.stars,
                     starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
                     onslaughtShards: g.shardsPerToken ?? 1,
+                    onslaughtMythicShards: g.mythicShardsPerToken ?? 1,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
+                    mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     ...base,
                 };
                 return result;
@@ -180,10 +183,13 @@ export class GoalsService {
                     rarityStart: unit.rarity,
                     rarityEnd: g.targetRarity!,
                     shards: unit.shards,
+                    mythicShards: unit.mythicShards ?? 0,
                     starsStart: unit.stars,
                     starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
                     onslaughtShards: g.shardsPerToken ?? 1,
+                    onslaughtMythicShards: g.mythicShardsPerToken ?? 0,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
+                    mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     ...base,
                 };
                 return result;
@@ -208,6 +214,7 @@ export class GoalsService {
                     type: PersonalGoalType.Unlock,
 
                     shards: unit.shards,
+                    mythicShards: 0,
                     rarity: unit.rarity,
                     rank: unit.rank,
                     faction: unit.faction,
@@ -270,7 +277,9 @@ export class GoalsService {
                     targetRarity: goal.rarityEnd,
                     targetStars: goal.starsEnd,
                     campaignsUsage: goal.campaignsUsage,
+                    mythicCampaignsUsage: goal.mythicCampaignsUsage,
                     shardsPerToken: goal.onslaughtShards,
+                    mythicShardsPerToken: goal.onslaughtMythicShards,
                 };
             }
             case PersonalGoalType.MowAbilities: {
