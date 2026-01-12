@@ -24,7 +24,7 @@ import redStar from './red star small.png';
 import goldStar from './star small.png';
 import warTokenIcon from './warToken.png';
 
-export interface TacticusIcon {
+interface TacticusIcon {
     file: string;
     label: string;
 }
