@@ -212,6 +212,10 @@ export default [
                             message:
                                 'Relative parent imports are not allowed. Use absolute imports with layer names instead.',
                         },
+                        {
+                            group: 'src/assets/*',
+                            message: 'Shared assets have been moved to fsd/5-shared/assets.',
+                        },
                     ],
                     paths: [
                         {
@@ -221,10 +225,6 @@ export default [
                         {
                             name: '@emotion/styled',
                             message: 'Please use TailwindCSS. Emotion is only included as a dependency of MUI.',
-                        },
-                        {
-                            name: 'src/assets/*',
-                            message: 'Shared assets have been moved to fsd/5-shared/assets.',
                         },
                     ],
                 },
