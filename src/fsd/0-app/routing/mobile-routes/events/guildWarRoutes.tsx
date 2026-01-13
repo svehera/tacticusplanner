@@ -1,7 +1,7 @@
 ﻿import { Card, CardHeader } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import { menuItemById } from '../../models/menu-items';
+import { menuItemById } from '@/models/menu-items';
 
 export const PlanGuildWarRoutes = () => {
     const navigate = useNavigate();

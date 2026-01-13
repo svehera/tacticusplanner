@@ -1,8 +1,9 @@
-﻿import difficultyHardImg from 'src/assets/images/icons/difficulty-hard.png';
-import difficultyNormalImg from 'src/assets/images/icons/difficulty-normal.png';
-import difficultyVeryImg from 'src/assets/images/icons/difficulty-very-hard.png';
-import difficultyImg from 'src/assets/images/icons/difficulty.png';
-import { Difficulty } from 'src/models/enums';
+﻿import { Difficulty } from 'src/models/enums';
+
+import difficultyHardImg from '@/fsd/5-shared/assets/images/icons/difficulty-hard.png';
+import difficultyNormalImg from '@/fsd/5-shared/assets/images/icons/difficulty-normal.png';
+import difficultyVeryImg from '@/fsd/5-shared/assets/images/icons/difficulty-very-hard.png';
+import difficultyImg from '@/fsd/5-shared/assets/images/icons/difficulty.png';
 
 export const DifficultyImage = ({ difficulty, withColor = false }: { difficulty: Difficulty; withColor?: boolean }) => {
     if (withColor) {

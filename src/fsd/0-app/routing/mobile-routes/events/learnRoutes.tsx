@@ -1,7 +1,7 @@
 ﻿import { Card, CardHeader } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import { learnSubMenuMobile } from '../../models/menu-items';
+import { learnSubMenuMobile } from '@/models/menu-items';
 
 export const LearnRoutes = () => {
     const navigate = useNavigate();

@@ -1,7 +1,8 @@
-﻿// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+﻿// eslint-disable-next-line import-x/no-internal-modules
 import { MenuItem } from '@/models/menu-item';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import GuildWarIcon from 'src/assets/images/icons/guildWarMono.png';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import GuildWarIcon from '@/fsd/5-shared/assets/images/icons/guildWarMono.png';
 
 export const guildWarDefenseMenuItem = new MenuItem(
     'Defense',

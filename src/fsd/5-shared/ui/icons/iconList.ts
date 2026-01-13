@@ -1,26 +1,26 @@
 // TODO(mythic): Change the location of a few things, but automate copying via datamine_tacticus
 
 /* eslint-disable import-x/no-internal-modules */
-import armourIcon from '@/assets/images/icons/armour.webp';
-import blackstoneIcon from '@/assets/images/icons/blackstone.png';
-import blockIcon from '@/assets/images/icons/block.png';
-import chanceIcon from '@/assets/images/icons/chance.png';
-import critDamageIcon from '@/assets/images/icons/crit_dmg.png';
-import deploymentIcon from '@/assets/images/icons/deployment.png';
-import damageIcon from '@/assets/images/icons/dmg.webp';
-import energyIcon from '@/assets/images/icons/energy.png';
-import healthIcon from '@/assets/images/icons/health.webp';
-import hitsIcon from '@/assets/images/icons/hits.webp';
-import meleeIcon from '@/assets/images/icons/melee.png';
-import mowIcon from '@/assets/images/icons/mow.png';
-import powerIcon from '@/assets/images/icons/power.png';
-import rangedIcon from '@/assets/images/icons/ranged.png';
-import redStar from '@/assets/images/icons/red star small.png';
-import goldStar from '@/assets/images/icons/star small.png';
-import warTokenIcon from '@/assets/images/icons/warToken.png';
+import { snowprintIcons } from '@/fsd/5-shared/assets';
+import armourIcon from '@/fsd/5-shared/assets/images/icons/armour.webp';
+import blackstoneIcon from '@/fsd/5-shared/assets/images/icons/blackstone.png';
+import blockIcon from '@/fsd/5-shared/assets/images/icons/block.png';
+import chanceIcon from '@/fsd/5-shared/assets/images/icons/chance.png';
+import critDamageIcon from '@/fsd/5-shared/assets/images/icons/crit_dmg.png';
+import deploymentIcon from '@/fsd/5-shared/assets/images/icons/deployment.png';
+import damageIcon from '@/fsd/5-shared/assets/images/icons/dmg.webp';
+import energyIcon from '@/fsd/5-shared/assets/images/icons/energy.png';
+import healthIcon from '@/fsd/5-shared/assets/images/icons/health.webp';
+import hitsIcon from '@/fsd/5-shared/assets/images/icons/hits.webp';
+import meleeIcon from '@/fsd/5-shared/assets/images/icons/melee.png';
+import mowIcon from '@/fsd/5-shared/assets/images/icons/mow.png';
+import powerIcon from '@/fsd/5-shared/assets/images/icons/power.png';
+import rangedIcon from '@/fsd/5-shared/assets/images/icons/ranged.png';
+import redStar from '@/fsd/5-shared/assets/images/icons/red star small.png';
+import goldStar from '@/fsd/5-shared/assets/images/icons/star small.png';
+import warTokenIcon from '@/fsd/5-shared/assets/images/icons/warToken.png';
 /* eslint-enable import-x/no-internal-modules */
 
-import { snowprintIcons } from '@/fsd/5-shared/assets';
 export { OrbIcon } from './orb-image';
 export { ForgeBadgesTotal } from './forge-badges-total';
 export { XpBooksTotal } from './xp-books-total';

@@ -222,6 +222,10 @@ export default [
                             name: '@emotion/styled',
                             message: 'Please use TailwindCSS. Emotion is only included as a dependency of MUI.',
                         },
+                        {
+                            name: 'src/assets/*',
+                            message: 'Shared assets have been moved to fsd/5-shared/assets.',
+                        },
                     ],
                 },
             ],
