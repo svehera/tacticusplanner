@@ -213,7 +213,7 @@ export default [
                                 'Relative parent imports are not allowed. Use absolute imports with layer names instead.',
                         },
                         {
-                            group: 'src/assets/*',
+                            group: ['src/assets/*'],
                             message: 'Shared assets have been moved to fsd/5-shared/assets.',
                         },
                     ],
