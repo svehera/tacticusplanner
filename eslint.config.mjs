@@ -118,6 +118,41 @@ export default [
                     })),
                 },
             ],
+            'boundaries/no-unknown': 'off',
+            // https://www.jsboundaries.dev/docs/rules/no-unknown/
+            // Prevents importing files that aren't part of any defined element.
+            'boundaries/no-unknown-files': 'off',
+            // https://www.jsboundaries.dev/docs/rules/no-unknown-files/
+            // Prevents creating files outside of defined elements.
+            'boundaries/no-ignored': 'off',
+            // https://www.jsboundaries.dev/docs/rules/no-ignored/
+            // Prevents importing files that are listed in settings/boundaries/ignored.
+            'boundaries/no-private': [
+                // https://www.jsboundaries.dev/docs/rules/no-private/
+                // TL;DR: Only import from `index.ts` of other modules, not from internal files.
+                //
+                // An element is defined by settings/boundaries/elements (e.g. { type: 'components', pattern: 'components/*' })
+                // An element is considered public at the root of its layer (e.g. components/Button.tsx, components/Button/index.ts)
+                // An element becomes private when it is nested under another element (e.g. components/Button/utils.ts)
+                // Private elements can only be imported by their parent element
+                // Private elements can import public files (e.g. components/Button/utils.ts can import from components/Button/index.ts)
+                // Private elements can import sibling files (elements with the same parent) (e.g. components/Button/VersionA.tsx can import components/Button/utils.ts)
+                'off',
+                { allowUncles: false },
+            ],
+            'boundaries/entry-point': [
+                // https://www.jsboundaries.dev/docs/rules/entry-point/
+                // Defines what are the valid entry points for each element.
+                //
+                // Enforces that imports from other elements only occur through their public API (index.ts).
+                // For example, if you don't want to allow importing JSON data files directly:
+                // { target: ['shared-data'], allow: '*.ts' }
+                'off',
+                {
+                    default: 'disallow',
+                    rules: [],
+                },
+            ],
             'boundaries/element-types': [
                 'error',
                 {
