@@ -22,7 +22,7 @@ import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Alliance, Rank, useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
-import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/assets';
+import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/iconList';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
@@ -58,8 +58,8 @@ export const Goals = () => {
         inventory,
         dailyRaids,
         viewPreferences,
-        xpIncomeState,
-        xpUseState,
+        xpIncome,
+        xpUse,
     } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { userInfo } = useAuth();
@@ -314,11 +314,11 @@ export const Goals = () => {
             cloneDeep(goals),
             cloneDeep(goalsEstimate),
             inventory,
-            xpUseState,
+            xpUse,
             upgradeRankOrMowGoals,
-            xpIncomeState
+            xpIncome
         );
-    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals, xpUseState, xpIncomeState]);
+    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals, xpUse, xpIncome]);
 
     const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
 
@@ -440,9 +440,19 @@ export const Goals = () => {
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
-                                    goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
-                                        x => x.goalId === goal.goalId
-                                    )}
+                                    goalEstimate={adjustedGoalsEstimates.goalEstimates
+                                        .filter(x => x.goalId === goal.goalId)
+                                        .reduce(
+                                            (prev, curr) =>
+                                                ({
+                                                    // We run this reduce solely to aggregate estimates for ascension goals that include
+                                                    // both non-mythic and mythic shards, that's why we ignore other fields.
+                                                    ...curr,
+                                                    oTokensTotal: (prev?.oTokensTotal ?? 0) + (curr.oTokensTotal ?? 0),
+                                                    daysLeft: Math.max(prev?.daysLeft ?? 0, curr.daysLeft ?? 0),
+                                                    daysTotal: (prev?.daysTotal ?? 0) + (curr.daysTotal ?? 0),
+                                                }) as IGoalEstimate
+                                        )}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                     bgColor={GoalService.getBackgroundColor(
                                         viewPreferences.goalColorMode,

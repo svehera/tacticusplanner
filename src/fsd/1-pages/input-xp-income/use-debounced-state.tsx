@@ -32,7 +32,7 @@ export const useDebouncedState = <T extends XpIncomeState[K], K extends keyof Xp
         }
 
         timeoutRef.current = setTimeout(() => {
-            dispatch.xpIncomeState({
+            dispatch.xpIncome({
                 type: 'SaveXpIncomeState',
                 value: {
                     ...globalState,

@@ -1,30 +1,32 @@
 // TODO(mythic): Change the location of a few things, but automate copying via datamine_tacticus
 
-import { snowprintIcons, snowprintStarsIcons } from '@/fsd/5-shared/assets';
+/* eslint-disable import-x/no-internal-modules */
+import armourIcon from '@/assets/images/icons/armour.webp';
+import blackstoneIcon from '@/assets/images/icons/blackstone.png';
+import blockIcon from '@/assets/images/icons/block.png';
+import chanceIcon from '@/assets/images/icons/chance.png';
+import critDamageIcon from '@/assets/images/icons/crit_dmg.png';
+import deploymentIcon from '@/assets/images/icons/deployment.png';
+import damageIcon from '@/assets/images/icons/dmg.webp';
+import energyIcon from '@/assets/images/icons/energy.png';
+import healthIcon from '@/assets/images/icons/health.webp';
+import hitsIcon from '@/assets/images/icons/hits.webp';
+import meleeIcon from '@/assets/images/icons/melee.png';
+import mowIcon from '@/assets/images/icons/mow.png';
+import powerIcon from '@/assets/images/icons/power.png';
+import rangedIcon from '@/assets/images/icons/ranged.png';
+import redStar from '@/assets/images/icons/red star small.png';
+import goldStar from '@/assets/images/icons/star small.png';
+import warTokenIcon from '@/assets/images/icons/warToken.png';
+/* eslint-enable import-x/no-internal-modules */
+
+import { snowprintIcons } from '@/fsd/5-shared/assets';
 export { OrbIcon } from './orb-image';
 export { ForgeBadgesTotal } from './forge-badges-total';
 export { XpBooksTotal } from './xp-books-total';
 export { MoWComponentsTotal } from './mow-components-total';
 
-import armourIcon from './armour.webp';
-import blackstoneIcon from './blackstone.png';
-import blockIcon from './block.png';
-import chanceIcon from './chance.png';
-import critDamageIcon from './crit_dmg.png';
-import deploymentIcon from './deployment.png';
-import damageIcon from './dmg.webp';
-import energyIcon from './energy.png';
-import healthIcon from './health.webp';
-import hitsIcon from './hits.webp';
-import meleeIcon from './melee.png';
-import mowIcon from './mow.png';
-import powerIcon from './power.png';
-import rangedIcon from './ranged.png';
-import redStar from './red star small.png';
-import goldStar from './star small.png';
-import warTokenIcon from './warToken.png';
-
-export interface TacticusIcon {
+interface TacticusIcon {
     file: string;
     label: string;
 }
@@ -158,11 +160,25 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     damagePsychic: snowprintIcons.damagePsychic,
     damagePulse: snowprintIcons.damagePulse,
     damageToxic: snowprintIcons.damageToxic,
+    commonFrame: snowprintIcons.commonFrame,
+    uncommonFrame: snowprintIcons.uncommonFrame,
+    rareFrame: snowprintIcons.rareFrame,
+    epicFrame: snowprintIcons.epicFrame,
+    legendaryFrame: snowprintIcons.legendaryFrame,
+    mythicFrame: snowprintIcons.mythicFrame,
+    mowCommonFrame: snowprintIcons.mowCommonFrame,
+    mowUncommonFrame: snowprintIcons.mowUncommonFrame,
+    mowRareFrame: snowprintIcons.mowRareFrame,
+    mowEpicFrame: snowprintIcons.mowEpicFrame,
+    mowLegendaryFrame: snowprintIcons.mowLegendaryFrame,
+    mowMythicFrame: snowprintIcons.mowMythicFrame,
+    shard: snowprintIcons.shard,
+    mythicShard: snowprintIcons.mythicShard,
 };
 
 export const starsIcons = {
-    mythicWings: snowprintStarsIcons.mythicWings,
-    blueStar: snowprintStarsIcons.blueStar,
+    mythicWings: snowprintIcons.mythicWings.file,
+    blueStar: snowprintIcons.blueStar.file,
     redStar: redStar,
     goldStar: goldStar,
 };

@@ -45,12 +45,14 @@ export class LreService {
                 premiumMissions: 0,
                 regularMissions: 0,
                 bundle: 0,
+                ohSoCloseShards: 0,
             };
             occurrenceProgress.push({
                 eventOccurrence: occurrence as 1 | 2 | 3,
                 premiumMissionsProgress: value.premiumMissions,
                 freeMissionsProgress: value.regularMissions,
                 bundlePurchased: !!value.bundle,
+                ohSoCloseShards: value.ohSoCloseShards ?? 0,
             });
         }
 
@@ -116,6 +118,7 @@ export class LreService {
                         blocked: reqProgress?.state === ProgressState.blocked,
                         status: reqProgress?.status, // Load new status field
                         killScore: reqProgress?.scoredPoints, // Load kill score from scoredPoints
+                        highScore: reqProgress?.highScoredPoints, // Load high score from highScoredPoints
                     };
                 });
                 battles.push({
@@ -170,6 +173,7 @@ export class LreService {
                 premiumMissions: occurrenceProgress.premiumMissionsProgress,
                 regularMissions: occurrenceProgress.freeMissionsProgress,
                 bundle: +occurrenceProgress.bundlePurchased,
+                ohSoCloseShards: occurrenceProgress.ohSoCloseShards,
             };
         }
 
@@ -188,6 +192,7 @@ export class LreService {
                                   : ProgressState.none,
                             status: requirement.status, // Save new status field
                             scoredPoints: requirement.killScore, // Save kill score as scoredPoints
+                            highScoredPoints: requirement.highScore, // Save high score as highScoredPoints
                         }))
                         .filter(x => x.state !== ProgressState.none || x.status !== undefined),
                 }))

@@ -11,7 +11,19 @@ export interface IViewOption<T = IViewPreferences> {
     tooltip?: string;
 }
 
-export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IWyoViewSettings {
+export enum RosterSnapshotShowVariableSettings {
+    Never,
+    WhenNonZero,
+    Always,
+}
+
+export enum RosterSnapshotDiffStyle {
+    SideBySide,
+    Detailed,
+}
+
+export interface IViewPreferences
+    extends ILreViewSettings, ILreTileSettings, IWyoViewSettings, IRosterSnapshotsViewSettings {
     // autoTeams: boolean;
     wyoFilter: CharactersFilterBy;
     wyoOrder: CharactersOrderBy;
@@ -57,6 +69,16 @@ export interface ILreTileSettings {
     lreTileShowUnitPassiveAbility: boolean;
     lreTileShowUnitHealTraits: boolean;
     lreTileShowUnitRelic: boolean;
+}
+
+interface IRosterSnapshotsViewSettings {
+    showXpLevelInRosterSnapshots: RosterSnapshotShowVariableSettings;
+    showShardsInRosterSnapshots: RosterSnapshotShowVariableSettings;
+    showMythicShardsInRosterSnapshots: RosterSnapshotShowVariableSettings;
+    showXpLevelInDiffs: RosterSnapshotShowVariableSettings;
+    showShardsInDiffs: RosterSnapshotShowVariableSettings;
+    showMythicShardsInDiffs: RosterSnapshotShowVariableSettings;
+    rosterSnapshotsDiffStyle: RosterSnapshotDiffStyle;
 }
 
 export interface ICharactersViewControls {
