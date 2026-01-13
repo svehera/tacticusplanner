@@ -8,11 +8,13 @@ const PREMIUM_TOKENS_PER_EVENT = 6;
 
 export class LeTokenService {
     public static getEventStartTimeMillis(event: ILegendaryEvent): number {
+        if (event.finished) return 0;
         const startDate = new Date(event.nextEventDateUtc ?? '');
         return startDate.getTime();
     }
 
     public static getEventEndTimeMillis(event: ILegendaryEvent): number {
+        if (event.finished) return 0;
         return this.getEventStartTimeMillis(event) + ONE_DAY_MILLIS * 7;
     }
 
