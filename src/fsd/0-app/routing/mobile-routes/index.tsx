@@ -3,14 +3,14 @@
 import { faqLazyRoute } from '@/fsd/1-pages/faq/faq.route';
 import { sharedRosterRoute } from '@/fsd/1-pages/shared-roster/shared-roster.route';
 
-import { globalInputRoutes, globalLearnRoutes, globalPlanRoutes } from './desktop-routes';
-import MobileApp from './mobile-app';
+import { globalInputRoutes, globalLearnRoutes, globalPlanRoutes } from '../desktop-routes';
+import MobileApp from '../mobile-app';
 
 const inputRoutes: RouteObject[] = [
     {
         path: 'input',
         async lazy() {
-            const { InputRoutes } = await import('@/mobile-routes/events/inputRoutes');
+            const { InputRoutes } = await import('@/fsd/0-app/routing/mobile-routes/events/inputRoutes');
             return { Component: InputRoutes };
         },
     },
@@ -21,7 +21,7 @@ const planRoutes: RouteObject[] = [
     {
         path: 'plan',
         async lazy() {
-            const { PlanRoutes } = await import('@/mobile-routes/events/planRoutes');
+            const { PlanRoutes } = await import('@/fsd/0-app/routing/mobile-routes/events/planRoutes');
             return { Component: PlanRoutes };
         },
     },
@@ -32,7 +32,7 @@ const learnRoutes: RouteObject[] = [
     {
         path: 'learn',
         async lazy() {
-            const { LearnRoutes } = await import('@/mobile-routes/events/learnRoutes');
+            const { LearnRoutes } = await import('@/fsd/0-app/routing/mobile-routes/events/learnRoutes');
             return { Component: LearnRoutes };
         },
     },
