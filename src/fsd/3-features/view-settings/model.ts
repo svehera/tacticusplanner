@@ -71,7 +71,7 @@ export interface ILreTileSettings {
     lreTileShowUnitRelic: boolean;
 }
 
-export interface IRosterSnapshotsViewSettings {
+interface IRosterSnapshotsViewSettings {
     showXpLevelInRosterSnapshots: RosterSnapshotShowVariableSettings;
     showShardsInRosterSnapshots: RosterSnapshotShowVariableSettings;
     showMythicShardsInRosterSnapshots: RosterSnapshotShowVariableSettings;

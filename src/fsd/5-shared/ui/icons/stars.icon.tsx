@@ -1,6 +1,6 @@
 ﻿import { RarityStars } from '@/fsd/5-shared/model';
 
-import { starsIcons } from './assets';
+import { starsIcons } from './iconList';
 
 export const StarsIcon = ({ stars }: { stars: RarityStars }) => {
     if (stars === RarityStars.None) {
