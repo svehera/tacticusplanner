@@ -1,7 +1,7 @@
 // eslint-disable-next-line import-x/no-internal-modules
-import charactersJson from '@/data/newCharacterData.json';
+import charactersJson from '@/fsd/5-shared/data/newCharacterData.json';
 // eslint-disable-next-line import-x/no-internal-modules
-import charactersRanksJson from '@/data/newRankUpData.json';
+import charactersRanksJson from '@/fsd/5-shared/data/newRankUpData.json';
 
 import { IRankUpData, UnitDataRaw } from './model';
 

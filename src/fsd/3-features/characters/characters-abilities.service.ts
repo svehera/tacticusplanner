@@ -1,10 +1,9 @@
 ﻿import { groupBy, mapValues, sum } from 'lodash';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import abilitiesLvlUpJson from 'src/data/characters-lvl-up-abilities.json';
+import abilitiesLvlUpJson from '@/fsd/5-shared/data/characters-lvl-up-abilities.json';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import xpData from 'src/data/xp.json';
-
+import xpData from '@/fsd/5-shared/data/xp.json';
 import { Rarity, Alliance } from '@/fsd/5-shared/model';
 
 import {

@@ -1,12 +1,12 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import factionsData from 'src/data/factions.json';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { charsUnlockShards, charsProgression } from 'src/models/constants';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalCharacterData2, ICharProgression } from 'src/models/interfaces';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import factionsData from '@/fsd/5-shared/data/factions.json';
 import { Rank, Rarity, UnitType, RarityStars } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';

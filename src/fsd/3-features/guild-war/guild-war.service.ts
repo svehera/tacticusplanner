@@ -1,10 +1,10 @@
 ﻿import { groupBy, mapValues } from 'lodash';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import guildWarData from 'src/data/guildWar.json';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { Difficulty } from 'src/models/enums';
 
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import guildWarData from '@/fsd/5-shared/data/guildWar.json';
 import { Rarity } from '@/fsd/5-shared/model';
 
 import { IGWData, IGWDataRaw, IGWZone } from './guild-war.models';

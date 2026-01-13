@@ -2,9 +2,9 @@
 import { initReactI18next } from 'react-i18next';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import enTranslation from '@/data/i18n/en.json';
+import enTranslation from '@/fsd/5-shared/data/i18n/en.json';
 // eslint-disable-next-line import-x/no-internal-modules
-import ukTranslation from '@/data/i18n/uk.json';
+import ukTranslation from '@/fsd/5-shared/data/i18n/uk.json';
 
 export const initI18n = () => {
     use(initReactI18next).init({

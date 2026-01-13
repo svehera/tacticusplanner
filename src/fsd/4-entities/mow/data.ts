@@ -1,7 +1,7 @@
 // eslint-disable-next-line import-x/no-internal-modules
-import mowsJson from '@/data/mows.json';
+import mowsJson from '@/fsd/5-shared/data/mows.json';
 // eslint-disable-next-line import-x/no-internal-modules
-import mows2Json from '@/data/newMowData.json';
+import mows2Json from '@/fsd/5-shared/data/newMowData.json';
 
 import { IMowsAndUpgradeCosts, IMowStatic } from './model';
 

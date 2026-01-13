@@ -1,6 +1,5 @@
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import xpData from 'src/data/xp.json';
-
+import xpData from '@/fsd/5-shared/data/xp.json';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api';
 import { RarityStars, Rarity, Rank, Alliance } from '@/fsd/5-shared/model';

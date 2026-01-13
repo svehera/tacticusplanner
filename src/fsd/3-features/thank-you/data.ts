@@ -1,7 +1,7 @@
 // eslint-disable-next-line import-x/no-internal-modules
-import contentCreatorsJson from '@/data/contentCreators.json';
+import contentCreatorsJson from '@/fsd/5-shared/data/contentCreators.json';
 // eslint-disable-next-line import-x/no-internal-modules
-import contributorsJson from '@/data/thankYou.json';
+import contributorsJson from '@/fsd/5-shared/data/thankYou.json';
 
 import { IContributor, IContentCreator } from './thank-you.model';
 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import-x/no-internal-modules
-import battleData from '@/data/newLeBattleData.json';
+import battleData from '@/fsd/5-shared/data/newLeBattleData.json';
 
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 

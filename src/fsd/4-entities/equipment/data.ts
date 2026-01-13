@@ -1,5 +1,5 @@
 // eslint-disable-next-line import-x/no-internal-modules
-import newEquipmentDataJson from '@/data/newEquipmentData.json';
+import newEquipmentDataJson from '@/fsd/5-shared/data/newEquipmentData.json';
 
 import { IEquipmentStatic } from './model';
 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import-x/no-internal-modules
-import whatsNewJson from '@/data/whats-new.json';
+import whatsNewJson from '@/fsd/5-shared/data/whats-new.json';
 
 import { IWhatsNew } from './whats-new.model';
 
