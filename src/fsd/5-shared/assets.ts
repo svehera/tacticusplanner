@@ -80,6 +80,7 @@ import imperialComponent from '@/assets/images/snowprint_assets/resources/ui_mac
 import xenosComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_xenos.png';
 import blueStar from '@/assets/images/snowprint_assets/stars/ui_icon_star_legendary_large.png';
 import mythicWings from '@/assets/images/snowprint_assets/stars/ui_icon_star_mythic.png';
+import movement from '@/assets/images/snowprint_assets/stat_icons/ui_icon_movement.png';
 import hitsIcon from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_hit_01.png';
 import meleeAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_melee_01.png';
 import rangedAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_rangedattack_01.png';
@@ -425,5 +426,9 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     mythicShard: {
         file: mythicShardIcon,
         label: 'Mythic Unit Shard',
+    },
+    movement: {
+        file: movement,
+        label: 'Movement',
     },
 };
