@@ -153,6 +153,7 @@ export class CampaignsService {
                 enemiesTotal: battle.enemiesTotal ?? 0,
                 enemiesTypes: battle.enemiesTypes ?? [],
                 detailedEnemyTypes: battle.detailedEnemyTypes ?? [],
+                rawEnemyTypes: battle.rawEnemyTypes ?? [],
             };
         });
 

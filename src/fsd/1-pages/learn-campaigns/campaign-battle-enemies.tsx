@@ -1,15 +1,19 @@
 import React, { JSX, useMemo } from 'react';
 
-import { Rank } from '@/fsd/5-shared/model';
+import { Rank, RarityStars } from '@/fsd/5-shared/model';
 
-import { IDetailedEnemy } from '@/fsd/4-entities/campaign';
-import { NpcPortrait } from '@/fsd/4-entities/npc';
+// eslint-disable-next-line import-x/no-internal-modules
+import { IRawEnemy } from '@/fsd/4-entities/campaign/model';
+import { NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
+
+import { ResolvedEnemyData } from './models';
 
 interface Props {
     battleId: string;
     keyPrefix: string;
-    enemies: IDetailedEnemy[];
+    enemies: IRawEnemy[];
     scale: number;
+    onEnemyClick: (enemy: ResolvedEnemyData) => void;
 }
 
 /**
@@ -21,10 +25,38 @@ interface Props {
  * @param enemies The enemies to display. Each enemy must have a name, rank,
  *                and stars. Bosses can also have a rarity.
  * @param scale The scale of the grid. 1 is full size (which can be very large).
+ * @param onEnemyClick A callback when an enemy is clicked.
  */
-export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, enemies, scale }) => {
+export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, enemies, scale, onEnemyClick }) => {
     // The total number of enemies in this battle.
     const numEnemies = useMemo(() => enemies.reduce((acc, enemy) => acc + enemy.count, 0), [enemies]);
+
+    // Extracted Logic: Resolve string to data object
+    const resolveEnemy = (enemyStr: string): ResolvedEnemyData | null => {
+        const colon = enemyStr.indexOf(':');
+        const id = colon !== -1 ? enemyStr.substring(0, colon) : enemyStr;
+
+        // Calculate index
+        let progressionIndex = 0;
+        if (colon !== -1) {
+            const pStr = enemyStr.substring(colon + 1);
+            const pInt = parseInt(pStr, 10);
+            progressionIndex = isNaN(pInt) ? 0 : pInt;
+        }
+
+        // Adjust for 0-based array (Your logic used -1, keeping that consistency)
+        const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
+
+        const npc = NpcService.getNpcById(id);
+
+        if (!npc || arrayIndex >= npc.stats.length) return null;
+
+        return {
+            id,
+            npc,
+            stats: npc.stats[arrayIndex],
+        };
+    };
 
     // How many enemies we show in each row, based on how many enemies we have
     // in total. Faster than doing the math.
@@ -63,18 +95,6 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
     const horizontalMargin = 20;
     const verticalMargin = 30;
 
-    /** @returns The enum rep of a rank. Defaults to Locked. */
-    const parseRank = (rank: string): Rank => {
-        if (rank.startsWith('Stone')) return Rank.Stone1 + parseInt(rank[6]) - 1;
-        if (rank.startsWith('Iron')) return Rank.Iron1 + parseInt(rank[5]) - 1;
-        if (rank.startsWith('Bronze')) return Rank.Bronze1 + parseInt(rank[7]) - 1;
-        if (rank.startsWith('Silver')) return Rank.Silver1 + parseInt(rank[7]) - 1;
-        if (rank.startsWith('Gold')) return Rank.Gold1 + parseInt(rank[5]) - 1;
-        if (rank.startsWith('Diamond')) return Rank.Diamond1 + parseInt(rank[8]) - 1;
-        if (rank.startsWith('Adamantine')) return Rank.Adamantine1 + parseInt(rank[11]) - 1;
-        return Rank.Locked;
-    };
-
     /** @returns The grid of enemies, as an array without any scaling. */
     const getEnemies = () => {
         let row = 0;
@@ -83,14 +103,29 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
         let enemiesInRow = 0;
         const elems: JSX.Element[] = [];
         enemies.forEach(enemy => {
+            // Pre-resolve NPC data for the click handler
+            const resolved = resolveEnemy(enemy.id);
+            const enemyId = resolved?.id || enemy.id;
+            const npc = NpcService.getNpcById(enemyId);
+            const rank = resolved !== null ? resolved.stats.rank : Rank.Stone1;
+            const stars = resolved !== null ? resolved.stats.rarityStars : RarityStars.None;
+
             for (let i = 0; i < enemy.count; i++) {
                 elems.push(
-                    <div
-                        key={keyPrefix + battleId + (row * maxPerRow + i) + enemy.name + enemy.rank}
-                        className="absolute"
-                        style={{ left, top }}>
-                        <NpcPortrait id={enemy.id} rank={parseRank(enemy.rank)} stars={enemy.stars} />
-                    </div>
+                    <button
+                        key={keyPrefix + battleId + '-' + (row * maxPerRow + i) + '-' + enemyId}
+                        className="absolute p-0 border-none bg-transparent cursor-pointer hover:brightness-110 transition-all focus:outline-none"
+                        style={{ left, top, width: frameWidth, height: frameHeight }}
+                        onClick={() =>
+                            npc &&
+                            onEnemyClick({
+                                id: enemyId,
+                                npc,
+                                stats: resolved !== null ? resolved.stats : npc.stats[0],
+                            })
+                        }>
+                        <NpcPortrait id={enemyId} rank={rank} stars={stars} />
+                    </button>
                 );
                 left += frameWidth + horizontalMargin;
                 if (++enemiesInRow >= columns[row]) {
@@ -112,6 +147,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
             style={{
                 width: scale * (frameWidth * maxPerRow + horizontalMargin * (maxPerRow + 1)),
                 height: scale * (frameHeight * numRows + verticalMargin * (numRows + 1)),
+                position: 'relative',
             }}>
             <div className="absolute" style={{ scale }}>
                 {getEnemies()}
