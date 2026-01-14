@@ -6,7 +6,7 @@ import { getImageUrl } from 'src/shared-logic/functions';
 
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
-import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/assets';
+import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
 
 import { ICharacterData, RankIcon } from '@/fsd/4-entities/character';
 import { IMowStatic2 } from '@/fsd/4-entities/mow/model';
@@ -89,7 +89,7 @@ const AbilityDisplay = ({ value, positionClasses }: AbilityBadgeProps) => {
     return (
         <div
             className={`
-            absolute w-6 h-5 rounded-full flex items-center justify-center 
+            absolute w-6 h-5 rounded-full flex items-center justify-center
             text-[14px] font-bold z-10 shadow-sm border-[1.5px]
             dark:bg-[#272424] dark:text-white border-[#333]
             bg-gray-100 text-gray-900 dark:border-white
@@ -104,7 +104,7 @@ const XpLevelDisplay = ({ value, positionClasses }: AbilityBadgeProps) => {
     return (
         <div
             className={`
-            absolute min-w-[28px] h-5 flex items-center justify-center 
+            absolute min-w-[28px] h-5 flex items-center justify-center
             text-[14px] font-bold z-10 shadow-sm border-[1.5px]
             dark:bg-[#272424] dark:text-white border-[#333]
             bg-gray-100 text-gray-900 dark:border-white

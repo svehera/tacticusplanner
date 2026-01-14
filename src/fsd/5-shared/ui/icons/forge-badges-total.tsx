@@ -5,7 +5,7 @@ import React from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model/enums';
 
-import { MiscIcon } from '../misc.icon';
+import { MiscIcon } from './misc.icon';
 
 interface Props {
     badges: Record<Rarity, number>;

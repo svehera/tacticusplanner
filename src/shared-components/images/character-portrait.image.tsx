@@ -2,7 +2,7 @@
 
 import { getImageUrl } from 'src/shared-logic/functions';
 
-import { tacticusIcons } from '@/fsd/5-shared/ui/icons/assets';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
 
 interface Props {
     icon: string;
