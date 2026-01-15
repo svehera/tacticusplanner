@@ -55,6 +55,7 @@ import blessedReqOrder from '@/assets/images/snowprint_assets/misc/ui_icon_resou
 import coin from '@/assets/images/snowprint_assets/misc/ui_icon_resource_coin.png';
 import eventCurrencyHalloween2025Icon from '@/assets/images/snowprint_assets/misc/ui_icon_resource_event_currency_halloween_25.png';
 import defeatWaves from '@/assets/images/snowprint_assets/misc/ui_icon_resource_event_defeatwaves.png';
+import leShard from '@/assets/images/snowprint_assets/misc/ui_icon_resource_le_shards.png';
 import reqOrder from '@/assets/images/snowprint_assets/misc/ui_icon_resource_req_order.png';
 import arenaToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_arena.png';
 import legendaryEventToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_legendary_events.png';
@@ -80,6 +81,7 @@ import imperialComponent from '@/assets/images/snowprint_assets/resources/ui_mac
 import xenosComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_xenos.png';
 import blueStar from '@/assets/images/snowprint_assets/stars/ui_icon_star_legendary_large.png';
 import mythicWings from '@/assets/images/snowprint_assets/stars/ui_icon_star_mythic.png';
+import movement from '@/assets/images/snowprint_assets/stat_icons/ui_icon_movement.png';
 import hitsIcon from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_hit_01.png';
 import meleeAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_melee_01.png';
 import rangedAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_rangedattack_01.png';
@@ -425,5 +427,13 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     mythicShard: {
         file: mythicShardIcon,
         label: 'Mythic Unit Shard',
+    },
+    movement: {
+        file: movement,
+        label: 'Movement',
+    },
+    leShard: {
+        file: leShard,
+        label: 'Legendary-Event Shard',
     },
 };

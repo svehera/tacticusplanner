@@ -20,8 +20,9 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
                                 <CampaignBattleEnemies
                                     keyPrefix="battle"
                                     battleId={battle.id}
-                                    enemies={battle.detailedEnemyTypes}
+                                    enemies={battle.rawEnemyTypes ?? []}
                                     scale={scale}
+                                    onEnemyClick={() => {}}
                                 />
                             )}
                         </td>

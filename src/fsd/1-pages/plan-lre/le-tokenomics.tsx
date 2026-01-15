@@ -1,28 +1,45 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
+
+import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
 
-import { RequirementStatus } from '@/fsd/3-features/lre';
+import { CharactersService } from '@/fsd/4-entities/character';
+
+import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 // eslint-disable-next-line import-x/no-internal-modules
 import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
+// eslint-disable-next-line import-x/no-internal-modules
+import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
+
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
+import { ISnapshotCharacter } from '../input-roster-snapshots/models';
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
+import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
 
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
+import { useLreProgress } from './le-progress.hooks';
+import { LeProgressService } from './le-progress.service';
 import { LeTokenCard } from './le-token-card';
 import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
+import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
 import { milestonesAndPoints, TokenDisplay, TokenUse } from './token-estimation-service';
 
 interface Props {
+    legendaryEvent: ILegendaryEvent;
     battles: ILeBattles | undefined;
     tokens: TokenUse[];
     currentPoints: number;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
-    eventStartTime: number | undefined;
     showP2P: boolean;
     nextTokenCompleted: (tokenIndex: number) => void;
     toggleBattleState: (
@@ -39,27 +56,30 @@ interface Props {
  * achieve.
  */
 export const LeTokenomics: React.FC<Props> = ({
+    legendaryEvent,
     battles,
     tokens,
     currentPoints,
     tokenDisplays,
     tracksProgress,
-    eventStartTime,
     showP2P,
     nextTokenCompleted,
     toggleBattleState,
 }: Props) => {
+    const { characters: unresolvedChars, leSettings } = useContext(StoreContext);
+    const { model } = useLreProgress(legendaryEvent);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
-
-    const achievedMilestones = milestonesAndPoints.filter(
-        milestone => currentPoints >= milestone.points && (showP2P || milestone.packsPerRound === 0)
-    );
+    const characters = CharactersService.resolveStoredCharacters(unresolvedChars);
 
     const missedMilestones = milestonesAndPoints
         .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
         .sort((a, b) => a.points - b.points);
+
+    const achievedMilestones = milestonesAndPoints.filter(
+        milestone => currentPoints >= milestone.points && (showP2P || milestone.packsPerRound === 0)
+    );
 
     // Helper function to check if a token has yellow or red restrictions
     const hasWarningRestrictions = (token: TokenDisplay): boolean => {
@@ -78,23 +98,89 @@ export const LeTokenomics: React.FC<Props> = ({
     const firstToken = tokenDisplays.find(token => !hasWarningRestrictions(token)) ?? null;
     const firstTokenIndex = firstToken ? tokenDisplays.indexOf(firstToken) : -1;
 
-    const millisRemaining = () => {
-        if (eventStartTime === undefined) return 0;
-        const now = Date.now();
-        const EVENT_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
-        return Math.max(EVENT_DURATION - (now - eventStartTime), 0);
-    };
+    const totalFreeTokensRemainingInIteration = LeTokenService.getFreeTokensRemainingInIteration(
+        legendaryEvent,
+        Date.now()
+    );
+    const totalAdTokensRemainingInIteration = LeTokenService.getAdTokensRemainingInIteration(
+        legendaryEvent,
+        Date.now()
+    );
+    const totalFreeTokensRemaining = LeTokenService.getFreeTokensRemainingInEvent(legendaryEvent, Date.now());
+    const totalAdTokensRemaining = LeTokenService.getAdTokensRemainingInEvent(legendaryEvent, Date.now());
 
-    const freeTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (3 * 60 * 60 * 1000));
-    const adTokensRemaining = millisRemaining() === 0 ? 'N/A' : Math.floor(millisRemaining() / (24 * 60 * 60 * 1000));
+    const progress = LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true);
+
+    const char = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
+    const rarity = char?.rarity ?? Rarity.Legendary;
+    const stars = char?.stars ?? RarityStars.None;
+
+    const characterPortrait = () => {
+        return (
+            <div className="flex flex-col items-center">
+                {/* Character Icon Container */}
+                <div>
+                    {char !== undefined && (
+                        <RosterSnapshotCharacter
+                            showShards={RosterSnapshotShowVariableSettings.Never}
+                            showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                            showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                            showAbilities={false}
+                            char={
+                                {
+                                    id: char.snowprintId!,
+                                    rank: char.rank,
+                                    rarity: rarity,
+                                    stars: stars,
+                                    shards: 0,
+                                    mythicShards: 0,
+                                    activeAbilityLevel: 1,
+                                    passiveAbilityLevel: 1,
+                                    xpLevel: 1,
+                                } as ISnapshotCharacter
+                            }
+                            charData={char}
+                        />
+                    )}
+                </div>
+                <div className="flex items-center w-full justify-center gap-2">
+                    <div className="relative w-40 h-6 bg-gray-200 rounded-full dark:bg-gray-700 overflow-hidden">
+                        <div
+                            className="h-full bg-blue-600"
+                            style={{
+                                width: `${Math.min(
+                                    100,
+                                    (progress.incrementalShards / progress.incrementalShardsGoal) * 100
+                                )}%`,
+                                // Optional: adds a slight round to the leading edge as it grows
+                                borderTopRightRadius: '9999px',
+                                borderBottomRightRadius: '9999px',
+                            }}></div>
+                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-xs font-medium text-gray-800 dark:text-gray-100">
+                            {progress.incrementalShards} / {progress.incrementalShardsGoal}
+                        </span>
+                    </div>
+                </div>
+                <div className="flex mt-2">
+                    <MiscIcon icon="leShard" width={40} height={40} />
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div className="flex flex-col w-full gap-y-8">
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        <div>Free Tokens Remaining: {freeTokensRemaining}</div>
-                        <div>Ad Tokens Remaining: {adTokensRemaining}</div>
+                        <div>
+                            Free Tokens Remaining: {totalFreeTokensRemaining} ({totalFreeTokensRemainingInIteration} in
+                            this iteration)
+                        </div>
+                        <div>
+                            Ad Tokens Remaining: {totalAdTokensRemaining} ({totalAdTokensRemainingInIteration} in this
+                            iteration)
+                        </div>
                     </div>
                     <div>
                         <h3 className="text-lg font-bold">Next Token</h3>
@@ -102,6 +188,17 @@ export const LeTokenomics: React.FC<Props> = ({
                     <div className="justify-center w-full md:w-2/3 lg:w-1/2">
                         <LeTokenCard
                             token={firstToken}
+                            tokenUsedDuringEventIteration={
+                                LeTokenService.getIterationForToken(
+                                    0,
+                                    /*currentTokensRemaining=*/ 0,
+                                    legendaryEvent,
+                                    model.occurrenceProgress[0].premiumMissionsProgress > 0,
+                                    model.occurrenceProgress[1].premiumMissionsProgress > 0,
+                                    model.occurrenceProgress[2].premiumMissionsProgress > 0,
+                                    Date.now()
+                                ) ?? 3
+                            }
                             index={firstTokenIndex}
                             renderMode={LeTokenCardRenderMode.kStandalone}
                             currentPoints={currentPoints}
@@ -142,19 +239,25 @@ export const LeTokenomics: React.FC<Props> = ({
                 <SupportSection />
             </div>
 
-            <div className="flex flex-col items-center w-full gap-y-4">
-                <div>
-                    <h3 className="text-lg font-bold">Milestones Already Achieved</h3>
+            <div className="flex flex-col items-center w-full gap-y-4">{characterPortrait()}</div>
+
+            {showP2P && (
+                <div className="flex flex-col items-center w-full gap-y-4">
+                    <div>
+                        <h3 className="text-lg font-bold">Milestones Already Achieved</h3>
+                    </div>
+                    <LeTokenMilestoneCardGrid
+                        milestonesToList={achievedMilestones}
+                        emptyMessage="No milestones achieved yet."
+                    />
                 </div>
-                <LeTokenMilestoneCardGrid
-                    milestonesToList={achievedMilestones}
-                    emptyMessage="No milestones achieved yet."
-                />
-            </div>
+            )}
 
             <div key="tokens" className="flex flex-col w-full gap-2">
                 <LeTokenTable
                     battles={battles}
+                    legendaryEvent={legendaryEvent}
+                    progress={model}
                     tokenDisplays={tokenDisplays}
                     tracksProgress={tracksProgress}
                     showP2P={showP2P}

@@ -5,6 +5,7 @@ import { milestonesAndPoints, TokenDisplay } from './token-estimation-service';
 
 interface CardProps {
     token: TokenDisplay;
+    tokenUsedDuringEventIteration: number;
     index: number;
     renderMode: LeTokenCardRenderMode;
     renderMilestone: (milestoneIndex: number) => JSX.Element;
@@ -21,8 +22,16 @@ interface CardProps {
 
 const COMPLETE_DELAY_MILLIS: number = 500;
 
+const TRACK_COLORS: string[] = [
+    'border-blue-200 dark:border-blue-900',
+    'border-green-200 dark:border-green-900',
+    'border-yellow-200 dark:border-yellow-900',
+    'border-red-200 dark:border-red-900',
+];
+
 export const LeTokenCard: React.FC<CardProps> = ({
     token,
+    tokenUsedDuringEventIteration,
     index,
     renderMode,
     renderMilestone,
@@ -47,9 +56,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
 
     // Use Tailwind dark: classes for theme handling
     const bgClass = hasMilestone ? 'bg-blue-50 dark:bg-gray-800/80' : 'bg-gray-100 dark:bg-gray-900';
-    const borderClass = hasMilestone
-        ? 'border-blue-300 dark:border-blue-500/30'
-        : 'border-gray-300 dark:border-gray-700/50';
+    const borderClass = TRACK_COLORS[tokenUsedDuringEventIteration];
 
     const toggleText = isBattleVisible ? 'Hide Battle' : 'Show Battle';
 
@@ -59,7 +66,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
     return (
         <div
             className={`
-                w-full ${widthClass} ${bgClass} rounded-xl border ${borderClass} p-4 
+                w-full ${widthClass} ${bgClass} rounded-xl border-[3px] ${borderClass} p-4 
                 flex flex-col gap-3 shadow-lg relative overflow-hidden 
                 transition-all ease-in-out
                 ${opacityClass} 

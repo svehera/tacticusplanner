@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
+import { ILegendaryEvent } from '@/fsd/3-features/lre';
 import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
 
@@ -14,11 +15,14 @@ import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
-import { ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
+import { LeTokenService } from './le-token-service';
+import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
 import { TokenDisplay } from './token-estimation-service';
 
 interface Props {
     battles: ILeBattles | undefined;
+    legendaryEvent: ILegendaryEvent;
+    progress: ILreProgressModel;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
     showP2P: boolean;
@@ -36,6 +40,8 @@ interface Props {
  */
 export const LeTokenTable: React.FC<Props> = ({
     battles,
+    legendaryEvent,
+    progress,
     tokenDisplays,
     tracksProgress,
     showP2P,
@@ -58,6 +64,20 @@ export const LeTokenTable: React.FC<Props> = ({
             ...prev,
             [index]: !prev[index],
         }));
+    };
+
+    const getTokenEventIteration = (tokenIndex: number): number => {
+        return (
+            LeTokenService.getIterationForToken(
+                tokenIndex,
+                /*currentTokensRemaining=*/ 0,
+                legendaryEvent,
+                progress.occurrenceProgress[0].premiumMissionsProgress > 0,
+                progress.occurrenceProgress[1].premiumMissionsProgress > 0,
+                progress.occurrenceProgress[2].premiumMissionsProgress > 0,
+                Date.now()
+            ) ?? 3
+        );
     };
 
     const createCompleteBattleHandler = (token: TokenDisplay) => {
@@ -213,6 +233,7 @@ export const LeTokenTable: React.FC<Props> = ({
                             <div key={index}>
                                 <LeTokenCard
                                     index={index}
+                                    tokenUsedDuringEventIteration={getTokenEventIteration(index)}
                                     renderMode={LeTokenCardRenderMode.kInGrid}
                                     token={token}
                                     renderMilestone={x => renderMilestone(x, showP2P)}

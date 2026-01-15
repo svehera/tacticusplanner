@@ -18,8 +18,32 @@ export class LegendaryEventService {
         const kMaxEventsToReturn = 3;
         const activeEvent = this.getActiveEvent();
         const startDates: Date[] = [];
-        if (activeEvent && activeEvent.nextEventDateUtc) {
+        if (activeEvent !== undefined && activeEvent.nextEventDateUtc) {
             startDates.push(new Date(activeEvent.nextEventDateUtc));
+        } else {
+            // Find the most recent past event to use as a starting point.
+            const now = Date.now();
+            const pastEvents = allLegendaryEvents
+                .map(event => ({ event, startDate: Date.parse(event.nextEventDateUtc ?? '') }))
+                .filter(({ startDate }) => Number.isFinite(startDate) && startDate < now)
+                .sort((a, b) => b.startDate - a.startDate);
+            if (pastEvents.length !== 0) {
+                startDates.push(new Date(pastEvents[0].startDate));
+            } else {
+                const knownStartTimeMillis = 1766880000000; // This was the start of Farsight 1, it's arbitrary.
+
+                const now = Date.now();
+                for (let i = 0; ; ++i) {
+                    const newStart = knownStartTimeMillis + i * this.getTimeBetweenLegendaryEvents();
+                    if (
+                        newStart > now ||
+                        (newStart <= now && newStart + this.getLegendaryEventDurationMillis() > now)
+                    ) {
+                        startDates.push(new Date(newStart));
+                        break;
+                    }
+                }
+            }
         }
         for (let i = 1; i < kMaxEventsToReturn; i++) {
             startDates.push(new Date(startDates[i - 1].getTime() + this.getTimeBetweenLegendaryEvents()));

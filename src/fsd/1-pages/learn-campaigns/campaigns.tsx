@@ -198,6 +198,7 @@ export const Campaigns = () => {
                                     battleId={battle.id}
                                     enemies={battle.detailedEnemyTypes}
                                     scale={0.2}
+                                    onEnemyClick={() => {}}
                                 />
                             </div>
                         </center>
