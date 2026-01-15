@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { getImageUrl } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { INpcData, NpcService, INpcStats } from '@/fsd/4-entities/npc';
@@ -115,7 +114,7 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
                             return (
                                 <div key={trait} className="relative group">
                                     <img
-                                        src={getImageUrl(icon)}
+                                        src={icon}
                                         alt={trait}
                                         className="w-8 h-8 transition-transform transform group-hover:scale-110"
                                     />
