@@ -6,14 +6,14 @@ import Zoom from 'react-medium-image-zoom';
 import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line import-x/no-internal-modules
+import currentCalendar from '@/assets/images/calendar/calendar_20260104.png';
+// eslint-disable-next-line import-x/no-internal-modules
 import { PersonalGoalType } from 'src/models/enums';
 // eslint-disable-next-line import-x/no-internal-modules
 import { menuItemById } from 'src/models/menu-items';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import currentCalendar from '@/fsd/5-shared/assets/images/calendar/calendar_20260104.png';
 import { useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 

@@ -1,11 +1,14 @@
 import { Tooltip } from '@mui/material';
 import React, { useContext, useMemo } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules
+/* eslint-disable import-x/no-internal-modules */
+import healerUrl from '@/assets/images/traits/resized/healer.png';
+import mechanicUrl from '@/assets/images/traits/resized/mechanic.png';
 import { StoreContext } from '@/reducers/store.provider';
+/* eslint-enable import-x/no-internal-modules */
 
 import { Trait, Rank, Rarity } from '@/fsd/5-shared/model';
-import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharacterBias, CharactersService, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
 import { EquipmentIcon, EquipmentService } from '@/fsd/4-entities/equipment';
@@ -138,14 +141,24 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             {showHealTrait && (
                 <Tooltip placement="top" title="Healer">
                     <span>
-                        <TraitImage trait={Trait.Healer} width={20} height={20} />
+                        <img
+                            loading={'lazy'}
+                            className="pointer-events-none w-auto h-auto max-w-5 max-h-5"
+                            src={healerUrl}
+                            alt="Healer"
+                        />
                     </span>
                 </Tooltip>
             )}
             {showMechanicTrait && (
                 <Tooltip placement="top" title="Mechanic">
                     <span>
-                        <TraitImage trait={Trait.Mechanic} width={20} height={20} />
+                        <img
+                            loading={'lazy'}
+                            className="pointer-events-none w-auto h-auto max-w-5 max-h-5"
+                            src={mechanicUrl}
+                            alt="Mechanic"
+                        />
                     </span>
                 </Tooltip>
             )}

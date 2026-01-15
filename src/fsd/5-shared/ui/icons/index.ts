@@ -8,4 +8,3 @@ export { BadgeImage } from './badge-image';
 export { ComponentImage } from './component-image';
 export { ForgeBadgeImage } from './forge-badge-image';
 export { pooEmoji, starEmoji } from './emojis';
-export { TraitImage } from './trait-image';
