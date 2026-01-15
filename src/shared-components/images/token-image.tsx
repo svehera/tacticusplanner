@@ -1,9 +1,11 @@
-﻿import guildRaids from '@/assets/images/modes/_gr.png';
+﻿// old assets; used because the official snowprint ones aren't available yet
+import guildRaids from '@/assets/images/modes/_gr.png';
 import guildWar from '@/assets/images/modes/_gw.png';
 import incursion from '@/assets/images/modes/_inc.png';
-import legendaryRelease from '@/assets/images/modes/_lre.png';
-import survival from '@/assets/images/modes/_sur.png';
 import tournamentArena from '@/assets/images/modes/_ta.png';
+// new official snowprint assets
+import legendaryRelease from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_legendary_events.png';
+import survival from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_survival.png';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
