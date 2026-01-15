@@ -11,6 +11,7 @@ import { ILegendaryEvent } from '@/fsd/3-features/lre';
 import { LeNextGoalProgress } from './le-next-goal-progress';
 import { LeProgressOverviewMissions } from './le-progress-overview-missions';
 import { useLreProgress } from './le-progress.hooks';
+import { LeProgressService } from './le-progress.service';
 import { LreTrackOverallProgress } from './le-track-overall-progress';
 
 /**
@@ -52,7 +53,10 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
 
     return (
         <div className="w-full">
-            <LeNextGoalProgress model={model} />
+            <LeNextGoalProgress
+                shardsPerChest={model.shardsPerChest}
+                progress={LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true)}
+            />
             <Accordion
                 TransitionProps={{ unmountOnExit: true }}
                 expanded={accordionExpanded === 'missionAndNotes'}

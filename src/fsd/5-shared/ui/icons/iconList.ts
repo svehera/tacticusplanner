@@ -1,5 +1,3 @@
-// TODO(mythic): Change the location of a few things, but automate copying via datamine_tacticus
-
 /* eslint-disable import-x/no-internal-modules */
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 import armourIcon from '@/fsd/5-shared/assets/images/icons/armour.webp';
@@ -174,6 +172,8 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     mowMythicFrame: snowprintIcons.mowMythicFrame,
     shard: snowprintIcons.shard,
     mythicShard: snowprintIcons.mythicShard,
+    movement: snowprintIcons.movement,
+    leShard: snowprintIcons.leShard,
 };
 
 export const starsIcons = {

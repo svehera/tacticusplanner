@@ -25,6 +25,7 @@ export interface ICampaignBattleComposed {
     enemiesTotal: number;
     enemiesTypes: string[];
     detailedEnemyTypes?: IDetailedEnemy[];
+    rawEnemyTypes?: IRawEnemy[];
     // new props for upgrades service
     isSuggested?: boolean;
     isUnlocked?: boolean;
@@ -65,6 +66,11 @@ export interface IDetailedEnemy {
     rarity?: string;
 }
 
+export interface IRawEnemy {
+    id: string;
+    count: number;
+}
+
 export interface ICampaignsData {
     [campaignKey: string]: ICampaignBattle;
 }
@@ -82,6 +88,7 @@ export interface ICampaignBattle {
     enemiesTotal?: number;
     enemiesTypes?: string[];
     enemyPower: number;
+    rawEnemyTypes?: IRawEnemy[];
     detailedEnemyTypes?: IDetailedEnemy[];
     requiredCharacterSnowprintIds?: string[];
 }

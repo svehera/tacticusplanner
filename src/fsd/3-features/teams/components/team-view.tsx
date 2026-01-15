@@ -49,7 +49,7 @@ export const TeamView: React.FC<Props> = ({ characters, mow, withMow = false, on
 
     return (
         <div className="flex-box" style={{ zoom: isMobile ? '80%' : '100%' }}>
-            <div className="flex-box gap5" style={{ display: 'flex', flexFlow: 'row wrap' }}>
+            <div className="grid grid-cols-5 gap-x-0.5 gap-y-2">
                 {(() => {
                     const slotCount = Math.max(5, characters.length);
                     return Array.from({ length: slotCount }).map((_, index) => {

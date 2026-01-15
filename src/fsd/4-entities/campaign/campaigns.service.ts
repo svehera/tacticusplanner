@@ -153,6 +153,7 @@ export class CampaignsService {
                 enemiesTotal: battle.enemiesTotal ?? 0,
                 enemiesTypes: battle.enemiesTypes ?? [],
                 detailedEnemyTypes: battle.detailedEnemyTypes ?? [],
+                rawEnemyTypes: battle.rawEnemyTypes ?? [],
             };
         });
 
@@ -216,11 +217,11 @@ export class CampaignsService {
             .map(faction => FactionsService.getFactionSnowprintId(faction))
             .filter(isString);
 
-        if (enemiesMinCount !== undefined && enemiesMinCount >= location.enemiesTotal) {
+        if (enemiesMinCount !== undefined && enemiesMinCount > location.enemiesTotal) {
             return false;
         }
 
-        if (enemiesMaxCount !== undefined && enemiesMaxCount <= location.enemiesTotal) {
+        if (enemiesMaxCount !== undefined && enemiesMaxCount < location.enemiesTotal) {
             return false;
         }
 
