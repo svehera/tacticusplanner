@@ -114,7 +114,7 @@ const traitIconMap = {
 } as const;
 
 type TraitKey = keyof typeof traitIconMap;
-const isValidTrait = (traitName: string): traitName is TraitKey => Object.hasOwn(traitIconMap, traitName);
+const isValidTrait = (traitName: string): traitName is TraitKey => traitName in traitIconMap;
 
 export class NpcService {
     static readonly npcDataFull: INpcData[] = this.convertNpcData();

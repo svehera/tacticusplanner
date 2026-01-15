@@ -91,7 +91,7 @@ const lreImageMap = {
 } as const;
 
 type LreReq = keyof typeof lreImageMap;
-const isValidLreReq = (iconId: string): iconId is LreReq => Object.hasOwn(lreImageMap, iconId);
+const isValidLreReq = (iconId: string): iconId is LreReq => iconId in lreImageMap;
 
 export const LreReqImage = ({ iconId, tooltip, sizePx }: { iconId: string; tooltip?: string; sizePx?: number }) => {
     if (!isValidLreReq(iconId)) return null;
