@@ -1,9 +1,28 @@
 ﻿import React, { useState, CSSProperties, useMemo } from 'react';
 
+/* eslint-disable import-x/no-internal-modules */
+import commonFrame from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_common.png';
+import epicFrame from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_epic.png';
+import legendaryFrame from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_legendary.png';
+import mythicFrame from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_mythic.png';
+import rareFrame from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_rare.png';
+import uncommonFrame from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_uncommon.png';
+import bgImageUrl from '@/assets/images/snowprint_assets/frames/ui_underlay_upgrades.png';
+/* eslint-enable import-x/no-internal-modules */
+
 import { RarityString } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 
 import { UpgradesService } from './upgrades.service';
+
+const frameImageMap = {
+    [RarityString.Mythic]: mythicFrame,
+    [RarityString.Legendary]: legendaryFrame,
+    [RarityString.Epic]: epicFrame,
+    [RarityString.Rare]: rareFrame,
+    [RarityString.Uncommon]: uncommonFrame,
+    [RarityString.Common]: commonFrame,
+} as const;
 
 export const UpgradeImage = ({
     material,
@@ -23,28 +42,8 @@ export const UpgradeImage = ({
     const height = size ?? 50;
     const imagePath = iconPath || material.toLowerCase() + '.png';
     const image = getImageUrl(imagePath);
-    const frameImageDir = 'snowprint_assets/frames';
-    const bgImgUrl = getImageUrl(`${frameImageDir}/ui_underlay_upgrades.png`);
     const upgradeHeightRatio = 0.78;
-
-    function getFrameUrl(rarity?: RarityString) {
-        switch (rarity) {
-            case RarityString.Mythic:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_mythic.png`);
-            case RarityString.Legendary:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_legendary.png`);
-            case RarityString.Epic:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_epic.png`);
-            case RarityString.Rare:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_rare.png`);
-            case RarityString.Uncommon:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_uncommon.png`);
-            case RarityString.Common:
-            default:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_common.png`);
-        }
-    }
-    const frameImgUrl = getFrameUrl(rarity);
+    const frameImgUrl = frameImageMap[rarity ?? RarityString.Common];
 
     const centeredImageStackStyles: CSSProperties = {
         position: 'absolute',
@@ -81,7 +80,7 @@ export const UpgradeImage = ({
             <div style={{ width, height }} className={'upgrade'}>
                 {!imgError ? (
                     <div className="relative block my-0 mx-auto" style={{ width, height }}>
-                        <img style={centeredImageStackStyles} src={bgImgUrl} alt={`${rarity} upgrade`} />
+                        <img style={centeredImageStackStyles} src={bgImageUrl} alt={`${rarity} upgrade`} />
                         <img
                             loading={'lazy'}
                             style={{
