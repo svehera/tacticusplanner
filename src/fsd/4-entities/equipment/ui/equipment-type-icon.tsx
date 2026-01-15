@@ -1,4 +1,23 @@
-import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
+/* eslint-disable import-x/no-internal-modules */
+import block from '@/assets/images/snowprint_assets/equipment/ui_icon_itemtype_block.png';
+import boosterBlock from '@/assets/images/snowprint_assets/equipment/ui_icon_itemtype_booster_block.png';
+import boosterCrit from '@/assets/images/snowprint_assets/equipment/ui_icon_itemtype_booster_crit.png';
+import crit from '@/assets/images/snowprint_assets/equipment/ui_icon_itemtype_crit.png';
+import defensive from '@/assets/images/snowprint_assets/equipment/ui_icon_itemtype_defensive.png';
+/* eslint-enable import-x/no-internal-modules */
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+
+const equipmentIconMap = {
+    I_Block: block,
+    I_Booster_Block: boosterBlock,
+    I_Booster_Crit: boosterCrit,
+    I_Crit: crit,
+    I_Defensive: defensive,
+} as const;
+
+type Equipment = keyof typeof equipmentIconMap;
+const isValidEquipment = (key: string): key is Equipment => key in equipmentIconMap;
 
 export const EquipmentTypeIcon = ({
     equipmentType,
@@ -11,16 +30,14 @@ export const EquipmentTypeIcon = ({
     width?: number;
     tooltip?: boolean;
 }) => {
-    const imageUrl = getImageUrl(
-        `snowprint_assets/equipment/ui_icon_itemtype_${equipmentType.substring(2).toLowerCase()}.png`
-    );
+    if (!isValidEquipment(equipmentType)) return null;
 
     const image = (
         <img
             loading={'lazy'}
             className="pointer-events-none"
             style={{ width, height }}
-            src={imageUrl}
+            src={equipmentIconMap[equipmentType]}
             alt={equipmentType}
         />
     );
