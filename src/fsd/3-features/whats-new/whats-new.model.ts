@@ -1,3 +1,5 @@
+import { WhatsNewImagePath } from './whats-new-image';
+
 export interface IWhatsNew {
     currentVersion: string;
     releaseNotes: IVersionReleaseNotes[];
@@ -18,5 +20,5 @@ export interface IReleaseNote {
     mobileRoute?: string;
     imagePath?: string;
     subPoints?: string[];
-    images?: Array<{ path: string; size?: number }>;
+    images?: Array<{ path: WhatsNewImagePath; size?: number }>;
 }
