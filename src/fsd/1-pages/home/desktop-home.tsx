@@ -12,8 +12,9 @@ import { menuItemById } from 'src/models/menu-items';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import currentCalendar from '@/fsd/5-shared/assets/images/calendar/calendar_20260104.png';
 import { useAuth } from '@/fsd/5-shared/model';
-import { getImageUrl } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -94,10 +95,10 @@ export const DesktopHome = () => {
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
-    const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_20260104.png'),
+    const calendarUrls = {
+        current: currentCalendar,
         // Feb 8 calendar not yet available
-        // next: getImageUrl('calendar/calendar_20260208.png'),
+        next: undefined,
     };
 
     const topPriorityGoal = goals[0];
