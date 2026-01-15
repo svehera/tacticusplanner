@@ -1,4 +1,9 @@
-﻿import { getImageUrl } from '../get-image-url';
+﻿// eslint-disable-next-line import-x/no-internal-modules
+import normalBorder from '@/assets/images/snowprint_assets/frames/ui_icon_character_shard_empty.png';
+// eslint-disable-next-line import-x/no-internal-modules
+import mythicBorder from '@/assets/images/snowprint_assets/frames/ui_icon_character_shard_mythic.png';
+
+import { getImageUrl } from '../get-image-url';
 import { AccessibleTooltip } from '../tooltip';
 
 export const UnitShardIcon = ({
@@ -18,9 +23,7 @@ export const UnitShardIcon = ({
 }) => {
     const hasIconUrl = icon && icon !== '';
     const imageUrl = hasIconUrl ? getImageUrl(`${icon.replace('.webp', '.png')}`) : '';
-    const borderImageUrl = mythic
-        ? getImageUrl('snowprint_assets/frames/ui_icon_character_shard_mythic.png')
-        : getImageUrl('snowprint_assets/frames/ui_icon_character_shard_empty.png');
+    const borderImageUrl = mythic ? mythicBorder : normalBorder;
     const defaultWidth = 50;
     width = width ?? defaultWidth;
     height = height ?? defaultWidth;
