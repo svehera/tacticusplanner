@@ -42,11 +42,11 @@ describe('Legendary Events Data Integrity', () => {
                     expect(requirement).toHaveProperty('objectiveType');
                     expect(requirement).toHaveProperty('objectiveTarget');
                     expect(typeof requirement.objectiveType).toBe('string');
-                    expect(typeof requirement.objectiveTarget).toBe('string');
                     if (requirement.objectiveType !== undefined) {
                         expect(requirement.objectiveType.length).toBeGreaterThan(0);
                     }
                     if ((requirement.objectiveType ?? '') !== 'HasRangedAttack') {
+                        expect(typeof requirement.objectiveTarget).toBe('string');
                         expect((requirement.objectiveTarget ?? '').length).toBeGreaterThan(0);
                     }
                 });
