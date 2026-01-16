@@ -2,8 +2,7 @@
 import { Tooltip } from '@mui/material';
 import React from 'react';
 
-import { getImageUrl } from 'src/shared-logic/functions';
-
+import { mapSnowprintAssets } from '@/fsd/5-shared/lib/map-snow-print-assets';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
@@ -14,6 +13,12 @@ import { IMowStatic2 } from '@/fsd/4-entities/mow/model';
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { ISnapshotCharacter, ISnapshotMachineOfWar } from './models';
+
+const portraitAssets = import.meta.glob('/src/assets/images/snowprint_assets/characters/ui_image_portrait_*.png', {
+    eager: true,
+    import: 'default',
+});
+const portraitMap = mapSnowprintAssets(portraitAssets); // Run at module load time so that the build breaks if the glob is wrong.
 
 function getFrame(isMow: boolean, rarity: number): keyof typeof tacticusIcons {
     if (isMow) {
@@ -188,7 +193,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
     mow,
     mowData,
 }) => {
-    const charIcon = getImageUrl(charData?.icon ?? mowData?.icon ?? 'default-character-icon.png');
+    const charIcon = portraitMap[charData?.icon ?? mowData?.icon ?? 'default-character-icon.png'];
     const frameIcon = tacticusIcons[getFrame(mow !== undefined, char?.rarity ?? mow?.rarity ?? 0)]?.file || '';
     const starIcon = getStarIcon(char?.stars ?? mow?.stars ?? 0);
     const starCount = getStarCount(char?.stars ?? mow?.stars ?? 0);
@@ -230,6 +235,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
                           : ''
                 }>
                 <div className="absolute w-[96px] h-[170px] justify-center">
+                    {/* ToDo: Replace this with CharacterPortraitImage component */}
                     <img
                         loading="lazy"
                         className={`pointer-events-none absolute left-[3px] top-[17px] z-[1] ${
