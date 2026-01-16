@@ -111,13 +111,20 @@ export const LeTokenomics: React.FC<Props> = ({
 
     const totalFreeTokensRemainingInIteration = LeTokenService.getFreeTokensRemainingInIteration(
         legendaryEvent,
-        Date.now()
+        Date.now(),
+        model.forceProgress?.nextTokenMillisUtc,
+        model.forceProgress?.regenDelayInSeconds
     );
     const totalAdTokensRemainingInIteration = LeTokenService.getAdTokensRemainingInIteration(
         legendaryEvent,
         Date.now()
     );
-    const totalFreeTokensRemaining = LeTokenService.getFreeTokensRemainingInEvent(legendaryEvent, Date.now());
+    const totalFreeTokensRemaining = LeTokenService.getFreeTokensRemainingInEvent(
+        legendaryEvent,
+        Date.now(),
+        model.forceProgress?.nextTokenMillisUtc,
+        model.forceProgress?.regenDelayInSeconds
+    );
     const totalAdTokensRemaining = LeTokenService.getAdTokensRemainingInEvent(legendaryEvent, Date.now());
 
     const progress = LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true);
@@ -198,7 +205,7 @@ export const LeTokenomics: React.FC<Props> = ({
                         )}
                         <div className="flex items-center gap-2">
                             <AccessibleTooltip
-                                title={model.forceProgress?.currentTokens ?? 0 + ' Current Tokens in possession'}>
+                                title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
                                 <div className="flex items-center gap-2">
                                     <MiscIcon icon="legendaryEventToken" width={30} height={35} />
                                     {model.forceProgress?.currentTokens ?? 0}
@@ -216,7 +223,7 @@ export const LeTokenomics: React.FC<Props> = ({
                         </div>
                         <div className="flex items-center gap-2">
                             <AccessibleTooltip
-                                title={`${totalAdTokensRemainingInIteration} free tokens remaining to be regenerated in this event, ${totalAdTokensRemaining} across all events.`}>
+                                title={`${totalAdTokensRemainingInIteration} ad tokens remaining to be claimed in this event, ${totalAdTokensRemaining} across all events.`}>
                                 <div className="flex items-center gap-2">
                                     <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />{' '}
                                     {totalAdTokensRemainingInIteration} / {totalAdTokensRemaining}
