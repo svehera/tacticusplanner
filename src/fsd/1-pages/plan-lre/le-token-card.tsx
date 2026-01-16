@@ -109,7 +109,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                                     }}
                                     disabled={isCompleting}
                                     className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                    title="Mark this battle as completed">
+                                    title="Mark this token as successful.">
                                     {STATUS_LABELS[RequirementStatus.Cleared]}{' '}
                                 </button>
                             </div>
@@ -126,7 +126,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                                 }}
                                 disabled={isCompleting}
                                 className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                title="Mark this battle as completed">
+                                title="Potentially will not succeed with this token.">
                                 {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
                             </button>
                         </div>
@@ -142,7 +142,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                                 }}
                                 disabled={isCompleting}
                                 className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                title="Mark this battle as completed">
+                                title="Do not attempt this token.">
                                 {STATUS_LABELS[RequirementStatus.StopHere]}
                             </button>
                         </div>

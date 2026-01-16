@@ -45,13 +45,34 @@ export class LeTokenService {
     }
 
     /** Returns the total number of free tokens remaining across all iterations of this event. */
-    public static getFreeTokensRemainingInEvent(event: ILegendaryEvent, nowMillis: number): number {
-        return this.getTokensRemainingInEventHelper(event, nowMillis, FREE_TOKENS_PER_EVENT, 3 * ONE_HOUR_MILLIS);
+    public static getFreeTokensRemainingInEvent(
+        event: ILegendaryEvent,
+        nowMillis: number,
+        nextTokenMillisUtc?: number,
+        regenDelayInSeconds?: number
+    ): number {
+        return (
+            this.getFreeTokensRemainingInIteration(event, nowMillis, nextTokenMillisUtc, regenDelayInSeconds) +
+            this.getTokensRemainingInEventHelper(
+                event,
+                nowMillis + 35 * ONE_DAY_MILLIS,
+                FREE_TOKENS_PER_EVENT,
+                3 * ONE_HOUR_MILLIS
+            )
+        );
     }
 
     /** Returns the total number of ad tokens remaining across all iterations of this event. */
     public static getAdTokensRemainingInEvent(event: ILegendaryEvent, nowMillis: number): number {
-        return this.getTokensRemainingInEventHelper(event, nowMillis, AD_TOKENS_PER_EVENT, ONE_DAY_MILLIS);
+        return (
+            this.getAdTokensRemainingInIteration(event, nowMillis) +
+            this.getTokensRemainingInEventHelper(
+                event,
+                nowMillis + ONE_DAY_MILLIS * 35,
+                AD_TOKENS_PER_EVENT,
+                ONE_DAY_MILLIS
+            )
+        );
     }
 
     /**
@@ -77,10 +98,21 @@ export class LeTokenService {
     /**
      * Returns the number of tokens remaining in this iteration of the event.
      */
-    public static getFreeTokensRemainingInIteration(event: ILegendaryEvent, nowMillis: number): number {
-        const millisRemaining = this.getMillisRemainingInIteration(event, nowMillis);
-        if (nowMillis < this.getEventStartTimeMillis(event)) return FREE_TOKENS_PER_EVENT;
-        return Math.floor(millisRemaining / (3 * ONE_HOUR_MILLIS));
+    public static getFreeTokensRemainingInIteration(
+        event: ILegendaryEvent,
+        nowMillis: number,
+        nextTokenMillisUtc?: number,
+        regenDelayInSeconds?: number
+    ): number {
+        const forcedToken =
+            nextTokenMillisUtc !== undefined && nextTokenMillisUtc < this.getEventEndTimeMillis(event) ? 1 : 0;
+        const now = nextTokenMillisUtc !== undefined ? nextTokenMillisUtc : nowMillis;
+        const millisRemaining = this.getMillisRemainingInIteration(event, now);
+        if (now < this.getEventStartTimeMillis(event)) return FREE_TOKENS_PER_EVENT;
+        return (
+            forcedToken +
+            Math.floor(millisRemaining / (regenDelayInSeconds ? regenDelayInSeconds * 1000 : 3 * ONE_HOUR_MILLIS))
+        );
     }
 
     /**
