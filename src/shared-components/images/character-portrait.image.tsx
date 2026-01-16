@@ -1,8 +1,13 @@
 ﻿import React from 'react';
 
-import { getImageUrl } from 'src/shared-logic/functions';
-
+import { mapSnowprintAssets } from '@/fsd/5-shared/lib/map-snow-print-assets';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
+
+const portraitAssets = import.meta.glob('/src/assets/images/snowprint_assets/characters/ui_image_portrait_*.png', {
+    eager: true,
+    import: 'default',
+});
+const portraitMap = mapSnowprintAssets(portraitAssets); // Run at module load time so that the build breaks if the glob is wrong.
 
 interface Props {
     icon: string;
@@ -15,8 +20,7 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
         : props.icon; // Prepend portraits/resized/ for simple filenames
     const frame = tacticusIcons[props.frameIcon ?? '']?.file || '';
 
-    const imageUrl = getImageUrl(imagePath);
-
+    const imageUrl = portraitMap[props.icon];
     // We need a div to stack the images, but the ref is for an HTMLImageElement.
     // We'll pass the ref to the character image and other props to the container.
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
