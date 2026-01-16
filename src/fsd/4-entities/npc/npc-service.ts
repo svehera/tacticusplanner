@@ -58,6 +58,9 @@ import { Alliance, DamageType } from '@/fsd/5-shared/model';
 import { npcData } from './data';
 import { INpcData, INpcRawStats, INpcStats } from './model';
 
+// The mapping of trait names to their corresponding image isn't as 1-to-1 as
+// other assets (where there's a JSON listing the traits and their icons), so we
+// have to do it manually here.
 const traitIconMap = {
     actoffaith,
     ambush,
