@@ -52,12 +52,13 @@ export class LeTokenService {
         regenDelayInSeconds?: number
     ): number {
         return (
-            this.getFreeTokensRemainingInIteration(
+            this.getFreeTokensRemainingInIteration(event, nowMillis, nextTokenMillisUtc, regenDelayInSeconds) +
+            this.getTokensRemainingInEventHelper(
                 event,
                 nowMillis + 35 * ONE_DAY_MILLIS,
-                nextTokenMillisUtc,
-                regenDelayInSeconds
-            ) + this.getTokensRemainingInEventHelper(event, nowMillis, FREE_TOKENS_PER_EVENT, 3 * ONE_HOUR_MILLIS)
+                FREE_TOKENS_PER_EVENT,
+                3 * ONE_HOUR_MILLIS
+            )
         );
     }
 
