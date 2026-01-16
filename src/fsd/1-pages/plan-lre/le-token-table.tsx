@@ -7,8 +7,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { ILegendaryEvent } from '@/fsd/3-features/lre';
-import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
+import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
 
 import { LeBattle } from './le-battle';
@@ -16,6 +15,7 @@ import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
 import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenService } from './le-token-service';
+import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
 import { TokenDisplay } from './token-estimation-service';
 
@@ -26,11 +26,11 @@ interface Props {
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
     showP2P: boolean;
-    toggleBattleState: (
+    setBattleState: (
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
         reqId: string,
-        state: ProgressState
+        status: RequirementStatus
     ) => void;
 }
 
@@ -45,7 +45,7 @@ export const LeTokenTable: React.FC<Props> = ({
     tokenDisplays,
     tracksProgress,
     showP2P,
-    toggleBattleState,
+    setBattleState,
 }: Props) => {
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -80,41 +80,59 @@ export const LeTokenTable: React.FC<Props> = ({
         );
     };
 
-    const createCompleteBattleHandler = (token: TokenDisplay) => {
-        return () => {
-            if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-            if (token.battleNumber == null || token.battleNumber < 0) return;
+    const setRequirementStatus = (token: TokenDisplay, status: RequirementStatus) => {
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+        if (token.battleNumber == null || token.battleNumber < 0) return;
 
-            // Mark the restrictions included in this token as completed
-            for (const restrict of token.restricts) {
-                toggleBattleState(
-                    token.track as 'alpha' | 'beta' | 'gamma',
-                    token.battleNumber,
-                    restrict.id,
-                    ProgressState.completed
-                );
+        const hasRestrictions = token.restricts.some(r => !LreRequirementStatusService.isDefaultObjective(r.id));
+        // Mark the restrictions included in this token as completed
+        for (const restrict of token.restricts) {
+            if (
+                status === RequirementStatus.Cleared ||
+                !hasRestrictions ||
+                !LreRequirementStatusService.isDefaultObjective(restrict.id)
+            ) {
+                setBattleState(token.track as 'alpha' | 'beta' | 'gamma', token.battleNumber, restrict.id, status);
             }
+        }
+    };
 
-            // Also mark defeatAll, killScore, and highScore as completed
-            toggleBattleState(
-                token.track as 'alpha' | 'beta' | 'gamma',
-                token.battleNumber,
-                '_defeatAll',
-                ProgressState.completed
-            );
-            toggleBattleState(
-                token.track as 'alpha' | 'beta' | 'gamma',
-                token.battleNumber,
-                '_killPoints',
-                ProgressState.completed
-            );
-            toggleBattleState(
-                token.track as 'alpha' | 'beta' | 'gamma',
-                token.battleNumber,
-                '_highScore',
-                ProgressState.completed
-            );
-        };
+    const onCompleteBattle = (token: TokenDisplay) => {
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+        if (token.battleNumber == null || token.battleNumber < 0) return;
+        setRequirementStatus(token, RequirementStatus.Cleared);
+
+        // Also mark defeatAll, killScore, and highScore as completed
+        setBattleState(
+            token.track as 'alpha' | 'beta' | 'gamma',
+            token.battleNumber,
+            '_defeatAll',
+            RequirementStatus.Cleared
+        );
+        setBattleState(
+            token.track as 'alpha' | 'beta' | 'gamma',
+            token.battleNumber,
+            '_killPoints',
+            RequirementStatus.Cleared
+        );
+        setBattleState(
+            token.track as 'alpha' | 'beta' | 'gamma',
+            token.battleNumber,
+            '_highScore',
+            RequirementStatus.Cleared
+        );
+    };
+
+    const onMaybeBattle = (token: TokenDisplay) => {
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+        if (token.battleNumber == null || token.battleNumber < 0) return;
+        setRequirementStatus(token, RequirementStatus.MaybeClear);
+    };
+
+    const onStopBattle = (token: TokenDisplay) => {
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+        if (token.battleNumber == null || token.battleNumber < 0) return;
+        setRequirementStatus(token, RequirementStatus.StopHere);
     };
 
     const getRowClassName = (index: number) => {
@@ -212,7 +230,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                         <td className="px-3 py-2 text-center">
                                             <IconButton
                                                 size="small"
-                                                onClick={createCompleteBattleHandler(token)}
+                                                onClick={() => onCompleteBattle(token)}
                                                 sx={{ color: 'text.secondary' }}
                                                 title="Mark this battle as completed">
                                                 <CheckIcon fontSize="small" />
@@ -249,7 +267,9 @@ export const LeTokenTable: React.FC<Props> = ({
                                     renderTeam={x => renderTeam(x, 30)}
                                     isBattleVisible={isVisible}
                                     onToggleBattle={onToggleBattle}
-                                    onCompleteBattle={createCompleteBattleHandler(token)}
+                                    onCompleteBattle={() => onCompleteBattle(token)}
+                                    onMaybeBattle={() => onMaybeBattle(token)}
+                                    onStopBattle={() => onStopBattle(token)}
                                 />
 
                                 {isVisible && LeBattleService.getBattleFromToken(token, battles) ? (

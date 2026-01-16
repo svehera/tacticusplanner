@@ -1,3 +1,5 @@
+import SyncIcon from '@mui/icons-material/Sync';
+import { Button } from '@mui/material';
 import { useContext, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -11,7 +13,7 @@ import { CharactersService } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 // eslint-disable-next-line import-x/no-internal-modules
-import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 // eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
@@ -42,11 +44,13 @@ interface Props {
     tracksProgress: ILreTrackProgress[];
     showP2P: boolean;
     nextTokenCompleted: (tokenIndex: number) => void;
-    toggleBattleState: (
+    nextTokenMaybe: (tokenIndex: number) => void;
+    nextTokenStopped: (tokenIndex: number) => void;
+    setBattleState: (
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
         reqId: string,
-        state: ProgressState
+        status: RequirementStatus
     ) => void;
 }
 
@@ -64,11 +68,15 @@ export const LeTokenomics: React.FC<Props> = ({
     tracksProgress,
     showP2P,
     nextTokenCompleted,
-    toggleBattleState,
+    nextTokenMaybe,
+    nextTokenStopped,
+    setBattleState,
 }: Props) => {
-    const { characters: unresolvedChars, leSettings } = useContext(StoreContext);
+    const { characters: unresolvedChars, leSettings, viewPreferences } = useContext(StoreContext);
     const { model } = useLreProgress(legendaryEvent);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
+    const { syncWithTacticus } = useSyncWithTacticus();
+
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
     const characters = CharactersService.resolveStoredCharacters(unresolvedChars);
@@ -114,6 +122,11 @@ export const LeTokenomics: React.FC<Props> = ({
     const char = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
     const rarity = char?.rarity ?? Rarity.Legendary;
     const stars = char?.stars ?? RarityStars.None;
+
+    const sync = async () => {
+        console.log('Syncing with Tacticus...');
+        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+    };
 
     const characterPortrait = () => {
         return (
@@ -173,6 +186,13 @@ export const LeTokenomics: React.FC<Props> = ({
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
+                        {Date.now() > 1769385600000 && (
+                            <div>
+                                <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
+                                    <SyncIcon /> Sync
+                                </Button>{' '}
+                            </div>
+                        )}
                         <div>
                             Free Tokens Remaining: {totalFreeTokensRemaining} ({totalFreeTokensRemainingInIteration} in
                             this iteration)
@@ -216,6 +236,8 @@ export const LeTokenomics: React.FC<Props> = ({
                             isBattleVisible={isFirstTokenBattleVisible}
                             onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
                             onCompleteBattle={() => nextTokenCompleted(firstTokenIndex)}
+                            onMaybeBattle={() => nextTokenMaybe(firstTokenIndex)}
+                            onStopBattle={() => nextTokenStopped(firstTokenIndex)}
                         />
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) !== undefined && (
@@ -261,7 +283,7 @@ export const LeTokenomics: React.FC<Props> = ({
                     tokenDisplays={tokenDisplays}
                     tracksProgress={tracksProgress}
                     showP2P={showP2P}
-                    toggleBattleState={toggleBattleState}
+                    setBattleState={setBattleState}
                 />
             </div>
             {missedMilestones.length > 0 && (

@@ -7,7 +7,7 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
-import { ProgressState, LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
+import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { ILreProgressModel, ILreOccurrenceProgress, ILreBattleRequirementsProgress } from './lre.models';
 import { LreService } from './lre.service';
@@ -52,7 +52,7 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
         trackId: LreTrackId,
         battleIndex: number,
         reqId: string,
-        state: ProgressState,
+        status: RequirementStatus,
         forceOverwrite = false
     ) => {
         setModel(currModel => {
@@ -78,7 +78,7 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
             let updatedReqProgress: ILreBattleRequirementsProgress;
             let updatedRequirementsProgress = [...battleProgress.requirementsProgress];
 
-            if (state === ProgressState.completed) {
+            if (status === RequirementStatus.Cleared) {
                 updatedReqProgress = {
                     ...reqProgress,
                     completed: true,
@@ -126,24 +126,22 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
                             : req
                     );
                 }
-            } else if (state === ProgressState.blocked) {
+            } else if (status === RequirementStatus.StopHere) {
                 updatedReqProgress = {
                     ...reqProgress,
                     completed: false,
                     blocked: true,
                     // If forceOverwrite, set to StopHere; otherwise preserve
-                    status: forceOverwrite ? 3 : (reqProgress.status ?? 3), // RequirementStatus.StopHere
+                    status: RequirementStatus.StopHere,
                     killScore: forceOverwrite ? undefined : reqProgress.killScore,
                     highScore: forceOverwrite ? undefined : reqProgress.highScore,
                 };
             } else {
-                // State is "none"
                 updatedReqProgress = {
                     ...reqProgress,
                     completed: false,
                     blocked: false,
-                    // If forceOverwrite, set to NotCleared and clear killScore/highScore; otherwise preserve
-                    status: forceOverwrite ? 0 : (reqProgress.status ?? 0),
+                    status: status,
                     killScore: forceOverwrite ? undefined : reqProgress.killScore,
                     highScore: forceOverwrite ? undefined : reqProgress.highScore,
                 };
@@ -170,5 +168,5 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
         });
     };
 
-    return { model, updateNotes, updateOccurrenceProgress, toggleBattleState: setBattleState };
+    return { model, updateNotes, updateOccurrenceProgress, setBattleState };
 };
