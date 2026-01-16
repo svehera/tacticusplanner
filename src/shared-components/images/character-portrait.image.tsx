@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { mapSnowprintAssets } from '@/fsd/5-shared/lib/map-snow-print-assets';
+import { mapSnowprintAssets } from '@/fsd/5-shared/lib';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
 
 const portraitAssets = import.meta.glob('/src/assets/images/snowprint_assets/characters/ui_image_portrait_*.png', {

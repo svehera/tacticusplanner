@@ -10,10 +10,29 @@ import uncommonFrame from '@/assets/images/snowprint_assets/frames/ui_frame_upgr
 import bgImageUrl from '@/assets/images/snowprint_assets/frames/ui_underlay_upgrades.png';
 /* eslint-enable import-x/no-internal-modules */
 
+import { mapSnowprintAssets } from '@/fsd/5-shared/lib';
 import { RarityString } from '@/fsd/5-shared/model';
-import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 import { UpgradesService } from './upgrades.service';
+
+const snowprintUpgradeAssets = import.meta.glob('/src/assets/images/snowprint_assets/upgrade_materials/*.png', {
+    eager: true,
+    import: 'default',
+});
+const upgradeMap = mapSnowprintAssets(snowprintUpgradeAssets); // Run at module load time so that the build breaks if the glob is wrong.
+
+const ourUpgradeAssets = import.meta.glob('/src/assets/images/upgrades/*.png', {
+    eager: true,
+    import: 'default',
+});
+Object.entries(ourUpgradeAssets).forEach(([key, value]) => {
+    if (typeof value !== 'string') throw new Error(`Unexpected non-string value for upgrade asset: ${key}`);
+    const keyFileName = key.split('/').pop();
+    const materialName = keyFileName?.split('.').shift();
+    if (!materialName) throw new Error(`Failed to parse upgrade asset filename: ${key}`);
+    upgradeMap[materialName] = value;
+});
 
 const frameImageMap = {
     [RarityString.Mythic]: mythicFrame,
@@ -41,7 +60,7 @@ export const UpgradeImage = ({
     const width = size ?? 50;
     const height = size ?? 50;
     const imagePath = iconPath || material.toLowerCase() + '.png';
-    const image = getImageUrl(imagePath);
+    const image = upgradeMap[imagePath];
     const upgradeHeightRatio = 0.78;
     const frameImgUrl = frameImageMap[rarity ?? RarityString.Common];
 

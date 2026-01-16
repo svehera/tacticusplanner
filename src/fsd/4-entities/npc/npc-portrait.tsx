@@ -6,7 +6,7 @@ import mythicWings from 'src/assets/images/snowprint_assets/stars/ui_icon_star_m
 import redStar from 'src/assets/images/stars/red star small.png';
 import goldStar from 'src/assets/images/stars/star small.png';
 
-import { mapSnowprintAssets } from '@/fsd/5-shared/lib/map-snow-print-assets';
+import { mapSnowprintAssets } from '@/fsd/5-shared/lib';
 import { RarityStars, Rank } from '@/fsd/5-shared/model';
 
 import { RankIcon } from '@/fsd/4-entities/character/@x/npc';

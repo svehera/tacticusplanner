@@ -2,7 +2,7 @@
 import { Tooltip } from '@mui/material';
 import React from 'react';
 
-import { mapSnowprintAssets } from '@/fsd/5-shared/lib/map-snow-print-assets';
+import { mapSnowprintAssets } from '@/fsd/5-shared/lib';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';

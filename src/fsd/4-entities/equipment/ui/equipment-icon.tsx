@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import unknown from '@/assets/images/snowprint_assets/equipment/ui_icon_item_unknown.png';
 
-import { mapSnowprintAssets } from '@/fsd/5-shared/lib/map-snow-print-assets';
+import { mapSnowprintAssets } from '@/fsd/5-shared/lib';
 import { RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
