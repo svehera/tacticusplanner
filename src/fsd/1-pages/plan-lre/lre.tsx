@@ -3,7 +3,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Switch, Tab, Tabs } from '@mui/material';
 import Button from '@mui/material/Button';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -13,9 +13,7 @@ import { SetGoalDialog } from '@/shared-components/goals/set-goal-dialog';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { IAutoTeamsPreferences } from '@/fsd/3-features/lre';
-// eslint-disable-next-line import-x/no-internal-modules
-import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
+import { IAutoTeamsPreferences, RequirementStatus } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings';
 
 import { LeBattleService } from './le-battle.service';
@@ -30,13 +28,14 @@ import { LreSectionsSettings } from './lre-sections-settings';
 import { LreSettings } from './lre-settings';
 import { LreSection } from './lre.models';
 import PointsTable from './points-table';
-import { TokenEstimationService } from './token-estimation-service';
+import { TokenEstimationService, TokenUse } from './token-estimation-service';
 
 export const Lre: React.FC = () => {
     const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
-    const { toggleBattleState } = useLreProgress(legendaryEvent);
+    const { setBattleState } = useLreProgress(legendaryEvent);
     const { model } = useLreProgress(legendaryEvent);
+    const [tokens, setTokens] = useState<TokenUse[]>([]);
     const dispatch = useContext(DispatchContext);
     const updatePreferencesOption = (setting: keyof ILreViewSettings, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
@@ -44,10 +43,12 @@ export const Lre: React.FC = () => {
 
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
-    const tokens = useMemo(() => {
-        return TokenEstimationService.computeAllTokenUsage(
-            model.tracksProgress,
-            leSelectedTeams[legendaryEvent.id]?.teams ?? []
+    useEffect(() => {
+        setTokens(
+            TokenEstimationService.computeAllTokenUsage(
+                model.tracksProgress,
+                leSelectedTeams[legendaryEvent.id]?.teams ?? []
+            )
         );
     }, [model, leSelectedTeams, legendaryEvent]);
 
@@ -82,26 +83,52 @@ export const Lre: React.FC = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'lreGoalsPreview', value: preview });
     };
 
-    const tokenDisplays = useMemo(
-        () => TokenEstimationService.getTokenDisplays(tokens, currentPoints),
-        [tokens, currentPoints]
-    );
+    const tokenDisplays = TokenEstimationService.getTokenDisplays(tokens, currentPoints);
 
     const nextTokenCompleted = (tokenIndex: number): void => {
         if (tokenDisplays.length === 0 || tokenIndex < 0 || tokenIndex >= tokenDisplays.length) return;
         const token = tokenDisplays[tokenIndex];
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
 
-        // Used to handle the "Mark Completed" option in tokenomics.
-        // trackId -> track;
-        // battleIndex -> battleNumber.
-        // reqId -> restricts
         for (const restrict of token.restricts) {
-            toggleBattleState(
+            setBattleState(
                 token.track as 'alpha' | 'beta' | 'gamma',
                 token.battleNumber,
                 restrict.id,
-                ProgressState.completed
+                RequirementStatus.Cleared
+            );
+        }
+    };
+
+    const nextTokenMaybe = (tokenIndex: number): void => {
+        if (tokenDisplays.length === 0 || tokenIndex < 0 || tokenIndex >= tokenDisplays.length) return;
+        const token = tokenDisplays[tokenIndex];
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+
+        const hasRestrictions = token.restricts.some(r => !LreRequirementStatusService.isDefaultObjective(r.id));
+        for (const restrict of token.restricts) {
+            if (!hasRestrictions || !LreRequirementStatusService.isDefaultObjective(restrict.id)) {
+                setBattleState(
+                    token.track as 'alpha' | 'beta' | 'gamma',
+                    token.battleNumber,
+                    restrict.id,
+                    RequirementStatus.MaybeClear
+                );
+            }
+        }
+    };
+
+    const nextTokenStopped = (tokenIndex: number): void => {
+        if (tokenDisplays.length === 0 || tokenIndex < 0 || tokenIndex >= tokenDisplays.length) return;
+        const token = tokenDisplays[tokenIndex];
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+
+        for (const restrict of token.restricts) {
+            setBattleState(
+                token.track as 'alpha' | 'beta' | 'gamma',
+                token.battleNumber,
+                restrict.id,
+                RequirementStatus.StopHere
             );
         }
     };
@@ -126,7 +153,9 @@ export const Lre: React.FC = () => {
                         currentPoints={currentPoints}
                         showP2P={leSettings.showP2POptions ?? true}
                         nextTokenCompleted={nextTokenCompleted}
-                        toggleBattleState={toggleBattleState}
+                        nextTokenMaybe={nextTokenMaybe}
+                        nextTokenStopped={nextTokenStopped}
+                        setBattleState={setBattleState}
                     />
                 );
             case LreSection.battles:

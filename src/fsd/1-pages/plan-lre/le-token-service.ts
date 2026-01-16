@@ -125,22 +125,6 @@ export class LeTokenService {
             this.getFreeTokensRemainingInIteration(event, nowMillis) +
             this.getAdTokensRemainingInIteration(event, nowMillis) +
             this.getPremiumTokensRemainingInIteration(event, premiums[event.eventStage - 1], nowMillis);
-        console.log(
-            'event tokenIndex currentTokensRemaining eventStage premiums, nowMillis:',
-            event,
-            tokenIndex,
-            currentTokensRemaining,
-            event.eventStage,
-            premiums,
-            nowMillis
-        );
-        console.log(
-            'free ad premium: ',
-            this.getFreeTokensRemainingInIteration(event, nowMillis),
-            this.getAdTokensRemainingInIteration(event, nowMillis),
-            this.getPremiumTokensRemainingInIteration(event, premiums[event.eventStage - 1], nowMillis)
-        );
-        console.log('tokensremaining eventStage:', tokensRemaining, event.eventStage);
         if (tokenIndex < tokensRemaining) return event.eventStage - 1;
         tokenIndex -= tokensRemaining;
         for (let iteration = event.eventStage + 1; iteration <= 3; ++iteration) {
