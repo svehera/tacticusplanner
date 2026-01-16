@@ -6,12 +6,18 @@ import mythicWings from 'src/assets/images/snowprint_assets/stars/ui_icon_star_m
 import redStar from 'src/assets/images/stars/red star small.png';
 import goldStar from 'src/assets/images/stars/star small.png';
 
+import { mapSnowprintAssets } from '@/fsd/5-shared/lib/map-snow-print-assets';
 import { RarityStars, Rank } from '@/fsd/5-shared/model';
-import { getImageUrl } from '@/fsd/5-shared/ui';
 
 import { RankIcon } from '@/fsd/4-entities/character/@x/npc';
 
 import { NpcService } from './npc-service';
+
+const portraitAssets = import.meta.glob('/src/assets/images/snowprint_assets/characters/ui_image_portrait_*.png', {
+    eager: true,
+    import: 'default',
+});
+const portraitMap = mapSnowprintAssets(portraitAssets); // Run at module load time so that the build breaks if the glob is wrong.
 
 interface Props {
     id: string;
@@ -37,8 +43,16 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
     const fifthStarSize = 52;
 
     const getNpcPortrait = () => {
-        const imageUrl = getImageUrl(NpcService.getNpcById(id)?.icon ?? '');
-        return <img src={imageUrl} width={frameWidth} height={frameHeight} className="absolute top-0 left-0 z-0" />;
+        const imageUrl = portraitMap[NpcService.getNpcById(id)?.icon ?? ''];
+        return (
+            <img
+                alt="portrait"
+                src={imageUrl}
+                width={frameWidth}
+                height={frameHeight}
+                className="absolute top-0 left-0 z-0"
+            />
+        );
     };
 
     const getMythicWings = () => {
