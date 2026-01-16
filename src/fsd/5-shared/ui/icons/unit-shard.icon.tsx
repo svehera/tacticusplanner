@@ -3,8 +3,16 @@ import normalBorder from '@/assets/images/snowprint_assets/frames/ui_icon_charac
 // eslint-disable-next-line import-x/no-internal-modules
 import mythicBorder from '@/assets/images/snowprint_assets/frames/ui_icon_character_shard_mythic.png';
 
-import { getImageUrl } from '../get-image-url';
+import { mapSnowprintAssets } from '@/fsd/5-shared/lib';
+
 import { AccessibleTooltip } from '../tooltip';
+
+const characterShardAssets = import.meta.glob(
+    '/src/assets/images/snowprint_assets/characters/ui_image_RoundPortrait_*.png',
+    { eager: true, import: 'default' }
+);
+
+const characterShardMap = mapSnowprintAssets(characterShardAssets); // Run at module load time so that the build breaks if the glob is wrong.
 
 export const UnitShardIcon = ({
     icon,
@@ -22,7 +30,7 @@ export const UnitShardIcon = ({
     mythic?: boolean;
 }) => {
     const hasIconUrl = icon && icon !== '';
-    const imageUrl = hasIconUrl ? getImageUrl(`${icon.replace('.webp', '.png')}`) : '';
+    const imageUrl = characterShardMap[icon];
     const borderImageUrl = mythic ? mythicBorder : normalBorder;
     const defaultWidth = 50;
     width = width ?? defaultWidth;
