@@ -1,3 +1,5 @@
+import AdsClickIcon from '@mui/icons-material/AdsClick';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import SyncIcon from '@mui/icons-material/Sync';
 import { Button } from '@mui/material';
 import { useContext, useState } from 'react';
@@ -6,6 +8,7 @@ import { useContext, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
 
@@ -193,13 +196,32 @@ export const LeTokenomics: React.FC<Props> = ({
                                 </Button>{' '}
                             </div>
                         )}
-                        <div>
-                            Free Tokens Remaining: {totalFreeTokensRemaining} ({totalFreeTokensRemainingInIteration} in
-                            this iteration)
+                        <div className="flex items-center gap-2">
+                            <AccessibleTooltip
+                                title={model.forceProgress?.currentTokens ?? 0 + ' Current Tokens in possession'}>
+                                <div className="flex items-center gap-2">
+                                    <MiscIcon icon="legendaryEventToken" width={30} height={35} />
+                                    {model.forceProgress?.currentTokens ?? 0}
+                                </div>
+                            </AccessibleTooltip>
                         </div>
-                        <div>
-                            Ad Tokens Remaining: {totalAdTokensRemaining} ({totalAdTokensRemainingInIteration} in this
-                            iteration)
+                        <div className="flex items-center gap-2">
+                            <AccessibleTooltip
+                                title={`${totalFreeTokensRemainingInIteration} free tokens remaining to be regenerated in this event, ${totalFreeTokensRemaining} across all events.`}>
+                                <div className="flex items-center gap-2">
+                                    <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />{' '}
+                                    {totalFreeTokensRemainingInIteration} / {totalFreeTokensRemaining}
+                                </div>
+                            </AccessibleTooltip>{' '}
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <AccessibleTooltip
+                                title={`${totalAdTokensRemainingInIteration} free tokens remaining to be regenerated in this event, ${totalAdTokensRemaining} across all events.`}>
+                                <div className="flex items-center gap-2">
+                                    <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />{' '}
+                                    {totalAdTokensRemainingInIteration} / {totalAdTokensRemaining}
+                                </div>
+                            </AccessibleTooltip>{' '}
                         </div>
                     </div>
                     <div>
