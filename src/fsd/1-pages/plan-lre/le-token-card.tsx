@@ -1,6 +1,9 @@
 import React, { JSX, useState } from 'react';
 
+import { RequirementStatus } from '@/fsd/3-features/lre';
+
 import { LeTokenCardRenderMode } from './lre.models';
+import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
 import { milestonesAndPoints, TokenDisplay } from './token-estimation-service';
 
 interface CardProps {
@@ -15,7 +18,9 @@ interface CardProps {
     isBattleVisible: boolean;
     onToggleBattle: (index: number) => void;
     // If this is provided, show a complete battle button.
-    onCompleteBattle?: () => void;
+    onCompleteBattle: () => void;
+    onMaybeBattle: () => void;
+    onStopBattle: () => void;
     // Current progress points - used in standalone mode to show non-cumulative total
     currentPoints?: number;
 }
@@ -40,6 +45,8 @@ export const LeTokenCard: React.FC<CardProps> = ({
     isBattleVisible,
     onToggleBattle,
     onCompleteBattle,
+    onMaybeBattle,
+    onStopBattle,
     currentPoints,
 }: CardProps) => {
     const [isCompleting, setIsCompleting] = useState<boolean>(false);
@@ -88,24 +95,59 @@ export const LeTokenCard: React.FC<CardProps> = ({
                             {displayTotalPoints}
                         </div>
                     </div>
-
-                    {onCompleteBattle && (
-                        <button
-                            onClick={() => {
-                                if (onCompleteBattle !== undefined) {
+                    <div className="flex flex-wrap gap-5">
+                        {Date.now() < 1769385600000 && (
+                            <div style={{ color: STATUS_COLORS[RequirementStatus.Cleared] }}>
+                                <button
+                                    onClick={() => {
+                                        if (isCompleting) return;
+                                        setIsCompleting(true);
+                                        setTimeout(() => {
+                                            setIsCompleting(false);
+                                            onCompleteBattle();
+                                        }, COMPLETE_DELAY_MILLIS);
+                                    }}
+                                    disabled={isCompleting}
+                                    className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                    title="Mark this token as successful.">
+                                    {STATUS_LABELS[RequirementStatus.Cleared]}{' '}
+                                </button>
+                            </div>
+                        )}
+                        <div style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}>
+                            <button
+                                onClick={() => {
+                                    if (isCompleting) return;
                                     setIsCompleting(true);
                                     setTimeout(() => {
                                         setIsCompleting(false);
-                                        onCompleteBattle();
+                                        onMaybeBattle();
                                     }, COMPLETE_DELAY_MILLIS);
-                                }
-                            }}
-                            disabled={isCompleting}
-                            className="text-xs font-semibold text-green-600 uppercase transition-colors duration-500 disabled:opacity-50 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 focus:outline-none"
-                            title="Mark this battle as completed">
-                            {isCompleting ? 'Completing...' : 'Mark Complete'}
-                        </button>
-                    )}
+                                }}
+                                disabled={isCompleting}
+                                className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                title="Potentially will not succeed with this token.">
+                                {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
+                            </button>
+                        </div>
+                        <div style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}>
+                            <button
+                                onClick={() => {
+                                    if (isCompleting) return;
+                                    setIsCompleting(true);
+                                    setTimeout(() => {
+                                        setIsCompleting(false);
+                                        onStopBattle();
+                                    }, COMPLETE_DELAY_MILLIS);
+                                }}
+                                disabled={isCompleting}
+                                className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                title="Do not attempt this token.">
+                                {STATUS_LABELS[RequirementStatus.StopHere]}
+                            </button>
+                        </div>
+                    </div>
+
                     <button
                         onClick={() => onToggleBattle(index)}
                         className="text-xs font-semibold text-blue-600 uppercase transition-colors duration-150 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 focus:outline-none"

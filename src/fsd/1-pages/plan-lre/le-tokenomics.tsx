@@ -1,9 +1,14 @@
+import AdsClickIcon from '@mui/icons-material/AdsClick';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import SyncIcon from '@mui/icons-material/Sync';
+import { Button } from '@mui/material';
 import { useContext, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
 
@@ -11,7 +16,7 @@ import { CharactersService } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 // eslint-disable-next-line import-x/no-internal-modules
-import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 // eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
@@ -42,11 +47,13 @@ interface Props {
     tracksProgress: ILreTrackProgress[];
     showP2P: boolean;
     nextTokenCompleted: (tokenIndex: number) => void;
-    toggleBattleState: (
+    nextTokenMaybe: (tokenIndex: number) => void;
+    nextTokenStopped: (tokenIndex: number) => void;
+    setBattleState: (
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
         reqId: string,
-        state: ProgressState
+        status: RequirementStatus
     ) => void;
 }
 
@@ -64,11 +71,15 @@ export const LeTokenomics: React.FC<Props> = ({
     tracksProgress,
     showP2P,
     nextTokenCompleted,
-    toggleBattleState,
+    nextTokenMaybe,
+    nextTokenStopped,
+    setBattleState,
 }: Props) => {
-    const { characters: unresolvedChars, leSettings } = useContext(StoreContext);
+    const { characters: unresolvedChars, leSettings, viewPreferences } = useContext(StoreContext);
     const { model } = useLreProgress(legendaryEvent);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
+    const { syncWithTacticus } = useSyncWithTacticus();
+
     const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
     const characters = CharactersService.resolveStoredCharacters(unresolvedChars);
@@ -100,13 +111,20 @@ export const LeTokenomics: React.FC<Props> = ({
 
     const totalFreeTokensRemainingInIteration = LeTokenService.getFreeTokensRemainingInIteration(
         legendaryEvent,
-        Date.now()
+        Date.now(),
+        model.forceProgress?.nextTokenMillisUtc,
+        model.forceProgress?.regenDelayInSeconds
     );
     const totalAdTokensRemainingInIteration = LeTokenService.getAdTokensRemainingInIteration(
         legendaryEvent,
         Date.now()
     );
-    const totalFreeTokensRemaining = LeTokenService.getFreeTokensRemainingInEvent(legendaryEvent, Date.now());
+    const totalFreeTokensRemaining = LeTokenService.getFreeTokensRemainingInEvent(
+        legendaryEvent,
+        Date.now(),
+        model.forceProgress?.nextTokenMillisUtc,
+        model.forceProgress?.regenDelayInSeconds
+    );
     const totalAdTokensRemaining = LeTokenService.getAdTokensRemainingInEvent(legendaryEvent, Date.now());
 
     const progress = LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true);
@@ -114,6 +132,11 @@ export const LeTokenomics: React.FC<Props> = ({
     const char = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
     const rarity = char?.rarity ?? Rarity.Legendary;
     const stars = char?.stars ?? RarityStars.None;
+
+    const sync = async () => {
+        console.log('Syncing with Tacticus...');
+        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+    };
 
     const characterPortrait = () => {
         return (
@@ -173,13 +196,39 @@ export const LeTokenomics: React.FC<Props> = ({
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        <div>
-                            Free Tokens Remaining: {totalFreeTokensRemaining} ({totalFreeTokensRemainingInIteration} in
-                            this iteration)
+                        {Date.now() > 1769385600000 && (
+                            <div>
+                                <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
+                                    <SyncIcon /> Sync
+                                </Button>{' '}
+                            </div>
+                        )}
+                        <div className="flex items-center gap-2">
+                            <AccessibleTooltip
+                                title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
+                                <div className="flex items-center gap-2">
+                                    <MiscIcon icon="legendaryEventToken" width={30} height={35} />
+                                    {model.forceProgress?.currentTokens ?? 0}
+                                </div>
+                            </AccessibleTooltip>
                         </div>
-                        <div>
-                            Ad Tokens Remaining: {totalAdTokensRemaining} ({totalAdTokensRemainingInIteration} in this
-                            iteration)
+                        <div className="flex items-center gap-2">
+                            <AccessibleTooltip
+                                title={`${totalFreeTokensRemainingInIteration} free tokens remaining to be regenerated in this event, ${totalFreeTokensRemaining} across all events.`}>
+                                <div className="flex items-center gap-2">
+                                    <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />{' '}
+                                    {totalFreeTokensRemainingInIteration} / {totalFreeTokensRemaining}
+                                </div>
+                            </AccessibleTooltip>{' '}
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <AccessibleTooltip
+                                title={`${totalAdTokensRemainingInIteration} ad tokens remaining to be claimed in this event, ${totalAdTokensRemaining} across all events.`}>
+                                <div className="flex items-center gap-2">
+                                    <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />{' '}
+                                    {totalAdTokensRemainingInIteration} / {totalAdTokensRemaining}
+                                </div>
+                            </AccessibleTooltip>{' '}
                         </div>
                     </div>
                     <div>
@@ -216,6 +265,8 @@ export const LeTokenomics: React.FC<Props> = ({
                             isBattleVisible={isFirstTokenBattleVisible}
                             onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
                             onCompleteBattle={() => nextTokenCompleted(firstTokenIndex)}
+                            onMaybeBattle={() => nextTokenMaybe(firstTokenIndex)}
+                            onStopBattle={() => nextTokenStopped(firstTokenIndex)}
                         />
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) !== undefined && (
@@ -261,7 +312,7 @@ export const LeTokenomics: React.FC<Props> = ({
                     tokenDisplays={tokenDisplays}
                     tracksProgress={tracksProgress}
                     showP2P={showP2P}
-                    toggleBattleState={toggleBattleState}
+                    setBattleState={setBattleState}
                 />
             </div>
             {missedMilestones.length > 0 && (

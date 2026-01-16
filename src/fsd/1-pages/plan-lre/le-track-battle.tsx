@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ConfirmationDialog } from '@/fsd/5-shared/ui';
 
 import { RequirementStatus } from '@/fsd/3-features/lre';
-import { LrePointsCategoryId, ProgressState } from '@/fsd/3-features/lre-progress';
+import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { BattleStatusCheckbox } from './battle-status-checkbox';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
@@ -14,15 +14,10 @@ interface Props {
     battle: ILreBattleProgress;
     maxKillPoints: number;
     projectedRestrictions: Set<string>;
-    toggleState: (req: ILreBattleRequirementsProgress, state: ProgressState, forceOverwrite?: boolean) => void;
+    setState: (req: ILreBattleRequirementsProgress, status: RequirementStatus, forceOverwrite?: boolean) => void;
 }
 
-export const LreTrackBattleSummary: React.FC<Props> = ({
-    battle,
-    maxKillPoints,
-    projectedRestrictions,
-    toggleState,
-}) => {
+export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, projectedRestrictions, setState }) => {
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
     const [showDropdown, setShowDropdown] = useState<string | null>(null);
     const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
@@ -177,17 +172,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
         req.completed = status === RequirementStatus.Cleared;
         req.blocked = status === RequirementStatus.StopHere;
 
-        // Convert to ProgressState for the toggle function
-        let progressState: ProgressState;
-        if (status === RequirementStatus.Cleared) {
-            progressState = ProgressState.completed;
-        } else if (status === RequirementStatus.StopHere) {
-            progressState = ProgressState.blocked;
-        } else {
-            progressState = ProgressState.none;
-        }
-
-        toggleState(req, progressState, forceOverwrite);
+        setState(req, status, forceOverwrite);
     };
 
     const allCompleted = useMemo((): boolean => {

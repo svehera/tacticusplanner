@@ -28,6 +28,9 @@ export interface ILreProgressModel {
     tracksProgress: ILreTrackProgress[];
     regularMissions: string[];
     premiumMissions: string[];
+    // Allow the user to specify their own progress that overrides
+    // what the planner has calculated.
+    forceProgress?: ILeProgress;
 
     pointsMilestones: IPointsMilestone[];
     chestsMilestones: IChestMilestone[];
@@ -41,6 +44,17 @@ export interface ILreOccurrenceProgress {
     premiumMissionsProgress: number;
     bundlePurchased: boolean;
     ohSoCloseShards: number;
+}
+
+export interface ILeProgress {
+    currentTokens: number;
+    maxTokens: number;
+    nextTokenMillisUtc: number;
+    regenDelayInSeconds: number;
+    currentPoints: number;
+    currentCurrency: number;
+    currentShards: number;
+    hasPremiumPayout: boolean;
 }
 
 /**

@@ -53,6 +53,8 @@ export interface ILegendaryEventTrackRequirement {
     points: number;
     units: ICharacter2[];
     selected?: boolean;
+    objectiveType?: string;
+    objectiveTarget?: string;
 }
 
 export interface ILreTeam {

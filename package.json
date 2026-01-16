@@ -90,6 +90,7 @@
   },
   "scripts": {
     "start": "vite",
+    "start-local": "vite --mode dev-local",
     "build": "tsc && vite build",
     "build-dev": "tsc && vite build --mode staging",
     "build-ci": "npm run format-ci && npm run lint-ci && npm run build && npm run test",
