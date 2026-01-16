@@ -24,6 +24,7 @@ import { LeTokenomics } from './le-tokenomics';
 import { LegendaryEvent } from './legendary-event';
 import { LegendaryEventSettings } from './legendary-event-settings';
 import { useLre } from './lre-hook';
+import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { LreSectionsSettings } from './lre-sections-settings';
 import { LreSettings } from './lre-settings';
 import { LreSection } from './lre.models';
