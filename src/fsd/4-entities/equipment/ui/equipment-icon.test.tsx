@@ -9,6 +9,6 @@ describe('EquipmentIcon', () => {
     it('renders an image given the icon path in the snowprint data', () => {
         const equipment = EquipmentService.equipmentData[0];
         render(<EquipmentIcon equipment={equipment} />);
-        expect(screen.getAllByRole('img')).toHaveLength(equipment.isRelic ? 3 : 2);
+        expect(screen.getByAltText(`${equipment.name} image`)).toBeInTheDocument();
     });
 });

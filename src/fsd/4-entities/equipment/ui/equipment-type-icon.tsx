@@ -17,7 +17,7 @@ const equipmentIconMap = {
 } as const;
 
 type Equipment = keyof typeof equipmentIconMap;
-const isValidEquipment = (key: string): key is Equipment => key in equipmentIconMap;
+const isValidEquipment = (key: string): key is Equipment => Object.hasOwn(equipmentIconMap, key);
 
 export const EquipmentTypeIcon = ({
     equipmentType,

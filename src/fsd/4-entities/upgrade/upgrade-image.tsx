@@ -113,7 +113,7 @@ export const UpgradeImage = ({
                                 setImgError(true);
                             }}
                         />
-                        <img loading={'lazy'} style={centeredImageStackStyles} src={frameImgUrl} />
+                        <img loading={'lazy'} style={centeredImageStackStyles} src={frameImgUrl} alt="" />
                     </div>
                 ) : (
                     <div style={imageMissingStyles}>{material}</div>

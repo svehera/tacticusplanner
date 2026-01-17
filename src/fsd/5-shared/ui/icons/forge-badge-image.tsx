@@ -17,7 +17,7 @@ const forgeRarityMap = {
 } as const;
 
 type BadgeRarity = keyof typeof forgeRarityMap;
-const isValidBadgeRarity = (rarity: Rarity): rarity is BadgeRarity => rarity in forgeRarityMap;
+const isValidBadgeRarity = (rarity: Rarity): rarity is BadgeRarity => Object.hasOwn(forgeRarityMap, rarity);
 
 export const ForgeBadgeImage = ({ rarity, size = 'medium' }: { rarity: Rarity; size?: 'small' | 'medium' }) => {
     if (!isValidBadgeRarity(rarity)) return <span>Invalid rarity</span>;

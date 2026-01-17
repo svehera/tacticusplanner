@@ -309,7 +309,7 @@ export const TRAIT_MAP: {
         icon: ui_icon_trait_object_01,
         name: 'Object',
         description:
-            'Automatically takes its action, if any, at the beggining of the turn. Cannot be healed or repaired. A player loses the battle if their only remaining units are Objects.',
+            'Automatically takes its action, if any, at the beginning of the turn. Cannot be healed or repaired. A player loses the battle if their only remaining units are Objects.',
     },
     Overwatch: {
         icon: ui_icon_trait_overwatch_01,
@@ -440,4 +440,4 @@ export const TRAIT_MAP: {
     },
 };
 
-export const isValidTraitKey = (key: string): key is TraitKey => key in TRAIT_MAP;
+export const isValidTraitKey = (key: string): key is TraitKey => Object.hasOwn(TRAIT_MAP, key);

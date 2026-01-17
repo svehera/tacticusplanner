@@ -45,6 +45,7 @@ import unstoppable from '@/assets/images/lre/unstoppable.png';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
+// ToDo: Switch to using TRAIT_MAP where possible
 const lreImageMap = {
     _defeatAll: defeatAll,
     astra_militarum: astraMilitarum,
@@ -91,7 +92,7 @@ const lreImageMap = {
 } as const;
 
 type LreReq = keyof typeof lreImageMap;
-const isValidLreReq = (iconId: string): iconId is LreReq => iconId in lreImageMap;
+const isValidLreReq = (iconId: string): iconId is LreReq => Object.hasOwn(lreImageMap, iconId);
 
 export const LreReqImage = ({ iconId, tooltip, sizePx }: { iconId: string; tooltip?: string; sizePx?: number }) => {
     if (!isValidLreReq(iconId)) return null;

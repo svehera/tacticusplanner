@@ -293,7 +293,7 @@ const imageMap = {
 };
 
 export type WhatsNewImagePath = keyof typeof imageMap;
-const isValidPath = (path: string): path is WhatsNewImagePath => path in imageMap;
+const isValidPath = (path: string): path is WhatsNewImagePath => Object.hasOwn(imageMap, path);
 
 export const WhatsNewImage = ({ path, imageSize }: { path: string; imageSize?: number }) =>
     isValidPath(path) ? <img src={imageMap[path]} height={imageSize} width={'100%'} alt={path} /> : null;

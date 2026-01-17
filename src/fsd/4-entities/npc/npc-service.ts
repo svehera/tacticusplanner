@@ -14,7 +14,7 @@ export class NpcService {
     private static convertNpcData(): INpcData[] {
         return npcData.map(npc => {
             if (!areValidTraits(npc.Traits)) {
-                const invalidTraits = npc.Traits.filter(t => !isValidTraitKey(t))
+                const invalidTraits = npc.Traits.filter(t => !isValidTraitKey(t));
                 throw new Error(`invalid traits found: ${invalidTraits}`);
             }
             return {

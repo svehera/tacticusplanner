@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Since we do not have a JSON manifest of what traits exist and their icons,
 # we need to make our our.
 
@@ -17,8 +19,6 @@
 # The corresponding value will be null since we don't have the user-facing name or icon yet.
 # The reasons for this instead of is because TypeScript treats keys as string literals but
 # values as more variable types (e.g. string | null), so this format is more useful for type definitions.
-
-#!/bin/bash
 
 # Step 1: Extract all unique trait keys from both JSON files using `jq` and other shell tools
 traits=$(jq -r '.[] | .Traits[]?' newCharacterData.json newNpcData.json | sort -u)

@@ -23,15 +23,17 @@ const ImageLayer = ({
     size,
     zIndex,
     scaleFactor,
+    alt,
 }: {
     url: string;
     scaleFactor: number;
     size: { width: number; height: number };
     zIndex: number;
+    alt: string;
 }) => (
     <img
         src={url}
-        alt={url.split('/').pop()}
+        alt={alt}
         className="absolute pointer-events-none top-1/2 left-1/2 object-contain"
         style={{
             width: size.width,
@@ -68,10 +70,16 @@ export const EquipmentIcon = ({
     return (
         <AccessibleTooltip title={tooltip ? equipment.name : ''}>
             <div className="layered-image-stack relative overflow-hidden" style={{ width, height }}>
-                <ImageLayer url={imageUrl} size={{ width, height }} zIndex={1} scaleFactor={85} />
-                <ImageLayer url={frameDetails.file} size={{ width, height }} zIndex={2} scaleFactor={100} />
+                <ImageLayer
+                    url={imageUrl}
+                    size={{ width, height }}
+                    zIndex={1}
+                    scaleFactor={85}
+                    alt={`${equipment.name} image`}
+                />
+                <ImageLayer url={frameDetails.file} size={{ width, height }} zIndex={2} scaleFactor={100} alt="" />
                 {equipment.isRelic && (
-                    <ImageLayer url={relicDetails.file} size={{ width, height }} zIndex={3} scaleFactor={100} />
+                    <ImageLayer url={relicDetails.file} size={{ width, height }} zIndex={3} scaleFactor={100} alt="" />
                 )}
             </div>
         </AccessibleTooltip>

@@ -47,7 +47,7 @@ const factionIcons = {
 };
 
 type Faction = keyof typeof factionIcons;
-const isValidFaction = (faction: string): faction is Faction => faction in factionIcons;
+const isValidFaction = (faction: string): faction is Faction => Object.hasOwn(factionIcons, faction);
 
 export const FactionImage = ({ faction }: { faction: string }) =>
     isValidFaction(faction) ? (

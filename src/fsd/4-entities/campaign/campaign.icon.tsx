@@ -73,7 +73,7 @@ const campaignImages = {
 } as const;
 
 type CampaignName = keyof typeof campaignImages;
-const isValidCampaignName = (name: string): name is CampaignName => name in campaignImages;
+const isValidCampaignName = (name: string): name is CampaignName => Object.hasOwn(campaignImages, name);
 
 export const CampaignImage = ({ campaign, size = 50 }: { campaign: string; size?: number }) =>
     isValidCampaignName(campaign) ? (

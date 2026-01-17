@@ -21,7 +21,7 @@ const warZoneBuffImages = {
 } as const;
 
 type WarZone = keyof typeof warZoneBuffImages;
-const isValidWarZone = (zoneId: string): zoneId is WarZone => zoneId in warZoneBuffImages;
+const isValidWarZone = (zoneId: string): zoneId is WarZone => Object.hasOwn(warZoneBuffImages, zoneId);
 
 export const WarZoneBuffImage = ({ zoneId }: { zoneId: WarZone | string }) => {
     return isValidWarZone(zoneId) ? (

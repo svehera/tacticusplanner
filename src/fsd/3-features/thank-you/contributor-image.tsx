@@ -41,7 +41,7 @@ const contributorMap = {
 };
 
 type ContributorImagePath = keyof typeof contributorMap;
-const isValidContributorImagePath = (path: string): path is ContributorImagePath => path in contributorMap;
+const isValidContributorImagePath = (path: string): path is ContributorImagePath => Object.hasOwn(contributorMap, path);
 
 export const ContributorImage = ({
     iconPath,
