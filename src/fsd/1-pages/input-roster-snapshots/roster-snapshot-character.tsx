@@ -193,6 +193,8 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
     mow,
     mowData,
 }) => {
+    // FIXME: 'default-character-icon.png does not exist
+    // Either create it or make the lookups type safe
     const charIcon = portraitMap[charData?.icon ?? mowData?.icon ?? 'default-character-icon.png'];
     const frameIcon = tacticusIcons[getFrame(mow !== undefined, char?.rarity ?? mow?.rarity ?? 0)]?.file || '';
     const starIcon = getStarIcon(char?.stars ?? mow?.stars ?? 0);
