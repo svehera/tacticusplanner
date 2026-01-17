@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Since we do not have a JSON manifest of what traits exist and their icons,
-# we need to make our our.
+# we need to make our own.
 
-# This script starts the process by generating a JSONC file that lists out all
-# the traits found in the character data. They appear there as the 'key' to the trait.
+# This script starts the process by generating a JSON file that lists out all
+# the traits found in the character & NPC data. They appear there as the 'key' to the trait.
 # The user-facing name and icon need to be filled in manually after this file is generated.
 # The primary purpose of this script is to ensure that all traits used in the character
-# data are captured here and can then be used by type definitions to ensure completeness.
+# data are captured and can then be used by type definitions to ensure completeness.
 
 # The input files are:
 # - ./newCharacterData.json
@@ -17,8 +17,9 @@
 
 # The output file will contain a JSON object where each key is a trait key found.
 # The corresponding value will be null since we don't have the user-facing name or icon yet.
-# The reasons for this instead of is because TypeScript treats keys as string literals but
-# values as more variable types (e.g. string | null), so this format is more useful for type definitions.
+# The reason for this instead of of an array of strings is because TypeScript treats keys as
+# string literals but values as more variable types (e.g. string | null), so this format is
+# more useful for type definitions via `keyof typeof traits-generated.json`.
 
 # Step 1: Extract all unique trait keys from both JSON files using `jq` and other shell tools
 traits=$(jq -r '.[] | .Traits[]?' newCharacterData.json newNpcData.json | sort -u)
