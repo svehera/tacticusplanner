@@ -21,16 +21,16 @@ import yourAdHere from '@/assets/images/contributors/yourAdHere.webp';
 /* eslint-enable import-x/no-internal-modules */
 
 const contributorMap = {
-    'db.jpg': db_vid,
-    'db_vid.jpg': db,
+    'db.jpg': db,
+    'db_vid.jpg': db_vid,
     'kiviy.webp': kiviy,
     'leonaica.webp': leonaica,
     'lucky.webp': lucky,
-    'nandi.jpg': nandi_vid,
-    'nandi_vid.jpg': nandi,
+    'nandi.jpg': nandi,
+    'nandi_vid.jpg': nandi_vid,
     'none.png': none,
-    'nox.jpg': nox_vid,
-    'nox_vid.jpg': nox,
+    'nox.jpg': nox,
+    'nox_vid.jpg': nox_vid,
     'qr.png': qr,
     'ref.webp': ref,
     'seventhSun.webp': seventhSun,
