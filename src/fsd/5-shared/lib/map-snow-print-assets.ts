@@ -6,6 +6,7 @@ import sampleAsset from 'src/assets/images/snowprint_assets/books/ui_icon_consum
 //      If the snowprint sampleAsset path changes, it's a signal that the type on `root_glob` should be reviewed.
 
 const prefixLength = sampleAsset.indexOf('snowprint_assets/');
+if (prefixLength === -1) throw new Error(`Sample asset path does not contain 'snowprint_assets/': ${sampleAsset}`);
 
 /**
  *
