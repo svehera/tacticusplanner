@@ -66,10 +66,9 @@ export const UpgradeImage = ({
     tooltip?: React.ReactNode;
     rarity?: RarityString;
 }) => {
-    const imagePath = iconPath || material.toLowerCase() + '.png';
-    let image = upgradeMap[imagePath];
+    let image = upgradeMap[iconPath];
     if (!image) {
-        console.error(`image not found for ${imagePath}`);
+        console.error(`image not found for ${iconPath}`);
         image = unknownItem;
     }
     const frameImgUrl = frameImageMap[rarity ?? RarityString.Common];
