@@ -1,6 +1,7 @@
-﻿import React, { useState, CSSProperties, useMemo } from 'react';
+﻿import React, { CSSProperties, useMemo } from 'react';
 
 /* eslint-disable import-x/no-internal-modules */
+import unknownItem from '@/assets/images/snowprint_assets/equipment/ui_icon_item_unknown.png';
 import commonFrame from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_common.png';
 import epicFrame from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_epic.png';
 import legendaryFrame from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_legendary.png';
@@ -43,10 +44,19 @@ const frameImageMap = {
     [RarityString.Common]: commonFrame,
 } as const;
 
+const centeredImageStackStyles: CSSProperties = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: '100%',
+    maxHeight: '100%',
+};
+
 export const UpgradeImage = ({
     material,
     iconPath,
-    size,
+    size = 50,
     tooltip,
     rarity,
 }: {
@@ -56,68 +66,36 @@ export const UpgradeImage = ({
     tooltip?: React.ReactNode;
     rarity?: RarityString;
 }) => {
-    const [imgError, setImgError] = useState(false);
-    const width = size ?? 50;
-    const height = size ?? 50;
     const imagePath = iconPath || material.toLowerCase() + '.png';
-    const image = upgradeMap[imagePath];
-    const upgradeHeightRatio = 0.78;
+    let image = upgradeMap[imagePath];
+    if (!image) {
+        console.error(`image not found for ${imagePath}`);
+        image = unknownItem;
+    }
     const frameImgUrl = frameImageMap[rarity ?? RarityString.Common];
-
-    const centeredImageStackStyles: CSSProperties = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        maxWidth: '100%',
-        maxHeight: '100%',
-    };
-
-    const imageMissingStyles: CSSProperties = {
-        height,
-        width,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: `clamp(8px, ${width / 4.5}px, 14px)`,
-        textAlign: 'center',
-        overflow: 'hidden',
-        whiteSpace: 'pre-wrap',
-        wordBreak: 'break-word',
-        lineHeight: '0.9',
-    };
-
-    const tooltipText = useMemo(() => {
-        if (tooltip) {
-            return tooltip;
-        }
-        return UpgradesService.getUpgradeMaterial(material)?.material ?? material;
-    }, [material, tooltip]);
+    const tooltipText = useMemo(
+        () => tooltip ?? UpgradesService.getUpgradeMaterial(material)?.material ?? material,
+        [material, tooltip]
+    );
 
     return (
         <AccessibleTooltip title={tooltipText}>
-            <div style={{ width, height }} className={'upgrade'}>
-                {!imgError ? (
-                    <div className="relative block my-0 mx-auto" style={{ width, height }}>
-                        <img style={centeredImageStackStyles} src={bgImageUrl} alt={`${rarity} upgrade`} />
-                        <img
-                            loading={'lazy'}
-                            style={{
-                                ...centeredImageStackStyles,
-                                height: `${upgradeHeightRatio * 100}%`,
-                            }}
-                            src={image}
-                            alt={material}
-                            onError={() => {
-                                console.error(`Image not found: ${imagePath}`);
-                                setImgError(true);
-                            }}
-                        />
-                        <img loading={'lazy'} style={centeredImageStackStyles} src={frameImgUrl} alt="" />
-                    </div>
-                ) : (
-                    <div style={imageMissingStyles}>{material}</div>
-                )}
+            <div style={{ width: size, height: size }} className={'upgrade'}>
+                (
+                <div className="relative block my-0 mx-auto" style={{ width: size, height: size }}>
+                    <img style={centeredImageStackStyles} src={bgImageUrl} alt={`${rarity} upgrade`} />
+                    <img
+                        loading={'lazy'}
+                        style={{
+                            ...centeredImageStackStyles,
+                            height: '78%',
+                        }}
+                        src={image}
+                        alt={material}
+                    />
+                    <img loading={'lazy'} style={centeredImageStackStyles} src={frameImgUrl} alt="" />
+                </div>
+                )
             </div>
         </AccessibleTooltip>
     );
