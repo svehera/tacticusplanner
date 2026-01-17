@@ -1,5 +1,7 @@
 import { Alliance, Faction, Rank, RarityStars } from '@/fsd/5-shared/model';
 
+import { TraitKey } from '../character/@x/trait';
+
 export interface INpcStats {
     abilityLevel: number;
     damage: number;
@@ -21,7 +23,7 @@ export interface INpcData {
     rangeHits?: number;
     rangeDistance?: number;
     movement: number;
-    traits: string[];
+    traits: TraitKey[];
     icon: string;
     activeAbilities: string[];
     passiveAbilities: string[];
@@ -51,7 +53,7 @@ export interface INpcDataRaw {
     'Ranged Hits'?: number;
     Distance?: number;
     Movement: number;
-    Traits: string[];
+    Traits: TraitKey[];
     Stats: INpcRawStats[];
     'Active Ability Damage'?: string[];
     'Active Abilities'?: string[];
