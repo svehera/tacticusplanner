@@ -88,23 +88,23 @@ const gammaTrack = createTrack('gamma', 3, [
 describe('TokenEstimationService', () => {
     describe('getFurthestMilestoneAchievedSmokeTest', () => {
         it('should return the correct milestone index for a few select sample points', () => {
-            const idx1 = TokenEstimationService.getFurthestMilestoneAchieved(500);
+            const idx1 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(500);
             expect(idx1).not.toBe(-1);
             expect(milestonesAndPoints[idx1].stars).toBe(3);
             expect(milestonesAndPoints[idx1].round).toBe(3);
 
-            const idx2 = TokenEstimationService.getFurthestMilestoneAchieved(13000);
+            const idx2 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(13000);
             expect(idx2).not.toBe(-1);
             expect(milestonesAndPoints[idx2].stars).toBe(3);
             expect(milestonesAndPoints[idx2].round).toBe(1);
 
-            const idx3 = TokenEstimationService.getFurthestMilestoneAchieved(20000);
+            const idx3 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(20000);
             expect(idx3).not.toBe(-1);
             expect(milestonesAndPoints[idx3].stars).toBe(6);
         });
 
         it('should return -1 if no milestone is achieved', () => {
-            expect(TokenEstimationService.getFurthestMilestoneAchieved(50)).toBe(-1);
+            expect(TokenEstimationService.getFurthestCurrencyMilestoneAchieved(50)).toBe(-1);
         });
     });
 
@@ -666,9 +666,9 @@ describe('TokenEstimationService', () => {
                 battle.completed = true;
             });
 
-            const points1 = TokenEstimationService.computeCurrentPoints(track1);
-            const points2 = TokenEstimationService.computeCurrentPoints(track2);
-            const points3 = TokenEstimationService.computeCurrentPoints(track3);
+            const points1 = TokenEstimationService.computeCurrentPointsInTrack(track1);
+            const points2 = TokenEstimationService.computeCurrentPointsInTrack(track2);
+            const points3 = TokenEstimationService.computeCurrentPointsInTrack(track3);
 
             // Track 1: nothing cleared, so 0
             expect(points1).toBe(0);
@@ -727,9 +727,9 @@ describe('TokenEstimationService', () => {
                 battle.completed = false;
             });
 
-            expect(TokenEstimationService.computeCurrentPoints(alphaTrack)).toBe(0);
-            expect(TokenEstimationService.computeCurrentPoints(betaTrack)).toBe(0);
-            expect(TokenEstimationService.computeCurrentPoints(gammaTrack)).toBe(0);
+            expect(TokenEstimationService.computeCurrentPointsInTrack(alphaTrack)).toBe(0);
+            expect(TokenEstimationService.computeCurrentPointsInTrack(betaTrack)).toBe(0);
+            expect(TokenEstimationService.computeCurrentPointsInTrack(gammaTrack)).toBe(0);
         });
     });
 

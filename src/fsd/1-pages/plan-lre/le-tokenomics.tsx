@@ -1,6 +1,7 @@
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import SyncIcon from '@mui/icons-material/Sync';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { Button } from '@mui/material';
 import { useContext, useState } from 'react';
 
@@ -31,7 +32,7 @@ import { useLreProgress } from './le-progress.hooks';
 import { LeProgressService } from './le-progress.service';
 import { LeTokenCard } from './le-token-card';
 import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
-import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
+import { renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
@@ -196,7 +197,7 @@ export const LeTokenomics: React.FC<Props> = ({
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        {Date.now() > 1769385600000 && (
+                        {LeTokenService.isAfterCutoff() && (
                             <div>
                                 <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
                                     <SyncIcon /> Sync
@@ -204,6 +205,13 @@ export const LeTokenomics: React.FC<Props> = ({
                             </div>
                         )}
                         <div className="flex items-center gap-2">
+                            {LeTokenService.isAfterCutoff() &&
+                                (model.forceProgress === undefined ||
+                                    Date.now() - model.forceProgress.nextTokenMillisUtc > 3 * 60 * 60 * 1000) && (
+                                    <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
+                                        <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
+                                    </AccessibleTooltip>
+                                )}
                             <AccessibleTooltip
                                 title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
                                 <div className="flex items-center gap-2">
@@ -251,7 +259,6 @@ export const LeTokenomics: React.FC<Props> = ({
                             index={firstTokenIndex}
                             renderMode={LeTokenCardRenderMode.kStandalone}
                             currentPoints={currentPoints}
-                            renderMilestone={index => renderMilestone(index, showP2P)}
                             renderRestrictions={x =>
                                 renderRestrictions(
                                     x,
@@ -311,7 +318,6 @@ export const LeTokenomics: React.FC<Props> = ({
                     progress={model}
                     tokenDisplays={tokenDisplays}
                     tracksProgress={tracksProgress}
-                    showP2P={showP2P}
                     setBattleState={setBattleState}
                 />
             </div>

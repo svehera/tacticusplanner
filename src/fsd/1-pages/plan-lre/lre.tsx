@@ -1,4 +1,5 @@
-﻿import GridViewIcon from '@mui/icons-material/GridView';
+﻿/* eslint-disable import-x/no-internal-modules */
+import GridViewIcon from '@mui/icons-material/GridView';
 import SettingsIcon from '@mui/icons-material/Settings';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Switch, Tab, Tabs } from '@mui/material';
@@ -6,12 +7,14 @@ import Button from '@mui/material/Button';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
-// eslint-disable-next-line import-x/no-internal-modules
 import { SetGoalDialog } from '@/shared-components/goals/set-goal-dialog';
 
-import { CharactersService } from '@/fsd/4-entities/character';
+import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
+import { RarityStars } from '@/fsd/5-shared/model/enums/rarity-stars.enum';
+import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
+
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 
 import { IAutoTeamsPreferences, RequirementStatus } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings';
@@ -29,7 +32,7 @@ import { LreSectionsSettings } from './lre-sections-settings';
 import { LreSettings } from './lre-settings';
 import { LreSection } from './lre.models';
 import PointsTable from './points-table';
-import { TokenEstimationService, TokenUse } from './token-estimation-service';
+import { TokenDisplay, TokenEstimationService, TokenUse } from './token-estimation-service';
 
 export const Lre: React.FC = () => {
     const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
@@ -37,12 +40,26 @@ export const Lre: React.FC = () => {
     const { setBattleState } = useLreProgress(legendaryEvent);
     const { model } = useLreProgress(legendaryEvent);
     const [tokens, setTokens] = useState<TokenUse[]>([]);
+    const [tokenDisplays, setTokenDisplays] = useState<TokenDisplay[]>([]);
+    const [currentRarity, setCurrentRarity] = useState<Rarity>(Rarity.Legendary);
+    const [currentStars, setCurrentStars] = useState<RarityStars>(RarityStars.None);
+    const [resolvedCharacters, setResolvedCharacters] = useState<ICharacter2[]>([]);
     const dispatch = useContext(DispatchContext);
     const updatePreferencesOption = (setting: keyof ILreViewSettings, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
 
-    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
+    useEffect(() => {
+        setResolvedCharacters(CharactersService.resolveStoredCharacters(characters));
+        const character = resolvedCharacters.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
+        if (character === undefined || character.rank === Rank.Locked) {
+            setCurrentRarity(Rarity.Legendary);
+            setCurrentStars(RarityStars.None);
+        } else {
+            setCurrentRarity(character.rarity);
+            setCurrentStars(character.rarityStars);
+        }
+    }, [characters]);
 
     useEffect(() => {
         setTokens(
@@ -53,9 +70,20 @@ export const Lre: React.FC = () => {
         );
     }, [model, leSelectedTeams, legendaryEvent]);
 
+    useEffect(() => {
+        const displays = TokenEstimationService.getTokenDisplays(
+            tokens,
+            model,
+            currentRarity,
+            currentStars,
+            leSettings.showP2POptions ?? true
+        );
+        setTokenDisplays(displays);
+    }, [tokens, model]);
+
     const currentPoints = useMemo(() => {
         return model.tracksProgress
-            .map(track => TokenEstimationService.computeCurrentPoints(track))
+            .map(track => TokenEstimationService.computeCurrentPointsInTrack(track))
             .reduce((a, b) => a + b, 0);
     }, [model, legendaryEvent]);
 
@@ -83,8 +111,6 @@ export const Lre: React.FC = () => {
     const updateGoalsPreview = (preview: boolean): void => {
         dispatch.viewPreferences({ type: 'Update', setting: 'lreGoalsPreview', value: preview });
     };
-
-    const tokenDisplays = TokenEstimationService.getTokenDisplays(tokens, currentPoints);
 
     const nextTokenCompleted = (tokenIndex: number): void => {
         if (tokenDisplays.length === 0 || tokenIndex < 0 || tokenIndex >= tokenDisplays.length) return;

@@ -1,17 +1,19 @@
 import React, { JSX, useState } from 'react';
 
+import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
+
 import { RequirementStatus } from '@/fsd/3-features/lre';
 
+import { LeTokenService } from './le-token-service';
 import { LeTokenCardRenderMode } from './lre.models';
 import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
-import { milestonesAndPoints, TokenDisplay } from './token-estimation-service';
+import { TokenDisplay } from './token-estimation-service';
 
 interface CardProps {
     token: TokenDisplay;
     tokenUsedDuringEventIteration: number;
     index: number;
     renderMode: LeTokenCardRenderMode;
-    renderMilestone: (milestoneIndex: number) => JSX.Element;
     renderRestrictions: (restricts: any[], track: string, battleNumber: number) => JSX.Element;
     renderTeam: (team: string[]) => JSX.Element;
 
@@ -39,7 +41,6 @@ export const LeTokenCard: React.FC<CardProps> = ({
     tokenUsedDuringEventIteration,
     index,
     renderMode,
-    renderMilestone,
     renderRestrictions,
     renderTeam,
     isBattleVisible,
@@ -50,8 +51,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
     currentPoints,
 }: CardProps) => {
     const [isCompleting, setIsCompleting] = useState<boolean>(false);
-    const hasMilestone =
-        token.milestoneAchievedIndex !== -1 && token.milestoneAchievedIndex < milestonesAndPoints.length;
+    const hasMilestone = token.achievedStarMilestone;
     const widthClass = renderMode === LeTokenCardRenderMode.kInGrid ? '' : 'lg:w-full';
 
     // For standalone mode (Next Token card), show currentPoints + incrementalPoints
@@ -96,7 +96,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                         </div>
                     </div>
                     <div className="flex flex-wrap gap-5">
-                        {Date.now() < 1769385600000 && (
+                        {!LeTokenService.isAfterCutoff() && (
                             <div style={{ color: STATUS_COLORS[RequirementStatus.Cleared] }}>
                                 <button
                                     onClick={() => {
@@ -161,8 +161,9 @@ export const LeTokenCard: React.FC<CardProps> = ({
             <div className="grid grid-cols-[auto_1fr] gap-4">
                 <div className="flex flex-col items-center justify-start gap-2 min-w-[80px]">
                     {hasMilestone ? (
-                        <div className="origin-top transform scale-90">
-                            {renderMilestone(token.milestoneAchievedIndex)}
+                        <div className="flex flex-col items-center justify-center gap-2">
+                            <StarsIcon stars={token.stars} />
+                            <RarityIcon rarity={token.rarity} />
                         </div>
                     ) : (
                         <div className="h-[70px] w-[70px] rounded-lg border border-gray-300 dark:border-gray-800 bg-gray-200 dark:bg-gray-800/20 text-gray-500 dark:text-gray-600 flex items-center justify-center text-xs text-center p-1">

@@ -13,7 +13,7 @@ import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
-import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
+import { renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenService } from './le-token-service';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
@@ -25,7 +25,6 @@ interface Props {
     progress: ILreProgressModel;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
-    showP2P: boolean;
     setBattleState: (
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
@@ -44,7 +43,6 @@ export const LeTokenTable: React.FC<Props> = ({
     progress,
     tokenDisplays,
     tracksProgress,
-    showP2P,
     setBattleState,
 }: Props) => {
     const { viewPreferences } = useContext(StoreContext);
@@ -208,9 +206,9 @@ export const LeTokenTable: React.FC<Props> = ({
                                         key={index}
                                         className={`${getRowClassName(index)} border-t border-gray-300 dark:border-gray-700/50 hover:bg-gray-300 dark:hover:bg-gray-700 transition duration-150 ease-in-out`}>
                                         <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
-                                        <td className="px-3 py-2 flex justify-center items-center h-full">
+                                        {/*<td className="px-3 py-2 flex justify-center items-center h-full">
                                             {renderMilestone(token.milestoneAchievedIndex, showP2P)}
-                                        </td>
+                                        </td>*/}
                                         <td className="px-3 py-2">{token.track}</td>
                                         <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
                                         <td className="px-3 py-2 h-full flex items-center justify-center">
@@ -254,7 +252,6 @@ export const LeTokenTable: React.FC<Props> = ({
                                     tokenUsedDuringEventIteration={getTokenEventIteration(index)}
                                     renderMode={LeTokenCardRenderMode.kInGrid}
                                     token={token}
-                                    renderMilestone={x => renderMilestone(x, showP2P)}
                                     renderRestrictions={x =>
                                         renderRestrictions(
                                             x,
