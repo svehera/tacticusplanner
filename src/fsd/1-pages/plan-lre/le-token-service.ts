@@ -28,7 +28,8 @@ export class LeTokenService {
         return ONE_DAY_MILLIS * 7 - (nowMillis - this.getEventStartTimeMillis(event));
     }
 
-    private static getTokensRemainingInEventHelper(
+    /** THIS IS ONLY PUBLIC TO ALLOW TESTING, DO NOT USE. */
+    public static getTokensRemainingInEventHelper(
         event: ILegendaryEvent,
         nowMillis: number,
         tokensPerEvent: number,
@@ -170,5 +171,9 @@ export class LeTokenService {
                 FREE_TOKENS_PER_EVENT + AD_TOKENS_PER_EVENT + (premiums[iteration - 1] ? PREMIUM_TOKENS_PER_EVENT : 0);
         }
         return undefined;
+    }
+
+    public static isAfterCutoff(date: number = Date.now()): boolean {
+        return date > 1769385600000;
     }
 }
