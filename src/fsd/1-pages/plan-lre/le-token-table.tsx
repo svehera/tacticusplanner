@@ -1,11 +1,13 @@
 /* eslint-disable import-x/no-internal-modules */
-import CheckIcon from '@mui/icons-material/Check';
 import GridViewIcon from '@mui/icons-material/GridView';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import { FormControlLabel, IconButton, Switch } from '@mui/material';
+import { FormControlLabel, Switch } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
+
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
@@ -17,6 +19,7 @@ import { renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenService } from './le-token-service';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
+import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
 import { TokenDisplay } from './token-estimation-service';
 
 interface Props {
@@ -192,11 +195,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                 </th>
                                 <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">Total Points</th>
                                 <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Team</th>
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
-                                    Mark
-                                    <br />
-                                    Complete
-                                </th>
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Outcome</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -206,9 +205,16 @@ export const LeTokenTable: React.FC<Props> = ({
                                         key={index}
                                         className={`${getRowClassName(index)} border-t border-gray-300 dark:border-gray-700/50 hover:bg-gray-300 dark:hover:bg-gray-700 transition duration-150 ease-in-out`}>
                                         <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
-                                        {/*<td className="px-3 py-2 flex justify-center items-center h-full">
-                                            {renderMilestone(token.milestoneAchievedIndex, showP2P)}
-                                        </td>*/}
+                                        <td className="px-3 py-2 flex justify-center items-center h-full">
+                                            {token.achievedStarMilestone ? (
+                                                <div className="flex flex-col items-center justify-center gap-2">
+                                                    <StarsIcon stars={token.stars} />
+                                                    <RarityIcon rarity={token.rarity} />
+                                                </div>
+                                            ) : (
+                                                <></>
+                                            )}
+                                        </td>
                                         <td className="px-3 py-2">{token.track}</td>
                                         <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
                                         <td className="px-3 py-2 h-full flex items-center justify-center">
@@ -226,13 +232,40 @@ export const LeTokenTable: React.FC<Props> = ({
                                         </td>
                                         <td className="px-3 py-2 text-center">{renderTeam(token.team, 25)}</td>
                                         <td className="px-3 py-2 text-center">
-                                            <IconButton
-                                                size="small"
-                                                onClick={() => onCompleteBattle(token)}
-                                                sx={{ color: 'text.secondary' }}
-                                                title="Mark this battle as completed">
-                                                <CheckIcon fontSize="small" />
-                                            </IconButton>
+                                            <div className="flex flex-wrap gap-3 justify-center">
+                                                {!LeTokenService.isAfterCutoff() && (
+                                                    <div style={{ color: STATUS_COLORS[RequirementStatus.Cleared] }}>
+                                                        <button
+                                                            onClick={() => {
+                                                                onCompleteBattle(token);
+                                                            }}
+                                                            className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                            title="Mark this token as successful.">
+                                                            {STATUS_LABELS[RequirementStatus.Cleared]}{' '}
+                                                        </button>
+                                                    </div>
+                                                )}
+                                                <div style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}>
+                                                    <button
+                                                        onClick={() => {
+                                                            onMaybeBattle(token);
+                                                        }}
+                                                        className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                        title="Potentially will not succeed with this token.">
+                                                        {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
+                                                    </button>
+                                                </div>
+                                                <div style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}>
+                                                    <button
+                                                        onClick={() => {
+                                                            onStopBattle(token);
+                                                        }}
+                                                        className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                        title="Do not attempt this token.">
+                                                        {STATUS_LABELS[RequirementStatus.StopHere]}
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 );

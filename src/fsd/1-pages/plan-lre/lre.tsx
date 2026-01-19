@@ -50,8 +50,9 @@ export const Lre: React.FC = () => {
     };
 
     useEffect(() => {
-        setResolvedCharacters(CharactersService.resolveStoredCharacters(characters));
-        const character = resolvedCharacters.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
+        const chars = CharactersService.resolveStoredCharacters(characters);
+        setResolvedCharacters(chars);
+        const character = chars.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
         if (character === undefined || character.rank === Rank.Locked) {
             setCurrentRarity(Rarity.Legendary);
             setCurrentStars(RarityStars.None);
@@ -79,7 +80,7 @@ export const Lre: React.FC = () => {
             leSettings.showP2POptions ?? true
         );
         setTokenDisplays(displays);
-    }, [tokens, model]);
+    }, [tokens, model, currentRarity, currentStars, leSettings]);
 
     const currentPoints = useMemo(() => {
         return model.tracksProgress
