@@ -19,6 +19,7 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEvent, ILegendaryEventTrack, ILegendaryEventTrackRequirement, ILreTeam } from '@/fsd/3-features/lre';
@@ -32,6 +33,7 @@ interface Props {
     legendaryEvent: ILegendaryEvent;
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
+    upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     startAddTeam: (section: LreTrackId, requirements: string[]) => void;
     autoAddTeam: (section: LreTrackId, requirements: string[], characters: ICharacter2[]) => void;
     progress: Record<string, number>;
@@ -42,6 +44,7 @@ interface Props {
 export const LreTeamsTable: React.FC<Props> = ({
     legendaryEvent,
     track,
+    upgradeRankOrMowGoals,
     startAddTeam,
     progress,
     teams: selectedTeams,
@@ -59,7 +62,13 @@ export const LreTeamsTable: React.FC<Props> = ({
         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
             const character = props.value;
             if (character) {
-                return <LreTile character={character} settings={viewPreferences} />;
+                return (
+                    <LreTile
+                        character={character}
+                        settings={viewPreferences}
+                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                    />
+                );
             }
         },
         section: track.section,
@@ -259,6 +268,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                     <SelectedTeamsTable
                         track={track}
                         rows={selectedTeamsRows}
+                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                         editTeam={editExistingTeam}
                         deleteTeam={deleteTeam}
                     />

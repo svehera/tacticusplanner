@@ -6,16 +6,19 @@ import React, { useContext } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
+
 import { ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
 
 interface Props {
     team: ILreTeam;
+    upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     menuItemSelect: (action: 'edit' | 'delete') => void;
 }
 
-export const SelectedTeamCard: React.FC<Props> = ({ team, menuItemSelect }) => {
+export const SelectedTeamCard: React.FC<Props> = ({ team, upgradeRankOrMowGoals, menuItemSelect }) => {
     const { viewPreferences } = useContext(StoreContext);
     let subheader = team.restrictionsIds.join(', ');
     if (team.points) subheader += ` (${team.points} points)`;
@@ -45,7 +48,12 @@ export const SelectedTeamCard: React.FC<Props> = ({ team, menuItemSelect }) => {
             />
             <CardContent className="flex-box column gap1 start min-h-[150]">
                 {team.characters?.map(x => (
-                    <LreTile key={x.id} character={x} settings={viewPreferences} />
+                    <LreTile
+                        key={x.id}
+                        character={x}
+                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                        settings={viewPreferences}
+                    />
                 ))}
             </CardContent>
         </Card>

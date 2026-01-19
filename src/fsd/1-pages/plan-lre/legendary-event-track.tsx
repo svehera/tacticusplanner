@@ -4,6 +4,7 @@
 import { StoreContext } from '@/reducers/store.provider';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 import { LreTrackId, LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import {
@@ -21,6 +22,7 @@ interface Props {
     legendaryEvent: ILegendaryEvent;
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
+    upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     autoAddTeam: (section: LreTrackId, requirements: string[], characters: ICharacter2[]) => void;
     startAddTeam: (section: LreTrackId, requirements: string[]) => void;
     editTeam: (team: ILreTeam) => void;
@@ -34,6 +36,7 @@ export const LegendaryEventTrack: React.FC<Props> = ({
     startAddTeam,
     progress,
     teams: selectedTeams,
+    upgradeRankOrMowGoals,
     autoAddTeam,
     editTeam,
     deleteTeam,
@@ -92,6 +95,7 @@ export const LegendaryEventTrack: React.FC<Props> = ({
                 legendaryEvent={legendaryEvent}
                 track={track}
                 teams={selectedTeams}
+                upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                 startAddTeam={startAddTeam}
                 editTeam={editTeam}
                 deleteTeam={deleteTeam}
@@ -105,6 +109,7 @@ export const LegendaryEventTrack: React.FC<Props> = ({
                 legendaryEvent={legendaryEvent}
                 track={track}
                 teams={selectedTeams}
+                upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                 autoAddTeam={autoAddTeam}
                 startAddTeam={startAddTeam}
                 editTeam={editTeam}
