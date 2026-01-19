@@ -446,6 +446,7 @@ export class UpgradesService {
                     settings.completedLocations,
                     raids
                 );
+                material.energyLeft = clonedMaterial.energyLeft;
 
                 // Figure out how many materials we just farmed and subtract them from the total
                 // materials required.
