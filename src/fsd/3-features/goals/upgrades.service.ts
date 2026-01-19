@@ -333,9 +333,9 @@ export class UpgradesService {
             }
         }
 
-        allMaterials = this.splitMaterialsForHomeScreenEvent(settings, allMaterials);
+        const splitMaterials = this.splitMaterialsForHomeScreenEvent(settings, allMaterials);
 
-        const upgradesRaids = this.generateDailyRaidsList(settings, allMaterials);
+        const upgradesRaids = this.generateDailyRaidsList(settings, splitMaterials);
 
         const blockedMaterials = allMaterials.filter(x => x.isBlocked);
         const finishedMaterials = allMaterials.filter(x => x.isFinished);
@@ -362,6 +362,7 @@ export class UpgradesService {
         };
     }
     /**
+     * PLEASE READ THIS ENTIRE COMMENT, THERE IS SOME SUBTLE BEHAVIOR YOU NEED TO KNOW ABOUT.
      * Generates a day-by-day plan for raiding to acquire character upgrade materials.
      *
      * This function simulates the process of spending daily energy on raids to farm the
@@ -394,6 +395,25 @@ export class UpgradesService {
 
         let iteration = 0;
         let upgradesToFarm = allUpgrades.filter(x => !x.isBlocked && !x.isFinished && x.energyLeft > 0);
+        const totalMaterialsNeeded: Record<string, number> = {};
+        const totalMaterialsAcquired: Record<string, number> = {};
+
+        // Certain upgrades will appear in here multiple times because we split them for HSEs. Keep
+        // track of the total materials by look at the required for the first occurrence of each
+        // upgrade material.
+        allUpgrades.forEach(upgrade => {
+            if (totalMaterialsNeeded[upgrade.id] === undefined) {
+                totalMaterialsNeeded[upgrade.id] = upgrade.requiredCount - upgrade.acquiredCount;
+            }
+            if (totalMaterialsAcquired[upgrade.id] === undefined) {
+                totalMaterialsAcquired[upgrade.id] = upgrade.acquiredCount;
+            }
+        });
+
+        // We need to clone this so that way on the raids page, when we display acquired/required
+        // for each material, we show the correct numbers.
+        const initTotalMaterials = cloneDeep(totalMaterialsNeeded);
+        const initAcquiredMaterials = cloneDeep(totalMaterialsAcquired);
 
         while (upgradesToFarm.length > 0) {
             const isFirstDay = iteration === 0;
@@ -411,17 +431,34 @@ export class UpgradesService {
                     break;
                 }
 
+                // We already completed this material, so skip it.
+                if (totalMaterialsNeeded[material.id] <= 0) continue;
+
+                // We need to clone the material here because we're going to adjust the total
+                // number of materials we need.
+                const clonedMaterial = cloneDeep(material);
+                clonedMaterial.requiredCount = totalMaterialsNeeded[material.id];
+                clonedMaterial.acquiredCount = 0;
                 const { raidLocations, energySpent } = this._planRaidsForMaterial(
-                    material,
+                    clonedMaterial,
                     energyLeft,
                     isFirstDay,
                     settings.completedLocations,
                     raids
                 );
+                material.energyLeft = clonedMaterial.energyLeft;
+
+                // Figure out how many materials we just farmed and subtract them from the total
+                // materials required.
+                raidLocations.forEach(location => {
+                    totalMaterialsNeeded[material.id] -= Math.round(location.farmedItems);
+                });
 
                 if (raidLocations.length) {
                     raids.push({
-                        ...material,
+                        ...clonedMaterial,
+                        acquiredCount: initAcquiredMaterials[material.id],
+                        requiredCount: initTotalMaterials[material.id],
                         raidLocations,
                     });
                     energyLeft -= energySpent;
