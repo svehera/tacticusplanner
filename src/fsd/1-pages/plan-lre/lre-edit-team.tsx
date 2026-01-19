@@ -12,6 +12,8 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/3-features/goals/goals.models';
 import { ILegendaryEvent, ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
@@ -19,12 +21,13 @@ import { LreTile } from './lre-tile';
 interface Props {
     lre: ILegendaryEvent;
     team: ILreTeam;
+    upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     onClose: () => void;
     saveTeam: (team: ILreTeam) => void;
     deleteTeam: (teamId: string) => void;
 }
 
-export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, deleteTeam }) => {
+export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals, onClose, saveTeam, deleteTeam }) => {
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const [expectedBattleClears, setExpectedBattleClears] = useState<number>(team.expectedBattleClears ?? 1);
     const [expectedBattleClearsInput, setExpectedBattleClearsInput] = useState<string>(
@@ -152,7 +155,11 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                                         className="flex-box gap5 w-[350px]">
                                         {!gridTeam.some(x => x.id === character.id) && <WarningIcon color="error" />}
                                         <CloseIcon />
-                                        <LreTile character={character} settings={viewPreferences} />
+                                        <LreTile
+                                            character={character}
+                                            upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                                            settings={viewPreferences}
+                                        />
                                     </div>
                                 ))
                             ) : (
@@ -175,7 +182,11 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                                     }}
                                     className="flex-box gap5 pointer w-[350px]">
                                     <AddIcon />
-                                    <LreTile character={character} settings={viewPreferences} />
+                                    <LreTile
+                                        character={character}
+                                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                                        settings={viewPreferences}
+                                    />
                                 </div>
                             ))}
                         </div>

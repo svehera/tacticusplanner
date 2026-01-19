@@ -9,23 +9,19 @@ import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fs
 
 import { CharacterBias, CharactersService, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
 import { EquipmentIcon, EquipmentService } from '@/fsd/4-entities/equipment';
-import { ICharacterUpgradeRankGoal, PersonalGoalType } from '@/fsd/4-entities/goal';
-import { MowsService } from '@/fsd/4-entities/mow';
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal, PersonalGoalType } from '@/fsd/4-entities/goal';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ILreTileSettings } from '@/fsd/3-features/view-settings';
 
 interface Props {
     character: ICharacter2;
     settings: ILreTileSettings;
+    upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     onClick?: (character: ICharacter2) => void;
 }
 
-export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => {} }) => {
-    const { goals, characters, mows, viewPreferences } = useContext(StoreContext);
-
-    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMowGoals, onClick = () => {} }) => {
+    const { viewPreferences } = useContext(StoreContext);
 
     // We use the current goals of the tactician, as well as the current state
     // of the character, to determine which rank to show. We also take into
@@ -33,7 +29,6 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
     const rank = useMemo(() => {
         // If we don't have goal previews enabled, return the character's current rank.
         if (!viewPreferences.lreGoalsPreview) return character.rank;
-        const { upgradeRankOrMowGoals } = GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false);
         // We allow partial goals (Based on upgrade-material rarity), so figure
         // out the maximum rank for each rarity of upgrade material.
         let maxCommonRank: Rank = character.rank;
@@ -82,7 +77,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             Math.min(maxCommonRank, maxUncommonRank, maxRareRank, maxEpicRank, maxLegendaryRank)
         );
         return ret;
-    }, [goals, characters, resolvedMows, viewPreferences, character]);
+    }, [viewPreferences, character]);
 
     // Determine the rarity icon to display based on the goal rank and current
     // character rank.

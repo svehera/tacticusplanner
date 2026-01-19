@@ -26,11 +26,12 @@ import { ITableRow } from './lre.models';
 interface Props {
     track: ILegendaryEventTrack;
     rows: ITableRow[];
+    upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     editTeam: (teamId: string) => void;
     deleteTeam: (teamId: string) => void;
 }
 
-export const SelectedTeamsTable: React.FC<Props> = ({ rows, editTeam, deleteTeam, track }) => {
+export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoals, editTeam, deleteTeam, track }) => {
     const { viewPreferences } = useContext(StoreContext);
     const gridRef = useRef<AgGridReact>(null);
 
@@ -43,7 +44,13 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, editTeam, deleteTeam
         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
             const character = props.value;
             if (character) {
-                return <LreTile character={character} settings={viewPreferences} />;
+                return (
+                    <LreTile
+                        character={character}
+                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                        settings={viewPreferences}
+                    />
+                );
             }
         },
         colSpan: params => {

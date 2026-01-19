@@ -15,7 +15,10 @@ import { RarityStars } from '@/fsd/5-shared/model/enums/rarity-stars.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/3-features/goals/goals.models';
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { IAutoTeamsPreferences, RequirementStatus } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings';
 
@@ -35,7 +38,8 @@ import PointsTable from './points-table';
 import { TokenDisplay, TokenEstimationService, TokenUse } from './token-estimation-service';
 
 export const Lre: React.FC = () => {
-    const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
+    const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters, mows, goals } =
+        useContext(StoreContext);
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
     const { setBattleState } = useLreProgress(legendaryEvent);
     const { model } = useLreProgress(legendaryEvent);
@@ -44,10 +48,20 @@ export const Lre: React.FC = () => {
     const [currentRarity, setCurrentRarity] = useState<Rarity>(Rarity.Legendary);
     const [currentStars, setCurrentStars] = useState<RarityStars>(RarityStars.None);
     const [resolvedCharacters, setResolvedCharacters] = useState<ICharacter2[]>([]);
+    const [resolvedMows, setResolvedMows] = useState<IMow2[]>([]);
+    const [upgradeRankOrMowGoals, setUpgradeRankOrMowGoals] = useState<
+        (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[]
+    >([]);
     const dispatch = useContext(DispatchContext);
     const updatePreferencesOption = (setting: keyof ILreViewSettings, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
+
+    useEffect(() => {
+        setUpgradeRankOrMowGoals(
+            GoalsService.prepareGoals(goals, [...resolvedCharacters, ...resolvedMows], false).upgradeRankOrMowGoals
+        );
+    }, [goals, resolvedCharacters, resolvedMows]);
 
     useEffect(() => {
         const chars = CharactersService.resolveStoredCharacters(characters);
@@ -61,6 +75,11 @@ export const Lre: React.FC = () => {
             setCurrentStars(character.rarityStars);
         }
     }, [characters]);
+
+    useEffect(() => {
+        const mowsResolved = MowsService.resolveAllFromStorage(mows);
+        setResolvedMows(mowsResolved);
+    }, [mows]);
 
     useEffect(() => {
         setTokens(
@@ -166,7 +185,7 @@ export const Lre: React.FC = () => {
     const renderTabContent = () => {
         switch (section) {
             case LreSection.teams:
-                return <LegendaryEvent legendaryEvent={legendaryEvent} />;
+                return <LegendaryEvent legendaryEvent={legendaryEvent} upgradeRankOrMowGoals={upgradeRankOrMowGoals} />;
             case LreSection.progress:
                 return <LeProgress legendaryEvent={legendaryEvent} />;
             case LreSection.tokenomics:
