@@ -77,7 +77,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
             Math.min(maxCommonRank, maxUncommonRank, maxRareRank, maxEpicRank, maxLegendaryRank)
         );
         return ret;
-    }, [viewPreferences, character]);
+    }, [viewPreferences, upgradeRankOrMowGoals, character]);
 
     // Determine the rarity icon to display based on the goal rank and current
     // character rank.
@@ -92,7 +92,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
 
     const rarity = useMemo(() => {
         return Math.max(character.rarity, rarityFromRank);
-    }, [character]);
+    }, [character, rarityFromRank]);
 
     const emoji =
         character.bias === CharacterBias.recommendFirst

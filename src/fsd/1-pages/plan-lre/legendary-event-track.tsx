@@ -109,6 +109,7 @@ export const LegendaryEventTrack: React.FC<Props> = ({
                 legendaryEvent={legendaryEvent}
                 track={track}
                 teams={selectedTeams}
+                upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                 autoAddTeam={autoAddTeam}
                 startAddTeam={startAddTeam}
                 editTeam={editTeam}

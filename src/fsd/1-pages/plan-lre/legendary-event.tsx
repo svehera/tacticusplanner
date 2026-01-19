@@ -179,6 +179,7 @@ export const LegendaryEvent = ({
                     lre={legendaryEvent}
                     preselectedTrackId={preselectedTrackId}
                     preselectedRequirements={preselectedRequirements}
+                    upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                     onClose={() => setShowAddTeam(false)}
                     addTeam={addLreTeam}
                 />

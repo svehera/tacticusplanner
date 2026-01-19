@@ -17,6 +17,7 @@ import { StoreContext } from '@/reducers/store.provider';
 import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 
 import { ILegendaryEventTrack, ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
 
