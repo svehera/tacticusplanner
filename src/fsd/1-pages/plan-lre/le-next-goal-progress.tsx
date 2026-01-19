@@ -6,10 +6,9 @@ import { LeProgress } from './le-progress.service';
 
 interface Props {
     progress: LeProgress;
-    shardsPerChest: number;
 }
 
-export const LeNextGoalProgress: React.FC<Props> = ({ progress, shardsPerChest }) => {
+export const LeNextGoalProgress: React.FC<Props> = ({ progress }) => {
     return (
         <div className="flex-box wrap gap15 m-2.5">
             <div className="flex gap-[5px]">
@@ -41,7 +40,8 @@ export const LeNextGoalProgress: React.FC<Props> = ({ progress, shardsPerChest }
                 Shards to {progress.goal}:
                 <span className="font-bold">
                     {' '}
-                    {progress.currentChests * shardsPerChest} / {progress.chestsForNextGoal * shardsPerChest}
+                    {progress.currentTotalShards} /{' '}
+                    {progress.currentTotalShards - progress.incrementalShards + progress.incrementalShardsGoal}
                 </span>
                 <Tooltip title={/*totalChests + ' in total'*/ `${progress.totalChests} in total`}>
                     <InfoIcon />

@@ -1,6 +1,7 @@
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import SyncIcon from '@mui/icons-material/Sync';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { Button } from '@mui/material';
 import { useContext, useState } from 'react';
 
@@ -30,13 +31,13 @@ import { ILeBattles, LeBattleService } from './le-battle.service';
 import { useLreProgress } from './le-progress.hooks';
 import { LeProgressService } from './le-progress.service';
 import { LeTokenCard } from './le-token-card';
-import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
-import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
+// import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
+import { renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
-import { milestonesAndPoints, TokenDisplay, TokenUse } from './token-estimation-service';
+import { TokenDisplay, TokenUse } from './token-estimation-service';
 
 interface Props {
     legendaryEvent: ILegendaryEvent;
@@ -65,11 +66,11 @@ interface Props {
 export const LeTokenomics: React.FC<Props> = ({
     legendaryEvent,
     battles,
-    tokens,
+    // tokens,
     currentPoints,
     tokenDisplays,
     tracksProgress,
-    showP2P,
+    // showP2P,
     nextTokenCompleted,
     nextTokenMaybe,
     nextTokenStopped,
@@ -80,18 +81,17 @@ export const LeTokenomics: React.FC<Props> = ({
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
     const { syncWithTacticus } = useSyncWithTacticus();
 
-    const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
-    const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
+    // const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
+    // const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
     const characters = CharactersService.resolveStoredCharacters(unresolvedChars);
-
+    /*
     const missedMilestones = milestonesAndPoints
         .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
         .sort((a, b) => a.points - b.points);
-
     const achievedMilestones = milestonesAndPoints.filter(
         milestone => currentPoints >= milestone.points && (showP2P || milestone.packsPerRound === 0)
     );
-
+    */
     // Helper function to check if a token has yellow or red restrictions
     const hasWarningRestrictions = (token: TokenDisplay): boolean => {
         return token.restricts.some(restrict => {
@@ -196,7 +196,7 @@ export const LeTokenomics: React.FC<Props> = ({
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        {Date.now() > 1769385600000 && (
+                        {LeTokenService.isAfterCutoff() && (
                             <div>
                                 <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
                                     <SyncIcon /> Sync
@@ -204,6 +204,13 @@ export const LeTokenomics: React.FC<Props> = ({
                             </div>
                         )}
                         <div className="flex items-center gap-2">
+                            {LeTokenService.isAfterCutoff() &&
+                                (model.forceProgress === undefined ||
+                                    Date.now() - model.forceProgress.nextTokenMillisUtc > 3 * 60 * 60 * 1000) && (
+                                    <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
+                                        <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
+                                    </AccessibleTooltip>
+                                )}
                             <AccessibleTooltip
                                 title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
                                 <div className="flex items-center gap-2">
@@ -251,7 +258,6 @@ export const LeTokenomics: React.FC<Props> = ({
                             index={firstTokenIndex}
                             renderMode={LeTokenCardRenderMode.kStandalone}
                             currentPoints={currentPoints}
-                            renderMilestone={index => renderMilestone(index, showP2P)}
                             renderRestrictions={x =>
                                 renderRestrictions(
                                     x,
@@ -292,7 +298,7 @@ export const LeTokenomics: React.FC<Props> = ({
 
             <div className="flex flex-col items-center w-full gap-y-4">{characterPortrait()}</div>
 
-            {showP2P && (
+            {/*showP2P && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div>
                         <h3 className="text-lg font-bold">Milestones Already Achieved</h3>
@@ -302,7 +308,7 @@ export const LeTokenomics: React.FC<Props> = ({
                         emptyMessage="No milestones achieved yet."
                     />
                 </div>
-            )}
+            )*/}
 
             <div key="tokens" className="flex flex-col w-full gap-2">
                 <LeTokenTable
@@ -311,11 +317,10 @@ export const LeTokenomics: React.FC<Props> = ({
                     progress={model}
                     tokenDisplays={tokenDisplays}
                     tracksProgress={tracksProgress}
-                    showP2P={showP2P}
                     setBattleState={setBattleState}
                 />
             </div>
-            {missedMilestones.length > 0 && (
+            {/*missedMilestones.length > 0 && (
                 <div className="flex flex-col items-center w-full pt-6 mt-4 border-t-2 border-gray-200 gap-y-4 dark:border-gray-700">
                     <div className="text-center">
                         <h3 className="text-lg font-bold text-red-700 dark:text-red-400">
@@ -333,7 +338,7 @@ export const LeTokenomics: React.FC<Props> = ({
                         isMissedVariant={true}
                     />
                 </div>
-            )}
+            )*/}
         </div>
     );
 };

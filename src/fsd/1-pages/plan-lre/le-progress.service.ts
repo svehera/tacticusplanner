@@ -17,6 +17,8 @@ export interface LeProgress {
     chestsForNextGoal: number;
     totalChests: number;
 
+    // The total number of shards that were claimed from chests and "Oh So Close" combined.
+    currentTotalShards: number;
     // The number of shards towards the next goal. E.g. 0 (out of 400)), 50 (out of 180).
     incrementalShards: number;
     // The number of shards to reach the next goal starting from the previous goal. E.g. 400 (to
@@ -103,6 +105,7 @@ export class LeProgressService {
             chestsForNextGoal,
             totalChests: model.chestsMilestones.length,
 
+            currentTotalShards: currentShards,
             incrementalShards: goal.currentIncrementalShards,
             incrementalShardsGoal: goal.requiredIncrementalShards,
 
@@ -161,6 +164,7 @@ export class LeProgressService {
 
         return model.chestsMilestones.length;
     }
+
     private static getShardThresholds(progression: ILreProgressModel['progression']) {
         const shardsForUnlock = progression.unlock;
         const shardsFor4Stars = shardsForUnlock + progression.fourStars;

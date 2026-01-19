@@ -49,6 +49,7 @@ export interface ILreOccurrenceProgress {
 export interface ILeProgress {
     currentTokens: number;
     maxTokens: number;
+    nextChestIndex: number;
     nextTokenMillisUtc: number;
     regenDelayInSeconds: number;
     currentPoints: number;
