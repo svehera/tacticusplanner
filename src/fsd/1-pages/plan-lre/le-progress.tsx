@@ -140,7 +140,14 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                         {LeTokenService.isAfterCutoff() && (
                             <>
                                 <div className="w-[20px]" />
-                                <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
+                                <Button
+                                    size="small"
+                                    variant={'contained'}
+                                    color={'primary'}
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        sync();
+                                    }}>
                                     <SyncIcon /> Sync
                                 </Button>{' '}
                             </>
