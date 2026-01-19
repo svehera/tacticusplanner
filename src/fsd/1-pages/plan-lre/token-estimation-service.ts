@@ -752,7 +752,7 @@ export class TokenEstimationService {
         if (progress.forceProgress !== undefined) {
             return (
                 progress.forceProgress.currentCurrency +
-                (progress.forceProgress.nextChestIndex >= 0
+                (progress.forceProgress.nextChestIndex > 0
                     ? chestMilestones[progress.forceProgress.nextChestIndex - 1].totalNeededCurrency
                     : 0)
             );
@@ -794,7 +794,7 @@ export class TokenEstimationService {
         let milestoneIndex = progress.forceProgress.nextChestIndex;
 
         // Determine the total currency, since forced progress only gives us the current incremental currency.
-        if (milestoneIndex > 0 && milestoneIndex + 1 < chestMilestones.length) {
+        if (milestoneIndex > 0 && milestoneIndex < chestMilestones.length) {
             currentCurrency = chestMilestones[milestoneIndex - 1].totalNeededCurrency + currentCurrency;
         }
 
