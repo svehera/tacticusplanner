@@ -23,7 +23,7 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
             [
                 {
                     name: 'Black Legion',
-                    points: 90,
+                    points: 85,
                     objectiveType: 'Faction',
                     objectiveTarget: 'BlackLegion',
                     units: filter(noXenos).byFaction(Faction.Black_Legion),
