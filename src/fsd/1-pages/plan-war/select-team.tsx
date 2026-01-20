@@ -15,8 +15,11 @@ import { IMow2 } from '@/fsd/4-entities/mow';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
-import { ISnapshotCharacter, ISnapshotMachineOfWar } from '../input-roster-snapshots/models';
 import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
+
+import { CharacterSelectionGrid } from './character-selection-grid';
+import { MowSelectionGrid } from './mow-selection-grid';
+import { WarService } from './war.service';
 
 interface FilterGroupProps {
     label: string;
@@ -58,90 +61,6 @@ const RANKS = [
     Rank.Adamantine2,
     Rank.Adamantine3,
 ];
-
-function convertCharacter(charData: ICharacter2): ISnapshotCharacter {
-    return {
-        id: charData.snowprintId!,
-        activeAbilityLevel: charData.activeAbilityLevel ?? 0,
-        passiveAbilityLevel: charData.passiveAbilityLevel ?? 0,
-        rarity: charData.rarity,
-        rank: charData.rank,
-        xpLevel: charData.level ?? 0,
-        stars: charData.stars ?? 0,
-        shards: 0,
-        mythicShards: 0,
-    };
-}
-
-function convertMow(mowData: IMow2): ISnapshotMachineOfWar {
-    return {
-        id: mowData.snowprintId!,
-        primaryAbilityLevel: mowData.primaryAbilityLevel ?? 0,
-        secondaryAbilityLevel: mowData.secondaryAbilityLevel ?? 0,
-        rarity: mowData.rarity,
-        stars: mowData.stars ?? 0,
-        shards: 0,
-        mythicShards: 0,
-        locked: false,
-    };
-}
-
-function passesCharacterFilter(
-    c: ICharacter2,
-    minRank: Rank,
-    maxRank: Rank,
-    minRarity: Rarity,
-    maxRarity: Rarity,
-    factions: Faction[],
-    searchText: string
-): boolean {
-    if (c.rank < minRank || c.rank > maxRank) {
-        return false;
-    }
-    if (c.rarity < minRarity || c.rarity > maxRarity) {
-        return false;
-    }
-    if (factions.length > 0 && !factions.includes(FactionsService.snowprintFactionToFaction(c.faction) as Faction)) {
-        return false;
-    }
-    if (searchText.trim() !== '') {
-        const lowerSearch = searchText.toLowerCase();
-        if (
-            !c.name.toLowerCase().includes(lowerSearch) &&
-            !c.shortName.toLowerCase().includes(lowerSearch) &&
-            !c.snowprintId!.toLowerCase().includes(lowerSearch)
-        ) {
-            return false;
-        }
-    }
-    return true;
-}
-
-function passesMowFilter(
-    m: IMow2,
-    minRarity: Rarity,
-    maxRarity: Rarity,
-    factions: Faction[],
-    searchText: string
-): boolean {
-    if (m.rarity < minRarity || m.rarity > maxRarity) {
-        return false;
-    }
-    if (factions.length > 0 && !factions.includes(FactionsService.snowprintFactionToFaction(m.faction) as Faction)) {
-        return false;
-    }
-    if (searchText.trim() !== '') {
-        const lowerSearch = searchText.toLowerCase();
-        if (
-            !m.name.toLowerCase().includes(lowerSearch) &&
-            !m.id.toLowerCase().includes(lowerSearch) &&
-            !m.snowprintId!.toLowerCase().includes(lowerSearch)
-        ) {
-            return false;
-        }
-    }
-    return true;
-}
 
 export const SelectTeam: React.FC<SelectTeamProps> = ({ chars, mows }) => {
     const [teamName, setTeamName] = useState('');
@@ -274,7 +193,7 @@ export const SelectTeam: React.FC<SelectTeamProps> = ({ chars, mows }) => {
                                         showMythicShards={RosterSnapshotShowVariableSettings.Never}
                                         showShards={RosterSnapshotShowVariableSettings.Never}
                                         showXpLevel={RosterSnapshotShowVariableSettings.Never}
-                                        char={convertCharacter(char!)}
+                                        char={WarService.convertCharacter(char!)}
                                         charData={char}
                                     />
                                 </div>
@@ -293,7 +212,7 @@ export const SelectTeam: React.FC<SelectTeamProps> = ({ chars, mows }) => {
                                         showMythicShards={RosterSnapshotShowVariableSettings.Never}
                                         showShards={RosterSnapshotShowVariableSettings.Never}
                                         showXpLevel={RosterSnapshotShowVariableSettings.Never}
-                                        mow={convertMow(mow!)}
+                                        mow={WarService.convertMow(mow!)}
                                         mowData={mow}
                                     />
                                 </div>
@@ -302,85 +221,26 @@ export const SelectTeam: React.FC<SelectTeamProps> = ({ chars, mows }) => {
             </section>
 
             <div className="flex flex-col lg:flex-row gap-6 h-full">
-                <div className="flex-[3] bg-white dark:bg-[#161b22] p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-                    <div className="flex justify-between mb-4">
-                        <h3 className="font-bold">Characters</h3>
-                        <span className="text-xs text-slate-500">Showing 84 units</span>
-                    </div>
-                    <div className="flex flex-wrap gap-4">
-                        {chars
-                            .filter(c => !selectedChars.includes(c.snowprintId!))
-                            .filter(c =>
-                                passesCharacterFilter(c, minRank, maxRank, minRarity, maxRarity, factions, searchText)
-                            )
-                            .sort((a, b) => {
-                                if (b.rank !== a.rank) {
-                                    return b.rank - a.rank;
-                                }
-                                const powerA =
-                                    Math.pow(a.activeAbilityLevel ?? 0, 2) + Math.pow(a.passiveAbilityLevel ?? 0, 2);
-                                const powerB =
-                                    Math.pow(b.activeAbilityLevel ?? 0, 2) + Math.pow(b.passiveAbilityLevel ?? 0, 2);
-                                if (powerB !== powerA) {
-                                    return powerB - powerA;
-                                }
-                                return b.rarity - a.rarity;
-                            })
-                            .map(char => (
-                                <div
-                                    key={char.snowprintId!}
-                                    onClick={() => addChar(char.snowprintId!)}
-                                    className="cursor-pointer transition-transform duration-100 active:scale-95 hover:brightness-110"
-                                    title={`Select ${char.name || 'Character'}`}>
-                                    <RosterSnapshotCharacter
-                                        key={char.snowprintId!}
-                                        showMythicShards={RosterSnapshotShowVariableSettings.Never}
-                                        showShards={RosterSnapshotShowVariableSettings.Never}
-                                        showXpLevel={RosterSnapshotShowVariableSettings.Never}
-                                        char={convertCharacter(char)}
-                                        charData={char}
-                                    />
-                                </div>
-                            ))}
-                    </div>
-                </div>
-
-                <div className="flex-[1] bg-white dark:bg-[#161b22] p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-                    <div className="mb-4">
-                        <h3 className="font-bold">Machines of War</h3>
-                    </div>
-                    <div className="flex flex-wrap gap-4">
-                        {mows
-                            .filter(mow => selectedMow !== mow.snowprintId!)
-                            .filter(mow => passesMowFilter(mow, minRarity, maxRarity, factions, searchText))
-                            .sort((a, b) => {
-                                const powerA =
-                                    Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);
-                                const powerB =
-                                    Math.pow(b.primaryAbilityLevel ?? 0, 2) + Math.pow(b.secondaryAbilityLevel ?? 0, 2);
-                                if (powerB !== powerA) {
-                                    return powerB - powerA;
-                                }
-                                return b.rarity - a.rarity;
-                            })
-                            .map(mow => (
-                                <div
-                                    key={mow.snowprintId!}
-                                    onClick={() => setSelectedMow(mow.snowprintId!)}
-                                    className="cursor-pointer transition-transform duration-100 active:scale-95 hover:brightness-110"
-                                    title={`Select ${mow.name || 'Machine of War'}`}>
-                                    <RosterSnapshotCharacter
-                                        key={mow.snowprintId!}
-                                        showMythicShards={RosterSnapshotShowVariableSettings.Never}
-                                        showShards={RosterSnapshotShowVariableSettings.Never}
-                                        showXpLevel={RosterSnapshotShowVariableSettings.Never}
-                                        mow={convertMow(mow)}
-                                        mowData={mow}
-                                    />
-                                </div>
-                            ))}
-                    </div>
-                </div>
+                <CharacterSelectionGrid
+                    searchText={searchText}
+                    minRank={minRank}
+                    maxRank={maxRank}
+                    minRarity={minRarity}
+                    maxRarity={maxRarity}
+                    factions={factions}
+                    characters={chars}
+                    selectedCharacterIds={selectedChars}
+                    onCharacterSelect={addChar}
+                />
+                <MowSelectionGrid
+                    searchText={searchText}
+                    minRarity={minRarity}
+                    maxRarity={maxRarity}
+                    factions={factions}
+                    mows={mows}
+                    selectedMow={selectedMow}
+                    onMowSelect={setSelectedMow}
+                />
             </div>
         </div>
     );
