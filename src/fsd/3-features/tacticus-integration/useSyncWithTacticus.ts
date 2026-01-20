@@ -1,20 +1,92 @@
+/* eslint-disable import-x/no-internal-modules */
+/* eslint-disable boundaries/element-types */
 import { enqueueSnackbar } from 'notistack';
 import { useContext } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { IDispatchContext } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { getTacticusPlayerData } from '@/fsd/5-shared/lib/tacticus-api';
+import { getTacticusPlayerData, TacticusLegendaryEventProgress } from '@/fsd/5-shared/lib/tacticus-api';
 import { useLoader } from '@/fsd/5-shared/ui';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignMapperService } from '@/fsd/4-entities/campaign/campaign-mapper-service';
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+
+import { LeProgressService } from '@/fsd/1-pages/plan-lre/le-progress.service';
+import { LreService } from '@/fsd/1-pages/plan-lre/lre.service';
+
+import { ICharacter2 } from '../characters/characters.models';
+import { getLre } from '../lre';
+import { ILreProgressDto } from '../lre-progress';
+
+function handleLegendaryEvents(
+    leProgress: Partial<Record<LegendaryEventEnum, ILreProgressDto>>,
+    legendaryEvents: TacticusLegendaryEventProgress[],
+    dispatch: IDispatchContext
+): void {
+    const successfulEvents: string[] = [];
+    legendaryEvents.forEach(externalProgress => {
+        const internalEventId = LeProgressService.mapEventId(externalProgress.id);
+        if (internalEventId === undefined) {
+            enqueueSnackbar(`Error mapping external legendary event ${externalProgress.id}.`, {
+                variant: 'error',
+            });
+            return;
+        }
+        const internalEvent = leProgress[internalEventId];
+        if (internalEvent === undefined) {
+            enqueueSnackbar(`Error finding internal legendary event for external event ID ${externalProgress.id}.`, {
+                variant: 'error',
+            });
+            return;
+        }
+        const legendaryEvent = getLre(internalEventId, [] as ICharacter2[]);
+        const dtoModel = leProgress[internalEventId];
+        if (dtoModel === undefined) {
+            enqueueSnackbar(`Error finding internal event DTO model for external event ID ${externalProgress.id}.`, {
+                variant: 'error',
+            });
+            return;
+        }
+        const model = LreService.mapProgressDtoToModel(leProgress[internalEventId], legendaryEvent);
+        if (model === undefined) {
+            enqueueSnackbar(`Error finding internal event model for external event ID ${externalProgress.id}.`, {
+                variant: 'error',
+            });
+            return;
+        }
+        try {
+            const convertedModel = LeProgressService.convertExternalProgress(legendaryEvent, externalProgress, model);
+            dispatch.leProgress({
+                type: 'SyncWithTacticus',
+                eventId: internalEventId,
+                value: LreService.mapProgressModelToDto(convertedModel),
+            });
+            successfulEvents.push(legendaryEvent.name);
+        } catch (e) {
+            enqueueSnackbar(
+                `Error converting external legendary event progress for event ID ${externalProgress.id}. - ${e}`,
+                {
+                    variant: 'error',
+                }
+            );
+            console.error(e);
+            return;
+        }
+    });
+
+    if (successfulEvents.length > 0) {
+        enqueueSnackbar(`Synced progress for ${successfulEvents.join(', ')}'s legendary events.`, {
+            variant: 'info',
+        });
+    }
+}
 
 export const useSyncWithTacticus = () => {
     const dispatch = useContext(DispatchContext);
     const store = useContext(StoreContext);
     const loader = useLoader();
+
     async function syncWithTacticus(syncOptions: string[]) {
         dispatch.viewPreferences({ type: 'Update', setting: 'apiIntegrationSyncOptions', value: syncOptions });
         try {
@@ -68,8 +140,7 @@ export const useSyncWithTacticus = () => {
                         progress: result.data.player.progress.campaigns,
                     });
                 }
-
-                // updateLegendaryEvents(result.data.player);
+                handleLegendaryEvents(store.leProgress, result.data.player.progress.legendaryEvents, dispatch);
 
                 enqueueSnackbar('Successfully synced with Tacticus API', { variant: 'success' });
             } else {
