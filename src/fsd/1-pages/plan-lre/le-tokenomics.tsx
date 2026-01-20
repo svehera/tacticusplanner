@@ -206,6 +206,7 @@ export const LeTokenomics: React.FC<Props> = ({
                         <div className="flex items-center gap-2">
                             {LeTokenService.isAfterCutoff() &&
                                 (model.forceProgress === undefined ||
+                                    model.forceProgress.nextTokenMillisUtc === undefined ||
                                     Date.now() - model.forceProgress.nextTokenMillisUtc > 3 * 60 * 60 * 1000) && (
                                     <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
                                         <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />

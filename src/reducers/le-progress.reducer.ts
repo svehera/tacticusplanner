@@ -10,6 +10,11 @@ export type LeProgressAction =
           eventId: LegendaryEventEnum;
           value: ILreProgressDto;
       }
+    | {
+          type: 'SyncWithTacticus';
+          eventId: LegendaryEventEnum;
+          value: ILreProgressDto;
+      }
     | SetStateAction<LegendaryEventData<ILreProgressDto>>;
 
 export const leProgressReducer = (
@@ -21,6 +26,9 @@ export const leProgressReducer = (
             return action.value;
         }
         case 'Update': {
+            return { ...state, [action.eventId]: action.value };
+        }
+        case 'SyncWithTacticus': {
             return { ...state, [action.eventId]: action.value };
         }
         default: {
