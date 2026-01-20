@@ -232,7 +232,8 @@ export class GoalsService {
                     rankPoint5: g.rankPoint5!,
                     rankStartPoint5: g.startingRankPoint5 ?? false,
                     upgradesRarity: g.upgradesRarity ?? [],
-                    appliedUpgrades: unit.upgrades,
+                    appliedUpgrades:
+                        Math.max(g.startingRank ?? unit.rank, unit.rank) === unit.rank ? unit.upgrades : [],
                     level: unit.level,
                     xp: unit.xp,
                     rarity: unit.rarity,
