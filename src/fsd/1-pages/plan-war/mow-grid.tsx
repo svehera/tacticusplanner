@@ -1,8 +1,6 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 
-import { Faction, Rarity } from '@/fsd/5-shared/model';
-
 import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
@@ -12,42 +10,22 @@ import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapsh
 import { WarService } from './war.service';
 
 interface Props {
-    searchText: string;
-    minRarity: Rarity;
-    maxRarity: Rarity;
-    factions: Faction[];
     mows: IMow2[];
-    selectedMow: string;
     onMowSelect: (id: string) => void;
+    showHeader: boolean;
 }
 
-export const MowSelectionGrid: React.FC<Props> = ({
-    searchText,
-    minRarity,
-    maxRarity,
-    mows,
-    factions,
-    selectedMow,
-    onMowSelect,
-}: Props) => {
-    const filteredMows = mows
-        .filter(mow => selectedMow !== mow.snowprintId!)
-        .filter(mow => WarService.passesMowFilter(mow, minRarity, maxRarity, factions, searchText))
-        .sort((a, b) => {
-            const powerA = Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);
-            const powerB = Math.pow(b.primaryAbilityLevel ?? 0, 2) + Math.pow(b.secondaryAbilityLevel ?? 0, 2);
-            if (powerB !== powerA) {
-                return powerB - powerA;
-            }
-            return b.rarity - a.rarity;
-        });
+export const MowGrid: React.FC<Props> = ({ mows, onMowSelect, showHeader }: Props) => {
     return (
-        <div className="flex-[1] bg-white dark:bg-[#161b22] p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-            <div className="mb-4">
-                <h3 className="font-bold">Machines of War</h3>
-            </div>
+        <div>
+            {showHeader && (
+                <div className="flex justify-between mb-4">
+                    <h3 className="font-bold">Machines of War</h3>
+                    <span className="text-xs text-slate-500">Showing {mows.length} units</span>
+                </div>
+            )}
             <div className="flex flex-wrap gap-4">
-                {filteredMows.map(mow => (
+                {mows.map(mow => (
                     <div
                         key={mow.snowprintId!}
                         onClick={() => onMowSelect(mow.snowprintId!)}
