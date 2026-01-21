@@ -163,6 +163,7 @@ export interface TacticusShard {
 
 interface TacticusProgress {
     campaigns: TacticusCampaignProgress[]; // List of CampaignProgress objects
+    legendaryEvents: TacticusLegendaryEventsProgress[]; // List of LegendaryEventProgress objects
 }
 
 export interface TacticusCampaignProgress {
@@ -176,6 +177,53 @@ interface TacticusCampaignLevel {
     battleIndex: number; // Example: 10
     attemptsLeft: number; // Example: 2
     attemptsUsed: number; // Example: 3
+}
+
+export interface TacticusLegendaryEventsProgress {
+    id: string; // The SP ID of the event character.
+    lanes: TacticusLegendaryEventLane[];
+    currentPoints: number;
+    currentCurrency: number;
+    currentShards: number;
+    currentEvent: TacticusLegendaryEventCurrentEvent;
+}
+export interface TacticusLegendaryEventLane {
+    id: number; // Typically Alpha=1, Beta=2, Gamma=3
+    name: string; // Typically Alpha, Beta, Gamma
+    battleConfigs: TacticusLegendaryEventBattleConfig[];
+    progress: TacticusLegendaryEventProgress[];
+}
+
+export interface TacticusLegendaryEventBattleConfig {
+    numEnemies: number;
+    objectives: TacticusLegendaryEventObjective[];
+    disallowedFactions: string[];
+}
+
+export interface TacticusLegendaryEventObjective {
+    objectiveType: string;
+    objectiveTarget: string;
+    score: number;
+}
+
+export interface TacticusLegendaryEventProgress {
+    objectivesCleared: number[];
+    highScore: number;
+    encounterPoints: number;
+}
+
+export interface TacticusLegendaryEventCurrentEvent {
+    run: number;
+    tokens: TacticusLegendaryEventTokens;
+    hasUsedAdForExtraTokenToday: boolean;
+    extraCurrencyPerPayout: number;
+}
+
+export interface TacticusLegendaryEventTokens {
+    currentTokens: number;
+    maxTokens: number;
+    nextTokenInSeconds: number;
+    regenDelayInSeconds: number;
 }
 
 export interface TacticusGuildResponse {

@@ -11,6 +11,7 @@ import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { ILreProgressModel, ILreOccurrenceProgress, ILreBattleRequirementsProgress } from './lre.models';
 import { LreService } from './lre.service';
+
 export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     const { leProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);

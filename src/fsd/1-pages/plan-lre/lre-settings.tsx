@@ -177,7 +177,11 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         );
     };
 
-    const lreTileCharacter = characters[0];
+    const lreTileCharacter: ICharacter2 = {
+        ...characters[0],
+        ...characters.find(x => x.snowprintId === 'deathRotbone'),
+        equipment: [{ id: 'R_Booster_Crit_OrbsOfDecay', level: 1 }],
+    };
 
     return (
         <Dialog open={true} fullWidth onClose={onClose} maxWidth="md" fullScreen={isMobile}>
@@ -188,7 +192,7 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
 
                 <h3>Unit tile view</h3>
                 <div className="flex-box gap5 wrap">{lreTileViewOptions.map(renderOption)}</div>
-                <LreTile character={lreTileCharacter} settings={viewSettings} />
+                <LreTile character={lreTileCharacter} settings={viewSettings} upgradeRankOrMowGoals={[]} />
                 <Divider orientation="horizontal" />
 
                 <h3>Units bias</h3>

@@ -69,6 +69,8 @@ export const useSyncWithTacticus = () => {
                     });
                 }
 
+                // updateLegendaryEvents(result.data.player);
+
                 enqueueSnackbar('Successfully synced with Tacticus API', { variant: 'success' });
             } else {
                 enqueueSnackbar('There was an error while syncing with Tacticus API', { variant: 'error' });
