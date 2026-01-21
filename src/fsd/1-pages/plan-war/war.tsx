@@ -9,7 +9,7 @@ import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
-import { SelectTeam } from './select-team';
+import { ManageTeams } from './manage-teams';
 
 export const War = () => {
     const { characters: unresolvedCharacters, mows: unresolvedMows } = useContext(StoreContext);
@@ -31,7 +31,7 @@ export const War = () => {
 
     return (
         <div className="p-6">
-            <SelectTeam chars={chars} mows={mows} />
+            <ManageTeams chars={chars} mows={mows} />
         </div>
     );
 };
