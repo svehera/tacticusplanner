@@ -17,11 +17,15 @@ import { TeamFlow } from './team-flow';
 import { UnitFilter } from './unit-filter';
 import { WarService } from './war.service';
 
-const NAME_TOO_SHORT_MESSAGE = 'Team name must be at least 3 characters long.';
-
 interface Props {
     chars: ICharacter2[];
     mows: IMow2[];
+}
+
+interface Team {
+    name: string;
+    characterIds: string[];
+    mowIds: string[];
 }
 
 export const ManageTeams: React.FC<Props> = ({ chars, mows }) => {
@@ -35,6 +39,41 @@ export const ManageTeams: React.FC<Props> = ({ chars, mows }) => {
     const [factions, setFactions] = useState<Faction[]>([]);
     const [mowWidth, setMowWidth] = useState<number>(200);
     const [isDragging, setIsDragging] = useState<boolean>(false);
+
+    // TODO(cpunerd): Move this stuff into GlobalState once done prototyping.
+    const [teams, setTeams] = useState<Team[]>([
+        {
+            name: 'Custards',
+            characterIds: [
+                'custoBladeChampion',
+                'worldKharn',
+                'custoTrajann',
+                'custoVexilusPraetor',
+                'spaceRagnar',
+                'bloodDante',
+                'bloodMephiston',
+                'blackAbaddon',
+                'templHelbrecht',
+                'admecDominus',
+                'emperExultant',
+                'orksWarboss',
+            ],
+            mowIds: ['blackForgefiend', 'tyranBiovore', 'ultraDreadnought'],
+        },
+        {
+            name: 'Toasters',
+            characterIds: [
+                'admecDominus',
+                'admecManipulus',
+                'admecMarshall',
+                'admecRuststalker',
+                'tauMarksman',
+                'orksWarboss',
+                'templHelbrecht',
+            ],
+            mowIds: ['ultraDreadnought'],
+        },
+    ]);
 
     // State for the save dialog.
     const [saveAllowed, setSaveAllowed] = useState(false);
@@ -131,6 +170,10 @@ export const ManageTeams: React.FC<Props> = ({ chars, mows }) => {
     };
 
     const handleSaveTeam = () => {
+        setTeams([...teams, { name: teamName, characterIds: selectedChars, mowIds: selectedMows }]);
+        setSelectedChars([]);
+        setSelectedMows([]);
+        setTeamName('');
         setSaveTeamDialogOpen(false);
     };
 
@@ -174,10 +217,19 @@ export const ManageTeams: React.FC<Props> = ({ chars, mows }) => {
         }
 
         if (teamName.trim().length < 3) {
-            setSaveDisallowedMessage(NAME_TOO_SHORT_MESSAGE);
+            setSaveDisallowedMessage('Team name must be at least 3 characters long.');
             setSaveAllowed(teamName.trim().length >= 3);
             return;
+        } else if (teams.some(team => team.name.toLowerCase() === teamName.trim().toLowerCase())) {
+            setSaveDisallowedMessage('A team with this name already exists. Please choose a unique name.');
+            setSaveAllowed(false);
+            return;
+        } else if (teamName.trim().length > 40) {
+            setSaveDisallowedMessage('Team name must be at most 40 characters.');
+            setSaveAllowed(false);
+            return;
         }
+
         if (
             !guildRaidSelected &&
             (!nonRaidModesEnabled || (!warOffenseSelected && !warDefenseSelected && !tournamentArenaSelected))
@@ -323,6 +375,19 @@ export const ManageTeams: React.FC<Props> = ({ chars, mows }) => {
                         <CharacterGrid characters={filteredChars} onCharacterSelect={addChar} showHeader={true} />
                     </div>
                 </div>
+            </div>
+            <div>
+                {teams.map(team => (
+                    <div key={team.name} className="p-4 border-b border-slate-200 dark:border-slate-800">
+                        <h3 className="font-bold mb-2">{team.name}</h3>
+                        <TeamFlow
+                            chars={chars.filter(x => team.characterIds.includes(x.snowprintId!))}
+                            mows={mows.filter(x => team.mowIds.includes(x.snowprintId!))}
+                            onCharClicked={() => {}}
+                            onMowClicked={() => {}}
+                        />
+                    </div>
+                ))}
             </div>
         </div>
     );
