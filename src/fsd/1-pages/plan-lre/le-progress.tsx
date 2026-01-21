@@ -1,26 +1,37 @@
 ﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
+import SyncIcon from '@mui/icons-material/Sync';
+import { Accordion, AccordionDetails, AccordionSummary, Button, TextField } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
+// eslint-disable-next-line import-x/no-internal-modules
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 
 import { LeNextGoalProgress } from './le-next-goal-progress';
 import { LeProgressOverviewMissions } from './le-progress-overview-missions';
 import { useLreProgress } from './le-progress.hooks';
 import { LeProgressService } from './le-progress.service';
+import { LeTokenService } from './le-token-service';
 import { LreTrackOverallProgress } from './le-track-overall-progress';
 
 /**
  * UI Element to display the progress of missions and tracks in a legendary event.
  */
 export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
-    const { leSelectedTeams, leSettings } = useContext(StoreContext);
-    const { model, updateNotes, updateOccurrenceProgress, toggleBattleState } = useLreProgress(legendaryEvent);
+    const { leSelectedTeams, leSettings, viewPreferences } = useContext(StoreContext);
+    const { model, updateNotes, updateOccurrenceProgress, setBattleState } = useLreProgress(legendaryEvent);
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
+    const [viewPrefs, setViewPrefs] = useState(viewPreferences);
+
+    const { syncWithTacticus } = useSyncWithTacticus();
+
+    useEffect(() => {
+        setViewPrefs(viewPreferences);
+    }, [viewPreferences]);
 
     const teams = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
@@ -51,10 +62,14 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
         )
         .join('-');
 
+    const sync = async () => {
+        console.log('Syncing with Tacticus...');
+        await syncWithTacticus(viewPrefs.apiIntegrationSyncOptions);
+    };
+
     return (
         <div className="w-full">
             <LeNextGoalProgress
-                shardsPerChest={model.shardsPerChest}
                 progress={LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true)}
             />
             <Accordion
@@ -122,6 +137,21 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                         <span>
                             Tracks Progress <span className="font-bold">({tracksTotalProgress})</span>
                         </span>
+                        {LeTokenService.isAfterCutoff() && (
+                            <>
+                                <div className="w-[20px]" />
+                                <Button
+                                    size="small"
+                                    variant={'contained'}
+                                    color={'primary'}
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        sync();
+                                    }}>
+                                    <SyncIcon /> Sync
+                                </Button>{' '}
+                            </>
+                        )}
                     </div>
                 </AccordionSummary>
 
@@ -132,7 +162,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                             track={track}
                             legendaryEventId={legendaryEvent.id}
                             teams={teams}
-                            toggleBattleState={toggleBattleState}
+                            setBattleState={setBattleState}
                         />
                     ))}
                 </AccordionDetails>

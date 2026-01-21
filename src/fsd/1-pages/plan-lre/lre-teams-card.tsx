@@ -8,6 +8,8 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/3-features/goals/goals.models';
 import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
@@ -18,6 +20,7 @@ interface Props {
     legendaryEvent: ILegendaryEvent;
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
+    upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     startAddTeam: (section: LreTrackId, requirements: string[]) => void;
     progress: Record<string, number>;
     editTeam: (team: ILreTeam) => void;
@@ -29,6 +32,7 @@ export const LreTeamsCard: React.FC<Props> = ({
     legendaryEvent,
     track,
     progress,
+    upgradeRankOrMowGoals,
     startAddTeam,
     teams: selectedTeams,
     editTeam,
@@ -112,6 +116,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                     {gridTeam.map(character => (
                         <LreTile
                             key={character.id}
+                            upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                             character={character}
                             settings={viewPreferences}
                             onClick={addTeam}
@@ -123,7 +128,12 @@ export const LreTeamsCard: React.FC<Props> = ({
                         <h3>Selected Teams ({selectedTeams.length})</h3>
                         <div className="flex-box wrap">
                             {selectedTeams.map(team => (
-                                <SelectedTeamCard key={team.id} team={team} menuItemSelect={handleAction(team)} />
+                                <SelectedTeamCard
+                                    key={team.id}
+                                    team={team}
+                                    upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                                    menuItemSelect={handleAction(team)}
+                                />
                             ))}
                         </div>
                     </>

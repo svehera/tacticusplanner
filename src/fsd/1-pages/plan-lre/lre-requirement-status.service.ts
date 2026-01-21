@@ -102,4 +102,8 @@ export class LreRequirementStatusService {
     public static getFirstRestrictionIndex(requirements: Array<{ id: string }>): number {
         return requirements.findIndex(req => !this.isSpecialRequirement(req.id));
     }
+
+    public static isDefaultObjective(id: string): boolean {
+        return id === '_defeatAll' || id === '_killPoints' || id === '_highScore';
+    }
 }

@@ -24,6 +24,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Psyker',
                     points: 90,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Psyker',
                     units: filter(noXenos).byTrait(Trait.Psyker),
                     iconId: 'psyker',
                     index: 0,
@@ -31,6 +33,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Power',
                     points: 65,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Power',
                     units: filter(noXenos).byDamageType(DamageType.Power),
                     iconId: 'power',
                     index: 1,
@@ -38,6 +42,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Max 1 Hit',
                     points: 50,
+                    objectiveType: 'MaxHits',
+                    objectiveTarget: '1',
                     units: filter(noXenos).byMaxHits(1),
                     iconId: 'hits',
                     index: 2,
@@ -45,6 +51,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Rapid Assault',
                     points: 90,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'RapidAssault',
                     units: filter(noXenos).byTrait(Trait.RapidAssault),
                     iconId: 'rapid assault',
                     index: 3,
@@ -52,6 +60,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Physical',
                     points: 80,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Physical',
                     units: filter(noXenos).byDamageType(DamageType.Physical),
                     iconId: 'physical',
                     index: 4,
@@ -71,6 +81,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Power',
                     points: 75,
+                    objectiveType: 'NotDamageType',
+                    objectiveTarget: 'Power',
                     units: filter(noChaos).byDamageType(DamageType.Power, true),
                     iconId: 'no_power',
                     index: 0,
@@ -78,6 +90,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Get Stuck In',
                     points: 90,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'GetStuckIn',
                     units: filter(noChaos).byTrait(Trait.GetStuckIn),
                     iconId: 'get stuck in',
                     index: 1,
@@ -85,6 +99,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Deep Strike',
                     points: 75,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'TeleportStrike',
                     units: filter(noChaos).byTrait(Trait.TeleportStrike),
                     iconId: 'deep strike',
                     index: 2,
@@ -92,6 +108,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Chain',
                     points: 90,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Chain',
                     units: filter(noChaos).byDamageType(DamageType.Chain),
                     iconId: 'chain',
                     index: 3,
@@ -99,6 +117,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Max 3 hits',
                     points: 45,
+                    objectiveType: 'MaxHits',
+                    objectiveTarget: '3',
                     units: filter(noChaos).byMaxHits(3),
                     iconId: 'hits',
                     index: 4,
@@ -118,6 +138,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Flame',
                     points: 90,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Flame',
                     units: filter(noImperial).byDamageType(DamageType.Flame),
                     iconId: 'flame',
                     index: 0,
@@ -125,6 +147,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Power',
                     points: 50,
+                    objectiveType: 'NotDamageType',
+                    objectiveTarget: 'Power',
                     units: filter(noImperial).byDamageType(DamageType.Power, true),
                     iconId: 'no_power',
                     index: 1,
@@ -132,6 +156,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Terminator',
                     points: 65,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'TerminatorArmour',
                     units: filter(noImperial).byTrait(Trait.TerminatorArmour),
                     iconId: 'terminator',
                     index: 2,
@@ -139,6 +165,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Min 4 hits',
                     points: 75,
+                    objectiveType: 'MinHits',
+                    objectiveTarget: '4',
                     units: filter(noImperial).byMinHits(4),
                     selected: false,
                     iconId: 'hits',
@@ -147,6 +175,8 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Physical',
                     points: 95,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Physical',
                     units: filter(noImperial).byDamageType(DamageType.Physical),
                     selected: false,
                     iconId: 'physical',
