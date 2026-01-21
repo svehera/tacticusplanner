@@ -16,9 +16,10 @@ interface Props {
     onCharClicked: (char: ICharacter2) => void;
     onMowClicked: (mow: IMow2) => void;
 }
+
 export const TeamFlow: React.FC<Props> = ({ chars, mows, onCharClicked, onMowClicked }: Props) => {
     return (
-        <div className="flex w-full p-4 min-h-[100px] items-center justify-center border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-lg bg-slate-50/50 dark:bg-black/10">
+        <div className="flex w-full p-4 min-h-[100px] items-center border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-lg bg-slate-50/50 dark:bg-black/10">
             <div className="flex items-center gap-4">
                 <div className="flex flex-wrap gap-4 justify-center max-w-4xl">
                     {chars.map(char => (
@@ -42,7 +43,7 @@ export const TeamFlow: React.FC<Props> = ({ chars, mows, onCharClicked, onMowCli
                     <div className="self-stretch w-px bg-slate-300 dark:bg-slate-700 mx-2 min-h-[60px]" />
                 )}
 
-                <div className="flex flex-wrap gap-4 shrink-0 items-center">
+                <div className="flex flex-wrap gap-4 items-center">
                     {mows.map(mow => (
                         <div
                             key={mow.snowprintId!}
