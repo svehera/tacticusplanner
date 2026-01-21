@@ -80,7 +80,6 @@ export const UpgradeImage = ({
     return (
         <AccessibleTooltip title={tooltipText}>
             <div style={{ width: size, height: size }} className={'upgrade'}>
-                (
                 <div className="relative block my-0 mx-auto" style={{ width: size, height: size }}>
                     <img style={centeredImageStackStyles} src={bgImageUrl} alt={`${rarity} upgrade`} />
                     <img
@@ -94,7 +93,6 @@ export const UpgradeImage = ({
                     />
                     <img loading={'lazy'} style={centeredImageStackStyles} src={frameImgUrl} alt="" />
                 </div>
-                )
             </div>
         </AccessibleTooltip>
     );
