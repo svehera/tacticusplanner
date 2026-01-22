@@ -1,4 +1,15 @@
 /**
+ * The Prettify helper is a utility type that takes an object type and makes the hover overlay more readable.
+ *
+ * @source https://www.totaltypescript.com/concepts/the-prettify-helper
+ * @param T The type to prettify
+ * @returns A new type with the same properties as T, but with a cleaner representation
+ * @example type Original = { a: number } & { b: string };
+ * @example type Pretty = Prettify<Original>; // { a: number; b: string; }
+ */
+export type Prettify<T> = { [K in keyof T]: T[K] } & {};
+
+/**
  * Type-safe version of Object.keys
  *
  * @description Normally Object.keys returns string[] which is not type safe. This wraps it to return typed keys
@@ -60,14 +71,14 @@ export function createSafeGetter<T extends readonly object[]>() {
 }
 
 /**
- * Utility type to remove the readonly modifier from a type T
+ * Utility type to remove all levels of readonly modifier from a type T
  */
-type Mutable<T> = {
-    -readonly [P in keyof T]: T[P];
-};
+type DeepMutable<T> = Prettify<{
+    -readonly [P in keyof T]: DeepMutable<T[P]>;
+}>;
 
 /**
- * Creates a deep mutable copy of the given object or array.
+ * Creates a deep mutable copy of the given array of objects.
  * Intended for when we pass our JSON data (which is readonly) to libraries that require mutable data.
  *
  * @param obj The object or array to create a mutable copy of
@@ -76,6 +87,6 @@ type Mutable<T> = {
  * @example const mutableObj = mutableCopy(readonlyObj);
  * @example mutableObj.b.c = 3; // No TypeScript error
  */
-export function mutableCopy<T extends readonly object | readonly object[]>(obj: T): Mutable<T> {
-    return JSON.parse(JSON.stringify(obj)) as Mutable<T>;
+export function mutableCopy<T extends object | readonly object[]>(obj: T): DeepMutable<T> {
+    return JSON.parse(JSON.stringify(obj)) as DeepMutable<T>;
 }
