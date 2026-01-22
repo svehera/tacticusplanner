@@ -87,6 +87,15 @@ export const UnitFilter: React.FC<Props> = ({
         onFactionsChange(event.target.value as Faction[]);
     };
 
+    const handleResetAllFilters = () => {
+        onSearchTextChange('');
+        onMinRarityChange(Rarity.Common);
+        onMaxRarityChange(Rarity.Mythic);
+        onMinRankChange(Rank.Stone1);
+        onMaxRankChange(Rank.Adamantine3);
+        onFactionsChange([]);
+    };
+
     return (
         <header className="flex flex-wrap items-center gap-4 p-4 bg-white dark:bg-[#161b22] rounded-lg border border-slate-200 dark:border-slate-800">
             <FilterGroup label="Search Unit">
@@ -142,7 +151,9 @@ export const UnitFilter: React.FC<Props> = ({
             </FilterGroup>
 
             <div className="ml-auto self-end">
-                <button className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm font-medium transition">
+                <button
+                    className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm font-medium transition"
+                    onClick={handleResetAllFilters}>
                     Reset All Filters
                 </button>
             </div>
