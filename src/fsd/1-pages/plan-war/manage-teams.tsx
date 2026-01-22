@@ -1,46 +1,94 @@
+/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import SaveIcon from '@mui/icons-material/Save';
-import { Button } from '@mui/material';
-import React, { useCallback, useEffect, useState } from 'react';
+import {
+    Add as AddIcon,
+    Edit as EditIcon,
+    DeleteOutline as DeleteIcon,
+    MilitaryTech, // War
+    Shield, // Defense
+    Groups, // Guild Raid
+    WorkspacePremium, // Tournament
+    Layers, // Battlefield
+} from '@mui/icons-material';
+import { IconButton, Tooltip, Paper, Stack, Chip, ButtonBase, Typography } from '@mui/material';
+import { cloneDeep } from 'lodash';
+import { useContext, useEffect, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
+import { StoreContext } from '@/reducers/store.provider';
 
-import { FactionsService } from '@/fsd/5-shared/lib';
-import { Faction, Rank, Rarity } from '@/fsd/5-shared/model';
+import { Faction } from '@/fsd/5-shared/model/enums/faction.enum';
+import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
+import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 
-import { IMow2 } from '@/fsd/4-entities/mow';
+import { CharactersService } from '@/fsd/4-entities/character/@x/unit';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
-import { CharacterGrid } from './character-grid';
-import { MowGrid } from './mow-grid';
-import { SaveTeamDialog } from './save-team-dialog';
+import { AddTeamDialog } from './add-team-dialog';
 import { TeamFlow } from './team-flow';
-import { UnitFilter } from './unit-filter';
-import { WarService } from './war.service';
 
-interface Props {
-    chars: ICharacter2[];
-    mows: IMow2[];
-}
+const MAX_TEAMS = 5;
+
+// Internal helper for metadata styling
+const MetadataChip = ({ icon, label, color }: { icon: React.ReactElement; label: string; color: any }) => (
+    <Chip
+        icon={icon}
+        label={label}
+        size="small"
+        variant="outlined"
+        color={color}
+        sx={{ height: 20, fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase' }}
+    />
+);
 
 interface Team {
     name: string;
     characterIds: string[];
-    mowIds: string[];
+    mowIds?: string[];
+    warOffense?: boolean;
+    warDefense?: boolean;
+    guildRaid?: boolean;
+    tournamentArena?: boolean;
+    battleFieldLevels?: boolean[];
 }
 
-export const ManageTeams: React.FC<Props> = ({ chars, mows }) => {
-    const [selectedChars, setSelectedChars] = useState<string[]>([]);
-    const [selectedMows, setSelectedMows] = useState<string[]>([]);
-    const [searchText, setSearchText] = useState('');
-    const [minRarity, setMinRarity] = useState<Rarity>(Rarity.Common);
-    const [maxRarity, setMaxRarity] = useState<Rarity>(Rarity.Mythic);
+enum SaveTeamMode {
+    MODE_ADD,
+    MODE_EDIT,
+}
+
+export const ManageTeams = () => {
+    const { characters: unresolvedCharacters, mows: unresolvedMows } = useContext(StoreContext);
     const [minRank, setMinRank] = useState<Rank>(Rank.Stone1);
     const [maxRank, setMaxRank] = useState<Rank>(Rank.Adamantine3);
-    const [factions, setFactions] = useState<Faction[]>([]);
-    const [mowWidth, setMowWidth] = useState<number>(200);
-    const [isDragging, setIsDragging] = useState<boolean>(false);
+    const [minRarity, setMinRarity] = useState<Rarity>(Rarity.Common);
+    const [maxRarity, setMaxRarity] = useState<Rarity>(Rarity.Mythic);
+    const [factions, onFactionsChange] = useState<Faction[]>([]);
+    const [searchText, setSearchText] = useState<string>('');
+    const [selectedChars, onSelectedCharsChange] = useState<string[]>([]);
+    const [selectedMows, onSelectedMowsChange] = useState<string[]>([]);
 
-    // TODO(cpunerd): Move this stuff into GlobalState once done prototyping.
+    // State for the add/edit dialog.
+    const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
+    const [editingTeam, setEditingTeam] = useState<Team | null>(null);
+    const [saveAllowed, setSaveAllowed] = useState(false);
+    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>(undefined);
+    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>(undefined);
+    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>(
+        undefined
+    );
+    const [warOffenseSelected, setWarOffenseSelected] = useState<boolean>(false);
+    const [warDefenseSelected, setWarDefenseSelected] = useState<boolean>(false);
+    const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
+    const [tournamentArenaSelected, setTournamentArenaSelected] = useState<boolean>(false);
+    const [teamName, setTeamName] = useState<string>('');
+    const [battleFieldLevels, setBattleFieldLevels] = useState<boolean[]>([true, true, true, true, true, true]);
+    const [resolvedChars, setResolvedChars] = useState<ICharacter2[]>([]);
+    const [resolvedMows, setResolvedMows] = useState<IMow2[]>([]);
+
+    const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
+
+    // TODO(cpunerd): This is just here as a demo, move this stuff into GlobalState once done prototyping.
     const [teams, setTeams] = useState<Team[]>([
         {
             name: 'Custards',
@@ -59,6 +107,7 @@ export const ManageTeams: React.FC<Props> = ({ chars, mows }) => {
                 'orksWarboss',
             ],
             mowIds: ['blackForgefiend', 'tyranBiovore', 'ultraDreadnought'],
+            guildRaid: true,
         },
         {
             name: 'Toasters',
@@ -72,130 +121,27 @@ export const ManageTeams: React.FC<Props> = ({ chars, mows }) => {
                 'templHelbrecht',
             ],
             mowIds: ['ultraDreadnought'],
+            guildRaid: true,
+        },
+        {
+            name: 'GSC TA',
+            characterIds: ['genesBiophagus', 'genesKelermorph', 'genesMagus', 'genesPatriarch', 'genesPrimus'],
+            tournamentArena: true,
+        },
+        {
+            name: 'GSC War',
+            characterIds: ['genesBiophagus', 'genesKelermorph', 'tyranNeurothrope', 'genesPatriarch', 'genesPrimus'],
+            mowIds: ['blackForgefiend'],
+            warOffense: true,
+            warDefense: true,
+            battleFieldLevels: [true, true, true, false, false, false],
         },
     ]);
 
-    // State for the save dialog.
-    const [saveAllowed, setSaveAllowed] = useState(false);
-    const [saveTeamDialogOpen, setSaveTeamDialogOpen] = useState<boolean>(false);
-    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>(undefined);
-    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>(undefined);
-    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>(
-        undefined
-    );
-    const [warOffenseSelected, setWarOffenseSelected] = useState<boolean>(false);
-    const [warDefenseSelected, setWarDefenseSelected] = useState<boolean>(false);
-    const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
-    const [tournamentArenaSelected, setTournamentArenaSelected] = useState<boolean>(false);
-    const [teamName, setTeamName] = useState<string>('');
-    const [battleFieldLevels, setBattleFieldLevels] = useState<boolean[]>([true, true, true, true, true, true]);
-
-    const startResizing = useCallback(() => {
-        setIsDragging(true);
-    }, []);
-
-    const stopResizing = useCallback(() => {
-        setIsDragging(false);
-    }, []);
-
-    const resizeGrids = useCallback(
-        (e: MouseEvent) => {
-            if (isDragging) {
-                // We calculate distance from the right side of the window
-                const newWidth = window.innerWidth - e.clientX;
-                // Set boundaries (e.g., min 200px, max 50% of screen)
-                if (newWidth > 200 && newWidth < window.innerWidth * 0.5) {
-                    setMowWidth(newWidth);
-                }
-            }
-        },
-        [isDragging]
-    );
-
     useEffect(() => {
-        if (isDragging) {
-            window.addEventListener('mousemove', resizeGrids);
-            window.addEventListener('mouseup', stopResizing);
-        }
-        return () => {
-            window.removeEventListener('mousemove', resizeGrids);
-            window.removeEventListener('mouseup', stopResizing);
-        };
-    }, [isDragging, resizeGrids, stopResizing]);
-
-    const allFactions: Faction[] = Array.from(
-        new Set<Faction>([
-            ...(chars.map(c => FactionsService.snowprintFactionToFaction(c.faction)) as Faction[]),
-            ...(mows.map(m => FactionsService.snowprintFactionToFaction(m.faction)) as Faction[]),
-        ])
-    ).sort((a, b) => a.localeCompare(b));
-
-    const addChar = (snowprintId: string) => {
-        setSelectedChars(prev => [...prev, snowprintId]);
-    };
-
-    const addMow = (snowprintId: string) => {
-        setSelectedMows(prev => [...prev, snowprintId]);
-    };
-
-    const filteredChars = chars
-        .filter(c => !selectedChars.includes(c.snowprintId!))
-        .filter(c => WarService.passesCharacterFilter(c, minRank, maxRank, minRarity, maxRarity, factions, searchText))
-        .sort((a, b) => {
-            if (b.rank !== a.rank) {
-                return b.rank - a.rank;
-            }
-            const powerA = Math.pow(a.activeAbilityLevel ?? 0, 2) + Math.pow(a.passiveAbilityLevel ?? 0, 2);
-            const powerB = Math.pow(b.activeAbilityLevel ?? 0, 2) + Math.pow(b.passiveAbilityLevel ?? 0, 2);
-            if (powerB !== powerA) {
-                return powerB - powerA;
-            }
-            return b.rarity - a.rarity;
-        });
-
-    const filteredMows = mows
-        .filter(mow => !selectedMows.includes(mow.snowprintId!))
-        .filter(mow => WarService.passesMowFilter(mow, minRarity, maxRarity, factions, searchText))
-        .sort((a, b) => {
-            const powerA = Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);
-            const powerB = Math.pow(b.primaryAbilityLevel ?? 0, 2) + Math.pow(b.secondaryAbilityLevel ?? 0, 2);
-            if (powerB !== powerA) {
-                return powerB - powerA;
-            }
-            return b.rarity - a.rarity;
-        });
-
-    const showSaveDialog = () => {
-        setSaveTeamDialogOpen(true);
-    };
-
-    const handleSaveTeam = () => {
-        setTeams([...teams, { name: teamName, characterIds: selectedChars, mowIds: selectedMows }]);
-        setSelectedChars([]);
-        setSelectedMows([]);
-        setTeamName('');
-        setSaveTeamDialogOpen(false);
-    };
-
-    const handleWarOffenseChange = (offense: boolean) => {
-        setWarOffenseSelected(offense);
-    };
-    const handleWarDefenseChange = (defense: boolean) => {
-        setWarDefenseSelected(defense);
-    };
-    const handleGuildRaidChange = (guildRaid: boolean) => {
-        setGuildRaidSelected(guildRaid);
-    };
-    const handleTournamentArenaChange = (tournamentArena: boolean) => {
-        setTournamentArenaSelected(tournamentArena);
-    };
-    const handleBattleFieldLevelsChange = (levels: boolean[]) => {
-        setBattleFieldLevels(levels);
-    };
-
-    const handleTeamNameChange = (teamName: string) => {
-        setTeamName(teamName);
-    };
+        setResolvedChars(CharactersService.resolveStoredCharacters(unresolvedCharacters));
+        setResolvedMows(MowsService.resolveAllFromStorage(unresolvedMows));
+    }, [unresolvedCharacters, unresolvedMows]);
 
     useEffect(() => {
         let nonRaidModesEnabled = true;
@@ -220,7 +166,13 @@ export const ManageTeams: React.FC<Props> = ({ chars, mows }) => {
             setSaveDisallowedMessage('Team name must be at least 3 characters long.');
             setSaveAllowed(teamName.trim().length >= 3);
             return;
-        } else if (teams.some(team => team.name.toLowerCase() === teamName.trim().toLowerCase())) {
+        } else if (
+            teams.some(team => team.name.toLowerCase() === teamName.trim().toLowerCase()) &&
+            !(
+                saveTeamMode === SaveTeamMode.MODE_EDIT &&
+                editingTeam?.name.toLowerCase() === teamName.trim().toLowerCase()
+            )
+        ) {
             setSaveDisallowedMessage('A team with this name already exists. Please choose a unique name.');
             setSaveAllowed(false);
             return;
@@ -260,135 +212,219 @@ export const ManageTeams: React.FC<Props> = ({ chars, mows }) => {
         selectedMows,
     ]);
 
-    return (
-        <div>
-            <SaveTeamDialog
-                warOffense={warOffenseSelected}
-                warDefense={warDefenseSelected}
-                warEnabled={warDisallowedMessage === undefined}
-                warDisabledMessage={warDisallowedMessage}
-                tournamentArena={tournamentArenaSelected}
-                tournamentArenaEnabled={tournamentArenaDisallowedMessage === undefined}
-                tournamentArenaDisabledMessage={tournamentArenaDisallowedMessage}
-                guildRaid={guildRaidSelected}
-                battleFieldLevels={battleFieldLevels}
-                teamName={teamName}
-                isOpen={saveTeamDialogOpen}
+    const onAdd = () => {
+        setAddTeamDialogOpen(true);
+        setSaveTeamMode(SaveTeamMode.MODE_ADD);
+        // Reset dialog state
+        setTeamName('');
+        onSelectedCharsChange([]);
+        onSelectedMowsChange([]);
+    };
+
+    const onEdit = (team: Team) => {
+        setEditingTeam(team);
+        setAddTeamDialogOpen(true);
+        setSaveTeamMode(SaveTeamMode.MODE_EDIT);
+        // Load dialog state
+        setTeamName(team.name);
+        onSelectedCharsChange(team.characterIds);
+        onSelectedMowsChange(team.mowIds || []);
+        setWarOffenseSelected(!!team.warOffense);
+        setWarDefenseSelected(!!team.warDefense);
+        setGuildRaidSelected(!!team.guildRaid);
+        setTournamentArenaSelected(!!team.tournamentArena);
+        setBattleFieldLevels(team.battleFieldLevels || [true, true, true, true, true, true]);
+    };
+
+    const onDelete = (team: Team) => {
+        if (window.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)) {
+            setTeams(currentTeams => currentTeams.filter(t => t.name !== team.name));
+        }
+    };
+
+    const onSave = () => {
+        if (saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam) {
+            const team = teams.find(t => t.name === editingTeam?.name)!;
+            team.characterIds = selectedChars;
+            team.mowIds = selectedMows;
+            team.warOffense = warOffenseSelected;
+            team.warDefense = warDefenseSelected;
+            team.guildRaid = guildRaidSelected;
+            team.tournamentArena = tournamentArenaSelected;
+            team.battleFieldLevels = battleFieldLevels;
+            const curTeams = [...teams];
+            curTeams.forEach(t => {
+                if (t.name !== editingTeam.name) return;
+                t = team;
+            });
+            setTeams(cloneDeep(curTeams));
+        } else {
+            const newTeam: Team = {
+                name: teamName.trim(),
+                characterIds: selectedChars,
+                mowIds: selectedMows,
+                warOffense: warOffenseSelected,
+                warDefense: warDefenseSelected,
+                guildRaid: guildRaidSelected,
+                tournamentArena: tournamentArenaSelected,
+                battleFieldLevels: battleFieldLevels,
+            };
+            setTeams(currentTeams => [...currentTeams, newTeam]);
+        }
+        // TODO: dispatch changes to global state.
+        setTeamName('');
+        onSelectedCharsChange([]);
+        onSelectedMowsChange([]);
+        setAddTeamDialogOpen(false);
+    };
+
+    if (addTeamDialogOpen) {
+        return (
+            <AddTeamDialog
+                chars={resolvedChars}
+                mows={resolvedMows}
+                selectedChars={selectedChars}
+                selectedMows={selectedMows}
+                searchText={searchText}
+                minRarity={minRarity}
+                maxRarity={maxRarity}
+                minRank={minRank}
+                maxRank={maxRank}
+                factions={factions}
+                onSelectedCharsChange={onSelectedCharsChange}
+                onSelectedMowsChange={onSelectedMowsChange}
+                onSearchTextChange={setSearchText}
+                onMinRarityChange={setMinRarity}
+                onMaxRarityChange={setMaxRarity}
+                onMinRankChange={setMinRank}
+                onMaxRankChange={setMaxRank}
+                onFactionsChange={onFactionsChange}
                 saveAllowed={saveAllowed}
                 saveDisallowedMessage={saveDisallowedMessage}
-                onWarOffenseChanged={handleWarOffenseChange}
-                onWarDefenseChanged={handleWarDefenseChange}
-                onGuildRaidChanged={handleGuildRaidChange}
-                onTournamentArenaChanged={handleTournamentArenaChange}
-                onBattleFieldLevelsChanged={handleBattleFieldLevelsChange}
-                onTeamNameChange={handleTeamNameChange}
-                onCancel={() => setSaveTeamDialogOpen(false)}
-                onSave={handleSaveTeam}
+                warDisallowedMessage={warDisallowedMessage}
+                tournamentArenaDisallowedMessage={tournamentArenaDisallowedMessage}
+                warOffenseSelected={warOffenseSelected}
+                warDefenseSelected={warDefenseSelected}
+                guildRaidSelected={guildRaidSelected}
+                tournamentArenaSelected={tournamentArenaSelected}
+                teamName={teamName}
+                battleFieldLevels={battleFieldLevels}
+                onWarOffenseChanged={setWarOffenseSelected}
+                onWarDefenseChanged={setWarDefenseSelected}
+                onGuildRaidChanged={setGuildRaidSelected}
+                onTournamentArenaChanged={setTournamentArenaSelected}
+                onTeamNameChanged={setTeamName}
+                onBattleFieldLevelsChanged={setBattleFieldLevels}
+                onCancel={() => setAddTeamDialogOpen(false)}
+                onSave={onSave}
             />
-            <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-[#0d1117] text-slate-900 dark:text-slate-100 p-4 gap-6">
-                <UnitFilter
-                    searchText={searchText}
-                    minRarity={minRarity}
-                    maxRarity={maxRarity}
-                    minRank={minRank}
-                    maxRank={maxRank}
-                    factions={factions}
-                    allFactions={allFactions}
-                    onSearchTextChange={setSearchText}
-                    onMinRarityChange={setMinRarity}
-                    onMaxRarityChange={setMaxRarity}
-                    onMinRankChange={setMinRank}
-                    onMaxRankChange={setMaxRank}
-                    onFactionsChange={(newFactions: Faction[]) => {
-                        setFactions(newFactions);
-                    }}
-                />
-                <section className="bg-white dark:bg-[#161b22] p-6 rounded-lg border-2 border-blue-500/30 dark:border-blue-400/20 shadow-inner">
-                    <div className="flex flex-wrap">
-                        <h2 className="text-sm font-bold uppercase tracking-widest mb-4 text-blue-600 dark:text-blue-400">
-                            Selected Team
-                        </h2>
-                        <div className="w-[20px]" />
-                        <Button
-                            size="small"
-                            variant="contained"
-                            color="primary"
-                            sx={{ py: 0.2 }}
-                            onClick={showSaveDialog}
-                            disabled={selectedChars.length === 0 && selectedMows.length === 0}>
-                            <SaveIcon className="mr-1" />
-                            Save
-                        </Button>
-                    </div>
-                    <div className="h-[10px]" />
-                    <TeamFlow
-                        chars={selectedChars.map(x => chars.find(char => char.snowprintId! === x)) as ICharacter2[]}
-                        mows={selectedMows.map(id => mows.find(mow => mow.snowprintId! === id)) as IMow2[]}
-                        onCharClicked={char => setSelectedChars(prev => prev.filter(id => id !== char.snowprintId!))}
-                        onMowClicked={mow => setSelectedMows(prev => prev.filter(id => id !== mow.snowprintId!))}
-                    />
-                </section>
-                <div
-                    className={`flex flex-col xl:flex-row-reverse xl:flex-nowrap gap-4 h-full ${
-                        isDragging ? 'cursor-col-resize select-none' : ''
-                    }`}
-                    style={{ '--mow-width': `${mowWidth}px` } as React.CSSProperties}>
-                    <div
-                        /* w-full by default. On desktop (xl), it takes the custom width */
-                        className="w-full xl:w-[var(--mow-width)] flex-shrink-0 bg-white dark:bg-[#161b22] p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-                        <MowGrid mows={filteredMows} onMowSelect={addMow} showHeader={true} />
-                    </div>
+        );
+    }
 
+    return (
+        <Stack spacing={2} className="p-4">
+            <div className="px-4 pt-4">
+                <ButtonBase
+                    onClick={onAdd}
+                    disabled={teams.length >= MAX_TEAMS}
+                    className="w-full group flex flex-col items-center justify-center p-6 
+                           border-2 border-dashed border-slate-300 dark:border-slate-700 
+                           hover:border-blue-500 dark:hover:border-blue-400 
+                           hover:bg-blue-50/30 dark:hover:bg-blue-900/10 
+                           rounded-xl transition-all duration-200">
                     <div
-                        onMouseDown={startResizing}
-                        className={`hidden xl:flex w-6 flex-shrink-0 cursor-col-resize relative z-20
-                                ${isDragging ? 'bg-blue-500/10' : 'hover:bg-blue-500/5'}
-                                group`}>
-                        <div
-                            className={`w-[1px] h-full mx-auto ${isDragging ? 'bg-blue-500' : 'bg-slate-200 dark:bg-slate-800 group-hover:bg-blue-400'}`}
-                        />
-                        <div className="absolute inset-0 pointer-events-none flex justify-center">
-                            <div
-                                className={`sticky top-[20%] z-30 pointer-events-auto flex flex-col gap-1 items-center justify-center
-                                        w-6 h-16 rounded-l-md border-y border-l shadow-[-4px_0_10px_rgba(0,0,0,0.1)] 
-                                        transition-all duration-200
-                                        ${
-                                            isDragging
-                                                ? 'bg-blue-500 border-blue-600'
-                                                : 'bg-white dark:bg-[#1c2128] border-slate-300 dark:border-slate-600 group-hover:border-blue-500'
-                                        }`}>
-                                <div
-                                    className={`w-3 h-[2px] rounded-full ${isDragging ? 'bg-blue-200' : 'bg-slate-300 dark:bg-slate-500'}`}
-                                />
-                                <div
-                                    className={`w-3 h-[2px] rounded-full ${isDragging ? 'bg-blue-200' : 'bg-slate-300 dark:bg-slate-500'}`}
-                                />
-                                <div
-                                    className={`w-3 h-[2px] rounded-full ${isDragging ? 'bg-blue-200' : 'bg-slate-300 dark:bg-slate-500'}`}
-                                />
-                                <div className="absolute right-[-2px] w-[2px] h-full bg-inherit" />
-                            </div>
+                        className="flex items-center justify-center w-10 h-10 mb-2 
+                                rounded-full bg-slate-100 dark:bg-slate-800 
+                                group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 
+                                transition-colors">
+                        <AddIcon className="text-slate-500 group-hover:text-blue-500 transition-colors" />
+                    </div>
+                    <Typography className="font-bold text-slate-600 dark:text-slate-400 group-hover:text-blue-600">
+                        Add New Team
+                    </Typography>
+                    {teams.length < MAX_TEAMS ? (
+                        <Typography className="text-xs text-slate-400 dark:text-slate-500">
+                            Create a custom configuration for Raids or War
+                        </Typography>
+                    ) : (
+                        <Typography className="text-xs text-red-500 dark:text-red-400">
+                            You have reached the maximum number of teams ({MAX_TEAMS}).
+                        </Typography>
+                    )}
+                </ButtonBase>
+            </div>
+            {teams.map(team => (
+                <Paper
+                    key={team.name}
+                    elevation={0}
+                    className="p-4 border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a1f2e] transition-colors">
+                    <div className="flex justify-between items-start mb-4">
+                        <div>
+                            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">
+                                Team Configuration
+                            </span>
+                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">{team.name}</h3>
+                        </div>
+
+                        <div className="flex gap-1">
+                            <Tooltip title="Edit Team">
+                                <IconButton onClick={() => onEdit(team)} size="small">
+                                    <EditIcon fontSize="small" className="text-slate-500" />
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Delete Team">
+                                <IconButton onClick={() => onDelete(team)} size="small" color="error">
+                                    <DeleteIcon fontSize="small" />
+                                </IconButton>
+                            </Tooltip>
                         </div>
                     </div>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {team.warOffense && (
+                            <MetadataChip
+                                icon={<MilitaryTech fontSize="inherit" />}
+                                label="War Offense"
+                                color="warning"
+                            />
+                        )}
+                        {team.warDefense && (
+                            <MetadataChip icon={<Shield fontSize="inherit" />} label="War Defense" color="info" />
+                        )}
+                        {team.guildRaid && (
+                            <MetadataChip icon={<Groups fontSize="inherit" />} label="Guild Raid" color="secondary" />
+                        )}
+                        {team.tournamentArena && (
+                            <MetadataChip
+                                icon={<WorkspacePremium fontSize="inherit" />}
+                                label="Tournament"
+                                color="success"
+                            />
+                        )}
 
-                    <div className="flex-1 min-w-0 bg-white dark:bg-[#161b22] p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-                        <CharacterGrid characters={filteredChars} onCharacterSelect={addChar} showHeader={true} />
+                        {team.battleFieldLevels !== undefined && (!!team.warOffense || !!team.warDefense) && (
+                            <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                                <Layers className="text-slate-500" sx={{ fontSize: 14 }} />
+                                <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400">
+                                    {team.battleFieldLevels
+                                        .map((active: boolean, i: number) => (active ? i + 1 : null))
+                                        .filter(Boolean)
+                                        .map(num => `BF${num!.toString()}`)
+                                        .join(', ')}
+                                </span>
+                            </div>
+                        )}
                     </div>
-                </div>
-            </div>
-            <div>
-                {teams.map(team => (
-                    <div key={team.name} className="p-4 border-b border-slate-200 dark:border-slate-800">
-                        <h3 className="font-bold mb-2">{team.name}</h3>
+
+                    <div className="bg-slate-50/50 dark:bg-slate-900/50 rounded-lg p-3">
                         <TeamFlow
-                            chars={chars.filter(x => team.characterIds.includes(x.snowprintId!))}
-                            mows={mows.filter(x => team.mowIds.includes(x.snowprintId!))}
+                            chars={resolvedChars.filter(x => team.characterIds.includes(x.snowprintId!))}
+                            mows={resolvedMows.filter(x => (team.mowIds ?? []).includes(x.snowprintId!))}
                             onCharClicked={() => {}}
                             onMowClicked={() => {}}
                         />
                     </div>
-                ))}
-            </div>
-        </div>
+                </Paper>
+            ))}
+        </Stack>
     );
 };

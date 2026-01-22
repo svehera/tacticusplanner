@@ -2,7 +2,6 @@
 /* eslint-disable import-x/no-internal-modules */
 import { ICharacter2 } from '@/models/interfaces';
 
-import { FactionsService } from '@/fsd/5-shared/lib';
 import { Faction, Rank, Rarity } from '@/fsd/5-shared/model';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
@@ -25,10 +24,7 @@ export class WarService {
         if (c.rarity < minRarity || c.rarity > maxRarity) {
             return false;
         }
-        if (
-            factions.length > 0 &&
-            !factions.includes(FactionsService.snowprintFactionToFaction(c.faction) as Faction)
-        ) {
+        if (factions.length > 0 && !factions.includes(c.faction as Faction)) {
             return false;
         }
         if (searchText.trim() !== '') {
@@ -81,10 +77,7 @@ export class WarService {
         if (m.rarity < minRarity || m.rarity > maxRarity) {
             return false;
         }
-        if (
-            factions.length > 0 &&
-            !factions.includes(FactionsService.snowprintFactionToFaction(m.faction) as Faction)
-        ) {
+        if (factions.length > 0 && !factions.includes(m.faction as Faction)) {
             return false;
         }
         if (searchText.trim() !== '') {
