@@ -110,12 +110,28 @@ export const UnitFilter: React.FC<Props> = ({
                 </div>
             </FilterGroup>
             <FilterGroup label="Rarity">
-                <RaritySelect label="Min" rarityValues={RARITIES} value={minRarity} valueChanges={onMinRarityChange} />
-                <RaritySelect label="Max" rarityValues={RARITIES} value={maxRarity} valueChanges={onMaxRarityChange} />
+                <div className="min-w-[180px]">
+                    <RaritySelect
+                        label="Min"
+                        rarityValues={RARITIES}
+                        value={minRarity}
+                        valueChanges={onMinRarityChange}
+                    />
+                </div>
+                <div className="min-w-[180px]">
+                    <RaritySelect
+                        label="Max"
+                        rarityValues={RARITIES}
+                        value={maxRarity}
+                        valueChanges={onMaxRarityChange}
+                    />
+                </div>
             </FilterGroup>
             <FilterGroup label="Rank">
-                <RankSelect label="Min" rankValues={RANKS} value={minRank} valueChanges={onMinRankChange} />
-                <div className="min-width-[180px]">
+                <div className="min-w-[210px]">
+                    <RankSelect label="Min" rankValues={RANKS} value={minRank} valueChanges={onMinRankChange} />
+                </div>
+                <div className="min-w-[210px]">
                     <RankSelect label="Max" rankValues={RANKS} value={maxRank} valueChanges={onMaxRankChange} />
                 </div>
             </FilterGroup>
