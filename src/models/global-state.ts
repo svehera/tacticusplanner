@@ -12,6 +12,7 @@ import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 import { XpUseState } from '@/fsd/1-pages/input-resources/models';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
+import { ITeam2 } from '@/fsd/1-pages/plan-teams2/models';
 
 import { defaultData, rankToLevel, rankToRarity } from './constants';
 import {
@@ -46,6 +47,7 @@ export class GlobalState implements IGlobalState {
     readonly leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     readonly goals: IPersonalGoal[];
     readonly teams: IPersonalTeam[];
+    readonly teams2: ITeam2[];
     readonly leProgress: LegendaryEventData<ILreProgressDto>;
     readonly leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     readonly leSettings: ILegendaryEventSettings;
@@ -86,6 +88,7 @@ export class GlobalState implements IGlobalState {
         this.guildWar = personalData.guildWar ?? defaultData.guildWar;
         this.guild = personalData.guild ?? defaultData.guild;
         this.teams = personalData.teams ?? defaultData.teams;
+        this.teams2 = personalData.teams2 ?? defaultData.teams2;
         this.xpIncome = personalData.xpIncome ?? defaultData.xpIncome;
         this.xpUse = personalData.xpUse ?? defaultData.xpUse;
         this.rosterSnapshots = personalData.rosterSnapshots ?? defaultData.rosterSnapshots;
@@ -306,6 +309,7 @@ export class GlobalState implements IGlobalState {
             xpUse: value.xpUse,
             rosterSnapshots: value.rosterSnapshots,
             teams: value.teams,
+            teams2: value.teams2,
         };
     }
 }

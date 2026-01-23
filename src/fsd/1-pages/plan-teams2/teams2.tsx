@@ -1,6 +1,6 @@
 import { ManageTeams } from './manage-teams';
 
-export const War = () => {
+export const Teams2 = () => {
     return (
         <div className="p-6">
             <ManageTeams />
