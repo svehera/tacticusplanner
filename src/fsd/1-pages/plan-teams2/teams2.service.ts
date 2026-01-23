@@ -36,7 +36,7 @@ export class Teams2Service {
             if (
                 !c.name.toLowerCase().includes(lowerSearch) &&
                 !c.shortName.toLowerCase().includes(lowerSearch) &&
-                !c.snowprintId!.toLowerCase().includes(lowerSearch)
+                !(c.snowprintId ?? '').toLowerCase().includes(lowerSearch)
             ) {
                 return false;
             }
