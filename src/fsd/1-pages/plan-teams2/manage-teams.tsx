@@ -15,7 +15,7 @@ import { cloneDeep } from 'lodash';
 import { useContext, useEffect, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
-import { StoreContext } from '@/reducers/store.provider';
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Faction } from '@/fsd/5-shared/model/enums/faction.enum';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
@@ -25,6 +25,7 @@ import { CharactersService } from '@/fsd/4-entities/character/@x/unit';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
 import { AddTeamDialog } from './add-team-dialog';
+import { ITeam2 } from './models';
 import { TeamFlow } from './team-flow';
 
 const MAX_TEAMS = 5;
@@ -41,24 +42,14 @@ const MetadataChip = ({ icon, label, color }: { icon: React.ReactElement; label:
     />
 );
 
-interface Team {
-    name: string;
-    characterIds: string[];
-    mowIds?: string[];
-    warOffense?: boolean;
-    warDefense?: boolean;
-    guildRaid?: boolean;
-    tournamentArena?: boolean;
-    battleFieldLevels?: boolean[];
-}
-
 enum SaveTeamMode {
     MODE_ADD,
     MODE_EDIT,
 }
 
 export const ManageTeams = () => {
-    const { characters: unresolvedCharacters, mows: unresolvedMows } = useContext(StoreContext);
+    const { characters: unresolvedCharacters, mows: unresolvedMows, teams2: currentTeams } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
     const [minRank, setMinRank] = useState<Rank>(Rank.Stone1);
     const [maxRank, setMaxRank] = useState<Rank>(Rank.Adamantine3);
     const [minRarity, setMinRarity] = useState<Rarity>(Rarity.Common);
@@ -70,7 +61,7 @@ export const ManageTeams = () => {
 
     // State for the add/edit dialog.
     const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
-    const [editingTeam, setEditingTeam] = useState<Team | null>(null);
+    const [editingTeam, setEditingTeam] = useState<ITeam2 | null>(null);
     const [saveAllowed, setSaveAllowed] = useState(false);
     const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>(undefined);
     const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>(undefined);
@@ -87,56 +78,11 @@ export const ManageTeams = () => {
     const [resolvedMows, setResolvedMows] = useState<IMow2[]>([]);
 
     const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
+    const [teams, setTeams] = useState<ITeam2[]>([]);
 
-    // TODO(cpunerd): This is just here as a demo, move this stuff into GlobalState once done prototyping.
-    const [teams, setTeams] = useState<Team[]>([
-        {
-            name: 'Custards',
-            characterIds: [
-                'custoBladeChampion',
-                'worldKharn',
-                'custoTrajann',
-                'custoVexilusPraetor',
-                'spaceRagnar',
-                'bloodDante',
-                'bloodMephiston',
-                'blackAbaddon',
-                'templHelbrecht',
-                'admecDominus',
-                'emperExultant',
-                'orksWarboss',
-            ],
-            mowIds: ['blackForgefiend', 'tyranBiovore', 'ultraDreadnought'],
-            guildRaid: true,
-        },
-        {
-            name: 'Toasters',
-            characterIds: [
-                'admecDominus',
-                'admecManipulus',
-                'admecMarshall',
-                'admecRuststalker',
-                'tauMarksman',
-                'orksWarboss',
-                'templHelbrecht',
-            ],
-            mowIds: ['ultraDreadnought'],
-            guildRaid: true,
-        },
-        {
-            name: 'GSC TA',
-            characterIds: ['genesBiophagus', 'genesKelermorph', 'genesMagus', 'genesPatriarch', 'genesPrimus'],
-            tournamentArena: true,
-        },
-        {
-            name: 'GSC War',
-            characterIds: ['genesBiophagus', 'genesKelermorph', 'tyranNeurothrope', 'genesPatriarch', 'genesPrimus'],
-            mowIds: ['blackForgefiend'],
-            warOffense: true,
-            warDefense: true,
-            battleFieldLevels: [true, true, true, false, false, false],
-        },
-    ]);
+    useEffect(() => {
+        setTeams(currentTeams);
+    }, [currentTeams]);
 
     useEffect(() => {
         setResolvedChars(CharactersService.resolveStoredCharacters(unresolvedCharacters));
@@ -221,57 +167,56 @@ export const ManageTeams = () => {
         onSelectedMowsChange([]);
     };
 
-    const onEdit = (team: Team) => {
+    const onEdit = (team: ITeam2) => {
         setEditingTeam(team);
         setAddTeamDialogOpen(true);
         setSaveTeamMode(SaveTeamMode.MODE_EDIT);
         // Load dialog state
         setTeamName(team.name);
-        onSelectedCharsChange(team.characterIds);
-        onSelectedMowsChange(team.mowIds || []);
+        onSelectedCharsChange(team.chars);
+        onSelectedMowsChange(team.mows || []);
         setWarOffenseSelected(!!team.warOffense);
         setWarDefenseSelected(!!team.warDefense);
-        setGuildRaidSelected(!!team.guildRaid);
-        setTournamentArenaSelected(!!team.tournamentArena);
-        setBattleFieldLevels(team.battleFieldLevels || [true, true, true, true, true, true]);
+        setGuildRaidSelected(!!team.raid);
+        setTournamentArenaSelected(!!team.ta);
+        setBattleFieldLevels(team.bfs || [true, true, true, true, true, true]);
     };
 
-    const onDelete = (team: Team) => {
+    const onDelete = (team: ITeam2) => {
         if (window.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)) {
-            setTeams(currentTeams => currentTeams.filter(t => t.name !== team.name));
+            dispatch.teams2({ type: 'Set', value: teams.filter(t => t.name !== team.name) });
         }
     };
 
     const onSave = () => {
         if (saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam) {
-            const team = teams.find(t => t.name === editingTeam?.name)!;
-            team.characterIds = selectedChars;
-            team.mowIds = selectedMows;
-            team.warOffense = warOffenseSelected;
-            team.warDefense = warDefenseSelected;
-            team.guildRaid = guildRaidSelected;
-            team.tournamentArena = tournamentArenaSelected;
-            team.battleFieldLevels = battleFieldLevels;
+            const team: ITeam2 = teams.find(t => t.name === editingTeam?.name)!;
+            team.chars = selectedChars;
+            if (selectedMows.length > 0) team.mows = selectedMows;
+            team.warOffense = warOffenseSelected ? true : undefined;
+            team.warDefense = warDefenseSelected ? true : undefined;
+            team.raid = guildRaidSelected ? true : undefined;
+            team.ta = tournamentArenaSelected ? true : undefined;
+            team.bfs = team.warOffense || team.warDefense ? battleFieldLevels : undefined;
             const curTeams = [...teams];
             curTeams.forEach(t => {
                 if (t.name !== editingTeam.name) return;
                 t = team;
             });
-            setTeams(cloneDeep(curTeams));
+            dispatch.teams2({ type: 'Set', value: cloneDeep(curTeams) });
         } else {
-            const newTeam: Team = {
+            const newTeam: ITeam2 = {
                 name: teamName.trim(),
-                characterIds: selectedChars,
-                mowIds: selectedMows,
-                warOffense: warOffenseSelected,
-                warDefense: warDefenseSelected,
-                guildRaid: guildRaidSelected,
-                tournamentArena: tournamentArenaSelected,
-                battleFieldLevels: battleFieldLevels,
+                chars: selectedChars,
+                mows: selectedMows,
+                warOffense: warOffenseSelected ? true : undefined,
+                warDefense: warDefenseSelected ? true : undefined,
+                raid: guildRaidSelected ? true : undefined,
+                ta: tournamentArenaSelected ? true : undefined,
+                bfs: warOffenseSelected || warDefenseSelected ? battleFieldLevels : undefined,
             };
-            setTeams(currentTeams => [...currentTeams, newTeam]);
+            dispatch.teams2({ type: 'Set', value: [...teams, newTeam] });
         }
-        // TODO: dispatch changes to global state.
         setTeamName('');
         onSelectedCharsChange([]);
         onSelectedMowsChange([]);
@@ -380,20 +325,20 @@ export const ManageTeams = () => {
                         </div>
                     </div>
                     <div className="flex flex-wrap gap-2 mb-4">
-                        {team.warOffense && (
+                        {!!team.warOffense && (
                             <MetadataChip
                                 icon={<MilitaryTech fontSize="inherit" />}
                                 label="War Offense"
                                 color="warning"
                             />
                         )}
-                        {team.warDefense && (
+                        {!!team.warDefense && (
                             <MetadataChip icon={<Shield fontSize="inherit" />} label="War Defense" color="info" />
                         )}
-                        {team.guildRaid && (
+                        {!!team.raid && (
                             <MetadataChip icon={<Groups fontSize="inherit" />} label="Guild Raid" color="secondary" />
                         )}
-                        {team.tournamentArena && (
+                        {!!team.ta && (
                             <MetadataChip
                                 icon={<WorkspacePremium fontSize="inherit" />}
                                 label="Tournament"
@@ -401,11 +346,11 @@ export const ManageTeams = () => {
                             />
                         )}
 
-                        {team.battleFieldLevels !== undefined && (!!team.warOffense || !!team.warDefense) && (
+                        {team.bfs !== undefined && (!!team.warOffense || !!team.warDefense) && (
                             <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
                                 <Layers className="text-slate-500" sx={{ fontSize: 14 }} />
                                 <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400">
-                                    {team.battleFieldLevels
+                                    {team.bfs
                                         .map((active: boolean, i: number) => (active ? i + 1 : null))
                                         .filter(Boolean)
                                         .map(num => `BF${num!.toString()}`)
@@ -417,8 +362,8 @@ export const ManageTeams = () => {
 
                     <div className="bg-slate-50/50 dark:bg-slate-900/50 rounded-lg p-3">
                         <TeamFlow
-                            chars={resolvedChars.filter(x => team.characterIds.includes(x.snowprintId!))}
-                            mows={resolvedMows.filter(x => (team.mowIds ?? []).includes(x.snowprintId!))}
+                            chars={resolvedChars.filter(x => team.chars.includes(x.snowprintId!))}
+                            mows={resolvedMows.filter(x => (team.mows ?? []).includes(x.snowprintId!))}
                             onCharClicked={() => {}}
                             onMowClicked={() => {}}
                         />

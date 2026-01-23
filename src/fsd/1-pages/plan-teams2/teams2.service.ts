@@ -2,13 +2,14 @@
 /* eslint-disable import-x/no-internal-modules */
 import { ICharacter2 } from '@/models/interfaces';
 
+import { FactionsService } from '@/fsd/5-shared/lib';
 import { Faction, Rank, Rarity } from '@/fsd/5-shared/model';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import { ISnapshotCharacter, ISnapshotMachineOfWar } from '../input-roster-snapshots/models';
 
-export class WarService {
+export class Teams2Service {
     public static passesCharacterFilter(
         c: ICharacter2,
         minRank: Rank,
@@ -24,7 +25,10 @@ export class WarService {
         if (c.rarity < minRarity || c.rarity > maxRarity) {
             return false;
         }
-        if (factions.length > 0 && !factions.includes(c.faction as Faction)) {
+        if (
+            factions.length > 0 &&
+            !(factions.includes(c.faction) || factions.includes(FactionsService.snowprintFactionToFaction(c.faction)))
+        ) {
             return false;
         }
         if (searchText.trim() !== '') {

@@ -12,8 +12,8 @@ import { IMow2 } from '@/fsd/4-entities/mow';
 import { CharacterGrid } from './character-grid';
 import { MowGrid } from './mow-grid';
 import { TeamFlow } from './team-flow';
+import { Teams2Service } from './teams2.service';
 import { UnitFilter } from './unit-filter';
-import { WarService } from './war.service';
 
 interface Props {
     chars: ICharacter2[];
@@ -147,7 +147,9 @@ export const AddTeamDialog: React.FC<Props> = ({
 
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId!))
-        .filter(c => WarService.passesCharacterFilter(c, minRank, maxRank, minRarity, maxRarity, factions, searchText))
+        .filter(c =>
+            Teams2Service.passesCharacterFilter(c, minRank, maxRank, minRarity, maxRarity, factions, searchText)
+        )
         .sort((a, b) => {
             if (b.rank !== a.rank) return b.rank - a.rank;
             const powerA = Math.pow(a.activeAbilityLevel ?? 0, 2) + Math.pow(a.passiveAbilityLevel ?? 0, 2);
@@ -158,7 +160,7 @@ export const AddTeamDialog: React.FC<Props> = ({
 
     const filteredMows = mows
         .filter(mow => !selectedMows.includes(mow.snowprintId!))
-        .filter(mow => WarService.passesMowFilter(mow, minRarity, maxRarity, factions, searchText))
+        .filter(mow => Teams2Service.passesMowFilter(mow, minRarity, maxRarity, factions, searchText))
         .sort((a, b) => {
             const powerA = Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.primaryAbilityLevel ?? 0, 2) + Math.pow(b.secondaryAbilityLevel ?? 0, 2);

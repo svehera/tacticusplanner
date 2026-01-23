@@ -1,43 +1,42 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-
-import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
+import { ICharacter2 } from '@/models/interfaces';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
 
-import { WarService } from './war.service';
+import { Teams2Service } from './teams2.service';
 
 interface Props {
-    mows: IMow2[];
-    onMowSelect: (id: string) => void;
+    characters: ICharacter2[];
+    onCharacterSelect: (id: string) => void;
     showHeader: boolean;
 }
 
-export const MowGrid: React.FC<Props> = ({ mows, onMowSelect, showHeader }: Props) => {
+export const CharacterGrid: React.FC<Props> = ({ characters, onCharacterSelect, showHeader }: Props) => {
     return (
         <div>
             {showHeader && (
                 <div className="flex justify-between mb-4">
-                    <h3 className="font-bold">Machines of War</h3>
-                    <span className="text-xs text-slate-500">Showing {mows.length} units</span>
+                    <h3 className="font-bold">Characters</h3>
+                    <span className="text-xs text-slate-500">Showing {characters.length} units</span>
                 </div>
             )}
             <div className="flex flex-wrap gap-4">
-                {mows.map(mow => (
+                {characters.map(char => (
                     <div
-                        key={mow.snowprintId!}
-                        onClick={() => onMowSelect(mow.snowprintId!)}
+                        key={char.snowprintId!}
+                        onClick={() => onCharacterSelect(char.snowprintId!)}
                         className="cursor-pointer transition-transform duration-100 active:scale-95 hover:brightness-110"
-                        title={`Select ${mow.name || 'Machine of War'}`}>
+                        title={`Select ${char.name || 'Character'}`}>
                         <RosterSnapshotCharacter
-                            key={mow.snowprintId!}
+                            key={char.snowprintId!}
                             showMythicShards={RosterSnapshotShowVariableSettings.Never}
                             showShards={RosterSnapshotShowVariableSettings.Never}
                             showXpLevel={RosterSnapshotShowVariableSettings.Never}
-                            mow={WarService.convertMow(mow)}
-                            mowData={mow}
+                            char={Teams2Service.convertCharacter(char)}
+                            charData={char}
                         />
                     </div>
                 ))}
