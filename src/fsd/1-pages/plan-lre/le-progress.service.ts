@@ -385,8 +385,10 @@ export class LeProgressService {
         if (externalData.currentShards < 0) {
             throw new Error('Invalid current shards in Legendary Event data: ' + externalData.currentShards);
         }
-        if ((externalData.nextChestIndex ?? 0) < 0) {
-            throw new Error('Invalid next chest index in Legendary Event data: ' + externalData.nextChestIndex);
+        if ((externalData.currentClaimedChestIndex ?? 0) < 0) {
+            throw new Error(
+                'Invalid current claimed chest index in Legendary Event data: ' + externalData.currentClaimedChestIndex
+            );
         }
     }
 
@@ -532,7 +534,7 @@ export class LeProgressService {
                 hasUsedAdForExtraTokenToday: externalData.currentEvent?.hasUsedAdForExtraTokenToday ?? false,
                 currentTokens: externalData.currentEvent?.tokens.currentTokens ?? 0,
                 maxTokens: externalData.currentEvent?.tokens.maxTokens ?? 12,
-                nextChestIndex: externalData.nextChestIndex ?? 0,
+                currentClaimedChestIndex: externalData.currentClaimedChestIndex ?? -1,
                 nextTokenMillisUtc: externalData.currentEvent
                     ? Date.now() + externalData.currentEvent?.tokens.nextTokenInSeconds * 1000
                     : Date.now() + 3600 * 3 * 1000,
