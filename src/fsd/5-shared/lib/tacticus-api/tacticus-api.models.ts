@@ -185,8 +185,8 @@ export interface TacticusLegendaryEventProgress {
     currentPoints: number;
     currentCurrency: number;
     currentShards: number;
+    currentClaimedChestIndex: number | undefined;
     currentEvent: TacticusLegendaryEventCurrentEvent | undefined;
-    nextChestIndex?: number;
 }
 export interface TacticusLegendaryEventLane {
     id: number; // Typically Alpha=1, Beta=2, Gamma=3

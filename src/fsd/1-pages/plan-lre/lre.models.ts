@@ -51,7 +51,8 @@ export interface ILeProgress {
     hasUsedAdForExtraTokenToday: boolean;
     currentTokens: number;
     maxTokens: number;
-    nextChestIndex: number;
+    // The chest most recently claimed. 0-based (-1 means nothing claimed).
+    currentClaimedChestIndex: number;
     nextTokenMillisUtc?: number;
     regenDelayInSeconds?: number;
     currentPoints: number;
