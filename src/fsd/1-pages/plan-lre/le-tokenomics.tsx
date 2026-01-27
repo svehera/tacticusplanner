@@ -76,7 +76,7 @@ export const LeTokenomics: React.FC<Props> = ({
     nextTokenStopped,
     setBattleState,
 }: Props) => {
-    const { characters: unresolvedChars, leSettings, viewPreferences } = useContext(StoreContext);
+    const { characters: unresolvedChars, leSettings } = useContext(StoreContext);
     const { model } = useLreProgress(legendaryEvent);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
     const { syncWithTacticus } = useSyncWithTacticus();
@@ -135,7 +135,7 @@ export const LeTokenomics: React.FC<Props> = ({
 
     const sync = async () => {
         console.log('Syncing with Tacticus...');
-        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+        await syncWithTacticus();
     };
 
     const characterPortrait = () => {

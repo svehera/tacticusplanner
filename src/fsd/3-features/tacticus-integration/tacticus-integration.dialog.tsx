@@ -9,7 +9,7 @@ import { updateTacticusApiKey } from '@/fsd/5-shared/lib/tacticus-api';
 import { useAuth } from '@/fsd/5-shared/model';
 import { Button } from '@/fsd/5-shared/ui/button';
 import { useLoader } from '@/fsd/5-shared/ui/contexts';
-import { Checkbox, CheckboxGroup, TextField } from '@/fsd/5-shared/ui/input';
+import { TextField } from '@/fsd/5-shared/ui/input';
 import { Modal } from '@/fsd/5-shared/ui/modal';
 
 import { useSyncWithTacticus } from './useSyncWithTacticus';
@@ -18,7 +18,6 @@ interface Props extends DialogProps {
     tacticusApiKey: string;
     tacticusUserId: string;
     tacticusGuildApiKey: string;
-    initialSyncOptions: string[];
 }
 
 export const TacticusIntegrationDialog: React.FC<Props> = ({
@@ -27,7 +26,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     tacticusApiKey,
     tacticusUserId,
     tacticusGuildApiKey,
-    initialSyncOptions,
 }) => {
     const loader = useLoader();
     const auth = useAuth();
@@ -39,11 +37,10 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     const [currentGuildApiKey, setCurrentGuildApiKey] = useState<string>(tacticusGuildApiKey);
     const [userId, setUserId] = useState<string>(tacticusUserId);
     const [currentUserId, setCurrentUserId] = useState<string>(tacticusUserId);
-    const [syncOptions, setSyncOptions] = useState<Array<string>>(initialSyncOptions);
 
     async function syncWithTacticusApi() {
         onClose();
-        await syncWithTacticus(syncOptions);
+        await syncWithTacticus();
     }
 
     function buildErrMsg(error: string | Error | null): string {
@@ -172,21 +169,12 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                         </Button>
                     </div>
                     <br />
-                    <CheckboxGroup value={syncOptions} onChange={setSyncOptions} label="Options">
-                        <Checkbox value="roster">Roster (Characters and MoWs)</Checkbox>
-                        <Checkbox value="inventory">Inventory (Upgrades)</Checkbox>
-                        <Checkbox value="campaignProgress">Campaign Progress (Campaign Events excluded)</Checkbox>
-                        <Checkbox value="raidedLocations">Daily Raids (raided locations)</Checkbox>
-                    </CheckboxGroup>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button intent="secondary" onPress={onClose}>
                         Cancel
                     </Button>
-                    <Button
-                        intent="primary"
-                        onPress={syncWithTacticusApi}
-                        isDisabled={syncOptions.length === 0 || !currentApiKey}>
+                    <Button intent="primary" onPress={syncWithTacticusApi} isDisabled={!currentApiKey}>
                         Sync
                     </Button>
                 </Modal.Footer>

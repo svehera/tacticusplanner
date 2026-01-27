@@ -69,7 +69,7 @@ export const Resources = () => {
 
     const sync = async () => {
         console.log('Syncing with Tacticus...');
-        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+        await syncWithTacticus();
     };
 
     const renderResourceItem = (
