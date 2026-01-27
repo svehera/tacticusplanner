@@ -355,7 +355,7 @@ export const RankLookup = () => {
                         />
                         <AccessibleTooltip
                             title={
-                                'When you reach a target upgrade rank, you are immediately able to apply the top row of three upgrades.\r\nIf you toggle on this switch then these upgrades will be included in your daily raids plan.'
+                                'When you reach a target upgrade rank, you are immediately able to apply one or more upgrades.\r\nIf you toggle on this switch then the top row of upgrades will be included in your daily raids plan.'
                             }>
                             <Info color="primary" />
                         </AccessibleTooltip>
@@ -364,9 +364,7 @@ export const RankLookup = () => {
             </div>
 
             <div>
-                <div
-                    className="ag-theme-material max-h-[40vh] w-full"
-                    style={{ height: 50 + totalMaterials.length * 30 }}>
+                <div className="ag-theme-material w-full h-[800px]">
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}

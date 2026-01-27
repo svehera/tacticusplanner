@@ -7,6 +7,8 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/3-features/goals/goals.models';
 import { ILegendaryEvent, ILreTeam } from '@/fsd/3-features/lre';
 
 import { useLreProgress } from './le-progress.hooks';
@@ -15,7 +17,13 @@ import { LreAddTeam } from './lre-add-team';
 import { LreEditTeam } from './lre-edit-team';
 import { LreService } from './lre.service';
 
-export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
+export const LegendaryEvent = ({
+    legendaryEvent,
+    upgradeRankOrMowGoals,
+}: {
+    legendaryEvent: ILegendaryEvent;
+    upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
+}) => {
     const { viewPreferences, leSelectedTeams, characters } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { model: lreProgress } = useLreProgress(legendaryEvent);
@@ -124,6 +132,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                     <LegendaryEventTrack
                         legendaryEvent={legendaryEvent}
                         track={legendaryEvent.alpha}
+                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                         startAddTeam={startAddTeam}
                         editTeam={setEditTeam}
                         autoAddTeam={autoAddTeam}
@@ -138,6 +147,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                     <LegendaryEventTrack
                         legendaryEvent={legendaryEvent}
                         track={legendaryEvent.beta}
+                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                         startAddTeam={startAddTeam}
                         editTeam={setEditTeam}
                         autoAddTeam={autoAddTeam}
@@ -152,6 +162,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                     <LegendaryEventTrack
                         legendaryEvent={legendaryEvent}
                         track={legendaryEvent.gamma}
+                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                         startAddTeam={startAddTeam}
                         editTeam={setEditTeam}
                         autoAddTeam={autoAddTeam}
@@ -168,6 +179,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                     lre={legendaryEvent}
                     preselectedTrackId={preselectedTrackId}
                     preselectedRequirements={preselectedRequirements}
+                    upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                     onClose={() => setShowAddTeam(false)}
                     addTeam={addLreTeam}
                 />
@@ -176,6 +188,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                 <LreEditTeam
                     lre={legendaryEvent}
                     team={editTeam}
+                    upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                     onClose={() => setEditTeam(null)}
                     saveTeam={saveLreTeam}
                     deleteTeam={deleteTeam}

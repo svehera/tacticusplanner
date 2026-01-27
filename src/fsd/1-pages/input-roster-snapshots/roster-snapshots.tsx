@@ -1,6 +1,5 @@
 import AddAPhoto from '@mui/icons-material/AddAPhoto';
 import Settings from '@mui/icons-material/Settings';
-import SyncIcon from '@mui/icons-material/Sync';
 import { Button, Tooltip } from '@mui/material';
 import { cloneDeep, orderBy } from 'lodash';
 import { useCallback, useContext, useEffect, useState } from 'react';
@@ -10,6 +9,7 @@ import { isMobile } from 'react-device-detect';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Rank } from '@/fsd/5-shared/model';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 // eslint-disable-next-line import-x/order
@@ -18,8 +18,6 @@ import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 // eslint-disable-next-line import-x/no-internal-modules
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 // eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
@@ -244,7 +242,6 @@ function getDisplay(
 export const RosterSnapshots = () => {
     const { characters, mows: unresolvedMows, rosterSnapshots, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-    const { syncWithTacticus } = useSyncWithTacticus();
     const chars = CharactersService.resolveStoredCharacters(characters);
     const mows = MowsService.resolveAllFromStorage(unresolvedMows);
     const [isTakeSnapshotDialogOpen, setIsTakeSnapshotDialogOpen] = useState(false);
@@ -286,11 +283,6 @@ export const RosterSnapshots = () => {
         setShowMythicShardsDiffsSetting(viewPreferences.showMythicShardsInDiffs);
         setShowXpLevelDiffsSetting(viewPreferences.showXpLevelInDiffs);
     }, [rosterSnapshots, viewPreferences]);
-
-    const sync = async () => {
-        console.log('Syncing with Tacticus...');
-        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
-    };
 
     const takeSnapshot = () => {
         setCurrentTimeMillis(Date.now());
@@ -537,10 +529,7 @@ export const RosterSnapshots = () => {
                 />
             </div>
             <div className="flex justify-begin p-2 border-b border-gray-600">
-                <Button size="small" variant="contained" color="primary" onClick={sync}>
-                    <SyncIcon className="mr-1" />
-                    {!isMobile && 'Sync'}
-                </Button>
+                <SyncButton showText={!isMobile} />
                 <div className="w-1" />
                 <Tooltip title={getTakeSnapshotTitle()}>
                     <Button

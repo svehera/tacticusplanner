@@ -10,11 +10,12 @@ import { isMobile } from 'react-device-detect';
 
 import { getCompletionRateColor } from '@/fsd/5-shared/lib';
 import { AccessibleTooltip, ConfirmationDialog } from '@/fsd/5-shared/ui';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { LegendaryEventEnum, LreReqImage, LreTrackId } from '@/fsd/4-entities/lre';
 
 import { RequirementStatus, ILreTeam } from '@/fsd/3-features/lre';
-import { LrePointsCategoryId, ProgressState } from '@/fsd/3-features/lre-progress';
+import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { LreTrackBattleSummary } from './le-track-battle';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
@@ -24,11 +25,11 @@ interface Props {
     track: ILreTrackProgress;
     legendaryEventId: LegendaryEventEnum;
     teams: ILreTeam[];
-    toggleBattleState: (
+    setBattleState: (
         trackId: LreTrackId,
         battleIndex: number,
         reqId: string,
-        state: ProgressState,
+        status: RequirementStatus,
         forceOverwrite?: boolean
     ) => void;
 }
@@ -37,7 +38,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
     track,
     legendaryEventId: _legendaryEventId,
     teams,
-    toggleBattleState,
+    setBattleState,
 }) => {
     // Calculate which restrictions are projected to be cleared for each battle
     const projectedRestrictions = useMemo(() => {
@@ -103,6 +104,22 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
         return `${req.name} - ${req.pointsPerBattle}`;
     };
 
+    const handleToggle = () => {
+        if (
+            track.battles.some(battle =>
+                battle.requirementsProgress.some(
+                    req => req.status === RequirementStatus.MaybeClear || req.status === RequirementStatus.StopHere
+                )
+            )
+        ) {
+            // Only open the confirmation dialog if the user has custom statuses set. Otherwise
+            // there's no risk in toggling because they can just sync to restore it.
+            handleOpenConfirmDialog();
+        } else {
+            setAll();
+        }
+    };
+
     const handleOpenConfirmDialog = () => {
         setConfirmDialogOpen(true);
     };
@@ -120,14 +137,14 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
         const completedBattles = track.battles
             .map(battle => battle.requirementsProgress.filter(req => req.completed).length)
             .reduce((a, b) => a + b, 0);
-        const state =
+        const status =
             completedBattles === track.requirements.length * track.battles.length
-                ? ProgressState.none
-                : ProgressState.completed;
+                ? RequirementStatus.NotCleared
+                : RequirementStatus.Cleared;
 
         track.battles.forEach(battle => {
             battle.requirementsProgress.forEach(req => {
-                toggleBattleState(track.trackId, battle.battleIndex, req.id, state, true);
+                setBattleState(track.trackId, battle.battleIndex, req.id, status, true);
             });
         });
     };
@@ -179,10 +196,11 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                         flexDirection: 'column',
                         width: '100%',
                     }}>
-                    <div className="flex-box gap5 column pb-2.5">
-                        <Button size="medium" variant="text" onClick={handleOpenConfirmDialog}>
+                    <div className="flex-box gap5 pb-2.5 justify-center items-center">
+                        <Button size="medium" variant="text" onClick={handleToggle}>
                             <Grid2x2Check className="size-5 md:size-6" />
                         </Button>
+                        <SyncButton showText={false} variant={'text'} />
                     </div>
                     <div className="flex-col w-full">
                         <div className="flex flex-row w-full mb-1">
@@ -216,8 +234,8 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                 battle={battle}
                                 maxKillPoints={track.battlesPoints[battle.battleIndex]}
                                 projectedRestrictions={projectedRestrictions.get(battle.battleIndex) ?? new Set()}
-                                toggleState={(req, state, forceOverwrite) =>
-                                    toggleBattleState(track.trackId, battle.battleIndex, req.id, state, forceOverwrite)
+                                setState={(req, status, forceOverwrite) =>
+                                    setBattleState(track.trackId, battle.battleIndex, req.id, status, forceOverwrite)
                                 }
                             />
                         ))}

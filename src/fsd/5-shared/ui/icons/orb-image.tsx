@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Alliance, Rarity } from '@/fsd/5-shared/model';
 
-import { tacticusIcons } from '.';
+import { tacticusIcons } from './iconList';
 
 interface OrbIconProps {
     alliance: Alliance;

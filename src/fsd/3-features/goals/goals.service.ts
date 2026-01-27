@@ -32,8 +32,7 @@ import {
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 // eslint-disable-next-line boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
-
-export interface RevisedGoals {
+interface RevisedGoals {
     goalEstimates: IGoalEstimate[];
     neededBadges: Record<Alliance, Record<Rarity, number>>;
     neededForgeBadges: Record<Rarity, number>;
@@ -233,7 +232,8 @@ export class GoalsService {
                     rankPoint5: g.rankPoint5!,
                     rankStartPoint5: g.startingRankPoint5 ?? false,
                     upgradesRarity: g.upgradesRarity ?? [],
-                    appliedUpgrades: unit.upgrades,
+                    appliedUpgrades:
+                        Math.max(g.startingRank ?? unit.rank, unit.rank) === unit.rank ? unit.upgrades : [],
                     level: unit.level,
                     xp: unit.xp,
                     rarity: unit.rarity,

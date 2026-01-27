@@ -41,8 +41,20 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
                 <StatCard label="Damage" icon="damage" value={currentStats?.damage} />
             </div>
 
-            {/* Attack Profiles Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Attack & Movement Profiles Section */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Movement Profile */}
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <MiscIcon icon="movement" />
+                        </div>
+                        <div className="flex items-center gap-1 font-mono font-bold text-lg dark:text-white">
+                            <span>{npc.movement}</span>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Melee Profile */}
                 <div className="p-4 rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700">
                     <div className="flex items-center justify-between">
@@ -63,19 +75,25 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
 
                 {/* Ranged Profile (Conditional) */}
                 {npc.rangeDamage !== undefined ? (
-                    <div className="p-4 rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
+                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700">
+                        <div className="flex items-center gap-4">
+                            {/* Relative Container to stack Number on top of Icon */}
+                            <div className="relative flex items-center justify-center h-10 w-10 shrink-0">
                                 <MiscIcon icon="rangedAttack" />
+                                <span className="absolute inset-0 flex items-center justify-center text-sm font-black text-gray-900 dark:text-white mt-0.5">
+                                    {npc.rangeDistance!}
+                                </span>
                             </div>
-                            <div className="flex items-center gap-3">
-                                <div className="flex items-center bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded">
-                                    <MiscIcon icon={'damage' + npc.rangeDamage!} />
-                                </div>
-                                <div className="flex items-center gap-1 font-mono font-bold text-lg dark:text-white">
-                                    <MiscIcon icon="hits" />
-                                    <span>{npc.rangeHits!}</span>
-                                </div>
+
+                            {/* Damage Icon */}
+                            <div className="flex items-center bg-slate-200 dark:bg-slate-700 p-1 rounded-md">
+                                <MiscIcon icon={'damage' + npc.rangeDamage!} />
+                            </div>
+
+                            {/* Hits */}
+                            <div className="flex items-center gap-1 font-mono font-bold text-lg dark:text-white">
+                                <MiscIcon icon="hits" />
+                                <span>{npc.rangeHits!}</span>
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,7 @@
 
 import { LeSettingsAction } from '@/reducers/le-settings.reducer';
 import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
+import { Teams2Action } from '@/reducers/teams2.reducer';
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
 import { XpUseAction } from '@/reducers/xp-use-reducer';
 import { GuildAction } from 'src/reducers/guildReducer';
@@ -32,6 +33,7 @@ import { IViewPreferences } from '@/fsd/3-features/view-settings';
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
+import { ITeam2 } from '@/fsd/1-pages/plan-teams2/models';
 
 import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
 import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
@@ -58,6 +60,7 @@ export interface IPersonalData {
     characters: IPersonalCharacter[];
     charactersPriorityList: string[];
     goals: IPersonalGoal[];
+    teams2: ITeam2[];
     legendaryEvents: ILegendaryEventsData | undefined;
     legendaryEvents3: ILegendaryEventsData3 | undefined;
     legendaryEventsProgress: LegendaryEventData<ILreProgressDto>;
@@ -79,6 +82,7 @@ export interface IGlobalState {
     mows: Array<IMow | IMow2>;
     goals: IPersonalGoal[];
     teams: IPersonalTeam[];
+    teams2: ITeam2[];
     selectedTeamOrder: ISelectedTeamsOrdering;
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
@@ -98,6 +102,7 @@ export interface IDispatchContext {
     characters: React.Dispatch<CharactersAction>;
     mows: React.Dispatch<MowsAction>;
     teams: React.Dispatch<TeamsAction>;
+    teams2: React.Dispatch<Teams2Action>;
     viewPreferences: React.Dispatch<ViewPreferencesAction>;
     dailyRaidsPreferences: React.Dispatch<DailyRaidsPreferencesAction>;
     autoTeamsPreferences: React.Dispatch<AutoTeamsPreferencesAction>;
@@ -131,6 +136,7 @@ export interface IPersonalData2 {
     mows: IMowDb[];
     goals: IPersonalGoal[];
     teams: IPersonalTeam[];
+    teams2: ITeam2[];
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
@@ -212,8 +218,7 @@ export enum ITrainingRushStrategy {
     maximizeRewards,
     maximizeXpForCharacter,
 }
-
-export interface IPurgeOrderPreferences {
+interface IPurgeOrderPreferences {
     // Only consider battles with at least this mean Tyranids worth rearranging for.
     minimumTyranidCount: number;
 }
@@ -224,18 +229,15 @@ export interface ITrainingRushPreferences {
     // Only matters when strategy is maximizeXpForCharacter
     characterId?: string;
 }
-
-export interface IWarpSurgePreferences {
+interface IWarpSurgePreferences {
     // Only consider battles with at least this mean chaos enemies worth rearranging for.
     minimumChaosEnemyCount: number;
 }
-
-export interface IMachineHuntPreferences {
+interface IMachineHuntPreferences {
     // Only consider battles with at least this mean mechanical enemies worth rearranging for.
     minimumMechanicalEnemyCount: number;
 }
-
-export interface IDailyRaidsFarmPreferences {
+interface IDailyRaidsFarmPreferences {
     order: IDailyRaidsFarmOrder;
     homeScreenEvent: IDailyRaidsHomeScreenEvent;
     purgeOrderPreferences?: IPurgeOrderPreferences;

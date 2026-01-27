@@ -24,6 +24,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Terrifying',
                     points: 50,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Terrifying',
                     units: filter(noChaos).byTrait(Trait.Terrifying),
                     iconId: 'terrifying',
                     index: 0,
@@ -31,6 +33,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Physical',
                     points: 85,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Physical',
                     units: filter(noChaos).byDamageType(DamageType.Physical),
                     iconId: 'physical',
                     index: 1,
@@ -38,6 +42,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Min 4 Hits',
                     points: 60,
+                    objectiveType: 'MinHits',
+                    objectiveTarget: '4',
                     units: filter(noChaos).byMinHits(4),
                     iconId: 'hits',
                     index: 2,
@@ -45,6 +51,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Infiltrate',
                     points: 85,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Infiltrate',
                     units: filter(noChaos).byTrait(Trait.Infiltrate),
                     iconId: 'infiltrate',
                     index: 3,
@@ -52,6 +60,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Piercing',
                     points: 95,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Piercing',
                     units: filter(noChaos).byDamageType(DamageType.Piercing),
                     iconId: 'piercing',
                     index: 4,
@@ -71,6 +81,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Flying',
                     points: 90,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Flying',
                     units: filter(noImperial).byTrait(Trait.Flying),
                     iconId: 'flying',
                     index: 0,
@@ -78,6 +90,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Power',
                     points: 95,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Power',
                     units: filter(noImperial).byDamageType(DamageType.Power),
                     iconId: 'power',
                     index: 1,
@@ -85,6 +99,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Mechanical',
                     points: 75,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Mechanical',
                     units: filter(noImperial).isMechanical(),
                     iconId: 'mech',
                     index: 2,
@@ -92,6 +108,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Physical',
                     points: 45,
+                    objectiveType: 'NotDamageType',
+                    objectiveTarget: 'Physical',
                     units: filter(noImperial).byDamageType(DamageType.Physical, true),
                     iconId: 'no_physical',
                     index: 3,
@@ -99,6 +117,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Max 2 hits',
                     points: 70,
+                    objectiveType: 'MaxHits',
+                    objectiveTarget: '2',
                     units: filter(noImperial).byMaxHits(2),
                     iconId: 'hits',
                     index: 4,
@@ -118,6 +138,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Resilient',
                     points: 90,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Resilient',
                     units: filter(noXenos).byTrait(Trait.Resilient),
                     iconId: 'resilient',
                     index: 0,
@@ -125,6 +147,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Psyker',
                     points: 95,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Psyker',
                     units: filter(noXenos).byTrait(Trait.Psyker),
                     iconId: 'psyker',
                     index: 1,
@@ -132,6 +156,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Bolter',
                     points: 55,
+                    objectiveType: 'NotDamageType',
+                    objectiveTarget: 'Bolter',
                     units: filter(noXenos).byDamageType(DamageType.Bolter, true),
                     iconId: 'no_bolter',
                     index: 2,
@@ -139,6 +165,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Min 3 hits',
                     points: 70,
+                    objectiveType: 'MinHits',
+                    objectiveTarget: '3',
                     units: filter(noXenos).byMinHits(3),
                     selected: false,
                     iconId: 'hits',
@@ -147,6 +175,8 @@ export class TrajannLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Chain',
                     points: 65,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Chain',
                     units: filter(noXenos).byDamageType(DamageType.Chain),
                     selected: false,
                     iconId: 'chain',

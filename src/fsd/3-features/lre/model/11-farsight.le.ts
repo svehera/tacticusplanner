@@ -24,6 +24,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Terminator',
                     points: 65,
+                    objectiveType: 'NotTrait',
+                    objectiveTarget: 'TerminatorArmour',
                     units: filter(noImperial).byTrait(Trait.TerminatorArmour, /*not=*/ true),
                     iconId: 'no_terminator',
                     index: 0,
@@ -31,6 +33,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Power',
                     points: 70,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Power',
                     units: filter(noImperial).byDamageType(DamageType.Power),
                     iconId: 'power',
                     index: 1,
@@ -38,6 +42,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Min 5 Hits',
                     points: 45,
+                    objectiveType: 'MinHits',
+                    objectiveTarget: '5',
                     units: filter(noImperial).byMinHits(5),
                     iconId: 'hits',
                     index: 2,
@@ -45,6 +51,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Flame',
                     points: 90,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Flame',
                     units: filter(noImperial).byDamageType(DamageType.Flame),
                     iconId: 'flame',
                     index: 3,
@@ -52,6 +60,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Eviscerate',
                     points: 105,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Eviscerate',
                     units: filter(noImperial).byDamageType(DamageType.Eviscerate),
                     iconId: 'eviscerate',
                     index: 4,
@@ -72,6 +82,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Astra Militarum',
                     points: 75,
+                    objectiveType: 'Faction',
+                    objectiveTarget: 'AstraMilitarum',
                     units: filter(noXenos).byFaction(Faction.Astra_militarum),
                     iconId: 'astra_militarum',
                     index: 0,
@@ -79,6 +91,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Bolter',
                     points: 65,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Bolter',
                     units: filter(noXenos).byDamageType(DamageType.Bolter),
                     iconId: 'bolter',
                     index: 1,
@@ -86,6 +100,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Resilient',
                     points: 75,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Resilient',
                     units: filter(noXenos).byTrait(Trait.Resilient),
                     iconId: 'resilient',
                     index: 2,
@@ -93,6 +109,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Piercing',
                     points: 105,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Piercing',
                     units: filter(noXenos).byDamageType(DamageType.Piercing),
                     iconId: 'piercing',
                     index: 3,
@@ -100,6 +118,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Max 2 hits',
                     points: 55,
+                    objectiveType: 'MaxHits',
+                    objectiveTarget: '2',
                     units: filter(noXenos).byMaxHits(2),
                     iconId: 'hits',
                     index: 4,
@@ -120,6 +140,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Physical',
                     points: 45,
+                    objectiveType: 'NotDamageType',
+                    objectiveTarget: 'Physical',
                     units: filter(noChaosOrOrks).byDamageType(DamageType.Physical, true),
                     iconId: 'no_physical',
                     index: 0,
@@ -127,6 +149,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Blast',
                     points: 90,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Blast',
                     units: filter(noChaosOrOrks).byDamageType(DamageType.Blast),
                     iconId: 'blast',
                     index: 1,
@@ -134,6 +158,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Ranged',
                     points: 45,
+                    objectiveType: 'HasRangedAttack',
+                    objectiveTarget: '',
                     units: filter(noChaosOrOrks).byAttackType('rangeOnly'),
                     iconId: 'ranged',
                     index: 2,
@@ -141,6 +167,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Max 1 hit',
                     points: 90,
+                    objectiveType: 'MaxHits',
+                    objectiveTarget: '1',
                     units: filter(noChaosOrOrks).byMaxHits(1),
                     iconId: 'hits',
                     index: 3,
@@ -148,6 +176,8 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Flying',
                     points: 105,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Flying',
                     units: filter(noChaosOrOrks).byTrait(Trait.Flying),
                     iconId: 'flying',
                     index: 4,

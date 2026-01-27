@@ -29,24 +29,24 @@ export interface TacticusInventory {
     components: TacticusComponents[];
 }
 
-export interface TacticusOrb {
+interface TacticusOrb {
     rarity: string;
     amount: number;
 }
 
-export interface TacticusOrbs {
+interface TacticusOrbs {
     Imperial: TacticusOrb[];
     Xenos: TacticusOrb[];
     Chaos: TacticusOrb[];
 }
 
-export interface TacticusForgeBadge {
+interface TacticusForgeBadge {
     name: string;
     rarity: string;
     amount: number;
 }
 
-export interface TacticusComponents {
+interface TacticusComponents {
     name: string;
     grandAlliance: string;
     amount: number;
@@ -64,7 +64,7 @@ interface TacticusAbility {
     level: number;
 }
 
-export interface TacticusXpBook {
+interface TacticusXpBook {
     /** Unique identifier for the xp book.*/
     id: string;
 
@@ -75,7 +75,7 @@ export interface TacticusXpBook {
     amount: number;
 }
 
-export interface TacticusAbilityBadge {
+interface TacticusAbilityBadge {
     /** Unique identifier for ability badge.*/
     id: string;
 
@@ -86,7 +86,7 @@ export interface TacticusAbilityBadge {
     amount: number;
 }
 
-export interface TacticusAbilityBadges {
+interface TacticusAbilityBadges {
     Imperial: TacticusAbilityBadge[];
     Xenos: TacticusAbilityBadge[];
     Chaos: TacticusAbilityBadge[];
@@ -163,6 +163,7 @@ export interface TacticusShard {
 
 interface TacticusProgress {
     campaigns: TacticusCampaignProgress[]; // List of CampaignProgress objects
+    legendaryEvents: TacticusLegendaryEventProgress[]; // List of LegendaryEventProgress objects
 }
 
 export interface TacticusCampaignProgress {
@@ -176,6 +177,55 @@ interface TacticusCampaignLevel {
     battleIndex: number; // Example: 10
     attemptsLeft: number; // Example: 2
     attemptsUsed: number; // Example: 3
+}
+
+export interface TacticusLegendaryEventProgress {
+    id: string; // The SP ID of the event character.
+    lanes: TacticusLegendaryEventLane[];
+    currentPoints: number;
+    currentCurrency: number;
+    currentShards: number;
+    currentClaimedChestIndex: number | undefined;
+    currentEvent: TacticusLegendaryEventCurrentEvent | undefined;
+}
+export interface TacticusLegendaryEventLane {
+    id: number; // Typically Alpha=1, Beta=2, Gamma=3
+    name: string; // Typically Alpha, Beta, Gamma
+    battleConfigs: TacticusLegendaryEventBattleConfig[];
+    progress: TacticusLegendaryEventBattlesProgress[];
+}
+
+export interface TacticusLegendaryEventBattleConfig {
+    numEnemies: number;
+    objectives: TacticusLegendaryEventObjective[];
+    disallowedFactions: string[];
+}
+
+export interface TacticusLegendaryEventObjective {
+    objectiveType: string;
+    objectiveTarget: string;
+    score: number;
+}
+
+export interface TacticusLegendaryEventBattlesProgress {
+    // 0 is always "clear score", and the rest are 1-based indices of the restrictions.
+    objectivesCleared: number[];
+    highScore: number;
+    encounterPoints: number;
+}
+
+export interface TacticusLegendaryEventCurrentEvent {
+    run: number;
+    tokens: TacticusLegendaryEventTokens;
+    hasUsedAdForExtraTokenToday: boolean;
+    extraCurrencyPerPayout: number;
+}
+
+export interface TacticusLegendaryEventTokens {
+    currentTokens: number;
+    maxTokens: number;
+    nextTokenInSeconds: number;
+    regenDelayInSeconds: number;
 }
 
 export interface TacticusGuildResponse {
