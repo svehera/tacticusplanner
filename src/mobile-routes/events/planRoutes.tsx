@@ -23,6 +23,7 @@ export const PlanRoutes = () => {
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const teamsMenuItem = menuItemById['teams'];
+    const teams2MenuItem = menuItemById['teams2'];
 
     const [selectedRoutes, setSelectedRoutes] = useState<SelectedRoutes>(SelectedRoutes.all);
 
@@ -30,7 +31,13 @@ export const PlanRoutes = () => {
         <div className="flex gap-2.5 flex-col items-center">
             {selectedRoutes === SelectedRoutes.all ? (
                 <>
-                    {[goalsMenuItem, dailyRaidsMenuItem, teamsMenuItem, campaignProgressionMenuItem].map(menuItem => (
+                    {[
+                        goalsMenuItem,
+                        dailyRaidsMenuItem,
+                        teamsMenuItem,
+                        teams2MenuItem,
+                        campaignProgressionMenuItem,
+                    ].map(menuItem => (
                         <Card
                             variant="outlined"
                             key={menuItem.label}

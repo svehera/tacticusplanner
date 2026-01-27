@@ -1,0 +1,47 @@
+/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+
+import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
+
+import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
+
+import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
+
+import { Teams2Service } from './teams2.service';
+
+interface Props {
+    mows: IMow2[];
+    onMowSelect: (id: string) => void;
+    showHeader: boolean;
+}
+
+export const MowGrid: React.FC<Props> = ({ mows, onMowSelect, showHeader }: Props) => {
+    return (
+        <div>
+            {showHeader && (
+                <div className="flex justify-between mb-4">
+                    <h3 className="font-bold">Machines of War</h3>
+                    <span className="text-xs text-slate-500">Showing {mows.length} units</span>
+                </div>
+            )}
+            <div className="flex flex-wrap gap-4">
+                {mows.map(mow => (
+                    <div
+                        key={mow.snowprintId!}
+                        onClick={() => onMowSelect(mow.snowprintId!)}
+                        className="cursor-pointer transition-transform duration-100 active:scale-95 hover:brightness-110"
+                        title={`Select ${mow.name || 'Machine of War'}`}>
+                        <RosterSnapshotCharacter
+                            key={mow.snowprintId!}
+                            showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                            showShards={RosterSnapshotShowVariableSettings.Never}
+                            showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                            mow={Teams2Service.convertMow(mow)}
+                            mowData={mow}
+                        />
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};

@@ -260,6 +260,7 @@ export const defaultData: IPersonalData2 = {
     },
     mows: [],
     teams: [],
+    teams2: [],
     characters: [
         {
             name: 'Varro Tigurius',

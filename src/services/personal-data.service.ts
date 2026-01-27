@@ -18,6 +18,7 @@ import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 import { XpUseState } from '@/fsd/1-pages/input-resources/models';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income/models';
+import { ITeam2 } from '@/fsd/1-pages/plan-teams2/models';
 
 import { defaultData } from '../models/constants';
 import {
@@ -75,6 +76,7 @@ export class PersonalDataLocalStorage {
                 characters: this.getItem<IPersonalCharacterData2[]>('characters') ?? defaultData.characters,
                 mows: this.getItem<IMowDb[]>('mows') ?? defaultData.mows,
                 teams: this.getItem<IPersonalTeam[]>('teams') ?? defaultData.teams,
+                teams2: this.getItem<ITeam2[]>('teams2') ?? defaultData.teams2,
                 goals: this.getItem<IPersonalGoal[]>('goals') ?? defaultData.goals,
                 selectedTeamOrder:
                     this.getItem<ISelectedTeamsOrdering>('selectedTeamOrder') ?? defaultData.selectedTeamOrder,
@@ -248,6 +250,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             xpIncome: defaultData.xpIncome,
             xpUse: defaultData.xpUse,
             teams: defaultData.teams,
+            teams2: defaultData.teams2,
             rosterSnapshots: defaultData.rosterSnapshots,
         };
     }

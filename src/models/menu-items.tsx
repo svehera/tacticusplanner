@@ -28,6 +28,7 @@ import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
+import { teams2MenuItem } from '@/fsd/1-pages/plan-teams2/teams2.menu-item';
 import { teamsMenuItem } from '@/fsd/1-pages/teams/teams.menu-item';
 import { wyoMenuItem } from '@/fsd/1-pages/who-you-own/who-you-own.menu-item';
 
@@ -65,7 +66,7 @@ export const menuItemById = {
     insights: insightsMenuItem,
     campaignProgression: campaignProgressionMenuItem,
     rosterSnapshots: rosterSnapshotsMenuItem,
-
+    teams2: teams2MenuItem,
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
     ty: new MenuItemTP('Thank You', <HealthAndSafetyIcon />, '/ty', 'Thank You Page'),
@@ -94,6 +95,7 @@ export const inputSubMenu: MenuItemTP[] = [
 export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
+    menuItemById['teams2'],
     menuItemById['teams'],
     new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
         menuItemById['defense'],
@@ -108,6 +110,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
 export const planSubMenu: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
+    menuItemById['teams2'],
     menuItemById['teams'],
     menuItemById['defense'],
     menuItemById['offense'],
