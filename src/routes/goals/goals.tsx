@@ -1,7 +1,6 @@
 ﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
-import SyncIcon from '@mui/icons-material/Sync';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -23,6 +22,7 @@ import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-
 import { Alliance, Rank, useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/iconList';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
@@ -41,7 +41,6 @@ import {
 import { GoalsService, IXpLevel } from '@/fsd/3-features/goals/goals.service';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 
 import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
 
@@ -63,7 +62,6 @@ export const Goals = () => {
     } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { userInfo } = useAuth();
-    const { syncWithTacticus } = useSyncWithTacticus();
 
     const characters = CharactersService.resolveStoredCharacters(unresolvedCharacters);
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
@@ -322,11 +320,6 @@ export const Goals = () => {
 
     const hasSync = !!userInfo.tacticusApiKey;
 
-    const sync = async () => {
-        console.log('Syncing with Tacticus...');
-        await syncWithTacticus();
-    };
-
     return (
         <div>
             <div className="flex flex-wrap items-center gap-5">
@@ -338,6 +331,7 @@ export const Goals = () => {
                     <LinkIcon /> <span className="pl-[5px]">Go to Raids</span>
                 </Button>
                 <SetGoalDialog key={goals.length} />
+                {hasSync && <SyncButton showText={!isMobile} />}
                 <span className="text-xl">
                     {goals.length}/{goalsLimit}
                 </span>
@@ -378,12 +372,6 @@ export const Goals = () => {
 
                     <AccordionDetails className="!p-0 !bg-transparent">
                         <div className="flex flex-col gap-y-2 p-2 bg-[var(--overlay)] rounded-lg border border-[var(--border)] mt-2">
-                            {hasSync && (
-                                <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
-                                    <SyncIcon /> Sync
-                                </Button>
-                            )}
-
                             <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)] flex items-center justify-start gap-x-4">
                                 <MiscIcon icon={'energy'} height={35} width={35} />{' '}
                                 <b className="text-lg text-[var(--fg)]">{estimatedUpgradesTotal.energyTotal}</b>
