@@ -172,8 +172,4 @@ export class LeTokenService {
         }
         return undefined;
     }
-
-    public static isAfterCutoff(date: number = Date.now()): boolean {
-        return date > 1769385600000;
-    }
 }

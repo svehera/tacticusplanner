@@ -15,7 +15,6 @@ import { LeNextGoalProgress } from './le-next-goal-progress';
 import { LeProgressOverviewMissions } from './le-progress-overview-missions';
 import { useLreProgress } from './le-progress.hooks';
 import { LeProgressService } from './le-progress.service';
-import { LeTokenService } from './le-token-service';
 import { LreTrackOverallProgress } from './le-track-overall-progress';
 
 /**
@@ -151,20 +150,16 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
             </div>
             <div className="h-[5px] w-full"></div>
             <div className="w-full justify-center gap-2 flex">
-                {LeTokenService.isAfterCutoff() && (
-                    <>
-                        <Button
-                            size="small"
-                            variant={'contained'}
-                            color={'primary'}
-                            onClick={e => {
-                                e.stopPropagation();
-                                sync();
-                            }}>
-                            <SyncIcon /> Sync
-                        </Button>{' '}
-                    </>
-                )}
+                <Button
+                    size="small"
+                    variant={'contained'}
+                    color={'primary'}
+                    onClick={e => {
+                        e.stopPropagation();
+                        sync();
+                    }}>
+                    <SyncIcon /> Sync
+                </Button>{' '}
             </div>
         </div>
     );

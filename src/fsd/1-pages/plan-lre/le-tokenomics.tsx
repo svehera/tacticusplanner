@@ -196,22 +196,19 @@ export const LeTokenomics: React.FC<Props> = ({
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        {LeTokenService.isAfterCutoff() && (
-                            <div>
-                                <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
-                                    <SyncIcon /> Sync
-                                </Button>{' '}
-                            </div>
-                        )}
+                        <div>
+                            <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
+                                <SyncIcon /> Sync
+                            </Button>{' '}
+                        </div>
                         <div className="flex items-center gap-2">
-                            {LeTokenService.isAfterCutoff() &&
-                                (model.forceProgress === undefined ||
-                                    model.forceProgress.nextTokenMillisUtc === undefined ||
-                                    Date.now() - model.forceProgress.nextTokenMillisUtc > 3 * 60 * 60 * 1000) && (
-                                    <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
-                                        <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
-                                    </AccessibleTooltip>
-                                )}
+                            {(model.forceProgress === undefined ||
+                                model.forceProgress.nextTokenMillisUtc === undefined ||
+                                Date.now() - model.forceProgress.nextTokenMillisUtc > 3 * 60 * 60 * 1000) && (
+                                <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
+                                    <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
+                                </AccessibleTooltip>
+                            )}
                             <AccessibleTooltip
                                 title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
                                 <div className="flex items-center gap-2">
