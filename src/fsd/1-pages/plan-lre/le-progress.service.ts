@@ -437,11 +437,7 @@ export class LeProgressService {
 
         const ret = cloneDeep(track);
 
-        externalTrack.progress.forEach((progress, battleIndex) => {
-            const battle = ret.battles.find(b => b.battleIndex === battleIndex);
-            if (battle === undefined) {
-                throw new Error('Cannot find battle index ' + battleIndex + ' in track ' + eventTrack.name);
-            }
+        ret.battles.forEach(battle => {
             battle.completed = false;
             battle.totalPoints = 0;
             battle.requirementsProgress.forEach(reqProgress => {
@@ -449,8 +445,20 @@ export class LeProgressService {
                 reqProgress.highScore = undefined;
                 reqProgress.killScore = undefined;
                 reqProgress.blocked = false;
-                reqProgress.status = RequirementStatus.NotCleared;
+                if (
+                    reqProgress.status !== RequirementStatus.MaybeClear &&
+                    reqProgress.status !== RequirementStatus.StopHere
+                ) {
+                    reqProgress.status = RequirementStatus.NotCleared;
+                }
             });
+        });
+
+        externalTrack.progress.forEach((progress, battleIndex) => {
+            const battle = ret.battles.find(b => b.battleIndex === battleIndex);
+            if (battle === undefined) {
+                throw new Error('Cannot find battle index ' + battleIndex + ' in track ' + eventTrack.name);
+            }
             if (progress.objectivesCleared.length === 0) return;
             if (progress.objectivesCleared.length === 6) {
                 battle.completed = true;
