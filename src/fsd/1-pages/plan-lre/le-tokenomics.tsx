@@ -1,8 +1,6 @@
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import SyncIcon from '@mui/icons-material/Sync';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import { Button } from '@mui/material';
 import { useContext, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -12,12 +10,11 @@ import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
-// eslint-disable-next-line import-x/no-internal-modules
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 // eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
@@ -79,7 +76,6 @@ export const LeTokenomics: React.FC<Props> = ({
     const { characters: unresolvedChars, leSettings } = useContext(StoreContext);
     const { model } = useLreProgress(legendaryEvent);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
-    const { syncWithTacticus } = useSyncWithTacticus();
 
     // const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     // const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
@@ -132,11 +128,6 @@ export const LeTokenomics: React.FC<Props> = ({
     const char = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
     const rarity = char?.rarity ?? Rarity.Legendary;
     const stars = char?.stars ?? RarityStars.None;
-
-    const sync = async () => {
-        console.log('Syncing with Tacticus...');
-        await syncWithTacticus();
-    };
 
     const characterPortrait = () => {
         return (
@@ -197,9 +188,7 @@ export const LeTokenomics: React.FC<Props> = ({
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
                         <div>
-                            <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
-                                <SyncIcon /> Sync
-                            </Button>{' '}
+                            <SyncButton showText={true} />{' '}
                         </div>
                         <div className="flex items-center gap-2">
                             {(model.forceProgress === undefined ||
