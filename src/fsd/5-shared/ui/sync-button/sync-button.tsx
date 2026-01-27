@@ -21,6 +21,8 @@ const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant }) => {
     return (
         <Button
             size="small"
+            aria-label="Sync with Tacticus"
+            title="Sync with Tacticus"
             variant={variant !== undefined ? variant : 'contained'}
             color={'primary'}
             onClick={e => {

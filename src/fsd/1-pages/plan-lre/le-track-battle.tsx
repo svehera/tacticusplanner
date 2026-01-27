@@ -207,7 +207,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
     const handleBattleNumberKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === ' ' || event.key === 'Enter') {
             event.preventDefault();
-            handleOpenConfirmDialog();
+            handleToggle();
         }
     };
 
