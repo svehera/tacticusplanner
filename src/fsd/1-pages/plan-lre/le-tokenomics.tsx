@@ -130,11 +130,14 @@ export const LeTokenomics: React.FC<Props> = ({
     const stars = char?.stars ?? RarityStars.None;
 
     const isDataStale = () => {
-        const nextEventDataUtc: Date = new Date(legendaryEvent.nextEventDateUtc ?? 0);
+        const nextEventDateUtc: Date = new Date(legendaryEvent.nextEventDateUtc ?? 0);
         if (model.forceProgress === undefined) return true;
         if (model.forceProgress.nextTokenMillisUtc === undefined) return false;
-        if (Date.now() < nextEventDataUtc.getMilliseconds()) return false;
-        if (Date.now() > nextEventDataUtc.getMilliseconds() + 7 * 86400 * 1000) return false;
+        if (Date.now() < nextEventDateUtc.getTime()) return false;
+        if (Date.now() > nextEventDateUtc.getTime() + 7 * 86400 * 1000) return false;
+        // It's been long enough for a token to regenerate, so either the token count is wrong or
+        // the tokenomics data is wrong (most likely).
+        return Date.now() - model.forceProgress.lastUpdateMillisUtc > 3 * 3600 * 1000;
     };
 
     const characterPortrait = () => {
