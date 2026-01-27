@@ -1,6 +1,22 @@
 ﻿{
-    "currentVersion": "1.33.1",
+    "currentVersion": "Current",
     "releaseNotes": [
+        {
+            "version": "Current",
+            "date": "January 27, 2026",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Discord",
+                    "subPoints": [
+                        "Release notes and versions are now tracked solely on the planner discord.",
+                        "https://discord.gg/R7fBkF2A"
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.33.1",
             "date": "November 13",

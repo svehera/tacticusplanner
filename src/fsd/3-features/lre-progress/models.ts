@@ -1,5 +1,8 @@
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
+import { ILeProgress } from '@/fsd/1-pages/plan-lre/lre.models';
+
 import { LrePointsCategoryId, ProgressState } from './enums';
 
 export interface ILreProgressDto {
@@ -9,6 +12,7 @@ export interface ILreProgressDto {
     beta?: ILreTrackProgressLegacyDto;
     gamma?: ILreTrackProgressLegacyDto;
     battlesProgress: ILreBattleProgressDto[];
+    forceProgress?: ILeProgress;
     overview?: Record<1 | 2 | 3, ILreOverviewDto>;
     notes: string;
 }

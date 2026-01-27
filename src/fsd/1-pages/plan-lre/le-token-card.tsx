@@ -4,7 +4,6 @@ import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
 import { RequirementStatus } from '@/fsd/3-features/lre';
 
-import { LeTokenService } from './le-token-service';
 import { LeTokenCardRenderMode } from './lre.models';
 import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
 import { TokenDisplay } from './token-estimation-service';
@@ -96,24 +95,22 @@ export const LeTokenCard: React.FC<CardProps> = ({
                         </div>
                     </div>
                     <div className="flex flex-wrap gap-5">
-                        {!LeTokenService.isAfterCutoff() && (
-                            <div style={{ color: STATUS_COLORS[RequirementStatus.Cleared] }}>
-                                <button
-                                    onClick={() => {
-                                        if (isCompleting) return;
-                                        setIsCompleting(true);
-                                        setTimeout(() => {
-                                            setIsCompleting(false);
-                                            onCompleteBattle();
-                                        }, COMPLETE_DELAY_MILLIS);
-                                    }}
-                                    disabled={isCompleting}
-                                    className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                    title="Mark this token as successful.">
-                                    {STATUS_LABELS[RequirementStatus.Cleared]}{' '}
-                                </button>
-                            </div>
-                        )}
+                        <div style={{ color: STATUS_COLORS[RequirementStatus.Cleared] }}>
+                            <button
+                                onClick={() => {
+                                    if (isCompleting) return;
+                                    setIsCompleting(true);
+                                    setTimeout(() => {
+                                        setIsCompleting(false);
+                                        onCompleteBattle();
+                                    }, COMPLETE_DELAY_MILLIS);
+                                }}
+                                disabled={isCompleting}
+                                className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                title="Mark this token as successful.">
+                                {STATUS_LABELS[RequirementStatus.Cleared]}{' '}
+                            </button>
+                        </div>
                         <div style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}>
                             <button
                                 onClick={() => {

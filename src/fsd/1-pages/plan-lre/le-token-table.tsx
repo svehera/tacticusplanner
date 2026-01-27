@@ -233,18 +233,16 @@ export const LeTokenTable: React.FC<Props> = ({
                                         <td className="px-3 py-2 text-center">{renderTeam(token.team, 25)}</td>
                                         <td className="px-3 py-2 text-center">
                                             <div className="flex flex-wrap gap-3 justify-center">
-                                                {!LeTokenService.isAfterCutoff() && (
-                                                    <div style={{ color: STATUS_COLORS[RequirementStatus.Cleared] }}>
-                                                        <button
-                                                            onClick={() => {
-                                                                onCompleteBattle(token);
-                                                            }}
-                                                            className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                                            title="Mark this token as successful.">
-                                                            {STATUS_LABELS[RequirementStatus.Cleared]}{' '}
-                                                        </button>
-                                                    </div>
-                                                )}
+                                                <div style={{ color: STATUS_COLORS[RequirementStatus.Cleared] }}>
+                                                    <button
+                                                        onClick={() => {
+                                                            onCompleteBattle(token);
+                                                        }}
+                                                        className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                        title="Mark this token as successful.">
+                                                        {STATUS_LABELS[RequirementStatus.Cleared]}{' '}
+                                                    </button>
+                                                </div>
                                                 <div style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}>
                                                     <button
                                                         onClick={() => {

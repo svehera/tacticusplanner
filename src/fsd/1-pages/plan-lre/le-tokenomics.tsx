@@ -1,9 +1,7 @@
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import SyncIcon from '@mui/icons-material/Sync';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import { Button } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
@@ -12,12 +10,11 @@ import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
-import { CharactersService } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
-// eslint-disable-next-line import-x/no-internal-modules
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 // eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
@@ -76,14 +73,19 @@ export const LeTokenomics: React.FC<Props> = ({
     nextTokenStopped,
     setBattleState,
 }: Props) => {
-    const { characters: unresolvedChars, leSettings, viewPreferences } = useContext(StoreContext);
+    const { characters: unresolvedChars, leSettings } = useContext(StoreContext);
     const { model } = useLreProgress(legendaryEvent);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
-    const { syncWithTacticus } = useSyncWithTacticus();
 
     // const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     // const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
-    const characters = CharactersService.resolveStoredCharacters(unresolvedChars);
+    const [characters, setCharacters] = useState<ICharacter2[]>([]);
+
+    useEffect(() => {
+        const resolvedChars = CharactersService.resolveStoredCharacters(unresolvedChars);
+        setCharacters(resolvedChars);
+    }, [unresolvedChars]);
+
     /*
     const missedMilestones = milestonesAndPoints
         .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
@@ -133,9 +135,15 @@ export const LeTokenomics: React.FC<Props> = ({
     const rarity = char?.rarity ?? Rarity.Legendary;
     const stars = char?.stars ?? RarityStars.None;
 
-    const sync = async () => {
-        console.log('Syncing with Tacticus...');
-        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+    const isDataStale = () => {
+        const nextEventDateUtc: Date = new Date(legendaryEvent.nextEventDateUtc ?? 0);
+        if (model.forceProgress === undefined) return true;
+        if (model.forceProgress.nextTokenMillisUtc === undefined) return false;
+        if (Date.now() < nextEventDateUtc.getTime()) return false;
+        if (Date.now() > nextEventDateUtc.getTime() + 7 * 86400 * 1000) return false;
+        // It's been long enough for a token to regenerate, so either the token count is wrong or
+        // the tokenomics data is wrong (most likely).
+        return Date.now() - model.forceProgress.lastUpdateMillisUtc > 3 * 3600 * 1000;
     };
 
     const characterPortrait = () => {
@@ -195,49 +203,55 @@ export const LeTokenomics: React.FC<Props> = ({
         <div className="flex flex-col w-full gap-y-8">
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
-                    <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        {LeTokenService.isAfterCutoff() && (
-                            <div>
-                                <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
-                                    <SyncIcon /> Sync
-                                </Button>{' '}
+                    <div className="flex flex-col items-center w-full gap-y-4">
+                        {/* 1. Relative container to allow absolute positioning inside */}
+                        <div className="relative flex items-center justify-center w-full min-h-[40px]">
+                            {/* 2. Sync Button - Pushed to the far left */}
+                            <div className="absolute left-0">
+                                <SyncButton showText={true} />
                             </div>
-                        )}
-                        <div className="flex items-center gap-2">
-                            {LeTokenService.isAfterCutoff() &&
-                                (model.forceProgress === undefined ||
-                                    Date.now() - model.forceProgress.nextTokenMillisUtc > 3 * 60 * 60 * 1000) && (
-                                    <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
-                                        <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
+
+                            {/* 3. Icons - These will stay perfectly centered in the 'relative' div */}
+                            <div className="flex gap-x-8 text-sm text-gray-600 dark:text-gray-400">
+                                <div className="flex items-center gap-2">
+                                    {isDataStale() && (
+                                        <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
+                                            <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
+                                        </AccessibleTooltip>
+                                    )}
+                                    <AccessibleTooltip
+                                        title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
+                                        <div className="flex items-center gap-2">
+                                            <MiscIcon icon="legendaryEventToken" width={30} height={35} />
+                                            {model.forceProgress?.currentTokens ?? 0}
+                                        </div>
                                     </AccessibleTooltip>
-                                )}
-                            <AccessibleTooltip
-                                title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
-                                <div className="flex items-center gap-2">
-                                    <MiscIcon icon="legendaryEventToken" width={30} height={35} />
-                                    {model.forceProgress?.currentTokens ?? 0}
                                 </div>
-                            </AccessibleTooltip>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <AccessibleTooltip
-                                title={`${totalFreeTokensRemainingInIteration} free tokens remaining to be regenerated in this event, ${totalFreeTokensRemaining} across all events.`}>
+
                                 <div className="flex items-center gap-2">
-                                    <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />{' '}
-                                    {totalFreeTokensRemainingInIteration} / {totalFreeTokensRemaining}
+                                    <AccessibleTooltip
+                                        title={`${totalFreeTokensRemainingInIteration} free tokens remaining...`}>
+                                        <div className="flex items-center gap-2">
+                                            <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />
+                                            {totalFreeTokensRemainingInIteration} / {totalFreeTokensRemaining}
+                                        </div>
+                                    </AccessibleTooltip>
                                 </div>
-                            </AccessibleTooltip>{' '}
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <AccessibleTooltip
-                                title={`${totalAdTokensRemainingInIteration} ad tokens remaining to be claimed in this event, ${totalAdTokensRemaining} across all events.`}>
+
                                 <div className="flex items-center gap-2">
-                                    <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />{' '}
-                                    {totalAdTokensRemainingInIteration} / {totalAdTokensRemaining}
+                                    <AccessibleTooltip
+                                        title={`${totalAdTokensRemainingInIteration} ad tokens remaining...`}>
+                                        <div className="flex items-center gap-2">
+                                            <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />
+                                            {totalAdTokensRemainingInIteration} / {totalAdTokensRemaining}
+                                        </div>
+                                    </AccessibleTooltip>
                                 </div>
-                            </AccessibleTooltip>{' '}
+                            </div>
                         </div>
-                    </div>
+
+                        {/* rest of your code... */}
+                    </div>{' '}
                     <div>
                         <h3 className="text-lg font-bold">Next Token</h3>
                     </div>
