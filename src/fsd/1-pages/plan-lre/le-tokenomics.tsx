@@ -1,7 +1,7 @@
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
@@ -12,7 +12,7 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
-import { CharactersService } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 // eslint-disable-next-line import-x/no-internal-modules
@@ -79,7 +79,13 @@ export const LeTokenomics: React.FC<Props> = ({
 
     // const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
     // const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
-    const characters = CharactersService.resolveStoredCharacters(unresolvedChars);
+    const [characters, setCharacters] = useState<ICharacter2[]>([]);
+
+    useEffect(() => {
+        const resolvedChars = CharactersService.resolveStoredCharacters(unresolvedChars);
+        setCharacters(resolvedChars);
+    }, [unresolvedChars]);
+
     /*
     const missedMilestones = milestonesAndPoints
         .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))

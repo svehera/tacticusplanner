@@ -33,28 +33,8 @@ function handleLegendaryEvents(
             });
             return;
         }
-        const internalEvent = leProgress[internalEventId];
-        if (internalEvent === undefined) {
-            enqueueSnackbar(`Error finding internal legendary event for external event ID ${externalProgress.id}.`, {
-                variant: 'error',
-            });
-            return;
-        }
         const legendaryEvent = getLre(internalEventId, [] as ICharacter2[]);
-        const dtoModel = leProgress[internalEventId];
-        if (dtoModel === undefined) {
-            enqueueSnackbar(`Error finding internal event DTO model for external event ID ${externalProgress.id}.`, {
-                variant: 'error',
-            });
-            return;
-        }
         const model = LreService.mapProgressDtoToModel(leProgress[internalEventId], legendaryEvent);
-        if (model === undefined) {
-            enqueueSnackbar(`Error finding internal event model for external event ID ${externalProgress.id}.`, {
-                variant: 'error',
-            });
-            return;
-        }
         try {
             const convertedModel = LeProgressService.convertExternalProgress(legendaryEvent, externalProgress, model);
             dispatch.leProgress({
