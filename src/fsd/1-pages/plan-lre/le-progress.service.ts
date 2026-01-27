@@ -337,6 +337,12 @@ export class LeProgressService {
                         `(${externalTrack?.progress.length}) should be <= Planner Model (${track.battles.length}).`
                 );
             }
+
+            if (!externalTrack.battleConfigs || externalTrack.battleConfigs.length === 0) {
+                throw new Error(
+                    'Unsupported Legendary Event data: ' + lane.displayName + ' Track has no battle configs.'
+                );
+            }
             externalTrack.battleConfigs.forEach(externalBattleConfig => {
                 externalBattleConfig.objectives.forEach(externalObjective => {
                     // Acing objectives are called something different in the planner.
@@ -442,6 +448,8 @@ export class LeProgressService {
                 reqProgress.completed = false;
                 reqProgress.highScore = undefined;
                 reqProgress.killScore = undefined;
+                reqProgress.blocked = false;
+                reqProgress.status = RequirementStatus.NotCleared;
             });
             if (progress.objectivesCleared.length === 0) return;
             if (progress.objectivesCleared.length === 6) {
@@ -462,6 +470,7 @@ export class LeProgressService {
                     reqProgress.status = RequirementStatus.Cleared;
                     reqProgress.killScore = undefined;
                     reqProgress.highScore = undefined;
+                    battle.totalPoints += reqProgress.points;
                 });
             } else {
                 // If we haven't cleared defeatAll, we might still have a kill score or high score.
@@ -542,7 +551,7 @@ export class LeProgressService {
                 currentPoints: externalData.currentPoints,
                 currentCurrency: externalData.currentCurrency,
                 currentShards: externalData.currentShards,
-                hasPremiumPayout: externalData.currentEvent?.extraCurrencyPerPayout ?? false,
+                hasPremiumPayout: !!(externalData.currentEvent?.extraCurrencyPerPayout ?? false),
             } as ILeProgress,
         } as ILreProgressModel;
 
