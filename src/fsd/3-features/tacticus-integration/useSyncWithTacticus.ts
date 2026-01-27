@@ -87,8 +87,8 @@ export const useSyncWithTacticus = () => {
     const store = useContext(StoreContext);
     const loader = useLoader();
 
-    async function syncWithTacticus(syncOptions: string[]) {
-        dispatch.viewPreferences({ type: 'Update', setting: 'apiIntegrationSyncOptions', value: syncOptions });
+    async function syncWithTacticus() {
+        dispatch.viewPreferences({ type: 'Update', setting: 'apiIntegrationSyncOptions', value: [] });
         try {
             loader.startLoading('Syncing data via Tacticus API. Please wait...');
             const result = await getTacticusPlayerData();
@@ -96,51 +96,45 @@ export const useSyncWithTacticus = () => {
 
             if (result.data) {
                 console.log('Tacticus API data for debug', result.data);
-                if (syncOptions.includes('roster')) {
-                    dispatch.mows({
-                        type: 'SyncWithTacticus',
-                        units: result.data.player.units,
-                        shards: result.data.player.inventory.shards,
-                    });
-                    dispatch.characters({
-                        type: 'SyncWithTacticus',
-                        units: result.data.player.units,
-                        shards: result.data.player.inventory.shards,
-                    });
-                }
+                dispatch.mows({
+                    type: 'SyncWithTacticus',
+                    units: result.data.player.units,
+                    shards: result.data.player.inventory.shards,
+                });
+                dispatch.characters({
+                    type: 'SyncWithTacticus',
+                    units: result.data.player.units,
+                    shards: result.data.player.inventory.shards,
+                });
 
-                if (syncOptions.includes('inventory')) {
-                    dispatch.inventory({ type: 'SyncWithTacticus', inventory: result.data.player.inventory });
-                }
+                dispatch.inventory({ type: 'SyncWithTacticus', inventory: result.data.player.inventory });
 
-                if (syncOptions.includes('campaignProgress')) {
-                    dispatch.campaignsProgress({
-                        type: 'SyncWithTacticus',
-                        campaigns: result.data.player.progress.campaigns,
-                    });
+                dispatch.campaignsProgress({
+                    type: 'SyncWithTacticus',
+                    campaigns: result.data.player.progress.campaigns,
+                });
 
-                    // Auto-detect Daily Raids campaign event group and update preferences if changed
-                    const detectedGroup = CampaignMapperService.inferDailyRaidsCampaignGroup(
-                        result.data.player.progress.campaigns
-                    );
-                    if (detectedGroup && detectedGroup !== 'none') {
-                        const current = store.dailyRaidsPreferences.campaignEvent ?? 'none';
-                        if (current !== detectedGroup) {
-                            dispatch.dailyRaidsPreferences({
-                                type: 'Set',
-                                value: { ...store.dailyRaidsPreferences, campaignEvent: detectedGroup },
-                            });
-                        }
+                // Auto-detect Daily Raids campaign event group and update preferences if changed
+                const detectedGroup = CampaignMapperService.inferDailyRaidsCampaignGroup(
+                    result.data.player.progress.campaigns
+                );
+                if (detectedGroup && detectedGroup !== 'none') {
+                    const current = store.dailyRaidsPreferences.campaignEvent ?? 'none';
+                    if (current !== detectedGroup) {
+                        dispatch.dailyRaidsPreferences({
+                            type: 'Set',
+                            value: { ...store.dailyRaidsPreferences, campaignEvent: detectedGroup },
+                        });
                     }
                 }
+                dispatch.dailyRaids({
+                    type: 'SyncWithTacticus',
+                    progress: result.data.player.progress.campaigns,
+                });
 
-                if (syncOptions.includes('raidedLocations')) {
-                    dispatch.dailyRaids({
-                        type: 'SyncWithTacticus',
-                        progress: result.data.player.progress.campaigns,
-                    });
+                if (result.data.player.progress.legendaryEvents) {
+                    handleLegendaryEvents(store.leProgress, result.data.player.progress.legendaryEvents, dispatch);
                 }
-                handleLegendaryEvents(store.leProgress, result.data.player.progress.legendaryEvents, dispatch);
 
                 enqueueSnackbar('Successfully synced with Tacticus API', { variant: 'success' });
             } else {
