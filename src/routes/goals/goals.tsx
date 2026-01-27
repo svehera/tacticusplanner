@@ -320,11 +320,11 @@ export const Goals = () => {
         );
     }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals, xpUse, xpIncome]);
 
-    const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
+    const hasSync = !!userInfo.tacticusApiKey;
 
     const sync = async () => {
         console.log('Syncing with Tacticus...');
-        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+        await syncWithTacticus();
     };
 
     return (

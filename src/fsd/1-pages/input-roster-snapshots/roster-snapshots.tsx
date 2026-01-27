@@ -289,7 +289,7 @@ export const RosterSnapshots = () => {
 
     const sync = async () => {
         console.log('Syncing with Tacticus...');
-        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+        await syncWithTacticus();
     };
 
     const takeSnapshot = () => {

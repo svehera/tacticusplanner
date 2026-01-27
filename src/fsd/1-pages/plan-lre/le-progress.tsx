@@ -2,7 +2,7 @@
 import SyncIcon from '@mui/icons-material/Sync';
 import { Accordion, AccordionDetails, AccordionSummary, Button, TextField } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
@@ -22,16 +22,11 @@ import { LreTrackOverallProgress } from './le-track-overall-progress';
  * UI Element to display the progress of missions and tracks in a legendary event.
  */
 export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
-    const { leSelectedTeams, leSettings, viewPreferences } = useContext(StoreContext);
+    const { leSelectedTeams, leSettings } = useContext(StoreContext);
     const { model, updateNotes, updateOccurrenceProgress, setBattleState } = useLreProgress(legendaryEvent);
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
-    const [viewPrefs, setViewPrefs] = useState(viewPreferences);
 
     const { syncWithTacticus } = useSyncWithTacticus();
-
-    useEffect(() => {
-        setViewPrefs(viewPreferences);
-    }, [viewPreferences]);
 
     const teams = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
@@ -64,7 +59,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
 
     const sync = async () => {
         console.log('Syncing with Tacticus...');
-        await syncWithTacticus(viewPrefs.apiIntegrationSyncOptions);
+        await syncWithTacticus();
     };
 
     return (

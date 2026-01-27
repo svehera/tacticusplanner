@@ -185,7 +185,6 @@ export const UserMenu = () => {
             tacticusApiKey: userInfo.tacticusApiKey,
             tacticusUserId: userInfo.tacticusUserId,
             tacticusGuildApiKey: userInfo.tacticusGuildApiKey,
-            initialSyncOptions: store.viewPreferences.apiIntegrationSyncOptions,
             onClose: () => {},
         });
     }
