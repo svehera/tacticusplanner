@@ -129,6 +129,14 @@ export const LeTokenomics: React.FC<Props> = ({
     const rarity = char?.rarity ?? Rarity.Legendary;
     const stars = char?.stars ?? RarityStars.None;
 
+    const isDataStale = () => {
+        const nextEventDataUtc: Date = new Date(legendaryEvent.nextEventDateUtc ?? 0);
+        if (model.forceProgress === undefined) return true;
+        if (model.forceProgress.nextTokenMillisUtc === undefined) return false;
+        if (Date.now() < nextEventDataUtc.getMilliseconds()) return false;
+        if (Date.now() > nextEventDataUtc.getMilliseconds() + 7 * 86400 * 1000) return false;
+    };
+
     const characterPortrait = () => {
         return (
             <div className="flex flex-col items-center">
@@ -186,45 +194,55 @@ export const LeTokenomics: React.FC<Props> = ({
         <div className="flex flex-col w-full gap-y-8">
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
-                    <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        <div>
-                            <SyncButton showText={true} />{' '}
-                        </div>
-                        <div className="flex items-center gap-2">
-                            {(model.forceProgress === undefined ||
-                                model.forceProgress.nextTokenMillisUtc === undefined ||
-                                Date.now() - model.forceProgress.nextTokenMillisUtc > 3 * 60 * 60 * 1000) && (
-                                <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
-                                    <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
-                                </AccessibleTooltip>
-                            )}
-                            <AccessibleTooltip
-                                title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
+                    <div className="flex flex-col items-center w-full gap-y-4">
+                        {/* 1. Relative container to allow absolute positioning inside */}
+                        <div className="relative flex items-center justify-center w-full min-h-[40px]">
+                            {/* 2. Sync Button - Pushed to the far left */}
+                            <div className="absolute left-0">
+                                <SyncButton showText={true} />
+                            </div>
+
+                            {/* 3. Icons - These will stay perfectly centered in the 'relative' div */}
+                            <div className="flex gap-x-8 text-sm text-gray-600 dark:text-gray-400">
                                 <div className="flex items-center gap-2">
-                                    <MiscIcon icon="legendaryEventToken" width={30} height={35} />
-                                    {model.forceProgress?.currentTokens ?? 0}
+                                    {isDataStale() && (
+                                        <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
+                                            <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
+                                        </AccessibleTooltip>
+                                    )}
+                                    <AccessibleTooltip
+                                        title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
+                                        <div className="flex items-center gap-2">
+                                            <MiscIcon icon="legendaryEventToken" width={30} height={35} />
+                                            {model.forceProgress?.currentTokens ?? 0}
+                                        </div>
+                                    </AccessibleTooltip>
                                 </div>
-                            </AccessibleTooltip>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <AccessibleTooltip
-                                title={`${totalFreeTokensRemainingInIteration} free tokens remaining to be regenerated in this event, ${totalFreeTokensRemaining} across all events.`}>
+
                                 <div className="flex items-center gap-2">
-                                    <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />{' '}
-                                    {totalFreeTokensRemainingInIteration} / {totalFreeTokensRemaining}
+                                    <AccessibleTooltip
+                                        title={`${totalFreeTokensRemainingInIteration} free tokens remaining...`}>
+                                        <div className="flex items-center gap-2">
+                                            <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />
+                                            {totalFreeTokensRemainingInIteration} / {totalFreeTokensRemaining}
+                                        </div>
+                                    </AccessibleTooltip>
                                 </div>
-                            </AccessibleTooltip>{' '}
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <AccessibleTooltip
-                                title={`${totalAdTokensRemainingInIteration} ad tokens remaining to be claimed in this event, ${totalAdTokensRemaining} across all events.`}>
+
                                 <div className="flex items-center gap-2">
-                                    <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />{' '}
-                                    {totalAdTokensRemainingInIteration} / {totalAdTokensRemaining}
+                                    <AccessibleTooltip
+                                        title={`${totalAdTokensRemainingInIteration} ad tokens remaining...`}>
+                                        <div className="flex items-center gap-2">
+                                            <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />
+                                            {totalAdTokensRemainingInIteration} / {totalAdTokensRemaining}
+                                        </div>
+                                    </AccessibleTooltip>
                                 </div>
-                            </AccessibleTooltip>{' '}
+                            </div>
                         </div>
-                    </div>
+
+                        {/* rest of your code... */}
+                    </div>{' '}
                     <div>
                         <h3 className="text-lg font-bold">Next Token</h3>
                     </div>
