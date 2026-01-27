@@ -10,6 +10,7 @@ import { isMobile } from 'react-device-detect';
 
 import { getCompletionRateColor } from '@/fsd/5-shared/lib';
 import { AccessibleTooltip, ConfirmationDialog } from '@/fsd/5-shared/ui';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { LegendaryEventEnum, LreReqImage, LreTrackId } from '@/fsd/4-entities/lre';
 
@@ -103,6 +104,22 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
         return `${req.name} - ${req.pointsPerBattle}`;
     };
 
+    const handleToggle = () => {
+        if (
+            track.battles.some(battle =>
+                battle.requirementsProgress.some(
+                    req => req.status === RequirementStatus.MaybeClear || req.status === RequirementStatus.StopHere
+                )
+            )
+        ) {
+            // Only open the confirmation dialog if the user has custom statuses set. Otherwise
+            // there's no risk in toggling because they can just sync to restore it.
+            handleOpenConfirmDialog();
+        } else {
+            setAll();
+        }
+    };
+
     const handleOpenConfirmDialog = () => {
         setConfirmDialogOpen(true);
     };
@@ -179,10 +196,11 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                         flexDirection: 'column',
                         width: '100%',
                     }}>
-                    <div className="flex-box gap5 column pb-2.5">
-                        <Button size="medium" variant="text" onClick={handleOpenConfirmDialog}>
+                    <div className="flex-box gap5 pb-2.5 justify-center items-center">
+                        <Button size="medium" variant="text" onClick={handleToggle}>
                             <Grid2x2Check className="size-5 md:size-6" />
                         </Button>
+                        <SyncButton showText={false} variant={'text'} />
                     </div>
                     <div className="flex-col w-full">
                         <div className="flex flex-row w-full mb-1">

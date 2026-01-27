@@ -1,6 +1,5 @@
 ﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import SyncIcon from '@mui/icons-material/Sync';
-import { Accordion, AccordionDetails, AccordionSummary, Button, TextField } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
 import { sum } from 'lodash';
 import React, { useContext, useState } from 'react';
 
@@ -8,14 +7,11 @@ import React, { useContext, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
-// eslint-disable-next-line import-x/no-internal-modules
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 
 import { LeNextGoalProgress } from './le-next-goal-progress';
 import { LeProgressOverviewMissions } from './le-progress-overview-missions';
 import { useLreProgress } from './le-progress.hooks';
 import { LeProgressService } from './le-progress.service';
-import { LeTokenService } from './le-token-service';
 import { LreTrackOverallProgress } from './le-track-overall-progress';
 
 /**
@@ -25,8 +21,6 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
     const { leSelectedTeams, leSettings } = useContext(StoreContext);
     const { model, updateNotes, updateOccurrenceProgress, setBattleState } = useLreProgress(legendaryEvent);
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
-
-    const { syncWithTacticus } = useSyncWithTacticus();
 
     const teams = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
@@ -56,11 +50,6 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
             )
         )
         .join('-');
-
-    const sync = async () => {
-        console.log('Syncing with Tacticus...');
-        await syncWithTacticus();
-    };
 
     return (
         <div className="gap-2">
@@ -150,22 +139,6 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                 </Accordion>
             </div>
             <div className="h-[5px] w-full"></div>
-            <div className="w-full justify-center gap-2 flex">
-                {LeTokenService.isAfterCutoff() && (
-                    <>
-                        <Button
-                            size="small"
-                            variant={'contained'}
-                            color={'primary'}
-                            onClick={e => {
-                                e.stopPropagation();
-                                sync();
-                            }}>
-                            <SyncIcon /> Sync
-                        </Button>{' '}
-                    </>
-                )}
-            </div>
         </div>
     );
 };
