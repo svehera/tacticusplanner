@@ -47,7 +47,7 @@ interface ShardsGoal {
 
 export class LeProgressService {
     static computeProgress(model: ILreProgressModel, useP2P: boolean): LeProgress {
-        const totalPoints = sum(model.tracksProgress.map(x => x.totalPoints));
+        const totalPoints = model.syncedProgress?.currentPoints ?? sum(model.tracksProgress.map(x => x.totalPoints));
         const totalCurrency = sum(model.pointsMilestones.map(x => x.engramPayout));
         const currentPoints = sum(model.tracksProgress.map(this.computeCurrentPoints));
 
@@ -101,7 +101,7 @@ export class LeProgressService {
         const averageBattles = this.computeAverageBattles(pointsForNextMilestone);
 
         return {
-            currentPoints,
+            currentPoints: model.syncedProgress?.currentPoints ?? currentPoints,
             pointsForNextMilestone,
             totalPoints,
             averageBattles,
@@ -546,7 +546,7 @@ export class LeProgressService {
         const model = {
             ...currentModel,
             tracksProgress: [] as ILreTrackProgress[],
-            forceProgress: {
+            syncedProgress: {
                 lastUpdateMillisUtc: Date.now(),
                 hasUsedAdForExtraTokenToday: externalData.currentEvent?.hasUsedAdForExtraTokenToday ?? false,
                 currentTokens: externalData.currentEvent?.tokens.currentTokens ?? 0,

@@ -26,15 +26,14 @@ import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapsh
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { useLreProgress } from './le-progress.hooks';
-import { LeProgressService } from './le-progress.service';
 import { LeTokenCard } from './le-token-card';
 // import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
-import { ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
-import { TokenDisplay, TokenUse } from './token-estimation-service';
+import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
+import { TokenDisplay, TokenEstimationService, TokenUse } from './token-estimation-service';
 
 interface Props {
     legendaryEvent: ILegendaryEvent;
@@ -73,18 +72,20 @@ export const LeTokenomics: React.FC<Props> = ({
     nextTokenStopped,
     setBattleState,
 }: Props) => {
-    const { characters: unresolvedChars, leSettings } = useContext(StoreContext);
-    const { model } = useLreProgress(legendaryEvent);
+    const { characters: unresolvedChars } = useContext(StoreContext);
+    const { model: progressModel } = useLreProgress(legendaryEvent);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
 
-    // const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
-    // const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
     const [characters, setCharacters] = useState<ICharacter2[]>([]);
+    const [model, setModel] = useState<ILreProgressModel>(progressModel);
 
     useEffect(() => {
         const resolvedChars = CharactersService.resolveStoredCharacters(unresolvedChars);
         setCharacters(resolvedChars);
     }, [unresolvedChars]);
+    useEffect(() => {
+        setModel(progressModel);
+    }, [progressModel]);
 
     /*
     const missedMilestones = milestonesAndPoints
@@ -114,22 +115,36 @@ export const LeTokenomics: React.FC<Props> = ({
     const totalFreeTokensRemainingInIteration = LeTokenService.getFreeTokensRemainingInIteration(
         legendaryEvent,
         Date.now(),
-        model.forceProgress?.nextTokenMillisUtc,
-        model.forceProgress?.regenDelayInSeconds
+        model.syncedProgress?.currentTokens ?? 0,
+        model.syncedProgress?.nextTokenMillisUtc,
+        model.syncedProgress?.regenDelayInSeconds
     );
     const totalAdTokensRemainingInIteration = LeTokenService.getAdTokensRemainingInIteration(
         legendaryEvent,
+        model.syncedProgress?.hasUsedAdForExtraTokenToday ?? false,
         Date.now()
     );
     const totalFreeTokensRemaining = LeTokenService.getFreeTokensRemainingInEvent(
         legendaryEvent,
         Date.now(),
-        model.forceProgress?.nextTokenMillisUtc,
-        model.forceProgress?.regenDelayInSeconds
+        model.syncedProgress?.currentTokens ?? 0,
+        model.syncedProgress?.nextTokenMillisUtc,
+        model.syncedProgress?.regenDelayInSeconds
     );
-    const totalAdTokensRemaining = LeTokenService.getAdTokensRemainingInEvent(legendaryEvent, Date.now());
+    const totalAdTokensRemaining = LeTokenService.getAdTokensRemainingInEvent(
+        legendaryEvent,
+        model.syncedProgress?.hasUsedAdForExtraTokenToday ?? false,
+        Date.now()
+    );
 
-    const progress = LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true);
+    const character = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
+
+    const progress = TokenEstimationService.computeCurrentProgress(
+        model,
+        character?.rarity ?? Rarity.Legendary,
+        character?.stars ?? RarityStars.None,
+        /*p2p=*/ true
+    );
 
     const char = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
     const rarity = char?.rarity ?? Rarity.Legendary;
@@ -137,14 +152,19 @@ export const LeTokenomics: React.FC<Props> = ({
 
     const isDataStale = () => {
         const nextEventDateUtc: Date = new Date(legendaryEvent.nextEventDateUtc ?? 0);
-        if (model.forceProgress === undefined) return true;
-        if (model.forceProgress.nextTokenMillisUtc === undefined) return false;
+        if (model.syncedProgress === undefined) return true;
+        if (model.syncedProgress.nextTokenMillisUtc === undefined) return false;
         if (Date.now() < nextEventDateUtc.getTime()) return false;
         if (Date.now() > nextEventDateUtc.getTime() + 7 * 86400 * 1000) return false;
         // It's been long enough for a token to regenerate, so either the token count is wrong or
         // the tokenomics data is wrong (most likely).
-        return Date.now() - model.forceProgress.lastUpdateMillisUtc > 3 * 3600 * 1000;
+        return Date.now() - model.syncedProgress.lastUpdateMillisUtc > 3 * 3600 * 1000;
     };
+
+    const shardBarWidth =
+        progress.shardsForNextMilestone === Infinity
+            ? 100
+            : Math.min(100, (progress.shards / progress.shardsForNextMilestone) * 100);
 
     const characterPortrait = () => {
         return (
@@ -179,16 +199,13 @@ export const LeTokenomics: React.FC<Props> = ({
                         <div
                             className="h-full bg-blue-600"
                             style={{
-                                width: `${Math.min(
-                                    100,
-                                    (progress.incrementalShards / progress.incrementalShardsGoal) * 100
-                                )}%`,
+                                width: `${shardBarWidth}%`,
                                 // Optional: adds a slight round to the leading edge as it grows
                                 borderTopRightRadius: '9999px',
                                 borderBottomRightRadius: '9999px',
                             }}></div>
                         <span className="absolute inset-0 flex items-center justify-center w-full h-full text-xs font-medium text-gray-800 dark:text-gray-100">
-                            {progress.incrementalShards} / {progress.incrementalShardsGoal}
+                            {progress.shards} / {progress.shardsForNextMilestone}
                         </span>
                     </div>
                 </div>
@@ -220,10 +237,10 @@ export const LeTokenomics: React.FC<Props> = ({
                                         </AccessibleTooltip>
                                     )}
                                     <AccessibleTooltip
-                                        title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
+                                        title={`${model.syncedProgress?.currentTokens ?? 0} Current Tokens in possession`}>
                                         <div className="flex items-center gap-2">
                                             <MiscIcon icon="legendaryEventToken" width={30} height={35} />
-                                            {model.forceProgress?.currentTokens ?? 0}
+                                            {model.syncedProgress?.currentTokens ?? 0}
                                         </div>
                                     </AccessibleTooltip>
                                 </div>
@@ -261,7 +278,8 @@ export const LeTokenomics: React.FC<Props> = ({
                             tokenUsedDuringEventIteration={
                                 LeTokenService.getIterationForToken(
                                     0,
-                                    /*currentTokensRemaining=*/ 0,
+                                    model.syncedProgress?.currentTokens ?? 0,
+                                    model.syncedProgress?.hasUsedAdForExtraTokenToday ?? true,
                                     legendaryEvent,
                                     model.occurrenceProgress[0].premiumMissionsProgress > 0,
                                     model.occurrenceProgress[1].premiumMissionsProgress > 0,
