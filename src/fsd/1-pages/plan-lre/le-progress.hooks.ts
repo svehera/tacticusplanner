@@ -29,7 +29,7 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     const debounceUpdateDto = useDebounceCallback(updateDto, 500);
 
     const updateNotes = (notes: string) => {
-        debounceUpdateDto(updateDto({ ...model, notes }));
+        debounceUpdateDto({ ...model, notes });
     };
 
     const updateOccurrenceProgress = (occurrence: ILreOccurrenceProgress) => {
@@ -167,5 +167,5 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
         updateDto(createNewModel(model, trackId, battleIndex, reqId, status, forceOverwrite));
     };
 
-    return { model, updateNotes, updateOccurrenceProgress, setBattleState };
+    return { model, createNewModel, updateDto, updateNotes, updateOccurrenceProgress, setBattleState };
 };
