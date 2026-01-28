@@ -28,9 +28,8 @@ export interface ILreProgressModel {
     tracksProgress: ILreTrackProgress[];
     regularMissions: string[];
     premiumMissions: string[];
-    // Allow the user to specify their own progress that overrides
-    // what the planner has calculated.
-    forceProgress?: ILeProgress;
+    // Progress from the sync, which overrides anything specified by the user in the planner.
+    syncedProgress?: ILeProgress;
 
     pointsMilestones: IPointsMilestone[];
     chestsMilestones: IChestMilestone[];

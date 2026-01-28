@@ -71,7 +71,8 @@ export const LeTokenTable: React.FC<Props> = ({
         return (
             LeTokenService.getIterationForToken(
                 tokenIndex,
-                /*currentTokensRemaining=*/ 0,
+                progress.syncedProgress?.currentTokens ?? 0,
+                progress.syncedProgress?.hasUsedAdForExtraTokenToday ?? true,
                 legendaryEvent,
                 progress.occurrenceProgress[0].premiumMissionsProgress > 0,
                 progress.occurrenceProgress[1].premiumMissionsProgress > 0,

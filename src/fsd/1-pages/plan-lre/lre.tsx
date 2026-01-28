@@ -4,18 +4,18 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Switch, Tab, Tabs } from '@mui/material';
 import Button from '@mui/material/Button';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { SetGoalDialog } from '@/shared-components/goals/set-goal-dialog';
 
-import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
+import { Rank } from '@/fsd/5-shared/model';
 import { RarityStars } from '@/fsd/5-shared/model/enums/rarity-stars.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 
-import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { CharactersService } from '@/fsd/4-entities/character';
+import { MowsService } from '@/fsd/4-entities/mow';
 
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
@@ -41,65 +41,40 @@ export const Lre: React.FC = () => {
     const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters, mows, goals } =
         useContext(StoreContext);
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
-    const { setBattleState } = useLreProgress(legendaryEvent);
-    const { model } = useLreProgress(legendaryEvent);
-    const [tokens, setTokens] = useState<TokenUse[]>([]);
-    const [tokenDisplays, setTokenDisplays] = useState<TokenDisplay[]>([]);
-    const [currentRarity, setCurrentRarity] = useState<Rarity>(Rarity.Legendary);
-    const [currentStars, setCurrentStars] = useState<RarityStars>(RarityStars.None);
-    const [resolvedCharacters, setResolvedCharacters] = useState<ICharacter2[]>([]);
-    const [resolvedMows, setResolvedMows] = useState<IMow2[]>([]);
-    const [upgradeRankOrMowGoals, setUpgradeRankOrMowGoals] = useState<
-        (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[]
-    >([]);
+    const { model, setBattleState } = useLreProgress(legendaryEvent);
     const dispatch = useContext(DispatchContext);
     const updatePreferencesOption = (setting: keyof ILreViewSettings, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
 
-    useEffect(() => {
-        setUpgradeRankOrMowGoals(
-            GoalsService.prepareGoals(goals, [...resolvedCharacters, ...resolvedMows], false).upgradeRankOrMowGoals
-        );
-    }, [goals, resolvedCharacters, resolvedMows]);
+    const resolvedCharacters = CharactersService.resolveStoredCharacters(characters);
+    const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
-    useEffect(() => {
-        const chars = CharactersService.resolveStoredCharacters(characters);
-        setResolvedCharacters(chars);
-        const character = chars.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
-        if (character === undefined || character.rank === Rank.Locked) {
-            setCurrentRarity(Rarity.Legendary);
-            setCurrentStars(RarityStars.None);
-        } else {
-            setCurrentRarity(character.rarity);
-            setCurrentStars(character.rarityStars);
+    const upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[] = GoalsService.prepareGoals(
+        goals,
+        [...resolvedCharacters, ...resolvedMows],
+        false
+    ).upgradeRankOrMowGoals;
+
+    const leUnitAscensionData = useMemo(() => {
+        const character = resolvedCharacters.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
+        if (character !== undefined && character.rank !== Rank.Locked) {
+            return { rarity: character.rarity, stars: character.stars };
         }
-    }, [characters]);
+        return { rarity: Rarity.Legendary, stars: RarityStars.None };
+    }, [resolvedCharacters, legendaryEvent.unitSnowprintId]);
 
-    useEffect(() => {
-        const mowsResolved = MowsService.resolveAllFromStorage(mows);
-        setResolvedMows(mowsResolved);
-    }, [mows]);
-
-    useEffect(() => {
-        setTokens(
-            TokenEstimationService.computeAllTokenUsage(
-                model.tracksProgress,
-                leSelectedTeams[legendaryEvent.id]?.teams ?? []
-            )
-        );
-    }, [model, leSelectedTeams, legendaryEvent]);
-
-    useEffect(() => {
-        const displays = TokenEstimationService.getTokenDisplays(
-            tokens,
-            model,
-            currentRarity,
-            currentStars,
-            leSettings.showP2POptions ?? true
-        );
-        setTokenDisplays(displays);
-    }, [tokens, model, currentRarity, currentStars, leSettings]);
+    const tokens: TokenUse[] = TokenEstimationService.computeAllTokenUsage(
+        model.tracksProgress,
+        leSelectedTeams[legendaryEvent.id]?.teams ?? []
+    );
+    const tokenDisplays: TokenDisplay[] = TokenEstimationService.getTokenDisplays(
+        tokens,
+        model,
+        leUnitAscensionData.rarity,
+        leUnitAscensionData.stars,
+        leSettings.showP2POptions ?? true
+    );
 
     const currentPoints = useMemo(() => {
         return model.tracksProgress
