@@ -138,6 +138,7 @@ export class LeTokenService {
         nowMillis: number
     ): number {
         const millisRemaining = this.getMillisRemainingInIteration(event, nowMillis) - 1;
+        if (millisRemaining <= 0) return 0;
         return Math.floor(millisRemaining / ONE_DAY_MILLIS) + (hasUsedAdForExtraTokenToday ? 0 : 1);
     }
 

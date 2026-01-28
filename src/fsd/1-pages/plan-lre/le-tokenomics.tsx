@@ -46,12 +46,15 @@ interface Props {
     nextTokenCompleted: (tokenIndex: number) => void;
     nextTokenMaybe: (tokenIndex: number) => void;
     nextTokenStopped: (tokenIndex: number) => void;
-    setBattleState: (
+    createNewModel: (
+        model: ILreProgressModel,
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
         reqId: string,
-        status: RequirementStatus
-    ) => void;
+        status: RequirementStatus,
+        forceOverwrite?: boolean
+    ) => ILreProgressModel;
+    updateDto: (model: ILreProgressModel) => void;
 }
 
 /**
@@ -70,7 +73,8 @@ export const LeTokenomics: React.FC<Props> = ({
     nextTokenCompleted,
     nextTokenMaybe,
     nextTokenStopped,
-    setBattleState,
+    createNewModel,
+    updateDto,
 }: Props) => {
     const { characters: unresolvedChars } = useContext(StoreContext);
     const { model: progressModel } = useLreProgress(legendaryEvent);
@@ -121,7 +125,7 @@ export const LeTokenomics: React.FC<Props> = ({
     );
     const totalAdTokensRemainingInIteration = LeTokenService.getAdTokensRemainingInIteration(
         legendaryEvent,
-        model.syncedProgress?.hasUsedAdForExtraTokenToday ?? false,
+        model.syncedProgress?.hasUsedAdForExtraTokenToday ?? true,
         Date.now()
     );
     const totalFreeTokensRemaining = LeTokenService.getFreeTokensRemainingInEvent(
@@ -349,7 +353,8 @@ export const LeTokenomics: React.FC<Props> = ({
                     progress={model}
                     tokenDisplays={tokenDisplays}
                     tracksProgress={tracksProgress}
-                    setBattleState={setBattleState}
+                    createNewModel={createNewModel}
+                    updateDto={updateDto}
                 />
             </div>
             {/*missedMilestones.length > 0 && (

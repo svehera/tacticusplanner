@@ -28,12 +28,15 @@ interface Props {
     progress: ILreProgressModel;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
-    setBattleState: (
+    createNewModel: (
+        model: ILreProgressModel,
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
         reqId: string,
-        status: RequirementStatus
-    ) => void;
+        status: RequirementStatus,
+        forceOverwrite?: boolean
+    ) => ILreProgressModel;
+    updateDto: (model: ILreProgressModel) => void;
 }
 
 /**
@@ -46,7 +49,8 @@ export const LeTokenTable: React.FC<Props> = ({
     progress,
     tokenDisplays,
     tracksProgress,
-    setBattleState,
+    createNewModel,
+    updateDto,
 }: Props) => {
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -88,15 +92,25 @@ export const LeTokenTable: React.FC<Props> = ({
 
         const hasRestrictions = token.restricts.some(r => !LreRequirementStatusService.isDefaultObjective(r.id));
         // Mark the restrictions included in this token as completed
+        let leModel = progress;
+        let modified = false;
         for (const restrict of token.restricts) {
             if (
                 status === RequirementStatus.Cleared ||
                 !hasRestrictions ||
                 !LreRequirementStatusService.isDefaultObjective(restrict.id)
             ) {
-                setBattleState(token.track as 'alpha' | 'beta' | 'gamma', token.battleNumber, restrict.id, status);
+                modified = true;
+                leModel = createNewModel(
+                    leModel,
+                    token.track as 'alpha' | 'beta' | 'gamma',
+                    token.battleNumber,
+                    restrict.id,
+                    status
+                );
             }
         }
+        if (modified) updateDto(leModel);
     };
 
     const onCompleteBattle = (token: TokenDisplay) => {
@@ -105,24 +119,29 @@ export const LeTokenTable: React.FC<Props> = ({
         setRequirementStatus(token, RequirementStatus.Cleared);
 
         // Also mark defeatAll, killScore, and highScore as completed
-        setBattleState(
+        let leModel = progress;
+        leModel = createNewModel(
+            leModel,
             token.track as 'alpha' | 'beta' | 'gamma',
             token.battleNumber,
             '_defeatAll',
             RequirementStatus.Cleared
         );
-        setBattleState(
+        leModel = createNewModel(
+            leModel,
             token.track as 'alpha' | 'beta' | 'gamma',
             token.battleNumber,
             '_killPoints',
             RequirementStatus.Cleared
         );
-        setBattleState(
+        leModel = createNewModel(
+            leModel,
             token.track as 'alpha' | 'beta' | 'gamma',
             token.battleNumber,
             '_highScore',
             RequirementStatus.Cleared
         );
+        updateDto(leModel);
     };
 
     const onMaybeBattle = (token: TokenDisplay) => {

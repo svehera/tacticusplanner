@@ -41,7 +41,7 @@ export const Lre: React.FC = () => {
     const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters, mows, goals } =
         useContext(StoreContext);
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
-    const { model, setBattleState } = useLreProgress(legendaryEvent);
+    const { model, createNewModel, updateDto } = useLreProgress(legendaryEvent);
     const dispatch = useContext(DispatchContext);
     const updatePreferencesOption = (setting: keyof ILreViewSettings, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
@@ -112,14 +112,17 @@ export const Lre: React.FC = () => {
         const token = tokenDisplays[tokenIndex];
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
 
+        let leModel = model;
         for (const restrict of token.restricts) {
-            setBattleState(
+            leModel = createNewModel(
+                leModel,
                 token.track as 'alpha' | 'beta' | 'gamma',
                 token.battleNumber,
                 restrict.id,
                 RequirementStatus.Cleared
             );
         }
+        updateDto(leModel);
     };
 
     const nextTokenMaybe = (tokenIndex: number): void => {
@@ -128,9 +131,13 @@ export const Lre: React.FC = () => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
 
         const hasRestrictions = token.restricts.some(r => !LreRequirementStatusService.isDefaultObjective(r.id));
+        let leModel = model;
+        let modified = false;
         for (const restrict of token.restricts) {
             if (!hasRestrictions || !LreRequirementStatusService.isDefaultObjective(restrict.id)) {
-                setBattleState(
+                modified = true;
+                leModel = createNewModel(
+                    leModel,
                     token.track as 'alpha' | 'beta' | 'gamma',
                     token.battleNumber,
                     restrict.id,
@@ -138,6 +145,7 @@ export const Lre: React.FC = () => {
                 );
             }
         }
+        if (modified) updateDto(leModel);
     };
 
     const nextTokenStopped = (tokenIndex: number): void => {
@@ -145,14 +153,17 @@ export const Lre: React.FC = () => {
         const token = tokenDisplays[tokenIndex];
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
 
+        let leModel = model;
         for (const restrict of token.restricts) {
-            setBattleState(
+            leModel = createNewModel(
+                leModel,
                 token.track as 'alpha' | 'beta' | 'gamma',
                 token.battleNumber,
                 restrict.id,
                 RequirementStatus.StopHere
             );
         }
+        updateDto(leModel);
     };
 
     const battles = LeBattleService.getBattleSetForCharacter(legendaryEvent.id);
@@ -177,7 +188,8 @@ export const Lre: React.FC = () => {
                         nextTokenCompleted={nextTokenCompleted}
                         nextTokenMaybe={nextTokenMaybe}
                         nextTokenStopped={nextTokenStopped}
-                        setBattleState={setBattleState}
+                        createNewModel={createNewModel}
+                        updateDto={updateDto}
                     />
                 );
             case LreSection.battles:
