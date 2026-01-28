@@ -110,7 +110,7 @@ describe('LeTokenService', () => {
 
         it('should return full ad tokens if event has not started', () => {
             const beforeEventMillis = nowMillis - ONE_DAY_MILLIS;
-            expect(LeTokenService.getAdTokensRemainingInIteration(event, true, beforeEventMillis)).toBe(7);
+            expect(LeTokenService.getAdTokensRemainingInIteration(event, false, beforeEventMillis)).toBe(7);
         });
 
         it('should calculate remaining ad tokens during the event', () => {
@@ -120,7 +120,7 @@ describe('LeTokenService', () => {
 
         it('should return 0 if event is over', () => {
             const afterEventMillis = nowMillis + 8 * ONE_DAY_MILLIS;
-            expect(LeTokenService.getAdTokensRemainingInIteration(event, true, afterEventMillis)).toBe(0);
+            expect(LeTokenService.getAdTokensRemainingInIteration(event, false, afterEventMillis)).toBe(0);
         });
     });
 
@@ -163,7 +163,7 @@ describe('LeTokenService', () => {
     describe('getAdTokensRemainingInEvent', () => {
         it('should sum tokens from current and future iterations', () => {
             const event = createMockEvent({ nextEventDateUtc: now.toUTCString(), eventStage: 1 });
-            const total = LeTokenService.getAdTokensRemainingInEvent(event, true, nowMillis);
+            const total = LeTokenService.getAdTokensRemainingInEvent(event, false, nowMillis);
             expect(total).toBe(3 * 7);
         });
     });
