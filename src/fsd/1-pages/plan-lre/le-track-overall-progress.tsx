@@ -19,26 +19,31 @@ import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { LreTrackBattleSummary } from './le-track-battle';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
-import { ILreRequirements, ILreTrackProgress } from './lre.models';
+import { ILreProgressModel, ILreRequirements, ILreTrackProgress } from './lre.models';
 
 interface Props {
     track: ILreTrackProgress;
     legendaryEventId: LegendaryEventEnum;
     teams: ILreTeam[];
-    setBattleState: (
+    model: ILreProgressModel;
+    createNewModel: (
+        model: ILreProgressModel,
         trackId: LreTrackId,
         battleIndex: number,
         reqId: string,
         status: RequirementStatus,
         forceOverwrite?: boolean
-    ) => void;
+    ) => ILreProgressModel;
+    updateDto: (model: ILreProgressModel) => void;
 }
 
 export const LreTrackOverallProgress: React.FC<Props> = ({
     track,
     legendaryEventId: _legendaryEventId,
     teams,
-    setBattleState,
+    model,
+    createNewModel,
+    updateDto,
 }) => {
     // Calculate which restrictions are projected to be cleared for each battle
     const projectedRestrictions = useMemo(() => {
@@ -142,11 +147,13 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                 ? RequirementStatus.NotCleared
                 : RequirementStatus.Cleared;
 
+        let leModel = model;
         track.battles.forEach(battle => {
             battle.requirementsProgress.forEach(req => {
-                setBattleState(track.trackId, battle.battleIndex, req.id, status, true);
+                leModel = createNewModel(leModel, track.trackId, battle.battleIndex, req.id, status);
             });
         });
+        updateDto(leModel);
     };
 
     return (
@@ -234,8 +241,8 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                 battle={battle}
                                 maxKillPoints={track.battlesPoints[battle.battleIndex]}
                                 projectedRestrictions={projectedRestrictions.get(battle.battleIndex) ?? new Set()}
-                                setState={(req, status, forceOverwrite) =>
-                                    setBattleState(track.trackId, battle.battleIndex, req.id, status, forceOverwrite)
+                                setState={(req, status) =>
+                                    updateDto(createNewModel(model, track.trackId, battle.battleIndex, req.id, status))
                                 }
                             />
                         ))}
