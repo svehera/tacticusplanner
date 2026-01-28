@@ -81,25 +81,25 @@ describe('LeTokenService', () => {
 
         it('should return full tokens if event has not started', () => {
             const beforeEventMillis = nowMillis - ONE_DAY_MILLIS;
-            expect(LeTokenService.getFreeTokensRemainingInIteration(event, beforeEventMillis)).toBe(61); // 7*8-1+6
+            expect(LeTokenService.getFreeTokensRemainingInIteration(event, beforeEventMillis, 0)).toBe(61); // 7*8-1+6
         });
 
         it('should calculate remaining tokens during the event', () => {
             const duringEventMillis = nowMillis + ONE_DAY_MILLIS; // 1 day in
             const expected = Math.floor((6 * ONE_DAY_MILLIS) / (3 * ONE_HOUR_MILLIS));
-            expect(LeTokenService.getFreeTokensRemainingInIteration(event, duringEventMillis)).toBe(expected);
+            expect(LeTokenService.getFreeTokensRemainingInIteration(event, duringEventMillis, 0)).toBe(expected);
         });
 
         it('should include a forced token if nextTokenMillisUtc is provided and within event time', () => {
             const nextTokenTime = nowMillis + ONE_HOUR_MILLIS;
             const expected = 1 + Math.floor((7 * ONE_DAY_MILLIS - ONE_HOUR_MILLIS) / (3 * ONE_HOUR_MILLIS));
-            expect(LeTokenService.getFreeTokensRemainingInIteration(event, nowMillis, nextTokenTime)).toBe(expected);
+            expect(LeTokenService.getFreeTokensRemainingInIteration(event, nowMillis, 0, nextTokenTime)).toBe(expected);
         });
 
         it('should respect custom regen delay', () => {
             const regenDelay = 4 * 3600; // 4 hours
             const expected = Math.floor((7 * ONE_DAY_MILLIS) / (regenDelay * 1000));
-            expect(LeTokenService.getFreeTokensRemainingInIteration(event, nowMillis, undefined, regenDelay)).toBe(
+            expect(LeTokenService.getFreeTokensRemainingInIteration(event, nowMillis, 0, undefined, regenDelay)).toBe(
                 expected
             );
         });
@@ -110,17 +110,17 @@ describe('LeTokenService', () => {
 
         it('should return full ad tokens if event has not started', () => {
             const beforeEventMillis = nowMillis - ONE_DAY_MILLIS;
-            expect(LeTokenService.getAdTokensRemainingInIteration(event, beforeEventMillis)).toBe(7);
+            expect(LeTokenService.getAdTokensRemainingInIteration(event, false, beforeEventMillis)).toBe(7);
         });
 
         it('should calculate remaining ad tokens during the event', () => {
             const duringEventMillis = nowMillis + 2.5 * ONE_DAY_MILLIS; // 2.5 days in
-            expect(LeTokenService.getAdTokensRemainingInIteration(event, duringEventMillis)).toBe(4); // 7 - 3 = 4
+            expect(LeTokenService.getAdTokensRemainingInIteration(event, true, duringEventMillis)).toBe(4); // 7 - 3 = 4
         });
 
         it('should return 0 if event is over', () => {
             const afterEventMillis = nowMillis + 8 * ONE_DAY_MILLIS;
-            expect(LeTokenService.getAdTokensRemainingInIteration(event, afterEventMillis)).toBe(0);
+            expect(LeTokenService.getAdTokensRemainingInIteration(event, false, afterEventMillis)).toBe(0);
         });
     });
 
@@ -155,7 +155,7 @@ describe('LeTokenService', () => {
             // Each full iteration gives 61 free tokens.
             const expectedTokensInFutureIterations = 2 * 61;
 
-            const total = LeTokenService.getFreeTokensRemainingInEvent(event, oneDayIn);
+            const total = LeTokenService.getFreeTokensRemainingInEvent(event, oneDayIn, 0);
             expect(total).toBe(expectedTokensInCurrentIteration + expectedTokensInFutureIterations);
         });
     });
@@ -163,7 +163,7 @@ describe('LeTokenService', () => {
     describe('getAdTokensRemainingInEvent', () => {
         it('should sum tokens from current and future iterations', () => {
             const event = createMockEvent({ nextEventDateUtc: now.toUTCString(), eventStage: 1 });
-            const total = LeTokenService.getAdTokensRemainingInEvent(event, nowMillis);
+            const total = LeTokenService.getAdTokensRemainingInEvent(event, false, nowMillis);
             expect(total).toBe(3 * 7);
         });
     });
@@ -193,31 +193,49 @@ describe('LeTokenService', () => {
         const beforeStart = nowMillis - 1;
 
         it('should return current iteration if tokenIndex is within current remaining tokens', () => {
-            const iteration = LeTokenService.getIterationForToken(10, 0, event, false, false, false, beforeStart);
+            const iteration = LeTokenService.getIterationForToken(10, 0, true, event, false, false, false, beforeStart);
             expect(iteration).toBe(0); // stage 1
         });
 
         it('should return next iteration if tokenIndex is for the next event', () => {
             // Total tokens for first event = 61 (free) + 7 (ad) = 68
-            const iteration = LeTokenService.getIterationForToken(70, 0, event, false, false, false, beforeStart);
+            const iteration = LeTokenService.getIterationForToken(70, 0, true, event, false, false, false, beforeStart);
             expect(iteration).toBe(1); // stage 2
         });
 
         it('should return last iteration if tokenIndex is for the last event', () => {
             // Total for first two events = 68 + 68 = 136
-            const iteration = LeTokenService.getIterationForToken(140, 0, event, false, false, false, beforeStart);
+            const iteration = LeTokenService.getIterationForToken(
+                140,
+                0,
+                true,
+                event,
+                false,
+                false,
+                false,
+                beforeStart
+            );
             expect(iteration).toBe(2); // stage 3
         });
 
         it('should return undefined if tokenIndex is out of bounds', () => {
             // Total for all three events = 68 * 3 = 204
-            const iteration = LeTokenService.getIterationForToken(250, 0, event, false, false, false, beforeStart);
+            const iteration = LeTokenService.getIterationForToken(
+                250,
+                0,
+                true,
+                event,
+                false,
+                false,
+                false,
+                beforeStart
+            );
             expect(iteration).toBeUndefined();
         });
 
         it('should account for premium tokens', () => {
             // Total for first event with premium = 68 + 6 = 74
-            const iteration = LeTokenService.getIterationForToken(75, 0, event, true, false, false, beforeStart);
+            const iteration = LeTokenService.getIterationForToken(75, 0, true, event, true, false, false, beforeStart);
             expect(iteration).toBe(1); // stage 2
         });
     });

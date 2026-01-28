@@ -19,7 +19,7 @@ import { LreTrackOverallProgress } from './le-track-overall-progress';
  */
 export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
     const { leSelectedTeams, leSettings } = useContext(StoreContext);
-    const { model, updateNotes, updateOccurrenceProgress, setBattleState } = useLreProgress(legendaryEvent);
+    const { model, updateNotes, updateOccurrenceProgress, createNewModel, updateDto } = useLreProgress(legendaryEvent);
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
 
     const teams = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
@@ -132,7 +132,9 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                                 track={track}
                                 legendaryEventId={legendaryEvent.id}
                                 teams={teams}
-                                setBattleState={setBattleState}
+                                createNewModel={createNewModel}
+                                updateDto={updateDto}
+                                model={model}
                             />
                         ))}
                     </AccordionDetails>
