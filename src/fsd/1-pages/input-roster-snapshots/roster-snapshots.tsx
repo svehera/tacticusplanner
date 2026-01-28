@@ -324,7 +324,15 @@ export const RosterSnapshots = () => {
             };
             resolved.forEach((snap, index) => {
                 if (index == 0) return;
-                newSnapshots.diffs.push(RosterSnapshotsService.diffSnapshots(resolved[index - 1], snap));
+                newSnapshots.diffs.push(
+                    RosterSnapshotsService.diffSnapshots(
+                        resolved[index - 1],
+                        snap,
+                        /*diffShards=*/ true,
+                        /*diffMythicShards=*/ true,
+                        /*diffXpLevel=*/ true
+                    )
+                );
             });
             if (newSnapshots.diffs.length > RosterSnapshotsService.MAX_SNAPSHOTS - 1) {
                 newSnapshots.diffs.splice(0, newSnapshots.diffs.length - (RosterSnapshotsService.MAX_SNAPSHOTS - 1));
@@ -423,7 +431,15 @@ export const RosterSnapshots = () => {
         };
         snapshots.forEach((snap, index) => {
             if (index == 0) return;
-            state.diffs.push(RosterSnapshotsService.diffSnapshots(snapshots[index - 1], snap));
+            state.diffs.push(
+                RosterSnapshotsService.diffSnapshots(
+                    snapshots[index - 1],
+                    snap,
+                    /*diffShards=*/ true,
+                    /*diffMythicShards=*/ true,
+                    /*diffXpLevel=*/ true
+                )
+            );
         });
         dispatch.rosterSnapshots({ type: 'Set', value: state });
     };
