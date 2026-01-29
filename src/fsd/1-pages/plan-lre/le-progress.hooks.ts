@@ -1,3 +1,4 @@
+import { produce } from 'immer';
 import { useContext } from 'react';
 import { useDebounceCallback } from 'usehooks-ts';
 
@@ -17,13 +18,13 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     const dispatch = useContext(DispatchContext);
     const model = LreService.mapProgressDtoToModel(leProgress[legendaryEvent.id], legendaryEvent);
 
-    const updateDto = (newModel: ILreProgressModel): ILreProgressModel => {
+    const updateDto = <T extends ILreProgressModel>(newModel: T) => {
         dispatch.leProgress({
             type: 'Update',
             value: LreService.mapProgressModelToDto(newModel),
             eventId: newModel.eventId,
         });
-        return newModel;
+        return newModel as T; // I'm not sure why this is necessary to satisfy TypeScript that we haven't widened the type
     };
 
     const debounceUpdateDto = useDebounceCallback(updateDto, 500);
@@ -33,9 +34,10 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     };
 
     const updateOccurrenceProgress = (occurrence: ILreOccurrenceProgress) => {
-        const occurrenceProgress = model.occurrenceProgress;
-        occurrenceProgress[occurrence.eventOccurrence - 1] = occurrence;
-        return updateDto({ ...model, occurrenceProgress: [...occurrenceProgress] });
+        const updatedProgress = produce(model, draft => {
+            draft.occurrenceProgress[occurrence.eventOccurrence - 1] = occurrence;
+        });
+        return updateDto(updatedProgress);
     };
 
     const createNewModel = (

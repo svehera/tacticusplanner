@@ -1,3 +1,5 @@
+import { allLegendaryEvents } from './data';
+
 export interface ILegendaryEventStatic {
     id: number;
     unitSnowprintId: string; // The snowprint ID for the unit.
@@ -8,15 +10,15 @@ export interface ILegendaryEventStatic {
     nextEventDate?: string;
     nextEventDateUtc?: string;
 
-    regularMissions: string[];
-    premiumMissions: string[];
+    regularMissions: readonly string[];
+    premiumMissions: readonly string[];
 
     alpha: ILegendaryEventTrackStatic;
     beta: ILegendaryEventTrackStatic;
     gamma: ILegendaryEventTrackStatic;
 
-    pointsMilestones: IPointsMilestone[];
-    chestsMilestones: IChestMilestone[];
+    pointsMilestones: readonly IPointsMilestone[];
+    chestsMilestones: readonly IChestMilestone[];
 
     shardsPerChest: number;
     battlesCount: number;
@@ -24,10 +26,15 @@ export interface ILegendaryEventStatic {
     progression: ILEProgression;
 }
 
+// TODO: Work towards deriving this type from allLegendaryEvents data instead
+//      of manually keeping it in sync.
+// a.k.a. "Have the data tell us its own type instead of us telling the data what type it is."
+allLegendaryEvents satisfies readonly ILegendaryEventStatic[];
+
 export interface ILegendaryEventTrackStatic {
     name: string;
     killPoints: number;
-    battlesPoints: number[];
+    battlesPoints: readonly number[];
     enemies: {
         label: string;
         link: string;

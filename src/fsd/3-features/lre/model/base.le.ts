@@ -27,11 +27,11 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     readonly nextEventDateUtc: string;
     readonly finished: boolean;
 
-    readonly regularMissions: string[];
-    readonly premiumMissions: string[];
+    readonly regularMissions: readonly string[];
+    readonly premiumMissions: readonly string[];
 
-    readonly pointsMilestones: IPointsMilestone[];
-    readonly chestsMilestones: IChestMilestone[];
+    readonly pointsMilestones: readonly IPointsMilestone[];
+    readonly chestsMilestones: readonly IChestMilestone[];
 
     readonly shardsPerChest: number;
     readonly battlesCount: number;

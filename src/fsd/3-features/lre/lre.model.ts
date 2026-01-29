@@ -22,8 +22,8 @@ export interface ILegendaryEvent extends ILegendaryEventStatic {
 export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
     eventId: LegendaryEventEnum;
     section: LreTrackId;
-    allowedUnits: ICharacter2[];
-    unitsRestrictions: Array<ILegendaryEventTrackRequirement>;
+    allowedUnits: readonly ICharacter2[];
+    unitsRestrictions: readonly ILegendaryEventTrackRequirement[];
 
     getCharacterPoints(char: ICharacter2): number;
 
