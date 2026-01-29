@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
-import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
@@ -25,7 +25,6 @@ import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapsh
 
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
-import { useLreProgress } from './le-progress.hooks';
 import { LeTokenCard } from './le-token-card';
 // import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderRestrictions, renderTeam } from './le-token-render-utils';
@@ -38,6 +37,7 @@ import { TokenDisplay, TokenEstimationService, TokenUse } from './token-estimati
 interface Props {
     legendaryEvent: ILegendaryEvent;
     battles: ILeBattles | undefined;
+    model: ILreProgressModel;
     tokens: TokenUse[];
     currentPoints: number;
     tokenDisplays: TokenDisplay[];
@@ -65,6 +65,7 @@ interface Props {
 export const LeTokenomics: React.FC<Props> = ({
     legendaryEvent,
     battles,
+    model,
     // tokens,
     currentPoints,
     tokenDisplays,
@@ -77,19 +78,14 @@ export const LeTokenomics: React.FC<Props> = ({
     updateDto,
 }: Props) => {
     const { characters: unresolvedChars } = useContext(StoreContext);
-    const { model: progressModel } = useLreProgress(legendaryEvent);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
 
     const [characters, setCharacters] = useState<ICharacter2[]>([]);
-    const [model, setModel] = useState<ILreProgressModel>(progressModel);
 
     useEffect(() => {
         const resolvedChars = CharactersService.resolveStoredCharacters(unresolvedChars);
         setCharacters(resolvedChars);
     }, [unresolvedChars]);
-    useEffect(() => {
-        setModel(progressModel);
-    }, [progressModel]);
 
     /*
     const missedMilestones = milestonesAndPoints
@@ -142,11 +138,12 @@ export const LeTokenomics: React.FC<Props> = ({
     );
 
     const character = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
+    const rank = character?.rank ?? Rank.Locked;
 
     const progress = TokenEstimationService.computeCurrentProgress(
         model,
-        character?.rarity ?? Rarity.Legendary,
-        character?.stars ?? RarityStars.None,
+        rank === Rank.Locked ? Rarity.Legendary : (character?.rarity ?? Rarity.Legendary),
+        rank === Rank.Locked ? RarityStars.None : (character?.stars ?? RarityStars.None),
         /*p2p=*/ true
     );
 

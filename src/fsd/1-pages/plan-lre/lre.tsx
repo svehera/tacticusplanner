@@ -179,6 +179,7 @@ export const Lre: React.FC = () => {
                     <LeTokenomics
                         legendaryEvent={legendaryEvent}
                         key="tokenomics"
+                        model={model}
                         battles={battles}
                         tokens={tokens}
                         tokenDisplays={tokenDisplays}
