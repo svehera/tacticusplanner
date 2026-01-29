@@ -1,10 +1,4 @@
-export type {
-    ICampaignBattleComposed,
-    IDetailedEnemy,
-    ICampaignModel,
-    ICampaignsProgress,
-    ICampaignsFilters,
-} from './model';
+export type { ICampaignBattleComposed, ICampaignModel, ICampaignsProgress, ICampaignsFilters } from './model';
 export { battleData } from './data';
 export { CampaignsService } from './campaigns.service';
 export { Campaign, CampaignType, CampaignGroupType, CampaignDifficulty } from './enums';

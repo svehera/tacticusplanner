@@ -27,7 +27,6 @@ import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { useLreProgress } from './le-progress.hooks';
 import { LeTokenCard } from './le-token-card';
-// import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
@@ -334,18 +333,6 @@ export const LeTokenomics: React.FC<Props> = ({
 
             <div className="flex flex-col items-center w-full gap-y-4">{characterPortrait()}</div>
 
-            {/*showP2P && (
-                <div className="flex flex-col items-center w-full gap-y-4">
-                    <div>
-                        <h3 className="text-lg font-bold">Milestones Already Achieved</h3>
-                    </div>
-                    <LeTokenMilestoneCardGrid
-                        milestonesToList={achievedMilestones}
-                        emptyMessage="No milestones achieved yet."
-                    />
-                </div>
-            )*/}
-
             <div key="tokens" className="flex flex-col w-full gap-2">
                 <LeTokenTable
                     battles={battles}
@@ -357,25 +344,6 @@ export const LeTokenomics: React.FC<Props> = ({
                     updateDto={updateDto}
                 />
             </div>
-            {/*missedMilestones.length > 0 && (
-                <div className="flex flex-col items-center w-full pt-6 mt-4 border-t-2 border-gray-200 gap-y-4 dark:border-gray-700">
-                    <div className="text-center">
-                        <h3 className="text-lg font-bold text-red-700 dark:text-red-400">
-                            Milestones Projected to Miss
-                        </h3>
-                        <p className="text-sm text-gray-500">
-                            Based on current points ({currentPoints}) + tokens listed above (+
-                            {projectedAdditionalPoints})
-                        </p>
-                    </div>
-
-                    <LeTokenMilestoneCardGrid
-                        milestonesToList={missedMilestones}
-                        emptyMessage=""
-                        isMissedVariant={true}
-                    />
-                </div>
-            )*/}
         </div>
     );
 };
