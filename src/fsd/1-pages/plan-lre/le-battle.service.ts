@@ -56,6 +56,9 @@ export class LeBattleService {
         if (characterId === LegendaryEventEnum.Farsight) {
             return this.battles.find(battle => battle.id === '13');
         }
+        if (characterId === LegendaryEventEnum.Uthar) {
+            return this.battles.find(battle => battle.id === '14');
+        }
         return undefined;
     }
 
