@@ -1,5 +1,7 @@
 import { allLegendaryEvents } from './data';
 
+// TODO: We cannot replace this yet because it is extended by ILegendaryEvent
+//      Extending an interface requires a static type, not a derived one.
 export interface ILegendaryEventStatic {
     id: number;
     unitSnowprintId: string; // The snowprint ID for the unit.
@@ -31,6 +33,8 @@ export interface ILegendaryEventStatic {
 // a.k.a. "Have the data tell us its own type instead of us telling the data what type it is."
 allLegendaryEvents satisfies readonly ILegendaryEventStatic[];
 
+// TODO: We cannot replace this yet because it is extended by ILegendaryEventTrack
+//      Extending an interface requires a static type, not a derived one.
 export interface ILegendaryEventTrackStatic {
     name: string;
     killPoints: number;
@@ -41,24 +45,9 @@ export interface ILegendaryEventTrackStatic {
     };
 }
 
-export interface ILEProgression {
-    unlock: number;
-    fourStars: number;
-    fiveStars: number;
-    blueStar: number;
-    mythic?: number; // Automatic mythic ascension
-    twoBlueStars?: number; // Mythic two blue stars
-}
-
-export interface IPointsMilestone {
-    milestone: number;
-    cumulativePoints: number;
-    engramPayout: number;
-}
-
-export interface IChestMilestone {
-    chestLevel: number;
-    engramCost: number;
-}
+type ActualLegendaryEvents = (typeof allLegendaryEvents)[number];
+export type ILEProgression = ActualLegendaryEvents['progression'];
+export type IPointsMilestone = ActualLegendaryEvents['pointsMilestones'][number];
+export type IChestMilestone = ActualLegendaryEvents['chestsMilestones'][number];
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';
