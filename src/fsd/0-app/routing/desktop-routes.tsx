@@ -127,6 +127,13 @@ export const globalLearnRoutes: RouteObject[] = [
     mowLookupDesktopLazyRoute,
     guidesLazyRoute,
     guildApiLazyRoute,
+    {
+        path: 'learn/onslaught',
+        async lazy() {
+            const { Onslaught } = await import('@/fsd/1-pages/learn-onslaught');
+            return { Component: Onslaught };
+        },
+    },
 ];
 
 export const appRoutes: () => RouteObject[] = () => [
