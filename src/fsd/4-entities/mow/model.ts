@@ -1,4 +1,4 @@
-import { Alliance, DynamicProps, Faction, Rarity, RarityStars, RarityString, UnitType } from '@/fsd/5-shared/model';
+import { Alliance, DynamicProps, FactionId, Rarity, RarityStars, RarityString, UnitType } from '@/fsd/5-shared/model';
 
 import { IBaseUpgrade, ICraftedUpgrade } from '@/fsd/4-entities/upgrade/@x/mow';
 
@@ -12,7 +12,7 @@ export interface IMowStatic {
     releaseDate?: string;
     alliance: Alliance;
     deployableAlliance: Alliance;
-    faction: Faction;
+    faction: FactionId;
     initialRarity: RarityString;
 }
 
@@ -24,7 +24,7 @@ interface IMowStaticAbility {
 export interface IMowStatic2 {
     snowprintId: string;
     name: string;
-    faction: string;
+    faction: FactionId;
     alliance: string;
     icon: string;
     roundIcon: string;

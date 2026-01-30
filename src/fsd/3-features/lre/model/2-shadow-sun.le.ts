@@ -1,4 +1,4 @@
-﻿import { Alliance, DamageType, Trait, Faction } from '@/fsd/5-shared/model';
+﻿import { Alliance, DamageType, Trait } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { shadowsun as staticData } from '@/fsd/4-entities/lre';
@@ -15,7 +15,7 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
-        const noNecrons = filter(unitsData).byFaction(Faction.Necrons, true);
+        const noNecrons = filter(unitsData).byFaction('Necrons', true);
         return new LETrack(
             this.id,
             'alpha',
@@ -60,7 +60,7 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
     }
 
     protected getBetaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
-        const noTyranids = filter(unitsData).byFaction(Faction.Tyranids, true);
+        const noTyranids = filter(unitsData).byFaction('Tyranids', true);
         return new LETrack(
             this.id,
             'beta',
@@ -75,7 +75,7 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'ASTRA MILITARUM',
                     points: 120,
-                    units: filter(noTyranids).byFaction(Faction.Astra_militarum),
+                    units: filter(noTyranids).byFaction('AstraMilitarum'),
                     iconId: 'astra_militarum',
                 },
                 {
@@ -141,7 +141,7 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Black Legion',
                     points: 120,
-                    units: filter(noImperials).byFaction(Faction.Black_Legion),
+                    units: filter(noImperials).byFaction('BlackLegion'),
                     iconId: 'black_legion',
                 },
             ],

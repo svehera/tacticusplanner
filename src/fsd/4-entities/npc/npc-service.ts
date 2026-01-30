@@ -1,4 +1,4 @@
-import { createSafeGetter, FactionsService, mutableCopy } from '@/fsd/5-shared/lib';
+import { createSafeGetter, mutableCopy } from '@/fsd/5-shared/lib';
 import { Alliance, DamageType } from '@/fsd/5-shared/model';
 
 import { npcData } from './data';
@@ -14,7 +14,7 @@ export class NpcService {
             return {
                 snowprintId: npc.id,
                 name: npc.Name,
-                faction: FactionsService.safeSnowprintFactionToFaction(npc.Faction),
+                faction: npc.Faction || undefined, // source data has empty string for some NPCs (e.g. loot objects)
                 alliance: npc.Alliance ? (npc.Alliance as Alliance) : undefined,
                 meleeDamage: npc['Melee Damage'],
                 meleeHits: npc['Melee Hits'],

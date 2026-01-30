@@ -1,16 +1,13 @@
-﻿import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
+﻿// eslint-disable-next-line import-x/no-internal-modules
+import type factions from '@/data/factions.json';
+
+import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
-interface IFactionStatic {
-    alliance: string;
-    name: string;
-    snowprintId: string;
-    icon: string;
-    color: string;
-}
+type IFactionStatic = (typeof factions)[number];
 
 export interface IRarityCap {
     rarity: Rarity;
@@ -19,12 +16,12 @@ export interface IRarityCap {
     stars: RarityStars;
 }
 
-export interface IFaction extends IFactionStatic {
+export type IFaction = IFactionStatic & {
     power: number;
     bsValue: number;
     unlockedCharacters: number;
     units: IUnit[];
-}
+};
 
 export interface ICharactersContext {
     showBadges: boolean;

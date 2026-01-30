@@ -17,7 +17,7 @@ import { useContext, useEffect, useState } from 'react';
 import { ICharacter2 } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { Faction } from '@/fsd/5-shared/model/enums/faction.enum';
+import { FactionId } from '@/fsd/5-shared/model';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 
@@ -54,7 +54,7 @@ export const ManageTeams = () => {
     const [maxRank, setMaxRank] = useState<Rank>(Rank.Adamantine3);
     const [minRarity, setMinRarity] = useState<Rarity>(Rarity.Common);
     const [maxRarity, setMaxRarity] = useState<Rarity>(Rarity.Mythic);
-    const [factions, onFactionsChange] = useState<Faction[]>([]);
+    const [factions, onFactionsChange] = useState<FactionId[]>([]);
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, onSelectedCharsChange] = useState<string[]>([]);
     const [selectedMows, onSelectedMowsChange] = useState<string[]>([]);
@@ -272,15 +272,15 @@ export const ManageTeams = () => {
                 <ButtonBase
                     onClick={onAdd}
                     disabled={teams.length >= MAX_TEAMS}
-                    className="w-full group flex flex-col items-center justify-center p-6 
-                           border-2 border-dashed border-slate-300 dark:border-slate-700 
-                           hover:border-blue-500 dark:hover:border-blue-400 
-                           hover:bg-blue-50/30 dark:hover:bg-blue-900/10 
+                    className="w-full group flex flex-col items-center justify-center p-6
+                           border-2 border-dashed border-slate-300 dark:border-slate-700
+                           hover:border-blue-500 dark:hover:border-blue-400
+                           hover:bg-blue-50/30 dark:hover:bg-blue-900/10
                            rounded-xl transition-all duration-200">
                     <div
-                        className="flex items-center justify-center w-10 h-10 mb-2 
-                                rounded-full bg-slate-100 dark:bg-slate-800 
-                                group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 
+                        className="flex items-center justify-center w-10 h-10 mb-2
+                                rounded-full bg-slate-100 dark:bg-slate-800
+                                group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30
                                 transition-colors">
                         <AddIcon className="text-slate-500 group-hover:text-blue-500 transition-colors" />
                     </div>

@@ -5,7 +5,7 @@ import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalGoal } from 'src/models/interfaces';
 
-import { Alliance, Faction, Rank, Rarity, RarityStars, UnitType } from '@/fsd/5-shared/model';
+import { Alliance, Rank, Rarity, RarityStars, UnitType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 
@@ -84,7 +84,7 @@ describe('Goal service', () => {
                 name: 'Ragnar Blackmane',
                 shortName: 'Ragnar',
                 alliance: Alliance.Chaos,
-                faction: Faction.Thousand_Sons,
+                faction: 'ThousandSons',
                 icon: 'path',
                 shards: 10,
                 rarity: Rarity.Legendary,

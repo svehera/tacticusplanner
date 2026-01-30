@@ -7,7 +7,7 @@ import React, { useMemo } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import factionsData from 'src/data/factions.json';
 
-import { Alliance, Faction, Rarity, RarityString } from '@/fsd/5-shared/model';
+import { Alliance, FactionId, Rarity, RarityString } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
 
 import { CampaignsService, CampaignType, ICampaignsFilters } from '@/fsd/4-entities/campaign';
@@ -22,7 +22,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
     const [open, setOpen] = React.useState<boolean>(false);
 
     const allFactions = useMemo(
-        () => factionsData.map(x => ({ alliance: x.alliance as Alliance, faction: x.name as Faction })),
+        () => factionsData.map(x => ({ alliance: x.alliance as Alliance, faction: x.name })),
         [factionsData]
     );
 
@@ -79,7 +79,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         setOpen(false);
     };
 
-    const renderUnitsFilter = (type: 'allies' | 'enemies', alliance: Alliance[], factions: Faction[]) => {
+    const renderUnitsFilter = (type: 'allies' | 'enemies', alliance: Alliance[], factions: FactionId[]) => {
         const allowedFactions = !alliance.length
             ? allFactions.map(x => x.faction)
             : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
@@ -94,13 +94,13 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             }
         };
 
-        const factionsFilterChanged = (values: string[]) => {
+        const factionsFilterChanged = (values: FactionId[]) => {
             if (type === 'allies') {
-                setCurrFilter({ ...currFilter, alliesFactions: values as Faction[] });
+                setCurrFilter({ ...currFilter, alliesFactions: values });
             }
 
             if (type === 'enemies') {
-                setCurrFilter({ ...currFilter, enemiesFactions: values as Faction[] });
+                setCurrFilter({ ...currFilter, enemiesFactions: values });
             }
         };
 
@@ -122,7 +122,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     placeholder="Factions"
                     selectedValues={factions}
                     values={allowedFactions}
-                    selectionChanges={factionsFilterChanged}
+                    selectionChanges={factionsFilterChanged as (value: string[]) => void}
                     disableCloseOnSelect={false}
                     minWidth={150}
                 />

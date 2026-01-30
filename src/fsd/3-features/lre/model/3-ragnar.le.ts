@@ -1,4 +1,4 @@
-﻿import { Alliance, DamageType, Trait, Faction } from '@/fsd/5-shared/model';
+﻿import { Alliance, DamageType, Trait } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { ragnar as staticData } from '@/fsd/4-entities/lre';
@@ -137,7 +137,7 @@ export class RagnarLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Black Legion',
                     points: 35,
-                    units: filter(noImperials).byFaction(Faction.Black_Legion, true),
+                    units: filter(noImperials).byFaction('BlackLegion', true),
                     selected: true,
                     iconId: 'no_black_legion',
                 },

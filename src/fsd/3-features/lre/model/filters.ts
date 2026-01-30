@@ -1,61 +1,12 @@
-﻿import { Alliance, DamageType, Trait, Faction } from '@/fsd/5-shared/model';
+﻿import { Alliance, DamageType, Trait, FactionId } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
-
-const factionToString = (faction: Faction): string => {
-    switch (faction) {
-        case Faction.Ultramarines:
-            return 'Ultramarines';
-        case Faction.Black_Legion:
-            return 'BlackLegion';
-        case Faction.Orks:
-            return 'Orks';
-        case Faction.ADEPTA_SORORITAS:
-            return 'Sisterhood';
-        case Faction.Necrons:
-            return 'Necrons';
-        case Faction.Astra_militarum:
-            return 'AstraMilitarum';
-        case Faction.Death_Guard:
-            return 'DeathGuard';
-        case Faction.Black_Templars:
-            return 'BlackTemplars';
-        case Faction.Aeldari:
-            return 'Aeldari';
-        case Faction.Space_Wolves:
-            return 'SpaceWolves';
-        case Faction.T_Au:
-            return 'Tau';
-        case Faction.Dark_Angels:
-            return 'DarkAngels';
-        case Faction.Thousand_Sons:
-            return 'ThousandSons';
-        case Faction.Tyranids:
-            return 'Tyranids';
-        case Faction.AdeptusMechanicus:
-            return 'AdeptusMechanicus';
-        case Faction.WorldEaters:
-            return 'WorldEaters';
-        case Faction.BloodAngels:
-            return 'BloodAngels';
-        case Faction.GenestealerCults:
-            return 'Genestealers';
-        case Faction.AdeptusCustodes:
-            return 'Custodes';
-        case Faction.EmperorsChildren:
-            return 'EmperorsChildren';
-        default:
-            return '';
-    }
-};
 
 export const filter = (characters: ICharacter2[]) => ({
     byAlliance: (alliance: Alliance, not = false) =>
         characters.filter(char => (not ? char.alliance !== alliance : char.alliance === alliance)),
-    byFaction: (faction: Faction, not = false) => {
-        return characters.filter(char =>
-            not ? char.faction !== factionToString(faction) : char.faction === factionToString(faction)
-        );
+    byFaction: (faction: FactionId, not = false) => {
+        return characters.filter(char => (not ? char.faction !== faction : char.faction === faction));
     },
     byDamageType: (damageType: DamageType, not = false) =>
         characters.filter(char =>

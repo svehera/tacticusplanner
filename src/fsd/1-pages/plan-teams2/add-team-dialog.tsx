@@ -3,8 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
 
-import { FactionsService } from '@/fsd/5-shared/lib';
-import { Faction, Rank, Rarity } from '@/fsd/5-shared/model';
+import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
@@ -25,7 +24,7 @@ interface Props {
     maxRarity: Rarity;
     minRank: Rank;
     maxRank: Rank;
-    factions: Faction[];
+    factions: FactionId[];
     onSelectedCharsChange: (ids: string[]) => void;
     onSelectedMowsChange: (ids: string[]) => void;
     onSearchTextChange: (text: string) => void;
@@ -33,7 +32,7 @@ interface Props {
     onMaxRarityChange: (rarity: Rarity) => void;
     onMinRankChange: (rank: Rank) => void;
     onMaxRankChange: (rank: Rank) => void;
-    onFactionsChange: (factions: Faction[]) => void;
+    onFactionsChange: (factions: FactionId[]) => void;
 
     saveAllowed: boolean;
     saveDisallowedMessage: string | undefined;
@@ -130,11 +129,8 @@ export const AddTeamDialog: React.FC<Props> = ({
         };
     }, [isDragging, resizeGrids, stopResizing]);
 
-    const allFactions: Faction[] = Array.from(
-        new Set<Faction>([
-            ...(chars.map(c => FactionsService.snowprintFactionToFaction(c.faction)) as Faction[]),
-            ...(mows.map(m => FactionsService.snowprintFactionToFaction(m.faction)) as Faction[]),
-        ])
+    const allFactions: FactionId[] = Array.from(
+        new Set<FactionId>([...chars.map(c => c.faction), ...mows.map(m => m.faction)])
     ).sort((a, b) => a.localeCompare(b));
 
     const addChar = (snowprintId: string) => {

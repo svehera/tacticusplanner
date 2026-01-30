@@ -14,7 +14,7 @@ import {
 import { getEnumValues } from '@/fsd/5-shared/lib';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
-import { Alliance, Faction, Rank } from '@/fsd/5-shared/model';
+import { Alliance, Rank } from '@/fsd/5-shared/model';
 
 import {
     ICampaignsProgress,
@@ -257,7 +257,7 @@ export class UpgradesService {
     }
 
     private static canCharacterParticipateInBattle(unit: ICharacterData, location: ICampaignBattleComposed): boolean {
-        return location.alliesAlliance === unit.alliance || location.alliesFactions.includes(unit.faction as Faction);
+        return location.alliesAlliance === unit.alliance || location.alliesFactions.includes(unit.faction);
     }
 
     /**
@@ -940,7 +940,7 @@ export class UpgradesService {
         let ret = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
-            if (npc && npc.faction === Faction.Tyranids && !npc.traits.includes('Summon')) {
+            if (npc && npc.faction === 'Tyranids' && !npc.traits.includes('Summon')) {
                 ret += enemy.count;
             }
         }

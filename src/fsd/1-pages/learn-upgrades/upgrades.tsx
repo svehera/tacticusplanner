@@ -6,7 +6,7 @@ import { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
-import { Rarity, RarityString, Rank, stringToRank, RarityMapper } from '@/fsd/5-shared/model';
+import { Rarity, RarityString, Rank, stringToRank, RarityMapper, FactionId } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignsService, CampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
@@ -19,7 +19,7 @@ interface IUpgradesTableRow {
     upgradeLabel: string;
     upgradeId: string;
     upgradeIcon: string;
-    faction: string;
+    faction?: FactionId; // omitted when the upgrade is not faction-specific
     rarity: Rarity;
     type: string;
     locations: ICampaignBattleComposed[];
@@ -248,7 +248,7 @@ export const Upgrades = () => {
                     upgradeLabel: x.label ?? x.material,
                     upgradeId: x.snowprintId,
                     upgradeIcon: x.icon ?? '',
-                    faction: x.faction ?? '',
+                    faction: x.faction,
                     rarity: RarityMapper.stringToNumber[x.rarity as unknown as RarityString],
                     type: x.stat,
                     locations,
