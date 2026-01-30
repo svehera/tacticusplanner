@@ -1,15 +1,15 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React from 'react';
 
-import { Faction } from '@/fsd/5-shared/model';
+import { FactionId } from '@/fsd/5-shared/model';
 
 import { FactionImage } from './faction.icon';
 
 interface Props {
     label: string;
-    factions: Faction[];
-    faction: Faction;
-    factionChanges: (value: Faction) => void;
+    factions: FactionId[];
+    faction: FactionId;
+    factionChanges: (value: FactionId) => void;
 }
 
 /** Exposes a select (list box) with the given factions. */
@@ -17,10 +17,10 @@ export const FactionSelect: React.FC<Props> = ({ label, factions, faction, facti
     return (
         <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>
-            <Select<Faction>
+            <Select<FactionId>
                 label={label}
                 value={faction}
-                onChange={event => factionChanges(event.target.value as Faction)}>
+                onChange={event => factionChanges(event.target.value as FactionId)}>
                 {factions.map(faction => (
                     <MenuItem key={faction} value={faction}>
                         <div className="flex items-center gap-[15px]">

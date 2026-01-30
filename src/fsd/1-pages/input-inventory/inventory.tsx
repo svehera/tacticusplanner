@@ -42,7 +42,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                     stat: x.stat,
                     quantity: inventory.upgrades[x.snowprintId] ?? 0,
                     iconPath: x.icon ?? '',
-                    faction: x.faction ?? '',
+                    faction: x.faction,
                     visible: true,
                     alphabet: (x.label ?? x.material)[0].toUpperCase(),
                 })),

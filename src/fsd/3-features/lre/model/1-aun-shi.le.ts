@@ -1,4 +1,4 @@
-﻿import { Alliance, DamageType, Trait, Faction } from '@/fsd/5-shared/model';
+﻿import { Alliance, DamageType, Trait } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { aunshi as staticData } from '@/fsd/4-entities/lre';
@@ -15,7 +15,7 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
-        const noOrks = filter(unitsData).byFaction(Faction.Orks, true);
+        const noOrks = filter(unitsData).byFaction('Orks', true);
         return new LETrack(
             this.id,
             'alpha',

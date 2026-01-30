@@ -1,4 +1,4 @@
-﻿import { Alliance, DamageType, Trait, Faction } from '@/fsd/5-shared/model';
+﻿import { Alliance, DamageType, Trait } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { vitruvius as staticData } from '@/fsd/4-entities/lre';
@@ -15,7 +15,7 @@ export class VitruviusLegendaryEvent extends LegendaryEventBase {
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
-        const noNecrons = filter(unitsData).byFaction(Faction.Necrons, true);
+        const noNecrons = filter(unitsData).byFaction('Necrons', true);
         return new LETrack(
             this.id,
             'alpha',
@@ -120,7 +120,7 @@ export class VitruviusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Death Guard',
                     points: 35,
-                    units: filter(noImperials).byFaction(Faction.Death_Guard, true),
+                    units: filter(noImperials).byFaction('DeathGuard', true),
                     selected: true,
                     iconId: 'no_death_guard',
                 },
