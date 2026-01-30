@@ -29,6 +29,7 @@ export const Onslaught = () => {
                     <Tab key={tab} label={tab.charAt(0).toUpperCase() + tab.slice(1)} value={tab} />
                 ))}
             </Tabs>
+            <hr className="py-2" />
             <div role="tabpanel" hidden={queryParams.get('tab') !== 'sectors'}>
                 <OnslaughtSectorTab />
             </div>
