@@ -8,6 +8,7 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
@@ -111,37 +112,6 @@ export const LeTokenTable: React.FC<Props> = ({
             }
         }
         if (modified) updateDto(leModel);
-    };
-
-    const onCompleteBattle = (token: TokenDisplay) => {
-        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
-        setRequirementStatus(token, RequirementStatus.Cleared);
-
-        // Also mark defeatAll, killScore, and highScore as completed
-        let leModel = progress;
-        leModel = createNewModel(
-            leModel,
-            token.track as 'alpha' | 'beta' | 'gamma',
-            token.battleNumber,
-            '_defeatAll',
-            RequirementStatus.Cleared
-        );
-        leModel = createNewModel(
-            leModel,
-            token.track as 'alpha' | 'beta' | 'gamma',
-            token.battleNumber,
-            '_killPoints',
-            RequirementStatus.Cleared
-        );
-        leModel = createNewModel(
-            leModel,
-            token.track as 'alpha' | 'beta' | 'gamma',
-            token.battleNumber,
-            '_highScore',
-            RequirementStatus.Cleared
-        );
-        updateDto(leModel);
     };
 
     const onMaybeBattle = (token: TokenDisplay) => {
@@ -252,37 +222,43 @@ export const LeTokenTable: React.FC<Props> = ({
                                         </td>
                                         <td className="px-3 py-2 text-center">{renderTeam(token.team, 25)}</td>
                                         <td className="px-3 py-2 text-center">
-                                            <div className="flex flex-wrap gap-3 justify-center">
-                                                <div style={{ color: STATUS_COLORS[RequirementStatus.Cleared] }}>
-                                                    <button
-                                                        onClick={() => {
-                                                            onCompleteBattle(token);
-                                                        }}
-                                                        className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                                        title="Mark this token as successful.">
-                                                        {STATUS_LABELS[RequirementStatus.Cleared]}{' '}
-                                                    </button>
-                                                </div>
-                                                <div style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}>
-                                                    <button
-                                                        onClick={() => {
-                                                            onMaybeBattle(token);
-                                                        }}
-                                                        className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                                        title="Potentially will not succeed with this token.">
-                                                        {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
-                                                    </button>
-                                                </div>
-                                                <div style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}>
-                                                    <button
-                                                        onClick={() => {
-                                                            onStopBattle(token);
-                                                        }}
-                                                        className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                                        title="Do not attempt this token.">
-                                                        {STATUS_LABELS[RequirementStatus.StopHere]}
-                                                    </button>
-                                                </div>
+                                            <div className="flex flex-wrap gap-3 justify-center items-start">
+                                                <SyncButton
+                                                    showText={false}
+                                                    variant="text"
+                                                    sx={{
+                                                        minWidth: 'auto',
+                                                        padding: 0,
+                                                        minHeight: 'auto',
+                                                        height: 'auto',
+                                                        fontSize: '0.75rem',
+                                                        lineHeight: 1,
+                                                        '& .MuiButton-startIcon': {
+                                                            margin: 0,
+                                                        },
+                                                        '& .MuiSvgIcon-root': {
+                                                            fontSize: '1.25rem',
+                                                        },
+                                                    }}
+                                                />
+                                                <button
+                                                    onClick={() => {
+                                                        onMaybeBattle(token);
+                                                    }}
+                                                    style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}
+                                                    className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                    title="Potentially will not succeed with this token.">
+                                                    {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        onStopBattle(token);
+                                                    }}
+                                                    style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}
+                                                    className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                    title="Do not attempt this token.">
+                                                    {STATUS_LABELS[RequirementStatus.StopHere]}
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -315,7 +291,6 @@ export const LeTokenTable: React.FC<Props> = ({
                                     renderTeam={x => renderTeam(x, 30)}
                                     isBattleVisible={isVisible}
                                     onToggleBattle={onToggleBattle}
-                                    onCompleteBattle={() => onCompleteBattle(token)}
                                     onMaybeBattle={() => onMaybeBattle(token)}
                                     onStopBattle={() => onStopBattle(token)}
                                 />
