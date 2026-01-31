@@ -92,7 +92,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                             {displayTotalPoints}
                         </div>
                     </div>
-                    <div className="flex flex-wrap gap-5 items-start">
+                    <div className="flex flex-wrap items-start gap-5 md:items-center">
                         <SyncButton
                             showText={false}
                             variant="text"
@@ -102,12 +102,15 @@ export const LeTokenCard: React.FC<CardProps> = ({
                                 minHeight: 'auto',
                                 height: 'auto',
                                 fontSize: '0.75rem',
-                                lineHeight: 1,
+                                lineHeight: '1.25rem',
+                                alignSelf: 'center',
+                                marginTop: '-4px',
                                 '& .MuiButton-startIcon': {
                                     margin: 0,
                                 },
                                 '& .MuiSvgIcon-root': {
                                     fontSize: '1.25rem',
+                                    verticalAlign: 'middle',
                                 },
                             }}
                         />
