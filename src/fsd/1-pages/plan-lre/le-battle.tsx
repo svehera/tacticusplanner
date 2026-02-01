@@ -159,7 +159,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                             <img
                                 src={
                                     new URL(
-                                        `../../5-shared/assets/snowprint/le_maps/${battle.mapId}_Visual.jpg`,
+                                        `../../../assets/images/snowprint_assets/le_maps/${battle.mapId}_Visual.jpg`,
                                         import.meta.url
                                     ).href
                                 }
