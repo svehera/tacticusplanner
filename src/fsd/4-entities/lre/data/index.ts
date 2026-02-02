@@ -1,6 +1,7 @@
 import aunshiJson from './1-Aunshi.json';
 import luciusJson from './10-Lucius.json';
 import farsightJson from './11-Farsight.json';
+import utharJson from './12-Uthar.json';
 import shadowsunJson from './2-Shadowsun.json';
 import ragnarJson from './3-Ragnar.json';
 import vitruviusJson from './4-Vitruvius.json';
@@ -21,6 +22,7 @@ export const trajann = trajannJson;
 export const vitruvius = vitruviusJson;
 export const lucius = luciusJson;
 export const farsight = farsightJson;
+export const uthar = utharJson;
 
 export const allLegendaryEvents = [
     aunshi,
@@ -34,4 +36,5 @@ export const allLegendaryEvents = [
     trajann,
     lucius,
     farsight,
+    uthar,
 ] as const;

@@ -13,6 +13,7 @@ import {
     ShadowSunLegendaryEvent,
     VitruviusLegendaryEvent,
     LuciusLegendaryEvent,
+    UtharLegendaryEvent,
 } from './model';
 
 export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
@@ -39,6 +40,8 @@ export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
             return new ShadowSunLegendaryEvent(characters);
         case LegendaryEventEnum.Vitruvius:
             return new VitruviusLegendaryEvent(characters);
+        case LegendaryEventEnum.Uthar:
+            return new UtharLegendaryEvent(characters);
         default:
             return new ShadowSunLegendaryEvent(characters);
     }

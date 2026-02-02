@@ -9,3 +9,4 @@ export { DanteLegendaryEvent } from './8-dante.le';
 export { TrajannLegendaryEvent } from './9-trajann.le';
 export { LuciusLegendaryEvent } from './10-lucius.le';
 export { FarsightLegendaryEvent } from './11-farsight.le';
+export { UtharLegendaryEvent } from './12-uthar.le';
