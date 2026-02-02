@@ -14,7 +14,8 @@ export const UpgradesRaritySelect: React.FC<Props> = ({ upgradesRarity, upgrades
         <div className="flex gap-3 items-center">
             <MultipleSelectCheckmarks
                 placeholder="Upgrades rarity"
-                selectedValues={upgradesRarity.map(x => Rarity[x])}
+                // TODO: Replace type casting with something type-safe
+                selectedValues={upgradesRarity.map(x => Rarity[x]) as RarityString[]}
                 values={Object.values(RarityString)}
                 selectionChanges={values => upgradesRarityChange(values.map(x => +Rarity[x as unknown as number]))}
             />

@@ -7,7 +7,8 @@ import React, { useMemo } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import factionsData from 'src/data/factions.json';
 
-import { Alliance, FactionId, Rarity, RarityString } from '@/fsd/5-shared/model';
+import { factionLookup } from '@/fsd/5-shared/lib';
+import { Alliance, FactionId, FactionName, Rarity, RarityString } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
 
 import { CampaignsService, CampaignType, ICampaignsFilters } from '@/fsd/4-entities/campaign';
@@ -83,6 +84,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         const allowedFactions = !alliance.length
             ? allFactions.map(x => x.faction)
             : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
+        const selectedFactionNames = factions.map(factionId => factionLookup[factionId].name);
 
         const allianceFilterChanged = (values: string[]) => {
             if (type === 'allies') {
@@ -94,13 +96,18 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             }
         };
 
-        const factionsFilterChanged = (values: FactionId[]) => {
+        const factionsFilterChanged = (values: FactionName[]) => {
+            const factionIds = values.map(factionName => {
+                const faction = factionsData.find(x => x.name === factionName);
+                if (!faction) throw new Error(`Faction with name ${factionName} not found`);
+                return faction.snowprintId;
+            });
             if (type === 'allies') {
-                setCurrFilter({ ...currFilter, alliesFactions: values });
+                setCurrFilter({ ...currFilter, alliesFactions: factionIds });
             }
 
             if (type === 'enemies') {
-                setCurrFilter({ ...currFilter, enemiesFactions: values });
+                setCurrFilter({ ...currFilter, enemiesFactions: factionIds });
             }
         };
 
@@ -120,7 +127,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     sortByAlphabet
                     size="small"
                     placeholder="Factions"
-                    selectedValues={factions}
+                    selectedValues={selectedFactionNames}
                     values={allowedFactions}
                     selectionChanges={factionsFilterChanged as (value: string[]) => void}
                     disableCloseOnSelect={false}
@@ -188,6 +195,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                         <MultipleSelectCheckmarks
                             size="small"
                             placeholder="Types"
+                            // @ts-expect-error FIXME: The type of `currFilter.campaignTypes` is looser than the values provided
                             selectedValues={currFilter.campaignTypes}
                             values={[
                                 CampaignType.Elite,
@@ -207,6 +215,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                         <MultipleSelectCheckmarks
                             size="small"
                             placeholder="Slots"
+                            // @ts-expect-error FIXME: The type of `currFilter.slotsCount` is looser than the values provided
                             selectedValues={currFilter.slotsCount?.map(x => x.toString()) ?? []}
                             values={['3', '4', '5']}
                             selectionChanges={values => {
@@ -221,7 +230,8 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <MultipleSelectCheckmarks
                         size="small"
                         placeholder="Rarity"
-                        selectedValues={currFilter.upgradesRarity.map(x => Rarity[x])}
+                        // TODO: Replace type casting with something type-safe
+                        selectedValues={currFilter.upgradesRarity.map(x => Rarity[x]) as RarityString[]}
                         values={Object.values(RarityString)}
                         selectionChanges={values => {
                             setCurrFilter({
