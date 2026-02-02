@@ -43,7 +43,6 @@ interface Props {
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
     showP2P: boolean;
-    nextTokenCompleted: (tokenIndex: number) => void;
     nextTokenMaybe: (tokenIndex: number) => void;
     nextTokenStopped: (tokenIndex: number) => void;
     createNewModel: (
@@ -71,7 +70,6 @@ export const LeTokenomics: React.FC<Props> = ({
     tokenDisplays,
     tracksProgress,
     // showP2P,
-    nextTokenCompleted,
     nextTokenMaybe,
     nextTokenStopped,
     createNewModel,
@@ -222,15 +220,12 @@ export const LeTokenomics: React.FC<Props> = ({
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex flex-col items-center w-full gap-y-4">
-                        {/* 1. Relative container to allow absolute positioning inside */}
-                        <div className="relative flex items-center justify-center w-full min-h-[40px]">
-                            {/* 2. Sync Button - Pushed to the far left */}
-                            <div className="absolute left-0">
-                                <SyncButton showText={true} />
-                            </div>
-
-                            {/* 3. Icons - These will stay perfectly centered in the 'relative' div */}
+                        {/* Token status and sync section */}
+                        <div className="flex items-center justify-center w-full min-h-[40px]">
                             <div className="flex gap-x-8 text-sm text-gray-600 dark:text-gray-400">
+                                <div className="flex items-center gap-2">
+                                    <SyncButton showText={true} />
+                                </div>
                                 <div className="flex items-center gap-2">
                                     {isDataStale() && (
                                         <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
@@ -303,7 +298,6 @@ export const LeTokenomics: React.FC<Props> = ({
                             renderTeam={x => renderTeam(x, 30)}
                             isBattleVisible={isFirstTokenBattleVisible}
                             onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
-                            onCompleteBattle={() => nextTokenCompleted(firstTokenIndex)}
                             onMaybeBattle={() => nextTokenMaybe(firstTokenIndex)}
                             onStopBattle={() => nextTokenStopped(firstTokenIndex)}
                         />
