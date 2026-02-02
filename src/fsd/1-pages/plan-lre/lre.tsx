@@ -107,24 +107,6 @@ export const Lre: React.FC = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'lreGoalsPreview', value: preview });
     };
 
-    const nextTokenCompleted = (tokenIndex: number): void => {
-        if (tokenDisplays.length === 0 || tokenIndex < 0 || tokenIndex >= tokenDisplays.length) return;
-        const token = tokenDisplays[tokenIndex];
-        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-
-        let leModel = model;
-        for (const restrict of token.restricts) {
-            leModel = createNewModel(
-                leModel,
-                token.track as 'alpha' | 'beta' | 'gamma',
-                token.battleNumber,
-                restrict.id,
-                RequirementStatus.Cleared
-            );
-        }
-        updateDto(leModel);
-    };
-
     const nextTokenMaybe = (tokenIndex: number): void => {
         if (tokenDisplays.length === 0 || tokenIndex < 0 || tokenIndex >= tokenDisplays.length) return;
         const token = tokenDisplays[tokenIndex];
@@ -179,13 +161,13 @@ export const Lre: React.FC = () => {
                     <LeTokenomics
                         legendaryEvent={legendaryEvent}
                         key="tokenomics"
+                        model={model}
                         battles={battles}
                         tokens={tokens}
                         tokenDisplays={tokenDisplays}
                         tracksProgress={model.tracksProgress}
                         currentPoints={currentPoints}
                         showP2P={leSettings.showP2POptions ?? true}
-                        nextTokenCompleted={nextTokenCompleted}
                         nextTokenMaybe={nextTokenMaybe}
                         nextTokenStopped={nextTokenStopped}
                         createNewModel={createNewModel}

@@ -1,6 +1,7 @@
 import React, { JSX, useState } from 'react';
 
 import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { RequirementStatus } from '@/fsd/3-features/lre';
 
@@ -18,8 +19,6 @@ interface CardProps {
 
     isBattleVisible: boolean;
     onToggleBattle: (index: number) => void;
-    // If this is provided, show a complete battle button.
-    onCompleteBattle: () => void;
     onMaybeBattle: () => void;
     onStopBattle: () => void;
     // Current progress points - used in standalone mode to show non-cumulative total
@@ -44,7 +43,6 @@ export const LeTokenCard: React.FC<CardProps> = ({
     renderTeam,
     isBattleVisible,
     onToggleBattle,
-    onCompleteBattle,
     onMaybeBattle,
     onStopBattle,
     currentPoints,
@@ -94,55 +92,58 @@ export const LeTokenCard: React.FC<CardProps> = ({
                             {displayTotalPoints}
                         </div>
                     </div>
-                    <div className="flex flex-wrap gap-5">
-                        <div style={{ color: STATUS_COLORS[RequirementStatus.Cleared] }}>
-                            <button
-                                onClick={() => {
-                                    if (isCompleting) return;
-                                    setIsCompleting(true);
-                                    setTimeout(() => {
-                                        setIsCompleting(false);
-                                        onCompleteBattle();
-                                    }, COMPLETE_DELAY_MILLIS);
-                                }}
-                                disabled={isCompleting}
-                                className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                title="Mark this token as successful.">
-                                {STATUS_LABELS[RequirementStatus.Cleared]}{' '}
-                            </button>
-                        </div>
-                        <div style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}>
-                            <button
-                                onClick={() => {
-                                    if (isCompleting) return;
-                                    setIsCompleting(true);
-                                    setTimeout(() => {
-                                        setIsCompleting(false);
-                                        onMaybeBattle();
-                                    }, COMPLETE_DELAY_MILLIS);
-                                }}
-                                disabled={isCompleting}
-                                className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                title="Potentially will not succeed with this token.">
-                                {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
-                            </button>
-                        </div>
-                        <div style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}>
-                            <button
-                                onClick={() => {
-                                    if (isCompleting) return;
-                                    setIsCompleting(true);
-                                    setTimeout(() => {
-                                        setIsCompleting(false);
-                                        onStopBattle();
-                                    }, COMPLETE_DELAY_MILLIS);
-                                }}
-                                disabled={isCompleting}
-                                className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                title="Do not attempt this token.">
-                                {STATUS_LABELS[RequirementStatus.StopHere]}
-                            </button>
-                        </div>
+                    <div className="flex flex-wrap items-start gap-5 md:items-center">
+                        <SyncButton
+                            showText={false}
+                            variant="text"
+                            sx={{
+                                minWidth: 'auto',
+                                padding: 0,
+                                minHeight: 'auto',
+                                height: 'auto',
+                                fontSize: '0.75rem',
+                                lineHeight: '1.25rem',
+                                alignSelf: 'center',
+                                marginTop: '-4px',
+                                '& .MuiButton-startIcon': {
+                                    margin: 0,
+                                },
+                                '& .MuiSvgIcon-root': {
+                                    fontSize: '1.25rem',
+                                    verticalAlign: 'middle',
+                                },
+                            }}
+                        />
+                        <button
+                            onClick={() => {
+                                if (isCompleting) return;
+                                setIsCompleting(true);
+                                setTimeout(() => {
+                                    setIsCompleting(false);
+                                    onMaybeBattle();
+                                }, COMPLETE_DELAY_MILLIS);
+                            }}
+                            disabled={isCompleting}
+                            style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}
+                            className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                            title="Potentially will not succeed with this token.">
+                            {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
+                        </button>
+                        <button
+                            onClick={() => {
+                                if (isCompleting) return;
+                                setIsCompleting(true);
+                                setTimeout(() => {
+                                    setIsCompleting(false);
+                                    onStopBattle();
+                                }, COMPLETE_DELAY_MILLIS);
+                            }}
+                            disabled={isCompleting}
+                            style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}
+                            className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                            title="Do not attempt this token.">
+                            {STATUS_LABELS[RequirementStatus.StopHere]}
+                        </button>
                     </div>
 
                     <button

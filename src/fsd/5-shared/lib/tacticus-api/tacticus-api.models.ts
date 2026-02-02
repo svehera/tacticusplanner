@@ -222,8 +222,8 @@ interface TacticusLegendaryEventCurrentEvent {
 }
 
 interface TacticusLegendaryEventTokens {
-    currentTokens: number;
-    maxTokens: number;
+    current: number;
+    max: number;
     nextTokenInSeconds: number;
     regenDelayInSeconds: number;
 }

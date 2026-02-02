@@ -9377,6 +9377,125 @@
             }
         ]
     },
+    "I_Crit_M001": {
+        "name": "Ancient Combat Knife",
+        "rarity": "Mythic",
+        "type": "I_Crit",
+        "abilityId": "",
+        "isRelic": false,
+        "isUniqueRelic": false,
+        "allowedUnits": [],
+        "allowedFactions": [
+            "Ultramarines",
+            "Sisterhood",
+            "AstraMilitarum",
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "BlackTemplars",
+            "SpaceWolves",
+            "ThousandSons",
+            "DarkAngels",
+            "AdeptusMechanicus",
+            "WorldEaters",
+            "BloodAngels",
+            "Genestealers",
+            "EmperorsChildren",
+            "LeaguesOfVotann"
+        ],
+        "levels": [
+            {
+                "goldCost": 0,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 20,
+                    "critDamage": 1835
+                }
+            },
+            {
+                "goldCost": 50000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 50,
+                "stats": {
+                    "critChance": 20,
+                    "critDamage": 1935
+                }
+            },
+            {
+                "goldCost": 60000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 75,
+                "stats": {
+                    "critChance": 20,
+                    "critDamage": 2034
+                }
+            },
+            {
+                "goldCost": 70000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 20,
+                    "critDamage": 2133
+                }
+            },
+            {
+                "goldCost": 85000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 125,
+                "stats": {
+                    "critChance": 20,
+                    "critDamage": 2232
+                }
+            },
+            {
+                "goldCost": 100000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 150,
+                "stats": {
+                    "critChance": 20,
+                    "critDamage": 2331
+                }
+            },
+            {
+                "goldCost": 125000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 200,
+                "stats": {
+                    "critChance": 20,
+                    "critDamage": 2430
+                }
+            },
+            {
+                "goldCost": 150000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 300,
+                "stats": {
+                    "critChance": 20,
+                    "critDamage": 2529
+                }
+            },
+            {
+                "goldCost": 175000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 500,
+                "stats": {
+                    "critChance": 20,
+                    "critDamage": 2628
+                }
+            },
+            {
+                "goldCost": 200000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 1000,
+                "stats": {
+                    "critChance": 20,
+                    "critDamage": 2727
+                }
+            }
+        ]
+    },
     "I_Crit_M002": {
         "name": "Archeotech Bolt Pistol",
         "rarity": "Mythic",
@@ -16275,6 +16394,108 @@
             }
         ]
     },
+    "R_Crit_MonsterSlayerOfCaliban": {
+        "name": "Monster Slayer of Caliban",
+        "rarity": "Mythic",
+        "type": "I_Crit",
+        "abilityId": "MonsterSlayerOfCaliban",
+        "isRelic": true,
+        "isUniqueRelic": true,
+        "allowedUnits": ["darkaCompanion"],
+        "allowedFactions": [],
+        "levels": [
+            {
+                "goldCost": 0,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 40,
+                    "critDamage": 920
+                }
+            },
+            {
+                "goldCost": 50000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 50,
+                "stats": {
+                    "critChance": 40,
+                    "critDamage": 970
+                }
+            },
+            {
+                "goldCost": 60000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 75,
+                "stats": {
+                    "critChance": 40,
+                    "critDamage": 1020
+                }
+            },
+            {
+                "goldCost": 70000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 40,
+                    "critDamage": 1069
+                }
+            },
+            {
+                "goldCost": 85000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 125,
+                "stats": {
+                    "critChance": 40,
+                    "critDamage": 1119
+                }
+            },
+            {
+                "goldCost": 100000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 150,
+                "stats": {
+                    "critChance": 40,
+                    "critDamage": 1169
+                }
+            },
+            {
+                "goldCost": 125000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 200,
+                "stats": {
+                    "critChance": 40,
+                    "critDamage": 1218
+                }
+            },
+            {
+                "goldCost": 150000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 300,
+                "stats": {
+                    "critChance": 40,
+                    "critDamage": 1268
+                }
+            },
+            {
+                "goldCost": 175000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 500,
+                "stats": {
+                    "critChance": 40,
+                    "critDamage": 1318
+                }
+            },
+            {
+                "goldCost": 200000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 1000,
+                "stats": {
+                    "critChance": 40,
+                    "critDamage": 1367
+                }
+            }
+        ]
+    },
     "R_Crit_ParagonSpear": {
         "name": "Paragon Spear",
         "rarity": "Mythic",
@@ -16487,6 +16708,108 @@
         "isRelic": true,
         "isUniqueRelic": false,
         "allowedUnits": ["templAggressor", "bloodIntercessor", "darkaTerminator"],
+        "allowedFactions": [],
+        "levels": [
+            {
+                "goldCost": 0,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1050
+                }
+            },
+            {
+                "goldCost": 50000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 50,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1107
+                }
+            },
+            {
+                "goldCost": 60000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 75,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1164
+                }
+            },
+            {
+                "goldCost": 70000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1221
+                }
+            },
+            {
+                "goldCost": 85000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 125,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1277
+                }
+            },
+            {
+                "goldCost": 100000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 150,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1334
+                }
+            },
+            {
+                "goldCost": 125000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 200,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1391
+                }
+            },
+            {
+                "goldCost": 150000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 300,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1447
+                }
+            },
+            {
+                "goldCost": 175000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 500,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1504
+                }
+            },
+            {
+                "goldCost": 200000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 1000,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1561
+                }
+            }
+        ]
+    },
+    "R_Crit_SabreOfSacrifice": {
+        "name": "Sabre of Sacrifice",
+        "rarity": "Mythic",
+        "type": "I_Crit",
+        "abilityId": "SabreOfSacrifice",
+        "isRelic": true,
+        "isUniqueRelic": true,
+        "allowedUnits": ["astraDreir"],
         "allowedFactions": [],
         "levels": [
             {
