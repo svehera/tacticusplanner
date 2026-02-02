@@ -5,6 +5,7 @@ import guildWarData from 'src/data/guildWar.json';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { Difficulty } from 'src/models/enums';
 
+import { mutableCopy } from '@/fsd/5-shared/lib';
 import { Rarity } from '@/fsd/5-shared/model';
 
 import { IGWData, IGWDataRaw, IGWZone } from './guild-war.models';
@@ -26,7 +27,7 @@ export class GuildWarService {
         ['L']: Rarity.Legendary,
     };
 
-    private static readonly gwDataRaw: IGWDataRaw = guildWarData;
+    private static readonly gwDataRaw = mutableCopy(guildWarData) satisfies IGWDataRaw;
     static readonly gwData: IGWData = this.convertRawDataToGWData(this.gwDataRaw);
 
     public static getRarityCaps(bfLevel: number, sectionId: string): Rarity[] {

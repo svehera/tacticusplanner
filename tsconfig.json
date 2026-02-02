@@ -18,6 +18,7 @@
         "noEmit": true,
         "sourceMap": true,
         "jsx": "react-jsx",
+        "importJsonAsConst": true,
         "paths": {
             "@/*": ["./src/*"],
             "src/*": ["./src/*"]
