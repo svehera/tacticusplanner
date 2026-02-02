@@ -784,7 +784,7 @@ export class TokenEstimationService {
      * Computes the current progress event progress based on the forced progress provided by the
      * user.
      */
-    private static computeForcedProgress(
+    private static computeSyncedProgress(
         progress: ILreProgressModel,
         currentRarity: Rarity,
         currentStars: RarityStars
@@ -849,7 +849,7 @@ export class TokenEstimationService {
         p2p: boolean
     ): EventProgress {
         if (progress.syncedProgress !== undefined) {
-            return this.computeForcedProgress(progress, currentRarity, currentStars);
+            return this.computeSyncedProgress(progress, currentRarity, currentStars);
         }
         const computedProgress = LeProgressService.computeProgress(progress, p2p);
         let lastClaimedChestIndex = -1;
