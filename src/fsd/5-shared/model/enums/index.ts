@@ -11,3 +11,4 @@ export { UnitType } from './unit-type.enum';
 export { Equipment } from './equipment.enum';
 
 export type FactionId = (typeof factions)[number]['snowprintId'];
+export type FactionName = (typeof factions)[number]['name'];
