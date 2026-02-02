@@ -42,7 +42,10 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
         // Adjust for 0-based array (Your logic used -1, keeping that consistency)
         const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
 
+        console.log('Resolving enemy:', enemyStr, 'to id:', id, 'at index:', arrayIndex);
         const npc = NpcService.getNpcById(id);
+
+        console.log('Resolved NPC:', npc);
 
         if (!npc || arrayIndex >= npc.stats.length) return null;
 
@@ -60,6 +63,7 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
 
                 // Fallback for bad data
                 if (!data) {
+                    console.error('could not resolve enemy data for string:', enemyStr);
                     return (
                         <div key={idx} className="text-xs text-red-500">
                             Error: {enemyStr}
@@ -159,7 +163,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                             <img
                                 src={
                                     new URL(
-                                        `../../5-shared/assets/snowprint/le_maps/${battle.mapId}_Visual.jpg`,
+                                        `../../../assets/images/snowprint_assets/le_maps/${battle.mapId}_Visual.jpg`,
                                         import.meta.url
                                     ).href
                                 }
