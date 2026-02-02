@@ -8,7 +8,7 @@ import React, { useMemo } from 'react';
 import factionsData from 'src/data/factions.json';
 
 import { factionLookup } from '@/fsd/5-shared/lib';
-import { Alliance, FactionId, FactionName, Rarity, RarityString } from '@/fsd/5-shared/model';
+import { Alliance, FactionId, FactionName, Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
 
 import { CampaignsService, CampaignType, ICampaignsFilters } from '@/fsd/4-entities/campaign';
@@ -84,7 +84,8 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         const allowedFactions = !alliance.length
             ? allFactions.map(x => x.faction)
             : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
-        const selectedFactionNames = factions.map(factionId => factionLookup[factionId].name);
+        // Note: we filter out undefined even though TS says we don't have to because users might have outdated faction IDs saved in local storage
+        const selectedFactionNames = factions.map(factionId => factionLookup[factionId]?.name).filter(Boolean);
 
         const allianceFilterChanged = (values: string[]) => {
             if (type === 'allies') {
@@ -97,11 +98,10 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         };
 
         const factionsFilterChanged = (values: FactionName[]) => {
-            const factionIds = values.map(factionName => {
-                const faction = factionsData.find(x => x.name === factionName);
-                if (!faction) throw new Error(`Faction with name ${factionName} not found`);
-                return faction.snowprintId;
-            });
+            const factionIds = values
+                // Note: we filter out undefined even though TS says we don't have to because users might have outdated faction IDs saved in local storage
+                .map(factionName => factionsData.find(x => x.name === factionName)?.snowprintId)
+                .filter(fn => !!fn);
             if (type === 'allies') {
                 setCurrFilter({ ...currFilter, alliesFactions: factionIds });
             }
@@ -230,8 +230,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <MultipleSelectCheckmarks
                         size="small"
                         placeholder="Rarity"
-                        // TODO: Replace type casting with something type-safe
-                        selectedValues={currFilter.upgradesRarity.map(x => Rarity[x]) as RarityString[]}
+                        selectedValues={currFilter.upgradesRarity.map(x => RarityMapper.rarityToRarityString(x))}
                         values={Object.values(RarityString)}
                         selectionChanges={values => {
                             setCurrFilter({

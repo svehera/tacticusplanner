@@ -1,7 +1,7 @@
 ﻿import { Info } from '@mui/icons-material';
 import React from 'react';
 
-import { Rarity, RarityString } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks, AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 interface Props {
@@ -14,8 +14,7 @@ export const UpgradesRaritySelect: React.FC<Props> = ({ upgradesRarity, upgrades
         <div className="flex gap-3 items-center">
             <MultipleSelectCheckmarks
                 placeholder="Upgrades rarity"
-                // TODO: Replace type casting with something type-safe
-                selectedValues={upgradesRarity.map(x => Rarity[x]) as RarityString[]}
+                selectedValues={upgradesRarity.map(x => RarityMapper.rarityToRarityString(x))}
                 values={Object.values(RarityString)}
                 selectionChanges={values => upgradesRarityChange(values.map(x => +Rarity[x as unknown as number]))}
             />
