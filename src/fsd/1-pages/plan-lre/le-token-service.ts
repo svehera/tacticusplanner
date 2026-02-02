@@ -49,11 +49,18 @@ export class LeTokenService {
     public static getFreeTokensRemainingInEvent(
         event: ILegendaryEvent,
         nowMillis: number,
+        currentTokens: number,
         nextTokenMillisUtc?: number,
         regenDelayInSeconds?: number
     ): number {
         return (
-            this.getFreeTokensRemainingInIteration(event, nowMillis, nextTokenMillisUtc, regenDelayInSeconds) +
+            this.getFreeTokensRemainingInIteration(
+                event,
+                nowMillis,
+                currentTokens,
+                nextTokenMillisUtc,
+                regenDelayInSeconds
+            ) +
             this.getTokensRemainingInEventHelper(
                 event,
                 nowMillis + 35 * ONE_DAY_MILLIS,
@@ -64,9 +71,13 @@ export class LeTokenService {
     }
 
     /** Returns the total number of ad tokens remaining across all iterations of this event. */
-    public static getAdTokensRemainingInEvent(event: ILegendaryEvent, nowMillis: number): number {
+    public static getAdTokensRemainingInEvent(
+        event: ILegendaryEvent,
+        hasUsedAdForExtraTokenToday: boolean,
+        nowMillis: number
+    ): number {
         return (
-            this.getAdTokensRemainingInIteration(event, nowMillis) +
+            this.getAdTokensRemainingInIteration(event, hasUsedAdForExtraTokenToday, nowMillis) +
             this.getTokensRemainingInEventHelper(
                 event,
                 nowMillis + ONE_DAY_MILLIS * 35,
@@ -102,6 +113,7 @@ export class LeTokenService {
     public static getFreeTokensRemainingInIteration(
         event: ILegendaryEvent,
         nowMillis: number,
+        currentTokens: number,
         nextTokenMillisUtc?: number,
         regenDelayInSeconds?: number
     ): number {
@@ -111,6 +123,7 @@ export class LeTokenService {
         const millisRemaining = this.getMillisRemainingInIteration(event, now);
         if (now < this.getEventStartTimeMillis(event)) return FREE_TOKENS_PER_EVENT;
         return (
+            currentTokens +
             forcedToken +
             Math.floor(millisRemaining / (regenDelayInSeconds ? regenDelayInSeconds * 1000 : 3 * ONE_HOUR_MILLIS))
         );
@@ -119,9 +132,14 @@ export class LeTokenService {
     /**
      * Returns the number of ad tokens remaining in this iteration of the event.
      */
-    public static getAdTokensRemainingInIteration(event: ILegendaryEvent, nowMillis: number): number {
-        const millisRemaining = this.getMillisRemainingInIteration(event, nowMillis);
-        return Math.floor(millisRemaining / ONE_DAY_MILLIS);
+    public static getAdTokensRemainingInIteration(
+        event: ILegendaryEvent,
+        hasUsedAdForExtraTokenToday: boolean,
+        nowMillis: number
+    ): number {
+        const millisRemaining = this.getMillisRemainingInIteration(event, nowMillis) - 1;
+        if (millisRemaining <= 0) return 0;
+        return Math.floor(millisRemaining / ONE_DAY_MILLIS) + (hasUsedAdForExtraTokenToday ? 0 : 1);
     }
 
     /** Returns the number of premium tokens remaining in this iteration of the event. */
@@ -146,6 +164,7 @@ export class LeTokenService {
     public static getIterationForToken(
         tokenIndex: number,
         currentTokensRemaining: number,
+        hasUsedAdForExtraTokenToday: boolean,
         event: ILegendaryEvent,
         premiumPurchasedFirstEvent: boolean,
         premiumPurchasedSecondEvent: boolean,
@@ -155,8 +174,8 @@ export class LeTokenService {
         const premiums = [premiumPurchasedFirstEvent, premiumPurchasedSecondEvent, premiumPurchasedThirdEvent];
         const tokensRemaining =
             currentTokensRemaining +
-            this.getFreeTokensRemainingInIteration(event, nowMillis) +
-            this.getAdTokensRemainingInIteration(event, nowMillis) +
+            this.getFreeTokensRemainingInIteration(event, currentTokensRemaining, nowMillis) +
+            this.getAdTokensRemainingInIteration(event, hasUsedAdForExtraTokenToday, nowMillis) +
             this.getPremiumTokensRemainingInIteration(event, premiums[event.eventStage - 1], nowMillis);
         if (tokenIndex < tokensRemaining) return event.eventStage - 1;
         tokenIndex -= tokensRemaining;
@@ -171,9 +190,5 @@ export class LeTokenService {
                 FREE_TOKENS_PER_EVENT + AD_TOKENS_PER_EVENT + (premiums[iteration - 1] ? PREMIUM_TOKENS_PER_EVENT : 0);
         }
         return undefined;
-    }
-
-    public static isAfterCutoff(date: number = Date.now()): boolean {
-        return date > 1769385600000;
     }
 }

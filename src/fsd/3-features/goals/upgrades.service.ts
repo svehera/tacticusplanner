@@ -116,7 +116,7 @@ export class UpgradesService {
             }
         }
 
-        const sortedChaosEnemyMaterials = orderBy(battlesWithPriority, ['priority'], ['desc']);
+        const sortedMaterials = orderBy(battlesWithPriority, ['priority'], ['desc']);
 
         const remainingMaterials = cloneDeep(allMaterials);
 
@@ -126,7 +126,7 @@ export class UpgradesService {
 
         const finalMaterials = remainingMaterials.filter(material => material.locations.length > 0);
 
-        return [...sortedChaosEnemyMaterials, ...finalMaterials];
+        return [...sortedMaterials, ...finalMaterials];
     }
 
     /**
@@ -393,7 +393,6 @@ export class UpgradesService {
         }
         const resultDays: IUpgradesRaidsDay[] = [];
 
-        let iteration = 0;
         let upgradesToFarm = allUpgrades.filter(x => !x.isBlocked && !x.isFinished && x.energyLeft > 0);
         const totalMaterialsNeeded: Record<string, number> = {};
         const totalMaterialsAcquired: Record<string, number> = {};
@@ -403,18 +402,14 @@ export class UpgradesService {
         // upgrade material.
         allUpgrades.forEach(upgrade => {
             if (totalMaterialsNeeded[upgrade.id] === undefined) {
-                totalMaterialsNeeded[upgrade.id] = upgrade.requiredCount - upgrade.acquiredCount;
+                totalMaterialsNeeded[upgrade.id] = upgrade.requiredCount;
             }
             if (totalMaterialsAcquired[upgrade.id] === undefined) {
                 totalMaterialsAcquired[upgrade.id] = upgrade.acquiredCount;
             }
         });
 
-        // We need to clone this so that way on the raids page, when we display acquired/required
-        // for each material, we show the correct numbers.
-        const initTotalMaterials = cloneDeep(totalMaterialsNeeded);
-        const initAcquiredMaterials = cloneDeep(totalMaterialsAcquired);
-
+        let iteration = 0;
         while (upgradesToFarm.length > 0) {
             const isFirstDay = iteration === 0;
             let energyLeft = settings.dailyEnergy;
@@ -432,13 +427,14 @@ export class UpgradesService {
                 }
 
                 // We already completed this material, so skip it.
-                if (totalMaterialsNeeded[material.id] <= 0) continue;
+                if (totalMaterialsNeeded[material.id] <= 0) {
+                    upgradesToFarm = upgradesToFarm.filter(x => x.id !== material.id);
+                    continue;
+                }
 
                 // We need to clone the material here because we're going to adjust the total
                 // number of materials we need.
                 const clonedMaterial = cloneDeep(material);
-                clonedMaterial.requiredCount = totalMaterialsNeeded[material.id];
-                clonedMaterial.acquiredCount = 0;
                 const { raidLocations, energySpent } = this._planRaidsForMaterial(
                     clonedMaterial,
                     energyLeft,
@@ -452,13 +448,14 @@ export class UpgradesService {
                 // materials required.
                 raidLocations.forEach(location => {
                     totalMaterialsNeeded[material.id] -= Math.round(location.farmedItems);
+                    totalMaterialsAcquired[material.id] += Math.round(location.farmedItems);
                 });
 
                 if (raidLocations.length) {
                     raids.push({
                         ...clonedMaterial,
-                        acquiredCount: initAcquiredMaterials[material.id],
-                        requiredCount: initTotalMaterials[material.id],
+                        // acquiredCount: initAcquiredMaterials[material.id],
+                        // requiredCount: initTotalMaterials[material.id],
                         raidLocations,
                     });
                     energyLeft -= energySpent;

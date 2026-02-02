@@ -157,6 +157,7 @@ export class LreService {
             notes: dto?.notes ?? '',
             occurrenceProgress,
             tracksProgress,
+            syncedProgress: dto?.forceProgress,
             regularMissions: lre.regularMissions,
             premiumMissions: lre.premiumMissions,
             pointsMilestones: lre.pointsMilestones,
@@ -204,6 +205,7 @@ export class LreService {
             name: model.eventName,
             notes: model.notes,
             battlesProgress,
+            forceProgress: model.syncedProgress,
             overview: overviewDto,
         };
     };

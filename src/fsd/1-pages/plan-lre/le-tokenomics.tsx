@@ -1,23 +1,20 @@
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import SyncIcon from '@mui/icons-material/Sync';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import { Button } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
-import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
-import { CharactersService } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
-// eslint-disable-next-line import-x/no-internal-modules
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 // eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
@@ -28,34 +25,35 @@ import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapsh
 
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
-import { useLreProgress } from './le-progress.hooks';
-import { LeProgressService } from './le-progress.service';
 import { LeTokenCard } from './le-token-card';
 // import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
-import { ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
-import { TokenDisplay, TokenUse } from './token-estimation-service';
+import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
+import { TokenDisplay, TokenEstimationService, TokenUse } from './token-estimation-service';
 
 interface Props {
     legendaryEvent: ILegendaryEvent;
     battles: ILeBattles | undefined;
+    model: ILreProgressModel;
     tokens: TokenUse[];
     currentPoints: number;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
     showP2P: boolean;
-    nextTokenCompleted: (tokenIndex: number) => void;
     nextTokenMaybe: (tokenIndex: number) => void;
     nextTokenStopped: (tokenIndex: number) => void;
-    setBattleState: (
+    createNewModel: (
+        model: ILreProgressModel,
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
         reqId: string,
-        status: RequirementStatus
-    ) => void;
+        status: RequirementStatus,
+        forceOverwrite?: boolean
+    ) => ILreProgressModel;
+    updateDto: (model: ILreProgressModel) => void;
 }
 
 /**
@@ -66,24 +64,27 @@ interface Props {
 export const LeTokenomics: React.FC<Props> = ({
     legendaryEvent,
     battles,
+    model,
     // tokens,
     currentPoints,
     tokenDisplays,
     tracksProgress,
     // showP2P,
-    nextTokenCompleted,
     nextTokenMaybe,
     nextTokenStopped,
-    setBattleState,
+    createNewModel,
+    updateDto,
 }: Props) => {
-    const { characters: unresolvedChars, leSettings, viewPreferences } = useContext(StoreContext);
-    const { model } = useLreProgress(legendaryEvent);
+    const { characters: unresolvedChars } = useContext(StoreContext);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
-    const { syncWithTacticus } = useSyncWithTacticus();
 
-    // const projectedAdditionalPoints = tokens.reduce((sum, token) => sum + (token.incrementalPoints || 0), 0);
-    // const finalProjectedPoints = currentPoints + projectedAdditionalPoints;
-    const characters = CharactersService.resolveStoredCharacters(unresolvedChars);
+    const [characters, setCharacters] = useState<ICharacter2[]>([]);
+
+    useEffect(() => {
+        const resolvedChars = CharactersService.resolveStoredCharacters(unresolvedChars);
+        setCharacters(resolvedChars);
+    }, [unresolvedChars]);
+
     /*
     const missedMilestones = milestonesAndPoints
         .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
@@ -112,31 +113,57 @@ export const LeTokenomics: React.FC<Props> = ({
     const totalFreeTokensRemainingInIteration = LeTokenService.getFreeTokensRemainingInIteration(
         legendaryEvent,
         Date.now(),
-        model.forceProgress?.nextTokenMillisUtc,
-        model.forceProgress?.regenDelayInSeconds
+        model.syncedProgress?.currentTokens ?? 0,
+        model.syncedProgress?.nextTokenMillisUtc,
+        model.syncedProgress?.regenDelayInSeconds
     );
     const totalAdTokensRemainingInIteration = LeTokenService.getAdTokensRemainingInIteration(
         legendaryEvent,
+        model.syncedProgress?.hasUsedAdForExtraTokenToday ?? true,
         Date.now()
     );
     const totalFreeTokensRemaining = LeTokenService.getFreeTokensRemainingInEvent(
         legendaryEvent,
         Date.now(),
-        model.forceProgress?.nextTokenMillisUtc,
-        model.forceProgress?.regenDelayInSeconds
+        model.syncedProgress?.currentTokens ?? 0,
+        model.syncedProgress?.nextTokenMillisUtc,
+        model.syncedProgress?.regenDelayInSeconds
     );
-    const totalAdTokensRemaining = LeTokenService.getAdTokensRemainingInEvent(legendaryEvent, Date.now());
+    const totalAdTokensRemaining = LeTokenService.getAdTokensRemainingInEvent(
+        legendaryEvent,
+        model.syncedProgress?.hasUsedAdForExtraTokenToday ?? false,
+        Date.now()
+    );
 
-    const progress = LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true);
+    const character = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
+    const rank = character?.rank ?? Rank.Locked;
+
+    const progress = TokenEstimationService.computeCurrentProgress(
+        model,
+        rank === Rank.Locked ? Rarity.Legendary : (character?.rarity ?? Rarity.Legendary),
+        rank === Rank.Locked ? RarityStars.None : (character?.stars ?? RarityStars.None),
+        /*p2p=*/ true
+    );
 
     const char = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
     const rarity = char?.rarity ?? Rarity.Legendary;
     const stars = char?.stars ?? RarityStars.None;
 
-    const sync = async () => {
-        console.log('Syncing with Tacticus...');
-        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+    const isDataStale = () => {
+        const nextEventDateUtc: Date = new Date(legendaryEvent.nextEventDateUtc ?? 0);
+        if (model.syncedProgress === undefined) return true;
+        if (model.syncedProgress.nextTokenMillisUtc === undefined) return false;
+        if (Date.now() < nextEventDateUtc.getTime()) return false;
+        if (Date.now() > nextEventDateUtc.getTime() + 7 * 86400 * 1000) return false;
+        // It's been long enough for a token to regenerate, so either the token count is wrong or
+        // the tokenomics data is wrong (most likely).
+        return Date.now() - model.syncedProgress.lastUpdateMillisUtc > 3 * 3600 * 1000;
     };
+
+    const shardBarWidth =
+        progress.shardsForNextMilestone === Infinity
+            ? 100
+            : Math.min(100, (progress.shards / progress.shardsForNextMilestone) * 100);
 
     const characterPortrait = () => {
         return (
@@ -171,16 +198,13 @@ export const LeTokenomics: React.FC<Props> = ({
                         <div
                             className="h-full bg-blue-600"
                             style={{
-                                width: `${Math.min(
-                                    100,
-                                    (progress.incrementalShards / progress.incrementalShardsGoal) * 100
-                                )}%`,
+                                width: `${shardBarWidth}%`,
                                 // Optional: adds a slight round to the leading edge as it grows
                                 borderTopRightRadius: '9999px',
                                 borderBottomRightRadius: '9999px',
                             }}></div>
                         <span className="absolute inset-0 flex items-center justify-center w-full h-full text-xs font-medium text-gray-800 dark:text-gray-100">
-                            {progress.incrementalShards} / {progress.incrementalShardsGoal}
+                            {progress.shards} / {progress.shardsForNextMilestone}
                         </span>
                     </div>
                 </div>
@@ -195,49 +219,52 @@ export const LeTokenomics: React.FC<Props> = ({
         <div className="flex flex-col w-full gap-y-8">
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
-                    <div className="flex gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-                        {LeTokenService.isAfterCutoff() && (
-                            <div>
-                                <Button size="small" variant={'contained'} color={'primary'} onClick={sync}>
-                                    <SyncIcon /> Sync
-                                </Button>{' '}
-                            </div>
-                        )}
-                        <div className="flex items-center gap-2">
-                            {LeTokenService.isAfterCutoff() &&
-                                (model.forceProgress === undefined ||
-                                    Date.now() - model.forceProgress.nextTokenMillisUtc > 3 * 60 * 60 * 1000) && (
-                                    <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
-                                        <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
+                    <div className="flex flex-col items-center w-full gap-y-4">
+                        {/* Token status and sync section */}
+                        <div className="flex items-center justify-center w-full min-h-[40px]">
+                            <div className="flex gap-x-8 text-sm text-gray-600 dark:text-gray-400">
+                                <div className="flex items-center gap-2">
+                                    <SyncButton showText={true} />
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    {isDataStale() && (
+                                        <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
+                                            <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
+                                        </AccessibleTooltip>
+                                    )}
+                                    <AccessibleTooltip
+                                        title={`${model.syncedProgress?.currentTokens ?? 0} Current Tokens in possession`}>
+                                        <div className="flex items-center gap-2">
+                                            <MiscIcon icon="legendaryEventToken" width={30} height={35} />
+                                            {model.syncedProgress?.currentTokens ?? 0}
+                                        </div>
                                     </AccessibleTooltip>
-                                )}
-                            <AccessibleTooltip
-                                title={`${model.forceProgress?.currentTokens ?? 0} Current Tokens in possession`}>
-                                <div className="flex items-center gap-2">
-                                    <MiscIcon icon="legendaryEventToken" width={30} height={35} />
-                                    {model.forceProgress?.currentTokens ?? 0}
                                 </div>
-                            </AccessibleTooltip>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <AccessibleTooltip
-                                title={`${totalFreeTokensRemainingInIteration} free tokens remaining to be regenerated in this event, ${totalFreeTokensRemaining} across all events.`}>
+
                                 <div className="flex items-center gap-2">
-                                    <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />{' '}
-                                    {totalFreeTokensRemainingInIteration} / {totalFreeTokensRemaining}
+                                    <AccessibleTooltip
+                                        title={`${totalFreeTokensRemainingInIteration} free tokens remaining...`}>
+                                        <div className="flex items-center gap-2">
+                                            <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />
+                                            {totalFreeTokensRemainingInIteration} / {totalFreeTokensRemaining}
+                                        </div>
+                                    </AccessibleTooltip>
                                 </div>
-                            </AccessibleTooltip>{' '}
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <AccessibleTooltip
-                                title={`${totalAdTokensRemainingInIteration} ad tokens remaining to be claimed in this event, ${totalAdTokensRemaining} across all events.`}>
+
                                 <div className="flex items-center gap-2">
-                                    <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />{' '}
-                                    {totalAdTokensRemainingInIteration} / {totalAdTokensRemaining}
+                                    <AccessibleTooltip
+                                        title={`${totalAdTokensRemainingInIteration} ad tokens remaining...`}>
+                                        <div className="flex items-center gap-2">
+                                            <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />
+                                            {totalAdTokensRemainingInIteration} / {totalAdTokensRemaining}
+                                        </div>
+                                    </AccessibleTooltip>
                                 </div>
-                            </AccessibleTooltip>{' '}
+                            </div>
                         </div>
-                    </div>
+
+                        {/* rest of your code... */}
+                    </div>{' '}
                     <div>
                         <h3 className="text-lg font-bold">Next Token</h3>
                     </div>
@@ -247,7 +274,8 @@ export const LeTokenomics: React.FC<Props> = ({
                             tokenUsedDuringEventIteration={
                                 LeTokenService.getIterationForToken(
                                     0,
-                                    /*currentTokensRemaining=*/ 0,
+                                    model.syncedProgress?.currentTokens ?? 0,
+                                    model.syncedProgress?.hasUsedAdForExtraTokenToday ?? true,
                                     legendaryEvent,
                                     model.occurrenceProgress[0].premiumMissionsProgress > 0,
                                     model.occurrenceProgress[1].premiumMissionsProgress > 0,
@@ -270,7 +298,6 @@ export const LeTokenomics: React.FC<Props> = ({
                             renderTeam={x => renderTeam(x, 30)}
                             isBattleVisible={isFirstTokenBattleVisible}
                             onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
-                            onCompleteBattle={() => nextTokenCompleted(firstTokenIndex)}
                             onMaybeBattle={() => nextTokenMaybe(firstTokenIndex)}
                             onStopBattle={() => nextTokenStopped(firstTokenIndex)}
                         />
@@ -317,7 +344,8 @@ export const LeTokenomics: React.FC<Props> = ({
                     progress={model}
                     tokenDisplays={tokenDisplays}
                     tracksProgress={tracksProgress}
-                    setBattleState={setBattleState}
+                    createNewModel={createNewModel}
+                    updateDto={updateDto}
                 />
             </div>
             {/*missedMilestones.length > 0 && (

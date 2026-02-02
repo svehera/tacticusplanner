@@ -179,6 +179,18 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
         return battle.requirementsProgress.every(req => req.completed);
     }, [battle]);
 
+    const handleToggle = () => {
+        if (
+            battle.requirementsProgress.some(
+                req => req.status === RequirementStatus.MaybeClear || req.status === RequirementStatus.StopHere
+            )
+        ) {
+            handleOpenConfirmDialog();
+        } else {
+            handleToggleAll();
+        }
+    };
+
     const handleOpenConfirmDialog = () => {
         setConfirmDialogOpen(true);
     };
@@ -195,7 +207,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
     const handleBattleNumberKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === ' ' || event.key === 'Enter') {
             event.preventDefault();
-            handleOpenConfirmDialog();
+            handleToggle();
         }
     };
 
@@ -215,7 +227,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                     tabIndex={0}
                     aria-label={`Toggle all requirements for battle ${battle.battleIndex + 1}`}
                     className="cursor-pointer min-w-6 md:min-w-8 p-0.5 md:p-0.5 my-0.5 mr-1 md:mr-2 text-xs md:text-base font-bold text-center border-2 border-blue-300/75 size-6 md:size-8 rounded-xs shrink-0"
-                    onClick={handleOpenConfirmDialog}
+                    onClick={handleToggle}
                     onKeyDown={handleBattleNumberKeyDown}>
                     {battle.battleIndex + 1}
                 </span>

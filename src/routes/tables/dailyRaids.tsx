@@ -33,7 +33,6 @@ export const DailyRaids = () => {
     const { userInfo } = useAuth();
     const { syncWithTacticus } = useSyncWithTacticus();
     const {
-        viewPreferences,
         dailyRaids,
         characters: storeCharacters,
         mows: storeMows,
@@ -54,7 +53,7 @@ export const DailyRaids = () => {
         return GoalsService.prepareGoals(goals, units, true);
     }, [goals, units]);
 
-    const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
+    const hasSync = !!userInfo.tacticusApiKey;
 
     const location = useLocation();
     const [searchParams] = useSearchParams();
@@ -139,7 +138,7 @@ export const DailyRaids = () => {
 
     const sync = async () => {
         console.log('Syncing with Tacticus...');
-        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+        await syncWithTacticus();
         // Inline refresh after successful sync
         setUpgrades({ ...inventory.upgrades });
         setUnits([...storeCharacters, ...resolvedMows]);
