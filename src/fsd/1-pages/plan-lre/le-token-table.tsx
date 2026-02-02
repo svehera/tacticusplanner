@@ -8,6 +8,7 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
@@ -113,37 +114,6 @@ export const LeTokenTable: React.FC<Props> = ({
         if (modified) updateDto(leModel);
     };
 
-    const onCompleteBattle = (token: TokenDisplay) => {
-        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
-        setRequirementStatus(token, RequirementStatus.Cleared);
-
-        // Also mark defeatAll, killScore, and highScore as completed
-        let leModel = progress;
-        leModel = createNewModel(
-            leModel,
-            token.track as 'alpha' | 'beta' | 'gamma',
-            token.battleNumber,
-            '_defeatAll',
-            RequirementStatus.Cleared
-        );
-        leModel = createNewModel(
-            leModel,
-            token.track as 'alpha' | 'beta' | 'gamma',
-            token.battleNumber,
-            '_killPoints',
-            RequirementStatus.Cleared
-        );
-        leModel = createNewModel(
-            leModel,
-            token.track as 'alpha' | 'beta' | 'gamma',
-            token.battleNumber,
-            '_highScore',
-            RequirementStatus.Cleared
-        );
-        updateDto(leModel);
-    };
-
     const onMaybeBattle = (token: TokenDisplay) => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
         if (token.battleNumber == null || token.battleNumber < 0) return;
@@ -163,7 +133,7 @@ export const LeTokenTable: React.FC<Props> = ({
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex justify-end items-center bg-gray-200 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700 p-2 rounded-lg border">
+            <div className="flex items-center justify-end p-2 bg-gray-200 border border-gray-300 rounded-lg dark:bg-gray-800/50 dark:border-gray-700">
                 <FormControlLabel
                     control={
                         <Switch
@@ -189,33 +159,33 @@ export const LeTokenTable: React.FC<Props> = ({
             </div>
 
             {isTableView ? (
-                <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-300 dark:border-gray-700/50">
+                <div className="overflow-x-auto border border-gray-300 shadow-2xl rounded-xl dark:border-gray-700/50">
                     <table
                         key="tokensTable"
-                        className="min-w-full table-auto border-separate border-spacing-0 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 text-sm">
+                        className="min-w-full text-sm text-gray-800 bg-white border-separate table-auto border-spacing-0 dark:bg-gray-900 dark:text-gray-200">
                         <thead>
-                            <tr className="bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-100 uppercase sticky top-0">
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Token</th>
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
+                            <tr className="sticky top-0 text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-100">
+                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">Token</th>
+                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">
                                     Milestone
                                     <br />
                                     Achieved
                                 </th>
-                                <th className="px-3 py-3 text-left font-semibold whitespace-nowrap">Track</th>
-                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">Battle</th>
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
+                                <th className="px-3 py-3 font-semibold text-left whitespace-nowrap">Track</th>
+                                <th className="px-3 py-3 font-semibold text-right whitespace-nowrap">Battle</th>
+                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">
                                     Restrictions
                                     <br />
                                     Cleared
                                 </th>
-                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">
+                                <th className="px-3 py-3 font-semibold text-right whitespace-nowrap">
                                     Incremental
                                     <br />
                                     Points
                                 </th>
-                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">Total Points</th>
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Team</th>
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Outcome</th>
+                                <th className="px-3 py-3 font-semibold text-right whitespace-nowrap">Total Points</th>
+                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">Team</th>
+                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">Outcome</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -224,8 +194,8 @@ export const LeTokenTable: React.FC<Props> = ({
                                     <tr
                                         key={index}
                                         className={`${getRowClassName(index)} border-t border-gray-300 dark:border-gray-700/50 hover:bg-gray-300 dark:hover:bg-gray-700 transition duration-150 ease-in-out`}>
-                                        <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
-                                        <td className="px-3 py-2 flex justify-center items-center h-full">
+                                        <td className="px-3 py-2 font-medium text-center">{index + 1}</td>
+                                        <td className="flex items-center justify-center h-full px-3 py-2">
                                             {token.achievedStarMilestone ? (
                                                 <div className="flex flex-col items-center justify-center gap-2">
                                                     <StarsIcon stars={token.stars} />
@@ -236,8 +206,8 @@ export const LeTokenTable: React.FC<Props> = ({
                                             )}
                                         </td>
                                         <td className="px-3 py-2">{token.track}</td>
-                                        <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
-                                        <td className="px-3 py-2 h-full flex items-center justify-center">
+                                        <td className="px-3 py-2 font-mono text-right">{token.battleNumber + 1}</td>
+                                        <td className="flex items-center justify-center h-full px-3 py-2">
                                             {renderRestrictions(
                                                 token.restricts,
                                                 tracksProgress,
@@ -246,43 +216,52 @@ export const LeTokenTable: React.FC<Props> = ({
                                                 25
                                             )}
                                         </td>
-                                        <td className="px-3 py-2 text-right font-mono">{token.incrementalPoints}</td>
-                                        <td className="px-3 py-2 text-right font-bold font-mono text-blue-400">
+                                        <td className="px-3 py-2 font-mono text-right">{token.incrementalPoints}</td>
+                                        <td className="px-3 py-2 font-mono font-bold text-right text-blue-400">
                                             {token.totalPoints}
                                         </td>
                                         <td className="px-3 py-2 text-center">{renderTeam(token.team, 25)}</td>
                                         <td className="px-3 py-2 text-center">
-                                            <div className="flex flex-wrap gap-3 justify-center">
-                                                <div style={{ color: STATUS_COLORS[RequirementStatus.Cleared] }}>
-                                                    <button
-                                                        onClick={() => {
-                                                            onCompleteBattle(token);
-                                                        }}
-                                                        className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                                        title="Mark this token as successful.">
-                                                        {STATUS_LABELS[RequirementStatus.Cleared]}{' '}
-                                                    </button>
-                                                </div>
-                                                <div style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}>
-                                                    <button
-                                                        onClick={() => {
-                                                            onMaybeBattle(token);
-                                                        }}
-                                                        className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                                        title="Potentially will not succeed with this token.">
-                                                        {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
-                                                    </button>
-                                                </div>
-                                                <div style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}>
-                                                    <button
-                                                        onClick={() => {
-                                                            onStopBattle(token);
-                                                        }}
-                                                        className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
-                                                        title="Do not attempt this token.">
-                                                        {STATUS_LABELS[RequirementStatus.StopHere]}
-                                                    </button>
-                                                </div>
+                                            <div className="flex items-center justify-center gap-3">
+                                                <SyncButton
+                                                    showText={false}
+                                                    variant="text"
+                                                    sx={{
+                                                        minWidth: 'auto',
+                                                        padding: 0,
+                                                        minHeight: 'auto',
+                                                        height: 'auto',
+                                                        fontSize: '1.25rem',
+                                                        lineHeight: '1.25rem',
+                                                        alignSelf: 'center',
+                                                        marginTop: '-2px',
+                                                        '& .MuiButton-startIcon': {
+                                                            margin: 0,
+                                                        },
+                                                        '& .MuiSvgIcon-root': {
+                                                            fontSize: '1.25rem',
+                                                            verticalAlign: 'middle',
+                                                        },
+                                                    }}
+                                                />
+                                                <button
+                                                    onClick={() => {
+                                                        onMaybeBattle(token);
+                                                    }}
+                                                    style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}
+                                                    className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                    title="Potentially will not succeed with this token.">
+                                                    {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        onStopBattle(token);
+                                                    }}
+                                                    style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}
+                                                    className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                    title="Do not attempt this token.">
+                                                    {STATUS_LABELS[RequirementStatus.StopHere]}
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -315,7 +294,6 @@ export const LeTokenTable: React.FC<Props> = ({
                                     renderTeam={x => renderTeam(x, 30)}
                                     isBattleVisible={isVisible}
                                     onToggleBattle={onToggleBattle}
-                                    onCompleteBattle={() => onCompleteBattle(token)}
                                     onMaybeBattle={() => onMaybeBattle(token)}
                                     onStopBattle={() => onStopBattle(token)}
                                 />
@@ -329,7 +307,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                     </div>
                                 ) : (
                                     isVisible && (
-                                        <div className="w-full text-center text-gray-600 dark:text-gray-500 border-gray-300 dark:border-gray-700 p-4 border rounded-xl">
+                                        <div className="w-full p-4 text-center text-gray-600 border border-gray-300 dark:text-gray-500 dark:border-gray-700 rounded-xl">
                                             Battle data not available.
                                         </div>
                                     )
