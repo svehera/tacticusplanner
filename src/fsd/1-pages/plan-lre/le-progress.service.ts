@@ -562,8 +562,8 @@ export class LeProgressService {
             syncedProgress: {
                 lastUpdateMillisUtc: Date.now(),
                 hasUsedAdForExtraTokenToday: externalData.currentEvent?.hasUsedAdForExtraTokenToday ?? false,
-                currentTokens: externalData.currentEvent?.tokens.currentTokens ?? 0,
-                maxTokens: externalData.currentEvent?.tokens.maxTokens ?? 12,
+                currentTokens: externalData.currentEvent?.tokens.current ?? 0,
+                maxTokens: externalData.currentEvent?.tokens.max ?? 12,
                 currentClaimedChestIndex: externalData.currentClaimedChestIndex ?? -1,
                 nextTokenMillisUtc: externalData.currentEvent
                     ? Date.now() + externalData.currentEvent?.tokens.nextTokenInSeconds * 1000
