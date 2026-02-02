@@ -1,3 +1,5 @@
+import { mutableCopy } from '@/fsd/5-shared/lib';
+
 import { ILegendaryEventStatic } from '../static-data.model';
 
 import aunshiJson from './1-Aunshi.json';
@@ -13,18 +15,18 @@ import patermineJson from './7-Patermine.json';
 import danteJson from './8-Dante.json';
 import trajannJson from './9-Trajann.json';
 
-export const aunshi: ILegendaryEventStatic = aunshiJson;
-export const dante: ILegendaryEventStatic = danteJson;
-export const kharn: ILegendaryEventStatic = kharnJson;
-export const mephiston: ILegendaryEventStatic = mephistonJson;
-export const patermine: ILegendaryEventStatic = patermineJson;
-export const ragnar: ILegendaryEventStatic = ragnarJson;
-export const shadowsun: ILegendaryEventStatic = shadowsunJson;
-export const trajann: ILegendaryEventStatic = trajannJson;
-export const vitruvius: ILegendaryEventStatic = vitruviusJson;
-export const lucius: ILegendaryEventStatic = luciusJson;
-export const farsight: ILegendaryEventStatic = farsightJson;
-export const uthar: ILegendaryEventStatic = utharJson;
+export const aunshi = mutableCopy(aunshiJson) satisfies ILegendaryEventStatic;
+export const dante = mutableCopy(danteJson) satisfies ILegendaryEventStatic;
+export const kharn = mutableCopy(kharnJson) satisfies ILegendaryEventStatic;
+export const mephiston = mutableCopy(mephistonJson) satisfies ILegendaryEventStatic;
+export const patermine = mutableCopy(patermineJson) satisfies ILegendaryEventStatic;
+export const ragnar = mutableCopy(ragnarJson) satisfies ILegendaryEventStatic;
+export const shadowsun = mutableCopy(shadowsunJson) satisfies ILegendaryEventStatic;
+export const trajann = mutableCopy(trajannJson) satisfies ILegendaryEventStatic;
+export const vitruvius = mutableCopy(vitruviusJson) satisfies ILegendaryEventStatic;
+export const lucius = mutableCopy(luciusJson) satisfies ILegendaryEventStatic;
+export const farsight = mutableCopy(farsightJson) satisfies ILegendaryEventStatic;
+export const uthar = mutableCopy(utharJson) satisfies ILegendaryEventStatic;
 
 export const allLegendaryEvents: ILegendaryEventStatic[] = [
     aunshi,
