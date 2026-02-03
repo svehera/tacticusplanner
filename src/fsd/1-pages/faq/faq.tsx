@@ -6,13 +6,15 @@ import { Link } from 'react-router-dom';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import faqData from 'src/data/faq.json';
 
+import { mutableCopy } from '@/fsd/5-shared/lib';
+
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { FaqCategory } from '@/fsd/3-features/faq/faq-category';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IFaqItem } from '@/fsd/3-features/faq/faq.models';
 
 export const Faq = () => {
-    const data: IFaqItem[] = faqData.items;
+    const data = mutableCopy(faqData.items) satisfies IFaqItem[];
     const categoryKey: keyof IFaqItem = 'category';
     const itemsByCategories = groupBy(data, categoryKey);
     return (
