@@ -397,15 +397,24 @@ export class UpgradesService {
         const totalMaterialsNeeded: Record<string, number> = {};
         const totalMaterialsAcquired: Record<string, number> = {};
 
-        // Certain upgrades will appear in here multiple times because we split them for HSEs. Keep
-        // track of the total materials by look at the required for the first occurrence of each
-        // upgrade material.
+        // Materials can appear multiple times in allUpgrades for two reasons:
+        // 1. HSE splits: same material split into entries with different locations but same
+        //    relatedGoals — these represent the SAME need and should NOT be summed.
+        // 2. Goal priority mode: same material appears for different goals with different
+        //    relatedGoals — these represent SEPARATE needs and SHOULD be summed.
+        // We deduplicate by (relatedGoals, materialId) to handle both cases correctly.
+        const countedGoalMaterial = new Set<string>();
         allUpgrades.forEach(upgrade => {
             if (totalMaterialsNeeded[upgrade.id] === undefined) {
-                totalMaterialsNeeded[upgrade.id] = upgrade.requiredCount;
+                totalMaterialsNeeded[upgrade.id] = 0;
+                totalMaterialsAcquired[upgrade.id] = 0;
             }
-            if (totalMaterialsAcquired[upgrade.id] === undefined) {
-                totalMaterialsAcquired[upgrade.id] = upgrade.acquiredCount;
+            const goalsKey = upgrade.relatedGoals.slice().sort().join(',');
+            const key = `${goalsKey}_${upgrade.id}`;
+            if (!countedGoalMaterial.has(key)) {
+                countedGoalMaterial.add(key);
+                totalMaterialsNeeded[upgrade.id] += Math.max(upgrade.requiredCount - upgrade.acquiredCount, 0);
+                totalMaterialsAcquired[upgrade.id] += upgrade.acquiredCount;
             }
         });
 
