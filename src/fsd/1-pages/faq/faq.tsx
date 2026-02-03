@@ -17,7 +17,7 @@ const faqData = {
     'Data Management': [
         {
             question: 'Is there a way to import my roster from the game?',
-            answer: 'Yes, you can now import your roster data directly from the game by syncing your tacticusplanner,app account directly with the Tacticus API.',
+            answer: 'Yes, you can now import your roster data directly from the game by syncing your tacticusplanner.app account directly with the Tacticus API.',
         },
         {
             question: "I've lost all my roster. Can I restore it?",
