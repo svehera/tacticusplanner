@@ -20,14 +20,18 @@ interface Props {
     mows: IMow2[];
     selectedChars: string[];
     selectedMows: string[];
+    flexIndex?: number;
     searchText: string;
     minRarity: Rarity;
     maxRarity: Rarity;
     minRank: Rank;
     maxRank: Rank;
     factions: Faction[];
-    onSelectedCharsChange: (ids: string[]) => void;
-    onSelectedMowsChange: (ids: string[]) => void;
+    notes: string;
+    onAddChar: (snowprintId: string) => void;
+    onAddMow: (snowprintId: string) => void;
+    onCharClicked: (char: ICharacter2) => void;
+    onMowClicked: (mow: IMow2) => void;
     onSearchTextChange: (text: string) => void;
     onMinRarityChange: (rarity: Rarity) => void;
     onMaxRarityChange: (rarity: Rarity) => void;
@@ -51,6 +55,7 @@ interface Props {
     onTournamentArenaChanged: (tournamentArena: boolean) => void;
     onBattleFieldLevelsChanged: (levels: boolean[]) => void;
     onTeamNameChanged: (teamName: string) => void;
+    onNotesChanged: (notes: string) => void;
     onCancel: () => void;
     onSave: () => void;
 }
@@ -59,14 +64,18 @@ export const AddTeamDialog: React.FC<Props> = ({
     mows,
     selectedChars,
     selectedMows,
+    flexIndex,
     searchText,
     minRarity,
     maxRarity,
     minRank,
     maxRank,
     factions,
-    onSelectedCharsChange,
-    onSelectedMowsChange,
+    notes,
+    onAddChar,
+    onAddMow,
+    onCharClicked,
+    onMowClicked,
     onSearchTextChange,
     onMinRarityChange,
     onMaxRarityChange,
@@ -91,7 +100,8 @@ export const AddTeamDialog: React.FC<Props> = ({
     onGuildRaidChanged,
     onTournamentArenaChanged,
     onBattleFieldLevelsChanged,
-    onTeamNameChanged: onTeamNameChange,
+    onTeamNameChanged,
+    onNotesChanged,
 }: Props) => {
     const [mowWidth, setMowWidth] = useState<number>(250);
     const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -136,14 +146,6 @@ export const AddTeamDialog: React.FC<Props> = ({
             ...(mows.map(m => FactionsService.snowprintFactionToFaction(m.faction)) as Faction[]),
         ])
     ).sort((a, b) => a.localeCompare(b));
-
-    const addChar = (snowprintId: string) => {
-        onSelectedCharsChange([...selectedChars, snowprintId]);
-    };
-
-    const addMow = (snowprintId: string) => {
-        onSelectedMowsChange([...selectedMows, snowprintId]);
-    };
 
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId!))
@@ -204,23 +206,6 @@ export const AddTeamDialog: React.FC<Props> = ({
                     />
 
                     <section className="bg-white dark:bg-[#161b22] p-6 rounded-lg border-2 border-blue-500/30 dark:border-blue-400/20 shadow-inner">
-                        <div className="flex flex-wrap items-center">
-                            <h2 className="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-                                Selected Team
-                            </h2>
-                        </div>
-                        <div className="mt-4">
-                            <TeamFlow
-                                chars={selectedChars.map(x => chars.find(char => (char.snowprintId ?? '') === x)!)}
-                                mows={selectedMows.map(id => mows.find(mow => (mow.snowprintId ?? '') === id)!)}
-                                onCharClicked={char =>
-                                    onSelectedCharsChange(selectedChars.filter(id => id !== (char.snowprintId ?? '')))
-                                }
-                                onMowClicked={mow =>
-                                    onSelectedMowsChange(selectedMows.filter(id => id !== (mow.snowprintId ?? '')))
-                                }
-                            />
-                        </div>
                         <div className="p-6 space-y-6">
                             <div>
                                 <div className="flex justify-between items-end mb-2">
@@ -234,7 +219,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                                 <input
                                     type="text"
                                     value={teamName}
-                                    onChange={e => onTeamNameChange(e.target.value)}
+                                    onChange={e => onTeamNameChanged(e.target.value)}
                                     placeholder="Enter team name..."
                                     className="w-full px-4 py-2 bg-gray-50 dark:bg-[#0f172a] border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                                 />
@@ -321,6 +306,31 @@ export const AddTeamDialog: React.FC<Props> = ({
                                 )}
                             </div>
                         </div>
+                        <div>
+                            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">
+                                Notes
+                            </label>
+                            <textarea
+                                placeholder="Add notes..."
+                                value={notes}
+                                onChange={e => onNotesChanged(e.target.value)}
+                                className="w-full min-h-[80px] px-4 py-2 bg-gray-50 dark:bg-[#0f172a] border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                            />
+                        </div>
+                        <div className="flex flex-wrap items-center">
+                            <h2 className="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
+                                Selected Team
+                            </h2>
+                        </div>
+                        <div className="mt-4">
+                            <TeamFlow
+                                chars={selectedChars.map(x => chars.find(char => (char.snowprintId ?? '') === x)!)}
+                                mows={selectedMows.map(id => mows.find(mow => (mow.snowprintId ?? '') === id)!)}
+                                flexIndex={flexIndex}
+                                onCharClicked={onCharClicked}
+                                onMowClicked={onMowClicked}
+                            />
+                        </div>
 
                         <div className="flex items-center justify-end gap-3 p-4 bg-gray-50 dark:bg-[#1e293b] border-t border-gray-200 dark:border-slate-700">
                             <button
@@ -347,7 +357,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                         }`}
                         style={{ '--mow-width': `${mowWidth}px` } as React.CSSProperties}>
                         <div className="w-full xl:w-[var(--mow-width)] flex-shrink-0 bg-white dark:bg-[#161b22] p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-                            <MowGrid mows={filteredMows} onMowSelect={addMow} showHeader={true} />
+                            <MowGrid mows={filteredMows} onMowSelect={onAddMow} showHeader={true} />
                         </div>
 
                         <div
@@ -377,7 +387,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                         </div>
 
                         <div className="flex-1 min-w-0 bg-white dark:bg-[#161b22] p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-                            <CharacterGrid characters={filteredChars} onCharacterSelect={addChar} showHeader={true} />
+                            <CharacterGrid characters={filteredChars} onCharacterSelect={onAddChar} showHeader={true} />
                         </div>
                     </div>
                 </div>
