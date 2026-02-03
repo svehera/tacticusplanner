@@ -221,7 +221,7 @@ export const LeTokenomics: React.FC<Props> = ({
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex flex-col items-center w-full gap-y-4">
                         {/* Token status and sync section */}
-                        <div className="flex items-center justify-center w-full min-h-[40px]">
+                        <div className="flex items-center justify-center w-full min-h-10">
                             <div className="flex text-sm text-gray-600 gap-x-8 dark:text-gray-400">
                                 <div className="flex items-center gap-2">
                                     <SyncButton showText={true} />
@@ -243,12 +243,19 @@ export const LeTokenomics: React.FC<Props> = ({
 
                                 <div className="flex items-center gap-2">
                                     <AccessibleTooltip
-                                        title={`${totalFreeTokensRemainingInIteration - (model.syncedProgress?.currentTokens ?? 0)} free tokens remaining...`}>
+                                        title={`${Math.max(0, totalFreeTokensRemainingInIteration - (model.syncedProgress?.currentTokens ?? 0))} free tokens remaining...`}>
                                         <div className="flex items-center gap-2">
                                             <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />
-                                            {totalFreeTokensRemainingInIteration -
-                                                (model.syncedProgress?.currentTokens ?? 0)}{' '}
-                                            / {totalFreeTokensRemaining - (model.syncedProgress?.currentTokens ?? 0)}
+                                            {Math.max(
+                                                0,
+                                                totalFreeTokensRemainingInIteration -
+                                                    (model.syncedProgress?.currentTokens ?? 0)
+                                            )}{' '}
+                                            /{' '}
+                                            {Math.max(
+                                                0,
+                                                totalFreeTokensRemaining - (model.syncedProgress?.currentTokens ?? 0)
+                                            )}
                                         </div>
                                     </AccessibleTooltip>
                                 </div>
