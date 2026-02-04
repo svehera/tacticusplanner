@@ -1,3 +1,5 @@
+import { mutableCopy } from '@/fsd/5-shared/lib';
+
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import battleData from './newLeBattleData.json';
@@ -37,7 +39,7 @@ export interface ILeBattles {
 }
 
 export class LeBattleService {
-    public static readonly battles: ILeBattles[] = battleData.legendaryEvents;
+    public static readonly battles = mutableCopy(battleData.legendaryEvents) satisfies ILeBattles[];
 
     /**
      * @returns the battle set for the given character released via legendary events. SP tends to

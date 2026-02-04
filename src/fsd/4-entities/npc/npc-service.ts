@@ -1,8 +1,10 @@
-import { FactionsService } from '@/fsd/5-shared/lib';
+import { createSafeGetter, FactionsService, mutableCopy } from '@/fsd/5-shared/lib';
 import { Alliance, DamageType } from '@/fsd/5-shared/model';
 
 import { npcData } from './data';
 import { INpcData, INpcRawStats, INpcStats } from './model';
+
+const safeGet = createSafeGetter<typeof npcData>();
 
 export class NpcService {
     static readonly npcDataFull: INpcData[] = this.convertNpcData();
@@ -16,16 +18,16 @@ export class NpcService {
                 alliance: npc.Alliance ? (npc.Alliance as Alliance) : undefined,
                 meleeDamage: npc['Melee Damage'],
                 meleeHits: npc['Melee Hits'],
-                rangeDamage: npc['Ranged Damage'],
-                rangeHits: npc['Ranged Hits'],
-                rangeDistance: npc.Distance,
+                rangeDamage: safeGet(npc, 'Ranged Damage'),
+                rangeHits: safeGet(npc, 'Ranged Hits'),
+                rangeDistance: safeGet(npc, 'Distance'),
                 movement: npc.Movement,
-                traits: npc.Traits,
+                traits: mutableCopy(npc.Traits),
                 icon: npc.Icon,
-                activeAbilities: npc['Active Abilities'] ?? [],
-                passiveAbilities: npc['Passive Abilities'] ?? [],
-                activeAbilityDamage: npc['Active Ability Damage'],
-                passiveAbilityDamage: npc['Passive Ability Damage'],
+                activeAbilities: mutableCopy(safeGet(npc, 'Active Abilities') ?? []),
+                passiveAbilities: mutableCopy(safeGet(npc, 'Passive Abilities') ?? []),
+                activeAbilityDamage: mutableCopy(safeGet(npc, 'Active Ability Damage') ?? []),
+                passiveAbilityDamage: mutableCopy(safeGet(npc, 'Passive Ability Damage') ?? []),
                 stats: npc.Stats.map(
                     (stat: INpcRawStats) =>
                         ({

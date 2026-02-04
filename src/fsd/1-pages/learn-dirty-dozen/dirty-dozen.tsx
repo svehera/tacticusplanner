@@ -6,13 +6,15 @@ import { Link } from 'react-router-dom';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
+import { mutableCopy } from '@/fsd/5-shared/lib';
+
 import { DirtyDozenTable } from './dirty-dozen-table';
 import dirtyDozen from './dirty-dozen.data.json';
 import { IDirtyDozen } from './dirty-dozen.models';
 
 export const DirtyDozen = () => {
     const { characters } = useContext(StoreContext);
-    const dirtyDozenVersions: IDirtyDozen[] = dirtyDozen;
+    const dirtyDozenVersions = mutableCopy(dirtyDozen) satisfies IDirtyDozen[];
     const [dirtyDozenVersion, setDirtyDozenVersion] = useState<IDirtyDozen>(dirtyDozenVersions[0]);
 
     return (
