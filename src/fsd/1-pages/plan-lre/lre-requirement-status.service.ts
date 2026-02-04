@@ -19,7 +19,7 @@ export class LreRequirementStatusService {
      * @returns The requirement status, or NotCleared if not found
      */
     public static getRequirementStatus(
-        tracksProgress: ILreTrackProgress[],
+        tracksProgress: readonly ILreTrackProgress[],
         track: LreTrackId,
         battleNumber: number,
         reqId: string
@@ -99,7 +99,7 @@ export class LreRequirementStatusService {
      * @param requirements - Array of requirements to search
      * @returns The index of the first restriction, or -1 if all requirements are special
      */
-    public static getFirstRestrictionIndex(requirements: Array<{ id: string }>): number {
+    public static getFirstRestrictionIndex(requirements: readonly { id: string }[]): number {
         return requirements.findIndex(req => !this.isSpecialRequirement(req.id));
     }
 

@@ -1,3 +1,5 @@
+import { createSafeGetter } from '@/fsd/5-shared/lib';
+
 import { allLegendaryEvents } from './data';
 import { ILegendaryEventStatic } from './static-data.model';
 
@@ -8,6 +10,8 @@ type UnfinishedScheduledEvent = Required<Pick<ILegendaryEventStatic, 'nextEventD
 function isUnfinishedScheduledEvent(event: ILegendaryEventStatic): event is UnfinishedScheduledEvent {
     return !event.finished && !!event.nextEventDateUtc;
 }
+
+const safeGet = createSafeGetter<typeof allLegendaryEvents>();
 
 export class LegendaryEventService {
     /**
@@ -24,7 +28,7 @@ export class LegendaryEventService {
             // Find the most recent past event to use as a starting point.
             const now = Date.now();
             const pastEvents = allLegendaryEvents
-                .map(event => ({ event, startDate: Date.parse(event.nextEventDateUtc ?? '') }))
+                .map(event => ({ event, startDate: Date.parse(safeGet(event, 'nextEventDateUtc') ?? '') }))
                 .filter(({ startDate }) => Number.isFinite(startDate) && startDate < now)
                 .sort((a, b) => b.startDate - a.startDate);
             if (pastEvents.length !== 0) {

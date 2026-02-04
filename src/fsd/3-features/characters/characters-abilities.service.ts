@@ -5,6 +5,7 @@ import abilitiesLvlUpJson from 'src/data/characters-lvl-up-abilities.json';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import xpData from 'src/data/xp.json';
 
+import { mutableCopy } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance } from '@/fsd/5-shared/model';
 
 import {
@@ -16,14 +17,14 @@ import {
 } from '@/fsd/3-features/characters/characters.models';
 
 export class CharactersAbilitiesService {
-    private static abilitiesLvlUpRaw: ICharacterAbilityLevelRaw[] = abilitiesLvlUpJson;
+    private static abilitiesLvlUpRaw = mutableCopy(abilitiesLvlUpJson) satisfies ICharacterAbilityLevelRaw[];
     private static abilitiesLvlUp: ICharacterAbilityLevel[] = this.abilitiesLvlUpRaw.map(x => ({
         ...x,
         rarity: this.getRarityFromLevel(x.lvl + 1),
     }));
     static readonly legendaryTomeXp = 12500 as const;
     static readonly legendaryTomeApplyCost = 500 as const;
-    static xpLevelThresholds: IXpLevel[] = xpData.xpLevelThresholds;
+    static xpLevelThresholds = mutableCopy(xpData.xpLevelThresholds) satisfies IXpLevel[];
 
     public static getMaximumAbilityLevel(): number {
         return this.abilitiesLvlUpRaw.length + 1;
