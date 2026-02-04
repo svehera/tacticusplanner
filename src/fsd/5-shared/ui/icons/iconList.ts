@@ -97,6 +97,8 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     salvageRunToken: snowprintIcons.salvageRunToken,
     arenaToken: snowprintIcons.arenaToken,
     survivalToken: snowprintIcons.survivalToken,
+    guildRaidToken: snowprintIcons.guildRaidToken,
+    bombToken: snowprintIcons.bombToken,
     coin: snowprintIcons.coin,
     reqOrder: snowprintIcons.reqOrder,
     blessedReqOrder: snowprintIcons.blessedReqOrder,
