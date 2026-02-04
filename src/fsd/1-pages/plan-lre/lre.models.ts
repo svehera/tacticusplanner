@@ -26,13 +26,13 @@ export interface ILreProgressModel {
     notes: string;
     occurrenceProgress: ILreOccurrenceProgress[];
     tracksProgress: ILreTrackProgress[];
-    regularMissions: string[];
-    premiumMissions: string[];
+    regularMissions: readonly string[];
+    premiumMissions: readonly string[];
     // Progress from the sync, which overrides anything specified by the user in the planner.
     syncedProgress?: ILeProgress;
 
-    pointsMilestones: IPointsMilestone[];
-    chestsMilestones: IChestMilestone[];
+    pointsMilestones: readonly IPointsMilestone[];
+    chestsMilestones: readonly IChestMilestone[];
     progression: ILEProgression;
     shardsPerChest: number;
 }
@@ -78,8 +78,8 @@ export interface ILreTrackProgress {
     trackId: LreTrackId;
     trackName: string;
     totalPoints: number;
-    battlesPoints: number[];
-    requirements: ILreRequirements[];
+    battlesPoints: readonly number[];
+    requirements: readonly ILreRequirements[];
     battles: ILreBattleProgress[];
 }
 
