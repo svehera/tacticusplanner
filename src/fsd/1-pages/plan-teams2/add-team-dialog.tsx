@@ -324,8 +324,16 @@ export const AddTeamDialog: React.FC<Props> = ({
                         </div>
                         <div className="mt-4">
                             <TeamFlow
-                                chars={selectedChars.map(x => chars.find(char => (char.snowprintId ?? '') === x)!)}
-                                mows={selectedMows.map(id => mows.find(mow => (mow.snowprintId ?? '') === id)!)}
+                                chars={
+                                    selectedChars
+                                        .map(x => chars.find(char => (char.snowprintId ?? '') === x))
+                                        .filter(x => x !== undefined) ?? []
+                                }
+                                mows={
+                                    selectedMows
+                                        .map(id => mows.find(mow => (mow.snowprintId ?? '') === id))
+                                        .filter(x => x !== undefined) ?? []
+                                }
                                 flexIndex={flexIndex}
                                 onCharClicked={onCharClicked}
                                 onMowClicked={onMowClicked}
