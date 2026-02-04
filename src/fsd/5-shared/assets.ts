@@ -48,6 +48,7 @@ import mythicEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame
 import rareEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_rare.png';
 import relicEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_relic.png';
 import uncommonEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_uncommon.png';
+import bombToken from '@/assets/images/snowprint_assets/misc/ui_icon_bomb.png';
 import shardIcon from '@/assets/images/snowprint_assets/misc/ui_icon_character_shard_empty.png';
 import mythicShardIcon from '@/assets/images/snowprint_assets/misc/ui_icon_character_shard_mythic_empty.png';
 import checkmark from '@/assets/images/snowprint_assets/misc/ui_icon_checkmark_default.png';
@@ -58,6 +59,7 @@ import defeatWaves from '@/assets/images/snowprint_assets/misc/ui_icon_resource_
 import leShard from '@/assets/images/snowprint_assets/misc/ui_icon_resource_le_shards.png';
 import reqOrder from '@/assets/images/snowprint_assets/misc/ui_icon_resource_req_order.png';
 import arenaToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_arena.png';
+import guildRaidToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_battle_guildboss.png';
 import legendaryEventToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_legendary_events.png';
 import onslaughtToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_onslaught.png';
 import salvageRunToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_salvage_run.png';
@@ -135,6 +137,14 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     survivalToken: {
         file: survivalToken,
         label: 'Survival Token',
+    },
+    guildRaidToken: {
+        file: guildRaidToken,
+        label: 'Guild Raid Token',
+    },
+    bombToken: {
+        file: bombToken,
+        label: 'Bomb Token',
     },
     blueStar: {
         file: blueStar,

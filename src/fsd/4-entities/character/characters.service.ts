@@ -30,7 +30,7 @@ export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
 
     static readonly lreCharacters: ICharacterData[] = LegendaryEventService.getLegendaryEvents()
-        .map((lre: ILegendaryEventStatic) => {
+        .map(lre => {
             const character = this.charactersData.find(unit => unit.snowprintId === lre.unitSnowprintId);
             if (character) return { ...character, lre: this.toILreCharacterStaticData(lre) };
             return character;

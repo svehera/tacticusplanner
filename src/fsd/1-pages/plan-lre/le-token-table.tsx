@@ -27,8 +27,8 @@ interface Props {
     battles: ILeBattles | undefined;
     legendaryEvent: ILegendaryEvent;
     progress: ILreProgressModel;
-    tokenDisplays: TokenDisplay[];
-    tracksProgress: ILreTrackProgress[];
+    tokenDisplays: readonly TokenDisplay[];
+    tracksProgress: readonly ILreTrackProgress[];
     createNewModel: (
         model: ILreProgressModel,
         trackId: 'alpha' | 'beta' | 'gamma',

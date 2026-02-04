@@ -54,10 +54,12 @@ export const ManageTeams = () => {
     const [maxRank, setMaxRank] = useState<Rank>(Rank.Adamantine3);
     const [minRarity, setMinRarity] = useState<Rarity>(Rarity.Common);
     const [maxRarity, setMaxRarity] = useState<Rarity>(Rarity.Mythic);
-    const [factions, onFactionsChange] = useState<FactionId[]>([]);
+    const [factions, setFactions] = useState<FactionId[]>([]);
     const [searchText, setSearchText] = useState<string>('');
-    const [selectedChars, onSelectedCharsChange] = useState<string[]>([]);
-    const [selectedMows, onSelectedMowsChange] = useState<string[]>([]);
+    const [selectedChars, setSelectedChars] = useState<string[]>([]);
+    const [selectedMows, setSelectedMows] = useState<string[]>([]);
+    const [flexIndex, setFlexIndex] = useState<number | undefined>(undefined);
+    const [notes, setNotes] = useState<string>('');
 
     // State for the add/edit dialog.
     const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
@@ -108,6 +110,12 @@ export const ManageTeams = () => {
             setTournamentArenaDisallowedMessage(undefined);
         }
 
+        if (notes.trim().length > 300) {
+            setSaveDisallowedMessage('Notes cannot exceed 300 characters.');
+            setSaveAllowed(false);
+            return;
+        }
+
         if (teamName.trim().length < 3) {
             setSaveDisallowedMessage('Team name must be at least 3 characters long.');
             setSaveAllowed(teamName.trim().length >= 3);
@@ -154,6 +162,7 @@ export const ManageTeams = () => {
         guildRaidSelected,
         tournamentArenaSelected,
         battleFieldLevels,
+        notes,
         selectedChars,
         selectedMows,
     ]);
@@ -163,18 +172,21 @@ export const ManageTeams = () => {
         setSaveTeamMode(SaveTeamMode.MODE_ADD);
         // Reset dialog state
         setTeamName('');
-        onSelectedCharsChange([]);
-        onSelectedMowsChange([]);
+        setNotes('');
+        setFlexIndex(undefined);
+        setSelectedChars([]);
+        setSelectedMows([]);
     };
 
     const onEdit = (team: ITeam2) => {
         setEditingTeam(team);
         setAddTeamDialogOpen(true);
         setSaveTeamMode(SaveTeamMode.MODE_EDIT);
-        // Load dialog state
+        setFlexIndex(team.flexIndex);
+        setNotes(team.notes || '');
         setTeamName(team.name);
-        onSelectedCharsChange(team.chars);
-        onSelectedMowsChange(team.mows || []);
+        setSelectedChars(team.chars);
+        setSelectedMows(team.mows || []);
         setWarOffenseSelected(!!team.warOffense);
         setWarDefenseSelected(!!team.warDefense);
         setGuildRaidSelected(!!team.raid);
@@ -198,6 +210,8 @@ export const ManageTeams = () => {
             team.raid = guildRaidSelected ? true : undefined;
             team.ta = tournamentArenaSelected ? true : undefined;
             team.bfs = team.warOffense || team.warDefense ? battleFieldLevels : undefined;
+            team.notes = notes;
+            team.flexIndex = flexIndex;
             const curTeams = [...teams];
             curTeams.forEach(t => {
                 if (t.name !== editingTeam.name) return;
@@ -208,19 +222,51 @@ export const ManageTeams = () => {
             const newTeam: ITeam2 = {
                 name: teamName.trim(),
                 chars: selectedChars,
+                flexIndex: flexIndex,
                 mows: selectedMows,
                 warOffense: warOffenseSelected ? true : undefined,
                 warDefense: warDefenseSelected ? true : undefined,
                 raid: guildRaidSelected ? true : undefined,
                 ta: tournamentArenaSelected ? true : undefined,
+                notes: notes,
                 bfs: warOffenseSelected || warDefenseSelected ? battleFieldLevels : undefined,
             };
             dispatch.teams2({ type: 'Set', value: [...teams, newTeam] });
         }
         setTeamName('');
-        onSelectedCharsChange([]);
-        onSelectedMowsChange([]);
+        setSelectedChars([]);
+        setSelectedMows([]);
         setAddTeamDialogOpen(false);
+    };
+
+    const onAddChar = (snowprintId: string) => {
+        const flex = flexIndex ?? selectedChars.length;
+        setSelectedChars([...selectedChars.slice(0, flex), snowprintId, ...selectedChars.slice(flex)]);
+        setFlexIndex(flexIndex !== undefined ? flexIndex + 1 : undefined);
+    };
+
+    const onAddMow = (snowprintId: string) => {
+        setSelectedMows([...selectedMows, snowprintId]);
+    };
+
+    const onCharClicked = (char: ICharacter2) => {
+        const index = selectedChars.findIndex(id => id === (char.snowprintId ?? ''));
+        if (index === -1) {
+            console.error('Clicked character that is not in selectedChars: ', char, selectedChars, index);
+            return;
+        }
+        let flex = flexIndex ?? selectedChars.length;
+        let newChars: string[] = [...selectedChars.slice(0, index), ...selectedChars.slice(index + 1)];
+        if (index < flex) {
+            newChars = [...newChars, char.snowprintId!];
+            --flex;
+        }
+        setSelectedChars(newChars);
+        setFlexIndex(flex >= newChars.length ? undefined : flex);
+    };
+
+    const onMowClicked = (mow: IMow2) => {
+        setSelectedMows(selectedMows.filter(id => id !== (mow.snowprintId ?? '')));
     };
 
     if (addTeamDialogOpen) {
@@ -230,20 +276,24 @@ export const ManageTeams = () => {
                 mows={resolvedMows}
                 selectedChars={selectedChars}
                 selectedMows={selectedMows}
+                flexIndex={flexIndex}
                 searchText={searchText}
                 minRarity={minRarity}
                 maxRarity={maxRarity}
                 minRank={minRank}
                 maxRank={maxRank}
                 factions={factions}
-                onSelectedCharsChange={onSelectedCharsChange}
-                onSelectedMowsChange={onSelectedMowsChange}
+                notes={notes}
+                onAddChar={onAddChar}
+                onAddMow={onAddMow}
+                onCharClicked={onCharClicked}
+                onMowClicked={onMowClicked}
                 onSearchTextChange={setSearchText}
                 onMinRarityChange={setMinRarity}
                 onMaxRarityChange={setMaxRarity}
                 onMinRankChange={setMinRank}
                 onMaxRankChange={setMaxRank}
-                onFactionsChange={onFactionsChange}
+                onFactionsChange={setFactions}
                 saveAllowed={saveAllowed}
                 saveDisallowedMessage={saveDisallowedMessage}
                 warDisallowedMessage={warDisallowedMessage}
@@ -260,6 +310,7 @@ export const ManageTeams = () => {
                 onTournamentArenaChanged={setTournamentArenaSelected}
                 onTeamNameChanged={setTeamName}
                 onBattleFieldLevelsChanged={setBattleFieldLevels}
+                onNotesChanged={setNotes}
                 onCancel={() => setAddTeamDialogOpen(false)}
                 onSave={onSave}
             />
@@ -359,11 +410,31 @@ export const ManageTeams = () => {
                             </div>
                         )}
                     </div>
-
+                    {team.notes && team.notes.trim().length > 0 && (
+                        <div className="mb-4">
+                            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">Notes</span>
+                            <div className="mt-2 p-3 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                                <p className="text-sm text-slate-700 dark:text-slate-300 whitespace-pre-wrap">
+                                    {team.notes}
+                                </p>
+                            </div>
+                        </div>
+                    )}
                     <div className="bg-slate-50/50 dark:bg-slate-900/50 rounded-lg p-3">
                         <TeamFlow
-                            chars={resolvedChars.filter(x => team.chars.includes(x.snowprintId!))}
-                            mows={resolvedMows.filter(x => (team.mows ?? []).includes(x.snowprintId!))}
+                            chars={
+                                team.chars
+                                    .filter(id => resolvedChars.some(x => x.snowprintId === id))
+                                    .map(id => resolvedChars.find(x => x.snowprintId === id)!)
+                                    .filter(x => x !== undefined) ?? []
+                            }
+                            mows={
+                                team.mows
+                                    ?.filter(id => resolvedMows.some(x => x.snowprintId === id))
+                                    .map(id => resolvedMows.find(x => x.snowprintId === id)!)
+                                    .filter(x => x !== undefined) ?? []
+                            }
+                            flexIndex={team.flexIndex}
                             onCharClicked={() => {}}
                             onMowClicked={() => {}}
                         />
