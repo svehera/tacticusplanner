@@ -16,7 +16,7 @@ export const UpgradesRaritySelect: React.FC<Props> = ({ upgradesRarity, upgrades
                 placeholder="Upgrades rarity"
                 selectedValues={upgradesRarity.map(x => RarityMapper.rarityToRarityString(x))}
                 values={Object.values(RarityString)}
-                selectionChanges={values => upgradesRarityChange(values.map(x => +Rarity[x as unknown as number]))}
+                selectionChanges={values => upgradesRarityChange(values.map(x => RarityMapper.stringToNumber[x]))}
             />
 
             <AccessibleTooltip
