@@ -1,6 +1,5 @@
 ﻿import React, { useEffect, useMemo, useState } from 'react';
 
-import { Faction } from '@/fsd/5-shared/model';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
@@ -23,15 +22,11 @@ export const GuildRaidsModes: React.FC<Props> = ({ updateSelection, units, filte
         updateSelection(values);
     };
 
-    const bannedFaction: Faction = useMemo(() => grEncounterToFaction[grEncounter], [grEncounter]);
-
-    const getFaction = (unit: IUnit): Faction => {
-        return unit.faction as Faction;
-    };
+    const bannedFaction = useMemo(() => grEncounterToFaction[grEncounter], [grEncounter]);
 
     const allowedUnits = useMemo(() => {
         if (bannedFaction) {
-            return units.filter(x => getFaction(x) !== bannedFaction);
+            return units.filter(x => x.faction !== bannedFaction);
         }
         return units;
     }, [bannedFaction]);

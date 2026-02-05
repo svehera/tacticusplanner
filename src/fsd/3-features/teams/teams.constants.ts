@@ -1,7 +1,7 @@
 ﻿// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMenuOption } from '@/models/menu-option';
 
-import { Faction } from '@/fsd/5-shared/model';
+import { FactionId } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GameMode, GuildRaidBoss, GwMode, TaMode } from '@/fsd/3-features/teams/teams.enums';
@@ -245,35 +245,35 @@ export const lreSections: IMenuOption[] = [
 
 export const allModes = [...guildRaidBosses, ...guildRaidPrimes, ...taSubModes, ...gwSubModes];
 
-export const grEncounterToFaction: Record<string, Faction> = {
-    [GuildRaidBoss.avatar]: Faction.Aeldari,
-    [GuildRaidBoss.avatar + leftSidePrimeSuffix]: Faction.Aeldari,
-    [GuildRaidBoss.avatar + rightSidePrimeSuffix]: Faction.Aeldari,
-    [GuildRaidBoss.cawl]: Faction.AdeptusMechanicus,
-    [GuildRaidBoss.cawl + leftSidePrimeSuffix]: Faction.AdeptusMechanicus,
-    [GuildRaidBoss.cawl + rightSidePrimeSuffix]: Faction.AdeptusMechanicus,
-    [GuildRaidBoss.ghazghkull]: Faction.Orks,
-    [GuildRaidBoss.ghazghkull + leftSidePrimeSuffix]: Faction.Orks,
-    [GuildRaidBoss.ghazghkull + rightSidePrimeSuffix]: Faction.Orks,
-    [GuildRaidBoss.hiveTyrant]: Faction.Tyranids,
-    [GuildRaidBoss.hiveTyrant + leftSidePrimeSuffix]: Faction.Tyranids,
-    [GuildRaidBoss.hiveTyrant + rightSidePrimeSuffix]: Faction.Tyranids,
-    [GuildRaidBoss.magnus]: Faction.Thousand_Sons,
-    [GuildRaidBoss.magnus + leftSidePrimeSuffix]: Faction.Thousand_Sons,
-    [GuildRaidBoss.magnus + rightSidePrimeSuffix]: Faction.Thousand_Sons,
-    [GuildRaidBoss.mortarion]: Faction.Death_Guard,
-    [GuildRaidBoss.mortarion + leftSidePrimeSuffix]: Faction.Death_Guard,
-    [GuildRaidBoss.mortarion + rightSidePrimeSuffix]: Faction.Death_Guard,
-    [GuildRaidBoss.rogalDorn]: Faction.Astra_militarum,
-    [GuildRaidBoss.rogalDorn + leftSidePrimeSuffix]: Faction.Astra_militarum,
-    [GuildRaidBoss.rogalDorn + rightSidePrimeSuffix]: Faction.Astra_militarum,
-    [GuildRaidBoss.screamerKiller]: Faction.Tyranids,
-    [GuildRaidBoss.screamerKiller + leftSidePrimeSuffix]: Faction.Tyranids,
-    [GuildRaidBoss.screamerKiller + rightSidePrimeSuffix]: Faction.Tyranids,
-    [GuildRaidBoss.szarekh]: Faction.Necrons,
-    [GuildRaidBoss.szarekh + leftSidePrimeSuffix]: Faction.Necrons,
-    [GuildRaidBoss.szarekh + rightSidePrimeSuffix]: Faction.Necrons,
-    [GuildRaidBoss.tervigon]: Faction.Tyranids,
-    [GuildRaidBoss.tervigon + leftSidePrimeSuffix]: Faction.Tyranids,
-    [GuildRaidBoss.tervigon + rightSidePrimeSuffix]: Faction.Tyranids,
+export const grEncounterToFaction: Record<string, FactionId> = {
+    [GuildRaidBoss.avatar]: 'Aeldari',
+    [GuildRaidBoss.avatar + leftSidePrimeSuffix]: 'Aeldari',
+    [GuildRaidBoss.avatar + rightSidePrimeSuffix]: 'Aeldari',
+    [GuildRaidBoss.cawl]: 'AdeptusMechanicus',
+    [GuildRaidBoss.cawl + leftSidePrimeSuffix]: 'AdeptusMechanicus',
+    [GuildRaidBoss.cawl + rightSidePrimeSuffix]: 'AdeptusMechanicus',
+    [GuildRaidBoss.ghazghkull]: 'Orks',
+    [GuildRaidBoss.ghazghkull + leftSidePrimeSuffix]: 'Orks',
+    [GuildRaidBoss.ghazghkull + rightSidePrimeSuffix]: 'Orks',
+    [GuildRaidBoss.hiveTyrant]: 'Tyranids',
+    [GuildRaidBoss.hiveTyrant + leftSidePrimeSuffix]: 'Tyranids',
+    [GuildRaidBoss.hiveTyrant + rightSidePrimeSuffix]: 'Tyranids',
+    [GuildRaidBoss.magnus]: 'ThousandSons',
+    [GuildRaidBoss.magnus + leftSidePrimeSuffix]: 'ThousandSons',
+    [GuildRaidBoss.magnus + rightSidePrimeSuffix]: 'ThousandSons',
+    [GuildRaidBoss.mortarion]: 'DeathGuard',
+    [GuildRaidBoss.mortarion + leftSidePrimeSuffix]: 'DeathGuard',
+    [GuildRaidBoss.mortarion + rightSidePrimeSuffix]: 'DeathGuard',
+    [GuildRaidBoss.rogalDorn]: 'AstraMilitarum',
+    [GuildRaidBoss.rogalDorn + leftSidePrimeSuffix]: 'AstraMilitarum',
+    [GuildRaidBoss.rogalDorn + rightSidePrimeSuffix]: 'AstraMilitarum',
+    [GuildRaidBoss.screamerKiller]: 'Tyranids',
+    [GuildRaidBoss.screamerKiller + leftSidePrimeSuffix]: 'Tyranids',
+    [GuildRaidBoss.screamerKiller + rightSidePrimeSuffix]: 'Tyranids',
+    [GuildRaidBoss.szarekh]: 'Necrons',
+    [GuildRaidBoss.szarekh + leftSidePrimeSuffix]: 'Necrons',
+    [GuildRaidBoss.szarekh + rightSidePrimeSuffix]: 'Necrons',
+    [GuildRaidBoss.tervigon]: 'Tyranids',
+    [GuildRaidBoss.tervigon + leftSidePrimeSuffix]: 'Tyranids',
+    [GuildRaidBoss.tervigon + rightSidePrimeSuffix]: 'Tyranids',
 };

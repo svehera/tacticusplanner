@@ -50,7 +50,7 @@ export const FactionsTile = ({
                 className="text-white mb-0 mt-[5px] border-t-2 border-solid border-[gold] font-medium flex items-center justify-between"
                 style={{ backgroundColor: faction.color }}>
                 <div className="flex items-center gap-[5px]">
-                    <FactionImage faction={faction.name} />
+                    <FactionImage faction={faction.snowprintId} />
                     <span>{faction.name.toUpperCase()}</span>
                 </div>
                 <Conditional condition={showBsValue}>

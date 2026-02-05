@@ -1,4 +1,4 @@
-import { Alliance, Rarity, Faction } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, FactionId } from '@/fsd/5-shared/model';
 
 import { Campaign, CampaignDifficulty, CampaignGroupType, CampaignReleaseType, CampaignType } from './enums';
 
@@ -17,10 +17,10 @@ export interface ICampaignBattleComposed {
     rarityEnum: Rarity;
     rewards: IRewards;
     slots?: number;
-    enemiesFactions: string[];
+    enemiesFactions: FactionId[];
     enemiesAlliances: Alliance[];
     enemyPower: number;
-    alliesFactions: string[];
+    alliesFactions: FactionId[];
     alliesAlliance: Alliance;
     enemiesTotal: number;
     enemiesTypes: string[];
@@ -84,7 +84,7 @@ export interface ICampaignBattle {
     rewards: IRewards;
     slots?: number;
     enemiesAlliances?: string[];
-    enemiesFactions?: string[];
+    enemiesFactions?: FactionId[];
     enemiesTotal?: number;
     enemiesTypes?: string[];
     enemyPower: number;
@@ -138,7 +138,7 @@ export interface ICampaignModel {
     /**
      * The faction required to beat campaign.
      */
-    faction: Faction;
+    faction: FactionId;
 
     /**
      * The characters required to beat campaign.
@@ -165,9 +165,9 @@ export type ICampaignsProgress = Record<Campaign, number>;
 
 export interface ICampaignsFilters {
     enemiesAlliance: Alliance[];
-    enemiesFactions: Faction[];
+    enemiesFactions: FactionId[];
     alliesAlliance: Alliance[];
-    alliesFactions: Faction[];
+    alliesFactions: FactionId[];
     campaignTypes: CampaignType[];
     upgradesRarity: Rarity[];
     slotsCount?: number[];
