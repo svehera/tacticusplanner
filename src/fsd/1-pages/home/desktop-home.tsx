@@ -5,11 +5,8 @@ import { isMobile } from 'react-device-detect';
 import Zoom from 'react-medium-image-zoom';
 import { useNavigate } from 'react-router-dom';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { PersonalGoalType } from 'src/models/enums';
-// eslint-disable-next-line import-x/no-internal-modules
 import { menuItemById } from 'src/models/menu-items';
-// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { useAuth } from '@/fsd/5-shared/model';
@@ -21,6 +18,7 @@ import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from
 
 import { Thanks } from '@/fsd/3-features/thank-you';
 
+import TokenAvailability from './gameModeTokens';
 import { useBmcWidget } from './useBmcWidget';
 
 function formatMonthAndDay(date: Date): string {
@@ -136,6 +134,7 @@ export const DesktopHome = () => {
             <div className="flex gap-2.5 flex-wrap justify-center items-start">
                 <div>
                     <h3 className="text-center">Daily Raids</h3>
+                    <TokenAvailability />
                     <Card
                         variant="outlined"
                         onClick={() =>

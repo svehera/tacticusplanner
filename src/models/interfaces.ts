@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 
+import { GameModeTokensAction } from '@/reducers/gameModeTokensReducer';
 import { LeSettingsAction } from '@/reducers/le-settings.reducer';
 import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
 import { Teams2Action } from '@/reducers/teams2.reducer';
@@ -10,6 +11,7 @@ import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { MowsAction } from 'src/reducers/mows.reducer';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 
+import { TacticusTokensState } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import {
@@ -96,6 +98,7 @@ export interface IGlobalState {
     xpIncome: XpIncomeState;
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
+    gameModeTokens: IGameModeTokensState;
 }
 
 export interface IDispatchContext {
@@ -120,6 +123,7 @@ export interface IDispatchContext {
     xpIncome: React.Dispatch<XpIncomeAction>;
     xpUse: React.Dispatch<XpUseAction>;
     rosterSnapshots: React.Dispatch<RosterSnapshotsAction>;
+    gameModeTokens: React.Dispatch<GameModeTokensAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -149,6 +153,11 @@ export interface IPersonalData2 {
     xpIncome: XpIncomeState;
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
+    gameModeTokens: IGameModeTokensState;
+}
+
+export interface IGameModeTokensState {
+    tokens?: TacticusTokensState;
 }
 
 export interface IGuild {

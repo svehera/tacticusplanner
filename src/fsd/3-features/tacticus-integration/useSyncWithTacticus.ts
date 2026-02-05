@@ -1,4 +1,3 @@
-/* eslint-disable import-x/no-internal-modules */
 /* eslint-disable boundaries/element-types */
 import { enqueueSnackbar } from 'notistack';
 import { useContext } from 'react';
@@ -88,6 +87,20 @@ export const useSyncWithTacticus = () => {
                 });
 
                 dispatch.inventory({ type: 'SyncWithTacticus', inventory: result.data.player.inventory });
+
+                // Extract tokens from nested game mode objects
+                const progress = result.data.player.progress;
+                const combinedTokens = {
+                    arena: progress.arena?.tokens,
+                    guildRaid: progress.guildRaid?.tokens,
+                    bombToken: progress.guildRaid?.bombTokens,
+                    onslaught: progress.onslaught?.tokens,
+                    salvageRun: progress.salvageRun?.tokens,
+                };
+                dispatch.gameModeTokens({
+                    type: 'SyncWithTacticus',
+                    gameModeTokens: combinedTokens,
+                });
 
                 dispatch.campaignsProgress({
                     type: 'SyncWithTacticus',
