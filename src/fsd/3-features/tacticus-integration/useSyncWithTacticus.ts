@@ -1,3 +1,4 @@
+/* eslint-disable import-x/no-internal-modules */
 /* eslint-disable boundaries/element-types */
 import { enqueueSnackbar } from 'notistack';
 import { useContext } from 'react';

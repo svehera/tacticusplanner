@@ -3,7 +3,7 @@ import type { IGameModeTokensState, SetStateAction } from '@/models/interfaces';
 import type { TacticusTokensState } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 
 export type GameModeTokensAction =
-    | { type: 'SyncWithTacticus'; gameModeTokens: TacticusTokensState['tokens'] }
+    | { type: 'SyncWithTacticus'; gameModeTokens: TacticusTokensState }
     | SetStateAction<IGameModeTokensState>;
 
 export const gameModeTokensActionReducer = (

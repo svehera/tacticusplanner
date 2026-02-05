@@ -5,8 +5,11 @@ import { isMobile } from 'react-device-detect';
 import Zoom from 'react-medium-image-zoom';
 import { useNavigate } from 'react-router-dom';
 
+// eslint-disable-next-line import-x/no-internal-modules
 import { PersonalGoalType } from 'src/models/enums';
+// eslint-disable-next-line import-x/no-internal-modules
 import { menuItemById } from 'src/models/menu-items';
+// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { useAuth } from '@/fsd/5-shared/model';

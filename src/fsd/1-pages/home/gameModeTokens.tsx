@@ -1,3 +1,7 @@
+/* eslint-disable import-x/no-internal-modules */
+
+//import { Card, CardContent, CardHeader } from '@mui/material';
+
 import { useState, useEffect, useContext } from 'react';
 
 import { StoreContext } from '@/reducers/store.provider';
@@ -27,7 +31,7 @@ export default function TokenAvailability() {
         // Initialize countdowns from token data
         const initial: Record<string, number> = {};
         Object.entries(gameModeTokens.tokens).forEach(([key, value]: [string, TacticusTokens | undefined]) => {
-            if (value?.nextTokenInSeconds) {
+            if (value?.nextTokenInSeconds != null) {
                 initial[key] = value.nextTokenInSeconds;
             }
         });
