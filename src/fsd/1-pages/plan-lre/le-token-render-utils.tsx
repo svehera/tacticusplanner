@@ -1,6 +1,5 @@
 /* eslint-disable import-x/no-internal-modules */
 
-import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
@@ -15,60 +14,15 @@ import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreRequirements, ILreTrackProgress } from './lre.models';
 import { STATUS_COLORS } from './requirement-status-constants';
-import { milestonesAndPoints } from './token-estimation-service';
+import { TokenDisplay } from './token-estimation-service';
 
-const getOrdinal = (num: number) => {
-    if (num == 1) return '1st';
-    if (num == 2) return '2nd';
-    if (num == 3) return '3rd';
-    return num + 'th';
-};
-
-const getSeverityClass = (severity: number) => {
-    const index = severity < 0 ? 0 : severity > 2 ? 2 : severity;
-    const classes = [
-        'text-[#b00] dark:text-red-400',
-        'text-[#bb0] dark:text-yellow-400',
-        'text-[#0b0] dark:text-green-400',
-    ];
-    return classes[index];
-};
-
-export const renderMilestone = (milestoneIndex: number, showP2P: boolean) => {
-    if (
-        milestoneIndex === -1 ||
-        milestoneIndex >= milestonesAndPoints.length ||
-        (!showP2P && milestonesAndPoints[milestoneIndex].packsPerRound > 0)
-    ) {
-        return <></>;
-    }
-    const milestone = milestonesAndPoints[milestoneIndex];
+export const renderMilestone = (token: TokenDisplay) => {
+    if (!token.achievedStarMilestone) return <></>;
     return (
         <div className="flex flex-col items-center justify-center p-1 border border-gray-400 dark:border-gray-600 rounded-lg bg-blue-100 dark:bg-gray-700/50 min-w-[70px]">
             <div className="flex items-center text-lg font-bold text-gray-800 dark:text-white">
-                {milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1]?.points ? (
-                    '100%'
-                ) : (
-                    <>
-                        {milestone.stars == 7 ? (
-                            <RarityIcon rarity={Rarity.Mythic} />
-                        ) : (
-                            <StarsIcon stars={milestone.stars + 5 - (milestone.stars >= 7 ? 1 : 0)} />
-                        )}
-                    </>
-                )}
-            </div>
-            <div className="text-xs font-medium mt-0.5 whitespace-nowrap">
-                <span className={getSeverityClass(3 - milestone.round)}>{getOrdinal(milestone.round)} Round</span>
-            </div>
-            <div className="text-[10px] whitespace-nowrap">
-                <span className={getSeverityClass(2 - milestone.packsPerRound)}>
-                    {milestone.packsPerRound == 2
-                        ? 'w/ both packs'
-                        : milestone.packsPerRound == 1
-                          ? 'w/ premium'
-                          : 'w/ free'}
-                </span>
+                <RarityIcon rarity={token.rarity} />
+                <StarsIcon stars={token.stars} />
             </div>
         </div>
     );
@@ -76,7 +30,7 @@ export const renderMilestone = (milestoneIndex: number, showP2P: boolean) => {
 
 export const renderRestrictions = (
     restricts: ILreRequirements[],
-    tracksProgress: ILreTrackProgress[],
+    tracksProgress: readonly ILreTrackProgress[],
     track: LreTrackId,
     battleNumber: number,
     sizePx?: number

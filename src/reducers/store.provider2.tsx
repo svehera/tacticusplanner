@@ -8,6 +8,7 @@ import { guildReducer } from 'src/reducers/guildReducer';
 import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
+import { teams2Reducer } from 'src/reducers/teams2.reducer';
 
 import { IErrorResponse } from '@/fsd/5-shared/api';
 import { useAuth } from '@/fsd/5-shared/model';
@@ -55,6 +56,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [mows, dispatchMows] = React.useReducer(mowsReducer, globalState.mows);
     const [goals, dispatchGoals] = React.useReducer(goalsReducer, globalState.goals);
     const [teams, dispatchTeams] = React.useReducer(teamsReducer, globalState.teams);
+    const [teams2, dispatchTeams2] = React.useReducer(teams2Reducer, globalState.teams2);
     const [viewPreferences, dispatchViewPreferences] = React.useReducer(
         viewPreferencesReducer,
         globalState.viewPreferences
@@ -113,6 +115,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             characters: wrapDispatch(dispatchCharacters),
             mows: wrapDispatch(dispatchMows),
             teams: wrapDispatch(dispatchTeams),
+            teams2: wrapDispatch(dispatchTeams2),
             goals: wrapDispatch(dispatchGoals),
             viewPreferences: wrapDispatch(dispatchViewPreferences),
             autoTeamsPreferences: wrapDispatch(dispatchAutoTeamsPreferences),
@@ -135,6 +138,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 dispatchMows({ type: 'Set', value: data.mows });
                 dispatchGoals({ type: 'Set', value: data.goals });
                 dispatchTeams({ type: 'Set', value: data.teams });
+                dispatchTeams2({ type: 'Set', value: data.teams2 });
                 dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
                 dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
                 dispatchAutoTeamsPreferences({ type: 'Set', value: data.autoTeamsPreferences });
@@ -194,6 +198,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             characters,
             mows,
             teams,
+            teams2,
             viewPreferences,
             autoTeamsPreferences,
             selectedTeamOrder,

@@ -17,6 +17,7 @@ import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { lreLazyRoute } from '@/fsd/1-pages/plan-lre';
+import { teams2Route } from '@/fsd/1-pages/plan-teams2/teams2.route';
 import { sharedRosterRoute } from '@/fsd/1-pages/shared-roster/shared-roster.route';
 import { teamsDesktopLazyRoute } from '@/fsd/1-pages/teams/teams.route';
 import { wyoLazyRoute } from '@/fsd/1-pages/who-you-own/who-you-own.route';
@@ -54,6 +55,7 @@ export const globalPlanRoutes: RouteObject[] = [
             return { Component: DailyRaids };
         },
     },
+    teams2Route,
     guildWarOffenseLazyRoute,
     guildWarDefenseLazyRoute,
     guildWarZonesLazyRoute,

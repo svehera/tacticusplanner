@@ -24,13 +24,14 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     readonly wikiLink: string;
     readonly eventStage: number;
     readonly nextEventDate: string;
+    readonly nextEventDateUtc: string;
     readonly finished: boolean;
 
-    readonly regularMissions: string[];
-    readonly premiumMissions: string[];
+    readonly regularMissions: readonly string[];
+    readonly premiumMissions: readonly string[];
 
-    readonly pointsMilestones: IPointsMilestone[];
-    readonly chestsMilestones: IChestMilestone[];
+    readonly pointsMilestones: readonly IPointsMilestone[];
+    readonly chestsMilestones: readonly IChestMilestone[];
 
     readonly shardsPerChest: number;
     readonly battlesCount: number;
@@ -53,6 +54,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
         this.premiumMissions = staticData.premiumMissions ?? [];
         this.eventStage = staticData.eventStage;
         this.nextEventDate = staticData.nextEventDate ?? '';
+        this.nextEventDateUtc = staticData.nextEventDateUtc ?? '';
         this.finished = staticData.finished ?? false;
 
         this.pointsMilestones = staticData.pointsMilestones;

@@ -1,6 +1,6 @@
 import { orderBy, sum } from 'lodash';
 
-import { LreTrackId, LegendaryEventEnum } from '@/fsd/4-entities/lre';
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 import {
@@ -36,32 +36,28 @@ export class LreService {
         dto: ILreProgressDto | undefined,
         lre: ILegendaryEvent
     ): ILreProgressModel => {
-        const occurrenceProgress: ILreOccurrenceProgress[] = [];
-        const tracksProgress: ILreTrackProgress[] = [];
-
-        const eventOccurrence = [1, 2, 3];
-        for (const occurrence of eventOccurrence) {
-            const value: ILreOverviewDto = dto?.overview?.[occurrence as 1 | 2 | 3] ?? {
+        const occurrenceProgress = ([1, 2, 3] as const).map(occurrence => {
+            const value: ILreOverviewDto = dto?.overview?.[occurrence] ?? {
                 premiumMissions: 0,
                 regularMissions: 0,
                 bundle: 0,
                 ohSoCloseShards: 0,
             };
-            occurrenceProgress.push({
-                eventOccurrence: occurrence as 1 | 2 | 3,
+            return {
+                eventOccurrence: occurrence,
                 premiumMissionsProgress: value.premiumMissions,
                 freeMissionsProgress: value.regularMissions,
                 bundlePurchased: !!value.bundle,
                 ohSoCloseShards: value.ohSoCloseShards ?? 0,
-            });
-        }
+            } satisfies ILreOccurrenceProgress;
+        });
 
         const battlesDto = dto?.battlesProgress ?? [];
-        for (const trackId of ['alpha', 'beta', 'gamma'] as LreTrackId[]) {
+        const tracksProgress = (['alpha', 'beta', 'gamma'] as const).map(trackId => {
             const track = lre[trackId];
             const trackBattlesDto = battlesDto.filter(x => x.trackId === trackId);
             const trackBattlesRequirementsDto = trackBattlesDto.flatMap(x => x.requirements);
-            const requirements: ILreRequirements[] = [
+            const requirements: readonly ILreRequirements[] = [
                 {
                     id: LrePointsCategoryId.killScore,
                     name: 'Killscore',
@@ -98,9 +94,7 @@ export class LreService {
                 })),
             ];
 
-            const battles: ILreBattleProgress[] = [];
-
-            track.battlesPoints.forEach((points, index) => {
+            const battles = track.battlesPoints.map((points, index) => {
                 const flexPointsCategories = [LrePointsCategoryId.killScore, LrePointsCategoryId.highScore];
                 const battleProgress = trackBattlesDto.find(x => x.battleIndex === index);
 
@@ -121,12 +115,12 @@ export class LreService {
                         highScore: reqProgress?.highScoredPoints, // Load high score from highScoredPoints
                     };
                 });
-                battles.push({
+                return {
                     battleIndex: index,
                     requirementsProgress,
                     totalPoints: sum(requirementsProgress.map(x => x.points)),
                     completed: requirementsProgress.every(x => x.completed),
-                });
+                } satisfies ILreBattleProgress;
             });
 
             requirements.forEach(req => {
@@ -141,15 +135,15 @@ export class LreService {
                 track.battlesPoints.map(battlePoints => battlePoints * 2 + requirementsTotalPoints)
             );
 
-            tracksProgress.push({
+            return {
                 trackId,
                 trackName: lre[trackId].name,
                 battlesPoints: track.battlesPoints,
                 totalPoints,
                 requirements,
-                battles: battles.reverse(),
-            });
-        }
+                battles: battles.toReversed(),
+            } satisfies ILreTrackProgress;
+        });
 
         return {
             eventId: dto?.id ?? lre.id,
@@ -157,6 +151,7 @@ export class LreService {
             notes: dto?.notes ?? '',
             occurrenceProgress,
             tracksProgress,
+            syncedProgress: dto?.forceProgress,
             regularMissions: lre.regularMissions,
             premiumMissions: lre.premiumMissions,
             pointsMilestones: lre.pointsMilestones,
@@ -204,6 +199,7 @@ export class LreService {
             name: model.eventName,
             notes: model.notes,
             battlesProgress,
+            forceProgress: model.syncedProgress,
             overview: overviewDto,
         };
     };

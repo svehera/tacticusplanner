@@ -1,33 +1,43 @@
 /* eslint-disable import-x/no-internal-modules */
-import CheckIcon from '@mui/icons-material/Check';
 import GridViewIcon from '@mui/icons-material/GridView';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import { FormControlLabel, IconButton, Switch } from '@mui/material';
+import { FormControlLabel, Switch } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
+
+import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
 
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
-import { renderMilestone, renderRestrictions, renderTeam } from './le-token-render-utils';
-import { ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
+import { renderRestrictions, renderTeam } from './le-token-render-utils';
+import { LeTokenService } from './le-token-service';
+import { LreRequirementStatusService } from './lre-requirement-status.service';
+import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
+import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
 import { TokenDisplay } from './token-estimation-service';
 
 interface Props {
     battles: ILeBattles | undefined;
-    tokenDisplays: TokenDisplay[];
-    tracksProgress: ILreTrackProgress[];
-    showP2P: boolean;
-    toggleBattleState: (
+    legendaryEvent: ILegendaryEvent;
+    progress: ILreProgressModel;
+    tokenDisplays: readonly TokenDisplay[];
+    tracksProgress: readonly ILreTrackProgress[];
+    createNewModel: (
+        model: ILreProgressModel,
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
         reqId: string,
-        state: ProgressState
-    ) => void;
+        status: RequirementStatus,
+        forceOverwrite?: boolean
+    ) => ILreProgressModel;
+    updateDto: (model: ILreProgressModel) => void;
 }
 
 /**
@@ -36,10 +46,12 @@ interface Props {
  */
 export const LeTokenTable: React.FC<Props> = ({
     battles,
+    legendaryEvent,
+    progress,
     tokenDisplays,
     tracksProgress,
-    showP2P,
-    toggleBattleState,
+    createNewModel,
+    updateDto,
 }: Props) => {
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -60,41 +72,58 @@ export const LeTokenTable: React.FC<Props> = ({
         }));
     };
 
-    const createCompleteBattleHandler = (token: TokenDisplay) => {
-        return () => {
-            if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-            if (token.battleNumber == null || token.battleNumber < 0) return;
+    const getTokenEventIteration = (tokenIndex: number): number => {
+        return (
+            LeTokenService.getIterationForToken(
+                tokenIndex,
+                progress.syncedProgress?.currentTokens ?? 0,
+                progress.syncedProgress?.hasUsedAdForExtraTokenToday ?? true,
+                legendaryEvent,
+                progress.occurrenceProgress[0].premiumMissionsProgress > 0,
+                progress.occurrenceProgress[1].premiumMissionsProgress > 0,
+                progress.occurrenceProgress[2].premiumMissionsProgress > 0,
+                Date.now()
+            ) ?? 3
+        );
+    };
 
-            // Mark the restrictions included in this token as completed
-            for (const restrict of token.restricts) {
-                toggleBattleState(
+    const setRequirementStatus = (token: TokenDisplay, status: RequirementStatus) => {
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+        if (token.battleNumber == null || token.battleNumber < 0) return;
+
+        const hasRestrictions = token.restricts.some(r => !LreRequirementStatusService.isDefaultObjective(r.id));
+        // Mark the restrictions included in this token as completed
+        let leModel = progress;
+        let modified = false;
+        for (const restrict of token.restricts) {
+            if (
+                status === RequirementStatus.Cleared ||
+                !hasRestrictions ||
+                !LreRequirementStatusService.isDefaultObjective(restrict.id)
+            ) {
+                modified = true;
+                leModel = createNewModel(
+                    leModel,
                     token.track as 'alpha' | 'beta' | 'gamma',
                     token.battleNumber,
                     restrict.id,
-                    ProgressState.completed
+                    status
                 );
             }
+        }
+        if (modified) updateDto(leModel);
+    };
 
-            // Also mark defeatAll, killScore, and highScore as completed
-            toggleBattleState(
-                token.track as 'alpha' | 'beta' | 'gamma',
-                token.battleNumber,
-                '_defeatAll',
-                ProgressState.completed
-            );
-            toggleBattleState(
-                token.track as 'alpha' | 'beta' | 'gamma',
-                token.battleNumber,
-                '_killPoints',
-                ProgressState.completed
-            );
-            toggleBattleState(
-                token.track as 'alpha' | 'beta' | 'gamma',
-                token.battleNumber,
-                '_highScore',
-                ProgressState.completed
-            );
-        };
+    const onMaybeBattle = (token: TokenDisplay) => {
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+        if (token.battleNumber == null || token.battleNumber < 0) return;
+        setRequirementStatus(token, RequirementStatus.MaybeClear);
+    };
+
+    const onStopBattle = (token: TokenDisplay) => {
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+        if (token.battleNumber == null || token.battleNumber < 0) return;
+        setRequirementStatus(token, RequirementStatus.StopHere);
     };
 
     const getRowClassName = (index: number) => {
@@ -104,7 +133,7 @@ export const LeTokenTable: React.FC<Props> = ({
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex justify-end items-center bg-gray-200 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700 p-2 rounded-lg border">
+            <div className="flex items-center justify-end p-2 bg-gray-200 border border-gray-300 rounded-lg dark:bg-gray-800/50 dark:border-gray-700">
                 <FormControlLabel
                     control={
                         <Switch
@@ -130,37 +159,33 @@ export const LeTokenTable: React.FC<Props> = ({
             </div>
 
             {isTableView ? (
-                <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-300 dark:border-gray-700/50">
+                <div className="overflow-x-auto border border-gray-300 shadow-2xl rounded-xl dark:border-gray-700/50">
                     <table
                         key="tokensTable"
-                        className="min-w-full table-auto border-separate border-spacing-0 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 text-sm">
+                        className="min-w-full text-sm text-gray-800 bg-white border-separate table-auto border-spacing-0 dark:bg-gray-900 dark:text-gray-200">
                         <thead>
-                            <tr className="bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-100 uppercase sticky top-0">
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Token</th>
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
+                            <tr className="sticky top-0 text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-100">
+                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">Token</th>
+                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">
                                     Milestone
                                     <br />
                                     Achieved
                                 </th>
-                                <th className="px-3 py-3 text-left font-semibold whitespace-nowrap">Track</th>
-                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">Battle</th>
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
+                                <th className="px-3 py-3 font-semibold text-left whitespace-nowrap">Track</th>
+                                <th className="px-3 py-3 font-semibold text-right whitespace-nowrap">Battle</th>
+                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">
                                     Restrictions
                                     <br />
                                     Cleared
                                 </th>
-                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">
+                                <th className="px-3 py-3 font-semibold text-right whitespace-nowrap">
                                     Incremental
                                     <br />
                                     Points
                                 </th>
-                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">Total Points</th>
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Team</th>
-                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
-                                    Mark
-                                    <br />
-                                    Complete
-                                </th>
+                                <th className="px-3 py-3 font-semibold text-right whitespace-nowrap">Total Points</th>
+                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">Team</th>
+                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">Outcome</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -169,13 +194,20 @@ export const LeTokenTable: React.FC<Props> = ({
                                     <tr
                                         key={index}
                                         className={`${getRowClassName(index)} border-t border-gray-300 dark:border-gray-700/50 hover:bg-gray-300 dark:hover:bg-gray-700 transition duration-150 ease-in-out`}>
-                                        <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
-                                        <td className="px-3 py-2 flex justify-center items-center h-full">
-                                            {renderMilestone(token.milestoneAchievedIndex, showP2P)}
+                                        <td className="px-3 py-2 font-medium text-center">{index + 1}</td>
+                                        <td className="flex items-center justify-center h-full px-3 py-2">
+                                            {token.achievedStarMilestone ? (
+                                                <div className="flex flex-col items-center justify-center gap-2">
+                                                    <StarsIcon stars={token.stars} />
+                                                    <RarityIcon rarity={token.rarity} />
+                                                </div>
+                                            ) : (
+                                                <></>
+                                            )}
                                         </td>
                                         <td className="px-3 py-2">{token.track}</td>
-                                        <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
-                                        <td className="px-3 py-2 h-full flex items-center justify-center">
+                                        <td className="px-3 py-2 font-mono text-right">{token.battleNumber + 1}</td>
+                                        <td className="flex items-center justify-center h-full px-3 py-2">
                                             {renderRestrictions(
                                                 token.restricts,
                                                 tracksProgress,
@@ -184,19 +216,53 @@ export const LeTokenTable: React.FC<Props> = ({
                                                 25
                                             )}
                                         </td>
-                                        <td className="px-3 py-2 text-right font-mono">{token.incrementalPoints}</td>
-                                        <td className="px-3 py-2 text-right font-bold font-mono text-blue-400">
+                                        <td className="px-3 py-2 font-mono text-right">{token.incrementalPoints}</td>
+                                        <td className="px-3 py-2 font-mono font-bold text-right text-blue-400">
                                             {token.totalPoints}
                                         </td>
                                         <td className="px-3 py-2 text-center">{renderTeam(token.team, 25)}</td>
                                         <td className="px-3 py-2 text-center">
-                                            <IconButton
-                                                size="small"
-                                                onClick={createCompleteBattleHandler(token)}
-                                                sx={{ color: 'text.secondary' }}
-                                                title="Mark this battle as completed">
-                                                <CheckIcon fontSize="small" />
-                                            </IconButton>
+                                            <div className="flex items-center justify-center gap-3">
+                                                <SyncButton
+                                                    showText={false}
+                                                    variant="text"
+                                                    sx={{
+                                                        minWidth: 'auto',
+                                                        padding: 0,
+                                                        minHeight: 'auto',
+                                                        height: 'auto',
+                                                        fontSize: '1.25rem',
+                                                        lineHeight: '1.25rem',
+                                                        alignSelf: 'center',
+                                                        marginTop: '-2px',
+                                                        '& .MuiButton-startIcon': {
+                                                            margin: 0,
+                                                        },
+                                                        '& .MuiSvgIcon-root': {
+                                                            fontSize: '1.25rem',
+                                                            verticalAlign: 'middle',
+                                                        },
+                                                    }}
+                                                />
+                                                <button
+                                                    onClick={() => {
+                                                        onMaybeBattle(token);
+                                                    }}
+                                                    style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}
+                                                    className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                    title="Potentially will not succeed with this token.">
+                                                    {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        onStopBattle(token);
+                                                    }}
+                                                    style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}
+                                                    className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                    title="Do not attempt this token.">
+                                                    {STATUS_LABELS[RequirementStatus.StopHere]}
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 );
@@ -213,9 +279,9 @@ export const LeTokenTable: React.FC<Props> = ({
                             <div key={index}>
                                 <LeTokenCard
                                     index={index}
+                                    tokenUsedDuringEventIteration={getTokenEventIteration(index)}
                                     renderMode={LeTokenCardRenderMode.kInGrid}
                                     token={token}
-                                    renderMilestone={x => renderMilestone(x, showP2P)}
                                     renderRestrictions={x =>
                                         renderRestrictions(
                                             x,
@@ -228,7 +294,8 @@ export const LeTokenTable: React.FC<Props> = ({
                                     renderTeam={x => renderTeam(x, 30)}
                                     isBattleVisible={isVisible}
                                     onToggleBattle={onToggleBattle}
-                                    onCompleteBattle={createCompleteBattleHandler(token)}
+                                    onMaybeBattle={() => onMaybeBattle(token)}
+                                    onStopBattle={() => onStopBattle(token)}
                                 />
 
                                 {isVisible && LeBattleService.getBattleFromToken(token, battles) ? (
@@ -240,7 +307,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                     </div>
                                 ) : (
                                     isVisible && (
-                                        <div className="w-full text-center text-gray-600 dark:text-gray-500 border-gray-300 dark:border-gray-700 p-4 border rounded-xl">
+                                        <div className="w-full p-4 text-center text-gray-600 border border-gray-300 dark:text-gray-500 dark:border-gray-700 rounded-xl">
                                             Battle data not available.
                                         </div>
                                     )

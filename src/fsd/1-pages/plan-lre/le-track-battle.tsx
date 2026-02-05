@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ConfirmationDialog } from '@/fsd/5-shared/ui';
 
 import { RequirementStatus } from '@/fsd/3-features/lre';
-import { LrePointsCategoryId, ProgressState } from '@/fsd/3-features/lre-progress';
+import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { BattleStatusCheckbox } from './battle-status-checkbox';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
@@ -14,15 +14,10 @@ interface Props {
     battle: ILreBattleProgress;
     maxKillPoints: number;
     projectedRestrictions: Set<string>;
-    toggleState: (req: ILreBattleRequirementsProgress, state: ProgressState, forceOverwrite?: boolean) => void;
+    setState: (req: ILreBattleRequirementsProgress, status: RequirementStatus, forceOverwrite?: boolean) => void;
 }
 
-export const LreTrackBattleSummary: React.FC<Props> = ({
-    battle,
-    maxKillPoints,
-    projectedRestrictions,
-    toggleState,
-}) => {
+export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, projectedRestrictions, setState }) => {
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
     const [showDropdown, setShowDropdown] = useState<string | null>(null);
     const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
@@ -177,22 +172,24 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
         req.completed = status === RequirementStatus.Cleared;
         req.blocked = status === RequirementStatus.StopHere;
 
-        // Convert to ProgressState for the toggle function
-        let progressState: ProgressState;
-        if (status === RequirementStatus.Cleared) {
-            progressState = ProgressState.completed;
-        } else if (status === RequirementStatus.StopHere) {
-            progressState = ProgressState.blocked;
-        } else {
-            progressState = ProgressState.none;
-        }
-
-        toggleState(req, progressState, forceOverwrite);
+        setState(req, status, forceOverwrite);
     };
 
     const allCompleted = useMemo((): boolean => {
         return battle.requirementsProgress.every(req => req.completed);
     }, [battle]);
+
+    const handleToggle = () => {
+        if (
+            battle.requirementsProgress.some(
+                req => req.status === RequirementStatus.MaybeClear || req.status === RequirementStatus.StopHere
+            )
+        ) {
+            handleOpenConfirmDialog();
+        } else {
+            handleToggleAll();
+        }
+    };
 
     const handleOpenConfirmDialog = () => {
         setConfirmDialogOpen(true);
@@ -210,7 +207,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
     const handleBattleNumberKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === ' ' || event.key === 'Enter') {
             event.preventDefault();
-            handleOpenConfirmDialog();
+            handleToggle();
         }
     };
 
@@ -230,7 +227,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
                     tabIndex={0}
                     aria-label={`Toggle all requirements for battle ${battle.battleIndex + 1}`}
                     className="cursor-pointer min-w-6 md:min-w-8 p-0.5 md:p-0.5 my-0.5 mr-1 md:mr-2 text-xs md:text-base font-bold text-center border-2 border-blue-300/75 size-6 md:size-8 rounded-xs shrink-0"
-                    onClick={handleOpenConfirmDialog}
+                    onClick={handleToggle}
                     onKeyDown={handleBattleNumberKeyDown}>
                     {battle.battleIndex + 1}
                 </span>

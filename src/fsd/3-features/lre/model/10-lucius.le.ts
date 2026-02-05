@@ -23,7 +23,9 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
             [
                 {
                     name: 'Black Legion',
-                    points: 90,
+                    points: 85,
+                    objectiveType: 'Faction',
+                    objectiveTarget: 'BlackLegion',
                     units: filter(noXenos).byFaction(Faction.Black_Legion),
                     iconId: 'black_legion',
                     index: 0,
@@ -31,6 +33,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Bolter',
                     points: 95,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Bolter',
                     units: filter(noXenos).byDamageType(DamageType.Bolter),
                     iconId: 'bolter',
                     index: 1,
@@ -38,6 +42,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Min 4 Hits',
                     points: 45,
+                    objectiveType: 'MinHits',
+                    objectiveTarget: '4',
                     units: filter(noXenos).byMinHits(4),
                     iconId: 'hits',
                     index: 2,
@@ -45,6 +51,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Flying',
                     points: 90,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Flying',
                     units: filter(noXenos).byTrait(Trait.Flying),
                     iconId: 'flying',
                     index: 3,
@@ -52,6 +60,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Bolter',
                     points: 60,
+                    objectiveType: 'NotDamageType',
+                    objectiveTarget: 'Bolter',
                     units: filter(noXenos).byDamageType(DamageType.Bolter, true),
                     iconId: 'no_bolter',
                     index: 4,
@@ -73,6 +83,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Heavy Weapon',
                     points: 95,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'HeavyWeapon',
                     units: filter(noChaosOrTyranids).byTrait(Trait.HeavyWeapon),
                     iconId: 'heavy_weapon',
                     index: 0,
@@ -80,6 +92,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Piercing',
                     points: 65,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Piercing',
                     units: filter(noChaosOrTyranids).byDamageType(DamageType.Piercing),
                     iconId: 'piercing',
                     index: 1,
@@ -87,6 +101,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Unstoppable',
                     points: 95,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Unstoppable',
                     units: filter(noChaosOrTyranids).byTrait(Trait.Unstoppable),
                     iconId: 'unstoppable',
                     index: 2,
@@ -94,6 +110,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Physical',
                     points: 45,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Physical',
                     units: filter(noChaosOrTyranids).byDamageType(DamageType.Physical),
                     iconId: 'physical',
                     index: 3,
@@ -101,6 +119,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Max 2 hits',
                     points: 75,
+                    objectiveType: 'MaxHits',
+                    objectiveTarget: '2',
                     units: filter(noChaosOrTyranids).byMaxHits(2),
                     iconId: 'hits',
                     index: 4,
@@ -120,6 +140,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Ranged Specialist',
                     points: 105,
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'RangedSpecialist',
                     units: filter(noImperials).byTrait(Trait.RangedSpecialist),
                     iconId: 'ranged_specialist',
                     index: 0,
@@ -127,6 +149,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Psychic',
                     points: 80,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Psychic',
                     units: filter(noImperials).byDamageType(DamageType.Psychic),
                     iconId: 'psychic',
                     index: 1,
@@ -134,6 +158,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Power',
                     points: 35,
+                    objectiveType: 'NotDamageType',
+                    objectiveTarget: 'Power',
                     units: filter(noImperials).byDamageType(DamageType.Power, true),
                     iconId: 'no_power',
                     index: 2,
@@ -141,6 +167,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Min 5 hits',
                     points: 95,
+                    objectiveType: 'MinHits',
+                    objectiveTarget: '5',
                     units: filter(noImperials).byMinHits(5),
                     iconId: 'hits',
                     index: 3,
@@ -148,6 +176,8 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Physical',
                     points: 60,
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Physical',
                     units: filter(noImperials).byDamageType(DamageType.Physical),
                     iconId: 'physical',
                     index: 4,

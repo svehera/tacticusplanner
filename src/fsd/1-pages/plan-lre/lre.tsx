@@ -1,4 +1,5 @@
-﻿import GridViewIcon from '@mui/icons-material/GridView';
+﻿/* eslint-disable import-x/no-internal-modules */
+import GridViewIcon from '@mui/icons-material/GridView';
 import SettingsIcon from '@mui/icons-material/Settings';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Switch, Tab, Tabs } from '@mui/material';
@@ -6,17 +7,19 @@ import Button from '@mui/material/Button';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
-// eslint-disable-next-line import-x/no-internal-modules
 import { SetGoalDialog } from '@/shared-components/goals/set-goal-dialog';
 
-import { CharactersService } from '@/fsd/4-entities/character';
-import { LegendaryEventService } from '@/fsd/4-entities/lre';
+import { Rank } from '@/fsd/5-shared/model';
+import { RarityStars } from '@/fsd/5-shared/model/enums/rarity-stars.enum';
+import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 
-import { IAutoTeamsPreferences } from '@/fsd/3-features/lre';
-// eslint-disable-next-line import-x/no-internal-modules
-import { ProgressState } from '@/fsd/3-features/lre-progress/enums';
+import { CharactersService } from '@/fsd/4-entities/character';
+import { MowsService } from '@/fsd/4-entities/mow';
+
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/3-features/goals/goals.models';
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
+import { IAutoTeamsPreferences, RequirementStatus } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings';
 
 import { LeBattleService } from './le-battle.service';
@@ -27,34 +30,55 @@ import { LeTokenomics } from './le-tokenomics';
 import { LegendaryEvent } from './legendary-event';
 import { LegendaryEventSettings } from './legendary-event-settings';
 import { useLre } from './lre-hook';
+import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { LreSectionsSettings } from './lre-sections-settings';
 import { LreSettings } from './lre-settings';
 import { LreSection } from './lre.models';
 import PointsTable from './points-table';
-import { TokenEstimationService } from './token-estimation-service';
+import { TokenDisplay, TokenEstimationService, TokenUse } from './token-estimation-service';
 
 export const Lre: React.FC = () => {
-    const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);
+    const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters, mows, goals } =
+        useContext(StoreContext);
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
-    const { toggleBattleState } = useLreProgress(legendaryEvent);
-    const { model } = useLreProgress(legendaryEvent);
+    const { model, createNewModel, updateDto } = useLreProgress(legendaryEvent);
     const dispatch = useContext(DispatchContext);
     const updatePreferencesOption = (setting: keyof ILreViewSettings, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
 
-    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
+    const resolvedCharacters = CharactersService.resolveStoredCharacters(characters);
+    const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
-    const tokens = useMemo(() => {
-        return TokenEstimationService.computeAllTokenUsage(
-            model.tracksProgress,
-            leSelectedTeams[legendaryEvent.id]?.teams ?? []
-        );
-    }, [model, leSelectedTeams, legendaryEvent]);
+    const upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[] = GoalsService.prepareGoals(
+        goals,
+        [...resolvedCharacters, ...resolvedMows],
+        false
+    ).upgradeRankOrMowGoals;
+
+    const leUnitAscensionData = useMemo(() => {
+        const character = resolvedCharacters.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
+        if (character !== undefined && character.rank !== Rank.Locked) {
+            return { rarity: character.rarity, stars: character.stars };
+        }
+        return { rarity: Rarity.Legendary, stars: RarityStars.None };
+    }, [resolvedCharacters, legendaryEvent.unitSnowprintId]);
+
+    const tokens: TokenUse[] = TokenEstimationService.computeAllTokenUsage(
+        model.tracksProgress,
+        leSelectedTeams[legendaryEvent.id]?.teams ?? []
+    );
+    const tokenDisplays: TokenDisplay[] = TokenEstimationService.getTokenDisplays(
+        tokens,
+        model,
+        leUnitAscensionData.rarity,
+        leUnitAscensionData.stars,
+        leSettings.showP2POptions ?? true
+    );
 
     const currentPoints = useMemo(() => {
         return model.tracksProgress
-            .map(track => TokenEstimationService.computeCurrentPoints(track))
+            .map(track => TokenEstimationService.computeCurrentPointsInTrack(track))
             .reduce((a, b) => a + b, 0);
     }, [model, legendaryEvent]);
 
@@ -83,56 +107,71 @@ export const Lre: React.FC = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'lreGoalsPreview', value: preview });
     };
 
-    const tokenDisplays = useMemo(
-        () => TokenEstimationService.getTokenDisplays(tokens, currentPoints),
-        [tokens, currentPoints]
-    );
-
-    const nextTokenCompleted = (tokenIndex: number): void => {
+    const nextTokenMaybe = (tokenIndex: number): void => {
         if (tokenDisplays.length === 0 || tokenIndex < 0 || tokenIndex >= tokenDisplays.length) return;
         const token = tokenDisplays[tokenIndex];
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
 
-        // Used to handle the "Mark Completed" option in tokenomics.
-        // trackId -> track;
-        // battleIndex -> battleNumber.
-        // reqId -> restricts
+        const hasRestrictions = token.restricts.some(r => !LreRequirementStatusService.isDefaultObjective(r.id));
+        let leModel = model;
+        let modified = false;
         for (const restrict of token.restricts) {
-            toggleBattleState(
+            if (!hasRestrictions || !LreRequirementStatusService.isDefaultObjective(restrict.id)) {
+                modified = true;
+                leModel = createNewModel(
+                    leModel,
+                    token.track as 'alpha' | 'beta' | 'gamma',
+                    token.battleNumber,
+                    restrict.id,
+                    RequirementStatus.MaybeClear
+                );
+            }
+        }
+        if (modified) updateDto(leModel);
+    };
+
+    const nextTokenStopped = (tokenIndex: number): void => {
+        if (tokenDisplays.length === 0 || tokenIndex < 0 || tokenIndex >= tokenDisplays.length) return;
+        const token = tokenDisplays[tokenIndex];
+        if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
+
+        let leModel = model;
+        for (const restrict of token.restricts) {
+            leModel = createNewModel(
+                leModel,
                 token.track as 'alpha' | 'beta' | 'gamma',
                 token.battleNumber,
                 restrict.id,
-                ProgressState.completed
+                RequirementStatus.StopHere
             );
         }
+        updateDto(leModel);
     };
 
     const battles = LeBattleService.getBattleSetForCharacter(legendaryEvent.id);
 
-    const eventStartTime = () => {
-        if (LegendaryEventService.getActiveEvent()?.id !== legendaryEvent.id) return undefined;
-        return LegendaryEventService.getLegendaryEventStartDates()[0].getTime();
-    };
-
     const renderTabContent = () => {
         switch (section) {
             case LreSection.teams:
-                return <LegendaryEvent legendaryEvent={legendaryEvent} />;
+                return <LegendaryEvent legendaryEvent={legendaryEvent} upgradeRankOrMowGoals={upgradeRankOrMowGoals} />;
             case LreSection.progress:
                 return <LeProgress legendaryEvent={legendaryEvent} />;
             case LreSection.tokenomics:
                 return (
                     <LeTokenomics
+                        legendaryEvent={legendaryEvent}
                         key="tokenomics"
+                        model={model}
                         battles={battles}
                         tokens={tokens}
                         tokenDisplays={tokenDisplays}
                         tracksProgress={model.tracksProgress}
                         currentPoints={currentPoints}
-                        showP2P={leSettings.showP2POptions}
-                        eventStartTime={eventStartTime()}
-                        nextTokenCompleted={nextTokenCompleted}
-                        toggleBattleState={toggleBattleState}
+                        showP2P={leSettings.showP2POptions ?? true}
+                        nextTokenMaybe={nextTokenMaybe}
+                        nextTokenStopped={nextTokenStopped}
+                        createNewModel={createNewModel}
+                        updateDto={updateDto}
                     />
                 );
             case LreSection.battles:

@@ -13,7 +13,7 @@ import { ILegendaryEventTrack, ILegendaryEventTrackRequirement } from '../lre.mo
 export class LETrack implements ILegendaryEventTrack {
     name: string;
     killPoints: number;
-    battlesPoints: number[];
+    battlesPoints: readonly number[];
     enemies: {
         label: string;
         link: string;
@@ -22,8 +22,8 @@ export class LETrack implements ILegendaryEventTrack {
     constructor(
         public eventId: LegendaryEventEnum,
         public section: LreTrackId,
-        public allowedUnits: ICharacter2[],
-        public unitsRestrictions: Array<ILegendaryEventTrackRequirement>,
+        public allowedUnits: readonly ICharacter2[],
+        public unitsRestrictions: readonly ILegendaryEventTrackRequirement[],
         staticData: ILegendaryEventTrackStatic
     ) {
         this.name = staticData.name;
@@ -107,15 +107,12 @@ export class LETrack implements ILegendaryEventTrack {
         onlyUnlocked: boolean,
         restrictions: string[]
     ): Array<ICharacter2> {
-        let allowedChars: ICharacter2[] = [];
-        if (!restrictions.length) {
-            allowedChars = this.allowedUnits;
-        } else {
-            allowedChars = intersectionBy(
-                ...this.unitsRestrictions.filter(x => restrictions.includes(x.name)).map(x => x.units),
-                'name'
-            );
-        }
+        const allowedChars = !restrictions.length
+            ? this.allowedUnits
+            : intersectionBy(
+                  ...this.unitsRestrictions.filter(x => restrictions.includes(x.name)).map(x => x.units),
+                  'name'
+              );
         const sortChars = allowedChars
             .filter(x => (onlyUnlocked ? x.rank > Rank.Locked : true))
             .map(unit => ({

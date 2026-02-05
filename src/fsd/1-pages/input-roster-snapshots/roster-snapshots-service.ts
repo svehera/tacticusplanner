@@ -402,9 +402,9 @@ export class RosterSnapshotsService {
     public static diffSnapshots(
         base: IRosterSnapshot,
         compare: IRosterSnapshot,
-        diffShards: boolean = false,
-        diffMythicShards: boolean = false,
-        diffXpLevel: boolean = false
+        diffShards: boolean,
+        diffMythicShards: boolean,
+        diffXpLevel: boolean
     ): IRosterSnapshotDiff {
         const name = compare.name;
         const dateMillisUtc = compare.dateMillisUtc;
@@ -535,7 +535,13 @@ export class RosterSnapshotsService {
         state.base = toKeep[0];
         let current = state.base;
         for (let i = 1; i < toKeep.length; i++) {
-            const diff = this.diffSnapshots(current, toKeep[i]);
+            const diff = this.diffSnapshots(
+                current,
+                toKeep[i],
+                /*diffShards=*/ true,
+                /*diffMythicShards=*/ true,
+                /*diffXpLevel=*/ true
+            );
             current = toKeep[i];
 
             state.diffs.push(diff);

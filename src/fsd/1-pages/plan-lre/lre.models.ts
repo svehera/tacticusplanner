@@ -26,11 +26,13 @@ export interface ILreProgressModel {
     notes: string;
     occurrenceProgress: ILreOccurrenceProgress[];
     tracksProgress: ILreTrackProgress[];
-    regularMissions: string[];
-    premiumMissions: string[];
+    regularMissions: readonly string[];
+    premiumMissions: readonly string[];
+    // Progress from the sync, which overrides anything specified by the user in the planner.
+    syncedProgress?: ILeProgress;
 
-    pointsMilestones: IPointsMilestone[];
-    chestsMilestones: IChestMilestone[];
+    pointsMilestones: readonly IPointsMilestone[];
+    chestsMilestones: readonly IChestMilestone[];
     progression: ILEProgression;
     shardsPerChest: number;
 }
@@ -41,6 +43,21 @@ export interface ILreOccurrenceProgress {
     premiumMissionsProgress: number;
     bundlePurchased: boolean;
     ohSoCloseShards: number;
+}
+
+export interface ILeProgress {
+    lastUpdateMillisUtc: number;
+    hasUsedAdForExtraTokenToday: boolean;
+    currentTokens: number;
+    maxTokens: number;
+    // The chest most recently claimed. 0-based (-1 means nothing claimed).
+    currentClaimedChestIndex: number;
+    nextTokenMillisUtc?: number;
+    regenDelayInSeconds?: number;
+    currentPoints: number;
+    currentCurrency: number;
+    currentShards: number;
+    hasPremiumPayout: boolean;
 }
 
 /**
@@ -61,11 +78,18 @@ export interface ILreTrackProgress {
     trackId: LreTrackId;
     trackName: string;
     totalPoints: number;
-    battlesPoints: number[];
-    requirements: ILreRequirements[];
+    battlesPoints: readonly number[];
+    requirements: readonly ILreRequirements[];
     battles: ILreBattleProgress[];
 }
 
+/**
+ * Represents the progress of a single battle within a LE.
+ * @property battleIndex - The zero-based index of the battle within its track.
+ * @property requirementsProgress - An array tracking the progress for each requirement of the battle.
+ * @property completed - A flag indicating whether the battle has been successfully completed.
+ * @property totalPoints - The total points scored in this battle across all successful attempts.
+ */
 export interface ILreBattleProgress {
     battleIndex: number;
     requirementsProgress: ILreBattleRequirementsProgress[];
@@ -73,18 +97,41 @@ export interface ILreBattleProgress {
     totalPoints: number;
 }
 
+/**
+ * Represents the progress of a single requirement for a Legendary Release Event (LRE) battle.
+ * @property id - The unique identifier for the requirement.
+ * @property iconId - The identifier for the icon associated with the requirement.
+ * @property name - The display name of the requirement.
+ * @property points - The number of points awarded upon completion of the requirement.
+ * @property status - The current completion status of the requirement, represented by the `RequirementStatus` enum. This is the preferred property for tracking status.
+ * @property killScore - Tracks the partial score for "kill count" type requirements.
+ * @property highScore - Tracks the partial score for "high score" type requirements.
+ * @property completed - **Legacy Property**. Indicates if the requirement is fully completed. Kept for backward compatibility. Use `status` for new implementations.
+ * @property blocked - **Legacy Property**. Indicates if the requirement is blocked. Kept for backward compatibility. Use `status` for new implementations.
+ */
 export interface ILreBattleRequirementsProgress {
     id: string;
     iconId: string;
     name: string;
     points: number;
-    completed: boolean; // Legacy - keep for backward compatibility
-    blocked: boolean; // Legacy - keep for backward compatibility
     status?: RequirementStatus; // New: RequirementStatus enum value (0-4)
     killScore?: number; // New: For partial kill score tracking
     highScore?: number; // New: For partial high score tracking
+    completed: boolean; // Legacy - keep for backward compatibility
+    blocked: boolean; // Legacy - keep for backward compatibility
 }
 
+/**
+ * Represents the requirements for a Legendary Release Event (LRE).
+ * @property id - The unique identifier for the requirement.
+ * @property iconId - The identifier for the requirement's icon.
+ * @property name - The display name of the requirement.
+ * @property pointsPerBattle - The number of points awarded per battle for this requirement.
+ * @property totalPoints - The total points for this requirement across all battles in the track.
+ *                         Usually this is just #battles * points per battle, but some requirements
+ *                         can give variable points per battle.
+ * @property completed - A flag indicating if the requirement has been fulfilled.
+ */
 export interface ILreRequirements {
     id: string;
     iconId: string;

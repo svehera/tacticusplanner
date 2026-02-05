@@ -14,6 +14,7 @@ import { IMenuOption } from '@/fsd/5-shared/ui';
 import { MultipleSelect } from '@/fsd/5-shared/ui/input';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEvent, ILreTeam } from '@/fsd/3-features/lre';
@@ -24,11 +25,19 @@ interface Props {
     lre: ILegendaryEvent;
     preselectedTrackId: LreTrackId;
     preselectedRequirements: string[];
+    upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     onClose: () => void;
     addTeam: (team: ILreTeam) => void;
 }
 
-export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselectedRequirements, onClose, addTeam }) => {
+export const LreAddTeam: React.FC<Props> = ({
+    lre,
+    preselectedTrackId,
+    preselectedRequirements,
+    upgradeRankOrMowGoals,
+    onClose,
+    addTeam,
+}) => {
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const trackOptions: IMenuOption[] = [
         {
@@ -208,7 +217,11 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                                             <WarningIcon color="error" />
                                         )}
                                         <CloseIcon />
-                                        <LreTile character={character} settings={viewPreferences} />
+                                        <LreTile
+                                            character={character}
+                                            upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                                            settings={viewPreferences}
+                                        />
                                     </div>
                                 ))
                             ) : (
@@ -231,7 +244,11 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                                     }}
                                     className="flex-box gap5 pointer w-[350px]">
                                     <AddIcon />
-                                    <LreTile character={character} settings={viewPreferences} />
+                                    <LreTile
+                                        character={character}
+                                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                                        settings={viewPreferences}
+                                    />
                                 </div>
                             ))}
                         </div>

@@ -1,6 +1,4 @@
 /* eslint-disable import-x/no-internal-modules */
-import SyncIcon from '@mui/icons-material/Sync';
-import Button from '@mui/material/Button';
 import { JSX, useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 
@@ -10,15 +8,13 @@ import { Alliance, Rarity, RarityMapper, useAuth } from '@/fsd/5-shared/model';
 import { BadgeImage } from '@/fsd/5-shared/ui/icons/badge-image';
 import { OrbIcon } from '@/fsd/5-shared/ui/icons/iconList';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
-
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button/sync-button';
 
 import { XpUseState } from './models';
 
 export const Resources = () => {
-    const { inventory, viewPreferences, xpUse } = useContext(StoreContext);
+    const { inventory, xpUse } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-    const { syncWithTacticus } = useSyncWithTacticus();
     const { userInfo } = useAuth();
 
     const dispatchUpdate = (newState: XpUseState) => {
@@ -65,12 +61,7 @@ export const Resources = () => {
         Rarity.Mythic,
     ];
 
-    const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
-
-    const sync = async () => {
-        console.log('Syncing with Tacticus...');
-        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
-    };
+    const hasSync = !!userInfo.tacticusApiKey;
 
     const renderResourceItem = (
         key: string,
@@ -99,10 +90,7 @@ export const Resources = () => {
         <div className="flex flex-col gap-y-4 p-2">
             {hasSync && (
                 <div className="flex justify-end p-2 border-b border-gray-600">
-                    <Button size="small" variant="contained" color="primary" onClick={sync}>
-                        <SyncIcon className="mr-1" />
-                        {!isMobile && 'Sync'}
-                    </Button>
+                    <SyncButton showText={!isMobile} />
                 </div>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

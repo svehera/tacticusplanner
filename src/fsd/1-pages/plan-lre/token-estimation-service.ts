@@ -3,10 +3,13 @@ import { cloneDeep } from 'lodash';
 // eslint-disable-next-line import-x/no-internal-modules
 import { ILreTeam } from '@/models/interfaces';
 
+import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+
 import { CharactersService } from '@/fsd/4-entities/character';
 
+import { LeProgressService } from './le-progress.service';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
-import { ILreBattleProgress, ILreRequirements, ILreTrackProgress } from './lre.models';
+import { ILreBattleProgress, ILreProgressModel, ILreRequirements, ILreTrackProgress } from './lre.models';
 
 export class TokenUse {
     /**
@@ -35,7 +38,11 @@ export class TokenDisplay {
     public track: string = '(null track)';
     public incrementalPoints: number = -1;
     public totalPoints: number = -1;
-    public milestoneAchievedIndex: number = -1;
+    public rarity: Rarity = Rarity.Legendary;
+    public stars: RarityStars = RarityStars.None;
+    public shardsToNextMilestone: number = 400;
+    public achievedPointsMilestone: boolean = false;
+    public achievedStarMilestone: boolean = false;
 }
 
 /**
@@ -98,6 +105,196 @@ export const milestonesAndPoints: readonly MilestoneAndPoints[] = [
     { points: 27000, stars: 8, round: 1, packsPerRound: 0 },
 ];
 
+export interface PointMilestone {
+    points: number;
+    currencyPayout: number;
+}
+
+export const pointMilestones: readonly PointMilestone[] = [
+    { points: 100, currencyPayout: 25 },
+    { points: 250, currencyPayout: 30 },
+    { points: 500, currencyPayout: 35 },
+    { points: 1000, currencyPayout: 40 },
+    { points: 1500, currencyPayout: 45 },
+    { points: 2000, currencyPayout: 50 },
+    { points: 2500, currencyPayout: 55 },
+    { points: 3000, currencyPayout: 60 },
+    { points: 3500, currencyPayout: 65 },
+    { points: 4000, currencyPayout: 70 },
+    { points: 4500, currencyPayout: 75 },
+    { points: 5000, currencyPayout: 80 },
+    { points: 5500, currencyPayout: 85 },
+    { points: 6000, currencyPayout: 90 },
+    { points: 6500, currencyPayout: 95 },
+    { points: 7000, currencyPayout: 100 },
+    { points: 7500, currencyPayout: 110 },
+    { points: 8000, currencyPayout: 120 },
+    { points: 8500, currencyPayout: 140 },
+    { points: 9000, currencyPayout: 160 },
+    { points: 9500, currencyPayout: 180 },
+    { points: 10000, currencyPayout: 200 },
+    { points: 10500, currencyPayout: 220 },
+    { points: 11000, currencyPayout: 240 },
+    { points: 11500, currencyPayout: 260 },
+    { points: 12000, currencyPayout: 280 },
+    { points: 12500, currencyPayout: 300 },
+    { points: 13000, currencyPayout: 310 },
+    { points: 13500, currencyPayout: 320 },
+    { points: 14000, currencyPayout: 330 },
+    { points: 14250, currencyPayout: 340 },
+    { points: 14500, currencyPayout: 350 },
+    { points: 14750, currencyPayout: 355 },
+    { points: 15000, currencyPayout: 360 },
+    { points: 15250, currencyPayout: 365 },
+    { points: 15500, currencyPayout: 370 },
+    { points: 15750, currencyPayout: 380 },
+    { points: 16000, currencyPayout: 390 },
+    { points: 16250, currencyPayout: 400 },
+    { points: 16500, currencyPayout: 410 },
+    { points: 16750, currencyPayout: 420 },
+    { points: 17000, currencyPayout: 430 },
+    { points: 17250, currencyPayout: 440 },
+    { points: 17500, currencyPayout: 450 },
+    { points: 17750, currencyPayout: 460 },
+    { points: 18000, currencyPayout: 470 },
+    { points: 18250, currencyPayout: 480 },
+    { points: 18500, currencyPayout: 490 },
+    { points: 18750, currencyPayout: 500 },
+    { points: 19000, currencyPayout: 510 },
+    { points: 19250, currencyPayout: 520 },
+    { points: 19500, currencyPayout: 530 },
+    { points: 19750, currencyPayout: 540 },
+    { points: 20000, currencyPayout: 550 },
+    { points: 20250, currencyPayout: 560 },
+    { points: 20500, currencyPayout: 570 },
+    { points: 20750, currencyPayout: 580 },
+    { points: 21000, currencyPayout: 590 },
+    { points: 21250, currencyPayout: 600 },
+    { points: 21500, currencyPayout: 605 },
+    { points: 21750, currencyPayout: 610 },
+    { points: 22000, currencyPayout: 615 },
+    { points: 22250, currencyPayout: 620 },
+    { points: 22500, currencyPayout: 625 },
+    { points: 22750, currencyPayout: 630 },
+    { points: 23000, currencyPayout: 635 },
+    { points: 23250, currencyPayout: 640 },
+    { points: 23500, currencyPayout: 645 },
+    { points: 23750, currencyPayout: 650 },
+    { points: 24000, currencyPayout: 655 },
+    { points: 24250, currencyPayout: 660 },
+    { points: 24500, currencyPayout: 665 },
+    { points: 24750, currencyPayout: 670 },
+    { points: 25000, currencyPayout: 675 },
+    { points: 25250, currencyPayout: 680 },
+    { points: 25500, currencyPayout: 685 },
+    { points: 25750, currencyPayout: 690 },
+    { points: 26000, currencyPayout: 695 },
+    { points: 26250, currencyPayout: 700 },
+    { points: 26500, currencyPayout: 705 },
+    { points: 26750, currencyPayout: 710 },
+    { points: 27000, currencyPayout: 715 },
+];
+interface ShardMilestone {
+    shards: PositiveInteger<number>;
+    rarity: Rarity;
+    stars: RarityStars;
+    totalNeededCurrency: PositiveInteger<number>;
+}
+
+export const chestMilestones: readonly ShardMilestone[] = [
+    { shards: 25, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 60 },
+    { shards: 50, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 140 },
+    { shards: 75, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 240 },
+    { shards: 100, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 360 },
+    { shards: 125, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 500 },
+    { shards: 150, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 660 },
+    { shards: 175, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 840 },
+    { shards: 200, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 1040 },
+    { shards: 225, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 1260 },
+    { shards: 250, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 1500 },
+    { shards: 275, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 1760 },
+    { shards: 300, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 2040 },
+    { shards: 325, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 2340 },
+    { shards: 350, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 2660 },
+    { shards: 375, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 3000 },
+    { shards: 400, rarity: Rarity.Legendary, stars: RarityStars.RedThreeStars, totalNeededCurrency: 3350 },
+    { shards: 425, rarity: Rarity.Legendary, stars: RarityStars.RedThreeStars, totalNeededCurrency: 3710 },
+    { shards: 450, rarity: Rarity.Legendary, stars: RarityStars.RedThreeStars, totalNeededCurrency: 4080 },
+    { shards: 475, rarity: Rarity.Legendary, stars: RarityStars.RedThreeStars, totalNeededCurrency: 4460 },
+    { shards: 500, rarity: Rarity.Legendary, stars: RarityStars.RedThreeStars, totalNeededCurrency: 4850 },
+    { shards: 525, rarity: Rarity.Legendary, stars: RarityStars.RedFourStars, totalNeededCurrency: 5250 },
+    { shards: 550, rarity: Rarity.Legendary, stars: RarityStars.RedFourStars, totalNeededCurrency: 5650 },
+    { shards: 575, rarity: Rarity.Legendary, stars: RarityStars.RedFourStars, totalNeededCurrency: 6050 },
+    { shards: 600, rarity: Rarity.Legendary, stars: RarityStars.RedFourStars, totalNeededCurrency: 6450 },
+    { shards: 625, rarity: Rarity.Legendary, stars: RarityStars.RedFourStars, totalNeededCurrency: 6850 },
+    { shards: 650, rarity: Rarity.Legendary, stars: RarityStars.RedFourStars, totalNeededCurrency: 7250 },
+    { shards: 675, rarity: Rarity.Legendary, stars: RarityStars.RedFourStars, totalNeededCurrency: 7650 },
+    { shards: 700, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 8050 },
+    { shards: 725, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 8450 },
+    { shards: 750, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 8850 },
+    { shards: 775, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 9250 },
+    { shards: 800, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 9650 },
+    { shards: 825, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10050 },
+    { shards: 850, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10450 },
+    { shards: 875, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10850 },
+    { shards: 900, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 11250 },
+    { shards: 925, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 12050 },
+    { shards: 950, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 12950 },
+    { shards: 975, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 13950 },
+    { shards: 1000, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 15050 },
+    { shards: 1025, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 16250 },
+    { shards: 1050, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 17550 },
+    { shards: 1075, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 18950 },
+    { shards: 1100, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 20450 },
+    { shards: 1125, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 21950 },
+    { shards: 1150, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 23450 },
+    { shards: 1175, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 24950 },
+    { shards: 1200, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 26450 },
+    { shards: 1225, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 27950 },
+    { shards: 1250, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 29450 },
+    { shards: 1275, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 30950 },
+    { shards: 1300, rarity: Rarity.Mythic, stars: RarityStars.TwoBlueStars, totalNeededCurrency: 32450 },
+];
+
+export interface StarMilestone {
+    totalShards: number;
+    incrementalShards: number;
+    rarity: Rarity;
+    stars: RarityStars;
+}
+
+export const ascensionMilestones: readonly StarMilestone[] = [
+    { totalShards: 400, incrementalShards: 400, rarity: Rarity.Legendary, stars: RarityStars.RedThreeStars },
+    { totalShards: 520, incrementalShards: 120, rarity: Rarity.Legendary, stars: RarityStars.RedFourStars },
+    { totalShards: 700, incrementalShards: 180, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars },
+    { totalShards: 900, incrementalShards: 200, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar },
+    { totalShards: 1150, incrementalShards: 250, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar },
+    { totalShards: 1300, incrementalShards: 150, rarity: Rarity.Mythic, stars: RarityStars.TwoBlueStars },
+];
+
+export interface EventProgress {
+    // The total points accumulated so far.
+    points: number;
+
+    // The total currency accumulated so far.
+    currency: number;
+
+    // The current rarity of the character.
+    rarity: Rarity;
+
+    // The current stars of the character.
+    stars: RarityStars;
+
+    // The current number of shards of the character.
+    shards: number;
+
+    // The number of shards needed to hit the next ascension milestone.
+    shardsForNextMilestone: number;
+
+    // The index of the last chest opened (0 based, -1 means nothing claimed).
+    currentClaimedChestIndex: number;
+}
+
 /**
  * Computes or estimates various values related to tokenomics.
  */
@@ -143,7 +340,7 @@ export class TokenEstimationService {
      * @returns the index of the furthest milestone achieved with the number of
      * points. If no milestone has been achieved, returns -1.
      */
-    public static getFurthestMilestoneAchieved(currentPoints: number): number {
+    public static getFurthestCurrencyMilestoneAchieved(currentPoints: number): number {
         for (let i = milestonesAndPoints.length - 1; i >= 0; --i) {
             if (currentPoints >= milestonesAndPoints[i].points) {
                 return i;
@@ -251,7 +448,7 @@ export class TokenEstimationService {
     }
 
     /** @returns the current points earned in this track, accounting for partial killScore and highScore inputs. */
-    public static computeCurrentPoints(track: ILreTrackProgress): number {
+    public static computeCurrentPointsInTrack(track: ILreTrackProgress): number {
         return track.battles.reduce((sum, battle) => {
             const battlePoints = battle.requirementsProgress
                 .map(req => LreRequirementStatusService.getRequirementPoints(req))
@@ -499,21 +696,241 @@ export class TokenEstimationService {
         return restrictions;
     }
 
-    public static getTokenDisplays(tokens: TokenUse[], currentPoints: number): TokenDisplay[] {
-        let totalPoints = currentPoints;
+    /**
+     * Returns the next point milestone to be achieved that will award currency.
+     */
+    private static getNextPointMilestoneIndex(currentPoints: number): number {
+        for (let i = 0; i < pointMilestones.length; ++i) {
+            if (currentPoints < pointMilestones[i].points) return i;
+        }
+        return pointMilestones.length;
+    }
+
+    /**
+     * Gets the index of the current star milestone based on the character's rarity and stars.
+     * This is used to determine the starting point for token calculation within the `starMilestones` array.
+     *
+     * @param currentRarity - The current rarity of the character.
+     * @param currentStars - The number of stars the character currently has.
+     * @returns The index in the `starMilestones` array corresponding to the character's current progression.
+     * Returns -1 if the character has no stars (`RarityStars.None`).
+     * Returns `starMilestones.length` if the character has surpassed all defined milestones.
+     */
+    private static getCurrentStarIndex(currentRarity: Rarity, currentStars: RarityStars): number {
+        if (currentStars === RarityStars.None) return -1;
+        for (let i = 0; i < ascensionMilestones.length; ++i) {
+            if (currentRarity === ascensionMilestones[i].rarity && currentStars <= ascensionMilestones[i].stars) {
+                return i;
+            }
+        }
+        return ascensionMilestones.length;
+    }
+
+    /**
+     * Returns the current bonus payout per currency payout. While the bonus
+     * payout is fixed, whether it's active is not.
+     */
+    private static getBonusPayoutPerCurrencyPayout(progress: ILreProgressModel): number {
+        if (progress.syncedProgress !== undefined) {
+            return progress.syncedProgress.hasPremiumPayout ? 15 : 0;
+        }
+        return progress.occurrenceProgress.some(occ => occ.premiumMissionsProgress > 0) ? 15 : 0;
+    }
+
+    /** Returns the number of shards obtained per chest. */
+    private static getShardsPerChest(): number {
+        return 25;
+    }
+
+    /** Gets the current points in the event, either from the player override or the computed progress. */
+    public static computeCurrentPoints(progress: ILreProgressModel): number {
+        if (progress.syncedProgress !== undefined) {
+            return progress.syncedProgress.currentPoints;
+        }
+        return LeProgressService.computeProgress(progress, false).currentPoints;
+    }
+
+    /** Gets the total current currency based on progress, character rarity, stars, and P2P status. */
+    public static computeTotalCurrency(progress: ILreProgressModel, p2p: boolean): number {
+        if (progress.syncedProgress !== undefined) {
+            return (
+                progress.syncedProgress.currentCurrency +
+                (progress.syncedProgress.currentClaimedChestIndex >= 0
+                    ? chestMilestones[progress.syncedProgress.currentClaimedChestIndex].totalNeededCurrency
+                    : 0)
+            );
+        }
+        return LeProgressService.computeProgress(progress, p2p).currentCurrency;
+    }
+
+    /**
+     * @returns the number of shards the user currently has. If the user has forced progress,
+     *          returns the value they specified, but excludes any chests they have the ability to
+     *          open with their current stash of currency. */
+    public static computeCurrentShards(progress: ILreProgressModel): number {
+        if (progress.syncedProgress !== undefined) {
+            return progress.syncedProgress.currentShards;
+        }
+        let shards = LeProgressService.computeProgress(progress, false).currentChests * this.getShardsPerChest();
+        for (let i = 0; i < ascensionMilestones.length; ++i) {
+            if (ascensionMilestones[i].totalShards > shards) break;
+            shards -= ascensionMilestones[i].incrementalShards;
+        }
+
+        return shards;
+    }
+
+    /**
+     * Computes the current progress event progress based on the forced progress provided by the
+     * user.
+     */
+    private static computeSyncedProgress(
+        progress: ILreProgressModel,
+        currentRarity: Rarity,
+        currentStars: RarityStars
+    ): EventProgress {
+        if (progress.syncedProgress === undefined) {
+            throw new Error('computeForcedProgress called with no forced progress');
+        }
+        let currentCurrency = progress.syncedProgress.currentCurrency;
+        let currentShards = progress.syncedProgress.currentShards;
+        let lastClaimedChestIndex = progress.syncedProgress.currentClaimedChestIndex;
+
+        // Determine the total currency, since forced progress only gives us the current incremental currency.
+        if (lastClaimedChestIndex >= 0 && lastClaimedChestIndex < chestMilestones.length) {
+            currentCurrency = chestMilestones[lastClaimedChestIndex].totalNeededCurrency + currentCurrency;
+        }
+
+        // Open any chests we can with the current currency, collecting shards along the way.
+        while (
+            lastClaimedChestIndex + 1 < chestMilestones.length &&
+            currentCurrency >= chestMilestones[lastClaimedChestIndex + 1].totalNeededCurrency
+        ) {
+            ++lastClaimedChestIndex;
+            currentShards += this.getShardsPerChest();
+        }
+        // Determine if we hit any new ascension milestones.
+        let starIndex = 0;
+        for (starIndex = 0; starIndex < ascensionMilestones.length; ++starIndex) {
+            // Skip over the milestones we've already hit.
+            if (currentRarity > ascensionMilestones[starIndex].rarity) continue;
+            if (currentStars > ascensionMilestones[starIndex].stars) continue;
+            if (
+                currentRarity === ascensionMilestones[starIndex].rarity &&
+                currentStars === ascensionMilestones[starIndex].stars
+            ) {
+                continue;
+            }
+            // Go over each milestone and see if we can spend our incremental shards to ascend.
+            if (ascensionMilestones[starIndex].incrementalShards > currentShards) break;
+            currentRarity = ascensionMilestones[starIndex].rarity;
+            currentStars = ascensionMilestones[starIndex].stars;
+            currentShards -= ascensionMilestones[starIndex].incrementalShards;
+        }
+        return {
+            points: progress.syncedProgress.currentPoints,
+            currency: currentCurrency,
+            rarity: currentRarity,
+            stars: currentStars,
+            shards: currentShards,
+            shardsForNextMilestone: ascensionMilestones[starIndex]?.incrementalShards ?? Infinity,
+            currentClaimedChestIndex: lastClaimedChestIndex,
+        } as EventProgress;
+    }
+
+    /**
+     * @returns the current progress based either on the forced progress, or on the provided
+     * progress model and current rarity/stars.
+     */
+    public static computeCurrentProgress(
+        progress: ILreProgressModel,
+        currentRarity: Rarity,
+        currentStars: RarityStars,
+        p2p: boolean
+    ): EventProgress {
+        if (progress.syncedProgress !== undefined) {
+            return this.computeSyncedProgress(progress, currentRarity, currentStars);
+        }
+        const computedProgress = LeProgressService.computeProgress(progress, p2p);
+        let lastClaimedChestIndex = -1;
+        for (lastClaimedChestIndex = -1; lastClaimedChestIndex + 1 < chestMilestones.length; ++lastClaimedChestIndex) {
+            if (computedProgress.currentCurrency < chestMilestones[lastClaimedChestIndex + 1].totalNeededCurrency) {
+                break;
+            }
+        }
+        let totalShards = computedProgress.currentTotalShards;
+        let starIndex = 0;
+        for (starIndex = 0; starIndex < ascensionMilestones.length; ++starIndex) {
+            if (ascensionMilestones[starIndex].totalShards > totalShards) break;
+            currentRarity = ascensionMilestones[starIndex].rarity;
+            currentStars = ascensionMilestones[starIndex].stars;
+            totalShards -= ascensionMilestones[starIndex].incrementalShards;
+        }
+
+        return {
+            points: computedProgress.currentPoints,
+            currency: computedProgress.currentCurrency,
+            rarity: currentRarity,
+            stars: currentStars,
+            shards: totalShards,
+            shardsForNextMilestone: ascensionMilestones[starIndex]?.incrementalShards ?? Infinity,
+            currentClaimedChestIndex: lastClaimedChestIndex,
+        } as EventProgress;
+    }
+
+    /**
+     * @returns the information to display for each token based on the current progress of the
+     * player.
+     */
+    public static getTokenDisplays(
+        tokens: TokenUse[],
+        progress: ILreProgressModel,
+        currentRarity: Rarity,
+        currentStars: RarityStars,
+        p2p: boolean
+    ): TokenDisplay[] {
+        const currentProgress = this.computeCurrentProgress(progress, currentRarity, currentStars, p2p);
+        let currentPoints = currentProgress.points;
+        let currentCurrency = currentProgress.currency;
+        let currentShards = currentProgress.shards;
+        currentRarity = currentProgress.rarity;
+        currentStars = currentProgress.stars;
+        let lastClaimedChestIndex = currentProgress.currentClaimedChestIndex;
+        let nextPointMilestoneIndex = this.getNextPointMilestoneIndex(currentProgress.points);
+        let nextStarIndex = this.getCurrentStarIndex(currentProgress.rarity, currentProgress.stars) + 1;
         const ret: TokenDisplay[] = [];
-        let currentMilestoneIndex: number = TokenEstimationService.getFurthestMilestoneAchieved(totalPoints) + 1;
 
         for (let i = 0; i < tokens.length; ++i) {
             const token = tokens[i];
-            totalPoints += token.incrementalPoints;
-            let milestoneIndex = -1;
-            if (
-                currentMilestoneIndex < milestonesAndPoints.length &&
-                totalPoints >= milestonesAndPoints[currentMilestoneIndex].points
+            currentPoints += token.incrementalPoints;
+            let achievedPointsMilestone = false;
+            let achievedStarMilestone = false;
+            while (
+                nextPointMilestoneIndex < pointMilestones.length &&
+                currentPoints >= pointMilestones[nextPointMilestoneIndex].points
             ) {
-                milestoneIndex = currentMilestoneIndex;
-                currentMilestoneIndex++;
+                currentCurrency +=
+                    pointMilestones[nextPointMilestoneIndex].currencyPayout +
+                    this.getBonusPayoutPerCurrencyPayout(progress);
+                ++nextPointMilestoneIndex;
+                achievedPointsMilestone = true;
+                while (
+                    lastClaimedChestIndex + 1 < chestMilestones.length &&
+                    currentCurrency >= chestMilestones[lastClaimedChestIndex + 1].totalNeededCurrency
+                ) {
+                    currentShards += this.getShardsPerChest();
+                    ++lastClaimedChestIndex;
+                }
+                while (
+                    nextStarIndex < ascensionMilestones.length &&
+                    currentShards >= ascensionMilestones[nextStarIndex].incrementalShards
+                ) {
+                    currentRarity = ascensionMilestones[nextStarIndex].rarity;
+                    currentStars = ascensionMilestones[nextStarIndex].stars;
+                    currentShards -= ascensionMilestones[nextStarIndex].incrementalShards;
+                    achievedStarMilestone = true;
+                    ++nextStarIndex;
+                }
             }
             const chars = [];
             if (token.team) {
@@ -527,14 +944,22 @@ export class TokenEstimationService {
                     );
                 }
             }
+            const shardsToNextMilestone =
+                nextStarIndex < ascensionMilestones.length
+                    ? ascensionMilestones[nextStarIndex].incrementalShards - currentShards
+                    : 0;
             ret.push({
                 team: chars,
                 restricts: token.restrictionsCleared,
                 battleNumber: token.battleNumber,
                 track: token.team!.section,
                 incrementalPoints: token.incrementalPoints,
-                totalPoints: totalPoints,
-                milestoneAchievedIndex: milestoneIndex,
+                totalPoints: currentPoints,
+                rarity: currentRarity,
+                stars: currentStars,
+                shardsToNextMilestone: shardsToNextMilestone,
+                achievedPointsMilestone: achievedPointsMilestone,
+                achievedStarMilestone: achievedStarMilestone,
             });
         }
         return ret;

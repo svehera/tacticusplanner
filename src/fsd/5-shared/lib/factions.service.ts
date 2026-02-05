@@ -114,6 +114,8 @@ export class FactionsService {
                 return Faction.AdeptusCustodes;
             case 'EmperorsChildren':
                 return Faction.EmperorsChildren;
+            case 'LeaguesOfVotann':
+                return Faction.LeaguesOfVotann;
             default:
                 throw new Error(`Unknown faction: ${snowprintFaction}`);
         }

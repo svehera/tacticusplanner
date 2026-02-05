@@ -171,6 +171,7 @@ interface Props {
     showShards: RosterSnapshotShowVariableSettings;
     showMythicShards: RosterSnapshotShowVariableSettings;
     showXpLevel: RosterSnapshotShowVariableSettings;
+    showAbilities?: boolean;
     char?: ISnapshotCharacter;
     charData?: ICharacterData;
     mow?: ISnapshotMachineOfWar;
@@ -181,6 +182,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
     showShards,
     showMythicShards,
     showXpLevel,
+    showAbilities = true,
     char,
     charData,
     mow,
@@ -265,7 +267,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
                         </div>
                     )}
 
-                    {(rank !== Rank.Locked || (mow !== undefined && !mow.locked)) && (
+                    {showAbilities && (rank !== Rank.Locked || (mow !== undefined && !mow.locked)) && (
                         <>
                             <div className="absolute bottom-[8px] left-0 z-[11] w-[36px] flex justify-center">
                                 <div>
