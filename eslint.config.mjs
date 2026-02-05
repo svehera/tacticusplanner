@@ -168,21 +168,7 @@ export default [
             'src/fsd/5-shared/**/*.{ts,tsx}',
         ],
         rules: {
-            'import-x/no-internal-modules': [
-                'error',
-                {
-                    allow: [
-                        '**/*(0-app|1-pages|2-widgets|3-features|4-entities|5-shared)/*',
-                        '**/5-shared/*(ui|model|api|i18n)',
-                        '**/5-shared/ui/*',
-                        /** Allow @x cross-imports only within entities */
-                        '**/4-entities/*/@x/*',
-                        '**/node_modules/**',
-                        './',
-                    ],
-                },
-            ],
-            'no-restricted-imports': [
+                        'no-restricted-imports': [
                 'error',
                 {
                     patterns: [
