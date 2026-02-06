@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# We have the typescript compiler able to import JSON files as const types,
+# but that approach doesn't work for dynamic imports or for large collections of files.
+# To deal with this, we generate some JSON files that contain indexes of the data we need.
+
+# Generate a list of all unique BoardIds used in the onslaught data files.
+grep -Rho '"BoardId"[[:space:]]*:[[:space:]]*"[^"]*"' src/data/onslaught \
+  | sed -E 's/.*"BoardId"[[:space:]]*:[[:space:]]*"([^"]*)".*/\1/' \
+  | sort -u \
+  | jq -R -s -c 'split("\n") | map(select(length>0))' \
+  > src/data/onslaught-board-ids.generated.json
+
+# Generate a list of all onslaught data JSON files.
+find src/data/onslaught -type f -name '*.json' \
+  | sort \
+  | sed 's|^|/|' \
+  | jq -R -s -c 'split("\n") | map(select(length>0))' \
+  > src/data/onslaught-json-index.generated.json

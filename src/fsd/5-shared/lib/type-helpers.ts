@@ -90,3 +90,9 @@ type DeepMutable<T> = Prettify<{
 export function mutableCopy<T extends object | readonly object[]>(obj: T): DeepMutable<T> {
     return JSON.parse(JSON.stringify(obj)) as DeepMutable<T>;
 }
+
+type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
+    ? Acc[number]
+    : Enumerate<N, [...Acc, Acc['length']]>;
+
+export type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>;

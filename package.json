@@ -38,7 +38,8 @@
     "use-analytics": "^1.1.0",
     "usehooks-ts": "^3.1.1",
     "uuid": "^9.0.1",
-    "web-vitals": "^4.2.4"
+    "web-vitals": "^4.2.4",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.13.5",
@@ -93,8 +94,8 @@
   "scripts": {
     "start": "vite",
     "start-local": "vite --mode dev-local",
-    "build": "tsc && vite build",
-    "build-dev": "tsc && vite build --mode staging",
+    "build": "bin/regenerate-json && tsc && vite build",
+    "build-dev": "bin/regenerate-json && tsc && vite build --mode staging",
     "build-ci": "npm run format-ci && npm run lint-ci && npm run build && npm run test",
     "build-dev-ci": "npm run format-ci && npm run lint-ci && npm run build-dev && npm run test",
     "test": "vitest run",
