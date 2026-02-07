@@ -80,7 +80,7 @@ export const menuItemById = {
     teams: teamsMenuItem,
     guides: guidesMenuItem,
     xpIncome: xpIncomeMenuItem,
-    onslaught: new MenuItemTP('Onslaught', <MilitaryTechIcon />, '/learn/onslaught?tab=sectors'),
+    onslaught: new MenuItemTP('Onslaught', <MilitaryTechIcon />, '/learn/onslaught?track=Imperial'),
 };
 
 export const inputSubMenu: MenuItemTP[] = [

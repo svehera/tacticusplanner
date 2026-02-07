@@ -31,3 +31,6 @@ yarn-error.log*
 !/.vscode/settings.example.json
 
 /tmp/
+
+# working files for local development. e.g. design docs for feeding into AI.
+/.local/
