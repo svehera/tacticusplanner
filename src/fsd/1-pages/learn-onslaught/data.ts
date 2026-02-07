@@ -19,16 +19,16 @@ export type OnslaughtWave = {
     badge: `${RarityString}_${Alliance}:${number}`;
 };
 
-export type OnslaughtBattle = {
+export type OnslaughtKillzone = { [wave: `wave_${number}`]: OnslaughtWave };
+
+export type OnslaughtSector = {
     minHeroPower: number;
     boardId: BoardId;
-    waves: {
-        [round: `${number}`]: OnslaughtWave;
-    };
+    killzones: OnslaughtKillzone[];
 };
 
 export type OnslaughtData = {
-    [alliance in Alliance]: OnslaughtBattle[];
+    [alliance in Alliance]: OnslaughtSector[];
 };
 
 // TS thinks the type is `{}` due the size, so we have to override it

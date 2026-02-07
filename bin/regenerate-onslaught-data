@@ -6,20 +6,24 @@ set -euo pipefail
 # compiler limits. Instead, we generate indexes of key data.
 
 jsonPath=src/data/onslaught/rawData.json
+outPath=src/data/onslaught/data.generated.json
 
 # --- Validation: ensure rawData.json matches our expected schema ---
 # NOTE: This is written to be compatible with jq 1.6 (no halt_error/2).
 
-# 0. top-level .tracks must be an array
+# 0. top-level .tracks must be an array; allowedGrandAlliance must be unique across tracks
 jq -e '
   if (.tracks | type) != "array" then
     error("rawData.tracks must be an array, got \(.tracks | type)")
   else
     .
   end
+  | if ([.tracks[].allowedGrandAlliance] | unique | length) != (.tracks | length) then
+      error("allowedGrandAlliance must be unique across tracks; got \([.tracks[].allowedGrandAlliance])")
+    else . end
 ' "$jsonPath" >/dev/null
 
-# 1. track-level checks: each track object, allowedGrandAlliance, tiers
+# 1. track-level checks: each track object, allowedGrandAlliance, tiers; battleNr is sequential [1..N]
 jq -e '
   .tracks[]
   | if (type != "object") then
@@ -30,6 +34,11 @@ jq -e '
     else . end
   | if (.tiers | type) != "array" then
       error("track.tiers must be an array (allowedGrandAlliance=\(.allowedGrandAlliance))")
+    else . end
+  | .allowedGrandAlliance as $ga
+  | [ .tiers[].battles[].battleNr ] as $nrs
+  | if $nrs != [range(1; $nrs | length + 1)] then
+      error("battleNr must be sequential [1..N] (ga=\($ga)); got \($nrs)")
     else . end
 ' "$jsonPath" >/dev/null
 
@@ -49,12 +58,15 @@ jq -e '
     else . end
 ' "$jsonPath" >/dev/null
 
-# 3. battle-level checks: battleNr, BoardId, waves
+# 3. battle-level checks: battleNr, BoardId, waves; all battles in a tier share the same BoardId
 jq -e '
   .tracks[]
   | .allowedGrandAlliance as $ga
   | .tiers[]
   | .minHeroPower as $min
+  | if (.battles | map(.BoardId) | unique | length > 1) then
+      error("all battles within a tier must share the same BoardId (ga=\($ga), minHeroPower=\($min)); got \(.battles | map(.BoardId) | unique)")
+    else . end
   | .battles[]
   | if (type != "object") then
       error("battle must be an object (ga=\($ga), minHeroPower=\($min)), got \(. | type)")
@@ -68,9 +80,12 @@ jq -e '
   | if (.waves | type) != "array" then
       error("battles[].waves must be an array (ga=\($ga), minHeroPower=\($min), battleNr=\(.battleNr), BoardId=\(.BoardId))")
     else . end
+  | if (.waves | map(.round) | unique | length) != (.waves | length) then
+      error("waves[].round must be unique within a battle (ga=\($ga), minHeroPower=\($min), battleNr=\(.battleNr)); got \(.waves | map(.round))")
+    else . end
 ' "$jsonPath" >/dev/null
 
-# 4. wave structure: round, enemies, enemies.defaultGroup, rewards, rewards.guaranteed, rewards.oneTime
+# 4. wave structure and value formats
 jq -e '
   .tracks[]
   | .allowedGrandAlliance as $ga
@@ -84,6 +99,7 @@ jq -e '
       error("wave must be an object (ga=\($ga), minHeroPower=\($min), battleNr=\($battle), boardId=\($board)), got \(. | type)")
     else . end
   | .round as $round
+  # --- type checks ---
   | if ($round | type) != "number" then
       error("waves[].round must be a number (ga=\($ga), minHeroPower=\($min), battleNr=\($battle), boardId=\($board)), got \($round | type)")
     else . end
@@ -92,6 +108,9 @@ jq -e '
     else . end
   | if (.enemies.defaultGroup | type) != "array" then
       error("waves[].enemies.defaultGroup must be an array (ga=\($ga), minHeroPower=\($min), battleNr=\($battle), boardId=\($board), round=\($round)), got \(.enemies.defaultGroup | type)")
+    else . end
+  | if (.enemies | keys) != ["defaultGroup"] then
+      error("waves[].enemies must only contain \"defaultGroup\" (ga=\($ga), minHeroPower=\($min), battleNr=\($battle), boardId=\($board), round=\($round)); got \(.enemies | keys)")
     else . end
   | if (.rewards | type) != "object" then
       error("waves[].rewards must be an object (ga=\($ga), minHeroPower=\($min), battleNr=\($battle), boardId=\($board), round=\($round)), got \(.rewards | type)")
@@ -102,34 +121,25 @@ jq -e '
   | if (.rewards.oneTime | type) != "array" then
       error("waves[].rewards.oneTime must be an array (ga=\($ga), minHeroPower=\($min), battleNr=\($battle), boardId=\($board), round=\($round)), got \(.rewards.oneTime | type)")
     else . end
-' "$jsonPath" >/dev/null
-
-# 5. wave value formats: enemies.defaultGroup entries, rewards.guaranteed[0], rewards.oneTime[0]
-jq -e '
-  .tracks[]
-  | .allowedGrandAlliance as $ga
-  | .tiers[]
-  | .minHeroPower as $min
-  | .battles[]
-  | .battleNr as $battle
-  | .BoardId as $board
-  | .waves[]
-  | .round as $round
-  # enemies.defaultGroup entries
+  | if (.rewards.guaranteed | length) != 1 then
+      error("rewards.guaranteed must have exactly 1 element (ga=\($ga), minHeroPower=\($min), battleNr=\($battle), boardId=\($board), round=\($round)); got \(.rewards.guaranteed | length)")
+    else . end
+  | if (.rewards.oneTime | length) != 1 then
+      error("rewards.oneTime must have exactly 1 element (ga=\($ga), minHeroPower=\($min), battleNr=\($battle), boardId=\($board), round=\($round)); got \(.rewards.oneTime | length)")
+    else . end
+  # --- value format checks ---
   | (
       .enemies.defaultGroup[]
       | if (type != "string" or (test("^[^:]+:[0-9]+$") | not)) then
           error("enemies.defaultGroup entries must match \"<unitId>:<levelNumber>\" (ga=\($ga), minHeroPower=\($min), battleNr=\($battle), boardId=\($board), round=\($round)); got \(.)")
         else . end
     ),
-  # rewards.guaranteed[0]
   (
       (.rewards.guaranteed[0] // "")
       | if (type != "string" or (test("^wavesXp:[0-9]+$") | not)) then
           error("rewards.guaranteed[0] must match \"wavesXp:<number>\" (ga=\($ga), minHeroPower=\($min), battleNr=\($battle), boardId=\($board), round=\($round)); got \(.)")
         else . end
     ),
-  # rewards.oneTime[0]
   (
       (.rewards.oneTime[0] // "")
       | if (type != "string" or (test("^abilityToken[A-Za-z]+_[A-Za-z]+(:[0-9]+)?$") | not)) then
@@ -139,80 +149,55 @@ jq -e '
 ' "$jsonPath" >/dev/null
 
 
-
 # --- Transform: generate compact JSON that matches our access pattern ---
 
 jq '
-  [
-    .tracks[]
-    | .allowedGrandAlliance as $ga
-    | .tiers[]
-    | .minHeroPower as $min
-    | .battles[]
-    | {
-        allowedGrandAlliance: $ga,
-        minHeroPower: $min,
-        boardId: .BoardId,
-        waves: (
-          .waves
-          | map(
-              .rewards as $r
-              # Extract XP: "wavesXp:5" -> 5
-              | .wavesXp = (
-                  ($r.guaranteed[0] // "")
-                  | sub("^wavesXp:"; "")
-                  | select(. != "")
-                  | tonumber
-                )
-              # Extract badge: "abilityTokenCommon_X" or "abilityTokenCommon_X:2" -> "Common_X:1" or "Common_X:2"
-              | .badge = (
-                  ($r.oneTime[0] // "")
-                  | sub("^abilityToken"; "")
-                  | select(. != "")
-                  # Add ":1" if no count is present
-                  | if test(":[0-9]+$") then . else . + ":1" end
-                )
-              | del(.rewards)
-              | .enemies =
-                  (
-                    (.enemies.defaultGroup // [])
-                    | map({ key: ., value: 1 })
-                    | group_by(.key)
-                    | map({
-                        key:   .[0].key,
-                        value: (map(.value) | add)
-                      })
-                    | from_entries
-                  )
-            )
-          # waves array -> object keyed by round
-          | map(
-              {
-                key:   (.round | tostring),
-                value: {
-                  enemies: .enemies,
-                  wavesXp: .wavesXp,
-                  badge:   .badge
-                }
-              }
-            )
-          | from_entries
-        )
-      }
-  ]
-  | group_by(.allowedGrandAlliance)
+  .tracks
   | map({
-      (.[0].allowedGrandAlliance): (
-        map({
+      key: .allowedGrandAlliance,
+      value: (
+        .tiers | map({
           minHeroPower,
-          boardId,
-          waves
+          boardId: .battles[0].BoardId,
+          killzones: (
+            .battles | map(
+              .waves | map(
+                .rewards as $r
+                | {
+                    key: ("wave_" + (.round | tostring)),
+                    value: {
+                      enemies: (
+                        .enemies.defaultGroup
+                        | group_by(.)
+                        | map({ key: .[0], value: length })
+                        | from_entries
+                      ),
+                      # Extract XP: "wavesXp:5" -> 5
+                      wavesXp: (
+                        ($r.guaranteed[0] // "")
+                        | sub("^wavesXp:"; "")
+                        | select(. != "")
+                        | tonumber
+                      ),
+                      # Extract badge: "abilityTokenCommon_Xenos" or "abilityTokenCommon_Xenos:2" -> "Common_Xenos:1" or "Common_Xenos:2"
+                      badge: (
+                        ($r.oneTime[0] // "")
+                        | sub("^abilityToken"; "")
+                        | select(. != "")
+                        | if test(":[0-9]+$") then . else . + ":1" end
+                      )
+                    }
+                  }
+              )
+              | from_entries
+            )
+          )
         })
       )
     })
-  | add
+  | from_entries
 ' "$jsonPath" \
-  > src/data/onslaught/data.generated.json
+  > "$outPath"
 
 # Generate a json array of all unique boardIds used in the onslaught data
 jq '
@@ -222,15 +207,14 @@ jq '
   ]
   | sort
   | unique
-' src/data/onslaught/data.generated.json \
+' "$outPath" \
   > src/data/onslaught/boardIds.generated.json
 
 # Generate a json object of all unitIds -> levels[] used in the onslaught data
 jq '
   [
-    .[]
-    | .[]
-    | .waves
+    .[][]
+    | .killzones[]
     | to_entries[]
     | .value.enemies
     | to_entries[]
@@ -248,5 +232,5 @@ jq '
       )
     })
   | add
-' src/data/onslaught/data.generated.json \
+' "$outPath" \
   > src/data/onslaught/unitIdLevels.generated.json
