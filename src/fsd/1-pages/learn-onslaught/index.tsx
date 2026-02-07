@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import type { OnslaughtData } from './data';
 import { onslaughtData } from './data';
+import { indexToRomanNumeral } from './utils';
 
 const validTracks = Object.keys(onslaughtData) as (keyof typeof onslaughtData)[];
 
@@ -37,10 +38,23 @@ export const Onslaught = () => {
             </Tabs>
 
             <main className="flex flex-col gap-3">
-                <p className="text-sm">
-                    {activeTrack} — {sectors.length} sectors
-                </p>
+                {sectors.toReversed().map((sector, reversedIndex) => {
+                    const sectorIndex = sectors.length - 1 - reversedIndex;
+                    return (
+                        <details key={sector.boardId}>
+                            <summary className="cursor-pointer">
+                                <strong>Sector {indexToRomanNumeral(sectorIndex)}</strong>
+                                {' — '}Character Power required: {sector.minHeroPower}
+                            </summary>
+                            <Killzone />
+                        </details>
+                    );
+                })}
             </main>
         </div>
     );
 };
+
+function Killzone() {
+    return <p className="text-muted-foreground pl-4 text-sm">Killzone content placeholder</p>;
+}
