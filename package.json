@@ -94,8 +94,8 @@
   "scripts": {
     "start": "vite",
     "start-local": "vite --mode dev-local",
-    "build": "bin/regenerate-json && tsc && vite build",
-    "build-dev": "bin/regenerate-json && tsc && vite build --mode staging",
+    "build": "tsc && vite build",
+    "build-dev": "tsc && vite build --mode staging",
     "build-ci": "npm run format-ci && npm run lint-ci && npm run build && npm run test",
     "build-dev-ci": "npm run format-ci && npm run lint-ci && npm run build-dev && npm run test",
     "test": "vitest run",
