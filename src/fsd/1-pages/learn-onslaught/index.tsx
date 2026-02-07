@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import type { OnslaughtData, OnslaughtSector } from './data';
 import { onslaughtData } from './data';
-import { indexToGreekLetter, indexToRomanNumeral } from './utils';
+import { BadgeRewardIcon, formatEnemyTypesAndLevels, indexToGreekLetter, indexToRomanNumeral } from './utils';
 
 const validTracks = Object.keys(onslaughtData) as (keyof typeof onslaughtData)[];
 
@@ -64,7 +64,17 @@ function KillzoneList({ killzones }: { killzones: OnslaughtSector['killzones'] }
                         <summary className="cursor-pointer">Killzone {indexToGreekLetter(index)}</summary>
                         <ol className="list-decimal pl-8">
                             {Object.entries(killzone).map(([waveKey, wave]) => (
-                                <li key={waveKey}>Wave: {waveKey}</li>
+                                <li key={waveKey}>
+                                    <ul>
+                                        {formatEnemyTypesAndLevels(wave.enemies).map(enemy => (
+                                            <li key={enemy}>{enemy}</li>
+                                        ))}
+                                    </ul>
+                                    <p>
+                                        Badge reward: <BadgeRewardIcon badge={wave.badge} />
+                                    </p>
+                                    <p>XP reward: {wave.wavesXp}</p>
+                                </li>
                             ))}
                         </ol>
                     </details>
