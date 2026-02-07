@@ -1,4 +1,3 @@
-// eslint-disable-next-line import-x/no-internal-modules
 import type { Alliance, RarityString } from '@/fsd/5-shared/model';
 
 import type { OnslaughtKillzone, OnslaughtWave } from './data';

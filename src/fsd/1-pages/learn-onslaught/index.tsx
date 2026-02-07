@@ -41,7 +41,7 @@ export const Onslaught = () => {
                 {sectors.toReversed().map((sector, reversedIndex) => {
                     const sectorIndex = sectors.length - 1 - reversedIndex;
                     return (
-                        <details key={sector.boardId}>
+                        <details key={sectorIndex}>
                             <summary className="cursor-pointer">
                                 <strong>Sector {indexToRomanNumeral(sectorIndex)}</strong>
                                 {' — '}Character Power required: {sector.minHeroPower}
