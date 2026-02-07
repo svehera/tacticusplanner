@@ -1,41 +1,46 @@
-import { Tab, Tabs } from '@mui/material';
-import { useLayoutEffect, SyntheticEvent } from 'react';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import { useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { OnslaughtLevelTab } from './onslaught-level.tab';
-import { OnslaughtSectorTab } from './onslaught-sector.tab';
+import type { OnslaughtData } from './data';
+import { onslaughtData } from './data';
 
-const validTabs = ['sectors', 'levels'] as const;
+const validTracks = Object.keys(onslaughtData) as (keyof typeof onslaughtData)[];
 
 export const Onslaught = () => {
-    const [queryParams, setQueryParams] = useSearchParams({ tab: 'sectors' });
+    const [queryParams, setQueryParams] = useSearchParams({ track: validTracks[0] });
 
     useLayoutEffect(() => {
-        const currentTab = queryParams.get('tab');
-        if (!currentTab || !validTabs.includes(currentTab as (typeof validTabs)[number])) {
-            setQueryParams(new URLSearchParams({ tab: 'sectors' }));
+        const currentTrack = queryParams.get('track');
+        if (!currentTrack || !validTracks.includes(currentTrack as (typeof validTracks)[number])) {
+            setQueryParams(new URLSearchParams({ track: validTracks[0] }));
         }
     }, [queryParams, setQueryParams]);
 
-    const handleTabChange = (_event: SyntheticEvent, newValue: string) => {
-        if (!validTabs.includes(newValue as (typeof validTabs)[number])) return;
-        setQueryParams(new URLSearchParams({ tab: newValue }));
-    };
+    const activeTrack = (queryParams.get('track') as keyof OnslaughtData) ?? validTracks[0];
+    const sectors = onslaughtData[activeTrack];
 
     return (
-        <>
-            <Tabs value={queryParams.get('tab')} onChange={handleTabChange}>
-                {validTabs.map(tab => (
-                    <Tab key={tab} label={tab.charAt(0).toUpperCase() + tab.slice(1)} value={tab} />
+        <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-4 sm:px-6 sm:py-6">
+            <h1 className="text-xl font-bold sm:text-2xl">Onslaught</h1>
+
+            <Tabs
+                value={activeTrack}
+                onChange={(_, value: keyof OnslaughtData) => setQueryParams({ track: value })}
+                variant="scrollable"
+                scrollButtons="auto"
+                aria-label="Alliance track selection">
+                {validTracks.map(track => (
+                    <Tab key={track} label={track} value={track} />
                 ))}
             </Tabs>
-            <hr className="py-2" />
-            <div role="tabpanel" hidden={queryParams.get('tab') !== 'sectors'}>
-                <OnslaughtSectorTab />
-            </div>
-            <div role="tabpanel" hidden={queryParams.get('tab') !== 'levels'}>
-                <OnslaughtLevelTab />
-            </div>
-        </>
+
+            <main className="flex flex-col gap-3">
+                <p className="text-sm">
+                    {activeTrack} — {sectors.length} sectors
+                </p>
+            </main>
+        </div>
     );
 };
