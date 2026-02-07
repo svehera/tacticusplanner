@@ -3,9 +3,9 @@ import Tabs from '@mui/material/Tabs';
 import { useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import type { OnslaughtData } from './data';
+import type { OnslaughtData, OnslaughtSector } from './data';
 import { onslaughtData } from './data';
-import { indexToRomanNumeral } from './utils';
+import { indexToGreekLetter, indexToRomanNumeral } from './utils';
 
 const validTracks = Object.keys(onslaughtData) as (keyof typeof onslaughtData)[];
 
@@ -46,7 +46,7 @@ export const Onslaught = () => {
                                 <strong>Sector {indexToRomanNumeral(sectorIndex)}</strong>
                                 {' — '}Character Power required: {sector.minHeroPower}
                             </summary>
-                            <Killzone />
+                            <KillzoneList killzones={sector.killzones} />
                         </details>
                     );
                 })}
@@ -55,6 +55,21 @@ export const Onslaught = () => {
     );
 };
 
-function Killzone() {
-    return <p className="text-muted-foreground pl-4 text-sm">Killzone content placeholder</p>;
+function KillzoneList({ killzones }: { killzones: OnslaughtSector['killzones'] }) {
+    return (
+        <div className="flex flex-col gap-2 pl-4">
+            {killzones
+                .map((killzone, index) => (
+                    <details key={index}>
+                        <summary className="cursor-pointer">Killzone {indexToGreekLetter(index)}</summary>
+                        <ol className="list-decimal pl-8">
+                            {Object.entries(killzone).map(([waveKey, wave]) => (
+                                <li key={waveKey}>Wave: {waveKey}</li>
+                            ))}
+                        </ol>
+                    </details>
+                ))
+                .reverse()}
+        </div>
+    );
 }
