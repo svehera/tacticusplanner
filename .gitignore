@@ -25,5 +25,9 @@ yarn-error.log*
 
 # IDE
 /.idea/
+/.zed
+!/.zed/settings.example.json
+/.vscode/
+!/.vscode/settings.example.json
 
 /tmp/
