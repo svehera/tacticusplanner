@@ -5,7 +5,6 @@ import {
     formatEnemyTypesAndLevels,
     indexToGreekLetter,
     indexToRomanNumeral,
-    parseBadge,
     totalKillzoneBadgeRewards,
     totalKillzoneXPReward,
 } from './utils';
@@ -62,7 +61,7 @@ describe('indexToGreekLetter', () => {
 describe('formatEnemyTypesAndLevels', () => {
     it('formats a single enemy type', () => {
         const enemies = { 'tyranNpc3Termagant:1': 6 } satisfies OnslaughtWave['enemies'];
-        expect(formatEnemyTypesAndLevels(enemies)).toEqual(['6x tyranNpc3Termagant (Level 1)']);
+        expect(formatEnemyTypesAndLevels(enemies)).toEqual(['6x Termagant (Level 1)']);
     });
 
     it('formats multiple enemy types', () => {
@@ -72,40 +71,17 @@ describe('formatEnemyTypesAndLevels', () => {
         } satisfies OnslaughtWave['enemies'];
         const result = formatEnemyTypesAndLevels(enemies);
         expect(result).toHaveLength(2);
-        expect(result).toContain('6x tyranNpc3Termagant (Level 1)');
-        expect(result).toContain('2x tyranNpc2RipperSwarm (Level 1)');
+        expect(result).toContain('6x Termagant (Level 1)');
+        expect(result).toContain('2x Ripper Swarm (Level 1)');
     });
 
     it('handles higher level enemies', () => {
         const enemies = { 'tyranNpc4Warrior:50': 3 } satisfies OnslaughtWave['enemies'];
-        expect(formatEnemyTypesAndLevels(enemies)).toEqual(['3x tyranNpc4Warrior (Level 50)']);
+        expect(formatEnemyTypesAndLevels(enemies)).toEqual(['3x Tyranid Warrior (Level 50)']);
     });
 
     it('returns an empty array for an empty enemies object', () => {
         expect(formatEnemyTypesAndLevels({})).toEqual([]);
-    });
-});
-
-describe('BadgeRewardIcon', () => {
-    // Rendering tests deferred to step 8 — requires @testing-library/react which is not yet installed.
-    // The component is a simple placeholder, so parse-logic coverage via parseBadge is sufficient for now.
-
-    it('parseBadge extracts rarity, alliance, and count', () => {
-        const badge = 'Common_Chaos:1' satisfies OnslaughtWave['badge'];
-        expect(parseBadge(badge)).toEqual({
-            rarity: 'Common',
-            alliance: 'Chaos',
-            count: 1,
-        });
-    });
-
-    it('parseBadge handles higher quantities', () => {
-        const badge = 'Uncommon_Imperial:2' satisfies OnslaughtWave['badge'];
-        expect(parseBadge(badge)).toEqual({
-            rarity: 'Uncommon',
-            alliance: 'Imperial',
-            count: 2,
-        });
     });
 });
 

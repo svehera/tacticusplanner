@@ -1,5 +1,7 @@
 import type { Alliance, RarityString } from '@/fsd/5-shared/model';
 
+import { NpcService } from '@/fsd/4-entities/npc';
+
 import type { OnslaughtKillzone, OnslaughtWave } from './data';
 
 const ROMAN_NUMERALS = [
@@ -58,10 +60,10 @@ export function indexToGreekLetter(index: number) {
  */
 export function formatEnemyTypesAndLevels(enemies: OnslaughtWave['enemies']) {
     return Object.entries(enemies).map(([key, quantity]) => {
-        const lastColon = key.lastIndexOf(':');
-        const enemyId = key.slice(0, lastColon);
-        const level = key.slice(lastColon + 1);
-        return `${quantity}x ${enemyId} (Level ${level})`;
+        const [enemyId, enemyLevel] = key.split(':');
+        const enemy = NpcService.getNpcById(enemyId);
+        const name = enemy?.name || `Unknown(${enemyId})`;
+        return `${quantity}x ${name} (Level ${enemyLevel})`;
     });
 }
 
@@ -79,19 +81,6 @@ export function parseBadge(badge: OnslaughtWave['badge']) {
 }
 
 /**
- * Skeleton component that renders a placeholder for a badge reward icon.
- * TODO: Replace with actual badge icon components in a future step.
- */
-export function BadgeRewardIcon({ badge }: { badge: OnslaughtWave['badge'] }) {
-    const { rarity, alliance, count } = parseBadge(badge);
-    return (
-        <span>
-            {count}x {alliance} {rarity} Badge
-        </span>
-    );
-}
-
-/**
  * Calculates the total XP reward for a killzone by summing all wave XP values.
  */
 export function totalKillzoneXPReward(killzone: OnslaughtKillzone) {
@@ -103,11 +92,23 @@ export function totalKillzoneXPReward(killzone: OnslaughtKillzone) {
  * Returns an object like { "Common_Chaos": 3, "Rare_Imperial": 1 }.
  */
 export function totalKillzoneBadgeRewards(killzone: OnslaughtKillzone) {
-    const totals: Partial<Record<`${RarityString}_${Alliance}`, number>> = {};
+    const badgeCounts: Record<string, number> = {};
+
     for (const wave of Object.values(killzone)) {
-        const { rarity, alliance, count } = parseBadge(wave.badge);
-        const key = `${rarity}_${alliance}` as const;
-        totals[key] = (totals[key] ?? 0) + count;
+        const { badge } = wave;
+        if (!badgeCounts[badge]) badgeCounts[badge] = 0;
+        badgeCounts[badge] += parseBadge(badge).count;
     }
-    return totals;
+
+    return Object.entries(badgeCounts).map(([badgeType, count]) => `${badgeType}:${count}`) as OnslaughtWave['badge'][];
+}
+
+export function totalKillzoneEnemyCount(killzone: OnslaughtKillzone) {
+    let total = 0;
+    for (const wave of Object.values(killzone)) {
+        for (const enemyQty of Object.values(wave.enemies)) {
+            total += enemyQty ?? 0;
+        }
+    }
+    return total;
 }

@@ -3,9 +3,9 @@ import Tabs from '@mui/material/Tabs';
 import { useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import type { OnslaughtData, OnslaughtSector } from './data';
+import type { OnslaughtData } from './data';
 import { onslaughtData } from './data';
-import { BadgeRewardIcon, formatEnemyTypesAndLevels, indexToGreekLetter, indexToRomanNumeral } from './utils';
+import { SectorCard } from './SectorCard';
 
 const validTracks = Object.keys(onslaughtData) as (keyof typeof onslaughtData)[];
 
@@ -23,8 +23,8 @@ export const Onslaught = () => {
     const sectors = onslaughtData[activeTrack];
 
     return (
-        <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-4 sm:px-6 sm:py-6">
-            <h1 className="text-xl font-bold sm:text-2xl">Onslaught</h1>
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-4 px-3 py-4 sm:gap-5 sm:px-6 sm:py-6">
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Onslaught</h1>
 
             <Tabs
                 value={activeTrack}
@@ -37,49 +37,12 @@ export const Onslaught = () => {
                 ))}
             </Tabs>
 
-            <main className="flex flex-col gap-3">
+            <main className="flex flex-col gap-3 sm:gap-4">
                 {sectors.toReversed().map((sector, reversedIndex) => {
                     const sectorIndex = sectors.length - 1 - reversedIndex;
-                    return (
-                        <details key={sectorIndex}>
-                            <summary className="cursor-pointer">
-                                <strong>Sector {indexToRomanNumeral(sectorIndex)}</strong>
-                                {' — '}Character Power required: {sector.minHeroPower}
-                            </summary>
-                            <KillzoneList killzones={sector.killzones} />
-                        </details>
-                    );
+                    return <SectorCard key={sectorIndex} sector={sector} sectorIndex={sectorIndex} />;
                 })}
             </main>
         </div>
     );
 };
-
-function KillzoneList({ killzones }: { killzones: OnslaughtSector['killzones'] }) {
-    return (
-        <div className="flex flex-col gap-2 pl-4">
-            {killzones
-                .map((killzone, index) => (
-                    <details key={index}>
-                        <summary className="cursor-pointer">Killzone {indexToGreekLetter(index)}</summary>
-                        <ol className="list-decimal pl-8">
-                            {Object.entries(killzone).map(([waveKey, wave]) => (
-                                <li key={waveKey}>
-                                    <ul>
-                                        {formatEnemyTypesAndLevels(wave.enemies).map(enemy => (
-                                            <li key={enemy}>{enemy}</li>
-                                        ))}
-                                    </ul>
-                                    <p>
-                                        Badge reward: <BadgeRewardIcon badge={wave.badge} />
-                                    </p>
-                                    <p>XP reward: {wave.wavesXp}</p>
-                                </li>
-                            ))}
-                        </ol>
-                    </details>
-                ))
-                .reverse()}
-        </div>
-    );
-}
