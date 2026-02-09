@@ -1,4 +1,4 @@
-﻿import { Faction } from '@/fsd/5-shared/model';
+﻿import { FactionId } from '@/fsd/5-shared/model';
 
 import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
@@ -17,36 +17,40 @@ export class StaticDataService {
         return possibleLocations;
     };
 
-    static getFactionPray(faction: Faction): string {
+    static getFactionPray(faction: FactionId): string {
         switch (faction) {
-            case Faction.Ultramarines:
-            case Faction.ADEPTA_SORORITAS:
-            case Faction.Astra_militarum:
-            case Faction.Black_Templars:
-            case Faction.Space_Wolves:
-            case Faction.Dark_Angels:
+            case 'Ultramarines':
+            case 'Sisterhood':
+            case 'AstraMilitarum':
+            case 'BlackTemplars':
+            case 'SpaceWolves':
+            case 'DarkAngels':
                 return 'Pray for the God-Emperor of Mankind';
-            case Faction.AdeptusMechanicus:
+            case 'AdeptusMechanicus':
                 return 'Pray for the Machine God';
-            case Faction.Black_Legion:
+            case 'BlackLegion':
                 return 'Follow the Chaos Undivided';
-            case Faction.Orks:
+            case 'Orks':
                 return 'Believe in the Waaagh!';
-            case Faction.Necrons:
+            case 'Necrons':
                 return "Serve the C'tan";
-            case Faction.Death_Guard:
+            case 'DeathGuard':
                 return 'Pray for the Plague God';
-            case Faction.Aeldari:
+            case 'Aeldari':
                 return 'Follow various Paths';
-            case Faction.T_Au:
+            case 'Tau':
                 return 'Pray for Greater Good';
-            case Faction.Thousand_Sons:
+            case 'ThousandSons':
                 return 'Follow the Architect of Fate';
-            case Faction.Tyranids:
+            case 'Tyranids':
                 return 'Bring more biomass';
-            case Faction.WorldEaters:
+            case 'WorldEaters':
                 return 'More Blood for the Blood God!';
-            default:
+            case 'Genestealers':
+            case 'BloodAngels':
+            case 'Custodes':
+            case 'EmperorsChildren':
+            case 'LeaguesOfVotann':
                 return '';
         }
     }

@@ -1,7 +1,7 @@
 import { MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material';
 import React from 'react';
 
-import { Faction, Rank, Rarity } from '@/fsd/5-shared/model';
+import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
 import { RaritySelect } from '@/fsd/5-shared/ui';
 
 import { RankSelect } from '@/fsd/4-entities/character';
@@ -50,14 +50,14 @@ interface Props {
     maxRarity: Rarity;
     minRank: Rank;
     maxRank: Rank;
-    factions: Faction[];
-    allFactions: Faction[];
+    factions: FactionId[];
+    allFactions: FactionId[];
     onSearchTextChange: (text: string) => void;
     onMinRarityChange: (rarity: Rarity) => void;
     onMaxRarityChange: (rarity: Rarity) => void;
     onMinRankChange: (rank: Rank) => void;
     onMaxRankChange: (rank: Rank) => void;
-    onFactionsChange: (factions: Faction[]) => void;
+    onFactionsChange: (factions: FactionId[]) => void;
 }
 
 export const UnitFilter: React.FC<Props> = ({
@@ -75,7 +75,7 @@ export const UnitFilter: React.FC<Props> = ({
     onMaxRankChange,
     onFactionsChange,
 }) => {
-    const handleFactionChange = (event: SelectChangeEvent<Faction[]>) => {
+    const handleFactionChange = (event: SelectChangeEvent<FactionId[]>) => {
         if (event.target.value === undefined) {
             onFactionsChange([]);
             return;
@@ -84,7 +84,7 @@ export const UnitFilter: React.FC<Props> = ({
             onFactionsChange([]);
             return;
         }
-        onFactionsChange(event.target.value as Faction[]);
+        onFactionsChange(event.target.value as FactionId[]);
     };
 
     const handleResetAllFilters = () => {
@@ -136,7 +136,7 @@ export const UnitFilter: React.FC<Props> = ({
                 </div>
             </FilterGroup>
             <FilterGroup label="Factions">
-                <Select<Faction[]>
+                <Select<FactionId[]>
                     labelId="faction-select-label"
                     multiple
                     value={factions}

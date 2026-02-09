@@ -1,4 +1,4 @@
-import { Alliance, Trait, DamageType, Faction } from '@/fsd/5-shared/model';
+import { Alliance, Trait, DamageType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { farsight as staticData } from '@/fsd/4-entities/lre';
@@ -84,7 +84,7 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
                     points: 75,
                     objectiveType: 'Faction',
                     objectiveTarget: 'AstraMilitarum',
-                    units: filter(noXenos).byFaction(Faction.Astra_militarum),
+                    units: filter(noXenos).byFaction('AstraMilitarum'),
                     iconId: 'astra_militarum',
                     index: 0,
                 },
@@ -131,7 +131,7 @@ export class FarsightLegendaryEvent extends LegendaryEventBase {
 
     protected getGammaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
         const noChaos = filter(unitsData).byAlliance(Alliance.Chaos, true);
-        const noChaosOrOrks = filter(noChaos).byFaction(Faction.Orks, true);
+        const noChaosOrOrks = filter(noChaos).byFaction('Orks', true);
         return new LETrack(
             this.id,
             'gamma',

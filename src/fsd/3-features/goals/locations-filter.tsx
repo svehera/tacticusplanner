@@ -7,7 +7,8 @@ import React, { useMemo } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import factionsData from 'src/data/factions.json';
 
-import { Alliance, Faction, Rarity, RarityString } from '@/fsd/5-shared/model';
+import { factionLookup } from '@/fsd/5-shared/lib';
+import { Alliance, FactionId, FactionName, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
 
 import { CampaignsService, CampaignType, ICampaignsFilters } from '@/fsd/4-entities/campaign';
@@ -22,7 +23,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
     const [open, setOpen] = React.useState<boolean>(false);
 
     const allFactions = useMemo(
-        () => factionsData.map(x => ({ alliance: x.alliance as Alliance, faction: x.name as Faction })),
+        () => factionsData.map(x => ({ alliance: x.alliance as Alliance, faction: x.name })),
         [factionsData]
     );
 
@@ -79,10 +80,12 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         setOpen(false);
     };
 
-    const renderUnitsFilter = (type: 'allies' | 'enemies', alliance: Alliance[], factions: Faction[]) => {
+    const renderUnitsFilter = (type: 'allies' | 'enemies', alliance: Alliance[], factions: FactionId[]) => {
         const allowedFactions = !alliance.length
             ? allFactions.map(x => x.faction)
             : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
+        // Note: we filter out undefined even though TS says we don't have to because users might have outdated faction IDs saved in local storage
+        const selectedFactionNames = factions.map(factionId => factionLookup[factionId]?.name).filter(Boolean);
 
         const allianceFilterChanged = (values: string[]) => {
             if (type === 'allies') {
@@ -94,13 +97,17 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             }
         };
 
-        const factionsFilterChanged = (values: string[]) => {
+        const factionsFilterChanged = (values: FactionName[]) => {
+            const factionIds = values
+                // Note: we filter out undefined even though TS says we don't have to because users might have outdated faction IDs saved in local storage
+                .map(factionName => factionsData.find(x => x.name === factionName)?.snowprintId)
+                .filter(fn => !!fn);
             if (type === 'allies') {
-                setCurrFilter({ ...currFilter, alliesFactions: values as Faction[] });
+                setCurrFilter({ ...currFilter, alliesFactions: factionIds });
             }
 
             if (type === 'enemies') {
-                setCurrFilter({ ...currFilter, enemiesFactions: values as Faction[] });
+                setCurrFilter({ ...currFilter, enemiesFactions: factionIds });
             }
         };
 
@@ -120,9 +127,9 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     sortByAlphabet
                     size="small"
                     placeholder="Factions"
-                    selectedValues={factions}
+                    selectedValues={selectedFactionNames}
                     values={allowedFactions}
-                    selectionChanges={factionsFilterChanged}
+                    selectionChanges={factionsFilterChanged as (value: string[]) => void}
                     disableCloseOnSelect={false}
                     minWidth={150}
                 />
@@ -188,6 +195,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                         <MultipleSelectCheckmarks
                             size="small"
                             placeholder="Types"
+                            // @ts-expect-error FIXME: The type of `currFilter.campaignTypes` is looser than the values provided
                             selectedValues={currFilter.campaignTypes}
                             values={[
                                 CampaignType.Elite,
@@ -207,6 +215,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                         <MultipleSelectCheckmarks
                             size="small"
                             placeholder="Slots"
+                            // @ts-expect-error FIXME: The type of `currFilter.slotsCount` is looser than the values provided
                             selectedValues={currFilter.slotsCount?.map(x => x.toString()) ?? []}
                             values={['3', '4', '5']}
                             selectionChanges={values => {
@@ -221,12 +230,12 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <MultipleSelectCheckmarks
                         size="small"
                         placeholder="Rarity"
-                        selectedValues={currFilter.upgradesRarity.map(x => Rarity[x])}
+                        selectedValues={currFilter.upgradesRarity.map(x => RarityMapper.rarityToRarityString(x))}
                         values={Object.values(RarityString)}
                         selectionChanges={values => {
                             setCurrFilter({
                                 ...currFilter,
-                                upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                upgradesRarity: values.map(x => RarityMapper.stringToNumber[x]),
                             });
                         }}
                         disableCloseOnSelect={false}
