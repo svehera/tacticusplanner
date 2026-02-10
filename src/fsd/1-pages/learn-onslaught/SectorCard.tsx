@@ -33,19 +33,19 @@ export function SectorCard({
     return (
         <details
             className={clsx(
-                'w-full group rounded-lg border shadow-sm transition-shadow hover:shadow-md bg-stone-100/80 dark:bg-stone-900/80',
+                'group w-full rounded-lg border bg-stone-100/80 shadow-sm transition-shadow hover:shadow-md dark:bg-stone-900/80',
                 badgeAlliance === 'Imperial' && 'border-green-700/60 hover:shadow-green-700/60', // Chaos Track
-                badgeAlliance === 'Xenos' && ' border-red-700/60 hover:shadow-red-700/60', // Chaos Track
+                badgeAlliance === 'Xenos' && 'border-red-700/60 hover:shadow-red-700/60', // Chaos Track
                 badgeAlliance === 'Chaos' && 'border-blue-700/60 hover:shadow-blue-700/60' // Imperial Track
             )}
             open={isOpen}
             onToggle={() => setOpen(prev => !prev)}>
-            <summary className="flex items-center cursor-pointer select-none gap-2 px-3 py-2.5 text-sm transition-colors hover:bg-stone-400/50 dark:hover:bg-stone-800/50 sm:px-4 sm:py-3 sm:text-base bg-stone-300/80 dark:bg-stone-900/80">
-                <span className="font-semibold dark:text-amber-100 w-32">{name}</span>
+            <summary className="flex cursor-pointer items-center gap-2 bg-stone-300/80 px-3 py-2.5 text-sm transition-colors select-none hover:bg-stone-400/50 sm:px-4 sm:py-3 sm:text-base dark:bg-stone-900/80 dark:hover:bg-stone-800/50">
+                <span className="w-32 font-semibold dark:text-amber-100">{name}</span>
                 <span className="whitespace-nowrap">Min Power:</span>
-                <span className="font-medium dark:text-amber-200 block sm:inline">{minHeroPower}</span>
+                <span className="block font-medium sm:inline dark:text-amber-200">{minHeroPower}</span>
                 <span className="text-sm dark:text-stone-400"></span>
-                <span className="text-sm dark:text-stone-400 pl-2 whitespace-nowrap">Max Badge:</span>
+                <span className="pl-2 text-sm whitespace-nowrap dark:text-stone-400">Max Badge:</span>
                 <BadgeImage alliance={badgeAlliance} rarity={maxBadgeRarity} size="small" />
                 <span className="ml-auto text-sm dark:text-amber-100">
                     {isOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
@@ -53,7 +53,7 @@ export function SectorCard({
             </summary>
 
             {isOpen && (
-                <div className="border-t border-amber-700/30 px-3 pb-3 pt-2 sm:px-4 sm:pb-4 sm:pt-3 w-full">
+                <div className="w-full border-t border-amber-700/30 px-3 pt-2 pb-3 sm:px-4 sm:pt-3 sm:pb-4">
                     <KillzoneList killzones={killzones} badgeAlliance={badgeAlliance} />
                 </div>
             )}

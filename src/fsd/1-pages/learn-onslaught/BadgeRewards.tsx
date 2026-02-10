@@ -13,12 +13,12 @@ export function BadgeRewards({
     alliance: OnslaughtBadgeAlliance;
 }) {
     return (
-        <span className="items-start inline-flex sm:gap-1">
+        <span className="inline-flex items-start sm:gap-1">
             {Object.entries(badgeCountsByRarity)
                 .filter(([_, count]) => count > 0)
                 .map(([rarity, count]) => (
                     // on very small screens, smush the badges until they're touching to save space. On larger screens, add a small gap between them
-                    <span key={rarity} className="flex items-start -ml-[4px] sm:ml-0 first:ml-0">
+                    <span key={rarity} className="-ml-[4px] flex items-start first:ml-0 sm:ml-0">
                         {Array(count)
                             .fill(0)
                             .map((_, index) => (
