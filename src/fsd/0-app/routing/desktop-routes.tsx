@@ -68,13 +68,6 @@ export const globalPlanRoutes: RouteObject[] = [
             return { Component: MasterTable };
         },
     },
-    {
-        path: 'plan/debugraids',
-        async lazy() {
-            const { DebugRaids } = await import('@/fsd/1-pages/plan-debug-raids');
-            return { Component: DebugRaids };
-        },
-    },
     campaignProgressionLazyRoute,
 ];
 
