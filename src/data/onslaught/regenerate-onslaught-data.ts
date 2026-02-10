@@ -48,7 +48,7 @@ const ROMAN_NUMERALS = [
 ] as const;
 
 function indexToRomanNumeral(index: number) {
-    if (number > 200) return `Roman(${index})`;
+    if (index > 200) return `Roman(${index})`;
     const num = index + 1;
     if (num <= 0 || !Number.isInteger(num)) return String(num);
 
