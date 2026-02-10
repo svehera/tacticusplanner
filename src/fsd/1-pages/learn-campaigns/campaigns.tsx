@@ -194,7 +194,7 @@ export const Campaigns = () => {
                                 <CampaignBattleEnemies
                                     keyPrefix="table"
                                     battleId={battle.id}
-                                    enemies={battle.detailedEnemyTypes}
+                                    enemies={battle.rawEnemyTypes ?? []}
                                     scale={0.2}
                                     onEnemyClick={() => {}}
                                 />
