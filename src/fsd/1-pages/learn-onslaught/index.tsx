@@ -3,10 +3,12 @@ import Tabs from '@mui/material/Tabs';
 import { useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import type { OnslaughtData } from './data';
-import { onslaughtData } from './data';
+// eslint-disable-next-line import-x/no-internal-modules
+import onslaughtData from '@/data/onslaught/data.generated.json';
+
 import { SectorCard } from './SectorCard';
 
+type OnslaughtData = typeof onslaughtData;
 const validTracks = Object.keys(onslaughtData) as (keyof typeof onslaughtData)[];
 
 export const Onslaught = () => {
@@ -20,12 +22,10 @@ export const Onslaught = () => {
     }, [queryParams, setQueryParams]);
 
     const activeTrack = (queryParams.get('track') as keyof OnslaughtData) ?? validTracks[0];
-    const sectors = onslaughtData[activeTrack];
+    const { sectors, badgeAlliance } = onslaughtData[activeTrack];
 
     return (
-        <div className="mx-auto flex w-full max-w-3xl flex-col gap-4 px-3 py-4 sm:gap-5 sm:px-6 sm:py-6">
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Onslaught</h1>
-
+        <div className="mx-auto flex w-full max-w-2xl flex-col gap-4">
             <Tabs
                 value={activeTrack}
                 onChange={(_, value: keyof OnslaughtData) => setQueryParams({ track: value })}
@@ -38,9 +38,10 @@ export const Onslaught = () => {
             </Tabs>
 
             <main className="flex flex-col gap-3 sm:gap-4">
-                {sectors.toReversed().map((sector, reversedIndex) => {
-                    const sectorIndex = sectors.length - 1 - reversedIndex;
-                    return <SectorCard key={sectorIndex} sector={sector} sectorIndex={sectorIndex} />;
+                {Object.entries(sectors).map(([sectorName, sector]) => {
+                    return (
+                        <SectorCard key={sectorName} name={sectorName} sector={sector} badgeAlliance={badgeAlliance} />
+                    );
                 })}
             </main>
         </div>
