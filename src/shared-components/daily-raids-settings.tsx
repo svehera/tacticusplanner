@@ -44,6 +44,14 @@ import {
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 
 const defaultCustomSettings: ICustomDailyRaidsSettings = {
+    ['Mythic Shard']: [CampaignType.Extremis],
+    ['Shard']: [
+        CampaignType.Elite,
+        CampaignType.Extremis,
+        CampaignType.Early,
+        CampaignType.Mirror,
+        CampaignType.Standard,
+    ],
     [Rarity.Mythic]: [CampaignType.Extremis],
     [Rarity.Legendary]: [CampaignType.Elite, CampaignType.Extremis, CampaignType.Mirror, CampaignType.Standard],
     [Rarity.Epic]: [CampaignType.Elite, CampaignType.Extremis, CampaignType.Mirror, CampaignType.Standard],
