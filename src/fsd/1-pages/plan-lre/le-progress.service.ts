@@ -578,8 +578,6 @@ export class LeProgressService {
             } as ILeProgress,
         } as ILreProgressModel;
 
-        console.log('model.syncedProgress', event.id, model.syncedProgress);
-
         model.tracksProgress = [
             this.convertLaneToTrack(
                 event.id,

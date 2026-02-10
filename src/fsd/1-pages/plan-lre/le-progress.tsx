@@ -43,6 +43,11 @@ export const LeProgress = ({
     const [dirtyText, setDirtyText] = useState<string | undefined>(undefined);
     const notesDebounceRef = useRef<number | null>(null);
 
+    // Editing
+    //  Model - A
+    //  Dirty text - B
+    //  Notes draft - B
+
     // 1. Sync from model ONLY if the user isn't currently editing
     useEffect(() => {
         if (!dirtyText || model.notes === dirtyText) {
@@ -54,12 +59,10 @@ export const LeProgress = ({
     useEffect(() => {
         if (notesDebounceRef.current) window.clearTimeout(notesDebounceRef.current);
 
-        if (dirtyText !== notesDraft) {
+        if (dirtyText !== model.notes) {
             notesDebounceRef.current = window.setTimeout(async () => {
                 await updateNotes(notesDraft.slice(0, 10000));
 
-                // 3. IMPORTANT: Only flip dirtyText back to undefined
-                // once we are sure the model matches the draft.
                 setDirtyText(undefined);
             }, 800); // Higher debounce helps prevent collision
         }
