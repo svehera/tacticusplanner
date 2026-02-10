@@ -15,7 +15,7 @@ export const gameModeTokensActionReducer = (
             return {
                 ...state,
                 tokens: {
-                    ...(state && state.tokens ? state.tokens : {}),
+                    ...(state.tokens ?? {}),
                     ...action.gameModeTokens,
                 },
             };

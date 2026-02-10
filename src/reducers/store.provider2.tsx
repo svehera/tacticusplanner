@@ -4,7 +4,7 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { gameModeTokensActionReducer } from 'src/reducers/gameModeTokensReducer';
+import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
 import { guildReducer } from 'src/reducers/guildReducer';
 import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';

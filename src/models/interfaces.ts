@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { GameModeTokensAction } from '@/reducers/gameModeTokensReducer';
+import { GameModeTokensAction } from '@/reducers/game-mode-tokens-reducer';
 import { LeSettingsAction } from '@/reducers/le-settings.reducer';
 import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
 import { Teams2Action } from '@/reducers/teams2.reducer';

@@ -94,7 +94,7 @@ export const useSyncWithTacticus = () => {
                 const combinedTokens = {
                     arena: progress.arena?.tokens,
                     guildRaid: progress.guildRaid?.tokens,
-                    bombToken: progress.guildRaid?.bombTokens,
+                    bombTokens: progress.guildRaid?.bombTokens,
                     onslaught: progress.onslaught?.tokens,
                     salvageRun: progress.salvageRun?.tokens,
                 };

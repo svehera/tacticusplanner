@@ -19,9 +19,7 @@ import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
-import { Thanks } from '@/fsd/3-features/thank-you';
-
-import TokenAvailability from './gameModeTokens';
+import TokenAvailability from './game-mode-tokens';
 import { useBmcWidget } from './useBmcWidget';
 
 function formatMonthAndDay(date: Date): string {
@@ -132,12 +130,10 @@ export const DesktopHome = () => {
     return (
         <div>
             {announcements()}
-            <Thanks sliderMode={true} />
-            {/*{announcements()}*/}
+            <TokenAvailability />
             <div className="flex gap-2.5 flex-wrap justify-center items-start">
                 <div>
                     <h3 className="text-center">Daily Raids</h3>
-                    <TokenAvailability />
                     <Card
                         variant="outlined"
                         onClick={() =>

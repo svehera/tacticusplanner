@@ -7,8 +7,7 @@ import { useState, useEffect, useContext } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { TacticusTokens } from '@/fsd/5-shared/lib/tacticus-api';
-
-import { tokenLabels } from './game-mode-tokens.constants';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 const TokenAvailability = () => {
     const { gameModeTokens } = useContext(StoreContext);
@@ -16,8 +15,9 @@ const TokenAvailability = () => {
 
     // Format seconds as HH:MM:SS, always using integer values
     const formatTime = (seconds: number): string => {
+        seconds = Math.floor(seconds);
         if (seconds <= 0) return '00:00:00';
-        const total = Math.floor(seconds);
+        const total = seconds;
         const hours = Math.floor(total / 3600);
         const minutes = Math.floor((total % 3600) / 60);
         const secs = total % 60;
@@ -63,6 +63,13 @@ const TokenAvailability = () => {
         return 'text-red-400';
     };
 
+    const tokenLabels: Record<string, { label: string; icon: string | React.ReactElement }> = {
+        guildRaid: { label: 'Guild Raid', icon: <MiscIcon icon={'guildRaidToken'} width={24} height={24} /> },
+        arena: { label: 'Arena', icon: <MiscIcon icon={'arenaToken'} width={24} height={24} /> },
+        onslaught: { label: 'Onslaught', icon: <MiscIcon icon={'onslaughtToken'} width={24} height={24} /> },
+        salvageRun: { label: 'Salvage Run', icon: <MiscIcon icon={'salvageRunToken'} width={24} height={24} /> },
+        bombTokens: { label: 'Bomb', icon: <MiscIcon icon={'bombToken'} width={24} height={24} /> },
+    };
     // Type guard for TacticusTokens shape
     const isTacticusTokens = (value: any): value is TacticusTokens => {
         return value && typeof value === 'object' && typeof value.current === 'number' && typeof value.max === 'number';
