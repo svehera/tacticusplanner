@@ -54,12 +54,6 @@ function handleLegendaryEvents(
             return;
         }
     });
-
-    if (successfulEvents.length > 0) {
-        enqueueSnackbar(`Synced progress for ${successfulEvents.join(', ')}'s legendary events.`, {
-            variant: 'info',
-        });
-    }
 }
 
 export const useSyncWithTacticus = () => {

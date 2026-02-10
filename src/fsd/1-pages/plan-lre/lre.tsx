@@ -72,8 +72,7 @@ export const Lre: React.FC = () => {
         tokens,
         model,
         leUnitAscensionData.rarity,
-        leUnitAscensionData.stars,
-        leSettings.showP2POptions ?? true
+        leUnitAscensionData.stars
     );
 
     const currentPoints = useMemo(() => {
@@ -168,12 +167,25 @@ export const Lre: React.FC = () => {
 
     const battles = LeBattleService.getBattleSetForCharacter(legendaryEvent.id);
 
+    const character = resolvedCharacters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
+    const rank = character?.rank ?? Rank.Locked;
+
+    const progress = TokenEstimationService.computeCurrentProgress(
+        model,
+        rank === Rank.Locked ? Rarity.Legendary : (character?.rarity ?? Rarity.Legendary),
+        rank === Rank.Locked ? RarityStars.None : (character?.stars ?? RarityStars.None)
+    );
+
+    const char = resolvedCharacters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
+    const rarity = char?.rarity ?? Rarity.Legendary;
+    const stars = char?.stars ?? RarityStars.None;
+
     const renderTabContent = () => {
         switch (section) {
             case LreSection.teams:
                 return <LegendaryEvent legendaryEvent={legendaryEvent} upgradeRankOrMowGoals={upgradeRankOrMowGoals} />;
             case LreSection.progress:
-                return <LeProgress legendaryEvent={legendaryEvent} />;
+                return <LeProgress legendaryEvent={legendaryEvent} progress={progress} rarity={rarity} stars={stars} />;
             case LreSection.tokenomics:
                 return (
                     <LeTokenomics

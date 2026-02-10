@@ -46,7 +46,7 @@ interface ShardsGoal {
 }
 
 export class LeProgressService {
-    static computeProgress(model: ILreProgressModel, useP2P: boolean): LeProgress {
+    public static computeProgress(model: ILreProgressModel, useP2P: boolean): LeProgress {
         const totalPoints = model.syncedProgress?.currentPoints ?? sum(model.tracksProgress.map(x => x.totalPoints));
         const totalCurrency = sum(model.pointsMilestones.map(x => x.engramPayout));
         const currentPoints = sum(model.tracksProgress.map(this.computeCurrentPoints));
@@ -551,7 +551,7 @@ export class LeProgressService {
                 hasUsedAdForExtraTokenToday: externalData.currentEvent?.hasUsedAdForExtraTokenToday ?? false,
                 currentTokens: externalData.currentEvent?.tokens.currentTokens ?? 0,
                 maxTokens: externalData.currentEvent?.tokens.maxTokens ?? 12,
-                currentClaimedChestIndex: externalData.currentClaimedChestIndex ?? -1,
+                currentClaimedChestIndex: (externalData.currentClaimedChestIndex ?? 0) - 1,
                 nextTokenMillisUtc: externalData.currentEvent
                     ? Date.now() + externalData.currentEvent?.tokens.nextTokenInSeconds * 1000
                     : Date.now() + 3600 * 3 * 1000,
@@ -562,6 +562,8 @@ export class LeProgressService {
                 hasPremiumPayout: !!(externalData.currentEvent?.extraCurrencyPerPayout ?? false),
             } as ILeProgress,
         } as ILreProgressModel;
+
+        console.log('model.syncedProgress', event.id, model.syncedProgress);
 
         model.tracksProgress = [
             this.convertLaneToTrack(

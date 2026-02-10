@@ -1,23 +1,33 @@
 ﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
+
+import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 
 import { LeNextGoalProgress } from './le-next-goal-progress';
 import { LeProgressOverviewMissions } from './le-progress-overview-missions';
 import { useLreProgress } from './le-progress.hooks';
-import { LeProgressService } from './le-progress.service';
 import { LreTrackOverallProgress } from './le-track-overall-progress';
+import { EventProgress } from './token-estimation-service';
 
 /**
  * UI Element to display the progress of missions and tracks in a legendary event.
  */
-export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
+export const LeProgress = ({
+    legendaryEvent,
+    progress,
+}: {
+    legendaryEvent: ILegendaryEvent;
+    progress: EventProgress;
+    rarity: Rarity;
+    stars: RarityStars;
+}) => {
     const { leSelectedTeams, leSettings } = useContext(StoreContext);
     const { model, updateNotes, updateOccurrenceProgress, createNewModel, updateDto } = useLreProgress(legendaryEvent);
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
@@ -28,14 +38,37 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
         setAccordionExpanded(isExpanded ? section : false);
     };
 
-    const missionsTotalProgress = leSettings.showP2POptions
-        ? model.occurrenceProgress
-              .map(
-                  x =>
-                      `${x.freeMissionsProgress},${x.premiumMissionsProgress},${+x.bundlePurchased},${x.ohSoCloseShards}`
-              )
-              .join('-')
-        : model.occurrenceProgress.map(x => x.freeMissionsProgress.toString()).join('-');
+    // Use a local draft for notes and debounce updates to avoid doing heavy work on every keystroke
+    const [notesDraft, setNotesDraft] = useState(model.notes);
+    const [dirtyText, setDirtyText] = useState<string | undefined>(undefined);
+    const notesDebounceRef = useRef<number | null>(null);
+
+    // 1. Sync from model ONLY if the user isn't currently editing
+    useEffect(() => {
+        if (!dirtyText || model.notes === dirtyText) {
+            setNotesDraft(model.notes);
+        }
+    }, [model.notes, dirtyText]);
+
+    // 2. The Debounce logic
+    useEffect(() => {
+        if (notesDebounceRef.current) window.clearTimeout(notesDebounceRef.current);
+
+        if (dirtyText !== notesDraft) {
+            notesDebounceRef.current = window.setTimeout(async () => {
+                await updateNotes(notesDraft.slice(0, 10000));
+
+                // 3. IMPORTANT: Only flip dirtyText back to undefined
+                // once we are sure the model matches the draft.
+                setDirtyText(undefined);
+            }, 800); // Higher debounce helps prevent collision
+        }
+
+        return () => {
+            if (notesDebounceRef.current) window.clearTimeout(notesDebounceRef.current);
+        };
+    }, [notesDraft, updateNotes, dirtyText]);
+
     const tracksTotalProgress = model.tracksProgress
         .map(track =>
             Math.round(
@@ -54,17 +87,13 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
     return (
         <div className="gap-2">
             <div className="w-full">
-                <LeNextGoalProgress
-                    progress={LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true)}
-                />
+                <LeNextGoalProgress progress={progress} />
                 <Accordion
                     TransitionProps={{ unmountOnExit: true }}
                     expanded={accordionExpanded === 'missionAndNotes'}
                     onChange={handleAccordionChange('missionAndNotes')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <span>
-                            Notes & Missions Progress <span className="font-bold">({missionsTotalProgress})</span>
-                        </span>
+                        <span>Notes & Missions Progress</span>
                     </AccordionSummary>
 
                     <AccordionDetails className="flex-box wrap gap20">
@@ -75,19 +104,23 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                             label="Notes"
                             placeholder="Notes"
                             multiline
-                            value={model.notes}
-                            helperText={model.notes.length + '/10000'}
-                            onChange={event => updateNotes(event.target.value.slice(0, 10000))}
+                            value={notesDraft}
+                            helperText={notesDraft.length + '/10000'}
+                            onChange={event => {
+                                setDirtyText(event.target.value.slice(0, 10000));
+                                setNotesDraft(event.target.value.slice(0, 10000));
+                            }}
                         />
 
-                        {model.occurrenceProgress.map(occurrence => (
-                            <LeProgressOverviewMissions
-                                showP2P={leSettings.showP2POptions}
-                                key={occurrence.eventOccurrence}
-                                occurrence={occurrence}
-                                progressChange={updateOccurrenceProgress}
-                            />
-                        ))}
+                        {model.syncedProgress === undefined &&
+                            model.occurrenceProgress.map(occurrence => (
+                                <LeProgressOverviewMissions
+                                    showP2P={leSettings.showP2POptions}
+                                    key={occurrence.eventOccurrence}
+                                    occurrence={occurrence}
+                                    progressChange={updateOccurrenceProgress}
+                                />
+                            ))}
 
                         <div className="flex-box wrap gap-x-[50px]">
                             <div className="flex-box column start flex-1 min-w-[450px]">

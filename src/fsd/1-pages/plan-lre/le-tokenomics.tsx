@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
-import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
@@ -91,14 +91,6 @@ export const LeTokenomics: React.FC<Props> = ({
         setModel(progressModel);
     }, [progressModel]);
 
-    /*
-    const missedMilestones = milestonesAndPoints
-        .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
-        .sort((a, b) => a.points - b.points);
-    const achievedMilestones = milestonesAndPoints.filter(
-        milestone => currentPoints >= milestone.points && (showP2P || milestone.packsPerRound === 0)
-    );
-    */
     // Helper function to check if a token has yellow or red restrictions
     const hasWarningRestrictions = (token: TokenDisplay): boolean => {
         return token.restricts.some(restrict => {
@@ -142,12 +134,12 @@ export const LeTokenomics: React.FC<Props> = ({
     );
 
     const character = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
+    const rank = character?.rank ?? Rank.Locked;
 
     const progress = TokenEstimationService.computeCurrentProgress(
         model,
-        character?.rarity ?? Rarity.Legendary,
-        character?.stars ?? RarityStars.None,
-        /*p2p=*/ true
+        rank === Rank.Locked ? Rarity.Legendary : (character?.rarity ?? Rarity.Legendary),
+        rank === Rank.Locked ? RarityStars.None : (character?.stars ?? RarityStars.None)
     );
 
     const char = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
@@ -165,10 +157,12 @@ export const LeTokenomics: React.FC<Props> = ({
         return Date.now() - model.syncedProgress.lastUpdateMillisUtc > 3 * 3600 * 1000;
     };
 
+    const incrementalShardsForNextMilestone = progress.currentShards + progress.addlShardsForNextMilestone;
+
     const shardBarWidth =
-        progress.shardsForNextMilestone === Infinity
+        incrementalShardsForNextMilestone === Infinity
             ? 100
-            : Math.min(100, (progress.shards / progress.shardsForNextMilestone) * 100);
+            : Math.min(100, (progress.currentShards / incrementalShardsForNextMilestone) * 100);
 
     const characterPortrait = () => {
         return (
@@ -209,7 +203,7 @@ export const LeTokenomics: React.FC<Props> = ({
                                 borderBottomRightRadius: '9999px',
                             }}></div>
                         <span className="absolute inset-0 flex items-center justify-center w-full h-full text-xs font-medium text-gray-800 dark:text-gray-100">
-                            {progress.shards} / {progress.shardsForNextMilestone}
+                            {progress.currentShards} / {incrementalShardsForNextMilestone}
                         </span>
                     </div>
                 </div>
@@ -334,18 +328,6 @@ export const LeTokenomics: React.FC<Props> = ({
 
             <div className="flex flex-col items-center w-full gap-y-4">{characterPortrait()}</div>
 
-            {/*showP2P && (
-                <div className="flex flex-col items-center w-full gap-y-4">
-                    <div>
-                        <h3 className="text-lg font-bold">Milestones Already Achieved</h3>
-                    </div>
-                    <LeTokenMilestoneCardGrid
-                        milestonesToList={achievedMilestones}
-                        emptyMessage="No milestones achieved yet."
-                    />
-                </div>
-            )*/}
-
             <div key="tokens" className="flex flex-col w-full gap-2">
                 <LeTokenTable
                     battles={battles}
@@ -357,25 +339,6 @@ export const LeTokenomics: React.FC<Props> = ({
                     updateDto={updateDto}
                 />
             </div>
-            {/*missedMilestones.length > 0 && (
-                <div className="flex flex-col items-center w-full pt-6 mt-4 border-t-2 border-gray-200 gap-y-4 dark:border-gray-700">
-                    <div className="text-center">
-                        <h3 className="text-lg font-bold text-red-700 dark:text-red-400">
-                            Milestones Projected to Miss
-                        </h3>
-                        <p className="text-sm text-gray-500">
-                            Based on current points ({currentPoints}) + tokens listed above (+
-                            {projectedAdditionalPoints})
-                        </p>
-                    </div>
-
-                    <LeTokenMilestoneCardGrid
-                        milestonesToList={missedMilestones}
-                        emptyMessage=""
-                        isMissedVariant={true}
-                    />
-                </div>
-            )*/}
         </div>
     );
 };
