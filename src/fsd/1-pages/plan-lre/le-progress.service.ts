@@ -10,7 +10,7 @@ import { ILegendaryEventTrack, RequirementStatus } from '@/fsd/3-features/lre';
 import { LegendaryEventBase } from '@/fsd/3-features/lre/model/base.le';
 
 import { LreRequirementStatusService } from './lre-requirement-status.service';
-import { ILeProgress, ILreProgressModel, ILreTrackProgress } from './lre.models';
+import { ILeProgress, ILreBattleProgress, ILreProgressModel, ILreTrackProgress } from './lre.models';
 
 export interface LeProgress {
     currentPoints: number;
@@ -179,8 +179,10 @@ export class LeProgressService {
         const shardsFor4Stars = shardsForUnlock + progression.fourStars;
         const shardsFor5Stars = shardsFor4Stars + progression.fiveStars;
         const shardsForBlueStar = shardsFor5Stars + progression.blueStar;
-        const shardsForMythic = shardsForBlueStar + (progression.mythic ?? Infinity);
-        const shardsForTwoBlueStars = shardsForMythic + (progression.twoBlueStars ?? Infinity);
+        // TODO: Make a helper function for getting optional properties from a union type
+        const shardsForMythic = shardsForBlueStar + ('mythic' in progression ? progression.mythic : Infinity);
+        const shardsForTwoBlueStars =
+            shardsForMythic + ('twoBlueStars' in progression ? progression.twoBlueStars : Infinity);
 
         return [
             { threshold: shardsForUnlock, name: 'unlock' },
@@ -399,6 +401,37 @@ export class LeProgressService {
     }
 
     /**
+     * Syncs partial killScore and highScore from external API data to battle requirements.
+     */
+    private static syncPartialScores(battle: ILreBattleProgress, encounterPoints: number, highScore: number): void {
+        // _killPoints
+        const killPointsProgress = battle.requirementsProgress.find(x => x.id === '_killPoints')!;
+        killPointsProgress.killScore = encounterPoints;
+        if (killPointsProgress.killScore >= killPointsProgress.points) {
+            killPointsProgress.completed = true;
+            killPointsProgress.blocked = false;
+            killPointsProgress.status = RequirementStatus.Cleared;
+        } else if (killPointsProgress.killScore > 0) {
+            killPointsProgress.completed = false;
+            killPointsProgress.blocked = false;
+            killPointsProgress.status = RequirementStatus.PartiallyCleared;
+        }
+
+        // _highScore
+        const highScoreProgress = battle.requirementsProgress.find(x => x.id === '_highScore')!;
+        highScoreProgress.highScore = highScore;
+        if (highScoreProgress.highScore >= highScoreProgress.points) {
+            highScoreProgress.completed = true;
+            highScoreProgress.blocked = false;
+            highScoreProgress.status = RequirementStatus.Cleared;
+        } else if (highScoreProgress.highScore > 0) {
+            highScoreProgress.completed = false;
+            highScoreProgress.blocked = false;
+            highScoreProgress.status = RequirementStatus.PartiallyCleared;
+        }
+    }
+
+    /**
      * Converts the progress of a track (lane) from an external source into the planner's internal
      * model.
      */
@@ -459,7 +492,14 @@ export class LeProgressService {
             if (battle === undefined) {
                 throw new Error('Cannot find battle index ' + battleIndex + ' in track ' + eventTrack.name);
             }
-            if (progress.objectivesCleared.length === 0) return;
+
+            // Handle case where no objectives are cleared - only sync partial scores
+            if (progress.objectivesCleared.length === 0) {
+                this.syncPartialScores(battle, progress.encounterPoints, progress.highScore);
+                return;
+            }
+
+            // Handle case where all 6 objectives are cleared
             if (progress.objectivesCleared.length === 6) {
                 battle.completed = true;
                 battle.totalPoints = sum(battle.requirementsProgress.map(req => req.points));
@@ -470,6 +510,8 @@ export class LeProgressService {
                 });
                 return;
             }
+
+            // Handle case where defeatAll is cleared
             if (progress.objectivesCleared.includes(0)) {
                 ['_defeatAll', '_killPoints', '_highScore'].forEach(reqId => {
                     const reqProgress = battle.requirementsProgress.find(x => x.id === reqId)!;
@@ -481,35 +523,8 @@ export class LeProgressService {
                     battle.totalPoints += reqProgress.points;
                 });
             } else {
-                // If we haven't cleared defeatAll, we might still have a kill score or high score.
-                // _killPoints
-                {
-                    const reqProgress = battle.requirementsProgress.find(x => x.id === '_killPoints')!;
-                    reqProgress.killScore = progress.encounterPoints;
-                    if (reqProgress.killScore >= reqProgress.points) {
-                        reqProgress.completed = true;
-                        reqProgress.blocked = false;
-                        reqProgress.status = RequirementStatus.Cleared;
-                    } else if (reqProgress.killScore > 0) {
-                        reqProgress.completed = false;
-                        reqProgress.blocked = false;
-                        reqProgress.status = RequirementStatus.PartiallyCleared;
-                    }
-                }
-                // _highScore
-                {
-                    const reqProgress = battle.requirementsProgress.find(x => x.id === '_highScore')!;
-                    reqProgress.highScore = progress.highScore;
-                    if (reqProgress.highScore >= reqProgress.points) {
-                        reqProgress.completed = true;
-                        reqProgress.blocked = false;
-                        reqProgress.status = RequirementStatus.Cleared;
-                    } else if (reqProgress.highScore > 0) {
-                        reqProgress.completed = false;
-                        reqProgress.blocked = false;
-                        reqProgress.status = RequirementStatus.PartiallyCleared;
-                    }
-                }
+                // If defeatAll not cleared, sync partial scores
+                this.syncPartialScores(battle, progress.encounterPoints, progress.highScore);
             }
             progress.objectivesCleared.forEach(objectiveIndex => {
                 if (objectiveIndex === 0) return; // Handled above
@@ -549,9 +564,9 @@ export class LeProgressService {
             syncedProgress: {
                 lastUpdateMillisUtc: Date.now(),
                 hasUsedAdForExtraTokenToday: externalData.currentEvent?.hasUsedAdForExtraTokenToday ?? false,
-                currentTokens: externalData.currentEvent?.tokens.currentTokens ?? 0,
-                maxTokens: externalData.currentEvent?.tokens.maxTokens ?? 12,
-                currentClaimedChestIndex: (externalData.currentClaimedChestIndex ?? 0) - 1,
+                currentTokens: externalData.currentEvent?.tokens.current ?? 0,
+                maxTokens: externalData.currentEvent?.tokens.max ?? 12,
+                currentClaimedChestIndex: externalData.currentClaimedChestIndex ?? -1,
                 nextTokenMillisUtc: externalData.currentEvent
                     ? Date.now() + externalData.currentEvent?.tokens.nextTokenInSeconds * 1000
                     : Date.now() + 3600 * 3 * 1000,

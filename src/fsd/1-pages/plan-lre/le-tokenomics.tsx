@@ -25,7 +25,6 @@ import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapsh
 
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
-import { useLreProgress } from './le-progress.hooks';
 import { LeTokenCard } from './le-token-card';
 // import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderRestrictions, renderTeam } from './le-token-render-utils';
@@ -38,12 +37,12 @@ import { TokenDisplay, TokenEstimationService, TokenUse } from './token-estimati
 interface Props {
     legendaryEvent: ILegendaryEvent;
     battles: ILeBattles | undefined;
+    model: ILreProgressModel;
     tokens: TokenUse[];
     currentPoints: number;
     tokenDisplays: TokenDisplay[];
     tracksProgress: ILreTrackProgress[];
     showP2P: boolean;
-    nextTokenCompleted: (tokenIndex: number) => void;
     nextTokenMaybe: (tokenIndex: number) => void;
     nextTokenStopped: (tokenIndex: number) => void;
     createNewModel: (
@@ -65,31 +64,26 @@ interface Props {
 export const LeTokenomics: React.FC<Props> = ({
     legendaryEvent,
     battles,
+    model,
     // tokens,
     currentPoints,
     tokenDisplays,
     tracksProgress,
     // showP2P,
-    nextTokenCompleted,
     nextTokenMaybe,
     nextTokenStopped,
     createNewModel,
     updateDto,
 }: Props) => {
     const { characters: unresolvedChars } = useContext(StoreContext);
-    const { model: progressModel } = useLreProgress(legendaryEvent);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
 
     const [characters, setCharacters] = useState<ICharacter2[]>([]);
-    const [model, setModel] = useState<ILreProgressModel>(progressModel);
 
     useEffect(() => {
         const resolvedChars = CharactersService.resolveStoredCharacters(unresolvedChars);
         setCharacters(resolvedChars);
     }, [unresolvedChars]);
-    useEffect(() => {
-        setModel(progressModel);
-    }, [progressModel]);
 
     // Helper function to check if a token has yellow or red restrictions
     const hasWarningRestrictions = (token: TokenDisplay): boolean => {
@@ -192,8 +186,8 @@ export const LeTokenomics: React.FC<Props> = ({
                         />
                     )}
                 </div>
-                <div className="flex items-center w-full justify-center gap-2">
-                    <div className="relative w-40 h-6 bg-gray-200 rounded-full dark:bg-gray-700 overflow-hidden">
+                <div className="flex items-center justify-center w-full gap-2">
+                    <div className="relative w-40 h-6 overflow-hidden bg-gray-200 rounded-full dark:bg-gray-700">
                         <div
                             className="h-full bg-blue-600"
                             style={{
@@ -219,15 +213,12 @@ export const LeTokenomics: React.FC<Props> = ({
             {firstToken && (
                 <div className="flex flex-col items-center w-full gap-y-4">
                     <div className="flex flex-col items-center w-full gap-y-4">
-                        {/* 1. Relative container to allow absolute positioning inside */}
-                        <div className="relative flex items-center justify-center w-full min-h-[40px]">
-                            {/* 2. Sync Button - Pushed to the far left */}
-                            <div className="absolute left-0">
-                                <SyncButton showText={true} />
-                            </div>
-
-                            {/* 3. Icons - These will stay perfectly centered in the 'relative' div */}
-                            <div className="flex gap-x-8 text-sm text-gray-600 dark:text-gray-400">
+                        {/* Token status and sync section */}
+                        <div className="flex items-center justify-center w-full min-h-10">
+                            <div className="flex text-sm text-gray-600 gap-x-8 dark:text-gray-400">
+                                <div className="flex items-center gap-2">
+                                    <SyncButton showText={true} />
+                                </div>
                                 <div className="flex items-center gap-2">
                                     {isDataStale() && (
                                         <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
@@ -245,10 +236,19 @@ export const LeTokenomics: React.FC<Props> = ({
 
                                 <div className="flex items-center gap-2">
                                     <AccessibleTooltip
-                                        title={`${totalFreeTokensRemainingInIteration} free tokens remaining...`}>
+                                        title={`${Math.max(0, totalFreeTokensRemainingInIteration - (model.syncedProgress?.currentTokens ?? 0))} free tokens remaining...`}>
                                         <div className="flex items-center gap-2">
                                             <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />
-                                            {totalFreeTokensRemainingInIteration} / {totalFreeTokensRemaining}
+                                            {Math.max(
+                                                0,
+                                                totalFreeTokensRemainingInIteration -
+                                                    (model.syncedProgress?.currentTokens ?? 0)
+                                            )}{' '}
+                                            /{' '}
+                                            {Math.max(
+                                                0,
+                                                totalFreeTokensRemaining - (model.syncedProgress?.currentTokens ?? 0)
+                                            )}
                                         </div>
                                     </AccessibleTooltip>
                                 </div>
@@ -300,7 +300,6 @@ export const LeTokenomics: React.FC<Props> = ({
                             renderTeam={x => renderTeam(x, 30)}
                             isBattleVisible={isFirstTokenBattleVisible}
                             onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
-                            onCompleteBattle={() => nextTokenCompleted(firstTokenIndex)}
                             onMaybeBattle={() => nextTokenMaybe(firstTokenIndex)}
                             onStopBattle={() => nextTokenStopped(firstTokenIndex)}
                         />

@@ -1,0 +1,115 @@
+# Source: https://github.com/microsoft/TypeScript/issues/32063#issuecomment-3765791778
+# Description: enable treating JSON content as fixed readonly values instead of widening them to general types
+#
+# e.g. import kharnLreData from "./5-Kharn.json";
+#     before: (typeof kharnLreData)['name'] -> string
+#     after:  (typeof kharnLreData)['name'] -> "Kharn"
+
+diff --git a/node_modules/typescript/lib/_tsc.js b/node_modules/typescript/lib/_tsc.js
+index 612a1f7..53fa32a 100644
+--- a/node_modules/typescript/lib/_tsc.js
++++ b/node_modules/typescript/lib/_tsc.js
+@@ -7563,6 +7563,7 @@ var Diagnostics = {
+   Compiles_the_current_project_with_additional_settings: diag(6929, 3 /* Message */, "Compiles_the_current_project_with_additional_settings_6929", "Compiles the current project, with additional settings."),
+   true_for_ES2022_and_above_including_ESNext: diag(6930, 3 /* Message */, "true_for_ES2022_and_above_including_ESNext_6930", "`true` for ES2022 and above, including ESNext."),
+   List_of_file_name_suffixes_to_search_when_resolving_a_module: diag(6931, 1 /* Error */, "List_of_file_name_suffixes_to_search_when_resolving_a_module_6931", "List of file name suffixes to search when resolving a module."),
++  Import_JSON_files_as_const_assertions: diag(6933, 3 /* Message */, "Import_JSON_files_as_const_assertions_6933", "Import JSON files as const assertions."),
+   Variable_0_implicitly_has_an_1_type: diag(7005, 1 /* Error */, "Variable_0_implicitly_has_an_1_type_7005", "Variable '{0}' implicitly has an '{1}' type."),
+   Parameter_0_implicitly_has_an_1_type: diag(7006, 1 /* Error */, "Parameter_0_implicitly_has_an_1_type_7006", "Parameter '{0}' implicitly has an '{1}' type."),
+   Member_0_implicitly_has_an_1_type: diag(7008, 1 /* Error */, "Member_0_implicitly_has_an_1_type_7008", "Member '{0}' implicitly has an '{1}' type."),
+@@ -37490,6 +37491,15 @@ var commandOptionsWithoutBuild = [
+     description: Diagnostics.Enable_importing_json_files,
+     defaultValueDescription: false
+   },
++  {
++    name: "importJsonAsConst",
++    type: "boolean",
++    affectsSemanticDiagnostics: true,
++    affectsBuildInfo: true,
++    category: Diagnostics.Language_and_Environment,
++    description: Diagnostics.Import_JSON_files_as_const_assertions,
++    defaultValueDescription: false
++  },
+   {
+     name: "allowArbitraryExtensions",
+     type: "boolean",
+@@ -56577,6 +56587,9 @@ function createTypeChecker(host) {
+       if (!declaration.statements.length) {
+         return emptyObjectType;
+       }
++      if (compilerOptions.importJsonAsConst) {
++        return checkExpression(declaration.statements[0].expression);
++      }
+       return getWidenedType(getWidenedLiteralType(checkExpression(declaration.statements[0].expression)));
+     }
+     if (isAccessor(declaration)) {
+@@ -80599,6 +80612,9 @@ function createTypeChecker(host) {
+   }
+   function isConstContext(node) {
+     const parent = node.parent;
++    if (compilerOptions.importJsonAsConst && parent.kind === 245 /* ExpressionStatement */ && isSourceFile(parent.parent) && isJsonSourceFile(parent.parent)) {
++      return true;
++    }
+     return isAssertionExpression(parent) && isConstTypeReference(parent.type) || isJSDocTypeAssertion(parent) && isConstTypeReference(getJSDocTypeAssertionType(parent)) || isValidConstAssertionArgument(node) && isConstTypeVariable(getContextualType(node, 0 /* None */)) || (isParenthesizedExpression(parent) || isArrayLiteralExpression(parent) || isSpreadElement(parent)) && isConstContext(parent) || (isPropertyAssignment(parent) || isShorthandPropertyAssignment(parent) || isTemplateSpan(parent)) && isConstContext(parent.parent);
+   }
+   function checkExpressionForMutableLocation(node, checkMode, forceTuple) {
+diff --git a/node_modules/typescript/lib/typescript.d.ts b/node_modules/typescript/lib/typescript.d.ts
+index 2c56042..b402cc4 100644
+--- a/node_modules/typescript/lib/typescript.d.ts
++++ b/node_modules/typescript/lib/typescript.d.ts
+@@ -7040,6 +7040,7 @@ declare namespace ts {
+         forceConsistentCasingInFileNames?: boolean;
+         ignoreDeprecations?: string;
+         importHelpers?: boolean;
++        importJsonAsConst?: boolean;
+         /** @deprecated */
+         importsNotUsedAsValues?: ImportsNotUsedAsValues;
+         inlineSourceMap?: boolean;
+diff --git a/node_modules/typescript/lib/typescript.js b/node_modules/typescript/lib/typescript.js
+index 0554fc3..6c5a0ee 100644
+--- a/node_modules/typescript/lib/typescript.js
++++ b/node_modules/typescript/lib/typescript.js
+@@ -10949,6 +10949,7 @@ var Diagnostics = {
+   Compiles_the_current_project_with_additional_settings: diag(6929, 3 /* Message */, "Compiles_the_current_project_with_additional_settings_6929", "Compiles the current project, with additional settings."),
+   true_for_ES2022_and_above_including_ESNext: diag(6930, 3 /* Message */, "true_for_ES2022_and_above_including_ESNext_6930", "`true` for ES2022 and above, including ESNext."),
+   List_of_file_name_suffixes_to_search_when_resolving_a_module: diag(6931, 1 /* Error */, "List_of_file_name_suffixes_to_search_when_resolving_a_module_6931", "List of file name suffixes to search when resolving a module."),
++  Import_JSON_files_as_const_assertions: diag(6933, 3 /* Message */, "Import_JSON_files_as_const_assertions_6933", "Import JSON files as const assertions."),
+   Variable_0_implicitly_has_an_1_type: diag(7005, 1 /* Error */, "Variable_0_implicitly_has_an_1_type_7005", "Variable '{0}' implicitly has an '{1}' type."),
+   Parameter_0_implicitly_has_an_1_type: diag(7006, 1 /* Error */, "Parameter_0_implicitly_has_an_1_type_7006", "Parameter '{0}' implicitly has an '{1}' type."),
+   Member_0_implicitly_has_an_1_type: diag(7008, 1 /* Error */, "Member_0_implicitly_has_an_1_type_7008", "Member '{0}' implicitly has an '{1}' type."),
+@@ -41751,6 +41752,15 @@ var commandOptionsWithoutBuild = [
+     description: Diagnostics.Enable_importing_json_files,
+     defaultValueDescription: false
+   },
++  {
++    name: "importJsonAsConst",
++    type: "boolean",
++    affectsSemanticDiagnostics: true,
++    affectsBuildInfo: true,
++    category: Diagnostics.Language_and_Environment,
++    description: Diagnostics.Import_JSON_files_as_const_assertions,
++    defaultValueDescription: false
++  },
+   {
+     name: "allowArbitraryExtensions",
+     type: "boolean",
+@@ -61188,6 +61198,9 @@ function createTypeChecker(host) {
+       if (!declaration.statements.length) {
+         return emptyObjectType;
+       }
++      if (compilerOptions.importJsonAsConst) {
++        return checkExpression(declaration.statements[0].expression);
++      }
+       return getWidenedType(getWidenedLiteralType(checkExpression(declaration.statements[0].expression)));
+     }
+     if (isAccessor(declaration)) {
+@@ -85210,6 +85223,9 @@ function createTypeChecker(host) {
+   }
+   function isConstContext(node) {
+     const parent2 = node.parent;
++    if (compilerOptions.importJsonAsConst && parent2.kind === 245 /* ExpressionStatement */ && isSourceFile(parent2.parent) && isJsonSourceFile(parent2.parent)) {
++      return true;
++    }
+     return isAssertionExpression(parent2) && isConstTypeReference(parent2.type) || isJSDocTypeAssertion(parent2) && isConstTypeReference(getJSDocTypeAssertionType(parent2)) || isValidConstAssertionArgument(node) && isConstTypeVariable(getContextualType2(node, 0 /* None */)) || (isParenthesizedExpression(parent2) || isArrayLiteralExpression(parent2) || isSpreadElement(parent2)) && isConstContext(parent2) || (isPropertyAssignment(parent2) || isShorthandPropertyAssignment(parent2) || isTemplateSpan(parent2)) && isConstContext(parent2.parent);
+   }
+   function checkExpressionForMutableLocation(node, checkMode, forceTuple) {

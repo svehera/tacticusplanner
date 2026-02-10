@@ -10,13 +10,6 @@ import { LETrack } from '@/fsd/3-features/lre/model/base.le.track';
 
 import { allLegendaryEvents } from './index';
 
-// Helper function to check uniform length of arrays
-function allArraysSameLength(arrays: any[][]): boolean {
-    if (arrays.length === 0) return true;
-    const length = arrays[0].length;
-    return arrays.every(arr => arr.length === length);
-}
-
 describe('Legendary Events Data Integrity', () => {
     allLegendaryEvents.forEach(event => {
         it(`should have uniform track battle counts and correct battle counts for tracks in "${event.name}" LE`, () => {
@@ -25,11 +18,9 @@ describe('Legendary Events Data Integrity', () => {
             expect(event).toHaveProperty('beta');
             expect(event).toHaveProperty('gamma');
 
-            expect(
-                allArraysSameLength([event.alpha.battlesPoints, event.beta.battlesPoints, event.gamma.battlesPoints])
-            ).toBe(true);
-
             expect(event.alpha.battlesPoints.length).toBe(event.battlesCount);
+            expect(event.beta.battlesPoints.length).toBe(event.battlesCount);
+            expect(event.gamma.battlesPoints.length).toBe(event.battlesCount);
         });
     });
     allLegendaryEvents.forEach(staticEvent => {

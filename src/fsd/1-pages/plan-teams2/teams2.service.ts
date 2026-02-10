@@ -2,8 +2,7 @@
 /* eslint-disable import-x/no-internal-modules */
 import { ICharacter2 } from '@/models/interfaces';
 
-import { FactionsService } from '@/fsd/5-shared/lib';
-import { Faction, Rank, Rarity } from '@/fsd/5-shared/model';
+import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
 
@@ -16,7 +15,7 @@ export class Teams2Service {
         maxRank: Rank,
         minRarity: Rarity,
         maxRarity: Rarity,
-        factions: Faction[],
+        factions: FactionId[],
         searchText: string
     ): boolean {
         if (c.rank < minRank || c.rank > maxRank) {
@@ -25,10 +24,7 @@ export class Teams2Service {
         if (c.rarity < minRarity || c.rarity > maxRarity) {
             return false;
         }
-        if (
-            factions.length > 0 &&
-            !(factions.includes(c.faction) || factions.includes(FactionsService.snowprintFactionToFaction(c.faction)))
-        ) {
+        if (factions.length > 0 && !factions.includes(c.faction)) {
             return false;
         }
         if (searchText.trim() !== '') {
@@ -75,13 +71,13 @@ export class Teams2Service {
         m: IMow2,
         minRarity: Rarity,
         maxRarity: Rarity,
-        factions: Faction[],
+        factions: FactionId[],
         searchText: string
     ): boolean {
         if (m.rarity < minRarity || m.rarity > maxRarity) {
             return false;
         }
-        if (factions.length > 0 && !factions.includes(m.faction as Faction)) {
+        if (factions.length > 0 && !factions.includes(m.faction)) {
             return false;
         }
         if (searchText.trim() !== '') {

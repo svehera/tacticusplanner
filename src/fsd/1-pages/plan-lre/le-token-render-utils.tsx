@@ -30,7 +30,7 @@ export const renderMilestone = (token: TokenDisplay) => {
 
 export const renderRestrictions = (
     restricts: ILreRequirements[],
-    tracksProgress: ILreTrackProgress[],
+    tracksProgress: readonly ILreTrackProgress[],
     track: LreTrackId,
     battleNumber: number,
     sizePx?: number

@@ -1,4 +1,4 @@
-import { Alliance, Trait, DamageType, Faction } from '@/fsd/5-shared/model';
+import { Alliance, Trait, DamageType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { lucius as staticData } from '@/fsd/4-entities/lre';
@@ -26,7 +26,7 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                     points: 85,
                     objectiveType: 'Faction',
                     objectiveTarget: 'BlackLegion',
-                    units: filter(noXenos).byFaction(Faction.Black_Legion),
+                    units: filter(noXenos).byFaction('BlackLegion'),
                     iconId: 'black_legion',
                     index: 0,
                 },
@@ -73,7 +73,7 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
 
     protected getBetaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
         const noChaos = filter(unitsData).byAlliance(Alliance.Chaos, true);
-        const noChaosOrTyranids = filter(noChaos).byFaction(Faction.Tyranids, true);
+        const noChaosOrTyranids = filter(noChaos).byFaction('Tyranids', true);
 
         return new LETrack(
             this.id,

@@ -5,7 +5,6 @@ import {
     RarityMapper,
     RarityString,
     Alliance,
-    Faction,
     Equipment,
     Trait,
     DamageType,
@@ -31,7 +30,7 @@ export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
 
     static readonly lreCharacters: ICharacterData[] = LegendaryEventService.getLegendaryEvents()
-        .map((lre: ILegendaryEventStatic) => {
+        .map(lre => {
             const character = this.charactersData.find(unit => unit.snowprintId === lre.unitSnowprintId);
             if (character) return { ...character, lre: this.toILreCharacterStaticData(lre) };
             return character;
@@ -91,7 +90,7 @@ export class CharactersService {
             fullName: rawData['Full Name'],
             unitType: UnitType.character,
             alliance: rawData.Alliance as Alliance,
-            faction: rawData.Faction as Faction,
+            faction: rawData.Faction,
             name: rawData.Name,
             numberAdded: rawData.Number,
             health: rawData.Health,

@@ -18404,7 +18404,7 @@
             ],
             "potential": [
                 {
-                    "id": "upgDmgR028",
+                    "id": "upgDmgR040",
                     "chance_numerator": 3,
                     "chance_denominator": 6,
                     "effective_rate": 0.571
@@ -22688,7 +22688,7 @@
             ],
             "potential": [
                 {
-                    "id": "upgHpR028",
+                    "id": "upgHpR040",
                     "chance_numerator": 3,
                     "chance_denominator": 6,
                     "effective_rate": 0.571
@@ -23482,7 +23482,7 @@
             ],
             "potential": [
                 {
-                    "id": "upgArmR028",
+                    "id": "upgArmR040",
                     "chance_numerator": 3,
                     "chance_denominator": 6,
                     "effective_rate": 0.571
@@ -29050,7 +29050,7 @@
             ],
             "potential": [
                 {
-                    "id": "upgHpL108",
+                    "id": "upgHpL099",
                     "chance_numerator": 1,
                     "chance_denominator": 9,
                     "effective_rate": 0.199
@@ -33801,17 +33801,17 @@
                     "max": 165
                 },
                 {
-                    "id": "upgHpC008",
+                    "id": "upgHpR040",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgHpC008",
-                    "chance_numerator": 3,
-                    "chance_denominator": 6,
-                    "effective_rate": 0.571
+                    "id": "upgHpR040",
+                    "chance_numerator": 1,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -34274,17 +34274,17 @@
                     "max": 180
                 },
                 {
-                    "id": "upgHpC009",
+                    "id": "upgDmgR040",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgHpC009",
-                    "chance_numerator": 3,
-                    "chance_denominator": 6,
-                    "effective_rate": 0.571
+                    "id": "upgDmgR040",
+                    "chance_numerator": 1,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -35038,19 +35038,14 @@
                     "id": "gold",
                     "min": 131,
                     "max": 195
-                },
-                {
-                    "id": "upgArmC006",
-                    "min": 1,
-                    "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgArmC006",
-                    "chance_numerator": 3,
+                    "id": "upgHpL099",
+                    "chance_numerator": 2,
                     "chance_denominator": 6,
-                    "effective_rate": 0.571
+                    "effective_rate": 0.428
                 }
             ]
         },
@@ -35516,14 +35511,14 @@
                     "max": 210
                 },
                 {
-                    "id": "upgDmgR009",
+                    "id": "upgArmR040",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgDmgR009",
+                    "id": "upgArmR040",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
                     "effective_rate": 0.153
@@ -36961,17 +36956,17 @@
                     "max": 180
                 },
                 {
-                    "id": "upgDmgR007",
+                    "id": "upgHpC008",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgDmgR007",
-                    "chance_numerator": 1,
-                    "chance_denominator": 12,
-                    "effective_rate": 0.153
+                    "id": "upgHpC008",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
                 }
             ]
         },
@@ -37347,14 +37342,14 @@
                     "max": 195
                 },
                 {
-                    "id": "upgHpC006",
+                    "id": "upgHpC009",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgHpC006",
+                    "id": "upgHpC009",
                     "chance_numerator": 3,
                     "chance_denominator": 6,
                     "effective_rate": 0.571
@@ -37765,14 +37760,14 @@
                     "max": 210
                 },
                 {
-                    "id": "upgArmU009",
+                    "id": "upgArmU008",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgArmU009",
+                    "id": "upgArmU008",
                     "chance_numerator": 2,
                     "chance_denominator": 8,
                     "effective_rate": 0.333
@@ -42061,14 +42056,14 @@
                     "max": 180
                 },
                 {
-                    "id": "upgHpC015",
+                    "id": "upgHpC014",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgHpC015",
+                    "id": "upgHpC014",
                     "chance_numerator": 3,
                     "chance_denominator": 6,
                     "effective_rate": 0.571
@@ -43108,7 +43103,7 @@
                 }
             ]
         },
-        "enemyPower": 337478,
+        "enemyPower": 234495,
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["ThousandSons"],
         "enemiesTotal": 10,
@@ -43131,8 +43126,8 @@
                 "id": "thousBossTerminatorLHE",
                 "name": "Toth",
                 "count": 1,
-                "stars": 11,
-                "rank": "Gold 3"
+                "stars": 2,
+                "rank": "Iron 1"
             },
             {
                 "id": "thousNpc3RubricMarine",
@@ -43291,17 +43286,17 @@
                     "max": 160
                 },
                 {
-                    "id": "upgDmgR009",
+                    "id": "upgArmC011",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgDmgR009",
-                    "chance_numerator": 1,
-                    "chance_denominator": 12,
-                    "effective_rate": 0.153
+                    "id": "upgArmC011",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
                 }
             ]
         },
@@ -48758,17 +48753,17 @@
                     "max": 165
                 },
                 {
-                    "id": "upgDmgC013",
+                    "id": "upgHpR040",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgDmgC013",
-                    "chance_numerator": 3,
-                    "chance_denominator": 6,
-                    "effective_rate": 0.571
+                    "id": "upgHpR040",
+                    "chance_numerator": 1,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -49260,14 +49255,14 @@
                     "max": 180
                 },
                 {
-                    "id": "upgDmgC005",
+                    "id": "upgArmC006",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgDmgC005",
+                    "id": "upgArmC006",
                     "chance_numerator": 3,
                     "chance_denominator": 6,
                     "effective_rate": 0.571
@@ -49583,17 +49578,17 @@
                     "max": 195
                 },
                 {
-                    "id": "upgHpC014",
+                    "id": "upgArmR040",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgHpC014",
-                    "chance_numerator": 3,
-                    "chance_denominator": 6,
-                    "effective_rate": 0.571
+                    "id": "upgArmR040",
+                    "chance_numerator": 1,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -49886,19 +49881,14 @@
                     "id": "gold",
                     "min": 131,
                     "max": 195
-                },
-                {
-                    "id": "upgArmU008",
-                    "min": 1,
-                    "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgArmU008",
+                    "id": "upgHpL099",
                     "chance_numerator": 2,
-                    "chance_denominator": 8,
-                    "effective_rate": 0.333
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
                 }
             ]
         },
@@ -51603,14 +51593,14 @@
                     "max": 165
                 },
                 {
-                    "id": "upgDmgR007",
+                    "id": "upgDmgR040",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgDmgR007",
+                    "id": "upgDmgR040",
                     "chance_numerator": 1,
                     "chance_denominator": 12,
                     "effective_rate": 0.153

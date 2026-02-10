@@ -5,7 +5,7 @@ import {
     Alliance,
     DamageType,
     DynamicProps,
-    Faction,
+    FactionId,
     Rank,
     Rarity,
     RarityStars,
@@ -70,7 +70,7 @@ export interface UnitDataRaw {
     id: string;
     Name: string;
     Title: string;
-    Faction: string;
+    Faction: FactionId;
     Alliance: string;
     Health: number;
     Damage: number;
@@ -119,7 +119,7 @@ export interface ICharacterData {
     id: string;
     snowprintId?: string;
     alliance: Alliance;
-    faction: Faction;
+    faction: FactionId;
     name: string;
     fullName: string;
     shortName: string;

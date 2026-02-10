@@ -14,7 +14,7 @@ import {
 import { getEnumValues } from '@/fsd/5-shared/lib';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
-import { Alliance, Faction, Rank } from '@/fsd/5-shared/model';
+import { Alliance, Rank } from '@/fsd/5-shared/model';
 
 import {
     ICampaignsProgress,
@@ -257,7 +257,7 @@ export class UpgradesService {
     }
 
     private static canCharacterParticipateInBattle(unit: ICharacterData, location: ICampaignBattleComposed): boolean {
-        return location.alliesAlliance === unit.alliance || location.alliesFactions.includes(unit.faction as Faction);
+        return location.alliesAlliance === unit.alliance || location.alliesFactions.includes(unit.faction);
     }
 
     /**
@@ -397,15 +397,24 @@ export class UpgradesService {
         const totalMaterialsNeeded: Record<string, number> = {};
         const totalMaterialsAcquired: Record<string, number> = {};
 
-        // Certain upgrades will appear in here multiple times because we split them for HSEs. Keep
-        // track of the total materials by look at the required for the first occurrence of each
-        // upgrade material.
+        // Materials can appear multiple times in allUpgrades for two reasons:
+        // 1. HSE splits: same material split into entries with different locations but same
+        //    relatedGoals — these represent the SAME need and should NOT be summed.
+        // 2. Goal priority mode: same material appears for different goals with different
+        //    relatedGoals — these represent SEPARATE needs and SHOULD be summed.
+        // We deduplicate by (relatedGoals, materialId) to handle both cases correctly.
+        const countedGoalMaterial = new Set<string>();
         allUpgrades.forEach(upgrade => {
             if (totalMaterialsNeeded[upgrade.id] === undefined) {
-                totalMaterialsNeeded[upgrade.id] = upgrade.requiredCount;
+                totalMaterialsNeeded[upgrade.id] = 0;
+                totalMaterialsAcquired[upgrade.id] = 0;
             }
-            if (totalMaterialsAcquired[upgrade.id] === undefined) {
-                totalMaterialsAcquired[upgrade.id] = upgrade.acquiredCount;
+            const goalsKey = upgrade.relatedGoals.slice().sort().join(',');
+            const key = `${goalsKey}_${upgrade.id}`;
+            if (!countedGoalMaterial.has(key)) {
+                countedGoalMaterial.add(key);
+                totalMaterialsNeeded[upgrade.id] += Math.max(upgrade.requiredCount - upgrade.acquiredCount, 0);
+                totalMaterialsAcquired[upgrade.id] += upgrade.acquiredCount;
             }
         });
 
@@ -940,7 +949,7 @@ export class UpgradesService {
         let ret = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
-            if (npc && npc.faction === Faction.Tyranids && !npc.traits.includes('Summon')) {
+            if (npc && npc.faction === 'Tyranids' && !npc.traits.includes('Summon')) {
                 ret += enemy.count;
             }
         }

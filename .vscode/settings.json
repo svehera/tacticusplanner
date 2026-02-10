@@ -29,5 +29,8 @@
 
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  {
+    // Use the TypeScript version installed in the workspace so that patches can be applied
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
