@@ -93,7 +93,7 @@ export const LeProgress = ({
                     expanded={accordionExpanded === 'missionAndNotes'}
                     onChange={handleAccordionChange('missionAndNotes')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <span>Notes & Missions Progress</span>
+                        <span>Notes & Missions</span>
                     </AccordionSummary>
 
                     <AccordionDetails className="flex-box wrap gap20">
