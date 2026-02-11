@@ -9,19 +9,19 @@ import onslaughtData from '@/data/onslaught/data.generated.json';
 import { SectorCard } from './SectorCard';
 
 type OnslaughtData = typeof onslaughtData;
-const validTracks = Object.keys(onslaughtData) as (keyof typeof onslaughtData)[];
+const isValidTrack = (track: string): track is keyof OnslaughtData => track in onslaughtData;
 
 export const Onslaught = () => {
-    const [queryParams, setQueryParams] = useSearchParams({ track: validTracks[0] });
+    const [queryParams, setQueryParams] = useSearchParams({ track: 'Imperial' });
 
     useLayoutEffect(() => {
-        const currentTrack = queryParams.get('track');
-        if (!currentTrack || !validTracks.includes(currentTrack as (typeof validTracks)[number])) {
-            setQueryParams(new URLSearchParams({ track: validTracks[0] }));
-        }
+        const queryTrack = queryParams.get('track');
+        if (!queryTrack) setQueryParams(new URLSearchParams({ track: 'Imperial' }));
+        else if (!isValidTrack(queryTrack)) setQueryParams(new URLSearchParams({ track: 'Imperial' }));
     }, [queryParams, setQueryParams]);
 
-    const activeTrack = (queryParams.get('track') as keyof OnslaughtData) ?? validTracks[0];
+    const activeTrack = queryParams.get('track') ?? 'Imperial';
+    if (!isValidTrack(activeTrack)) return <div>Invalid track. Switching...</div>;
     const { sectors, badgeAlliance } = onslaughtData[activeTrack];
 
     return (
@@ -33,7 +33,7 @@ export const Onslaught = () => {
                 scrollButtons="auto"
                 className="sticky top-0 bg-(--bg) border-b pb-0.5 border-stone-200 dark:border-stone-700"
                 aria-label="Alliance track selection">
-                {validTracks.map(track => (
+                {Object.keys(onslaughtData).map(track => (
                     <Tab key={track} label={track} value={track} />
                 ))}
             </Tabs>

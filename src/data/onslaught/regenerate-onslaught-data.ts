@@ -98,7 +98,7 @@ const WaveSchema = z
     .strictObject({
         round: z.int().min(1).max(13),
         enemies: z.strictObject({
-            defaultGroup: z.array(z.string()), // could be stricter but we only care about count
+            defaultGroup: z.array(z.string()).nonempty(), // could be stricter but we only care about count
         }),
         rewards: z.strictObject({
             guaranteed: z.array(GuaranteedRewardSchema).length(1),
@@ -120,20 +120,25 @@ const KillZoneSchema = z
     .strictObject({
         battleNr: z.int().positive(),
         BoardId: z.string(),
-        waves: z.array(WaveSchema).refine(
-            waves => {
-                const rounds = waves.map(w => w.round);
-                return new Set(rounds).size === rounds.length;
-            },
-            { message: 'round number is expected to be unique within a zone' }
-        ),
+        waves: z
+            .array(WaveSchema)
+            .nonempty()
+            .refine(
+                waves => {
+                    const rounds = waves.map(w => w.round);
+                    return new Set(rounds).size === rounds.length;
+                },
+                { message: 'round number is expected to be unique within a zone' }
+            ),
     })
     .refine(({ waves }) => new Set(waves.map(w => w.badges.alliance)).size === 1, {
         message: 'All reward badges are expected to be from the same alliance',
     })
     .transform(({ battleNr, BoardId, waves }) => {
         const badgeCountsByRarity = { Common: 0, Uncommon: 0, Rare: 0, Epic: 0, Legendary: 0, Mythic: 0 };
-        waves.forEach(({ badges }) => (badgeCountsByRarity[badges.rarityString] += badges.count));
+        waves.forEach(({ badges }) => {
+            badgeCountsByRarity[badges.rarityString] += badges.count;
+        });
         return {
             battleNr,
             waves: waves.length,
@@ -151,6 +156,7 @@ const SectorSchema = z
         minHeroPower: z.int().positive(),
         battles: z
             .array(KillZoneSchema)
+            .nonempty()
             .refine(zone => new Set(zone.map(b => b.boardId)).size === 1, {
                 message: 'all zones within a sector are expected to share the same BoardId',
             })
@@ -169,21 +175,24 @@ const SectorSchema = z
 const TrackSchema = z
     .strictObject({
         allowedGrandAlliance: AllianceSchema,
-        tiers: z.array(SectorSchema).superRefine((sectors, ctx) => {
-            let currentExpectedBattleNr = 1;
-            for (let i = 0; i < sectors.length; i++) {
-                for (const { battleNr } of sectors[i].zones) {
-                    if (battleNr !== currentExpectedBattleNr)
-                        ctx.addIssue({
-                            code: 'invalid_value',
-                            message: `battleNr is expected to be ${currentExpectedBattleNr}`,
-                            input: battleNr,
-                            values: [currentExpectedBattleNr],
-                        });
-                    currentExpectedBattleNr++;
+        tiers: z
+            .array(SectorSchema)
+            .nonempty()
+            .superRefine((sectors, ctx) => {
+                let currentExpectedBattleNr = 1;
+                for (let i = 0; i < sectors.length; i++) {
+                    for (const { battleNr } of sectors[i].zones) {
+                        if (battleNr !== currentExpectedBattleNr)
+                            ctx.addIssue({
+                                code: 'invalid_value',
+                                message: `battleNr is expected to be ${currentExpectedBattleNr}`,
+                                input: battleNr,
+                                values: [currentExpectedBattleNr],
+                            });
+                        currentExpectedBattleNr++;
+                    }
                 }
-            }
-        }),
+            }),
     })
     .transform(({ allowedGrandAlliance, tiers: sectors }) => ({
         alliance: allowedGrandAlliance,
@@ -220,5 +229,5 @@ const DataSchema = z
 // ----------- Stage 7: Executing and write to file -----------
 export const main = () => {
     const parsedData = DataSchema.parse(rawData);
-    fs.writeFileSync(__dirname + '/data.generated.json', JSON.stringify(parsedData, null, 4) + '\n');
+    fs.writeFileSync(import.meta.dirname + '/data.generated.json', JSON.stringify(parsedData, null, 4) + '\n');
 };

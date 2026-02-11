@@ -8,7 +8,9 @@ import powerIcon from '@/assets/images/icons/power.png';
 import { BadgeImage } from '@/fsd/5-shared/ui/icons';
 
 import { KillzoneList } from './KillzoneList';
-import type { OnslaughtBadgeAlliance, OnslaughtSector } from './types';
+import type { OnslaughtBadgeAlliance, OnslaughtSector, OnslaughtKillzone } from './types';
+
+const RARITY_VALUES = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic'] as const;
 
 export function SectorCard({
     name,
@@ -25,11 +27,13 @@ export function SectorCard({
     // Without it, React lags from rendering thousands of badge icons
     const [isOpen, setOpen] = useState(false);
 
-    const maxBadgeRarity = Object.values(killzones).reduce((_, kz) => {
-        for (const rarity of ['Mythic', 'Legendary', 'Epic', 'Rare', 'Uncommon', 'Common'] as const) {
-            if (kz.badgeCountsByRarity[rarity] > 0) return rarity;
-        }
-    }, 'Common' as const);
+    const maxRarityIndex = Object.values(killzones).reduce((rarestIndex, kz: OnslaughtKillzone) => {
+        const kzRarityIndexes = Object.entries(kz.badgeCountsByRarity)
+            .filter(([_, count]) => count > 0)
+            .map(([rarity]) => RARITY_VALUES.indexOf(rarity as (typeof RARITY_VALUES)[number]));
+        return Math.max(...kzRarityIndexes, rarestIndex);
+    }, 0);
+    const maxBadgeRarity = RARITY_VALUES[maxRarityIndex];
 
     return (
         <details
@@ -49,7 +53,7 @@ export function SectorCard({
                         <span className="pr-1">
                             <span className="hidden sm:inline">Character</span> Power required:
                         </span>
-                        <img src={powerIcon} className="w-2.5 aspect-auto self-baseline" />
+                        <img alt="Power" src={powerIcon} className="w-2.5 aspect-auto self-baseline" />
                         <span className="">{minHeroPower}</span>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ export function KillzoneList({
     return (
         <table className="w-full border-collapse">
             <thead>
-                <tr className="text-stone-600 text-xs *:px-0.5 text-center sm:text-left">
+                <tr className="text-stone-500 text-xs *:px-0.5 text-center sm:text-left">
                     <th className="text-left">Killzone </th>
                     <th>Waves</th>
                     <th>Enemies</th>
