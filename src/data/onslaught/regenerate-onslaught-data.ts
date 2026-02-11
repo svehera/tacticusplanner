@@ -194,7 +194,8 @@ const TrackSchema = z
         sectors: sectors.map((sector, sectorIndex) => ({
             name: `Sector ${indexToRomanNumeral(sectorIndex)}`,
             minHeroPower: sector.minHeroPower,
-            killzones: sector.killzones.reverse(), // to match the order they are presented in-game
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            killzones: sector.killzones.map(({ battleNr, ...kz }) => kz).reverse(), // to match the order they are presented in-game
         })),
     }));
 
