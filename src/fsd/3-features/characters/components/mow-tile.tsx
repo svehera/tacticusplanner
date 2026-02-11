@@ -32,7 +32,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
 
     return (
         <div
-            className="flex flex-col items-center min-w-[75px]"
+            className="flex min-w-[75px] flex-col items-center"
             style={{
                 opacity: viewContext.getOpacity ? viewContext.getOpacity(mow) : mow.unlocked ? 1 : 0.5,
                 cursor: onClick && !disableClick ? 'pointer' : undefined,
@@ -55,23 +55,23 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                 </Tooltip>
 
                 <div
-                    className="relative top-[-7px] flex items-center justify-between z-10"
+                    className="relative top-[-7px] z-10 flex items-center justify-between"
                     style={{ visibility: hasAbilities && viewContext.showAbilitiesLevel ? 'visible' : 'hidden' }}>
-                    <div className="relative top-[-16px] w-5 h-5 flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold] rounded-full">
+                    <div className="relative top-[-16px] flex h-5 w-5 items-center justify-center rounded-full border border-solid border-[gold] bg-[#012a41] text-xs text-[white]">
                         {mow.primaryAbilityLevel}
                     </div>
-                    <div className="relative top-[-16px] w-5 h-5 flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold] rounded-full">
+                    <div className="relative top-[-16px] flex h-5 w-5 items-center justify-center rounded-full border border-solid border-[gold] bg-[#012a41] text-xs text-[white]">
                         {mow.secondaryAbilityLevel}
                     </div>
                 </div>
                 <Conditional condition={viewContext.showCharacterLevel}>
                     {mow.unlocked ? (
-                        <div className="relative top-[-24px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                        <div className="relative top-[-24px] flex items-center justify-center border border-solid border-[gold] bg-[#012a41] text-xs text-[white]">
                             {mow.shards}
                         </div>
                     ) : (
                         <div
-                            className="relative top-[-23px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]"
+                            className="relative top-[-23px] flex items-center justify-center border border-solid border-[gold] bg-[#012a41] text-xs text-[white]"
                             style={{
                                 background: `linear-gradient(to right, green ${unlockProgress}%, #012A41 ${unlockProgress}%)`,
                             }}>
@@ -80,7 +80,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                     )}
                 </Conditional>
             </div>
-            <div className="min-h-[30px] flex items-center mt-[-19px] justify-center">
+            <div className="mt-[-19px] flex min-h-[30px] items-center justify-center">
                 {viewContext.showCharacterRarity && <RarityIcon rarity={mow.rarity} />}
                 <MiscIcon icon={'mow'} width={22} height={25} />
             </div>
@@ -106,7 +106,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                         )
                     }>
                     <div
-                        className="w-[60px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs mb-[5px] border-solid border-[gold]"
+                        className="mb-[5px] flex w-[60px] items-center justify-center border border-solid border-[gold] bg-[#012a41] text-xs text-[white]"
                         style={{
                             background: `linear-gradient(to right, green ${mow.numberOfUnlocked}%, #012A41 ${mow.numberOfUnlocked}%)`,
                         }}>

@@ -127,7 +127,7 @@ export const LegendaryEvent = ({
 
     return (
         <div>
-            <div className="flex gap-[15px] mb-2.5" style={{ flexWrap: isMobile ? 'wrap' : 'nowrap' }}>
+            <div className="mb-2.5 flex gap-[15px]" style={{ flexWrap: isMobile ? 'wrap' : 'nowrap' }}>
                 {viewPreferences.showAlpha && (
                     <LegendaryEventTrack
                         legendaryEvent={legendaryEvent}

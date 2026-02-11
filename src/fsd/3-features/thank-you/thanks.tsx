@@ -92,7 +92,7 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
             </Button>
 
             {sliderMode && currentContributor ? (
-                <div className="flex justify-center min-h-[400px] gap-2.5">
+                <div className="flex min-h-[400px] justify-center gap-2.5">
                     {isMobile && <ThankYouCard contributor={currentContributor} hide={hide} />}
                     {!isMobile && (
                         <>
@@ -103,7 +103,7 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
                     )}
                 </div>
             ) : (
-                <div className="flex flex-wrap gap-2.5 justify-center">
+                <div className="flex flex-wrap justify-center gap-2.5">
                     {contributorsList.map(x => (
                         <ThankYouCard key={x.name} contributor={x} />
                     ))}

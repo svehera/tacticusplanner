@@ -19,7 +19,7 @@ import { TokenDisplay } from './token-estimation-service';
 export const renderMilestone = (token: TokenDisplay) => {
     if (!token.achievedStarMilestone) return <></>;
     return (
-        <div className="flex flex-col items-center justify-center p-1 border border-gray-400 dark:border-gray-600 rounded-lg bg-blue-100 dark:bg-gray-700/50 min-w-[70px]">
+        <div className="flex min-w-[70px] flex-col items-center justify-center rounded-lg border border-gray-400 bg-blue-100 p-1 dark:border-gray-600 dark:bg-gray-700/50">
             <div className="flex items-center text-lg font-bold text-gray-800 dark:text-white">
                 <RarityIcon rarity={token.rarity} />
                 <StarsIcon stars={token.stars} />
@@ -71,7 +71,7 @@ export const renderRestrictions = (
 );
 
 export const renderTeam = (team: string[], sizePx?: number) => (
-    <div className="flex flex-row justify-center -space-x-1 flex-nowrap">
+    <div className="flex flex-row flex-nowrap justify-center -space-x-1">
         {team.map((snowprintId: string, i) => {
             const unit = CharactersService.getUnit(snowprintId);
             return (

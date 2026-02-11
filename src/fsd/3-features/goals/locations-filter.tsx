@@ -151,7 +151,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <h5>Enemies</h5>
                     {renderUnitsFilter('enemies', currFilter.enemiesAlliance, currFilter.enemiesFactions)}
 
-                    <div className="flex items-center gap-3 mt-2.5">
+                    <div className="mt-2.5 flex items-center gap-3">
                         <Autocomplete
                             fullWidth
                             size="small"

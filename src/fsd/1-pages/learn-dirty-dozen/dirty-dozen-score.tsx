@@ -21,9 +21,9 @@
     }
 
     return (
-        <div className="w-full flex justify-center">
+        <div className="flex w-full justify-center">
             <div
-                className="h-8 aspect-square rounded-full text-center font-bold border text-[#181d1f]"
+                className="aspect-square h-8 rounded-full border text-center font-bold text-[#181d1f]"
                 style={{ backgroundColor }}>
                 {value}
             </div>

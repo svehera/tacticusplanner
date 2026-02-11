@@ -10,7 +10,7 @@ interface Props {
 
 export const LeNextGoalProgress: React.FC<Props> = ({ progress }) => {
     return (
-        <div className="flex flex-wrap gap-2 m-2.5">
+        <div className="m-2.5 flex flex-wrap gap-2">
             <div className="flex gap-[5px]">
                 Deed Points to {progress.nextMilestone}:
                 <span className="font-bold">

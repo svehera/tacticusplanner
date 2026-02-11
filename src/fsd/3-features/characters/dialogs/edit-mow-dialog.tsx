@@ -85,7 +85,7 @@ export const EditMowDialog: React.FC<Props> = ({
                     </IconButton>
                 )}
             </DialogTitle>
-            <DialogContent className="pt-5 min-h-50">
+            <DialogContent className="min-h-50 pt-5">
                 <Grid container spacing={2} alignItems="center">
                     <Grid item xs={6}>
                         <RaritySelect

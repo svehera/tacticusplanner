@@ -32,9 +32,9 @@ export const RosterSnapshotsUnitDiffSideBySide: React.FC<Props> = ({
     const staticMow = mow ? MowsService.resolveToStatic(mow.id) : undefined;
 
     return (
-        <div className="flex w-56 170px dark:bg-gray-800 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl hover:border-blue-500">
+        <div className="170px flex w-56 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg transition duration-300 hover:border-blue-500 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800">
             <div className="w-1"></div>
-            <div className="w-[96px] h-[170px]">
+            <div className="h-[170px] w-[96px]">
                 <RosterSnapshotCharacter
                     showShards={showShards}
                     showMythicShards={showMythicShards}

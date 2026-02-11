@@ -1,17 +1,21 @@
 # Tacticus Planner
 
 ## Project Overview
+
 Tacticus Planner is a project built with a combination of React(tsx), Material-UI, and ag-Grid.
 The development server and bundler are powered by [Vite](https://vitejs.dev/)
 
 ## Project Dependencies
+
 Major dependencies for this project include:
+
 - **react**: ^19.0.0
 - **react-router-dom**
 - **@mui/material**
 - **ag-grid-react**
 
 Major DEV dependencies:
+
 - **typescript**
 - **tailwindcss**
 - **vite**

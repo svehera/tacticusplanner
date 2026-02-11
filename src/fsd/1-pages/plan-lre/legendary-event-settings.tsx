@@ -25,8 +25,8 @@ const SettingGroup = ({
     currentValue: LegendaryEventDefaultPage;
     onChange: (val: LegendaryEventDefaultPage) => void;
 }) => (
-    <div className="flex flex-col gap-3 p-5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm">
-        <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
+    <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <h3 className="mb-1 text-[10px] font-bold tracking-widest text-gray-500 uppercase dark:text-gray-400">
             {title}
         </h3>
         <div className="flex flex-wrap gap-2">
@@ -36,14 +36,11 @@ const SettingGroup = ({
                     <button
                         key={opt.id}
                         onClick={() => onChange(opt.id)}
-                        className={`
-              px-4 py-2 text-xs font-bold uppercase rounded-lg transition-all duration-200 border
-              ${
-                  isActive
-                      ? 'bg-blue-600 border-blue-500 text-white shadow-md'
-                      : 'bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 hover:dark:bg-gray-850'
-              }
-                `}>
+                        className={`rounded-lg border px-4 py-2 text-xs font-bold uppercase transition-all duration-200 ${
+                            isActive
+                                ? 'border-blue-500 bg-blue-600 text-white shadow-md'
+                                : 'hover:dark:bg-gray-850 border-gray-300 bg-gray-50 text-gray-600 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300'
+                        } `}>
                         {opt.label}
                     </button>
                 );
@@ -77,7 +74,7 @@ export const LegendaryEventSettings: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col gap-6 p-4 max-w-3xl">
+        <div className="flex max-w-3xl flex-col gap-6 p-4">
             <SettingGroup
                 title="Default Page During Event"
                 currentValue={defaultPageWhenEventIsActive}
@@ -94,11 +91,11 @@ export const LegendaryEventSettings: React.FC = () => {
                     update({ ...leSettings, defaultPageWhenEventNotActive: e });
                 }}
             />
-            <div className="flex flex-col gap-3 p-5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm">
-                <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
+            <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+                <h3 className="mb-1 text-[10px] font-bold tracking-widest text-gray-500 uppercase dark:text-gray-400">
                     Content Visibility
                 </h3>
-                <label className="flex items-center gap-3 cursor-pointer">
+                <label className="flex cursor-pointer items-center gap-3">
                     <input
                         type="checkbox"
                         checked={showP2P}
@@ -106,7 +103,7 @@ export const LegendaryEventSettings: React.FC = () => {
                             setShowP2P(e.target.checked);
                             update({ ...leSettings, showP2POptions: e.target.checked });
                         }}
-                        className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
+                        className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700"
                     />
                     <span className="text-sm text-gray-700 dark:text-gray-300">Show Pay-to-Play (P2P) options</span>
                 </label>

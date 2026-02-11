@@ -30,7 +30,7 @@ export const ThankYouCard = ({
             }}>
             <CardHeader
                 title={
-                    <div className="flex items-center gap-2.5 cursor-pointer">
+                    <div className="flex cursor-pointer items-center gap-2.5">
                         {isContentMaker(contributor) ? (
                             <Link
                                 to={contributor.youtubeLink}

@@ -11,7 +11,7 @@ export function KillzoneList({
     return (
         <table className="w-full border-collapse">
             <thead>
-                <tr className="text-stone-500 text-xs *:px-0.5 text-center sm:text-left">
+                <tr className="text-center text-xs text-stone-500 *:px-0.5 sm:text-left">
                     <th className="text-left">Killzone </th>
                     <th>Waves</th>
                     <th>Enemies</th>
@@ -26,12 +26,12 @@ export function KillzoneList({
                         return (
                             <tr
                                 key={name}
-                                className="border-t border-stone-300 dark:border-stone-700 text-center sm:text-left">
+                                className="border-t border-stone-300 text-center sm:text-left dark:border-stone-700">
                                 <td className="text-left">{name.replace('KillZone ', '')}</td>
                                 <td>{killzone.waves}</td>
                                 <td>{killzone.totalEnemyCount}</td>
                                 <td>{killzone.totalXp}</td>
-                                <td className="pl-2 sm:pl-0 text-left">
+                                <td className="pl-2 text-left sm:pl-0">
                                     <BadgeRewards
                                         badgeCountsByRarity={killzone.badgeCountsByRarity}
                                         alliance={badgeAlliance}

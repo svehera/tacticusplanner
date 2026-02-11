@@ -55,7 +55,7 @@ export const SetAscendGoal: React.FC<Props> = ({
 
     return (
         <>
-            <div className="flex gap-3 items-center">
+            <div className="flex items-center gap-3">
                 <RaritySelect
                     label={'Target Rarity'}
                     rarityValues={rarityValues}
@@ -88,7 +88,7 @@ export const SetAscendGoal: React.FC<Props> = ({
                 <>
                     {possibleLocations.length !== 0 && (
                         <>
-                            <div className="flex gap-3 items-center">
+                            <div className="flex items-center gap-3">
                                 <CampaignsUsageSelect
                                     disabled={!unlockedLocations.length}
                                     value={campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
@@ -96,7 +96,7 @@ export const SetAscendGoal: React.FC<Props> = ({
                                     mythic={false}
                                 />
                             </div>
-                            <div className="flex gap-3 items-center">
+                            <div className="flex items-center gap-3">
                                 <NumbersInput
                                     title="Shards per onslaught"
                                     helperText="Put 0 to ignore Onslaught raids"
@@ -123,7 +123,7 @@ export const SetAscendGoal: React.FC<Props> = ({
             {targetRarity >= Rarity.Mythic && (
                 <>
                     {!!possibleMythicLocations.length && (
-                        <div className="flex gap-3 items-center">
+                        <div className="flex items-center gap-3">
                             <div className="w-1/2">
                                 <CampaignsUsageSelect
                                     disabled={!unlockedMythicLocations.length}

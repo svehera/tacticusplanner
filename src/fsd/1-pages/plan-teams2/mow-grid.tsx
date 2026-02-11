@@ -19,7 +19,7 @@ export const MowGrid: React.FC<Props> = ({ mows, onMowSelect, showHeader }: Prop
     return (
         <div>
             {showHeader && (
-                <div className="flex justify-between mb-4">
+                <div className="mb-4 flex justify-between">
                     <h3 className="font-bold">Machines of War</h3>
                     <span className="text-xs text-slate-500">Showing {mows.length} units</span>
                 </div>
@@ -29,7 +29,7 @@ export const MowGrid: React.FC<Props> = ({ mows, onMowSelect, showHeader }: Prop
                     <div
                         key={mow.snowprintId!}
                         onClick={() => onMowSelect(mow.snowprintId!)}
-                        className="cursor-pointer transition-transform duration-100 active:scale-95 hover:brightness-110"
+                        className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"
                         title={`Select ${mow.name || 'Machine of War'}`}>
                         <RosterSnapshotCharacter
                             key={mow.snowprintId!}

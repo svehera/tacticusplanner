@@ -121,7 +121,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
             {itemsGrouped.map(group => (
                 <Accordion key={group.rarity} defaultExpanded={!isMobile && !viewPreferences.craftableItemsInInventory}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <h2 className="flex gap-1 items-center">
+                        <h2 className="flex items-center gap-1">
                             <RarityIcon rarity={group.rarity} /> <span>{group.label}</span>
                         </h2>
                     </AccordionSummary>

@@ -12,7 +12,7 @@ export const RarityIcon = ({ rarity }: { rarity: Rarity }) => {
     return (
         <img
             loading={'lazy'}
-            className="pointer-events-none max-w-[25px] max-h-[25px] w-auto h-auto"
+            className="pointer-events-none h-auto max-h-[25px] w-auto max-w-[25px]"
             src={image}
             alt={rarityString}
         />

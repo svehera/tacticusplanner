@@ -162,27 +162,27 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
             {!!guildRaidTeams.length && (
                 <div>
                     <h2>Guild Raids</h2>
-                    <div className="flex gap-3 flex-wrap items-center">{guildRaidTeams.map(renderTeam)}</div>
+                    <div className="flex flex-wrap items-center gap-3">{guildRaidTeams.map(renderTeam)}</div>
                 </div>
             )}
             {!!taTeams.length && (
                 <div>
                     <h2>Tournament Arena</h2>
-                    <div className="flex gap-3 flex-wrap items-center">{taTeams.map(renderCappedTeam)}</div>
+                    <div className="flex flex-wrap items-center gap-3">{taTeams.map(renderCappedTeam)}</div>
                 </div>
             )}
 
             {!!gwTeams.length && (
                 <div>
                     <h2>Guild War</h2>
-                    <div className="flex gap-3 flex-wrap items-center">{gwTeams.map(renderCappedTeam)}</div>
+                    <div className="flex flex-wrap items-center gap-3">{gwTeams.map(renderCappedTeam)}</div>
                 </div>
             )}
 
             {!!survivalTeams.length && (
                 <div>
                     <h2>Survival</h2>
-                    <div className="flex gap-3 flex-wrap items-center">{survivalTeams.map(renderCappedTeam)}</div>
+                    <div className="flex flex-wrap items-center gap-3">{survivalTeams.map(renderCappedTeam)}</div>
                 </div>
             )}
         </div>

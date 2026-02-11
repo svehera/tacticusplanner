@@ -31,7 +31,7 @@ export const Onslaught = () => {
                 onChange={(_, value: keyof OnslaughtData) => setQueryParams({ track: value })}
                 variant="scrollable"
                 scrollButtons="auto"
-                className="sticky top-0 bg-(--bg) border-b pb-0.5 border-stone-200 dark:border-stone-700"
+                className="sticky top-0 border-b border-stone-200 bg-(--bg) pb-0.5 dark:border-stone-700"
                 aria-label="Alliance track selection">
                 {Object.keys(onslaughtData).map(track => (
                     <Tab key={track} label={track} value={track} />

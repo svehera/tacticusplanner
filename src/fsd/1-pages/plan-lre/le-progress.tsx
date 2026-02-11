@@ -73,7 +73,7 @@ export const LeProgress = ({
                     </AccordionSummary>
 
                     <AccordionDetails className="flex-box wrap gap20">
-                        <div className="flex-box column start flex-1 min-w-[450px]">
+                        <div className="flex-box column start min-w-[450px] flex-1">
                             <div className="w-full">
                                 <TextField
                                     className="mt-5"
@@ -119,7 +119,7 @@ export const LeProgress = ({
                                 ))}
 
                             <div className="flex-box wrap gap-x-[50px]">
-                                <div className="flex-box column start flex-1 min-w-[450px]">
+                                <div className="flex-box column start min-w-[450px] flex-1">
                                     <h4>Free missions</h4>
                                     {model.regularMissions.map((mission, index) => (
                                         <span key={index}>
@@ -129,7 +129,7 @@ export const LeProgress = ({
                                 </div>
 
                                 {leSettings.showP2POptions && (
-                                    <div className="flex-box column start flex-1 min-w-[450px]">
+                                    <div className="flex-box column start min-w-[450px] flex-1">
                                         <h4>Premium missions</h4>
                                         {model.premiumMissions.map((mission, index) => (
                                             <span key={index}>
@@ -155,7 +155,7 @@ export const LeProgress = ({
                         </div>
                     </AccordionSummary>
 
-                    <AccordionDetails className="box-border flex flex-wrap start">
+                    <AccordionDetails className="start box-border flex flex-wrap">
                         {model.tracksProgress.map(track => (
                             <LreTrackOverallProgress
                                 key={track.trackId}

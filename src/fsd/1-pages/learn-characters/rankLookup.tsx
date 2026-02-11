@@ -328,7 +328,7 @@ export const RankLookup = () => {
                         }}
                     />
                 </div>
-                <div className="flex gap-5 items-center flex-wrap">
+                <div className="flex flex-wrap items-center gap-5">
                     <div className="w-50">
                         <RankSelect
                             label={'Rank End'}
@@ -364,7 +364,7 @@ export const RankLookup = () => {
             </div>
 
             <div>
-                <div className="ag-theme-material w-full h-[800px]">
+                <div className="ag-theme-material h-[800px] w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}
@@ -382,10 +382,10 @@ export const RankLookup = () => {
                     <InfoIcon color="primary" />
                     <span>Click on the upgrade to view recipe</span>
                 </div>
-                <div className="flex gap-5 flex-wrap">
+                <div className="flex flex-wrap gap-5">
                     {groupByRanks.map((x, index) => (
                         <div key={index}>
-                            <div className="flex gap-[3px] justify-center">
+                            <div className="flex justify-center gap-[3px]">
                                 <RankIcon rank={x.rank1} /> <ArrowForward />
                                 <RankIcon
                                     rank={x.rank2}

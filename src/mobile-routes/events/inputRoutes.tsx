@@ -7,7 +7,7 @@ export const InputRoutes = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex gap-2.5 flex-col items-center">
+        <div className="flex flex-col items-center gap-2.5">
             {inputSubMenu.map(item => (
                 <Card
                     variant="outlined"

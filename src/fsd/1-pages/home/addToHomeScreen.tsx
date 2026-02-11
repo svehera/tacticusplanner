@@ -11,8 +11,8 @@ interface Props {
 
 export const AddToHomeScreen: React.FC<Props> = ({ link, dismiss }) => {
     return (
-        <div className="block w-full bg-[var(--muted)] p-[10px] flex items-center align-center gap-3 justify-center">
-            <div className="flex align-center items-center gap-3">
+        <div className="align-center block flex w-full items-center justify-center gap-3 bg-[var(--muted)] p-[10px]">
+            <div className="align-center flex items-center gap-3">
                 <img width="42" height="42" src="/android-chrome-192x192.png" />
                 <p>Add Tacticus Planner to home screen</p>
             </div>
