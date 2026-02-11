@@ -1,148 +1,84 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 
-import { onslaughtData } from './data';
-import { indexToRomanNumeral } from './utils';
+// eslint-disable-next-line import-x/no-internal-modules
+import onslaughtData from '@/data/onslaught/data.generated.json';
 
 import { Onslaught } from './index';
 
-function renderOnslaught(initialRoute = '?track=Imperial') {
-    return render(
-        <MemoryRouter initialEntries={[`/learn/onslaught${initialRoute}`]}>
-            <Onslaught />
-        </MemoryRouter>
-    );
+function LocationDisplay() {
+    const location = useLocation();
+    return <div data-testid="location">{location.search}</div>;
 }
 
 describe('Onslaught page', () => {
-    describe('rendering', () => {
-        it('renders the page heading', () => {
-            renderOnslaught();
-            expect(screen.getByRole('heading', { level: 1, name: 'Onslaught' })).toBeInTheDocument();
-        });
+    it('renders the correct track for a given query parameter', () => {
+        render(
+            <MemoryRouter initialEntries={['/learn/onslaught?track=Imperial']}>
+                <Onslaught />
+            </MemoryRouter>
+        );
 
-        it('renders a tab for each alliance track', () => {
-            renderOnslaught();
-            expect(screen.getByRole('tab', { name: 'Imperial' })).toBeInTheDocument();
-            expect(screen.getByRole('tab', { name: 'Xenos' })).toBeInTheDocument();
-            expect(screen.getByRole('tab', { name: 'Chaos' })).toBeInTheDocument();
-        });
-
-        it('renders the correct number of sectors for the active track', () => {
-            renderOnslaught('?track=Imperial');
-            const summaries = screen.getAllByText(/^Sector /);
-            expect(summaries).toHaveLength(onslaughtData.Imperial.length);
-        });
+        expect(screen.getByRole('tab', { name: 'Imperial' })).toHaveAttribute('aria-selected', 'true');
     });
 
-    describe('tab switching', () => {
-        it('marks the active track tab as selected', () => {
-            renderOnslaught('?track=Chaos');
-            expect(screen.getByRole('tab', { name: 'Chaos', selected: true })).toBeInTheDocument();
-            expect(screen.getByRole('tab', { name: 'Imperial', selected: false })).toBeInTheDocument();
-        });
+    it('switching track is reflected in the query parameters', async () => {
+        const user = userEvent.setup();
 
-        it('switches displayed sectors when clicking a different tab', async () => {
-            renderOnslaught('?track=Imperial');
-            expect(screen.getByRole('tab', { name: 'Imperial', selected: true })).toBeInTheDocument();
+        render(
+            <MemoryRouter initialEntries={['/learn/onslaught?track=Imperial']}>
+                <>
+                    <Onslaught />
+                    <LocationDisplay />
+                </>
+            </MemoryRouter>
+        );
 
-            await userEvent.click(screen.getByRole('tab', { name: 'Xenos' }));
+        // Click another track and verify the URL search params update
+        const xenosTab = screen.getByRole('tab', { name: 'Xenos' });
+        await user.click(xenosTab);
 
-            expect(screen.getByRole('tab', { name: 'Xenos', selected: true })).toBeInTheDocument();
-            const xenosSectors = screen.getAllByText(/^Sector /);
-            expect(xenosSectors).toHaveLength(onslaughtData.Xenos.length);
-        });
-
-        it('defaults to the first track when no query param is provided', () => {
-            renderOnslaught('');
-            const firstTrack = Object.keys(onslaughtData)[0];
-            expect(screen.getByRole('tab', { name: firstTrack, selected: true })).toBeInTheDocument();
-        });
+        expect(await screen.findByTestId('location')).toHaveTextContent('track=Xenos');
+        expect(screen.getByRole('tab', { name: 'Xenos' })).toHaveAttribute('aria-selected', 'true');
     });
 
-    describe('sector display', () => {
-        it('displays sectors in descending order (highest index first)', () => {
-            renderOnslaught('?track=Imperial');
-            const sectorSummaries = screen.getAllByText(/^Sector /);
-            const lastIndex = onslaughtData.Imperial.length - 1;
+    it('renders a collection of details elements for the active track', () => {
+        const { container } = render(
+            <MemoryRouter initialEntries={['/learn/onslaught?track=Imperial']}>
+                <Onslaught />
+            </MemoryRouter>
+        );
 
-            expect(sectorSummaries[0].textContent).toContain(`Sector ${indexToRomanNumeral(lastIndex)}`);
-            expect(sectorSummaries[sectorSummaries.length - 1].textContent).toContain('Sector I');
-        });
+        const sectors = onslaughtData.Imperial.sectors;
+        const detailsEls = container.querySelectorAll('details');
 
-        it('displays the character power requirement in each sector summary', () => {
-            renderOnslaught('?track=Imperial');
-            // The last rendered summary corresponds to Sector I (index 0)
-            const sectorSummaries = screen.getAllByText(/^Sector /);
-            const sectorISummary = sectorSummaries[sectorSummaries.length - 1];
-            const firstSector = onslaughtData.Imperial[0];
-            expect(sectorISummary.closest('summary')?.textContent).toContain(
-                `Character Power required: ${firstSector.minHeroPower}`
-            );
-        });
+        expect(detailsEls.length).toBe(Object.keys(sectors).length);
     });
 
-    describe('killzone display', () => {
-        // Note: jsdom does not implement <details> show/hide, so all content is always in the DOM.
-        // We use `within` to scope queries to specific sectors.
+    it('details elements can be opened to show a table of information', async () => {
+        const user = userEvent.setup();
+        const { container } = render(
+            <MemoryRouter initialEntries={['/learn/onslaught?track=Imperial']}>
+                <Onslaught />
+            </MemoryRouter>
+        );
 
-        it('renders the correct number of killzones for Sector I', () => {
-            renderOnslaught('?track=Imperial');
-            const sectorISummary = screen.getAllByText(/^Sector /).pop()!;
-            const sectorDetails = sectorISummary.closest('details')!;
-            const killzoneCount = onslaughtData.Imperial[0].killzones.length;
+        const firstSectorKey = Object.keys(onslaughtData.Imperial.sectors)[0];
+        const firstSector = onslaughtData.Imperial.sectors[firstSectorKey];
+        if (!firstSector) throw new Error('First sector data not found');
 
-            const killzoneSummaries = within(sectorDetails).getAllByText(/^Killzone /);
-            expect(killzoneSummaries).toHaveLength(killzoneCount);
-        });
+        // Open the first sector
+        await user.click(screen.getByText(firstSectorKey));
 
-        it('displays killzones in descending order (last killzone first)', () => {
-            renderOnslaught('?track=Imperial');
-            const sectorISummary = screen.getAllByText(/^Sector /).pop()!;
-            const sectorDetails = sectorISummary.closest('details')!;
+        // Table and headers should now be visible
+        const table = await screen.findByRole('table');
+        expect(table).toBeInTheDocument();
+        expect(screen.getByText('Killzone')).toBeInTheDocument();
 
-            const killzoneSummaries = within(sectorDetails).getAllByText(/^Killzone /);
-            // Last in the list should be Alpha (index 0), first should be the highest
-            expect(killzoneSummaries[killzoneSummaries.length - 1].textContent).toBe('Killzone Alpha');
-        });
-    });
-
-    describe('wave display', () => {
-        it('displays enemy info, badge reward, and XP reward for waves in a killzone', () => {
-            renderOnslaught('?track=Imperial');
-
-            // Scope to Sector I
-            const sectorISummary = screen.getAllByText(/^Sector /).pop()!;
-            const sectorDetails = sectorISummary.closest('details')!;
-            const sectorScope = within(sectorDetails);
-
-            // Scope to Killzone Alpha (last in the rendered list)
-            const killzoneSummaries = sectorScope.getAllByText(/^Killzone /);
-            const killzoneAlphaSummary = killzoneSummaries[killzoneSummaries.length - 1];
-            const killzoneDetails = killzoneAlphaSummary.closest('details')!;
-            const killzoneScope = within(killzoneDetails);
-
-            const killzone = onslaughtData.Imperial[0].killzones[0];
-            const waves = Object.values(killzone);
-
-            // Check that XP rewards are rendered for each wave
-            const xpTexts = killzoneScope.getAllByText(/^XP reward:/);
-            expect(xpTexts).toHaveLength(waves.length);
-
-            // Check that badge rewards are rendered for each wave
-            const badgeTexts = killzoneScope.getAllByText(/^Badge reward:/);
-            expect(badgeTexts).toHaveLength(waves.length);
-
-            // Check that the first wave's enemies are rendered
-            const firstWave = waves[0];
-            for (const [key, quantity] of Object.entries(firstWave.enemies)) {
-                const lastColon = key.lastIndexOf(':');
-                const enemyId = key.slice(0, lastColon);
-                const level = key.slice(lastColon + 1);
-                expect(killzoneScope.getByText(`${quantity}x ${enemyId} (Level ${level})`)).toBeInTheDocument();
-            }
-        });
+        // Verify the number of rows equals the number of killzones
+        const tbodyRows = container.querySelectorAll('tbody tr');
+        expect(tbodyRows.length).toBe(Object.keys(firstSector).length - 1); // -1 to exclude minHeroPower
     });
 });

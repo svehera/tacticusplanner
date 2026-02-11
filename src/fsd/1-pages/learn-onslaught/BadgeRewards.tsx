@@ -18,7 +18,7 @@ export function BadgeRewards({
                 .filter(([_, count]) => count > 0)
                 .map(([rarity, count]) => (
                     // on very small screens, smush the badges until they're touching to save space. On larger screens, add a small gap between them
-                    <span key={rarity} className="-ml-[4px] flex items-start first:ml-0 sm:ml-0">
+                    <span key={rarity} className="-ml-1.5 flex items-start first:ml-0 sm:ml-0">
                         {Array(count)
                             .fill(0)
                             .map((_, index) => (
@@ -28,7 +28,7 @@ export function BadgeRewards({
                                     alliance={alliance}
                                     size="small"
                                     // give badges of the same rarity a stacked appearance via negative margin
-                                    className="-ml-4.5 first:ml-0"
+                                    className="-ml-[21px] first:ml-0"
                                 />
                             ))}
                     </span>

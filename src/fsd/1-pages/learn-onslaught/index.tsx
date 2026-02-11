@@ -31,13 +31,14 @@ export const Onslaught = () => {
                 onChange={(_, value: keyof OnslaughtData) => setQueryParams({ track: value })}
                 variant="scrollable"
                 scrollButtons="auto"
+                className="sticky top-0 bg-(--bg) border-b pb-0.5 border-stone-200 dark:border-stone-700"
                 aria-label="Alliance track selection">
                 {validTracks.map(track => (
                     <Tab key={track} label={track} value={track} />
                 ))}
             </Tabs>
 
-            <main className="flex flex-col gap-3 sm:gap-4">
+            <main className="flex flex-col gap-4">
                 {Object.entries(sectors).map(([sectorName, sector]) => {
                     return (
                         <SectorCard key={sectorName} name={sectorName} sector={sector} badgeAlliance={badgeAlliance} />

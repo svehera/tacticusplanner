@@ -2,6 +2,9 @@ import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import { clsx } from 'clsx';
 import { useState } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import powerIcon from '@/assets/images/icons/power.png';
+
 import { BadgeImage } from '@/fsd/5-shared/ui/icons';
 
 import { KillzoneList } from './KillzoneList';
@@ -24,36 +27,42 @@ export function SectorCard({
 
     const maxBadgeRarity = Object.values(killzones).reduce((_, kz) => {
         for (const rarity of ['Mythic', 'Legendary', 'Epic', 'Rare', 'Uncommon', 'Common'] as const) {
-            if (kz.badgeCountsByRarity[rarity] > 0) {
-                return rarity;
-            }
+            if (kz.badgeCountsByRarity[rarity] > 0) return rarity;
         }
     }, 'Common' as const);
 
     return (
         <details
-            className={clsx(
-                'group w-full rounded-lg border bg-stone-100/80 shadow-sm transition-shadow hover:shadow-md dark:bg-stone-900/80',
-                badgeAlliance === 'Imperial' && 'border-green-700/60 hover:shadow-green-700/60', // Chaos Track
-                badgeAlliance === 'Xenos' && 'border-red-700/60 hover:shadow-red-700/60', // Chaos Track
-                badgeAlliance === 'Chaos' && 'border-blue-700/60 hover:shadow-blue-700/60' // Imperial Track
-            )}
+            className="group w-full border bg-stone-100 shadow-sm transition-shadow hover:shadow-xl dark:bg-stone-900 rounded overflow-hidden"
             open={isOpen}
             onToggle={() => setOpen(prev => !prev)}>
-            <summary className="flex cursor-pointer items-center gap-2 bg-stone-300/80 px-3 py-2.5 text-sm transition-colors select-none hover:bg-stone-400/50 sm:px-4 sm:py-3 sm:text-base dark:bg-stone-900/80 dark:hover:bg-stone-800/50">
-                <span className="w-32 font-semibold dark:text-amber-100">{name}</span>
-                <span className="whitespace-nowrap">Min Power:</span>
-                <span className="block font-medium sm:inline dark:text-amber-200">{minHeroPower}</span>
-                <span className="text-sm dark:text-stone-400"></span>
-                <span className="pl-2 text-sm whitespace-nowrap dark:text-stone-400">Max Badge:</span>
-                <BadgeImage alliance={badgeAlliance} rarity={maxBadgeRarity} size="small" />
-                <span className="ml-auto text-sm dark:text-amber-100">
-                    {isOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-                </span>
+            <summary
+                className={clsx(
+                    'flex cursor-pointer justify-between w-full items-center px-2 text-stone-200 bg-linear-to-r select-none',
+                    badgeAlliance === 'Imperial' && 'from-teal-950 to-emerald-950 hover:from-teal-900', // Xenos Track
+                    badgeAlliance === 'Xenos' && 'from-red-950 to-pink-950 hover:from-red-900 ', // Chaos Track
+                    badgeAlliance === 'Chaos' && ' from-indigo-950 to-blue-900 hover:from-indigo-900' // Imperial Track
+                )}>
+                <div>
+                    <div className="text-lg font-bold">{name}</div>
+                    <div className="text-sm inline-block">
+                        <span className="pr-1">
+                            <span className="hidden sm:inline">Character</span> Power required:
+                        </span>
+                        <img src={powerIcon} className="w-2.5 aspect-auto self-baseline" />
+                        <span className="">{minHeroPower}</span>
+                    </div>
+                </div>
+
+                <div className="flex flex-col items-center">
+                    <div className="text-sm">Max Badge</div>
+                    <BadgeImage alliance={badgeAlliance} rarity={maxBadgeRarity} size="small" />
+                </div>
+                <span className="text-sm">{isOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}</span>
             </summary>
 
             {isOpen && (
-                <div className="w-full border-t border-amber-700/30 px-3 pt-2 pb-3 sm:px-4 sm:pt-3 sm:pb-4">
+                <div className="px-2 pt-1 border-t rounded-b bg-linear-to-b from-stone-100 to-stone-200 dark:from-stone-900 dark:to-stone-950">
                     <KillzoneList killzones={killzones} badgeAlliance={badgeAlliance} />
                 </div>
             )}

@@ -8,5 +8,4 @@ export { useQueryState } from './query-state';
 export { useFitGridOnWindowResize } from './resize-grid';
 export { getCompletionRateColor } from './get-completion-color';
 export { constObjectKeys, createSafeGetter, mutableCopy } from './type-helpers';
-export type { Prettify, IntRange } from './type-helpers';
 export * from './tacticus-api';
