@@ -3,6 +3,7 @@ import React, { useMemo, useContext, useCallback } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
+import { cn } from '@/fsd/5-shared/lib';
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -280,11 +281,12 @@ export const XpIncome: React.FC = () => {
                                         }
 
                                         <div
-                                            className={`// Appearance when starred (visible) absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full border-2 text-xs font-bold transition-all ${
-                                                isStarred
-                                                    ? 'scale-100 border-white bg-green-500 text-white opacity-100 dark:border-gray-900'
-                                                    : 'scale-0 opacity-0' // Hidden when not starred
-                                            } `}>
+                                            className={cn(
+                                                `absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full border-2 text-xs font-bold transition-all`,
+                                                isStarred && // Appearance when starred (visible)
+                                                    'scale-100 border-white bg-green-500 text-white opacity-100 dark:border-gray-900',
+                                                isStarred || 'scale-0 opacity-0' // Hidden when not starred
+                                            )}>
                                             ✓
                                         </div>
                                     </div>
