@@ -91,7 +91,8 @@
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-image-optimizer": "^1.1.9",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "zod": "^4.3.6"
   },
   "scripts": {
     "start": "vite",

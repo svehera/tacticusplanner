@@ -74,14 +74,9 @@ const GuaranteedRewardSchema = z
     .transform(str => Number(str.replace(/^wavesXp:/, '')));
 
 const OneTimeRewardSchema = z
-    .templateLiteral([
-        // aka "badge"
-        'abilityToken',
-        RarityStringSchema,
-        '_',
-        AllianceSchema,
-        z.literal(':').optional(), // count = 1 is the default and usually omitted
-        z.int().positive().optional(),
+    .union([
+        z.templateLiteral(['abilityToken', RarityStringSchema, '_', AllianceSchema]),
+        z.templateLiteral(['abilityToken', RarityStringSchema, '_', AllianceSchema, ':', z.int().positive()]),
     ])
     .transform(str => {
         const [rarityString, rest] = str.replace(/^abilityToken/, '').split('_');
