@@ -59,9 +59,9 @@ export const Lre: React.FC = () => {
     const leUnitAscensionData = useMemo(() => {
         const character = resolvedCharacters.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
         if (character !== undefined && character.rank !== Rank.Locked) {
-            return { rarity: character.rarity, stars: character.stars };
+            return { rank: character.rank, rarity: character.rarity, stars: character.stars };
         }
-        return { rarity: Rarity.Legendary, stars: RarityStars.None };
+        return { rank: Rank.Locked, rarity: Rarity.Legendary, stars: RarityStars.None };
     }, [resolvedCharacters, legendaryEvent.unitSnowprintId]);
 
     const tokens: TokenUse[] = TokenEstimationService.computeAllTokenUsage(
@@ -149,25 +149,18 @@ export const Lre: React.FC = () => {
 
     const battles = LeBattleService.getBattleSetForCharacter(legendaryEvent.id);
 
-    const character = resolvedCharacters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
-    const rank = character?.rank ?? Rank.Locked;
-
     const progress = TokenEstimationService.computeCurrentProgress(
         model,
-        rank === Rank.Locked ? Rarity.Legendary : (character?.rarity ?? Rarity.Legendary),
-        rank === Rank.Locked ? RarityStars.None : (character?.stars ?? RarityStars.None)
+        leUnitAscensionData.rank === Rank.Locked ? Rarity.Legendary : (leUnitAscensionData?.rarity ?? Rarity.Legendary),
+        leUnitAscensionData.rank === Rank.Locked ? RarityStars.None : (leUnitAscensionData?.stars ?? RarityStars.None)
     );
-
-    const char = resolvedCharacters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
-    const rarity = char?.rarity ?? Rarity.Legendary;
-    const stars = char?.stars ?? RarityStars.None;
 
     const renderTabContent = () => {
         switch (section) {
             case LreSection.teams:
                 return <LegendaryEvent legendaryEvent={legendaryEvent} upgradeRankOrMowGoals={upgradeRankOrMowGoals} />;
             case LreSection.progress:
-                return <LeProgress legendaryEvent={legendaryEvent} progress={progress} rarity={rarity} stars={stars} />;
+                return <LeProgress legendaryEvent={legendaryEvent} progress={progress} />;
             case LreSection.tokenomics:
                 return (
                     <LeTokenomics

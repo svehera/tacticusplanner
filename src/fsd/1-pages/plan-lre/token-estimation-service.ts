@@ -812,6 +812,8 @@ export class TokenEstimationService {
         // Determine the total currency, since forced progress only gives us the current incremental currency.
         if (lastClaimedChestIndex >= 0 && lastClaimedChestIndex < chestMilestones.length) {
             totalCurrency = chestMilestones[lastClaimedChestIndex].totalNeededCurrency + currentCurrency;
+        } else {
+            totalCurrency = currentCurrency;
         }
 
         // Determine if we hit any new ascension milestones.
@@ -850,7 +852,6 @@ export class TokenEstimationService {
                 addlPointsForNextMilestone =
                     this.computeTotalPointsToNextMilestone(
                         totalPoints,
-                        totalCurrency,
                         addlCurrencyForNextMilestone,
                         this.getBonusPayoutPerCurrencyPayout(progress)
                     ) - totalPoints;
@@ -900,36 +901,13 @@ export class TokenEstimationService {
 
     private static computeTotalPointsToNextMilestone(
         totalPoints: number,
-        totalCurrency: number,
         addlCurrencyForNextMilestone: number,
         bonusPayoutPerCurrencyPayout: number
     ): number {
-        console.log(
-            'looking for points from ' +
-                totalPoints +
-                ' with total currency ' +
-                totalCurrency +
-                ' to earn ' +
-                addlCurrencyForNextMilestone +
-                ' currency for next milestone with a bonus per payout of ' +
-                bonusPayoutPerCurrencyPayout
-        );
         let nextPointMilestoneIndex = this.getNextPointMilestoneIndex(totalPoints);
-        console.log('starting at last claimed point milestone index ' + (nextPointMilestoneIndex - 1));
         while (nextPointMilestoneIndex < pointMilestones.length && addlCurrencyForNextMilestone > 0) {
             addlCurrencyForNextMilestone -=
                 pointMilestones[nextPointMilestoneIndex].currencyPayout + bonusPayoutPerCurrencyPayout;
-            console.log(
-                'claiming milestone index ' +
-                    nextPointMilestoneIndex +
-                    ' which requires  ' +
-                    pointMilestones[nextPointMilestoneIndex].points +
-                    ' points and gives ' +
-                    pointMilestones[nextPointMilestoneIndex].currencyPayout +
-                    ' currency, now have ' +
-                    addlCurrencyForNextMilestone +
-                    ' additional currency left to earn for next milestone'
-            );
             nextPointMilestoneIndex++;
         }
         if (nextPointMilestoneIndex < pointMilestones.length) {

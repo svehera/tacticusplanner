@@ -1,3 +1,4 @@
+import { produce } from 'immer';
 import { useContext } from 'react';
 import { useDebounceCallback } from 'usehooks-ts';
 
@@ -33,9 +34,10 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     };
 
     const updateOccurrenceProgress = (occurrence: ILreOccurrenceProgress) => {
-        const occurrenceProgress = model.occurrenceProgress;
-        occurrenceProgress[occurrence.eventOccurrence - 1] = occurrence;
-        return updateDto({ ...model, occurrenceProgress: [...occurrenceProgress] });
+        const updatedProgress = produce(model, draft => {
+            draft.occurrenceProgress[occurrence.eventOccurrence - 1] = occurrence;
+        });
+        return updateDto(updatedProgress);
     };
 
     const createNewModel = (

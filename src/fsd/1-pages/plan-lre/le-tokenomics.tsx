@@ -129,16 +129,10 @@ export const LeTokenomics: React.FC<Props> = ({
 
     const character = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
     const rank = character?.rank ?? Rank.Locked;
+    const rarity = character?.rarity ?? Rarity.Legendary;
+    const stars = character?.stars ?? RarityStars.None;
 
-    const progress = TokenEstimationService.computeCurrentProgress(
-        model,
-        rank === Rank.Locked ? Rarity.Legendary : (character?.rarity ?? Rarity.Legendary),
-        rank === Rank.Locked ? RarityStars.None : (character?.stars ?? RarityStars.None)
-    );
-
-    const char = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
-    const rarity = char?.rarity ?? Rarity.Legendary;
-    const stars = char?.stars ?? RarityStars.None;
+    const progress = TokenEstimationService.computeCurrentProgress(model, rarity, stars);
 
     const isDataStale = () => {
         const nextEventDateUtc: Date = new Date(legendaryEvent.nextEventDateUtc ?? 0);
@@ -163,7 +157,7 @@ export const LeTokenomics: React.FC<Props> = ({
             <div className="flex flex-col items-center">
                 {/* Character Icon Container */}
                 <div>
-                    {char !== undefined && (
+                    {character !== undefined && (
                         <RosterSnapshotCharacter
                             showShards={RosterSnapshotShowVariableSettings.Never}
                             showMythicShards={RosterSnapshotShowVariableSettings.Never}
@@ -171,8 +165,8 @@ export const LeTokenomics: React.FC<Props> = ({
                             showAbilities={false}
                             char={
                                 {
-                                    id: char.snowprintId!,
-                                    rank: char.rank,
+                                    id: character.snowprintId!,
+                                    rank: rank,
                                     rarity: rarity,
                                     stars: stars,
                                     shards: 0,
@@ -182,7 +176,7 @@ export const LeTokenomics: React.FC<Props> = ({
                                     xpLevel: 1,
                                 } as ISnapshotCharacter
                             }
-                            charData={char}
+                            charData={character}
                         />
                     )}
                 </div>
@@ -197,7 +191,10 @@ export const LeTokenomics: React.FC<Props> = ({
                                 borderBottomRightRadius: '9999px',
                             }}></div>
                         <span className="absolute inset-0 flex items-center justify-center w-full h-full text-xs font-medium text-gray-800 dark:text-gray-100">
-                            {progress.currentShards} / {incrementalShardsForNextMilestone}
+                            {progress.currentShards} /{' '}
+                            {progress.addlCurrencyForNextMilestone === Infinity
+                                ? '∞'
+                                : incrementalShardsForNextMilestone}
                         </span>
                     </div>
                 </div>
