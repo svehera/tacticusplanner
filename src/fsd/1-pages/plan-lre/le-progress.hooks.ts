@@ -18,7 +18,7 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     const dispatch = useContext(DispatchContext);
     const model = LreService.mapProgressDtoToModel(leProgress[legendaryEvent.id], legendaryEvent);
 
-    const updateDto = (newModel: ILreProgressModel): ILreProgressModel => {
+    const updateDto = <T extends ILreProgressModel>(newModel: T) => {
         dispatch.leProgress({
             type: 'Update',
             value: LreService.mapProgressModelToDto(newModel),

@@ -98,7 +98,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
 
         const factionsFilterChanged = (values: FactionName[]) => {
             const factionIds = values
-                .map(factionName => (factionLookup as Record<string, any>)[factionName]?.snowprintId)
+                .map(factionName => Object.values(factionLookup).find(f => f.name === factionName)?.snowprintId)
                 .filter((fn): fn is FactionId => !!fn); // Use a type guard to clean up the filter
             if (type === 'allies') {
                 setCurrFilter({ ...currFilter, alliesFactions: factionIds });

@@ -27,14 +27,23 @@ export const LeProgress = ({
     const { leSelectedTeams, leSettings } = useContext(StoreContext);
     const { model, updateNotes, updateOccurrenceProgress, createNewModel, updateDto } = useLreProgress(legendaryEvent);
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
+    const [notesDraft, setNotesDraft] = useState(model.notes);
+    useEffect(() => {
+        const handler = (e: BeforeUnloadEvent) => {
+            if (!notesDraft || notesDraft === model.notes) return;
+            e.preventDefault();
+            e.returnValue = '';
+            return '';
+        };
+        window.addEventListener('beforeunload', handler);
+        return () => window.removeEventListener('beforeunload', handler);
+    }, [notesDraft, model.notes]);
 
     const teams = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
     const handleAccordionChange = (section: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
         setAccordionExpanded(isExpanded ? section : false);
     };
-
-    const [notesDraft, setNotesDraft] = useState(model.notes);
 
     const tracksTotalProgress = model.tracksProgress
         .map(track =>
@@ -66,23 +75,6 @@ export const LeProgress = ({
                     <AccordionDetails className="flex-box wrap gap20">
                         <div className="flex-box column start flex-1 min-w-[450px]">
                             <div className="w-full">
-                                {(() => {
-                                    const hasUnsaved = notesDraft !== model.notes;
-                                    useEffect(() => {
-                                        const handler = (e: any) => {
-                                            if (!hasUnsaved) return;
-                                            e.preventDefault();
-                                            // Some browsers show a default message when returnValue is set.
-                                            e.returnValue = '';
-                                            return '';
-                                        };
-                                        window.addEventListener('beforeunload', handler);
-                                        return () => window.removeEventListener('beforeunload', handler);
-                                    }, [hasUnsaved]);
-
-                                    return null;
-                                })()}
-
                                 <TextField
                                     className="mt-5"
                                     fullWidth

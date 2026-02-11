@@ -192,9 +192,7 @@ export const LeTokenomics: React.FC<Props> = ({
                             }}></div>
                         <span className="absolute inset-0 flex items-center justify-center w-full h-full text-xs font-medium text-gray-800 dark:text-gray-100">
                             {progress.currentShards} /{' '}
-                            {progress.addlCurrencyForNextMilestone === Infinity
-                                ? '∞'
-                                : incrementalShardsForNextMilestone}
+                            {progress.addlShardsForNextMilestone === Infinity ? '∞' : incrementalShardsForNextMilestone}
                         </span>
                     </div>
                 </div>
