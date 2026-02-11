@@ -347,7 +347,7 @@ export const HomeScreenEvent = () => {
                     </div>
                 </div>
             </div>
-            <div className="ag-theme-material w-full h-[calc(100vh-220px)]">
+            <div className="ag-theme-material h-[calc(100vh-220px)] w-full">
                 <AgGridReact
                     modules={[AllCommunityModule]}
                     theme={themeBalham}

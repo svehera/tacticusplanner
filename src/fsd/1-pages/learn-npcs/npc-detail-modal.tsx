@@ -15,25 +15,25 @@ export const NpcDetailModal: React.FC<Props> = ({ isOpen, onClose, npc, stats }:
     if (!isOpen || !npc) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm transition-opacity">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm transition-opacity">
             {/* Modal Container */}
-            <div className="relative w-full max-w-2xl bg-white dark:bg-[#1a2234] rounded-xl shadow-2xl border border-gray-200 dark:border-slate-700 max-h-[90vh] overflow-y-auto scrollbar-hide">
+            <div className="scrollbar-hide relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-[#1a2234]">
                 {/* Header */}
-                <div className="sticky top-0 z-10 flex items-center justify-between p-4 bg-gray-50 dark:bg-[#1e293b] border-b border-gray-200 dark:border-slate-700">
+                <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-gray-50 p-4 dark:border-slate-700 dark:bg-[#1e293b]">
                     <div className="flex items-center gap-3">
                         {/* We can reuse NpcPortrait here if desired, or just the name */}
                         <div className="flex flex-col">
                             <h2 className="text-lg font-bold text-gray-900 dark:text-white">
                                 {npc.name || 'Unknown Enemy'}
                             </h2>
-                            <span className="text-xs text-gray-500 uppercase tracking-wider">
+                            <span className="text-xs tracking-wider text-gray-500 uppercase">
                                 {npc.faction} &bull; Rank {stats?.rank}
                             </span>
                         </div>
                     </div>
                     <button
                         onClick={onClose}
-                        className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-slate-700 rounded-full transition-colors">
+                        className="rounded-full p-2 text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-slate-700 dark:hover:text-white">
                         {/* Simple X icon */}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

@@ -238,7 +238,7 @@ export const Campaigns = () => {
                 </table>
             </div>
             <div className="flex-box gap10 wrap">
-                <FormControl className="w-[250px] m-5">
+                <FormControl className="m-5 w-[250px]">
                     <InputLabel>Campaign</InputLabel>
                     <Select
                         label={'Campaign'}
@@ -281,7 +281,7 @@ export const Campaigns = () => {
                 )}
             </div>
             {viewPreferences.campaignsTableView ? (
-                <div className="ag-theme-material w-full h-[calc(100vh-220px)]">
+                <div className="ag-theme-material h-[calc(100vh-220px)] w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}
@@ -292,7 +292,7 @@ export const Campaigns = () => {
                         rowData={rows}></AgGridReact>
                 </div>
             ) : (
-                <div className="flex gap-3 flex-wrap">
+                <div className="flex flex-wrap gap-3">
                     {rows.map(x => (
                         <CampaignBattleCard key={x.id} battle={x} />
                     ))}

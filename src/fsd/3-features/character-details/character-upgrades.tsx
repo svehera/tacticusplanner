@@ -244,7 +244,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                     <p>Inventory after update:</p>
                     <ul className="p-0">
                         {inventoryUpgrades.map((x, index) => (
-                            <li key={x.id + index} className="flex items-center gap-2.5 pb-2.5 list-none">
+                            <li key={x.id + index} className="flex list-none items-center gap-2.5 pb-2.5">
                                 <UpgradeImage
                                     material={x.label}
                                     iconPath={x.iconPath}

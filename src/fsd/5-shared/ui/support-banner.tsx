@@ -16,27 +16,27 @@ export const SupportSection: React.FC = () => {
     };
 
     return (
-        <div className="w-full p-6 rounded-2xl bg-white dark:bg-gray-800 border-pink-400 dark:border-pink-500/50 shadow-lg border-2 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex flex-col space-y-3 max-w-md">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+        <div className="flex w-full flex-col items-center justify-between gap-6 rounded-2xl border-2 border-pink-400 bg-white p-6 shadow-lg md:flex-row dark:border-pink-500/50 dark:bg-gray-800">
+            <div className="flex max-w-md flex-col space-y-3">
+                <h2 className="flex items-center gap-2 text-2xl font-bold text-gray-800 dark:text-gray-100">
                     Support Tacticus Planner
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="w-6 h-6 text-pink-500">
+                        className="h-6 w-6 text-pink-500">
                         <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.75 3c1.99 0 3.751 1.08 4.75 2.735a5.375 5.375 0 014.75-2.735c3.036 0 5.5 2.322 5.5 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.47 0l-.003-.001z" />
                     </svg>
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300">Found this helpful? Use refer-a-friend code:</p>
 
-                <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 border rounded-lg p-1 pl-4 w-full max-w-xs shadow-sm">
-                    <span className="font-mono font-bold text-gray-800 dark:text-gray-100 tracking-wider select-all">
+                <div className="flex w-full max-w-xs items-center justify-between rounded-lg border border-gray-200 bg-gray-50 p-1 pl-4 shadow-sm dark:border-gray-600 dark:bg-gray-700">
+                    <span className="font-mono font-bold tracking-wider text-gray-800 select-all dark:text-gray-100">
                         {referralCode}
                     </span>
                     <button
                         onClick={handleCopy}
-                        className="p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none"
+                        className="rounded-md p-2 text-gray-400 transition-colors hover:bg-gray-200 hover:text-gray-600 focus:outline-none dark:hover:bg-gray-600"
                         title="Copy to clipboard">
                         {copied ? (
                             <svg
@@ -45,7 +45,7 @@ export const SupportSection: React.FC = () => {
                                 viewBox="0 0 24 24"
                                 strokeWidth={2}
                                 stroke="currentColor"
-                                className="w-5 h-5 text-green-500">
+                                className="h-5 w-5 text-green-500">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
                         ) : (
@@ -55,7 +55,7 @@ export const SupportSection: React.FC = () => {
                                 viewBox="0 0 24 24"
                                 strokeWidth={1.5}
                                 stroke="currentColor"
-                                className="w-5 h-5">
+                                className="h-5 w-5">
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -72,11 +72,11 @@ export const SupportSection: React.FC = () => {
                     href={coffeeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 border rounded-xl px-4 py-3 shadow-sm hover:shadow-md transition-all duration-200 group">
-                    <div className="w-10 h-10 flex-shrink-0 relative">
+                    className="group flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 shadow-sm transition-all duration-200 hover:shadow-md dark:border-gray-600 dark:bg-gray-700">
+                    <div className="relative h-10 w-10 flex-shrink-0">
                         <svg
                             viewBox="0 0 32 32"
-                            className="w-full h-full"
+                            className="h-full w-full"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 24H23" stroke="#4B5563" strokeWidth="2" strokeLinecap="round" />
@@ -101,7 +101,7 @@ export const SupportSection: React.FC = () => {
                         </svg>
                     </div>
                     <div className="flex flex-col">
-                        <span className="font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        <span className="font-bold text-gray-800 transition-colors group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">
                             Buy me a coffee
                         </span>
                         <span className="text-sm text-gray-500 dark:text-gray-400">buymeacoffee.com</span>

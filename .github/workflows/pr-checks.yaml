@@ -1,30 +1,30 @@
 name: PR Checks
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - develop
-      - master
+    pull_request:
+        types: [opened, synchronize, reopened]
+        branches:
+            - develop
+            - master
 
 # Cancel prior runs for the same PR when new commits arrive
 concurrency:
-  group: pr-checks-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+    group: pr-checks-${{ github.event.pull_request.number }}
+    cancel-in-progress: true
 
 jobs:
-  build_and_deploy_job:
-    runs-on: ubuntu-latest
-    name: Run Checks
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-          cache-dependency-path: 'package-lock.json'
-      - name: Install dependencies
-        run: npm ci
-      - name: Format / Lint / Build / Test
-        run: npm run build-dev-ci
+    build_and_deploy_job:
+        runs-on: ubuntu-latest
+        name: Run Checks
+        steps:
+            - uses: actions/checkout@v4
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: 'npm'
+                  cache-dependency-path: 'package-lock.json'
+            - name: Install dependencies
+              run: npm ci
+            - name: Format / Lint / Build / Test
+              run: npm run build-dev-ci

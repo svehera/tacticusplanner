@@ -18,7 +18,7 @@ export const CharacterGrid: React.FC<Props> = ({ characters, onCharacterSelect, 
     return (
         <div>
             {showHeader && (
-                <div className="flex justify-between mb-4">
+                <div className="mb-4 flex justify-between">
                     <h3 className="font-bold">Characters</h3>
                     <span className="text-xs text-slate-500">Showing {characters.length} units</span>
                 </div>
@@ -28,7 +28,7 @@ export const CharacterGrid: React.FC<Props> = ({ characters, onCharacterSelect, 
                     <div
                         key={char.snowprintId!}
                         onClick={() => onCharacterSelect(char.snowprintId!)}
-                        className="cursor-pointer transition-transform duration-100 active:scale-95 hover:brightness-110"
+                        className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"
                         title={`Select ${char.name || 'Character'}`}>
                         <RosterSnapshotCharacter
                             key={char.snowprintId!}

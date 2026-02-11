@@ -12,7 +12,7 @@ const FactionsGridFn = ({
     onCharacterClick?: (character: IUnit) => void;
 }) => {
     return (
-        <div className="grid place-content-around gap-x-6 grid-cols-[repeat(auto-fill,525px)]">
+        <div className="grid grid-cols-[repeat(auto-fill,525px)] place-content-around gap-x-6">
             {factions.map(x => (
                 <FactionsTile key={x.name} faction={x} onCharacterClick={onCharacterClick} />
             ))}

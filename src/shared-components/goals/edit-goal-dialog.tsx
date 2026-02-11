@@ -172,7 +172,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
-            <DialogTitle className="flex gap-[3px] items-center">
+            <DialogTitle className="flex items-center gap-[3px]">
                 <span>Edit {PersonalGoalType[goal.type]} Goal</span> <UnitShardIcon icon={goal.unitRoundIcon} />
             </DialogTitle>
             <DialogContent className="pt-5">
@@ -372,7 +372,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 value={form.shards}
                                 valueChange={value => setForm(curr => ({ ...curr, shards: value }))}
                             />
-                            <div className="flex gap-2 flex-wrap">
+                            <div className="flex flex-wrap gap-2">
                                 {possibleLocations.map(location => (
                                     <CampaignLocation
                                         key={location.id}

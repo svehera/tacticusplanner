@@ -57,7 +57,7 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
     };
 
     const renderEnemies = (enemies: string[]) => (
-        <div className="flex flex-wrap gap-x-3 gap-y-6 items-start">
+        <div className="flex flex-wrap items-start gap-x-3 gap-y-6">
             {enemies.map((enemyStr, idx) => {
                 const data = resolveEnemy(enemyStr);
 
@@ -75,7 +75,7 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
                     <button
                         key={idx}
                         onClick={() => onEnemyClick(data)} // Trigger the modal
-                        className="relative w-[60px] h-[75px] hover:brightness-110 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                        className="relative h-[75px] w-[60px] cursor-pointer rounded transition-all hover:brightness-110 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         style={{ transform: 'scale(0.3)', transformOrigin: 'top left' }}
                         title="Click for details">
                         <NpcPortrait id={data.id} rank={data.stats.rank} stars={data.stats.rarityStars} />
@@ -86,26 +86,26 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
     );
 
     return (
-        <div className="flex flex-col gap-1 p-2 border-l-2 border-gray-400 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800/50 transition-colors duration-150">
-            <div className="flex justify-between items-start">
+        <div className="flex flex-col gap-1 border-l-2 border-gray-400 p-2 transition-colors duration-150 hover:bg-gray-200 dark:border-gray-700 dark:hover:bg-gray-800/50">
+            <div className="flex items-start justify-between">
                 <div className="flex items-center gap-2">
                     <span className="text-sm font-bold text-blue-600 dark:text-blue-400">Wave {waveIndex + 1}</span>
                     <span className="text-xs text-gray-600 dark:text-gray-500">| Round {wave.round}</span>
                 </div>
                 <div className="text-right">
-                    <div className="text-[10px] uppercase text-gray-600 dark:text-gray-500">Power</div>
-                    <div className="text-xs font-mono text-gray-800 dark:text-gray-300">{wave.power}</div>
+                    <div className="text-[10px] text-gray-600 uppercase dark:text-gray-500">Power</div>
+                    <div className="font-mono text-xs text-gray-800 dark:text-gray-300">{wave.power}</div>
                 </div>
             </div>
 
             <div className="mt-1">
-                <h5 className="text-[10px] font-semibold uppercase text-gray-600 dark:text-gray-500 mb-1">
+                <h5 className="mb-1 text-[10px] font-semibold text-gray-600 uppercase dark:text-gray-500">
                     {hasEnemies ? 'Enemy Deployment' : 'No Enemies This Wave'}
                 </h5>
                 {hasEnemies ? (
                     renderEnemies(wave.enemies)
                 ) : (
-                    <span className="text-xs italic text-gray-500 dark:text-gray-600">The battle continues...</span>
+                    <span className="text-xs text-gray-500 italic dark:text-gray-600">The battle continues...</span>
                 )}
             </div>
         </div>
@@ -135,10 +135,10 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
 
     return (
         <>
-            <div className="w-full bg-gray-100 dark:bg-gray-900 rounded-xl border border-gray-300 dark:border-gray-700/50 p-4 shadow-lg">
-                <div className="flex justify-between items-center border-b border-gray-300 dark:border-gray-800 pb-3 mb-4">
+            <div className="w-full rounded-xl border border-gray-300 bg-gray-100 p-4 shadow-lg dark:border-gray-700/50 dark:bg-gray-900">
+                <div className="mb-4 flex items-center justify-between border-b border-gray-300 pb-3 dark:border-gray-800">
                     <div className="flex items-center gap-3">
-                        <span className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-md uppercase">
+                        <span className="rounded-md bg-blue-600 px-3 py-1 text-sm font-bold text-white uppercase">
                             {trackName}
                         </span>
                         <span className="text-lg font-bold text-gray-800 dark:text-gray-200">
@@ -147,7 +147,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                     </div>
                     <div className="text-right">
                         <div className="text-xs text-gray-600 dark:text-gray-400">Total Enemy Power</div>
-                        <div className="font-bold font-mono text-green-600 dark:text-green-400 text-xl">
+                        <div className="font-mono text-xl font-bold text-green-600 dark:text-green-400">
                             {battle.power}
                         </div>
                     </div>
@@ -155,7 +155,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                 <div className="mb-4">
                     <button
                         onClick={() => setIsMapVisible(prev => !prev)}
-                        className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1 mb-2">
+                        className="mb-2 rounded px-2 py-1 text-sm font-semibold text-blue-600 hover:underline focus:ring-2 focus:ring-blue-500 focus:outline-none dark:text-blue-400">
                         {isMapVisible ? 'Hide Map' : 'Show Map'}
                     </button>
                     {isMapVisible && (
@@ -168,13 +168,13 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                                     ).href
                                 }
                                 alt={`Map for Battle ${battle.number}`}
-                                className="w-full h-auto object-cover"
+                                className="h-auto w-full object-cover"
                             />
                         </div>
                     )}
                 </div>
 
-                <h3 className="text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-3 ml-2">
+                <h3 className="mb-3 ml-2 text-sm font-semibold text-gray-600 uppercase dark:text-gray-400">
                     Deployment Schedule
                 </h3>
 
@@ -184,7 +184,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                             <WaveDisplay key={index} wave={wave} waveIndex={index} onEnemyClick={handleEnemyClick} />
                         ))
                     ) : (
-                        <div className="text-center py-4 text-gray-600 dark:text-gray-500">No wave data found.</div>
+                        <div className="py-4 text-center text-gray-600 dark:text-gray-500">No wave data found.</div>
                     )}
                 </div>
             </div>

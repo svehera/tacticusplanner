@@ -66,7 +66,7 @@ const RoleRenderer: React.FC<{ value: TacticusGuildRole }> = ({ value }) => {
     }
 
     return (
-        <span className={`px-2 py-1 rounded ${bgColor} ${textColor} text-xs font-medium`}>{getRoleLabel(value)}</span>
+        <span className={`rounded px-2 py-1 ${bgColor} ${textColor} text-xs font-medium`}>{getRoleLabel(value)}</span>
     );
 };
 
@@ -162,7 +162,7 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-64">
+            <div className="flex h-64 items-center justify-center">
                 <div className="text-muted-fg">Loading guild data...</div>
             </div>
         );
@@ -170,7 +170,7 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
 
     if (error) {
         return (
-            <div className="bg-danger/20 border border-danger/70 text-danger-fg px-4 py-3 rounded">
+            <div className="bg-danger/20 border-danger/70 text-danger-fg rounded border px-4 py-3">
                 <p>{error}</p>
             </div>
         );
@@ -178,7 +178,7 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
 
     if (!guildData) {
         return (
-            <div className="bg-warning/20 border border-warning/70 text-warning-fg px-4 py-3 rounded">
+            <div className="bg-warning/20 border-warning/70 text-warning-fg rounded border px-4 py-3">
                 <p>No guild data available.</p>
             </div>
         );
@@ -187,12 +187,12 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
     return (
         <div className="container mx-auto p-4">
             {/* Guild Header */}
-            <div className="bg-primary rounded-lg shadow-lg p-6 mb-6 text-primary-fg">
-                <div className="flex justify-between items-center">
+            <div className="bg-primary text-primary-fg mb-6 rounded-lg p-6 shadow-lg">
+                <div className="flex items-center justify-between">
                     <div>
                         <h1 className="text-3xl font-bold">{guildData.name}</h1>
-                        <div className="flex items-center mt-2">
-                            <span className="bg-secondary/80 text-secondary-fg px-2 py-1 rounded text-sm mr-3">
+                        <div className="mt-2 flex items-center">
+                            <span className="bg-secondary/80 text-secondary-fg mr-3 rounded px-2 py-1 text-sm">
                                 {guildData.guildTag}
                             </span>
                             <span className="text-sm">ID: {guildData.guildId}</span>
@@ -200,34 +200,34 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
                     </div>
                     <div className="text-center">
                         <div className="text-4xl font-bold">{guildData.level}</div>
-                        <div className="text-sm uppercase tracking-wide">Guild Level</div>
+                        <div className="text-sm tracking-wide uppercase">Guild Level</div>
                     </div>
                 </div>
             </div>
 
             {/* Stats Cards */}
             {stats && (
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                    <div className="bg-overlay rounded-lg shadow p-4">
+                <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-4">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
                         <div className="text-muted-fg text-sm">Total Members</div>
-                        <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.totalMembers}</div>
+                        <div className="text-overlay-fg mt-1 text-2xl font-bold">{stats.totalMembers}</div>
                     </div>
-                    <div className="bg-overlay rounded-lg shadow p-4">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
                         <div className="text-muted-fg text-sm">Average Level</div>
-                        <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.avgLevel.toFixed(1)}</div>
+                        <div className="text-overlay-fg mt-1 text-2xl font-bold">{stats.avgLevel.toFixed(1)}</div>
                     </div>
-                    <div className="bg-overlay rounded-lg shadow p-4">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
                         <div className="text-muted-fg text-sm">Active Members</div>
-                        <div className="text-2xl font-bold mt-1 text-overlay-fg">
+                        <div className="text-overlay-fg mt-1 text-2xl font-bold">
                             {stats.activeMembers}
-                            <span className="text-sm font-normal text-muted-fg ml-1">
+                            <span className="text-muted-fg ml-1 text-sm font-normal">
                                 ({Math.round((stats.activeMembers / stats.totalMembers) * 100)}%)
                             </span>
                         </div>
                     </div>
-                    <div className="bg-overlay rounded-lg shadow p-4">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
                         <div className="text-muted-fg text-sm">Raid Seasons</div>
-                        <div className="text-2xl font-bold mt-1 text-overlay-fg">
+                        <div className="text-overlay-fg mt-1 text-2xl font-bold">
                             {guildData.guildRaidSeasons.length}
                         </div>
                     </div>
@@ -235,11 +235,11 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
             )}
 
             {/* Raid Seasons */}
-            <div className="bg-overlay rounded-lg shadow mb-6 p-4">
-                <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Raid Seasons</h2>
+            <div className="bg-overlay mb-6 rounded-lg p-4 shadow">
+                <h2 className="text-overlay-fg mb-3 text-lg font-semibold">Raid Seasons</h2>
                 <div className="flex flex-wrap gap-2">
                     {guildData.guildRaidSeasons.map(season => (
-                        <span key={season} className="bg-accent/20 text-accent-fg px-3 py-1 rounded-full text-sm">
+                        <span key={season} className="bg-accent/20 text-accent-fg rounded-full px-3 py-1 text-sm">
                             Season {season}
                         </span>
                     ))}
@@ -247,9 +247,9 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
             </div>
 
             {/* Members Table */}
-            <div className="bg-overlay rounded-lg shadow p-4">
-                <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Guild Members</h2>
-                <div className="w-full h-96">
+            <div className="bg-overlay rounded-lg p-4 shadow">
+                <h2 className="text-overlay-fg mb-3 text-lg font-semibold">Guild Members</h2>
+                <div className="h-96 w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}

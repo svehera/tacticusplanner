@@ -239,7 +239,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         <Dialog open={open} onClose={close} fullWidth maxWidth={'md'} fullScreen={isMobile}>
             <DialogTitle>Raids settings</DialogTitle>
             <DialogContent>
-                <FormGroup className="flex flex-col gap-5 py-0 px-5">
+                <FormGroup className="flex flex-col gap-5 px-5 py-0">
                     <div>
                         <Typography className="flex items-center gap-1">
                             <b>{energyMarks[dailyEnergy].value}</b> <MiscIcon icon={'energy'} width={20} height={20} />{' '}
@@ -260,7 +260,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                         />
                     </div>
 
-                    <div className="flex flex-wrap gap-10 items-[unset]">
+                    <div className="items-[unset] flex flex-wrap gap-10">
                         <FormControl>
                             <FormLabel id="radio-buttons-group" className="font-bold">
                                 Raids order/grouping:
@@ -340,7 +340,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             />
                         </FormControl>
                     </div>
-                    <div className="flex flex-row gap-4 items-start">
+                    <div className="flex flex-row items-start gap-4">
                         <FormControl>
                             <InputLabel id="home-screen-event-label">Home Screen Event</InputLabel>
                             <Select

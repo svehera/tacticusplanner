@@ -94,14 +94,14 @@ const HPBarRenderer: React.FC<{ value: number; data: TacticusGuildRaidEntry }> =
 
     return (
         <div className="w-full">
-            <div className="flex justify-between text-xs mb-1">
+            <div className="mb-1 flex justify-between text-xs">
                 <span>{Math.round(damagePercentage)}% damage</span>
                 <span>
                     {data.remainingHp.toLocaleString()} / {data.maxHp.toLocaleString()} HP
                 </span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div className="bg-red-600 h-2.5 rounded-full" style={{ width: `${percentage}%` }}></div>
+            <div className="h-2.5 w-full rounded-full bg-gray-200">
+                <div className="h-2.5 rounded-full bg-red-600" style={{ width: `${percentage}%` }}></div>
             </div>
         </div>
     );
@@ -114,7 +114,7 @@ const EncounterTypeRenderer: React.FC<{ value: TacticusEncounterType }> = ({ val
     const icon = value === TacticusEncounterType.Boss ? '👑' : '⚔️';
 
     return (
-        <span className={`px-2 py-1 rounded ${bgColor} ${textColor} text-xs font-medium flex items-center gap-1`}>
+        <span className={`rounded px-2 py-1 ${bgColor} ${textColor} flex items-center gap-1 text-xs font-medium`}>
             <span>{icon}</span>
             <span>{getEncounterTypeLabel(value)}</span>
         </span>
@@ -128,7 +128,7 @@ const DamageTypeRenderer: React.FC<{ value: TacticusDamageType }> = ({ value }) 
     const icon = value === TacticusDamageType.Battle ? '⚔️' : '💣';
 
     return (
-        <span className={`px-2 py-1 rounded ${bgColor} ${textColor} text-xs font-medium flex items-center gap-1`}>
+        <span className={`rounded px-2 py-1 ${bgColor} ${textColor} flex items-center gap-1 text-xs font-medium`}>
             <span>{icon}</span>
             <span>{getDamageTypeLabel(value)}</span>
         </span>
@@ -165,7 +165,7 @@ const DateRenderer: React.FC<{ value: number | null | undefined }> = ({ value })
 // Component for rendering unit icons
 const UnitIconRenderer: React.FC<{ value: ICharacterData[] | IMowStatic2[] }> = ({ value }) => {
     return (
-        <span className="flex items-center gap-1 h-full">
+        <span className="flex h-full items-center gap-1">
             {value.map((unit, i) => {
                 return (
                     <UnitShardIcon
@@ -378,7 +378,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         const timeUntilNext = getTimeUntilNextBomb(data);
 
         if (timeUntilNext === 0) {
-            return <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">Available</span>;
+            return <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">Available</span>;
         }
 
         const hoursLeft = Math.floor(timeUntilNext / HOUR);
@@ -397,7 +397,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         if (tokenStatus.count === MAX_TOKEN) {
             return (
-                <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">
+                <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
                     {tokenStatus.count} tokens available
                 </span>
             );
@@ -407,7 +407,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             const hoursCooldown = Math.round(cooldown / HOUR);
             if (tokenStatus.count > 0) {
                 return (
-                    <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">
+                    <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
                         {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''}, {hoursCooldown}h cooldown
                     </span>
                 );
@@ -793,7 +793,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-64">
+            <div className="flex h-64 items-center justify-center">
                 <div className="text-muted-fg">Loading raid data...</div>
             </div>
         );
@@ -801,7 +801,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
     if (error) {
         return (
-            <div className="bg-danger/20 border border-danger/70 text-danger-fg px-4 py-3 rounded">
+            <div className="bg-danger/20 border-danger/70 text-danger-fg rounded border px-4 py-3">
                 <p>{error}</p>
             </div>
         );
@@ -809,7 +809,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
     if (!raidData) {
         return (
-            <div className="bg-warning/20 border border-warning/70 text-warning-fg px-4 py-3 rounded">
+            <div className="bg-warning/20 border-warning/70 text-warning-fg rounded border px-4 py-3">
                 <p>No raid data available.</p>
             </div>
         );
@@ -818,61 +818,61 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     return (
         <div className="container mx-auto p-4">
             {/* Raid Header */}
-            <div className="bg-gradient-to-r from-purple-700 to-indigo-800 rounded-lg shadow-lg p-6 mb-6 text-white">
-                <div className="flex justify-between items-center">
+            <div className="mb-6 rounded-lg bg-gradient-to-r from-purple-700 to-indigo-800 p-6 text-white shadow-lg">
+                <div className="flex items-center justify-between">
                     <div>
                         <h1 className="text-3xl font-bold">Guild Raid Season {raidData.season}</h1>
-                        <div className="flex items-center mt-2">
+                        <div className="mt-2 flex items-center">
                             <span className="text-sm">Config ID: {raidData.seasonConfigId}</span>
                         </div>
                     </div>
                     <div className="text-center">
                         <div className="text-4xl font-bold">{raidData.entries.length}</div>
-                        <div className="text-sm uppercase tracking-wide">Total Attacks</div>
+                        <div className="text-sm tracking-wide uppercase">Total Attacks</div>
                     </div>
                 </div>
             </div>
 
             {/* Stats Dashboard */}
             {stats && (
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                    <div className="bg-overlay rounded-lg shadow p-4">
+                <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-4">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
                         <div className="text-muted-fg text-sm">Total Damage</div>
-                        <div className="text-2xl font-bold mt-1 text-overlay-fg">
+                        <div className="text-overlay-fg mt-1 text-2xl font-bold">
                             {stats.totalDamage.toLocaleString()}
                         </div>
                     </div>
-                    <div className="bg-overlay rounded-lg shadow p-4">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
                         <div className="text-muted-fg text-sm">Average Damage</div>
-                        <div className="text-2xl font-bold mt-1 text-overlay-fg">
+                        <div className="text-overlay-fg mt-1 text-2xl font-bold">
                             {Math.round(stats.avgDamage).toLocaleString()}
                         </div>
                     </div>
-                    <div className="bg-overlay rounded-lg shadow p-4">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
                         <div className="text-muted-fg text-sm">Participants</div>
-                        <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.userCount}</div>
+                        <div className="text-overlay-fg mt-1 text-2xl font-bold">{stats.userCount}</div>
                     </div>
-                    <div className="bg-overlay rounded-lg shadow p-4">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
                         <div className="text-muted-fg text-sm">Enemies Defeated</div>
-                        <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.defeatedEnemies}</div>
+                        <div className="text-overlay-fg mt-1 text-2xl font-bold">{stats.defeatedEnemies}</div>
                     </div>
-                    <div className="bg-overlay rounded-lg shadow p-4">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
                         <div className="text-muted-fg text-sm">Available Bombs</div>
-                        <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.availableBombs}</div>
+                        <div className="text-overlay-fg mt-1 text-2xl font-bold">{stats.availableBombs}</div>
                     </div>
-                    <div className="bg-overlay rounded-lg shadow p-4">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
                         <div className="text-muted-fg text-sm">Available Tokens</div>
-                        <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.availableTokens}</div>
+                        <div className="text-overlay-fg mt-1 text-2xl font-bold">{stats.availableTokens}</div>
                     </div>
                 </div>
             )}
 
             {/* Attack Type Breakdown */}
             {stats && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div className="bg-overlay rounded-lg shadow p-4">
-                        <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Attack Types</h2>
-                        <div className="flex h-8 rounded-md overflow-hidden">
+                <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
+                        <h2 className="text-overlay-fg mb-3 text-lg font-semibold">Attack Types</h2>
+                        <div className="flex h-8 overflow-hidden rounded-md">
                             <div
                                 className="bg-accent text-accent-fg flex items-center justify-center text-sm"
                                 style={{
@@ -889,9 +889,9 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                             </div>
                         </div>
                     </div>
-                    <div className="bg-overlay rounded-lg shadow p-4">
-                        <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Encounter Types</h2>
-                        <div className="flex h-8 rounded-md overflow-hidden">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
+                        <h2 className="text-overlay-fg mb-3 text-lg font-semibold">Encounter Types</h2>
+                        <div className="flex h-8 overflow-hidden rounded-md">
                             <div
                                 className="bg-danger text-danger-fg flex items-center justify-center text-sm"
                                 style={{
@@ -913,13 +913,13 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
             {/* Top Performers */}
             {stats && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div className="bg-overlay rounded-lg shadow p-4">
-                        <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Most Active</h2>
+                <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div className="bg-overlay rounded-lg p-4 shadow">
+                        <h2 className="text-overlay-fg mb-3 text-lg font-semibold">Most Active</h2>
                         <div className="flex items-center">
-                            <div className="bg-accent/20 p-3 rounded-full mr-4">
+                            <div className="bg-accent/20 mr-4 rounded-full p-3">
                                 <svg
-                                    className="h-6 w-6 text-accent"
+                                    className="text-accent h-6 w-6"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -932,17 +932,17 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                                 </svg>
                             </div>
                             <div>
-                                <div className="font-medium text-overlay-fg">{stats.mostActiveUser}</div>
-                                <div className="text-sm text-muted-fg">{stats.mostActiveCount} attacks</div>
+                                <div className="text-overlay-fg font-medium">{stats.mostActiveUser}</div>
+                                <div className="text-muted-fg text-sm">{stats.mostActiveCount} attacks</div>
                             </div>
                         </div>
                     </div>
-                    <div className="bg-overlay rounded-lg shadow p-4">
-                        <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Highest Damage</h2>
+                    <div className="bg-overlay rounded-lg p-4 shadow">
+                        <h2 className="text-overlay-fg mb-3 text-lg font-semibold">Highest Damage</h2>
                         <div className="flex items-center">
-                            <div className="bg-danger/20 p-3 rounded-full mr-4">
+                            <div className="bg-danger/20 mr-4 rounded-full p-3">
                                 <svg
-                                    className="h-6 w-6 text-danger"
+                                    className="text-danger h-6 w-6"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -955,8 +955,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                                 </svg>
                             </div>
                             <div>
-                                <div className="font-medium text-overlay-fg">{stats.userWithHighestDamage}</div>
-                                <div className="text-sm text-muted-fg">
+                                <div className="text-overlay-fg font-medium">{stats.userWithHighestDamage}</div>
+                                <div className="text-muted-fg text-sm">
                                     {stats.highestDamage.toLocaleString()} damage
                                 </div>
                             </div>
@@ -966,9 +966,9 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             )}
 
             {/* Player Summary Table */}
-            <div className="bg-overlay rounded-lg shadow p-4 mb-6">
-                <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Player Summary</h2>
-                <div className="flex flex-wrap items-center gap-4 mb-6">
+            <div className="bg-overlay mb-6 rounded-lg p-4 shadow">
+                <h2 className="text-overlay-fg mb-3 text-lg font-semibold">Player Summary</h2>
+                <div className="mb-6 flex flex-wrap items-center gap-4">
                     <div>
                         <FormControlLabel
                             control={
@@ -982,19 +982,19 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                         />
                     </div>
                     <div className="flex items-center gap-2">
-                        <span className="font-medium text-overlay-fg">Users with bomb:</span>
+                        <span className="text-overlay-fg font-medium">Users with bomb:</span>
                         <Button onClick={() => copyUsersWithBomb()} color={'inherit'}>
                             <ContentCopyIcon /> Copy
                         </Button>
                     </div>
                     <div className="flex items-center gap-2">
-                        <span className="font-medium text-overlay-fg">Users with tokens:</span>
+                        <span className="text-overlay-fg font-medium">Users with tokens:</span>
                         <Button onClick={() => copyUsersWithToken()} color={'inherit'}>
                             <ContentCopyIcon /> Copy
                         </Button>
                     </div>
                 </div>
-                <div className="ag-theme-alpine w-full h-96">
+                <div className="ag-theme-alpine h-96 w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}
@@ -1009,9 +1009,9 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             </div>
 
             {/* Raid Entries Table */}
-            <div className="bg-overlay rounded-lg shadow p-4">
-                <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Raid Attacks</h2>
-                <div className="ag-theme-alpine w-full h-96">
+            <div className="bg-overlay rounded-lg p-4 shadow">
+                <h2 className="text-overlay-fg mb-3 text-lg font-semibold">Raid Attacks</h2>
+                <div className="ag-theme-alpine h-96 w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}

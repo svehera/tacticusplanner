@@ -43,12 +43,12 @@ export const NpcInfo: React.FC = () => {
     const currentStats = npc.stats[progressionIndex];
 
     return (
-        <div className="w-full max-w-4xl mx-auto p-4">
+        <div className="mx-auto w-full max-w-4xl p-4">
             {/* Main Card Container */}
-            <div className="bg-white dark:bg-[#1a2234] rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 overflow-hidden">
+            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg dark:border-slate-700 dark:bg-[#1a2234]">
                 {/* Header / Controls Section */}
-                <div className="p-5 bg-gray-50 dark:bg-[#1e293b] border-b border-gray-200 dark:border-slate-700">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="border-b border-gray-200 bg-gray-50 p-5 dark:border-slate-700 dark:bg-[#1e293b]">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div className="flex flex-col">
                             <FactionSelect
                                 label={'Faction'}

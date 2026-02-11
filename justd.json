@@ -1,9 +1,9 @@
 {
-  "$schema": "https://getjustd.com/schema.json",
-  "ui": "src/shared/ui",
-  "utils": "src/shared/lib",
-  "gray": "stone",
-  "css": "src/index.css",
-  "alias": "@",
-  "language": "typescript"
+    "$schema": "https://getjustd.com/schema.json",
+    "ui": "src/shared/ui",
+    "utils": "src/shared/lib",
+    "gray": "stone",
+    "css": "src/index.css",
+    "alias": "@",
+    "language": "typescript"
 }

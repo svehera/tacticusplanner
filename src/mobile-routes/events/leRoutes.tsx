@@ -49,7 +49,7 @@ export const PlanLeRoutes = () => {
         [CharactersService.activeLres]
     );
     return (
-        <div className="flex gap-2.5 flex-col items-center">
+        <div className="flex flex-col items-center gap-2.5">
             <Card
                 variant="outlined"
                 onClick={() => navigate(leMasterTableMenuItem.routeMobile)}

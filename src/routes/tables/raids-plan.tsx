@@ -162,7 +162,7 @@ export const RaidsPlan: React.FC<Props> = ({
         <Accordion defaultExpanded={scrollToCharSnowprintId !== undefined}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <FlexBox className="flex-col items-start">
-                    <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
+                    <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
                         <span>
                             Raids plan (<b>{daysTotal}</b> Days |
                         </span>
@@ -184,7 +184,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 {!!estimatedRanks.relatedUpgrades.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
+                            <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <InventoryIcon />
                                 <b>{estimatedRanks.relatedUpgrades.length}</b> related upgrades (Inventory)
                             </div>
@@ -199,7 +199,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         defaultExpanded={scrollToCharSnowprintId !== undefined}
                         TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
+                            <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <PendingIcon color={'primary'} />
                                 <b>{estimatedRanks.inProgressMaterials.length}</b> in progress upgrades
                                 <FormControlLabel
@@ -228,7 +228,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         <AccordionDetails>
                             <div className="h-[400px] max-h-[600px] overflow-y-auto">
                                 {viewPreferences.raidsTableView === true ? (
-                                    <div className="ag-theme-material w-full h-full flex flex-col min-h-[150px]">
+                                    <div className="ag-theme-material flex h-full min-h-[150px] w-full flex-col">
                                         <MaterialsTable
                                             rows={estimatedRanks.inProgressMaterials}
                                             updateMaterialQuantity={updateInventory}
@@ -262,7 +262,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 {!!estimatedRanks.finishedMaterials.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
+                            <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <CheckCircleIcon color={'success'} /> <b>{estimatedRanks.finishedMaterials.length}</b>{' '}
                                 finished upgrades
                             </div>
@@ -270,7 +270,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         <AccordionDetails>
                             <div className="h-[400px] max-h-[600px] overflow-y-auto">
                                 {viewPreferences.raidsTableView === true ? (
-                                    <div className="ag-theme-material w-full h-full flex flex-col min-h-[150px]">
+                                    <div className="ag-theme-material flex h-full min-h-[150px] w-full flex-col">
                                         <MaterialsTable
                                             rows={estimatedRanks.finishedMaterials}
                                             updateMaterialQuantity={updateInventory}
@@ -279,7 +279,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                         />
                                     </div>
                                 ) : (
-                                    <div className="w-full p-2 flex flex-wrap gap-1">
+                                    <div className="flex w-full flex-wrap gap-1 p-2">
                                         <div className="flex flex-wrap gap-x-4 gap-y-4">
                                             {estimatedRanks.finishedMaterials.map((material, index) => (
                                                 <div className="item-raids w-64" key={index}>
@@ -306,7 +306,7 @@ export const RaidsPlan: React.FC<Props> = ({
                             <AccessibleTooltip
                                 title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} upgrades`}>
                                 <div
-                                    className="flex gap-2 items-center flex-wrap"
+                                    className="flex flex-wrap items-center gap-2"
                                     style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <Warning color={'warning'} />
                                     <b>{estimatedRanks.blockedMaterials.length}</b> blocked upgrades
@@ -314,7 +314,7 @@ export const RaidsPlan: React.FC<Props> = ({
                             </AccessibleTooltip>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div className="h-[400px] flex flex-col">
+                            <div className="flex h-[400px] flex-col">
                                 <div className="flex-box p-2">
                                     <InfoIcon color="primary" /> You don&apos;t have available campaigns nodes for the
                                     items listed in the table below
@@ -322,7 +322,7 @@ export const RaidsPlan: React.FC<Props> = ({
 
                                 <div className="flex-grow">
                                     {viewPreferences.raidsTableView === true ? (
-                                        <div className="ag-theme-material w-full h-[600px] flex flex-col min-h-[150px]">
+                                        <div className="ag-theme-material flex h-[600px] min-h-[150px] w-full flex-col">
                                             <MaterialsTable
                                                 rows={estimatedRanks.blockedMaterials}
                                                 updateMaterialQuantity={updateInventory}
@@ -331,7 +331,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                             />
                                         </div>
                                     ) : (
-                                        <div className="h-[300px] w-full overflow-y-scroll p-2 flex flex-wrap gap-1">
+                                        <div className="flex h-[300px] w-full flex-wrap gap-1 overflow-y-scroll p-2">
                                             <div className="flex flex-wrap gap-x-4 gap-y-4">
                                                 {estimatedRanks.blockedMaterials.map((material, index) => (
                                                     <div className="item-raids w-64" key={index}>
@@ -359,7 +359,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <FlexBox className="flex-col items-start">
                                 <div
-                                    className="flex gap-2 items-center flex-wrap"
+                                    className="flex flex-wrap items-center gap-2"
                                     style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <span>
                                         Shards Raids (<b>{estimatedShards.daysTotal}</b> Days |

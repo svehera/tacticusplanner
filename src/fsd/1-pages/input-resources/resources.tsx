@@ -77,11 +77,11 @@ export const Resources = () => {
         return (
             <div
                 key={key}
-                className={`flex flex-col items-center justify-start min-w-[55px] p-1 ${clickableClass} ${disabledClass} ${hoverClass}`}
+                className={`flex min-w-[55px] flex-col items-center justify-start p-1 ${clickableClass} ${disabledClass} ${hoverClass}`}
                 onClick={onClick}
                 title={onClick ? `Click to ${isEnabled ? 'disable' : 'enable'}` : undefined}>
-                <div className="h-[45px] w-[45px] flex items-center justify-center">{icon}</div>
-                <span className="text-sm font-semibold text-white mt-1">{quantity}</span>
+                <div className="flex h-[45px] w-[45px] items-center justify-center">{icon}</div>
+                <span className="mt-1 text-sm font-semibold text-white">{quantity}</span>
             </div>
         );
     };
@@ -89,13 +89,13 @@ export const Resources = () => {
     return (
         <div className="flex flex-col gap-y-4 p-2">
             {hasSync && (
-                <div className="flex justify-end p-2 border-b border-gray-600">
+                <div className="flex justify-end border-b border-gray-600 p-2">
                     <SyncButton showText={!isMobile} />
                 </div>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="flex flex-col p-3 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
-                    <h4 className="text-md font-bold text-gray-300 border-b border-gray-600 pb-2 mb-2 uppercase tracking-wide">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="flex flex-col rounded-lg border border-gray-700 bg-gray-800 p-3 shadow-lg">
+                    <h4 className="text-md mb-2 border-b border-gray-600 pb-2 font-bold tracking-wide text-gray-300 uppercase">
                         XP Books
                     </h4>
                     <div className="flex flex-wrap justify-start gap-x-1">
@@ -116,8 +116,8 @@ export const Resources = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col p-3 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
-                    <h4 className="text-md font-bold text-gray-300 border-b border-gray-600 pb-2 mb-2 uppercase tracking-wide">
+                <div className="flex flex-col rounded-lg border border-gray-700 bg-gray-800 p-3 shadow-lg">
+                    <h4 className="text-md mb-2 border-b border-gray-600 pb-2 font-bold tracking-wide text-gray-300 uppercase">
                         Forge Badges
                     </h4>
                     <div className="flex flex-wrap justify-start gap-x-1">
@@ -133,8 +133,8 @@ export const Resources = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col p-3 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
-                    <h4 className="text-md font-bold text-gray-300 border-b border-gray-600 pb-2 mb-2 uppercase tracking-wide">
+                <div className="flex flex-col rounded-lg border border-gray-700 bg-gray-800 p-3 shadow-lg">
+                    <h4 className="text-md mb-2 border-b border-gray-600 pb-2 font-bold tracking-wide text-gray-300 uppercase">
                         Machine of War Components
                     </h4>
                     <div className="flex flex-wrap justify-start gap-x-1">
@@ -148,15 +148,15 @@ export const Resources = () => {
                     </div>
                 </div>
             </div>{' '}
-            <div className="flex flex-col p-3 bg-gray-800 border border-gray-700 rounded-lg shadow-lg mt-4">
-                <h3 className="text-lg font-bold text-gray-300 border-b border-gray-600 pb-2 mb-3 uppercase tracking-wider">
+            <div className="mt-4 flex flex-col rounded-lg border border-gray-700 bg-gray-800 p-3 shadow-lg">
+                <h3 className="mb-3 border-b border-gray-600 pb-2 text-lg font-bold tracking-wider text-gray-300 uppercase">
                     Alliance Resources
                 </h3>
 
                 <div className="flex flex-col divide-y divide-gray-700">
                     {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                         <div key={alliance} className="py-3">
-                            <h4 className="text-sm font-semibold text-gray-400 mb-2 uppercase">{alliance}</h4>
+                            <h4 className="mb-2 text-sm font-semibold text-gray-400 uppercase">{alliance}</h4>
 
                             <div className="grid grid-cols-2 gap-x-4">
                                 <div className="flex flex-wrap justify-start">

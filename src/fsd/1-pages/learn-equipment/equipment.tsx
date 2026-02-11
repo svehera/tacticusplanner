@@ -133,7 +133,7 @@ export const Equipment = () => {
                     const characterIds = params.data!.allowedUnits;
 
                     return (
-                        <div className="flex gap-[5px] flex-wrap">
+                        <div className="flex flex-wrap gap-[5px]">
                             {characterIds.map(charId => {
                                 const character = CharactersService.resolveCharacter(charId);
                                 return character ? (
@@ -159,7 +159,7 @@ export const Equipment = () => {
 
     return (
         <div>
-            <div className="flex items-center gap-5 my-0 mx-5">
+            <div className="mx-5 my-0 flex items-center gap-5">
                 <TextField
                     label="Quick Filter"
                     variant="outlined"

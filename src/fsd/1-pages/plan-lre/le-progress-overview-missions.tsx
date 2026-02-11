@@ -32,7 +32,7 @@ export const LeProgressOverviewMissions: React.FC<Props> = ({ showP2P, occurrenc
                 </span>
             </h3>
 
-            <div className="flex gap-5 flex-wrap items-center">
+            <div className="flex flex-wrap items-center gap-5">
                 <NumberInput
                     fullWidth
                     label={'Free missions ' + occurrence.freeMissionsProgress + '/10'}

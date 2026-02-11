@@ -60,17 +60,17 @@ export const MyProgress = () => {
         <>
             <ViewSettings preset="myProgress" />
             <h2>Standard Campaigns</h2>
-            <div className="flex flex-col gap-10 justify-start">
+            <div className="flex flex-col justify-start gap-10">
                 {standardCampaignsByGroup.map(([group, campaigns]) => (
-                    <div key={group} className="flex gap-10 flex-wrap">
+                    <div key={group} className="flex flex-wrap gap-10">
                         {campaigns.map(renderCampaignProgress)}
                     </div>
                 ))}
             </div>
             <h2>Campaign Events</h2>
-            <div className="flex gap-10 flex-wrap">
+            <div className="flex flex-wrap gap-10">
                 {campaignEventsByGroup.map(([group, campaigns]) => (
-                    <div key={group} className="flex gap-10 flex-wrap">
+                    <div key={group} className="flex flex-wrap gap-10">
                         {campaigns.map(renderCampaignProgress)}
                     </div>
                 ))}

@@ -69,16 +69,11 @@ export const LeTokenCard: React.FC<CardProps> = ({
 
     return (
         <div
-            className={`
-                w-full ${widthClass} ${bgClass} rounded-xl border-[3px] ${borderClass} p-4 
-                flex flex-col gap-3 shadow-lg relative overflow-hidden 
-                transition-all ease-in-out
-                ${opacityClass} 
-            `}
+            className={`w-full ${widthClass} ${bgClass} rounded-xl border-[3px] ${borderClass} relative flex flex-col gap-3 overflow-hidden p-4 shadow-lg transition-all ease-in-out ${opacityClass} `}
             style={{ '--complete-delay': `${COMPLETE_DELAY_MILLIS}ms` } as React.CSSProperties}>
-            <div className="flex items-center justify-between pb-2 border-b border-gray-300 dark:border-gray-800">
+            <div className="flex items-center justify-between border-b border-gray-300 pb-2 dark:border-gray-800">
                 <div className="flex items-center gap-2">
-                    <span className="px-2 py-1 text-xs font-bold text-gray-800 bg-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-200">
+                    <span className="rounded-md bg-gray-300 px-2 py-1 text-xs font-bold text-gray-800 dark:bg-gray-700 dark:text-gray-200">
                         #{index + 1}
                     </span>
                     <span className="text-sm font-semibold text-gray-700 uppercase dark:text-gray-300">
@@ -125,7 +120,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                             }}
                             disabled={isCompleting}
                             style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}
-                            className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                            className="text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50"
                             title="Potentially will not succeed with this token.">
                             {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
                         </button>
@@ -140,7 +135,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                             }}
                             disabled={isCompleting}
                             style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}
-                            className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                            className="text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50"
                             title="Do not attempt this token.">
                             {STATUS_LABELS[RequirementStatus.StopHere]}
                         </button>
@@ -148,7 +143,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
 
                     <button
                         onClick={() => onToggleBattle(index)}
-                        className="text-xs font-semibold text-blue-600 uppercase transition-colors duration-150 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 focus:outline-none"
+                        className="text-xs font-semibold text-blue-600 uppercase transition-colors duration-150 hover:text-blue-500 focus:outline-none dark:text-blue-400 dark:hover:text-blue-300"
                         aria-expanded={isBattleVisible}
                         aria-controls={`battle-details-${index}`}>
                         {toggleText}
@@ -157,19 +152,19 @@ export const LeTokenCard: React.FC<CardProps> = ({
             </div>
 
             <div className="grid grid-cols-[auto_1fr] gap-4">
-                <div className="flex flex-col items-center justify-start gap-2 min-w-[80px]">
+                <div className="flex min-w-[80px] flex-col items-center justify-start gap-2">
                     {hasMilestone ? (
                         <div className="flex flex-col items-center justify-center gap-2">
                             <StarsIcon stars={token.stars} />
                             <RarityIcon rarity={token.rarity} />
                         </div>
                     ) : (
-                        <div className="h-[70px] w-[70px] rounded-lg border border-gray-300 dark:border-gray-800 bg-gray-200 dark:bg-gray-800/20 text-gray-500 dark:text-gray-600 flex items-center justify-center text-xs text-center p-1">
+                        <div className="flex h-[70px] w-[70px] items-center justify-center rounded-lg border border-gray-300 bg-gray-200 p-1 text-center text-xs text-gray-500 dark:border-gray-800 dark:bg-gray-800/20 dark:text-gray-600">
                             No Milestone
                         </div>
                     )}
                     <div className="mt-1 text-center">
-                        <div className="text-[10px] uppercase text-gray-600 dark:text-gray-500">Incremental</div>
+                        <div className="text-[10px] text-gray-600 uppercase dark:text-gray-500">Incremental</div>
                         <div className="font-mono font-semibold text-green-600 dark:text-green-400">
                             +{token.incrementalPoints}
                         </div>
@@ -178,7 +173,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
 
                 <div className="flex flex-col gap-3">
                     <div>
-                        <h4 className="text-[10px] font-semibold uppercase text-gray-600 dark:text-gray-500 mb-1">
+                        <h4 className="mb-1 text-[10px] font-semibold text-gray-600 uppercase dark:text-gray-500">
                             Restrictions Cleared
                         </h4>
                         <div className="flex items-center">
@@ -187,7 +182,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                     </div>
 
                     <div>
-                        <h4 className="text-[10px] font-semibold uppercase text-gray-600 dark:text-gray-500 mb-1">
+                        <h4 className="mb-1 text-[10px] font-semibold text-gray-600 uppercase dark:text-gray-500">
                             Team Used
                         </h4>
                         <div className="flex flex-wrap gap-1">{renderTeam(token.team)}</div>

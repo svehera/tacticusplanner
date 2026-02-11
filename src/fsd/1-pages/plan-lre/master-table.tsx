@@ -522,7 +522,7 @@ export const MasterTable = () => {
                     </span>
                 )}
             </div>
-            <div className="ag-theme-material w-full h-[calc(100vh-150px)]">
+            <div className="ag-theme-material h-[calc(100vh-150px)] w-full">
                 <AgGridReact
                     ref={gridRef}
                     modules={[AllCommunityModule]}

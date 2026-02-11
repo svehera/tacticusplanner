@@ -544,7 +544,7 @@ export const RosterSnapshots = () => {
                     onDone={handleManageDone}
                 />
             </div>
-            <div className="flex justify-begin p-2 border-b border-gray-600">
+            <div className="justify-begin flex border-b border-gray-600 p-2">
                 <SyncButton showText={!isMobile} />
                 <div className="w-1" />
                 <Tooltip title={getTakeSnapshotTitle()}>
@@ -574,7 +574,7 @@ export const RosterSnapshots = () => {
                         <select
                             id="left-snapshot"
                             value={leftIndex}
-                            className="p-1 border rounded bg-gray-700"
+                            className="rounded border bg-gray-700 p-1"
                             onChange={event => {
                                 const newLeftIndex = parseInt(event.target.value, 10);
                                 setLeftIndex(newLeftIndex);
@@ -596,7 +596,7 @@ export const RosterSnapshots = () => {
                         <select
                             id="right-snapshot"
                             value={rightIndex}
-                            className="p-1 border rounded bg-gray-700"
+                            className="rounded border bg-gray-700 p-1"
                             onChange={event => {
                                 setRightIndex(parseInt(event.target.value, 10));
                             }}>
