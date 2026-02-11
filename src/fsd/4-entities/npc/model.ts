@@ -1,4 +1,4 @@
-import { Alliance, Faction, Rank, RarityStars } from '@/fsd/5-shared/model';
+import { Alliance, FactionId, Rank, RarityStars } from '@/fsd/5-shared/model';
 
 export interface INpcStats {
     abilityLevel: number;
@@ -13,7 +13,7 @@ export interface INpcStats {
 export interface INpcData {
     snowprintId: string;
     name: string;
-    faction?: Faction;
+    faction?: FactionId; // undefined for some NPCs (e.g. loot objects)
     alliance?: Alliance;
     meleeDamage?: string;
     meleeHits?: number;

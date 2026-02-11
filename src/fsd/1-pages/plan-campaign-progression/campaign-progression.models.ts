@@ -91,13 +91,6 @@ export class BattleSavings {
     }
 }
 
-export class CampaignFactionMapping {
-    // For each campaign, a list of factions usable in at least one node.
-    campaignFactions: Map<string, Set<string>> = new Map<string, Set<string>>();
-    // For each faction, a list of campaigns they can be used in.
-    factionCampaigns: Map<string, Set<string>> = new Map<string, Set<string>>();
-}
-
 /**
  * Information about a particular campaign. Includes how much each related
  * goal costs, and how much we would save by advancing to particular nodes.

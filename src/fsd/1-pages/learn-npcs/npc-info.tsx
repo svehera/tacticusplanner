@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 
-import { Faction } from '@/fsd/5-shared/model';
+import { FactionId } from '@/fsd/5-shared/model';
 
 import { FactionSelect } from '@/fsd/4-entities/faction';
 import { INpcData, NpcSelect, NpcService, ProgressionIndexSelect } from '@/fsd/4-entities/npc';
@@ -8,7 +8,7 @@ import { INpcData, NpcSelect, NpcService, ProgressionIndexSelect } from '@/fsd/4
 import { NpcStats } from './npc-stats';
 
 export const NpcInfo: React.FC = () => {
-    const [faction, setFaction] = useState<Faction>(Faction.Necrons);
+    const [faction, setFaction] = useState<FactionId>('Necrons');
     const [npc, setNpc] = useState<INpcData>(NpcService.npcDataFull.find(npc => npc.faction === faction)!);
     const [progressionIndex, setProgressionIndex] = useState<number>(0);
 
@@ -16,7 +16,7 @@ export const NpcInfo: React.FC = () => {
         return NpcService.npcDataFull
             .map(npc => npc.faction)
             .filter(faction => faction !== undefined)
-            .reduce((acc: Faction[], faction: Faction) => {
+            .reduce((acc: FactionId[], faction: FactionId) => {
                 if (!acc.includes(faction)) {
                     acc.push(faction);
                 }
@@ -28,7 +28,7 @@ export const NpcInfo: React.FC = () => {
         return NpcService.npcDataFull.filter(npc => npc.faction === faction);
     }, [faction]);
 
-    const onFactionChange = (newFaction: Faction) => {
+    const onFactionChange = (newFaction: FactionId) => {
         setFaction(newFaction);
         const npcs = NpcService.npcDataFull.filter(npc => npc.faction === newFaction);
         setNpc(npcs[0]);

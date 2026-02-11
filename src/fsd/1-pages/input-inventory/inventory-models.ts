@@ -1,4 +1,4 @@
-﻿import { Rarity } from '@/fsd/5-shared/model';
+﻿import { FactionId, Rarity } from '@/fsd/5-shared/model';
 
 export interface IInventoryUpgrade {
     material: string;
@@ -9,7 +9,7 @@ export interface IInventoryUpgrade {
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
     quantity: number;
     iconPath: string;
-    faction: string;
+    faction?: FactionId;
     alphabet: string;
 }
 

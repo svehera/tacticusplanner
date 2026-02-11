@@ -1,4 +1,4 @@
-﻿import { Alliance, DamageType, Trait, Faction } from '@/fsd/5-shared/model';
+﻿import { Alliance, DamageType, Trait } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { kharn as staticData } from '@/fsd/4-entities/lre';
@@ -65,7 +65,7 @@ export class KharnLegendaryEvent extends LegendaryEventBase {
     }
 
     protected getBetaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
-        const noTyranids = filter(unitsData).byFaction(Faction.Tyranids, true);
+        const noTyranids = filter(unitsData).byFaction('Tyranids', true);
         return new LETrack(
             this.id,
             'beta',
@@ -115,7 +115,7 @@ export class KharnLegendaryEvent extends LegendaryEventBase {
     }
 
     protected getGammaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
-        const noThousandSons = filter(unitsData).byFaction(Faction.Thousand_Sons, true);
+        const noThousandSons = filter(unitsData).byFaction('ThousandSons', true);
         return new LETrack(
             this.id,
             'gamma',
