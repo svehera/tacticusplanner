@@ -11,11 +11,11 @@ export function KillzoneList({
     return (
         <table className="w-full border-collapse">
             <thead>
-                <tr className="text-stone-600 text-xs *:px-0.5 text-left">
-                    <th className="">Killzone </th>
-                    <th className="">Waves</th>
-                    <th className="">Enemies</th>
-                    <th className="">XP</th>
+                <tr className="text-stone-600 text-xs *:px-0.5 text-center sm:text-left">
+                    <th className="text-left">Killzone </th>
+                    <th>Waves</th>
+                    <th>Enemies</th>
+                    <th>XP</th>
                     <th className="pl-2 sm:pl-0">Badges</th>
                 </tr>
             </thead>
