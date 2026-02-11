@@ -51,7 +51,7 @@ describe('Onslaught page', () => {
             </MemoryRouter>
         );
 
-        const sectors = onslaughtData.Imperial.sectors;
+        const sectors = onslaughtData[0].sectors;
         const detailsEls = container.querySelectorAll('details');
 
         expect(detailsEls.length).toBe(Object.keys(sectors).length);
@@ -65,12 +65,11 @@ describe('Onslaught page', () => {
             </MemoryRouter>
         );
 
-        const firstSectorKey = Object.keys(onslaughtData.Imperial.sectors)[0];
-        const firstSector = onslaughtData.Imperial.sectors[firstSectorKey];
+        const firstSector = onslaughtData[0].sectors[0];
         if (!firstSector) throw new Error('First sector data not found');
 
         // Open the first sector
-        await user.click(screen.getByText(firstSectorKey));
+        await user.click(screen.getByText(firstSector.name));
 
         // Table and headers should now be visible
         const table = await screen.findByRole('table');
@@ -79,6 +78,6 @@ describe('Onslaught page', () => {
 
         // Verify the number of rows equals the number of killzones
         const tbodyRows = container.querySelectorAll('tbody tr');
-        expect(tbodyRows.length).toBe(Object.keys(firstSector).length - 1); // -1 to exclude minHeroPower
+        expect(tbodyRows.length).toBe(firstSector.killzones.length);
     });
 });

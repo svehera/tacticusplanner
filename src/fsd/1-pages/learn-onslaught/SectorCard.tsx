@@ -8,26 +8,24 @@ import powerIcon from '@/assets/images/icons/power.png';
 import { BadgeImage } from '@/fsd/5-shared/ui/icons';
 
 import { KillzoneList } from './KillzoneList';
-import type { OnslaughtBadgeAlliance, OnslaughtSector, OnslaughtKillzone } from './types';
+import type { OnslaughtBadgeAlliance, OnslaughtSector } from './types';
 
 const RARITY_VALUES = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic'] as const;
 
 export function SectorCard({
-    name,
     sector,
     badgeAlliance,
 }: {
-    name: string;
     sector: OnslaughtSector;
     badgeAlliance: OnslaughtBadgeAlliance;
 }) {
-    const { minHeroPower, ...killzones } = sector;
+    const { name, minHeroPower, killzones } = sector;
 
     // Performance optimization to stop React from rendering the contents of closed sections
     // Without it, React lags from rendering thousands of badge icons
     const [isOpen, setOpen] = useState(false);
 
-    const maxRarityIndex = Object.values(killzones).reduce((rarestIndex, kz: OnslaughtKillzone) => {
+    const maxRarityIndex = killzones.reduce((rarestIndex, kz) => {
         const kzRarityIndexes = Object.entries(kz.badgeCountsByRarity)
             .filter(([_, count]) => count > 0)
             .map(([rarity]) => RARITY_VALUES.indexOf(rarity as (typeof RARITY_VALUES)[number]));
