@@ -25,5 +25,12 @@ yarn-error.log*
 
 # IDE
 /.idea/
+/.zed
+!/.zed/settings.example.json
+/.vscode/
+!/.vscode/settings.example.json
 
 /tmp/
+
+# working files for local development. e.g. design docs for feeding into AI.
+/.local/
