@@ -1,0 +1,75 @@
+import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
+import { clsx } from 'clsx';
+import { useState } from 'react';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import powerIcon from '@/assets/images/icons/power.png';
+
+import { BadgeImage } from '@/fsd/5-shared/ui/icons';
+
+import { KillzoneList } from './KillzoneList';
+import type { OnslaughtBadgeAlliance, OnslaughtSector, OnslaughtKillzone } from './types';
+
+const RARITY_VALUES = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic'] as const;
+
+export function SectorCard({
+    name,
+    sector,
+    badgeAlliance,
+}: {
+    name: string;
+    sector: OnslaughtSector;
+    badgeAlliance: OnslaughtBadgeAlliance;
+}) {
+    const { minHeroPower, ...killzones } = sector;
+
+    // Performance optimization to stop React from rendering the contents of closed sections
+    // Without it, React lags from rendering thousands of badge icons
+    const [isOpen, setOpen] = useState(false);
+
+    const maxRarityIndex = Object.values(killzones).reduce((rarestIndex, kz: OnslaughtKillzone) => {
+        const kzRarityIndexes = Object.entries(kz.badgeCountsByRarity)
+            .filter(([_, count]) => count > 0)
+            .map(([rarity]) => RARITY_VALUES.indexOf(rarity as (typeof RARITY_VALUES)[number]));
+        return Math.max(...kzRarityIndexes, rarestIndex);
+    }, 0);
+    const maxBadgeRarity = RARITY_VALUES[maxRarityIndex];
+
+    return (
+        <details
+            className="group w-full border bg-stone-100 shadow-sm transition-shadow hover:shadow-xl dark:bg-stone-900 rounded overflow-hidden"
+            open={isOpen}
+            onToggle={() => setOpen(prev => !prev)}>
+            <summary
+                className={clsx(
+                    'flex cursor-pointer justify-between w-full items-center px-2 text-stone-200 bg-linear-to-r select-none',
+                    badgeAlliance === 'Imperial' && 'from-teal-950 to-emerald-950 hover:from-teal-900', // Xenos Track
+                    badgeAlliance === 'Xenos' && 'from-red-950 to-pink-950 hover:from-red-900 ', // Chaos Track
+                    badgeAlliance === 'Chaos' && ' from-indigo-950 to-blue-900 hover:from-indigo-900' // Imperial Track
+                )}>
+                <div>
+                    <div className="text-lg font-bold">{name}</div>
+                    <div className="text-sm inline-block">
+                        <span className="pr-1">
+                            <span className="hidden sm:inline">Character</span> Power required:
+                        </span>
+                        <img alt="Power" src={powerIcon} className="w-2.5 aspect-auto self-baseline" />
+                        <span className="">{minHeroPower}</span>
+                    </div>
+                </div>
+
+                <div className="flex flex-col items-center">
+                    <div className="text-sm">Max Badge</div>
+                    <BadgeImage alliance={badgeAlliance} rarity={maxBadgeRarity} size="small" />
+                </div>
+                <span className="text-sm">{isOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}</span>
+            </summary>
+
+            {isOpen && (
+                <div className="px-2 pt-1 border-t rounded-b bg-linear-to-b from-stone-100 to-stone-200 dark:from-stone-900 dark:to-stone-950">
+                    <KillzoneList killzones={killzones} badgeAlliance={badgeAlliance} />
+                </div>
+            )}
+        </details>
+    );
+}

@@ -6,6 +6,8 @@ import { defineConfig } from 'vite';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 
+import { main } from './src/data/onslaught/regenerate-onslaught-data';
+
 export default defineConfig({
     // depending on your application, base can also be "/"
     base: '/',
@@ -32,6 +34,10 @@ export default defineConfig({
                 quality: 75,
             },
         }),
+        {
+            name: 'generate-onslaught-data',
+            buildStart: () => main(),
+        },
     ],
     server: {
         // this ensures that the browser opens upon server start
