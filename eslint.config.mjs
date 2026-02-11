@@ -5,6 +5,7 @@ import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import boundaries from 'eslint-plugin-boundaries';
 import * as pluginImportX from 'eslint-plugin-import-x';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
@@ -26,7 +27,8 @@ const FS_LAYERS = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
 
 const REVERSED_FS_LAYERS = [...FS_LAYERS].reverse();
 
-export default [
+export default defineConfig([
+    globalIgnores(['dist', 'build', 'node_modules', 'package-lock.json']),
     ...compat.extends(
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -228,4 +230,4 @@ export default [
         },
     },
     eslintPluginPrettierRecommended,
-];
+]);
