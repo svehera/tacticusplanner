@@ -158,7 +158,6 @@ const SectorSchema = z
             }),
     })
     .transform(sector => ({
-        name: `Sector ${indexToRomanNumeral(0)}`, // placeholder name, will be updated in the next stage
         minHeroPower: sector.minHeroPower,
         badgeAlliance: sector.battles[0].badgeAlliance,
         killzones: sector.battles
