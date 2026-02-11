@@ -17,6 +17,9 @@ export type GoalsAction =
           goalId: string;
       }
     | {
+          type: 'DeleteAll';
+      }
+    | {
           type: 'UpdateDailyRaids';
           value: Array<{ goalId: string; include: boolean }>;
       }
@@ -36,6 +39,9 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
         }
         case 'Delete': {
             return state.filter(x => x.id !== action.goalId).map((x, index) => ({ ...x, priority: index + 1 }));
+        }
+        case 'DeleteAll': {
+            return [];
         }
         case 'Update': {
             const updatedGoal = action.goal;

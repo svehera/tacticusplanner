@@ -274,22 +274,34 @@ export const ascensionMilestones: readonly StarMilestone[] = [
 
 export interface EventProgress {
     // The total points accumulated so far.
-    points: number;
+    totalPoints: number;
 
     // The total currency accumulated so far.
-    currency: number;
+    totalCurrency: number;
+
+    // The total shards accumulated so far.
+    totalShards: number;
 
     // The current rarity of the character.
-    rarity: Rarity;
+    currentRarity: Rarity;
 
     // The current stars of the character.
-    stars: RarityStars;
+    currentStars: RarityStars;
 
     // The current number of shards of the character.
-    shards: number;
+    currentShards: number;
+
+    // A human-readable short description of the next milestone.
+    nextMilestone: string;
+
+    // The number of additional points needed to hit the next milestone.
+    addlPointsForNextMilestone: number;
+
+    // The amount of additional currency needed to hit the next milestone.
+    addlCurrencyForNextMilestone: number;
 
     // The number of shards needed to hit the next ascension milestone.
-    shardsForNextMilestone: number;
+    addlShardsForNextMilestone: number;
 
     // The index of the last chest opened (0 based, -1 means nothing claimed).
     currentClaimedChestIndex: number;
@@ -750,19 +762,6 @@ export class TokenEstimationService {
         return LeProgressService.computeProgress(progress, false).currentPoints;
     }
 
-    /** Gets the total current currency based on progress, character rarity, stars, and P2P status. */
-    public static computeTotalCurrency(progress: ILreProgressModel, p2p: boolean): number {
-        if (progress.syncedProgress !== undefined) {
-            return (
-                progress.syncedProgress.currentCurrency +
-                (progress.syncedProgress.currentClaimedChestIndex >= 0
-                    ? chestMilestones[progress.syncedProgress.currentClaimedChestIndex].totalNeededCurrency
-                    : 0)
-            );
-        }
-        return LeProgressService.computeProgress(progress, p2p).currentCurrency;
-    }
-
     /**
      * @returns the number of shards the user currently has. If the user has forced progress,
      *          returns the value they specified, but excludes any chests they have the ability to
@@ -784,33 +783,42 @@ export class TokenEstimationService {
      * Computes the current progress event progress based on the forced progress provided by the
      * user.
      */
-    private static computeSyncedProgress(
+    public static computeCurrentProgress(
         progress: ILreProgressModel,
         currentRarity: Rarity,
         currentStars: RarityStars
     ): EventProgress {
         if (progress.syncedProgress === undefined) {
-            throw new Error('computeForcedProgress called with no forced progress');
+            return {
+                totalPoints: 0,
+                totalCurrency: 0,
+                totalShards: 0,
+                currentRarity: Rarity.Legendary,
+                currentStars: RarityStars.None,
+                currentShards: 0,
+                addlPointsForNextMilestone: 13000,
+                addlCurrencyForNextMilestone: 3350,
+                addlShardsForNextMilestone: 400,
+                currentClaimedChestIndex: -1,
+                nextMilestone: 'Unlock',
+            };
         }
-        let currentCurrency = progress.syncedProgress.currentCurrency;
+        const totalPoints = progress.syncedProgress.currentPoints;
+        const currentCurrency = progress.syncedProgress.currentCurrency;
+        let totalCurrency = 0;
         let currentShards = progress.syncedProgress.currentShards;
-        let lastClaimedChestIndex = progress.syncedProgress.currentClaimedChestIndex;
+        const lastClaimedChestIndex = progress.syncedProgress.currentClaimedChestIndex;
 
         // Determine the total currency, since forced progress only gives us the current incremental currency.
         if (lastClaimedChestIndex >= 0 && lastClaimedChestIndex < chestMilestones.length) {
-            currentCurrency = chestMilestones[lastClaimedChestIndex].totalNeededCurrency + currentCurrency;
+            totalCurrency = chestMilestones[lastClaimedChestIndex].totalNeededCurrency + currentCurrency;
+        } else {
+            totalCurrency = currentCurrency;
         }
 
-        // Open any chests we can with the current currency, collecting shards along the way.
-        while (
-            lastClaimedChestIndex + 1 < chestMilestones.length &&
-            currentCurrency >= chestMilestones[lastClaimedChestIndex + 1].totalNeededCurrency
-        ) {
-            ++lastClaimedChestIndex;
-            currentShards += this.getShardsPerChest();
-        }
         // Determine if we hit any new ascension milestones.
         let starIndex = 0;
+        let totalShards = 0;
         for (starIndex = 0; starIndex < ascensionMilestones.length; ++starIndex) {
             // Skip over the milestones we've already hit.
             if (currentRarity > ascensionMilestones[starIndex].rarity) continue;
@@ -821,61 +829,91 @@ export class TokenEstimationService {
             ) {
                 continue;
             }
-            // Go over each milestone and see if we can spend our incremental shards to ascend.
+            // Can we spend our incremental shards to ascend?
             if (ascensionMilestones[starIndex].incrementalShards > currentShards) break;
+            totalShards += ascensionMilestones[starIndex].incrementalShards;
             currentRarity = ascensionMilestones[starIndex].rarity;
             currentStars = ascensionMilestones[starIndex].stars;
             currentShards -= ascensionMilestones[starIndex].incrementalShards;
         }
+
+        let addlCurrencyForNextMilestone = Infinity;
+        let addlPointsForNextMilestone = Infinity;
+        let addlShardsForNextMilestone = Infinity;
+        if (starIndex < ascensionMilestones.length) {
+            addlShardsForNextMilestone = ascensionMilestones[starIndex].incrementalShards - currentShards;
+            const addlChests = Math.ceil(addlShardsForNextMilestone / this.getShardsPerChest());
+            const neededChestIndex = lastClaimedChestIndex + addlChests;
+            if (neededChestIndex >= chestMilestones.length) {
+                addlCurrencyForNextMilestone = Infinity;
+                addlPointsForNextMilestone = 27000 - totalPoints;
+            } else {
+                addlCurrencyForNextMilestone = chestMilestones[neededChestIndex].totalNeededCurrency - totalCurrency;
+                addlPointsForNextMilestone =
+                    this.computeTotalPointsToNextMilestone(
+                        totalPoints,
+                        addlCurrencyForNextMilestone,
+                        this.getBonusPayoutPerCurrencyPayout(progress)
+                    ) - totalPoints;
+            }
+        } else {
+            addlPointsForNextMilestone = Infinity;
+            addlCurrencyForNextMilestone = Infinity;
+            addlShardsForNextMilestone = Infinity;
+        }
+
         return {
-            points: progress.syncedProgress.currentPoints,
-            currency: currentCurrency,
-            rarity: currentRarity,
-            stars: currentStars,
-            shards: currentShards,
-            shardsForNextMilestone: ascensionMilestones[starIndex]?.incrementalShards ?? Infinity,
+            totalPoints,
+            totalCurrency,
+            totalShards,
+            currentRarity,
+            currentStars,
+            currentShards,
+            addlCurrencyForNextMilestone,
+            addlPointsForNextMilestone,
+            addlShardsForNextMilestone,
             currentClaimedChestIndex: lastClaimedChestIndex,
-        } as EventProgress;
+            nextMilestone: this.getNextGoal(currentRarity, currentStars),
+        };
     }
 
-    /**
-     * @returns the current progress based either on the forced progress, or on the provided
-     * progress model and current rarity/stars.
-     */
-    public static computeCurrentProgress(
-        progress: ILreProgressModel,
-        currentRarity: Rarity,
-        currentStars: RarityStars,
-        p2p: boolean
-    ): EventProgress {
-        if (progress.syncedProgress !== undefined) {
-            return this.computeSyncedProgress(progress, currentRarity, currentStars);
+    private static getNextGoal(currentRarity: Rarity, currentStars: RarityStars): string {
+        switch (currentStars) {
+            case RarityStars.None:
+                return 'Unlock';
+            case RarityStars.RedThreeStars:
+                return 'Red 4★';
+            case RarityStars.RedFourStars:
+                return 'Red 5★';
+            case RarityStars.RedFiveStars:
+                return 'Blue 1★';
+            case RarityStars.OneBlueStar:
+                if (currentRarity === Rarity.Legendary) {
+                    return 'Mythic 1★';
+                } else {
+                    return 'Blue 2★';
+                }
+            case RarityStars.TwoBlueStars:
+                return 'Full Clear';
         }
-        const computedProgress = LeProgressService.computeProgress(progress, p2p);
-        let lastClaimedChestIndex = -1;
-        for (lastClaimedChestIndex = -1; lastClaimedChestIndex + 1 < chestMilestones.length; ++lastClaimedChestIndex) {
-            if (computedProgress.currentCurrency < chestMilestones[lastClaimedChestIndex + 1].totalNeededCurrency) {
-                break;
-            }
-        }
-        let totalShards = computedProgress.currentTotalShards;
-        let starIndex = 0;
-        for (starIndex = 0; starIndex < ascensionMilestones.length; ++starIndex) {
-            if (ascensionMilestones[starIndex].totalShards > totalShards) break;
-            currentRarity = ascensionMilestones[starIndex].rarity;
-            currentStars = ascensionMilestones[starIndex].stars;
-            totalShards -= ascensionMilestones[starIndex].incrementalShards;
-        }
+        return '(unknown)';
+    }
 
-        return {
-            points: computedProgress.currentPoints,
-            currency: computedProgress.currentCurrency,
-            rarity: currentRarity,
-            stars: currentStars,
-            shards: totalShards,
-            shardsForNextMilestone: ascensionMilestones[starIndex]?.incrementalShards ?? Infinity,
-            currentClaimedChestIndex: lastClaimedChestIndex,
-        } as EventProgress;
+    private static computeTotalPointsToNextMilestone(
+        totalPoints: number,
+        addlCurrencyForNextMilestone: number,
+        bonusPayoutPerCurrencyPayout: number
+    ): number {
+        let nextPointMilestoneIndex = this.getNextPointMilestoneIndex(totalPoints);
+        while (nextPointMilestoneIndex < pointMilestones.length && addlCurrencyForNextMilestone > 0) {
+            addlCurrencyForNextMilestone -=
+                pointMilestones[nextPointMilestoneIndex].currencyPayout + bonusPayoutPerCurrencyPayout;
+            nextPointMilestoneIndex++;
+        }
+        if (nextPointMilestoneIndex < pointMilestones.length) {
+            return pointMilestones[nextPointMilestoneIndex - 1].points;
+        }
+        return Infinity;
     }
 
     /**
@@ -886,18 +924,17 @@ export class TokenEstimationService {
         tokens: TokenUse[],
         progress: ILreProgressModel,
         currentRarity: Rarity,
-        currentStars: RarityStars,
-        p2p: boolean
+        currentStars: RarityStars
     ): TokenDisplay[] {
-        const currentProgress = this.computeCurrentProgress(progress, currentRarity, currentStars, p2p);
-        let currentPoints = currentProgress.points;
-        let currentCurrency = currentProgress.currency;
-        let currentShards = currentProgress.shards;
-        currentRarity = currentProgress.rarity;
-        currentStars = currentProgress.stars;
+        const currentProgress = this.computeCurrentProgress(progress, currentRarity, currentStars);
+        let currentPoints = currentProgress.totalPoints;
+        let currentCurrency = currentProgress.totalCurrency;
+        let currentShards = currentProgress.currentShards;
+        currentRarity = currentProgress.currentRarity;
+        currentStars = currentProgress.currentStars;
         let lastClaimedChestIndex = currentProgress.currentClaimedChestIndex;
-        let nextPointMilestoneIndex = this.getNextPointMilestoneIndex(currentProgress.points);
-        let nextStarIndex = this.getCurrentStarIndex(currentProgress.rarity, currentProgress.stars) + 1;
+        let nextPointMilestoneIndex = this.getNextPointMilestoneIndex(currentProgress.totalPoints);
+        let nextStarIndex = this.getCurrentStarIndex(currentProgress.currentRarity, currentProgress.currentStars) + 1;
         const ret: TokenDisplay[] = [];
 
         for (let i = 0; i < tokens.length; ++i) {

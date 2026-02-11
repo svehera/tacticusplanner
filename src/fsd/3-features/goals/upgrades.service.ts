@@ -873,7 +873,7 @@ export class UpgradesService {
         return estimate;
     }
 
-    private static combineBaseMaterials(charactersUpgrades: IUnitUpgrade[]): Record<string, ICombinedUpgrade> {
+    public static combineBaseMaterials(charactersUpgrades: IUnitUpgrade[]): Record<string, ICombinedUpgrade> {
         const result: Record<string, ICombinedUpgrade> = {};
         for (const character of charactersUpgrades) {
             for (const upgradeId in character.baseUpgradesTotal) {
@@ -1122,7 +1122,7 @@ export class UpgradesService {
         }
     }
 
-    private static shouldRaidForHomeScreenEvent(
+    public static shouldRaidForHomeScreenEvent(
         location: ICampaignBattleComposed,
         settings: IEstimatedRanksSettings
     ): boolean {

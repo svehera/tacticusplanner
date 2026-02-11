@@ -1,7 +1,7 @@
 ﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Button, TextField } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
@@ -11,16 +11,33 @@ import { ILegendaryEvent } from '@/fsd/3-features/lre';
 import { LeNextGoalProgress } from './le-next-goal-progress';
 import { LeProgressOverviewMissions } from './le-progress-overview-missions';
 import { useLreProgress } from './le-progress.hooks';
-import { LeProgressService } from './le-progress.service';
 import { LreTrackOverallProgress } from './le-track-overall-progress';
+import { EventProgress } from './token-estimation-service';
 
 /**
  * UI Element to display the progress of missions and tracks in a legendary event.
  */
-export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
+export const LeProgress = ({
+    legendaryEvent,
+    progress,
+}: {
+    legendaryEvent: ILegendaryEvent;
+    progress: EventProgress;
+}) => {
     const { leSelectedTeams, leSettings } = useContext(StoreContext);
     const { model, updateNotes, updateOccurrenceProgress, createNewModel, updateDto } = useLreProgress(legendaryEvent);
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
+    const [notesDraft, setNotesDraft] = useState(model.notes);
+    useEffect(() => {
+        const handler = (e: BeforeUnloadEvent) => {
+            if (!notesDraft || notesDraft === model.notes) return;
+            e.preventDefault();
+            e.returnValue = '';
+            return '';
+        };
+        window.addEventListener('beforeunload', handler);
+        return () => window.removeEventListener('beforeunload', handler);
+    }, [notesDraft, model.notes]);
 
     const teams = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
@@ -28,14 +45,6 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
         setAccordionExpanded(isExpanded ? section : false);
     };
 
-    const missionsTotalProgress = leSettings.showP2POptions
-        ? model.occurrenceProgress
-              .map(
-                  x =>
-                      `${x.freeMissionsProgress},${x.premiumMissionsProgress},${+x.bundlePurchased},${x.ohSoCloseShards}`
-              )
-              .join('-')
-        : model.occurrenceProgress.map(x => x.freeMissionsProgress.toString()).join('-');
     const tracksTotalProgress = model.tracksProgress
         .map(track =>
             Math.round(
@@ -54,61 +63,82 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
     return (
         <div className="gap-2">
             <div className="w-full">
-                <LeNextGoalProgress
-                    progress={LeProgressService.computeProgress(model, leSettings.showP2POptions ?? true)}
-                />
+                <LeNextGoalProgress progress={progress} />
                 <Accordion
                     TransitionProps={{ unmountOnExit: true }}
                     expanded={accordionExpanded === 'missionAndNotes'}
                     onChange={handleAccordionChange('missionAndNotes')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <span>
-                            Notes & Missions Progress <span className="font-bold">({missionsTotalProgress})</span>
-                        </span>
+                        <span>Notes & Missions</span>
                     </AccordionSummary>
 
                     <AccordionDetails className="flex-box wrap gap20">
-                        <TextField
-                            className="mt-5"
-                            fullWidth
-                            id="outlined-textarea"
-                            label="Notes"
-                            placeholder="Notes"
-                            multiline
-                            value={model.notes}
-                            helperText={model.notes.length + '/10000'}
-                            onChange={event => updateNotes(event.target.value.slice(0, 10000))}
-                        />
+                        <div className="flex-box column start flex-1 min-w-[450px]">
+                            <div className="w-full">
+                                <TextField
+                                    className="mt-5"
+                                    fullWidth
+                                    id="outlined-textarea"
+                                    label="Notes"
+                                    placeholder="Notes"
+                                    multiline
+                                    value={notesDraft}
+                                    helperText={notesDraft.length + '/10000'}
+                                    onChange={event => {
+                                        setNotesDraft(event.target.value.slice(0, 10000));
+                                    }}
+                                />
 
-                        {model.occurrenceProgress.map(occurrence => (
-                            <LeProgressOverviewMissions
-                                showP2P={leSettings.showP2POptions}
-                                key={occurrence.eventOccurrence}
-                                occurrence={occurrence}
-                                progressChange={updateOccurrenceProgress}
-                            />
-                        ))}
+                                {notesDraft !== model.notes && (
+                                    <div className="mt-2 text-sm text-yellow-700">
+                                        You have unsaved changes — they will be lost if you leave this page.
+                                    </div>
+                                )}
 
-                        <div className="flex-box wrap gap-x-[50px]">
-                            <div className="flex-box column start flex-1 min-w-[450px]">
-                                <h4>Free missions</h4>
-                                {model.regularMissions.map((mission, index) => (
-                                    <span key={index}>
-                                        {index + 1}. {mission}
-                                    </span>
-                                ))}
+                                <div className="mt-3 w-full text-right">
+                                    <Button
+                                        size="small"
+                                        aria-label="Sync with Tacticus"
+                                        title="Sync with Tacticus"
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={() => updateNotes(notesDraft)}>
+                                        Save
+                                    </Button>
+                                </div>
                             </div>
 
-                            {leSettings.showP2POptions && (
+                            {model.syncedProgress === undefined &&
+                                model.occurrenceProgress.map(occurrence => (
+                                    <LeProgressOverviewMissions
+                                        showP2P={leSettings.showP2POptions}
+                                        key={occurrence.eventOccurrence}
+                                        occurrence={occurrence}
+                                        progressChange={updateOccurrenceProgress}
+                                    />
+                                ))}
+
+                            <div className="flex-box wrap gap-x-[50px]">
                                 <div className="flex-box column start flex-1 min-w-[450px]">
-                                    <h4>Premium missions</h4>
-                                    {model.premiumMissions.map((mission, index) => (
+                                    <h4>Free missions</h4>
+                                    {model.regularMissions.map((mission, index) => (
                                         <span key={index}>
                                             {index + 1}. {mission}
                                         </span>
                                     ))}
                                 </div>
-                            )}
+
+                                {leSettings.showP2POptions && (
+                                    <div className="flex-box column start flex-1 min-w-[450px]">
+                                        <h4>Premium missions</h4>
+                                        {model.premiumMissions.map((mission, index) => (
+                                            <span key={index}>
+                                                {index + 1}. {mission}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </AccordionDetails>
                 </Accordion>

@@ -17,5 +17,6 @@ export interface ITeam2 {
     ta?: boolean;
     // war battlefield levels
     bfs?: boolean[];
-    notes: string;
+    // Any user-provided notes.
+    notes?: string;
 }

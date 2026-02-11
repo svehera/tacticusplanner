@@ -49,10 +49,11 @@ const alliedFactions = (factionId: FactionId) => {
 
 const factionCampaigns = Object.fromEntries(
     factions.map(f => {
-        const allies = alliedFactions(f.snowprintId).map(a => a.snowprintId);
+        const allies = alliedFactions(f.snowprintId)?.map(a => a.snowprintId) ?? [];
         return [f.snowprintId, CampaignsService.allCampaigns.filter(c => allies.includes(c.faction))];
     })
 );
+
 const campaignFactions = Object.fromEntries(CampaignsService.allCampaigns.map(c => [c.id, alliedFactions(c.faction)]));
 
 export class CampaignsProgressionService {

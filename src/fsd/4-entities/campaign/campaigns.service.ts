@@ -21,6 +21,7 @@ export class CampaignsService {
     public static readonly campaignEvents = campaignsList.filter(
         campaign => campaign.releaseType === CampaignReleaseType.event
     );
+    /** Holds a mapping from battle ID (e.g. SHE31) to an ICampaignBattleComposed representing the battle. */
     public static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
 
     static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
@@ -32,7 +33,7 @@ export class CampaignsService {
      *          The map value is ICampaignBattle.shortName (e.g. SHME31 for
      *          Saim-Hann Mirror Elite 31).
      */
-    static getUpgradesLocations(): Record<string, string[]> {
+    public static getUpgradesLocations(): Record<string, string[]> {
         const result: Record<string, string[]> = {};
         const battles: ICampaignBattle[] = [];
         for (const battleDataKey in battleData) {
@@ -66,7 +67,11 @@ export class CampaignsService {
         return result;
     }
 
-    private static getReward(battle: ICampaignBattle): string {
+    /**
+     * @returns the upgrade material rewarded for winning this battle, or an empty string if
+     * none exists.
+     */
+    public static getReward(battle: ICampaignBattle): string {
         // Elite battles give a guaranteed material, so return that.
         for (const reward of battle.rewards.guaranteed) {
             if (reward.id === 'gold') continue;

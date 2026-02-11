@@ -255,7 +255,7 @@ export interface IDailyRaidsPreferences {
     campaignEvent?: CampaignGroupType | 'none';
 }
 
-export type ICustomDailyRaidsSettings = Record<Rarity, CampaignType[]>;
+export type ICustomDailyRaidsSettings = Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>;
 
 export interface ISelectedTeamsOrdering {
     orderBy: 'name' | 'rank' | 'rarity';

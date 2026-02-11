@@ -1,4 +1,5 @@
-﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+﻿import DeleteIcon from '@mui/icons-material/Delete';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
 import TableRowsIcon from '@mui/icons-material/TableRows';
@@ -320,6 +321,20 @@ export const Goals = () => {
 
     const hasSync = !!userInfo.tacticusApiKey;
 
+    const onDeleteAll = () => {
+        if (
+            !confirm(
+                'This will permanently delete ALL goals and cannot be undone.\n\n' +
+                    'Consider exporting your JSON before proceeding.\n\n' +
+                    'Are you sure you want to continue?'
+            )
+        ) {
+            return;
+        }
+
+        dispatch.goals({ type: 'DeleteAll' });
+    };
+
     return (
         <div>
             <div className="flex flex-wrap items-center gap-5">
@@ -332,6 +347,10 @@ export const Goals = () => {
                 </Button>
                 <SetGoalDialog key={goals.length} />
                 {hasSync && <SyncButton showText={!isMobile} />}
+                {}
+                <Button size="small" variant="contained" color="error" onClick={onDeleteAll}>
+                    <DeleteIcon sx={{ mr: 1 }} /> delete all
+                </Button>
                 <span className="text-xl">
                     {goals.length}/{goalsLimit}
                 </span>
