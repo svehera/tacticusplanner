@@ -194,6 +194,22 @@ const TrackSchema = z
         sectors: sectors.map((sector, sectorIndex) => ({
             name: `Sector ${indexToRomanNumeral(sectorIndex)}`,
             minHeroPower: sector.minHeroPower,
+            maxBadgeRarity:
+                RarityStringSchema.options[ // ordered from lowest to highest rarity
+                    // use the maximum index to get the rarest badge
+                    Math.max(
+                        // Find the highest rarity that has at least 1 badge rewarded in this zone
+                        ...sector.killzones.map(({ badgeCountsByRarity }) => {
+                            // Iterate from highest rarity to lowest
+                            // Do not use `.reverse()` since that alters the indexes
+                            for (let i = RarityStringSchema.options.length - 1; i >= 0; i--) {
+                                const rarity = RarityStringSchema.options[i];
+                                if (badgeCountsByRarity[rarity] > 0) return i;
+                            }
+                            return 0;
+                        })
+                    )
+                ],
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             killzones: sector.killzones.map(({ battleNr, ...kz }) => kz).reverse(), // to match the order they are presented in-game
         })),
