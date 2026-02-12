@@ -1,11 +1,11 @@
 import { BadgeRewards } from './BadgeRewards';
-import type { OnslaughtBadgeAlliance, OnslaughtKillzones } from './types';
+import type { OnslaughtBadgeAlliance, OnslaughtKillzone } from './types';
 
 export function KillzoneList({
     killzones,
     badgeAlliance,
 }: {
-    killzones: OnslaughtKillzones;
+    killzones: readonly OnslaughtKillzone[];
     badgeAlliance: OnslaughtBadgeAlliance;
 }) {
     return (
@@ -20,26 +20,19 @@ export function KillzoneList({
                 </tr>
             </thead>
             <tbody>
-                {Object.entries(killzones)
-                    .reverse() // To match the order shown in-game
-                    .map(([name, killzone]) => {
-                        return (
-                            <tr
-                                key={name}
-                                className="border-t border-stone-300 text-center sm:text-left dark:border-stone-700">
-                                <td className="text-left">{name.replace('KillZone ', '')}</td>
-                                <td>{killzone.waves}</td>
-                                <td>{killzone.totalEnemyCount}</td>
-                                <td>{killzone.totalXp}</td>
-                                <td className="pl-2 text-left sm:pl-0">
-                                    <BadgeRewards
-                                        badgeCountsByRarity={killzone.badgeCountsByRarity}
-                                        alliance={badgeAlliance}
-                                    />
-                                </td>
-                            </tr>
-                        );
-                    })}
+                {killzones.map(killzone => (
+                    <tr
+                        key={killzone.name}
+                        className="border-t border-stone-300 text-center sm:text-left dark:border-stone-700">
+                        <td className="text-left">{killzone.name}</td>
+                        <td>{killzone.waves}</td>
+                        <td>{killzone.totalEnemyCount}</td>
+                        <td>{killzone.totalXp}</td>
+                        <td className="pl-2 text-left sm:pl-0">
+                            <BadgeRewards badgeCountsByRarity={killzone.badgeCountsByRarity} alliance={badgeAlliance} />
+                        </td>
+                    </tr>
+                ))}
             </tbody>
         </table>
     );

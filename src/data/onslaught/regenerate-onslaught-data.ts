@@ -27,8 +27,6 @@ import fs from 'fs';
 
 import { z } from 'zod';
 
-import rawData from './rawData.json';
-
 // ----------- Stage 0: Helper Functions -----------
 const GREEK_LETTERS = ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta', 'Theta', 'Iota', 'Kappa'] as const;
 const ROMAN_NUMERALS = [
@@ -162,8 +160,9 @@ const SectorSchema = z
     .transform(sector => ({
         minHeroPower: sector.minHeroPower,
         badgeAlliance: sector.battles[0].badgeAlliance,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        zones: sector.battles.map(({ badgeAlliance, boardId, ...rest }) => rest),
+        killzones: sector.battles
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            .map(({ badgeAlliance, boardId, ...rest }, index) => ({ name: indexToGreekLetter(index), ...rest })),
     }));
 
 // ----------- Stage 5: Validating & transforming for a Track -----------
@@ -176,7 +175,7 @@ const TrackSchema = z
             .superRefine((sectors, ctx) => {
                 let currentExpectedBattleNr = 1;
                 for (let i = 0; i < sectors.length; i++) {
-                    for (const { battleNr } of sectors[i].zones) {
+                    for (const { battleNr } of sectors[i].killzones) {
                         if (battleNr !== currentExpectedBattleNr)
                             ctx.addIssue({
                                 code: 'invalid_value',
@@ -192,21 +191,28 @@ const TrackSchema = z
     .transform(({ allowedGrandAlliance, tiers: sectors }) => ({
         alliance: allowedGrandAlliance,
         badgeAlliance: sectors[0].badgeAlliance,
-        sectors: Object.fromEntries(
-            sectors.map((sector, sectorIndex) => [
-                `Sector ${indexToRomanNumeral(sectorIndex)}`,
-                {
-                    minHeroPower: sector.minHeroPower,
-                    ...Object.fromEntries(
-                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                        sector.zones.map(({ battleNr, ...zone }, zoneIndex) => [
-                            `KillZone ${indexToGreekLetter(zoneIndex)}`,
-                            zone,
-                        ])
-                    ),
-                },
-            ])
-        ),
+        sectors: sectors.map((sector, sectorIndex) => ({
+            name: `Sector ${indexToRomanNumeral(sectorIndex)}`,
+            minHeroPower: sector.minHeroPower,
+            maxBadgeRarity:
+                RarityStringSchema.options[ // ordered from lowest to highest rarity
+                    // use the maximum index to get the rarest badge
+                    Math.max(
+                        // Find the highest rarity that has at least 1 badge rewarded in this zone
+                        ...sector.killzones.map(({ badgeCountsByRarity }) => {
+                            // Iterate from highest rarity to lowest
+                            // Do not use `.reverse()` since that alters the indexes
+                            for (let i = RarityStringSchema.options.length - 1; i >= 0; i--) {
+                                const rarity = RarityStringSchema.options[i];
+                                if (badgeCountsByRarity[rarity] > 0) return i;
+                            }
+                            return 0;
+                        })
+                    )
+                ],
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            killzones: sector.killzones.map(({ battleNr, ...kz }) => kz).reverse(), // to match the order they are presented in-game
+        })),
     }));
 
 // ----------- Stage 6: Validating & transforming for the File -----------
@@ -219,10 +225,12 @@ const DataSchema = z
             .refine(tracks => tracks[1].alliance === 'Xenos')
             .refine(tracks => tracks[2].alliance === 'Chaos'),
     })
-    .transform(({ tracks }) => Object.fromEntries(tracks.map(({ alliance, ...rest }) => [alliance, rest])));
+    .transform(({ tracks }) => tracks);
 
 // ----------- Stage 7: Executing and write to file -----------
 export const main = () => {
+    // Note: reading here instead of importing so that importing from this file doesn't cause Vite to try to load the entire raw JSON into memory during startup
+    const rawData = JSON.parse(fs.readFileSync(import.meta.dirname + '/rawData.json', 'utf-8'));
     const parsedData = DataSchema.parse(rawData);
     fs.writeFileSync(import.meta.dirname + '/data.generated.json', JSON.stringify(parsedData, null, 4) + '\n');
 };

@@ -8,38 +8,26 @@ import powerIcon from '@/assets/images/icons/power.png';
 import { BadgeImage } from '@/fsd/5-shared/ui/icons';
 
 import { KillzoneList } from './KillzoneList';
-import type { OnslaughtBadgeAlliance, OnslaughtSector, OnslaughtKillzone } from './types';
-
-const RARITY_VALUES = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic'] as const;
+import type { OnslaughtBadgeAlliance, OnslaughtSector } from './types';
 
 export function SectorCard({
-    name,
     sector,
     badgeAlliance,
 }: {
-    name: string;
     sector: OnslaughtSector;
     badgeAlliance: OnslaughtBadgeAlliance;
 }) {
-    const { minHeroPower, ...killzones } = sector;
+    const { name, minHeroPower, killzones, maxBadgeRarity } = sector;
 
     // Performance optimization to stop React from rendering the contents of closed sections
     // Without it, React lags from rendering thousands of badge icons
     const [isOpen, setOpen] = useState(false);
 
-    const maxRarityIndex = Object.values(killzones).reduce((rarestIndex, kz: OnslaughtKillzone) => {
-        const kzRarityIndexes = Object.entries(kz.badgeCountsByRarity)
-            .filter(([_, count]) => count > 0)
-            .map(([rarity]) => RARITY_VALUES.indexOf(rarity as (typeof RARITY_VALUES)[number]));
-        return Math.max(...kzRarityIndexes, rarestIndex);
-    }, 0);
-    const maxBadgeRarity = RARITY_VALUES[maxRarityIndex];
-
     return (
         <details
             className="group w-full overflow-hidden rounded border bg-stone-100 shadow-sm transition-shadow hover:shadow-xl dark:bg-stone-900"
             open={isOpen}
-            onToggle={() => setOpen(prev => !prev)}>
+            onToggle={e => setOpen(e.currentTarget.open)}>
             <summary
                 className={clsx(
                     'flex w-full cursor-pointer items-center justify-between bg-linear-to-r px-2 text-stone-200 select-none',
