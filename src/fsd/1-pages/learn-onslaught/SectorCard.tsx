@@ -27,7 +27,7 @@ export function SectorCard({
         <details
             className="group w-full overflow-hidden rounded border bg-stone-100 shadow-sm transition-shadow hover:shadow-xl dark:bg-stone-900"
             open={isOpen}
-            onToggle={() => setOpen(prev => !prev)}>
+            onToggle={e => setOpen(e.currentTarget.open)}>
             <summary
                 className={clsx(
                     'flex w-full cursor-pointer items-center justify-between bg-linear-to-r px-2 text-stone-200 select-none',
