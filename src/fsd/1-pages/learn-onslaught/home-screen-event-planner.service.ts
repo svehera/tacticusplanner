@@ -243,13 +243,17 @@ export class HomeScreenEventPlannerService {
                             allRollingTotal[1].length - 1
                         );
                         const enemiesOnA =
-                            allRollingTotal[0][finishingIndexOnA] -
-                            allRollingTotal[0][startingIndexA] +
-                            allEnemies[0][startingIndexA];
+                            finishingIndexOnA < startingIndexA
+                                ? 0
+                                : allRollingTotal[0][finishingIndexOnA] -
+                                  allRollingTotal[0][startingIndexA] +
+                                  allEnemies[0][startingIndexA];
                         const enemiesOnB =
-                            allRollingTotal[1][finishingIndexOnB] -
-                            allRollingTotal[1][startingIndexB] +
-                            allEnemies[1][startingIndexB];
+                            finishingIndexOnB < startingIndexB
+                                ? 0
+                                : allRollingTotal[1][finishingIndexOnB] -
+                                  allRollingTotal[1][startingIndexB] +
+                                  allEnemies[1][startingIndexB];
                         const totalEnemies = enemiesOnA + enemiesOnB;
 
                         if (totalEnemies > bestEnemies) {
@@ -344,17 +348,23 @@ export class HomeScreenEventPlannerService {
                             Math.min(preEventTokensOnC + tokensOnC - 1, allRollingTotal[2].length - 1),
                         ];
                         const enemies = [
-                            allRollingTotal[0][finishingIndex[0]] -
-                                allRollingTotal[0][startingIndex[0]] +
-                                allEnemies[0][startingIndex[0]],
+                            finishingIndex[0] < startingIndex[0]
+                                ? 0
+                                : allRollingTotal[0][finishingIndex[0]] -
+                                  allRollingTotal[0][startingIndex[0]] +
+                                  allEnemies[0][startingIndex[0]],
 
-                            allRollingTotal[1][finishingIndex[1]] -
-                                allRollingTotal[1][startingIndex[1]] +
-                                allEnemies[1][startingIndex[1]],
+                            finishingIndex[1] < startingIndex[1]
+                                ? 0
+                                : allRollingTotal[1][finishingIndex[1]] -
+                                  allRollingTotal[1][startingIndex[1]] +
+                                  allEnemies[1][startingIndex[1]],
 
-                            allRollingTotal[2][finishingIndex[2]] -
-                                allRollingTotal[2][startingIndex[2]] +
-                                allEnemies[2][startingIndex[2]],
+                            finishingIndex[2] < startingIndex[2]
+                                ? 0
+                                : allRollingTotal[2][finishingIndex[2]] -
+                                  allRollingTotal[2][startingIndex[2]] +
+                                  allEnemies[2][startingIndex[2]],
                         ];
                         const totalEnemies = enemies[0] + enemies[1] + enemies[2];
 
