@@ -147,13 +147,13 @@ export const learnSubMenu: MenuItemTP[] = [
         menuItemById['learnEquipment'],
         menuItemById['campaigns'],
         menuItemById['hses'],
+        menuItemById['onslaught'],
     ]),
     menuItemById['guides'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildApi'],
     menuItemById['guildInsights'],
-    menuItemById['onslaught'],
 ];
 
 export const miscMenuItems: MenuItemTP[] = [menuItemById['home'], menuItemById['contacts'], menuItemById['ty']];
