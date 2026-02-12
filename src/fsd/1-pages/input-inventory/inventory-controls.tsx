@@ -18,7 +18,7 @@ const InventoryControlsFn: React.FC<Props> = ({ resetUpgrades, nameFilter, setNa
     const [nameFilterRaw, setNameFilterRaw] = useState<string>('');
 
     return (
-        <div className="flex items-center justify-center flex-wrap gap-5 m-5">
+        <div className="m-5 flex flex-wrap items-center justify-center gap-5">
             <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                 <InputLabel htmlFor="quick-filter-input">Quick Filter</InputLabel>
                 <OutlinedInput

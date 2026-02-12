@@ -18,23 +18,23 @@ export const LeTokenMilestoneCardGrid = ({ milestonesToList, emptyMessage, isMis
         : 'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600';
 
     return milestonesToList.length === 0 ? (
-        <div className="text-center py-4 text-gray-500 dark:text-gray-400">{emptyMessage}</div>
+        <div className="py-4 text-center text-gray-500 dark:text-gray-400">{emptyMessage}</div>
     ) : (
-        <div className="flex flex-wrap gap-3 justify-center w-full">
+        <div className="flex w-full flex-wrap justify-center gap-3">
             {milestonesToList.map((milestone, index) => {
                 const isFinalMilestone =
                     milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1]?.points;
 
                 return (
                     <div key={index} className={`${baseCardClasses} ${variantClasses}`}>
-                        <div className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Points</div>
+                        <div className="text-xs font-semibold text-gray-500 uppercase dark:text-gray-400">Points</div>
                         <div
-                            className={`text-xl font-extrabold font-mono mb-2 ${isMissedVariant ? 'text-gray-500' : 'text-blue-600 dark:text-blue-400'}`}>
+                            className={`mb-2 font-mono text-xl font-extrabold ${isMissedVariant ? 'text-gray-500' : 'text-blue-600 dark:text-blue-400'}`}>
                             {milestone.points}
                         </div>
 
-                        <div className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Reward</div>
-                        <div className="flex justify-center items-center h-full text-lg font-bold">
+                        <div className="text-xs font-semibold text-gray-500 uppercase dark:text-gray-400">Reward</div>
+                        <div className="flex h-full items-center justify-center text-lg font-bold">
                             {isFinalMilestone ? (
                                 <span
                                     className={

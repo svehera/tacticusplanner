@@ -12,7 +12,7 @@ export const TraitImage = ({ trait, width, height }: { trait: Trait; width: numb
     return (
         <img
             loading={'lazy'}
-            className="pointer-events-none w-auto h-auto"
+            className="pointer-events-none h-auto w-auto"
             style={{ maxWidth: width || 25, maxHeight: height || 25 }}
             src={image}
             alt={traitString}

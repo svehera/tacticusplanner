@@ -15,14 +15,14 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
         <section>
             <article>
                 {showAlphabet && (
-                    <div className="flex gap-10 flex-wrap justify-center">
+                    <div className="flex flex-wrap justify-center gap-10">
                         <div>
                             {group.itemsAllCrafted.length > 0 && <h3>Basic</h3>}
-                            <div className="flex gap-5 flex-wrap justify-center">
+                            <div className="flex flex-wrap justify-center gap-5">
                                 {group.items.map(group => (
                                     <div
                                         key={group.letter}
-                                        className="flex items-start justify-center flex-wrap gap-2.5">
+                                        className="flex flex-wrap items-start justify-center gap-2.5">
                                         <div className="text-2xl font-bold">{group.letter}</div>
                                         {group.subItems.map(item => (
                                             <InventoryItem
@@ -39,11 +39,11 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
                         {group.itemsAllCrafted.length > 0 && (
                             <div>
                                 <h3>Crafted</h3>
-                                <div className="flex gap-5 flex-wrap justify-center">
+                                <div className="flex flex-wrap justify-center gap-5">
                                     {group.itemsCrafted.map(group => (
                                         <div
                                             key={group.letter}
-                                            className="flex items-start justify-center flex-wrap gap-2.5">
+                                            className="flex flex-wrap items-start justify-center gap-2.5">
                                             <div className="text-2xl font-bold">{group.letter}</div>
                                             {group.subItems.map(item => (
                                                 <InventoryItem
@@ -62,10 +62,10 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
                 )}
 
                 {!showAlphabet && (
-                    <div className="flex gap-10 flex-wrap justify-center">
+                    <div className="flex flex-wrap justify-center gap-10">
                         <div>
                             {group.itemsAllCrafted.length > 0 && <h3>Basic</h3>}
-                            <div className="flex gap-5 flex-wrap justify-center">
+                            <div className="flex flex-wrap justify-center gap-5">
                                 {group.itemsAll.map(item => (
                                     <InventoryItem
                                         key={item.snowprintId}
@@ -79,7 +79,7 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
                         {group.itemsAllCrafted.length > 0 && (
                             <div>
                                 <h3>Crafted</h3>
-                                <div className="flex gap-5 flex-wrap justify-center">
+                                <div className="flex flex-wrap justify-center gap-5">
                                     {group.itemsAllCrafted.map(item => (
                                         <InventoryItem
                                             key={item.snowprintId}

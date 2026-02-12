@@ -216,7 +216,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
         <Dialog open={true} onClose={cancel} fullWidth fullScreen={isMobile}>
             <DialogTitle>
                 Select team
-                <Typography className="flex-box my-2.5 mx-0">
+                <Typography className="flex-box mx-0 my-2.5">
                     <InfoIcon color="primary" />
                     <span>
                         Toggle between &ldquo;Core&ldquo; and &ldquo;Flex&ldquo; slot types by clicking on the slot type

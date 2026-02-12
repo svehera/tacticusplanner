@@ -119,7 +119,7 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
                 <button
                     ref={buttonRef}
                     onClick={toggleDropdown}
-                    className="p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
+                    className="size-8 rounded border-2 p-1 text-center text-sm font-bold md:size-10 md:p-1.5 md:text-base"
                     style={{
                         color: STATUS_COLORS[displayStatus],
                         borderColor: `${STATUS_COLORS[displayStatus]}20`,
@@ -133,7 +133,7 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
 
                 {showDropdown && (
                     <div
-                        className="absolute z-10 bg-white border border-gray-300 rounded shadow-lg dark:bg-gray-800 dark:border-gray-600"
+                        className="absolute z-10 rounded border border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-800"
                         style={
                             dropdownPosition === 'top'
                                 ? { bottom: '100%', marginBottom: '4px' }
@@ -143,7 +143,7 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
                             <button
                                 key={option.value}
                                 onClick={() => handleStatusClick(option.value)}
-                                className="flex items-center justify-center w-full px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
+                                className="flex w-full items-center justify-center px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
                                 style={{
                                     color: STATUS_COLORS[option.value],
                                 }}>

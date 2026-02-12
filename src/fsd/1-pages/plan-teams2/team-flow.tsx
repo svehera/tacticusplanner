@@ -23,15 +23,15 @@ export const TeamFlow: React.FC<Props> = ({ chars, mows, flexIndex, onCharClicke
     const flex = chars.slice(flexIndex ?? chars.length);
 
     return (
-        <div className="w-full p-3 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-lg bg-slate-50/50 dark:bg-black/10">
+        <div className="w-full rounded-lg border-2 border-dashed border-slate-200 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-black/10">
             <div className="flex flex-nowrap">
                 {core.length > 0 && (
-                    <div className="flex flex-wrap items-start flex-1 gap-2 flex-auto flex-min-w-[120px]">
+                    <div className="flex-min-w-[120px] flex flex-1 flex-auto flex-wrap items-start gap-2">
                         {core.map(char => (
                             <div
                                 key={char.snowprintId}
                                 onClick={() => onCharClicked(char)}
-                                className="cursor-pointer transition-transform duration-100 active:scale-95 hover:brightness-110">
+                                className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
                                 <RosterSnapshotCharacter
                                     showMythicShards={RosterSnapshotShowVariableSettings.Never}
                                     showShards={RosterSnapshotShowVariableSettings.Never}
@@ -46,13 +46,13 @@ export const TeamFlow: React.FC<Props> = ({ chars, mows, flexIndex, onCharClicke
 
                 {flex.length > 0 && (
                     <>
-                        {core.length > 0 && <div className="self-stretch w-px bg-slate-300 dark:bg-slate-700 mx-4" />}
-                        <div className="flex flex-wrap items-start flex-1 gap-2 flex-auto flex-min-w-[120px]">
+                        {core.length > 0 && <div className="mx-4 w-px self-stretch bg-slate-300 dark:bg-slate-700" />}
+                        <div className="flex-min-w-[120px] flex flex-1 flex-auto flex-wrap items-start gap-2">
                             {flex.map(char => (
                                 <div
                                     key={char.snowprintId}
                                     onClick={() => onCharClicked(char)}
-                                    className="cursor-pointer transition-transform duration-100 active:scale-95 hover:brightness-110">
+                                    className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
                                     <RosterSnapshotCharacter
                                         showMythicShards={RosterSnapshotShowVariableSettings.Never}
                                         showShards={RosterSnapshotShowVariableSettings.Never}
@@ -69,14 +69,14 @@ export const TeamFlow: React.FC<Props> = ({ chars, mows, flexIndex, onCharClicke
                 {mows.length > 0 && (
                     <>
                         {(core.length > 0 || flex.length > 0) && (
-                            <div className="self-stretch w-px bg-slate-300 dark:bg-slate-700 mx-4" />
+                            <div className="mx-4 w-px self-stretch bg-slate-300 dark:bg-slate-700" />
                         )}
-                        <div className="flex flex-wrap items-start flex-1 gap-2 flex-auto flex-min-w-[120px]">
+                        <div className="flex-min-w-[120px] flex flex-1 flex-auto flex-wrap items-start gap-2">
                             {mows.map(mow => (
                                 <div
                                     key={mow.snowprintId}
                                     onClick={() => onMowClicked(mow)}
-                                    className="cursor-pointer transition-transform duration-100 active:scale-95 hover:brightness-110">
+                                    className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
                                     <RosterSnapshotCharacter
                                         showMythicShards={RosterSnapshotShowVariableSettings.Never}
                                         showShards={RosterSnapshotShowVariableSettings.Never}

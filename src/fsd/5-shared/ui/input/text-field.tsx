@@ -63,7 +63,7 @@ const TextField = ({
                         isInvalid={!!errorMessage}
                         data-loading={isPending ? 'true' : undefined}>
                         {prefix && typeof prefix === 'string' ? (
-                            <span className="ml-2 text-muted-fg">{prefix}</span>
+                            <span className="text-muted-fg ml-2">{prefix}</span>
                         ) : (
                             prefix
                         )}
@@ -73,14 +73,14 @@ const TextField = ({
                                 type="button"
                                 aria-label="Toggle password visibility"
                                 onPress={handleTogglePasswordVisibility}
-                                className="relative mr-1 grid shrink-0 place-content-center rounded-sm border-transparent outline-hidden data-focus-visible:*:data-[slot=icon]:text-primary *:data-[slot=icon]:text-muted-fg">
+                                className="data-focus-visible:*:data-[slot=icon]:text-primary *:data-[slot=icon]:text-muted-fg relative mr-1 grid shrink-0 place-content-center rounded-sm border-transparent outline-hidden">
                                 {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
                             </ButtonPrimitive>
                         ) : isPending ? (
                             <Loader variant="spin" />
                         ) : suffix ? (
                             typeof suffix === 'string' ? (
-                                <span className="mr-2 text-muted-fg">{suffix}</span>
+                                <span className="text-muted-fg mr-2">{suffix}</span>
                             ) : (
                                 suffix
                             )

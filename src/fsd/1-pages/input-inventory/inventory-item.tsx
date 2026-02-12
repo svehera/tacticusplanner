@@ -43,8 +43,8 @@ const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
     }, [data.quantity]);
 
     return (
-        <div key={data.snowprintId} className="flex flex-col max-w-[60px]">
-            <div className="py-0 px-[5px]">
+        <div key={data.snowprintId} className="flex max-w-[60px] flex-col">
+            <div className="px-[5px] py-0">
                 <UpgradeImage
                     material={data.material}
                     iconPath={data.iconPath}

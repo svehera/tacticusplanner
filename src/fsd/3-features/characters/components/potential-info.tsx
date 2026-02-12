@@ -77,7 +77,7 @@ export const PotentialInfo: React.FC = () => {
                 <DialogTitle>Character potential</DialogTitle>
                 <DialogContent>
                     <p>The potential(0-100) is calculated based on specific rarity cap:</p>
-                    <ul className="ps-5 list-none">
+                    <ul className="list-none ps-5">
                         {rarities.map(rarity => (
                             <li key={rarity}>
                                 <FlexBox gap={5}>

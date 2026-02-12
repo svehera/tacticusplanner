@@ -133,7 +133,7 @@ export const LeTokenTable: React.FC<Props> = ({
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-end p-2 bg-gray-200 border border-gray-300 rounded-lg dark:bg-gray-800/50 dark:border-gray-700">
+            <div className="flex items-center justify-end rounded-lg border border-gray-300 bg-gray-200 p-2 dark:border-gray-700 dark:bg-gray-800/50">
                 <FormControlLabel
                     control={
                         <Switch
@@ -159,33 +159,33 @@ export const LeTokenTable: React.FC<Props> = ({
             </div>
 
             {isTableView ? (
-                <div className="overflow-x-auto border border-gray-300 shadow-2xl rounded-xl dark:border-gray-700/50">
+                <div className="overflow-x-auto rounded-xl border border-gray-300 shadow-2xl dark:border-gray-700/50">
                     <table
                         key="tokensTable"
-                        className="min-w-full text-sm text-gray-800 bg-white border-separate table-auto border-spacing-0 dark:bg-gray-900 dark:text-gray-200">
+                        className="min-w-full table-auto border-separate border-spacing-0 bg-white text-sm text-gray-800 dark:bg-gray-900 dark:text-gray-200">
                         <thead>
-                            <tr className="sticky top-0 text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-100">
-                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">Token</th>
-                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">
+                            <tr className="sticky top-0 bg-gray-300 text-gray-800 uppercase dark:bg-gray-700 dark:text-gray-100">
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Token</th>
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
                                     Milestone
                                     <br />
                                     Achieved
                                 </th>
-                                <th className="px-3 py-3 font-semibold text-left whitespace-nowrap">Track</th>
-                                <th className="px-3 py-3 font-semibold text-right whitespace-nowrap">Battle</th>
-                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">
+                                <th className="px-3 py-3 text-left font-semibold whitespace-nowrap">Track</th>
+                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">Battle</th>
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
                                     Restrictions
                                     <br />
                                     Cleared
                                 </th>
-                                <th className="px-3 py-3 font-semibold text-right whitespace-nowrap">
+                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">
                                     Incremental
                                     <br />
                                     Points
                                 </th>
-                                <th className="px-3 py-3 font-semibold text-right whitespace-nowrap">Total Points</th>
-                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">Team</th>
-                                <th className="px-3 py-3 font-semibold text-center whitespace-nowrap">Outcome</th>
+                                <th className="px-3 py-3 text-right font-semibold whitespace-nowrap">Total Points</th>
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Team</th>
+                                <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Outcome</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -193,9 +193,9 @@ export const LeTokenTable: React.FC<Props> = ({
                                 return (
                                     <tr
                                         key={index}
-                                        className={`${getRowClassName(index)} border-t border-gray-300 dark:border-gray-700/50 hover:bg-gray-300 dark:hover:bg-gray-700 transition duration-150 ease-in-out`}>
-                                        <td className="px-3 py-2 font-medium text-center">{index + 1}</td>
-                                        <td className="flex items-center justify-center h-full px-3 py-2">
+                                        className={`${getRowClassName(index)} border-t border-gray-300 transition duration-150 ease-in-out hover:bg-gray-300 dark:border-gray-700/50 dark:hover:bg-gray-700`}>
+                                        <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
+                                        <td className="flex h-full items-center justify-center px-3 py-2">
                                             {token.achievedStarMilestone ? (
                                                 <div className="flex flex-col items-center justify-center gap-2">
                                                     <StarsIcon stars={token.stars} />
@@ -206,8 +206,8 @@ export const LeTokenTable: React.FC<Props> = ({
                                             )}
                                         </td>
                                         <td className="px-3 py-2">{token.track}</td>
-                                        <td className="px-3 py-2 font-mono text-right">{token.battleNumber + 1}</td>
-                                        <td className="flex items-center justify-center h-full px-3 py-2">
+                                        <td className="px-3 py-2 text-right font-mono">{token.battleNumber + 1}</td>
+                                        <td className="flex h-full items-center justify-center px-3 py-2">
                                             {renderRestrictions(
                                                 token.restricts,
                                                 tracksProgress,
@@ -216,8 +216,8 @@ export const LeTokenTable: React.FC<Props> = ({
                                                 25
                                             )}
                                         </td>
-                                        <td className="px-3 py-2 font-mono text-right">{token.incrementalPoints}</td>
-                                        <td className="px-3 py-2 font-mono font-bold text-right text-blue-400">
+                                        <td className="px-3 py-2 text-right font-mono">{token.incrementalPoints}</td>
+                                        <td className="px-3 py-2 text-right font-mono font-bold text-blue-400">
                                             {token.totalPoints}
                                         </td>
                                         <td className="px-3 py-2 text-center">{renderTeam(token.team, 25)}</td>
@@ -249,7 +249,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                                         onMaybeBattle(token);
                                                     }}
                                                     style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}
-                                                    className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                    className="text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50"
                                                     title="Potentially will not succeed with this token.">
                                                     {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
                                                 </button>
@@ -258,7 +258,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                                         onStopBattle(token);
                                                     }}
                                                     style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}
-                                                    className="text-xs font-semibold uppercase transition-colors duration-500 disabled:opacity-50 focus:outline-none"
+                                                    className="text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50"
                                                     title="Do not attempt this token.">
                                                     {STATUS_LABELS[RequirementStatus.StopHere]}
                                                 </button>
@@ -307,7 +307,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                     </div>
                                 ) : (
                                     isVisible && (
-                                        <div className="w-full p-4 text-center text-gray-600 border border-gray-300 dark:text-gray-500 dark:border-gray-700 rounded-xl">
+                                        <div className="w-full rounded-xl border border-gray-300 p-4 text-center text-gray-600 dark:border-gray-700 dark:text-gray-500">
                                             Battle data not available.
                                         </div>
                                     )

@@ -228,9 +228,9 @@ export const LreTeamsTable: React.FC<Props> = ({
         <div className="size-full overflow-auto">
             <div className="flex-box between">
                 <div className="flex-box gap10">
-                    <span className="font-bold text-base">{track.name}</span>
+                    <span className="text-base font-bold">{track.name}</span>
                     <div className="flex-box gap5">
-                        <span className="italic text-base"> vs {track.enemies.label}</span>
+                        <span className="text-base italic"> vs {track.enemies.label}</span>
                         <a href={track.enemies.link} target={'_blank'} rel="noreferrer">
                             <InfoIcon color={'primary'} />
                         </a>

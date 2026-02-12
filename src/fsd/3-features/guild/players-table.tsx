@@ -90,7 +90,7 @@ export const PlayersTable = ({
     ]);
 
     return (
-        <div className="ag-theme-material w-full h-[350px] [&_.ag-header-cell-label]:justify-center">
+        <div className="ag-theme-material h-[350px] w-full [&_.ag-header-cell-label]:justify-center">
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}

@@ -527,7 +527,7 @@ export const LearnCharacters = () => {
                 </>
             )}
 
-            <div className="flex gap-[3px] justify-left">
+            <div className="justify-left flex gap-[3px]">
                 <div style={{ width: 200 }}>
                     <RaritySelect
                         label={'Target Rarity'}

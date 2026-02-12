@@ -71,7 +71,7 @@ export const Teams = () => {
 
     return (
         <>
-            <div className="flex gap-3 items-center">
+            <div className="flex items-center gap-3">
                 <Button
                     size="small"
                     variant={'contained'}

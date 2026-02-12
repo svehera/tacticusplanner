@@ -266,7 +266,7 @@ export const GuildWarZones = () => {
                     </>
                 )}
             </FlexBox>
-            <div className="gap-x-[5px] gap-y-[10px] grid grid-flow-row justify-center mt-[10px] grid-rows-[repeat(5,_1fr)] grid-cols-[repeat(3,_minmax(180px,_400px))] max-[800]:grid-cols-[repeat(3,_minmax(33%,_400px))]">
+            <div className="mt-[10px] grid grid-flow-row grid-cols-[repeat(3,_minmax(180px,_400px))] grid-rows-[repeat(5,_1fr)] justify-center gap-x-[5px] gap-y-[10px] max-[800]:grid-cols-[repeat(3,_minmax(33%,_400px))]">
                 {activeLayout.zones.map((zone, index) => (
                     <ZoneCard
                         key={index}

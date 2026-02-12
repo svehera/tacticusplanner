@@ -2,9 +2,7 @@
 import type onslaughtData from '@/data/onslaught/data.generated.json';
 
 type OnslaughtData = typeof onslaughtData;
-export type OnslaughtBadgeAlliance = OnslaughtData[keyof OnslaughtData]['badgeAlliance'];
-type OnslaughtSectors = OnslaughtData[keyof OnslaughtData]['sectors'];
-export type OnslaughtSector = OnslaughtSectors[keyof OnslaughtSectors];
-
-export type OnslaughtKillzones = Omit<OnslaughtSector, 'minHeroPower'>;
-export type OnslaughtKillzone = OnslaughtKillzones[keyof OnslaughtKillzones];
+type OnslaughtTrack = OnslaughtData[number];
+export type OnslaughtBadgeAlliance = OnslaughtTrack['badgeAlliance'];
+export type OnslaughtSector = OnslaughtTrack['sectors'][number];
+export type OnslaughtKillzone = OnslaughtSector['killzones'][number];

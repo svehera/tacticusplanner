@@ -28,7 +28,7 @@ export const RaidsDayView: React.FC<Props> = ({ day, title }) => {
                 }
             />
             <CardContent>
-                <ul className="p-0 list-none">
+                <ul className="list-none p-0">
                     {day.raids.map((raid, index) => {
                         return (
                             <li key={raid.id + index}>

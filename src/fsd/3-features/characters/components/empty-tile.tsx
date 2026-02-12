@@ -17,7 +17,7 @@ interface Props {
 export const EmptyTile: React.FC<Props> = ({ onClick, isMow = false }) => {
     return (
         <div
-            className="flex flex-col items-center min-w-[75px]"
+            className="flex min-w-[75px] flex-col items-center"
             style={{
                 cursor: onClick ? 'pointer' : undefined,
             }}
@@ -26,19 +26,19 @@ export const EmptyTile: React.FC<Props> = ({ onClick, isMow = false }) => {
             <div>
                 <CharacterPortraitImage icon={'portraits/unset.webp'} />
 
-                <div className="relative top-[-7px] flex items-center justify-between z-10 [visibility:hidden]">
-                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                <div className="[visibility:hidden] relative top-[-7px] z-10 flex items-center justify-between">
+                    <div className="relative top-[-15px] flex items-center justify-center border border-solid border-[gold] bg-[#012a41] text-xs text-[white]">
                         1
                     </div>
-                    <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                    <div className="relative top-[-15px] flex items-center justify-center border border-solid border-[gold] bg-[#012a41] text-xs text-[white]">
                         1
                     </div>
                 </div>
-                <div className="relative top-[-15px] flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold]">
+                <div className="relative top-[-15px] flex items-center justify-center border border-solid border-[gold] bg-[#012a41] text-xs text-[white]">
                     1
                 </div>
             </div>
-            <div className="min-h-[30px] flex items-center mt-[-15px] justify-center">
+            <div className="mt-[-15px] flex min-h-[30px] items-center justify-center">
                 {isMow ? <MiscIcon icon={'mow'} width={22} height={25} /> : <RankIcon rank={Rank.Stone1} />}
             </div>
         </div>

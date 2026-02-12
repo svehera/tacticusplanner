@@ -55,12 +55,12 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
     const characterIconHeight = 28;
 
     return (
-        <div className="w-full max-w-[400px] bg-gray-900 rounded-md border border-gray-700 p-3 flex flex-col gap-3 shadow-lg">
+        <div className="flex w-full max-w-[400px] flex-col gap-3 rounded-md border border-gray-700 bg-gray-900 p-3 shadow-lg">
             <div className="grid grid-cols-[auto_1fr] gap-3">
                 <div className="flex flex-col items-center justify-start pt-1">
                     {rewardIcon()}
 
-                    <span className={`font-bold mt-1 text-sm ${isSufficient ? 'text-green-400' : 'text-red-400'}`}>
+                    <span className={`mt-1 text-sm font-bold ${isSufficient ? 'text-green-400' : 'text-red-400'}`}>
                         {currentQuantity}/{desiredQuantity}
                     </span>
 
@@ -70,14 +70,14 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
                 </div>
 
                 <div className="flex flex-col">
-                    <h4 className="text-xs font-semibold uppercase text-gray-400 mb-1 border-b border-gray-700 pb-1">
+                    <h4 className="mb-1 border-b border-gray-700 pb-1 text-xs font-semibold text-gray-400 uppercase">
                         Upgrading Characters
                     </h4>
-                    <div className="flex flex-wrap gap-1 max-h-[84px] overflow-y-auto pr-1">
+                    <div className="flex max-h-[84px] flex-wrap gap-1 overflow-y-auto pr-1">
                         {relatedCharacterSnowprintIds.map(id => (
                             <div
                                 key={id}
-                                className="w-[28px] h-[28px] rounded-full overflow-hidden border border-gray-600"
+                                className="h-[28px] w-[28px] overflow-hidden rounded-full border border-gray-600"
                                 title={
                                     CharactersService.getUnit(id)?.name ??
                                     mows2Data.mows.find(m => id === m.name)?.name ??
@@ -98,8 +98,8 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
                 </div>
             </div>
 
-            <div className="pt-2 border-t border-gray-800">
-                <h4 className="text-xs font-semibold uppercase text-gray-400 mb-1">Suggested Raids</h4>
+            <div className="border-t border-gray-800 pt-2">
+                <h4 className="mb-1 text-xs font-semibold text-gray-400 uppercase">Suggested Raids</h4>
                 <div className="flex flex-wrap gap-2">
                     {locations
                         .filter(x => x.isSuggested && x.isUnlocked)

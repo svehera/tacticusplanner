@@ -223,11 +223,11 @@
     }
 
     h2 {
-        @apply text-2xl font-bold mb-2 mt-2;
+        @apply mt-2 mb-2 text-2xl font-bold;
     }
 
     h3 {
-        @apply text-lg font-bold mb-2 mt-2;
+        @apply mt-2 mb-2 text-lg font-bold;
     }
 
     /*!*Workaround for tailwind default styles reset. Need to do this partially to not break everything*!*/

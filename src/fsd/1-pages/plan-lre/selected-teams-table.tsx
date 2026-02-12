@@ -114,7 +114,7 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
 
     return (
         <div
-            className="ag-theme-material auto-teams min-h-[230px] w-full border-2 border-black border-solid"
+            className="ag-theme-material auto-teams min-h-[230px] w-full border-2 border-solid border-black"
             style={{ height: rows.length * 35, minWidth: isMobile ? '750px' : '' }}>
             <AgGridReact
                 modules={[AllCommunityModule]}
