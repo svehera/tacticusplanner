@@ -4,7 +4,7 @@ import { HomeScreenEventPlannerService } from './home-screen-event-planner.servi
 import { OnslaughtData, OnslaughtTrackId } from './models';
 
 const sampleData = {
-    Imperial: {
+    [OnslaughtTrackId.Imperial]: {
         sectors: [
             {
                 killzones: [{ totalEnemyCount: 3 }, { totalEnemyCount: 5 }],
@@ -17,7 +17,7 @@ const sampleData = {
             },
         ],
     },
-    Xenos: {
+    [OnslaughtTrackId.Xenos]: {
         sectors: [
             {
                 killzones: [{ totalEnemyCount: 3 }, { totalEnemyCount: 5 }],
@@ -30,7 +30,7 @@ const sampleData = {
             },
         ],
     },
-    Chaos: {
+    [OnslaughtTrackId.Chaos]: {
         sectors: [
             {
                 killzones: [{ totalEnemyCount: 3 }, { totalEnemyCount: 5 }],

@@ -10,6 +10,18 @@ import {
 import { OnslaughtKillzone } from './types';
 
 export class HomeScreenEventPlannerService {
+    /**
+     * @returns a token usage plan to maximize enemies killed in onslaught during a home-screen event. Technically
+     * it can be used whenever, but the current need is for home-screen events.
+     *
+     * @param onslaughtData the data to use for calculations
+     * @param imperial the current battle key for the imperial track
+     * @param xenos the current battle key for the xenos track
+     * @param chaos the current battle key for the chaos track
+     * @param chosenTracks a record of which tracks the user has chosen to use tokens on
+     * @param preEventTokens how many tokens the user will use before the event starts
+     * @param duringEventTokens how many tokens the user will use during the event
+     */
     public static calculateHsePlan(
         onslaughtData: OnslaughtData,
         imperial: OnslaughtBattleKey,
@@ -61,6 +73,12 @@ export class HomeScreenEventPlannerService {
         return this.calculateTripleTrack(onslaughtData, imperial, xenos, chaos, preEventTokens, duringEventTokens);
     }
 
+    /**
+     * @returns the optimal token usage plan if the user is only using tokens on one track. This is a simpler calculation than the
+     * double and triple track cases, as we just need to find the best contiguous segment of battles to use tokens on. In this case,
+     * we will simply recommend to the user the optimal number of tokens to use on their chosen track pre-event, and if they have
+     * excess tokens before the event, they should use them on other tracks.
+     */
     public static calculateSingleTrack(
         onslaughtData: OnslaughtData,
         imperial: OnslaughtBattleKey,
@@ -137,6 +155,13 @@ export class HomeScreenEventPlannerService {
         };
     }
 
+    /**
+     * Calculates the optimal token usage plan if the user is using tokens on two tracks. This is a more complex calculation
+     * than the single track case, as we need to consider the interaction between the two tracks and find the optimal distribution
+     * of tokens between them.
+     * @returns The optimal number of tokens to use on their chosen tracks before the event starts, and during the event. Leftover
+     * pre-event tokens are allocated to the remaining track.
+     */
     public static calculateDoubleTrack(
         onslaughtData: OnslaughtData,
         imperial: OnslaughtBattleKey,
@@ -261,6 +286,12 @@ export class HomeScreenEventPlannerService {
         };
     }
 
+    /**
+     * @returns the optimal number of tokens to use on each of the three tracks before the event starts, and during the event.
+     *
+     * This is an N^4 algorithm using dynamic programming. The memory footprint is small but after about 130-150 tokens, this will start
+     * to grind.
+     */
     public static calculateTripleTrack(
         onslaughtData: OnslaughtData,
         imperial: OnslaughtBattleKey,
@@ -359,6 +390,7 @@ export class HomeScreenEventPlannerService {
         };
     }
 
+    /** @returns the next battle key after the supplied one. Or undefined if there are no more battles. */
     public static getBattleAfter(
         onslaughtData: OnslaughtData,
         track: OnslaughtTrackId,
@@ -366,22 +398,31 @@ export class HomeScreenEventPlannerService {
         zone: OnslaughtZoneKey
     ): OnslaughtBattleKey | undefined {
         const trackData = onslaughtData[track];
-        if (!trackData) return undefined;
+        if (!trackData) {
+            console.error('Invalid track', track);
+            return undefined;
+        }
         if (zone + 1 < trackData.sectors[sector].killzones.length) {
             return { track, sector, zone: zone + 1 };
         }
         if (sector + 1 < trackData.sectors.length) {
             return { track, sector: sector + 1, zone: 0 };
         }
+        console.error('No more battles after', { track, sector, zone });
         return undefined;
     }
 
+    /**
+     * @returns the total number of in-event enemies killed for the specified track, start at
+     * sector+zone, using the specified number of pre-event tokens and the specified number of
+     * in-event tokens.
+     */
     public static computeTotalEnemies(
+        onslaughtData: OnslaughtData,
         track: OnslaughtTrackId,
         sector: number,
         zone: number,
-        tokens: HsePlan,
-        onslaughtData: OnslaughtData
+        tokens: HsePlan
     ): number {
         const preEventTokens = tokens.preEventTokens[track] ?? 0;
         const duringEventTokens = tokens.eventTokens[track] ?? 0;

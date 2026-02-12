@@ -16,6 +16,7 @@ export const Onslaught = () => {
     const trackData = onslaughtData.find(track => track !== undefined && track.alliance === activeTrack);
     useLayoutEffect(() => {
         if (trackData) return; // if the track is valid, no need to update the URL
+        if (activeTrack === 'HSE') return; // if the user has selected the HSE planner, no need to update the URL
         setQueryParams(new URLSearchParams({ track: 'HSE' }));
     }, [queryParams, setQueryParams, trackData]);
 

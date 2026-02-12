@@ -83,6 +83,10 @@ export const HomeScreenEventPlanner = () => {
     }, [selections, preEventTokens, duringEventTokens]);
     return (
         <div className="flex flex-col gap-6 bg-gray-50 p-2 dark:bg-gray-900">
+            <div className="mb-4 rounded bg-red-100 p-2 text-sm text-red-600">
+                Onslaught progress is not currently provided by the Tacticus API, thus this information must be entered
+                manually.
+            </div>
             <section className="rounded-xl border border-stone-200 bg-stone-200 p-4 dark:border-stone-700 dark:bg-stone-800">
                 <h3 className="mb-3 text-xs font-bold tracking-wider text-stone-800 uppercase opacity-80 dark:text-stone-200">
                     Active Tracks
@@ -287,11 +291,11 @@ export const HomeScreenEventPlanner = () => {
                             <span className="text-sm font-medium">Enemies</span>
                             <span className="text-lg font-bold text-red-600">
                                 {HomeScreenEventPlannerService.computeTotalEnemies(
+                                    onslaughtData,
                                     OnslaughtTrackId.Imperial,
                                     selections[OnslaughtTrackId.Imperial].sector,
                                     selections[OnslaughtTrackId.Imperial].zone,
-                                    tokens,
-                                    onslaughtData
+                                    tokens
                                 )}
                             </span>
                         </div>
@@ -303,11 +307,11 @@ export const HomeScreenEventPlanner = () => {
                             <span className="text-sm font-medium">Enemies</span>
                             <span className="text-lg font-bold text-red-600">
                                 {HomeScreenEventPlannerService.computeTotalEnemies(
+                                    onslaughtData,
                                     OnslaughtTrackId.Xenos,
                                     selections[OnslaughtTrackId.Xenos].sector,
                                     selections[OnslaughtTrackId.Xenos].zone,
-                                    tokens,
-                                    onslaughtData
+                                    tokens
                                 )}
                             </span>
                         </div>
@@ -319,11 +323,11 @@ export const HomeScreenEventPlanner = () => {
                             <span className="text-sm font-medium">Enemies</span>
                             <span className="text-lg font-bold text-red-600">
                                 {HomeScreenEventPlannerService.computeTotalEnemies(
+                                    onslaughtData,
                                     OnslaughtTrackId.Chaos,
                                     selections[OnslaughtTrackId.Chaos].sector,
                                     selections[OnslaughtTrackId.Chaos].zone,
-                                    tokens,
-                                    onslaughtData
+                                    tokens
                                 )}
                             </span>
                         </div>
