@@ -113,9 +113,9 @@ export class HomeScreenEventPlannerService {
                 nextBattle.zone
             ] as OnslaughtKillzone;
             if (!zoneData) break;
+            enemies.push(zoneData.totalEnemyCount);
             nextBattle = this.getBattleAfter(onslaughtData, nextBattle.track, nextBattle.sector, nextBattle.zone);
             if (!nextBattle) break;
-            enemies.push(zoneData.totalEnemyCount);
             rollingTotal.push(enemies[i] + (rollingTotal[i - 1] || 0));
         }
 
