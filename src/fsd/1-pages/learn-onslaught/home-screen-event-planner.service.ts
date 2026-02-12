@@ -293,9 +293,6 @@ export class HomeScreenEventPlannerService {
             }
         }
 
-        console.log('All Enemies', allEnemies);
-        console.log('All Rolling Total', allRollingTotal);
-
         let bestStartingIndex: number[] = [0, 0, 0];
         let bestEndingIndex: number[] = [-1, -1, -1];
         let bestEnemies = 0;
@@ -339,15 +336,6 @@ export class HomeScreenEventPlannerService {
                 }
             }
         }
-
-        console.log(
-            'bestStartingIndex',
-            bestStartingIndex,
-            'bestEndingIndex',
-            bestEndingIndex,
-            'bestEnemies',
-            bestEnemies
-        );
 
         const preEventTokens: OnslaughtTokens = {
             [OnslaughtTrackId.Imperial]: 0,
