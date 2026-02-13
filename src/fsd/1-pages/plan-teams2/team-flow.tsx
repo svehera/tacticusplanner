@@ -32,7 +32,7 @@ export const TeamFlow: React.FC<Props> = ({
 
     return (
         <div className="w-full rounded-lg border-2 border-dashed border-slate-200 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-black/10">
-            <div className="flex-min-w-[120px] flex flex-1 flex-auto flex-wrap items-start gap-2">
+            <div className="flex min-w-[120px] flex-1 flex-auto flex-wrap items-start gap-2">
                 {core.map(char => (
                     <div
                         key={char.snowprintId}

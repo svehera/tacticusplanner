@@ -279,8 +279,16 @@ export const WarOffense2 = () => {
                                 </Button>
                             </div>
                             <TeamFlow
-                                chars={team.chars.map(charId => characters.find(char => char.snowprintId === charId)!)}
-                                mows={team.mows?.map(mowId => mows.find(mow => mow.snowprintId === mowId)!) ?? []}
+                                chars={
+                                    team.chars
+                                        .map(charId => characters.find(char => char.snowprintId === charId))
+                                        .filter(c => c !== undefined) as ICharacter2[]
+                                }
+                                mows={
+                                    (team.mows
+                                        ?.map(mowId => mows.find(mow => mow.snowprintId === mowId))
+                                        .filter(m => m !== undefined) as IMow2[]) ?? []
+                                }
                                 flexIndex={team.flexIndex}
                                 disabledUnits={[...deployedCharacters, ...deployedMows]}
                                 onCharClicked={stageChar}
@@ -344,8 +352,16 @@ export const WarOffense2 = () => {
                     {undeployableTeams.map((team, index) => (
                         <div key={index} className="mb-2 flex items-center">
                             <TeamFlow
-                                chars={team.chars.map(charId => characters.find(char => char.snowprintId === charId)!)}
-                                mows={team.mows?.map(mowId => mows.find(mow => mow.snowprintId === mowId)!) ?? []}
+                                chars={
+                                    team.chars
+                                        .map(charId => characters.find(char => char.snowprintId === charId))
+                                        .filter(c => c !== undefined) as ICharacter2[]
+                                }
+                                mows={
+                                    (team.mows
+                                        ?.map(mowId => mows.find(mow => mow.snowprintId === mowId))
+                                        .filter(m => m !== undefined) as IMow2[]) ?? []
+                                }
                                 flexIndex={team.flexIndex}
                                 disabledUnits={[...deployedCharacters, ...deployedMows]}
                                 onCharClicked={stageChar}
