@@ -163,6 +163,7 @@ interface Props {
     charData?: ICharacterData;
     mow?: ISnapshotMachineOfWar;
     mowData?: IMowStatic2;
+    isDisabled?: boolean;
 }
 
 export const RosterSnapshotCharacter: React.FC<Props> = ({
@@ -174,6 +175,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
     charData,
     mow,
     mowData,
+    isDisabled,
 }) => {
     const charIcon = getImageUrl(charData?.icon ?? mowData?.icon ?? 'default-character-icon.png');
     const frameIcon = tacticusIcons[getFrame(mow !== undefined, char?.rarity ?? mow?.rarity ?? 0)]?.file || '';
@@ -220,7 +222,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
                     <img
                         loading="lazy"
                         className={`pointer-events-none absolute top-[17px] left-[3px] z-[1] ${
-                            isLocked ? 'grayscale filter' : ''
+                            isLocked || isDisabled ? 'grayscale filter' : ''
                         }`}
                         src={charIcon}
                         width={90}

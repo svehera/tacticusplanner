@@ -93,7 +93,7 @@ export const ManageTeams = () => {
 
     useEffect(() => {
         let nonRaidModesEnabled = true;
-        if (selectedChars.length > 5) {
+        if (selectedChars.length > 5 && (flexIndex ?? selectedChars.length) > 5) {
             const MESSAGE =
                 'A team can have a maximum of 5 characters (only Guild Raid Teams can have more than five characters).';
             setWarDisallowedMessage(MESSAGE);
