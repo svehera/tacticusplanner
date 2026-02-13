@@ -107,13 +107,13 @@ export const WarOffense2 = () => {
 
     const stageTeam = (team: ITeam2) => {
         for (const charId of team.chars) {
-            if (!stagedChars.includes(charId)) {
+            if (!stagedChars.includes(charId) && !deployableCharacters.some(c => c.snowprintId === charId)) {
                 setStagedChars(prev => [...prev, charId]);
             }
         }
 
         for (const mowId of team.mows ?? []) {
-            if (!stagedMows.includes(mowId)) {
+            if (!stagedMows.includes(mowId) && !deployableMows.some(m => m.snowprintId === mowId)) {
                 setStagedMows(prev => [...prev, mowId]);
             }
         }
@@ -224,8 +224,16 @@ export const WarOffense2 = () => {
                 <h2 className="text-lg font-semibold">To Be Deployed</h2>
                 <div className="flex flex-col gap-2">
                     <TeamFlow
-                        chars={stagedChars.map(charId => characters.find(char => char.snowprintId === charId)!)}
-                        mows={stagedMows.map(mowId => mows.find(mow => mow.snowprintId === mowId)!)}
+                        chars={
+                            stagedChars
+                                .map(charId => characters.find(char => char.snowprintId === charId))
+                                .filter(c => c !== undefined) as ICharacter2[]
+                        }
+                        mows={
+                            stagedMows
+                                .map(mowId => mows.find(mow => mow.snowprintId === mowId))
+                                .filter(m => m !== undefined) as IMow2[]
+                        }
                         onCharClicked={unstageChar}
                         onMowClicked={unstageMow}
                     />
@@ -314,12 +322,12 @@ export const WarOffense2 = () => {
                 <div className="mt-4">
                     <CharacterGrid
                         characters={characters.filter(char => deployedCharacters.includes(char.snowprintId!))}
-                        onCharacterSelect={charId => unstageChar(characters.find(char => char.snowprintId === charId)!)}
+                        onCharacterSelect={() => {}}
                         showHeader={true}
                     />
                     <MowGrid
                         mows={mows.filter(mow => deployedMows.includes(mow.snowprintId!))}
-                        onMowSelect={mowId => unstageMow(mows.find(mow => mow.snowprintId === mowId)!)}
+                        onMowSelect={() => {}}
                         showHeader={true}
                     />
                 </div>

@@ -27,16 +27,6 @@ export const TeamFlow: React.FC<Props> = ({
     onCharClicked,
     onMowClicked,
 }: Props) => {
-    console.log(
-        'Rendering TeamFlow with chars:',
-        chars,
-        'mows:',
-        mows,
-        'disabledUnits:',
-        disabledUnits,
-        'flexIndex:',
-        flexIndex
-    );
     const core = chars.slice(0, flexIndex ?? chars.length);
     const flex = chars.slice(flexIndex ?? chars.length);
 
