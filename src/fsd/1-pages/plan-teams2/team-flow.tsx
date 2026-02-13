@@ -12,22 +12,47 @@ import { Teams2Service } from './teams2.service';
 
 interface Props {
     chars: ICharacter2[];
-    flexIndex?: number;
     mows: IMow2[];
+    disabledUnits?: string[]; // List of character snowprintIds that should be shown as disabled
+    flexIndex?: number;
     onCharClicked: (char: ICharacter2) => void;
     onMowClicked: (mow: IMow2) => void;
 }
 
-export const TeamFlow: React.FC<Props> = ({ chars, mows, flexIndex, onCharClicked, onMowClicked }: Props) => {
+export const TeamFlow: React.FC<Props> = ({
+    chars,
+    mows,
+    disabledUnits,
+    flexIndex,
+    onCharClicked,
+    onMowClicked,
+}: Props) => {
     const core = chars.slice(0, flexIndex ?? chars.length);
     const flex = chars.slice(flexIndex ?? chars.length);
 
     return (
         <div className="w-full rounded-lg border-2 border-dashed border-slate-200 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-black/10">
-            <div className="flex flex-nowrap">
-                {core.length > 0 && (
-                    <div className="flex-min-w-[120px] flex flex-1 flex-auto flex-wrap items-start gap-2">
-                        {core.map(char => (
+            <div className="flex min-w-[120px] flex-1 flex-auto flex-wrap items-start gap-2">
+                {core.map(char => (
+                    <div
+                        key={char.snowprintId}
+                        onClick={() => onCharClicked(char)}
+                        className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
+                        <RosterSnapshotCharacter
+                            showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                            showShards={RosterSnapshotShowVariableSettings.Never}
+                            showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                            char={Teams2Service.convertCharacter(char!)}
+                            charData={char}
+                            isDisabled={disabledUnits?.includes(char.snowprintId!)}
+                        />
+                    </div>
+                ))}
+
+                {flex.length > 0 && (
+                    <>
+                        {core.length > 0 && <div className="mx-4 w-px self-stretch bg-slate-300 dark:bg-slate-700" />}
+                        {flex.map(char => (
                             <div
                                 key={char.snowprintId}
                                 onClick={() => onCharClicked(char)}
@@ -38,31 +63,10 @@ export const TeamFlow: React.FC<Props> = ({ chars, mows, flexIndex, onCharClicke
                                     showXpLevel={RosterSnapshotShowVariableSettings.Never}
                                     char={Teams2Service.convertCharacter(char!)}
                                     charData={char}
+                                    isDisabled={disabledUnits?.includes(char.snowprintId!)}
                                 />
                             </div>
                         ))}
-                    </div>
-                )}
-
-                {flex.length > 0 && (
-                    <>
-                        {core.length > 0 && <div className="mx-4 w-px self-stretch bg-slate-300 dark:bg-slate-700" />}
-                        <div className="flex-min-w-[120px] flex flex-1 flex-auto flex-wrap items-start gap-2">
-                            {flex.map(char => (
-                                <div
-                                    key={char.snowprintId}
-                                    onClick={() => onCharClicked(char)}
-                                    className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
-                                    <RosterSnapshotCharacter
-                                        showMythicShards={RosterSnapshotShowVariableSettings.Never}
-                                        showShards={RosterSnapshotShowVariableSettings.Never}
-                                        showXpLevel={RosterSnapshotShowVariableSettings.Never}
-                                        char={Teams2Service.convertCharacter(char!)}
-                                        charData={char}
-                                    />
-                                </div>
-                            ))}
-                        </div>
                     </>
                 )}
 
@@ -71,22 +75,21 @@ export const TeamFlow: React.FC<Props> = ({ chars, mows, flexIndex, onCharClicke
                         {(core.length > 0 || flex.length > 0) && (
                             <div className="mx-4 w-px self-stretch bg-slate-300 dark:bg-slate-700" />
                         )}
-                        <div className="flex-min-w-[120px] flex flex-1 flex-auto flex-wrap items-start gap-2">
-                            {mows.map(mow => (
-                                <div
-                                    key={mow.snowprintId}
-                                    onClick={() => onMowClicked(mow)}
-                                    className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
-                                    <RosterSnapshotCharacter
-                                        showMythicShards={RosterSnapshotShowVariableSettings.Never}
-                                        showShards={RosterSnapshotShowVariableSettings.Never}
-                                        showXpLevel={RosterSnapshotShowVariableSettings.Never}
-                                        mow={Teams2Service.convertMow(mow)}
-                                        mowData={mow}
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                        {mows.map(mow => (
+                            <div
+                                key={mow.snowprintId}
+                                onClick={() => onMowClicked(mow)}
+                                className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
+                                <RosterSnapshotCharacter
+                                    showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                                    showShards={RosterSnapshotShowVariableSettings.Never}
+                                    showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                                    mow={Teams2Service.convertMow(mow)}
+                                    mowData={mow}
+                                    isDisabled={disabledUnits?.includes(mow.snowprintId!)}
+                                />
+                            </div>
+                        ))}
                     </>
                 )}
             </div>
