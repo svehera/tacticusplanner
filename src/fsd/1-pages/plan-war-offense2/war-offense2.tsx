@@ -107,13 +107,13 @@ export const WarOffense2 = () => {
 
     const stageTeam = (team: ITeam2) => {
         for (const charId of team.chars) {
-            if (!stagedChars.includes(charId) && !deployableCharacters.some(c => c.snowprintId === charId)) {
+            if (!stagedChars.includes(charId) && !deployedCharacters.includes(charId)) {
                 setStagedChars(prev => [...prev, charId]);
             }
         }
 
         for (const mowId of team.mows ?? []) {
-            if (!stagedMows.includes(mowId) && !deployableMows.some(m => m.snowprintId === mowId)) {
+            if (!stagedMows.includes(mowId) && !deployedMows.includes(mowId)) {
                 setStagedMows(prev => [...prev, mowId]);
             }
         }
