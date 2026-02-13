@@ -28,7 +28,8 @@ import { AddTeamDialog } from './add-team-dialog';
 import { ITeam2 } from './models';
 import { TeamFlow } from './team-flow';
 
-const MAX_TEAMS = 5;
+// Somewhat arbitrary, but please consult with the planner maintainer before increasing.
+const MAX_TEAMS = 20;
 
 // Internal helper for metadata styling
 const MetadataChip = ({ icon, label, color }: { icon: React.ReactElement; label: string; color: any }) => (
