@@ -4,6 +4,7 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
 import { guildReducer } from 'src/reducers/guildReducer';
 import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
@@ -58,6 +59,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [goals, dispatchGoals] = React.useReducer(goalsReducer, globalState.goals);
     const [teams, dispatchTeams] = React.useReducer(teamsReducer, globalState.teams);
     const [teams2, dispatchTeams2] = React.useReducer(teams2Reducer, globalState.teams2);
+    const [gameModeTokens, dispatchGameModeTokens] = React.useReducer(
+        gameModeTokensActionReducer,
+        globalState.gameModeTokens
+    );
     const [warOffense2, dispatchWarOffense2] = React.useReducer(warOffense2Reducer, globalState.warOffense2);
     const [viewPreferences, dispatchViewPreferences] = React.useReducer(
         viewPreferencesReducer,
@@ -136,6 +141,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpIncome: wrapDispatch(dispatchXpIncome),
             xpUse: wrapDispatch(dispatchXpUse),
             rosterSnapshots: wrapDispatch(dispatchRosterSnapshots),
+            gameModeTokens: wrapDispatch(dispatchGameModeTokens),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
                 dispatchMows({ type: 'Set', value: data.mows });
@@ -159,6 +165,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 dispatchXpIncome({ type: 'Set', value: data.xpIncome });
                 dispatchXpUse({ type: 'Set', value: data.xpUse });
                 dispatchRosterSnapshots({ type: 'Set', value: data.rosterSnapshots });
+                dispatchGameModeTokens({ type: 'Set', value: data.gameModeTokens });
 
                 if (modified) {
                     setModified(true);
@@ -191,6 +198,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchXpIncome,
             dispatchXpUse,
             dispatchRosterSnapshots,
+            dispatchGameModeTokens,
             setGlobalState,
         ]
     );
@@ -225,6 +233,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpIncome,
             xpUse,
             rosterSnapshots,
+            gameModeTokens,
         };
         const storeValue = GlobalState.toStore(newValue);
 

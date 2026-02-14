@@ -10,6 +10,13 @@ interface TacticusPlayer {
     progress: TacticusProgress;
 }
 
+export interface TacticusTokens {
+    current: number;
+    max: number;
+    nextTokenInSeconds: number | null;
+    regenDelayInSeconds: number;
+}
+
 export interface TacticusEquipment {
     id: string; // I_Crit_M007
     level: number; // 1-3/11.
@@ -164,6 +171,11 @@ export interface TacticusShard {
 interface TacticusProgress {
     campaigns: TacticusCampaignProgress[]; // List of CampaignProgress objects
     legendaryEvents: TacticusLegendaryEventProgress[]; // List of LegendaryEventProgress objects
+    arena?: { tokens?: TacticusTokens };
+    guildRaid?: { tokens?: TacticusTokens; bombTokens?: TacticusTokens };
+    onslaught?: { tokens?: TacticusTokens };
+    salvageRun?: { tokens?: TacticusTokens };
+    // Add other game modes as needed
 }
 
 export interface TacticusCampaignProgress {

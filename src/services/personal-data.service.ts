@@ -42,6 +42,7 @@ import {
     ILreTeam,
     SelectedTeams,
     ILegendaryEventSettings,
+    IGameModeTokensState,
 } from '../models/interfaces';
 
 export class PersonalDataLocalStorage {
@@ -123,6 +124,10 @@ export class PersonalDataLocalStorage {
                 rosterSnapshots: {
                     ...defaultData.rosterSnapshots,
                     ...(this.getItem<IRosterSnapshotsState>('rosterSnapshots') ?? defaultData.rosterSnapshots),
+                },
+                gameModeTokens: {
+                    ...defaultData.gameModeTokens,
+                    ...(this.getItem<IGameModeTokensState>('gameModeTokens') ?? defaultData.gameModeTokens),
                 },
             };
         } else {
@@ -255,6 +260,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             teams2: defaultData.teams2,
             warOffense2: defaultData.warOffense2,
             rosterSnapshots: defaultData.rosterSnapshots,
+            gameModeTokens: defaultData.gameModeTokens,
         };
     }
 
@@ -263,6 +269,10 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
         inventory: {
             ...defaultData.inventory,
             ...v1Data.inventory,
+        },
+        gameModeTokens: {
+            ...defaultData.gameModeTokens,
+            ...(v1Data.gameModeTokens ?? {}),
         },
     };
 };
