@@ -574,6 +574,12 @@ export class GoalsService {
             }
 
             if (goal.mowEstimate === undefined) continue;
+            if (!goal.mowEstimate.forgeBadges) {
+                console.log(
+                    'unexpectedly found a goal with mow estimate but no forge badges, initializing to empty map',
+                    goal
+                );
+            }
             const forgeBadges = goal.mowEstimate.forgeBadges ?? new Map<Rarity, number>();
             forgeBadges.entries().forEach(([rarity, count]) => {
                 const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
