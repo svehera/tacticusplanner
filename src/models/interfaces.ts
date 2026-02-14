@@ -36,6 +36,7 @@ import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 import { ITeam2 } from '@/fsd/1-pages/plan-teams2/models';
+import { WarOffense2State } from '@/fsd/1-pages/plan-war-offense2/models';
 
 import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
 import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
@@ -49,6 +50,7 @@ import { LeSelectedRequirementsAction } from '../reducers/le-selected-requiremen
 import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
 import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
 import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
+import { WarOffense2Action } from '../reducers/war-offense2.reducer';
 
 import { CampaignsLocationsUsage, DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
 
@@ -63,6 +65,7 @@ export interface IPersonalData {
     charactersPriorityList: string[];
     goals: IPersonalGoal[];
     teams2: ITeam2[];
+    warOffense2: WarOffense2State;
     legendaryEvents: ILegendaryEventsData | undefined;
     legendaryEvents3: ILegendaryEventsData3 | undefined;
     legendaryEventsProgress: LegendaryEventData<ILreProgressDto>;
@@ -85,6 +88,7 @@ export interface IGlobalState {
     goals: IPersonalGoal[];
     teams: IPersonalTeam[];
     teams2: ITeam2[];
+    warOffense2: WarOffense2State;
     selectedTeamOrder: ISelectedTeamsOrdering;
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
@@ -106,6 +110,7 @@ export interface IDispatchContext {
     mows: React.Dispatch<MowsAction>;
     teams: React.Dispatch<TeamsAction>;
     teams2: React.Dispatch<Teams2Action>;
+    warOffense2: React.Dispatch<WarOffense2Action>;
     viewPreferences: React.Dispatch<ViewPreferencesAction>;
     dailyRaidsPreferences: React.Dispatch<DailyRaidsPreferencesAction>;
     autoTeamsPreferences: React.Dispatch<AutoTeamsPreferencesAction>;
@@ -141,6 +146,7 @@ export interface IPersonalData2 {
     goals: IPersonalGoal[];
     teams: IPersonalTeam[];
     teams2: ITeam2[];
+    warOffense2: WarOffense2State;
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
