@@ -574,7 +574,7 @@ export class GoalsService {
             }
 
             if (goal.mowEstimate === undefined) continue;
-            const forgeBadges = goal.mowEstimate.forgeBadges;
+            const forgeBadges = goal.mowEstimate.forgeBadges ?? new Map<Rarity, number>();
             forgeBadges.entries().forEach(([rarity, count]) => {
                 const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
                 goal.mowEstimate!.forgeBadges.set(rarity, count - toRemove);
