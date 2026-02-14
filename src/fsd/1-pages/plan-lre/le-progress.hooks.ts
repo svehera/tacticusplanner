@@ -24,7 +24,7 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
             value: LreService.mapProgressModelToDto(newModel),
             eventId: newModel.eventId,
         });
-        return newModel as T; // I'm not sure why this is necessary to satisfy TypeScript that we haven't widened the type
+        return newModel;
     };
 
     const debounceUpdateDto = useDebounceCallback(updateDto, 500);

@@ -19,6 +19,7 @@ import { XpUseState } from '@/fsd/1-pages/input-resources/models';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income/models';
 import { ITeam2 } from '@/fsd/1-pages/plan-teams2/models';
+import { WarOffense2State } from '@/fsd/1-pages/plan-war-offense2/models';
 
 import { defaultData } from '../models/constants';
 import {
@@ -41,6 +42,7 @@ import {
     ILreTeam,
     SelectedTeams,
     ILegendaryEventSettings,
+    IGameModeTokensState,
 } from '../models/interfaces';
 
 export class PersonalDataLocalStorage {
@@ -77,6 +79,7 @@ export class PersonalDataLocalStorage {
                 mows: this.getItem<IMowDb[]>('mows') ?? defaultData.mows,
                 teams: this.getItem<IPersonalTeam[]>('teams') ?? defaultData.teams,
                 teams2: this.getItem<ITeam2[]>('teams2') ?? defaultData.teams2,
+                warOffense2: this.getItem<WarOffense2State>('warOffense2') ?? defaultData.warOffense2,
                 goals: this.getItem<IPersonalGoal[]>('goals') ?? defaultData.goals,
                 selectedTeamOrder:
                     this.getItem<ISelectedTeamsOrdering>('selectedTeamOrder') ?? defaultData.selectedTeamOrder,
@@ -121,6 +124,10 @@ export class PersonalDataLocalStorage {
                 rosterSnapshots: {
                     ...defaultData.rosterSnapshots,
                     ...(this.getItem<IRosterSnapshotsState>('rosterSnapshots') ?? defaultData.rosterSnapshots),
+                },
+                gameModeTokens: {
+                    ...defaultData.gameModeTokens,
+                    ...(this.getItem<IGameModeTokensState>('gameModeTokens') ?? defaultData.gameModeTokens),
                 },
             };
         } else {
@@ -251,7 +258,9 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             xpUse: defaultData.xpUse,
             teams: defaultData.teams,
             teams2: defaultData.teams2,
+            warOffense2: defaultData.warOffense2,
             rosterSnapshots: defaultData.rosterSnapshots,
+            gameModeTokens: defaultData.gameModeTokens,
         };
     }
 
@@ -260,6 +269,10 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
         inventory: {
             ...defaultData.inventory,
             ...v1Data.inventory,
+        },
+        gameModeTokens: {
+            ...defaultData.gameModeTokens,
+            ...(v1Data.gameModeTokens ?? {}),
         },
     };
 };

@@ -29,6 +29,7 @@ import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
 import { teams2MenuItem } from '@/fsd/1-pages/plan-teams2/teams2.menu-item';
+import { warOffense2MenuItem } from '@/fsd/1-pages/plan-war-offense2/war-offense2.menu-item';
 import { teamsMenuItem } from '@/fsd/1-pages/teams/teams.menu-item';
 import { wyoMenuItem } from '@/fsd/1-pages/who-you-own/who-you-own.menu-item';
 
@@ -67,6 +68,7 @@ export const menuItemById = {
     campaignProgression: campaignProgressionMenuItem,
     rosterSnapshots: rosterSnapshotsMenuItem,
     teams2: teams2MenuItem,
+    warOffense2: warOffense2MenuItem,
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
     ty: new MenuItemTP('Thank You', <HealthAndSafetyIcon />, '/ty', 'Thank You Page'),
@@ -80,6 +82,7 @@ export const menuItemById = {
     teams: teamsMenuItem,
     guides: guidesMenuItem,
     xpIncome: xpIncomeMenuItem,
+    onslaught: new MenuItemTP('Onslaught', <MilitaryTechIcon />, '/learn/onslaught?track=Imperial'),
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -100,6 +103,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
         menuItemById['defense'],
         menuItemById['offense'],
+        menuItemById['warOffense2'],
         menuItemById['zones'],
     ]),
     new MenuItemTP('LRE', <TableChartIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
@@ -114,6 +118,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['teams'],
     menuItemById['defense'],
     menuItemById['offense'],
+    menuItemById['warOffense2'],
     menuItemById['zones'],
     menuItemById['leMasterTable'],
     ...activeLreMenuItems,
@@ -133,6 +138,7 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['insights'],
     menuItemById['guildApi'],
     menuItemById['guildInsights'],
+    menuItemById['onslaught'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [
@@ -145,6 +151,7 @@ export const learnSubMenu: MenuItemTP[] = [
         menuItemById['learnEquipment'],
         menuItemById['campaigns'],
         menuItemById['hses'],
+        menuItemById['onslaught'],
     ]),
     menuItemById['guides'],
     menuItemById['dirtyDozen'],

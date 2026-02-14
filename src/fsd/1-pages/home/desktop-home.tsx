@@ -95,9 +95,7 @@ export const DesktopHome = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_20260104.png'),
-        // Feb 8 calendar not yet available
-        // next: getImageUrl('calendar/calendar_20260208.png'),
+        current: getImageUrl('calendar/calendar_20260202.png'),
     };
 
     const topPriorityGoal = goals[0];
@@ -111,7 +109,7 @@ export const DesktopHome = () => {
         }
 
         return (
-            <div className="text-center pt-[25px] pb-[50px] px-0">
+            <div className="px-0 pt-[25px] pb-[50px] text-center">
                 <h2>Exciting News from WH40k Tacticus!</h2>
                 <p>
                     We&apos;re thrilled to announce that player API keys are now available! Use your key to effortlessly
@@ -133,7 +131,7 @@ export const DesktopHome = () => {
             {announcements()}
             <Thanks sliderMode={true} />
             {/*{announcements()}*/}
-            <div className="flex gap-2.5 flex-wrap justify-center items-start">
+            <div className="flex flex-wrap items-start justify-center gap-2.5">
                 <div>
                     <h3 className="text-center">Daily Raids</h3>
                     <Card

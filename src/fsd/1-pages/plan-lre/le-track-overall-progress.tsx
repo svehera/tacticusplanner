@@ -157,24 +157,24 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
     };
 
     return (
-        <div className="box-border flex flex-col w-full mx-auto md:w-fit md:max-w-full">
+        <div className="mx-auto box-border flex w-full flex-col md:w-fit md:max-w-full">
             <h3>
                 {completionPercentage}% {track.trackName}
             </h3>
-            <div className="box-border flex flex-col start gap5">
+            <div className="start gap5 box-border flex flex-col">
                 {track.requirements.map(req => (
                     <div key={req.id} className="flex-box gap5">
                         <div
-                            className="w-[15px] h-[15px] rounded-[50px]"
+                            className="h-[15px] w-[15px] rounded-[50px]"
                             style={{
                                 backgroundColor: getCompletionRateColor(getReqProgress(req.id), track.battles.length),
                             }}
                         />
-                        <span className="font-bold min-w-[50px]">
+                        <span className="min-w-[50px] font-bold">
                             {getReqProgress(req.id)}/{track.battles.length}
                         </span>
 
-                        <span className="font-bold min-w-20">
+                        <span className="min-w-20 font-bold">
                             {getReqProgressPoints(req.id)}/{req.totalPoints}
                         </span>
                         <LreReqImage iconId={req.iconId} />
@@ -203,20 +203,20 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                         flexDirection: 'column',
                         width: '100%',
                     }}>
-                    <div className="flex-box gap5 pb-2.5 justify-center items-center">
+                    <div className="flex-box gap5 items-center justify-center pb-2.5">
                         <Button size="medium" variant="text" onClick={handleToggle}>
                             <Grid2x2Check className="size-5 md:size-6" />
                         </Button>
                         <SyncButton showText={false} variant={'text'} />
                     </div>
-                    <div className="flex-col w-full">
-                        <div className="flex flex-row w-full mb-1">
-                            <div className="flex items-center justify-center shrink-0 mr-0 min-w-8 md:min-w-10 md:mr-1.5">
+                    <div className="w-full flex-col">
+                        <div className="mb-1 flex w-full flex-row">
+                            <div className="mr-0 flex min-w-8 shrink-0 items-center justify-center md:mr-1.5 md:min-w-10">
                                 <AccessibleTooltip title="Click on a battle number to mark all objectives complete">
                                     <Info className={isMobile ? 'size-5' : 'size-6'} />
                                 </AccessibleTooltip>
                             </div>
-                            <div className="flex flex-row justify-between flex-1">
+                            <div className="flex flex-1 flex-row justify-between">
                                 {(() => {
                                     const firstRestrictionIndex = LreRequirementStatusService.getFirstRestrictionIndex(
                                         track.requirements

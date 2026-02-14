@@ -221,17 +221,17 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
 
     return (
         <>
-            <div className="flex flex-row w-full">
+            <div className="flex w-full flex-row">
                 <span
                     role="button"
                     tabIndex={0}
                     aria-label={`Toggle all requirements for battle ${battle.battleIndex + 1}`}
-                    className="cursor-pointer min-w-6 md:min-w-8 p-0.5 md:p-0.5 my-0.5 mr-1 md:mr-2 text-xs md:text-base font-bold text-center border-2 border-blue-300/75 size-6 md:size-8 rounded-xs shrink-0"
+                    className="my-0.5 mr-1 size-6 min-w-6 shrink-0 cursor-pointer rounded-xs border-2 border-blue-300/75 p-0.5 text-center text-xs font-bold md:mr-2 md:size-8 md:min-w-8 md:p-0.5 md:text-base"
                     onClick={handleToggle}
                     onKeyDown={handleBattleNumberKeyDown}>
                     {battle.battleIndex + 1}
                 </span>
-                <div className="flex flex-row justify-between flex-1">
+                <div className="flex flex-1 flex-row justify-between">
                     {(() => {
                         const firstRestrictionIndex = LreRequirementStatusService.getFirstRestrictionIndex(
                             battle.requirementsProgress
@@ -292,7 +292,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                                         aria-haspopup="menu"
                                         aria-expanded={showDropdown === req.id}
                                         aria-controls={`dropdown-${req.id}`}
-                                        className="select-none p-1 md:p-1.5 text-sm md:text-base font-bold text-center size-8 md:size-10 border-2 rounded"
+                                        className="size-8 rounded border-2 p-1 text-center text-sm font-bold select-none md:size-10 md:p-1.5 md:text-base"
                                         style={{
                                             color: shouldShowGreenBorder
                                                 ? `${STATUS_COLORS[RequirementStatus.Cleared]}60`
@@ -306,7 +306,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                                         <div
                                             id={`dropdown-${req.id}`}
                                             role="menu"
-                                            className="absolute z-50 bg-white border border-gray-300 rounded shadow-lg dark:bg-gray-800 dark:border-gray-600"
+                                            className="absolute z-50 rounded border border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-800"
                                             style={
                                                 dropdownPosition === 'top'
                                                     ? { bottom: '100%', marginBottom: '4px' }
@@ -330,7 +330,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                                                         e.stopPropagation();
                                                         handleDirectStatusChange(req, statusOption);
                                                     }}
-                                                    className="flex items-center justify-center w-full px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                    className="flex w-full items-center justify-center px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
                                                     style={{
                                                         color: STATUS_COLORS[statusOption],
                                                     }}>

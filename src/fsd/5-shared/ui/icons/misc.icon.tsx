@@ -13,7 +13,7 @@ export const MiscIcon = ({
     return (
         <img
             loading="lazy"
-            className="pointer-events-none "
+            className="pointer-events-none"
             style={{ height, width }}
             src={details.file}
             width={width}

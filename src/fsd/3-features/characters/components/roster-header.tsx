@@ -27,7 +27,7 @@ export const RosterHeader = ({
             <InfoBox />
             <Conditional condition={showBsValue}>
                 <AccessibleTooltip title={numberToThousandsStringOld(totalValue)}>
-                    <div className="flex items-center text-[20px] font-bold min-w-[fit-content]">
+                    <div className="flex min-w-[fit-content] items-center text-[20px] font-bold">
                         <MiscIcon icon={'blackstone'} height={40} width={30} />
                         {numberToThousandsString(totalValue)}
                     </div>
@@ -35,7 +35,7 @@ export const RosterHeader = ({
             </Conditional>
             <Conditional condition={showPower}>
                 <AccessibleTooltip title={numberToThousandsStringOld(totalPower)}>
-                    <div className="flex items-center text-[20px] font-bold min-w-[fit-content]">
+                    <div className="flex min-w-[fit-content] items-center text-[20px] font-bold">
                         <MiscIcon icon={'power'} height={40} width={30} />
                         {numberToThousandsString(totalPower)}
                     </div>

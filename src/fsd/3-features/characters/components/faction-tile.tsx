@@ -45,12 +45,12 @@ export const FactionsTile = ({
     }, [faction.units.length]);
     const { showBsValue, showPower } = useContext(CharactersViewContext);
     return (
-        <div className="min-w-[375px] max-w-[525px] max-[500px]:max-w-[375px]">
+        <div className="max-w-[525px] min-w-[375px] max-[500px]:max-w-[375px]">
             <h4
-                className="text-white mb-0 mt-[5px] border-t-2 border-solid border-[gold] font-medium flex items-center justify-between"
+                className="mt-[5px] mb-0 flex items-center justify-between border-t-2 border-solid border-[gold] font-medium text-white"
                 style={{ backgroundColor: faction.color }}>
                 <div className="flex items-center gap-[5px]">
-                    <FactionImage faction={faction.name} />
+                    <FactionImage faction={faction.snowprintId} />
                     <span>{faction.name.toUpperCase()}</span>
                 </div>
                 <Conditional condition={showBsValue}>

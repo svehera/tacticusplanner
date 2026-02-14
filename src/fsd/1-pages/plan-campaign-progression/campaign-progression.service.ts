@@ -1,16 +1,11 @@
 import { uniq } from 'lodash';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { FactionsService } from '@/fsd/5-shared/lib/factions.service';
-import { Rank } from '@/fsd/5-shared/model';
+import factions from '@/data/factions.json';
 
-import {
-    battleData,
-    CampaignsService,
-    CampaignType,
-    ICampaignBattleComposed,
-    ICampaignsProgress,
-} from '@/fsd/4-entities/campaign';
+import { FactionId, Rank } from '@/fsd/5-shared/model';
+
+import { CampaignsService, CampaignType, ICampaignBattleComposed, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import {
     CharactersService,
     CharacterUpgradesService,
@@ -28,7 +23,6 @@ import { MowsService } from '@/fsd/4-entities/mow';
 import { IRecipeExpandedUpgrade, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import {
-    CampaignFactionMapping,
     CampaignsProgressData,
     GoalData,
     CampaignProgressData,
@@ -37,44 +31,32 @@ import {
     FarmData,
 } from './campaign-progression.models';
 
-export class CampaignsProgressionService {
-    static readonly campaignFactionMapping = this.getFactionCampaignMappings();
+const imperialFactions = factions.filter(f => f.alliance === 'Imperial');
+const chaosFactions = factions.filter(f => f.alliance === 'Chaos');
 
-    /**
-     * @returns A mapping of all factions playable in a campaign, and
-     *      all campaigns playable by a faction.
-     */
-    private static getFactionCampaignMappings(): CampaignFactionMapping {
-        const result = new CampaignFactionMapping();
-
-        for (const campaign of CampaignsService.allCampaigns) {
-            result.campaignFactions.set(campaign.name, new Set<string>([campaign.faction]));
-        }
-
-        for (const [campaign, factions] of result.campaignFactions.entries()) {
-            factions.forEach((_key: string, faction: string) => {
-                if (!result.factionCampaigns.get(faction)) {
-                    result.factionCampaigns.set(faction, new Set<string>());
-                }
-                result.factionCampaigns.get(faction)?.add(campaign);
-            });
-        }
-        Object.entries(battleData).forEach(([battleId, battle]) => {
-            if (!(battleId in CampaignsService.campaignsComposed)) return;
-            // Early indomitus battles are sparse.
-            CampaignsService.campaignsComposed[battleId].alliesFactions.forEach(factionId => {
-                if (!battle.campaign) return; // Early indomitus doesn't have most of this info.
-                const faction = FactionsService.snowprintFactionToFaction(factionId);
-                result.campaignFactions.get(battle.campaign)?.add(faction);
-                if (!result.factionCampaigns.get(faction)) {
-                    result.factionCampaigns.set(faction, new Set<string>());
-                }
-                result.factionCampaigns.get(faction)?.add(battle.campaign);
-            });
-        });
-        return result;
+const alliedFactions = (factionId: FactionId) => {
+    const faction = factions.find(f => f.snowprintId === factionId);
+    if (!faction) throw new Error(`Unknown faction ID: ${factionId}`);
+    switch (faction.alliance) {
+        case 'Imperial':
+            return imperialFactions;
+        case 'Chaos':
+            return chaosFactions;
+        case 'Xenos':
+            return [faction];
     }
+};
 
+const factionCampaigns = Object.fromEntries(
+    factions.map(f => {
+        const allies = alliedFactions(f.snowprintId)?.map(a => a.snowprintId) ?? [];
+        return [f.snowprintId, CampaignsService.allCampaigns.filter(c => allies.includes(c.faction))];
+    })
+);
+
+const campaignFactions = Object.fromEntries(CampaignsService.allCampaigns.map(c => [c.id, alliedFactions(c.faction)]));
+
+export class CampaignsProgressionService {
     /**
      * Computes the cost per goal and associates each character with the campaigns
      * in which they can participate. Also computes the nodes we can beat to bring
@@ -109,12 +91,12 @@ export class CampaignsProgressionService {
             }
             // If this unit can participate in campaigns, add the farm data to the
             // campaign results.
-            this.campaignFactionMapping.factionCampaigns.get(unit.faction)?.forEach(campaign => {
-                if (!result.data.get(campaign)) {
-                    console.error("no campaign data for '" + campaign + "'.");
+            factionCampaigns[unit.faction].forEach(campaign => {
+                if (!result.data.get(campaign.id)) {
+                    console.error("no campaign data for '" + campaign.id + "'.");
                     return;
                 }
-                result.data.get(campaign)?.goalCost.set(goal.goalId, goalData.totalEnergy);
+                result.data.get(campaign.id)?.goalCost.set(goal.goalId, goalData.totalEnergy);
             });
 
             // Sum up all the materials across all goals.
@@ -191,7 +173,7 @@ export class CampaignsProgressionService {
         let nodesToBeat = new Map<string, ICampaignBattleComposed[]>();
         // Do some initialization required before
         // calling computeGoalCostsAndUnbeatenNodes.
-        for (const campaign of this.campaignFactionMapping.campaignFactions.keys()) {
+        for (const campaign of Object.keys(campaignFactions)) {
             nodesToBeat.set(campaign, []);
             result.data.set(campaign, new CampaignProgressData());
         }

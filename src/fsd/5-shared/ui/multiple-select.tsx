@@ -1,20 +1,6 @@
 ﻿import { Autocomplete, TextField } from '@mui/material';
-import * as React from 'react';
 
-interface Props {
-    values: string[];
-    selectedValues: string[];
-    placeholder: string;
-    selectionChanges: (value: string[]) => void;
-    size?: 'small' | 'medium';
-    groupByFirstLetter?: boolean;
-    sortByAlphabet?: boolean;
-    minWidth?: number;
-    maxWidth?: number;
-    disableCloseOnSelect?: boolean;
-}
-
-export const MultipleSelectCheckmarks: React.FC<Props> = ({
+export const MultipleSelectCheckmarks = <T extends string>({
     values,
     selectedValues,
     selectionChanges,
@@ -25,8 +11,19 @@ export const MultipleSelectCheckmarks: React.FC<Props> = ({
     minWidth = 300,
     maxWidth,
     disableCloseOnSelect = true,
+}: {
+    values: T[];
+    selectedValues: NoInfer<T>[];
+    placeholder: string;
+    selectionChanges: (value: NoInfer<T>[]) => void;
+    size?: 'small' | 'medium';
+    groupByFirstLetter?: boolean;
+    sortByAlphabet?: boolean;
+    minWidth?: number;
+    maxWidth?: number;
+    disableCloseOnSelect?: boolean;
 }) => {
-    const handleChange = (newValue: string[]) => {
+    const handleChange = (newValue: NoInfer<T>[]) => {
         selectionChanges(newValue);
     };
 

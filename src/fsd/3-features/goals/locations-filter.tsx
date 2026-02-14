@@ -4,10 +4,11 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import React, { useMemo } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+// eslint-disable-next-line import-x/no-internal-modules
 import factionsData from 'src/data/factions.json';
 
-import { Alliance, Faction, Rarity, RarityString } from '@/fsd/5-shared/model';
+import { factionLookup } from '@/fsd/5-shared/lib';
+import { Alliance, FactionId, FactionName, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
 
 import { CampaignsService, CampaignType, ICampaignsFilters } from '@/fsd/4-entities/campaign';
@@ -22,7 +23,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
     const [open, setOpen] = React.useState<boolean>(false);
 
     const allFactions = useMemo(
-        () => factionsData.map(x => ({ alliance: x.alliance as Alliance, faction: x.name as Faction })),
+        () => factionsData.map(x => ({ alliance: x.alliance as Alliance, faction: x.name })),
         [factionsData]
     );
 
@@ -79,10 +80,11 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         setOpen(false);
     };
 
-    const renderUnitsFilter = (type: 'allies' | 'enemies', alliance: Alliance[], factions: Faction[]) => {
+    const renderUnitsFilter = (type: 'allies' | 'enemies', alliance: Alliance[], factions: FactionId[]) => {
         const allowedFactions = !alliance.length
             ? allFactions.map(x => x.faction)
             : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
+        const selectedFactionNames = factions.map(factionId => factionLookup[factionId]?.name).filter(Boolean);
 
         const allianceFilterChanged = (values: string[]) => {
             if (type === 'allies') {
@@ -94,13 +96,16 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             }
         };
 
-        const factionsFilterChanged = (values: string[]) => {
+        const factionsFilterChanged = (values: FactionName[]) => {
+            const factionIds = values
+                .map(factionName => Object.values(factionLookup).find(f => f.name === factionName)?.snowprintId)
+                .filter((fn): fn is FactionId => !!fn); // Use a type guard to clean up the filter
             if (type === 'allies') {
-                setCurrFilter({ ...currFilter, alliesFactions: values as Faction[] });
+                setCurrFilter({ ...currFilter, alliesFactions: factionIds });
             }
 
             if (type === 'enemies') {
-                setCurrFilter({ ...currFilter, enemiesFactions: values as Faction[] });
+                setCurrFilter({ ...currFilter, enemiesFactions: factionIds });
             }
         };
 
@@ -120,9 +125,9 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     sortByAlphabet
                     size="small"
                     placeholder="Factions"
-                    selectedValues={factions}
+                    selectedValues={selectedFactionNames}
                     values={allowedFactions}
-                    selectionChanges={factionsFilterChanged}
+                    selectionChanges={factionsFilterChanged as (value: string[]) => void}
                     disableCloseOnSelect={false}
                     minWidth={150}
                 />
@@ -146,7 +151,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <h5>Enemies</h5>
                     {renderUnitsFilter('enemies', currFilter.enemiesAlliance, currFilter.enemiesFactions)}
 
-                    <div className="flex items-center gap-3 mt-2.5">
+                    <div className="mt-2.5 flex items-center gap-3">
                         <Autocomplete
                             fullWidth
                             size="small"
@@ -188,7 +193,16 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                         <MultipleSelectCheckmarks
                             size="small"
                             placeholder="Types"
-                            selectedValues={currFilter.campaignTypes}
+                            selectedValues={
+                                currFilter.campaignTypes as (
+                                    | CampaignType.Early
+                                    | CampaignType.Extremis
+                                    | CampaignType.Standard
+                                    | CampaignType.Mirror
+                                    | CampaignType.Normal
+                                    | CampaignType.Elite
+                                )[]
+                            }
                             values={[
                                 CampaignType.Elite,
                                 CampaignType.Extremis,
@@ -207,10 +221,16 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                         <MultipleSelectCheckmarks
                             size="small"
                             placeholder="Slots"
-                            selectedValues={currFilter.slotsCount?.map(x => x.toString()) ?? []}
+                            // Cast the result of the map to the specific literals
+                            selectedValues={
+                                (currFilter.slotsCount?.map(x => x.toString()) ?? []) as ('3' | '4' | '5')[]
+                            }
                             values={['3', '4', '5']}
                             selectionChanges={values => {
-                                setCurrFilter({ ...currFilter, slotsCount: values.map(x => +x) });
+                                setCurrFilter({
+                                    ...currFilter,
+                                    slotsCount: values.map(x => Number(x) as 3 | 4 | 5),
+                                });
                             }}
                             disableCloseOnSelect={false}
                             minWidth={150}
@@ -221,12 +241,12 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <MultipleSelectCheckmarks
                         size="small"
                         placeholder="Rarity"
-                        selectedValues={currFilter.upgradesRarity.map(x => Rarity[x])}
+                        selectedValues={currFilter.upgradesRarity.map(x => RarityMapper.rarityToRarityString(x))}
                         values={Object.values(RarityString)}
                         selectionChanges={values => {
                             setCurrFilter({
                                 ...currFilter,
-                                upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                upgradesRarity: values.map(x => RarityMapper.stringToNumber[x as RarityString]),
                             });
                         }}
                         disableCloseOnSelect={false}

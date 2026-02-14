@@ -28,9 +28,7 @@ export const DecimalSpinner: React.FC<DecimalSpinnerProps> = ({ value, onChange,
                 onChange={handleChange}
                 min="0"
                 step="0.01"
-                className="w-32 p-2 rounded-md border bg-gray-100 border-gray-300 text-gray-800 
-                           dark:bg-gray-700 dark:border-gray-600 dark:text-white 
-                           focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-32 rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             />
         </div>
     );

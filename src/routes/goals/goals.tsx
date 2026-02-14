@@ -1,4 +1,5 @@
-﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+﻿import DeleteIcon from '@mui/icons-material/Delete';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
 import TableRowsIcon from '@mui/icons-material/TableRows';
@@ -320,6 +321,20 @@ export const Goals = () => {
 
     const hasSync = !!userInfo.tacticusApiKey;
 
+    const onDeleteAll = () => {
+        if (
+            !confirm(
+                'This will permanently delete ALL goals and cannot be undone.\n\n' +
+                    'Consider exporting your JSON before proceeding.\n\n' +
+                    'Are you sure you want to continue?'
+            )
+        ) {
+            return;
+        }
+
+        dispatch.goals({ type: 'DeleteAll' });
+    };
+
     return (
         <div>
             <div className="flex flex-wrap items-center gap-5">
@@ -332,6 +347,10 @@ export const Goals = () => {
                 </Button>
                 <SetGoalDialog key={goals.length} />
                 {hasSync && <SyncButton showText={!isMobile} />}
+                {}
+                <Button size="small" variant="contained" color="error" onClick={onDeleteAll}>
+                    <DeleteIcon sx={{ mr: 1 }} /> delete all
+                </Button>
                 <span className="text-xl">
                     {goals.length}/{goalsLimit}
                 </span>
@@ -358,31 +377,31 @@ export const Goals = () => {
                     onToggle={updateColorCodingMode}
                 />
             </div>
-            <div className="my-2 flex-box gap20 w-[350px]">
+            <div className="flex-box gap20 my-2 w-[350px]">
                 <Accordion
                     defaultExpanded={false}
-                    className="!shadow-none !bg-transparent border border-[var(--border)] px-2 hover:!bg-[var(--secondary)]">
+                    className="border border-[var(--border)] !bg-transparent px-2 !shadow-none hover:!bg-[var(--secondary)]">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-[var(--muted-fg)]" />}
-                        className="!p-0 min-h-0 !bg-transparent rounded-lg"
+                        className="min-h-0 rounded-lg !bg-transparent !p-0"
                         aria-controls="resources-content"
                         id="resources-header">
-                        <span className="text-[var(--fg)] text-base font-semibold">Total Resources Missing</span>
+                        <span className="text-base font-semibold text-[var(--fg)]">Total Resources Missing</span>
                     </AccordionSummary>
 
-                    <AccordionDetails className="!p-0 !bg-transparent">
-                        <div className="flex flex-col gap-y-2 p-2 bg-[var(--overlay)] rounded-lg border border-[var(--border)] mt-2">
-                            <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)] flex items-center justify-start gap-x-4">
+                    <AccordionDetails className="!bg-transparent !p-0">
+                        <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-[var(--border)] bg-[var(--overlay)] p-2">
+                            <div className="flex items-center justify-start gap-x-4 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
                                 <MiscIcon icon={'energy'} height={35} width={35} />{' '}
                                 <b className="text-lg text-[var(--fg)]">{estimatedUpgradesTotal.energyTotal}</b>
                             </div>
 
-                            <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)]">
+                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
                                 <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
                             </div>
 
-                            <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)] flex flex-col gap-y-2">
-                                <h4 className="text-sm font-semibold text-[var(--muted-fg)] uppercase border-b border-[var(--border)] pb-1 mb-1">
+                            <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
                                     Ability Badges
                                 </h4>
 
@@ -397,11 +416,11 @@ export const Goals = () => {
                                 ))}
                             </div>
 
-                            <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)]">
+                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
                                 <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
                             </div>
 
-                            <div className="p-2 bg-[var(--secondary)] rounded-md border border-[var(--border)]">
+                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
                                 <MoWComponentsTotal
                                     components={adjustedGoalsEstimates.neededComponents}
                                     size={'medium'}
@@ -413,7 +432,7 @@ export const Goals = () => {
             </div>
             {!!upgradeRankOrMowGoals.length && (
                 <div>
-                    <div className="flex flex-wrap items-center gap5 text-xl my-5 mx-0">
+                    <div className="gap5 mx-0 my-5 flex flex-wrap items-center text-xl">
                         <span>
                             Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
                         </span>
@@ -463,7 +482,7 @@ export const Goals = () => {
             )}
             {!!shardsGoals.length && (
                 <div>
-                    <div className="flex-box gap5 wrap text-xl my-5 mx-0">
+                    <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>
                             Ascend/Promote/Unlock (<b>{estimatedShardsTotal.daysTotal}</b> Days |
                         </span>
@@ -506,7 +525,7 @@ export const Goals = () => {
             )}
             {!!upgradeAbilities.length && (
                 <div>
-                    <div className="flex-box gap5 wrap text-xl my-5 mx-0">
+                    <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>
                             Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold)
                         </span>

@@ -1,4 +1,4 @@
-import { Alliance, Trait, DamageType, Faction } from '@/fsd/5-shared/model';
+import { Alliance, Trait, DamageType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { uthar as staticData } from '@/fsd/4-entities/lre';
@@ -26,7 +26,7 @@ export class UtharLegendaryEvent extends LegendaryEventBase {
                     points: 75,
                     objectiveType: 'Faction',
                     objectiveTarget: 'Ultramarines',
-                    units: filter(noXenos).byFaction(Faction.Ultramarines, /*not=*/ false),
+                    units: filter(noXenos).byFaction('Ultramarines', /*not=*/ false),
                     iconId: 'ultramarines',
                     index: 0,
                 },

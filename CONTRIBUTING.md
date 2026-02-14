@@ -59,6 +59,7 @@ There are also multiple different component libraries:
 We have listed the preferred options in the [conventions section](#conventions) but there's a fair amount of code that doesn't currently comply with them.
 At some point we should start moving the older code to follow the current conventions.
 This will make both the UI and the code more consistent.
+
 #### TailwindCSS Migration: Inline Styles to TailwindCSS
 
 A stumbling block in converting the inline styles to TailwindCSS is that a lot of the styles are dynamic (e.g. based on props).

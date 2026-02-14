@@ -6,7 +6,7 @@ import { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
-import { Rarity, RarityString, Rank, stringToRank, RarityMapper } from '@/fsd/5-shared/model';
+import { Rarity, RarityString, Rank, stringToRank, RarityMapper, FactionId } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignsService, CampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
@@ -19,7 +19,7 @@ interface IUpgradesTableRow {
     upgradeLabel: string;
     upgradeId: string;
     upgradeIcon: string;
-    faction: string;
+    faction?: FactionId; // omitted when the upgrade is not faction-specific
     rarity: Rarity;
     type: string;
     locations: ICampaignBattleComposed[];
@@ -248,7 +248,7 @@ export const Upgrades = () => {
                     upgradeLabel: x.label ?? x.material,
                     upgradeId: x.snowprintId,
                     upgradeIcon: x.icon ?? '',
-                    faction: x.faction ?? '',
+                    faction: x.faction,
                     rarity: RarityMapper.stringToNumber[x.rarity as unknown as RarityString],
                     type: x.stat,
                     locations,
@@ -293,13 +293,13 @@ export const Upgrades = () => {
 
     return (
         <div>
-            <div className="flex items-center gap-5 my-0 mx-5" style={{ flexDirection: isMobile ? 'column' : 'row' }}>
+            <div className="mx-5 my-0 flex items-center gap-5" style={{ flexDirection: isMobile ? 'column' : 'row' }}>
                 <TextField
                     label="Quick Filter"
                     variant="outlined"
                     onChange={change => setNameFilter(change.target.value)}
                 />
-                <FormControl className="w-[250px] m-5">
+                <FormControl className="m-5 w-[250px]">
                     <InputLabel>Selection</InputLabel>
                     <Select
                         label={'Selection'}
@@ -326,7 +326,7 @@ export const Upgrades = () => {
                 />
             </div>
 
-            <div className="ag-theme-material w-full h-[calc(100vh-220px)]">
+            <div className="ag-theme-material h-[calc(100vh-220px)] w-full">
                 <AgGridReact
                     key={selection}
                     ref={gridRef}

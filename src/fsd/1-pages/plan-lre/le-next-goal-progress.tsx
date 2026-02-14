@@ -2,50 +2,43 @@ import { Info as InfoIcon } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import React from 'react';
 
-import { LeProgress } from './le-progress.service';
+import { EventProgress } from './token-estimation-service';
 
 interface Props {
-    progress: LeProgress;
+    progress: EventProgress;
 }
 
 export const LeNextGoalProgress: React.FC<Props> = ({ progress }) => {
     return (
-        <div className="flex-box wrap gap15 m-2.5">
+        <div className="m-2.5 flex flex-wrap gap-2">
             <div className="flex gap-[5px]">
-                Deed Points to {progress.goal}:
+                Deed Points to {progress.nextMilestone}:
                 <span className="font-bold">
-                    {progress.currentPoints} / {progress.pointsForNextMilestone}
+                    {progress.addlPointsForNextMilestone === Infinity
+                        ? 'Complete'
+                        : `${progress.totalPoints} / ${progress.totalPoints + progress.addlPointsForNextMilestone}`}
                 </span>
-                <Tooltip
-                    title={
-                        /*totalPoints + ' in total. Battles per track: ' + averageBattles*/
-                        `${progress.totalPoints} in total. Battles per track: ${progress.averageBattles}`
-                    }>
+                <Tooltip title={`${progress.totalPoints} in total.`}>
                     <InfoIcon />
                 </Tooltip>
             </div>
 
             <div className="flex gap-[5px]">
-                Currency to {progress.goal}:
+                Currency to {progress.nextMilestone}:
                 <span className="font-bold">
-                    {' '}
-                    {progress.currentCurrency} / {progress.currencyForNextMilestone}
+                    {progress.addlCurrencyForNextMilestone === Infinity
+                        ? 'Complete'
+                        : `${progress.totalCurrency} / ${progress.totalCurrency + progress.addlCurrencyForNextMilestone}`}
                 </span>
-                <Tooltip title={/*totalCurrency + ' in total'*/ `${progress.totalCurrency} in total`}>
-                    <InfoIcon />
-                </Tooltip>
             </div>
 
             <div className="flex gap-[5px]">
-                Shards to {progress.goal}:
+                Shards to {progress.nextMilestone}:
                 <span className="font-bold">
-                    {' '}
-                    {progress.currentTotalShards} /{' '}
-                    {progress.currentTotalShards - progress.incrementalShards + progress.incrementalShardsGoal}
+                    {progress.addlShardsForNextMilestone === Infinity
+                        ? 'Complete'
+                        : `${progress.currentShards} / ${progress.currentShards + progress.addlShardsForNextMilestone}`}
                 </span>
-                <Tooltip title={/*totalChests + ' in total'*/ `${progress.totalChests} in total`}>
-                    <InfoIcon />
-                </Tooltip>
             </div>
         </div>
     );

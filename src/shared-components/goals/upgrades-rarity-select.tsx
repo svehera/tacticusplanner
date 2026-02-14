@@ -1,7 +1,7 @@
 ﻿import { Info } from '@mui/icons-material';
 import React from 'react';
 
-import { Rarity, RarityString } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks, AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 interface Props {
@@ -11,12 +11,12 @@ interface Props {
 
 export const UpgradesRaritySelect: React.FC<Props> = ({ upgradesRarity, upgradesRarityChange }) => {
     return (
-        <div className="flex gap-3 items-center">
+        <div className="flex items-center gap-3">
             <MultipleSelectCheckmarks
                 placeholder="Upgrades rarity"
-                selectedValues={upgradesRarity.map(x => Rarity[x])}
+                selectedValues={upgradesRarity.map(x => RarityMapper.rarityToRarityString(x))}
                 values={Object.values(RarityString)}
-                selectionChanges={values => upgradesRarityChange(values.map(x => +Rarity[x as unknown as number]))}
+                selectionChanges={values => upgradesRarityChange(values.map(x => RarityMapper.stringToNumber[x]))}
             />
 
             <AccessibleTooltip

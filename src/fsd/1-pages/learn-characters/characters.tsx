@@ -509,6 +509,7 @@ export const LearnCharacters = () => {
                             maxWidth={250}
                             groupByFirstLetter
                             placeholder="Traits"
+                            // @ts-expect-error FIXME: The type of `filter.traits` is looser than the values provided
                             selectedValues={filter.traits}
                             values={traitsOptions}
                             selectionChanges={(value: string[]) => handleFilterChange('traits', value)}
@@ -516,6 +517,7 @@ export const LearnCharacters = () => {
                         <MultipleSelectCheckmarks
                             maxWidth={250}
                             placeholder="Alliance"
+                            // @ts-expect-error FIXME: The type of `filter.alliance` is looser than the values provided
                             selectedValues={filter.alliance}
                             values={Object.values(Alliance)}
                             selectionChanges={(value: string[]) => handleFilterChange('alliance', value)}
@@ -525,7 +527,7 @@ export const LearnCharacters = () => {
                 </>
             )}
 
-            <div className="flex gap-[3px] justify-left">
+            <div className="justify-left flex gap-[3px]">
                 <div style={{ width: 200 }}>
                     <RaritySelect
                         label={'Target Rarity'}

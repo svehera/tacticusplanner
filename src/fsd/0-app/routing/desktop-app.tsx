@@ -56,7 +56,7 @@ const DesktopApp = () => {
                 seenAppVersion={seenAppVersion ?? ''}
                 onCloseWhatsNew={handleWhatsNewClose}
             />
-            <div className="my-2.5 mx-5">
+            <div className="mx-5 my-2.5">
                 <Outlet />
             </div>
         </div>

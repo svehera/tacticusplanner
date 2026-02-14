@@ -9,7 +9,7 @@ export const PlanGuildWarRoutes = () => {
     const offenseItem = menuItemById['offense'];
     const layoutItem = menuItemById['zones'];
     return (
-        <div className="flex gap-2.5 flex-col items-center">
+        <div className="flex flex-col items-center gap-2.5">
             <Card
                 variant="outlined"
                 onClick={() => navigate(defenseItem.routeMobile)}

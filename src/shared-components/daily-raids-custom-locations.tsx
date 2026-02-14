@@ -71,7 +71,7 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
                     <FormControlLabel
                         control={<Switch value={showDroprates} onChange={(_, checked) => setShowDroprates(checked)} />}
                         label={
-                            <div className="flex items-center text-fg">
+                            <div className="text-fg flex items-center">
                                 <span>Show Rates&nbsp;</span>
                                 <AccessibleTooltip title={'Energy conversion efficiency per 1 energy used'}>
                                     <Info color="primary" />
@@ -81,7 +81,7 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
                     />
                 </div>
                 {campaignTypes.map(type => (
-                    <div key={type} className="h-[42px] flex items-center justify-center font-medium">
+                    <div key={type} className="flex h-[42px] items-center justify-center font-medium">
                         {campaignLabels[type]}
                     </div>
                 ))}
@@ -99,12 +99,12 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
                     ];
 
                     return (
-                        <div key={rarity} className="flex flex-col items-center mx-2">
+                        <div key={rarity} className="mx-2 flex flex-col items-center">
                             <RarityIcon rarity={rarity} />
                             {campaignTypes.map(type => (
                                 <div
                                     key={type}
-                                    className="flex flex-col gap-3 min-h-[42px] min-w-[42px] justify-center">
+                                    className="flex min-h-[42px] min-w-[42px] flex-col justify-center gap-3">
                                     {!showDroprates ? (
                                         <Checkbox
                                             className="mt-2"

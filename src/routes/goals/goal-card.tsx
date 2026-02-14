@@ -229,7 +229,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             Shards
                         </div>
                         {goalEstimate.mowEstimate && (
-                            <div className="py-2.5 px-0">
+                            <div className="px-0 py-2.5">
                                 <MowMaterialsTotal
                                     size="small"
                                     mowAlliance={goal.unitAlliance}
@@ -302,7 +302,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                         )}
                         {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
                         {goalEstimate.abilitiesEstimate && (
-                            <div className="py-2.5 px-0">
+                            <div className="px-0 py-2.5">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}

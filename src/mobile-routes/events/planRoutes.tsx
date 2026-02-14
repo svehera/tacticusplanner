@@ -24,11 +24,12 @@ export const PlanRoutes = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const teamsMenuItem = menuItemById['teams'];
     const teams2MenuItem = menuItemById['teams2'];
+    const warOffense2MenuItem = menuItemById['warOffense2'];
 
     const [selectedRoutes, setSelectedRoutes] = useState<SelectedRoutes>(SelectedRoutes.all);
 
     return (
-        <div className="flex gap-2.5 flex-col items-center">
+        <div className="flex flex-col items-center gap-2.5">
             {selectedRoutes === SelectedRoutes.all ? (
                 <>
                     {[
@@ -36,6 +37,7 @@ export const PlanRoutes = () => {
                         dailyRaidsMenuItem,
                         teamsMenuItem,
                         teams2MenuItem,
+                        warOffense2MenuItem,
                         campaignProgressionMenuItem,
                     ].map(menuItem => (
                         <Card

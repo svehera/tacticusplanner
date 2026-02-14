@@ -88,13 +88,7 @@ interface AbilityBadgeProps {
 const AbilityDisplay = ({ value, positionClasses }: AbilityBadgeProps) => {
     return (
         <div
-            className={`
-            absolute w-6 h-5 rounded-full flex items-center justify-center
-            text-[14px] font-bold z-10 shadow-sm border-[1.5px]
-            dark:bg-[#272424] dark:text-white border-[#333]
-            bg-gray-100 text-gray-900 dark:border-white
-            ${positionClasses}
-        `}>
+            className={`absolute z-10 flex h-5 w-6 items-center justify-center rounded-full border-[1.5px] border-[#333] bg-gray-100 text-[14px] font-bold text-gray-900 shadow-sm dark:border-white dark:bg-[#272424] dark:text-white ${positionClasses} `}>
             {value}
         </div>
     );
@@ -103,14 +97,7 @@ const AbilityDisplay = ({ value, positionClasses }: AbilityBadgeProps) => {
 const XpLevelDisplay = ({ value, positionClasses }: AbilityBadgeProps) => {
     return (
         <div
-            className={`
-            absolute min-w-[28px] h-5 flex items-center justify-center
-            text-[14px] font-bold z-10 shadow-sm border-[1.5px]
-            dark:bg-[#272424] dark:text-white border-[#333]
-            bg-gray-100 text-gray-900 dark:border-white
-            px-1
-            ${positionClasses}
-        `}>
+            className={`absolute z-10 flex h-5 min-w-[28px] items-center justify-center border-[1.5px] border-[#333] bg-gray-100 px-1 text-[14px] font-bold text-gray-900 shadow-sm dark:border-white dark:bg-[#272424] dark:text-white ${positionClasses} `}>
             {value}
         </div>
     );
@@ -176,6 +163,7 @@ interface Props {
     charData?: ICharacterData;
     mow?: ISnapshotMachineOfWar;
     mowData?: IMowStatic2;
+    isDisabled?: boolean;
 }
 
 export const RosterSnapshotCharacter: React.FC<Props> = ({
@@ -187,6 +175,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
     charData,
     mow,
     mowData,
+    isDisabled,
 }) => {
     const charIcon = getImageUrl(charData?.icon ?? mowData?.icon ?? 'default-character-icon.png');
     const frameIcon = tacticusIcons[getFrame(mow !== undefined, char?.rarity ?? mow?.rarity ?? 0)]?.file || '';
@@ -219,7 +208,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
     };
 
     return (
-        <div className="w-[96px] h-[170px]">
+        <div className="h-[170px] w-[96px]">
             <Tooltip
                 placement="top"
                 title={
@@ -229,11 +218,11 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
                           ? getMowTooltip(mow!, mowData!)
                           : ''
                 }>
-                <div className="absolute w-[96px] h-[170px] justify-center">
+                <div className="absolute h-[170px] w-[96px] justify-center">
                     <img
                         loading="lazy"
-                        className={`pointer-events-none absolute left-[3px] top-[17px] z-[1] ${
-                            isLocked ? 'filter grayscale' : ''
+                        className={`pointer-events-none absolute top-[17px] left-[3px] z-[1] ${
+                            isLocked || isDisabled ? 'grayscale filter' : ''
                         }`}
                         src={charIcon}
                         width={90}
@@ -241,10 +230,10 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
                         alt={char?.id ?? mow?.id ?? 'character'}
                     />
 
-                    <img src={frameIcon} alt="frame" className="absolute top-[14px] left-0 w-[96px] h-[126px] z-[2]" />
+                    <img src={frameIcon} alt="frame" className="absolute top-[14px] left-0 z-[2] h-[126px] w-[96px]" />
 
                     {starCount > 0 && !isLocked && (
-                        <div className="absolute top-[-4px] left-0 w-full flex justify-center items-center z-[10] h-[32px] pointer-events-none">
+                        <div className="pointer-events-none absolute top-[-4px] left-0 z-[10] flex h-[32px] w-full items-center justify-center">
                             <div className="flex items-center justify-center -space-x-2">
                                 {Array.from({ length: starCount }).map((_, index) => {
                                     const isBigStar = starCount === 5 && index === 2;
@@ -253,12 +242,12 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
                                             key={index}
                                             src={starIcon}
                                             alt="star"
-                                            className={`shrink-0 object-contain drop-shadow-[0_0_2px_rgba(0,0,0,1)] drop-shadow-[0_0_1px_rgba(0,0,0,1)] ${
+                                            className={`shrink-0 object-contain drop-shadow-[0_0_1px_rgba(0,0,0,1)] drop-shadow-[0_0_2px_rgba(0,0,0,1)] ${
                                                 starIcon === starsIcons.mythicWings
                                                     ? 'h-[26px] w-auto'
                                                     : isBigStar
-                                                      ? 'w-[30px] h-[30px]'
-                                                      : 'w-[24px] h-[24px]'
+                                                      ? 'h-[30px] w-[30px]'
+                                                      : 'h-[24px] w-[24px]'
                                             }`}
                                         />
                                     );
@@ -269,7 +258,7 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
 
                     {showAbilities && (rank !== Rank.Locked || (mow !== undefined && !mow.locked)) && (
                         <>
-                            <div className="absolute bottom-[8px] left-0 z-[11] w-[36px] flex justify-center">
+                            <div className="absolute bottom-[8px] left-0 z-[11] flex w-[36px] justify-center">
                                 <div>
                                     <AbilityDisplay
                                         value={char?.activeAbilityLevel ?? mow?.primaryAbilityLevel ?? 0}
@@ -278,13 +267,13 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
                                 </div>
                             </div>
                             {shouldShowXpLevel() && (
-                                <div className="absolute bottom-[7px] left-1/2 -translate-x-1/2 z-[11] w-[32px] flex justify-center">
-                                    <div className="w-[36px] flex justify-center">
+                                <div className="absolute bottom-[7px] left-1/2 z-[11] flex w-[32px] -translate-x-1/2 justify-center">
+                                    <div className="flex w-[36px] justify-center">
                                         <XpLevelDisplay value={char?.xpLevel ?? 0} positionClasses="relative" />
                                     </div>
                                 </div>
                             )}
-                            <div className="absolute bottom-[8px] right-0 z-[11] w-[36px] flex justify-center">
+                            <div className="absolute right-0 bottom-[8px] z-[11] flex w-[36px] justify-center">
                                 <AbilityDisplay
                                     value={char?.passiveAbilityLevel ?? mow?.secondaryAbilityLevel ?? 0}
                                     positionClasses="relative"
@@ -293,26 +282,26 @@ export const RosterSnapshotCharacter: React.FC<Props> = ({
                         </>
                     )}
 
-                    <div className="absolute top-[102px] left-[-2px] z-[12] pointer-events-none">
+                    <div className="pointer-events-none absolute top-[102px] left-[-2px] z-[12]">
                         {rank !== Rank.Locked && <RankIcon rank={rank} size={44} />}
                     </div>
 
-                    <div className="absolute top-[25px] left-[0px] w-full flex justify-between px-2 z-[4]">
-                        <div className="relative flex items-center justify-center min-w-[30px] left-[-10px]">
+                    <div className="absolute top-[25px] left-[0px] z-[4] flex w-full justify-between px-2">
+                        <div className="relative left-[-10px] flex min-w-[30px] items-center justify-center">
                             {shouldShowShards() && (
                                 <>
                                     <img src={shardIcon} alt="shards" className="h-[32px] w-auto" />
-                                    <span className="absolute text-[14px] font-bold text-gray-300 [text-shadow:1px_1px_2px_black] pointer-events-none">
+                                    <span className="pointer-events-none absolute text-[14px] font-bold text-gray-300 [text-shadow:1px_1px_2px_black]">
                                         {formatShardCount(char?.shards ?? mow?.shards ?? 0)}
                                     </span>
                                 </>
                             )}
                         </div>
-                        <div className="relative flex items-center justify-center min-w-[30px] right-[-10px]">
+                        <div className="relative right-[-10px] flex min-w-[30px] items-center justify-center">
                             {shouldShowMythicShards() && (
                                 <>
                                     <img src={mythicShardIcon} alt="mythic shards" className="h-[32px] w-auto" />
-                                    <span className="absolute text-[14px] font-bold text-gray-300 [text-shadow:1px_1px_2px_black] pointer-events-none">
+                                    <span className="pointer-events-none absolute text-[14px] font-bold text-gray-300 [text-shadow:1px_1px_2px_black]">
                                         {formatShardCount(char?.mythicShards ?? mow?.mythicShards ?? 0)}
                                     </span>
                                 </>

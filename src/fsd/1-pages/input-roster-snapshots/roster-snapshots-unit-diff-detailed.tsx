@@ -27,11 +27,11 @@ const ProgressionRow: React.FC<ProgressionRowProps> = ({
     className = '',
 }: ProgressionRowProps) => (
     <div className={`flex items-center justify-start space-x-2 ${className}`}>
-        <div className="flex justify-center items-center h-6 w-10">
+        <div className="flex h-6 w-10 items-center justify-center">
             {diffFlag ? icon1 : <span className="opacity-0">{icon1}</span>}
         </div>
-        <div className="flex justify-center items-center h-6 w-4">{diffFlag && <ArrowForward />}</div>
-        <div className="flex justify-center items-center h-6 w-10">{diffFlag ? icon2 : icon1}</div>
+        <div className="flex h-6 w-4 items-center justify-center">{diffFlag && <ArrowForward />}</div>
+        <div className="flex h-6 w-10 items-center justify-center">{diffFlag ? icon2 : icon1}</div>
     </div>
 );
 
@@ -114,12 +114,12 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
     };
 
     return (
-        <div className="flex w-82 h-28 dark:bg-gray-800 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl hover:border-blue-500">
-            <div className="w-18 h-full flex-shrink-0 relative p-1 dark:bg-gray-900 bg-gray-100 flex items-center justify-center">
+        <div className="flex h-28 w-82 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg transition duration-300 hover:border-blue-500 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800">
+            <div className="relative flex h-full w-18 flex-shrink-0 items-center justify-center bg-gray-100 p-1 dark:bg-gray-900">
                 {(staticChar || staticMow) && <CharacterPortraitImage icon={(staticChar || staticMow)!.icon} />}
             </div>
 
-            <div className="flex-grow flex p-3 dark:text-white text-gray-900 justify-between">
+            <div className="flex flex-grow justify-between p-3 text-gray-900 dark:text-white">
                 <div className="justify-center space-y-1">
                     <ProgressionRow
                         diffFlag={rarityDiff}
@@ -160,7 +160,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                             }`}>
                             {active1}
                         </span>
-                        <div className={`w-4 flex justify-center ${activeDiff ? '' : 'opacity-0'}`}>
+                        <div className={`flex w-4 justify-center ${activeDiff ? '' : 'opacity-0'}`}>
                             <ArrowForward fontSize="inherit" />
                         </div>
                         <span className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400">
@@ -177,7 +177,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                             }`}>
                             {passive1}
                         </span>
-                        <div className={`w-4 flex justify-center ${passiveDiff ? '' : 'opacity-0'}`}>
+                        <div className={`flex w-4 justify-center ${passiveDiff ? '' : 'opacity-0'}`}>
                             <ArrowForward fontSize="inherit" />
                         </div>
                         <span className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400">
@@ -193,7 +193,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                     }`}>
                                     {char?.xpLevel ?? 0}
                                 </span>
-                                <div className={`w-4 flex justify-center ${xpDiff ? '' : 'opacity-0'}`}>
+                                <div className={`flex w-4 justify-center ${xpDiff ? '' : 'opacity-0'}`}>
                                     <ArrowForward fontSize="inherit" />
                                 </div>
                                 <span className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400">
@@ -213,7 +213,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                     }`}>
                                     {shards1}
                                 </span>
-                                <div className={`w-4 flex justify-center ${shardsDiff ? '' : 'opacity-0'}`}>
+                                <div className={`flex w-4 justify-center ${shardsDiff ? '' : 'opacity-0'}`}>
                                     <ArrowForward fontSize="inherit" />
                                 </div>
                                 <span className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400">
@@ -233,7 +233,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                     }`}>
                                     {mythicShards1}
                                 </span>
-                                <div className={`w-4 flex justify-center ${mythicShardsDiff ? '' : 'opacity-0'}`}>
+                                <div className={`flex w-4 justify-center ${mythicShardsDiff ? '' : 'opacity-0'}`}>
                                     <ArrowForward fontSize="inherit" />
                                 </div>
                                 <span className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400">

@@ -1,5 +1,5 @@
 export { cn } from './classes';
-export { FactionsService } from './factions.service';
+export { factionLookup } from './factions.service';
 export { useMediaQuery } from './use-media-query';
 export { getEnumValues } from './get-enum-value';
 export { findAndRemoveItem } from './find-and-remove';
@@ -8,5 +8,4 @@ export { useQueryState } from './query-state';
 export { useFitGridOnWindowResize } from './resize-grid';
 export { getCompletionRateColor } from './get-completion-color';
 export { constObjectKeys, createSafeGetter, mutableCopy } from './type-helpers';
-export type { Prettify } from './type-helpers';
 export * from './tacticus-api';

@@ -114,7 +114,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
                 elems.push(
                     <button
                         key={keyPrefix + battleId + '-' + (row * maxPerRow + i) + '-' + enemyId}
-                        className="absolute p-0 border-none bg-transparent cursor-pointer hover:brightness-110 transition-all focus:outline-none"
+                        className="absolute cursor-pointer border-none bg-transparent p-0 transition-all hover:brightness-110 focus:outline-none"
                         style={{ left, top, width: frameWidth, height: frameHeight }}
                         onClick={() =>
                             npc &&

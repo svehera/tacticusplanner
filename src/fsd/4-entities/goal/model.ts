@@ -1,4 +1,4 @@
-import { Alliance, Faction, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Alliance, FactionId, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { IRankLookup } from '@/fsd/4-entities/character/@x/goal';
 
@@ -46,7 +46,7 @@ export interface ICharacterUnlockGoal extends ICharacterRaidGoalSelectBase {
     mythicShards: 0;
     rank: Rank;
     rarity: Rarity;
-    faction: Faction;
+    faction: FactionId;
     campaignsUsage: CampaignsLocationsUsage;
 }
 

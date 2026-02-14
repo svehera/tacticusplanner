@@ -54,12 +54,6 @@ function handleLegendaryEvents(
             return;
         }
     });
-
-    if (successfulEvents.length > 0) {
-        enqueueSnackbar(`Synced progress for ${successfulEvents.join(', ')}'s legendary events.`, {
-            variant: 'info',
-        });
-    }
 }
 
 export const useSyncWithTacticus = () => {
@@ -88,6 +82,20 @@ export const useSyncWithTacticus = () => {
                 });
 
                 dispatch.inventory({ type: 'SyncWithTacticus', inventory: result.data.player.inventory });
+
+                // Extract tokens from nested game mode objects
+                const progress = result.data.player.progress;
+                const combinedTokens = {
+                    arena: progress.arena?.tokens,
+                    guildRaid: progress.guildRaid?.tokens,
+                    bombTokens: progress.guildRaid?.bombTokens,
+                    onslaught: progress.onslaught?.tokens,
+                    salvageRun: progress.salvageRun?.tokens,
+                };
+                dispatch.gameModeTokens({
+                    type: 'SyncWithTacticus',
+                    gameModeTokens: combinedTokens,
+                });
 
                 dispatch.campaignsProgress({
                     type: 'SyncWithTacticus',

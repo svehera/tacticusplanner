@@ -100,12 +100,12 @@ const CharacterTileFn = ({
 
     const renderCharacterLevel = useMemo(() => {
         return isUnlocked ? (
-            <div className="relative top-[-20px] flex items-center justify-center border text-[white] text-xs border-solid border-[gold] bg-[#012a41]">
+            <div className="relative top-[-20px] flex items-center justify-center border border-solid border-[gold] bg-[#012a41] text-xs text-[white]">
                 {character.level}
             </div>
         ) : (
             <div
-                className="relative top-[-20px] flex items-center justify-center border text-[white] text-xs border-solid border-[gold] bg-[#012a41]"
+                className="relative top-[-20px] flex items-center justify-center border border-solid border-[gold] bg-[#012a41] text-xs text-[white]"
                 style={{
                     background: `linear-gradient(to right, green ${unlockProgress}%, #012A41 ${unlockProgress}%)`,
                 }}>
@@ -130,7 +130,7 @@ const CharacterTileFn = ({
 
     return (
         <div
-            className="flex flex-col items-center min-w-[75px]"
+            className="flex min-w-[75px] flex-col items-center"
             style={{ opacity: tileOpacity, cursor: onCharacterClick && !disableClick ? 'pointer' : undefined }}
             onClick={!disableClick ? handleCharacterClick : undefined}>
             <StarsIcon stars={character.stars} />
@@ -142,25 +142,25 @@ const CharacterTileFn = ({
                 </Tooltip>
 
                 <div
-                    className="relative top-[-10px] flex items-center justify-between z-10"
+                    className="relative top-[-10px] z-10 flex items-center justify-between"
                     style={{ visibility: hasAbilities && viewContext.showAbilitiesLevel ? 'visible' : 'hidden' }}>
-                    <div className="relative top-[-10px] w-5 h-5 flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold] rounded-full">
+                    <div className="relative top-[-10px] flex h-5 w-5 items-center justify-center rounded-full border border-solid border-[gold] bg-[#012a41] text-xs text-[white]">
                         {character.activeAbilityLevel}
                     </div>
-                    <div className="relative top-[-10px] w-5 h-5 flex items-center justify-center bg-[#012a41] border text-[white] text-xs border-solid border-[gold] rounded-full">
+                    <div className="relative top-[-10px] flex h-5 w-5 items-center justify-center rounded-full border border-solid border-[gold] bg-[#012a41] text-xs text-[white]">
                         {character.passiveAbilityLevel}
                     </div>
                 </div>
                 {viewContext.showCharacterLevel && renderCharacterLevel}
             </div>
-            <div className="min-h-[30px] flex items-center mt-[-15px] justify-center">
+            <div className="mt-[-15px] flex min-h-[30px] items-center justify-center">
                 {viewContext.showCharacterRarity && <RarityIcon rarity={character.rarity} />}
                 {isUnlocked && <RankIcon rank={character.rank} />}
             </div>
             {!!character.numberOfUnlocked && (
                 <AccessibleTooltip title={renderUnlockStats}>
                     <div
-                        className="bg-[#012a41] w-[60px] flex items-center justify-center border text-[white] text-xs mb-[5px] border-solid border-[gold]"
+                        className="mb-[5px] flex w-[60px] items-center justify-center border border-solid border-[gold] bg-[#012a41] text-xs text-[white]"
                         style={{
                             background: `linear-gradient(to right, green ${character.numberOfUnlocked}%, #012A41 ${character.numberOfUnlocked}%)`,
                         }}>

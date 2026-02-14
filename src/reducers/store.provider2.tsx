@@ -4,11 +4,13 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
 import { guildReducer } from 'src/reducers/guildReducer';
 import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
 import { teams2Reducer } from 'src/reducers/teams2.reducer';
+import { warOffense2Reducer } from 'src/reducers/war-offense2.reducer';
 
 import { IErrorResponse } from '@/fsd/5-shared/api';
 import { useAuth } from '@/fsd/5-shared/model';
@@ -57,6 +59,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [goals, dispatchGoals] = React.useReducer(goalsReducer, globalState.goals);
     const [teams, dispatchTeams] = React.useReducer(teamsReducer, globalState.teams);
     const [teams2, dispatchTeams2] = React.useReducer(teams2Reducer, globalState.teams2);
+    const [gameModeTokens, dispatchGameModeTokens] = React.useReducer(
+        gameModeTokensActionReducer,
+        globalState.gameModeTokens
+    );
+    const [warOffense2, dispatchWarOffense2] = React.useReducer(warOffense2Reducer, globalState.warOffense2);
     const [viewPreferences, dispatchViewPreferences] = React.useReducer(
         viewPreferencesReducer,
         globalState.viewPreferences
@@ -116,6 +123,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             mows: wrapDispatch(dispatchMows),
             teams: wrapDispatch(dispatchTeams),
             teams2: wrapDispatch(dispatchTeams2),
+            warOffense2: wrapDispatch(dispatchWarOffense2),
             goals: wrapDispatch(dispatchGoals),
             viewPreferences: wrapDispatch(dispatchViewPreferences),
             autoTeamsPreferences: wrapDispatch(dispatchAutoTeamsPreferences),
@@ -133,12 +141,14 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpIncome: wrapDispatch(dispatchXpIncome),
             xpUse: wrapDispatch(dispatchXpUse),
             rosterSnapshots: wrapDispatch(dispatchRosterSnapshots),
+            gameModeTokens: wrapDispatch(dispatchGameModeTokens),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
                 dispatchMows({ type: 'Set', value: data.mows });
                 dispatchGoals({ type: 'Set', value: data.goals });
                 dispatchTeams({ type: 'Set', value: data.teams });
                 dispatchTeams2({ type: 'Set', value: data.teams2 });
+                dispatchWarOffense2({ type: 'Set', value: data.warOffense2 });
                 dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
                 dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
                 dispatchAutoTeamsPreferences({ type: 'Set', value: data.autoTeamsPreferences });
@@ -155,6 +165,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 dispatchXpIncome({ type: 'Set', value: data.xpIncome });
                 dispatchXpUse({ type: 'Set', value: data.xpUse });
                 dispatchRosterSnapshots({ type: 'Set', value: data.rosterSnapshots });
+                dispatchGameModeTokens({ type: 'Set', value: data.gameModeTokens });
 
                 if (modified) {
                     setModified(true);
@@ -182,9 +193,12 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchGuildWar,
             dispatchGuild,
             dispatchTeams,
+            dispatchTeams2,
+            dispatchWarOffense2,
             dispatchXpIncome,
             dispatchXpUse,
             dispatchRosterSnapshots,
+            dispatchGameModeTokens,
             setGlobalState,
         ]
     );
@@ -199,6 +213,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             mows,
             teams,
             teams2,
+            warOffense2,
             viewPreferences,
             autoTeamsPreferences,
             selectedTeamOrder,
@@ -218,6 +233,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpIncome,
             xpUse,
             rosterSnapshots,
+            gameModeTokens,
         };
         const storeValue = GlobalState.toStore(newValue);
 

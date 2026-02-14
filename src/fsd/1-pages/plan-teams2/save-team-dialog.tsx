@@ -59,13 +59,13 @@ export const SaveTeamDialog: React.FC<Props> = ({
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm transition-opacity">
-            <div className="relative w-full max-w-lg bg-white dark:bg-[#1a2234] rounded-xl shadow-2xl border border-gray-200 dark:border-slate-700 max-h-[90vh] overflow-y-auto scrollbar-hide">
-                <div className="sticky top-0 z-10 flex items-center justify-between p-4 bg-gray-50 dark:bg-[#1e293b] border-b border-gray-200 dark:border-slate-700">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm transition-opacity">
+            <div className="scrollbar-hide relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-[#1a2234]">
+                <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-gray-50 p-4 dark:border-slate-700 dark:bg-[#1e293b]">
                     <h2 className="text-lg font-bold text-gray-900 dark:text-white">Save Team</h2>
                     <button
                         onClick={onCancel}
-                        className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-slate-700 rounded-full transition-colors">
+                        className="rounded-full p-2 text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-slate-700 dark:hover:text-white">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -82,12 +82,12 @@ export const SaveTeamDialog: React.FC<Props> = ({
                     </button>
                 </div>
 
-                <div className="p-6 space-y-6">
+                <div className="space-y-6 p-6">
                     <div>
-                        <div className="flex justify-between items-end mb-2">
+                        <div className="mb-2 flex items-end justify-between">
                             <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Team Name</label>
                             {!saveAllowed && (
-                                <span className="text-red-500 text-xs italic">{saveDisallowedMessage}</span>
+                                <span className="text-xs text-red-500 italic">{saveDisallowedMessage}</span>
                             )}
                         </div>
                         <input
@@ -95,12 +95,12 @@ export const SaveTeamDialog: React.FC<Props> = ({
                             value={teamName}
                             onChange={e => onTeamNameChange(e.target.value)}
                             placeholder="Enter team name..."
-                            className="w-full px-4 py-2 bg-gray-50 dark:bg-[#0f172a] border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 transition-all outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-[#0f172a] dark:text-white"
                         />
                     </div>
 
                     <div className="flex gap-6">
-                        <label className="flex items-center gap-2 cursor-pointer text-gray-700 dark:text-gray-300">
+                        <label className="flex cursor-pointer items-center gap-2 text-gray-700 dark:text-gray-300">
                             <AccessibleTooltip title={warEnabled ? '' : warDisabledMessage!}>
                                 <div>
                                     <input
@@ -108,13 +108,13 @@ export const SaveTeamDialog: React.FC<Props> = ({
                                         checked={warEnabled && warOffense}
                                         disabled={!warEnabled}
                                         onChange={() => onWarOffenseChanged(!warOffense)}
-                                        className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                        className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                                     />
                                     War Offense
                                 </div>
                             </AccessibleTooltip>
                         </label>
-                        <label className="flex items-center gap-2 cursor-pointer text-gray-700 dark:text-gray-300">
+                        <label className="flex cursor-pointer items-center gap-2 text-gray-700 dark:text-gray-300">
                             <AccessibleTooltip title={warEnabled ? '' : warDisabledMessage!}>
                                 <div>
                                     <input
@@ -122,22 +122,22 @@ export const SaveTeamDialog: React.FC<Props> = ({
                                         checked={warEnabled && warDefense}
                                         disabled={!warEnabled}
                                         onChange={() => onWarDefenseChanged(!warDefense)}
-                                        className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                        className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                                     />
                                     War Defense
                                 </div>
                             </AccessibleTooltip>
                         </label>
-                        <label className="flex items-center gap-2 cursor-pointer text-gray-700 dark:text-gray-300">
+                        <label className="flex cursor-pointer items-center gap-2 text-gray-700 dark:text-gray-300">
                             <input
                                 type="checkbox"
                                 checked={guildRaid}
                                 onChange={() => onGuildRaidChanged(!guildRaid)}
-                                className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                             />
                             Guild Raid
                         </label>
-                        <label className="flex items-center gap-2 cursor-pointer text-gray-700 dark:text-gray-300">
+                        <label className="flex cursor-pointer items-center gap-2 text-gray-700 dark:text-gray-300">
                             <AccessibleTooltip title={tournamentArenaEnabled ? '' : tournamentArenaDisabledMessage!}>
                                 <div>
                                     <input
@@ -145,7 +145,7 @@ export const SaveTeamDialog: React.FC<Props> = ({
                                         checked={tournamentArenaEnabled && tournamentArena}
                                         disabled={!tournamentArenaEnabled}
                                         onChange={() => onTournamentArenaChanged(!tournamentArena)}
-                                        className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                        className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                                     />
                                     Tournament Arena
                                 </div>
@@ -154,17 +154,17 @@ export const SaveTeamDialog: React.FC<Props> = ({
                     </div>
 
                     <div>
-                        <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                        <h4 className="mb-3 text-sm font-semibold tracking-wider text-gray-500 uppercase">
                             Battlefield Levels
                         </h4>
                         <div className="grid grid-cols-3 gap-3">
                             {[1, 2, 3, 4, 5, 6].map(lvl => (
                                 <label
                                     key={lvl}
-                                    className={`flex items-center justify-center p-2 rounded-lg border cursor-pointer transition-colors ${
+                                    className={`flex cursor-pointer items-center justify-center rounded-lg border p-2 transition-colors ${
                                         battleFieldLevels[lvl - 1]
-                                            ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-500 text-blue-600'
-                                            : 'border-gray-200 dark:border-slate-700 text-gray-500'
+                                            ? 'border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/20'
+                                            : 'border-gray-200 text-gray-500 dark:border-slate-700'
                                     }`}>
                                     <input
                                         type="checkbox"
@@ -179,19 +179,19 @@ export const SaveTeamDialog: React.FC<Props> = ({
                     </div>
                 </div>
 
-                <div className="flex items-center justify-end gap-3 p-4 bg-gray-50 dark:bg-[#1e293b] border-t border-gray-200 dark:border-slate-700">
+                <div className="flex items-center justify-end gap-3 border-t border-gray-200 bg-gray-50 p-4 dark:border-slate-700 dark:bg-[#1e293b]">
                     <button
                         onClick={onCancel}
-                        className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors">
+                        className="px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:text-gray-800 dark:text-gray-400 dark:hover:text-white">
                         Cancel
                     </button>
                     <button
                         onClick={handleSave}
                         disabled={!saveAllowed}
-                        className={`px-6 py-2 rounded-lg text-sm font-bold shadow-lg shadow-emerald-900/20 transition-all active:scale-95 ${
+                        className={`rounded-lg px-6 py-2 text-sm font-bold shadow-lg shadow-emerald-900/20 transition-all active:scale-95 ${
                             saveAllowed
-                                ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
-                                : 'bg-gray-400 cursor-not-allowed text-gray-200'
+                                ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                                : 'cursor-not-allowed bg-gray-400 text-gray-200'
                         }`}>
                         Save Team
                     </button>

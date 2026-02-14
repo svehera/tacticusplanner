@@ -104,7 +104,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                     <p>Inventory after update:</p>
                     <ul className="p-0">
                         {inventoryUpgrades.map((x, index) => (
-                            <li key={x.id + index} className="list-none flex items-center gap-2.5 pb-2.5">
+                            <li key={x.id + index} className="flex list-none items-center gap-2.5 pb-2.5">
                                 <UpgradeImage
                                     material={x.label}
                                     iconPath={x.iconPath}

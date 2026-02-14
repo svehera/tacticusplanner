@@ -85,14 +85,6 @@ export const LeTokenomics: React.FC<Props> = ({
         setCharacters(resolvedChars);
     }, [unresolvedChars]);
 
-    /*
-    const missedMilestones = milestonesAndPoints
-        .filter(milestone => milestone.points > finalProjectedPoints && (showP2P || milestone.packsPerRound === 0))
-        .sort((a, b) => a.points - b.points);
-    const achievedMilestones = milestonesAndPoints.filter(
-        milestone => currentPoints >= milestone.points && (showP2P || milestone.packsPerRound === 0)
-    );
-    */
     // Helper function to check if a token has yellow or red restrictions
     const hasWarningRestrictions = (token: TokenDisplay): boolean => {
         return token.restricts.some(restrict => {
@@ -137,17 +129,10 @@ export const LeTokenomics: React.FC<Props> = ({
 
     const character = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
     const rank = character?.rank ?? Rank.Locked;
+    const rarity = character?.rarity ?? Rarity.Legendary;
+    const stars = character?.stars ?? RarityStars.None;
 
-    const progress = TokenEstimationService.computeCurrentProgress(
-        model,
-        rank === Rank.Locked ? Rarity.Legendary : (character?.rarity ?? Rarity.Legendary),
-        rank === Rank.Locked ? RarityStars.None : (character?.stars ?? RarityStars.None),
-        /*p2p=*/ true
-    );
-
-    const char = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
-    const rarity = char?.rarity ?? Rarity.Legendary;
-    const stars = char?.stars ?? RarityStars.None;
+    const progress = TokenEstimationService.computeCurrentProgress(model, rarity, stars);
 
     const isDataStale = () => {
         const nextEventDateUtc: Date = new Date(legendaryEvent.nextEventDateUtc ?? 0);
@@ -160,17 +145,19 @@ export const LeTokenomics: React.FC<Props> = ({
         return Date.now() - model.syncedProgress.lastUpdateMillisUtc > 3 * 3600 * 1000;
     };
 
+    const incrementalShardsForNextMilestone = progress.currentShards + progress.addlShardsForNextMilestone;
+
     const shardBarWidth =
-        progress.shardsForNextMilestone === Infinity
+        incrementalShardsForNextMilestone === Infinity
             ? 100
-            : Math.min(100, (progress.shards / progress.shardsForNextMilestone) * 100);
+            : Math.min(100, (progress.currentShards / incrementalShardsForNextMilestone) * 100);
 
     const characterPortrait = () => {
         return (
             <div className="flex flex-col items-center">
                 {/* Character Icon Container */}
                 <div>
-                    {char !== undefined && (
+                    {character !== undefined && (
                         <RosterSnapshotCharacter
                             showShards={RosterSnapshotShowVariableSettings.Never}
                             showMythicShards={RosterSnapshotShowVariableSettings.Never}
@@ -178,8 +165,8 @@ export const LeTokenomics: React.FC<Props> = ({
                             showAbilities={false}
                             char={
                                 {
-                                    id: char.snowprintId!,
-                                    rank: char.rank,
+                                    id: character.snowprintId!,
+                                    rank: rank,
                                     rarity: rarity,
                                     stars: stars,
                                     shards: 0,
@@ -189,12 +176,12 @@ export const LeTokenomics: React.FC<Props> = ({
                                     xpLevel: 1,
                                 } as ISnapshotCharacter
                             }
-                            charData={char}
+                            charData={character}
                         />
                     )}
                 </div>
-                <div className="flex items-center justify-center w-full gap-2">
-                    <div className="relative w-40 h-6 overflow-hidden bg-gray-200 rounded-full dark:bg-gray-700">
+                <div className="flex w-full items-center justify-center gap-2">
+                    <div className="relative h-6 w-40 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
                         <div
                             className="h-full bg-blue-600"
                             style={{
@@ -203,12 +190,13 @@ export const LeTokenomics: React.FC<Props> = ({
                                 borderTopRightRadius: '9999px',
                                 borderBottomRightRadius: '9999px',
                             }}></div>
-                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-xs font-medium text-gray-800 dark:text-gray-100">
-                            {progress.shards} / {progress.shardsForNextMilestone}
+                        <span className="absolute inset-0 flex h-full w-full items-center justify-center text-xs font-medium text-gray-800 dark:text-gray-100">
+                            {progress.currentShards} /{' '}
+                            {progress.addlShardsForNextMilestone === Infinity ? '∞' : incrementalShardsForNextMilestone}
                         </span>
                     </div>
                 </div>
-                <div className="flex mt-2">
+                <div className="mt-2 flex">
                     <MiscIcon icon="leShard" width={40} height={40} />
                 </div>
             </div>
@@ -216,13 +204,13 @@ export const LeTokenomics: React.FC<Props> = ({
     };
 
     return (
-        <div className="flex flex-col w-full gap-y-8">
+        <div className="flex w-full flex-col gap-y-8">
             {firstToken && (
-                <div className="flex flex-col items-center w-full gap-y-4">
-                    <div className="flex flex-col items-center w-full gap-y-4">
+                <div className="flex w-full flex-col items-center gap-y-4">
+                    <div className="flex w-full flex-col items-center gap-y-4">
                         {/* Token status and sync section */}
-                        <div className="flex items-center justify-center w-full min-h-10">
-                            <div className="flex text-sm text-gray-600 gap-x-8 dark:text-gray-400">
+                        <div className="flex min-h-10 w-full items-center justify-center">
+                            <div className="flex gap-x-8 text-sm text-gray-600 dark:text-gray-400">
                                 <div className="flex items-center gap-2">
                                     <SyncButton showText={true} />
                                 </div>
@@ -277,7 +265,7 @@ export const LeTokenomics: React.FC<Props> = ({
                     <div>
                         <h3 className="text-lg font-bold">Next Token</h3>
                     </div>
-                    <div className="justify-center w-full md:w-2/3 lg:w-1/2">
+                    <div className="w-full justify-center md:w-2/3 lg:w-1/2">
                         <LeTokenCard
                             token={firstToken}
                             tokenUsedDuringEventIteration={
@@ -312,7 +300,7 @@ export const LeTokenomics: React.FC<Props> = ({
                         />
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) !== undefined && (
-                                <div className="w-full mt-4">
+                                <div className="mt-4 w-full">
                                     <LeBattle
                                         battle={LeBattleService.getBattleFromToken(firstToken, battles)!}
                                         trackName={firstToken.track}
@@ -321,7 +309,7 @@ export const LeTokenomics: React.FC<Props> = ({
                             )}
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) === undefined && (
-                                <div className="w-full p-4 mt-4 text-center text-gray-600 border border-gray-300 dark:text-gray-500 dark:border-gray-700 rounded-xl">
+                                <div className="mt-4 w-full rounded-xl border border-gray-300 p-4 text-center text-gray-600 dark:border-gray-700 dark:text-gray-500">
                                     Battle data not available.
                                 </div>
                             )}
@@ -332,21 +320,9 @@ export const LeTokenomics: React.FC<Props> = ({
                 <SupportSection />
             </div>
 
-            <div className="flex flex-col items-center w-full gap-y-4">{characterPortrait()}</div>
+            <div className="flex w-full flex-col items-center gap-y-4">{characterPortrait()}</div>
 
-            {/*showP2P && (
-                <div className="flex flex-col items-center w-full gap-y-4">
-                    <div>
-                        <h3 className="text-lg font-bold">Milestones Already Achieved</h3>
-                    </div>
-                    <LeTokenMilestoneCardGrid
-                        milestonesToList={achievedMilestones}
-                        emptyMessage="No milestones achieved yet."
-                    />
-                </div>
-            )*/}
-
-            <div key="tokens" className="flex flex-col w-full gap-2">
+            <div key="tokens" className="flex w-full flex-col gap-2">
                 <LeTokenTable
                     battles={battles}
                     legendaryEvent={legendaryEvent}
@@ -357,25 +333,6 @@ export const LeTokenomics: React.FC<Props> = ({
                     updateDto={updateDto}
                 />
             </div>
-            {/*missedMilestones.length > 0 && (
-                <div className="flex flex-col items-center w-full pt-6 mt-4 border-t-2 border-gray-200 gap-y-4 dark:border-gray-700">
-                    <div className="text-center">
-                        <h3 className="text-lg font-bold text-red-700 dark:text-red-400">
-                            Milestones Projected to Miss
-                        </h3>
-                        <p className="text-sm text-gray-500">
-                            Based on current points ({currentPoints}) + tokens listed above (+
-                            {projectedAdditionalPoints})
-                        </p>
-                    </div>
-
-                    <LeTokenMilestoneCardGrid
-                        milestonesToList={missedMilestones}
-                        emptyMessage=""
-                        isMissedVariant={true}
-                    />
-                </div>
-            )*/}
         </div>
     );
 };

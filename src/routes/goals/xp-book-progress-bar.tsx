@@ -20,13 +20,13 @@ export const XpGoalProgressBar: React.FC<XpGoalProgressBarProps> = ({ applied, r
     return (
         <AccessibleTooltip title={tooltipText}>
             <div className="flex-box w-full max-w-[140px] items-center gap-1">
-                <div className="relative flex-grow h-4 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
+                <div className="relative h-4 flex-grow overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
                     <div className="h-full bg-green-800 transition-all duration-500" style={{ width: barWidth }}></div>
-                    <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold leading-none px-1 text-gray-900 dark:text-white">
+                    <span className="absolute inset-0 flex items-center justify-center px-1 text-[10px] leading-none font-bold text-gray-900 dark:text-white">
                         {displayValue}
                     </span>
                 </div>
-                <div className="w-[18px] h-[18px] flex items-center justify-center">
+                <div className="flex h-[18px] w-[18px] items-center justify-center">
                     <MiscIcon icon={'legendaryBook'} height={18} width={15} />
                 </div>
             </div>

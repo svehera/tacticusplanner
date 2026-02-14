@@ -17,7 +17,7 @@ import { useContext, useEffect, useState } from 'react';
 import { ICharacter2 } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { Faction } from '@/fsd/5-shared/model/enums/faction.enum';
+import { FactionId } from '@/fsd/5-shared/model';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 
@@ -28,7 +28,8 @@ import { AddTeamDialog } from './add-team-dialog';
 import { ITeam2 } from './models';
 import { TeamFlow } from './team-flow';
 
-const MAX_TEAMS = 5;
+// Somewhat arbitrary, but please consult with the planner maintainer before increasing.
+const MAX_TEAMS = 20;
 
 // Internal helper for metadata styling
 const MetadataChip = ({ icon, label, color }: { icon: React.ReactElement; label: string; color: any }) => (
@@ -54,7 +55,7 @@ export const ManageTeams = () => {
     const [maxRank, setMaxRank] = useState<Rank>(Rank.Adamantine3);
     const [minRarity, setMinRarity] = useState<Rarity>(Rarity.Common);
     const [maxRarity, setMaxRarity] = useState<Rarity>(Rarity.Mythic);
-    const [factions, setFactions] = useState<Faction[]>([]);
+    const [factions, setFactions] = useState<FactionId[]>([]);
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, setSelectedChars] = useState<string[]>([]);
     const [selectedMows, setSelectedMows] = useState<string[]>([]);
@@ -93,7 +94,7 @@ export const ManageTeams = () => {
 
     useEffect(() => {
         let nonRaidModesEnabled = true;
-        if (selectedChars.length > 5) {
+        if (selectedChars.length > 5 && (flexIndex ?? selectedChars.length) > 5) {
             const MESSAGE =
                 'A team can have a maximum of 5 characters (only Guild Raid Teams can have more than five characters).';
             setWarDisallowedMessage(MESSAGE);
@@ -323,19 +324,11 @@ export const ManageTeams = () => {
                 <ButtonBase
                     onClick={onAdd}
                     disabled={teams.length >= MAX_TEAMS}
-                    className="w-full group flex flex-col items-center justify-center p-6 
-                           border-2 border-dashed border-slate-300 dark:border-slate-700 
-                           hover:border-blue-500 dark:hover:border-blue-400 
-                           hover:bg-blue-50/30 dark:hover:bg-blue-900/10 
-                           rounded-xl transition-all duration-200">
-                    <div
-                        className="flex items-center justify-center w-10 h-10 mb-2 
-                                rounded-full bg-slate-100 dark:bg-slate-800 
-                                group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 
-                                transition-colors">
-                        <AddIcon className="text-slate-500 group-hover:text-blue-500 transition-colors" />
+                    className="group flex w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 p-6 transition-all duration-200 hover:border-blue-500 hover:bg-blue-50/30 dark:border-slate-700 dark:hover:border-blue-400 dark:hover:bg-blue-900/10">
+                    <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 transition-colors group-hover:bg-blue-100 dark:bg-slate-800 dark:group-hover:bg-blue-900/30">
+                        <AddIcon className="text-slate-500 transition-colors group-hover:text-blue-500" />
                     </div>
-                    <Typography className="font-bold text-slate-600 dark:text-slate-400 group-hover:text-blue-600">
+                    <Typography className="font-bold text-slate-600 group-hover:text-blue-600 dark:text-slate-400">
                         Add New Team
                     </Typography>
                     {teams.length < MAX_TEAMS ? (
@@ -353,10 +346,10 @@ export const ManageTeams = () => {
                 <Paper
                     key={team.name}
                     elevation={0}
-                    className="p-4 border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a1f2e] transition-colors">
-                    <div className="flex justify-between items-start mb-4">
+                    className="border border-slate-200 bg-white p-4 transition-colors dark:border-slate-800 dark:bg-[#1a1f2e]">
+                    <div className="mb-4 flex items-start justify-between">
                         <div>
-                            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">
+                            <span className="font-mono text-xs tracking-wider text-slate-500 uppercase">
                                 Team Configuration
                             </span>
                             <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">{team.name}</h3>
@@ -375,7 +368,7 @@ export const ManageTeams = () => {
                             </Tooltip>
                         </div>
                     </div>
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="mb-4 flex flex-wrap gap-2">
                         {!!team.warOffense && (
                             <MetadataChip
                                 icon={<MilitaryTech fontSize="inherit" />}
@@ -398,7 +391,7 @@ export const ManageTeams = () => {
                         )}
 
                         {team.bfs !== undefined && (!!team.warOffense || !!team.warDefense) && (
-                            <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                            <div className="flex items-center gap-1 rounded border border-slate-200 bg-slate-100 px-2 py-0.5 dark:border-slate-700 dark:bg-slate-800">
                                 <Layers className="text-slate-500" sx={{ fontSize: 14 }} />
                                 <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400">
                                     {team.bfs
@@ -412,15 +405,15 @@ export const ManageTeams = () => {
                     </div>
                     {team.notes && team.notes.trim().length > 0 && (
                         <div className="mb-4">
-                            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">Notes</span>
-                            <div className="mt-2 p-3 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                                <p className="text-sm text-slate-700 dark:text-slate-300 whitespace-pre-wrap">
+                            <span className="font-mono text-xs tracking-wider text-slate-500 uppercase">Notes</span>
+                            <div className="mt-2 rounded border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-900">
+                                <p className="text-sm whitespace-pre-wrap text-slate-700 dark:text-slate-300">
                                     {team.notes}
                                 </p>
                             </div>
                         </div>
                     )}
-                    <div className="bg-slate-50/50 dark:bg-slate-900/50 rounded-lg p-3">
+                    <div className="rounded-lg bg-slate-50/50 p-3 dark:bg-slate-900/50">
                         <TeamFlow
                             chars={
                                 team.chars

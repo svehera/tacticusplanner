@@ -1,7 +1,7 @@
 import { MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material';
 import React from 'react';
 
-import { Faction, Rank, Rarity } from '@/fsd/5-shared/model';
+import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
 import { RaritySelect } from '@/fsd/5-shared/ui';
 
 import { RankSelect } from '@/fsd/4-entities/character';
@@ -37,7 +37,7 @@ interface FilterGroupProps {
 
 const FilterGroup: React.FC<FilterGroupProps> = ({ label, children }) => (
     <div className="flex flex-col gap-1">
-        <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+        <label className="text-[10px] font-bold tracking-wider text-slate-500 uppercase dark:text-slate-400">
             {label}
         </label>
         <div className="flex flex-row items-center gap-2">{children}</div>
@@ -50,14 +50,14 @@ interface Props {
     maxRarity: Rarity;
     minRank: Rank;
     maxRank: Rank;
-    factions: Faction[];
-    allFactions: Faction[];
+    factions: FactionId[];
+    allFactions: FactionId[];
     onSearchTextChange: (text: string) => void;
     onMinRarityChange: (rarity: Rarity) => void;
     onMaxRarityChange: (rarity: Rarity) => void;
     onMinRankChange: (rank: Rank) => void;
     onMaxRankChange: (rank: Rank) => void;
-    onFactionsChange: (factions: Faction[]) => void;
+    onFactionsChange: (factions: FactionId[]) => void;
 }
 
 export const UnitFilter: React.FC<Props> = ({
@@ -75,7 +75,7 @@ export const UnitFilter: React.FC<Props> = ({
     onMaxRankChange,
     onFactionsChange,
 }) => {
-    const handleFactionChange = (event: SelectChangeEvent<Faction[]>) => {
+    const handleFactionChange = (event: SelectChangeEvent<FactionId[]>) => {
         if (event.target.value === undefined) {
             onFactionsChange([]);
             return;
@@ -84,7 +84,7 @@ export const UnitFilter: React.FC<Props> = ({
             onFactionsChange([]);
             return;
         }
-        onFactionsChange(event.target.value as Faction[]);
+        onFactionsChange(event.target.value as FactionId[]);
     };
 
     const handleResetAllFilters = () => {
@@ -97,7 +97,7 @@ export const UnitFilter: React.FC<Props> = ({
     };
 
     return (
-        <header className="flex flex-wrap items-center gap-4 p-4 bg-white dark:bg-[#161b22] rounded-lg border border-slate-200 dark:border-slate-800">
+        <header className="flex flex-wrap items-center gap-4 rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-[#161b22]">
             <FilterGroup label="Search Unit">
                 <div className="relative">
                     <input
@@ -105,7 +105,7 @@ export const UnitFilter: React.FC<Props> = ({
                         placeholder="e.g. Bellator..."
                         value={searchText}
                         onChange={e => onSearchTextChange(e.target.value)}
-                        className="w-full md:w-64 bg-white dark:bg-[#0d1117] text-slate-900 dark:text-slate-100 border border-slate-300 dark:border-slate-700 rounded px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full rounded border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 md:w-64 dark:border-slate-700 dark:bg-[#0d1117] dark:text-slate-100"
                     />
                 </div>
             </FilterGroup>
@@ -136,7 +136,7 @@ export const UnitFilter: React.FC<Props> = ({
                 </div>
             </FilterGroup>
             <FilterGroup label="Factions">
-                <Select<Faction[]>
+                <Select<FactionId[]>
                     labelId="faction-select-label"
                     multiple
                     value={factions}
@@ -168,7 +168,7 @@ export const UnitFilter: React.FC<Props> = ({
 
             <div className="ml-auto self-end">
                 <button
-                    className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm font-medium transition"
+                    className="rounded bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700"
                     onClick={handleResetAllFilters}>
                     Reset All Filters
                 </button>
