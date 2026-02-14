@@ -34,6 +34,7 @@ import {
     ISelectedTeamsOrdering,
     IViewPreferences,
     LegendaryEventData,
+    IGameModeTokensState,
 } from './interfaces';
 
 export class GlobalState implements IGlobalState {
@@ -62,7 +63,7 @@ export class GlobalState implements IGlobalState {
     readonly xpUse: XpUseState;
     readonly rosterSnapshots: IRosterSnapshotsState;
     readonly mows: Array<IMow | IMow2>;
-
+    readonly gameModeTokens: IGameModeTokensState;
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;
@@ -95,6 +96,7 @@ export class GlobalState implements IGlobalState {
         this.xpIncome = personalData.xpIncome ?? defaultData.xpIncome;
         this.xpUse = personalData.xpUse ?? defaultData.xpUse;
         this.rosterSnapshots = personalData.rosterSnapshots ?? defaultData.rosterSnapshots;
+        this.gameModeTokens = personalData.gameModeTokens ?? defaultData.gameModeTokens;
     }
 
     static initCharacters(
@@ -311,6 +313,7 @@ export class GlobalState implements IGlobalState {
             xpIncome: value.xpIncome,
             xpUse: value.xpUse,
             rosterSnapshots: value.rosterSnapshots,
+            gameModeTokens: value.gameModeTokens,
             teams: value.teams,
             teams2: value.teams2,
             warOffense2: value.warOffense2,

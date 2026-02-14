@@ -429,6 +429,7 @@ export const defaultData: IPersonalData2 = {
         useMythic: true,
     },
     rosterSnapshots: { base: undefined, diffs: [] },
+    gameModeTokens: {},
 };
 
 export const goalsLimit = 100;
