@@ -103,6 +103,13 @@ export const globalLearnRoutes: RouteObject[] = [
         },
     },
     {
+        path: 'learn/nerd-math',
+        async lazy() {
+            const { NerdMath } = await import('@/fsd/1-pages/learn-nerd-math');
+            return { Component: NerdMath };
+        },
+    },
+    {
         path: 'learn/rankLookup',
         async lazy() {
             const { RankLookup } = await import('@/fsd/1-pages/learn-characters');
