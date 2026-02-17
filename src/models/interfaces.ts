@@ -162,6 +162,8 @@ export interface IPersonalData2 {
     gameModeTokens: IGameModeTokensState;
 }
 export interface TacticusTokensState {
+    /** This field exists so that the "nextTokenInSeconds" has a starting point. */
+    lastSetAtSecondsUtc?: number;
     guildRaid?: TacticusTokens;
     arena?: TacticusTokens;
     onslaught?: TacticusTokens;

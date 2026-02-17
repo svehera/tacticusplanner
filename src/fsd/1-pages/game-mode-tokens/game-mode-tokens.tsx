@@ -5,6 +5,7 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { TacticusTokens } from '@/fsd/5-shared/lib/tacticus-api';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
 
 const tokenIcons: Record<string, string> = {
     guildRaid: 'guildRaidToken',
@@ -25,25 +26,30 @@ const tokenPulseColors: Record<string, string> = {
 function IconPulseStyles() {
     return (
         <style>{`
-      @keyframes icon-pulse {
-        0%, 100% { filter: drop-shadow(0 0 2px var(--pulse-color)); opacity: 1,0; }
-        50% { filter: drop-shadow(0 0 12px var(--pulse-color)); opacity: 1; }
-      }
-    .animate-token-pulse {
-      animation: icon-pulse 2s infinite ease-in-out;
-    }
-  `}</style>
+          @keyframes icon-pulse {
+            0%, 100% { filter: drop-shadow(0 0 10px var(--pulse-color)) drop-shadow(0 0 20px var(--pulse-color)); opacity: 1; }
+            50% { filter: drop-shadow(0 0 30px var(--pulse-color)) drop-shadow(0 0 50px var(--pulse-color)); opacity: 1; }
+          }
+          .animate-token-pulse {
+            animation: icon-pulse 2s infinite ease-in-out;
+          }
+        `}</style>
     );
 }
 
-function renderTokenIcon(iconLabel: string, size: number, shouldPulse: boolean, color: string): React.ReactElement {
+function renderTokenIcon(
+    iconLabel: keyof typeof tacticusIcons,
+    size: number,
+    shouldPulse: boolean,
+    color: string
+): React.ReactElement {
     return (
         <>
             <IconPulseStyles />
             <MiscIcon
-                icon={iconLabel as any}
+                icon={iconLabel}
                 width={size}
-                height={size}
+                height={size * 1.1}
                 className={shouldPulse ? 'animate-token-pulse' : ''}
                 style={{ '--pulse-color': color } as React.CSSProperties}
             />
@@ -60,48 +66,70 @@ function formatTime(seconds: number): string {
         .toString()
         .padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
+
 function renderToken(
     tokenKey: string,
     tokenData: TacticusTokens,
-    countdown: Record<string, number>
+    lastSetAtSecondsUtc: number,
+    currentSecondsUtc: number
 ): React.ReactElement {
-    const remainingSeconds = countdown[tokenKey] ?? 0;
-
-    let bonusTokens = 0;
-
-    if (tokenData.nextTokenInSeconds !== null && tokenData.current < tokenData.max) {
-        if (remainingSeconds <= 0) {
-            // The first token in the chamber finished.
-            bonusTokens = 1;
-
-            // Note: If your countdown state doesn't automatically loop,
-            // you might want to handle multiple regens here, but usually,
-            // a fresh sync from the DB/Store is better for long gaps.
+    if (!(tokenKey in tokenIcons)) return <></>;
+    const nextTokenAtSecondsUtc = (tokenData.nextTokenInSeconds ?? 0) + lastSetAtSecondsUtc;
+    let current = tokenData.current;
+    let needsSync: boolean = false;
+    let nextTokenInSeconds = lastSetAtSecondsUtc + (tokenData.nextTokenInSeconds ?? 0) - currentSecondsUtc;
+    if (current >= tokenData.max) {
+        // Tell the user that they need to sync if they're capped and it's been more than five
+        // minutes since their last sync.
+        if (currentSecondsUtc - lastSetAtSecondsUtc > 300) needsSync = true;
+    } else if (nextTokenAtSecondsUtc < currentSecondsUtc) {
+        needsSync = true;
+        ++current;
+        let timeSecondsUtc = nextTokenAtSecondsUtc;
+        const intervalsSpanned = (currentSecondsUtc - nextTokenAtSecondsUtc) / (tokenData.regenDelayInSeconds ?? 1);
+        if (intervalsSpanned >= 1) {
+            const additionalTokens = Math.floor(intervalsSpanned);
+            current += additionalTokens;
+            timeSecondsUtc += additionalTokens * (tokenData.regenDelayInSeconds ?? 1);
+            nextTokenInSeconds = timeSecondsUtc + (tokenData.regenDelayInSeconds ?? 0) - currentSecondsUtc;
         }
+        current = Math.min(current, tokenData.max);
     }
 
-    const displayCurrent = Math.min(tokenData.max, tokenData.current + bonusTokens);
-    const isFull = displayCurrent >= tokenData.max;
+    const isFull = current === tokenData.max;
+    const displayCurrent = isFull ? tokenData.max : current;
+    const nextTimerDisplay = isFull ? 'FULL' : formatTime(nextTokenInSeconds);
 
     return (
-        <div key={tokenKey} className="flex w-24 min-w-[120px] flex-col items-center gap-2">
+        <div key={tokenKey} className="flex w-24 min-w-[120px] flex-col items-center gap-1">
             <div className="relative flex h-10 w-full items-center justify-center">
                 <div className="absolute left-1/2 -translate-x-1/2">
                     {renderTokenIcon(
                         tokenIcons[tokenKey] ?? 'defaultToken',
                         36,
-                        displayCurrent >= tokenData.max,
+                        isFull,
                         tokenPulseColors[tokenKey] ?? 'rgba(255, 255, 255, 0.25)'
                     )}
                 </div>
-                <div className="absolute right-0 translate-x-1 font-bold text-white drop-shadow-md">
+                <div className="absolute right-0 translate-x-1 font-bold text-gray-900 drop-shadow-md dark:text-white">
                     <span>{displayCurrent}</span>
                     <span className="text-[10px] opacity-60">/{tokenData.max}</span>
                 </div>
             </div>
 
-            <div className={`text-center text-sm tabular-nums ${isFull ? 'text-red-400' : 'text-gray-300'}`}>
-                {isFull ? 'FULL' : remainingSeconds > 0 ? formatTime(remainingSeconds) : 'PLEASE SYNC'}
+            <div className="flex flex-col items-center leading-tight">
+                <span
+                    className={`text-sm tabular-nums ${
+                        isFull ? 'text-red-600 dark:text-red-400' : 'text-gray-700 dark:text-gray-300'
+                    }`}>
+                    {isFull ? 'FULL' : nextTimerDisplay}
+                </span>
+
+                {needsSync && (
+                    <span className="animate-pulse text-[10px] font-bold text-amber-600 dark:text-amber-500">
+                        PLEASE SYNC
+                    </span>
+                )}
             </div>
         </div>
     );
@@ -109,31 +137,14 @@ function renderToken(
 
 export const TokenAvailability = () => {
     const { gameModeTokens } = useContext(StoreContext);
-    const [countdown, setCountdown] = useState<Record<string, number>>({});
+    const [secondsUtc, setSecondsUtc] = useState(Math.floor(Date.now() / 1000));
 
     useEffect(() => {
-        if (!gameModeTokens?.tokens) return;
+        const intervalId = setInterval(() => {
+            setSecondsUtc(Math.floor(Date.now() / 1000));
+        }, 500);
 
-        const initialCountdown: Record<string, number> = {};
-        Object.entries(gameModeTokens.tokens).forEach(([key, value]) => {
-            if (value?.nextTokenInSeconds != null) {
-                initialCountdown[key] = value.nextTokenInSeconds;
-            }
-        });
-        setCountdown(initialCountdown);
-    }, [gameModeTokens?.tokens]);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCountdown(prev => {
-                const updatedCountdown: Record<string, number> = {};
-                Object.entries(prev).forEach(([key, value]) => {
-                    updatedCountdown[key] = Math.max(0, value - 1);
-                });
-                return updatedCountdown;
-            });
-        }, 1000);
-        return () => clearInterval(interval);
+        return () => clearInterval(intervalId);
     }, []);
 
     return (
@@ -142,7 +153,7 @@ export const TokenAvailability = () => {
                 <h2>Token Availability</h2>
                 <div className="flex flex-wrap items-center items-start justify-center gap-4 tabular-nums">
                     {Object.entries(gameModeTokens.tokens ?? {}).map(([key, token]) =>
-                        renderToken(key, token, countdown)
+                        renderToken(key, token, gameModeTokens.tokens!.lastSetAtSecondsUtc ?? 0, secondsUtc)
                     )}
                 </div>
             </div>
