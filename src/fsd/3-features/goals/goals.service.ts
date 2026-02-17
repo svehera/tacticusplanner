@@ -580,7 +580,18 @@ export class GoalsService {
                     goal
                 );
             }
-            const forgeBadges = goal.mowEstimate.forgeBadges ?? new Map<Rarity, number>();
+            let forgeBadges = new Map<Rarity, number>();
+            try {
+                forgeBadges = new Map<Rarity, number>(
+                    Object.entries(goal.mowEstimate.forgeBadges ?? {}).map(([rarity, count]) => [
+                        Number(rarity) as Rarity,
+                        count,
+                    ])
+                );
+            } catch (error) {
+                console.error('Error processing forge badges:', error);
+                console.error('goal causing error: ', goal);
+            }
             forgeBadges.entries().forEach(([rarity, count]) => {
                 const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
                 goal.mowEstimate!.forgeBadges.set(rarity, count - toRemove);
