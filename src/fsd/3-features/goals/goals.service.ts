@@ -489,20 +489,20 @@ export class GoalsService {
             [Alliance.Imperial]: 0,
             [Alliance.Xenos]: 0,
         };
-        try {
-            const heldBadges = cloneDeep(inventory.abilityBadges);
-            const heldForgeBadges = cloneDeep(inventory.forgeBadges);
-            const heldComponents = cloneDeep(inventory.components);
+        const heldBadges = cloneDeep(inventory.abilityBadges);
+        const heldForgeBadges = cloneDeep(inventory.forgeBadges);
+        const heldComponents = cloneDeep(inventory.components);
 
-            const newGoalsEstimates: IGoalEstimate[] = cloneDeep(goalsEstimate);
-            const goalsByPrio = orderBy(
-                goals.map(x => ({ id: x.id, priority: x.priority, unit: x.character })),
-                ['priority'],
-                ['asc']
-            );
-            let totalXpNeeded = 0;
-            const today = new Date();
-            let xpBooksAccrual = { accruedDate: today, booksAccrued: 0 } as XpBookAccrual;
+        const newGoalsEstimates: IGoalEstimate[] = cloneDeep(goalsEstimate);
+        const goalsByPrio = orderBy(
+            goals.map(x => ({ id: x.id, priority: x.priority, unit: x.character })),
+            ['priority'],
+            ['asc']
+        );
+        let totalXpNeeded = 0;
+        const today = new Date();
+        let xpBooksAccrual = { accruedDate: today, booksAccrued: 0 } as XpBookAccrual;
+        try {
             for (const goalIdAndPriority of goalsByPrio) {
                 const goal = newGoalsEstimates.find(x => x.goalId === goalIdAndPriority.id);
 
