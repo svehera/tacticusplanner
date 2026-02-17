@@ -1086,9 +1086,6 @@ export class UpgradesService {
                     location.isUnlocked &&
                     location.isPassFilter &&
                     (!isCampaignEventLocation || isCampaignEventLocationAvailable);
-                if (location.isSuggested) {
-                    console.log('Suggested location', location, combinedUpgrade);
-                }
             }
             const minEnergy = Math.min(
                 ...combinedUpgrade.locations.filter(x => x.isSuggested).map(x => x.energyPerItem)
