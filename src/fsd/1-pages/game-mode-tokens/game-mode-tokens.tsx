@@ -1,4 +1,5 @@
 /* eslint-disable import-x/no-internal-modules */
+import { Tooltip } from '@mui/material';
 import React, { useState, useEffect, useContext } from 'react';
 
 import { StoreContext } from '@/reducers/store.provider';
@@ -13,6 +14,14 @@ const tokenIcons: Record<string, string> = {
     onslaught: 'onslaughtToken',
     salvageRun: 'salvageRunToken',
     bombTokens: 'bombToken',
+};
+
+const tokenNames: Record<string, string> = {
+    guildRaid: 'Guild Raid',
+    arena: 'Arena',
+    onslaught: 'Onslaught',
+    salvageRun: 'Salvage Run',
+    bombTokens: 'Bomb',
 };
 
 const tokenPulseColors: Record<string, string> = {
@@ -100,12 +109,16 @@ function renderToken(
         <div key={tokenKey} className="flex w-24 min-w-[120px] flex-col items-center gap-1">
             <div className="relative flex h-10 w-full items-center justify-center">
                 <div className="absolute left-1/2 -translate-x-1/2">
-                    {renderTokenIcon(
-                        tokenIcons[tokenKey] ?? 'defaultToken',
-                        36,
-                        isFull,
-                        tokenPulseColors[tokenKey] ?? 'rgba(255, 255, 255, 0.25)'
-                    )}
+                    <Tooltip title={tokenNames[tokenKey] ?? tokenKey}>
+                        <span className="inline-flex">
+                            {renderTokenIcon(
+                                tokenIcons[tokenKey] ?? 'defaultToken',
+                                36,
+                                isFull,
+                                tokenPulseColors[tokenKey] ?? 'rgba(255, 255, 255, 0.25)'
+                            )}
+                        </span>
+                    </Tooltip>
                 </div>
                 <div className="absolute right-0 translate-x-1 font-bold text-gray-900 drop-shadow-md dark:text-white">
                     <span>{displayCurrent}</span>

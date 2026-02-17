@@ -18,7 +18,7 @@ import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
-import TokenAvailability from '../game-mode-tokens';
+import TokenAvailability from '@/fsd/1-pages/game-mode-tokens';
 
 import { useBmcWidget } from './useBmcWidget';
 

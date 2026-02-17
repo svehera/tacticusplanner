@@ -2,6 +2,21 @@ import { Rarity } from '@/fsd/5-shared/model';
 
 export interface TacticusPlayerResponse {
     player: TacticusPlayer;
+    metaData: TacticusApiResponseMetadata;
+}
+
+export interface TacticusApiResponseMetadata {
+    /** Unix timestamp (in seconds). Empty if key never expires. */
+    apiKeyExpiresOn?: number;
+
+    /** gameConfigVersion for player. */
+    configHash?: string;
+
+    /**
+     * Unix timestamp (in seconds) when player was last updated from the server. Player
+     * data is cached in the API so use this field to know when it was actually fetched.
+     */
+    lastUpdatedOn?: number;
 }
 
 interface TacticusPlayer {
