@@ -70,7 +70,6 @@ function renderToken(
     lastSetAtSecondsUtc: number,
     currentSecondsUtc: number
 ): React.ReactElement {
-    if (!(tokenKey in tokenIcons)) return <></>;
     const nextTokenAtSecondsUtc = (tokenData.nextTokenInSeconds ?? 0) + lastSetAtSecondsUtc;
     let current = tokenData.current;
     let needsSync: boolean = false;
@@ -88,7 +87,7 @@ function renderToken(
             const additionalTokens = Math.floor(intervalsSpanned);
             current += additionalTokens;
             timeSecondsUtc += additionalTokens * (tokenData.regenDelayInSeconds ?? 1);
-            nextTokenInSeconds = timeSecondsUtc + (tokenData.regenDelayInSeconds ?? 0) - currentSecondsUtc;
+            nextTokenInSeconds = timeSecondsUtc + (tokenData.regenDelayInSeconds ?? 1) - currentSecondsUtc;
         }
         current = Math.min(current, tokenData.max);
     }
@@ -150,9 +149,11 @@ export const TokenAvailability = () => {
                 <IconPulseStyles />
                 <h2>Token Availability</h2>
                 <div className="flex flex-wrap items-start justify-center gap-4 tabular-nums">
-                    {Object.entries(gameModeTokens.tokens ?? {}).map(([key, token]) =>
-                        renderToken(key, token, gameModeTokens.tokens!.lastSetAtSecondsUtc ?? 0, secondsUtc)
-                    )}
+                    {Object.entries(gameModeTokens.tokens ?? {})
+                        .filter(([key]) => key in tokenIcons)
+                        .map(([key, token]) =>
+                            renderToken(key, token, gameModeTokens.tokens!.lastSetAtSecondsUtc ?? 0, secondsUtc)
+                        )}
                 </div>
             </div>
         </div>
