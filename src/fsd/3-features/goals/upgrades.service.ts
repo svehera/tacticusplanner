@@ -309,6 +309,7 @@ export class UpgradesService {
         const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals);
 
         const combinedBaseMaterials = this.combineBaseMaterials(unitsUpgrades);
+
         this.populateLocationsData(combinedBaseMaterials, settings);
 
         let allMaterials: ICharacterUpgradeEstimate[] = [];
@@ -1045,7 +1046,7 @@ export class UpgradesService {
                 );
 
                 // location can be suggested for raids only if it is unlocked, passed other filters
-                // and in case it is Campaign Event location user should have specific Campaign Event selected
+                // and in case it is Campaign Event location user should have specific Campaign Event selected.
                 location.isSuggested =
                     location.isUnlocked &&
                     location.isPassFilter &&
@@ -1083,7 +1084,8 @@ export class UpgradesService {
                 ];
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
                 const ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
-                if (ignoredLocations.length !== selectedLocations.length) {
+
+                if (ignoredLocations.length !== combinedUpgrade.locations.length) {
                     // We have some nodes to raid, so don't suggest the others.
                     ignoredLocations.forEach(location => (location.isSuggested = false));
                 } else {
