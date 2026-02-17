@@ -575,29 +575,12 @@ export class GoalsService {
                 }
 
                 if (goal.mowEstimate === undefined) continue;
-                if (!goal.mowEstimate.forgeBadges) {
-                    console.log(
-                        'unexpectedly found a goal with mow estimate but no forge badges, initializing to empty map',
-                        goal
-                    );
-                }
-                let forgeBadges = new Map<Rarity, number>();
-                try {
-                    forgeBadges = new Map<Rarity, number>(
-                        Object.entries(goal.mowEstimate.forgeBadges ?? {}).map(([rarity, count]) => [
-                            Number(rarity) as Rarity,
-                            count,
-                        ])
-                    );
-                } catch (error) {
-                    console.error('Error processing forge badges:', error);
-                    console.error('goal causing error: ', goal);
-                }
-                forgeBadges.entries().forEach(([rarity, count]) => {
+                (Object.keys(goal.mowEstimate.forgeBadges) as unknown as Rarity[]).forEach(rarity => {
+                    const count = goal.mowEstimate!.forgeBadges[rarity] ?? 0;
                     const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
-                    goal.mowEstimate!.forgeBadges.set(rarity, count - toRemove);
+                    goal.mowEstimate!.forgeBadges[rarity] = count - toRemove;
                     heldForgeBadges[rarity] = (heldForgeBadges[rarity] ?? 0) - toRemove;
-                    neededForgeBadges[rarity] += goal.mowEstimate!.forgeBadges.get(rarity) ?? 0;
+                    neededForgeBadges[rarity] += goal.mowEstimate!.forgeBadges[rarity] ?? 0;
                 });
                 const components = goal.mowEstimate.components;
                 const alliance = GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
@@ -626,3 +609,44 @@ export class GoalsService {
         };
     }
 }
+
+/*
+const goals = [
+    {
+        id: 'a119cc4f-188e-4022-bb58-fb5b15dd91f0',
+        character: 'ultraDreadnought',
+        type: 4,
+        startingRank: 1,
+        startingRankPoint5: false,
+        targetRarity: 0,
+        targetStars: 0,
+        shardsPerToken: 0,
+        mythicShardsPerToken: 0,
+        campaignsUsage: 2,
+        mythicCampaignsUsage: 2,
+        priority: 6,
+        dailyRaids: true,
+        rankPoint5: false,
+        upgradesRarity: [],
+        firstAbilityLevel: 1,
+        secondAbilityLevel: 2,
+    },
+];
+
+const goalsEstimates = [
+    {
+        goalId: 'a119cc4f-188e-4022-bb58-fb5b15dd91f0',
+        energyTotal: 22,
+        daysTotal: 1,
+        daysLeft: 58,
+        oTokensTotal: 0,
+        mowEstimate: {
+            salvage: 5,
+            components: 1,
+            gold: 15,
+            badges: { '0': 1, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 },
+            forgeBadges: {},
+        },
+    },
+];
+*/
