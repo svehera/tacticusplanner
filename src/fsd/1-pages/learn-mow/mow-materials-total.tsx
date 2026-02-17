@@ -39,7 +39,7 @@ export const MowMaterialsTotal: React.FC<Props> = ({ total, mowAlliance, label, 
                 </div>
                 <div className="flex-box gap5">
                     {[Rarity.Mythic, Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
-                        const forgeBadgesCount = total.forgeBadges.get(rarity) ?? 0;
+                        const forgeBadgesCount = total.forgeBadges[rarity] ?? 0;
                         return (
                             forgeBadgesCount > 0 && (
                                 <Badge key={rarity} badgeContent={<b>{forgeBadgesCount}</b>}>
