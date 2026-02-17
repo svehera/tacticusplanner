@@ -226,9 +226,9 @@ export const RaidsPlan: React.FC<Props> = ({
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div className="h-[400px] max-h-[600px] overflow-y-auto">
+                            <div className="h-[600px] overflow-y-auto">
                                 {viewPreferences.raidsTableView === true ? (
-                                    <div className="ag-theme-material flex h-full min-h-[150px] w-full flex-col">
+                                    <div className="ag-theme-material flex h-[600px] min-h-[150px] w-full flex-col">
                                         <MaterialsTable
                                             rows={estimatedRanks.inProgressMaterials}
                                             updateMaterialQuantity={updateInventory}
@@ -239,7 +239,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                         />
                                     </div>
                                 ) : (
-                                    <div className="flex flex-wrap gap-x-4 gap-y-4">
+                                    <div className="flex max-h-[600px] w-full flex-wrap gap-x-4 gap-y-4 overflow-y-auto p-2">
                                         {estimatedRanks.inProgressMaterials.length > 0 &&
                                             estimatedRanks.inProgressMaterials.map((material, index) => (
                                                 <div className="item-raids w-64" key={index} ref={setCardRef(index)}>
@@ -268,9 +268,9 @@ export const RaidsPlan: React.FC<Props> = ({
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div className="h-[400px] max-h-[600px] overflow-y-auto">
+                            <div className="max-h-[600px] overflow-y-auto">
                                 {viewPreferences.raidsTableView === true ? (
-                                    <div className="ag-theme-material flex h-full min-h-[150px] w-full flex-col">
+                                    <div className="ag-theme-material flex h-[600px] w-full flex-col">
                                         <MaterialsTable
                                             rows={estimatedRanks.finishedMaterials}
                                             updateMaterialQuantity={updateInventory}
@@ -279,7 +279,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                         />
                                     </div>
                                 ) : (
-                                    <div className="flex w-full flex-wrap gap-1 p-2">
+                                    <div className="flex max-h-[600px] w-full flex-wrap gap-1 p-2">
                                         <div className="flex flex-wrap gap-x-4 gap-y-4">
                                             {estimatedRanks.finishedMaterials.map((material, index) => (
                                                 <div className="item-raids w-64" key={index}>
@@ -314,7 +314,7 @@ export const RaidsPlan: React.FC<Props> = ({
                             </AccessibleTooltip>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div className="flex h-[400px] flex-col">
+                            <div className="flex flex-col">
                                 <div className="flex-box p-2">
                                     <InfoIcon color="primary" /> You don&apos;t have available campaigns nodes for the
                                     items listed in the table below
@@ -322,7 +322,7 @@ export const RaidsPlan: React.FC<Props> = ({
 
                                 <div className="flex-grow">
                                     {viewPreferences.raidsTableView === true ? (
-                                        <div className="ag-theme-material flex h-[600px] min-h-[150px] w-full flex-col">
+                                        <div className="ag-theme-material flex max-h-[600px] w-full flex-col">
                                             <MaterialsTable
                                                 rows={estimatedRanks.blockedMaterials}
                                                 updateMaterialQuantity={updateInventory}
@@ -331,7 +331,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                             />
                                         </div>
                                     ) : (
-                                        <div className="flex h-[300px] w-full flex-wrap gap-1 overflow-y-scroll p-2">
+                                        <div className="flex max-h-[600px] w-full flex-wrap gap-1 overflow-y-scroll p-2">
                                             <div className="flex flex-wrap gap-x-4 gap-y-4">
                                                 {estimatedRanks.blockedMaterials.map((material, index) => (
                                                     <div className="item-raids w-64" key={index}>
