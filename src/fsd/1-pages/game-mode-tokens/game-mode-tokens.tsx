@@ -44,16 +44,13 @@ function renderTokenIcon(
     color: string
 ): React.ReactElement {
     return (
-        <>
-            <IconPulseStyles />
-            <MiscIcon
-                icon={iconLabel}
-                width={size}
-                height={size * 1.1}
-                className={shouldPulse ? 'animate-token-pulse' : ''}
-                style={{ '--pulse-color': color } as React.CSSProperties}
-            />
-        </>
+        <MiscIcon
+            icon={iconLabel}
+            width={size}
+            height={size * 1.1}
+            className={shouldPulse ? 'animate-token-pulse' : ''}
+            style={{ '--pulse-color': color } as React.CSSProperties}
+        />
     );
 }
 
@@ -150,8 +147,9 @@ export const TokenAvailability = () => {
     return (
         <div className="text-center">
             <div className="flex flex-col gap-2">
+                <IconPulseStyles />
                 <h2>Token Availability</h2>
-                <div className="flex flex-wrap items-center items-start justify-center gap-4 tabular-nums">
+                <div className="flex flex-wrap items-start justify-center gap-4 tabular-nums">
                     {Object.entries(gameModeTokens.tokens ?? {}).map(([key, token]) =>
                         renderToken(key, token, gameModeTokens.tokens!.lastSetAtSecondsUtc ?? 0, secondsUtc)
                     )}
