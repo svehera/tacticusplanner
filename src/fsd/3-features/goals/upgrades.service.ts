@@ -16,13 +16,7 @@ import { getEnumValues } from '@/fsd/5-shared/lib';
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Alliance, Rank } from '@/fsd/5-shared/model';
 
-import {
-    ICampaignsProgress,
-    CampaignsService,
-    CampaignType,
-    Campaign,
-    ICampaignBattleComposed,
-} from '@/fsd/4-entities/campaign';
+import { CampaignsService, CampaignType, Campaign, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import {
@@ -777,22 +771,7 @@ export class UpgradesService {
         for (const upgradeId of correctUpgradesLocations) {
             const upgrade = upgrades[upgradeId];
             const newLocation = upgrade.locations.find(location => {
-                // Challenge CE campaigns should unlock based on their corresponding base campaign progress
-                const challengeToBase: Partial<Record<Campaign, Campaign>> = {
-                    [Campaign.AMSC]: Campaign.AMS,
-                    [Campaign.AMEC]: Campaign.AME,
-                    [Campaign.TSC]: Campaign.TS,
-                    [Campaign.TEC]: Campaign.TE,
-                    [Campaign.TASC]: Campaign.TAS,
-                    [Campaign.TAEC]: Campaign.TAE,
-                    [Campaign.DGSC]: Campaign.DGS,
-                    [Campaign.DGEC]: Campaign.DGE,
-                };
-                const unlockCampaign =
-                    (challengeToBase[location.campaign as Campaign] as keyof ICampaignsProgress | undefined) ??
-                    (location.campaign as keyof ICampaignsProgress);
-
-                const campaignProgress = settings.campaignsProgress[unlockCampaign];
+                const campaignProgress = settings.campaignsProgress[location.campaign];
                 const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign as Campaign);
                 const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
 
@@ -1046,22 +1025,7 @@ export class UpgradesService {
             const combinedUpgrade = upgrades[upgradeId];
 
             for (const location of combinedUpgrade.locations) {
-                // Challenge CE campaigns should unlock based on their corresponding base campaign progress
-                const challengeToBase: Partial<Record<Campaign, Campaign>> = {
-                    [Campaign.AMSC]: Campaign.AMS,
-                    [Campaign.AMEC]: Campaign.AME,
-                    [Campaign.TSC]: Campaign.TS,
-                    [Campaign.TEC]: Campaign.TE,
-                    [Campaign.TASC]: Campaign.TAS,
-                    [Campaign.TAEC]: Campaign.TAE,
-                    [Campaign.DGSC]: Campaign.DGS,
-                    [Campaign.DGEC]: Campaign.DGE,
-                };
-                const unlockCampaign =
-                    (challengeToBase[location.campaign as Campaign] as keyof ICampaignsProgress | undefined) ??
-                    (location.campaign as keyof ICampaignsProgress);
-
-                const campaignProgress = settings.campaignsProgress[unlockCampaign];
+                const campaignProgress = settings.campaignsProgress[location.campaign];
                 const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign as Campaign);
                 const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
 
