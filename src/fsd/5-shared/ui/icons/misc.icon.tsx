@@ -4,17 +4,21 @@ export const MiscIcon = ({
     icon,
     width = 30,
     height = 30,
+    className = '',
+    style = {},
 }: {
     icon: keyof typeof tacticusIcons;
     width?: number;
     height?: number;
+    className?: string;
+    style?: React.CSSProperties;
 }) => {
     const details = tacticusIcons[icon] ?? { file: '', label: icon };
     return (
         <img
             loading="lazy"
-            className="pointer-events-none"
-            style={{ height, width }}
+            className={`pointer-events-none ${className}`}
+            style={{ height, width, ...style }}
             src={details.file}
             width={width}
             height={height}

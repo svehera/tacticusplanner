@@ -1,26 +1,115 @@
-import { useState, useEffect, useContext } from 'react';
+/* eslint-disable import-x/no-internal-modules */
+import React, { useState, useEffect, useContext } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { TacticusTokens } from '@/fsd/5-shared/lib/tacticus-api';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { tokenLabels } from './game-mode-tokens.constants';
+const tokenIcons: Record<string, string> = {
+    guildRaid: 'guildRaidToken',
+    arena: 'arenaToken',
+    onslaught: 'onslaughtToken',
+    salvageRun: 'salvageRunToken',
+    bombTokens: 'bombToken',
+};
 
-const TokenAvailability = () => {
+const tokenPulseColors: Record<string, string> = {
+    guildRaid: 'rgba(255, 0, 0, 0.25)',
+    arena: 'rgba(0, 0, 255, 0.25)',
+    onslaught: 'rgba(255, 0, 0, 0.25)',
+    salvageRun: 'rgba(0, 255, 0, 0.25)',
+    bombTokens: 'rgba(255, 0, 0, 0.25)',
+};
+
+function IconPulseStyles() {
+    return (
+        <style>{`
+      @keyframes icon-pulse {
+        0%, 100% { filter: drop-shadow(0 0 2px var(--pulse-color)); opacity: 1,0; }
+        50% { filter: drop-shadow(0 0 12px var(--pulse-color)); opacity: 1; }
+      }
+    .animate-token-pulse {
+      animation: icon-pulse 2s infinite ease-in-out;
+    }
+  `}</style>
+    );
+}
+
+function renderTokenIcon(iconLabel: string, size: number, shouldPulse: boolean, color: string): React.ReactElement {
+    return (
+        <>
+            <IconPulseStyles />
+            <MiscIcon
+                icon={iconLabel as any}
+                width={size}
+                height={size}
+                className={shouldPulse ? 'animate-token-pulse' : ''}
+                style={{ '--pulse-color': color } as React.CSSProperties}
+            />
+        </>
+    );
+}
+
+function formatTime(seconds: number): string {
+    const totalSeconds = Math.max(0, Math.floor(seconds));
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const secs = totalSeconds % 60;
+    return `${hours.toString().padStart(2, '0')}:${minutes
+        .toString()
+        .padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+function renderToken(
+    tokenKey: string,
+    tokenData: TacticusTokens,
+    countdown: Record<string, number>
+): React.ReactElement {
+    const remainingSeconds = countdown[tokenKey] ?? 0;
+
+    let bonusTokens = 0;
+
+    if (tokenData.nextTokenInSeconds !== null && tokenData.current < tokenData.max) {
+        if (remainingSeconds <= 0) {
+            // The first token in the chamber finished.
+            bonusTokens = 1;
+
+            // Note: If your countdown state doesn't automatically loop,
+            // you might want to handle multiple regens here, but usually,
+            // a fresh sync from the DB/Store is better for long gaps.
+        }
+    }
+
+    const displayCurrent = Math.min(tokenData.max, tokenData.current + bonusTokens);
+    const isFull = displayCurrent >= tokenData.max;
+
+    return (
+        <div key={tokenKey} className="flex w-24 min-w-[120px] flex-col items-center gap-2">
+            <div className="relative flex h-10 w-full items-center justify-center">
+                <div className="absolute left-1/2 -translate-x-1/2">
+                    {renderTokenIcon(
+                        tokenIcons[tokenKey] ?? 'defaultToken',
+                        36,
+                        displayCurrent >= tokenData.max,
+                        tokenPulseColors[tokenKey] ?? 'rgba(255, 255, 255, 0.25)'
+                    )}
+                </div>
+                <div className="absolute right-0 translate-x-1 font-bold text-white drop-shadow-md">
+                    <span>{displayCurrent}</span>
+                    <span className="text-[10px] opacity-60">/{tokenData.max}</span>
+                </div>
+            </div>
+
+            <div className={`text-center text-sm tabular-nums ${isFull ? 'text-red-400' : 'text-gray-300'}`}>
+                {isFull ? 'FULL' : remainingSeconds > 0 ? formatTime(remainingSeconds) : 'PLEASE SYNC'}
+            </div>
+        </div>
+    );
+}
+
+export const TokenAvailability = () => {
     const { gameModeTokens } = useContext(StoreContext);
     const [countdown, setCountdown] = useState<Record<string, number>>({});
-
-    const formatTime = (seconds: number): string => {
-        const totalSeconds = Math.max(0, Math.floor(seconds));
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const secs = totalSeconds % 60;
-        return `${hours.toString().padStart(2, '0')}:${minutes
-            .toString()
-            .padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    };
 
     useEffect(() => {
         if (!gameModeTokens?.tokens) return;
@@ -47,66 +136,16 @@ const TokenAvailability = () => {
         return () => clearInterval(interval);
     }, []);
 
-    /*const getStatusColor = (current: number, max: number): string => {
-    const ratio = max > 0 ? current / max : 0;
-    if (ratio >= 1) return 'text-green-400';
-    if (ratio >= 0.5) return 'text-yellow-400';
-    if (ratio > 0) return 'text-orange-400';
-    return 'text-red-400';
-  };*/
-
-    const isTacticusTokens = (value: any): value is TacticusTokens => {
-        return value && typeof value === 'object' && typeof value.current === 'number' && typeof value.max === 'number';
-    };
-
-    const tokenItems = Object.entries(gameModeTokens?.tokens ?? {})
-        .filter(([_key, value]) => isTacticusTokens(value))
-        .map(([key, value]) => ({
-            key,
-            label: tokenLabels[key]?.label ?? key,
-            icon: tokenLabels[key]?.icon ?? '',
-            data: value as TacticusTokens,
-        }));
-
-    if (tokenItems.length === 0) {
-        return <div>No token data available</div>;
-    }
-
     return (
         <div className="text-center">
-            <h2>Token Availability</h2>
-            <div className="flex flex-wrap items-start justify-center gap-2.5">
-                {tokenItems.map(item => (
-                    <div key={item.key}>
-                        <div>
-                            {item.icon}
-                            <span>{item.label}</span>
-                        </div>
-                        <div>
-                            {item.data ? (
-                                <>
-                                    <span>
-                                        {item.data.current}/{item.data.max}
-                                        {item.data.current === item.data.max && (
-                                            <span className="font-mono text-[10px]"> Full</span>
-                                        )}
-                                    </span>
-                                    {countdown[item.key] > 0 && item.data.current < item.data.max && (
-                                        <span>
-                                            <span className="text-[10px]"> Next</span>
-                                            <span className="text-[10px]"> {formatTime(countdown[item.key])}</span>
-                                        </span>
-                                    )}
-                                </>
-                            ) : (
-                                <span>Invalid token data</span>
-                            )}
-                        </div>
-                    </div>
-                ))}
+            <div className="flex flex-col gap-2">
+                <h2>Token Availability</h2>
+                <div className="flex flex-wrap items-center items-start justify-center gap-4 tabular-nums">
+                    {Object.entries(gameModeTokens.tokens ?? {}).map(([key, token]) =>
+                        renderToken(key, token, countdown)
+                    )}
+                </div>
             </div>
         </div>
     );
 };
-
-export default TokenAvailability;
