@@ -22,6 +22,8 @@ import { OnslaughtSectorKey, OnslaughtTrackId, OnslaughtZoneKey } from './models
 export const HomeScreenEventPlanner = () => {
     const [preEventTokens, setPreEventTokens] = useState<number>(0);
     const [duringEventTokens, setDuringEventTokens] = useState<number>(0);
+    const [preEventTokensText, setPreEventTokensText] = useState<string>('0');
+    const [duringEventTokensText, setDuringEventTokensText] = useState<string>('0');
     const tracks = Object.keys(onslaughtData) as Array<OnslaughtTrackId>;
     const [selections, setSelections] = useState<
         Record<OnslaughtTrackId, { selected: boolean; sector: OnslaughtSectorKey; zone: OnslaughtZoneKey }>
@@ -81,6 +83,23 @@ export const HomeScreenEventPlanner = () => {
         );
         return ret;
     }, [selections, preEventTokens, duringEventTokens]);
+    const updateTokenState =
+        (
+            setText: React.Dispatch<React.SetStateAction<string>>,
+            setValue: React.Dispatch<React.SetStateAction<number>>
+        ) =>
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const raw = e.target.value;
+            const value = parseInt(raw.trim(), 10);
+            setText(raw);
+            if (!Number.isNaN(value) && value >= 0) {
+                setValue(value);
+            }
+        };
+
+    const updatePreEventTokens = updateTokenState(setPreEventTokensText, setPreEventTokens);
+    const updateDuringEventTokens = updateTokenState(setDuringEventTokensText, setDuringEventTokens);
+
     return (
         <div className="flex flex-col gap-6 bg-gray-50 p-2 dark:bg-gray-900">
             <div className="mb-4 rounded bg-red-100 p-2 text-sm text-red-600">
@@ -203,8 +222,8 @@ export const HomeScreenEventPlanner = () => {
                                 label="Tokens BEFORE event"
                                 type="number"
                                 size="small"
-                                value={preEventTokens}
-                                onChange={e => setPreEventTokens(Math.max(0, parseInt(e.target.value) || 0))}
+                                value={preEventTokensText}
+                                onChange={updatePreEventTokens}
                                 slotProps={{
                                     input: {
                                         startAdornment: (
@@ -219,8 +238,8 @@ export const HomeScreenEventPlanner = () => {
                                 label="Tokens DURING event"
                                 type="number"
                                 size="small"
-                                value={duringEventTokens}
-                                onChange={e => setDuringEventTokens(Math.max(0, parseInt(e.target.value) || 0))}
+                                value={duringEventTokensText}
+                                onChange={updateDuringEventTokens}
                                 slotProps={{
                                     input: {
                                         startAdornment: (

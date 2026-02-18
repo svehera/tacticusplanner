@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
 
+// eslint-disable-next-line import-x/no-internal-modules
+import onslaughtData from '@/data/onslaught/data.generated.json';
+
 import { HomeScreenEventPlannerService } from './home-screen-event-planner.service';
 import { OnslaughtData, OnslaughtTrackId } from './models';
 
@@ -202,6 +205,49 @@ describe('HomeScreenEventPlannerService.calculateSimpleHsePlan', () => {
             [OnslaughtTrackId.Imperial]: 0,
             [OnslaughtTrackId.Xenos]: 0,
             [OnslaughtTrackId.Chaos]: 4,
+        });
+    });
+});
+
+describe('HomeScreenEventPlannerService.smokeTest', () => {
+    it('TheSageMage flying boost, 2026 feb 18', () => {
+        const impProg = { track: OnslaughtTrackId.Imperial, sector: 131, zone: 1 }; // CXXXII, beta
+        const xenosProg = { track: OnslaughtTrackId.Xenos, sector: 89, zone: 0 }; // XC, alpha
+        const chaosProg = { track: OnslaughtTrackId.Chaos, sector: 68, zone: 4 }; // LXIX, epsilon
+        const result = HomeScreenEventPlannerService.calculateHsePlan(
+            onslaughtData,
+            impProg,
+            xenosProg,
+            chaosProg,
+            { [OnslaughtTrackId.Imperial]: true, [OnslaughtTrackId.Xenos]: true, [OnslaughtTrackId.Chaos]: true },
+            2,
+            8
+        );
+        expect(onslaughtData[impProg.track].sectors[impProg.sector].name).toBe('Sector CXXXII');
+        expect(onslaughtData[xenosProg.track].sectors[xenosProg.sector].name).toBe('Sector XC');
+        expect(onslaughtData[chaosProg.track].sectors[chaosProg.sector].name).toBe('Sector LXIX');
+
+        expect(onslaughtData[impProg.track].sectors[impProg.sector].killzones[impProg.zone].name).toBe('Beta');
+        expect(onslaughtData[xenosProg.track].sectors[xenosProg.sector].killzones[xenosProg.zone].name).toBe('Alpha');
+        expect(onslaughtData[chaosProg.track].sectors[chaosProg.sector].killzones[chaosProg.zone].name).toBe('Epsilon');
+
+        expect(onslaughtData[impProg.track].sectors[impProg.sector].killzones[impProg.zone].totalEnemyCount).toBe(77);
+        expect(onslaughtData[xenosProg.track].sectors[xenosProg.sector].killzones[xenosProg.zone].totalEnemyCount).toBe(
+            67
+        );
+        expect(onslaughtData[chaosProg.track].sectors[chaosProg.sector].killzones[chaosProg.zone].totalEnemyCount).toBe(
+            62
+        );
+        expect(result).toBeDefined();
+        expect.soft(result.preEventTokens).toEqual({
+            [OnslaughtTrackId.Imperial]: 0,
+            [OnslaughtTrackId.Xenos]: 0,
+            [OnslaughtTrackId.Chaos]: 2,
+        });
+        expect.soft(result.eventTokens).toEqual({
+            [OnslaughtTrackId.Imperial]: 2,
+            [OnslaughtTrackId.Xenos]: 6,
+            [OnslaughtTrackId.Chaos]: 0,
         });
     });
 });

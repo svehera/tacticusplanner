@@ -211,7 +211,7 @@ const TrackSchema = z
                     )
                 ],
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            killzones: sector.killzones.map(({ battleNr, ...kz }) => kz).reverse(), // to match the order they are presented in-game
+            killzones: sector.killzones.map(({ battleNr, ...kz }) => kz),
         })),
     }));
 
