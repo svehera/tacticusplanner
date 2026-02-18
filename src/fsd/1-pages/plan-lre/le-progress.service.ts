@@ -568,7 +568,7 @@ export class LeProgressService {
                 maxTokens: externalData.currentEvent?.tokens.max ?? 12,
                 currentClaimedChestIndex: externalData.currentClaimedChestIndex ?? -1,
                 nextTokenMillisUtc: externalData.currentEvent
-                    ? Date.now() + externalData.currentEvent?.tokens.nextTokenInSeconds * 1000
+                    ? Date.now() + (externalData.currentEvent.tokens.nextTokenInSeconds ?? 0) * 1000
                     : Date.now() + 3600 * 3 * 1000,
                 regenDelayInSeconds: externalData.currentEvent?.tokens.regenDelayInSeconds ?? 3600 * 3,
                 currentPoints: externalData.currentPoints,
