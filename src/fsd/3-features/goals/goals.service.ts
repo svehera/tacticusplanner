@@ -502,109 +502,102 @@ export class GoalsService {
         let totalXpNeeded = 0;
         const today = new Date();
         let xpBooksAccrual = { accruedDate: today, booksAccrued: 0 } as XpBookAccrual;
-        for (const goalIdAndPriority of goalsByPrio) {
-            const goal = newGoalsEstimates.find(x => x.goalId === goalIdAndPriority.id);
+        try {
+            for (const goalIdAndPriority of goalsByPrio) {
+                const goal = newGoalsEstimates.find(x => x.goalId === goalIdAndPriority.id);
 
-            if (goal === undefined) {
-                console.error('could not find goal estimate for goal id ' + goalIdAndPriority.id);
-                continue;
-            }
-            const remainingXp = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
-            goal.xpBooksRequired = Math.floor(remainingXp / 12500);
-            const xpNeeded = this.adjustNeededXp(remainingXp, heldBooks);
-            goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / 12500);
+                if (goal === undefined) {
+                    console.error('could not find goal estimate for goal id ' + goalIdAndPriority.id);
+                    continue;
+                }
+                const remainingXp = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
+                goal.xpBooksRequired = Math.floor(remainingXp / 12500);
+                const xpNeeded = this.adjustNeededXp(remainingXp, heldBooks);
+                goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / 12500);
 
-            if (goal.xpEstimate || goal.xpEstimateAbilities) {
-                totalXpNeeded += xpNeeded;
-                goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
-                if (totalXpNeeded === 0) {
-                    goal.xpEstimate = undefined;
-                    goal.xpEstimateAbilities = undefined;
-                } else {
-                    if (goal.xpEstimate) {
-                        goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
-                        goal.xpEstimate.xpLeft = xpNeeded;
-                        if (xpIncomeState.manualBooksPerDay > 0) {
-                            const newAccrual = this.processGoalAccrual(
-                                Math.ceil(xpNeeded / 12500),
-                                xpBooksAccrual,
-                                xpIncomeState.manualBooksPerDay
-                            );
-                            goal.xpDaysLeft = Math.ceil(
-                                (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
-                            );
-                            xpBooksAccrual = newAccrual;
-                        }
+                if (goal.xpEstimate || goal.xpEstimateAbilities) {
+                    totalXpNeeded += xpNeeded;
+                    goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
+                    if (totalXpNeeded === 0) {
+                        goal.xpEstimate = undefined;
+                        goal.xpEstimateAbilities = undefined;
                     } else {
-                        goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
-                        goal.xpEstimateAbilities!.xpLeft = xpNeeded;
-                        if (xpIncomeState.manualBooksPerDay > 0) {
-                            const newAccrual = this.processGoalAccrual(
-                                Math.ceil(xpNeeded / 12500),
-                                xpBooksAccrual,
-                                xpIncomeState.manualBooksPerDay
-                            );
-                            goal.xpDaysLeft = Math.ceil(
-                                (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
-                            );
-                            xpBooksAccrual = newAccrual;
+                        if (goal.xpEstimate) {
+                            goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
+                            goal.xpEstimate.xpLeft = xpNeeded;
+                            if (xpIncomeState.manualBooksPerDay > 0) {
+                                const newAccrual = this.processGoalAccrual(
+                                    Math.ceil(xpNeeded / 12500),
+                                    xpBooksAccrual,
+                                    xpIncomeState.manualBooksPerDay
+                                );
+                                goal.xpDaysLeft = Math.ceil(
+                                    (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
+                                );
+                                xpBooksAccrual = newAccrual;
+                            }
+                        } else {
+                            goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
+                            goal.xpEstimateAbilities!.xpLeft = xpNeeded;
+                            if (xpIncomeState.manualBooksPerDay > 0) {
+                                const newAccrual = this.processGoalAccrual(
+                                    Math.ceil(xpNeeded / 12500),
+                                    xpBooksAccrual,
+                                    xpIncomeState.manualBooksPerDay
+                                );
+                                goal.xpDaysLeft = Math.ceil(
+                                    (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
+                                );
+                                xpBooksAccrual = newAccrual;
+                            }
                         }
                     }
                 }
-            }
 
-            if (goal.abilitiesEstimate === undefined && goal.mowEstimate === undefined) continue;
-            const badges = goal.mowEstimate?.badges ?? goal.abilitiesEstimate!.badges;
-            for (const [rarityStr, count] of Object.entries(badges)) {
-                const rarity = Number(rarityStr) as Rarity;
-                const alliance =
-                    goal.abilitiesEstimate?.alliance ??
-                    GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
-                if (!neededBadges[alliance][rarity]) {
-                    neededBadges[alliance][rarity] = 0;
+                if (goal.abilitiesEstimate === undefined && goal.mowEstimate === undefined) continue;
+                const badges = goal.mowEstimate?.badges ?? goal.abilitiesEstimate!.badges;
+                for (const [rarityStr, count] of Object.entries(badges)) {
+                    const rarity = Number(rarityStr) as Rarity;
+                    const alliance =
+                        goal.abilitiesEstimate?.alliance ??
+                        GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
+                    if (!neededBadges[alliance][rarity]) {
+                        neededBadges[alliance][rarity] = 0;
+                    }
+                    if (heldBadges[alliance][rarity]) {
+                        const toRemove = Math.min(heldBadges[alliance][rarity], count);
+                        heldBadges[alliance][rarity] -= toRemove;
+                        neededBadges[alliance][rarity] += count - toRemove;
+                        badges[rarity] = count - toRemove;
+                    } else {
+                        neededBadges[alliance][rarity] += count;
+                    }
                 }
-                if (heldBadges[alliance][rarity]) {
-                    const toRemove = Math.min(heldBadges[alliance][rarity], count);
-                    heldBadges[alliance][rarity] -= toRemove;
-                    neededBadges[alliance][rarity] += count - toRemove;
-                    badges[rarity] = count - toRemove;
-                } else {
-                    neededBadges[alliance][rarity] += count;
-                }
-            }
 
-            if (goal.mowEstimate === undefined) continue;
-            if (!goal.mowEstimate.forgeBadges) {
-                console.log(
-                    'unexpectedly found a goal with mow estimate but no forge badges, initializing to empty map',
-                    goal
-                );
+                if (goal.mowEstimate === undefined) continue;
+                (Object.keys(goal.mowEstimate.forgeBadges) as unknown as Rarity[]).forEach(rarity => {
+                    const count = goal.mowEstimate!.forgeBadges[rarity] ?? 0;
+                    const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
+                    goal.mowEstimate!.forgeBadges[rarity] = count - toRemove;
+                    heldForgeBadges[rarity] = (heldForgeBadges[rarity] ?? 0) - toRemove;
+                    neededForgeBadges[rarity] += goal.mowEstimate!.forgeBadges[rarity] ?? 0;
+                });
+                const components = goal.mowEstimate.components;
+                const alliance = GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
+                const held = heldComponents[alliance] ?? 0;
+                const toRemove = Math.min(components, held);
+                goal.mowEstimate!.components = components - toRemove;
+                heldComponents[alliance] -= toRemove;
+                neededComponents[alliance] = (neededComponents[alliance] ?? 0) + goal.mowEstimate!.components;
             }
-            let forgeBadges = new Map<Rarity, number>();
-            try {
-                forgeBadges = new Map<Rarity, number>(
-                    Object.entries(goal.mowEstimate.forgeBadges ?? {}).map(([rarity, count]) => [
-                        Number(rarity) as Rarity,
-                        count,
-                    ])
-                );
-            } catch (error) {
-                console.error('Error processing forge badges:', error);
-                console.error('goal causing error: ', goal);
-            }
-            forgeBadges.entries().forEach(([rarity, count]) => {
-                const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
-                goal.mowEstimate!.forgeBadges.set(rarity, count - toRemove);
-                heldForgeBadges[rarity] = (heldForgeBadges[rarity] ?? 0) - toRemove;
-                neededForgeBadges[rarity] += goal.mowEstimate!.forgeBadges.get(rarity) ?? 0;
-            });
-            const components = goal.mowEstimate.components;
-            const alliance = GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
-            const held = heldComponents[alliance] ?? 0;
-            const toRemove = Math.min(components, held);
-            goal.mowEstimate!.components = components - toRemove;
-            heldComponents[alliance] -= toRemove;
-            neededComponents[alliance] = (neededComponents[alliance] ?? 0) + goal.mowEstimate!.components;
+        } catch (error) {
+            console.error('Error adjusting goal estimates:', error);
+            console.error('goals: ', JSON.stringify(goals));
+            console.error('goalsEstimate: ', JSON.stringify(goalsEstimate));
+            console.error('inventory: ', JSON.stringify(inventory));
+            console.error('xpUseState: ', JSON.stringify(xpUseState));
+            console.error('upgradeRankOrMowGoals: ', JSON.stringify(upgradeRankOrMowGoals));
+            console.error('xpIncomeState: ', JSON.stringify(xpIncomeState));
         }
 
         return {
@@ -616,3 +609,44 @@ export class GoalsService {
         };
     }
 }
+
+/*
+const goals = [
+    {
+        id: 'a119cc4f-188e-4022-bb58-fb5b15dd91f0',
+        character: 'ultraDreadnought',
+        type: 4,
+        startingRank: 1,
+        startingRankPoint5: false,
+        targetRarity: 0,
+        targetStars: 0,
+        shardsPerToken: 0,
+        mythicShardsPerToken: 0,
+        campaignsUsage: 2,
+        mythicCampaignsUsage: 2,
+        priority: 6,
+        dailyRaids: true,
+        rankPoint5: false,
+        upgradesRarity: [],
+        firstAbilityLevel: 1,
+        secondAbilityLevel: 2,
+    },
+];
+
+const goalsEstimates = [
+    {
+        goalId: 'a119cc4f-188e-4022-bb58-fb5b15dd91f0',
+        energyTotal: 22,
+        daysTotal: 1,
+        daysLeft: 58,
+        oTokensTotal: 0,
+        mowEstimate: {
+            salvage: 5,
+            components: 1,
+            gold: 15,
+            badges: { '0': 1, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 },
+            forgeBadges: {},
+        },
+    },
+];
+*/
