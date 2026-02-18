@@ -16,13 +16,7 @@ import { getEnumValues } from '@/fsd/5-shared/lib';
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Alliance, Rank } from '@/fsd/5-shared/model';
 
-import {
-    ICampaignsProgress,
-    CampaignsService,
-    CampaignType,
-    Campaign,
-    ICampaignBattleComposed,
-} from '@/fsd/4-entities/campaign';
+import { CampaignsService, CampaignType, Campaign, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import {
@@ -315,6 +309,7 @@ export class UpgradesService {
         const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals);
 
         const combinedBaseMaterials = this.combineBaseMaterials(unitsUpgrades);
+
         this.populateLocationsData(combinedBaseMaterials, settings);
 
         let allMaterials: ICharacterUpgradeEstimate[] = [];
@@ -329,7 +324,7 @@ export class UpgradesService {
             allMaterials = this.getTotalEstimates(combinedBaseMaterials, inventoryUpgrades);
 
             if (settings.preferences.farmStrategy === DailyRaidsStrategy.leastTime) {
-                allMaterials = this.improveEstimates(allMaterials, combinedBaseMaterials, inventoryUpgrades);
+                allMaterials = this.improveEstimates(settings, allMaterials, combinedBaseMaterials, inventoryUpgrades);
             }
         }
 
@@ -751,10 +746,15 @@ export class UpgradesService {
      * @returns A new array of refined and sorted character upgrade estimates.
      */
     private static improveEstimates(
+        settings: IEstimatedRanksSettings,
         estimates: ICharacterUpgradeEstimate[],
         upgrades: Record<string, ICombinedUpgrade>,
-        inventoryUpgrades: Record<string, number>
+        inventoryUpgrades: Record<string, number>,
+        depth: number = 0
     ): ICharacterUpgradeEstimate[] {
+        if (depth > 5) {
+            return estimates;
+        }
         const average = Math.ceil(mean(estimates.map(x => x.daysTotal)));
         const correctUpgradesLocations = estimates
             .filter(
@@ -768,18 +768,36 @@ export class UpgradesService {
             return estimates;
         }
 
+        const currCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
         for (const upgradeId of correctUpgradesLocations) {
             const upgrade = upgrades[upgradeId];
-            const newLocation = upgrade.locations.find(
-                location => location.isUnlocked && location.isPassFilter && !location.isSuggested
-            );
+            const newLocation = upgrade.locations.find(location => {
+                const campaignProgress = settings.campaignsProgress[location.campaign];
+                const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign as Campaign);
+                const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
+
+                location.isUnlocked = this.mapNodeNumber(location.campaign, location.nodeNumber) <= campaignProgress;
+                location.isCompleted = settings.completedLocations.some(
+                    completedLocation =>
+                        location.id === completedLocation.id &&
+                        completedLocation.dailyBattleCount === completedLocation.raidsCount
+                );
+
+                return (
+                    location.isUnlocked &&
+                    location.isPassFilter &&
+                    !location.isSuggested &&
+                    !location.isCompleted &&
+                    (!isCampaignEventLocation || isCampaignEventLocationAvailable)
+                );
+            });
             if (newLocation) {
                 newLocation.isSuggested = true;
             }
         }
 
         const newEstimates = this.getTotalEstimates(upgrades, inventoryUpgrades);
-        const result = this.improveEstimates(newEstimates, upgrades, inventoryUpgrades);
+        const result = this.improveEstimates(settings, newEstimates, upgrades, inventoryUpgrades, depth + 1);
 
         return orderBy(result, ['daysTotal', 'energyTotal'], ['desc', 'desc']);
     }
@@ -1008,22 +1026,7 @@ export class UpgradesService {
             const combinedUpgrade = upgrades[upgradeId];
 
             for (const location of combinedUpgrade.locations) {
-                // Challenge CE campaigns should unlock based on their corresponding base campaign progress
-                const challengeToBase: Partial<Record<Campaign, Campaign>> = {
-                    [Campaign.AMSC]: Campaign.AMS,
-                    [Campaign.AMEC]: Campaign.AME,
-                    [Campaign.TSC]: Campaign.TS,
-                    [Campaign.TEC]: Campaign.TE,
-                    [Campaign.TASC]: Campaign.TAS,
-                    [Campaign.TAEC]: Campaign.TAE,
-                    [Campaign.DGSC]: Campaign.DGS,
-                    [Campaign.DGEC]: Campaign.DGE,
-                };
-                const unlockCampaign =
-                    (challengeToBase[location.campaign as Campaign] as keyof ICampaignsProgress | undefined) ??
-                    (location.campaign as keyof ICampaignsProgress);
-
-                const campaignProgress = settings.campaignsProgress[unlockCampaign];
+                const campaignProgress = settings.campaignsProgress[location.campaign];
                 const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign as Campaign);
                 const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
 
@@ -1043,7 +1046,7 @@ export class UpgradesService {
                 );
 
                 // location can be suggested for raids only if it is unlocked, passed other filters
-                // and in case it is Campaign Event location user should have specific Campaign Event selected
+                // and in case it is Campaign Event location user should have specific Campaign Event selected.
                 location.isSuggested =
                     location.isUnlocked &&
                     location.isPassFilter &&
@@ -1081,7 +1084,8 @@ export class UpgradesService {
                 ];
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
                 const ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
-                if (ignoredLocations.length !== selectedLocations.length) {
+
+                if (ignoredLocations.length !== combinedUpgrade.locations.length) {
                     // We have some nodes to raid, so don't suggest the others.
                     ignoredLocations.forEach(location => (location.isSuggested = false));
                 } else {

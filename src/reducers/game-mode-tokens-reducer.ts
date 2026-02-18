@@ -15,8 +15,9 @@ export const gameModeTokensActionReducer = (
                 tokens: {
                     ...(state.tokens ?? {}),
                     ...action.gameModeTokens,
+                    lastSetAtSecondsUtc: Math.floor(Date.now() / 1000),
                 },
-            };
+            } as IGameModeTokensState;
         }
         case 'Set': {
             return action.value;

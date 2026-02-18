@@ -1,15 +1,14 @@
-﻿import { Card, CardContent, CardHeader } from '@mui/material';
+﻿/* eslint-disable import-x/no-internal-modules */
+/* eslint-disable boundaries/element-types */
+import { Card, CardContent, CardHeader } from '@mui/material';
 import { sum } from 'lodash';
 import { useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 import Zoom from 'react-medium-image-zoom';
 import { useNavigate } from 'react-router-dom';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { PersonalGoalType } from 'src/models/enums';
-// eslint-disable-next-line import-x/no-internal-modules
 import { menuItemById } from 'src/models/menu-items';
-// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { useAuth } from '@/fsd/5-shared/model';
@@ -19,7 +18,7 @@ import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
-import { Thanks } from '@/fsd/3-features/thank-you';
+import TokenAvailability from '@/fsd/1-pages/game-mode-tokens';
 
 import { useBmcWidget } from './useBmcWidget';
 
@@ -129,8 +128,7 @@ export const DesktopHome = () => {
     return (
         <div>
             {announcements()}
-            <Thanks sliderMode={true} />
-            {/*{announcements()}*/}
+            <TokenAvailability />
             <div className="flex flex-wrap items-start justify-center gap-2.5">
                 <div>
                     <h3 className="text-center">Daily Raids</h3>

@@ -3,7 +3,7 @@
 import { enqueueSnackbar } from 'notistack';
 import { useContext } from 'react';
 
-import { IDispatchContext } from '@/models/interfaces';
+import { IDispatchContext, TacticusTokensState } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { getTacticusPlayerData, TacticusLegendaryEventProgress } from '@/fsd/5-shared/lib/tacticus-api';
@@ -85,7 +85,8 @@ export const useSyncWithTacticus = () => {
 
                 // Extract tokens from nested game mode objects
                 const progress = result.data.player.progress;
-                const combinedTokens = {
+                const combinedTokens: TacticusTokensState = {
+                    lastSetAtSecondsUtc: result.data.metaData.lastUpdatedOn ?? Math.floor(Date.now() / 1000),
                     arena: progress.arena?.tokens,
                     guildRaid: progress.guildRaid?.tokens,
                     bombTokens: progress.guildRaid?.bombTokens,
