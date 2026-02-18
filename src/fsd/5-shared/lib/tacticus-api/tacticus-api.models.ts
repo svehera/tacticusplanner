@@ -243,16 +243,9 @@ export interface TacticusLegendaryEventBattlesProgress {
 
 export interface TacticusLegendaryEventCurrentEvent {
     run: number;
-    tokens: TacticusLegendaryEventTokens;
+    tokens: TacticusTokens;
     hasUsedAdForExtraTokenToday: boolean;
     extraCurrencyPerPayout: number;
-}
-
-export interface TacticusLegendaryEventTokens {
-    current: number;
-    max: number;
-    nextTokenInSeconds: number;
-    regenDelayInSeconds: number;
 }
 
 export interface TacticusGuildResponse {
