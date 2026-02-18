@@ -21,10 +21,17 @@ export class MowLookupService {
             [Rarity.Legendary]: 0,
             [Rarity.Mythic]: 0,
         };
-        const forgeBadges = new Map<Rarity, number>();
+        const forgeBadges: Record<Rarity, number> = {
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 0,
+            [Rarity.Mythic]: 0,
+        };
         for (const material of materials) {
             badges[material.rarity] += material.badges;
-            forgeBadges.set(material.rarity, (forgeBadges.get(material.rarity) ?? 0) + material.forgeBadges);
+            forgeBadges[material.rarity] += material.forgeBadges;
         }
 
         return {
