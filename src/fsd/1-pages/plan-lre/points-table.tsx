@@ -21,7 +21,7 @@ import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank, rankToString, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService, CharacterTitleShort, RankIcon } from '@/fsd/4-entities/character';
+import { CharactersService, CharacterTitle, RankIcon } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
 
@@ -81,7 +81,16 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         cellRenderer: (props: ICellRendererParams<ITableRow>) => {
                             const character = props.data?.character;
                             if (character) {
-                                return <CharacterTitleShort character={character} hideName={isMobile} imageSize={30} />;
+                                return (
+                                    <CharacterTitle
+                                        character={character}
+                                        hideName={isMobile}
+                                        imageSize={30}
+                                        short
+                                        hideRarity
+                                        hideRank
+                                    />
+                                );
                             }
                         },
                         valueGetter: (params: ValueGetterParams<ITableRow>) => params.data?.character?.shortName,

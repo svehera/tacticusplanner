@@ -14,7 +14,7 @@ import {
 } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { ICharacter2, CharacterTitleShort, RankIcon } from '@/fsd/4-entities/character';
+import { ICharacter2, RankIcon, CharacterTitle } from '@/fsd/4-entities/character';
 import { StatCell, DamageCell, StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 export const useCharacters = () => {
@@ -119,7 +119,7 @@ export const useCharacters = () => {
                         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                             const character = props.data;
                             return character ? (
-                                <CharacterTitleShort character={character} hideName={isMobile} imageSize={30} />
+                                <CharacterTitle character={character} imageSize={30} short hideRarity hideRank />
                             ) : null;
                         },
                     },

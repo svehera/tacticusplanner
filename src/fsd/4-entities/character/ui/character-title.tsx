@@ -15,6 +15,8 @@ export const CharacterTitle = ({
     hideName,
     imageSize,
     fullName,
+    hideRank,
+    hideRarity,
 }: {
     character: ICharacter2;
     showLockedWithOpacity?: boolean;
@@ -23,6 +25,8 @@ export const CharacterTitle = ({
     short?: boolean;
     fullName?: boolean;
     imageSize?: number;
+    hideRarity?: boolean;
+    hideRank?: boolean;
 }) => {
     const name = fullName ? character.fullName : character.shortName;
 
@@ -46,8 +50,8 @@ export const CharacterTitle = ({
                 height={imageSize}
             />
             {!hideName && <span>{name}</span>}
-            <RarityIcon rarity={character.rarity} />
-            {isUnlocked ? <RankIcon key={character.rank} rank={character.rank} /> : undefined}
+            {!hideRarity && <RarityIcon rarity={character.rarity} />}
+            {isUnlocked && !hideRank && <RankIcon key={character.rank} rank={character.rank} />}
             <Tooltip
                 placement="top"
                 title={
