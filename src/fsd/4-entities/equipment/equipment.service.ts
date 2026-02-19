@@ -1,9 +1,9 @@
-// eslint-disable-next-line import-x/no-internal-modules
+/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
 import { TacticusEquipment } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { RarityString, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
-// eslint-disable-next-line boundaries/element-types
-import { CharactersService } from '../character';
+import { CharactersService } from '../character/characters.service';
 
 import { newEquipmentData } from './data';
 import { IEquipment, IEquipmentStatic } from './model';
@@ -55,14 +55,15 @@ export class EquipmentService {
     // Returns the characters that can use this equipment.
     private static resolveUnits(data: IEquipmentStatic): string[] {
         if (data.allowedUnits.length > 0) return data.allowedUnits;
-        return CharactersService.charactersData
-            .filter(char => data.allowedFactions.includes(char.faction))
-            .filter(char =>
-                [char.equipment1, char.equipment2, char.equipment3].includes(
-                    CharactersService.parseEquipmentType(data.type) || ''
-                )
-            )
+        const ret = CharactersService.charactersData
+            .filter(char => {
+                return (
+                    (data.allowedFactions.includes(char.faction) || data.allowedUnits.includes(char.snowprintId!)) &&
+                    [char.equipment1, char.equipment2, char.equipment3].includes(data.type)
+                );
+            })
             .map(char => char.snowprintId!);
+        return ret;
     }
 
     private static parseEquipmentRarity(rarity: string): Rarity {

@@ -12,3 +12,4 @@ export { MultipleSelectCheckmarks } from './multiple-select';
 export { RaritySelect } from './rarity-select';
 export { StarsSelect } from './stars-select';
 export { ConfirmationDialog } from './confirmation-dialog';
+export { EquipmentSelect } from './equipment-select';

@@ -1,3 +1,5 @@
+/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
 import { uniq } from 'lodash';
 
 import {
@@ -11,8 +13,8 @@ import {
     Rarity,
 } from '@/fsd/5-shared/model';
 
-// eslint-disable-next-line boundaries/element-types
-import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
+import { ILegendaryEventStatic, LegendaryEventEnum } from '@/fsd/4-entities/lre';
+import { LegendaryEventService } from '@/fsd/4-entities/lre/legendary-event-service';
 
 import { charactersData } from './data';
 import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData, ICharacter2 } from './model';
@@ -29,25 +31,36 @@ const equipmentTypeMapping = {
 export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
 
-    static readonly lreCharacters: ICharacterData[] = LegendaryEventService.getLegendaryEvents()
-        .map(lre => {
-            const character = this.charactersData.find(unit => unit.snowprintId === lre.unitSnowprintId);
-            if (character) return { ...character, lre: this.toILreCharacterStaticData(lre) };
-            return character;
-        })
-        .filter(Boolean) as ICharacterData[];
+    private static _lreCharacters?: ICharacterData[];
+    static get lreCharacters(): ICharacterData[] {
+        if (!this._lreCharacters) {
+            this._lreCharacters = LegendaryEventService.getLegendaryEvents()
+                .map(lre => {
+                    const character = this.charactersData.find(unit => unit.snowprintId === lre.unitSnowprintId);
+                    if (character) return { ...character, lre: this.toILreCharacterStaticData(lre) };
+                    return character;
+                })
+                .filter(Boolean) as ICharacterData[];
+        }
+        return this._lreCharacters;
+    }
 
-    static readonly activeLres = this.lreCharacters.filter(x => !x.lre?.finished);
-    static readonly inactiveLres = this.lreCharacters.filter(x => !!x.lre?.finished);
+    static get activeLres(): ICharacterData[] {
+        return this.lreCharacters.filter(x => !x.lre?.finished);
+    }
+
+    static get inactiveLres(): ICharacterData[] {
+        return this.lreCharacters.filter(x => !!x.lre?.finished);
+    }
 
     public static getInitialRarity(snowprintId: string): Rarity | undefined {
         const character = this.charactersData.find(unit => unit.snowprintId === snowprintId);
         return character?.initialRarity;
     }
 
-    static readonly activeLre: ICharacterData = (() => {
+    static get activeLre(): ICharacterData {
         return this.charactersData.find(unit => unit.snowprintId === LegendaryEventService.getActiveLreUnitId())!;
-    })();
+    }
 
     public static getLreCharacter(id: LegendaryEventEnum): ICharacterData | undefined {
         return this.lreCharacters.find(unit => {
@@ -103,6 +116,8 @@ export class CharactersService {
             equipment3: rawData.Equipment3,
             meleeHits: rawData['Melee Hits'],
             rangeHits: rawData['Ranged Hits'],
+            activeAbilityNames: rawData['Active Ability Names'] ?? [],
+            passiveAbilityNames: rawData['Passive Ability Names'] ?? [],
             rangeDistance: rawData.Distance,
             movement: rawData.Movement,
             forcedSummons: rawData.ForcedSummons ?? false,

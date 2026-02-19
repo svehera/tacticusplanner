@@ -1,5 +1,6 @@
-import { ICharacter2 } from '@/fsd/4-entities/character';
-import {
+/* eslint-disable import-x/no-internal-modules */
+import type { ICharacter2 } from '@/fsd/4-entities/character/model';
+import type {
     ILegendaryEventStatic,
     ILegendaryEventTrackStatic,
     LegendaryEventEnum,

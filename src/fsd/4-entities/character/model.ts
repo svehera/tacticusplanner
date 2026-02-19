@@ -92,6 +92,8 @@ export interface UnitDataRaw {
     Traits: string[];
     'Active Ability'?: string[];
     'Passive Ability'?: string[];
+    'Active Ability Names'?: string[];
+    'Passive Ability Names'?: string[];
     Equipment1: string;
     Equipment2: string;
     Equipment3: string;
@@ -130,6 +132,8 @@ export interface ICharacterData {
     initialRarity: Rarity;
     rarityStars: RarityStars;
     damageTypes: IDamageTypes;
+    activeAbilityNames: string[];
+    passiveAbilityNames: string[];
     traits: Trait[];
     equipment1: string;
     equipment2: string;
