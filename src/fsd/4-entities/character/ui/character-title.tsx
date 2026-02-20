@@ -15,8 +15,8 @@ export const CharacterTitle = ({
     hideName,
     imageSize,
     fullName,
-    hideRank,
     hideRarity,
+    hideRank,
 }: {
     character: ICharacter2;
     showLockedWithOpacity?: boolean;
