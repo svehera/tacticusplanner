@@ -1,11 +1,12 @@
+/* eslint-disable import-x/no-internal-modules */
 import { ArrowForward } from '@mui/icons-material';
 
 import { Rank } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
+import { EquipmentService } from '@/fsd/4-entities/equipment/equipment.service';
 import { MowsService } from '@/fsd/4-entities/mow';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { ISnapshotCharacter, ISnapshotMachineOfWar, ISnapshotUnitDiff } from './models';
@@ -77,9 +78,9 @@ export const RosterSnapshotsUnitDiffSideBySide: React.FC<Props> = ({
                               xpLevel: diff.xpLevel ?? (char ? char.xpLevel : 0),
                               shards: diff.shards ?? char!.shards,
                               mythicShards: diff.mythicShards ?? char!.mythicShards,
-                              equip0: diff.equip0 ?? char!.equip0,
-                              equip1: diff.equip1 ?? char!.equip1,
-                              equip2: diff.equip2 ?? char!.equip2,
+                              equip0: EquipmentService.equipmentData.find(eq => eq.id === diff.equip0) ?? char!.equip0,
+                              equip1: EquipmentService.equipmentData.find(eq => eq.id === diff.equip1) ?? char!.equip1,
+                              equip2: EquipmentService.equipmentData.find(eq => eq.id === diff.equip2) ?? char!.equip2,
                               equip0Level: diff.equip0Level ?? char!.equip0Level,
                               equip1Level: diff.equip1Level ?? char!.equip1Level,
                               equip2Level: diff.equip2Level ?? char!.equip2Level,
