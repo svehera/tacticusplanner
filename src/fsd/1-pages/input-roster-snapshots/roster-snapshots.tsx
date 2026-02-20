@@ -66,16 +66,18 @@ function getDisplay(
             <div className="flex flex-wrap gap-5 p-4">
                 {powerUnits.map(unit => (
                     <div key={`power-${unit.id}`}>
-                        <RosterSnapshotsUnit
-                            showShards={showShards}
-                            showMythicShards={showMythicShards}
-                            showXpLevel={showXpLevel}
-                            showAbilities={RosterSnapshotShowVariableSettings.Always}
-                            showEquipment={RosterSnapshotShowVariableSettings.Always}
-                            showTooltip={true}
-                            char={'rank' in unit ? unit : undefined}
-                            mow={'rank' in unit ? undefined : unit}
-                        />
+                        <RosterSnapshotsAssetsProvider>
+                            <RosterSnapshotsUnit
+                                showShards={showShards}
+                                showMythicShards={showMythicShards}
+                                showXpLevel={showXpLevel}
+                                showAbilities={RosterSnapshotShowVariableSettings.Always}
+                                showEquipment={RosterSnapshotShowVariableSettings.Always}
+                                showTooltip={true}
+                                char={'rank' in unit ? unit : undefined}
+                                mow={'rank' in unit ? undefined : unit}
+                            />
+                        </RosterSnapshotsAssetsProvider>
                     </div>
                 ))}
             </div>
