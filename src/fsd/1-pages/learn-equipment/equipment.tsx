@@ -30,14 +30,13 @@ export const Equipment = () => {
             {
                 field: 'icon',
                 headerName: 'Equipment',
-                minWidth: 120,
+                minWidth: 60,
                 flex: 1,
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     const equipment = params.data;
                     return equipment ? (
                         <span className="flex items-center">
                             <EquipmentIcon equipment={equipment} width={60} height={60} />
-                            {equipment.name}
                         </span>
                     ) : (
                         ''
