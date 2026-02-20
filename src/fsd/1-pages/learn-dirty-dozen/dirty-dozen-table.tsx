@@ -49,7 +49,7 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
                 const characterId = props.data?.Name ?? '';
                 const character = characters.find(char => CharactersService.matchesAnyCharacterId(characterId, char));
                 if (character) {
-                    return <CharacterTitle character={character} imageSize={30} short hideRarity hideRank />;
+                    return <CharacterTitle character={character} imageSize={30} hideRarity hideRank />;
                 } else {
                     return characterId;
                 }

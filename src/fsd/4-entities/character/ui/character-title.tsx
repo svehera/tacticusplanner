@@ -22,7 +22,6 @@ export const CharacterTitle = ({
     showLockedWithOpacity?: boolean;
     hideName?: boolean;
     onClick?: () => void;
-    short?: boolean;
     fullName?: boolean;
     imageSize?: number;
     hideRarity?: boolean;

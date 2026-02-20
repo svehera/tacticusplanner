@@ -86,7 +86,6 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                                         character={character}
                                         hideName={isMobile}
                                         imageSize={30}
-                                        short
                                         hideRarity
                                         hideRank
                                     />

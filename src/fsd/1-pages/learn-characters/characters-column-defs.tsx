@@ -119,7 +119,7 @@ export const useCharacters = () => {
                         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                             const character = props.data;
                             return character ? (
-                                <CharacterTitle character={character} imageSize={30} short hideRarity hideRank />
+                                <CharacterTitle character={character} imageSize={30} hideRarity hideRank />
                             ) : null;
                         },
                     },

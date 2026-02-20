@@ -282,7 +282,6 @@ export const MasterTable = () => {
                                         character={character}
                                         hideName={isMobile}
                                         imageSize={30}
-                                        short
                                         hideRarity
                                         hideRank
                                     />
