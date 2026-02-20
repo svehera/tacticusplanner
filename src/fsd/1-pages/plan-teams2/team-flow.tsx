@@ -15,6 +15,7 @@ interface Props {
     mows: IMow2[];
     disabledUnits?: string[]; // List of character snowprintIds that should be shown as disabled
     flexIndex?: number;
+    sizeMod?: number;
     onCharClicked: (char: ICharacter2) => void;
     onMowClicked: (mow: IMow2) => void;
 }
@@ -24,6 +25,7 @@ export const TeamFlow: React.FC<Props> = ({
     mows,
     disabledUnits,
     flexIndex,
+    sizeMod = 1,
     onCharClicked,
     onMowClicked,
 }: Props) => {
@@ -31,7 +33,9 @@ export const TeamFlow: React.FC<Props> = ({
     const flex = chars.slice(flexIndex ?? chars.length);
 
     return (
-        <div className="w-full rounded-lg border-2 border-dashed border-slate-200 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-black/10">
+        <div
+            style={{ zoom: sizeMod }}
+            className="w-full rounded-lg border-2 border-dashed border-slate-200 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-black/10">
             <div className="flex min-w-[120px] flex-1 flex-auto flex-wrap items-start gap-2">
                 {core.map(char => (
                     <div
@@ -42,6 +46,9 @@ export const TeamFlow: React.FC<Props> = ({
                             showMythicShards={RosterSnapshotShowVariableSettings.Never}
                             showShards={RosterSnapshotShowVariableSettings.Never}
                             showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                            showAbilities={RosterSnapshotShowVariableSettings.Always}
+                            showEquipment={RosterSnapshotShowVariableSettings.Always}
+                            showTooltip={false}
                             char={Teams2Service.convertCharacter(char!)}
                             charData={char}
                             isDisabled={disabledUnits?.includes(char.snowprintId!)}
@@ -61,6 +68,9 @@ export const TeamFlow: React.FC<Props> = ({
                                     showMythicShards={RosterSnapshotShowVariableSettings.Never}
                                     showShards={RosterSnapshotShowVariableSettings.Never}
                                     showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                                    showAbilities={RosterSnapshotShowVariableSettings.Always}
+                                    showEquipment={RosterSnapshotShowVariableSettings.Always}
+                                    showTooltip={false}
                                     char={Teams2Service.convertCharacter(char!)}
                                     charData={char}
                                     isDisabled={disabledUnits?.includes(char.snowprintId!)}
@@ -84,6 +94,9 @@ export const TeamFlow: React.FC<Props> = ({
                                     showMythicShards={RosterSnapshotShowVariableSettings.Never}
                                     showShards={RosterSnapshotShowVariableSettings.Never}
                                     showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                                    showAbilities={RosterSnapshotShowVariableSettings.Always}
+                                    showEquipment={RosterSnapshotShowVariableSettings.Always}
+                                    showTooltip={false}
                                     mow={Teams2Service.convertMow(mow)}
                                     mowData={mow}
                                     isDisabled={disabledUnits?.includes(mow.snowprintId!)}

@@ -36,11 +36,11 @@ interface FilterGroupProps {
 }
 
 const FilterGroup: React.FC<FilterGroupProps> = ({ label, children }) => (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-wrap items-center gap-1">
         <label className="text-[10px] font-bold tracking-wider text-slate-500 uppercase dark:text-slate-400">
             {label}
         </label>
-        <div className="flex flex-row items-center gap-2">{children}</div>
+        <div className="flex flex-wrap items-center justify-center gap-2">{children}</div>
     </div>
 );
 
@@ -166,12 +166,14 @@ export const UnitFilter: React.FC<Props> = ({
                 </Select>
             </FilterGroup>
 
-            <div className="ml-auto self-end">
-                <button
-                    className="rounded bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700"
-                    onClick={handleResetAllFilters}>
-                    Reset All Filters
-                </button>
+            <div className="flex flex-col items-center">
+                <div className="ml-auto self-end">
+                    <button
+                        className="rounded bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700"
+                        onClick={handleResetAllFilters}>
+                        Reset All Filters
+                    </button>
+                </div>
             </div>
         </header>
     );

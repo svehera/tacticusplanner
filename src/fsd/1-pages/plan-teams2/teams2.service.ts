@@ -4,6 +4,7 @@ import { ICharacter2 } from '@/models/interfaces';
 
 import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
 
+import { EquipmentService } from '@/fsd/4-entities/equipment';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import { ISnapshotCharacter, ISnapshotMachineOfWar } from '../input-roster-snapshots/models';
@@ -51,6 +52,12 @@ export class Teams2Service {
             stars: charData.stars ?? 0,
             shards: 0,
             mythicShards: 0,
+            equip0: EquipmentService.equipmentData.find(equip => equip.id === charData.equipment?.[0]?.id),
+            equip1: EquipmentService.equipmentData.find(equip => equip.id === charData.equipment?.[1]?.id),
+            equip2: EquipmentService.equipmentData.find(equip => equip.id === charData.equipment?.[2]?.id),
+            equip0Level: charData.equipment?.[0]?.level ?? 0,
+            equip1Level: charData.equipment?.[1]?.level ?? 0,
+            equip2Level: charData.equipment?.[2]?.level ?? 0,
         };
     }
 

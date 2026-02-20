@@ -1,3 +1,4 @@
+/* eslint-disable import-x/order */
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import {
@@ -27,6 +28,8 @@ import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { AddTeamDialog } from './add-team-dialog';
 import { ITeam2 } from './models';
 import { TeamFlow } from './team-flow';
+import { RosterSnapshotsMagnificationSlider } from '../input-roster-snapshots/roster-snapshots-magnification-slider';
+import { isMobile } from 'react-device-detect';
 
 // Somewhat arbitrary, but please consult with the planner maintainer before increasing.
 const MAX_TEAMS = 20;
@@ -82,6 +85,7 @@ export const ManageTeams = () => {
 
     const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
     const [teams, setTeams] = useState<ITeam2[]>([]);
+    const [sizeMod, setSizeMod] = useState(isMobile ? 0.5 : 1);
 
     useEffect(() => {
         setTeams(currentTeams);
@@ -97,12 +101,6 @@ export const ManageTeams = () => {
         if (selectedChars.length > 5 && (flexIndex ?? selectedChars.length) > 5) {
             const MESSAGE =
                 'A team can have a maximum of 5 characters (only Guild Raid Teams can have more than five characters).';
-            setWarDisallowedMessage(MESSAGE);
-            setTournamentArenaDisallowedMessage(MESSAGE);
-            nonRaidModesEnabled = false;
-        } else if (selectedMows.length > 1) {
-            const MESSAGE =
-                'A team can have a maximum of 1 Machine of War (only Guild Raid Teams can have more than one MoW).';
             setWarDisallowedMessage(MESSAGE);
             setTournamentArenaDisallowedMessage(MESSAGE);
             nonRaidModesEnabled = false;
@@ -132,7 +130,7 @@ export const ManageTeams = () => {
             setSaveAllowed(false);
             return;
         } else if (teamName.trim().length > 40) {
-            setSaveDisallowedMessage('Team name must be at most 40 characters.');
+            setSaveDisallowedMessage('Team name must be at most 40 characters long.');
             setSaveAllowed(false);
             return;
         }
@@ -285,6 +283,8 @@ export const ManageTeams = () => {
                 maxRank={maxRank}
                 factions={factions}
                 notes={notes}
+                sizeMod={sizeMod}
+                setSizeMod={setSizeMod}
                 onAddChar={onAddChar}
                 onAddMow={onAddMow}
                 onCharClicked={onCharClicked}
@@ -320,6 +320,9 @@ export const ManageTeams = () => {
 
     return (
         <Stack spacing={2} className="p-4">
+            <div className="flex items-start justify-start">
+                <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+            </div>
             <div className="px-4 pt-4">
                 <ButtonBase
                     onClick={onAdd}
@@ -430,6 +433,7 @@ export const ManageTeams = () => {
                             flexIndex={team.flexIndex}
                             onCharClicked={() => {}}
                             onMowClicked={() => {}}
+                            sizeMod={sizeMod}
                         />
                     </div>
                 </Paper>

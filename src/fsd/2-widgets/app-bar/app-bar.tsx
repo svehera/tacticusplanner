@@ -153,9 +153,9 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                     </FlexBox>
                     <div className="flex items-center">
                         {nav}
-                        <Tooltip title="Sync with the Tacticus API">
-                            <SyncButton showText={false} variant={'text'} sx={{ minWidth: 0, px: 1 }} />
-                        </Tooltip>
+                        <IconButton color="inherit" onClick={() => navigate('./faq')}>
+                            <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
+                        </IconButton>
                         <Tooltip title="Join Tacticus Planner community on Discord">
                             <IconButton color="inherit" component={Link} to={discordInvitationLink} target={'_blank'}>
                                 <DiscordIcon />
@@ -166,9 +166,9 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                                 <BmcIcon />
                             </IconButton>
                         </Tooltip>
-                        <IconButton color="inherit" onClick={() => navigate('./faq')}>
-                            <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
-                        </IconButton>
+                        <Tooltip title="Sync with the Tacticus API">
+                            <SyncButton showText={false} variant={'text'} sx={{ minWidth: 0, px: 1 }} />
+                        </Tooltip>
                         <ThemeSwitch />
                         <Button
                             id="basic-button"

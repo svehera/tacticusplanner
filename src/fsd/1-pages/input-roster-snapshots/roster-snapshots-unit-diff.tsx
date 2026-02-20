@@ -9,6 +9,9 @@ interface Props {
     showShards: RosterSnapshotShowVariableSettings;
     showMythicShards: RosterSnapshotShowVariableSettings;
     showXpLevel: RosterSnapshotShowVariableSettings;
+    showAbilities: RosterSnapshotShowVariableSettings;
+    showEquipment: RosterSnapshotShowVariableSettings;
+    showTooltip: boolean;
     diffStyle: RosterSnapshotDiffStyle;
     char?: ISnapshotCharacter;
     mow?: ISnapshotMachineOfWar;
@@ -19,6 +22,9 @@ export const RosterSnapshotsUnitDiff: React.FC<Props> = ({
     showShards,
     showMythicShards,
     showXpLevel,
+    showAbilities,
+    showEquipment,
+    showTooltip,
     diffStyle,
     char,
     mow,
@@ -30,6 +36,9 @@ export const RosterSnapshotsUnitDiff: React.FC<Props> = ({
                 showShards={showShards}
                 showMythicShards={showMythicShards}
                 showXpLevel={showXpLevel}
+                showAbilities={showAbilities}
+                showEquipment={showEquipment}
+                showTooltip={showTooltip}
                 char={char}
                 mow={mow}
                 diff={diff}

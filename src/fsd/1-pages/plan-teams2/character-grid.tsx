@@ -10,11 +10,12 @@ import { Teams2Service } from './teams2.service';
 
 interface Props {
     characters: ICharacter2[];
+    sizeMod: number;
     onCharacterSelect: (id: string) => void;
     showHeader: boolean;
 }
 
-export const CharacterGrid: React.FC<Props> = ({ characters, onCharacterSelect, showHeader }: Props) => {
+export const CharacterGrid: React.FC<Props> = ({ characters, sizeMod, onCharacterSelect, showHeader }: Props) => {
     return (
         <div>
             {showHeader && (
@@ -28,6 +29,7 @@ export const CharacterGrid: React.FC<Props> = ({ characters, onCharacterSelect, 
                     <div
                         key={char.snowprintId!}
                         onClick={() => onCharacterSelect(char.snowprintId!)}
+                        style={{ zoom: sizeMod }}
                         className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"
                         title={`Select ${char.name || 'Character'}`}>
                         <RosterSnapshotCharacter
@@ -35,6 +37,9 @@ export const CharacterGrid: React.FC<Props> = ({ characters, onCharacterSelect, 
                             showMythicShards={RosterSnapshotShowVariableSettings.Never}
                             showShards={RosterSnapshotShowVariableSettings.Never}
                             showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                            showAbilities={RosterSnapshotShowVariableSettings.Always}
+                            showEquipment={RosterSnapshotShowVariableSettings.Always}
+                            showTooltip={true}
                             char={Teams2Service.convertCharacter(char)}
                             charData={char}
                         />

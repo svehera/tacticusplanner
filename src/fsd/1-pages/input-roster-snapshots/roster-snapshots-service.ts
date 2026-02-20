@@ -1,11 +1,12 @@
+/* eslint-disable import-x/no-internal-modules */
 import { cloneDeep } from 'lodash';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { ICharacter2 } from '@/models/interfaces';
 
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
+import { EquipmentService } from '@/fsd/4-entities/equipment/equipment.service';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import {
@@ -33,6 +34,12 @@ export class RosterSnapshotsService {
             shards: c.shards,
             mythicShards: c.mythicShards,
             xpLevel: c.level,
+            equip0: EquipmentService.equipmentData.find(equip => equip.id === c.equipment?.[0]?.id),
+            equip1: EquipmentService.equipmentData.find(equip => equip.id === c.equipment?.[1]?.id),
+            equip2: EquipmentService.equipmentData.find(equip => equip.id === c.equipment?.[2]?.id),
+            equip0Level: c.equipment?.[0]?.level,
+            equip1Level: c.equipment?.[1]?.level,
+            equip2Level: c.equipment?.[2]?.level,
         };
     }
 
@@ -72,6 +79,12 @@ export class RosterSnapshotsService {
         if (char.shards !== baseChar.shards) diff.shards = char.shards;
         if (char.mythicShards !== baseChar.mythicShards) diff.mythicShards = char.mythicShards;
         if (char.xpLevel !== baseChar.xpLevel) diff.xpLevel = char.xpLevel;
+        if (char.equip0?.id !== baseChar.equip0?.id) diff.equip0 = char.equip0?.id;
+        if (char.equip1?.id !== baseChar.equip1?.id) diff.equip1 = char.equip1?.id;
+        if (char.equip2?.id !== baseChar.equip2?.id) diff.equip2 = char.equip2?.id;
+        if (char.equip0Level !== baseChar.equip0Level) diff.equip0Level = char.equip0Level;
+        if (char.equip1Level !== baseChar.equip1Level) diff.equip1Level = char.equip1Level;
+        if (char.equip2Level !== baseChar.equip2Level) diff.equip2Level = char.equip2Level;
         return diff;
     }
 
