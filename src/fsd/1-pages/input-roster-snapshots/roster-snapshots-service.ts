@@ -1,11 +1,12 @@
+/* eslint-disable import-x/no-internal-modules */
 import { cloneDeep } from 'lodash';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { ICharacter2 } from '@/models/interfaces';
 
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
+import { EquipmentService } from '@/fsd/4-entities/equipment/equipment.service';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import {
@@ -33,6 +34,12 @@ export class RosterSnapshotsService {
             shards: c.shards,
             mythicShards: c.mythicShards,
             xpLevel: c.level,
+            equip0: EquipmentService.equipmentData.find(equip => equip.id === c.equipment?.[0]?.id),
+            equip1: EquipmentService.equipmentData.find(equip => equip.id === c.equipment?.[1]?.id),
+            equip2: EquipmentService.equipmentData.find(equip => equip.id === c.equipment?.[2]?.id),
+            equip0Level: c.equipment?.[0]?.level,
+            equip1Level: c.equipment?.[1]?.level,
+            equip2Level: c.equipment?.[2]?.level,
         };
     }
 
@@ -72,6 +79,12 @@ export class RosterSnapshotsService {
         if (char.shards !== baseChar.shards) diff.shards = char.shards;
         if (char.mythicShards !== baseChar.mythicShards) diff.mythicShards = char.mythicShards;
         if (char.xpLevel !== baseChar.xpLevel) diff.xpLevel = char.xpLevel;
+        if (char.equip0?.id !== baseChar.equip0?.id) diff.equip0 = char.equip0?.id;
+        if (char.equip1?.id !== baseChar.equip1?.id) diff.equip1 = char.equip1?.id;
+        if (char.equip2?.id !== baseChar.equip2?.id) diff.equip2 = char.equip2?.id;
+        if (char.equip0Level !== baseChar.equip0Level) diff.equip0Level = char.equip0Level;
+        if (char.equip1Level !== baseChar.equip1Level) diff.equip1Level = char.equip1Level;
+        if (char.equip2Level !== baseChar.equip2Level) diff.equip2Level = char.equip2Level;
         return diff;
     }
 
@@ -262,6 +275,18 @@ export class RosterSnapshotsService {
                     shards: charDiff.shards!,
                     mythicShards: charDiff.mythicShards!,
                     xpLevel: charDiff.xpLevel!,
+                    equip0: charDiff.equip0
+                        ? EquipmentService.equipmentData.find(equip => equip.id === charDiff.equip0)
+                        : undefined,
+                    equip1: charDiff.equip1
+                        ? EquipmentService.equipmentData.find(equip => equip.id === charDiff.equip1)
+                        : undefined,
+                    equip2: charDiff.equip2
+                        ? EquipmentService.equipmentData.find(equip => equip.id === charDiff.equip2)
+                        : undefined,
+                    equip0Level: charDiff.equip0Level,
+                    equip1Level: charDiff.equip1Level,
+                    equip2Level: charDiff.equip2Level,
                 });
             } else {
                 const baseChar = resolvedChars[baseCharIndex];
@@ -275,6 +300,18 @@ export class RosterSnapshotsService {
                     shards: charDiff.shards ?? baseChar.shards,
                     mythicShards: charDiff.mythicShards ?? baseChar.mythicShards,
                     xpLevel: charDiff.xpLevel ?? baseChar.xpLevel,
+                    equip0: charDiff.equip0
+                        ? EquipmentService.equipmentData.find(equip => equip.id === charDiff.equip0)
+                        : baseChar.equip0,
+                    equip1: charDiff.equip1
+                        ? EquipmentService.equipmentData.find(equip => equip.id === charDiff.equip1)
+                        : baseChar.equip1,
+                    equip2: charDiff.equip2
+                        ? EquipmentService.equipmentData.find(equip => equip.id === charDiff.equip2)
+                        : baseChar.equip2,
+                    equip0Level: charDiff.equip0Level ?? baseChar.equip0Level,
+                    equip1Level: charDiff.equip1Level ?? baseChar.equip1Level,
+                    equip2Level: charDiff.equip2Level ?? baseChar.equip2Level,
                 };
             }
         }
@@ -404,7 +441,8 @@ export class RosterSnapshotsService {
         compare: IRosterSnapshot,
         diffShards: boolean,
         diffMythicShards: boolean,
-        diffXpLevel: boolean
+        diffXpLevel: boolean,
+        diffEquipment: boolean
     ): IRosterSnapshotDiff {
         const name = compare.name;
         const dateMillisUtc = compare.dateMillisUtc;
@@ -425,12 +463,26 @@ export class RosterSnapshotsService {
                     shards: char.shards,
                     mythicShards: char.mythicShards,
                     xpLevel: char.xpLevel,
+                    equip0: char.equip0?.id,
+                    equip1: char.equip1?.id,
+                    equip2: char.equip2?.id,
+                    equip0Level: char.equip0Level,
+                    equip1Level: char.equip1Level,
+                    equip2Level: char.equip2Level,
                 });
             } else {
                 const fixedChar = cloneDeep(char);
                 if (!diffShards) fixedChar.shards = baseChar.shards;
                 if (!diffMythicShards) fixedChar.mythicShards = baseChar.mythicShards;
                 if (!diffXpLevel) fixedChar.xpLevel = baseChar.xpLevel;
+                if (!diffEquipment) {
+                    fixedChar.equip0 = baseChar.equip0;
+                    fixedChar.equip1 = baseChar.equip1;
+                    fixedChar.equip2 = baseChar.equip2;
+                    fixedChar.equip0Level = baseChar.equip0Level;
+                    fixedChar.equip1Level = baseChar.equip1Level;
+                    fixedChar.equip2Level = baseChar.equip2Level;
+                }
                 const diff: ISnapshotUnitDiff = this.diffCharacter(baseChar, fixedChar);
                 if (Object.entries(diff).length > 1) {
                     // If only id is present, no changes.
@@ -540,7 +592,8 @@ export class RosterSnapshotsService {
                 toKeep[i],
                 /*diffShards=*/ true,
                 /*diffMythicShards=*/ true,
-                /*diffXpLevel=*/ true
+                /*diffXpLevel=*/ true,
+                /*diffEquipment=*/ true
             );
             current = toKeep[i];
 

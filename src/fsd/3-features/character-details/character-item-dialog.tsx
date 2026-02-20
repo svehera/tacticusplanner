@@ -67,7 +67,7 @@ const CharacterItemDialogFn: React.FC<Props> = props => {
                     style={{
                         flexDirection: isMobile ? 'column' : 'row',
                     }}>
-                    <CharacterTitle character={character} />
+                    <CharacterTitle character={character} hideRarity hideRank />
                     <Conditional condition={viewPreferences.showBsValue}>
                         <AccessibleTooltip title={numberToThousandsStringOld(bsValue)}>
                             <div className="flex">

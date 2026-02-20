@@ -11,11 +11,12 @@ import { Teams2Service } from './teams2.service';
 
 interface Props {
     mows: IMow2[];
+    sizeMod: number;
     onMowSelect: (id: string) => void;
     showHeader: boolean;
 }
 
-export const MowGrid: React.FC<Props> = ({ mows, onMowSelect, showHeader }: Props) => {
+export const MowGrid: React.FC<Props> = ({ mows, sizeMod, onMowSelect, showHeader }: Props) => {
     return (
         <div>
             {showHeader && (
@@ -29,6 +30,7 @@ export const MowGrid: React.FC<Props> = ({ mows, onMowSelect, showHeader }: Prop
                     <div
                         key={mow.snowprintId!}
                         onClick={() => onMowSelect(mow.snowprintId!)}
+                        style={{ zoom: sizeMod }}
                         className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"
                         title={`Select ${mow.name || 'Machine of War'}`}>
                         <RosterSnapshotCharacter
@@ -36,6 +38,9 @@ export const MowGrid: React.FC<Props> = ({ mows, onMowSelect, showHeader }: Prop
                             showMythicShards={RosterSnapshotShowVariableSettings.Never}
                             showShards={RosterSnapshotShowVariableSettings.Never}
                             showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                            showAbilities={RosterSnapshotShowVariableSettings.Always}
+                            showEquipment={RosterSnapshotShowVariableSettings.Never}
+                            showTooltip={true}
                             mow={Teams2Service.convertMow(mow)}
                             mowData={mow}
                         />

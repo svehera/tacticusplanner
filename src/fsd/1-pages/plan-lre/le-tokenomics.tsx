@@ -1,9 +1,10 @@
+/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { useContext, useEffect, useState } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
@@ -15,18 +16,15 @@ import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
-// eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
-// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
 import { ISnapshotCharacter } from '../input-roster-snapshots/models';
-// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
 import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
+import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
-// import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
 import { renderRestrictions, renderTeam } from './le-token-render-utils';
 import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
@@ -158,26 +156,30 @@ export const LeTokenomics: React.FC<Props> = ({
                 {/* Character Icon Container */}
                 <div>
                     {character !== undefined && (
-                        <RosterSnapshotCharacter
-                            showShards={RosterSnapshotShowVariableSettings.Never}
-                            showMythicShards={RosterSnapshotShowVariableSettings.Never}
-                            showXpLevel={RosterSnapshotShowVariableSettings.Never}
-                            showAbilities={false}
-                            char={
-                                {
-                                    id: character.snowprintId!,
-                                    rank: rank,
-                                    rarity: rarity,
-                                    stars: stars,
-                                    shards: 0,
-                                    mythicShards: 0,
-                                    activeAbilityLevel: 1,
-                                    passiveAbilityLevel: 1,
-                                    xpLevel: 1,
-                                } as ISnapshotCharacter
-                            }
-                            charData={character}
-                        />
+                        <RosterSnapshotsAssetsProvider>
+                            <RosterSnapshotCharacter
+                                showShards={RosterSnapshotShowVariableSettings.Never}
+                                showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                                showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                                showAbilities={RosterSnapshotShowVariableSettings.Never}
+                                showEquipment={RosterSnapshotShowVariableSettings.Never}
+                                showTooltip={false}
+                                char={
+                                    {
+                                        id: character.snowprintId!,
+                                        rank: rank,
+                                        rarity: rarity,
+                                        stars: stars,
+                                        shards: 0,
+                                        mythicShards: 0,
+                                        activeAbilityLevel: 1,
+                                        passiveAbilityLevel: 1,
+                                        xpLevel: 1,
+                                    } as ISnapshotCharacter
+                                }
+                                charData={character}
+                            />
+                        </RosterSnapshotsAssetsProvider>
                     )}
                 </div>
                 <div className="flex w-full items-center justify-center gap-2">

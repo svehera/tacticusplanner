@@ -30,14 +30,13 @@ export const Equipment = () => {
             {
                 field: 'icon',
                 headerName: 'Equipment',
-                minWidth: 120,
-                flex: 1,
+                minWidth: 60,
+                flex: 0,
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     const equipment = params.data;
                     return equipment ? (
                         <span className="flex items-center">
                             <EquipmentIcon equipment={equipment} width={60} height={60} />
-                            {equipment.name}
                         </span>
                     ) : (
                         ''
@@ -117,8 +116,8 @@ export const Equipment = () => {
             {
                 field: 'isRelic',
                 headerName: 'Is Relic',
-                minWidth: 100,
-                flex: 1,
+                minWidth: 40,
+                flex: 0,
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     const { isRelic, isUniqueRelic } = params.data || {};
                     return <span>{isRelic ? (isUniqueRelic ? 'Yes (Unique)' : 'Yes (Shared)') : 'No'}</span>;
