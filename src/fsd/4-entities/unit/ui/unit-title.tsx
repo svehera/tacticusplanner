@@ -1,4 +1,4 @@
-import { CharacterTitleShort, CharacterTitle } from '@/fsd/4-entities/character/@x/unit';
+import { CharacterTitle } from '@/fsd/4-entities/character/@x/unit';
 import { MowTitle } from '@/fsd/4-entities/mow/@x/unit';
 
 import { IUnit } from '../model';
@@ -21,12 +21,14 @@ export const UnitTitle = ({
 }) => {
     if (isCharacter(character)) {
         return short ? (
-            <CharacterTitleShort
+            <CharacterTitle
                 character={character}
                 onClick={onClick}
                 hideName={hideName}
                 imageSize={imageSize}
                 showLockedWithOpacity={showLockedWithOpacity}
+                hideRarity={true}
+                hideRank={true}
             />
         ) : (
             <CharacterTitle
