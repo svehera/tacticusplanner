@@ -27,16 +27,20 @@ interface ManageSnapshotsDialogProps {
     showShards: RosterSnapshotShowVariableSettings;
     showMythicShards: RosterSnapshotShowVariableSettings;
     showXpLevel: RosterSnapshotShowVariableSettings;
+    showEquipment: RosterSnapshotShowVariableSettings;
     showShardDiffs: RosterSnapshotShowVariableSettings;
     showMythicShardsDiffs: RosterSnapshotShowVariableSettings;
     showXpLevelDiffs: RosterSnapshotShowVariableSettings;
+    showEquipmentDiffs: RosterSnapshotShowVariableSettings;
     diffStyle: RosterSnapshotDiffStyle;
     onShowShardsChange: (value: RosterSnapshotShowVariableSettings) => void;
     onShowMythicShardsChange: (value: RosterSnapshotShowVariableSettings) => void;
     onShowXpLevelChange: (value: RosterSnapshotShowVariableSettings) => void;
+    onShowEquipmentChange: (value: RosterSnapshotShowVariableSettings) => void;
     onShowShardDiffsChange: (value: RosterSnapshotShowVariableSettings) => void;
     onShowMythicShardsDiffsChange: (value: RosterSnapshotShowVariableSettings) => void;
     onShowXpLevelDiffsChange: (value: RosterSnapshotShowVariableSettings) => void;
+    onShowEquipmentDiffsChange: (value: RosterSnapshotShowVariableSettings) => void;
     onDiffStyleChange: (value: RosterSnapshotDiffStyle) => void;
     onDeleteSnapshot: (index: number) => void;
     onDeleteAllSnapshots: () => void;
@@ -52,16 +56,20 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
     showShards,
     showMythicShards,
     showXpLevel,
+    showEquipment,
     showShardDiffs,
     showMythicShardsDiffs,
     showXpLevelDiffs,
+    showEquipmentDiffs,
     diffStyle,
     onShowShardsChange,
     onShowMythicShardsChange,
     onShowXpLevelChange,
+    onShowEquipmentChange,
     onShowShardDiffsChange,
     onShowMythicShardsDiffsChange,
     onShowXpLevelDiffsChange,
+    onShowEquipmentDiffsChange,
     onDiffStyleChange,
     onDeleteSnapshot,
     onDeleteAllSnapshots,
@@ -230,6 +238,34 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                                     value={showXpLevelDiffs}
                                     onChange={e =>
                                         onShowXpLevelDiffsChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    }>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Never}>No</MenuItem>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Yes</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+
+                        {/* Row 4: Equipment */}
+                        <div className="flex gap-4">
+                            <FormControl fullWidth>
+                                <InputLabel>Show Equipment</InputLabel>
+                                <Select
+                                    label="Show Equipment"
+                                    value={showEquipment}
+                                    onChange={e =>
+                                        onShowEquipmentChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    }>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
+                                    <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Always</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth>
+                                <InputLabel>Diff Equipment</InputLabel>
+                                <Select
+                                    label="Diff Equipment"
+                                    value={showEquipmentDiffs}
+                                    onChange={e =>
+                                        onShowEquipmentDiffsChange(e.target.value as RosterSnapshotShowVariableSettings)
                                     }>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Never}>No</MenuItem>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Yes</MenuItem>
