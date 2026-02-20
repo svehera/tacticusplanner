@@ -2,7 +2,7 @@ import AddAPhoto from '@mui/icons-material/AddAPhoto';
 import Settings from '@mui/icons-material/Settings';
 import { Button, Tooltip } from '@mui/material';
 import { cloneDeep, orderBy } from 'lodash';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -23,12 +23,15 @@ import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/f
 
 import { ManageSnapshotsDialog } from './manage-snapshots-dialog';
 import { IRosterSnapshot, IRosterSnapshotsState } from './models';
+import { RosterSnapshotsAssetsProvider } from './roster-snapshots-assets-provider';
+import { RosterSnapshotsMagnificationSlider } from './roster-snapshots-magnification-slider';
 import { RosterSnapshotsService } from './roster-snapshots-service';
 import { RosterSnapshotsUnit } from './roster-snapshots-unit';
 import { RosterSnapshotsUnitDiff } from './roster-snapshots-unit-diff';
 import { TakeSnapshotDialog } from './take-snapshot-dialog';
 
 function getDisplay(
+    sizeMod: number,
     chars: ICharacter2[],
     mows: IMow2[],
     rosterSnapshots: IRosterSnapshotsState,
@@ -67,6 +70,9 @@ function getDisplay(
                             showShards={showShards}
                             showMythicShards={showMythicShards}
                             showXpLevel={showXpLevel}
+                            showAbilities={RosterSnapshotShowVariableSettings.Always}
+                            showEquipment={RosterSnapshotShowVariableSettings.Always}
+                            showTooltip={true}
                             char={'rank' in unit ? unit : undefined}
                             mow={'rank' in unit ? undefined : unit}
                         />
@@ -183,58 +189,117 @@ function getDisplay(
     const diffUnits = orderBy([...diffChars, ...diffMows], 'powerDiff', 'desc');
     const nonDiffUnits = orderBy([...nonDiffChars, ...nonDiffMows], 'power', 'desc');
 
+    const diffCache = useMemo(() => {
+        const cache = diffUnits.reduce(
+            (cache, unit) => {
+                if ('rank' in unit.before) cache.chars.push(unit as CharDiff);
+                else cache.mows.push(unit as MachineOfWarDiff);
+                return cache;
+            },
+            { chars: [] as CharDiff[], mows: [] as MachineOfWarDiff[] }
+        );
+        return {
+            chars: cache.chars.map(c => ({
+                before: RosterSnapshotsService.snapshotCharacter(c.before),
+                diff: RosterSnapshotsService.diffChar(c.before, c.after),
+            })),
+            mows: cache.mows.map(m => ({
+                before: RosterSnapshotsService.snapshotMachineOfWar(m.before),
+                diff: RosterSnapshotsService.diffMow(m.before, m.after),
+            })),
+        };
+    }, [diffUnits]);
+    const nonDiffCache = useMemo(() => {
+        const cache = nonDiffUnits.reduce(
+            (cache, unit) => {
+                if ('rank' in unit) cache.chars.push(unit);
+                else cache.mows.push(unit);
+                return cache;
+            },
+            { chars: [] as (ICharacter2 & { power: number })[], mows: [] as (IMow2 & { power: number })[] }
+        );
+        return {
+            chars: cache.chars.map(c => RosterSnapshotsService.snapshotCharacter(c)),
+            mows: cache.mows.map(m => RosterSnapshotsService.snapshotMachineOfWar(m)),
+        };
+    }, [nonDiffUnits]);
+
+    const renderedCharDiffs = useMemo(() => {
+        return diffCache.chars.map(unit => (
+            <RosterSnapshotsUnitDiff
+                key={`diff-${unit.before.id}`}
+                diffStyle={diffStyle}
+                showShards={showShards}
+                showMythicShards={showMythicShards}
+                showXpLevel={showXpLevel}
+                showEquipment={RosterSnapshotShowVariableSettings.Never}
+                showAbilities={RosterSnapshotShowVariableSettings.Always}
+                showTooltip={true}
+                char={unit.before}
+                diff={unit.diff}
+            />
+        ));
+    }, [diffCache, diffStyle, showShards, showMythicShards, showXpLevel]);
+
+    const renderedMowDiffs = useMemo(() => {
+        return diffCache.mows.map(unit => (
+            <RosterSnapshotsUnitDiff
+                key={`diff-${unit.before.id}`}
+                diffStyle={diffStyle}
+                showShards={showShards}
+                showMythicShards={showMythicShards}
+                showXpLevel={showXpLevel}
+                showEquipment={RosterSnapshotShowVariableSettings.Never}
+                showAbilities={RosterSnapshotShowVariableSettings.Always}
+                showTooltip={true}
+                mow={unit.before}
+                diff={unit.diff}
+            />
+        ));
+    }, [diffCache, diffStyle, showShards, showMythicShards, showXpLevel]);
+
+    const renderedChars = useMemo(() => {
+        return nonDiffCache.chars.map(unit => (
+            <RosterSnapshotsUnit
+                key={`nondiff-${unit.id}`}
+                showShards={showShards}
+                showMythicShards={showMythicShards}
+                showXpLevel={showXpLevel}
+                showAbilities={RosterSnapshotShowVariableSettings.Always}
+                showEquipment={RosterSnapshotShowVariableSettings.Always}
+                showTooltip={true}
+                char={unit}
+            />
+        ));
+    }, [nonDiffCache, showShards, showMythicShards, showXpLevel]);
+
+    const renderedMows = useMemo(() => {
+        return nonDiffCache.mows.map(unit => (
+            <RosterSnapshotsUnit
+                key={`nondiff-${unit.id}`}
+                showShards={showShards}
+                showMythicShards={showMythicShards}
+                showXpLevel={showXpLevel}
+                showAbilities={RosterSnapshotShowVariableSettings.Always}
+                showEquipment={RosterSnapshotShowVariableSettings.Always}
+                showTooltip={true}
+                mow={unit}
+            />
+        ));
+    }, [nonDiffCache, showShards, showMythicShards, showXpLevel]);
+
     return (
         <>
-            <div className="flex flex-wrap gap-5 p-4">
-                {diffUnits.map(unit => (
-                    <div key={`diff-${unit.before.id}`}>
-                        {'rank' in unit.before && (
-                            <RosterSnapshotsUnitDiff
-                                diffStyle={diffStyle}
-                                showShards={showShards}
-                                showMythicShards={showMythicShards}
-                                showXpLevel={showXpLevel}
-                                char={RosterSnapshotsService.snapshotCharacter(unit.before as ICharacter2)}
-                                diff={RosterSnapshotsService.diffChar(
-                                    unit.before as ICharacter2,
-                                    unit.after as ICharacter2
-                                )}
-                            />
-                        )}
-                        {!('rank' in unit.before) && (
-                            <RosterSnapshotsUnitDiff
-                                diffStyle={diffStyle}
-                                showShards={showShards}
-                                showMythicShards={showMythicShards}
-                                showXpLevel={showXpLevel}
-                                mow={RosterSnapshotsService.snapshotMachineOfWar(unit.before as IMow2)}
-                                diff={RosterSnapshotsService.diffMow(unit.before as IMow2, unit.after as IMow2)}
-                            />
-                        )}
-                    </div>
-                ))}
-            </div>
-            <div className="flex flex-wrap gap-5 p-4">
-                {nonDiffUnits.map(unit => (
-                    <div key={`nondiff-${'rank' in unit ? unit.snowprintId : unit.id}`}>
-                        {'rank' in unit ? (
-                            <RosterSnapshotsUnit
-                                showShards={showShards}
-                                showMythicShards={showMythicShards}
-                                showXpLevel={showXpLevel}
-                                char={RosterSnapshotsService.snapshotCharacter(unit)}
-                            />
-                        ) : (
-                            <RosterSnapshotsUnit
-                                showShards={showShards}
-                                showMythicShards={showMythicShards}
-                                showXpLevel={showXpLevel}
-                                mow={RosterSnapshotsService.snapshotMachineOfWar(unit)}
-                            />
-                        )}
-                    </div>
-                ))}
-            </div>
+            <RosterSnapshotsAssetsProvider>
+                <div style={{ zoom: sizeMod }} className="flex flex-wrap gap-5 p-4">
+                    {renderedCharDiffs}
+                    {renderedMowDiffs}
+                </div>
+                <div style={{ zoom: sizeMod }} className="flex flex-wrap gap-5 p-4">
+                    {renderedChars}
+                    {renderedMows}
+                </div>
+            </RosterSnapshotsAssetsProvider>
         </>
     );
 }
@@ -272,6 +337,7 @@ export const RosterSnapshots = () => {
     const [showXpLevelDiffsSetting, setShowXpLevelDiffsSetting] = useState<RosterSnapshotShowVariableSettings>(
         viewPreferences.showXpLevelInDiffs
     );
+    const [sizeMod, setSizeMod] = useState<number>(1);
 
     useEffect(() => {
         setLiveSnapshotIndices(RosterSnapshotsService.getLiveSnapshotInidices(rosterSnapshots));
@@ -563,6 +629,9 @@ export const RosterSnapshots = () => {
                     <Settings className="mr-1" />
                     {!isMobile && 'Manage'}
                 </Button>
+                <div className="w-2">
+                    <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                </div>
             </div>
 
             {liveSnapshotIndices.length > 0 && (
@@ -613,6 +682,7 @@ export const RosterSnapshots = () => {
                 </div>
             )}
             {getDisplay(
+                sizeMod,
                 chars,
                 mows,
                 rosterSnapshots,
