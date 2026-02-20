@@ -228,7 +228,7 @@ export const AddTeamDialog: React.FC<Props> = ({
 
                     {/* TEAM DETAILS SECTION */}
                     <section className="rounded-lg border-2 border-blue-500/30 bg-white shadow-inner dark:border-blue-400/20 dark:bg-[#161b22]">
-                        <details open className="space-y-6 p-6">
+                        <details open className="group space-y-6 p-6">
                             <summary className="cursor-pointer list-none text-lg font-semibold outline-none focus:text-blue-600">
                                 <div className="flex items-center justify-between">
                                     <span>Team Details</span>

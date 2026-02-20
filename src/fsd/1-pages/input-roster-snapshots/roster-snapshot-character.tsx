@@ -339,6 +339,9 @@ export const RosterSnapshotCharacter = ({
         if (stars >= RarityStars.RedOneStar) {
             starCount = stars - RarityStars.RedOneStar + 1;
         }
+        if (stars <= RarityStars.FiveStars) {
+            starCount = stars;
+        }
         const hasBigStar = starCount === 5;
         const overlap = 10;
         const totalWidth = starCount * starSize + (hasBigStar ? 6 : 0) - overlap * (starCount - 1);
@@ -367,7 +370,7 @@ export const RosterSnapshotCharacter = ({
 
     return (
         <div className={`relative h-[${canvasHeight}px] w-[${canvasWidth}px] origin-top-left transition-none`}>
-            <div className="absolute inset-0 h-[170px] w-[96px] origin-top-left scale-[var(--unit-scale)]">
+            <div className="absolute inset-0 h-[170px] w-[96px] origin-top-left">
                 <img
                     src={charIcon}
                     className={`absolute top-[17px] left-[3px] h-[120px] w-[90px] ${isLocked ? 'grayscale' : ''}`}
