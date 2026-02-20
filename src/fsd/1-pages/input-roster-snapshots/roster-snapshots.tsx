@@ -41,9 +41,11 @@ function getDisplay(
     showShards: RosterSnapshotShowVariableSettings,
     showMythicShards: RosterSnapshotShowVariableSettings,
     showXpLevel: RosterSnapshotShowVariableSettings,
+    showEquipment: RosterSnapshotShowVariableSettings,
     showShardDiffs: RosterSnapshotShowVariableSettings,
     showMythicShardsDiffs: RosterSnapshotShowVariableSettings,
-    showXpLevelDiffs: RosterSnapshotShowVariableSettings
+    showXpLevelDiffs: RosterSnapshotShowVariableSettings,
+    showEquipmentDiffs: RosterSnapshotShowVariableSettings
 ) {
     let leftIndex = left;
     let rightIndex = right;
@@ -72,7 +74,7 @@ function getDisplay(
                                 showMythicShards={showMythicShards}
                                 showXpLevel={showXpLevel}
                                 showAbilities={RosterSnapshotShowVariableSettings.Always}
-                                showEquipment={RosterSnapshotShowVariableSettings.Always}
+                                showEquipment={showEquipment}
                                 showTooltip={true}
                                 char={'rank' in unit ? unit : undefined}
                                 mow={'rank' in unit ? undefined : unit}
@@ -106,7 +108,8 @@ function getDisplay(
         compare,
         showShardDiffs !== RosterSnapshotShowVariableSettings.Never,
         showMythicShardsDiffs !== RosterSnapshotShowVariableSettings.Never,
-        showXpLevelDiffs !== RosterSnapshotShowVariableSettings.Never
+        showXpLevelDiffs !== RosterSnapshotShowVariableSettings.Never,
+        showEquipmentDiffs !== RosterSnapshotShowVariableSettings.Never
     );
 
     interface CharDiff {
@@ -233,7 +236,7 @@ function getDisplay(
             showShards={showShards}
             showMythicShards={showMythicShards}
             showXpLevel={showXpLevel}
-            showEquipment={RosterSnapshotShowVariableSettings.Never}
+            showEquipment={showEquipment}
             showAbilities={RosterSnapshotShowVariableSettings.Always}
             showTooltip={true}
             char={unit.before}
@@ -248,7 +251,7 @@ function getDisplay(
             showShards={showShards}
             showMythicShards={showMythicShards}
             showXpLevel={showXpLevel}
-            showEquipment={RosterSnapshotShowVariableSettings.Never}
+            showEquipment={showEquipment}
             showAbilities={RosterSnapshotShowVariableSettings.Always}
             showTooltip={true}
             mow={unit.before}
@@ -263,7 +266,7 @@ function getDisplay(
             showMythicShards={showMythicShards}
             showXpLevel={showXpLevel}
             showAbilities={RosterSnapshotShowVariableSettings.Always}
-            showEquipment={RosterSnapshotShowVariableSettings.Always}
+            showEquipment={showEquipment}
             showTooltip={true}
             char={unit}
         />
@@ -276,7 +279,7 @@ function getDisplay(
             showMythicShards={showMythicShards}
             showXpLevel={showXpLevel}
             showAbilities={RosterSnapshotShowVariableSettings.Always}
-            showEquipment={RosterSnapshotShowVariableSettings.Always}
+            showEquipment={showEquipment}
             showTooltip={true}
             mow={unit}
         />
@@ -323,6 +326,9 @@ export const RosterSnapshots = () => {
     const [showXpLevelSetting, setShowXpLevelSetting] = useState<RosterSnapshotShowVariableSettings>(
         viewPreferences.showXpLevelInRosterSnapshots
     );
+    const [showEquipmentSetting, setShowEquipmentSetting] = useState<RosterSnapshotShowVariableSettings>(
+        viewPreferences.showEquipmentInRosterSnapshots
+    );
     const [showShardDiffsSetting, setShowShardDiffsSetting] = useState<RosterSnapshotShowVariableSettings>(
         viewPreferences.showShardsInDiffs
     );
@@ -330,6 +336,9 @@ export const RosterSnapshots = () => {
         useState<RosterSnapshotShowVariableSettings>(viewPreferences.showMythicShardsInDiffs);
     const [showXpLevelDiffsSetting, setShowXpLevelDiffsSetting] = useState<RosterSnapshotShowVariableSettings>(
         viewPreferences.showXpLevelInDiffs
+    );
+    const [showEquipmentDiffsSetting, setShowEquipmentDiffsSetting] = useState<RosterSnapshotShowVariableSettings>(
+        viewPreferences.showEquipmentInDiffs
     );
     const [sizeMod, setSizeMod] = useState<number>(1);
 
@@ -342,6 +351,8 @@ export const RosterSnapshots = () => {
         setShowShardDiffsSetting(viewPreferences.showShardsInDiffs);
         setShowMythicShardsDiffsSetting(viewPreferences.showMythicShardsInDiffs);
         setShowXpLevelDiffsSetting(viewPreferences.showXpLevelInDiffs);
+        setShowEquipmentSetting(viewPreferences.showEquipmentInRosterSnapshots);
+        setShowEquipmentDiffsSetting(viewPreferences.showEquipmentInDiffs);
     }, [rosterSnapshots, viewPreferences]);
 
     const takeSnapshot = () => {
@@ -390,7 +401,8 @@ export const RosterSnapshots = () => {
                         snap,
                         /*diffShards=*/ true,
                         /*diffMythicShards=*/ true,
-                        /*diffXpLevel=*/ true
+                        /*diffXpLevel=*/ true,
+                        /*diffEquipment=*/ true
                     )
                 );
             });
@@ -497,7 +509,8 @@ export const RosterSnapshots = () => {
                     snap,
                     /*diffShards=*/ true,
                     /*diffMythicShards=*/ true,
-                    /*diffXpLevel=*/ true
+                    /*diffXpLevel=*/ true,
+                    /*diffEquipment=*/ true
                 )
             );
         });
@@ -543,6 +556,14 @@ export const RosterSnapshots = () => {
         });
     };
 
+    const handleShowEquipmentChange = (value: RosterSnapshotShowVariableSettings) => {
+        dispatch.viewPreferences({
+            type: 'Update',
+            setting: 'showEquipmentInRosterSnapshots',
+            value,
+        });
+    };
+
     const handleShowShardDiffsChange = (value: RosterSnapshotShowVariableSettings) => {
         dispatch.viewPreferences({
             type: 'Update',
@@ -567,6 +588,14 @@ export const RosterSnapshots = () => {
         });
     };
 
+    const handleShowEquipmentDiffsChange = (value: RosterSnapshotShowVariableSettings) => {
+        dispatch.viewPreferences({
+            type: 'Update',
+            setting: 'showEquipmentInDiffs',
+            value,
+        });
+    };
+
     return (
         <div>
             <div>
@@ -585,17 +614,21 @@ export const RosterSnapshots = () => {
                     showShards={showShardsSetting}
                     showMythicShards={showMythicShardsSetting}
                     showXpLevel={showXpLevelSetting}
+                    showEquipment={showEquipmentSetting}
                     diffStyle={viewPreferences.rosterSnapshotsDiffStyle}
                     showShardDiffs={showShardDiffsSetting}
                     showMythicShardsDiffs={showMythicShardsDiffsSetting}
                     showXpLevelDiffs={showXpLevelDiffsSetting}
+                    showEquipmentDiffs={showEquipmentDiffsSetting}
                     onShowShardsChange={handleShowShardsChange}
                     onShowMythicShardsChange={handleShowMythicShardsChange}
+                    onShowXpLevelChange={handleShowXpLevelChange}
+                    onShowEquipmentChange={handleShowEquipmentChange}
                     onDiffStyleChange={handleDiffStyleChange}
                     onShowShardDiffsChange={handleShowShardDiffsChange}
                     onShowMythicShardsDiffsChange={handleShowMythicShardsDiffsChange}
                     onShowXpLevelDiffsChange={handleShowXpLevelDiffsChange}
-                    onShowXpLevelChange={handleShowXpLevelChange}
+                    onShowEquipmentDiffsChange={handleShowEquipmentDiffsChange}
                     onDeleteSnapshot={handleDeleteSnapshot}
                     onDeleteAllSnapshots={handleDeleteAllSnapshots}
                     onPurgeDeleted={handelPurgeAllDeleted}
@@ -684,9 +717,11 @@ export const RosterSnapshots = () => {
                 showShardsSetting,
                 showMythicShardsSetting,
                 showXpLevelSetting,
+                showEquipmentSetting,
                 showShardDiffsSetting,
                 showMythicShardsDiffsSetting,
-                showXpLevelDiffsSetting
+                showXpLevelDiffsSetting,
+                showEquipmentDiffsSetting
             )}
         </div>
     );

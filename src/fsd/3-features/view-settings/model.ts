@@ -75,9 +75,11 @@ interface IRosterSnapshotsViewSettings {
     showXpLevelInRosterSnapshots: RosterSnapshotShowVariableSettings;
     showShardsInRosterSnapshots: RosterSnapshotShowVariableSettings;
     showMythicShardsInRosterSnapshots: RosterSnapshotShowVariableSettings;
+    showEquipmentInRosterSnapshots: RosterSnapshotShowVariableSettings;
     showXpLevelInDiffs: RosterSnapshotShowVariableSettings;
     showShardsInDiffs: RosterSnapshotShowVariableSettings;
     showMythicShardsInDiffs: RosterSnapshotShowVariableSettings;
+    showEquipmentInDiffs: RosterSnapshotShowVariableSettings;
     rosterSnapshotsDiffStyle: RosterSnapshotDiffStyle;
 }
 

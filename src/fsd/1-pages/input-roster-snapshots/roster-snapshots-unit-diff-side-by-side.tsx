@@ -77,6 +77,12 @@ export const RosterSnapshotsUnitDiffSideBySide: React.FC<Props> = ({
                               xpLevel: diff.xpLevel ?? (char ? char.xpLevel : 0),
                               shards: diff.shards ?? char!.shards,
                               mythicShards: diff.mythicShards ?? char!.mythicShards,
+                              equip0: diff.equip0 ?? char!.equip0,
+                              equip1: diff.equip1 ?? char!.equip1,
+                              equip2: diff.equip2 ?? char!.equip2,
+                              equip0Level: diff.equip0Level ?? char!.equip0Level,
+                              equip1Level: diff.equip1Level ?? char!.equip1Level,
+                              equip2Level: diff.equip2Level ?? char!.equip2Level,
                           }
                 }
                 charData={staticChar}
