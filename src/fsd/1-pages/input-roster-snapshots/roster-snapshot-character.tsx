@@ -135,6 +135,7 @@ export const RosterSnapshotCharacter = ({
             </div>
         );
     };
+
     const renderEquipmentType = (type: string | undefined) => {
         if (type === undefined) {
             return <div style={{ width: equipmentHeight, height: equipmentHeight }} />;
@@ -294,11 +295,13 @@ export const RosterSnapshotCharacter = ({
 
     const getStarSrc = () => (Array.isArray(starIcon) ? starIcon[0]?.src : starIcon) ?? '';
 
+    const grayscaleClass = (isDisabled ?? false) ? 'grayscale' : '';
+
     const renderWings = () => {
         return (
             <img
                 src={getStarSrc()}
-                className={`absolute ${isLocked || (isDisabled ?? false) ? 'grayscale' : ''}`}
+                className={`absolute ${grayscaleClass}`}
                 style={{ left: 3, top: 2, width: 90, height: starSize, zIndex: 11 }}
             />
         );
@@ -370,22 +373,25 @@ export const RosterSnapshotCharacter = ({
 
     return (
         <div className={`relative h-[${canvasHeight}px] w-[${canvasWidth}px] origin-top-left transition-none`}>
-            <div className="absolute inset-0 h-[170px] w-[96px] origin-top-left">
-                <img
-                    src={charIcon}
-                    className={`absolute top-[17px] left-[3px] h-[120px] w-[90px] ${isLocked ? 'grayscale' : ''}`}
-                />
-                <img src={frame[0]?.src} className="absolute top-[14px] z-10 h-[126px] w-[96px]" />
-                {rankIcon && rankIcon[0] && !isLocked && (
-                    <img src={rankIcon[0]?.src} className={`absolute top-[110px] left-0 z-20 h-[30px] w-[30px]`} />
-                )}
-                {shouldShowAbilities() && char && renderAbilities(char.activeAbilityLevel, char.passiveAbilityLevel)}
-                {shouldShowAbilities() && mow && renderAbilities(mow.primaryAbilityLevel, mow.secondaryAbilityLevel)}
-                {shouldShowXpLevel() && char && renderXpLevel(char.xpLevel)}
-                {starIcon && starIcon[0] && !isLocked && renderStars()}
-                {shouldShowShards() && renderShards(char?.shards ?? mow?.shards ?? 0)}
-                {shouldShowMythicShards() && renderMythicShards(char?.mythicShards ?? mow?.mythicShards ?? 0)}
-                {shouldShowEquipment() && renderEquipment()}
+            <div className={grayscaleClass}>
+                <div className="absolute inset-0 h-[170px] w-[96px] origin-top-left">
+                    <img src={charIcon} className={`absolute top-[17px] left-[3px] h-[120px] w-[90px]`} />
+                    <img src={frame[0]?.src} className="absolute top-[14px] z-10 h-[126px] w-[96px]" />
+                    {rankIcon && rankIcon[0] && !isLocked && (
+                        <img src={rankIcon[0]?.src} className={`absolute top-[110px] left-0 z-20 h-[30px] w-[30px]`} />
+                    )}
+                    {shouldShowAbilities() &&
+                        char &&
+                        renderAbilities(char.activeAbilityLevel, char.passiveAbilityLevel)}
+                    {shouldShowAbilities() &&
+                        mow &&
+                        renderAbilities(mow.primaryAbilityLevel, mow.secondaryAbilityLevel)}
+                    {shouldShowXpLevel() && char && renderXpLevel(char.xpLevel)}
+                    {starIcon && starIcon[0] && !isLocked && renderStars()}
+                    {shouldShowShards() && renderShards(char?.shards ?? mow?.shards ?? 0)}
+                    {shouldShowMythicShards() && renderMythicShards(char?.mythicShards ?? mow?.mythicShards ?? 0)}
+                    {shouldShowEquipment() && renderEquipment()}
+                </div>
             </div>
         </div>
     );

@@ -10,4 +10,5 @@ export const CharactersViewContext = createContext<ICharactersContext>({
     showPower: true,
     showCharacterLevel: true,
     showCharacterRarity: true,
+    showEquipment: true,
 });

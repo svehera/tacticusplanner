@@ -8,7 +8,8 @@ import { isMobile } from 'react-device-detect';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { Rank } from '@/fsd/5-shared/model';
+import { Rank, Rarity } from '@/fsd/5-shared/model';
+import { RaritySelect2 } from '@/fsd/5-shared/ui/rarity-select2';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
@@ -19,6 +20,7 @@ import { CharacterGrid } from '../plan-teams2/character-grid';
 import { ITeam2 } from '../plan-teams2/models';
 import { MowGrid } from '../plan-teams2/mow-grid';
 import { TeamFlow } from '../plan-teams2/team-flow';
+import { Teams2Service } from '../plan-teams2/teams2.service';
 
 export const WarOffense2 = () => {
     const dispatch = useContext(DispatchContext);
@@ -35,6 +37,8 @@ export const WarOffense2 = () => {
     );
 
     const [sizeMod, setSizeMod] = useState<number>(isMobile ? 0.5 : 1);
+
+    const [rarityCap, setRarityCap] = useState<Rarity>(Rarity.Mythic);
 
     const characters = CharactersService.resolveStoredCharacters(unresolvedCharacters);
     const mows = MowsService.resolveAllFromStorage(unresolvedMows);
@@ -142,6 +146,10 @@ export const WarOffense2 = () => {
         }
     };
 
+    const onRarityCapChanged = (newRarity: Rarity) => {
+        setRarityCap(newRarity);
+    };
+
     return (
         <RosterSnapshotsAssetsProvider>
             <div className="flex flex-col gap-6 bg-gray-50 p-2 dark:bg-gray-900">
@@ -197,6 +205,25 @@ export const WarOffense2 = () => {
                     <div className="flex flex-wrap items-center gap-2">
                         <h1 className="text-lg font-bold">War Offense</h1>
                         <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                        {/* RARITY CAP */}
+                        <div className="flex items-center gap-3">
+                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Rarity Cap</span>
+
+                            <div className="min-w-[180px]">
+                                <RaritySelect2
+                                    rarityValues={[
+                                        Rarity.Common,
+                                        Rarity.Uncommon,
+                                        Rarity.Rare,
+                                        Rarity.Epic,
+                                        Rarity.Legendary,
+                                        Rarity.Mythic,
+                                    ]}
+                                    value={rarityCap}
+                                    valueChanges={onRarityCapChanged}
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
                         <Button
@@ -297,16 +324,16 @@ export const WarOffense2 = () => {
                                 {/* 2. Team Content - Takes up the rest of the space */}
                                 <div className="flex-1 overflow-hidden py-3 pr-2">
                                     <TeamFlow
-                                        chars={
+                                        chars={(
                                             team.chars
                                                 .map(charId => characters.find(char => char.snowprintId === charId))
                                                 .filter(c => c !== undefined) as ICharacter2[]
-                                        }
-                                        mows={
-                                            (team.mows
+                                        ).map(char => Teams2Service.capCharacterAtRarity(char, rarityCap))}
+                                        mows={(
+                                            team.mows
                                                 ?.map(mowId => mows.find(mow => mow.snowprintId === mowId))
-                                                .filter(m => m !== undefined) as IMow2[]) ?? []
-                                        }
+                                                .filter(m => m !== undefined) ?? []
+                                        ).map(mow => Teams2Service.capMowAtRarity(mow, rarityCap))}
                                         flexIndex={team.flexIndex}
                                         disabledUnits={[...deployedCharacters, ...deployedMows]}
                                         sizeMod={sizeMod}
@@ -328,7 +355,9 @@ export const WarOffense2 = () => {
                     </summary>
                     <div className="mt-4">
                         <CharacterGrid
-                            characters={deployableCharacters}
+                            characters={deployableCharacters.map(char =>
+                                Teams2Service.capCharacterAtRarity(char, rarityCap)
+                            )}
                             onCharacterSelect={charId =>
                                 stageChar(characters.find(char => char.snowprintId === charId)!)
                             }
@@ -336,7 +365,7 @@ export const WarOffense2 = () => {
                             showHeader={true}
                         />
                         <MowGrid
-                            mows={deployableMows}
+                            mows={deployableMows.map(mow => Teams2Service.capMowAtRarity(mow, rarityCap))}
                             onMowSelect={mowId => stageMow(mows.find(mow => mow.snowprintId === mowId)!)}
                             sizeMod={sizeMod}
                             showHeader={true}
@@ -353,13 +382,17 @@ export const WarOffense2 = () => {
                     </summary>
                     <div className="mt-4">
                         <CharacterGrid
-                            characters={characters.filter(char => deployedCharacters.includes(char.snowprintId!))}
+                            characters={characters
+                                .filter(char => deployedCharacters.includes(char.snowprintId!))
+                                .map(char => Teams2Service.capCharacterAtRarity(char, rarityCap))}
                             onCharacterSelect={() => {}}
                             showHeader={true}
                             sizeMod={sizeMod}
                         />
                         <MowGrid
-                            mows={mows.filter(mow => deployedMows.includes(mow.snowprintId!))}
+                            mows={mows
+                                .filter(mow => deployedMows.includes(mow.snowprintId!))
+                                .map(mow => Teams2Service.capMowAtRarity(mow, rarityCap))}
                             onMowSelect={() => {}}
                             showHeader={true}
                             sizeMod={sizeMod}
@@ -378,15 +411,17 @@ export const WarOffense2 = () => {
                         {undeployableTeams.map((team, index) => (
                             <div key={index} className="mb-2 flex items-center">
                                 <TeamFlow
-                                    chars={
+                                    chars={(
                                         team.chars
                                             .map(charId => characters.find(char => char.snowprintId === charId))
                                             .filter(c => c !== undefined) as ICharacter2[]
-                                    }
+                                    ).map(char => Teams2Service.capCharacterAtRarity(char, rarityCap))}
                                     mows={
-                                        (team.mows
-                                            ?.map(mowId => mows.find(mow => mow.snowprintId === mowId))
-                                            .filter(m => m !== undefined) as IMow2[]) ?? []
+                                        (
+                                            team.mows
+                                                ?.map(mowId => mows.find(mow => mow.snowprintId === mowId))
+                                                .filter(m => m !== undefined) as IMow2[]
+                                        ).map(mow => Teams2Service.capMowAtRarity(mow, rarityCap)) ?? []
                                     }
                                     flexIndex={team.flexIndex}
                                     disabledUnits={[...deployedCharacters, ...deployedMows]}
