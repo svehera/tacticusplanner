@@ -318,6 +318,7 @@ export const GuildWarOffense = () => {
                     showBadges: viewPreferences.showBadges,
                     showPower: viewPreferences.showPower,
                     showBsValue: viewPreferences.showBsValue,
+                    showEquipment: viewPreferences.showEquipment,
                     showCharacterLevel: viewPreferences.showCharacterLevel,
                     showCharacterRarity: viewPreferences.showCharacterRarity,
                     getOpacity: character => (guildWar.deployedCharacters.includes(character.name) ? 0.5 : 1),

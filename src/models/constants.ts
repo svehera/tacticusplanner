@@ -229,6 +229,7 @@ export const defaultData: IPersonalData2 = {
         showAbilitiesLevel: true,
         showBsValue: false,
         showPower: true,
+        showEquipment: true,
         showCharacterLevel: true,
         showCharacterRarity: true,
         inventoryShowAlphabet: true,

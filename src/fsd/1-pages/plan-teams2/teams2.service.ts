@@ -2,12 +2,39 @@
 /* eslint-disable import-x/no-internal-modules */
 import { ICharacter2 } from '@/models/interfaces';
 
-import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
+import { FactionId, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { EquipmentService } from '@/fsd/4-entities/equipment';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import { ISnapshotCharacter, ISnapshotMachineOfWar } from '../input-roster-snapshots/models';
+
+const maxRankForRarity: Record<Rarity, Rank> = {
+    [Rarity.Common]: Rank.Iron1,
+    [Rarity.Uncommon]: Rank.Bronze1,
+    [Rarity.Rare]: Rank.Silver1,
+    [Rarity.Epic]: Rank.Gold1,
+    [Rarity.Legendary]: Rank.Diamond3,
+    [Rarity.Mythic]: Rank.Adamantine3,
+};
+
+const maxLevelForRarity: Record<Rarity, number> = {
+    [Rarity.Common]: 8,
+    [Rarity.Uncommon]: 17,
+    [Rarity.Rare]: 26,
+    [Rarity.Epic]: 35,
+    [Rarity.Legendary]: 50,
+    [Rarity.Mythic]: 65,
+};
+
+const maxStarsForRarity: Record<Rarity, RarityStars> = {
+    [Rarity.Common]: RarityStars.TwoStars,
+    [Rarity.Uncommon]: RarityStars.FourStars,
+    [Rarity.Rare]: RarityStars.RedOneStar,
+    [Rarity.Epic]: RarityStars.RedThreeStars,
+    [Rarity.Legendary]: RarityStars.OneBlueStar,
+    [Rarity.Mythic]: RarityStars.MythicWings,
+};
 
 export class Teams2Service {
     public static passesCharacterFilter(
@@ -98,5 +125,33 @@ export class Teams2Service {
             }
         }
         return true;
+    }
+
+    public static capCharacterAtRarity(char: ICharacter2, rarityCap: Rarity): ICharacter2 {
+        if (char.rarity <= rarityCap) {
+            return char;
+        }
+        return {
+            ...char,
+            rarity: rarityCap,
+            rank: Math.min(maxRankForRarity[rarityCap], char.rank),
+            level: Math.min(maxLevelForRarity[rarityCap], char.level ?? 0),
+            stars: Math.min(maxStarsForRarity[rarityCap], char.stars ?? 0),
+            activeAbilityLevel: Math.min(maxLevelForRarity[rarityCap], char.activeAbilityLevel ?? 0),
+            passiveAbilityLevel: Math.min(maxLevelForRarity[rarityCap], char.passiveAbilityLevel ?? 0),
+        };
+    }
+
+    public static capMowAtRarity(mow: IMow2, rarityCap: Rarity): IMow2 {
+        if (mow.rarity <= rarityCap) {
+            return mow;
+        }
+        return {
+            ...mow,
+            rarity: rarityCap,
+            stars: Math.min(maxStarsForRarity[rarityCap], mow.stars ?? 0),
+            primaryAbilityLevel: Math.min(maxLevelForRarity[rarityCap], mow.primaryAbilityLevel ?? 0),
+            secondaryAbilityLevel: Math.min(maxLevelForRarity[rarityCap], mow.secondaryAbilityLevel ?? 0),
+        };
     }
 }

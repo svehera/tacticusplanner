@@ -51,6 +51,6 @@ export const rarityCaps: Record<Rarity, IRarityCap> = {
         rarity: Rarity.Mythic,
         abilitiesLevel: 55,
         rank: Rank.Adamantine1,
-        stars: RarityStars.OneBlueStar,
+        stars: RarityStars.MythicWings,
     },
 };

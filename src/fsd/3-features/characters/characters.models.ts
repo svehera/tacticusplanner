@@ -30,6 +30,7 @@ export interface ICharactersContext {
     showPower: boolean;
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
+    showEquipment: boolean;
     getOpacity?: (character: IUnit) => number;
 }
 

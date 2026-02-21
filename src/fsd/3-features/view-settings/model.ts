@@ -46,6 +46,7 @@ interface IWyoViewSettings {
     showPower: boolean;
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
+    showEquipment: boolean;
 }
 
 export interface ILreViewSettings {
