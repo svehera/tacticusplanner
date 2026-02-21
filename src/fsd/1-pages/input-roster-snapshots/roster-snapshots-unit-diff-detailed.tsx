@@ -5,6 +5,7 @@ import { CharacterPortraitImage } from '@/shared-components/images/character-por
 import { getImageUrl } from '@/shared-logic/functions';
 
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
+import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
 import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
 
@@ -314,10 +315,27 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                             <div />
 
                             {/* Active/Primary Ability Row */}
+                            <div className="h-[18px]" />
+                            <div />
+                            <div />
+                            <div />
                             <span
                                 className="w-6 text-right font-medium text-gray-600 dark:text-gray-400"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
-                                {char ? 'A' : 'P'}:
+                                {!!char &&
+                                    (() => (
+                                        <img
+                                            src={abilityIcons[staticChar?.activeAbilityName ?? '']?.file}
+                                            style={{ width: 24, height: 24 }}
+                                        />
+                                    ))()}
+                                {!!mow &&
+                                    (() => (
+                                        <img
+                                            src={abilityIcons[staticMow?.primaryAbility.name ?? '']?.file}
+                                            style={{ width: 24, height: 24 }}
+                                        />
+                                    ))()}
                             </span>
                             <span
                                 className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${
@@ -339,7 +357,20 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                             <span
                                 className="w-6 text-right font-medium text-gray-600 dark:text-gray-400"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
-                                {char ? 'P' : 'S'}:
+                                {!!char &&
+                                    (() => (
+                                        <img
+                                            src={abilityIcons[staticChar?.passiveAbilityName ?? '']?.file}
+                                            style={{ width: 24, height: 24 }}
+                                        />
+                                    ))()}
+                                {!!mow &&
+                                    (() => (
+                                        <img
+                                            src={abilityIcons[staticMow?.secondaryAbility.name ?? '']?.file}
+                                            style={{ width: 24, height: 24 }}
+                                        />
+                                    ))()}
                             </span>
                             <span
                                 className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${
