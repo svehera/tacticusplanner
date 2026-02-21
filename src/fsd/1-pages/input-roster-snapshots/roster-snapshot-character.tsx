@@ -4,10 +4,12 @@ import { getImageUrl } from 'src/shared-logic/functions';
 
 import { RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
+import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
 
 import { ICharacterData } from '@/fsd/4-entities/character';
 import { IEquipment } from '@/fsd/4-entities/equipment/model';
+import { MowsService } from '@/fsd/4-entities/mow';
 import { IMowStatic2 } from '@/fsd/4-entities/mow/model';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
@@ -257,7 +259,8 @@ export const RosterSnapshotCharacter = ({
             </div>
         );
     };
-    const AbilityBadge = ({ val, x, y }: { val: number; x: number; y: number }) => {
+
+    const CircularBadge = ({ val, x, y }: { val: number; x: number; y: number }) => {
         const badgeRadius = 12;
         return (
             <div
@@ -273,15 +276,69 @@ export const RosterSnapshotCharacter = ({
         );
     };
 
-    const renderAbilities = (first: number, second: number) => {
+    const AbilityBadge = ({
+        name,
+        val,
+        x,
+        y,
+    }: {
+        name: keyof typeof abilityIcons;
+        val: number;
+        x: number;
+        y: number;
+    }) => {
+        const badgeRadius = 12;
+        return (
+            <>
+                <div
+                    className="absolute text-black shadow-md dark:text-white"
+                    style={{
+                        left: x - badgeRadius,
+                        top: y - badgeRadius,
+                        width: badgeRadius * 2,
+                        height: badgeRadius * 2,
+                    }}>
+                    <img
+                        src={abilityIcons[name]?.file}
+                        className="absolute top-1 left-1"
+                        style={{ left: -1, top: -1, width: badgeRadius * 2, height: badgeRadius * 2 }}
+                    />
+                </div>
+                <div
+                    className="absolute text-black shadow-md dark:text-white"
+                    style={{
+                        left: x - 8,
+                        top: y - badgeRadius * 2 + 6,
+                        width: badgeRadius * 2,
+                        textAlign: 'right',
+                        fontSize: 11,
+                        fontWeight: 'bold',
+                        textShadow: '0 0 1px rgba(0, 0, 0, 0.8)',
+                    }}>
+                    {val}
+                </div>
+            </>
+        );
+    };
+
+    const renderAbilities = (
+        firstName: keyof typeof abilityIcons,
+        secondName: keyof typeof abilityIcons,
+        first: number,
+        second: number
+    ) => {
         const yPos = 155; // Positioned near the bottom of your 170px height
         const leftX = 18; // Left side of the 96px frame
         const rightX = 78; // Right side of the 96px frame
 
+        if (!(firstName in abilityIcons) || !(secondName in abilityIcons)) {
+            console.log('firstName secondName first second', firstName, secondName, first, second);
+        }
+
         return (
             <>
-                <AbilityBadge val={first} x={leftX} y={yPos} />
-                <AbilityBadge val={second} x={rightX} y={yPos} />
+                <AbilityBadge name={firstName} val={first} x={leftX} y={yPos} />
+                <AbilityBadge name={secondName} val={second} x={rightX} y={yPos} />
             </>
         );
     };
@@ -290,7 +347,7 @@ export const RosterSnapshotCharacter = ({
         const yPos = 155; // Positioned near the bottom of your 170px height
         const centerX = 48; // Left side of the 96px frame
 
-        return <AbilityBadge val={level} x={centerX} y={yPos} />;
+        return <CircularBadge val={level} x={centerX} y={yPos} />;
     };
 
     const getStarSrc = () => (Array.isArray(starIcon) ? starIcon[0]?.src : starIcon) ?? '';
@@ -384,10 +441,20 @@ export const RosterSnapshotCharacter = ({
                     )}
                     {shouldShowAbilities() &&
                         char &&
-                        renderAbilities(char.activeAbilityLevel, char.passiveAbilityLevel)}
+                        renderAbilities(
+                            charData?.activeAbilityName ?? '',
+                            charData?.passiveAbilityName ?? '',
+                            char.activeAbilityLevel,
+                            char.passiveAbilityLevel
+                        )}
                     {shouldShowAbilities() &&
                         mow &&
-                        renderAbilities(mow.primaryAbilityLevel, mow.secondaryAbilityLevel)}
+                        renderAbilities(
+                            MowsService.resolveToStatic(mow.id)?.primaryAbility.name ?? mow.id + '-primary',
+                            MowsService.resolveToStatic(mow.id)?.secondaryAbility.name ?? mow.id + '-secondary',
+                            mow.primaryAbilityLevel,
+                            mow.secondaryAbilityLevel
+                        )}
                     {shouldShowXpLevel() && char && renderXpLevel(char.xpLevel)}
                     {starIcon && starIcon[0] && !isLocked && renderStars()}
                     {shouldShowShards() && renderShards(char?.shards ?? mow?.shards ?? 0)}
