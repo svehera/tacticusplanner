@@ -105,7 +105,7 @@ export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
         {
             label: 'Show equipment',
             key: 'showEquipment',
-            value: !!viewPreferences.showEquipment,
+            value: viewPreferences.showEquipment ?? true,
             disabled: false,
         },
     ];

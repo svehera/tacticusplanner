@@ -372,7 +372,9 @@ export const RosterSnapshotCharacter = ({
     };
 
     return (
-        <div className={`relative h-[${canvasHeight}px] w-[${canvasWidth}px] origin-top-left transition-none`}>
+        <div
+            style={{ height: canvasHeight, width: canvasWidth }}
+            className={`relative origin-top-left transition-none`}>
             <div className={grayscaleClass}>
                 <div className="absolute inset-0 h-[170px] w-[96px] origin-top-left">
                     <img src={charIcon} className={`absolute top-[17px] left-[3px] h-[120px] w-[90px]`} />

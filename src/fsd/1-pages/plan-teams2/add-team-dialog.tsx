@@ -189,7 +189,14 @@ export const AddTeamDialog: React.FC<Props> = ({
 
                         <div className="min-w-[180px]">
                             <RaritySelect2
-                                rarityValues={[Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Mythic]}
+                                rarityValues={[
+                                    Rarity.Common,
+                                    Rarity.Uncommon,
+                                    Rarity.Rare,
+                                    Rarity.Epic,
+                                    Rarity.Legendary,
+                                    Rarity.Mythic,
+                                ]}
                                 value={rarityCap}
                                 valueChanges={onRarityCapChanged}
                             />
