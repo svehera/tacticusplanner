@@ -1,27 +1,28 @@
-﻿import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+﻿/* eslint-disable no-restricted-imports */
+/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import React, { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { getEnumValues } from 'src/shared-logic/functions';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox, Conditional, RaritySelect } from '@/fsd/5-shared/ui';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { unsetCharacter } from '@/fsd/3-features/characters/characters.constants';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacter2, IUnit } from '@/fsd/3-features/characters/characters.models';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersService } from '@/fsd/3-features/characters/characters.service';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { CharacterTile } from '@/fsd/3-features/characters/components/character-tile';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
+
+import { RosterSnapshotCharacter } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshot-character';
+import { RosterSnapshotsAssetsProvider } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots-assets-provider';
+import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots-service';
+
+import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';
 
 type Props = {
     teamName: string;
@@ -79,15 +80,43 @@ export const SelectTeamDialog: React.FC<Props> = ({
 
             if (char) {
                 return (
-                    <CharacterTile
-                        key={char.name}
-                        character={CharactersService.capCharacterAtRarity(char, rarityCap)}
-                        onCharacterClick={handleCharacterSelect}
-                    />
+                    <div
+                        key={char.snowprintId!}
+                        onClick={() => handleCharacterSelect(char)}
+                        className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
+                        title={`Select ${char.name || 'Unit'}`}>
+                        <RosterSnapshotCharacter
+                            key={char.name}
+                            char={RosterSnapshotsService.snapshotCharacter(
+                                CharactersService.capCharacterAtRarity(char, rarityCap)
+                            )}
+                            charData={char}
+                            showShards={RosterSnapshotShowVariableSettings.Never}
+                            showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                            showAbilities={RosterSnapshotShowVariableSettings.Always}
+                            showEquipment={RosterSnapshotShowVariableSettings.Always}
+                            showTooltip={false}
+                            showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                            isDisabled={false}
+                        />
+                    </div>
                 );
             }
 
-            return <CharacterTile key={fallbackCharacter.name + i} character={fallbackCharacter} />;
+            return (
+                <RosterSnapshotCharacter
+                    key={fallbackCharacter.name + i}
+                    char={RosterSnapshotsService.snapshotCharacter(fallbackCharacter)}
+                    charData={fallbackCharacter}
+                    showShards={RosterSnapshotShowVariableSettings.Never}
+                    showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                    showAbilities={RosterSnapshotShowVariableSettings.Never}
+                    showEquipment={RosterSnapshotShowVariableSettings.Never}
+                    showTooltip={false}
+                    showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                    isDisabled={true}
+                />
+            );
         });
     }, [lineup, rarityCap]);
 
@@ -123,12 +152,14 @@ export const SelectTeamDialog: React.FC<Props> = ({
                                 ? 0.5
                                 : 1,
                     }}>
-                    <CharactersGrid
-                        characters={characters.map(x => CharactersService.capCharacterAtRarity(x, rarityCap))}
-                        blockedCharacters={blockedCharacters}
-                        onAvailableCharacterClick={handleCharacterSelect}
-                        onLockedCharacterClick={handleCharacterSelect}
-                    />
+                    <RosterSnapshotsAssetsProvider>
+                        <CharactersGrid
+                            characters={characters.map(x => CharactersService.capCharacterAtRarity(x, rarityCap))}
+                            blockedCharacters={blockedCharacters}
+                            onAvailableCharacterClick={handleCharacterSelect}
+                            onLockedCharacterClick={handleCharacterSelect}
+                        />
+                    </RosterSnapshotsAssetsProvider>
                 </CharactersViewContext.Provider>
             </DialogContent>
             <DialogActions>

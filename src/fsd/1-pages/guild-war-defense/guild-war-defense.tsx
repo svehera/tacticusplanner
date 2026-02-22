@@ -1,4 +1,6 @@
-﻿import InfoIcon from '@mui/icons-material/Info';
+﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardActions, CardContent, CardHeader } from '@mui/material';
 import Button from '@mui/material/Button';
 import { orderBy, sum } from 'lodash';
@@ -6,40 +8,28 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacter2 } from 'src/models/interfaces';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { CharactersService as CharacterEntityService } from '@/fsd/4-entities/character';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersService } from '@/fsd/3-features/characters/characters.service';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { PotentialInfo } from '@/fsd/3-features/characters/components/potential-info';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { SelectTeamDialog } from '@/fsd/3-features/characters/components/select-team-dialog';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { Team } from '@/fsd/3-features/characters/components/team';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { BattlefieldInfo } from '@/fsd/3-features/guild-war/battlefield-info';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { BfZoneDifficultySelect } from '@/fsd/3-features/guild-war/bf-zone-difficulty-select';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuildWarTeamType, IGWTeamWithCharacters } from '@/fsd/3-features/guild-war/guild-war.models';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuildWarService } from '@/fsd/3-features/guild-war/guild-war.service';
+
+import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 
 export const GuildWarDefense = () => {
     const { guildWar, characters, viewPreferences } = useContext(StoreContext);
@@ -58,14 +48,6 @@ export const GuildWarDefense = () => {
 
     const updateZoneDifficulty = (zoneDifficulty: number) => {
         dispatch.guildWar({ type: 'UpdateZoneDifficulty', zoneDifficulty });
-    };
-
-    const startEditCharacter = (character: ICharacter2): void => {
-        const originalChar = characters.find(x => x.name === character.name);
-        if (originalChar) {
-            setEditedCharacter(originalChar);
-            setOpenCharacterItemDialog(true);
-        }
     };
 
     const endEditCharacter = (): void => {
@@ -135,7 +117,7 @@ export const GuildWarDefense = () => {
                     onEdit={() => startEditTeam(currTeam)}
                     onClear={() => clearTeam(currTeam.id)}
                     teamPotential={teamsPotential[i].total}
-                    onCharacterClick={startEditCharacter}
+                    onCharacterClick={() => {}}
                     teamPotentialBreakdown={
                         <FlexBox className="flex-col items-start">
                             {teamsPotential[i].lineup.map(char => (
@@ -197,29 +179,31 @@ export const GuildWarDefense = () => {
                     showCharacterLevel: viewPreferences.showCharacterLevel,
                     showCharacterRarity: viewPreferences.showCharacterRarity,
                 }}>
-                <FlexBox wrap={true} gap={30} justifyContent={'center'}>
-                    {renderTeams}
-                </FlexBox>
+                <RosterSnapshotsAssetsProvider>
+                    <FlexBox wrap={true} gap={30} justifyContent={'center'}>
+                        {renderTeams}
+                    </FlexBox>
 
-                <Conditional condition={!!editedCharacter}>
-                    <CharacterItemDialog
-                        character={editedCharacter!}
-                        isOpen={openCharacterItemDialog}
-                        onClose={endEditCharacter}
-                    />
-                </Conditional>
+                    <Conditional condition={!!editedCharacter}>
+                        <CharacterItemDialog
+                            character={editedCharacter!}
+                            isOpen={openCharacterItemDialog}
+                            onClose={endEditCharacter}
+                        />
+                    </Conditional>
 
-                {editedTeam && (
-                    <SelectTeamDialog
-                        isOpen={openSelectTeamDialog}
-                        team={editedTeam.lineup}
-                        teamName={editedTeam.name}
-                        rarityCap={editedTeam.rarityCap}
-                        onClose={endEditTeam}
-                        characters={getCharactersWithPotential(editedTeam.rarityCap)}
-                        blockedCharacters={getBlockedCharacters(editedTeam.id)}
-                    />
-                )}
+                    {editedTeam && (
+                        <SelectTeamDialog
+                            isOpen={openSelectTeamDialog}
+                            team={editedTeam.lineup}
+                            teamName={editedTeam.name}
+                            rarityCap={editedTeam.rarityCap}
+                            onClose={endEditTeam}
+                            characters={getCharactersWithPotential(editedTeam.rarityCap)}
+                            blockedCharacters={getBlockedCharacters(editedTeam.id)}
+                        />
+                    )}
+                </RosterSnapshotsAssetsProvider>
             </CharactersViewContext.Provider>
         </FlexBox>
     );
@@ -234,7 +218,14 @@ const TeamCard: React.FC<{
     onCharacterClick: (character: ICharacter2) => void;
 }> = ({ team, teamPotential, teamPotentialBreakdown, onEdit, onClear, onCharacterClick }) => {
     return (
-        <Card variant="outlined" sx={{ maxWidth: 400, boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)' }}>
+        <Card
+            variant="outlined"
+            sx={{
+                minWidth: 524,
+                width: 'fit-content',
+                flexShrink: 0,
+                boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)',
+            }}>
             <CardHeader
                 title={
                     <FlexBox justifyContent={'space-between'}>
@@ -261,7 +252,17 @@ const TeamCard: React.FC<{
                 }
                 subheader={Rarity[team.rarityCap]}
             />
-            <CardContent className="py-0">
+            <CardContent
+                sx={{
+                    padding: '10px',
+                    '&:last-child': { paddingBottom: '10px' },
+                    '& > div': {
+                        display: 'inline-flex',
+                        flexWrap: 'nowrap',
+                        gap: '6px',
+                        justifyContent: 'center',
+                    },
+                }}>
                 <Team
                     characters={team.lineup.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap))}
                     onSetSlotClick={onCharacterClick}

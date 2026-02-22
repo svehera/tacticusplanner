@@ -1,3 +1,5 @@
+/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
 import { Box, Grid, Input, Slider } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -6,8 +8,10 @@ import { useDebounceCallback } from 'usehooks-ts';
 import { ICampaignModel, CampaignImage, CampaignDifficulty } from '@/fsd/4-entities/campaign';
 import { ICharacter2 } from '@/fsd/4-entities/character';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import { CharacterTile } from '@/fsd/3-features/characters/components/character-tile';
+import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
+
+import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
+import { RosterSnapshotsService } from '../input-roster-snapshots/roster-snapshots-service';
 
 interface Props {
     characters: ICharacter2[];
@@ -97,7 +101,7 @@ export const CampaignProgress: React.FC<Props> = ({
     };
 
     return (
-        <Box sx={{ width: 250, opacity: currProgress === max ? 0.5 : 1 }}>
+        <Box sx={{ width: 310, opacity: currProgress === max ? 0.5 : 1 }}>
             <Typography id="input-slider" gutterBottom>
                 <CampaignImage campaign={campaign.id} /> <span className="inline-block">{campaign.displayName}</span>
             </Typography>
@@ -132,7 +136,18 @@ export const CampaignProgress: React.FC<Props> = ({
             <Grid>
                 <div className="flex-box">
                     {coreCharacters.map(unit => (
-                        <CharacterTile key={unit.id} character={unit} />
+                        <RosterSnapshotCharacter
+                            key={unit.id}
+                            char={RosterSnapshotsService.snapshotCharacter(unit)}
+                            charData={unit}
+                            showShards={RosterSnapshotShowVariableSettings.Never}
+                            showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                            showAbilities={RosterSnapshotShowVariableSettings.Always}
+                            showEquipment={RosterSnapshotShowVariableSettings.Always}
+                            showTooltip={true}
+                            showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                            isDisabled={false}
+                        />
                     ))}
                 </div>
             </Grid>
