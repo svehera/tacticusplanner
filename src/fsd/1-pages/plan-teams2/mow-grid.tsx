@@ -38,11 +38,16 @@ export const MowGrid: React.FC<Props> = ({ mows, sizeMod, onMowSelect, showHeade
                             showMythicShards={RosterSnapshotShowVariableSettings.Never}
                             showShards={RosterSnapshotShowVariableSettings.Never}
                             showXpLevel={RosterSnapshotShowVariableSettings.Never}
-                            showAbilities={RosterSnapshotShowVariableSettings.Always}
+                            showAbilities={
+                                mow.unlocked
+                                    ? RosterSnapshotShowVariableSettings.Always
+                                    : RosterSnapshotShowVariableSettings.Never
+                            }
                             showEquipment={RosterSnapshotShowVariableSettings.Never}
                             showTooltip={true}
                             mow={Teams2Service.convertMow(mow)}
                             mowData={mow}
+                            isDisabled={!mow.unlocked}
                         />
                     </div>
                 ))}

@@ -15,8 +15,8 @@ export interface ITeam2 {
     raid?: boolean;
     // If the team is viable in tournament arena.
     ta?: boolean;
-    // war battlefield levels
-    bfs?: boolean[];
+    // If the team is viable in horde mode.
+    horde?: boolean;
     // Any user-provided notes.
     notes?: string;
 }

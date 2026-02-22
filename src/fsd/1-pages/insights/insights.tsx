@@ -1,39 +1,31 @@
-﻿import Box from '@mui/material/Box';
+﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+import Box from '@mui/material/Box';
 import { sum } from 'lodash';
 import { useContext, useState } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GlobalState } from 'src/models/global-state';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { LoaderWithText, Conditional } from '@/fsd/5-shared/ui';
 
 import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
-// eslint-disable-next-line boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 import { CharactersPowerService, CharactersValueService } from '@/fsd/4-entities/unit';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersService } from '@/fsd/3-features/characters/characters.service';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { FactionsGrid } from '@/fsd/3-features/characters/components/factions-grid';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RosterHeader } from '@/fsd/3-features/characters/components/roster-header';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TeamGraph } from '@/fsd/3-features/characters/components/team-graph';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isCharactersView } from '@/fsd/3-features/characters/functions/is-characters-view';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isFactionsView } from '@/fsd/3-features/characters/functions/is-factions-view';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { useGetInsights } from '@/fsd/3-features/insights/insights.endpoint';
 import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
+
+import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 
 export const Insights = () => {
     const { viewPreferences } = useContext(StoreContext);
@@ -119,18 +111,20 @@ export const Insights = () => {
                     showCharacterLevel: viewPreferences.showCharacterLevel,
                     showCharacterRarity: viewPreferences.showCharacterRarity,
                 }}>
-                <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
-                    <TeamGraph units={unitsFiltered} />
-                </RosterHeader>
-                <CharactersViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
+                <RosterSnapshotsAssetsProvider>
+                    <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
+                        <TeamGraph units={unitsFiltered} />
+                    </RosterHeader>
+                    <CharactersViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 
-                <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                    <FactionsGrid factions={factions} />
-                </Conditional>
+                    <Conditional condition={isFactionsView(viewControls.orderBy)}>
+                        <FactionsGrid factions={factions} />
+                    </Conditional>
 
-                <Conditional condition={isCharactersView(viewControls.orderBy)}>
-                    <CharactersGrid characters={units} />
-                </Conditional>
+                    <Conditional condition={isCharactersView(viewControls.orderBy)}>
+                        <CharactersGrid characters={units} />
+                    </Conditional>
+                </RosterSnapshotsAssetsProvider>
             </CharactersViewContext.Provider>
         </Box>
     );

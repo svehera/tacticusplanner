@@ -5,6 +5,7 @@ import {
     Add as AddIcon,
     Edit as EditIcon,
     DeleteOutline as DeleteIcon,
+    Diversity3 as DiversityIcon,
     MilitaryTech, // War
     Shield, // Defense
     Groups, // Guild Raid
@@ -59,6 +60,7 @@ export const ManageTeams = () => {
     const [maxRarity, setMaxRarity] = useState<Rarity>(Rarity.Mythic);
     const [rarityCap, setRarityCap] = useState<Rarity>(Rarity.Mythic);
     const [factions, setFactions] = useState<FactionId[]>([]);
+    const [allowLockedUnits, setAllowLockedUnits] = useState<boolean>(true);
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, setSelectedChars] = useState<string[]>([]);
     const [selectedMows, setSelectedMows] = useState<string[]>([]);
@@ -78,6 +80,7 @@ export const ManageTeams = () => {
     const [warDefenseSelected, setWarDefenseSelected] = useState<boolean>(false);
     const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
     const [tournamentArenaSelected, setTournamentArenaSelected] = useState<boolean>(false);
+    const [hordeModeSelected, setHordeModeSelected] = useState<boolean>(false);
     const [teamName, setTeamName] = useState<string>('');
     const [resolvedChars, setResolvedChars] = useState<ICharacter2[]>([]);
     const [resolvedMows, setResolvedMows] = useState<IMow2[]>([]);
@@ -136,7 +139,8 @@ export const ManageTeams = () => {
 
         if (
             !guildRaidSelected &&
-            (!nonRaidModesEnabled || (!warOffenseSelected && !warDefenseSelected && !tournamentArenaSelected))
+            (!nonRaidModesEnabled ||
+                (!warOffenseSelected && !warDefenseSelected && !tournamentArenaSelected && !hordeModeSelected))
         ) {
             setSaveDisallowedMessage('Select at least one game mode.');
             setSaveAllowed(false);
@@ -150,6 +154,7 @@ export const ManageTeams = () => {
         warDefenseSelected,
         guildRaidSelected,
         tournamentArenaSelected,
+        hordeModeSelected,
         notes,
         selectedChars,
         selectedMows,
@@ -179,6 +184,7 @@ export const ManageTeams = () => {
         setWarDefenseSelected(!!team.warDefense);
         setGuildRaidSelected(!!team.raid);
         setTournamentArenaSelected(!!team.ta);
+        setHordeModeSelected(!!team.horde);
         setRarityCap(Rarity.Mythic);
     };
 
@@ -197,6 +203,7 @@ export const ManageTeams = () => {
             team.warDefense = warDefenseSelected ? true : undefined;
             team.raid = guildRaidSelected ? true : undefined;
             team.ta = tournamentArenaSelected ? true : undefined;
+            team.horde = hordeModeSelected ? true : undefined;
             team.notes = notes;
             team.flexIndex = flexIndex;
             const curTeams = [...teams];
@@ -215,6 +222,7 @@ export const ManageTeams = () => {
                 warDefense: warDefenseSelected ? true : undefined,
                 raid: guildRaidSelected ? true : undefined,
                 ta: tournamentArenaSelected ? true : undefined,
+                horde: hordeModeSelected ? true : undefined,
                 notes: notes,
             };
             dispatch.teams2({ type: 'Set', value: [...teams, newTeam] });
@@ -263,6 +271,7 @@ export const ManageTeams = () => {
                 selectedChars={selectedChars}
                 selectedMows={selectedMows}
                 flexIndex={flexIndex}
+                allowLockedUnits={allowLockedUnits}
                 searchText={searchText}
                 minRarity={minRarity}
                 maxRarity={maxRarity}
@@ -277,6 +286,7 @@ export const ManageTeams = () => {
                 onAddMow={onAddMow}
                 onCharClicked={onCharClicked}
                 onMowClicked={onMowClicked}
+                onAllowLockedUnitsChange={setAllowLockedUnits}
                 onSearchTextChange={setSearchText}
                 onMinRarityChange={setMinRarity}
                 onMaxRarityChange={setMaxRarity}
@@ -292,11 +302,13 @@ export const ManageTeams = () => {
                 warDefenseSelected={warDefenseSelected}
                 guildRaidSelected={guildRaidSelected}
                 tournamentArenaSelected={tournamentArenaSelected}
+                hordeModeSelected={hordeModeSelected}
                 teamName={teamName}
                 onWarOffenseChanged={setWarOffenseSelected}
                 onWarDefenseChanged={setWarDefenseSelected}
                 onGuildRaidChanged={setGuildRaidSelected}
                 onTournamentArenaChanged={setTournamentArenaSelected}
+                onHordeModeChanged={setHordeModeSelected}
                 onTeamNameChanged={setTeamName}
                 onNotesChanged={setNotes}
                 onCancel={() => setAddTeamDialogOpen(false)}
@@ -379,6 +391,9 @@ export const ManageTeams = () => {
                                 color="success"
                             />
                         )}
+                        {!!team.horde && (
+                            <MetadataChip icon={<DiversityIcon fontSize="inherit" />} label="Horde" color="error" />
+                        )}
                     </div>
                     {team.notes && team.notes.trim().length > 0 && (
                         <div className="mb-4">
@@ -408,6 +423,18 @@ export const ManageTeams = () => {
                             onCharClicked={() => {}}
                             onMowClicked={() => {}}
                             sizeMod={sizeMod}
+                            disabledUnits={[
+                                ...team.chars.map(
+                                    char =>
+                                        resolvedChars.find(x => x.snowprintId === char && x.rank === Rank.Locked)
+                                            ?.snowprintId
+                                ),
+                                ...(team.mows?.map(
+                                    mow => resolvedMows.find(x => x.snowprintId === mow && !x.unlocked)?.snowprintId
+                                ) ?? []),
+                            ]
+                                .flatMap(id => (id ? [id] : []))
+                                .filter(id => id !== undefined)}
                         />
                     </div>
                 </Paper>

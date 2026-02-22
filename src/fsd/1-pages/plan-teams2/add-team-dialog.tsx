@@ -24,6 +24,7 @@ interface Props {
     selectedChars: string[];
     selectedMows: string[];
     flexIndex?: number;
+    allowLockedUnits: boolean;
     searchText: string;
     minRarity: Rarity;
     maxRarity: Rarity;
@@ -38,6 +39,7 @@ interface Props {
     onAddMow: (snowprintId: string) => void;
     onCharClicked: (char: ICharacter2) => void;
     onMowClicked: (mow: IMow2) => void;
+    onAllowLockedUnitsChange: (allow: boolean) => void;
     onSearchTextChange: (text: string) => void;
     onMinRarityChange: (rarity: Rarity) => void;
     onMaxRarityChange: (rarity: Rarity) => void;
@@ -54,11 +56,13 @@ interface Props {
     warDefenseSelected: boolean;
     guildRaidSelected: boolean;
     tournamentArenaSelected: boolean;
+    hordeModeSelected: boolean;
     teamName: string;
     onWarOffenseChanged: (offense: boolean) => void;
     onWarDefenseChanged: (defense: boolean) => void;
     onGuildRaidChanged: (guildRaid: boolean) => void;
     onTournamentArenaChanged: (tournamentArena: boolean) => void;
+    onHordeModeChanged: (hordeMode: boolean) => void;
     onTeamNameChanged: (teamName: string) => void;
     onNotesChanged: (notes: string) => void;
     onCancel: () => void;
@@ -70,6 +74,7 @@ export const AddTeamDialog: React.FC<Props> = ({
     selectedChars,
     selectedMows,
     flexIndex,
+    allowLockedUnits,
     searchText,
     minRarity,
     maxRarity,
@@ -84,6 +89,7 @@ export const AddTeamDialog: React.FC<Props> = ({
     onAddMow,
     onCharClicked,
     onMowClicked,
+    onAllowLockedUnitsChange,
     onSearchTextChange,
     onMinRarityChange,
     onMaxRarityChange,
@@ -102,11 +108,13 @@ export const AddTeamDialog: React.FC<Props> = ({
     warDefenseSelected: warDefense,
     guildRaidSelected: guildRaid,
     tournamentArenaSelected: tournamentArena,
+    hordeModeSelected,
     teamName,
     onWarOffenseChanged,
     onWarDefenseChanged,
     onGuildRaidChanged,
     onTournamentArenaChanged,
+    onHordeModeChanged,
     onTeamNameChanged,
     onNotesChanged,
 }: Props) => {
@@ -154,7 +162,16 @@ export const AddTeamDialog: React.FC<Props> = ({
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId!))
         .filter(c =>
-            Teams2Service.passesCharacterFilter(c, minRank, maxRank, minRarity, maxRarity, factions, searchText)
+            Teams2Service.passesCharacterFilter(
+                c,
+                allowLockedUnits,
+                minRank,
+                maxRank,
+                minRarity,
+                maxRarity,
+                factions,
+                searchText
+            )
         )
         .sort((a, b) => {
             if (b.rank !== a.rank) return b.rank - a.rank;
@@ -167,7 +184,7 @@ export const AddTeamDialog: React.FC<Props> = ({
 
     const filteredMows = mows
         .filter(mow => !selectedMows.includes(mow.snowprintId!))
-        .filter(mow => Teams2Service.passesMowFilter(mow, minRarity, maxRarity, factions, searchText))
+        .filter(mow => Teams2Service.passesMowFilter(mow, allowLockedUnits, minRarity, maxRarity, factions, searchText))
         .sort((a, b) => {
             const powerA = Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.primaryAbilityLevel ?? 0, 2) + Math.pow(b.secondaryAbilityLevel ?? 0, 2);
@@ -223,6 +240,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                         </summary>
                         <div className="mt-4 space-y-6">
                             <UnitFilter
+                                allowLockedUnits={allowLockedUnits}
                                 searchText={searchText}
                                 minRarity={minRarity}
                                 maxRarity={maxRarity}
@@ -230,6 +248,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                                 maxRank={maxRank}
                                 factions={factions}
                                 allFactions={allFactions}
+                                onAllowLockedUnitsChange={onAllowLockedUnitsChange}
                                 onSearchTextChange={onSearchTextChange}
                                 onMinRarityChange={onMinRarityChange}
                                 onMaxRarityChange={onMaxRarityChange}
@@ -320,6 +339,15 @@ export const AddTeamDialog: React.FC<Props> = ({
                                             <span>Tournament Arena</span>
                                         </div>
                                     </AccessibleTooltip>
+                                </label>
+                                <label className="flex cursor-pointer items-center gap-2 text-gray-700 dark:text-gray-300">
+                                    <input
+                                        type="checkbox"
+                                        checked={hordeModeSelected}
+                                        onChange={() => onHordeModeChanged(!hordeModeSelected)}
+                                        className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    />
+                                    <span>Horde Mode</span>
                                 </label>
                             </div>
                         </div>

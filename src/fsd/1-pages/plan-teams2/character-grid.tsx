@@ -2,6 +2,8 @@
 /* eslint-disable import-x/no-internal-modules */
 import { ICharacter2 } from '@/models/interfaces';
 
+import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
+
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
@@ -42,6 +44,7 @@ export const CharacterGrid: React.FC<Props> = ({ characters, sizeMod, onCharacte
                             showTooltip={true}
                             char={Teams2Service.convertCharacter(char)}
                             charData={char}
+                            isDisabled={char.rank === Rank.Locked}
                         />
                     </div>
                 ))}
