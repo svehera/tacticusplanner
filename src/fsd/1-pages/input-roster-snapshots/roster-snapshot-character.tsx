@@ -436,7 +436,7 @@ export const RosterSnapshotCharacter = ({
                 <div className="absolute inset-0 h-[170px] w-[96px] origin-top-left">
                     <img src={charIcon} className={`absolute top-[17px] left-[3px] h-[120px] w-[90px]`} />
                     <img src={frame[0]?.src} className="absolute top-[14px] z-10 h-[126px] w-[96px]" />
-                    {rankIcon && rankIcon[0] && !isLocked && (
+                    {rankIcon && rankIcon[0] && char !== undefined && !isLocked && (
                         <img src={rankIcon[0]?.src} className={`absolute top-[110px] left-0 z-20 h-[30px] w-[30px]`} />
                     )}
                     {shouldShowAbilities() &&
