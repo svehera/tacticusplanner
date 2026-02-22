@@ -36,12 +36,14 @@ interface Props {
     maxRank: Rank;
     factions: FactionId[];
     allFactions: FactionId[];
+    allowLockedUnits: boolean;
     onSearchTextChange: (text: string) => void;
     onMinRarityChange: (rarity: Rarity) => void;
     onMaxRarityChange: (rarity: Rarity) => void;
     onMinRankChange: (rank: Rank) => void;
     onMaxRankChange: (rank: Rank) => void;
     onFactionsChange: (factions: FactionId[]) => void;
+    onAllowLockedUnitsChange: (allow: boolean) => void;
 }
 
 export const UnitFilter: React.FC<Props> = ({
@@ -52,12 +54,14 @@ export const UnitFilter: React.FC<Props> = ({
     maxRank,
     factions,
     allFactions,
+    allowLockedUnits,
     onSearchTextChange,
     onMinRarityChange,
     onMaxRarityChange,
     onMinRankChange,
     onMaxRankChange,
     onFactionsChange,
+    onAllowLockedUnitsChange,
 }) => {
     const handleFactionChange = (value: FactionId[]) => {
         onFactionsChange(value);
@@ -70,11 +74,27 @@ export const UnitFilter: React.FC<Props> = ({
         onMinRankChange(Rank.Stone1);
         onMaxRankChange(Rank.Adamantine3);
         onFactionsChange([]);
+        onAllowLockedUnitsChange(true);
     };
 
     return (
         <header className="rounded-xl border border-slate-200 bg-white p-4 md:p-6 dark:border-slate-800 dark:bg-[#161b22]">
             <div className="grid grid-cols-1 gap-6">
+                {/* ALLOW LOCKED UNITS */}
+                <div className="flex items-center gap-2">
+                    <input
+                        id="allow-locked-units"
+                        type="checkbox"
+                        checked={allowLockedUnits}
+                        onChange={e => onAllowLockedUnitsChange(e.target.checked)}
+                        className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 dark:border-slate-700"
+                    />
+                    <label
+                        htmlFor="allow-locked-units"
+                        className="text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                        Allow Locked Units
+                    </label>
+                </div>
                 {/* SEARCH */}
                 <div>
                     <label className="mb-2 block text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">

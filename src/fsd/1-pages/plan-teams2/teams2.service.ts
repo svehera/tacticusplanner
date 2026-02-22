@@ -39,6 +39,7 @@ const maxStarsForRarity: Record<Rarity, RarityStars> = {
 export class Teams2Service {
     public static passesCharacterFilter(
         c: ICharacter2,
+        allowLockedUnits: boolean,
         minRank: Rank,
         maxRank: Rank,
         minRarity: Rarity,
@@ -46,7 +47,10 @@ export class Teams2Service {
         factions: FactionId[],
         searchText: string
     ): boolean {
-        if (c.rank < minRank || c.rank > maxRank) {
+        if (!allowLockedUnits && c.rank === Rank.Locked) {
+            return false;
+        }
+        if (Math.max(c.rank, Rank.Stone1) < minRank || c.rank > maxRank) {
             return false;
         }
         if (c.rarity < minRarity || c.rarity > maxRarity) {
@@ -103,11 +107,15 @@ export class Teams2Service {
 
     public static passesMowFilter(
         m: IMow2,
+        allowLockedUnits: boolean,
         minRarity: Rarity,
         maxRarity: Rarity,
         factions: FactionId[],
         searchText: string
     ): boolean {
+        if (!allowLockedUnits && !m.unlocked) {
+            return false;
+        }
         if (m.rarity < minRarity || m.rarity > maxRarity) {
             return false;
         }
