@@ -58,7 +58,7 @@ export const RosterSnapshotCharacter = ({
     isDisabled,
 }: Props) => {
     const { frame, rankIcon, starIcon, shardIcon, mythicShardIcon } = useRosterSnapshotAssets(
-        mow !== undefined,
+        char !== undefined,
         char?.rarity ?? mow?.rarity ?? 0,
         char?.rank ?? undefined,
         char?.stars ?? mow?.stars ?? 0
