@@ -1,4 +1,6 @@
-﻿import AddIcon from '@mui/icons-material/Add';
+﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+import AddIcon from '@mui/icons-material/Add';
 import LinkIcon from '@mui/icons-material/Link';
 import { Fab, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -7,23 +9,18 @@ import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 import { useDebounceValue } from 'usehooks-ts';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { AddTeamDialog } from '@/fsd/3-features/teams/components/add-team.dialog';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { EditTeamDialog } from '@/fsd/3-features/teams/components/edit-team.dialog';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TeamsGrid } from '@/fsd/3-features/teams/components/teams-grid';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { allModes } from '@/fsd/3-features/teams/teams.constants';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
+
+import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 
 export const Teams = () => {
     const dispatch = useContext(DispatchContext);
@@ -98,32 +95,34 @@ export const Teams = () => {
                 />
             </div>
             <CharactersViewContext.Provider value={viewPreferences}>
-                <TeamsGrid
-                    teams={filteredTeams}
-                    characters={characters}
-                    mows={resolvedMows}
-                    editTeam={setEditTeam}
-                    deleteTeam={deleteTeam}
-                />
-
-                {openCreateTeamDialog && (
-                    <AddTeamDialog
-                        onClose={() => setOpenCreateTeamDialog(false)}
+                <RosterSnapshotsAssetsProvider>
+                    <TeamsGrid
+                        teams={filteredTeams}
                         characters={characters}
                         mows={resolvedMows}
-                        addTeam={addTeam}
+                        editTeam={setEditTeam}
+                        deleteTeam={deleteTeam}
                     />
-                )}
 
-                {editTeam && (
-                    <EditTeamDialog
-                        team={editTeam}
-                        onClose={() => setEditTeam(null)}
-                        characters={characters}
-                        mows={resolvedMows}
-                        saveTeam={updateTeam}
-                    />
-                )}
+                    {openCreateTeamDialog && (
+                        <AddTeamDialog
+                            onClose={() => setOpenCreateTeamDialog(false)}
+                            characters={characters}
+                            mows={resolvedMows}
+                            addTeam={addTeam}
+                        />
+                    )}
+
+                    {editTeam && (
+                        <EditTeamDialog
+                            team={editTeam}
+                            onClose={() => setEditTeam(null)}
+                            characters={characters}
+                            mows={resolvedMows}
+                            saveTeam={updateTeam}
+                        />
+                    )}
+                </RosterSnapshotsAssetsProvider>
             </CharactersViewContext.Provider>
         </>
     );

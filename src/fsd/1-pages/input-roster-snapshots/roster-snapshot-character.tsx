@@ -4,10 +4,12 @@ import { getImageUrl } from 'src/shared-logic/functions';
 
 import { RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
+import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
 
 import { ICharacterData } from '@/fsd/4-entities/character';
 import { IEquipment } from '@/fsd/4-entities/equipment/model';
+import { MowsService } from '@/fsd/4-entities/mow';
 import { IMowStatic2 } from '@/fsd/4-entities/mow/model';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
@@ -56,7 +58,7 @@ export const RosterSnapshotCharacter = ({
     isDisabled,
 }: Props) => {
     const { frame, rankIcon, starIcon, shardIcon, mythicShardIcon } = useRosterSnapshotAssets(
-        mow !== undefined,
+        char !== undefined,
         char?.rarity ?? mow?.rarity ?? 0,
         char?.rank ?? undefined,
         char?.stars ?? mow?.stars ?? 0
@@ -135,6 +137,7 @@ export const RosterSnapshotCharacter = ({
             </div>
         );
     };
+
     const renderEquipmentType = (type: string | undefined) => {
         if (type === undefined) {
             return <div style={{ width: equipmentHeight, height: equipmentHeight }} />;
@@ -256,7 +259,8 @@ export const RosterSnapshotCharacter = ({
             </div>
         );
     };
-    const AbilityBadge = ({ val, x, y }: { val: number; x: number; y: number }) => {
+
+    const CircularBadge = ({ val, x, y }: { val: number; x: number; y: number }) => {
         const badgeRadius = 12;
         return (
             <div
@@ -272,15 +276,69 @@ export const RosterSnapshotCharacter = ({
         );
     };
 
-    const renderAbilities = (first: number, second: number) => {
+    const AbilityBadge = ({
+        name,
+        val,
+        x,
+        y,
+    }: {
+        name: keyof typeof abilityIcons;
+        val: number;
+        x: number;
+        y: number;
+    }) => {
+        const badgeRadius = 12;
+        return (
+            <>
+                <div
+                    className="absolute text-black shadow-md dark:text-white"
+                    style={{
+                        left: x - badgeRadius,
+                        top: y - badgeRadius,
+                        width: badgeRadius * 2,
+                        height: badgeRadius * 2,
+                    }}>
+                    <img
+                        src={abilityIcons[name]?.file}
+                        className="absolute top-1 left-1"
+                        style={{ left: -1, top: -1, width: badgeRadius * 2, height: badgeRadius * 2 }}
+                    />
+                </div>
+                <div
+                    className="absolute text-black shadow-md dark:text-white"
+                    style={{
+                        left: x - 8,
+                        top: y - badgeRadius * 2 + 6,
+                        width: badgeRadius * 2,
+                        textAlign: 'right',
+                        fontSize: 11,
+                        fontWeight: 'bold',
+                        textShadow: '0 0 1px rgba(0, 0, 0, 0.8)',
+                    }}>
+                    {val}
+                </div>
+            </>
+        );
+    };
+
+    const renderAbilities = (
+        firstName: keyof typeof abilityIcons,
+        secondName: keyof typeof abilityIcons,
+        first: number,
+        second: number
+    ) => {
         const yPos = 155; // Positioned near the bottom of your 170px height
         const leftX = 18; // Left side of the 96px frame
         const rightX = 78; // Right side of the 96px frame
 
+        if (!(firstName in abilityIcons) || !(secondName in abilityIcons)) {
+            console.log('firstName secondName first second', firstName, secondName, first, second);
+        }
+
         return (
             <>
-                <AbilityBadge val={first} x={leftX} y={yPos} />
-                <AbilityBadge val={second} x={rightX} y={yPos} />
+                <AbilityBadge name={firstName} val={first} x={leftX} y={yPos} />
+                <AbilityBadge name={secondName} val={second} x={rightX} y={yPos} />
             </>
         );
     };
@@ -289,16 +347,18 @@ export const RosterSnapshotCharacter = ({
         const yPos = 155; // Positioned near the bottom of your 170px height
         const centerX = 48; // Left side of the 96px frame
 
-        return <AbilityBadge val={level} x={centerX} y={yPos} />;
+        return <CircularBadge val={level} x={centerX} y={yPos} />;
     };
 
     const getStarSrc = () => (Array.isArray(starIcon) ? starIcon[0]?.src : starIcon) ?? '';
+
+    const grayscaleClass = (isDisabled ?? false) ? 'grayscale' : '';
 
     const renderWings = () => {
         return (
             <img
                 src={getStarSrc()}
-                className={`absolute ${isLocked || (isDisabled ?? false) ? 'grayscale' : ''}`}
+                className={`absolute ${grayscaleClass}`}
                 style={{ left: 3, top: 2, width: 90, height: starSize, zIndex: 11 }}
             />
         );
@@ -369,23 +429,38 @@ export const RosterSnapshotCharacter = ({
     };
 
     return (
-        <div className={`relative h-[${canvasHeight}px] w-[${canvasWidth}px] origin-top-left transition-none`}>
-            <div className="absolute inset-0 h-[170px] w-[96px] origin-top-left">
-                <img
-                    src={charIcon}
-                    className={`absolute top-[17px] left-[3px] h-[120px] w-[90px] ${isLocked ? 'grayscale' : ''}`}
-                />
-                <img src={frame[0]?.src} className="absolute top-[14px] z-10 h-[126px] w-[96px]" />
-                {rankIcon && rankIcon[0] && !isLocked && (
-                    <img src={rankIcon[0]?.src} className={`absolute top-[110px] left-0 z-20 h-[30px] w-[30px]`} />
-                )}
-                {shouldShowAbilities() && char && renderAbilities(char.activeAbilityLevel, char.passiveAbilityLevel)}
-                {shouldShowAbilities() && mow && renderAbilities(mow.primaryAbilityLevel, mow.secondaryAbilityLevel)}
-                {shouldShowXpLevel() && char && renderXpLevel(char.xpLevel)}
-                {starIcon && starIcon[0] && !isLocked && renderStars()}
-                {shouldShowShards() && renderShards(char?.shards ?? mow?.shards ?? 0)}
-                {shouldShowMythicShards() && renderMythicShards(char?.mythicShards ?? mow?.mythicShards ?? 0)}
-                {shouldShowEquipment() && renderEquipment()}
+        <div
+            style={{ height: canvasHeight, width: canvasWidth }}
+            className={`relative origin-top-left transition-none`}>
+            <div className={grayscaleClass}>
+                <div className="absolute inset-0 h-[170px] w-[96px] origin-top-left">
+                    <img src={charIcon} className={`absolute top-[17px] left-[3px] h-[120px] w-[90px]`} />
+                    <img src={frame[0]?.src} className="absolute top-[14px] z-10 h-[126px] w-[96px]" />
+                    {rankIcon && rankIcon[0] && char !== undefined && !isLocked && (
+                        <img src={rankIcon[0]?.src} className={`absolute top-[110px] left-0 z-20 h-[30px] w-[30px]`} />
+                    )}
+                    {shouldShowAbilities() &&
+                        char &&
+                        renderAbilities(
+                            charData?.activeAbilityName ?? '',
+                            charData?.passiveAbilityName ?? '',
+                            char.activeAbilityLevel,
+                            char.passiveAbilityLevel
+                        )}
+                    {shouldShowAbilities() &&
+                        mow &&
+                        renderAbilities(
+                            MowsService.resolveToStatic(mow.id)?.primaryAbility.name ?? mow.id + '-primary',
+                            MowsService.resolveToStatic(mow.id)?.secondaryAbility.name ?? mow.id + '-secondary',
+                            mow.primaryAbilityLevel,
+                            mow.secondaryAbilityLevel
+                        )}
+                    {shouldShowXpLevel() && char && renderXpLevel(char.xpLevel)}
+                    {starIcon && starIcon[0] && !isLocked && renderStars()}
+                    {shouldShowShards() && renderShards(char?.shards ?? mow?.shards ?? 0)}
+                    {shouldShowMythicShards() && renderMythicShards(char?.mythicShards ?? mow?.mythicShards ?? 0)}
+                    {shouldShowEquipment() && renderEquipment()}
+                </div>
             </div>
         </div>
     );

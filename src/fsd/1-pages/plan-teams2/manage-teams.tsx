@@ -5,11 +5,11 @@ import {
     Add as AddIcon,
     Edit as EditIcon,
     DeleteOutline as DeleteIcon,
+    Diversity3 as DiversityIcon,
     MilitaryTech, // War
     Shield, // Defense
     Groups, // Guild Raid
     WorkspacePremium, // Tournament
-    Layers, // Battlefield
 } from '@mui/icons-material';
 import { IconButton, Tooltip, Paper, Stack, Chip, ButtonBase, Typography } from '@mui/material';
 import { cloneDeep } from 'lodash';
@@ -58,7 +58,9 @@ export const ManageTeams = () => {
     const [maxRank, setMaxRank] = useState<Rank>(Rank.Adamantine3);
     const [minRarity, setMinRarity] = useState<Rarity>(Rarity.Common);
     const [maxRarity, setMaxRarity] = useState<Rarity>(Rarity.Mythic);
+    const [rarityCap, setRarityCap] = useState<Rarity>(Rarity.Mythic);
     const [factions, setFactions] = useState<FactionId[]>([]);
+    const [allowLockedUnits, setAllowLockedUnits] = useState<boolean>(true);
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, setSelectedChars] = useState<string[]>([]);
     const [selectedMows, setSelectedMows] = useState<string[]>([]);
@@ -78,8 +80,8 @@ export const ManageTeams = () => {
     const [warDefenseSelected, setWarDefenseSelected] = useState<boolean>(false);
     const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
     const [tournamentArenaSelected, setTournamentArenaSelected] = useState<boolean>(false);
+    const [hordeModeSelected, setHordeModeSelected] = useState<boolean>(false);
     const [teamName, setTeamName] = useState<string>('');
-    const [battleFieldLevels, setBattleFieldLevels] = useState<boolean[]>([true, true, true, true, true, true]);
     const [resolvedChars, setResolvedChars] = useState<ICharacter2[]>([]);
     const [resolvedMows, setResolvedMows] = useState<IMow2[]>([]);
 
@@ -137,18 +139,10 @@ export const ManageTeams = () => {
 
         if (
             !guildRaidSelected &&
-            (!nonRaidModesEnabled || (!warOffenseSelected && !warDefenseSelected && !tournamentArenaSelected))
+            (!nonRaidModesEnabled ||
+                (!warOffenseSelected && !warDefenseSelected && !tournamentArenaSelected && !hordeModeSelected))
         ) {
             setSaveDisallowedMessage('Select at least one game mode.');
-            setSaveAllowed(false);
-            return;
-        }
-        if (
-            nonRaidModesEnabled &&
-            (warOffenseSelected || warDefenseSelected) &&
-            !battleFieldLevels.some(level => level)
-        ) {
-            setSaveDisallowedMessage('Select at least one Battlefield Level.');
             setSaveAllowed(false);
             return;
         }
@@ -160,7 +154,7 @@ export const ManageTeams = () => {
         warDefenseSelected,
         guildRaidSelected,
         tournamentArenaSelected,
-        battleFieldLevels,
+        hordeModeSelected,
         notes,
         selectedChars,
         selectedMows,
@@ -190,7 +184,8 @@ export const ManageTeams = () => {
         setWarDefenseSelected(!!team.warDefense);
         setGuildRaidSelected(!!team.raid);
         setTournamentArenaSelected(!!team.ta);
-        setBattleFieldLevels(team.bfs || [true, true, true, true, true, true]);
+        setHordeModeSelected(!!team.horde);
+        setRarityCap(Rarity.Mythic);
     };
 
     const onDelete = (team: ITeam2) => {
@@ -208,7 +203,7 @@ export const ManageTeams = () => {
             team.warDefense = warDefenseSelected ? true : undefined;
             team.raid = guildRaidSelected ? true : undefined;
             team.ta = tournamentArenaSelected ? true : undefined;
-            team.bfs = team.warOffense || team.warDefense ? battleFieldLevels : undefined;
+            team.horde = hordeModeSelected ? true : undefined;
             team.notes = notes;
             team.flexIndex = flexIndex;
             const curTeams = [...teams];
@@ -227,8 +222,8 @@ export const ManageTeams = () => {
                 warDefense: warDefenseSelected ? true : undefined,
                 raid: guildRaidSelected ? true : undefined,
                 ta: tournamentArenaSelected ? true : undefined,
+                horde: hordeModeSelected ? true : undefined,
                 notes: notes,
-                bfs: warOffenseSelected || warDefenseSelected ? battleFieldLevels : undefined,
             };
             dispatch.teams2({ type: 'Set', value: [...teams, newTeam] });
         }
@@ -276,9 +271,11 @@ export const ManageTeams = () => {
                 selectedChars={selectedChars}
                 selectedMows={selectedMows}
                 flexIndex={flexIndex}
+                allowLockedUnits={allowLockedUnits}
                 searchText={searchText}
                 minRarity={minRarity}
                 maxRarity={maxRarity}
+                rarityCap={rarityCap}
                 minRank={minRank}
                 maxRank={maxRank}
                 factions={factions}
@@ -289,12 +286,14 @@ export const ManageTeams = () => {
                 onAddMow={onAddMow}
                 onCharClicked={onCharClicked}
                 onMowClicked={onMowClicked}
+                onAllowLockedUnitsChange={setAllowLockedUnits}
                 onSearchTextChange={setSearchText}
                 onMinRarityChange={setMinRarity}
                 onMaxRarityChange={setMaxRarity}
                 onMinRankChange={setMinRank}
                 onMaxRankChange={setMaxRank}
                 onFactionsChange={setFactions}
+                onRarityCapChanged={setRarityCap}
                 saveAllowed={saveAllowed}
                 saveDisallowedMessage={saveDisallowedMessage}
                 warDisallowedMessage={warDisallowedMessage}
@@ -303,14 +302,14 @@ export const ManageTeams = () => {
                 warDefenseSelected={warDefenseSelected}
                 guildRaidSelected={guildRaidSelected}
                 tournamentArenaSelected={tournamentArenaSelected}
+                hordeModeSelected={hordeModeSelected}
                 teamName={teamName}
-                battleFieldLevels={battleFieldLevels}
                 onWarOffenseChanged={setWarOffenseSelected}
                 onWarDefenseChanged={setWarDefenseSelected}
                 onGuildRaidChanged={setGuildRaidSelected}
                 onTournamentArenaChanged={setTournamentArenaSelected}
+                onHordeModeChanged={setHordeModeSelected}
                 onTeamNameChanged={setTeamName}
-                onBattleFieldLevelsChanged={setBattleFieldLevels}
                 onNotesChanged={setNotes}
                 onCancel={() => setAddTeamDialogOpen(false)}
                 onSave={onSave}
@@ -392,18 +391,8 @@ export const ManageTeams = () => {
                                 color="success"
                             />
                         )}
-
-                        {team.bfs !== undefined && (!!team.warOffense || !!team.warDefense) && (
-                            <div className="flex items-center gap-1 rounded border border-slate-200 bg-slate-100 px-2 py-0.5 dark:border-slate-700 dark:bg-slate-800">
-                                <Layers className="text-slate-500" sx={{ fontSize: 14 }} />
-                                <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400">
-                                    {team.bfs
-                                        .map((active: boolean, i: number) => (active ? i + 1 : null))
-                                        .filter(Boolean)
-                                        .map(num => `BF${num!.toString()}`)
-                                        .join(', ')}
-                                </span>
-                            </div>
+                        {!!team.horde && (
+                            <MetadataChip icon={<DiversityIcon fontSize="inherit" />} label="Horde" color="error" />
                         )}
                     </div>
                     {team.notes && team.notes.trim().length > 0 && (
@@ -434,6 +423,18 @@ export const ManageTeams = () => {
                             onCharClicked={() => {}}
                             onMowClicked={() => {}}
                             sizeMod={sizeMod}
+                            disabledUnits={[
+                                ...team.chars.map(
+                                    char =>
+                                        resolvedChars.find(x => x.snowprintId === char && x.rank === Rank.Locked)
+                                            ?.snowprintId
+                                ),
+                                ...(team.mows?.map(
+                                    mow => resolvedMows.find(x => x.snowprintId === mow && !x.unlocked)?.snowprintId
+                                ) ?? []),
+                            ]
+                                .flatMap(id => (id ? [id] : []))
+                                .filter(id => id !== undefined)}
                         />
                     </div>
                 </Paper>

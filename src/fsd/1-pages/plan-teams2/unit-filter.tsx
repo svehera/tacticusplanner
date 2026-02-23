@@ -1,11 +1,9 @@
-import { MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material';
 import React from 'react';
 
 import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
-import { RaritySelect } from '@/fsd/5-shared/ui';
-
-import { RankSelect } from '@/fsd/4-entities/character';
-import { FactionImage } from '@/fsd/4-entities/faction';
+import { FactionSelect2 } from '@/fsd/5-shared/ui/faction-select2';
+import { RankSelect2 } from '@/fsd/5-shared/ui/rank-select2';
+import { RaritySelect2 } from '@/fsd/5-shared/ui/rarity-select2';
 
 const RARITIES = [Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Legendary, Rarity.Mythic];
 
@@ -30,20 +28,6 @@ const RANKS = [
     Rank.Adamantine3,
 ];
 
-interface FilterGroupProps {
-    label: string;
-    children: React.ReactNode;
-}
-
-const FilterGroup: React.FC<FilterGroupProps> = ({ label, children }) => (
-    <div className="flex flex-wrap items-center gap-1">
-        <label className="text-[10px] font-bold tracking-wider text-slate-500 uppercase dark:text-slate-400">
-            {label}
-        </label>
-        <div className="flex flex-wrap items-center justify-center gap-2">{children}</div>
-    </div>
-);
-
 interface Props {
     searchText: string;
     minRarity: Rarity;
@@ -52,12 +36,14 @@ interface Props {
     maxRank: Rank;
     factions: FactionId[];
     allFactions: FactionId[];
+    allowLockedUnits: boolean;
     onSearchTextChange: (text: string) => void;
     onMinRarityChange: (rarity: Rarity) => void;
     onMaxRarityChange: (rarity: Rarity) => void;
     onMinRankChange: (rank: Rank) => void;
     onMaxRankChange: (rank: Rank) => void;
     onFactionsChange: (factions: FactionId[]) => void;
+    onAllowLockedUnitsChange: (allow: boolean) => void;
 }
 
 export const UnitFilter: React.FC<Props> = ({
@@ -68,23 +54,17 @@ export const UnitFilter: React.FC<Props> = ({
     maxRank,
     factions,
     allFactions,
+    allowLockedUnits,
     onSearchTextChange,
     onMinRarityChange,
     onMaxRarityChange,
     onMinRankChange,
     onMaxRankChange,
     onFactionsChange,
+    onAllowLockedUnitsChange,
 }) => {
-    const handleFactionChange = (event: SelectChangeEvent<FactionId[]>) => {
-        if (event.target.value === undefined) {
-            onFactionsChange([]);
-            return;
-        }
-        if (event.target.value === 'All') {
-            onFactionsChange([]);
-            return;
-        }
-        onFactionsChange(event.target.value as FactionId[]);
+    const handleFactionChange = (value: FactionId[]) => {
+        onFactionsChange(value);
     };
 
     const handleResetAllFilters = () => {
@@ -94,82 +74,106 @@ export const UnitFilter: React.FC<Props> = ({
         onMinRankChange(Rank.Stone1);
         onMaxRankChange(Rank.Adamantine3);
         onFactionsChange([]);
+        onAllowLockedUnitsChange(true);
     };
 
     return (
-        <header className="flex flex-wrap items-center gap-4 rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-[#161b22]">
-            <FilterGroup label="Search Unit">
-                <div className="relative">
+        <header className="rounded-xl border border-slate-200 bg-white p-4 md:p-6 dark:border-slate-800 dark:bg-[#161b22]">
+            <div className="grid grid-cols-1 gap-6">
+                {/* ALLOW LOCKED UNITS */}
+                <div className="flex items-center gap-2">
+                    <input
+                        id="allow-locked-units"
+                        type="checkbox"
+                        checked={allowLockedUnits}
+                        onChange={e => onAllowLockedUnitsChange(e.target.checked)}
+                        className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 dark:border-slate-700"
+                    />
+                    <label
+                        htmlFor="allow-locked-units"
+                        className="text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                        Allow Locked Units
+                    </label>
+                </div>
+                {/* SEARCH */}
+                <div>
+                    <label className="mb-2 block text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                        Search Unit
+                    </label>
                     <input
                         type="text"
                         placeholder="e.g. Bellator..."
                         value={searchText}
                         onChange={e => onSearchTextChange(e.target.value)}
-                        className="w-full rounded border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 md:w-64 dark:border-slate-700 dark:bg-[#0d1117] dark:text-slate-100"
+                        className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-[#0d1117] dark:text-slate-100"
                     />
                 </div>
-            </FilterGroup>
-            <FilterGroup label="Rarity">
-                <div className="min-w-[180px]">
-                    <RaritySelect
-                        label="Min"
-                        rarityValues={RARITIES}
-                        value={minRarity}
-                        valueChanges={onMinRarityChange}
-                    />
-                </div>
-                <div className="min-w-[180px]">
-                    <RaritySelect
-                        label="Max"
-                        rarityValues={RARITIES}
-                        value={maxRarity}
-                        valueChanges={onMaxRarityChange}
-                    />
-                </div>
-            </FilterGroup>
-            <FilterGroup label="Rank">
-                <div className="min-w-[210px]">
-                    <RankSelect label="Min" rankValues={RANKS} value={minRank} valueChanges={onMinRankChange} />
-                </div>
-                <div className="min-w-[210px]">
-                    <RankSelect label="Max" rankValues={RANKS} value={maxRank} valueChanges={onMaxRankChange} />
-                </div>
-            </FilterGroup>
-            <FilterGroup label="Factions">
-                <Select<FactionId[]>
-                    labelId="faction-select-label"
-                    multiple
-                    value={factions}
-                    onChange={handleFactionChange}
-                    input={<OutlinedInput label="Factions" />}
-                    className="min-w-[200px]"
-                    renderValue={selected => {
-                        if (selected.length === 0) {
-                            return <em style={{ color: '#94a3b8' }}>All Factions</em>;
-                        }
-                        return (
-                            <div className="flex flex-wrap gap-1">
-                                {selected.map(value => (
-                                    <FactionImage key={'shown-faction-' + value} faction={value} />
-                                ))}
-                            </div>
-                        );
-                    }}>
-                    {allFactions.map(faction => (
-                        <MenuItem key={faction} value={faction}>
-                            <div className="flex items-center gap-[15px]">
-                                <span>{faction}</span>
-                                <FactionImage faction={faction} />
-                            </div>
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FilterGroup>
 
-            <div className="flex flex-col items-center">
-                <div className="ml-auto self-end">
+                {/* RARITY + RANK */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    {/* RARITY */}
+                    <div>
+                        <label className="mb-2 block text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                            Rarity
+                        </label>
+
+                        <div className="grid grid-cols-2 gap-3">
+                            <RaritySelect2
+                                label="Min"
+                                rarityValues={RARITIES}
+                                value={minRarity}
+                                valueChanges={onMinRarityChange}
+                            />
+                            <RaritySelect2
+                                label="Max"
+                                rarityValues={RARITIES}
+                                value={maxRarity}
+                                valueChanges={onMaxRarityChange}
+                            />
+                        </div>
+                    </div>
+
+                    {/* RANK */}
+                    <div>
+                        <label className="mb-2 block text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                            Rank
+                        </label>
+
+                        <div className="grid grid-cols-2 gap-3">
+                            <RankSelect2
+                                label="Min"
+                                rankValues={RANKS}
+                                value={minRank}
+                                valueChanges={onMinRankChange}
+                            />
+                            <RankSelect2
+                                label="Max"
+                                rankValues={RANKS}
+                                value={maxRank}
+                                valueChanges={onMaxRankChange}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* FACTIONS */}
+                <div>
+                    <label className="mb-2 block text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                        Factions
+                    </label>
+
+                    <FactionSelect2
+                        label=""
+                        value={factions}
+                        factionValues={allFactions}
+                        valueChanges={handleFactionChange}
+                    />
+                </div>
+
+                {/* RESET BUTTON */}
+                <div className="flex justify-end pt-2">
                     <button
-                        className="rounded bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700"
+                        className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
                         onClick={handleResetAllFilters}>
                         Reset All Filters
                     </button>

@@ -1,4 +1,6 @@
-﻿import InfoIcon from '@mui/icons-material/Info';
+﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardActions, CardContent, CardHeader, Input } from '@mui/material';
 import Button from '@mui/material/Button';
 import { groupBy, mapValues, orderBy, sum } from 'lodash';
@@ -6,47 +8,32 @@ import React, { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacter2 } from 'src/models/interfaces';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional, FlexBox } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { CharactersService as CharacterEntityService } from '@/fsd/4-entities/character';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersService } from '@/fsd/3-features/characters/characters.service';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { PotentialInfo } from '@/fsd/3-features/characters/components/potential-info';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { SelectTeamDialog } from '@/fsd/3-features/characters/components/select-team-dialog';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { Team } from '@/fsd/3-features/characters/components/team';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { useGetGuildRosters } from '@/fsd/3-features/guild/guild.endpoint';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuildWarOffensePlayer } from '@/fsd/3-features/guild/guild.models';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ViewGuildOffense } from '@/fsd/3-features/guild/view-guild-offense';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { BattlefieldInfo } from '@/fsd/3-features/guild-war/battlefield-info';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DeploymentStatus } from '@/fsd/3-features/guild-war/deployment-status';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuildWarTeamType, IGWTeamWithCharacters } from '@/fsd/3-features/guild-war/guild-war.models';
+
+import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 
 export const GuildWarOffense = () => {
     const { guild, guildWar, characters, viewPreferences } = useContext(StoreContext);
@@ -318,89 +305,95 @@ export const GuildWarOffense = () => {
                     showBadges: viewPreferences.showBadges,
                     showPower: viewPreferences.showPower,
                     showBsValue: viewPreferences.showBsValue,
+                    showEquipment: viewPreferences.showEquipment,
                     showCharacterLevel: viewPreferences.showCharacterLevel,
                     showCharacterRarity: viewPreferences.showCharacterRarity,
                     getOpacity: character => (guildWar.deployedCharacters.includes(character.name) ? 0.5 : 1),
                 }}>
-                <div className="flex-box gap10">
-                    <BattlefieldInfo />
-                    <Button
-                        variant={'contained'}
-                        component={Link}
-                        to={isMobile ? '/mobile/plan/guildWar/defense' : '/plan/guildWar/defense'}>
-                        Go to: Defense
-                    </Button>
-                    <DeploymentStatus charactersLeft={availableCharacters.length} onClearAll={clearDeployedCharacters}>
-                        <div className="flex-box gap-[3px]">
-                            <MiscIcon icon={'warToken'} />
-                            <Input
-                                value={guildWar.attackTokens}
-                                size="small"
-                                onChange={handleWarTokensChange}
-                                onFocus={event => event.target.select()}
-                                inputProps={{
-                                    step: 1,
-                                    min: 0,
-                                    max: 10,
-                                    type: 'number',
-                                    'aria-labelledby': 'input-slider',
-                                }}
+                <RosterSnapshotsAssetsProvider>
+                    <div className="flex-box gap10">
+                        <BattlefieldInfo />
+                        <Button
+                            variant={'contained'}
+                            component={Link}
+                            to={isMobile ? '/mobile/plan/guildWar/defense' : '/plan/guildWar/defense'}>
+                            Go to: Defense
+                        </Button>
+                        <DeploymentStatus
+                            charactersLeft={availableCharacters.length}
+                            onClearAll={clearDeployedCharacters}>
+                            <div className="flex-box gap-[3px]">
+                                <MiscIcon icon={'warToken'} />
+                                <Input
+                                    value={guildWar.attackTokens}
+                                    size="small"
+                                    onChange={handleWarTokensChange}
+                                    onFocus={event => event.target.select()}
+                                    inputProps={{
+                                        step: 1,
+                                        min: 0,
+                                        max: 10,
+                                        type: 'number',
+                                        'aria-labelledby': 'input-slider',
+                                    }}
+                                />
+                            </div>
+                            <div className="flex-box gap5">Rarity pools: {groupByRarityPools()}</div>
+                            <CharactersGrid
+                                onlyBlocked
+                                characters={orderBy(
+                                    characters,
+                                    [
+                                        character =>
+                                            CharactersService.calculateCharacterPotential(character, Rarity.Legendary),
+                                    ],
+                                    ['desc']
+                                )}
+                                blockedCharacters={guildWar.deployedCharacters}
+                                onAvailableCharacterClick={character => deployCharacter(character.name)}
+                                onLockedCharacterClick={character => withdrawCharacter(character.name)}
                             />
-                        </div>
-                        <div className="flex-box gap5">Rarity pools: {groupByRarityPools()}</div>
-                        <CharactersGrid
-                            onlyBlocked
-                            characters={orderBy(
-                                characters,
-                                [
-                                    character =>
-                                        CharactersService.calculateCharacterPotential(character, Rarity.Legendary),
-                                ],
-                                ['desc']
-                            )}
-                            blockedCharacters={guildWar.deployedCharacters}
-                            onAvailableCharacterClick={character => deployCharacter(character.name)}
-                            onLockedCharacterClick={character => withdrawCharacter(character.name)}
+                        </DeploymentStatus>
+
+                        <AccessibleTooltip title={'War tokens. Deploy/withdraw team to decrement/increment by 1'}>
+                            <div className="flex-box gap-[3px]">
+                                <MiscIcon icon={'warToken'} /> {guildWar.attackTokens}/10
+                            </div>
+                        </AccessibleTooltip>
+                    </div>
+                    {!!guild.members.length && <ViewGuildOffense guildWarPlayers={guildWarPlayers} loading={loading} />}
+                    <div className="flex-box gap5">Your teams: {getTeamsSlots}</div>
+                    <div className="flex-box gap5">
+                        Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}
+                        /100
+                        <PotentialInfo />
+                    </div>
+
+                    <FlexBox wrap={true} justifyContent={'center'} gap={30}>
+                        {renderTeams}
+                    </FlexBox>
+
+                    <Conditional condition={!!editedCharacter}>
+                        <CharacterItemDialog
+                            character={editedCharacter!}
+                            isOpen={openCharacterItemDialog}
+                            onClose={endEditCharacter}
                         />
-                    </DeploymentStatus>
+                    </Conditional>
 
-                    <AccessibleTooltip title={'War tokens. Deploy/withdraw team to decrement/increment by 1'}>
-                        <div className="flex-box gap-[3px]">
-                            <MiscIcon icon={'warToken'} /> {guildWar.attackTokens}/10
-                        </div>
-                    </AccessibleTooltip>
-                </div>
-                {!!guild.members.length && <ViewGuildOffense guildWarPlayers={guildWarPlayers} loading={loading} />}
-                <div className="flex-box gap5">Your teams: {getTeamsSlots}</div>
-                <div className="flex-box gap5">
-                    Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}/100
-                    <PotentialInfo />
-                </div>
-
-                <FlexBox wrap={true} justifyContent={'center'} gap={30}>
-                    {renderTeams}
-                </FlexBox>
-
-                <Conditional condition={!!editedCharacter}>
-                    <CharacterItemDialog
-                        character={editedCharacter!}
-                        isOpen={openCharacterItemDialog}
-                        onClose={endEditCharacter}
-                    />
-                </Conditional>
-
-                {editedTeam && (
-                    <SelectTeamDialog
-                        allowPropsEdit
-                        isOpen={openSelectTeamDialog}
-                        team={editedTeam.lineup}
-                        teamName={editedTeam.name}
-                        rarityCap={editedTeam.rarityCap}
-                        onClose={endEditTeam}
-                        characters={getCharactersWithPotential(editedTeam.rarityCap)}
-                        blockedCharacters={getBlockedCharacters(editedTeam.id)}
-                    />
-                )}
+                    {editedTeam && (
+                        <SelectTeamDialog
+                            allowPropsEdit
+                            isOpen={openSelectTeamDialog}
+                            team={editedTeam.lineup}
+                            teamName={editedTeam.name}
+                            rarityCap={editedTeam.rarityCap}
+                            onClose={endEditTeam}
+                            characters={getCharactersWithPotential(editedTeam.rarityCap)}
+                            blockedCharacters={getBlockedCharacters(editedTeam.id)}
+                        />
+                    )}
+                </RosterSnapshotsAssetsProvider>
             </CharactersViewContext.Provider>
         </div>
     );
@@ -415,7 +408,14 @@ const TeamCard: React.FC<{
     teamPotentialBreakdown: React.ReactElement;
 }> = ({ actions, team, teamPotential, teamPotentialBreakdown, onEdit, onCharacterClick }) => {
     return (
-        <Card variant="outlined" sx={{ maxWidth: 400, boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)' }}>
+        <Card
+            variant="outlined"
+            sx={{
+                minWidth: 524,
+                width: 'fit-content',
+                flexShrink: 0,
+                boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)',
+            }}>
             <CardHeader
                 title={
                     <FlexBox justifyContent={'space-between'}>

@@ -94,7 +94,11 @@ export const TeamFlow: React.FC<Props> = ({
                                     showMythicShards={RosterSnapshotShowVariableSettings.Never}
                                     showShards={RosterSnapshotShowVariableSettings.Never}
                                     showXpLevel={RosterSnapshotShowVariableSettings.Never}
-                                    showAbilities={RosterSnapshotShowVariableSettings.Always}
+                                    showAbilities={
+                                        disabledUnits?.includes(mow.snowprintId!)
+                                            ? RosterSnapshotShowVariableSettings.Never
+                                            : RosterSnapshotShowVariableSettings.Always
+                                    }
                                     showEquipment={RosterSnapshotShowVariableSettings.Always}
                                     showTooltip={false}
                                     mow={Teams2Service.convertMow(mow)}

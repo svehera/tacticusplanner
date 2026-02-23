@@ -102,6 +102,12 @@ export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
             value: viewPreferences.showCharacterRarity,
             disabled: false,
         },
+        {
+            label: 'Show equipment',
+            key: 'showEquipment',
+            value: viewPreferences.showEquipment ?? true,
+            disabled: false,
+        },
     ];
 
     const inventoryOptions: IViewOption[] = [

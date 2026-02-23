@@ -59,7 +59,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
                 variant="outlined"
                 sx={{
                     zoom: isMobile ? '80%' : '100%',
-                    width: withMow ? 500 : 450,
+                    width: withMow ? 600 : 550,
                     minHeight: 200,
                 }}>
                 <CardHeader
@@ -104,7 +104,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
                 variant="outlined"
                 sx={{
                     zoom: isMobile ? '80%' : '100%',
-                    width: withMow ? 500 : 450,
+                    width: withMow ? 550 : 550,
                     minHeight: 200,
                 }}>
                 <CardHeader

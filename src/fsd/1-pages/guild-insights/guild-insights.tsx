@@ -97,6 +97,7 @@ export const GuildInsights = () => {
                     showBadges: viewPreferences.showBadges,
                     showPower: viewPreferences.showPower,
                     showBsValue: viewPreferences.showBsValue,
+                    showEquipment: viewPreferences.showEquipment,
                     showCharacterLevel: viewPreferences.showCharacterLevel,
                     showCharacterRarity: viewPreferences.showCharacterRarity,
                 }}>

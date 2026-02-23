@@ -121,6 +121,8 @@ export class CharactersService {
             releaseRarity: rawData.ReleaseRarity,
             releaseDate: rawData.releaseDate,
             lre: rawData.lre,
+            activeAbilityName: rawData['Active Ability Names'][0] || '',
+            passiveAbilityName: rawData['Passive Ability Names'][0] || '',
         };
 
         if (rawData['Ranged Damage']) {

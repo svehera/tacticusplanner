@@ -1,18 +1,19 @@
-﻿import { Divider } from '@mui/material';
+﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+/* eslint-disable no-restricted-imports */
+import { Divider } from '@mui/material';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacter2 } from 'src/models/interfaces';
 
-// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMow2, IUnit } from '@/fsd/3-features/characters/characters.models';
-// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { CharacterTile } from '@/fsd/3-features/characters/components/character-tile';
-// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { EmptyTile } from '@/fsd/3-features/characters/components/empty-tile';
-// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { MowTile } from '@/fsd/3-features/characters/components/mow-tile';
+
+import { RosterSnapshotCharacter } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshot-character';
+import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots-service';
+
+import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';
 
 interface Props {
     characters: (ICharacter2 | undefined)[];
@@ -48,18 +49,31 @@ export const TeamView: React.FC<Props> = ({ characters, mow, withMow = false, on
     };
 
     return (
-        <div className="flex-box" style={{ zoom: isMobile ? '80%' : '100%' }}>
-            <div className="grid grid-cols-5 gap-x-0.5 gap-y-2">
+        <div className="flex-box" style={{ zoom: isMobile ? '50%' : '100%' }}>
+            <div className="grid grid-cols-[repeat(5,auto)] justify-items-center gap-x-2 gap-y-2">
                 {(() => {
                     const slotCount = Math.max(5, characters.length);
                     return Array.from({ length: slotCount }).map((_, index) => {
                         const character = characters[index];
                         return character ? (
-                            <CharacterTile
-                                key={character.id}
-                                character={character}
-                                onCharacterClick={onCharacterClick}
-                            />
+                            <div
+                                key={character.snowprintId!}
+                                onClick={() => onCharacterClick(character)}
+                                className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
+                                title={`Select ${character.name || 'Unit'}`}>
+                                <RosterSnapshotCharacter
+                                    key={character.id}
+                                    char={RosterSnapshotsService.snapshotCharacter(character)}
+                                    charData={character}
+                                    showShards={RosterSnapshotShowVariableSettings.Never}
+                                    showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                                    showAbilities={RosterSnapshotShowVariableSettings.Always}
+                                    showEquipment={RosterSnapshotShowVariableSettings.Always}
+                                    showTooltip={false}
+                                    showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                                    isDisabled={false}
+                                />
+                            </div>
                         ) : (
                             <EmptyTile key={`empty-${index}`} onClick={onEmptyCharacterClick} />
                         );
@@ -69,7 +83,28 @@ export const TeamView: React.FC<Props> = ({ characters, mow, withMow = false, on
             {withMow && (
                 <>
                     <Divider orientation="vertical" flexItem />
-                    {mow ? <MowTile mow={mow} onClick={onMowClick} /> : <EmptyTile isMow onClick={onEmptyMowClick} />}
+                    {mow ? (
+                        <div
+                            key={mow.snowprintId!}
+                            onClick={() => onMowClick(mow)}
+                            className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
+                            title={`Select ${mow.name || 'Unit'}`}>
+                            <RosterSnapshotCharacter
+                                key={mow.id}
+                                mow={RosterSnapshotsService.snapshotMachineOfWar(mow)}
+                                mowData={mow}
+                                showShards={RosterSnapshotShowVariableSettings.Never}
+                                showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                                showAbilities={RosterSnapshotShowVariableSettings.Always}
+                                showEquipment={RosterSnapshotShowVariableSettings.Always}
+                                showTooltip={false}
+                                showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                                isDisabled={false}
+                            />
+                        </div>
+                    ) : (
+                        <EmptyTile isMow onClick={onEmptyMowClick} />
+                    )}
                 </>
             )}
         </div>
