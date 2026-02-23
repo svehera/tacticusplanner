@@ -1,40 +1,31 @@
-﻿import Box from '@mui/material/Box';
+﻿/* eslint-disable import-x/no-internal-modules */
+/* eslint-disable boundaries/element-types */
+import Box from '@mui/material/Box';
 import { sum } from 'lodash';
 import { useContext, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GlobalState } from 'src/models/global-state';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { LoaderWithText, Conditional } from '@/fsd/5-shared/ui';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { CharactersPowerService, CharactersValueService } from '@/fsd/4-entities/unit';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMow2, IUnit } from '@/fsd/3-features/characters/characters.models';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersService } from '@/fsd/3-features/characters/characters.service';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { FactionsGrid } from '@/fsd/3-features/characters/components/factions-grid';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RosterHeader } from '@/fsd/3-features/characters/components/roster-header';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TeamGraph } from '@/fsd/3-features/characters/components/team-graph';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isCharactersView } from '@/fsd/3-features/characters/functions/is-characters-view';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isFactionsView } from '@/fsd/3-features/characters/functions/is-factions-view';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { useGetSharedRoster } from '@/fsd/3-features/share/share-roster.endpoints';
 import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
+
+import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 
 export const SharedRoster = () => {
     const { viewPreferences } = useContext(StoreContext);
@@ -90,29 +81,31 @@ export const SharedRoster = () => {
         <Box className="m-auto">
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             <h3 className="text-center">{sharedUser}'s Roster</h3>
-            <CharactersViewContext.Provider
-                value={{
-                    showAbilitiesLevel: viewPreferences.showAbilitiesLevel,
-                    showBadges: viewPreferences.showBadges,
-                    showPower: viewPreferences.showPower,
-                    showBsValue: viewPreferences.showBsValue,
-                    showEquipment: viewPreferences.showEquipment,
-                    showCharacterLevel: viewPreferences.showCharacterLevel,
-                    showCharacterRarity: viewPreferences.showCharacterRarity,
-                }}>
-                <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
-                    <TeamGraph units={charactersFiltered} />
-                </RosterHeader>
-                <CharactersViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
+            <RosterSnapshotsAssetsProvider>
+                <CharactersViewContext.Provider
+                    value={{
+                        showAbilitiesLevel: viewPreferences.showAbilitiesLevel,
+                        showBadges: viewPreferences.showBadges,
+                        showPower: viewPreferences.showPower,
+                        showBsValue: viewPreferences.showBsValue,
+                        showEquipment: viewPreferences.showEquipment,
+                        showCharacterLevel: viewPreferences.showCharacterLevel,
+                        showCharacterRarity: viewPreferences.showCharacterRarity,
+                    }}>
+                    <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
+                        <TeamGraph units={charactersFiltered} />
+                    </RosterHeader>
+                    <CharactersViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 
-                <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                    <FactionsGrid factions={factions} />
-                </Conditional>
+                    <Conditional condition={isFactionsView(viewControls.orderBy)}>
+                        <FactionsGrid factions={factions} />
+                    </Conditional>
 
-                <Conditional condition={isCharactersView(viewControls.orderBy)}>
-                    <CharactersGrid characters={characters} />
-                </Conditional>
-            </CharactersViewContext.Provider>
+                    <Conditional condition={isCharactersView(viewControls.orderBy)}>
+                        <CharactersGrid characters={characters} />
+                    </Conditional>
+                </CharactersViewContext.Provider>
+            </RosterSnapshotsAssetsProvider>
         </Box>
     );
 };
