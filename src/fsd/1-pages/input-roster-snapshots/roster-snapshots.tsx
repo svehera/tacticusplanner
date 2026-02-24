@@ -78,6 +78,7 @@ function getDisplay(
                                 showTooltip={true}
                                 char={'rank' in unit ? unit : undefined}
                                 mow={'rank' in unit ? undefined : unit}
+                                isEnabled={'rank' in unit ? unit.rank !== Rank.Locked : !unit.locked}
                             />
                         </RosterSnapshotsAssetsProvider>
                     </div>
