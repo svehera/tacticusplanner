@@ -212,7 +212,7 @@ export const RosterSnapshotCharacter = ({
                         }}
                     />
                 )}
-                <div className="absolute top-0 right-0 text-[13px] font-bold text-white">
+                <div className="absolute top-0 right-0 text-[16px] font-bold text-black dark:text-white">
                     {Math.min(11, Math.max(1, level ?? 1)).toString()}
                 </div>
             </div>
@@ -276,46 +276,19 @@ export const RosterSnapshotCharacter = ({
         );
     };
 
-    const AbilityBadge = ({
-        name,
-        val,
-        x,
-        y,
-    }: {
-        name: keyof typeof abilityIcons;
-        val: number;
-        x: number;
-        y: number;
-    }) => {
+    const AbilityBadge = ({ val, x, y, pos }: { val: number; x: number; y: number; pos: 'left' | 'right' }) => {
         const badgeRadius = 12;
         return (
             <>
                 <div
-                    className="absolute text-black shadow-md dark:text-white"
+                    className="absolute flex items-center justify-center rounded-[4px] border border-white bg-[#272424] text-white shadow-md"
                     style={{
-                        left: x - badgeRadius,
+                        left: x - badgeRadius - (pos === 'left' ? 4 : -2),
                         top: y - badgeRadius,
-                        width: badgeRadius * 2,
+                        width: badgeRadius * 2 + 2,
                         height: badgeRadius * 2,
                     }}>
-                    <img
-                        src={abilityIcons[name]?.file}
-                        className="absolute top-1 left-1"
-                        style={{ left: -1, top: -1, width: badgeRadius * 2, height: badgeRadius * 2 }}
-                    />
-                </div>
-                <div
-                    className="absolute text-black shadow-md dark:text-white"
-                    style={{
-                        left: x - 8,
-                        top: y - badgeRadius * 2 + 6,
-                        width: badgeRadius * 2,
-                        textAlign: 'right',
-                        fontSize: 11,
-                        fontWeight: 'bold',
-                        textShadow: '0 0 1px rgba(0, 0, 0, 0.8)',
-                    }}>
-                    {val}
+                    <span className="text-[18px] text-white">{val}</span>
                 </div>
             </>
         );
@@ -332,13 +305,13 @@ export const RosterSnapshotCharacter = ({
         const rightX = 78; // Right side of the 96px frame
 
         if (!(firstName in abilityIcons) || !(secondName in abilityIcons)) {
-            console.log('firstName secondName first second', firstName, secondName, first, second);
+            console.error('Unknown abilities: firstName secondName first second', firstName, secondName, first, second);
         }
 
         return (
             <>
-                <AbilityBadge name={firstName} val={first} x={leftX} y={yPos} />
-                <AbilityBadge name={secondName} val={second} x={rightX} y={yPos} />
+                <AbilityBadge val={first} x={leftX} y={yPos} pos="left" />
+                <AbilityBadge val={second} x={rightX} y={yPos} pos="right" />
             </>
         );
     };
@@ -437,7 +410,10 @@ export const RosterSnapshotCharacter = ({
                     <img src={charIcon} className={`absolute top-[17px] left-[3px] h-[120px] w-[90px]`} />
                     <img src={frame[0]?.src} className="absolute top-[14px] z-10 h-[126px] w-[96px]" />
                     {rankIcon && rankIcon[0] && char !== undefined && !isLocked && (
-                        <img src={rankIcon[0]?.src} className={`absolute top-[110px] left-0 z-20 h-[30px] w-[30px]`} />
+                        <img
+                            src={rankIcon[0]?.src}
+                            className={`absolute top-[100px] left-[-10px] z-20 h-[40px] w-auto`}
+                        />
                     )}
                     {shouldShowAbilities() &&
                         char &&
