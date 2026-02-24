@@ -224,7 +224,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                             }}
                         />
                     )}
-                    <div className="absolute top-0 right-0 text-[13px] font-bold text-white">
+                    <div className="absolute top-0 right-0 text-[15px] font-bold text-black dark:text-white">
                         {Math.min(11, Math.max(1, level ?? 1))}
                     </div>
                 </div>
@@ -277,13 +277,13 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
     };
 
     return (
-        <div className="flex flex-col gap-2 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg transition duration-300 hover:border-blue-500 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800">
-            <div className="flex h-28 w-82">
+        <div className="flex flex-col justify-start gap-2 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg transition duration-300 hover:border-blue-500 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800">
+            <div className="flex min-h-30 w-82 justify-start">
                 <div className="relative flex h-full w-18 flex-shrink-0 items-center justify-center bg-gray-100 p-1 dark:bg-gray-900">
                     {(staticChar || staticMow) && <CharacterPortraitImage icon={(staticChar || staticMow)!.icon} />}
                 </div>
 
-                <div className="flex flex-grow justify-between p-3 text-gray-900 dark:text-white">
+                <div className="flex flex-grow justify-start p-3 text-gray-900 dark:text-white">
                     <div className="justify-center space-y-1">
                         <ProgressionRow
                             diffFlag={rarityDiff}
@@ -306,19 +306,8 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
 
                     <div className="mx-2 w-px bg-gray-200 dark:bg-gray-700"></div>
 
-                    <div className="flex flex-col justify-center space-y-1 text-sm">
-                        <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-1">
-                            {/* Headers */}
-                            <div />
-                            <div />
-                            <div />
-                            <div />
-
-                            {/* Active/Primary Ability Row */}
-                            <div className="h-[18px]" />
-                            <div />
-                            <div />
-                            <div />
+                    <div className="flex flex-col items-start justify-start space-y-1 text-sm">
+                        <div className="grid grid-cols-[auto_auto_auto_auto] items-start gap-x-1">
                             <span
                                 className="w-6 text-right font-medium text-gray-600 dark:text-gray-400"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
@@ -451,7 +440,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                     </div>
                 </div>
             </div>
-            {shouldShowEquipment() && char && <div className="px-3 py-3">{renderEquipment()}</div>}
+            {shouldShowEquipment() && char && <div className="px-3">{renderEquipment()}</div>}
         </div>
     );
 };

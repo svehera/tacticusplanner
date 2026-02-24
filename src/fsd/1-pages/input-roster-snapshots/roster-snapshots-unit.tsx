@@ -16,6 +16,7 @@ interface Props {
     showTooltip: boolean;
     char?: ISnapshotCharacter;
     mow?: ISnapshotMachineOfWar;
+    isEnabled: boolean;
 }
 
 export const RosterSnapshotsUnit: React.FC<Props> = ({
@@ -27,6 +28,7 @@ export const RosterSnapshotsUnit: React.FC<Props> = ({
     char,
     mow,
     showTooltip,
+    isEnabled,
 }: Props) => {
     const staticChar = char ? CharactersService.resolveCharacter(char.id) : undefined;
     const staticMow = mow ? MowsService.resolveToStatic(mow.id) : undefined;
@@ -44,6 +46,7 @@ export const RosterSnapshotsUnit: React.FC<Props> = ({
                         showAbilities={showAbilities}
                         char={char}
                         charData={staticChar}
+                        isDisabled={!isEnabled}
                     />
                 )}
                 {mow !== undefined && staticMow !== undefined && (
@@ -56,6 +59,7 @@ export const RosterSnapshotsUnit: React.FC<Props> = ({
                         showAbilities={showAbilities}
                         mow={mow}
                         mowData={staticMow}
+                        isDisabled={!isEnabled}
                     />
                 )}
             </div>

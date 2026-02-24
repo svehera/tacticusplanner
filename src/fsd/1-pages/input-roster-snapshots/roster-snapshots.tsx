@@ -78,6 +78,7 @@ function getDisplay(
                                 showTooltip={true}
                                 char={'rank' in unit ? unit : undefined}
                                 mow={'rank' in unit ? undefined : unit}
+                                isEnabled={'rank' in unit ? unit.rank !== Rank.Locked : !unit.locked}
                             />
                         </RosterSnapshotsAssetsProvider>
                     </div>
@@ -143,8 +144,28 @@ function getDisplay(
         if (fullChar === undefined) return;
 
         if (diffChar !== undefined && baseChar !== undefined) {
-            const beforeChar = { ...fullChar, ...baseChar, level: baseChar.xpLevel, id: fullChar.id };
-            const afterChar = { ...fullChar, ...compareChar, level: compareChar.xpLevel, id: fullChar.id };
+            const beforeChar = {
+                ...fullChar,
+                ...baseChar,
+                level: baseChar.xpLevel,
+                id: fullChar.id,
+                equipment: [
+                    { id: baseChar.equip0?.id ?? '', level: baseChar.equip0Level ?? 0 },
+                    { id: baseChar.equip1?.id ?? '', level: baseChar.equip1Level ?? 0 },
+                    { id: baseChar.equip2?.id ?? '', level: baseChar.equip2Level ?? 0 },
+                ],
+            };
+            const afterChar = {
+                ...fullChar,
+                ...compareChar,
+                level: compareChar.xpLevel,
+                id: fullChar.id,
+                equipment: [
+                    { id: compareChar.equip0?.id ?? '', level: compareChar.equip0Level ?? 0 },
+                    { id: compareChar.equip1?.id ?? '', level: compareChar.equip1Level ?? 0 },
+                    { id: compareChar.equip2?.id ?? '', level: compareChar.equip2Level ?? 0 },
+                ],
+            };
             const powerBefore =
                 beforeChar.rank === Rank.Locked ? 0 : CharactersPowerService.getCharacterPower(beforeChar);
             const powerAfter = afterChar.rank === Rank.Locked ? 0 : CharactersPowerService.getCharacterPower(afterChar);
@@ -269,6 +290,7 @@ function getDisplay(
             showEquipment={showEquipment}
             showTooltip={true}
             char={unit}
+            isEnabled={unit.rank !== Rank.Locked}
         />
     ));
 
@@ -282,6 +304,7 @@ function getDisplay(
             showEquipment={showEquipment}
             showTooltip={true}
             mow={unit}
+            isEnabled={!unit.locked}
         />
     ));
 
@@ -293,8 +316,10 @@ function getDisplay(
                     {renderedMowDiffs}
                 </div>
                 <div style={{ zoom: sizeMod }} className="flex flex-wrap gap-5 p-4">
-                    {renderedChars}
-                    {renderedMows}
+                    {renderedChars.filter(char => char.props.isEnabled)}
+                    {renderedMows.filter(mow => mow.props.isEnabled)}
+                    {renderedChars.filter(char => !char.props.isEnabled)}
+                    {renderedMows.filter(mow => !mow.props.isEnabled)}
                 </div>
             </RosterSnapshotsAssetsProvider>
         </>
