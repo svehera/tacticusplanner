@@ -32,6 +32,7 @@ import { IUnit } from '@/fsd/4-entities/unit';
 import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
 import { CharactersXpService } from '@/fsd/3-features/characters/characters-xp.service';
 import { BadgesTotal } from '@/fsd/3-features/characters/components/badges-total';
+import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
 import {
     CharacterRaidGoalSelect,
     ICharacterUpgradeAbilities,
@@ -391,12 +392,17 @@ export const Goals = () => {
 
                     <AccordionDetails className="!bg-transparent !p-0">
                         <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-[var(--border)] bg-[var(--overlay)] p-2">
-                            <div className="flex items-center justify-start gap-x-4 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
-                                <MiscIcon icon={'energy'} height={35} width={35} />{' '}
-                                <b className="text-lg text-[var(--fg)]">{estimatedUpgradesTotal.energyTotal}</b>
+                            <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
+                                Energy
+                            </h4>
+                            <div className="flex items-center">
+                                <MiscIcon icon={'energy'} height={35} width={35} className="mr-2" />
+                                <div className="text-lg text-[var(--fg)]">{estimatedUpgradesTotal.energyTotal}</div>
                             </div>
-
                             <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
+                                    XP Books
+                                </h4>
                                 <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
                             </div>
 
@@ -416,10 +422,34 @@ export const Goals = () => {
                                 ))}
                             </div>
 
+                            <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
+                                    Orbs (BETA)
+                                </h4>
+
+                                {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
+                                    <div key={alliance} className="flex-box">
+                                        <OrbsTotal
+                                            orbs={adjustedGoalsEstimates.neededOrbs[alliance]}
+                                            alliance={alliance}
+                                            size={35}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
+                                    Forge Badges
+                                </h4>
+                            </div>
                             <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
                                 <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
                             </div>
-
+                            <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
+                                    MoW Components
+                                </h4>
+                            </div>
                             <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
                                 <MoWComponentsTotal
                                     components={adjustedGoalsEstimates.neededComponents}
