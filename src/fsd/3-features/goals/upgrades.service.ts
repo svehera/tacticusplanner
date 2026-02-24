@@ -1,6 +1,7 @@
-﻿import { cloneDeep, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
+﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+import { cloneDeep, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
 import {
     IDailyRaidsFarmOrder,
@@ -8,16 +9,13 @@ import {
     IEstimatedRanksSettings,
     ITrainingRushPreferences,
     ITrainingRushStrategy,
-    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from 'src/models/interfaces';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
-import { Alliance, Rank } from '@/fsd/5-shared/model';
+import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { CampaignsService, CampaignType, Campaign, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import {
     CharactersService,
@@ -25,8 +23,8 @@ import {
     ICharacterData,
     IUnitUpgradeRank,
 } from '@/fsd/4-entities/character';
-import { MowsService } from '@/fsd/4-entities/mow';
-// eslint-disable-next-line boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { ICharacter2, IUnitShards } from '@/fsd/4-entities/character/model';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 import {
     IBaseUpgrade,
@@ -34,10 +32,11 @@ import {
     IMaterial,
     UpgradesService as FsdUpgradesService,
 } from '@/fsd/4-entities/upgrade';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { recipeDataByName } from '@/fsd/4-entities/upgrade/data';
 
 import {
+    ICharacterAscendGoal,
+    ICharacterUnlockGoal,
     ICharacterUpgradeEstimate,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankEstimate,
@@ -48,8 +47,57 @@ import {
     IUnitUpgrade,
     IUpgradeRaid,
     IUpgradesRaidsDay,
-    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/3-features/goals/goals.models';
+
+const INITIAL_STARS_FOR_RARITY: Partial<Record<Rarity, RarityStars>> = {
+    [Rarity.Common]: RarityStars.None,
+    [Rarity.Uncommon]: RarityStars.TwoStars,
+    [Rarity.Rare]: RarityStars.FourStars,
+    [Rarity.Epic]: RarityStars.RedOneStar,
+    [Rarity.Legendary]: RarityStars.RedThreeStars,
+};
+
+const SHARDS_AT_RARITY_AND_STARS: Record<Rarity, Partial<Record<RarityStars, number>>> = {
+    [Rarity.Common]: {
+        [RarityStars.None]: 40,
+        [RarityStars.OneStar]: 50,
+        [RarityStars.TwoStars]: 65,
+    },
+    [Rarity.Uncommon]: {
+        [RarityStars.TwoStars]: 80,
+        [RarityStars.ThreeStars]: 95,
+        [RarityStars.FourStars]: 110,
+    },
+    [Rarity.Rare]: {
+        [RarityStars.FourStars]: 130,
+        [RarityStars.FiveStars]: 160,
+        [RarityStars.RedOneStar]: 200,
+    },
+    [Rarity.Epic]: {
+        [RarityStars.RedOneStar]: 250,
+        [RarityStars.RedTwoStars]: 315,
+        [RarityStars.RedThreeStars]: 400,
+    },
+    [Rarity.Legendary]: {
+        [RarityStars.RedThreeStars]: 500,
+        [RarityStars.RedFourStars]: 650,
+        [RarityStars.RedFiveStars]: 900,
+        [RarityStars.OneBlueStar]: 1400,
+    },
+    [Rarity.Mythic]: {
+        // Once at Mythic, you never need more normal shards.
+        [RarityStars.OneBlueStar]: 1400,
+        [RarityStars.TwoBlueStars]: 1400,
+        [RarityStars.ThreeBlueStars]: 1400,
+        [RarityStars.MythicWings]: 1400,
+    },
+};
+const MYTHIC_SHARDS_AT_RARITY_AND_STARS: Partial<Record<RarityStars, number>> = {
+    [RarityStars.OneBlueStar]: 20,
+    [RarityStars.TwoBlueStars]: 50,
+    [RarityStars.ThreeBlueStars]: 100,
+    [RarityStars.MythicWings]: 200,
+};
 
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
@@ -302,7 +350,7 @@ export class UpgradesService {
 
     static getUpgradesEstimatedDays(
         settings: IEstimatedRanksSettings,
-        ...goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
+        ...goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
     ): IEstimatedUpgrades {
         const inventoryUpgrades = this.canonicalizeInventoryUpgrades(cloneDeep(settings.upgrades));
 
@@ -600,6 +648,88 @@ export class UpgradesService {
         return { raidLocations, energySpent: totalEnergySpent };
     }
 
+    private static getCurrentShardsForGoal(rarityStart: Rarity, starsStart: RarityStars): number {
+        return SHARDS_AT_RARITY_AND_STARS[rarityStart][starsStart] ?? 0;
+    }
+
+    private static getCurrentMythicShardsForGoal(starsStart: RarityStars): number {
+        return MYTHIC_SHARDS_AT_RARITY_AND_STARS[starsStart] ?? 0;
+    }
+
+    private static getCurrentShards(
+        chars: ICharacter2[],
+        mows: IMow2[],
+        goal: ICharacterAscendGoal | ICharacterUnlockGoal
+    ): number {
+        const unit = chars.find(x => x.snowprintId === goal.unitId) || mows.find(x => x.snowprintId === goal.unitId);
+        const currentShards = unit ? (unit.shards ?? 0) : 0;
+        if (goal.type === PersonalGoalType.Unlock) {
+            return currentShards;
+        } else if (goal.type === PersonalGoalType.Ascend) {
+            const shardsAtStartOfGoal = this.getCurrentShardsForGoal(goal.rarityStart, goal.starsStart);
+            if (goal.rarityStart <= (unit?.rarity ?? 0) && goal.starsStart <= (unit?.stars ?? 0)) {
+                return currentShards + shardsAtStartOfGoal;
+            }
+            return shardsAtStartOfGoal;
+        }
+        throw new Error('Unsupported goal type: ' + goal);
+    }
+
+    private static getCurrentMythicShards(
+        chars: ICharacter2[],
+        mows: IMow2[],
+        goal: ICharacterAscendGoal | ICharacterUnlockGoal
+    ): number {
+        const unit = chars.find(x => x.snowprintId === goal.unitId) || mows.find(x => x.snowprintId === goal.unitId);
+        const currentMythicShards = unit ? (unit.mythicShards ?? 0) : 0;
+        if (goal.type === PersonalGoalType.Unlock) {
+            return 0;
+        } else if (goal.type === PersonalGoalType.Ascend) {
+            const mythicShardsAtStartOfGoal = this.getCurrentMythicShardsForGoal(goal.starsStart);
+            if (goal.starsStart <= (unit?.stars ?? 0)) {
+                return currentMythicShards + mythicShardsAtStartOfGoal;
+            }
+            return mythicShardsAtStartOfGoal;
+        } else {
+            throw new Error('Unsupported goal type: ' + goal);
+        }
+    }
+
+    private static getTotalShardsNeededForGoal(
+        chars: ICharacter2[],
+        _mows: IMow2[],
+        goal: ICharacterAscendGoal | ICharacterUnlockGoal
+    ): number {
+        const char = chars.find(x => x.snowprintId === goal.unitId);
+        if (goal.type === PersonalGoalType.Unlock) {
+            const rarity = char?.initialRarity ?? Rarity.Common; // MoWs always unlock at common.
+            const stars = INITIAL_STARS_FOR_RARITY[rarity] ?? RarityStars.None;
+            return SHARDS_AT_RARITY_AND_STARS[rarity]?.[stars] ?? 0;
+        }
+        return SHARDS_AT_RARITY_AND_STARS[goal.rarityEnd][goal.starsEnd] ?? 0;
+    }
+
+    private static getTotalMythicShardsNeededForGoal(goal: ICharacterAscendGoal | ICharacterUnlockGoal): number {
+        if (goal.type === PersonalGoalType.Unlock) return 0;
+        if (goal.rarityEnd < Rarity.Mythic) return 0;
+        return MYTHIC_SHARDS_AT_RARITY_AND_STARS[goal.starsEnd] ?? 0;
+    }
+
+    private static getShardsForGoal(
+        chars: ICharacter2[],
+        mows: IMow2[],
+        goal: ICharacterAscendGoal | ICharacterUnlockGoal
+    ): IUnitShards {
+        return {
+            shardName: `shards_${goal.unitId}`,
+            mythicShardName: `mythicShards_${goal.unitId}`,
+            shardsAcquired: this.getCurrentShards(chars, mows, goal),
+            totalShardsNeeded: this.getTotalShardsNeededForGoal(chars, mows, goal),
+            mythicShardsAcquired: this.getCurrentMythicShards(chars, mows, goal),
+            totalMythicShardsNeeded: this.getTotalMythicShardsNeededForGoal(goal),
+        };
+    }
+
     /**
      * Computes and returns a list of unit upgrades based on the provided inventory and goal definitions.
      *
@@ -613,15 +743,24 @@ export class UpgradesService {
      */
     public static getUpgrades(
         inventoryUpgrades: Record<string, number>,
-        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
+        chars: ICharacter2[],
+        mows: IMow2[],
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
     ): IUnitUpgrade[] {
         const result: IUnitUpgrade[] = [];
         const canonUpgrades = this.canonicalizeInventoryUpgrades(inventoryUpgrades);
         for (const goal of goals) {
-            const upgradeRanks =
-                goal.type === PersonalGoalType.UpgradeRank
-                    ? CharacterUpgradesService.getCharacterUpgradeRank(goal)
-                    : this.getMowUpgradeRank(goal);
+            const upgradeRanks = (() => {
+                switch (goal.type) {
+                    case PersonalGoalType.UpgradeRank:
+                        return CharacterUpgradesService.getCharacterUpgradeRank(goal);
+                    case PersonalGoalType.MowAbilities:
+                        return this.getMowUpgradeRank(goal);
+                    case PersonalGoalType.Ascend:
+                    case PersonalGoalType.Unlock:
+                        return UpgradesService.getShardsForGoal(chars, mows, goal);
+                }
+            })();
             const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(upgradeRanks, canonUpgrades);
 
             if (goal.upgradesRarity.length) {

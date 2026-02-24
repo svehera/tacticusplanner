@@ -119,6 +119,7 @@ export class GlobalState implements IGlobalState {
                 ? personalCharData.upgrades.filter(UpgradesService.isValidUpgrade)
                 : [];
 
+            console.log('chars: ', chars);
             const combinedData: IPersonalCharacterData2 = {
                 name: staticData.snowprintId!,
                 rank: rank,

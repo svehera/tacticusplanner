@@ -114,7 +114,7 @@ export const Goals = () => {
                 upgrades: inventory.upgrades,
                 completedLocations: [],
             },
-            ...upgradeRankOrMowGoals
+            ...[upgradeRankOrMowGoals, shardsGoals].flat()
         );
     }, [upgradeRankOrMowGoals, estimatedShardsTotal.energyPerDay]);
 
