@@ -289,6 +289,7 @@ function getDisplay(
             showEquipment={showEquipment}
             showTooltip={true}
             char={unit}
+            isEnabled={unit.rank !== Rank.Locked}
         />
     ));
 
@@ -302,6 +303,7 @@ function getDisplay(
             showEquipment={showEquipment}
             showTooltip={true}
             mow={unit}
+            isEnabled={!unit.locked}
         />
     ));
 
@@ -313,8 +315,10 @@ function getDisplay(
                     {renderedMowDiffs}
                 </div>
                 <div style={{ zoom: sizeMod }} className="flex flex-wrap gap-5 p-4">
-                    {renderedChars}
-                    {renderedMows}
+                    {renderedChars.filter(char => char.props.isEnabled)}
+                    {renderedMows.filter(mow => mow.props.isEnabled)}
+                    {renderedChars.filter(char => !char.props.isEnabled)}
+                    {renderedMows.filter(mow => !mow.props.isEnabled)}
                 </div>
             </RosterSnapshotsAssetsProvider>
         </>
