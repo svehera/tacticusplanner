@@ -276,45 +276,19 @@ export const RosterSnapshotCharacter = ({
         );
     };
 
-    const AbilityBadge = ({
-        name,
-        val,
-        x,
-        y,
-    }: {
-        name: keyof typeof abilityIcons;
-        val: number;
-        x: number;
-        y: number;
-    }) => {
+    const AbilityBadge = ({ val, x, y, pos }: { val: number; x: number; y: number; pos: 'left' | 'right' }) => {
         const badgeRadius = 12;
         return (
             <>
                 <div
-                    className="absolute text-black shadow-md dark:text-white"
+                    className="absolute flex items-center justify-center rounded-[4px] border border-white bg-[#272424] text-white shadow-md"
                     style={{
-                        left: x - badgeRadius - 2,
-                        top: y - badgeRadius + 6,
-                        width: badgeRadius * 2 - 8,
-                        height: badgeRadius * 2 - 8,
+                        left: x - badgeRadius - (pos === 'left' ? 4 : -2),
+                        top: y - badgeRadius,
+                        width: badgeRadius * 2 + 2,
+                        height: badgeRadius * 2,
                     }}>
-                    <img
-                        src={abilityIcons[name]?.file}
-                        className="absolute drop-shadow-[0_0_2px_black] dark:drop-shadow-[0_0_2px_white]"
-                        style={{
-                            width: badgeRadius * 2 - 6,
-                            height: badgeRadius * 2 - 6,
-                        }}
-                    />
-                </div>
-                <div
-                    className="justify-right absolute text-[13px] font-bold text-black shadow-md dark:text-white"
-                    style={{
-                        left: x,
-                        top: y - badgeRadius * 2 + 6,
-                        width: badgeRadius * 2,
-                    }}>
-                    {val}
+                    <span className="text-[18px] text-white">{val}</span>
                 </div>
             </>
         );
@@ -331,13 +305,13 @@ export const RosterSnapshotCharacter = ({
         const rightX = 78; // Right side of the 96px frame
 
         if (!(firstName in abilityIcons) || !(secondName in abilityIcons)) {
-            console.log('firstName secondName first second', firstName, secondName, first, second);
+            console.error('Unknown abilities: firstName secondName first second', firstName, secondName, first, second);
         }
 
         return (
             <>
-                <AbilityBadge name={firstName} val={first} x={leftX} y={yPos} />
-                <AbilityBadge name={secondName} val={second} x={rightX} y={yPos} />
+                <AbilityBadge val={first} x={leftX} y={yPos} pos="left" />
+                <AbilityBadge val={second} x={rightX} y={yPos} pos="right" />
             </>
         );
     };
