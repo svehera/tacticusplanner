@@ -224,7 +224,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                             }}
                         />
                     )}
-                    <div className="absolute top-0 right-0 text-[13px] font-bold text-white">
+                    <div className="absolute top-0 right-0 text-[15px] font-bold text-black dark:text-white">
                         {Math.min(11, Math.max(1, level ?? 1))}
                     </div>
                 </div>

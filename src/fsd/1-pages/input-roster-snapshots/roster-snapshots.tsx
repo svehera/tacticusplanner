@@ -143,8 +143,28 @@ function getDisplay(
         if (fullChar === undefined) return;
 
         if (diffChar !== undefined && baseChar !== undefined) {
-            const beforeChar = { ...fullChar, ...baseChar, level: baseChar.xpLevel, id: fullChar.id };
-            const afterChar = { ...fullChar, ...compareChar, level: compareChar.xpLevel, id: fullChar.id };
+            const beforeChar = {
+                ...fullChar,
+                ...baseChar,
+                level: baseChar.xpLevel,
+                id: fullChar.id,
+                equipment: [
+                    { id: baseChar.equip0?.id ?? '', level: baseChar.equip0Level ?? 0 },
+                    { id: baseChar.equip1?.id ?? '', level: baseChar.equip1Level ?? 0 },
+                    { id: baseChar.equip2?.id ?? '', level: baseChar.equip2Level ?? 0 },
+                ],
+            };
+            const afterChar = {
+                ...fullChar,
+                ...compareChar,
+                level: compareChar.xpLevel,
+                id: fullChar.id,
+                equipment: [
+                    { id: compareChar.equip0?.id ?? '', level: compareChar.equip0Level ?? 0 },
+                    { id: compareChar.equip1?.id ?? '', level: compareChar.equip1Level ?? 0 },
+                    { id: compareChar.equip2?.id ?? '', level: compareChar.equip2Level ?? 0 },
+                ],
+            };
             const powerBefore =
                 beforeChar.rank === Rank.Locked ? 0 : CharactersPowerService.getCharacterPower(beforeChar);
             const powerAfter = afterChar.rank === Rank.Locked ? 0 : CharactersPowerService.getCharacterPower(afterChar);

@@ -212,7 +212,7 @@ export const RosterSnapshotCharacter = ({
                         }}
                     />
                 )}
-                <div className="absolute top-0 right-0 text-[13px] font-bold text-white">
+                <div className="absolute top-0 right-0 text-[16px] font-bold text-black dark:text-white">
                     {Math.min(11, Math.max(1, level ?? 1)).toString()}
                 </div>
             </div>
@@ -293,27 +293,26 @@ export const RosterSnapshotCharacter = ({
                 <div
                     className="absolute text-black shadow-md dark:text-white"
                     style={{
-                        left: x - badgeRadius,
-                        top: y - badgeRadius,
-                        width: badgeRadius * 2,
-                        height: badgeRadius * 2,
+                        left: x - badgeRadius - 2,
+                        top: y - badgeRadius + 6,
+                        width: badgeRadius * 2 - 8,
+                        height: badgeRadius * 2 - 8,
                     }}>
                     <img
                         src={abilityIcons[name]?.file}
-                        className="absolute top-1 left-1"
-                        style={{ left: -1, top: -1, width: badgeRadius * 2, height: badgeRadius * 2 }}
+                        className="absolute drop-shadow-[0_0_2px_black] dark:drop-shadow-[0_0_2px_white]"
+                        style={{
+                            width: badgeRadius * 2 - 6,
+                            height: badgeRadius * 2 - 6,
+                        }}
                     />
                 </div>
                 <div
-                    className="absolute text-black shadow-md dark:text-white"
+                    className="justify-right absolute text-[13px] font-bold text-black shadow-md dark:text-white"
                     style={{
-                        left: x - 8,
+                        left: x,
                         top: y - badgeRadius * 2 + 6,
                         width: badgeRadius * 2,
-                        textAlign: 'right',
-                        fontSize: 11,
-                        fontWeight: 'bold',
-                        textShadow: '0 0 1px rgba(0, 0, 0, 0.8)',
                     }}>
                     {val}
                 </div>
