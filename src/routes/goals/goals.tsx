@@ -420,21 +420,17 @@ export const Goals = () => {
                                     </div>
                                 ))}
                             </div>
-
                             <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
                                 <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
                                     Forge Badges
                                 </h4>
-                            </div>
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
                                 <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
                             </div>
+
                             <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
                                 <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
                                     MoW Components
                                 </h4>
-                            </div>
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
                                 <MoWComponentsTotal
                                     components={adjustedGoalsEstimates.neededComponents}
                                     size={'medium'}
