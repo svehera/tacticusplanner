@@ -144,6 +144,10 @@ export class RosterSnapshotsService {
         return RarityStars.None;
     }
 
+    /**
+     * Some old snapshots had things like abilities at level 0 or rarity/stars that didn't make
+     * sense. This function is a band aid to sanitize those diffs.
+     */
     public static fixSnapshot(snapshot: IRosterSnapshot): IRosterSnapshot {
         const ret = cloneDeep(snapshot);
         for (const char of ret.chars) {
