@@ -38,6 +38,7 @@ interface RevisedGoals {
     neededForgeBadges: Record<Rarity, number>;
     neededComponents: Record<Alliance, number>;
     neededXp: number;
+    neededOrbs: Record<Alliance, Record<Rarity, number>>;
 }
 
 export interface IXpLevel {
@@ -483,6 +484,12 @@ export class GoalsService {
             [Alliance.Xenos]: createRarityRecord(),
         };
 
+        const neededOrbs: Record<Alliance, Record<Rarity, number>> = {
+            [Alliance.Chaos]: createRarityRecord(),
+            [Alliance.Imperial]: createRarityRecord(),
+            [Alliance.Xenos]: createRarityRecord(),
+        };
+
         const neededForgeBadges: Record<Rarity, number> = createRarityRecord();
         const neededComponents: Record<Alliance, number> = {
             [Alliance.Chaos]: 0,
@@ -490,6 +497,7 @@ export class GoalsService {
             [Alliance.Xenos]: 0,
         };
         const heldBadges = cloneDeep(inventory.abilityBadges);
+        const heldOrbs = cloneDeep(inventory.orbs);
         const heldForgeBadges = cloneDeep(inventory.forgeBadges);
         const heldComponents = cloneDeep(inventory.components);
 
@@ -574,6 +582,26 @@ export class GoalsService {
                     }
                 }
 
+                // TODO: Refactor to process orbs as part of Ascend goals
+                const orbs = goal.abilitiesEstimate?.badges ?? goal.abilitiesEstimate!.badges;
+                for (const [rarityStr, count] of Object.entries(orbs)) {
+                    const rarity = Number(rarityStr) as Rarity;
+                    const alliance =
+                        goal.abilitiesEstimate?.alliance ??
+                        GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
+                    if (!neededOrbs[alliance][rarity]) {
+                        neededOrbs[alliance][rarity] = 0;
+                    }
+                    if (heldOrbs[alliance][rarity]) {
+                        const toRemove = Math.min(heldOrbs[alliance][rarity], count);
+                        heldOrbs[alliance][rarity] -= toRemove;
+                        neededOrbs[alliance][rarity] += count - toRemove;
+                        orbs[rarity] = count - toRemove;
+                    } else {
+                        neededOrbs[alliance][rarity] += count;
+                    }
+                }
+
                 if (goal.mowEstimate === undefined) continue;
                 (Object.keys(goal.mowEstimate.forgeBadges) as unknown as Rarity[]).forEach(rarity => {
                     const count = goal.mowEstimate!.forgeBadges[rarity] ?? 0;
@@ -606,6 +634,7 @@ export class GoalsService {
             neededComponents,
             goalEstimates: newGoalsEstimates,
             neededXp: totalXpNeeded,
+            neededOrbs,
         };
     }
 }
