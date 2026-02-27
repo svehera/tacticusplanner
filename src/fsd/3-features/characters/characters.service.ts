@@ -111,7 +111,14 @@ export class CharactersService {
             case CharactersOrderBy.Rarity:
                 return orderBy(units, ['rarity', 'stars'], ['desc', 'desc']);
             case CharactersOrderBy.Shards:
-                return orderBy(units, ['shards', 'rarity', 'stars'], ['desc', 'desc', 'desc']);
+                return orderBy(
+                    units.map(x => ({
+                        ...x,
+                        effectiveShards: this.getEffectiveShards(x),
+                    })),
+                    ['effectiveShards', 'rarity', 'stars'],
+                    ['desc', 'desc', 'desc']
+                );
             case CharactersOrderBy.UnlockPercentage:
                 return orderBy(
                     units,
@@ -137,6 +144,23 @@ export class CharactersService {
         } else {
             return unit.primaryAbilityLevel + unit.secondaryAbilityLevel;
         }
+    }
+
+    /**
+     * Returns an effective shard count for sorting purposes.
+     * Blue star and mythic characters have consumed their normal shards through ascension,
+     * so their `shards` field is low. To sort them at the top, we treat them as having
+     * max normal shards plus their mythic shards.
+     */
+    private static getEffectiveShards(unit: IUnit): number {
+        const isBlueStarOrAbove =
+            (unit.rarity === Rarity.Legendary && unit.stars >= RarityStars.OneBlueStar) || unit.rarity >= Rarity.Mythic;
+
+        if (isBlueStarOrAbove) {
+            return charsUnlockShards[Rarity.Mythic] + unit.shards + unit.mythicShards;
+        }
+
+        return unit.shards;
     }
 
     static orderByFaction(
