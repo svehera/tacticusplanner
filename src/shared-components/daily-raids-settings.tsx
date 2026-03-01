@@ -1,5 +1,4 @@
-﻿import { Warning } from '@mui/icons-material';
-import InfoIcon from '@mui/icons-material/Info';
+﻿import InfoIcon from '@mui/icons-material/Info';
 import {
     DialogActions,
     DialogContent,
@@ -501,24 +500,6 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     value={DailyRaidsStrategy.leastEnergy}
                                     control={<Radio />}
                                     label="Least energy"
-                                />
-                                <FormControlLabel
-                                    value={DailyRaidsStrategy.leastTime}
-                                    disabled={
-                                        dailyRaidsPreferencesForm.farmPreferences.order !==
-                                        IDailyRaidsFarmOrder.totalMaterials
-                                    }
-                                    control={<Radio />}
-                                    label={
-                                        <AccessibleTooltip
-                                            title="Experimental/unstable feature.
-                                Please report any issues you have while using this feature in the Discord.
-                                It doesn't work yet with 'By goals priority'.">
-                                            <div className="flex-box gap-0.5">
-                                                <Warning color="warning" /> Least time
-                                            </div>
-                                        </AccessibleTooltip>
-                                    }
                                 />
                                 <FormControlLabel
                                     value={DailyRaidsStrategy.allLocations}

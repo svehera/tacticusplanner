@@ -1,4 +1,12 @@
-﻿import DeleteIcon from '@mui/icons-material/Delete';
+﻿// TODO(cpunerd): merge all of the goals tables into one
+// TODO(cpunerd): merge all of the goal card sections into one
+// TODO(cpunerd): account for onslaughts when generating daily raids
+// TODO(cpunerd): add support to select shards and mythic shards in the raids filters
+// TODO(cpunerd): add support to select battle types for shards and mythic shards in raids settings
+// TODO(cpunerd): in ascend goal dialog (both edit and add), change campaign usage to a tri-state with (energy-only, energy+onslaught, onslaught-only)
+// TODO(cpunerd): in unlock goal dialog (both edit and add), remove campaign usage selection
+
+import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
@@ -114,6 +122,8 @@ export const Goals = () => {
                 upgrades: inventory.upgrades,
                 completedLocations: [],
             },
+            characters,
+            resolvedMows,
             ...[upgradeRankOrMowGoals, shardsGoals].flat()
         );
     }, [upgradeRankOrMowGoals, estimatedShardsTotal.energyPerDay]);
@@ -446,6 +456,8 @@ export const Goals = () => {
                             {upgradeRankOrMowGoals.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}
+                                    characters={characters}
+                                    mows={resolvedMows}
                                     goal={goal}
                                     goalEstimate={adjustedGoalsEstimates.goalEstimates
                                         .filter(x => x.goalId === goal.goalId)
@@ -498,6 +510,8 @@ export const Goals = () => {
                         <div className="flex flex-wrap gap-3">
                             {shardsGoals.map(goal => (
                                 <GoalCard
+                                    characters={characters}
+                                    mows={resolvedMows}
                                     key={goal.goalId}
                                     goal={goal}
                                     goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
@@ -534,6 +548,8 @@ export const Goals = () => {
                         <div className="flex flex-wrap gap-3">
                             {upgradeAbilities.map(goal => (
                                 <GoalCard
+                                    characters={characters}
+                                    mows={resolvedMows}
                                     key={goal.goalId}
                                     goal={goal}
                                     goalEstimate={adjustedGoalsEstimates.goalEstimates.find(

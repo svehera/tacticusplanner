@@ -187,8 +187,12 @@ export interface IUnitUpgradeRank {
 export interface IUnitShards {
     shardName: string;
     mythicShardName: string;
+    incrementalShardsAcquired: number;
+    totalIncrementalShardsNeeded: number;
     shardsAcquired: number;
     totalShardsNeeded: number;
+    incrementalMythicShardsAcquired: number;
+    totalIncrementalMythicShardsNeeded: number;
     mythicShardsAcquired: number;
     totalMythicShardsNeeded: number;
 }

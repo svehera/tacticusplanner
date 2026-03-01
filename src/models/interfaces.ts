@@ -376,6 +376,7 @@ export interface IEstimatedRanksSettings {
     preferences: IDailyRaidsPreferences;
     filters?: ICampaignsFilters;
     upgrades: Record<string, number>;
+    onslaughtTokensToday?: number;
 }
 
 export interface IInventory {

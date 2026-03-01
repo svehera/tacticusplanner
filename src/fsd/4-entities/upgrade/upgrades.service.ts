@@ -257,11 +257,13 @@ export class UpgradesService {
 
         return {
             inventoryUpdate: filteredInventoryUpdate,
-            inventoryUpgrades: Object.keys(filteredInventoryUpdate).map(upgradeId => this.getUpgrade(upgradeId)),
+            inventoryUpgrades: Object.keys(filteredInventoryUpdate)
+                .map(upgradeId => this.getUpgrade(upgradeId))
+                .filter(upgrade => !!upgrade) as Array<IBaseUpgrade | ICraftedUpgrade>,
         };
     }
 
-    public static getUpgrade(upgradeId: string): IBaseUpgrade | ICraftedUpgrade {
+    public static getUpgrade(upgradeId: string): IBaseUpgrade | ICraftedUpgrade | undefined {
         if (!this.baseUpgradesData[upgradeId] && !this.craftedUpgradesData[upgradeId]) {
             console.error('Upgrade not found:', upgradeId);
         }
@@ -308,6 +310,52 @@ export class UpgradesService {
                 stat: upgrade.stat,
             };
         }
+
+        Object.keys(upgradeLocationsShort).forEach(upgradeId => {
+            if (!upgradeId.startsWith('shards_') && !upgradeId.startsWith('mythicShards_')) return;
+            const charId = upgradeId.split('_')[1];
+            const char = CharactersService.charactersData.find(c => c.snowprintId === charId);
+            result[upgradeId] = {
+                id: upgradeId,
+                snowprintId: upgradeId,
+                label: upgradeId.startsWith('shards_')
+                    ? 'Shards for ' + (char?.name ?? charId)
+                    : 'Mythic Shards for ' + (char?.name ?? charId),
+                rarity: upgradeId.startsWith('shards_') ? 'Shard' : 'Mythic Shard',
+                locations:
+                    orderBy(
+                        upgradeLocationsShort[upgradeId as keyof typeof upgradeLocationsShort].map(
+                            location => CampaignsService.campaignsComposed[location]
+                        ),
+                        ['dropRate', 'nodeNumber'],
+                        ['desc', 'desc']
+                    ) ?? [],
+                iconPath: char?.roundIcon ?? '',
+                crafted: false,
+                stat: 'Shard',
+            };
+        });
+
+        CharactersService.charactersData.forEach(char => {
+            const shards = 'shards_' + char.snowprintId!;
+            const mythicShards = 'mythicShards_' + char.snowprintId!;
+            for (const shard of [shards, mythicShards]) {
+                if (!result[shard]) {
+                    result[shard] = {
+                        id: shard,
+                        snowprintId: shard,
+                        label: shard.startsWith('shards_')
+                            ? 'Shards for ' + (char?.name ?? char.snowprintId)
+                            : 'Mythic Shards for ' + (char?.name ?? char.snowprintId),
+                        rarity: shard.startsWith('shards_') ? 'Shard' : 'Mythic Shard',
+                        locations: [],
+                        iconPath: char?.roundIcon ?? '',
+                        crafted: false,
+                        stat: 'Shard',
+                    };
+                }
+            }
+        });
 
         return result;
     }

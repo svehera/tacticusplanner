@@ -22,7 +22,6 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { IEstimatedShards, IEstimatedUpgrades } from '@/fsd/3-features/goals/goals.models';
 import { MaterialsTable } from '@/fsd/3-features/goals/materials-table';
 import { RaidsDayView } from '@/fsd/3-features/goals/raids-day-view';
-import { ShardsRaidsDayInput } from '@/fsd/3-features/goals/shards-raids-day-input';
 
 import { Inventory } from '@/fsd/1-pages/input-inventory';
 
@@ -140,13 +139,6 @@ export const RaidsPlan: React.FC<Props> = ({
 
         return formatDateWithOrdinal(nextDate);
     }, [estimatedRanks.upgradesRaids.length]);
-
-    const shardsCalendarDate: string = useMemo(() => {
-        const nextDate = new Date();
-        nextDate.setDate(nextDate.getDate() + estimatedShards.daysTotal);
-
-        return formatDateWithOrdinal(nextDate);
-    }, [estimatedShards.daysTotal]);
 
     const daysTotal = Math.max(estimatedRanks.daysTotal, estimatedShards.daysTotal);
     const energyTotal = estimatedRanks.energyTotal + estimatedShards.energyTotal;
@@ -322,7 +314,7 @@ export const RaidsPlan: React.FC<Props> = ({
 
                                 <div className="flex-grow">
                                     {viewPreferences.raidsTableView === true ? (
-                                        <div className="ag-theme-material flex max-h-[600px] w-full flex-col">
+                                        <div className="ag-theme-material flex h-[600px] w-full flex-col">
                                             <MaterialsTable
                                                 rows={estimatedRanks.blockedMaterials}
                                                 updateMaterialQuantity={updateInventory}
@@ -354,40 +346,6 @@ export const RaidsPlan: React.FC<Props> = ({
                     </Accordion>
                 )}
 
-                {!!estimatedShards.shardsRaids.length && (
-                    <Accordion>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <FlexBox className="flex-col items-start">
-                                <div
-                                    className="flex flex-wrap items-center gap-2"
-                                    style={{ fontSize: isMobile ? 16 : 20 }}>
-                                    <span>
-                                        Shards Raids (<b>{estimatedShards.daysTotal}</b> Days |
-                                    </span>
-                                    <span>
-                                        <b>{estimatedShards.energyTotal}</b>{' '}
-                                        <MiscIcon icon={'energy'} height={15} width={15} /> |
-                                    </span>
-                                    <span>
-                                        <b>{estimatedShards.raidsTotal}</b> Raids |
-                                    </span>
-                                    <span>
-                                        <b>{estimatedShards.onslaughtTokens}</b> Tokens)
-                                    </span>
-                                </div>
-                                <span className="italic">{shardsCalendarDate}</span>
-                            </FlexBox>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <div className="flex-box gap10 wrap start">
-                                {estimatedShards.shardsRaids.map(shardsRaid => (
-                                    <ShardsRaidsDayInput key={shardsRaid.characterId} shardRaids={shardsRaid} />
-                                ))}
-                            </div>
-                        </AccordionDetails>
-                    </Accordion>
-                )}
-
                 {!!estimatedRanks.upgradesRaids.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -412,26 +370,28 @@ export const RaidsPlan: React.FC<Props> = ({
                             </FlexBox>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div className="flex gap-2.5 overflow-auto">
-                                {estimatedRanks.upgradesRaids
-                                    .slice(upgradesPaging.start, upgradesPaging.end)
-                                    .map((day, index) => {
-                                        return <RaidsDayView key={index} day={day} title={'Day ' + (index + 1)} />;
-                                    })}
-                                {!upgradesPaging.completed && (
-                                    <Button
-                                        variant={'outlined'}
-                                        className="min-w-[300px] items-start pt-5"
-                                        onClick={() =>
-                                            setUpgradesPaging({
-                                                start: 0,
-                                                end: estimatedRanks.upgradesRaids.length,
-                                                completed: true,
-                                            })
-                                        }>
-                                        Show All
-                                    </Button>
-                                )}
+                            <div className="overflow-x-auto overflow-y-hidden" style={{ transform: 'rotateX(180deg)' }}>
+                                <div className="flex gap-2.5" style={{ transform: 'rotateX(180deg)' }}>
+                                    {estimatedRanks.upgradesRaids
+                                        .slice(upgradesPaging.start, upgradesPaging.end)
+                                        .map((day, index) => {
+                                            return <RaidsDayView key={index} day={day} title={'Day ' + (index + 1)} />;
+                                        })}
+                                    {!upgradesPaging.completed && (
+                                        <Button
+                                            variant={'outlined'}
+                                            className="min-w-[300px] items-start pt-5"
+                                            onClick={() =>
+                                                setUpgradesPaging({
+                                                    start: 0,
+                                                    end: estimatedRanks.upgradesRaids.length,
+                                                    completed: true,
+                                                })
+                                            }>
+                                            Show All
+                                        </Button>
+                                    )}
+                                </div>
                             </div>
                         </AccordionDetails>
                     </Accordion>
