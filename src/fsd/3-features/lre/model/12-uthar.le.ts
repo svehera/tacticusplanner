@@ -51,8 +51,8 @@ export class UtharLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Melee',
                     points: 65,
-                    objectiveType: 'AttackType',
-                    objectiveTarget: 'Melee',
+                    objectiveType: 'HasNoRangedAttack',
+                    objectiveTarget: '',
                     units: filter(noXenos).byAttackType('meleeOnly'),
                     iconId: 'melee',
                     index: 3,
@@ -82,8 +82,8 @@ export class UtharLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Ranged',
                     points: 60,
-                    objectiveType: 'AttackType',
-                    objectiveTarget: 'Ranged',
+                    objectiveType: 'HasRangedAttack',
+                    objectiveTarget: '',
                     units: filter(noImperial).byAttackType('rangeOnly'),
                     iconId: 'ranged',
                     index: 0,
@@ -91,8 +91,8 @@ export class UtharLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Psyker',
                     points: 55,
-                    objectiveType: 'Trait',
-                    objectiveTarget: 'No Psyker',
+                    objectiveType: 'NotTrait',
+                    objectiveTarget: 'Psyker',
                     units: filter(noImperial).byTrait(Trait.Psyker, true),
                     iconId: 'no_psychic',
                     index: 1,
@@ -118,7 +118,7 @@ export class UtharLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Min 5 Hits',
                     points: 75,
-                    objectiveType: 'MaxHits',
+                    objectiveType: 'MinHits',
                     objectiveTarget: '5',
                     units: filter(noImperial).byMinHits(5),
                     iconId: 'hits',

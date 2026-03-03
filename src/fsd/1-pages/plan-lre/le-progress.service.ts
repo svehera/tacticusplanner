@@ -291,6 +291,8 @@ export class LeProgressService {
                 return LegendaryEventEnum.Lucius;
             case 'tauFarsight':
                 return LegendaryEventEnum.Farsight;
+            case 'votanUthar':
+                return LegendaryEventEnum.Uthar;
             default:
                 return undefined;
         }
@@ -345,6 +347,7 @@ export class LeProgressService {
                     'Unsupported Legendary Event data: ' + lane.displayName + ' Track has no battle configs.'
                 );
             }
+            const errorStrings: string[] = [];
             externalTrack.battleConfigs.forEach(externalBattleConfig => {
                 externalBattleConfig.objectives.forEach(externalObjective => {
                     // Acing objectives are called something different in the planner.
@@ -355,14 +358,13 @@ export class LeProgressService {
                             x.objectiveType === externalObjective.objectiveType
                     );
                     if (requirement === undefined) {
-                        throw new Error(
+                        errorStrings.push(
                             `Unsupported Legendary Event data: Could not find planner data that matches requirement ` +
                                 `objectiveType=${externalObjective.objectiveType} - objectiveTarget=${externalObjective.objectiveTarget} ` +
                                 `in ${lane.displayName} Track.`
                         );
-                    }
-                    if (requirement.points !== externalObjective.score) {
-                        throw new Error(
+                    } else if (requirement.points !== externalObjective.score) {
+                        errorStrings.push(
                             `Mismatched Legendary Event points for objectiveType=${externalObjective.objectiveType} - ` +
                                 `objectiveTarget=${externalObjective.objectiveTarget} in ${lane.displayName} Track. ` +
                                 `External (${externalObjective.score}) vs Planner (${requirement.points}).`
@@ -372,17 +374,21 @@ export class LeProgressService {
             });
             externalTrack.progress.forEach(progress => {
                 if (progress.objectivesCleared.length > 6) {
-                    throw new Error(
+                    errorStrings.push(
                         `Unsupported Legendary Event data: More than 6 objectives cleared in a single battle in ` +
                             `${lane.displayName} Track. Expected at most the clear score (Acing) and five restrictions.`
                     );
                 }
                 progress.objectivesCleared.forEach(objectiveCleared => {
                     if (objectiveCleared < 0 || objectiveCleared > 5) {
-                        throw new Error('Invalid index in objectivesCleared: ' + objectiveCleared);
+                        errorStrings.push('Invalid index in objectivesCleared: ' + objectiveCleared);
                     }
                 });
             });
+            if (errorStrings.length > 0) {
+                console.error(errorStrings.join('\n'));
+                throw new Error(errorStrings.join('\n'));
+            }
         });
         if (externalData.currentCurrency < 0) {
             throw new Error('Invalid current currency in Legendary Event data: ' + externalData.currentCurrency);
