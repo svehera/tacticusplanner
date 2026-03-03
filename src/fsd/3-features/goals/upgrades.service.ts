@@ -99,6 +99,14 @@ const MYTHIC_SHARDS_AT_RARITY_AND_STARS: Partial<Record<RarityStars, number>> = 
     [RarityStars.MythicWings]: 200,
 };
 
+interface TaggedLocation {
+    loc: ICampaignBattleComposed;
+    priority?: number;
+    highestPriorityGoalId?: string;
+    daysToComplete: number;
+    hsePoints?: number;
+}
+
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
@@ -376,26 +384,12 @@ export class UpgradesService {
         */
 
         // const energyTotal = sum(inProgressMaterials.map(material => material.energyTotal));
-        const energyTotal = 1024;
+        const energyTotal = sum(upgradesRaids.map(day => day.energyTotal));
         const raidsTotal = sum(upgradesRaids.map(day => day.raidsTotal));
         const freeEnergyDays = upgradesRaids.filter(x => settings.dailyEnergy - x.energyTotal > 60).length;
 
         const relatedUpgrades = uniq(unitsUpgrades.flatMap(ranksUpgrade => ranksUpgrade.relatedUpgrades));
 
-        /*
-        return {
-            upgradesRaids,
-            characters: unitsUpgrades,
-            inProgressMaterials,
-            blockedMaterials,
-            finishedMaterials,
-            relatedUpgrades,
-            byCharactersPriority,
-            daysTotal: upgradesRaids.length,
-            energyTotal,
-            raidsTotal,
-            freeEnergyDays,
-        };*/
         return {
             upgradesRaids,
             characters: unitsUpgrades,
@@ -434,7 +428,7 @@ export class UpgradesService {
      * @param allUpgrades - A list of all character upgrades to be farmed. **The order of this array determines the farming priority.**
      * @returns An array of `IUpgradesRaidsDay`, where each object represents a single day's raiding plan. Returns an empty array if daily energy is too low to perform any raids.
      */
-    private static generateDailyRaidsList(
+    public static generateDailyRaidsList(
         settings: IEstimatedRanksSettings,
         characters: ICharacter2[],
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
@@ -453,15 +447,7 @@ export class UpgradesService {
         const MAX_DAYS = 1000;
         cloneDeep(Object.keys(remainingMats)).forEach(upgradeId => {
             const mat = remainingMats[upgradeId];
-            if (!mat.locations.some(loc => loc.isSuggested)) {
-                console.warn(
-                    'Material ',
-                    mat,
-                    ' is not farmable with the current filters. Please adjust your filters to be able to farm it. Remaining mats: ',
-                    remainingMats
-                );
-                delete remainingMats[upgradeId];
-            }
+            if (!mat.locations.some(loc => loc.isSuggested)) delete remainingMats[upgradeId];
         });
         while (Object.entries(remainingMats).length > 0 && days++ < MAX_DAYS) {
             // regenerate 1 token every 18 hours, or 3 every two days.
@@ -502,18 +488,26 @@ export class UpgradesService {
                 const mat = remainingMats[upgradeId];
                 if (inventory[upgradeId] === undefined) continue;
                 if (inventory[upgradeId] >= mat.requiredCount) {
-                    console.log(
-                        'finished material ',
-                        upgradeId,
-                        ' after day ',
-                        days,
-                        ' with excess of ',
-                        inventory[upgradeId] - mat.requiredCount
-                    );
                     delete remainingMats[upgradeId];
                 }
             }
             if (!firstDay) ret.push(day);
+            day.raids.forEach(raid => {
+                raid.relatedCharacters = raid.relatedCharacters.map(
+                    charId => CharactersService.resolveCharacter(charId)?.name ?? charId
+                );
+                raid.raidLocations.forEach(loc => {
+                    loc.energySpent = loc.raidsCount * loc.energyCost;
+                });
+                raid.energyTotal = raid.raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
+            });
+            day.energyTotal = day.raids.reduce((sum, raid) => {
+                raid.raidLocations.forEach(loc => {
+                    loc.energySpent = loc.raidsCount * loc.energyCost;
+                });
+                const raidEnergy = raid.raidLocations.reduce((raidSum, loc) => raidSum + loc.energySpent, 0);
+                return sum + raidEnergy;
+            }, 0);
             firstDay = false;
             energy = settings.dailyEnergy;
             if (day.raids.length === 0) {
@@ -526,7 +520,6 @@ export class UpgradesService {
                 break;
             }
         }
-        console.log('finished raiding after ', days, ' days. Remaining mats: ', remainingMats);
         Object.entries(remainingMats).forEach(([matId, mat]) => {
             console.warn(
                 'Unable to farm material ',
@@ -542,7 +535,22 @@ export class UpgradesService {
         return ret;
     }
 
-    private static planDayRaiding(
+    /**
+     * Plans raids for a single day by spending energy across the provided locations.
+     *
+     * Behavior depends on the farm order:
+     * - total materials: raids locations in order, based on total remaining need.
+     * - goal priority: iterates goals by priority and raids locations tied to each goal.
+     *
+     * @param day - The day object being populated.
+     * @param settings - User settings that control farm order and strategy.
+     * @param energy - Starting energy budget for the day.
+     * @param locs - Suggested raid locations to consider (already filtered/sorted).
+     * @param remainingMats - Remaining materials mapped by upgrade ID.
+     * @param inventory - Inventory counts to update as raids are planned.
+     * @param goals - Active goals used for priority-based planning.
+     */
+    public static planDayRaiding(
         day: IUpgradesRaidsDay,
         settings: IEstimatedRanksSettings,
         energy: number,
@@ -553,76 +561,10 @@ export class UpgradesService {
     ): void {
         const minEnergy = locs.reduce((min, loc) => Math.min(min, loc.energyCost), Infinity);
         const maxEnergy = locs.reduce((max, loc) => Math.max(max, loc.energyCost), -Infinity);
-        const addRaidForLocation = (
-            loc: ICampaignBattleComposed,
-            needed: number,
-            mat: ICombinedUpgrade,
-            upgradeId: string
-        ) => {
-            const toRaid = Math.max(
-                0,
-                Math.min(loc.dailyBattleCount, Math.min(needed, Math.floor(energy / loc.energyCost)))
-            );
-            const toAdd = toRaid * loc.dropRate;
-            const raidLoc: IItemRaidLocation = {
-                ...loc,
-                raidsCount: toRaid,
-                farmedItems: Math.floor(toAdd),
-                energySpent: toRaid * loc.energyCost,
-                isShardsLocation: upgradeId.startsWith('shards_') || upgradeId.startsWith('mythicShards_'),
-            };
-            const existingRaid = day.raids.find(raid => raid.id === upgradeId);
-            if (existingRaid !== undefined) {
-                existingRaid.raidLocations.push(raidLoc);
-                existingRaid.energyTotal += raidLoc.energySpent;
-                existingRaid.raidsTotal += raidLoc.raidsCount;
-            } else {
-                day.raids.push({
-                    raidLocations: [raidLoc],
-                    energyTotal: raidLoc.energySpent,
-                    energyLeft: energy - raidLoc.energySpent,
-                    daysTotal: -1,
-                    raidsTotal: raidLoc.raidsCount,
-                    acquiredCount: Math.floor(inventory[upgradeId] ?? 0),
-                    requiredCount: sum(Object.values(mat.countByGoalId)),
-                    relatedCharacters: mat.relatedCharacters,
-                    relatedGoals: mat.relatedGoals,
-                    isBlocked: false,
-                    isFinished: false,
-                    id: upgradeId,
-                    snowprintId: mat.snowprintId,
-                    label: mat.label,
-                    rarity: mat.rarity,
-                    iconPath: mat.iconPath,
-                    locations: mat.locations,
-                    crafted: mat.crafted,
-                    stat: mat.stat,
-                } as IUpgradeRaid);
-            }
-            inventory[upgradeId] = (inventory[upgradeId] ?? 0) + toAdd;
-            energy -= toRaid * loc.energyCost;
-        };
         if (settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials) {
             for (const loc of locs) {
-                if (energy < loc.energyCost) continue;
-                const upgradeId = loc.rewards.potential[0].id;
-                const mat = remainingMats[upgradeId];
-                if (mat === undefined) {
-                    console.error('Material ', upgradeId, ' not found for location: ', loc);
-                    continue;
-                }
-                if (mat.requiredCount <= (inventory[upgradeId] ?? 0)) {
-                    continue;
-                }
                 if (energy < minEnergy) break;
-                const remainingNeeded = this.getRemainingNeededForGoal(
-                    upgradeId,
-                    mat,
-                    inventory,
-                    goals,
-                    undefined
-                ).totalRemaining;
-                addRaidForLocation(loc, remainingNeeded, mat, upgradeId);
+                energy = this.raidLocation(day, energy, inventory, loc, remainingMats, goals, undefined);
             }
             if (energy < maxEnergy) locs = locs.filter(loc => loc.energyCost <= energy);
             return;
@@ -636,34 +578,143 @@ export class UpgradesService {
                     loc.rewards.potential.some(reward => matsForGoal.some(([_, mat]) => mat.id === reward.id))
                 );
                 for (const loc of locsForGoal) {
-                    if (energy < loc.energyCost) continue;
-                    const upgradeId = loc.rewards.potential[0].id;
-                    const mat = remainingMats[upgradeId];
-                    if (mat === undefined) {
-                        console.error('Material ', upgradeId, ' not found for location: ', loc);
-                        continue;
-                    }
-                    const { neededByHigherPriorityGoals, stillNeededForGoal } = this.getRemainingNeededForGoal(
-                        upgradeId,
-                        mat,
-                        inventory,
-                        goals,
-                        goal.goalId
-                    );
-                    if (
-                        neededByHigherPriorityGoals + (mat.countByGoalId[goal.goalId] ?? 0) <=
-                        (inventory[upgradeId] ?? 0)
-                    ) {
-                        continue;
-                    }
                     if (energy < minEnergy) break;
-                    addRaidForLocation(loc, stillNeededForGoal, mat, upgradeId);
+                    energy = this.raidLocation(day, energy, inventory, loc, remainingMats, goals, goal.goalId);
                 }
                 if (energy < maxEnergy) locs = locs.filter(loc => loc.energyCost <= energy);
             }
         }
     }
 
+    /**
+     * Adds a raid entry for a single location, updating the day's raids, inventory, and energy.
+     *
+     * @param day - The day being planned.
+     * @param energy - Remaining energy before this raid.
+     * @param inventory - Inventory counts to update with farmed items.
+     * @param loc - The campaign location to raid.
+     * @param needed - Remaining materials needed for this location's material.
+     * @param mat - Combined upgrade info for this material.
+     * @param upgradeId - The material ID to update.
+     * @returns The remaining energy after raiding this location.
+     */
+    public static addRaidForLocation(
+        day: IUpgradesRaidsDay,
+        energy: number,
+        inventory: Record<string, number>,
+        loc: ICampaignBattleComposed,
+        needed: number,
+        mat: ICombinedUpgrade,
+        upgradeId: string
+    ): number {
+        const raidsNeeded = Math.ceil(needed / loc.dropRate);
+        const raidsToPerform = Math.max(0, Math.min(loc.dailyBattleCount, raidsNeeded));
+        const toAdd = raidsToPerform * loc.dropRate;
+        const raidLoc: IItemRaidLocation = {
+            ...loc,
+            raidsCount: raidsToPerform,
+            farmedItems: Math.floor(toAdd),
+            energySpent: raidsToPerform * loc.energyCost,
+            isShardsLocation: upgradeId.startsWith('shards_') || upgradeId.startsWith('mythicShards_'),
+        };
+        const existingRaid = day.raids.find(raid => raid.id === upgradeId);
+        if (existingRaid !== undefined) {
+            existingRaid.raidLocations.push(raidLoc);
+            existingRaid.energyTotal += raidLoc.energySpent;
+            existingRaid.raidsTotal += raidLoc.raidsCount;
+        } else {
+            day.raids.push({
+                raidLocations: [raidLoc],
+                energyTotal: raidLoc.energySpent,
+                energyLeft: energy - raidLoc.energySpent,
+                daysTotal: -1,
+                raidsTotal: raidLoc.raidsCount,
+                acquiredCount: Math.floor(inventory[upgradeId] ?? 0),
+                requiredCount: sum(Object.values(mat.countByGoalId)),
+                relatedCharacters: mat.relatedCharacters,
+                relatedGoals: mat.relatedGoals,
+                isBlocked: false,
+                isFinished: false,
+                id: upgradeId,
+                snowprintId: mat.snowprintId,
+                label: mat.label,
+                rarity: mat.rarity,
+                iconPath: mat.iconPath,
+                locations: mat.locations,
+                crafted: mat.crafted,
+                stat: mat.stat,
+            } as IUpgradeRaid);
+        }
+        inventory[upgradeId] = (inventory[upgradeId] ?? 0) + toAdd;
+        return energy - raidsToPerform * loc.energyCost;
+    }
+
+    /**
+     * Plans a raid for a location, applying goal-priority rules when a goal is provided.
+     *
+     * @param day - The day being planned.
+     * @param energy - Remaining energy before this raid.
+     * @param inventory - Inventory counts to update with farmed items.
+     * @param loc - The campaign location to raid.
+     * @param remainingMats - Remaining materials mapped by upgrade ID.
+     * @param goals - All active goals (used for priority comparisons).
+     * @param goalId - Optional goal ID to apply priority-based remaining logic.
+     * @returns The remaining energy after attempting this raid.
+     */
+    public static raidLocation(
+        day: IUpgradesRaidsDay,
+        energy: number,
+        inventory: Record<string, number>,
+        loc: ICampaignBattleComposed,
+        remainingMats: Record<string, ICombinedUpgrade>,
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
+        goalId: string | undefined
+    ): number {
+        if (energy < loc.energyCost) return energy;
+        const upgradeId = loc.rewards.potential[0].id;
+        const mat = remainingMats[upgradeId];
+        if (mat === undefined) {
+            console.error('Material ', upgradeId, ' not found for location: ', loc);
+            return energy;
+        }
+        if (goalId) {
+            const { neededByHigherPriorityGoals, stillNeededForGoal } = this.getRemainingNeededForGoal(
+                upgradeId,
+                mat,
+                inventory,
+                goals,
+                goalId
+            );
+            if (stillNeededForGoal <= 0) return energy;
+            if (neededByHigherPriorityGoals + (mat.countByGoalId[goalId] ?? 0) <= (inventory[upgradeId] ?? 0)) {
+                return energy;
+            }
+            return this.addRaidForLocation(day, energy, inventory, loc, stillNeededForGoal, mat, upgradeId);
+        }
+        if (mat.requiredCount <= (inventory[upgradeId] ?? 0)) {
+            return energy;
+        }
+        const remainingNeeded = this.getRemainingNeededForGoal(
+            upgradeId,
+            mat,
+            inventory,
+            goals,
+            undefined
+        ).totalRemaining;
+        if (remainingNeeded <= 0) return energy;
+        return this.addRaidForLocation(day, energy, inventory, loc, remainingNeeded, mat, upgradeId);
+    }
+
+    /**
+     * Computes remaining counts for an upgrade relative to a specific goal and overall totals.
+     *
+     * @param upgradeId - The upgrade material ID to evaluate.
+     * @param mat - The combined upgrade data for this material.
+     * @param inventory - Current inventory counts keyed by upgrade ID.
+     * @param goals - All active goals (used for priority comparisons).
+     * @param goalId - The goal to compute remaining needs for; if undefined, returns totals only.
+     * @returns Remaining counts for higher-priority goals, the specified goal, and overall total.
+     */
     public static getRemainingNeededForGoal(
         upgradeId: string,
         mat: ICombinedUpgrade,
@@ -694,6 +745,31 @@ export class UpgradesService {
             0
         );
         return { neededByHigherPriorityGoals, stillNeededForGoal, totalRemaining };
+    }
+
+    /**
+     * Returns the highest-priority goal ID that still needs the specified material.
+     *
+     * This accounts for inventory already applied to higher-priority goals so we don’t
+     * select a goal whose material needs are already satisfied.
+     */
+    public static getHighestPriorityGoalIdNeedingMaterial(
+        upgradeId: string,
+        combinedBaseMaterials: Record<string, ICombinedUpgrade>,
+        inventory: Record<string, number>,
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
+    ): string | undefined {
+        const mat = combinedBaseMaterials[upgradeId];
+        if (!mat) return undefined;
+        const eligibleGoals = mat.relatedGoals
+            .map(goalId => goals.find(goal => goal.goalId === goalId))
+            .filter(goal => goal !== undefined)
+            .filter(
+                goal =>
+                    this.getRemainingNeededForGoal(upgradeId, mat, inventory, goals, goal.goalId).stillNeededForGoal > 0
+            );
+        const highestPriorityGoal = orderBy(eligibleGoals, ['priority'], ['asc'])[0];
+        return highestPriorityGoal?.goalId;
     }
 
     /**
@@ -736,42 +812,45 @@ export class UpgradesService {
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
         settings: IEstimatedRanksSettings
-    ): Array<{
-        loc: ICampaignBattleComposed;
-        priority: number;
-        highestPriorityGoalId?: string;
-        daysToComplete: number;
-    }> {
+    ): Array<TaggedLocation> {
         // Give everything a two-part priority. The first part is priority. If we're ordering by
         // goal priority, it's simply the priority of the most urgent goal to which this maps. If
         // we're ordering by total materials, then all materials will have the same priority (zero).
         return cloneDeep(locs).map(loc => {
+            const upgradeId = loc.rewards.potential[0].id;
             if (settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials) {
-                return { loc, priority: 0, highestPriorityGoalId: undefined as string | undefined, daysToComplete: -1 };
+                return {
+                    loc,
+                    priority: undefined,
+                    highestPriorityGoalId: undefined,
+                    daysToComplete: this.calculateDaysToCompleteMaterial(
+                        upgradeId,
+                        combinedBaseMaterials,
+                        inventory,
+                        goals,
+                        undefined
+                    ),
+                };
             }
-            const highestPriorityGoal = combinedBaseMaterials[loc.rewards.potential[0].id]?.relatedGoals.reduce(
-                (acc, goalId) => {
-                    const goal = goals.find(g => g.goalId === goalId);
-                    if (goal === undefined) return acc;
-                    if (acc === undefined || goal.priority < acc.priority) {
-                        acc = goal;
-                    }
-                    return acc;
-                },
-                undefined as
-                    | (ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal)
-                    | undefined
+            const highestPriorityGoalId = this.getHighestPriorityGoalIdNeedingMaterial(
+                upgradeId,
+                combinedBaseMaterials,
+                inventory,
+                goals
             );
+            const highestPriorityGoal = highestPriorityGoalId
+                ? goals.find(goal => goal.goalId === highestPriorityGoalId)
+                : undefined;
             return {
                 loc,
                 priority: highestPriorityGoal?.priority ?? 0,
-                highestPriorityGoalId: highestPriorityGoal?.goalId,
+                highestPriorityGoalId,
                 daysToComplete: this.calculateDaysToCompleteMaterial(
-                    loc.rewards.potential[0].id,
+                    upgradeId,
                     combinedBaseMaterials,
                     inventory,
                     goals,
-                    highestPriorityGoal?.goalId
+                    highestPriorityGoalId
                 ),
             };
         });
@@ -781,14 +860,14 @@ export class UpgradesService {
      * Sorts locations for raiding based on the user's preferences and campaign progress. `locs`
      * is assumed to be the battles that can be raided.
      */
-    private static sortLocationsForRaiding(
+    public static sortLocationsForRaiding(
         locs: ICampaignBattleComposed[],
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
         settings: IEstimatedRanksSettings
     ): ICampaignBattleComposed[] {
-        const taggedLocs = orderBy(
+        let taggedLocs = orderBy(
             this.tagLocationsWithGoalPriorityAndDaysToCompletion(
                 locs,
                 goals,
@@ -798,47 +877,61 @@ export class UpgradesService {
             ),
             ['priority', 'daysToComplete'],
             ['asc', 'desc']
-        ).map(x => x.loc);
+        );
         if (
             settings.preferences.farmPreferences?.homeScreenEvent === undefined ||
             settings.preferences.farmPreferences?.homeScreenEvent === IDailyRaidsHomeScreenEvent.none
         ) {
             // If we don't have a homescreen event, then we're done, locations are sorted in raiding order.
-            return taggedLocs;
+            return taggedLocs.map(x => x.loc);
         } else {
             const hsePointsPerUnit = (campaignType: CampaignType): number => {
                 if (campaignType === CampaignType.Elite) return 5;
                 return 3;
             };
+            const orderingFields =
+                settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials
+                    ? ['hsePoints', 'daysToComplete']
+                    : ['priority', 'hsePoints', 'daysToComplete'];
+            const orderingDirections = ['desc', 'asc', 'desc'] as const;
             switch (settings.preferences.farmPreferences.homeScreenEvent) {
                 case IDailyRaidsHomeScreenEvent.purgeOrder:
-                    return taggedLocs.sort(
-                        (a, b) =>
-                            this.getNonSummonTyranidCount(b) * hsePointsPerUnit(b.campaignType) -
-                            this.getNonSummonTyranidCount(a) * hsePointsPerUnit(a.campaignType)
-                    );
+                    taggedLocs = taggedLocs.map(x => ({
+                        ...x,
+                        hsePoints:
+                            (this.getNonSummonTyranidCount(x.loc) * hsePointsPerUnit(x.loc.campaignType)) /
+                            x.loc.energyCost,
+                    }));
+                    break;
                 case IDailyRaidsHomeScreenEvent.warpSurge:
-                    return taggedLocs.sort(
-                        (a, b) =>
-                            this.getNonSummonChaosEnemyCount(b) * hsePointsPerUnit(b.campaignType) -
-                            this.getNonSummonChaosEnemyCount(a) * hsePointsPerUnit(a.campaignType)
-                    );
+                    taggedLocs = taggedLocs.map(x => ({
+                        ...x,
+                        hsePoints:
+                            (this.getNonSummonChaosEnemyCount(x.loc) * hsePointsPerUnit(x.loc.campaignType)) /
+                            x.loc.energyCost,
+                    }));
+                    break;
                 case IDailyRaidsHomeScreenEvent.machineHunt:
                     // Machine hunt is old and as of 1.36, doesn't differentiate between elite and non-elite raiding.
-                    return taggedLocs.sort(
-                        (a, b) => this.getNonSummonMechanicalEnemyCount(b) - this.getNonSummonMechanicalEnemyCount(a)
-                    );
+                    taggedLocs = taggedLocs.map(x => ({
+                        ...x,
+                        hsePoints: this.getNonSummonMechanicalEnemyCount(x.loc) / x.loc.energyCost,
+                    }));
+                    break;
                 case IDailyRaidsHomeScreenEvent.trainingRush:
-                    return taggedLocs.sort(
-                        (a, b) =>
-                            this.getNonSummonEnemyCount(b) * hsePointsPerUnit(b.campaignType) -
-                            this.getNonSummonEnemyCount(a) * hsePointsPerUnit(a.campaignType)
-                    );
+                    taggedLocs = taggedLocs.map(x => ({
+                        ...x,
+                        hsePoints:
+                            (this.getNonSummonEnemyCount(x.loc) * hsePointsPerUnit(x.loc.campaignType)) /
+                            x.loc.energyCost,
+                    }));
+                    break;
                 default:
                     break;
             }
+            return orderBy(taggedLocs, orderingFields, orderingDirections).map(x => x.loc);
         }
-        return taggedLocs;
+        return taggedLocs.map(x => x.loc);
     }
 
     /**
@@ -896,16 +989,19 @@ export class UpgradesService {
         goal: ICharacterAscendGoal
     ): number {
         const shardData = this.getShardsForGoal(characters, [] as IMow2[], goal);
+        console.log('shardData: ', shardData);
         const tokensForRegularShards = this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal)
             ? Math.ceil(
-                  Math.max(0, shardData.totalShardsNeeded - (inventory['shards_' + goal.unitId] ?? 0)) /
+                  Math.max(0, shardData.totalIncrementalShardsNeeded - (inventory['shards_' + goal.unitId] ?? 0)) /
                       goal.onslaughtShards
               )
             : 0;
         const tokensForMythicShards = this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, goal)
             ? Math.ceil(
-                  Math.max(0, shardData.totalMythicShardsNeeded - (inventory['mythicShards_' + goal.unitId] ?? 0)) /
-                      goal.onslaughtMythicShards
+                  Math.max(
+                      0,
+                      shardData.totalIncrementalMythicShardsNeeded - (inventory['mythicShards_' + goal.unitId] ?? 0)
+                  ) / goal.onslaughtMythicShards
               )
             : 0;
         return tokensForRegularShards + tokensForMythicShards;
@@ -921,7 +1017,6 @@ export class UpgradesService {
         goals: ICharacterAscendGoal[]
     ): ICharacterAscendGoal | undefined {
         const shardGoal = goals
-            .filter(goal => goal.onslaughtShards > 0)
             .filter(goal => this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal))
             .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, goal) > 0)
             .reduce(
@@ -929,7 +1024,6 @@ export class UpgradesService {
                 undefined as ICharacterAscendGoal | undefined
             );
         const mythicShardGoal = goals
-            .filter(goal => goal.onslaughtMythicShards > 0)
             .filter(goal => this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, goal))
             .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, goal) > 0)
             .reduce(
@@ -954,20 +1048,11 @@ export class UpgradesService {
         // First filter out any goals that need either type of shard but don't allow onslaught for
         // that type.
         return goals
-            .filter(
-                goal =>
-                    goal.onslaughtShards === 0 ||
-                    this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal)
-            )
-            .filter(
-                goal =>
-                    goal.onslaughtMythicShards === 0 ||
-                    this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, goal)
-            )
             .map(goal => ({
                 goal,
                 tokens: this.getOnslaughtTokensForGoal(inventory, characters, goal),
             }))
+            .filter(x => x.tokens > 0)
             .sort((a, b) => b.tokens - a.tokens)[0]?.goal;
     }
 
@@ -1038,7 +1123,6 @@ export class UpgradesService {
             } else {
                 goal = this.findHighestPriorityOnslaughtGoal(inventory, characters, goals);
             }
-            console.log('onslaught goal unit: ', goal?.unitId, ' with priority: ', goal?.priority);
             if (goal === undefined) break;
             let upgradeId = '';
             let shards = 0;
@@ -1068,8 +1152,8 @@ export class UpgradesService {
                 energyLeft: 0,
                 daysTotal: 0,
                 raidsTotal: 0,
-                acquiredCount: originalInventory[upgradeId] ?? 0,
-                requiredCount: combinedBaseMaterials[upgradeId]?.requiredCount ?? 0,
+                acquiredCount: Math.floor(originalInventory[upgradeId] ?? 0),
+                requiredCount: Math.ceil(combinedBaseMaterials[upgradeId]?.requiredCount ?? 0),
                 relatedCharacters: uniq(relatedGoals[upgradeId]?.map(goal => goal.unitId) ?? []),
                 relatedGoals: uniq((relatedGoals[upgradeId] ?? []).map(goal => goal.goalId)),
                 isBlocked: false,
@@ -1126,20 +1210,22 @@ export class UpgradesService {
         raidsByMaterial.forEach(([reward, locations]) => {
             const acquired = settings.upgrades[reward] ?? 0;
             const required = combinedBaseMaterials[reward]?.requiredCount ?? 0;
+            const upgrade = FsdUpgradesService.getUpgrade(reward);
+            const newLocations = cloneDeep(locations);
             const raid: IUpgradeRaid = {
                 id: `first-day-${reward}-${raidIndex++}`,
                 snowprintId: '',
-                label: 'Already raided',
-                rarity: 'Shard',
-                iconPath: FsdUpgradesService.getUpgrade(reward)?.iconPath ?? '',
-                locations: locations,
-                raidLocations: locations,
+                label: upgrade?.label ?? 'Unknown',
+                rarity: upgrade?.rarity ?? 'Shard',
+                iconPath: upgrade?.iconPath ?? '',
+                locations: newLocations,
+                raidLocations: newLocations,
                 crafted: false,
                 stat: 'Shard',
-                energyTotal: sum(locations.map(loc => loc.energySpent)),
+                energyTotal: sum(newLocations.map(loc => loc.energySpent)),
                 energyLeft: 0,
                 daysTotal: 1,
-                raidsTotal: sum(locations.map(loc => loc.raidsCount)),
+                raidsTotal: sum(newLocations.map(loc => loc.raidsCount)),
                 acquiredCount: acquired,
                 requiredCount: required,
                 relatedCharacters: uniq(
@@ -1151,7 +1237,7 @@ export class UpgradesService {
             };
 
             raids.push(raid);
-            energySpent += locations.reduce((sum, loc) => sum + loc.energySpent, 0);
+            energySpent += newLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
         });
 
         return {
@@ -2009,8 +2095,6 @@ export class UpgradesService {
                         completedLocation.dailyBattleCount !== completedLocation.raidsCount
                 );
 
-                console.warn('loc isCE isAvail', location, isCampaignEventLocation, isCampaignEventLocationAvailable);
-
                 // location can be suggested for raids only if it is unlocked, passed other filters
                 // and in case it is Campaign Event location user should have specific Campaign Event selected.
                 location.isSuggested =
@@ -2042,19 +2126,8 @@ export class UpgradesService {
                         CampaignType.Extremis,
                     ]),
                 ];
-                console.warn(
-                    'looking for location types',
-                    combinedUpgrade.rarity,
-                    locationTypes,
-                    combinedUpgrade.locations
-                );
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
                 const ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
-                console.warn(
-                    'selectedLocations ignoredLocations',
-                    selectedLocations.map(x => x.id),
-                    ignoredLocations.map(x => x.id)
-                );
 
                 ignoredLocations.forEach(location => (location.isSuggested = false));
             }

@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const TodayRaids: React.FC<Props> = ({ completedRaids, upgradesRaids }: Props) => {
-    const locs = completedRaids.flatMap(raid => raid.raidLocations);
+    const locs = [...completedRaids, ...upgradesRaids].flatMap(raid => raid.raidLocations);
     const energySpent = sum(locs.map(loc => loc.energySpent));
     const raidsCount = sum(locs.map(loc => loc.raidsCount));
 

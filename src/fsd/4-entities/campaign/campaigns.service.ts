@@ -156,6 +156,11 @@ export class CampaignsService {
                 : reward.startsWith('mythicShards_')
                   ? 'Mythic Shard'
                   : RarityString[recipe?.rarity as keyof typeof Rarity];
+            const rarityEnum = reward.startsWith('shards_')
+                ? 'Shard'
+                : reward.startsWith('mythicShards_')
+                  ? 'Mythic Shard'
+                  : Rarity[recipe?.rarity as keyof typeof Rarity];
 
             result[battleDataKey] = {
                 id: battle.campaign + battle.nodeNumber,
@@ -169,7 +174,7 @@ export class CampaignsService {
                 energyPerDay,
                 nodeNumber: battle.nodeNumber,
                 rarity: rarity,
-                rarityEnum: rarity,
+                rarityEnum: rarityEnum,
                 rewards: battle.rewards,
                 slots: battle.slots,
                 enemiesAlliances: (battle.enemiesAlliances ?? [enemies.alliance]) as Alliance[],

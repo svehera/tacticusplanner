@@ -352,7 +352,7 @@ export const RaidsPlan: React.FC<Props> = ({
                             <FlexBox className="flex-col items-start">
                                 <div className="flex-box gap5 wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <span>
-                                        Upgrades raids (<b>{estimatedRanks.upgradesRaids.length}</b> Days |
+                                        Raids Plan (<b>{estimatedRanks.upgradesRaids.length}</b> Days |
                                     </span>
                                     <span>
                                         <b>{estimatedRanks.freeEnergyDays}</b> Unused{' '}

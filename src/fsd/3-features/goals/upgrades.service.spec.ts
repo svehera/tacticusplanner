@@ -210,7 +210,7 @@ const createCompletedLocation = (
 ): IItemRaidLocation => {
     return {
         ...battle,
-        raidsCount,
+        raidsCount: raidsCount,
         farmedItems: 0,
         energySpent: raidsCount * battle.energyCost,
         isShardsLocation: false,
@@ -224,7 +224,7 @@ const createNoRewardLocation = (battleId: string, raidsCount = 1): IItemRaidLoca
         rewards: battle.rewards,
         energyCost: battle.energyCost,
         dailyBattleCount: raidsCount,
-        raidsCount,
+        raidsCount: raidsCount,
         farmedItems: 0,
         energySpent: raidsCount * battle.energyCost,
         isShardsLocation: false,
@@ -351,7 +351,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
     it('consumes only the tokens needed to complete onslaught shards', () => {
         const baseChar = CharactersService.charactersData[0];
-        const character = createCharacter(baseChar);
+        const character = createCharacter(baseChar, { rarity: Rarity.Rare, stars: RarityStars.RedOneStar, shards: 40 });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-2',
@@ -360,6 +360,11 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
             unitAlliance: character.alliance ?? Alliance.Imperial,
+            rarityStart: Rarity.Rare,
+            rarityEnd: Rarity.Epic,
+            starsStart: RarityStars.RedOneStar,
+            starsEnd: RarityStars.RedOneStar,
+            onslaughtShards: 6.5,
         });
 
         const inventory: Record<string, number> = {
@@ -368,7 +373,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
                     .slice(0, 1)
                     .map(item => [item.material, 0])
             ),
-            [`shards_${character.snowprintId}`]: 237,
+            [`shards_${character.snowprintId}`]: character.shards,
         };
 
         const settings: IEstimatedRanksSettings = {
@@ -410,8 +415,16 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         const baseCharA = CharactersService.charactersData[0];
         const baseCharB = CharactersService.charactersData[1];
 
-        const characterA = createCharacter(baseCharA);
-        const characterB = createCharacter(baseCharB);
+        const characterA = createCharacter(baseCharA, {
+            rarity: Rarity.Rare,
+            stars: RarityStars.RedOneStar,
+            shards: 49,
+        });
+        const characterB = createCharacter(baseCharB, {
+            rarity: Rarity.Rare,
+            stars: RarityStars.RedOneStar,
+            shards: 49,
+        });
 
         const goalA: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-a',
@@ -420,6 +433,10 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
             unitIcon: characterA.icon ?? '',
             unitRoundIcon: characterA.roundIcon ?? '',
             unitAlliance: characterA.alliance ?? Alliance.Imperial,
+            rarityStart: Rarity.Rare,
+            rarityEnd: Rarity.Epic,
+            starsStart: RarityStars.RedOneStar,
+            starsEnd: RarityStars.RedOneStar,
         });
 
         const goalB: ICharacterAscendGoal = createAscendGoal({
@@ -430,6 +447,10 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
             unitIcon: characterB.icon ?? '',
             unitRoundIcon: characterB.roundIcon ?? '',
             unitAlliance: characterB.alliance ?? Alliance.Imperial,
+            rarityStart: Rarity.Rare,
+            rarityEnd: Rarity.Epic,
+            starsStart: RarityStars.RedOneStar,
+            starsEnd: RarityStars.RedOneStar,
         });
 
         const inventory: Record<string, number> = {
@@ -438,8 +459,8 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
                     .slice(0, 1)
                     .map(item => [item.material, 0])
             ),
-            [`shards_${characterA.snowprintId}`]: 244,
-            [`shards_${characterB.snowprintId}`]: 244,
+            [`shards_${characterA.snowprintId}`]: characterA.shards,
+            [`shards_${characterB.snowprintId}`]: characterB.shards,
         };
 
         const settings: IEstimatedRanksSettings = {
@@ -487,6 +508,133 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         expect(day.raids.every(raid => raid.raidLocations.length === 1)).toBe(true);
     });
 
+    it('does not add onslaughts when shard goal is already met (total materials)', () => {
+        const baseChar = CharactersService.charactersData.find(char => char.snowprintId === 'emperExultant');
+        expect(baseChar).toBeDefined();
+        const character = createCharacter(baseChar as ICharacterData, {
+            shards: 750,
+            rarity: Rarity.Legendary,
+            stars: RarityStars.RedFourStars,
+        });
+
+        const goal: ICharacterAscendGoal = createAscendGoal({
+            goalId: 'goal-legendary-ascend',
+            unitId: character.snowprintId!,
+            unitName: character.shortName ?? character.name,
+            unitIcon: character.icon ?? '',
+            unitRoundIcon: character.roundIcon ?? '',
+            unitAlliance: character.alliance ?? Alliance.Imperial,
+            rarityStart: Rarity.Legendary,
+            rarityEnd: Rarity.Legendary,
+            starsStart: RarityStars.RedFourStars,
+            starsEnd: RarityStars.OneBlueStar,
+        });
+
+        const inventory: Record<string, number> = {
+            ...Object.fromEntries(
+                Object.values(recipeDataByName)
+                    .slice(0, 1)
+                    .map(item => [item.material, 0])
+            ),
+            [`shards_${character.snowprintId}`]: 750,
+        };
+
+        const settings: IEstimatedRanksSettings = {
+            completedLocations: [],
+            campaignsProgress: {} as IEstimatedRanksSettings['campaignsProgress'],
+            dailyEnergy: 0,
+            preferences: {
+                dailyEnergy: 638,
+                shardsEnergy: 0,
+                farmPreferences: {
+                    order: IDailyRaidsFarmOrder.totalMaterials,
+                    homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
+                },
+                farmStrategy: DailyRaidsStrategy.leastEnergy,
+            },
+            upgrades: inventory,
+            onslaughtTokensToday: 3,
+        };
+
+        const day: IUpgradesRaidsDay = {
+            raids: [],
+            energyTotal: 0,
+            raidsTotal: 0,
+            onslaughtTokens: 0,
+        };
+
+        const combinedBaseMaterials = {} as Record<string, ICombinedUpgrade>;
+
+        UpgradesService.addOnslaughtsForDay(day, [character], 3, [goal], combinedBaseMaterials, settings, inventory);
+
+        expect(day.raids).toHaveLength(0);
+        expect(day.onslaughtTokens).toBe(0);
+    });
+
+    it('does not add onslaughts when shard goal is already met (goal priority)', () => {
+        const baseChar = CharactersService.charactersData.find(char => char.snowprintId === 'emperExultant');
+        expect(baseChar).toBeDefined();
+        const character = createCharacter(baseChar as ICharacterData, {
+            shards: 750,
+            rarity: Rarity.Legendary,
+            stars: RarityStars.RedFourStars,
+        });
+
+        const goal: ICharacterAscendGoal = createAscendGoal({
+            goalId: 'goal-legendary-ascend',
+            unitId: character.snowprintId!,
+            unitName: character.shortName ?? character.name,
+            unitIcon: character.icon ?? '',
+            unitRoundIcon: character.roundIcon ?? '',
+            unitAlliance: character.alliance ?? Alliance.Imperial,
+            rarityStart: Rarity.Legendary,
+            rarityEnd: Rarity.Legendary,
+            starsStart: RarityStars.RedFourStars,
+            starsEnd: RarityStars.OneBlueStar,
+        });
+
+        const inventory: Record<string, number> = {
+            ...Object.fromEntries(
+                Object.values(recipeDataByName)
+                    .slice(0, 1)
+                    .map(item => [item.material, 0])
+            ),
+            [`shards_${character.snowprintId}`]: 750,
+        };
+
+        const settings: IEstimatedRanksSettings = {
+            completedLocations: [],
+            campaignsProgress: {} as IEstimatedRanksSettings['campaignsProgress'],
+            dailyEnergy: 0,
+            preferences: {
+                dailyEnergy: 638,
+                shardsEnergy: 0,
+                farmPreferences: {
+                    order: IDailyRaidsFarmOrder.goalPriority,
+                    homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
+                },
+                farmStrategy: DailyRaidsStrategy.leastEnergy,
+            },
+            upgrades: inventory,
+            onslaughtTokensToday: 3,
+        };
+
+        const day: IUpgradesRaidsDay = {
+            raids: [],
+            energyTotal: 0,
+            raidsTotal: 0,
+            onslaughtTokens: 0,
+        };
+
+        const combinedBaseMaterials = {} as Record<string, ICombinedUpgrade>;
+
+        UpgradesService.addOnslaughtsForDay(day, [character], 3, [goal], combinedBaseMaterials, settings, inventory);
+
+        console.error('day', day);
+        expect(day.raids).toHaveLength(0);
+        expect(day.onslaughtTokens).toBe(0);
+    });
+
     it('does not modify the day when goals is empty', () => {
         const baseChar = CharactersService.charactersData[0];
         const character = createCharacter(baseChar);
@@ -532,6 +680,81 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         expect(day.raids).toHaveLength(0);
         expect(day.energyTotal).toBe(0);
         expect(day.raidsTotal).toBe(0);
+    });
+});
+
+describe('UpgradesService.planDayRaiding', () => {
+    it('farms both Boon of Khorne elite locations when sorting by total materials', () => {
+        const baseChar = CharactersService.charactersData.find(
+            char => char.shortName === 'Tarvakh' || char.name === 'Tarvakh'
+        );
+        expect(baseChar).toBeDefined();
+        const character = createCharacter(baseChar as ICharacterData, {
+            rank: Rank.Silver1,
+            rarity: Rarity.Legendary,
+            stars: RarityStars.RedThreeStars,
+        });
+
+        const goal = createRankGoal(baseChar as ICharacterData, {
+            goalId: 'goal-tarvakh-s1-d3',
+            rankStart: Rank.Silver1,
+            rankEnd: Rank.Diamond3,
+        });
+
+        const campaignsProgress = Object.values(Campaign)
+            .filter((value): value is Campaign => typeof value === 'string')
+            .reduce(
+                (acc, campaign) => {
+                    acc[campaign] = 999;
+                    return acc;
+                },
+                {} as IEstimatedRanksSettings['campaignsProgress']
+            );
+
+        const inventory: Record<string, number> = {};
+        const settings = createSettings({
+            dailyEnergy: 500,
+            campaignsProgress,
+            upgrades: inventory,
+            preferences: {
+                ...createSettings().preferences,
+                dailyEnergy: 500,
+                farmPreferences: {
+                    order: IDailyRaidsFarmOrder.totalMaterials,
+                    homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
+                },
+                farmStrategy: DailyRaidsStrategy.leastEnergy,
+            },
+        });
+
+        const unitUpgrades = UpgradesService.getUpgrades(inventory, [character], [], [goal]);
+        const combinedBaseMaterials = UpgradesService.combineBaseMaterials(unitUpgrades);
+        UpgradesService.populateLocationsData(combinedBaseMaterials, settings);
+
+        const locs = Object.values(combinedBaseMaterials)
+            .flatMap(mat => mat.locations)
+            .filter(loc => loc.isSuggested);
+
+        const day: IUpgradesRaidsDay = {
+            raids: [],
+            energyTotal: 0,
+            raidsTotal: 0,
+            onslaughtTokens: 0,
+        };
+
+        UpgradesService.planDayRaiding(day, settings, settings.dailyEnergy, locs, combinedBaseMaterials, inventory, [
+            goal,
+        ]);
+
+        const boonLocations = [
+            CampaignsService.campaignsComposed['FoCE29'].id,
+            CampaignsService.campaignsComposed['SHME31'].id,
+        ];
+        const boonRaid = day.raids.find(raid => raid.id === 'upgHpL118');
+        const raidLocationIds = boonRaid?.raidLocations.map(loc => loc.id) ?? [];
+
+        expect(boonRaid).toBeDefined();
+        expect(raidLocationIds).toEqual(expect.arrayContaining(boonLocations));
     });
 });
 
@@ -1190,22 +1413,54 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             rarityStart: Rarity.Mythic,
             starsStart: RarityStars.OneBlueStar,
             rarityEnd: Rarity.Mythic,
-            starsEnd: RarityStars.OneBlueStar,
+            starsEnd: RarityStars.TwoBlueStars,
             onslaughtShards: 0,
-            onslaughtMythicShards: 10,
+            onslaughtMythicShards: 1,
         });
 
         const inventory: Record<string, number> = {
-            [`shards_${character.snowprintId}`]: 1400,
+            [`shards_${character.snowprintId}`]: 0,
             [`mythicShards_${character.snowprintId}`]: 0,
         };
 
         const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
 
-        expect(tokens).toBe(2);
+        expect(tokens).toBe(30);
     });
 
-    it('returns mythic tokens when both shard types are needed but only mythic onslaught is permitted', () => {
+    it('returns normal onslaughts only when character has a goal from pre-mythic to mythic but character is not yet mythic', () => {
+        const baseChar = CharactersService.charactersData[0];
+        const character = createCharacter(baseChar, {
+            rarity: Rarity.Legendary,
+            stars: RarityStars.RedFiveStars,
+            rarityStars: RarityStars.RedFiveStars,
+        });
+
+        const goal: ICharacterAscendGoal = createAscendGoal({
+            unitId: character.snowprintId!,
+            unitName: character.shortName ?? character.name,
+            unitIcon: character.icon ?? '',
+            unitRoundIcon: character.roundIcon ?? '',
+            unitAlliance: character.alliance ?? Alliance.Imperial,
+            rarityStart: Rarity.Legendary,
+            starsStart: RarityStars.RedFiveStars,
+            rarityEnd: Rarity.Mythic,
+            starsEnd: RarityStars.OneBlueStar,
+            onslaughtShards: 6.5,
+            onslaughtMythicShards: 1,
+        });
+
+        const inventory: Record<string, number> = {
+            [`shards_${character.snowprintId}`]: 494,
+            [`mythicShards_${character.snowprintId}`]: 16,
+        };
+
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+
+        expect(tokens).toBe(1);
+    });
+
+    it('returns mythic onslaughts only when character has a goal from pre-mythic to mythic and character is now mythic', () => {
         const baseChar = CharactersService.charactersData[0];
         const character = createCharacter(baseChar, {
             rarity: Rarity.Mythic,
@@ -1228,21 +1483,20 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         });
 
         const inventory: Record<string, number> = {
-            [`shards_${character.snowprintId}`]: 1394,
-            [`mythicShards_${character.snowprintId}`]: 45,
+            [`shards_${character.snowprintId}`]: 0,
+            [`mythicShards_${character.snowprintId}`]: 16,
         };
 
         const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
 
-        expect(tokens).toBe(5);
+        expect(tokens).toBe(14);
     });
 
     it('rounds up tokens for 21 regular shards at 6.5 per token', () => {
         const baseChar = CharactersService.charactersData[0];
         const character = createCharacter(baseChar, {
-            rarity: Rarity.Common,
-            stars: RarityStars.None,
-            rarityStars: RarityStars.None,
+            rarity: Rarity.Rare,
+            rarityStars: RarityStars.RedOneStar,
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
@@ -1251,15 +1505,15 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
             unitAlliance: character.alliance ?? Alliance.Imperial,
-            rarityStart: Rarity.Common,
-            starsStart: RarityStars.None,
-            rarityEnd: Rarity.Common,
-            starsEnd: RarityStars.TwoStars,
+            rarityStart: Rarity.Rare,
+            starsStart: RarityStars.RedOneStar,
+            rarityEnd: Rarity.Epic,
+            starsEnd: RarityStars.RedOneStar,
             onslaughtShards: 6.5,
         });
 
         const inventory: Record<string, number> = {
-            [`shards_${character.snowprintId}`]: 44,
+            [`shards_${character.snowprintId}`]: 29,
         };
 
         const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
@@ -1267,7 +1521,65 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         expect(tokens).toBe(4);
     });
 
-    it('rounds up tokens for 21 mythic shards at 6.5 per token', () => {
+    it('Uses no onslaught tokens when goal is already met', () => {
+        const baseChar = CharactersService.charactersData[0];
+        const character = createCharacter(baseChar, {
+            rarity: Rarity.Rare,
+            rarityStars: RarityStars.RedOneStar,
+        });
+
+        const goal: ICharacterAscendGoal = createAscendGoal({
+            unitId: character.snowprintId!,
+            unitName: character.shortName ?? character.name,
+            unitIcon: character.icon ?? '',
+            unitRoundIcon: character.roundIcon ?? '',
+            unitAlliance: character.alliance ?? Alliance.Imperial,
+            rarityStart: Rarity.Uncommon,
+            starsStart: RarityStars.FourStars,
+            rarityEnd: Rarity.Rare,
+            starsEnd: RarityStars.RedOneStar,
+            onslaughtShards: 6.5,
+        });
+
+        const inventory: Record<string, number> = {
+            [`shards_${character.snowprintId}`]: 0,
+        };
+
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+
+        expect(tokens).toBe(0);
+    });
+
+    it('Uses no onslaught tokens when goal is already surpassed', () => {
+        const baseChar = CharactersService.charactersData[0];
+        const character = createCharacter(baseChar, {
+            rarity: Rarity.Legendary,
+            rarityStars: RarityStars.OneBlueStar,
+        });
+
+        const goal: ICharacterAscendGoal = createAscendGoal({
+            unitId: character.snowprintId!,
+            unitName: character.shortName ?? character.name,
+            unitIcon: character.icon ?? '',
+            unitRoundIcon: character.roundIcon ?? '',
+            unitAlliance: character.alliance ?? Alliance.Imperial,
+            rarityStart: Rarity.Rare,
+            starsStart: RarityStars.RedOneStar,
+            rarityEnd: Rarity.Epic,
+            starsEnd: RarityStars.RedOneStar,
+            onslaughtShards: 6.5,
+        });
+
+        const inventory: Record<string, number> = {
+            [`shards_${character.snowprintId}`]: 0,
+        };
+
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+
+        expect(tokens).toBe(0);
+    });
+
+    it('rounds up tokens for 5 mythic shards at 1.5 per token', () => {
         const baseChar = CharactersService.charactersData[0];
         const character = createCharacter(baseChar, {
             rarity: Rarity.Mythic,
@@ -1286,12 +1598,11 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             rarityEnd: Rarity.Mythic,
             starsEnd: RarityStars.ThreeBlueStars,
             onslaughtShards: 0,
-            onslaughtMythicShards: 6.5,
+            onslaughtMythicShards: 1.5,
         });
 
         const inventory: Record<string, number> = {
-            [`shards_${character.snowprintId}`]: 1400,
-            [`mythicShards_${character.snowprintId}`]: 79,
+            [`mythicShards_${character.snowprintId}`]: 45,
         };
 
         const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
@@ -1299,12 +1610,12 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         expect(tokens).toBe(4);
     });
 
-    it('returns one token when only one shard is needed and onslaught grants more than one', () => {
+    it('returns one token when onslaught rewards more token than needed', () => {
         const baseChar = CharactersService.charactersData[0];
         const character = createCharacter(baseChar, {
-            rarity: Rarity.Common,
-            stars: RarityStars.None,
-            rarityStars: RarityStars.None,
+            rarity: Rarity.Rare,
+            stars: RarityStars.RedOneStar,
+            rarityStars: RarityStars.RedOneStar,
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
@@ -1313,15 +1624,15 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
             unitAlliance: character.alliance ?? Alliance.Imperial,
-            rarityStart: Rarity.Common,
-            starsStart: RarityStars.None,
-            rarityEnd: Rarity.Common,
-            starsEnd: RarityStars.None,
+            rarityStart: Rarity.Rare,
+            starsStart: RarityStars.RedOneStar,
+            rarityEnd: Rarity.Epic,
+            starsEnd: RarityStars.RedOneStar,
             onslaughtShards: 6.5,
         });
 
         const inventory: Record<string, number> = {
-            [`shards_${character.snowprintId}`]: 39,
+            [`shards_${character.snowprintId}`]: 45,
         };
 
         const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
@@ -1487,7 +1798,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             unitAlliance: characterRegular.alliance ?? Alliance.Imperial,
             rarityStart: Rarity.Common,
             starsStart: RarityStars.TwoStars,
-            rarityEnd: Rarity.Common,
+            rarityEnd: Rarity.Uncommon,
             starsEnd: RarityStars.TwoStars,
             onslaughtShards: 6.5,
             onslaughtMythicShards: 0,
@@ -1509,9 +1820,8 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
         });
 
         const inventory: Record<string, number> = {
-            [`shards_${characterRegular.snowprintId}`]: 60,
-            [`shards_${characterMythic.snowprintId}`]: 1400,
-            [`mythicShards_${characterMythic.snowprintId}`]: 47,
+            [`shards_${characterRegular.snowprintId}`]: 0,
+            [`mythicShards_${characterMythic.snowprintId}`]: 15,
         };
 
         const result = UpgradesService.findLongestOnslaughtGoal(
@@ -1547,7 +1857,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             unitAlliance: characterLow.alliance ?? Alliance.Imperial,
             rarityStart: Rarity.Common,
             starsStart: RarityStars.TwoStars,
-            rarityEnd: Rarity.Common,
+            rarityEnd: Rarity.Uncommon,
             starsEnd: RarityStars.TwoStars,
             onslaughtShards: 6.5,
             onslaughtMythicShards: 0,
@@ -1562,15 +1872,15 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             unitAlliance: characterHigh.alliance ?? Alliance.Imperial,
             rarityStart: Rarity.Common,
             starsStart: RarityStars.TwoStars,
-            rarityEnd: Rarity.Common,
+            rarityEnd: Rarity.Uncommon,
             starsEnd: RarityStars.TwoStars,
             onslaughtShards: 6.5,
             onslaughtMythicShards: 0,
         });
 
         const inventory: Record<string, number> = {
-            [`shards_${characterLow.snowprintId}`]: 60,
-            [`shards_${characterHigh.snowprintId}`]: 50,
+            [`shards_${characterLow.snowprintId}`]: 10,
+            [`shards_${characterHigh.snowprintId}`]: 0,
         };
 
         const result = UpgradesService.findLongestOnslaughtGoal(
@@ -2623,5 +2933,502 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
 
         const expected = Math.ceil(18 / getRate(location));
         expect(result).toBeCloseTo(expected, 5);
+    });
+});
+
+describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () => {
+    const getRate = (location: ICampaignBattleComposed): number => location.energyPerDay / location.energyPerItem;
+    const upgradeId = 'upgHpL118';
+
+    const buildCombinedUpgrade = (overrides: Partial<ICombinedUpgrade>): ICombinedUpgrade => ({
+        ...FsdUpgradesService.baseUpgradesData[upgradeId],
+        requiredCount: 0,
+        countByGoalId: {},
+        relatedCharacters: [],
+        relatedGoals: [],
+        locations: [],
+        ...overrides,
+    });
+
+    const baseChar = CharactersService.charactersData[0];
+    const goalA = createRankGoal(baseChar, { goalId: 'goalA', priority: 1 });
+    const goalB = createRankGoal(baseChar, { goalId: 'goalB', priority: 2 });
+    const goals = [goalA, goalB];
+
+    const buildSettings = (order: IDailyRaidsFarmOrder): IEstimatedRanksSettings =>
+        createSettings({
+            preferences: {
+                ...createSettings().preferences,
+                farmPreferences: {
+                    order,
+                    homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
+                },
+                farmStrategy: DailyRaidsStrategy.leastEnergy,
+            },
+        });
+
+    it('uses highest-priority goal that still needs the material', () => {
+        const location = { ...CampaignsService.campaignsComposed['FoCE29'], isSuggested: true };
+        const combinedUpgrade = buildCombinedUpgrade({
+            countByGoalId: { goalA: 10, goalB: 30 },
+            requiredCount: 40,
+            relatedGoals: [goalA.goalId, goalB.goalId],
+            locations: [location],
+        });
+
+        const [tagged] = UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            [location],
+            goals,
+            { [upgradeId]: combinedUpgrade },
+            {},
+            buildSettings(IDailyRaidsFarmOrder.goalPriority)
+        );
+
+        const expectedDays = Math.ceil(10 / getRate(location));
+        expect(tagged?.priority).toBe(1);
+        expect(tagged?.highestPriorityGoalId).toBe('goalA');
+        expect(tagged?.daysToComplete).toBe(expectedDays);
+    });
+
+    it('moves to the next goal when higher-priority needs are met', () => {
+        const location = { ...CampaignsService.campaignsComposed['FoCE29'], isSuggested: true };
+        const combinedUpgrade = buildCombinedUpgrade({
+            countByGoalId: { goalA: 10, goalB: 20 },
+            requiredCount: 30,
+            relatedGoals: [goalA.goalId, goalB.goalId],
+            locations: [location],
+        });
+
+        const [tagged] = UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            [location],
+            goals,
+            { [upgradeId]: combinedUpgrade },
+            { [upgradeId]: 15 },
+            buildSettings(IDailyRaidsFarmOrder.goalPriority)
+        );
+
+        const expectedDays = Math.ceil(15 / getRate(location));
+        expect(tagged?.priority).toBe(2);
+        expect(tagged?.highestPriorityGoalId).toBe('goalB');
+        expect(tagged?.daysToComplete).toBe(expectedDays);
+    });
+
+    it('accounts for the number of available nodes', () => {
+        const locationA = { ...CampaignsService.campaignsComposed['FoCE29'], isSuggested: true };
+        const locationB = { ...CampaignsService.campaignsComposed['SHME31'], isSuggested: true };
+        const combinedUpgrade = buildCombinedUpgrade({
+            countByGoalId: { goalA: 10 },
+            requiredCount: 10,
+            relatedGoals: [goalA.goalId],
+            locations: [locationA, locationB],
+        });
+
+        const [tagged] = UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            [locationA, locationB],
+            goals,
+            { [upgradeId]: combinedUpgrade },
+            {},
+            buildSettings(IDailyRaidsFarmOrder.goalPriority)
+        );
+
+        const expectedDays = Math.ceil(10 / (getRate(locationA) + getRate(locationB)));
+        expect(tagged?.priority).toBe(1);
+        expect(tagged?.highestPriorityGoalId).toBe('goalA');
+        expect(tagged?.daysToComplete).toBe(expectedDays);
+    });
+
+    it('reflects drop rate differences via energy per item', () => {
+        const slowLocation = { ...CampaignsService.campaignsComposed['SHM64'], isSuggested: true };
+        const fastLocation = { ...CampaignsService.campaignsComposed['FoCE29'], isSuggested: true };
+        const combinedSlow = buildCombinedUpgrade({
+            countByGoalId: { goalA: 50 },
+            requiredCount: 50,
+            relatedGoals: [goalA.goalId],
+            locations: [slowLocation],
+        });
+        const combinedFast = buildCombinedUpgrade({
+            countByGoalId: { goalA: 50 },
+            requiredCount: 50,
+            relatedGoals: [goalA.goalId],
+            locations: [fastLocation],
+        });
+
+        const [slowTagged] = UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            [slowLocation],
+            goals,
+            { [upgradeId]: combinedSlow },
+            {},
+            buildSettings(IDailyRaidsFarmOrder.goalPriority)
+        );
+        const [fastTagged] = UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            [fastLocation],
+            goals,
+            { [upgradeId]: combinedFast },
+            {},
+            buildSettings(IDailyRaidsFarmOrder.goalPriority)
+        );
+
+        const expectedSlow = Math.ceil(50 / getRate(slowLocation));
+        const expectedFast = Math.ceil(50 / getRate(fastLocation));
+
+        expect(slowTagged?.daysToComplete).toBe(expectedSlow);
+        expect(fastTagged?.daysToComplete).toBe(expectedFast);
+        expect(fastTagged?.daysToComplete).toBeLessThan(slowTagged?.daysToComplete ?? 0);
+    });
+
+    it('does not change with rarity when locations are the same', () => {
+        const location = { ...CampaignsService.campaignsComposed['FoCE29'], isSuggested: true };
+        const combinedLegendary = buildCombinedUpgrade({
+            rarity: Rarity.Legendary,
+            countByGoalId: { goalA: 12 },
+            requiredCount: 12,
+            relatedGoals: [goalA.goalId],
+            locations: [location],
+        });
+        const combinedEpic = buildCombinedUpgrade({
+            rarity: Rarity.Epic,
+            countByGoalId: { goalA: 12 },
+            requiredCount: 12,
+            relatedGoals: [goalA.goalId],
+            locations: [location],
+        });
+
+        const [legendaryTagged] = UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            [location],
+            goals,
+            { [upgradeId]: combinedLegendary },
+            {},
+            buildSettings(IDailyRaidsFarmOrder.goalPriority)
+        );
+        const [epicTagged] = UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            [location],
+            goals,
+            { [upgradeId]: combinedEpic },
+            {},
+            buildSettings(IDailyRaidsFarmOrder.goalPriority)
+        );
+
+        expect(legendaryTagged?.daysToComplete).toBe(epicTagged?.daysToComplete);
+    });
+
+    it('combines multiple variables consistently', () => {
+        const locationA = { ...CampaignsService.campaignsComposed['FoCE29'], isSuggested: true };
+        const locationB = { ...CampaignsService.campaignsComposed['SHM64'], isSuggested: true };
+        const combinedUpgrade = buildCombinedUpgrade({
+            countByGoalId: { goalA: 8, goalB: 20 },
+            requiredCount: 28,
+            relatedGoals: [goalA.goalId, goalB.goalId],
+            locations: [locationA, locationB],
+        });
+
+        const [tagged] = UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            [locationA, locationB],
+            goals,
+            { [upgradeId]: combinedUpgrade },
+            {},
+            buildSettings(IDailyRaidsFarmOrder.goalPriority)
+        );
+
+        const rateSum = getRate(locationA) + getRate(locationB);
+        expect(tagged?.priority).toBe(1);
+        expect(tagged?.highestPriorityGoalId).toBe('goalA');
+        expect(tagged?.daysToComplete).toBe(Math.ceil(8 / rateSum));
+    });
+
+    it('returns default tagging for total-materials order', () => {
+        const location = { ...CampaignsService.campaignsComposed['FoCE29'], isSuggested: true };
+        const combinedUpgrade = buildCombinedUpgrade({
+            countByGoalId: { goalA: 10, goalB: 20 },
+            requiredCount: 30,
+            relatedGoals: [goalA.goalId, goalB.goalId],
+            locations: [location],
+        });
+
+        const [tagged] = UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            [location],
+            goals,
+            { [upgradeId]: combinedUpgrade },
+            { [upgradeId]: 12 },
+            buildSettings(IDailyRaidsFarmOrder.totalMaterials)
+        );
+
+        expect(tagged?.priority).toBe(undefined);
+        expect(tagged?.highestPriorityGoalId).toBeUndefined();
+        expect(tagged?.daysToComplete).toBe(8);
+    });
+
+    it('omits goal and priority when ordering by total materials', () => {
+        const location = { ...CampaignsService.campaignsComposed['FoCE29'], isSuggested: true };
+        const combinedUpgrade = buildCombinedUpgrade({
+            countByGoalId: { goalA: 10, goalB: 20 },
+            requiredCount: 30,
+            relatedGoals: [goalA.goalId, goalB.goalId],
+            locations: [location],
+        });
+
+        const [tagged] = UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            [location],
+            goals,
+            { [upgradeId]: combinedUpgrade },
+            { [upgradeId]: 12 },
+            buildSettings(IDailyRaidsFarmOrder.totalMaterials)
+        );
+
+        expect(tagged?.priority).toBeUndefined();
+        expect(tagged?.highestPriorityGoalId).toBeUndefined();
+    });
+});
+
+describe('UpgradesService.sortLocationsForRaiding', () => {
+    const baseChar = CharactersService.charactersData[0];
+    const goal = createRankGoal(baseChar, { goalId: 'goal-hse', priority: 1 });
+    const goals = [goal];
+
+    const buildSettingsForHse = (
+        order: IDailyRaidsFarmOrder,
+        homeScreenEvent: IDailyRaidsHomeScreenEvent
+    ): IEstimatedRanksSettings =>
+        createSettings({
+            preferences: {
+                ...createSettings().preferences,
+                farmPreferences: {
+                    order,
+                    homeScreenEvent,
+                },
+                farmStrategy: DailyRaidsStrategy.leastEnergy,
+            },
+        });
+
+    const buildCombinedUpgradeForLocation = (
+        upgradeId: string,
+        location: ICampaignBattleComposed
+    ): ICombinedUpgrade => ({
+        ...FsdUpgradesService.baseUpgradesData[upgradeId],
+        requiredCount: 5,
+        countByGoalId: { [goal.goalId]: 5 },
+        relatedCharacters: [],
+        relatedGoals: [goal.goalId],
+        locations: [location],
+    });
+
+    it('keeps Boon of Khorne locations near the front for Tarvakh S1→D3 (total materials, least energy)', () => {
+        const tarvakh = CharactersService.charactersData.find(
+            char => char.shortName === 'Tarvakh' || char.name === 'Tarvakh'
+        );
+        expect(tarvakh).toBeDefined();
+        const character = createCharacter(tarvakh as ICharacterData, { rank: Rank.Silver1 });
+
+        const tarvakhGoal = createRankGoal(tarvakh as ICharacterData, {
+            goalId: 'goal-tarvakh-s1-d3-sort',
+            rankStart: Rank.Silver1,
+            rankEnd: Rank.Diamond3,
+        });
+
+        const campaignsProgress = Object.values(Campaign)
+            .filter((value): value is Campaign => typeof value === 'string')
+            .reduce(
+                (acc, campaign) => {
+                    acc[campaign] = 999;
+                    return acc;
+                },
+                {} as IEstimatedRanksSettings['campaignsProgress']
+            );
+
+        const inventory: Record<string, number> = {};
+        const settings = createSettings({
+            dailyEnergy: 500,
+            campaignsProgress,
+            upgrades: inventory,
+            preferences: {
+                ...createSettings().preferences,
+                dailyEnergy: 500,
+                farmPreferences: {
+                    order: IDailyRaidsFarmOrder.totalMaterials,
+                    homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
+                },
+                farmStrategy: DailyRaidsStrategy.leastEnergy,
+            },
+        });
+
+        const unitUpgrades = UpgradesService.getUpgrades(inventory, [character], [], [tarvakhGoal]);
+        const combinedBaseMaterials = UpgradesService.combineBaseMaterials(unitUpgrades);
+        UpgradesService.populateLocationsData(combinedBaseMaterials, settings);
+
+        expect(combinedBaseMaterials.upgHpL118).toBeDefined();
+
+        const locs = Object.values(combinedBaseMaterials)
+            .flatMap(mat => mat.locations)
+            .filter(loc => loc.isSuggested);
+
+        const sorted = UpgradesService.sortLocationsForRaiding(
+            locs,
+            [tarvakhGoal],
+            combinedBaseMaterials,
+            inventory,
+            settings
+        );
+
+        const topLocations = sorted.slice(0, 10).map(loc => loc.id);
+        const boonLocations = [
+            CampaignsService.campaignsComposed['FoCE29'].id,
+            CampaignsService.campaignsComposed['SHME31'].id,
+        ];
+
+        expect(topLocations).toEqual(expect.arrayContaining(boonLocations));
+    });
+
+    it('orders purge order battles by hsePoints (goal priority)', () => {
+        const locO36 = { ...CampaignsService.campaignsComposed['O36'], isSuggested: true };
+        const locO40 = { ...CampaignsService.campaignsComposed['O40'], isSuggested: true };
+        const locOME30 = { ...CampaignsService.campaignsComposed['OME30'], isSuggested: true };
+        const combinedBaseMaterials = {
+            [locO36.rewards.potential[0].id]: buildCombinedUpgradeForLocation(locO36.rewards.potential[0].id, locO36),
+            [locO40.rewards.potential[0].id]: buildCombinedUpgradeForLocation(locO40.rewards.potential[0].id, locO40),
+            [locOME30.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locOME30.rewards.potential[0].id,
+                locOME30
+            ),
+        };
+
+        const sorted = UpgradesService.sortLocationsForRaiding(
+            [locO40, locOME30, locO36],
+            goals,
+            combinedBaseMaterials,
+            {},
+            buildSettingsForHse(IDailyRaidsFarmOrder.goalPriority, IDailyRaidsHomeScreenEvent.purgeOrder)
+        );
+
+        expect(sorted.map(loc => loc.id)).toEqual(['Octarius36', 'Octarius40', 'Octarius Mirror Elite30']);
+    });
+
+    it('orders purge order battles by hsePoints (total materials)', () => {
+        const locO36 = { ...CampaignsService.campaignsComposed['O36'], isSuggested: true };
+        const locO40 = { ...CampaignsService.campaignsComposed['O40'], isSuggested: true };
+        const locOME30 = { ...CampaignsService.campaignsComposed['OME30'], isSuggested: true };
+        const combinedBaseMaterials = {
+            [locO36.rewards.potential[0].id]: buildCombinedUpgradeForLocation(locO36.rewards.potential[0].id, locO36),
+            [locO40.rewards.potential[0].id]: buildCombinedUpgradeForLocation(locO40.rewards.potential[0].id, locO40),
+            [locOME30.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locOME30.rewards.potential[0].id,
+                locOME30
+            ),
+        };
+
+        const sorted = UpgradesService.sortLocationsForRaiding(
+            [locO40, locOME30, locO36],
+            goals,
+            combinedBaseMaterials,
+            {},
+            buildSettingsForHse(IDailyRaidsFarmOrder.totalMaterials, IDailyRaidsHomeScreenEvent.purgeOrder)
+        );
+
+        expect(sorted.map(loc => loc.id)).toEqual(['Octarius Mirror Elite30', 'Octarius40', 'Octarius36']);
+    });
+
+    it('orders warp surge battles by hsePoints (goal priority)', () => {
+        const locSH10 = { ...CampaignsService.campaignsComposed['SH10'], isSuggested: true };
+        const locSHE39 = { ...CampaignsService.campaignsComposed['SHE39'], isSuggested: true };
+        const locFoCME39 = { ...CampaignsService.campaignsComposed['FoCME39'], isSuggested: true };
+        const combinedBaseMaterials = {
+            [locSH10.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locSH10.rewards.potential[0].id,
+                locSH10
+            ),
+            [locSHE39.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locSHE39.rewards.potential[0].id,
+                locSHE39
+            ),
+            [locFoCME39.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locFoCME39.rewards.potential[0].id,
+                locFoCME39
+            ),
+        };
+
+        const sorted = UpgradesService.sortLocationsForRaiding(
+            [locFoCME39, locSHE39, locSH10],
+            goals,
+            combinedBaseMaterials,
+            {},
+            buildSettingsForHse(IDailyRaidsFarmOrder.goalPriority, IDailyRaidsHomeScreenEvent.warpSurge)
+        );
+
+        expect(sorted.map(loc => loc.id)).toEqual(['Saim-Hann Elite39', 'Saim-Hann10', 'Fall of Cadia Mirror Elite39']);
+    });
+
+    it('orders warp surge battles by hsePoints (total materials)', () => {
+        const locSH10 = { ...CampaignsService.campaignsComposed['SH10'], isSuggested: true };
+        const locSHE39 = { ...CampaignsService.campaignsComposed['SHE39'], isSuggested: true };
+        const locFoCME39 = { ...CampaignsService.campaignsComposed['FoCME39'], isSuggested: true };
+        const combinedBaseMaterials = {
+            [locSH10.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locSH10.rewards.potential[0].id,
+                locSH10
+            ),
+            [locSHE39.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locSHE39.rewards.potential[0].id,
+                locSHE39
+            ),
+            [locFoCME39.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locFoCME39.rewards.potential[0].id,
+                locFoCME39
+            ),
+        };
+
+        const sorted = UpgradesService.sortLocationsForRaiding(
+            [locFoCME39, locSHE39, locSH10],
+            goals,
+            combinedBaseMaterials,
+            {},
+            buildSettingsForHse(IDailyRaidsFarmOrder.totalMaterials, IDailyRaidsHomeScreenEvent.warpSurge)
+        );
+
+        expect(sorted.map(loc => loc.id)).toEqual(['Fall of Cadia Mirror Elite39', 'Saim-Hann10', 'Saim-Hann Elite39']);
+    });
+
+    it('orders machine hunt battles by hsePoints (goal priority)', () => {
+        const locI23 = { ...CampaignsService.campaignsComposed['I23'], isSuggested: true };
+        const locI37 = { ...CampaignsService.campaignsComposed['I37'], isSuggested: true };
+        const locIE05 = { ...CampaignsService.campaignsComposed['IE05'], isSuggested: true };
+        const combinedBaseMaterials = {
+            [locI23.rewards.potential[0].id]: buildCombinedUpgradeForLocation(locI23.rewards.potential[0].id, locI23),
+            [locI37.rewards.potential[0].id]: buildCombinedUpgradeForLocation(locI37.rewards.potential[0].id, locI37),
+            [locIE05.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locIE05.rewards.potential[0].id,
+                locIE05
+            ),
+        };
+
+        const sorted = UpgradesService.sortLocationsForRaiding(
+            [locI37, locIE05, locI23],
+            goals,
+            combinedBaseMaterials,
+            {},
+            buildSettingsForHse(IDailyRaidsFarmOrder.goalPriority, IDailyRaidsHomeScreenEvent.machineHunt)
+        );
+        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus Elite5', 'Indomitus37', 'Indomitus23']);
+    });
+
+    it('orders machine hunt battles by hsePoints (total materials)', () => {
+        const locI23 = { ...CampaignsService.campaignsComposed['I23'], isSuggested: true };
+        const locI37 = { ...CampaignsService.campaignsComposed['I37'], isSuggested: true };
+        const locIE05 = { ...CampaignsService.campaignsComposed['IE05'], isSuggested: true };
+        const combinedBaseMaterials = {
+            [locI23.rewards.potential[0].id]: buildCombinedUpgradeForLocation(locI23.rewards.potential[0].id, locI23),
+            [locI37.rewards.potential[0].id]: buildCombinedUpgradeForLocation(locI37.rewards.potential[0].id, locI37),
+            [locIE05.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locIE05.rewards.potential[0].id,
+                locIE05
+            ),
+        };
+
+        const sorted = UpgradesService.sortLocationsForRaiding(
+            [locI37, locIE05, locI23],
+            goals,
+            combinedBaseMaterials,
+            {},
+            buildSettingsForHse(IDailyRaidsFarmOrder.totalMaterials, IDailyRaidsHomeScreenEvent.machineHunt)
+        );
+
+        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus37', 'Indomitus23', 'Indomitus Elite5']);
     });
 });
