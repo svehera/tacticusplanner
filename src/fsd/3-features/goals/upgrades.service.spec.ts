@@ -34,6 +34,7 @@ import {
     IItemRaidLocation,
     IUpgradesRaidsDay,
     IUnitUpgrade,
+    IUpgradeRaid,
 } from '@/fsd/3-features/goals/goals.models';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
@@ -755,6 +756,200 @@ describe('UpgradesService.planDayRaiding', () => {
 
         expect(boonRaid).toBeDefined();
         expect(raidLocationIds).toEqual(expect.arrayContaining(boonLocations));
+    });
+});
+
+describe('UpgradesService.addRaidForLocation (daily caps)', () => {
+    const upgradeId = 'upgHpU012';
+    const baseUpgrade = FsdUpgradesService.baseUpgradesData[upgradeId];
+    const baseCharA = CharactersService.charactersData[0];
+    const baseCharB = CharactersService.charactersData[1];
+    const baseCharC = CharactersService.charactersData[2];
+
+    const goalA = createRankGoal(baseCharA, { goalId: 'goal-a', priority: 1 });
+    const goalB = createRankGoal(baseCharB, { goalId: 'goal-b', priority: 2 });
+    const goalC = createRankGoal(baseCharC, { goalId: 'goal-c', priority: 3 });
+    const goals = [goalA, goalB, goalC];
+
+    const createLocation = (id: string): ICampaignBattleComposed => ({
+        ...CampaignsService.campaignsComposed[id],
+        isSuggested: true,
+        dailyBattleCount: 6,
+        dropRate: 1,
+    });
+
+    const buildRemainingMats = (countByGoalId: Record<string, number>, locations: ICampaignBattleComposed[]) => ({
+        [upgradeId]: {
+            ...baseUpgrade,
+            requiredCount: Object.values(countByGoalId).reduce((sum, count) => sum + count, 0),
+            countByGoalId,
+            relatedCharacters: [goalA.unitId, goalB.unitId, goalC.unitId],
+            relatedGoals: [goalA.goalId, goalB.goalId, goalC.goalId],
+            locations,
+        } as ICombinedUpgrade,
+    });
+
+    const createDayWithRaid = (raidLocations: IItemRaidLocation[]): IUpgradesRaidsDay => ({
+        raids: [
+            {
+                raidLocations,
+                energyTotal: raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0),
+                energyLeft: 0,
+                daysTotal: -1,
+                raidsTotal: raidLocations.reduce((sum, loc) => sum + loc.raidsCount, 0),
+                acquiredCount: 0,
+                requiredCount: 0,
+                relatedCharacters: [goalC.unitId],
+                relatedGoals: [goalC.goalId],
+                isBlocked: false,
+                isFinished: false,
+                id: upgradeId,
+                snowprintId: baseUpgrade.snowprintId,
+                label: baseUpgrade.label,
+                rarity: baseUpgrade.rarity,
+                iconPath: baseUpgrade.iconPath,
+                locations: raidLocations,
+                crafted: baseUpgrade.crafted,
+                stat: baseUpgrade.stat,
+            } as IUpgradeRaid,
+        ],
+        energyTotal: 0,
+        raidsTotal: 0,
+        onslaughtTokens: 0,
+    });
+
+    it('raids each location once when two goals need one material each', () => {
+        const locOE05 = createLocation('OE05');
+        const locIME04 = createLocation('IME04');
+        const remainingMats = buildRemainingMats({ [goalA.goalId]: 1, [goalB.goalId]: 1 }, [locOE05, locIME04]);
+        const inventory: Record<string, number> = {};
+        const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
+
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId);
+        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalB.goalId);
+
+        const raid = day.raids.find(r => r.id === upgradeId)!;
+        const locationIds = raid.raidLocations.map(loc => loc.id);
+        expect(locationIds).toHaveLength(2);
+        expect(new Set(locationIds).size).toBe(2);
+        expect(locationIds).toEqual(expect.arrayContaining([locOE05.id, locIME04.id]));
+        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        expect(counts[locOE05.id]).toBe(1);
+        expect(counts[locIME04.id]).toBe(1);
+    });
+
+    it('caps raids to one goal when both locations are maxed by the first goal', () => {
+        const locOE05 = createLocation('OE05');
+        const locIME04 = createLocation('IME04');
+        const remainingMats = buildRemainingMats({ [goalA.goalId]: 20, [goalB.goalId]: 20 }, [locOE05, locIME04]);
+        const inventory: Record<string, number> = {};
+        const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
+
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId);
+        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalA.goalId);
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalB.goalId);
+        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalB.goalId);
+
+        const raid = day.raids.find(r => r.id === upgradeId)!;
+        const locationIds = raid.raidLocations.map(loc => loc.id);
+        expect(locationIds).toHaveLength(2);
+        expect(new Set(locationIds).size).toBe(2);
+        expect(locationIds).toEqual(expect.arrayContaining([locOE05.id, locIME04.id]));
+        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        expect(counts[locOE05.id]).toBe(6);
+        expect(counts[locIME04.id]).toBe(6);
+    });
+
+    it('shares a location between goals when the first goal leaves remaining attempts', () => {
+        const locOE05 = createLocation('OE05');
+        const locIME04 = createLocation('IME04');
+        const remainingMats = buildRemainingMats({ [goalA.goalId]: 8, [goalB.goalId]: 8 }, [locOE05, locIME04]);
+        const inventory: Record<string, number> = {};
+        const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
+
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId);
+        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalA.goalId);
+
+        const raidAfterGoalA = day.raids.find(r => r.id === upgradeId)!;
+        const countsAfterGoalA = Object.fromEntries(raidAfterGoalA.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        expect(countsAfterGoalA[locOE05.id]).toBe(6);
+        expect(countsAfterGoalA[locIME04.id]).toBe(2);
+
+        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalB.goalId);
+
+        const raid = day.raids.find(r => r.id === upgradeId)!;
+        const locationIds = raid.raidLocations.map(loc => loc.id);
+        expect(locationIds).toHaveLength(2);
+        expect(new Set(locationIds).size).toBe(2);
+        expect(locationIds).toEqual(expect.arrayContaining([locOE05.id, locIME04.id]));
+        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        expect(counts[locOE05.id]).toBe(6);
+        expect(counts[locIME04.id]).toBe(6);
+    });
+
+    it('does not add raids when both locations are already maxed', () => {
+        const locOE05 = createLocation('OE05');
+        const locIME04 = createLocation('IME04');
+        const remainingMats = buildRemainingMats({ [goalA.goalId]: 1, [goalB.goalId]: 1 }, [locOE05, locIME04]);
+        const inventory: Record<string, number> = {};
+        const day = createDayWithRaid([
+            {
+                ...locOE05,
+                raidsCount: 6,
+                farmedItems: 6,
+                energySpent: 6 * locOE05.energyCost,
+                isShardsLocation: false,
+            },
+            {
+                ...locIME04,
+                raidsCount: 6,
+                farmedItems: 6,
+                energySpent: 6 * locIME04.energyCost,
+                isShardsLocation: false,
+            },
+        ]);
+
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId);
+        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalB.goalId);
+
+        const raid = day.raids.find(r => r.id === upgradeId)!;
+        const locationIds = raid.raidLocations.map(loc => loc.id);
+        expect(locationIds).toHaveLength(2);
+        expect(new Set(locationIds).size).toBe(2);
+        expect(locationIds).toEqual(expect.arrayContaining([locOE05.id, locIME04.id]));
+        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        expect(counts[locOE05.id]).toBe(6);
+        expect(counts[locIME04.id]).toBe(6);
+    });
+
+    it('uses the second location when the first is already maxed by another goal', () => {
+        const locOE05 = createLocation('OE05');
+        const locIME04 = createLocation('IME04');
+        const remainingMats = buildRemainingMats({ [goalA.goalId]: 1, [goalB.goalId]: 1 }, [locOE05, locIME04]);
+        const inventory: Record<string, number> = {};
+        const day = createDayWithRaid([
+            {
+                ...locOE05,
+                raidsCount: 6,
+                farmedItems: 6,
+                energySpent: 6 * locOE05.energyCost,
+                isShardsLocation: false,
+            },
+        ]);
+
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId);
+        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalA.goalId);
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalB.goalId);
+        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalB.goalId);
+
+        const raid = day.raids.find(r => r.id === upgradeId)!;
+        const locationIds = raid.raidLocations.map(loc => loc.id);
+        expect(locationIds).toHaveLength(2);
+        expect(new Set(locationIds).size).toBe(2);
+        expect(locationIds).toEqual(expect.arrayContaining([locOE05.id, locIME04.id]));
+        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        expect(counts[locOE05.id]).toBe(6);
+        expect(counts[locIME04.id]).toBe(2);
     });
 });
 
@@ -1895,7 +2090,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
     it('returns a goal when only mythic shards are needed and mythic onslaught is enabled', () => {
         const baseChar = CharactersService.charactersData[0];
         const character = createCharacter(baseChar, {
-            rarity: Rarity.Mythic,
+            rarity: Rarity.Legendary,
             stars: RarityStars.OneBlueStar,
             rarityStars: RarityStars.OneBlueStar,
         });
@@ -1907,7 +2102,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
             unitAlliance: character.alliance ?? Alliance.Imperial,
-            rarityStart: Rarity.Mythic,
+            rarityStart: Rarity.Legendary,
             starsStart: RarityStars.OneBlueStar,
             rarityEnd: Rarity.Mythic,
             starsEnd: RarityStars.OneBlueStar,
@@ -1928,9 +2123,9 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
     it('returns a goal when only regular shards are needed and regular onslaught is enabled', () => {
         const baseChar = CharactersService.charactersData[0];
         const character = createCharacter(baseChar, {
-            rarity: Rarity.Common,
-            stars: RarityStars.None,
-            rarityStars: RarityStars.None,
+            rarity: Rarity.Rare,
+            stars: RarityStars.RedOneStar,
+            rarityStars: RarityStars.RedOneStar,
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
@@ -1940,10 +2135,10 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
             unitAlliance: character.alliance ?? Alliance.Imperial,
-            rarityStart: Rarity.Common,
-            starsStart: RarityStars.None,
-            rarityEnd: Rarity.Common,
-            starsEnd: RarityStars.None,
+            rarityStart: Rarity.Rare,
+            starsStart: RarityStars.RedOneStar,
+            rarityEnd: Rarity.Epic,
+            starsEnd: RarityStars.RedOneStar,
             onslaughtShards: 6.5,
             onslaughtMythicShards: 0,
         });

@@ -607,8 +607,12 @@ export class UpgradesService {
         mat: ICombinedUpgrade,
         upgradeId: string
     ): number {
+        const existingRaid = day.raids.find(raid => raid.id === upgradeId);
+        const existingRaidLoc = existingRaid?.raidLocations.find(raidLoc => raidLoc.id === loc.id);
+        const raidsAlreadyDone = existingRaidLoc?.raidsCount ?? 0;
+        const remainingAttempts = Math.max(loc.dailyBattleCount - raidsAlreadyDone, 0);
         const raidsNeeded = Math.ceil(needed / loc.dropRate);
-        const raidsToPerform = Math.max(0, Math.min(loc.dailyBattleCount, raidsNeeded));
+        const raidsToPerform = Math.max(0, Math.min(remainingAttempts, raidsNeeded));
         const toAdd = raidsToPerform * loc.dropRate;
         const raidLoc: IItemRaidLocation = {
             ...loc,
@@ -617,11 +621,18 @@ export class UpgradesService {
             energySpent: raidsToPerform * loc.energyCost,
             isShardsLocation: upgradeId.startsWith('shards_') || upgradeId.startsWith('mythicShards_'),
         };
-        const existingRaid = day.raids.find(raid => raid.id === upgradeId);
         if (existingRaid !== undefined) {
-            existingRaid.raidLocations.push(raidLoc);
+            if (existingRaidLoc) {
+                existingRaidLoc.raidsCount += raidLoc.raidsCount;
+                existingRaidLoc.farmedItems += raidLoc.farmedItems;
+                existingRaidLoc.energySpent += raidLoc.energySpent;
+            } else {
+                existingRaid.raidLocations.push(raidLoc);
+            }
             existingRaid.energyTotal += raidLoc.energySpent;
             existingRaid.raidsTotal += raidLoc.raidsCount;
+            existingRaid.relatedCharacters = uniq([...existingRaid.relatedCharacters, ...mat.relatedCharacters]);
+            existingRaid.relatedGoals = uniq([...existingRaid.relatedGoals, ...mat.relatedGoals]);
         } else {
             day.raids.push({
                 raidLocations: [raidLoc],
@@ -989,7 +1000,6 @@ export class UpgradesService {
         goal: ICharacterAscendGoal
     ): number {
         const shardData = this.getShardsForGoal(characters, [] as IMow2[], goal);
-        console.log('shardData: ', shardData);
         const tokensForRegularShards = this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal)
             ? Math.ceil(
                   Math.max(0, shardData.totalIncrementalShardsNeeded - (inventory['shards_' + goal.unitId] ?? 0)) /
