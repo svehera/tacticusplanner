@@ -8,7 +8,6 @@ import {
     FormGroup,
     FormHelperText,
     FormLabel,
-    Input,
     InputLabel,
     MenuItem,
     Radio,
@@ -20,7 +19,7 @@ import {
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { DailyRaidsStrategy } from 'src/models/enums';
@@ -31,15 +30,8 @@ import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignType, CampaignGroupType } from '@/fsd/4-entities/campaign';
-import { UnitsAutocomplete } from '@/fsd/4-entities/unit';
 
-import {
-    ICharacter2,
-    ICustomDailyRaidsSettings,
-    IDailyRaidsFarmOrder,
-    IDailyRaidsHomeScreenEvent,
-    ITrainingRushStrategy,
-} from '../models/interfaces';
+import { ICustomDailyRaidsSettings, IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 
 const defaultCustomSettings: ICustomDailyRaidsSettings = {
@@ -106,7 +98,7 @@ interface Props {
 }
 
 const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
-    const { characters } = useContext(StoreContext);
+    // const { characters } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { dailyRaidsPreferences } = useContext(StoreContext);
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
@@ -114,17 +106,17 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
         return index >= 0 ? index : 0; // Default to first option if not found
     });
-    const [shardsEnergy, setShardsEnergy] = React.useState<number | string>(dailyRaidsPreferences.shardsEnergy);
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
     );
+    /*
     const [character, setCharacter] = useState<ICharacter2 | null>(() => {
         return (
             characters.find(
                 x => x.snowprintId === dailyRaidsPreferencesForm.farmPreferences.trainingRushPreferences?.characterId
             ) || null
         );
-    });
+    });*/
 
     // Keep local form state in sync if preferences change externally (e.g., API auto-detect)
     React.useEffect(() => {
@@ -144,13 +136,6 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
             setDailyEnergy(value);
             setDailyRaidsPreferencesForm(curr => ({ ...curr, dailyEnergy: scaledValue }));
         }
-    };
-
-    const handleShardsEnergyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const rawValue = event.target.value;
-        const value = event.target.value === '' ? 0 : Number(event.target.value);
-        setShardsEnergy(rawValue);
-        setDailyRaidsPreferencesForm(curr => ({ ...curr, shardsEnergy: value }));
     };
 
     const saveChanges = () => {
@@ -179,17 +164,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
             },
         }));
     }
-
-    function savePurgeOrderMinimumTyranidsCountChanges(event: SelectChangeEvent<number>): void {
-        const parsed = Number(event.target.value);
-        const value = Number.isNaN(parsed) ? 0 : Math.max(0, Math.floor(parsed));
-        setDailyRaidsPreferencesForm(curr => {
-            const ret = { ...curr };
-            ret.farmPreferences.purgeOrderPreferences = { minimumTyranidCount: value };
-            return ret;
-        });
-    }
-
+    /*
     function saveTrainingRushStrategyChanges(event: SelectChangeEvent<ITrainingRushStrategy>): void {
         setDailyRaidsPreferencesForm(curr => {
             const ret = { ...curr };
@@ -213,27 +188,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
             return ret;
         });
     }
-
-    function saveWarpSurgeMinimumChaosEnemyCountChanges(event: SelectChangeEvent<number>): void {
-        const parsed = Number(event.target.value);
-        const value = Number.isNaN(parsed) ? 0 : Math.max(0, Math.floor(parsed));
-        setDailyRaidsPreferencesForm(curr => {
-            const ret = { ...curr };
-            ret.farmPreferences.warpSurgePreferences = { minimumChaosEnemyCount: value };
-            return ret;
-        });
-    }
-
-    function saveMachineHuntMinimumMechanicalEnemyCountChanges(event: SelectChangeEvent<number>): void {
-        const parsed = Number(event.target.value);
-        const value = Number.isNaN(parsed) ? 0 : Math.max(0, Math.floor(parsed));
-        setDailyRaidsPreferencesForm(curr => {
-            const ret = { ...curr };
-            ret.farmPreferences.machineHuntPreferences = { minimumMechanicalEnemyCount: value };
-            return ret;
-        });
-    }
-
+*/
     return (
         <Dialog open={open} onClose={close} fullWidth maxWidth={'md'} fullScreen={isMobile}>
             <DialogTitle>Raids settings</DialogTitle>
@@ -319,25 +274,6 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 />
                             </RadioGroup>
                         </FormControl>
-
-                        <FormControl>
-                            <FormLabel htmlFor="shardsEnergy" className="font-bold">
-                                Characters shards energy
-                            </FormLabel>
-                            <Input
-                                className="ms-5"
-                                value={shardsEnergy}
-                                size="small"
-                                id="shardsEnergy"
-                                onChange={handleShardsEnergyChange}
-                                inputProps={{
-                                    step: 1,
-                                    min: 0,
-                                    max: 200,
-                                    type: 'number',
-                                }}
-                            />
-                        </FormControl>
                     </div>
                     <div className="flex flex-row items-start gap-4">
                         <FormControl>
@@ -368,30 +304,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             </Select>
                             <FormHelperText>Select your current Home Screen Event.</FormHelperText>
                         </FormControl>
-                        {dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ===
-                            IDailyRaidsHomeScreenEvent.purgeOrder && (
-                            <FormControl>
-                                <InputLabel id="purge-order-min-tyranids-label">Minimum Tyranids</InputLabel>
-                                <Select
-                                    labelId="purge-order-min-tyranids-label"
-                                    id="purge-order-min-tyranids-select"
-                                    value={
-                                        dailyRaidsPreferencesForm.farmPreferences.purgeOrderPreferences
-                                            ?.minimumTyranidCount ?? 0
-                                    }
-                                    label="Minimum Tyranids"
-                                    onChange={savePurgeOrderMinimumTyranidsCountChanges}
-                                    style={{ minWidth: 180 }}>
-                                    {Array.from({ length: 15 }, (_, i) => (
-                                        <MenuItem key={i + 1} value={i + 1}>
-                                            {i + 1}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                                <FormHelperText>Minimum tyranids to consider a battle.</FormHelperText>
-                            </FormControl>
-                        )}
-
+                        {/*}
                         {dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ===
                             IDailyRaidsHomeScreenEvent.trainingRush && (
                             <FormControl>
@@ -432,54 +345,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     <FormHelperText>Select your character.</FormHelperText>
                                 </FormControl>
                             )}
-                        {dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ===
-                            IDailyRaidsHomeScreenEvent.warpSurge && (
-                            <FormControl>
-                                <InputLabel id="warp-surge-min-chaos-enemies-label">Minimum Chaos Enemies</InputLabel>
-                                <Select
-                                    labelId="warp-surge-min-chaos-enemies-label"
-                                    id="warp-surge-min-chaos-enemies-select"
-                                    value={
-                                        dailyRaidsPreferencesForm.farmPreferences.warpSurgePreferences
-                                            ?.minimumChaosEnemyCount ?? 0
-                                    }
-                                    label="Minimum Chaos Enemies"
-                                    onChange={saveWarpSurgeMinimumChaosEnemyCountChanges}
-                                    style={{ minWidth: 180 }}>
-                                    {Array.from({ length: 15 }, (_, i) => (
-                                        <MenuItem key={i + 1} value={i + 1}>
-                                            {i + 1}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                                <FormHelperText>Minimum chaos enemies to consider a battle.</FormHelperText>
-                            </FormControl>
-                        )}
-                        {dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ===
-                            IDailyRaidsHomeScreenEvent.machineHunt && (
-                            <FormControl>
-                                <InputLabel id="machine-hunt-min-mechanical-enemies-label">
-                                    Minimum Mechanical Enemies
-                                </InputLabel>
-                                <Select
-                                    labelId="machine-hunt-min-mechanical-enemies-label"
-                                    id="machine-hunt-min-mechanical-enemies-select"
-                                    value={
-                                        dailyRaidsPreferencesForm.farmPreferences.machineHuntPreferences
-                                            ?.minimumMechanicalEnemyCount ?? 0
-                                    }
-                                    label="Minimum Mechanical Enemies"
-                                    onChange={saveMachineHuntMinimumMechanicalEnemyCountChanges}
-                                    style={{ minWidth: 180 }}>
-                                    {Array.from({ length: 15 }, (_, i) => (
-                                        <MenuItem key={i + 1} value={i + 1}>
-                                            {i + 1}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                                <FormHelperText>Minimum mechanical enemies to consider a battle.</FormHelperText>
-                            </FormControl>
-                        )}
+                                */}
                     </div>
 
                     <div className="flex flex-wrap gap-10">

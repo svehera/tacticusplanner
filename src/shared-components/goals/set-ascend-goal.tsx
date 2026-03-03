@@ -3,14 +3,11 @@
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage } from 'src/models/enums';
 import { ICampaignBattleComposed, IPersonalGoal } from 'src/models/interfaces';
-import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
-
-import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 
 interface Props {
     currentRarity: Rarity;
@@ -34,11 +31,7 @@ export const SetAscendGoal: React.FC<Props> = ({
     currentStars,
     currentRarity,
     possibleLocations,
-    unlockedLocations,
-    campaignsUsage,
     possibleMythicLocations,
-    unlockedMythicLocations,
-    mythicCampaignsUsage,
     shardsPerToken,
     mythicShardsPerToken,
     onChange,
@@ -74,28 +67,10 @@ export const SetAscendGoal: React.FC<Props> = ({
                 />
             </div>
 
-            <div className="flex-box gap5 wrap">
-                {possibleLocations.map(location => (
-                    <CampaignLocation
-                        key={location.id}
-                        location={location}
-                        unlocked={unlockedLocations.includes(location.id)}
-                    />
-                ))}
-            </div>
-
             {(currentRarity < Rarity.Legendary || currentStars < RarityStars.OneBlueStar) && (
                 <>
                     {possibleLocations.length !== 0 && (
                         <>
-                            <div className="flex items-center gap-3">
-                                <CampaignsUsageSelect
-                                    disabled={!unlockedLocations.length}
-                                    value={campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
-                                    valueChange={value => onChange('campaignsUsage', value)}
-                                    mythic={false}
-                                />
-                            </div>
                             <div className="flex items-center gap-3">
                                 <NumbersInput
                                     title="Shards per onslaught"
@@ -124,14 +99,6 @@ export const SetAscendGoal: React.FC<Props> = ({
                 <>
                     {!!possibleMythicLocations.length && (
                         <div className="flex items-center gap-3">
-                            <div className="w-1/2">
-                                <CampaignsUsageSelect
-                                    disabled={!unlockedMythicLocations.length}
-                                    value={mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
-                                    valueChange={value => onChange('mythicCampaignsUsage', value)}
-                                    mythic={true}
-                                />
-                            </div>
                             <div className="w-1/2">
                                 <NumbersInput
                                     title="Mythic shards per onslaught"

@@ -38,7 +38,17 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid }) => {
                                 {upgradeRaid.label}
                                 <ul className="ps-[15px]">
                                     {upgradeRaid.relatedCharacters.map(x => (
-                                        <li key={'material-item-input-' + upgradeRaid.id + '-' + x}>{x}</li>
+                                        <li
+                                            key={
+                                                'material-item-input-' +
+                                                upgradeRaid.id +
+                                                '-' +
+                                                upgradeRaid.raidLocations.map(loc => loc.id).join(',') +
+                                                '-' +
+                                                x
+                                            }>
+                                            {x}
+                                        </li>
                                     ))}
                                 </ul>
                             </div>
@@ -64,6 +74,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid }) => {
                             className="flex-box between"
                             style={{ opacity: location.isCompleted ? 0.5 : 1 }}>
                             <CampaignLocation location={location} unlocked={true} />
+                            {location.raidsAlreadyPerformed},{location.raidsToPerform}
                         </li>
                     );
                 })}

@@ -20,8 +20,8 @@ export const MiscIcon = ({
             className={`pointer-events-none ${className}`}
             style={{ height, width, ...style }}
             src={details.file}
-            width={width}
-            height={height}
+            width={width > 0 ? width : undefined}
+            height={height > 0 ? height : undefined}
             alt={details.label}
         />
     );

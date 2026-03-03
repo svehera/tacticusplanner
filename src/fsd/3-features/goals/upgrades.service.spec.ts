@@ -211,7 +211,7 @@ const createCompletedLocation = (
 ): IItemRaidLocation => {
     return {
         ...battle,
-        raidsCount: raidsCount,
+        raidsToPerform: raidsCount,
         farmedItems: 0,
         energySpent: raidsCount * battle.energyCost,
         isShardsLocation: false,
@@ -225,7 +225,7 @@ const createNoRewardLocation = (battleId: string, raidsCount = 1): IItemRaidLoca
         rewards: battle.rewards,
         energyCost: battle.energyCost,
         dailyBattleCount: raidsCount,
-        raidsCount: raidsCount,
+        raidsToPerform: raidsCount,
         farmedItems: 0,
         energySpent: raidsCount * battle.energyCost,
         isShardsLocation: false,
@@ -346,7 +346,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         expect(day.raids).toHaveLength(1);
         expect(day.raids[0].id).toBe(`shards_${character.snowprintId}`);
         expect(day.raids[0].raidLocations).toHaveLength(3);
-        expect(day.raids[0].raidLocations.every(loc => loc.raidsCount === 1)).toBe(true);
+        expect(day.raids[0].raidLocations.every(loc => loc.raidsToPerform === 1)).toBe(true);
         expect(day.raids[0].raidLocations.map(loc => loc.farmedItems)).toEqual([6, 7, 6]);
     });
 
@@ -796,7 +796,7 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
                 energyTotal: raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0),
                 energyLeft: 0,
                 daysTotal: -1,
-                raidsTotal: raidLocations.reduce((sum, loc) => sum + loc.raidsCount, 0),
+                raidsTotal: raidLocations.reduce((sum, loc) => sum + loc.raidsToPerform, 0),
                 acquiredCount: 0,
                 requiredCount: 0,
                 relatedCharacters: [goalC.unitId],
@@ -833,7 +833,7 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         expect(locationIds).toHaveLength(2);
         expect(new Set(locationIds).size).toBe(2);
         expect(locationIds).toEqual(expect.arrayContaining([locOE05.id, locIME04.id]));
-        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsToPerform]));
         expect(counts[locOE05.id]).toBe(1);
         expect(counts[locIME04.id]).toBe(1);
     });
@@ -855,7 +855,7 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         expect(locationIds).toHaveLength(2);
         expect(new Set(locationIds).size).toBe(2);
         expect(locationIds).toEqual(expect.arrayContaining([locOE05.id, locIME04.id]));
-        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsToPerform]));
         expect(counts[locOE05.id]).toBe(6);
         expect(counts[locIME04.id]).toBe(6);
     });
@@ -871,7 +871,9 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalA.goalId);
 
         const raidAfterGoalA = day.raids.find(r => r.id === upgradeId)!;
-        const countsAfterGoalA = Object.fromEntries(raidAfterGoalA.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        const countsAfterGoalA = Object.fromEntries(
+            raidAfterGoalA.raidLocations.map(loc => [loc.id, loc.raidsToPerform])
+        );
         expect(countsAfterGoalA[locOE05.id]).toBe(6);
         expect(countsAfterGoalA[locIME04.id]).toBe(2);
 
@@ -882,7 +884,7 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         expect(locationIds).toHaveLength(2);
         expect(new Set(locationIds).size).toBe(2);
         expect(locationIds).toEqual(expect.arrayContaining([locOE05.id, locIME04.id]));
-        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsToPerform]));
         expect(counts[locOE05.id]).toBe(6);
         expect(counts[locIME04.id]).toBe(6);
     });
@@ -895,14 +897,16 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         const day = createDayWithRaid([
             {
                 ...locOE05,
-                raidsCount: 6,
+                raidsAlreadyPerformed: 6,
+                raidsToPerform: 0,
                 farmedItems: 6,
                 energySpent: 6 * locOE05.energyCost,
                 isShardsLocation: false,
             },
             {
                 ...locIME04,
-                raidsCount: 6,
+                raidsAlreadyPerformed: 6,
+                raidsToPerform: 0,
                 farmedItems: 6,
                 energySpent: 6 * locIME04.energyCost,
                 isShardsLocation: false,
@@ -917,7 +921,7 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         expect(locationIds).toHaveLength(2);
         expect(new Set(locationIds).size).toBe(2);
         expect(locationIds).toEqual(expect.arrayContaining([locOE05.id, locIME04.id]));
-        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsToPerform]));
         expect(counts[locOE05.id]).toBe(6);
         expect(counts[locIME04.id]).toBe(6);
     });
@@ -930,7 +934,8 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         const day = createDayWithRaid([
             {
                 ...locOE05,
-                raidsCount: 6,
+                raidsAlreadyPerformed: 6,
+                raidsToPerform: 0,
                 farmedItems: 6,
                 energySpent: 6 * locOE05.energyCost,
                 isShardsLocation: false,
@@ -947,7 +952,7 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         expect(locationIds).toHaveLength(2);
         expect(new Set(locationIds).size).toBe(2);
         expect(locationIds).toEqual(expect.arrayContaining([locOE05.id, locIME04.id]));
-        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsCount]));
+        const counts = Object.fromEntries(raid.raidLocations.map(loc => [loc.id, loc.raidsToPerform]));
         expect(counts[locOE05.id]).toBe(6);
         expect(counts[locIME04.id]).toBe(2);
     });

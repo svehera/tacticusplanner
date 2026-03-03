@@ -20,7 +20,6 @@ import {
     IEstimatedShards,
     IEstimatedUpgrades,
     IItemRaidLocation,
-    IUpgradeRaid,
 } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
@@ -180,10 +179,6 @@ export const DailyRaids = () => {
         ? `${actualEnergy} = ${dailyRaidsPreferences.dailyEnergy} - ${Math.min(estimatedShards.energyPerDay, dailyRaidsPreferences.shardsEnergy)}`
         : actualEnergy.toString();
 
-    const shouldBeGrayedOutFilter = (raid: IUpgradeRaid) => {
-        return raid.acquiredCount >= raid.requiredCount || raid.raidLocations.every(loc => loc.isCompleted);
-    };
-
     return (
         <div>
             <RaidsHeader
@@ -207,12 +202,7 @@ export const DailyRaids = () => {
                 scrollToCharSnowprintId={charSnowprintId ?? undefined}
             />
 
-            <TodayRaids
-                completedRaids={(estimatedRanks.upgradesRaids[0]?.raids ?? []).filter(shouldBeGrayedOutFilter)}
-                upgradesRaids={(estimatedRanks.upgradesRaids[0]?.raids ?? []).filter(
-                    raid => !shouldBeGrayedOutFilter(raid)
-                )}
-            />
+            <TodayRaids raids={estimatedRanks.upgradesRaids[0].raids} />
         </div>
     );
 };

@@ -161,7 +161,7 @@ export const DesktopHome = () => {
                             <ul className="m-0">
                                 {dailyRaids.raidedLocations.map(x => (
                                     <li key={x.id}>
-                                        {x.raidsCount}x {x.campaign} {x.nodeNumber}
+                                        {x.raidsToPerform}x {x.campaign} {x.nodeNumber}
                                     </li>
                                 ))}
                             </ul>

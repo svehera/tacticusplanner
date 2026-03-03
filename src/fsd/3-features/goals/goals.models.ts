@@ -164,7 +164,8 @@ export interface IUpgradeRaid extends ICharacterUpgradeEstimate {
 }
 
 export interface IItemRaidLocation extends ICampaignBattleComposed {
-    raidsCount: number;
+    raidsAlreadyPerformed: number;
+    raidsToPerform: number;
     farmedItems: number;
     energySpent: number;
     isShardsLocation: boolean;
