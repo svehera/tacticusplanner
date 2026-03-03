@@ -291,6 +291,8 @@ export class LeProgressService {
                 return LegendaryEventEnum.Lucius;
             case 'tauFarsight':
                 return LegendaryEventEnum.Farsight;
+            case 'votanUthar':
+                return LegendaryEventEnum.Uthar;
             default:
                 return undefined;
         }
