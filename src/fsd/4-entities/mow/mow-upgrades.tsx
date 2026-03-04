@@ -21,7 +21,14 @@ export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mow
     const mow = MowsService.resolveToStatic(mowId);
     const [primary] = MowsService.getMaterialsList(mowId, mow?.name ?? '', alliance, [primaryLevel + 1]);
     const [secondary] = MowsService.getMaterialsList(mowId, mow?.name ?? '', alliance, [secondaryLevel + 1]);
-
+    const VALID_UPGRADE_RARITIES = new Set<IBaseUpgrade['rarity']>([
+        Rarity.Common,
+        Rarity.Uncommon,
+        Rarity.Rare,
+        Rarity.Epic,
+        Rarity.Legendary,
+        Rarity.Mythic,
+    ]);
     const renderAbility = (
         label: string,
         materials: IMowLevelMaterials,
@@ -57,7 +64,7 @@ export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mow
                     <div className="flex gap-1">
                         {upgrades.map((x, index) => {
                             return (
-                                x.rarity in Rarity && (
+                                VALID_UPGRADE_RARITIES.has(x.rarity) && (
                                     <UpgradeImage
                                         key={x.id + index}
                                         material={x.label}

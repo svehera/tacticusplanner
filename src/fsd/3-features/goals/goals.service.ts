@@ -122,7 +122,9 @@ export class GoalsService {
                     if (totalRequired > 0 && goalRequired > 0) {
                         estimate.energyTotal += Math.round(raid.energyTotal * (goalRequired / totalRequired));
                     } else {
-                        estimate.energyTotal += Math.round(raid.energyTotal / raid.relatedCharacters.length);
+                        estimate.energyTotal += Math.round(
+                            raid.energyTotal / Math.max(1, raid.relatedCharacters.length)
+                        );
                     }
                     if (goal.type === PersonalGoalType.UpgradeRank) {
                         const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
@@ -139,6 +141,7 @@ export class GoalsService {
                         );
                         if (xpEstimate) {
                             xpEstimate.xpFromPreviousGoalApplied = currentXp.xpFromPriorGoalApplied;
+                            estimate.xpEstimate = xpEstimate;
                         }
                     }
                 });
@@ -180,7 +183,12 @@ export class GoalsService {
                     goalId: goal.goalId,
                     abilitiesEstimate,
                     xpEstimateAbilities: xpEstimate!,
-                } as IGoalEstimate);
+                    daysLeft: 0,
+                    energyTotal: 0,
+                    oTokensTotal: 0,
+                    daysTotal: 0,
+                    xpBooksTotal: 0,
+                });
             }
         }
 

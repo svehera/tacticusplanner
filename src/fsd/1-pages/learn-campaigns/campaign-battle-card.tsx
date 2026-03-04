@@ -45,13 +45,13 @@ export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
 
     const rewardIcon = useMemo(() => {
         const upgrade = UpgradesService.getUpgrade(reward);
-        if (upgrade === undefined) return <></>;
+        if (upgrade === undefined) return <span>{reward}</span>;
         if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
             const char = CharactersService.getUnit(reward.substring(reward.indexOf('_') + 1));
             if (char) {
                 return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />;
             }
-            return <> </>;
+            return <span>{reward}</span>;
         }
 
         return (

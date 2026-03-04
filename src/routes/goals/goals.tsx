@@ -100,7 +100,16 @@ export const Goals = () => {
             resolvedMows,
             ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
         );
-    }, [upgradeRankOrMowGoals, estimatedShardsTotal.energyPerDay]);
+    }, [
+        upgradeRankOrMowGoals,
+        estimatedShardsTotal.energyPerDay,
+        characters,
+        resolvedMows,
+        inventory.upgrades,
+        dailyRaidsPreferences,
+        campaignsProgress,
+        dailyRaids,
+    ]);
 
     const removeGoal = (goalId: string): void => {
         dispatch.goals({ type: 'Delete', goalId });

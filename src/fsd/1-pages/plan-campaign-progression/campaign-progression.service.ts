@@ -295,9 +295,17 @@ export class CampaignsProgressionService {
             materialReqs.materials = newMaterials;
         }
         const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
-            if (rarity === 'Shard') return 6;
-            if (rarity === 'Mythic Shard') return 7;
-            return rarity as unknown as number;
+            const rarityMap = {
+                [Rarity.Common]: 0,
+                [Rarity.Uncommon]: 1,
+                [Rarity.Rare]: 2,
+                [Rarity.Epic]: 3,
+                [Rarity.Legendary]: 4,
+                [Rarity.Mythic]: 5,
+                Shard: 6,
+                'Mythic Shard': 7,
+            };
+            return rarityMap[rarity];
         };
         const sortedMaterials: string[] = Object.keys(materialReqs.materials).sort(
             (a, b) =>

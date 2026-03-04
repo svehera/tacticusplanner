@@ -61,7 +61,9 @@ export const DailyRaids = () => {
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
 
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
-    const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);
+    const [upgrades, setUpgrades] = React.useState<Record<string, number>>(
+        addShardsToUpgrades(inventory.upgrades, storeCharacters, resolvedMows)
+    );
     const [units, setUnits] = React.useState<IUnit[]>([...storeCharacters, ...resolvedMows]);
     const [raidedLocations, setRaidedLocations] = React.useState<IItemRaidLocation[]>(dailyRaids.raidedLocations);
 
@@ -172,6 +174,9 @@ export const DailyRaids = () => {
         dailyRaids.filters,
         upgrades,
         raidedLocations,
+        resolvedCharacters,
+        resolvedMows,
+        campaignsProgress,
     ]);
 
     const hasShardsEnergy = dailyRaidsPreferences.shardsEnergy > 0 || estimatedShards.energyPerDay > 0;
@@ -202,7 +207,7 @@ export const DailyRaids = () => {
                 scrollToCharSnowprintId={charSnowprintId ?? undefined}
             />
 
-            <TodayRaids raids={estimatedRanks.upgradesRaids[0].raids} />
+            {estimatedRanks.upgradesRaids.length > 0 && <TodayRaids raids={estimatedRanks.upgradesRaids[0].raids} />}
         </div>
     );
 };

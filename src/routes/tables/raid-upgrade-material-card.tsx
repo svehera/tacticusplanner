@@ -28,6 +28,10 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
     relatedCharacterSnowprintIds,
     locations,
 }) => {
+    const mapUpgradeRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): Rarity => {
+        if (typeof rarity === 'number') return rarity;
+        throw new Error(`Unsupported upgrade rarity: ${rarity}`);
+    };
     const rewardIcon = () => {
         if (UpgradesService.isShard(upgradeMaterialSnowprintId)) {
             const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(7));
@@ -52,7 +56,7 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
             <UpgradeImage
                 material={upgrade.label}
                 iconPath={upgrade.iconPath}
-                rarity={RarityMapper.rarityToRarityString(upgrade.rarity as unknown as Rarity)}
+                rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(upgrade.rarity))}
             />
         );
     };
