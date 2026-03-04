@@ -28,7 +28,6 @@ import {
     ICharacterUnlockGoal,
     ICharacterUpgradeEstimate,
     ICharacterUpgradeMow,
-    ICharacterUpgradeRankEstimate,
     ICharacterUpgradeRankGoal,
     ICombinedUpgrade,
     IEstimatedUpgrades,
@@ -178,25 +177,36 @@ export class UpgradesService {
                 locations: x.locations.map(loc => ({ ...loc, isSuggested: false })),
             };
         });
-        const finishedMaterials = this.getTotalEstimates(
-            Object.entries(combinedBaseMaterials)
-                .filter(([_, val]) => val.id && (inventoryUpgrades[val.id] ?? 0) >= val.requiredCount)
-                .reduce(
-                    (acc, [id, upgrade]) => {
-                        acc[id] = cloneDeep(upgrade);
-                        return acc;
-                    },
-                    {} as Record<string, ICombinedUpgrade>
-                ),
-            inventoryUpgrades
-        );
-        const inProgressMaterials = this.getTotalEstimates(mergedInProgress, inventoryUpgrades).map(x => {
-            x.locations.forEach(loc => {
-                const inProgressLoc = combinedBaseMaterials[x.id].locations.find(l => l.id === loc.id);
-                if (inProgressLoc) loc.isSuggested = inProgressLoc.isSuggested;
-            });
-            return x;
-        });
+
+        const isGoalPriority = settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.goalPriority;
+        const goalPriorityEstimates = isGoalPriority
+            ? this.getGoalPriorityEstimates(combinedBaseMaterials, inventoryUpgrades, goals, chars)
+            : undefined;
+
+        const finishedMaterials = isGoalPriority
+            ? goalPriorityEstimates!.filter(x => x.isFinished && !x.isBlocked)
+            : this.getTotalEstimates(
+                  Object.entries(combinedBaseMaterials)
+                      .filter(([_, val]) => val.id && (inventoryUpgrades[val.id] ?? 0) >= val.requiredCount)
+                      .reduce(
+                          (acc, [id, upgrade]) => {
+                              acc[id] = cloneDeep(upgrade);
+                              return acc;
+                          },
+                          {} as Record<string, ICombinedUpgrade>
+                      ),
+                  inventoryUpgrades
+              );
+
+        const inProgressMaterials = isGoalPriority
+            ? goalPriorityEstimates!.filter(x => !x.isFinished && !x.isBlocked)
+            : this.getTotalEstimates(mergedInProgress, inventoryUpgrades).map(x => {
+                  x.locations.forEach(loc => {
+                      const inProgressLoc = combinedBaseMaterials[x.id].locations.find(l => l.id === loc.id);
+                      if (inProgressLoc) loc.isSuggested = inProgressLoc.isSuggested;
+                  });
+                  return x;
+              });
 
         const energyTotal = sum(upgradesRaids.map(day => day.energyTotal));
         const raidsTotal = sum(upgradesRaids.map(day => day.raidsTotal));
@@ -220,27 +230,42 @@ export class UpgradesService {
     }
 
     /**
-     * PLEASE READ THIS ENTIRE COMMENT, THERE IS SOME SUBTLE BEHAVIOR YOU NEED TO KNOW ABOUT.
-     * Generates a day-by-day plan for raiding to acquire character upgrade materials.
-     *
-     * This function simulates the process of spending daily energy on raids to farm the
-     * necessary materials for a list of character upgrades. It iterates day by day,
-     * planning which raids to perform based on the available energy and the remaining
-     * material requirements. The simulation continues until all required materials for the
-     * provided upgrades are farmed.
-     *
-     * @remarks
-     * The order of the `allUpgrades` array is crucial as it dictates the priority of farming.
-     * Materials for upgrades that appear earlier in the array will be prioritized each day.
-     *
-     * The function has special logic for the "first day" (today) to account for any raids
-     * that the user has already completed, ensuring the plan is accurate from the start.
-     *
-     * A safeguard is in place to prevent infinite loops, terminating after 1000 simulated days.
-     *
-     * @param settings - The user's settings for the estimation, including available daily energy and any raids already completed on the first day.
-     * @param allUpgrades - A list of all character upgrades to be farmed. **The order of this array determines the farming priority.**
-     * @returns An array of `IUpgradesRaidsDay`, where each object represents a single day's raiding plan. Returns an empty array if daily energy is too low to perform any raids.
+     * @returns whether we can use energy or onslaught tokens to farm this particular
+     * material, given the suggestibility of any/all of its locations.
+     */
+    public static canRaidMaterial(
+        mat: ICombinedUpgrade,
+        characters: ICharacter2[],
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
+    ): boolean {
+        if (!mat.id.startsWith('shards_') && !mat.id.startsWith('mythicShards_')) {
+            return mat.locations.some(loc => loc.isSuggested);
+        } else if (!mat.locations.some(loc => loc.isSuggested)) {
+            // We have shard goals but no place to farm them, check for onslaught.
+            const goal = goals.find(goal => mat.relatedGoals.find(relatedGoal => goal.goalId === relatedGoal));
+            if (goal === undefined || goal.type === PersonalGoalType.Unlock) {
+                // we either don't have a goal, or we have an unlock goal that we can't farm, so the goal is blocked.
+                return false;
+            } else if (
+                mat.id.startsWith('shards_') &&
+                !this.canOnslaughtCharacterForRegularShards(goal?.unitId, characters, goal as ICharacterAscendGoal)
+            ) {
+                // We have an ascension goal requiring regular shards, but we can't farm them with onslaught, so the goal is blocked.
+                return false;
+            } else if (
+                mat.id.startsWith('mythicShards_') &&
+                !this.canOnslaughtCharacterForMythicShards(goal?.unitId, characters, goal as ICharacterAscendGoal)
+            ) {
+                // We have an ascension goal requiring mythic shards, but we can't farm them with onslaught, so the goal is blocked.
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*
+     * @returns An array of `IUpgradesRaidsDay`, where each object represents a single day's
+     * raiding plan. Returns an empty array if daily energy is too low to perform any raids.
      */
     public static generateDailyRaidsList(
         settings: IEstimatedRanksSettings,
@@ -254,7 +279,7 @@ export class UpgradesService {
         const remainingMats = cloneDeep(combinedBaseMaterials);
         const inventory = cloneDeep(inventoryUpgrades);
 
-        ret.push(this.handleFirstDayCompletedRaids(settings, combinedBaseMaterials, goals));
+        ret.push(this.handleFirstDayCompletedRaids(settings, combinedBaseMaterials));
         let energy = settings.dailyEnergy - ret[0].energyTotal;
         let firstDay = true;
         let days = 0;
@@ -262,34 +287,7 @@ export class UpgradesService {
         const blockedMats: Record<string, ICombinedUpgrade> = {};
         cloneDeep(Object.keys(remainingMats)).forEach(upgradeId => {
             const mat = remainingMats[upgradeId];
-            let canDelete = false;
-            if (
-                !mat.id.startsWith('shards_') &&
-                !mat.id.startsWith('mythicShards_') &&
-                !mat.locations.some(loc => loc.isSuggested)
-            ) {
-                canDelete = true;
-            } else if (!mat.locations.some(loc => loc.isSuggested)) {
-                // We have shard goals but no place to farm them, check for onslaught.
-                const goal = goals.find(goal => mat.relatedGoals.find(relatedGoal => goal.goalId === relatedGoal));
-                if (goal === undefined || goal.type === PersonalGoalType.Unlock) {
-                    // we either don't have a goal, or we have an unlock goal that we can't farm, so the goal is blocked.
-                    canDelete = true;
-                } else if (
-                    mat.id.startsWith('shards_') &&
-                    !this.canOnslaughtCharacterForRegularShards(goal?.unitId, characters, goal as ICharacterAscendGoal)
-                ) {
-                    // We have an ascension goal requiring regular shards, but we can't farm them with onslaught, so the goal is blocked.
-                    canDelete = true;
-                } else if (
-                    mat.id.startsWith('mythicShards_') &&
-                    !this.canOnslaughtCharacterForMythicShards(goal?.unitId, characters, goal as ICharacterAscendGoal)
-                ) {
-                    // We have an ascension goal requiring mythic shards, but we can't farm them with onslaught, so the goal is blocked.
-                    canDelete = true;
-                }
-            }
-            if (canDelete) {
+            if (!this.canRaidMaterial(mat, characters, goals)) {
                 blockedMats[upgradeId] = mat;
                 // Delete upgrade materials we cannot farm.
                 delete remainingMats[upgradeId];
@@ -373,10 +371,22 @@ export class UpgradesService {
             remainingMats[upgradeId] = blockedMats[upgradeId];
         });
 
+        ret.forEach(day => {
+            day.raids.forEach(raid => {
+                raid.raidLocations.forEach(loc => {
+                    loc.energySpent = (loc.raidsAlreadyPerformed + loc.raidsToPerform) * loc.energyCost;
+                });
+                raid.energyTotal = raid.raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
+                raid.raidsTotal = sum(raid.raidLocations.map(loc => loc.raidsToPerform + loc.raidsAlreadyPerformed));
+            });
+            day.energyTotal = day.raids.reduce((sum, raid) => sum + raid.energyTotal, 0);
+            day.raidsTotal = sum(day.raids.map(raid => raid.raidsTotal));
+        });
+
         return { upgradesRaids: ret, remainingMats };
     }
 
-    private static postProcessRaidsForHse(
+    public static postProcessRaidsForHse(
         day: IUpgradesRaidsDay,
         settings: IEstimatedRanksSettings,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
@@ -421,7 +431,10 @@ export class UpgradesService {
 
             grouped.forEach(raidLocations => {
                 const energyTotal = raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
-                const raidsTotal = raidLocations.reduce((sum, loc) => sum + loc.raidsToPerform, 0);
+                const raidsTotal = raidLocations.reduce(
+                    (sum, loc) => sum + loc.raidsToPerform + loc.raidsAlreadyPerformed,
+                    0
+                );
                 splitRaids.push({
                     ...raid,
                     raidLocations,
@@ -439,7 +452,7 @@ export class UpgradesService {
         day.raids = orderBy(
             splitRaids,
             [
-                raid => raid.raidLocations.every(loc => loc.isCompleted),
+                raid => (raid.raidLocations.every(loc => loc.raidsAlreadyPerformed === loc.dailyBattleCount) ? 1 : 0),
                 raid => Math.min(...raid.raidLocations.map(loc => locIndex.get(loc.id) ?? Number.POSITIVE_INFINITY)),
             ],
             ['desc', 'asc']
@@ -492,7 +505,11 @@ export class UpgradesService {
                 );
                 for (const loc of locsForGoal) {
                     if (energy < minEnergy) break;
-                    energy = this.raidLocation(day, energy, inventory, loc, remainingMats, goals, goal.goalId);
+                    const raidKey = `${loc.rewards.potential[0].id}::${goal.goalId}`;
+                    energy = this.raidLocation(day, energy, inventory, loc, remainingMats, goals, goal.goalId, {
+                        raidKey,
+                        goal: { goalId: goal.goalId, unitId: goal.unitId },
+                    });
                 }
                 if (energy < maxEnergy) locs = locs.filter(loc => loc.energyCost <= energy);
             }
@@ -518,17 +535,26 @@ export class UpgradesService {
         loc: ICampaignBattleComposed,
         needed: number,
         mat: ICombinedUpgrade,
-        upgradeId: string
+        upgradeId: string,
+        options?: { raidKey?: string; goal?: { goalId: string; unitId: string } }
     ): number {
-        const existingRaid = day.raids.find(raid => raid.id === upgradeId);
+        const raidKey = options?.raidKey ?? upgradeId;
+        const existingRaid = day.raids.find(raid => raid.id === raidKey);
         const existingRaidLoc = existingRaid?.raidLocations.find(raidLoc => raidLoc.id === loc.id);
-        const raidsAlreadyDone = existingRaidLoc?.raidsAlreadyPerformed ?? 0;
+        const totalRaidsForLocation = day.raids
+            .flatMap(raid => raid.raidLocations)
+            .filter(raidLoc => raidLoc.id === loc.id)
+            .reduce((sum, raidLoc) => sum + (raidLoc.raidsToPerform ?? 0), 0);
+        const raidsAlreadyDone = existingRaidLoc
+            ? Math.max(totalRaidsForLocation - (existingRaidLoc.raidsToPerform ?? 0), 0)
+            : totalRaidsForLocation;
         const remainingAttempts = Math.max(
-            Math.min(loc.dailyBattleCount - raidsAlreadyDone, energy / loc.energyCost),
+            Math.min(loc.dailyBattleCount - raidsAlreadyDone, Math.floor(energy / loc.energyCost)),
             0
         );
         const raidsNeeded = Math.ceil(needed / loc.dropRate);
         const raidsToPerform = Math.max(0, Math.min(remainingAttempts, raidsNeeded));
+        if (raidsToPerform <= 0) return energy;
         const toAdd = raidsToPerform * loc.dropRate;
         const raidLoc: IItemRaidLocation = {
             ...loc,
@@ -540,7 +566,7 @@ export class UpgradesService {
         };
         if (existingRaid !== undefined) {
             if (existingRaidLoc) {
-                existingRaidLoc.raidsAlreadyPerformed += raidLoc.raidsAlreadyPerformed;
+                existingRaidLoc.raidsAlreadyPerformed = raidsAlreadyDone;
                 existingRaidLoc.raidsToPerform += raidLoc.raidsToPerform;
                 existingRaidLoc.farmedItems += raidLoc.farmedItems;
                 existingRaidLoc.energySpent += raidLoc.energySpent;
@@ -549,9 +575,16 @@ export class UpgradesService {
             }
             existingRaid.energyTotal += raidLoc.energySpent;
             existingRaid.raidsTotal += raidLoc.raidsToPerform;
-            existingRaid.relatedCharacters = uniq([...existingRaid.relatedCharacters, ...mat.relatedCharacters]);
-            existingRaid.relatedGoals = uniq([...existingRaid.relatedGoals, ...mat.relatedGoals]);
+            const relatedCharacters = options?.goal ? [options.goal.unitId] : mat.relatedCharacters;
+            const relatedGoals = options?.goal ? [options.goal.goalId] : mat.relatedGoals;
+            existingRaid.relatedCharacters = uniq([...existingRaid.relatedCharacters, ...relatedCharacters]);
+            existingRaid.relatedGoals = uniq([...existingRaid.relatedGoals, ...relatedGoals]);
         } else {
+            const relatedCharacters = options?.goal ? [options.goal.unitId] : mat.relatedCharacters;
+            const relatedGoals = options?.goal ? [options.goal.goalId] : mat.relatedGoals;
+            const requiredCount = options?.goal
+                ? (mat.countByGoalId[options.goal.goalId] ?? 0)
+                : sum(Object.values(mat.countByGoalId));
             day.raids.push({
                 raidLocations: [raidLoc],
                 energyTotal: raidLoc.energySpent,
@@ -559,12 +592,12 @@ export class UpgradesService {
                 daysTotal: -1,
                 raidsTotal: raidLoc.raidsToPerform,
                 acquiredCount: Math.floor(inventory[upgradeId] ?? 0),
-                requiredCount: sum(Object.values(mat.countByGoalId)),
-                relatedCharacters: mat.relatedCharacters,
-                relatedGoals: mat.relatedGoals,
+                requiredCount,
+                relatedCharacters,
+                relatedGoals,
                 isBlocked: false,
                 isFinished: false,
-                id: upgradeId,
+                id: raidKey,
                 snowprintId: mat.snowprintId,
                 label: mat.label,
                 rarity: mat.rarity,
@@ -597,7 +630,8 @@ export class UpgradesService {
         loc: ICampaignBattleComposed,
         remainingMats: Record<string, ICombinedUpgrade>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
-        goalId: string | undefined
+        goalId: string | undefined,
+        options?: { raidKey?: string; goal?: { goalId: string; unitId: string } }
     ): number {
         if (energy < loc.energyCost) return energy;
         const upgradeId = loc.rewards.potential[0].id;
@@ -618,7 +652,7 @@ export class UpgradesService {
             if (neededByHigherPriorityGoals + (mat.countByGoalId[goalId] ?? 0) <= (inventory[upgradeId] ?? 0)) {
                 return energy;
             }
-            return this.addRaidForLocation(day, energy, inventory, loc, stillNeededForGoal, mat, upgradeId);
+            return this.addRaidForLocation(day, energy, inventory, loc, stillNeededForGoal, mat, upgradeId, options);
         }
         if (mat.requiredCount <= (inventory[upgradeId] ?? 0)) {
             return energy;
@@ -631,7 +665,7 @@ export class UpgradesService {
             undefined
         ).totalRemaining;
         if (remainingNeeded <= 0) return energy;
-        return this.addRaidForLocation(day, energy, inventory, loc, remainingNeeded, mat, upgradeId);
+        return this.addRaidForLocation(day, energy, inventory, loc, remainingNeeded, mat, upgradeId, options);
     }
 
     /**
@@ -1108,8 +1142,7 @@ export class UpgradesService {
      */
     public static handleFirstDayCompletedRaids(
         settings: IEstimatedRanksSettings,
-        combinedBaseMaterials: Record<string, ICombinedUpgrade>,
-        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
+        combinedBaseMaterials: Record<string, ICombinedUpgrade>
     ): IUpgradesRaidsDay {
         const raids: IUpgradeRaid[] = [];
         let energySpent = 0;
@@ -1128,14 +1161,6 @@ export class UpgradesService {
                 },
                 {} as Record<string, IItemRaidLocation[]>
             )
-        );
-
-        const unitNames: Record<string, string> = goals.reduce(
-            (acc, goal) => {
-                acc[goal.unitId] = goal.unitName;
-                return acc;
-            },
-            {} as Record<string, string>
         );
 
         let raidIndex = 0;
@@ -1160,10 +1185,8 @@ export class UpgradesService {
                 raidsTotal: sum(newLocations.map(loc => loc.raidsAlreadyPerformed)),
                 acquiredCount: acquired,
                 requiredCount: required,
-                relatedCharacters: uniq(
-                    combinedBaseMaterials[reward]?.relatedCharacters.map(id => unitNames[id] ?? id) ?? []
-                ),
-                relatedGoals: uniq(combinedBaseMaterials[reward]?.relatedGoals),
+                relatedCharacters: [],
+                relatedGoals: [],
                 isBlocked: false,
                 isFinished: acquired >= required,
             };
@@ -1523,6 +1546,65 @@ export class UpgradesService {
             est.relatedCharacters = est.relatedCharacters.map(id => this.resolveUnitIdToShortName(id));
         }
         return orderBy(result, ['daysTotal', 'energyTotal'], ['desc', 'desc']);
+    }
+
+    private static getGoalPriorityEstimates(
+        upgrades: Record<string, ICombinedUpgrade>,
+        inventoryUpgrades: Record<string, number>,
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
+        chars: ICharacter2[]
+    ): ICharacterUpgradeEstimate[] {
+        const sortedGoals = orderBy(goals, ['priority'], ['asc']);
+        const goalPriorityMap = new Map(sortedGoals.map(goal => [goal.goalId, goal.priority]));
+        const result: ICharacterUpgradeEstimate[] = [];
+
+        for (const upgradeId in upgrades) {
+            const upgrade = upgrades[upgradeId];
+            let available = inventoryUpgrades[upgradeId] ?? 0;
+
+            for (const goal of sortedGoals) {
+                const requiredCount = upgrade.countByGoalId[goal.goalId];
+                if (!requiredCount) continue;
+
+                const acquiredCount = Math.min(available, requiredCount);
+                available = Math.max(available - acquiredCount, 0);
+
+                const perGoalUpgrade: ICombinedUpgrade = {
+                    ...upgrade,
+                    requiredCount,
+                    countByGoalId: { [goal.goalId]: requiredCount },
+                    relatedGoals: [goal.goalId],
+                    relatedCharacters: [goal.unitId],
+                };
+
+                const estimate = this.getUpgradeEstimate(perGoalUpgrade, requiredCount, acquiredCount);
+                if (estimate.isBlocked && (this.isShard(upgradeId) || this.isMythicShard(upgradeId))) {
+                    const ascendGoal =
+                        goal.type === PersonalGoalType.Ascend ? (goal as ICharacterAscendGoal) : undefined;
+                    if (
+                        ascendGoal &&
+                        ((this.isShard(upgradeId) &&
+                            this.canOnslaughtCharacterForRegularShards(ascendGoal.unitId, chars, ascendGoal)) ||
+                            (this.isMythicShard(upgradeId) &&
+                                this.canOnslaughtCharacterForMythicShards(ascendGoal.unitId, chars, ascendGoal)))
+                    ) {
+                        estimate.isBlocked = false;
+                    }
+                }
+                estimate.relatedCharacters = estimate.relatedCharacters.map(id => this.resolveUnitIdToShortName(id));
+                result.push(estimate);
+            }
+        }
+
+        return orderBy(
+            result,
+            [
+                estimate => goalPriorityMap.get(estimate.relatedGoals[0]) ?? Number.POSITIVE_INFINITY,
+                'daysTotal',
+                'energyTotal',
+            ],
+            ['asc', 'desc', 'desc']
+        );
     }
 
     /**
@@ -1930,47 +2012,6 @@ export class UpgradesService {
         }
 
         return baseUpgradesTotal;
-    }
-
-    /**
-     * Calculates upgrade estimates for a list of goals, processing them sequentially.
-     * This method assumes goals are provided in a priority order. As it processes each goal,
-     * it consumes items from the shared `inventoryUpgrades` pool. This means that items used
-     * for a higher-priority goal are no longer available for subsequent, lower-priority goals.
-     *
-     * @param goals - An array of character upgrade goals, sorted by priority.
-     * @param upgrades - A record of all possible upgrades, detailing their requirements for each goal.
-     * @param inventoryUpgrades - A record representing the user's current inventory of upgrade materials.
-     *                            **Note:** This object is mutated by the function to simulate the consumption of items.
-     * @returns An array of `ICharacterUpgradeRankEstimate`, each corresponding to a goal and containing
-     *          a list of the necessary upgrades sorted in descending order by total days and energy required.
-     */
-    private static getEstimatesByPriority(
-        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
-        upgrades: Record<string, ICombinedUpgrade>,
-        inventoryUpgrades: Record<string, number>
-    ): ICharacterUpgradeRankEstimate[] {
-        const result: ICharacterUpgradeRankEstimate[] = [];
-        for (const goal of orderBy(goals, ['priority'], ['asc'])) {
-            const goalUpgrades: ICharacterUpgradeEstimate[] = [];
-            for (const upgradeId in upgrades) {
-                const upgrade = upgrades[upgradeId];
-                const requiredCount = upgrade.countByGoalId[goal.goalId];
-                if (!requiredCount) continue;
-                const acquiredCount = inventoryUpgrades[upgradeId] ?? 0;
-                inventoryUpgrades[upgradeId] = Math.max(acquiredCount - requiredCount, 0);
-                const estimate = this.getUpgradeEstimate(upgrade, requiredCount, acquiredCount);
-                estimate.relatedCharacters = [CharactersService.resolveCharacter(goal.unitName)?.name ?? goal.unitName];
-                estimate.relatedGoals = [goal.goalId];
-                goalUpgrades.push(estimate);
-            }
-
-            result.push({
-                goalId: goal.goalId,
-                upgrades: orderBy(goalUpgrades, ['daysTotal', 'energyTotal'], ['desc', 'desc']),
-            });
-        }
-        return result;
     }
 
     static findUpgrade(upgrade: TacticusUpgrade): string | null {

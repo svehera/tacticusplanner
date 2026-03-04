@@ -18,7 +18,7 @@ interface Props {
 export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid }) => {
     const isAllRaidsCompleted =
         upgradeRaid.acquiredCount >= upgradeRaid.requiredCount ||
-        upgradeRaid.raidLocations.every(location => location.isCompleted);
+        upgradeRaid.raidLocations.every(location => location.raidsToPerform === 0);
     const isShard = UpgradesService.isShard(upgradeRaid.id);
     const isMythicShard = UpgradesService.isMythicShard(upgradeRaid.id);
 
@@ -74,7 +74,6 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid }) => {
                             className="flex-box between"
                             style={{ opacity: location.isCompleted ? 0.5 : 1 }}>
                             <CampaignLocation location={location} unlocked={true} />
-                            {location.raidsAlreadyPerformed},{location.raidsToPerform}
                         </li>
                     );
                 })}
