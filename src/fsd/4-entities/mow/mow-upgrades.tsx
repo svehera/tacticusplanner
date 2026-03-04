@@ -1,7 +1,7 @@
 ﻿import { Badge } from '@mui/material';
 import React from 'react';
 
-import { Alliance, RarityMapper } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { BadgeImage, ComponentImage, ForgeBadgeImage } from '@/fsd/5-shared/ui/icons';
 
 import { IBaseUpgrade, ICraftedUpgrade, UpgradeImage } from '@/fsd/4-entities/upgrade/@x/mow';
@@ -55,15 +55,19 @@ export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mow
                 </div>
                 <div className="flex items-center">
                     <div className="flex gap-1">
-                        {upgrades.map((x, index) => (
-                            <UpgradeImage
-                                key={x.id + index}
-                                material={x.label}
-                                iconPath={x.iconPath}
-                                rarity={RarityMapper.rarityToRarityString(x.rarity)}
-                                size={40}
-                            />
-                        ))}
+                        {upgrades.map((x, index) => {
+                            return (
+                                x.rarity in Rarity && (
+                                    <UpgradeImage
+                                        key={x.id + index}
+                                        material={x.label}
+                                        iconPath={x.iconPath}
+                                        rarity={RarityMapper.rarityToRarityString(x.rarity as unknown as Rarity)}
+                                        size={40}
+                                    />
+                                )
+                            );
+                        })}
                     </div>
                 </div>
             </div>
