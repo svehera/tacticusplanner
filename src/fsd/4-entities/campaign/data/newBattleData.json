@@ -43103,14 +43103,14 @@
                 }
             ]
         },
-        "enemyPower": 234495,
+        "enemyPower": 337478,
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["ThousandSons"],
         "enemiesTotal": 10,
         "enemiesTypes": ["Ahriman", "Rubric Marine", "Scarab Occult Terminator", "Toth"],
         "rawEnemyTypes": [
             { "id": "thousBossAhrimanCamp:2", "count": 1 },
-            { "id": "thousBossTerminatorLHE:2", "count": 1 },
+            { "id": "thousBossTerminator:6", "count": 1 },
             { "id": "thousNpc3RubricMarine:20", "count": 6 },
             { "id": "thousNpc4Terminator:21", "count": 2 }
         ],
@@ -43123,11 +43123,11 @@
                 "rank": "Gold 2"
             },
             {
-                "id": "thousBossTerminatorLHE",
+                "id": "thousBossTerminator",
                 "name": "Toth",
                 "count": 1,
-                "stars": 2,
-                "rank": "Iron 1"
+                "stars": 11,
+                "rank": "Gold 3"
             },
             {
                 "id": "thousNpc3RubricMarine",
@@ -58200,7 +58200,7 @@
                 }
             ]
         },
-        "enemyPower": 41875,
+        "enemyPower": 47447,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 8,
@@ -67671,6 +67671,3828 @@
                 "name": "Nurglings",
                 "count": 1,
                 "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASS01": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 1,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC016",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 165,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Cadian Guardsman"],
+        "rawEnemyTypes": [{ "id": "astraNpc1Guardsman:8", "count": 5 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "stars": 3,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "ASS02": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 2,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC003",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 362,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:7", "count": 3 },
+            { "id": "astraNpc1Guardsman:7", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "ASS03": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC001",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 350,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Battle Sister"],
+        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:6", "count": 5 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 5,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "ASSC03B": {
+        "campaign": "Adepta Sororitas Standard Challenge",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR005",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 2023,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team", "Cadian Vox-caster"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:8", "count": 3 },
+            { "id": "astraNpc2Lascannon:11", "count": 2 },
+            { "id": "astraNpc3Voxcaster:10", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASS04": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 4,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC007",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 490,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Battle Sister"],
+        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:6", "count": 7 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 7,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "ASS05": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 5,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC011",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 685,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Cadian Vox-caster"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:7", "count": 3 },
+            { "id": "astraNpc1Guardsman:7", "count": 3 },
+            { "id": "astraNpc3Voxcaster:7", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "ASS06": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 6,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_adeptRetributor",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 1037,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Vindicta"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:8", "count": 4 },
+            { "id": "adeptNpcRetributor:4", "count": 1 },
+            { "id": "astraNpc1Guardsman:9", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 4,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "adeptNpcRetributor",
+                "name": "Vindicta",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "stars": 3,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASS07": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 7,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC006",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 518,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:7", "count": 3 },
+            { "id": "astraNpc1Guardsman:8", "count": 4 },
+            { "id": "astraNpc2Lascannon:6", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "ASS08": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 8,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC003",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 685,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:8", "count": 3 },
+            { "id": "astraNpc1Guardsman:6", "count": 7 },
+            { "id": "astraNpc2Lascannon:6", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "ASS09": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 9,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC010",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 735,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:7", "count": 6 },
+            { "id": "astraNpc2Lascannon:6", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 6,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "ASS10": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 10,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR022",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 560,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:7", "count": 4 },
+            { "id": "astraNpc2Lascannon:7", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "ASS11": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 11,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_adeptCanoness",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 1023,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team", "Cadian Vox-caster", "Roswitha"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:7", "count": 5 },
+            { "id": "adeptNpcCanoness:3", "count": 1 },
+            { "id": "astraNpc2Lascannon:6", "count": 2 },
+            { "id": "astraNpc3Voxcaster:6", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 5,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "adeptNpcCanoness",
+                "name": "Roswitha",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "ASS12": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 12,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC002",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 1457,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Battle Sister", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:9", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:10", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 3,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASS13": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU007",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 2270,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Zephyrim"],
+        "rawEnemyTypes": [{ "id": "adeptNpc2Zephyrim:10", "count": 5 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 5,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASSC13B": {
+        "campaign": "Adepta Sororitas Standard Challenge",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpE012",
+                    "chance_numerator": 1,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.4
+                }
+            ]
+        },
+        "enemyPower": 11177,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Battle Sister", "Cadian Mortar Team", "Cadian Vox-caster", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:14", "count": 2 },
+            { "id": "adeptNpc2Zephyrim:13", "count": 3 },
+            { "id": "astraNpc3Voxcaster:13", "count": 4 },
+            { "id": "astraNpc4Mortar:10", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 2,
+                "stars": 9,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 3,
+                "stars": 7,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 7,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASS14": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 14,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU003",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 2202,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Battle Sister", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:10", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:10", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASS15": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 15,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU005",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 2656,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Battle Sister", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:10", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:10", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASS16": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 16,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR022",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 3215,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:10", "count": 4 },
+            { "id": "adeptNpc2Zephyrim:11", "count": 3 },
+            { "id": "astraNpc2Lascannon:9", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 3,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASS17": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 17,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_adeptHospitaller",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 4476,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Battle Sister", "Cadian Vox-caster", "Isabella", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:10", "count": 4 },
+            { "id": "adeptNpc2Zephyrim:10", "count": 4 },
+            { "id": "adeptNpcHospitaller:9", "count": 1 },
+            { "id": "astraNpc3Voxcaster:10", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "adeptNpcHospitaller",
+                "name": "Isabella",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASS18": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 18,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU014",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 3869,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "AstraMilitarum"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Tech-Priest Enginseer"],
+        "rawEnemyTypes": [
+            { "id": "admecNpc2Techpriest:10", "count": 3 },
+            { "id": "astraNpc2Lascannon:10", "count": 2 },
+            { "id": "astraNpc3Voxcaster:11", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "ASS19": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 19,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU016",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 4395,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "AstraMilitarum"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Tech-Priest Enginseer"],
+        "rawEnemyTypes": [
+            { "id": "admecNpc2Techpriest:11", "count": 3 },
+            { "id": "astraNpc2Lascannon:10", "count": 3 },
+            { "id": "astraNpc3Voxcaster:11", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "ASS20": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 20,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU001",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 2982,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Battle Sister", "Cadian Vox-caster", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:10", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:11", "count": 2 },
+            { "id": "astraNpc3Voxcaster:11", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "ASS21": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 21,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR022",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 5081,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Battle Sister", "Cadian Vox-caster", "Tech-Priest Enginseer", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:10", "count": 4 },
+            { "id": "adeptNpc2Zephyrim:10", "count": 3 },
+            { "id": "admecNpc2Techpriest:10", "count": 3 },
+            { "id": "astraNpc3Voxcaster:10", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASS22": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 22,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_adeptMorvenn",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 5794,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "Sisterhood"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Battle Sister", "Morvenn Vahl", "Tech-Priest Enginseer", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:10", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:10", "count": 4 },
+            { "id": "adeptNpcMorvenn:9", "count": 1 },
+            { "id": "admecNpc2Techpriest:10", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "adeptNpcMorvenn",
+                "name": "Morvenn Vahl",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "ASS23": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 23,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU002",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 5796,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister"],
+        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:12", "count": 9 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 9,
+                "stars": 5,
+                "rank": "Bronze 3"
+            }
+        ]
+    },
+    "ASS24": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 24,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU012",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 5772,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Zephyrim"],
+        "rawEnemyTypes": [{ "id": "adeptNpc2Zephyrim:13", "count": 4 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 4,
+                "stars": 7,
+                "rank": "Bronze 3"
+            }
+        ]
+    },
+    "ASS25": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU013",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 10764,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Battle Sister", "Cadian Mortar Team", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:14", "count": 4 },
+            { "id": "adeptNpc2Zephyrim:14", "count": 2 },
+            { "id": "astraNpc4Mortar:14", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 4,
+                "stars": 9,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 9,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 9,
+                "rank": "Bronze 3"
+            }
+        ]
+    },
+    "ASSC25B": {
+        "campaign": "Adepta Sororitas Standard Challenge",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgE003",
+                    "chance_numerator": 1,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.4
+                }
+            ]
+        },
+        "enemyPower": 68416,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": [
+            "Battle Sister",
+            "Isabella",
+            "Morvenn Vahl",
+            "Roswitha",
+            "Tech-Priest Enginseer",
+            "Vindicta",
+            "Zephyrim"
+        ],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:19", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:17", "count": 2 },
+            { "id": "adeptNpcCanoness:10", "count": 1 },
+            { "id": "adeptNpcHospitaller:11", "count": 1 },
+            { "id": "adeptNpcMorvenn:12", "count": 1 },
+            { "id": "adeptNpcRetributor:10", "count": 1 },
+            { "id": "admecNpc2Techpriest:19", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "adeptNpcCanoness",
+                "name": "Roswitha",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "adeptNpcHospitaller",
+                "name": "Isabella",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "adeptNpcMorvenn",
+                "name": "Morvenn Vahl",
+                "count": 1,
+                "stars": 9,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "adeptNpcRetributor",
+                "name": "Vindicta",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "ASS26": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 26,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR002",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 22023,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Mortar Team", "Tech-Priest Enginseer", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:16", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:16", "count": 3 },
+            { "id": "admecNpc2Techpriest:16", "count": 1 },
+            { "id": "astraNpc4Mortar:14", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 3,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 1,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 9,
+                "rank": "Bronze 3"
+            }
+        ]
+    },
+    "ASS27": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 27,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR006",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 19789,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team", "Cadian Mortar Team", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:17", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:17", "count": 2 },
+            { "id": "astraNpc2Lascannon:17", "count": 2 },
+            { "id": "astraNpc4Mortar:15", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "ASS28": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 28,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR005",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 31831,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": [
+            "Battle Sister",
+            "Cadian Lascannon Team",
+            "Cadian Mortar Team",
+            "Cadian Vox-caster",
+            "Zephyrim"
+        ],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:18", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:17", "count": 2 },
+            { "id": "astraNpc2Lascannon:17", "count": 2 },
+            { "id": "astraNpc3Voxcaster:18", "count": 2 },
+            { "id": "astraNpc4Mortar:16", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 9,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "ASS29": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 29,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpL102",
+                    "chance_numerator": 1,
+                    "chance_denominator": 9,
+                    "effective_rate": 0.199
+                }
+            ]
+        },
+        "enemyPower": 29806,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": [
+            "Battle Sister",
+            "Cadian Lascannon Team",
+            "Cadian Mortar Team",
+            "Cadian Vox-caster",
+            "Zephyrim"
+        ],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:17", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:17", "count": 3 },
+            { "id": "astraNpc2Lascannon:17", "count": 1 },
+            { "id": "astraNpc3Voxcaster:17", "count": 2 },
+            { "id": "astraNpc4Mortar:15", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "ASS30": {
+        "campaign": "Adepta Sororitas Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 30,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_adeptCelestine",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 40184,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Mortar Team", "Celestine", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptBossCelestineCE:2", "count": 1 },
+            { "id": "adeptNpc1BattleSister:17", "count": 4 },
+            { "id": "adeptNpc2Zephyrim:17", "count": 2 },
+            { "id": "astraNpc4Mortar:16", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptBossCelestineCE",
+                "name": "Celestine",
+                "count": 1,
+                "stars": 6,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 4,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "ASE01": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 1,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC016",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 13873,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:20", "count": 2 },
+            { "id": "astraNpc1Guardsman:22", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 2,
+                "stars": 10,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "ASE02": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 2,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC003",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 27470,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:22", "count": 2 },
+            { "id": "astraNpc1Guardsman:24", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "ASE03": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC001",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 61530,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Battle Sister"],
+        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:23", "count": 6 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 6,
+                "stars": 10,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "ASEC03B": {
+        "campaign": "Adepta Sororitas Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmE010",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 130314,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team", "Cadian Vox-caster"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:25", "count": 3 },
+            { "id": "astraNpc2Lascannon:26", "count": 2 },
+            { "id": "astraNpc3Voxcaster:25", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 10,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 10,
+                "rank": "Gold 3"
+            }
+        ]
+    },
+    "ASE04": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 4,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC007",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 87378,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Battle Sister"],
+        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:24", "count": 6 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 6,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "ASE05": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 5,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC011",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 84364,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Cadian Vox-caster"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:24", "count": 3 },
+            { "id": "astraNpc1Guardsman:25", "count": 3 },
+            { "id": "astraNpc3Voxcaster:24", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "stars": 10,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "ASE06": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 6,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_adeptRetributor",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemyPower": 129045,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Vindicta"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:24", "count": 4 },
+            { "id": "adeptNpcRetributor:13", "count": 1 },
+            { "id": "astraNpc1Guardsman:25", "count": 7 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "adeptNpcRetributor",
+                "name": "Vindicta",
+                "count": 1,
+                "stars": 10,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "stars": 10,
+                "rank": "Gold 3"
+            }
+        ]
+    },
+    "ASE07": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 7,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC006",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 48196,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:24", "count": 2 },
+            { "id": "astraNpc1Guardsman:25", "count": 4 },
+            { "id": "astraNpc2Lascannon:24", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "stars": 10,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "ASE08": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 8,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC003",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 73034,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:25", "count": 3 },
+            { "id": "astraNpc1Guardsman:25", "count": 6 },
+            { "id": "astraNpc2Lascannon:25", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 10,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc1Guardsman",
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "stars": 10,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 10,
+                "rank": "Gold 3"
+            }
+        ]
+    },
+    "ASE09": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 9,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC010",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 111648,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:25", "count": 6 },
+            { "id": "astraNpc2Lascannon:25", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 6,
+                "stars": 10,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 10,
+                "rank": "Gold 3"
+            }
+        ]
+    },
+    "ASE10": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 10,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC002",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 128587,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:26", "count": 5 },
+            { "id": "astraNpc2Lascannon:26", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 5,
+                "stars": 11,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 3"
+            }
+        ]
+    },
+    "ASE11": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 11,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_adeptCanoness",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemyPower": 210760,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team", "Cadian Vox-caster", "Roswitha"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:25", "count": 5 },
+            { "id": "adeptNpcCanoness:14", "count": 1 },
+            { "id": "astraNpc2Lascannon:25", "count": 3 },
+            { "id": "astraNpc3Voxcaster:25", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 5,
+                "stars": 10,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "adeptNpcCanoness",
+                "name": "Roswitha",
+                "count": 1,
+                "stars": 10,
+                "rank": "Diamond 1"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 10,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 10,
+                "rank": "Gold 3"
+            }
+        ]
+    },
+    "ASE12": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 12,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU001",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemyPower": 225336,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Battle Sister", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:27", "count": 2 },
+            { "id": "adeptNpc2Zephyrim:28", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 2,
+                "stars": 10,
+                "rank": "Diamond 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 3,
+                "stars": 11,
+                "rank": "Diamond 1"
+            }
+        ]
+    },
+    "ASE13": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU007",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemyPower": 291730,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Zephyrim"],
+        "rawEnemyTypes": [{ "id": "adeptNpc2Zephyrim:28", "count": 5 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 5,
+                "stars": 11,
+                "rank": "Diamond 1"
+            }
+        ]
+    },
+    "ASEC13B": {
+        "campaign": "Adepta Sororitas Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmL001",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemyPower": 1650798,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Battle Sister", "Cadian Mortar Team", "Cadian Vox-caster", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:35", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:33", "count": 2 },
+            { "id": "astraNpc3Voxcaster:34", "count": 3 },
+            { "id": "astraNpc4Mortar:33", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE14": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 14,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU003",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemyPower": 485022,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Battle Sister", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:29", "count": 6 },
+            { "id": "adeptNpc2Zephyrim:29", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 6,
+                "stars": 10,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 4,
+                "stars": 10,
+                "rank": "Diamond 2"
+            }
+        ]
+    },
+    "ASE15": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 15,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR002",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 445591,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:29", "count": 5 },
+            { "id": "adeptNpc2Zephyrim:29", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 5,
+                "stars": 10,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 4,
+                "stars": 10,
+                "rank": "Diamond 2"
+            }
+        ]
+    },
+    "ASE16": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 16,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR006",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 508414,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:30", "count": 5 },
+            { "id": "adeptNpc2Zephyrim:30", "count": 2 },
+            { "id": "astraNpc2Lascannon:29", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 5,
+                "stars": 11,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 11,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 10,
+                "rank": "Diamond 2"
+            }
+        ]
+    },
+    "ASE17": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 17,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_adeptHospitaller",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemyPower": 1129087,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Battle Sister", "Cadian Vox-caster", "Isabella", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:31", "count": 5 },
+            { "id": "adeptNpc2Zephyrim:30", "count": 2 },
+            { "id": "adeptNpcHospitaller:16", "count": 1 },
+            { "id": "astraNpc3Voxcaster:31", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 5,
+                "stars": 10,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 11,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "adeptNpcHospitaller",
+                "name": "Isabella",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 10,
+                "rank": "Diamond 3"
+            }
+        ]
+    },
+    "ASE18": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 18,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR005",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 1424304,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "AstraMilitarum"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Tech-Priest Enginseer"],
+        "rawEnemyTypes": [
+            { "id": "admecNpc2Techpriest:33", "count": 2 },
+            { "id": "astraNpc2Lascannon:33", "count": 4 },
+            { "id": "astraNpc3Voxcaster:33", "count": 6 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 4,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 6,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE19": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 19,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR022",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 2025598,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "AstraMilitarum"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Tech-Priest Enginseer"],
+        "rawEnemyTypes": [
+            { "id": "admecNpc2Techpriest:33", "count": 4 },
+            { "id": "astraNpc2Lascannon:33", "count": 3 },
+            { "id": "astraNpc3Voxcaster:34", "count": 5 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 4,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 5,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE20": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 20,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR022",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 1248208,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Battle Sister", "Cadian Vox-caster", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:33", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:33", "count": 4 },
+            { "id": "astraNpc3Voxcaster:33", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 4,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE21": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 21,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR022",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 1852254,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Battle Sister", "Cadian Vox-caster", "Tech-Priest Enginseer", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:33", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:33", "count": 3 },
+            { "id": "admecNpc2Techpriest:33", "count": 2 },
+            { "id": "astraNpc3Voxcaster:33", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE22": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 22,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_adeptMorvenn",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemyPower": 2165136,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Battle Sister", "Morvenn Vahl", "Tech-Priest Enginseer", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:33", "count": 4 },
+            { "id": "adeptNpc2Zephyrim:33", "count": 3 },
+            { "id": "adeptNpcMorvenn:16", "count": 1 },
+            { "id": "admecNpc2Techpriest:33", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 4,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpcMorvenn",
+                "name": "Morvenn Vahl",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE23": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 23,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpL102",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemyPower": 1820664,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Battle Sister"],
+        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:34", "count": 12 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 12,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE24": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 24,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_adeptCelestine",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemyPower": 1373355,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Sisterhood"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Zephyrim"],
+        "rawEnemyTypes": [{ "id": "adeptNpc2Zephyrim:35", "count": 5 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 5,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE25": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_adeptRetributor",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemyPower": 2103842,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Battle Sister", "Cadian Mortar Team", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:35", "count": 5 },
+            { "id": "adeptNpc2Zephyrim:36", "count": 3 },
+            { "id": "astraNpc4Mortar:35", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 5,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 3,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASEC25B": {
+        "campaign": "Adepta Sororitas Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 90,
+                    "max": 155
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgL001",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemyPower": 4404153,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": [
+            "Battle Sister",
+            "Isabella",
+            "Morvenn Vahl",
+            "Roswitha",
+            "Tech-Priest Enginseer",
+            "Vindicta",
+            "Zephyrim"
+        ],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:34", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:34", "count": 2 },
+            { "id": "adeptNpcCanoness:17", "count": 1 },
+            { "id": "adeptNpcHospitaller:17", "count": 1 },
+            { "id": "adeptNpcMorvenn:17", "count": 1 },
+            { "id": "adeptNpcRetributor:17", "count": 1 },
+            { "id": "admecNpc2Techpriest:34", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpcCanoness",
+                "name": "Roswitha",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpcHospitaller",
+                "name": "Isabella",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpcMorvenn",
+                "name": "Morvenn Vahl",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpcRetributor",
+                "name": "Vindicta",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 2,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE26": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 26,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_adeptCanoness",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemyPower": 2691700,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AdeptusMechanicus", "AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Battle Sister", "Cadian Mortar Team", "Tech-Priest Enginseer", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:35", "count": 5 },
+            { "id": "adeptNpc2Zephyrim:36", "count": 2 },
+            { "id": "admecNpc2Techpriest:36", "count": 2 },
+            { "id": "astraNpc4Mortar:36", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 5,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "admecNpc2Techpriest",
+                "name": "Tech-Priest Enginseer",
+                "count": 2,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE27": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 27,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_adeptHospitaller",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemyPower": 1781358,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team", "Cadian Mortar Team", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:38", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:38", "count": 2 },
+            { "id": "astraNpc2Lascannon:37", "count": 2 },
+            { "id": "astraNpc4Mortar:37", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "stars": 11,
+                "rank": "Adamantine 2"
+            }
+        ]
+    },
+    "ASE28": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 28,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_adeptMorvenn",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemyPower": 3132635,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 12,
+        "enemiesTypes": [
+            "Battle Sister",
+            "Cadian Lascannon Team",
+            "Cadian Mortar Team",
+            "Cadian Vox-caster",
+            "Zephyrim"
+        ],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:40", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:40", "count": 2 },
+            { "id": "astraNpc2Lascannon:40", "count": 2 },
+            { "id": "astraNpc3Voxcaster:40", "count": 4 },
+            { "id": "astraNpc4Mortar:40", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 14,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 14,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 14,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 14,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "stars": 14,
+                "rank": "Adamantine 2"
+            }
+        ]
+    },
+    "ASE29": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 3,
+        "nodeNumber": 29,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_adeptCelestine",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemyPower": 2613913,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 11,
+        "enemiesTypes": [
+            "Battle Sister",
+            "Cadian Lascannon Team",
+            "Cadian Mortar Team",
+            "Cadian Vox-caster",
+            "Zephyrim"
+        ],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:38", "count": 3 },
+            { "id": "adeptNpc2Zephyrim:40", "count": 2 },
+            { "id": "astraNpc2Lascannon:36", "count": 2 },
+            { "id": "astraNpc3Voxcaster:40", "count": 3 },
+            { "id": "astraNpc4Mortar:36", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 14,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 14,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "ASE30": {
+        "campaign": "Adepta Sororitas Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 30,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 90,
+                    "max": 155
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpM001",
+                    "chance_numerator": 3,
+                    "chance_denominator": 25,
+                    "effective_rate": 0.153
+                }
+            ]
+        },
+        "enemyPower": 3951724,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Battle Sister", "Cadian Mortar Team", "Celestine", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptBossCelestineCE:4", "count": 1 },
+            { "id": "adeptNpc1BattleSister:34", "count": 6 },
+            { "id": "adeptNpc2Zephyrim:35", "count": 2 },
+            { "id": "astraNpc4Mortar:34", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "adeptBossCelestineCE",
+                "name": "Celestine",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 6,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "adeptNpc2Zephyrim",
+                "name": "Zephyrim",
+                "count": 2,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "stars": 12,
                 "rank": "Adamantine 1"
             }
         ]

@@ -338,6 +338,47 @@ export const campaignsList: ICampaignModel[] = [
         groupType: CampaignGroupType.tauCE,
         difficulty: CampaignDifficulty.eventChallenge,
     },
+    // Adepta Sororitas Campaign Events
+    {
+        id: Campaign.ASS,
+        name: 'Adepta Sororitas Standard',
+        displayName: 'Adepta Sororitas Standard',
+        faction: 'Adepta Sororitas',
+        coreCharacters: ['worldEightbound', 'worldExecutions', 'worldTerminator'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.sistersCE,
+        difficulty: CampaignDifficulty.eventStandard,
+    },
+    {
+        id: Campaign.ASSC,
+        name: 'Adepta Sororitas Standard Challenge',
+        displayName: 'Adepta Sororitas Standard Challenge',
+        faction: 'Adepta Sororitas',
+        coreCharacters: ['worldEightbound', 'worldExecutions', 'worldTerminator'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.sistersCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
+    {
+        id: Campaign.ASE,
+        name: 'Adepta Sororitas Extremis',
+        displayName: 'Adepta Sororitas Extremis',
+        faction: 'Adepta Sororitas',
+        coreCharacters: ['worldEightbound', 'worldExecutions', 'worldTerminator'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.sistersCE,
+        difficulty: CampaignDifficulty.eventExtremis,
+    },
+    {
+        id: Campaign.ASEC,
+        name: 'Adepta Sororitas Extremis Challenge',
+        displayName: 'Adepta Sororitas Extremis Challenge',
+        faction: 'Adepta Sororitas',
+        coreCharacters: ['worldEightbound', 'worldExecutions', 'worldTerminator'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.sistersCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
 ];
 
 export const campaignsByGroup: Record<string, Campaign[]> = mapValues(groupBy(campaignsList, 'groupType'), value =>
@@ -349,6 +390,7 @@ const campaignEvents: CampaignGroupType[] = [
     CampaignGroupType.tyranidCE,
     CampaignGroupType.tauCE,
     CampaignGroupType.deathGuardCE,
+    CampaignGroupType.sistersCE,
 ];
 
 export const campaignEventsLocations: Campaign[] = campaignsList

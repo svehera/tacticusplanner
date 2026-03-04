@@ -53,7 +53,7 @@ export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
             }
             if (reward.startsWith('mythicShards_')) {
                 const char = CharactersService.getUnit(reward.substring(13));
-                if (char) return <UnitShardIcon name={reward} icon={char.roundIcon} />;
+                if (char) return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={true} />;
                 return reward.substring(13);
             }
             return reward;
