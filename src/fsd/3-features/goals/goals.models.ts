@@ -87,6 +87,11 @@ export interface IGoalEstimate {
     abilitiesEstimate?: ICharacterAbilitiesMaterialsTotal;
     xpBooksApplied?: number;
     xpBooksRequired?: number;
+
+    /** If the goal is already done and no further raiding/onslaught is required. */
+    completed?: boolean;
+    /** If the goal is currently blocked and cannot be completed (though you might be able to progress). */
+    blocked?: boolean;
 }
 
 export interface IEstimatedAscensionSettings {

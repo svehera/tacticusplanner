@@ -1,4 +1,4 @@
-﻿import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
+﻿import { ArrowForward, Block, CheckCircle, DeleteForever, Edit } from '@mui/icons-material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LinkIcon from '@mui/icons-material/Link';
 import { Card, CardContent, CardHeader } from '@mui/material';
@@ -62,11 +62,9 @@ export const GoalCard: React.FC<Props> = ({
     const isGoalCompleted = GoalsService.isGoalCompleted(goal, goalEstimate);
 
     const calendarDate: string = useMemo(() => {
-        if (!goalEstimate.daysLeft) {
-            return '';
-        }
+        const daysLeft = goalEstimate.daysLeft ?? 0;
         const nextDate = new Date();
-        nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
+        nextDate.setDate(nextDate.getDate() + daysLeft - 1);
 
         return formatDateWithOrdinal(nextDate);
     }, [goalEstimate.daysLeft]);
@@ -116,7 +114,7 @@ export const GoalCard: React.FC<Props> = ({
                                 Mythic Shards
                             </div>
                         )}
-                        <div className="flex-box gap10 wrap">
+                        <div className="flex-box wrap gap-2">
                             <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
                                 <div className="flex-box gap-[3px]">
                                     <CalendarMonthIcon /> {goalEstimate.daysLeft}
@@ -136,6 +134,17 @@ export const GoalCard: React.FC<Props> = ({
                                         <CampaignImage campaign={'Onslaught'} size={18} /> {goalEstimate.oTokensTotal}
                                     </div>
                                 </AccessibleTooltip>
+                            )}
+
+                            {!!goalEstimate.completed && (
+                                <span className="flex-box gap-[3px]">
+                                    <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                                </span>
+                            )}
+                            {!!goalEstimate.blocked && (
+                                <span className="flex-box gap-[3px]">
+                                    <Block fontSize="small" sx={{ color: 'error.main' }} />
+                                </span>
                             )}
                         </div>
                     </div>
@@ -161,7 +170,7 @@ export const GoalCard: React.FC<Props> = ({
                                 )}
                             </div>
                         </div>
-                        <div className="flex-box gap10 wrap">
+                        <div className="flex-box wrap gap-2">
                             <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
                                 <div className="flex-box gap-[3px]">
                                     <CalendarMonthIcon /> {goalEstimate.daysLeft}
@@ -172,6 +181,16 @@ export const GoalCard: React.FC<Props> = ({
                                     <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
                                 </div>
                             </AccessibleTooltip>
+                            {!!goalEstimate.completed && (
+                                <span className="flex-box gap-[3px]">
+                                    <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                                </span>
+                            )}
+                            {!!goalEstimate.blocked && (
+                                <span className="flex-box gap-[3px]">
+                                    <Block fontSize="small" sx={{ color: 'error.main' }} />
+                                </span>
+                            )}
                         </div>
                         {goalEstimate.xpDaysLeft !== undefined && (
                             <div className="flex-box gap10 wrap">
@@ -353,6 +372,16 @@ export const GoalCard: React.FC<Props> = ({
                                             {goalEstimate.energyTotal}
                                         </div>
                                     </AccessibleTooltip>
+                                    {!!goalEstimate.completed && (
+                                        <span className="flex-box gap-[3px]">
+                                            <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                                        </span>
+                                    )}
+                                    {!!goalEstimate.blocked && (
+                                        <span className="flex-box gap-[3px]">
+                                            <Block fontSize="small" sx={{ color: 'error.main' }} />
+                                        </span>
+                                    )}
                                 </>
                             )}
                         </div>

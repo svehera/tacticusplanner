@@ -1,20 +1,20 @@
-﻿import { cloneDeep, orderBy } from 'lodash';
+﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+import { cloneDeep, orderBy } from 'lodash';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { rarityToStars } from 'src/models/constants';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { rankToLevel, rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IInventory, IPersonalGoal } from 'src/models/interfaces';
 
 import { Alliance, Rank, Rarity } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
+import { ICharacter2 } from '@/fsd/4-entities/character/model';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
-// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
+import { CharactersXpService } from '@/fsd/3-features/characters/characters-xp.service';
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import {
     CharacterRaidGoalSelect,
@@ -24,14 +24,14 @@ import {
     ICharacterUpgradeAbilities,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
+    IEstimatedUpgrades,
     IGoalEstimate,
-    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from '@/fsd/3-features/goals/goals.models';
+import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
-// eslint-disable-next-line boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { XpUseState } from '@/fsd/1-pages/input-resources';
-// eslint-disable-next-line boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
+
 interface RevisedGoals {
     goalEstimates: IGoalEstimate[];
     neededBadges: Record<Alliance, Record<Rarity, number>>;
@@ -52,6 +52,139 @@ interface XpBookAccrual {
 }
 
 export class GoalsService {
+    private static currentCharacterXp(
+        characterId: string,
+        goals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUpgradeAbilities)[],
+        currentGoalPriority: number,
+        characters: ICharacter2[]
+    ): IXpLevel {
+        const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
+        const character = characters.find(c => c.snowprintId! === characterId);
+        const ret: IXpLevel = { currentLevel: character?.level ?? 1, xpAtLevel: character?.xp ?? 0 };
+        for (const goal of priorGoals) {
+            if (goal.type === PersonalGoalType.UpgradeRank) {
+                const upgradeGoal = goal as ICharacterUpgradeRankGoal;
+                const targetLevel = rankToLevel[(upgradeGoal.rankEnd ?? Rank.Stone2) as Rank];
+                if (targetLevel > ret.currentLevel) {
+                    ret.currentLevel = targetLevel;
+                    ret.xpAtLevel = 0;
+                    ret.xpFromPriorGoalApplied = true;
+                }
+            } else if (goal.type === PersonalGoalType.CharacterAbilities) {
+                const abilityGoal = goal as ICharacterUpgradeAbilities;
+                const targetLevel = Math.max(abilityGoal.activeEnd, abilityGoal.passiveEnd);
+                if (targetLevel > ret.currentLevel) {
+                    ret.currentLevel = targetLevel;
+                    ret.xpAtLevel = 0;
+                    ret.xpFromPriorGoalApplied = true;
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    public static buildGoalEstimates(
+        estimatedUpgradesTotal: IEstimatedUpgrades,
+        shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>,
+        upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
+        upgradeAbilities: Array<ICharacterUpgradeAbilities>,
+        characters: ICharacter2[]
+    ): IGoalEstimate[] {
+        const result: IGoalEstimate[] = [];
+
+        [shardsGoals, upgradeRankOrMowGoals].flat().forEach(goal => {
+            const estimate: IGoalEstimate = {
+                goalId: goal.goalId,
+                energyTotal: 0,
+                daysTotal: 0,
+                oTokensTotal: 0,
+                daysLeft: 0,
+                xpBooksTotal: 0,
+            };
+            estimatedUpgradesTotal.upgradesRaids.forEach((day, index) => {
+                let raidedToday = false;
+                day.raids.forEach(raid => {
+                    if (!raid.relatedGoals.includes(goal.goalId)) return;
+                    raid.raidLocations.forEach(location => {
+                        if (UpgradesService.isOnslaughtLocation(location)) {
+                            estimate.oTokensTotal += location.raidsToPerform;
+                        }
+                    });
+                    if (raid.raidLocations.some(location => location.raidsToPerform > 0)) {
+                        raidedToday = true;
+                    }
+                    estimate.energyTotal += raid.energyTotal;
+                    if (goal.type === PersonalGoalType.UpgradeRank) {
+                        const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
+                        const currentXp = this.currentCharacterXp(
+                            goal.unitId,
+                            [...upgradeRankOrMowGoals, ...upgradeAbilities],
+                            goal.priority,
+                            characters
+                        );
+                        const xpEstimate = CharactersXpService.getLegendaryTomesCount(
+                            currentXp.currentLevel,
+                            currentXp.xpAtLevel,
+                            targetLevel
+                        );
+                        if (xpEstimate) {
+                            xpEstimate.xpFromPreviousGoalApplied = currentXp.xpFromPriorGoalApplied;
+                        }
+                    }
+                });
+                if (raidedToday) {
+                    if (goal.unitId === 'tyranDeathleaper') {
+                        console.log('estimate for goal ', goal.goalId, ' on day ', index, ': ', estimate);
+                        console.log(
+                            'day: ',
+                            day.raids.filter(r => r.relatedGoals.includes(goal.goalId))
+                        );
+                    }
+                    ++estimate.daysTotal;
+                    estimate.daysLeft = index + 1;
+                }
+            });
+            estimate.blocked =
+                !goal.include ||
+                estimatedUpgradesTotal.blockedMaterials.find(m => m.relatedGoals.includes(goal.goalId)) !== undefined;
+            estimate.completed = !estimate.blocked && estimate.oTokensTotal === 0 && estimate.energyTotal === 0;
+            result.push(estimate);
+        });
+
+        if (upgradeAbilities.length) {
+            for (const goal of upgradeAbilities) {
+                const targetLevel = Math.max(goal.activeEnd, goal.passiveEnd);
+                const currentXp = this.currentCharacterXp(
+                    goal.unitId,
+                    [...upgradeRankOrMowGoals, ...upgradeAbilities],
+                    goal.priority,
+                    characters
+                );
+                const xpEstimate = CharactersXpService.getLegendaryTomesCount(
+                    currentXp.currentLevel,
+                    currentXp.xpAtLevel,
+                    targetLevel
+                );
+                const activeAbility = CharactersAbilitiesService.getMaterials(goal.activeStart, goal.activeEnd);
+                const passiveAbility = CharactersAbilitiesService.getMaterials(goal.passiveStart, goal.passiveEnd);
+
+                const abilitiesEstimate = CharactersAbilitiesService.getTotals(
+                    [...activeAbility, ...passiveAbility],
+                    goal.unitAlliance
+                );
+
+                result.push({
+                    goalId: goal.goalId,
+                    abilitiesEstimate,
+                    xpEstimateAbilities: xpEstimate!,
+                } as IGoalEstimate);
+            }
+        }
+
+        return result;
+    }
+
     static prepareGoals(
         goals: IPersonalGoal[],
         characters: IUnit[],
@@ -456,7 +589,7 @@ export class GoalsService {
 
     /**
      * Computes the total number of remaining resources needed AND adjusts all goals to use as
-     * many possible badges from our existing inventory.
+     * many possible resources from our existing inventory.
      */
     public static adjustGoalEstimates(
         goals: IPersonalGoal[],

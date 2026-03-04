@@ -1,8 +1,6 @@
 ﻿// TODO(cpunerd): merge all of the goals tables into one
 // TODO(cpunerd): merge all of the goal card sections into one
-// TODO(cpunerd): account for onslaughts when generating daily raids
 // TODO(cpunerd): add support to select shards and mythic shards in the raids filters
-// TODO(cpunerd): add support to select battle types for shards and mythic shards in raids settings
 // TODO(cpunerd): in ascend goal dialog (both edit and add), change campaign usage to a tri-state with (energy-only, energy+onslaught, onslaught-only)
 // TODO(cpunerd): in unlock goal dialog (both edit and add), remove campaign usage selection
 
@@ -18,9 +16,7 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-import { IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent } from '@/models/interfaces';
-import { goalsLimit, rankToLevel } from 'src/models/constants';
-import { PersonalGoalType } from 'src/models/enums';
+import { goalsLimit } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
@@ -28,7 +24,7 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
-import { Alliance, Rank, useAuth } from '@/fsd/5-shared/model';
+import { Alliance, useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/iconList';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
@@ -37,21 +33,11 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
-import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
-import { CharactersXpService } from '@/fsd/3-features/characters/characters-xp.service';
 import { BadgesTotal } from '@/fsd/3-features/characters/components/badges-total';
-import {
-    CharacterRaidGoalSelect,
-    ICharacterUpgradeAbilities,
-    ICharacterUpgradeMow,
-    ICharacterUpgradeRankGoal,
-    IGoalEstimate,
-} from '@/fsd/3-features/goals/goals.models';
-import { GoalsService, IXpLevel } from '@/fsd/3-features/goals/goals.service';
+import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
-
-import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
 
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
@@ -108,23 +94,17 @@ export const Goals = () => {
     const estimatedUpgradesTotal = useMemo(() => {
         return UpgradesService.getUpgradesEstimatedDays(
             {
-                dailyEnergy:
-                    dailyRaidsPreferences.dailyEnergy -
-                    Math.min(estimatedShardsTotal.energyPerDay + dailyRaidsPreferences.shardsEnergy, 90),
+                dailyEnergy: dailyRaidsPreferences.dailyEnergy,
                 campaignsProgress: campaignsProgress,
                 preferences: {
                     ...dailyRaidsPreferences,
-                    farmPreferences: {
-                        order: IDailyRaidsFarmOrder.goalPriority,
-                        homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
-                    },
                 },
                 upgrades: inventory.upgrades,
-                completedLocations: [],
+                completedLocations: dailyRaids.raidedLocations,
             },
             characters,
             resolvedMows,
-            ...[upgradeRankOrMowGoals, shardsGoals].flat()
+            ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
         );
     }, [upgradeRankOrMowGoals, estimatedShardsTotal.energyPerDay]);
 
@@ -160,159 +140,15 @@ export const Goals = () => {
         }
     };
 
-    /**
-     * Returns the maximum XP level needed for the character with the given goal priority to meet
-     * all prior goals (if any). If there are no prior goals, returns the character's current
-     * level.
-     */
-    const currentCharacterXp = (
-        characterId: string,
-        goals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUpgradeAbilities)[],
-        currentGoalPriority: number
-    ): IXpLevel => {
-        const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
-        const character = characters.find(c => c.snowprintId! === characterId);
-        const ret: IXpLevel = { currentLevel: character?.level ?? 1, xpAtLevel: character?.xp ?? 0 };
-        for (const goal of priorGoals) {
-            if (goal.type === PersonalGoalType.UpgradeRank) {
-                const upgradeGoal = goal as ICharacterUpgradeRankGoal;
-                const targetLevel = rankToLevel[(upgradeGoal.rankEnd ?? Rank.Stone2) as Rank];
-                if (targetLevel > ret.currentLevel) {
-                    ret.currentLevel = targetLevel;
-                    ret.xpAtLevel = 0;
-                    ret.xpFromPriorGoalApplied = true;
-                }
-            } else if (goal.type === PersonalGoalType.CharacterAbilities) {
-                const abilityGoal = goal as ICharacterUpgradeAbilities;
-                const targetLevel = Math.max(abilityGoal.activeEnd, abilityGoal.passiveEnd);
-                if (targetLevel > ret.currentLevel) {
-                    ret.currentLevel = targetLevel;
-                    ret.xpAtLevel = 0;
-                    ret.xpFromPriorGoalApplied = true;
-                }
-            }
-        }
-
-        return ret;
-    };
-
     const goalsEstimate = useMemo<IGoalEstimate[]>(() => {
-        const result: IGoalEstimate[] = [];
-
-        if (shardsGoals.length) {
-            const shardsEstimate = ShardsService.getShardsEstimatedDays(
-                {
-                    campaignsProgress: campaignsProgress,
-                    preferences: dailyRaidsPreferences,
-                    raidedLocations: dailyRaids.raidedLocations ?? [],
-                },
-                ...shardsGoals
-            );
-
-            const goalsEstimate = shardsEstimate.materials.map(
-                x =>
-                    ({
-                        goalId: x.goalId,
-                        energyTotal: x.energyTotal,
-                        daysTotal: x.daysTotal,
-                        oTokensTotal: x.onslaughtTokensTotal,
-                        daysLeft: x.daysTotal,
-                    }) as IGoalEstimate
-            );
-
-            result.push(...goalsEstimate);
-        }
-
-        if (upgradeRankOrMowGoals.length) {
-            const goalsEstimate = upgradeRankOrMowGoals.map(goal => {
-                const goalEstimate = estimatedUpgradesTotal.byCharactersPriority.find(x => x.goalId === goal.goalId);
-                const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x => {
-                    const relatedGoals = x.raids.flatMap(raid => raid.relatedGoals);
-                    return relatedGoals.includes(goal.goalId);
-                });
-
-                const daysTotal = estimatedUpgradesTotal.upgradesRaids.filter(x => {
-                    const relatedGoals = x.raids.flatMap(raid => raid.relatedGoals);
-                    return relatedGoals.includes(goal.goalId);
-                }).length;
-
-                if (goal.type === PersonalGoalType.UpgradeRank) {
-                    const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
-                    const currentXp = currentCharacterXp(
-                        goal.unitId,
-                        [...upgradeRankOrMowGoals, ...upgradeAbilities],
-                        goal.priority
-                    );
-                    const xpEstimate = CharactersXpService.getLegendaryTomesCount(
-                        currentXp.currentLevel,
-                        currentXp.xpAtLevel,
-                        targetLevel
-                    );
-                    if (xpEstimate) {
-                        xpEstimate!.xpFromPreviousGoalApplied = currentXp.xpFromPriorGoalApplied;
-                    }
-
-                    return {
-                        goalId: goal.goalId,
-                        energyTotal: sum(goalEstimate?.upgrades.map(x => x.energyTotal) ?? []),
-                        daysTotal: daysTotal,
-                        daysLeft: firstFarmDay + daysTotal,
-                        oTokensTotal: 0,
-                        xpEstimate,
-                    } as IGoalEstimate;
-                } else {
-                    const mowMaterials = MowsService.getMaterialsList(goal.unitId, goal.unitName, goal.unitAlliance);
-
-                    const primaryAbility = mowMaterials.slice(goal.primaryStart - 1, goal.primaryEnd - 1);
-                    const secondaryAbility = mowMaterials.slice(goal.secondaryStart - 1, goal.secondaryEnd - 1);
-
-                    const mowEstimate = MowLookupService.getTotals([...primaryAbility, ...secondaryAbility]);
-
-                    return {
-                        goalId: goal.goalId,
-                        energyTotal: sum(goalEstimate?.upgrades.map(x => x.energyTotal) ?? []),
-                        daysTotal: daysTotal,
-                        daysLeft: firstFarmDay + daysTotal,
-                        oTokensTotal: 0,
-                        mowEstimate,
-                    } as IGoalEstimate;
-                }
-            });
-
-            result.push(...goalsEstimate);
-        }
-
-        if (upgradeAbilities.length) {
-            for (const goal of upgradeAbilities) {
-                const targetLevel = Math.max(goal.activeEnd, goal.passiveEnd);
-                const currentXp = currentCharacterXp(
-                    goal.unitId,
-                    [...upgradeRankOrMowGoals, ...upgradeAbilities],
-                    goal.priority
-                );
-                const xpEstimate = CharactersXpService.getLegendaryTomesCount(
-                    currentXp.currentLevel,
-                    currentXp.xpAtLevel,
-                    targetLevel
-                );
-                const activeAbility = CharactersAbilitiesService.getMaterials(goal.activeStart, goal.activeEnd);
-                const passiveAbility = CharactersAbilitiesService.getMaterials(goal.passiveStart, goal.passiveEnd);
-
-                const abilitiesEstimate = CharactersAbilitiesService.getTotals(
-                    [...activeAbility, ...passiveAbility],
-                    goal.unitAlliance
-                );
-
-                result.push({
-                    goalId: goal.goalId,
-                    abilitiesEstimate,
-                    xpEstimateAbilities: xpEstimate!,
-                } as IGoalEstimate);
-            }
-        }
-
-        return result;
-    }, [shardsGoals, upgradeRankOrMowGoals]);
+        return GoalsService.buildGoalEstimates(
+            estimatedUpgradesTotal,
+            shardsGoals,
+            upgradeRankOrMowGoals,
+            upgradeAbilities,
+            characters
+        );
+    }, [estimatedUpgradesTotal, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities, characters]);
 
     const totalGoldAbilities = sum(
         goalsEstimate.map(x => (x.abilitiesEstimate?.gold ?? 0) + (x.xpEstimateAbilities?.gold ?? 0))

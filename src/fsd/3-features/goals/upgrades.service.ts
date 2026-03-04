@@ -1023,6 +1023,15 @@ export class UpgradesService {
         return 'Onslaught-' + upgradeId + '-' + index;
     }
 
+    public static isOnslaughtLocation(location: IItemRaidLocation): boolean {
+        const comps = location.id.split('-');
+        return (
+            location.id.startsWith('Onslaught-') &&
+            comps.length === 3 &&
+            (comps[1].startsWith('shards_') || comps[1].startsWith('mythicShards_'))
+        );
+    }
+
     /** Cobbles together an IItemRaidLocation for an onslaught battle. */
     public static createOnslaughtLocation(
         upgradeId: string,
@@ -1335,7 +1344,7 @@ export class UpgradesService {
         const unit = char ?? mow;
         if (!unit) return 0;
         if (goal.type === PersonalGoalType.Unlock) {
-            return Math.max(this.getTotalShardsNeededForGoal(chars, mows, goal) - (unit.shards ?? 0), 0);
+            return this.getTotalShardsNeededForGoal(chars, mows, goal);
         }
         const locked = char ? char.rank === Rank.Locked : !mow?.unlocked;
         if (locked) return this.getTotalShardsNeededForGoal(chars, mows, goal);
@@ -2003,10 +2012,10 @@ export class UpgradesService {
         processCraftedUpgrade(topLevelCraftedUpgrades);
 
         if (upgradeShards !== undefined) {
-            if (upgradeShards.totalIncrementalMythicShardsNeeded > upgradeShards.incrementalMythicShardsAcquired) {
+            if (upgradeShards.totalIncrementalMythicShardsNeeded > 0) {
                 baseUpgradesTotal[upgradeShards.mythicShardName] = upgradeShards.totalIncrementalMythicShardsNeeded;
             }
-            if (upgradeShards.totalIncrementalShardsNeeded > upgradeShards.incrementalShardsAcquired) {
+            if (upgradeShards.totalIncrementalShardsNeeded > 0) {
                 baseUpgradesTotal[upgradeShards.shardName] = upgradeShards.totalIncrementalShardsNeeded;
             }
         }
