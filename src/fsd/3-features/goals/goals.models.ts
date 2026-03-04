@@ -166,6 +166,7 @@ export interface IUpgradesRaidsDay {
 
 export interface IUpgradeRaid extends ICharacterUpgradeEstimate {
     raidLocations: IItemRaidLocation[];
+    countByGoalId?: Record<string, number>;
 }
 
 export interface IItemRaidLocation extends ICampaignBattleComposed {

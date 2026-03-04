@@ -114,7 +114,16 @@ export class GoalsService {
                     if (raid.raidLocations.some(location => location.raidsToPerform > 0)) {
                         raidedToday = true;
                     }
-                    estimate.energyTotal += raid.energyTotal;
+                    const totalRequired = Object.values(raid.countByGoalId ?? {}).reduce(
+                        (sum, count) => sum + count,
+                        0
+                    );
+                    const goalRequired = raid.countByGoalId?.[goal.goalId] ?? 0;
+                    if (totalRequired > 0 && goalRequired > 0) {
+                        estimate.energyTotal += Math.round(raid.energyTotal * (goalRequired / totalRequired));
+                    } else {
+                        estimate.energyTotal += Math.round(raid.energyTotal / raid.relatedCharacters.length);
+                    }
                     if (goal.type === PersonalGoalType.UpgradeRank) {
                         const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
                         const currentXp = this.currentCharacterXp(
@@ -134,13 +143,6 @@ export class GoalsService {
                     }
                 });
                 if (raidedToday) {
-                    if (goal.unitId === 'tyranDeathleaper') {
-                        console.log('estimate for goal ', goal.goalId, ' on day ', index, ': ', estimate);
-                        console.log(
-                            'day: ',
-                            day.raids.filter(r => r.relatedGoals.includes(goal.goalId))
-                        );
-                    }
                     ++estimate.daysTotal;
                     estimate.daysLeft = index + 1;
                 }

@@ -56,7 +56,10 @@ export const MaterialsTable: React.FC<Props> = ({
         if (['Shard', 'Mythic Shard', 'Unknown'].includes(shardVal)) {
             return shardVal;
         }
-        return RarityString[rarity as keyof typeof RarityString] ?? 'Unknown';
+        if (typeof rarity === 'number') {
+            return RarityMapper.rarityToRarityString(rarity);
+        }
+        return RarityMapper.stringToRarityString(shardVal) ?? 'Unknown';
     };
 
     const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {

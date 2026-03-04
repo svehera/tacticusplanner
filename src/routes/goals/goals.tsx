@@ -1,10 +1,4 @@
-﻿// TODO(cpunerd): merge all of the goals tables into one
-// TODO(cpunerd): merge all of the goal card sections into one
-// TODO(cpunerd): add support to select shards and mythic shards in the raids filters
-// TODO(cpunerd): in ascend goal dialog (both edit and add), change campaign usage to a tri-state with (energy-only, energy+onslaught, onslaught-only)
-// TODO(cpunerd): in unlock goal dialog (both edit and add), remove campaign usage selection
-
-import DeleteIcon from '@mui/icons-material/Delete';
+﻿import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';

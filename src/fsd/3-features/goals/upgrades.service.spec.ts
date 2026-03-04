@@ -250,6 +250,18 @@ const createSettings = (overrides: Partial<IEstimatedRanksSettings> = {}): IEsti
     ...overrides,
 });
 
+const createAllCampaignsProgress = (): IEstimatedRanksSettings['campaignsProgress'] => {
+    return Object.values(Campaign)
+        .filter((value): value is Campaign => typeof value === 'string')
+        .reduce(
+            (acc, campaign) => {
+                acc[campaign] = 999;
+                return acc;
+            },
+            {} as IEstimatedRanksSettings['campaignsProgress']
+        );
+};
+
 const createFilters = (overrides: Partial<ICampaignsFilters> = {}): ICampaignsFilters => ({
     enemiesAlliance: [],
     enemiesFactions: [],
@@ -632,7 +644,6 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         UpgradesService.addOnslaughtsForDay(day, [character], 3, [goal], combinedBaseMaterials, settings, inventory);
 
-        console.error('day', day);
         expect(day.raids).toHaveLength(0);
         expect(day.onslaughtTokens).toBe(0);
     });
@@ -1265,8 +1276,7 @@ describe('UpgradesService.getUpgrades', () => {
         const upgrades = UpgradesService.getUpgrades({}, [character], [], [goal]);
         const shardName = `shards_${abraxas.snowprintId}`;
 
-        console.error('upgrades: ', upgrades);
-        expect(upgrades[0].baseUpgradesTotal[shardName]).toBe(30);
+        expect(upgrades[0].baseUpgradesTotal[shardName]).toBe(130);
     });
 
     it('adds 80 shards for a Wrask unlock goal with zero shards', () => {
@@ -1301,8 +1311,7 @@ describe('UpgradesService.getUpgrades', () => {
         const upgrades = UpgradesService.getUpgrades({}, [character], [], [goal]);
         const shardName = `shards_${wrask.snowprintId}`;
 
-        console.error('upgrades: ', upgrades);
-        expect(upgrades[0].baseUpgradesTotal[shardName]).toBe(20);
+        expect(upgrades[0].baseUpgradesTotal[shardName]).toBe(80);
     });
 
     it('counts World Eaters rares and legendaries across two Kharn goals', () => {
@@ -1488,6 +1497,321 @@ describe('UpgradesService.getUpgrades', () => {
 
         expect(actualRare).toBe(expectedRare);
         expect(actualLegendary).toBe(expectedLegendary);
+    });
+});
+
+describe('UpgradesService.getUpgradesEstimatedDays', () => {
+    const buildSettings = (overrides: Partial<IEstimatedRanksSettings> = {}) =>
+        createSettings({
+            dailyEnergy: 638,
+            campaignsProgress: createAllCampaignsProgress(),
+            preferences: {
+                ...createSettings().preferences,
+                dailyEnergy: 638,
+                farmPreferences: {
+                    order: IDailyRaidsFarmOrder.goalPriority,
+                    homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
+                },
+                farmStrategy: DailyRaidsStrategy.leastEnergy,
+            },
+            ...overrides,
+        });
+
+    it('Helbrecht Stone I to Silver I with empty inventory', () => {
+        const hmh = CharactersService.getUnit('templHelbrecht')!;
+        const character = createCharacter(hmh, { rank: Rank.Stone1 });
+        const goal = createRankGoal(hmh, {
+            goalId: 'goal-hmh-s1-s1',
+            unitId: hmh.snowprintId!,
+            unitName: hmh.shortName ?? hmh.name,
+            unitIcon: hmh.icon ?? '',
+            unitRoundIcon: hmh.roundIcon ?? '',
+            unitAlliance: hmh.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Silver1,
+        });
+
+        const settings = buildSettings({ preferences: { ...createSettings().preferences } });
+        const result = UpgradesService.getUpgradesEstimatedDays(settings, [character], [], goal);
+
+        console.log('result', result);
+
+        expect(result.daysTotal).toBe(4);
+        // 2149 with current drop rates.
+        expect(Math.abs(2150 - result.energyTotal)).toBeLessThan(100);
+    });
+
+    it('Atlacoya Stone I to Silver I with empty inventory', () => {
+        const atlacoya = CharactersService.getUnit('custoAtlacoya')!;
+        const character = createCharacter(atlacoya, { rank: Rank.Stone1 });
+        const goal = createRankGoal(atlacoya, {
+            goalId: 'goal-atlacoya-s1-s1',
+            unitId: atlacoya.snowprintId!,
+            unitName: atlacoya.shortName ?? atlacoya.name,
+            unitIcon: atlacoya.icon ?? '',
+            unitRoundIcon: atlacoya.roundIcon ?? '',
+            unitAlliance: atlacoya.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Silver1,
+        });
+
+        const settings = buildSettings({ preferences: { ...createSettings().preferences } });
+        const result = UpgradesService.getUpgradesEstimatedDays(settings, [character], [], goal);
+
+        expect(result.daysTotal).toBe(3);
+        // 1852 with current drop rates.
+        expect(Math.abs(1850 - result.energyTotal)).toBeLessThan(100);
+    });
+
+    it('estimates Wrask Diamond I to Diamond III with positive days and energy', () => {
+        const wrask = CharactersService.getUnit('worldTerminator')!;
+        const character = createCharacter(wrask, { rank: Rank.Diamond1 });
+        const goal = createRankGoal(wrask, {
+            goalId: 'goal-wrask-d1-d3',
+            unitId: wrask.snowprintId!,
+            unitName: wrask.shortName ?? wrask.name,
+            unitIcon: wrask.icon ?? '',
+            unitRoundIcon: wrask.roundIcon ?? '',
+            unitAlliance: wrask.alliance ?? Alliance.Chaos,
+            rankStart: Rank.Diamond1,
+            rankEnd: Rank.Diamond3,
+        });
+
+        const result = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({ preferences: { ...createSettings().preferences } }),
+            [character],
+            [],
+            goal
+        );
+
+        expect(result.daysTotal).toBe(11);
+        // 4715 with current drop rates.
+        expect(Math.abs(4500 - result.energyTotal)).toBeLessThan(500);
+    });
+
+    it('estimates Helbrecht Stone I to Diamond III with positive days and energy', () => {
+        const hmh = CharactersService.getUnit('templHelbrecht')!;
+        const character = createCharacter(hmh, { rank: Rank.Stone1 });
+        const goal = createRankGoal(hmh, {
+            goalId: 'goal-hmh-s1-d3',
+            unitId: hmh.snowprintId!,
+            unitName: hmh.shortName ?? hmh.name,
+            unitIcon: hmh.icon ?? '',
+            unitRoundIcon: hmh.roundIcon ?? '',
+            unitAlliance: hmh.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+        });
+
+        const result = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({ preferences: { ...createSettings().preferences } }),
+            [character],
+            [],
+            goal
+        );
+
+        expect(result.daysTotal).toBe(25);
+        // 15504 with current drop rates.
+        expect(Math.abs(15500 - result.energyTotal)).toBeLessThan(1000);
+    });
+
+    it('reduces Helbrecht Diamond III estimate with existing inventory', () => {
+        const hmh = CharactersService.getUnit('templHelbrecht')!;
+        const character = createCharacter(hmh, { rank: Rank.Stone1 });
+        const goal = createRankGoal(hmh, {
+            goalId: 'goal-hmh-s1-d3-inventory',
+            unitId: hmh.snowprintId!,
+            unitName: hmh.shortName ?? hmh.name,
+            unitIcon: hmh.icon ?? '',
+            unitRoundIcon: hmh.roundIcon ?? '',
+            unitAlliance: hmh.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+        });
+
+        const inventory = {
+            'Bones of the Paragons': 73,
+            'Master-Crafted Ammo': 16,
+            'Archeotech Remnant': 32,
+            'Special Issue Ammo': 24,
+        };
+
+        const withInventory = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({ upgrades: inventory }),
+            [character],
+            [],
+            goal
+        );
+
+        expect(withInventory.daysTotal).toBe(20);
+        // 12634 with current drop rates. Importantly, this is less than the 15504 that it costs
+        // without anything useful in our inventory.
+        expect(Math.abs(12500 - withInventory.energyTotal)).toBeLessThan(1000);
+    });
+
+    it('adds Atlacoya after Helbrecht and prioritizes Helbrecht materials first', () => {
+        const hmh = CharactersService.getUnit('templHelbrecht')!;
+        const atlacoya = CharactersService.getUnit('custoAtlacoya')!;
+
+        const hmhChar = createCharacter(hmh, { rank: Rank.Stone1 });
+        const atlacoyaChar = createCharacter(atlacoya, { rank: Rank.Stone1 });
+
+        const hmhGoal = createRankGoal(hmh, {
+            goalId: 'goal-hmh-s1-d3-priority-1',
+            unitId: hmh.snowprintId!,
+            unitName: hmh.shortName ?? hmh.name,
+            unitIcon: hmh.icon ?? '',
+            unitRoundIcon: hmh.roundIcon ?? '',
+            unitAlliance: hmh.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+            priority: 1,
+        });
+
+        const atlacoyaGoal = createRankGoal(atlacoya, {
+            goalId: 'goal-atlacoya-s1-d3-priority-2',
+            unitId: atlacoya.snowprintId!,
+            unitName: atlacoya.shortName ?? atlacoya.name,
+            unitIcon: atlacoya.icon ?? '',
+            unitRoundIcon: atlacoya.roundIcon ?? '',
+            unitAlliance: atlacoya.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+            priority: 2,
+        });
+
+        const inventory = {
+            'Bones of the Paragons': 73,
+            'Master-Crafted Ammo': 16,
+            'Archeotech Remnant': 32,
+            'Special Issue Ammo': 24,
+        };
+
+        const result = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({ upgrades: inventory }),
+            [hmhChar, atlacoyaChar],
+            [],
+            hmhGoal,
+            atlacoyaGoal
+        );
+
+        expect(result.daysTotal).toBe(42);
+        // 26611 with current drop rates.
+        expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1000);
+    });
+
+    it('prioritizes Atlacoya when its goal is more urgent than Helbrecht', () => {
+        const hmh = CharactersService.getUnit('templHelbrecht')!;
+        const atlacoya = CharactersService.getUnit('custoAtlacoya')!;
+
+        const hmhChar = createCharacter(hmh, { rank: Rank.Stone1 });
+        const atlacoyaChar = createCharacter(atlacoya, { rank: Rank.Stone1 });
+
+        const hmhGoal = createRankGoal(hmh, {
+            goalId: 'goal-hmh-s1-d3-priority-2',
+            unitId: hmh.snowprintId!,
+            unitName: hmh.shortName ?? hmh.name,
+            unitIcon: hmh.icon ?? '',
+            unitRoundIcon: hmh.roundIcon ?? '',
+            unitAlliance: hmh.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+            priority: 2,
+        });
+
+        const atlacoyaGoal = createRankGoal(atlacoya, {
+            goalId: 'goal-atlacoya-s1-d3-priority-1',
+            unitId: atlacoya.snowprintId!,
+            unitName: atlacoya.shortName ?? atlacoya.name,
+            unitIcon: atlacoya.icon ?? '',
+            unitRoundIcon: atlacoya.roundIcon ?? '',
+            unitAlliance: atlacoya.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+            priority: 1,
+        });
+
+        const inventory = {
+            'Bones of the Paragons': 73,
+            'Master-Crafted Ammo': 16,
+            'Archeotech Remnant': 32,
+            'Special Issue Ammo': 24,
+        };
+
+        const result = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({ upgrades: inventory }),
+            [hmhChar, atlacoyaChar],
+            [],
+            hmhGoal,
+            atlacoyaGoal
+        );
+
+        expect(result.daysTotal).toBe(42);
+        // 26581 with current drop rates.
+        expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1000);
+    });
+
+    it('total energy cost is roughly equivalent regardless of priority', () => {
+        const hmh = CharactersService.getUnit('templHelbrecht')!;
+        const atlacoya = CharactersService.getUnit('custoAtlacoya')!;
+
+        const hmhChar = createCharacter(hmh, { rank: Rank.Stone1 });
+        const atlacoyaChar = createCharacter(atlacoya, { rank: Rank.Stone1 });
+
+        const hmhGoal = createRankGoal(hmh, {
+            goalId: 'goal-hmh-s1-d3-priority-2',
+            unitId: hmh.snowprintId!,
+            unitName: hmh.shortName ?? hmh.name,
+            unitIcon: hmh.icon ?? '',
+            unitRoundIcon: hmh.roundIcon ?? '',
+            unitAlliance: hmh.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+            priority: 2,
+        });
+
+        const atlacoyaGoal = createRankGoal(atlacoya, {
+            goalId: 'goal-atlacoya-s1-d3-priority-1',
+            unitId: atlacoya.snowprintId!,
+            unitName: atlacoya.shortName ?? atlacoya.name,
+            unitIcon: atlacoya.icon ?? '',
+            unitRoundIcon: atlacoya.roundIcon ?? '',
+            unitAlliance: atlacoya.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+            priority: 1,
+        });
+
+        const inventory = {
+            'Bones of the Paragons': 73,
+            'Master-Crafted Ammo': 16,
+            'Archeotech Remnant': 32,
+            'Special Issue Ammo': 24,
+        };
+
+        const result1 = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({ upgrades: inventory }),
+            [hmhChar, atlacoyaChar],
+            [],
+            hmhGoal,
+            atlacoyaGoal
+        );
+
+        const temp = hmhGoal.priority;
+        hmhGoal.priority = atlacoyaGoal.priority;
+        atlacoyaGoal.priority = temp;
+
+        const result2 = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({ upgrades: inventory }),
+            [hmhChar, atlacoyaChar],
+            [],
+            hmhGoal,
+            atlacoyaGoal
+        );
+
+        expect(Math.abs(result1.daysTotal - result2.daysTotal)).toBeLessThanOrEqual(2);
+        // Two days worth of energy.
+        expect(Math.abs(result1.energyTotal - result2.energyTotal)).toBeLessThan(1272);
     });
 });
 

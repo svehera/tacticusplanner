@@ -356,15 +356,7 @@ export class UpgradesService {
             }, 0);
             firstDay = false;
             energy = settings.dailyEnergy;
-            if (day.raids.length === 0) {
-                console.warn(
-                    'stopping raiding after ',
-                    days,
-                    ' days because no raids were planned. Remaining mats: ',
-                    remainingMats
-                );
-                break;
-            }
+            if (day.raids.length === 0) break;
         }
 
         Object.keys(blockedMats).forEach(upgradeId => {
@@ -579,12 +571,24 @@ export class UpgradesService {
             const relatedGoals = options?.goal ? [options.goal.goalId] : mat.relatedGoals;
             existingRaid.relatedCharacters = uniq([...existingRaid.relatedCharacters, ...relatedCharacters]);
             existingRaid.relatedGoals = uniq([...existingRaid.relatedGoals, ...relatedGoals]);
+            if (options?.goal) {
+                if (!existingRaid.countByGoalId) {
+                    existingRaid.countByGoalId = {
+                        [options.goal.goalId]: mat.countByGoalId[options.goal.goalId] ?? 0,
+                    };
+                }
+            } else if (!existingRaid.countByGoalId) {
+                existingRaid.countByGoalId = { ...mat.countByGoalId };
+            }
         } else {
             const relatedCharacters = options?.goal ? [options.goal.unitId] : mat.relatedCharacters;
             const relatedGoals = options?.goal ? [options.goal.goalId] : mat.relatedGoals;
             const requiredCount = options?.goal
                 ? (mat.countByGoalId[options.goal.goalId] ?? 0)
                 : sum(Object.values(mat.countByGoalId));
+            const countByGoalId = options?.goal
+                ? { [options.goal.goalId]: mat.countByGoalId[options.goal.goalId] ?? 0 }
+                : { ...mat.countByGoalId };
             day.raids.push({
                 raidLocations: [raidLoc],
                 energyTotal: raidLoc.energySpent,
@@ -605,6 +609,7 @@ export class UpgradesService {
                 locations: mat.locations,
                 crafted: mat.crafted,
                 stat: mat.stat,
+                countByGoalId,
             } as IUpgradeRaid);
         }
         inventory[upgradeId] = (inventory[upgradeId] ?? 0) + toAdd;
@@ -1129,6 +1134,7 @@ export class UpgradesService {
                 raidsTotal: 0,
                 acquiredCount: Math.floor(originalInventory[upgradeId] ?? 0),
                 requiredCount: Math.ceil(combinedBaseMaterials[upgradeId]?.requiredCount ?? 0),
+                countByGoalId: { ...(combinedBaseMaterials[upgradeId]?.countByGoalId ?? {}) },
                 relatedCharacters: uniq(relatedGoals[upgradeId]?.map(goal => goal.unitId) ?? []),
                 relatedGoals: uniq((relatedGoals[upgradeId] ?? []).map(goal => goal.goalId)),
                 isBlocked: false,
@@ -1194,6 +1200,7 @@ export class UpgradesService {
                 raidsTotal: sum(newLocations.map(loc => loc.raidsAlreadyPerformed)),
                 acquiredCount: acquired,
                 requiredCount: required,
+                countByGoalId: {},
                 relatedCharacters: [],
                 relatedGoals: [],
                 isBlocked: false,
@@ -1710,8 +1717,7 @@ export class UpgradesService {
      *
      * @remarks
      * - The returned object is keyed by `upgradeId` and accumulates a `requiredCount` sum across all characters.
-     * - `countByGoalId` is set per character using `character.goalId`, but **each goal ID is assigned (not incremented)**;
-     *   if multiple entries share the same `goalId` and `upgradeId`, later values overwrite earlier ones.
+     * - `countByGoalId` is accumulated per character using `character.goalId`.
      * - `relatedCharacters` and `relatedGoals` are de-duplicated via `includes` checks.
      * - The method assumes `FsdUpgradesService.baseUpgradesData[upgradeId]` exists; missing entries will
      *   spread `undefined` properties into the combined object.
@@ -1734,7 +1740,8 @@ export class UpgradesService {
                 };
 
                 combinedUpgrade.requiredCount += upgradeCount;
-                combinedUpgrade.countByGoalId[character.goalId] = upgradeCount;
+                combinedUpgrade.countByGoalId[character.goalId] =
+                    (combinedUpgrade.countByGoalId[character.goalId] ?? 0) + upgradeCount;
                 if (!combinedUpgrade.relatedCharacters.includes(character.unitId)) {
                     combinedUpgrade.relatedCharacters.push(character.unitId);
                 }
