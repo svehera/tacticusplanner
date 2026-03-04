@@ -38,10 +38,10 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             const battleIndex = state.raidedLocations.findIndex(x => x.id === action.location.id);
             if (battleIndex >= 0) {
                 const raidedLocations = [...state.raidedLocations];
-                const finalCount = raidedLocations[battleIndex].raidsCount + action.location.raidsCount;
+                const finalCount = raidedLocations[battleIndex].raidsToPerform + action.location.raidsToPerform;
                 raidedLocations[battleIndex] = {
                     ...raidedLocations[battleIndex],
-                    raidsCount: finalCount,
+                    raidsToPerform: finalCount,
                     isCompleted: finalCount === action.location.dailyBattleCount,
                 };
                 return {
@@ -102,7 +102,8 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                         }
                         raidedLocations.push({
                             ...campaignComposed,
-                            raidsCount: battle.attemptsUsed,
+                            raidsAlreadyPerformed: battle.attemptsUsed,
+                            raidsToPerform: 0,
                             energySpent: battle.attemptsUsed * campaignComposed.energyCost,
                             farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
                             isShardsLocation: false,
@@ -130,7 +131,8 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                         }
                         raidedLocations.push({
                             ...campaignComposed,
-                            raidsCount: battle.attemptsUsed,
+                            raidsAlreadyPerformed: battle.attemptsUsed,
+                            raidsToPerform: 0,
                             energySpent: battle.attemptsUsed * campaignComposed.energyCost,
                             farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
                             isShardsLocation: false,

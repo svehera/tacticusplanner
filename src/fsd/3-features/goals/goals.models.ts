@@ -1,14 +1,15 @@
-﻿// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import {
     ICampaignBattleComposed,
     ICampaignsProgress,
     ICampaignsFilters,
     IDailyRaidsPreferences,
-    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 } from 'src/models/interfaces';
 
 import { IUnitUpgradeRank } from '@/fsd/4-entities/character';
+import { IUnitShards } from '@/fsd/4-entities/character/model';
 import {
     ICharacterAscendGoal,
     ICharacterRaidGoalSelectBase,
@@ -18,10 +19,8 @@ import {
 } from '@/fsd/4-entities/goal';
 import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
-// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacterAbilitiesMaterialsTotal, IXpEstimate } from '@/fsd/3-features/characters/characters.models';
 
-// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMowMaterialsTotal } from '@/fsd/1-pages/learn-mow/lookup.models';
 
 export type CharacterRaidGoalSelect =
@@ -88,6 +87,11 @@ export interface IGoalEstimate {
     abilitiesEstimate?: ICharacterAbilitiesMaterialsTotal;
     xpBooksApplied?: number;
     xpBooksRequired?: number;
+
+    /** If the goal is already done and no further raiding/onslaught is required. */
+    completed?: boolean;
+    /** If the goal is currently blocked and cannot be completed (though you might be able to progress). */
+    blocked?: boolean;
 }
 
 export interface IEstimatedAscensionSettings {
@@ -157,14 +161,17 @@ export interface IUpgradesRaidsDay {
     raids: IUpgradeRaid[];
     energyTotal: number;
     raidsTotal: number;
+    onslaughtTokens: number;
 }
 
 export interface IUpgradeRaid extends ICharacterUpgradeEstimate {
     raidLocations: IItemRaidLocation[];
+    countByGoalId?: Record<string, number>;
 }
 
 export interface IItemRaidLocation extends ICampaignBattleComposed {
-    raidsCount: number;
+    raidsAlreadyPerformed: number;
+    raidsToPerform: number;
     farmedItems: number;
     energySpent: number;
     isShardsLocation: boolean;
@@ -175,6 +182,7 @@ export interface IUnitUpgrade {
     unitId: string;
     label: string;
     upgradeRanks: IUnitUpgradeRank[];
+    upgradeShards: IUnitShards | undefined;
     baseUpgradesTotal: Record<string, number>;
     relatedUpgrades: string[];
 }

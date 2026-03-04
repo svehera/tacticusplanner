@@ -1,4 +1,5 @@
-﻿import {
+﻿/* eslint-disable import-x/no-internal-modules */
+import {
     AllCommunityModule,
     ColDef,
     ColGroupDef,
@@ -12,19 +13,16 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 
-import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
 interface Props {
@@ -53,6 +51,34 @@ export const MaterialsTable: React.FC<Props> = ({
     scrollToCharSnowprintId,
     alreadyUsedMaterials,
 }) => {
+    const upgradeRarityClassName = (rarity: Rarity | 'Shard' | 'Mythic Shard' | undefined): string => {
+        const shardVal = (rarity ?? 'Unknown').toString();
+        if (['Shard', 'Mythic Shard', 'Unknown'].includes(shardVal)) {
+            return shardVal;
+        }
+        if (typeof rarity === 'number') {
+            return RarityMapper.rarityToRarityString(rarity);
+        }
+        return RarityMapper.stringToRarityString(shardVal) ?? 'Unknown';
+    };
+
+    const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {
+        const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
+
+        if (typeof rarity === 'number') {
+            return order.indexOf(RarityString[rarity as unknown as keyof typeof RarityString] ?? 'Unknown');
+        }
+
+        if (typeof rarity === 'string') {
+            const mapped = RarityMapper.stringToRarity(rarity);
+            const normalized =
+                mapped !== undefined ? RarityString[mapped as unknown as keyof typeof RarityString] : rarity;
+            return order.indexOf(normalized) === -1 ? order.length - 1 : order.indexOf(normalized);
+        }
+
+        return order.length - 1;
+    };
+
     const columnDefs: Array<ColDef<IRaidMaterialRow> | ColGroupDef<IRaidMaterialRow>> = [
         {
             headerName: 'Upgrade',
@@ -69,13 +95,19 @@ export const MaterialsTable: React.FC<Props> = ({
                     cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) => {
                         const { data } = params;
                         if (data) {
-                            return (
-                                <UpgradeImage
-                                    material={data.label}
-                                    iconPath={data.iconPath}
-                                    rarity={RarityMapper.rarityToRarityString(data.rarity)}
-                                />
-                            );
+                            if (data.id.startsWith('shards_')) {
+                                return <UnitShardIcon icon={data.iconPath} mythic={false} />;
+                            } else if (data.id.startsWith('mythicShards_')) {
+                                return <UnitShardIcon icon={data.iconPath} mythic={true} />;
+                            } else {
+                                return (
+                                    <UpgradeImage
+                                        material={data.label}
+                                        iconPath={data.iconPath}
+                                        rarity={RarityMapper.rarityToRarityString(data.rarity as Rarity)}
+                                    />
+                                );
+                            }
                         }
                     },
                     valueFormatter: () => {
@@ -94,9 +126,13 @@ export const MaterialsTable: React.FC<Props> = ({
                     field: 'rarity',
                     maxWidth: 120,
                     columnGroupShow: 'open',
-                    valueFormatter: (params: ValueFormatterParams<IRaidMaterialRow>) =>
-                        Rarity[params.data?.rarity ?? 0],
-                    cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
+                    valueFormatter: (params: ValueFormatterParams<IRaidMaterialRow>) => {
+                        return upgradeRarityClassName(params.data?.rarity);
+                    },
+                    cellClass: params => upgradeRarityClassName(params.data?.rarity),
+                    comparator: (valueA, valueB) => {
+                        return getRaritySortKey(valueA) - getRaritySortKey(valueB);
+                    },
                 },
                 {
                     columnGroupShow: 'open',

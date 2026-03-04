@@ -19,7 +19,9 @@ export const MaterialItemView: React.FC<Props> = ({ upgradeRaid }) => {
             <ul className="ps-[15px]">
                 {upgradeRaid.raidLocations.map(location => {
                     return (
-                        <li key={location.id} className="flex-box gap5 justify-between">
+                        <li
+                            key={'material-item-view-' + upgradeRaid.relatedGoals.join(',') + '-' + location.id}
+                            className="flex-box gap5 justify-between">
                             <CampaignLocation location={location} unlocked={true} />
                         </li>
                     );

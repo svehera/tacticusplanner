@@ -5,10 +5,9 @@ import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useMemo, useState } from 'react';
 
-import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+import { PersonalGoalType } from '@/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
 import { PrioritySelect } from 'src/shared-components/goals/priority-select';
@@ -381,13 +380,6 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     />
                                 ))}
                             </div>
-                            <CampaignsUsageSelect
-                                allowIgnore={false}
-                                disabled={!unlockedLocations.length}
-                                value={form.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
-                                valueChange={value => setForm(curr => ({ ...curr, campaignsUsage: value }))}
-                                mythic={false}
-                            />
                         </>
                     )}
 

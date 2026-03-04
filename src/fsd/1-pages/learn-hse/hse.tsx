@@ -146,19 +146,11 @@ export const HomeScreenEvent = () => {
 
     const rewardIcon = (reward: string) => {
         const upgrade = UpgradesService.getUpgrade(reward);
-        if (!upgrade) {
-            if (!reward) {
-                return <span>Unknown Reward</span>;
-            }
-            if (reward.startsWith('shards_')) {
-                const char = CharactersService.getUnit(reward.substring(7));
-                if (char) return <UnitShardIcon name={reward} icon={char.roundIcon} />;
-                return reward.substring(7);
-            }
-            if (reward.startsWith('mythicShards_')) {
-                const char = CharactersService.getUnit(reward.substring(13));
-                if (char) return <UnitShardIcon name={reward} icon={char.roundIcon} />;
-                return reward.substring(13);
+        if (!upgrade) return reward;
+        if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
+            const char = CharactersService.getUnit(reward.substring(reward.indexOf('_') + 1));
+            if (char) {
+                return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />;
             }
             return reward;
         }

@@ -241,12 +241,20 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <MultipleSelectCheckmarks
                         size="small"
                         placeholder="Rarity"
-                        selectedValues={currFilter.upgradesRarity.map(x => RarityMapper.rarityToRarityString(x))}
-                        values={Object.values(RarityString)}
+                        selectedValues={currFilter.upgradesRarity.map(x => {
+                            if (x === 'Shard') return 'Shard';
+                            if (x === 'Mythic Shard') return 'Mythic Shard';
+                            return RarityMapper.rarityToRarityString(x);
+                        })}
+                        values={[Object.values(RarityString), 'Shard', 'Mythic Shard'].flat()}
                         selectionChanges={values => {
                             setCurrFilter({
                                 ...currFilter,
-                                upgradesRarity: values.map(x => RarityMapper.stringToNumber[x as RarityString]),
+                                upgradesRarity: values.map(x => {
+                                    if (x === 'Shard') return 'Shard';
+                                    if (x === 'Mythic Shard') return 'Mythic Shard';
+                                    return RarityMapper.stringToNumber[x as RarityString];
+                                }),
                             });
                         }}
                         disableCloseOnSelect={false}

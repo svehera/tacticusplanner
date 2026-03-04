@@ -184,6 +184,19 @@ export interface IUnitUpgradeRank {
     upgrades: string[];
 }
 
+export interface IUnitShards {
+    shardName: string;
+    mythicShardName: string;
+    incrementalShardsAcquired: number;
+    totalIncrementalShardsNeeded: number;
+    shardsAcquired: number;
+    totalShardsNeeded: number;
+    incrementalMythicShardsAcquired: number;
+    totalIncrementalMythicShardsNeeded: number;
+    mythicShardsAcquired: number;
+    totalMythicShardsNeeded: number;
+}
+
 /**
  * Represents data about a character-associated goal, including the starting
  * and ending rank, the applied upgrades, and the rarity of upgrades to farm

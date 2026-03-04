@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -7,7 +8,9 @@ import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign/@x/upgrade';
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { mows2Data } from '@/fsd/4-entities/mow';
-import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
+import { UpgradeImage, UpgradesService as FsdUpgradesService } from '@/fsd/4-entities/upgrade';
+
+import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
 interface Props {
     index: number;
@@ -25,19 +28,27 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
     relatedCharacterSnowprintIds,
     locations,
 }) => {
+    const mapUpgradeRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): Rarity => {
+        if (typeof rarity === 'number') return rarity;
+        throw new Error(`Unsupported upgrade rarity: ${rarity}`);
+    };
     const rewardIcon = () => {
-        const upgrade = UpgradesService.getUpgrade(upgradeMaterialSnowprintId);
+        if (UpgradesService.isShard(upgradeMaterialSnowprintId)) {
+            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(7));
+            if (char) {
+                return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} mythic={false} />;
+            }
+            return upgradeMaterialSnowprintId.substring(7);
+        }
+        if (UpgradesService.isMythicShard(upgradeMaterialSnowprintId)) {
+            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(13));
+            if (char) {
+                return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} mythic={true} />;
+            }
+            return upgradeMaterialSnowprintId.substring(13);
+        }
+        const upgrade = FsdUpgradesService.getUpgrade(upgradeMaterialSnowprintId);
         if (!upgrade) {
-            if (upgradeMaterialSnowprintId.startsWith('shards_')) {
-                const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(7));
-                if (char) return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} />;
-                return upgradeMaterialSnowprintId.substring(7);
-            }
-            if (upgradeMaterialSnowprintId.startsWith('mythicShards_')) {
-                const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(13));
-                if (char) return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} />;
-                return upgradeMaterialSnowprintId.substring(13);
-            }
             return upgradeMaterialSnowprintId;
         }
 
@@ -45,7 +56,7 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
             <UpgradeImage
                 material={upgrade.label}
                 iconPath={upgrade.iconPath}
-                rarity={RarityMapper.rarityToRarityString(upgrade.rarity)}
+                rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(upgrade.rarity))}
             />
         );
     };

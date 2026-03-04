@@ -18,10 +18,14 @@ export const MiscIcon = ({
         <img
             loading="lazy"
             className={`pointer-events-none ${className}`}
-            style={{ height, width, ...style }}
+            style={{
+                ...(height > 0 ? { height } : {}),
+                ...(width > 0 ? { width } : {}),
+                ...style,
+            }}
             src={details.file}
-            width={width}
-            height={height}
+            width={width > 0 ? width : undefined}
+            height={height > 0 ? height : undefined}
             alt={details.label}
         />
     );

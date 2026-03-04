@@ -8,7 +8,7 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { findAndRemoveItem } from '@/fsd/5-shared/lib';
-import { Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2, CharacterUpgradesService } from '@/fsd/4-entities/character';
@@ -64,7 +64,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             upgradesRarity: [],
         });
 
-        return rankUpgrades.upgrades.map(x => UpgradesService.getUpgrade(x));
+        return rankUpgrades.upgrades.map(x => UpgradesService.getUpgrade(x)).filter(x => !!x);
     }, [rank]);
 
     const healthUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Health'), [possibleUpgrades]);
@@ -129,7 +129,8 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
             const previousRankUpgrades = previousRankUpgradesList
                 .flatMap(x => x.upgrades)
-                .map(x => UpgradesService.getUpgrade(x));
+                .map(x => UpgradesService.getUpgrade(x))
+                .filter(x => !!x);
             upgradesToConsider = [...previousRankUpgrades, ...newUpgrades];
         }
 
@@ -245,11 +246,13 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                     <ul className="p-0">
                         {inventoryUpgrades.map((x, index) => (
                             <li key={x.id + index} className="flex list-none items-center gap-2.5 pb-2.5">
-                                <UpgradeImage
-                                    material={x.label}
-                                    iconPath={x.iconPath}
-                                    rarity={RarityMapper.rarityToRarityString(x.rarity)}
-                                />{' '}
+                                {x.rarity in Rarity && (
+                                    <UpgradeImage
+                                        material={x.label}
+                                        iconPath={x.iconPath}
+                                        rarity={RarityMapper.rarityToRarityString(x.rarity as unknown as Rarity)}
+                                    />
+                                )}{' '}
                                 {inventory.upgrades[x.snowprintId] ?? 0} - {inventoryUpdate[x.snowprintId]} ={' '}
                                 {(inventory.upgrades[x.snowprintId] ?? 0) - inventoryUpdate[x.snowprintId] < 0
                                     ? 0
