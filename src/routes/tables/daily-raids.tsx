@@ -26,7 +26,7 @@ import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-sync-with-tacticus';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);

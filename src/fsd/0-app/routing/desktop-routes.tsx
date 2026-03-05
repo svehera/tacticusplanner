@@ -51,7 +51,7 @@ export const globalPlanRoutes: RouteObject[] = [
     {
         path: 'plan/dailyRaids',
         async lazy() {
-            const { DailyRaids } = await import('@/routes/tables/dailyRaids');
+            const { DailyRaids } = await import('@/routes/tables/daily-raids');
             return { Component: DailyRaids };
         },
     },

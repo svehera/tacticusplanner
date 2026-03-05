@@ -10,7 +10,6 @@ export const teams2Reducer = (_state: ITeam2[], action: Teams2Action) => {
             return action.value;
         }
         default: {
-            // @ts-expect-error This should not be reachable but we want to capture as much info as possible if it does
             throw new Error(`Invalid action type received: ${action.type}`);
         }
     }

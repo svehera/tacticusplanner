@@ -6,7 +6,7 @@ import { getImageUrl } from 'src/shared-logic/functions';
 
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
-import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
+import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import { ICharacterData, RankIcon } from '@/fsd/4-entities/character';
 import { IMowStatic2 } from '@/fsd/4-entities/mow/model';

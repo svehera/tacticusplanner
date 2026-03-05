@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 // eslint-disable-next-line import-x/no-internal-modules
 import onslaughtData from '@/data/onslaught/data.generated.json';
 
-import { SectorCard } from './SectorCard';
+import { SectorCard } from './sector-card';
 
 export const Onslaught = () => {
     const [queryParameters, setQueryParameters] = useSearchParams({ track: 'Imperial' });
