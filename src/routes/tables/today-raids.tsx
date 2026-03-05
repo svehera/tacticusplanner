@@ -27,11 +27,11 @@ export const TodayRaids: React.FC<Properties> = ({
     const raidsCount = sum(completedLocations.map(x => x.raidsCount));
 
     const unStartedShardsRaids = useMemo(() => {
-        return shardsRaids.filter(x => x.locations.length && x.locations.every(location => !location.isCompleted));
+        return shardsRaids.filter(x => x.locations.length > 0 && x.locations.every(location => !location.isCompleted));
     }, [shardsRaids]);
 
     const startedShardsRaids = useMemo(() => {
-        return shardsRaids.filter(x => x.locations.length && x.locations.some(location => location.isCompleted));
+        return shardsRaids.filter(x => x.locations.some(location => location.isCompleted));
     }, [shardsRaids]);
 
     return (

@@ -41,6 +41,10 @@ interface Properties {
     restrictions: string[];
 }
 
+const getRowStyle = (parameters: RowClassParams): RowStyle => {
+    return parameters.node.rowIndex === 5 ? { borderTop: '5px dashed' } : {};
+};
+
 export const LreTeamsTable: React.FC<Properties> = ({
     legendaryEvent,
     track,
@@ -134,10 +138,6 @@ export const LreTeamsTable: React.FC<Properties> = ({
             restrictionName,
             selected,
         });
-    };
-
-    const getRowStyle = (parameters: RowClassParams): RowStyle => {
-        return parameters.node.rowIndex === 5 ? { borderTop: '5px dashed' } : {};
     };
 
     const addNewTeam = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {

@@ -14,6 +14,34 @@ import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { resetUserPasswordApi, changeUserRoleApi, getUsersApi } from './admin.endpoints';
 import { IGetUser } from './admin.model';
 
+const downloadJson = (username: string, jsonData: string) => {
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+
+    const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+    };
+    const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(new Date());
+
+    link.download = `${username}-data-${formattedDate}.json`;
+    link.click();
+
+    URL.revokeObjectURL(url);
+};
+
+const copyLink = (shareLink: string) => {
+    if (shareLink) {
+        navigator.clipboard.writeText(shareLink).then(() => enqueueSnackbar('Copied', { variant: 'success' }));
+    }
+};
+
 export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [resetPasswordForm, setResetPasswordForm] = useState({
         username: '',
@@ -52,34 +80,6 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                 setUsersList(result.data ?? []);
             })
             .catch(() => enqueueSnackbar('Failed to find users', { variant: 'error' }));
-    };
-
-    const downloadJson = (username: string, jsonData: string) => {
-        const blob = new Blob([jsonData], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-
-        const link = document.createElement('a');
-        link.href = url;
-
-        const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-        };
-        const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(new Date());
-
-        link.download = `${username}-data-${formattedDate}.json`;
-        link.click();
-
-        URL.revokeObjectURL(url);
-    };
-
-    const copyLink = (shareLink: string) => {
-        if (shareLink) {
-            navigator.clipboard.writeText(shareLink).then(() => enqueueSnackbar('Copied', { variant: 'success' }));
-        }
     };
 
     const renderUser = (user: IGetUser) => {
@@ -153,7 +153,7 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                     </FormControl>
                     <Button onClick={changeUserRole}>Update role</Button>
                 </Box>
-                {usersList.length > 0 && <Box>{usersList.map(renderUser)}</Box>}
+                {usersList.length > 0 && <Box>{usersList.map(user => renderUser(user))}</Box>}
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => onClose()}>Close</Button>

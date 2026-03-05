@@ -17,6 +17,45 @@ interface Properties {
     setState: (request: ILreBattleRequirementsProgress, status: RequirementStatus, forceOverwrite?: boolean) => void;
 }
 
+// Convert legacy boolean flags to RequirementStatus
+const getRequirementStatus = (request: ILreBattleRequirementsProgress): RequirementStatus => {
+    // If new status field exists, use it
+    if (request.status !== undefined) {
+        return request.status as RequirementStatus;
+    }
+
+    // Legacy conversion
+    if (request.completed) {
+        return RequirementStatus.Cleared;
+    }
+    if (request.blocked) {
+        return RequirementStatus.StopHere;
+    }
+    return RequirementStatus.NotCleared;
+};
+
+// Cycle through statuses for non-killScore requirements
+// NotCleared (0) → Cleared (1) → MaybeClear (2) → StopHere (3) → NotCleared (0)
+const getNextStatus = (currentStatus: RequirementStatus): RequirementStatus => {
+    switch (currentStatus) {
+        case RequirementStatus.NotCleared: {
+            return RequirementStatus.Cleared;
+        }
+        case RequirementStatus.Cleared: {
+            return RequirementStatus.MaybeClear;
+        }
+        case RequirementStatus.MaybeClear: {
+            return RequirementStatus.StopHere;
+        }
+        case RequirementStatus.StopHere: {
+            return RequirementStatus.NotCleared;
+        }
+        default: {
+            return RequirementStatus.NotCleared;
+        }
+    }
+};
+
 export const LreTrackBattleSummary: React.FC<Properties> = ({
     battle,
     maxKillPoints,
@@ -115,45 +154,6 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
     const handleDirectStatusChange = (request: ILreBattleRequirementsProgress, newStatus: RequirementStatus) => {
         setShowDropdown(undefined);
         handleStatusChange(request, newStatus);
-    };
-
-    // Convert legacy boolean flags to RequirementStatus
-    const getRequirementStatus = (request: ILreBattleRequirementsProgress): RequirementStatus => {
-        // If new status field exists, use it
-        if (request.status !== undefined) {
-            return request.status as RequirementStatus;
-        }
-
-        // Legacy conversion
-        if (request.completed) {
-            return RequirementStatus.Cleared;
-        }
-        if (request.blocked) {
-            return RequirementStatus.StopHere;
-        }
-        return RequirementStatus.NotCleared;
-    };
-
-    // Cycle through statuses for non-killScore requirements
-    // NotCleared (0) → Cleared (1) → MaybeClear (2) → StopHere (3) → NotCleared (0)
-    const getNextStatus = (currentStatus: RequirementStatus): RequirementStatus => {
-        switch (currentStatus) {
-            case RequirementStatus.NotCleared: {
-                return RequirementStatus.Cleared;
-            }
-            case RequirementStatus.Cleared: {
-                return RequirementStatus.MaybeClear;
-            }
-            case RequirementStatus.MaybeClear: {
-                return RequirementStatus.StopHere;
-            }
-            case RequirementStatus.StopHere: {
-                return RequirementStatus.NotCleared;
-            }
-            default: {
-                return RequirementStatus.NotCleared;
-            }
-        }
     };
 
     // Handle cycling button click for non-killScore requirements

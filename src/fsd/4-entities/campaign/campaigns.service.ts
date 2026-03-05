@@ -16,9 +16,11 @@ export class CampaignsService {
     public static readonly rawBattleData = battleData;
     public static readonly allCampaigns = campaignsList;
     public static readonly standardCampaigns = campaignsList.filter(
+        // eslint-disable-next-line unicorn/consistent-function-scoping
         campaign => campaign.releaseType === CampaignReleaseType.standard
     );
     public static readonly campaignEvents = campaignsList.filter(
+        // eslint-disable-next-line unicorn/consistent-function-scoping
         campaign => campaign.releaseType === CampaignReleaseType.event
     );
     /** Holds a mapping from battle ID (e.g. SHE31) to an ICampaignBattleComposed representing the battle. */

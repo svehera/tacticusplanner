@@ -33,6 +33,35 @@ import { OverrideDataDialog } from './override-data-dialog';
 import { RegisterUserDialog } from './register-user-dialog';
 import { RestoreBackupDialog } from './restore-backup-dialog';
 
+function stringToColor(string: string) {
+    let hash = 0;
+    let index;
+
+    for (index = 0; index < string.length; index += 1) {
+        hash = (string.codePointAt(index) ?? 0) + ((hash << 5) - hash);
+    }
+
+    let color = '#';
+
+    for (index = 0; index < 3; index += 1) {
+        const value = (hash >> (index * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
+    }
+
+    return color;
+}
+
+function stringAvatar(name: string) {
+    return {
+        sx: {
+            width: 32,
+            height: 32,
+            bgcolor: stringToColor(name),
+        },
+        children: `${name.slice(0, 2)}`,
+    };
+}
+
 export const UserMenu = () => {
     const store = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -86,9 +115,9 @@ export const UserMenu = () => {
         if (file) {
             const reader = new FileReader();
 
-            reader.addEventListener('load', (e: ProgressEvent<FileReader>) => {
+            reader.addEventListener('load', (progressEvent: ProgressEvent<FileReader>) => {
                 try {
-                    const content = e.target?.result as string;
+                    const content = progressEvent.target?.result as string;
                     const personalData: IPersonalData2 = convertData(JSON.parse(content));
                     personalData.modifiedDate = new Date();
 
@@ -99,7 +128,7 @@ export const UserMenu = () => {
                 }
             });
 
-            reader.readAsText(file);
+            file.text();
         }
     };
 
@@ -150,35 +179,6 @@ export const UserMenu = () => {
             setShowLoginUser(true);
         }
     };
-
-    function stringToColor(string: string) {
-        let hash = 0;
-        let index;
-
-        for (index = 0; index < string.length; index += 1) {
-            hash = string.charCodeAt(index) + ((hash << 5) - hash);
-        }
-
-        let color = '#';
-
-        for (index = 0; index < 3; index += 1) {
-            const value = (hash >> (index * 8)) & 0xff;
-            color += `00${value.toString(16)}`.slice(-2);
-        }
-
-        return color;
-    }
-
-    function stringAvatar(name: string) {
-        return {
-            sx: {
-                width: 32,
-                height: 32,
-                bgcolor: stringToColor(name),
-            },
-            children: `${name.slice(0, 2)}`,
-        };
-    }
 
     function syncWithTacticus(): void {
         popupManager.open(TacticusIntegrationDialog, {

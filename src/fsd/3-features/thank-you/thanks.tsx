@@ -10,19 +10,19 @@ import { contentCreators, contributors } from './data';
 import { ThankYouCard } from './thank-you.card';
 import { IContributor, IContentCreator, IYoutubeCreator } from './thank-you.model';
 
+const shuffleArray = (array: unknown[]): void => {
+    for (let index = array.length - 1; index > 0; index--) {
+        const index_ = Math.floor(Math.random() * (index + 1));
+        [array[index], array[index_]] = [array[index_], array[index]];
+    }
+};
+
 export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
     const [activeContributorIndex, setActiveContributorIndex] = useState<number>(0);
     const [hide, setHide] = useState<boolean>(false);
     const [contributorsList, setContributorsList] = useState<Array<IContributor | IContentCreator | IYoutubeCreator>>(
         []
     );
-
-    const shuffleArray = (array: any[]): void => {
-        for (let index = array.length - 1; index > 0; index--) {
-            const index_ = Math.floor(Math.random() * (index + 1));
-            [array[index], array[index_]] = [array[index_], array[index]];
-        }
-    };
 
     useEffect(() => {
         const api = axios.create({

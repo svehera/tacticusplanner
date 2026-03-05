@@ -37,7 +37,9 @@ export class CharactersService {
         })
         .filter(Boolean) as ICharacterData[];
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     static readonly activeLres = this.lreCharacters.filter(x => !x.lre?.finished);
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     static readonly inactiveLres = this.lreCharacters.filter(x => !!x.lre?.finished);
 
     public static getInitialRarity(snowprintId: string): Rarity | undefined {
@@ -45,9 +47,9 @@ export class CharactersService {
         return character?.initialRarity;
     }
 
-    static readonly activeLre: ICharacterData = (() => {
-        return this.charactersData.find(unit => unit.snowprintId === LegendaryEventService.getActiveLreUnitId())!;
-    })();
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+    static readonly activeLre: ICharacterData = (() =>
+        this.charactersData.find(unit => unit.snowprintId === LegendaryEventService.getActiveLreUnitId())!)();
 
     public static getLreCharacter(id: LegendaryEventEnum): ICharacterData | undefined {
         return this.lreCharacters.find(unit => {

@@ -6,6 +6,7 @@ import { rankUpData } from './data';
 import { IRankLookup, IUnitUpgradeRank } from './model';
 
 export class CharacterUpgradesService {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
 
     /**

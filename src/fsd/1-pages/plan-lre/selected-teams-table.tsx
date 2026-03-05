@@ -32,6 +32,10 @@ interface Properties {
     deleteTeam: (teamId: string) => void;
 }
 
+const getRowStyle = (parameters: RowClassParams): RowStyle => {
+    return parameters.node.rowIndex && parameters.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
+};
+
 export const SelectedTeamsTable: React.FC<Properties> = ({
     rows,
     upgradeRankOrMowGoals,
@@ -113,10 +117,6 @@ export const SelectedTeamsTable: React.FC<Properties> = ({
     useEffect(() => {
         gridReference.current?.api?.sizeColumnsToFit();
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, viewPreferences.hideCompleted]);
-
-    const getRowStyle = (parameters: RowClassParams): RowStyle => {
-        return parameters.node.rowIndex && parameters.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
-    };
 
     return (
         <div
