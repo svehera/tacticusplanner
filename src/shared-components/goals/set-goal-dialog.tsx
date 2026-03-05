@@ -96,7 +96,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     };
 
     const handleAscendGoalChanges = (key: keyof IPersonalGoal, value: number) => {
-        setForm(curr => ({ ...curr, [key]: value }));
+        setForm(current => ({ ...current, [key]: value }));
     };
 
     const maxRank = useMemo(() => {
@@ -112,7 +112,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     }, [unit, maxRank]);
 
     useEffect(() => {
-        setForm(curr => ({ ...curr, targetRank: rankValues[0] }));
+        setForm(current => ({ ...current, targetRank: rankValues[0] }));
     }, [rankValues]);
 
     const allowedCharacters: IUnit[] = useMemo(() => {
@@ -180,15 +180,15 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             setUnit(null);
         }
 
-        setForm(curr => ({ ...curr, type: newGoalType }));
+        setForm(current => ({ ...current, type: newGoalType }));
     };
 
     const handleUnitChange = (value: IUnit | null) => {
         setUnit(value);
 
         if (isCharacter(value)) {
-            setForm(curr => ({
-                ...curr,
+            setForm(current => ({
+                ...current,
                 targetRank: value.rank,
                 targetStars: value.stars,
                 targetRarity: value.rarity,
@@ -198,8 +198,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
 
         if (isMow(value)) {
-            setForm(curr => ({
-                ...curr,
+            setForm(current => ({
+                ...current,
                 firstAbilityLevel: value.primaryAbilityLevel,
                 secondAbilityLevel: value.secondaryAbilityLevel,
             }));
@@ -301,7 +301,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             <PrioritySelect
                                 value={form.priority}
                                 maxValue={goals.length + 1}
-                                valueChange={value => setForm(curr => ({ ...curr, priority: value }))}
+                                valueChange={value => setForm(current => ({ ...current, priority: value }))}
                             />
                         </div>
 
@@ -313,19 +313,19 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 startingRank={form.startingRank ?? (unit as ICharacter2).rank ?? Rank.Stone1}
                                 startingPoint5={!!form.startingRankPoint5}
                                 onStartChange={(startingRank, startingRankPoint5) =>
-                                    setForm(curr => ({ ...curr, startingRank, startingRankPoint5 }))
+                                    setForm(current => ({ ...current, startingRank, startingRankPoint5 }))
                                 }
                                 rank={form.targetRank ?? (unit as ICharacter2).rank ?? Rank.Stone1}
                                 point5={!!form.rankPoint5}
                                 onChange={(targetRank, rankPoint5) =>
-                                    setForm(curr => ({ ...curr, targetRank, rankPoint5 }))
+                                    setForm(current => ({ ...current, targetRank, rankPoint5 }))
                                 }
                             />
                             <UpgradesRaritySelect
                                 upgradesRarity={form.upgradesRarity ?? []}
                                 upgradesRarityChange={values => {
-                                    setForm(curr => ({
-                                        ...curr,
+                                    setForm(current => ({
+                                        ...current,
                                         upgradesRarity: values,
                                     }));
                                 }}
@@ -343,8 +343,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.firstAbilityLevel!}
                                         valueChange={primaryAbilityLevel => {
-                                            setForm(curr => ({
-                                                ...curr,
+                                            setForm(current => ({
+                                                ...current,
                                                 firstAbilityLevel: primaryAbilityLevel,
                                             }));
                                         }}
@@ -357,8 +357,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.secondAbilityLevel!}
                                         valueChange={secondaryAbilityLevel => {
-                                            setForm(curr => ({
-                                                ...curr,
+                                            setForm(current => ({
+                                                ...current,
                                                 secondAbilityLevel: secondaryAbilityLevel,
                                             }));
                                         }}
@@ -367,8 +367,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 <UpgradesRaritySelect
                                     upgradesRarity={form.upgradesRarity ?? []}
                                     upgradesRarityChange={values => {
-                                        setForm(curr => ({
-                                            ...curr,
+                                        setForm(current => ({
+                                            ...current,
                                             upgradesRarity: values,
                                         }));
                                     }}
@@ -387,8 +387,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.firstAbilityLevel!}
                                         valueChange={primaryAbilityLevel => {
-                                            setForm(curr => ({
-                                                ...curr,
+                                            setForm(current => ({
+                                                ...current,
                                                 firstAbilityLevel: primaryAbilityLevel,
                                             }));
                                         }}
@@ -401,8 +401,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                         value={form.secondAbilityLevel!}
                                         valueChange={secondaryAbilityLevel => {
-                                            setForm(curr => ({
-                                                ...curr,
+                                            setForm(current => ({
+                                                ...current,
                                                 secondAbilityLevel: secondaryAbilityLevel,
                                             }));
                                         }}
@@ -441,9 +441,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             </div>
                             <CampaignsUsageSelect
                                 allowIgnore={false}
-                                disabled={!unlockedLocations.length}
+                                disabled={unlockedLocations.length === 0}
                                 value={form.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
-                                valueChange={value => setForm(curr => ({ ...curr, campaignsUsage: value }))}
+                                valueChange={value => setForm(current => ({ ...current, campaignsUsage: value }))}
                                 mythic={form.targetRarity! >= Rarity.Mythic}
                             />
                         </Conditional>
@@ -456,8 +456,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             multiline
                             helperText="Optional. Max length 200 characters."
                             onChange={event =>
-                                setForm(curr => ({
-                                    ...curr,
+                                setForm(current => ({
+                                    ...current,
                                     notes: event.target.value.slice(0, 200),
                                 }))
                             }

@@ -2,12 +2,12 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-interface Props {
+interface Properties {
     title: React.ReactNode;
     children: React.ReactElement<any, any>;
 }
 
-export const AccessibleTooltip: React.FC<Props> = ({ children, title }) => {
+export const AccessibleTooltip: React.FC<Properties> = ({ children, title }) => {
     const [open, setOpen] = React.useState(false);
 
     const handleTooltipClose = () => {

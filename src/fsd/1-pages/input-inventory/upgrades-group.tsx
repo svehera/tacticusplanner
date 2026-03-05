@@ -3,14 +3,14 @@ import React from 'react';
 import { InventoryItem } from './inventory-item';
 import { IUpgradesGroup } from './inventory-models';
 
-interface Props {
+interface Properties {
     group: IUpgradesGroup;
     showAlphabet: boolean;
     showPlusMinus: boolean;
     dataUpdate: (upgradeId: string, value: number) => void;
 }
 
-const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, dataUpdate }) => {
+const UpgradesGroupFunction: React.FC<Properties> = ({ group, showPlusMinus, showAlphabet, dataUpdate }) => {
     return (
         <section>
             <article>
@@ -98,4 +98,4 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
     );
 };
 
-export const UpgradesGroup = React.memo(UpgradesGroupFn);
+export const UpgradesGroup = React.memo(UpgradesGroupFunction);

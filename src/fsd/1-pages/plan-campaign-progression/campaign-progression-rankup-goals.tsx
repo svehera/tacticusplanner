@@ -11,12 +11,12 @@ import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entitie
 
 import { CampaignData } from './campaign-progression.models';
 
-interface Props {
+interface Properties {
     campaignData: CampaignData;
     goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>;
 }
 
-export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, goals }) => {
+export const CampaignProgressionRankupGoals: React.FC<Properties> = ({ campaignData, goals }) => {
     const [goalDefs] = useState(getColumnDefs());
 
     /** @returns the goal with the given ID. */
@@ -24,7 +24,7 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
         const filtered: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow> = goals.filter(
             goal => goal.goalId == goalId
         );
-        if (filtered.length == 0) {
+        if (filtered.length === 0) {
             return undefined;
         }
         if (filtered.length > 1) {
@@ -73,9 +73,9 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
         const goal = getGoal(goalId);
         let rankEnd: number = 1;
         if (!goal) return 1;
-        Object.entries(goal).forEach(([key, value]) => {
+        for (const [key, value] of Object.entries(goal)) {
             if (key == 'rankEnd') rankEnd = value as number;
-        });
+        }
         return rankEnd;
     }
 
@@ -103,9 +103,9 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                 headerName: 'A',
                 width: 45,
                 cellStyle: { align: 'center' },
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
-                    const goalData = params.data.goalData[0];
+                cellRenderer: (parameters: any) => {
+                    if (!parameters.data.goalData || !parameters.data.goalData[0]) return '';
+                    const goalData = parameters.data.goalData[0];
                     return (
                         <a href={getRankLookupHref(goalData.goalId)}>
                             <UnitShardIcon
@@ -121,9 +121,9 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                 headerName: 'B',
                 width: 60,
                 cellStyle: { align: 'center' },
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
-                    const goalData = params.data.goalData[0];
+                cellRenderer: (parameters: any) => {
+                    if (!parameters.data.goalData || !parameters.data.goalData[0]) return '';
+                    const goalData = parameters.data.goalData[0];
                     return <RankIcon rank={getGoalRankStart(goalData.goalId)} />;
                 },
             },
@@ -131,8 +131,8 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                 headerName: 'C',
                 width: 35,
                 cellStyle: { align: 'center' },
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                cellRenderer: (parameters: any) => {
+                    if (!parameters.data.goalData || !parameters.data.goalData[0]) return '';
                     return <ArrowForward />;
                 },
             },
@@ -140,17 +140,17 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                 headerName: 'D',
                 width: 60,
                 cellStyle: { align: 'center' },
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
-                    const goalData = params.data.goalData[0];
+                cellRenderer: (parameters: any) => {
+                    if (!parameters.data.goalData || !parameters.data.goalData[0]) return '';
+                    const goalData = parameters.data.goalData[0];
                     return <RankIcon rank={getGoalRankEnd(goalData.goalId)} />;
                 },
             },
             {
                 headerName: 'E',
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
-                    const goalData = params.data.goalData[0];
+                cellRenderer: (parameters: any) => {
+                    if (!parameters.data.goalData || !parameters.data.goalData[0]) return '';
+                    const goalData = parameters.data.goalData[0];
                     return (
                         <span>
                             costs {goalData.goalCost} <MiscIcon icon={'energy'} height={15} width={15} />

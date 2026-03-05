@@ -10,7 +10,7 @@ import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapsh
 
 import { Teams2Service } from './teams2.service';
 
-interface Props {
+interface Properties {
     chars: ICharacter2[];
     flexIndex?: number;
     mows: IMow2[];
@@ -18,7 +18,7 @@ interface Props {
     onMowClicked: (mow: IMow2) => void;
 }
 
-export const TeamFlow: React.FC<Props> = ({ chars, mows, flexIndex, onCharClicked, onMowClicked }: Props) => {
+export const TeamFlow: React.FC<Properties> = ({ chars, mows, flexIndex, onCharClicked, onMowClicked }: Properties) => {
     const core = chars.slice(0, flexIndex ?? chars.length);
     const flex = chars.slice(flexIndex ?? chars.length);
 

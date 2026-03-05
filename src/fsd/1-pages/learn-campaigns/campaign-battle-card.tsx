@@ -18,11 +18,11 @@ import { NpcDetailModal } from '../learn-npcs';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 import { ResolvedEnemyData } from './models';
 
-interface Props {
+interface Properties {
     battle: ICampaignBattleComposed;
 }
 
-export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
+export const CampaignBattleCard: React.FC<Properties> = ({ battle }) => {
     // 1. Add State for the modal
     const [selectedEnemy, setSelectedEnemy] = useState<ResolvedEnemyData | null>(null);
 
@@ -47,14 +47,14 @@ export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
         const upgrade = UpgradesService.getUpgrade(reward);
         if (!upgrade) {
             if (reward.startsWith('shards_')) {
-                const char = CharactersService.getUnit(reward.substring(7));
+                const char = CharactersService.getUnit(reward.slice(7));
                 if (char) return <UnitShardIcon name={reward} icon={char.roundIcon} />;
-                return reward.substring(7);
+                return reward.slice(7);
             }
             if (reward.startsWith('mythicShards_')) {
-                const char = CharactersService.getUnit(reward.substring(13));
+                const char = CharactersService.getUnit(reward.slice(13));
                 if (char) return <UnitShardIcon name={reward} icon={char.roundIcon} />;
-                return reward.substring(13);
+                return reward.slice(13);
             }
             return reward;
         }

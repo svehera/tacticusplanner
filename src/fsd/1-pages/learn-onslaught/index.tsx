@@ -9,14 +9,14 @@ import onslaughtData from '@/data/onslaught/data.generated.json';
 import { SectorCard } from './SectorCard';
 
 export const Onslaught = () => {
-    const [queryParams, setQueryParams] = useSearchParams({ track: 'Imperial' });
+    const [queryParameters, setQueryParameters] = useSearchParams({ track: 'Imperial' });
 
-    const activeTrack = queryParams.get('track') ?? 'Imperial';
+    const activeTrack = queryParameters.get('track') ?? 'Imperial';
     const trackData = onslaughtData.find(track => track.alliance === activeTrack);
     useLayoutEffect(() => {
         if (trackData) return; // if the track is valid, no need to update the URL
-        setQueryParams(new URLSearchParams({ track: 'Imperial' }));
-    }, [queryParams, setQueryParams, trackData]);
+        setQueryParameters(new URLSearchParams({ track: 'Imperial' }));
+    }, [queryParameters, setQueryParameters, trackData]);
 
     if (!trackData) return <div>Invalid track. Switching...</div>;
     const { sectors, badgeAlliance } = trackData;
@@ -25,7 +25,7 @@ export const Onslaught = () => {
         <div className="mx-auto flex w-full max-w-2xl flex-col gap-4">
             <Tabs
                 value={activeTrack}
-                onChange={(_, value) => setQueryParams({ track: value })}
+                onChange={(_, value) => setQueryParameters({ track: value })}
                 variant="scrollable"
                 scrollButtons="auto"
                 className="sticky top-0 border-b border-stone-200 bg-(--bg) pb-0.5 dark:border-stone-700"

@@ -9,7 +9,7 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { mows2Data } from '@/fsd/4-entities/mow';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
-interface Props {
+interface Properties {
     index: number;
     upgradeMaterialSnowprintId: string;
     currentQuantity: number;
@@ -18,7 +18,7 @@ interface Props {
     locations: ICampaignBattleComposed[];
 }
 
-export const RaidUpgradeMaterialCard: React.FC<Props> = ({
+export const RaidUpgradeMaterialCard: React.FC<Properties> = ({
     upgradeMaterialSnowprintId,
     currentQuantity,
     desiredQuantity,
@@ -29,14 +29,14 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
         const upgrade = UpgradesService.getUpgrade(upgradeMaterialSnowprintId);
         if (!upgrade) {
             if (upgradeMaterialSnowprintId.startsWith('shards_')) {
-                const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(7));
+                const char = CharactersService.getUnit(upgradeMaterialSnowprintId.slice(7));
                 if (char) return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} />;
-                return upgradeMaterialSnowprintId.substring(7);
+                return upgradeMaterialSnowprintId.slice(7);
             }
             if (upgradeMaterialSnowprintId.startsWith('mythicShards_')) {
-                const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(13));
+                const char = CharactersService.getUnit(upgradeMaterialSnowprintId.slice(13));
                 if (char) return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} />;
-                return upgradeMaterialSnowprintId.substring(13);
+                return upgradeMaterialSnowprintId.slice(13);
             }
             return upgradeMaterialSnowprintId;
         }

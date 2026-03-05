@@ -58,18 +58,16 @@ export const ManageTeams = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, setSelectedChars] = useState<string[]>([]);
     const [selectedMows, setSelectedMows] = useState<string[]>([]);
-    const [flexIndex, setFlexIndex] = useState<number | undefined>(undefined);
+    const [flexIndex, setFlexIndex] = useState<number | undefined>();
     const [notes, setNotes] = useState<string>('');
 
     // State for the add/edit dialog.
     const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
     const [editingTeam, setEditingTeam] = useState<ITeam2 | null>(null);
     const [saveAllowed, setSaveAllowed] = useState(false);
-    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>(undefined);
-    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>(undefined);
-    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>(
-        undefined
-    );
+    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>();
+    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>();
+    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>();
     const [warOffenseSelected, setWarOffenseSelected] = useState<boolean>(false);
     const [warDefenseSelected, setWarDefenseSelected] = useState<boolean>(false);
     const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
@@ -144,11 +142,7 @@ export const ManageTeams = () => {
             setSaveAllowed(false);
             return;
         }
-        if (
-            nonRaidModesEnabled &&
-            (warOffenseSelected || warDefenseSelected) &&
-            !battleFieldLevels.some(level => level)
-        ) {
+        if (nonRaidModesEnabled && (warOffenseSelected || warDefenseSelected) && !battleFieldLevels.some(Boolean)) {
             setSaveDisallowedMessage('Select at least one Battlefield Level.');
             setSaveAllowed(false);
             return;
@@ -195,7 +189,9 @@ export const ManageTeams = () => {
     };
 
     const onDelete = (team: ITeam2) => {
-        if (window.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)) {
+        if (
+            globalThis.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)
+        ) {
             dispatch.teams2({ type: 'Set', value: teams.filter(t => t.name !== team.name) });
         }
     };
@@ -212,12 +208,12 @@ export const ManageTeams = () => {
             team.bfs = team.warOffense || team.warDefense ? battleFieldLevels : undefined;
             team.notes = notes;
             team.flexIndex = flexIndex;
-            const curTeams = [...teams];
-            curTeams.forEach(t => {
-                if (t.name !== editingTeam.name) return;
+            const currentTeams_ = [...teams];
+            for (let t of currentTeams_) {
+                if (t.name !== editingTeam.name) continue;
                 t = team;
-            });
-            dispatch.teams2({ type: 'Set', value: cloneDeep(curTeams) });
+            }
+            dispatch.teams2({ type: 'Set', value: cloneDeep(currentTeams_) });
         } else {
             const newTeam: ITeam2 = {
                 name: teamName.trim(),
@@ -242,7 +238,7 @@ export const ManageTeams = () => {
     const onAddChar = (snowprintId: string) => {
         const flex = flexIndex ?? selectedChars.length;
         setSelectedChars([...selectedChars.slice(0, flex), snowprintId, ...selectedChars.slice(flex)]);
-        setFlexIndex(flexIndex !== undefined ? flexIndex + 1 : undefined);
+        setFlexIndex(flexIndex === undefined ? undefined : flexIndex + 1);
     };
 
     const onAddMow = (snowprintId: string) => {
@@ -250,9 +246,9 @@ export const ManageTeams = () => {
     };
 
     const onCharClicked = (char: ICharacter2) => {
-        const index = selectedChars.findIndex(id => id === (char.snowprintId ?? ''));
+        const index = selectedChars.indexOf(char.snowprintId ?? '');
         if (index === -1) {
-            console.error('Clicked character that is not in selectedChars: ', char, selectedChars, index);
+            console.error('Clicked character that is not in selectedChars:', char, selectedChars, index);
             return;
         }
         let flex = flexIndex ?? selectedChars.length;
@@ -394,9 +390,9 @@ export const ManageTeams = () => {
                                 <Layers className="text-slate-500" sx={{ fontSize: 14 }} />
                                 <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400">
                                     {team.bfs
-                                        .map((active: boolean, i: number) => (active ? i + 1 : null))
+                                        .map((active: boolean, index: number) => (active ? index + 1 : null))
                                         .filter(Boolean)
-                                        .map(num => `BF${num!.toString()}`)
+                                        .map(number_ => `BF${number_!.toString()}`)
                                         .join(', ')}
                                 </span>
                             </div>

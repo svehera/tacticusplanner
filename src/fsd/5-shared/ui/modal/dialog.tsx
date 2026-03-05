@@ -6,7 +6,7 @@ import { tv } from 'tailwind-variants';
 
 import { useMediaQuery } from '@/fsd/5-shared/lib';
 
-import { Button, ButtonProps } from '../button';
+import { Button, ButtonProps as ButtonProperties } from '../button';
 
 const dialogStyles = tv({
     slots: {
@@ -27,22 +27,22 @@ const dialogStyles = tv({
 
 const { root, header, description, body, footer, closeIndicator } = dialogStyles();
 
-const Dialog = ({ role = 'dialog', className, ...props }: React.ComponentProps<typeof DialogPrimitive>) => {
-    return <DialogPrimitive role={role} className={root({ className })} {...props} />;
+const Dialog = ({ role = 'dialog', className, ...properties }: React.ComponentProps<typeof DialogPrimitive>) => {
+    return <DialogPrimitive role={role} className={root({ className })} {...properties} />;
 };
 
-const Trigger = (props: React.ComponentProps<typeof ButtonPrimitive>) => <ButtonPrimitive {...props} />;
+const Trigger = (properties: React.ComponentProps<typeof ButtonPrimitive>) => <ButtonPrimitive {...properties} />;
 
-type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement> & {
+type DialogHeaderProperties = React.HTMLAttributes<HTMLDivElement> & {
     title?: string;
     description?: string;
 };
 
-const Header = ({ className, ...props }: DialogHeaderProps) => {
-    const headerRef = useRef<HTMLHeadingElement>(null);
+const Header = ({ className, ...properties }: DialogHeaderProperties) => {
+    const headerReference = useRef<HTMLHeadingElement>(null);
 
     useEffect(() => {
-        const header = headerRef.current;
+        const header = headerReference.current;
         if (!header) {
             return;
         }
@@ -58,10 +58,14 @@ const Header = ({ className, ...props }: DialogHeaderProps) => {
     }, []);
 
     return (
-        <div data-slot="dialog-header" ref={headerRef} className={header({ className })}>
-            {props.title && <Title>{props.title}</Title>}
-            {props.description && <Description>{props.description}</Description>}
-            {!props.title && typeof props.children === 'string' ? <Title {...props} /> : props.children}
+        <div data-slot="dialog-header" ref={headerReference} className={header({ className })}>
+            {properties.title && <Title>{properties.title}</Title>}
+            {properties.description && <Description>{properties.description}</Description>}
+            {!properties.title && typeof properties.children === 'string' ? (
+                <Title {...properties} />
+            ) : (
+                properties.children
+            )}
         </div>
     );
 };
@@ -78,30 +82,30 @@ const titleStyles = tv({
     },
 });
 
-interface DialogTitleProps extends Omit<HeadingProps, 'level'> {
+interface DialogTitleProperties extends Omit<HeadingProps, 'level'> {
     level?: 1 | 2 | 3 | 4;
     ref?: React.Ref<HTMLHeadingElement>;
 }
-const Title = ({ level = 2, className, ref, ...props }: DialogTitleProps) => (
-    <Heading slot="title" level={level} ref={ref} className={titleStyles({ level, className })} {...props} />
+const Title = ({ level = 2, className, ref, ...properties }: DialogTitleProperties) => (
+    <Heading slot="title" level={level} ref={ref} className={titleStyles({ level, className })} {...properties} />
 );
 
-type DialogDescriptionProps = React.ComponentProps<'div'>;
-const Description = ({ className, ref, ...props }: DialogDescriptionProps) => (
-    <Text slot="description" className={description({ className })} ref={ref} {...props} />
+type DialogDescriptionProperties = React.ComponentProps<'div'>;
+const Description = ({ className, ref, ...properties }: DialogDescriptionProperties) => (
+    <Text slot="description" className={description({ className })} ref={ref} {...properties} />
 );
 
-type DialogBodyProps = React.ComponentProps<'div'>;
-const Body = ({ className, ref, ...props }: DialogBodyProps) => (
-    <div data-slot="dialog-body" ref={ref} className={body({ className })} {...props} />
+type DialogBodyProperties = React.ComponentProps<'div'>;
+const Body = ({ className, ref, ...properties }: DialogBodyProperties) => (
+    <div data-slot="dialog-body" ref={ref} className={body({ className })} {...properties} />
 );
 
-type DialogFooterProps = React.ComponentProps<'div'>;
-const Footer = ({ className, ...props }: DialogFooterProps) => {
-    const footerRef = useRef<HTMLDivElement>(null);
+type DialogFooterProperties = React.ComponentProps<'div'>;
+const Footer = ({ className, ...properties }: DialogFooterProperties) => {
+    const footerReference = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const footer = footerRef.current;
+        const footer = footerReference.current;
 
         if (!footer) {
             return;
@@ -118,30 +122,30 @@ const Footer = ({ className, ...props }: DialogFooterProps) => {
             observer.unobserve(footer);
         };
     }, []);
-    return <div ref={footerRef} data-slot="dialog-footer" className={footer({ className })} {...props} />;
+    return <div ref={footerReference} data-slot="dialog-footer" className={footer({ className })} {...properties} />;
 };
 
-const Close = ({ className, appearance = 'outline', ref, ...props }: ButtonProps) => {
-    return <Button slot="close" className={className} ref={ref} appearance={appearance} {...props} />;
+const Close = ({ className, appearance = 'outline', ref, ...properties }: ButtonProperties) => {
+    return <Button slot="close" className={className} ref={ref} appearance={appearance} {...properties} />;
 };
 
-interface CloseButtonIndicatorProps extends ButtonProps {
+interface CloseButtonIndicatorProperties extends ButtonProperties {
     className?: string;
     isDismissable?: boolean | undefined;
 }
 
-const CloseIndicator = ({ className, ...props }: CloseButtonIndicatorProps) => {
+const CloseIndicator = ({ className, ...properties }: CloseButtonIndicatorProperties) => {
     const isMobile = useMediaQuery('(max-width: 600px)');
-    const buttonRef = useRef<HTMLButtonElement>(null);
+    const buttonReference = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
-        if (isMobile && buttonRef.current) {
-            buttonRef.current.focus();
+        if (isMobile && buttonReference.current) {
+            buttonReference.current.focus();
         }
     }, [isMobile]);
-    return props.isDismissable ? (
+    return properties.isDismissable ? (
         <ButtonPrimitive
-            ref={buttonRef}
+            ref={buttonReference}
             {...(isMobile ? { autoFocus: true } : {})}
             aria-label="Close"
             slot="close"

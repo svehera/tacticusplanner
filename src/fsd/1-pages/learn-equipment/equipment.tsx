@@ -11,7 +11,7 @@ import { EquipmentIcon, EquipmentService, EquipmentTypeIcon, IEquipment } from '
 import { EquipmentBoost } from '@/fsd/4-entities/equipment/ui/equipment-boost';
 
 export const Equipment = () => {
-    const gridRef = useRef<AgGridReact<IEquipment>>(null);
+    const gridReference = useRef<AgGridReact<IEquipment>>(null);
     const [nameFilter, setNameFilter] = useState<string>('');
     const [showCharacters, setShowCharacters] = useState<boolean>(false);
     const rows = useMemo(
@@ -32,8 +32,8 @@ export const Equipment = () => {
                 headerName: 'Equipment',
                 minWidth: 120,
                 flex: 1,
-                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    const equipment = params.data;
+                cellRenderer: (parameters: ICellRendererParams<IEquipment>) => {
+                    const equipment = parameters.data;
                     return equipment ? (
                         <span className="flex items-center">
                             <EquipmentIcon equipment={equipment} width={60} height={60} />
@@ -49,8 +49,8 @@ export const Equipment = () => {
                 headerName: 'Equipment',
                 minWidth: 120,
                 flex: 1,
-                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    const equipment = params.data;
+                cellRenderer: (parameters: ICellRendererParams<IEquipment>) => {
+                    const equipment = parameters.data;
                     return equipment ? <span className="flex items-center">{equipment?.name}</span> : '';
                 },
             },
@@ -58,8 +58,8 @@ export const Equipment = () => {
                 field: 'rarity',
                 headerName: 'Rarity',
                 width: 60,
-                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    return typeof params.data?.rarity !== 'undefined' && <RarityIcon rarity={params.data?.rarity} />;
+                cellRenderer: (parameters: ICellRendererParams<IEquipment>) => {
+                    return parameters.data?.rarity !== undefined && <RarityIcon rarity={parameters.data?.rarity} />;
                 },
             },
             {
@@ -70,8 +70,8 @@ export const Equipment = () => {
                 },
                 headerName: 'Slot',
                 minWidth: 50,
-                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    const equipment = params.data;
+                cellRenderer: (parameters: ICellRendererParams<IEquipment>) => {
+                    const equipment = parameters.data;
                     return equipment ? (
                         <span className="flex items-center">
                             <EquipmentTypeIcon equipmentType={equipment.type} width={25} height={25} />
@@ -87,12 +87,12 @@ export const Equipment = () => {
                 headerName: 'Boost by Level',
                 minWidth: 100,
                 flex: 1,
-                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    const ret = [];
-                    const equipment: IEquipment = params.data!;
+                cellRenderer: (parameters: ICellRendererParams<IEquipment>) => {
+                    const returnValue = [];
+                    const equipment: IEquipment = parameters.data!;
                     for (let index = 0; index < equipment.levels.length; ++index) {
-                        ret.push(
-                            <div key={`${params.data?.id}-${index}`}>
+                        returnValue.push(
+                            <div key={`${parameters.data?.id}-${index}`}>
                                 <table>
                                     <tbody>
                                         <tr>
@@ -111,7 +111,7 @@ export const Equipment = () => {
                             </div>
                         );
                     }
-                    return <div>{ret}</div>;
+                    return <div>{returnValue}</div>;
                 },
             },
             {
@@ -119,8 +119,8 @@ export const Equipment = () => {
                 headerName: 'Is Relic',
                 minWidth: 100,
                 flex: 1,
-                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    const { isRelic, isUniqueRelic } = params.data || {};
+                cellRenderer: (parameters: ICellRendererParams<IEquipment>) => {
+                    const { isRelic, isUniqueRelic } = parameters.data || {};
                     return <span>{isRelic ? (isUniqueRelic ? 'Yes (Unique)' : 'Yes (Shared)') : 'No'}</span>;
                 },
             },
@@ -129,8 +129,8 @@ export const Equipment = () => {
                 minWidth: 100,
                 flex: 1,
                 hide: !showCharacters,
-                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    const characterIds = params.data!.allowedUnits;
+                cellRenderer: (parameters: ICellRendererParams<IEquipment>) => {
+                    const characterIds = parameters.data!.allowedUnits;
 
                     return (
                         <div className="flex flex-wrap gap-[5px]">
@@ -180,7 +180,7 @@ export const Equipment = () => {
                 className="ag-theme-material"
                 style={{ height: 'calc(100vh - 12rem)', minHeight: '400px', width: '100%' }}>
                 <AgGridReact
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     suppressCellFocus={true}

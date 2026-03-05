@@ -26,7 +26,7 @@ import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMow2 } from '@/fsd/3-features/characters/characters.models';
 
-interface Props {
+interface Properties {
     mow: IMow2;
     saveChanges: (mow: IMow2) => void;
     isOpen: boolean;
@@ -37,7 +37,7 @@ interface Props {
     inventoryUpdate: (value: Record<string, number>) => void;
 }
 
-export const EditMowDialog: React.FC<Props> = ({
+export const EditMowDialog: React.FC<Properties> = ({
     mow,
     saveChanges,
     onClose,
@@ -59,8 +59,8 @@ export const EditMowDialog: React.FC<Props> = ({
     const rarityEntries: number[] = getEnumValues(Rarity);
 
     const handleInputChange = (name: keyof IMow2, value: boolean | number) => {
-        setEditedMow(curr => ({
-            ...curr,
+        setEditedMow(current => ({
+            ...current,
             [name]: value,
         }));
     };

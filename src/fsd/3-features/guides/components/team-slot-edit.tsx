@@ -15,7 +15,7 @@ import { SlotType } from '@/fsd/3-features/guides/guides.enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ITeamSlot } from '@/fsd/3-features/guides/guides.models';
 
-interface Props {
+interface Properties {
     units: IUnit[];
     slot: ITeamSlot;
     selectedIndex?: number;
@@ -24,7 +24,7 @@ interface Props {
     editType?: (type: SlotType) => void;
 }
 
-export const TeamSlotEdit: React.FC<Props> = ({
+export const TeamSlotEdit: React.FC<Properties> = ({
     slot,
     units,
     editable = false,

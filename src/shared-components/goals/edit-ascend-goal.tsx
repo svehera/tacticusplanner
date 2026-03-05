@@ -14,7 +14,7 @@ import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 
 import { ICharacterAscendGoal } from '@/fsd/3-features/goals/goals.models';
 
-interface Props {
+interface Properties {
     goal: ICharacterAscendGoal;
     possibleLocations: ICampaignBattleComposed[];
     unlockedLocations: string[];
@@ -23,7 +23,7 @@ interface Props {
     onChange: (key: keyof ICharacterAscendGoal, value: number) => void;
 }
 
-export const EditAscendGoal: React.FC<Props> = ({
+export const EditAscendGoal: React.FC<Properties> = ({
     goal,
     possibleLocations,
     unlockedLocations,
@@ -91,11 +91,11 @@ export const EditAscendGoal: React.FC<Props> = ({
                         ))}
                     </div>
 
-                    {possibleLocations.length !== 0 && (
+                    {possibleLocations.length > 0 && (
                         <div className="flex gap-3">
                             <div className="w-1/2">
                                 <CampaignsUsageSelect
-                                    disabled={!unlockedLocations.length}
+                                    disabled={unlockedLocations.length === 0}
                                     value={goal.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
                                     valueChange={value => onChange('campaignsUsage', value)}
                                     mythic={false}
@@ -137,11 +137,11 @@ export const EditAscendGoal: React.FC<Props> = ({
                         ))}
                     </div>
 
-                    {!!possibleMythicLocations.length && (
+                    {possibleMythicLocations.length > 0 && (
                         <div className="flex gap-3">
                             <div className="w-1/2">
                                 <CampaignsUsageSelect
-                                    disabled={!unlockedMythicLocations.length}
+                                    disabled={unlockedMythicLocations.length === 0}
                                     value={goal.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
                                     valueChange={value => onChange('mythicCampaignsUsage', value)}
                                     mythic={true}
@@ -158,7 +158,7 @@ export const EditAscendGoal: React.FC<Props> = ({
                         </div>
                     )}
 
-                    {!possibleMythicLocations.length && (
+                    {possibleMythicLocations.length === 0 && (
                         <div className="flex-box gap10 full-width">
                             <NumbersInput
                                 title="Mythic Shards per onslaught"

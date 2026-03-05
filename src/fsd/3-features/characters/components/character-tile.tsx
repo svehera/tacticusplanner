@@ -27,7 +27,7 @@ import { CharactersValueService } from '@/fsd/4-entities/unit/characters-value.s
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
 
-const CharacterTileFn = ({
+const CharacterTileFunction = ({
     character,
     disableClick,
     onCharacterClick,
@@ -132,7 +132,7 @@ const CharacterTileFn = ({
         <div
             className="flex min-w-[75px] flex-col items-center"
             style={{ opacity: tileOpacity, cursor: onCharacterClick && !disableClick ? 'pointer' : undefined }}
-            onClick={!disableClick ? handleCharacterClick : undefined}>
+            onClick={disableClick ? undefined : handleCharacterClick}>
             <StarsIcon stars={character.stars} />
             <div>
                 <Tooltip placement="top" title={renderTooltipTitle}>
@@ -172,4 +172,4 @@ const CharacterTileFn = ({
     );
 };
 
-export const CharacterTile = React.memo(CharacterTileFn);
+export const CharacterTile = React.memo(CharacterTileFunction);

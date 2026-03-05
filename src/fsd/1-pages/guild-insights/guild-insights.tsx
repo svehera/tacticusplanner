@@ -43,7 +43,7 @@ export const GuildInsights = () => {
 
     const { data, loading } = useGetGuildInsights({ members: guild.members });
 
-    if (!guild.members.length) {
+    if (guild.members.length === 0) {
         return <div>Populate guild members</div>;
     }
 

@@ -18,37 +18,51 @@ import { ISnapshotCharacter, ISnapshotMachineOfWar } from './models';
 function getFrame(isMow: boolean, rarity: number): keyof typeof tacticusIcons {
     if (isMow) {
         switch (rarity) {
-            case Rarity.Common:
+            case Rarity.Common: {
                 return 'mowCommonFrame';
-            case Rarity.Uncommon:
+            }
+            case Rarity.Uncommon: {
                 return 'mowUncommonFrame';
-            case Rarity.Rare:
+            }
+            case Rarity.Rare: {
                 return 'mowRareFrame';
-            case Rarity.Epic:
+            }
+            case Rarity.Epic: {
                 return 'mowEpicFrame';
-            case Rarity.Legendary:
+            }
+            case Rarity.Legendary: {
                 return 'mowLegendaryFrame';
-            case Rarity.Mythic:
+            }
+            case Rarity.Mythic: {
                 return 'mowMythicFrame';
-            default:
+            }
+            default: {
                 return 'mowCommonFrame';
+            }
         }
     }
     switch (rarity) {
-        case Rarity.Common:
+        case Rarity.Common: {
             return 'commonFrame';
-        case Rarity.Uncommon:
+        }
+        case Rarity.Uncommon: {
             return 'uncommonFrame';
-        case Rarity.Rare:
+        }
+        case Rarity.Rare: {
             return 'rareFrame';
-        case Rarity.Epic:
+        }
+        case Rarity.Epic: {
             return 'epicFrame';
-        case Rarity.Legendary:
+        }
+        case Rarity.Legendary: {
             return 'legendaryFrame';
-        case Rarity.Mythic:
+        }
+        case Rarity.Mythic: {
             return 'mythicFrame';
-        default:
+        }
+        default: {
             return 'commonFrame';
+        }
     }
 }
 
@@ -76,16 +90,16 @@ function getRank(rank: number): Rank {
 function formatShardCount(count: number): string {
     if (count < 0) return '0';
     if (count < 1000) return count.toString();
-    if (count < 10000) return `${Math.floor(count / 1000)}k`;
+    if (count < 10_000) return `${Math.floor(count / 1000)}k`;
     return '>10k';
 }
 
-interface AbilityBadgeProps {
+interface AbilityBadgeProperties {
     value: number;
     positionClasses: string;
 }
 
-const AbilityDisplay = ({ value, positionClasses }: AbilityBadgeProps) => {
+const AbilityDisplay = ({ value, positionClasses }: AbilityBadgeProperties) => {
     return (
         <div
             className={`absolute z-10 flex h-5 w-6 items-center justify-center rounded-full border-[1.5px] border-[#333] bg-gray-100 text-[14px] font-bold text-gray-900 shadow-sm dark:border-white dark:bg-[#272424] dark:text-white ${positionClasses} `}>
@@ -94,7 +108,7 @@ const AbilityDisplay = ({ value, positionClasses }: AbilityBadgeProps) => {
     );
 };
 
-const XpLevelDisplay = ({ value, positionClasses }: AbilityBadgeProps) => {
+const XpLevelDisplay = ({ value, positionClasses }: AbilityBadgeProperties) => {
     return (
         <div
             className={`absolute z-10 flex h-5 min-w-[28px] items-center justify-center border-[1.5px] border-[#333] bg-gray-100 px-1 text-[14px] font-bold text-gray-900 shadow-sm dark:border-white dark:bg-[#272424] dark:text-white ${positionClasses} `}>
@@ -104,9 +118,9 @@ const XpLevelDisplay = ({ value, positionClasses }: AbilityBadgeProps) => {
 };
 
 function getStars(stars: number): string {
-    if (stars <= 5) return stars.toString() + ` Star${stars !== 1 ? 's' : ''}`;
-    if (stars <= 10) return `${stars - 5} Red Star${stars - 5 !== 1 ? 's' : ''}`;
-    if (stars <= 13) return `${stars - 10} Blue Star${stars - 10 !== 1 ? 's' : ''}`;
+    if (stars <= 5) return stars.toString() + ` Star${stars === 1 ? '' : 's'}`;
+    if (stars <= 10) return `${stars - 5} Red Star${stars - 5 === 1 ? '' : 's'}`;
+    if (stars <= 13) return `${stars - 10} Blue Star${stars - 10 === 1 ? '' : 's'}`;
     return `Mythic Winged`;
 }
 
@@ -154,7 +168,7 @@ function getMowTooltip(mow: ISnapshotMachineOfWar, mowData: IMowStatic2): React.
     );
 }
 
-interface Props {
+interface Properties {
     showShards: RosterSnapshotShowVariableSettings;
     showMythicShards: RosterSnapshotShowVariableSettings;
     showXpLevel: RosterSnapshotShowVariableSettings;
@@ -165,7 +179,7 @@ interface Props {
     mowData?: IMowStatic2;
 }
 
-export const RosterSnapshotCharacter: React.FC<Props> = ({
+export const RosterSnapshotCharacter: React.FC<Properties> = ({
     showShards,
     showMythicShards,
     showXpLevel,

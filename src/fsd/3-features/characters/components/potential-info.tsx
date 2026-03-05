@@ -38,8 +38,8 @@ export const PotentialInfo: React.FC = () => {
         {
             field: 'rarity',
             width: 70,
-            cellRenderer: (params: ICellRendererParams<IRarityCap, Rarity>) => {
-                const { value } = params;
+            cellRenderer: (parameters: ICellRendererParams<IRarityCap, Rarity>) => {
+                const { value } = parameters;
 
                 return <RarityIcon rarity={value!} />;
             },
@@ -47,8 +47,8 @@ export const PotentialInfo: React.FC = () => {
         {
             field: 'rank',
             width: 70,
-            cellRenderer: (params: ICellRendererParams<IRarityCap, Rank>) => {
-                const { value } = params;
+            cellRenderer: (parameters: ICellRendererParams<IRarityCap, Rank>) => {
+                const { value } = parameters;
 
                 return <RankIcon rank={value!} />;
             },
@@ -56,8 +56,8 @@ export const PotentialInfo: React.FC = () => {
         {
             field: 'stars',
             width: 100,
-            cellRenderer: (params: ICellRendererParams<IRarityCap, RarityStars>) => {
-                const { value } = params;
+            cellRenderer: (parameters: ICellRendererParams<IRarityCap, RarityStars>) => {
+                const { value } = parameters;
 
                 return <StarsIcon stars={value!} />;
             },

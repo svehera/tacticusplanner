@@ -11,7 +11,7 @@ import { LETrack } from '@/fsd/3-features/lre/model/base.le.track';
 import { allLegendaryEvents } from './index';
 
 describe('Legendary Events Data Integrity', () => {
-    allLegendaryEvents.forEach(event => {
+    for (const event of allLegendaryEvents) {
         it(`should have uniform track battle counts and correct battle counts for tracks in "${event.name}" LE`, () => {
             expect(event).toHaveProperty('battlesCount');
             expect(event).toHaveProperty('alpha');
@@ -22,14 +22,14 @@ describe('Legendary Events Data Integrity', () => {
             expect(event.beta.battlesPoints.length).toBe(event.battlesCount);
             expect(event.gamma.battlesPoints.length).toBe(event.battlesCount);
         });
-    });
-    allLegendaryEvents.forEach(staticEvent => {
+    }
+    for (const staticEvent of allLegendaryEvents) {
         it(`Newer Events Must Define Objective Types and Targets`, () => {
             if (staticEvent.id < 10) return; // Only check events starting from Dante.
             const event = getLre(staticEvent.id, [] as ICharacter2[]) as LegendaryEventBase;
-            [event.alpha, event.beta, event.gamma].forEach(uncastTrack => {
+            for (const uncastTrack of [event.alpha, event.beta, event.gamma]) {
                 const track = uncastTrack as LETrack;
-                track.unitsRestrictions.forEach(requirement => {
+                for (const requirement of track.unitsRestrictions) {
                     expect(requirement).toHaveProperty('objectiveType');
                     expect(requirement).toHaveProperty('objectiveTarget');
                     expect(typeof requirement.objectiveType).toBe('string');
@@ -40,8 +40,8 @@ describe('Legendary Events Data Integrity', () => {
                         expect(typeof requirement.objectiveTarget).toBe('string');
                         expect((requirement.objectiveTarget ?? '').length).toBeGreaterThan(0);
                     }
-                });
-            });
+                }
+            }
         });
-    });
+    }
 });

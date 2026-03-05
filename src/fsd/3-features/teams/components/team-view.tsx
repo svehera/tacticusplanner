@@ -14,7 +14,7 @@ import { EmptyTile } from '@/fsd/3-features/characters/components/empty-tile';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MowTile } from '@/fsd/3-features/characters/components/mow-tile';
 
-interface Props {
+interface Properties {
     characters: (ICharacter2 | undefined)[];
     onClick?: (unit: IUnit) => void;
     onEmptyClick?: (isMow: boolean) => void;
@@ -22,7 +22,7 @@ interface Props {
     withMow?: boolean;
 }
 
-export const TeamView: React.FC<Props> = ({ characters, mow, withMow = false, onClick, onEmptyClick }) => {
+export const TeamView: React.FC<Properties> = ({ characters, mow, withMow = false, onClick, onEmptyClick }) => {
     const onMowClick = (relatedMow: IMow2) => {
         if (onClick) {
             onClick(relatedMow);

@@ -7,12 +7,12 @@ import { Alliance } from '@/fsd/5-shared/model/enums';
 
 import { MiscIcon } from './misc.icon';
 
-interface Props {
+interface Properties {
     components: Record<Alliance, number>;
     size?: 'small' | 'medium';
 }
 
-export const MoWComponentsTotal: React.FC<Props> = ({ components, size = 'small' }) => {
+export const MoWComponentsTotal: React.FC<Properties> = ({ components, size = 'small' }) => {
     const sizePx = size === 'small' ? 25 : 35;
     return (
         <div className="flex-box gap20">

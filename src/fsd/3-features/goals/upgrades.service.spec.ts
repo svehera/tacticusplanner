@@ -40,9 +40,7 @@ describe('UpgradesService - CE challenge unlocks based on base progress', () => 
         };
 
         // Base progress indicates node 3 reached on DGE; no DGEC progress recorded yet
-        const campaignsProgress: any = {};
-        campaignsProgress[Campaign.DGE] = 3;
-        campaignsProgress[Campaign.DGEC] = 0;
+        const campaignsProgress: any = { [Campaign.DGE]: 3, [Campaign.DGEC]: 0 };
 
         const settings: IEstimatedRanksSettings = {
             completedLocations: [],

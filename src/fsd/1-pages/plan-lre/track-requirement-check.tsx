@@ -8,14 +8,14 @@ import { LreReqImage } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
 
-interface Props {
+interface Properties {
     checked: boolean;
     restriction: ILegendaryEventTrackRequirement;
     onCheckboxChange: (selected: boolean) => void;
     progress: string;
 }
 
-export const TrackRequirementCheck: React.FC<Props> = ({ restriction, checked, progress, onCheckboxChange }) => {
+export const TrackRequirementCheck: React.FC<Properties> = ({ restriction, checked, progress, onCheckboxChange }) => {
     const handleToggle = () => {
         onCheckboxChange(!checked);
     };

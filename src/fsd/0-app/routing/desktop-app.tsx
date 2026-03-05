@@ -10,7 +10,7 @@ import { TopAppBar } from '@/fsd/2-widgets/app-bar';
 
 const DesktopApp = () => {
     const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
+    const [searchParameters] = useSearchParams();
     const preferredView = localStorage.getItem('preferredView');
     const { headerTitle } = useTitle();
 
@@ -18,7 +18,7 @@ const DesktopApp = () => {
     const { seenAppVersion } = useContext(StoreContext);
 
     useEffect(() => {
-        const redirect = searchParams.get('redirect');
+        const redirect = searchParameters.get('redirect');
 
         // Redirect to mobile view if on mobile device and preferred view is not set to desktop
         if (isMobile && !redirect && (!preferredView || preferredView === 'mobile')) {
@@ -27,11 +27,11 @@ const DesktopApp = () => {
         }
 
         if (redirect) {
-            searchParams.delete('redirect');
+            searchParameters.delete('redirect');
 
             navigate({
                 pathname: redirect,
-                search: '?' + searchParams.toString(),
+                search: '?' + searchParameters.toString(),
             });
             return;
         }

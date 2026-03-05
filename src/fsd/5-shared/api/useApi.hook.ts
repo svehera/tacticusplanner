@@ -26,8 +26,8 @@ export const useApi = <TResponse, TRequestBody = any>(
             const data = response?.data;
 
             setData(data);
-        } catch (err: any) {
-            const error = err as Error | AxiosError<IErrorResponse>;
+        } catch (error_: any) {
+            const error = error_ as Error | AxiosError<IErrorResponse>;
             // replace here with your own error handling
             if (axios.isAxiosError(error)) {
                 if (error.code === AxiosError.ERR_CANCELED) {
@@ -39,7 +39,7 @@ export const useApi = <TResponse, TRequestBody = any>(
                 setError(error.message);
             }
 
-            console.error(err);
+            console.error(error_);
         } finally {
             setLoading(false);
         }

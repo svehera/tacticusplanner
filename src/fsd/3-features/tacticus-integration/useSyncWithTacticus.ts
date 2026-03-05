@@ -25,13 +25,13 @@ function handleLegendaryEvents(
     dispatch: IDispatchContext
 ): void {
     const successfulEvents: string[] = [];
-    legendaryEvents.forEach(externalProgress => {
+    for (const externalProgress of legendaryEvents) {
         const internalEventId = LeProgressService.mapEventId(externalProgress.id);
         if (internalEventId === undefined) {
             enqueueSnackbar(`Error mapping external legendary event ${externalProgress.id}.`, {
                 variant: 'error',
             });
-            return;
+            continue;
         }
         const legendaryEvent = getLre(internalEventId, [] as ICharacter2[]);
         const model = LreService.mapProgressDtoToModel(leProgress[internalEventId], legendaryEvent);
@@ -43,17 +43,17 @@ function handleLegendaryEvents(
                 value: LreService.mapProgressModelToDto(convertedModel),
             });
             successfulEvents.push(legendaryEvent.name);
-        } catch (e) {
+        } catch (error) {
             enqueueSnackbar(
-                `Error converting external legendary event progress for event ID ${externalProgress.id}. - ${e}`,
+                `Error converting external legendary event progress for event ID ${externalProgress.id}. - ${error}`,
                 {
                     variant: 'error',
                 }
             );
-            console.error(e);
-            return;
+            console.error(error);
+            continue;
         }
-    });
+    }
 }
 
 export const useSyncWithTacticus = () => {
@@ -114,8 +114,8 @@ export const useSyncWithTacticus = () => {
             } else {
                 enqueueSnackbar('There was an error while syncing with Tacticus API', { variant: 'error' });
             }
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
             enqueueSnackbar('There was an error while syncing with Tacticus API', { variant: 'error' });
         }
     }

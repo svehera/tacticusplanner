@@ -38,13 +38,13 @@ import { WhatsNewDialog } from 'src/fsd/3-features/whats-new';
 
 import { AppBarSubMenu } from './app-bar-sub-menu';
 
-interface Props {
+interface Properties {
     headerTitle: string;
     seenAppVersion: string;
     onCloseWhatsNew: () => void;
 }
 
-export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onCloseWhatsNew }) => {
+export const TopAppBar: React.FC<Properties> = ({ headerTitle, seenAppVersion, onCloseWhatsNew }) => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
     const location = useLocation();
     const navigate = useNavigate();
@@ -59,7 +59,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
 
     const title = useMemo(() => {
         const routeSections = location.pathname.split('/');
-        const menuItemId = routeSections[routeSections.length - 1];
+        const menuItemId = routeSections.at(-1)!;
         if (Object.hasOwn(menuItemById, menuItemId)) {
             return menuItemById[menuItemId as keyof typeof menuItemById].title;
         } else if (menuItemId === 'lre') {
@@ -90,7 +90,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
     const navigationMenu = (
         <Menu
             id="basic-menu"
-            anchorEl={navigationMenuControls.anchorEl}
+            anchorEl={navigationMenuControls.anchorElement}
             open={navigationMenuControls.open}
             onClose={navigationMenuControls.handleClose}
             onClick={navigationMenuControls.handleClose}

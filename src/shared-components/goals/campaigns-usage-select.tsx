@@ -4,7 +4,7 @@ import React from 'react';
 
 import { CampaignsLocationsUsage } from 'src/models/enums';
 
-interface Props {
+interface Properties {
     value?: number;
     valueChange: (value: number) => void;
     disabled: boolean;
@@ -12,7 +12,13 @@ interface Props {
     mythic: boolean;
 }
 
-export const CampaignsUsageSelect: React.FC<Props> = ({ value, valueChange, disabled, allowIgnore = true, mythic }) => {
+export const CampaignsUsageSelect: React.FC<Properties> = ({
+    value,
+    valueChange,
+    disabled,
+    allowIgnore = true,
+    mythic,
+}) => {
     return (
         <FormControl fullWidth disabled={disabled}>
             <InputLabel id="priority-label">Campaigns Usage</InputLabel>

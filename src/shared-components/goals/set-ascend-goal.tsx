@@ -12,7 +12,7 @@ import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 
-interface Props {
+interface Properties {
     currentRarity: Rarity;
     targetRarity: Rarity;
     currentStars: RarityStars;
@@ -28,7 +28,7 @@ interface Props {
     onChange: (key: keyof IPersonalGoal, value: number) => void;
 }
 
-export const SetAscendGoal: React.FC<Props> = ({
+export const SetAscendGoal: React.FC<Properties> = ({
     targetStars,
     targetRarity,
     currentStars,
@@ -86,11 +86,11 @@ export const SetAscendGoal: React.FC<Props> = ({
 
             {(currentRarity < Rarity.Legendary || currentStars < RarityStars.OneBlueStar) && (
                 <>
-                    {possibleLocations.length !== 0 && (
+                    {possibleLocations.length > 0 && (
                         <>
                             <div className="flex items-center gap-3">
                                 <CampaignsUsageSelect
-                                    disabled={!unlockedLocations.length}
+                                    disabled={unlockedLocations.length === 0}
                                     value={campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
                                     valueChange={value => onChange('campaignsUsage', value)}
                                     mythic={false}
@@ -122,11 +122,11 @@ export const SetAscendGoal: React.FC<Props> = ({
 
             {targetRarity >= Rarity.Mythic && (
                 <>
-                    {!!possibleMythicLocations.length && (
+                    {possibleMythicLocations.length > 0 && (
                         <div className="flex items-center gap-3">
                             <div className="w-1/2">
                                 <CampaignsUsageSelect
-                                    disabled={!unlockedMythicLocations.length}
+                                    disabled={unlockedMythicLocations.length === 0}
                                     value={mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
                                     valueChange={value => onChange('mythicCampaignsUsage', value)}
                                     mythic={true}

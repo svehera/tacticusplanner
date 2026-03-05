@@ -60,16 +60,21 @@ export const lreCharacters: IMenuOption[] = [
 
 export const getLre = (character: LreCharacter, characters: ICharacter2[] = []): ILegendaryEvent => {
     switch (character) {
-        case LreCharacter.kharn:
+        case LreCharacter.kharn: {
             return new KharnLegendaryEvent(characters);
-        case LreCharacter.mephiston:
+        }
+        case LreCharacter.mephiston: {
             return new MephistonLegendaryEvent(characters);
-        case LreCharacter.vitruvius:
+        }
+        case LreCharacter.vitruvius: {
             return new VitruviusLegendaryEvent(characters);
-        case LreCharacter.patermine:
+        }
+        case LreCharacter.patermine: {
             return new PatermineLegendaryEvent(characters);
-        case LreCharacter.dante:
+        }
+        case LreCharacter.dante: {
             return new DanteLegendaryEvent(characters);
+        }
     }
 };
 
@@ -82,12 +87,14 @@ export function getLreGuideData(
 } {
     const character = subModes[0] as LreCharacter;
     const section = subModes[1].replace(character + '_', '') as 'alpha' | 'beta' | 'gamma';
-    const restrictionIndexes = subModes
-        .slice(2)
-        .map(x => x.replace(character + '_' + section + '_', ''))
-        .map(Number);
+    const restrictionIndexes = new Set(
+        subModes
+            .slice(2)
+            .map(x => x.replace(character + '_' + section + '_', ''))
+            .map(Number)
+    );
     const lre = getLre(character, units.filter(isCharacter));
-    const selectedSections = lre[section].unitsRestrictions.filter((_, index) => restrictionIndexes.includes(index));
+    const selectedSections = lre[section].unitsRestrictions.filter((_, index) => restrictionIndexes.has(index));
 
     const sections = selectedSections.map(x => x.name).join(' & ');
     return {

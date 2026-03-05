@@ -4,12 +4,12 @@ import { isMobile } from 'react-device-detect';
 
 import { ILreViewSettings, IViewOption } from '@/fsd/3-features/view-settings';
 
-interface Props {
+interface Properties {
     lreViewSettings: ILreViewSettings;
     save: (setting: keyof ILreViewSettings, value: boolean) => void;
 }
 
-export const LreSectionsSettings: React.FC<Props> = ({ lreViewSettings, save }) => {
+export const LreSectionsSettings: React.FC<Properties> = ({ lreViewSettings, save }) => {
     const [value, setValue] = React.useState<keyof ILreViewSettings>('showAlpha');
 
     const lreSectionOptions: IViewOption<ILreViewSettings>[] = [
@@ -69,9 +69,7 @@ export const LreSectionsSettings: React.FC<Props> = ({ lreViewSettings, save }) 
         }
     }, []);
 
-    return !isMobile ? (
-        <div className="flex-box gap5 wrap">{lreSectionOptions.map(renderOption)}</div>
-    ) : (
+    return isMobile ? (
         <FormControl className="pl-4">
             <RadioGroup
                 row
@@ -84,5 +82,7 @@ export const LreSectionsSettings: React.FC<Props> = ({ lreViewSettings, save }) 
                 <FormControlLabel value="showGamma" control={<Radio />} label="Gamma" />
             </RadioGroup>
         </FormControl>
+    ) : (
+        <div className="flex-box gap5 wrap">{lreSectionOptions.map(renderOption)}</div>
     );
 };

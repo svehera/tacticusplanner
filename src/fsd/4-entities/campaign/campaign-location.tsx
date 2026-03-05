@@ -4,13 +4,13 @@ import { CampaignImage } from './campaign.icon';
 import { Campaign } from './enums';
 import { ICampaignBattleComposed } from './model';
 
-interface Props {
+interface Properties {
     location: ICampaignBattleComposed;
     unlocked: boolean;
     short?: boolean;
 }
 
-export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = false }) => {
+export const CampaignLocation: React.FC<Properties> = ({ location, unlocked, short = false }) => {
     // Campaigns events has optional "Challenge" nodes 3B, 13B and 25B
     // this function converts linear progression to proper labels
     const locationNumber = useMemo(() => {

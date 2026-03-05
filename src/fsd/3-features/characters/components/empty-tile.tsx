@@ -9,12 +9,12 @@ import { MiscIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
-interface Props {
+interface Properties {
     onClick?: () => void;
     isMow?: boolean;
 }
 
-export const EmptyTile: React.FC<Props> = ({ onClick, isMow = false }) => {
+export const EmptyTile: React.FC<Properties> = ({ onClick, isMow = false }) => {
     return (
         <div
             className="flex min-w-[75px] flex-col items-center"

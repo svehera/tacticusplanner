@@ -10,25 +10,25 @@ import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { IMowUpgrade } from './lookup.models';
 
-interface Props {
+interface Properties {
     rows: IMowUpgrade[];
 }
 
-export const MowUpgradesTable: React.FC<Props> = ({ rows }) => {
+export const MowUpgradesTable: React.FC<Properties> = ({ rows }) => {
     const [columnDefs] = useState<Array<ColDef<IMowUpgrade>>>([
         {
             headerName: '#',
             colId: 'rowNumber',
-            valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+            valueGetter: parameters => (parameters.node?.rowIndex ?? 0) + 1,
             maxWidth: 50,
         },
         {
             headerName: 'Upgrade',
-            valueGetter: params => {
-                return params.data?.id ?? '';
+            valueGetter: parameters => {
+                return parameters.data?.id ?? '';
             },
-            cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {
-                const { data } = params;
+            cellRenderer: (parameters: ICellRendererParams<IMowUpgrade>) => {
+                const { data } = parameters;
                 if (data) {
                     return (
                         <UpgradeImage
@@ -50,20 +50,20 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows }) => {
         {
             field: 'rarity',
             maxWidth: 70,
-            cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {
-                const { data } = params;
+            cellRenderer: (parameters: ICellRendererParams<IMowUpgrade>) => {
+                const { data } = parameters;
                 if (data) {
                     return <RarityIcon rarity={data.rarity} />;
                 }
             },
-            cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
+            cellClass: parameters => Rarity[parameters.data?.rarity ?? 0].toLowerCase(),
         },
         {
             headerName: 'Locations',
             minWidth: 300,
             flex: 1,
-            cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {
-                const { data } = params;
+            cellRenderer: (parameters: ICellRendererParams<IMowUpgrade>) => {
+                const { data } = parameters;
                 if (data) {
                     return (
                         <div className="flex-box gap5 wrap">

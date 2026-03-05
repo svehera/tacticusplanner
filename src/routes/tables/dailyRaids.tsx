@@ -56,11 +56,13 @@ export const DailyRaids = () => {
     const hasSync = !!userInfo.tacticusApiKey;
 
     const location = useLocation();
-    const [searchParams] = useSearchParams();
-    const [charSnowprintId, setCharSnowprintId] = React.useState<string | null>(searchParams.get('charSnowprintId'));
+    const [searchParameters] = useSearchParams();
+    const [charSnowprintId, setCharSnowprintId] = React.useState<string | null>(
+        searchParameters.get('charSnowprintId')
+    );
 
     useEffect(() => {
-        setCharSnowprintId(searchParams.get('charSnowprintId'));
+        setCharSnowprintId(searchParameters.get('charSnowprintId'));
     }, [location]);
 
     const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation | null) => {

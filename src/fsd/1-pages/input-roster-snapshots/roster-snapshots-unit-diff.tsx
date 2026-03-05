@@ -5,7 +5,7 @@ import { ISnapshotCharacter, ISnapshotMachineOfWar, ISnapshotUnitDiff } from './
 import { RosterSnapshotsUnitDiffDetailed } from './roster-snapshots-unit-diff-detailed';
 import { RosterSnapshotsUnitDiffSideBySide } from './roster-snapshots-unit-diff-side-by-side';
 
-interface Props {
+interface Properties {
     showShards: RosterSnapshotShowVariableSettings;
     showMythicShards: RosterSnapshotShowVariableSettings;
     showXpLevel: RosterSnapshotShowVariableSettings;
@@ -15,7 +15,7 @@ interface Props {
     diff: ISnapshotUnitDiff;
 }
 
-export const RosterSnapshotsUnitDiff: React.FC<Props> = ({
+export const RosterSnapshotsUnitDiff: React.FC<Properties> = ({
     showShards,
     showMythicShards,
     showXpLevel,
@@ -23,28 +23,24 @@ export const RosterSnapshotsUnitDiff: React.FC<Props> = ({
     char,
     mow,
     diff,
-}: Props) => {
-    if (diffStyle === RosterSnapshotDiffStyle.SideBySide) {
-        return (
-            <RosterSnapshotsUnitDiffSideBySide
-                showShards={showShards}
-                showMythicShards={showMythicShards}
-                showXpLevel={showXpLevel}
-                char={char}
-                mow={mow}
-                diff={diff}
-            />
-        );
-    } else {
-        return (
-            <RosterSnapshotsUnitDiffDetailed
-                showShards={showShards}
-                showMythicShards={showMythicShards}
-                showXpLevel={showXpLevel}
-                char={char}
-                mow={mow}
-                diff={diff}
-            />
-        );
-    }
+}: Properties) => {
+    return diffStyle === RosterSnapshotDiffStyle.SideBySide ? (
+        <RosterSnapshotsUnitDiffSideBySide
+            showShards={showShards}
+            showMythicShards={showMythicShards}
+            showXpLevel={showXpLevel}
+            char={char}
+            mow={mow}
+            diff={diff}
+        />
+    ) : (
+        <RosterSnapshotsUnitDiffDetailed
+            showShards={showShards}
+            showMythicShards={showMythicShards}
+            showXpLevel={showXpLevel}
+            char={char}
+            mow={mow}
+            diff={diff}
+        />
+    );
 };

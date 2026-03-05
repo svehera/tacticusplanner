@@ -8,13 +8,13 @@ import React, { useState } from 'react';
 
 import { ViewSettings } from '@/fsd/3-features/view-settings';
 
-interface Props {
+interface Properties {
     nameFilter: string;
     setNameFilter: (name: string) => void;
     resetUpgrades: () => void;
 }
 
-const InventoryControlsFn: React.FC<Props> = ({ resetUpgrades, nameFilter, setNameFilter }) => {
+const InventoryControlsFunction: React.FC<Properties> = ({ resetUpgrades, nameFilter, setNameFilter }) => {
     const [nameFilterRaw, setNameFilterRaw] = useState<string>('');
 
     return (
@@ -54,4 +54,4 @@ const InventoryControlsFn: React.FC<Props> = ({ resetUpgrades, nameFilter, setNa
         </div>
     );
 };
-export const InventoryControls = React.memo(InventoryControlsFn);
+export const InventoryControls = React.memo(InventoryControlsFunction);

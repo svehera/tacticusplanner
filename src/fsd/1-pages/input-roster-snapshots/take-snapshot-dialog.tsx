@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Tooltip } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-interface TakeSnapshotDialogProps {
+interface TakeSnapshotDialogProperties {
     snapshotNames: string[];
     currentTimeMillis: number;
     isOpen: boolean;
@@ -9,13 +9,13 @@ interface TakeSnapshotDialogProps {
     onCancel: () => void;
 }
 
-export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProps> = ({
+export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProperties> = ({
     snapshotNames,
     currentTimeMillis,
     isOpen,
     onSave,
     onCancel,
-}: TakeSnapshotDialogProps) => {
+}: TakeSnapshotDialogProperties) => {
     const currentTimestamp: number = currentTimeMillis;
     const [formattedTime, setFormattedTime] = useState<string>(new Date(currentTimestamp).toLocaleString());
     const [snapshotName, setSnapshotName] = useState<string>('');
@@ -54,7 +54,7 @@ export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProps> = ({
                 <Tooltip
                     placement="top"
                     title={
-                        snapshotName.trim().length < 1
+                        snapshotName.trim().length === 0
                             ? 'Snapshot name cannot be empty.'
                             : snapshotNames.includes(snapshotName.trim())
                               ? 'Snapshot name must be unique.'
@@ -65,7 +65,7 @@ export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProps> = ({
                             onClick={() => onSave(snapshotName)}
                             color="primary"
                             variant="contained"
-                            disabled={snapshotName.trim().length < 1 || snapshotNames.includes(snapshotName.trim())}>
+                            disabled={snapshotName.trim().length === 0 || snapshotNames.includes(snapshotName.trim())}>
                             Save Snapshot
                         </Button>
                     </div>

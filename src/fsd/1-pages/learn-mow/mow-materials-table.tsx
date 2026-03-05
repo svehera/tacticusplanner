@@ -9,11 +9,11 @@ import { BadgeImage, ComponentImage, ForgeBadgeImage } from '@/fsd/5-shared/ui/i
 import { IMowLevelMaterials } from '@/fsd/4-entities/mow';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
-interface Props {
+interface Properties {
     rows: IMowLevelMaterials[];
 }
 
-export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
+export const MowMaterialsTable: React.FC<Properties> = ({ rows }) => {
     const columnDefs = useMemo<Array<ColDef<IMowLevelMaterials>>>(() => {
         return [
             {
@@ -22,8 +22,8 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
             },
             {
                 field: 'badges',
-                cellRenderer: (params: ICellRendererParams<IMowLevelMaterials>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<IMowLevelMaterials>) => {
+                    const { data } = parameters;
                     if (data) {
                         return (
                             <div className="flex-box gap-[3px]">
@@ -37,8 +37,8 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
             },
             {
                 field: 'components',
-                cellRenderer: (params: ICellRendererParams<IMowLevelMaterials>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<IMowLevelMaterials>) => {
+                    const { data } = parameters;
                     if (data) {
                         return (
                             <div className="flex-box gap-[3px]">
@@ -52,8 +52,8 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
             },
             {
                 field: 'forgeBadges',
-                cellRenderer: (params: ICellRendererParams<IMowLevelMaterials>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<IMowLevelMaterials>) => {
+                    const { data } = parameters;
                     if (data) {
                         return data.forgeBadges > 0 ? (
                             <div className="flex-box gap-[3px]">
@@ -69,12 +69,12 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
             },
             {
                 field: 'primaryUpgrades',
-                valueFormatter: params => {
-                    const { data } = params;
+                valueFormatter: parameters => {
+                    const { data } = parameters;
                     return data?.primaryUpgrades.map(x => x.id).join(', ') ?? '';
                 },
-                cellRenderer: (params: ICellRendererParams<IMowLevelMaterials>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<IMowLevelMaterials>) => {
+                    const { data } = parameters;
                     if (data) {
                         return (
                             <div className="flex-box gap-[3px]">
@@ -95,20 +95,20 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
             },
             {
                 field: 'gold',
-                cellRenderer: (params: ICellRendererParams<IMowLevelMaterials>) => {
-                    const { value } = params;
+                cellRenderer: (parameters: ICellRendererParams<IMowLevelMaterials>) => {
+                    const { value } = parameters;
                     return numberToThousandsString(value);
                 },
                 width: 60,
             },
             {
                 field: 'secondaryUpgrades',
-                valueFormatter: params => {
-                    const { data } = params;
+                valueFormatter: parameters => {
+                    const { data } = parameters;
                     return data?.secondaryUpgrades.map(x => x.id).join(', ') ?? '';
                 },
-                cellRenderer: (params: ICellRendererParams<IMowLevelMaterials>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<IMowLevelMaterials>) => {
+                    const { data } = parameters;
                     if (data) {
                         return (
                             <div className="flex-box gap-[3px]">

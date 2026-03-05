@@ -1,5 +1,4 @@
-﻿import { getEnumValues, getCompletionRateColor } from '@/fsd/5-shared/lib';
-import { Rarity, Rank } from '@/fsd/5-shared/model';
+﻿import { Rarity, Rank } from '@/fsd/5-shared/model';
 
 import { rankToLevel } from '../models/constants';
 import { ICharacter2 } from '../models/interfaces';
@@ -40,16 +39,21 @@ function getDaySuffix(day: number) {
         return 'th';
     }
     switch (day % 10) {
-        case 1:
+        case 1: {
             return 'st';
-        case 2:
+        }
+        case 2: {
             return 'nd';
-        case 3:
+        }
+        case 3: {
             return 'rd';
-        default:
+        }
+        default: {
             return 'th';
+        }
     }
 }
 
 // Re-export from shared lib
-export { getEnumValues, getCompletionRateColor };
+
+export { getEnumValues, getCompletionRateColor } from '@/fsd/5-shared/lib';

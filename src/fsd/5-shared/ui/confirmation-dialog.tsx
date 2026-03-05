@@ -6,7 +6,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import React from 'react';
 
-interface ConfirmationDialogProps {
+interface ConfirmationDialogProperties {
     open: boolean;
     title: string;
     message: string;
@@ -16,7 +16,7 @@ interface ConfirmationDialogProps {
     cancelText?: string;
 }
 
-export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
+export const ConfirmationDialog: React.FC<ConfirmationDialogProperties> = ({
     open,
     title,
     message,

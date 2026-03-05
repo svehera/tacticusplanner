@@ -5,7 +5,7 @@ import { isMobile } from 'react-device-detect';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuildMember } from 'src/models/interfaces';
 
-interface Props {
+interface Properties {
     index: number;
     member: IGuildMember;
     onFieldChange: (field: keyof IGuildMember, value: string) => void;
@@ -23,9 +23,9 @@ const MEMBER_FIELDS: FieldConfig[] = [
     { field: 'userId', label: 'In-Game UserId' },
 ] as const;
 
-export const GuildMemberInput: React.FC<Props> = ({ index, member, onFieldChange }) => {
+export const GuildMemberInput: React.FC<Properties> = ({ index, member, onFieldChange }) => {
     return (
-        <div className="flex gap-3" style={{ minWidth: !isMobile ? 450 : 'unset' }}>
+        <div className="flex gap-3" style={{ minWidth: isMobile ? 'unset' : 450 }}>
             <span className="min-w-[25px]">{index + 1}.</span>
             {MEMBER_FIELDS.map(({ field, label }) => (
                 <TextField

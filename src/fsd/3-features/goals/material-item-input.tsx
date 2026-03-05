@@ -13,7 +13,7 @@ import { IUpgradeRaid, IItemRaidLocation } from '@/fsd/3-features/goals/goals.mo
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RaidItemInput } from '@/fsd/3-features/goals/raid-item-input';
 
-interface Props {
+interface Properties {
     acquiredCount: number;
     upgradeRaid: IUpgradeRaid;
     addCount: (count: number, location: IItemRaidLocation) => void;
@@ -21,7 +21,13 @@ interface Props {
     decrement: () => void;
 }
 
-export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount, addCount, increment, decrement }) => {
+export const MaterialItemInput: React.FC<Properties> = ({
+    upgradeRaid,
+    acquiredCount,
+    addCount,
+    increment,
+    decrement,
+}) => {
     const isAllRaidsCompleted = upgradeRaid.raidLocations.every(location => location.isCompleted);
 
     return (

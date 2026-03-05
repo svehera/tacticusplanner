@@ -1,8 +1,8 @@
 import { CheckIcon, MinusIcon } from 'lucide-react';
 import React from 'react';
 import type {
-    CheckboxGroupProps as CheckboxGroupPrimitiveProps,
-    CheckboxProps as CheckboxPrimitiveProps,
+    CheckboxGroupProps as CheckboxGroupPrimitiveProperties,
+    CheckboxProps as CheckboxPrimitiveProperties,
     ValidationResult,
 } from 'react-aria-components';
 import {
@@ -14,23 +14,25 @@ import { tv } from 'tailwind-variants';
 
 import { cn } from '@/fsd/5-shared/lib';
 
-import { composeTailwindRenderProps } from '../primitive';
+import { composeTailwindRenderProps as composeTailwindRenderProperties } from '../primitive';
 
 import { Description, FieldError, Label } from './field';
 
-interface CheckboxGroupProps extends CheckboxGroupPrimitiveProps {
+interface CheckboxGroupProperties extends CheckboxGroupPrimitiveProperties {
     label?: string;
     description?: string;
     errorMessage?: string | ((validation: ValidationResult) => string);
 }
 
-const CheckboxGroup = ({ className, ...props }: CheckboxGroupProps) => {
+const CheckboxGroup = ({ className, ...properties }: CheckboxGroupProperties) => {
     return (
-        <CheckboxGroupPrimitive {...props} className={composeTailwindRenderProps(className, 'flex flex-col gap-y-2')}>
-            {props.label && <Label>{props.label}</Label>}
-            {props.children as React.ReactNode}
-            {props.description && <Description className="block">{props.description}</Description>}
-            <FieldError>{props.errorMessage}</FieldError>
+        <CheckboxGroupPrimitive
+            {...properties}
+            className={composeTailwindRenderProperties(className, 'flex flex-col gap-y-2')}>
+            {properties.label && <Label>{properties.label}</Label>}
+            {properties.children as React.ReactNode}
+            {properties.description && <Description className="block">{properties.description}</Description>}
+            <FieldError>{properties.errorMessage}</FieldError>
         </CheckboxGroupPrimitive>
     );
 };
@@ -66,23 +68,23 @@ const boxStyles = tv({
     },
 });
 
-interface CheckboxProps extends CheckboxPrimitiveProps {
+interface CheckboxProperties extends CheckboxPrimitiveProperties {
     description?: string;
     label?: string;
 }
 
-const Checkbox = ({ className, ...props }: CheckboxProps) => {
+const Checkbox = ({ className, ...properties }: CheckboxProperties) => {
     return (
         <CheckboxPrimitive
-            {...props}
-            className={composeRenderProps(className, (className, renderProps) =>
-                checkboxStyles({ ...renderProps, className })
+            {...properties}
+            className={composeRenderProps(className, (className, renderProperties) =>
+                checkboxStyles({ ...renderProperties, className })
             )}>
-            {({ isSelected, isIndeterminate, ...renderProps }) => (
-                <div className={cn('flex gap-x-2', props.description ? 'items-start' : 'items-center')}>
+            {({ isSelected, isIndeterminate, ...renderProperties }) => (
+                <div className={cn('flex gap-x-2', properties.description ? 'items-start' : 'items-center')}>
                     <div
                         className={boxStyles({
-                            ...renderProps,
+                            ...renderProperties,
                             isSelected: isSelected || isIndeterminate,
                         })}>
                         {isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null}
@@ -90,12 +92,12 @@ const Checkbox = ({ className, ...props }: CheckboxProps) => {
 
                     <div className="flex flex-col gap-1">
                         <>
-                            {props.label ? (
-                                <Label className={cn(props.description && 'text-sm/4')}>{props.label}</Label>
+                            {properties.label ? (
+                                <Label className={cn(properties.description && 'text-sm/4')}>{properties.label}</Label>
                             ) : (
-                                (props.children as React.ReactNode)
+                                (properties.children as React.ReactNode)
                             )}
-                            {props.description && <Description>{props.description}</Description>}
+                            {properties.description && <Description>{properties.description}</Description>}
                         </>
                     </div>
                 </div>

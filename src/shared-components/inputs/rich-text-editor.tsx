@@ -3,13 +3,13 @@ import ReactQuill from 'react-quill-new';
 
 import 'react-quill-new/dist/quill.snow.css';
 
-interface Props {
+interface Properties {
     htmlValue: string;
     placeholder?: string;
     onChange: (value: string) => void;
 }
 
-export const RichTextEditor: React.FC<Props> = ({ htmlValue, onChange, placeholder }) => {
+export const RichTextEditor: React.FC<Properties> = ({ htmlValue, onChange, placeholder }) => {
     const modules = {
         toolbar: [
             ['link'],

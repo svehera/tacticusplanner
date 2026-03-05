@@ -13,12 +13,12 @@ import { WhatsNewImage } from './whats-new-image';
 import { releaseNotes } from './whats-new.data';
 import { IReleaseNote, IVersionReleaseNotes } from './whats-new.model';
 
-interface Props {
+interface Properties {
     isOpen: boolean;
     onClose: () => void;
 }
 
-export const WhatsNewDialog: React.FC<Props> = ({ isOpen, onClose }) => {
+export const WhatsNewDialog: React.FC<Properties> = ({ isOpen, onClose }) => {
     const { t } = useTranslation();
     return (
         <Dialog open={isOpen} fullWidth>
@@ -61,7 +61,7 @@ const VersionReleaseNotes = ({ releaseNotes }: { releaseNotes: IVersionReleaseNo
                     date: releaseNotes.date,
                 })}
             </h2>
-            {!releaseNotes.new.length ? undefined : (
+            {releaseNotes.new.length === 0 ? undefined : (
                 <ReleaseNotes
                     subtitle={t('whatsNew.sections.new')}
                     version={releaseNotes.version}
@@ -69,7 +69,7 @@ const VersionReleaseNotes = ({ releaseNotes }: { releaseNotes: IVersionReleaseNo
                 />
             )}
 
-            {!releaseNotes.minor.length ? undefined : (
+            {releaseNotes.minor.length === 0 ? undefined : (
                 <ReleaseNotes
                     subtitle={t('whatsNew.sections.minor')}
                     version={releaseNotes.version}
@@ -77,7 +77,7 @@ const VersionReleaseNotes = ({ releaseNotes }: { releaseNotes: IVersionReleaseNo
                 />
             )}
 
-            {!releaseNotes.bugFixes.length ? undefined : (
+            {releaseNotes.bugFixes.length === 0 ? undefined : (
                 <ReleaseNotes
                     subtitle={t('whatsNew.sections.bugFixes')}
                     version={releaseNotes.version}
@@ -115,7 +115,7 @@ const ReleaseNotes = ({
                                 (<Link to={releaseNote.mobileRoute}>{t('whatsNew.link')}</Link>)
                             </span>
                         ) : undefined}
-                        {!releaseNote.subPoints?.length ? undefined : (
+                        {releaseNote.subPoints?.length ? (
                             <ul className="pl-5">
                                 {releaseNote.subPoints.map((subPoint, subPointIndex) => (
                                     <li key={subPointIndex} className="pb-2">
@@ -124,16 +124,16 @@ const ReleaseNotes = ({
                                     </li>
                                 ))}
                             </ul>
-                        )}
-                        {!releaseNote.images?.length
-                            ? undefined
-                            : releaseNote.images.map((image, imageIndex) => (
+                        ) : undefined}
+                        {releaseNote.images?.length
+                            ? releaseNote.images.map((image, imageIndex) => (
                                   <WhatsNewImage
                                       key={imageIndex}
                                       path={version + '/' + image.path}
                                       imageSize={image.size}
                                   />
-                              ))}
+                              ))
+                            : undefined}
                     </li>
                 ))}
             </ul>

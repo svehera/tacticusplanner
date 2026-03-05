@@ -28,7 +28,7 @@ import { Inventory } from '@/fsd/1-pages/input-inventory';
 
 import { RaidUpgradeMaterialCard } from './raid-upgrade-material-card';
 
-interface Props {
+interface Properties {
     estimatedShards: IEstimatedShards;
     estimatedRanks: IEstimatedUpgrades;
     scrollToCharSnowprintId?: string;
@@ -37,10 +37,10 @@ interface Props {
     updateInventoryAny: () => void;
 }
 
-type RefElem = HTMLDivElement | null;
-type RefMap = { [key: string]: RefElem };
+type ReferenceElement = HTMLDivElement | null;
+type ReferenceMap = { [key: string]: ReferenceElement };
 
-export const RaidsPlan: React.FC<Props> = ({
+export const RaidsPlan: React.FC<Properties> = ({
     estimatedShards,
     estimatedRanks,
     scrollToCharSnowprintId,
@@ -60,10 +60,10 @@ export const RaidsPlan: React.FC<Props> = ({
     const [grid2Loaded, setGrid2Loaded] = useState<boolean>(false);
     const [grid3Loaded, setGrid3Loaded] = useState<boolean>(false);
 
-    const itemRefs = useRef<RefMap>({});
-    const setCardRef = useCallback(
-        (id: number) => (element: RefElem) => {
-            itemRefs.current[id] = element;
+    const itemReferences = useRef<ReferenceMap>({});
+    const setCardReference = useCallback(
+        (id: number) => (element: ReferenceElement) => {
+            itemReferences.current[id] = element;
         },
         []
     );
@@ -77,18 +77,18 @@ export const RaidsPlan: React.FC<Props> = ({
     const characterToMaterialMap: CharacterToMaterialIndexMap = useMemo(() => {
         const characterIndexMap: CharacterToMaterialIndexMap = {};
 
-        estimatedRanks.inProgressMaterials.forEach((material, materialIndex) => {
+        for (const [materialIndex, material] of estimatedRanks.inProgressMaterials.entries()) {
             // Iterate over the related characters for the current material
-            material.relatedCharacters.forEach(fullName => {
+            for (const fullName of material.relatedCharacters) {
                 const unit = CharactersService.getUnit(fullName);
-                if (!unit || !unit.snowprintId) return;
+                if (!unit || !unit.snowprintId) continue;
                 // Check if this snowprintId has ALREADY been recorded.
                 // If it hasn't, this is the FIRST time we've seen it, so record the index.
                 if (!(unit.snowprintId in characterIndexMap)) {
                     characterIndexMap[unit.snowprintId] = materialIndex;
                 }
-            });
-        });
+            }
+        }
 
         return characterIndexMap;
     }, [estimatedRanks.inProgressMaterials]);
@@ -96,7 +96,7 @@ export const RaidsPlan: React.FC<Props> = ({
     const scrollToTarget = useCallback(() => {
         if (scrollToCharSnowprintId === undefined) return;
         if (!Object.keys(characterToMaterialMap).includes(scrollToCharSnowprintId)) return;
-        const targetElement = itemRefs.current[characterToMaterialMap[scrollToCharSnowprintId]];
+        const targetElement = itemReferences.current[characterToMaterialMap[scrollToCharSnowprintId]];
         if (targetElement) {
             // 3. Call the native DOM method: scrollIntoView
             targetElement.scrollIntoView({
@@ -104,7 +104,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 block: 'center', // Aligns the element to the vertical center of the container
             });
         }
-    }, [itemRefs, scrollToCharSnowprintId]);
+    }, [itemReferences, scrollToCharSnowprintId]);
 
     useEffect(() => {
         if (scrollToCharSnowprintId) {
@@ -181,7 +181,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 </FlexBox>
             </AccordionSummary>
             <AccordionDetails>
-                {!!estimatedRanks.relatedUpgrades.length && (
+                {estimatedRanks.relatedUpgrades.length > 0 && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
@@ -194,7 +194,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         </AccordionDetails>
                     </Accordion>
                 )}
-                {!!estimatedRanks.inProgressMaterials.length && (
+                {estimatedRanks.inProgressMaterials.length > 0 && (
                     <Accordion
                         defaultExpanded={scrollToCharSnowprintId !== undefined}
                         TransitionProps={{ unmountOnExit: !grid1Loaded }}>
@@ -242,7 +242,10 @@ export const RaidsPlan: React.FC<Props> = ({
                                     <div className="flex flex-wrap gap-x-4 gap-y-4">
                                         {estimatedRanks.inProgressMaterials.length > 0 &&
                                             estimatedRanks.inProgressMaterials.map((material, index) => (
-                                                <div className="item-raids w-64" key={index} ref={setCardRef(index)}>
+                                                <div
+                                                    className="item-raids w-64"
+                                                    key={index}
+                                                    ref={setCardReference(index)}>
                                                     <RaidUpgradeMaterialCard
                                                         index={index}
                                                         upgradeMaterialSnowprintId={material.id}
@@ -259,7 +262,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         </AccordionDetails>
                     </Accordion>
                 )}
-                {!!estimatedRanks.finishedMaterials.length && (
+                {estimatedRanks.finishedMaterials.length > 0 && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
@@ -300,7 +303,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         </AccordionDetails>
                     </Accordion>
                 )}
-                {!!estimatedRanks.blockedMaterials.length && (
+                {estimatedRanks.blockedMaterials.length > 0 && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid2Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <AccessibleTooltip
@@ -354,7 +357,7 @@ export const RaidsPlan: React.FC<Props> = ({
                     </Accordion>
                 )}
 
-                {!!estimatedShards.shardsRaids.length && (
+                {estimatedShards.shardsRaids.length > 0 && (
                     <Accordion>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <FlexBox className="flex-col items-start">
@@ -388,7 +391,7 @@ export const RaidsPlan: React.FC<Props> = ({
                     </Accordion>
                 )}
 
-                {!!estimatedRanks.upgradesRaids.length && (
+                {estimatedRanks.upgradesRaids.length > 0 && (
                     <Accordion TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <FlexBox className="flex-col items-start">

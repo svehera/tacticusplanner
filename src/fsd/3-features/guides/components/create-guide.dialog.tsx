@@ -36,13 +36,13 @@ import { gameModesForGuides, gwSubModes, taSubModes } from '@/fsd/3-features/tea
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 
-interface Props {
+interface Properties {
     onClose: () => void;
     addTeam: (team: ICreateGuide) => void;
     units: IUnit[];
 }
 
-export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) => {
+export const CreateGuideDialog: React.FC<Properties> = ({ onClose, units, addTeam }) => {
     const lastStep = 3;
     const { t } = useTranslation();
     const [gameMode, setGameMode] = useState<GameMode>(GameMode.guildRaids);
@@ -92,7 +92,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
         setIsOpenSelectDialog(false);
     };
 
-    const updateSelectedMod = (values: string[]) => {
+    const updateSelectedModule = (values: string[]) => {
         if (values[0] !== gameMode) {
             setGameMode(values[0] as GameMode);
             setSelectedSubModes([]);
@@ -115,24 +115,24 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
             });
             // onClose();
         }
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
+        setActiveStep(previousActiveStep => previousActiveStep + 1);
     };
 
     const handleBack = () => {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
+        setActiveStep(previousActiveStep => previousActiveStep - 1);
     };
 
     const disableContinue = (function () {
         if (activeStep === 1) {
-            return !selectedSubModes.length || unitsFiltered.length < 5;
+            return selectedSubModes.length === 0 || unitsFiltered.length < 5;
         }
 
         if (activeStep === 2) {
-            if (!teamName.length || !intro.length || !guide.length) {
+            if (teamName.length === 0 || intro.length === 0 || guide.length === 0) {
                 return true;
             }
 
-            if (teamSlots.some(x => x.slotType !== SlotType.none && !x.unitIds.length)) {
+            if (teamSlots.some(x => x.slotType !== SlotType.none && x.unitIds.length === 0)) {
                 return true;
             }
         }
@@ -141,15 +141,15 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
     })();
 
     useEffect(() => {
-        setTeamSlots(prev => {
+        setTeamSlots(previous => {
             const includeMowSlot = [GameMode.guildRaids, GameMode.guildWar, GameMode.tournamentArena].includes(
                 gameMode
             );
-            const hasMowSlot = prev.some(slot => slot.unitType === UnitType.mow);
+            const hasMowSlot = previous.some(slot => slot.unitType === UnitType.mow);
 
             if (includeMowSlot && !hasMowSlot) {
                 return [
-                    ...prev,
+                    ...previous,
                     {
                         slotNumber: 6,
                         unitType: UnitType.mow,
@@ -160,10 +160,10 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
             }
 
             if (!includeMowSlot && hasMowSlot) {
-                return prev.filter(slot => slot.unitType !== UnitType.mow);
+                return previous.filter(slot => slot.unitType !== UnitType.mow);
             }
 
-            return prev;
+            return previous;
         });
     }, [gameMode]);
 
@@ -192,7 +192,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                             selected={[gameMode]}
                             options={gameModesForGuides}
                             multiple={false}
-                            optionsChange={updateSelectedMod}
+                            optionsChange={updateSelectedModule}
                         />
                     </>
                 )}
@@ -349,7 +349,11 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                 )}
             </DialogContent>
             <DialogActions className="flex-box between">
-                {activeStep !== lastStep + 1 ? (
+                {activeStep === lastStep + 1 ? (
+                    <>
+                        <Button onClick={onClose}>Close</Button>
+                    </>
+                ) : (
                     <>
                         <Button onClick={onClose}>Cancel</Button>
                         <div>
@@ -364,10 +368,6 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                                 {activeStep === lastStep ? 'Add' : 'Continue'}
                             </Button>
                         </div>
-                    </>
-                ) : (
-                    <>
-                        <Button onClick={onClose}>Close</Button>
                     </>
                 )}
             </DialogActions>

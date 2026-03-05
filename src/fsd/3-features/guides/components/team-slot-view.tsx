@@ -14,13 +14,13 @@ import { SlotType } from '@/fsd/3-features/guides/guides.enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ITeamSlot } from '@/fsd/3-features/guides/guides.models';
 
-interface Props {
+interface Properties {
     units: IUnit[];
     slot: ITeamSlot;
     expanded?: boolean;
 }
 
-export const TeamSlotView: React.FC<Props> = ({ slot, units, expanded = false }) => {
+export const TeamSlotView: React.FC<Properties> = ({ slot, units, expanded = false }) => {
     const renderPortrait = (unitId: string) => {
         const unit = units.find(x => x.id === unitId);
         if (!unit) {

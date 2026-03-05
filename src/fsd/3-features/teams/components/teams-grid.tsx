@@ -30,7 +30,7 @@ import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
-interface Props {
+interface Properties {
     teams: IPersonalTeam[];
     characters: ICharacter2[];
     mows: IMow2[];
@@ -38,7 +38,7 @@ interface Props {
     editTeam: (team: IPersonalTeam) => void;
 }
 
-export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam, editTeam }) => {
+export const TeamsGrid: React.FC<Properties> = ({ teams, characters, mows, deleteTeam, editTeam }) => {
     const guildRaidTeams = teams.filter(x => x.primaryGameMode === GameMode.guildRaids);
     const taTeams = teams.filter(x => x.primaryGameMode === GameMode.tournamentArena);
     const gwTeams = teams.filter(x => x.primaryGameMode === GameMode.guildWar);
@@ -159,27 +159,27 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
 
     return (
         <div>
-            {!!guildRaidTeams.length && (
+            {guildRaidTeams.length > 0 && (
                 <div>
                     <h2>Guild Raids</h2>
                     <div className="flex flex-wrap items-center gap-3">{guildRaidTeams.map(renderTeam)}</div>
                 </div>
             )}
-            {!!taTeams.length && (
+            {taTeams.length > 0 && (
                 <div>
                     <h2>Tournament Arena</h2>
                     <div className="flex flex-wrap items-center gap-3">{taTeams.map(renderCappedTeam)}</div>
                 </div>
             )}
 
-            {!!gwTeams.length && (
+            {gwTeams.length > 0 && (
                 <div>
                     <h2>Guild War</h2>
                     <div className="flex flex-wrap items-center gap-3">{gwTeams.map(renderCappedTeam)}</div>
                 </div>
             )}
 
-            {!!survivalTeams.length && (
+            {survivalTeams.length > 0 && (
                 <div>
                     <h2>Survival</h2>
                     <div className="flex flex-wrap items-center gap-3">{survivalTeams.map(renderCappedTeam)}</div>

@@ -8,13 +8,13 @@ import readXlsxFile, { Schema } from 'read-excel-file';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuildMember } from 'src/models/interfaces';
 
-interface Props {
+interface Properties {
     onImport: (guildUsers: IGuildMember[]) => void;
 }
 
-export const ImportGuildExcel: React.FC<Props> = ({ onImport }) => {
+export const ImportGuildExcel: React.FC<Properties> = ({ onImport }) => {
     const [open, setOpen] = React.useState(false);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputReference = useRef<HTMLInputElement>(null);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -48,10 +48,10 @@ export const ImportGuildExcel: React.FC<Props> = ({ onImport }) => {
             };
 
             readXlsxFile<IGuildMember>(file, { schema }).then(({ rows, errors }) => {
-                if (rows.length) {
+                if (rows.length > 0) {
                     onImport(rows);
                     enqueueSnackbar('Import successful', { variant: 'success' });
-                } else if (!rows.length && errors.length) {
+                } else if (rows.length === 0 && errors.length > 0) {
                     enqueueSnackbar('Import failed. Error parsing Excel gile.', { variant: 'error' });
                 }
                 handleClose();
@@ -84,7 +84,7 @@ export const ImportGuildExcel: React.FC<Props> = ({ onImport }) => {
                         <li>Download the spreadsheet in the XLSX format</li>
                         <li>Chose downloaded file in the file picker below</li>
                     </ol>
-                    <input ref={inputRef} type="file" accept=".xlsx" onChange={handleFileUpload} />
+                    <input ref={inputReference} type="file" accept=".xlsx" onChange={handleFileUpload} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Close</Button>

@@ -3,8 +3,6 @@ import type factions from '@/data/factions.json';
 
 import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
-import { ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 type IFactionStatic = (typeof factions)[number];
@@ -68,4 +66,7 @@ export interface ICharacterAbilitiesMaterialsTotal {
 }
 
 // Re-export types from FSD entities
-export type { ICharacter2, IMow, IMow2, IMowDb, IUnit };
+
+export { type ICharacter2 } from '@/fsd/4-entities/character';
+export { type IMow2, type IMow, type IMowDatabase } from '@/fsd/4-entities/mow';
+export { type IUnit } from '@/fsd/4-entities/unit';

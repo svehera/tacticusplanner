@@ -22,7 +22,7 @@ export class LreRequirementStatusService {
         tracksProgress: readonly ILreTrackProgress[],
         track: LreTrackId,
         battleNumber: number,
-        reqId: string
+        requestId: string
     ): RequirementStatus {
         const trackProgress = tracksProgress.find(t => t.trackId === track);
         if (!trackProgress) return RequirementStatus.NotCleared;
@@ -30,15 +30,15 @@ export class LreRequirementStatusService {
         const battleProgress = trackProgress.battles.find(b => b.battleIndex === battleNumber);
         if (!battleProgress) return RequirementStatus.NotCleared;
 
-        const reqProgress = battleProgress.requirementsProgress.find(r => r.id === reqId);
-        if (!reqProgress) return RequirementStatus.NotCleared;
+        const requestProgress = battleProgress.requirementsProgress.find(r => r.id === requestId);
+        if (!requestProgress) return RequirementStatus.NotCleared;
 
         // Use new status if available, otherwise convert from legacy fields
-        if (reqProgress.status !== undefined) {
-            return reqProgress.status;
+        if (requestProgress.status !== undefined) {
+            return requestProgress.status;
         }
-        if (reqProgress.completed) return RequirementStatus.Cleared;
-        if (reqProgress.blocked) return RequirementStatus.StopHere;
+        if (requestProgress.completed) return RequirementStatus.Cleared;
+        if (requestProgress.blocked) return RequirementStatus.StopHere;
         return RequirementStatus.NotCleared;
     }
 
@@ -48,7 +48,7 @@ export class LreRequirementStatusService {
      * @param req - The requirement object with status, scores, and points
      * @returns The number of points this requirement contributes
      */
-    public static getRequirementPoints(req: {
+    public static getRequirementPoints(request: {
         completed: boolean;
         status?: RequirementStatus | number;
         killScore?: number;
@@ -57,26 +57,26 @@ export class LreRequirementStatusService {
         id: string;
     }): number {
         // Check if new status system is being used
-        if (req.status !== undefined) {
-            const status = req.status as RequirementStatus;
+        if (request.status !== undefined) {
+            const status = request.status as RequirementStatus;
 
             // Only Cleared and PartiallyCleared contribute points
             if (status === RequirementStatus.Cleared) {
-                return req.points;
+                return request.points;
             }
             if (status === RequirementStatus.PartiallyCleared) {
-                if (req.id === LrePointsCategoryId.killScore && req.killScore) {
-                    return req.killScore;
+                if (request.id === LrePointsCategoryId.killScore && request.killScore) {
+                    return request.killScore;
                 }
-                if (req.id === LrePointsCategoryId.highScore && req.highScore) {
-                    return req.highScore;
+                if (request.id === LrePointsCategoryId.highScore && request.highScore) {
+                    return request.highScore;
                 }
             }
             return 0;
         }
 
         // Legacy: use completed flag
-        return req.completed ? req.points : 0;
+        return request.completed ? request.points : 0;
     }
 
     /**
@@ -85,11 +85,11 @@ export class LreRequirementStatusService {
      * @param reqId - The requirement ID to check
      * @returns True if the requirement is a special requirement
      */
-    public static isSpecialRequirement(reqId: string): boolean {
+    public static isSpecialRequirement(requestId: string): boolean {
         return (
-            reqId === LrePointsCategoryId.killScore ||
-            reqId === LrePointsCategoryId.highScore ||
-            reqId === LrePointsCategoryId.defeatAll
+            requestId === LrePointsCategoryId.killScore ||
+            requestId === LrePointsCategoryId.highScore ||
+            requestId === LrePointsCategoryId.defeatAll
         );
     }
 
@@ -100,7 +100,7 @@ export class LreRequirementStatusService {
      * @returns The index of the first restriction, or -1 if all requirements are special
      */
     public static getFirstRestrictionIndex(requirements: readonly { id: string }[]): number {
-        return requirements.findIndex(req => !this.isSpecialRequirement(req.id));
+        return requirements.findIndex(request => !this.isSpecialRequirement(request.id));
     }
 
     public static isDefaultObjective(id: string): boolean {

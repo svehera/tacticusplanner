@@ -37,14 +37,14 @@ import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 import { GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
 
-interface Props {
+interface Properties {
     rows: CharacterRaidGoalSelect[];
     estimate: IGoalEstimate[];
     goalsColorCoding: GoalColorMode;
     menuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
 }
 
-export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, menuItemSelect }) => {
+export const GoalsTable: React.FC<Properties> = ({ rows, estimate, goalsColorCoding, menuItemSelect }) => {
     const { characters, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -116,7 +116,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                             <div className="flex-box gap-[3px]">
                                 <RankIcon rank={goal.rankStart} rankPoint5={goal.rankStartPoint5} /> <ArrowForward />
                                 <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
-                                {!!goal.upgradesRarity.length && (
+                                {goal.upgradesRarity.length > 0 && (
                                     <div className="flex-box gap-[3px]">
                                         {goal.upgradesRarity.map(x => (
                                             <RarityIcon key={x} rarity={x} />
@@ -166,7 +166,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     </div>
                                 )}
                             </div>
-                            {!!goal.upgradesRarity.length && (
+                            {goal.upgradesRarity.length > 0 && (
                                 <div className="flex-box gap-[3px]">
                                     {goal.upgradesRarity.map(x => (
                                         <RarityIcon key={x} rarity={x} />
@@ -250,8 +250,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             {
                 field: 'priority',
                 maxWidth: 100,
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = parameters;
                     if (!data) return;
 
                     const moveUp = () => {
@@ -283,8 +283,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             },
             {
                 headerName: 'Actions',
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = parameters;
                     if (data) {
                         return (
                             <>
@@ -303,8 +303,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             {
                 field: 'unitIcon',
                 headerName: 'Character',
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = parameters;
                     if (data) {
                         return (
                             <UnitShardIcon icon={data.unitRoundIcon} height={30} width={30} tooltip={data.unitName} />
@@ -318,8 +318,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 headerName: 'Details',
                 autoHeight: true,
                 width: 300,
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = parameters;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
                     if (data && goalEstimate) {
                         return getGoalInfo(data, goalEstimate);
@@ -329,8 +329,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             {
                 headerName: 'Estimated date',
                 hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
-                valueGetter: params => {
-                    const { data } = params;
+                valueGetter: parameters => {
+                    const { data } = parameters;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
                     if (goalEstimate) {
                         if (!goalEstimate.daysLeft) {
@@ -339,25 +339,23 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
 
                         const nextDate = new Date();
                         nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
-                        let ret = formatDateWithOrdinal(nextDate);
+                        let returnValue = formatDateWithOrdinal(nextDate);
                         if (goalEstimate.xpDaysLeft !== undefined) {
-                            ret +=
+                            returnValue +=
                                 '\n' +
                                 '(XP by ' +
-                                formatDateWithOrdinal(
-                                    new Date(new Date().getTime() + goalEstimate.xpDaysLeft * 86400000)
-                                ) +
+                                formatDateWithOrdinal(new Date(Date.now() + goalEstimate.xpDaysLeft * 86_400_000)) +
                                 ')';
                         }
 
-                        return ret;
+                        return returnValue;
                     }
                 },
             },
             {
                 headerName: 'Health',
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = parameters;
                     if (data) {
                         if (data.type == PersonalGoalType.UpgradeRank) {
                             return (
@@ -404,8 +402,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             },
             {
                 headerName: 'Damage',
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = parameters;
                     if (data) {
                         if (data.type == PersonalGoalType.UpgradeRank) {
                             return (
@@ -452,8 +450,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             },
             {
                 headerName: 'Armor',
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = parameters;
                     if (data) {
                         if (data.type == PersonalGoalType.UpgradeRank) {
                             return (
@@ -501,8 +499,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             {
                 headerName: 'Days left',
                 hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
-                valueGetter: params => {
-                    const { data } = params;
+                valueGetter: parameters => {
+                    const { data } = parameters;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
                     if (goalEstimate) {
                         return goalEstimate.daysLeft;
@@ -513,8 +511,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             {
                 headerName: 'Days total',
                 hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
-                valueGetter: params => {
-                    const { data } = params;
+                valueGetter: parameters => {
+                    const { data } = parameters;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
                     if (goalEstimate) {
                         return goalEstimate.daysTotal;
@@ -525,8 +523,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             {
                 headerName: 'Energy',
                 hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
-                valueGetter: params => {
-                    const { data } = params;
+                valueGetter: parameters => {
+                    const { data } = parameters;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
                     if (goalEstimate) {
                         return goalEstimate.energyTotal;
@@ -537,8 +535,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             {
                 headerName: 'Onslaught tokens',
                 hide: !rows.some(row => row.type === PersonalGoalType.Ascend),
-                valueGetter: params => {
-                    const { data } = params;
+                valueGetter: parameters => {
+                    const { data } = parameters;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
                     if (goalEstimate) {
                         return goalEstimate.oTokensTotal;
@@ -551,27 +549,27 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 hide: !rows.some(row =>
                     [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(row.type)
                 ),
-                cellRenderer: (params: ICellRendererParams<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>) => {
-                    const { data } = params;
+                cellRenderer: (parameters: ICellRendererParams<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>) => {
+                    const { data } = parameters;
                     if (data) {
                         let linkBase: string = '';
-                        let params: string = '';
+                        let parameters: string = '';
 
                         if (data.type === PersonalGoalType.UpgradeRank) {
                             linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-                            params = `?charSnowprintId=${data.unitId}`;
+                            parameters = `?charSnowprintId=${data.unitId}`;
                         }
 
                         if (data.type === PersonalGoalType.MowAbilities) {
                             linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-                            params = `?charSnowprintId=${data.unitId}`;
+                            parameters = `?charSnowprintId=${data.unitId}`;
                         }
                         return (
                             <Button
                                 size="small"
                                 variant={'outlined'}
                                 component={Link}
-                                to={linkBase + params}
+                                to={linkBase + parameters}
                                 target={'_self'}>
                                 <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
                             </Button>
@@ -588,18 +586,18 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
     }, [rows]);
 
     const getRowStyle = useMemo(
-        () => (params: any) => {
+        () => (parameters: any) => {
             return {
                 background: GoalService.getBackgroundColor(
                     goalsColorCoding,
-                    estimate.find(x => x.goalId === params.data?.goalId)
+                    estimate.find(x => x.goalId === parameters.data?.goalId)
                 ),
             };
         },
         [estimate, goalsColorCoding, viewPreferences]
     );
 
-    const baseRowHeight = !rows.some(row => [PersonalGoalType.CharacterAbilities].includes(row.type)) ? 60 : 90;
+    const baseRowHeight = rows.some(row => [PersonalGoalType.CharacterAbilities].includes(row.type)) ? 90 : 60;
 
     return (
         <div

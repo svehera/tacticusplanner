@@ -96,24 +96,24 @@ const energyMarks = [
         label: '1000 BS',
     },
     {
-        value: 888888,
+        value: 888_888,
         label: '∞',
     },
 ];
 
-interface Props {
+interface Properties {
     close: () => void;
     open: boolean;
 }
 
-const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
+const DailyRaidsSettings: React.FC<Properties> = ({ close, open }) => {
     const { characters } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { dailyRaidsPreferences } = useContext(StoreContext);
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
     const [dailyEnergy, setDailyEnergy] = React.useState(() => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
-        return index >= 0 ? index : 0; // Default to first option if not found
+        return Math.max(index, 0); // Default to first option if not found
     });
     const [shardsEnergy, setShardsEnergy] = React.useState<number | string>(dailyRaidsPreferences.shardsEnergy);
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
@@ -133,9 +133,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     }, [dailyRaidsPreferences]);
 
     const updatePreferences = useCallback((value: IDailyRaidsFarmOrder) => {
-        setDailyRaidsPreferencesForm(curr => ({
-            ...curr,
-            farmPreferences: { ...curr.farmPreferences, order: value },
+        setDailyRaidsPreferencesForm(current => ({
+            ...current,
+            farmPreferences: { ...current.farmPreferences, order: value },
         }));
     }, []);
 
@@ -143,7 +143,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         if (typeof value === 'number') {
             const scaledValue = energyMarks[value]?.value || 288; // Adjust the index and default
             setDailyEnergy(value);
-            setDailyRaidsPreferencesForm(curr => ({ ...curr, dailyEnergy: scaledValue }));
+            setDailyRaidsPreferencesForm(current => ({ ...current, dailyEnergy: scaledValue }));
         }
     };
 
@@ -151,7 +151,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         const rawValue = event.target.value;
         const value = event.target.value === '' ? 0 : Number(event.target.value);
         setShardsEnergy(rawValue);
-        setDailyRaidsPreferencesForm(curr => ({ ...curr, shardsEnergy: value }));
+        setDailyRaidsPreferencesForm(current => ({ ...current, shardsEnergy: value }));
     };
 
     const saveChanges = () => {
@@ -165,17 +165,17 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     }
 
     function saveCampaignEventChanges(event: SelectChangeEvent<CampaignGroupType | 'none'>): void {
-        setDailyRaidsPreferencesForm(curr => ({
-            ...curr,
+        setDailyRaidsPreferencesForm(current => ({
+            ...current,
             campaignEvent: event.target.value as CampaignGroupType | 'none',
         }));
     }
 
     function saveHomeScreenEventChanges(event: SelectChangeEvent<IDailyRaidsHomeScreenEvent>): void {
-        setDailyRaidsPreferencesForm(curr => ({
-            ...curr,
+        setDailyRaidsPreferencesForm(current => ({
+            ...current,
             farmPreferences: {
-                ...curr.farmPreferences,
+                ...current.farmPreferences,
                 homeScreenEvent: event.target.value as IDailyRaidsHomeScreenEvent,
             },
         }));
@@ -184,54 +184,55 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     function savePurgeOrderMinimumTyranidsCountChanges(event: SelectChangeEvent<number>): void {
         const parsed = Number(event.target.value);
         const value = Number.isNaN(parsed) ? 0 : Math.max(0, Math.floor(parsed));
-        setDailyRaidsPreferencesForm(curr => {
-            const ret = { ...curr };
-            ret.farmPreferences.purgeOrderPreferences = { minimumTyranidCount: value };
-            return ret;
+        setDailyRaidsPreferencesForm(current => {
+            const returnValue = { ...current };
+            returnValue.farmPreferences.purgeOrderPreferences = { minimumTyranidCount: value };
+            return returnValue;
         });
     }
 
     function saveTrainingRushStrategyChanges(event: SelectChangeEvent<ITrainingRushStrategy>): void {
-        setDailyRaidsPreferencesForm(curr => {
-            const ret = { ...curr };
-            ret.farmPreferences.trainingRushPreferences = {
-                ...ret.farmPreferences.trainingRushPreferences,
+        setDailyRaidsPreferencesForm(current => {
+            const returnValue = { ...current };
+            returnValue.farmPreferences.trainingRushPreferences = {
+                ...returnValue.farmPreferences.trainingRushPreferences,
                 strategy: event.target.value as ITrainingRushStrategy,
             };
-            return ret;
+            return returnValue;
         });
     }
 
     function saveTrainingRushUnitChanges(unit: ICharacter2 | null): void {
         setCharacter(unit);
-        setDailyRaidsPreferencesForm(curr => {
-            const ret = { ...curr };
-            ret.farmPreferences.trainingRushPreferences = {
+        setDailyRaidsPreferencesForm(current => {
+            const returnValue = { ...current };
+            returnValue.farmPreferences.trainingRushPreferences = {
                 strategy:
-                    ret.farmPreferences.trainingRushPreferences?.strategy ?? ITrainingRushStrategy.maximizeRewards,
+                    returnValue.farmPreferences.trainingRushPreferences?.strategy ??
+                    ITrainingRushStrategy.maximizeRewards,
                 characterId: unit ? unit.snowprintId! : undefined,
             };
-            return ret;
+            return returnValue;
         });
     }
 
     function saveWarpSurgeMinimumChaosEnemyCountChanges(event: SelectChangeEvent<number>): void {
         const parsed = Number(event.target.value);
         const value = Number.isNaN(parsed) ? 0 : Math.max(0, Math.floor(parsed));
-        setDailyRaidsPreferencesForm(curr => {
-            const ret = { ...curr };
-            ret.farmPreferences.warpSurgePreferences = { minimumChaosEnemyCount: value };
-            return ret;
+        setDailyRaidsPreferencesForm(current => {
+            const returnValue = { ...current };
+            returnValue.farmPreferences.warpSurgePreferences = { minimumChaosEnemyCount: value };
+            return returnValue;
         });
     }
 
     function saveMachineHuntMinimumMechanicalEnemyCountChanges(event: SelectChangeEvent<number>): void {
         const parsed = Number(event.target.value);
         const value = Number.isNaN(parsed) ? 0 : Math.max(0, Math.floor(parsed));
-        setDailyRaidsPreferencesForm(curr => {
-            const ret = { ...curr };
-            ret.farmPreferences.machineHuntPreferences = { minimumMechanicalEnemyCount: value };
-            return ret;
+        setDailyRaidsPreferencesForm(current => {
+            const returnValue = { ...current };
+            returnValue.farmPreferences.machineHuntPreferences = { minimumMechanicalEnemyCount: value };
+            return returnValue;
         });
     }
 
@@ -271,7 +272,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 name="controlled-radio-buttons-group"
                                 value={dailyRaidsPreferencesForm.farmPreferences.order}
                                 onChange={change =>
-                                    updatePreferences(parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder)
+                                    updatePreferences(
+                                        Number.parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder
+                                    )
                                 }>
                                 <FormControlLabel
                                     value={IDailyRaidsFarmOrder.totalMaterials}
@@ -383,9 +386,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     label="Minimum Tyranids"
                                     onChange={savePurgeOrderMinimumTyranidsCountChanges}
                                     style={{ minWidth: 180 }}>
-                                    {Array.from({ length: 15 }, (_, i) => (
-                                        <MenuItem key={i + 1} value={i + 1}>
-                                            {i + 1}
+                                    {Array.from({ length: 15 }, (_, index) => (
+                                        <MenuItem key={index + 1} value={index + 1}>
+                                            {index + 1}
                                         </MenuItem>
                                     ))}
                                 </Select>
@@ -447,9 +450,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     label="Minimum Chaos Enemies"
                                     onChange={saveWarpSurgeMinimumChaosEnemyCountChanges}
                                     style={{ minWidth: 180 }}>
-                                    {Array.from({ length: 15 }, (_, i) => (
-                                        <MenuItem key={i + 1} value={i + 1}>
-                                            {i + 1}
+                                    {Array.from({ length: 15 }, (_, index) => (
+                                        <MenuItem key={index + 1} value={index + 1}>
+                                            {index + 1}
                                         </MenuItem>
                                     ))}
                                 </Select>
@@ -472,9 +475,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     label="Minimum Mechanical Enemies"
                                     onChange={saveMachineHuntMinimumMechanicalEnemyCountChanges}
                                     style={{ minWidth: 180 }}>
-                                    {Array.from({ length: 15 }, (_, i) => (
-                                        <MenuItem key={i + 1} value={i + 1}>
-                                            {i + 1}
+                                    {Array.from({ length: 15 }, (_, index) => (
+                                        <MenuItem key={index + 1} value={index + 1}>
+                                            {index + 1}
                                         </MenuItem>
                                     ))}
                                 </Select>
@@ -495,7 +498,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 value={dailyRaidsPreferencesForm.farmStrategy}
                                 onChange={change => {
                                     const value = +change.target.value as DailyRaidsStrategy;
-                                    setDailyRaidsPreferencesForm(curr => ({ ...curr, farmStrategy: value }));
+                                    setDailyRaidsPreferencesForm(current => ({ ...current, farmStrategy: value }));
                                 }}>
                                 <FormControlLabel
                                     value={DailyRaidsStrategy.leastEnergy}
@@ -542,7 +545,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 settings={customLocationsSettings}
                                 settingsChange={value => {
                                     setCustomLocationsSettings(value);
-                                    setDailyRaidsPreferencesForm(curr => ({ ...curr, customSettings: value }));
+                                    setDailyRaidsPreferencesForm(current => ({ ...current, customSettings: value }));
                                 }}
                             />
                         )}

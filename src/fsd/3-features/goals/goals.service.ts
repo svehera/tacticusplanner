@@ -390,12 +390,12 @@ export class GoalsService {
     }
 
     private static adjustNeededXp(xpNeeded: number, heldBooks: Record<Rarity, number>): number {
-        while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
-            xpNeeded -= 62500;
+        while (xpNeeded >= 62_500 && heldBooks[Rarity.Mythic] > 0) {
+            xpNeeded -= 62_500;
             heldBooks[Rarity.Mythic] -= 1;
         }
-        while (xpNeeded >= 12500 && heldBooks[Rarity.Legendary] > 0) {
-            xpNeeded -= 12500;
+        while (xpNeeded >= 12_500 && heldBooks[Rarity.Legendary] > 0) {
+            xpNeeded -= 12_500;
             heldBooks[Rarity.Legendary] -= 1;
         }
         while (xpNeeded >= 2500 && heldBooks[Rarity.Epic] > 0) {
@@ -432,11 +432,11 @@ export class GoalsService {
                 heldBooks[Rarity.Epic] -= 1;
             }
             while (xpNeeded > 0 && heldBooks[Rarity.Legendary] > 0) {
-                xpNeeded = Math.max(0, xpNeeded - 12500);
+                xpNeeded = Math.max(0, xpNeeded - 12_500);
                 heldBooks[Rarity.Legendary] -= 1;
             }
             while (xpNeeded > 0 && heldBooks[Rarity.Mythic] > 0) {
-                xpNeeded = Math.max(0, xpNeeded - 62500);
+                xpNeeded = Math.max(0, xpNeeded - 62_500);
                 heldBooks[Rarity.Mythic] -= 1;
             }
         }
@@ -510,42 +510,42 @@ export class GoalsService {
                 continue;
             }
             const remainingXp = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
-            goal.xpBooksRequired = Math.floor(remainingXp / 12500);
+            goal.xpBooksRequired = Math.floor(remainingXp / 12_500);
             const xpNeeded = this.adjustNeededXp(remainingXp, heldBooks);
-            goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / 12500);
+            goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / 12_500);
 
             if (goal.xpEstimate || goal.xpEstimateAbilities) {
                 totalXpNeeded += xpNeeded;
-                goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
+                goal.xpBooksTotal = Math.floor(xpNeeded / 12_500);
                 if (totalXpNeeded === 0) {
                     goal.xpEstimate = undefined;
                     goal.xpEstimateAbilities = undefined;
                 } else {
                     if (goal.xpEstimate) {
-                        goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
+                        goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12_500);
                         goal.xpEstimate.xpLeft = xpNeeded;
                         if (xpIncomeState.manualBooksPerDay > 0) {
                             const newAccrual = this.processGoalAccrual(
-                                Math.ceil(xpNeeded / 12500),
+                                Math.ceil(xpNeeded / 12_500),
                                 xpBooksAccrual,
                                 xpIncomeState.manualBooksPerDay
                             );
                             goal.xpDaysLeft = Math.ceil(
-                                (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
+                                (newAccrual.accruedDate.getTime() - today.getTime()) / 86_400_000
                             );
                             xpBooksAccrual = newAccrual;
                         }
                     } else {
-                        goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
+                        goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12_500);
                         goal.xpEstimateAbilities!.xpLeft = xpNeeded;
                         if (xpIncomeState.manualBooksPerDay > 0) {
                             const newAccrual = this.processGoalAccrual(
-                                Math.ceil(xpNeeded / 12500),
+                                Math.ceil(xpNeeded / 12_500),
                                 xpBooksAccrual,
                                 xpIncomeState.manualBooksPerDay
                             );
                             goal.xpDaysLeft = Math.ceil(
-                                (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
+                                (newAccrual.accruedDate.getTime() - today.getTime()) / 86_400_000
                             );
                             xpBooksAccrual = newAccrual;
                         }
@@ -555,8 +555,8 @@ export class GoalsService {
 
             if (goal.abilitiesEstimate === undefined && goal.mowEstimate === undefined) continue;
             const badges = goal.mowEstimate?.badges ?? goal.abilitiesEstimate!.badges;
-            for (const [rarityStr, count] of Object.entries(badges)) {
-                const rarity = Number(rarityStr) as Rarity;
+            for (const [rarityString, count] of Object.entries(badges)) {
+                const rarity = Number(rarityString) as Rarity;
                 const alliance =
                     goal.abilitiesEstimate?.alliance ??
                     GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
@@ -575,12 +575,12 @@ export class GoalsService {
 
             if (goal.mowEstimate === undefined) continue;
             const forgeBadges = goal.mowEstimate.forgeBadges;
-            forgeBadges.entries().forEach(([rarity, count]) => {
+            for (const [rarity, count] of forgeBadges.entries()) {
                 const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
                 goal.mowEstimate!.forgeBadges.set(rarity, count - toRemove);
                 heldForgeBadges[rarity] = (heldForgeBadges[rarity] ?? 0) - toRemove;
                 neededForgeBadges[rarity] += goal.mowEstimate!.forgeBadges.get(rarity) ?? 0;
-            });
+            }
             const components = goal.mowEstimate.components;
             const alliance = GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
             const held = heldComponents[alliance] ?? 0;

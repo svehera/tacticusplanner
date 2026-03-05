@@ -8,7 +8,7 @@ import { IItemRaidLocation, IShardsRaid, IUpgradeRaid } from '@/fsd/3-features/g
 import { MaterialItemInput } from '@/fsd/3-features/goals/material-item-input';
 import { ShardsItemInput } from '@/fsd/3-features/goals/shards-item-input';
 
-interface Props {
+interface Properties {
     completedLocations: IItemRaidLocation[];
     shardsRaids: IShardsRaid[];
     upgradesRaids: IUpgradeRaid[];
@@ -16,7 +16,7 @@ interface Props {
     addUpgrades: (upgradeId: string, value: number, location: IItemRaidLocation | null) => void;
 }
 
-export const TodayRaids: React.FC<Props> = ({
+export const TodayRaids: React.FC<Properties> = ({
     completedLocations,
     shardsRaids,
     upgradesRaids,

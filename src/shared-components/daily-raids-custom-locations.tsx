@@ -12,13 +12,13 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { CampaignType, CampaignsService } from '@/fsd/4-entities/campaign';
 
-interface Props {
+interface Properties {
     hasCE: boolean;
     settings: ICustomDailyRaidsSettings;
     settingsChange: (value: ICustomDailyRaidsSettings) => void;
 }
 
-export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsChange, hasCE }) => {
+export const DailyRaidsCustomLocations: React.FC<Properties> = ({ settings, settingsChange, hasCE }) => {
     const [showDroprates, setShowDroprates] = useState<boolean>(false);
     const rarities: Rarity[] = [
         Rarity.Mythic,
@@ -105,13 +105,7 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
                                 <div
                                     key={type}
                                     className="flex min-h-[42px] min-w-[42px] flex-col justify-center gap-3">
-                                    {!showDroprates ? (
-                                        <Checkbox
-                                            className="mt-2"
-                                            checked={value.includes(type)}
-                                            onChange={event => handleChange(rarity, event.target.checked, [type])}
-                                        />
-                                    ) : (
+                                    {showDroprates ? (
                                         <Badge
                                             className="cursor-pointer"
                                             badgeContent="✓"
@@ -120,6 +114,12 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
                                             onClick={() => handleChange(rarity, !value.includes(type), [type])}>
                                             <span>{CampaignsService.getItemAcquiredPerEnergyUsed(type, rarity)}</span>
                                         </Badge>
+                                    ) : (
+                                        <Checkbox
+                                            className="mt-2"
+                                            checked={value.includes(type)}
+                                            onChange={event => handleChange(rarity, event.target.checked, [type])}
+                                        />
                                     )}
                                 </div>
                             ))}

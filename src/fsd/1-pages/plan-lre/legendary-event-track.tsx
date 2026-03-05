@@ -18,7 +18,7 @@ import {
 import { LreTeamsCard } from './lre-teams-card';
 import { LreTeamsTable } from './lre-teams-table';
 
-interface Props {
+interface Properties {
     legendaryEvent: ILegendaryEvent;
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
@@ -30,7 +30,7 @@ interface Props {
     progress: Record<string, number>;
 }
 
-export const LegendaryEventTrack: React.FC<Props> = ({
+export const LegendaryEventTrack: React.FC<Properties> = ({
     legendaryEvent,
     track,
     startAddTeam,
@@ -44,9 +44,9 @@ export const LegendaryEventTrack: React.FC<Props> = ({
     const { viewPreferences, leSelectedRequirements } = useContext(StoreContext);
 
     if (viewPreferences.hideCompleted) {
-        track.unitsRestrictions.forEach(restriction => {
+        for (const restriction of track.unitsRestrictions) {
             restriction.hide = progress[restriction.name] === legendaryEvent.battlesCount;
-        });
+        }
     }
 
     const restrictions = useMemo(() => {
@@ -60,31 +60,28 @@ export const LegendaryEventTrack: React.FC<Props> = ({
         const section = event[track.section];
         const result: string[] = [];
 
-        track.unitsRestrictions
-            .filter(x => !x.hide)
-            .forEach(x => {
-                const saved = section[x.name];
-                let selected: boolean;
+        for (const x of track.unitsRestrictions.filter(x => !x.hide)) {
+            const saved = section[x.name];
+            let selected: boolean;
 
-                if (saved === undefined) {
-                    // Not set, use default
-                    selected = x.selected ?? false;
-                } else if (typeof saved === 'boolean') {
-                    // Legacy boolean format
-                    selected = saved;
-                } else if (typeof saved === 'object' && 'status' in saved) {
-                    // New IRequirementProgress format - only Cleared (1) and PartiallyCleared (4) count as "selected"
-                    selected =
-                        saved.status === RequirementStatus.Cleared ||
-                        saved.status === RequirementStatus.PartiallyCleared;
-                } else {
-                    selected = false;
-                }
+            if (saved === undefined) {
+                // Not set, use default
+                selected = x.selected ?? false;
+            } else if (typeof saved === 'boolean') {
+                // Legacy boolean format
+                selected = saved;
+            } else if (typeof saved === 'object' && 'status' in saved) {
+                // New IRequirementProgress format - only Cleared (1) and PartiallyCleared (4) count as "selected"
+                selected =
+                    saved.status === RequirementStatus.Cleared || saved.status === RequirementStatus.PartiallyCleared;
+            } else {
+                selected = false;
+            }
 
-                if (selected) {
-                    result.push(x.name);
-                }
-            });
+            if (selected) {
+                result.push(x.name);
+            }
+        }
 
         return result;
     }, [leSelectedRequirements]);

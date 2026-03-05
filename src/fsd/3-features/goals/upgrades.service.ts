@@ -182,7 +182,7 @@ export class UpgradesService {
         if (!preferences) return allMaterials;
 
         switch (preferences.strategy) {
-            case ITrainingRushStrategy.maximizeRewards:
+            case ITrainingRushStrategy.maximizeRewards: {
                 {
                     const battlesWithPriority: Array<ICharacterUpgradeEstimate & { priority: number }> = [];
 
@@ -200,12 +200,13 @@ export class UpgradesService {
                     return orderBy(battlesWithPriority, ['priority'], ['desc']);
                 }
                 break;
-            case ITrainingRushStrategy.maximizeXpForCharacter:
+            }
+            case ITrainingRushStrategy.maximizeXpForCharacter: {
                 {
                     if (preferences === undefined || preferences.characterId === undefined) return allMaterials;
                     const unit = CharactersService.getUnit(preferences.characterId);
                     if (unit === undefined) {
-                        console.error('Unable to find unit: ', preferences.characterId);
+                        console.error('Unable to find unit:', preferences.characterId);
                         return allMaterials;
                     }
 
@@ -226,6 +227,7 @@ export class UpgradesService {
                     return orderBy(battlesWithPriority, ['priority'], ['desc']);
                 }
                 break;
+            }
         }
         return allMaterials;
     }
@@ -251,7 +253,7 @@ export class UpgradesService {
             location => this.getNonSummonMechanicalEnemyCount(location) >= minMechanicalEnemies,
             location =>
                 this.getNonSummonMechanicalEnemyCount(location) /
-                (location.energyCost === 0 ? 100000 : location.energyCost),
+                (location.energyCost === 0 ? 100_000 : location.energyCost),
             allMaterials
         );
     }
@@ -278,29 +280,34 @@ export class UpgradesService {
     ): ICharacterUpgradeEstimate[] {
         const event = settings.preferences.farmPreferences?.homeScreenEvent ?? IDailyRaidsHomeScreenEvent.none;
         switch (event) {
-            case IDailyRaidsHomeScreenEvent.purgeOrder:
+            case IDailyRaidsHomeScreenEvent.purgeOrder: {
                 return this.splitMaterialsForPurgeOrder(
                     settings.preferences.farmPreferences.purgeOrderPreferences?.minimumTyranidCount ?? 1,
                     allMaterials
                 );
-            case IDailyRaidsHomeScreenEvent.warpSurge:
+            }
+            case IDailyRaidsHomeScreenEvent.warpSurge: {
                 return this.splitMaterialsForWarpSurge(
                     settings.preferences.farmPreferences.warpSurgePreferences?.minimumChaosEnemyCount ?? 1,
                     allMaterials
                 );
-            case IDailyRaidsHomeScreenEvent.trainingRush:
+            }
+            case IDailyRaidsHomeScreenEvent.trainingRush: {
                 return this.splitMaterialsForTrainingRush(
                     settings.preferences.farmPreferences.trainingRushPreferences,
                     allMaterials
                 );
-            case IDailyRaidsHomeScreenEvent.machineHunt:
+            }
+            case IDailyRaidsHomeScreenEvent.machineHunt: {
                 return this.splitMaterialsForMachineHunt(
                     settings.preferences.farmPreferences.machineHuntPreferences?.minimumMechanicalEnemyCount ?? 1,
                     allMaterials
                 );
+            }
             case IDailyRaidsHomeScreenEvent.none:
-            default:
+            default: {
                 return allMaterials;
+            }
         }
 
         return allMaterials;
@@ -404,19 +411,19 @@ export class UpgradesService {
         //    relatedGoals — these represent SEPARATE needs and SHOULD be summed.
         // We deduplicate by (relatedGoals, materialId) to handle both cases correctly.
         const countedGoalMaterial = new Set<string>();
-        allUpgrades.forEach(upgrade => {
+        for (const upgrade of allUpgrades) {
             if (totalMaterialsNeeded[upgrade.id] === undefined) {
                 totalMaterialsNeeded[upgrade.id] = 0;
                 totalMaterialsAcquired[upgrade.id] = 0;
             }
-            const goalsKey = upgrade.relatedGoals.slice().sort().join(',');
+            const goalsKey = [...upgrade.relatedGoals].sort().join(',');
             const key = `${goalsKey}_${upgrade.id}`;
             if (!countedGoalMaterial.has(key)) {
                 countedGoalMaterial.add(key);
                 totalMaterialsNeeded[upgrade.id] += Math.max(upgrade.requiredCount - upgrade.acquiredCount, 0);
                 totalMaterialsAcquired[upgrade.id] += upgrade.acquiredCount;
             }
-        });
+        }
 
         let iteration = 0;
         while (upgradesToFarm.length > 0) {
@@ -455,12 +462,12 @@ export class UpgradesService {
 
                 // Figure out how many materials we just farmed and subtract them from the total
                 // materials required.
-                raidLocations.forEach(location => {
+                for (const location of raidLocations) {
                     totalMaterialsNeeded[material.id] -= Math.round(location.farmedItems);
                     totalMaterialsAcquired[material.id] += Math.round(location.farmedItems);
-                });
+                }
 
-                if (raidLocations.length) {
+                if (raidLocations.length > 0) {
                     raids.push({
                         ...clonedMaterial,
                         // acquiredCount: initAcquiredMaterials[material.id],
@@ -471,7 +478,7 @@ export class UpgradesService {
                 }
             }
 
-            if (raids.length) {
+            if (raids.length > 0) {
                 const raidsTotal = sum(raids.flatMap(x => x.raidLocations.map(x => x.raidsCount)));
                 const energyTotal = sum(raids.flatMap(x => x.raidLocations.map(x => x.energySpent)));
                 resultDays.push({
@@ -508,12 +515,10 @@ export class UpgradesService {
     ): { raids: IUpgradeRaid[]; energySpent: number } {
         const raids: IUpgradeRaid[] = [];
         const completedRaids = settings.completedLocations.filter(x => !x.isShardsLocation);
-        const raidedLocationsIds = completedRaids.map(x => x.id);
+        const raidedLocationsIds = new Set(completedRaids.map(x => x.id));
 
         const raidedUpgrades = allUpgrades.filter(x =>
-            x.locations
-                .filter(location => location.isSuggested)
-                .some(location => raidedLocationsIds.includes(location.id))
+            x.locations.filter(location => location.isSuggested).some(location => raidedLocationsIds.has(location.id))
         );
 
         for (const raidedUpgrade of uniqBy(raidedUpgrades, 'id')) {
@@ -554,13 +559,15 @@ export class UpgradesService {
         const raidLocations: IItemRaidLocation[] = [];
         let totalEnergySpent = 0;
 
-        const plannedLocationIds = dailyRaids
-            .filter(x => x.id === material.id)
-            .flatMap(x => x.raidLocations)
-            .map(x => x.id);
+        const plannedLocationIds = new Set(
+            dailyRaids
+                .filter(x => x.id === material.id)
+                .flatMap(x => x.raidLocations)
+                .map(x => x.id)
+        );
 
         const availableLocations = material.locations.filter(
-            location => location.isSuggested && !plannedLocationIds.includes(location.id)
+            location => location.isSuggested && !plannedLocationIds.has(location.id)
         );
 
         for (const location of availableLocations) {
@@ -629,7 +636,7 @@ export class UpgradesService {
                     : this.getMowUpgradeRank(goal);
             const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(upgradeRanks, canonUpgrades);
 
-            if (goal.upgradesRarity.length) {
+            if (goal.upgradesRarity.length > 0) {
                 // remove upgrades that do not match to selected rarities
                 for (const upgradeId in baseUpgradesTotal) {
                     const upgradeData = FsdUpgradesService.baseUpgradesData[upgradeId];
@@ -764,7 +771,7 @@ export class UpgradesService {
             )
             .map(x => x.id);
 
-        if (!correctUpgradesLocations.length) {
+        if (correctUpgradesLocations.length === 0) {
             return estimates;
         }
 
@@ -824,7 +831,7 @@ export class UpgradesService {
             raidsTotal: 0,
             energyTotal: 0,
             energyLeft: 0,
-            isBlocked: !selectedLocations.length && leftCount > 0,
+            isBlocked: selectedLocations.length === 0 && leftCount > 0,
             isFinished: leftCount === 0,
             crafted: false,
             stat: upgrade.stat,
@@ -917,7 +924,7 @@ export class UpgradesService {
             case Campaign.TAEC:
             case Campaign.TASC:
             case Campaign.DGEC:
-            case Campaign.DGSC:
+            case Campaign.DGSC: {
                 if (nodeNumber === 3) {
                     nodeNumber = 1;
                 } else if (nodeNumber === 13) {
@@ -926,58 +933,60 @@ export class UpgradesService {
                     nodeNumber = 3;
                 }
                 break;
-            default:
+            }
+            default: {
                 break;
+            }
         }
         return nodeNumber;
     }
 
     /** @returns the number of non-summon enemies you'll face in the battle. */
     private static getNonSummonEnemyCount(battle: ICampaignBattleComposed): number {
-        let ret = 0;
+        let returnValue = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
             if (npc && !npc.traits.includes('Summon')) {
-                ret += enemy.count;
+                returnValue += enemy.count;
             }
         }
-        return ret;
+        return returnValue;
     }
 
     /** @returns the number of non-summon tyranids you'll face in the battle. */
     private static getNonSummonTyranidCount(battle: ICampaignBattleComposed): number {
-        let ret = 0;
+        let returnValue = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
             if (npc && npc.faction === 'Tyranids' && !npc.traits.includes('Summon')) {
-                ret += enemy.count;
+                returnValue += enemy.count;
             }
         }
-        return ret;
+        return returnValue;
     }
 
     /** @returns the number of non-summon chaos enemies you'll face in the battle. */
     private static getNonSummonChaosEnemyCount(battle: ICampaignBattleComposed): number {
-        let ret = 0;
+        let returnValue = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
             if (npc && npc.alliance === Alliance.Chaos && !npc.traits.includes('Summon')) {
-                ret += enemy.count;
+                returnValue += enemy.count;
             }
         }
-        return ret;
+        return returnValue;
     }
 
     /** @returns the number of non-summon chaos enemies you'll face in the battle. */
     private static getNonSummonMechanicalEnemyCount(battle: ICampaignBattleComposed): number {
-        let ret = 0;
+        let returnValue = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
             if (npc && npc.traits.includes('Mechanical') && !npc.traits.includes('Summon')) {
-                ret += enemy.count;
+                returnValue += enemy.count;
             }
         }
-        return ret;
+        return returnValue;
     }
 
     /**
@@ -1003,7 +1012,7 @@ export class UpgradesService {
     ): void {
         const completedLocations = settings.completedLocations;
         // get locations of the selected Campaign Event if there are any
-        const currCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
+        const currentCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
         for (const upgradeId in upgrades) {
             const combinedUpgrade = upgrades[upgradeId];
 
@@ -1025,7 +1034,7 @@ export class UpgradesService {
 
                 const campaignProgress = settings.campaignsProgress[unlockCampaign];
                 const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign as Campaign);
-                const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
+                const isCampaignEventLocationAvailable = currentCampaignEventLocations.includes(location.campaign);
 
                 location.isUnlocked = this.mapNodeNumber(location.campaign, location.nodeNumber) <= campaignProgress;
                 location.isPassFilter =
@@ -1081,10 +1090,7 @@ export class UpgradesService {
                 ];
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
                 const ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
-                if (ignoredLocations.length !== selectedLocations.length) {
-                    // We have some nodes to raid, so don't suggest the others.
-                    ignoredLocations.forEach(location => (location.isSuggested = false));
-                } else {
+                if (ignoredLocations.length === selectedLocations.length) {
                     // No nodes available after initial filter, try to adjust for slightly worse nodes.
                     const needsUpdate = new Set<CampaignType>();
 
@@ -1107,10 +1113,12 @@ export class UpgradesService {
                         locationTypes = [...locationTypes, ...needsUpdate];
 
                         // Set all location types we aren't going to use to "not suggested".
-                        selectedLocations
-                            .filter(x => !locationTypes.includes(x.campaignType))
-                            .forEach(location => (location.isSuggested = false));
+                        for (const location of selectedLocations.filter(x => !locationTypes.includes(x.campaignType)))
+                            location.isSuggested = false;
                     }
+                } else {
+                    // We have some nodes to raid, so don't suggest the others.
+                    for (const location of ignoredLocations) location.isSuggested = false;
                 }
             }
 
@@ -1147,8 +1155,9 @@ export class UpgradesService {
                     settings.preferences.farmPreferences.machineHuntPreferences?.minimumMechanicalEnemyCount ?? 1;
                 return this.getNonSummonMechanicalEnemyCount(location) >= minMechanical;
             }
-            case IDailyRaidsHomeScreenEvent.none:
+            case IDailyRaidsHomeScreenEvent.none: {
                 return false;
+            }
         }
     }
 
@@ -1183,7 +1192,7 @@ export class UpgradesService {
                 const craftedUpgradeCount = craftedUpgrades[craftedUpgrade];
 
                 if (craftedUpgradeData) {
-                    if (!craftedUpgradeData.craftedUpgrades.length) {
+                    if (craftedUpgradeData.craftedUpgrades.length === 0) {
                         for (const baseUpgrade of craftedUpgradeData.baseUpgrades) {
                             baseUpgradesTotal[baseUpgrade.id] =
                                 (baseUpgradesTotal[baseUpgrade.id] ?? 0) + baseUpgrade.count * craftedUpgradeCount;

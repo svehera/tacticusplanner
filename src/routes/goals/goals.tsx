@@ -127,10 +127,8 @@ export const Goals = () => {
     };
 
     const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete') => {
-        if (item === 'delete') {
-            if (confirm('Are you sure? The goal will be permanently deleted!')) {
-                removeGoal(goalId);
-            }
+        if (item === 'delete' && confirm('Are you sure? The goal will be permanently deleted!')) {
+            removeGoal(goalId);
         }
 
         if (item === 'edit') {
@@ -162,34 +160,34 @@ export const Goals = () => {
     ): IXpLevel => {
         const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
         const character = characters.find(c => c.snowprintId! === characterId);
-        const ret: IXpLevel = { currentLevel: character?.level ?? 1, xpAtLevel: character?.xp ?? 0 };
+        const returnValue: IXpLevel = { currentLevel: character?.level ?? 1, xpAtLevel: character?.xp ?? 0 };
         for (const goal of priorGoals) {
             if (goal.type === PersonalGoalType.UpgradeRank) {
                 const upgradeGoal = goal as ICharacterUpgradeRankGoal;
                 const targetLevel = rankToLevel[(upgradeGoal.rankEnd ?? Rank.Stone2) as Rank];
-                if (targetLevel > ret.currentLevel) {
-                    ret.currentLevel = targetLevel;
-                    ret.xpAtLevel = 0;
-                    ret.xpFromPriorGoalApplied = true;
+                if (targetLevel > returnValue.currentLevel) {
+                    returnValue.currentLevel = targetLevel;
+                    returnValue.xpAtLevel = 0;
+                    returnValue.xpFromPriorGoalApplied = true;
                 }
             } else if (goal.type === PersonalGoalType.CharacterAbilities) {
                 const abilityGoal = goal as ICharacterUpgradeAbilities;
                 const targetLevel = Math.max(abilityGoal.activeEnd, abilityGoal.passiveEnd);
-                if (targetLevel > ret.currentLevel) {
-                    ret.currentLevel = targetLevel;
-                    ret.xpAtLevel = 0;
-                    ret.xpFromPriorGoalApplied = true;
+                if (targetLevel > returnValue.currentLevel) {
+                    returnValue.currentLevel = targetLevel;
+                    returnValue.xpAtLevel = 0;
+                    returnValue.xpFromPriorGoalApplied = true;
                 }
             }
         }
 
-        return ret;
+        return returnValue;
     };
 
     const goalsEstimate = useMemo<IGoalEstimate[]>(() => {
         const result: IGoalEstimate[] = [];
 
-        if (shardsGoals.length) {
+        if (shardsGoals.length > 0) {
             const shardsEstimate = ShardsService.getShardsEstimatedDays(
                 {
                     campaignsProgress: campaignsProgress,
@@ -213,7 +211,7 @@ export const Goals = () => {
             result.push(...goalsEstimate);
         }
 
-        if (upgradeRankOrMowGoals.length) {
+        if (upgradeRankOrMowGoals.length > 0) {
             const goalsEstimate = upgradeRankOrMowGoals.map(goal => {
                 const goalEstimate = estimatedUpgradesTotal.byCharactersPriority.find(x => x.goalId === goal.goalId);
                 const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x => {
@@ -272,7 +270,7 @@ export const Goals = () => {
             result.push(...goalsEstimate);
         }
 
-        if (upgradeAbilities.length) {
+        if (upgradeAbilities.length > 0) {
             for (const goal of upgradeAbilities) {
                 const targetLevel = Math.max(goal.activeEnd, goal.passiveEnd);
                 const currentXp = currentCharacterXp(
@@ -430,7 +428,7 @@ export const Goals = () => {
                     </AccordionDetails>
                 </Accordion>
             </div>
-            {!!upgradeRankOrMowGoals.length && (
+            {upgradeRankOrMowGoals.length > 0 && (
                 <div>
                     <div className="gap5 mx-0 my-5 flex flex-wrap items-center text-xl">
                         <span>
@@ -450,14 +448,15 @@ export const Goals = () => {
                                     goalEstimate={adjustedGoalsEstimates.goalEstimates
                                         .filter(x => x.goalId === goal.goalId)
                                         .reduce(
-                                            (prev, curr) =>
+                                            (previous, current) =>
                                                 ({
                                                     // We run this reduce solely to aggregate estimates for ascension goals that include
                                                     // both non-mythic and mythic shards, that's why we ignore other fields.
-                                                    ...curr,
-                                                    oTokensTotal: (prev?.oTokensTotal ?? 0) + (curr.oTokensTotal ?? 0),
-                                                    daysLeft: Math.max(prev?.daysLeft ?? 0, curr.daysLeft ?? 0),
-                                                    daysTotal: (prev?.daysTotal ?? 0) + (curr.daysTotal ?? 0),
+                                                    ...current,
+                                                    oTokensTotal:
+                                                        (previous?.oTokensTotal ?? 0) + (current.oTokensTotal ?? 0),
+                                                    daysLeft: Math.max(previous?.daysLeft ?? 0, current.daysLeft ?? 0),
+                                                    daysTotal: (previous?.daysTotal ?? 0) + (current.daysTotal ?? 0),
                                                 }) as IGoalEstimate
                                         )}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
@@ -480,7 +479,7 @@ export const Goals = () => {
                     )}
                 </div>
             )}
-            {!!shardsGoals.length && (
+            {shardsGoals.length > 0 && (
                 <div>
                     <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>
@@ -523,7 +522,7 @@ export const Goals = () => {
                     )}
                 </div>
             )}
-            {!!upgradeAbilities.length && (
+            {upgradeAbilities.length > 0 && (
                 <div>
                     <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>

@@ -48,7 +48,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const newGoal = GoalsService.convertToGenericGoal(updatedGoal);
             const updatedGoalIndex = state.findIndex(x => x.id === updatedGoal.goalId);
 
-            if (updatedGoalIndex < 0 || !newGoal) {
+            if (updatedGoalIndex === -1 || !newGoal) {
                 return state;
             }
 
@@ -60,13 +60,13 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
         case 'UpdateDailyRaids': {
             const { value } = action;
 
-            return state.map(currGoal => {
-                const newGoal = value.find(x => x.goalId === currGoal.id);
+            return state.map(currentGoal => {
+                const newGoal = value.find(x => x.goalId === currentGoal.id);
                 if (newGoal) {
-                    return { ...currGoal, dailyRaids: newGoal.include };
+                    return { ...currentGoal, dailyRaids: newGoal.include };
                 }
 
-                return currGoal;
+                return currentGoal;
             });
         }
         default: {

@@ -16,7 +16,7 @@ import { LreTile } from './lre-tile';
 import { SelectedTeamCard } from './selected-teams-card';
 import { TrackRequirementCheck } from './track-requirement-check';
 
-interface Props {
+interface Properties {
     legendaryEvent: ILegendaryEvent;
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
@@ -28,7 +28,7 @@ interface Props {
     restrictions: string[];
 }
 
-export const LreTeamsCard: React.FC<Props> = ({
+export const LreTeamsCard: React.FC<Properties> = ({
     legendaryEvent,
     track,
     progress,
@@ -39,7 +39,7 @@ export const LreTeamsCard: React.FC<Props> = ({
     deleteTeam,
     restrictions,
 }) => {
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -50,7 +50,7 @@ export const LreTeamsCard: React.FC<Props> = ({
     );
 
     useEffect(() => {
-        gridRef.current?.api?.sizeColumnsToFit();
+        gridReference.current?.api?.sizeColumnsToFit();
     }, [
         viewPreferences.showAlpha,
         viewPreferences.showBeta,
@@ -123,7 +123,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                         />
                     ))}
                 </div>
-                {selectedTeams.length ? (
+                {selectedTeams.length > 0 ? (
                     <>
                         <h3>Selected Teams ({selectedTeams.length})</h3>
                         <div className="flex-box wrap">

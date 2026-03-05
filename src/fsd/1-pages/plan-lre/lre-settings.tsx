@@ -14,7 +14,7 @@ import { ILreTileSettings, ILreViewSettings, IViewOption } from '@/fsd/3-feature
 
 import { LreTile } from './lre-tile';
 
-interface Props {
+interface Properties {
     lreViewSettings: ILreViewSettings & ILreTileSettings;
     autoTeamsSettings: IAutoTeamsPreferences;
     characters: ICharacter2[];
@@ -27,7 +27,13 @@ interface Props {
     ) => void;
 }
 
-export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSettings, autoTeamsSettings, save }) => {
+export const LreSettings: React.FC<Properties> = ({
+    onClose,
+    characters,
+    lreViewSettings,
+    autoTeamsSettings,
+    save,
+}) => {
     const [viewSettings, setViewSettings] = useState<ILreViewSettings & ILreTileSettings>(lreViewSettings);
     const [teamsSettings, setTeamsSettings] = useState<IAutoTeamsPreferences>(autoTeamsSettings);
     const [recommendFirst, setRecommendFirst] = useState<string[]>(
@@ -42,9 +48,9 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         value: boolean
     ) => {
         if (Object.hasOwn(viewSettings, setting)) {
-            setViewSettings(curr => ({ ...curr, [setting]: value }));
+            setViewSettings(current => ({ ...current, [setting]: value }));
         } else {
-            setTeamsSettings(curr => ({ ...curr, [setting]: value }));
+            setTeamsSettings(current => ({ ...current, [setting]: value }));
         }
     };
 

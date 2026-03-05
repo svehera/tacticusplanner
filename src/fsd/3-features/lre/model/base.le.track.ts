@@ -72,29 +72,25 @@ export class LETrack implements ILegendaryEventTrack {
         const coreSuggestedTeams = this.suggestTeam(settings, onlyUnlocked, restrictions);
         const result: Record<string, ICharacter2[]> = {};
 
-        this.unitsRestrictions.forEach(x => {
+        for (const x of this.unitsRestrictions) {
             result[x.name] = restrictions.includes(x.name)
                 ? [...coreSuggestedTeams]
                 : this.suggestTeam(settings, onlyUnlocked, [x.name]);
-        });
+        }
 
         if (!this.isAutoTeams(settings)) {
             const result2: Record<string, Array<ICharacter2 | undefined>> = {};
-            const uniqChars = uniqBy(
-                Object.values(result).flatMap(x => x),
-                'name'
-            );
+            const uniqChars = uniqBy(Object.values(result).flat(), 'name');
 
             const ordered = orderBy(uniqChars, [settings.orderBy], [settings.direction]).filter(x =>
                 onlyUnlocked ? x.rank > Rank.Locked : true
             );
 
-            for (let i = 0; i < ordered.length; i++) {
-                const uniqChar = ordered[i];
-                this.unitsRestrictions.forEach(x => {
+            for (const [index, uniqChar] of ordered.entries()) {
+                for (const x of this.unitsRestrictions) {
                     result2[x.name] ??= [];
-                    result2[x.name][i] = result[x.name].find(x => x.name === uniqChar.name);
-                });
+                    result2[x.name][index] = result[x.name].find(x => x.name === uniqChar.name);
+                }
             }
             return result2;
         }
@@ -107,12 +103,13 @@ export class LETrack implements ILegendaryEventTrack {
         onlyUnlocked: boolean,
         restrictions: string[]
     ): Array<ICharacter2> {
-        const allowedChars = !restrictions.length
-            ? this.allowedUnits
-            : intersectionBy(
-                  ...this.unitsRestrictions.filter(x => restrictions.includes(x.name)).map(x => x.units),
-                  'name'
-              );
+        const allowedChars =
+            restrictions.length === 0
+                ? this.allowedUnits
+                : intersectionBy(
+                      ...this.unitsRestrictions.filter(x => restrictions.includes(x.name)).map(x => x.units),
+                      'name'
+                  );
         const sortChars = allowedChars
             .filter(x => (onlyUnlocked ? x.rank > Rank.Locked : true))
             .map(unit => ({

@@ -5,7 +5,7 @@ import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 
 import { SlotType, GuidesGroup, GuidesStatus } from './guides.enums';
 
-export interface IGetGuidesQueryParams {
+export interface IGetGuidesQueryParameters {
     group?: GuidesGroup;
     primaryModes?: string;
     subModes?: string[];

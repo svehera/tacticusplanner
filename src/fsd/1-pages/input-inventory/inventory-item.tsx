@@ -8,18 +8,18 @@ import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { IInventoryUpgrade } from './inventory-models';
 
-interface Props {
+interface Properties {
     data: IInventoryUpgrade;
     showIncDec: boolean;
     dataUpdate: (upgradeId: string, value: number) => void;
 }
 
-const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
+const InventoryItemFunction: React.FC<Properties> = ({ data, showIncDec, dataUpdate }) => {
     const [amount, setAmount] = React.useState<number | ''>(data.quantity);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, upgradeId: string) => {
         const value = event.target.value === '' ? 0 : Number(event.target.value);
-        const result = value > 1000 ? 1000 : value;
+        const result = Math.min(value, 1000);
         dataUpdate(upgradeId, result);
         setAmount(event.target.value === '' ? '' : Number(event.target.value));
     };
@@ -86,4 +86,4 @@ const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
     );
 };
 
-export const InventoryItem = React.memo(InventoryItemFn);
+export const InventoryItem = React.memo(InventoryItemFunction);

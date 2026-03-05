@@ -4,12 +4,12 @@ import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
-interface Props {
+interface Properties {
     battle: ICampaignBattleComposed;
     scale: number;
 }
 
-export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
+export const CampaignBattle: React.FC<Properties> = ({ battle, scale }) => {
     return (
         <div className="content-center">
             <table>
@@ -34,9 +34,9 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
                                     return (
                                         <span key={index}>
                                             Guaranteed: {reward.id}{' '}
-                                            {reward.min !== reward.max
-                                                ? reward.min + ' - ' + reward.max
-                                                : ': ' + reward.min}
+                                            {reward.min === reward.max
+                                                ? ': ' + reward.min
+                                                : reward.min + ' - ' + reward.max}
                                         </span>
                                     );
                                 })}

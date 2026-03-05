@@ -6,13 +6,13 @@ import { RarityMapper } from '@/fsd/5-shared/model';
 import { IBaseUpgrade, ICraftedUpgrade } from './model';
 import { UpgradeImage } from './upgrade-image';
 
-interface Props {
+interface Properties {
     upgrade: IBaseUpgrade | ICraftedUpgrade;
     checked: boolean;
     checkedChanges: (value: boolean) => void;
 }
 
-export const UpgradeControl: React.FC<Props> = ({ upgrade, checked, checkedChanges }) => {
+export const UpgradeControl: React.FC<Properties> = ({ upgrade, checked, checkedChanges }) => {
     return (
         <FormControlLabel
             control={

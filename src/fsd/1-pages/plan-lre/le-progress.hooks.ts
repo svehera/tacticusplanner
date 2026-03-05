@@ -41,105 +41,105 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     };
 
     const createNewModel = (
-        currModel: ILreProgressModel,
+        currentModel: ILreProgressModel,
         trackId: LreTrackId,
         battleIndex: number,
-        reqId: string,
+        requestId: string,
         status: RequirementStatus,
         forceOverwrite = false
     ): ILreProgressModel => {
-        const trackProgressIndex = currModel.tracksProgress.findIndex(x => x.trackId === trackId);
-        if (trackProgressIndex === -1) return currModel;
+        const trackProgressIndex = currentModel.tracksProgress.findIndex(x => x.trackId === trackId);
+        if (trackProgressIndex === -1) return currentModel;
 
-        const trackProgress = currModel.tracksProgress[trackProgressIndex];
+        const trackProgress = currentModel.tracksProgress[trackProgressIndex];
         const battleProgressIndex = trackProgress.battles.findIndex(x => x.battleIndex === battleIndex);
-        if (battleProgressIndex === -1) return currModel;
+        if (battleProgressIndex === -1) return currentModel;
 
         const battleProgress = trackProgress.battles[battleProgressIndex];
-        const reqProgressIndex = battleProgress.requirementsProgress.findIndex(x => x.id === reqId);
-        if (reqProgressIndex === -1) return currModel;
+        const requestProgressIndex = battleProgress.requirementsProgress.findIndex(x => x.id === requestId);
+        if (requestProgressIndex === -1) return currentModel;
 
-        const reqProgress = battleProgress.requirementsProgress[reqProgressIndex];
+        const requestProgress = battleProgress.requirementsProgress[requestProgressIndex];
 
-        const autoCompleteReqs = [
+        const autoCompleteReqs = new Set([
             LrePointsCategoryId.defeatAll,
             LrePointsCategoryId.killScore,
             LrePointsCategoryId.highScore,
-        ];
+        ]);
 
-        let updatedReqProgress: ILreBattleRequirementsProgress;
+        let updatedRequestProgress: ILreBattleRequirementsProgress;
         let updatedRequirementsProgress = [...battleProgress.requirementsProgress];
 
         if (status === RequirementStatus.Cleared) {
-            updatedReqProgress = {
-                ...reqProgress,
+            updatedRequestProgress = {
+                ...requestProgress,
                 completed: true,
                 blocked: false,
                 // When completed, always set to Cleared status (unless preserving PartiallyCleared for killScore/highScore)
                 status:
                     !forceOverwrite &&
-                    reqProgress.status === RequirementStatus.PartiallyCleared &&
-                    (reqProgress.id === LrePointsCategoryId.killScore ||
-                        reqProgress.id === LrePointsCategoryId.highScore)
+                    requestProgress.status === RequirementStatus.PartiallyCleared &&
+                    (requestProgress.id === LrePointsCategoryId.killScore ||
+                        requestProgress.id === LrePointsCategoryId.highScore)
                         ? RequirementStatus.PartiallyCleared
                         : RequirementStatus.Cleared,
                 // Clear killScore/highScore when forcing to Cleared
-                killScore: forceOverwrite ? undefined : reqProgress.killScore,
-                highScore: forceOverwrite ? undefined : reqProgress.highScore,
+                killScore: forceOverwrite ? undefined : requestProgress.killScore,
+                highScore: forceOverwrite ? undefined : requestProgress.highScore,
             };
 
             // If marking a non-auto requirement (restriction) as complete, auto-complete defeatAll, killScore, and highScore
-            if (!autoCompleteReqs.includes(reqProgress.id as LrePointsCategoryId)) {
-                updatedRequirementsProgress = updatedRequirementsProgress.map(req =>
-                    autoCompleteReqs.includes(req.id as LrePointsCategoryId)
+            if (!autoCompleteReqs.has(requestProgress.id as LrePointsCategoryId)) {
+                updatedRequirementsProgress = updatedRequirementsProgress.map(request =>
+                    autoCompleteReqs.has(request.id as LrePointsCategoryId)
                         ? {
-                              ...req,
+                              ...request,
                               completed: true,
                               blocked: false,
                               status: 1,
                               killScore: undefined,
                               highScore: undefined,
                           }
-                        : req
+                        : request
                 );
             }
             // If marking defeatAll as complete, also mark killScore and highScore as complete (but leave restrictions as-is)
-            else if (reqProgress.id === LrePointsCategoryId.defeatAll) {
-                updatedRequirementsProgress = updatedRequirementsProgress.map(req =>
-                    autoCompleteReqs.includes(req.id as LrePointsCategoryId)
+            else if (requestProgress.id === LrePointsCategoryId.defeatAll) {
+                updatedRequirementsProgress = updatedRequirementsProgress.map(request =>
+                    autoCompleteReqs.has(request.id as LrePointsCategoryId)
                         ? {
-                              ...req,
+                              ...request,
                               completed: true,
                               blocked: false,
                               status: 1,
                               killScore: undefined,
                               highScore: undefined,
                           }
-                        : req
+                        : request
                 );
             }
         } else if (status === RequirementStatus.StopHere) {
-            updatedReqProgress = {
-                ...reqProgress,
+            updatedRequestProgress = {
+                ...requestProgress,
                 completed: false,
                 blocked: true,
                 // If forceOverwrite, set to StopHere; otherwise preserve
                 status: RequirementStatus.StopHere,
-                killScore: forceOverwrite ? undefined : reqProgress.killScore,
-                highScore: forceOverwrite ? undefined : reqProgress.highScore,
+                killScore: forceOverwrite ? undefined : requestProgress.killScore,
+                highScore: forceOverwrite ? undefined : requestProgress.highScore,
             };
         } else {
-            updatedReqProgress = {
-                ...reqProgress,
+            updatedRequestProgress = {
+                ...requestProgress,
                 completed: false,
                 blocked: false,
                 status: status,
-                killScore: forceOverwrite ? undefined : reqProgress.killScore,
-                highScore: forceOverwrite ? undefined : reqProgress.highScore,
+                killScore: forceOverwrite ? undefined : requestProgress.killScore,
+                highScore: forceOverwrite ? undefined : requestProgress.highScore,
             };
         }
 
-        updatedRequirementsProgress[reqProgressIndex] = updatedReqProgress;
+        updatedRequirementsProgress[requestProgressIndex] = updatedRequestProgress;
         const updatedBattleProgress = {
             ...battleProgress,
             requirementsProgress: updatedRequirementsProgress,
@@ -153,20 +153,20 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
             battles: updatedBattles,
         };
 
-        const updatedTracksProgress = [...currModel.tracksProgress];
+        const updatedTracksProgress = [...currentModel.tracksProgress];
         updatedTracksProgress[trackProgressIndex] = updatedTrackProgress;
 
-        return { ...currModel, tracksProgress: updatedTracksProgress };
+        return { ...currentModel, tracksProgress: updatedTracksProgress };
     };
 
     const setBattleState = (
         trackId: LreTrackId,
         battleIndex: number,
-        reqId: string,
+        requestId: string,
         status: RequirementStatus,
         forceOverwrite = false
     ) => {
-        updateDto(createNewModel(model, trackId, battleIndex, reqId, status, forceOverwrite));
+        updateDto(createNewModel(model, trackId, battleIndex, requestId, status, forceOverwrite));
     };
 
     return { model, createNewModel, updateDto, updateNotes, updateOccurrenceProgress, setBattleState };

@@ -23,7 +23,7 @@ import { CharacterTile } from '@/fsd/3-features/characters/components/character-
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
 
-type Props = {
+type Properties = {
     teamName: string;
     isOpen: boolean;
     characters: ICharacter2[];
@@ -35,7 +35,7 @@ type Props = {
     allowPropsEdit?: boolean;
 };
 
-export const SelectTeamDialog: React.FC<Props> = ({
+export const SelectTeamDialog: React.FC<Properties> = ({
     isOpen,
     onClose,
     team,
@@ -44,7 +44,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
     teamName: defaultTeamName,
     rarityCap: defaultRarityCap,
     blockedCharacters,
-    allowPropsEdit = false,
+    allowPropsEdit: allowPropertiesEdit = false,
 }) => {
     const fallbackCharacter = unsetCharacter as ICharacter2;
     const charactersViewContext = useContext(CharactersViewContext);
@@ -54,28 +54,28 @@ export const SelectTeamDialog: React.FC<Props> = ({
     const [teamName, setTeamName] = useState(defaultTeamName);
 
     const handleCharacterSelect = (character: IUnit) => {
-        setLineup(curr => {
-            if (curr.some(x => x.id === character.id)) {
-                return curr.filter(x => x.id !== character.id);
+        setLineup(current => {
+            if (current.some(x => x.id === character.id)) {
+                return current.filter(x => x.id !== character.id);
             } else {
-                if (curr.length === size) {
-                    return curr;
+                if (current.length === size) {
+                    return current;
                 }
 
                 const newChar = characters.find(x => x.id === character.id);
 
                 if (newChar) {
-                    return [...curr, newChar];
+                    return [...current, newChar];
                 }
 
-                return curr;
+                return current;
             }
         });
     };
 
     const currentTeam = useMemo(() => {
-        return Array.from({ length: size }, (_, i) => {
-            const char = lineup[i];
+        return Array.from({ length: size }, (_, index) => {
+            const char = lineup[index];
 
             if (char) {
                 return (
@@ -87,7 +87,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
                 );
             }
 
-            return <CharacterTile key={fallbackCharacter.name + i} character={fallbackCharacter} />;
+            return <CharacterTile key={fallbackCharacter.name + index} character={fallbackCharacter} />;
         });
     }, [lineup, rarityCap]);
 
@@ -95,7 +95,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
         <Dialog open={isOpen} onClose={() => onClose()} fullScreen={isMobile} fullWidth>
             <DialogTitle>
                 Edit team
-                <Conditional condition={allowPropsEdit}>
+                <Conditional condition={allowPropertiesEdit}>
                     <FlexBox gap={10} className="mt-5">
                         <TextField
                             className="min-w-1/2"
@@ -119,7 +119,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
                     value={{
                         ...charactersViewContext,
                         getOpacity: character =>
-                            lineup.some(x => x.id === character.id) || blockedCharacters.some(x => x === character.name)
+                            lineup.some(x => x.id === character.id) || blockedCharacters.includes(character.name)
                                 ? 0.5
                                 : 1,
                     }}>

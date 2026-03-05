@@ -1,6 +1,6 @@
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
-interface Props {
+interface Properties {
     warOffense: boolean;
     warDefense: boolean;
     warEnabled: boolean;
@@ -23,7 +23,7 @@ interface Props {
     onCancel: () => void;
     onSave: () => void;
 }
-export const SaveTeamDialog: React.FC<Props> = ({
+export const SaveTeamDialog: React.FC<Properties> = ({
     warOffense,
     warDefense,
     warEnabled,
@@ -45,7 +45,7 @@ export const SaveTeamDialog: React.FC<Props> = ({
     onTeamNameChange,
     onCancel,
     onSave,
-}: Props) => {
+}: Properties) => {
     if (!isOpen) return null;
 
     const handleBattleFieldLevelChange = (level: number) => {

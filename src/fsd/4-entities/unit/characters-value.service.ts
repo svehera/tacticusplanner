@@ -49,7 +49,7 @@ export class CharactersValueService {
                 })
                 .filter(x => !!x);
 
-            if (!rankUpgrades.length) {
+            if (rankUpgrades.length === 0) {
                 continue;
             }
 
@@ -121,16 +121,21 @@ export class CharactersValueService {
         const ShardBS = 35;
 
         switch (initialRarity) {
-            case Rarity.Common:
+            case Rarity.Common: {
                 return ShardBS * 40;
-            case Rarity.Uncommon:
+            }
+            case Rarity.Uncommon: {
                 return ShardBS * 80;
-            case Rarity.Rare:
+            }
+            case Rarity.Rare: {
                 return ShardBS * 130;
-            case Rarity.Epic:
+            }
+            case Rarity.Epic: {
                 return ShardBS * 250;
-            case Rarity.Legendary:
+            }
+            case Rarity.Legendary: {
                 return ShardBS * 500;
+            }
         }
 
         console.warn('Initial Rarity unknown');
@@ -138,109 +143,159 @@ export class CharactersValueService {
     }
 
     public static getExperienceValue(level: number): number {
-        const ExpBS = 175 / 12500;
+        const ExpBS = 175 / 12_500;
 
         switch (level) {
-            case 1:
+            case 1: {
                 return 0;
-            case 2:
+            }
+            case 2: {
                 return ExpBS * 25;
-            case 3:
+            }
+            case 3: {
                 return ExpBS * 60;
-            case 4:
+            }
+            case 4: {
                 return ExpBS * 120;
-            case 5:
+            }
+            case 5: {
                 return ExpBS * 200;
-            case 6:
+            }
+            case 6: {
                 return ExpBS * 300;
-            case 7:
+            }
+            case 7: {
                 return ExpBS * 420;
-            case 8:
+            }
+            case 8: {
                 return ExpBS * 560;
-            case 9:
+            }
+            case 9: {
                 return ExpBS * 720;
-            case 10:
+            }
+            case 10: {
                 return ExpBS * 900;
-            case 11:
+            }
+            case 11: {
                 return ExpBS * 1100;
-            case 12:
+            }
+            case 12: {
                 return ExpBS * 1350;
-            case 13:
+            }
+            case 13: {
                 return ExpBS * 1650;
-            case 14:
+            }
+            case 14: {
                 return ExpBS * 2000;
-            case 15:
+            }
+            case 15: {
                 return ExpBS * 2400;
-            case 16:
+            }
+            case 16: {
                 return ExpBS * 2850;
-            case 17:
+            }
+            case 17: {
                 return ExpBS * 3350;
-            case 18:
+            }
+            case 18: {
                 return ExpBS * 3950;
-            case 19:
+            }
+            case 19: {
                 return ExpBS * 4700;
-            case 20:
+            }
+            case 20: {
                 return ExpBS * 5600;
-            case 21:
+            }
+            case 21: {
                 return ExpBS * 6700;
-            case 22:
+            }
+            case 22: {
                 return ExpBS * 8100;
-            case 23:
+            }
+            case 23: {
                 return ExpBS * 9900;
-            case 24:
-                return ExpBS * 12200;
-            case 25:
-                return ExpBS * 15200;
-            case 26:
-                return ExpBS * 19200;
-            case 27:
-                return ExpBS * 24700;
-            case 28:
-                return ExpBS * 32200;
-            case 29:
-                return ExpBS * 42200;
-            case 30:
-                return ExpBS * 55200;
-            case 31:
-                return ExpBS * 72200;
-            case 32:
-                return ExpBS * 94200;
-            case 33:
-                return ExpBS * 122200;
-            case 34:
-                return ExpBS * 157200;
-            case 35:
-                return ExpBS * 200200;
-            case 36:
-                return ExpBS * 252200;
-            case 37:
-                return ExpBS * 314200;
-            case 38:
-                return ExpBS * 387200;
-            case 39:
-                return ExpBS * 472200;
-            case 40:
-                return ExpBS * 570200;
-            case 41:
-                return ExpBS * 682200;
-            case 42:
-                return ExpBS * 809200;
-            case 43:
-                return ExpBS * 952200;
-            case 44:
-                return ExpBS * 1112200;
-            case 45:
-                return ExpBS * 1290200;
-            case 46:
-                return ExpBS * 1487200;
-            case 47:
-                return ExpBS * 1704200;
-            case 48:
-                return ExpBS * 1942200;
-            case 49:
-                return ExpBS * 2202200;
-            case 50:
-                return ExpBS * 2485200;
+            }
+            case 24: {
+                return ExpBS * 12_200;
+            }
+            case 25: {
+                return ExpBS * 15_200;
+            }
+            case 26: {
+                return ExpBS * 19_200;
+            }
+            case 27: {
+                return ExpBS * 24_700;
+            }
+            case 28: {
+                return ExpBS * 32_200;
+            }
+            case 29: {
+                return ExpBS * 42_200;
+            }
+            case 30: {
+                return ExpBS * 55_200;
+            }
+            case 31: {
+                return ExpBS * 72_200;
+            }
+            case 32: {
+                return ExpBS * 94_200;
+            }
+            case 33: {
+                return ExpBS * 122_200;
+            }
+            case 34: {
+                return ExpBS * 157_200;
+            }
+            case 35: {
+                return ExpBS * 200_200;
+            }
+            case 36: {
+                return ExpBS * 252_200;
+            }
+            case 37: {
+                return ExpBS * 314_200;
+            }
+            case 38: {
+                return ExpBS * 387_200;
+            }
+            case 39: {
+                return ExpBS * 472_200;
+            }
+            case 40: {
+                return ExpBS * 570_200;
+            }
+            case 41: {
+                return ExpBS * 682_200;
+            }
+            case 42: {
+                return ExpBS * 809_200;
+            }
+            case 43: {
+                return ExpBS * 952_200;
+            }
+            case 44: {
+                return ExpBS * 1_112_200;
+            }
+            case 45: {
+                return ExpBS * 1_290_200;
+            }
+            case 46: {
+                return ExpBS * 1_487_200;
+            }
+            case 47: {
+                return ExpBS * 1_704_200;
+            }
+            case 48: {
+                return ExpBS * 1_942_200;
+            }
+            case 49: {
+                return ExpBS * 2_202_200;
+            }
+            case 50: {
+                return ExpBS * 2_485_200;
+            }
             default: {
                 console.warn('Level unknown');
                 return 0;
@@ -249,7 +304,7 @@ export class CharactersValueService {
     }
 
     public static getAbilityValue(level: number): number {
-        const CoinBS = 780 / 60000;
+        const CoinBS = 780 / 60_000;
         const CommonBadgeBS = 70 / 5;
         const UncommonBadgeBS = 30;
         const RareBadgeBS = 60;
@@ -355,55 +410,55 @@ export class CharactersValueService {
             tally += EpicBadgeBS * 3 + CoinBS * 9500;
         }
         if (level >= 34) {
-            tally += EpicBadgeBS * 4 + CoinBS * 10000;
+            tally += EpicBadgeBS * 4 + CoinBS * 10_000;
         }
         if (level >= 35) {
-            tally += EpicBadgeBS * 5 + CoinBS * 11000;
+            tally += EpicBadgeBS * 5 + CoinBS * 11_000;
         }
         if (level >= 36) {
-            tally += LegendaryBadgeBS * 1 + CoinBS * 12000;
+            tally += LegendaryBadgeBS * 1 + CoinBS * 12_000;
         }
         if (level >= 37) {
-            tally += LegendaryBadgeBS * 1 + CoinBS * 13000;
+            tally += LegendaryBadgeBS * 1 + CoinBS * 13_000;
         }
         if (level >= 38) {
-            tally += LegendaryBadgeBS * 1 + CoinBS * 14000;
+            tally += LegendaryBadgeBS * 1 + CoinBS * 14_000;
         }
         if (level >= 39) {
-            tally += LegendaryBadgeBS * 2 + CoinBS * 15000;
+            tally += LegendaryBadgeBS * 2 + CoinBS * 15_000;
         }
         if (level >= 40) {
-            tally += LegendaryBadgeBS * 2 + CoinBS * 16000;
+            tally += LegendaryBadgeBS * 2 + CoinBS * 16_000;
         }
         if (level >= 41) {
-            tally += LegendaryBadgeBS * 2 + CoinBS * 18000;
+            tally += LegendaryBadgeBS * 2 + CoinBS * 18_000;
         }
         if (level >= 42) {
-            tally += LegendaryBadgeBS * 3 + CoinBS * 20000;
+            tally += LegendaryBadgeBS * 3 + CoinBS * 20_000;
         }
         if (level >= 43) {
-            tally += LegendaryBadgeBS * 3 + CoinBS * 22500;
+            tally += LegendaryBadgeBS * 3 + CoinBS * 22_500;
         }
         if (level >= 44) {
-            tally += LegendaryBadgeBS * 4 + CoinBS * 25000;
+            tally += LegendaryBadgeBS * 4 + CoinBS * 25_000;
         }
         if (level >= 45) {
-            tally += LegendaryBadgeBS * 5 + CoinBS * 30000;
+            tally += LegendaryBadgeBS * 5 + CoinBS * 30_000;
         }
         if (level >= 46) {
-            tally += LegendaryBadgeBS * 6 + CoinBS * 40000;
+            tally += LegendaryBadgeBS * 6 + CoinBS * 40_000;
         }
         if (level >= 47) {
-            tally += LegendaryBadgeBS * 7 + CoinBS * 50000;
+            tally += LegendaryBadgeBS * 7 + CoinBS * 50_000;
         }
         if (level >= 48) {
-            tally += LegendaryBadgeBS * 8 + CoinBS * 75000;
+            tally += LegendaryBadgeBS * 8 + CoinBS * 75_000;
         }
         if (level >= 49) {
-            tally += LegendaryBadgeBS * 9 + CoinBS * 100000;
+            tally += LegendaryBadgeBS * 9 + CoinBS * 100_000;
         }
         if (level >= 50) {
-            tally += LegendaryBadgeBS * 10 + CoinBS * 250000;
+            tally += LegendaryBadgeBS * 10 + CoinBS * 250_000;
         }
         return tally;
     }
@@ -413,30 +468,42 @@ export class CharactersValueService {
         const LegendaryOrbBS = 2800 / 3;
 
         switch (stars) {
-            case RarityStars.None:
+            case RarityStars.None: {
                 return 0;
-            case RarityStars.OneStar:
+            }
+            case RarityStars.OneStar: {
                 return ShardBS * 10;
-            case RarityStars.TwoStars:
+            }
+            case RarityStars.TwoStars: {
                 return ShardBS * 25;
-            case RarityStars.ThreeStars:
+            }
+            case RarityStars.ThreeStars: {
                 return ShardBS * 40;
-            case RarityStars.FourStars:
+            }
+            case RarityStars.FourStars: {
                 return ShardBS * 55;
-            case RarityStars.FiveStars:
+            }
+            case RarityStars.FiveStars: {
                 return ShardBS * 85;
-            case RarityStars.RedOneStar:
+            }
+            case RarityStars.RedOneStar: {
                 return ShardBS * 125;
-            case RarityStars.RedTwoStars:
+            }
+            case RarityStars.RedTwoStars: {
                 return ShardBS * 190;
-            case RarityStars.RedThreeStars:
+            }
+            case RarityStars.RedThreeStars: {
                 return ShardBS * 275;
-            case RarityStars.RedFourStars:
+            }
+            case RarityStars.RedFourStars: {
                 return ShardBS * 425 + LegendaryOrbBS * 10;
-            case RarityStars.RedFiveStars:
+            }
+            case RarityStars.RedFiveStars: {
                 return ShardBS * 675 + LegendaryOrbBS * 15;
-            case RarityStars.OneBlueStar:
+            }
+            case RarityStars.OneBlueStar: {
                 return ShardBS * 1175 + LegendaryOrbBS * 20;
+            }
             // TODO(mythic): Implement other blue stars and Mythic Wings value
             default: {
                 console.warn('Stars value unknown');
@@ -449,16 +516,21 @@ export class CharactersValueService {
         const ShardBS = 35;
 
         switch (rarity) {
-            case Rarity.Common:
+            case Rarity.Common: {
                 return 0;
-            case Rarity.Uncommon:
+            }
+            case Rarity.Uncommon: {
                 return ShardBS * 25;
-            case Rarity.Rare:
+            }
+            case Rarity.Rare: {
                 return ShardBS * 55;
-            case Rarity.Epic:
+            }
+            case Rarity.Epic: {
                 return ShardBS * 125;
-            case Rarity.Legendary:
+            }
+            case Rarity.Legendary: {
                 return ShardBS * 275;
+            }
             default: {
                 console.warn('Rarity value unknown');
                 return 0;
@@ -476,20 +548,26 @@ export class CharactersValueService {
         const MythicOrbBS = 6720 / 3;
 
         switch (rarity) {
-            case Rarity.Common:
+            case Rarity.Common: {
                 return 0;
-            case Rarity.Uncommon:
+            }
+            case Rarity.Uncommon: {
                 return ShardBS * 15 + UncommonOrbBS * 10;
-            case Rarity.Rare:
+            }
+            case Rarity.Rare: {
                 return ShardBS * 20 + RareOrbBS * 10;
-            case Rarity.Epic:
+            }
+            case Rarity.Epic: {
                 return ShardBS * 50 + EpicOrbBS * 10;
-            case Rarity.Legendary:
+            }
+            case Rarity.Legendary: {
                 return ShardBS * 100 + LegendaryOrbBS * 10;
-            case Rarity.Mythic:
+            }
+            case Rarity.Mythic: {
                 // Mythic values were invented to get a rough idea. I have no idea where the pre-Mythic
                 // value calcs come from, so unable to replicate the same logic here.
                 return ShardBS * 200 + MythicOrbBS * 10;
+            }
             default: {
                 console.warn('Rarity value unknown');
                 return 0;

@@ -30,12 +30,12 @@ const RANKS = [
     Rank.Adamantine3,
 ];
 
-interface FilterGroupProps {
+interface FilterGroupProperties {
     label: string;
     children: React.ReactNode;
 }
 
-const FilterGroup: React.FC<FilterGroupProps> = ({ label, children }) => (
+const FilterGroup: React.FC<FilterGroupProperties> = ({ label, children }) => (
     <div className="flex flex-col gap-1">
         <label className="text-[10px] font-bold tracking-wider text-slate-500 uppercase dark:text-slate-400">
             {label}
@@ -44,7 +44,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({ label, children }) => (
     </div>
 );
 
-interface Props {
+interface Properties {
     searchText: string;
     minRarity: Rarity;
     maxRarity: Rarity;
@@ -60,7 +60,7 @@ interface Props {
     onFactionsChange: (factions: FactionId[]) => void;
 }
 
-export const UnitFilter: React.FC<Props> = ({
+export const UnitFilter: React.FC<Properties> = ({
     searchText,
     minRarity,
     maxRarity,

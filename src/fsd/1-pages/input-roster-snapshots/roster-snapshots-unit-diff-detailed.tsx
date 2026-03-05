@@ -13,19 +13,19 @@ import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settin
 
 import { ISnapshotCharacter, ISnapshotMachineOfWar, ISnapshotUnitDiff } from './models';
 
-interface ProgressionRowProps {
+interface ProgressionRowProperties {
     diffFlag: boolean;
     icon1: React.ReactNode;
     icon2: React.ReactNode;
     className?: string;
 }
 
-const ProgressionRow: React.FC<ProgressionRowProps> = ({
+const ProgressionRow: React.FC<ProgressionRowProperties> = ({
     diffFlag,
     icon1,
     icon2,
     className = '',
-}: ProgressionRowProps) => (
+}: ProgressionRowProperties) => (
     <div className={`flex items-center justify-start space-x-2 ${className}`}>
         <div className="flex h-6 w-10 items-center justify-center">
             {diffFlag ? icon1 : <span className="opacity-0">{icon1}</span>}
@@ -35,7 +35,7 @@ const ProgressionRow: React.FC<ProgressionRowProps> = ({
     </div>
 );
 
-interface Props {
+interface Properties {
     showShards: RosterSnapshotShowVariableSettings;
     showMythicShards: RosterSnapshotShowVariableSettings;
     showXpLevel: RosterSnapshotShowVariableSettings;
@@ -44,14 +44,14 @@ interface Props {
     diff: ISnapshotUnitDiff;
 }
 
-export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
+export const RosterSnapshotsUnitDiffDetailed: React.FC<Properties> = ({
     showShards,
     showMythicShards,
     showXpLevel,
     char,
     mow,
     diff,
-}: Props) => {
+}: Properties) => {
     const staticChar = char ? CharactersService.resolveCharacter(char.id) : undefined;
     const staticMow = mow ? MowsService.resolveToStatic(mow.id) : undefined;
 

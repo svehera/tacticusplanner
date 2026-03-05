@@ -31,8 +31,8 @@ import { CharactersService, ICharacter2, RankSelect } from '@/fsd/4-entities/cha
 import { useCharacters } from './characters-column-defs';
 
 export const LearnCharacters = () => {
-    const gridRef = useRef<AgGridReact<ICharacter2>>(null);
-    const [searchParams] = useSearchParams();
+    const gridReference = useRef<AgGridReact<ICharacter2>>(null);
+    const [searchParameters] = useSearchParams();
     const navigate = useNavigate();
 
     const {
@@ -76,15 +76,15 @@ export const LearnCharacters = () => {
     });
 
     useEffect(() => {
-        const damageTypes = searchParams.getAll('damageTypes'); // supports multiple ?damageTypes=... values
-        const name = searchParams.get('name');
-        const minHits = searchParams.get('minHits');
-        const maxHits = searchParams.get('maxHits');
-        const attackType = searchParams.get('attackType');
-        const movement = searchParams.get('movement');
-        const distance = searchParams.get('distance');
-        const traits = searchParams.getAll('trait');
-        const alliance = searchParams.getAll('alliance');
+        const damageTypes = searchParameters.getAll('damageTypes'); // supports multiple ?damageTypes=... values
+        const name = searchParameters.get('name');
+        const minHits = searchParameters.get('minHits');
+        const maxHits = searchParameters.get('maxHits');
+        const attackType = searchParameters.get('attackType');
+        const movement = searchParameters.get('movement');
+        const distance = searchParameters.get('distance');
+        const traits = searchParameters.getAll('trait');
+        const alliance = searchParameters.getAll('alliance');
         const newFilter: Filter = {
             name: name ?? '',
             minHits: minHits ? Number(minHits) : '',
@@ -101,17 +101,17 @@ export const LearnCharacters = () => {
     }, []);
 
     const handleFilterChange = (name: keyof Filter, value: string | boolean | number | string[]) => {
-        setFilter(prev => ({ ...prev, [name]: value }));
-        const params = new URLSearchParams(searchParams);
+        setFilter(previous => ({ ...previous, [name]: value }));
+        const parameters = new URLSearchParams(searchParameters);
         if (Array.isArray(value)) {
-            params.delete(name);
-            value.forEach(v => params.append(name, String(v)));
+            parameters.delete(name);
+            for (const v of value) parameters.append(name, String(v));
         } else if (value === '' || value === false) {
-            params.delete(name);
+            parameters.delete(name);
         } else {
-            params.set(name, String(value));
+            parameters.set(name, String(value));
         }
-        navigate({ search: params.toString() }, { replace: true });
+        navigate({ search: parameters.toString() }, { replace: true });
     };
 
     const defaultColDef: ColDef<ICharacter2> = {
@@ -142,9 +142,9 @@ export const LearnCharacters = () => {
     const traitsOptions = useMemo(() => {
         const activeTraits = new Set<string>();
 
-        resolvedCharacters.forEach(c => {
-            c.traits?.forEach(t => activeTraits.add(t));
-        });
+        for (const c of resolvedCharacters) {
+            if (c.traits) for (const t of c.traits) activeTraits.add(t);
+        }
 
         return Object.values(Trait).filter(label => {
             const key = getTraitStringFromLabel(label);
@@ -213,14 +213,14 @@ export const LearnCharacters = () => {
     const doesExternalFilterPass = useCallback(
         (node: IRowNode<ICharacter2>) => {
             const doesDamageTypeFilterPass = () => {
-                if (!filter.damageTypes.length) {
+                if (filter.damageTypes.length === 0) {
                     return true;
                 }
                 return filter.damageTypes.every(type => node.data?.damageTypes.all.includes(type));
             };
 
             const doesTraitsFilterPass = () => {
-                if (!filter.traits.length) {
+                if (filter.traits.length === 0) {
                     return true;
                 }
 
@@ -228,21 +228,21 @@ export const LearnCharacters = () => {
                 return filter.traits.every(label => {
                     const key = getTraitStringFromLabel(label);
                     if (!key) return false;
-                    if (key !== 'Mechanical') {
-                        const includes = nodeTraits.includes(key);
-                        return includes;
-                    } else {
+                    if (key === 'Mechanical') {
                         const includesMech = nodeTraits.includes('Mechanical');
                         const includesLiving = nodeTraits.includes('LivingMetal');
                         const result = includesMech || includesLiving;
 
                         return result;
+                    } else {
+                        const includes = nodeTraits.includes(key);
+                        return includes;
                     }
                 });
             };
 
             const doesAllianceFilterPass = () => {
-                if (!filter.alliance.length) {
+                if (filter.alliance.length === 0) {
                     return true;
                 }
                 return filter.alliance.some(alliance => node.data?.alliance.includes(alliance));
@@ -311,10 +311,10 @@ export const LearnCharacters = () => {
     );
 
     const refreshRowNumberColumn = useCallback(() => {
-        const columns = [gridRef.current?.api.getColumn('rowNumber') ?? ''];
-        gridRef.current?.api.refreshCells({ columns });
+        const columns = [gridReference.current?.api.getColumn('rowNumber') ?? ''];
+        gridReference.current?.api.refreshCells({ columns });
 
-        const displayedRowCount = gridRef.current?.api.getDisplayedRowCount();
+        const displayedRowCount = gridReference.current?.api.getDisplayedRowCount();
         setRowCount(displayedRowCount ?? 0);
     }, []);
 
@@ -330,17 +330,17 @@ export const LearnCharacters = () => {
             traits: [],
             alliance: [],
         });
-        const params = new URLSearchParams(searchParams);
-        params.delete('minHits');
-        params.delete('maxHits');
-        params.delete('attackType');
-        params.delete('movement');
-        params.delete('distance');
-        params.delete('damageTypes');
-        params.delete('trait');
-        params.delete('alliance');
-        params.delete('name');
-        navigate({ search: params.toString() }, { replace: true });
+        const parameters = new URLSearchParams(searchParameters);
+        parameters.delete('minHits');
+        parameters.delete('maxHits');
+        parameters.delete('attackType');
+        parameters.delete('movement');
+        parameters.delete('distance');
+        parameters.delete('damageTypes');
+        parameters.delete('trait');
+        parameters.delete('alliance');
+        parameters.delete('name');
+        navigate({ search: parameters.toString() }, { replace: true });
     };
 
     return (
@@ -555,7 +555,7 @@ export const LearnCharacters = () => {
             </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
                 <AgGridReact
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     suppressCellFocus={true}

@@ -3,24 +3,28 @@ import React, { useMemo, useState } from 'react';
 import { LeBattle } from './le-battle';
 import { ILeBattles } from './le-battle.service';
 
-interface Props {
+interface Properties {
     battles: ILeBattles;
 }
 
-export const LeBattles: React.FC<Props> = ({ battles }) => {
+export const LeBattles: React.FC<Properties> = ({ battles }) => {
     const [track, setTrack] = useState<'ALPHA' | 'BETA' | 'GAMMA'>('ALPHA');
     const [battleIndex, setBattleIndex] = useState<number>(0);
 
     const battle = useMemo(() => {
         switch (track) {
-            case 'ALPHA':
+            case 'ALPHA': {
                 return battles.alpha.battles[battleIndex];
-            case 'BETA':
+            }
+            case 'BETA': {
                 return battles.beta.battles[battleIndex];
-            case 'GAMMA':
+            }
+            case 'GAMMA': {
                 return battles.gamma.battles[battleIndex];
-            default:
+            }
+            default: {
                 return battles.alpha.battles[battleIndex];
+            }
         }
     }, [track, battleIndex, battles]);
 

@@ -7,7 +7,7 @@ import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settin
 import { ISnapshotCharacter, ISnapshotMachineOfWar } from './models';
 import { RosterSnapshotCharacter } from './roster-snapshot-character';
 
-interface Props {
+interface Properties {
     showShards: RosterSnapshotShowVariableSettings;
     showMythicShards: RosterSnapshotShowVariableSettings;
     showXpLevel: RosterSnapshotShowVariableSettings;
@@ -15,13 +15,13 @@ interface Props {
     mow?: ISnapshotMachineOfWar;
 }
 
-export const RosterSnapshotsUnit: React.FC<Props> = ({
+export const RosterSnapshotsUnit: React.FC<Properties> = ({
     showShards,
     showMythicShards,
     showXpLevel,
     char,
     mow,
-}: Props) => {
+}: Properties) => {
     const staticChar = char ? CharactersService.resolveCharacter(char.id) : undefined;
     const staticMow = mow ? MowsService.resolveToStatic(mow.id) : undefined;
 

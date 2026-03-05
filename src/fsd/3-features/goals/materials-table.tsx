@@ -27,7 +27,7 @@ import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
-interface Props {
+interface Properties {
     rows: ICharacterUpgradeEstimate[];
     updateMaterialQuantity: (materialId: string, quantity: number) => void;
     onGridReady: () => void;
@@ -45,7 +45,7 @@ interface IRaidMaterialRow extends ICharacterUpgradeEstimate {
     remainingAfter: number;
 }
 
-export const MaterialsTable: React.FC<Props> = ({
+export const MaterialsTable: React.FC<Properties> = ({
     rows,
     updateMaterialQuantity,
     onGridReady,
@@ -61,13 +61,13 @@ export const MaterialsTable: React.FC<Props> = ({
                 {
                     headerName: '#',
                     colId: 'rowNumber',
-                    valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+                    valueGetter: parameters => (parameters.node?.rowIndex ?? 0) + 1,
                     maxWidth: 50,
                 },
                 {
                     headerName: 'Icon',
-                    cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) => {
-                        const { data } = params;
+                    cellRenderer: (parameters: ICellRendererParams<IRaidMaterialRow>) => {
+                        const { data } = parameters;
                         if (data) {
                             return (
                                 <UpgradeImage
@@ -94,9 +94,9 @@ export const MaterialsTable: React.FC<Props> = ({
                     field: 'rarity',
                     maxWidth: 120,
                     columnGroupShow: 'open',
-                    valueFormatter: (params: ValueFormatterParams<IRaidMaterialRow>) =>
-                        Rarity[params.data?.rarity ?? 0],
-                    cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
+                    valueFormatter: (parameters: ValueFormatterParams<IRaidMaterialRow>) =>
+                        Rarity[parameters.data?.rarity ?? 0],
+                    cellClass: parameters => Rarity[parameters.data?.rarity ?? 0].toLowerCase(),
                 },
                 {
                     columnGroupShow: 'open',
@@ -113,8 +113,8 @@ export const MaterialsTable: React.FC<Props> = ({
             maxWidth: 75,
         },
         {
-            valueGetter: params => {
-                return params.data?.inventoryAfter ?? 0;
+            valueGetter: parameters => {
+                return parameters.data?.inventoryAfter ?? 0;
             },
             valueSetter: event => {
                 updateMaterialQuantity(event.data.snowprintId, event.newValue);
@@ -134,8 +134,8 @@ export const MaterialsTable: React.FC<Props> = ({
         {
             headerName: 'Remaining',
             maxWidth: 90,
-            valueGetter: params => {
-                const { data } = params;
+            valueGetter: parameters => {
+                const { data } = parameters;
                 if (data) {
                     return Math.max(0, data.requiredCount - (data.inventoryAfter ?? 0));
                 }
@@ -149,8 +149,8 @@ export const MaterialsTable: React.FC<Props> = ({
                     field: 'daysTotal',
                     columnGroupShow: 'closed',
                     maxWidth: isMobile ? 125 : 300,
-                    cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        const { daysTotal, energyTotal, raidsTotal } = props.data!;
+                    cellRenderer: (properties: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                        const { daysTotal, energyTotal, raidsTotal } = properties.data!;
                         return (
                             <ul className="m-0 ps-5">
                                 <li>{daysTotal} - days</li>
@@ -185,11 +185,11 @@ export const MaterialsTable: React.FC<Props> = ({
             children: [
                 {
                     columnGroupShow: 'closed',
-                    valueGetter: params => {
-                        return params.data?.locations.map(x => x.id) ?? [];
+                    valueGetter: parameters => {
+                        return parameters.data?.locations.map(x => x.id) ?? [];
                     },
-                    cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        const locations: ICampaignBattleComposed[] = props.data?.locations ?? [];
+                    cellRenderer: (properties: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                        const locations: ICampaignBattleComposed[] = properties.data?.locations ?? [];
                         const usedLocations = locations.filter(x => x.isSuggested).length;
                         const canBeUsedLocations = locations.filter(x => x.isUnlocked && x.isPassFilter).length;
                         const lockedLocations = locations.filter(x => !x.isUnlocked).length;
@@ -206,11 +206,11 @@ export const MaterialsTable: React.FC<Props> = ({
                 {
                     columnGroupShow: 'open',
                     headerName: 'Used',
-                    valueGetter: params => {
-                        return params.data?.locations.filter(x => x.isSuggested).map(x => x.id) ?? [];
+                    valueGetter: parameters => {
+                        return parameters.data?.locations.filter(x => x.isSuggested).map(x => x.id) ?? [];
                     },
-                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        const { data } = params;
+                    cellRenderer: (parameters: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                        const { data } = parameters;
                         if (data) {
                             return (
                                 <div className="flex-box gap5 wrap">
@@ -232,11 +232,11 @@ export const MaterialsTable: React.FC<Props> = ({
                 {
                     headerName: 'Locked',
                     columnGroupShow: 'open',
-                    valueGetter: params => {
-                        return params.data?.locations.filter(x => !x.isUnlocked).map(x => x.id) ?? [];
+                    valueGetter: parameters => {
+                        return parameters.data?.locations.filter(x => !x.isUnlocked).map(x => x.id) ?? [];
                     },
-                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        const { data } = params;
+                    cellRenderer: (parameters: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                        const { data } = parameters;
                         if (data) {
                             return (
                                 <div className="flex-box gap5 wrap">
@@ -258,11 +258,13 @@ export const MaterialsTable: React.FC<Props> = ({
                 {
                     headerName: 'Other',
                     columnGroupShow: 'open',
-                    valueGetter: params => {
-                        return params.data?.locations.filter(x => !x.isSuggested && x.isUnlocked).map(x => x.id) ?? [];
+                    valueGetter: parameters => {
+                        return (
+                            parameters.data?.locations.filter(x => !x.isSuggested && x.isUnlocked).map(x => x.id) ?? []
+                        );
                     },
-                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        const { data } = params;
+                    cellRenderer: (parameters: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                        const { data } = parameters;
                         if (data) {
                             return (
                                 <div className="flex-box gap5 wrap">
@@ -320,8 +322,8 @@ export const MaterialsTable: React.FC<Props> = ({
         }) as IRaidMaterialRow[];
     }, [rows, inventory, alreadyUsedMaterials]);
 
-    const onGridReadyInternal = (params: GridReadyEvent) => {
-        if (!params.api) return;
+    const onGridReadyInternal = (parameters: GridReadyEvent) => {
+        if (!parameters.api) return;
         if (scrollToCharSnowprintId === undefined) return;
         let name: string = CharactersService.resolveCharacter(scrollToCharSnowprintId)?.name ?? '';
         if (name.length === 0) {
@@ -336,10 +338,10 @@ export const MaterialsTable: React.FC<Props> = ({
         // Find the first row that uses this character as a material
         const targetIndex = processedRows.findIndex(row => row.relatedCharacters?.includes(name));
         if (targetIndex !== -1) {
-            const rowNode = params.api.getDisplayedRowAtIndex(targetIndex);
+            const rowNode = parameters.api.getDisplayedRowAtIndex(targetIndex);
             if (rowNode) {
-                params.api.ensureIndexVisible(rowNode.rowIndex ?? 0, 'top');
-                params.api.setColumnGroupOpened('upgrade', true);
+                parameters.api.ensureIndexVisible(rowNode.rowIndex ?? 0, 'top');
+                parameters.api.setColumnGroupOpened('upgrade', true);
             }
         }
         onGridReady();

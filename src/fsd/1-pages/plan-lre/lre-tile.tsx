@@ -13,14 +13,14 @@ import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal, PersonalGoalType } fro
 
 import { ILreTileSettings } from '@/fsd/3-features/view-settings';
 
-interface Props {
+interface Properties {
     character: ICharacter2;
     settings: ILreTileSettings;
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     onClick?: (character: ICharacter2) => void;
 }
 
-export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMowGoals, onClick = () => {} }) => {
+export const LreTile: React.FC<Properties> = ({ character, settings, upgradeRankOrMowGoals, onClick = () => {} }) => {
     const { viewPreferences } = useContext(StoreContext);
 
     // We use the current goals of the tactician, as well as the current state
@@ -36,28 +36,45 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
         let maxRareRank: Rank = character.rank;
         let maxEpicRank: Rank = character.rank;
         let maxLegendaryRank: Rank = character.rank;
-        upgradeRankOrMowGoals.forEach(rawGoal => {
+        for (const rawGoal of upgradeRankOrMowGoals) {
             // If it's not an upgrade, it's probably a MoW. Skip it.
-            if (rawGoal.type !== PersonalGoalType.UpgradeRank) return;
+            if (rawGoal.type !== PersonalGoalType.UpgradeRank) continue;
             const goal = rawGoal as ICharacterUpgradeRankGoal;
             // If this goal isn't for this character, skip it.
-            if (!CharactersService.matchesAnyCharacterId(goal.unitId, character)) return;
+            if (!CharactersService.matchesAnyCharacterId(goal.unitId, character)) continue;
 
             // Go through each upgrade-material rarity in the goal and update
             // max ranks accordingly.
-            goal.upgradesRarity.forEach(upgrade => {
-                if (upgrade === Rarity.Common) {
-                    maxCommonRank = Math.max(maxCommonRank, goal.rankEnd);
-                } else if (upgrade === Rarity.Uncommon) {
-                    maxUncommonRank = Math.max(maxUncommonRank, goal.rankEnd);
-                } else if (upgrade === Rarity.Rare) {
-                    maxRareRank = Math.max(maxRareRank, goal.rankEnd);
-                } else if (upgrade === Rarity.Epic) {
-                    maxEpicRank = Math.max(maxEpicRank, goal.rankEnd);
-                } else if (upgrade === Rarity.Legendary) {
-                    maxLegendaryRank = Math.max(maxLegendaryRank, goal.rankEnd);
+            for (const upgrade of goal.upgradesRarity) {
+                switch (upgrade) {
+                    case Rarity.Common: {
+                        maxCommonRank = Math.max(maxCommonRank, goal.rankEnd);
+
+                        break;
+                    }
+                    case Rarity.Uncommon: {
+                        maxUncommonRank = Math.max(maxUncommonRank, goal.rankEnd);
+
+                        break;
+                    }
+                    case Rarity.Rare: {
+                        maxRareRank = Math.max(maxRareRank, goal.rankEnd);
+
+                        break;
+                    }
+                    case Rarity.Epic: {
+                        maxEpicRank = Math.max(maxEpicRank, goal.rankEnd);
+
+                        break;
+                    }
+                    case Rarity.Legendary: {
+                        maxLegendaryRank = Math.max(maxLegendaryRank, goal.rankEnd);
+
+                        break;
+                    }
+                    // No default
                 }
-            });
+            }
 
             // If we don't have any upgrade-material rarity restrictions, then
             // all materials are treated as the end rank of the goal.
@@ -69,14 +86,14 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
                 maxEpicRank = Math.max(maxEpicRank, goal.rankEnd);
                 maxLegendaryRank = Math.max(maxLegendaryRank, goal.rankEnd);
             }
-        });
+        }
         // Just in case a tactician has a stale goal lying around, make sure we
         // don't display a rank lower than the current character's rank.
-        const ret = Math.max(
+        const returnValue = Math.max(
             character.rank,
             Math.min(maxCommonRank, maxUncommonRank, maxRareRank, maxEpicRank, maxLegendaryRank)
         );
-        return ret;
+        return returnValue;
     }, [viewPreferences, upgradeRankOrMowGoals, character]);
 
     // Determine the rarity icon to display based on the goal rank and current
@@ -107,7 +124,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
     const showMechanicTrait =
         settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait.Mechanic);
     const showShardIcon = settings.lreTileShowUnitIcon && character.name && character.icon;
-    const showRarity = settings.lreTileShowUnitRarity && typeof rarity !== 'undefined';
+    const showRarity = settings.lreTileShowUnitRarity && rarity !== undefined;
     const characterRelic = character.equipment.find(x => EquipmentService.isRelic(x.id));
     const equipmentRelic = EquipmentService.equipmentData.find(eq => eq.id === characterRelic?.id);
     const showRelic = settings.lreTileShowUnitRelic && equipmentRelic !== undefined;

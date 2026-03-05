@@ -10,11 +10,11 @@ import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
 
-interface Props {
+interface Properties {
     upgradeRaid: IUpgradeRaid;
 }
 
-export const MaterialItemTitle: React.FC<Props> = ({ upgradeRaid }) => {
+export const MaterialItemTitle: React.FC<Properties> = ({ upgradeRaid }) => {
     return (
         <div className="flex-box gap10">
             <div className="flex-box column">

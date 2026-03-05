@@ -13,7 +13,7 @@ import { MowTile } from '@/fsd/3-features/characters/components/mow-tile';
 
 import { CharacterTile } from './character-tile';
 
-const CharactersGridFn = ({
+const CharactersGridFunction = ({
     characters,
     blockedCharacters = [],
     onAvailableCharacterClick,
@@ -56,7 +56,7 @@ const CharactersGridFn = ({
                 {unlockedCharacters}
             </div>
 
-            <Conditional condition={!!lockedCharacters.length}>
+            <Conditional condition={lockedCharacters.length > 0}>
                 <h4>Locked ({lockedCharacters.length})</h4>
                 <div
                     className="flex flex-wrap [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
@@ -68,4 +68,4 @@ const CharactersGridFn = ({
     );
 };
 
-export const CharactersGrid = React.memo(CharactersGridFn);
+export const CharactersGrid = React.memo(CharactersGridFunction);

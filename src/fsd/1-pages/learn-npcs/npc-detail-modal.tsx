@@ -4,14 +4,14 @@ import { INpcData, INpcStats } from '@/fsd/4-entities/npc';
 
 import { NpcStats } from './npc-stats';
 
-interface Props {
+interface Properties {
     isOpen: boolean;
     onClose: () => void;
     npc: INpcData | null;
     stats: INpcStats | null; // The specific level stats
 }
 
-export const NpcDetailModal: React.FC<Props> = ({ isOpen, onClose, npc, stats }: Props) => {
+export const NpcDetailModal: React.FC<Properties> = ({ isOpen, onClose, npc, stats }: Properties) => {
     if (!isOpen || !npc) return null;
 
     return (

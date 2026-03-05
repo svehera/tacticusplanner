@@ -17,13 +17,13 @@ import { CharactersPowerService } from '@/fsd/4-entities/unit';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
 
-interface Props {
+interface Properties {
     mow: IMow2;
     onClick?: (mow: IMow2) => void;
     disableClick?: boolean;
 }
 
-export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
+export const MowTile: React.FC<Properties> = ({ mow, disableClick, onClick }) => {
     const viewContext = useContext(CharactersViewContext);
 
     const unlockShards = charsUnlockShards[mow.rarity];
@@ -87,9 +87,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
             {!!mow.numberOfUnlocked && (
                 <AccessibleTooltip
                     title={
-                        !mow.statsByOwner?.length ? (
-                            `${mow.numberOfUnlocked}% of players unlocked this MoW`
-                        ) : (
+                        mow.statsByOwner?.length ? (
                             <div>
                                 ${mow.numberOfUnlocked}% of players unlocked this MoW:
                                 <ul>
@@ -103,6 +101,8 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                                     ))}
                                 </ul>
                             </div>
+                        ) : (
+                            `${mow.numberOfUnlocked}% of players unlocked this MoW`
                         )
                     }>
                     <div

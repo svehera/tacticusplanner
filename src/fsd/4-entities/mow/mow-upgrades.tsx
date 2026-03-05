@@ -9,14 +9,14 @@ import { IBaseUpgrade, ICraftedUpgrade, UpgradeImage } from '@/fsd/4-entities/up
 import { IMowLevelMaterials } from './model';
 import { MowsService } from './mows.service';
 
-interface Props {
+interface Properties {
     mowId: string;
     alliance: Alliance;
     primaryLevel: number;
     secondaryLevel: number;
 }
 
-export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mowId, alliance }) => {
+export const MowUpgrades: React.FC<Properties> = ({ primaryLevel, secondaryLevel, mowId, alliance }) => {
     const size = 'medium';
     const mow = MowsService.resolveToStatic(mowId);
     const [primary] = MowsService.getMaterialsList(mowId, mow?.name ?? '', alliance, [primaryLevel + 1]);

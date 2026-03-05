@@ -6,7 +6,7 @@ import { CharacterPortraitImage } from '@/shared-components/images/character-por
 
 import { INpcData } from './model';
 
-interface Props {
+interface Properties {
     label: string;
     npcs: INpcData[];
     npc: INpcData;
@@ -14,7 +14,7 @@ interface Props {
 }
 
 /** Exposes a select (list box) with the given NPCs. */
-export const NpcSelect: React.FC<Props> = ({ label, npcs, npc, npcChanges }) => {
+export const NpcSelect: React.FC<Properties> = ({ label, npcs, npc, npcChanges }) => {
     return (
         <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>

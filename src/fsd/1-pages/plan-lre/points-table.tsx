@@ -29,8 +29,8 @@ import { useLreProgress } from './le-progress.hooks';
 import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-events.interfaces';
 import { LreService } from './lre.service';
 
-const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
-    const { legendaryEvent } = props;
+const PointsTable = (properties: { legendaryEvent: ILegendaryEvent }) => {
+    const { legendaryEvent } = properties;
     const { leSelectedTeams } = useContext(StoreContext);
     const { model: leProgress } = useLreProgress(legendaryEvent);
 
@@ -48,11 +48,11 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     );
 
     const [selection, setSelection] = useState<CharactersSelection>(
-        selectedChars.length ? CharactersSelection.Selected : CharactersSelection.All
+        selectedChars.length > 0 ? CharactersSelection.Selected : CharactersSelection.All
     );
     const [filter, setFilter] = useState('');
 
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
     const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
         return [
@@ -60,8 +60,8 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 headerName: 'Character',
                 pinned: !isMobile,
                 openByDefault: !isMobile,
-                cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
-                tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
+                cellClass: (parameters: CellClassParams<ITableRow>) => parameters.data?.className,
+                tooltipValueGetter: (parameters: ITooltipParams<ITableRow>) => parameters.data?.tooltip,
                 children: [
                     {
                         headerName: 'Position',
@@ -78,15 +78,16 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         colId: 'name',
                         width: isMobile ? 75 : 180,
                         pinned: !isMobile,
-                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
-                            const character = props.data?.character;
+                        cellRenderer: (properties_: ICellRendererParams<ITableRow>) => {
+                            const character = properties_.data?.character;
                             if (character) {
                                 return <CharacterTitleShort character={character} hideName={isMobile} imageSize={30} />;
                             }
                         },
-                        valueGetter: (params: ValueGetterParams<ITableRow>) => params.data?.character?.shortName,
-                        cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
-                        tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
+                        valueGetter: (parameters: ValueGetterParams<ITableRow>) =>
+                            parameters.data?.character?.shortName,
+                        cellClass: (parameters: CellClassParams<ITableRow>) => parameters.data?.className,
+                        tooltipValueGetter: (parameters: ITooltipParams<ITableRow>) => parameters.data?.tooltip,
                     },
                     {
                         headerName: 'Rarity',
@@ -94,11 +95,11 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         width: 80,
                         columnGroupShow: 'open',
                         pinned: !isMobile,
-                        valueGetter: (props: ValueGetterParams<ITableRow>) => {
-                            return props.data?.character.rarity;
+                        valueGetter: (properties_: ValueGetterParams<ITableRow>) => {
+                            return properties_.data?.character.rarity;
                         },
-                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
-                            const rarity = props.value ?? Rarity.Common;
+                        cellRenderer: (properties_: ICellRendererParams<ITableRow>) => {
+                            const rarity = properties_.value ?? Rarity.Common;
                             return <RarityIcon rarity={rarity} />;
                         },
                     },
@@ -108,11 +109,11 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         width: 80,
                         columnGroupShow: 'open',
                         pinned: !isMobile,
-                        valueGetter: (props: ValueGetterParams<ITableRow>) => {
-                            return props.data?.character.rank;
+                        valueGetter: (properties_: ValueGetterParams<ITableRow>) => {
+                            return properties_.data?.character.rank;
                         },
-                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
-                            const rank = props.value ?? 0;
+                        cellRenderer: (properties_: ICellRendererParams<ITableRow>) => {
+                            const rank = properties_.value ?? 0;
                             return <RankIcon rank={rank} />;
                         },
                     },
@@ -240,12 +241,12 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         x => CharactersService.resolveCharacter(x)?.snowprintId ?? x
                     );
                 }
-                chars.forEach(character => {
+                for (const character of chars) {
                     if (!result[character]) {
                         result[character] = [];
                     }
                     result[character] = uniq([...result[character], ...team.restrictionsIds]);
-                });
+                }
             }
             return result;
         }
@@ -273,7 +274,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
             let progressByRequirement: Record<string, number> = {};
 
             if (pointsCalculation === PointsCalculation.unearned || pointsCalculation === PointsCalculation.estimated) {
-                const trackProgress = leProgress.tracksProgress.filter(x => x.trackId === track.section)[0];
+                const trackProgress = leProgress.tracksProgress.find(x => x.trackId === track.section);
                 if (trackProgress) {
                     progressByRequirement = LreService.getReqProgressPerTrack(trackProgress);
                 }
@@ -377,18 +378,18 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                     size="small"
                     variant={'contained'}
                     onClick={() => {
-                        const gridApi = gridRef.current?.api;
+                        const gridApi = gridReference.current?.api;
                         if (gridApi) {
                             const csv = gridApi.getDataAsCsv({
                                 columnKeys: ['name', 'rarity', 'rank', 'totalPoints'],
-                                processCellCallback: params => {
-                                    if (params.column.getColId() === 'rarity') {
-                                        return RarityMapper.rarityToRarityString(params.value) ?? 'Common';
+                                processCellCallback: parameters => {
+                                    if (parameters.column.getColId() === 'rarity') {
+                                        return RarityMapper.rarityToRarityString(parameters.value) ?? 'Common';
                                     }
-                                    if (params.column.getColId() === 'rank') {
-                                        return rankToString(params.value) ?? 'Locked';
+                                    if (parameters.column.getColId() === 'rank') {
+                                        return rankToString(parameters.value) ?? 'Locked';
                                     }
-                                    return params.value;
+                                    return parameters.value;
                                 },
                             });
                             navigator.clipboard.writeText(csv ?? '');
@@ -454,12 +455,12 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 <AgGridReact
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
-                    ref={gridRef}
+                    ref={gridReference}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
                     columnDefs={columnsDef}
-                    onSortChanged={() => gridRef.current?.api?.refreshCells()}
-                    onFilterChanged={() => gridRef.current?.api?.refreshCells()}></AgGridReact>
+                    onSortChanged={() => gridReference.current?.api?.refreshCells()}
+                    onFilterChanged={() => gridReference.current?.api?.refreshCells()}></AgGridReact>
             </div>
         </div>
     );

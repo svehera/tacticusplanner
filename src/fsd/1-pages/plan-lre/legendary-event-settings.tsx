@@ -23,7 +23,7 @@ const SettingGroup = ({
 }: {
     title: string;
     currentValue: LegendaryEventDefaultPage;
-    onChange: (val: LegendaryEventDefaultPage) => void;
+    onChange: (value: LegendaryEventDefaultPage) => void;
 }) => (
     <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
         <h3 className="mb-1 text-[10px] font-bold tracking-widest text-gray-500 uppercase dark:text-gray-400">

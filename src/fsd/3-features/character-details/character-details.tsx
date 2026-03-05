@@ -35,10 +35,12 @@ export const CharacterDetails = ({
 
     const rarityStarsToString = (rarity: RarityStars): string => {
         switch (rarity) {
-            case RarityStars.None:
+            case RarityStars.None: {
                 return 'None';
-            default:
+            }
+            default: {
                 return '';
+            }
         }
     };
 
@@ -144,7 +146,7 @@ export const CharacterDetails = ({
                             inputProps={{
                                 step: 1,
                                 min: 0,
-                                max: 10000,
+                                max: 10_000,
                                 type: 'number',
                                 'aria-labelledby': 'input-slider',
                             }}
@@ -215,7 +217,7 @@ export const CharacterDetails = ({
                                     inputProps={{
                                         step: 100,
                                         min: 0,
-                                        max: 283000,
+                                        max: 283_000,
                                         type: 'number',
                                         'aria-labelledby': 'input-slider',
                                     }}

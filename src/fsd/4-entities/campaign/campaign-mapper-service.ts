@@ -22,16 +22,16 @@ export class CampaignMapperService {
     private static getChallengeIndicesForBaseCampaign(baseCampaignName: string): number[] {
         const indices: number[] = [];
         let runningIndex = 0;
-        Object.entries(battleData).forEach(([key, battle]) => {
-            if (!battle.campaign.trim().toLowerCase().startsWith(baseCampaignName.trim().toLowerCase())) return;
+        for (const [key, battle] of Object.entries(battleData)) {
+            if (!battle.campaign.trim().toLowerCase().startsWith(baseCampaignName.trim().toLowerCase())) continue;
             const isChallenge = key.endsWith('B');
             if (isChallenge) {
                 indices.push(runningIndex);
                 runningIndex++;
-                return;
+                continue;
             }
             runningIndex++;
-        });
+        }
         return indices;
     }
     // mapTacticusCampaignToLocal removed; reducer falls back to idToCampaign for legacy campaigns
@@ -57,17 +57,31 @@ export class CampaignMapperService {
         const result: CampaignProgressSplit = {};
 
         // Determine baseKey from event id and type
-        if (id === 'eventcampaign1') {
-            result.baseCampaignEventId = isStandard ? Campaign.AMS : isExtremis ? Campaign.AME : undefined;
-        } else if (id === 'eventcampaign2') {
-            result.baseCampaignEventId = isStandard ? Campaign.TS : isExtremis ? Campaign.TE : undefined;
-        } else if (id === 'eventcampaign3') {
-            result.baseCampaignEventId = isStandard ? Campaign.TAS : isExtremis ? Campaign.TAE : undefined;
-        } else if (id === 'eventcampaign4') {
-            result.baseCampaignEventId = isStandard ? Campaign.DGS : isExtremis ? Campaign.DGE : undefined;
-        } else {
-            // in case we get a new campaign event id we don't know about yet
-            result.baseCampaignEventId = undefined;
+        switch (id) {
+            case 'eventcampaign1': {
+                result.baseCampaignEventId = isStandard ? Campaign.AMS : isExtremis ? Campaign.AME : undefined;
+
+                break;
+            }
+            case 'eventcampaign2': {
+                result.baseCampaignEventId = isStandard ? Campaign.TS : isExtremis ? Campaign.TE : undefined;
+
+                break;
+            }
+            case 'eventcampaign3': {
+                result.baseCampaignEventId = isStandard ? Campaign.TAS : isExtremis ? Campaign.TAE : undefined;
+
+                break;
+            }
+            case 'eventcampaign4': {
+                result.baseCampaignEventId = isStandard ? Campaign.DGS : isExtremis ? Campaign.DGE : undefined;
+
+                break;
+            }
+            default: {
+                // in case we get a new campaign event id we don't know about yet
+                result.baseCampaignEventId = undefined;
+            }
         }
 
         // Derive challenge key from base key to avoid duplication and ease future maintenance

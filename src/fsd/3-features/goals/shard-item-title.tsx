@@ -5,11 +5,11 @@ import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IShardsRaid } from '@/fsd/3-features/goals/goals.models';
 
-interface Props {
+interface Properties {
     shardRaid: IShardsRaid;
 }
 
-export const ShardItemTitle: React.FC<Props> = ({ shardRaid }) => {
+export const ShardItemTitle: React.FC<Properties> = ({ shardRaid }) => {
     return (
         <div className="flex-box gap10">
             <div className="flex-box column text-base">

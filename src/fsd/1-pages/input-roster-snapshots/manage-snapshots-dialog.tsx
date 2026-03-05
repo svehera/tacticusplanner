@@ -21,7 +21,7 @@ import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/f
 
 import { IRosterSnapshotsState } from './models';
 
-interface ManageSnapshotsDialogProps {
+interface ManageSnapshotsDialogProperties {
     rosterSnapshots: IRosterSnapshotsState;
     isOpen: boolean;
     showShards: RosterSnapshotShowVariableSettings;
@@ -46,7 +46,7 @@ interface ManageSnapshotsDialogProps {
     onDone: () => void;
 }
 
-export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
+export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProperties> = ({
     rosterSnapshots,
     isOpen,
     showShards,
@@ -82,7 +82,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                 ? [{ name: rosterSnapshots.base.name, index: -1 }]
                 : []),
             ...rosterSnapshots.diffs
-                .map((d, i) => ({ name: d.name, index: i, deleted: d.deletedDateMillisUtc !== undefined }))
+                .map((d, index) => ({ name: d.name, index: index, deleted: d.deletedDateMillisUtc !== undefined }))
                 .filter(d => !d.deleted),
         ],
         [rosterSnapshots]
@@ -94,7 +94,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                 ? [{ name: rosterSnapshots.base.name, index: -1 }]
                 : []),
             ...rosterSnapshots.diffs
-                .map((d, i) => ({ name: d.name, index: i, deleted: d.deletedDateMillisUtc !== undefined }))
+                .map((d, index) => ({ name: d.name, index: index, deleted: d.deletedDateMillisUtc !== undefined }))
                 .filter(d => d.deleted),
         ],
         [rosterSnapshots]
