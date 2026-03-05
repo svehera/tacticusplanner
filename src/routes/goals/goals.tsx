@@ -6,7 +6,7 @@ import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import { cloneDeep, sum } from 'lodash';
-import { useCallback, useContext, useMemo, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
@@ -68,48 +68,37 @@ export const Goals = () => {
         [dispatch]
     );
 
-    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+    const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
-    const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false);
-    }, [goals, characters, resolvedMows]);
+    const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = GoalsService.prepareGoals(
+        goals,
+        [...characters, ...resolvedMows],
+        false
+    );
 
-    const estimatedShardsTotal = useMemo(() => {
-        return ShardsService.getShardsEstimatedDays(
-            {
-                campaignsProgress: campaignsProgress,
-                preferences: dailyRaidsPreferences,
-                raidedLocations: [],
+    const estimatedShardsTotal = ShardsService.getShardsEstimatedDays(
+        {
+            campaignsProgress: campaignsProgress,
+            preferences: dailyRaidsPreferences,
+            raidedLocations: [],
+        },
+        ...shardsGoals
+    );
+
+    const estimatedUpgradesTotal = UpgradesService.getUpgradesEstimatedDays(
+        {
+            dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+            campaignsProgress: campaignsProgress,
+            preferences: {
+                ...dailyRaidsPreferences,
             },
-            ...shardsGoals
-        );
-    }, [shardsGoals]);
-
-    const estimatedUpgradesTotal = useMemo(() => {
-        return UpgradesService.getUpgradesEstimatedDays(
-            {
-                dailyEnergy: dailyRaidsPreferences.dailyEnergy,
-                campaignsProgress: campaignsProgress,
-                preferences: {
-                    ...dailyRaidsPreferences,
-                },
-                upgrades: inventory.upgrades,
-                completedLocations: dailyRaids.raidedLocations,
-            },
-            characters,
-            resolvedMows,
-            ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
-        );
-    }, [
-        upgradeRankOrMowGoals,
-        estimatedShardsTotal.energyPerDay,
+            upgrades: inventory.upgrades,
+            completedLocations: dailyRaids.raidedLocations,
+        },
         characters,
         resolvedMows,
-        inventory.upgrades,
-        dailyRaidsPreferences,
-        campaignsProgress,
-        dailyRaids,
-    ]);
+        ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
+    );
 
     const removeGoal = (goalId: string): void => {
         dispatch.goals({ type: 'Delete', goalId });
@@ -143,30 +132,26 @@ export const Goals = () => {
         }
     };
 
-    const goalsEstimate = useMemo<IGoalEstimate[]>(() => {
-        return GoalsService.buildGoalEstimates(
-            estimatedUpgradesTotal,
-            shardsGoals,
-            upgradeRankOrMowGoals,
-            upgradeAbilities,
-            characters
-        );
-    }, [estimatedUpgradesTotal, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities, characters]);
+    const goalsEstimate = GoalsService.buildGoalEstimates(
+        estimatedUpgradesTotal,
+        shardsGoals,
+        upgradeRankOrMowGoals,
+        upgradeAbilities,
+        characters
+    );
 
     const totalGoldAbilities = sum(
         goalsEstimate.map(x => (x.abilitiesEstimate?.gold ?? 0) + (x.xpEstimateAbilities?.gold ?? 0))
     );
 
-    const adjustedGoalsEstimates = useMemo(() => {
-        return GoalsService.adjustGoalEstimates(
-            cloneDeep(goals),
-            cloneDeep(goalsEstimate),
-            inventory,
-            xpUse,
-            upgradeRankOrMowGoals,
-            xpIncome
-        );
-    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals, xpUse, xpIncome]);
+    const adjustedGoalsEstimates = GoalsService.adjustGoalEstimates(
+        cloneDeep(goals),
+        cloneDeep(goalsEstimate),
+        inventory,
+        xpUse,
+        upgradeRankOrMowGoals,
+        xpIncome
+    );
 
     const hasSync = !!userInfo.tacticusApiKey;
 
