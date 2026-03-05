@@ -15,8 +15,12 @@ export const TodayRaids: React.FC<Props> = ({ raids }: Props) => {
     const energySpent = sum(locs.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
     const raidsCount = sum(locs.map(loc => loc.raidsAlreadyPerformed));
 
-    const completedRaids = raids.filter(raid => raid.raidLocations.every(loc => loc.raidsToPerform === 0));
-    const upgradesRaids = raids.filter(raid => raid.raidLocations.some(loc => loc.raidsToPerform > 0));
+    const completedRaids = raids
+        .filter(raid => raid.raidLocations.length > 0)
+        .filter(raid => raid.raidLocations.every(loc => loc.raidsToPerform === 0));
+    const upgradesRaids = raids
+        .filter(raid => raid.raidLocations.length > 0)
+        .filter(raid => raid.raidLocations.some(loc => loc.raidsToPerform > 0));
 
     return (
         <>
