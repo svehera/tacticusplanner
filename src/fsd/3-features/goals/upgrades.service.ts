@@ -748,7 +748,7 @@ export class UpgradesService {
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         goalId: string | undefined
     ): { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number } {
-        const totalNeeded = sum(Object.values(mat.countByGoalId));
+        const totalNeeded = mat.requiredCount;
         const available = inventory[upgradeId] ?? 0;
         const totalRemaining = Math.max(totalNeeded - available, 0);
         if (!goalId) {
@@ -811,6 +811,7 @@ export class UpgradesService {
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         highestPriorityGoalId: string | undefined
     ): number {
+        if (!combinedBaseMaterials[upgradeId]) return 0;
         const remaining = this.getRemainingNeededForGoal(
             upgradeId,
             combinedBaseMaterials[upgradeId],
