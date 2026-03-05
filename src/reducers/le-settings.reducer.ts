@@ -13,7 +13,8 @@ export const leSettingsReducer = (_: ILegendaryEventSettings, action: LeSettings
             return action.value;
         }
         default: {
-            throw new Error();
+            // @ts-expect-error This should not be reachable but we want to capture as much info as possible if it does
+            throw new Error(`Invalid action type received: ${action.type}`);
         }
     }
 };

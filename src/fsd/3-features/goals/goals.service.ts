@@ -83,7 +83,7 @@ export class GoalsService {
                     !relatedCharacter
                 ) {
                     console.warn('Goal not applicable for character or mow:', g);
-                    return undefined;
+                    return;
                 }
                 return this.convertToTypedGoal(g, relatedCharacter);
             })
