@@ -201,7 +201,7 @@ export const DailyRaids = () => {
             <RaidsPlan
                 estimatedShards={estimatedShards}
                 estimatedRanks={estimatedRanks}
-                upgrades={inventory.upgrades}
+                upgrades={upgrades}
                 updateInventory={saveInventoryUpdateChanges}
                 updateInventoryAny={() => setHasChanges(true)}
                 scrollToCharSnowprintId={charSnowprintId ?? undefined}

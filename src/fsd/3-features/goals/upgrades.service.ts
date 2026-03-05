@@ -263,6 +263,63 @@ export class UpgradesService {
         return true;
     }
 
+    /**
+     * Creates skeleton raids for all acquired inventory, removing things from
+     * combinedBaseMaterials as necessary.
+     */
+    public static createRaidsForExistingInventory(
+        combinedBaseMaterials: Record<string, ICombinedUpgrade>,
+        existingInventory: Record<string, number>
+    ): IUpgradesRaidsDay {
+        const raids: IUpgradeRaid[] = [];
+        Object.entries(combinedBaseMaterials).forEach(([upgradeId, mat]) => {
+            const raid: IUpgradeRaid = {
+                id: 'inventory_in_stock-' + upgradeId,
+                snowprintId: upgradeId,
+                label: mat.label,
+                rarity: mat.rarity,
+                iconPath: mat.iconPath,
+                locations: [],
+                crafted: false,
+                stat: mat.stat,
+                raidLocations: [],
+                countByGoalId: {},
+                energyTotal: 0,
+                energyLeft: 0,
+                daysTotal: 0,
+                raidsTotal: 0,
+                acquiredCount: 0,
+                requiredCount: mat.requiredCount,
+                relatedCharacters: mat.relatedCharacters,
+                relatedGoals: mat.relatedGoals,
+                isBlocked: false,
+                isFinished: false,
+            };
+            let quantity = existingInventory[upgradeId] ?? 0;
+            if (quantity > 0) {
+                for (const [goalId, count] of Object.entries(mat.countByGoalId)) {
+                    const toClaim = Math.min(quantity, count);
+                    quantity -= toClaim;
+                    raid.countByGoalId![goalId] = toClaim;
+                    if (quantity === 0) break;
+                }
+                raid.acquiredCount = existingInventory[upgradeId] ?? 0;
+                if (raid.acquiredCount >= mat.requiredCount) {
+                    raid.isFinished = true;
+                    delete combinedBaseMaterials[upgradeId];
+                }
+                raids.push(raid);
+            }
+        });
+
+        return {
+            raids,
+            energyTotal: 0,
+            raidsTotal: 0,
+            onslaughtTokens: 0,
+        };
+    }
+
     /*
      * @returns An array of `IUpgradesRaidsDay`, where each object represents a single day's
      * raiding plan. Returns an empty array if daily energy is too low to perform any raids.
@@ -279,14 +336,18 @@ export class UpgradesService {
         const remainingMats = cloneDeep(combinedBaseMaterials);
         const inventory = cloneDeep(inventoryUpgrades);
 
-        ret.push(this.handleFirstDayCompletedRaids(settings, combinedBaseMaterials));
-        let energy = settings.dailyEnergy - ret[0].energyTotal;
-        let firstDay = true;
+        let day = this.createRaidsForExistingInventory(remainingMats, inventory);
+        this.handleFirstDayCompletedRaids(day, settings, combinedBaseMaterials);
+        let energy = settings.dailyEnergy - day.energyTotal;
         let days = 0;
         const MAX_DAYS = 1000;
         const blockedMats: Record<string, ICombinedUpgrade> = {};
         cloneDeep(Object.keys(remainingMats)).forEach(upgradeId => {
             const mat = remainingMats[upgradeId];
+            if (mat.requiredCount <= 0) {
+                delete remainingMats[upgradeId];
+                return;
+            }
             if (!this.canRaidMaterial(mat, characters, goals)) {
                 blockedMats[upgradeId] = mat;
                 // Delete upgrade materials we cannot farm.
@@ -298,20 +359,12 @@ export class UpgradesService {
             // regenerate 1 token every 18 hours, or 3 every two days.
             onslaughtTokens = Math.max(1, Math.min(2, 3 - onslaughtTokens));
 
-            const day: IUpgradesRaidsDay = firstDay
-                ? ret[0]
-                : {
-                      energyTotal: 0,
-                      raidsTotal: 0,
-                      onslaughtTokens,
-                      raids: [],
-                  };
             this.addOnslaughtsForDay(
                 day,
                 characters,
                 onslaughtTokens,
                 goals.filter(goal => goal.type === PersonalGoalType.Ascend),
-                combinedBaseMaterials,
+                remainingMats,
                 settings,
                 inventory
             );
@@ -323,12 +376,12 @@ export class UpgradesService {
                 day,
                 settings,
                 energy,
-                this.sortLocationsForRaiding(locs, goals, combinedBaseMaterials, inventory, settings),
+                this.sortLocationsForRaiding(locs, goals, remainingMats, inventory, settings),
                 remainingMats,
                 inventory,
                 goals
             );
-            this.postProcessRaidsForHse(day, settings, goals, combinedBaseMaterials, inventory);
+            this.postProcessRaidsForHse(day, settings, goals, remainingMats, inventory);
             const upgradeIds = cloneDeep(Object.keys(remainingMats));
             for (const upgradeId of upgradeIds) {
                 const mat = remainingMats[upgradeId];
@@ -337,7 +390,6 @@ export class UpgradesService {
                     delete remainingMats[upgradeId];
                 }
             }
-            if (!firstDay) ret.push(day);
             day.raids.forEach(raid => {
                 raid.relatedCharacters = raid.relatedCharacters.map(
                     charId => CharactersService.resolveCharacter(charId)?.name ?? charId
@@ -354,9 +406,15 @@ export class UpgradesService {
                 const raidEnergy = raid.raidLocations.reduce((raidSum, loc) => raidSum + loc.energySpent, 0);
                 return sum + raidEnergy;
             }, 0);
-            firstDay = false;
             energy = settings.dailyEnergy;
             if (day.raids.length === 0) break;
+            ret.push(day);
+            day = {
+                energyTotal: 0,
+                raidsTotal: 0,
+                onslaughtTokens,
+                raids: [],
+            };
         }
 
         Object.keys(blockedMats).forEach(upgradeId => {
@@ -536,7 +594,7 @@ export class UpgradesService {
         const totalRaidsForLocation = day.raids
             .flatMap(raid => raid.raidLocations)
             .filter(raidLoc => raidLoc.id === loc.id)
-            .reduce((sum, raidLoc) => sum + (raidLoc.raidsToPerform ?? 0), 0);
+            .reduce((sum, raidLoc) => sum + raidLoc.raidsAlreadyPerformed + raidLoc.raidsToPerform, 0);
         const raidsAlreadyDone = existingRaidLoc
             ? Math.max(totalRaidsForLocation - (existingRaidLoc.raidsToPerform ?? 0), 0)
             : totalRaidsForLocation;
@@ -1156,10 +1214,10 @@ export class UpgradesService {
      * plans and reported via the UI.
      */
     public static handleFirstDayCompletedRaids(
+        day: IUpgradesRaidsDay,
         settings: IEstimatedRanksSettings,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>
-    ): IUpgradesRaidsDay {
-        const raids: IUpgradeRaid[] = [];
+    ) {
         let energySpent = 0;
         let nonRewardRaidIndex = 0;
 
@@ -1179,6 +1237,7 @@ export class UpgradesService {
         );
 
         let raidIndex = 0;
+        const raids: IUpgradeRaid[] = [];
         raidsByMaterial.forEach(([reward, locations]) => {
             const acquired = settings.upgrades[reward] ?? 0;
             const required = combinedBaseMaterials[reward]?.requiredCount ?? 0;
@@ -1186,7 +1245,7 @@ export class UpgradesService {
             const newLocations = cloneDeep(locations);
             const raid: IUpgradeRaid = {
                 id: `first-day-${reward}-${raidIndex++}`,
-                snowprintId: '',
+                snowprintId: reward,
                 label: upgrade?.label ?? 'Unknown',
                 rarity: upgrade?.rarity ?? 'Shard',
                 iconPath: upgrade?.iconPath ?? '',
@@ -1208,15 +1267,11 @@ export class UpgradesService {
             };
 
             raids.push(raid);
-            energySpent += newLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
+            energySpent += sum(newLocations.map(loc => loc.energySpent));
         });
-
-        return {
-            raids,
-            energyTotal: energySpent,
-            raidsTotal: raids.length,
-            onslaughtTokens: 0,
-        };
+        day.raids = raids.concat(day.raids);
+        day.energyTotal += energySpent;
+        day.raidsTotal += sum(raids.map(raid => raid.raidsTotal));
     }
 
     private static getCurrentShardsForGoal(rarityStart: Rarity, starsStart: RarityStars): number {
@@ -1411,13 +1466,15 @@ export class UpgradesService {
     }
 
     /**
-     * Computes and returns a list of unit upgrades based on the provided inventory and goal definitions.
+     * Computes and returns a list of unit upgrades, one per goal, based on the provided inventory and goal definitions.
      *
      * This method processes each goal, determines the required upgrade ranks, filters upgrades by rarity if specified,
      * and aggregates related upgrades for each goal. The result is an array of unit upgrade objects, each containing
      * details about the goal, the unit, the required upgrades, and related upgrades.
      *
      * @param inventoryUpgrades - A record mapping upgrade IDs to their quantities in the user's inventory.
+     * @param chars - An array of character data to consider for the upgrades.
+     * @param mows - An array of mow data to consider for the upgrades.
      * @param goals - An array of character upgrade rank or mow upgrade goals to process.
      * @returns An array of `IUnitUpgrade` objects, each representing the upgrade requirements and related data for a goal.
      */
@@ -1428,7 +1485,7 @@ export class UpgradesService {
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
     ): IUnitUpgrade[] {
         const result: IUnitUpgrade[] = [];
-        const canonUpgrades = this.canonicalizeInventoryUpgrades(inventoryUpgrades, chars, mows);
+        const clonedUpgrades = cloneDeep(inventoryUpgrades);
         for (const goal of goals) {
             const upgradeRanks =
                 (() => {
@@ -1453,7 +1510,7 @@ export class UpgradesService {
             const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(
                 upgradeRanks,
                 upgradeShards,
-                canonUpgrades
+                clonedUpgrades
             );
 
             if ('upgradesRarity' in goal && goal.upgradesRarity && goal.upgradesRarity.length > 0) {
@@ -1934,23 +1991,17 @@ export class UpgradesService {
         upgradeShards: IUnitShards | undefined,
         inventoryUpgrades: Record<string, number>
     ): Record<string, number> {
+        // Accumulator for base (non-craftable) material requirements after inventory has been applied.
         const baseUpgradesTotal: Record<string, number> = {};
 
         const addBaseUpgrade = (upgradeId: string, count: number): void => {
-            const available = inventoryUpgrades[upgradeId] ?? 0;
-            if (available >= count) {
-                inventoryUpgrades[upgradeId] = available - count;
-                return;
-            }
-            if (available > 0) {
-                inventoryUpgrades[upgradeId] = 0;
-                count -= available;
-            }
             if (count > 0) {
                 baseUpgradesTotal[upgradeId] = (baseUpgradesTotal[upgradeId] ?? 0) + count;
             }
         };
 
+        // Expands crafted upgrades into their constituent requirements until only base upgrades remain.
+        // This recursively walks craft trees and uses inventory to satisfy crafted items when possible.
         const processCraftedUpgrade = (craftedUpgrades: Record<string, number>, depth = 0): void => {
             const nextLevelCraftedUpgrades: Record<string, number> = {};
 
@@ -1958,11 +2009,13 @@ export class UpgradesService {
                 const acquiredCount = inventoryUpgrades[craftedUpgrade];
                 const requiredCount = craftedUpgrades[craftedUpgrade];
 
+                // If we already own enough of this crafted upgrade, consume from inventory and move on.
                 if (acquiredCount >= requiredCount) {
                     inventoryUpgrades[craftedUpgrade] = acquiredCount - requiredCount;
                     continue;
                 }
 
+                // If we own some but not all, consume what we can and keep the remainder to craft.
                 if (acquiredCount > 0 && acquiredCount < requiredCount) {
                     inventoryUpgrades[craftedUpgrade] = 0;
                     craftedUpgrades[craftedUpgrade] = requiredCount - acquiredCount;
@@ -1971,12 +2024,15 @@ export class UpgradesService {
                 const craftedUpgradeData = FsdUpgradesService.craftedUpgradesData[craftedUpgrade];
                 const craftedUpgradeCount = craftedUpgrades[craftedUpgrade];
 
+                // For each crafted upgrade, expand into either base materials or nested crafted upgrades.
                 if (craftedUpgradeData) {
+                    // If this crafted upgrade has no crafted subcomponents, expand directly to base upgrades.
                     if (!craftedUpgradeData.craftedUpgrades.length) {
                         for (const baseUpgrade of craftedUpgradeData.baseUpgrades) {
                             addBaseUpgrade(baseUpgrade.id, baseUpgrade.count * craftedUpgradeCount);
                         }
                     } else {
+                        // Otherwise, expand each recipe item into either another crafted upgrade or a base upgrade.
                         for (const recipeUpgrade of craftedUpgradeData.recipe) {
                             const subCraftedUpgrade = craftedUpgradeData.craftedUpgrades.find(
                                 x => x.id === recipeUpgrade.id
@@ -1994,11 +2050,13 @@ export class UpgradesService {
                 }
             }
 
+            // If additional crafted upgrades were discovered, continue expanding them until only base upgrades remain.
             if (Object.keys(nextLevelCraftedUpgrades).length > 0) {
                 processCraftedUpgrade(nextLevelCraftedUpgrades, depth + 1);
             }
         };
 
+        // Top-level crafted upgrades are gathered from the rank-up list and expanded afterward.
         const topLevelCraftedUpgrades: Record<string, number> = {};
 
         for (const upgradeRank of upgradeRanks) {
@@ -2008,6 +2066,7 @@ export class UpgradesService {
                     continue;
                 }
 
+                // Crafted upgrades are expanded later; base upgrades are applied immediately.
                 if (upgradeData.crafted) {
                     topLevelCraftedUpgrades[upgrade] = (topLevelCraftedUpgrades[upgrade] ?? 0) + 1;
                 } else {
@@ -2016,8 +2075,10 @@ export class UpgradesService {
             }
         }
 
+        // Expand crafted upgrades into their base material requirements, honoring inventory.
         processCraftedUpgrade(topLevelCraftedUpgrades);
 
+        // Finally, include shard requirements (if any) as base materials.
         if (upgradeShards !== undefined) {
             if (upgradeShards.totalIncrementalMythicShardsNeeded > 0) {
                 baseUpgradesTotal[upgradeShards.mythicShardName] = upgradeShards.totalIncrementalMythicShardsNeeded;
@@ -2027,6 +2088,7 @@ export class UpgradesService {
             }
         }
 
+        // Result is the remaining base material counts after applying all inventory consumption.
         return baseUpgradesTotal;
     }
 

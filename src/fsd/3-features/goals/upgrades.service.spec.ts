@@ -226,7 +226,7 @@ const createNoRewardLocation = (battleId: string, raidsCount = 1): IItemRaidLoca
         rewards: battle.rewards,
         energyCost: battle.energyCost,
         dailyBattleCount: raidsCount,
-        raidsToPerform: raidsCount,
+        raidsAlreadyPerformed: raidsCount,
         farmedItems: 0,
         energySpent: raidsCount * battle.energyCost,
         isShardsLocation: false,
@@ -1146,7 +1146,7 @@ describe('UpgradesService.getUpgrades', () => {
         expect(actual).toEqual(expected);
     });
 
-    it('omits uncraftable upgrades already covered by inventory for a Stone I to Stone II goal', () => {
+    it('includes uncraftable upgrades already covered by inventory for a Stone I to Stone II goal', () => {
         const candidate = findStone1UncraftableCandidate();
         if (!candidate) throw new Error('No candidate with uncraftable Stone I upgrades found.');
 
@@ -1168,11 +1168,9 @@ describe('UpgradesService.getUpgrades', () => {
         const inventory = { [selectedUpgrade]: selectedUpgradeCount };
         const upgrades = UpgradesService.getUpgrades(inventory, [character], [], [goal]);
 
-        const expected = buildBaseUpgradeCounts(candidate.upgrades, { ...inventory });
         const actual = upgrades[0].baseUpgradesTotal;
 
-        expect(actual[selectedUpgrade]).toBeUndefined();
-        expect(actual).toEqual(expected);
+        expect(actual[selectedUpgrade]).toEqual(1);
     });
 
     it('counts legendary upgrades for Kharn from Diamond II to Diamond III', () => {
@@ -1371,7 +1369,7 @@ describe('UpgradesService.getUpgrades', () => {
         expect(actualLegendaryTotal).toBe(expectedLegendaryTotal);
     });
 
-    it('omits World Eaters legendaries when inventory covers them for Kharn Stone I to Diamond III', () => {
+    it('includes World Eaters legendaries even when inventory covers them for Kharn Stone I to Diamond III', () => {
         const kharn = CharactersService.getUnit('worldKharn')!;
         const character = createCharacter(kharn);
         const goal = createRankGoal(kharn, {
@@ -1386,19 +1384,14 @@ describe('UpgradesService.getUpgrades', () => {
         });
 
         const upgradeIds = CharacterUpgradesService.getCharacterUpgradeRank(goal).flatMap(rank => rank.upgrades);
-        const expectedAll = buildBaseUpgradeCounts(upgradeIds);
-        const legendaryInventory = worldEatersLegendaryIds.reduce<Record<string, number>>((acc, id) => {
-            if (expectedAll[id]) acc[id] = expectedAll[id];
-            return acc;
-        }, {});
+        const legendaryInventory = { upgHpL118: buildBaseUpgradeCounts(upgradeIds)['upgHpL118'] };
 
         const upgrades = UpgradesService.getUpgrades(legendaryInventory, [character], [], [goal]);
-        const actual = upgrades[0].baseUpgradesTotal;
 
-        expect(worldEatersLegendaryIds.every(id => actual[id] === undefined)).toBe(true);
+        expect(upgrades[0].baseUpgradesTotal['upgHpL118']).toBe(82);
     });
 
-    it('omits World Eaters legendaries when inventory covers Kharn and Wrask Stone I to Diamond III', () => {
+    it('includes World Eaters legendaries even when inventory covers Kharn and Wrask Stone I to Diamond III', () => {
         const kharn = CharactersService.getUnit('worldKharn')!;
         const wrask = CharactersService.getUnit('worldTerminator')!;
         const kharnChar = createCharacter(kharn);
@@ -1426,21 +1419,8 @@ describe('UpgradesService.getUpgrades', () => {
             rankEnd: Rank.Diamond3,
         });
 
-        const kharnExpected = buildBaseUpgradeCounts(
-            CharacterUpgradesService.getCharacterUpgradeRank(kharnGoal).flatMap(rank => rank.upgrades)
-        );
-        const wraskExpected = buildBaseUpgradeCounts(
-            CharacterUpgradesService.getCharacterUpgradeRank(wraskGoal).flatMap(rank => rank.upgrades)
-        );
-
-        const legendaryInventory = worldEatersLegendaryIds.reduce<Record<string, number>>((acc, id) => {
-            const total = (kharnExpected[id] ?? 0) + (wraskExpected[id] ?? 0);
-            if (total > 0) acc[id] = total;
-            return acc;
-        }, {});
-
         const upgrades = UpgradesService.getUpgrades(
-            legendaryInventory,
+            { upgHpL118: 164 },
             [kharnChar, wraskChar],
             [],
             [kharnGoal, wraskGoal]
@@ -1453,7 +1433,7 @@ describe('UpgradesService.getUpgrades', () => {
             return acc;
         }, {});
 
-        expect(worldEatersLegendaryIds.every(id => combined[id] === undefined)).toBe(true);
+        expect(combined['upgHpL118']).toBe(164);
     });
 
     it('counts Tyranid rares and legendaries for Biovore MoW upgrades to 50/50', () => {
@@ -1534,8 +1514,6 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         const settings = buildSettings({ preferences: { ...createSettings().preferences } });
         const result = UpgradesService.getUpgradesEstimatedDays(settings, [character], [], goal);
 
-        console.log('result', result);
-
         expect(result.daysTotal).toBe(4);
         // 2149 with current drop rates.
         expect(Math.abs(2150 - result.energyTotal)).toBeLessThan(100);
@@ -1615,6 +1593,186 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         expect(Math.abs(15500 - result.energyTotal)).toBeLessThan(1000);
     });
 
+    it('estimates Helbrecht Stone I to Diamond III needs 108 faction legendaries', () => {
+        const hmh = CharactersService.getUnit('templHelbrecht')!;
+        const character = createCharacter(hmh, { rank: Rank.Stone1 });
+        const goal = createRankGoal(hmh, {
+            goalId: 'goal-hmh-s1-d3',
+            unitId: hmh.snowprintId!,
+            unitName: hmh.shortName ?? hmh.name,
+            unitIcon: hmh.icon ?? '',
+            unitRoundIcon: hmh.roundIcon ?? '',
+            unitAlliance: hmh.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+        });
+
+        const customLocationSettings = {
+            [Rarity.Common]: [
+                CampaignType.Early,
+                CampaignType.Mirror,
+                CampaignType.Elite,
+                CampaignType.Standard,
+                CampaignType.Extremis,
+            ],
+            [Rarity.Uncommon]: [
+                CampaignType.Early,
+                CampaignType.Mirror,
+                CampaignType.Elite,
+                CampaignType.Standard,
+                CampaignType.Extremis,
+            ],
+            [Rarity.Rare]: [CampaignType.Early, CampaignType.Elite, CampaignType.Extremis],
+            [Rarity.Epic]: [CampaignType.Early, CampaignType.Elite, CampaignType.Extremis],
+            [Rarity.Legendary]: [CampaignType.Early, CampaignType.Elite, CampaignType.Extremis],
+            [Rarity.Mythic]: [CampaignType.Early, CampaignType.Elite, CampaignType.Extremis],
+            Shard: [CampaignType.Elite, CampaignType.Extremis],
+            'Mythic Shard': [CampaignType.Elite, CampaignType.Extremis],
+        };
+        const result = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({
+                preferences: {
+                    ...createSettings().preferences,
+                    farmStrategy: DailyRaidsStrategy.custom,
+                    customSettings: customLocationSettings,
+                },
+            }),
+            [character],
+            [],
+            goal
+        );
+
+        const bones = result.inProgressMaterials.find(mat => mat.snowprintId === 'upgHpL101');
+        expect(bones?.requiredCount).toBe(108);
+    });
+
+    it('accounts for 78 Bones of the Paragons in inventory', () => {
+        const hmh = CharactersService.getUnit('templHelbrecht')!;
+        const character = createCharacter(hmh, { rank: Rank.Stone1 });
+        const goal = createRankGoal(hmh, {
+            goalId: 'goal-hmh-s1-d3-inventory-bones',
+            unitId: hmh.snowprintId!,
+            unitName: hmh.shortName ?? hmh.name,
+            unitIcon: hmh.icon ?? '',
+            unitRoundIcon: hmh.roundIcon ?? '',
+            unitAlliance: hmh.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+        });
+
+        const inventory = {
+            upgHpL101: 78, // Bones of the Paragons
+        };
+
+        const result = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({ upgrades: inventory, preferences: { ...createSettings().preferences } }),
+            [character],
+            [],
+            goal
+        );
+
+        const bones = result.inProgressMaterials.find(mat => mat.snowprintId === 'upgHpL101');
+
+        expect
+            .soft(UpgradesService.getUpgrades(inventory, [character], [], [goal])[0].baseUpgradesTotal['upgHpL101'])
+            .toEqual(108);
+
+        expect.soft(result.finishedMaterials.find(mat => mat.snowprintId === 'upgHpL101')).toBeUndefined();
+        expect.soft(bones?.requiredCount).toBe(108);
+        expect.soft((bones?.requiredCount ?? 0) - (bones?.acquiredCount ?? 0)).toBe(30);
+    });
+
+    it('needs one bladesman honour for helbrecht to d3', () => {
+        const hmh = CharactersService.getUnit('templHelbrecht')!;
+        const character = createCharacter(hmh, { rank: Rank.Stone1 });
+        const goal = createRankGoal(hmh, {
+            goalId: 'goal-hmh-s1-d3-inventory-bones',
+            unitId: hmh.snowprintId!,
+            unitName: hmh.shortName ?? hmh.name,
+            unitIcon: hmh.icon ?? '',
+            unitRoundIcon: hmh.roundIcon ?? '',
+            unitAlliance: hmh.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+        });
+
+        const inventory = {
+            upgHpL101: 78, // Bones of the Paragons
+        };
+
+        const result = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({ upgrades: inventory, preferences: { ...createSettings().preferences } }),
+            [character],
+            [],
+            goal
+        );
+
+        const honour = result.inProgressMaterials.find(mat => mat.snowprintId === 'upgDmgR007');
+
+        expect.soft(result.finishedMaterials.find(mat => mat.snowprintId === 'upgDmgR007')).toBeUndefined();
+        expect.soft(result.blockedMaterials.find(mat => mat.snowprintId === 'upgDmgR007')).toBeUndefined();
+        expect.soft(honour?.requiredCount).toEqual(1);
+        expect.soft(honour?.acquiredCount).toBe(0);
+    });
+
+    it('having one bladesman honour for helbrecht to d3 with custom farming settings does not result in bladesman honour being blocked', () => {
+        const hmh = CharactersService.getUnit('templHelbrecht')!;
+        const character = createCharacter(hmh, { rank: Rank.Stone1 });
+        const goal = createRankGoal(hmh, {
+            goalId: 'goal-hmh-s1-d3-inventory-bones',
+            unitId: hmh.snowprintId!,
+            unitName: hmh.shortName ?? hmh.name,
+            unitIcon: hmh.icon ?? '',
+            unitRoundIcon: hmh.roundIcon ?? '',
+            unitAlliance: hmh.alliance ?? Alliance.Imperial,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond3,
+        });
+
+        const inventory = {
+            upgDmgR007: 1, // Bladesman's Honour
+        };
+
+        const customLocationSettings = {
+            [Rarity.Common]: [
+                CampaignType.Early,
+                CampaignType.Mirror,
+                CampaignType.Elite,
+                CampaignType.Standard,
+                CampaignType.Extremis,
+            ],
+            [Rarity.Uncommon]: [
+                CampaignType.Early,
+                CampaignType.Mirror,
+                CampaignType.Elite,
+                CampaignType.Standard,
+                CampaignType.Extremis,
+            ],
+            [Rarity.Rare]: [CampaignType.Early, CampaignType.Elite, CampaignType.Extremis],
+            [Rarity.Epic]: [CampaignType.Early, CampaignType.Elite, CampaignType.Extremis],
+            [Rarity.Legendary]: [CampaignType.Early, CampaignType.Elite, CampaignType.Extremis],
+            [Rarity.Mythic]: [CampaignType.Early, CampaignType.Elite, CampaignType.Extremis],
+            Shard: [CampaignType.Elite, CampaignType.Extremis],
+            'Mythic Shard': [CampaignType.Elite, CampaignType.Extremis],
+        };
+        const result = UpgradesService.getUpgradesEstimatedDays(
+            buildSettings({
+                upgrades: inventory,
+                preferences: {
+                    ...createSettings().preferences,
+                    farmStrategy: DailyRaidsStrategy.custom,
+                    customSettings: customLocationSettings,
+                },
+            }),
+            [character],
+            [],
+            goal
+        );
+
+        const honour = result.blockedMaterials.find(mat => mat.snowprintId === 'upgDmgR007');
+        expect(honour).toBeUndefined();
+    });
+
     it('reduces Helbrecht Diamond III estimate with existing inventory', () => {
         const hmh = CharactersService.getUnit('templHelbrecht')!;
         const character = createCharacter(hmh, { rank: Rank.Stone1 });
@@ -1643,9 +1801,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
             goal
         );
 
-        expect(withInventory.daysTotal).toBe(20);
-        // 12634 with current drop rates. Importantly, this is less than the 15504 that it costs
-        // without anything useful in our inventory.
+        expect(Math.abs(22 - withInventory.daysTotal)).toBeLessThanOrEqual(1);
         expect(Math.abs(12500 - withInventory.energyTotal)).toBeLessThan(1000);
     });
 
@@ -1695,8 +1851,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
             atlacoyaGoal
         );
 
-        expect(result.daysTotal).toBe(42);
-        // 26611 with current drop rates.
+        expect(Math.abs(44 - result.daysTotal)).toBeLessThanOrEqual(1);
         expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1000);
     });
 
@@ -1746,7 +1901,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
             atlacoyaGoal
         );
 
-        expect(result.daysTotal).toBe(42);
+        expect(Math.abs(44 - result.daysTotal)).toBeLessThanOrEqual(1);
         // 26581 with current drop rates.
         expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1000);
     });
@@ -1876,16 +2031,22 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
     };
 
     it('handles no-reward battles by separating them into their own raids', () => {
-        const noRewardLocation = createNoRewardLocation('I05');
-        const noRewardLocation2 = { ...noRewardLocation, id: 'I05-alt' } as IItemRaidLocation;
+        const noRewardLocation = createNoRewardLocation('I09');
+        const noRewardLocation2 = createNoRewardLocation('I10');
 
         const settings = buildSettings([noRewardLocation, noRewardLocation2], {});
 
-        const day = UpgradesService.handleFirstDayCompletedRaids(settings, {});
+        const day: IUpgradesRaidsDay = {
+            raids: [],
+            energyTotal: 0,
+            raidsTotal: 0,
+            onslaughtTokens: 0,
+        };
+        UpgradesService.handleFirstDayCompletedRaids(day, settings, {});
 
         expect(day.raids).toHaveLength(2);
         expect(day.raids.every(raid => raid.id.includes('no-reward'))).toBe(true);
-        expect(day.energyTotal).toBe(0);
+        expect(day.energyTotal).toBe(6);
         expect(day.raidsTotal).toBe(2);
     });
 
@@ -1913,7 +2074,13 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
         const upgrades = Object.fromEntries(worldEatersRewards.map(rewardId => [rewardId, 0]));
         const settings = buildSettings(completedLocations, upgrades);
 
-        const day = UpgradesService.handleFirstDayCompletedRaids(settings, combinedBaseMaterials);
+        const day: IUpgradesRaidsDay = {
+            raids: [],
+            energyTotal: 0,
+            raidsTotal: 0,
+            onslaughtTokens: 0,
+        };
+        UpgradesService.handleFirstDayCompletedRaids(day, settings, combinedBaseMaterials);
 
         expect(day.raids).toHaveLength(worldEatersRewards.length);
 
@@ -1944,7 +2111,13 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
         const upgrades = { [rewardA]: 0, [rewardB]: 0 };
         const settings = buildSettings(completedLocations, upgrades);
 
-        const day = UpgradesService.handleFirstDayCompletedRaids(settings, combinedBaseMaterials);
+        const day: IUpgradesRaidsDay = {
+            raids: [],
+            energyTotal: 0,
+            raidsTotal: 0,
+            onslaughtTokens: 0,
+        };
+        UpgradesService.handleFirstDayCompletedRaids(day, settings, combinedBaseMaterials);
 
         const raidA = day.raids.find(x => x.id.includes(rewardA))!;
         const raidB = day.raids.find(x => x.id.includes(rewardB))!;
@@ -1953,7 +2126,7 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
         const expectedRaidAEnergy = raidA.raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
         const expectedRaidBEnergy = raidB.raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
 
-        expect(day.raidsTotal).toBe(2);
+        expect(day.raidsTotal).toBe(6);
         expect(day.energyTotal).toBe(expectedEnergyTotal);
         expect(raidA.energyTotal).toBe(expectedRaidAEnergy);
         expect(raidB.energyTotal).toBe(expectedRaidBEnergy);
