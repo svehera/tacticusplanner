@@ -66,13 +66,12 @@ export const MaterialsTable: React.FC<Props> = ({
         const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
 
         if (typeof rarity === 'number') {
-            return order.indexOf(RarityString[rarity as unknown as keyof typeof RarityString] ?? 'Unknown');
+            const normalized = RarityMapper.rarityToRarityString(rarity as Rarity);
+            return order.indexOf(normalized) === -1 ? order.length - 1 : order.indexOf(normalized);
         }
 
         if (typeof rarity === 'string') {
-            const mapped = RarityMapper.stringToRarity(rarity);
-            const normalized =
-                mapped !== undefined ? RarityString[mapped as unknown as keyof typeof RarityString] : rarity;
+            const normalized = RarityMapper.stringToRarityString(rarity) ?? rarity;
             return order.indexOf(normalized) === -1 ? order.length - 1 : order.indexOf(normalized);
         }
 
