@@ -46,7 +46,7 @@ export const SaveTeamDialog: React.FC<Properties> = ({
     onCancel,
     onSave,
 }: Properties) => {
-    if (!isOpen) return null;
+    if (!isOpen) return;
 
     const handleBattleFieldLevelChange = (level: number) => {
         const newLevels = [...battleFieldLevels];

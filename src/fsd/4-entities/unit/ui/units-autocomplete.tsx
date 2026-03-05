@@ -9,7 +9,7 @@ import { UnitTitle } from './unit-title';
 interface Properties<T extends IUnit> {
     unit: T | T[] | null;
     options: T[];
-    onUnitChange?: (value: T | null) => void;
+    onUnitChange?: (value: T | undefined) => void;
     onUnitsChange?: (value: T[]) => void;
     multiple?: boolean;
     label?: string;
@@ -27,7 +27,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
 }: Properties<T>) => {
     const [openAutocomplete, setOpenAutocomplete] = useState(false);
 
-    const updateValue = (value: T | T[] | null): void => {
+    const updateValue = (value: T | T[] | undefined): void => {
         if (Array.isArray(value)) {
             onUnitsChange(value);
         } else {
@@ -97,7 +97,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
                     onClick={() => updateValue(option)}
                 />
             )}
-            onChange={(_, value) => updateValue(value)}
+            onChange={(_, value) => updateValue(value ?? undefined)}
             renderInput={parameters => (
                 <TextField
                     {...parameters}

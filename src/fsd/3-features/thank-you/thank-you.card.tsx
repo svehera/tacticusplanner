@@ -117,7 +117,7 @@ export const ThankYouCard = ({
                 ) : (
                     <>
                         <p>{contributor.thankYou}</p>
-                        {contributor.resourceLink ? (
+                        {contributor.resourceLink && (
                             <React.Fragment>
                                 Check out{' '}
                                 <Link
@@ -127,7 +127,7 @@ export const ThankYouCard = ({
                                     {contributor.resourceDescription}
                                 </Link>
                             </React.Fragment>
-                        ) : undefined}
+                        )}
                     </>
                 )}
             </CardContent>

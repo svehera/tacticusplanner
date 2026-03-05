@@ -41,7 +41,7 @@ export const Insights = () => {
         filterBy: CharactersFilterBy.None,
         orderBy: CharactersOrderBy.Faction,
     });
-    const [nameFilter, setNameFilter] = useState<string | null>(null);
+    const [nameFilter, setNameFilter] = useState<string>();
     const { data, loading } = useGetInsights();
 
     if (loading) {

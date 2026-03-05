@@ -57,15 +57,13 @@ export const DailyRaids = () => {
 
     const location = useLocation();
     const [searchParameters] = useSearchParams();
-    const [charSnowprintId, setCharSnowprintId] = React.useState<string | null>(
-        searchParameters.get('charSnowprintId')
-    );
+    const [charSnowprintId, setCharSnowprintId] = React.useState(searchParameters.get('charSnowprintId') ?? undefined);
 
     useEffect(() => {
-        setCharSnowprintId(searchParameters.get('charSnowprintId'));
+        setCharSnowprintId(searchParameters.get('charSnowprintId') ?? undefined);
     }, [location]);
 
-    const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation | null) => {
+    const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation | undefined) => {
         setHasChanges(true);
 
         if (location) {

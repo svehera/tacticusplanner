@@ -86,7 +86,7 @@ export const CharacterDetails = ({
                     <MenuItem key={value} value={value}>
                         <div className="flex items-center gap-2.5">
                             <span>{getName(value)}</span>
-                            {icon ? icon(value) : undefined}
+                            {icon?.(value)}
                         </div>
                     </MenuItem>
                 ))}
@@ -177,7 +177,7 @@ export const CharacterDetails = ({
                 </Grid>
             </Grid>
 
-            {formData.rank > Rank.Locked ? (
+            {formData.rank > Rank.Locked && (
                 <React.Fragment>
                     <Grid container spacing={2} alignItems="center">
                         <Grid item xs={6}>
@@ -283,7 +283,7 @@ export const CharacterDetails = ({
                         }}
                     />
                 </React.Fragment>
-            ) : undefined}
+            )}
         </FormGroup>
     );
 };

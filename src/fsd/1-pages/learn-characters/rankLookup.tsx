@@ -32,7 +32,7 @@ export const RankLookup = () => {
     const [searchParameters, setSearchParameters] = useSearchParams();
 
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
-    const [character, setCharacter] = useState<ICharacter2 | null>(() => {
+    const [character, setCharacter] = useState<ICharacter2 | undefined>(() => {
         const queryParametersCharacter = searchParameters.get('character');
 
         return characters.find(x => x.name === queryParametersCharacter) ?? characters[0];
@@ -58,8 +58,8 @@ export const RankLookup = () => {
         return !!queryParametersRankPoint5 && queryParametersRankPoint5 === 'true';
     });
 
-    const [anchorElement2, setAnchorElement2] = React.useState<HTMLElement | null>(null);
-    const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull | null>(null);
+    const [anchorElement2, setAnchorElement2] = React.useState<HTMLElement>();
+    const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull>();
 
     /**
      * Holds the set of uncraftable upgrade materials needed to rank up this
@@ -136,7 +136,7 @@ export const RankLookup = () => {
                         />{' '}
                         - <span className="font-bold">{item.count}</span>
                     </div>
-                    {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
+                    {item.recipe?.length && renderUpgradesMaterials(item.recipe)}
                 </li>
             ))}
         </ul>
@@ -299,7 +299,8 @@ export const RankLookup = () => {
                 <UnitsAutocomplete
                     label="Characters"
                     className="max-w-[300px]"
-                    unit={character}
+                    // eslint-disable-next-line unicorn/no-null
+                    unit={character ?? null}
                     options={characters}
                     onUnitChange={value => {
                         setCharacter(value);
@@ -399,7 +400,7 @@ export const RankLookup = () => {
                     <Popover
                         open={!!materialRecipe}
                         anchorEl={anchorElement2}
-                        onClose={() => setMaterialRecipe(null)}
+                        onClose={() => setMaterialRecipe(undefined)}
                         anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'left',
@@ -419,9 +420,7 @@ export const RankLookup = () => {
                                         size={30}
                                     />
                                 </div>
-                                {materialRecipe.recipe?.length
-                                    ? renderUpgradesMaterials(materialRecipe.recipe)
-                                    : undefined}
+                                {materialRecipe.recipe?.length && renderUpgradesMaterials(materialRecipe.recipe)}
                             </div>
                         )}
                     </Popover>

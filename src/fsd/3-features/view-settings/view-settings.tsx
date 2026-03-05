@@ -13,14 +13,14 @@ type OptionsPreset = 'wyo' | 'inventory' | 'myProgress';
 export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
     const dispatch = useContext(DispatchContext);
     const { viewPreferences } = useContext(StoreContext);
-    const [anchorElement2, setAnchorElement2] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement2, setAnchorElement2] = React.useState<HTMLButtonElement>();
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorElement2(event.currentTarget);
     };
 
     const handleClose2 = () => {
-        setAnchorElement2(null);
+        setAnchorElement2(undefined);
     };
 
     const open2 = Boolean(anchorElement2);

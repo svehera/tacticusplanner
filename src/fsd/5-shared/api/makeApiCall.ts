@@ -7,7 +7,7 @@ export const makeApiCall = <TResponse, TRequestBody = any>(
     method: Method,
     url: string,
     body?: TRequestBody
-): Promise<{ data: TResponse | null; error: AxiosError<IErrorResponse> | string | null }> => {
+): Promise<{ data: TResponse | undefined; error: AxiosError<IErrorResponse> | string | undefined }> => {
     const fetchData = async () => {
         try {
             const response = await API<TResponse, AxiosResponse<TResponse>, TRequestBody>({
@@ -18,7 +18,7 @@ export const makeApiCall = <TResponse, TRequestBody = any>(
 
             const data = response?.data;
 
-            return { data, error: null };
+            return { data, error: undefined };
         } catch (error_: any) {
             console.error(error_);
             const error = error_ as Error | AxiosError<IErrorResponse>;
@@ -26,13 +26,13 @@ export const makeApiCall = <TResponse, TRequestBody = any>(
             if (axios.isAxiosError(error)) {
                 if (error.code === AxiosError.ERR_CANCELED) {
                     console.info('Request was canceled');
-                    return { data: null, error: null };
+                    return { data: undefined, error: undefined };
                 }
                 error.message = error?.response?.data?.message || error.message;
-                return { data: null, error };
+                return { data: undefined, error };
             } else {
                 console.error(`Unexpected error during API call`, error);
-                return { data: null, error: error.message };
+                return { data: undefined, error: error.message };
             }
         }
     };

@@ -361,7 +361,7 @@ export const GoalCard: React.FC<Properties> = ({ goal, menuItemSelect, goalEstim
             }}>
             <CardHeader
                 action={
-                    menuItemSelect ? (
+                    menuItemSelect && (
                         <>
                             <IconButton onClick={() => menuItemSelect('edit')}>
                                 <Edit fontSize="small" />
@@ -370,7 +370,7 @@ export const GoalCard: React.FC<Properties> = ({ goal, menuItemSelect, goalEstim
                                 <DeleteForever fontSize="small" />
                             </IconButton>
                         </>
-                    ) : undefined
+                    )
                 }
                 title={
                     <div className="flex-box gap5">

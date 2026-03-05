@@ -170,7 +170,7 @@ export const TopAppBar: React.FC<Properties> = ({ headerTitle, seenAppVersion, o
                             id="basic-button"
                             aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}
                             aria-haspopup="true"
-                            aria-expanded={navigationMenuControls.open ? 'true' : undefined}
+                            aria-expanded={navigationMenuControls.open}
                             color="inherit"
                             onClick={navigationMenuControls.handleClick}>
                             <Badge color="secondary" variant="dot" invisible={seenNewVersion}>

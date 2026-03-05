@@ -30,7 +30,7 @@ export const Teams = () => {
     const { mows, characters, viewPreferences, teams } = useContext(StoreContext);
     const [quickFilter, setQuickFilter] = useDebounceValue('', 300);
     const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);
-    const [editTeam, setEditTeam] = React.useState<IPersonalTeam | null>(null);
+    const [editTeam, setEditTeam] = React.useState<IPersonalTeam>();
 
     const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
@@ -118,7 +118,7 @@ export const Teams = () => {
                 {editTeam && (
                     <EditTeamDialog
                         team={editTeam}
-                        onClose={() => setEditTeam(null)}
+                        onClose={() => setEditTeam(undefined)}
                         characters={characters}
                         mows={resolvedMows}
                         saveTeam={updateTeam}

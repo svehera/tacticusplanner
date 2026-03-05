@@ -119,11 +119,9 @@ const DailyRaidsSettings: React.FC<Properties> = ({ close, open }) => {
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
     );
-    const [character, setCharacter] = useState<ICharacter2 | null>(() => {
-        return (
-            characters.find(
-                x => x.snowprintId === dailyRaidsPreferencesForm.farmPreferences.trainingRushPreferences?.characterId
-            ) || null
+    const [character, setCharacter] = useState(() => {
+        return characters.find(
+            x => x.snowprintId === dailyRaidsPreferencesForm.farmPreferences.trainingRushPreferences?.characterId
         );
     });
 
@@ -202,7 +200,7 @@ const DailyRaidsSettings: React.FC<Properties> = ({ close, open }) => {
         });
     }
 
-    function saveTrainingRushUnitChanges(unit: ICharacter2 | null): void {
+    function saveTrainingRushUnitChanges(unit: ICharacter2 | undefined): void {
         setCharacter(unit);
         setDailyRaidsPreferencesForm(current => {
             const returnValue = { ...current };
@@ -210,7 +208,7 @@ const DailyRaidsSettings: React.FC<Properties> = ({ close, open }) => {
                 strategy:
                     returnValue.farmPreferences.trainingRushPreferences?.strategy ??
                     ITrainingRushStrategy.maximizeRewards,
-                characterId: unit ? unit.snowprintId! : undefined,
+                characterId: unit?.snowprintId,
             };
             return returnValue;
         });
@@ -429,7 +427,8 @@ const DailyRaidsSettings: React.FC<Properties> = ({ close, open }) => {
                                 ITrainingRushStrategy.maximizeXpForCharacter && (
                                 <FormControl>
                                     <UnitsAutocomplete
-                                        unit={character}
+                                        // eslint-disable-next-line unicorn/no-null
+                                        unit={character ?? null}
                                         options={characters}
                                         onUnitChange={saveTrainingRushUnitChanges}
                                     />

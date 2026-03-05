@@ -143,16 +143,18 @@ const CloseIndicator = ({ className, ...properties }: CloseButtonIndicatorProper
             buttonReference.current.focus();
         }
     }, [isMobile]);
-    return properties.isDismissable ? (
-        <ButtonPrimitive
-            ref={buttonReference}
-            {...(isMobile ? { autoFocus: true } : {})}
-            aria-label="Close"
-            slot="close"
-            className={closeIndicator({ className })}>
-            <XIcon className="size-4" />
-        </ButtonPrimitive>
-    ) : null;
+    return (
+        properties.isDismissable && (
+            <ButtonPrimitive
+                ref={buttonReference}
+                {...(isMobile ? { autoFocus: true } : {})}
+                aria-label="Close"
+                slot="close"
+                className={closeIndicator({ className })}>
+                <XIcon className="size-4" />
+            </ButtonPrimitive>
+        )
+    );
 };
 
 Dialog.Trigger = Trigger;

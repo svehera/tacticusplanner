@@ -172,7 +172,7 @@ export const Resources = () => {
 
                                 <div className="flex flex-wrap justify-start">
                                     {rarities.map(rarity => {
-                                        if (rarity === Rarity.Common) return null; // Skip Common Orbs
+                                        if (rarity === Rarity.Common) return; // Skip Common Orbs
                                         const quantity = inventory.orbs[alliance][rarity as number as Rarity];
                                         return renderResourceItem(
                                             alliance + '-orb-' + rarity,

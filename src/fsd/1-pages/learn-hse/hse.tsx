@@ -222,7 +222,7 @@ export const HomeScreenEvent = () => {
             maxWidth: 130,
             cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
                 const hunt = parameters.data;
-                if (!hunt) return null;
+                if (!hunt) return;
                 const rowIndex = parameters.node.rowIndex ?? 0;
                 let cumulativeGears = 0;
                 for (let index = 0; index <= rowIndex; index++) {
@@ -240,7 +240,7 @@ export const HomeScreenEvent = () => {
             maxWidth: 130,
             cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
                 const hunt = parameters.data;
-                if (!hunt) return null;
+                if (!hunt) return;
                 return (
                     <>
                         <MiscIcon icon="energy" width={24} height={24} />
@@ -254,7 +254,7 @@ export const HomeScreenEvent = () => {
             maxWidth: 130,
             cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
                 const hunt = parameters.data;
-                if (!hunt) return null;
+                if (!hunt) return;
                 const rowIndex = parameters.node.rowIndex ?? 0;
                 let cumulativeEnergy = 0;
                 for (let index = 0; index <= rowIndex; index++) {
@@ -276,7 +276,7 @@ export const HomeScreenEvent = () => {
             field: 'reward',
             cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
                 const hunt = parameters.data;
-                if (!hunt) return null;
+                if (!hunt) return;
                 return rewardIcon(hunt.reward);
             },
         },

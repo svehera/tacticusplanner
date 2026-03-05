@@ -124,9 +124,11 @@ export const useCharacters = () => {
                         pinned: !isMobile,
                         cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
                             const character = properties.data;
-                            return character ? (
-                                <CharacterTitleShort character={character} hideName={isMobile} imageSize={30} />
-                            ) : null;
+                            return (
+                                character && (
+                                    <CharacterTitleShort character={character} hideName={isMobile} imageSize={30} />
+                                )
+                            );
                         },
                     },
                     {

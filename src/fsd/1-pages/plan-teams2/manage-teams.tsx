@@ -63,7 +63,7 @@ export const ManageTeams = () => {
 
     // State for the add/edit dialog.
     const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
-    const [editingTeam, setEditingTeam] = useState<ITeam2 | null>(null);
+    const [editingTeam, setEditingTeam] = useState<ITeam2>();
     const [saveAllowed, setSaveAllowed] = useState(false);
     const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>();
     const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>();
@@ -390,7 +390,7 @@ export const ManageTeams = () => {
                                 <Layers className="text-slate-500" sx={{ fontSize: 14 }} />
                                 <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400">
                                     {team.bfs
-                                        .map((active: boolean, index: number) => (active ? index + 1 : null))
+                                        .map((active: boolean, index: number) => (active ? index + 1 : undefined))
                                         .filter(Boolean)
                                         .map(number_ => `BF${number_!.toString()}`)
                                         .join(', ')}

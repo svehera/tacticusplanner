@@ -55,9 +55,7 @@ const TextField = ({
             type={inputType}
             {...properties}
             className={composeTailwindRenderProperties(className, 'group flex flex-col gap-y-1')}>
-            {properties.children ? (
-                properties.children
-            ) : (
+            {properties.children || (
                 <>
                     {label && <Label>{label}</Label>}
                     <FieldGroup
@@ -80,13 +78,10 @@ const TextField = ({
                             </ButtonPrimitive>
                         ) : isPending ? (
                             <Loader variant="spin" />
-                        ) : suffix ? (
-                            typeof suffix === 'string' ? (
-                                <span className="text-muted-fg mr-2">{suffix}</span>
-                            ) : (
-                                suffix
-                            )
-                        ) : null}
+                        ) : (
+                            suffix &&
+                            (typeof suffix === 'string' ? <span className="text-muted-fg mr-2">{suffix}</span> : suffix)
+                        )}
                     </FieldGroup>
                     {description && <Description>{description}</Description>}
                     <FieldError>{errorMessage}</FieldError>

@@ -83,7 +83,7 @@ export class GoalsService {
                     !relatedCharacter
                 ) {
                     console.warn('Goal not applicable for character or mow:', g);
-                    return null;
+                    return undefined;
                 }
                 return this.convertToTypedGoal(g, relatedCharacter);
             })
@@ -110,9 +110,9 @@ export class GoalsService {
             upgradeAbilities,
         };
     }
-    static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): CharacterRaidGoalSelect | null {
+    static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): CharacterRaidGoalSelect | undefined {
         if (!unit) {
-            return null;
+            return;
         }
 
         if (isMow(unit)) {
@@ -243,10 +243,10 @@ export class GoalsService {
             }
         }
 
-        return null;
+        return;
     }
 
-    static convertToGenericGoal(goal: CharacterRaidGoalSelect): IPersonalGoal | null {
+    static convertToGenericGoal(goal: CharacterRaidGoalSelect): IPersonalGoal | undefined {
         const base: IPersonalGoal = {
             id: goal.goalId,
             type: goal.type,
@@ -299,7 +299,7 @@ export class GoalsService {
                 };
             }
             default: {
-                return null;
+                return;
             }
         }
     }

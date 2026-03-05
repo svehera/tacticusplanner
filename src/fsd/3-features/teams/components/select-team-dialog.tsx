@@ -30,9 +30,9 @@ import { TeamView } from '@/fsd/3-features/teams/components/team-view';
 type Properties = {
     units: IUnit[];
     team: ICharacter2[];
-    activeMow: IMow2 | null;
+    activeMow: IMow2 | undefined;
     rarityCap: Rarity;
-    onClose: (team: ICharacter2[], mow: IMow2 | null) => void;
+    onClose: (team: ICharacter2[], mow: IMow2 | undefined) => void;
 };
 
 type OrderBy = 'rank' | 'faction' | 'power';
@@ -70,7 +70,7 @@ export const SelectTeamDialog: React.FC<Properties> = ({ onClose, team, units, a
         if (isMow(unit)) {
             if (mow && mow.id) {
                 if (mow.id === unit.id) {
-                    setMow(null);
+                    setMow(undefined);
                 } else {
                     setMow(unit);
                 }

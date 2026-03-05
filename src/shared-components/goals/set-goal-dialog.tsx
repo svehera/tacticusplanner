@@ -71,7 +71,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
-    const [unit, setUnit] = React.useState<IUnit | null>(null);
+    const [unit, setUnit] = React.useState<IUnit>();
 
     const [form, setForm] = useState<IPersonalGoal>(() => getDefaultForm(goals.length + 1));
 
@@ -88,7 +88,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             });
         }
         setOpenDialog(false);
-        setUnit(null);
+        setUnit(undefined);
         setForm(getDefaultForm(goal ? goal.priority + 1 : goals.length + 1));
         if (onClose) {
             onClose(goal);
@@ -134,12 +134,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
     }, [form.type, ignoreRankRarity, resolvedMows, characters]);
 
-    const getAscensionShardsName = (unit: IUnit | null): string => {
+    const getAscensionShardsName = (unit: IUnit | undefined): string => {
         if (!unit) return '';
         return 'shards_' + unit.snowprintId;
     };
 
-    const getAscensionMythicShardsName = (unit: IUnit | null): string => {
+    const getAscensionMythicShardsName = (unit: IUnit | undefined): string => {
         if (!unit) return '';
         return 'mythicShards_' + unit.snowprintId;
     };
@@ -177,13 +177,13 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             (newGoalType === PersonalGoalType.MowAbilities && form.type !== PersonalGoalType.MowAbilities) ||
             (newGoalType !== PersonalGoalType.MowAbilities && form.type === PersonalGoalType.MowAbilities)
         ) {
-            setUnit(null);
+            setUnit(undefined);
         }
 
         setForm(current => ({ ...current, type: newGoalType }));
     };
 
-    const handleUnitChange = (value: IUnit | null) => {
+    const handleUnitChange = (value: IUnit | undefined) => {
         setUnit(value);
 
         if (isCharacter(value)) {
@@ -208,7 +208,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
     const hasNonMythicAscension = () => {
         if (form.type !== PersonalGoalType.Ascend) return false;
-        return unit !== null && unit!.stars < RarityStars.OneBlueStar;
+        return unit && unit.stars < RarityStars.OneBlueStar;
     };
     const hasMythicAscension = () => {
         if (form.type !== PersonalGoalType.Ascend) return false;
@@ -305,7 +305,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             />
                         </div>
 
-                        <UnitsAutocomplete unit={unit} options={allowedCharacters} onUnitChange={handleUnitChange} />
+                        <UnitsAutocomplete
+                            // eslint-disable-next-line unicorn/no-null
+                            unit={unit ?? null}
+                            options={allowedCharacters}
+                            onUnitChange={handleUnitChange}
+                        />
 
                         <Conditional condition={!!unit && form.type === PersonalGoalType.UpgradeRank}>
                             <RankGoalSelect

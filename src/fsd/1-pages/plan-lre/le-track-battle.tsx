@@ -24,7 +24,7 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
     setState,
 }) => {
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-    const [showDropdown, setShowDropdown] = useState<string | null>(null);
+    const [showDropdown, setShowDropdown] = useState<string>();
     const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
     const longPressTimer = useRef<NodeJS.Timeout | null>(null);
     const longPressTriggered = useRef<boolean>(false);
@@ -50,7 +50,7 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
                 const button = buttonReferences.current.get(showDropdown);
                 const target = event.target as Node;
                 if (button && target && !button.contains(target)) {
-                    setShowDropdown(null);
+                    setShowDropdown(undefined);
                 }
             }
         };
@@ -93,6 +93,7 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
     const handlePressEnd = () => {
         if (longPressTimer.current) {
             clearTimeout(longPressTimer.current);
+            // eslint-disable-next-line unicorn/no-null
             longPressTimer.current = null;
         }
 
@@ -105,13 +106,14 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
             // Reset the flag after a short delay to prevent immediate click
             resetTriggerTimer.current = setTimeout(() => {
                 longPressTriggered.current = false;
+                // eslint-disable-next-line unicorn/no-null
                 resetTriggerTimer.current = null;
             }, 100);
         }
     };
 
     const handleDirectStatusChange = (request: ILreBattleRequirementsProgress, newStatus: RequirementStatus) => {
-        setShowDropdown(null);
+        setShowDropdown(undefined);
         handleStatusChange(request, newStatus);
     };
 

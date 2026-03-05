@@ -122,7 +122,7 @@ export class RankLookupService {
         ownedUpgrades: Record<string, number>,
         craftedBasedUpgrades: Record<string, number>,
         updateInventory = false
-    ): IMaterialEstimated2 | null {
+    ): IMaterialEstimated2 | undefined {
         const lockedLocations = (material.locationsComposed ?? []).filter(location => {
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber > campaignProgress;

@@ -53,10 +53,10 @@ export const GuildWarOffense = () => {
     const dispatch = useContext(DispatchContext);
 
     const [openSelectTeamDialog, setOpenSelectTeamDialog] = useState(false);
-    const [editedTeam, setEditedTeam] = useState<IGWTeamWithCharacters | null>(null);
+    const [editedTeam, setEditedTeam] = useState<IGWTeamWithCharacters>();
 
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = useState(false);
-    const [editedCharacter, setEditedCharacter] = useState<ICharacter2 | null>(null);
+    const [editedCharacter, setEditedCharacter] = useState<ICharacter2>();
 
     const { data, loading } = useGetGuildRosters({ members: guild.members });
 
@@ -69,7 +69,7 @@ export const GuildWarOffense = () => {
     };
 
     const endEditCharacter = (): void => {
-        setEditedCharacter(null);
+        setEditedCharacter(undefined);
         setOpenCharacterItemDialog(false);
     };
 
@@ -95,7 +95,7 @@ export const GuildWarOffense = () => {
                 teamName,
             });
         }
-        setEditedTeam(null);
+        setEditedTeam(undefined);
         setOpenSelectTeamDialog(false);
     };
 

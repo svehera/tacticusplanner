@@ -105,7 +105,7 @@ export const UserMenu = () => {
 
     const downloadJson = () => {
         const data = GlobalState.toStore(store);
-        const jsonData = JSON.stringify(data, null, 2);
+        const jsonData = JSON.stringify(data, undefined, 2);
 
         const blob = new Blob([jsonData], { type: 'application/json' });
         const url = URL.createObjectURL(blob);

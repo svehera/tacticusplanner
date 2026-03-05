@@ -427,11 +427,7 @@ export class TokenEstimationService {
             ),
         }));
         while (true) {
-            const token: TokenUse = this.computeNextToken(
-                tracks,
-                resolvedTeams,
-                tokens.length > 0 ? tokens.at(-1) : undefined
-            );
+            const token: TokenUse = this.computeNextToken(tracks, resolvedTeams, tokens.at(-1));
             if (token.team === undefined) break;
             this.markRestrictionsAsCleared(token, tracks.find(x => x.trackId === token.team!.section)!);
             tokens.push(token);

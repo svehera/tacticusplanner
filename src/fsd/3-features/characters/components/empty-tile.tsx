@@ -21,7 +21,7 @@ export const EmptyTile: React.FC<Properties> = ({ onClick, isMow = false }) => {
             style={{
                 cursor: onClick ? 'pointer' : undefined,
             }}
-            onClick={onClick ? () => onClick!() : undefined}>
+            onClick={() => onClick?.()}>
             <StarsIcon stars={RarityStars.None} />
             <div>
                 <CharacterPortraitImage icon={'portraits/unset.webp'} />

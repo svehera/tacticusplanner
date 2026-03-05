@@ -68,7 +68,7 @@ export type SetStateAction<T> = { type: 'Set'; value: T };
 
 export interface IGlobalState {
     modifiedDate?: Date;
-    seenAppVersion?: string | null;
+    seenAppVersion?: string;
     autoTeamsPreferences: IAutoTeamsPreferences;
     viewPreferences: IViewPreferences;
     dailyRaidsPreferences: IDailyRaidsPreferences;
@@ -114,14 +114,14 @@ export interface IDispatchContext {
     xpIncome: React.Dispatch<XpIncomeAction>;
     xpUse: React.Dispatch<XpUseAction>;
     rosterSnapshots: React.Dispatch<RosterSnapshotsAction>;
-    seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
+    seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
 
 export interface IPersonalData2 {
     schemaVersion: 2;
     modifiedDate?: Date;
-    seenAppVersion?: string | null;
+    seenAppVersion?: string;
     autoTeamsPreferences: IAutoTeamsPreferences;
     viewPreferences: IViewPreferences;
     dailyRaidsPreferences: IDailyRaidsPreferences;

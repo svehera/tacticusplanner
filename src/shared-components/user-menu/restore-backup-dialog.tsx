@@ -12,7 +12,7 @@ import { PersonalDataLocalStorage } from '../../services';
 
 export const RestoreBackupDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const { setStore } = useContext(DispatchContext);
-    const [data, setData] = useState<IPersonalData2 | null>(null);
+    const [data, setData] = useState<IPersonalData2>();
 
     useEffect(() => {
         const localStorage = new PersonalDataLocalStorage();
@@ -35,14 +35,14 @@ export const RestoreBackupDialog = ({ isOpen, onClose }: { isOpen: boolean; onCl
             <DialogContent>
                 <Box>
                     <h5>Backup contains:</h5>
-                    {data ? (
+                    {data && (
                         <ul>
                             <li>{data?.characters.length} Characters unlocked</li>
                             <li>
                                 {data?.goals.length} Goals ({data.goals.map(goal => goal.character).join(', ')})
                             </li>
                         </ul>
-                    ) : undefined}
+                    )}
                 </Box>
             </DialogContent>
             <DialogActions>

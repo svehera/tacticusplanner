@@ -50,7 +50,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [abortController, setAbortController] = useState<AbortController>();
 
     const [modifiedDate, setModifiedDate] = useState(globalState.modifiedDate);
-    const [seenAppVersion, setSeenAppVersion] = useState<string | undefined | null>(globalState.seenAppVersion);
+    const [seenAppVersion, setSeenAppVersion] = useState(globalState.seenAppVersion);
 
     const [characters, dispatchCharacters] = React.useReducer(charactersReducer, globalState.characters);
     const [mows, dispatchMows] = React.useReducer(mowsReducer, globalState.mows);

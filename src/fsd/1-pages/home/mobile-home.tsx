@@ -38,7 +38,7 @@ export const MobileHome = () => {
     }, [seenAppVersion]);
 
     const handleWhatsNewClose = () => {
-        const currentAppVersion = localStorage.getItem('appVersion');
+        const currentAppVersion = localStorage.getItem('appVersion') ?? undefined;
         if (seenAppVersion !== currentAppVersion) {
             dispatch.seenAppVersion(currentAppVersion);
         }

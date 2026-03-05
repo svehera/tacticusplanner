@@ -165,7 +165,7 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
             }
 
             for (const upgrade of upgrades) {
-                const upgradeId: string | null = TacticusIntegrationService.getUpgradeId(upgrade);
+                const upgradeId = TacticusIntegrationService.getUpgradeId(upgrade);
                 if (upgradeId) {
                     result[upgradeId] = upgrade.amount;
                 }

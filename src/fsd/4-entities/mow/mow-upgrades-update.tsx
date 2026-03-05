@@ -55,15 +55,15 @@ export const MowUpgradesUpdate: React.FC<Properties> = ({
         return UpgradesService.updateInventory(inventory, totalUpgrades);
     }, [currPrimaryLevel, currSecondaryLevel]);
 
-    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement | null>(null);
-    const [updateInventory, setUpdateInventory] = React.useState<boolean>(true);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement>();
+    const [updateInventory, setUpdateInventory] = React.useState(true);
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
         setAnchorElement(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorElement(null);
+        setAnchorElement(undefined);
     };
 
     const open = Boolean(anchorElement);

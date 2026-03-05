@@ -105,17 +105,17 @@ const ReleaseNotes = ({
                 {releaseNotes.map((releaseNote, index) => (
                     <li key={index} className="pb-3">
                         {releaseNote.text}{' '}
-                        {releaseNote.route && !isMobile ? (
+                        {releaseNote.route && !isMobile && (
                             <span>
                                 (<Link to={releaseNote.route}>{t('whatsNew.link')}</Link>)
                             </span>
-                        ) : undefined}
-                        {releaseNote.mobileRoute && isMobile ? (
+                        )}
+                        {releaseNote.mobileRoute && isMobile && (
                             <span>
                                 (<Link to={releaseNote.mobileRoute}>{t('whatsNew.link')}</Link>)
                             </span>
-                        ) : undefined}
-                        {releaseNote.subPoints?.length ? (
+                        )}
+                        {releaseNote.subPoints?.length && (
                             <ul className="pl-5">
                                 {releaseNote.subPoints.map((subPoint, subPointIndex) => (
                                     <li key={subPointIndex} className="pb-2">
@@ -124,16 +124,10 @@ const ReleaseNotes = ({
                                     </li>
                                 ))}
                             </ul>
-                        ) : undefined}
-                        {releaseNote.images?.length
-                            ? releaseNote.images.map((image, imageIndex) => (
-                                  <WhatsNewImage
-                                      key={imageIndex}
-                                      path={version + '/' + image.path}
-                                      imageSize={image.size}
-                                  />
-                              ))
-                            : undefined}
+                        )}
+                        {releaseNote.images?.map((image, imageIndex) => (
+                            <WhatsNewImage key={imageIndex} path={version + '/' + image.path} imageSize={image.size} />
+                        ))}
                     </li>
                 ))}
             </ul>

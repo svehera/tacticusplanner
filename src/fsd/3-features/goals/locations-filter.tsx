@@ -156,7 +156,7 @@ export const LocationsFilter: React.FC<Properties> = ({ filter, filtersChange })
                         <Autocomplete
                             fullWidth
                             size="small"
-                            value={currentFilter.enemiesMinCount?.toString() ?? null}
+                            value={currentFilter.enemiesMinCount?.toString()}
                             options={enemiesCountOptions}
                             onChange={(_, value) => {
                                 setCurrentFilter({ ...currentFilter, enemiesMinCount: value ? +value : undefined });
@@ -167,7 +167,7 @@ export const LocationsFilter: React.FC<Properties> = ({ filter, filtersChange })
                         <Autocomplete
                             fullWidth
                             size="small"
-                            value={currentFilter.enemiesMaxCount?.toString() ?? null}
+                            value={currentFilter.enemiesMaxCount?.toString()}
                             options={enemiesCountOptions}
                             onChange={(_, value) => {
                                 setCurrentFilter({ ...currentFilter, enemiesMaxCount: value ? +value : undefined });

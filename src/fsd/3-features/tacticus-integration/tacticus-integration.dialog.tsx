@@ -43,7 +43,7 @@ export const TacticusIntegrationDialog: React.FC<Properties> = ({
         await syncWithTacticus();
     }
 
-    function buildErrorMessage(error: string | Error | null): string {
+    function buildErrorMessage(error: string | Error | undefined): string {
         const baseMessage = 'Failed to update settings';
         const detail = typeof error === 'string' ? error : error?.message;
         return detail ? `${baseMessage}: ${detail}` : baseMessage;
@@ -73,7 +73,7 @@ export const TacticusIntegrationDialog: React.FC<Properties> = ({
         } catch (error) {
             console.error(error);
             const parsedError =
-                typeof error === 'string' || error instanceof Error || error === null ? error : String(error);
+                typeof error === 'string' || error instanceof Error || error === undefined ? error : String(error);
             enqueueSnackbar(buildErrorMessage(parsedError), { variant: 'error' });
         } finally {
             loader.endLoading();

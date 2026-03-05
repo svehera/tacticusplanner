@@ -154,17 +154,17 @@ export class PersonalDataLocalStorage {
         localStorage.removeItem(this.v1personalDataStorageKey);
     }
 
-    restoreData(): IPersonalData2 | null {
+    restoreData(): IPersonalData2 | undefined {
         const backup = localStorage.getItem(this.backupKey);
         if (backup) {
             try {
                 const data: IPersonalData | IPersonalData2 = JSON.parse(backup);
                 return convertData(data);
             } catch {
-                return null;
+                return;
             }
         } else {
-            return null;
+            return;
         }
     }
 
@@ -174,26 +174,26 @@ export class PersonalDataLocalStorage {
         localStorage.setItem(this.backUpDateKey, new Date().toISOString());
     }
 
-    public getBackupDate(): Date | null {
+    public getBackupDate(): Date | undefined {
         const date = localStorage.getItem(this.backUpDateKey);
         if (!date) {
-            return null;
+            return;
         }
 
         return new Date(date);
     }
 
-    private getItem<T>(key: keyof IPersonalData2): T | null {
+    private getItem<T>(key: keyof IPersonalData2): T | undefined {
         const value = localStorage.getItem(this.storePrefix + key);
 
         if (!value) {
-            return null;
+            return;
         }
 
         try {
             return JSON.parse(value);
         } catch {
-            return null;
+            return;
         }
     }
 

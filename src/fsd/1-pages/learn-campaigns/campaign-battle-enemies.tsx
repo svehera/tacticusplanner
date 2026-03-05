@@ -35,7 +35,7 @@ export const CampaignBattleEnemies: React.FC<Properties> = ({ keyPrefix, battleI
     );
 
     // Extracted Logic: Resolve string to data object
-    const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
+    const resolveEnemy = (enemyString: string): ResolvedEnemyData | undefined => {
         const colon = enemyString.indexOf(':');
         const id = colon === -1 ? enemyString : enemyString.slice(0, Math.max(0, colon));
 
@@ -52,7 +52,7 @@ export const CampaignBattleEnemies: React.FC<Properties> = ({ keyPrefix, battleI
 
         const npc = NpcService.getNpcById(id);
 
-        if (!npc || arrayIndex >= npc.stats.length) return null;
+        if (!npc || arrayIndex >= npc.stats.length) return;
 
         return {
             id,
@@ -110,8 +110,8 @@ export const CampaignBattleEnemies: React.FC<Properties> = ({ keyPrefix, battleI
             const resolved = resolveEnemy(enemy.id);
             const enemyId = resolved?.id || enemy.id;
             const npc = NpcService.getNpcById(enemyId);
-            const rank = resolved === null ? Rank.Stone1 : resolved.stats.rank;
-            const stars = resolved === null ? RarityStars.None : resolved.stats.rarityStars;
+            const rank = resolved === undefined ? Rank.Stone1 : resolved.stats.rank;
+            const stars = resolved === undefined ? RarityStars.None : resolved.stats.rarityStars;
 
             for (let index = 0; index < enemy.count; index++) {
                 elements.push(
@@ -124,7 +124,7 @@ export const CampaignBattleEnemies: React.FC<Properties> = ({ keyPrefix, battleI
                             onEnemyClick({
                                 id: enemyId,
                                 npc,
-                                stats: resolved === null ? npc.stats[0] : resolved.stats,
+                                stats: resolved === undefined ? npc.stats[0] : resolved.stats,
                             })
                         }>
                         <NpcPortrait id={enemyId} rank={rank} stars={stars} />

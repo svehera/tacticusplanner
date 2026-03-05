@@ -77,7 +77,7 @@ const CharacterTileFunction = ({
     const handleCharacterClick = useCallback(() => onCharacterClick?.(character), [onCharacterClick, character]);
 
     const renderUnlockStats = useMemo(() => {
-        if (!character.numberOfUnlocked) return null;
+        if (!character.numberOfUnlocked) return;
         if (!character.statsByOwner?.length) {
             return `${character.numberOfUnlocked}% of players unlocked this character`;
         }

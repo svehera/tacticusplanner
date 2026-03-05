@@ -245,7 +245,7 @@ export interface TacticusGuildMember {
     userId: string;
     role: TacticusGuildRole;
     level: number;
-    lastActivityOn?: string | null;
+    lastActivityOn?: string;
 }
 
 export enum TacticusGuildRole {
@@ -274,8 +274,8 @@ export interface TacticusGuildRaidEntry {
     rarity: Rarity;
     damageDealt: number;
     damageType: TacticusDamageType;
-    startedOn?: number | null;
-    completedOn?: number | null;
+    startedOn?: number;
+    completedOn?: number;
     heroDetails: TacticusGuildRaidUnit[];
     machineOfWarDetails?: TacticusGuildRaidUnit;
     globalConfigHash: string;

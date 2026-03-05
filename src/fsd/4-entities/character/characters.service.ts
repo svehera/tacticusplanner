@@ -58,7 +58,7 @@ export class CharactersService {
 
     /**
      * @param id The unit ID of the character or MoW.
-     * @returns An ICharacterData representation, or null.
+     * @returns An ICharacterData representation, or undefined.
      */
     public static getUnit(id: string): ICharacterData | undefined {
         return this.charactersData.find(

@@ -4,7 +4,7 @@ import { IMow2 } from '@/fsd/4-entities/mow';
 import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
 export interface IMowLookupInputs {
-    mow: IMow2 | null;
+    mow: IMow2 | undefined;
     primaryAbilityStart: number;
     primaryAbilityEnd: number;
     secondaryAbilityStart: number;
