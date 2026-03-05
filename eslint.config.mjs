@@ -12,6 +12,7 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 
@@ -23,12 +24,12 @@ const compat = new FlatCompat({
     allConfig: js.configs.all,
 });
 
-const FS_LAYERS = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
-
-const REVERSED_FS_LAYERS = [...FS_LAYERS].reverse();
+// Order from bottom to top (things earlier in the array cannot import things later in the array)
+const FS_LAYERS = ['shared', 'entities', 'features', 'widgets', 'pages', 'app'];
 
 export default defineConfig([
     globalIgnores(['dist', 'build', 'node_modules', 'package-lock.json']),
+    eslintPluginUnicorn.configs.recommended,
     ...compat.extends(
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -113,7 +114,7 @@ export default defineConfig([
 
                     // experimental features
                     'newlines-between': 'always',
-                    pathGroups: REVERSED_FS_LAYERS.map(layer => ({
+                    pathGroups: FS_LAYERS.map(layer => ({
                         pattern: `**/?(*)${layer}{,/**}`,
                         group: 'internal',
                         position: 'after',
