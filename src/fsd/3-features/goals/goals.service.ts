@@ -31,6 +31,7 @@ import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
+import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
 
 interface RevisedGoals {
     goalEstimates: IGoalEstimate[];
@@ -126,30 +127,38 @@ export class GoalsService {
                             raid.energyTotal / Math.max(1, raid.relatedCharacters.length)
                         );
                     }
-                    if (goal.type === PersonalGoalType.UpgradeRank) {
-                        const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
-                        const currentXp = this.currentCharacterXp(
-                            goal.unitId,
-                            [...upgradeRankOrMowGoals, ...upgradeAbilities],
-                            goal.priority,
-                            characters
-                        );
-                        const xpEstimate = CharactersXpService.getLegendaryTomesCount(
-                            currentXp.currentLevel,
-                            currentXp.xpAtLevel,
-                            targetLevel
-                        );
-                        if (xpEstimate) {
-                            xpEstimate.xpFromPreviousGoalApplied = currentXp.xpFromPriorGoalApplied;
-                            estimate.xpEstimate = xpEstimate;
-                        }
-                    }
                 });
                 if (raidedToday) {
                     ++estimate.daysTotal;
                     estimate.daysLeft = index + 1;
                 }
             });
+            if (goal.type === PersonalGoalType.UpgradeRank) {
+                const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
+                const currentXp = this.currentCharacterXp(
+                    goal.unitId,
+                    [...upgradeRankOrMowGoals, ...upgradeAbilities],
+                    goal.priority,
+                    characters
+                );
+                const xpEstimate = CharactersXpService.getLegendaryTomesCount(
+                    currentXp.currentLevel,
+                    currentXp.xpAtLevel,
+                    targetLevel
+                );
+                if (xpEstimate) {
+                    xpEstimate.xpFromPreviousGoalApplied = currentXp.xpFromPriorGoalApplied;
+                    estimate.xpEstimate = xpEstimate;
+                }
+            }
+            if (goal.type === PersonalGoalType.MowAbilities) {
+                const mowMaterials = MowsService.getMaterialsList(goal.unitId, goal.unitName, goal.unitAlliance);
+
+                estimate.mowEstimate = MowLookupService.getTotals([
+                    ...mowMaterials.slice(goal.primaryStart - 1, goal.primaryEnd - 1),
+                    ...mowMaterials.slice(goal.secondaryStart - 1, goal.secondaryEnd - 1),
+                ]);
+            }
             estimate.blocked =
                 !goal.include ||
                 estimatedUpgradesTotal.blockedMaterials.find(m => m.relatedGoals.includes(goal.goalId)) !== undefined;
