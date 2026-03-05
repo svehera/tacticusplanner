@@ -1,5 +1,5 @@
 ﻿import { cloneDeep } from 'lodash';
-import React, { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { ICampaignsFilters } from 'src/models/interfaces';
@@ -60,12 +60,13 @@ export const DailyRaids = () => {
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
 
-    const [hasChanges, setHasChanges] = React.useState<boolean>(false);
-    const [upgrades, setUpgrades] = React.useState<Record<string, number>>(
-        addShardsToUpgrades(inventory.upgrades, storeCharacters, resolvedMows)
+    const [hasChanges, setHasChanges] = useState<boolean>(false);
+    const upgrades = useMemo(
+        () => addShardsToUpgrades(inventory.upgrades, storeCharacters, resolvedMows),
+        [inventory.upgrades, storeCharacters, resolvedMows]
     );
-    const [units, setUnits] = React.useState<IUnit[]>([...storeCharacters, ...resolvedMows]);
-    const [raidedLocations, setRaidedLocations] = React.useState<IItemRaidLocation[]>(dailyRaids.raidedLocations);
+    const units = useMemo(() => [...storeCharacters, ...resolvedMows], [storeCharacters, resolvedMows]);
+    const [raidedLocations, setRaidedLocations] = useState<IItemRaidLocation[]>(dailyRaids.raidedLocations);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
         return GoalsService.prepareGoals(goals, units, true);
@@ -75,7 +76,7 @@ export const DailyRaids = () => {
 
     const location = useLocation();
     const [searchParams] = useSearchParams();
-    const [charSnowprintId, setCharSnowprintId] = React.useState<string | null>(searchParams.get('charSnowprintId'));
+    const [charSnowprintId, setCharSnowprintId] = useState<string | null>(searchParams.get('charSnowprintId'));
 
     useEffect(() => {
         setCharSnowprintId(searchParams.get('charSnowprintId'));
@@ -98,8 +99,6 @@ export const DailyRaids = () => {
     };
 
     const refresh = () => {
-        setUpgrades(addShardsToUpgrades(inventory.upgrades, storeCharacters, resolvedMows));
-        setUnits([...storeCharacters, ...resolvedMows]);
         setRaidedLocations([...dailyRaids.raidedLocations]);
         setHasChanges(false);
     };
@@ -108,8 +107,6 @@ export const DailyRaids = () => {
         console.log('Syncing with Tacticus...');
         await syncWithTacticus();
         // Inline refresh after successful sync
-        setUpgrades(addShardsToUpgrades(inventory.upgrades, storeCharacters, resolvedMows));
-        setUnits([...storeCharacters, ...resolvedMows]);
         setRaidedLocations([...raidedLocations]);
         setHasChanges(false);
     };
@@ -118,8 +115,6 @@ export const DailyRaids = () => {
         dispatch.dailyRaids({ type: 'ResetCompletedBattles' });
         setHasChanges(false);
         setTimeout(() => {
-            setUpgrades(addShardsToUpgrades(inventory.upgrades, storeCharacters, resolvedMows));
-            setUnits([...storeCharacters, ...resolvedMows]);
             setRaidedLocations([]);
         }, 100);
     };
