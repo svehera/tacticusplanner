@@ -11,12 +11,12 @@ import { Teams2Service } from './teams2.service';
 
 interface Properties {
     mows: IMow2[];
-    sizeMod: number;
+    zoom: number;
     onMowSelect: (id: string) => void;
     showHeader: boolean;
 }
 
-export const MowGrid: React.FC<Properties> = ({ mows, sizeMod, onMowSelect, showHeader }: Properties) => {
+export const MowGrid: React.FC<Properties> = ({ mows, zoom, onMowSelect, showHeader }: Properties) => {
     return (
         <div>
             {showHeader && (
@@ -30,7 +30,7 @@ export const MowGrid: React.FC<Properties> = ({ mows, sizeMod, onMowSelect, show
                     <div
                         key={mow.snowprintId!}
                         onClick={() => onMowSelect(mow.snowprintId!)}
-                        style={{ zoom: sizeMod }}
+                        style={{ zoom }}
                         className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"
                         title={`Select ${mow.name || 'Machine of War'}`}>
                         <RosterSnapshotCharacter

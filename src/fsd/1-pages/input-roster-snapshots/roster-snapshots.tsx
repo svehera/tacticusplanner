@@ -671,7 +671,7 @@ export const RosterSnapshots = () => {
                     <Settings className="mr-1" />
                     {!isMobile && 'Manage'}
                 </Button>
-                <RosterSnapshotsMagnificationSlider sizeMod={zoom} setSizeMod={setZoom} />
+                <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
             </div>
 
             {liveSnapshotIndices.length > 0 && (
