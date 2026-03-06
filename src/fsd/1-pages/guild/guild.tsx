@@ -124,7 +124,7 @@ export const Guild: React.FC = () => {
                         const guildMember = guild.members.find(x => x.index === index) ?? {
                             username: '',
                             shareToken: '',
-                            index: index,
+                            index,
                         };
                         return <GuildMemberView key={index} index={index} member={guildMember} />;
                     })}
@@ -136,7 +136,7 @@ export const Guild: React.FC = () => {
                         const guildMember = editedMembers.find(x => x.index === index) ?? {
                             username: '',
                             shareToken: '',
-                            index: index,
+                            index,
                         };
 
                         return (

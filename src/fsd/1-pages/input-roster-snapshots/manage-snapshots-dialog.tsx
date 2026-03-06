@@ -90,7 +90,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProperties> = 
                 ? [{ name: rosterSnapshots.base.name, index: -1 }]
                 : []),
             ...rosterSnapshots.diffs
-                .map((d, index) => ({ name: d.name, index: index, deleted: d.deletedDateMillisUtc !== undefined }))
+                .map((d, index) => ({ name: d.name, index, deleted: d.deletedDateMillisUtc !== undefined }))
                 .filter(d => !d.deleted),
         ],
         [rosterSnapshots]
@@ -102,7 +102,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProperties> = 
                 ? [{ name: rosterSnapshots.base.name, index: -1 }]
                 : []),
             ...rosterSnapshots.diffs
-                .map((d, index) => ({ name: d.name, index: index, deleted: d.deletedDateMillisUtc !== undefined }))
+                .map((d, index) => ({ name: d.name, index, deleted: d.deletedDateMillisUtc !== undefined }))
                 .filter(d => d.deleted),
         ],
         [rosterSnapshots]

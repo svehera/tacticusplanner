@@ -18,7 +18,7 @@ export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
             const newMembers = action.members
                 .filter(x => x.username.length > 0 || (!!x.userId?.length && !!x.inGameName?.length))
                 .slice(0, 30)
-                .map((x, index) => ({ ...x, index: index }));
+                .map((x, index) => ({ ...x, index }));
             return {
                 ...state,
                 members: newMembers,
