@@ -12,7 +12,7 @@ import { useLoader } from '@/fsd/5-shared/ui/contexts';
 import { TextField } from '@/fsd/5-shared/ui/input';
 import { Modal } from '@/fsd/5-shared/ui/modal';
 
-import { useSyncWithTacticus } from './useSyncWithTacticus';
+import { useSyncWithTacticus } from './use-sync-with-tacticus';
 
 interface Props extends DialogProps {
     tacticusApiKey: string;

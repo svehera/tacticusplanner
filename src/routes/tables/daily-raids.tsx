@@ -2,11 +2,11 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
+import { TodayRaids } from '@/routes/tables/today-raids';
 import { ICampaignsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { RaidsPlan } from 'src/routes/tables/raids-plan';
-import { TodayRaids } from 'src/routes/tables/todayRaids';
 
 import { useAuth } from '@/fsd/5-shared/model';
 
@@ -25,7 +25,7 @@ import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-sync-with-tacticus';
 
 function addShardsToUpgrades(
     upgrades: Record<string, number>,

@@ -7,7 +7,7 @@ import { getImageUrl } from '@/shared-logic/functions';
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
 import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
 import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
-import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import { CharactersService, RankIcon } from '@/fsd/4-entities/character';
 import { EquipmentService, IEquipment } from '@/fsd/4-entities/equipment';
