@@ -20,14 +20,14 @@ import { SlotType } from '@/fsd/3-features/guides/guides.enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICreateGuide, ITeamSlot } from '@/fsd/3-features/guides/guides.models';
 
-interface Props {
+interface Properties {
     units: IUnit[];
     guide: ICreateGuide;
     saveGuide: (guide: ICreateGuide) => void;
     onClose: () => void;
 }
 
-export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, guide }) => {
+export const EditGuideDialog: React.FC<Properties> = ({ onClose, units, saveGuide, guide }) => {
     const { t } = useTranslation();
     const [guideText, setGuideText] = useState<string>(guide.guide);
     const [intro, setIntro] = useState<string>(guide.intro);
@@ -56,11 +56,11 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
     };
 
     const disableContinue = (function () {
-        if (!teamName.length || !intro.length || !guideText.length) {
+        if (teamName.length === 0 || intro.length === 0 || guideText.length === 0) {
             return true;
         }
 
-        return teamSlots.some(x => x.slotType !== SlotType.none && !x.unitIds.length);
+        return teamSlots.some(x => x.slotType !== SlotType.none && x.unitIds.length === 0);
     })();
 
     return (

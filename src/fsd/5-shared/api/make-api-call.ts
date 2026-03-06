@@ -19,9 +19,9 @@ export const makeApiCall = <TResponse, TRequestBody = any>(
             const data = response?.data;
 
             return { data, error: null };
-        } catch (err: any) {
-            console.error(err);
-            const error = err as Error | AxiosError<IErrorResponse>;
+        } catch (error_: any) {
+            console.error(error_);
+            const error = error_ as Error | AxiosError<IErrorResponse>;
             // replace here with your own error handling
             if (axios.isAxiosError(error)) {
                 if (error.code === AxiosError.ERR_CANCELED) {

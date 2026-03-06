@@ -4,11 +4,11 @@ import React from 'react';
 
 import { EventProgress } from './token-estimation-service';
 
-interface Props {
+interface Properties {
     progress: EventProgress;
 }
 
-export const LeNextGoalProgress: React.FC<Props> = ({ progress }) => {
+export const LeNextGoalProgress: React.FC<Properties> = ({ progress }) => {
     return (
         <div className="m-2.5 flex flex-wrap gap-2">
             <div className="flex gap-[5px]">

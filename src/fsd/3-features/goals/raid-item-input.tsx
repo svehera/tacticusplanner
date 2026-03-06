@@ -2,14 +2,14 @@
 import Button from '@mui/material/Button';
 import React, { useState } from 'react';
 
-interface Props {
+interface Properties {
     defaultItemsObtained: number;
     isDisabled: boolean;
 
     addCount: (count: number) => void;
 }
 
-export const RaidItemInput: React.FC<Props> = ({ defaultItemsObtained, isDisabled, addCount }) => {
+export const RaidItemInput: React.FC<Properties> = ({ defaultItemsObtained, isDisabled, addCount }) => {
     const [itemsObtained, setItemsObtained] = useState<string | number>(defaultItemsObtained);
 
     const handleItemsObtainedChange = (event: React.ChangeEvent<HTMLInputElement>) => {

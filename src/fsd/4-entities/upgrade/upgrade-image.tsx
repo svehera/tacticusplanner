@@ -29,19 +29,25 @@ export const UpgradeImage = ({
 
     function getFrameUrl(rarity?: RarityString) {
         switch (rarity) {
-            case RarityString.Mythic:
+            case RarityString.Mythic: {
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_mythic.png`);
-            case RarityString.Legendary:
+            }
+            case RarityString.Legendary: {
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_legendary.png`);
-            case RarityString.Epic:
+            }
+            case RarityString.Epic: {
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_epic.png`);
-            case RarityString.Rare:
+            }
+            case RarityString.Rare: {
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_rare.png`);
-            case RarityString.Uncommon:
+            }
+            case RarityString.Uncommon: {
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_uncommon.png`);
+            }
             case RarityString.Common:
-            default:
+            default: {
                 return getImageUrl(`${frameImageDir}/ui_frame_upgrades_common.png`);
+            }
         }
     }
     const frameImgUrl = getFrameUrl(rarity);
@@ -79,7 +85,9 @@ export const UpgradeImage = ({
     return (
         <AccessibleTooltip title={tooltipText}>
             <div style={{ width, height }} className={'upgrade'}>
-                {!imgError ? (
+                {imgError ? (
+                    <div style={imageMissingStyles}>{material}</div>
+                ) : (
                     <div className="relative mx-auto my-0 block" style={{ width, height }}>
                         <img style={centeredImageStackStyles} src={bgImgUrl} alt={`${rarity} upgrade`} />
                         <img
@@ -97,8 +105,6 @@ export const UpgradeImage = ({
                         />
                         <img loading={'lazy'} style={centeredImageStackStyles} src={frameImgUrl} />
                     </div>
-                ) : (
-                    <div style={imageMissingStyles}>{material}</div>
                 )}
             </div>
         </AccessibleTooltip>

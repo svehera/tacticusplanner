@@ -10,21 +10,26 @@ export const TokenImage = ({ gameMode }: { gameMode: GameMode }) => {
     let tooltipText = '';
 
     switch (gameMode) {
-        case GameMode.tournamentArena:
+        case GameMode.tournamentArena: {
             tooltipText = 'Tournament Arena';
             break;
-        case GameMode.guildRaids:
+        }
+        case GameMode.guildRaids: {
             tooltipText = 'Guild Raids';
             break;
-        case GameMode.guildWar:
+        }
+        case GameMode.guildWar: {
             tooltipText = 'Guild War';
             break;
-        case GameMode.legendaryRelease:
+        }
+        case GameMode.legendaryRelease: {
             tooltipText = 'Legendary Event';
             break;
-        case GameMode.incursion:
+        }
+        case GameMode.incursion: {
             tooltipText = 'Incursion';
             break;
+        }
     }
 
     return (

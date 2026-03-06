@@ -23,7 +23,7 @@ import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './l
 import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
 import { TokenDisplay } from './token-estimation-service';
 
-interface Props {
+interface Properties {
     battles: ILeBattles | undefined;
     legendaryEvent: ILegendaryEvent;
     progress: ILreProgressModel;
@@ -33,7 +33,7 @@ interface Props {
         model: ILreProgressModel,
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
-        reqId: string,
+        requestId: string,
         status: RequirementStatus,
         forceOverwrite?: boolean
     ) => ILreProgressModel;
@@ -44,7 +44,7 @@ interface Props {
  * Displays the tokens to be used by the player in optimal order, along with
  * various statistics about each milestone.
  */
-export const LeTokenTable: React.FC<Props> = ({
+export const LeTokenTable: React.FC<Properties> = ({
     battles,
     legendaryEvent,
     progress,
@@ -52,7 +52,7 @@ export const LeTokenTable: React.FC<Props> = ({
     tracksProgress,
     createNewModel,
     updateDto,
-}: Props) => {
+}: Properties) => {
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -66,9 +66,9 @@ export const LeTokenTable: React.FC<Props> = ({
     }, [isTableView, dispatch]);
 
     const onToggleBattle = (index: number) => {
-        setBattleVisibility(prev => ({
-            ...prev,
-            [index]: !prev[index],
+        setBattleVisibility(previous => ({
+            ...previous,
+            [index]: !previous[index],
         }));
     };
 
@@ -89,7 +89,7 @@ export const LeTokenTable: React.FC<Props> = ({
 
     const setRequirementStatus = (token: TokenDisplay, status: RequirementStatus) => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
+        if (token.battleNumber == undefined || token.battleNumber < 0) return;
 
         const hasRestrictions = token.restricts.some(r => !LreRequirementStatusService.isDefaultObjective(r.id));
         // Mark the restrictions included in this token as completed
@@ -116,13 +116,13 @@ export const LeTokenTable: React.FC<Props> = ({
 
     const onMaybeBattle = (token: TokenDisplay) => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
+        if (token.battleNumber == undefined || token.battleNumber < 0) return;
         setRequirementStatus(token, RequirementStatus.MaybeClear);
     };
 
     const onStopBattle = (token: TokenDisplay) => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
+        if (token.battleNumber == undefined || token.battleNumber < 0) return;
         setRequirementStatus(token, RequirementStatus.StopHere);
     };
 

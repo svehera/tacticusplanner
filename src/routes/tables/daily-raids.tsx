@@ -33,14 +33,14 @@ function addShardsToUpgrades(
     mows: IUnit[]
 ): Record<string, number> {
     const newUpgrades = cloneDeep(upgrades);
-    characters.forEach(char => {
+    for (const char of characters) {
         newUpgrades['shards_' + char.snowprintId] = char.shards;
         newUpgrades['mythicShards_' + char.snowprintId] = char.mythicShards;
-    });
-    mows.forEach(mow => {
+    }
+    for (const mow of mows) {
         newUpgrades['shards_' + mow.snowprintId] = mow.shards;
         newUpgrades['mythicShards_' + mow.snowprintId] = mow.mythicShards;
-    });
+    }
     return newUpgrades;
 }
 
@@ -75,11 +75,11 @@ export const DailyRaids = () => {
     const hasSync = !!userInfo.tacticusApiKey;
 
     const location = useLocation();
-    const [searchParams] = useSearchParams();
-    const [charSnowprintId, setCharSnowprintId] = useState<string | null>(searchParams.get('charSnowprintId'));
+    const [searchParameters] = useSearchParams();
+    const [charSnowprintId, setCharSnowprintId] = useState<string | null>(searchParameters.get('charSnowprintId'));
 
     useEffect(() => {
-        setCharSnowprintId(searchParams.get('charSnowprintId'));
+        setCharSnowprintId(searchParameters.get('charSnowprintId'));
     }, [location]);
 
     const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
@@ -159,7 +159,8 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
-            ...[...upgradeRankOrMowGoals, ...shardsGoals]
+            ...upgradeRankOrMowGoals,
+            ...shardsGoals
         );
     }, [
         actualEnergy,

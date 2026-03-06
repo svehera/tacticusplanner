@@ -10,7 +10,7 @@ import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
 import { ICharacterAscendGoal } from '@/fsd/3-features/goals/goals.models';
 
-interface Props {
+interface Properties {
     goal: ICharacterAscendGoal;
     possibleLocations: ICampaignBattleComposed[];
     unlockedLocations: string[];
@@ -19,7 +19,12 @@ interface Props {
     onChange: (key: keyof ICharacterAscendGoal, value: number) => void;
 }
 
-export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, possibleMythicLocations, onChange }) => {
+export const EditAscendGoal: React.FC<Properties> = ({
+    goal,
+    possibleLocations,
+    possibleMythicLocations,
+    onChange,
+}) => {
     const rarityValues = useMemo(() => {
         return getEnumValues(Rarity).filter(x => x >= goal.rarityStart);
     }, [goal.rarityStart]);
@@ -70,7 +75,7 @@ export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, possi
 
             {(goal.rarityStart < Rarity.Mythic || goal.starsStart < RarityStars.OneBlueStar) && (
                 <>
-                    {possibleLocations.length !== 0 && (
+                    {possibleLocations.length > 0 && (
                         <div className="flex gap-3">
                             <div className="w-1/2">
                                 <NumbersInput
@@ -98,7 +103,7 @@ export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, possi
 
             {goal.rarityEnd >= Rarity.Mythic && (
                 <>
-                    {!!possibleMythicLocations.length && (
+                    {possibleMythicLocations.length > 0 && (
                         <div className="flex gap-3">
                             <div className="w-1/2">
                                 <NumbersInput
@@ -111,7 +116,7 @@ export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, possi
                         </div>
                     )}
 
-                    {!possibleMythicLocations.length && (
+                    {possibleMythicLocations.length === 0 && (
                         <div className="flex-box gap10 full-width">
                             <NumbersInput
                                 title="Mythic Shards per onslaught"

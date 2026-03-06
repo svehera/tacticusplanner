@@ -12,12 +12,12 @@ import { UpgradesService } from '@/fsd/4-entities/upgrade';
 import { CampaignData, CampaignsProgressData } from './campaign-progression.models';
 import { CampaignsProgressionService } from './campaign-progression.service';
 
-interface Props {
+interface Properties {
     progression: CampaignsProgressData;
     campaignDataArray: CampaignData[];
 }
 
-export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progression, campaignDataArray }) => {
+export const CampaignProgressionUnfarmableMaterials: React.FC<Properties> = ({ progression, campaignDataArray }) => {
     /** Renders an information table row about a specific missing material. */
     function renderMissingMaterial(material: string): any {
         return (
@@ -42,14 +42,14 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
     /** Renders a table showing all materials currently unfarmable. */
     function renderMissingMaterials(): any {
         const missingMaterials: Set<string> = new Set<string>();
-        campaignDataArray.forEach(entry => {
+        for (const entry of campaignDataArray) {
             for (const savings of entry[1].savings) {
                 if (!savings.canFarmPrior) {
                     missingMaterials.add(CampaignsProgressionService.getReward(savings.battle));
                 }
             }
-        });
-        if (missingMaterials.size == 0) {
+        }
+        if (missingMaterials.size === 0) {
             return <span></span>;
         }
 
@@ -64,7 +64,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
                 <AccordionDetails>
                     <table key="missing_materials">
                         <tbody>
-                            {Array.from(missingMaterials.values()).map(material => {
+                            {[...missingMaterials.values()].map(material => {
                                 return renderMissingMaterial(material);
                             })}
                         </tbody>

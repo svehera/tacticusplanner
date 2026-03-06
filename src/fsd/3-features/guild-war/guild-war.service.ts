@@ -52,9 +52,7 @@ export class GuildWarService {
 
     public static getTotalRarityCaps(bfLevel: number): Record<Rarity, number> {
         const totalRarity = this.gwData.zones.flatMap(section =>
-            Array<Rarity[]>(section.count)
-                .fill(section.rarityCaps[bfLevel].caps)
-                .flatMap(x => x)
+            new Array<Rarity[]>(section.count).fill(section.rarityCaps[bfLevel].caps).flat()
         );
 
         return mapValues(groupBy(totalRarity), x => x.length * 2) as Record<Rarity, number>;
@@ -72,7 +70,7 @@ export class GuildWarService {
                 for (const bfLevel in rawSection.difficulty) {
                     const difficulty = rawSection.difficulty[bfLevel];
                     const caps = rawData.rarityCaps[difficulty].map(x => this.shortRarityStringToEnum[x]);
-                    rarityCaps[parseInt(bfLevel)] = {
+                    rarityCaps[Number.parseInt(bfLevel)] = {
                         difficulty: difficulty,
                         caps: caps,
                     };

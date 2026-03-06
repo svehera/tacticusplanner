@@ -253,13 +253,13 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                             localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
                             enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
                         })
-                        .catch((err: AxiosError<IErrorResponse>) => {
-                            if (err.code === 'ERR_CANCELED') {
+                        .catch((error: AxiosError<IErrorResponse>) => {
+                            if (error.code === 'ERR_CANCELED') {
                                 return;
                             }
-                            if (err.response?.status === 401) {
+                            if (error.response?.status === 401) {
                                 enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else if (err.response?.status === 409) {
+                            } else if (error.response?.status === 409) {
                                 enqueueSnackbar(
                                     'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
                                     { variant: 'error' }
@@ -271,7 +271,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                             }
                         });
                 },
-                isMobile ? 1000 : 10000
+                isMobile ? 1000 : 10_000
             );
             setSaveTimeoutId(timeoutId);
             setAbortController(controller);
@@ -377,11 +377,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                             localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
                             return enqueueSnackbar('Pushed local data to server.', { variant: 'info' });
                         })
-                        .catch((err: AxiosError<IErrorResponse>) => {
-                            if (err.response?.status === 401) {
+                        .catch((error: AxiosError<IErrorResponse>) => {
+                            if (error.response?.status === 401) {
                                 logout();
                                 enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else if (err.response?.status === 409) {
+                            } else if (error.response?.status === 409) {
                                 enqueueSnackbar(
                                     'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
                                     { variant: 'error' }
@@ -394,12 +394,12 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         });
                 }
             })
-            .catch((err: AxiosError<IErrorResponse>) => {
-                if (err.response?.status === 401) {
+            .catch((error: AxiosError<IErrorResponse>) => {
+                if (error.response?.status === 401) {
                     logout();
                     enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
                 } else {
-                    console.error(err);
+                    console.error(error);
                     enqueueSnackbar('Failed to fetch data from server. Try again later', { variant: 'error' });
                 }
             });
@@ -411,16 +411,16 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
         const timerId = setInterval(() => {
             const lastBackup = localStore.getBackupDate();
-            if (!lastBackup) {
-                const localData = GlobalState.toStore(globalState);
-                localStore.storeBackup(localData);
-            } else {
+            if (lastBackup) {
                 const now = new Date();
                 const timeDifference = now.getTime() - lastBackup.getTime();
                 if (timeDifference > oneDay) {
                     const localData = GlobalState.toStore(globalState);
                     localStore.storeBackup(localData);
                 }
+            } else {
+                const localData = GlobalState.toStore(globalState);
+                localStore.storeBackup(localData);
             }
         }, sixtySeconds);
 

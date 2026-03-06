@@ -22,14 +22,14 @@ import {
     UpgradeImage,
 } from '@/fsd/4-entities/upgrade';
 
-interface Props {
+interface Properties {
     character: ICharacter2;
     rank: Rank;
     upgrades: string[];
     upgradesChanges: (upgrades: string[], updateInventory: IUpgradeRecipe[]) => void;
 }
 
-export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, rank, character }) => {
+export const CharacterUpgrades: React.FC<Properties> = ({ upgradesChanges, upgrades, rank, character }) => {
     const { inventory } = useContext(StoreContext);
 
     const [formData, setFormData] = useState({
@@ -39,18 +39,18 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
         originalRank: rank,
     });
 
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement | null>(null);
     const [updateInventory, setUpdateInventory] = React.useState<boolean>(true);
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorElement(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorElement(null);
     };
 
-    const open = Boolean(anchorEl);
+    const open = Boolean(anchorElement);
 
     const possibleUpgrades: Array<IBaseUpgrade | ICraftedUpgrade> = useMemo(() => {
         const [rankUpgrades] = CharacterUpgradesService.getCharacterUpgradeRank({
@@ -92,7 +92,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             findAndRemoveItem(newUpgrades, value);
         }
 
-        if (!newUpgrades.length) {
+        if (newUpgrades.length === 0) {
             setUpdateInventory(false);
         }
 
@@ -222,7 +222,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             <FormControlLabel
                 control={
                     <Checkbox
-                        disabled={!inventoryUpgrades.length}
+                        disabled={inventoryUpgrades.length === 0}
                         checked={updateInventory}
                         onChange={event => setUpdateInventory(event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -235,7 +235,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             </Button>
             <Popover
                 open={open}
-                anchorEl={anchorEl}
+                anchorEl={anchorElement}
                 onClose={handleClose}
                 anchorOrigin={{
                     vertical: 'bottom',
@@ -254,9 +254,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                                     />
                                 )}{' '}
                                 {inventory.upgrades[x.snowprintId] ?? 0} - {inventoryUpdate[x.snowprintId]} ={' '}
-                                {(inventory.upgrades[x.snowprintId] ?? 0) - inventoryUpdate[x.snowprintId] < 0
-                                    ? 0
-                                    : (inventory.upgrades[x.snowprintId] ?? 0) - inventoryUpdate[x.snowprintId]}
+                                {Math.max((inventory.upgrades[x.snowprintId] ?? 0) - inventoryUpdate[x.snowprintId], 0)}
                             </li>
                         ))}
                     </ul>

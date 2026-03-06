@@ -9,14 +9,14 @@ import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapsh
 
 import { Teams2Service } from './teams2.service';
 
-interface Props {
+interface Properties {
     mows: IMow2[];
     sizeMod: number;
     onMowSelect: (id: string) => void;
     showHeader: boolean;
 }
 
-export const MowGrid: React.FC<Props> = ({ mows, sizeMod, onMowSelect, showHeader }: Props) => {
+export const MowGrid: React.FC<Properties> = ({ mows, sizeMod, onMowSelect, showHeader }: Properties) => {
     return (
         <div>
             {showHeader && (

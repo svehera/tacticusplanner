@@ -109,10 +109,8 @@ export const Goals = () => {
     };
 
     const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete') => {
-        if (item === 'delete') {
-            if (confirm('Are you sure? The goal will be permanently deleted!')) {
-                removeGoal(goalId);
-            }
+        if (item === 'delete' && confirm('Are you sure? The goal will be permanently deleted!')) {
+            removeGoal(goalId);
         }
 
         if (item === 'edit') {
@@ -264,7 +262,7 @@ export const Goals = () => {
                     </AccordionDetails>
                 </Accordion>
             </div>
-            {!!upgradeRankOrMowGoals.length && (
+            {upgradeRankOrMowGoals.length > 0 && (
                 <div>
                     <div className="gap5 mx-0 my-5 flex flex-wrap items-center text-xl">
                         <span>
@@ -286,14 +284,15 @@ export const Goals = () => {
                                     goalEstimate={adjustedGoalsEstimates.goalEstimates
                                         .filter(x => x.goalId === goal.goalId)
                                         .reduce(
-                                            (prev, curr) =>
+                                            (previous, current) =>
                                                 ({
                                                     // We run this reduce solely to aggregate estimates for ascension goals that include
                                                     // both non-mythic and mythic shards, that's why we ignore other fields.
-                                                    ...curr,
-                                                    oTokensTotal: (prev?.oTokensTotal ?? 0) + (curr.oTokensTotal ?? 0),
-                                                    daysLeft: Math.max(prev?.daysLeft ?? 0, curr.daysLeft ?? 0),
-                                                    daysTotal: (prev?.daysTotal ?? 0) + (curr.daysTotal ?? 0),
+                                                    ...current,
+                                                    oTokensTotal:
+                                                        (previous?.oTokensTotal ?? 0) + (current.oTokensTotal ?? 0),
+                                                    daysLeft: Math.max(previous?.daysLeft ?? 0, current.daysLeft ?? 0),
+                                                    daysTotal: (previous?.daysTotal ?? 0) + (current.daysTotal ?? 0),
                                                 }) as IGoalEstimate
                                         )}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
@@ -316,7 +315,7 @@ export const Goals = () => {
                     )}
                 </div>
             )}
-            {!!shardsGoals.length && (
+            {shardsGoals.length > 0 && (
                 <div>
                     <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>
@@ -361,7 +360,7 @@ export const Goals = () => {
                     )}
                 </div>
             )}
-            {!!upgradeAbilities.length && (
+            {upgradeAbilities.length > 0 && (
                 <div>
                     <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>

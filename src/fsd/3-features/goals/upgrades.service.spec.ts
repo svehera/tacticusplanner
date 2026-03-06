@@ -162,26 +162,26 @@ const buildBaseUpgradeCounts = (
         }
     };
 
-    upgradeIds.forEach(upgradeId => {
+    for (const upgradeId of upgradeIds) {
         const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
-        if (!upgrade) return;
+        if (!upgrade) continue;
         if (upgrade.crafted) {
             const expanded = FsdUpgradesService.recipeExpandedUpgradeData[upgrade.snowprintId];
-            Object.entries(expanded.expandedRecipe).forEach(([baseId, count]) => {
+            for (const [baseId, count] of Object.entries(expanded.expandedRecipe)) {
                 addBaseUpgrade(baseId, count);
-            });
-            return;
+            }
+            continue;
         }
         addBaseUpgrade(upgradeId, 1);
-    });
+    }
 
     if (rarityFilter && rarityFilter.length > 0) {
-        Object.keys(counts).forEach(upgradeId => {
+        for (const upgradeId of Object.keys(counts)) {
             const upgrade = FsdUpgradesService.baseUpgradesData[upgradeId];
             if (upgrade && !rarityFilter.includes(upgrade.rarity as Rarity)) {
                 delete counts[upgradeId];
             }
-        });
+        }
     }
 
     return counts;
@@ -254,9 +254,9 @@ const createAllCampaignsProgress = (): IEstimatedRanksSettings['campaignsProgres
     return Object.values(Campaign)
         .filter((value): value is Campaign => typeof value === 'string')
         .reduce(
-            (acc, campaign) => {
-                acc[campaign] = 999;
-                return acc;
+            (accumulator, campaign) => {
+                accumulator[campaign] = 999;
+                return accumulator;
             },
             {} as IEstimatedRanksSettings['campaignsProgress']
         );
@@ -282,9 +282,9 @@ const createCustomDailyRaidsSettings = (
     const defaults = Object.values(Rarity)
         .filter((value): value is Rarity => typeof value === 'number')
         .reduce<Partial<Record<Rarity, CampaignType[]>>>(
-            (acc, rarity) => {
-                acc[rarity] = [];
-                return acc;
+            (accumulator, rarity) => {
+                accumulator[rarity] = [];
+                return accumulator;
             },
             { Shard: [], 'Mythic Shard': [] } as Partial<Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>>
         ) as Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>;
@@ -717,9 +717,9 @@ describe('UpgradesService.planDayRaiding', () => {
         const campaignsProgress = Object.values(Campaign)
             .filter((value): value is Campaign => typeof value === 'string')
             .reduce(
-                (acc, campaign) => {
-                    acc[campaign] = 999;
-                    return acc;
+                (accumulator, campaign) => {
+                    accumulator[campaign] = 999;
+                    return accumulator;
                 },
                 {} as IEstimatedRanksSettings['campaignsProgress']
             );
@@ -1117,7 +1117,7 @@ describe('UpgradesService.getUpgrades', () => {
                 return { unitId, upgrades: stoneOne };
             }
         }
-        return undefined;
+        return;
     };
 
     it('counts uncraftable upgrades for a Stone I to Stone II rank-up goal', () => {
@@ -1355,11 +1355,11 @@ describe('UpgradesService.getUpgrades', () => {
         );
 
         const upgrades = UpgradesService.getUpgrades({}, [character], [], [goalStoneToGold, goalGoldToDiamond]);
-        const actualCounts = upgrades.reduce<Record<string, number>>((acc, upgrade) => {
-            Object.entries(upgrade.baseUpgradesTotal).forEach(([id, count]) => {
-                acc[id] = (acc[id] ?? 0) + count;
-            });
-            return acc;
+        const actualCounts = upgrades.reduce<Record<string, number>>((accumulator, upgrade) => {
+            for (const [id, count] of Object.entries(upgrade.baseUpgradesTotal)) {
+                accumulator[id] = (accumulator[id] ?? 0) + count;
+            }
+            return accumulator;
         }, {});
 
         const actualRareTotal = worldEatersRareIds.reduce((sum, id) => sum + (actualCounts[id] ?? 0), 0);
@@ -1426,11 +1426,11 @@ describe('UpgradesService.getUpgrades', () => {
             [kharnGoal, wraskGoal]
         );
 
-        const combined = upgrades.reduce<Record<string, number>>((acc, upgrade) => {
-            Object.entries(upgrade.baseUpgradesTotal).forEach(([id, count]) => {
-                acc[id] = (acc[id] ?? 0) + count;
-            });
-            return acc;
+        const combined = upgrades.reduce<Record<string, number>>((accumulator, upgrade) => {
+            for (const [id, count] of Object.entries(upgrade.baseUpgradesTotal)) {
+                accumulator[id] = (accumulator[id] ?? 0) + count;
+            }
+            return accumulator;
         }, {});
 
         expect(combined['upgHpL118']).toBe(164);
@@ -1590,7 +1590,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         expect(result.daysTotal).toBe(25);
         // 15504 with current drop rates.
-        expect(Math.abs(15500 - result.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(15_500 - result.energyTotal)).toBeLessThan(1000);
     });
 
     it('estimates Helbrecht Stone I to Diamond III needs 108 faction legendaries', () => {
@@ -1802,7 +1802,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         );
 
         expect(Math.abs(22 - withInventory.daysTotal)).toBeLessThanOrEqual(1);
-        expect(Math.abs(12500 - withInventory.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(12_500 - withInventory.energyTotal)).toBeLessThan(1000);
     });
 
     it('adds Atlacoya after Helbrecht and prioritizes Helbrecht materials first', () => {
@@ -1852,7 +1852,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         );
 
         expect(Math.abs(44 - result.daysTotal)).toBeLessThanOrEqual(1);
-        expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(26_500 - result.energyTotal)).toBeLessThan(1000);
     });
 
     it('prioritizes Atlacoya when its goal is more urgent than Helbrecht', () => {
@@ -1903,7 +1903,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         expect(Math.abs(44 - result.daysTotal)).toBeLessThanOrEqual(1);
         // 26581 with current drop rates.
-        expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(26_500 - result.energyTotal)).toBeLessThan(1000);
     });
 
     it('total energy cost is roughly equivalent regardless of priority', () => {
@@ -1952,9 +1952,9 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
             atlacoyaGoal
         );
 
-        const temp = hmhGoal.priority;
+        const temporary = hmhGoal.priority;
         hmhGoal.priority = atlacoyaGoal.priority;
-        atlacoyaGoal.priority = temp;
+        atlacoyaGoal.priority = temporary;
 
         const result2 = UpgradesService.getUpgradesEstimatedDays(
             buildSettings({ upgrades: inventory }),
@@ -2056,14 +2056,14 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
             locations: getRewardLocations(rewardId),
         }));
 
-        rewardLocations.forEach(({ rewardId: _, locations }) => {
+        for (const { rewardId: _, locations } of rewardLocations) {
             expect(locations.length).toBeGreaterThan(0);
             expect(
                 locations.some(
                     loc => loc.campaignType === CampaignType.Elite || loc.campaignType === CampaignType.Mirror
                 )
             ).toBe(true);
-        });
+        }
 
         const completedLocations = rewardLocations.flatMap(({ locations }) =>
             locations.map(location => createCompletedLocation(location))
@@ -3682,8 +3682,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
             upgradeId,
             { [upgradeId]: combinedUpgrade },
             {},
-            goals,
-            undefined
+            goals
         );
         const goalAOnly = UpgradesService.calculateDaysToCompleteMaterial(
             upgradeId,
@@ -3731,8 +3730,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
             upgradeId,
             { [upgradeId]: combinedUpgrade },
             { [upgradeId]: 12 },
-            goals,
-            undefined
+            goals
         );
 
         const expected = Math.ceil(18 / getRate(location));
@@ -4031,9 +4029,9 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
         const campaignsProgress = Object.values(Campaign)
             .filter((value): value is Campaign => typeof value === 'string')
             .reduce(
-                (acc, campaign) => {
-                    acc[campaign] = 999;
-                    return acc;
+                (accumulator, campaign) => {
+                    accumulator[campaign] = 999;
+                    return accumulator;
                 },
                 {} as IEstimatedRanksSettings['campaignsProgress']
             );

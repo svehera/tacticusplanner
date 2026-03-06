@@ -51,14 +51,14 @@ export const WhoYouOwn = () => {
     const [editedInventory, setEditedInventory] = React.useState<Record<string, number>>({});
     const [editedMow, setEditedMow] = React.useState<IMow2 | null>(null);
 
-    const [searchParams] = useSearchParams();
+    const [searchParameters] = useSearchParams();
 
-    const sharedUser = searchParams.get('username');
-    const shareToken = searchParams.get('shareToken');
+    const sharedUser = searchParameters.get('username');
+    const shareToken = searchParameters.get('shareToken');
 
-    const hasShareParams = !!sharedUser && !!shareToken;
+    const hasShareParameters = !!sharedUser && !!shareToken;
 
-    if (hasShareParams) {
+    if (hasShareParameters) {
         navigate((isMobile ? '/mobile' : '') + `/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
         return <></>;
     }

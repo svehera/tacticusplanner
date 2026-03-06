@@ -30,16 +30,16 @@ const loaderStyles = tv({
     },
 });
 
-type LoaderVariantProps = VariantProps<typeof loaderStyles>;
+type LoaderVariantProperties = VariantProps<typeof loaderStyles>;
 
-const Bars: React.FC<React.SVGProps<SVGSVGElement> & { className: string }> = ({ className, ...props }) => (
+const Bars: React.FC<React.SVGProps<SVGSVGElement> & { className: string }> = ({ className, ...properties }) => (
     <svg
         className={cn('size-4', className)}
         data-slot="icon"
         viewBox="0 0 135 140"
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"
-        {...props}>
+        {...properties}>
         <rect y="10" width="15" height="120" rx="6">
             <animate
                 attributeName="height"
@@ -132,9 +132,9 @@ const Bars: React.FC<React.SVGProps<SVGSVGElement> & { className: string }> = ({
         </rect>
     </svg>
 );
-const Ring = (props: React.SVGProps<SVGSVGElement>) => <LoaderIcon {...props} />;
-const Spin: React.FC<React.SVGProps<SVGSVGElement> & { className: string }> = ({ className, ...props }) => (
-    <svg className={cn('size-4', className)} data-slot="icon" viewBox="0 0 2400 2400" {...props}>
+const Ring = (properties: React.SVGProps<SVGSVGElement>) => <LoaderIcon {...properties} />;
+const Spin: React.FC<React.SVGProps<SVGSVGElement> & { className: string }> = ({ className, ...properties }) => (
+    <svg className={cn('size-4', className)} data-slot="icon" viewBox="0 0 2400 2400" {...properties}>
         <g strokeWidth="200" strokeLinecap="round" fill="none">
             <line x1="1200" y1="600" x2="1200" y2="100" />
             <line opacity="0.5" x1="1200" y1="2300" x2="1200" y2="1800" />
@@ -171,8 +171,8 @@ const LOADERS = {
 
 const DEFAULT_SPINNER = 'spin';
 
-interface LoaderProps
-    extends Omit<React.ComponentPropsWithoutRef<'svg'>, 'display' | 'opacity' | 'intent'>, LoaderVariantProps {
+interface LoaderProperties
+    extends Omit<React.ComponentPropsWithoutRef<'svg'>, 'display' | 'opacity' | 'intent'>, LoaderVariantProperties {
     variant?: keyof typeof LOADERS;
     percentage?: number;
     isIndeterminate?: boolean;
@@ -180,14 +180,14 @@ interface LoaderProps
     ref?: React.RefObject<SVGSVGElement>;
 }
 
-const Loader = ({ isIndeterminate = true, ref, ...props }: LoaderProps) => {
-    const { className, variant = DEFAULT_SPINNER, intent, size, ...spinnerProps } = props;
+const Loader = ({ isIndeterminate = true, ref, ...properties }: LoaderProperties) => {
+    const { className, variant = DEFAULT_SPINNER, intent, size, ...spinnerProperties } = properties;
     const LoaderPrimitive = LOADERS[variant in LOADERS ? variant : DEFAULT_SPINNER];
 
     return (
         <ProgressBar
-            aria-label={props['aria-label'] ?? 'Loading...'}
-            formatOptions={props.formatOptions}
+            aria-label={properties['aria-label'] ?? 'Loading...'}
+            formatOptions={properties.formatOptions}
             isIndeterminate={isIndeterminate}>
             <LoaderPrimitive
                 role="presentation"
@@ -201,7 +201,7 @@ const Loader = ({ isIndeterminate = true, ref, ...props }: LoaderProps) => {
                     ]),
                 })}
                 ref={ref}
-                {...spinnerProps}
+                {...spinnerProperties}
             />
         </ProgressBar>
     );

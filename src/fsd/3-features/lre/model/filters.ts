@@ -10,9 +10,7 @@ export const filter = (characters: ICharacter2[]) => ({
     },
     byDamageType: (damageType: DamageType, not = false) =>
         characters.filter(char =>
-            not
-                ? char.damageTypes.all.every(type => type !== damageType)
-                : char.damageTypes.all.some(type => type === damageType)
+            not ? char.damageTypes.all.every(type => type !== damageType) : char.damageTypes.all.includes(damageType)
         ),
     byTrait: (trait: Trait, not = false) =>
         characters.filter(char =>

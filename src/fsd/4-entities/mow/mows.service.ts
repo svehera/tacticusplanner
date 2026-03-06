@@ -3,7 +3,7 @@ import { Alliance, DynamicProps, Rarity, RarityMapper, RarityStars, UnitType } f
 import { UpgradesService } from '@/fsd/4-entities/upgrade/@x/mow';
 
 import { mows2Data, mowsData } from './data';
-import { IMow, IMow2, IMowDb, IMowLevelMaterials, IMowStatic, IMowStatic2 } from './model';
+import { IMow, IMow2, IMowDatabase, IMowLevelMaterials, IMowStatic, IMowStatic2 } from './model';
 
 export class MowsService {
     public static getMowMaterialsList(mow: IMow2): IMowLevelMaterials[] {
@@ -21,7 +21,7 @@ export class MowsService {
         for (const lvlUpgrade of mows2Data.upgradeCosts) {
             const actualLevel = index + 2;
             index++;
-            if (levels.length && !levels.includes(actualLevel)) {
+            if (levels.length > 0 && !levels.includes(actualLevel)) {
                 continue;
             }
 
@@ -66,10 +66,10 @@ export class MowsService {
         if ('snowprintId' in mow) return { ...(mow as IMow2), shortName: mow.name } as IMow2;
 
         const mow1 = mow as IMowStatic;
-        const db: IMowDb = mow as IMowDb;
-        const props: DynamicProps = mow as DynamicProps;
+        const database: IMowDatabase = mow as IMowDatabase;
+        const properties: DynamicProps = mow as DynamicProps;
         const mow2 = this.resolveToStatic(mow1.tacticusId);
-        return { ...mow2!, ...db, ...props } as IMow2;
+        return { ...mow2!, ...database, ...properties } as IMow2;
     }
 
     /**
@@ -84,14 +84,14 @@ export class MowsService {
      * locked units.
      */
     public static resolveAllFromStorage(mows: Array<IMow | IMow2>): IMow2[] {
-        const ret = mows.map(mow => {
+        const returnValue = mows.map(mow => {
             if ('snowprintId' in mow) return mow as IMow2;
             return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
         });
         // If the user's server data is missing any MoWs, merge them in as locked units.
-        mows2Data.mows.forEach(staticMow => {
-            if (!ret.find(x => x.snowprintId === staticMow.snowprintId)) {
-                ret.push({
+        for (const staticMow of mows2Data.mows) {
+            if (!returnValue.find(x => x.snowprintId === staticMow.snowprintId)) {
+                returnValue.push({
                     ...staticMow,
                     id: staticMow.snowprintId,
                     unlocked: false,
@@ -105,8 +105,8 @@ export class MowsService {
                     unitType: UnitType.mow,
                 } as IMow2);
             }
-        });
-        return ret;
+        }
+        return returnValue;
     }
 
     public static resolveOldIdToStatic(id: string): IMowStatic2 | undefined {
@@ -130,6 +130,6 @@ export class MowsService {
             return [];
         }
         const upgrades = key === 'primary' ? mow.primaryAbility : mow.secondaryAbility;
-        return upgrades.recipes.slice(levelStart - 1, levelEnd - 1).flatMap(upgrades => upgrades);
+        return upgrades.recipes.slice(levelStart - 1, levelEnd - 1).flat();
     }
 }

@@ -12,25 +12,25 @@ import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/ros
 
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';
 
-type Props = {
+type Properties = {
     characters: ICharacter2[];
     size?: 5 | 7;
     onSetSlotClick: (character: ICharacter2) => void;
     onEmptySlotClick?: () => void;
 };
 
-export const Team: React.FC<Props> = ({ characters, size = 5, onSetSlotClick, onEmptySlotClick }) => {
+export const Team: React.FC<Properties> = ({ characters, size = 5, onSetSlotClick, onEmptySlotClick }) => {
     const fallbackCharacter = unsetCharacter as ICharacter2;
 
     return (
         <div className="flex flex-wrap items-center justify-center">
-            {Array.from({ length: size }, (_, i) => {
-                const char = characters[i];
+            {Array.from({ length: size }, (_, index) => {
+                const char = characters[index];
 
                 if (char) {
                     return (
                         <div
-                            key={char.snowprintId! + i}
+                            key={char.snowprintId! + index}
                             onClick={() => onSetSlotClick(char)}
                             className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
                             title={'Select Unit'}>
@@ -51,7 +51,7 @@ export const Team: React.FC<Props> = ({ characters, size = 5, onSetSlotClick, on
 
                 return (
                     <div
-                        key={fallbackCharacter.name + i}
+                        key={fallbackCharacter.name + index}
                         onClick={() => onEmptySlotClick?.()}
                         className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
                         title={'Select Unit'}>

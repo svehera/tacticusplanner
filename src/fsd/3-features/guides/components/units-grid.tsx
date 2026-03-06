@@ -11,13 +11,13 @@ import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 
-interface Props {
+interface Properties {
     units: IUnit[];
     selectedUnits: string[];
     onUnitClick: (unit: IUnit) => void;
 }
 
-export const UnitsGrid: React.FC<Props> = ({ units, onUnitClick, selectedUnits }) => {
+export const UnitsGrid: React.FC<Properties> = ({ units, onUnitClick, selectedUnits }) => {
     const renderPortrait = (unitId: string, index: number) => {
         const unit = units.find(x => x.id === unitId);
         if (!unit) {

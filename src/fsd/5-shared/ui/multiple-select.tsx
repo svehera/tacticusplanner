@@ -38,7 +38,7 @@ export const MultipleSelectCheckmarks = <T extends string>({
             groupBy={groupByFirstLetter ? option => option[0] : undefined}
             onChange={(_, value) => handleChange(value)}
             sx={{ minWidth, maxWidth }}
-            renderInput={params => <TextField {...params} label={placeholder} />}
+            renderInput={parameters => <TextField {...parameters} label={placeholder} />}
         />
     );
 };

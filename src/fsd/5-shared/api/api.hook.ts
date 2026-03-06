@@ -16,7 +16,7 @@ export const callApi = <TData = any | null, TError = any | null, TResponse = TDa
             'Content-Type': 'application/json',
             'x-functions-key': import.meta.env.VITE_FUNCTIONS_KEY,
             Authorization: localStorage.getItem('token'),
-            ...(headers ?? {}),
+            ...headers,
         },
         data: data,
         signal,

@@ -54,11 +54,11 @@ const modalContentStyles = tv({
     },
 });
 
-const Modal = (props: DialogTriggerProps) => {
-    return <DialogTrigger {...props} />;
+const Modal = (properties: DialogTriggerProps) => {
+    return <DialogTrigger {...properties} />;
 };
 
-interface ModalContentProps
+interface ModalContentProperties
     extends
         Omit<ModalOverlayProps, 'className' | 'children'>,
         Pick<DialogProps, 'aria-label' | 'aria-labelledby' | 'role' | 'children'>,
@@ -79,31 +79,31 @@ const ModalContent = ({
     size,
     role = 'dialog',
     closeButton = true,
-    ...props
-}: ModalContentProps) => {
+    ...properties
+}: ModalContentProperties) => {
     const isDismissable = isDismissableInternal ?? role !== 'alertdialog';
 
     return (
         <ModalOverlay
             isDismissable={isDismissable}
-            className={composeRenderProps(classNames?.overlay, (className, renderProps) =>
+            className={composeRenderProps(classNames?.overlay, (className, renderProperties) =>
                 modalOverlayStyles({
-                    ...renderProps,
+                    ...renderProperties,
                     isBlurred,
                     className,
                 })
             )}
-            {...props}>
+            {...properties}>
             <ModalPrimitive
                 isDismissable={isDismissable}
-                className={composeRenderProps(classNames?.content, (className, renderProps) =>
+                className={composeRenderProps(classNames?.content, (className, renderProperties) =>
                     modalContentStyles({
-                        ...renderProps,
+                        ...renderProperties,
                         size,
                         className,
                     })
                 )}
-                {...props}>
+                {...properties}>
                 <Dialog role={role}>
                     {values => (
                         <>

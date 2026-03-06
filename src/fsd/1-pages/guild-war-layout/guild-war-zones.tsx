@@ -83,7 +83,7 @@ export const GuildWarZones = () => {
             return;
         }
 
-        if (!swapZones.length) {
+        if (swapZones.length === 0) {
             setSwapZones([zoneIndex]);
             return;
         }
@@ -236,7 +236,7 @@ export const GuildWarZones = () => {
                         {editZonesMode ? 'Stop editing' : 'Edit war zones'}
                     </Button>
                 </Tooltip>
-                {!!guildWarPlayers.length && (
+                {guildWarPlayers.length > 0 && (
                     <>
                         <ViewGuild guildWarPlayers={guildWarPlayers} />
                         <AccessibleTooltip
@@ -335,13 +335,13 @@ export const GuildWarZones = () => {
     );
 };
 
-interface ZoneCardProps extends React.DOMAttributes<HTMLElement>, CommonProps {
+interface ZoneCardProperties extends React.DOMAttributes<HTMLElement>, CommonProps {
     bfLevel: number;
     zone: IGWLayoutZone;
     players: IGuildWarPlayer[];
 }
 
-const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, players }) => {
+const ZoneCard: React.FC<ZoneCardProperties> = ({ zone, bfLevel, onClick, style, players }) => {
     const zoneStats = GuildWarService.getZone(zone.id);
     const { difficulty, caps } = zoneStats.rarityCaps[bfLevel];
     const maxRarity = Math.max(...caps);

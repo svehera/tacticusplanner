@@ -34,14 +34,14 @@ import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalTeam, PersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
-interface Props {
+interface Properties {
     onClose: () => void;
     addTeam: (team: IPersonalTeam) => void;
     characters: ICharacter2[];
     mows: IMow2[];
 }
 
-export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addTeam }) => {
+export const AddTeamDialog: React.FC<Properties> = ({ onClose, characters, mows, addTeam }) => {
     const [gameMode, setGameMode] = useState<GameMode>(GameMode.guildRaids);
     const [selectedSubModes, setSelectedSubModes] = useState<string[]>([]);
     const [notes, setNotes] = useState<string>('');
@@ -59,7 +59,7 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
         setIsOpenSelectDialog(false);
     };
 
-    const updateSelectedMod = (values: string[]) => {
+    const updateSelectedModule = (values: string[]) => {
         if (values[0] !== gameMode) {
             setGameMode(values[0] as GameMode);
             setSelectedSubModes([]);
@@ -68,7 +68,7 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
 
     const updateSelectedGuildBosses = (values: string[]) => {
         const nonGuildBossValues = selectedSubModes.filter(
-            mod => !guildRaidBosses.some(option => option.value === mod)
+            module_ => !guildRaidBosses.some(option => option.value === module_)
         );
 
         setSelectedSubModes([...nonGuildBossValues, ...values]);
@@ -76,7 +76,7 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
 
     const updateSelectedGuildPrimes = (values: string[]) => {
         const nonGuildPrimeValues = selectedSubModes.filter(
-            mod => !guildRaidPrimes.some(option => option.value === mod)
+            module_ => !guildRaidPrimes.some(option => option.value === module_)
         );
 
         setSelectedSubModes([...nonGuildPrimeValues, ...values]);
@@ -99,11 +99,11 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
             );
             onClose();
         }
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
+        setActiveStep(previousActiveStep => previousActiveStep + 1);
     };
 
     const handleBack = () => {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
+        setActiveStep(previousActiveStep => previousActiveStep - 1);
     };
 
     return (
@@ -127,7 +127,7 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
                             label=""
                             options={gameModes}
                             multiple={false}
-                            optionsChange={updateSelectedMod}
+                            optionsChange={updateSelectedModule}
                         />
                     </>
                 )}

@@ -16,12 +16,12 @@ import { InventoryControls } from './inventory-controls';
 import { IInventoryUpgrade, IUpgradesGroup } from './inventory-models';
 import { UpgradesGroup } from './upgrades-group';
 
-interface Props {
+interface Properties {
     itemsFilter?: string[];
     onUpdate?: () => void;
 }
 
-export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
+export const Inventory: React.FC<Properties> = ({ itemsFilter = [], onUpdate }) => {
     const dispatch = useContext(DispatchContext);
     const { inventory, viewPreferences } = useContext(StoreContext);
 
@@ -31,7 +31,8 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
         return orderBy(
             Object.values(UpgradesService.recipeDataByName)
                 .filter(
-                    item => item.stat !== 'Shard' && (!itemsFilter.length || itemsFilter.includes(item.snowprintId))
+                    item =>
+                        item.stat !== 'Shard' && (itemsFilter.length === 0 || itemsFilter.includes(item.snowprintId))
                 )
                 .map(x => ({
                     material: x.material,
@@ -67,7 +68,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                 rarity: +rarity,
                 items: map(
                     groupBy(
-                        items.filter(x => !x.craftable).filter(x => x.material.indexOf('Coming soon') === -1),
+                        items.filter(x => !x.craftable).filter(x => !x.material.includes('Coming soon')),
                         'alphabet'
                     ),
                     (subItems, letter) => ({
@@ -108,9 +109,9 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
             dispatch.inventory({
                 type: 'ResetUpgrades',
             });
-            itemsList.forEach(row => {
+            for (const row of itemsList) {
                 row.quantity = 0;
-            });
+            }
         }
     }, [itemsList]);
 

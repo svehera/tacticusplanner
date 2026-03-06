@@ -73,13 +73,13 @@ export class CharactersService {
      * @returns The converted DamageType.
      */
     private static convertSnowprintDamageProfile(rawData: string): DamageType {
-        const ret: DamageType = DamageType[rawData as keyof typeof DamageType] || DamageType.Physical;
+        const returnValue: DamageType = DamageType[rawData as keyof typeof DamageType] || DamageType.Physical;
         if (rawData === 'DirectDamage') return DamageType.Direct;
         if (rawData === 'Gauss') return DamageType.Molecular;
-        if (ret == DamageType.Physical && rawData !== 'Physical') {
+        if (returnValue == DamageType.Physical && rawData !== 'Physical') {
             console.warn(`Unknown damage profile: ${rawData}`);
         }
-        return ret;
+        return returnValue;
     }
 
     private static convertUnitData(rawData: UnitDataRaw): ICharacterData {
@@ -130,18 +130,18 @@ export class CharactersService {
             unitData.damageTypes.range = CharactersService.convertSnowprintDamageProfile(rawData['Ranged Damage']);
         }
         if (rawData['Active Ability']) {
-            rawData['Active Ability'].forEach(x => {
+            for (const x of rawData['Active Ability']) {
                 const damageType = CharactersService.convertSnowprintDamageProfile(x);
                 unitData.damageTypes.all.push(damageType);
                 unitData.damageTypes.activeAbility.push(damageType);
-            });
+            }
         }
         if (rawData['Passive Ability']) {
-            rawData['Passive Ability'].forEach(x => {
+            for (const x of rawData['Passive Ability']) {
                 const damageType = CharactersService.convertSnowprintDamageProfile(x);
                 unitData.damageTypes.all.push(damageType);
                 unitData.damageTypes.passiveAbility.push(damageType);
-            });
+            }
         }
         unitData.damageTypes.all = uniq(unitData.damageTypes.all);
 
@@ -178,10 +178,10 @@ export class CharactersService {
     }
 
     public static resolveCharacter(identifier: string): ICharacterData {
-        const ret = CharactersService.charactersData.find(
+        const returnValue = CharactersService.charactersData.find(
             x => x.snowprintId! == CharactersService.canonicalName(identifier)
         );
-        return ret!;
+        return returnValue!;
     }
 
     /**
@@ -195,8 +195,8 @@ export class CharactersService {
             .map(x => {
                 const staticChar = this.resolveCharacter(x.snowprintId ?? x.name);
                 if (staticChar === undefined) {
-                    console.error('Could not resolve character ', x.snowprintId ?? x.name);
-                    return undefined;
+                    console.error('Could not resolve character', x.snowprintId ?? x.name);
+                    return;
                 }
                 return { ...x, ...staticChar };
             })

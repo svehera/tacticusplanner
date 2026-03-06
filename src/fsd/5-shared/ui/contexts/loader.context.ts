@@ -1,13 +1,13 @@
 ﻿import { createContext, useContext } from 'react';
 
-interface LoaderContextProps {
+interface LoaderContextProperties {
     loading: boolean;
     loadingText?: string;
     startLoading: (text: string) => void;
     endLoading: () => void;
 }
 
-export const LoaderContext = createContext<LoaderContextProps>({
+export const LoaderContext = createContext<LoaderContextProperties>({
     loading: false,
     loadingText: '',
     startLoading: () => {},

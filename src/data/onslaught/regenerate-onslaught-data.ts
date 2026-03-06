@@ -23,7 +23,7 @@
  * is sketchy since Vite has not fully started up yet.
  *  */
 
-import fs from 'fs';
+import fs from 'node:fs';
 
 import { z } from 'zod';
 
@@ -69,20 +69,20 @@ const RarityStringSchema = z.enum(['Common', 'Uncommon', 'Rare', 'Epic', 'Legend
 
 const GuaranteedRewardSchema = z
     .templateLiteral(['wavesXp:', z.int().positive()])
-    .transform(str => Number(str.replace(/^wavesXp:/, '')));
+    .transform(rewardText => Number(rewardText.replace(/^wavesXp:/, '')));
 
 const OneTimeRewardSchema = z
     .union([
         z.templateLiteral(['abilityToken', RarityStringSchema, '_', AllianceSchema]),
         z.templateLiteral(['abilityToken', RarityStringSchema, '_', AllianceSchema, ':', z.int().positive()]),
     ])
-    .transform(str => {
-        const [rarityString, rest] = str.replace(/^abilityToken/, '').split('_');
-        const [alliance, countStr] = rest.split(':');
+    .transform(tokenText => {
+        const [rarityString, rest] = tokenText.replace(/^abilityToken/, '').split('_');
+        const [alliance, countString] = rest.split(':');
         return {
             rarityString: RarityStringSchema.parse(rarityString),
             alliance: AllianceSchema.parse(alliance),
-            count: countStr ? Number(countStr) : 1,
+            count: countString ? Number(countString) : 1,
         };
     });
 
@@ -129,9 +129,9 @@ const KillZoneSchema = z
     })
     .transform(({ battleNr, BoardId, waves }) => {
         const badgeCountsByRarity = { Common: 0, Uncommon: 0, Rare: 0, Epic: 0, Legendary: 0, Mythic: 0 };
-        waves.forEach(({ badges }) => {
+        for (const { badges } of waves) {
             badgeCountsByRarity[badges.rarityString] += badges.count;
-        });
+        }
         return {
             battleNr,
             waves: waves.length,
@@ -172,12 +172,12 @@ const TrackSchema = z
         tiers: z
             .array(SectorSchema)
             .nonempty()
-            .superRefine((sectors, ctx) => {
+            .superRefine((sectors, context) => {
                 let currentExpectedBattleNr = 1;
-                for (let i = 0; i < sectors.length; i++) {
-                    for (const { battleNr } of sectors[i].killzones) {
+                for (const sector of sectors) {
+                    for (const { battleNr } of sector.killzones) {
                         if (battleNr !== currentExpectedBattleNr)
-                            ctx.addIssue({
+                            context.addIssue({
                                 code: 'invalid_value',
                                 message: `battleNr is expected to be ${currentExpectedBattleNr}`,
                                 input: battleNr,
@@ -202,9 +202,9 @@ const TrackSchema = z
                         ...sector.killzones.map(({ badgeCountsByRarity }) => {
                             // Iterate from highest rarity to lowest
                             // Do not use `.reverse()` since that alters the indexes
-                            for (let i = RarityStringSchema.options.length - 1; i >= 0; i--) {
-                                const rarity = RarityStringSchema.options[i];
-                                if (badgeCountsByRarity[rarity] > 0) return i;
+                            for (let index = RarityStringSchema.options.length - 1; index >= 0; index--) {
+                                const rarity = RarityStringSchema.options[index];
+                                if (badgeCountsByRarity[rarity] > 0) return index;
                             }
                             return 0;
                         })
@@ -230,7 +230,7 @@ const DataSchema = z
 // ----------- Stage 7: Executing and write to file -----------
 export const main = () => {
     // Note: reading here instead of importing so that importing from this file doesn't cause Vite to try to load the entire raw JSON into memory during startup
-    const rawData = JSON.parse(fs.readFileSync(import.meta.dirname + '/rawData.json', 'utf-8'));
+    const rawData = JSON.parse(fs.readFileSync(import.meta.dirname + '/rawData.json', 'utf8'));
     const parsedData = DataSchema.parse(rawData);
     fs.writeFileSync(import.meta.dirname + '/data.generated.json', JSON.stringify(parsedData, null, 4) + '\n');
 };

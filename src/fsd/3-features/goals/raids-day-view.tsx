@@ -6,12 +6,12 @@ import { IUpgradesRaidsDay } from '@/fsd/3-features/goals/goals.models';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MaterialItemView } from '@/fsd/3-features/goals/material-item-view';
 
-interface Props {
+interface Properties {
     day: IUpgradesRaidsDay;
     title: string;
 }
 
-export const RaidsDayView: React.FC<Props> = ({ day, title }) => {
+export const RaidsDayView: React.FC<Properties> = ({ day, title }) => {
     return (
         <Card
             variant="outlined"

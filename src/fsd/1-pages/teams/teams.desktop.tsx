@@ -56,10 +56,10 @@ export const Teams = () => {
         return teams.filter(team => {
             const nameMatched = () => team.name.toLowerCase().includes(searchTerm);
             const modeMatched = () => {
-                const modsNames = team.subModes.map(mod =>
-                    (allModes.find(x => x.value === mod)?.label ?? '').toLowerCase()
+                const modsNames = team.subModes.map(module_ =>
+                    (allModes.find(x => x.value === module_)?.label ?? '').toLowerCase()
                 );
-                return modsNames.some(mod => mod.includes(searchTerm));
+                return modsNames.some(module_ => module_.includes(searchTerm));
             };
 
             return nameMatched() || modeMatched();

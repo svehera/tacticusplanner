@@ -110,17 +110,17 @@ export const GuildWarDefense = () => {
 
     const renderTeams = useMemo(
         () =>
-            teamsWithCharacters.map((currTeam, i) => (
+            teamsWithCharacters.map((currentTeam, index) => (
                 <TeamCard
-                    key={currTeam.id}
-                    team={currTeam}
-                    onEdit={() => startEditTeam(currTeam)}
-                    onClear={() => clearTeam(currTeam.id)}
-                    teamPotential={teamsPotential[i].total}
+                    key={currentTeam.id}
+                    team={currentTeam}
+                    onEdit={() => startEditTeam(currentTeam)}
+                    onClear={() => clearTeam(currentTeam.id)}
+                    teamPotential={teamsPotential[index].total}
                     onCharacterClick={() => {}}
                     teamPotentialBreakdown={
                         <FlexBox className="flex-col items-start">
-                            {teamsPotential[i].lineup.map(char => (
+                            {teamsPotential[index].lineup.map(char => (
                                 <span key={char.id}>
                                     {char.potential} - {char.id}
                                 </span>
@@ -273,7 +273,7 @@ const TeamCard: React.FC<{
                 <Button size="small" onClick={onEdit}>
                     Edit
                 </Button>
-                <Conditional condition={!!team.lineup.length}>
+                <Conditional condition={team.lineup.length > 0}>
                     <Button size="small" color="error" onClick={onClear}>
                         Clear
                     </Button>

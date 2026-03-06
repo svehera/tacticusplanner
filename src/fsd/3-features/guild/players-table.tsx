@@ -28,7 +28,7 @@ export const PlayersTable = ({
         {
             headerName: '#',
             colId: 'rowNumber',
-            valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+            valueGetter: parameters => (parameters.node?.rowIndex ?? 0) + 1,
             maxWidth: 50,
             width: 50,
         },
@@ -39,8 +39,8 @@ export const PlayersTable = ({
         {
             field: 'enlistedZone',
             width: 140,
-            valueGetter: (params: ValueGetterParams<IGuildWarPlayer>) => {
-                const data = params.data?.enlistedZone ?? '';
+            valueGetter: (parameters: ValueGetterParams<IGuildWarPlayer>) => {
+                const data = parameters.data?.enlistedZone ?? '';
                 const zone = GuildWarService.getZone(data);
 
                 return zone?.name ?? '';
@@ -54,13 +54,13 @@ export const PlayersTable = ({
             field: 'slots',
             headerName: 'Rarity pool',
             width: 150,
-            valueGetter: (params: ValueGetterParams<IGuildWarPlayer>) => {
-                const data = params.data!.slots;
+            valueGetter: (parameters: ValueGetterParams<IGuildWarPlayer>) => {
+                const data = parameters.data!.slots;
 
                 return sum(Object.values(mapValues(data, (x, y) => x * +y)));
             },
-            cellRenderer: (params: ICellRendererParams<IGuildWarPlayer>) => {
-                const slots = params.data!.slots;
+            cellRenderer: (parameters: ICellRendererParams<IGuildWarPlayer>) => {
+                const slots = parameters.data!.slots;
 
                 return (
                     <FlexBox gap={10} className="h-full">
@@ -81,8 +81,8 @@ export const PlayersTable = ({
         ...[Difficulty.Easy, Difficulty.Normal, Difficulty.Hard, Difficulty.VeryHard].map(difficulty => ({
             headerName: GuildWarService.gwData.difficulties[difficulty - 1],
             width: 90,
-            valueGetter: (params: ValueGetterParams<IGuildWarPlayer>) => {
-                const { potential } = params.data ?? {};
+            valueGetter: (parameters: ValueGetterParams<IGuildWarPlayer>) => {
+                const { potential } = parameters.data ?? {};
 
                 return potential && potential[difficulty];
             },

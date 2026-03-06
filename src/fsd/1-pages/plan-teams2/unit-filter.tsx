@@ -28,7 +28,7 @@ const RANKS = [
     Rank.Adamantine3,
 ];
 
-interface Props {
+interface Properties {
     searchText: string;
     minRarity: Rarity;
     maxRarity: Rarity;
@@ -46,7 +46,7 @@ interface Props {
     onAllowLockedUnitsChange: (allow: boolean) => void;
 }
 
-export const UnitFilter: React.FC<Props> = ({
+export const UnitFilter: React.FC<Properties> = ({
     searchText,
     minRarity,
     maxRarity,

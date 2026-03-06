@@ -16,9 +16,9 @@ export const romanToNum = (roman: string): number => {
     };
 
     let result = 0;
-    for (let i = 0; i < roman.length; i++) {
-        const current = romanNumerals[roman[i]];
-        const next = romanNumerals[roman[i + 1]];
+    for (let index = 0; index < roman.length; index++) {
+        const current = romanNumerals[roman[index]];
+        const next = romanNumerals[roman[index + 1]];
 
         if (next && current < next) {
             result -= current;
@@ -30,8 +30,8 @@ export const romanToNum = (roman: string): number => {
 };
 
 /** Utility to convert Numbers to Roman Numerals */
-export const numToRoman = (num: number): string => {
-    if (num < 1 || num > 1000) return '';
+export const numToRoman = (number_: number): string => {
+    if (number_ < 1 || number_ > 1000) return '';
 
     const romanNumerals: [number, string][] = [
         [1000, 'M'],
@@ -51,9 +51,9 @@ export const numToRoman = (num: number): string => {
 
     let result = '';
     for (const [value, symbol] of romanNumerals) {
-        while (num >= value) {
+        while (number_ >= value) {
             result += symbol;
-            num -= value;
+            number_ -= value;
         }
     }
     return result;

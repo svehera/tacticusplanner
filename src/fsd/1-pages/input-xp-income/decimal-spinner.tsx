@@ -1,16 +1,16 @@
 import React from 'react';
 
-interface DecimalSpinnerProps {
+interface DecimalSpinnerProperties {
     value: number;
     onChange: (value: number) => void;
     label: string;
 }
 
 /** Decimal spinner component for numeric input with two points of decimal precision. */
-export const DecimalSpinner: React.FC<DecimalSpinnerProps> = ({ value, onChange, label }) => {
+export const DecimalSpinner: React.FC<DecimalSpinnerProperties> = ({ value, onChange, label }) => {
     const [stringValue, setStringValue] = React.useState(value.toFixed(2));
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const numericValue = parseFloat(e.target.value);
+        const numericValue = Number.parseFloat(e.target.value);
         if (!isNaN(numericValue)) {
             onChange(numericValue);
             setStringValue(e.target.value);

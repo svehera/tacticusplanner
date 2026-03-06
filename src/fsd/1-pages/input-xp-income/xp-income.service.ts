@@ -54,24 +54,29 @@ export class XpIncomeService {
 
         let totalGuildCreditsPerRaidSeason = 0;
         if (loopsRaids === 'yes') {
-            totalGuildCreditsPerRaidSeason = 22000 + raidLoops * 6000 + extraBossesAfterLoop * 1000;
+            totalGuildCreditsPerRaidSeason = 22_000 + raidLoops * 6000 + extraBossesAfterLoop * 1000;
         } else {
             totalGuildCreditsPerRaidSeason = additionalBosses * 1000; // Uses debounced variable
             switch (clearRarity) {
-                case Rarity.Common:
+                case Rarity.Common: {
                     totalGuildCreditsPerRaidSeason += 4000;
                     break;
-                case Rarity.Uncommon:
+                }
+                case Rarity.Uncommon: {
                     totalGuildCreditsPerRaidSeason += 8000;
                     break;
-                case Rarity.Rare:
-                    totalGuildCreditsPerRaidSeason += 12000;
+                }
+                case Rarity.Rare: {
+                    totalGuildCreditsPerRaidSeason += 12_000;
                     break;
-                case Rarity.Epic:
-                    totalGuildCreditsPerRaidSeason += 17000;
+                }
+                case Rarity.Epic: {
+                    totalGuildCreditsPerRaidSeason += 17_000;
                     break;
-                default:
+                }
+                default: {
                     totalGuildCreditsPerRaidSeason += 0;
+                }
             }
         }
         weeklyEstimate += totalGuildCreditsPerRaidSeason / 300 / 2;

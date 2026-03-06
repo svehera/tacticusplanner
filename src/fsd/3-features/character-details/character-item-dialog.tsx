@@ -18,7 +18,7 @@ import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
 
 import { CharacterDetails } from './character-details';
 
-interface Props {
+interface Properties {
     character: ICharacter2;
     isOpen: boolean;
     onClose: () => void;
@@ -26,15 +26,15 @@ interface Props {
     showPreviousUnit?: () => void;
 }
 
-const CharacterItemDialogFn: React.FC<Props> = props => {
+const CharacterItemDialogFunction: React.FC<Properties> = properties => {
     const { viewPreferences } = useContext(StoreContext);
-    const [character, setCharacter] = useState(() => ({ ...props.character }));
+    const [character, setCharacter] = useState(() => ({ ...properties.character }));
     const [inventoryUpdate, setInventoryUpdate] = useState<IUpgradeRecipe[]>([]);
 
     const dispatch = useContext(DispatchContext);
     const saveChanges = () => {
         dispatch.characters({ type: 'Update', character });
-        if (inventoryUpdate.length) {
+        if (inventoryUpdate.length > 0) {
             dispatch.inventory({
                 type: 'DecrementUpgradeQuantity',
                 upgrades: inventoryUpdate.map(x => ({ id: x.id, count: x.count })),
@@ -46,17 +46,17 @@ const CharacterItemDialogFn: React.FC<Props> = props => {
     const bsValue = CharactersValueService.getCharacterValue(character);
 
     useEffect(() => {
-        setCharacter(props.character);
-    }, [props.character]);
+        setCharacter(properties.character);
+    }, [properties.character]);
 
     return (
-        <Dialog open={props.isOpen} onClose={props.onClose} fullScreen={isMobile}>
+        <Dialog open={properties.isOpen} onClose={properties.onClose} fullScreen={isMobile}>
             <DialogTitle className="flex-box between">
-                {props.showPreviousUnit && (
+                {properties.showPreviousUnit && (
                     <IconButton
                         onClick={() => {
                             saveChanges();
-                            props.showPreviousUnit!();
+                            properties.showPreviousUnit!();
                         }}>
                         <ArrowBack />
                     </IconButton>
@@ -84,11 +84,11 @@ const CharacterItemDialogFn: React.FC<Props> = props => {
                         </AccessibleTooltip>
                     </Conditional>
                 </div>
-                {props.showNextUnit && (
+                {properties.showNextUnit && (
                     <IconButton
                         onClick={() => {
                             saveChanges();
-                            props.showNextUnit!();
+                            properties.showNextUnit!();
                         }}>
                         <ArrowForward />
                     </IconButton>
@@ -102,11 +102,11 @@ const CharacterItemDialogFn: React.FC<Props> = props => {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={props.onClose}>Cancel</Button>
+                <Button onClick={properties.onClose}>Cancel</Button>
                 <Button
                     onClick={() => {
                         saveChanges();
-                        props.onClose();
+                        properties.onClose();
                     }}>
                     Save
                 </Button>
@@ -115,4 +115,4 @@ const CharacterItemDialogFn: React.FC<Props> = props => {
     );
 };
 
-export const CharacterItemDialog = React.memo(CharacterItemDialogFn);
+export const CharacterItemDialog = React.memo(CharacterItemDialogFunction);

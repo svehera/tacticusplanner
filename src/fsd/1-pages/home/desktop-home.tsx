@@ -171,7 +171,7 @@ export const DesktopHome = () => {
 
                 {nextLeMenuItem && <LreSection nextEvent={nextLeMenuItem} />}
 
-                {!!goals.length && (
+                {goals.length > 0 && (
                     <div>
                         <h3 className="text-center">Your Goals</h3>
                         <Card

@@ -9,7 +9,7 @@ import { UpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade/@x/mow';
 
 import { MowsService } from './mows.service';
 
-interface Props {
+interface Properties {
     mowId: string;
     inventory: Record<string, number>;
     currPrimaryLevel: number;
@@ -19,7 +19,7 @@ interface Props {
     inventoryDecrement: (value: Record<string, number>) => void;
 }
 
-export const MowUpgradesUpdate: React.FC<Props> = ({
+export const MowUpgradesUpdate: React.FC<Properties> = ({
     mowId,
     inventory,
     originalSecondaryLevel,
@@ -39,12 +39,14 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
             (_, index) => originalSecondaryLevel + index + 1
         );
 
-        const primary = primaryLevels.length
-            ? MowsService.getMaterialsList(mowId, mowId, Alliance.Imperial, primaryLevels)
-            : [];
-        const secondary = secondaryLevels.length
-            ? MowsService.getMaterialsList(mowId, mowId, Alliance.Imperial, secondaryLevels)
-            : [];
+        const primary =
+            primaryLevels.length > 0
+                ? MowsService.getMaterialsList(mowId, mowId, Alliance.Imperial, primaryLevels)
+                : [];
+        const secondary =
+            secondaryLevels.length > 0
+                ? MowsService.getMaterialsList(mowId, mowId, Alliance.Imperial, secondaryLevels)
+                : [];
 
         const totalUpgrades = [
             ...primary.flatMap(x => x.primaryUpgrades),
@@ -53,18 +55,18 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
         return UpgradesService.updateInventory(inventory, totalUpgrades);
     }, [currPrimaryLevel, currSecondaryLevel]);
 
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement | null>(null);
     const [updateInventory, setUpdateInventory] = React.useState<boolean>(true);
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorElement(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorElement(null);
     };
 
-    const open = Boolean(anchorEl);
+    const open = Boolean(anchorElement);
 
     useEffect(() => {
         if (updateInventory) {
@@ -79,7 +81,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
             <FormControlLabel
                 control={
                     <Checkbox
-                        disabled={!inventoryUpgrades.length}
+                        disabled={inventoryUpgrades.length === 0}
                         checked={updateInventory}
                         onChange={event => {
                             setUpdateInventory(event.target.checked);
@@ -94,7 +96,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
             </Button>
             <Popover
                 open={open}
-                anchorEl={anchorEl}
+                anchorEl={anchorElement}
                 onClose={handleClose}
                 anchorOrigin={{
                     vertical: 'bottom',
@@ -113,9 +115,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                                     />
                                 )}{' '}
                                 {inventory[x.id] ?? 0} - {inventoryUpdate[x.id]} ={' '}
-                                {(inventory[x.id] ?? 0) - inventoryUpdate[x.id] < 0
-                                    ? 0
-                                    : (inventory[x.id] ?? 0) - inventoryUpdate[x.id]}
+                                {Math.max((inventory[x.id] ?? 0) - inventoryUpdate[x.id], 0)}
                             </li>
                         ))}
                     </ul>

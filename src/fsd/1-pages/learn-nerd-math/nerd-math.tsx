@@ -43,14 +43,14 @@ interface Attack {
     hmhBuffPerHit: number[];
 }
 
-interface CharacterLineProps {
+interface CharacterLineProperties {
     name: string;
     critDamage: number;
     damageMods: DamageMods;
     onDamageModsChange: (newMods: DamageMods) => void;
 }
 
-const CharacterLine = ({ name, critDamage, damageMods, onDamageModsChange }: CharacterLineProps) => {
+const CharacterLine = ({ name, critDamage, damageMods, onDamageModsChange }: CharacterLineProperties) => {
     const handleChange = (field: keyof DamageMods, value: boolean | number) => {
         onDamageModsChange({ ...damageMods, [field]: value });
     };
@@ -254,7 +254,7 @@ export const NerdMath = () => {
         );
     };
 
-    const getPreModDamage = (basePierce: number, preArmorDamage: number, damageMods: DamageMods): number => {
+    const getPreModuleDamage = (basePierce: number, preArmorDamage: number, damageMods: DamageMods): number => {
         const pierce = Math.min(basePierce + (damageMods.hmhActiveBuff ? HMH_ACTIVE_PIERCE_BUFF : 0), 1);
         const damageViaPierce = preArmorDamage * pierce;
         const damageViaArmor = preArmorDamage - bossArmor;
@@ -263,9 +263,9 @@ export const NerdMath = () => {
 
     const applyMortyTrait = (damage: number, totalHits: number): number[] => {
         const hits: number[] = [];
-        for (let i = 0; i < totalHits; ++i) {
+        for (let index = 0; index < totalHits; ++index) {
             let hitDamage = damage;
-            for (let hit = 3; hit <= i; ++hit) {
+            for (let hit = 3; hit <= index; ++hit) {
                 hitDamage *= MORTY_TRAIT_DEBUFF;
             }
             hits.push(hitDamage);
@@ -273,7 +273,7 @@ export const NerdMath = () => {
         return hits;
     };
 
-    const calculatePreModDamage = (
+    const calculatePreModuleDamage = (
         minBaseDamage: number,
         maxBaseDamage: number,
         basePierce: number,
@@ -281,11 +281,11 @@ export const NerdMath = () => {
     ): number => {
         const baseDamage = getBaseDamage(minBaseDamage, maxBaseDamage, damageMods.rollType);
         const preArmorDamage = getPreArmorDamage(baseDamage, damageMods);
-        return getPreModDamage(basePierce, preArmorDamage, damageMods);
+        return getPreModuleDamage(basePierce, preArmorDamage, damageMods);
     };
 
     const kariyanActive = (damageMods: DamageMods): Attack => {
-        const damagePerHit = calculatePreModDamage(5712, 7140, 0.5, damageMods);
+        const damagePerHit = calculatePreModuleDamage(5712, 7140, 0.5, damageMods);
         const mods =
             (damageMods.mowBuff ? MOW_MOD : 1) *
             BEAST_SLAYER_BUFF_PERCENTAGE *
@@ -324,7 +324,7 @@ export const NerdMath = () => {
     };
 
     const kariyanPassive = (damageMods: DamageMods, kariyanHits: number): Attack => {
-        const damagePerHit = calculatePreModDamage(5712, 7140, 0.8, damageMods);
+        const damagePerHit = calculatePreModuleDamage(5712, 7140, 0.8, damageMods);
         const mods =
             (damageMods.mowBuff ? MOW_MOD : 1) *
             BEAST_SLAYER_BUFF_PERCENTAGE *
@@ -363,7 +363,7 @@ export const NerdMath = () => {
         };
     };
     const hmhMelee = (damageMods: DamageMods): Attack => {
-        const damagePerHit = calculatePreModDamage(1821 * 0.8, 1821 * 1.2, 0.4, damageMods);
+        const damagePerHit = calculatePreModuleDamage(1821 * 0.8, 1821 * 1.2, 0.4, damageMods);
         const mods = (damageMods.mowBuff ? MOW_MOD : 1) * (damageMods.highGround ? HIGH_GROUND_BUFF_PERCENTAGE : 1);
         const hits = applyMortyTrait(damagePerHit * mods, 6 + (damageMods.bossBuff ? BOSS_HITS_BUFF : 0));
         if (damageMods.hmhPassiveBuff || damageMods.hmhActiveBuff) {
@@ -385,7 +385,7 @@ export const NerdMath = () => {
     };
 
     const hmhRange = (damageMods: DamageMods): Attack => {
-        const damagePerHit = calculatePreModDamage(1821 * 0.8, 1821 * 1.2, 0.2, damageMods);
+        const damagePerHit = calculatePreModuleDamage(1821 * 0.8, 1821 * 1.2, 0.2, damageMods);
         const mods =
             (damageMods.mowBuff ? MOW_MOD : 1) *
             (damageMods.highGround ? HIGH_GROUND_BUFF_PERCENTAGE : 1) *
@@ -420,7 +420,7 @@ export const NerdMath = () => {
     };
 
     const trajannMelee = (damageMods: DamageMods): Attack => {
-        const damagePerHit = calculatePreModDamage(1336 * 0.8, 1336 * 1.2, 0.8, damageMods);
+        const damagePerHit = calculatePreModuleDamage(1336 * 0.8, 1336 * 1.2, 0.8, damageMods);
         const mods =
             CRUSHING_STRIKE_BUFF *
             (damageMods.mowBuff ? MOW_MOD : 1) *
@@ -456,7 +456,7 @@ export const NerdMath = () => {
     };
 
     const bossMelee = (damageMods: DamageMods): Attack => {
-        const damagePerHit = calculatePreModDamage(3158 * 0.8, 3158 * 1.2, 0.5, damageMods);
+        const damagePerHit = calculatePreModuleDamage(3158 * 0.8, 3158 * 1.2, 0.5, damageMods);
         const mods =
             (damageMods.mowBuff ? MOW_MOD : 1) *
             (damageMods.highGround ? HIGH_GROUND_BUFF_PERCENTAGE : 1) *
@@ -491,7 +491,7 @@ export const NerdMath = () => {
     };
 
     const bossPassive = (damageMods: DamageMods): Attack => {
-        const damagePerHit = calculatePreModDamage(1786, 2380, 0.15, damageMods);
+        const damagePerHit = calculatePreModuleDamage(1786, 2380, 0.15, damageMods);
         const mods =
             (damageMods.mowBuff ? MOW_MOD : 1) *
             (damageMods.highGround ? HIGH_GROUND_BUFF_PERCENTAGE : 1) *
@@ -516,16 +516,16 @@ export const NerdMath = () => {
     };
 
     const atlacoyaActive = (damageMods: DamageMods): Attack => {
-        const damagePerHit = calculatePreModDamage(5712, 7140, 1, damageMods);
+        const damagePerHit = calculatePreModuleDamage(5712, 7140, 1, damageMods);
         const mods =
             (damageMods.mowBuff ? MOW_MOD : 1) *
             (damageMods.highGround ? HIGH_GROUND_BUFF_PERCENTAGE : 1) *
             (damageMods.atlacoyaBuff ? ATLACOYA_BUFF : 1);
-        const ret: number[] = [];
-        for (let i = 0; i < 1 + TRAJANN_HIT_BUFF * (damageMods.trajannBuff ? 1 : 0); ++i) {
-            ret.push(damagePerHit * mods);
+        const returnValue: number[] = [];
+        for (let index = 0; index < 1 + TRAJANN_HIT_BUFF * (damageMods.trajannBuff ? 1 : 0); ++index) {
+            returnValue.push(damagePerHit * mods);
         }
-        const hits = ret;
+        const hits = returnValue;
         return {
             name: 'Atlacoya Active',
             hits,
@@ -535,7 +535,7 @@ export const NerdMath = () => {
     };
 
     const laviscusActive = (damageMods: DamageMods): Attack => {
-        const damagePerHit = calculatePreModDamage(4760, 5712, 0.4, damageMods);
+        const damagePerHit = calculatePreModuleDamage(4760, 5712, 0.4, damageMods);
         const mods =
             (damageMods.highGround ? HIGH_GROUND_BUFF_PERCENTAGE : 1) * (damageMods.atlacoyaBuff ? ATLACOYA_BUFF : 1);
         const hits = applyMortyTrait(damagePerHit * mods, 1 + TRAJANN_HIT_BUFF * (damageMods.trajannBuff ? 1 : 0));
@@ -568,9 +568,9 @@ export const NerdMath = () => {
     };
 
     const laviscusMelee = (damageMods: DamageMods, allOtherCharacterAttacks: number[][]): Attack => {
-        const outrage = allOtherCharacterAttacks.map(arr => Math.max(...arr)).reduce((a, b) => a + b, 0);
+        const outrage = allOtherCharacterAttacks.map(array => Math.max(...array)).reduce((a, b) => a + b, 0);
         const baseDamage = 4860 + outrage * 1.2;
-        const damagePerHit = calculatePreModDamage(baseDamage * 0.8, baseDamage * 1.2, 0.4, damageMods);
+        const damagePerHit = calculatePreModuleDamage(baseDamage * 0.8, baseDamage * 1.2, 0.4, damageMods);
         const mods =
             (damageMods.highGround ? HIGH_GROUND_BUFF_PERCENTAGE : 1) *
             CRUSHING_STRIKE_BUFF *
@@ -618,7 +618,7 @@ export const NerdMath = () => {
             atlacoyaActiveState.enabled ? atlacoyaActive(atlacoyaActiveState) : null,
             laviscusActiveState.enabled ? laviscusActive(laviscusActiveState) : null,
         ].filter((attack): attack is Attack => attack !== null) ?? [];
-    const outrage = allAttacksExceptLaviscusMelee.map(arr => Math.max(...arr.hits)).reduce((a, b) => a + b, 0);
+    const outrage = allAttacksExceptLaviscusMelee.map(array => Math.max(...array.hits)).reduce((a, b) => a + b, 0);
     const allAttacks =
         [
             ...allAttacksExceptLaviscusMelee,
@@ -703,8 +703,8 @@ export const NerdMath = () => {
             crit: 1561,
             rollType: RollType.MAXIMUM,
         });
-        setHmhRangeState(prev => ({ ...prev, enabled: false }));
-        setAtlacoyaActiveState(prev => ({ ...prev, enabled: false }));
+        setHmhRangeState(previous => ({ ...previous, enabled: false }));
+        setAtlacoyaActiveState(previous => ({ ...previous, enabled: false }));
         setLaviscusActiveState({
             enabled: true,
             trajannBuff: true,
@@ -792,8 +792,8 @@ export const NerdMath = () => {
             crit: 1561,
             rollType: RollType.MAXIMUM,
         });
-        setHmhMeleeState(prev => ({ ...prev, enabled: false }));
-        setHmhRangeState(prev => ({ ...prev, enabled: false }));
+        setHmhMeleeState(previous => ({ ...previous, enabled: false }));
+        setHmhRangeState(previous => ({ ...previous, enabled: false }));
         setAtlacoyaActiveState({
             enabled: true,
             trajannBuff: true,
@@ -834,47 +834,47 @@ export const NerdMath = () => {
 
     const toggleHighGround = () => {
         const hg = highGroundState;
-        setHighGroundState(prev => !prev);
-        setKariyanActiveState(prev => ({ ...prev, highGround: !hg }));
-        setKariyanPassiveState(prev => ({ ...prev, highGround: !hg }));
-        setTrajannMeleeState(prev => ({ ...prev, highGround: !hg }));
-        setBossMeleeState(prev => ({ ...prev, highGround: !hg }));
-        setBossPassiveState(prev => ({ ...prev, highGround: !hg }));
-        setHmhMeleeState(prev => ({ ...prev, highGround: !hg }));
-        setHmhRangeState(prev => ({ ...prev, highGround: !hg }));
-        setAtlacoyaActiveState(prev => ({ ...prev, highGround: !hg }));
-        setLaviscusActiveState(prev => ({ ...prev, highGround: !hg }));
-        setLaviscusMeleeState(prev => ({ ...prev, highGround: !hg }));
+        setHighGroundState(previous => !previous);
+        setKariyanActiveState(previous => ({ ...previous, highGround: !hg }));
+        setKariyanPassiveState(previous => ({ ...previous, highGround: !hg }));
+        setTrajannMeleeState(previous => ({ ...previous, highGround: !hg }));
+        setBossMeleeState(previous => ({ ...previous, highGround: !hg }));
+        setBossPassiveState(previous => ({ ...previous, highGround: !hg }));
+        setHmhMeleeState(previous => ({ ...previous, highGround: !hg }));
+        setHmhRangeState(previous => ({ ...previous, highGround: !hg }));
+        setAtlacoyaActiveState(previous => ({ ...previous, highGround: !hg }));
+        setLaviscusActiveState(previous => ({ ...previous, highGround: !hg }));
+        setLaviscusMeleeState(previous => ({ ...previous, highGround: !hg }));
     };
 
     const toggleMow = () => {
         const mow = mowState;
         setMowState(!mow);
-        setKariyanActiveState(prev => ({ ...prev, mowBuff: !mow }));
-        setKariyanPassiveState(prev => ({ ...prev, mowBuff: !mow }));
-        setTrajannMeleeState(prev => ({ ...prev, mowBuff: !mow }));
-        setBossMeleeState(prev => ({ ...prev, mowBuff: !mow }));
-        setBossPassiveState(prev => ({ ...prev, mowBuff: !mow }));
-        setHmhMeleeState(prev => ({ ...prev, mowBuff: !mow }));
-        setHmhRangeState(prev => ({ ...prev, mowBuff: !mow }));
-        setAtlacoyaActiveState(prev => ({ ...prev, mowBuff: !mow }));
-        setLaviscusActiveState(prev => ({ ...prev, mowBuff: !mow }));
-        setLaviscusMeleeState(prev => ({ ...prev, mowBuff: !mow }));
+        setKariyanActiveState(previous => ({ ...previous, mowBuff: !mow }));
+        setKariyanPassiveState(previous => ({ ...previous, mowBuff: !mow }));
+        setTrajannMeleeState(previous => ({ ...previous, mowBuff: !mow }));
+        setBossMeleeState(previous => ({ ...previous, mowBuff: !mow }));
+        setBossPassiveState(previous => ({ ...previous, mowBuff: !mow }));
+        setHmhMeleeState(previous => ({ ...previous, mowBuff: !mow }));
+        setHmhRangeState(previous => ({ ...previous, mowBuff: !mow }));
+        setAtlacoyaActiveState(previous => ({ ...previous, mowBuff: !mow }));
+        setLaviscusActiveState(previous => ({ ...previous, mowBuff: !mow }));
+        setLaviscusMeleeState(previous => ({ ...previous, mowBuff: !mow }));
     };
 
     const toggleCrit = () => {
         const crit = critState;
         setCritState(!crit);
-        setKariyanActiveState(prev => ({ ...prev, crit: crit ? 0 : 2706 }));
-        setKariyanPassiveState(prev => ({ ...prev, crit: crit ? 0 : 2706 }));
-        setTrajannMeleeState(prev => ({ ...prev, crit: crit ? 0 : 2185 }));
-        setBossMeleeState(prev => ({ ...prev, crit: crit ? 0 : 1561 }));
-        setBossPassiveState(prev => ({ ...prev, crit: crit ? 0 : 1561 }));
-        setHmhMeleeState(prev => ({ ...prev, crit: crit ? 0 : 1561 }));
-        setHmhRangeState(prev => ({ ...prev, crit: crit ? 0 : 1561 }));
-        setAtlacoyaActiveState(prev => ({ ...prev, crit: crit ? 0 : 2706 }));
-        setLaviscusActiveState(prev => ({ ...prev, crit: crit ? 0 : 2082 }));
-        setLaviscusMeleeState(prev => ({ ...prev, crit: crit ? 0 : 2082 + 952 }));
+        setKariyanActiveState(previous => ({ ...previous, crit: crit ? 0 : 2706 }));
+        setKariyanPassiveState(previous => ({ ...previous, crit: crit ? 0 : 2706 }));
+        setTrajannMeleeState(previous => ({ ...previous, crit: crit ? 0 : 2185 }));
+        setBossMeleeState(previous => ({ ...previous, crit: crit ? 0 : 1561 }));
+        setBossPassiveState(previous => ({ ...previous, crit: crit ? 0 : 1561 }));
+        setHmhMeleeState(previous => ({ ...previous, crit: crit ? 0 : 1561 }));
+        setHmhRangeState(previous => ({ ...previous, crit: crit ? 0 : 1561 }));
+        setAtlacoyaActiveState(previous => ({ ...previous, crit: crit ? 0 : 2706 }));
+        setLaviscusActiveState(previous => ({ ...previous, crit: crit ? 0 : 2082 }));
+        setLaviscusMeleeState(previous => ({ ...previous, crit: crit ? 0 : 2082 + 952 }));
     };
 
     const changeRollType = () => {
@@ -885,16 +885,16 @@ export const NerdMath = () => {
                   ? RollType.AVERAGE
                   : RollType.MAXIMUM;
         setRollTypeState(newRollType);
-        setKariyanActiveState(prev => ({ ...prev, rollType: newRollType }));
-        setKariyanPassiveState(prev => ({ ...prev, rollType: newRollType }));
-        setTrajannMeleeState(prev => ({ ...prev, rollType: newRollType }));
-        setBossMeleeState(prev => ({ ...prev, rollType: newRollType }));
-        setBossPassiveState(prev => ({ ...prev, rollType: newRollType }));
-        setHmhMeleeState(prev => ({ ...prev, rollType: newRollType }));
-        setHmhRangeState(prev => ({ ...prev, rollType: newRollType }));
-        setAtlacoyaActiveState(prev => ({ ...prev, rollType: newRollType }));
-        setLaviscusActiveState(prev => ({ ...prev, rollType: newRollType }));
-        setLaviscusMeleeState(prev => ({ ...prev, rollType: newRollType }));
+        setKariyanActiveState(previous => ({ ...previous, rollType: newRollType }));
+        setKariyanPassiveState(previous => ({ ...previous, rollType: newRollType }));
+        setTrajannMeleeState(previous => ({ ...previous, rollType: newRollType }));
+        setBossMeleeState(previous => ({ ...previous, rollType: newRollType }));
+        setBossPassiveState(previous => ({ ...previous, rollType: newRollType }));
+        setHmhMeleeState(previous => ({ ...previous, rollType: newRollType }));
+        setHmhRangeState(previous => ({ ...previous, rollType: newRollType }));
+        setAtlacoyaActiveState(previous => ({ ...previous, rollType: newRollType }));
+        setLaviscusActiveState(previous => ({ ...previous, rollType: newRollType }));
+        setLaviscusMeleeState(previous => ({ ...previous, rollType: newRollType }));
     };
 
     return (

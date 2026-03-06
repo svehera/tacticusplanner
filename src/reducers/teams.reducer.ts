@@ -32,7 +32,7 @@ export const teamsReducer = (state: IPersonalTeam[], action: TeamsAction) => {
             const updatedTeam = action.team;
             const updatedTeamIndex = state.findIndex(x => x.id === updatedTeam.id);
 
-            if (updatedTeamIndex < 0) {
+            if (updatedTeamIndex === -1) {
                 return state;
             }
 

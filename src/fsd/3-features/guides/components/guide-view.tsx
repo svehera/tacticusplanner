@@ -13,7 +13,7 @@ import { GuidesStatus } from '@/fsd/3-features/guides/guides.enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuide } from '@/fsd/3-features/guides/guides.models';
 
-interface Props {
+interface Properties {
     onClose: () => void;
     moderate: (result: GuidesStatus) => void;
     team: IGuide;
@@ -24,7 +24,7 @@ interface Props {
     onEdit: () => void;
 }
 
-export const GuideView: React.FC<Props> = ({
+export const GuideView: React.FC<Properties> = ({
     team,
     units,
     onClose,

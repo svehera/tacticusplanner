@@ -2,7 +2,7 @@
 import InputLabel from '@mui/material/InputLabel';
 import React, { useState } from 'react';
 
-interface Props {
+interface Properties {
     label: string;
     value: number;
     valueChange: (v: number) => void;
@@ -13,7 +13,7 @@ interface Props {
     style?: React.CSSProperties;
 }
 
-export const NumberInput: React.FC<Props> = ({
+export const NumberInput: React.FC<Properties> = ({
     label,
     value,
     valueChange,

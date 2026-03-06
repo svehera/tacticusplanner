@@ -15,7 +15,7 @@ import { ITeamSlot } from '@/fsd/3-features/guides/guides.models';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 
-interface Props {
+interface Properties {
     teamName: string;
     intro: string;
     guide: string;
@@ -25,7 +25,15 @@ interface Props {
     units: IUnit[];
 }
 
-export const GuidePreview: React.FC<Props> = ({ teamName, intro, guide, gameMode, subModes, teamSlots, units }) => {
+export const GuidePreview: React.FC<Properties> = ({
+    teamName,
+    intro,
+    guide,
+    gameMode,
+    subModes,
+    teamSlots,
+    units,
+}) => {
     const subName: string = getDisplayName(gameMode, subModes);
 
     return (

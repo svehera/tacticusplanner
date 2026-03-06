@@ -16,13 +16,13 @@ import { CharactersRaidsGoal } from '@/fsd/3-features/goals/characters-raids-goa
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
 
-interface Props {
+interface Properties {
     goals: CharacterRaidGoalSelect[];
     units: IUnit[];
     onGoalsSelectChange: (chars: CharacterRaidGoalSelect[]) => void;
 }
 
-export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelectChange }) => {
+export const ActiveGoalsDialog: React.FC<Properties> = ({ goals, units, onGoalsSelectChange }) => {
     const [openGoals, setOpenGoals] = useState<boolean>(false);
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit | null>(null);
@@ -32,11 +32,11 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
     // Sync currentGoalsSelect with goals prop when goals change while dialog is open
     useEffect(() => {
         if (openGoals) {
-            setCurrentGoalsSelect(prevGoals =>
+            setCurrentGoalsSelect(previousGoals =>
                 goals.map(goal => {
-                    const prevGoal = prevGoals.find(g => g.goalId === goal.goalId);
+                    const previousGoal = previousGoals.find(g => g.goalId === goal.goalId);
                     // Preserve include state if goal exists, otherwise use the new goal's include value
-                    return prevGoal ? { ...goal, include: prevGoal.include } : goal;
+                    return previousGoal ? { ...goal, include: previousGoal.include } : goal;
                 })
             );
         }
@@ -73,11 +73,11 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
         const currentSelected = currentGoalsSelect
             .filter(x => x.include)
             .map(x => x.goalId)
-            .join();
+            .join(',');
         const initialSelected = goals
             .filter(x => x.include)
             .map(x => x.goalId)
-            .join();
+            .join(',');
         return currentSelected !== initialSelected;
     }, [currentGoalsSelect, goals]);
 
@@ -150,10 +150,10 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                 </DialogTitle>
                 <DialogContent>
                     <div className="flex-box start wrap">
-                        {!!upgradeRankGoals.length && renderGoalsGroup('Upgrade rank', upgradeRankGoals)}
-                        {!!upgradeMowGoals.length && renderGoalsGroup('Upgrade MoW', upgradeMowGoals)}
-                        {!!ascendGoals.length && renderGoalsGroup('Ascend/Promote', ascendGoals)}
-                        {!!unlockGoals.length && renderGoalsGroup('Unlock', unlockGoals)}
+                        {upgradeRankGoals.length > 0 && renderGoalsGroup('Upgrade rank', upgradeRankGoals)}
+                        {upgradeMowGoals.length > 0 && renderGoalsGroup('Upgrade MoW', upgradeMowGoals)}
+                        {ascendGoals.length > 0 && renderGoalsGroup('Ascend/Promote', ascendGoals)}
+                        {unlockGoals.length > 0 && renderGoalsGroup('Unlock', unlockGoals)}
                     </div>
                 </DialogContent>
 

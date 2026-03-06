@@ -8,13 +8,13 @@ import { IUnit } from '@/fsd/3-features/characters/characters.models';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { grEncounterToFaction, guildRaidBosses, guildRaidPrimes } from '@/fsd/3-features/teams/teams.constants';
 
-interface Props {
+interface Properties {
     units: IUnit[];
     filterUnits: (filtered: IUnit[]) => void;
     updateSelection: (value: string[]) => void;
 }
 
-export const GuildRaidsModes: React.FC<Props> = ({ updateSelection, units, filterUnits }) => {
+export const GuildRaidsModes: React.FC<Properties> = ({ updateSelection, units, filterUnits }) => {
     const [grEncounter, setGrEncounter] = useState<string>('');
 
     const updateEncounter = (values: string[]) => {

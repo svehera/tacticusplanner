@@ -18,7 +18,7 @@ import { TeamFlow } from './team-flow';
 import { Teams2Service } from './teams2.service';
 import { UnitFilter } from './unit-filter';
 
-interface Props {
+interface Properties {
     chars: ICharacter2[];
     mows: IMow2[];
     selectedChars: string[];
@@ -68,7 +68,7 @@ interface Props {
     onCancel: () => void;
     onSave: () => void;
 }
-export const AddTeamDialog: React.FC<Props> = ({
+export const AddTeamDialog: React.FC<Properties> = ({
     chars,
     mows,
     selectedChars,
@@ -117,7 +117,7 @@ export const AddTeamDialog: React.FC<Props> = ({
     onHordeModeChanged,
     onTeamNameChanged,
     onNotesChanged,
-}: Props) => {
+}: Properties) => {
     const [mowWidth, setMowWidth] = useState<number>(250);
     const [isDragging, setIsDragging] = useState<boolean>(false);
 
@@ -143,21 +143,21 @@ export const AddTeamDialog: React.FC<Props> = ({
 
     useEffect(() => {
         if (isDragging) {
-            window.addEventListener('mousemove', resizeGrids);
-            window.addEventListener('mouseup', stopResizing);
+            globalThis.addEventListener('mousemove', resizeGrids);
+            globalThis.addEventListener('mouseup', stopResizing);
             document.body.style.cursor = 'col-resize';
         } else {
             document.body.style.cursor = 'default';
         }
         return () => {
-            window.removeEventListener('mousemove', resizeGrids);
-            window.removeEventListener('mouseup', stopResizing);
+            globalThis.removeEventListener('mousemove', resizeGrids);
+            globalThis.removeEventListener('mouseup', stopResizing);
         };
     }, [isDragging, resizeGrids, stopResizing]);
 
-    const allFactions: FactionId[] = Array.from(
-        new Set<FactionId>([...chars.map(c => c.faction), ...mows.map(m => m.faction)])
-    ).sort((a, b) => a.localeCompare(b));
+    const allFactions: FactionId[] = [
+        ...new Set<FactionId>([...chars.map(c => c.faction), ...mows.map(m => m.faction)]),
+    ].sort((a, b) => a.localeCompare(b));
 
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId!))

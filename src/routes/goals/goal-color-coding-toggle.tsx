@@ -6,12 +6,12 @@ import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 export type GoalColorMode = 'None' | 'Battle Pass Season' | 'Guild Raid Season';
 const COLOR_MODES: GoalColorMode[] = ['None', 'Battle Pass Season', 'Guild Raid Season'];
 
-interface ColorCodingToggleProps {
+interface ColorCodingToggleProperties {
     currentMode: GoalColorMode;
     onToggle: (newMode: GoalColorMode) => void;
 }
 
-export const GoalColorCodingToggle: React.FC<ColorCodingToggleProps> = ({ currentMode, onToggle }) => {
+export const GoalColorCodingToggle: React.FC<ColorCodingToggleProperties> = ({ currentMode, onToggle }) => {
     const getNextMode = useCallback((current: GoalColorMode): GoalColorMode => {
         const currentIndex = COLOR_MODES.indexOf(current);
         const nextIndex = (currentIndex + 1) % COLOR_MODES.length;

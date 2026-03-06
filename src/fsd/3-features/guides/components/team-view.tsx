@@ -12,13 +12,13 @@ import { SlotType } from '@/fsd/3-features/guides/guides.enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ITeamSlot } from '@/fsd/3-features/guides/guides.models';
 
-interface Props {
+interface Properties {
     units: IUnit[];
     slots: ITeamSlot[];
     expanded?: boolean;
 }
 
-export const TeamView: React.FC<Props> = ({ slots, units, expanded = false }) => {
+export const TeamView: React.FC<Properties> = ({ slots, units, expanded = false }) => {
     const characters = slots.filter(x => x.unitType === UnitType.character);
     const mow = slots.find(x => x.unitType === UnitType.mow);
     const withMow = mow && mow.slotType !== SlotType.none;

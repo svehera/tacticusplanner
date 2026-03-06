@@ -61,28 +61,28 @@ export class GoalsService {
     ): IXpLevel {
         const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
         const character = characters.find(c => c.snowprintId! === characterId);
-        const ret: IXpLevel = { currentLevel: character?.level ?? 1, xpAtLevel: character?.xp ?? 0 };
+        const returnValue: IXpLevel = { currentLevel: character?.level ?? 1, xpAtLevel: character?.xp ?? 0 };
         for (const goal of priorGoals) {
             if (goal.type === PersonalGoalType.UpgradeRank) {
                 const upgradeGoal = goal as ICharacterUpgradeRankGoal;
                 const targetLevel = rankToLevel[(upgradeGoal.rankEnd ?? Rank.Stone2) as Rank];
-                if (targetLevel > ret.currentLevel) {
-                    ret.currentLevel = targetLevel;
-                    ret.xpAtLevel = 0;
-                    ret.xpFromPriorGoalApplied = true;
+                if (targetLevel > returnValue.currentLevel) {
+                    returnValue.currentLevel = targetLevel;
+                    returnValue.xpAtLevel = 0;
+                    returnValue.xpFromPriorGoalApplied = true;
                 }
             } else if (goal.type === PersonalGoalType.CharacterAbilities) {
                 const abilityGoal = goal as ICharacterUpgradeAbilities;
                 const targetLevel = Math.max(abilityGoal.activeEnd, abilityGoal.passiveEnd);
-                if (targetLevel > ret.currentLevel) {
-                    ret.currentLevel = targetLevel;
-                    ret.xpAtLevel = 0;
-                    ret.xpFromPriorGoalApplied = true;
+                if (targetLevel > returnValue.currentLevel) {
+                    returnValue.currentLevel = targetLevel;
+                    returnValue.xpAtLevel = 0;
+                    returnValue.xpFromPriorGoalApplied = true;
                 }
             }
         }
 
-        return ret;
+        return returnValue;
     }
 
     public static buildGoalEstimates(
@@ -94,7 +94,7 @@ export class GoalsService {
     ): IGoalEstimate[] {
         const result: IGoalEstimate[] = [];
 
-        [shardsGoals, upgradeRankOrMowGoals].flat().forEach(goal => {
+        for (const goal of [shardsGoals, upgradeRankOrMowGoals].flat()) {
             const estimate: IGoalEstimate = {
                 goalId: goal.goalId,
                 energyTotal: 0,
@@ -103,15 +103,15 @@ export class GoalsService {
                 daysLeft: 0,
                 xpBooksTotal: 0,
             };
-            estimatedUpgradesTotal.upgradesRaids.forEach((day, index) => {
+            for (const [index, day] of estimatedUpgradesTotal.upgradesRaids.entries()) {
                 let raidedToday = false;
-                day.raids.forEach(raid => {
-                    if (!raid.relatedGoals.includes(goal.goalId)) return;
-                    raid.raidLocations.forEach(location => {
+                for (const raid of day.raids) {
+                    if (!raid.relatedGoals.includes(goal.goalId)) continue;
+                    for (const location of raid.raidLocations) {
                         if (UpgradesService.isOnslaughtLocation(location)) {
                             estimate.oTokensTotal += location.raidsToPerform;
                         }
-                    });
+                    }
                     if (raid.raidLocations.some(location => location.raidsToPerform > 0)) {
                         raidedToday = true;
                     }
@@ -120,19 +120,16 @@ export class GoalsService {
                         0
                     );
                     const goalRequired = raid.countByGoalId?.[goal.goalId] ?? 0;
-                    if (totalRequired > 0 && goalRequired > 0) {
-                        estimate.energyTotal += Math.round(raid.energyTotal * (goalRequired / totalRequired));
-                    } else {
-                        estimate.energyTotal += Math.round(
-                            raid.energyTotal / Math.max(1, raid.relatedCharacters.length)
-                        );
-                    }
-                });
+                    estimate.energyTotal +=
+                        totalRequired > 0 && goalRequired > 0
+                            ? Math.round(raid.energyTotal * (goalRequired / totalRequired))
+                            : Math.round(raid.energyTotal / Math.max(1, raid.relatedCharacters.length));
+                }
                 if (raidedToday) {
                     ++estimate.daysTotal;
                     estimate.daysLeft = index + 1;
                 }
-            });
+            }
             if (goal.type === PersonalGoalType.UpgradeRank) {
                 const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
                 const currentXp = this.currentCharacterXp(
@@ -164,9 +161,9 @@ export class GoalsService {
                 estimatedUpgradesTotal.blockedMaterials.find(m => m.relatedGoals.includes(goal.goalId)) !== undefined;
             estimate.completed = !estimate.blocked && estimate.oTokensTotal === 0 && estimate.energyTotal === 0;
             result.push(estimate);
-        });
+        }
 
-        if (upgradeAbilities.length) {
+        if (upgradeAbilities.length > 0) {
             for (const goal of upgradeAbilities) {
                 const targetLevel = Math.max(goal.activeEnd, goal.passiveEnd);
                 const currentXp = this.currentCharacterXp(
@@ -542,12 +539,12 @@ export class GoalsService {
     }
 
     private static adjustNeededXp(xpNeeded: number, heldBooks: Record<Rarity, number>): number {
-        while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
-            xpNeeded -= 62500;
+        while (xpNeeded >= 62_500 && heldBooks[Rarity.Mythic] > 0) {
+            xpNeeded -= 62_500;
             heldBooks[Rarity.Mythic] -= 1;
         }
-        while (xpNeeded >= 12500 && heldBooks[Rarity.Legendary] > 0) {
-            xpNeeded -= 12500;
+        while (xpNeeded >= 12_500 && heldBooks[Rarity.Legendary] > 0) {
+            xpNeeded -= 12_500;
             heldBooks[Rarity.Legendary] -= 1;
         }
         while (xpNeeded >= 2500 && heldBooks[Rarity.Epic] > 0) {
@@ -584,11 +581,11 @@ export class GoalsService {
                 heldBooks[Rarity.Epic] -= 1;
             }
             while (xpNeeded > 0 && heldBooks[Rarity.Legendary] > 0) {
-                xpNeeded = Math.max(0, xpNeeded - 12500);
+                xpNeeded = Math.max(0, xpNeeded - 12_500);
                 heldBooks[Rarity.Legendary] -= 1;
             }
             while (xpNeeded > 0 && heldBooks[Rarity.Mythic] > 0) {
-                xpNeeded = Math.max(0, xpNeeded - 62500);
+                xpNeeded = Math.max(0, xpNeeded - 62_500);
                 heldBooks[Rarity.Mythic] -= 1;
             }
         }
@@ -663,42 +660,42 @@ export class GoalsService {
                     continue;
                 }
                 const remainingXp = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
-                goal.xpBooksRequired = Math.floor(remainingXp / 12500);
+                goal.xpBooksRequired = Math.floor(remainingXp / 12_500);
                 const xpNeeded = this.adjustNeededXp(remainingXp, heldBooks);
-                goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / 12500);
+                goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / 12_500);
 
                 if (goal.xpEstimate || goal.xpEstimateAbilities) {
                     totalXpNeeded += xpNeeded;
-                    goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
+                    goal.xpBooksTotal = Math.floor(xpNeeded / 12_500);
                     if (totalXpNeeded === 0) {
                         goal.xpEstimate = undefined;
                         goal.xpEstimateAbilities = undefined;
                     } else {
                         if (goal.xpEstimate) {
-                            goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
+                            goal.xpEstimate.legendaryBooks = Math.floor(xpNeeded / 12_500);
                             goal.xpEstimate.xpLeft = xpNeeded;
                             if (xpIncomeState.manualBooksPerDay > 0) {
                                 const newAccrual = this.processGoalAccrual(
-                                    Math.ceil(xpNeeded / 12500),
+                                    Math.ceil(xpNeeded / 12_500),
                                     xpBooksAccrual,
                                     xpIncomeState.manualBooksPerDay
                                 );
                                 goal.xpDaysLeft = Math.ceil(
-                                    (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
+                                    (newAccrual.accruedDate.getTime() - today.getTime()) / 86_400_000
                                 );
                                 xpBooksAccrual = newAccrual;
                             }
                         } else {
-                            goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12500);
+                            goal.xpEstimateAbilities!.legendaryBooks = Math.floor(xpNeeded / 12_500);
                             goal.xpEstimateAbilities!.xpLeft = xpNeeded;
                             if (xpIncomeState.manualBooksPerDay > 0) {
                                 const newAccrual = this.processGoalAccrual(
-                                    Math.ceil(xpNeeded / 12500),
+                                    Math.ceil(xpNeeded / 12_500),
                                     xpBooksAccrual,
                                     xpIncomeState.manualBooksPerDay
                                 );
                                 goal.xpDaysLeft = Math.ceil(
-                                    (newAccrual.accruedDate.getTime() - today.getTime()) / 86400000
+                                    (newAccrual.accruedDate.getTime() - today.getTime()) / 86_400_000
                                 );
                                 xpBooksAccrual = newAccrual;
                             }
@@ -708,8 +705,8 @@ export class GoalsService {
 
                 if (goal.abilitiesEstimate === undefined && goal.mowEstimate === undefined) continue;
                 const badges = goal.mowEstimate?.badges ?? goal.abilitiesEstimate!.badges;
-                for (const [rarityStr, count] of Object.entries(badges)) {
-                    const rarity = Number(rarityStr) as Rarity;
+                for (const [rarityString, count] of Object.entries(badges)) {
+                    const rarity = Number(rarityString) as Rarity;
                     const alliance =
                         goal.abilitiesEstimate?.alliance ??
                         GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
@@ -727,13 +724,13 @@ export class GoalsService {
                 }
 
                 if (goal.mowEstimate === undefined) continue;
-                (Object.keys(goal.mowEstimate.forgeBadges) as unknown as Rarity[]).forEach(rarity => {
+                for (const rarity of Object.keys(goal.mowEstimate.forgeBadges) as unknown as Rarity[]) {
                     const count = goal.mowEstimate!.forgeBadges[rarity] ?? 0;
                     const toRemove = Math.min(count, heldForgeBadges[rarity] ?? 0);
                     goal.mowEstimate!.forgeBadges[rarity] = count - toRemove;
                     heldForgeBadges[rarity] = (heldForgeBadges[rarity] ?? 0) - toRemove;
                     neededForgeBadges[rarity] += goal.mowEstimate!.forgeBadges[rarity] ?? 0;
-                });
+                }
                 const components = goal.mowEstimate.components;
                 const alliance = GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
                 const held = heldComponents[alliance] ?? 0;
@@ -744,12 +741,12 @@ export class GoalsService {
             }
         } catch (error) {
             console.error('Error adjusting goal estimates:', error);
-            console.error('goals: ', JSON.stringify(goals));
-            console.error('goalsEstimate: ', JSON.stringify(goalsEstimate));
-            console.error('inventory: ', JSON.stringify(inventory));
-            console.error('xpUseState: ', JSON.stringify(xpUseState));
-            console.error('upgradeRankOrMowGoals: ', JSON.stringify(upgradeRankOrMowGoals));
-            console.error('xpIncomeState: ', JSON.stringify(xpIncomeState));
+            console.error('goals:', JSON.stringify(goals));
+            console.error('goalsEstimate:', JSON.stringify(goalsEstimate));
+            console.error('inventory:', JSON.stringify(inventory));
+            console.error('xpUseState:', JSON.stringify(xpUseState));
+            console.error('upgradeRankOrMowGoals:', JSON.stringify(upgradeRankOrMowGoals));
+            console.error('xpIncomeState:', JSON.stringify(xpIncomeState));
         }
 
         return {

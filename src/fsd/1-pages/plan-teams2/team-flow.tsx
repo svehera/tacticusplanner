@@ -10,7 +10,7 @@ import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapsh
 
 import { Teams2Service } from './teams2.service';
 
-interface Props {
+interface Properties {
     chars: ICharacter2[];
     mows: IMow2[];
     disabledUnits?: string[]; // List of character snowprintIds that should be shown as disabled
@@ -20,21 +20,21 @@ interface Props {
     onMowClicked: (mow: IMow2) => void;
 }
 
-export const TeamFlow: React.FC<Props> = ({
+export const TeamFlow: React.FC<Properties> = ({
     chars,
     mows,
     disabledUnits,
     flexIndex,
-    sizeMod = 1,
+    sizeMod: sizeModule = 1,
     onCharClicked,
     onMowClicked,
-}: Props) => {
+}: Properties) => {
     const core = chars.slice(0, flexIndex ?? chars.length);
     const flex = chars.slice(flexIndex ?? chars.length);
 
     return (
         <div
-            style={{ zoom: sizeMod }}
+            style={{ zoom: sizeModule }}
             className="w-full rounded-lg border-2 border-dashed border-slate-200 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-black/10">
             <div className="flex min-w-[120px] flex-1 flex-auto flex-wrap items-start gap-2">
                 {core.map(char => (

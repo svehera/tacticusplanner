@@ -22,7 +22,7 @@ export class CharactersAbilitiesService {
         ...x,
         rarity: this.getRarityFromLevel(x.lvl + 1),
     }));
-    static readonly legendaryTomeXp = 12500 as const;
+    static readonly legendaryTomeXp = 12_500 as const;
     static readonly legendaryTomeApplyCost = 500 as const;
     static xpLevelThresholds = mutableCopy(xpData.xpLevelThresholds) satisfies IXpLevel[];
 

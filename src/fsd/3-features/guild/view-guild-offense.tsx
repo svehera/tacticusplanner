@@ -12,12 +12,12 @@ import { GuildOffenseTable } from '@/fsd/3-features/guild/guild-offense-table';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuildWarOffensePlayer } from '@/fsd/3-features/guild/guild.models';
 
-interface Props {
+interface Properties {
     loading: boolean;
     guildWarPlayers: IGuildWarOffensePlayer[];
 }
 
-export const ViewGuildOffense: React.FC<Props> = ({ guildWarPlayers, loading }) => {
+export const ViewGuildOffense: React.FC<Properties> = ({ guildWarPlayers, loading }) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {

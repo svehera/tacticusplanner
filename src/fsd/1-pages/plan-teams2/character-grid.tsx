@@ -10,14 +10,19 @@ import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapsh
 
 import { Teams2Service } from './teams2.service';
 
-interface Props {
+interface Properties {
     characters: ICharacter2[];
     sizeMod: number;
     onCharacterSelect: (id: string) => void;
     showHeader: boolean;
 }
 
-export const CharacterGrid: React.FC<Props> = ({ characters, sizeMod, onCharacterSelect, showHeader }: Props) => {
+export const CharacterGrid: React.FC<Properties> = ({
+    characters,
+    sizeMod,
+    onCharacterSelect,
+    showHeader,
+}: Properties) => {
     return (
         <div>
             {showHeader && (

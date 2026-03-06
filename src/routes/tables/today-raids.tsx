@@ -6,11 +6,11 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
 import { MaterialItemInput } from '@/fsd/3-features/goals/material-item-input';
 
-interface Props {
+interface Properties {
     raids: IUpgradeRaid[];
 }
 
-export const TodayRaids: React.FC<Props> = ({ raids }: Props) => {
+export const TodayRaids: React.FC<Properties> = ({ raids }: Properties) => {
     const locs = raids.flatMap(raid => raid.raidLocations);
     const energySpent = sum(locs.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
     const raidsCount = sum(locs.map(loc => loc.raidsAlreadyPerformed));

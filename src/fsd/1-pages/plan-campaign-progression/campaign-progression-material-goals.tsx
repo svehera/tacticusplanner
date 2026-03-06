@@ -14,12 +14,12 @@ import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { BattleSavings, CampaignData, CampaignsProgressData } from './campaign-progression.models';
 import { CampaignsProgressionService } from './campaign-progression.service';
-interface Props {
+interface Properties {
     campaignData: CampaignData;
     progression: CampaignsProgressData;
 }
 
-export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData, progression }) => {
+export const CampaignProgressionMaterialGoals: React.FC<Properties> = ({ campaignData, progression }) => {
     const colDefs = useMemo(() => getColumnDefs(), [progression]);
     const mobileColDefs = useMemo(() => getMobileColumnDefs(), [progression]);
 
@@ -28,7 +28,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
      * one instance of `material`.
      */
     function getCharactersNeedingMaterial(material: string): string[] {
-        return Array.from(progression.charactersNeedingMaterials.get(material) ?? []);
+        return [...(progression.charactersNeedingMaterials.get(material) ?? [])];
     }
 
     /** @returns the quantity of this upgrade material that our goals require. */
@@ -82,8 +82,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                 headerName: 'Battle',
                 autoHeight: true,
                 width: 70,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return '';
                     const savings: BattleSavings = savingsData[0].savings;
                     return (
@@ -100,8 +100,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                 headerName: 'Mat.',
                 autoHeight: true,
                 width: 45,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return '';
                     const savings: BattleSavings = savingsData[0].savings;
                     const reward = UpgradesService.getUpgradeMaterial(
@@ -136,8 +136,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                 headerName: '#',
                 autoHeight: true,
                 flex: 1,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
                     return (
@@ -149,11 +149,20 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                 headerName: 'Savings',
                 autoHeight: true,
                 flex: 2,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
-                    if (!savings.canFarmPrior) {
+                    if (savings.canFarmPrior) {
+                        return (
+                            <Tooltip
+                                title={getSavingsTooltipText(CampaignsProgressionService.getReward(savings.battle))}>
+                                <span>
+                                    {savings.savings} <MiscIcon icon={'energy'} height={15} width={15} />
+                                </span>
+                            </Tooltip>
+                        );
+                    } else {
                         let tooltipText: string = '';
                         const battle = CampaignsProgressionService.getBattleFromBaseCampaignWithSameReward(
                             savings.battle,
@@ -170,15 +179,6 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                                 <span>Unlocks{battle === undefined ? '' : '*'}</span>
                             </Tooltip>
                         );
-                    } else {
-                        return (
-                            <Tooltip
-                                title={getSavingsTooltipText(CampaignsProgressionService.getReward(savings.battle))}>
-                                <span>
-                                    {savings.savings} <MiscIcon icon={'energy'} height={15} width={15} />
-                                </span>
-                            </Tooltip>
-                        );
                     }
                 },
             },
@@ -186,8 +186,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                 headerName: 'Cum. Savings',
                 autoHeight: true,
                 flex: 2,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
                     if (savings.canFarmPrior) {
@@ -212,8 +212,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                 headerName: 'A',
                 autoHeight: true,
                 width: 70,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return '';
                     const savings: BattleSavings = savingsData[0].savings;
                     return (
@@ -230,8 +230,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                 headerName: 'B',
                 autoHeight: true,
                 width: 35,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return '';
                     return <ArrowForward />;
                 },
@@ -240,8 +240,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                 headerName: 'C',
                 autoHeight: true,
                 width: 45,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return '';
                     const savings: BattleSavings = savingsData[0].savings;
                     const reward = UpgradesService.getUpgradeMaterial(
@@ -275,8 +275,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
             {
                 headerName: 'D',
                 autoHeight: true,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
                     return (
@@ -290,11 +290,20 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
             {
                 headerName: 'E',
                 autoHeight: true,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
-                    if (!savings.canFarmPrior) {
+                    if (savings.canFarmPrior) {
+                        return (
+                            <Tooltip
+                                title={getSavingsTooltipText(CampaignsProgressionService.getReward(savings.battle))}>
+                                <span>
+                                    Saves {savings.savings} <MiscIcon icon={'energy'} height={15} width={15} />
+                                </span>
+                            </Tooltip>
+                        );
+                    } else {
                         let tooltipText: string = '';
                         const battle = CampaignsProgressionService.getBattleFromBaseCampaignWithSameReward(
                             savings.battle,
@@ -311,23 +320,14 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                                 <span>Unlocks the material{battle === undefined ? '' : '*'}</span>
                             </Tooltip>
                         );
-                    } else {
-                        return (
-                            <Tooltip
-                                title={getSavingsTooltipText(CampaignsProgressionService.getReward(savings.battle))}>
-                                <span>
-                                    Saves {savings.savings} <MiscIcon icon={'energy'} height={15} width={15} />
-                                </span>
-                            </Tooltip>
-                        );
                     }
                 },
             },
             {
                 headerName: 'F',
                 autoHeight: true,
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
                     if (savings.canFarmPrior) {
@@ -344,14 +344,14 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                 headerName: 'G',
                 autoHeight: true,
                 cellStyle: { width: '100%' },
-                cellRenderer: (params: any) => {
-                    const savingsData = params.data.savingsData;
+                cellRenderer: (parameters: any) => {
+                    const savingsData = parameters.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
                     const characters = getCharactersNeedingMaterial(
                         CampaignsProgressionService.getReward(savings.battle)
                     );
-                    if (characters.length == 0) return <span></span>;
+                    if (characters.length === 0) return <span></span>;
                     return (
                         <div className="flex-box gap5 wrap" key={CampaignsProgressionService.getReward(savings.battle)}>
                             {characters.map(unitId => {

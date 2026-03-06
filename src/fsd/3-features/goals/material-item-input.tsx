@@ -11,11 +11,11 @@ import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
 
 import { UpgradesService } from './upgrades.service';
 
-interface Props {
+interface Properties {
     upgradeRaid: IUpgradeRaid;
 }
 
-export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid }) => {
+export const MaterialItemInput: React.FC<Properties> = ({ upgradeRaid }) => {
     const isAllRaidsCompleted =
         upgradeRaid.acquiredCount >= upgradeRaid.requiredCount ||
         upgradeRaid.raidLocations.every(location => location.raidsToPerform === 0);

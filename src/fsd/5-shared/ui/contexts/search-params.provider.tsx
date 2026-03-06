@@ -4,10 +4,10 @@ import { useSearchParams } from 'react-router-dom';
 import { SearchParamsStateContext } from './search-params.context';
 
 export const SearchParamsStateProvider = ({ children }: React.PropsWithChildren) => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParameters, setSearchParameters] = useSearchParams();
 
     return (
-        <SearchParamsStateContext.Provider value={[searchParams, setSearchParams]}>
+        <SearchParamsStateContext.Provider value={[searchParameters, setSearchParameters]}>
             {children}
         </SearchParamsStateContext.Provider>
     );

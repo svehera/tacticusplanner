@@ -10,21 +10,26 @@ import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreBattleProgress, ILreBattleRequirementsProgress } from './lre.models';
 import { STATUS_COLORS, STATUS_LABELS, STATUS_LABEL_TEXT } from './requirement-status-constants';
 
-interface Props {
+interface Properties {
     battle: ILreBattleProgress;
     maxKillPoints: number;
     projectedRestrictions: Set<string>;
-    setState: (req: ILreBattleRequirementsProgress, status: RequirementStatus, forceOverwrite?: boolean) => void;
+    setState: (request: ILreBattleRequirementsProgress, status: RequirementStatus, forceOverwrite?: boolean) => void;
 }
 
-export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, projectedRestrictions, setState }) => {
+export const LreTrackBattleSummary: React.FC<Properties> = ({
+    battle,
+    maxKillPoints,
+    projectedRestrictions,
+    setState,
+}) => {
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
     const [showDropdown, setShowDropdown] = useState<string | null>(null);
     const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
     const longPressTimer = useRef<NodeJS.Timeout | null>(null);
     const longPressTriggered = useRef<boolean>(false);
     const resetTriggerTimer = useRef<NodeJS.Timeout | null>(null);
-    const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+    const buttonReferences = useRef<Map<string, HTMLButtonElement>>(new Map());
 
     // Cleanup timers on unmount
     useEffect(() => {
@@ -42,7 +47,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
     useEffect(() => {
         const handleClickOutside = (event: Event) => {
             if (showDropdown) {
-                const button = buttonRefs.current.get(showDropdown);
+                const button = buttonReferences.current.get(showDropdown);
                 const target = event.target as Node;
                 if (button && target && !button.contains(target)) {
                     setShowDropdown(null);
@@ -62,12 +67,12 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
     }, [showDropdown]);
 
     // Long press handlers for both mouse and touch
-    const handlePressStart = (req: ILreBattleRequirementsProgress) => {
+    const handlePressStart = (request: ILreBattleRequirementsProgress) => {
         longPressTriggered.current = false;
         longPressTimer.current = setTimeout(() => {
             longPressTriggered.current = true;
             // Calculate dropdown position
-            const button = buttonRefs.current.get(req.id);
+            const button = buttonReferences.current.get(request.id);
             if (button) {
                 const buttonRect = button.getBoundingClientRect();
                 const viewportHeight = window.innerHeight;
@@ -80,7 +85,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                 } else {
                     setDropdownPosition('bottom');
                 }
-                setShowDropdown(req.id);
+                setShowDropdown(request.id);
             }
         }, 500); // 500ms for long press
     };
@@ -105,23 +110,23 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
         }
     };
 
-    const handleDirectStatusChange = (req: ILreBattleRequirementsProgress, newStatus: RequirementStatus) => {
+    const handleDirectStatusChange = (request: ILreBattleRequirementsProgress, newStatus: RequirementStatus) => {
         setShowDropdown(null);
-        handleStatusChange(req, newStatus);
+        handleStatusChange(request, newStatus);
     };
 
     // Convert legacy boolean flags to RequirementStatus
-    const getRequirementStatus = (req: ILreBattleRequirementsProgress): RequirementStatus => {
+    const getRequirementStatus = (request: ILreBattleRequirementsProgress): RequirementStatus => {
         // If new status field exists, use it
-        if (req.status !== undefined) {
-            return req.status as RequirementStatus;
+        if (request.status !== undefined) {
+            return request.status as RequirementStatus;
         }
 
         // Legacy conversion
-        if (req.completed) {
+        if (request.completed) {
             return RequirementStatus.Cleared;
         }
-        if (req.blocked) {
+        if (request.blocked) {
             return RequirementStatus.StopHere;
         }
         return RequirementStatus.NotCleared;
@@ -131,58 +136,64 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
     // NotCleared (0) → Cleared (1) → MaybeClear (2) → StopHere (3) → NotCleared (0)
     const getNextStatus = (currentStatus: RequirementStatus): RequirementStatus => {
         switch (currentStatus) {
-            case RequirementStatus.NotCleared:
+            case RequirementStatus.NotCleared: {
                 return RequirementStatus.Cleared;
-            case RequirementStatus.Cleared:
+            }
+            case RequirementStatus.Cleared: {
                 return RequirementStatus.MaybeClear;
-            case RequirementStatus.MaybeClear:
+            }
+            case RequirementStatus.MaybeClear: {
                 return RequirementStatus.StopHere;
-            case RequirementStatus.StopHere:
+            }
+            case RequirementStatus.StopHere: {
                 return RequirementStatus.NotCleared;
-            default:
+            }
+            default: {
                 return RequirementStatus.NotCleared;
+            }
         }
     };
 
     // Handle cycling button click for non-killScore requirements
-    const handleCycleStatus = (req: ILreBattleRequirementsProgress) => {
-        const currentStatus = getRequirementStatus(req);
+    const handleCycleStatus = (request: ILreBattleRequirementsProgress) => {
+        const currentStatus = getRequirementStatus(request);
         const nextStatus = getNextStatus(currentStatus);
-        handleStatusChange(req, nextStatus);
+        handleStatusChange(request, nextStatus);
     };
 
     // Convert RequirementStatus back to ProgressState for toggleState
     const handleStatusChange = (
-        req: ILreBattleRequirementsProgress,
+        request: ILreBattleRequirementsProgress,
         status: RequirementStatus,
         score?: number,
         forceOverwrite?: boolean
     ) => {
         // Update the requirement with new status
-        req.status = status;
+        request.status = status;
 
         // Set the appropriate score field based on requirement type
-        if (req.id === LrePointsCategoryId.killScore) {
-            req.killScore = score;
-        } else if (req.id === LrePointsCategoryId.highScore) {
-            req.highScore = score;
+        if (request.id === LrePointsCategoryId.killScore) {
+            request.killScore = score;
+        } else if (request.id === LrePointsCategoryId.highScore) {
+            request.highScore = score;
         }
 
         // Also update legacy fields for backward compatibility
-        req.completed = status === RequirementStatus.Cleared;
-        req.blocked = status === RequirementStatus.StopHere;
+        request.completed = status === RequirementStatus.Cleared;
+        request.blocked = status === RequirementStatus.StopHere;
 
-        setState(req, status, forceOverwrite);
+        setState(request, status, forceOverwrite);
     };
 
     const allCompleted = useMemo((): boolean => {
-        return battle.requirementsProgress.every(req => req.completed);
+        return battle.requirementsProgress.every(request => request.completed);
     }, [battle]);
 
     const handleToggle = () => {
         if (
             battle.requirementsProgress.some(
-                req => req.status === RequirementStatus.MaybeClear || req.status === RequirementStatus.StopHere
+                request =>
+                    request.status === RequirementStatus.MaybeClear || request.status === RequirementStatus.StopHere
             )
         ) {
             handleOpenConfirmDialog();
@@ -212,11 +223,11 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
     };
 
     const handleToggleAll = () => {
-        battle.requirementsProgress.forEach(req => {
+        for (const request of battle.requirementsProgress) {
             // Use handleStatusChange to properly set status and clear killScore
             const newStatus = allCompleted ? RequirementStatus.NotCleared : RequirementStatus.Cleared;
-            handleStatusChange(req, newStatus, undefined, true); // Force overwrite when toggling
-        });
+            handleStatusChange(request, newStatus, undefined, true); // Force overwrite when toggling
+        }
     };
 
     return (
@@ -236,62 +247,64 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                         const firstRestrictionIndex = LreRequirementStatusService.getFirstRestrictionIndex(
                             battle.requirementsProgress
                         );
-                        return battle.requirementsProgress.map((req, index) => {
-                            const isKillScore = req.id === LrePointsCategoryId.killScore;
-                            const isHighScore = req.id === LrePointsCategoryId.highScore;
+                        return battle.requirementsProgress.map((request, index) => {
+                            const isKillScore = request.id === LrePointsCategoryId.killScore;
+                            const isHighScore = request.id === LrePointsCategoryId.highScore;
                             const isFirstRestriction = index === firstRestrictionIndex;
 
-                            const status = getRequirementStatus(req);
+                            const status = getRequirementStatus(request);
 
                             // Use BattleStatusCheckbox with dropdown for score requirements (killScore or highScore)
                             const isScoreRequirement = isKillScore || isHighScore;
                             if (isScoreRequirement) {
                                 return (
                                     <BattleStatusCheckbox
-                                        key={req.id}
+                                        key={request.id}
                                         status={status}
-                                        score={isKillScore ? req.killScore : req.highScore}
+                                        score={isKillScore ? request.killScore : request.highScore}
                                         scoreType={isKillScore ? 'killScore' : 'highScore'}
                                         maxScore={maxKillPoints}
-                                        onChange={(newStatus, newScore) => handleStatusChange(req, newStatus, newScore)}
+                                        onChange={(newStatus, newScore) =>
+                                            handleStatusChange(request, newStatus, newScore)
+                                        }
                                     />
                                 );
                             }
 
                             // Use simple cycling button for other requirements
-                            const isProjected = projectedRestrictions.has(req.id);
+                            const isProjected = projectedRestrictions.has(request.id);
                             const isNotSet = status === RequirementStatus.NotCleared;
                             const shouldShowGreenBorder = isProjected && isNotSet;
 
                             return (
                                 <div
-                                    key={req.id}
+                                    key={request.id}
                                     className={`relative inline-block ${isFirstRestriction ? 'ml-4' : ''}`}>
                                     <button
-                                        ref={el => {
-                                            if (el) {
-                                                buttonRefs.current.set(req.id, el);
+                                        ref={element => {
+                                            if (element) {
+                                                buttonReferences.current.set(request.id, element);
                                             } else {
-                                                buttonRefs.current.delete(req.id);
+                                                buttonReferences.current.delete(request.id);
                                             }
                                         }}
                                         onClick={() => {
                                             // Don't cycle if dropdown is showing or long press was just triggered
-                                            if (showDropdown !== req.id && !longPressTriggered.current) {
-                                                handleCycleStatus(req);
+                                            if (showDropdown !== request.id && !longPressTriggered.current) {
+                                                handleCycleStatus(request);
                                             }
                                         }}
                                         onContextMenu={e => e.preventDefault()}
-                                        onMouseDown={() => handlePressStart(req)}
+                                        onMouseDown={() => handlePressStart(request)}
                                         onMouseUp={handlePressEnd}
                                         onMouseLeave={handlePressEnd}
-                                        onTouchStart={() => handlePressStart(req)}
+                                        onTouchStart={() => handlePressStart(request)}
                                         onTouchEnd={handlePressEnd}
-                                        aria-label={`${req.id} - ${STATUS_LABEL_TEXT[status] || 'Unknown'}`}
+                                        aria-label={`${request.id} - ${STATUS_LABEL_TEXT[status] || 'Unknown'}`}
                                         aria-pressed={status === RequirementStatus.Cleared}
                                         aria-haspopup="menu"
-                                        aria-expanded={showDropdown === req.id}
-                                        aria-controls={`dropdown-${req.id}`}
+                                        aria-expanded={showDropdown === request.id}
+                                        aria-controls={`dropdown-${request.id}`}
                                         className="size-8 rounded border-2 p-1 text-center text-sm font-bold select-none md:size-10 md:p-1.5 md:text-base"
                                         style={{
                                             color: shouldShowGreenBorder
@@ -302,9 +315,9 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                                         {STATUS_LABELS[status]}
                                     </button>
 
-                                    {showDropdown === req.id && (
+                                    {showDropdown === request.id && (
                                         <div
-                                            id={`dropdown-${req.id}`}
+                                            id={`dropdown-${request.id}`}
                                             role="menu"
                                             className="absolute z-50 rounded border border-gray-300 bg-white shadow-lg dark:border-gray-600 dark:bg-gray-800"
                                             style={
@@ -328,7 +341,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                                                     role="menuitem"
                                                     onClick={e => {
                                                         e.stopPropagation();
-                                                        handleDirectStatusChange(req, statusOption);
+                                                        handleDirectStatusChange(request, statusOption);
                                                     }}
                                                     className="flex w-full items-center justify-center px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
                                                     style={{

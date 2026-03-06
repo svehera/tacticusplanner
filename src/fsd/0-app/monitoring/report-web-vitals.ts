@@ -7,7 +7,7 @@ const reportWebVitals = (onReport: (metric: MetricWithAttribution) => void) => {
         if (onReport) {
             onReport(metric); // Optional: handle metrics in your own function
         }
-        const eventParams = {
+        const eventParameters = {
             // Built-in params:
             value: metric.delta, // Use `delta` so the value can be summed.
             // Custom params:
@@ -18,28 +18,33 @@ const reportWebVitals = (onReport: (metric: MetricWithAttribution) => void) => {
         };
 
         switch (metric.name) {
-            case 'CLS':
-                eventParams.debug_target = metric.attribution.largestShiftTarget ?? '';
+            case 'CLS': {
+                eventParameters.debug_target = metric.attribution.largestShiftTarget ?? '';
                 break;
-            case 'INP':
-                eventParams.debug_target = metric.attribution.interactionTarget;
+            }
+            case 'INP': {
+                eventParameters.debug_target = metric.attribution.interactionTarget;
                 break;
-            case 'LCP':
-                eventParams.debug_target = metric.attribution.element ?? '';
+            }
+            case 'LCP': {
+                eventParameters.debug_target = metric.attribution.element ?? '';
                 break;
-            case 'TTFB':
-                eventParams.debug_target = metric.attribution.navigationEntry?.name ?? '';
+            }
+            case 'TTFB': {
+                eventParameters.debug_target = metric.attribution.navigationEntry?.name ?? '';
                 break;
-            case 'FCP':
-                eventParams.debug_target = metric.attribution.fcpEntry?.name ?? '';
+            }
+            case 'FCP': {
+                eventParameters.debug_target = metric.attribution.fcpEntry?.name ?? '';
                 break;
+            }
         }
 
         // Track the metric to Google Analytics via `analytics`
         analytics.track(metric.name, {
             category: 'Web Vitals',
             label: metric.name, // Metric name (e.g., CLS, LCP)
-            ...eventParams,
+            ...eventParameters,
         });
     };
 

@@ -15,11 +15,11 @@ import { IUnit } from '@/fsd/3-features/characters/characters.models';
 
 import { InfoTeamGraphBox } from './info-team-graph-box';
 
-interface Props {
+interface Properties {
     units: IUnit[];
 }
 
-export const TeamGraph: React.FC<Props> = ({ units }) => {
+export const TeamGraph: React.FC<Properties> = ({ units }) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -34,7 +34,7 @@ export const TeamGraph: React.FC<Props> = ({ units }) => {
     const teamPowerData: { x: string; y: number }[] = [];
     const teamAttributeData: { x: string; y: number }[] = [];
     const teamAbilityData: { x: string; y: number }[] = [];
-    units.forEach(character => {
+    for (const character of units) {
         const power = CharactersPowerService.getCharacterPower(character);
         const attributePower = CharactersPowerService.getCharacterAttributePower(character);
         const abilityPower = CharactersPowerService.getCharacterAbilityPower(character);
@@ -42,7 +42,7 @@ export const TeamGraph: React.FC<Props> = ({ units }) => {
         teamPowerData.push({ x: character.name, y: power });
         teamAttributeData.push({ x: character.name, y: attributePower });
         teamAbilityData.push({ x: character.name, y: abilityPower });
-    });
+    }
 
     const sortByPower = (a: { x: string; y: number }, b: { x: string; y: number }) => b.y - a.y;
     teamPowerData.sort(sortByPower);
@@ -93,9 +93,9 @@ export const TeamGraph: React.FC<Props> = ({ units }) => {
                                 type: 'linear',
                                 reverse: false,
                                 min: -2500,
-                                max: 40000,
+                                max: 40_000,
                             }}
-                            gridYValues={[851, 2212, 5097, 11194, 23758, 40000]}
+                            gridYValues={[851, 2212, 5097, 11_194, 23_758, 40_000]}
                             useMesh={true}
                             animate={false}
                         />

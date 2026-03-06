@@ -12,13 +12,13 @@ import { ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
 
-interface Props {
+interface Properties {
     team: ILreTeam;
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     menuItemSelect: (action: 'edit' | 'delete') => void;
 }
 
-export const SelectedTeamCard: React.FC<Props> = ({ team, upgradeRankOrMowGoals, menuItemSelect }) => {
+export const SelectedTeamCard: React.FC<Properties> = ({ team, upgradeRankOrMowGoals, menuItemSelect }) => {
     const { viewPreferences } = useContext(StoreContext);
     let subheader = team.restrictionsIds.join(', ');
     if (team.points) subheader += ` (${team.points} points)`;

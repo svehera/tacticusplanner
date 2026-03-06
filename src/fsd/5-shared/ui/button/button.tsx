@@ -1,13 +1,13 @@
 import React from 'react';
 import {
     Button as ButtonPrimitive,
-    type ButtonProps as ButtonPrimitiveProps,
+    type ButtonProps as ButtonPrimitiveProperties,
     composeRenderProps,
 } from 'react-aria-components';
 
 import { buttonStyles } from './button-styles';
 
-interface ButtonProps extends ButtonPrimitiveProps {
+interface ButtonProperties extends ButtonPrimitiveProperties {
     intent?: 'primary' | 'secondary' | 'danger' | 'warning';
     size?: 'medium' | 'large' | 'square-petite' | 'extra-small' | 'small';
     shape?: 'square' | 'circle';
@@ -15,14 +15,14 @@ interface ButtonProps extends ButtonPrimitiveProps {
     ref?: React.Ref<HTMLButtonElement>;
 }
 
-const Button: React.FC<ButtonProps> = ({ className, intent, appearance, size, shape, ref, ...props }) => {
+const Button: React.FC<ButtonProperties> = ({ className, intent, appearance, size, shape, ref, ...properties }) => {
     return (
         <ButtonPrimitive
             ref={ref}
-            {...props}
-            className={composeRenderProps(className, (className, renderProps) =>
+            {...properties}
+            className={composeRenderProps(className, (className, renderProperties) =>
                 buttonStyles({
-                    ...renderProps,
+                    ...renderProperties,
                     intent,
                     appearance,
                     size,
@@ -30,10 +30,12 @@ const Button: React.FC<ButtonProps> = ({ className, intent, appearance, size, sh
                     className,
                 })
             )}>
-            {values => <>{typeof props.children === 'function' ? props.children(values) : props.children}</>}
+            {values => (
+                <>{typeof properties.children === 'function' ? properties.children(values) : properties.children}</>
+            )}
         </ButtonPrimitive>
     );
 };
 
-export type { ButtonProps };
+export type { ButtonProperties as ButtonProps };
 export { Button };

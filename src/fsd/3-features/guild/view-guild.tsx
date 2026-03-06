@@ -9,11 +9,11 @@ import { IGuildWarPlayer } from '@/fsd/3-features/guild/guild.models';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { PlayersTable } from '@/fsd/3-features/guild/players-table';
 
-interface Props {
+interface Properties {
     guildWarPlayers: IGuildWarPlayer[];
 }
 
-export const ViewGuild: React.FC<Props> = ({ guildWarPlayers }) => {
+export const ViewGuild: React.FC<Properties> = ({ guildWarPlayers }) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {

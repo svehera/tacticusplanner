@@ -145,50 +145,47 @@ export const GuildWarOffense = () => {
 
     const renderTeams = useMemo(
         () =>
-            teamsWithCharacters.map((currTeam, i) => (
+            teamsWithCharacters.map((currentTeam, index) => (
                 <TeamCard
-                    key={currTeam.id}
-                    team={currTeam}
+                    key={currentTeam.id}
+                    team={currentTeam}
                     actions={
                         <>
-                            <Button size="small" onClick={() => startEditTeam(currTeam)}>
+                            <Button size="small" onClick={() => startEditTeam(currentTeam)}>
                                 Edit
                             </Button>
-                            <Conditional condition={!!currTeam.lineup.length}>
-                                <Button size="small" color="error" onClick={() => clearTeam(currTeam.id)}>
+                            <Conditional condition={currentTeam.lineup.length > 0}>
+                                <Button size="small" color="error" onClick={() => clearTeam(currentTeam.id)}>
                                     Clear
                                 </Button>
                             </Conditional>
                             <Conditional
-                                condition={
-                                    !!currTeam.lineup.length &&
-                                    currTeam.lineup.some(
-                                        character => !guildWar.deployedCharacters.includes(character.name)
-                                    )
-                                }>
-                                <Button size="small" onClick={() => deployTeam(currTeam.lineup.map(x => x.name))}>
+                                condition={currentTeam.lineup.some(
+                                    character => !guildWar.deployedCharacters.includes(character.name)
+                                )}>
+                                <Button size="small" onClick={() => deployTeam(currentTeam.lineup.map(x => x.name))}>
                                     Deploy
                                 </Button>
                             </Conditional>
                             <Conditional
                                 condition={
-                                    !!currTeam.lineup.length &&
-                                    currTeam.lineup.every(character =>
+                                    currentTeam.lineup.length > 0 &&
+                                    currentTeam.lineup.every(character =>
                                         guildWar.deployedCharacters.includes(character.name)
                                     )
                                 }>
-                                <Button size="small" onClick={() => withdrawTeam(currTeam.lineup.map(x => x.name))}>
+                                <Button size="small" onClick={() => withdrawTeam(currentTeam.lineup.map(x => x.name))}>
                                     Withdraw
                                 </Button>
                             </Conditional>
                         </>
                     }
-                    onEdit={() => startEditTeam(currTeam)}
-                    teamPotential={teamsPotential[i].total}
+                    onEdit={() => startEditTeam(currentTeam)}
+                    teamPotential={teamsPotential[index].total}
                     onCharacterClick={startEditCharacter}
                     teamPotentialBreakdown={
                         <div className="flex-box column start">
-                            {teamsPotential[i].lineup.map(char => (
+                            {teamsPotential[index].lineup.map(char => (
                                 <span key={char.id}>
                                     {char.potential} - {char.id}
                                 </span>
@@ -236,7 +233,7 @@ export const GuildWarOffense = () => {
             x => x.length
         );
 
-        if (!Object.values(slots).length) {
+        if (Object.values(slots).length === 0) {
             return 'Empty. Add some characters to the teams below';
         }
 
@@ -361,7 +358,9 @@ export const GuildWarOffense = () => {
                             </div>
                         </AccessibleTooltip>
                     </div>
-                    {!!guild.members.length && <ViewGuildOffense guildWarPlayers={guildWarPlayers} loading={loading} />}
+                    {guild.members.length > 0 && (
+                        <ViewGuildOffense guildWarPlayers={guildWarPlayers} loading={loading} />
+                    )}
                     <div className="flex-box gap5">Your teams: {getTeamsSlots}</div>
                     <div className="flex-box gap5">
                         Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}

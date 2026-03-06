@@ -12,7 +12,7 @@ import DailyRaidsSettings from 'src/shared-components/daily-raids-settings';
 
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-interface Props extends React.PropsWithChildren {
+interface Properties extends React.PropsWithChildren {
     actualDailyEnergy: string;
     resetHandler: () => void;
     refreshHandle: () => void;
@@ -22,7 +22,7 @@ interface Props extends React.PropsWithChildren {
     hasSync: boolean;
 }
 
-export const RaidsHeader: React.FC<Props> = ({
+export const RaidsHeader: React.FC<Properties> = ({
     actualDailyEnergy,
     children,
     refreshDisabled,

@@ -16,7 +16,7 @@ import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/ros
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';
 import { CharactersViewContext } from '../characters-view.context';
 
-const CharactersGridFn = ({
+const CharactersGridFunction = ({
     characters,
     blockedCharacters = [],
     onAvailableCharacterClick,
@@ -44,8 +44,8 @@ const CharactersGridFn = ({
                         key={unit.snowprintId!}
                         char={isCharacter ? RosterSnapshotsService.snapshotCharacter(unit) : undefined}
                         charData={isCharacter ? unit : undefined}
-                        mow={!isCharacter ? RosterSnapshotsService.snapshotMachineOfWar(unit) : undefined}
-                        mowData={!isCharacter ? unit : undefined}
+                        mow={isCharacter ? undefined : RosterSnapshotsService.snapshotMachineOfWar(unit)}
+                        mowData={isCharacter ? undefined : unit}
                         showShards={
                             viewContext.showCharacterLevel
                                 ? RosterSnapshotShowVariableSettings.Always
@@ -92,8 +92,8 @@ const CharactersGridFn = ({
                         key={unit.snowprintId!}
                         char={isCharacter ? RosterSnapshotsService.snapshotCharacter(unit) : undefined}
                         charData={isCharacter ? unit : undefined}
-                        mow={!isCharacter ? RosterSnapshotsService.snapshotMachineOfWar(unit) : undefined}
-                        mowData={!isCharacter ? unit : undefined}
+                        mow={isCharacter ? undefined : RosterSnapshotsService.snapshotMachineOfWar(unit)}
+                        mowData={isCharacter ? undefined : unit}
                         showShards={RosterSnapshotShowVariableSettings.Always}
                         showMythicShards={RosterSnapshotShowVariableSettings.Always}
                         showXpLevel={RosterSnapshotShowVariableSettings.Never}
@@ -114,7 +114,7 @@ const CharactersGridFn = ({
                 {unlockedCharacters}
             </div>
 
-            <Conditional condition={!!lockedCharacters.length}>
+            <Conditional condition={lockedCharacters.length > 0}>
                 <h4>Locked ({lockedCharacters.length})</h4>
                 <div
                     className="flex flex-wrap [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
@@ -126,4 +126,4 @@ const CharactersGridFn = ({
     );
 };
 
-export const CharactersGrid = React.memo(CharactersGridFn);
+export const CharactersGrid = React.memo(CharactersGridFunction);

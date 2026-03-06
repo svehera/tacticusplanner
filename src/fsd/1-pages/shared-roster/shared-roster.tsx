@@ -35,14 +35,14 @@ export const SharedRoster = () => {
     });
     const [nameFilter, setNameFilter] = useState<string | null>(null);
 
-    const [searchParams] = useSearchParams();
+    const [searchParameters] = useSearchParams();
 
-    const sharedUser = searchParams.get('username');
-    const shareToken = searchParams.get('shareToken');
+    const sharedUser = searchParameters.get('username');
+    const shareToken = searchParameters.get('shareToken');
 
-    const hasValidParams = !!sharedUser && !!shareToken;
+    const hasValidParameters = !!sharedUser && !!shareToken;
 
-    if (!hasValidParams) {
+    if (!hasValidParameters) {
         return <>Invalid page params</>;
     }
 

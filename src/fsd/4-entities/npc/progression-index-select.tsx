@@ -8,7 +8,7 @@ import { RankIcon } from '../character';
 
 import { INpcData } from './model';
 
-interface Props {
+interface Properties {
     label: string;
     npc: INpcData;
     index: number;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 /** Exposes a select (list box) with the given NPCs. */
-export const ProgressionIndexSelect: React.FC<Props> = ({ label, npc, index, indexChanges }) => {
+export const ProgressionIndexSelect: React.FC<Properties> = ({ label, npc, index, indexChanges }) => {
     return (
         <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>

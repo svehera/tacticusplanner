@@ -7,13 +7,13 @@ import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import { AssetContext } from './roster-snapshots-assets-context';
 
-interface RosterSnapshotsAssetsProviderProps {
+interface RosterSnapshotsAssetsProviderProperties {
     children: React.ReactNode;
 }
 
-export const RosterSnapshotsAssetsProvider: React.FC<RosterSnapshotsAssetsProviderProps> = ({
+export const RosterSnapshotsAssetsProvider: React.FC<RosterSnapshotsAssetsProviderProperties> = ({
     children,
-}: RosterSnapshotsAssetsProviderProps) => {
+}: RosterSnapshotsAssetsProviderProperties) => {
     const charFrameCommon = useImage(tacticusIcons['commonFrame'].file);
     const charFrameUncommon = useImage(tacticusIcons['uncommonFrame'].file);
     const charFrameRare = useImage(tacticusIcons['rareFrame'].file);

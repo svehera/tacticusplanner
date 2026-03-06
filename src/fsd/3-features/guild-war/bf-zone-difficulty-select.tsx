@@ -15,12 +15,12 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuildWarService } from '@/fsd/3-features/guild-war/guild-war.service';
 
-type Props = {
+type Properties = {
     value: Difficulty;
     valueChange: (value: Difficulty) => void;
 };
 
-export const BfZoneDifficultySelect: React.FC<Props> = ({ value, valueChange }) => {
+export const BfZoneDifficultySelect: React.FC<Properties> = ({ value, valueChange }) => {
     const options = GuildWarService.gwData.difficulties.map((difficulty, index) => {
         const slots = GuildWarService.getDifficultyRarityCapsGrouped(index + 1);
         const rarityCaps = (

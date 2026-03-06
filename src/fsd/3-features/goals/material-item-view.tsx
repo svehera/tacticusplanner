@@ -8,11 +8,11 @@ import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MaterialItemTitle } from '@/fsd/3-features/goals/material-item-title';
 
-interface Props {
+interface Properties {
     upgradeRaid: IUpgradeRaid;
 }
 
-export const MaterialItemView: React.FC<Props> = ({ upgradeRaid }) => {
+export const MaterialItemView: React.FC<Properties> = ({ upgradeRaid }) => {
     return (
         <div style={{ opacity: upgradeRaid.isBlocked ? 0.5 : 1 }}>
             <MaterialItemTitle upgradeRaid={upgradeRaid} />
