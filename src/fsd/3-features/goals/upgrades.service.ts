@@ -882,7 +882,7 @@ export class UpgradesService {
             .filter(loc => loc.isSuggested)
             .map(loc => loc.energyPerDay / loc.energyPerItem)
             .reduce((acc, x) => acc + x, 0);
-        return Math.ceil(totalMatsNeeded / matsPerDay);
+        return totalMatsNeeded / matsPerDay;
     }
 
     /**
