@@ -57,6 +57,17 @@ export const RaidsPlan: React.FC<Props> = ({
     const [grid2Loaded, setGrid2Loaded] = useState<boolean>(false);
     const [grid3Loaded, setGrid3Loaded] = useState<boolean>(false);
 
+    const [expandedPanels, setExpandedPanels] = useState(() => ({
+        related: false,
+        inProgress: false,
+        finished: false,
+        blocked: false,
+        raids: true,
+    }));
+
+    const togglePanel = (key: keyof typeof expandedPanels) => (_: any, isExpanded: boolean) =>
+        setExpandedPanels(prev => ({ ...prev, [key]: isExpanded }));
+
     const itemRefs = useRef<RefMap>({});
     const setCardRef = useCallback(
         (id: number) => (element: RefElem) => {
@@ -159,13 +170,43 @@ export const RaidsPlan: React.FC<Props> = ({
                         <span>
                             <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} />)
                         </span>
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={viewPreferences.raidsTableView}
+                                    onChange={event => {
+                                        event.stopPropagation();
+                                        updateView(event.target.checked);
+                                    }}
+                                    onClick={e => e.stopPropagation()}
+                                    onFocus={e => e.stopPropagation()}
+                                    onMouseDown={e => e.stopPropagation()}
+                                />
+                            }
+                            label={
+                                <div className="flex-box gap5">
+                                    {viewPreferences.raidsTableView ? (
+                                        <div className="flex-box gap5">
+                                            <TableRowsIcon color="primary" /> <span>Table View</span>
+                                        </div>
+                                    ) : (
+                                        <div className="flex-box gap5">
+                                            <GridViewIcon color="primary" /> <span>Cards View</span>
+                                        </div>
+                                    )}
+                                </div>
+                            }
+                        />
                     </div>
                     <span className="italic">{calendarDateTotal}</span>
                 </FlexBox>
             </AccordionSummary>
             <AccordionDetails>
                 {!!estimatedRanks.relatedUpgrades.length && (
-                    <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
+                    <Accordion
+                        TransitionProps={{ unmountOnExit: !grid1Loaded }}
+                        expanded={expandedPanels.related}
+                        onChange={togglePanel('related')}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <InventoryIcon />
@@ -179,33 +220,13 @@ export const RaidsPlan: React.FC<Props> = ({
                 )}
                 {!!estimatedRanks.inProgressMaterials.length && (
                     <Accordion
-                        defaultExpanded={scrollToCharSnowprintId !== undefined}
+                        expanded={expandedPanels.inProgress}
+                        onChange={togglePanel('inProgress')}
                         TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <PendingIcon color={'primary'} />
                                 <b>{estimatedRanks.inProgressMaterials.length}</b> in progress upgrades
-                                <FormControlLabel
-                                    control={
-                                        <Switch
-                                            checked={viewPreferences.raidsTableView}
-                                            onChange={event => updateView(event.target.checked)}
-                                        />
-                                    }
-                                    label={
-                                        <div className="flex-box gap5">
-                                            {viewPreferences.raidsTableView ? (
-                                                <div className="flex-box gap5">
-                                                    <TableRowsIcon color="primary" /> <span>Table View</span>
-                                                </div>
-                                            ) : (
-                                                <div className="flex-box gap5">
-                                                    <GridViewIcon color="primary" /> <span>Cards View</span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    }
-                                />
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -243,7 +264,10 @@ export const RaidsPlan: React.FC<Props> = ({
                     </Accordion>
                 )}
                 {!!estimatedRanks.finishedMaterials.length && (
-                    <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
+                    <Accordion
+                        TransitionProps={{ unmountOnExit: !grid3Loaded }}
+                        expanded={expandedPanels.finished}
+                        onChange={togglePanel('finished')}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <CheckCircleIcon color={'success'} /> <b>{estimatedRanks.finishedMaterials.length}</b>{' '}
@@ -284,7 +308,10 @@ export const RaidsPlan: React.FC<Props> = ({
                     </Accordion>
                 )}
                 {!!estimatedRanks.blockedMaterials.length && (
-                    <Accordion TransitionProps={{ unmountOnExit: !grid2Loaded }}>
+                    <Accordion
+                        TransitionProps={{ unmountOnExit: !grid2Loaded }}
+                        expanded={expandedPanels.blocked}
+                        onChange={togglePanel('blocked')}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <AccessibleTooltip
                                 title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} upgrades`}>
@@ -338,7 +365,10 @@ export const RaidsPlan: React.FC<Props> = ({
                 )}
 
                 {!!estimatedRanks.upgradesRaids.length && (
-                    <Accordion TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
+                    <Accordion
+                        TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}
+                        expanded={expandedPanels.raids}
+                        onChange={togglePanel('raids')}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <FlexBox className="flex-col items-start">
                                 <div className="flex-box gap5 wrap" style={{ fontSize: isMobile ? 16 : 20 }}>

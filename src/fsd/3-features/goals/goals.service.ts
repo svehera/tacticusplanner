@@ -159,10 +159,11 @@ export class GoalsService {
                     ...mowMaterials.slice(goal.secondaryStart - 1, goal.secondaryEnd - 1),
                 ]);
             }
+            estimate.included = goal.include;
             estimate.blocked =
-                !goal.include ||
                 estimatedUpgradesTotal.blockedMaterials.find(m => m.relatedGoals.includes(goal.goalId)) !== undefined;
-            estimate.completed = !estimate.blocked && estimate.oTokensTotal === 0 && estimate.energyTotal === 0;
+            estimate.completed =
+                !estimate.blocked && estimate.included && estimate.oTokensTotal === 0 && estimate.energyTotal === 0;
             result.push(estimate);
         });
 
@@ -197,6 +198,7 @@ export class GoalsService {
                     oTokensTotal: 0,
                     daysTotal: 0,
                     xpBooksTotal: 0,
+                    included: goal.include,
                 });
             }
         }
