@@ -92,6 +92,9 @@ export interface IGoalEstimate {
     completed?: boolean;
     /** If the goal is currently blocked and cannot be completed (though you might be able to progress). */
     blocked?: boolean;
+
+    /** Set if the goal is selected to be included in raiding. False otherwise. */
+    included?: boolean;
 }
 
 export interface IEstimatedAscensionSettings {
