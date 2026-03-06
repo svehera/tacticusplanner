@@ -16,7 +16,7 @@ import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
-import { renderRestrictions, renderTeam } from './le-token-render-utils';
+import { renderRestrictions, renderTeam } from './le-token-render-utilities';
 import { LeTokenService } from './le-token-service';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';

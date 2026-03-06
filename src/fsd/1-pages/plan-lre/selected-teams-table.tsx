@@ -46,7 +46,7 @@ export const SelectedTeamsTable: React.FC<Properties> = ({
     const { viewPreferences } = useContext(StoreContext);
     const gridReference = useRef<AgGridReact>(null);
 
-    const defaultColumnDef: ColDef<ITableRow> = {
+    const defaultColumnDefinition: ColDef<ITableRow> = {
         headerClass: 'center-header-text',
         resizable: true,
         sortable: false,
@@ -129,7 +129,7 @@ export const SelectedTeamsTable: React.FC<Properties> = ({
                 rowData={rows}
                 rowHeight={35}
                 getRowStyle={getRowStyle}
-                defaultColDef={defaultColumnDef}
+                defaultColDef={defaultColumnDefinition}
                 columnDefs={columnsDefs}
                 onCellClicked={handleCellCLick}
                 onGridReady={useFitGridOnWindowResize(gridReference)}></AgGridReact>

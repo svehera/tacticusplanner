@@ -98,8 +98,8 @@ export const HomeScreenEvent = () => {
 
         return Object.values(pointsPerEnergy)
             .flat()
-            .sort((a, b) => b.dropChance - a.dropChance)
-            .sort((a, b) => b.pointsPerEnergy - a.pointsPerEnergy);
+            .toSorted((a, b) => b.dropChance - a.dropChance)
+            .toSorted((a, b) => b.pointsPerEnergy - a.pointsPerEnergy);
     };
 
     const bestMachineHunt = useMemo(
@@ -306,7 +306,7 @@ export const HomeScreenEvent = () => {
                             name="events"
                             id="event-select"
                             value={selectedEvent}
-                            onChange={e => setSelectedEvent(e.target.value as IDailyRaidsHomeScreenEvent)}
+                            onChange={({ target: { value } }) => setSelectedEvent(value as IDailyRaidsHomeScreenEvent)}
                             size="small"
                             className="rounded-md bg-slate-700">
                             <MenuItem value={IDailyRaidsHomeScreenEvent.purgeOrder}>Purge Order</MenuItem>
@@ -322,10 +322,7 @@ export const HomeScreenEvent = () => {
                             id="campaign-select"
                             multiple
                             value={campaignsToConsider}
-                            onChange={e => {
-                                const {
-                                    target: { value },
-                                } = e;
+                            onChange={({ target: { value } }) => {
                                 setCampaignsToConsider(
                                     // On autofill we get a stringified value.
                                     (typeof value === 'string' ? value.split(',') : value).map(id => id as Campaign)
@@ -347,7 +344,7 @@ export const HomeScreenEvent = () => {
                             type="checkbox"
                             id="ignore-early-indom"
                             checked={includeRewardlessBattles}
-                            onChange={e => setIncludeRewardlessBattles(e.target.checked)}
+                            onChange={({ target: { checked } }) => setIncludeRewardlessBattles(checked)}
                         />
                         <label htmlFor="ignore-early-indom">Include battles with no rewards</label>
                     </div>

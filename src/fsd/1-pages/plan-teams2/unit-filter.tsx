@@ -104,7 +104,7 @@ export const UnitFilter: React.FC<Properties> = ({
                         type="text"
                         placeholder="e.g. Bellator..."
                         value={searchText}
-                        onChange={e => onSearchTextChange(e.target.value)}
+                        onChange={({ target: { value } }) => onSearchTextChange(value)}
                         className="w-full rounded border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 md:w-64 dark:border-slate-700 dark:bg-[#0d1117] dark:text-slate-100"
                     />
                 </div>

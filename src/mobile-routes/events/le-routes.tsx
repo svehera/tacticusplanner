@@ -46,7 +46,7 @@ export const PlanLeRoutes = () => {
     const navigate = useNavigate();
     const leMasterTableMenuItem = menuItemById['leMasterTable'];
     const sortedActiveLres: ICharacterData[] = useMemo(
-        () => [...CharactersService.activeLres].sort(sortCharsByLreDate),
+        () => CharactersService.activeLres.toSorted(sortCharsByLreDate),
         [CharactersService.activeLres]
     );
     return (

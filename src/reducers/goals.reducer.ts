@@ -31,7 +31,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             return action.value;
         }
         case 'Add': {
-            if (state.find(x => x.id === action.goal.id)) {
+            if (state.some(x => x.id === action.goal.id)) {
                 return state;
             }
             state.splice(action.goal.priority - 1, 0, action.goal);

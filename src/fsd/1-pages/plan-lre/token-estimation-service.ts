@@ -391,18 +391,18 @@ export class TokenEstimationService {
         }
         // Find the token with the highest points, and if there is a tie, the lowest
         // (real) battle number.
-        return nextBestTokens.reduce((best, current) => {
-            if (best === undefined) return current;
-            if (current === undefined) return best;
-            if (current.incrementalPoints > best.incrementalPoints) return current;
-            if (current.incrementalPoints < best.incrementalPoints) return best;
-            if (this.isTokenNextBattleWithTeam(current, lastToken)) return current;
-            if (this.isTokenNextBattleWithTeam(best, lastToken)) return best;
-            if (this.getTrack(current) < this.getTrack(best)) return current;
-            if (this.getTrack(current) > this.getTrack(best)) return best;
-            if (current.battleNumber > best.battleNumber) return current;
-            return best;
-        }, nextBestTokens[0]);
+        const sortedTokens = nextBestTokens.toSorted((a, b) => {
+            // -ve if a should come before b, +ve if b should come before a, 0 if equal
+            if (a === undefined) return -1;
+            if (b === undefined) return 1;
+            if (a.incrementalPoints !== b.incrementalPoints) return b.incrementalPoints - a.incrementalPoints;
+            if (this.isTokenNextBattleWithTeam(b, lastToken)) return -1;
+            if (this.isTokenNextBattleWithTeam(a, lastToken)) return 1;
+            if (this.getTrack(b) < this.getTrack(a)) return -1;
+            if (this.getTrack(b) > this.getTrack(a)) return 1;
+            return b.battleNumber - a.battleNumber;
+        });
+        return sortedTokens[0];
     }
 
     /**
@@ -415,9 +415,7 @@ export class TokenEstimationService {
         const tracks: ILreTrackProgress[] = cloneDeep(tracksProgress);
         for (const track of tracks) {
             for (const battle of track.battles) {
-                battle.completed =
-                    battle.requirementsProgress.reduce((sum, request) => (sum += request.completed ? 1 : 0), 0) ===
-                    battle.requirementsProgress.length;
+                battle.completed = battle.requirementsProgress.every(request => request.completed);
             }
         }
         const resolvedTeams = teams.map(team => ({
@@ -457,14 +455,13 @@ export class TokenEstimationService {
 
     /** @returns the current points earned in this track, accounting for partial killScore and highScore inputs. */
     public static computeCurrentPointsInTrack(track: ILreTrackProgress): number {
-        return track.battles.reduce((sum, battle) => {
-            const battlePoints = battle.requirementsProgress
-                .map(request => LreRequirementStatusService.getRequirementPoints(request))
-                .reduce((innerSum, points) => {
-                    return innerSum + points;
-                }, 0);
-            return sum + battlePoints;
-        }, 0);
+        let sum = 0;
+        for (const battle of track.battles) {
+            for (const requirement of battle.requirementsProgress) {
+                sum += LreRequirementStatusService.getRequirementPoints(requirement);
+            }
+        }
+        return sum;
     }
 
     /**

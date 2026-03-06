@@ -63,7 +63,7 @@ export const MyProgress = () => {
             <div className="flex flex-col justify-start gap-10">
                 {standardCampaignsByGroup.map(([group, campaigns]) => (
                     <div key={group} className="flex flex-wrap gap-10">
-                        {campaigns.map(renderCampaignProgress)}
+                        {campaigns.map(campaign => renderCampaignProgress(campaign))}
                     </div>
                 ))}
             </div>
@@ -71,7 +71,7 @@ export const MyProgress = () => {
             <div className="flex flex-wrap gap-10">
                 {campaignEventsByGroup.map(([group, campaigns]) => (
                     <div key={group} className="flex flex-wrap gap-10">
-                        {campaigns.map(renderCampaignProgress)}
+                        {campaigns.map(campaign => renderCampaignProgress(campaign))}
                     </div>
                 ))}
             </div>

@@ -60,6 +60,7 @@ import {
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
 
     public static canonicalizeInventoryUpgrades(inventoryUpgrades: Record<string, number>): Record<string, number> {
@@ -103,7 +104,7 @@ export class UpgradesService {
         // Find all the battle IDs that satisfy the minimum number of chaos enemies, noting that a material
         // may be available from nodes that have chaos enemies, and also from nodes that do not.
         for (const material of materialsPassingFilter) {
-            const chaosEnemyLocations = material.locations.filter(passesFilter);
+            const chaosEnemyLocations = material.locations.filter(location => passesFilter(location));
 
             for (const location of chaosEnemyLocations) {
                 const newMaterial = cloneDeep(material);
@@ -304,7 +305,7 @@ export class UpgradesService {
                     allMaterials
                 );
             }
-            case IDailyRaidsHomeScreenEvent.none:
+            // case IDailyRaidsHomeScreenEvent.none:
             default: {
                 return allMaterials;
             }
@@ -416,7 +417,7 @@ export class UpgradesService {
                 totalMaterialsNeeded[upgrade.id] = 0;
                 totalMaterialsAcquired[upgrade.id] = 0;
             }
-            const goalsKey = [...upgrade.relatedGoals].sort().join(',');
+            const goalsKey = upgrade.relatedGoals.toSorted().join(',');
             const key = `${goalsKey}_${upgrade.id}`;
             if (!countedGoalMaterial.has(key)) {
                 countedGoalMaterial.add(key);
@@ -653,8 +654,7 @@ export class UpgradesService {
                     .filter(x => !!x);
                 for (const upgrade of upgrades) {
                     if (upgrade.crafted) {
-                        result.push(...upgrade.baseUpgrades.map(x => x.id));
-                        result.push(...upgrade.craftedUpgrades.map(x => x.id));
+                        result.push(...upgrade.baseUpgrades.map(x => x.id), ...upgrade.craftedUpgrades.map(x => x.id));
                     }
                 }
 

@@ -118,7 +118,7 @@ export class CampaignsProgressionService {
             }
         }
         for (const [material, units] of result.charactersNeedingMaterials.entries()) {
-            result.charactersNeedingMaterials.set(material, uniq(units.sort()));
+            result.charactersNeedingMaterials.set(material, uniq(units.toSorted()));
         }
     }
 
@@ -188,7 +188,7 @@ export class CampaignsProgressionService {
         for (const campaign of nodesToBeat.keys()) {
             const newMaterialEnergy = new Map<string, number>();
             if ((nodesToBeat.get(campaign)?.length ?? 0) == 0) continue;
-            const nodes: ICampaignBattleComposed[] = nodesToBeat.get(campaign)!.sort((a, b) => {
+            const nodes: ICampaignBattleComposed[] = nodesToBeat.get(campaign)!.toSorted((a, b) => {
                 return a.nodeNumber - b.nodeNumber;
             });
             let cumulativeSavings: number = 0;
@@ -297,7 +297,7 @@ export class CampaignsProgressionService {
             }
             materialReqs.materials = newMaterials;
         }
-        const sortedMaterials: string[] = Object.keys(materialReqs.materials).sort(
+        const sortedMaterials: string[] = Object.keys(materialReqs.materials).toSorted(
             (a, b) =>
                 UpgradesService.recipeExpandedUpgradeData[b].rarity -
                 UpgradesService.recipeExpandedUpgradeData[a].rarity

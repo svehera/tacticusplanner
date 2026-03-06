@@ -296,7 +296,7 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
                                                 handleCycleStatus(request);
                                             }
                                         }}
-                                        onContextMenu={e => e.preventDefault()}
+                                        onContextMenu={event => event.preventDefault()}
                                         onMouseDown={() => handlePressStart(request)}
                                         onMouseUp={handlePressEnd}
                                         onMouseLeave={handlePressEnd}
@@ -327,11 +327,11 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
                                                     ? { bottom: '100%', marginBottom: '4px' }
                                                     : { top: '100%', marginTop: '4px' }
                                             }
-                                            onClick={e => e.stopPropagation()}
-                                            onMouseDown={e => e.stopPropagation()}
-                                            onMouseUp={e => e.stopPropagation()}
-                                            onTouchStart={e => e.stopPropagation()}
-                                            onTouchEnd={e => e.stopPropagation()}>
+                                            onClick={event => event.stopPropagation()}
+                                            onMouseDown={event => event.stopPropagation()}
+                                            onMouseUp={event => event.stopPropagation()}
+                                            onTouchStart={event => event.stopPropagation()}
+                                            onTouchEnd={event => event.stopPropagation()}>
                                             {[
                                                 RequirementStatus.NotCleared,
                                                 RequirementStatus.Cleared,
@@ -341,8 +341,8 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
                                                 <button
                                                     key={statusOption}
                                                     role="menuitem"
-                                                    onClick={e => {
-                                                        e.stopPropagation();
+                                                    onClick={event => {
+                                                        event.stopPropagation();
                                                         handleDirectStatusChange(request, statusOption);
                                                     }}
                                                     className="flex w-full items-center justify-center px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"

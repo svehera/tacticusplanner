@@ -54,30 +54,30 @@ export class CharactersService {
 
         switch (filterBy) {
             case CharactersFilterBy.NeedToAscend: {
-                return filteredCharactersByName.filter(needToAscendCharacter);
+                return filteredCharactersByName.filter(character => needToAscendCharacter(character));
             }
             case CharactersFilterBy.CanAscend: {
-                return filteredCharactersByName.filter(canAscendCharacter);
+                return filteredCharactersByName.filter(character => canAscendCharacter(character));
             }
             case CharactersFilterBy.NeedToLevel: {
-                return filteredCharactersByName.filter(needToLevelCharacter);
+                return filteredCharactersByName.filter(character => needToLevelCharacter(character));
             }
             case CharactersFilterBy.BlueStarReady: {
-                return filteredCharactersByName.filter(blueStarReady);
+                return filteredCharactersByName.filter(character => blueStarReady(character));
             }
             case CharactersFilterBy.Chaos: {
-                return filteredCharactersByName.filter(filterChaos);
+                return filteredCharactersByName.filter(character => filterChaos(character));
             }
             case CharactersFilterBy.Imperial: {
-                return filteredCharactersByName.filter(filterImperial);
+                return filteredCharactersByName.filter(character => filterImperial(character));
             }
             case CharactersFilterBy.Xenos: {
-                return filteredCharactersByName.filter(filterXenos);
+                return filteredCharactersByName.filter(character => filterXenos(character));
             }
             case CharactersFilterBy.MoW: {
-                return filteredCharactersByName.filter(isMow);
+                return filteredCharactersByName.filter(character => isMow(character));
             }
-            case CharactersFilterBy.None:
+            // case CharactersFilterBy.None:
             default: {
                 return filteredCharactersByName;
             }
@@ -163,32 +163,31 @@ export class CharactersService {
         const factionCharacters = groupBy(units, 'faction');
 
         // Derive relevant faction data in one pass
-        const result: IFaction[] = factionsData.reduce((accumulator: IFaction[], faction) => {
-            const characters = factionCharacters[faction.snowprintId];
-            if (!characters) return accumulator;
+        const result: IFaction[] = factionsData
+            .map(faction => {
+                const characters = factionCharacters[faction.snowprintId];
+                if (!characters) return;
 
-            let bsValue = 0,
-                power = 0,
-                unlockedCharacters = 0;
-            for (const char of characters) {
-                if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue) {
-                    bsValue += CharactersValueService.getCharacterValue(char);
+                let bsValue = 0;
+                let power = 0;
+                let unlockedCharacters = 0;
+                for (const char of characters) {
+                    if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue)
+                        bsValue += CharactersValueService.getCharacterValue(char);
+                    if (includePower || charactersOrderBy === CharactersOrderBy.FactionPower)
+                        power += CharactersPowerService.getCharacterPower(char);
+                    if (isUnlocked(char)) unlockedCharacters++;
                 }
-                if (includePower || charactersOrderBy === CharactersOrderBy.FactionPower) {
-                    power += CharactersPowerService.getCharacterPower(char);
-                }
-                if (isUnlocked(char)) unlockedCharacters++;
-            }
 
-            accumulator.push({
-                ...faction,
-                units: characters,
-                bsValue,
-                power,
-                unlockedCharacters,
-            });
-            return accumulator;
-        }, []);
+                return {
+                    ...faction,
+                    units: characters,
+                    bsValue,
+                    power,
+                    unlockedCharacters,
+                };
+            })
+            .filter(faction => faction !== undefined);
 
         // Determine sort key based on the order parameter
         let orderByKey: keyof IFaction;
@@ -211,7 +210,7 @@ export class CharactersService {
         }
 
         // Sort using native sort
-        return result.sort((a, b) => b[orderByKey] - a[orderByKey]);
+        return result.toSorted((a, b) => b[orderByKey] - a[orderByKey]);
     }
 
     static capCharacterAtRarity(character: ICharacter2, rarity: Rarity): ICharacter2 {
@@ -417,7 +416,7 @@ export class CharactersService {
             }
         }
 
-        const sorted = [...rarities].sort((a, b) => a - b);
+        const sorted = [...rarities].toSorted((a, b) => a - b);
 
         const index = sorted.indexOf(current);
 
@@ -441,6 +440,6 @@ export class CharactersService {
             }
         }
 
-        return matches.sort((a, b) => a - b)[0] as RarityStars;
+        return matches.toSorted((a, b) => a - b)[0] as RarityStars;
     }
 }

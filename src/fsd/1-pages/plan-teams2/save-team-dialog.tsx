@@ -93,7 +93,7 @@ export const SaveTeamDialog: React.FC<Properties> = ({
                         <input
                             type="text"
                             value={teamName}
-                            onChange={e => onTeamNameChange(e.target.value)}
+                            onChange={({ target: { value } }) => onTeamNameChange(value)}
                             placeholder="Enter team name..."
                             className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 transition-all outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-[#0f172a] dark:text-white"
                         />

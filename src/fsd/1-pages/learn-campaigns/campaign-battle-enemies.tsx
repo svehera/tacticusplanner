@@ -90,9 +90,9 @@ export const CampaignBattleEnemies: React.FC<Properties> = ({ keyPrefix, battleI
         [8, 8, 7],
         [8, 8, 8],
     ];
-    const columns = useMemo(() => enemiesInCols[numberEnemies], [enemiesInCols, numberEnemies]);
-    const numberRows = useMemo(() => columns.length, columns);
-    const maxPerRow = useMemo(() => Math.max(...columns), [columns]);
+    const columns = enemiesInCols[numberEnemies];
+    const numberRows = columns.length;
+    const maxPerRow = Math.max(...columns);
     const frameWidth = 202;
     const frameHeight = 267;
     const horizontalMargin = 20;
@@ -116,9 +116,10 @@ export const CampaignBattleEnemies: React.FC<Properties> = ({ keyPrefix, battleI
             for (let index = 0; index < enemy.count; index++) {
                 elements.push(
                     <button
-                        key={keyPrefix + battleId + '-' + (row * maxPerRow + index) + '-' + enemyId}
+                        key={`${keyPrefix}${battleId}-${row * maxPerRow + index}-${enemyId}`}
                         className="absolute cursor-pointer border-none bg-transparent p-0 transition-all hover:brightness-110 focus:outline-none"
                         style={{ left, top, width: frameWidth, height: frameHeight }}
+                        type="button"
                         onClick={() =>
                             npc &&
                             onEnemyClick({

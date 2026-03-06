@@ -136,9 +136,9 @@ export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
 
     return (
         <FormGroup className="flex flex-row" style={{ height: preset === 'wyo' ? '55px' : 'unset' }}>
-            {preset === 'wyo' && renderPopover(wyoOptions.map(renderOption))}
-            {preset === 'inventory' && inventoryOptions.map(renderOption)}
-            {preset === 'myProgress' && myProgressOptions.map(renderOption)}
+            {preset === 'wyo' && renderPopover(wyoOptions.map(option => renderOption(option)))}
+            {preset === 'inventory' && inventoryOptions.map(option => renderOption(option))}
+            {preset === 'myProgress' && myProgressOptions.map(option => renderOption(option))}
         </FormGroup>
     );
 };

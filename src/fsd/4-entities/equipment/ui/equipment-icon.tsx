@@ -19,9 +19,9 @@ function getImageDimensions(url: string): Promise<{ width: number; height: numbe
             });
         });
 
-        img.onerror = error => {
+        img.addEventListener('error', error => {
             reject(new Error(`Failed to load image from URL: ${url}. Error: ${error}`));
-        };
+        });
 
         img.src = url;
     });

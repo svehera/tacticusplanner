@@ -39,7 +39,7 @@ export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProperties> = ({
                     fullWidth
                     variant="outlined"
                     value={snapshotName}
-                    onChange={e => setSnapshotName(e.target.value)}
+                    onChange={({ target: { value } }) => setSnapshotName(value)}
                     placeholder={`e.g., Guild Raid Setup - ${currentTimestamp}`}
                 />
 

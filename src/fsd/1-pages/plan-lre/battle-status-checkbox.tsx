@@ -175,11 +175,9 @@ export const BattleStatusCheckbox: React.FC<Properties> = ({ status, score, scor
                         type="number"
                         label={scoreLabel}
                         value={scoreInput}
-                        onChange={e => setScoreInput(e.target.value)}
-                        onKeyDown={e => {
-                            if (e.key === 'Enter') {
-                                handleScoreSubmit();
-                            }
+                        onChange={({ target: { value } }) => setScoreInput(value)}
+                        onKeyDown={({ key }) => {
+                            if (key === 'Enter') handleScoreSubmit();
                         }}
                         slotProps={{ htmlInput: { min: 0, max: maxScore } }}
                         helperText={`Maximum points for this battle: ${maxScore}`}

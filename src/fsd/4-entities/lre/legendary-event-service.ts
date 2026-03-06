@@ -30,7 +30,7 @@ export class LegendaryEventService {
             const pastEvents = allLegendaryEvents
                 .map(event => ({ event, startDate: Date.parse(safeGet(event, 'nextEventDateUtc') ?? '') }))
                 .filter(({ startDate }) => Number.isFinite(startDate) && startDate < now)
-                .sort((a, b) => b.startDate - a.startDate);
+                .toSorted((a, b) => b.startDate - a.startDate);
             if (pastEvents.length > 0) {
                 startDates.push(new Date(pastEvents[0].startDate));
             } else {
@@ -68,24 +68,24 @@ export class LegendaryEventService {
     public static getActiveEvent(events?: ILegendaryEventStatic[]): ILegendaryEventStatic | undefined {
         const sevenDaysAgoTs = Date.now() - 7 * DAY_MS;
         const sortedEvents = (events ?? allLegendaryEvents)
-            .filter(isUnfinishedScheduledEvent)
+            .filter(event => isUnfinishedScheduledEvent(event))
             .map(event => ({ event, startDate: Date.parse(event.nextEventDateUtc) }))
             // started in the last 7 days (exclusive) or any future date
             .filter(({ startDate }) => Number.isFinite(startDate) && startDate > sevenDaysAgoTs)
-            .sort((a, b) => a.startDate - b.startDate);
+            .toSorted((a, b) => a.startDate - b.startDate);
         return sortedEvents[0]?.event;
     }
 
     public static getUnfinishedEvents(): ILegendaryEventStatic[] {
-        return allLegendaryEvents.filter(e => !e.finished);
+        return allLegendaryEvents.filter(event => !event.finished);
     }
 
     public static getEventByCharacterSnowprintId(snowprintId: string): ILegendaryEventStatic | undefined {
-        return allLegendaryEvents.find(e => e.unitSnowprintId === snowprintId);
+        return allLegendaryEvents.find(event => event.unitSnowprintId === snowprintId);
     }
 
     public static getUnfinishedLegendaryEventCharacterSnowprintIds(): string[] {
-        return allLegendaryEvents.filter(e => !e.finished).map(e => e.unitSnowprintId);
+        return allLegendaryEvents.filter(event => !event.finished).map(event => event.unitSnowprintId);
     }
 
     public static getLegendaryEvents() {

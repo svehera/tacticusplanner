@@ -9,12 +9,12 @@ interface DecimalSpinnerProperties {
 /** Decimal spinner component for numeric input with two points of decimal precision. */
 export const DecimalSpinner: React.FC<DecimalSpinnerProperties> = ({ value, onChange, label }) => {
     const [stringValue, setStringValue] = React.useState(value.toFixed(2));
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const numericValue = Number.parseFloat(e.target.value);
+    const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+        const numericValue = Number.parseFloat(target.value);
         if (!Number.isNaN(numericValue)) {
             onChange(numericValue);
-            setStringValue(e.target.value);
-        } else if (e.target.value === '') {
+            setStringValue(target.value);
+        } else if (target.value === '') {
             setStringValue('');
         }
     };

@@ -43,7 +43,7 @@ function createTrack(id: LreTrackId, numberBattles: number, reqs: ILreRequiremen
         trackId: id,
         trackName: id,
         totalPoints: 0,
-        battlesPoints: new Array(numberBattles).fill(0),
+        battlesPoints: Array.from({ length: numberBattles }).fill(0) as number[],
         requirements: reqs,
         battles: Array.from({ length: numberBattles }, (_, index) =>
             createBattleProgress(numberBattles - index - 1, reqs)
@@ -134,7 +134,7 @@ describe('TokenEstimationService', () => {
             expect(bestToken.team?.id ?? '').toBe('team1');
             expect(bestToken.battleNumber).toBe(0);
             expect(bestToken.incrementalPoints).toBe(45 + 45 + 60 + 60 + 70);
-            expect(bestToken.restrictionsCleared.map(restriction => restriction.name).sort()).containSubset([
+            expect(bestToken.restrictionsCleared.map(restriction => restriction.name).toSorted()).containSubset([
                 'Flame',
                 'Pierce',
             ]);

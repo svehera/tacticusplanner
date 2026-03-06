@@ -29,10 +29,10 @@ export const LeProgress = ({
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
     const [notesDraft, setNotesDraft] = useState(model.notes);
     useEffect(() => {
-        const handler = (e: BeforeUnloadEvent) => {
+        const handler = (beforeUnloadEvent: BeforeUnloadEvent) => {
             if (!notesDraft || notesDraft === model.notes) return;
-            e.preventDefault();
-            e.returnValue = '';
+            beforeUnloadEvent.preventDefault();
+            beforeUnloadEvent.returnValue = '';
             return '';
         };
         window.addEventListener('beforeunload', handler);

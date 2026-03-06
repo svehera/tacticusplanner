@@ -27,7 +27,8 @@ const equipmentTypeMapping = {
 } as const;
 
 export class CharactersService {
-    static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+    static readonly charactersData: ICharacterData[] = charactersData.map(character => this.convertUnitData(character));
 
     static readonly lreCharacters: ICharacterData[] = LegendaryEventService.getLegendaryEvents()
         .map(lre => {

@@ -27,7 +27,7 @@ import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
 // import { LeTokenMilestoneCardGrid } from './le-token-milestone-card-grid';
-import { renderRestrictions, renderTeam } from './le-token-render-utils';
+import { renderRestrictions, renderTeam } from './le-token-render-utilities';
 import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
 import { LreRequirementStatusService } from './lre-requirement-status.service';

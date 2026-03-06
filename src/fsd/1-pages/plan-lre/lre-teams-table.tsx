@@ -61,7 +61,7 @@ export const LreTeamsTable: React.FC<Properties> = ({
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const defaultColumnDef: ColDef & { section: LreTrackId } = {
+    const defaultColumnDefinition: ColDef & { section: LreTrackId } = {
         resizable: true,
         cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
             const character = properties.value;
@@ -176,12 +176,8 @@ export const LreTeamsTable: React.FC<Properties> = ({
         }));
 
         // Create a lookup table to get the order from `columnIds`
-        const columnOrder: Record<string, number> = selectedRequirements.reduce(
-            (order, id, index) => {
-                order[id] = index;
-                return order;
-            },
-            {} as Record<string, number>
+        const columnOrder: Record<string, number> = Object.fromEntries(
+            selectedRequirements.map((id, index) => [id, index])
         );
 
         // Sort `columns` by using the order from `columnIds`, keeping unspecified columns in original order
@@ -252,7 +248,7 @@ export const LreTeamsTable: React.FC<Properties> = ({
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     ref={gridReference}
-                    defaultColDef={defaultColumnDef}
+                    defaultColDef={defaultColumnDefinition}
                     columnDefs={columnsDefs}
                     components={components}
                     rowData={rows}

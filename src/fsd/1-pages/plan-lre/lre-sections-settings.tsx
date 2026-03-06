@@ -83,6 +83,6 @@ export const LreSectionsSettings: React.FC<Properties> = ({ lreViewSettings, sav
             </RadioGroup>
         </FormControl>
     ) : (
-        <div className="flex-box gap5 wrap">{lreSectionOptions.map(renderOption)}</div>
+        <div className="flex-box gap5 wrap">{lreSectionOptions.map(option => renderOption(option))}</div>
     );
 };

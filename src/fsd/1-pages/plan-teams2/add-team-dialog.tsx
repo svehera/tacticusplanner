@@ -114,9 +114,9 @@ export const AddTeamDialog: React.FC<Properties> = ({
     }, []);
 
     const resizeGrids = useCallback(
-        (e: MouseEvent) => {
+        ({ clientX }: MouseEvent) => {
             if (isDragging) {
-                const newWidth = window.innerWidth - e.clientX;
+                const newWidth = window.innerWidth - clientX;
                 if (newWidth > 200 && newWidth < window.innerWidth * 0.5) {
                     setMowWidth(newWidth);
                 }
@@ -141,14 +141,14 @@ export const AddTeamDialog: React.FC<Properties> = ({
 
     const allFactions: FactionId[] = [
         ...new Set<FactionId>([...chars.map(c => c.faction), ...mows.map(m => m.faction)]),
-    ].sort((a, b) => a.localeCompare(b));
+    ].toSorted((a, b) => a.localeCompare(b));
 
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId!))
         .filter(c =>
             Teams2Service.passesCharacterFilter(c, minRank, maxRank, minRarity, maxRarity, factions, searchText)
         )
-        .sort((a, b) => {
+        .toSorted((a, b) => {
             if (b.rank !== a.rank) return b.rank - a.rank;
             const powerA = Math.pow(a.activeAbilityLevel ?? 0, 2) + Math.pow(a.passiveAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.activeAbilityLevel ?? 0, 2) + Math.pow(b.passiveAbilityLevel ?? 0, 2);
@@ -159,7 +159,7 @@ export const AddTeamDialog: React.FC<Properties> = ({
     const filteredMows = mows
         .filter(mow => !selectedMows.includes(mow.snowprintId!))
         .filter(mow => Teams2Service.passesMowFilter(mow, minRarity, maxRarity, factions, searchText))
-        .sort((a, b) => {
+        .toSorted((a, b) => {
             const powerA = Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.primaryAbilityLevel ?? 0, 2) + Math.pow(b.secondaryAbilityLevel ?? 0, 2);
             if (powerB !== powerA) return powerB - powerA;
@@ -215,7 +215,7 @@ export const AddTeamDialog: React.FC<Properties> = ({
                                 <input
                                     type="text"
                                     value={teamName}
-                                    onChange={e => onTeamNameChanged(e.target.value)}
+                                    onChange={({ target: { value } }) => onTeamNameChanged(value)}
                                     placeholder="Enter team name..."
                                     className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 transition-all outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-[#0f172a] dark:text-white"
                                 />
@@ -309,7 +309,7 @@ export const AddTeamDialog: React.FC<Properties> = ({
                             <textarea
                                 placeholder="Add notes..."
                                 value={notes}
-                                onChange={e => onNotesChanged(e.target.value)}
+                                onChange={({ target: { value } }) => onNotesChanged(value)}
                                 className="min-h-[80px] w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 transition-all outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-[#0f172a] dark:text-white"
                             />
                         </div>

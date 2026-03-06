@@ -119,7 +119,7 @@ export const MasterTable = () => {
 
             const eventCharacters = legendaryEvent.allowedUnits
                 .filter(x => selectedChars.includes(x.snowprintId!))
-                .sort((a, b) => {
+                .toSorted((a, b) => {
                     const aTotal =
                         (alpha[a.snowprintId!]?.points ?? 0) +
                         (beta[a.snowprintId!]?.points ?? 0) +
@@ -253,7 +253,7 @@ export const MasterTable = () => {
         selectedCharsRows.length > 0 ? CharactersSelection.Selected : CharactersSelection.All
     );
 
-    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
+    const columnsDefinition: Array<ColDef | ColGroupDef> = useMemo(() => {
         return [
             {
                 headerName: 'Character',
@@ -370,7 +370,7 @@ export const MasterTable = () => {
                       ? legendaryEvent.allowedUnits.filter(x => x.rank > Rank.Locked)
                       : [];
             const eventCharacters = chars
-                .sort(
+                .toSorted(
                     (a, b) =>
                         b.legendaryEvents[legendaryEvent.id].totalPoints -
                         a.legendaryEvents[legendaryEvent.id].totalPoints
@@ -529,7 +529,7 @@ export const MasterTable = () => {
                     theme={themeBalham}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
-                    columnDefs={columnsDef}
+                    columnDefs={columnsDefinition}
                     defaultColDef={{
                         suppressMovable: true,
                     }}

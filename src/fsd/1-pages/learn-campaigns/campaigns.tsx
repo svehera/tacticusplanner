@@ -216,7 +216,7 @@ export const Campaigns = () => {
         value => value.toString()
     );
 
-    const campaignsOptions = useMemo(() => Object.keys(CampaignsService.campaignsGrouped).sort(), []);
+    const campaignsOptions = useMemo(() => Object.keys(CampaignsService.campaignsGrouped).toSorted(), []);
 
     const rows = useMemo(() => CampaignsService.campaignsGrouped[campaign], [campaign]);
 
