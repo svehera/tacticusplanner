@@ -184,7 +184,7 @@ export const ManageTeams = () => {
         setImportDialogOpen(true);
     };
 
-    const onImportGo = (team: IPersonalTeam | null) => {
+    const onImportGo = (team: IPersonalTeam | undefined) => {
         setImportDialogOpen(false);
         if (!team) return;
         setSelectedChars(
@@ -412,7 +412,7 @@ export const ManageTeams = () => {
                                     <select
                                         className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-blue-900/40"
                                         value={selectedLegacyTeamName}
-                                        onChange={e => setSelectedLegacyTeamName(e.target.value)}>
+                                        onChange={event => setSelectedLegacyTeamName(event.target.value)}>
                                         {legacyTeams.map(t => (
                                             <option key={t.name} value={t.name}>
                                                 {t.name}
@@ -429,8 +429,7 @@ export const ManageTeams = () => {
                                         <button
                                             className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-green-700"
                                             onClick={() => {
-                                                const team =
-                                                    legacyTeams.find(t => t.name === selectedLegacyTeamName) ?? null;
+                                                const team = legacyTeams.find(t => t.name === selectedLegacyTeamName);
                                                 onImportGo(team);
                                                 setImportDialogOpen(false);
                                             }}>
