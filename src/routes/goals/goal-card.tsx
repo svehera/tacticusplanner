@@ -192,19 +192,21 @@ export const GoalCard: React.FC<Props> = ({
                                 </span>
                             )}
                         </div>
-                        {goalEstimate.xpDaysLeft !== undefined && (
+                        {(goalEstimate.xpDaysLeft !== undefined ||
+                            !!goalEstimate.xpBooksApplied ||
+                            !!goalEstimate.xpBooksRequired) && (
                             <div className="flex-box gap10 wrap">
                                 <AccessibleTooltip
                                     title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
                                     <div className="flex-box gap3">
-                                        <CalendarMonthIcon /> {goalEstimate.xpDaysLeft}
+                                        <CalendarMonthIcon /> {goalEstimate.xpDaysLeft ?? 0}
                                     </div>
                                 </AccessibleTooltip>
                                 {goalEstimate.xpBooksApplied !== undefined &&
                                     goalEstimate.xpBooksRequired !== undefined && (
                                         <XpGoalProgressBar
-                                            applied={goalEstimate.xpBooksApplied}
-                                            required={goalEstimate.xpBooksRequired}
+                                            applied={goalEstimate.xpBooksApplied ?? 0}
+                                            required={goalEstimate.xpBooksRequired ?? 0}
                                         />
                                     )}
                             </div>
