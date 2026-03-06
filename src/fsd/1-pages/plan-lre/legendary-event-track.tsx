@@ -45,6 +45,7 @@ export const LegendaryEventTrack: React.FC<Properties> = ({
 
     if (viewPreferences.hideCompleted) {
         for (const restriction of track.unitsRestrictions) {
+            // eslint-disable-next-line react-compiler/react-compiler -- ToDo: Refactor to avoid mutation
             restriction.hide = progress[restriction.name] === legendaryEvent.battlesCount;
         }
     }

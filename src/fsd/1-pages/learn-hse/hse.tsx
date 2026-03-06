@@ -26,6 +26,23 @@ interface HseBattle {
     dropChance: number;
 }
 
+/**
+ * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
+ */
+const getReward = (rewards: IRewards): string => {
+    // Elite battles give a guaranteed material, so return that.
+    for (const reward of rewards.guaranteed) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    // Otherwise, return the first potential reward that is not gold.
+    for (const reward of rewards.potential) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    return '';
+};
+
 export const HomeScreenEvent = () => {
     const gridReference = useRef<AgGridReact<HseBattle>>(null);
     const [campaignsToConsider, setCampaignsToConsider] = useState<Campaign[]>(() => {
@@ -33,22 +50,6 @@ export const HomeScreenEvent = () => {
     });
     const [includeRewardlessBattles, setIncludeRewardlessBattles] = useState<boolean>(true);
 
-    /**
-     * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
-     */
-    const getReward = (rewards: IRewards): string => {
-        // Elite battles give a guaranteed material, so return that.
-        for (const reward of rewards.guaranteed) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        // Otherwise, return the first potential reward that is not gold.
-        for (const reward of rewards.potential) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        return '';
-    };
     const calculateBestBattles = (
         campaigns: Campaign[],
         includeRewardlessBattles: boolean,
@@ -214,7 +215,7 @@ export const HomeScreenEvent = () => {
             maxWidth: 130,
             cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
                 const hunt = parameters.data;
-                if (!hunt) return null;
+                if (!hunt) return;
                 const rowIndex = parameters.node.rowIndex ?? 0;
                 let cumulativeGears = 0;
                 for (let index = 0; index <= rowIndex; index++) {
@@ -232,7 +233,7 @@ export const HomeScreenEvent = () => {
             maxWidth: 130,
             cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
                 const hunt = parameters.data;
-                if (!hunt) return null;
+                if (!hunt) return;
                 return (
                     <>
                         <MiscIcon icon="energy" width={24} height={24} />
@@ -246,7 +247,7 @@ export const HomeScreenEvent = () => {
             maxWidth: 130,
             cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
                 const hunt = parameters.data;
-                if (!hunt) return null;
+                if (!hunt) return;
                 const rowIndex = parameters.node.rowIndex ?? 0;
                 let cumulativeEnergy = 0;
                 for (let index = 0; index <= rowIndex; index++) {
@@ -268,7 +269,7 @@ export const HomeScreenEvent = () => {
             field: 'reward',
             cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
                 const hunt = parameters.data;
-                if (!hunt) return null;
+                if (!hunt) return;
                 return rewardIcon(hunt.reward);
             },
         },
@@ -297,7 +298,7 @@ export const HomeScreenEvent = () => {
                             name="events"
                             id="event-select"
                             value={selectedEvent}
-                            onChange={e => setSelectedEvent(e.target.value as IDailyRaidsHomeScreenEvent)}
+                            onChange={event => setSelectedEvent(event.target.value as IDailyRaidsHomeScreenEvent)}
                             size="small"
                             className="rounded-md bg-slate-700">
                             <MenuItem value={IDailyRaidsHomeScreenEvent.purgeOrder}>Purge Order</MenuItem>
@@ -313,10 +314,7 @@ export const HomeScreenEvent = () => {
                             id="campaign-select"
                             multiple
                             value={campaignsToConsider}
-                            onChange={e => {
-                                const {
-                                    target: { value },
-                                } = e;
+                            onChange={({ target: { value } }) => {
                                 setCampaignsToConsider(
                                     // On autofill we get a stringified value.
                                     (typeof value === 'string' ? value.split(',') : value).map(id => id as Campaign)
@@ -338,7 +336,7 @@ export const HomeScreenEvent = () => {
                             type="checkbox"
                             id="ignore-early-indom"
                             checked={includeRewardlessBattles}
-                            onChange={e => setIncludeRewardlessBattles(e.target.checked)}
+                            onChange={event => setIncludeRewardlessBattles(event.target.checked)}
                         />
                         <label htmlFor="ignore-early-indom">Include battles with no rewards</label>
                     </div>

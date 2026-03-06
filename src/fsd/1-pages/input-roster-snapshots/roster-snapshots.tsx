@@ -22,7 +22,7 @@ import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.s
 import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { ManageSnapshotsDialog } from './manage-snapshots-dialog';
-import { IRosterSnapshot, IRosterSnapshotsState } from './models';
+import { IRosterSnapshot, IRosterSnapshotsState, ISnapshotCharacter, ISnapshotMachineOfWar } from './models';
 import { RosterSnapshotsAssetsProvider } from './roster-snapshots-assets-provider';
 import { RosterSnapshotsMagnificationSlider } from './roster-snapshots-magnification-slider';
 import { RosterSnapshotsService } from './roster-snapshots-service';
@@ -215,14 +215,11 @@ function getDisplay(
     const diffUnits = orderBy([...diffChars, ...diffMows], 'powerDiff', 'desc');
     const nonDiffUnits = orderBy([...nonDiffChars, ...nonDiffMows], 'power', 'desc');
     const diffCache = (() => {
-        const cache = diffUnits.reduce(
-            (cache, unit) => {
-                if ('rank' in unit.before) cache.chars.push(unit as CharDiff);
-                else cache.mows.push(unit as MachineOfWarDiff);
-                return cache;
-            },
-            { chars: [] as CharDiff[], mows: [] as MachineOfWarDiff[] }
-        );
+        const cache = { chars: [] as CharDiff[], mows: [] as MachineOfWarDiff[] };
+        for (const unit of diffUnits) {
+            if ('rank' in unit.before) cache.chars.push(unit as CharDiff);
+            else cache.mows.push(unit as MachineOfWarDiff);
+        }
         return {
             chars: cache.chars.map(c => ({
                 before: RosterSnapshotsService.snapshotCharacter(c.before),
@@ -236,18 +233,12 @@ function getDisplay(
     })();
 
     const nonDiffCache = (() => {
-        const cache = nonDiffUnits.reduce(
-            (cache, unit) => {
-                if ('rank' in unit) cache.chars.push(unit);
-                else cache.mows.push(unit);
-                return cache;
-            },
-            { chars: [] as (ICharacter2 & { power: number })[], mows: [] as (IMow2 & { power: number })[] }
-        );
-        return {
-            chars: cache.chars.map(c => RosterSnapshotsService.snapshotCharacter(c)),
-            mows: cache.mows.map(m => RosterSnapshotsService.snapshotMachineOfWar(m)),
-        };
+        const cache = { chars: [] as ISnapshotCharacter[], mows: [] as ISnapshotMachineOfWar[] };
+        for (const unit of nonDiffUnits) {
+            if ('rank' in unit) cache.chars.push(RosterSnapshotsService.snapshotCharacter(unit));
+            else cache.mows.push(RosterSnapshotsService.snapshotMachineOfWar(unit));
+        }
+        return cache;
     })();
 
     const renderedCharDiffs = diffCache.chars.map(unit => (

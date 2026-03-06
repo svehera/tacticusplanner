@@ -2,15 +2,13 @@
 
 import { SearchParamsStateContext } from '@/fsd/5-shared/ui/contexts';
 
-type NullableString = string | null | undefined;
-
 export const useQueryState = <T>(
     queryParameter: string,
-    stringToValue: (v: string | null) => T,
-    valueToString: (v: T) => NullableString
+    stringToValue: (v: string | undefined) => T,
+    valueToString: (v: T) => string | undefined
 ): [T, (value: T) => void] => {
     const [searchParameters, setSearchParameters] = useContext(SearchParamsStateContext);
-    const queryParameterValue = searchParameters.get(queryParameter);
+    const queryParameterValue = searchParameters.get(queryParameter) ?? undefined;
     const initialState = stringToValue(queryParameterValue);
 
     const [value, setValue] = useState<T>(initialState);
@@ -40,7 +38,7 @@ export const useQueryState = <T>(
     );
 
     useEffect(() => {
-        const queryParameterValueNew = searchParameters.get(queryParameter);
+        const queryParameterValueNew = searchParameters.get(queryParameter) ?? undefined;
         setValue(stringToValue(queryParameterValueNew));
     }, [searchParameters]);
 

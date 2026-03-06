@@ -391,6 +391,7 @@ export class TokenEstimationService {
         }
         // Find the token with the highest points, and if there is a tie, the lowest
         // (real) battle number.
+        // eslint-disable-next-line unicorn/no-array-reduce -- Finding the max with reduce is more efficient than sorting the whole array.
         return nextBestTokens.reduce((best, current) => {
             if (best === undefined) return current;
             if (current === undefined) return best;
@@ -415,9 +416,7 @@ export class TokenEstimationService {
         const tracks: ILreTrackProgress[] = cloneDeep(tracksProgress);
         for (const track of tracks) {
             for (const battle of track.battles) {
-                battle.completed =
-                    battle.requirementsProgress.reduce((sum, request) => (sum += request.completed ? 1 : 0), 0) ===
-                    battle.requirementsProgress.length;
+                battle.completed = battle.requirementsProgress.every(request => request.completed);
             }
         }
         const resolvedTeams = teams.map(team => ({
@@ -461,14 +460,13 @@ export class TokenEstimationService {
 
     /** @returns the current points earned in this track, accounting for partial killScore and highScore inputs. */
     public static computeCurrentPointsInTrack(track: ILreTrackProgress): number {
-        return track.battles.reduce((sum, battle) => {
-            const battlePoints = battle.requirementsProgress
-                .map(request => LreRequirementStatusService.getRequirementPoints(request))
-                .reduce((innerSum, points) => {
-                    return innerSum + points;
-                }, 0);
-            return sum + battlePoints;
-        }, 0);
+        let sum = 0;
+        for (const battle of track.battles) {
+            for (const request of battle.requirementsProgress) {
+                sum += LreRequirementStatusService.getRequirementPoints(request);
+            }
+        }
+        return sum;
     }
 
     /**

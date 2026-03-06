@@ -95,6 +95,10 @@ interface TaggedLocation {
     hsePoints?: number;
 }
 
+const hsePointsPerUnit = (campaignType: CampaignType): number => {
+    if (campaignType === CampaignType.Elite) return 5;
+    return 3;
+};
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
@@ -159,18 +163,15 @@ export class UpgradesService {
             ([_, value]) => !!value.id && !blockedIds.has(value.id) && !finishedIds.has(value.id)
         );
 
-        const mergedInProgress = inProgressMats.reduce(
-            (accumulator, [id, upgrade]) => {
-                const existing = accumulator[id];
-                if (existing) {
-                    existing.locations = uniqBy([...existing.locations, ...upgrade.locations], 'id');
-                } else {
-                    accumulator[id] = cloneDeep(upgrade);
-                }
-                return accumulator;
-            },
-            {} as Record<string, ICombinedUpgrade>
-        );
+        const mergedInProgress: Record<string, ICombinedUpgrade> = {};
+        for (const [id, upgrade] of inProgressMats) {
+            const existing = mergedInProgress[id];
+            if (existing) {
+                existing.locations = uniqBy([...existing.locations, ...upgrade.locations], 'id');
+            } else {
+                mergedInProgress[id] = cloneDeep(upgrade);
+            }
+        }
 
         const blockedMaterials = this.getTotalEstimates(remainingMats, inventoryUpgrades).map(x => {
             return {
@@ -412,13 +413,13 @@ export class UpgradesService {
                 }
                 raid.energyTotal = raid.raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
             }
-            day.energyTotal = day.raids.reduce((sum, raid) => {
+            day.energyTotal = 0;
+            for (const raid of day.raids) {
                 for (const loc of raid.raidLocations) {
                     loc.energySpent = loc.raidsToPerform * loc.energyCost;
+                    day.energyTotal += loc.energySpent;
                 }
-                const raidEnergy = raid.raidLocations.reduce((raidSum, loc) => raidSum + loc.energySpent, 0);
-                return sum + raidEnergy;
-            }, 0);
+            }
             energy = settings.dailyEnergy;
             if (day.raids.length === 0) break;
             returnValue.push(day);
@@ -458,11 +459,6 @@ export class UpgradesService {
     ): void {
         const hse = settings.preferences.farmPreferences?.homeScreenEvent;
         if (hse === undefined || hse === IDailyRaidsHomeScreenEvent.none) return;
-
-        const hsePointsPerUnit = (campaignType: CampaignType): number => {
-            if (campaignType === CampaignType.Elite) return 5;
-            return 3;
-        };
 
         const getHsePoints = (loc: ICampaignBattleComposed): number => {
             switch (hse) {
@@ -1046,15 +1042,6 @@ export class UpgradesService {
         );
     }
 
-    /** Used in reduce statements to select the most urgent goal (numerically lowest priority). */
-    private static reduceGoalsByPriority(
-        accumulator: ICharacterAscendGoal | undefined,
-        goal: ICharacterAscendGoal
-    ): ICharacterAscendGoal | undefined {
-        if (accumulator === undefined || goal.priority < accumulator.priority) accumulator = goal;
-        return accumulator;
-    }
-
     /**
      * Computes the number of onslaught tokens needed to collect the required shards and mythic
      * shards for a goal.
@@ -1091,24 +1078,19 @@ export class UpgradesService {
         characters: ICharacter2[],
         goals: ICharacterAscendGoal[]
     ): ICharacterAscendGoal | undefined {
-        const shardGoal = goals
+        const shardGoals = goals
             .filter(goal => this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal))
-            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, goal) > 0)
-            .reduce(
-                (accumulator, goal) => this.reduceGoalsByPriority(accumulator, goal),
-                undefined as ICharacterAscendGoal | undefined
-            );
-        const mythicShardGoal = goals
+            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, goal) > 0);
+        const mythicGoals = goals
             .filter(goal => this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, goal))
-            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, goal) > 0)
-            .reduce(
-                (accumulator, goal) => this.reduceGoalsByPriority(accumulator, goal),
-                undefined as ICharacterAscendGoal | undefined
-            );
-        const order = [shardGoal, mythicShardGoal]
-            .filter(x => x !== undefined)
-            .toSorted((a, b) => a.priority - b.priority);
-        return order.length === 0 ? undefined : order[0];
+            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, goal) > 0);
+        const findLowestPriorityGoal = (filtered: ICharacterAscendGoal[]) =>
+            filtered.toSorted((a, b) => a.priority - b.priority)[0];
+
+        const candidates = [findLowestPriorityGoal(shardGoals), findLowestPriorityGoal(mythicGoals)].filter(
+            (goal): goal is ICharacterAscendGoal => goal !== undefined
+        );
+        return candidates.length === 0 ? undefined : candidates.toSorted((a, b) => a.priority - b.priority)[0];
     }
 
     /**
@@ -1272,24 +1254,17 @@ export class UpgradesService {
         let energySpent = 0;
         let nonRewardRaidIndex = 0;
 
-        const raidsByMaterial = Object.entries(
-            settings.completedLocations.reduce(
-                (accumulator, loc) => {
-                    const reward = CampaignsService.getRepeatableReward(loc.rewards);
-                    if (reward.length === 0) {
-                        accumulator['no-reward-' + nonRewardRaidIndex++] = [loc];
-                    } else {
-                        accumulator[reward] = [...(accumulator[reward] ?? []), loc];
-                    }
-                    return accumulator;
-                },
-                {} as Record<string, IItemRaidLocation[]>
-            )
-        );
+        const raidsByMaterial = {} as Record<string, IItemRaidLocation[]>;
+        for (const location of settings.completedLocations) {
+            const reward = CampaignsService.getRepeatableReward(location.rewards);
+            const key = reward || 'no-reward-' + nonRewardRaidIndex++;
+            raidsByMaterial[key] ||= [];
+            raidsByMaterial[key].push(location);
+        }
 
         let raidIndex = 0;
         const raids: IUpgradeRaid[] = [];
-        for (const [reward, locations] of raidsByMaterial) {
+        for (const [reward, locations] of Object.entries(raidsByMaterial)) {
             const acquired = settings.upgrades[reward] ?? 0;
             const required = combinedBaseMaterials[reward]?.requiredCount ?? 0;
             const upgrade = FsdUpgradesService.getUpgrade(reward);

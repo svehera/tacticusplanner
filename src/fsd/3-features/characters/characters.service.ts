@@ -187,32 +187,33 @@ export class CharactersService {
         const factionCharacters = groupBy(units, 'faction');
 
         // Derive relevant faction data in one pass
-        const result: IFaction[] = factionsData.reduce((accumulator: IFaction[], faction) => {
-            const characters = factionCharacters[faction.snowprintId];
-            if (!characters) return accumulator;
+        const result: IFaction[] = factionsData
+            .map(faction => {
+                const characters = factionCharacters[faction.snowprintId];
+                if (!characters) return;
 
-            let bsValue = 0,
-                power = 0,
-                unlockedCharacters = 0;
-            for (const char of characters) {
-                if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue) {
-                    bsValue += CharactersValueService.getCharacterValue(char);
+                let bsValue = 0,
+                    power = 0,
+                    unlockedCharacters = 0;
+                for (const char of characters) {
+                    if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue) {
+                        bsValue += CharactersValueService.getCharacterValue(char);
+                    }
+                    if (includePower || charactersOrderBy === CharactersOrderBy.FactionPower) {
+                        power += CharactersPowerService.getCharacterPower(char);
+                    }
+                    if (isUnlocked(char)) unlockedCharacters++;
                 }
-                if (includePower || charactersOrderBy === CharactersOrderBy.FactionPower) {
-                    power += CharactersPowerService.getCharacterPower(char);
-                }
-                if (isUnlocked(char)) unlockedCharacters++;
-            }
 
-            accumulator.push({
-                ...faction,
-                units: characters,
-                bsValue,
-                power,
-                unlockedCharacters,
-            });
-            return accumulator;
-        }, []);
+                return {
+                    ...faction,
+                    units: characters,
+                    bsValue,
+                    power,
+                    unlockedCharacters,
+                };
+            })
+            .filter((x): x is IFaction => !!x);
 
         // Determine sort key based on the order parameter
         let orderByKey: keyof IFaction;

@@ -70,10 +70,10 @@ export const DailyRaids = () => {
 
     const location = useLocation();
     const [searchParameters] = useSearchParams();
-    const [charSnowprintId, setCharSnowprintId] = useState<string | null>(searchParameters.get('charSnowprintId'));
+    const [charSnowprintId, setCharSnowprintId] = useState(searchParameters.get('charSnowprintId') ?? undefined);
 
     useEffect(() => {
-        setCharSnowprintId(searchParameters.get('charSnowprintId'));
+        setCharSnowprintId(searchParameters.get('charSnowprintId') ?? undefined);
     }, [location]);
 
     const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {

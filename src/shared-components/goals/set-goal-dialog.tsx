@@ -133,12 +133,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
     }, [form.type, ignoreRankRarity, resolvedMows, characters]);
 
-    const getAscensionShardsName = (unit: IUnit | null): string => {
+    const getAscensionShardsName = (unit: IUnit | undefined): string => {
         if (!unit) return '';
         return 'shards_' + unit.snowprintId;
     };
 
-    const getAscensionMythicShardsName = (unit: IUnit | null): string => {
+    const getAscensionMythicShardsName = (unit: IUnit | undefined): string => {
         if (!unit) return '';
         return 'mythicShards_' + unit.snowprintId;
     };
@@ -207,7 +207,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
     const hasNonMythicAscension = () => {
         if (form.type !== PersonalGoalType.Ascend) return false;
-        return unit !== null && unit!.stars < RarityStars.OneBlueStar;
+        return unit !== undefined && unit.stars < RarityStars.OneBlueStar;
     };
     const hasMythicAscension = () => {
         if (form.type !== PersonalGoalType.Ascend) return false;

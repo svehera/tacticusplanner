@@ -80,7 +80,7 @@ export class TacticusIntegrationService {
         return [];
     }
 
-    static getUpgradeId(upgrade: TacticusUpgrade): string | null {
+    static getUpgradeId(upgrade: TacticusUpgrade): string {
         return upgrade.id;
     }
 }

@@ -41,6 +41,10 @@ interface Properties {
     restrictions: string[];
 }
 
+const getRowStyle = (parameters: RowClassParams): RowStyle => {
+    return parameters.node.rowIndex === 5 ? { borderTop: '5px dashed' } : {};
+};
+
 export const LreTeamsTable: React.FC<Properties> = ({
     legendaryEvent,
     track,
@@ -57,7 +61,7 @@ export const LreTeamsTable: React.FC<Properties> = ({
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const defaultColumnDef: ColDef & { section: LreTrackId } = {
+    const defaultColumnDefinition: ColDef & { section: LreTrackId } = {
         resizable: true,
         cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
             const character = properties.value;
@@ -136,10 +140,6 @@ export const LreTeamsTable: React.FC<Properties> = ({
         });
     };
 
-    const getRowStyle = (parameters: RowClassParams): RowStyle => {
-        return parameters.node.rowIndex === 5 ? { borderTop: '5px dashed' } : {};
-    };
-
     const addNewTeam = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
         const cellRelatedRestriction = cellClicked.colDef.field! as string;
         const restrictionsList = restrictions.includes(cellRelatedRestriction)
@@ -176,13 +176,7 @@ export const LreTeamsTable: React.FC<Properties> = ({
         }));
 
         // Create a lookup table to get the order from `columnIds`
-        const columnOrder: Record<string, number> = selectedRequirements.reduce(
-            (order, id, index) => {
-                order[id] = index;
-                return order;
-            },
-            {} as Record<string, number>
-        );
+        const columnOrder = Object.fromEntries(selectedRequirements.map((id, index) => [id, index]));
 
         // Sort `columns` by using the order from `columnIds`, keeping unspecified columns in original order
         columns.toSorted((a, b) => {
@@ -252,7 +246,7 @@ export const LreTeamsTable: React.FC<Properties> = ({
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     ref={gridReference}
-                    defaultColDef={defaultColumnDef}
+                    defaultColDef={defaultColumnDefinition}
                     columnDefs={columnsDefs}
                     components={components}
                     rowData={rows}

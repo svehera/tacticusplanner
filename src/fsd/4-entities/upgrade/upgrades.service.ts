@@ -159,7 +159,7 @@ export class UpgradesService {
      * using the results in expandedRecipeData.
      * @param key The ID of the upgrade material to expand.
      * @param expandedRecipeData The existing materials we have already expanded.
-     * @returns the expanded data, or null if the recipe cannot be expanded
+     * @returns the expanded data, or undefined if the recipe cannot be expanded
      *          because one or more ingredients have yet to be expanded.
      */
     private static expandRecipe(

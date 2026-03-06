@@ -16,6 +16,33 @@ interface Properties {
     onEnemyClick: (enemy: ResolvedEnemyData) => void;
 }
 
+// Extracted Logic: Resolve string to data object
+const resolveEnemy = (enemyString: string): ResolvedEnemyData | undefined => {
+    const colon = enemyString.indexOf(':');
+    const id = colon === -1 ? enemyString : enemyString.slice(0, Math.max(0, colon));
+
+    // Calculate index
+    let progressionIndex = 0;
+    if (colon !== -1) {
+        const pString = enemyString.slice(Math.max(0, colon + 1));
+        const pInt = Number.parseInt(pString, 10);
+        progressionIndex = Number.isNaN(pInt) ? 0 : pInt;
+    }
+
+    // Adjust for 0-based array (Your logic used -1, keeping that consistency)
+    const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
+
+    const npc = NpcService.getNpcById(id);
+
+    if (!npc || arrayIndex >= npc.stats.length) return;
+
+    return {
+        id,
+        npc,
+        stats: npc.stats[arrayIndex],
+    };
+};
+
 /**
  * Displays a grid of enemies, similar to what you see in game when you open a
  * campaign-battle dialog.
@@ -33,33 +60,6 @@ export const CampaignBattleEnemies: React.FC<Properties> = ({ keyPrefix, battleI
         () => enemies.reduce((accumulator, enemy) => accumulator + enemy.count, 0),
         [enemies]
     );
-
-    // Extracted Logic: Resolve string to data object
-    const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
-        const colon = enemyString.indexOf(':');
-        const id = colon === -1 ? enemyString : enemyString.slice(0, Math.max(0, colon));
-
-        // Calculate index
-        let progressionIndex = 0;
-        if (colon !== -1) {
-            const pString = enemyString.slice(Math.max(0, colon + 1));
-            const pInt = Number.parseInt(pString, 10);
-            progressionIndex = isNaN(pInt) ? 0 : pInt;
-        }
-
-        // Adjust for 0-based array (Your logic used -1, keeping that consistency)
-        const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
-
-        const npc = NpcService.getNpcById(id);
-
-        if (!npc || arrayIndex >= npc.stats.length) return null;
-
-        return {
-            id,
-            npc,
-            stats: npc.stats[arrayIndex],
-        };
-    };
 
     // How many enemies we show in each row, based on how many enemies we have
     // in total. Faster than doing the math.
@@ -91,7 +91,7 @@ export const CampaignBattleEnemies: React.FC<Properties> = ({ keyPrefix, battleI
         [8, 8, 8],
     ];
     const columns = useMemo(() => enemiesInCols[numberEnemies], [enemiesInCols, numberEnemies]);
-    const numberRows = useMemo(() => columns.length, columns);
+    const numberRows = columns.length;
     const maxPerRow = useMemo(() => Math.max(...columns), [columns]);
     const frameWidth = 202;
     const frameHeight = 267;
@@ -110,8 +110,8 @@ export const CampaignBattleEnemies: React.FC<Properties> = ({ keyPrefix, battleI
             const resolved = resolveEnemy(enemy.id);
             const enemyId = resolved?.id || enemy.id;
             const npc = NpcService.getNpcById(enemyId);
-            const rank = resolved === null ? Rank.Stone1 : resolved.stats.rank;
-            const stars = resolved === null ? RarityStars.None : resolved.stats.rarityStars;
+            const rank = resolved?.stats?.rank || Rank.Stone1;
+            const stars = resolved?.stats?.rarityStars || RarityStars.None;
 
             for (let index = 0; index < enemy.count; index++) {
                 elements.push(
@@ -124,7 +124,7 @@ export const CampaignBattleEnemies: React.FC<Properties> = ({ keyPrefix, battleI
                             onEnemyClick({
                                 id: enemyId,
                                 npc,
-                                stats: resolved === null ? npc.stats[0] : resolved.stats,
+                                stats: resolved?.stats ?? npc.stats[0],
                             })
                         }>
                         <NpcPortrait id={enemyId} rank={rank} stars={stars} />

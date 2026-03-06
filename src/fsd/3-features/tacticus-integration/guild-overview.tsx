@@ -32,7 +32,7 @@ const getRoleLabel = (role: TacticusGuildRole): string => {
 };
 
 // Component to format the date
-const DateFormatter: React.FC<{ value: string | null | undefined }> = ({ value }) => {
+const DateFormatter: React.FC<{ value: string | undefined }> = ({ value }) => {
     if (!value) return <span>Never</span>;
 
     const date = new Date(value);

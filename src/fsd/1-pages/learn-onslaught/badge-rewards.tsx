@@ -19,7 +19,7 @@ export function BadgeRewards({
                 .map(([rarity, count]) => (
                     // on very small screens, smush the badges until they're touching to save space. On larger screens, add a small gap between them
                     <span key={rarity} className="-ml-1.5 flex items-start first:ml-0 sm:ml-0">
-                        {new Array(count).fill(0).map((_, index) => (
+                        {Array.from({ length: count }, () => 0).map((_, index) => (
                             <BadgeImage
                                 key={index}
                                 rarity={rarity as RarityString}

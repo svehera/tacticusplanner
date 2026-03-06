@@ -49,7 +49,7 @@ export class LeProgressService {
     public static computeProgress(model: ILreProgressModel, useP2P: boolean): LeProgress {
         const totalPoints = model.syncedProgress?.currentPoints ?? sum(model.tracksProgress.map(x => x.totalPoints));
         const totalCurrency = sum(model.pointsMilestones.map(x => x.engramPayout));
-        const currentPoints = sum(model.tracksProgress.map(this.computeCurrentPoints));
+        const currentPoints = sum(model.tracksProgress.map(track => this.computeCurrentPoints(track)));
 
         const premiumMissions = useP2P ? sum(model.occurrenceProgress.map(x => x.premiumMissionsProgress)) : 0;
 

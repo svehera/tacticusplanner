@@ -114,7 +114,7 @@ export const LearnCharacters = () => {
         navigate({ search: parameters.toString() }, { replace: true });
     };
 
-    const defaultColDef: ColDef<ICharacter2> = {
+    const defaultColumnDefinition: ColDef<ICharacter2> = {
         sortable: true,
         resizable: true,
         autoHeight: true,
@@ -559,7 +559,7 @@ export const LearnCharacters = () => {
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     suppressCellFocus={true}
-                    defaultColDef={defaultColDef}
+                    defaultColDef={defaultColumnDefinition}
                     columnDefs={columnDefs}
                     rowData={rows}
                     onSortChanged={refreshRowNumberColumn}

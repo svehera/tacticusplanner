@@ -155,7 +155,7 @@ const DurationRenderer: React.FC<{ data: TacticusGuildRaidEntry }> = ({ data }) 
 };
 
 // Component for rendering date in a readable format
-const DateRenderer: React.FC<{ value: number | null | undefined }> = ({ value }) => {
+const DateRenderer: React.FC<{ value: number | undefined }> = ({ value }) => {
     if (!value) return <span>-</span>;
 
     const date = new Date(value * 1000);
@@ -588,7 +588,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         const now = Date.now();
 
         // Worst case scenario: season started at first damage
-        const firstEntryStart = (raidData.entries.find(entry => entry.startedOn !== null)?.startedOn ?? 0) * 1000;
+        const firstEntryStart =
+            (raidData.entries.find(entry => typeof entry.startedOn === 'number')?.startedOn ?? 0) * 1000;
         const seasonStart = firstEntryStart === 0 ? now : firstEntryStart;
 
         const userMap = new Map<string, UserSummary>();

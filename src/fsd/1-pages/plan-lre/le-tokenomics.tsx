@@ -25,7 +25,7 @@ import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
-import { renderRestrictions, renderTeam } from './le-token-render-utils';
+import { renderRestrictions, renderTeam } from './le-token-render-utilities';
 import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
