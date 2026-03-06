@@ -11,7 +11,7 @@ export const DecimalSpinner: React.FC<DecimalSpinnerProperties> = ({ value, onCh
     const [stringValue, setStringValue] = React.useState(value.toFixed(2));
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const numericValue = Number.parseFloat(e.target.value);
-        if (!isNaN(numericValue)) {
+        if (!Number.isNaN(numericValue)) {
             onChange(numericValue);
             setStringValue(e.target.value);
         } else if (e.target.value === '') {

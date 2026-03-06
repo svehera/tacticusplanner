@@ -44,6 +44,12 @@ interface Properties {
  * Displays the tokens to be used by the player in optimal order, along with
  * various statistics about each milestone.
  */
+
+const getRowClassName = (index: number) => {
+    // Alternate between two sets of colors for striping
+    return index % 2 === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-900';
+};
+
 export const LeTokenTable: React.FC<Properties> = ({
     battles,
     legendaryEvent,
@@ -124,11 +130,6 @@ export const LeTokenTable: React.FC<Properties> = ({
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
         if (token.battleNumber == undefined || token.battleNumber < 0) return;
         setRequirementStatus(token, RequirementStatus.StopHere);
-    };
-
-    const getRowClassName = (index: number) => {
-        // Alternate between two sets of colors for striping
-        return index % 2 === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-900';
     };
 
     return (

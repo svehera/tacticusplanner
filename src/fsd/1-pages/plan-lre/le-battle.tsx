@@ -36,7 +36,7 @@ const WaveDisplay: React.FC<WaveDisplayProperties> = ({ wave, waveIndex, onEnemy
         if (colon !== -1) {
             const pString = enemyString.slice(Math.max(0, colon + 1));
             const pInt = Number.parseInt(pString, 10);
-            progressionIndex = isNaN(pInt) ? 0 : pInt;
+            progressionIndex = Number.isNaN(pInt) ? 0 : pInt;
         }
 
         // Adjust for 0-based array (Your logic used -1, keeping that consistency)
