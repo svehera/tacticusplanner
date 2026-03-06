@@ -15,15 +15,9 @@ import { MowsService } from '@/fsd/4-entities/mow';
 
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
-import {
-    CharacterRaidGoalSelect,
-    IEstimatedShards,
-    IEstimatedUpgrades,
-    IItemRaidLocation,
-} from '@/fsd/3-features/goals/goals.models';
+import { CharacterRaidGoalSelect, IEstimatedUpgrades, IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
-import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
 
@@ -128,29 +122,12 @@ export const DailyRaids = () => {
         });
     };
 
-    const estimatedShards: IEstimatedShards = useMemo(() => {
-        return ShardsService.getShardsEstimatedDays(
-            {
-                campaignsProgress: campaignsProgress,
-                preferences: dailyRaidsPreferences,
-                raidedLocations: dailyRaids.raidedLocations,
-                filters: dailyRaids.filters,
-            },
-            ...shardsGoals
-        );
-    }, [shardsGoals, dailyRaidsPreferences, dailyRaids.filters]);
-
-    const actualEnergy = useMemo(() => {
-        return (
-            dailyRaidsPreferences.dailyEnergy -
-            Math.min(estimatedShards.energyPerDay, dailyRaidsPreferences.shardsEnergy)
-        );
-    }, [dailyRaidsPreferences.dailyEnergy, dailyRaidsPreferences.shardsEnergy, estimatedShards.energyPerDay]);
+    const actualEnergy = dailyRaidsPreferences.dailyEnergy;
 
     const estimatedRanks: IEstimatedUpgrades = useMemo(() => {
         return UpgradesService.getUpgradesEstimatedDays(
             {
-                dailyEnergy: actualEnergy,
+                dailyEnergy: dailyRaidsPreferences.dailyEnergy,
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,
@@ -162,7 +139,7 @@ export const DailyRaids = () => {
             ...[...upgradeRankOrMowGoals, ...shardsGoals]
         );
     }, [
-        actualEnergy,
+        dailyRaidsPreferences.dailyEnergy,
         upgradeRankOrMowGoals,
         shardsGoals,
         dailyRaidsPreferences,
@@ -174,17 +151,39 @@ export const DailyRaids = () => {
         campaignsProgress,
     ]);
 
-    const hasShardsEnergy = dailyRaidsPreferences.shardsEnergy > 0 || estimatedShards.energyPerDay > 0;
-    const energyDescription = hasShardsEnergy
-        ? `${actualEnergy} = ${dailyRaidsPreferences.dailyEnergy} - ${Math.min(estimatedShards.energyPerDay, dailyRaidsPreferences.shardsEnergy)}`
-        : actualEnergy.toString();
+    const infiniteEstimatedRanks: IEstimatedUpgrades = useMemo(() => {
+        return UpgradesService.getUpgradesEstimatedDays(
+            {
+                dailyEnergy: 88888888,
+                campaignsProgress: campaignsProgress,
+                preferences: dailyRaidsPreferences,
+                upgrades: upgrades,
+                completedLocations: raidedLocations?.filter(x => !x.isShardsLocation) ?? [],
+                filters: dailyRaids.filters,
+            },
+            resolvedCharacters,
+            resolvedMows,
+            ...[...upgradeRankOrMowGoals, ...shardsGoals]
+        );
+    }, [
+        dailyRaidsPreferences.dailyEnergy,
+        upgradeRankOrMowGoals,
+        shardsGoals,
+        dailyRaidsPreferences,
+        dailyRaids.filters,
+        upgrades,
+        raidedLocations,
+        resolvedCharacters,
+        resolvedMows,
+        campaignsProgress,
+    ]);
 
     return (
         <div>
             <RaidsHeader
                 hasSync={hasSync}
                 syncHandle={sync}
-                actualDailyEnergy={energyDescription}
+                actualDailyEnergy={actualEnergy.toString()}
                 refreshDisabled={!hasChanges && dailyRaids.raidedLocations.length === raidedLocations.length}
                 refreshHandle={refresh}
                 resetDisabled={!dailyRaids.raidedLocations?.length}
@@ -194,7 +193,6 @@ export const DailyRaids = () => {
             </RaidsHeader>
 
             <RaidsPlan
-                estimatedShards={estimatedShards}
                 estimatedRanks={estimatedRanks}
                 upgrades={upgrades}
                 updateInventory={saveInventoryUpdateChanges}
@@ -202,7 +200,15 @@ export const DailyRaids = () => {
                 scrollToCharSnowprintId={charSnowprintId ?? undefined}
             />
 
-            {estimatedRanks.upgradesRaids.length > 0 && <TodayRaids raids={estimatedRanks.upgradesRaids[0].raids} />}
+            {estimatedRanks.upgradesRaids.length > 0 && (
+                <TodayRaids
+                    raids={estimatedRanks.upgradesRaids[0].raids}
+                    bonusRaids={UpgradesService.getDayRaidsDifference(
+                        infiniteEstimatedRanks.upgradesRaids[0],
+                        estimatedRanks.upgradesRaids[0]
+                    )}
+                />
+            )}
         </div>
     );
 };

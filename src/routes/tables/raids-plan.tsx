@@ -19,7 +19,7 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { IEstimatedShards, IEstimatedUpgrades } from '@/fsd/3-features/goals/goals.models';
+import { IEstimatedUpgrades } from '@/fsd/3-features/goals/goals.models';
 import { MaterialsTable } from '@/fsd/3-features/goals/materials-table';
 import { RaidsDayView } from '@/fsd/3-features/goals/raids-day-view';
 
@@ -28,7 +28,6 @@ import { Inventory } from '@/fsd/1-pages/input-inventory';
 import { RaidUpgradeMaterialCard } from './raid-upgrade-material-card';
 
 interface Props {
-    estimatedShards: IEstimatedShards;
     estimatedRanks: IEstimatedUpgrades;
     scrollToCharSnowprintId?: string;
     upgrades: Record<string, number>;
@@ -40,7 +39,6 @@ type RefElem = HTMLDivElement | null;
 type RefMap = { [key: string]: RefElem };
 
 export const RaidsPlan: React.FC<Props> = ({
-    estimatedShards,
     estimatedRanks,
     scrollToCharSnowprintId,
     updateInventoryAny,
@@ -140,8 +138,8 @@ export const RaidsPlan: React.FC<Props> = ({
         return formatDateWithOrdinal(nextDate);
     }, [estimatedRanks.upgradesRaids.length]);
 
-    const daysTotal = Math.max(estimatedRanks.daysTotal, estimatedShards.daysTotal);
-    const energyTotal = estimatedRanks.energyTotal + estimatedShards.energyTotal;
+    const daysTotal = estimatedRanks.daysTotal;
+    const energyTotal = estimatedRanks.energyTotal;
 
     const calendarDateTotal: string = useMemo(() => {
         const nextDate = new Date();
@@ -159,15 +157,8 @@ export const RaidsPlan: React.FC<Props> = ({
                             Raids plan (<b>{daysTotal}</b> Days |
                         </span>
                         <span>
-                            <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} />
+                            <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} />)
                         </span>
-                        {!!estimatedShards.onslaughtTokens && (
-                            <span>
-                                | <b>{estimatedShards.onslaughtTokens}</b> Tokens)
-                            </span>
-                        )}
-
-                        {!estimatedShards.onslaughtTokens && <>)</>}
                     </div>
                     <span className="italic">{calendarDateTotal}</span>
                 </FlexBox>

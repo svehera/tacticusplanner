@@ -755,9 +755,16 @@ describe('UpgradesService.planDayRaiding', () => {
             onslaughtTokens: 0,
         };
 
-        UpgradesService.planDayRaiding(day, settings, settings.dailyEnergy, locs, combinedBaseMaterials, inventory, [
-            goal,
-        ]);
+        UpgradesService.planDayRaiding(
+            day,
+            settings,
+            settings.dailyEnergy,
+            locs,
+            combinedBaseMaterials,
+            inventory,
+            inventory,
+            [goal]
+        );
 
         const boonLocations = [
             CampaignsService.campaignsComposed['FoCE29'].id,
@@ -841,11 +848,11 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         const inventory: Record<string, number> = {};
         const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
 
-        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locOE05, remainingMats, goals, goalA.goalId, {
             raidKey: `${upgradeId}::${goalA.goalId}`,
             goal: { goalId: goalA.goalId, unitId: goalA.unitId },
         });
-        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalB.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locIME04, remainingMats, goals, goalB.goalId, {
             raidKey: `${upgradeId}::${goalB.goalId}`,
             goal: { goalId: goalB.goalId, unitId: goalB.unitId },
         });
@@ -875,19 +882,19 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         const inventory: Record<string, number> = {};
         const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
 
-        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locOE05, remainingMats, goals, goalA.goalId, {
             raidKey: `${upgradeId}::${goalA.goalId}`,
             goal: { goalId: goalA.goalId, unitId: goalA.unitId },
         });
-        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalA.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locIME04, remainingMats, goals, goalA.goalId, {
             raidKey: `${upgradeId}::${goalA.goalId}`,
             goal: { goalId: goalA.goalId, unitId: goalA.unitId },
         });
-        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalB.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locOE05, remainingMats, goals, goalB.goalId, {
             raidKey: `${upgradeId}::${goalB.goalId}`,
             goal: { goalId: goalB.goalId, unitId: goalB.unitId },
         });
-        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalB.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locIME04, remainingMats, goals, goalB.goalId, {
             raidKey: `${upgradeId}::${goalB.goalId}`,
             goal: { goalId: goalB.goalId, unitId: goalB.unitId },
         });
@@ -913,11 +920,11 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         const inventory: Record<string, number> = {};
         const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
 
-        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locOE05, remainingMats, goals, goalA.goalId, {
             raidKey: `${upgradeId}::${goalA.goalId}`,
             goal: { goalId: goalA.goalId, unitId: goalA.unitId },
         });
-        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalA.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locIME04, remainingMats, goals, goalA.goalId, {
             raidKey: `${upgradeId}::${goalA.goalId}`,
             goal: { goalId: goalA.goalId, unitId: goalA.unitId },
         });
@@ -929,7 +936,7 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         expect(countsAfterGoalA[locOE05.id]).toBe(6);
         expect(countsAfterGoalA[locIME04.id]).toBe(2);
 
-        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalB.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locIME04, remainingMats, goals, goalB.goalId, {
             raidKey: `${upgradeId}::${goalB.goalId}`,
             goal: { goalId: goalB.goalId, unitId: goalB.unitId },
         });
@@ -981,11 +988,11 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
             goalC
         );
 
-        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locOE05, remainingMats, goals, goalA.goalId, {
             raidKey: `${upgradeId}::${goalA.goalId}`,
             goal: { goalId: goalA.goalId, unitId: goalA.unitId },
         });
-        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalB.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locIME04, remainingMats, goals, goalB.goalId, {
             raidKey: `${upgradeId}::${goalB.goalId}`,
             goal: { goalId: goalB.goalId, unitId: goalB.unitId },
         });
@@ -1022,19 +1029,19 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
             goalC
         );
 
-        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locOE05, remainingMats, goals, goalA.goalId, {
             raidKey: `${upgradeId}::${goalA.goalId}`,
             goal: { goalId: goalA.goalId, unitId: goalA.unitId },
         });
-        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalA.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locIME04, remainingMats, goals, goalA.goalId, {
             raidKey: `${upgradeId}::${goalA.goalId}`,
             goal: { goalId: goalA.goalId, unitId: goalA.unitId },
         });
-        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalB.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locOE05, remainingMats, goals, goalB.goalId, {
             raidKey: `${upgradeId}::${goalB.goalId}`,
             goal: { goalId: goalB.goalId, unitId: goalB.unitId },
         });
-        UpgradesService.raidLocation(day, 999, inventory, locIME04, remainingMats, goals, goalB.goalId, {
+        UpgradesService.raidLocation(day, 999, inventory, inventory, locIME04, remainingMats, goals, goalB.goalId, {
             raidKey: `${upgradeId}::${goalB.goalId}`,
             goal: { goalId: goalB.goalId, unitId: goalB.unitId },
         });
