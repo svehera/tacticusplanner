@@ -283,6 +283,7 @@ export const Goals = () => {
                                     goal={goal}
                                     goalEstimate={adjustedGoalsEstimates.goalEstimates
                                         .filter(x => x.goalId === goal.goalId)
+                                        // eslint-disable-next-line unicorn/no-array-reduce -- not simple to refactor to a simpler method
                                         .reduce(
                                             (previous, current) =>
                                                 ({

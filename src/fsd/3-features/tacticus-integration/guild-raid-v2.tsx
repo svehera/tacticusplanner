@@ -437,14 +437,13 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'Token Status',
             field: 'tokenStatus',
             cellRenderer: TokenStatusRenderer,
-            valueFormatter: parameters => {
-                const tokenStatus = parameters.value;
-                if (tokenStatus.count === MAX_TOKEN) return `${tokenStatus.count} tokens available`;
-                const timeReloading = Date.now() - tokenStatus.reloadStart;
+            valueFormatter: ({ value: { count, reloadStart } }) => {
+                if (count === MAX_TOKEN) return `${count} tokens available`;
+                const timeReloading = Date.now() - reloadStart;
                 const cooldown = millisecondsPerToken - timeReloading;
                 const hoursCooldown = Math.round(cooldown / HOUR);
-                return tokenStatus.count > 0
-                    ? `${tokenStatus.count} token${tokenStatus.count > 1 ? 's' : ''}, ${hoursCooldown}h cooldown`
+                return count > 0
+                    ? `${count} token${count > 1 ? 's' : ''}, ${hoursCooldown}h cooldown`
                     : `no token, ${hoursCooldown}h cooldown`;
             },
             sortable: true,
@@ -709,7 +708,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         ).length;
 
         // User participation count
-        const userParticipation = new Map();
+        const userParticipation = new Map<(typeof filteredEntries)[number]['userId'], number>();
         for (const entry of filteredEntries) {
             userParticipation.set(entry.userId, (userParticipation.get(entry.userId) || 0) + 1);
         }
@@ -717,15 +716,15 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         // Most active user
         let mostActiveUser = '';
         let mostActiveCount = 0;
-        userParticipation.forEach((count, user: string) => {
+        for (const [user, count] of userParticipation.entries()) {
             if (count > mostActiveCount) {
                 mostActiveUser = userIdMapper(user);
                 mostActiveCount = count;
             }
-        });
+        }
 
         // Highest damage in a single attack
-        const highestDamage = filteredEntries.reduce((max, entry) => Math.max(max, entry.damageDealt), 0);
+        const highestDamage = Math.max(0, ...filteredEntries.map(entry => entry.damageDealt));
 
         // User with highest damage
         const userWithHighestDamage = userIdMapper(

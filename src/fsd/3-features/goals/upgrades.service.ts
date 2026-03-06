@@ -187,15 +187,11 @@ export class UpgradesService {
         const finishedMaterials = isGoalPriority
             ? goalPriorityEstimates!.filter(x => x.isFinished && !x.isBlocked)
             : this.getTotalEstimates(
-                  Object.entries(combinedBaseMaterials)
-                      .filter(([_, value]) => value.id && (inventoryUpgrades[value.id] ?? 0) >= value.requiredCount)
-                      .reduce(
-                          (accumulator, [id, upgrade]) => {
-                              accumulator[id] = cloneDeep(upgrade);
-                              return accumulator;
-                          },
-                          {} as Record<string, ICombinedUpgrade>
-                      ),
+                  Object.fromEntries(
+                      Object.entries(combinedBaseMaterials)
+                          .filter(([_, value]) => value.id && (inventoryUpgrades[value.id] ?? 0) >= value.requiredCount)
+                          .map(([id, upgrade]) => [id, cloneDeep(upgrade)])
+                  ),
                   inventoryUpgrades
               );
 

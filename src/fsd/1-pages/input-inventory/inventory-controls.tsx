@@ -31,7 +31,7 @@ const InventoryControlsFunction: React.FC<Properties> = ({ resetUpgrades, nameFi
                         setTimeout(() => setNameFilter(value), value ? 50 : 0);
                     }}
                     endAdornment={
-                        nameFilter ? (
+                        nameFilter && (
                             <InputAdornment position="end">
                                 <IconButton
                                     onClick={() => {
@@ -42,7 +42,7 @@ const InventoryControlsFunction: React.FC<Properties> = ({ resetUpgrades, nameFi
                                     <ClearIcon />
                                 </IconButton>
                             </InputAdornment>
-                        ) : null
+                        )
                     }
                     label="Quick Filter"
                 />

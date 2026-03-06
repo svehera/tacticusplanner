@@ -20,6 +20,42 @@ interface Properties {
     changeProgress: (value: number) => void; // Callback to update progress externally.
 }
 
+// Get the maximum number of nodes based on the campaign difficulty.
+const getMaxNodes = (difficulty: CampaignDifficulty) => {
+    switch (difficulty) {
+        case CampaignDifficulty.standard:
+        case CampaignDifficulty.mirror: {
+            return 75;
+        }
+        case CampaignDifficulty.elite: {
+            return 40;
+        }
+        case CampaignDifficulty.eventStandard:
+        case CampaignDifficulty.eventExtremis: {
+            return 30;
+        }
+        case CampaignDifficulty.eventChallenge: {
+            return 3;
+        }
+        default: {
+            return 0;
+        }
+    }
+};
+
+//  Get the color based on the campaign difficulty.
+const getColor = (difficulty: CampaignDifficulty) => {
+    switch (difficulty) {
+        case CampaignDifficulty.elite:
+        case CampaignDifficulty.eventExtremis: {
+            return 'secondary';
+        }
+        default: {
+            return 'primary';
+        }
+    }
+};
+
 /**
  * CampaignProgress Component
  * Displays the progress of a campaign using a slider and input,
@@ -37,42 +73,6 @@ export const CampaignProgress: React.FC<Properties> = ({
     useEffect(() => {
         setCurrentProgress(initialProgress);
     }, [initialProgress]);
-
-    // Get the maximum number of nodes based on the campaign difficulty.
-    const getMaxNodes = (difficulty: CampaignDifficulty) => {
-        switch (difficulty) {
-            case CampaignDifficulty.standard:
-            case CampaignDifficulty.mirror: {
-                return 75;
-            }
-            case CampaignDifficulty.elite: {
-                return 40;
-            }
-            case CampaignDifficulty.eventStandard:
-            case CampaignDifficulty.eventExtremis: {
-                return 30;
-            }
-            case CampaignDifficulty.eventChallenge: {
-                return 3;
-            }
-            default: {
-                return 0;
-            }
-        }
-    };
-
-    //  Get the color based on the campaign difficulty.
-    const getColor = (difficulty: CampaignDifficulty) => {
-        switch (difficulty) {
-            case CampaignDifficulty.elite:
-            case CampaignDifficulty.eventExtremis: {
-                return 'secondary';
-            }
-            default: {
-                return 'primary';
-            }
-        }
-    };
 
     const max = useMemo(() => getMaxNodes(campaign.difficulty), [campaign.difficulty]);
     const color = useMemo(() => getColor(campaign.difficulty), [campaign.difficulty]);
