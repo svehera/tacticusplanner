@@ -235,7 +235,7 @@ export const RosterSnapshotCharacter = ({
             { equip: char?.equip0, level: char?.equip0Level, type: char?.equip0?.type ?? charData?.equipment1 },
             { equip: char?.equip1, level: char?.equip1Level, type: char?.equip1?.type ?? charData?.equipment2 },
             { equip: char?.equip2, level: char?.equip2Level, type: char?.equip2?.type ?? charData?.equipment3 },
-        ].sort(
+        ].toSorted(
             (a, b) =>
                 (typeOrder[a.type ?? ''] ?? Number.MAX_SAFE_INTEGER) -
                 (typeOrder[b.type ?? ''] ?? Number.MAX_SAFE_INTEGER)

@@ -37,6 +37,17 @@ interface Properties {
     updateDto: (model: ILreProgressModel) => void;
 }
 
+const getRestrictionTooltip = (request: ILreRequirements) => {
+    if (
+        request.id === LrePointsCategoryId.defeatAll ||
+        request.id === LrePointsCategoryId.killScore ||
+        request.id === LrePointsCategoryId.highScore
+    ) {
+        return request.name;
+    }
+    return `${request.name} - ${request.pointsPerBattle}`;
+};
+
 export const LreTrackOverallProgress: React.FC<Properties> = ({
     track,
     legendaryEventId: _legendaryEventId,
@@ -95,17 +106,6 @@ export const LreTrackOverallProgress: React.FC<Properties> = ({
     };
 
     const completionPercentage = Math.round((currentPoints / track.totalPoints) * 100);
-
-    const getRestrictionTooltip = (request: ILreRequirements) => {
-        if (
-            request.id === LrePointsCategoryId.defeatAll ||
-            request.id === LrePointsCategoryId.killScore ||
-            request.id === LrePointsCategoryId.highScore
-        ) {
-            return request.name;
-        }
-        return `${request.name} - ${request.pointsPerBattle}`;
-    };
 
     const handleToggle = () => {
         if (

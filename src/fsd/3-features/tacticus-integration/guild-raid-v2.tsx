@@ -185,9 +185,9 @@ const UnitIconRenderer: React.FC<{ value: ICharacterData[] | IMowStatic2[] }> = 
 export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: string) => string }> = ({
     userIdMapper,
 }) => {
-    const [raidData, setRaidData] = useState<TacticusGuildRaidResponse | null>(null);
+    const [raidData, setRaidData] = useState<TacticusGuildRaidResponse>();
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string>();
     const [filteredEntries, setFilteredEntries] = useState<TacticusGuildRaidEntry[]>([]);
 
     // Simulating data fetch
@@ -195,7 +195,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         // In a real application, you would fetch this data from an API
         getTacticusGuildRaidData()
             .then(response => {
-                setRaidData(response.data ?? null);
+                setRaidData(response.data);
                 setLoading(false);
 
                 setFilteredEntries(response.data?.entries ?? []);
@@ -516,7 +516,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 160,
             cellRenderer: (parameters: ICellRendererParams<UserSummary>) => {
                 const topHeroes = [...parameters.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 5)
                     .map(([key]) => CharactersService.getUnit(key))
                     .filter((character): character is ICharacterData => character !== undefined);
@@ -524,7 +524,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             },
             valueFormatter: parameters => {
                 const topHeroes = [...parameters.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 5)
                     .map(([key]) => key);
                 return topHeroes.join(', ');
@@ -536,7 +536,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 120,
             cellRenderer: (parameters: ICellRendererParams<UserSummary>) => {
                 const topMoW = [...parameters.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 3)
                     .map(([key]) => MowsService.resolveToStatic(key))
                     .filter((mow): mow is IMowStatic2 => mow !== undefined);
@@ -544,7 +544,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             },
             valueFormatter: parameters => {
                 const topMoW = [...parameters.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 5)
                     .map(([key]) => key);
                 return topMoW.join(', ');
@@ -557,7 +557,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             valueFormatter: parameters => {
                 if (!parameters.value) return '';
                 const topBosses = [...parameters.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 3)
                     .map(([key, count]) => `${key}(${count})`);
                 return topBosses.join(', ');
@@ -570,7 +570,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             valueFormatter: parameters => {
                 if (!parameters.value) return '';
                 const topSideBosses = [...parameters.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 3)
                     .map(([key, count]) => `${key}(${count})`);
                 return topSideBosses.join(', ');
@@ -584,7 +584,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     ];
 
     const summaryData = useMemo(() => {
-        if (raidData === null) return [];
+        if (raidData === undefined) return [];
 
         const now = Date.now();
 
@@ -688,7 +688,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
     // Calculate summary statistics
     const calculateStats = () => {
-        if (!raidData || filteredEntries.length === 0) return null;
+        if (!raidData || filteredEntries.length === 0) return;
 
         // Total damage dealt across all entries
         const totalDamage = filteredEntries.reduce((sum, entry) => sum + entry.damageDealt, 0);

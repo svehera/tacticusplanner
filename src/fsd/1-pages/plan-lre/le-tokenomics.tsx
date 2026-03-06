@@ -97,7 +97,7 @@ export const LeTokenomics: React.FC<Properties> = ({
     };
 
     // Find the first token that doesn't have yellow/red restrictions
-    const firstToken = tokenDisplays.find(token => !hasWarningRestrictions(token)) ?? null;
+    const firstToken = tokenDisplays.find(token => !hasWarningRestrictions(token));
     const firstTokenIndex = firstToken ? tokenDisplays.indexOf(firstToken) : -1;
 
     const totalFreeTokensRemainingInIteration = LeTokenService.getFreeTokensRemainingInIteration(

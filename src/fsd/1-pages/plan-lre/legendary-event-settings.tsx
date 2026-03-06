@@ -78,17 +78,17 @@ export const LegendaryEventSettings: React.FC = () => {
             <SettingGroup
                 title="Default Page During Event"
                 currentValue={defaultPageWhenEventIsActive}
-                onChange={e => {
-                    setDefaultPageWhenEventIsActive(e);
-                    update({ ...leSettings, defaultPageForActiveEvent: e });
+                onChange={defaultPageForActiveEvent => {
+                    setDefaultPageWhenEventIsActive(defaultPageForActiveEvent);
+                    update({ ...leSettings, defaultPageForActiveEvent });
                 }}
             />
             <SettingGroup
                 title="Default Page Outside of Event"
                 currentValue={defaultPageWhenEventIsInactive}
-                onChange={e => {
-                    setDefaultPageWhenEventIsInactive(e);
-                    update({ ...leSettings, defaultPageWhenEventNotActive: e });
+                onChange={defaultPageWhenEventNotActive => {
+                    setDefaultPageWhenEventIsInactive(defaultPageWhenEventNotActive);
+                    update({ ...leSettings, defaultPageWhenEventNotActive });
                 }}
             />
             <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
@@ -99,9 +99,9 @@ export const LegendaryEventSettings: React.FC = () => {
                     <input
                         type="checkbox"
                         checked={showP2P}
-                        onChange={e => {
-                            setShowP2P(e.target.checked);
-                            update({ ...leSettings, showP2POptions: e.target.checked });
+                        onChange={event => {
+                            setShowP2P(event.target.checked);
+                            update({ ...leSettings, showP2POptions: event.target.checked });
                         }}
                         className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700"
                     />

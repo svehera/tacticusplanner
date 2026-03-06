@@ -45,6 +45,20 @@ import {
     IGameModeTokensState,
 } from '../models/interfaces';
 
+// Helper function to compare two arrays for equality
+function areArraysEqual(array1: string[], array2: string[]): boolean {
+    return array1.length === array2.length && array1.every(char => array2.includes(char));
+}
+
+function doTeamsMatch(team1: string[], team2: string[]) {
+    return areArraysEqual(
+        team1.map(id => CharactersService.canonicalName(id)),
+        team2.map(id => CharactersService.canonicalName(id))
+    );
+}
+
+const resolve = (char: string) => CharactersService.canonicalName(char);
+
 export class PersonalDataLocalStorage {
     private readonly storePrefix = 'tp-';
     private readonly backupKey = this.storePrefix + 'backup';
@@ -161,17 +175,17 @@ export class PersonalDataLocalStorage {
         localStorage.removeItem(this.v1personalDataStorageKey);
     }
 
-    restoreData(): IPersonalData2 | null {
+    restoreData() {
         const backup = localStorage.getItem(this.backupKey);
         if (backup) {
             try {
                 const data: IPersonalData | IPersonalData2 = JSON.parse(backup);
                 return convertData(data);
             } catch {
-                return null;
+                return;
             }
         } else {
-            return null;
+            return;
         }
     }
 
@@ -181,26 +195,26 @@ export class PersonalDataLocalStorage {
         localStorage.setItem(this.backUpDateKey, new Date().toISOString());
     }
 
-    public getBackupDate(): Date | null {
+    public getBackupDate() {
         const date = localStorage.getItem(this.backUpDateKey);
         if (!date) {
-            return null;
+            return;
         }
 
         return new Date(date);
     }
 
-    private getItem<T>(key: keyof IPersonalData2): T | null {
+    private getItem<T>(key: keyof IPersonalData2): T | undefined {
         const value = localStorage.getItem(this.storePrefix + key);
 
         if (!value) {
-            return null;
+            return;
         }
 
         try {
             return JSON.parse(value);
         } catch {
-            return null;
+            return;
         }
     }
 
@@ -294,23 +308,10 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
     const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
     const teams: ILreTeam[] = [];
 
-    // Helper function to compare two arrays for equality
-    function areArraysEqual(array1: string[], array2: string[]): boolean {
-        return array1.length === array2.length && array1.every(char => array2.includes(char));
-    }
-
-    function doTeamsMatch(team1: string[], team2: string[]) {
-        return areArraysEqual(
-            team1.map(id => CharactersService.canonicalName(id)),
-            team2.map(id => CharactersService.canonicalName(id))
-        );
-    }
-
     for (const section of sections) {
         const selectedTeams: SelectedTeams = data[section];
 
         for (const [restriction, charSnowprintIds] of Object.entries(selectedTeams)) {
-            const resolve = (char: string) => CharactersService.canonicalName(char);
             // Check if there's already a team with the same set of characters
             const existingTeam = teams.find(
                 team =>

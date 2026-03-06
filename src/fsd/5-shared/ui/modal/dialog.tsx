@@ -152,7 +152,7 @@ const CloseIndicator = ({ className, ...properties }: CloseButtonIndicatorProper
             className={closeIndicator({ className })}>
             <XIcon className="size-4" />
         </ButtonPrimitive>
-    ) : null;
+    ) : undefined;
 };
 
 Dialog.Trigger = Trigger;

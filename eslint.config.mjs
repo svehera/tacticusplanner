@@ -28,7 +28,14 @@ const compat = new FlatCompat({
 const FS_LAYERS = ['shared', 'entities', 'features', 'widgets', 'pages', 'app'];
 
 export default defineConfig([
-    globalIgnores(['dist', 'build', 'node_modules', 'package-lock.json', 'vite-env.d.ts']),
+    globalIgnores([
+        'dist',
+        'build',
+        'node_modules',
+        'package-lock.json',
+        'vite-env.d.ts',
+        'analytics__google-analytics.d.ts',
+    ]),
     eslintPluginUnicorn.configs.recommended,
     ...compat.extends(
         'eslint:recommended',

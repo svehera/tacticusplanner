@@ -16,7 +16,7 @@ import { useMemo, useState } from 'react';
 import onslaughtData from '@/data/onslaught/data.generated.json';
 
 import { HomeScreenEventPlannerService } from './home-screen-event-planner.service';
-import { GREEK_ZONES, numToRoman as numberToRoman, ONSLAUGHT_TRACK_NAME, romanToNum as romanToNumber } from './id-data';
+import { GREEK_ZONES, numberToRoman, ONSLAUGHT_TRACK_NAME, romanToNumber } from './id-data';
 import { OnslaughtSectorKey, OnslaughtTrackId, OnslaughtZoneKey } from './models';
 
 export const HomeScreenEventPlanner = () => {

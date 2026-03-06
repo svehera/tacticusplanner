@@ -17,6 +17,45 @@ interface Properties {
     setState: (request: ILreBattleRequirementsProgress, status: RequirementStatus, forceOverwrite?: boolean) => void;
 }
 
+// Convert legacy boolean flags to RequirementStatus
+const getRequirementStatus = (request: ILreBattleRequirementsProgress): RequirementStatus => {
+    // If new status field exists, use it
+    if (request.status !== undefined) {
+        return request.status as RequirementStatus;
+    }
+
+    // Legacy conversion
+    if (request.completed) {
+        return RequirementStatus.Cleared;
+    }
+    if (request.blocked) {
+        return RequirementStatus.StopHere;
+    }
+    return RequirementStatus.NotCleared;
+};
+
+// Cycle through statuses for non-killScore requirements
+// NotCleared (0) → Cleared (1) → MaybeClear (2) → StopHere (3) → NotCleared (0)
+const getNextStatus = (currentStatus: RequirementStatus): RequirementStatus => {
+    switch (currentStatus) {
+        case RequirementStatus.NotCleared: {
+            return RequirementStatus.Cleared;
+        }
+        case RequirementStatus.Cleared: {
+            return RequirementStatus.MaybeClear;
+        }
+        case RequirementStatus.MaybeClear: {
+            return RequirementStatus.StopHere;
+        }
+        case RequirementStatus.StopHere: {
+            return RequirementStatus.NotCleared;
+        }
+        default: {
+            return RequirementStatus.NotCleared;
+        }
+    }
+};
+
 export const LreTrackBattleSummary: React.FC<Properties> = ({
     battle,
     maxKillPoints,
@@ -24,7 +63,7 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
     setState,
 }) => {
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-    const [showDropdown, setShowDropdown] = useState<string | null>(null);
+    const [showDropdown, setShowDropdown] = useState<string>();
     const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
     const longPressTimer = useRef<NodeJS.Timeout | null>(null);
     const longPressTriggered = useRef<boolean>(false);
@@ -50,7 +89,7 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
                 const button = buttonReferences.current.get(showDropdown);
                 const target = event.target as Node;
                 if (button && target && !button.contains(target)) {
-                    setShowDropdown(null);
+                    setShowDropdown(undefined);
                 }
             }
         };
@@ -93,6 +132,7 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
     const handlePressEnd = () => {
         if (longPressTimer.current) {
             clearTimeout(longPressTimer.current);
+            // eslint-disable-next-line unicorn/no-null
             longPressTimer.current = null;
         }
 
@@ -105,53 +145,15 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
             // Reset the flag after a short delay to prevent immediate click
             resetTriggerTimer.current = setTimeout(() => {
                 longPressTriggered.current = false;
+                // eslint-disable-next-line unicorn/no-null
                 resetTriggerTimer.current = null;
             }, 100);
         }
     };
 
     const handleDirectStatusChange = (request: ILreBattleRequirementsProgress, newStatus: RequirementStatus) => {
-        setShowDropdown(null);
+        setShowDropdown(undefined);
         handleStatusChange(request, newStatus);
-    };
-
-    // Convert legacy boolean flags to RequirementStatus
-    const getRequirementStatus = (request: ILreBattleRequirementsProgress): RequirementStatus => {
-        // If new status field exists, use it
-        if (request.status !== undefined) {
-            return request.status as RequirementStatus;
-        }
-
-        // Legacy conversion
-        if (request.completed) {
-            return RequirementStatus.Cleared;
-        }
-        if (request.blocked) {
-            return RequirementStatus.StopHere;
-        }
-        return RequirementStatus.NotCleared;
-    };
-
-    // Cycle through statuses for non-killScore requirements
-    // NotCleared (0) → Cleared (1) → MaybeClear (2) → StopHere (3) → NotCleared (0)
-    const getNextStatus = (currentStatus: RequirementStatus): RequirementStatus => {
-        switch (currentStatus) {
-            case RequirementStatus.NotCleared: {
-                return RequirementStatus.Cleared;
-            }
-            case RequirementStatus.Cleared: {
-                return RequirementStatus.MaybeClear;
-            }
-            case RequirementStatus.MaybeClear: {
-                return RequirementStatus.StopHere;
-            }
-            case RequirementStatus.StopHere: {
-                return RequirementStatus.NotCleared;
-            }
-            default: {
-                return RequirementStatus.NotCleared;
-            }
-        }
     };
 
     // Handle cycling button click for non-killScore requirements
@@ -294,7 +296,7 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
                                                 handleCycleStatus(request);
                                             }
                                         }}
-                                        onContextMenu={e => e.preventDefault()}
+                                        onContextMenu={event => event.preventDefault()}
                                         onMouseDown={() => handlePressStart(request)}
                                         onMouseUp={handlePressEnd}
                                         onMouseLeave={handlePressEnd}
@@ -325,11 +327,11 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
                                                     ? { bottom: '100%', marginBottom: '4px' }
                                                     : { top: '100%', marginTop: '4px' }
                                             }
-                                            onClick={e => e.stopPropagation()}
-                                            onMouseDown={e => e.stopPropagation()}
-                                            onMouseUp={e => e.stopPropagation()}
-                                            onTouchStart={e => e.stopPropagation()}
-                                            onTouchEnd={e => e.stopPropagation()}>
+                                            onClick={event => event.stopPropagation()}
+                                            onMouseDown={event => event.stopPropagation()}
+                                            onMouseUp={event => event.stopPropagation()}
+                                            onTouchStart={event => event.stopPropagation()}
+                                            onTouchEnd={event => event.stopPropagation()}>
                                             {[
                                                 RequirementStatus.NotCleared,
                                                 RequirementStatus.Cleared,
@@ -339,8 +341,8 @@ export const LreTrackBattleSummary: React.FC<Properties> = ({
                                                 <button
                                                     key={statusOption}
                                                     role="menuitem"
-                                                    onClick={e => {
-                                                        e.stopPropagation();
+                                                    onClick={event => {
+                                                        event.stopPropagation();
                                                         handleDirectStatusChange(request, statusOption);
                                                     }}
                                                     className="flex w-full items-center justify-center px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"

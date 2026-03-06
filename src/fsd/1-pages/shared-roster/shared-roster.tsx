@@ -33,7 +33,7 @@ export const SharedRoster = () => {
         filterBy: viewPreferences.wyoFilter,
         orderBy: viewPreferences.wyoOrder,
     });
-    const [nameFilter, setNameFilter] = useState<string | null>(null);
+    const [nameFilter, setNameFilter] = useState<string>();
 
     const [searchParameters] = useSearchParams();
 

@@ -2,7 +2,7 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { DialogProperties } from '@/models/dialog.props';
+import { DialogProperties } from '@/models/dialog.properties';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { updateTacticusApiKey } from '@/fsd/5-shared/lib/tacticus-api';
@@ -18,6 +18,12 @@ interface Properties extends DialogProperties {
     tacticusApiKey: string;
     tacticusUserId: string;
     tacticusGuildApiKey: string;
+}
+
+function buildErrorMessage(error: string | Error | undefined): string {
+    const baseMessage = 'Failed to update settings';
+    const detail = typeof error === 'string' ? error : error?.message;
+    return detail ? `${baseMessage}: ${detail}` : baseMessage;
 }
 
 export const TacticusIntegrationDialog: React.FC<Properties> = ({
@@ -41,12 +47,6 @@ export const TacticusIntegrationDialog: React.FC<Properties> = ({
     async function syncWithTacticusApi() {
         onClose();
         await syncWithTacticus();
-    }
-
-    function buildErrorMessage(error: string | Error | null): string {
-        const baseMessage = 'Failed to update settings';
-        const detail = typeof error === 'string' ? error : error?.message;
-        return detail ? `${baseMessage}: ${detail}` : baseMessage;
     }
 
     async function updateApiKey() {
@@ -73,8 +73,10 @@ export const TacticusIntegrationDialog: React.FC<Properties> = ({
         } catch (error) {
             console.error(error);
             const parsedError =
-                typeof error === 'string' || error instanceof Error || error === null ? error : String(error);
-            enqueueSnackbar(buildErrorMessage(parsedError), { variant: 'error' });
+                typeof error === 'string' || error instanceof Error || error === null || error === undefined
+                    ? error
+                    : String(error);
+            enqueueSnackbar(buildErrorMessage(parsedError ?? undefined), { variant: 'error' });
         } finally {
             loader.endLoading();
         }

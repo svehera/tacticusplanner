@@ -25,27 +25,27 @@ import { CampaignBattle } from './campaign-battle';
 import { CampaignBattleCard } from './campaign-battle-card';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
+/**
+ * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
+ */
+const getReward = (rewards: IRewards): string => {
+    // Elite battles give a guaranteed material, so return that.
+    for (const reward of rewards.guaranteed) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    // Otherwise, return the first potential reward that is not gold.
+    for (const reward of rewards.potential) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    return '';
+};
+
 export const Campaigns = () => {
     const gridReference = useRef<AgGridReact<ICampaignBattleComposed>>(null);
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-
-    /**
-     * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
-     */
-    const getReward = (rewards: IRewards): string => {
-        // Elite battles give a guaranteed material, so return that.
-        for (const reward of rewards.guaranteed) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        // Otherwise, return the first potential reward that is not gold.
-        for (const reward of rewards.potential) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        return '';
-    };
 
     const [mobileColumnDefs] = useState<Array<ColDef>>([
         {
@@ -211,7 +211,7 @@ export const Campaigns = () => {
         value => value.toString()
     );
 
-    const campaignsOptions = useMemo(() => Object.keys(CampaignsService.campaignsGrouped).sort(), []);
+    const campaignsOptions = useMemo(() => Object.keys(CampaignsService.campaignsGrouped).toSorted(), []);
 
     const rows = useMemo(() => CampaignsService.campaignsGrouped[campaign], [campaign]);
 

@@ -193,11 +193,11 @@ export const LreSettings: React.FC<Properties> = ({
         <Dialog open={true} fullWidth onClose={onClose} maxWidth="md" fullScreen={isMobile}>
             <DialogTitle>LRE Planner Settings</DialogTitle>
             <DialogContent>
-                <div className="flex-box gap5 wrap">{lreOptions.map(renderOption)}</div>
+                <div className="flex-box gap5 wrap">{lreOptions.map(option => renderOption(option))}</div>
                 <Divider orientation="horizontal" />
 
                 <h3>Unit tile view</h3>
-                <div className="flex-box gap5 wrap">{lreTileViewOptions.map(renderOption)}</div>
+                <div className="flex-box gap5 wrap">{lreTileViewOptions.map(option => renderOption(option))}</div>
                 <LreTile character={lreTileCharacter} settings={viewSettings} upgradeRankOrMowGoals={[]} />
                 <Divider orientation="horizontal" />
 
@@ -232,7 +232,7 @@ export const LreSettings: React.FC<Properties> = ({
                 </div>
                 <Divider orientation="horizontal" />
                 <h3>Auto teams settings</h3>
-                <div className="flex-box gap5 wrap">{lreAutoTeamsOptions.map(renderOption)}</div>
+                <div className="flex-box gap5 wrap">{lreAutoTeamsOptions.map(option => renderOption(option))}</div>
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Cancel</Button>

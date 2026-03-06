@@ -16,7 +16,7 @@ interface Properties {
 }
 
 export const DirtyDozenTable: React.FC<Properties> = ({ characters, rows, columns }) => {
-    const defaultColDef: ColDef<IDirtyDozenChar> = {
+    const defaultColDefinition: ColDef<IDirtyDozenChar> = {
         sortable: true,
         resizable: true,
     };
@@ -31,7 +31,7 @@ export const DirtyDozenTable: React.FC<Properties> = ({ characters, rows, column
                 return <Score value={value ?? 0} />;
             },
             headerClass: '[&_.ag-header-cell-text]:w-full [&_.ag-header-cell-text]:text-center',
-            sortingOrder: ['desc', null],
+            sortingOrder: ['desc', undefined],
         } as ColDef<IDirtyDozenChar>;
     };
 
@@ -96,7 +96,7 @@ export const DirtyDozenTable: React.FC<Properties> = ({ characters, rows, column
                 modules={[AllCommunityModule]}
                 theme={themeBalham}
                 suppressCellFocus={true}
-                defaultColDef={defaultColDef}
+                defaultColDef={defaultColDefinition}
                 columnDefs={columnDefs}
                 rowHeight={35}
                 rowData={rows}></AgGridReact>

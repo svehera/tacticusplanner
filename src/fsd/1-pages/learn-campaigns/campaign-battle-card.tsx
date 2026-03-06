@@ -24,7 +24,7 @@ interface Properties {
 
 export const CampaignBattleCard: React.FC<Properties> = ({ battle }) => {
     // 1. Add State for the modal
-    const [selectedEnemy, setSelectedEnemy] = useState<ResolvedEnemyData | null>(null);
+    const [selectedEnemy, setSelectedEnemy] = useState<ResolvedEnemyData>();
 
     /**
      * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
@@ -102,9 +102,9 @@ export const CampaignBattleCard: React.FC<Properties> = ({ battle }) => {
             {/* 3. Add the Modal */}
             <NpcDetailModal
                 isOpen={!!selectedEnemy}
-                onClose={() => setSelectedEnemy(null)}
-                npc={selectedEnemy?.npc || null}
-                stats={selectedEnemy?.stats || null}
+                onClose={() => setSelectedEnemy(undefined)}
+                npc={selectedEnemy?.npc}
+                stats={selectedEnemy?.stats}
             />
         </>
     );

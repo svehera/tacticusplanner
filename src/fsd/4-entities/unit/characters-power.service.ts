@@ -195,7 +195,7 @@ export class CharactersPowerService {
             // case Rank.Adamantine3:
             //     return 1.25 ** 20;
 
-            case Rank.Locked:
+            // case Rank.Locked:
             default: {
                 return 0;
             }
@@ -247,7 +247,7 @@ export class CharactersPowerService {
                 case RarityStars.MythicWings: {
                     return 2.4;
                 }
-                case RarityStars.None:
+                // case RarityStars.None:
                 default: {
                     return 1;
                 }
@@ -297,7 +297,7 @@ export class CharactersPowerService {
                     return 0.9;
                 }
 
-                case RarityStars.None:
+                // case RarityStars.None:
                 default: {
                     return 0;
                 }

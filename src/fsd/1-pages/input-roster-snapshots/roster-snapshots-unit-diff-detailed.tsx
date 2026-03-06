@@ -253,7 +253,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Properties> = ({
                 afterLevel: diff.equip2Level ?? char.equip2Level,
                 type: char.equip2?.type ?? base?.equipment3,
             },
-        ].sort(
+        ].toSorted(
             (a, b) =>
                 (order[a.type ?? ''] ?? Number.MAX_SAFE_INTEGER) - (order[b.type ?? ''] ?? Number.MAX_SAFE_INTEGER)
         );
@@ -311,20 +311,18 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Properties> = ({
                             <span
                                 className="w-6 text-right font-medium text-gray-600 dark:text-gray-400"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
-                                {!!char &&
-                                    (() => (
-                                        <img
-                                            src={abilityIcons[staticChar?.activeAbilityName ?? '']?.file}
-                                            style={{ width: 24, height: 24 }}
-                                        />
-                                    ))()}
-                                {!!mow &&
-                                    (() => (
-                                        <img
-                                            src={abilityIcons[staticMow?.primaryAbility.name ?? '']?.file}
-                                            style={{ width: 24, height: 24 }}
-                                        />
-                                    ))()}
+                                {!!char && (
+                                    <img
+                                        src={abilityIcons[staticChar?.activeAbilityName ?? '']?.file}
+                                        style={{ width: 24, height: 24 }}
+                                    />
+                                )}
+                                {!!mow && (
+                                    <img
+                                        src={abilityIcons[staticMow?.primaryAbility.name ?? '']?.file}
+                                        style={{ width: 24, height: 24 }}
+                                    />
+                                )}
                             </span>
                             <span
                                 className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${
@@ -346,20 +344,18 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Properties> = ({
                             <span
                                 className="w-6 text-right font-medium text-gray-600 dark:text-gray-400"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
-                                {!!char &&
-                                    (() => (
-                                        <img
-                                            src={abilityIcons[staticChar?.passiveAbilityName ?? '']?.file}
-                                            style={{ width: 24, height: 24 }}
-                                        />
-                                    ))()}
-                                {!!mow &&
-                                    (() => (
-                                        <img
-                                            src={abilityIcons[staticMow?.secondaryAbility.name ?? '']?.file}
-                                            style={{ width: 24, height: 24 }}
-                                        />
-                                    ))()}
+                                {!!char && (
+                                    <img
+                                        src={abilityIcons[staticChar?.passiveAbilityName ?? '']?.file}
+                                        style={{ width: 24, height: 24 }}
+                                    />
+                                )}
+                                {!!mow && (
+                                    <img
+                                        src={abilityIcons[staticMow?.secondaryAbility.name ?? '']?.file}
+                                        style={{ width: 24, height: 24 }}
+                                    />
+                                )}
                             </span>
                             <span
                                 className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${

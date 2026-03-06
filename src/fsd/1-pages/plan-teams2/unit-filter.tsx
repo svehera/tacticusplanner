@@ -86,7 +86,7 @@ export const UnitFilter: React.FC<Properties> = ({
                         id="allow-locked-units"
                         type="checkbox"
                         checked={allowLockedUnits}
-                        onChange={e => onAllowLockedUnitsChange(e.target.checked)}
+                        onChange={event => onAllowLockedUnitsChange(event.target.checked)}
                         className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 dark:border-slate-700"
                     />
                     <label
@@ -104,7 +104,7 @@ export const UnitFilter: React.FC<Properties> = ({
                         type="text"
                         placeholder="e.g. Bellator..."
                         value={searchText}
-                        onChange={e => onSearchTextChange(e.target.value)}
+                        onChange={event => onSearchTextChange(event.target.value)}
                         className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-[#0d1117] dark:text-slate-100"
                     />
                 </div>

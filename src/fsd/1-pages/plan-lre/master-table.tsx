@@ -46,6 +46,14 @@ import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-e
 import { ILreProgressModel } from './lre.models';
 import { LreService } from './lre.service';
 
+const passesNameFilter = (filter: string, character: ICharacter2) => {
+    if (!filter) return true;
+    return (
+        character.name.toLowerCase().includes(filter.toLowerCase()) ||
+        ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
+    );
+};
+
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
         LegendaryEventService.getUnfinishedEvents().map(x => x.id)
@@ -73,14 +81,6 @@ export const MasterTable = () => {
         const teams = getSelectedTeams(eventId);
         return uniq(
             teams.flatMap(t => t.charSnowprintIds ?? t.charactersIds ?? []).map(x => CharactersService.canonicalName(x))
-        );
-    };
-
-    const passesNameFilter = (filter: string, character: ICharacter2) => {
-        if (!filter) return true;
-        return (
-            character.name.toLowerCase().includes(filter.toLowerCase()) ||
-            ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
         );
     };
 
@@ -119,7 +119,7 @@ export const MasterTable = () => {
 
             const eventCharacters = legendaryEvent.allowedUnits
                 .filter(x => selectedChars.includes(x.snowprintId!))
-                .sort((a, b) => {
+                .toSorted((a, b) => {
                     const aTotal =
                         (alpha[a.snowprintId!]?.points ?? 0) +
                         (beta[a.snowprintId!]?.points ?? 0) +
@@ -253,7 +253,7 @@ export const MasterTable = () => {
         selectedCharsRows.length > 0 ? CharactersSelection.Selected : CharactersSelection.All
     );
 
-    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
+    const columnsDefinition: Array<ColDef | ColGroupDef> = useMemo(() => {
         return [
             {
                 headerName: 'Character',
@@ -378,7 +378,7 @@ export const MasterTable = () => {
                       ? legendaryEvent.allowedUnits.filter(x => x.rank > Rank.Locked)
                       : [];
             const eventCharacters = chars
-                .sort(
+                .toSorted(
                     (a, b) =>
                         b.legendaryEvents[legendaryEvent.id].totalPoints -
                         a.legendaryEvents[legendaryEvent.id].totalPoints
@@ -537,7 +537,7 @@ export const MasterTable = () => {
                     theme={themeBalham}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
-                    columnDefs={columnsDef}
+                    columnDefs={columnsDefinition}
                     defaultColDef={{
                         suppressMovable: true,
                     }}

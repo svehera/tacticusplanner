@@ -27,7 +27,8 @@ const equipmentTypeMapping = {
 } as const;
 
 export class CharactersService {
-    static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+    static readonly charactersData: ICharacterData[] = charactersData.map(character => this.convertUnitData(character));
 
     static readonly lreCharacters: ICharacterData[] = LegendaryEventService.getLegendaryEvents()
         .map(lre => {
@@ -37,7 +38,9 @@ export class CharactersService {
         })
         .filter(Boolean) as ICharacterData[];
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     static readonly activeLres = this.lreCharacters.filter(x => !x.lre?.finished);
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     static readonly inactiveLres = this.lreCharacters.filter(x => !!x.lre?.finished);
 
     public static getInitialRarity(snowprintId: string): Rarity | undefined {
@@ -45,6 +48,7 @@ export class CharactersService {
         return character?.initialRarity;
     }
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     static readonly activeLre: ICharacterData = (() => {
         return this.charactersData.find(unit => unit.snowprintId === LegendaryEventService.getActiveLreUnitId())!;
     })();

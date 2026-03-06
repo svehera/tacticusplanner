@@ -575,7 +575,7 @@ export class RosterSnapshotsService {
                 originalIndex: index,
             }))
             .filter(item => item.snapshot.deletedDateMillisUtc !== undefined)
-            .sort((a, b) => a.snapshot.deletedDateMillisUtc! - b.snapshot.deletedDateMillisUtc!);
+            .toSorted((a, b) => a.snapshot.deletedDateMillisUtc! - b.snapshot.deletedDateMillisUtc!);
 
         const snapshotsToDeleteCount =
             deletedSnapshotsWithIndices.length - RosterSnapshotsService.MAX_DELETED_SNAPSHOTS;

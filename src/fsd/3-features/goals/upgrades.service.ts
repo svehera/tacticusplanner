@@ -98,6 +98,7 @@ interface TaggedLocation {
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
 
     public static canonicalizeInventoryUpgrades(
@@ -540,8 +541,8 @@ export class UpgradesService {
         inventory: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
     ): void {
-        const minEnergy = locs.reduce((min, loc) => Math.min(min, loc.energyCost), Infinity);
-        const maxEnergy = locs.reduce((max, loc) => Math.max(max, loc.energyCost), -Infinity);
+        const minEnergy = Math.min(Infinity, ...locs.map(loc => loc.energyCost));
+        const maxEnergy = Math.max(-Infinity, ...locs.map(loc => loc.energyCost));
         if (settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials) {
             for (const loc of locs) {
                 if (energy < minEnergy) break;
@@ -1059,7 +1060,9 @@ export class UpgradesService {
                 (accumulator, goal) => this.reduceGoalsByPriority(accumulator, goal),
                 undefined as ICharacterAscendGoal | undefined
             );
-        const order = [shardGoal, mythicShardGoal].filter(x => x !== undefined).sort((a, b) => a.priority - b.priority);
+        const order = [shardGoal, mythicShardGoal]
+            .filter(x => x !== undefined)
+            .toSorted((a, b) => a.priority - b.priority);
         return order.length === 0 ? undefined : order[0];
     }
 
@@ -1082,7 +1085,7 @@ export class UpgradesService {
                 tokens: this.getOnslaughtTokensForGoal(inventory, characters, goal),
             }))
             .filter(x => x.tokens > 0)
-            .sort((a, b) => b.tokens - a.tokens)[0]?.goal;
+            .toSorted((a, b) => b.tokens - a.tokens)[0]?.goal;
     }
 
     /** Returns our name for a custom onslaught location based on the shards reward. */
@@ -1159,8 +1162,7 @@ export class UpgradesService {
         let index = 0;
         const originalInventory = cloneDeep(inventory);
         while (onslaughtTokens > 0) {
-            let goal;
-            goal =
+            const goal =
                 settings.preferences.farmPreferences.order === IDailyRaidsFarmOrder.totalMaterials
                     ? this.findLongestOnslaughtGoal(inventory, characters, goals)
                     : this.findHighestPriorityOnslaughtGoal(inventory, characters, goals);
@@ -1177,9 +1179,10 @@ export class UpgradesService {
             }
 
             const fractional = (inventory[upgradeId] ?? 0) - Math.floor(inventory[upgradeId] ?? 0);
-            onslaughts[upgradeId] = (onslaughts[upgradeId] ?? []).concat(
-                this.createOnslaughtLocation(upgradeId, Math.floor(shards + fractional), 'Shard', ++index)
-            );
+            onslaughts[upgradeId] = [
+                ...(onslaughts[upgradeId] ?? []),
+                this.createOnslaughtLocation(upgradeId, Math.floor(shards + fractional), 'Shard', ++index),
+            ];
             relatedGoals[upgradeId] = [...(relatedGoals[upgradeId] ?? []), goal];
             inventory[upgradeId] = (inventory[upgradeId] ?? 0) + shards;
             day.onslaughtTokens++;
@@ -1272,7 +1275,7 @@ export class UpgradesService {
             raids.push(raid);
             energySpent += sum(newLocations.map(loc => loc.energySpent));
         }
-        day.raids = raids.concat(day.raids);
+        day.raids = [...raids, ...day.raids];
         day.energyTotal += energySpent;
         day.raidsTotal += sum(raids.map(raid => raid.raidsTotal));
     }
@@ -1542,8 +1545,7 @@ export class UpgradesService {
                     .filter(x => !!x);
                 for (const upgrade of upgrades) {
                     if (upgrade.crafted) {
-                        result.push(...upgrade.baseUpgrades.map(x => x.id));
-                        result.push(...upgrade.craftedUpgrades.map(x => x.id));
+                        result.push(...upgrade.baseUpgrades.map(x => x.id), ...upgrade.craftedUpgrades.map(x => x.id));
                     }
                 }
 
@@ -2102,7 +2104,7 @@ export class UpgradesService {
         return baseUpgradesTotal;
     }
 
-    static findUpgrade(upgrade: TacticusUpgrade): string | null {
+    static findUpgrade(upgrade: TacticusUpgrade): string | undefined {
         const byName = FsdUpgradesService.recipeDataByName[upgrade.name];
         if (byName) {
             return byName.material;
@@ -2113,7 +2115,7 @@ export class UpgradesService {
             return byTacticusId.material;
         }
 
-        return null;
+        return;
     }
 
     private static composeByTacticusId(): Record<string, IMaterial> {

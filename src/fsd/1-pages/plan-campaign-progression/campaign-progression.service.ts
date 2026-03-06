@@ -59,6 +59,20 @@ const factionCampaigns = Object.fromEntries(
 
 const campaignFactions = Object.fromEntries(CampaignsService.allCampaigns.map(c => [c.id, alliedFactions(c.faction)]));
 
+const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
+    const rarityMap = {
+        [Rarity.Common]: 0,
+        [Rarity.Uncommon]: 1,
+        [Rarity.Rare]: 2,
+        [Rarity.Epic]: 3,
+        [Rarity.Legendary]: 4,
+        [Rarity.Mythic]: 5,
+        Shard: 6,
+        'Mythic Shard': 7,
+    };
+    return rarityMap[rarity];
+};
+
 export class CampaignsProgressionService {
     /**
      * Computes the cost per goal and associates each character with the campaigns
@@ -118,7 +132,7 @@ export class CampaignsProgressionService {
             }
         }
         for (const [material, units] of result.charactersNeedingMaterials.entries()) {
-            result.charactersNeedingMaterials.set(material, uniq(units.sort()));
+            result.charactersNeedingMaterials.set(material, uniq(units.toSorted()));
         }
     }
 
@@ -188,7 +202,7 @@ export class CampaignsProgressionService {
         for (const campaign of nodesToBeat.keys()) {
             const newMaterialEnergy = new Map<string, number>();
             if ((nodesToBeat.get(campaign)?.length ?? 0) == 0) continue;
-            const nodes: ICampaignBattleComposed[] = nodesToBeat.get(campaign)!.sort((a, b) => {
+            const nodes: ICampaignBattleComposed[] = nodesToBeat.get(campaign)!.toSorted((a, b) => {
                 return a.nodeNumber - b.nodeNumber;
             });
             let cumulativeSavings: number = 0;
@@ -297,20 +311,7 @@ export class CampaignsProgressionService {
             }
             materialReqs.materials = newMaterials;
         }
-        const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
-            const rarityMap = {
-                [Rarity.Common]: 0,
-                [Rarity.Uncommon]: 1,
-                [Rarity.Rare]: 2,
-                [Rarity.Epic]: 3,
-                [Rarity.Legendary]: 4,
-                [Rarity.Mythic]: 5,
-                Shard: 6,
-                'Mythic Shard': 7,
-            };
-            return rarityMap[rarity];
-        };
-        const sortedMaterials: string[] = Object.keys(materialReqs.materials).sort(
+        const sortedMaterials: string[] = Object.keys(materialReqs.materials).toSorted(
             (a, b) =>
                 mapRarity(UpgradesService.recipeExpandedUpgradeData[b].rarity) -
                 mapRarity(UpgradesService.recipeExpandedUpgradeData[a].rarity)

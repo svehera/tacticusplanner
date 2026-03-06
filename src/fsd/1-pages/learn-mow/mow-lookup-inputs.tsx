@@ -16,7 +16,7 @@ interface Properties {
 }
 
 export const MowLookupInputs: React.FC<Properties> = ({ mows, inputs, inputsChange }) => {
-    const [mow, setMow] = useQueryState<IMow2 | null>(
+    const [mow, setMow] = useQueryState<IMow2 | undefined>(
         'mow',
         mowQueryParameter => mows.find(x => x.snowprintId === mowQueryParameter) ?? inputs.mow,
         mow => mow?.name
@@ -63,7 +63,8 @@ export const MowLookupInputs: React.FC<Properties> = ({ mows, inputs, inputsChan
     return (
         <div className="flex-box gap20 wrap">
             {mow && <UnitShardIcon icon={mow.roundIcon} />}
-            <UnitsAutocomplete className="max-w-[250px]" unit={mow} options={mows} onUnitChange={setMow} />
+            {/* eslint-disable-next-line unicorn/no-null  */}
+            <UnitsAutocomplete className="max-w-[250px]" unit={mow ?? null} options={mows} onUnitChange={setMow} />
             <div className="flex-box gap15 p10">
                 <span>Primary:</span>
 

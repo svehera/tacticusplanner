@@ -41,7 +41,7 @@ export const GuidesFilter: React.FC<Properties> = ({ units, applyFilters, filter
 
     const apply = () => {
         applyFilters({
-            createdBy: nameFilter ? nameFilter : undefined,
+            createdBy: nameFilter || undefined,
             primaryMod: gameMode === 'any' ? undefined : gameMode,
             subMods: selectedSubModes.length > 0 ? selectedSubModes : undefined,
             unitIds: selectedUnits.length > 0 ? selectedUnits.map(x => x.id) : undefined,

@@ -53,7 +53,7 @@ export const Goals = () => {
     const { userInfo } = useAuth();
 
     const characters = CharactersService.resolveStoredCharacters(unresolvedCharacters);
-    const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
+    const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect>();
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
 
     const updateColorCodingMode = useCallback(
@@ -404,7 +404,7 @@ export const Goals = () => {
                     goal={editGoal}
                     unit={editUnit}
                     onClose={() => {
-                        setEditGoal(null);
+                        setEditGoal(undefined);
                     }}
                 />
             )}

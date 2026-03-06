@@ -23,7 +23,7 @@ export const teamsReducer = (state: IPersonalTeam[], action: TeamsAction) => {
             return action.value;
         }
         case 'Add': {
-            if (state.find(x => x.id === action.team.id)) {
+            if (state.some(x => x.id === action.team.id)) {
                 return state;
             }
             return [...state, action.team];

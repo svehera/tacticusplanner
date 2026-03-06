@@ -27,8 +27,8 @@ const SyncButton: React.FC<SyncButtonProperties> = ({ showText, variant, sx }) =
             variant={variant === undefined ? 'contained' : variant}
             color={'primary'}
             sx={sx}
-            onClick={e => {
-                e.stopPropagation();
+            onClick={event => {
+                event.stopPropagation();
                 sync();
             }}>
             <SyncIcon /> {showText && 'Sync'}

@@ -12,7 +12,7 @@ export const registerUser = async (username: string, password: string) => {
         }
     );
     if (error) throw error;
-    return { data, error: null };
+    return { data, error: undefined };
 };
 
 export const loginUser = async (username: string, password: string) => {
@@ -25,5 +25,5 @@ export const loginUser = async (username: string, password: string) => {
         }
     );
     if (error) throw error;
-    return { data, error: null };
+    return { data, error: undefined };
 };

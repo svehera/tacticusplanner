@@ -43,6 +43,33 @@ interface IRaidMaterialRow extends ICharacterUpgradeEstimate {
     remainingAfter: number;
 }
 
+const upgradeRarityClassName = (rarity: Rarity | 'Shard' | 'Mythic Shard' | undefined): string => {
+    const shardValue = (rarity ?? 'Unknown').toString();
+    if (['Shard', 'Mythic Shard', 'Unknown'].includes(shardValue)) {
+        return shardValue;
+    }
+    if (typeof rarity === 'number') {
+        return RarityMapper.rarityToRarityString(rarity);
+    }
+    return RarityMapper.stringToRarityString(shardValue) ?? 'Unknown';
+};
+
+const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {
+    const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
+
+    if (typeof rarity === 'number') {
+        const normalized = RarityMapper.rarityToRarityString(rarity as Rarity);
+        return order.includes(normalized) ? order.indexOf(normalized) : order.length - 1;
+    }
+
+    if (typeof rarity === 'string') {
+        const normalized = RarityMapper.stringToRarityString(rarity) ?? rarity;
+        return order.includes(normalized) ? order.indexOf(normalized) : order.length - 1;
+    }
+
+    return order.length - 1;
+};
+
 export const MaterialsTable: React.FC<Properties> = ({
     rows,
     updateMaterialQuantity,
@@ -51,33 +78,6 @@ export const MaterialsTable: React.FC<Properties> = ({
     scrollToCharSnowprintId,
     alreadyUsedMaterials,
 }) => {
-    const upgradeRarityClassName = (rarity: Rarity | 'Shard' | 'Mythic Shard' | undefined): string => {
-        const shardValue = (rarity ?? 'Unknown').toString();
-        if (['Shard', 'Mythic Shard', 'Unknown'].includes(shardValue)) {
-            return shardValue;
-        }
-        if (typeof rarity === 'number') {
-            return RarityMapper.rarityToRarityString(rarity);
-        }
-        return RarityMapper.stringToRarityString(shardValue) ?? 'Unknown';
-    };
-
-    const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {
-        const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
-
-        if (typeof rarity === 'number') {
-            const normalized = RarityMapper.rarityToRarityString(rarity as Rarity);
-            return order.includes(normalized) ? order.indexOf(normalized) : order.length - 1;
-        }
-
-        if (typeof rarity === 'string') {
-            const normalized = RarityMapper.stringToRarityString(rarity) ?? rarity;
-            return order.includes(normalized) ? order.indexOf(normalized) : order.length - 1;
-        }
-
-        return order.length - 1;
-    };
-
     const columnDefs: Array<ColDef<IRaidMaterialRow> | ColGroupDef<IRaidMaterialRow>> = [
         {
             headerName: 'Upgrade',

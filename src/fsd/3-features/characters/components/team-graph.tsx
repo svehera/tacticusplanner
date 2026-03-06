@@ -19,6 +19,8 @@ interface Properties {
     units: IUnit[];
 }
 
+const sortByPower = (a: { x: string; y: number }, b: { x: string; y: number }) => b.y - a.y;
+
 export const TeamGraph: React.FC<Properties> = ({ units }) => {
     const [open, setOpen] = React.useState(false);
 
@@ -44,14 +46,13 @@ export const TeamGraph: React.FC<Properties> = ({ units }) => {
         teamAbilityData.push({ x: character.name, y: abilityPower });
     }
 
-    const sortByPower = (a: { x: string; y: number }, b: { x: string; y: number }) => b.y - a.y;
-    teamPowerData.sort(sortByPower);
-    teamAttributeData.sort((a, b) => {
+    teamPowerData.toSorted(sortByPower);
+    teamAttributeData.toSorted((a, b) => {
         const aIndex = teamPowerData.findIndex(item => item.x === a.x);
         const bIndex = teamPowerData.findIndex(item => item.x === b.x);
         return sortByPower(teamPowerData[aIndex], teamPowerData[bIndex]);
     });
-    teamAbilityData.sort((a, b) => {
+    teamAbilityData.toSorted((a, b) => {
         const aIndex = teamPowerData.findIndex(item => item.x === a.x);
         const bIndex = teamPowerData.findIndex(item => item.x === b.x);
         return sortByPower(teamPowerData[aIndex], teamPowerData[bIndex]);
@@ -87,7 +88,7 @@ export const TeamGraph: React.FC<Properties> = ({ units }) => {
                                 left: 40,
                             }}
                             enableGridX={false}
-                            axisBottom={null}
+                            axisBottom={undefined}
                             enableGridY={true}
                             yScale={{
                                 type: 'linear',

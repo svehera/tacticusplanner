@@ -134,7 +134,7 @@ describe('TokenEstimationService', () => {
             expect(bestToken.team?.id ?? '').toBe('team1');
             expect(bestToken.battleNumber).toBe(0);
             expect(bestToken.incrementalPoints).toBe(45 + 45 + 60 + 60 + 70);
-            expect(bestToken.restrictionsCleared.map(restriction => restriction.name).sort()).containSubset([
+            expect(bestToken.restrictionsCleared.map(restriction => restriction.name).toSorted()).containSubset([
                 'Flame',
                 'Pierce',
             ]);

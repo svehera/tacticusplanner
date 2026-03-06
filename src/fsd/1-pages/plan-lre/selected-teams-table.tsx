@@ -32,6 +32,10 @@ interface Properties {
     deleteTeam: (teamId: string) => void;
 }
 
+const getRowStyle = (parameters: RowClassParams): RowStyle => {
+    return parameters.node.rowIndex && parameters.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
+};
+
 export const SelectedTeamsTable: React.FC<Properties> = ({
     rows,
     upgradeRankOrMowGoals,
@@ -42,7 +46,7 @@ export const SelectedTeamsTable: React.FC<Properties> = ({
     const { viewPreferences } = useContext(StoreContext);
     const gridReference = useRef<AgGridReact>(null);
 
-    const defaultColumnDef: ColDef<ITableRow> = {
+    const defaultColumnDefinition: ColDef<ITableRow> = {
         headerClass: 'center-header-text',
         resizable: true,
         sortable: false,
@@ -114,10 +118,6 @@ export const SelectedTeamsTable: React.FC<Properties> = ({
         gridReference.current?.api?.sizeColumnsToFit();
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, viewPreferences.hideCompleted]);
 
-    const getRowStyle = (parameters: RowClassParams): RowStyle => {
-        return parameters.node.rowIndex && parameters.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
-    };
-
     return (
         <div
             className="ag-theme-material auto-teams min-h-[230px] w-full border-2 border-solid border-black"
@@ -129,7 +129,7 @@ export const SelectedTeamsTable: React.FC<Properties> = ({
                 rowData={rows}
                 rowHeight={35}
                 getRowStyle={getRowStyle}
-                defaultColDef={defaultColumnDef}
+                defaultColDef={defaultColumnDefinition}
                 columnDefs={columnsDefs}
                 onCellClicked={handleCellCLick}
                 onGridReady={useFitGridOnWindowResize(gridReference)}></AgGridReact>

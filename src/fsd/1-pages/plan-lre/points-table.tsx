@@ -54,7 +54,7 @@ const PointsTable = (properties: { legendaryEvent: ILegendaryEvent }) => {
 
     const gridReference = useRef<AgGridReact>(null);
 
-    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
+    const columnsDefinition: Array<ColDef | ColGroupDef> = useMemo(() => {
         return [
             {
                 headerName: 'Character',
@@ -215,7 +215,7 @@ const PointsTable = (properties: { legendaryEvent: ILegendaryEvent }) => {
 
         return legendaryEvent.allowedUnits
             .filter(x => selectedChars.includes(x.snowprintId!))
-            .sort((a, b) => {
+            .toSorted((a, b) => {
                 const aTotal =
                     (alpha[a.name]?.points ?? 0) + (beta[a.name]?.points ?? 0) + (gamma[a.name]?.points ?? 0);
                 const bTotal =
@@ -348,7 +348,7 @@ const PointsTable = (properties: { legendaryEvent: ILegendaryEvent }) => {
                   : [];
 
         return chars
-            .sort(
+            .toSorted(
                 (a, b) =>
                     b.legendaryEvents[legendaryEvent.id].totalPoints - a.legendaryEvents[legendaryEvent.id].totalPoints
             )
@@ -466,7 +466,7 @@ const PointsTable = (properties: { legendaryEvent: ILegendaryEvent }) => {
                     ref={gridReference}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
-                    columnDefs={columnsDef}
+                    columnDefs={columnsDefinition}
                     onSortChanged={() => gridReference.current?.api?.refreshCells()}
                     onFilterChanged={() => gridReference.current?.api?.refreshCells()}></AgGridReact>
             </div>

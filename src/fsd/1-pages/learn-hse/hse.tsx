@@ -97,8 +97,8 @@ export const HomeScreenEvent = () => {
 
         return Object.values(pointsPerEnergy)
             .flat()
-            .sort((a, b) => b.dropChance - a.dropChance)
-            .sort((a, b) => b.pointsPerEnergy - a.pointsPerEnergy);
+            .toSorted((a, b) => b.dropChance - a.dropChance)
+            .toSorted((a, b) => b.pointsPerEnergy - a.pointsPerEnergy);
     };
 
     const bestMachineHunt = useMemo(

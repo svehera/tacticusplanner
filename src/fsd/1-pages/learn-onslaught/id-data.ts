@@ -4,7 +4,7 @@ export const ROMAN_MAP: Record<string, number> = { I: 1, V: 5, X: 10, L: 50, C: 
 export const GREEK_ZONES = ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta'];
 
 /** Utility to convert Roman Numerals to Numbers for search */
-export const romanToNum = (roman: string): number => {
+export const romanToNumber = (roman: string): number => {
     const romanNumerals: Record<string, number> = {
         I: 1,
         V: 5,
@@ -30,7 +30,7 @@ export const romanToNum = (roman: string): number => {
 };
 
 /** Utility to convert Numbers to Roman Numerals */
-export const numToRoman = (number_: number): string => {
+export const numberToRoman = (number_: number): string => {
     if (number_ < 1 || number_ > 1000) return '';
 
     const romanNumerals: [number, string][] = [

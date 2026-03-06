@@ -1,6 +1,6 @@
 import { Rank } from './enums';
 
-export type DynamicProps = {
+export type DynamicProperties = {
     numberOfUnlocked?: number;
     ownedBy?: string[];
     potential?: number;

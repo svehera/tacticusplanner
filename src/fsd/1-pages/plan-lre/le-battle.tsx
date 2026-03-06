@@ -21,40 +21,40 @@ interface WaveDisplayProperties {
     onEnemyClick: (data: ResolvedEnemyData) => void;
 }
 
+// Extracted Logic: Resolve string to data object
+const resolveEnemy = (enemyString: string): ResolvedEnemyData | undefined => {
+    const colon = enemyString.indexOf(':');
+    const id = colon === -1 ? enemyString : enemyString.slice(0, Math.max(0, colon));
+
+    // Calculate index
+    let progressionIndex = 0;
+    if (colon !== -1) {
+        const pString = enemyString.slice(Math.max(0, colon + 1));
+        const pInt = Number.parseInt(pString, 10);
+        progressionIndex = Number.isNaN(pInt) ? 0 : pInt;
+    }
+
+    // Adjust for 0-based array (Your logic used -1, keeping that consistency)
+    const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
+
+    console.log('Resolving enemy:', enemyString, 'to id:', id, 'at index:', arrayIndex);
+    const npc = NpcService.getNpcById(id);
+
+    console.log('Resolved NPC:', npc);
+
+    if (!npc || arrayIndex >= npc.stats.length) return;
+
+    return {
+        id,
+        npc,
+        stats: npc.stats[arrayIndex],
+    };
+};
+
 // Helper component to render a single wave's enemies
 const WaveDisplay: React.FC<WaveDisplayProperties> = ({ wave, waveIndex, onEnemyClick }) => {
     // Determine if enemies are present. Use a simple text placeholder for enemy rendering.
     const hasEnemies = wave.enemies.length > 0;
-
-    // Extracted Logic: Resolve string to data object
-    const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
-        const colon = enemyString.indexOf(':');
-        const id = colon === -1 ? enemyString : enemyString.slice(0, Math.max(0, colon));
-
-        // Calculate index
-        let progressionIndex = 0;
-        if (colon !== -1) {
-            const pString = enemyString.slice(Math.max(0, colon + 1));
-            const pInt = Number.parseInt(pString, 10);
-            progressionIndex = isNaN(pInt) ? 0 : pInt;
-        }
-
-        // Adjust for 0-based array (Your logic used -1, keeping that consistency)
-        const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
-
-        console.log('Resolving enemy:', enemyString, 'to id:', id, 'at index:', arrayIndex);
-        const npc = NpcService.getNpcById(id);
-
-        console.log('Resolved NPC:', npc);
-
-        if (!npc || arrayIndex >= npc.stats.length) return null;
-
-        return {
-            id,
-            npc,
-            stats: npc.stats[arrayIndex],
-        };
-    };
 
     const renderEnemies = (enemies: string[]) => (
         <div className="flex flex-wrap items-start gap-x-3 gap-y-6">
@@ -117,7 +117,7 @@ interface LeBattleProperties {
 }
 
 export const LeBattle: React.FC<LeBattleProperties> = ({ battle, trackName }) => {
-    const [selectedEnemy, setSelectedEnemy] = React.useState<ResolvedEnemyData | null>(null);
+    const [selectedEnemy, setSelectedEnemy] = React.useState<ResolvedEnemyData>();
 
     const [isMapVisible, setIsMapVisible] = React.useState<boolean>(false);
 
@@ -128,10 +128,10 @@ export const LeBattle: React.FC<LeBattleProperties> = ({ battle, trackName }) =>
 
     // Handler to close modal
     const handleCloseModal = () => {
-        setSelectedEnemy(null);
+        setSelectedEnemy(undefined);
     };
 
-    const sortedWaves = [...battle.waves].sort((a, b) => a.round - b.round);
+    const sortedWaves = battle.waves.toSorted((a, b) => a.round - b.round);
 
     return (
         <>
@@ -192,8 +192,8 @@ export const LeBattle: React.FC<LeBattleProperties> = ({ battle, trackName }) =>
             <NpcDetailModal
                 isOpen={!!selectedEnemy}
                 onClose={handleCloseModal}
-                npc={selectedEnemy?.npc || null}
-                stats={selectedEnemy?.stats || null}
+                npc={selectedEnemy?.npc}
+                stats={selectedEnemy?.stats}
             />
         </>
     );

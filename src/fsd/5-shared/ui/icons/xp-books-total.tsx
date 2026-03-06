@@ -21,9 +21,8 @@ export const XpBooksTotal: React.FC<Properties> = ({ xp, size = 'small' }) => {
             [Rarity.Rare]: 0,
             [Rarity.Epic]: 0,
             [Rarity.Legendary]: 0,
-            [Rarity.Mythic]: 0,
+            [Rarity.Mythic]: Math.floor(xp / 62_500),
         };
-        books[Rarity.Mythic] = Math.floor(xp / 62_500);
         let remainingXp = xp % 62_500;
         books[Rarity.Legendary] = Math.floor(remainingXp / 12_500);
         remainingXp = remainingXp % 12_500;

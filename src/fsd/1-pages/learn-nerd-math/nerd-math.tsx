@@ -50,6 +50,18 @@ interface CharacterLineProperties {
     onDamageModsChange: (newMods: DamageMods) => void;
 }
 
+const applyMortyTrait = (damage: number, totalHits: number): number[] => {
+    const hits: number[] = [];
+    for (let index = 0; index < totalHits; ++index) {
+        let hitDamage = damage;
+        for (let hit = 3; hit <= index; ++hit) {
+            hitDamage *= MORTY_TRAIT_DEBUFF;
+        }
+        hits.push(hitDamage);
+    }
+    return hits;
+};
+
 const CharacterLine = ({ name, critDamage, damageMods, onDamageModsChange }: CharacterLineProperties) => {
     const handleChange = (field: keyof DamageMods, value: boolean | number) => {
         onDamageModsChange({ ...damageMods, [field]: value });
@@ -59,7 +71,10 @@ const CharacterLine = ({ name, critDamage, damageMods, onDamageModsChange }: Cha
         <div className="flex flex-wrap items-center gap-2">
             <FormControlLabel
                 control={
-                    <Switch checked={damageMods.enabled} onChange={e => handleChange('enabled', e.target.checked)} />
+                    <Switch
+                        checked={damageMods.enabled}
+                        onChange={event => handleChange('enabled', event.target.checked)}
+                    />
                 }
                 label=""
             />
@@ -79,7 +94,7 @@ const CharacterLine = ({ name, critDamage, damageMods, onDamageModsChange }: Cha
                     control={
                         <Switch
                             checked={!!damageMods[field as keyof DamageMods]}
-                            onChange={e => handleChange(field as keyof DamageMods, e.target.checked)}
+                            onChange={event => handleChange(field as keyof DamageMods, event.target.checked)}
                         />
                     }
                     label={label}
@@ -90,7 +105,7 @@ const CharacterLine = ({ name, critDamage, damageMods, onDamageModsChange }: Cha
                 control={
                     <Switch
                         checked={damageMods.crit > 0}
-                        onChange={e => handleChange('crit', e.target.checked ? critDamage : 0)}
+                        onChange={event => handleChange('crit', event.target.checked ? critDamage : 0)}
                     />
                 }
                 label={`Crit (${critDamage})`}
@@ -101,7 +116,7 @@ const CharacterLine = ({ name, critDamage, damageMods, onDamageModsChange }: Cha
                     native
                     label="Roll Type"
                     value={damageMods.rollType}
-                    onChange={e => handleChange('rollType', Number(e.target.value))}>
+                    onChange={event => handleChange('rollType', Number(event.target.value))}>
                     <option value={RollType.MINIMUM}>Minimum</option>
                     <option value={RollType.AVERAGE}>Average</option>
                     <option value={RollType.MAXIMUM}>Maximum</option>
@@ -259,18 +274,6 @@ export const NerdMath = () => {
         const damageViaPierce = preArmorDamage * pierce;
         const damageViaArmor = preArmorDamage - bossArmor;
         return Math.max(damageViaPierce, damageViaArmor);
-    };
-
-    const applyMortyTrait = (damage: number, totalHits: number): number[] => {
-        const hits: number[] = [];
-        for (let index = 0; index < totalHits; ++index) {
-            let hitDamage = damage;
-            for (let hit = 3; hit <= index; ++hit) {
-                hitDamage *= MORTY_TRAIT_DEBUFF;
-            }
-            hits.push(hitDamage);
-        }
-        return hits;
     };
 
     const calculatePreModuleDamage = (
@@ -575,9 +578,10 @@ export const NerdMath = () => {
             (damageMods.highGround ? HIGH_GROUND_BUFF_PERCENTAGE : 1) *
             CRUSHING_STRIKE_BUFF *
             (damageMods.atlacoyaBuff ? ATLACOYA_BUFF : 1);
-        const hits = [damagePerHit * mods, damageMods.bossBuff ? damagePerHit * mods * BOSS_HITS_BUFF : null].filter(
-            (x): x is number => x !== null
-        );
+        const hits = [
+            damagePerHit * mods,
+            damageMods.bossBuff ? damagePerHit * mods * BOSS_HITS_BUFF : undefined,
+        ].filter((x): x is number => typeof x === 'number');
         if (damageMods.hmhActiveBuff || damageMods.hmhPassiveBuff) {
             const newDamageMods = { ...damageMods, hmhActiveBuff: false, hmhPassiveBuff: false };
             const hits2 = laviscusMelee(newDamageMods, allOtherCharacterAttacks);
@@ -608,16 +612,16 @@ export const NerdMath = () => {
 
     const allAttacksExceptLaviscusMelee: Attack[] =
         [
-            kariyanActiveState.enabled ? kariyanActive(kariyanActiveState) : null,
-            kariyanPassiveState.enabled ? kariyanPassive(kariyanPassiveState, 5) : null,
-            trajannMeleeState.enabled ? trajannMelee(trajannMeleeState) : null,
-            bossMeleeState.enabled ? bossMelee(bossMeleeState) : null,
-            bossPassiveState.enabled ? bossPassive(bossPassiveState) : null,
-            hmhMeleeState.enabled ? hmhMelee(hmhMeleeState) : null,
-            hmhRangeState.enabled ? hmhRange(hmhRangeState) : null,
-            atlacoyaActiveState.enabled ? atlacoyaActive(atlacoyaActiveState) : null,
-            laviscusActiveState.enabled ? laviscusActive(laviscusActiveState) : null,
-        ].filter((attack): attack is Attack => attack !== null) ?? [];
+            kariyanActiveState.enabled ? kariyanActive(kariyanActiveState) : undefined,
+            kariyanPassiveState.enabled ? kariyanPassive(kariyanPassiveState, 5) : undefined,
+            trajannMeleeState.enabled ? trajannMelee(trajannMeleeState) : undefined,
+            bossMeleeState.enabled ? bossMelee(bossMeleeState) : undefined,
+            bossPassiveState.enabled ? bossPassive(bossPassiveState) : undefined,
+            hmhMeleeState.enabled ? hmhMelee(hmhMeleeState) : undefined,
+            hmhRangeState.enabled ? hmhRange(hmhRangeState) : undefined,
+            atlacoyaActiveState.enabled ? atlacoyaActive(atlacoyaActiveState) : undefined,
+            laviscusActiveState.enabled ? laviscusActive(laviscusActiveState) : undefined,
+        ].filter((attack): attack is Attack => attack !== undefined) ?? [];
     const outrage = allAttacksExceptLaviscusMelee.map(array => Math.max(...array.hits)).reduce((a, b) => a + b, 0);
     const allAttacks =
         [
@@ -627,8 +631,8 @@ export const NerdMath = () => {
                       laviscusMeleeState,
                       allAttacksExceptLaviscusMelee.map(a => a.hits)
                   )
-                : null,
-        ].filter((attack): attack is Attack => attack !== null) ?? [];
+                : undefined,
+        ].filter((attack): attack is Attack => attack !== undefined) ?? [];
 
     const setToMaxHmh = () => {
         setKariyanActiveState({
@@ -929,12 +933,12 @@ export const NerdMath = () => {
                     type="number"
                     label="Boss Armor"
                     value={bossArmor}
-                    onChange={e => setBossArmor(Number(e.target.value))}
+                    onChange={event => setBossArmor(Number(event.target.value))}
                     variant="outlined"
                     size="small"
                 />
                 <FormControlLabel
-                    control={<Switch checked={morty} onChange={e => setMorty(e.target.checked)} />}
+                    control={<Switch checked={morty} onChange={event => setMorty(event.target.checked)} />}
                     label="Morty?"
                 />
             </div>

@@ -33,12 +33,12 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Propert
                 width={60}
                 height={80}
                 alt={properties.icon}
-                onError={e => {
+                onError={error => {
                     console.error('❌ Failed to load image:', {
                         icon: properties.icon,
                         imagePath: imagePath,
                         resolvedUrl: imageUrl,
-                        error: e,
+                        error,
                     });
                 }}
                 onLoad={() => {}}
@@ -57,12 +57,12 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Propert
                 height={80}
                 alt={properties.icon}
                 style={{ position: 'absolute', top: 2, left: 2 }}
-                onError={e => {
+                onError={error => {
                     console.error('❌ Failed to load image:', {
                         icon: properties.icon,
                         imagePath: imagePath,
                         resolvedUrl: imageUrl,
-                        error: e,
+                        error,
                     });
                 }}
                 onLoad={() => {}}

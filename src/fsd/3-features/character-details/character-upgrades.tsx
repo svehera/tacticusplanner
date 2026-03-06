@@ -39,7 +39,7 @@ export const CharacterUpgrades: React.FC<Properties> = ({ upgradesChanges, upgra
         originalRank: rank,
     });
 
-    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement>();
     const [updateInventory, setUpdateInventory] = React.useState<boolean>(true);
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
@@ -47,7 +47,7 @@ export const CharacterUpgrades: React.FC<Properties> = ({ upgradesChanges, upgra
     };
 
     const handleClose = () => {
-        setAnchorElement(null);
+        setAnchorElement(undefined);
     };
 
     const open = Boolean(anchorElement);

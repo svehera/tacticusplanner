@@ -82,14 +82,14 @@ const RoleRenderer: React.FC<{ value: TacticusGuildRole }> = ({ value }) => {
 export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: string) => string }> = ({
     userIdMapper,
 }) => {
-    const [guildData, setGuildData] = useState<TacticusGuild | null>(null);
+    const [guildData, setGuildData] = useState<TacticusGuild>();
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string>();
 
     useEffect(() => {
         getTacticusGuildData()
             .then(response => {
-                setGuildData(response.data?.guild ?? null);
+                setGuildData(response.data?.guild);
                 setLoading(false);
             })
             .catch(error => {
@@ -139,7 +139,7 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
 
     // Stats calculation
     const calculateStats = () => {
-        if (!guildData) return null;
+        if (!guildData) return;
 
         const totalMembers = guildData.members.length;
         const avgLevel = guildData.members.reduce((sum, member) => sum + member.level, 0) / totalMembers;
