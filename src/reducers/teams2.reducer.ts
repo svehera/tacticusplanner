@@ -10,7 +10,7 @@ export const teams2Reducer = (_state: ITeam2[], action: Teams2Action) => {
             return action.value;
         }
         default: {
-            throw new Error();
+            throw new Error(`Invalid action type: ${action.type}`);
         }
     }
 };

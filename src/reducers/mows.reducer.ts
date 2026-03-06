@@ -114,7 +114,8 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
             return [...state];
         }
         default: {
-            throw new Error();
+            // @ts-expect-error - TS thinks this is impossible but let's get runtime information in case it does happen
+            throw new Error(`Invalid action type: ${action.type}`);
         }
     }
 };

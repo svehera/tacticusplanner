@@ -70,7 +70,8 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             });
         }
         default: {
-            throw new Error();
+            // @ts-expect-error - TS thinks this is impossible but let's get runtime information in case it does happen
+            throw new Error(`Invalid action type: ${action.type}`);
         }
     }
 };
