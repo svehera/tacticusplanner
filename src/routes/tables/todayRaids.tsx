@@ -8,9 +8,10 @@ import { MaterialItemInput } from '@/fsd/3-features/goals/material-item-input';
 
 interface Props {
     raids: IUpgradeRaid[];
+    bonusRaids: IUpgradeRaid[];
 }
 
-export const TodayRaids: React.FC<Props> = ({ raids }: Props) => {
+export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
     const locs = raids.flatMap(raid => raid.raidLocations);
     const energySpent = sum(locs.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
     const raidsCount = sum(locs.map(loc => loc.raidsAlreadyPerformed));
@@ -24,26 +25,44 @@ export const TodayRaids: React.FC<Props> = ({ raids }: Props) => {
 
     return (
         <>
-            <p style={{ fontSize: isMobile ? 16 : 20 }}>
-                Today (<b>{energySpent}</b> <MiscIcon icon={'energy'} height={15} width={15} /> spent |{' '}
-                <b>{raidsCount}</b> raids done)
-            </p>
-            <div className="mt-2.5 flex flex-wrap items-center justify-center gap-2">
-                {upgradesRaids.map((raid, index) => (
-                    <div
-                        className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
-                        key={raid.id + '-' + index}>
-                        <MaterialItemInput upgradeRaid={raid} />
-                    </div>
-                ))}
-                {completedRaids.map((raid, index) => (
-                    <div
-                        className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
-                        key={raid.id + '-' + index}>
-                        <MaterialItemInput upgradeRaid={{ ...raid, relatedCharacters: [] }} />
-                    </div>
-                ))}
+            <div>
+                <p style={{ fontSize: isMobile ? 16 : 20 }}>
+                    Today (<b>{energySpent}</b> <MiscIcon icon={'energy'} height={15} width={15} /> spent |{' '}
+                    <b>{raidsCount}</b> raids done)
+                </p>
+                <div className="mt-2.5 flex flex-wrap items-center justify-center gap-2">
+                    {upgradesRaids.map((raid, index) => (
+                        <div
+                            className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
+                            key={raid.id + '-' + index}>
+                            <MaterialItemInput upgradeRaid={raid} />
+                        </div>
+                    ))}
+                    {completedRaids.map((raid, index) => (
+                        <div
+                            className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
+                            key={raid.id + '-' + index}>
+                            <MaterialItemInput upgradeRaid={{ ...raid, relatedCharacters: [] }} isExhausted={true} />
+                        </div>
+                    ))}
+                </div>
             </div>
+            <details>
+                <summary>
+                    <p style={{ fontSize: isMobile ? 16 : 20 }}>
+                        Bonus Raids (when you have extra energy <MiscIcon icon={'energy'} height={15} width={15} />)
+                    </p>
+                </summary>
+                <div className="mt-2.5 flex flex-wrap items-center justify-center gap-2">
+                    {bonusRaids.map((raid, index) => (
+                        <div
+                            className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
+                            key={raid.id + '-' + index}>
+                            <MaterialItemInput upgradeRaid={raid} />
+                        </div>
+                    ))}
+                </div>
+            </details>
         </>
     );
 };

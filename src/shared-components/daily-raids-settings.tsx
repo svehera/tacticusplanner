@@ -86,10 +86,6 @@ const energyMarks = [
         value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100 + 100,
         label: '1000 BS',
     },
-    {
-        value: 888888,
-        label: '∞',
-    },
 ];
 
 interface Props {
@@ -104,7 +100,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
     const [dailyEnergy, setDailyEnergy] = React.useState(() => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
-        return index >= 0 ? index : 0; // Default to first option if not found
+        return index >= 0 ? index : 2; // Default to 50 BS refresh if not found.
     });
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
