@@ -227,6 +227,21 @@ export class UpgradesService {
     }
 
     /**
+     * @returns the difference in raids on the first day between the two estimates. This is a
+     * simple diff that just removes raids in highEnergyRaids that are also in lowEnergyRaids
+     * and return a new IUpgradeRaid array. If we happen to have any battles that are present
+     * but not completely exploited in lowEnergyRaids, but are exploited in highEnergyRaids,
+     * those raids will most likely be removed from highEnergyRaids.
+     */
+    public static getDayRaidsDifference(
+        highEnergyRaids: IUpgradesRaidsDay,
+        lowEnergyRaids: IUpgradesRaidsDay
+    ): IUpgradeRaid[] {
+        const lowRaidIds = new Set(lowEnergyRaids.raids.map(raid => raid.id));
+        return highEnergyRaids.raids.filter(raid => !lowRaidIds.has(raid.id));
+    }
+
+    /**
      * @returns whether we can use energy or onslaught tokens to farm this particular
      * material, given the suggestibility of any/all of its locations.
      */
@@ -376,6 +391,7 @@ export class UpgradesService {
                 this.sortLocationsForRaiding(locs, goals, remainingMats, inventory, settings),
                 remainingMats,
                 inventory,
+                inventoryUpgrades,
                 goals
             );
             this.postProcessRaidsForHse(day, settings, goals, remainingMats, inventory);
@@ -535,6 +551,7 @@ export class UpgradesService {
         locs: ICampaignBattleComposed[],
         remainingMats: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
+        originalInventory: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
     ): void {
         const minEnergy = Math.min(Infinity, ...locs.map(loc => loc.energyCost));
@@ -542,7 +559,7 @@ export class UpgradesService {
         if (settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials) {
             for (const loc of locs) {
                 if (energy < minEnergy) break;
-                energy = this.raidLocation(day, energy, inventory, loc, remainingMats, goals);
+                energy = this.raidLocation(day, energy, inventory, originalInventory, loc, remainingMats, goals);
             }
             if (energy < maxEnergy) locs = locs.filter(loc => loc.energyCost <= energy);
             return;
@@ -558,10 +575,20 @@ export class UpgradesService {
                 for (const loc of locsForGoal) {
                     if (energy < minEnergy) break;
                     const raidKey = `${loc.rewards.potential[0].id}::${goal.goalId}`;
-                    energy = this.raidLocation(day, energy, inventory, loc, remainingMats, goals, goal.goalId, {
-                        raidKey,
-                        goal: { goalId: goal.goalId, unitId: goal.unitId },
-                    });
+                    energy = this.raidLocation(
+                        day,
+                        energy,
+                        inventory,
+                        originalInventory,
+                        loc,
+                        remainingMats,
+                        goals,
+                        goal.goalId,
+                        {
+                            raidKey,
+                            goal: { goalId: goal.goalId, unitId: goal.unitId },
+                        }
+                    );
                 }
                 if (energy < maxEnergy) locs = locs.filter(loc => loc.energyCost <= energy);
             }
@@ -584,6 +611,7 @@ export class UpgradesService {
         day: IUpgradesRaidsDay,
         energy: number,
         inventory: Record<string, number>,
+        originalInventory: Record<string, number>,
         loc: ICampaignBattleComposed,
         needed: number,
         mat: ICombinedUpgrade,
@@ -631,7 +659,7 @@ export class UpgradesService {
                 energyLeft: energy - raidLoc.energySpent,
                 daysTotal: -1,
                 raidsTotal: raidLoc.raidsToPerform,
-                acquiredCount: Math.floor(inventory[upgradeId] ?? 0),
+                acquiredCount: Math.floor(originalInventory[upgradeId] ?? 0),
                 requiredCount,
                 relatedCharacters,
                 relatedGoals,
@@ -692,6 +720,7 @@ export class UpgradesService {
         day: IUpgradesRaidsDay,
         energy: number,
         inventory: Record<string, number>,
+        originalInventory: Record<string, number>,
         loc: ICampaignBattleComposed,
         remainingMats: Record<string, ICombinedUpgrade>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
@@ -717,14 +746,34 @@ export class UpgradesService {
             if (neededByHigherPriorityGoals + (mat.countByGoalId[goalId] ?? 0) <= (inventory[upgradeId] ?? 0)) {
                 return energy;
             }
-            return this.addRaidForLocation(day, energy, inventory, loc, stillNeededForGoal, mat, upgradeId, options);
+            return this.addRaidForLocation(
+                day,
+                energy,
+                inventory,
+                originalInventory,
+                loc,
+                stillNeededForGoal,
+                mat,
+                upgradeId,
+                options
+            );
         }
         if (mat.requiredCount <= (inventory[upgradeId] ?? 0)) {
             return energy;
         }
         const remainingNeeded = this.getRemainingNeededForGoal(upgradeId, mat, inventory, goals).totalRemaining;
         if (remainingNeeded <= 0) return energy;
-        return this.addRaidForLocation(day, energy, inventory, loc, remainingNeeded, mat, upgradeId, options);
+        return this.addRaidForLocation(
+            day,
+            energy,
+            inventory,
+            originalInventory,
+            loc,
+            remainingNeeded,
+            mat,
+            upgradeId,
+            options
+        );
     }
 
     /**
@@ -820,7 +869,7 @@ export class UpgradesService {
             .filter(loc => loc.isSuggested)
             .map(loc => loc.energyPerDay / loc.energyPerItem)
             .reduce((accumulator, x) => accumulator + x, 0);
-        return Math.ceil(totalMatsNeeded / matsPerDay);
+        return totalMatsNeeded / matsPerDay;
     }
 
     /**

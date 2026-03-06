@@ -13,17 +13,16 @@ import { UpgradesService } from './upgrades.service';
 
 interface Properties {
     upgradeRaid: IUpgradeRaid;
+    isExhausted?: boolean;
 }
 
-export const MaterialItemInput: React.FC<Properties> = ({ upgradeRaid }) => {
-    const isAllRaidsCompleted =
-        upgradeRaid.acquiredCount >= upgradeRaid.requiredCount ||
-        upgradeRaid.raidLocations.every(location => location.raidsToPerform === 0);
+export const MaterialItemInput: React.FC<Properties> = ({ upgradeRaid, isExhausted = false }) => {
     const isShard = UpgradesService.isShard(upgradeRaid.id);
     const isMythicShard = UpgradesService.isMythicShard(upgradeRaid.id);
+    const canStillFarm = !isExhausted;
 
     return (
-        <div className="flex-box between" style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
+        <div className="flex-box between" style={{ opacity: canStillFarm ? 1 : 0.5 }}>
             <div className="flex-box column">
                 {isShard && <UnitShardIcon icon={upgradeRaid.iconPath} mythic={false} />}
 

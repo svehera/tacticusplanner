@@ -122,8 +122,8 @@ export const RankLookup = () => {
         return orderBy(RankLookupService.getAllMaterials(campaignsProgress, {}, upgrades), ['rarity'], ['desc']);
     }, [upgrades]);
 
-    const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>) => (
-        <ul>
+    const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>, depth = 0) => (
+        <ul className={depth > 0 ? 'pl-4' : undefined}>
             {materials.map(item => (
                 <li key={item.id}>
                     <div className="flex items-center gap-[5px]">
@@ -136,7 +136,7 @@ export const RankLookup = () => {
                         />{' '}
                         - <span className="font-bold">{item.count}</span>
                     </div>
-                    {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
+                    {item.recipe?.length ? renderUpgradesMaterials(item.recipe, depth + 1) : undefined}
                 </li>
             ))}
         </ul>
@@ -408,7 +408,7 @@ export const RankLookup = () => {
                         {materialRecipe && (
                             <div className="m-5 w-[300px]">
                                 <div className="flex items-center gap-[5px]">
-                                    <MiscIcon icon={materialRecipe.stat.toLowerCase() as any} />
+                                    <MiscIcon icon={materialRecipe.stat.toLowerCase() as string} />
                                     <span className={Rarity[materialRecipe.rarity]?.toLowerCase()}>
                                         {Rarity[materialRecipe.rarity]}
                                     </span>{' '}
