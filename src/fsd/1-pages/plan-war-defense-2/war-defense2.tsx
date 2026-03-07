@@ -123,7 +123,7 @@ export const WarDefense2 = () => {
                     </div>
                 </div>
                 <div>
-                    <div className="flex flex-col items-center gap-4">
+                    <div className="flex flex-wrap items-center justify-center gap-4">
                         {[0, 1, 2, 3, 4].map(i => (
                             <DeploymentZone
                                 key={`war-defense-team-${i}`}

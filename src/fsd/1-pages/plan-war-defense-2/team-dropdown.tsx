@@ -94,6 +94,15 @@ export const TeamDropdown: React.FC<Props> = ({
                 {selectedTeamName ?? 'SELECT A TEAM'}
             </Button>
             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                <MenuItem
+                    onClick={() => {
+                        onSelect(undefined as unknown as string);
+                        handleClose();
+                    }}>
+                    <Box className="flex w-full items-center justify-between gap-2">
+                        <Box className="text-sm text-red-600 dark:text-red-300">CLEAR</Box>
+                    </Box>
+                </MenuItem>
                 {teams.map(team => (
                     <MenuItem
                         key={team.name}

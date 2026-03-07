@@ -47,26 +47,28 @@ export const DeploymentZone = ({
                     onSelect={onSelectTeam}
                 />
             </div>
-            {team && (
-                <TeamFlow
-                    chars={(
-                        team.chars
-                            .map((id: string) => chars.find(x => x.snowprintId === id))
-                            .filter(x => x !== undefined) ?? []
-                    ).map(x => Teams2Service.capCharacterAtRarity(x, rarityCap))}
-                    mows={
-                        team.mows
-                            ?.map((id: string) => mows.find(x => x.snowprintId === id))
-                            .filter(x => x !== undefined)
-                            .map(x => Teams2Service.capMowAtRarity(x, rarityCap)) ?? []
-                    }
-                    flexIndex={team.flexIndex}
-                    onCharClicked={() => {}}
-                    onMowClicked={() => {}}
-                    sizeMod={sizeMod}
-                    disabledUnits={[]}
-                />
-            )}
+            <div style={{ minHeight: 230 * sizeMod }} className="flex w-full items-center justify-center">
+                {team && (
+                    <TeamFlow
+                        chars={(
+                            team.chars
+                                .map((id: string) => chars.find(x => x.snowprintId === id))
+                                .filter(x => x !== undefined) ?? []
+                        ).map(x => Teams2Service.capCharacterAtRarity(x, rarityCap))}
+                        mows={
+                            team.mows
+                                ?.map((id: string) => mows.find(x => x.snowprintId === id))
+                                .filter(x => x !== undefined)
+                                .map(x => Teams2Service.capMowAtRarity(x, rarityCap)) ?? []
+                        }
+                        flexIndex={team.flexIndex}
+                        onCharClicked={() => {}}
+                        onMowClicked={() => {}}
+                        sizeMod={sizeMod}
+                        disabledUnits={[]}
+                    />
+                )}
+            </div>
         </div>
     );
 };
