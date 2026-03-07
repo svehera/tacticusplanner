@@ -122,7 +122,7 @@ export const Goals = () => {
         },
         characters,
         resolvedMows,
-        ...[upgradeRankOrMowGoals, shardsGoals, ascendGoals].flat().filter(x => x.include)
+        ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
     );
 
     const removeGoal = (goalId: string): void => {
