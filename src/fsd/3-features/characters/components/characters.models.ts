@@ -1,4 +1,4 @@
-﻿// eslint-disable-next-line import-x/no-internal-modules
+// eslint-disable-next-line import-x/no-internal-modules
 import type factions from '@/data/factions.json';
 
 import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
@@ -34,11 +34,11 @@ export interface ICharactersContext {
     getOpacity?: (character: IUnit) => number;
 }
 
-export type IXpLevel = {
+export interface IXpLevel {
     level: number;
     xpToNextLevel: number;
     totalXp: number;
-};
+}
 
 export interface IXpEstimate {
     legendaryBooks: number;
@@ -55,10 +55,7 @@ export interface ICharacterAbilityLevelRaw {
     badges: number;
 }
 
-export interface ICharacterAbilityLevel {
-    lvl: number;
-    gold: number;
-    badges: number;
+export interface ICharacterAbilityLevel extends ICharacterAbilityLevelRaw {
     rarity: Rarity;
 }
 
