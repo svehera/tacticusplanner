@@ -32,6 +32,8 @@ import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
+import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
+import { filterZeroValues } from '@/fsd/3-features/characters/components/orbs-total-utils';
 import {
     CharacterRaidGoalSelect,
     ICharacterUpgradeMow,
@@ -144,6 +146,17 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                             </div>
                             {getStatusIcons(goalEstimate)}
                         </div>
+                        {goalEstimate.orbsEstimate &&
+                            !!Object.values(goalEstimate.orbsEstimate.orbs).some(x => x > 0) && (
+                                <div className="py-2.5">
+                                    <OrbsTotal
+                                        size={25}
+                                        alliance={goalEstimate.orbsEstimate.alliance}
+                                        orbs={goalEstimate.orbsEstimate.orbs}
+                                        displayOrbs={filterZeroValues(goalEstimate.orbsEstimate.orbs)}
+                                    />
+                                </div>
+                            )}
                     </div>
                 );
             }
