@@ -52,6 +52,8 @@ enum SaveTeamMode {
     MODE_EDIT,
 }
 
+type TeamTypeKey = 'warOffense' | 'warDefense' | 'raid' | 'ta' | 'horde';
+
 export const ManageTeams = () => {
     const {
         characters: unresolvedCharacters,
@@ -94,6 +96,7 @@ export const ManageTeams = () => {
     const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
     const [teams, setTeams] = useState<ITeam2[]>([]);
     const [sizeMod, setSizeMod] = useState(isMobile ? 0.5 : 1);
+    const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>(undefined);
 
     useEffect(() => {
         setTeams(currentTeams);
@@ -358,6 +361,25 @@ export const ManageTeams = () => {
         <Stack spacing={2} className="p-4">
             <div className="flex items-start justify-start">
                 <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                <div className="flex items-center gap-2">
+                    <label className="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
+                        Team Type
+                    </label>
+                    <select
+                        className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-blue-900/40"
+                        value={selectedTeamType ?? ''}
+                        onChange={e => {
+                            const value = e.target.value as TeamTypeKey | '';
+                            setSelectedTeamType(value ? value : undefined);
+                        }}>
+                        <option value="">All</option>
+                        <option value="warOffense">War Offense</option>
+                        <option value="warDefense">War Defense</option>
+                        <option value="raid">Guild Raid</option>
+                        <option value="ta">Tournament Arena</option>
+                        <option value="horde">Horde</option>
+                    </select>
+                </div>
             </div>
             <div className="flex flex-wrap justify-center gap-4 px-4 pt-4">
                 <ButtonBase
@@ -443,101 +465,107 @@ export const ManageTeams = () => {
                     </>
                 )}
             </div>
-            {teams.map(team => (
-                <Paper
-                    key={team.name}
-                    elevation={0}
-                    className="border border-slate-200 bg-white p-4 transition-colors dark:border-slate-800 dark:bg-[#1a1f2e]">
-                    <div className="mb-4 flex items-start justify-between">
-                        <div>
-                            <span className="font-mono text-xs tracking-wider text-slate-500 uppercase">
-                                Team Configuration
-                            </span>
-                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">{team.name}</h3>
-                        </div>
+            {teams
+                .filter(team => !selectedTeamType || Boolean(team[selectedTeamType]))
+                .map(team => (
+                    <Paper
+                        key={team.name}
+                        elevation={0}
+                        className="border border-slate-200 bg-white p-4 transition-colors dark:border-slate-800 dark:bg-[#1a1f2e]">
+                        <div className="mb-4 flex items-start justify-between">
+                            <div>
+                                <span className="font-mono text-xs tracking-wider text-slate-500 uppercase">
+                                    Team Configuration
+                                </span>
+                                <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">{team.name}</h3>
+                            </div>
 
-                        <div className="flex gap-1">
-                            <Tooltip title="Edit Team">
-                                <IconButton onClick={() => onEdit(team)} size="small">
-                                    <EditIcon fontSize="small" className="text-slate-500" />
-                                </IconButton>
-                            </Tooltip>
-                            <Tooltip title="Delete Team">
-                                <IconButton onClick={() => onDelete(team)} size="small" color="error">
-                                    <DeleteIcon fontSize="small" />
-                                </IconButton>
-                            </Tooltip>
-                        </div>
-                    </div>
-                    <div className="mb-4 flex flex-wrap gap-2">
-                        {!!team.warOffense && (
-                            <MetadataChip
-                                icon={<MilitaryTech fontSize="inherit" />}
-                                label="War Offense"
-                                color="warning"
-                            />
-                        )}
-                        {!!team.warDefense && (
-                            <MetadataChip icon={<Shield fontSize="inherit" />} label="War Defense" color="info" />
-                        )}
-                        {!!team.raid && (
-                            <MetadataChip icon={<Groups fontSize="inherit" />} label="Guild Raid" color="secondary" />
-                        )}
-                        {!!team.ta && (
-                            <MetadataChip
-                                icon={<WorkspacePremium fontSize="inherit" />}
-                                label="Tournament"
-                                color="success"
-                            />
-                        )}
-                        {!!team.horde && (
-                            <MetadataChip icon={<DiversityIcon fontSize="inherit" />} label="Horde" color="error" />
-                        )}
-                    </div>
-                    {team.notes && team.notes.trim().length > 0 && (
-                        <div className="mb-4">
-                            <span className="font-mono text-xs tracking-wider text-slate-500 uppercase">Notes</span>
-                            <div className="mt-2 rounded border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-900">
-                                <p className="text-sm whitespace-pre-wrap text-slate-700 dark:text-slate-300">
-                                    {team.notes}
-                                </p>
+                            <div className="flex gap-1">
+                                <Tooltip title="Edit Team">
+                                    <IconButton onClick={() => onEdit(team)} size="small">
+                                        <EditIcon fontSize="small" className="text-slate-500" />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Delete Team">
+                                    <IconButton onClick={() => onDelete(team)} size="small" color="error">
+                                        <DeleteIcon fontSize="small" />
+                                    </IconButton>
+                                </Tooltip>
                             </div>
                         </div>
-                    )}
-                    <div className="rounded-lg bg-slate-50/50 p-3 dark:bg-slate-900/50">
-                        <TeamFlow
-                            chars={
-                                team.chars
-                                    .filter(id => resolvedChars.some(x => x.snowprintId === id))
-                                    .map(id => resolvedChars.find(x => x.snowprintId === id)!)
-                                    .filter(x => x !== undefined) ?? []
-                            }
-                            mows={
-                                team.mows
-                                    ?.filter(id => resolvedMows.some(x => x.snowprintId === id))
-                                    .map(id => resolvedMows.find(x => x.snowprintId === id)!)
-                                    .filter(x => x !== undefined) ?? []
-                            }
-                            flexIndex={team.flexIndex}
-                            onCharClicked={() => {}}
-                            onMowClicked={() => {}}
-                            sizeMod={sizeMod}
-                            disabledUnits={[
-                                ...team.chars.map(
-                                    char =>
-                                        resolvedChars.find(x => x.snowprintId === char && x.rank === Rank.Locked)
-                                            ?.snowprintId
-                                ),
-                                ...(team.mows?.map(
-                                    mow => resolvedMows.find(x => x.snowprintId === mow && !x.unlocked)?.snowprintId
-                                ) ?? []),
-                            ]
-                                .flatMap(id => (id ? [id] : []))
-                                .filter(id => id !== undefined)}
-                        />
-                    </div>
-                </Paper>
-            ))}
+                        <div className="mb-4 flex flex-wrap gap-2">
+                            {!!team.warOffense && (
+                                <MetadataChip
+                                    icon={<MilitaryTech fontSize="inherit" />}
+                                    label="War Offense"
+                                    color="warning"
+                                />
+                            )}
+                            {!!team.warDefense && (
+                                <MetadataChip icon={<Shield fontSize="inherit" />} label="War Defense" color="info" />
+                            )}
+                            {!!team.raid && (
+                                <MetadataChip
+                                    icon={<Groups fontSize="inherit" />}
+                                    label="Guild Raid"
+                                    color="secondary"
+                                />
+                            )}
+                            {!!team.ta && (
+                                <MetadataChip
+                                    icon={<WorkspacePremium fontSize="inherit" />}
+                                    label="Tournament"
+                                    color="success"
+                                />
+                            )}
+                            {!!team.horde && (
+                                <MetadataChip icon={<DiversityIcon fontSize="inherit" />} label="Horde" color="error" />
+                            )}
+                        </div>
+                        {team.notes && team.notes.trim().length > 0 && (
+                            <div className="mb-4">
+                                <span className="font-mono text-xs tracking-wider text-slate-500 uppercase">Notes</span>
+                                <div className="mt-2 rounded border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-900">
+                                    <p className="text-sm whitespace-pre-wrap text-slate-700 dark:text-slate-300">
+                                        {team.notes}
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+                        <div className="rounded-lg bg-slate-50/50 p-3 dark:bg-slate-900/50">
+                            <TeamFlow
+                                chars={
+                                    team.chars
+                                        .filter(id => resolvedChars.some(x => x.snowprintId === id))
+                                        .map(id => resolvedChars.find(x => x.snowprintId === id)!)
+                                        .filter(x => x !== undefined) ?? []
+                                }
+                                mows={
+                                    team.mows
+                                        ?.filter(id => resolvedMows.some(x => x.snowprintId === id))
+                                        .map(id => resolvedMows.find(x => x.snowprintId === id)!)
+                                        .filter(x => x !== undefined) ?? []
+                                }
+                                flexIndex={team.flexIndex}
+                                onCharClicked={() => {}}
+                                onMowClicked={() => {}}
+                                sizeMod={sizeMod}
+                                disabledUnits={[
+                                    ...team.chars.map(
+                                        char =>
+                                            resolvedChars.find(x => x.snowprintId === char && x.rank === Rank.Locked)
+                                                ?.snowprintId
+                                    ),
+                                    ...(team.mows?.map(
+                                        mow => resolvedMows.find(x => x.snowprintId === mow && !x.unlocked)?.snowprintId
+                                    ) ?? []),
+                                ]
+                                    .flatMap(id => (id ? [id] : []))
+                                    .filter(id => id !== undefined)}
+                            />
+                        </div>
+                    </Paper>
+                ))}
         </Stack>
     );
 };
