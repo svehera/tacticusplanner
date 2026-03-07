@@ -10,6 +10,7 @@ import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
 import { teams2Reducer } from 'src/reducers/teams2.reducer';
+import { warDefense2Reducer } from 'src/reducers/war-defense2.reducer';
 import { warOffense2Reducer } from 'src/reducers/war-offense2.reducer';
 
 import { IErrorResponse } from '@/fsd/5-shared/api';
@@ -63,6 +64,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         gameModeTokensActionReducer,
         globalState.gameModeTokens
     );
+    const [warDefense2, dispatchWarDefense2] = React.useReducer(warDefense2Reducer, globalState.warDefense2);
     const [warOffense2, dispatchWarOffense2] = React.useReducer(warOffense2Reducer, globalState.warOffense2);
     const [viewPreferences, dispatchViewPreferences] = React.useReducer(
         viewPreferencesReducer,
@@ -123,6 +125,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             mows: wrapDispatch(dispatchMows),
             teams: wrapDispatch(dispatchTeams),
             teams2: wrapDispatch(dispatchTeams2),
+            warDefense2: wrapDispatch(dispatchWarDefense2),
             warOffense2: wrapDispatch(dispatchWarOffense2),
             goals: wrapDispatch(dispatchGoals),
             viewPreferences: wrapDispatch(dispatchViewPreferences),
@@ -148,6 +151,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 dispatchGoals({ type: 'Set', value: data.goals });
                 dispatchTeams({ type: 'Set', value: data.teams });
                 dispatchTeams2({ type: 'Set', value: data.teams2 });
+                dispatchWarDefense2({ type: 'Set', value: data.warDefense2 });
                 dispatchWarOffense2({ type: 'Set', value: data.warOffense2 });
                 dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
                 dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
@@ -194,6 +198,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchGuild,
             dispatchTeams,
             dispatchTeams2,
+            dispatchWarDefense2,
             dispatchWarOffense2,
             dispatchXpIncome,
             dispatchXpUse,
@@ -213,6 +218,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             mows,
             teams,
             teams2,
+            warDefense2,
             warOffense2,
             viewPreferences,
             autoTeamsPreferences,
