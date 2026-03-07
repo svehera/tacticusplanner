@@ -359,7 +359,7 @@ export const ManageTeams = () => {
 
     return (
         <Stack spacing={2} className="p-4">
-            <div className="flex items-start justify-start">
+            <div className="flex items-start justify-between gap-4">
                 <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
                 <div className="flex items-center gap-2">
                     <label className="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
