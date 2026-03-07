@@ -21,9 +21,9 @@ export const useLre = () => {
 
     const [legendaryEventId] = useQueryState<LegendaryEventEnum>(
         'character',
-        initQueryParam =>
-            initQueryParam
-                ? (LegendaryEventEnum[initQueryParam as keyof typeof LegendaryEventEnum] as LegendaryEventEnum)
+        initQueryParameter =>
+            initQueryParameter
+                ? (LegendaryEventEnum[initQueryParameter as keyof typeof LegendaryEventEnum] as LegendaryEventEnum)
                 : LegendaryEventEnum.Mephiston,
         value => LegendaryEventEnum[value]
     );
@@ -34,18 +34,21 @@ export const useLre = () => {
         if (event.id !== legendaryEventId) return false;
         const startDate = new Date(event.nextEventDateUtc ?? '');
         const endDate = startDate.getTime() + 7 * 24 * 60 * 60 * 1000;
-        const now = new Date().getTime();
+        const now = Date.now();
         return now >= startDate.getTime() && now <= endDate;
     }, [legendaryEventId]);
 
     const mapDefaultToPage = (page: LegendaryEventDefaultPage) => {
         switch (page) {
-            case LegendaryEventDefaultPage.TEAMS:
+            case LegendaryEventDefaultPage.TEAMS: {
                 return LreSection.teams;
-            case LegendaryEventDefaultPage.PROGRESS:
+            }
+            case LegendaryEventDefaultPage.PROGRESS: {
                 return LreSection.progress;
-            case LegendaryEventDefaultPage.TOKENOMICS:
+            }
+            case LegendaryEventDefaultPage.TOKENOMICS: {
                 return LreSection.tokenomics;
+            }
         }
         return LreSection.teams;
     };
@@ -56,12 +59,12 @@ export const useLre = () => {
             : mapDefaultToPage(leSettings.defaultPageWhenEventNotActive);
     const [section, setSection] = useQueryState<LreSection>(
         'section',
-        initQueryParam => (initQueryParam ? +initQueryParam : getDefaultPage()),
+        initQueryParameter => (initQueryParameter ? +initQueryParameter : getDefaultPage()),
         value => value.toString()
     );
 
     useEffect(() => {
-        const url = new URL(window.location.href);
+        const url = new URL(globalThis.location.href);
         if (!url.searchParams.has('section')) {
             setSection(getDefaultPage());
         }

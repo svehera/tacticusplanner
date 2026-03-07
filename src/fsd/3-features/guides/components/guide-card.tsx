@@ -28,7 +28,7 @@ import { GuidesStatus } from '@/fsd/3-features/guides/guides.enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuide } from '@/fsd/3-features/guides/guides.models';
 
-interface Props {
+interface Properties {
     team: IGuide;
     units: IUnit[];
     fullView?: boolean;
@@ -39,7 +39,7 @@ interface Props {
     onEdit: () => void;
 }
 
-export const GuideCard: React.FC<Props> = ({
+export const GuideCard: React.FC<Properties> = ({
     team: guide,
     units,
     fullView = false,
@@ -138,7 +138,7 @@ export const GuideCard: React.FC<Props> = ({
     return (
         <Card
             sx={{
-                maxWidth: !fullView ? 425 : 'unset',
+                maxWidth: fullView ? 'unset' : 425,
                 minWidth: isMobile ? 'unset' : 425,
                 overflow: 'auto',
                 zoom: isMobile ? '90%' : '100%',

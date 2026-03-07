@@ -13,7 +13,7 @@ import { IMenuOption } from '../menu-option';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-const MenuProps = {
+const MenuProperties = {
     PaperProps: {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
@@ -22,7 +22,7 @@ const MenuProps = {
     },
 };
 
-interface Props {
+interface Properties {
     label: string;
     options: Array<IMenuOption>;
     optionsChange: (value: Array<string>) => void;
@@ -33,7 +33,7 @@ interface Props {
     selected?: string[];
 }
 
-export const MultipleSelect: React.FC<Props> = ({
+export const MultipleSelect: React.FC<Properties> = ({
     label,
     optionsChange,
     options,
@@ -73,7 +73,7 @@ export const MultipleSelect: React.FC<Props> = ({
                         .map(x => x.label)
                         .join(', ')
                 }
-                MenuProps={MenuProps}>
+                MenuProps={MenuProperties}>
                 {options.map(option => (
                     <MenuItem key={option.value} value={option.value}>
                         {multiple && <Checkbox checked={selectedValues.includes(option.value)} />}

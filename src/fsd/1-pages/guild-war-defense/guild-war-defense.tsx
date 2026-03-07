@@ -36,10 +36,10 @@ export const GuildWarDefense = () => {
     const dispatch = useContext(DispatchContext);
 
     const [openSelectTeamDialog, setOpenSelectTeamDialog] = useState(false);
-    const [editedTeam, setEditedTeam] = useState<IGWTeamWithCharacters | null>(null);
+    const [editedTeam, setEditedTeam] = useState<IGWTeamWithCharacters>();
 
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = useState(false);
-    const [editedCharacter, setEditedCharacter] = useState<ICharacter2 | null>(null);
+    const [editedCharacter, setEditedCharacter] = useState<ICharacter2>();
 
     useEffect(() => {
         const rarityCaps = GuildWarService.getDifficultyRarityCaps(guildWar.zoneDifficulty);
@@ -51,7 +51,7 @@ export const GuildWarDefense = () => {
     };
 
     const endEditCharacter = (): void => {
-        setEditedCharacter(null);
+        setEditedCharacter(undefined);
         setOpenCharacterItemDialog(false);
     };
 
@@ -76,7 +76,7 @@ export const GuildWarDefense = () => {
                 rarityCap: editedTeam.rarityCap,
             });
         }
-        setEditedTeam(null);
+        setEditedTeam(undefined);
         setOpenSelectTeamDialog(false);
     };
 
@@ -110,17 +110,17 @@ export const GuildWarDefense = () => {
 
     const renderTeams = useMemo(
         () =>
-            teamsWithCharacters.map((currTeam, i) => (
+            teamsWithCharacters.map((currentTeam, index) => (
                 <TeamCard
-                    key={currTeam.id}
-                    team={currTeam}
-                    onEdit={() => startEditTeam(currTeam)}
-                    onClear={() => clearTeam(currTeam.id)}
-                    teamPotential={teamsPotential[i].total}
+                    key={currentTeam.id}
+                    team={currentTeam}
+                    onEdit={() => startEditTeam(currentTeam)}
+                    onClear={() => clearTeam(currentTeam.id)}
+                    teamPotential={teamsPotential[index].total}
                     onCharacterClick={() => {}}
                     teamPotentialBreakdown={
                         <FlexBox className="flex-col items-start">
-                            {teamsPotential[i].lineup.map(char => (
+                            {teamsPotential[index].lineup.map(char => (
                                 <span key={char.id}>
                                     {char.potential} - {char.id}
                                 </span>
@@ -273,7 +273,7 @@ const TeamCard: React.FC<{
                 <Button size="small" onClick={onEdit}>
                     Edit
                 </Button>
-                <Conditional condition={!!team.lineup.length}>
+                <Conditional condition={team.lineup.length > 0}>
                     <Button size="small" color="error" onClick={onClear}>
                         Clear
                     </Button>

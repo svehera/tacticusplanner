@@ -34,7 +34,7 @@ import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
 import { XpGoalProgressBar } from './xp-book-progress-bar';
 
-interface Props {
+interface Properties {
     goal: CharacterRaidGoalSelect;
     goalEstimate?: IGoalEstimate;
     menuItemSelect?: (item: 'edit' | 'delete') => void;
@@ -43,14 +43,14 @@ interface Props {
     mows: IMow2[];
 }
 
-export const GoalCard: React.FC<Props> = ({
+export const GoalCard: React.FC<Properties> = ({
     goal,
     menuItemSelect,
     goalEstimate: passed,
     bgColor,
     characters,
     mows,
-}: Props) => {
+}: Properties) => {
     const goalEstimate: IGoalEstimate = passed ?? {
         daysLeft: 0,
         daysTotal: 0,
@@ -164,7 +164,7 @@ export const GoalCard: React.FC<Props> = ({
             case PersonalGoalType.UpgradeRank: {
                 const { xpEstimate } = goalEstimate;
                 const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-                const params = `?charSnowprintId=${encodeURIComponent(goal.unitId)}`;
+                const parameters = `?charSnowprintId=${encodeURIComponent(goal.unitId)}`;
 
                 return (
                     <div>
@@ -172,7 +172,7 @@ export const GoalCard: React.FC<Props> = ({
                             <div className="flex-box gap-[3px]">
                                 <RankIcon rank={goal.rankStart} /> <ArrowForward />
                                 <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
-                                {!!goal.upgradesRarity.length && (
+                                {goal.upgradesRarity.length > 0 && (
                                     <div className="flex-box gap-[3px]">
                                         {goal.upgradesRarity.map(x => (
                                             <RarityIcon key={x} rarity={x} />
@@ -238,7 +238,7 @@ export const GoalCard: React.FC<Props> = ({
                             size="small"
                             variant={'outlined'}
                             component={Link}
-                            to={linkBase + params}
+                            to={linkBase + parameters}
                             target={'_self'}>
                             <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
                         </Button>
@@ -247,7 +247,7 @@ export const GoalCard: React.FC<Props> = ({
             }
             case PersonalGoalType.MowAbilities: {
                 const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-                const params = `?charSnowprintId=${encodeURIComponent(goal.unitId)}`;
+                const parameters = `?charSnowprintId=${encodeURIComponent(goal.unitId)}`;
                 const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
                 const targetShards = ShardsService.getTargetShardsForMow(goal);
@@ -269,7 +269,7 @@ export const GoalCard: React.FC<Props> = ({
                                     </div>
                                 )}
                             </div>
-                            {!!goal.upgradesRarity.length && (
+                            {goal.upgradesRarity.length > 0 && (
                                 <div className="flex-box gap-[3px]">
                                     {goal.upgradesRarity.map(x => (
                                         <RarityIcon key={x} rarity={x} />
@@ -314,7 +314,7 @@ export const GoalCard: React.FC<Props> = ({
                             size="small"
                             variant={'outlined'}
                             component={Link}
-                            to={linkBase + params}
+                            to={linkBase + parameters}
                             target={'_self'}>
                             <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
                         </Button>

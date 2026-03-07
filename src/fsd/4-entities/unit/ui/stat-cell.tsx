@@ -5,7 +5,7 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { StatsCalculatorService } from '../stats-calculator.service';
 
-interface Props {
+interface Properties {
     characterId?: string;
     rank: Rank;
     rarityStars: RarityStars;
@@ -14,7 +14,7 @@ interface Props {
     numArmorUpgrades: number;
 }
 
-export const StatCell: React.FC<Props> = ({
+export const StatCell: React.FC<Properties> = ({
     characterId,
     rank,
     rarityStars,

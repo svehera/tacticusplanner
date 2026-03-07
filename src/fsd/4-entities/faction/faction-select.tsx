@@ -5,7 +5,7 @@ import { FactionId } from '@/fsd/5-shared/model';
 
 import { FactionImage } from './faction.icon';
 
-interface Props {
+interface Properties {
     label: string;
     factions: FactionId[];
     faction: FactionId;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 /** Exposes a select (list box) with the given factions. */
-export const FactionSelect: React.FC<Props> = ({ label, factions, faction, factionChanges }) => {
+export const FactionSelect: React.FC<Properties> = ({ label, factions, faction, factionChanges }) => {
     return (
         <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>

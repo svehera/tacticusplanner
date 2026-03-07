@@ -46,6 +46,14 @@ import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-e
 import { ILreProgressModel } from './lre.models';
 import { LreService } from './lre.service';
 
+const passesNameFilter = (filter: string, character: ICharacter2) => {
+    if (!filter) return true;
+    return (
+        character.name.toLowerCase().includes(filter.toLowerCase()) ||
+        ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
+    );
+};
+
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
         LegendaryEventService.getUnfinishedEvents().map(x => x.id)
@@ -67,7 +75,7 @@ export const MasterTable = () => {
         value => value
     );
 
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
     const getSelectedChars = (eventId: LegendaryEventEnum) => {
         const teams = getSelectedTeams(eventId);
@@ -76,23 +84,15 @@ export const MasterTable = () => {
         );
     };
 
-    const passesNameFilter = (filter: string, character: ICharacter2) => {
-        if (!filter) return true;
-        return (
-            character.name.toLowerCase().includes(filter.toLowerCase()) ||
-            ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
-        );
-    };
-
     const selectedCharsRows: ITableRow[] = useMemo(() => {
-        const temp: Array<{
+        const temporary: Array<{
             character: ICharacter2;
             characterId: string;
             eventId: LegendaryEventEnum;
             points: number;
             slots: number;
         }> = [];
-        activeLegendaryEvents.forEach(eventId => {
+        for (const eventId of activeLegendaryEvents) {
             const legendaryEvent = getLre(eventId, resolvedCharacters);
             const legendaryEventProgress = LreService.mapProgressDtoToModel(
                 leProgress[legendaryEvent.id],
@@ -119,7 +119,7 @@ export const MasterTable = () => {
 
             const eventCharacters = legendaryEvent.allowedUnits
                 .filter(x => selectedChars.includes(x.snowprintId!))
-                .sort((a, b) => {
+                .toSorted((a, b) => {
                     const aTotal =
                         (alpha[a.snowprintId!]?.points ?? 0) +
                         (beta[a.snowprintId!]?.points ?? 0) +
@@ -148,10 +148,10 @@ export const MasterTable = () => {
                         (gamma[x.snowprintId!]?.slots ?? 0),
                 }));
 
-            temp.push(...eventCharacters);
-        });
+            temporary.push(...eventCharacters);
+        }
 
-        const grouped = groupBy(temp, 'characterId');
+        const grouped = groupBy(temporary, 'characterId');
 
         return map(grouped, items => {
             const charData = {
@@ -161,14 +161,14 @@ export const MasterTable = () => {
                 totalPoints: sum(items.map(x => x.points)),
                 totalSlots: sum(items.map(x => x.slots)),
             };
-            items.forEach(item => {
+            for (const item of items) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}points`] = item.points;
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}slots`] = item.slots;
-            });
+            }
 
             return charData;
         }) as any;
@@ -183,12 +183,12 @@ export const MasterTable = () => {
                         x => CharactersService.resolveCharacter(x)?.snowprintId ?? x
                     );
                 }
-                chars.forEach(character => {
+                for (const character of chars) {
                     if (!result[character]) {
                         result[character] = [];
                     }
                     result[character] = uniq([...result[character], ...team.restrictionsIds]);
-                });
+                }
             }
             return result;
         }
@@ -217,7 +217,7 @@ export const MasterTable = () => {
             let progressByRequirement: Record<string, number> = {};
 
             if (pointsCalculation === PointsCalculation.unearned) {
-                const trackProgress = legendaryEventProgress.tracksProgress.filter(x => x.trackId === track.section)[0];
+                const trackProgress = legendaryEventProgress.tracksProgress.find(x => x.trackId === track.section);
                 if (trackProgress) {
                     progressByRequirement = LreService.getReqProgressPerTrack(trackProgress);
                 }
@@ -250,22 +250,22 @@ export const MasterTable = () => {
     }, [filter, activeLegendaryEvents, pointsCalculation, resolvedCharacters, leProgress, leSelectedTeams]);
 
     const [selection, setSelection] = useState<CharactersSelection>(
-        selectedCharsRows.length ? CharactersSelection.Selected : CharactersSelection.All
+        selectedCharsRows.length > 0 ? CharactersSelection.Selected : CharactersSelection.All
     );
 
-    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
+    const columnsDefinition: Array<ColDef | ColGroupDef> = useMemo(() => {
         return [
             {
                 headerName: 'Character',
                 pinned: !isMobile,
                 openByDefault: !isMobile,
-                cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
-                tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
+                cellClass: (parameters: CellClassParams<ITableRow>) => parameters.data?.className,
+                tooltipValueGetter: (parameters: ITooltipParams<ITableRow>) => parameters.data?.tooltip,
                 children: [
                     {
                         headerName: '#',
                         colId: 'rowNumber',
-                        valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+                        valueGetter: parameters => (parameters.node?.rowIndex ?? 0) + 1,
                         maxWidth: 50,
                         width: 50,
                         pinned: !isMobile,
@@ -274,8 +274,8 @@ export const MasterTable = () => {
                         headerName: 'Name',
                         width: isMobile ? 75 : 180,
                         pinned: !isMobile,
-                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
-                            const character = props.data?.character;
+                        cellRenderer: (properties: ICellRendererParams<ITableRow>) => {
+                            const character = properties.data?.character;
                             if (character) {
                                 return (
                                     <CharacterTitle
@@ -288,20 +288,20 @@ export const MasterTable = () => {
                                 );
                             }
                         },
-                        cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
-                        valueGetter: (params: ValueGetterParams<ITableRow>) => params.data?.character.name,
-                        tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
+                        cellClass: (parameters: CellClassParams<ITableRow>) => parameters.data?.className,
+                        valueGetter: (parameters: ValueGetterParams<ITableRow>) => parameters.data?.character.name,
+                        tooltipValueGetter: (parameters: ITooltipParams<ITableRow>) => parameters.data?.tooltip,
                     },
                     {
                         headerName: 'Rarity',
                         width: 80,
                         columnGroupShow: 'open',
                         pinned: !isMobile,
-                        valueGetter: (props: ValueGetterParams<ITableRow>) => {
-                            return props.data?.character.rarity;
+                        valueGetter: (properties: ValueGetterParams<ITableRow>) => {
+                            return properties.data?.character.rarity;
                         },
-                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
-                            const rarity = props.value ?? 0;
+                        cellRenderer: (properties: ICellRendererParams<ITableRow>) => {
+                            const rarity = properties.value ?? 0;
                             return <RarityIcon rarity={rarity} />;
                         },
                     },
@@ -310,11 +310,11 @@ export const MasterTable = () => {
                         width: 80,
                         columnGroupShow: 'open',
                         pinned: !isMobile,
-                        valueGetter: (props: ValueGetterParams<ITableRow>) => {
-                            return props.data?.character.rank;
+                        valueGetter: (properties: ValueGetterParams<ITableRow>) => {
+                            return properties.data?.character.rank;
                         },
-                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
-                            const rank = props.value ?? 0;
+                        cellRenderer: (properties: ICellRendererParams<ITableRow>) => {
+                            const rank = properties.value ?? 0;
                             return <RankIcon rank={rank} />;
                         },
                     },
@@ -361,7 +361,7 @@ export const MasterTable = () => {
     }, [selection, activeLegendaryEvents]);
 
     const rows = useMemo<ITableRow[]>(() => {
-        const temp: Array<{
+        const temporary: Array<{
             character: ICharacter2;
             characterId: string;
             eventId: LegendaryEventEnum;
@@ -369,7 +369,7 @@ export const MasterTable = () => {
             slots: number;
         }> = [];
 
-        activeLegendaryEvents.forEach(eventId => {
+        for (const eventId of activeLegendaryEvents) {
             const legendaryEvent = getLre(eventId, resolvedCharacters);
             const chars =
                 selection === 'all'
@@ -378,7 +378,7 @@ export const MasterTable = () => {
                       ? legendaryEvent.allowedUnits.filter(x => x.rank > Rank.Locked)
                       : [];
             const eventCharacters = chars
-                .sort(
+                .toSorted(
                     (a, b) =>
                         b.legendaryEvents[legendaryEvent.id].totalPoints -
                         a.legendaryEvents[legendaryEvent.id].totalPoints
@@ -395,9 +395,9 @@ export const MasterTable = () => {
                     slots: x.legendaryEvents[legendaryEvent.id].totalSlots,
                 }));
 
-            temp.push(...eventCharacters);
-        });
-        const grouped = groupBy(temp, 'characterId');
+            temporary.push(...eventCharacters);
+        }
+        const grouped = groupBy(temporary, 'characterId');
 
         return map(grouped, items => {
             const charData = {
@@ -407,14 +407,14 @@ export const MasterTable = () => {
                 totalPoints: sum(items.map(x => x.points)),
                 totalSlots: sum(items.map(x => x.slots)),
             };
-            items.forEach(item => {
+            for (const item of items) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}points`] = item.points;
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}slots`] = item.slots;
-            });
+            }
 
             return charData;
         }) as any;
@@ -499,7 +499,7 @@ export const MasterTable = () => {
                         }>
                         {LegendaryEventService.getUnfinishedEvents().map(x => (
                             <MenuItem key={x.id} value={x.id}>
-                                <Checkbox checked={activeLegendaryEvents.indexOf(x.id) > -1} />
+                                <Checkbox checked={activeLegendaryEvents.includes(x.id)} />
                                 <ListItemIcon>
                                     <UnitShardIcon
                                         icon={CharactersService.resolveCharacter(x.unitSnowprintId).roundIcon}
@@ -514,7 +514,7 @@ export const MasterTable = () => {
 
                         {CharactersService.inactiveLres.map(x => (
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
-                                <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
+                                <Checkbox checked={activeLegendaryEvents.includes(x.lre!.id)} />
                                 <ListItemIcon>
                                     <UnitShardIcon icon={x.roundIcon} height={30} />
                                 </ListItemIcon>
@@ -532,17 +532,17 @@ export const MasterTable = () => {
             </div>
             <div className="ag-theme-material h-[calc(100vh-150px)] w-full">
                 <AgGridReact
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
-                    columnDefs={columnsDef}
+                    columnDefs={columnsDefinition}
                     defaultColDef={{
                         suppressMovable: true,
                     }}
-                    onSortChanged={() => gridRef.current?.api?.refreshCells()}
-                    onFilterChanged={() => gridRef.current?.api?.refreshCells()}></AgGridReact>
+                    onSortChanged={() => gridReference.current?.api?.refreshCells()}
+                    onFilterChanged={() => gridReference.current?.api?.refreshCells()}></AgGridReact>
             </div>
         </div>
     );

@@ -29,7 +29,7 @@ export const LegendaryEvent = ({
     const { model: lreProgress } = useLreProgress(legendaryEvent);
 
     const [showAddTeam, setShowAddTeam] = useState(false);
-    const [editTeam, setEditTeam] = useState<ILreTeam | null>(null);
+    const [editTeam, setEditTeam] = useState<ILreTeam>();
     const [preselectedTrackId, setPreselectedTrackId] = useState<LreTrackId>('alpha');
     const [preselectedRequirements, setPreselectedRequirements] = useState<string[]>([]);
 
@@ -37,8 +37,7 @@ export const LegendaryEvent = ({
 
     // Compute virtual attributes (not saved in JSON) for display on LRE team cards.
     const selectedTeams = (leSelectedTeams[legendaryEvent.id]?.teams ?? []).map(rawTeam => {
-        const team = { ...rawTeam };
-        team.points = 0;
+        const team = { ...rawTeam, points: 0 };
         for (const id of team.restrictionsIds) {
             team.points += legendaryEvent[team.section].getRestrictionPoints(id);
         }
@@ -61,13 +60,13 @@ export const LegendaryEvent = ({
                 const character = resolvedCharacters.find(x => x.snowprintId === id);
                 if (!character) {
                     console.warn(
-                        'unknown character. if you have imported teams from a pre-mythic ',
-                        'instance of the planner, please remove the unit from the team and ',
+                        'unknown character. if you have imported teams from a pre-mythic',
+                        'instance of the planner, please remove the unit from the team and',
                         'add it back.',
                         id,
                         character
                     );
-                    return undefined;
+                    return;
                 }
 
                 return { ...character, teamId: team.id };
@@ -111,7 +110,7 @@ export const LegendaryEvent = ({
             charSnowprintIds: team.charSnowprintIds ?? [],
             expectedBattleClears: team.expectedBattleClears,
         });
-        setEditTeam(null);
+        setEditTeam(undefined);
     };
 
     const deleteTeam = (teamId: string) => {
@@ -121,7 +120,7 @@ export const LegendaryEvent = ({
                 eventId: legendaryEvent.id,
                 teamId,
             });
-            setEditTeam(null);
+            setEditTeam(undefined);
         }
     };
 
@@ -189,7 +188,7 @@ export const LegendaryEvent = ({
                     lre={legendaryEvent}
                     team={editTeam}
                     upgradeRankOrMowGoals={upgradeRankOrMowGoals}
-                    onClose={() => setEditTeam(null)}
+                    onClose={() => setEditTeam(undefined)}
                     saveTeam={saveLreTeam}
                     deleteTeam={deleteTeam}
                 />

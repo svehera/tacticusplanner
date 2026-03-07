@@ -16,9 +16,9 @@ export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
 
         case 'SaveGuildMembers': {
             const newMembers = action.members
-                .filter(x => !!x.username.length || (!!x.userId?.length && !!x.inGameName?.length))
+                .filter(x => x.username.length > 0 || (!!x.userId?.length && !!x.inGameName?.length))
                 .slice(0, 30)
-                .map((x, i) => ({ ...x, index: i }));
+                .map((x, index) => ({ ...x, index }));
             return {
                 ...state,
                 members: newMembers,
@@ -26,7 +26,8 @@ export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
         }
 
         default: {
-            throw new Error();
+            // @ts-expect-error - TS thinks this is impossible but let's get runtime information in case it does happen
+            throw new Error(`Invalid action type: ${action.type}`);
         }
     }
 };

@@ -18,11 +18,12 @@ import {
 
 export class CharactersAbilitiesService {
     private static abilitiesLvlUpRaw = mutableCopy(abilitiesLvlUpJson) satisfies ICharacterAbilityLevelRaw[];
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     private static abilitiesLvlUp: ICharacterAbilityLevel[] = this.abilitiesLvlUpRaw.map(x => ({
         ...x,
         rarity: this.getRarityFromLevel(x.lvl + 1),
     }));
-    static readonly legendaryTomeXp = 12500 as const;
+    static readonly legendaryTomeXp = 12_500 as const;
     static readonly legendaryTomeApplyCost = 500 as const;
     static xpLevelThresholds = mutableCopy(xpData.xpLevelThresholds) satisfies IXpLevel[];
 

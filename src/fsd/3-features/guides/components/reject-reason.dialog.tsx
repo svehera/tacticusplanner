@@ -3,11 +3,11 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import React, { useState } from 'react';
 
-interface Props {
+interface Properties {
     onClose: (reason: string) => void;
 }
 
-export const RejectReasonDialog: React.FC<Props> = ({ onClose }) => {
+export const RejectReasonDialog: React.FC<Properties> = ({ onClose }) => {
     const [reason, setReason] = useState<string>('');
     return (
         <Dialog open={true} fullWidth>

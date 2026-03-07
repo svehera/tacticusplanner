@@ -9,17 +9,17 @@ import wyoInfo from 'src/assets/images/wyo_info.png';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 export const InfoBox = () => {
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement>();
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorElement(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorElement(undefined);
     };
 
-    const open = Boolean(anchorEl);
+    const open = Boolean(anchorElement);
 
     return (
         <>
@@ -29,7 +29,7 @@ export const InfoBox = () => {
 
             <Popover
                 open={open}
-                anchorEl={anchorEl}
+                anchorEl={anchorElement}
                 onClose={handleClose}
                 anchorOrigin={{
                     vertical: 'bottom',

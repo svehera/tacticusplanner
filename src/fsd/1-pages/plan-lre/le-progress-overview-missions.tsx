@@ -5,21 +5,24 @@ import { NumberInput } from '@/fsd/5-shared/ui/input';
 
 import { ILreOccurrenceProgress } from './lre.models';
 
-interface Props {
+interface Properties {
     showP2P: boolean;
     occurrence: ILreOccurrenceProgress;
     progressChange: (value: ILreOccurrenceProgress) => void;
 }
 
-export const LeProgressOverviewMissions: React.FC<Props> = ({ showP2P, occurrence, progressChange }) => {
+export const LeProgressOverviewMissions: React.FC<Properties> = ({ showP2P, occurrence, progressChange }) => {
     const getEventName = () => {
         switch (occurrence.eventOccurrence) {
-            case 1:
+            case 1: {
                 return 'First event';
-            case 2:
+            }
+            case 2: {
                 return 'Second event';
-            case 3:
+            }
+            case 3: {
                 return 'Third event';
+            }
         }
     };
     return (

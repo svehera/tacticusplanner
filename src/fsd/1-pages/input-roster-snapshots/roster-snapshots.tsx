@@ -22,7 +22,7 @@ import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.s
 import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { ManageSnapshotsDialog } from './manage-snapshots-dialog';
-import { IRosterSnapshot, IRosterSnapshotsState } from './models';
+import { IRosterSnapshot, IRosterSnapshotsState, ISnapshotCharacter, ISnapshotMachineOfWar } from './models';
 import { RosterSnapshotsAssetsProvider } from './roster-snapshots-assets-provider';
 import { RosterSnapshotsMagnificationSlider } from './roster-snapshots-magnification-slider';
 import { RosterSnapshotsService } from './roster-snapshots-service';
@@ -31,7 +31,7 @@ import { RosterSnapshotsUnitDiff } from './roster-snapshots-unit-diff';
 import { TakeSnapshotDialog } from './take-snapshot-dialog';
 
 function getDisplay(
-    sizeMod: number,
+    zoom: number,
     chars: ICharacter2[],
     mows: IMow2[],
     rosterSnapshots: IRosterSnapshotsState,
@@ -87,16 +87,16 @@ function getDisplay(
         );
     }
     let base = RosterSnapshotsService.fixSnapshot(rosterSnapshots.base);
-    for (let i = 0; i <= leftIndex; i++) {
+    for (let index = 0; index <= leftIndex; index++) {
         base = RosterSnapshotsService.fixSnapshot(
-            RosterSnapshotsService.resolveSnapshotDiff(base, rosterSnapshots.diffs[i])
+            RosterSnapshotsService.resolveSnapshotDiff(base, rosterSnapshots.diffs[index])
         );
     }
     let compare: IRosterSnapshot = base;
     if (rightIndex < rosterSnapshots.diffs.length) {
-        for (let i = leftIndex + 1; i <= rightIndex; i++) {
+        for (let index = leftIndex + 1; index <= rightIndex; index++) {
             compare = RosterSnapshotsService.fixSnapshot(
-                RosterSnapshotsService.resolveSnapshotDiff(compare, rosterSnapshots.diffs[i])
+                RosterSnapshotsService.resolveSnapshotDiff(compare, rosterSnapshots.diffs[index])
             );
         }
     } else {
@@ -136,12 +136,12 @@ function getDisplay(
     const baseChars = base.chars;
     const compareChars = compare.chars;
 
-    compareChars.forEach(compareChar => {
+    for (const compareChar of compareChars) {
         const baseChar = baseChars.find(c => c.id === compareChar.id);
         const diffChar = diff.charDiffs.find(c => c.id === compareChar.id);
         const fullChar = chars.find(c => c.snowprintId === compareChar.id);
 
-        if (fullChar === undefined) return;
+        if (fullChar === undefined) continue;
 
         if (diffChar !== undefined && baseChar !== undefined) {
             const beforeChar = {
@@ -181,17 +181,17 @@ function getDisplay(
             const power = CharactersPowerService.getCharacterPower({ ...fullChar, ...compareChar, id: fullChar.id });
             nonDiffChars.push({ ...fullChar, ...compareChar, power });
         }
-    });
+    }
 
     const baseMows = base.mows;
     const compareMows = compare.mows;
 
-    compareMows.forEach(compareMow => {
+    for (const compareMow of compareMows) {
         const baseMow = baseMows.find(m => m.id === compareMow.id);
         const diffMow = diff.mowDiffs.find(m => m.id === compareMow.id);
         const fullMow = mows.find(m => m.snowprintId === compareMow.id);
 
-        if (!fullMow) return;
+        if (!fullMow) continue;
 
         if (diffMow && baseMow) {
             const beforeMow = { ...fullMow, ...baseMow, id: fullMow.id };
@@ -210,19 +210,16 @@ function getDisplay(
             const power = CharactersPowerService.getCharacterPower({ ...fullMow, ...compareMow });
             nonDiffMows.push({ ...fullMow, ...compareMow, power });
         }
-    });
+    }
 
     const diffUnits = orderBy([...diffChars, ...diffMows], 'powerDiff', 'desc');
     const nonDiffUnits = orderBy([...nonDiffChars, ...nonDiffMows], 'power', 'desc');
     const diffCache = (() => {
-        const cache = diffUnits.reduce(
-            (cache, unit) => {
-                if ('rank' in unit.before) cache.chars.push(unit as CharDiff);
-                else cache.mows.push(unit as MachineOfWarDiff);
-                return cache;
-            },
-            { chars: [] as CharDiff[], mows: [] as MachineOfWarDiff[] }
-        );
+        const cache = { chars: [] as CharDiff[], mows: [] as MachineOfWarDiff[] };
+        for (const unit of diffUnits) {
+            if ('rank' in unit.before) cache.chars.push(unit as CharDiff);
+            else cache.mows.push(unit as MachineOfWarDiff);
+        }
         return {
             chars: cache.chars.map(c => ({
                 before: RosterSnapshotsService.snapshotCharacter(c.before),
@@ -236,18 +233,12 @@ function getDisplay(
     })();
 
     const nonDiffCache = (() => {
-        const cache = nonDiffUnits.reduce(
-            (cache, unit) => {
-                if ('rank' in unit) cache.chars.push(unit);
-                else cache.mows.push(unit);
-                return cache;
-            },
-            { chars: [] as (ICharacter2 & { power: number })[], mows: [] as (IMow2 & { power: number })[] }
-        );
-        return {
-            chars: cache.chars.map(c => RosterSnapshotsService.snapshotCharacter(c)),
-            mows: cache.mows.map(m => RosterSnapshotsService.snapshotMachineOfWar(m)),
-        };
+        const cache = { chars: [] as ISnapshotCharacter[], mows: [] as ISnapshotMachineOfWar[] };
+        for (const unit of nonDiffUnits) {
+            if ('rank' in unit) cache.chars.push(RosterSnapshotsService.snapshotCharacter(unit));
+            else cache.mows.push(RosterSnapshotsService.snapshotMachineOfWar(unit));
+        }
+        return cache;
     })();
 
     const renderedCharDiffs = diffCache.chars.map(unit => (
@@ -311,11 +302,11 @@ function getDisplay(
     return (
         <>
             <RosterSnapshotsAssetsProvider>
-                <div style={{ zoom: sizeMod }} className="flex flex-wrap gap-5 p-4">
+                <div style={{ zoom }} className="flex flex-wrap gap-5 p-4">
                     {renderedCharDiffs}
                     {renderedMowDiffs}
                 </div>
-                <div style={{ zoom: sizeMod }} className="flex flex-wrap gap-5 p-4">
+                <div style={{ zoom }} className="flex flex-wrap gap-5 p-4">
                     {renderedChars.filter(char => char.props.isEnabled)}
                     {renderedMows.filter(mow => mow.props.isEnabled)}
                     {renderedChars.filter(char => !char.props.isEnabled)}
@@ -365,7 +356,7 @@ export const RosterSnapshots = () => {
     const [showEquipmentDiffsSetting, setShowEquipmentDiffsSetting] = useState<RosterSnapshotShowVariableSettings>(
         viewPreferences.showEquipmentInDiffs
     );
-    const [sizeMod, setSizeMod] = useState<number>(1);
+    const [zoom, setZoom] = useState<number>(1);
 
     useEffect(() => {
         setLiveSnapshotIndices(RosterSnapshotsService.getLiveSnapshotInidices(rosterSnapshots));
@@ -396,7 +387,7 @@ export const RosterSnapshots = () => {
 
     const createAndDispatchSnapshot = useCallback(
         (name: string) => {
-            const snapshot = RosterSnapshotsService.createSnapshot(name, new Date().getTime(), chars, mows);
+            const snapshot = RosterSnapshotsService.createSnapshot(name, Date.now(), chars, mows);
             if (rosterSnapshots.base === undefined) {
                 dispatch.rosterSnapshots({
                     type: 'Set',
@@ -407,19 +398,18 @@ export const RosterSnapshots = () => {
                 });
                 return;
             }
-            const resolved: IRosterSnapshot[] = [];
-            resolved.push(rosterSnapshots.base);
-            rosterSnapshots.diffs.forEach(diff => {
-                resolved.push(RosterSnapshotsService.resolveSnapshotDiff(resolved[resolved.length - 1], diff));
-            });
+            const resolved: IRosterSnapshot[] = [rosterSnapshots.base];
+            for (const diff of rosterSnapshots.diffs) {
+                resolved.push(RosterSnapshotsService.resolveSnapshotDiff(resolved.at(-1)!, diff));
+            }
             resolved.push(snapshot);
 
             const newSnapshots: IRosterSnapshotsState = {
                 base: resolved[0],
                 diffs: [],
             };
-            resolved.forEach((snap, index) => {
-                if (index == 0) return;
+            for (const [index, snap] of resolved.entries()) {
+                if (index == 0) continue;
                 newSnapshots.diffs.push(
                     RosterSnapshotsService.diffSnapshots(
                         resolved[index - 1],
@@ -430,7 +420,7 @@ export const RosterSnapshots = () => {
                         /*diffEquipment=*/ true
                     )
                 );
-            });
+            }
             if (newSnapshots.diffs.length > RosterSnapshotsService.MAX_SNAPSHOTS - 1) {
                 newSnapshots.diffs.splice(0, newSnapshots.diffs.length - (RosterSnapshotsService.MAX_SNAPSHOTS - 1));
             }
@@ -470,9 +460,9 @@ export const RosterSnapshots = () => {
         if (state.base) {
             state.base.deletedDateMillisUtc = timeMillis;
         }
-        state.diffs.forEach(diff => {
+        for (const diff of state.diffs) {
             diff.deletedDateMillisUtc = timeMillis;
-        });
+        }
 
         dispatch.rosterSnapshots({
             type: 'Set',
@@ -515,19 +505,19 @@ export const RosterSnapshots = () => {
         if (current.deletedDateMillisUtc === undefined) {
             snapshots.push(current);
         }
-        rosterSnapshots.diffs.forEach(diff => {
+        for (const diff of rosterSnapshots.diffs) {
             current = RosterSnapshotsService.resolveSnapshotDiff(current, diff);
             if (current.deletedDateMillisUtc === undefined) {
                 snapshots.push(current);
             }
-        });
+        }
 
         const state: IRosterSnapshotsState = {
             base: snapshots.length > 0 ? snapshots[0] : undefined,
             diffs: [],
         };
-        snapshots.forEach((snap, index) => {
-            if (index == 0) return;
+        for (const [index, snap] of snapshots.entries()) {
+            if (index == 0) continue;
             state.diffs.push(
                 RosterSnapshotsService.diffSnapshots(
                     snapshots[index - 1],
@@ -538,7 +528,7 @@ export const RosterSnapshots = () => {
                     /*diffEquipment=*/ true
                 )
             );
-        });
+        }
         dispatch.rosterSnapshots({ type: 'Set', value: state });
     };
 
@@ -681,7 +671,7 @@ export const RosterSnapshots = () => {
                     <Settings className="mr-1" />
                     {!isMobile && 'Manage'}
                 </Button>
-                <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
             </div>
 
             {liveSnapshotIndices.length > 0 && (
@@ -695,7 +685,7 @@ export const RosterSnapshots = () => {
                             value={leftIndex}
                             className="rounded border bg-gray-700 p-1"
                             onChange={event => {
-                                const newLeftIndex = parseInt(event.target.value, 10);
+                                const newLeftIndex = Number.parseInt(event.target.value, 10);
                                 setLeftIndex(newLeftIndex);
                                 if (rightIndex <= newLeftIndex) {
                                     setRightIndex(newLeftIndex + 1);
@@ -717,7 +707,7 @@ export const RosterSnapshots = () => {
                             value={rightIndex}
                             className="rounded border bg-gray-700 p-1"
                             onChange={event => {
-                                setRightIndex(parseInt(event.target.value, 10));
+                                setRightIndex(Number.parseInt(event.target.value, 10));
                             }}>
                             {liveSnapshotIndices
                                 .filter((_, index) => index > leftIndex)
@@ -732,7 +722,7 @@ export const RosterSnapshots = () => {
                 </div>
             )}
             {getDisplay(
-                sizeMod,
+                zoom,
                 chars,
                 mows,
                 rosterSnapshots,

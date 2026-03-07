@@ -12,7 +12,7 @@ import { PersonalDataLocalStorage } from '../../services';
 
 export const RestoreBackupDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const { setStore } = useContext(DispatchContext);
-    const [data, setData] = useState<IPersonalData2 | null>(null);
+    const [data, setData] = useState<IPersonalData2>();
 
     useEffect(() => {
         const localStorage = new PersonalDataLocalStorage();

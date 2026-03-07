@@ -43,7 +43,7 @@ import { needToAscendCharacter } from './functions/need-to-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
 
 export class CharactersService {
-    static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
+    static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | undefined): IUnit[] {
         const filteredCharactersByName = nameFilter
             ? characters.filter(
                   x =>
@@ -53,25 +53,34 @@ export class CharactersService {
             : characters;
 
         switch (filterBy) {
-            case CharactersFilterBy.NeedToAscend:
-                return filteredCharactersByName.filter(needToAscendCharacter);
-            case CharactersFilterBy.CanAscend:
-                return filteredCharactersByName.filter(canAscendCharacter);
-            case CharactersFilterBy.NeedToLevel:
-                return filteredCharactersByName.filter(needToLevelCharacter);
-            case CharactersFilterBy.BlueStarReady:
-                return filteredCharactersByName.filter(blueStarReady);
-            case CharactersFilterBy.Chaos:
-                return filteredCharactersByName.filter(filterChaos);
-            case CharactersFilterBy.Imperial:
-                return filteredCharactersByName.filter(filterImperial);
-            case CharactersFilterBy.Xenos:
-                return filteredCharactersByName.filter(filterXenos);
-            case CharactersFilterBy.MoW:
-                return filteredCharactersByName.filter(isMow);
-            case CharactersFilterBy.None:
-            default:
+            case CharactersFilterBy.NeedToAscend: {
+                return filteredCharactersByName.filter(character => needToAscendCharacter(character));
+            }
+            case CharactersFilterBy.CanAscend: {
+                return filteredCharactersByName.filter(character => canAscendCharacter(character));
+            }
+            case CharactersFilterBy.NeedToLevel: {
+                return filteredCharactersByName.filter(character => needToLevelCharacter(character));
+            }
+            case CharactersFilterBy.BlueStarReady: {
+                return filteredCharactersByName.filter(character => blueStarReady(character));
+            }
+            case CharactersFilterBy.Chaos: {
+                return filteredCharactersByName.filter(character => filterChaos(character));
+            }
+            case CharactersFilterBy.Imperial: {
+                return filteredCharactersByName.filter(character => filterImperial(character));
+            }
+            case CharactersFilterBy.Xenos: {
+                return filteredCharactersByName.filter(character => filterXenos(character));
+            }
+            case CharactersFilterBy.MoW: {
+                return filteredCharactersByName.filter(character => isMow(character));
+            }
+            // case CharactersFilterBy.None:
+            default: {
                 return filteredCharactersByName;
+            }
         }
     }
 
@@ -85,19 +94,21 @@ export class CharactersService {
 
     static orderUnits(units: IUnit[], charactersOrderBy: CharactersOrderBy): IUnit[] {
         switch (charactersOrderBy) {
-            case CharactersOrderBy.CharacterValue:
+            case CharactersOrderBy.CharacterValue: {
                 return orderBy(
                     units.map(x => ({ ...x, characterValue: CharactersValueService.getCharacterValue(x) })),
                     ['characterValue'],
                     ['desc']
                 );
-            case CharactersOrderBy.CharacterPower:
+            }
+            case CharactersOrderBy.CharacterPower: {
                 return orderBy(
                     units.map(x => ({ ...x, characterPower: CharactersPowerService.getCharacterPower(x) })),
                     ['characterPower'],
                     ['desc']
                 );
-            case CharactersOrderBy.AbilitiesLevel:
+            }
+            case CharactersOrderBy.AbilitiesLevel: {
                 return orderBy(
                     units.map(x => ({
                         ...x,
@@ -106,11 +117,14 @@ export class CharactersService {
                     ['abilitiesLevel'],
                     ['desc']
                 );
-            case CharactersOrderBy.Rank:
+            }
+            case CharactersOrderBy.Rank: {
                 return orderBy(units, unit => (isMow(unit) ? Rank.Locked : unit.rank), ['desc']);
-            case CharactersOrderBy.Rarity:
+            }
+            case CharactersOrderBy.Rarity: {
                 return orderBy(units, ['rarity', 'stars'], ['desc', 'desc']);
-            case CharactersOrderBy.Shards:
+            }
+            case CharactersOrderBy.Shards: {
                 return orderBy(
                     units.map(x => ({
                         ...x,
@@ -119,31 +133,32 @@ export class CharactersService {
                     ['effectiveShards', 'rarity', 'stars'],
                     ['desc', 'desc', 'desc']
                 );
-            case CharactersOrderBy.UnlockPercentage:
+            }
+            case CharactersOrderBy.UnlockPercentage: {
                 return orderBy(
                     units,
                     unit => {
                         if (unit.numberOfUnlocked) {
                             return unit.numberOfUnlocked;
                         } else {
-                            return !isUnlocked(unit)
-                                ? Math.ceil((unit.shards / charsUnlockShards[unit.rarity]) * 100)
-                                : units.filter(x => this.haveSameFaction(x, unit) && isUnlocked(x)).length;
+                            return isUnlocked(unit)
+                                ? units.filter(x => this.haveSameFaction(x, unit) && isUnlocked(x)).length
+                                : Math.ceil((unit.shards / charsUnlockShards[unit.rarity]) * 100);
                         }
                     },
                     ['asc']
                 );
-            default:
+            }
+            default: {
                 return units;
+            }
         }
     }
 
     private static getAbilitiesLevel(unit: IUnit): number {
-        if (isCharacter(unit)) {
-            return unit.activeAbilityLevel + unit.passiveAbilityLevel;
-        } else {
-            return unit.primaryAbilityLevel + unit.secondaryAbilityLevel;
-        }
+        return isCharacter(unit)
+            ? unit.activeAbilityLevel + unit.passiveAbilityLevel
+            : unit.primaryAbilityLevel + unit.secondaryAbilityLevel;
     }
 
     /**
@@ -172,51 +187,56 @@ export class CharactersService {
         const factionCharacters = groupBy(units, 'faction');
 
         // Derive relevant faction data in one pass
-        const result: IFaction[] = factionsData.reduce((acc: IFaction[], faction) => {
-            const characters = factionCharacters[faction.snowprintId];
-            if (!characters) return acc;
+        const result: IFaction[] = factionsData
+            .map(faction => {
+                const characters = factionCharacters[faction.snowprintId];
+                if (!characters) return;
 
-            let bsValue = 0,
-                power = 0,
-                unlockedCharacters = 0;
-            characters.forEach(char => {
-                if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue) {
-                    bsValue += CharactersValueService.getCharacterValue(char);
+                let bsValue = 0,
+                    power = 0,
+                    unlockedCharacters = 0;
+                for (const char of characters) {
+                    if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue) {
+                        bsValue += CharactersValueService.getCharacterValue(char);
+                    }
+                    if (includePower || charactersOrderBy === CharactersOrderBy.FactionPower) {
+                        power += CharactersPowerService.getCharacterPower(char);
+                    }
+                    if (isUnlocked(char)) unlockedCharacters++;
                 }
-                if (includePower || charactersOrderBy === CharactersOrderBy.FactionPower) {
-                    power += CharactersPowerService.getCharacterPower(char);
-                }
-                if (isUnlocked(char)) unlockedCharacters++;
-            });
 
-            acc.push({
-                ...faction,
-                units: characters,
-                bsValue,
-                power,
-                unlockedCharacters,
-            });
-            return acc;
-        }, []);
+                return {
+                    ...faction,
+                    units: characters,
+                    bsValue,
+                    power,
+                    unlockedCharacters,
+                };
+            })
+            .filter((x): x is IFaction => !!x);
 
         // Determine sort key based on the order parameter
         let orderByKey: keyof IFaction;
         switch (charactersOrderBy) {
-            case CharactersOrderBy.FactionValue:
+            case CharactersOrderBy.FactionValue: {
                 orderByKey = 'bsValue';
                 break;
-            case CharactersOrderBy.FactionPower:
+            }
+            case CharactersOrderBy.FactionPower: {
                 orderByKey = 'power';
                 break;
-            case CharactersOrderBy.Faction:
+            }
+            case CharactersOrderBy.Faction: {
                 orderByKey = 'unlockedCharacters';
                 break;
-            default:
+            }
+            default: {
                 return result;
+            }
         }
 
         // Sort using native sort
-        return result.sort((a, b) => b[orderByKey] - a[orderByKey]);
+        return result.toSorted((a, b) => b[orderByKey] - a[orderByKey]);
     }
 
     static capCharacterAtRarity(character: ICharacter2, rarity: Rarity): ICharacter2 {
@@ -422,7 +442,7 @@ export class CharactersService {
             }
         }
 
-        const sorted = Array.from(rarities).sort((a, b) => a - b);
+        const sorted = [...rarities].toSorted((a, b) => a - b);
 
         const index = sorted.indexOf(current);
 
@@ -446,6 +466,6 @@ export class CharactersService {
             }
         }
 
-        return matches.sort((a, b) => a - b)[0] as RarityStars;
+        return matches.toSorted((a, b) => a - b)[0] as RarityStars;
     }
 }

@@ -7,14 +7,14 @@ import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox } from './flex-box';
 import { StarsIcon } from './icons';
 
-interface Props {
+interface Properties {
     label: string;
     starsValues: number[];
     value: number;
     valueChanges: (value: number) => void;
 }
 
-export const StarsSelect: React.FC<Props> = ({ starsValues, valueChanges, value, label }) => {
+export const StarsSelect: React.FC<Properties> = ({ starsValues, valueChanges, value, label }) => {
     return (
         <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>

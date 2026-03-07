@@ -3,10 +3,6 @@ import factionsData from 'src/data/factions.json';
 
 import { FactionId } from '../model';
 
-export const factionLookup = factionsData.reduce(
-    (acc, faction) => {
-        acc[faction.snowprintId] = faction;
-        return acc;
-    },
-    {} as { [key in FactionId]: (typeof factionsData)[number] }
+export const factionLookup = Object.fromEntries(
+    factionsData.map(faction => [faction.snowprintId as FactionId, faction])
 );

@@ -5,7 +5,7 @@ import { getImageUrl } from 'src/shared-logic/functions';
 import { RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
-import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import { ICharacterData } from '@/fsd/4-entities/character';
 import { IEquipment } from '@/fsd/4-entities/equipment/model';
@@ -27,11 +27,11 @@ function getRank(rank: number): Rank {
 function formatShardCount(count: number): string {
     if (count < 0) return '0';
     if (count < 1000) return count.toString();
-    if (count < 10000) return `${Math.floor(count / 1000)}k`;
+    if (count < 10_000) return `${Math.floor(count / 1000)}k`;
     return '>10k';
 }
 
-interface Props {
+interface Properties {
     showShards: RosterSnapshotShowVariableSettings;
     showMythicShards: RosterSnapshotShowVariableSettings;
     showXpLevel: RosterSnapshotShowVariableSettings;
@@ -56,7 +56,7 @@ export const RosterSnapshotCharacter = ({
     mow,
     mowData,
     isDisabled,
-}: Props) => {
+}: Properties) => {
     const { frame, rankIcon, starIcon, shardIcon, mythicShardIcon } = useRosterSnapshotAssets(
         char !== undefined,
         char?.rarity ?? mow?.rarity ?? 0,
@@ -143,9 +143,7 @@ export const RosterSnapshotCharacter = ({
             return <div style={{ width: equipmentHeight, height: equipmentHeight }} />;
         }
 
-        const imageUrl = getImageUrl(
-            `snowprint_assets/equipment/ui_icon_itemtype_${type?.substring(2).toLowerCase()}.png`
-        );
+        const imageUrl = getImageUrl(`snowprint_assets/equipment/ui_icon_itemtype_${type?.slice(2).toLowerCase()}.png`);
 
         return (
             <div className="relative" style={{ width: equipmentHeight, height: equipmentHeight }}>
@@ -237,7 +235,7 @@ export const RosterSnapshotCharacter = ({
             { equip: char?.equip0, level: char?.equip0Level, type: char?.equip0?.type ?? charData?.equipment1 },
             { equip: char?.equip1, level: char?.equip1Level, type: char?.equip1?.type ?? charData?.equipment2 },
             { equip: char?.equip2, level: char?.equip2Level, type: char?.equip2?.type ?? charData?.equipment3 },
-        ].sort(
+        ].toSorted(
             (a, b) =>
                 (typeOrder[a.type ?? ''] ?? Number.MAX_SAFE_INTEGER) -
                 (typeOrder[b.type ?? ''] ?? Number.MAX_SAFE_INTEGER)
@@ -323,14 +321,14 @@ export const RosterSnapshotCharacter = ({
         return <CircularBadge val={level} x={centerX} y={yPos} />;
     };
 
-    const getStarSrc = () => (Array.isArray(starIcon) ? starIcon[0]?.src : starIcon) ?? '';
+    const getStarSource = () => (Array.isArray(starIcon) ? starIcon[0]?.src : starIcon) ?? '';
 
     const grayscaleClass = (isDisabled ?? false) ? 'grayscale' : '';
 
     const renderWings = () => {
         return (
             <img
-                src={getStarSrc()}
+                src={getStarSource()}
                 className={`absolute ${grayscaleClass}`}
                 style={{ left: 3, top: 2, width: 90, height: starSize, zIndex: 11 }}
             />
@@ -345,7 +343,7 @@ export const RosterSnapshotCharacter = ({
             return (
                 <img
                     key={`char-star-${index}`}
-                    src={getStarSrc()}
+                    src={getStarSource()}
                     className="absolute"
                     style={{
                         left: startX + index * blueStarWidth - overlap * index,
@@ -387,7 +385,7 @@ export const RosterSnapshotCharacter = ({
             return (
                 <img
                     key={`char-star-${index}`}
-                    src={getStarSrc()}
+                    src={getStarSource()}
                     className="absolute"
                     style={{
                         left: startX + offset,

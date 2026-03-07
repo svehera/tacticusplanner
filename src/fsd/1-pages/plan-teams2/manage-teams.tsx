@@ -70,18 +70,16 @@ export const ManageTeams = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, setSelectedChars] = useState<string[]>([]);
     const [selectedMows, setSelectedMows] = useState<string[]>([]);
-    const [flexIndex, setFlexIndex] = useState<number | undefined>(undefined);
+    const [flexIndex, setFlexIndex] = useState<number | undefined>();
     const [notes, setNotes] = useState<string>('');
 
     // State for the add/edit dialog.
     const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
-    const [editingTeam, setEditingTeam] = useState<ITeam2 | null>(null);
+    const [editingTeam, setEditingTeam] = useState<ITeam2>();
     const [saveAllowed, setSaveAllowed] = useState(false);
-    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>(undefined);
-    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>(undefined);
-    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>(
-        undefined
-    );
+    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>();
+    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>();
+    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>();
     const [warOffenseSelected, setWarOffenseSelected] = useState<boolean>(false);
     const [warDefenseSelected, setWarDefenseSelected] = useState<boolean>(false);
     const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
@@ -93,7 +91,7 @@ export const ManageTeams = () => {
 
     const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
     const [teams, setTeams] = useState<ITeam2[]>([]);
-    const [sizeMod, setSizeMod] = useState(isMobile ? 0.5 : 1);
+    const [zoom, setZoom] = useState(isMobile ? 0.5 : 1);
 
     useEffect(() => {
         setTeams(currentTeams);
@@ -186,7 +184,7 @@ export const ManageTeams = () => {
         setImportDialogOpen(true);
     };
 
-    const onImportGo = (team: IPersonalTeam | null) => {
+    const onImportGo = (team: IPersonalTeam | undefined) => {
         setImportDialogOpen(false);
         if (!team) return;
         setSelectedChars(
@@ -226,7 +224,9 @@ export const ManageTeams = () => {
     };
 
     const onDelete = (team: ITeam2) => {
-        if (window.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)) {
+        if (
+            globalThis.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)
+        ) {
             dispatch.teams2({ type: 'Set', value: teams.filter(t => t.name !== team.name) });
         }
     };
@@ -243,12 +243,12 @@ export const ManageTeams = () => {
             team.horde = hordeModeSelected ? true : undefined;
             team.notes = notes;
             team.flexIndex = flexIndex;
-            const curTeams = [...teams];
-            curTeams.forEach(t => {
-                if (t.name !== editingTeam.name) return;
+            const currentTeams_ = [...teams];
+            for (let t of currentTeams_) {
+                if (t.name !== editingTeam.name) continue;
                 t = team;
-            });
-            dispatch.teams2({ type: 'Set', value: cloneDeep(curTeams) });
+            }
+            dispatch.teams2({ type: 'Set', value: cloneDeep(currentTeams_) });
         } else {
             const newTeam: ITeam2 = {
                 name: teamName.trim(),
@@ -273,7 +273,7 @@ export const ManageTeams = () => {
     const onAddChar = (snowprintId: string) => {
         const flex = flexIndex ?? selectedChars.length;
         setSelectedChars([...selectedChars.slice(0, flex), snowprintId, ...selectedChars.slice(flex)]);
-        setFlexIndex(flexIndex !== undefined ? flexIndex + 1 : undefined);
+        setFlexIndex(flexIndex === undefined ? undefined : flexIndex + 1);
     };
 
     const onAddMow = (snowprintId: string) => {
@@ -281,9 +281,9 @@ export const ManageTeams = () => {
     };
 
     const onCharClicked = (char: ICharacter2) => {
-        const index = selectedChars.findIndex(id => id === (char.snowprintId ?? ''));
+        const index = selectedChars.indexOf(char.snowprintId ?? '');
         if (index === -1) {
-            console.error('Clicked character that is not in selectedChars: ', char, selectedChars, index);
+            console.error('Clicked character that is not in selectedChars:', char, selectedChars, index);
             return;
         }
         let flex = flexIndex ?? selectedChars.length;
@@ -317,8 +317,8 @@ export const ManageTeams = () => {
                 maxRank={maxRank}
                 factions={factions}
                 notes={notes}
-                sizeMod={sizeMod}
-                setSizeMod={setSizeMod}
+                zoom={zoom}
+                setZoom={setZoom}
                 onAddChar={onAddChar}
                 onAddMow={onAddMow}
                 onCharClicked={onCharClicked}
@@ -357,7 +357,7 @@ export const ManageTeams = () => {
     return (
         <Stack spacing={2} className="p-4">
             <div className="flex items-start justify-start">
-                <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
             </div>
             <div className="flex flex-wrap justify-center gap-4 px-4 pt-4">
                 <ButtonBase
@@ -412,7 +412,7 @@ export const ManageTeams = () => {
                                     <select
                                         className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-blue-900/40"
                                         value={selectedLegacyTeamName}
-                                        onChange={e => setSelectedLegacyTeamName(e.target.value)}>
+                                        onChange={event => setSelectedLegacyTeamName(event.target.value)}>
                                         {legacyTeams.map(t => (
                                             <option key={t.name} value={t.name}>
                                                 {t.name}
@@ -429,8 +429,7 @@ export const ManageTeams = () => {
                                         <button
                                             className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-green-700"
                                             onClick={() => {
-                                                const team =
-                                                    legacyTeams.find(t => t.name === selectedLegacyTeamName) ?? null;
+                                                const team = legacyTeams.find(t => t.name === selectedLegacyTeamName);
                                                 onImportGo(team);
                                                 setImportDialogOpen(false);
                                             }}>
@@ -521,7 +520,7 @@ export const ManageTeams = () => {
                             flexIndex={team.flexIndex}
                             onCharClicked={() => {}}
                             onMowClicked={() => {}}
-                            sizeMod={sizeMod}
+                            zoom={zoom}
                             disabledUnits={[
                                 ...team.chars.map(
                                     char =>

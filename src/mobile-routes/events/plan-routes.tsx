@@ -4,8 +4,8 @@ import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { PlanGuildWarRoutes } from 'src/mobile-routes/events/guildWarRoutes';
-import { PlanLeRoutes } from 'src/mobile-routes/events/leRoutes';
+import { PlanGuildWarRoutes } from 'src/mobile-routes/events/guild-war-routes';
+import { PlanLeRoutes } from 'src/mobile-routes/events/le-routes';
 import { menuItemById } from 'src/models/menu-items';
 
 import { CharactersService } from '@/fsd/4-entities/character';

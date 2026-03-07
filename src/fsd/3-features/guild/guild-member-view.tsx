@@ -9,17 +9,17 @@ import { IGuildMember } from 'src/models/interfaces';
 
 import { FlexBox } from '@/fsd/5-shared/ui';
 
-interface Props {
+interface Properties {
     index: number;
     member: IGuildMember;
 }
 
-export const GuildMemberView: React.FC<Props> = ({ index, member }) => {
+export const GuildMemberView: React.FC<Properties> = ({ index, member }) => {
     const hasShareLink = member.username && member.shareToken;
     const hasInGameInfo = member.inGameName && member.userId;
 
     return (
-        <FlexBox gap={5} style={{ minWidth: !isMobile ? 450 : 'unset' }}>
+        <FlexBox gap={5} style={{ minWidth: isMobile ? 'unset' : 450 }}>
             <span>{index + 1}.</span>
             {hasShareLink && (
                 <IconButton

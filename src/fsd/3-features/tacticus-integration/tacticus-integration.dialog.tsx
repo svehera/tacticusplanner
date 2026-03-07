@@ -2,7 +2,7 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { DialogProps } from '@/models/dialog.props';
+import { DialogProperties } from '@/models/dialog.properties';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { updateTacticusApiKey } from '@/fsd/5-shared/lib/tacticus-api';
@@ -12,15 +12,21 @@ import { useLoader } from '@/fsd/5-shared/ui/contexts';
 import { TextField } from '@/fsd/5-shared/ui/input';
 import { Modal } from '@/fsd/5-shared/ui/modal';
 
-import { useSyncWithTacticus } from './useSyncWithTacticus';
+import { useSyncWithTacticus } from './use-sync-with-tacticus';
 
-interface Props extends DialogProps {
+interface Properties extends DialogProperties {
     tacticusApiKey: string;
     tacticusUserId: string;
     tacticusGuildApiKey: string;
 }
 
-export const TacticusIntegrationDialog: React.FC<Props> = ({
+function buildErrorMessage(error: string | Error | undefined): string {
+    const baseMessage = 'Failed to update settings';
+    const detail = typeof error === 'string' ? error : error?.message;
+    return detail ? `${baseMessage}: ${detail}` : baseMessage;
+}
+
+export const TacticusIntegrationDialog: React.FC<Properties> = ({
     isOpen,
     onClose,
     tacticusApiKey,
@@ -43,19 +49,13 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
         await syncWithTacticus();
     }
 
-    function buildErrMsg(error: string | Error | null): string {
-        const baseMsg = 'Failed to update settings';
-        const detail = typeof error === 'string' ? error : error?.message;
-        return detail ? `${baseMsg}: ${detail}` : baseMsg;
-    }
-
     async function updateApiKey() {
         loader.startLoading('Updating settings. Please wait...');
         try {
             const response = await updateTacticusApiKey(apiKey, guildApiKey, userId);
 
             if (!response.data) {
-                enqueueSnackbar(buildErrMsg(response.error), { variant: 'error' });
+                enqueueSnackbar(buildErrorMessage(response.error), { variant: 'error' });
                 return;
             }
 
@@ -73,8 +73,10 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
         } catch (error) {
             console.error(error);
             const parsedError =
-                typeof error === 'string' || error instanceof Error || error === null ? error : String(error);
-            enqueueSnackbar(buildErrMsg(parsedError), { variant: 'error' });
+                typeof error === 'string' || error instanceof Error || error === null || error === undefined
+                    ? error
+                    : String(error);
+            enqueueSnackbar(buildErrorMessage(parsedError ?? undefined), { variant: 'error' });
         } finally {
             loader.endLoading();
         }

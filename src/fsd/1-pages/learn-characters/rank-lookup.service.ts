@@ -49,7 +49,7 @@ export class RankLookupService {
                 }
             }
 
-            if (!rankUpgrades.length) {
+            if (rankUpgrades.length === 0) {
                 continue;
             }
 
@@ -72,9 +72,10 @@ export class RankLookupService {
                         allMaterials: [],
                     };
                 }
-                const allMaterials = character.upgradesRarity.length
-                    ? recipe.allMaterials?.filter(material => character.upgradesRarity.includes(material.rarity))
-                    : recipe.allMaterials;
+                const allMaterials =
+                    character.upgradesRarity.length > 0
+                        ? recipe.allMaterials?.filter(material => character.upgradesRarity.includes(material.rarity))
+                        : recipe.allMaterials;
 
                 for (const allMaterial of allMaterials ?? []) {
                     allMaterial.characters = [];
@@ -121,7 +122,7 @@ export class RankLookupService {
         ownedUpgrades: Record<string, number>,
         craftedBasedUpgrades: Record<string, number>,
         updateInventory = false
-    ): IMaterialEstimated2 | null {
+    ): IMaterialEstimated2 {
         const lockedLocations = (material.locationsComposed ?? []).filter(location => {
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber > campaignProgress;
@@ -135,11 +136,11 @@ export class RankLookupService {
         const ownedCount = ownedUpgrades[material.snowprintId] ?? 0;
         const craftedCount = craftedBasedUpgrades[material.snowprintId] ?? 0;
         const neededCount = material.count - craftedCount;
-        material.count = neededCount > 0 ? neededCount : 0;
+        material.count = Math.max(neededCount, 0);
         const leftCount = ownedCount >= material.count ? 0 : material.count - ownedCount;
         if (updateInventory) {
             const updatedCount = ownedCount - material.count;
-            ownedUpgrades[material.snowprintId] = updatedCount > 0 ? updatedCount : 0;
+            ownedUpgrades[material.snowprintId] = Math.max(updatedCount, 0);
             craftedBasedUpgrades[material.snowprintId] = neededCount > 0 ? 0 : Math.abs(neededCount);
         }
 
@@ -178,14 +179,15 @@ export class RankLookupService {
         const dailyEnergy = sum(selectedLocations.map(x => x.dailyBattleCount * x.energyCost));
         const dailyBattles = sum(selectedLocations.map(x => x.dailyBattleCount));
         const locations = selectedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
-        const missingLocationsString = !bestLocations.length
-            ? (material.locationsComposed
-                  ?.filter(x => {
-                      return !bestLocations.some(y => x.campaign === y.campaign && x.nodeNumber === y.nodeNumber);
-                  })
-                  .map(x => x.campaign + ' ' + x.nodeNumber)
-                  .join(', ') ?? '')
-            : lockedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
+        const missingLocationsString =
+            bestLocations.length === 0
+                ? (material.locationsComposed
+                      ?.filter(x => {
+                          return !bestLocations.some(y => x.campaign === y.campaign && x.nodeNumber === y.nodeNumber);
+                      })
+                      .map(x => x.campaign + ' ' + x.nodeNumber)
+                      .join(', ') ?? '')
+                : lockedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
 
         return {
             expectedEnergy,

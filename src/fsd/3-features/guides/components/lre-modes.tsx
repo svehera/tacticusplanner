@@ -18,14 +18,14 @@ import { LreCharacter } from '@/fsd/3-features/guides/guides.enums';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { lreSections } from '@/fsd/3-features/teams/teams.constants';
 
-interface Props {
+interface Properties {
     units: IUnit[];
     filterUnits: (filtered: IUnit[]) => void;
     selectedModes: string[];
     updateSelection: (value: string[]) => void;
 }
 
-export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, units, filterUnits }) => {
+export const LreModes: React.FC<Properties> = ({ selectedModes, updateSelection, units, filterUnits }) => {
     const [character, setCharacter] = useState<LreCharacter>(() => {
         return (lreCharacters.find(x => x.value === selectedModes[0])?.value as LreCharacter) ?? LreCharacter.vitruvius;
     });
@@ -34,14 +34,18 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
     });
     const [tracks, setTracks] = useState<string[]>(selectedModes.filter(x => x.includes(character + '_')));
     const { allowedUnits } = useMemo(
-        () => getLreGuideData([character, character + section, ...tracks], units.filter(isCharacter)),
+        () =>
+            getLreGuideData(
+                [character, character + section, ...tracks],
+                units.filter(unit => isCharacter(unit))
+            ),
         [character, section, tracks]
     );
 
     const lre = getLre(character);
     const lreTracks = useMemo<IMenuOption[]>(() => {
         switch (section) {
-            case '_alpha':
+            case '_alpha': {
                 return [
                     ...lre.alpha.unitsRestrictions.map((r, index) => ({
                         value: character + '_alpha_' + index,
@@ -49,7 +53,8 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
                         selected: false,
                     })),
                 ];
-            case '_beta':
+            }
+            case '_beta': {
                 return [
                     ...lre.beta.unitsRestrictions.map((r, index) => ({
                         value: character + '_beta_' + index,
@@ -57,8 +62,9 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
                         selected: false,
                     })),
                 ];
+            }
 
-            case '_gamma':
+            case '_gamma': {
                 return [
                     ...lre.gamma.unitsRestrictions.map((r, index) => ({
                         value: character + '_gamma_' + index,
@@ -66,9 +72,11 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
                         selected: false,
                     })),
                 ];
+            }
 
-            default:
+            default: {
                 return [];
+            }
         }
     }, [section, character]);
 
@@ -86,7 +94,7 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
 
     const handleTrackChange = (value: string[]) => {
         setTracks(value);
-        if (value.length) {
+        if (value.length > 0) {
             updateSelection([character, character + section, ...value]);
         } else {
             updateSelection([]);
@@ -125,7 +133,7 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
                     minWidth={150}
                 />
             </div>
-            {!!allowedUnits.length && <span>Available characters - {allowedUnits.length}</span>}
+            {allowedUnits.length > 0 && <span>Available characters - {allowedUnits.length}</span>}
         </>
     );
 };

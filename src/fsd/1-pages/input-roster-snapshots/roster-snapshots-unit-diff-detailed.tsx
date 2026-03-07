@@ -7,7 +7,7 @@ import { getImageUrl } from '@/shared-logic/functions';
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
 import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
 import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
-import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import { CharactersService, RankIcon } from '@/fsd/4-entities/character';
 import { EquipmentService, IEquipment } from '@/fsd/4-entities/equipment';
@@ -17,19 +17,19 @@ import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settin
 
 import { ISnapshotCharacter, ISnapshotMachineOfWar, ISnapshotUnitDiff } from './models';
 
-interface ProgressionRowProps {
+interface ProgressionRowProperties {
     diffFlag: boolean;
     icon1: React.ReactNode;
     icon2: React.ReactNode;
     className?: string;
 }
 
-const ProgressionRow: React.FC<ProgressionRowProps> = ({
+const ProgressionRow: React.FC<ProgressionRowProperties> = ({
     diffFlag,
     icon1,
     icon2,
     className = '',
-}: ProgressionRowProps) => (
+}: ProgressionRowProperties) => (
     <div className={`flex items-center justify-start space-x-2 ${className}`}>
         <div className="flex h-6 w-10 items-center justify-center">
             {diffFlag ? icon1 : <span className="opacity-0">{icon1}</span>}
@@ -39,7 +39,7 @@ const ProgressionRow: React.FC<ProgressionRowProps> = ({
     </div>
 );
 
-interface Props {
+interface Properties {
     showShards: RosterSnapshotShowVariableSettings;
     showMythicShards: RosterSnapshotShowVariableSettings;
     showXpLevel: RosterSnapshotShowVariableSettings;
@@ -50,7 +50,7 @@ interface Props {
     diff: ISnapshotUnitDiff;
 }
 
-export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
+export const RosterSnapshotsUnitDiffDetailed: React.FC<Properties> = ({
     showShards,
     showMythicShards,
     showXpLevel,
@@ -59,7 +59,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
     char,
     mow,
     diff,
-}: Props) => {
+}: Properties) => {
     const staticChar = char ? CharactersService.resolveCharacter(char.id) : undefined;
     const staticMow = mow ? MowsService.resolveToStatic(mow.id) : undefined;
 
@@ -253,17 +253,17 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                 afterLevel: diff.equip2Level ?? char.equip2Level,
                 type: char.equip2?.type ?? base?.equipment3,
             },
-        ].sort(
+        ].toSorted(
             (a, b) =>
                 (order[a.type ?? ''] ?? Number.MAX_SAFE_INTEGER) - (order[b.type ?? ''] ?? Number.MAX_SAFE_INTEGER)
         );
 
         return (
             <div className="flex items-center justify-start gap-4">
-                {slots.map((slot, i) => {
+                {slots.map((slot, index) => {
                     const changed = slot.before !== slot.after || slot.beforeLevel !== slot.afterLevel;
                     return (
-                        <div key={i} className="flex items-center gap-0">
+                        <div key={index} className="flex items-center gap-0">
                             {renderItem(slot.before, slot.beforeLevel, slot.type)}
                             <ArrowForward style={{ opacity: changed ? 1 : 0 }} fontSize="inherit" />
                             <div style={{ opacity: changed ? 1 : 0 }}>
@@ -311,20 +311,18 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                             <span
                                 className="w-6 text-right font-medium text-gray-600 dark:text-gray-400"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
-                                {!!char &&
-                                    (() => (
-                                        <img
-                                            src={abilityIcons[staticChar?.activeAbilityName ?? '']?.file}
-                                            style={{ width: 24, height: 24 }}
-                                        />
-                                    ))()}
-                                {!!mow &&
-                                    (() => (
-                                        <img
-                                            src={abilityIcons[staticMow?.primaryAbility.name ?? '']?.file}
-                                            style={{ width: 24, height: 24 }}
-                                        />
-                                    ))()}
+                                {!!char && (
+                                    <img
+                                        src={abilityIcons[staticChar?.activeAbilityName ?? '']?.file}
+                                        style={{ width: 24, height: 24 }}
+                                    />
+                                )}
+                                {!!mow && (
+                                    <img
+                                        src={abilityIcons[staticMow?.primaryAbility.name ?? '']?.file}
+                                        style={{ width: 24, height: 24 }}
+                                    />
+                                )}
                             </span>
                             <span
                                 className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${
@@ -346,20 +344,18 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                             <span
                                 className="w-6 text-right font-medium text-gray-600 dark:text-gray-400"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
-                                {!!char &&
-                                    (() => (
-                                        <img
-                                            src={abilityIcons[staticChar?.passiveAbilityName ?? '']?.file}
-                                            style={{ width: 24, height: 24 }}
-                                        />
-                                    ))()}
-                                {!!mow &&
-                                    (() => (
-                                        <img
-                                            src={abilityIcons[staticMow?.secondaryAbility.name ?? '']?.file}
-                                            style={{ width: 24, height: 24 }}
-                                        />
-                                    ))()}
+                                {!!char && (
+                                    <img
+                                        src={abilityIcons[staticChar?.passiveAbilityName ?? '']?.file}
+                                        style={{ width: 24, height: 24 }}
+                                    />
+                                )}
+                                {!!mow && (
+                                    <img
+                                        src={abilityIcons[staticMow?.secondaryAbility.name ?? '']?.file}
+                                        style={{ width: 24, height: 24 }}
+                                    />
+                                )}
                             </span>
                             <span
                                 className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${

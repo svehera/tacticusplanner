@@ -9,14 +9,14 @@ import { CharactersService, CharacterTitle, ICharacter2, RankIcon } from '@/fsd/
 import { Score } from './dirty-dozen-score';
 import { IDirtyDozenChar } from './dirty-dozen.models';
 
-interface Props {
+interface Properties {
     characters: ICharacter2[];
     rows: IDirtyDozenChar[];
     columns: Array<[string, string]>;
 }
 
-export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) => {
-    const defaultColDef: ColDef<IDirtyDozenChar> = {
+export const DirtyDozenTable: React.FC<Properties> = ({ characters, rows, columns }) => {
+    const defaultColDefinition: ColDef<IDirtyDozenChar> = {
         sortable: true,
         resizable: true,
     };
@@ -26,12 +26,12 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
             field,
             headerName,
             width: 80,
-            cellRenderer: (params: ICellRendererParams<IDirtyDozenChar, number>) => {
-                const { value } = params;
+            cellRenderer: (parameters: ICellRendererParams<IDirtyDozenChar, number>) => {
+                const { value } = parameters;
                 return <Score value={value ?? 0} />;
             },
             headerClass: '[&_.ag-header-cell-text]:w-full [&_.ag-header-cell-text]:text-center',
-            sortingOrder: ['desc', null],
+            sortingOrder: ['desc', undefined],
         } as ColDef<IDirtyDozenChar>;
     };
 
@@ -45,39 +45,39 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
             field: 'Name',
             headerName: 'Name',
             width: 200,
-            cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
-                const characterId = props.data?.Name ?? '';
+            cellRenderer: (properties: ICellRendererParams<IDirtyDozenChar>) => {
+                const characterId = properties.data?.Name ?? '';
                 const character = characters.find(char => CharactersService.matchesAnyCharacterId(characterId, char));
-                if (character) {
-                    return <CharacterTitle character={character} imageSize={30} hideRarity hideRank />;
-                } else {
-                    return characterId;
-                }
+                return character ? (
+                    <CharacterTitle character={character} imageSize={30} hideRarity hideRank />
+                ) : (
+                    characterId
+                );
             },
         },
         {
             headerName: 'Rarity',
             width: 60,
-            valueGetter: (props: ValueGetterParams<IDirtyDozenChar>) => {
-                const characterId = props.data?.Name ?? '';
+            valueGetter: (properties: ValueGetterParams<IDirtyDozenChar>) => {
+                const characterId = properties.data?.Name ?? '';
                 const character = characters.find(char => CharactersService.matchesAnyCharacterId(characterId, char));
                 return character?.rarity;
             },
-            cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
-                const rarity = props.value ?? 0;
+            cellRenderer: (properties: ICellRendererParams<IDirtyDozenChar>) => {
+                const rarity = properties.value ?? 0;
                 return <RarityIcon rarity={rarity} />;
             },
         },
         {
             headerName: 'Rank',
             width: 60,
-            valueGetter: (props: ValueGetterParams<IDirtyDozenChar>) => {
-                const characterId = props.data?.Name ?? '';
+            valueGetter: (properties: ValueGetterParams<IDirtyDozenChar>) => {
+                const characterId = properties.data?.Name ?? '';
                 const character = characters.find(char => CharactersService.matchesAnyCharacterId(characterId, char));
                 return character?.rank;
             },
-            cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
-                const rank = props.value ?? 0;
+            cellRenderer: (properties: ICellRendererParams<IDirtyDozenChar>) => {
+                const rank = properties.value ?? 0;
                 return <RankIcon rank={rank} />;
             },
         },
@@ -96,7 +96,7 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
                 modules={[AllCommunityModule]}
                 theme={themeBalham}
                 suppressCellFocus={true}
-                defaultColDef={defaultColDef}
+                defaultColDef={defaultColDefinition}
                 columnDefs={columnDefs}
                 rowHeight={35}
                 rowData={rows}></AgGridReact>

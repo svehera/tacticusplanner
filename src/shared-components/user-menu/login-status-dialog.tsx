@@ -4,14 +4,14 @@ import Dialog from '@mui/material/Dialog';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface Props {
+interface Properties {
     onContinue: () => void;
     onClose: () => void;
     onRegister: () => void;
     onLogin: () => void;
 }
 
-export const LoginStatusDialog: React.FC<Props> = ({ onContinue, onClose, onRegister, onLogin }) => {
+export const LoginStatusDialog: React.FC<Properties> = ({ onContinue, onClose, onRegister, onLogin }) => {
     const { t } = useTranslation();
 
     return (

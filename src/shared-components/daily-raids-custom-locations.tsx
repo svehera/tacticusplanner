@@ -10,13 +10,13 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { CampaignType } from '@/fsd/4-entities/campaign';
 
-interface Props {
+interface Properties {
     hasCE: boolean;
     settings: ICustomDailyRaidsSettings;
     settingsChange: (value: ICustomDailyRaidsSettings) => void;
 }
 
-export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsChange, hasCE }) => {
+export const DailyRaidsCustomLocations: React.FC<Properties> = ({ settings, settingsChange, hasCE }) => {
     const rarities: Array<Rarity | 'Shard' | 'Mythic Shard'> = [
         'Mythic Shard',
         'Shard',

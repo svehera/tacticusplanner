@@ -18,13 +18,13 @@ import { NpcDetailModal } from '../learn-npcs';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 import { ResolvedEnemyData } from './models';
 
-interface Props {
+interface Properties {
     battle: ICampaignBattleComposed;
 }
 
-export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
+export const CampaignBattleCard: React.FC<Properties> = ({ battle }) => {
     // 1. Add State for the modal
-    const [selectedEnemy, setSelectedEnemy] = useState<ResolvedEnemyData | null>(null);
+    const [selectedEnemy, setSelectedEnemy] = useState<ResolvedEnemyData>();
 
     /**
      * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
@@ -47,7 +47,7 @@ export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
         const upgrade = UpgradesService.getUpgrade(reward);
         if (upgrade === undefined) return <span>{reward}</span>;
         if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-            const char = CharactersService.getUnit(reward.substring(reward.indexOf('_') + 1));
+            const char = CharactersService.getUnit(reward.slice(Math.max(0, reward.indexOf('_') + 1)));
             if (char) {
                 return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />;
             }
@@ -102,9 +102,9 @@ export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
             {/* 3. Add the Modal */}
             <NpcDetailModal
                 isOpen={!!selectedEnemy}
-                onClose={() => setSelectedEnemy(null)}
-                npc={selectedEnemy?.npc || null}
-                stats={selectedEnemy?.stats || null}
+                onClose={() => setSelectedEnemy(undefined)}
+                npc={selectedEnemy?.npc}
+                stats={selectedEnemy?.stats}
             />
         </>
     );

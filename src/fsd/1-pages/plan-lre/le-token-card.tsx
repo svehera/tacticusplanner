@@ -9,7 +9,7 @@ import { LeTokenCardRenderMode } from './lre.models';
 import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
 import { TokenDisplay } from './token-estimation-service';
 
-interface CardProps {
+interface CardProperties {
     token: TokenDisplay;
     tokenUsedDuringEventIteration: number;
     index: number;
@@ -34,7 +34,7 @@ const TRACK_COLORS: string[] = [
     'border-red-200 dark:border-red-900',
 ];
 
-export const LeTokenCard: React.FC<CardProps> = ({
+export const LeTokenCard: React.FC<CardProperties> = ({
     token,
     tokenUsedDuringEventIteration,
     index,
@@ -46,7 +46,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
     onMaybeBattle,
     onStopBattle,
     currentPoints,
-}: CardProps) => {
+}: CardProperties) => {
     const [isCompleting, setIsCompleting] = useState<boolean>(false);
     const hasMilestone = token.achievedStarMilestone;
     const widthClass = renderMode === LeTokenCardRenderMode.kInGrid ? '' : 'lg:w-full';

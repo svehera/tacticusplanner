@@ -23,7 +23,7 @@ export const GuildOffenseTable = ({
         {
             headerName: '#',
             colId: 'rowNumber',
-            valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+            valueGetter: parameters => (parameters.node?.rowIndex ?? 0) + 1,
             maxWidth: 50,
             width: 50,
         },
@@ -34,8 +34,8 @@ export const GuildOffenseTable = ({
         {
             field: 'tokensLeft',
             width: 140,
-            cellRenderer: (params: ICellRendererParams<IGuildWarOffensePlayer>) => {
-                const { value } = params;
+            cellRenderer: (parameters: ICellRendererParams<IGuildWarOffensePlayer>) => {
+                const { value } = parameters;
 
                 return value === -1 ? 'Uknown' : value;
             },
@@ -52,13 +52,13 @@ export const GuildOffenseTable = ({
             field: 'rarityPool',
             headerName: 'Rarity pool',
             width: 150,
-            valueGetter: (params: ValueGetterParams<IGuildWarOffensePlayer>) => {
-                const data = params.data!.rarityPool;
+            valueGetter: (parameters: ValueGetterParams<IGuildWarOffensePlayer>) => {
+                const data = parameters.data!.rarityPool;
 
                 return sum(Object.values(mapValues(data, (x, y) => x * +y)));
             },
-            cellRenderer: (params: ICellRendererParams<IGuildWarOffensePlayer>) => {
-                const slots = params.data!.rarityPool;
+            cellRenderer: (parameters: ICellRendererParams<IGuildWarOffensePlayer>) => {
+                const slots = parameters.data!.rarityPool;
 
                 return (
                     <FlexBox gap={10} className="h-full">

@@ -1,10 +1,10 @@
 import React from 'react';
 import type {
-    FieldErrorProps as FieldErrorPrimitiveProps,
+    FieldErrorProps as FieldErrorPrimitiveProperties,
     GroupProps,
-    InputProps as InputPrimitiveProps,
+    InputProps as InputPrimitiveProperties,
     LabelProps,
-    TextFieldProps as TextFieldPrimitiveProps,
+    TextFieldProps as TextFieldPrimitiveProperties,
     TextProps,
     ValidationResult,
 } from 'react-aria-components';
@@ -18,15 +18,15 @@ import {
 } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
 
-import { composeTailwindRenderProps, focusStyles } from '../primitive';
+import { composeTailwindRenderProps as composeTailwindRenderProperties, focusStyles } from '../primitive';
 
-interface FieldProps {
+interface FieldProperties {
     label?: string;
     placeholder?: string;
     description?: string;
     errorMessage?: string | ((validation: ValidationResult) => string);
-    'aria-label'?: TextFieldPrimitiveProps['aria-label'];
-    'aria-labelledby'?: TextFieldPrimitiveProps['aria-labelledby'];
+    'aria-label'?: TextFieldPrimitiveProperties['aria-label'];
+    'aria-labelledby'?: TextFieldPrimitiveProperties['aria-labelledby'];
 }
 
 const fieldStyles = tv({
@@ -39,33 +39,39 @@ const fieldStyles = tv({
 
 const { description, label, fieldError } = fieldStyles();
 
-const Label = ({ className, ...props }: LabelProps) => {
-    return <LabelPrimitive {...props} className={label({ className })} />;
+const Label = ({ className, ...properties }: LabelProps) => {
+    return <LabelPrimitive {...properties} className={label({ className })} />;
 };
 
-interface DescriptionProps extends TextProps {
+interface DescriptionProperties extends TextProps {
     isWarning?: boolean;
     ref?: React.RefObject<HTMLElement>;
 }
 
-const Description = ({ ref, className, ...props }: DescriptionProps) => {
-    const isWarning = props.isWarning ?? false;
+const Description = ({ ref, className, ...properties }: DescriptionProperties) => {
+    const isWarning = properties.isWarning ?? false;
     return (
         <Text
             ref={ref}
-            {...props}
+            {...properties}
             slot="description"
             className={description({ className: isWarning ? 'text-warning' : className })}
         />
     );
 };
 
-interface FieldErrorProps extends FieldErrorPrimitiveProps {
+interface FieldErrorProperties extends FieldErrorPrimitiveProperties {
     ref?: React.RefObject<HTMLElement>;
 }
 
-const FieldError = ({ className, ref, ...props }: FieldErrorProps) => {
-    return <FieldErrorPrimitive ref={ref} {...props} className={composeTailwindRenderProps(className, fieldError())} />;
+const FieldError = ({ className, ref, ...properties }: FieldErrorProperties) => {
+    return (
+        <FieldErrorPrimitive
+            ref={ref}
+            {...properties}
+            className={composeTailwindRenderProperties(className, fieldError())}
+        />
+    );
 };
 
 const fieldGroupStyles = tv({
@@ -92,13 +98,13 @@ const fieldGroupStyles = tv({
     },
 });
 
-const FieldGroup = ({ className, ...props }: GroupProps) => {
+const FieldGroup = ({ className, ...properties }: GroupProps) => {
     return (
         <Group
-            {...props}
-            className={composeRenderProps(className, (className, renderProps) =>
+            {...properties}
+            className={composeRenderProps(className, (className, renderProperties) =>
                 fieldGroupStyles({
-                    ...renderProps,
+                    ...renderProperties,
                     className,
                 })
             )}
@@ -106,16 +112,16 @@ const FieldGroup = ({ className, ...props }: GroupProps) => {
     );
 };
 
-interface InputProps extends InputPrimitiveProps {
+interface InputProperties extends InputPrimitiveProperties {
     ref?: React.RefObject<HTMLInputElement>;
 }
 
-const Input = ({ className, ref, ...props }: InputProps) => {
+const Input = ({ className, ref, ...properties }: InputProperties) => {
     return (
         <InputPrimitive
             ref={ref}
-            {...props}
-            className={composeTailwindRenderProps(
+            {...properties}
+            className={composeTailwindRenderProperties(
                 className,
                 'text-fg placeholder-muted-fg w-full min-w-0 bg-transparent px-2.5 py-2 text-base outline-hidden data-focused:outline-hidden sm:text-sm/6 [&::-ms-reveal]:hidden [&::-webkit-search-cancel-button]:hidden'
             )}
@@ -123,5 +129,5 @@ const Input = ({ className, ref, ...props }: InputProps) => {
     );
 };
 
-export type { FieldProps };
+export type { FieldProperties as FieldProps };
 export { Description, FieldError, FieldGroup, Input, Label };

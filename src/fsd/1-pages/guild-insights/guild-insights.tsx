@@ -39,11 +39,11 @@ export const GuildInsights = () => {
         filterBy: CharactersFilterBy.None,
         orderBy: CharactersOrderBy.Faction,
     });
-    const [nameFilter, setNameFilter] = useState<string | null>(null);
+    const [nameFilter, setNameFilter] = useState<string>();
 
     const { data, loading } = useGetGuildInsights({ members: guild.members });
 
-    if (!guild.members.length) {
+    if (guild.members.length === 0) {
         return <div>Populate guild members</div>;
     }
 

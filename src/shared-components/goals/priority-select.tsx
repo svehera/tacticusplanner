@@ -2,13 +2,13 @@
 import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
-interface Props {
+interface Properties {
     maxValue: number;
     value: number;
     valueChange: (value: number) => void;
 }
 
-export const PrioritySelect: React.FC<Props> = ({ maxValue, value, valueChange }) => {
+export const PrioritySelect: React.FC<Properties> = ({ maxValue, value, valueChange }) => {
     return (
         <FormControl fullWidth>
             <InputLabel id="priority-label">Priority</InputLabel>

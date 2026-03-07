@@ -23,13 +23,13 @@ import { anyOption, gameModesForGuides, gwSubModes, taSubModes } from '@/fsd/3-f
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 
-interface Props {
+interface Properties {
     units: IUnit[];
     filter: IGuideFilter;
     applyFilters: (filter: IGuideFilter) => void;
 }
 
-export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) => {
+export const GuidesFilter: React.FC<Properties> = ({ units, applyFilters, filter }) => {
     const [filtersChanged, setFiltersChanged] = useState<boolean>(false);
 
     const [nameFilter, setNameFilter] = useState<string>(filter.createdBy ?? '');
@@ -41,15 +41,15 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
 
     const apply = () => {
         applyFilters({
-            createdBy: nameFilter ? nameFilter : undefined,
-            primaryMod: gameMode !== 'any' ? gameMode : undefined,
-            subMods: selectedSubModes.length ? selectedSubModes : undefined,
-            unitIds: selectedUnits.length ? selectedUnits.map(x => x.id) : undefined,
+            createdBy: nameFilter || undefined,
+            primaryMod: gameMode === 'any' ? undefined : gameMode,
+            subMods: selectedSubModes.length > 0 ? selectedSubModes : undefined,
+            unitIds: selectedUnits.length > 0 ? selectedUnits.map(x => x.id) : undefined,
         });
         setFiltersChanged(false);
     };
 
-    const updateSelectedMod = (values: string[]) => {
+    const updateSelectedModule = (values: string[]) => {
         if (values[0] !== gameMode) {
             setGameMode(values[0] as GameMode);
             setSelectedSubModes([]);
@@ -94,7 +94,7 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
                 selected={[gameMode]}
                 options={[anyOption, ...gameModesForGuides]}
                 multiple={false}
-                optionsChange={updateSelectedMod}
+                optionsChange={updateSelectedModule}
                 minWidth={200}
                 maxWidth={200}
             />

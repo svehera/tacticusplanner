@@ -24,7 +24,7 @@ import { ILegendaryEventTrack, ILegendaryEventTrackRequirement } from '@/fsd/3-f
 import { LreTile } from './lre-tile';
 import { ITableRow } from './lre.models';
 
-interface Props {
+interface Properties {
     track: ILegendaryEventTrack;
     rows: ITableRow[];
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
@@ -32,18 +32,28 @@ interface Props {
     deleteTeam: (teamId: string) => void;
 }
 
-export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoals, editTeam, deleteTeam, track }) => {
-    const { viewPreferences } = useContext(StoreContext);
-    const gridRef = useRef<AgGridReact>(null);
+const getRowStyle = (parameters: RowClassParams): RowStyle => {
+    return parameters.node.rowIndex && parameters.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
+};
 
-    const defaultColumnDef: ColDef<ITableRow> = {
+export const SelectedTeamsTable: React.FC<Properties> = ({
+    rows,
+    upgradeRankOrMowGoals,
+    editTeam,
+    deleteTeam,
+    track,
+}) => {
+    const { viewPreferences } = useContext(StoreContext);
+    const gridReference = useRef<AgGridReact>(null);
+
+    const defaultColumnDefinition: ColDef<ITableRow> = {
         headerClass: 'center-header-text',
         resizable: true,
         sortable: false,
         suppressMovable: true,
         wrapHeaderText: true,
-        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-            const character = props.value;
+        cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
+            const character = properties.value;
             if (character) {
                 return (
                     <LreTile
@@ -54,15 +64,15 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
                 );
             }
         },
-        colSpan: params => {
-            const indexOfCurrentCol = track.unitsRestrictions.findIndex(x => x.name === params.colDef.field);
+        colSpan: parameters => {
+            const indexOfCurrentCol = track.unitsRestrictions.findIndex(x => x.name === parameters.colDef.field);
             const restOfRestrictions = track.unitsRestrictions.slice(indexOfCurrentCol).map(x => x.name);
             if (restOfRestrictions.length === 1) {
                 return 1;
             }
 
             const teamIds = restOfRestrictions.map(restriction => {
-                const value = params.data?.[restriction];
+                const value = parameters.data?.[restriction];
                 if (typeof value === 'object') {
                     return value.teamId ?? '';
                 }
@@ -70,10 +80,10 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
             });
 
             let result = 1;
-            let currTeamId = teamIds.shift();
-            while (currTeamId && currTeamId === teamIds[0]) {
+            let currentTeamId = teamIds.shift();
+            while (currentTeamId && currentTeamId === teamIds[0]) {
                 result++;
-                currTeamId = teamIds.shift();
+                currentTeamId = teamIds.shift();
             }
 
             return result;
@@ -105,12 +115,8 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
     };
 
     useEffect(() => {
-        gridRef.current?.api?.sizeColumnsToFit();
+        gridReference.current?.api?.sizeColumnsToFit();
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, viewPreferences.hideCompleted]);
-
-    const getRowStyle = (params: RowClassParams): RowStyle => {
-        return params.node.rowIndex && params.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
-    };
 
     return (
         <div
@@ -119,14 +125,14 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}
-                ref={gridRef}
+                ref={gridReference}
                 rowData={rows}
                 rowHeight={35}
                 getRowStyle={getRowStyle}
-                defaultColDef={defaultColumnDef}
+                defaultColDef={defaultColumnDefinition}
                 columnDefs={columnsDefs}
                 onCellClicked={handleCellCLick}
-                onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
+                onGridReady={useFitGridOnWindowResize(gridReference)}></AgGridReact>
         </div>
     );
 };

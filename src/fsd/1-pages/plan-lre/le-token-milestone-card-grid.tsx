@@ -3,13 +3,13 @@ import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
 import { milestonesAndPoints } from './token-estimation-service';
 
-interface Props {
+interface Properties {
     milestonesToList: any[]; // Replace 'any' with your Milestone interface type
     emptyMessage: string;
     isMissedVariant?: boolean; // Optional prop to style missed items differently
 }
 
-export const LeTokenMilestoneCardGrid = ({ milestonesToList, emptyMessage, isMissedVariant = false }: Props) => {
+export const LeTokenMilestoneCardGrid = ({ milestonesToList, emptyMessage, isMissedVariant = false }: Properties) => {
     const baseCardClasses =
         'p-3 w-40 flex flex-col items-center rounded-lg shadow-md border transition duration-150 ease-in-out hover:shadow-lg';
 
@@ -22,8 +22,7 @@ export const LeTokenMilestoneCardGrid = ({ milestonesToList, emptyMessage, isMis
     ) : (
         <div className="flex w-full flex-wrap justify-center gap-3">
             {milestonesToList.map((milestone, index) => {
-                const isFinalMilestone =
-                    milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1]?.points;
+                const isFinalMilestone = milestone.points >= milestonesAndPoints.at(-1)!.points;
 
                 return (
                     <div key={index} className={`${baseCardClasses} ${variantClasses}`}>

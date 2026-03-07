@@ -20,13 +20,13 @@ import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
 
-interface Props {
+interface Properties {
     goal: CharacterRaidGoalSelect;
     onSelectChange: (goalId: string, selected: boolean) => void;
     onGoalEdit: () => void;
 }
 
-export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onGoalEdit }) => {
+export const CharactersRaidsGoal: React.FC<Properties> = ({ goal, onSelectChange, onGoalEdit }) => {
     const getGoalInfo = (goal: CharacterRaidGoalSelect) => {
         switch (goal.type) {
             case PersonalGoalType.Ascend: {
@@ -60,7 +60,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                         <div className="flex-box gap-[3px]">
                             <RankIcon rank={goal.rankStart} /> <ArrowForward />
                             <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
-                            {!!goal.upgradesRarity.length && (
+                            {goal.upgradesRarity.length > 0 && (
                                 <div className="flex-box gap-[3px]">
                                     {goal.upgradesRarity.map(x => (
                                         <RarityIcon key={x} rarity={x} />
@@ -92,7 +92,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                             )}
                         </div>
 
-                        {!!goal.upgradesRarity.length && (
+                        {goal.upgradesRarity.length > 0 && (
                             <div className="flex-box gap-[3px]">
                                 {goal.upgradesRarity.map(x => (
                                     <RarityIcon key={x} rarity={x} />

@@ -5,27 +5,27 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { INpcData, NpcService, INpcStats } from '@/fsd/4-entities/npc';
 
-interface Props {
+interface Properties {
     npc: INpcData;
     currentStats?: INpcStats;
 }
 
-interface StatCardProps {
+interface StatCardProperties {
     label: string;
     value: number | undefined;
     icon: string;
     subIcons?: React.ReactNode[];
 }
 
-export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
+export const NpcStats: React.FC<Properties> = ({ npc, currentStats }) => {
     // Helper component for stat cards to reduce repetition
-    const StatCard = ({ label, value, icon, subIcons = [] }: StatCardProps) => (
+    const StatCard = ({ label, value, icon, subIcons = [] }: StatCardProperties) => (
         <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-slate-700 dark:bg-slate-800">
             <div className="mb-1 text-xs tracking-wider text-gray-500 uppercase dark:text-gray-400">{label}</div>
             <div className="flex items-center gap-2">
                 <MiscIcon icon={icon} />
-                {subIcons.map((s: any, i: number) => (
-                    <React.Fragment key={i}>{s}</React.Fragment>
+                {subIcons.map((s: any, index: number) => (
+                    <React.Fragment key={index}>{s}</React.Fragment>
                 ))}
                 <span className="text-xl font-bold text-gray-900 dark:text-white">{value}</span>
             </div>
@@ -74,7 +74,11 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
                 </div>
 
                 {/* Ranged Profile (Conditional) */}
-                {npc.rangeDamage !== undefined ? (
+                {npc.rangeDamage === undefined ? (
+                    <div className="flex items-center justify-center rounded-lg border border-dashed border-gray-300 p-4 dark:border-slate-700">
+                        <span className="text-sm text-gray-400">No Ranged Attack</span>
+                    </div>
+                ) : (
                     <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-slate-700 dark:bg-slate-800/50">
                         <div className="flex items-center gap-4">
                             {/* Relative Container to stack Number on top of Icon */}
@@ -97,10 +101,6 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
                             </div>
                         </div>
                     </div>
-                ) : (
-                    <div className="flex items-center justify-center rounded-lg border border-dashed border-gray-300 p-4 dark:border-slate-700">
-                        <span className="text-sm text-gray-400">No Ranged Attack</span>
-                    </div>
                 )}
             </div>
 
@@ -111,7 +111,7 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
                     <div className="flex flex-wrap gap-3 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-slate-700 dark:bg-slate-800">
                         {npc.traits.map(trait => {
                             const icon = NpcService.getTraitIcon(trait);
-                            if (!icon) return null;
+                            if (!icon) return;
                             return (
                                 <div key={trait} className="group relative">
                                     <img

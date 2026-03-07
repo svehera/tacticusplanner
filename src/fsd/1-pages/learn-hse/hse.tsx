@@ -26,29 +26,30 @@ interface HseBattle {
     dropChance: number;
 }
 
+/**
+ * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
+ */
+const getReward = (rewards: IRewards): string => {
+    // Elite battles give a guaranteed material, so return that.
+    for (const reward of rewards.guaranteed) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    // Otherwise, return the first potential reward that is not gold.
+    for (const reward of rewards.potential) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    return '';
+};
+
 export const HomeScreenEvent = () => {
-    const gridRef = useRef<AgGridReact<HseBattle>>(null);
+    const gridReference = useRef<AgGridReact<HseBattle>>(null);
     const [campaignsToConsider, setCampaignsToConsider] = useState<Campaign[]>(() => {
         return CampaignsService.allCampaigns.map(x => x.id);
     });
     const [includeRewardlessBattles, setIncludeRewardlessBattles] = useState<boolean>(true);
 
-    /**
-     * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
-     */
-    const getReward = (rewards: IRewards): string => {
-        // Elite battles give a guaranteed material, so return that.
-        for (const reward of rewards.guaranteed) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        // Otherwise, return the first potential reward that is not gold.
-        for (const reward of rewards.potential) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        return '';
-    };
     const calculateBestBattles = (
         campaigns: Campaign[],
         includeRewardlessBattles: boolean,
@@ -57,48 +58,48 @@ export const HomeScreenEvent = () => {
     ): HseBattle[] => {
         const pointsPerEnergy: Record<number, HseBattle[]> = {};
 
-        Object.entries(CampaignsService.campaignsGrouped)
-            .filter(([campaignId]) => campaigns.includes(campaignId as Campaign))
-            .forEach(([, battles]) => {
-                battles.forEach(battle => {
-                    let points =
-                        battle.detailedEnemyTypes
-                            ?.filter(x => {
-                                const npc = NpcService.getNpcById(x.id);
-                                if (!npc) {
-                                    console.warn('battle ', battle.id, ' has undefined npc ', x);
-                                    return false;
-                                }
-                                return !npc.traits.includes('Summon') && enemyFilter(npc);
-                            })
-                            .map(x => x.count)
-                            .reduce((a, b) => a + b, 0) ?? 0;
+        for (const [, battles] of Object.entries(CampaignsService.campaignsGrouped).filter(([campaignId]) =>
+            campaigns.includes(campaignId as Campaign)
+        )) {
+            for (const battle of battles) {
+                let points =
+                    battle.detailedEnemyTypes
+                        ?.filter(x => {
+                            const npc = NpcService.getNpcById(x.id);
+                            if (!npc) {
+                                console.warn('battle', battle.id, 'has undefined npc', x);
+                                return false;
+                            }
+                            return !npc.traits.includes('Summon') && enemyFilter(npc);
+                        })
+                        .map(x => x.count)
+                        .reduce((a, b) => a + b, 0) ?? 0;
 
-                    if (applyEliteCampaignMultiplier) {
-                        points *= battle.campaignType === CampaignType.Elite ? 5 : 3;
-                    }
+                if (applyEliteCampaignMultiplier) {
+                    points *= battle.campaignType === CampaignType.Elite ? 5 : 3;
+                }
 
-                    if (points > 0 && (includeRewardlessBattles || getReward(battle.rewards) !== '')) {
-                        const details: HseBattle = {
-                            id: battle.id,
-                            battle: battle,
-                            energyCost: battle.energyCost,
-                            points: points,
-                            pointsPerEnergy: points / battle.energyCost,
-                            reward: getReward(battle.rewards),
-                            dropChance: battle.dropRate,
-                        };
-                        const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
-                        arr.push(details);
-                        pointsPerEnergy[details.pointsPerEnergy] = arr;
-                    }
-                });
-            });
+                if (points > 0 && (includeRewardlessBattles || getReward(battle.rewards) !== '')) {
+                    const details: HseBattle = {
+                        id: battle.id,
+                        battle: battle,
+                        energyCost: battle.energyCost,
+                        points: points,
+                        pointsPerEnergy: points / battle.energyCost,
+                        reward: getReward(battle.rewards),
+                        dropChance: battle.dropRate,
+                    };
+                    const array = pointsPerEnergy[details.pointsPerEnergy] || [];
+                    array.push(details);
+                    pointsPerEnergy[details.pointsPerEnergy] = array;
+                }
+            }
+        }
 
         return Object.values(pointsPerEnergy)
             .flat()
-            .sort((a, b) => b.dropChance - a.dropChance)
-            .sort((a, b) => b.pointsPerEnergy - a.pointsPerEnergy);
+            .toSorted((a, b) => b.dropChance - a.dropChance)
+            .toSorted((a, b) => b.pointsPerEnergy - a.pointsPerEnergy);
     };
 
     const bestMachineHunt = useMemo(
@@ -148,7 +149,7 @@ export const HomeScreenEvent = () => {
         const upgrade = UpgradesService.getUpgrade(reward);
         if (!upgrade) return reward;
         if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-            const char = CharactersService.getUnit(reward.substring(reward.indexOf('_') + 1));
+            const char = CharactersService.getUnit(reward.slice(Math.max(0, reward.indexOf('_') + 1)));
             if (char) {
                 return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />;
             }
@@ -170,16 +171,21 @@ export const HomeScreenEvent = () => {
 
     const rowData = useMemo(() => {
         switch (selectedEvent) {
-            case IDailyRaidsHomeScreenEvent.machineHunt:
+            case IDailyRaidsHomeScreenEvent.machineHunt: {
                 return bestMachineHunt;
-            case IDailyRaidsHomeScreenEvent.purgeOrder:
+            }
+            case IDailyRaidsHomeScreenEvent.purgeOrder: {
                 return bestPurgeOrder;
-            case IDailyRaidsHomeScreenEvent.trainingRush:
+            }
+            case IDailyRaidsHomeScreenEvent.trainingRush: {
                 return bestTrainingRush;
-            case IDailyRaidsHomeScreenEvent.warpSurge:
+            }
+            case IDailyRaidsHomeScreenEvent.warpSurge: {
                 return bestWarpSurge;
-            default:
+            }
+            default: {
                 return [];
+            }
         }
     }, [selectedEvent, bestMachineHunt, bestPurgeOrder, bestWarpSurge, bestTrainingRush]);
 
@@ -188,8 +194,8 @@ export const HomeScreenEvent = () => {
             headerName: 'Battle',
             pinned: true,
             maxWidth: 100,
-            cellRenderer: (params: ICellRendererParams<HseBattle>) => {
-                const hunt = params.data;
+            cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
+                const hunt = parameters.data;
                 if (!hunt) return <span>undefined</span>;
                 return <CampaignLocation key={hunt.id} location={hunt.battle} short={true} unlocked={true} />;
             },
@@ -197,8 +203,8 @@ export const HomeScreenEvent = () => {
         {
             headerName: 'Points per Energy',
             maxWidth: 150,
-            cellRenderer: (params: ICellRendererParams<HseBattle>) => {
-                const hunt = params.data;
+            cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
+                const hunt = parameters.data;
                 if (!hunt || hunt.pointsPerEnergy === undefined) return <span>undefined</span>;
                 return hunt.pointsPerEnergy.toFixed(2);
             },
@@ -207,13 +213,13 @@ export const HomeScreenEvent = () => {
         {
             headerName: 'Cumulative Points',
             maxWidth: 130,
-            cellRenderer: (params: ICellRendererParams<HseBattle>) => {
-                const hunt = params.data;
-                if (!hunt) return null;
-                const rowIndex = params.node.rowIndex ?? 0;
+            cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
+                const hunt = parameters.data;
+                if (!hunt) return;
+                const rowIndex = parameters.node.rowIndex ?? 0;
                 let cumulativeGears = 0;
-                for (let i = 0; i <= rowIndex; i++) {
-                    const data = params.api.getDisplayedRowAtIndex(i)?.data;
+                for (let index = 0; index <= rowIndex; index++) {
+                    const data = parameters.api.getDisplayedRowAtIndex(index)?.data;
                     if (data) {
                         cumulativeGears += data.points * data.battle.dailyBattleCount;
                     }
@@ -225,9 +231,9 @@ export const HomeScreenEvent = () => {
             headerName: 'Energy Cost',
             field: 'energyCost',
             maxWidth: 130,
-            cellRenderer: (params: ICellRendererParams<HseBattle>) => {
-                const hunt = params.data;
-                if (!hunt) return null;
+            cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
+                const hunt = parameters.data;
+                if (!hunt) return;
                 return (
                     <>
                         <MiscIcon icon="energy" width={24} height={24} />
@@ -239,13 +245,13 @@ export const HomeScreenEvent = () => {
         {
             headerName: 'Cumulative Energy Cost',
             maxWidth: 130,
-            cellRenderer: (params: ICellRendererParams<HseBattle>) => {
-                const hunt = params.data;
-                if (!hunt) return null;
-                const rowIndex = params.node.rowIndex ?? 0;
+            cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
+                const hunt = parameters.data;
+                if (!hunt) return;
+                const rowIndex = parameters.node.rowIndex ?? 0;
                 let cumulativeEnergy = 0;
-                for (let i = 0; i <= rowIndex; i++) {
-                    const data = params.api.getDisplayedRowAtIndex(i)?.data;
+                for (let index = 0; index <= rowIndex; index++) {
+                    const data = parameters.api.getDisplayedRowAtIndex(index)?.data;
                     if (data) {
                         cumulativeEnergy += data.energyCost * data.battle.dailyBattleCount;
                     }
@@ -261,9 +267,9 @@ export const HomeScreenEvent = () => {
         {
             headerName: 'Reward',
             field: 'reward',
-            cellRenderer: (params: ICellRendererParams<HseBattle>) => {
-                const hunt = params.data;
-                if (!hunt) return null;
+            cellRenderer: (parameters: ICellRendererParams<HseBattle>) => {
+                const hunt = parameters.data;
+                if (!hunt) return;
                 return rewardIcon(hunt.reward);
             },
         },
@@ -271,7 +277,7 @@ export const HomeScreenEvent = () => {
             headerName: 'Drop Chance',
             field: 'dropChance',
             maxWidth: 130,
-            valueFormatter: params => ((params.data?.dropChance ?? 0) * 100).toFixed(2) + '%',
+            valueFormatter: parameters => ((parameters.data?.dropChance ?? 0) * 100).toFixed(2) + '%',
         },
     ]);
 
@@ -292,7 +298,7 @@ export const HomeScreenEvent = () => {
                             name="events"
                             id="event-select"
                             value={selectedEvent}
-                            onChange={e => setSelectedEvent(e.target.value as IDailyRaidsHomeScreenEvent)}
+                            onChange={event => setSelectedEvent(event.target.value as IDailyRaidsHomeScreenEvent)}
                             size="small"
                             className="rounded-md bg-slate-700">
                             <MenuItem value={IDailyRaidsHomeScreenEvent.purgeOrder}>Purge Order</MenuItem>
@@ -308,10 +314,7 @@ export const HomeScreenEvent = () => {
                             id="campaign-select"
                             multiple
                             value={campaignsToConsider}
-                            onChange={e => {
-                                const {
-                                    target: { value },
-                                } = e;
+                            onChange={({ target: { value } }) => {
                                 setCampaignsToConsider(
                                     // On autofill we get a stringified value.
                                     (typeof value === 'string' ? value.split(',') : value).map(id => id as Campaign)
@@ -333,7 +336,7 @@ export const HomeScreenEvent = () => {
                             type="checkbox"
                             id="ignore-early-indom"
                             checked={includeRewardlessBattles}
-                            onChange={e => setIncludeRewardlessBattles(e.target.checked)}
+                            onChange={event => setIncludeRewardlessBattles(event.target.checked)}
                         />
                         <label htmlFor="ignore-early-indom">Include battles with no rewards</label>
                     </div>
@@ -343,7 +346,7 @@ export const HomeScreenEvent = () => {
                 <AgGridReact
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
-                    ref={gridRef}
+                    ref={gridReference}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
                     columnDefs={columnDefs}

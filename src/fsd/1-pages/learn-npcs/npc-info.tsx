@@ -13,15 +13,10 @@ export const NpcInfo: React.FC = () => {
     const [progressionIndex, setProgressionIndex] = useState<number>(0);
 
     const factions = useMemo(() => {
-        return NpcService.npcDataFull
+        const filteredFactions = NpcService.npcDataFull
             .map(npc => npc.faction)
-            .filter(faction => faction !== undefined)
-            .reduce((acc: FactionId[], faction: FactionId) => {
-                if (!acc.includes(faction)) {
-                    acc.push(faction);
-                }
-                return acc;
-            }, []);
+            .filter(faction => faction !== undefined);
+        return [...new Set(filteredFactions)];
     }, []);
 
     const npcs = useMemo(() => {
@@ -30,8 +25,8 @@ export const NpcInfo: React.FC = () => {
 
     const onFactionChange = (newFaction: FactionId) => {
         setFaction(newFaction);
-        const npcs = NpcService.npcDataFull.filter(npc => npc.faction === newFaction);
-        setNpc(npcs[0]);
+        const npc = NpcService.npcDataFull.find(npc => npc.faction === newFaction);
+        if (npc) setNpc(npc);
         setProgressionIndex(0);
     };
 

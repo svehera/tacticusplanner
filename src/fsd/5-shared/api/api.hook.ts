@@ -2,7 +2,7 @@
 
 const baseUrl = import.meta.env.VITE_API_HOST + '/api/';
 
-export const callApi = <TData = any | null, TError = any | null, TResponse = TData>(
+export const callApi = <TData = any, TError = any, TResponse = TData>(
     method: Method,
     url: string,
     data?: TData,
@@ -16,7 +16,7 @@ export const callApi = <TData = any | null, TError = any | null, TResponse = TDa
             'Content-Type': 'application/json',
             'x-functions-key': import.meta.env.VITE_FUNCTIONS_KEY,
             Authorization: localStorage.getItem('token'),
-            ...(headers ?? {}),
+            ...headers,
         },
         data: data,
         signal,

@@ -6,11 +6,11 @@ import React, { ChangeEvent, useCallback } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IGuildMember } from 'src/models/interfaces';
 
-interface Props {
+interface Properties {
     onImport: (guildUser: IGuildMember) => void;
 }
 
-export const ImportUserLink: React.FC<Props> = ({ onImport }) => {
+export const ImportUserLink: React.FC<Properties> = ({ onImport }) => {
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = React.useState<IGuildMember>({ username: '', shareToken: '', index: -1 });
 
@@ -30,8 +30,12 @@ export const ImportUserLink: React.FC<Props> = ({ onImport }) => {
 
     const onShareLinkChange = useCallback((change: ChangeEvent<HTMLInputElement>) => {
         const url = new URL(change.target.value);
-        const params = new URLSearchParams(url.search);
-        setUser({ username: params.get('username') ?? '', shareToken: params.get('shareToken') ?? '', index: 0 });
+        const parameters = new URLSearchParams(url.search);
+        setUser({
+            username: parameters.get('username') ?? '',
+            shareToken: parameters.get('shareToken') ?? '',
+            index: 0,
+        });
     }, []);
 
     return (

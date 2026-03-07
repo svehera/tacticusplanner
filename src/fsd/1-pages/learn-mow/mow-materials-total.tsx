@@ -7,14 +7,14 @@ import { BadgeImage, ComponentImage, ForgeBadgeImage } from '@/fsd/5-shared/ui/i
 
 import { IMowMaterialsTotal } from './lookup.models';
 
-interface Props {
+interface Properties {
     total: IMowMaterialsTotal;
     mowAlliance: Alliance;
     label?: string;
     size?: 'small' | 'medium';
 }
 
-export const MowMaterialsTotal: React.FC<Props> = ({ total, mowAlliance, label, size = 'medium' }) => {
+export const MowMaterialsTotal: React.FC<Properties> = ({ total, mowAlliance, label, size = 'medium' }) => {
     return (
         <div className="flex-box gap5 wrap">
             {label && <b>{label}</b>}

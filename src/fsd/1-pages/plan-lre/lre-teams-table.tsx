@@ -29,7 +29,7 @@ import { ITableRow } from './lre.models';
 import { SelectedTeamsTable } from './selected-teams-table';
 import { TrackRequirementCheck } from './track-requirement-check';
 
-interface Props {
+interface Properties {
     legendaryEvent: ILegendaryEvent;
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
@@ -41,7 +41,11 @@ interface Props {
     restrictions: string[];
 }
 
-export const LreTeamsTable: React.FC<Props> = ({
+const getRowStyle = (parameters: RowClassParams): RowStyle => {
+    return parameters.node.rowIndex === 5 ? { borderTop: '5px dashed' } : {};
+};
+
+export const LreTeamsTable: React.FC<Properties> = ({
     legendaryEvent,
     track,
     upgradeRankOrMowGoals,
@@ -52,15 +56,15 @@ export const LreTeamsTable: React.FC<Props> = ({
     editTeam,
     restrictions,
 }) => {
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const defaultColumnDef: ColDef & { section: LreTrackId } = {
+    const defaultColumnDefinition: ColDef & { section: LreTrackId } = {
         resizable: true,
-        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-            const character = props.value;
+        cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
+            const character = properties.value;
             if (character) {
                 return (
                     <LreTile
@@ -103,21 +107,21 @@ export const LreTeamsTable: React.FC<Props> = ({
     const selectedTeamsRows: Array<ITableRow> = useMemo(() => {
         const teamRecord: Record<string, Array<ICharacter2 | string>> = {};
 
-        selectedTeams.forEach(team => {
-            team.restrictionsIds.forEach(id => {
+        for (const team of selectedTeams) {
+            for (const id of team.restrictionsIds) {
                 const existingCharacters = teamRecord[id] ?? [];
                 const newTeam = Array.from({ length: 5 }, (_, index) => {
                     return team.characters?.[index] ?? '';
                 });
                 teamRecord[id] = [...existingCharacters, ...newTeam];
-            });
-        });
+            }
+        }
 
         return getRows(teamRecord);
     }, [selectedTeams]);
 
     useEffect(() => {
-        gridRef.current?.api?.sizeColumnsToFit();
+        gridReference.current?.api?.sizeColumnsToFit();
     }, [
         viewPreferences.showAlpha,
         viewPreferences.showBeta,
@@ -134,10 +138,6 @@ export const LreTeamsTable: React.FC<Props> = ({
             restrictionName,
             selected,
         });
-    };
-
-    const getRowStyle = (params: RowClassParams): RowStyle => {
-        return params.node.rowIndex === 5 ? { borderTop: '5px dashed' } : {};
     };
 
     const addNewTeam = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
@@ -176,24 +176,18 @@ export const LreTeamsTable: React.FC<Props> = ({
         }));
 
         // Create a lookup table to get the order from `columnIds`
-        const columnOrder: Record<string, number> = selectedRequirements.reduce(
-            (order, id, index) => {
-                order[id] = index;
-                return order;
-            },
-            {} as Record<string, number>
-        );
+        const columnOrder = Object.fromEntries(selectedRequirements.map((id, index) => [id, index]));
 
         // Sort `columns` by using the order from `columnIds`, keeping unspecified columns in original order
-        columns.sort((a, b) => {
-            const orderA = columnOrder[a.field!] !== undefined ? columnOrder[a.field!] : Infinity;
-            const orderB = columnOrder[b.field!] !== undefined ? columnOrder[b.field!] : Infinity;
+        columns.toSorted((a, b) => {
+            const orderA = columnOrder[a.field!] === undefined ? Infinity : columnOrder[a.field!];
+            const orderB = columnOrder[b.field!] === undefined ? Infinity : columnOrder[b.field!];
             return orderA - orderB;
         });
 
-        columns.forEach((column, index) => {
+        for (const [index, column] of columns.entries()) {
             column.colSpan = () => (index === 0 ? selectedRequirements.length : 1);
-        });
+        }
 
         return columns;
     }
@@ -202,12 +196,12 @@ export const LreTeamsTable: React.FC<Props> = ({
         const size = Math.max(...Object.values(teams).map(x => x.length));
         const rows: Array<ITableRow> = Array.from({ length: size }, () => ({}));
 
-        rows.forEach((row, index) => {
+        for (const [index, row] of rows.entries()) {
             for (const team in teams) {
                 const char = teams[team][index];
                 row[team] = char ?? '';
             }
-        });
+        }
 
         return rows;
     }
@@ -236,7 +230,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                         </a>
                     </div>
                 </div>
-                {!!restrictions.length && (
+                {restrictions.length > 0 && (
                     <Button size="small" onClick={clearSelection}>
                         Clear selection
                     </Button>
@@ -251,18 +245,18 @@ export const LreTeamsTable: React.FC<Props> = ({
                 <AgGridReact
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
-                    ref={gridRef}
-                    defaultColDef={defaultColumnDef}
+                    ref={gridReference}
+                    defaultColDef={defaultColumnDefinition}
                     columnDefs={columnsDefs}
                     components={components}
                     rowData={rows}
                     headerHeight={90}
                     rowHeight={35}
                     getRowStyle={getRowStyle}
-                    onGridReady={useFitGridOnWindowResize(gridRef)}
+                    onGridReady={useFitGridOnWindowResize(gridReference)}
                     onCellClicked={addNewTeam}></AgGridReact>
             </div>
-            {selectedTeams.length ? (
+            {selectedTeams.length > 0 ? (
                 <>
                     <h3>Selected Teams ({selectedTeams.length})</h3>
                     <SelectedTeamsTable

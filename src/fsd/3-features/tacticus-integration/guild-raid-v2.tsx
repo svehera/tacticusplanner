@@ -144,8 +144,8 @@ const DurationRenderer: React.FC<{ data: TacticusGuildRaidEntry }> = ({ data }) 
     const durationMs = endTime.getTime() - startTime.getTime();
 
     // Format duration
-    const minutes = Math.floor(durationMs / 60000);
-    const seconds = Math.floor((durationMs % 60000) / 1000);
+    const minutes = Math.floor(durationMs / 60_000);
+    const seconds = Math.floor((durationMs % 60_000) / 1000);
 
     return (
         <span>
@@ -155,7 +155,7 @@ const DurationRenderer: React.FC<{ data: TacticusGuildRaidEntry }> = ({ data }) 
 };
 
 // Component for rendering date in a readable format
-const DateRenderer: React.FC<{ value: number | null | undefined }> = ({ value }) => {
+const DateRenderer: React.FC<{ value: number | undefined }> = ({ value }) => {
     if (!value) return <span>-</span>;
 
     const date = new Date(value * 1000);
@@ -166,10 +166,10 @@ const DateRenderer: React.FC<{ value: number | null | undefined }> = ({ value })
 const UnitIconRenderer: React.FC<{ value: ICharacterData[] | IMowStatic2[] }> = ({ value }) => {
     return (
         <span className="flex h-full items-center gap-1">
-            {value.map((unit, i) => {
+            {value.map((unit, index) => {
                 return (
                     <UnitShardIcon
-                        key={i}
+                        key={index}
                         icon={unit?.roundIcon ?? ''}
                         name={unit?.name ?? ''}
                         height={22}
@@ -185,9 +185,9 @@ const UnitIconRenderer: React.FC<{ value: ICharacterData[] | IMowStatic2[] }> = 
 export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: string) => string }> = ({
     userIdMapper,
 }) => {
-    const [raidData, setRaidData] = useState<TacticusGuildRaidResponse | null>(null);
+    const [raidData, setRaidData] = useState<TacticusGuildRaidResponse>();
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string>();
     const [filteredEntries, setFilteredEntries] = useState<TacticusGuildRaidEntry[]>([]);
 
     // Simulating data fetch
@@ -195,7 +195,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         // In a real application, you would fetch this data from an API
         getTacticusGuildRaidData()
             .then(response => {
-                setRaidData(response.data ?? null);
+                setRaidData(response.data);
                 setLoading(false);
 
                 setFilteredEntries(response.data?.entries ?? []);
@@ -236,8 +236,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: true,
             filter: true,
             width: 80,
-            cellRenderer: (props: ICellRendererParams<TacticusGuildRaidEntry>) => {
-                const rarity = props.value ?? 0;
+            cellRenderer: (properties: ICellRendererParams<TacticusGuildRaidEntry>) => {
+                const rarity = properties.value ?? 0;
                 return <RarityIcon rarity={rarity} />;
             },
         },
@@ -262,17 +262,17 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: true,
             filter: true,
             width: 140,
-            valueGetter: params => {
-                if (params.data?.encounterType === TacticusEncounterType.SideBoss) {
-                    const match = params.data.unitId.match(/MiniBoss\d+(.+)/);
-                    return match ? match[1] : params.data.unitId;
+            valueGetter: parameters => {
+                if (parameters.data?.encounterType === TacticusEncounterType.SideBoss) {
+                    const match = parameters.data.unitId.match(/MiniBoss\d+(.+)/);
+                    return match ? match[1] : parameters.data.unitId;
                 }
 
-                if (params.data?.encounterType === TacticusEncounterType.Boss) {
-                    return params.data.type;
+                if (parameters.data?.encounterType === TacticusEncounterType.Boss) {
+                    return parameters.data.type;
                 }
 
-                return params.data?.unitId;
+                return parameters.data?.unitId;
             },
         },
         {
@@ -286,7 +286,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         {
             headerName: 'Damage',
             field: 'damageDealt',
-            valueFormatter: params => params.value.toLocaleString(),
+            valueFormatter: parameters => parameters.value.toLocaleString(),
             sortable: true,
             filter: true,
             width: 120,
@@ -297,13 +297,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: false,
             filter: true,
             width: 150,
-            cellRenderer: (params: ICellRendererParams<TacticusGuildRaidEntry>) => {
-                const heroes = params.data?.heroDetails
+            cellRenderer: (parameters: ICellRendererParams<TacticusGuildRaidEntry>) => {
+                const heroes = parameters.data?.heroDetails
                     .map((unit: TacticusGuildRaidUnit) => CharactersService.getUnit(unit.unitId))
                     .filter((character): character is ICharacterData => character !== undefined);
                 return <UnitIconRenderer value={heroes ?? []} />;
             },
-            valueFormatter: params => params.value?.map((unit: TacticusGuildRaidUnit) => unit.unitId).join(', '),
+            valueFormatter: parameters =>
+                parameters.value?.map((unit: TacticusGuildRaidUnit) => unit.unitId).join(', '),
         },
         {
             headerName: 'MoW',
@@ -311,14 +312,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: false,
             filter: true,
             width: 80,
-            cellRenderer: (params: ICellRendererParams<TacticusGuildRaidEntry>) => {
-                const mow = params.data?.machineOfWarDetails?.unitId
-                    ? MowsService.resolveToStatic(params.data.machineOfWarDetails.unitId)
+            cellRenderer: (parameters: ICellRendererParams<TacticusGuildRaidEntry>) => {
+                const mow = parameters.data?.machineOfWarDetails?.unitId
+                    ? MowsService.resolveToStatic(parameters.data.machineOfWarDetails.unitId)
                     : undefined;
                 const mowArray = mow ? [mow] : [];
                 return <UnitIconRenderer value={mowArray} />;
             },
-            valueFormatter: params => params.value?.unitId,
+            valueFormatter: parameters => parameters.value?.unitId,
         },
         {
             headerName: 'HP',
@@ -405,15 +406,13 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             const timeReloading = now - tokenStatus.reloadStart;
             const cooldown = millisecondsPerToken - timeReloading;
             const hoursCooldown = Math.round(cooldown / HOUR);
-            if (tokenStatus.count > 0) {
-                return (
-                    <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
-                        {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''}, {hoursCooldown}h cooldown
-                    </span>
-                );
-            } else {
-                return <span className="text-sm">no token, {hoursCooldown}h cooldown</span>;
-            }
+            return tokenStatus.count > 0 ? (
+                <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
+                    {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''}, {hoursCooldown}h cooldown
+                </span>
+            ) : (
+                <span className="text-sm">no token, {hoursCooldown}h cooldown</span>
+            );
         }
     };
 
@@ -438,17 +437,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'Token Status',
             field: 'tokenStatus',
             cellRenderer: TokenStatusRenderer,
-            valueFormatter: params => {
-                const tokenStatus = params.value;
-                if (tokenStatus.count === MAX_TOKEN) return `${tokenStatus.count} tokens available`;
-                const timeReloading = Date.now() - tokenStatus.reloadStart;
+            valueFormatter: ({ value: { count, reloadStart } }) => {
+                if (count === MAX_TOKEN) return `${count} tokens available`;
+                const timeReloading = Date.now() - reloadStart;
                 const cooldown = millisecondsPerToken - timeReloading;
                 const hoursCooldown = Math.round(cooldown / HOUR);
-                if (tokenStatus.count > 0) {
-                    return `${tokenStatus.count} token${tokenStatus.count > 1 ? 's' : ''}, ${hoursCooldown}h cooldown`;
-                } else {
-                    return `no token, ${hoursCooldown}h cooldown`;
-                }
+                return count > 0
+                    ? `${count} token${count > 1 ? 's' : ''}, ${hoursCooldown}h cooldown`
+                    : `no token, ${hoursCooldown}h cooldown`;
             },
             sortable: true,
             comparator: (tokenStatus1: TokenStatus, tokenStatus2: TokenStatus) => {
@@ -460,19 +456,17 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 return tokenStatus2.reloadStart - tokenStatus1.reloadStart;
             },
             width: 120,
-            tooltipValueGetter: (param: ITooltipParams) => {
-                if (param.data.tokenStatus.exact) {
-                    return 'Token estimation should be exact unless tokens were lost or restored';
-                } else {
-                    return 'Token estimation is pessimistic by up to 12 hours';
-                }
+            tooltipValueGetter: (parameter: ITooltipParams) => {
+                return parameter.data.tokenStatus.exact
+                    ? 'Token estimation should be exact unless tokens were lost or restored'
+                    : 'Token estimation is pessimistic by up to 12 hours';
             },
         },
         {
             field: 'totalDamageDealt',
             headerName: 'Total Damage',
             filter: 'agNumberColumnFilter',
-            valueFormatter: params => params.value.toLocaleString(),
+            valueFormatter: parameters => parameters.value.toLocaleString(),
             width: 120,
         },
         {
@@ -497,37 +491,39 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         },
         {
             headerName: 'Avg Dmg/Boss', // Updated header
-            valueGetter: (params: ValueGetterParams) => {
-                return params.data.battleBossCount > 0 ? params.data.bossDamage / params.data.battleBossCount : 0;
+            valueGetter: (parameters: ValueGetterParams) => {
+                return parameters.data.battleBossCount > 0
+                    ? parameters.data.bossDamage / parameters.data.battleBossCount
+                    : 0;
             },
-            valueFormatter: params => Math.round(params.value).toLocaleString(),
+            valueFormatter: parameters => Math.round(parameters.value).toLocaleString(),
             width: 120,
         },
         {
             headerName: 'Avg Dmg/Side Boss', // Updated header
-            valueGetter: (params: ValueGetterParams) => {
-                return params.data.battleSideBossCount > 0
-                    ? params.data.sideBossDamage / params.data.battleSideBossCount
+            valueGetter: (parameters: ValueGetterParams) => {
+                return parameters.data.battleSideBossCount > 0
+                    ? parameters.data.sideBossDamage / parameters.data.battleSideBossCount
                     : 0;
             },
-            valueFormatter: params => Math.round(params.value).toLocaleString(),
+            valueFormatter: parameters => Math.round(parameters.value).toLocaleString(),
             width: 120,
         },
         {
             headerName: 'Most Used Heroes',
             field: 'topHeroes',
             width: 160,
-            cellRenderer: (params: ICellRendererParams<UserSummary>) => {
-                const topHeroes = [...params.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+            cellRenderer: (parameters: ICellRendererParams<UserSummary>) => {
+                const topHeroes = [...parameters.value.entries()]
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 5)
                     .map(([key]) => CharactersService.getUnit(key))
                     .filter((character): character is ICharacterData => character !== undefined);
                 return <UnitIconRenderer value={topHeroes} />;
             },
-            valueFormatter: params => {
-                const topHeroes = [...params.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+            valueFormatter: parameters => {
+                const topHeroes = [...parameters.value.entries()]
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 5)
                     .map(([key]) => key);
                 return topHeroes.join(', ');
@@ -537,17 +533,17 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'Most Used MoW',
             field: 'topMachinesOfWar',
             width: 120,
-            cellRenderer: (params: ICellRendererParams<UserSummary>) => {
-                const topMoW = [...params.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+            cellRenderer: (parameters: ICellRendererParams<UserSummary>) => {
+                const topMoW = [...parameters.value.entries()]
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 3)
                     .map(([key]) => MowsService.resolveToStatic(key))
                     .filter((mow): mow is IMowStatic2 => mow !== undefined);
                 return <UnitIconRenderer value={topMoW} />;
             },
-            valueFormatter: params => {
-                const topMoW = [...params.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+            valueFormatter: parameters => {
+                const topMoW = [...parameters.value.entries()]
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 5)
                     .map(([key]) => key);
                 return topMoW.join(', ');
@@ -557,10 +553,10 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'Most Encountered Bosses',
             field: 'topBosses',
             width: 200,
-            valueFormatter: params => {
-                if (!params.value) return '';
-                const topBosses = [...params.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+            valueFormatter: parameters => {
+                if (!parameters.value) return '';
+                const topBosses = [...parameters.value.entries()]
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 3)
                     .map(([key, count]) => `${key}(${count})`);
                 return topBosses.join(', ');
@@ -570,10 +566,10 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'Most Encountered Side Bosses',
             field: 'topSideBosses',
             width: 200,
-            valueFormatter: params => {
-                if (!params.value) return '';
-                const topSideBosses = [...params.value.entries()]
-                    .sort((a, b) => b[1] - a[1])
+            valueFormatter: parameters => {
+                if (!parameters.value) return '';
+                const topSideBosses = [...parameters.value.entries()]
+                    .toSorted((a, b) => b[1] - a[1])
                     .slice(0, 3)
                     .map(([key, count]) => `${key}(${count})`);
                 return topSideBosses.join(', ');
@@ -582,22 +578,23 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         {
             field: 'highestDamage',
             headerName: 'Highest Damage',
-            valueFormatter: params => params.value.toLocaleString(),
+            valueFormatter: parameters => parameters.value.toLocaleString(),
         },
     ];
 
     const summaryData = useMemo(() => {
-        if (raidData === null) return [];
+        if (raidData === undefined) return [];
 
         const now = Date.now();
 
         // Worst case scenario: season started at first damage
-        const firstEntryStart = (raidData.entries.find(entry => entry.startedOn !== null)?.startedOn ?? 0) * 1000;
+        const firstEntryStart =
+            (raidData.entries.find(entry => typeof entry.startedOn === 'number')?.startedOn ?? 0) * 1000;
         const seasonStart = firstEntryStart === 0 ? now : firstEntryStart;
 
         const userMap = new Map<string, UserSummary>();
 
-        filteredEntries.forEach(entry => {
+        for (const entry of filteredEntries) {
             if (!userMap.has(entry.userId)) {
                 userMap.set(entry.userId, {
                     userId: entry.userId,
@@ -670,9 +667,9 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             }
 
             // Track top heroes
-            entry.heroDetails.forEach(hero => {
+            for (const hero of entry.heroDetails) {
                 userSummary.topHeroes.set(hero.unitId, (userSummary.topHeroes.get(hero.unitId) || 0) + 1);
-            });
+            }
 
             // Track top machines of war
             if (entry.machineOfWarDetails?.unitId) {
@@ -681,17 +678,17 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                     (userSummary.topMachinesOfWar.get(entry.machineOfWarDetails.unitId) || 0) + 1
                 );
             }
-        });
+        }
 
         // Advance token status to now
-        userMap.values().forEach(userSummary => updateTokenTo(userSummary.tokenStatus, now));
+        for (const userSummary of userMap.values()) updateTokenTo(userSummary.tokenStatus, now);
 
-        return Array.from(userMap.values());
+        return [...userMap.values()];
     }, [filteredEntries]);
 
     // Calculate summary statistics
     const calculateStats = () => {
-        if (!raidData || !filteredEntries.length) return null;
+        if (!raidData || filteredEntries.length === 0) return;
 
         // Total damage dealt across all entries
         const totalDamage = filteredEntries.reduce((sum, entry) => sum + entry.damageDealt, 0);
@@ -712,23 +709,23 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         ).length;
 
         // User participation count
-        const userParticipation = new Map();
-        filteredEntries.forEach(entry => {
+        const userParticipation = new Map<(typeof filteredEntries)[number]['userId'], number>();
+        for (const entry of filteredEntries) {
             userParticipation.set(entry.userId, (userParticipation.get(entry.userId) || 0) + 1);
-        });
+        }
 
         // Most active user
         let mostActiveUser = '';
         let mostActiveCount = 0;
-        userParticipation.forEach((count, user: string) => {
+        for (const [user, count] of userParticipation.entries()) {
             if (count > mostActiveCount) {
                 mostActiveUser = userIdMapper(user);
                 mostActiveCount = count;
             }
-        });
+        }
 
         // Highest damage in a single attack
-        const highestDamage = filteredEntries.reduce((max, entry) => Math.max(max, entry.damageDealt), 0);
+        const highestDamage = Math.max(0, ...filteredEntries.map(entry => entry.damageDealt));
 
         // User with highest damage
         const userWithHighestDamage = userIdMapper(
@@ -740,12 +737,15 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         // Number of available bombs at calculation time
         const availableBombs = summaryData.reduce(
-            (acc, userSummary) => acc + (getTimeUntilNextBomb(userSummary) === 0 ? 1 : 0),
+            (accumulator, userSummary) => accumulator + (getTimeUntilNextBomb(userSummary) === 0 ? 1 : 0),
             0
         );
 
         // Number of available tokens at calculation time
-        const availableTokens = summaryData.reduce((acc, userSummary) => acc + userSummary.tokenStatus.count, 0);
+        const availableTokens = summaryData.reduce(
+            (accumulator, userSummary) => accumulator + userSummary.tokenStatus.count,
+            0
+        );
 
         return {
             totalDamage,

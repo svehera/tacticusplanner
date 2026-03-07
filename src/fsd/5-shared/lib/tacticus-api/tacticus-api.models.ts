@@ -28,7 +28,7 @@ interface TacticusPlayer {
 export interface TacticusTokens {
     current: number;
     max: number;
-    nextTokenInSeconds: number | null;
+    nextTokenInSeconds: number | undefined;
     regenDelayInSeconds: number;
 }
 
@@ -265,7 +265,7 @@ export interface TacticusGuildMember {
     userId: string;
     role: TacticusGuildRole;
     level: number;
-    lastActivityOn?: string | null;
+    lastActivityOn?: string | undefined;
 }
 
 export enum TacticusGuildRole {
@@ -294,8 +294,8 @@ export interface TacticusGuildRaidEntry {
     rarity: Rarity;
     damageDealt: number;
     damageType: TacticusDamageType;
-    startedOn?: number | null;
-    completedOn?: number | null;
+    startedOn?: number | undefined;
+    completedOn?: number | undefined;
     heroDetails: TacticusGuildRaidUnit[];
     machineOfWarDetails?: TacticusGuildRaidUnit;
     globalConfigHash: string;

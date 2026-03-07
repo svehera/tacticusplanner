@@ -20,7 +20,7 @@ import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from
 
 import TokenAvailability from '@/fsd/1-pages/game-mode-tokens';
 
-import { useBmcWidget } from './useBmcWidget';
+import { useBmcWidget } from './use-bmc-widget';
 
 function formatMonthAndDay(date: Date): string {
     const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
@@ -171,7 +171,7 @@ export const DesktopHome = () => {
 
                 {nextLeMenuItem && <LreSection nextEvent={nextLeMenuItem} />}
 
-                {!!goals.length && (
+                {goals.length > 0 && (
                     <div>
                         <h3 className="text-center">Your Goals</h3>
                         <Card

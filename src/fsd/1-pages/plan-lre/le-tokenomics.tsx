@@ -25,14 +25,14 @@ import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
-import { renderRestrictions, renderTeam } from './le-token-render-utils';
+import { renderRestrictions, renderTeam } from './le-token-render-utilities';
 import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
 import { TokenDisplay, TokenEstimationService, TokenUse } from './token-estimation-service';
 
-interface Props {
+interface Properties {
     legendaryEvent: ILegendaryEvent;
     battles: ILeBattles | undefined;
     model: ILreProgressModel;
@@ -47,7 +47,7 @@ interface Props {
         model: ILreProgressModel,
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
-        reqId: string,
+        requestId: string,
         status: RequirementStatus,
         forceOverwrite?: boolean
     ) => ILreProgressModel;
@@ -59,7 +59,7 @@ interface Props {
  * already achieved, and a table of tokens to use, and which milestones they
  * achieve.
  */
-export const LeTokenomics: React.FC<Props> = ({
+export const LeTokenomics: React.FC<Properties> = ({
     legendaryEvent,
     battles,
     model,
@@ -72,7 +72,7 @@ export const LeTokenomics: React.FC<Props> = ({
     nextTokenStopped,
     createNewModel,
     updateDto,
-}: Props) => {
+}: Properties) => {
     const { characters: unresolvedChars } = useContext(StoreContext);
     const [isFirstTokenBattleVisible, setIsFirstTokenBattleVisible] = useState<boolean>(false);
 
@@ -97,7 +97,7 @@ export const LeTokenomics: React.FC<Props> = ({
     };
 
     // Find the first token that doesn't have yellow/red restrictions
-    const firstToken = tokenDisplays.find(token => !hasWarningRestrictions(token)) ?? null;
+    const firstToken = tokenDisplays.find(token => !hasWarningRestrictions(token));
     const firstTokenIndex = firstToken ? tokenDisplays.indexOf(firstToken) : -1;
 
     const totalFreeTokensRemainingInIteration = LeTokenService.getFreeTokensRemainingInIteration(
@@ -137,7 +137,7 @@ export const LeTokenomics: React.FC<Props> = ({
         if (model.syncedProgress === undefined) return true;
         if (model.syncedProgress.nextTokenMillisUtc === undefined) return false;
         if (Date.now() < nextEventDateUtc.getTime()) return false;
-        if (Date.now() > nextEventDateUtc.getTime() + 7 * 86400 * 1000) return false;
+        if (Date.now() > nextEventDateUtc.getTime() + 7 * 86_400 * 1000) return false;
         // It's been long enough for a token to regenerate, so either the token count is wrong or
         // the tokenomics data is wrong (most likely).
         return Date.now() - model.syncedProgress.lastUpdateMillisUtc > 3 * 3600 * 1000;

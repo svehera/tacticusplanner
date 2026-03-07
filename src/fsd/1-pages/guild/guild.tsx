@@ -42,16 +42,16 @@ export const Guild: React.FC = () => {
 
     const handleFieldChange = (index: number) => (field: keyof IGuildMember, value: string) => {
         const existingUserIndex = editedMembers.findIndex(x => x.index === index);
-        if (existingUserIndex >= 0) {
+        if (existingUserIndex === -1) {
+            const newMember: IGuildMember = { username: '', shareToken: '', index, [field]: value };
+            setEditedMembers([...editedMembers, newMember]);
+        } else {
             const updatedMembers = [...editedMembers];
             updatedMembers[existingUserIndex] = {
                 ...updatedMembers[existingUserIndex],
                 [field]: value,
             };
             setEditedMembers(updatedMembers);
-        } else {
-            const newMember: IGuildMember = { username: '', shareToken: '', index, [field]: value };
-            setEditedMembers([...editedMembers, newMember]);
         }
     };
 
@@ -60,7 +60,7 @@ export const Guild: React.FC = () => {
     };
 
     const importViaLink = (member: IGuildMember) => {
-        const updatedMembers = editedMembers.filter(x => !!x.username.length);
+        const updatedMembers = editedMembers.filter(x => x.username.length > 0);
         if (updatedMembers.length >= 30) {
             return;
         }
@@ -120,31 +120,31 @@ export const Guild: React.FC = () => {
             )}
             <Conditional condition={!editMode}>
                 <FlexBox gap={10} wrap justifyContent={'center'}>
-                    {...Array.from({ length: guildMembersLimit }, (_, i) => {
-                        const guildMember = guild.members.find(x => x.index === i) ?? {
+                    {...Array.from({ length: guildMembersLimit }, (_, index) => {
+                        const guildMember = guild.members.find(x => x.index === index) ?? {
                             username: '',
                             shareToken: '',
-                            index: i,
+                            index,
                         };
-                        return <GuildMemberView key={i} index={i} member={guildMember} />;
+                        return <GuildMemberView key={index} index={index} member={guildMember} />;
                     })}
                 </FlexBox>
             </Conditional>
             <Conditional condition={editMode}>
                 <FlexBox gap={10} wrap justifyContent={'center'}>
-                    {...Array.from({ length: guildMembersLimit }, (_, i) => {
-                        const guildMember = editedMembers.find(x => x.index === i) ?? {
+                    {...Array.from({ length: guildMembersLimit }, (_, index) => {
+                        const guildMember = editedMembers.find(x => x.index === index) ?? {
                             username: '',
                             shareToken: '',
-                            index: i,
+                            index,
                         };
 
                         return (
                             <GuildMemberInput
-                                key={i}
-                                index={i}
+                                key={index}
+                                index={index}
                                 member={guildMember}
-                                onFieldChange={handleFieldChange(i)}
+                                onFieldChange={handleFieldChange(index)}
                             />
                         );
                     })}

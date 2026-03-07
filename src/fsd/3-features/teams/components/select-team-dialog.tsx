@@ -27,52 +27,52 @@ import { CharactersGrid } from '@/fsd/3-features/characters/components/character
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TeamView } from '@/fsd/3-features/teams/components/team-view';
 
-type Props = {
+type Properties = {
     units: IUnit[];
     team: ICharacter2[];
-    activeMow: IMow2 | null;
+    activeMow: IMow2 | undefined;
     rarityCap: Rarity;
-    onClose: (team: ICharacter2[], mow: IMow2 | null) => void;
+    onClose: (team: ICharacter2[], mow: IMow2 | undefined) => void;
 };
 
 type OrderBy = 'rank' | 'faction' | 'power';
 type FilterBy = 'none' | 'xenos' | 'chaos' | 'imperial' | 'mows';
 
-export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, activeMow, rarityCap }) => {
+export const SelectTeamDialog: React.FC<Properties> = ({ onClose, team, units, activeMow, rarityCap }) => {
     const [lineup, setLineup] = useState(team);
     const [mow, setMow] = useState(activeMow);
     const [quickFilter, setQuickFilter] = useDebounceValue('', 300);
-    const [orderByVar, setOrderByVar] = useState<OrderBy>('power');
-    const [filterByVar, setFilterByVar] = useState<FilterBy>('none');
+    const [orderByVariable, setOrderByVariable] = useState<OrderBy>('power');
+    const [filterByVariable, setFilterByVariable] = useState<FilterBy>('none');
 
     const cancel = () => onClose(team, activeMow);
     const select = () => onClose(lineup, mow);
 
     const handleCharacterSelect = (unit: IUnit) => {
-        setLineup(curr => {
-            if (curr.some(x => x.id === unit.id)) {
-                return curr.filter(x => x.id !== unit.id);
+        setLineup(current => {
+            if (current.some(x => x.id === unit.id)) {
+                return current.filter(x => x.id !== unit.id);
             } else {
-                if (curr.length === units.length) {
-                    return curr;
+                if (current.length === units.length) {
+                    return current;
                 }
 
                 const newChar = units.find(x => x.id === unit.id);
 
                 if (newChar && isCharacter(newChar)) {
-                    return [...curr, newChar];
+                    return [...current, newChar];
                 }
 
-                return curr;
+                return current;
             }
         });
 
         if (isMow(unit)) {
             if (mow && mow.id) {
-                if (mow.id !== unit.id) {
-                    setMow(unit);
+                if (mow.id === unit.id) {
+                    setMow(undefined);
                 } else {
-                    setMow(null);
+                    setMow(unit);
                 }
             } else {
                 setMow(unit);
@@ -82,37 +82,45 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
 
     const filteredUnits = useMemo(() => {
         const filterUnits = () => {
-            const nameFiltered = !quickFilter
-                ? units
-                : units.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()));
+            const nameFiltered = quickFilter
+                ? units.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()))
+                : units;
 
-            switch (filterByVar) {
-                case 'xenos':
+            switch (filterByVariable) {
+                case 'xenos': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Xenos);
-                case 'chaos':
+                }
+                case 'chaos': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Chaos);
-                case 'imperial':
+                }
+                case 'imperial': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Imperial);
-                case 'mows':
+                }
+                case 'mows': {
                     return nameFiltered.filter(x => isMow(x));
-                case 'none':
-                default:
+                }
+                // case 'none':
+                default: {
                     return nameFiltered;
+                }
             }
         };
 
         const filtered = filterUnits();
 
-        switch (orderByVar) {
-            case 'rank':
+        switch (orderByVariable) {
+            case 'rank': {
                 return orderBy(filtered, ['rank'], ['desc']);
-            case 'power':
+            }
+            case 'power': {
                 return orderBy(filtered, ['power'], ['desc']);
-            case 'faction':
-            default:
+            }
+            // case 'faction':
+            default: {
                 return filtered;
+            }
         }
-    }, [units, quickFilter, orderByVar, filterByVar]);
+    }, [units, quickFilter, orderByVariable, filterByVariable]);
 
     const orderByOptions: IMenuOption[] = [
         {
@@ -161,11 +169,11 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
     ];
 
     const changeOrder = (value: string[]): void => {
-        setOrderByVar(value[0] as OrderBy);
+        setOrderByVariable(value[0] as OrderBy);
     };
 
     const changeFilter = (value: string[]): void => {
-        setFilterByVar(value[0] as FilterBy);
+        setFilterByVariable(value[0] as FilterBy);
     };
 
     return (

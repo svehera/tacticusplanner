@@ -31,13 +31,13 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             return action.value;
         }
         case 'Add': {
-            if (state.find(x => x.id === action.goal.id)) {
+            if (state.some(x => x.id === action.goal.id)) {
                 return state;
             }
             state.splice(action.goal.priority - 1, 0, action.goal);
-            state.forEach((x, index) => {
+            for (const [index, x] of state.entries()) {
                 x.priority = index + 1;
-            });
+            }
             return [...state];
         }
         case 'Delete': {
@@ -51,7 +51,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const newGoal = GoalsService.convertToGenericGoal(updatedGoal);
             const updatedGoalIndex = state.findIndex(x => x.id === updatedGoal.goalId);
 
-            if (updatedGoalIndex < 0 || !newGoal) {
+            if (updatedGoalIndex === -1 || !newGoal) {
                 return state;
             }
 
@@ -63,17 +63,18 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
         case 'UpdateDailyRaids': {
             const { value } = action;
 
-            return state.map(currGoal => {
-                const newGoal = value.find(x => x.goalId === currGoal.id);
+            return state.map(currentGoal => {
+                const newGoal = value.find(x => x.goalId === currentGoal.id);
                 if (newGoal) {
-                    return { ...currGoal, dailyRaids: newGoal.include };
+                    return { ...currentGoal, dailyRaids: newGoal.include };
                 }
 
-                return currGoal;
+                return currentGoal;
             });
         }
         default: {
-            throw new Error();
+            // @ts-expect-error - TS thinks this is impossible but let's get runtime information in case it does happen
+            throw new Error(`Invalid action type: ${action.type}`);
         }
     }
 };

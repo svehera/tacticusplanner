@@ -4,12 +4,12 @@ import React from 'react';
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { MultipleSelectCheckmarks, AccessibleTooltip } from '@/fsd/5-shared/ui';
 
-interface Props {
+interface Properties {
     upgradesRarity: Rarity[];
     upgradesRarityChange: (value: Rarity[]) => void;
 }
 
-export const UpgradesRaritySelect: React.FC<Props> = ({ upgradesRarity, upgradesRarityChange }) => {
+export const UpgradesRaritySelect: React.FC<Properties> = ({ upgradesRarity, upgradesRarityChange }) => {
     return (
         <div className="flex items-center gap-3">
             <MultipleSelectCheckmarks

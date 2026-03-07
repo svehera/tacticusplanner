@@ -17,30 +17,36 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 import { ICharacter2, RankIcon, CharacterTitle } from '@/fsd/4-entities/character';
 import { StatCell, DamageCell, StatsCalculatorService } from '@/fsd/4-entities/unit';
 
+const resolveEquipment = (equipment: string | undefined): string => {
+    if (!equipment) {
+        return 'None';
+    }
+    switch (equipment) {
+        case 'I_Crit': {
+            return 'Crit';
+        }
+        case 'I_Block': {
+            return 'Block';
+        }
+        case 'I_Booster_Crit': {
+            return 'Crit Booster';
+        }
+        case 'I_Booster_Block': {
+            return 'Block Booster';
+        }
+        case 'I_Defensive': {
+            return 'Defensive';
+        }
+        default: {
+            return equipment;
+        }
+    }
+};
+
 export const useCharacters = () => {
     const [targetRarity, setTargetRarity] = useState<Rarity>(Rarity.Legendary);
     const [targetStars, setTargetStars] = useState<RarityStars>(RarityStars.MythicWings);
     const [targetRank, setTargetRank] = useState<Rank>(Rank.Adamantine1);
-
-    const resolveEquipment = (equipment: string | undefined): string => {
-        if (!equipment) {
-            return 'None';
-        }
-        switch (equipment) {
-            case 'I_Crit':
-                return 'Crit';
-            case 'I_Block':
-                return 'Block';
-            case 'I_Booster_Crit':
-                return 'Crit Booster';
-            case 'I_Booster_Block':
-                return 'Block Booster';
-            case 'I_Defensive':
-                return 'Defensive';
-            default:
-                return equipment;
-        }
-    };
 
     const minStarsMap: Map<Rarity, RarityStars> = new Map([
         [Rarity.Common, RarityStars.None],
@@ -107,7 +113,7 @@ export const useCharacters = () => {
                     {
                         headerName: '#',
                         colId: 'rowNumber',
-                        valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+                        valueGetter: parameters => (parameters.node?.rowIndex ?? 0) + 1,
                         maxWidth: 50,
                         width: 50,
                         pinned: !isMobile,
@@ -116,11 +122,11 @@ export const useCharacters = () => {
                         headerName: 'Name',
                         width: isMobile ? 75 : 200,
                         pinned: !isMobile,
-                        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                            const character = props.data;
-                            return character ? (
-                                <CharacterTitle character={character} imageSize={30} hideRarity hideRank />
-                            ) : null;
+                        cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
+                            const character = properties.data;
+                            return (
+                                character && <CharacterTitle character={character} imageSize={30} hideRarity hideRank />
+                            );
                         },
                     },
                     {
@@ -128,11 +134,11 @@ export const useCharacters = () => {
                         width: 80,
                         columnGroupShow: 'open',
                         pinned: !isMobile,
-                        valueGetter: (props: ValueGetterParams<ICharacter2>) => {
-                            return props.data?.rarity;
+                        valueGetter: (properties: ValueGetterParams<ICharacter2>) => {
+                            return properties.data?.rarity;
                         },
-                        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                            const rarity = props.value ?? 0;
+                        cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
+                            const rarity = properties.value ?? 0;
                             return <RarityIcon rarity={rarity} />;
                         },
                     },
@@ -141,11 +147,11 @@ export const useCharacters = () => {
                         width: 80,
                         columnGroupShow: 'open',
                         pinned: !isMobile,
-                        valueGetter: (props: ValueGetterParams<ICharacter2>) => {
-                            return props.data?.rank;
+                        valueGetter: (properties: ValueGetterParams<ICharacter2>) => {
+                            return properties.data?.rank;
                         },
-                        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                            const rank = props.value ?? 0;
+                        cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
+                            const rank = properties.value ?? 0;
                             return <RankIcon rank={rank} />;
                         },
                     },
@@ -164,20 +170,20 @@ export const useCharacters = () => {
                 children: [
                     {
                         columnGroupShow: 'closed',
-                        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
+                        cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
                             return (
                                 <StatCell
-                                    characterId={props.data?.snowprintId ?? ''}
-                                    rank={props.data?.rank ?? Rank.Stone1}
-                                    rarityStars={props.data?.stars ?? RarityStars.None}
+                                    characterId={properties.data?.snowprintId ?? ''}
+                                    rank={properties.data?.rank ?? Rank.Stone1}
+                                    rarityStars={properties.data?.stars ?? RarityStars.None}
                                     numHealthUpgrades={StatsCalculatorService.countHealthUpgrades(
-                                        props.data as ICharacter2
+                                        properties.data as ICharacter2
                                     )}
                                     numDamageUpgrades={StatsCalculatorService.countDamageUpgrades(
-                                        props.data as ICharacter2
+                                        properties.data as ICharacter2
                                     )}
                                     numArmorUpgrades={StatsCalculatorService.countArmorUpgrades(
-                                        props.data as ICharacter2
+                                        properties.data as ICharacter2
                                     )}
                                 />
                             );
@@ -186,35 +192,35 @@ export const useCharacters = () => {
                     {
                         columnGroupShow: 'open',
                         headerName: 'Health',
-                        valueGetter: (props: ValueGetterParams<ICharacter2>) =>
-                            StatsCalculatorService.getHealth(props.data),
+                        valueGetter: (properties: ValueGetterParams<ICharacter2>) =>
+                            StatsCalculatorService.getHealth(properties.data),
                         width: 80,
                     },
                     {
                         columnGroupShow: 'open',
                         headerName: 'Damage',
-                        valueGetter: (props: ValueGetterParams<ICharacter2>) =>
-                            StatsCalculatorService.getDamage(props.data),
+                        valueGetter: (properties: ValueGetterParams<ICharacter2>) =>
+                            StatsCalculatorService.getDamage(properties.data),
                         width: 80,
                     },
                     {
                         columnGroupShow: 'open',
                         headerName: 'Armour',
-                        valueGetter: (props: ValueGetterParams<ICharacter2>) =>
-                            StatsCalculatorService.getArmor(props.data),
+                        valueGetter: (properties: ValueGetterParams<ICharacter2>) =>
+                            StatsCalculatorService.getArmor(properties.data),
                         width: 80,
                     },
                     {
                         columnGroupShow: 'open',
                         headerName: 'DAMVAR',
-                        cellRenderer: (props: ValueGetterParams<ICharacter2>) => {
+                        cellRenderer: (properties: ValueGetterParams<ICharacter2>) => {
                             return (
                                 <DamageCell
-                                    character={props.data as ICharacter2}
-                                    rank={props.data?.rank ?? Rank.Stone1}
-                                    rarityStars={props.data?.stars ?? RarityStars.None}
+                                    character={properties.data as ICharacter2}
+                                    rank={properties.data?.rank ?? Rank.Stone1}
+                                    rarityStars={properties.data?.stars ?? RarityStars.None}
                                     numDamageUpgrades={StatsCalculatorService.countDamageUpgrades(
-                                        props.data as ICharacter2
+                                        properties.data as ICharacter2
                                     )}
                                 />
                             );
@@ -228,20 +234,20 @@ export const useCharacters = () => {
                     {
                         columnGroupShow: 'closed',
                         colId: 'Target Stats',
-                        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
+                        cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
                             return (
                                 <StatCell
-                                    characterId={props.data?.snowprintId ?? ''}
+                                    characterId={properties.data?.snowprintId ?? ''}
                                     rank={targetRank}
                                     rarityStars={targetStars}
                                     numHealthUpgrades={StatsCalculatorService.countHealthUpgrades(
-                                        props.data as ICharacter2
+                                        properties.data as ICharacter2
                                     )}
                                     numDamageUpgrades={StatsCalculatorService.countDamageUpgrades(
-                                        props.data as ICharacter2
+                                        properties.data as ICharacter2
                                     )}
                                     numArmorUpgrades={StatsCalculatorService.countArmorUpgrades(
-                                        props.data as ICharacter2
+                                        properties.data as ICharacter2
                                     )}
                                 />
                             );
@@ -251,9 +257,9 @@ export const useCharacters = () => {
                         columnGroupShow: 'open',
                         colId: 'Target Health',
                         headerName: 'Health',
-                        valueGetter: (props: ValueGetterParams<ICharacter2>) =>
+                        valueGetter: (properties: ValueGetterParams<ICharacter2>) =>
                             StatsCalculatorService.calculateHealth(
-                                props.data?.snowprintId ?? '',
+                                properties.data?.snowprintId ?? '',
                                 targetStars,
                                 targetRank,
                                 0
@@ -264,9 +270,9 @@ export const useCharacters = () => {
                         columnGroupShow: 'open',
                         colId: 'Target Damage',
                         headerName: 'Damage',
-                        valueGetter: (props: ValueGetterParams<ICharacter2>) =>
+                        valueGetter: (properties: ValueGetterParams<ICharacter2>) =>
                             StatsCalculatorService.calculateDamage(
-                                props.data?.snowprintId ?? '',
+                                properties.data?.snowprintId ?? '',
                                 targetStars,
                                 targetRank,
                                 0
@@ -277,9 +283,9 @@ export const useCharacters = () => {
                         columnGroupShow: 'open',
                         colId: 'Target Armour',
                         headerName: 'Armour',
-                        valueGetter: (props: ValueGetterParams<ICharacter2>) =>
+                        valueGetter: (properties: ValueGetterParams<ICharacter2>) =>
                             StatsCalculatorService.calculateArmor(
-                                props.data?.snowprintId ?? '',
+                                properties.data?.snowprintId ?? '',
                                 targetStars,
                                 targetRank,
                                 0
@@ -289,10 +295,10 @@ export const useCharacters = () => {
                     {
                         columnGroupShow: 'open',
                         headerName: 'DAMVAR',
-                        cellRenderer: (props: ValueGetterParams<ICharacter2>) => {
+                        cellRenderer: (properties: ValueGetterParams<ICharacter2>) => {
                             return (
                                 <DamageCell
-                                    character={props.data as ICharacter2}
+                                    character={properties.data as ICharacter2}
                                     rank={targetRank}
                                     rarityStars={targetStars}
                                     numDamageUpgrades={0}
@@ -306,8 +312,8 @@ export const useCharacters = () => {
                 field: 'damageTypes.all',
                 headerName: 'Damage Types',
                 width: 120,
-                cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                    const damageTypes: DamageType[] = props.value ?? [];
+                cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
+                    const damageTypes: DamageType[] = properties.value ?? [];
                     return (
                         <ul className="m-0 ps-5">
                             {damageTypes.map(x => (
@@ -321,8 +327,8 @@ export const useCharacters = () => {
                 field: 'traits',
                 headerName: 'Traits',
                 width: 180,
-                cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                    const traits: Trait[] = props.value ?? [];
+                cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
+                    const traits: Trait[] = properties.value ?? [];
                     return (
                         <ul className="m-0 ps-5">
                             {traits.map(x => (
@@ -340,8 +346,8 @@ export const useCharacters = () => {
                         headerName: 'All',
                         width: 150,
                         columnGroupShow: 'closed',
-                        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                            const data = props.data;
+                        cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
+                            const data = properties.data;
                             return (
                                 data && (
                                     <ul className="m-0 ps-5">
@@ -387,8 +393,8 @@ export const useCharacters = () => {
                         headerName: 'All',
                         width: 180,
                         columnGroupShow: 'closed',
-                        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                            const data = props.data;
+                        cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
+                            const data = properties.data;
                             return (
                                 data && (
                                     <ul className="m-0 ps-5">
@@ -427,8 +433,8 @@ export const useCharacters = () => {
                         headerName: 'All',
                         width: 180,
                         columnGroupShow: 'closed',
-                        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                            const data = props.data;
+                        cellRenderer: (properties: ICellRendererParams<ICharacter2>) => {
+                            const data = properties.data;
                             return (
                                 data && (
                                     <ul className="m-0 ps-5">

@@ -10,7 +10,7 @@ const inputRoutes: RouteObject[] = [
     {
         path: 'input',
         async lazy() {
-            const { InputRoutes } = await import('@/mobile-routes/events/inputRoutes');
+            const { InputRoutes } = await import('@/mobile-routes/events/input-routes');
             return { Component: InputRoutes };
         },
     },
@@ -21,7 +21,7 @@ const planRoutes: RouteObject[] = [
     {
         path: 'plan',
         async lazy() {
-            const { PlanRoutes } = await import('@/mobile-routes/events/planRoutes');
+            const { PlanRoutes } = await import('@/mobile-routes/events/plan-routes');
             return { Component: PlanRoutes };
         },
     },
@@ -32,7 +32,7 @@ const learnRoutes: RouteObject[] = [
     {
         path: 'learn',
         async lazy() {
-            const { LearnRoutes } = await import('@/mobile-routes/events/learnRoutes');
+            const { LearnRoutes } = await import('@/mobile-routes/events/learn-routes');
             return { Component: LearnRoutes };
         },
     },

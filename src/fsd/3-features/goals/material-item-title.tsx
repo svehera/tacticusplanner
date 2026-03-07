@@ -12,11 +12,11 @@ import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
 
 import { UpgradesService } from './upgrades.service';
 
-interface Props {
+interface Properties {
     upgradeRaid: IUpgradeRaid;
 }
 
-export const MaterialItemTitle: React.FC<Props> = ({ upgradeRaid }) => {
+export const MaterialItemTitle: React.FC<Properties> = ({ upgradeRaid }) => {
     const isShard = UpgradesService.isShard(upgradeRaid.id);
     const isMythicShard = UpgradesService.isMythicShard(upgradeRaid.id);
 

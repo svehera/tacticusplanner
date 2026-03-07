@@ -53,59 +53,81 @@ export class NpcService {
     /** @returns the pierce ratio for the specified damage type, or -1 if the type is invalid. */
     public static getPierce(damageType: DamageType): number {
         switch (damageType) {
-            case DamageType.Bio:
+            case DamageType.Bio: {
                 return 0.3;
-            case DamageType.Blast:
+            }
+            case DamageType.Blast: {
                 return 0.15;
-            case DamageType.Bolter:
+            }
+            case DamageType.Bolter: {
                 return 0.2;
-            case DamageType.Chain:
+            }
+            case DamageType.Chain: {
                 return 0.15;
-            case DamageType.Direct:
-                return 1.0;
-            case DamageType.Energy:
+            }
+            case DamageType.Direct: {
+                return 1;
+            }
+            case DamageType.Energy: {
                 return 0.3;
-            case DamageType.Eviscerate:
+            }
+            case DamageType.Eviscerate: {
                 return 0.5;
-            case DamageType.Flame:
+            }
+            case DamageType.Flame: {
                 return 0.25;
-            case DamageType.HeavyRound:
+            }
+            case DamageType.HeavyRound: {
                 return 0.55;
-            case DamageType.Las:
+            }
+            case DamageType.Las: {
                 return 0.1;
-            case DamageType.Melta:
+            }
+            case DamageType.Melta: {
                 return 0.75;
-            case DamageType.Molecular:
+            }
+            case DamageType.Molecular: {
                 return 0.6;
-            case DamageType.Particle:
+            }
+            case DamageType.Particle: {
                 return 0.35;
-            case DamageType.Physical:
+            }
+            case DamageType.Physical: {
                 return 0.01;
-            case DamageType.Piercing:
+            }
+            case DamageType.Piercing: {
                 return 0.8;
-            case DamageType.Plasma:
+            }
+            case DamageType.Plasma: {
                 return 0.6;
-            case DamageType.Power:
+            }
+            case DamageType.Power: {
                 return 0.4;
-            case DamageType.Projectile:
+            }
+            case DamageType.Projectile: {
                 return 0.15;
-            case DamageType.Pulse:
+            }
+            case DamageType.Pulse: {
                 return 0.2;
-            case DamageType.Psychic:
-                return 1.0;
-            case DamageType.Toxic:
+            }
+            case DamageType.Psychic: {
+                return 1;
+            }
+            case DamageType.Toxic: {
                 return 0.7;
-            default:
+            }
+            default: {
                 return -1;
+            }
         }
     }
 
     /**
      * Maps a game trait name to its corresponding icon file name.
      * @param traitName The name of the trait (e.g., "ActOfFaith", "BeastSnagga").
-     * @returns The icon name (e.g., "act_of_faith", "beast_snagga") or null if no match is found.
+     * @returns The icon name (e.g., "act_of_faith", "beast_snagga") or undefined if no match is found.
      */
-    public static getTraitIcon(traitName: string): string | null {
+    public static getTraitIcon(traitName: string): string | undefined {
         // Standardize the input trait name to handle various casing styles
         // before checking the map.
         const key = traitName.toLowerCase();

@@ -18,7 +18,7 @@ import { ILegendaryEvent, ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
 
-interface Props {
+interface Properties {
     lre: ILegendaryEvent;
     team: ILreTeam;
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
@@ -27,7 +27,14 @@ interface Props {
     deleteTeam: (teamId: string) => void;
 }
 
-export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals, onClose, saveTeam, deleteTeam }) => {
+export const LreEditTeam: React.FC<Properties> = ({
+    lre,
+    team,
+    upgradeRankOrMowGoals,
+    onClose,
+    saveTeam,
+    deleteTeam,
+}) => {
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const [expectedBattleClears, setExpectedBattleClears] = useState<number>(team.expectedBattleClears ?? 1);
     const [expectedBattleClearsInput, setExpectedBattleClearsInput] = useState<string>(
@@ -54,10 +61,10 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
         if (selectedTeam.includes(character) || selectedTeam.length === 5) {
             return;
         }
-        setSelectedTeam(curr => [...curr, character]);
+        setSelectedTeam(current => [...current, character]);
     };
     const removeCharacter = (character: ICharacter2) => {
-        setSelectedTeam(curr => curr.filter(c => c.id !== character.id));
+        setSelectedTeam(current => current.filter(c => c.id !== character.id));
     };
 
     const clearAll = () => {
@@ -69,11 +76,11 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
     };
 
     const isValid = () => {
-        const availableCharacters = gridTeam.map(x => x.id);
+        const availableCharacters = new Set(gridTeam.map(x => x.id));
         return (
-            selectedTeam.length !== 0 &&
-            !!teamName.length &&
-            selectedTeam.every(character => availableCharacters.includes(character.id))
+            selectedTeam.length > 0 &&
+            teamName.length > 0 &&
+            selectedTeam.every(character => availableCharacters.has(character.id))
         );
     };
 
@@ -104,8 +111,8 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                             // allow empty or numeric input only
                             if (/^\d*$/.test(v)) {
                                 setExpectedBattleClearsInput(v);
-                                const parsed = parseInt(v, 10);
-                                if (!isNaN(parsed)) {
+                                const parsed = Number.parseInt(v, 10);
+                                if (!Number.isNaN(parsed)) {
                                     setExpectedBattleClears(clampExpectedBattles(parsed));
                                 }
                             }
@@ -116,8 +123,8 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                                 const clamped = clampExpectedBattles(expectedBattleClears);
                                 setExpectedBattleClearsInput(clamped.toString());
                             } else {
-                                const parsed = parseInt(expectedBattleClearsInput, 10);
-                                const final = isNaN(parsed) ? expectedBattleClears : parsed;
+                                const parsed = Number.parseInt(expectedBattleClearsInput, 10);
+                                const final = Number.isNaN(parsed) ? expectedBattleClears : parsed;
                                 const clamped = clampExpectedBattles(final);
                                 setExpectedBattleClears(clamped);
                                 setExpectedBattleClearsInput(clamped.toString());
@@ -140,14 +147,14 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                     <div className="min-w-[400px]">
                         <div className="flex-box gap20 space-between">
                             <h3>Selected Team ({selectedTeam.length}/5)</h3>
-                            {!!selectedTeam.length && (
+                            {selectedTeam.length > 0 && (
                                 <Button variant="text" onClick={clearAll}>
                                     Clear all
                                 </Button>
                             )}
                         </div>
                         <div className="flex-box column start pointer gap-[3px]">
-                            {selectedTeam.length ? (
+                            {selectedTeam.length > 0 ? (
                                 selectedTeam.map(character => (
                                     <div
                                         key={character.id}

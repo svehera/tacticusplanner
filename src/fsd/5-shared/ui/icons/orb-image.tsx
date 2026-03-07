@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Alliance, Rarity } from '@/fsd/5-shared/model';
 
-import { tacticusIcons } from './iconList';
+import { tacticusIcons } from './icon-list';
 
-interface OrbIconProps {
+interface OrbIconProperties {
     alliance: Alliance;
     rarity: Rarity;
     size: number; // Size in pixels (e.g., 60 for 60px)
@@ -20,13 +20,13 @@ const mapAllianceToKey = (alliance: Alliance): string => {
     return `${Alliance[alliance].toLowerCase()}Orb`;
 };
 
-export const OrbIcon: React.FC<OrbIconProps> = ({ alliance, rarity, size }) => {
+export const OrbIcon: React.FC<OrbIconProperties> = ({ alliance, rarity, size }) => {
     const allianceKey = mapAllianceToKey(alliance);
     const rarityKey = mapRarityToKey(rarity);
     // 2. Fetch the actual file source (assuming it's in a 'file' property)
     // Use optional chaining just in case the key isn't found
-    const allianceSrc = tacticusIcons[allianceKey]?.file;
-    const raritySrc = tacticusIcons[rarityKey]?.file;
+    const allianceSource = tacticusIcons[allianceKey]?.file;
+    const raritySource = tacticusIcons[rarityKey]?.file;
     // 2. Conditional Vertical Positioning
     let translateYStyle: React.CSSProperties = { transform: 'translateY(0%)' }; // Default: perfect center (-translate-y-1/2)
 
@@ -47,7 +47,7 @@ export const OrbIcon: React.FC<OrbIconProps> = ({ alliance, rarity, size }) => {
     const containerStyle: React.CSSProperties = {
         width: `${size}px`,
         height: `${size}px`,
-        backgroundImage: `url(${raritySrc})`, // Rarity image as background
+        backgroundImage: `url(${raritySource})`, // Rarity image as background
         backgroundSize: 'cover', // Or 'contain', depending on desired effect
         backgroundPosition: 'center', // Center the background image
         backgroundRepeat: 'no-repeat',
@@ -66,7 +66,7 @@ export const OrbIcon: React.FC<OrbIconProps> = ({ alliance, rarity, size }) => {
             {/* Add rounded-full if the final orb is round */}
             {/* Alliance Layer (Foreground) */}
             <img
-                src={allianceSrc}
+                src={allianceSource}
                 alt={`${alliance} alliance foreground`}
                 className={allianceImageClasses}
                 style={translateYStyle}

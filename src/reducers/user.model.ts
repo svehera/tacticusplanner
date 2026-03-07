@@ -14,5 +14,5 @@ export interface IUserDataResponse {
     tacticusApiKey: string;
     tacticusUserId: string;
     tacticusGuildApiKey: string;
-    data: IPersonalData | IPersonalData2 | null;
+    data: IPersonalData | IPersonalData2 | undefined;
 }

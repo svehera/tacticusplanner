@@ -1,22 +1,28 @@
 import React from 'react';
-import { Link as LinkPrimitive, type LinkProps as LinkPrimitiveProps, composeRenderProps } from 'react-aria-components';
+import {
+    Link as LinkPrimitive,
+    type LinkProps as LinkPrimitiveProperties,
+    composeRenderProps,
+} from 'react-aria-components';
 
 import { buttonStyles } from '../button';
 
-interface LinkProps extends LinkPrimitiveProps {
+interface LinkProperties extends LinkPrimitiveProperties {
     intent?: 'primary' | 'secondary' | 'unstyled';
     ref?: React.RefObject<HTMLAnchorElement>;
 }
 
-const LinkButton = ({ className, ref, ...props }: LinkProps) => {
+const LinkButton = ({ className, ref, ...properties }: LinkProperties) => {
     return (
         <LinkPrimitive
             ref={ref}
-            {...props}
-            className={composeRenderProps(className, (className, renderProps) =>
-                buttonStyles({ ...renderProps, className, intent: 'primary' })
+            {...properties}
+            className={composeRenderProps(className, (className, renderProperties) =>
+                buttonStyles({ ...renderProperties, className, intent: 'primary' })
             )}>
-            {values => <>{typeof props.children === 'function' ? props.children(values) : props.children}</>}
+            {values => (
+                <>{typeof properties.children === 'function' ? properties.children(values) : properties.children}</>
+            )}
         </LinkPrimitive>
     );
 };

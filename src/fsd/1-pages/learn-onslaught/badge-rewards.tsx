@@ -19,18 +19,16 @@ export function BadgeRewards({
                 .map(([rarity, count]) => (
                     // on very small screens, smush the badges until they're touching to save space. On larger screens, add a small gap between them
                     <span key={rarity} className="-ml-1.5 flex items-start first:ml-0 sm:ml-0">
-                        {Array(count)
-                            .fill(0)
-                            .map((_, index) => (
-                                <BadgeImage
-                                    key={index}
-                                    rarity={rarity as RarityString}
-                                    alliance={alliance}
-                                    size="small"
-                                    // give badges of the same rarity a stacked appearance via negative margin
-                                    className="-ml-[21px] first:ml-0"
-                                />
-                            ))}
+                        {Array.from({ length: count }, () => 0).map((_, index) => (
+                            <BadgeImage
+                                key={index}
+                                rarity={rarity as RarityString}
+                                alliance={alliance}
+                                size="small"
+                                // give badges of the same rarity a stacked appearance via negative margin
+                                className="-ml-[21px] first:ml-0"
+                            />
+                        ))}
                     </span>
                 ))}
         </span>

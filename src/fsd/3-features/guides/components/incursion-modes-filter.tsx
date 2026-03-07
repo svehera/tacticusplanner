@@ -8,12 +8,12 @@ import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
 import { mowsData } from '@/fsd/4-entities/mow';
 
-interface Props {
+interface Properties {
     selectedModes: string[];
     updateSelection: (value: string[]) => void;
 }
 
-export const IncursionModesFilter: React.FC<Props> = ({ selectedModes, updateSelection }) => {
+export const IncursionModesFilter: React.FC<Properties> = ({ selectedModes, updateSelection }) => {
     const options: IMenuOption[] = mowsData.map(m => ({
         value: m.id,
         label: m.name,

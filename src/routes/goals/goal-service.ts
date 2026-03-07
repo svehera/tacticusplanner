@@ -43,26 +43,26 @@ export class GoalService {
         ];
         if (goalEstimate !== undefined) {
             if (!goalEstimate.daysLeft) {
-                return GoalService.getColorString(kBgColors[kBgColors.length - 1]);
+                return GoalService.getColorString(kBgColors.at(-1)!);
             }
 
             if (goalsColorCoding === 'Battle Pass Season') {
                 const nextDate = new Date();
                 nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
                 const kStartDates = LegendaryEventService.getLegendaryEventStartDates();
-                for (let i: number = 0; i < kStartDates.length && i < kBgColors.length - 1; ++i) {
-                    if (nextDate < kStartDates[i]) {
-                        return GoalService.getColorString(kBgColors[i]);
+                for (let index: number = 0; index < kStartDates.length && index < kBgColors.length - 1; ++index) {
+                    if (nextDate < kStartDates[index]) {
+                        return GoalService.getColorString(kBgColors[index]);
                     }
                     if (
                         nextDate <
-                        new Date(kStartDates[i].getTime() + LegendaryEventService.getLegendaryEventDurationMillis())
+                        new Date(kStartDates[index].getTime() + LegendaryEventService.getLegendaryEventDurationMillis())
                     ) {
                         return GoalService.getColorString(
                             GoalService.interpolateColor(
-                                kBgColors[i],
-                                kBgColors[i + 1],
-                                (nextDate.getTime() - kStartDates[i].getTime()) /
+                                kBgColors[index],
+                                kBgColors[index + 1],
+                                (nextDate.getTime() - kStartDates[index].getTime()) /
                                     LegendaryEventService.getLegendaryEventDurationMillis()
                             )
                         );
@@ -70,7 +70,7 @@ export class GoalService {
                 }
             } else if (goalsColorCoding === 'Guild Raid Season') {
                 const daysPerRaidSeason = 14;
-                const raidSeasonStart = 1764738000000; // Arbitrary start of a past season (in milliseconds)
+                const raidSeasonStart = 1_764_738_000_000; // Arbitrary start of a past season (in milliseconds)
 
                 const nextDate = new Date();
                 nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1); // Subtracting 1 day from daysLeft is common for 'time remaining'
@@ -83,7 +83,7 @@ export class GoalService {
 
                 const nextDateSeasonIndex = Math.max(0, Math.floor(msDifference / msPerRaidSeason));
 
-                const currentMs = new Date().getTime();
+                const currentMs = Date.now();
                 const msDifferenceCurrent = currentMs - raidSeasonStart;
                 const currentSeasonIndex = Math.floor(msDifferenceCurrent / msPerRaidSeason);
 
@@ -94,6 +94,6 @@ export class GoalService {
                 );
             }
         }
-        return GoalService.getColorString(kBgColors[kBgColors.length - 1]);
+        return GoalService.getColorString(kBgColors.at(-1)!);
     }
 }

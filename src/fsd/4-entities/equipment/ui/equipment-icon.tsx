@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
-import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import type { IEquipment } from '../model';
 
@@ -12,16 +12,16 @@ function getImageDimensions(url: string): Promise<{ width: number; height: numbe
     return new Promise((resolve, reject) => {
         const img = new Image();
 
-        img.onload = () => {
+        img.addEventListener('load', () => {
             resolve({
                 width: img.naturalWidth,
                 height: img.naturalHeight,
             });
-        };
+        });
 
-        img.onerror = error => {
+        img.addEventListener('error', error => {
             reject(new Error(`Failed to load image from URL: ${url}. Error: ${error}`));
-        };
+        });
 
         img.src = url;
     });
@@ -75,9 +75,9 @@ export const EquipmentIcon = ({
     const [equipIsLoading, setEquipIsLoading] = useState<boolean>(true);
     const [frameIsLoading, setFrameIsLoading] = useState<boolean>(true);
     const [relicIsLoading, setRelicIsLoading] = useState<boolean>(true);
-    const [equipError, setEquipError] = useState<Error | null>(null);
-    const [frameError, setFrameError] = useState<Error | null>(null);
-    const [relicError, setRelicError] = useState<Error | null>(null);
+    const [equipError, setEquipError] = useState<Error>();
+    const [frameError, setFrameError] = useState<Error>();
+    const [relicError, setRelicError] = useState<Error>();
 
     const frameKey = (RarityMapper.rarityToRarityString(equipment.rarity).toLocaleLowerCase() +
         'EquipmentFrame') as keyof typeof tacticusIcons;
@@ -89,22 +89,22 @@ export const EquipmentIcon = ({
         if (!equipment.icon) return;
 
         setEquipIsLoading(true);
-        setEquipError(null);
+        setEquipError(undefined);
         setEquipSize({ width: 0, height: 0 });
 
         getImageDimensions(getImageUrl(equipment.icon))
             .then(data => setEquipSize(data))
-            .catch(err => setEquipError(err))
+            .catch(error => setEquipError(error))
             .finally(() => setEquipIsLoading(false));
 
         getImageDimensions(frameDetails.file)
             .then(data => setFrameSize(data))
-            .catch(err => setFrameError(err))
+            .catch(error => setFrameError(error))
             .finally(() => setFrameIsLoading(false));
 
         getImageDimensions(relicDetails.file)
             .then(data => setRelicSize(data))
-            .catch(err => setRelicError(err))
+            .catch(error => setRelicError(error))
             .finally(() => setRelicIsLoading(false));
 
         // The dependency array [imageUrl] ensures this effect runs

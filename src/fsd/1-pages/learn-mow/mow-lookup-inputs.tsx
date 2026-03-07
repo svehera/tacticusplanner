@@ -9,41 +9,44 @@ import { UnitsAutocomplete } from '@/fsd/4-entities/unit';
 
 import { IMowLookupInputs } from './lookup.models';
 
-interface Props {
+interface Properties {
     mows: IMow2[];
     inputs: IMowLookupInputs;
     inputsChange: (value: IMowLookupInputs) => void;
 }
 
-export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange }) => {
-    const [mow, setMow] = useQueryState<IMow2 | null>(
+export const MowLookupInputs: React.FC<Properties> = ({ mows, inputs, inputsChange }) => {
+    const [mow, setMow] = useQueryState<IMow2 | undefined>(
         'mow',
-        mowQueryParam => mows.find(x => x.snowprintId === mowQueryParam) ?? inputs.mow,
+        mowQueryParameter => mows.find(x => x.snowprintId === mowQueryParameter) ?? inputs.mow,
         mow => mow?.name
     );
 
     const [primaryAbilityStart, setPrimaryAbilityStart] = useQueryState<number>(
         'pStart',
-        primaryAbilityStartParam => (primaryAbilityStartParam ? +primaryAbilityStartParam : inputs.primaryAbilityStart),
+        primaryAbilityStartParameter =>
+            primaryAbilityStartParameter ? +primaryAbilityStartParameter : inputs.primaryAbilityStart,
         primaryAbilityStart => primaryAbilityStart.toString()
     );
 
     const [primaryAbilityEnd, setPrimaryAbilityEnd] = useQueryState<number>(
         'pEnd',
-        primaryAbilityEndParam => (primaryAbilityEndParam ? +primaryAbilityEndParam : inputs.primaryAbilityEnd),
+        primaryAbilityEndParameter =>
+            primaryAbilityEndParameter ? +primaryAbilityEndParameter : inputs.primaryAbilityEnd,
         primaryAbilityEnd => primaryAbilityEnd.toString()
     );
 
     const [secondaryAbilityStart, setSecondaryAbilityStart] = useQueryState<number>(
         'sStart',
-        secondaryAbilityStartParam =>
-            secondaryAbilityStartParam ? +secondaryAbilityStartParam : inputs.secondaryAbilityStart,
+        secondaryAbilityStartParameter =>
+            secondaryAbilityStartParameter ? +secondaryAbilityStartParameter : inputs.secondaryAbilityStart,
         secondaryAbilityStart => secondaryAbilityStart.toString()
     );
 
     const [secondaryAbilityEnd, setSecondaryAbilityEnd] = useQueryState<number>(
         'sEnd',
-        secondaryAbilityEndParam => (secondaryAbilityEndParam ? +secondaryAbilityEndParam : inputs.secondaryAbilityEnd),
+        secondaryAbilityEndParameter =>
+            secondaryAbilityEndParameter ? +secondaryAbilityEndParameter : inputs.secondaryAbilityEnd,
         secondaryAbilityEnd => secondaryAbilityEnd.toString()
     );
 
@@ -60,7 +63,8 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
     return (
         <div className="flex-box gap20 wrap">
             {mow && <UnitShardIcon icon={mow.roundIcon} />}
-            <UnitsAutocomplete className="max-w-[250px]" unit={mow} options={mows} onUnitChange={setMow} />
+            {/* eslint-disable-next-line unicorn/no-null  */}
+            <UnitsAutocomplete className="max-w-[250px]" unit={mow ?? null} options={mows} onUnitChange={setMow} />
             <div className="flex-box gap15 p10">
                 <span>Primary:</span>
 

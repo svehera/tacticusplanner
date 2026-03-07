@@ -2,17 +2,17 @@
 import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
-interface Props {
+interface Properties {
     title: string;
     helperText?: string;
     value?: number;
     valueChange: (value: number) => void;
 }
 
-export const NumbersInput: React.FC<Props> = ({ value, valueChange, title, helperText }) => {
+export const NumbersInput: React.FC<Properties> = ({ value, valueChange, title, helperText }) => {
     function handleChange(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
         const value = event.target.value === '' ? '' : (Number(event.target.value) as any);
-        valueChange(Math.min(value, 10000));
+        valueChange(Math.min(value, 10_000));
     }
 
     return (
@@ -24,7 +24,7 @@ export const NumbersInput: React.FC<Props> = ({ value, valueChange, title, helpe
                 inputProps={{
                     step: 1,
                     min: 0,
-                    max: 10000,
+                    max: 10_000,
                     type: 'number',
                     'aria-labelledby': 'input-slider',
                 }}

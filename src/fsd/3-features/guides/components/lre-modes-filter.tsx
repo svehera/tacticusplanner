@@ -13,12 +13,12 @@ import { LreCharacter } from '@/fsd/3-features/guides/guides.enums';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { anyOption, lreSections } from '@/fsd/3-features/teams/teams.constants';
 
-interface Props {
+interface Properties {
     selectedModes: string[];
     updateSelection: (value: string[]) => void;
 }
 
-export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection }) => {
+export const LreModesFilter: React.FC<Properties> = ({ selectedModes, updateSelection }) => {
     const [legendaryEvent, setLegendaryEvent] = useState<LreCharacter | 'any'>(() => {
         return (lreCharacters.find(x => x.value === selectedModes[0])?.value as LreCharacter) ?? 'any';
     });
@@ -28,17 +28,17 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
     });
 
     const [tracks, setTracks] = useState<string[]>(
-        selectedModes.filter(x => ['0', '1', '2', '3', '4'].includes(x[x.length - 1]))
+        selectedModes.filter(x => ['0', '1', '2', '3', '4'].includes(x.at(-1)!))
     );
 
-    const lre = legendaryEvent !== 'any' ? getLre(legendaryEvent) : null;
+    const lre = legendaryEvent === 'any' ? undefined : getLre(legendaryEvent);
     const lreTracks = useMemo<IMenuOption[]>(() => {
         if (!lre) {
             return [];
         }
 
         switch (section) {
-            case '_alpha':
+            case '_alpha': {
                 return [
                     ...lre.alpha.unitsRestrictions.map((r, index) => ({
                         value: legendaryEvent + '_alpha_' + index,
@@ -46,7 +46,8 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
                         selected: false,
                     })),
                 ];
-            case '_beta':
+            }
+            case '_beta': {
                 return [
                     ...lre.beta.unitsRestrictions.map((r, index) => ({
                         value: legendaryEvent + '_beta_' + index,
@@ -54,8 +55,9 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
                         selected: false,
                     })),
                 ];
+            }
 
-            case '_gamma':
+            case '_gamma': {
                 return [
                     ...lre.gamma.unitsRestrictions.map((r, index) => ({
                         value: legendaryEvent + '_gamma_' + index,
@@ -63,9 +65,11 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
                         selected: false,
                     })),
                 ];
+            }
 
-            default:
+            default: {
                 return [];
+            }
         }
     }, [section, legendaryEvent]);
 
@@ -97,7 +101,7 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
 
     const handleTrackChange = (value: string[]) => {
         setTracks(value);
-        if (value.length) {
+        if (value.length > 0) {
             updateSelection(value);
         } else {
             updateSelection([legendaryEvent + section]);

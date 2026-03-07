@@ -6,10 +6,10 @@ import { IUnit } from '../model';
 
 import { UnitTitle } from './unit-title';
 
-interface Props<T extends IUnit> {
+interface Properties<T extends IUnit> {
     unit: T | T[] | null;
     options: T[];
-    onUnitChange?: (value: T | null) => void;
+    onUnitChange?: (value: T | undefined) => void;
     onUnitsChange?: (value: T[]) => void;
     multiple?: boolean;
     label?: string;
@@ -24,10 +24,10 @@ export const UnitsAutocomplete = <T extends IUnit>({
     onUnitsChange = () => {},
     label = 'Unit',
     className = '',
-}: Props<T>) => {
+}: Properties<T>) => {
     const [openAutocomplete, setOpenAutocomplete] = useState(false);
 
-    const updateValue = (value: T | T[] | null): void => {
+    const updateValue = (value: T | T[] | undefined): void => {
         if (Array.isArray(value)) {
             onUnitsChange(value);
         } else {
@@ -76,10 +76,10 @@ export const UnitsAutocomplete = <T extends IUnit>({
             open={openAutocomplete}
             onFocus={() => handleAutocompleteChange(true)}
             onBlur={() => handleAutocompleteChange(false)}
-            filterOptions={(opts, state) => {
+            filterOptions={(options_, state) => {
                 const q = state.inputValue?.toLowerCase?.().trim() ?? '';
-                if (!q) return opts;
-                return opts.filter(x => {
+                if (!q) return options_;
+                return options_.filter(x => {
                     const short = 'shortName' in x ? ((x as any).shortName?.toLowerCase?.() ?? '') : '';
                     const normal = x.name?.toLowerCase?.() ?? '';
                     const full = 'fullName' in x ? (x.fullName?.toLowerCase?.() ?? '') : '';
@@ -88,13 +88,19 @@ export const UnitsAutocomplete = <T extends IUnit>({
             }}
             getOptionLabel={option => getOptionText(option)}
             isOptionEqualToValue={(option, value) => option.snowprintId === value.snowprintId}
-            renderOption={(props, option) => (
-                <UnitTitle {...props} key={option.name} character={option} short onClick={() => updateValue(option)} />
+            renderOption={(properties, option) => (
+                <UnitTitle
+                    {...properties}
+                    key={option.name}
+                    character={option}
+                    short
+                    onClick={() => updateValue(option)}
+                />
             )}
-            onChange={(_, value) => updateValue(value)}
-            renderInput={params => (
+            onChange={(_, value) => updateValue(value ?? undefined)}
+            renderInput={parameters => (
                 <TextField
-                    {...params}
+                    {...parameters}
                     fullWidth
                     onClick={() => handleAutocompleteChange(!openAutocomplete)}
                     onChange={() => handleAutocompleteChange(true)}

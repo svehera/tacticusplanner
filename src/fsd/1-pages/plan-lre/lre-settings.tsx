@@ -14,7 +14,7 @@ import { ILreTileSettings, ILreViewSettings, IViewOption } from '@/fsd/3-feature
 
 import { LreTile } from './lre-tile';
 
-interface Props {
+interface Properties {
     lreViewSettings: ILreViewSettings & ILreTileSettings;
     autoTeamsSettings: IAutoTeamsPreferences;
     characters: ICharacter2[];
@@ -27,7 +27,13 @@ interface Props {
     ) => void;
 }
 
-export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSettings, autoTeamsSettings, save }) => {
+export const LreSettings: React.FC<Properties> = ({
+    onClose,
+    characters,
+    lreViewSettings,
+    autoTeamsSettings,
+    save,
+}) => {
     const [viewSettings, setViewSettings] = useState<ILreViewSettings & ILreTileSettings>(lreViewSettings);
     const [teamsSettings, setTeamsSettings] = useState<IAutoTeamsPreferences>(autoTeamsSettings);
     const [recommendFirst, setRecommendFirst] = useState<string[]>(
@@ -42,9 +48,9 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         value: boolean
     ) => {
         if (Object.hasOwn(viewSettings, setting)) {
-            setViewSettings(curr => ({ ...curr, [setting]: value }));
+            setViewSettings(current => ({ ...current, [setting]: value }));
         } else {
-            setTeamsSettings(curr => ({ ...curr, [setting]: value }));
+            setTeamsSettings(current => ({ ...current, [setting]: value }));
         }
     };
 
@@ -187,11 +193,11 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         <Dialog open={true} fullWidth onClose={onClose} maxWidth="md" fullScreen={isMobile}>
             <DialogTitle>LRE Planner Settings</DialogTitle>
             <DialogContent>
-                <div className="flex-box gap5 wrap">{lreOptions.map(renderOption)}</div>
+                <div className="flex-box gap5 wrap">{lreOptions.map(option => renderOption(option))}</div>
                 <Divider orientation="horizontal" />
 
                 <h3>Unit tile view</h3>
-                <div className="flex-box gap5 wrap">{lreTileViewOptions.map(renderOption)}</div>
+                <div className="flex-box gap5 wrap">{lreTileViewOptions.map(option => renderOption(option))}</div>
                 <LreTile character={lreTileCharacter} settings={viewSettings} upgradeRankOrMowGoals={[]} />
                 <Divider orientation="horizontal" />
 
@@ -226,7 +232,7 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                 </div>
                 <Divider orientation="horizontal" />
                 <h3>Auto teams settings</h3>
-                <div className="flex-box gap5 wrap">{lreAutoTeamsOptions.map(renderOption)}</div>
+                <div className="flex-box gap5 wrap">{lreAutoTeamsOptions.map(option => renderOption(option))}</div>
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Cancel</Button>

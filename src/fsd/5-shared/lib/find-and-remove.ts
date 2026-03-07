@@ -4,11 +4,11 @@
  * @param x - The item to find and remove
  * @return true if the item was found and removed, false otherwise
  */
-export const findAndRemoveItem = <T>(arr: T[], x: T) => {
-    const itemIdx = arr.indexOf(x);
-    if (itemIdx === -1) {
+export const findAndRemoveItem = <T>(array: T[], x: T) => {
+    const itemIndex = array.indexOf(x);
+    if (itemIndex === -1) {
         return false;
     }
-    arr.splice(itemIdx, 1);
+    array.splice(itemIndex, 1);
     return true;
 };

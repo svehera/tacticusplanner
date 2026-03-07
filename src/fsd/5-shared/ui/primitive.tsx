@@ -2,7 +2,7 @@ import { composeRenderProps } from 'react-aria-components';
 import { twMerge } from 'tailwind-merge';
 import { tv } from 'tailwind-variants';
 
-function composeTailwindRenderProps<T>(
+function composeTailwindRenderProperties<T>(
     className: string | ((v: T) => string) | undefined,
     tailwind: string
 ): string | ((v: T) => string) {
@@ -35,4 +35,4 @@ const focusButtonStyles = tv({
     },
 });
 
-export { composeTailwindRenderProps, focusStyles, focusButtonStyles };
+export { composeTailwindRenderProperties as composeTailwindRenderProps, focusStyles, focusButtonStyles };

@@ -21,7 +21,7 @@ import { LreTrackBattleSummary } from './le-track-battle';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreProgressModel, ILreRequirements, ILreTrackProgress } from './lre.models';
 
-interface Props {
+interface Properties {
     track: ILreTrackProgress;
     legendaryEventId: LegendaryEventEnum;
     teams: ILreTeam[];
@@ -30,14 +30,25 @@ interface Props {
         model: ILreProgressModel,
         trackId: LreTrackId,
         battleIndex: number,
-        reqId: string,
+        requestId: string,
         status: RequirementStatus,
         forceOverwrite?: boolean
     ) => ILreProgressModel;
     updateDto: (model: ILreProgressModel) => void;
 }
 
-export const LreTrackOverallProgress: React.FC<Props> = ({
+const getRestrictionTooltip = (request: ILreRequirements) => {
+    if (
+        request.id === LrePointsCategoryId.defeatAll ||
+        request.id === LrePointsCategoryId.killScore ||
+        request.id === LrePointsCategoryId.highScore
+    ) {
+        return request.name;
+    }
+    return `${request.name} - ${request.pointsPerBattle}`;
+};
+
+export const LreTrackOverallProgress: React.FC<Properties> = ({
     track,
     legendaryEventId: _legendaryEventId,
     teams,
@@ -49,21 +60,19 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
     const projectedRestrictions = useMemo(() => {
         const battleRestrictions = new Map<number, Set<string>>();
 
-        teams
-            .filter(team => team.section === track.trackId)
-            .forEach(team => {
-                const clears = team.expectedBattleClears ?? 0;
-                // For each battle this team is expected to clear
-                for (let battleIndex = 0; battleIndex < clears && battleIndex < track.battles.length; battleIndex++) {
-                    if (!battleRestrictions.has(battleIndex)) {
-                        battleRestrictions.set(battleIndex, new Set());
-                    }
-                    // Add all restrictions this team can clear
-                    team.restrictionsIds.forEach(restrictionId => {
-                        battleRestrictions.get(battleIndex)!.add(restrictionId);
-                    });
+        for (const team of teams.filter(team => team.section === track.trackId)) {
+            const clears = team.expectedBattleClears ?? 0;
+            // For each battle this team is expected to clear
+            for (let battleIndex = 0; battleIndex < clears && battleIndex < track.battles.length; battleIndex++) {
+                if (!battleRestrictions.has(battleIndex)) {
+                    battleRestrictions.set(battleIndex, new Set());
                 }
-            });
+                // Add all restrictions this team can clear
+                for (const restrictionId of team.restrictionsIds) {
+                    battleRestrictions.get(battleIndex)!.add(restrictionId);
+                }
+            }
+        }
 
         return battleRestrictions;
     }, [teams, track.trackId, track.battles.length]);
@@ -72,14 +81,14 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
     const currentPoints = sum(
         track.battles
             .flatMap(x => x.requirementsProgress)
-            .map(req => LreRequirementStatusService.getRequirementPoints(req))
+            .map(request => LreRequirementStatusService.getRequirementPoints(request))
     );
 
-    const getReqProgress = (reqId: string) => {
+    const getRequestProgress = (requestId: string) => {
         return track.battles
             .flatMap(x => x.requirementsProgress)
             .filter(x => {
-                if (x.id !== reqId) return false;
+                if (x.id !== requestId) return false;
                 if (x.status !== undefined) {
                     return x.status === RequirementStatus.Cleared;
                 }
@@ -87,33 +96,23 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
             }).length;
     };
 
-    const getReqProgressPoints = (reqId: string) => {
+    const getRequestProgressPoints = (requestId: string) => {
         return sum(
             track.battles
                 .flatMap(x => x.requirementsProgress)
-                .filter(x => x.id === reqId)
-                .map(req => LreRequirementStatusService.getRequirementPoints(req))
+                .filter(x => x.id === requestId)
+                .map(request => LreRequirementStatusService.getRequirementPoints(request))
         );
     };
 
     const completionPercentage = Math.round((currentPoints / track.totalPoints) * 100);
 
-    const getRestrictionTooltip = (req: ILreRequirements) => {
-        if (
-            req.id === LrePointsCategoryId.defeatAll ||
-            req.id === LrePointsCategoryId.killScore ||
-            req.id === LrePointsCategoryId.highScore
-        ) {
-            return req.name;
-        }
-        return `${req.name} - ${req.pointsPerBattle}`;
-    };
-
     const handleToggle = () => {
         if (
             track.battles.some(battle =>
                 battle.requirementsProgress.some(
-                    req => req.status === RequirementStatus.MaybeClear || req.status === RequirementStatus.StopHere
+                    request =>
+                        request.status === RequirementStatus.MaybeClear || request.status === RequirementStatus.StopHere
                 )
             )
         ) {
@@ -140,7 +139,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
 
     const setAll = () => {
         const completedBattles = track.battles
-            .map(battle => battle.requirementsProgress.filter(req => req.completed).length)
+            .map(battle => battle.requirementsProgress.filter(request => request.completed).length)
             .reduce((a, b) => a + b, 0);
         const status =
             completedBattles === track.requirements.length * track.battles.length
@@ -148,11 +147,11 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                 : RequirementStatus.Cleared;
 
         let leModel = model;
-        track.battles.forEach(battle => {
-            battle.requirementsProgress.forEach(req => {
-                leModel = createNewModel(leModel, track.trackId, battle.battleIndex, req.id, status);
-            });
-        });
+        for (const battle of track.battles) {
+            for (const request of battle.requirementsProgress) {
+                leModel = createNewModel(leModel, track.trackId, battle.battleIndex, request.id, status);
+            }
+        }
         updateDto(leModel);
     };
 
@@ -162,24 +161,27 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                 {completionPercentage}% {track.trackName}
             </h3>
             <div className="start gap5 box-border flex flex-col">
-                {track.requirements.map(req => (
-                    <div key={req.id} className="flex-box gap5">
+                {track.requirements.map(request => (
+                    <div key={request.id} className="flex-box gap5">
                         <div
                             className="h-[15px] w-[15px] rounded-[50px]"
                             style={{
-                                backgroundColor: getCompletionRateColor(getReqProgress(req.id), track.battles.length),
+                                backgroundColor: getCompletionRateColor(
+                                    getRequestProgress(request.id),
+                                    track.battles.length
+                                ),
                             }}
                         />
                         <span className="min-w-[50px] font-bold">
-                            {getReqProgress(req.id)}/{track.battles.length}
+                            {getRequestProgress(request.id)}/{track.battles.length}
                         </span>
 
                         <span className="min-w-20 font-bold">
-                            {getReqProgressPoints(req.id)}/{req.totalPoints}
+                            {getRequestProgressPoints(request.id)}/{request.totalPoints}
                         </span>
-                        <LreReqImage iconId={req.iconId} />
-                        <span className="min-w-[25px] p-1 md:p-1.5">{req.pointsPerBattle || 'x'}</span>
-                        <span>{req.name}</span>
+                        <LreReqImage iconId={request.iconId} />
+                        <span className="min-w-[25px] p-1 md:p-1.5">{request.pointsPerBattle || 'x'}</span>
+                        <span>{request.name}</span>
                     </div>
                 ))}
             </div>
@@ -221,13 +223,13 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                     const firstRestrictionIndex = LreRequirementStatusService.getFirstRestrictionIndex(
                                         track.requirements
                                     );
-                                    return track.requirements.map((req, index) => (
+                                    return track.requirements.map((request, index) => (
                                         <div
-                                            key={req.id}
+                                            key={request.id}
                                             className={`flex items-center justify-center ${index === firstRestrictionIndex ? 'ml-4' : ''}`}>
                                             <LreReqImage
-                                                iconId={req.iconId}
-                                                tooltip={getRestrictionTooltip(req)}
+                                                iconId={request.iconId}
+                                                tooltip={getRestrictionTooltip(request)}
                                                 sizePx={isMobile ? 25 : 30}
                                             />
                                         </div>
@@ -241,8 +243,10 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                 battle={battle}
                                 maxKillPoints={track.battlesPoints[battle.battleIndex]}
                                 projectedRestrictions={projectedRestrictions.get(battle.battleIndex) ?? new Set()}
-                                setState={(req, status) =>
-                                    updateDto(createNewModel(model, track.trackId, battle.battleIndex, req.id, status))
+                                setState={(request, status) =>
+                                    updateDto(
+                                        createNewModel(model, track.trackId, battle.battleIndex, request.id, status)
+                                    )
                                 }
                             />
                         ))}

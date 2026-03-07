@@ -7,12 +7,12 @@ import { Rarity } from '@/fsd/5-shared/model/enums';
 
 import { MiscIcon } from './misc.icon';
 
-interface Props {
+interface Properties {
     xp: number;
     size?: 'small' | 'medium';
 }
 
-export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
+export const XpBooksTotal: React.FC<Properties> = ({ xp, size = 'small' }) => {
     const sizePx = size === 'small' ? 25 : 35;
     const xpBooks = useMemo(() => {
         const books: Record<Rarity, number> = {
@@ -21,12 +21,11 @@ export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
             [Rarity.Rare]: 0,
             [Rarity.Epic]: 0,
             [Rarity.Legendary]: 0,
-            [Rarity.Mythic]: 0,
+            [Rarity.Mythic]: Math.floor(xp / 62_500),
         };
-        books[Rarity.Mythic] = Math.floor(xp / 62500);
-        let remainingXp = xp % 62500;
-        books[Rarity.Legendary] = Math.floor(remainingXp / 12500);
-        remainingXp = remainingXp % 12500;
+        let remainingXp = xp % 62_500;
+        books[Rarity.Legendary] = Math.floor(remainingXp / 12_500);
+        remainingXp = remainingXp % 12_500;
         books[Rarity.Epic] = Math.floor(remainingXp / 2500);
         remainingXp = remainingXp % 2500;
         books[Rarity.Rare] = Math.floor(remainingXp / 500);

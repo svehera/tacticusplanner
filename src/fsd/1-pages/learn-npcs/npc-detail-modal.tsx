@@ -4,15 +4,15 @@ import { INpcData, INpcStats } from '@/fsd/4-entities/npc';
 
 import { NpcStats } from './npc-stats';
 
-interface Props {
+interface Properties {
     isOpen: boolean;
     onClose: () => void;
-    npc: INpcData | null;
-    stats: INpcStats | null; // The specific level stats
+    npc: INpcData | undefined;
+    stats: INpcStats | undefined; // The specific level stats
 }
 
-export const NpcDetailModal: React.FC<Props> = ({ isOpen, onClose, npc, stats }: Props) => {
-    if (!isOpen || !npc) return null;
+export const NpcDetailModal: React.FC<Properties> = ({ isOpen, onClose, npc, stats }: Properties) => {
+    if (!isOpen || !npc) return;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm transition-opacity">

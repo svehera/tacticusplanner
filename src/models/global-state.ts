@@ -2,7 +2,7 @@
 
 import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow, IMow2, IMowDb, mows2Data, mowsData, MowsService } from '@/fsd/4-entities/mow';
+import { IMow, IMow2, IMowDatabase, mows2Data, mowsData, MowsService } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
@@ -40,7 +40,7 @@ import {
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
-    readonly seenAppVersion?: string | null;
+    readonly seenAppVersion?: string | undefined;
 
     readonly autoTeamsPreferences: IAutoTeamsPreferences;
     readonly characters: Array<ICharacter2>;
@@ -119,7 +119,7 @@ export class GlobalState implements IGlobalState {
             const passiveLevel = Math.max(personalCharData?.passiveAbilityLevel ?? 1, 1);
             const level = Math.max(personalCharData?.level ?? 1, rankLevel, activeLevel, passiveLevel);
             const upgrades = personalCharData?.upgrades
-                ? personalCharData.upgrades.filter(UpgradesService.isValidUpgrade)
+                ? personalCharData.upgrades.filter(upgrade => UpgradesService.isValidUpgrade(upgrade))
                 : [];
 
             const combinedData: IPersonalCharacterData2 = {
@@ -156,9 +156,9 @@ export class GlobalState implements IGlobalState {
         });
     }
 
-    static initMows(dbMows: Partial<IMowDb & IInsightsData>[], totalUsers?: number): Array<IMow | IMow2> {
-        const ret = mowsData.map(staticData => {
-            const dbMow = dbMows?.find(c => c.id === staticData.id);
+    static initMows(databaseMows: Partial<IMowDatabase & IInsightsData>[], totalUsers?: number): Array<IMow | IMow2> {
+        const returnValue = mowsData.map(staticData => {
+            const databaseMow = databaseMows?.find(c => c.id === staticData.id);
             const initialRarity = RarityMapper.stringToNumber[staticData.initialRarity];
             const initialRarityStars = RarityMapper.toStars[RarityMapper.stringToNumber[staticData.initialRarity]];
             const isReleased = staticData.releaseDate
@@ -170,19 +170,19 @@ export class GlobalState implements IGlobalState {
                 unitType: UnitType.mow,
                 portraitIcon: isReleased ? `${staticData.id}.webp` : 'comingSoon.webp',
                 badgeIcon: isReleased ? `${staticData.id}.png` : 'unset.png',
-                rarity: dbMow?.rarity ?? initialRarity,
-                stars: dbMow?.stars ?? initialRarityStars,
-                primaryAbilityLevel: dbMow?.primaryAbilityLevel ?? 1,
-                secondaryAbilityLevel: dbMow?.secondaryAbilityLevel ?? 1,
-                unlocked: dbMow?.unlocked ?? false,
-                shards: dbMow?.shards ?? 0,
-                mythicShards: dbMow?.mythicShards ?? 0,
+                rarity: databaseMow?.rarity ?? initialRarity,
+                stars: databaseMow?.stars ?? initialRarityStars,
+                primaryAbilityLevel: databaseMow?.primaryAbilityLevel ?? 1,
+                secondaryAbilityLevel: databaseMow?.secondaryAbilityLevel ?? 1,
+                unlocked: databaseMow?.unlocked ?? false,
+                shards: databaseMow?.shards ?? 0,
+                mythicShards: databaseMow?.mythicShards ?? 0,
                 numberOfUnlocked:
-                    totalUsers && dbMow?.numberOfUnlocked
-                        ? Math.ceil((dbMow.numberOfUnlocked / totalUsers) * 100)
+                    totalUsers && databaseMow?.numberOfUnlocked
+                        ? Math.ceil((databaseMow.numberOfUnlocked / totalUsers) * 100)
                         : undefined,
-                ownedBy: dbMow?.ownedBy ?? [],
-                statsByOwner: dbMow?.statsByOwner ?? [],
+                ownedBy: databaseMow?.ownedBy ?? [],
+                statsByOwner: databaseMow?.statsByOwner ?? [],
             };
 
             const newStaticData = MowsService.resolveToStatic(staticData.id)!;
@@ -195,35 +195,35 @@ export class GlobalState implements IGlobalState {
 
             return result;
         }) as Array<IMow | IMow2>;
-        mows2Data.mows.forEach(staticMow => {
+        for (const staticMow of mows2Data.mows) {
             if (
-                ret.some(
+                returnValue.some(
                     x =>
                         ('tacticusId' in x && x.tacticusId === staticMow.snowprintId) ||
                         ('snowprintId' in x && x.snowprintId === staticMow.snowprintId)
                 )
             )
-                return;
-            const dbMow = dbMows?.find(c => c.id === staticMow.snowprintId);
+                continue;
+            const databaseMow = databaseMows?.find(c => c.id === staticMow.snowprintId);
 
             const result: IMow2 = {
                 ...staticMow,
                 id: staticMow.snowprintId,
                 unitType: UnitType.mow,
                 icon: staticMow.icon,
-                rarity: dbMow?.rarity ?? Rarity.Common,
-                stars: dbMow?.stars ?? RarityStars.None,
-                primaryAbilityLevel: dbMow?.primaryAbilityLevel ?? 1,
-                secondaryAbilityLevel: dbMow?.secondaryAbilityLevel ?? 1,
-                unlocked: dbMow?.unlocked ?? false,
-                shards: dbMow?.shards ?? 0,
-                mythicShards: dbMow?.mythicShards ?? 0,
+                rarity: databaseMow?.rarity ?? Rarity.Common,
+                stars: databaseMow?.stars ?? RarityStars.None,
+                primaryAbilityLevel: databaseMow?.primaryAbilityLevel ?? 1,
+                secondaryAbilityLevel: databaseMow?.secondaryAbilityLevel ?? 1,
+                unlocked: databaseMow?.unlocked ?? false,
+                shards: databaseMow?.shards ?? 0,
+                mythicShards: databaseMow?.mythicShards ?? 0,
                 numberOfUnlocked:
-                    totalUsers && dbMow?.numberOfUnlocked
-                        ? Math.ceil((dbMow.numberOfUnlocked / totalUsers) * 100)
+                    totalUsers && databaseMow?.numberOfUnlocked
+                        ? Math.ceil((databaseMow.numberOfUnlocked / totalUsers) * 100)
                         : undefined,
-                ownedBy: dbMow?.ownedBy ?? [],
-                statsByOwner: dbMow?.statsByOwner ?? [],
+                ownedBy: databaseMow?.ownedBy ?? [],
+                statsByOwner: databaseMow?.statsByOwner ?? [],
             };
 
             result.power = CharactersPowerService.getCharacterAbilityPower({
@@ -231,9 +231,9 @@ export class GlobalState implements IGlobalState {
                 ...result,
             } as IMow2);
 
-            ret.push(result);
-        });
-        return ret;
+            returnValue.push(result);
+        }
+        return returnValue;
     }
 
     static isAtLeast3DaysBefore(releaseDate: Date): boolean {
@@ -282,7 +282,7 @@ export class GlobalState implements IGlobalState {
                 equipment: x.equipment,
             }));
 
-        const mowsToDb: IMowDb[] = value.mows.map(x => ({
+        const mowsToDatabase: IMowDatabase[] = value.mows.map(x => ({
             id: x.id,
             rarity: x.rarity,
             primaryAbilityLevel: x.primaryAbilityLevel,
@@ -304,7 +304,7 @@ export class GlobalState implements IGlobalState {
             leSettings: value.leSettings,
             leSelectedRequirements: value.leSelectedRequirements,
             characters: charactersToStore,
-            mows: mowsToDb,
+            mows: mowsToDatabase,
             autoTeamsPreferences: value.autoTeamsPreferences,
             viewPreferences: value.viewPreferences,
             dailyRaidsPreferences: value.dailyRaidsPreferences,

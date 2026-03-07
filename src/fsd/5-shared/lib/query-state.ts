@@ -2,33 +2,31 @@
 
 import { SearchParamsStateContext } from '@/fsd/5-shared/ui/contexts';
 
-type NullableString = string | null | undefined;
-
 export const useQueryState = <T>(
-    queryParam: string,
-    stringToValue: (v: string | null) => T,
-    valueToString: (v: T) => NullableString
+    queryParameter: string,
+    stringToValue: (v: string | undefined) => T,
+    valueToString: (v: T) => string | undefined
 ): [T, (value: T) => void] => {
-    const [searchParams, setSearchParams] = useContext(SearchParamsStateContext);
-    const queryParamValue = searchParams.get(queryParam);
-    const initialState = stringToValue(queryParamValue);
+    const [searchParameters, setSearchParameters] = useContext(SearchParamsStateContext);
+    const queryParameterValue = searchParameters.get(queryParameter) ?? undefined;
+    const initialState = stringToValue(queryParameterValue);
 
     const [value, setValue] = useState<T>(initialState);
 
     const handleValueChange = useCallback(
         (newValue: T) => {
             setValue(newValue);
-            const newQueryParam = valueToString(newValue);
+            const newQueryParameter = valueToString(newValue);
 
             // Clone the current URLSearchParams before mutating to ensure
             // existing keys (e.g., activeTab) are preserved across updates.
-            setSearchParams(
-                curr => {
-                    const next = new URLSearchParams(curr);
-                    if (newQueryParam) {
-                        next.set(queryParam, newQueryParam);
+            setSearchParameters(
+                current => {
+                    const next = new URLSearchParams(current);
+                    if (newQueryParameter) {
+                        next.set(queryParameter, newQueryParameter);
                     } else {
-                        next.delete(queryParam);
+                        next.delete(queryParameter);
                     }
 
                     return next;
@@ -36,13 +34,13 @@ export const useQueryState = <T>(
                 { replace: true }
             );
         },
-        [searchParams, setSearchParams]
+        [searchParameters, setSearchParameters]
     );
 
     useEffect(() => {
-        const queryParamValueNew = searchParams.get(queryParam);
-        setValue(stringToValue(queryParamValueNew));
-    }, [searchParams]);
+        const queryParameterValueNew = searchParameters.get(queryParameter) ?? undefined;
+        setValue(stringToValue(queryParameterValueNew));
+    }, [searchParameters]);
 
     return [value, handleValueChange];
 };

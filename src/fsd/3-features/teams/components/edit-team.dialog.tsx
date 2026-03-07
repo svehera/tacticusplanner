@@ -29,7 +29,7 @@ import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalTeam, PersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
-interface Props {
+interface Properties {
     onClose: () => void;
     saveTeam: (team: IPersonalTeam) => void;
     team: IPersonalTeam;
@@ -37,7 +37,7 @@ interface Props {
     mows: IMow2[];
 }
 
-export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, team, saveTeam }) => {
+export const EditTeamDialog: React.FC<Properties> = ({ onClose, characters, mows, team, saveTeam }) => {
     const [selectedSubModes, setSelectedSubModes] = useState<string[]>(team.subModes);
     const [notes, setNotes] = useState<string>(team.notes);
     const [teamName, setTeamName] = useState<string>(team.name);
@@ -45,12 +45,12 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
     const [lineup, setLineup] = useState<ICharacter2[]>(
         team.lineup.map(id => characters.find(x => CharactersService.matchesAnyCharacterId(id, x))!)
     );
-    const [mow, setMow] = useState<IMow2 | null>(team.mowId ? mows.find(x => x.id === team.mowId)! : null);
+    const [mow, setMow] = useState<IMow2 | undefined>(mows.find(x => x.id === team.mowId));
 
     const [isOpenSelectDialog, setIsOpenSelectDialog] = useState<boolean>(false);
 
     const openSelectDialog = () => setIsOpenSelectDialog(true);
-    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | null) => {
+    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | undefined) => {
         setLineup(selectedTeam);
         setMow(mow);
         setIsOpenSelectDialog(false);
@@ -58,7 +58,7 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
 
     const updateSelectedGuildBosses = (values: string[]) => {
         const nonGuildBossValues = selectedSubModes.filter(
-            mod => !guildRaidBosses.some(option => option.value === mod)
+            module_ => !guildRaidBosses.some(option => option.value === module_)
         );
 
         setSelectedSubModes([...nonGuildBossValues, ...values]);
@@ -66,7 +66,7 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
 
     const updateSelectedGuildPrimes = (values: string[]) => {
         const nonGuildPrimeValues = selectedSubModes.filter(
-            mod => !guildRaidPrimes.some(option => option.value === mod)
+            module_ => !guildRaidPrimes.some(option => option.value === module_)
         );
 
         setSelectedSubModes([...nonGuildPrimeValues, ...values]);

@@ -3,24 +3,28 @@ import React, { useMemo, useState } from 'react';
 import { LeBattle } from './le-battle';
 import { ILeBattles } from './le-battle.service';
 
-interface Props {
+interface Properties {
     battles: ILeBattles;
 }
 
-export const LeBattles: React.FC<Props> = ({ battles }) => {
+export const LeBattles: React.FC<Properties> = ({ battles }) => {
     const [track, setTrack] = useState<'ALPHA' | 'BETA' | 'GAMMA'>('ALPHA');
     const [battleIndex, setBattleIndex] = useState<number>(0);
 
     const battle = useMemo(() => {
         switch (track) {
-            case 'ALPHA':
+            case 'ALPHA': {
                 return battles.alpha.battles[battleIndex];
-            case 'BETA':
+            }
+            case 'BETA': {
                 return battles.beta.battles[battleIndex];
-            case 'GAMMA':
+            }
+            case 'GAMMA': {
                 return battles.gamma.battles[battleIndex];
-            default:
+            }
+            default: {
                 return battles.alpha.battles[battleIndex];
+            }
         }
     }, [track, battleIndex, battles]);
 
@@ -64,7 +68,7 @@ export const LeBattles: React.FC<Props> = ({ battles }) => {
                     min={0}
                     max={battles.alpha.battles.length - 1}
                     value={battleIndex}
-                    onChange={e => setBattleIndex(Number(e.target.value))}
+                    onChange={event => setBattleIndex(Number(event.target.value))}
                     step="1"
                     className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600"
                 />

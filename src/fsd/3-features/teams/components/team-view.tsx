@@ -15,15 +15,15 @@ import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/ros
 
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';
 
-interface Props {
+interface Properties {
     characters: (ICharacter2 | undefined)[];
     onClick?: (unit: IUnit) => void;
     onEmptyClick?: (isMow: boolean) => void;
-    mow?: IMow2 | null;
+    mow?: IMow2;
     withMow?: boolean;
 }
 
-export const TeamView: React.FC<Props> = ({ characters, mow, withMow = false, onClick, onEmptyClick }) => {
+export const TeamView: React.FC<Properties> = ({ characters, mow, withMow = false, onClick, onEmptyClick }) => {
     const onMowClick = (relatedMow: IMow2) => {
         if (onClick) {
             onClick(relatedMow);

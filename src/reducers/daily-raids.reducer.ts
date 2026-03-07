@@ -36,7 +36,7 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
         }
         case 'AddCompletedBattle': {
             const battleIndex = state.raidedLocations.findIndex(x => x.id === action.location.id);
-            if (battleIndex >= 0) {
+            if (battleIndex !== -1) {
                 const raidedLocations = [...state.raidedLocations];
                 const finalCount = raidedLocations[battleIndex].raidsToPerform + action.location.raidsToPerform;
                 raidedLocations[battleIndex] = {
@@ -63,12 +63,12 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             const getOrderedKeysForBaseCampaign = (baseCampaignName: string): string[] => {
                 const ordered: string[] = [];
                 // Preserve insertion order from raw battle data
-                Object.entries(CampaignsService.rawBattleData).forEach(([shortKey, battle]) => {
+                for (const [shortKey, battle] of Object.entries(CampaignsService.rawBattleData)) {
                     const name = String(battle.campaign ?? '');
                     if (name.trim().toLowerCase().startsWith(baseCampaignName.trim().toLowerCase())) {
                         ordered.push(shortKey);
                     }
-                });
+                }
                 return ordered;
             };
 
@@ -123,7 +123,9 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                 for (const battle of completedBattles) {
                     const campaignKey = campaignShortId + String(battle.battleIndex + 1).padStart(2, '0');
                     const campaignComposed = CampaignsService.campaignsComposed[campaignKey];
-                    if (campaignComposed !== undefined) {
+                    if (campaignComposed === undefined) {
+                        console.warn(`Campaign composed data not found for key: ${campaignKey}`);
+                    } else {
                         // Ensure we don't duplicate an existing location entry for this campaign
                         const existingIndex = raidedLocations.findIndex(x => x.id === campaignComposed.id);
                         if (existingIndex !== -1) {
@@ -138,8 +140,6 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                             isShardsLocation: false,
                             isCompleted: battle.attemptsLeft < battle.attemptsUsed,
                         });
-                    } else {
-                        console.warn(`Campaign composed data not found for key: ${campaignKey}`);
                     }
                 }
             }
@@ -164,7 +164,8 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             };
         }
         default: {
-            throw new Error();
+            // @ts-expect-error - TS thinks this is impossible but let's get runtime information in case it does happen
+            throw new Error(`Invalid action type: ${action.type}`);
         }
     }
 };

@@ -25,35 +25,35 @@ import { CampaignBattle } from './campaign-battle';
 import { CampaignBattleCard } from './campaign-battle-card';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
+/**
+ * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
+ */
+const getReward = (rewards: IRewards): string => {
+    // Elite battles give a guaranteed material, so return that.
+    for (const reward of rewards.guaranteed) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    // Otherwise, return the first potential reward that is not gold.
+    for (const reward of rewards.potential) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    return '';
+};
+
 export const Campaigns = () => {
-    const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
+    const gridReference = useRef<AgGridReact<ICampaignBattleComposed>>(null);
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-
-    /**
-     * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
-     */
-    const getReward = (rewards: IRewards): string => {
-        // Elite battles give a guaranteed material, so return that.
-        for (const reward of rewards.guaranteed) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        // Otherwise, return the first potential reward that is not gold.
-        for (const reward of rewards.potential) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        return '';
-    };
 
     const [mobileColumnDefs] = useState<Array<ColDef>>([
         {
             headerName: 'Battle',
             pinned: true,
             maxWidth: 100,
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const location = params.data;
+            cellRenderer: (parameters: ICellRendererParams<ICampaignBattleComposed>) => {
+                const location = parameters.data;
                 if (location) {
                     return <CampaignLocation key={location.id} location={location} short={true} unlocked={true} />;
                 }
@@ -61,8 +61,8 @@ export const Campaigns = () => {
         },
         {
             headerName: 'Details',
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const location = params.data;
+            cellRenderer: (parameters: ICellRendererParams<ICampaignBattleComposed>) => {
+                const location = parameters.data;
                 if (location) {
                     return <CampaignBattle key={location.id} battle={location} scale={0.5} />;
                 }
@@ -75,8 +75,8 @@ export const Campaigns = () => {
             headerName: 'Battle',
             pinned: true,
             maxWidth: 100,
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const location = params.data;
+            cellRenderer: (parameters: ICellRendererParams<ICampaignBattleComposed>) => {
+                const location = parameters.data;
                 if (location) {
                     return <CampaignLocation key={location.id} location={location} short={true} unlocked={true} />;
                 }
@@ -101,8 +101,8 @@ export const Campaigns = () => {
             field: 'rarityEnum',
             headerName: 'Rarity',
             maxWidth: 80,
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const { rarityEnum, dropRate } = params.data ?? {};
+            cellRenderer: (parameters: ICellRendererParams<ICampaignBattleComposed>) => {
+                const { rarityEnum, dropRate } = parameters.data ?? {};
                 if (typeof rarityEnum === 'number' && rarityEnum >= 0) {
                     return <RarityIcon rarity={rarityEnum} />;
                 } else if (dropRate) {
@@ -114,14 +114,14 @@ export const Campaigns = () => {
             field: 'reward',
             headerName: 'Reward',
             minWidth: 170,
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const { rewards } = params.data ?? {};
-                if (!rewards) return undefined;
+            cellRenderer: (parameters: ICellRendererParams<ICampaignBattleComposed>) => {
+                const { rewards } = parameters.data ?? {};
+                if (!rewards) return;
                 const reward = getReward(rewards);
                 const upgrade = UpgradesService.getUpgrade(reward);
                 if (!upgrade) return reward;
                 if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-                    const char = CharactersService.getUnit(reward.substring(reward.indexOf('_') + 1));
+                    const char = CharactersService.getUnit(reward.slice(Math.max(0, reward.indexOf('_') + 1)));
                     if (!char) return reward;
                     return (
                         <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />
@@ -141,8 +141,8 @@ export const Campaigns = () => {
             field: 'slots',
             headerName: 'Slots',
             maxWidth: 80,
-            valueGetter: (params: ValueGetterParams<ICampaignBattleComposed>) => {
-                const battle = params.data;
+            valueGetter: (parameters: ValueGetterParams<ICampaignBattleComposed>) => {
+                const battle = parameters.data;
                 return battle?.slots ?? 5;
             },
         },
@@ -153,16 +153,16 @@ export const Campaigns = () => {
         },
         {
             headerName: 'Enemies Factions',
-            valueGetter: (params: ValueGetterParams<ICampaignBattleComposed>) => {
-                const battle = params.data;
+            valueGetter: (parameters: ValueGetterParams<ICampaignBattleComposed>) => {
+                const battle = parameters.data;
                 if (battle) {
                     return battle.enemiesFactions.map(x => factionLookup[x].name);
                 }
             },
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
+            cellRenderer: (parameters: ICellRendererParams<ICampaignBattleComposed>) => {
                 return (
                     <ul className="m-0 pl-5">
-                        {(params.value as string[]).map(x => (
+                        {(parameters.value as string[]).map(x => (
                             <li key={x}>{x}</li>
                         ))}
                     </ul>
@@ -171,51 +171,47 @@ export const Campaigns = () => {
         },
         {
             headerName: 'Enemies Types',
-            valueGetter: (params: ValueGetterParams<ICampaignBattleComposed>) => {
-                const battle = params.data;
+            valueGetter: (parameters: ValueGetterParams<ICampaignBattleComposed>) => {
+                const battle = parameters.data;
                 if (battle) {
                     return battle.enemiesTypes;
                 }
             },
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                if (!params.data) {
+            cellRenderer: (parameters: ICellRendererParams<ICampaignBattleComposed>) => {
+                if (!parameters.data) {
                     return <></>;
                 }
-                const battle = params.data;
-                if (battle.detailedEnemyTypes && battle.detailedEnemyTypes.length > 0) {
-                    return (
-                        <center>
-                            <div className="relative">
-                                <CampaignBattleEnemies
-                                    keyPrefix="table"
-                                    battleId={battle.id}
-                                    enemies={battle.rawEnemyTypes ?? []}
-                                    scale={0.2}
-                                    onEnemyClick={() => {}}
-                                />
-                            </div>
-                        </center>
-                    );
-                } else {
-                    return (
-                        <ul className="m-0 pl-5">
-                            {(params.value as string[]).map(x => (
-                                <li key={x}>{x}</li>
-                            ))}
-                        </ul>
-                    );
-                }
+                const battle = parameters.data;
+                return battle.detailedEnemyTypes && battle.detailedEnemyTypes.length > 0 ? (
+                    <center>
+                        <div className="relative">
+                            <CampaignBattleEnemies
+                                keyPrefix="table"
+                                battleId={battle.id}
+                                enemies={battle.rawEnemyTypes ?? []}
+                                scale={0.2}
+                                onEnemyClick={() => {}}
+                            />
+                        </div>
+                    </center>
+                ) : (
+                    <ul className="m-0 pl-5">
+                        {(parameters.value as string[]).map(x => (
+                            <li key={x}>{x}</li>
+                        ))}
+                    </ul>
+                );
             },
         },
     ]);
 
     const [campaign, setCampaign] = useQueryState(
         'campaign',
-        initQueryParam => initQueryParam ?? Campaign.I,
+        initQueryParameter => initQueryParameter ?? Campaign.I,
         value => value.toString()
     );
 
-    const campaignsOptions = useMemo(() => Object.keys(CampaignsService.campaignsGrouped).sort(), []);
+    const campaignsOptions = useMemo(() => Object.keys(CampaignsService.campaignsGrouped).toSorted(), []);
 
     const rows = useMemo(() => CampaignsService.campaignsGrouped[campaign], [campaign]);
 
@@ -266,7 +262,7 @@ export const Campaigns = () => {
                     }
                 />
 
-                {!!threeSlotsNodes.length && (
+                {threeSlotsNodes.length > 0 && (
                     <div className="flex-box gap10 wrap">
                         <span className="font-bold"> 3 Slots nodes:</span>
                         {threeSlotsNodes.map(x => (
@@ -280,7 +276,7 @@ export const Campaigns = () => {
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}
-                        ref={gridRef}
+                        ref={gridReference}
                         suppressCellFocus={true}
                         defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
                         columnDefs={isMobile ? mobileColumnDefs : columnDefs}

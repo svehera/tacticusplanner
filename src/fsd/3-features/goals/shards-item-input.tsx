@@ -13,12 +13,12 @@ import { IItemRaidLocation, IShardsRaid } from '@/fsd/3-features/goals/goals.mod
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RaidItemInput } from '@/fsd/3-features/goals/raid-item-input';
 
-interface Props {
+interface Properties {
     shardsRaid: IShardsRaid;
     handleAdd: (shardId: string, value: number, location: IItemRaidLocation) => void;
 }
 
-export const ShardsItemInput: React.FC<Props> = ({ shardsRaid, handleAdd }) => {
+export const ShardsItemInput: React.FC<Properties> = ({ shardsRaid, handleAdd }) => {
     const isAllRaidsCompleted = shardsRaid.locations.every(location => location.isCompleted);
 
     const handleAddCount = (value: number, location: IItemRaidLocation) => {
@@ -30,8 +30,8 @@ export const ShardsItemInput: React.FC<Props> = ({ shardsRaid, handleAdd }) => {
 
     const isMythic = shardsRaid.requiredCount === 0 && shardsRaid.requiredMythicCount > 0;
 
-    const acquired = !isMythic ? shardsRaid.acquiredCount : shardsRaid.acquiredMythicCount;
-    const required = !isMythic ? shardsRaid.requiredCount : shardsRaid.requiredMythicCount;
+    const acquired = isMythic ? shardsRaid.acquiredMythicCount : shardsRaid.acquiredCount;
+    const required = isMythic ? shardsRaid.requiredMythicCount : shardsRaid.requiredCount;
 
     return (
         <div className="flex-box" style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>

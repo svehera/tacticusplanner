@@ -2,11 +2,11 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
+import { TodayRaids } from '@/routes/tables/today-raids';
 import { ICampaignsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { RaidsPlan } from 'src/routes/tables/raids-plan';
-import { TodayRaids } from 'src/routes/tables/todayRaids';
 
 import { useAuth } from '@/fsd/5-shared/model';
 
@@ -19,7 +19,7 @@ import { CharacterRaidGoalSelect, IEstimatedUpgrades, IItemRaidLocation } from '
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-sync-with-tacticus';
 
 function addShardsToUpgrades(
     upgrades: Record<string, number>,
@@ -27,14 +27,14 @@ function addShardsToUpgrades(
     mows: IUnit[]
 ): Record<string, number> {
     const newUpgrades = cloneDeep(upgrades);
-    characters.forEach(char => {
+    for (const char of characters) {
         newUpgrades['shards_' + char.snowprintId] = char.shards;
         newUpgrades['mythicShards_' + char.snowprintId] = char.mythicShards;
-    });
-    mows.forEach(mow => {
+    }
+    for (const mow of mows) {
         newUpgrades['shards_' + mow.snowprintId] = mow.shards;
         newUpgrades['mythicShards_' + mow.snowprintId] = mow.mythicShards;
-    });
+    }
     return newUpgrades;
 }
 
@@ -69,11 +69,11 @@ export const DailyRaids = () => {
     const hasSync = !!userInfo.tacticusApiKey;
 
     const location = useLocation();
-    const [searchParams] = useSearchParams();
-    const [charSnowprintId, setCharSnowprintId] = useState<string | null>(searchParams.get('charSnowprintId'));
+    const [searchParameters] = useSearchParams();
+    const [charSnowprintId, setCharSnowprintId] = useState(searchParameters.get('charSnowprintId') ?? undefined);
 
     useEffect(() => {
-        setCharSnowprintId(searchParams.get('charSnowprintId'));
+        setCharSnowprintId(searchParameters.get('charSnowprintId') ?? undefined);
     }, [location]);
 
     const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
@@ -136,7 +136,8 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
-            ...[...upgradeRankOrMowGoals, ...shardsGoals]
+            ...upgradeRankOrMowGoals,
+            ...shardsGoals
         );
     }, [
         dailyRaidsPreferences.dailyEnergy,
@@ -154,7 +155,7 @@ export const DailyRaids = () => {
     const infiniteEstimatedRanks: IEstimatedUpgrades = useMemo(() => {
         return UpgradesService.getUpgradesEstimatedDays(
             {
-                dailyEnergy: 88888888,
+                dailyEnergy: 88_888_888,
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,
@@ -163,7 +164,8 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
-            ...[...upgradeRankOrMowGoals, ...shardsGoals]
+            ...upgradeRankOrMowGoals,
+            ...shardsGoals
         );
     }, [
         dailyRaidsPreferences.dailyEnergy,

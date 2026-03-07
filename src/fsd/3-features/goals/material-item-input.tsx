@@ -11,12 +11,12 @@ import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
 
 import { UpgradesService } from './upgrades.service';
 
-interface Props {
+interface Properties {
     upgradeRaid: IUpgradeRaid;
     isExhausted?: boolean;
 }
 
-export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = false }) => {
+export const MaterialItemInput: React.FC<Properties> = ({ upgradeRaid, isExhausted = false }) => {
     const isShard = UpgradesService.isShard(upgradeRaid.id);
     const isMythicShard = UpgradesService.isMythicShard(upgradeRaid.id);
     const canStillFarm = !isExhausted;

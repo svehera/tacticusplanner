@@ -7,12 +7,12 @@ import { Rarity } from '@/fsd/5-shared/model/enums';
 
 import { MiscIcon } from './misc.icon';
 
-interface Props {
+interface Properties {
     badges: Record<Rarity, number>;
     size?: 'small' | 'medium';
 }
 
-export const ForgeBadgesTotal: React.FC<Props> = ({ badges, size = 'small' }) => {
+export const ForgeBadgesTotal: React.FC<Properties> = ({ badges, size = 'small' }) => {
     const sizePx = size === 'small' ? 25 : 35;
     return (
         <div className="flex-box gap20">

@@ -3,12 +3,12 @@ import React from 'react';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
 
-interface XpGoalProgressBarProps {
+interface XpGoalProgressBarProperties {
     applied: number;
     required: number;
 }
 
-export const XpGoalProgressBar: React.FC<XpGoalProgressBarProps> = ({ applied, required }) => {
+export const XpGoalProgressBar: React.FC<XpGoalProgressBarProperties> = ({ applied, required }) => {
     const percentage = required > 0 ? Math.min(100, Math.round((applied / required) * 100)) : 100;
 
     const barWidth = `${percentage}%`;

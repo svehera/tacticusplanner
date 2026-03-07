@@ -7,7 +7,7 @@ import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 import { RankSelect } from '@/fsd/4-entities/character';
 
-interface Props {
+interface Properties {
     allowedValues: Rank[];
     startingRank: Rank;
     startingPoint5: boolean;
@@ -17,7 +17,7 @@ interface Props {
     onChange: (value: Rank, point5: boolean) => void;
 }
 
-export const RankGoalSelect: React.FC<Props> = ({
+export const RankGoalSelect: React.FC<Properties> = ({
     allowedValues,
     startingRank,
     rank,
@@ -34,8 +34,8 @@ export const RankGoalSelect: React.FC<Props> = ({
     });
 
     useEffect(() => {
-        setForm(curr => ({
-            ...curr,
+        setForm(current => ({
+            ...current,
             startingRank: startingRank && allowedValues.includes(startingRank) ? startingRank! : allowedValues[0],
             rank: rank && allowedValues.includes(rank) ? rank! : allowedValues[0],
         }));
@@ -43,22 +43,22 @@ export const RankGoalSelect: React.FC<Props> = ({
 
     const handleRankChange = (value: number) => {
         onChange(value, form.point5);
-        setForm(curr => ({ ...curr, rank: value }));
+        setForm(current => ({ ...current, rank: value }));
     };
 
     const handlePoint5Change = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange(form.rank, event.target.checked);
-        setForm(curr => ({ ...curr, point5: event.target.checked }));
+        setForm(current => ({ ...current, point5: event.target.checked }));
     };
 
     const handleStartRankChange = (value: number) => {
         onStartChange(value, form.startingPoint5);
-        setForm(curr => ({ ...curr, startingRank: value }));
+        setForm(current => ({ ...current, startingRank: value }));
     };
 
     const handleStartPoint5Change = (event: React.ChangeEvent<HTMLInputElement>) => {
         onStartChange(form.startingRank, event.target.checked);
-        setForm(curr => ({ ...curr, startingPoint5: event.target.checked }));
+        setForm(current => ({ ...current, startingPoint5: event.target.checked }));
     };
 
     return (

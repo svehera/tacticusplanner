@@ -2,7 +2,7 @@
 /* eslint-disable import-x/no-internal-modules */
 import Box from '@mui/material/Box';
 import { sum } from 'lodash';
-import React, { useCallback, useContext, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -46,19 +46,19 @@ export const WhoYouOwn = () => {
         filterBy: viewPreferences.wyoFilter,
         orderBy: viewPreferences.wyoOrder,
     });
-    const [nameFilter, setNameFilter] = useState<string | null>(null);
-    const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
-    const [editedInventory, setEditedInventory] = React.useState<Record<string, number>>({});
-    const [editedMow, setEditedMow] = React.useState<IMow2 | null>(null);
+    const [nameFilter, setNameFilter] = useState<string>();
+    const [editedCharacter, setEditedCharacter] = useState<ICharacter2>();
+    const [editedInventory, setEditedInventory] = useState<Record<string, number>>({});
+    const [editedMow, setEditedMow] = useState<IMow2>();
 
-    const [searchParams] = useSearchParams();
+    const [searchParameters] = useSearchParams();
 
-    const sharedUser = searchParams.get('username');
-    const shareToken = searchParams.get('shareToken');
+    const sharedUser = searchParameters.get('username');
+    const shareToken = searchParameters.get('shareToken');
 
-    const hasShareParams = !!sharedUser && !!shareToken;
+    const hasShareParameters = !!sharedUser && !!shareToken;
 
-    if (hasShareParams) {
+    if (hasShareParameters) {
         navigate((isMobile ? '/mobile' : '') + `/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
         return <></>;
     }
@@ -111,12 +111,12 @@ export const WhoYouOwn = () => {
     const startEditUnit = useCallback((unit: IUnit): void => {
         if (unit.unitType === UnitType.character) {
             setEditedCharacter(unit);
-            setEditedMow(null);
+            setEditedMow(undefined);
         }
 
         if (unit.unitType === UnitType.mow) {
             setEditedMow(unit);
-            setEditedCharacter(null);
+            setEditedCharacter(undefined);
         }
     }, []);
 
@@ -133,8 +133,8 @@ export const WhoYouOwn = () => {
     };
 
     const endEditUnit = useCallback((): void => {
-        setEditedCharacter(null);
-        setEditedMow(null);
+        setEditedCharacter(undefined);
+        setEditedMow(undefined);
     }, []);
 
     return (

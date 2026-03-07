@@ -13,14 +13,14 @@ import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 
-interface Props {
+interface Properties {
     units: IUnit[];
     filterUnits: (filtered: IUnit[]) => void;
     selectedModes: string[];
     updateSelection: (value: string[]) => void;
 }
 
-export const IncursionModes: React.FC<Props> = ({ selectedModes, updateSelection, units, filterUnits }) => {
+export const IncursionModes: React.FC<Properties> = ({ selectedModes, updateSelection, units, filterUnits }) => {
     const [mow, setMow] = useState<string>(() => {
         return selectedModes[0] ?? '';
     });
@@ -60,7 +60,7 @@ export const IncursionModes: React.FC<Props> = ({ selectedModes, updateSelection
                     minWidth={150}
                 />
             </div>
-            {!!allowedUnits.length && <span>Available characters - {allowedUnits.length}</span>}
+            {allowedUnits.length > 0 && <span>Available characters - {allowedUnits.length}</span>}
         </>
     );
 };

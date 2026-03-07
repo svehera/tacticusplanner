@@ -4,12 +4,12 @@ import React from 'react';
 import { Button } from '@/fsd/5-shared/ui/button';
 import { LinkButton } from '@/fsd/5-shared/ui/link';
 
-interface Props {
+interface Properties {
     link: string;
     dismiss: () => void;
 }
 
-export const AddToHomeScreen: React.FC<Props> = ({ link, dismiss }) => {
+export const AddToHomeScreen: React.FC<Properties> = ({ link, dismiss }) => {
     return (
         <div className="align-center block flex w-full items-center justify-center gap-3 bg-[var(--muted)] p-[10px]">
             <div className="align-center flex items-center gap-3">
