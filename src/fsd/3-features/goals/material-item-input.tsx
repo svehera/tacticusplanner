@@ -55,7 +55,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = 
                     />
                 )}
                 <span>
-                    {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}
+                    {Math.floor(upgradeRaid.acquiredCount)}/{upgradeRaid.requiredCount}
                 </span>
             </div>
             <ul className="w-full ps-[15px]">
