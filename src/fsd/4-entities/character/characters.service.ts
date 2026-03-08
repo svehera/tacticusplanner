@@ -28,10 +28,22 @@ const equipmentTypeMapping = {
 
 export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
+    static readonly charactersBySnowprintId: Record<string, ICharacterData> = Object.fromEntries(
+        this.charactersData.map(char => [char.snowprintId!, char])
+    );
+    static readonly charactersById: Record<string, ICharacterData> = Object.fromEntries(
+        this.charactersData.map(char => [char.id, char])
+    );
+    static readonly charactersByShortName: Record<string, ICharacterData> = Object.fromEntries(
+        this.charactersData.map(char => [char.shortName.toLowerCase(), char])
+    );
+    static readonly charactersByFullName: Record<string, ICharacterData> = Object.fromEntries(
+        this.charactersData.map(char => [char.fullName.toLowerCase(), char])
+    );
 
     static readonly lreCharacters: ICharacterData[] = LegendaryEventService.getLegendaryEvents()
         .map(lre => {
-            const character = this.charactersData.find(unit => unit.snowprintId === lre.unitSnowprintId);
+            const character = this.charactersBySnowprintId[lre.unitSnowprintId];
             if (character) return { ...character, lre: this.toILreCharacterStaticData(lre) };
             return character;
         })
@@ -61,8 +73,11 @@ export class CharactersService {
      * @returns An ICharacterData representation, or null.
      */
     public static getUnit(id: string): ICharacterData | undefined {
-        return this.charactersData.find(
-            x => x.id === id || x.snowprintId === id || x.fullName === id || x.shortName === id
+        return (
+            this.charactersBySnowprintId[id] ||
+            this.charactersById[id] ||
+            this.charactersByShortName[id.toLowerCase()] ||
+            this.charactersByFullName[id.toLowerCase()]
         );
     }
 
