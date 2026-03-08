@@ -1,4 +1,13 @@
-﻿import { ArrowForward, DeleteForever, Edit, ArrowUpward, ArrowDownward } from '@mui/icons-material';
+﻿import {
+    ArrowForward,
+    DeleteForever,
+    Edit,
+    ArrowUpward,
+    ArrowDownward,
+    FilterListOff,
+    Block,
+    CheckCircle,
+} from '@mui/icons-material';
 import LinkIcon from '@mui/icons-material/Link';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -59,6 +68,31 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
         return getUnit(unitId)?.rank ?? Rank.Locked;
     };
 
+    const getStatusIcons = (goalEstimate: IGoalEstimate) => {
+        if (!goalEstimate.completed && !goalEstimate.blocked && !!goalEstimate.included) {
+            return <div className="h-[0px]" />;
+        }
+        return (
+            <div>
+                {!!goalEstimate.completed && (
+                    <span className="flex-box gap-[3px]">
+                        <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                    </span>
+                )}
+                {!!goalEstimate.blocked && (
+                    <span className="flex-box gap-[3px]">
+                        <Block fontSize="small" sx={{ color: 'error.main' }} />
+                    </span>
+                )}
+                {!goalEstimate.included && (
+                    <span className="flex-box gap-[3px]">
+                        <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
+                    </span>
+                )}
+            </div>
+        );
+    };
+
     const getGoalInfo = (goal: CharacterRaidGoalSelect, goalEstimate: IGoalEstimate) => {
         switch (goal.type) {
             case PersonalGoalType.Ascend: {
@@ -70,41 +104,45 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 const targetMythicShards = ShardsService.getTargetMythicShards(goal);
                 return (
                     <div>
-                        <div className="flex-box between">
-                            <div className="flex-box gap5">
-                                {!isSameRarity && (
-                                    <>
-                                        <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
-                                        <RarityIcon rarity={goal.rarityEnd} />
-                                        {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
-                                    </>
-                                )}
+                        <div className="flex-box between items-center">
+                            <div className="flex-box column">
+                                <div className="flex-box gap5">
+                                    {!isSameRarity && (
+                                        <>
+                                            <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
+                                            <RarityIcon rarity={goal.rarityEnd} />
+                                            {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
+                                        </>
+                                    )}
 
-                                {isSameRarity && (
-                                    <>
-                                        <StarsIcon stars={goal.starsStart} /> <ArrowForward />
-                                        <StarsIcon stars={goal.starsEnd} />
-                                    </>
-                                )}
+                                    {isSameRarity && (
+                                        <>
+                                            <StarsIcon stars={goal.starsStart} /> <ArrowForward />
+                                            <StarsIcon stars={goal.starsEnd} />
+                                        </>
+                                    )}
+                                </div>
+
+                                <div>
+                                    {targetShards > 0 && (
+                                        <div>
+                                            <b>
+                                                {goal.shards} of {targetShards}
+                                            </b>{' '}
+                                            Shards
+                                        </div>
+                                    )}
+                                    {targetMythicShards > 0 && (
+                                        <div>
+                                            <b>
+                                                {goal.mythicShards} of {targetMythicShards}
+                                            </b>{' '}
+                                            Mythic Shards
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            {targetShards > 0 && (
-                                <div>
-                                    <b>
-                                        {goal.shards} of {targetShards}
-                                    </b>{' '}
-                                    Shards
-                                </div>
-                            )}
-                            {targetMythicShards > 0 && (
-                                <div>
-                                    <b>
-                                        {goal.mythicShards} of {targetMythicShards}
-                                    </b>{' '}
-                                    Mythic Shards
-                                </div>
-                            )}
+                            {getStatusIcons(goalEstimate)}
                         </div>
                     </div>
                 );
@@ -124,6 +162,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     </div>
                                 )}
                             </div>
+                            {getStatusIcons(goalEstimate)}
                         </div>
                         {goalEstimate.xpBooksApplied !== undefined &&
                             goalEstimate.xpBooksRequired !== undefined &&
@@ -150,7 +189,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
                 return (
                     <div>
-                        <div className="flex-box gap10">
+                        <div className="flex-box between gap10">
                             <div className="flex-box column start">
                                 {hasPrimaryGoal && (
                                     <div className="flex-box gap-[3px]">
@@ -173,6 +212,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     ))}
                                 </div>
                             )}
+                            {getStatusIcons(goalEstimate)}
                         </div>
                         {goalEstimate.mowEstimate && (
                             <div className="px-0 py-2.5">
@@ -238,6 +278,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 </b>{' '}
                                 Shards
                             </div>
+                            {getStatusIcons(goalEstimate)}
                         </div>
                     </div>
                 );

@@ -3,7 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade';
@@ -30,6 +30,11 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows }) => {
             cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {
                 const { data } = params;
                 if (data) {
+                    if (data.rarity === 'Shard') {
+                        return <MiscIcon icon="shard" height={26} width={30} />;
+                    } else if (data.rarity === 'Mythic Shard') {
+                        return <MiscIcon icon="mythicShard" height={26} width={30} />;
+                    }
                     return (
                         <UpgradeImage
                             material={data.label}
@@ -53,10 +58,15 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows }) => {
             cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {
                 const { data } = params;
                 if (data) {
+                    if (data.rarity === 'Shard') {
+                        return <MiscIcon icon="shard" height={26} width={30} />;
+                    } else if (data.rarity === 'Mythic Shard') {
+                        return <MiscIcon icon="mythicShard" height={26} width={30} />;
+                    }
                     return <RarityIcon rarity={data.rarity} />;
                 }
             },
-            cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
+            cellClass: params => Rarity[(params.data?.rarity ?? 0) as unknown as Rarity].toLowerCase(),
         },
         {
             headerName: 'Locations',

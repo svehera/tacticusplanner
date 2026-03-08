@@ -1,13 +1,15 @@
-﻿import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams } from 'ag-grid-community';
+﻿/* eslint-disable boundaries/element-types */
+import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo } from 'react';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib';
-import { RarityMapper } from '@/fsd/5-shared/model';
-import { BadgeImage, ComponentImage, ForgeBadgeImage } from '@/fsd/5-shared/ui/icons';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { BadgeImage, ComponentImage, ForgeBadgeImage, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
+import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
 import { IMowLevelMaterials } from '@/fsd/4-entities/mow';
-import { UpgradeImage } from '@/fsd/4-entities/upgrade';
+import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 interface Props {
     rows: IMowLevelMaterials[];
@@ -78,15 +80,33 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                     if (data) {
                         return (
                             <div className="flex-box gap-[3px]">
-                                {data.primaryUpgrades.map((x, index) => (
-                                    <UpgradeImage
-                                        key={x.id + index}
-                                        material={x.label}
-                                        iconPath={x.iconPath}
-                                        rarity={RarityMapper.rarityToRarityString(x.rarity)}
-                                        size={40}
-                                    />
-                                ))}
+                                {data.primaryUpgrades.map((x, index) => {
+                                    const upgrade = UpgradesService.getUpgrade(x.id);
+                                    if (!upgrade) return <></>;
+                                    if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
+                                        const char = CharactersService.getUnit(x.id.substring(x.id.indexOf('_') + 1));
+                                        if (char) {
+                                            return (
+                                                <UnitShardIcon
+                                                    key={x.id + index}
+                                                    name={x.id}
+                                                    icon={char.roundIcon}
+                                                    mythic={upgrade.rarity === 'Mythic Shard'}
+                                                />
+                                            );
+                                        }
+                                        return <></>;
+                                    }
+                                    return (
+                                        <UpgradeImage
+                                            key={x.id + index}
+                                            material={x.label}
+                                            iconPath={x.iconPath}
+                                            rarity={RarityMapper.rarityToRarityString(x.rarity as unknown as Rarity)}
+                                            size={40}
+                                        />
+                                    );
+                                })}
                             </div>
                         );
                     }
@@ -112,15 +132,33 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                     if (data) {
                         return (
                             <div className="flex-box gap-[3px]">
-                                {data.secondaryUpgrades.map((x, index) => (
-                                    <UpgradeImage
-                                        key={x.id + index}
-                                        material={x.label}
-                                        iconPath={x.iconPath}
-                                        rarity={RarityMapper.rarityToRarityString(x.rarity)}
-                                        size={40}
-                                    />
-                                ))}
+                                {data.secondaryUpgrades.map((x, index) => {
+                                    const upgrade = UpgradesService.getUpgrade(x.id);
+                                    if (!upgrade) return <></>;
+                                    if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
+                                        const char = CharactersService.getUnit(x.id.substring(x.id.indexOf('_') + 1));
+                                        if (char) {
+                                            return (
+                                                <UnitShardIcon
+                                                    key={x.id + index}
+                                                    name={x.id}
+                                                    icon={char.roundIcon}
+                                                    mythic={upgrade.rarity === 'Mythic Shard'}
+                                                />
+                                            );
+                                        }
+                                        return <></>;
+                                    }
+                                    return (
+                                        <UpgradeImage
+                                            key={x.id + index}
+                                            material={x.label}
+                                            iconPath={x.iconPath}
+                                            rarity={RarityMapper.rarityToRarityString(x.rarity as unknown as Rarity)}
+                                            size={40}
+                                        />
+                                    );
+                                })}
                             </div>
                         );
                     }

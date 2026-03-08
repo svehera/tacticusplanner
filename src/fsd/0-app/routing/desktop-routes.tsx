@@ -18,6 +18,7 @@ import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { lreLazyRoute } from '@/fsd/1-pages/plan-lre';
 import { teams2Route } from '@/fsd/1-pages/plan-teams2/teams2.route';
+import { warDefense2Route } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.route';
 import { warOffense2Route } from '@/fsd/1-pages/plan-war-offense2/war-offense2.route';
 import { sharedRosterRoute } from '@/fsd/1-pages/shared-roster/shared-roster.route';
 import { teamsDesktopLazyRoute } from '@/fsd/1-pages/teams/teams.route';
@@ -57,6 +58,7 @@ export const globalPlanRoutes: RouteObject[] = [
         },
     },
     teams2Route,
+    warDefense2Route,
     warOffense2Route,
     guildWarOffenseLazyRoute,
     guildWarDefenseLazyRoute,

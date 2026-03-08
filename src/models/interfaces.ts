@@ -4,6 +4,7 @@ import { GameModeTokensAction } from '@/reducers/game-mode-tokens-reducer';
 import { LeSettingsAction } from '@/reducers/le-settings.reducer';
 import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
 import { Teams2Action } from '@/reducers/teams2.reducer';
+import { WarDefense2Action } from '@/reducers/war-defense2.reducer';
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
 import { XpUseAction } from '@/reducers/xp-use-reducer';
 import { GuildAction } from 'src/reducers/guildReducer';
@@ -36,6 +37,7 @@ import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 import { ITeam2 } from '@/fsd/1-pages/plan-teams2/models';
+import { WarDefense2State } from '@/fsd/1-pages/plan-war-defense-2/models';
 import { WarOffense2State } from '@/fsd/1-pages/plan-war-offense2/models';
 
 import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
@@ -65,6 +67,7 @@ export interface IPersonalData {
     charactersPriorityList: string[];
     goals: IPersonalGoal[];
     teams2: ITeam2[];
+    warDefense2: WarDefense2State;
     warOffense2: WarOffense2State;
     legendaryEvents: ILegendaryEventsData | undefined;
     legendaryEvents3: ILegendaryEventsData3 | undefined;
@@ -88,6 +91,7 @@ export interface IGlobalState {
     goals: IPersonalGoal[];
     teams: IPersonalTeam[];
     teams2: ITeam2[];
+    warDefense2: WarDefense2State;
     warOffense2: WarOffense2State;
     selectedTeamOrder: ISelectedTeamsOrdering;
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
@@ -110,6 +114,7 @@ export interface IDispatchContext {
     mows: React.Dispatch<MowsAction>;
     teams: React.Dispatch<TeamsAction>;
     teams2: React.Dispatch<Teams2Action>;
+    warDefense2: React.Dispatch<WarDefense2Action>;
     warOffense2: React.Dispatch<WarOffense2Action>;
     viewPreferences: React.Dispatch<ViewPreferencesAction>;
     dailyRaidsPreferences: React.Dispatch<DailyRaidsPreferencesAction>;
@@ -146,6 +151,7 @@ export interface IPersonalData2 {
     goals: IPersonalGoal[];
     teams: IPersonalTeam[];
     teams2: ITeam2[];
+    warDefense2: WarDefense2State;
     warOffense2: WarOffense2State;
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
@@ -376,6 +382,7 @@ export interface IEstimatedRanksSettings {
     preferences: IDailyRaidsPreferences;
     filters?: ICampaignsFilters;
     upgrades: Record<string, number>;
+    onslaughtTokensToday?: number;
 }
 
 export interface IInventory {

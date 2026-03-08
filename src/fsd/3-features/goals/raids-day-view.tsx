@@ -29,13 +29,15 @@ export const RaidsDayView: React.FC<Props> = ({ day, title }) => {
             />
             <CardContent>
                 <ul className="list-none p-0">
-                    {day.raids.map((raid, index) => {
-                        return (
-                            <li key={raid.id + index}>
-                                <MaterialItemView upgradeRaid={raid} />
-                            </li>
-                        );
-                    })}
+                    {day.raids
+                        .filter(raid => raid.raidLocations.length > 0)
+                        .map((raid, index) => {
+                            return (
+                                <li key={raid.id + index}>
+                                    <MaterialItemView upgradeRaid={raid} />
+                                </li>
+                            );
+                        })}
                 </ul>
             </CardContent>
         </Card>

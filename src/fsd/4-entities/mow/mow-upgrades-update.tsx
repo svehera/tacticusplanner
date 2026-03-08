@@ -3,7 +3,7 @@ import { Checkbox, FormControlLabel, Popover } from '@mui/material';
 import Button from '@mui/material/Button';
 import React, { useEffect, useMemo } from 'react';
 
-import { Alliance, RarityMapper } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 import { UpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade/@x/mow';
 
@@ -105,11 +105,13 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                     <ul className="p-0">
                         {inventoryUpgrades.map((x, index) => (
                             <li key={x.id + index} className="flex list-none items-center gap-2.5 pb-2.5">
-                                <UpgradeImage
-                                    material={x.label}
-                                    iconPath={x.iconPath}
-                                    rarity={RarityMapper.rarityToRarityString(x.rarity)}
-                                />{' '}
+                                {x.rarity in Rarity && (
+                                    <UpgradeImage
+                                        material={x.label}
+                                        iconPath={x.iconPath}
+                                        rarity={RarityMapper.rarityToRarityString(x.rarity as unknown as Rarity)}
+                                    />
+                                )}{' '}
                                 {inventory[x.id] ?? 0} - {inventoryUpdate[x.id]} ={' '}
                                 {(inventory[x.id] ?? 0) - inventoryUpdate[x.id] < 0
                                     ? 0

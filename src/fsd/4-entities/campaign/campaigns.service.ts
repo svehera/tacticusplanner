@@ -3,14 +3,21 @@ import { groupBy, orderBy, sortBy, uniq } from 'lodash';
 // eslint-disable-next-line import-x/no-internal-modules
 import factionData from '@/data/factions.json';
 
-import { Alliance, FactionId, Rarity } from '@/fsd/5-shared/model';
+import { Alliance, FactionId, Rarity, RarityString } from '@/fsd/5-shared/model';
 
 import { recipeDataByName } from '@/fsd/4-entities/upgrade/@x/campaign';
 
 import { campaignsList } from './campaigns.constants';
 import { battleData, campaignConfigs } from './data';
 import { Campaign, CampaignReleaseType, CampaignType } from './enums';
-import { ICampaignBattle, ICampaignBattleComposed, ICampaignsProgress, ICampaignsFilters, IDropRate } from './model';
+import {
+    ICampaignBattle,
+    ICampaignBattleComposed,
+    ICampaignsProgress,
+    ICampaignsFilters,
+    IDropRate,
+    IRewards,
+} from './model';
 
 export class CampaignsService {
     public static readonly rawBattleData = battleData;
@@ -29,7 +36,7 @@ export class CampaignsService {
     /**
      * @returns for each upgrade, a list of all nodes from which it can be
      *          farmed. The key is the material ID or, for character shards,
-     *          the character name (e.g. "Aleph-Null").
+     *          the character ID (e.g. "ultraTitus").
      *          The map value is ICampaignBattle.shortName (e.g. SHME31 for
      *          Saim-Hann Mirror Elite 31).
      */
@@ -71,18 +78,26 @@ export class CampaignsService {
      * @returns the upgrade material rewarded for winning this battle, or an empty string if
      * none exists.
      */
-    public static getReward(battle: ICampaignBattle): string {
+    public static getRepeatableReward(rewards: IRewards): string {
         // Elite battles give a guaranteed material, so return that.
-        for (const reward of battle.rewards.guaranteed) {
+        for (const reward of rewards.guaranteed) {
             if (reward.id === 'gold') continue;
             return reward.id;
         }
         // Otherwise, return the first potential reward that is not gold.
-        for (const reward of battle.rewards.potential) {
+        for (const reward of rewards.potential) {
             if (reward.id === 'gold') continue;
             return reward.id;
         }
         return '';
+    }
+
+    /**
+     * @returns the upgrade material rewarded for winning this battle, or an empty string if
+     * none exists.
+     */
+    public static getReward(battle: ICampaignBattle): string {
+        return this.getRepeatableReward(battle.rewards);
     }
 
     /**
@@ -136,6 +151,16 @@ export class CampaignsService {
             }
             const energyPerDay = config.dailyBattleCount * battle.energyCost;
             const itemsPerDay = energyPerDay / energyPerItem;
+            const rarity = reward.startsWith('shards_')
+                ? 'Shard'
+                : reward.startsWith('mythicShards_')
+                  ? 'Mythic Shard'
+                  : RarityString[recipe?.rarity as keyof typeof Rarity];
+            const rarityEnum = reward.startsWith('shards_')
+                ? 'Shard'
+                : reward.startsWith('mythicShards_')
+                  ? 'Mythic Shard'
+                  : Rarity[recipe?.rarity as keyof typeof Rarity];
 
             result[battleDataKey] = {
                 id: battle.campaign + battle.nodeNumber,
@@ -148,8 +173,8 @@ export class CampaignsService {
                 itemsPerDay,
                 energyPerDay,
                 nodeNumber: battle.nodeNumber,
-                rarity: recipe?.rarity,
-                rarityEnum: Rarity[recipe?.rarity as unknown as number] as unknown as Rarity,
+                rarity: rarity,
+                rarityEnum: rarityEnum,
                 rewards: battle.rewards,
                 slots: battle.slots,
                 enemiesAlliances: (battle.enemiesAlliances ?? [enemies.alliance]) as Alliance[],
@@ -201,7 +226,7 @@ export class CampaignsService {
     public static passLocationFilter(
         location: ICampaignBattleComposed,
         filters: ICampaignsFilters,
-        materialRarity?: Rarity
+        materialRarity?: Rarity | 'Shard' | 'Mythic Shard'
     ): boolean {
         const {
             alliesFactions,

@@ -1,7 +1,7 @@
 ﻿import { Checkbox, FormControlLabel } from '@mui/material';
 import React from 'react';
 
-import { RarityMapper } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 import { IBaseUpgrade, ICraftedUpgrade } from './model';
 import { UpgradeImage } from './upgrade-image';
@@ -24,11 +24,13 @@ export const UpgradeControl: React.FC<Props> = ({ upgrade, checked, checkedChang
             }
             label={
                 <div className="flex items-center gap-2.5" style={{ opacity: checked ? 1 : 0.5 }}>
-                    <UpgradeImage
-                        material={upgrade.label}
-                        iconPath={upgrade.iconPath}
-                        rarity={RarityMapper.rarityToRarityString(upgrade.rarity)}
-                    />
+                    {upgrade.rarity in Rarity && (
+                        <UpgradeImage
+                            material={upgrade.label}
+                            iconPath={upgrade.iconPath}
+                            rarity={RarityMapper.rarityToRarityString(upgrade.rarity as unknown as Rarity)}
+                        />
+                    )}
                 </div>
             }
         />

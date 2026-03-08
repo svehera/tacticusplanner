@@ -1,82 +1,78 @@
-﻿import Button from '@mui/material/Button';
+﻿/* eslint-disable import-x/no-internal-modules */
 import React from 'react';
 
-import { RarityMapper } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { IUpgradeRaid, IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { RaidItemInput } from '@/fsd/3-features/goals/raid-item-input';
+import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
+
+import { UpgradesService } from './upgrades.service';
 
 interface Props {
-    acquiredCount: number;
     upgradeRaid: IUpgradeRaid;
-    addCount: (count: number, location: IItemRaidLocation) => void;
-    increment: () => void;
-    decrement: () => void;
+    isExhausted?: boolean;
 }
 
-export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount, addCount, increment, decrement }) => {
-    const isAllRaidsCompleted = upgradeRaid.raidLocations.every(location => location.isCompleted);
+export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = false }) => {
+    const isShard = UpgradesService.isShard(upgradeRaid.id);
+    const isMythicShard = UpgradesService.isMythicShard(upgradeRaid.id);
+    const canStillFarm = !isExhausted;
 
     return (
-        <div className="flex-box between" style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
+        <div className="flex-box between" style={{ opacity: canStillFarm ? 1 : 0.5 }}>
             <div className="flex-box column">
-                <UpgradeImage
-                    material={upgradeRaid.label}
-                    iconPath={upgradeRaid.iconPath}
-                    rarity={RarityMapper.rarityToRarityString(upgradeRaid.rarity)}
-                    tooltip={
-                        <div>
-                            {upgradeRaid.label}
-                            <ul className="ps-[15px]">
-                                {upgradeRaid.relatedCharacters.map(x => (
-                                    <li key={x}>{x}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    }
-                />
+                {isShard && <UnitShardIcon icon={upgradeRaid.iconPath} mythic={false} />}
+
+                {isMythicShard && <UnitShardIcon icon={upgradeRaid.iconPath} mythic={true} />}
+                {UpgradesService.isMaterial(upgradeRaid.id) && (
+                    <UpgradeImage
+                        material={upgradeRaid.label}
+                        iconPath={upgradeRaid.iconPath}
+                        rarity={RarityMapper.rarityToRarityString(upgradeRaid.rarity as unknown as Rarity)}
+                        tooltip={
+                            <div>
+                                {upgradeRaid.label}
+                                <ul className="ps-[15px]">
+                                    {upgradeRaid.relatedCharacters.map(x => (
+                                        <li
+                                            key={
+                                                'material-item-input-' +
+                                                upgradeRaid.id +
+                                                '-' +
+                                                upgradeRaid.raidLocations.map(loc => loc.id).join(',') +
+                                                '-' +
+                                                x
+                                            }>
+                                            {x}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        }
+                    />
+                )}
                 <span>
                     {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}
                 </span>
-                <div className="flex-box">
-                    <Button size="small" className="w-[30px] !min-w-0" onClick={decrement}>
-                        -
-                    </Button>
-                    <Button size="small" className="w-[30px] !min-w-0" onClick={increment}>
-                        +
-                    </Button>
-                </div>
             </div>
             <ul className="w-full ps-[15px]">
                 {upgradeRaid.raidLocations.map(location => {
-                    const maxObtained = Math.round(location.farmedItems);
-                    const defaultItemsObtained = Math.max(
-                        maxObtained + acquiredCount > upgradeRaid.requiredCount
-                            ? upgradeRaid.requiredCount - acquiredCount
-                            : maxObtained,
-                        0
-                    );
-
                     return (
                         <li
-                            key={location.id}
+                            key={
+                                'material-item-input-' +
+                                upgradeRaid.relatedGoals.join(',') +
+                                '-' +
+                                upgradeRaid.id +
+                                '-' +
+                                location.id
+                            }
                             className="flex-box between"
                             style={{ opacity: location.isCompleted ? 0.5 : 1 }}>
                             <CampaignLocation location={location} unlocked={true} />
-                            <RaidItemInput
-                                defaultItemsObtained={defaultItemsObtained}
-                                isDisabled={location.isCompleted || upgradeRaid.isBlocked}
-                                addCount={value => {
-                                    addCount(value, location);
-                                }}
-                            />
                         </li>
                     );
                 })}
