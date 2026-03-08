@@ -143,19 +143,26 @@ export const GoalCard: React.FC<Props> = ({
                             )}
 
                             {!!goalEstimate.completed && (
-                                <span className="flex-box gap-[3px]">
-                                    <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
-                                </span>
+                                <AccessibleTooltip title={`Goal is completed in current estimation.`}>
+                                    <span className="flex-box gap-[3px]">
+                                        <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                                    </span>
+                                </AccessibleTooltip>
                             )}
                             {!!goalEstimate.blocked && (
-                                <span className="flex-box gap-[3px]">
-                                    <Block fontSize="small" sx={{ color: 'error.main' }} />
-                                </span>
+                                <AccessibleTooltip
+                                    title={`Goal is blocked because required farm nodes are not accessible. See Campaign Progression section for details.`}>
+                                    <span className="flex-box gap-[3px]">
+                                        <Block fontSize="small" sx={{ color: 'error.main' }} />
+                                    </span>
+                                </AccessibleTooltip>
                             )}
                             {!goalEstimate.included && (
-                                <span className="flex-box gap-[3px]">
-                                    <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
-                                </span>
+                                <AccessibleTooltip title={`Goal is excluded from current estimation.`}>
+                                    <span className="flex-box gap-[3px]">
+                                        <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
+                                    </span>
+                                </AccessibleTooltip>
                             )}
                         </div>
                     </div>
@@ -199,19 +206,26 @@ export const GoalCard: React.FC<Props> = ({
                                 </>
                             )}
                             {!!goalEstimate.completed && (
-                                <span className="flex-box gap-[3px]">
-                                    <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
-                                </span>
+                                <AccessibleTooltip title={`Goal is completed in current estimation.`}>
+                                    <span className="flex-box gap-[3px]">
+                                        <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                                    </span>
+                                </AccessibleTooltip>
                             )}
                             {!!goalEstimate.blocked && (
-                                <span className="flex-box gap-[3px]">
-                                    <Block fontSize="small" sx={{ color: 'error.main' }} />
-                                </span>
+                                <AccessibleTooltip
+                                    title={`Goal is blocked because required farm nodes are not accessible. See Campaign Progression section for details.`}>
+                                    <span className="flex-box gap-[3px]">
+                                        <Block fontSize="small" sx={{ color: 'error.main' }} />
+                                    </span>
+                                </AccessibleTooltip>
                             )}
                             {!goalEstimate.included && (
-                                <span className="flex-box gap-[3px]">
-                                    <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
-                                </span>
+                                <AccessibleTooltip title={`Goal is excluded from current estimation.`}>
+                                    <span className="flex-box gap-[3px]">
+                                        <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
+                                    </span>
+                                </AccessibleTooltip>
                             )}
                         </div>
                         {(goalEstimate.xpDaysLeft !== undefined ||
@@ -408,14 +422,19 @@ export const GoalCard: React.FC<Props> = ({
                                         </div>
                                     </AccessibleTooltip>
                                     {!!goalEstimate.completed && (
-                                        <span className="flex-box gap-[3px]">
-                                            <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
-                                        </span>
+                                        <AccessibleTooltip title={`Goal is completed in current estimation.`}>
+                                            <span className="flex-box gap-[3px]">
+                                                <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                                            </span>
+                                        </AccessibleTooltip>
                                     )}
                                     {!!goalEstimate.blocked && (
-                                        <span className="flex-box gap-[3px]">
-                                            <Block fontSize="small" sx={{ color: 'error.main' }} />
-                                        </span>
+                                        <AccessibleTooltip
+                                            title={`Goal is blocked because required farm nodes are not accessible. See Campaign Progression section for details.`}>
+                                            <span className="flex-box gap-[3px]">
+                                                <Block fontSize="small" sx={{ color: 'error.main' }} />
+                                            </span>
+                                        </AccessibleTooltip>
                                     )}
                                 </>
                             )}

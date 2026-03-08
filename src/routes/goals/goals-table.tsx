@@ -26,6 +26,7 @@ import { Rank, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
@@ -75,19 +76,26 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
         return (
             <div>
                 {!!goalEstimate.completed && (
-                    <span className="flex-box gap-[3px]">
-                        <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
-                    </span>
+                    <AccessibleTooltip title={`Goal is completed in current estimation.`}>
+                        <span className="flex-box gap-[3px]">
+                            <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                        </span>
+                    </AccessibleTooltip>
                 )}
                 {!!goalEstimate.blocked && (
-                    <span className="flex-box gap-[3px]">
-                        <Block fontSize="small" sx={{ color: 'error.main' }} />
-                    </span>
+                    <AccessibleTooltip
+                        title={`Goal is blocked because required farm nodes are not accessible. See Campaign Progression section for details.`}>
+                        <span className="flex-box gap-[3px]">
+                            <Block fontSize="small" sx={{ color: 'error.main' }} />
+                        </span>
+                    </AccessibleTooltip>
                 )}
                 {!goalEstimate.included && (
-                    <span className="flex-box gap-[3px]">
-                        <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
-                    </span>
+                    <AccessibleTooltip title={`Goal is excluded from current estimation.`}>
+                        <span className="flex-box gap-[3px]">
+                            <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
+                        </span>
+                    </AccessibleTooltip>
                 )}
             </div>
         );
