@@ -144,15 +144,15 @@ export const GoalCard: React.FC<Props> = ({
 
                             {!!goalEstimate.completed && (
                                 <AccessibleTooltip title={`Goal is completed in current estimation.`}>
-                                    <span className="flex-box gap-[3px]">
+                                    <span className="flex-box gap-[3px]" tabIndex={0}>
                                         <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
                                     </span>
                                 </AccessibleTooltip>
                             )}
                             {!!goalEstimate.blocked && (
                                 <AccessibleTooltip
-                                    title={`Goal is blocked because required farm nodes are not accessible. See Campaign Progression section for details.`}>
-                                    <span className="flex-box gap-[3px]">
+                                    title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades (in table view) for details.`}>
+                                    <span className="flex-box gap-[3px]" tabIndex={0}>
                                         <Block fontSize="small" sx={{ color: 'error.main' }} />
                                     </span>
                                 </AccessibleTooltip>
@@ -160,7 +160,7 @@ export const GoalCard: React.FC<Props> = ({
                             {!goalEstimate.included && (
                                 <AccessibleTooltip
                                     title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
-                                    <span className="flex-box gap-[3px]">
+                                    <span className="flex-box gap-[3px]" tabIndex={0}>
                                         <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
                                     </span>
                                 </AccessibleTooltip>
@@ -208,15 +208,15 @@ export const GoalCard: React.FC<Props> = ({
                             )}
                             {!!goalEstimate.completed && (
                                 <AccessibleTooltip title={`Goal is completed in current estimation.`}>
-                                    <span className="flex-box gap-[3px]">
+                                    <span className="flex-box gap-[3px]" tabIndex={0}>
                                         <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
                                     </span>
                                 </AccessibleTooltip>
                             )}
                             {!!goalEstimate.blocked && (
                                 <AccessibleTooltip
-                                    title={`Goal is blocked because required farm nodes are not accessible. See Campaign Progression section for details.`}>
-                                    <span className="flex-box gap-[3px]">
+                                    title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades (in table view) for details.`}>
+                                    <span className="flex-box gap-[3px]" tabIndex={0}>
                                         <Block fontSize="small" sx={{ color: 'error.main' }} />
                                     </span>
                                 </AccessibleTooltip>
@@ -224,7 +224,7 @@ export const GoalCard: React.FC<Props> = ({
                             {!goalEstimate.included && (
                                 <AccessibleTooltip
                                     title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
-                                    <span className="flex-box gap-[3px]">
+                                    <span className="flex-box gap-[3px]" tabIndex={0}>
                                         <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
                                     </span>
                                 </AccessibleTooltip>
@@ -404,7 +404,7 @@ export const GoalCard: React.FC<Props> = ({
                             {!goalEstimate.included && (
                                 <AccessibleTooltip
                                     title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
-                                    <span className="flex-box gap-[3px]">
+                                    <span className="flex-box gap-[3px]" tabIndex={0}>
                                         <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
                                     </span>
                                 </AccessibleTooltip>
@@ -428,15 +428,15 @@ export const GoalCard: React.FC<Props> = ({
                                     </AccessibleTooltip>
                                     {!!goalEstimate.completed && (
                                         <AccessibleTooltip title={`Goal is completed in current estimation.`}>
-                                            <span className="flex-box gap-[3px]">
+                                            <span className="flex-box gap-[3px]" tabIndex={0}>
                                                 <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
                                             </span>
                                         </AccessibleTooltip>
                                     )}
                                     {!!goalEstimate.blocked && (
                                         <AccessibleTooltip
-                                            title={`Goal is blocked because required farm nodes are not accessible. See Campaign Progression section for details.`}>
-                                            <span className="flex-box gap-[3px]">
+                                            title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades (in table view) for details.`}>
+                                            <span className="flex-box gap-[3px]" tabIndex={0}>
                                                 <Block fontSize="small" sx={{ color: 'error.main' }} />
                                             </span>
                                         </AccessibleTooltip>
