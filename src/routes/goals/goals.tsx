@@ -343,7 +343,10 @@ export const Goals = () => {
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                     bgColor={GoalService.getBackgroundColor(
                                         viewPreferences.goalColorMode,
-                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
+                                        getAggregatedGoalEstimateForRankOrMow(
+                                            goal.goalId,
+                                            adjustedGoalsEstimates.goalEstimates
+                                        )
                                     )}
                                 />
                             ))}

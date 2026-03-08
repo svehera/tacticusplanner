@@ -68,7 +68,7 @@ export interface ICharacterAbilitiesMaterialsTotal {
     badges: Record<Rarity, number>;
 }
 
-export interface ICharacterAscendOrbsMaterialsTotal {
+export interface ICharacterAscendOrbsTotal {
     alliance: Alliance;
     orbs: Record<Rarity, number>;
 }

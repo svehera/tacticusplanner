@@ -6,7 +6,8 @@ interface UpgradeStep {
     cost: number;
     orbType: Rarity;
 }
-
+//This service calculates the total orbs needed to ascend a unit from one rarity/star level to another,
+//based on the defined upgrade path and costs.
 export class OrbAscensionCalculator {
     private static readonly UPGRADE_PATH: Record<string, UpgradeStep> = {
         [Rarity.Common + ':' + RarityStars.None]: {
@@ -130,7 +131,7 @@ export class OrbAscensionCalculator {
             orbType: Rarity.Mythic,
         },
     };
-
+    // Retrieves the next upgrade step based on the current rarity and stars, ensuring that the path is valid and prevents infinite loops.
     private static _getNextStep(rarity: Rarity, stars: RarityStars): UpgradeStep | undefined {
         const key = `${rarity}:${stars}`;
         const step = OrbAscensionCalculator.UPGRADE_PATH[key];
@@ -160,8 +161,9 @@ export class OrbAscensionCalculator {
             [Rarity.Mythic]: 0,
         };
     }
-
-    public static calculate(
+    // Calculates the total orbs needed to ascend a unit from one rarity/star level to another,
+    // by iterating through the upgrade path and summing the costs until the target is reached.
+    public static calculateOrbs(
         startRarity: Rarity,
         startStars: RarityStars,
         endRarity: Rarity,

@@ -164,7 +164,7 @@ export class GoalsService {
             }
             if (goal.type === PersonalGoalType.Ascend) {
                 const ascendGoal = goal as ICharacterAscendGoal;
-                const orbs = OrbAscensionCalculator.calculate(
+                const orbs = OrbAscensionCalculator.calculateOrbs(
                     ascendGoal.rarityStart,
                     ascendGoal.starsStart,
                     ascendGoal.rarityEnd,
@@ -879,6 +879,13 @@ export class GoalsService {
                     upgradeRankOrMowGoals,
                     ascendGoals
                 );
+                if (
+                    goal.completed &&
+                    goal.orbsEstimate &&
+                    Object.values(goal.orbsEstimate.orbs).some(count => count > 0)
+                ) {
+                    goal.completed = false;
+                }
             }
         } catch (error) {
             console.error('Error adjusting goal estimates:', error);

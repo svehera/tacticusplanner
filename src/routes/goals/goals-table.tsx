@@ -33,7 +33,6 @@ import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
 import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
-import { filterZeroValues } from '@/fsd/3-features/characters/components/orbs-total-utils';
 import {
     CharacterRaidGoalSelect,
     ICharacterUpgradeMow,
@@ -153,7 +152,9 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                         size={25}
                                         alliance={goalEstimate.orbsEstimate.alliance}
                                         orbs={goalEstimate.orbsEstimate.orbs}
-                                        displayOrbs={filterZeroValues(goalEstimate.orbsEstimate.orbs)}
+                                        displayOrbs={Object.fromEntries(
+                                            Object.entries(goalEstimate.orbsEstimate.orbs).filter(([, v]) => v > 0)
+                                        )}
                                     />
                                 </div>
                             )}

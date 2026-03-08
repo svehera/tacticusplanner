@@ -21,7 +21,7 @@ import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
 import {
     ICharacterAbilitiesMaterialsTotal,
-    ICharacterAscendOrbsMaterialsTotal,
+    ICharacterAscendOrbsTotal,
     IXpEstimate,
 } from '@/fsd/3-features/characters/characters.models';
 
@@ -89,7 +89,7 @@ export interface IGoalEstimate {
     xpEstimateAbilities?: IXpEstimate;
     mowEstimate?: IMowMaterialsTotal;
     abilitiesEstimate?: ICharacterAbilitiesMaterialsTotal;
-    orbsEstimate?: ICharacterAscendOrbsMaterialsTotal;
+    orbsEstimate?: ICharacterAscendOrbsTotal;
     xpBooksApplied?: number;
     xpBooksRequired?: number;
 
