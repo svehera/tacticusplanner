@@ -158,7 +158,8 @@ export const GoalCard: React.FC<Props> = ({
                                 </AccessibleTooltip>
                             )}
                             {!goalEstimate.included && (
-                                <AccessibleTooltip title={`Goal is excluded from current estimation.`}>
+                                <AccessibleTooltip
+                                    title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
                                     <span className="flex-box gap-[3px]">
                                         <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
                                     </span>
@@ -221,7 +222,8 @@ export const GoalCard: React.FC<Props> = ({
                                 </AccessibleTooltip>
                             )}
                             {!goalEstimate.included && (
-                                <AccessibleTooltip title={`Goal is excluded from current estimation.`}>
+                                <AccessibleTooltip
+                                    title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
                                     <span className="flex-box gap-[3px]">
                                         <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
                                     </span>
