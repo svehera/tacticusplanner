@@ -84,7 +84,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 )}
                 {!!goalEstimate.blocked && (
                     <AccessibleTooltip
-                        title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades (in table view) for details.`}>
+                        title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.`}>
                         <span className="flex-box gap-[3px]" tabIndex={0}>
                             <Block fontSize="small" sx={{ color: 'error.main' }} />
                         </span>

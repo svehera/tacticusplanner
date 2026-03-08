@@ -110,13 +110,26 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
             </div>
 
             <div className="border-t border-gray-800 pt-2">
-                <h4 className="mb-1 text-xs font-semibold text-gray-400 uppercase">Suggested Raids</h4>
                 <div className="flex flex-wrap gap-2">
-                    {locations
-                        .filter(x => x.isSuggested && x.isUnlocked)
-                        .map(loc => (
-                            <CampaignLocation key={loc.id} location={loc} short={true} unlocked={true} />
-                        ))}
+                    {(() => {
+                        const suggested = locations.filter(x => x.isSuggested && x.isUnlocked);
+                        const displayLocations = suggested.length > 0 ? suggested : locations;
+                        return (
+                            <>
+                                <h4 className="mb-1 w-full text-xs font-semibold text-gray-400 uppercase">
+                                    {suggested.length > 0 ? 'Suggested Raids' : 'Nodes to unlock'}
+                                </h4>
+                                {displayLocations.map(loc => (
+                                    <CampaignLocation
+                                        key={loc.id}
+                                        location={loc}
+                                        short={true}
+                                        unlocked={suggested.length > 0}
+                                    />
+                                ))}
+                            </>
+                        );
+                    })()}
                 </div>
             </div>
         </div>
