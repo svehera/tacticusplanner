@@ -402,9 +402,12 @@ export const GoalCard: React.FC<Props> = ({
                         </div>
                         <div className="flex-box gap10 wrap">
                             {!goalEstimate.included && (
-                                <span className="flex-box gap-[3px]">
-                                    <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
-                                </span>
+                                <AccessibleTooltip
+                                    title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
+                                    <span className="flex-box gap-[3px]">
+                                        <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
+                                    </span>
+                                </AccessibleTooltip>
                             )}
                             {!goalEstimate.daysLeft && !goalEstimate.energyTotal && (
                                 <div>{StaticDataService.getFactionPray(goal.faction)}</div>
