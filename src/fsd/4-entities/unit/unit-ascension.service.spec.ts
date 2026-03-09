@@ -107,6 +107,73 @@ describe('OrbAscensionCalculator', () => {
         });
     });
 
+    it('should calculate orbs for a single star Legendary promotion with a cost', () => {
+        const result = OrbAscensionCalculator.calculateOrbs(
+            Rarity.Legendary,
+            RarityStars.RedFourStars,
+            Rarity.Legendary,
+            RarityStars.RedFiveStars
+        );
+        expect(result).toEqual({
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 15,
+            [Rarity.Mythic]: 0,
+        });
+    });
+
+    it('should calculate orbs for a multi star Legendary promotion with a cost', () => {
+        const result = OrbAscensionCalculator.calculateOrbs(
+            Rarity.Legendary,
+            RarityStars.RedThreeStars,
+            Rarity.Legendary,
+            RarityStars.OneBlueStar
+        );
+        expect(result).toEqual({
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 45,
+            [Rarity.Mythic]: 0,
+        });
+    });
+
+    it('should calculate orbs for a single star Mythical promotion with a cost', () => {
+        const result = OrbAscensionCalculator.calculateOrbs(
+            Rarity.Mythic,
+            RarityStars.OneBlueStar,
+            Rarity.Mythic,
+            RarityStars.TwoBlueStars
+        );
+        expect(result).toEqual({
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 0,
+            [Rarity.Mythic]: 10,
+        });
+    });
+
+    it('should calculate orbs for a multi star Mythical promotion with a cost', () => {
+        const result = OrbAscensionCalculator.calculateOrbs(
+            Rarity.Mythic,
+            RarityStars.OneBlueStar,
+            Rarity.Mythic,
+            RarityStars.MythicWings
+        );
+        expect(result).toEqual({
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 0,
+            [Rarity.Mythic]: 50,
+        });
+    });
     it('should calculate orbs to the maximum level', () => {
         const result = OrbAscensionCalculator.calculateOrbs(
             Rarity.Common,
@@ -131,14 +198,20 @@ describe('OrbAscensionCalculator', () => {
             const rarity = args[0] as Rarity;
             const stars = args[1] as RarityStars;
 
-            // Simulate a break in the path
+            /**
+             *  Simulate a break in the path
+             */
             if (rarity === Rarity.Rare && stars === RarityStars.RedOneStar) {
                 return undefined;
             }
 
-            // For other steps needed by the test, perform the original logic
+            /**
+             *  For other steps needed by the test, perform the original logic
+             */
             const key = `${rarity}:${stars}`;
-            // We can access the static private property for the test
+            /**
+             * We can access the static private property for the test
+             */
             const step = (OrbAscensionCalculator as any).UPGRADE_PATH[key];
 
             if (!step) {
@@ -150,7 +223,9 @@ describe('OrbAscensionCalculator', () => {
             return step;
         });
 
-        // Let's pick a range that will cross the mocked undefined step
+        /**
+         * Let's pick a range that will cross the mocked undefined step
+         */
         const result = OrbAscensionCalculator.calculateOrbs(
             Rarity.Uncommon,
             RarityStars.FourStars,
@@ -158,9 +233,11 @@ describe('OrbAscensionCalculator', () => {
             RarityStars.RedTwoStars // Target is beyond the break
         );
 
-        // Path: U:4* -> R:4* (10R) -> R:5* (0R) -> R:R1* (0R).
-        // Next step is for R:R1*, which is mocked to be undefined.
-        // Total should be 10 Rare orbs.
+        /**
+         * // Path: U:4* -> R:4* (10R) -> R:5* (0R) -> R:R1* (0R).
+         * // Next step is for R:R1*, which is mocked to be undefined.
+         * // Total should be 10 Rare orbs.
+         */
         expect(result).toEqual({
             [Rarity.Common]: 0,
             [Rarity.Uncommon]: 0,

@@ -257,9 +257,6 @@ export const Goals = () => {
                             </div>
 
                             <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
-                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
-                                    XP Books
-                                </h4>
                                 <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
                             </div>
 

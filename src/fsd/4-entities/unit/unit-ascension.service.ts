@@ -6,8 +6,10 @@ interface UpgradeStep {
     cost: number;
     orbType: Rarity;
 }
-//This service calculates the total orbs needed to ascend a unit from one rarity/star level to another,
-//based on the defined upgrade path and costs.
+/**
+ * This service calculates the total orbs needed to ascend a unit from one rarity/star level to another,
+ * based on the defined upgrade path and costs.
+ */
 export class OrbAscensionCalculator {
     private static readonly UPGRADE_PATH: Record<string, UpgradeStep> = {
         [Rarity.Common + ':' + RarityStars.None]: {
@@ -131,20 +133,29 @@ export class OrbAscensionCalculator {
             orbType: Rarity.Mythic,
         },
     };
-    // Retrieves the next upgrade step based on the current rarity and stars, ensuring that the path is valid and prevents infinite loops.
+    /**
+     * Retrieves the next upgrade step based on the current rarity and stars, ensuring that the path is valid and prevents infinite loops.
+     */
     private static _getNextStep(rarity: Rarity, stars: RarityStars): UpgradeStep | undefined {
         const key = `${rarity}:${stars}`;
         const step = OrbAscensionCalculator.UPGRADE_PATH[key];
 
         if (!step) {
-            // We've reached a state with no further upgrade defined. This typically
-            // happens when the unit is at Mythic Wings or the final star for its
-            // rarity. Instead of throwing, stop processing and return what we have.
-            console.warn(`Reached terminal state in orb path: ${key}. Ending calculation.`);
+            /**
+             * We've reached a state with no further upgrade defined or possible. This typically
+             * happens when the unit is at Mythic Wings or the final star for its
+             * rarity. Instead of throwing, stop processing and return what we have.
+             * console.warn(`Reached terminal state in orb path: ${key}. Ending calculation.`);
+             */
+
             return undefined;
         }
         if (step.nextRarity === rarity && step.nextStars === stars) {
-            console.warn(`Non-progressing orb path step at: ${key}. Ending calculation.`);
+            /**
+             * We've reached an invalid ascention path, Instead of throwing, stop processing and return what we have.
+             * console.warn(`Non-progressing orb path step at: ${key}. Ending calculation.`);
+             */
+
             return undefined;
         }
 
@@ -161,8 +172,10 @@ export class OrbAscensionCalculator {
             [Rarity.Mythic]: 0,
         };
     }
-    // Calculates the total orbs needed to ascend a unit from one rarity/star level to another,
-    // by iterating through the upgrade path and summing the costs until the target is reached.
+    /**
+     * Calculates the total orbs needed to ascend a unit from one rarity/star level to another,
+     * by iterating through the upgrade path and summing the costs until the target is reached.
+     */
     public static calculateOrbs(
         startRarity: Rarity,
         startStars: RarityStars,
@@ -171,7 +184,9 @@ export class OrbAscensionCalculator {
     ): Record<Rarity, number> {
         const totals = OrbAscensionCalculator.createEmptyOrbTotals();
 
-        // If already at or beyond target, no orbs needed
+        /**
+         * If already at or beyond target, no orbs needed
+         */
         if (startRarity > endRarity || (startRarity === endRarity && startStars >= endStars)) {
             return totals;
         }
@@ -179,7 +194,7 @@ export class OrbAscensionCalculator {
         let rarity: Rarity = startRarity;
         let stars: RarityStars = startStars;
 
-        while (!(rarity === endRarity && stars === endStars)) {
+        while (rarity < endRarity || stars < endStars) {
             const step = this._getNextStep(rarity, stars);
 
             if (!step) {
