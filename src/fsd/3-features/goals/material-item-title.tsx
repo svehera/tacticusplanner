@@ -33,7 +33,7 @@ export const MaterialItemTitle: React.FC<Props> = ({ upgradeRaid }) => {
                     />
                 )}
                 <span>
-                    {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}
+                    {Math.floor(upgradeRaid.acquiredCount)}/{upgradeRaid.requiredCount}
                 </span>
             </div>
             {upgradeRaid.isBlocked ? (

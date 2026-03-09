@@ -264,6 +264,7 @@ export const defaultData: IPersonalData2 = {
     mows: [],
     teams: [],
     teams2: [],
+    warDefense2: {},
     warOffense2: { deployedCharacters: [], deployedMows: [] },
     characters: [
         {
