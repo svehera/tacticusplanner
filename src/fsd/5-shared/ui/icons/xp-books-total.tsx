@@ -1,8 +1,9 @@
 /* eslint-disable import-x/no-internal-modules */
 
-import { Badge } from '@mui/material';
+import { Badge, Tooltip } from '@mui/material';
 import React, { useMemo } from 'react';
 
+import { RarityMapper } from '@/fsd/5-shared/model';
 import { Rarity } from '@/fsd/5-shared/model/enums';
 
 import { MiscIcon } from './misc.icon';
@@ -43,9 +44,11 @@ export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
                 const bookName = Rarity[rarity].toLowerCase() + 'Book';
                 return (
                     booksCount > 0 && (
-                        <Badge key={rarity} badgeContent={<b>{booksCount}</b>}>
-                            <MiscIcon icon={bookName} width={sizePx} height={sizePx} />
-                        </Badge>
+                        <Tooltip key={rarity} title={`${RarityMapper.rarityToRarityString(rarity)} XP Books`}>
+                            <Badge badgeContent={<b>{booksCount}</b>}>
+                                <MiscIcon icon={bookName} width={sizePx} height={sizePx} />
+                            </Badge>
+                        </Tooltip>
                     )
                 );
             })}

@@ -1,6 +1,6 @@
 /* eslint-disable import-x/no-internal-modules */
 
-import { Badge } from '@mui/material';
+import { Badge, Tooltip } from '@mui/material';
 import React from 'react';
 
 import { Alliance } from '@/fsd/5-shared/model/enums';
@@ -21,9 +21,11 @@ export const MoWComponentsTotal: React.FC<Props> = ({ components, size = 'small'
                 const componentName = Alliance[alliance].toLowerCase() + 'Component';
                 return (
                     componentsCount >= 0 && (
-                        <Badge key={alliance} badgeContent={<b>{componentsCount}</b>}>
-                            <MiscIcon icon={componentName} width={sizePx} height={sizePx} />
-                        </Badge>
+                        <Tooltip key={alliance} title={`${Alliance[alliance]} Components`}>
+                            <Badge badgeContent={<b>{componentsCount}</b>}>
+                                <MiscIcon icon={componentName} width={sizePx} height={sizePx} />
+                            </Badge>
+                        </Tooltip>
                     )
                 );
             })}

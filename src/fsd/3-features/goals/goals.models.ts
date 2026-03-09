@@ -19,7 +19,11 @@ import {
 } from '@/fsd/4-entities/goal';
 import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
-import { ICharacterAbilitiesMaterialsTotal, IXpEstimate } from '@/fsd/3-features/characters/characters.models';
+import {
+    ICharacterAbilitiesMaterialsTotal,
+    ICharacterAscendOrbsTotal,
+    IXpEstimate,
+} from '@/fsd/3-features/characters/characters.models';
 
 import { IMowMaterialsTotal } from '@/fsd/1-pages/learn-mow/lookup.models';
 
@@ -85,6 +89,7 @@ export interface IGoalEstimate {
     xpEstimateAbilities?: IXpEstimate;
     mowEstimate?: IMowMaterialsTotal;
     abilitiesEstimate?: ICharacterAbilitiesMaterialsTotal;
+    orbsEstimate?: ICharacterAscendOrbsTotal;
     xpBooksApplied?: number;
     xpBooksRequired?: number;
 
