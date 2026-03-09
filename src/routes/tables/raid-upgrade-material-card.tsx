@@ -117,7 +117,7 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
                         return (
                             <>
                                 <h4 className="mb-1 w-full text-xs font-semibold text-gray-400 uppercase">
-                                    {suggested.length > 0 ? 'Suggested Raids' : 'Nodes to unlock'}
+                                    {suggested.length > 0 ? 'Suggested Raids' : 'Blocked Raids'}
                                 </h4>
                                 {displayLocations.map(loc => (
                                     <CampaignLocation
