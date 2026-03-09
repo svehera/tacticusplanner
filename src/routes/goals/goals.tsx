@@ -240,27 +240,27 @@ export const Goals = () => {
             <div className="flex-box gap20 my-2 w-[350px]">
                 <Accordion
                     defaultExpanded={false}
-                    className="border border-[var(--border)] !bg-transparent px-2 !shadow-none hover:!bg-[var(--secondary)]">
+                    className="border border-(--border) bg-transparent! px-2 shadow-none! hover:bg-(--secondary)!">
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-[var(--muted-fg)]" />}
-                        className="min-h-0 rounded-lg !bg-transparent !p-0"
+                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
+                        className="min-h-0 rounded-lg bg-transparent! p-0!"
                         aria-controls="resources-content"
                         id="resources-header">
-                        <span className="text-base font-semibold text-[var(--fg)]">Total Resources Missing</span>
+                        <span className="text-base font-semibold text-(--fg)">Total Resources Missing</span>
                     </AccordionSummary>
 
-                    <AccordionDetails className="!bg-transparent !p-0">
-                        <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-[var(--border)] bg-[var(--overlay)] p-2">
-                            <div className="flex items-center justify-start gap-x-4 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                    <AccordionDetails className="bg-transparent! p-0!">
+                        <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-(--border) bg-(--overlay) p-2">
+                            <div className="flex items-center justify-start gap-x-4 rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <MiscIcon icon={'energy'} height={35} width={35} />{' '}
-                                <b className="text-lg text-[var(--fg)]">{estimatedUpgradesTotal.energyTotal}</b>
+                                <b className="text-lg text-(--fg)">{estimatedUpgradesTotal.energyTotal}</b>
                             </div>
 
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
                             </div>
 
-                            <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="flex flex-col gap-y-2 rounded-md border border-(--border) bg-(--secondary) p-2">
                                 {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                     <div key={alliance} className="flex-box">
                                         <BadgesTotal
@@ -271,7 +271,7 @@ export const Goals = () => {
                                     </div>
                                 ))}
                             </div>
-                            <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="flex flex-col gap-y-2 rounded-md border border-(--border) bg-(--secondary) p-2">
                                 {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                     <div key={alliance} className="flex-box">
                                         <OrbsTotal
@@ -283,11 +283,11 @@ export const Goals = () => {
                                 ))}
                             </div>
 
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
                             </div>
 
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <MoWComponentsTotal
                                     components={adjustedGoalsEstimates.neededComponents}
                                     size={'medium'}
