@@ -127,8 +127,8 @@ export const LeTokenomics: React.FC<Props> = ({
 
     const character = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
     const rank = character?.rank ?? Rank.Locked;
-    const rarity = character?.rarity ?? Rarity.Legendary;
-    const stars = character?.stars ?? RarityStars.None;
+    const rarity = !!character?.rarity && rank !== Rank.Locked ? character.rarity : Rarity.Legendary;
+    const stars = !!character?.stars && rank !== Rank.Locked ? character.stars : RarityStars.None;
 
     const progress = TokenEstimationService.computeCurrentProgress(model, rarity, stars);
 
@@ -178,6 +178,7 @@ export const LeTokenomics: React.FC<Props> = ({
                                     } as ISnapshotCharacter
                                 }
                                 charData={character}
+                                isDisabled={rank === Rank.Locked}
                             />
                         </RosterSnapshotsAssetsProvider>
                     )}
