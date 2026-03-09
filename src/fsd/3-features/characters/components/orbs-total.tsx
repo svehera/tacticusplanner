@@ -21,7 +21,7 @@ export const OrbsTotal: React.FC<Props> = ({ orbs, alliance, size = 35, displayO
             {entries.map(([rarity, count]) => {
                 const rarityNum = Number(rarity) as Rarity;
                 return (
-                    <Tooltip key={rarityNum} title={`${RarityMapper.rarityToRarityString(rarityNum)} Orb`}>
+                    <Tooltip key={rarityNum} title={`${RarityMapper.rarityToRarityString(rarityNum)} Orbs`}>
                         <Badge badgeContent={<b>{count}</b>}>
                             <OrbIcon alliance={alliance} rarity={rarityNum} size={size} />
                         </Badge>

@@ -1,7 +1,7 @@
-import { Badge } from '@mui/material';
+import { Badge, Tooltip } from '@mui/material';
 import React from 'react';
 
-import { Alliance, Rarity } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { BadgeImage } from '@/fsd/5-shared/ui/icons/badge-image';
 
@@ -18,9 +18,11 @@ export const BadgesTotal: React.FC<Props> = ({ badges, alliance, size = 'small' 
                 const badgesCount = badges[rarity];
                 return (
                     badgesCount >= 0 && (
-                        <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
-                            <BadgeImage alliance={alliance} rarity={rarity} size={size} />
-                        </Badge>
+                        <Tooltip key={rarity} title={`${RarityMapper.rarityToRarityString(rarity)} Badges`}>
+                            <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
+                                <BadgeImage alliance={alliance} rarity={rarity} size={size} />
+                            </Badge>
+                        </Tooltip>
                     )
                 );
             })}

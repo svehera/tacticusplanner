@@ -252,9 +252,6 @@ export const Goals = () => {
                     <AccordionDetails className="!bg-transparent !p-0">
                         <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-[var(--border)] bg-[var(--overlay)] p-2">
                             <div className="flex items-center justify-start gap-x-4 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
-                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
-                                    Energy
-                                </h4>
                                 <MiscIcon icon={'energy'} height={35} width={35} />{' '}
                                 <b className="text-lg text-[var(--fg)]">{estimatedUpgradesTotal.energyTotal}</b>
                             </div>

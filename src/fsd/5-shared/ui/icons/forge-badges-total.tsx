@@ -1,8 +1,9 @@
 /* eslint-disable import-x/no-internal-modules */
 
-import { Badge } from '@mui/material';
+import { Badge, Tooltip } from '@mui/material';
 import React from 'react';
 
+import { RarityMapper } from '@/fsd/5-shared/model';
 import { Rarity } from '@/fsd/5-shared/model/enums';
 
 import { MiscIcon } from './misc.icon';
@@ -21,9 +22,11 @@ export const ForgeBadgesTotal: React.FC<Props> = ({ badges, size = 'small' }) =>
                 const badgeName = Rarity[rarity].toLowerCase() + 'ForgeBadge';
                 return (
                     badgesCount >= 0 && (
-                        <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
-                            <MiscIcon icon={badgeName} width={sizePx} height={sizePx} />
-                        </Badge>
+                        <Tooltip key={rarity} title={`${RarityMapper.rarityToRarityString(rarity)} Forge Badges`}>
+                            <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
+                                <MiscIcon icon={badgeName} width={sizePx} height={sizePx} />
+                            </Badge>
+                        </Tooltip>
                     )
                 );
             })}
