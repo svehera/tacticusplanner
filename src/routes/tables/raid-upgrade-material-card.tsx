@@ -124,7 +124,7 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
                                         key={loc.id}
                                         location={loc}
                                         short={true}
-                                        unlocked={suggested.length > 0}
+                                        unlocked={loc.isUnlocked ?? false}
                                     />
                                 ))}
                             </>
