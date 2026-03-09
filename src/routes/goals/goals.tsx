@@ -5,6 +5,7 @@
     Link as LinkIcon,
     TableRows as TableRowsIcon,
 } from '@mui/icons-material';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import { cloneDeep, sum } from 'lodash';
@@ -12,6 +13,7 @@ import { useCallback, useContext, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
+import DailyRaidsSettings from '@/shared-components/daily-raids-settings';
 import { goalsLimit } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GoalCard } from 'src/routes/goals/goal-card';
@@ -195,6 +197,8 @@ export const Goals = () => {
         dispatch.goals({ type: 'DeleteAll' });
     };
 
+    const [openSettings, setOpenSettings] = useState<boolean>(false);
+
     return (
         <div>
             <div className="flex flex-wrap items-center gap-5">
@@ -205,6 +209,12 @@ export const Goals = () => {
                     to={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
                     <LinkIcon /> <span className="pl-[5px]">Go to Raids</span>
                 </Button>
+
+                <Button variant="outlined" size="small" onClick={() => setOpenSettings(true)}>
+                    <SettingsIcon style={{ marginRight: 4 }} /> Raids Settings
+                </Button>
+
+                <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
                 <SetGoalDialog key={goals.length} />
                 {hasSync && <SyncButton showText={!isMobile} />}
                 {}

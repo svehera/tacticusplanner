@@ -37,7 +37,7 @@ export const RaidsHeader: React.FC<Props> = ({
     return (
         <>
             <div className="flex-box between wrap">
-                <div className="flex-box gap10 pb-2.5">
+                <div className="flex flex-wrap items-center gap-5">
                     <Button
                         variant={'contained'}
                         size="small"
@@ -47,7 +47,7 @@ export const RaidsHeader: React.FC<Props> = ({
                     </Button>
 
                     <Button variant="outlined" size="small" onClick={() => setOpenSettings(true)}>
-                        <SettingsIcon />
+                        <SettingsIcon style={{ marginRight: 4 }} /> Raids Settings
                     </Button>
                     <span>
                         <MiscIcon icon={'energy'} height={15} width={15} /> {actualDailyEnergy}
