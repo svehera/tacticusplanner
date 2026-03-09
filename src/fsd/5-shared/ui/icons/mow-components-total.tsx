@@ -22,7 +22,7 @@ export const MoWComponentsTotal: React.FC<Props> = ({ components, size = 'small'
                 return (
                     componentsCount >= 0 && (
                         <Tooltip key={alliance} title={`${Alliance[alliance]} Components`}>
-                            <Badge key={alliance} badgeContent={<b>{componentsCount}</b>}>
+                            <Badge badgeContent={<b>{componentsCount}</b>}>
                                 <MiscIcon icon={componentName} width={sizePx} height={sizePx} />
                             </Badge>
                         </Tooltip>

@@ -45,7 +45,7 @@ export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
                 return (
                     booksCount > 0 && (
                         <Tooltip key={rarity} title={`${RarityMapper.rarityToRarityString(rarity)} XP Books`}>
-                            <Badge key={rarity} badgeContent={<b>{booksCount}</b>}>
+                            <Badge badgeContent={<b>{booksCount}</b>}>
                                 <MiscIcon icon={bookName} width={sizePx} height={sizePx} />
                             </Badge>
                         </Tooltip>

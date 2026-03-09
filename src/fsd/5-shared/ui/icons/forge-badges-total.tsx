@@ -23,7 +23,7 @@ export const ForgeBadgesTotal: React.FC<Props> = ({ badges, size = 'small' }) =>
                 return (
                     badgesCount >= 0 && (
                         <Tooltip key={rarity} title={`${RarityMapper.rarityToRarityString(rarity)} Forge Badges`}>
-                            <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
+                            <Badge badgeContent={<b>{badgesCount}</b>}>
                                 <MiscIcon icon={badgeName} width={sizePx} height={sizePx} />
                             </Badge>
                         </Tooltip>

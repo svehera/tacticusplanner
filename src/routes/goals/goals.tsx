@@ -327,26 +327,26 @@ export const Goals = () => {
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex flex-wrap gap-3">
-                            {upgradeRankOrMowGoals.map(goal => (
-                                <GoalCard
-                                    key={goal.goalId}
-                                    characters={characters}
-                                    mows={resolvedMows}
-                                    goal={goal}
-                                    goalEstimate={getAggregatedGoalEstimateForRankOrMow(
-                                        goal.goalId,
-                                        adjustedGoalsEstimates.goalEstimates
-                                    )}
-                                    menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                    bgColor={GoalService.getBackgroundColor(
-                                        viewPreferences.goalColorMode,
-                                        getAggregatedGoalEstimateForRankOrMow(
-                                            goal.goalId,
-                                            adjustedGoalsEstimates.goalEstimates
-                                        )
-                                    )}
-                                />
-                            ))}
+                            {upgradeRankOrMowGoals.map(goal => {
+                                const aggregatedEstimate = getAggregatedGoalEstimateForRankOrMow(
+                                    goal.goalId,
+                                    adjustedGoalsEstimates.goalEstimates
+                                );
+                                return (
+                                    <GoalCard
+                                        key={goal.goalId}
+                                        characters={characters}
+                                        mows={resolvedMows}
+                                        goal={goal}
+                                        goalEstimate={aggregatedEstimate}
+                                        menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        bgColor={GoalService.getBackgroundColor(
+                                            viewPreferences.goalColorMode,
+                                            aggregatedEstimate
+                                        )}
+                                    />
+                                );
+                            })}
                         </div>
                     )}
 

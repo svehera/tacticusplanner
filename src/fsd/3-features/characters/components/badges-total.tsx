@@ -19,7 +19,7 @@ export const BadgesTotal: React.FC<Props> = ({ badges, alliance, size = 'small' 
                 return (
                     badgesCount >= 0 && (
                         <Tooltip key={rarity} title={`${RarityMapper.rarityToRarityString(rarity)} Badges`}>
-                            <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
+                            <Badge badgeContent={<b>{badgesCount}</b>}>
                                 <BadgeImage alliance={alliance} rarity={rarity} size={size} />
                             </Badge>
                         </Tooltip>

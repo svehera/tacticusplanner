@@ -686,15 +686,16 @@ export class GoalsService {
         if (!goalMowEstimate) {
             return;
         }
-        (Object.keys(goalMowEstimate.forgeBadges) as unknown as Rarity[]).forEach(rarity => {
+        for (const [rarityStr, count] of Object.entries(goalMowEstimate.forgeBadges)) {
+            const rarity = Number(rarityStr) as Rarity;
             goalMowEstimate.forgeBadges[rarity] = this._adjustItemCount(
-                goalMowEstimate.forgeBadges[rarity] ?? 0,
+                count ?? 0,
                 () => heldForgeBadges[rarity] ?? 0,
                 v => (heldForgeBadges[rarity] = v),
                 () => neededForgeBadges[rarity] ?? 0,
                 v => (neededForgeBadges[rarity] = v)
             );
-        });
+        }
     }
 
     private static _adjustMowComponents(
