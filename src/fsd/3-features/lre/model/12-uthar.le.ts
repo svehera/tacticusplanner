@@ -94,7 +94,7 @@ export class UtharLegendaryEvent extends LegendaryEventBase {
                     objectiveType: 'NotTrait',
                     objectiveTarget: 'Psyker',
                     units: filter(noImperial).byTrait(Trait.Psyker, true),
-                    iconId: 'no_psychic',
+                    iconId: 'no_psyker',
                     index: 1,
                 },
                 {
