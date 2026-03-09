@@ -261,10 +261,6 @@ export const Goals = () => {
                             </div>
 
                             <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
-                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
-                                    Ability Badges
-                                </h4>
-
                                 {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                     <div key={alliance} className="flex-box">
                                         <BadgesTotal
@@ -276,10 +272,6 @@ export const Goals = () => {
                                 ))}
                             </div>
                             <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
-                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
-                                    Orbs
-                                </h4>
-
                                 {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                     <div key={alliance} className="flex-box">
                                         <OrbsTotal
@@ -292,16 +284,10 @@ export const Goals = () => {
                             </div>
 
                             <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
-                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
-                                    Forge Badges
-                                </h4>
                                 <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
                             </div>
 
                             <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
-                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
-                                    Components
-                                </h4>
                                 <MoWComponentsTotal
                                     components={adjustedGoalsEstimates.neededComponents}
                                     size={'medium'}
