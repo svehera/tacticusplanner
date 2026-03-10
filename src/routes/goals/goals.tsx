@@ -337,6 +337,7 @@ export const Goals = () => {
                                             viewPreferences.goalColorMode,
                                             aggregatedEstimate
                                         )}
+                                        bookRarity={xpIncome.defaultBookToUse}
                                     />
                                 );
                             })}
@@ -383,6 +384,7 @@ export const Goals = () => {
                                         viewPreferences.goalColorMode,
                                         adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
                                     )}
+                                    bookRarity={xpIncome.defaultBookToUse}
                                 />
                             ))}
                         </div>
@@ -421,6 +423,7 @@ export const Goals = () => {
                                         viewPreferences.goalColorMode,
                                         adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
                                     )}
+                                    bookRarity={xpIncome.defaultBookToUse}
                                 />
                             ))}
                         </div>

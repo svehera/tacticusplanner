@@ -6,7 +6,7 @@ import { ICharacter2 } from '@/models/interfaces';
 
 import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { RaritySelect2 } from '@/fsd/5-shared/ui/rarity-select2';
+import { RaritySelect2 } from '@/fsd/5-shared/ui/selects/rarity-select2';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
 

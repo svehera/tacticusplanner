@@ -14,6 +14,7 @@ import { PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
+import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
@@ -41,6 +42,7 @@ interface Props {
     bgColor: string;
     characters: ICharacter2[];
     mows: IMow2[];
+    bookRarity: Rarity;
 }
 
 export const GoalCard: React.FC<Props> = ({
@@ -50,6 +52,7 @@ export const GoalCard: React.FC<Props> = ({
     bgColor,
     characters,
     mows,
+    bookRarity,
 }: Props) => {
     const goalEstimate: IGoalEstimate = passed ?? {
         daysLeft: 0,
@@ -245,6 +248,7 @@ export const GoalCard: React.FC<Props> = ({
                                         <XpGoalProgressBar
                                             applied={goalEstimate.xpBooksApplied ?? 0}
                                             required={goalEstimate.xpBooksRequired ?? 0}
+                                            bookRarity={bookRarity}
                                         />
                                     )}
                             </div>
@@ -373,6 +377,7 @@ export const GoalCard: React.FC<Props> = ({
                                         <XpGoalProgressBar
                                             applied={goalEstimate.xpBooksApplied}
                                             required={goalEstimate.xpBooksRequired}
+                                            bookRarity={bookRarity}
                                         />
                                     )}
                             </div>

@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model';
 
-import { RarityIcon } from './icons';
+import { RarityIcon } from '../icons';
 
 export const RaritySelect2 = ({
     rarityValues,
