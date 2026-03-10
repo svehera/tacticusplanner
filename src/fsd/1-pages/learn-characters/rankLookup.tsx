@@ -98,7 +98,7 @@ export const RankLookup = () => {
         }> = [];
 
         let currRank = rankStart < Rank.Stone1 ? Rank.Stone1 : rankStart;
-        const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Adamantine1 ? Rank.Adamantine1 : rankEnd;
+        const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Adamantine2 ? Rank.Adamantine1 : rankEnd;
         const upgradesCopy = upgrades.slice();
 
         while (currRank !== endRank) {

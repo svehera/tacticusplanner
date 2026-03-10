@@ -570,7 +570,7 @@
         ]
     },
     "upgArmE040C": {
-        "material": "_upgArmE040C",
+        "material": "Exoarmour Plating",
         "snowprintId": "upgArmE040C",
         "rarity": "Epic",
         "stat": "Armour",
@@ -1098,7 +1098,7 @@
                 "count": 2
             },
             {
-                "material": "upgArmE005C",
+                "material": "upgArmE014C",
                 "count": 1
             }
         ]
@@ -1556,11 +1556,11 @@
                 "count": 9
             },
             {
-                "material": "upgHpR012C",
+                "material": "upgArmR008C",
                 "count": 1
             },
             {
-                "material": "upgArmR015",
+                "material": "upgHpR014",
                 "count": 9
             }
         ]
@@ -3904,11 +3904,11 @@
                 "count": 9
             },
             {
-                "material": "upgDmgR012C",
+                "material": "upgDmgR008C",
                 "count": 1
             },
             {
-                "material": "upgDmgE004",
+                "material": "upgDmgE001",
                 "count": 6
             }
         ]
@@ -4468,7 +4468,7 @@
         "craftable": false
     },
     "upgDmgR040": {
-        "material": "Personel Scanner",
+        "material": "Personal Scanner",
         "snowprintId": "upgDmgR040",
         "rarity": "Rare",
         "stat": "Damage",
@@ -5366,7 +5366,7 @@
         ]
     },
     "upgHpE040C": {
-        "material": "Champion Wavefield Crest",
+        "material": "Champion Weavefield Crest",
         "snowprintId": "upgHpE040C",
         "rarity": "Epic",
         "stat": "Health",
@@ -5375,6 +5375,468 @@
         "recipe": [
             {
                 "material": "upgHpR040",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE120C": {
+        "material": "Symbol of the Ultramarines",
+        "snowprintId": "upgHpE120C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE120C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR005",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR007",
+                "count": 9
+            },
+            {
+                "material": "upgArmR005",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE121C": {
+        "material": "Symbol of the Black Templars",
+        "snowprintId": "upgHpE121C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE121C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR021",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR021",
+                "count": 9
+            },
+            {
+                "material": "upgArmR021",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE122C": {
+        "material": "Symbol of the Adepta Sororitas",
+        "snowprintId": "upgHpE122C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE122C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR022",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR022",
+                "count": 9
+            },
+            {
+                "material": "upgArmR022",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE123C": {
+        "material": "Symbol of the Black Legion",
+        "snowprintId": "upgHpE123C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE123C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR023",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR023",
+                "count": 9
+            },
+            {
+                "material": "upgArmR023",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE124C": {
+        "material": "Symbol of the Death Guard",
+        "snowprintId": "upgHpE124C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE124C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR024",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR024",
+                "count": 9
+            },
+            {
+                "material": "upgArmR023",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE125C": {
+        "material": "Symbol of the Astra Militarum",
+        "snowprintId": "upgHpE125C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE125C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR007",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR025",
+                "count": 9
+            },
+            {
+                "material": "upgArmR025",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE126C": {
+        "material": "Symbol of the Orks",
+        "snowprintId": "upgHpE126C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE126C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR010",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR026",
+                "count": 9
+            },
+            {
+                "material": "upgArmR026",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE127C": {
+        "material": "Symbol of the T'au Empire",
+        "snowprintId": "upgHpE127C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE127C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR027",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR027",
+                "count": 9
+            },
+            {
+                "material": "upgArmR027",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE128C": {
+        "material": "Symbol of the Aeldari",
+        "snowprintId": "upgHpE128C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE128C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR028",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR028",
+                "count": 9
+            },
+            {
+                "material": "upgArmR028",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE129C": {
+        "material": "Symbol of the Thousand Sons",
+        "snowprintId": "upgHpE129C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE129C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR029",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR029",
+                "count": 9
+            },
+            {
+                "material": "upgArmR029",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE130C": {
+        "material": "Symbol of the Necrons",
+        "snowprintId": "upgHpE130C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE130C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR002",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR009",
+                "count": 9
+            },
+            {
+                "material": "upgArmR006",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE131C": {
+        "material": "Symbol of the Space Wolves",
+        "snowprintId": "upgHpE131C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE131C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR031",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR031",
+                "count": 9
+            },
+            {
+                "material": "upgArmR031",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE132C": {
+        "material": "Symbol of the Dark Angels",
+        "snowprintId": "upgHpE132C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE132C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR032",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR032",
+                "count": 9
+            },
+            {
+                "material": "upgArmR032",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE133C": {
+        "material": "Symbol of the Tyranids",
+        "snowprintId": "upgHpE133C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE133C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR033",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR033",
+                "count": 9
+            },
+            {
+                "material": "upgArmR033",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE134C": {
+        "material": "Symbol of the Adeptus Mechanicus",
+        "snowprintId": "upgHpE134C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE134C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR001",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR034",
+                "count": 9
+            },
+            {
+                "material": "upgArmR034",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE135C": {
+        "material": "Symbol of the Blood Angels",
+        "snowprintId": "upgHpE135C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE135C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR035",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR035",
+                "count": 9
+            },
+            {
+                "material": "upgArmR035",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE136C": {
+        "material": "Symbol of the Genestealer Cults",
+        "snowprintId": "upgHpE136C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE136C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR036",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR036",
+                "count": 9
+            },
+            {
+                "material": "upgArmR036",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE137C": {
+        "material": "Symbol of the Adeptus Custodes",
+        "snowprintId": "upgHpE137C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE137C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR037",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR037",
+                "count": 9
+            },
+            {
+                "material": "upgArmR037",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE138C": {
+        "material": "Symbol of the World Eaters",
+        "snowprintId": "upgHpE138C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE138C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR038",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR038",
+                "count": 9
+            },
+            {
+                "material": "upgArmR038",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE139C": {
+        "material": "Symbol of the Emperor's Children",
+        "snowprintId": "upgHpE139C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE139C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR039",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR039",
+                "count": 9
+            },
+            {
+                "material": "upgArmR039",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE140C": {
+        "material": "Symbol of the Leagues of Votann",
+        "snowprintId": "upgHpE140C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE140C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR040",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR040",
+                "count": 9
+            },
+            {
+                "material": "upgArmR040",
                 "count": 9
             }
         ]
@@ -5966,7 +6428,7 @@
                 "count": 2
             },
             {
-                "material": "upgHpE002C",
+                "material": "upgHpE014C",
                 "count": 1
             }
         ]
@@ -6550,7 +7012,7 @@
         ]
     },
     "upgHpL140C": {
-        "material": "Foregewrought Maintainers Kit",
+        "material": "Forgewrought Maintainers Kit",
         "snowprintId": "upgHpL140C",
         "rarity": "Legendary",
         "stat": "Health",
@@ -6562,11 +7024,11 @@
                 "count": 9
             },
             {
-                "material": "upgHpR015C",
+                "material": "upgHpR013C",
                 "count": 1
             },
             {
-                "material": "upgDmgE003",
+                "material": "upgArmE010",
                 "count": 6
             }
         ]
@@ -6690,6 +7152,468 @@
         "stat": "Health",
         "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM004.png",
         "craftable": false
+    },
+    "upgHpM120C": {
+        "material": "Grand Symbol of the Ultramarines",
+        "snowprintId": "upgHpM120C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM120C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM001",
+                "count": 6
+            },
+            {
+                "material": "upgHpL100",
+                "count": 8
+            },
+            {
+                "material": "upgHpE120C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM121C": {
+        "material": "Grand Symbol of the Black Templars",
+        "snowprintId": "upgHpM121C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM121C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM001",
+                "count": 6
+            },
+            {
+                "material": "upgHpL101",
+                "count": 8
+            },
+            {
+                "material": "upgHpE121C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM122C": {
+        "material": "Grand Symbol of the Adepta Sororitas",
+        "snowprintId": "upgHpM122C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM122C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM001",
+                "count": 6
+            },
+            {
+                "material": "upgHpL102",
+                "count": 8
+            },
+            {
+                "material": "upgHpE122C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM123C": {
+        "material": "Grand Symbol of the Black Legion",
+        "snowprintId": "upgHpM123C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM123C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM002",
+                "count": 6
+            },
+            {
+                "material": "upgHpL103",
+                "count": 8
+            },
+            {
+                "material": "upgHpE123C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM124C": {
+        "material": "Grand Symbol of the Death Guard",
+        "snowprintId": "upgHpM124C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM124C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM004",
+                "count": 6
+            },
+            {
+                "material": "upgHpL104",
+                "count": 8
+            },
+            {
+                "material": "upgHpE124C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM125C": {
+        "material": "Grand Symbol of the Astra Militarum",
+        "snowprintId": "upgHpM125C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM125C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM004",
+                "count": 6
+            },
+            {
+                "material": "upgHpL105",
+                "count": 8
+            },
+            {
+                "material": "upgHpE125C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM126C": {
+        "material": "Grand Symbol of the Orks",
+        "snowprintId": "upgHpM126C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM126C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM004",
+                "count": 6
+            },
+            {
+                "material": "upgHpL106",
+                "count": 8
+            },
+            {
+                "material": "upgHpE126C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM127C": {
+        "material": "Grand Symbol of the T'au Empire",
+        "snowprintId": "upgHpM127C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM127C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM004",
+                "count": 6
+            },
+            {
+                "material": "upgHpL107",
+                "count": 8
+            },
+            {
+                "material": "upgHpE127C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM128C": {
+        "material": "Grand Symbol of the Aeldari",
+        "snowprintId": "upgHpM128C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM128C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM003",
+                "count": 6
+            },
+            {
+                "material": "upgHpL108",
+                "count": 8
+            },
+            {
+                "material": "upgHpE128C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM129C": {
+        "material": "Grand Symbol of the Thousand Sons",
+        "snowprintId": "upgHpM129C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM129C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM003",
+                "count": 6
+            },
+            {
+                "material": "upgHpL109",
+                "count": 8
+            },
+            {
+                "material": "upgHpE129C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM130C": {
+        "material": "Grand Symbol of the Necrons",
+        "snowprintId": "upgHpM130C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM130C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM003",
+                "count": 6
+            },
+            {
+                "material": "upgHpL010",
+                "count": 8
+            },
+            {
+                "material": "upgHpE130C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM131C": {
+        "material": "Grand Symbol of the Space Wolves",
+        "snowprintId": "upgHpM131C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM131C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM004",
+                "count": 6
+            },
+            {
+                "material": "upgHpL111",
+                "count": 8
+            },
+            {
+                "material": "upgHpE131C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM132C": {
+        "material": "Grand Symbol of the Dark Angels",
+        "snowprintId": "upgHpM132C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM132C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM001",
+                "count": 6
+            },
+            {
+                "material": "upgHpL112",
+                "count": 8
+            },
+            {
+                "material": "upgHpE132C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM133C": {
+        "material": "Grand Symbol of the Tyranids",
+        "snowprintId": "upgHpM133C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM133C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM002",
+                "count": 6
+            },
+            {
+                "material": "upgHpL113",
+                "count": 8
+            },
+            {
+                "material": "upgHpE133C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM134C": {
+        "material": "Grand Symbol of the Adeptus Mechanicus",
+        "snowprintId": "upgHpM134C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM134C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM003",
+                "count": 6
+            },
+            {
+                "material": "upgHpL114",
+                "count": 8
+            },
+            {
+                "material": "upgHpE134C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM135C": {
+        "material": "Grand Symbol of the Blood Angels",
+        "snowprintId": "upgHpM135C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM135C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM001",
+                "count": 6
+            },
+            {
+                "material": "upgHpL115",
+                "count": 8
+            },
+            {
+                "material": "upgHpE135C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM136C": {
+        "material": "Grand Symbol of the Genestealer Cults",
+        "snowprintId": "upgHpM136C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM136C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM002",
+                "count": 6
+            },
+            {
+                "material": "upgHpL116",
+                "count": 8
+            },
+            {
+                "material": "upgHpE136C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM137C": {
+        "material": "Grand Symbol of the Adeptus Custodes",
+        "snowprintId": "upgHpM137C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM137C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM001",
+                "count": 6
+            },
+            {
+                "material": "upgHpL117",
+                "count": 8
+            },
+            {
+                "material": "upgHpE137C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM138C": {
+        "material": "Grand Symbol of the World Eaters",
+        "snowprintId": "upgHpM138C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM138C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM002",
+                "count": 6
+            },
+            {
+                "material": "upgHpL118",
+                "count": 8
+            },
+            {
+                "material": "upgHpE138C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM139C": {
+        "material": "Grand Symbol of the Emperor's Children",
+        "snowprintId": "upgHpM139C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM139C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM002",
+                "count": 6
+            },
+            {
+                "material": "upgHpL119",
+                "count": 8
+            },
+            {
+                "material": "upgHpE139C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM140C": {
+        "material": "Grand Symbol of the Leagues of Votann",
+        "snowprintId": "upgHpM140C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM140C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM003",
+                "count": 6
+            },
+            {
+                "material": "upgHpL099",
+                "count": 8
+            },
+            {
+                "material": "upgHpE140C",
+                "count": 1
+            }
+        ]
     },
     "upgHpR001": {
         "material": "Repair Tool",
@@ -7080,7 +8004,7 @@
         "craftable": false
     },
     "upgHpR040": {
-        "material": "Kindred Wavefield Crest",
+        "material": "Kindred Weavefield Crest",
         "snowprintId": "upgHpR040",
         "rarity": "Rare",
         "stat": "Health",

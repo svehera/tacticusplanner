@@ -1,8 +1,11 @@
-﻿import DeleteIcon from '@mui/icons-material/Delete';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import GridViewIcon from '@mui/icons-material/GridView';
-import LinkIcon from '@mui/icons-material/Link';
-import TableRowsIcon from '@mui/icons-material/TableRows';
+﻿import {
+    Delete as DeleteIcon,
+    ExpandMore as ExpandMoreIcon,
+    GridView as GridViewIcon,
+    Link as LinkIcon,
+    TableRows as TableRowsIcon,
+} from '@mui/icons-material';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import { cloneDeep, sum } from 'lodash';
@@ -10,6 +13,7 @@ import { useCallback, useContext, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
+import DailyRaidsSettings from '@/shared-components/daily-raids-settings';
 import { goalsLimit } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GoalCard } from 'src/routes/goals/goal-card';
@@ -28,6 +32,7 @@ import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { BadgesTotal } from '@/fsd/3-features/characters/components/badges-total';
+import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
 import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
@@ -35,6 +40,28 @@ import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
+
+const getAggregatedGoalEstimateForRankOrMow = (
+    goalId: string,
+    estimates: IGoalEstimate[]
+): IGoalEstimate | undefined => {
+    const goalEstimates = estimates.filter(x => x.goalId === goalId);
+    if (!goalEstimates.length) {
+        return undefined;
+    }
+
+    return goalEstimates.reduce(
+        (prev, curr) =>
+            ({
+                // We run this reduce solely to aggregate estimates for ascension goals that include
+                // both non-mythic and mythic shards, that's why we ignore other fields.
+                ...curr,
+                oTokensTotal: (prev.oTokensTotal ?? 0) + (curr.oTokensTotal ?? 0),
+                daysLeft: Math.max(prev.daysLeft ?? 0, curr.daysLeft ?? 0),
+                daysTotal: (prev.daysTotal ?? 0) + (curr.daysTotal ?? 0),
+            }) as IGoalEstimate
+    );
+};
 
 export const Goals = () => {
     const {
@@ -70,7 +97,7 @@ export const Goals = () => {
 
     const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
-    const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = GoalsService.prepareGoals(
+    const { allGoals, shardsGoals, upgradeRankOrMowGoals, ascendGoals, upgradeAbilities } = GoalsService.prepareGoals(
         goals,
         [...characters, ...resolvedMows],
         false
@@ -150,6 +177,7 @@ export const Goals = () => {
         inventory,
         xpUse,
         upgradeRankOrMowGoals,
+        ascendGoals,
         xpIncome
     );
 
@@ -169,6 +197,8 @@ export const Goals = () => {
         dispatch.goals({ type: 'DeleteAll' });
     };
 
+    const [openSettings, setOpenSettings] = useState<boolean>(false);
+
     return (
         <div>
             <div className="flex flex-wrap items-center gap-5">
@@ -179,6 +209,12 @@ export const Goals = () => {
                     to={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
                     <LinkIcon /> <span className="pl-[5px]">Go to Raids</span>
                 </Button>
+
+                <Button variant="outlined" size="small" onClick={() => setOpenSettings(true)}>
+                    <SettingsIcon style={{ marginRight: 4 }} /> Raids Settings
+                </Button>
+
+                <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
                 <SetGoalDialog key={goals.length} />
                 {hasSync && <SyncButton showText={!isMobile} />}
                 {}
@@ -214,31 +250,27 @@ export const Goals = () => {
             <div className="flex-box gap20 my-2 w-[350px]">
                 <Accordion
                     defaultExpanded={false}
-                    className="border border-[var(--border)] !bg-transparent px-2 !shadow-none hover:!bg-[var(--secondary)]">
+                    className="border border-(--border) bg-transparent! px-2 shadow-none! hover:bg-(--secondary)!">
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-[var(--muted-fg)]" />}
-                        className="min-h-0 rounded-lg !bg-transparent !p-0"
+                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
+                        className="min-h-0 rounded-lg bg-transparent! p-0!"
                         aria-controls="resources-content"
                         id="resources-header">
-                        <span className="text-base font-semibold text-[var(--fg)]">Total Resources Missing</span>
+                        <span className="text-base font-semibold text-(--fg)">Total Resources Missing</span>
                     </AccordionSummary>
 
-                    <AccordionDetails className="!bg-transparent !p-0">
-                        <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-[var(--border)] bg-[var(--overlay)] p-2">
-                            <div className="flex items-center justify-start gap-x-4 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                    <AccordionDetails className="bg-transparent! p-0!">
+                        <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-(--border) bg-(--overlay) p-2">
+                            <div className="flex items-center justify-start gap-x-4 rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <MiscIcon icon={'energy'} height={35} width={35} />{' '}
-                                <b className="text-lg text-[var(--fg)]">{estimatedUpgradesTotal.energyTotal}</b>
+                                <b className="text-lg text-(--fg)">{estimatedUpgradesTotal.energyTotal}</b>
                             </div>
 
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
                             </div>
 
-                            <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
-                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
-                                    Ability Badges
-                                </h4>
-
+                            <div className="flex flex-col gap-y-2 rounded-md border border-(--border) bg-(--secondary) p-2">
                                 {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                     <div key={alliance} className="flex-box">
                                         <BadgesTotal
@@ -249,12 +281,23 @@ export const Goals = () => {
                                     </div>
                                 ))}
                             </div>
+                            <div className="flex flex-col gap-y-2 rounded-md border border-(--border) bg-(--secondary) p-2">
+                                {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
+                                    <div key={alliance} className="flex-box">
+                                        <OrbsTotal
+                                            orbs={adjustedGoalsEstimates.neededOrbs[alliance]}
+                                            alliance={alliance}
+                                            size={35}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
 
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
                             </div>
 
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <MoWComponentsTotal
                                     components={adjustedGoalsEstimates.neededComponents}
                                     size={'medium'}
@@ -277,32 +320,26 @@ export const Goals = () => {
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex flex-wrap gap-3">
-                            {upgradeRankOrMowGoals.map(goal => (
-                                <GoalCard
-                                    key={goal.goalId}
-                                    characters={characters}
-                                    mows={resolvedMows}
-                                    goal={goal}
-                                    goalEstimate={adjustedGoalsEstimates.goalEstimates
-                                        .filter(x => x.goalId === goal.goalId)
-                                        .reduce(
-                                            (prev, curr) =>
-                                                ({
-                                                    // We run this reduce solely to aggregate estimates for ascension goals that include
-                                                    // both non-mythic and mythic shards, that's why we ignore other fields.
-                                                    ...curr,
-                                                    oTokensTotal: (prev?.oTokensTotal ?? 0) + (curr.oTokensTotal ?? 0),
-                                                    daysLeft: Math.max(prev?.daysLeft ?? 0, curr.daysLeft ?? 0),
-                                                    daysTotal: (prev?.daysTotal ?? 0) + (curr.daysTotal ?? 0),
-                                                }) as IGoalEstimate
+                            {upgradeRankOrMowGoals.map(goal => {
+                                const aggregatedEstimate = getAggregatedGoalEstimateForRankOrMow(
+                                    goal.goalId,
+                                    adjustedGoalsEstimates.goalEstimates
+                                );
+                                return (
+                                    <GoalCard
+                                        key={goal.goalId}
+                                        characters={characters}
+                                        mows={resolvedMows}
+                                        goal={goal}
+                                        goalEstimate={aggregatedEstimate}
+                                        menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        bgColor={GoalService.getBackgroundColor(
+                                            viewPreferences.goalColorMode,
+                                            aggregatedEstimate
                                         )}
-                                    menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                    bgColor={GoalService.getBackgroundColor(
-                                        viewPreferences.goalColorMode,
-                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
-                                    )}
-                                />
-                            ))}
+                                    />
+                                );
+                            })}
                         </div>
                     )}
 

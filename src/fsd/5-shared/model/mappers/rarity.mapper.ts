@@ -25,7 +25,7 @@ export class RarityMapper {
         [Rarity.Rare]: Rank.Silver1,
         [Rarity.Epic]: Rank.Gold1,
         [Rarity.Legendary]: Rank.Diamond3,
-        [Rarity.Mythic]: Rank.Adamantine1,
+        [Rarity.Mythic]: Rank.Adamantine2,
     };
 
     public static stringToNumber: Record<RarityString, Rarity> = {

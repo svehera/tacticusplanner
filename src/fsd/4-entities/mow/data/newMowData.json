@@ -64,7 +64,12 @@
                     ["upgHpM003", "upgArmL001", "upgHpL102"],
                     ["upgHpM003", "upgDmgL001", "upgHpL102"],
                     ["upgHpM001", "upgArmL001", "upgHpL102"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL102"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL102"],
+                    ["upgHpM003", "upgArmL001", "upgDmgL022C"],
+                    ["upgHpM001", "upgHpL102", "upgArmL022C"],
+                    ["upgHpM003", "upgDmgL001", "upgDmgL022C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM003", "upgHpL102", "upgDmgL214C"]
                 ]
             },
             "secondaryAbility": {
@@ -124,7 +129,12 @@
                     ["upgHpM003", "upgArmL001", "upgHpL102"],
                     ["upgHpM003", "upgDmgL001", "upgHpL102"],
                     ["upgHpM001", "upgArmL001", "upgHpL102"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL102"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL102"],
+                    ["upgHpM003", "upgArmL001", "upgArmL022C"],
+                    ["upgHpM001", "upgHpL102", "upgArmL022C"],
+                    ["upgHpM003", "upgDmgL001", "upgDmgL022C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM003", "upgHpL102", "upgDmgL214C"]
                 ]
             }
         },
@@ -138,7 +148,6 @@
             "primaryAbility": {
                 "name": "MalleusRocketLauncher",
                 "recipes": [
-                    ["upgHpC015", "upgDmgC002", "upgArmC001"],
                     ["upgHpC001", "upgDmgC004", "upgArmC003"],
                     ["upgHpC004", "upgHpC015", "upgHpC001"],
                     ["upgDmgC011", "upgDmgC002", "upgDmgC004"],
@@ -192,7 +201,12 @@
                     ["upgHpM004", "upgArmL001", "upgHpL105"],
                     ["upgHpM004", "upgDmgL001", "upgHpL105"],
                     ["upgHpM001", "upgArmL001", "upgHpL105"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL105"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL105"],
+                    ["upgHpM004", "upgArmL001", "upgDmgL025C"],
+                    ["upgHpM001", "upgHpL105", "upgArmL025C"],
+                    ["upgHpM004", "upgDmgL001", "upgDmgL025C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL105", "upgDmgL214C"]
                 ]
             },
             "secondaryAbility": {
@@ -252,7 +266,12 @@
                     ["upgHpM004", "upgArmL001", "upgHpL105"],
                     ["upgHpM004", "upgDmgL001", "upgHpL105"],
                     ["upgHpM001", "upgArmL001", "upgHpL105"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL105"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL105"],
+                    ["upgHpM004", "upgArmL001", "upgArmL025C"],
+                    ["upgHpM001", "upgHpL105", "upgArmL025C"],
+                    ["upgHpM004", "upgDmgL001", "upgDmgL025C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL105", "upgDmgL214C"]
                 ]
             }
         },
@@ -320,7 +339,12 @@
                     ["upgHpM004", "upgArmL202", "upgHpL103"],
                     ["upgHpM004", "upgDmgL202", "upgHpL103"],
                     ["upgHpM002", "upgArmL202", "upgHpL103"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL103"]
+                    ["upgHpM002", "upgDmgL202", "upgHpL103"],
+                    ["upgHpM004", "upgArmL202", "upgDmgL023C"],
+                    ["upgHpM002", "upgHpL103", "upgArmL023C"],
+                    ["upgHpM004", "upgDmgL202", "upgDmgL023C"],
+                    ["upgHpM002", "upgArmL202", "upgHpL212C"],
+                    ["upgHpM004", "upgHpL103", "upgDmgL212C"]
                 ]
             },
             "secondaryAbility": {
@@ -380,7 +404,12 @@
                     ["upgHpM004", "upgArmL202", "upgHpL103"],
                     ["upgHpM004", "upgDmgL202", "upgHpL103"],
                     ["upgHpM002", "upgArmL202", "upgHpL103"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL103"]
+                    ["upgHpM002", "upgDmgL202", "upgHpL103"],
+                    ["upgHpM004", "upgArmL202", "upgArmL023C"],
+                    ["upgHpM002", "upgHpL103", "upgArmL023C"],
+                    ["upgHpM004", "upgDmgL202", "upgDmgL023C"],
+                    ["upgHpM002", "upgArmL202", "upgHpL212C"],
+                    ["upgHpM004", "upgHpL103", "upgDmgL212C"]
                 ]
             }
         },
@@ -448,7 +477,12 @@
                     ["upgHpM004", "upgArmL001", "upgHpL112"],
                     ["upgHpM004", "upgDmgL001", "upgHpL112"],
                     ["upgHpM001", "upgArmL001", "upgHpL112"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL112"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL112"],
+                    ["upgHpM004", "upgArmL001", "upgDmgL032C"],
+                    ["upgHpM001", "upgHpL112", "upgArmL032C"],
+                    ["upgHpM004", "upgDmgL001", "upgDmgL032C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL112", "upgDmgL214C"]
                 ]
             },
             "secondaryAbility": {
@@ -508,7 +542,12 @@
                     ["upgHpM004", "upgArmL001", "upgHpL112"],
                     ["upgHpM004", "upgDmgL001", "upgHpL112"],
                     ["upgHpM001", "upgArmL001", "upgHpL112"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL112"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL112"],
+                    ["upgHpM004", "upgArmL001", "upgArmL032C"],
+                    ["upgHpM001", "upgHpL112", "upgArmL032C"],
+                    ["upgHpM004", "upgDmgL001", "upgDmgL032C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL112", "upgDmgL214C"]
                 ]
             }
         },
@@ -576,7 +615,12 @@
                     ["upgHpM002", "upgArmL203", "upgHpL104"],
                     ["upgHpM002", "upgDmgL202", "upgHpL104"],
                     ["upgHpM004", "upgArmL203", "upgHpL104"],
-                    ["upgHpM004", "upgDmgL202", "upgHpL104"]
+                    ["upgHpM004", "upgDmgL202", "upgHpL104"],
+                    ["upgHpM002", "upgArmL203", "upgDmgL024C"],
+                    ["upgHpM004", "upgHpL104", "upgArmL007C"],
+                    ["upgHpM002", "upgDmgL202", "upgDmgL024C"],
+                    ["upgHpM004", "upgArmL203", "upgHpL214C"],
+                    ["upgHpM002", "upgHpL104", "upgDmgL214C"]
                 ]
             },
             "secondaryAbility": {
@@ -636,7 +680,12 @@
                     ["upgHpM002", "upgArmL203", "upgHpL104"],
                     ["upgHpM002", "upgDmgL202", "upgHpL104"],
                     ["upgHpM004", "upgArmL203", "upgHpL104"],
-                    ["upgHpM004", "upgDmgL202", "upgHpL104"]
+                    ["upgHpM004", "upgDmgL202", "upgHpL104"],
+                    ["upgHpM002", "upgArmL203", "upgArmL007C"],
+                    ["upgHpM004", "upgHpL104", "upgArmL007C"],
+                    ["upgHpM002", "upgDmgL202", "upgDmgL024C"],
+                    ["upgHpM004", "upgArmL203", "upgHpL214C"],
+                    ["upgHpM002", "upgHpL104", "upgDmgL214C"]
                 ]
             }
         },
@@ -704,7 +753,12 @@
                     ["upgHpM004", "upgArmL203", "upgHpL106"],
                     ["upgHpM004", "upgDmgL003", "upgHpL106"],
                     ["upgHpM004", "upgArmL203", "upgHpL106"],
-                    ["upgHpM004", "upgDmgL003", "upgHpL106"]
+                    ["upgHpM004", "upgDmgL003", "upgHpL106"],
+                    ["upgHpM004", "upgArmL203", "upgDmgL026C"],
+                    ["upgHpM004", "upgHpL106", "upgArmL026C"],
+                    ["upgHpM004", "upgDmgL003", "upgDmgL026C"],
+                    ["upgHpM004", "upgArmL203", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL106", "upgDmgL214C"]
                 ]
             },
             "secondaryAbility": {
@@ -764,7 +818,12 @@
                     ["upgHpM004", "upgArmL203", "upgHpL106"],
                     ["upgHpM004", "upgDmgL003", "upgHpL106"],
                     ["upgHpM004", "upgArmL203", "upgHpL106"],
-                    ["upgHpM004", "upgDmgL003", "upgHpL106"]
+                    ["upgHpM004", "upgDmgL003", "upgHpL106"],
+                    ["upgHpM004", "upgArmL203", "upgArmL026C"],
+                    ["upgHpM004", "upgHpL106", "upgArmL026C"],
+                    ["upgHpM004", "upgDmgL003", "upgDmgL026C"],
+                    ["upgHpM004", "upgArmL203", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL106", "upgDmgL214C"]
                 ]
             }
         },
@@ -832,7 +891,12 @@
                     ["upgHpM003", "upgArmL203", "upgHpL107"],
                     ["upgHpM003", "upgDmgL003", "upgHpL107"],
                     ["upgHpM004", "upgArmL203", "upgHpL107"],
-                    ["upgHpM004", "upgDmgL003", "upgHpL107"]
+                    ["upgHpM004", "upgDmgL003", "upgHpL107"],
+                    ["upgHpM003", "upgArmL203", "upgDmgL027C"],
+                    ["upgHpM004", "upgHpL107", "upgArmL027C"],
+                    ["upgHpM003", "upgDmgL003", "upgDmgL027C"],
+                    ["upgHpM004", "upgArmL203", "upgHpL214C"],
+                    ["upgHpM003", "upgHpL107", "upgDmgL214C"]
                 ]
             },
             "secondaryAbility": {
@@ -892,7 +956,12 @@
                     ["upgHpM003", "upgArmL203", "upgHpL107"],
                     ["upgHpM003", "upgDmgL003", "upgHpL107"],
                     ["upgHpM004", "upgArmL203", "upgHpL107"],
-                    ["upgHpM004", "upgDmgL003", "upgHpL107"]
+                    ["upgHpM004", "upgDmgL003", "upgHpL107"],
+                    ["upgHpM003", "upgArmL203", "upgArmL027C"],
+                    ["upgHpM004", "upgHpL107", "upgArmL027C"],
+                    ["upgHpM003", "upgDmgL003", "upgDmgL027C"],
+                    ["upgHpM004", "upgArmL203", "upgHpL214C"],
+                    ["upgHpM003", "upgHpL107", "upgDmgL214C"]
                 ]
             }
         },
@@ -960,7 +1029,12 @@
                     ["upgHpM003", "upgArmL202", "upgHpL109"],
                     ["upgHpM003", "upgDmgL202", "upgHpL109"],
                     ["upgHpM002", "upgArmL202", "upgHpL109"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL109"]
+                    ["upgHpM002", "upgDmgL202", "upgHpL109"],
+                    ["upgHpM003", "upgArmL202", "upgDmgL029C"],
+                    ["upgHpM002", "upgHpL109", "upgArmL029C"],
+                    ["upgHpM003", "upgDmgL202", "upgDmgL029C"],
+                    ["upgHpM002", "upgArmL202", "upgHpL212C"],
+                    ["upgHpM003", "upgHpL109", "upgDmgL212C"]
                 ]
             },
             "secondaryAbility": {
@@ -1020,7 +1094,12 @@
                     ["upgHpM003", "upgArmL202", "upgHpL109"],
                     ["upgHpM003", "upgDmgL202", "upgHpL109"],
                     ["upgHpM002", "upgArmL202", "upgHpL109"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL109"]
+                    ["upgHpM002", "upgDmgL202", "upgHpL109"],
+                    ["upgHpM003", "upgArmL202", "upgArmL029C"],
+                    ["upgHpM002", "upgHpL109", "upgArmL029C"],
+                    ["upgHpM003", "upgDmgL202", "upgDmgL029C"],
+                    ["upgHpM002", "upgArmL202", "upgHpL212C"],
+                    ["upgHpM003", "upgHpL109", "upgDmgL212C"]
                 ]
             }
         },
@@ -1088,7 +1167,12 @@
                     ["upgHpM004", "upgArmL202", "upgHpL113"],
                     ["upgHpM004", "upgDmgL202", "upgHpL113"],
                     ["upgHpM002", "upgArmL202", "upgHpL113"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL113"]
+                    ["upgHpM002", "upgDmgL202", "upgHpL113"],
+                    ["upgHpM004", "upgArmL202", "upgDmgL033C"],
+                    ["upgHpM002", "upgHpL113", "upgArmL033C"],
+                    ["upgHpM004", "upgDmgL202", "upgDmgL033C"],
+                    ["upgHpM002", "upgArmL202", "upgHpL211C"],
+                    ["upgHpM004", "upgHpL113", "upgDmgL211C"]
                 ]
             },
             "secondaryAbility": {
@@ -1148,7 +1232,12 @@
                     ["upgHpM004", "upgArmL202", "upgHpL113"],
                     ["upgHpM004", "upgDmgL202", "upgHpL113"],
                     ["upgHpM002", "upgArmL202", "upgHpL113"],
-                    ["upgHpM002", "upgDmgL202", "upgHpL113"]
+                    ["upgHpM002", "upgDmgL202", "upgHpL113"],
+                    ["upgHpM004", "upgArmL202", "upgArmL033C"],
+                    ["upgHpM002", "upgHpL113", "upgArmL033C"],
+                    ["upgHpM004", "upgDmgL202", "upgDmgL033C"],
+                    ["upgHpM002", "upgArmL202", "upgHpL211C"],
+                    ["upgHpM004", "upgHpL113", "upgDmgL211C"]
                 ]
             }
         },
@@ -1216,7 +1305,12 @@
                     ["upgHpM004", "upgArmL001", "upgHpL100"],
                     ["upgHpM004", "upgDmgL001", "upgHpL100"],
                     ["upgHpM001", "upgArmL001", "upgHpL100"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL100"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
+                    ["upgHpM004", "upgArmL001", "upgDmgL004C"],
+                    ["upgHpM001", "upgHpL100", "upgArmL004C"],
+                    ["upgHpM004", "upgDmgL001", "upgDmgL004C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL100", "upgDmgL214C"]
                 ]
             },
             "secondaryAbility": {
@@ -1276,7 +1370,12 @@
                     ["upgHpM004", "upgArmL001", "upgHpL100"],
                     ["upgHpM004", "upgDmgL001", "upgHpL100"],
                     ["upgHpM001", "upgArmL001", "upgHpL100"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL100"]
+                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
+                    ["upgHpM004", "upgArmL001", "upgDmgL012C"],
+                    ["upgHpM001", "upgHpL100", "upgDmgL012C"],
+                    ["upgHpM004", "upgDmgL001", "upgDmgL004C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL100", "upgDmgL214C"]
                 ]
             }
         }
@@ -1651,6 +1750,41 @@
             "salvage": 0,
             "badges": { "rarity": "Mythic", "amount": 1 },
             "forgeBadges": { "rarity": " Mythic", "amount": 1 },
+            "components": 50
+        },
+        {
+            "gold": 105000,
+            "salvage": 0,
+            "badges": { "rarity": "Mythic", "amount": 1 },
+            "forgeBadges": { "rarity": " Mythic", "amount": 1 },
+            "components": 50
+        },
+        {
+            "gold": 110000,
+            "salvage": 0,
+            "badges": { "rarity": "Mythic", "amount": 2 },
+            "forgeBadges": { "rarity": " Mythic", "amount": 2 },
+            "components": 50
+        },
+        {
+            "gold": 115000,
+            "salvage": 0,
+            "badges": { "rarity": "Mythic", "amount": 3 },
+            "forgeBadges": { "rarity": " Mythic", "amount": 3 },
+            "components": 50
+        },
+        {
+            "gold": 120000,
+            "salvage": 0,
+            "badges": { "rarity": "Mythic", "amount": 4 },
+            "forgeBadges": { "rarity": " Mythic", "amount": 4 },
+            "components": 50
+        },
+        {
+            "gold": 125000,
+            "salvage": 0,
+            "badges": { "rarity": "Mythic", "amount": 5 },
+            "forgeBadges": { "rarity": " Mythic", "amount": 5 },
             "components": 50
         }
     ]

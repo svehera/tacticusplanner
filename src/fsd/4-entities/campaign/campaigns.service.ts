@@ -489,6 +489,21 @@ export class CampaignsService {
                     },
                 };
             }
+            case Campaign.ASS:
+            case Campaign.ASSC:
+            case Campaign.ASE:
+            case Campaign.ASEC: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Imperial,
+                        factions: ['Sisterhood', 'AstraMilitarum'],
+                    },
+                    allies: {
+                        alliance: Alliance.Chaos,
+                        factions: ['WorldEaters', 'BlackLegion'],
+                    },
+                };
+            }
             default: {
                 return {
                     enemies: {
