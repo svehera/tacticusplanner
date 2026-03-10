@@ -29,6 +29,7 @@ import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
 import { teams2MenuItem } from '@/fsd/1-pages/plan-teams2/teams2.menu-item';
+import { warDefense2MenuItem } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.menu-item';
 import { warOffense2MenuItem } from '@/fsd/1-pages/plan-war-offense2/war-offense2.menu-item';
 import { teamsMenuItem } from '@/fsd/1-pages/teams/teams.menu-item';
 import { wyoMenuItem } from '@/fsd/1-pages/who-you-own/who-you-own.menu-item';
@@ -68,6 +69,7 @@ export const menuItemById = {
     campaignProgression: campaignProgressionMenuItem,
     rosterSnapshots: rosterSnapshotsMenuItem,
     teams2: teams2MenuItem,
+    warDefense2: warDefense2MenuItem,
     warOffense2: warOffense2MenuItem,
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
@@ -103,6 +105,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
         menuItemById['defense'],
         menuItemById['offense'],
+        menuItemById['warDefense2'],
         menuItemById['warOffense2'],
         menuItemById['zones'],
     ]),
@@ -118,6 +121,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['teams'],
     menuItemById['defense'],
     menuItemById['offense'],
+    menuItemById['warDefense2'],
     menuItemById['warOffense2'],
     menuItemById['zones'],
     menuItemById['leMasterTable'],

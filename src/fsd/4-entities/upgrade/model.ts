@@ -27,7 +27,7 @@ export interface IBaseUpgrade {
     id: string;
     snowprintId: string;
     label: string;
-    rarity: Rarity;
+    rarity: Rarity | 'Shard' | 'Mythic Shard';
     iconPath: string;
     locations: ICampaignBattleComposed[];
     crafted: false;
@@ -128,7 +128,7 @@ export interface IRecipeExpandedUpgrade {
     id: string;
     snowprintId: string; // The ID from snowprint assets.
     label: string;
-    rarity: Rarity;
+    rarity: Rarity | 'Shard' | 'Mythic Shard';
     iconPath: string;
     expandedRecipe: Record<string, number>;
     crafted: boolean;

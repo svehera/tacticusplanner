@@ -195,7 +195,22 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                             level: 0,
                             activeAbilityLevel: 0,
                             passiveAbilityLevel: 0,
+                            equipment: [],
                             shards: tacticusUnitShards.amount,
+                        };
+                    } else {
+                        // Locked and no shards.
+                        return {
+                            ...char,
+                            rarity: char.initialRarity,
+                            stars: RarityStars.None,
+                            rank: Rank.Locked,
+                            xp: 0,
+                            level: 0,
+                            activeAbilityLevel: 0,
+                            passiveAbilityLevel: 0,
+                            equipment: [],
+                            shards: 0,
                         };
                     }
 

@@ -14,7 +14,7 @@ export interface ICampaignBattleComposed {
     energyPerDay: number;
     nodeNumber: number;
     rarity: string;
-    rarityEnum: Rarity;
+    rarityEnum: Rarity | 'Shard' | 'Mythic Shard';
     rewards: IRewards;
     slots?: number;
     enemiesFactions: FactionId[];
@@ -169,7 +169,7 @@ export interface ICampaignsFilters {
     alliesAlliance: Alliance[];
     alliesFactions: FactionId[];
     campaignTypes: CampaignType[];
-    upgradesRarity: Rarity[];
+    upgradesRarity: Array<Rarity | 'Shard' | 'Mythic Shard'>;
     slotsCount?: number[];
     enemiesTypes?: string[];
     enemiesMinCount?: number;

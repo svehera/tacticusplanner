@@ -396,7 +396,8 @@ export class ShardsService {
         for (const material of materials) {
             const locations: IItemRaidLocation[] = material.raidsLocations.map(location => ({
                 ...location,
-                raidsCount: Math.ceil(location.dailyBattleCount),
+                raidsAlreadyPerformed: 0,
+                raidsToPerform: Math.ceil(location.dailyBattleCount),
                 farmedItems: location.itemsPerDay,
                 energySpent: location.energyPerDay,
                 isCompleted: completedLocations.some(cLocation => cLocation.id === location.id),

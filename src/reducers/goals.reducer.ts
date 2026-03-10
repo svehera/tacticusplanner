@@ -35,6 +35,9 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
                 return state;
             }
             state.splice(action.goal.priority - 1, 0, action.goal);
+            state.forEach((x, index) => {
+                x.priority = index + 1;
+            });
             return [...state];
         }
         case 'Delete': {

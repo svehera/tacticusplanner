@@ -1,16 +1,14 @@
-﻿import { Info } from '@mui/icons-material';
-import { Badge, FormControlLabel, Switch } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
+﻿import Checkbox from '@mui/material/Checkbox';
 import { uniq } from 'lodash';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
 import { ICustomDailyRaidsSettings } from 'src/models/interfaces';
 
 import { Rarity } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
-import { CampaignType, CampaignsService } from '@/fsd/4-entities/campaign';
+import { CampaignType } from '@/fsd/4-entities/campaign';
 
 interface Props {
     hasCE: boolean;
@@ -19,8 +17,9 @@ interface Props {
 }
 
 export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsChange, hasCE }) => {
-    const [showDroprates, setShowDroprates] = useState<boolean>(false);
-    const rarities: Rarity[] = [
+    const rarities: Array<Rarity | 'Shard' | 'Mythic Shard'> = [
+        'Mythic Shard',
+        'Shard',
         Rarity.Mythic,
         Rarity.Legendary,
         Rarity.Epic,
@@ -29,8 +28,19 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
         Rarity.Common,
     ];
 
-    const handleChange = (rarity: Rarity, checked: boolean, campaignTypes: CampaignType[]) => {
-        const currentValue = settings[rarity];
+    const handleChange = (
+        rarity: Rarity | 'Shard' | 'Mythic Shard',
+        checked: boolean,
+        campaignTypes: CampaignType[]
+    ) => {
+        const currentValue = settings[rarity] ?? [
+            CampaignType.Normal,
+            CampaignType.Early,
+            CampaignType.Mirror,
+            CampaignType.Elite,
+            CampaignType.Standard,
+            CampaignType.Extremis,
+        ];
         settingsChange({
             ...settings,
             [rarity]: checked
@@ -64,22 +74,14 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
         [CampaignType.Extremis]: 'Extremis CE',
     };
 
+    const isRarity = (value: Rarity | 'Shard' | 'Mythic Shard'): value is Rarity => {
+        return Object.values(Rarity).includes(value as Rarity);
+    };
+
     return (
         <div className="flex">
             <div className="flex flex-col">
-                <div className="h-6">
-                    <FormControlLabel
-                        control={<Switch value={showDroprates} onChange={(_, checked) => setShowDroprates(checked)} />}
-                        label={
-                            <div className="text-fg flex items-center">
-                                <span>Show Rates&nbsp;</span>
-                                <AccessibleTooltip title={'Energy conversion efficiency per 1 energy used'}>
-                                    <Info color="primary" />
-                                </AccessibleTooltip>
-                            </div>
-                        }
-                    />
-                </div>
+                <div className="h-6"></div>
                 {campaignTypes.map(type => (
                     <div key={type} className="flex h-[42px] items-center justify-center font-medium">
                         {campaignLabels[type]}
@@ -100,27 +102,18 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
 
                     return (
                         <div key={rarity} className="mx-2 flex flex-col items-center">
-                            <RarityIcon rarity={rarity} />
+                            {rarity === 'Shard' && <MiscIcon icon="shard" height={26} width={-1} />}
+                            {rarity === 'Mythic Shard' && <MiscIcon icon="mythicShard" height={26} width={-1} />}
+                            {isRarity(rarity) && <RarityIcon rarity={rarity} />}
                             {campaignTypes.map(type => (
                                 <div
                                     key={type}
                                     className="flex min-h-[42px] min-w-[42px] flex-col justify-center gap-3">
-                                    {!showDroprates ? (
-                                        <Checkbox
-                                            className="mt-2"
-                                            checked={value.includes(type)}
-                                            onChange={event => handleChange(rarity, event.target.checked, [type])}
-                                        />
-                                    ) : (
-                                        <Badge
-                                            className="cursor-pointer"
-                                            badgeContent="✓"
-                                            invisible={!value.includes(type)}
-                                            color="primary"
-                                            onClick={() => handleChange(rarity, !value.includes(type), [type])}>
-                                            <span>{CampaignsService.getItemAcquiredPerEnergyUsed(type, rarity)}</span>
-                                        </Badge>
-                                    )}
+                                    <Checkbox
+                                        className="mt-2"
+                                        checked={value.includes(type)}
+                                        onChange={event => handleChange(rarity, event.target.checked, [type])}
+                                    />
                                 </div>
                             ))}
                         </div>

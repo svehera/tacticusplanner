@@ -1,16 +1,12 @@
 ﻿import React, { useMemo } from 'react';
 
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
-import { CampaignsLocationsUsage } from 'src/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
-
-import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 
 import { ICharacterAscendGoal } from '@/fsd/3-features/goals/goals.models';
 
@@ -23,14 +19,7 @@ interface Props {
     onChange: (key: keyof ICharacterAscendGoal, value: number) => void;
 }
 
-export const EditAscendGoal: React.FC<Props> = ({
-    goal,
-    possibleLocations,
-    unlockedLocations,
-    possibleMythicLocations,
-    unlockedMythicLocations,
-    onChange,
-}) => {
+export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, possibleMythicLocations, onChange }) => {
     const rarityValues = useMemo(() => {
         return getEnumValues(Rarity).filter(x => x >= goal.rarityStart);
     }, [goal.rarityStart]);
@@ -81,26 +70,8 @@ export const EditAscendGoal: React.FC<Props> = ({
 
             {(goal.rarityStart < Rarity.Mythic || goal.starsStart < RarityStars.OneBlueStar) && (
                 <>
-                    <div className="flex gap-2">
-                        {possibleLocations.map(location => (
-                            <CampaignLocation
-                                key={location.id}
-                                location={location}
-                                unlocked={unlockedLocations.includes(location.id)}
-                            />
-                        ))}
-                    </div>
-
                     {possibleLocations.length !== 0 && (
                         <div className="flex gap-3">
-                            <div className="w-1/2">
-                                <CampaignsUsageSelect
-                                    disabled={!unlockedLocations.length}
-                                    value={goal.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
-                                    valueChange={value => onChange('campaignsUsage', value)}
-                                    mythic={false}
-                                />
-                            </div>
                             <div className="w-1/2">
                                 <NumbersInput
                                     title="Shards per onslaught"
@@ -127,26 +98,8 @@ export const EditAscendGoal: React.FC<Props> = ({
 
             {goal.rarityEnd >= Rarity.Mythic && (
                 <>
-                    <div className="flex gap-2">
-                        {possibleMythicLocations.map(location => (
-                            <CampaignLocation
-                                key={location.id}
-                                location={location}
-                                unlocked={unlockedMythicLocations.includes(location.id)}
-                            />
-                        ))}
-                    </div>
-
                     {!!possibleMythicLocations.length && (
                         <div className="flex gap-3">
-                            <div className="w-1/2">
-                                <CampaignsUsageSelect
-                                    disabled={!unlockedMythicLocations.length}
-                                    value={goal.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
-                                    valueChange={value => onChange('mythicCampaignsUsage', value)}
-                                    mythic={true}
-                                />
-                            </div>
                             <div className="w-1/2">
                                 <NumbersInput
                                     title="Mythic Shards per onslaught"

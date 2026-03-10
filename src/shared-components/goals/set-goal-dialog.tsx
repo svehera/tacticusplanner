@@ -21,7 +21,6 @@ import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { ICampaignsProgress, IPersonalGoal } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { PrioritySelect } from 'src/shared-components/goals/priority-select';
 import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
@@ -79,7 +78,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
     const handleClose = (goal?: IPersonalGoal | undefined): void => {
         if (goal) {
-            goal.dailyRaids = [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(goal.type);
+            goal.dailyRaids = true;
             dispatch.goals({ type: 'Add', goal });
             const character = characters.find(c => c.snowprintId === goal.character);
             const mow = resolvedMows.find(m => m.snowprintId === goal.character);
@@ -439,13 +438,6 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     />
                                 ))}
                             </div>
-                            <CampaignsUsageSelect
-                                allowIgnore={false}
-                                disabled={!unlockedLocations.length}
-                                value={form.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy}
-                                valueChange={value => setForm(curr => ({ ...curr, campaignsUsage: value }))}
-                                mythic={form.targetRarity! >= Rarity.Mythic}
-                            />
                         </Conditional>
 
                         <TextField

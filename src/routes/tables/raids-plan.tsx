@@ -19,17 +19,15 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { IEstimatedShards, IEstimatedUpgrades } from '@/fsd/3-features/goals/goals.models';
+import { IEstimatedUpgrades } from '@/fsd/3-features/goals/goals.models';
 import { MaterialsTable } from '@/fsd/3-features/goals/materials-table';
 import { RaidsDayView } from '@/fsd/3-features/goals/raids-day-view';
-import { ShardsRaidsDayInput } from '@/fsd/3-features/goals/shards-raids-day-input';
 
 import { Inventory } from '@/fsd/1-pages/input-inventory';
 
 import { RaidUpgradeMaterialCard } from './raid-upgrade-material-card';
 
 interface Props {
-    estimatedShards: IEstimatedShards;
     estimatedRanks: IEstimatedUpgrades;
     scrollToCharSnowprintId?: string;
     upgrades: Record<string, number>;
@@ -41,7 +39,6 @@ type RefElem = HTMLDivElement | null;
 type RefMap = { [key: string]: RefElem };
 
 export const RaidsPlan: React.FC<Props> = ({
-    estimatedShards,
     estimatedRanks,
     scrollToCharSnowprintId,
     updateInventoryAny,
@@ -59,6 +56,17 @@ export const RaidsPlan: React.FC<Props> = ({
     const [grid1Loaded, setGrid1Loaded] = useState<boolean>(false);
     const [grid2Loaded, setGrid2Loaded] = useState<boolean>(false);
     const [grid3Loaded, setGrid3Loaded] = useState<boolean>(false);
+
+    const [expandedPanels, setExpandedPanels] = useState(() => ({
+        related: false,
+        inProgress: false,
+        finished: false,
+        blocked: false,
+        raids: true,
+    }));
+
+    const togglePanel = (key: keyof typeof expandedPanels) => (_: any, isExpanded: boolean) =>
+        setExpandedPanels(prev => ({ ...prev, [key]: isExpanded }));
 
     const itemRefs = useRef<RefMap>({});
     const setCardRef = useCallback(
@@ -141,15 +149,8 @@ export const RaidsPlan: React.FC<Props> = ({
         return formatDateWithOrdinal(nextDate);
     }, [estimatedRanks.upgradesRaids.length]);
 
-    const shardsCalendarDate: string = useMemo(() => {
-        const nextDate = new Date();
-        nextDate.setDate(nextDate.getDate() + estimatedShards.daysTotal);
-
-        return formatDateWithOrdinal(nextDate);
-    }, [estimatedShards.daysTotal]);
-
-    const daysTotal = Math.max(estimatedRanks.daysTotal, estimatedShards.daysTotal);
-    const energyTotal = estimatedRanks.energyTotal + estimatedShards.energyTotal;
+    const daysTotal = estimatedRanks.daysTotal;
+    const energyTotal = estimatedRanks.energyTotal;
 
     const calendarDateTotal: string = useMemo(() => {
         const nextDate = new Date();
@@ -167,22 +168,45 @@ export const RaidsPlan: React.FC<Props> = ({
                             Raids plan (<b>{daysTotal}</b> Days |
                         </span>
                         <span>
-                            <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} />
+                            <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} />)
                         </span>
-                        {!!estimatedShards.onslaughtTokens && (
-                            <span>
-                                | <b>{estimatedShards.onslaughtTokens}</b> Tokens)
-                            </span>
-                        )}
-
-                        {!estimatedShards.onslaughtTokens && <>)</>}
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={viewPreferences.raidsTableView}
+                                    onChange={event => {
+                                        event.stopPropagation();
+                                        updateView(event.target.checked);
+                                    }}
+                                    onClick={e => e.stopPropagation()}
+                                    onFocus={e => e.stopPropagation()}
+                                    onMouseDown={e => e.stopPropagation()}
+                                />
+                            }
+                            label={
+                                <div className="flex-box gap5">
+                                    {viewPreferences.raidsTableView ? (
+                                        <div className="flex-box gap5">
+                                            <TableRowsIcon color="primary" /> <span>Table View</span>
+                                        </div>
+                                    ) : (
+                                        <div className="flex-box gap5">
+                                            <GridViewIcon color="primary" /> <span>Cards View</span>
+                                        </div>
+                                    )}
+                                </div>
+                            }
+                        />
                     </div>
                     <span className="italic">{calendarDateTotal}</span>
                 </FlexBox>
             </AccordionSummary>
             <AccordionDetails>
                 {!!estimatedRanks.relatedUpgrades.length && (
-                    <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
+                    <Accordion
+                        TransitionProps={{ unmountOnExit: !grid1Loaded }}
+                        expanded={expandedPanels.related}
+                        onChange={togglePanel('related')}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <InventoryIcon />
@@ -196,33 +220,13 @@ export const RaidsPlan: React.FC<Props> = ({
                 )}
                 {!!estimatedRanks.inProgressMaterials.length && (
                     <Accordion
-                        defaultExpanded={scrollToCharSnowprintId !== undefined}
+                        expanded={expandedPanels.inProgress}
+                        onChange={togglePanel('inProgress')}
                         TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <PendingIcon color={'primary'} />
                                 <b>{estimatedRanks.inProgressMaterials.length}</b> in progress upgrades
-                                <FormControlLabel
-                                    control={
-                                        <Switch
-                                            checked={viewPreferences.raidsTableView}
-                                            onChange={event => updateView(event.target.checked)}
-                                        />
-                                    }
-                                    label={
-                                        <div className="flex-box gap5">
-                                            {viewPreferences.raidsTableView ? (
-                                                <div className="flex-box gap5">
-                                                    <TableRowsIcon color="primary" /> <span>Table View</span>
-                                                </div>
-                                            ) : (
-                                                <div className="flex-box gap5">
-                                                    <GridViewIcon color="primary" /> <span>Cards View</span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    }
-                                />
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -260,7 +264,10 @@ export const RaidsPlan: React.FC<Props> = ({
                     </Accordion>
                 )}
                 {!!estimatedRanks.finishedMaterials.length && (
-                    <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
+                    <Accordion
+                        TransitionProps={{ unmountOnExit: !grid3Loaded }}
+                        expanded={expandedPanels.finished}
+                        onChange={togglePanel('finished')}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex flex-wrap items-center gap-2" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <CheckCircleIcon color={'success'} /> <b>{estimatedRanks.finishedMaterials.length}</b>{' '}
@@ -301,7 +308,10 @@ export const RaidsPlan: React.FC<Props> = ({
                     </Accordion>
                 )}
                 {!!estimatedRanks.blockedMaterials.length && (
-                    <Accordion TransitionProps={{ unmountOnExit: !grid2Loaded }}>
+                    <Accordion
+                        TransitionProps={{ unmountOnExit: !grid2Loaded }}
+                        expanded={expandedPanels.blocked}
+                        onChange={togglePanel('blocked')}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <AccessibleTooltip
                                 title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} upgrades`}>
@@ -354,47 +364,16 @@ export const RaidsPlan: React.FC<Props> = ({
                     </Accordion>
                 )}
 
-                {!!estimatedShards.shardsRaids.length && (
-                    <Accordion>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <FlexBox className="flex-col items-start">
-                                <div
-                                    className="flex flex-wrap items-center gap-2"
-                                    style={{ fontSize: isMobile ? 16 : 20 }}>
-                                    <span>
-                                        Shards Raids (<b>{estimatedShards.daysTotal}</b> Days |
-                                    </span>
-                                    <span>
-                                        <b>{estimatedShards.energyTotal}</b>{' '}
-                                        <MiscIcon icon={'energy'} height={15} width={15} /> |
-                                    </span>
-                                    <span>
-                                        <b>{estimatedShards.raidsTotal}</b> Raids |
-                                    </span>
-                                    <span>
-                                        <b>{estimatedShards.onslaughtTokens}</b> Tokens)
-                                    </span>
-                                </div>
-                                <span className="italic">{shardsCalendarDate}</span>
-                            </FlexBox>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <div className="flex-box gap10 wrap start">
-                                {estimatedShards.shardsRaids.map(shardsRaid => (
-                                    <ShardsRaidsDayInput key={shardsRaid.characterId} shardRaids={shardsRaid} />
-                                ))}
-                            </div>
-                        </AccordionDetails>
-                    </Accordion>
-                )}
-
                 {!!estimatedRanks.upgradesRaids.length && (
-                    <Accordion TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
+                    <Accordion
+                        TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}
+                        expanded={expandedPanels.raids}
+                        onChange={togglePanel('raids')}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <FlexBox className="flex-col items-start">
                                 <div className="flex-box gap5 wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <span>
-                                        Upgrades raids (<b>{estimatedRanks.upgradesRaids.length}</b> Days |
+                                        Raids Plan (<b>{estimatedRanks.upgradesRaids.length}</b> Days |
                                     </span>
                                     <span>
                                         <b>{estimatedRanks.freeEnergyDays}</b> Unused{' '}
@@ -412,26 +391,28 @@ export const RaidsPlan: React.FC<Props> = ({
                             </FlexBox>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div className="flex gap-2.5 overflow-auto">
-                                {estimatedRanks.upgradesRaids
-                                    .slice(upgradesPaging.start, upgradesPaging.end)
-                                    .map((day, index) => {
-                                        return <RaidsDayView key={index} day={day} title={'Day ' + (index + 1)} />;
-                                    })}
-                                {!upgradesPaging.completed && (
-                                    <Button
-                                        variant={'outlined'}
-                                        className="min-w-[300px] items-start pt-5"
-                                        onClick={() =>
-                                            setUpgradesPaging({
-                                                start: 0,
-                                                end: estimatedRanks.upgradesRaids.length,
-                                                completed: true,
-                                            })
-                                        }>
-                                        Show All
-                                    </Button>
-                                )}
+                            <div className="overflow-x-auto overflow-y-hidden" style={{ transform: 'rotateX(180deg)' }}>
+                                <div className="flex gap-2.5" style={{ transform: 'rotateX(180deg)' }}>
+                                    {estimatedRanks.upgradesRaids
+                                        .slice(upgradesPaging.start, upgradesPaging.end)
+                                        .map((day, index) => {
+                                            return <RaidsDayView key={index} day={day} title={'Day ' + (index + 1)} />;
+                                        })}
+                                    {!upgradesPaging.completed && (
+                                        <Button
+                                            variant={'outlined'}
+                                            className="min-w-[300px] items-start pt-5"
+                                            onClick={() =>
+                                                setUpgradesPaging({
+                                                    start: 0,
+                                                    end: estimatedRanks.upgradesRaids.length,
+                                                    completed: true,
+                                                })
+                                            }>
+                                            Show All
+                                        </Button>
+                                    )}
+                                </div>
                             </div>
                         </AccordionDetails>
                     </Accordion>

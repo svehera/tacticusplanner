@@ -68,5 +68,10 @@ export interface ICharacterAbilitiesMaterialsTotal {
     badges: Record<Rarity, number>;
 }
 
+export interface ICharacterAscendOrbsTotal {
+    alliance: Alliance;
+    orbs: Record<Rarity, number>;
+}
+
 // Re-export types from FSD entities
 export type { ICharacter2, IMow, IMow2, IMowDb, IUnit };

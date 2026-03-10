@@ -1,4 +1,13 @@
-﻿import { ArrowForward, DeleteForever, Edit, ArrowUpward, ArrowDownward } from '@mui/icons-material';
+﻿import {
+    ArrowForward,
+    DeleteForever,
+    Edit,
+    ArrowUpward,
+    ArrowDownward,
+    FilterListOff,
+    Block,
+    CheckCircle,
+} from '@mui/icons-material';
 import LinkIcon from '@mui/icons-material/Link';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -17,12 +26,14 @@ import { Rank, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
+import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
 import {
     CharacterRaidGoalSelect,
     ICharacterUpgradeMow,
@@ -59,6 +70,39 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
         return getUnit(unitId)?.rank ?? Rank.Locked;
     };
 
+    const getStatusIcons = (goalEstimate: IGoalEstimate) => {
+        if (!goalEstimate.completed && !goalEstimate.blocked && !!goalEstimate.included) {
+            return <div className="h-[0px]" />;
+        }
+        return (
+            <div>
+                {!!goalEstimate.completed && (
+                    <AccessibleTooltip title={`Goal is completed in current estimation.`}>
+                        <span className="flex-box gap-[3px]" tabIndex={0}>
+                            <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                        </span>
+                    </AccessibleTooltip>
+                )}
+                {!!goalEstimate.blocked && (
+                    <AccessibleTooltip
+                        title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.`}>
+                        <span className="flex-box gap-[3px]" tabIndex={0}>
+                            <Block fontSize="small" sx={{ color: 'error.main' }} />
+                        </span>
+                    </AccessibleTooltip>
+                )}
+                {!goalEstimate.included && (
+                    <AccessibleTooltip
+                        title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
+                        <span className="flex-box gap-[3px]" tabIndex={0}>
+                            <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
+                        </span>
+                    </AccessibleTooltip>
+                )}
+            </div>
+        );
+    };
+
     const getGoalInfo = (goal: CharacterRaidGoalSelect, goalEstimate: IGoalEstimate) => {
         switch (goal.type) {
             case PersonalGoalType.Ascend: {
@@ -70,45 +114,63 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 const targetMythicShards = ShardsService.getTargetMythicShards(goal);
                 return (
                     <div>
-                        <div className="flex-box between">
-                            <div className="flex-box gap5">
-                                {!isSameRarity && (
-                                    <>
-                                        <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
-                                        <RarityIcon rarity={goal.rarityEnd} />
-                                        {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
-                                    </>
-                                )}
+                        <div className="flex-box between items-center">
+                            <div className="flex-box column">
+                                <div className="flex-box gap5">
+                                    {!isSameRarity && (
+                                        <>
+                                            <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
+                                            <RarityIcon rarity={goal.rarityEnd} />
+                                            {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
+                                        </>
+                                    )}
 
-                                {isSameRarity && (
-                                    <>
-                                        <StarsIcon stars={goal.starsStart} /> <ArrowForward />
-                                        <StarsIcon stars={goal.starsEnd} />
-                                    </>
-                                )}
+                                    {isSameRarity && (
+                                        <>
+                                            <StarsIcon stars={goal.starsStart} /> <ArrowForward />
+                                            <StarsIcon stars={goal.starsEnd} />
+                                        </>
+                                    )}
+                                </div>
+
+                                <div>
+                                    {targetShards > 0 && (
+                                        <div>
+                                            <b>
+                                                {goal.shards} of {targetShards}
+                                            </b>{' '}
+                                            Shards
+                                        </div>
+                                    )}
+                                    {targetMythicShards > 0 && (
+                                        <div>
+                                            <b>
+                                                {goal.mythicShards} of {targetMythicShards}
+                                            </b>{' '}
+                                            Mythic Shards
+                                        </div>
+                                    )}
+                                </div>
                             </div>
+                            {getStatusIcons(goalEstimate)}
                         </div>
-                        <div>
-                            {targetShards > 0 && (
-                                <div>
-                                    <b>
-                                        {goal.shards} of {targetShards}
-                                    </b>{' '}
-                                    Shards
+                        {goalEstimate.orbsEstimate &&
+                            !!Object.values(goalEstimate.orbsEstimate.orbs).some(x => x > 0) && (
+                                <div className="py-2.5">
+                                    <OrbsTotal
+                                        size={25}
+                                        alliance={goalEstimate.orbsEstimate.alliance}
+                                        orbs={goalEstimate.orbsEstimate.orbs}
+                                        displayOrbs={Object.fromEntries(
+                                            Object.entries(goalEstimate.orbsEstimate.orbs).filter(([, v]) => v > 0)
+                                        )}
+                                    />
                                 </div>
                             )}
-                            {targetMythicShards > 0 && (
-                                <div>
-                                    <b>
-                                        {goal.mythicShards} of {targetMythicShards}
-                                    </b>{' '}
-                                    Mythic Shards
-                                </div>
-                            )}
-                        </div>
                     </div>
                 );
             }
+
             case PersonalGoalType.UpgradeRank: {
                 return (
                     <div>
@@ -124,6 +186,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     </div>
                                 )}
                             </div>
+                            {getStatusIcons(goalEstimate)}
                         </div>
                         {goalEstimate.xpBooksApplied !== undefined &&
                             goalEstimate.xpBooksRequired !== undefined &&
@@ -150,7 +213,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
                 return (
                     <div>
-                        <div className="flex-box gap10">
+                        <div className="flex-box between gap10">
                             <div className="flex-box column start">
                                 {hasPrimaryGoal && (
                                     <div className="flex-box gap-[3px]">
@@ -173,6 +236,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     ))}
                                 </div>
                             )}
+                            {getStatusIcons(goalEstimate)}
                         </div>
                         {goalEstimate.mowEstimate && (
                             <div className="px-0 py-2.5">
@@ -238,6 +302,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 </b>{' '}
                                 Shards
                             </div>
+                            {getStatusIcons(goalEstimate)}
                         </div>
                     </div>
                 );

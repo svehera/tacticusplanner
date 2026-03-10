@@ -45,18 +45,13 @@ export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
 
     const rewardIcon = useMemo(() => {
         const upgrade = UpgradesService.getUpgrade(reward);
-        if (!upgrade) {
-            if (reward.startsWith('shards_')) {
-                const char = CharactersService.getUnit(reward.substring(7));
-                if (char) return <UnitShardIcon name={reward} icon={char.roundIcon} />;
-                return reward.substring(7);
+        if (upgrade === undefined) return <span>{reward}</span>;
+        if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
+            const char = CharactersService.getUnit(reward.substring(reward.indexOf('_') + 1));
+            if (char) {
+                return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />;
             }
-            if (reward.startsWith('mythicShards_')) {
-                const char = CharactersService.getUnit(reward.substring(13));
-                if (char) return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={true} />;
-                return reward.substring(13);
-            }
-            return reward;
+            return <span>{reward}</span>;
         }
 
         return (

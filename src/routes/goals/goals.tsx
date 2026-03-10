@@ -1,18 +1,20 @@
-﻿import DeleteIcon from '@mui/icons-material/Delete';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import GridViewIcon from '@mui/icons-material/GridView';
-import LinkIcon from '@mui/icons-material/Link';
-import TableRowsIcon from '@mui/icons-material/TableRows';
+﻿import {
+    Delete as DeleteIcon,
+    ExpandMore as ExpandMoreIcon,
+    GridView as GridViewIcon,
+    Link as LinkIcon,
+    TableRows as TableRowsIcon,
+} from '@mui/icons-material';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import { cloneDeep, sum } from 'lodash';
-import { useCallback, useContext, useMemo, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-import { IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent } from '@/models/interfaces';
-import { goalsLimit, rankToLevel } from 'src/models/constants';
-import { PersonalGoalType } from 'src/models/enums';
+import DailyRaidsSettings from '@/shared-components/daily-raids-settings';
+import { goalsLimit } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
@@ -20,7 +22,7 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
-import { Alliance, Rank, useAuth } from '@/fsd/5-shared/model';
+import { Alliance, useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/iconList';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
@@ -29,24 +31,37 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
-import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
-import { CharactersXpService } from '@/fsd/3-features/characters/characters-xp.service';
 import { BadgesTotal } from '@/fsd/3-features/characters/components/badges-total';
-import {
-    CharacterRaidGoalSelect,
-    ICharacterUpgradeAbilities,
-    ICharacterUpgradeMow,
-    ICharacterUpgradeRankGoal,
-    IGoalEstimate,
-} from '@/fsd/3-features/goals/goals.models';
-import { GoalsService, IXpLevel } from '@/fsd/3-features/goals/goals.service';
+import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
+import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
-import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
-
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
+
+const getAggregatedGoalEstimateForRankOrMow = (
+    goalId: string,
+    estimates: IGoalEstimate[]
+): IGoalEstimate | undefined => {
+    const goalEstimates = estimates.filter(x => x.goalId === goalId);
+    if (!goalEstimates.length) {
+        return undefined;
+    }
+
+    return goalEstimates.reduce(
+        (prev, curr) =>
+            ({
+                // We run this reduce solely to aggregate estimates for ascension goals that include
+                // both non-mythic and mythic shards, that's why we ignore other fields.
+                ...curr,
+                oTokensTotal: (prev.oTokensTotal ?? 0) + (curr.oTokensTotal ?? 0),
+                daysLeft: Math.max(prev.daysLeft ?? 0, curr.daysLeft ?? 0),
+                daysTotal: (prev.daysTotal ?? 0) + (curr.daysTotal ?? 0),
+            }) as IGoalEstimate
+    );
+};
 
 export const Goals = () => {
     const {
@@ -80,43 +95,37 @@ export const Goals = () => {
         [dispatch]
     );
 
-    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+    const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
-    const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false);
-    }, [goals, characters, resolvedMows]);
+    const { allGoals, shardsGoals, upgradeRankOrMowGoals, ascendGoals, upgradeAbilities } = GoalsService.prepareGoals(
+        goals,
+        [...characters, ...resolvedMows],
+        false
+    );
 
-    const estimatedShardsTotal = useMemo(() => {
-        return ShardsService.getShardsEstimatedDays(
-            {
-                campaignsProgress: campaignsProgress,
-                preferences: dailyRaidsPreferences,
-                raidedLocations: [],
+    const estimatedShardsTotal = ShardsService.getShardsEstimatedDays(
+        {
+            campaignsProgress: campaignsProgress,
+            preferences: dailyRaidsPreferences,
+            raidedLocations: [],
+        },
+        ...shardsGoals
+    );
+
+    const estimatedUpgradesTotal = UpgradesService.getUpgradesEstimatedDays(
+        {
+            dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+            campaignsProgress: campaignsProgress,
+            preferences: {
+                ...dailyRaidsPreferences,
             },
-            ...shardsGoals
-        );
-    }, [shardsGoals]);
-
-    const estimatedUpgradesTotal = useMemo(() => {
-        return UpgradesService.getUpgradesEstimatedDays(
-            {
-                dailyEnergy:
-                    dailyRaidsPreferences.dailyEnergy -
-                    Math.min(estimatedShardsTotal.energyPerDay + dailyRaidsPreferences.shardsEnergy, 90),
-                campaignsProgress: campaignsProgress,
-                preferences: {
-                    ...dailyRaidsPreferences,
-                    farmPreferences: {
-                        order: IDailyRaidsFarmOrder.goalPriority,
-                        homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
-                    },
-                },
-                upgrades: inventory.upgrades,
-                completedLocations: [],
-            },
-            ...upgradeRankOrMowGoals
-        );
-    }, [upgradeRankOrMowGoals, estimatedShardsTotal.energyPerDay]);
+            upgrades: inventory.upgrades,
+            completedLocations: dailyRaids.raidedLocations,
+        },
+        characters,
+        resolvedMows,
+        ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
+    );
 
     const removeGoal = (goalId: string): void => {
         dispatch.goals({ type: 'Delete', goalId });
@@ -150,174 +159,27 @@ export const Goals = () => {
         }
     };
 
-    /**
-     * Returns the maximum XP level needed for the character with the given goal priority to meet
-     * all prior goals (if any). If there are no prior goals, returns the character's current
-     * level.
-     */
-    const currentCharacterXp = (
-        characterId: string,
-        goals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUpgradeAbilities)[],
-        currentGoalPriority: number
-    ): IXpLevel => {
-        const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
-        const character = characters.find(c => c.snowprintId! === characterId);
-        const ret: IXpLevel = { currentLevel: character?.level ?? 1, xpAtLevel: character?.xp ?? 0 };
-        for (const goal of priorGoals) {
-            if (goal.type === PersonalGoalType.UpgradeRank) {
-                const upgradeGoal = goal as ICharacterUpgradeRankGoal;
-                const targetLevel = rankToLevel[(upgradeGoal.rankEnd ?? Rank.Stone2) as Rank];
-                if (targetLevel > ret.currentLevel) {
-                    ret.currentLevel = targetLevel;
-                    ret.xpAtLevel = 0;
-                    ret.xpFromPriorGoalApplied = true;
-                }
-            } else if (goal.type === PersonalGoalType.CharacterAbilities) {
-                const abilityGoal = goal as ICharacterUpgradeAbilities;
-                const targetLevel = Math.max(abilityGoal.activeEnd, abilityGoal.passiveEnd);
-                if (targetLevel > ret.currentLevel) {
-                    ret.currentLevel = targetLevel;
-                    ret.xpAtLevel = 0;
-                    ret.xpFromPriorGoalApplied = true;
-                }
-            }
-        }
-
-        return ret;
-    };
-
-    const goalsEstimate = useMemo<IGoalEstimate[]>(() => {
-        const result: IGoalEstimate[] = [];
-
-        if (shardsGoals.length) {
-            const shardsEstimate = ShardsService.getShardsEstimatedDays(
-                {
-                    campaignsProgress: campaignsProgress,
-                    preferences: dailyRaidsPreferences,
-                    raidedLocations: dailyRaids.raidedLocations ?? [],
-                },
-                ...shardsGoals
-            );
-
-            const goalsEstimate = shardsEstimate.materials.map(
-                x =>
-                    ({
-                        goalId: x.goalId,
-                        energyTotal: x.energyTotal,
-                        daysTotal: x.daysTotal,
-                        oTokensTotal: x.onslaughtTokensTotal,
-                        daysLeft: x.daysTotal,
-                    }) as IGoalEstimate
-            );
-
-            result.push(...goalsEstimate);
-        }
-
-        if (upgradeRankOrMowGoals.length) {
-            const goalsEstimate = upgradeRankOrMowGoals.map(goal => {
-                const goalEstimate = estimatedUpgradesTotal.byCharactersPriority.find(x => x.goalId === goal.goalId);
-                const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x => {
-                    const relatedGoals = x.raids.flatMap(raid => raid.relatedGoals);
-                    return relatedGoals.includes(goal.goalId);
-                });
-
-                const daysTotal = estimatedUpgradesTotal.upgradesRaids.filter(x => {
-                    const relatedGoals = x.raids.flatMap(raid => raid.relatedGoals);
-                    return relatedGoals.includes(goal.goalId);
-                }).length;
-
-                if (goal.type === PersonalGoalType.UpgradeRank) {
-                    const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
-                    const currentXp = currentCharacterXp(
-                        goal.unitId,
-                        [...upgradeRankOrMowGoals, ...upgradeAbilities],
-                        goal.priority
-                    );
-                    const xpEstimate = CharactersXpService.getLegendaryTomesCount(
-                        currentXp.currentLevel,
-                        currentXp.xpAtLevel,
-                        targetLevel
-                    );
-                    if (xpEstimate) {
-                        xpEstimate!.xpFromPreviousGoalApplied = currentXp.xpFromPriorGoalApplied;
-                    }
-
-                    return {
-                        goalId: goal.goalId,
-                        energyTotal: sum(goalEstimate?.upgrades.map(x => x.energyTotal) ?? []),
-                        daysTotal: daysTotal,
-                        daysLeft: firstFarmDay + daysTotal,
-                        oTokensTotal: 0,
-                        xpEstimate,
-                    } as IGoalEstimate;
-                } else {
-                    const mowMaterials = MowsService.getMaterialsList(goal.unitId, goal.unitName, goal.unitAlliance);
-
-                    const primaryAbility = mowMaterials.slice(goal.primaryStart - 1, goal.primaryEnd - 1);
-                    const secondaryAbility = mowMaterials.slice(goal.secondaryStart - 1, goal.secondaryEnd - 1);
-
-                    const mowEstimate = MowLookupService.getTotals([...primaryAbility, ...secondaryAbility]);
-
-                    return {
-                        goalId: goal.goalId,
-                        energyTotal: sum(goalEstimate?.upgrades.map(x => x.energyTotal) ?? []),
-                        daysTotal: daysTotal,
-                        daysLeft: firstFarmDay + daysTotal,
-                        oTokensTotal: 0,
-                        mowEstimate,
-                    } as IGoalEstimate;
-                }
-            });
-
-            result.push(...goalsEstimate);
-        }
-
-        if (upgradeAbilities.length) {
-            for (const goal of upgradeAbilities) {
-                const targetLevel = Math.max(goal.activeEnd, goal.passiveEnd);
-                const currentXp = currentCharacterXp(
-                    goal.unitId,
-                    [...upgradeRankOrMowGoals, ...upgradeAbilities],
-                    goal.priority
-                );
-                const xpEstimate = CharactersXpService.getLegendaryTomesCount(
-                    currentXp.currentLevel,
-                    currentXp.xpAtLevel,
-                    targetLevel
-                );
-                const activeAbility = CharactersAbilitiesService.getMaterials(goal.activeStart, goal.activeEnd);
-                const passiveAbility = CharactersAbilitiesService.getMaterials(goal.passiveStart, goal.passiveEnd);
-
-                const abilitiesEstimate = CharactersAbilitiesService.getTotals(
-                    [...activeAbility, ...passiveAbility],
-                    goal.unitAlliance
-                );
-
-                result.push({
-                    goalId: goal.goalId,
-                    abilitiesEstimate,
-                    xpEstimateAbilities: xpEstimate!,
-                } as IGoalEstimate);
-            }
-        }
-
-        return result;
-    }, [shardsGoals, upgradeRankOrMowGoals]);
+    const goalsEstimate = GoalsService.buildGoalEstimates(
+        estimatedUpgradesTotal,
+        shardsGoals,
+        upgradeRankOrMowGoals,
+        upgradeAbilities,
+        characters
+    );
 
     const totalGoldAbilities = sum(
         goalsEstimate.map(x => (x.abilitiesEstimate?.gold ?? 0) + (x.xpEstimateAbilities?.gold ?? 0))
     );
 
-    const adjustedGoalsEstimates = useMemo(() => {
-        return GoalsService.adjustGoalEstimates(
-            cloneDeep(goals),
-            cloneDeep(goalsEstimate),
-            inventory,
-            xpUse,
-            upgradeRankOrMowGoals,
-            xpIncome
-        );
-    }, [allGoals, goalsEstimate, inventory, upgradeRankOrMowGoals, xpUse, xpIncome]);
+    const adjustedGoalsEstimates = GoalsService.adjustGoalEstimates(
+        cloneDeep(goals),
+        cloneDeep(goalsEstimate),
+        inventory,
+        xpUse,
+        upgradeRankOrMowGoals,
+        ascendGoals,
+        xpIncome
+    );
 
     const hasSync = !!userInfo.tacticusApiKey;
 
@@ -335,6 +197,8 @@ export const Goals = () => {
         dispatch.goals({ type: 'DeleteAll' });
     };
 
+    const [openSettings, setOpenSettings] = useState<boolean>(false);
+
     return (
         <div>
             <div className="flex flex-wrap items-center gap-5">
@@ -345,6 +209,12 @@ export const Goals = () => {
                     to={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
                     <LinkIcon /> <span className="pl-[5px]">Go to Raids</span>
                 </Button>
+
+                <Button variant="outlined" size="small" onClick={() => setOpenSettings(true)}>
+                    <SettingsIcon style={{ marginRight: 4 }} /> Raids Settings
+                </Button>
+
+                <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
                 <SetGoalDialog key={goals.length} />
                 {hasSync && <SyncButton showText={!isMobile} />}
                 {}
@@ -380,31 +250,27 @@ export const Goals = () => {
             <div className="flex-box gap20 my-2 w-[350px]">
                 <Accordion
                     defaultExpanded={false}
-                    className="border border-[var(--border)] !bg-transparent px-2 !shadow-none hover:!bg-[var(--secondary)]">
+                    className="border border-(--border) bg-transparent! px-2 shadow-none! hover:bg-(--secondary)!">
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-[var(--muted-fg)]" />}
-                        className="min-h-0 rounded-lg !bg-transparent !p-0"
+                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
+                        className="min-h-0 rounded-lg bg-transparent! p-0!"
                         aria-controls="resources-content"
                         id="resources-header">
-                        <span className="text-base font-semibold text-[var(--fg)]">Total Resources Missing</span>
+                        <span className="text-base font-semibold text-(--fg)">Total Resources Missing</span>
                     </AccordionSummary>
 
-                    <AccordionDetails className="!bg-transparent !p-0">
-                        <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-[var(--border)] bg-[var(--overlay)] p-2">
-                            <div className="flex items-center justify-start gap-x-4 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                    <AccordionDetails className="bg-transparent! p-0!">
+                        <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-(--border) bg-(--overlay) p-2">
+                            <div className="flex items-center justify-start gap-x-4 rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <MiscIcon icon={'energy'} height={35} width={35} />{' '}
-                                <b className="text-lg text-[var(--fg)]">{estimatedUpgradesTotal.energyTotal}</b>
+                                <b className="text-lg text-(--fg)">{estimatedUpgradesTotal.energyTotal}</b>
                             </div>
 
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
                             </div>
 
-                            <div className="flex flex-col gap-y-2 rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
-                                <h4 className="mb-1 border-b border-[var(--border)] pb-1 text-sm font-semibold text-[var(--muted-fg)] uppercase">
-                                    Ability Badges
-                                </h4>
-
+                            <div className="flex flex-col gap-y-2 rounded-md border border-(--border) bg-(--secondary) p-2">
                                 {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                     <div key={alliance} className="flex-box">
                                         <BadgesTotal
@@ -415,12 +281,23 @@ export const Goals = () => {
                                     </div>
                                 ))}
                             </div>
+                            <div className="flex flex-col gap-y-2 rounded-md border border-(--border) bg-(--secondary) p-2">
+                                {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
+                                    <div key={alliance} className="flex-box">
+                                        <OrbsTotal
+                                            orbs={adjustedGoalsEstimates.neededOrbs[alliance]}
+                                            alliance={alliance}
+                                            size={35}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
 
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
                             </div>
 
-                            <div className="rounded-md border border-[var(--border)] bg-[var(--secondary)] p-2">
+                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <MoWComponentsTotal
                                     components={adjustedGoalsEstimates.neededComponents}
                                     size={'medium'}
@@ -443,30 +320,26 @@ export const Goals = () => {
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex flex-wrap gap-3">
-                            {upgradeRankOrMowGoals.map(goal => (
-                                <GoalCard
-                                    key={goal.goalId}
-                                    goal={goal}
-                                    goalEstimate={adjustedGoalsEstimates.goalEstimates
-                                        .filter(x => x.goalId === goal.goalId)
-                                        .reduce(
-                                            (prev, curr) =>
-                                                ({
-                                                    // We run this reduce solely to aggregate estimates for ascension goals that include
-                                                    // both non-mythic and mythic shards, that's why we ignore other fields.
-                                                    ...curr,
-                                                    oTokensTotal: (prev?.oTokensTotal ?? 0) + (curr.oTokensTotal ?? 0),
-                                                    daysLeft: Math.max(prev?.daysLeft ?? 0, curr.daysLeft ?? 0),
-                                                    daysTotal: (prev?.daysTotal ?? 0) + (curr.daysTotal ?? 0),
-                                                }) as IGoalEstimate
+                            {upgradeRankOrMowGoals.map(goal => {
+                                const aggregatedEstimate = getAggregatedGoalEstimateForRankOrMow(
+                                    goal.goalId,
+                                    adjustedGoalsEstimates.goalEstimates
+                                );
+                                return (
+                                    <GoalCard
+                                        key={goal.goalId}
+                                        characters={characters}
+                                        mows={resolvedMows}
+                                        goal={goal}
+                                        goalEstimate={aggregatedEstimate}
+                                        menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        bgColor={GoalService.getBackgroundColor(
+                                            viewPreferences.goalColorMode,
+                                            aggregatedEstimate
                                         )}
-                                    menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                    bgColor={GoalService.getBackgroundColor(
-                                        viewPreferences.goalColorMode,
-                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
-                                    )}
-                                />
-                            ))}
+                                    />
+                                );
+                            })}
                         </div>
                     )}
 
@@ -498,6 +371,8 @@ export const Goals = () => {
                         <div className="flex flex-wrap gap-3">
                             {shardsGoals.map(goal => (
                                 <GoalCard
+                                    characters={characters}
+                                    mows={resolvedMows}
                                     key={goal.goalId}
                                     goal={goal}
                                     goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
@@ -534,6 +409,8 @@ export const Goals = () => {
                         <div className="flex flex-wrap gap-3">
                             {upgradeAbilities.map(goal => (
                                 <GoalCard
+                                    characters={characters}
+                                    mows={resolvedMows}
                                     key={goal.goalId}
                                     goal={goal}
                                     goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
