@@ -322,7 +322,7 @@ export const RaidsPlan: React.FC<Props> = ({
 
                                 <div className="flex-grow">
                                     {viewPreferences.raidsTableView === true ? (
-                                        <div className="ag-theme-material flex max-h-[600px] w-full flex-col">
+                                        <div className="ag-theme-material flex h-[600px] w-full flex-col">
                                             <MaterialsTable
                                                 rows={estimatedRanks.blockedMaterials}
                                                 updateMaterialQuantity={updateInventory}
