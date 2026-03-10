@@ -24,6 +24,8 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
             Campaign.TEC,
             Campaign.TASC,
             Campaign.TAEC,
+            Campaign.ASSC,
+            Campaign.ASEC,
         ];
         if (challengeCampaigns.includes(location.campaign)) {
             return location.nodeNumber + 'B';

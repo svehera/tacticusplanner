@@ -139,11 +139,15 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     [Campaign.TE]: 0,
     [Campaign.TEC]: 0,
 
-    // T'au Empire campaign event
     [Campaign.TAS]: 0,
     [Campaign.TASC]: 0,
     [Campaign.TAE]: 0,
     [Campaign.TAEC]: 0,
+
+    [Campaign.ASS]: 0,
+    [Campaign.ASSC]: 0,
+    [Campaign.ASE]: 0,
+    [Campaign.ASEC]: 0,
 };
 
 const defaultGWLayout: IGWLayoutZone[] = [
