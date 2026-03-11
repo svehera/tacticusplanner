@@ -19,9 +19,9 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank, rankToString, Rarity, RarityMapper } from '@/fsd/5-shared/model';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService, CharacterTitle, RankIcon } from '@/fsd/4-entities/character';
+import { CharactersService, CharacterTitle } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
 
