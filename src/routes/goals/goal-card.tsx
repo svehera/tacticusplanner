@@ -17,11 +17,11 @@ import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RankIcon } from '@/fsd/5-shared/ui/icons/rank.icon';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 
 import { CampaignImage } from '@/fsd/4-entities/campaign/campaign.icon';
-import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 
 import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';

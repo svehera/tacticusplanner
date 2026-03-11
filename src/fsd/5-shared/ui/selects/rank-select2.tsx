@@ -1,11 +1,9 @@
-/* eslint-disable boundaries/element-types */
 import { Listbox, Transition } from '@headlessui/react';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { Fragment } from 'react';
 
 import { Rank } from '@/fsd/5-shared/model';
-
-import { RankIcon } from '@/fsd/4-entities/character/@x/npc';
+import { RankIcon } from '@/fsd/5-shared/ui/icons';
 
 export const RankSelect2 = ({
     rankValues,

@@ -23,13 +23,10 @@ import { StoreContext, DispatchContext } from 'src/reducers/store.provider';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
 import { Rank, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
-import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
-import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
+import { RarityIcon, StarsIcon, MiscIcon, RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
-import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
