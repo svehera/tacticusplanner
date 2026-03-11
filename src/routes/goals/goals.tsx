@@ -13,6 +13,7 @@ import { useCallback, useContext, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
+import { IDailyRaidsFarmOrder } from '@/models/interfaces';
 import DailyRaidsSettings from '@/shared-components/daily-raids-settings';
 import { goalsLimit } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -159,12 +160,14 @@ export const Goals = () => {
         }
     };
 
+    const isGoalPriority = dailyRaidsPreferences?.farmPreferences?.order === IDailyRaidsFarmOrder.goalPriority;
     const goalsEstimate = GoalsService.buildGoalEstimates(
         estimatedUpgradesTotal,
         shardsGoals,
         upgradeRankOrMowGoals,
         upgradeAbilities,
-        characters
+        characters,
+        isGoalPriority
     );
 
     const totalGoldAbilities = sum(

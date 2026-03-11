@@ -268,5 +268,30 @@
         "lvl": 54,
         "gold": 137500,
         "badges": 2
+    },
+    {
+        "lvl": 55,
+        "gold": 140000,
+        "badges": 2
+    },
+    {
+        "lvl": 56,
+        "gold": 142500,
+        "badges": 3
+    },
+    {
+        "lvl": 57,
+        "gold": 145000,
+        "badges": 3
+    },
+    {
+        "lvl": 58,
+        "gold": 147500,
+        "badges": 4
+    },
+    {
+        "lvl": 59,
+        "gold": 150000,
+        "badges": 5
     }
 ]

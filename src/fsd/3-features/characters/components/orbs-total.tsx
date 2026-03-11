@@ -4,7 +4,7 @@ import { Badge, Tooltip } from '@mui/material';
 import React from 'react';
 
 import { RarityMapper, Alliance, Rarity } from '@/fsd/5-shared/model';
-import { OrbIcon } from '@/fsd/5-shared/ui/icons/orb-image';
+import { OrbImage } from '@/fsd/5-shared/ui/icons/orb-image';
 
 interface Props {
     alliance: Alliance;
@@ -23,7 +23,7 @@ export const OrbsTotal: React.FC<Props> = ({ orbs, alliance, size = 35, displayO
                 return (
                     <Tooltip key={rarityNum} title={`${RarityMapper.rarityToRarityString(rarityNum)} Orbs`}>
                         <Badge badgeContent={<b>{count}</b>}>
-                            <OrbIcon alliance={alliance} rarity={rarityNum} size={size} />
+                            <OrbImage alliance={alliance} rarity={rarityNum} size={size} />
                         </Badge>
                     </Tooltip>
                 );
