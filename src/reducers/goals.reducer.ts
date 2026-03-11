@@ -9,6 +9,11 @@ export type GoalsAction =
           goal: CharacterRaidGoalSelect;
       }
     | {
+          type: 'Swap'; // New action type
+          goalId: string;
+          neighborId: string;
+      }
+    | {
           type: 'Add';
           goal: IPersonalGoal;
       }
@@ -29,6 +34,22 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
     switch (action.type) {
         case 'Set': {
             return action.value;
+        }
+        case 'Swap': {
+            const { goalId, neighborId } = action;
+            const newState = [...state].sort((a, b) => a.priority - b.priority);
+
+            const idxA = newState.findIndex(x => x.id === goalId);
+            const idxB = newState.findIndex(x => x.id === neighborId);
+
+            if (idxA !== -1 && idxB !== -1) {
+                // Swap them in the array
+                [newState[idxA], newState[idxB]] = [newState[idxB], newState[idxA]];
+
+                // Re-index priorities 1..N
+                return newState.map((g, i) => ({ ...g, priority: i + 1 }));
+            }
+            return state;
         }
         case 'Add': {
             if (state.find(x => x.id === action.goal.id)) {

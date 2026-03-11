@@ -1,4 +1,4 @@
-﻿import {
+import {
     ArrowForward,
     DeleteForever,
     Edit,
@@ -49,13 +49,14 @@ import { GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
 
 interface Props {
-    rows: CharacterRaidGoalSelect[];
+    rows: CharacterRaidGoalSelect[]; // The filtered subset (e.g., just Abilities)
+    allGoals: CharacterRaidGoalSelect[]; // The full list for global priority checks
     estimate: IGoalEstimate[];
     goalsColorCoding: GoalColorMode;
     menuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
 }
 
-export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, menuItemSelect }) => {
+export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsColorCoding, menuItemSelect }) => {
     const { characters, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -316,18 +317,20 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                     const { data } = params;
                     if (!data) return;
 
+                    // Find the index in the GLOBAL list to determine true neighbors
+                    const globalIndex = allGoals.findIndex(x => x.goalId === data.goalId);
+
                     const moveUp = () => {
-                        if (data.priority <= 1) return;
-                        const updated = { ...data, priority: data.priority - 1 } as CharacterRaidGoalSelect;
-                        dispatch.goals({ type: 'Update', goal: updated });
+                        if (globalIndex <= 0) return; // Already at the absolute top
+                        const neighbor = allGoals[globalIndex - 1];
+                        dispatch.goals({ type: 'Swap', goalId: data.goalId, neighborId: neighbor.goalId });
                     };
 
                     const moveDown = () => {
-                        if (data.priority >= rows.length) return;
-                        const updated = { ...data, priority: data.priority + 1 } as CharacterRaidGoalSelect;
-                        dispatch.goals({ type: 'Update', goal: updated });
+                        if (globalIndex >= allGoals.length - 1) return; // Already at the absolute bottom
+                        const neighbor = allGoals[globalIndex + 1];
+                        dispatch.goals({ type: 'Swap', goalId: data.goalId, neighborId: neighbor.goalId });
                     };
-
                     return (
                         <div className="flex-box column center">
                             <div className="flex-box gap5 items-center">
@@ -662,7 +665,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 // width: 120,
             },
         ];
-    }, [rows]);
+    }, [rows, dispatch, menuItemSelect, estimate, characters]);
 
     const getRowStyle = useMemo(
         () => (params: any) => {

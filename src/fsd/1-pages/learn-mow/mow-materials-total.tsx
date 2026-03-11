@@ -59,7 +59,11 @@ export const MowMaterialsTotal: React.FC<Props> = ({ total, mowAlliance, label, 
                     })}
                 </div>
                 <div className="flex-box gap5">
-                    <MiscIcon icon={'coin'} width={25} height={25} />
+                    <Tooltip title="Gold">
+                        <span>
+                            <MiscIcon icon={'coin'} width={25} height={25} />
+                        </span>
+                    </Tooltip>
                     <b>{numberToThousandsString(total.gold)}</b>
                 </div>
             </div>

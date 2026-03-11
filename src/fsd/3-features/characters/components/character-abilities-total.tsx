@@ -16,7 +16,9 @@ export const CharacterAbilitiesTotal: React.FC<ICharacterAbilitiesMaterialsTotal
             <BadgesTotal badges={badges} alliance={alliance} />
             <div className="flex-box gap5">
                 <Tooltip title="Gold">
-                    <MiscIcon icon={'coin'} width={25} height={25} aria-label="Gold" />
+                    <span>
+                        <MiscIcon icon={'coin'} width={25} height={25} />
+                    </span>
                 </Tooltip>
                 <b>{numberToThousandsString(gold)}</b>
             </div>

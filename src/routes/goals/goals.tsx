@@ -80,6 +80,11 @@ export const Goals = () => {
         false
     );
 
+    // Add these sorts to ensure the UI matches the global priority order
+    const sortedShards = [...shardsGoals].sort((a, b) => a.priority - b.priority);
+    const sortedUpgrades = [...upgradeRankOrMowGoals].sort((a, b) => a.priority - b.priority);
+    const sortedAbilities = [...upgradeAbilities].sort((a, b) => a.priority - b.priority);
+
     const estimatedShardsTotal = ShardsService.getShardsEstimatedDays(
         {
             campaignsProgress: campaignsProgress,
@@ -113,6 +118,7 @@ export const Goals = () => {
     };
 
     const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => {
+        const currentGoals = [...goals].sort((a, b) => a.priority - b.priority);
         if (item === 'delete') {
             if (confirm('Are you sure? The goal will be permanently deleted!')) {
                 removeGoal(goalId);
@@ -135,25 +141,23 @@ export const Goals = () => {
             }
         }
 
-        if (item === 'moveUp') {
-            const goal = allGoals.find(x => x.goalId === goalId);
-            if (goal && goal.priority > 1) {
-                const neighborGoal = allGoals.find(x => x.goalId !== goalId && x.priority === goal.priority - 1);
-                if (neighborGoal) {
-                    dispatch.goals({ type: 'Update', goal: { ...neighborGoal, priority: neighborGoal.priority + 1 } });
-                }
-                dispatch.goals({ type: 'Update', goal: { ...goal, priority: goal.priority - 1 } });
-            }
-        }
+        if (item === 'moveUp' || item === 'moveDown') {
+            const isUp = item === 'moveUp';
 
-        if (item === 'moveDown') {
-            const goal = allGoals.find(x => x.goalId === goalId);
-            if (goal && goal.priority < allGoals.length) {
-                const neighborGoal = allGoals.find(x => x.goalId !== goalId && x.priority === goal.priority + 1);
-                if (neighborGoal) {
-                    dispatch.goals({ type: 'Update', goal: { ...neighborGoal, priority: neighborGoal.priority - 1 } });
-                }
-                dispatch.goals({ type: 'Update', goal: { ...goal, priority: goal.priority + 1 } });
+            // Find current position in the flattened list
+            const currentIndex = currentGoals.findIndex(x => x.id === goalId);
+            const targetIndex = isUp ? currentIndex - 1 : currentIndex + 1;
+
+            // 2. Boundary Check
+            if (targetIndex >= 0 && targetIndex < currentGoals.length) {
+                const neighbor = currentGoals[targetIndex];
+
+                // 3. Dispatch atomic swap
+                dispatch.goals({
+                    type: 'Swap',
+                    goalId: goalId,
+                    neighborId: neighbor.id,
+                });
             }
         }
     };
@@ -316,17 +320,23 @@ export const Goals = () => {
                                     goal.goalId,
                                     adjustedGoalsEstimates.goalEstimates
                                 );
+                                const originalEstimate = adjustedGoalsEstimates.goalEstimates.find(
+                                    x => x.goalId === goal.goalId
+                                );
+                                const finalEstimate = originalEstimate
+                                    ? { ...originalEstimate, ...aggregatedEstimate }
+                                    : undefined;
                                 return (
                                     <GoalCard
                                         key={goal.goalId}
                                         characters={characters}
                                         mows={resolvedMows}
                                         goal={goal}
-                                        goalEstimate={aggregatedEstimate}
+                                        goalEstimate={finalEstimate}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
-                                            aggregatedEstimate
+                                            finalEstimate
                                         )}
                                     />
                                 );
@@ -336,7 +346,8 @@ export const Goals = () => {
 
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
-                            rows={upgradeRankOrMowGoals}
+                            rows={sortedUpgrades}
+                            allGoals={allGoals} // Pass the global flattened list here
                             estimate={adjustedGoalsEstimates.goalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalColorMode}
@@ -381,7 +392,8 @@ export const Goals = () => {
 
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
-                            rows={shardsGoals}
+                            rows={sortedShards}
+                            allGoals={allGoals} // Pass the global flattened list here
                             estimate={adjustedGoalsEstimates.goalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalColorMode}
@@ -419,7 +431,8 @@ export const Goals = () => {
 
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
-                            rows={upgradeAbilities}
+                            rows={sortedAbilities}
+                            allGoals={allGoals} // Pass the global flattened list here
                             estimate={adjustedGoalsEstimates.goalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalColorMode}
