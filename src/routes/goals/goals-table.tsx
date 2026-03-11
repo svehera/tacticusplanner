@@ -72,7 +72,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
 
     const getStatusIcons = (goalEstimate: IGoalEstimate) => {
         if (!goalEstimate.completed && !goalEstimate.blocked && !!goalEstimate.included) {
-            return <div className="h-[0px]" />;
+            return <div className="h-0" />;
         }
         return (
             <div>
@@ -152,7 +152,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     )}
                                 </div>
                             </div>
-                            {getStatusIcons(goalEstimate)}
                         </div>
                         {goalEstimate.orbsEstimate &&
                             !!Object.values(goalEstimate.orbsEstimate.orbs).some(x => x > 0) && (
@@ -186,7 +185,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     </div>
                                 )}
                             </div>
-                            {getStatusIcons(goalEstimate)}
                         </div>
                         {goalEstimate.xpBooksApplied !== undefined &&
                             goalEstimate.xpBooksRequired !== undefined &&
@@ -229,15 +227,15 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     </div>
                                 )}
                             </div>
-                            {!!goal.upgradesRarity.length && (
-                                <div className="flex-box gap-[3px]">
-                                    {goal.upgradesRarity.map(x => (
-                                        <RarityIcon key={x} rarity={x} />
-                                    ))}
-                                </div>
-                            )}
-                            {getStatusIcons(goalEstimate)}
                         </div>
+                        {!!goal.upgradesRarity.length && (
+                            <div className="flex-box gap-[3px]">
+                                <ArrowForward />
+                                {goal.upgradesRarity.map(x => (
+                                    <RarityIcon key={x} rarity={x} />
+                                ))}
+                            </div>
+                        )}
                         {goalEstimate.mowEstimate && (
                             <div className="px-0 py-2.5">
                                 <MowMaterialsTotal
@@ -283,7 +281,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 </div>
                             )}
                         {goalEstimate.abilitiesEstimate && (
-                            <div className="px-0 py-2.5">
+                            <div className="flex-box gap-[3px]">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
@@ -302,7 +300,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 </b>{' '}
                                 Shards
                             </div>
-                            {getStatusIcons(goalEstimate)}
                         </div>
                     </div>
                 );
@@ -367,7 +364,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             },
             {
                 field: 'unitIcon',
-                headerName: 'Character',
+                headerName: 'Unit',
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
                     if (data) {
@@ -377,7 +374,22 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                     }
                 },
                 sortable: false,
-                maxWidth: 90,
+                maxWidth: 60,
+            },
+            {
+                headerName: 'Status',
+                autoHeight: true,
+                width: 60,
+                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = params;
+                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
+                    if (data && goalEstimate) {
+                        const statusEstimate = goalEstimate.blocked
+                            ? { ...goalEstimate, completed: false }
+                            : goalEstimate;
+                        return getStatusIcons(statusEstimate);
+                    }
+                },
             },
             {
                 headerName: 'Details',

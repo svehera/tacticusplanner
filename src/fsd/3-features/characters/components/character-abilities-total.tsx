@@ -1,9 +1,11 @@
-﻿import React from 'react';
+﻿/* eslint-disable import-x/no-internal-modules */
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { Tooltip } from '@mui/material';
+import React from 'react';
+
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacterAbilitiesMaterialsTotal } from '@/fsd/3-features/characters/characters.models';
 
 import { BadgesTotal } from './badges-total';
@@ -13,8 +15,10 @@ export const CharacterAbilitiesTotal: React.FC<ICharacterAbilitiesMaterialsTotal
         <div className="flex-box gap20 wrap">
             <BadgesTotal badges={badges} alliance={alliance} />
             <div className="flex-box gap5">
+                <Tooltip title="Gold">
+                    <MiscIcon icon={'coin'} width={25} height={25} aria-label="Gold" />
+                </Tooltip>
                 <b>{numberToThousandsString(gold)}</b>
-                <span>Gold</span>
             </div>
         </div>
     );

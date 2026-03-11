@@ -81,6 +81,7 @@ export interface IMowLevelMaterials {
     badges: number;
     salvage: number;
     forgeBadges: number;
+    orbs: number;
     rarity: Rarity;
     primaryUpgrades: Array<IBaseUpgrade | ICraftedUpgrade>;
     secondaryUpgrades: Array<IBaseUpgrade | ICraftedUpgrade>;

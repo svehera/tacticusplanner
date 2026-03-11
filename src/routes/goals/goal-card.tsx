@@ -1,4 +1,13 @@
-﻿import { ArrowForward, Block, CheckCircle, DeleteForever, Edit, FilterListOff } from '@mui/icons-material';
+﻿import {
+    ArrowForward,
+    ArrowUpward,
+    ArrowDownward,
+    Block,
+    CheckCircle,
+    DeleteForever,
+    Edit,
+    FilterListOff,
+} from '@mui/icons-material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LinkIcon from '@mui/icons-material/Link';
 import { Card, CardContent, CardHeader } from '@mui/material';
@@ -37,7 +46,7 @@ import { XpGoalProgressBar } from './xp-book-progress-bar';
 interface Props {
     goal: CharacterRaidGoalSelect;
     goalEstimate?: IGoalEstimate;
-    menuItemSelect?: (item: 'edit' | 'delete') => void;
+    menuItemSelect?: (item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => void;
     bgColor: string;
     characters: ICharacter2[];
     mows: IMow2[];
@@ -287,6 +296,7 @@ export const GoalCard: React.FC<Props> = ({
                             </div>
                             {!!goal.upgradesRarity.length && (
                                 <div className="flex-box gap-[3px]">
+                                    <ArrowForward />
                                     {goal.upgradesRarity.map(x => (
                                         <RarityIcon key={x} rarity={x} />
                                     ))}
@@ -379,7 +389,7 @@ export const GoalCard: React.FC<Props> = ({
                         )}
                         {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
                         {goalEstimate.abilitiesEstimate && (
-                            <div className="px-0 py-2.5">
+                            <div className="flex-box gap-[3px]">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
@@ -453,7 +463,7 @@ export const GoalCard: React.FC<Props> = ({
     return (
         <Card
             variant="outlined"
-            className={isGoalCompleted ? '!bg-[var(--success)]' : ''}
+            className={isGoalCompleted ? 'bg-(--success)!' : ''}
             sx={{
                 width: 350,
                 minHeight: 200,
@@ -463,6 +473,12 @@ export const GoalCard: React.FC<Props> = ({
                 action={
                     menuItemSelect ? (
                         <>
+                            <IconButton onClick={() => menuItemSelect('moveUp')}>
+                                <ArrowUpward fontSize="small" />
+                            </IconButton>
+                            <IconButton onClick={() => menuItemSelect('moveDown')}>
+                                <ArrowDownward fontSize="small" />
+                            </IconButton>
                             <IconButton onClick={() => menuItemSelect('edit')}>
                                 <Edit fontSize="small" />
                             </IconButton>

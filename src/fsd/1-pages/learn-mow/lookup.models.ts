@@ -17,6 +17,7 @@ export interface IMowMaterialsTotal {
     gold: number;
     badges: Record<Rarity, number>;
     forgeBadges: Record<Rarity, number>;
+    orbs: Record<Rarity, number>;
 }
 
 export interface IMowUpgrade extends IBaseUpgrade {

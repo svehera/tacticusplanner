@@ -112,7 +112,7 @@ export const Goals = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'goalsTableView', value: tableView });
     };
 
-    const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete') => {
+    const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => {
         if (item === 'delete') {
             if (confirm('Are you sure? The goal will be permanently deleted!')) {
                 removeGoal(goalId);
@@ -132,6 +132,28 @@ export const Goals = () => {
             if (relatedUnit && goal) {
                 setEditUnit(relatedUnit);
                 setEditGoal(goal);
+            }
+        }
+
+        if (item === 'moveUp') {
+            const goal = allGoals.find(x => x.goalId === goalId);
+            if (goal && goal.priority > 1) {
+                const neighborGoal = allGoals.find(x => x.goalId !== goalId && x.priority === goal.priority - 1);
+                if (neighborGoal) {
+                    dispatch.goals({ type: 'Update', goal: { ...neighborGoal, priority: neighborGoal.priority + 1 } });
+                }
+                dispatch.goals({ type: 'Update', goal: { ...goal, priority: goal.priority - 1 } });
+            }
+        }
+
+        if (item === 'moveDown') {
+            const goal = allGoals.find(x => x.goalId === goalId);
+            if (goal && goal.priority < allGoals.length) {
+                const neighborGoal = allGoals.find(x => x.goalId !== goalId && x.priority === goal.priority + 1);
+                if (neighborGoal) {
+                    dispatch.goals({ type: 'Update', goal: { ...neighborGoal, priority: neighborGoal.priority - 1 } });
+                }
+                dispatch.goals({ type: 'Update', goal: { ...goal, priority: goal.priority + 1 } });
             }
         }
     };

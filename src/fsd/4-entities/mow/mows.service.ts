@@ -47,6 +47,7 @@ export class MowsService {
                 salvage: lvlUpgrade.salvage,
                 badges: lvlUpgrade.badges.amount,
                 forgeBadges: lvlUpgrade.forgeBadges ? lvlUpgrade.forgeBadges.amount : 0,
+                orbs: 0,
                 primaryUpgrades,
                 secondaryUpgrades,
                 rarity: RarityMapper.getRarityFromLevel(actualLevel),
