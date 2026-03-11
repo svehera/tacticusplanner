@@ -1,14 +1,20 @@
 import React from 'react';
 
+import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
 
 interface XpGoalProgressBarProps {
     applied: number;
     required: number;
+    bookRarity: Rarity;
 }
 
-export const XpGoalProgressBar: React.FC<XpGoalProgressBarProps> = ({ applied, required }) => {
+export const XpGoalProgressBar: React.FC<XpGoalProgressBarProps> = ({
+    applied,
+    required,
+    bookRarity = Rarity.Legendary,
+}) => {
     const percentage = required > 0 ? Math.min(100, Math.round((applied / required) * 100)) : 100;
 
     const barWidth = `${percentage}%`;
@@ -17,6 +23,7 @@ export const XpGoalProgressBar: React.FC<XpGoalProgressBarProps> = ({ applied, r
 
     const tooltipText = `XP Books Applied: ${applied} / Required: ${required} (${percentage}%)`;
 
+    const bookIconName = Rarity[bookRarity].toLowerCase() + 'Book';
     return (
         <AccessibleTooltip title={tooltipText}>
             <div className="flex-box w-full max-w-[140px] items-center gap-1">
@@ -27,7 +34,7 @@ export const XpGoalProgressBar: React.FC<XpGoalProgressBarProps> = ({ applied, r
                     </span>
                 </div>
                 <div className="flex h-[18px] w-[18px] items-center justify-center">
-                    <MiscIcon icon={'legendaryBook'} height={18} width={15} />
+                    <MiscIcon icon={bookIconName} height={18} width={15} />
                 </div>
             </div>
         </AccessibleTooltip>

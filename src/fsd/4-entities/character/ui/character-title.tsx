@@ -1,12 +1,10 @@
 ﻿import { Tooltip } from '@mui/material';
 
 import { Rank } from '@/fsd/5-shared/model';
-import { pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { pooEmoji, RarityIcon, starEmoji, UnitShardIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharacterBias } from '../bias.enum';
 import { ICharacter2 } from '../model';
-
-import { RankIcon } from './rank.icon';
 
 export const CharacterTitle = ({
     character,

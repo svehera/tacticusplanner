@@ -6,7 +6,7 @@ import { rankToLevel, rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { IInventory, IPersonalGoal } from 'src/models/interfaces';
 
-import { Alliance, Rank, Rarity } from '@/fsd/5-shared/model';
+import { Alliance, Rank, Rarity, XP_BOOK_VALUE, XP_BOOK_ORDER } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacter2 } from '@/fsd/4-entities/character/model';
@@ -593,56 +593,21 @@ export class GoalsService {
     }
 
     private static adjustNeededXp(xpNeeded: number, heldBooks: Record<Rarity, number>): number {
-        while (xpNeeded >= 62500 && heldBooks[Rarity.Mythic] > 0) {
-            xpNeeded -= 62500;
-            heldBooks[Rarity.Mythic] -= 1;
+        for (const rarity of XP_BOOK_ORDER) {
+            const usable = Math.min(Math.floor(xpNeeded / XP_BOOK_VALUE[rarity]), heldBooks[rarity]);
+            heldBooks[rarity] -= usable;
+            xpNeeded -= usable * XP_BOOK_VALUE[rarity];
         }
-        while (xpNeeded >= 12500 && heldBooks[Rarity.Legendary] > 0) {
-            xpNeeded -= 12500;
-            heldBooks[Rarity.Legendary] -= 1;
-        }
-        while (xpNeeded >= 2500 && heldBooks[Rarity.Epic] > 0) {
-            xpNeeded -= 2500;
-            heldBooks[Rarity.Epic] -= 1;
-        }
-        while (xpNeeded >= 500 && heldBooks[Rarity.Rare] > 0) {
-            xpNeeded -= 500;
-            heldBooks[Rarity.Rare] -= 1;
-        }
-        while (xpNeeded >= 100 && heldBooks[Rarity.Uncommon] > 0) {
-            xpNeeded -= 100;
-            heldBooks[Rarity.Uncommon] -= 1;
-        }
-        while (xpNeeded >= 20 && heldBooks[Rarity.Common] > 0) {
-            xpNeeded -= 20;
-            heldBooks[Rarity.Common] -= 1;
-        }
+
         if (xpNeeded > 0) {
-            while (xpNeeded > 0 && heldBooks[Rarity.Common] > 0) {
-                xpNeeded = Math.max(0, xpNeeded - 20);
-                heldBooks[Rarity.Common] -= 1;
-            }
-            while (xpNeeded > 0 && heldBooks[Rarity.Uncommon] > 0) {
-                xpNeeded = Math.max(0, xpNeeded - 100);
-                heldBooks[Rarity.Uncommon] -= 1;
-            }
-            while (xpNeeded > 0 && heldBooks[Rarity.Rare] > 0) {
-                xpNeeded = Math.max(0, xpNeeded - 500);
-                heldBooks[Rarity.Rare] -= 1;
-            }
-            while (xpNeeded > 0 && heldBooks[Rarity.Epic] > 0) {
-                xpNeeded = Math.max(0, xpNeeded - 2500);
-                heldBooks[Rarity.Epic] -= 1;
-            }
-            while (xpNeeded > 0 && heldBooks[Rarity.Legendary] > 0) {
-                xpNeeded = Math.max(0, xpNeeded - 12500);
-                heldBooks[Rarity.Legendary] -= 1;
-            }
-            while (xpNeeded > 0 && heldBooks[Rarity.Mythic] > 0) {
-                xpNeeded = Math.max(0, xpNeeded - 62500);
-                heldBooks[Rarity.Mythic] -= 1;
+            for (const rarity of [...XP_BOOK_ORDER].reverse()) {
+                while (xpNeeded > 0 && heldBooks[rarity] > 0) {
+                    xpNeeded = Math.max(0, xpNeeded - XP_BOOK_VALUE[rarity]);
+                    heldBooks[rarity] -= 1;
+                }
             }
         }
+
         return xpNeeded;
     }
 
@@ -748,7 +713,8 @@ export class GoalsService {
         heldBooks: Record<Rarity, number>,
         xpIncomeState: XpIncomeState,
         xpBooksAccrual: XpBookAccrual,
-        today: Date
+        today: Date,
+        xpBookRarityToUse: Rarity
     ): { xpNeeded: number; newXpBooksAccrual: XpBookAccrual } {
         const remainingXp = goal.xpEstimate?.xpLeft ?? goal.xpEstimateAbilities?.xpLeft ?? 0;
         const currentEstimate = goal.xpEstimate ?? goal.xpEstimateAbilities;
@@ -761,24 +727,24 @@ export class GoalsService {
             return { xpNeeded: 0, newXpBooksAccrual: xpBooksAccrual };
         }
 
-        goal.xpBooksRequired = Math.floor(remainingXp / 12500);
+        goal.xpBooksRequired = Math.floor(remainingXp / XP_BOOK_VALUE[xpBookRarityToUse]);
         const xpNeeded = this.adjustNeededXp(remainingXp, heldBooks);
-        goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / 12500);
+        goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
 
         let newAccrual = xpBooksAccrual;
 
-        goal.xpBooksTotal = Math.floor(xpNeeded / 12500);
+        goal.xpBooksTotal = Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
         if (xpNeeded === 0) {
             goal.xpEstimate = undefined;
             goal.xpEstimateAbilities = undefined;
             return { xpNeeded: 0, newXpBooksAccrual: xpBooksAccrual };
         }
 
-        currentEstimate.legendaryBooks = Math.floor(xpNeeded / 12500);
+        currentEstimate.legendaryBooks = Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
         currentEstimate.xpLeft = xpNeeded;
 
         if (xpIncomeState.manualBooksPerDay > 0) {
-            const booksToAccrue = Math.ceil(xpNeeded / 12500);
+            const booksToAccrue = Math.ceil(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
             newAccrual = this.processGoalAccrual(booksToAccrue, xpBooksAccrual, xpIncomeState.manualBooksPerDay);
             goal.xpDaysLeft = Math.ceil((newAccrual.accruedDate.getTime() - today.getTime()) / 86400000);
         }
@@ -889,7 +855,8 @@ export class GoalsService {
                     heldBooks,
                     xpIncomeState,
                     xpBooksAccrual,
-                    today
+                    today,
+                    xpIncomeState.defaultBookToUse
                 );
                 totalXpNeeded += xpNeeded;
                 xpBooksAccrual = newXpBooksAccrual;

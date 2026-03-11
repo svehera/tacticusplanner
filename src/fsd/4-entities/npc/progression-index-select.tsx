@@ -1,10 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React from 'react';
 
-import { StarsIcon } from '@/fsd/5-shared/ui/icons';
-
-// eslint-disable-next-line boundaries/element-types
-import { RankIcon } from '../character';
+import { StarsIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
 import { INpcData } from './model';
 

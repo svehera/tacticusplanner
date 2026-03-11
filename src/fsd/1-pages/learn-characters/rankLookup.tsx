@@ -13,10 +13,10 @@ import { StoreContext } from '@/reducers/store.provider';
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign';
-import { RankSelect, RankIcon, ICharacter2 } from '@/fsd/4-entities/character';
+import { RankSelect, ICharacter2 } from '@/fsd/4-entities/character';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit';
 import {
     IMaterialFull,

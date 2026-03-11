@@ -4,9 +4,9 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
 import { Rank } from '@/fsd/5-shared/model';
-import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, UnitShardIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService, ICharacterData, RankIcon } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacterData } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 
 import { CampaignData } from './campaign-progression.models';

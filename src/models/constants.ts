@@ -427,6 +427,9 @@ export const defaultData: IPersonalData2 = {
 
         // Additional Sources
         additionalBooksPerWeek: 0,
+
+        // Calculation Preferences
+        defaultBookToUse: Rarity.Legendary,
     },
     xpUse: {
         useCommon: true,
