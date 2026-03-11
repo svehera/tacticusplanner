@@ -134,6 +134,16 @@ export const XpIncome: React.FC = () => {
                 />
             </div>
 
+            <AccessibleTooltip title="This controls which book rarity is used to display and calculate XP requirements. Smaller books (e.g. Common) show higher counts with less waste. Larger books (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed.">
+                <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+                    <BookSelect
+                        label="Default XP Book for Calculations"
+                        value={defaultBookToUse ?? Rarity.Legendary}
+                        valueChanges={v => dispatchUpdate('defaultBookToUse', v)}
+                    />
+                </div>
+            </AccessibleTooltip>
+
             <hr className="my-5 border-gray-300 dark:border-gray-700" />
 
             <h3 className="mb-4 text-lg font-semibold">Let Me Help You Estimate</h3>
@@ -439,16 +449,6 @@ export const XpIncome: React.FC = () => {
                     onChange={value => dispatchUpdate('additionalBooksPerWeek', value)}
                 />
             </div>
-            <AccessibleTooltip title="This controls which book rarity is used to display and calculate XP requirements. Smaller books (e.g. Common) show higher counts with less waste. Larger books (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed.">
-                <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
-                    <BookSelect
-                        label="Default XP Book for Calculations"
-                        value={defaultBookToUse}
-                        valueChanges={v => dispatchUpdate('defaultBookToUse', v)}
-                    />
-                </div>
-            </AccessibleTooltip>
-
             <div className="mt-5 rounded-lg border-2 border-green-600 bg-green-50 p-4 text-center dark:border-green-400 dark:bg-green-900">
                 <h3 className="text-gray-900 dark:text-white">Daily Book Estimate</h3>
                 <p className="mt-2 text-gray-700 dark:text-gray-300">
