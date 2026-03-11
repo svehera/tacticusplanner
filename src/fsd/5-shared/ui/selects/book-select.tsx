@@ -1,4 +1,4 @@
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
+import { Field, Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
 import { Rarity, XP_BOOK_ORDER } from '@/fsd/5-shared/model';
@@ -17,8 +17,8 @@ export const BookSelect = ({
     valueChanges: (value: Rarity) => void;
 }) => {
     return (
-        <div className="flex w-full items-center justify-between gap-4">
-            {label && <label className="font-bold">{label}:</label>}
+        <Field className="flex w-full items-center justify-between gap-4">
+            {label && <Label className="font-bold whitespace-nowrap">{label}:</Label>}
             <div className="relative w-48">
                 <Listbox value={value} onChange={valueChanges}>
                     <ListboxButton className="relative w-full cursor-pointer rounded-lg border border-slate-300 bg-white py-2 pr-10 pl-3 text-left shadow-sm transition-all hover:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-[#0f172a] dark:text-white">
@@ -63,6 +63,6 @@ export const BookSelect = ({
                     </ListboxOptions>
                 </Listbox>
             </div>
-        </div>
+        </Field>
     );
 };
