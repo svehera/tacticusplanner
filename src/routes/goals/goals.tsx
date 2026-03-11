@@ -7,12 +7,13 @@
 } from '@mui/icons-material';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
-import { cloneDeep, sum } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { useCallback, useContext, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
 import { goalsLimit } from 'src/models/constants';
+import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
@@ -27,12 +28,12 @@ import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shar
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { MowsService } from '@/fsd/4-entities/mow';
+import { MowsService, IMow2 } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { BadgesTotal } from '@/fsd/3-features/characters/components/badges-total';
 import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
-import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
@@ -170,10 +171,6 @@ export const Goals = () => {
         characters
     );
 
-    const totalGoldAbilities = sum(
-        goalsEstimate.map(x => (x.abilitiesEstimate?.gold ?? 0) + (x.xpEstimateAbilities?.gold ?? 0))
-    );
-
     const adjustedGoalsEstimates = GoalsService.adjustGoalEstimates(
         cloneDeep(goals),
         cloneDeep(goalsEstimate),
@@ -184,6 +181,28 @@ export const Goals = () => {
         xpIncome
     );
 
+    const mergedGoalEstimates = adjustedGoalsEstimates.goalEstimates.map(estimate => {
+        const goal = allGoals.find(g => g.goalId === estimate.goalId);
+
+        if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
+            const aggregated = getAggregatedGoalEstimateForRankOrMow(goal.unitId, [estimate]) as Partial<IGoalEstimate>;
+            // SPREAD the original estimate first to provide energyTotal, xpBooksTotal, etc.
+            // Then SPREAD aggregated to override the numbers.
+            // Finally, ensure goalId is explicitly set.
+            return {
+                ...estimate, // Provides all missing mandatory properties
+                ...aggregated, // Overwrites with aggregated days/tokens
+                goalId: goal.goalId,
+            } as IGoalEstimate;
+        }
+        return estimate;
+    });
+
+    const totalGoldAbilities = (mergedGoalEstimates as IGoalEstimate[]).reduce((acc, curr) => {
+        const abilityGold = curr.abilitiesEstimate?.gold ?? 0;
+        const xpGold = curr.xpEstimateAbilities?.gold ?? 0;
+        return acc + abilityGold + xpGold;
+    }, 0);
     const hasSync = !!userInfo.tacticusApiKey;
 
     const onDeleteAll = () => {
@@ -315,29 +334,23 @@ export const Goals = () => {
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex flex-wrap gap-3">
-                            {upgradeRankOrMowGoals.map(goal => {
-                                const aggregatedEstimate = getAggregatedGoalEstimateForRankOrMow(
-                                    goal.goalId,
-                                    adjustedGoalsEstimates.goalEstimates
-                                );
-                                const originalEstimate = adjustedGoalsEstimates.goalEstimates.find(
-                                    x => x.goalId === goal.goalId
-                                );
-                                const finalEstimate = originalEstimate
-                                    ? { ...originalEstimate, ...aggregatedEstimate }
-                                    : undefined;
+                            {allGoals.map(goal => {
+                                // Search the NEW merged collection for this goal's estimate
+                                const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
+
                                 return (
                                     <GoalCard
                                         key={goal.goalId}
-                                        characters={characters}
-                                        mows={resolvedMows}
                                         goal={goal}
-                                        goalEstimate={finalEstimate}
+                                        goalEstimate={finalEstimate} // Use the consolidated estimate
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        // Use finalEstimate for consistent color coding
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
                                             finalEstimate
                                         )}
+                                        characters={characters}
+                                        mows={resolvedMows as IMow2[]}
                                     />
                                 );
                             })}
@@ -348,7 +361,7 @@ export const Goals = () => {
                         <GoalsTable
                             rows={sortedUpgrades}
                             allGoals={allGoals} // Pass the global flattened list here
-                            estimate={adjustedGoalsEstimates.goalEstimates}
+                            estimate={mergedGoalEstimates} // Pass the merged estimates to the table
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalColorMode}
                         />
@@ -371,22 +384,23 @@ export const Goals = () => {
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex flex-wrap gap-3">
-                            {shardsGoals.map(goal => (
-                                <GoalCard
-                                    characters={characters}
-                                    mows={resolvedMows}
-                                    key={goal.goalId}
-                                    goal={goal}
-                                    goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
-                                        x => x.goalId === goal.goalId
-                                    )}
-                                    menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                    bgColor={GoalService.getBackgroundColor(
-                                        viewPreferences.goalColorMode,
-                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
-                                    )}
-                                />
-                            ))}
+                            {shardsGoals.map(goal => {
+                                const estimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
+                                return (
+                                    <GoalCard
+                                        characters={characters}
+                                        mows={resolvedMows as IMow2[]}
+                                        key={goal.goalId}
+                                        goal={goal}
+                                        goalEstimate={estimate}
+                                        menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        bgColor={GoalService.getBackgroundColor(
+                                            viewPreferences.goalColorMode,
+                                            estimate
+                                        )}
+                                    />
+                                );
+                            })}
                         </div>
                     )}
 
@@ -394,7 +408,7 @@ export const Goals = () => {
                         <GoalsTable
                             rows={sortedShards}
                             allGoals={allGoals} // Pass the global flattened list here
-                            estimate={adjustedGoalsEstimates.goalEstimates}
+                            estimate={mergedGoalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalColorMode}
                         />
@@ -410,22 +424,23 @@ export const Goals = () => {
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex flex-wrap gap-3">
-                            {upgradeAbilities.map(goal => (
-                                <GoalCard
-                                    characters={characters}
-                                    mows={resolvedMows}
-                                    key={goal.goalId}
-                                    goal={goal}
-                                    goalEstimate={adjustedGoalsEstimates.goalEstimates.find(
-                                        x => x.goalId === goal.goalId
-                                    )}
-                                    menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                    bgColor={GoalService.getBackgroundColor(
-                                        viewPreferences.goalColorMode,
-                                        adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
-                                    )}
-                                />
-                            ))}
+                            {upgradeAbilities.map(goal => {
+                                const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
+                                return (
+                                    <GoalCard
+                                        key={goal.goalId}
+                                        goal={goal}
+                                        goalEstimate={finalEstimate}
+                                        characters={characters}
+                                        mows={resolvedMows as IMow2[]}
+                                        menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        bgColor={GoalService.getBackgroundColor(
+                                            viewPreferences.goalColorMode,
+                                            finalEstimate
+                                        )}
+                                    />
+                                );
+                            })}
                         </div>
                     )}
 
@@ -433,7 +448,7 @@ export const Goals = () => {
                         <GoalsTable
                             rows={sortedAbilities}
                             allGoals={allGoals} // Pass the global flattened list here
-                            estimate={adjustedGoalsEstimates.goalEstimates}
+                            estimate={mergedGoalEstimates}
                             menuItemSelect={handleMenuItemSelect}
                             goalsColorCoding={viewPreferences.goalColorMode}
                         />

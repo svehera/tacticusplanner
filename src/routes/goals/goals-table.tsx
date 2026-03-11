@@ -307,7 +307,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             }
         }
     };
-
+    const orderedAllGoals = useMemo(() => [...allGoals].sort((a, b) => a.priority - b.priority), [allGoals]);
     const columnDefs = useMemo<Array<ColDef<CharacterRaidGoalSelect>>>(() => {
         return [
             {
@@ -318,17 +318,17 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                     if (!data) return;
 
                     // Find the index in the GLOBAL list to determine true neighbors
-                    const globalIndex = allGoals.findIndex(x => x.goalId === data.goalId);
+                    const globalIndex = orderedAllGoals.findIndex(x => x.goalId === data.goalId);
 
                     const moveUp = () => {
                         if (globalIndex <= 0) return; // Already at the absolute top
-                        const neighbor = allGoals[globalIndex - 1];
+                        const neighbor = orderedAllGoals[globalIndex - 1];
                         dispatch.goals({ type: 'Swap', goalId: data.goalId, neighborId: neighbor.goalId });
                     };
 
                     const moveDown = () => {
-                        if (globalIndex >= allGoals.length - 1) return; // Already at the absolute bottom
-                        const neighbor = allGoals[globalIndex + 1];
+                        if (globalIndex >= orderedAllGoals.length - 1) return;
+                        const neighbor = orderedAllGoals[globalIndex + 1];
                         dispatch.goals({ type: 'Swap', goalId: data.goalId, neighborId: neighbor.goalId });
                     };
                     return (
