@@ -69,7 +69,7 @@ export class CharactersService {
     }
 
     /**
-     * @param id The unit ID of the character or MoW.
+     * @param id The unit ID of the character.
      * @returns An ICharacterData representation, or null.
      */
     public static getUnit(id: string): ICharacterData | undefined {

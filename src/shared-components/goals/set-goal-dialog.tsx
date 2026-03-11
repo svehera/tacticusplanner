@@ -116,7 +116,11 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
     const allowedCharacters: IUnit[] = useMemo(() => {
         switch (form.type) {
-            case PersonalGoalType.Ascend:
+            case PersonalGoalType.Ascend: {
+                return ignoreRankRarity
+                    ? [...characters, ...resolvedMows]
+                    : [...characters.filter(x => x.rank > Rank.Locked), ...resolvedMows.filter(x => x.unlocked)];
+            }
             case PersonalGoalType.CharacterAbilities:
             case PersonalGoalType.UpgradeRank: {
                 return ignoreRankRarity ? characters : characters.filter(x => x.rank > Rank.Locked);
