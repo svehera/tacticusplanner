@@ -359,7 +359,9 @@ export class UpgradesService {
             }
         });
 
-        (newMowData as { mows: Array<{ snowprintId: string; name: string; roundIcon: string }> }).mows.forEach(mow => {
+        (
+            newMowData as unknown as { mows: Array<{ snowprintId: string; name: string; roundIcon: string }> }
+        ).mows.forEach(mow => {
             const shards = 'shards_' + mow.snowprintId;
             const mythicShards = 'mythicShards_' + mow.snowprintId;
             for (const shard of [shards, mythicShards]) {
