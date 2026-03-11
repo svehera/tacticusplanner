@@ -5,8 +5,8 @@ import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { CampaignsService } from '@/fsd/4-entities/campaign/@x/upgrade';
 // eslint-disable-next-line boundaries/element-types
 import { CharactersService } from '@/fsd/4-entities/character';
-// eslint-disable-next-line boundaries/element-types
-import { mows2Data } from '@/fsd/4-entities/mow';
+// eslint-disable-next-line boundaries/element-types, import-x/no-internal-modules
+import newMowData from '@/fsd/4-entities/mow/data/newMowData.json';
 
 import { recipeDataByName } from './data';
 import {
@@ -359,7 +359,7 @@ export class UpgradesService {
             }
         });
 
-        mows2Data.mows.forEach(mow => {
+        (newMowData as { mows: Array<{ snowprintId: string; name: string; roundIcon: string }> }).mows.forEach(mow => {
             const shards = 'shards_' + mow.snowprintId;
             const mythicShards = 'mythicShards_' + mow.snowprintId;
             for (const shard of [shards, mythicShards]) {
