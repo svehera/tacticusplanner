@@ -23,7 +23,7 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
-import { Alliance, useAuth } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/iconList';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
@@ -340,7 +340,7 @@ export const Goals = () => {
                                             viewPreferences.goalColorMode,
                                             aggregatedEstimate
                                         )}
-                                        bookRarity={xpIncome.defaultBookToUse}
+                                        bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                     />
                                 );
                             })}
