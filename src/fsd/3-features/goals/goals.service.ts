@@ -93,7 +93,8 @@ export class GoalsService {
         upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
 
         upgradeAbilities: Array<ICharacterUpgradeAbilities>,
-        characters: ICharacter2[]
+        characters: ICharacter2[],
+        isGoalPriority: boolean = false
     ): IGoalEstimate[] {
         const result: IGoalEstimate[] = [];
 
@@ -176,8 +177,34 @@ export class GoalsService {
                 };
             }
             estimate.included = goal.include;
-            estimate.blocked =
-                estimatedUpgradesTotal.blockedMaterials.find(m => m.relatedGoals.includes(goal.goalId)) !== undefined;
+            const blockedEntry = estimatedUpgradesTotal.blockedMaterials.find(m =>
+                m.relatedGoals.includes(goal.goalId)
+            );
+            if (!blockedEntry) {
+                estimate.blocked = false;
+            } else if (!isGoalPriority) {
+                estimate.blocked = true;
+            } else {
+                const available = blockedEntry.acquiredCount ?? 0;
+                const allGoals = [...shardsGoals, ...upgradeRankOrMowGoals];
+                const goalPriorityMap = new Map(allGoals.map(g => [g.goalId, g.priority]));
+
+                const requiredForThisGoal = estimatedUpgradesTotal.characters.reduce((sum, unit) => {
+                    if (unit.goalId !== goal.goalId) return sum;
+                    return sum + (unit.baseUpgradesTotal[blockedEntry.id] ?? 0);
+                }, 0);
+
+                const requiredForHigher = estimatedUpgradesTotal.characters.reduce((sum, unit) => {
+                    const pr = goalPriorityMap.get(unit.goalId);
+                    if (pr === undefined) return sum;
+                    if (pr < (goal.priority ?? Number.POSITIVE_INFINITY)) {
+                        return sum + (unit.baseUpgradesTotal[blockedEntry.id] ?? 0);
+                    }
+                    return sum;
+                }, 0);
+
+                estimate.blocked = isGoalPriority && available < requiredForHigher + requiredForThisGoal;
+            }
             estimate.completed =
                 !estimate.blocked && estimate.included && estimate.oTokensTotal === 0 && estimate.energyTotal === 0;
             result.push(estimate);
