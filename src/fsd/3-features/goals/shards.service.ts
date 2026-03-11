@@ -18,6 +18,7 @@ import {
     campaignsByGroup,
     ICampaignsProgress,
 } from '@/fsd/4-entities/campaign';
+import { IMoWAscendGoal } from '@/fsd/4-entities/goal';
 
 import {
     ICharacterAscendGoal,
@@ -61,7 +62,7 @@ export class ShardsService {
      */
     static getShardsEstimatedDays(
         settings: IEstimatedAscensionSettings,
-        ...goals: Array<ICharacterAscendGoal | ICharacterUnlockGoal>
+        ...goals: Array<ICharacterAscendGoal | IMoWAscendGoal | ICharacterUnlockGoal>
     ): IEstimatedShards {
         const materials = this.convertGoalsToMaterials(settings, goals);
 
@@ -147,7 +148,7 @@ export class ShardsService {
      */
     public static convertGoalsToMaterials(
         settings: IEstimatedAscensionSettings,
-        goals: Array<ICharacterAscendGoal | ICharacterUnlockGoal>
+        goals: Array<ICharacterAscendGoal | IMoWAscendGoal | ICharacterUnlockGoal>
     ): ICharacterShardsEstimate[] {
         const materials = goals
             .flatMap(goal => [this.convertGoalToMaterial(goal), this.convertGoalToMythicMaterial(goal)])
@@ -316,9 +317,11 @@ export class ShardsService {
         return onslaughtLocation;
     }
 
-    private static convertGoalToMaterial(goal: ICharacterAscendGoal | ICharacterUnlockGoal): IShardMaterial {
+    private static convertGoalToMaterial(
+        goal: ICharacterAscendGoal | ICharacterUnlockGoal | IMoWAscendGoal
+    ): IShardMaterial {
         const targetShards =
-            goal.type === PersonalGoalType.Ascend ? this.getTargetShards(goal) : charsUnlockShards[goal.rarity];
+            goal.type === PersonalGoalType.Unlock ? charsUnlockShards[goal.rarity] : this.getTargetShards(goal);
         const possibleLocations = StaticDataService.getItemLocations(`shards_${goal.unitId}`);
 
         return {
@@ -330,15 +333,17 @@ export class ShardsService {
             iconPath: goal.unitRoundIcon,
             relatedCharacters: [goal.unitName],
             possibleLocations,
-            onslaughtShards: goal.type === PersonalGoalType.Ascend ? goal.onslaughtShards : 0,
+            onslaughtShards: goal.type !== PersonalGoalType.Unlock ? goal.onslaughtShards : 0,
             onslaughtMythicShards: 0,
             acquiredMythicCount: 0,
             requiredMythicCount: 0,
-            campaignsUsage: goal.campaignsUsage,
+            campaignsUsage: 'campaignsUsage' in goal ? goal.campaignsUsage : CampaignsLocationsUsage.None,
         };
     }
 
-    private static convertGoalToMythicMaterial(goal: ICharacterAscendGoal | ICharacterUnlockGoal): IShardMaterial {
+    private static convertGoalToMythicMaterial(
+        goal: ICharacterAscendGoal | ICharacterUnlockGoal | IMoWAscendGoal
+    ): IShardMaterial {
         const targetMythicShards = goal.type === PersonalGoalType.Ascend ? this.getTargetMythicShards(goal) : 0;
         const possibleLocations = StaticDataService.getItemLocations(`mythicShards_${goal.unitId}`);
 
@@ -416,7 +421,7 @@ export class ShardsService {
         return orderBy(result, ['isCompleted'], ['asc']);
     }
 
-    public static getTargetShards(goal: ICharacterAscendGoal): number {
+    public static getTargetShards(goal: ICharacterAscendGoal | IMoWAscendGoal): number {
         const currentCharProgression = goal.rarityStart + goal.starsStart;
         const targetProgression = goal.rarityEnd + (goal.starsEnd || RarityMapper.toStars[goal.rarityEnd]);
 
@@ -430,7 +435,7 @@ export class ShardsService {
         return targetShards;
     }
 
-    public static getTargetMythicShards(goal: ICharacterAscendGoal): number {
+    public static getTargetMythicShards(goal: ICharacterAscendGoal | IMoWAscendGoal): number {
         const currentCharProgression = goal.rarityStart + goal.starsStart;
         const targetProgression = goal.rarityEnd + (goal.starsEnd || RarityMapper.toStars[goal.rarityEnd]);
 

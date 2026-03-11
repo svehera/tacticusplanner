@@ -18,6 +18,7 @@ import {
     ICharacterUpgradeMow,
     ICharacterUnlockGoal,
     ICharacterAscendGoal,
+    IMoWAscendGoal,
 } from '@/fsd/4-entities/goal';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IRecipeExpandedUpgrade, UpgradesService } from '@/fsd/4-entities/upgrade';
@@ -73,13 +74,21 @@ export class CampaignsProgressionService {
      *                    (empty) sets for every campaign.
      */
     private static computeGoalCostsAndUnbeatenNodes(
-        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal>,
+        goals: Array<
+            | ICharacterUpgradeRankGoal
+            | ICharacterUpgradeMow
+            | ICharacterUnlockGoal
+            | ICharacterAscendGoal
+            | IMoWAscendGoal
+        >,
         campaignProgress: ICampaignsProgress,
         inventoryUpgrades: Record<string, number>,
         result: CampaignsProgressData,
         nodesToBeat: Map<string, ICampaignBattleComposed[]>
     ): void {
         for (const goal of goals) {
+            // MoW ascend goals use onslaught shards, not campaign drops — skip them here.
+            if (goal.type === PersonalGoalType.MoWAscend) continue;
             const goalData: GoalData = this.computeGoalCost(goal, campaignProgress, inventoryUpgrades);
             goalData.unfarmableLocations.forEach(x => {
                 nodesToBeat.get(x.campaign)?.push(x);
@@ -163,7 +172,13 @@ export class CampaignsProgressionService {
      * save on all other goals if we were to beat other nodes in the campaign.
      */
     public static computeCampaignsProgress(
-        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal>,
+        goals: Array<
+            | ICharacterUpgradeRankGoal
+            | ICharacterUpgradeMow
+            | ICharacterUnlockGoal
+            | ICharacterAscendGoal
+            | IMoWAscendGoal
+        >,
         campaignProgress: ICampaignsProgress
     ): CampaignsProgressData {
         const result = new CampaignsProgressData();
@@ -251,12 +266,20 @@ export class CampaignsProgressionService {
      *          we could reap savings if we were to beat.
      */
     public static computeGoalCost(
-        goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal,
+        goal:
+            | ICharacterUpgradeRankGoal
+            | ICharacterUpgradeMow
+            | ICharacterUnlockGoal
+            | ICharacterAscendGoal
+            | IMoWAscendGoal,
         campaignProgress: ICampaignsProgress,
         inventoryUpgrades: Record<string, number>
     ): GoalData {
         const materialReqs = new MaterialRequirements();
-        if (goal.type == PersonalGoalType.Unlock) {
+        if (goal.type == PersonalGoalType.MoWAscend) {
+            // MoW shards come from onslaught, not campaigns — no campaign farming cost.
+            return new GoalData();
+        } else if (goal.type == PersonalGoalType.Unlock) {
             this.addToMaterials(materialReqs, goal.unitName, charsUnlockShards[goal.rarity] - goal.shards);
         } else {
             const upgradeRanks =

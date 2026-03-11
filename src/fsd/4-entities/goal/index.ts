@@ -5,4 +5,5 @@ export type {
     ICharacterUnlockGoal,
     ICharacterAscendGoal,
     ICharacterRaidGoalSelectBase,
+    IMoWAscendGoal,
 } from './model';

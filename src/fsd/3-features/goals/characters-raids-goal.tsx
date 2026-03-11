@@ -22,6 +22,7 @@ interface Props {
 export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onGoalEdit }) => {
     const getGoalInfo = (goal: CharacterRaidGoalSelect) => {
         switch (goal.type) {
+            case PersonalGoalType.MoWAscend:
             case PersonalGoalType.Ascend: {
                 const isSameRarity = goal.rarityStart === goal.rarityEnd;
                 const minStars = rarityToStars[goal.rarityEnd];

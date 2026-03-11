@@ -10,6 +10,7 @@ import { Alliance, Rank, Rarity, XP_BOOK_VALUE, XP_BOOK_ORDER } from '@/fsd/5-sh
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacter2 } from '@/fsd/4-entities/character/model';
+import { IMoWAscendGoal } from '@/fsd/4-entities/goal/model';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { OrbAscensionCalculator } from '@/fsd/4-entities/unit/unit-ascension.service';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
@@ -89,7 +90,7 @@ export class GoalsService {
 
     public static buildGoalEstimates(
         estimatedUpgradesTotal: IEstimatedUpgrades,
-        shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>,
+        shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal | IMoWAscendGoal>,
         upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
 
         upgradeAbilities: Array<ICharacterUpgradeAbilities>,
@@ -176,6 +177,20 @@ export class GoalsService {
                     alliance: ascendGoal.unitAlliance,
                 };
             }
+            if (goal.type === PersonalGoalType.MoWAscend) {
+                const ascendGoal = goal as IMoWAscendGoal;
+                const orbs = OrbAscensionCalculator.calculateOrbs(
+                    ascendGoal.rarityStart,
+                    ascendGoal.starsStart,
+                    ascendGoal.rarityEnd,
+                    ascendGoal.starsEnd
+                );
+                estimate.orbsEstimate = {
+                    orbs: orbs,
+                    alliance: ascendGoal.unitAlliance,
+                };
+            }
+
             estimate.included = goal.include;
             const blockedEntry = estimatedUpgradesTotal.blockedMaterials.find(m =>
                 m.relatedGoals.includes(goal.goalId)
@@ -255,10 +270,10 @@ export class GoalsService {
         onlySelected: boolean
     ): {
         allGoals: CharacterRaidGoalSelect[];
-        shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
+        shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal | IMoWAscendGoal>;
         upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>;
         upgradeAbilities: Array<ICharacterUpgradeAbilities>;
-        ascendGoals: Array<ICharacterAscendGoal>;
+        ascendGoals: Array<ICharacterAscendGoal | IMoWAscendGoal>;
     } {
         const allGoals = goals
             .map(g => {
@@ -274,6 +289,7 @@ export class GoalsService {
                     ![
                         PersonalGoalType.UpgradeRank,
                         PersonalGoalType.Ascend,
+                        PersonalGoalType.MoWAscend,
                         PersonalGoalType.Unlock,
                         PersonalGoalType.MowAbilities,
                         PersonalGoalType.CharacterAbilities,
@@ -290,8 +306,8 @@ export class GoalsService {
         const selectedGoals = onlySelected ? allGoals.filter(x => x.include) : allGoals;
 
         const shardsGoals = selectedGoals.filter(x =>
-            [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(x.type)
-        ) as Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
+            [PersonalGoalType.Ascend, PersonalGoalType.Unlock, PersonalGoalType.MoWAscend].includes(x.type)
+        ) as Array<ICharacterUnlockGoal | ICharacterAscendGoal | IMoWAscendGoal>;
 
         const upgradeRankOrMowGoals = selectedGoals.filter(x =>
             [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(x.type)
@@ -302,8 +318,8 @@ export class GoalsService {
         ) as Array<ICharacterUpgradeAbilities>;
 
         const ascendGoals = selectedGoals.filter(x =>
-            [PersonalGoalType.Ascend].includes(x.type)
-        ) as Array<ICharacterAscendGoal>;
+            [PersonalGoalType.Ascend, PersonalGoalType.MoWAscend].includes(x.type)
+        ) as Array<ICharacterAscendGoal | IMoWAscendGoal>;
 
         return {
             allGoals,
@@ -348,9 +364,9 @@ export class GoalsService {
                 return result;
             }
 
-            if (g.type === PersonalGoalType.Ascend) {
-                const result: ICharacterAscendGoal = {
-                    type: PersonalGoalType.Ascend,
+            if (g.type === PersonalGoalType.MoWAscend) {
+                const result: IMoWAscendGoal = {
+                    type: PersonalGoalType.MoWAscend,
                     rarityStart: unit.rarity,
                     rarityEnd: g.targetRarity!,
                     shards: unit.shards,
@@ -359,8 +375,6 @@ export class GoalsService {
                     starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
                     onslaughtShards: g.shardsPerToken ?? 1,
                     onslaughtMythicShards: g.mythicShardsPerToken ?? 1,
-                    campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
-                    mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     ...base,
                 };
                 return result;
@@ -501,6 +515,15 @@ export class GoalsService {
                     secondAbilityLevel: goal.passiveEnd,
                 };
             }
+            case PersonalGoalType.MoWAscend: {
+                return {
+                    ...base,
+                    targetRarity: goal.rarityEnd,
+                    targetStars: goal.starsEnd,
+                    shardsPerToken: goal.onslaughtShards,
+                    mythicShardsPerToken: goal.onslaughtMythicShards,
+                };
+            }
             default: {
                 return null;
             }
@@ -518,7 +541,7 @@ export class GoalsService {
             );
         }
 
-        if (goal.type == PersonalGoalType.Ascend) {
+        if (goal.type == PersonalGoalType.Ascend || goal.type == PersonalGoalType.MoWAscend) {
             return goal.rarityStart >= goal.rarityEnd && goal.starsStart >= goal.starsEnd;
         }
 
@@ -763,7 +786,7 @@ export class GoalsService {
         heldComponents: Record<Alliance, number>,
         neededComponents: Record<Alliance, number>,
         upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[],
-        ascendGoals: ICharacterAscendGoal[]
+        ascendGoals: (ICharacterAscendGoal | IMoWAscendGoal)[]
     ) {
         if (goal.abilitiesEstimate || goal.mowEstimate) {
             const badges = goal.mowEstimate?.badges ?? goal.abilitiesEstimate!.badges;
@@ -795,7 +818,7 @@ export class GoalsService {
         inventory: IInventory,
         xpUseState: XpUseState,
         upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[],
-        ascendGoals: ICharacterAscendGoal[],
+        ascendGoals: (ICharacterAscendGoal | IMoWAscendGoal)[],
         xpIncomeState: XpIncomeState
     ): RevisedGoals {
         const createRarityRecord = (): Record<Rarity, number> => ({

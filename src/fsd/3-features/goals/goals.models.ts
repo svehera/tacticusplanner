@@ -12,6 +12,7 @@ import { IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import { IUnitShards } from '@/fsd/4-entities/character/model';
 import {
     ICharacterAscendGoal,
+    IMoWAscendGoal,
     ICharacterRaidGoalSelectBase,
     ICharacterUnlockGoal,
     ICharacterUpgradeMow,
@@ -30,6 +31,7 @@ import { IMowMaterialsTotal } from '@/fsd/1-pages/learn-mow/lookup.models';
 export type CharacterRaidGoalSelect =
     | ICharacterUpgradeRankGoal
     | ICharacterAscendGoal
+    | IMoWAscendGoal
     | ICharacterUnlockGoal
     | ICharacterUpgradeMow
     | ICharacterUpgradeAbilities;

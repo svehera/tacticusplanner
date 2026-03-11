@@ -64,3 +64,16 @@ export interface ICharacterAscendGoal extends ICharacterRaidGoalSelectBase {
     campaignsUsage: CampaignsLocationsUsage;
     mythicCampaignsUsage: CampaignsLocationsUsage;
 }
+
+export interface IMoWAscendGoal extends ICharacterRaidGoalSelectBase {
+    type: PersonalGoalType.MoWAscend;
+
+    rarityStart: Rarity;
+    starsStart: RarityStars;
+    starsEnd: RarityStars;
+    rarityEnd: Rarity;
+    shards: number;
+    mythicShards: number;
+    onslaughtShards: number;
+    onslaughtMythicShards: number;
+}

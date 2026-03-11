@@ -1,24 +1,26 @@
 import { ArrowForward } from '@mui/icons-material';
-import { ColDef, AllCommunityModule, themeBalham } from 'ag-grid-community';
+import { ColDef, AllCommunityModule, themeBalham, ICellRendererParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo } from 'react';
 
 import { UnitShardIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService, ICharacterData } from '@/fsd/4-entities/character';
-import { ICharacterAscendGoal, ICharacterUnlockGoal } from '@/fsd/4-entities/goal';
+import { ICharacterAscendGoal, ICharacterUnlockGoal, IMoWAscendGoal } from '@/fsd/4-entities/goal';
 
 import { CampaignData } from './campaign-progression.models';
 
+type GoalRowData = { goalData: Array<{ goalId: string; goalCost: number }> };
+
 interface Props {
     campaignData: CampaignData;
-    goals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
+    goals: Array<ICharacterUnlockGoal | ICharacterAscendGoal | IMoWAscendGoal>;
 }
 
 export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignData, goals }) => {
     /** @returns the goal with the given ID. */
-    function getGoal(goalId: string): ICharacterAscendGoal | ICharacterUnlockGoal | undefined {
-        const filtered: Array<ICharacterAscendGoal | ICharacterUnlockGoal> = goals.filter(
+    function getGoal(goalId: string): ICharacterAscendGoal | ICharacterUnlockGoal | IMoWAscendGoal | undefined {
+        const filtered: Array<ICharacterAscendGoal | ICharacterUnlockGoal | IMoWAscendGoal> = goals.filter(
             goal => goal.goalId == goalId
         );
         if (filtered.length == 0) return undefined;
@@ -42,8 +44,8 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
      * @returns the row data for the grid that holds the ascend-character
      *          goals related to the campaign.
      */
-    function getGoalData(campaignData: CampaignData): any[] {
-        const rowData: any[] = [];
+    function getGoalData(campaignData: CampaignData): GoalRowData[] {
+        const rowData: GoalRowData[] = [];
         for (const [goalId, cost] of campaignData[1].goalCost) {
             const goal = getAscensionGoal(goalId);
             if (goal) {
@@ -69,8 +71,8 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                 headerName: 'A',
                 width: 45,
                 cellStyle: { align: 'center' },
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                cellRenderer: (params: ICellRendererParams<GoalRowData>) => {
+                    if (!params.data?.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     return (
                         <UnitShardIcon
@@ -85,8 +87,8 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                 headerName: 'B',
                 width: 60,
                 cellStyle: { align: 'center' },
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                cellRenderer: (params: ICellRendererParams<GoalRowData>) => {
+                    if (!params.data?.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     const goal: ICharacterAscendGoal = getAscensionGoal(goalData.goalId)!;
                     return <RarityIcon rarity={goal.rarityStart} />;
@@ -96,8 +98,8 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                 headerName: 'C',
                 width: 60,
                 cellStyle: { align: 'center' },
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                cellRenderer: (params: ICellRendererParams<GoalRowData>) => {
+                    if (!params.data?.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     const goal: ICharacterAscendGoal = getAscensionGoal(goalData.goalId)!;
                     return <StarsIcon stars={goal.starsStart} />;
@@ -107,8 +109,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                 headerName: 'D',
                 width: 35,
                 cellStyle: { align: 'center' },
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                cellRenderer: (_params: ICellRendererParams<GoalRowData>) => {
                     return <ArrowForward />;
                 },
             },
@@ -116,8 +117,8 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                 headerName: 'E',
                 width: 60,
                 cellStyle: { align: 'center' },
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                cellRenderer: (params: ICellRendererParams<GoalRowData>) => {
+                    if (!params.data?.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     const goal: ICharacterAscendGoal = getAscensionGoal(goalData.goalId)!;
                     return <RarityIcon rarity={goal.rarityEnd} />;
@@ -127,8 +128,8 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                 headerName: 'F',
                 width: 60,
                 cellStyle: { align: 'center' },
-                cellRenderer: (params: any) => {
-                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                cellRenderer: (params: ICellRendererParams<GoalRowData>) => {
+                    if (!params.data?.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     const goal: ICharacterAscendGoal = getAscensionGoal(goalData.goalId)!;
                     return <StarsIcon stars={goal.starsEnd} />;

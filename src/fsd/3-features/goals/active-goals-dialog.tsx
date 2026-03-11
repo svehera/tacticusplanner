@@ -84,6 +84,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
     const upgradeRankGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.UpgradeRank);
     const upgradeMowGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.MowAbilities);
     const ascendGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.Ascend);
+    const ascendMoWGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.MoWAscend);
     const unlockGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.Unlock);
 
     const selectedGoalsCount = goals.filter(x => x.include).length;
@@ -153,6 +154,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                         {!!upgradeRankGoals.length && renderGoalsGroup('Upgrade rank', upgradeRankGoals)}
                         {!!upgradeMowGoals.length && renderGoalsGroup('Upgrade MoW', upgradeMowGoals)}
                         {!!ascendGoals.length && renderGoalsGroup('Ascend/Promote', ascendGoals)}
+                        {!!ascendMoWGoals.length && renderGoalsGroup('Ascend/Promote MoW', ascendMoWGoals)}
                         {!!unlockGoals.length && renderGoalsGroup('Unlock', unlockGoals)}
                     </div>
                 </DialogContent>

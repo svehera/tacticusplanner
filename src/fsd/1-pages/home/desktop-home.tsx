@@ -99,7 +99,9 @@ export const DesktopHome = () => {
 
     const topPriorityGoal = goals[0];
     const unlockGoals = goals.filter(x => x.type === PersonalGoalType.Unlock).length;
-    const ascendGoals = goals.filter(x => x.type === PersonalGoalType.Ascend).length;
+    const ascendGoals = goals.filter(
+        x => x.type === PersonalGoalType.Ascend || x.type === PersonalGoalType.MoWAscend
+    ).length;
     const upgradeRankGoals = goals.filter(x => x.type === PersonalGoalType.UpgradeRank).length;
 
     const announcements = () => {

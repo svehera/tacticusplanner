@@ -175,7 +175,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                 <span>Edit {PersonalGoalType[goal.type]} Goal</span> <UnitShardIcon icon={goal.unitRoundIcon} />
             </DialogTitle>
             <DialogContent className="pt-5">
-                <Box id="edit-goal-form" className="flex flex-col gap-5">
+                <Box id="edit-goal-form" className="mt-2 flex flex-col gap-5">
                     <PrioritySelect
                         value={form.priority}
                         maxValue={goals.length}
@@ -398,6 +398,17 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 unlockedMythicLocations={unlockedMythicLocations}
                                 onChange={handleAscendGoalChanges}
                             />
+                        </>
+                    )}
+
+                    {form.type === PersonalGoalType.MoWAscend && (
+                        <>
+                            <NumbersInput
+                                title="Owned shards"
+                                value={form.shards}
+                                valueChange={value => setForm(curr => ({ ...curr, shards: value }))}
+                            />
+                            <EditAscendGoal goal={form} onChange={handleAscendGoalChanges} />
                         </>
                     )}
 

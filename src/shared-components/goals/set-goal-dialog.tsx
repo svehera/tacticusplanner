@@ -124,6 +124,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             case PersonalGoalType.Unlock: {
                 return characters.filter(x => x.rank === Rank.Locked);
             }
+            case PersonalGoalType.MoWAscend:
             case PersonalGoalType.MowAbilities: {
                 return ignoreRankRarity ? resolvedMows : resolvedMows.filter(x => x.unlocked);
             }
@@ -281,7 +282,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             <IgnoreRankRarity value={ignoreRankRarity} onChange={setIgnoreRankRarity} />
                         </Conditional>
 
-                        <div className="flex gap-3">
+                        <div className="mt-2 flex gap-3">
                             <FormControl fullWidth>
                                 <InputLabel id="goal-type-label">Goal Type</InputLabel>
                                 <Select<PersonalGoalType>
@@ -292,6 +293,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     onChange={handleGoalTypeChange}>
                                     <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
                                     <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
+                                    <MenuItem value={PersonalGoalType.MoWAscend}>MoW Ascend</MenuItem>
                                     <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
                                     <MenuItem value={PersonalGoalType.MowAbilities}>MoW Abilities</MenuItem>
                                     <MenuItem value={PersonalGoalType.CharacterAbilities}>Character Abilities</MenuItem>
@@ -421,6 +423,20 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 campaignsUsage={form.campaignsUsage!}
                                 possibleMythicLocations={possibleMythicLocations}
                                 unlockedMythicLocations={unlockedMythicLocations}
+                                mythicCampaignsUsage={form.mythicCampaignsUsage!}
+                                shardsPerToken={form.shardsPerToken!}
+                                mythicShardsPerToken={form.mythicShardsPerToken!}
+                                onChange={handleAscendGoalChanges}
+                            />
+                        )}
+
+                        {form.type === PersonalGoalType.MoWAscend && !!unit && (
+                            <SetAscendGoal
+                                currentRarity={unit.rarity}
+                                targetRarity={form.targetRarity!}
+                                currentStars={unit.stars}
+                                targetStars={form.targetStars!}
+                                campaignsUsage={form.campaignsUsage!}
                                 mythicCampaignsUsage={form.mythicCampaignsUsage!}
                                 shardsPerToken={form.shardsPerToken!}
                                 mythicShardsPerToken={form.mythicShardsPerToken!}

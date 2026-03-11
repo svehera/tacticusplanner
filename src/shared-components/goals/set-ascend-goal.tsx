@@ -14,11 +14,11 @@ interface Props {
     targetRarity: Rarity;
     currentStars: RarityStars;
     targetStars: RarityStars;
-    possibleLocations: ICampaignBattleComposed[];
-    unlockedLocations: string[];
+    possibleLocations?: ICampaignBattleComposed[];
+    unlockedLocations?: string[];
     campaignsUsage: CampaignsLocationsUsage;
-    possibleMythicLocations: ICampaignBattleComposed[];
-    unlockedMythicLocations: string[];
+    possibleMythicLocations?: ICampaignBattleComposed[];
+    unlockedMythicLocations?: string[];
     mythicCampaignsUsage: CampaignsLocationsUsage;
     shardsPerToken: number;
     mythicShardsPerToken: number;
@@ -69,7 +69,7 @@ export const SetAscendGoal: React.FC<Props> = ({
 
             {(currentRarity < Rarity.Legendary || currentStars < RarityStars.OneBlueStar) && (
                 <>
-                    {possibleLocations.length !== 0 && (
+                    {possibleLocations?.length !== 0 && (
                         <>
                             <div className="flex items-center gap-3">
                                 <NumbersInput
@@ -82,7 +82,7 @@ export const SetAscendGoal: React.FC<Props> = ({
                         </>
                     )}
 
-                    {possibleLocations.length === 0 && (
+                    {possibleLocations?.length === 0 && (
                         <div className="flex-box gap10 full-width">
                             <NumbersInput
                                 title="Shards per onslaught"
@@ -97,7 +97,7 @@ export const SetAscendGoal: React.FC<Props> = ({
 
             {targetRarity >= Rarity.Mythic && (
                 <>
-                    {!!possibleMythicLocations.length && (
+                    {!!possibleMythicLocations?.length && (
                         <div className="flex items-center gap-3">
                             <div className="w-1/2">
                                 <NumbersInput
@@ -110,7 +110,7 @@ export const SetAscendGoal: React.FC<Props> = ({
                         </div>
                     )}
 
-                    {possibleMythicLocations.length === 0 && (
+                    {possibleMythicLocations?.length === 0 && (
                         <div className="flex-box gap10 full-width">
                             <NumbersInput
                                 title="Mythic shards per onslaught"

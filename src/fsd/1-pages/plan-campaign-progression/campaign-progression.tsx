@@ -2,7 +2,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -16,6 +16,7 @@ import {
     ICharacterUpgradeMow,
     ICharacterUnlockGoal,
     ICharacterAscendGoal,
+    IMoWAscendGoal,
 } from '@/fsd/4-entities/goal';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
@@ -32,7 +33,7 @@ import { CampaignProgressionHeader } from './campaign-progression-header';
 import { CampaignProgressionMaterialGoals } from './campaign-progression-material-goals';
 import { CampaignProgressionRankupGoals } from './campaign-progression-rankup-goals';
 import { CampaignProgressionUnfarmableMaterials } from './campaign-progression-unfarmable-materials';
-import { CampaignData } from './campaign-progression.models';
+import { BattleSavings, CampaignData } from './campaign-progression.models';
 import { CampaignsProgressionService } from './campaign-progression.service';
 
 export const CampaignProgression = () => {
@@ -46,7 +47,7 @@ export const CampaignProgression = () => {
         [storeCharacters]
     );
 
-    const [units] = React.useState<IUnit[]>([...resolvedCharacters, ...resolvedMows]);
+    const [units] = useState<IUnit[]>([...resolvedCharacters, ...resolvedMows]);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
         const { allGoals, shardsGoals, upgradeRankOrMowGoals } = GoalsService.prepareGoals(
@@ -68,7 +69,11 @@ export const CampaignProgression = () => {
 
     const progression = useMemo(() => {
         const allGoals: Array<
-            ICharacterUpgradeMow | ICharacterUpgradeRankGoal | ICharacterUnlockGoal | ICharacterAscendGoal
+            | ICharacterUpgradeMow
+            | ICharacterUpgradeRankGoal
+            | ICharacterUnlockGoal
+            | ICharacterAscendGoal
+            | IMoWAscendGoal
         > = [...shardsGoals, ...upgradeRankOrMowGoals];
         return CampaignsProgressionService.computeCampaignsProgress(allGoals, campaignsProgress);
     }, [shardsGoals, upgradeRankOrMowGoals, campaignsProgress]);
@@ -84,9 +89,19 @@ export const CampaignProgression = () => {
     /** @returns the goal with the given ID. */
     function getGoal(
         goalId: string
-    ): ICharacterAscendGoal | ICharacterUnlockGoal | ICharacterUpgradeRankGoal | ICharacterUpgradeMow | undefined {
+    ):
+        | ICharacterAscendGoal
+        | ICharacterUnlockGoal
+        | ICharacterUpgradeRankGoal
+        | ICharacterUpgradeMow
+        | IMoWAscendGoal
+        | undefined {
         let filtered: Array<
-            ICharacterAscendGoal | ICharacterUnlockGoal | ICharacterUpgradeRankGoal | ICharacterUpgradeMow
+            | ICharacterAscendGoal
+            | ICharacterUnlockGoal
+            | ICharacterUpgradeRankGoal
+            | ICharacterUpgradeMow
+            | IMoWAscendGoal
         > = upgradeRankOrMowGoals.filter(goal => goal.goalId == goalId);
         if (filtered.length == 0) {
             filtered = shardsGoals.filter(goal => goal.goalId == goalId);
@@ -115,8 +130,10 @@ export const CampaignProgression = () => {
      * @returns the row data for the grid that holds the ascend-character
      *          goals related to the campaign.
      */
-    function getRankUpGoalData(campaignData: CampaignData): any[] {
-        const rowData: any[] = [];
+    function getRankUpGoalData(
+        campaignData: CampaignData
+    ): Array<{ goalData: Array<{ goalId: string; goalCost: number }> }> {
+        const rowData: Array<{ goalData: Array<{ goalId: string; goalCost: number }> }> = [];
         for (const [goalId, cost] of campaignData[1].goalCost) {
             const goal = getRankUpGoal(goalId);
             if (goal) rowData.push({ goalData: [{ goalId: goalId, goalCost: cost }] });
@@ -138,8 +155,10 @@ export const CampaignProgression = () => {
      * @returns the row data for the grid that holds the ascend-character
      *          goals related to the campaign.
      */
-    function getAscendGoalData(campaignData: CampaignData): any[] {
-        const rowData: any[] = [];
+    function getAscendGoalData(
+        campaignData: CampaignData
+    ): Array<{ goalData: Array<{ goalId: string; goalCost: number }> }> {
+        const rowData: Array<{ goalData: Array<{ goalId: string; goalCost: number }> }> = [];
         for (const [goalId, cost] of campaignData[1].goalCost) {
             const goal = getAscensionGoal(goalId);
             if (goal) {
@@ -153,8 +172,10 @@ export const CampaignProgression = () => {
      * @returns the row data for the grid that holds the material
      * requirements related to the campaign.
      */
-    function getCampaignMaterialData(campaignData: CampaignData): any[] {
-        const rowData: any[] = [];
+    function getCampaignMaterialData(
+        campaignData: CampaignData
+    ): Array<{ savingsData: Array<{ savings: BattleSavings }> }> {
+        const rowData: Array<{ savingsData: Array<{ savings: BattleSavings }> }> = [];
         for (const savings of campaignData[1].savings) {
             rowData.push({ savingsData: [{ savings: savings }] });
         }
@@ -166,7 +187,7 @@ export const CampaignProgression = () => {
      * be completed for the given campaign. This is only ever
      * called for incomplete campaigns.
      */
-    function getCampaignProgress(campaign: string): any {
+    function getCampaignProgress(campaign: string): React.ReactElement {
         let ret = <>Completed</>;
         Object.entries(campaignsProgress).forEach(([key, value]) => {
             if (key == campaign) {
