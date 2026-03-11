@@ -16,6 +16,7 @@ import { goalsLimit } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
+import { getAggregatedGoalEstimateForRankOrMow } from 'src/services/goalsEstimateService';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
@@ -31,35 +32,13 @@ import { IUnit } from '@/fsd/4-entities/unit';
 
 import { BadgesTotal } from '@/fsd/3-features/characters/components/badges-total';
 import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
-import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
+import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
-
-const getAggregatedGoalEstimateForRankOrMow = (
-    goalId: string,
-    estimates: IGoalEstimate[]
-): IGoalEstimate | undefined => {
-    const goalEstimates = estimates.filter(x => x.goalId === goalId);
-    if (!goalEstimates.length) {
-        return undefined;
-    }
-
-    return goalEstimates.reduce(
-        (prev, curr) =>
-            ({
-                // We run this reduce solely to aggregate estimates for ascension goals that include
-                // both non-mythic and mythic shards, that's why we ignore other fields.
-                ...curr,
-                oTokensTotal: (prev.oTokensTotal ?? 0) + (curr.oTokensTotal ?? 0),
-                daysLeft: Math.max(prev.daysLeft ?? 0, curr.daysLeft ?? 0),
-                daysTotal: (prev.daysTotal ?? 0) + (curr.daysTotal ?? 0),
-            }) as IGoalEstimate
-    );
-};
 
 export const Goals = () => {
     const {
@@ -240,16 +219,16 @@ export const Goals = () => {
             <div className="flex-box gap20 my-2 w-[350px]">
                 <Accordion
                     defaultExpanded={false}
-                    className="border border-(--border) bg-transparent! px-2 shadow-none! hover:bg-(--secondary)!">
+                    className="border border-(--border) bg-transparent px-2 shadow-none hover:bg-(--secondary)">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="min-h-0 rounded-lg bg-transparent! p-0!"
+                        className="min-h-0 rounded-lg bg-transparent p-0"
                         aria-controls="resources-content"
                         id="resources-header">
                         <span className="text-base font-semibold text-(--fg)">Total Resources Missing</span>
                     </AccordionSummary>
 
-                    <AccordionDetails className="bg-transparent! p-0!">
+                    <AccordionDetails className="bg-transparent p-0">
                         <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-(--border) bg-(--overlay) p-2">
                             <div className="flex items-center justify-start gap-x-4 rounded-md border border-(--border) bg-(--secondary) p-2">
                                 <MiscIcon icon={'energy'} height={35} width={35} />{' '}
