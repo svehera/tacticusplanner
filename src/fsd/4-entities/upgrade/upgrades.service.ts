@@ -5,8 +5,7 @@ import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 
 import { CampaignsService } from '@/fsd/4-entities/campaign/@x/upgrade';
 import { CharactersService } from '@/fsd/4-entities/character';
-
-import { mows2Data } from '../mow';
+import { mows2Data } from '@/fsd/4-entities/mow/@x/upgrade';
 
 import { recipeDataByName } from './data';
 import {
