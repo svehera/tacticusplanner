@@ -380,6 +380,7 @@ export const Goals = () => {
                                         key={goal.goalId}
                                         goal={goal}
                                         goalEstimate={finalEstimate} // Use the consolidated estimate
+                                        bookRarity={goal.rarity}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                         // Use finalEstimate for consistent color coding
                                         bgColor={GoalService.getBackgroundColor(
@@ -430,6 +431,7 @@ export const Goals = () => {
                                         key={goal.goalId}
                                         goal={goal}
                                         goalEstimate={estimate}
+                                        bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
@@ -470,6 +472,7 @@ export const Goals = () => {
                                         goalEstimate={finalEstimate}
                                         characters={characters}
                                         mows={resolvedMows as IMow2[]}
+                                        bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
