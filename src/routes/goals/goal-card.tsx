@@ -405,7 +405,7 @@ export const GoalCard: React.FC<Props> = ({
                         <div className="flex items-center">
                             {' '}
                             {/* Container to align icons with buttons */}
-                            {!!goalEstimate?.completed && (
+                            {!!goalEstimate?.completed && !goalEstimate?.blocked && (
                                 <AccessibleTooltip title={`Goal is completed in current estimation.`}>
                                     <span className="flex-box gap-[3px]" tabIndex={0}>
                                         <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />

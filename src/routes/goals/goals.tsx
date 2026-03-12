@@ -187,10 +187,7 @@ export const Goals = () => {
         const goal = allGoals.find(g => g.goalId === estimate.goalId);
 
         if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
-            const estimatesForUnit = adjustedGoalsEstimates.goalEstimates.filter(e => {
-                const itemGoal = allGoals.find(g => g.goalId === e.goalId);
-                return itemGoal && itemGoal.unitId === goal.unitId && itemGoal.type === goal.type;
-            });
+            const estimatesForUnit = adjustedGoalsEstimates.goalEstimates.filter(e => e.goalId === goal.goalId);
             const aggregated = getAggregatedGoalEstimate(estimatesForUnit) as Partial<IGoalEstimate>;
             // SPREAD the original estimate first to provide energyTotal, xpBooksTotal, etc.
             // Then SPREAD aggregated to override the numbers.
