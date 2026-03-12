@@ -194,12 +194,14 @@ export const Goals = () => {
         const first = group[0];
         const goal = allGoals.find(g => g.goalId === first.goalId);
 
+        // For Upgrade and MoW goals, we aggregate numeric days/tokens and merge metadata
         if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
             const aggregated = getAggregatedGoalEstimate(group) as Partial<IGoalEstimate>;
 
-            return group.reduce((acc, curr) => ({
+            const merged = group.reduce((acc, curr) => ({
                 ...acc,
                 ...curr,
+                // Preserve/merge specific per-row fields across the group
                 mowEstimate: acc.mowEstimate || curr.mowEstimate,
                 xpEstimate: acc.xpEstimate || curr.xpEstimate,
                 abilitiesEstimate: acc.abilitiesEstimate || curr.abilitiesEstimate,
@@ -207,10 +209,16 @@ export const Goals = () => {
                 completed: acc.completed || curr.completed,
                 blocked: acc.blocked || curr.blocked,
                 included: acc.included || curr.included,
+            }));
+
+            return {
+                ...merged,
                 ...aggregated,
                 goalId: first.goalId,
-            }));
+            };
         }
+
+        // For other goal types (like Shards), we typically have one estimate per goalId
         return first;
     });
 
