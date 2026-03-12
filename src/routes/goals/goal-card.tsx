@@ -428,16 +428,16 @@ export const GoalCard: React.FC<Props> = ({
                                     </span>
                                 </AccessibleTooltip>
                             )}
-                            <IconButton onClick={() => menuItemSelect('moveUp')}>
+                            <IconButton aria-label="Increase Goal Priority" onClick={() => menuItemSelect('moveUp')}>
                                 <ArrowUpward fontSize="small" />
                             </IconButton>
-                            <IconButton onClick={() => menuItemSelect('moveDown')}>
+                            <IconButton aria-label="Decrease Goal Priority" onClick={() => menuItemSelect('moveDown')}>
                                 <ArrowDownward fontSize="small" />
                             </IconButton>
-                            <IconButton onClick={() => menuItemSelect('edit')}>
+                            <IconButton aria-label="Edit Goal" onClick={() => menuItemSelect('edit')}>
                                 <Edit fontSize="small" />
                             </IconButton>
-                            <IconButton onClick={() => menuItemSelect('delete')}>
+                            <IconButton aria-label="Delete Goal" onClick={() => menuItemSelect('delete')}>
                                 <DeleteForever fontSize="small" />
                             </IconButton>
                         </div>

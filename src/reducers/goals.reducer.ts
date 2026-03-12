@@ -92,10 +92,10 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const newState = [...state];
 
             // Replace the goal at its current index without moving it.
-            // Since we preserve the priority, we don't need to splice based on updatedGoal.priority.
             newState[existingGoalIndex] = mergedGoal;
 
-            return newState;
+            // Re-index priorities 1..N to prevent gaps or duplicates.
+            return newState.map((g, i) => ({ ...g, priority: i + 1 }));
         }
         case 'UpdateDailyRaids': {
             const { value } = action;

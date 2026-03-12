@@ -6,23 +6,19 @@ export interface IGoalEstimateAggregate {
     daysTotal: number;
 }
 
-export const getAggregatedGoalEstimateForRankOrMow = (
-    goalId: string,
-    estimates: IGoalEstimate[]
-): IGoalEstimateAggregate | undefined => {
-    const goalEstimates = estimates.filter(x => x.goalId === goalId);
-    if (!goalEstimates.length) {
+export const getAggregatedGoalEstimate = (estimates: IGoalEstimate[]): IGoalEstimateAggregate | undefined => {
+    if (!estimates.length) {
         return undefined;
     }
 
     // We run this reduce solely to aggregate estimates for ascension goals that include
     // both non-mythic and mythic shards, that's why we ignore other fields.
-    return goalEstimates.reduce<IGoalEstimateAggregate>(
+    return estimates.reduce<IGoalEstimateAggregate>(
         (acc, curr) => {
             return {
                 oTokensTotal: acc.oTokensTotal + (curr.oTokensTotal ?? 0),
                 daysLeft: Math.max(acc.daysLeft, curr.daysLeft ?? 0),
-                daysTotal: acc.daysTotal + (curr.daysTotal ?? 0),
+                daysTotal: Math.max(acc.daysTotal, curr.daysTotal ?? 0),
             };
         },
         { oTokensTotal: 0, daysLeft: 0, daysTotal: 0 }

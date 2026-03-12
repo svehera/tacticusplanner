@@ -17,7 +17,7 @@ import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
-import { getAggregatedGoalEstimateForRankOrMow } from 'src/services/goalsEstimateService';
+import { getAggregatedGoalEstimate } from 'src/services/goalsEstimateService';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
@@ -95,9 +95,11 @@ export const Goals = () => {
         ...shardsGoals
     );
 
+    const energyForUpgrades = Math.max(0, dailyRaidsPreferences.dailyEnergy - (estimatedShardsTotal.energyPerDay ?? 0));
+
     const estimatedUpgradesTotal = UpgradesService.getUpgradesEstimatedDays(
         {
-            dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+            dailyEnergy: energyForUpgrades,
             campaignsProgress: campaignsProgress,
             preferences: {
                 ...dailyRaidsPreferences,
@@ -185,7 +187,11 @@ export const Goals = () => {
         const goal = allGoals.find(g => g.goalId === estimate.goalId);
 
         if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
-            const aggregated = getAggregatedGoalEstimateForRankOrMow(goal.unitId, [estimate]) as Partial<IGoalEstimate>;
+            const estimatesForUnit = adjustedGoalsEstimates.goalEstimates.filter(e => {
+                const itemGoal = allGoals.find(g => g.goalId === e.goalId);
+                return itemGoal && itemGoal.unitId === goal.unitId && itemGoal.type === goal.type;
+            });
+            const aggregated = getAggregatedGoalEstimate(estimatesForUnit) as Partial<IGoalEstimate>;
             // SPREAD the original estimate first to provide energyTotal, xpBooksTotal, etc.
             // Then SPREAD aggregated to override the numbers.
             // Finally, ensure goalId is explicitly set.
@@ -334,7 +340,7 @@ export const Goals = () => {
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex flex-wrap gap-3">
-                            {allGoals.map(goal => {
+                            {sortedUpgrades.map(goal => {
                                 // Search the NEW merged collection for this goal's estimate
                                 const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
 
@@ -384,7 +390,7 @@ export const Goals = () => {
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex flex-wrap gap-3">
-                            {shardsGoals.map(goal => {
+                            {sortedShards.map(goal => {
                                 const estimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
                                 return (
                                     <GoalCard
@@ -424,7 +430,7 @@ export const Goals = () => {
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex flex-wrap gap-3">
-                            {upgradeAbilities.map(goal => {
+                            {sortedAbilities.map(goal => {
                                 const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
                                 return (
                                     <GoalCard

@@ -335,10 +335,10 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                         <div className="flex-box column center">
                             <div className="flex-box gap5 items-center">
                                 <div>{data.priority}</div>
-                                <IconButton size="small" onClick={moveUp}>
+                                <IconButton size="small" aria-label="Increase Priority" onClick={moveUp}>
                                     <ArrowUpward fontSize="small" />
                                 </IconButton>
-                                <IconButton size="small" onClick={moveDown}>
+                                <IconButton size="small" aria-label="Decrease Priority" onClick={moveDown}>
                                     <ArrowDownward fontSize="small" />
                                 </IconButton>
                             </div>
