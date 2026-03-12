@@ -28,7 +28,7 @@ const FS_LAYERS = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
 const REVERSED_FS_LAYERS = [...FS_LAYERS].reverse();
 
 export default defineConfig([
-    globalIgnores(['dist', 'build', 'node_modules', 'package-lock.json']),
+    globalIgnores(['dist', 'build', 'node_modules', 'package-lock.json', 'bun.lock', '*.gen.ts']),
     ...compat.extends(
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
