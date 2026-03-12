@@ -183,22 +183,35 @@ export const Goals = () => {
         xpIncome
     );
 
-    const mergedGoalEstimates = adjustedGoalsEstimates.goalEstimates.map(estimate => {
-        const goal = allGoals.find(g => g.goalId === estimate.goalId);
+    const estimatesByGoalId = adjustedGoalsEstimates.goalEstimates.reduce((acc, estimate) => {
+        const group = acc.get(estimate.goalId) || [];
+        group.push(estimate);
+        acc.set(estimate.goalId, group);
+        return acc;
+    }, new Map<string, IGoalEstimate[]>());
+
+    const mergedGoalEstimates: IGoalEstimate[] = Array.from(estimatesByGoalId.values()).map(group => {
+        const first = group[0];
+        const goal = allGoals.find(g => g.goalId === first.goalId);
 
         if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
-            const estimatesForUnit = adjustedGoalsEstimates.goalEstimates.filter(e => e.goalId === goal.goalId);
-            const aggregated = getAggregatedGoalEstimate(estimatesForUnit) as Partial<IGoalEstimate>;
-            // SPREAD the original estimate first to provide energyTotal, xpBooksTotal, etc.
-            // Then SPREAD aggregated to override the numbers.
-            // Finally, ensure goalId is explicitly set.
-            return {
-                ...estimate, // Provides all missing mandatory properties
-                ...aggregated, // Overwrites with aggregated days/tokens
-                goalId: goal.goalId,
-            } as IGoalEstimate;
+            const aggregated = getAggregatedGoalEstimate(group) as Partial<IGoalEstimate>;
+
+            return group.reduce((acc, curr) => ({
+                ...acc,
+                ...curr,
+                mowEstimate: acc.mowEstimate || curr.mowEstimate,
+                xpEstimate: acc.xpEstimate || curr.xpEstimate,
+                abilitiesEstimate: acc.abilitiesEstimate || curr.abilitiesEstimate,
+                xpEstimateAbilities: acc.xpEstimateAbilities || curr.xpEstimateAbilities,
+                completed: acc.completed || curr.completed,
+                blocked: acc.blocked || curr.blocked,
+                included: acc.included || curr.included,
+                ...aggregated,
+                goalId: first.goalId,
+            }));
         }
-        return estimate;
+        return first;
     });
 
     const totalGoldAbilities = (mergedGoalEstimates as IGoalEstimate[]).reduce((acc, curr) => {
