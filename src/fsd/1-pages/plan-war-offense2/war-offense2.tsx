@@ -9,7 +9,7 @@ import { isMobile } from 'react-device-detect';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Rank, Rarity } from '@/fsd/5-shared/model';
-import { RaritySelect2 } from '@/fsd/5-shared/ui/rarity-select2';
+import { RaritySelect2 } from '@/fsd/5-shared/ui/selects/rarity-select2';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';

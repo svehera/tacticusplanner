@@ -35,9 +35,9 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank } from '@/fsd/5-shared/model';
-import { UnitShardIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { UnitShardIcon, RarityIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService, CharacterTitle, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
+import { CharactersService, CharacterTitle, ICharacter2 } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { getLre, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';

@@ -19,7 +19,7 @@ import warTokenIcon from '@/assets/images/icons/warToken.png';
 
 /* eslint-enable import-x/no-internal-modules */
 import { snowprintIcons } from '@/fsd/5-shared/assets';
-export { OrbIcon } from './orb-image';
+export { OrbImage as OrbIcon } from './orb-image';
 export { ForgeBadgesTotal } from './forge-badges-total';
 export { XpBooksTotal } from './xp-books-total';
 export { MoWComponentsTotal } from './mow-components-total';

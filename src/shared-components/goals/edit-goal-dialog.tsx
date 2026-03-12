@@ -21,6 +21,7 @@ import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
 import { ICampaignBattleComposed, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { CharactersService } from '@/fsd/4-entities/character';
 import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
 import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
 import { IUnit } from '@/fsd/4-entities/unit';
@@ -54,23 +55,25 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
             switch (updatedGoal.type) {
                 case PersonalGoalType.Ascend: {
-                    dispatch.characters({
-                        type: 'UpdateRarity',
-                        character: updatedGoal.unitId,
-                        value: updatedGoal.rarityStart,
-                    });
+                    if (CharactersService.getUnit(updatedGoal.unitId) !== undefined) {
+                        dispatch.characters({
+                            type: 'UpdateRarity',
+                            character: updatedGoal.unitId,
+                            value: updatedGoal.rarityStart,
+                        });
 
-                    dispatch.characters({
-                        type: 'UpdateShards',
-                        character: updatedGoal.unitId,
-                        value: updatedGoal.shards,
-                    });
+                        dispatch.characters({
+                            type: 'UpdateShards',
+                            character: updatedGoal.unitId,
+                            value: updatedGoal.shards,
+                        });
 
-                    dispatch.characters({
-                        type: 'UpdateStars',
-                        character: updatedGoal.unitId,
-                        value: updatedGoal.starsStart,
-                    });
+                        dispatch.characters({
+                            type: 'UpdateStars',
+                            character: updatedGoal.unitId,
+                            value: updatedGoal.starsStart,
+                        });
+                    }
                     break;
                 }
                 case PersonalGoalType.Unlock: {
@@ -128,7 +131,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
 
     const maxRank = useMemo(() => {
-        return ignoreRankRarity ? Rank.Adamantine1 : RarityMapper.toMaxRank[unit?.rarity ?? 0];
+        return ignoreRankRarity ? Rank.Adamantine2 : RarityMapper.toMaxRank[unit?.rarity ?? 0];
     }, [unit?.rarity, ignoreRankRarity]);
 
     let targetRankValues: number[] = [];

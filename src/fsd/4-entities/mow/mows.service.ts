@@ -31,10 +31,28 @@ export class MowsService {
                 continue;
             }
 
-            const primaryUpgrades = mow.primaryAbility.recipes[index]
+            if (index >= mow.primaryAbility.recipes.length || index >= mow.secondaryAbility.recipes.length) {
+                console.error(
+                    'mow: ',
+                    mowId,
+                    ' index: ',
+                    index,
+                    ' actualLevel: ',
+                    actualLevel,
+                    ' primarylen: ',
+                    mow.primaryAbility.recipes.length,
+                    ' secondarylen: ',
+                    mow.secondaryAbility.recipes.length
+                );
+            }
+            const primaryUpgrades = mow.primaryAbility.recipes[
+                Math.max(0, Math.min(index, mow.primaryAbility.recipes.length - 1))
+            ]
                 .flatMap(upgrade => UpgradesService.getUpgrade(upgrade))
                 .filter(x => !!x);
-            const secondaryUpgrades = mow.secondaryAbility.recipes[index]
+            const secondaryUpgrades = mow.secondaryAbility.recipes[
+                Math.max(0, Math.min(index, mow.secondaryAbility.recipes.length - 1))
+            ]
                 .flatMap(upgrade => UpgradesService.getUpgrade(upgrade))
                 .filter(x => !!x);
 
