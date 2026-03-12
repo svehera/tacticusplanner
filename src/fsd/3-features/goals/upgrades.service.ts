@@ -171,6 +171,7 @@ export class UpgradesService {
         const { upgradesRaids, remainingMats } = this.generateDailyRaidsList(
             settings,
             chars,
+            mows,
             goals,
             combinedBaseMaterials,
             inventoryUpgrades,
@@ -209,7 +210,7 @@ export class UpgradesService {
 
         const isGoalPriority = settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.goalPriority;
         const goalPriorityEstimates = isGoalPriority
-            ? this.getGoalPriorityEstimates(combinedBaseMaterials, inventoryUpgrades, goals, chars)
+            ? this.getGoalPriorityEstimates(combinedBaseMaterials, inventoryUpgrades, goals, chars, mows)
             : undefined;
 
         const finishedMaterials = isGoalPriority
@@ -286,6 +287,7 @@ export class UpgradesService {
     public static canRaidMaterial(
         mat: ICombinedUpgrade,
         characters: ICharacter2[],
+        mows: IMow2[],
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
     ): boolean {
         if (!mat.id.startsWith('shards_') && !mat.id.startsWith('mythicShards_')) {
@@ -298,13 +300,18 @@ export class UpgradesService {
                 return false;
             } else if (
                 mat.id.startsWith('shards_') &&
-                !this.canOnslaughtCharacterForRegularShards(goal?.unitId, characters, goal as ICharacterAscendGoal)
+                !this.canOnslaughtCharacterForRegularShards(
+                    goal?.unitId,
+                    characters,
+                    mows,
+                    goal as ICharacterAscendGoal
+                )
             ) {
                 // We have an ascension goal requiring regular shards, but we can't farm them with onslaught, so the goal is blocked.
                 return false;
             } else if (
                 mat.id.startsWith('mythicShards_') &&
-                !this.canOnslaughtCharacterForMythicShards(goal?.unitId, characters, goal as ICharacterAscendGoal)
+                !this.canOnslaughtCharacterForMythicShards(goal?.unitId, characters, mows, goal as ICharacterAscendGoal)
             ) {
                 // We have an ascension goal requiring mythic shards, but we can't farm them with onslaught, so the goal is blocked.
                 return false;
@@ -388,6 +395,7 @@ export class UpgradesService {
     public static generateDailyRaidsList(
         settings: IEstimatedRanksSettings,
         characters: ICharacter2[],
+        mows: IMow2[],
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventoryUpgrades: Record<string, number>,
@@ -415,7 +423,7 @@ export class UpgradesService {
         for (const key in remainingMats) {
             const mat = remainingMats[key];
             if (mat.requiredCount <= 0) continue;
-            if (!this.canRaidMaterial(mat, characters, goals)) {
+            if (!this.canRaidMaterial(mat, characters, mows, goals)) {
                 blockedMats[key] = mat;
                 continue;
             }
@@ -430,6 +438,7 @@ export class UpgradesService {
             this.addOnslaughtsForDay(
                 day,
                 characters,
+                mows,
                 onslaughtTokens,
                 goals.filter(goal => goal.type === PersonalGoalType.Ascend),
                 remainingMats,
@@ -440,16 +449,7 @@ export class UpgradesService {
                 .flatMap(mat => mat.locations)
                 .filter(loc => loc.isSuggested);
 
-            this.planDayRaiding(
-                day,
-                settings,
-                energy,
-                this.sortLocationsForRaiding(locs, goals, remainingMats, inventory, settings, remainingNeededCache),
-                remainingMats,
-                inventory,
-                goals,
-                remainingNeededCache
-            );
+            this.planDayRaiding(day, settings, energy, locs, remainingMats, inventory, goals, remainingNeededCache);
             this.postProcessRaidsForHse(day, settings, goals, remainingMats, inventory, remainingNeededCache);
             const upgradeIds = [...Object.keys(remainingMats)];
             for (const upgradeId of upgradeIds) {
@@ -622,7 +622,14 @@ export class UpgradesService {
         const minEnergy = locs.reduce((min, loc) => Math.min(min, loc.energyCost), Infinity);
         const maxEnergy = locs.reduce((max, loc) => Math.max(max, loc.energyCost), -Infinity);
         if (settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials) {
-            for (const loc of locs) {
+            for (const loc of this.sortLocationsForRaiding(
+                locs,
+                goals,
+                remainingMats,
+                inventory,
+                settings,
+                remainingNeededCache
+            )) {
                 if (energy < minEnergy) break;
                 energy = this.raidLocation(
                     day,
@@ -644,10 +651,16 @@ export class UpgradesService {
                 const matsForGoal = Object.entries(remainingMats).filter(([_, mat]) =>
                     mat.relatedGoals.includes(goal.goalId)
                 );
-                const locsForGoal = locs.filter(loc =>
-                    loc.rewards.potential.some(reward => matsForGoal.some(([_, mat]) => mat.id === reward.id))
-                );
-                for (const loc of locsForGoal) {
+                for (const loc of this.sortLocationsForRaiding(
+                    locs.filter(loc =>
+                        loc.rewards.potential.some(reward => matsForGoal.some(([_, mat]) => mat.id === reward.id))
+                    ),
+                    goals,
+                    remainingMats,
+                    inventory,
+                    settings,
+                    remainingNeededCache
+                )) {
                     if (energy < minEnergy) break;
                     const raidKey = `${loc.rewards.potential[0].id}::${goal.goalId}`;
                     energy = this.raidLocation(
@@ -1134,15 +1147,15 @@ export class UpgradesService {
     public static canOnslaughtCharacterForRegularShards(
         unitId: string,
         chars: ICharacter2[],
+        mows: IMow2[],
         goal: ICharacterAscendGoal
     ): boolean {
         const char = chars.find(char => unitId === char.snowprintId);
-        return (
-            char !== undefined &&
-            char.rank !== Rank.Locked &&
-            char.stars < RarityStars.OneBlueStar &&
-            goal.onslaughtShards > 0
-        );
+        if (char !== undefined) {
+            return char.rank !== Rank.Locked && char.stars < RarityStars.OneBlueStar && goal.onslaughtShards > 0;
+        }
+        const mow = mows.find(mow => unitId === mow.snowprintId);
+        return mow !== undefined && mow.stars < RarityStars.OneBlueStar && goal.onslaughtShards > 0 && mow.unlocked;
     }
 
     /**
@@ -1152,14 +1165,16 @@ export class UpgradesService {
     public static canOnslaughtCharacterForMythicShards(
         unitId: string,
         chars: ICharacter2[],
+        mows: IMow2[],
         goal: ICharacterAscendGoal
     ): boolean {
         const char = chars.find(char => unitId === char.snowprintId);
+        if (char !== undefined) {
+            return char.rank !== Rank.Locked && char.stars >= RarityStars.OneBlueStar && goal.onslaughtMythicShards > 0;
+        }
+        const mow = mows.find(mow => unitId === mow.snowprintId);
         return (
-            char !== undefined &&
-            char.rank !== Rank.Locked &&
-            char.stars >= RarityStars.OneBlueStar &&
-            goal.onslaughtMythicShards > 0
+            mow !== undefined && mow.stars >= RarityStars.OneBlueStar && goal.onslaughtMythicShards > 0 && mow.unlocked
         );
     }
 
@@ -1179,16 +1194,17 @@ export class UpgradesService {
     public static getOnslaughtTokensForGoal(
         inventory: Record<string, number>,
         characters: ICharacter2[],
+        mows: IMow2[],
         goal: ICharacterAscendGoal
     ): number {
-        const shardData = this.getShardsForGoal(characters, [] as IMow2[], goal);
-        const tokensForRegularShards = this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal)
+        const shardData = this.getShardsForGoal(characters, mows, goal);
+        const tokensForRegularShards = this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal)
             ? Math.ceil(
                   Math.max(0, shardData.totalIncrementalShardsNeeded - (inventory['shards_' + goal.unitId] ?? 0)) /
                       goal.onslaughtShards
               )
             : 0;
-        const tokensForMythicShards = this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, goal)
+        const tokensForMythicShards = this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal)
             ? Math.ceil(
                   Math.max(
                       0,
@@ -1206,18 +1222,19 @@ export class UpgradesService {
     public static findHighestPriorityOnslaughtGoal(
         inventory: Record<string, number>,
         characters: ICharacter2[],
+        mows: IMow2[],
         goals: ICharacterAscendGoal[]
     ): ICharacterAscendGoal | undefined {
         const shardGoal = goals
-            .filter(goal => this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal))
-            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, goal) > 0)
+            .filter(goal => this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal))
+            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, mows, goal) > 0)
             .reduce(
                 (acc, goal) => this.reduceGoalsByPriority(acc, goal),
                 undefined as ICharacterAscendGoal | undefined
             );
         const mythicShardGoal = goals
-            .filter(goal => this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, goal))
-            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, goal) > 0)
+            .filter(goal => this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal))
+            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, mows, goal) > 0)
             .reduce(
                 (acc, goal) => this.reduceGoalsByPriority(acc, goal),
                 undefined as ICharacterAscendGoal | undefined
@@ -1235,6 +1252,7 @@ export class UpgradesService {
     public static findLongestOnslaughtGoal(
         inventory: Record<string, number>,
         characters: ICharacter2[],
+        mows: IMow2[],
         goals: ICharacterAscendGoal[]
     ): ICharacterAscendGoal | undefined {
         // First filter out any goals that need either type of shard but don't allow onslaught for
@@ -1242,7 +1260,7 @@ export class UpgradesService {
         return goals
             .map(goal => ({
                 goal,
-                tokens: this.getOnslaughtTokensForGoal(inventory, characters, goal),
+                tokens: this.getOnslaughtTokensForGoal(inventory, characters, mows, goal),
             }))
             .filter(x => x.tokens > 0)
             .sort((a, b) => b.tokens - a.tokens)[0]?.goal;
@@ -1310,6 +1328,7 @@ export class UpgradesService {
     public static addOnslaughtsForDay(
         day: IUpgradesRaidsDay,
         characters: ICharacter2[],
+        mows: IMow2[],
         onslaughtTokens: number,
         goals: Array<ICharacterAscendGoal>,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
@@ -1326,14 +1345,14 @@ export class UpgradesService {
         while (onslaughtTokens > 0) {
             let goal = undefined;
             if (settings.preferences.farmPreferences.order === IDailyRaidsFarmOrder.totalMaterials) {
-                goal = this.findLongestOnslaughtGoal(inventory, characters, goals);
+                goal = this.findLongestOnslaughtGoal(inventory, characters, mows, goals);
             } else {
-                goal = this.findHighestPriorityOnslaughtGoal(inventory, characters, goals);
+                goal = this.findHighestPriorityOnslaughtGoal(inventory, characters, mows, goals);
             }
             if (goal === undefined) break;
             let upgradeId = '';
             let shards = 0;
-            if (this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal)) {
+            if (this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal)) {
                 upgradeId = 'shards_' + goal.unitId;
                 shards = goal.onslaughtShards;
             } else {
@@ -1797,7 +1816,8 @@ export class UpgradesService {
         upgrades: Record<string, ICombinedUpgrade>,
         inventoryUpgrades: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
-        chars: ICharacter2[]
+        chars: ICharacter2[],
+        mows: IMow2[]
     ): ICharacterUpgradeEstimate[] {
         const sortedGoals = orderBy(goals, ['priority'], ['asc']);
         const goalPriorityMap = new Map(sortedGoals.map(goal => [goal.goalId, goal.priority]));
@@ -1829,9 +1849,9 @@ export class UpgradesService {
                     if (
                         ascendGoal &&
                         ((this.isShard(upgradeId) &&
-                            this.canOnslaughtCharacterForRegularShards(ascendGoal.unitId, chars, ascendGoal)) ||
+                            this.canOnslaughtCharacterForRegularShards(ascendGoal.unitId, chars, mows, ascendGoal)) ||
                             (this.isMythicShard(upgradeId) &&
-                                this.canOnslaughtCharacterForMythicShards(ascendGoal.unitId, chars, ascendGoal)))
+                                this.canOnslaughtCharacterForMythicShards(ascendGoal.unitId, chars, mows, ascendGoal)))
                     ) {
                         estimate.isBlocked = false;
                     }

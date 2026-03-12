@@ -1,10 +1,11 @@
-﻿import { groupBy, map, orderBy, sumBy, uniq } from 'lodash';
+﻿/* eslint-disable boundaries/element-types */
+import { groupBy, map, orderBy, sumBy, uniq } from 'lodash';
 
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 
 import { CampaignsService } from '@/fsd/4-entities/campaign/@x/upgrade';
-// eslint-disable-next-line boundaries/element-types
 import { CharactersService } from '@/fsd/4-entities/character';
+import { mows2Data } from '@/fsd/4-entities/mow/@x/upgrade';
 
 import { recipeDataByName } from './data';
 import {
@@ -350,6 +351,27 @@ export class UpgradesService {
                         rarity: shard.startsWith('shards_') ? 'Shard' : 'Mythic Shard',
                         locations: [],
                         iconPath: char?.roundIcon ?? '',
+                        crafted: false,
+                        stat: 'Shard',
+                    };
+                }
+            }
+        });
+
+        mows2Data.mows.forEach(mow => {
+            const shards = 'shards_' + mow.snowprintId!;
+            const mythicShards = 'mythicShards_' + mow.snowprintId!;
+            for (const shard of [shards, mythicShards]) {
+                if (!result[shard]) {
+                    result[shard] = {
+                        id: shard,
+                        snowprintId: shard,
+                        label: shard.startsWith('shards_')
+                            ? 'Shards for ' + (mow?.name ?? mow.snowprintId)
+                            : 'Mythic Shards for ' + (mow?.name ?? mow.snowprintId),
+                        rarity: shard.startsWith('shards_') ? 'Shard' : 'Mythic Shard',
+                        locations: [],
+                        iconPath: mow?.roundIcon ?? '',
                         crafted: false,
                         stat: 'Shard',
                     };
