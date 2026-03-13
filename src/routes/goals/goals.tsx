@@ -68,6 +68,7 @@ export const Goals = () => {
     const {
         goals,
         characters: unresolvedCharacters,
+        gameModeTokens,
         mows,
         campaignsProgress,
         dailyRaidsPreferences,
@@ -122,6 +123,7 @@ export const Goals = () => {
             },
             upgrades: inventory.upgrades,
             completedLocations: dailyRaids.raidedLocations,
+            onslaughtTokensToday: UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
         },
         characters,
         resolvedMows,
