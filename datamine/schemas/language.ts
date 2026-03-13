@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import englishFile from '../source/I2Languages_en.1.36.json';
+import englishFile from '../source/I2Languages_en.json';
 
 const LanguageSchema = z
     .object({

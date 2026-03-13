@@ -1,10 +1,12 @@
-import { rmSync } from 'fs';
+import { glob } from 'glob';
+import { rm } from 'node:fs/promises';
 
 import { z } from 'zod';
 
 import { AchievementSchema } from './schemas/achievements';
 import { BattlesSchema } from './schemas/battles';
-import GAME_CONFIG from './source/gameconfig.1.36.json';
+import { UnitSchema } from './schemas/units';
+import GAME_CONFIG from './source/gameconfig.json';
 import { saveToTsConst } from './utils';
 
 // Schemas ordered from base of json to the most specific.
@@ -45,7 +47,7 @@ const ClientGameConfigSchema = z.strictObject({
     summoningPortal: z.object(),
     timedReminders: z.object(),
     tips: z.array(z.string()),
-    units: z.object(),
+    units: UnitSchema,
     upgrades: z.object(),
     views: z.object(),
 });
@@ -53,10 +55,13 @@ const ClientGameConfigSchema = z.strictObject({
 const parsed = ConfigSchema.parse(GAME_CONFIG);
 console.log('PARSED SUCCESSFULLY');
 
-// clear any existing data in the output directory
-rmSync('./generated/*', { recursive: true, force: true });
+const oldFiles = await glob('./generated/*.gen.*');
+await Promise.all(oldFiles.map(file => rm(file)));
 
 saveToTsConst(parsed.clientGameConfig.achievements, 'achievements');
 saveToTsConst(parsed.clientGameConfig.battles.waves.tracks, 'onslaughtTracks');
 saveToTsConst(parsed.clientGameConfig.battles.waves.levels, 'onslaughtLevels');
 saveToTsConst(parsed.clientGameConfig.battles.guildBoss, 'guildBoss');
+saveToTsConst(parsed.clientGameConfig.battles.salvageRun, 'salvageRun');
+saveToTsConst(parsed.clientGameConfig.units.traits, 'traits');
+saveToTsConst(parsed.clientGameConfig.units.heros, 'heros');

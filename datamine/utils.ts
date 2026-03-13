@@ -2,9 +2,9 @@ import fs from 'fs/promises';
 
 import { z } from 'zod';
 
-// e.g. RewardSchemaGenerator('gold', 'gem') will create a schema that accepts 'gold', 'gem', 'gold:100', 'gem:50', etc.
+// e.g. CountStringSchemaGenerator('gold', 'gem') will create a schema that accepts 'gold', 'gem', 'gold:100', 'gem:50', etc.
 // Transforms it to an object of the form { type: 'gold', amount: 100 } or { type: 'gem', amount: 50 } for easier use in code.
-export const RewardSchemaGenerator = (...rewardStrings: string[]) => {
+export const CountStringSchemaGenerator = (...rewardStrings: string[]) => {
     if (rewardStrings.length === 0) throw new Error('At least one reward string must be provided');
     const stringSchema = z.union(rewardStrings.map(str => z.literal(str)));
     return z
@@ -66,3 +66,33 @@ export function indexToGreekLetter(index: number) {
     if (index < 0 || index >= GREEK_LETTERS.length) return `Greek(${index})`;
     return GREEK_LETTERS[index];
 }
+
+type Prettify<T> = { [K in keyof T]: T[K] } & {};
+
+type RenameKeys<T, M extends Partial<Record<keyof T, string>>> = Prettify<{
+    [K in keyof T as K extends keyof M ? M[K] & string : K]: T[K];
+}>;
+
+export function renameKeys<T extends object, M extends Partial<Record<keyof T, string>>>(
+    obj: T,
+    keyMap: M
+): RenameKeys<T, M> {
+    return Object.fromEntries(
+        Object.entries(obj).map(([key, value]) => [keyMap[key as keyof T] ?? key, value])
+    ) as RenameKeys<T, M>;
+}
+
+export function isPropertyLinear<O extends object, K extends keyof O>(data: O[], key: K, initialValue = 1) {
+    return !data.some((entry, index) => entry[key] !== initialValue + index);
+}
+
+export function isPropertyAscending<K extends string, O extends { [key in K]: number }>(data: O[], key: K) {
+    let lastValue = -Infinity;
+    for (const entry of data) {
+        if (entry[key] <= lastValue) return false;
+        lastValue = entry[key];
+    }
+    return true;
+}
+
+export const ItemSchema = z.enum(['I_Crit', 'I_Defensive', 'I_Booster_Crit', 'I_Block', 'I_Booster_Block']);

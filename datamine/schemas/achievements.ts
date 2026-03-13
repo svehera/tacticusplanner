@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { RaritySchema, RewardSchemaGenerator } from '../utils';
+import { RaritySchema, CountStringSchemaGenerator } from '../utils';
 
-const RewardSchema = RewardSchemaGenerator('gems', 'elderShopCurrency', 'xpMythic');
+const RewardSchema = CountStringSchemaGenerator('gems', 'elderShopCurrency', 'xpMythic');
 
 const AchievementMilestoneSchema = z.strictObject({ goal: z.int(), reward: RewardSchema });
 
