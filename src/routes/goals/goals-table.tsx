@@ -11,7 +11,7 @@ import {
 import LinkIcon from '@mui/icons-material/Link';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 import { charsUnlockShards } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { StoreContext, DispatchContext } from 'src/reducers/store.provider';
-import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import { getEstimatedDate } from 'src/shared-logic/functions';
 
 import { Rank, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 import { RarityIcon, StarsIcon, MiscIcon, RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
@@ -404,32 +404,59 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 },
             },
             {
-                headerName: 'Estimated date',
-                hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
-                valueGetter: params => {
-                    const { data } = params;
-                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
-                    if (goalEstimate) {
-                        if (!goalEstimate.daysLeft) {
-                            return '';
-                        }
-
-                        const nextDate = new Date();
-                        nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
-                        let ret = formatDateWithOrdinal(nextDate);
-                        if (goalEstimate.xpDaysLeft !== undefined) {
-                            ret +=
-                                '\n' +
-                                '(XP by ' +
-                                formatDateWithOrdinal(
-                                    new Date(new Date().getTime() + goalEstimate.xpDaysLeft * 86400000)
-                                ) +
-                                ')';
-                        }
-
-                        return ret;
+                headerName: 'Estimated Date',
+                // valueGetter handles the underlying data for sorting, filtering, and clipboard
+                valueGetter: (params: ValueGetterParams<CharacterRaidGoalSelect>) => {
+                    const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
+                    if (!goalEstimate || !goalEstimate.daysLeft) {
+                        return '';
                     }
+
+                    const materialDate = getEstimatedDate(goalEstimate.daysLeft);
+                    let retdays = materialDate;
+
+                    if (goalEstimate.xpDaysLeft !== undefined) {
+                        const xpDate = getEstimatedDate(goalEstimate.xpDaysLeft);
+                        // Append the XP date to the string so it's visible in the data layer
+                        retdays += ` (XP by ${xpDate})`;
+                    }
+
+                    return retdays;
                 },
+                // cellRenderer handles the actual visual UI
+                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
+                    if (!goalEstimate || !goalEstimate.daysLeft) return null;
+
+                    const materialDays = goalEstimate.daysLeft;
+                    const materialDate = getEstimatedDate(materialDays);
+
+                    const xpDays = goalEstimate.xpDaysLeft;
+                    const xpDate = getEstimatedDate(xpDays ?? 0);
+
+                    return (
+                        <div className="column flex gap-0.5 py-1">
+                            {/* Material / Shards Row */}
+                            <AccessibleTooltip
+                                title={`${materialDays} days for materials. Estimated date ${materialDate}`}>
+                                <div className="flex-box gap-[3px] leading-tight">
+                                    <span className="text-sm">{materialDate}</span>
+                                </div>
+                            </AccessibleTooltip>
+
+                            {/* XP Row */}
+                            {xpDays !== undefined && (
+                                <AccessibleTooltip title={`${Math.ceil(xpDays)} days for XP. Estimated date ${xpDate}`}>
+                                    <div className="flex-box gap-[3px] leading-tight">
+                                        <span className="text-sm">{`XP: ${xpDate}`}</span>
+                                    </div>
+                                </AccessibleTooltip>
+                            )}
+                        </div>
+                    );
+                },
+                width: 170,
+                autoHeight: true, // Recommended since we are stacking rows in a column
             },
             {
                 headerName: 'Health',

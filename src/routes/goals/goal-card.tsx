@@ -54,6 +54,17 @@ interface Props {
     bookRarity: Rarity;
 }
 
+/**
+ * Shared helper to calculate estimated date based on days left.
+ * If this logic is needed in goals-table.tsx, move this to src/shared-logic/functions.ts
+ */
+const getEstimatedDate = (days: number | undefined): string => {
+    if (days === undefined || !Number.isFinite(days) || days <= 0) return '';
+    const date = new Date();
+    date.setDate(date.getDate() + Math.ceil(days) - 1);
+    return formatDateWithOrdinal(date);
+};
+
 export const GoalCard: React.FC<Props> = ({
     goal,
     menuItemSelect,
@@ -73,13 +84,8 @@ export const GoalCard: React.FC<Props> = ({
     };
     const isGoalCompleted = GoalsService.isGoalCompleted(goal, goalEstimate);
 
-    const calendarDate: string = useMemo(() => {
-        const daysLeft = goalEstimate.daysLeft ?? 0;
-        const nextDate = new Date();
-        nextDate.setDate(nextDate.getDate() + daysLeft - 1);
-
-        return formatDateWithOrdinal(nextDate);
-    }, [goalEstimate.daysLeft]);
+    // Material/Shards completion date (used in Subheader and general tooltips)
+    const calendarDate: string = useMemo(() => getEstimatedDate(goalEstimate.daysLeft), [goalEstimate.daysLeft]);
 
     const getGoalInfo = (goal: CharacterRaidGoalSelect) => {
         switch (goal.type) {
@@ -197,12 +203,22 @@ export const GoalCard: React.FC<Props> = ({
                         </div>
                         {(goalEstimate.xpDaysLeft !== undefined ||
                             !!goalEstimate.xpBooksApplied ||
-                            !!goalEstimate.xpBooksRequired) && (
+                            !!goalEstimate.xpBooksRequired ||
+                            goalEstimate.xpDaysLeft === undefined) && (
                             <div className="flex-box gap10 wrap">
                                 <AccessibleTooltip
-                                    title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                                    title={
+                                        goalEstimate.xpDaysLeft === undefined
+                                            ? 'XP Income not set in Daily Raids settings'
+                                            : `${Math.ceil(goalEstimate.xpDaysLeft)} days. Estimated date ${getEstimatedDate(goalEstimate.xpDaysLeft)}`
+                                    }>
                                     <div className="flex-box gap3">
-                                        <CalendarMonthIcon /> {goalEstimate.xpDaysLeft ?? 0}
+                                        <CalendarMonthIcon
+                                            sx={{
+                                                color: goalEstimate.xpDaysLeft === undefined ? 'error.main' : 'inherit',
+                                            }}
+                                        />
+                                        {Math.ceil(goalEstimate.xpDaysLeft ?? 0)}
                                     </div>
                                 </AccessibleTooltip>
                                 {goalEstimate.xpBooksApplied !== undefined &&
@@ -327,12 +343,21 @@ export const GoalCard: React.FC<Props> = ({
                                 )}
                             </div>
                         </div>
-                        {goalEstimate.xpDaysLeft !== undefined && (
+                        {(goalEstimate.xpDaysLeft !== undefined || goalEstimate.xpDaysLeft === undefined) && (
                             <div className="flex-box gap10 wrap">
                                 <AccessibleTooltip
-                                    title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                                    title={
+                                        goalEstimate.xpDaysLeft === undefined
+                                            ? 'XP Income not set / No XP needed for this goal'
+                                            : `${Math.ceil(goalEstimate.xpDaysLeft)} days. Estimated date ${getEstimatedDate(goalEstimate.xpDaysLeft)}`
+                                    }>
                                     <div className="flex-box gap3">
-                                        <CalendarMonthIcon /> {goalEstimate.xpDaysLeft}
+                                        <CalendarMonthIcon
+                                            sx={{
+                                                color: goalEstimate.xpDaysLeft === undefined ? 'error.main' : 'inherit',
+                                            }}
+                                        />
+                                        {Math.ceil(goalEstimate.xpDaysLeft ?? 0)}
                                     </div>
                                 </AccessibleTooltip>
                                 {goalEstimate.xpBooksApplied !== undefined &&
@@ -351,7 +376,9 @@ export const GoalCard: React.FC<Props> = ({
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
-                        {goalEstimate.xpDaysLeft !== undefined && <span> (XP in {goalEstimate.xpDaysLeft} days)</span>}
+                        {goalEstimate.xpDaysLeft !== undefined && (
+                            <span> (XP in {Math.ceil(goalEstimate.xpDaysLeft)} days)</span>
+                        )}
                     </div>
                 );
             }
@@ -408,8 +435,6 @@ export const GoalCard: React.FC<Props> = ({
                 action={
                     menuItemSelect ? (
                         <div className="flex items-center">
-                            {' '}
-                            {/* Container to align icons with buttons */}
                             {!!goalEstimate?.completed && !goalEstimate?.blocked && (
                                 <AccessibleTooltip title={`Goal is completed in current estimation.`}>
                                     <span className="flex-box gap-[3px]" tabIndex={0}>
