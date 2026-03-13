@@ -28,6 +28,7 @@ import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
+import { questsMenuItem } from '@/fsd/1-pages/plan-quests/quests.menu-item';
 import { teams2MenuItem } from '@/fsd/1-pages/plan-teams2/teams2.menu-item';
 import { warDefense2MenuItem } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.menu-item';
 import { warOffense2MenuItem } from '@/fsd/1-pages/plan-war-offense2/war-offense2.menu-item';
@@ -85,6 +86,7 @@ export const menuItemById = {
     guides: guidesMenuItem,
     xpIncome: xpIncomeMenuItem,
     onslaught: new MenuItemTP('Onslaught', <MilitaryTechIcon />, '/learn/onslaught?track=Imperial'),
+    quests: questsMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -112,6 +114,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     new MenuItemTP('LRE', <TableChartIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
     new MenuItemTP('LRE Archive', <TableChartIcon />, '', '', '', inactiveLreMenuItems),
     menuItemById['campaignProgression'],
+    menuItemById['quests'],
 ];
 
 export const planSubMenu: MenuItemTP[] = [
@@ -125,6 +128,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['warOffense2'],
     menuItemById['zones'],
     menuItemById['leMasterTable'],
+    menuItemById['quests'],
     ...activeLreMenuItems,
 ];
 

@@ -13,6 +13,7 @@ import { useCallback, useContext, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
+import { IDailyRaidsFarmOrder } from '@/models/interfaces';
 import DailyRaidsSettings from '@/shared-components/daily-raids-settings';
 import { goalsLimit } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -22,7 +23,7 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
-import { Alliance, useAuth } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/iconList';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
@@ -159,12 +160,14 @@ export const Goals = () => {
         }
     };
 
+    const isGoalPriority = dailyRaidsPreferences?.farmPreferences?.order === IDailyRaidsFarmOrder.goalPriority;
     const goalsEstimate = GoalsService.buildGoalEstimates(
         estimatedUpgradesTotal,
         shardsGoals,
         upgradeRankOrMowGoals,
         upgradeAbilities,
-        characters
+        characters,
+        isGoalPriority
     );
 
     const totalGoldAbilities = sum(
@@ -337,6 +340,7 @@ export const Goals = () => {
                                             viewPreferences.goalColorMode,
                                             aggregatedEstimate
                                         )}
+                                        bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                     />
                                 );
                             })}
@@ -383,6 +387,7 @@ export const Goals = () => {
                                         viewPreferences.goalColorMode,
                                         adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
                                     )}
+                                    bookRarity={xpIncome.defaultBookToUse}
                                 />
                             ))}
                         </div>
@@ -421,6 +426,7 @@ export const Goals = () => {
                                         viewPreferences.goalColorMode,
                                         adjustedGoalsEstimates.goalEstimates.find(x => x.goalId === goal.goalId)
                                     )}
+                                    bookRarity={xpIncome.defaultBookToUse}
                                 />
                             ))}
                         </div>

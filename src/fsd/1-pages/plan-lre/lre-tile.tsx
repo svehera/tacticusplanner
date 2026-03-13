@@ -5,9 +5,9 @@ import React, { useContext, useMemo } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Trait, Rank, Rarity } from '@/fsd/5-shared/model';
-import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterBias, CharactersService, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
+import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { EquipmentIcon, EquipmentService } from '@/fsd/4-entities/equipment';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal, PersonalGoalType } from '@/fsd/4-entities/goal';
 

@@ -3,7 +3,7 @@
 import { Badge, Tooltip } from '@mui/material';
 import React, { useMemo } from 'react';
 
-import { RarityMapper } from '@/fsd/5-shared/model';
+import { RarityMapper, XP_BOOK_VALUE, XP_BOOK_ORDER } from '@/fsd/5-shared/model';
 import { Rarity } from '@/fsd/5-shared/model/enums';
 
 import { MiscIcon } from './misc.icon';
@@ -24,22 +24,20 @@ export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
             [Rarity.Legendary]: 0,
             [Rarity.Mythic]: 0,
         };
-        books[Rarity.Mythic] = Math.floor(xp / 62500);
-        let remainingXp = xp % 62500;
-        books[Rarity.Legendary] = Math.floor(remainingXp / 12500);
-        remainingXp = remainingXp % 12500;
-        books[Rarity.Epic] = Math.floor(remainingXp / 2500);
-        remainingXp = remainingXp % 2500;
-        books[Rarity.Rare] = Math.floor(remainingXp / 500);
-        remainingXp = remainingXp % 500;
-        books[Rarity.Uncommon] = Math.floor(remainingXp / 100);
-        remainingXp = remainingXp % 100;
-        books[Rarity.Common] = Math.ceil(remainingXp / 20);
+        let remaining = xp;
+        for (let i = 0; i < XP_BOOK_ORDER.length; i++) {
+            const rarity = XP_BOOK_ORDER[i];
+            const isLast = i === XP_BOOK_ORDER.length - 1;
+            books[rarity] = isLast
+                ? Math.ceil(remaining / XP_BOOK_VALUE[rarity])
+                : Math.floor(remaining / XP_BOOK_VALUE[rarity]);
+            remaining %= XP_BOOK_VALUE[rarity];
+        }
         return books;
     }, [xp]);
     return (
         <div className="flex-box gap20">
-            {[Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Legendary, Rarity.Mythic].map(rarity => {
+            {[...XP_BOOK_ORDER].reverse().map(rarity => {
                 const booksCount = xpBooks[rarity];
                 const bookName = Rarity[rarity].toLowerCase() + 'Book';
                 return (

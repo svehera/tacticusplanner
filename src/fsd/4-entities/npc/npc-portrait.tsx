@@ -8,8 +8,7 @@ import goldStar from 'src/assets/images/stars/star small.png';
 
 import { RarityStars, Rank } from '@/fsd/5-shared/model';
 import { getImageUrl } from '@/fsd/5-shared/ui';
-
-import { RankIcon } from '@/fsd/4-entities/character/@x/npc';
+import { RankIcon } from '@/fsd/5-shared/ui/icons';
 
 import { NpcService } from './npc-service';
 

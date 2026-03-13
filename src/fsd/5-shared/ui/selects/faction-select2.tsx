@@ -3,10 +3,10 @@ import { Listbox, Transition } from '@headlessui/react';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { Fragment } from 'react';
 
-import { FactionImage } from '@/fsd/4-entities/faction';
+import { factionLookup } from '@/fsd/5-shared/lib';
+import { FactionId } from '@/fsd/5-shared/model';
 
-import { factionLookup } from '../lib';
-import { FactionId } from '../model';
+import { FactionImage } from '@/fsd/4-entities/faction';
 
 export const FactionSelect2 = ({
     factionValues,

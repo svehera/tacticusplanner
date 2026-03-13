@@ -1,33 +1,34 @@
-/* eslint-disable boundaries/element-types */
 import { Listbox, Transition } from '@headlessui/react';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { Fragment } from 'react';
 
-import { Rank } from '@/fsd/5-shared/model';
+import { Rarity } from '@/fsd/5-shared/model';
 
-import { RankIcon } from '@/fsd/4-entities/character/@x/npc';
+import { RarityIcon } from '../icons';
 
-export const RankSelect2 = ({
-    rankValues,
+export const RaritySelect2 = ({
+    rarityValues,
     value,
     valueChanges,
     label,
 }: {
-    label: string;
-    rankValues: number[];
+    label?: string;
+    rarityValues: number[];
     value: number;
     valueChanges: (value: number) => void;
 }) => {
     return (
         <div className="w-full">
-            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
+            {label && (
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
+            )}
 
             <Listbox value={value} onChange={valueChanges}>
                 <div className="relative">
                     <Listbox.Button className="relative w-full cursor-pointer rounded-lg border border-slate-300 bg-white py-2 pr-10 pl-3 text-left shadow-sm transition-all hover:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-[#0f172a] dark:text-white">
                         <div className="flex items-center gap-2">
-                            <RankIcon rank={value} />
-                            <span>{Rank[value]}</span>
+                            <RarityIcon rarity={value} />
+                            <span>{Rarity[value]}</span>
                         </div>
 
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -41,10 +42,10 @@ export const RankSelect2 = ({
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0">
                         <Listbox.Options className="absolute z-50 mt-2 w-full overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-xl dark:border-slate-700 dark:bg-[#161b22]">
-                            {rankValues.map(rank => (
+                            {rarityValues.map(rarity => (
                                 <Listbox.Option
-                                    key={rank}
-                                    value={rank}
+                                    key={rarity}
+                                    value={rarity}
                                     className={({ active }) =>
                                         `relative cursor-pointer py-2 pr-4 pl-10 transition-colors select-none ${
                                             active
@@ -55,8 +56,8 @@ export const RankSelect2 = ({
                                     {({ selected }) => (
                                         <>
                                             <div className="flex items-center gap-2">
-                                                <RankIcon rank={rank} />
-                                                <span>{Rank[rank]}</span>
+                                                <RarityIcon rarity={rarity} />
+                                                <span>{Rarity[rarity]}</span>
                                             </div>
 
                                             {selected && (

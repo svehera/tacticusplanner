@@ -24,6 +24,7 @@ export const PlanRoutes = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const teamsMenuItem = menuItemById['teams'];
     const teams2MenuItem = menuItemById['teams2'];
+    const questsMenuItem = menuItemById['quests'];
     const warOffense2MenuItem = menuItemById['warOffense2'];
 
     const [selectedRoutes, setSelectedRoutes] = useState<SelectedRoutes>(SelectedRoutes.all);
@@ -39,6 +40,7 @@ export const PlanRoutes = () => {
                         teams2MenuItem,
                         warOffense2MenuItem,
                         campaignProgressionMenuItem,
+                        questsMenuItem,
                     ].map(menuItem => (
                         <Card
                             variant="outlined"

@@ -1,9 +1,7 @@
 import React from 'react';
 
 import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
-import { FactionSelect2 } from '@/fsd/5-shared/ui/faction-select2';
-import { RankSelect2 } from '@/fsd/5-shared/ui/rank-select2';
-import { RaritySelect2 } from '@/fsd/5-shared/ui/rarity-select2';
+import { FactionSelect2, RankSelect2, RaritySelect2 } from '@/fsd/5-shared/ui';
 
 const RARITIES = [Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Legendary, Rarity.Mythic];
 
