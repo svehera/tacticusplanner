@@ -38,7 +38,7 @@ export const MowMaterialsTotal: React.FC<Props> = ({ total, mowAlliance, label, 
                 </div>
 
                 <div className="flex-box gap5">
-                    <Tooltip key={mowAlliance} title={`${Alliance[mowAlliance]} Components`}>
+                    <Tooltip title={`${Alliance[mowAlliance]} Components`}>
                         <Badge badgeContent={<b>{total.components}</b>}>
                             <MiscIcon icon={componentName} width={25} height={25} />
                         </Badge>

@@ -408,47 +408,53 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 // valueGetter handles the underlying data for sorting, filtering, and clipboard
                 valueGetter: (params: ValueGetterParams<CharacterRaidGoalSelect>) => {
                     const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
-                    if (!goalEstimate || !goalEstimate.daysLeft) {
+                    // Only return blank if both estimates are missing/undefined
+                    if (
+                        !goalEstimate ||
+                        (goalEstimate.daysLeft === undefined && goalEstimate.xpDaysLeft === undefined)
+                    ) {
                         return '';
                     }
 
-                    const materialDate = getEstimatedDate(goalEstimate.daysLeft);
-                    let retdays = materialDate;
+                    const { daysLeft, xpDaysLeft } = goalEstimate;
+                    const materialDate = daysLeft !== undefined ? getEstimatedDate(daysLeft) : null;
+                    const xpDate = xpDaysLeft !== undefined ? getEstimatedDate(xpDaysLeft) : null;
 
-                    if (goalEstimate.xpDaysLeft !== undefined) {
-                        const xpDate = getEstimatedDate(goalEstimate.xpDaysLeft);
-                        // Append the XP date to the string so it's visible in the data layer
-                        retdays += ` (XP by ${xpDate})`;
+                    if (materialDate && xpDate) {
+                        return `${materialDate} (XP by ${xpDate})`;
                     }
 
-                    return retdays;
+                    if (materialDate) return materialDate;
+                    if (xpDate) return `XP by ${xpDate}`;
+
+                    return '';
                 },
                 // cellRenderer handles the actual visual UI
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
-                    if (!goalEstimate || !goalEstimate.daysLeft) return null;
+                    // Remove early guard !goalEstimate.daysLeft to allow XP-only rendering
+                    if (!goalEstimate) return null;
 
-                    const materialDays = goalEstimate.daysLeft;
-                    const materialDate = getEstimatedDate(materialDays);
-
-                    const xpDays = goalEstimate.xpDaysLeft;
-                    const xpDate = getEstimatedDate(xpDays ?? 0);
+                    const { daysLeft, xpDaysLeft } = goalEstimate;
 
                     return (
-                        <div className="column flex gap-0.5 py-1">
-                            {/* Material / Shards Row */}
-                            <AccessibleTooltip
-                                title={`${materialDays} days for materials. Estimated date ${materialDate}`}>
-                                <div className="flex-box gap-[3px] leading-tight">
-                                    <span className="text-sm">{materialDate}</span>
-                                </div>
-                            </AccessibleTooltip>
-
-                            {/* XP Row */}
-                            {xpDays !== undefined && (
-                                <AccessibleTooltip title={`${Math.ceil(xpDays)} days for XP. Estimated date ${xpDate}`}>
+                        <div className="flex-box column gap-0.5 py-1">
+                            {/* Material / Shards Row: Render only if daysLeft is defined */}
+                            {daysLeft !== undefined && (
+                                <AccessibleTooltip
+                                    title={`${daysLeft} days for materials. Estimated date ${getEstimatedDate(daysLeft)}`}>
                                     <div className="flex-box gap-[3px] leading-tight">
-                                        <span className="text-sm">{`XP: ${xpDate}`}</span>
+                                        <span className="text-sm">{getEstimatedDate(daysLeft)}</span>
+                                    </div>
+                                </AccessibleTooltip>
+                            )}
+
+                            {/* XP Row: Render if xpDaysLeft exists, even if materials (daysLeft) are 0 or undefined */}
+                            {xpDaysLeft !== undefined && (
+                                <AccessibleTooltip
+                                    title={`${Math.ceil(xpDaysLeft)} days for XP. Estimated date ${getEstimatedDate(xpDaysLeft)}`}>
+                                    <div className="flex-box gap-[3px] leading-tight">
+                                        <span className="text-sm">{`XP: ${getEstimatedDate(xpDaysLeft)}`}</span>
                                     </div>
                                 </AccessibleTooltip>
                             )}
@@ -456,7 +462,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                     );
                 },
                 width: 170,
-                autoHeight: true, // Recommended since we are stacking rows in a column
+                autoHeight: true,
             },
             {
                 headerName: 'Health',
