@@ -3,7 +3,12 @@
 import { orderBy, sum, uniq, uniqBy } from 'lodash';
 
 import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
-import { IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent, IEstimatedRanksSettings } from 'src/models/interfaces';
+import {
+    IDailyRaidsFarmOrder,
+    IDailyRaidsHomeScreenEvent,
+    IEstimatedRanksSettings,
+    IGameModeTokensState,
+} from 'src/models/interfaces';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
@@ -99,6 +104,37 @@ export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
+
+    public static computeOnslaughtTokensToday(gameModeTokens: IGameModeTokensState): number {
+        const currentTokens = gameModeTokens.tokens?.onslaught?.current ?? 0;
+        const nextTokenInSeconds = gameModeTokens.tokens?.onslaught?.nextTokenInSeconds ?? Infinity;
+        const regenInSeconds = gameModeTokens.tokens?.onslaught?.regenDelayInSeconds ?? Infinity;
+        const maxTokens = gameModeTokens.tokens?.onslaught?.max ?? 3;
+        const now = new Date();
+        const endOfUtcDay = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59, 999);
+
+        const secondsLeftToday = Math.max(0, (endOfUtcDay - now.getTime()) / 1000);
+
+        const safeRegenInSeconds = Number.isFinite(regenInSeconds) && regenInSeconds > 0 ? regenInSeconds : Infinity;
+
+        const firstTokenInSeconds =
+            currentTokens >= maxTokens
+                ? safeRegenInSeconds
+                : Number.isFinite(nextTokenInSeconds) && nextTokenInSeconds >= 0
+                  ? nextTokenInSeconds
+                  : Infinity;
+
+        if (!Number.isFinite(firstTokenInSeconds) || !Number.isFinite(safeRegenInSeconds)) {
+            return currentTokens;
+        }
+
+        const regeneratedToday =
+            secondsLeftToday < firstTokenInSeconds
+                ? 0
+                : 1 + Math.floor((secondsLeftToday - firstTokenInSeconds) / safeRegenInSeconds);
+
+        return currentTokens + regeneratedToday;
+    }
 
     public static canonicalizeInventoryUpgrades(
         inventoryUpgrades: Record<string, number>,
@@ -405,7 +441,8 @@ export class UpgradesService {
         >
     ): { upgradesRaids: IUpgradesRaidsDay[]; remainingMats: Record<string, ICombinedUpgrade> } {
         const ret: IUpgradesRaidsDay[] = [];
-        let onslaughtTokens = settings.onslaughtTokensToday ?? 1;
+        let onslaughtTokens = settings.onslaughtTokensToday !== undefined ? settings.onslaughtTokensToday : 1;
+        console.trace('onslaughtTokens at start of raids generation:', settings.onslaughtTokensToday, onslaughtTokens);
         let remainingMats: Record<string, ICombinedUpgrade> = {};
 
         for (const [id, upgrade] of Object.entries(combinedBaseMaterials)) {
@@ -432,9 +469,6 @@ export class UpgradesService {
         remainingMats = newRemainignMats;
 
         while (Object.entries(remainingMats).length > 0 && days++ < MAX_DAYS) {
-            // regenerate 1 token every 18 hours, or 3 every two days.
-            onslaughtTokens = Math.max(1, Math.min(2, 3 - onslaughtTokens));
-
             this.addOnslaughtsForDay(
                 day,
                 characters,
@@ -484,6 +518,8 @@ export class UpgradesService {
                 onslaughtTokens,
                 raids: [],
             };
+            // regenerate 1 token every 18 hours, or 3 every two days.
+            onslaughtTokens = Math.max(1, Math.min(2, 3 - onslaughtTokens));
         }
 
         Object.keys(blockedMats).forEach(upgradeId => {
