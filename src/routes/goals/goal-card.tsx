@@ -191,8 +191,7 @@ export const GoalCard: React.FC<Props> = ({
                         </div>
                         {(goalEstimate.xpDaysLeft !== undefined ||
                             !!goalEstimate.xpBooksApplied ||
-                            !!goalEstimate.xpBooksRequired ||
-                            goalEstimate.xpDaysLeft === undefined) && (
+                            !!goalEstimate.xpBooksRequired) && (
                             <div className="flex-box gap10 wrap">
                                 <AccessibleTooltip
                                     title={
