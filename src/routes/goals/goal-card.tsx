@@ -21,7 +21,7 @@ import { ICharacter2 } from '@/models/interfaces';
 import { charsUnlockShards, rarityToStars } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
-import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import { getEstimatedDate } from 'src/shared-logic/functions';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
@@ -53,17 +53,6 @@ interface Props {
     mows: IMow2[];
     bookRarity: Rarity;
 }
-
-/**
- * Shared helper to calculate estimated date based on days left.
- * If this logic is needed in goals-table.tsx, move this to src/shared-logic/functions.ts
- */
-const getEstimatedDate = (days: number | undefined): string => {
-    if (days === undefined || !Number.isFinite(days) || days <= 0) return '';
-    const date = new Date();
-    date.setDate(date.getDate() + Math.ceil(days) - 1);
-    return formatDateWithOrdinal(date);
-};
 
 export const GoalCard: React.FC<Props> = ({
     goal,
@@ -209,7 +198,7 @@ export const GoalCard: React.FC<Props> = ({
                                 <AccessibleTooltip
                                     title={
                                         goalEstimate.xpDaysLeft === undefined
-                                            ? 'XP Income not set in Daily Raids settings'
+                                            ? 'XP Income not set / No XP needed for this goal'
                                             : `${Math.ceil(goalEstimate.xpDaysLeft)} days. Estimated date ${getEstimatedDate(goalEstimate.xpDaysLeft)}`
                                     }>
                                     <div className="flex-box gap3">
@@ -323,7 +312,7 @@ export const GoalCard: React.FC<Props> = ({
             case PersonalGoalType.CharacterAbilities: {
                 const hasActiveGoal = goal.activeEnd > goal.activeStart;
                 const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
-                const { xpEstimateAbilities: xpEstimate } = goalEstimate;
+
                 return (
                     <div>
                         <div className="flex-box gap10">
@@ -343,41 +332,11 @@ export const GoalCard: React.FC<Props> = ({
                                 )}
                             </div>
                         </div>
-                        {(goalEstimate.xpDaysLeft !== undefined || goalEstimate.xpDaysLeft === undefined) && (
-                            <div className="flex-box gap10 wrap">
-                                <AccessibleTooltip
-                                    title={
-                                        goalEstimate.xpDaysLeft === undefined
-                                            ? 'XP Income not set / No XP needed for this goal'
-                                            : `${Math.ceil(goalEstimate.xpDaysLeft)} days. Estimated date ${getEstimatedDate(goalEstimate.xpDaysLeft)}`
-                                    }>
-                                    <div className="flex-box gap3">
-                                        <CalendarMonthIcon
-                                            sx={{
-                                                color: goalEstimate.xpDaysLeft === undefined ? 'error.main' : 'inherit',
-                                            }}
-                                        />
-                                        {Math.ceil(goalEstimate.xpDaysLeft ?? 0)}
-                                    </div>
-                                </AccessibleTooltip>
-                                {goalEstimate.xpBooksApplied !== undefined &&
-                                    goalEstimate.xpBooksRequired !== undefined && (
-                                        <XpGoalProgressBar
-                                            applied={goalEstimate.xpBooksApplied}
-                                            required={goalEstimate.xpBooksRequired}
-                                            bookRarity={bookRarity}
-                                        />
-                                    )}
-                            </div>
-                        )}
-                        {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
+
                         {goalEstimate.abilitiesEstimate && (
                             <div className="flex-box gap-[3px]">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
-                        )}
-                        {goalEstimate.xpDaysLeft !== undefined && (
-                            <span> (XP in {Math.ceil(goalEstimate.xpDaysLeft)} days)</span>
                         )}
                     </div>
                 );

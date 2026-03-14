@@ -689,7 +689,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 // width: 120,
             },
         ];
-    }, [rows, dispatch, menuItemSelect, estimate, characters]);
+    }, [rows, dispatch, menuItemSelect, estimate, characters, orderedAllGoals]);
 
     const getRowStyle = useMemo(
         () => (params: any) => {
