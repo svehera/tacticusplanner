@@ -1,1 +1,4 @@
 package-lock.json
+bun.lock
+*.gen.ts
+datamine/source/*
