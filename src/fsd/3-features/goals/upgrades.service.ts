@@ -442,7 +442,6 @@ export class UpgradesService {
     ): { upgradesRaids: IUpgradesRaidsDay[]; remainingMats: Record<string, ICombinedUpgrade> } {
         const ret: IUpgradesRaidsDay[] = [];
         let onslaughtTokens = settings.onslaughtTokensToday !== undefined ? settings.onslaughtTokensToday : 1;
-        console.trace('onslaughtTokens at start of raids generation:', settings.onslaughtTokensToday, onslaughtTokens);
         let remainingMats: Record<string, ICombinedUpgrade> = {};
 
         for (const [id, upgrade] of Object.entries(combinedBaseMaterials)) {
