@@ -1,13 +1,13 @@
-﻿import { Card, CardHeader } from '@mui/material';
+import { Card, CardHeader } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import { menuItemById } from '../../models/menu-items';
 
-export const PlanGuildWarRoutes = () => {
+export const PlanToBeDeletedRoutes = () => {
     const navigate = useNavigate();
-    const defenseItem = menuItemById['warDefense2'];
-    const offenseItem = menuItemById['warOffense2'];
-    const layoutItem = menuItemById['zones'];
+    const teams = menuItemById['teams'];
+    const defenseItem = menuItemById['defense'];
+    const offenseItem = menuItemById['offense'];
     return (
         <div className="flex flex-col items-center gap-2.5">
             <Card
@@ -43,7 +43,7 @@ export const PlanGuildWarRoutes = () => {
             </Card>
             <Card
                 variant="outlined"
-                onClick={() => navigate(layoutItem.routeMobile)}
+                onClick={() => navigate(teams.routeMobile)}
                 sx={{
                     width: 350,
                     minHeight: 140,
@@ -51,7 +51,7 @@ export const PlanGuildWarRoutes = () => {
                 <CardHeader
                     title={
                         <div className="flex items-center gap-2.5">
-                            {layoutItem.icon} {layoutItem.label}
+                            {teams.icon} {teams.label}
                         </div>
                     }
                 />
