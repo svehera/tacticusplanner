@@ -1,0 +1,9 @@
+- When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision.
+- IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning.
+    - [Code Review](.agent-skills/code-review/SKILL.md)
+    - [Revise Agent Configuration](.agent-skills/revise-agent-configuration/SKILL.md)
+    - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+    - [Zod Validation API](https://zod.dev/api)
+    - [Better alternatives to useEffect](https://react.dev/learn/you-might-not-need-an-effect.md)
+- The primary branch for this repo is `develop`
+- Use Tailwind v4 for styling all new code
