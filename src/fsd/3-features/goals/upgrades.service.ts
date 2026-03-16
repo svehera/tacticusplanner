@@ -789,7 +789,7 @@ export class UpgradesService {
         remainingNeededCache: Map<
             string,
             { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
-        >,
+        > = new Map(),
         goalPriorityLocationsByGoal?: Map<string, GoalPriorityLocationsState>
     ): void {
         const minEnergy = locs.reduce((min, loc) => Math.min(min, loc.energyCost), Infinity);
@@ -1059,7 +1059,7 @@ export class UpgradesService {
         remainingNeededCache: Map<
             string,
             { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
-        >
+        > = new Map()
     ): number {
         if (energy < loc.energyCost) return energy;
         const upgradeId = loc.rewards.potential[0].id;
@@ -1138,7 +1138,7 @@ export class UpgradesService {
         inventory: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         goalId: string | undefined,
-        cache: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
+        cache?: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
     ): { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number } {
         const available = inventory[upgradeId] ?? 0;
         const totalRemaining = Math.max(mat.requiredCount - available, 0);
@@ -1203,7 +1203,7 @@ export class UpgradesService {
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
-        cache: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
+        cache?: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
     ): string | undefined {
         const mat = combinedBaseMaterials[upgradeId];
         if (!mat) return undefined;
@@ -1247,7 +1247,10 @@ export class UpgradesService {
         inventory: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         highestPriorityGoalId: string | undefined,
-        cache: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
+        cache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        > = new Map()
     ): number {
         if (!combinedBaseMaterials[upgradeId]) return 0;
         const remaining = this.getRemainingNeededForGoal(
@@ -1278,7 +1281,10 @@ export class UpgradesService {
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
         settings: IEstimatedRanksSettings,
-        cache: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
+        cache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        > = new Map()
     ): Array<TaggedLocation> {
         // Give everything a two-part priority. The first part is priority. If we're ordering by
         // goal priority, it's simply the priority of the most urgent goal to which this maps. If
@@ -1357,7 +1363,10 @@ export class UpgradesService {
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
         settings: IEstimatedRanksSettings,
-        cache: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
+        cache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        > = new Map()
     ): ICampaignBattleComposed[] {
         let taggedLocs = this.tagLocationsWithGoalPriorityAndDaysToCompletion(
             locs,
