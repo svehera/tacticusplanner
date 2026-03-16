@@ -4,7 +4,6 @@ import {
     ColDef,
     ColGroupDef,
     ICellRendererParams,
-    ValueFormatterParams,
     CellEditingStoppedEvent,
     themeBalham,
     GridReadyEvent,
@@ -16,6 +15,7 @@ import { isMobile } from 'react-device-detect';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
@@ -51,17 +51,6 @@ export const MaterialsTable: React.FC<Props> = ({
     scrollToCharSnowprintId,
     alreadyUsedMaterials,
 }) => {
-    const upgradeRarityClassName = (rarity: Rarity | 'Shard' | 'Mythic Shard' | undefined): string => {
-        const shardVal = (rarity ?? 'Unknown').toString();
-        if (['Shard', 'Mythic Shard', 'Unknown'].includes(shardVal)) {
-            return shardVal;
-        }
-        if (typeof rarity === 'number') {
-            return RarityMapper.rarityToRarityString(rarity);
-        }
-        return RarityMapper.stringToRarityString(shardVal) ?? 'Unknown';
-    };
-
     const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {
         const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
 
@@ -123,15 +112,26 @@ export const MaterialsTable: React.FC<Props> = ({
                 },
                 {
                     field: 'rarity',
-                    maxWidth: 120,
+                    maxWidth: 60,
                     columnGroupShow: 'open',
-                    valueFormatter: (params: ValueFormatterParams<IRaidMaterialRow>) => {
-                        return upgradeRarityClassName(params.data?.rarity);
+                    cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) => {
+                        const rarity = params.data?.rarity;
+                        if (typeof rarity === 'number') {
+                            return <RarityIcon rarity={rarity} />;
+                        }
+                        return null;
                     },
-                    cellClass: params => upgradeRarityClassName(params.data?.rarity),
+                    tooltipValueGetter: params => {
+                        const rarity = params.data?.rarity;
+                        if (typeof rarity === 'number') {
+                            return RarityMapper.rarityToRarityString(rarity as Rarity);
+                        }
+                        return;
+                    },
                     comparator: (valueA, valueB) => {
                         return getRaritySortKey(valueA) - getRaritySortKey(valueB);
                     },
+                    cellClass: params => RarityMapper.rarityToRarityString(params.data?.rarity as Rarity).toLowerCase(),
                 },
                 {
                     columnGroupShow: 'open',
