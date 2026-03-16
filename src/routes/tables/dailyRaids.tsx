@@ -15,7 +15,7 @@ import { MowsService } from '@/fsd/4-entities/mow';
 
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
-import { CharacterRaidGoalSelect, IEstimatedUpgrades, IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
+import { CharacterRaidGoalSelect, IEstimatedUpgrades } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
@@ -46,6 +46,7 @@ export const DailyRaids = () => {
         dailyRaids,
         characters: storeCharacters,
         mows: storeMows,
+        gameModeTokens,
         goals,
         campaignsProgress,
         dailyRaidsPreferences,
@@ -60,8 +61,6 @@ export const DailyRaids = () => {
         [inventory.upgrades, storeCharacters, resolvedMows]
     );
     const units = useMemo(() => [...storeCharacters, ...resolvedMows], [storeCharacters, resolvedMows]);
-    const [raidedLocations, setRaidedLocations] = useState<IItemRaidLocation[]>(dailyRaids.raidedLocations);
-
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
         return GoalsService.prepareGoals(goals, units, true);
     }, [goals, units]);
@@ -93,24 +92,18 @@ export const DailyRaids = () => {
     };
 
     const refresh = () => {
-        setRaidedLocations([...dailyRaids.raidedLocations]);
         setHasChanges(false);
     };
 
     const sync = async () => {
         console.log('Syncing with Tacticus...');
         await syncWithTacticus();
-        // Inline refresh after successful sync
-        setRaidedLocations([...raidedLocations]);
         setHasChanges(false);
     };
 
     const resetDay = () => {
         dispatch.dailyRaids({ type: 'ResetCompletedBattles' });
         setHasChanges(false);
-        setTimeout(() => {
-            setRaidedLocations([]);
-        }, 100);
     };
 
     const resolvedCharacters = CharactersService.resolveStoredCharacters(storeCharacters);
@@ -131,8 +124,9 @@ export const DailyRaids = () => {
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,
-                completedLocations: raidedLocations?.filter(x => !x.isShardsLocation) ?? [],
+                completedLocations: dailyRaids.raidedLocations.filter(x => !x.isShardsLocation),
                 filters: dailyRaids.filters,
+                onslaughtTokensToday: UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
             },
             resolvedCharacters,
             resolvedMows,
@@ -144,8 +138,8 @@ export const DailyRaids = () => {
         shardsGoals,
         dailyRaidsPreferences,
         dailyRaids.filters,
+        dailyRaids.raidedLocations,
         upgrades,
-        raidedLocations,
         resolvedCharacters,
         resolvedMows,
         campaignsProgress,
@@ -158,8 +152,9 @@ export const DailyRaids = () => {
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,
-                completedLocations: raidedLocations?.filter(x => !x.isShardsLocation) ?? [],
+                completedLocations: dailyRaids.raidedLocations.filter(x => !x.isShardsLocation),
                 filters: dailyRaids.filters,
+                onslaughtTokensToday: UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
             },
             resolvedCharacters,
             resolvedMows,
@@ -171,8 +166,8 @@ export const DailyRaids = () => {
         shardsGoals,
         dailyRaidsPreferences,
         dailyRaids.filters,
+        dailyRaids.raidedLocations,
         upgrades,
-        raidedLocations,
         resolvedCharacters,
         resolvedMows,
         campaignsProgress,
@@ -184,7 +179,7 @@ export const DailyRaids = () => {
                 hasSync={hasSync}
                 syncHandle={sync}
                 actualDailyEnergy={actualEnergy.toString()}
-                refreshDisabled={!hasChanges && dailyRaids.raidedLocations.length === raidedLocations.length}
+                refreshDisabled={!hasChanges}
                 refreshHandle={refresh}
                 resetDisabled={!dailyRaids.raidedLocations?.length}
                 resetHandler={resetDay}>

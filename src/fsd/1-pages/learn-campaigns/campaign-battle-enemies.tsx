@@ -101,6 +101,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
         let left = horizontalMargin;
         let top = verticalMargin;
         let enemiesInRow = 0;
+        let enemyIndex = 0;
         const elems: JSX.Element[] = [];
         enemies.forEach(enemy => {
             // Pre-resolve NPC data for the click handler
@@ -113,7 +114,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
             for (let i = 0; i < enemy.count; i++) {
                 elems.push(
                     <button
-                        key={keyPrefix + battleId + '-' + (row * maxPerRow + i) + '-' + enemyId}
+                        key={keyPrefix + battleId + '-' + enemyIndex++ + '-' + enemyId}
                         className="absolute cursor-pointer border-none bg-transparent p-0 transition-all hover:brightness-110 focus:outline-none"
                         style={{ left, top, width: frameWidth, height: frameHeight }}
                         onClick={() =>

@@ -12,19 +12,21 @@ import { CharactersService } from '@/fsd/4-entities/character';
 
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 
+import { PlanToBeDeletedRoutes } from './toBeDeletedRoutes';
+
 enum SelectedRoutes {
     all,
     lre,
     gw,
+    tbk,
 }
 
 export const PlanRoutes = () => {
     const navigate = useNavigate();
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
-    const teamsMenuItem = menuItemById['teams'];
     const teams2MenuItem = menuItemById['teams2'];
-    const warOffense2MenuItem = menuItemById['warOffense2'];
+    const questsMenuItem = menuItemById['quests'];
 
     const [selectedRoutes, setSelectedRoutes] = useState<SelectedRoutes>(SelectedRoutes.all);
 
@@ -35,10 +37,9 @@ export const PlanRoutes = () => {
                     {[
                         goalsMenuItem,
                         dailyRaidsMenuItem,
-                        teamsMenuItem,
                         teams2MenuItem,
-                        warOffense2MenuItem,
                         campaignProgressionMenuItem,
+                        questsMenuItem,
                     ].map(menuItem => (
                         <Card
                             variant="outlined"
@@ -104,6 +105,29 @@ export const PlanRoutes = () => {
                             </ul>
                         </CardContent>
                     </Card>
+
+                    <Card
+                        variant="outlined"
+                        onClick={() => setSelectedRoutes(SelectedRoutes.tbk)}
+                        sx={{
+                            width: 350,
+                            minHeight: 140,
+                        }}>
+                        <CardHeader
+                            title={
+                                <div className="flex items-center gap-2.5">
+                                    <FormatListBulletedIcon /> To Be Deleted
+                                </div>
+                            }
+                        />
+                        <CardContent className="flex flex-col">
+                            <ul>
+                                <li>Old Teams</li>
+                                <li>Old Guild War Offense</li>
+                                <li>Old Guild War Defense</li>
+                            </ul>
+                        </CardContent>
+                    </Card>
                 </>
             ) : (
                 <Button onClick={() => setSelectedRoutes(SelectedRoutes.all)}>Go Back</Button>
@@ -111,6 +135,7 @@ export const PlanRoutes = () => {
 
             {selectedRoutes === SelectedRoutes.lre && <PlanLeRoutes />}
             {selectedRoutes === SelectedRoutes.gw && <PlanGuildWarRoutes />}
+            {selectedRoutes === SelectedRoutes.tbk && <PlanToBeDeletedRoutes />}
         </div>
     );
 };

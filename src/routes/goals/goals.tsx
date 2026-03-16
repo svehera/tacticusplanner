@@ -10,6 +10,8 @@ import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch
 import Button from '@mui/material/Button';
 import { cloneDeep } from 'lodash';
 import { useCallback, useContext, useState } from 'react';
+import { cloneDeep, sum } from 'lodash';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
@@ -48,6 +50,7 @@ export const Goals = () => {
     const {
         goals,
         characters: unresolvedCharacters,
+        gameModeTokens,
         mows,
         campaignsProgress,
         dailyRaidsPreferences,
@@ -60,7 +63,10 @@ export const Goals = () => {
     const dispatch = useContext(DispatchContext);
     const { userInfo } = useAuth();
 
-    const characters = CharactersService.resolveStoredCharacters(unresolvedCharacters);
+    const characters = useMemo(
+        () => CharactersService.resolveStoredCharacters(unresolvedCharacters),
+        [unresolvedCharacters]
+    );
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
 
@@ -76,12 +82,12 @@ export const Goals = () => {
         [dispatch]
     );
 
-    const resolvedMows = MowsService.resolveAllFromStorage(mows);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+    const units = useMemo(() => [...characters, ...resolvedMows], [characters, resolvedMows]);
 
-    const { allGoals, shardsGoals, upgradeRankOrMowGoals, ascendGoals, upgradeAbilities } = GoalsService.prepareGoals(
-        goals,
-        [...characters, ...resolvedMows],
-        false
+    const { allGoals, shardsGoals, upgradeRankOrMowGoals, ascendGoals, upgradeAbilities } = useMemo(
+        () => GoalsService.prepareGoals(goals, units, false),
+        [goals, units]
     );
 
     // Add these sorts to ensure the UI matches the global priority order
@@ -96,21 +102,52 @@ export const Goals = () => {
             raidedLocations: [],
         },
         ...shardsGoals
+    const onslaughtTokensToday = useMemo(
+        () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
+        [gameModeTokens]
     );
 
-    const estimatedUpgradesTotal = UpgradesService.getUpgradesEstimatedDays(
-        {
-            dailyEnergy: dailyRaidsPreferences.dailyEnergy,
-            campaignsProgress: campaignsProgress,
-            preferences: {
-                ...dailyRaidsPreferences,
-            },
-            upgrades: inventory.upgrades,
-            completedLocations: dailyRaids.raidedLocations,
-        },
-        characters,
-        resolvedMows,
-        ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
+    const estimatedShardsTotal = useMemo(
+        () =>
+            ShardsService.getShardsEstimatedDays(
+                {
+                    campaignsProgress: campaignsProgress,
+                    preferences: dailyRaidsPreferences,
+                    raidedLocations: [],
+                },
+                ...shardsGoals
+            ),
+        [campaignsProgress, dailyRaidsPreferences, shardsGoals]
+    );
+
+    const estimatedUpgradesTotal = useMemo(
+        () =>
+            UpgradesService.getUpgradesEstimatedDays(
+                {
+                    dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+                    campaignsProgress: campaignsProgress,
+                    preferences: {
+                        ...dailyRaidsPreferences,
+                    },
+                    upgrades: inventory.upgrades,
+                    completedLocations: dailyRaids.raidedLocations,
+                    onslaughtTokensToday,
+                },
+                characters,
+                resolvedMows,
+                ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
+            ),
+        [
+            dailyRaidsPreferences,
+            campaignsProgress,
+            inventory.upgrades,
+            dailyRaids.raidedLocations,
+            onslaughtTokensToday,
+            characters,
+            resolvedMows,
+            upgradeRankOrMowGoals,
+            shardsGoals,
+        ]
     );
 
     const removeGoal = (goalId: string): void => {
@@ -167,13 +204,17 @@ export const Goals = () => {
     };
 
     const isGoalPriority = dailyRaidsPreferences?.farmPreferences?.order === IDailyRaidsFarmOrder.goalPriority;
-    const goalsEstimate = GoalsService.buildGoalEstimates(
-        estimatedUpgradesTotal,
-        shardsGoals,
-        upgradeRankOrMowGoals,
-        upgradeAbilities,
-        characters,
-        isGoalPriority
+    const goalsEstimate = useMemo(
+        () =>
+            GoalsService.buildGoalEstimates(
+                estimatedUpgradesTotal,
+                shardsGoals,
+                upgradeRankOrMowGoals,
+                upgradeAbilities,
+                characters,
+                isGoalPriority
+            ),
+        [estimatedUpgradesTotal, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities, characters, isGoalPriority]
     );
 
     const adjustedGoalsEstimates = GoalsService.adjustGoalEstimates(

@@ -63,7 +63,7 @@ export class GoalsService {
     ): IXpLevel {
         const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
         const character = characters.find(c => c.snowprintId! === characterId);
-        const ret: IXpLevel = { currentLevel: character?.level ?? 1, xpAtLevel: character?.xp ?? 0 };
+        const ret: IXpLevel = { currentLevel: Math.max(character?.level ?? 1, 1), xpAtLevel: character?.xp ?? 0 };
         for (const goal of priorGoals) {
             if (goal.type === PersonalGoalType.UpgradeRank) {
                 const upgradeGoal = goal as ICharacterUpgradeRankGoal;
