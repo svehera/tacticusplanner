@@ -9,8 +9,6 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import { cloneDeep } from 'lodash';
-import { useCallback, useContext, useState } from 'react';
-import { cloneDeep, sum } from 'lodash';
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
@@ -102,13 +100,13 @@ export const Goals = () => {
             raidedLocations: [],
         },
         ...shardsGoals
-        );
+    );
+
     const onslaughtTokensToday = useMemo(
         () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
         [gameModeTokens]
     );
 
-    
     const estimatedUpgradesTotal = UpgradesService.getUpgradesEstimatedDays(
         {
             dailyEnergy: dailyRaidsPreferences.dailyEnergy,
@@ -118,6 +116,7 @@ export const Goals = () => {
             },
             upgrades: inventory.upgrades,
             completedLocations: dailyRaids.raidedLocations,
+            onslaughtTokensToday,
         },
         characters,
         resolvedMows,
