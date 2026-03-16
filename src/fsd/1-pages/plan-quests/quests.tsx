@@ -111,8 +111,16 @@ export const Quests = () => {
         return { acquired, required, units: [...resolvedChars, ...resolvedMows] as Array<ICharacter2 | IMow2> };
     };
 
+    const showLaunchBanner = Date.now() <= new Date('2026-03-22T23:59:59').getTime();
+
     return (
         <div className="flex flex-col gap-4 p-2 text-slate-900 dark:text-slate-100">
+            {showLaunchBanner && (
+                <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900 dark:border-blue-800 dark:bg-blue-950/40 dark:text-blue-100">
+                    Thanks for using the new quests feature! Use this code in game <b>PLANNERQUEST</b>
+                </div>
+            )}
+
             {/* Header / Selector */}
             <div className="flex flex-wrap items-center justify-between gap-4 rounded-lg bg-slate-100 p-4 dark:bg-slate-800">
                 <UnitsAutocomplete<IUnit>
