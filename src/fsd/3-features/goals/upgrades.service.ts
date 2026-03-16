@@ -102,6 +102,13 @@ interface TaggedLocation {
 
 type TaggedLocationMetadata = Omit<TaggedLocation, 'loc'>;
 
+interface GoalPriorityLocationsState {
+    locs: ICampaignBattleComposed[];
+    upgradeIds: Set<string>;
+    sortedLocs?: ICampaignBattleComposed[];
+    lastInventoryByUpgrade?: Map<string, number>;
+}
+
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
@@ -557,6 +564,8 @@ export class UpgradesService {
         }
         remainingMats = newRemainignMats;
 
+        const precomputedGoalLocations = this.precomputeGoalPriorityLocations(settings, goals, remainingMats);
+
         while (Object.entries(remainingMats).length > 0 && days++ < MAX_DAYS) {
             this.addOnslaughtsForDay(
                 day,
@@ -572,7 +581,17 @@ export class UpgradesService {
                 .flatMap(mat => mat.locations)
                 .filter(loc => loc.isSuggested);
 
-            this.planDayRaiding(day, settings, energy, locs, remainingMats, inventory, goals, remainingNeededCache);
+            this.planDayRaiding(
+                day,
+                settings,
+                energy,
+                locs,
+                remainingMats,
+                inventory,
+                goals,
+                remainingNeededCache,
+                precomputedGoalLocations
+            );
             this.postProcessRaidsForHse(day, settings, goals, remainingMats, inventory, remainingNeededCache);
             const upgradeIds = [...Object.keys(remainingMats)];
             for (const upgradeId of upgradeIds) {
@@ -716,6 +735,34 @@ export class UpgradesService {
         day.raidsTotal = sum(day.raids.map(raid => raid.raidsTotal));
     }
 
+    private static precomputeGoalPriorityLocations(
+        settings: IEstimatedRanksSettings,
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
+        remainingMats: Record<string, ICombinedUpgrade>
+    ): Map<string, GoalPriorityLocationsState> | undefined {
+        if (settings.preferences.farmPreferences?.order !== IDailyRaidsFarmOrder.goalPriority) {
+            return undefined;
+        }
+
+        const sortedGoals = orderBy(goals, ['priority'], ['asc']);
+        const allSuggestedLocs = Object.values(remainingMats)
+            .flatMap(mat => mat.locations)
+            .filter(loc => loc.isSuggested);
+        const result = new Map<string, GoalPriorityLocationsState>();
+
+        for (const goal of sortedGoals) {
+            const upgradeIds = new Set(
+                Object.entries(remainingMats)
+                    .filter(([_, mat]) => mat.relatedGoals.includes(goal.goalId))
+                    .map(([upgradeId]) => upgradeId)
+            );
+            const locsForGoal = allSuggestedLocs.filter(loc => upgradeIds.has(loc.rewards.potential[0].id));
+            result.set(goal.goalId, { locs: locsForGoal, upgradeIds });
+        }
+
+        return result;
+    }
+
     /**
      * Plans raids for a single day by spending energy across the provided locations.
      *
@@ -742,7 +789,8 @@ export class UpgradesService {
         remainingNeededCache: Map<
             string,
             { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
-        >
+        >,
+        goalPriorityLocationsByGoal?: Map<string, GoalPriorityLocationsState>
     ): void {
         const minEnergy = locs.reduce((min, loc) => Math.min(min, loc.energyCost), Infinity);
         const maxEnergy = locs.reduce((max, loc) => Math.max(max, loc.energyCost), -Infinity);
@@ -773,19 +821,80 @@ export class UpgradesService {
         } else {
             const sortedGoals = orderBy(goals, ['priority'], ['asc']);
             for (const goal of sortedGoals) {
-                const matsForGoal = Object.entries(remainingMats).filter(([_, mat]) =>
-                    mat.relatedGoals.includes(goal.goalId)
-                );
-                for (const loc of this.sortLocationsForRaiding(
-                    locs.filter(loc =>
-                        loc.rewards.potential.some(reward => matsForGoal.some(([_, mat]) => mat.id === reward.id))
-                    ),
-                    goals,
-                    remainingMats,
-                    inventory,
-                    settings,
-                    remainingNeededCache
-                )) {
+                const precomputedState = goalPriorityLocationsByGoal?.get(goal.goalId);
+                const matsForGoalIds =
+                    precomputedState?.upgradeIds ??
+                    new Set(
+                        Object.entries(remainingMats)
+                            .filter(([_, mat]) => mat.relatedGoals.includes(goal.goalId))
+                            .map(([upgradeId]) => upgradeId)
+                    );
+                const candidateLocs = (
+                    precomputedState?.locs ??
+                    locs.filter(loc => loc.rewards.potential.some(reward => matsForGoalIds.has(reward.id)))
+                ).filter(loc => {
+                    const upgradeId = loc.rewards.potential[0].id;
+                    if (!matsForGoalIds.has(upgradeId)) {
+                        return false;
+                    }
+                    const mat = remainingMats[upgradeId];
+                    if (!mat) {
+                        return false;
+                    }
+                    const { stillNeededForGoal } = this.getRemainingNeededForGoal(
+                        upgradeId,
+                        mat,
+                        inventory,
+                        goals,
+                        goal.goalId,
+                        remainingNeededCache
+                    );
+                    return stillNeededForGoal > 0;
+                });
+
+                let sortedCandidateLocs: ICampaignBattleComposed[];
+
+                if (precomputedState) {
+                    precomputedState.locs = candidateLocs;
+                    const needsResort =
+                        !precomputedState.sortedLocs ||
+                        [...precomputedState.upgradeIds].some(
+                            upgradeId =>
+                                (precomputedState.lastInventoryByUpgrade?.get(upgradeId) ?? 0) !==
+                                (inventory[upgradeId] ?? 0)
+                        );
+
+                    if (needsResort) {
+                        sortedCandidateLocs = this.sortLocationsForRaiding(
+                            candidateLocs,
+                            goals,
+                            remainingMats,
+                            inventory,
+                            settings,
+                            remainingNeededCache
+                        );
+                        precomputedState.sortedLocs = sortedCandidateLocs;
+                        precomputedState.lastInventoryByUpgrade = new Map(
+                            [...precomputedState.upgradeIds].map(upgradeId => [upgradeId, inventory[upgradeId] ?? 0])
+                        );
+                    } else {
+                        const candidateIds = new Set(candidateLocs.map(loc => loc.id));
+                        const previousSorted = precomputedState.sortedLocs ?? [];
+                        sortedCandidateLocs = previousSorted.filter(loc => candidateIds.has(loc.id));
+                        precomputedState.sortedLocs = sortedCandidateLocs;
+                    }
+                } else {
+                    sortedCandidateLocs = this.sortLocationsForRaiding(
+                        candidateLocs,
+                        goals,
+                        remainingMats,
+                        inventory,
+                        settings,
+                        remainingNeededCache
+                    );
+                }
+
+                for (const loc of sortedCandidateLocs) {
                     if (energy < minEnergy) break;
                     const raidKey = `${loc.rewards.potential[0].id}::${goal.goalId}`;
                     energy = this.raidLocation(
