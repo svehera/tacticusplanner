@@ -14,7 +14,7 @@ import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
 import { IDailyRaidsFarmOrder } from '@/models/interfaces';
-import { goalsEstimateService } from '@/services/goals-estimate-service';
+import { GoalsEstimateFunction } from '@/services/goals-estimate-service';
 import DailyRaidsSettings from '@/shared-components/daily-raids-settings';
 import { goalsLimit } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
@@ -98,11 +98,9 @@ export const Goals = () => {
         ...shardsGoals
     );
 
-    const energyForUpgrades = Math.max(0, dailyRaidsPreferences.dailyEnergy - (estimatedShardsTotal.energyPerDay ?? 0));
-
     const estimatedUpgradesTotal = UpgradesService.getUpgradesEstimatedDays(
         {
-            dailyEnergy: energyForUpgrades,
+            dailyEnergy: dailyRaidsPreferences.dailyEnergy,
             campaignsProgress: campaignsProgress,
             preferences: {
                 ...dailyRaidsPreferences,
@@ -201,7 +199,7 @@ export const Goals = () => {
 
         // For Upgrade and MoW goals, we aggregate numeric days/tokens and merge metadata
         if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
-            const aggregated = goalsEstimateService.getAggregatedGoalEstimate(group) as Partial<IGoalEstimate>;
+            const aggregated = GoalsEstimateFunction.getAggregatedGoalEstimate(group) as Partial<IGoalEstimate>;
 
             const merged = group.reduce((acc, curr) => ({
                 ...acc,

@@ -6,14 +6,15 @@ export interface IGoalEstimateAggregate {
     daysTotal: number;
 }
 
-class GoalsEstimateService {
+export class GoalsEstimateService {
     public getAggregatedGoalEstimate(estimates: IGoalEstimate[]): IGoalEstimateAggregate | undefined {
         if (!estimates.length) {
             return undefined;
         }
 
-        // We run this reduce solely to aggregate estimates for ascension goals that include
-        // both non-mythic and mythic shards, that's why we ignore other fields.
+        // This helper, used in 'src/routes/goals/goals.tsx', merges estimates for 'UpgradeRank' and 'MowAbilities' goals.
+        // It intentionally ignores unrelated fields, combining only 'oTokensTotal', 'daysLeft', and 'daysTotal'
+        // to produce a unified aggregate estimate for these specific goal types.
         return estimates.reduce<IGoalEstimateAggregate>(
             (acc, curr) => {
                 return {
@@ -27,4 +28,4 @@ class GoalsEstimateService {
     }
 }
 
-export const goalsEstimateService = new GoalsEstimateService();
+export const GoalsEstimateFunction = new GoalsEstimateService();
