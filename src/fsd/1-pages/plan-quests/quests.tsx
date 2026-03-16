@@ -181,7 +181,7 @@ export const Quests = () => {
                             {/* Battles Content */}
                             {isTierExpanded && (
                                 <div className="divide-y divide-slate-100 border-t border-slate-200 dark:divide-slate-800 dark:border-slate-700">
-                                    {tier.battles.map(battle => {
+                                    {tier.battles.toReversed().map(battle => {
                                         const battleKey = `${quest.unitId}-${tier.index}-${battle.battleNr}`;
                                         const isBattleExpanded = !!expandedBattles[battleKey];
                                         const needing = unitsNeedingUpgrade(battle.loot.reward.upgradeId);
