@@ -1,4 +1,4 @@
-﻿import {
+import {
     Delete as DeleteIcon,
     ExpandMore as ExpandMoreIcon,
     GridView as GridViewIcon,
@@ -14,13 +14,13 @@ import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
 import { IDailyRaidsFarmOrder } from '@/models/interfaces';
+import { goalsEstimateService } from '@/services/goals-estimate-service';
 import DailyRaidsSettings from '@/shared-components/daily-raids-settings';
 import { goalsLimit } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
-import { getAggregatedGoalEstimate } from 'src/services/goalsEstimateService';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
@@ -201,7 +201,7 @@ export const Goals = () => {
 
         // For Upgrade and MoW goals, we aggregate numeric days/tokens and merge metadata
         if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
-            const aggregated = getAggregatedGoalEstimate(group) as Partial<IGoalEstimate>;
+            const aggregated = goalsEstimateService.getAggregatedGoalEstimate(group) as Partial<IGoalEstimate>;
 
             const merged = group.reduce((acc, curr) => ({
                 ...acc,

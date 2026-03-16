@@ -9,7 +9,7 @@ export type GoalsAction =
           goal: CharacterRaidGoalSelect;
       }
     | {
-          type: 'Swap'; // New action type
+          type: 'Swap';
           goalId: string;
           neighborId: string;
       }
