@@ -1,4 +1,5 @@
 ﻿import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
@@ -103,10 +104,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
     menuItemById['teams2'],
-    menuItemById['teams'],
     new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
-        menuItemById['defense'],
-        menuItemById['offense'],
         menuItemById['warDefense2'],
         menuItemById['warOffense2'],
         menuItemById['zones'],
@@ -115,21 +113,26 @@ export const planSubMenuWeb: MenuItemTP[] = [
     new MenuItemTP('LRE Archive', <TableChartIcon />, '', '', '', inactiveLreMenuItems),
     menuItemById['campaignProgression'],
     menuItemById['quests'],
+    new MenuItemTP('To Be Deleted', <DeleteForeverIcon />, '', '', '', [
+        menuItemById['teams'],
+        menuItemById['defense'],
+        menuItemById['offense'],
+    ]),
 ];
 
 export const planSubMenu: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
     menuItemById['teams2'],
-    menuItemById['teams'],
-    menuItemById['defense'],
-    menuItemById['offense'],
     menuItemById['warDefense2'],
     menuItemById['warOffense2'],
     menuItemById['zones'],
     menuItemById['leMasterTable'],
     menuItemById['quests'],
     ...activeLreMenuItems,
+    menuItemById['teams'],
+    menuItemById['defense'],
+    menuItemById['offense'],
 ];
 
 export const learnSubMenuMobile: MenuItemTP[] = [

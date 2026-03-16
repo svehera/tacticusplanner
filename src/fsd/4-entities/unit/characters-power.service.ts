@@ -55,8 +55,6 @@ export class CharactersPowerService {
         if (!isUnlocked(unit)) {
             return 0;
         }
-        // Leave this off as we're scaling so that 40,000 is the ultimate Power for any character.
-        //      const dirtyDozenCoeff = CharactersPowerService.getDirtyDozenCoeff(character.name);
         const powerLevel =
             CharactersPowerService.getCharacterAttributePower(unit) +
             CharactersPowerService.getCharacterAbilityPower(unit);
@@ -158,11 +156,10 @@ export class CharactersPowerService {
                 return 1.25 ** 17;
             case Rank.Adamantine1:
                 return 1.25 ** 18;
-            // Uncomment once higher Adamantine ranks are supported
-            // case Rank.Adamantine2:
-            //     return 1.25 ** 19;
-            // case Rank.Adamantine3:
-            //     return 1.25 ** 20;
+            case Rank.Adamantine2:
+                return 1.25 ** 19;
+            case Rank.Adamantine3:
+                return 1.25 ** 20;
 
             case Rank.Locked:
             default:
