@@ -34,6 +34,7 @@ import { IUnit } from '@/fsd/4-entities/unit';
 
 import { BadgesTotal } from '@/fsd/3-features/characters/components/badges-total';
 import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
+import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
 import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
@@ -87,6 +88,7 @@ export const Goals = () => {
     );
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
+    const [openSettings, setOpenSettings] = useState<boolean>(false);
 
     const updateColorCodingMode = useCallback(
         (newMode: GoalColorMode) => {
@@ -237,7 +239,12 @@ export const Goals = () => {
         dispatch.goals({ type: 'DeleteAll' });
     };
 
-    const [openSettings, setOpenSettings] = useState<boolean>(false);
+    const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
+        dispatch.goals({
+            type: 'UpdateDailyRaids',
+            value: selection.map(x => ({ goalId: x.goalId, include: x.include })),
+        });
+    };
 
     return (
         <div>
@@ -253,6 +260,8 @@ export const Goals = () => {
                 <Button variant="outlined" size="small" onClick={() => setOpenSettings(true)}>
                     <SettingsIcon style={{ marginRight: 4 }} /> Raids Settings
                 </Button>
+
+                <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
 
                 <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
                 <SetGoalDialog key={goals.length} />
