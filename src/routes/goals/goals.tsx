@@ -102,52 +102,26 @@ export const Goals = () => {
             raidedLocations: [],
         },
         ...shardsGoals
+        );
     const onslaughtTokensToday = useMemo(
         () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
         [gameModeTokens]
     );
 
-    const estimatedShardsTotal = useMemo(
-        () =>
-            ShardsService.getShardsEstimatedDays(
-                {
-                    campaignsProgress: campaignsProgress,
-                    preferences: dailyRaidsPreferences,
-                    raidedLocations: [],
-                },
-                ...shardsGoals
-            ),
-        [campaignsProgress, dailyRaidsPreferences, shardsGoals]
-    );
-
-    const estimatedUpgradesTotal = useMemo(
-        () =>
-            UpgradesService.getUpgradesEstimatedDays(
-                {
-                    dailyEnergy: dailyRaidsPreferences.dailyEnergy,
-                    campaignsProgress: campaignsProgress,
-                    preferences: {
-                        ...dailyRaidsPreferences,
-                    },
-                    upgrades: inventory.upgrades,
-                    completedLocations: dailyRaids.raidedLocations,
-                    onslaughtTokensToday,
-                },
-                characters,
-                resolvedMows,
-                ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
-            ),
-        [
-            dailyRaidsPreferences,
-            campaignsProgress,
-            inventory.upgrades,
-            dailyRaids.raidedLocations,
-            onslaughtTokensToday,
-            characters,
-            resolvedMows,
-            upgradeRankOrMowGoals,
-            shardsGoals,
-        ]
+    
+    const estimatedUpgradesTotal = UpgradesService.getUpgradesEstimatedDays(
+        {
+            dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+            campaignsProgress: campaignsProgress,
+            preferences: {
+                ...dailyRaidsPreferences,
+            },
+            upgrades: inventory.upgrades,
+            completedLocations: dailyRaids.raidedLocations,
+        },
+        characters,
+        resolvedMows,
+        ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
     );
 
     const removeGoal = (goalId: string): void => {
