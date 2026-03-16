@@ -22,12 +22,9 @@ import { PersonalGoalType } from 'src/models/enums';
 import { StoreContext, DispatchContext } from 'src/reducers/store.provider';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
-import { Rank, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
-import { RarityIcon, StarsIcon, MiscIcon, RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityMapper } from '@/fsd/5-shared/model';
+import { RarityIcon, StarsIcon, RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
-
-import { ICharacter2 } from '@/fsd/4-entities/character';
-import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
 import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
@@ -53,19 +50,8 @@ interface Props {
 }
 
 export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, menuItemSelect }) => {
-    const { characters, viewPreferences } = useContext(StoreContext);
+    const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-
-    const getUnit = (unitId: string): ICharacter2 | undefined => {
-        return characters.find(x => x.snowprintId! === unitId);
-    };
-    const getUnitStars = (unitId: string): RarityStars => {
-        return getUnit(unitId)?.stars ?? 0;
-    };
-
-    const getUnitRank = (unitId: string): Rank => {
-        return getUnit(unitId)?.rank ?? Rank.Locked;
-    };
 
     const getStatusIcons = (goalEstimate: IGoalEstimate) => {
         if (!goalEstimate.completed && !goalEstimate.blocked && !!goalEstimate.included) {
@@ -415,150 +401,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                         return ret;
                     }
                 },
-            },
-            {
-                headerName: 'Health',
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
-                    const { data } = params;
-                    if (data) {
-                        if (data.type == PersonalGoalType.UpgradeRank) {
-                            return (
-                                <div className="justify-left flex gap-[3px]">
-                                    <MiscIcon icon="health" width={15} height={15} />
-                                    {StatsCalculatorService.calculateHealth(
-                                        data.unitId,
-                                        getUnitStars(data.unitId),
-                                        data.rankStart,
-                                        StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
-                                    )}
-                                    <ArrowForward width={15} height={15} />
-                                    {StatsCalculatorService.calculateHealth(
-                                        data.unitId,
-                                        getUnitStars(data.unitId),
-                                        data.rankEnd,
-                                        data.rankPoint5 ? 1 : 0
-                                    )}
-                                </div>
-                            );
-                        } else if (data.type == PersonalGoalType.Ascend) {
-                            return (
-                                <div className="justify-left flex gap-[3px]">
-                                    <MiscIcon icon="health" width={15} height={15} />
-                                    {StatsCalculatorService.calculateHealth(
-                                        data.unitId,
-                                        data.starsStart,
-                                        getUnitRank(data.unitId),
-                                        StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
-                                    )}
-                                    <ArrowForward width={15} height={15} />
-                                    {StatsCalculatorService.calculateHealth(
-                                        data.unitId,
-                                        data.starsEnd,
-                                        getUnitRank(data.unitId),
-                                        StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
-                                    )}
-                                </div>
-                            );
-                        }
-                    }
-                },
-                maxWidth: 140,
-            },
-            {
-                headerName: 'Damage',
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
-                    const { data } = params;
-                    if (data) {
-                        if (data.type == PersonalGoalType.UpgradeRank) {
-                            return (
-                                <div className="justify-left flex gap-[3px]">
-                                    <MiscIcon icon="damage" width={15} height={15} />
-                                    {StatsCalculatorService.calculateDamage(
-                                        data.unitId,
-                                        getUnitStars(data.unitId),
-                                        data.rankStart,
-                                        StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
-                                    )}
-                                    <ArrowForward width={15} height={15} />
-                                    {StatsCalculatorService.calculateDamage(
-                                        data.unitId,
-                                        getUnitStars(data.unitId),
-                                        data.rankEnd,
-                                        data.rankPoint5 ? 1 : 0
-                                    )}
-                                </div>
-                            );
-                        } else if (data.type == PersonalGoalType.Ascend) {
-                            return (
-                                <div className="justify-left flex gap-[3px]">
-                                    <MiscIcon icon="damage" width={15} height={15} />
-                                    {StatsCalculatorService.calculateDamage(
-                                        data.unitId,
-                                        data.starsStart,
-                                        getUnitRank(data.unitId),
-                                        StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
-                                    )}
-                                    <ArrowForward width={15} height={15} />
-                                    {StatsCalculatorService.calculateDamage(
-                                        data.unitId,
-                                        data.starsEnd,
-                                        getUnitRank(data.unitId),
-                                        StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
-                                    )}
-                                </div>
-                            );
-                        }
-                    }
-                },
-                maxWidth: 140,
-            },
-            {
-                headerName: 'Armor',
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
-                    const { data } = params;
-                    if (data) {
-                        if (data.type == PersonalGoalType.UpgradeRank) {
-                            return (
-                                <div className="justify-left flex gap-[3px]">
-                                    <MiscIcon icon="armour" width={15} height={15} />
-                                    {StatsCalculatorService.calculateArmor(
-                                        data.unitId,
-                                        getUnitStars(data.unitId),
-                                        data.rankStart,
-                                        StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
-                                    )}
-                                    <ArrowForward width={15} height={15} />
-                                    {StatsCalculatorService.calculateArmor(
-                                        data.unitId,
-                                        getUnitStars(data.unitId),
-                                        data.rankEnd,
-                                        data.rankPoint5 ? 1 : 0
-                                    )}
-                                </div>
-                            );
-                        } else if (data.type == PersonalGoalType.Ascend) {
-                            return (
-                                <div className="justify-left flex gap-[3px]">
-                                    <MiscIcon icon="armour" width={15} height={15} />
-                                    {StatsCalculatorService.calculateArmor(
-                                        data.unitId,
-                                        data.starsStart,
-                                        getUnitRank(data.unitId),
-                                        StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
-                                    )}
-                                    <ArrowForward width={15} height={15} />
-                                    {StatsCalculatorService.calculateArmor(
-                                        data.unitId,
-                                        data.starsEnd,
-                                        getUnitRank(data.unitId),
-                                        StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
-                                    )}
-                                </div>
-                            );
-                        }
-                    }
-                },
-                maxWidth: 140,
             },
             {
                 headerName: 'Days left',
