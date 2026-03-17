@@ -149,6 +149,7 @@ export const MaterialsTable: React.FC<Props> = ({
                 },
             ],
         },
+        // ... (rest of the columns remain the same)
         {
             field: 'requiredCount',
             headerName: 'Goal',
