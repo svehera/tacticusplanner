@@ -1,4 +1,13 @@
-﻿import { ArrowForward, Block, CheckCircle, DeleteForever, Edit, FilterListOff } from '@mui/icons-material';
+﻿import {
+    ArrowForward,
+    ArrowUpward,
+    ArrowDownward,
+    Block,
+    CheckCircle,
+    DeleteForever,
+    Edit,
+    FilterListOff,
+} from '@mui/icons-material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LinkIcon from '@mui/icons-material/Link';
 import { Card, CardContent, CardHeader } from '@mui/material';
@@ -12,7 +21,7 @@ import { ICharacter2 } from '@/models/interfaces';
 import { charsUnlockShards, rarityToStars } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
-import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import { getEstimatedDate } from 'src/shared-logic/functions';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
@@ -38,7 +47,7 @@ import { XpGoalProgressBar } from './xp-book-progress-bar';
 interface Props {
     goal: CharacterRaidGoalSelect;
     goalEstimate?: IGoalEstimate;
-    menuItemSelect?: (item: 'edit' | 'delete') => void;
+    menuItemSelect?: (item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => void;
     bgColor: string;
     characters: ICharacter2[];
     mows: IMow2[];
@@ -64,13 +73,7 @@ export const GoalCard: React.FC<Props> = ({
     };
     const isGoalCompleted = GoalsService.isGoalCompleted(goal, goalEstimate);
 
-    const calendarDate: string = useMemo(() => {
-        const daysLeft = goalEstimate.daysLeft ?? 0;
-        const nextDate = new Date();
-        nextDate.setDate(nextDate.getDate() + daysLeft - 1);
-
-        return formatDateWithOrdinal(nextDate);
-    }, [goalEstimate.daysLeft]);
+    const calendarDate: string = useMemo(() => getEstimatedDate(goalEstimate.daysLeft), [goalEstimate.daysLeft]);
 
     const getGoalInfo = (goal: CharacterRaidGoalSelect) => {
         switch (goal.type) {
@@ -144,30 +147,6 @@ export const GoalCard: React.FC<Props> = ({
                                     </div>
                                 </AccessibleTooltip>
                             )}
-
-                            {!!goalEstimate.completed && (
-                                <AccessibleTooltip title={`Goal is completed in current estimation.`}>
-                                    <span className="flex-box gap-[3px]" tabIndex={0}>
-                                        <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
-                                    </span>
-                                </AccessibleTooltip>
-                            )}
-                            {!!goalEstimate.blocked && (
-                                <AccessibleTooltip
-                                    title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.`}>
-                                    <span className="flex-box gap-[3px]" tabIndex={0}>
-                                        <Block fontSize="small" sx={{ color: 'error.main' }} />
-                                    </span>
-                                </AccessibleTooltip>
-                            )}
-                            {!goalEstimate.included && (
-                                <AccessibleTooltip
-                                    title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
-                                    <span className="flex-box gap-[3px]" tabIndex={0}>
-                                        <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
-                                    </span>
-                                </AccessibleTooltip>
-                            )}
                         </div>
                     </div>
                 );
@@ -209,38 +188,24 @@ export const GoalCard: React.FC<Props> = ({
                                     </AccessibleTooltip>
                                 </>
                             )}
-                            {!!goalEstimate.completed && (
-                                <AccessibleTooltip title={`Goal is completed in current estimation.`}>
-                                    <span className="flex-box gap-[3px]" tabIndex={0}>
-                                        <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
-                                    </span>
-                                </AccessibleTooltip>
-                            )}
-                            {!!goalEstimate.blocked && (
-                                <AccessibleTooltip
-                                    title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.`}>
-                                    <span className="flex-box gap-[3px]" tabIndex={0}>
-                                        <Block fontSize="small" sx={{ color: 'error.main' }} />
-                                    </span>
-                                </AccessibleTooltip>
-                            )}
-                            {!goalEstimate.included && (
-                                <AccessibleTooltip
-                                    title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
-                                    <span className="flex-box gap-[3px]" tabIndex={0}>
-                                        <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
-                                    </span>
-                                </AccessibleTooltip>
-                            )}
                         </div>
                         {(goalEstimate.xpDaysLeft !== undefined ||
                             !!goalEstimate.xpBooksApplied ||
                             !!goalEstimate.xpBooksRequired) && (
                             <div className="flex-box gap10 wrap">
                                 <AccessibleTooltip
-                                    title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                                    title={
+                                        goalEstimate.xpDaysLeft === undefined
+                                            ? 'XP Income not set / No XP needed for this goal'
+                                            : `${Math.ceil(goalEstimate.xpDaysLeft)} days. Estimated date ${getEstimatedDate(goalEstimate.xpDaysLeft)}`
+                                    }>
                                     <div className="flex-box gap3">
-                                        <CalendarMonthIcon /> {goalEstimate.xpDaysLeft ?? 0}
+                                        <CalendarMonthIcon
+                                            sx={{
+                                                color: goalEstimate.xpDaysLeft === undefined ? 'error.main' : 'inherit',
+                                            }}
+                                        />
+                                        {Math.ceil(goalEstimate.xpDaysLeft ?? 0)}
                                     </div>
                                 </AccessibleTooltip>
                                 {goalEstimate.xpBooksApplied !== undefined &&
@@ -291,6 +256,7 @@ export const GoalCard: React.FC<Props> = ({
                             </div>
                             {!!goal.upgradesRarity.length && (
                                 <div className="flex-box gap-[3px]">
+                                    <ArrowForward />
                                     {goal.upgradesRarity.map(x => (
                                         <RarityIcon key={x} rarity={x} />
                                     ))}
@@ -344,7 +310,7 @@ export const GoalCard: React.FC<Props> = ({
             case PersonalGoalType.CharacterAbilities: {
                 const hasActiveGoal = goal.activeEnd > goal.activeStart;
                 const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
-                const { xpEstimateAbilities: xpEstimate } = goalEstimate;
+
                 return (
                     <div>
                         <div className="flex-box gap10">
@@ -364,31 +330,12 @@ export const GoalCard: React.FC<Props> = ({
                                 )}
                             </div>
                         </div>
-                        {goalEstimate.xpDaysLeft !== undefined && (
-                            <div className="flex-box gap10 wrap">
-                                <AccessibleTooltip
-                                    title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
-                                    <div className="flex-box gap3">
-                                        <CalendarMonthIcon /> {goalEstimate.xpDaysLeft}
-                                    </div>
-                                </AccessibleTooltip>
-                                {goalEstimate.xpBooksApplied !== undefined &&
-                                    goalEstimate.xpBooksRequired !== undefined && (
-                                        <XpGoalProgressBar
-                                            applied={goalEstimate.xpBooksApplied}
-                                            required={goalEstimate.xpBooksRequired}
-                                            bookRarity={bookRarity}
-                                        />
-                                    )}
-                            </div>
-                        )}
-                        {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
+
                         {goalEstimate.abilitiesEstimate && (
-                            <div className="px-0 py-2.5">
+                            <div className="flex-box gap-[3px]">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
-                        {goalEstimate.xpDaysLeft !== undefined && <span> (XP in {goalEstimate.xpDaysLeft} days)</span>}
                     </div>
                 );
             }
@@ -406,14 +353,6 @@ export const GoalCard: React.FC<Props> = ({
                             </div>
                         </div>
                         <div className="flex-box gap10 wrap">
-                            {!goalEstimate.included && (
-                                <AccessibleTooltip
-                                    title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
-                                    <span className="flex-box gap-[3px]" tabIndex={0}>
-                                        <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
-                                    </span>
-                                </AccessibleTooltip>
-                            )}
                             {!goalEstimate.daysLeft && !goalEstimate.energyTotal && (
                                 <div>{StaticDataService.getFactionPray(goal.faction)}</div>
                             )}
@@ -431,21 +370,6 @@ export const GoalCard: React.FC<Props> = ({
                                             {goalEstimate.energyTotal}
                                         </div>
                                     </AccessibleTooltip>
-                                    {!!goalEstimate.completed && (
-                                        <AccessibleTooltip title={`Goal is completed in current estimation.`}>
-                                            <span className="flex-box gap-[3px]" tabIndex={0}>
-                                                <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
-                                            </span>
-                                        </AccessibleTooltip>
-                                    )}
-                                    {!!goalEstimate.blocked && (
-                                        <AccessibleTooltip
-                                            title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.`}>
-                                            <span className="flex-box gap-[3px]" tabIndex={0}>
-                                                <Block fontSize="small" sx={{ color: 'error.main' }} />
-                                            </span>
-                                        </AccessibleTooltip>
-                                    )}
                                 </>
                             )}
                         </div>
@@ -458,7 +382,7 @@ export const GoalCard: React.FC<Props> = ({
     return (
         <Card
             variant="outlined"
-            className={isGoalCompleted ? '!bg-[var(--success)]' : ''}
+            className={isGoalCompleted ? 'bg-(--success)!' : ''}
             sx={{
                 width: 350,
                 minHeight: 200,
@@ -466,16 +390,51 @@ export const GoalCard: React.FC<Props> = ({
             }}>
             <CardHeader
                 action={
-                    menuItemSelect ? (
-                        <>
-                            <IconButton onClick={() => menuItemSelect('edit')}>
-                                <Edit fontSize="small" />
-                            </IconButton>
-                            <IconButton onClick={() => menuItemSelect('delete')}>
-                                <DeleteForever fontSize="small" />
-                            </IconButton>
-                        </>
-                    ) : undefined
+                    <div className="flex items-center">
+                        {!!goalEstimate?.completed && !goalEstimate?.blocked && (
+                            <AccessibleTooltip title={`Goal is completed in current estimation.`}>
+                                <span className="flex-box gap-[3px]" tabIndex={0}>
+                                    <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                                </span>
+                            </AccessibleTooltip>
+                        )}
+                        {!!goalEstimate?.blocked && (
+                            <AccessibleTooltip
+                                title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.`}>
+                                <span className="flex-box gap-[3px]" tabIndex={0}>
+                                    <Block fontSize="small" sx={{ color: 'error.main' }} />
+                                </span>
+                            </AccessibleTooltip>
+                        )}
+                        {goalEstimate?.included === false && (
+                            <AccessibleTooltip
+                                title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
+                                <span className="flex-box gap-[3px]" tabIndex={0}>
+                                    <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
+                                </span>
+                            </AccessibleTooltip>
+                        )}
+                        {menuItemSelect && (
+                            <>
+                                <IconButton
+                                    aria-label="Increase Goal Priority"
+                                    onClick={() => menuItemSelect('moveUp')}>
+                                    <ArrowUpward fontSize="small" />
+                                </IconButton>
+                                <IconButton
+                                    aria-label="Decrease Goal Priority"
+                                    onClick={() => menuItemSelect('moveDown')}>
+                                    <ArrowDownward fontSize="small" />
+                                </IconButton>
+                                <IconButton aria-label="Edit Goal" onClick={() => menuItemSelect('edit')}>
+                                    <Edit fontSize="small" />
+                                </IconButton>
+                                <IconButton aria-label="Delete Goal" onClick={() => menuItemSelect('delete')}>
+                                    <DeleteForever fontSize="small" />
+                                </IconButton>
+                            </>
+                        )}
+                    </div>
                 }
                 title={
                     <div className="flex-box gap5">
