@@ -79,6 +79,7 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
                         primaryAbilityLevel: tacticusUnit.abilities[0].level,
                         secondaryAbilityLevel: tacticusUnit.abilities[1].level,
                         shards: tacticusUnit.shards,
+                        mythicShards: tacticusUnit.mythicShards,
                     };
                 } else if (tacticusShards) {
                     return {
