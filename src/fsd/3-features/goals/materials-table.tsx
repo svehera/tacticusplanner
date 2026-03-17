@@ -51,6 +51,22 @@ export const MaterialsTable: React.FC<Props> = ({
     scrollToCharSnowprintId,
     alreadyUsedMaterials,
 }) => {
+    const getUpgradeRarityClassName = (upgrade: ICharacterUpgradeEstimate | undefined): string => {
+        if (!upgrade) {
+            return 'unknown';
+        }
+        if (upgrade.id.startsWith('shards_')) {
+            return 'shard';
+        }
+        if (upgrade.id.startsWith('mythicShards_')) {
+            return 'mythic-shard';
+        }
+        if (typeof upgrade.rarity === 'number') {
+            return RarityMapper.rarityToRarityString(upgrade.rarity as Rarity).toLowerCase();
+        }
+        return 'unknown';
+    };
+
     const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {
         const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
 
@@ -114,24 +130,37 @@ export const MaterialsTable: React.FC<Props> = ({
                     field: 'rarity',
                     maxWidth: 60,
                     columnGroupShow: 'open',
+                    cellStyle: { textAlign: 'center' },
                     cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) => {
-                        const rarity = params.data?.rarity;
-                        if (typeof rarity === 'number') {
-                            return <RarityIcon rarity={rarity} />;
+                        const { data } = params;
+                        if (data) {
+                            if (data.id.startsWith('shards_')) {
+                                return 'Shard';
+                            } else if (data.id.startsWith('mythicShards_')) {
+                                return 'Mythic Shard';
+                            } else if (typeof data.rarity === 'number') {
+                                return <RarityIcon rarity={data.rarity} />;
+                            }
                         }
                         return null;
                     },
                     tooltipValueGetter: params => {
-                        const rarity = params.data?.rarity;
-                        if (typeof rarity === 'number') {
-                            return RarityMapper.rarityToRarityString(rarity as Rarity);
+                        const { data } = params;
+                        if (data) {
+                            if (data.id.startsWith('shards_')) {
+                                return 'Shard';
+                            } else if (data.id.startsWith('mythicShards_')) {
+                                return 'Mythic Shard';
+                            } else if (typeof data.rarity === 'number') {
+                                return RarityMapper.rarityToRarityString(data.rarity as Rarity);
+                            }
                         }
                         return;
                     },
                     comparator: (valueA, valueB) => {
                         return getRaritySortKey(valueA) - getRaritySortKey(valueB);
                     },
-                    cellClass: params => RarityMapper.rarityToRarityString(params.data?.rarity as Rarity).toLowerCase(),
+                    cellClass: params => getUpgradeRarityClassName(params.data),
                 },
                 {
                     columnGroupShow: 'open',
