@@ -1,14 +1,11 @@
 import { ArrowForward } from '@mui/icons-material';
 import React from 'react';
 
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacterUpgradeMow } from '@/fsd/4-entities/goal';
 
-import { IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
-import { ShardsService } from '@/fsd/3-features/goals/shards.service';
-
-import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
+import { IGoalEstimate, ShardsService, MowMaterialsTotal } from '@/fsd/3-features/goals';
 
 import { GoalEstimateRow } from './estimate-row';
 

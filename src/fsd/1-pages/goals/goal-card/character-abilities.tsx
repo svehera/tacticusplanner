@@ -1,8 +1,8 @@
 import { ArrowForward } from '@mui/icons-material';
 import React from 'react';
 
-import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
-import { ICharacterUpgradeAbilities, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
+import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters';
+import { ICharacterUpgradeAbilities, IGoalEstimate } from '@/fsd/3-features/goals';
 
 interface Props {
     goal: ICharacterUpgradeAbilities;

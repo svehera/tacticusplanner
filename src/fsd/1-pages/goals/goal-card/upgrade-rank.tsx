@@ -2,17 +2,14 @@ import { ArrowForward } from '@mui/icons-material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import React from 'react';
 
-import { getEstimatedDate } from 'src/shared-logic/functions';
-
+import { getEstimatedDate } from '@/fsd/5-shared/lib';
 import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { RankIcon } from '@/fsd/5-shared/ui/icons/rank.icon';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { RankIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 
-import { IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
-import { XpTotal } from '@/fsd/3-features/goals/xp-total';
+import { IGoalEstimate, XpTotal } from '@/fsd/3-features/goals';
 
 import { XpGoalProgressBar } from '../xp-book-progress-bar';
 

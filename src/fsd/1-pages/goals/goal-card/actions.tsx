@@ -4,7 +4,7 @@ import React from 'react';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
-import { IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
+import { IGoalEstimate } from '@/fsd/3-features/goals';
 
 interface Props {
     goalEstimate: IGoalEstimate;

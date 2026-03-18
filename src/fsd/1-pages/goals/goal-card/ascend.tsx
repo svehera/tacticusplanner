@@ -1,19 +1,16 @@
 import { ArrowForward } from '@mui/icons-material';
 import React from 'react';
 
-import { ICharacter2 } from '@/models/interfaces';
-import { rarityToStars } from 'src/models/constants';
-
+import { RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
-import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
+import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CampaignImage } from '@/fsd/4-entities/campaign/campaign.icon';
+import { CampaignImage } from '@/fsd/4-entities/campaign';
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import { ICharacterAscendGoal } from '@/fsd/4-entities/goal';
-import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
+import { IMow2 } from '@/fsd/4-entities/mow';
 
-import { IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
-import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+import { IGoalEstimate, UpgradesService } from '@/fsd/3-features/goals';
 
 import { GoalEstimateRow } from './estimate-row';
 
@@ -27,7 +24,7 @@ interface Props {
 
 export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, calendarDate, characters, mows }) => {
     const isSameRarity = goal.rarityStart === goal.rarityEnd;
-    const minStars = rarityToStars[goal.rarityEnd];
+    const minStars = RarityMapper.toStars[goal.rarityEnd];
     const isMinStars = minStars === goal.starsEnd;
     const shardsData = UpgradesService.getShardsForGoal(characters, mows, goal);
 

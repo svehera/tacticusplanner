@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 interface XpGoalProgressBarProps {
     applied: number;

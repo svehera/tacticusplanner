@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { charsUnlockShards } from 'src/models/constants';
-import { StaticDataService } from 'src/services';
+import { getFactionPray } from '@/fsd/5-shared/lib';
 
+import { charsUnlockShards } from '@/fsd/4-entities/character';
 import { ICharacterUnlockGoal } from '@/fsd/4-entities/goal';
 
-import { IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
+import { IGoalEstimate } from '@/fsd/3-features/goals';
 
 import { GoalEstimateRow } from './estimate-row';
 
@@ -28,9 +28,7 @@ export const GoalCardUnlock: React.FC<Props> = ({ goal, goalEstimate, calendarDa
             </div>
 
             <div className="flex-box wrap gap-2">
-                {!goalEstimate.daysLeft && !goalEstimate.energyTotal && (
-                    <span>{StaticDataService.getFactionPray(goal.faction)}</span>
-                )}
+                {!goalEstimate.daysLeft && !goalEstimate.energyTotal && <span>{getFactionPray(goal.faction)}</span>}
                 {(!!goalEstimate.daysLeft || !!goalEstimate.energyTotal) && (
                     <GoalEstimateRow
                         daysLeft={goalEstimate.daysLeft}

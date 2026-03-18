@@ -3,17 +3,15 @@ import { Card, CardContent, Divider } from '@mui/material';
 import Button from '@mui/material/Button';
 import React, { useMemo } from 'react';
 
-import { ICharacter2 } from '@/models/interfaces';
-import { PersonalGoalType } from 'src/models/enums';
-import { getEstimatedDate } from 'src/shared-logic/functions';
-
+import { getEstimatedDate } from '@/fsd/5-shared/lib';
 import { Rarity } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
+import { ICharacter2 } from '@/fsd/4-entities/character';
+import { PersonalGoalType } from '@/fsd/4-entities/goal';
+import { IMow2 } from '@/fsd/4-entities/mow';
 
-import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
-import { GoalsService } from '@/fsd/3-features/goals/goals.service';
+import { CharacterRaidGoalSelect, GoalsService, IGoalEstimate } from '@/fsd/3-features/goals';
 
 import { GoalCardActions } from './actions';
 import { GoalCardAscend } from './ascend';
