@@ -3,10 +3,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {
     Badge,
     Divider,
-    ListItemIcon,
-    ListItemText,
+    ListSubheader,
     Menu,
     MenuItem,
+    ListItemIcon,
+    ListItemText,
     Typography,
     Tooltip,
     useMediaQuery,
@@ -63,15 +64,11 @@ const generateMenuItems = (items: MenuItemTP[]) =>
 
 const renderMenuGroup = (label: string, items: MenuItemTP[]) => (
     <>
-        <MenuItem disableRipple disableTouchRipple sx={{ opacity: 1, cursor: 'default' }}>
-            <ListItemText
-                primary={
-                    <Typography variant="caption" className="font-semibold tracking-wide text-gray-500 uppercase">
-                        {label}
-                    </Typography>
-                }
-            />
-        </MenuItem>
+        <ListSubheader disableSticky disableGutters sx={{ pl: 1, lineHeight: 1.75 }}>
+            <Typography variant="body2" className="tracking-wide text-gray-500 uppercase">
+                {label}
+            </Typography>
+        </ListSubheader>
         {generateMenuItems(items)}
     </>
 );
