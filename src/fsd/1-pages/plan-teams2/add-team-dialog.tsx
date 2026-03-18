@@ -1,6 +1,6 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
 
@@ -47,6 +47,9 @@ interface Props {
     onMaxRankChange: (rank: Rank) => void;
     onFactionsChange: (factions: FactionId[]) => void;
     onRarityCapChanged: (rarity: Rarity) => void;
+    warDefenseBlockedCoreCharIds: string[];
+    warDefenseFlexCharIds: string[];
+    warDefenseFlexMowIds: string[];
 
     saveAllowed: boolean;
     saveDisallowedMessage: string | undefined;
@@ -97,6 +100,9 @@ export const AddTeamDialog: React.FC<Props> = ({
     onMaxRankChange,
     onFactionsChange,
     onRarityCapChanged,
+    warDefenseBlockedCoreCharIds,
+    warDefenseFlexCharIds,
+    warDefenseFlexMowIds,
     onCancel,
     onSave,
 
@@ -159,8 +165,14 @@ export const AddTeamDialog: React.FC<Props> = ({
         new Set<FactionId>([...chars.map(c => c.faction), ...mows.map(m => m.faction)])
     ).sort((a, b) => a.localeCompare(b));
 
+    const warDefenseBlockedCoreCharIdsSet = useMemo(
+        () => new Set(warDefenseBlockedCoreCharIds),
+        [warDefenseBlockedCoreCharIds]
+    );
+
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId!))
+        .filter(c => !warDefense || !warDefenseBlockedCoreCharIdsSet.has(c.snowprintId!))
         .filter(c =>
             Teams2Service.passesCharacterFilter(
                 c,
@@ -415,6 +427,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             onCharacterSelect={onAddChar}
                             showHeader={true}
                             sizeMod={sizeMod}
+                            deployedFlexUnitIds={warDefense ? warDefenseFlexCharIds : undefined}
                         />
                     </div>
 
@@ -439,7 +452,13 @@ export const AddTeamDialog: React.FC<Props> = ({
                     </div>
 
                     <div className="w-full flex-shrink-0 rounded-lg border border-slate-200 bg-white p-4 xl:w-[var(--mow-width)] dark:border-slate-800 dark:bg-[#161b22]">
-                        <MowGrid mows={filteredMows} onMowSelect={onAddMow} showHeader={true} sizeMod={sizeMod} />
+                        <MowGrid
+                            mows={filteredMows}
+                            onMowSelect={onAddMow}
+                            showHeader={true}
+                            sizeMod={sizeMod}
+                            deployedFlexUnitIds={warDefense ? warDefenseFlexMowIds : undefined}
+                        />
                     </div>
                 </div>
             </div>
