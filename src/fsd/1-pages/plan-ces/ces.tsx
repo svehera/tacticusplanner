@@ -9,7 +9,7 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
+import { CampaignImage, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { UpgradesService as FsdUpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade';
@@ -23,7 +23,9 @@ interface MaterialPlan {
     materialId: string;
     needed: number;
     bestDropRate: number;
+    bestBattleId: string;
     estimatedEnergy: number;
+    relatedGoalIds: string[];
 }
 
 interface CampaignPlan {
@@ -38,6 +40,11 @@ interface CampaignPlan {
 interface MaterialAvailability {
     hasStandard: boolean;
     hasExtremis: boolean;
+}
+
+interface MaterialNeedInfo {
+    needed: number;
+    relatedGoalIds: Set<string>;
 }
 
 export const CEs = () => {
@@ -108,15 +115,24 @@ export const CEs = () => {
     ]);
 
     const neededByMaterial = useMemo(() => {
-        const ret = new Map<string, number>();
+        const ret = new Map<string, MaterialNeedInfo>();
         for (const mat of [...upgradesEstimates.inProgressMaterials, ...upgradesEstimates.blockedMaterials]) {
             const needed = Math.max(0, (mat.requiredCount ?? 0) - (mat.acquiredCount ?? 0));
             if (needed > 0) {
-                ret.set(mat.id, (ret.get(mat.id) ?? 0) + needed);
+                const existing = ret.get(mat.id) ?? { needed: 0, relatedGoalIds: new Set<string>() };
+                existing.needed += needed;
+                for (const goalId of mat.relatedGoals ?? []) {
+                    existing.relatedGoalIds.add(goalId);
+                }
+                ret.set(mat.id, existing);
             }
         }
         return ret;
     }, [upgradesEstimates.inProgressMaterials, upgradesEstimates.blockedMaterials]);
+
+    const goalUnitById = useMemo(() => {
+        return new Map(allGoals.map(goal => [goal.goalId, { name: goal.unitName, icon: goal.unitRoundIcon }]));
+    }, [allGoals]);
 
     const campaignPlans = useMemo(() => {
         const rawPlans = new Map<
@@ -124,7 +140,7 @@ export const CEs = () => {
             {
                 campaign: string;
                 campaignType: CampaignType.Standard | CampaignType.Extremis;
-                materials: Map<string, number>;
+                materials: Map<string, { bestDropRate: number; bestBattleId: string }>;
             }
         >();
         const materialAvailability = new Map<string, MaterialAvailability>();
@@ -142,22 +158,28 @@ export const CEs = () => {
 
                 const normalizedCampaign = normalizeCampaignName(battle.campaign);
                 const planKey = `${battle.campaignType}::${normalizedCampaign}`;
-                const existingPlan =
-                    rawPlans.get(planKey) ??
-                    ({
-                        campaign: normalizedCampaign,
-                        campaignType: battle.campaignType,
-                        materials: new Map<string, number>(),
-                    } as const);
+                const existingPlan = rawPlans.get(planKey) ?? {
+                    campaign: normalizedCampaign,
+                    campaignType: battle.campaignType,
+                    materials: new Map<string, { bestDropRate: number; bestBattleId: string }>(),
+                };
 
                 for (const reward of battle.rewards.potential) {
-                    const needed = neededByMaterial.get(reward.id) ?? 0;
+                    const needed = neededByMaterial.get(reward.id)?.needed ?? 0;
                     if (needed <= 0) {
                         continue;
                     }
 
-                    const currentRate = existingPlan.materials.get(reward.id) ?? 0;
-                    existingPlan.materials.set(reward.id, Math.max(currentRate, Math.max(battle.dropRate, 0)));
+                    const current = existingPlan.materials.get(reward.id);
+                    const nextDropRate = Math.max(battle.dropRate, 0);
+                    const battleId = battle.id;
+
+                    if (!current || nextDropRate > current.bestDropRate) {
+                        existingPlan.materials.set(reward.id, {
+                            bestDropRate: nextDropRate,
+                            bestBattleId: battleId,
+                        });
+                    }
 
                     const currentAvailability = materialAvailability.get(reward.id) ?? {
                         hasStandard: false,
@@ -178,13 +200,13 @@ export const CEs = () => {
 
         const isLeastEnergy = dailyRaidsPreferences.farmStrategy === DailyRaidsStrategy.leastEnergy;
         const isCustom = dailyRaidsPreferences.farmStrategy === DailyRaidsStrategy.custom;
-        const isExtremisEnabledForMaterial = (materialId: string): boolean => {
+        const isStandardEnabledForMaterial = (materialId: string): boolean => {
             const materialRarity = getMaterialPreferenceKey(materialId);
             const customSettings = dailyRaidsPreferences.customSettings;
             if (!customSettings) {
                 return false;
             }
-            return (customSettings[materialRarity] ?? []).includes(CampaignType.Extremis);
+            return (customSettings[materialRarity] ?? []).includes(CampaignType.Standard);
         };
 
         const shouldIncludeInStandard = (materialId: string): boolean => {
@@ -202,7 +224,7 @@ export const CEs = () => {
                 return false;
             }
 
-            if (isCustom && isExtremisEnabledForMaterial(materialId)) {
+            if (isCustom && !isStandardEnabledForMaterial(materialId)) {
                 return false;
             }
 
@@ -216,8 +238,9 @@ export const CEs = () => {
         const plans: CampaignPlan[] = [];
         for (const plan of rawPlans.values()) {
             const materials: MaterialPlan[] = [];
-            for (const [materialId, bestDropRate] of plan.materials) {
-                const needed = neededByMaterial.get(materialId) ?? 0;
+            for (const [materialId, source] of plan.materials) {
+                const neededInfo = neededByMaterial.get(materialId);
+                const needed = neededInfo?.needed ?? 0;
                 if (needed <= 0) {
                     continue;
                 }
@@ -233,8 +256,11 @@ export const CEs = () => {
                 materials.push({
                     materialId,
                     needed,
-                    bestDropRate,
-                    estimatedEnergy: bestDropRate > 0 ? (needed / bestDropRate) * 6 : Number.POSITIVE_INFINITY,
+                    bestDropRate: source.bestDropRate,
+                    bestBattleId: source.bestBattleId,
+                    estimatedEnergy:
+                        source.bestDropRate > 0 ? (needed / source.bestDropRate) * 6 : Number.POSITIVE_INFINITY,
+                    relatedGoalIds: [...(neededInfo?.relatedGoalIds ?? new Set<string>())],
                 });
             }
 
@@ -244,8 +270,8 @@ export const CEs = () => {
 
             const orderedMaterials = orderBy(
                 materials,
-                [x => getMaterialSortWeight(x.materialId), x => x.needed],
-                ['asc', 'desc']
+                [x => x.estimatedEnergy, x => x.needed, x => getMaterialSortWeight(x.materialId)],
+                ['desc', 'desc', 'asc']
             );
             const totalNeededMaterials = orderedMaterials.reduce((acc, x) => acc + x.needed, 0);
             const totalEstimatedEnergy = orderedMaterials.reduce((acc, x) => acc + x.estimatedEnergy, 0);
@@ -261,19 +287,25 @@ export const CEs = () => {
             });
         }
 
-        return orderBy(
-            plans,
-            [x => x.efficiency, x => x.totalNeededMaterials, x => -x.totalEstimatedEnergy],
-            ['desc', 'desc', 'asc']
-        );
+        return orderBy(plans, [x => x.totalEstimatedEnergy, x => x.totalNeededMaterials], ['desc', 'desc']);
     }, [campaignsProgress, dailyRaidsPreferences, neededByMaterial]);
 
     const standardPlans = useMemo(
-        () => campaignPlans.filter(x => x.campaignType === CampaignType.Standard),
+        () =>
+            orderBy(
+                campaignPlans.filter(x => x.campaignType === CampaignType.Standard),
+                [x => x.totalEstimatedEnergy, x => x.totalNeededMaterials],
+                ['desc', 'desc']
+            ),
         [campaignPlans]
     );
     const extremisPlans = useMemo(
-        () => campaignPlans.filter(x => x.campaignType === CampaignType.Extremis),
+        () =>
+            orderBy(
+                campaignPlans.filter(x => x.campaignType === CampaignType.Extremis),
+                [x => x.totalEstimatedEnergy, x => x.totalNeededMaterials],
+                ['desc', 'desc']
+            ),
         [campaignPlans]
     );
 
@@ -310,44 +342,75 @@ export const CEs = () => {
     };
 
     const renderCampaignSection = (title: string, plans: CampaignPlan[], defaultOpen = true) => {
-        const sectionMats = plans.reduce((acc, plan) => acc + plan.totalNeededMaterials, 0);
         return (
             <section>
                 <details open={defaultOpen}>
-                    <summary className="mb-3 cursor-pointer text-xl font-semibold">
-                        {title} · Mats: <b>{sectionMats}</b>
-                    </summary>
+                    <summary className="mb-3 cursor-pointer text-xl font-semibold">{title}</summary>
                     {plans.length === 0 ? (
                         <p className="text-sm opacity-70">No missing materials currently map to these campaigns.</p>
                     ) : (
                         <div className="space-y-4">
                             {plans.map(plan => (
-                                <div
+                                <details
                                     key={`${plan.campaignType}::${plan.campaign}`}
-                                    className="rounded-lg border border-slate-300 p-4 dark:border-slate-700">
-                                    <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                                        <h3 className="text-lg font-semibold">{plan.campaign}</h3>
-                                        <div className="text-sm opacity-80">
-                                            Mats: <b>{plan.totalNeededMaterials}</b>
+                                    className="group rounded-lg border border-slate-300 p-4 dark:border-slate-700">
+                                    <summary className="mb-2 flex cursor-pointer flex-wrap items-center justify-between gap-2">
+                                        <div className="flex items-center gap-2">
+                                            <span className="inline-block text-xl leading-none opacity-70 transition-transform group-open:rotate-90">
+                                                ▸
+                                            </span>
+                                            <CampaignImage campaign={plan.campaign} size={28} />
+                                            <h3 className="text-lg font-semibold">{plan.campaign}</h3>
                                         </div>
-                                    </div>
+                                        <div className="text-sm opacity-80">
+                                            Energy: <b>{Math.ceil(plan.totalEstimatedEnergy)}</b> · Mats:{' '}
+                                            <b>{plan.totalNeededMaterials}</b>
+                                        </div>
+                                    </summary>
 
-                                    <ul className="space-y-2">
+                                    <div className="space-y-2">
                                         {plan.materials.map(materialPlan => (
-                                            <li
+                                            <div
                                                 key={materialPlan.materialId}
-                                                className="flex items-center justify-between rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-800">
-                                                <div className="flex items-center gap-2">
-                                                    {renderMaterial(materialPlan.materialId)}
+                                                className="rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-800">
+                                                <div className="flex items-center justify-between gap-2">
+                                                    <div className="flex items-center gap-2">
+                                                        {renderMaterial(materialPlan.materialId)}
+                                                        <span className="text-xs opacity-70">
+                                                            <b>{extractBattleNumber(materialPlan.bestBattleId)}</b>
+                                                        </span>
+                                                        {Array.from(
+                                                            new Map(
+                                                                materialPlan.relatedGoalIds
+                                                                    .map(goalId => goalUnitById.get(goalId))
+                                                                    .filter(
+                                                                        (
+                                                                            unit
+                                                                        ): unit is {
+                                                                            name: string;
+                                                                            icon: string;
+                                                                        } => !!unit?.icon
+                                                                    )
+                                                                    .map(unit => [unit.icon, unit])
+                                                            ).values()
+                                                        ).map(unit => (
+                                                            <UnitShardIcon
+                                                                key={unit.icon}
+                                                                icon={unit.icon}
+                                                                mythic={false}
+                                                            />
+                                                        ))}
+                                                    </div>
+
+                                                    <div className="text-sm">
+                                                        Need <b>{materialPlan.needed.toFixed(0)}</b> · Est energy{' '}
+                                                        <b>{Math.ceil(materialPlan.estimatedEnergy)}</b>
+                                                    </div>
                                                 </div>
-                                                <div className="text-sm">
-                                                    Need <b>{materialPlan.needed.toFixed(0)}</b> · Est energy{' '}
-                                                    <b>{Math.ceil(materialPlan.estimatedEnergy)}</b>
-                                                </div>
-                                            </li>
+                                            </div>
                                         ))}
-                                    </ul>
-                                </div>
+                                    </div>
+                                </details>
                             ))}
                         </div>
                     )}
@@ -369,6 +432,18 @@ export const CEs = () => {
 
 function normalizeCampaignName(campaignName: string): string {
     return campaignName.replace(/\s+challenge$/i, '').trim();
+}
+
+function extractBattleNumber(battleId: string): string {
+    const trimmed = battleId.trim();
+    const match = trimmed.match(/(\d{1,2})(b)?$/i);
+    if (!match) {
+        return battleId;
+    }
+
+    const number = match[1];
+    const isChallenge = /challenge/i.test(trimmed);
+    return `${number}${isChallenge ? 'B' : ''}`;
 }
 
 function getMaterialPreferenceKey(materialId: string): keyof ICustomDailyRaidsSettings {
