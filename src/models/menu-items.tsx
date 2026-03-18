@@ -126,6 +126,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['zones'],
     menuItemById['leMasterTable'],
     ...activeLreMenuItems,
+    menuItemById['campaignProgression'],
 ];
 
 export const learnSubMenuMobile: MenuItemTP[] = [
