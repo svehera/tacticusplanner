@@ -50,8 +50,8 @@ export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, calen
             )}
 
             {(goalEstimate.xpDaysLeft !== undefined ||
-                !!goalEstimate.xpBooksApplied ||
-                !!goalEstimate.xpBooksRequired) && (
+                goalEstimate.xpBooksApplied !== undefined ||
+                goalEstimate.xpBooksRequired !== undefined) && (
                 <div className="flex-box wrap gap-2">
                     <AccessibleTooltip
                         title={
