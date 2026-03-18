@@ -94,7 +94,7 @@ export const DesktopHome = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_20260202.png'),
+        current: getImageUrl('calendar/calendar_137.webp'),
     };
 
     const topPriorityGoal = goals[0];
