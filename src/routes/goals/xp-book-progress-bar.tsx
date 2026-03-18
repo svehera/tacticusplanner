@@ -33,8 +33,8 @@ export const XpGoalProgressBar: React.FC<XpGoalProgressBarProps> = ({
                         {displayValue}
                     </span>
                 </div>
-                <div className="flex h-[18px] w-[18px] items-center justify-center">
-                    <MiscIcon icon={bookIconName} height={18} width={15} />
+                <div className="flex items-center justify-center">
+                    <MiscIcon icon={bookIconName} height={0} width={0} style={{ height: '1.5em', width: 'auto' }} />
                 </div>
             </div>
         </AccessibleTooltip>

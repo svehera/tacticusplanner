@@ -401,8 +401,14 @@ export const Goals = () => {
                                         key={goal.goalId}
                                         goal={goal}
                                         goalEstimate={finalEstimate} // Use the consolidated estimate
-                                        bookRarity={goal.rarity}
+                                        bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        onToggleInclude={() =>
+                                            dispatch.goals({
+                                                type: 'UpdateDailyRaids',
+                                                value: [{ goalId: goal.goalId, include: !goal.include }],
+                                            })
+                                        }
                                         // Use finalEstimate for consistent color coding
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
@@ -454,6 +460,12 @@ export const Goals = () => {
                                         goalEstimate={estimate}
                                         bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        onToggleInclude={() =>
+                                            dispatch.goals({
+                                                type: 'UpdateDailyRaids',
+                                                value: [{ goalId: goal.goalId, include: !goal.include }],
+                                            })
+                                        }
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
                                             estimate
@@ -495,6 +507,12 @@ export const Goals = () => {
                                         mows={resolvedMows as IMow2[]}
                                         bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        onToggleInclude={() =>
+                                            dispatch.goals({
+                                                type: 'UpdateDailyRaids',
+                                                value: [{ goalId: goal.goalId, include: !goal.include }],
+                                            })
+                                        }
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
                                             finalEstimate
