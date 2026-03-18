@@ -28,6 +28,7 @@ import { insightsMenuItem } from '@/fsd/1-pages/insights/insights.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
+import { cesMenuItem } from '@/fsd/1-pages/plan-ces/ces.menu-item';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
 import { questsMenuItem } from '@/fsd/1-pages/plan-quests/quests.menu-item';
 import { teams2MenuItem } from '@/fsd/1-pages/plan-teams2/teams2.menu-item';
@@ -88,6 +89,7 @@ export const menuItemById = {
     xpIncome: xpIncomeMenuItem,
     onslaught: new MenuItemTP('Onslaught', <MilitaryTechIcon />, '/learn/onslaught?track=Imperial'),
     quests: questsMenuItem,
+    ces: cesMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -113,6 +115,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     new MenuItemTP('LRE Archive', <TableChartIcon />, '', '', '', inactiveLreMenuItems),
     menuItemById['campaignProgression'],
     menuItemById['quests'],
+    menuItemById['ces'],
     new MenuItemTP('To Be Deleted', <DeleteForeverIcon />, '', '', '', [
         menuItemById['teams'],
         menuItemById['defense'],
