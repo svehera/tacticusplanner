@@ -148,13 +148,13 @@ export const WhoYouOwn = () => {
                     <CharactersViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
                     <div className="min-h-[10px]" />
 
-                    {factionsView && <FactionsGrid factions={factions} onCharacterClick={() => {}} />}
+                    {factionsView && <FactionsGrid factions={factions} onCharacterClick={startEditUnit} />}
 
                     {charactersView && (
                         <CharactersGrid
                             characters={units}
-                            onAvailableCharacterClick={() => {}}
-                            onLockedCharacterClick={() => {}}
+                            onAvailableCharacterClick={startEditUnit}
+                            onLockedCharacterClick={startEditUnit}
                         />
                     )}
 
