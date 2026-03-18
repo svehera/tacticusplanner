@@ -104,11 +104,11 @@ export const RaidsPlan: React.FC<Props> = ({
 
     const scrollToTarget = useCallback(() => {
         if (scrollToCharSnowprintId === undefined) return;
+        if (!Object.keys(characterToMaterialMap).includes(scrollToCharSnowprintId)) return;
         if (viewPreferences.raidsTableView) {
             inProgressRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             return;
         }
-        if (!Object.keys(characterToMaterialMap).includes(scrollToCharSnowprintId)) return;
         const targetElement = itemRefs.current[characterToMaterialMap[scrollToCharSnowprintId]];
         if (targetElement) {
             targetElement.scrollIntoView({
@@ -117,6 +117,12 @@ export const RaidsPlan: React.FC<Props> = ({
             });
         }
     }, [itemRefs, scrollToCharSnowprintId, characterToMaterialMap, viewPreferences.raidsTableView]);
+
+    useEffect(() => {
+        if (scrollToCharSnowprintId !== undefined) {
+            setExpandedPanels(prev => ({ ...prev, inProgress: true }));
+        }
+    }, [scrollToCharSnowprintId]);
 
     useEffect(() => {
         if (scrollToCharSnowprintId) {
