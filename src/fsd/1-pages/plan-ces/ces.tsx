@@ -200,13 +200,13 @@ export const CEs = () => {
 
         const isLeastEnergy = dailyRaidsPreferences.farmStrategy === DailyRaidsStrategy.leastEnergy;
         const isCustom = dailyRaidsPreferences.farmStrategy === DailyRaidsStrategy.custom;
-        const isExtremisEnabledForMaterial = (materialId: string): boolean => {
+        const isStandardEnabledForMaterial = (materialId: string): boolean => {
             const materialRarity = getMaterialPreferenceKey(materialId);
             const customSettings = dailyRaidsPreferences.customSettings;
             if (!customSettings) {
                 return false;
             }
-            return (customSettings[materialRarity] ?? []).includes(CampaignType.Extremis);
+            return (customSettings[materialRarity] ?? []).includes(CampaignType.Standard);
         };
 
         const shouldIncludeInStandard = (materialId: string): boolean => {
@@ -224,7 +224,7 @@ export const CEs = () => {
                 return false;
             }
 
-            if (isCustom && isExtremisEnabledForMaterial(materialId)) {
+            if (isCustom && !isStandardEnabledForMaterial(materialId)) {
                 return false;
             }
 
