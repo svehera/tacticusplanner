@@ -111,7 +111,7 @@ export const GoalCard: React.FC<Props> = ({
                 </div>
                 <div className="flex min-w-0 flex-col flex-wrap justify-start">
                     <span className="text-[1.05rem] leading-snug font-medium">{goal.unitName ?? goal.unitId}</span>
-                    <span className="text-xs opacity-60">{calendarDate}</span>
+                    {!!goalEstimate.daysLeft && <span className="text-xs opacity-60">{calendarDate}</span>}
                 </div>
                 <div className="self-start">
                     <GoalCardActions goalEstimate={goalEstimate} menuItemSelect={menuItemSelect} />
