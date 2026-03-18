@@ -2314,7 +2314,7 @@ export class UpgradesService {
      * @returns the mapping from the campaign number to the canonical node number. The node number
      * is directly provided by snowprint, so extremis node numbers come out as e.g. 13 instead of 2.
      */
-    private static mapNodeNumber(campaign: Campaign, nodeNumber: number): number {
+    public static mapNodeNumber(campaign: Campaign, nodeNumber: number): number {
         switch (campaign) {
             case Campaign.AMSC:
             case Campaign.AMEC:
