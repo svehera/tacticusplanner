@@ -66,7 +66,7 @@ export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, calendarDa
             <div className="flex-box wrap gap-2">
                 {goalEstimate.included && (
                     <GoalEstimateRow
-                        daysLeft={goalEstimate.daysLeft}
+                        daysLeft={goalEstimate.daysLeft ?? 0}
                         calendarDate={calendarDate}
                         energyTotal={goalEstimate.energyTotal}
                     />

@@ -61,7 +61,7 @@ export const GoalCardMowAbilities: React.FC<Props> = ({ goal, goalEstimate, cale
             {goalEstimate.included && (
                 <div className="flex-box wrap gap-2">
                     <GoalEstimateRow
-                        daysLeft={goalEstimate.daysLeft}
+                        daysLeft={goalEstimate.daysLeft ?? 0}
                         calendarDate={calendarDate}
                         energyTotal={goalEstimate.energyTotal}
                     />

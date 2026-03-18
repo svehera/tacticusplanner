@@ -31,7 +31,7 @@ export const GoalCardUnlock: React.FC<Props> = ({ goal, goalEstimate, calendarDa
                 {!goalEstimate.daysLeft && !goalEstimate.energyTotal && <span>{getFactionPray(goal.faction)}</span>}
                 {(!!goalEstimate.daysLeft || !!goalEstimate.energyTotal) && (
                     <GoalEstimateRow
-                        daysLeft={goalEstimate.daysLeft}
+                        daysLeft={goalEstimate.daysLeft ?? 0}
                         calendarDate={calendarDate}
                         energyTotal={goalEstimate.energyTotal}
                     />
