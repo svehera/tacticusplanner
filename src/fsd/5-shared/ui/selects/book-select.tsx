@@ -17,7 +17,7 @@ export const BookSelect = ({
     valueChanges: (value: Rarity) => void;
 }) => {
     return (
-        <Field className="flex w-full items-center justify-between gap-4">
+        <Field className="flex flex-wrap items-center justify-between gap-4">
             {label && <Label className="font-bold whitespace-nowrap">{label}:</Label>}
             <div className="relative w-48">
                 <Listbox value={value} onChange={valueChanges}>

@@ -135,7 +135,7 @@ export const XpIncome: React.FC = () => {
             </div>
 
             <AccessibleTooltip title="This controls which book rarity is used to display and calculate XP requirements. Smaller books (e.g. Common) show higher counts with less waste. Larger books (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed.">
-                <div className="mb-5 flex flex-wrap rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+                <div className="justify-endrounded-lg mb-5 border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
                     <BookSelect
                         label="Default XP Book for Calculations"
                         value={defaultBookToUse ?? Rarity.Legendary}
