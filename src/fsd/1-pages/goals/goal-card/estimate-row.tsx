@@ -6,13 +6,13 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 interface Props {
     daysLeft: number;
-    calendarDate: string;
+    calendarDate: string | null;
     energyTotal?: number;
 }
 
 export const GoalEstimateRow: React.FC<Props> = ({ daysLeft, calendarDate, energyTotal }) => (
     <>
-        <AccessibleTooltip title={`${daysLeft} days. Estimated date ${calendarDate}`}>
+        <AccessibleTooltip title={`${daysLeft} days. Estimated date ${calendarDate ?? ''}`}>
             <div className="flex-box gap-[3px]">
                 <CalendarMonthIcon /> {daysLeft}
             </div>

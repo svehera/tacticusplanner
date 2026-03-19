@@ -46,15 +46,15 @@ export const GoalCard: React.FC<Props> = ({
     bookRarity,
 }: Props) => {
     const goalEstimate: IGoalEstimate = passed ?? {
+        goalId: goal.goalId,
         daysLeft: 0,
         daysTotal: 0,
         oTokensTotal: 0,
         energyTotal: 0,
         xpBooksTotal: 0,
-        goalId: '',
     };
     const isGoalCompleted = GoalsService.isGoalCompleted(goal, goalEstimate);
-    const calendarDate: string = useMemo(() => getEstimatedDate(goalEstimate.daysLeft), [goalEstimate.daysLeft]);
+    const calendarDate = useMemo(() => (passed ? getEstimatedDate(passed.daysLeft) : null), [passed]);
 
     const renderBody = () => {
         switch (goal.type) {
@@ -109,7 +109,7 @@ export const GoalCard: React.FC<Props> = ({
                 </div>
                 <div className="flex min-w-0 flex-col flex-wrap justify-start">
                     <span className="text-[1.05rem] leading-snug font-medium">{goal.unitName ?? goal.unitId}</span>
-                    {!!goalEstimate.daysLeft && <span className="text-xs opacity-60">{calendarDate}</span>}
+                    {calendarDate && <span className="text-xs opacity-60">{calendarDate}</span>}
                 </div>
                 <div className="self-start">
                     <GoalCardActions goalEstimate={goalEstimate} menuItemSelect={menuItemSelect} />

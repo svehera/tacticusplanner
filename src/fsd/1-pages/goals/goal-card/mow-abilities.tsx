@@ -12,7 +12,7 @@ import { GoalEstimateRow } from './estimate-row';
 interface Props {
     goal: ICharacterUpgradeMow;
     goalEstimate: IGoalEstimate;
-    calendarDate: string;
+    calendarDate: string | null;
 }
 
 export const GoalCardMowAbilities: React.FC<Props> = ({ goal, goalEstimate, calendarDate }) => {
