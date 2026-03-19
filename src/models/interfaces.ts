@@ -7,8 +7,8 @@ import { Teams2Action } from '@/reducers/teams2.reducer';
 import { WarDefense2Action } from '@/reducers/war-defense2.reducer';
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
 import { XpUseAction } from '@/reducers/xp-use-reducer';
-import { GuildAction } from 'src/reducers/guildReducer';
-import { GuildWarAction } from 'src/reducers/guildWarReducer';
+import { GuildAction } from '@/reducers/guild-reducer';
+import { GuildWarAction } from '@/reducers/guild-war-reducer';
 import { MowsAction } from 'src/reducers/mows.reducer';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 
@@ -44,7 +44,7 @@ import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.redu
 import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
 import { CharactersAction } from '../reducers/characters.reducer';
 import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
-import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
+import { DailyRaidsAction } from '../reducers/daily-raids.reducer';
 import { GoalsAction } from '../reducers/goals.reducer';
 import { InventoryAction } from '../reducers/inventory.reducer';
 import { LeProgressAction } from '../reducers/le-progress.reducer';
