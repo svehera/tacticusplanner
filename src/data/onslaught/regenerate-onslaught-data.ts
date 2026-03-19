@@ -230,7 +230,7 @@ const DataSchema = z
 // ----------- Stage 7: Executing and write to file -----------
 export const main = () => {
     // Note: reading here instead of importing so that importing from this file doesn't cause Vite to try to load the entire raw JSON into memory during startup
-    const rawData = JSON.parse(fs.readFileSync(import.meta.dirname + '/rawData.json', 'utf-8'));
+    const rawData = JSON.parse(fs.readFileSync(import.meta.dirname + '/raw-data.json', 'utf-8'));
     const parsedData = DataSchema.parse(rawData);
     fs.writeFileSync(import.meta.dirname + '/data.generated.json', JSON.stringify(parsedData, null, 4) + '\n');
 };
