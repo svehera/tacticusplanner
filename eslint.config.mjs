@@ -102,9 +102,10 @@ export default defineConfig([
                     allowList: {
                         // Allow variable names used within React
                         Props: true,
+                        props: true,
+                        params: true,
                         searchParams: true,
                         inputRef: true,
-                        params: true,
                     },
                 },
             ],
