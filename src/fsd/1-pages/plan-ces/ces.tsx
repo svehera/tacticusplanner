@@ -341,6 +341,24 @@ export const CEs = () => {
         }
     };
 
+    const getRelatedUnits = (materialPlan: MaterialPlan): { name: string; icon: string }[] => {
+        return Array.from(
+            new Map(
+                materialPlan.relatedGoalIds
+                    .map(goalId => goalUnitById.get(goalId))
+                    .filter(
+                        (
+                            unit
+                        ): unit is {
+                            name: string;
+                            icon: string;
+                        } => !!unit?.icon
+                    )
+                    .map(unit => [unit.icon, unit])
+            ).values()
+        );
+    };
+
     const renderCampaignSection = (title: string, plans: CampaignPlan[], defaultOpen = true) => {
         return (
             <section>
@@ -354,61 +372,66 @@ export const CEs = () => {
                                 <details
                                     key={`${plan.campaignType}::${plan.campaign}`}
                                     className="group rounded-lg border border-slate-300 p-4 dark:border-slate-700">
-                                    <summary className="mb-2 flex cursor-pointer flex-wrap items-center justify-between gap-2">
+                                    <summary className="mb-2 flex cursor-pointer flex-wrap items-start justify-between gap-2 sm:items-center">
                                         <div className="flex items-center gap-2">
                                             <span className="inline-block text-xl leading-none opacity-70 transition-transform group-open:rotate-90">
                                                 ▸
                                             </span>
                                             <CampaignImage campaign={plan.campaign} size={28} />
-                                            <h3 className="text-lg font-semibold">{plan.campaign}</h3>
+                                            <h3 className="text-base font-semibold sm:text-lg">{plan.campaign}</h3>
                                         </div>
-                                        <div className="text-sm opacity-80">
+                                        <div className="w-full text-left text-xs opacity-80 sm:w-auto sm:text-right sm:text-sm">
                                             Energy: <b>{Math.ceil(plan.totalEstimatedEnergy)}</b> · Mats:{' '}
                                             <b>{plan.totalNeededMaterials}</b>
                                         </div>
                                     </summary>
 
                                     <div className="space-y-2">
-                                        {plan.materials.map(materialPlan => (
-                                            <div
-                                                key={materialPlan.materialId}
-                                                className="rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-800">
-                                                <div className="flex items-center justify-between gap-2">
-                                                    <div className="flex items-center gap-2">
-                                                        {renderMaterial(materialPlan.materialId)}
-                                                        <span className="text-xs opacity-70">
-                                                            <b>{extractBattleNumber(materialPlan.bestBattleId)}</b>
-                                                        </span>
-                                                        {Array.from(
-                                                            new Map(
-                                                                materialPlan.relatedGoalIds
-                                                                    .map(goalId => goalUnitById.get(goalId))
-                                                                    .filter(
-                                                                        (
-                                                                            unit
-                                                                        ): unit is {
-                                                                            name: string;
-                                                                            icon: string;
-                                                                        } => !!unit?.icon
-                                                                    )
-                                                                    .map(unit => [unit.icon, unit])
-                                                            ).values()
-                                                        ).map(unit => (
-                                                            <UnitShardIcon
-                                                                key={unit.icon}
-                                                                icon={unit.icon}
-                                                                mythic={false}
-                                                            />
-                                                        ))}
+                                        {plan.materials.map(materialPlan => {
+                                            const relatedUnits = getRelatedUnits(materialPlan);
+                                            return (
+                                                <div
+                                                    key={materialPlan.materialId}
+                                                    className="rounded-md bg-slate-100 p-2 dark:bg-slate-800">
+                                                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                                                        <div className="flex items-center gap-2">
+                                                            {renderMaterial(materialPlan.materialId)}
+                                                            <span className="text-xs opacity-70">
+                                                                <b>{extractBattleNumber(materialPlan.bestBattleId)}</b>
+                                                            </span>
+                                                            {relatedUnits.length > 0 && (
+                                                                <div className="hidden lg:flex lg:flex-wrap lg:items-center lg:gap-1.5">
+                                                                    {relatedUnits.map(unit => (
+                                                                        <UnitShardIcon
+                                                                            key={unit.icon}
+                                                                            icon={unit.icon}
+                                                                            mythic={false}
+                                                                        />
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                        </div>
+
+                                                        <div className="text-sm">
+                                                            Need <b>{materialPlan.needed.toFixed(0)}</b> · Est energy{' '}
+                                                            <b>{Math.ceil(materialPlan.estimatedEnergy)}</b>
+                                                        </div>
                                                     </div>
 
-                                                    <div className="text-sm">
-                                                        Need <b>{materialPlan.needed.toFixed(0)}</b> · Est energy{' '}
-                                                        <b>{Math.ceil(materialPlan.estimatedEnergy)}</b>
-                                                    </div>
+                                                    {relatedUnits.length > 0 && (
+                                                        <div className="mt-1.5 flex flex-wrap items-center gap-1.5 lg:hidden">
+                                                            {relatedUnits.map(unit => (
+                                                                <UnitShardIcon
+                                                                    key={unit.icon}
+                                                                    icon={unit.icon}
+                                                                    mythic={false}
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                    )}
                                                 </div>
-                                            </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
                                 </details>
                             ))}
