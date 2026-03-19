@@ -17,7 +17,7 @@ export const GoalEstimateRow: React.FC<Props> = ({ daysLeft, calendarDate, energ
                 <CalendarMonthIcon /> {daysLeft}
             </div>
         </AccessibleTooltip>
-        {!!energyTotal && (
+        {energyTotal !== undefined && (
             <AccessibleTooltip title={`${energyTotal} energy`}>
                 <div className="flex-box gap-[3px]">
                     <MiscIcon icon={'energy'} height={18} width={15} /> {energyTotal}

@@ -53,7 +53,8 @@ export const GoalCard: React.FC<Props> = ({
         energyTotal: 0,
         xpBooksTotal: 0,
     };
-    const isGoalCompleted = GoalsService.isGoalCompleted(goal, goalEstimate);
+    const completionEstimate: IGoalEstimate = passed ?? { ...goalEstimate, energyTotal: Number.POSITIVE_INFINITY };
+    const isGoalCompleted = GoalsService.isGoalCompleted(goal, completionEstimate);
     const calendarDate = useMemo(() => (passed ? getEstimatedDate(passed.daysLeft) : null), [passed]);
 
     const renderBody = () => {
