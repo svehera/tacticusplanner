@@ -74,6 +74,7 @@ export default defineConfig([
             react: {
                 version: 'detect',
             },
+
             'import/resolver': {
                 typescript: {
                     alwaysTryTypes: true,
@@ -95,6 +96,18 @@ export default defineConfig([
         },
 
         rules: {
+            'unicorn/prevent-abbreviations': [
+                'error',
+                {
+                    allowList: {
+                        // Allow variable names used within React
+                        Props: true,
+                        searchParams: true,
+                        inputRef: true,
+                        params: true,
+                    },
+                },
+            ],
             'object-curly-spacing': ['error', 'always'],
             '@typescript-eslint/no-explicit-any': ['warn'],
             '@typescript-eslint/no-unused-vars': [
