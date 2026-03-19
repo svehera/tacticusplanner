@@ -1,4 +1,4 @@
-﻿import {
+import {
     ArrowForward,
     DeleteForever,
     Edit,
@@ -11,7 +11,7 @@
 import LinkIcon from '@mui/icons-material/Link';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 import { charsUnlockShards } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { StoreContext, DispatchContext } from 'src/reducers/store.provider';
-import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import { getEstimatedDate } from 'src/shared-logic/functions';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon, StarsIcon, RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
@@ -43,19 +43,20 @@ import { GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
 
 interface Props {
-    rows: CharacterRaidGoalSelect[];
+    rows: CharacterRaidGoalSelect[]; // The filtered subset (e.g., just Abilities)
+    allGoals: CharacterRaidGoalSelect[]; // The full list for global priority checks
     estimate: IGoalEstimate[];
     goalsColorCoding: GoalColorMode;
     menuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
 }
 
-export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, menuItemSelect }) => {
-    const { viewPreferences } = useContext(StoreContext);
+export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsColorCoding, menuItemSelect }) => {
+    const { characters, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const getStatusIcons = (goalEstimate: IGoalEstimate) => {
         if (!goalEstimate.completed && !goalEstimate.blocked && !!goalEstimate.included) {
-            return <div className="h-[0px]" />;
+            return <div className="h-0" />;
         }
         return (
             <div>
@@ -74,7 +75,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                         </span>
                     </AccessibleTooltip>
                 )}
-                {!goalEstimate.included && (
+                {goalEstimate.included === false && (
                     <AccessibleTooltip
                         title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
                         <span className="flex-box gap-[3px]" tabIndex={0}>
@@ -135,7 +136,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     )}
                                 </div>
                             </div>
-                            {getStatusIcons(goalEstimate)}
                         </div>
                         {goalEstimate.orbsEstimate &&
                             !!Object.values(goalEstimate.orbsEstimate.orbs).some(x => x > 0) && (
@@ -169,7 +169,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     </div>
                                 )}
                             </div>
-                            {getStatusIcons(goalEstimate)}
                         </div>
                         {goalEstimate.xpBooksApplied !== undefined &&
                             goalEstimate.xpBooksRequired !== undefined &&
@@ -212,15 +211,15 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                     </div>
                                 )}
                             </div>
-                            {!!goal.upgradesRarity.length && (
-                                <div className="flex-box gap-[3px]">
-                                    {goal.upgradesRarity.map(x => (
-                                        <RarityIcon key={x} rarity={x} />
-                                    ))}
-                                </div>
-                            )}
-                            {getStatusIcons(goalEstimate)}
                         </div>
+                        {!!goal.upgradesRarity.length && (
+                            <div className="flex-box gap-[3px]">
+                                <ArrowForward />
+                                {goal.upgradesRarity.map(x => (
+                                    <RarityIcon key={x} rarity={x} />
+                                ))}
+                            </div>
+                        )}
                         {goalEstimate.mowEstimate && (
                             <div className="px-0 py-2.5">
                                 <MowMaterialsTotal
@@ -266,7 +265,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 </div>
                             )}
                         {goalEstimate.abilitiesEstimate && (
-                            <div className="px-0 py-2.5">
+                            <div className="flex-box gap-[3px]">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
@@ -285,14 +284,13 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                                 </b>{' '}
                                 Shards
                             </div>
-                            {getStatusIcons(goalEstimate)}
                         </div>
                     </div>
                 );
             }
         }
     };
-
+    const orderedAllGoals = useMemo(() => [...allGoals].sort((a, b) => a.priority - b.priority), [allGoals]);
     const columnDefs = useMemo<Array<ColDef<CharacterRaidGoalSelect>>>(() => {
         return [
             {
@@ -302,26 +300,28 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                     const { data } = params;
                     if (!data) return;
 
+                    // Find the index in the GLOBAL list to determine true neighbors
+                    const globalIndex = orderedAllGoals.findIndex(x => x.goalId === data.goalId);
+
                     const moveUp = () => {
-                        if (data.priority <= 1) return;
-                        const updated = { ...data, priority: data.priority - 1 } as CharacterRaidGoalSelect;
-                        dispatch.goals({ type: 'Update', goal: updated });
+                        if (globalIndex <= 0) return; // Already at the absolute top
+                        const neighbor = orderedAllGoals[globalIndex - 1];
+                        dispatch.goals({ type: 'Swap', goalId: data.goalId, neighborId: neighbor.goalId });
                     };
 
                     const moveDown = () => {
-                        if (data.priority >= rows.length) return;
-                        const updated = { ...data, priority: data.priority + 1 } as CharacterRaidGoalSelect;
-                        dispatch.goals({ type: 'Update', goal: updated });
+                        if (globalIndex >= orderedAllGoals.length - 1) return;
+                        const neighbor = orderedAllGoals[globalIndex + 1];
+                        dispatch.goals({ type: 'Swap', goalId: data.goalId, neighborId: neighbor.goalId });
                     };
-
                     return (
                         <div className="flex-box column center">
                             <div className="flex-box gap5 items-center">
                                 <div>{data.priority}</div>
-                                <IconButton size="small" onClick={moveUp}>
+                                <IconButton size="small" aria-label="Increase Priority" onClick={moveUp}>
                                     <ArrowUpward fontSize="small" />
                                 </IconButton>
-                                <IconButton size="small" onClick={moveDown}>
+                                <IconButton size="small" aria-label="Decrease Priority" onClick={moveDown}>
                                     <ArrowDownward fontSize="small" />
                                 </IconButton>
                             </div>
@@ -350,7 +350,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
             },
             {
                 field: 'unitIcon',
-                headerName: 'Character',
+                headerName: 'Unit',
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
                     if (data) {
@@ -360,7 +360,22 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                     }
                 },
                 sortable: false,
-                maxWidth: 90,
+                maxWidth: 60,
+            },
+            {
+                headerName: 'Status',
+                autoHeight: true,
+                width: 60,
+                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const { data } = params;
+                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
+                    if (data && goalEstimate) {
+                        const statusEstimate = goalEstimate.blocked
+                            ? { ...goalEstimate, completed: false }
+                            : goalEstimate;
+                        return getStatusIcons(statusEstimate);
+                    }
+                },
             },
             {
                 headerName: 'Details',
@@ -375,32 +390,65 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 },
             },
             {
-                headerName: 'Estimated date',
-                hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
-                valueGetter: params => {
-                    const { data } = params;
-                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
-                    if (goalEstimate) {
-                        if (!goalEstimate.daysLeft) {
-                            return '';
-                        }
-
-                        const nextDate = new Date();
-                        nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
-                        let ret = formatDateWithOrdinal(nextDate);
-                        if (goalEstimate.xpDaysLeft !== undefined) {
-                            ret +=
-                                '\n' +
-                                '(XP by ' +
-                                formatDateWithOrdinal(
-                                    new Date(new Date().getTime() + goalEstimate.xpDaysLeft * 86400000)
-                                ) +
-                                ')';
-                        }
-
-                        return ret;
+                headerName: 'Estimated Date',
+                // valueGetter handles the underlying data for sorting, filtering, and clipboard
+                valueGetter: (params: ValueGetterParams<CharacterRaidGoalSelect>) => {
+                    const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
+                    // Only return blank if both estimates are missing/undefined
+                    if (
+                        !goalEstimate ||
+                        (goalEstimate.daysLeft === undefined && goalEstimate.xpDaysLeft === undefined)
+                    ) {
+                        return '';
                     }
+
+                    const { daysLeft, xpDaysLeft } = goalEstimate;
+                    const materialDate = daysLeft !== undefined ? getEstimatedDate(daysLeft) : null;
+                    const xpDate = xpDaysLeft !== undefined ? getEstimatedDate(xpDaysLeft) : null;
+
+                    if (materialDate && xpDate) {
+                        return `${materialDate} (XP by ${xpDate})`;
+                    }
+
+                    if (materialDate) return materialDate;
+                    if (xpDate) return `XP by ${xpDate}`;
+
+                    return '';
                 },
+                // cellRenderer handles the actual visual UI
+                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                    const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
+                    // Remove early guard !goalEstimate.daysLeft to allow XP-only rendering
+                    if (!goalEstimate) return null;
+
+                    const { daysLeft, xpDaysLeft } = goalEstimate;
+
+                    return (
+                        <div className="flex-box column gap-0.5 py-1">
+                            {/* Material / Shards Row: Render only if daysLeft is defined */}
+                            {daysLeft !== undefined && (
+                                <AccessibleTooltip
+                                    title={`${daysLeft} days for materials. Estimated date ${getEstimatedDate(daysLeft)}`}>
+                                    <div className="flex-box gap-[3px] leading-tight">
+                                        <span className="text-sm">{getEstimatedDate(daysLeft)}</span>
+                                    </div>
+                                </AccessibleTooltip>
+                            )}
+
+                            {/* XP Row: Render if xpDaysLeft exists, even if materials (daysLeft) are 0 or undefined */}
+                            {xpDaysLeft !== undefined && (
+                                <AccessibleTooltip
+                                    title={`${Math.ceil(xpDaysLeft)} days for XP. Estimated date ${getEstimatedDate(xpDaysLeft)}`}>
+                                    <div className="flex-box gap-[3px] leading-tight">
+                                        <span className="text-sm">{`XP: ${getEstimatedDate(xpDaysLeft)}`}</span>
+                                    </div>
+                                </AccessibleTooltip>
+                            )}
+                        </div>
+                    );
+                },
+                width: 170,
+                autoHeight: true,
             },
             {
                 headerName: 'Days left',
@@ -489,7 +537,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, goalsColorCoding, 
                 // width: 120,
             },
         ];
-    }, [rows]);
+    }, [rows, dispatch, menuItemSelect, estimate, characters, orderedAllGoals]);
 
     const getRowStyle = useMemo(
         () => (params: any) => {
