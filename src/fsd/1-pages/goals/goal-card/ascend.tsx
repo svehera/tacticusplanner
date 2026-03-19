@@ -22,6 +22,7 @@ interface Props {
     mows: IMow2[];
 }
 
+/** Renders the body of an Ascend goal card, showing rarity/stars progression and shard costs. */
 export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, calendarDate, characters, mows }) => {
     const isSameRarity = goal.rarityStart === goal.rarityEnd;
     const minStars = RarityMapper.toStars[goal.rarityEnd];

@@ -15,6 +15,7 @@ interface Props {
     calendarDate: string | null;
 }
 
+/** Renders the body of an Unlock goal card, showing shard progress and energy estimate. */
 export const GoalCardUnlock: React.FC<Props> = ({ goal, goalEstimate, calendarDate }) => {
     const targetShards = charsUnlockShards[goal.rarity];
 

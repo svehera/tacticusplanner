@@ -10,6 +10,7 @@ interface Props {
     energyTotal?: number;
 }
 
+/** Displays the days-left estimate and optional energy cost for a goal. */
 export const GoalEstimateRow: React.FC<Props> = ({ daysLeft, calendarDate, energyTotal }) => (
     <>
         <AccessibleTooltip title={`${daysLeft} days. Estimated date ${calendarDate ?? ''}`}>

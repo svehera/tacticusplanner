@@ -22,6 +22,7 @@ interface Props {
     bookRarity: Rarity;
 }
 
+/** Renders the body of an UpgradeRank goal card, showing rank range, upgrade rarities, and energy/XP estimates. */
 export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, calendarDate, bookRarity }) => {
     const { xpEstimate } = goalEstimate;
 

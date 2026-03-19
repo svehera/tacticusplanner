@@ -15,6 +15,7 @@ interface Props {
     calendarDate: string | null;
 }
 
+/** Renders the body of a MowAbilities goal card, showing primary/secondary ability progress and material costs. */
 export const GoalCardMowAbilities: React.FC<Props> = ({ goal, goalEstimate, calendarDate }) => {
     const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
     const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;

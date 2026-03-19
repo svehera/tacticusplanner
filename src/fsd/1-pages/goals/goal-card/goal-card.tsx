@@ -21,6 +21,7 @@ import { GoalCardRaidsButton } from './raids-button';
 import { GoalCardUnlock } from './unlock';
 import { GoalCardUpgradeRank } from './upgrade-rank';
 
+/** Returns true if the goal type has an associated daily-raids shortcut button. */
 const showRaidsButton = (goal: CharacterRaidGoalSelect): boolean =>
     goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities;
 
@@ -35,6 +36,7 @@ interface Props {
     bookRarity: Rarity;
 }
 
+/** Renders a full goal card including header, type-specific body, and optional footer actions. */
 export const GoalCard: React.FC<Props> = ({
     goal,
     menuItemSelect,
