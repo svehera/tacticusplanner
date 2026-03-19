@@ -12,8 +12,9 @@ import {
     WorkspacePremium, // Tournament
 } from '@mui/icons-material';
 import { IconButton, Tooltip, Paper, Stack, Chip, ButtonBase, Typography } from '@mui/material';
+import type { ChipProps } from '@mui/material';
 import { cloneDeep } from 'lodash';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
@@ -36,7 +37,15 @@ import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 const MAX_TEAMS = 20;
 
 // Internal helper for metadata styling
-const MetadataChip = ({ icon, label, color }: { icon: React.ReactElement; label: string; color: any }) => (
+const MetadataChip = ({
+    icon,
+    label,
+    color,
+}: {
+    icon: React.ReactElement;
+    label: string;
+    color: ChipProps['color'];
+}) => (
     <Chip
         icon={icon}
         label={label}
@@ -53,6 +62,35 @@ enum SaveTeamMode {
 }
 
 type TeamTypeKey = 'warOffense' | 'warDefense' | 'raid' | 'ta' | 'horde';
+
+const getTeamCoreCharIds = (team: ITeam2) => team.chars.slice(0, team.flexIndex ?? team.chars.length);
+
+const getTeamFlexCharIds = (team: ITeam2) => team.chars.slice(team.flexIndex ?? team.chars.length);
+
+const sanitizeWarDefenseSelection = (
+    currentSelectedChars: string[],
+    currentFlexIndex: number | undefined,
+    blockedCoreCharIds: ReadonlySet<string>
+) => {
+    let nextFlexIndex = currentFlexIndex ?? currentSelectedChars.length;
+    const nextSelectedChars: string[] = [];
+
+    currentSelectedChars.forEach((charId, index) => {
+        if (blockedCoreCharIds.has(charId)) {
+            if (index < nextFlexIndex) {
+                nextFlexIndex -= 1;
+            }
+            return;
+        }
+        nextSelectedChars.push(charId);
+    });
+
+    const normalizedFlexIndex = Math.max(0, nextFlexIndex);
+    return {
+        selectedChars: nextSelectedChars,
+        flexIndex: normalizedFlexIndex >= nextSelectedChars.length ? undefined : normalizedFlexIndex,
+    };
+};
 
 export const ManageTeams = () => {
     const {
@@ -106,6 +144,59 @@ export const ManageTeams = () => {
         setResolvedChars(CharactersService.resolveStoredCharacters(unresolvedCharacters));
         setResolvedMows(MowsService.resolveAllFromStorage(unresolvedMows));
     }, [unresolvedCharacters, unresolvedMows]);
+
+    const otherWarDefenseTeams = useMemo(
+        () =>
+            teams.filter(
+                team =>
+                    !!team.warDefense &&
+                    !(saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam && team.name === editingTeam.name)
+            ),
+        [teams, saveTeamMode, editingTeam]
+    );
+
+    const warDefenseBlockedCoreCharIds = useMemo(
+        () => Array.from(new Set(otherWarDefenseTeams.flatMap(getTeamCoreCharIds))),
+        [otherWarDefenseTeams]
+    );
+
+    const warDefenseBlockedCoreCharIdsSet = useMemo(
+        () => new Set(warDefenseBlockedCoreCharIds),
+        [warDefenseBlockedCoreCharIds]
+    );
+
+    const warDefenseFlexCharIds = useMemo(
+        () =>
+            Array.from(
+                new Set(
+                    otherWarDefenseTeams
+                        .flatMap(getTeamFlexCharIds)
+                        .filter(charId => !warDefenseBlockedCoreCharIdsSet.has(charId))
+                )
+            ),
+        [otherWarDefenseTeams, warDefenseBlockedCoreCharIdsSet]
+    );
+
+    const warDefenseFlexMowIds = useMemo(
+        () => Array.from(new Set(otherWarDefenseTeams.flatMap(team => team.mows ?? []))),
+        [otherWarDefenseTeams]
+    );
+
+    useEffect(() => {
+        if (!warDefenseSelected) {
+            return;
+        }
+
+        const sanitized = sanitizeWarDefenseSelection(selectedChars, flexIndex, warDefenseBlockedCoreCharIdsSet);
+        if (
+            sanitized.flexIndex !== flexIndex ||
+            sanitized.selectedChars.length !== selectedChars.length ||
+            sanitized.selectedChars.some((charId, index) => charId !== selectedChars[index])
+        ) {
+            setSelectedChars(sanitized.selectedChars);
+            setFlexIndex(sanitized.flexIndex);
+        }
+    }, [warDefenseSelected, selectedChars, flexIndex, warDefenseBlockedCoreCharIdsSet]);
 
     useEffect(() => {
         let teamSizeRestrictedModesEnabled = true;
@@ -334,6 +425,9 @@ export const ManageTeams = () => {
                 onMaxRankChange={setMaxRank}
                 onFactionsChange={setFactions}
                 onRarityCapChanged={setRarityCap}
+                warDefenseBlockedCoreCharIds={warDefenseBlockedCoreCharIds}
+                warDefenseFlexCharIds={warDefenseFlexCharIds}
+                warDefenseFlexMowIds={warDefenseFlexMowIds}
                 saveAllowed={saveAllowed}
                 saveDisallowedMessage={saveDisallowedMessage}
                 warDisallowedMessage={warDisallowedMessage}
