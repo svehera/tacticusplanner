@@ -133,6 +133,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['leMasterTable'],
     menuItemById['quests'],
     ...activeLreMenuItems,
+    menuItemById['campaignProgression'],
     menuItemById['teams'],
     menuItemById['defense'],
     menuItemById['offense'],
