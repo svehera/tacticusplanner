@@ -36,7 +36,7 @@ export const WarOffense2 = () => {
         warOffense2?.showUnderConstructionWarning ?? true
     );
 
-    const [sizeMod, setSizeMod] = useState<number>(isMobile ? 0.5 : 1);
+    const [zoom, setZoom] = useState<number>(isMobile ? 0.5 : 1);
 
     const [rarityCap, setRarityCap] = useState<Rarity>(Rarity.Mythic);
 
@@ -204,7 +204,7 @@ export const WarOffense2 = () => {
                 <header className="mb-4 flex justify-between">
                     <div className="flex flex-wrap items-center gap-2">
                         <h1 className="text-lg font-bold">War Offense</h1>
-                        <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                        <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                         {/* RARITY CAP */}
                         <div className="flex items-center gap-3">
                             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Rarity Cap</span>
@@ -272,7 +272,7 @@ export const WarOffense2 = () => {
                             }
                             onCharClicked={unstageChar}
                             onMowClicked={unstageMow}
-                            sizeMod={sizeMod}
+                            zoom={zoom}
                         />
                     </div>
                     <div className="mt-4"> </div>
@@ -336,7 +336,7 @@ export const WarOffense2 = () => {
                                         ).map(mow => Teams2Service.capMowAtRarity(mow, rarityCap))}
                                         flexIndex={team.flexIndex}
                                         disabledUnits={[...deployedCharacters, ...deployedMows]}
-                                        sizeMod={sizeMod}
+                                        zoom={zoom}
                                         onCharClicked={stageChar}
                                         onMowClicked={stageMow}
                                     />
@@ -361,13 +361,13 @@ export const WarOffense2 = () => {
                             onCharacterSelect={charId =>
                                 stageChar(characters.find(char => char.snowprintId === charId)!)
                             }
-                            sizeMod={sizeMod}
+                            zoom={zoom}
                             showHeader={true}
                         />
                         <MowGrid
                             mows={deployableMows.map(mow => Teams2Service.capMowAtRarity(mow, rarityCap))}
                             onMowSelect={mowId => stageMow(mows.find(mow => mow.snowprintId === mowId)!)}
-                            sizeMod={sizeMod}
+                            zoom={zoom}
                             showHeader={true}
                         />
                     </div>
@@ -387,7 +387,7 @@ export const WarOffense2 = () => {
                                 .map(char => Teams2Service.capCharacterAtRarity(char, rarityCap))}
                             onCharacterSelect={() => {}}
                             showHeader={true}
-                            sizeMod={sizeMod}
+                            zoom={zoom}
                         />
                         <MowGrid
                             mows={mows
@@ -395,7 +395,7 @@ export const WarOffense2 = () => {
                                 .map(mow => Teams2Service.capMowAtRarity(mow, rarityCap))}
                             onMowSelect={() => {}}
                             showHeader={true}
-                            sizeMod={sizeMod}
+                            zoom={zoom}
                         />
                     </div>
                 </details>
@@ -427,7 +427,7 @@ export const WarOffense2 = () => {
                                     disabledUnits={[...deployedCharacters, ...deployedMows]}
                                     onCharClicked={stageChar}
                                     onMowClicked={stageMow}
-                                    sizeMod={sizeMod}
+                                    zoom={zoom}
                                 />
                             </div>
                         ))}

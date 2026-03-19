@@ -41,7 +41,7 @@ export const WarDefense2 = () => {
         setResolvedChars(CharactersService.resolveStoredCharacters(unresolvedCharacters));
         setResolvedMows(MowsService.resolveAllFromStorage(unresolvedMows));
     }, [unresolvedCharacters, unresolvedMows]);
-    const [sizeMod, setSizeMod] = useState(isMobile ? 0.5 : 1);
+    const [zoom, setZoom] = useState(isMobile ? 0.5 : 1);
 
     const handleSelectedTeam = (index: number, teamName: string) => {
         const newDefense = cloneDeep(warDefense2);
@@ -119,7 +119,7 @@ export const WarDefense2 = () => {
                     </FormControl>
 
                     <div className="flex items-start justify-start">
-                        <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                        <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                     </div>
                 </div>
                 <div>
@@ -141,7 +141,7 @@ export const WarDefense2 = () => {
                                 chars={resolvedChars}
                                 mows={resolvedMows}
                                 onSelectTeam={(teamName: string) => handleSelectedTeam(i, teamName)}
-                                sizeMod={sizeMod}
+                                zoom={zoom}
                             />
                         ))}
                     </div>

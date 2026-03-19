@@ -33,8 +33,8 @@ interface Props {
     maxRank: Rank;
     factions: FactionId[];
     notes: string;
-    sizeMod: number;
-    setSizeMod: (value: number) => void;
+    zoom: number;
+    setZoom: (value: number) => void;
     onAddChar: (snowprintId: string) => void;
     onAddMow: (snowprintId: string) => void;
     onCharClicked: (char: ICharacter2) => void;
@@ -85,9 +85,9 @@ export const AddTeamDialog: React.FC<Props> = ({
     maxRank,
     factions,
     notes,
-    sizeMod,
+    zoom,
     rarityCap,
-    setSizeMod,
+    setZoom,
     onAddChar,
     onAddMow,
     onCharClicked,
@@ -211,7 +211,7 @@ export const AddTeamDialog: React.FC<Props> = ({
             <div className="z-30 flex flex-shrink-0 items-center justify-between border-b border-gray-200 bg-gray-50 p-4 dark:border-slate-700 dark:bg-[#1e293b]">
                 <div className="justify-left flex flex-wrap items-center gap-6">
                     <h2 className="text-lg font-bold text-gray-900 dark:text-white">Assemble Team</h2>
-                    <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                    <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                     {/* RARITY CAP */}
                     <div className="flex items-center gap-3">
                         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Rarity Cap</span>
@@ -410,7 +410,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             flexIndex={flexIndex}
                             onCharClicked={onCharClicked}
                             onMowClicked={onMowClicked}
-                            sizeMod={sizeMod}
+                            zoom={zoom}
                         />
                     </div>
                 </section>
@@ -426,7 +426,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             characters={filteredChars}
                             onCharacterSelect={onAddChar}
                             showHeader={true}
-                            sizeMod={sizeMod}
+                            zoom={zoom}
                             deployedFlexUnitIds={warDefense ? warDefenseFlexCharIds : undefined}
                         />
                     </div>
@@ -456,7 +456,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             mows={filteredMows}
                             onMowSelect={onAddMow}
                             showHeader={true}
-                            sizeMod={sizeMod}
+                            zoom={zoom}
                             deployedFlexUnitIds={warDefense ? warDefenseFlexMowIds : undefined}
                         />
                     </div>

@@ -13,7 +13,7 @@ import { Teams2Service } from './teams2.service';
 
 interface Props {
     characters: ICharacter2[];
-    sizeMod: number;
+    zoom: number;
     onCharacterSelect: (id: string) => void;
     showHeader: boolean;
     deployedFlexUnitIds?: string[];
@@ -21,7 +21,7 @@ interface Props {
 
 export const CharacterGrid: React.FC<Props> = ({
     characters,
-    sizeMod,
+    zoom,
     onCharacterSelect,
     showHeader,
     deployedFlexUnitIds,
@@ -36,7 +36,7 @@ export const CharacterGrid: React.FC<Props> = ({
             )}
             <div className="flex flex-wrap gap-4">
                 {characters.map(char => (
-                    <div key={char.snowprintId!} className="relative" style={{ zoom: sizeMod }}>
+                    <div key={char.snowprintId!} className="relative" style={{ zoom }}>
                         <div
                             onClick={() => onCharacterSelect(char.snowprintId!)}
                             className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"

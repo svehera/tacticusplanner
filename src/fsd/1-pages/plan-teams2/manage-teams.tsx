@@ -133,7 +133,7 @@ export const ManageTeams = () => {
 
     const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
     const [teams, setTeams] = useState<ITeam2[]>([]);
-    const [sizeMod, setSizeMod] = useState(isMobile ? 0.5 : 1);
+    const [zoom, setZoom] = useState(isMobile ? 0.5 : 1);
     const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>(undefined);
 
     useEffect(() => {
@@ -411,8 +411,8 @@ export const ManageTeams = () => {
                 maxRank={maxRank}
                 factions={factions}
                 notes={notes}
-                sizeMod={sizeMod}
-                setSizeMod={setSizeMod}
+                zoom={zoom}
+                setZoom={setZoom}
                 onAddChar={onAddChar}
                 onAddMow={onAddMow}
                 onCharClicked={onCharClicked}
@@ -454,7 +454,7 @@ export const ManageTeams = () => {
     return (
         <Stack spacing={2} className="p-4">
             <div className="flex items-start justify-between gap-4">
-                <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                 <div className="flex items-center gap-2">
                     <label className="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
                         Team Type
@@ -643,7 +643,7 @@ export const ManageTeams = () => {
                                 flexIndex={team.flexIndex}
                                 onCharClicked={() => {}}
                                 onMowClicked={() => {}}
-                                sizeMod={sizeMod}
+                                zoom={zoom}
                                 disabledUnits={[
                                     ...team.chars.map(
                                         char =>

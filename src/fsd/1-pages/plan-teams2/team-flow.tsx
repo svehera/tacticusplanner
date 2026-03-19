@@ -15,7 +15,7 @@ interface Props {
     mows: IMow2[];
     disabledUnits?: string[]; // List of character snowprintIds that should be shown as disabled
     flexIndex?: number;
-    sizeMod?: number;
+    zoom?: number;
     onCharClicked: (char: ICharacter2) => void;
     onMowClicked: (mow: IMow2) => void;
 }
@@ -25,7 +25,7 @@ export const TeamFlow: React.FC<Props> = ({
     mows,
     disabledUnits,
     flexIndex,
-    sizeMod = 1,
+    zoom = 1,
     onCharClicked,
     onMowClicked,
 }: Props) => {
@@ -34,7 +34,7 @@ export const TeamFlow: React.FC<Props> = ({
 
     return (
         <div
-            style={{ zoom: sizeMod }}
+            style={{ zoom }}
             className="w-full rounded-lg border-2 border-dashed border-slate-200 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-black/10">
             <div className="flex min-w-[120px] flex-1 flex-auto flex-wrap items-start gap-2">
                 {core.map(char => (
