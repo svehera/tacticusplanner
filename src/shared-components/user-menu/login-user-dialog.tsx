@@ -64,11 +64,11 @@ export const LoginUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose:
                                 login(response.data?.accessToken ?? '');
                                 onClose();
                             })
-                            .catch((err: AxiosError<IErrorResponse>) => {
-                                if (err.response?.status === 401) {
+                            .catch((error: AxiosError<IErrorResponse>) => {
+                                if (error.response?.status === 401) {
                                     enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                                } else if (err.response?.status === 400) {
-                                    alert(err.response.data.message);
+                                } else if (error.response?.status === 400) {
+                                    alert(error.response.data.message);
                                 } else {
                                     enqueueSnackbar('Something went wrong. Try again later', { variant: 'error' });
                                 }

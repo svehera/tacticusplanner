@@ -94,17 +94,17 @@ export const EquipmentIcon = ({
 
         getImageDimensions(getImageUrl(equipment.icon))
             .then(data => setEquipSize(data))
-            .catch(err => setEquipError(err))
+            .catch(error => setEquipError(error))
             .finally(() => setEquipIsLoading(false));
 
         getImageDimensions(frameDetails.file)
             .then(data => setFrameSize(data))
-            .catch(err => setFrameError(err))
+            .catch(error => setFrameError(error))
             .finally(() => setFrameIsLoading(false));
 
         getImageDimensions(relicDetails.file)
             .then(data => setRelicSize(data))
-            .catch(err => setRelicError(err))
+            .catch(error => setRelicError(error))
             .finally(() => setRelicIsLoading(false));
 
         // The dependency array [imageUrl] ensures this effect runs
