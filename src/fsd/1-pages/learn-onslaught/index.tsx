@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 import onslaughtData from '@/data/onslaught/data.generated.json';
 
 import { HomeScreenEventPlanner } from './home-screen-event-planner';
-import { SectorCard } from './SectorCard';
+import { SectorCard } from './sector-card';
 
 export const Onslaught = () => {
     const [queryParams, setQueryParams] = useSearchParams({ track: 'Imperial' });

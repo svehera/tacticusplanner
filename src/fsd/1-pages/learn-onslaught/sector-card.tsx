@@ -7,7 +7,7 @@ import powerIcon from '@/assets/images/icons/power.png';
 
 import { BadgeImage } from '@/fsd/5-shared/ui/icons';
 
-import { KillzoneList } from './KillzoneList';
+import { KillzoneList } from './killzone-list';
 import type { OnslaughtBadgeAlliance, OnslaughtSector } from './types';
 
 export function SectorCard({

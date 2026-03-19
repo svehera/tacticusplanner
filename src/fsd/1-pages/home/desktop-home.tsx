@@ -20,7 +20,7 @@ import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from
 
 import TokenAvailability from '@/fsd/1-pages/game-mode-tokens';
 
-import { useBmcWidget } from './useBmcWidget';
+import { useBmcWidget } from './use-bmc-widget';
 
 function formatMonthAndDay(date: Date): string {
     const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };

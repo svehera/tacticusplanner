@@ -3,7 +3,7 @@ import { Button, SxProps, Theme } from '@mui/material';
 import React from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-sync-with-tacticus';
 
 interface SyncButtonProps {
     showText: boolean;

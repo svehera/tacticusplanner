@@ -19,7 +19,7 @@ import { CharacterRaidGoalSelect, IEstimatedUpgrades } from '@/fsd/3-features/go
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/useSyncWithTacticus';
+import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-sync-with-tacticus';
 
 function addShardsToUpgrades(
     upgrades: Record<string, number>,

@@ -13,7 +13,7 @@ import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { INpcData, INpcStats } from '@/fsd/4-entities/npc/model';
 import { NpcPortrait } from '@/fsd/4-entities/npc/npc-portrait';
 import { NpcService } from '@/fsd/4-entities/npc/npc-service';
-import questJson from '@/fsd/4-entities/quests/data/heroQuests.json';
+import questJson from '@/fsd/4-entities/quests/data/hero-quests.json';
 import { IUnit, UnitsAutocomplete } from '@/fsd/4-entities/unit';
 import { UpgradesService as FsdUpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade';
 
