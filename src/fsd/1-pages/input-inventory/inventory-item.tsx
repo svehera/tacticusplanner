@@ -14,7 +14,7 @@ interface Props {
     dataUpdate: (upgradeId: string, value: number) => void;
 }
 
-const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
+export const InventoryItem: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
     const [amount, setAmount] = React.useState<number | ''>(data.quantity);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, upgradeId: string) => {
@@ -85,5 +85,3 @@ const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
         </div>
     );
 };
-
-export const InventoryItem = React.memo(InventoryItemFn);
