@@ -408,8 +408,8 @@ export const Guides: React.FC = () => {
         setGuidesFilter(filter);
 
         setSearchParams(
-            curr => {
-                const next = new URLSearchParams(curr);
+            current => {
+                const next = new URLSearchParams(current);
 
                 if (filter.subMods) {
                     next.set('subModes', filter.subMods.join(','));

@@ -71,10 +71,10 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
                 setHide(true);
             }, 3000);
 
-            setActiveContributorIndex(curr => {
+            setActiveContributorIndex(current => {
                 const increment = isMobile ? 1 : 3;
                 const maxStep = isMobile ? 0 : 2;
-                const nextContributorId = curr + increment;
+                const nextContributorId = current + increment;
 
                 return nextContributorId + maxStep > contributorsList.length - 1 ? 0 : nextContributorId;
             });

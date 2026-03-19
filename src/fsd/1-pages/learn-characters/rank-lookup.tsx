@@ -214,27 +214,27 @@ export const RankLookup = () => {
     const updateRankStart = (value: number) => {
         setRankStart(value);
 
-        setSearchParams(curr => {
-            curr.set('rankStart', Rank[value]);
-            return curr;
+        setSearchParams(current => {
+            current.set('rankStart', Rank[value]);
+            return current;
         });
     };
 
     const updateRankEnd = (value: number) => {
         setRankEnd(value);
 
-        setSearchParams(curr => {
-            curr.set('rankEnd', Rank[value]);
-            return curr;
+        setSearchParams(current => {
+            current.set('rankEnd', Rank[value]);
+            return current;
         });
     };
 
     const updateRankPoint5 = (value: boolean) => {
         setRankPoint5(value);
 
-        setSearchParams(curr => {
-            curr.set('rankPoint5', value + '');
-            return curr;
+        setSearchParams(current => {
+            current.set('rankPoint5', value + '');
+            return current;
         });
     };
 
@@ -303,14 +303,14 @@ export const RankLookup = () => {
                     onUnitChange={value => {
                         setCharacter(value);
 
-                        setSearchParams(curr => {
+                        setSearchParams(current => {
                             if (value) {
-                                curr.set('character', value.name);
+                                current.set('character', value.name);
                             } else {
-                                curr.delete('character');
+                                current.delete('character');
                             }
 
-                            return curr;
+                            return current;
                         });
                     }}
                 />

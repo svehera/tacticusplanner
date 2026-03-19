@@ -41,7 +41,9 @@ export const RegisterUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClo
                             id="username-input"
                             inputProps={{ pattern: usernamePattern }}
                             autoComplete="off"
-                            onChange={event => setRegisterForm(curr => ({ ...curr, username: event.target.value }))}
+                            onChange={event =>
+                                setRegisterForm(current => ({ ...current, username: event.target.value }))
+                            }
                         />
                         <FormHelperText id="username-helper-text">
                             Should be between 3 to 20 characters long. Only [a-zA-Z0-9_-] characters are allowed.
@@ -53,7 +55,9 @@ export const RegisterUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClo
                             id="password-input"
                             type="password"
                             autoComplete="new-password"
-                            onChange={event => setRegisterForm(curr => ({ ...curr, password: event.target.value }))}
+                            onChange={event =>
+                                setRegisterForm(current => ({ ...current, password: event.target.value }))
+                            }
                         />
                         <FormHelperText id="password-helper-text">
                             Should be between 5 to 64 characters long.
@@ -66,7 +70,7 @@ export const RegisterUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClo
                             type="password"
                             autoComplete="new-password"
                             onChange={event =>
-                                setRegisterForm(curr => ({ ...curr, confirmPassword: event.target.value }))
+                                setRegisterForm(current => ({ ...current, confirmPassword: event.target.value }))
                             }
                         />
                     </FormControl>

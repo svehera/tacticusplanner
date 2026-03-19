@@ -38,7 +38,7 @@ export const LoginUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose:
                         <InputLabel htmlFor="username-input">Username</InputLabel>
                         <Input
                             id="username-input"
-                            onChange={event => setLoginForm(curr => ({ ...curr, username: event.target.value }))}
+                            onChange={event => setLoginForm(current => ({ ...current, username: event.target.value }))}
                         />
                     </FormControl>
                     <FormControl required fullWidth variant={'standard'}>
@@ -46,7 +46,7 @@ export const LoginUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose:
                         <Input
                             id="password-input"
                             type="password"
-                            onChange={event => setLoginForm(curr => ({ ...curr, password: event.target.value }))}
+                            onChange={event => setLoginForm(current => ({ ...current, password: event.target.value }))}
                         />
                     </FormControl>
                 </Box>

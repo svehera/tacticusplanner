@@ -49,21 +49,21 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
     const select = () => onClose(lineup, mow);
 
     const handleCharacterSelect = (unit: IUnit) => {
-        setLineup(curr => {
-            if (curr.some(x => x.id === unit.id)) {
-                return curr.filter(x => x.id !== unit.id);
+        setLineup(current => {
+            if (current.some(x => x.id === unit.id)) {
+                return current.filter(x => x.id !== unit.id);
             } else {
-                if (curr.length === units.length) {
-                    return curr;
+                if (current.length === units.length) {
+                    return current;
                 }
 
                 const newChar = units.find(x => x.id === unit.id);
 
                 if (newChar && isCharacter(newChar)) {
-                    return [...curr, newChar];
+                    return [...current, newChar];
                 }
 
-                return curr;
+                return current;
             }
         });
 

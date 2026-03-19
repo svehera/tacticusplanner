@@ -16,11 +16,11 @@ export class GoalsEstimateService {
         // It intentionally ignores unrelated fields, combining only 'oTokensTotal', 'daysLeft', and 'daysTotal'
         // to produce a unified aggregate estimate for these specific goal types.
         return estimates.reduce<IGoalEstimateAggregate>(
-            (acc, curr) => {
+            (acc, current) => {
                 return {
-                    oTokensTotal: acc.oTokensTotal + (curr.oTokensTotal ?? 0),
-                    daysLeft: Math.max(acc.daysLeft, curr.daysLeft ?? 0),
-                    daysTotal: Math.max(acc.daysTotal, curr.daysTotal ?? 0),
+                    oTokensTotal: acc.oTokensTotal + (current.oTokensTotal ?? 0),
+                    daysLeft: Math.max(acc.daysLeft, current.daysLeft ?? 0),
+                    daysTotal: Math.max(acc.daysTotal, current.daysTotal ?? 0),
                 };
             },
             { oTokensTotal: 0, daysLeft: 0, daysTotal: 0 }

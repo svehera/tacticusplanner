@@ -217,17 +217,17 @@ export const Goals = () => {
         if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
             const aggregated = GoalsEstimateFunction.getAggregatedGoalEstimate(group) as Partial<IGoalEstimate>;
 
-            const merged = group.reduce((acc, curr) => ({
+            const merged = group.reduce((acc, current) => ({
                 ...acc,
-                ...curr,
+                ...current,
                 // Preserve/merge specific per-row fields across the group
-                mowEstimate: acc.mowEstimate || curr.mowEstimate,
-                xpEstimate: acc.xpEstimate || curr.xpEstimate,
-                abilitiesEstimate: acc.abilitiesEstimate || curr.abilitiesEstimate,
-                xpEstimateAbilities: acc.xpEstimateAbilities || curr.xpEstimateAbilities,
-                completed: acc.completed || curr.completed,
-                blocked: acc.blocked || curr.blocked,
-                included: acc.included || curr.included,
+                mowEstimate: acc.mowEstimate || current.mowEstimate,
+                xpEstimate: acc.xpEstimate || current.xpEstimate,
+                abilitiesEstimate: acc.abilitiesEstimate || current.abilitiesEstimate,
+                xpEstimateAbilities: acc.xpEstimateAbilities || current.xpEstimateAbilities,
+                completed: acc.completed || current.completed,
+                blocked: acc.blocked || current.blocked,
+                included: acc.included || current.included,
             }));
 
             return {
@@ -241,9 +241,9 @@ export const Goals = () => {
         return first;
     });
 
-    const totalGoldAbilities = (mergedGoalEstimates as IGoalEstimate[]).reduce((acc, curr) => {
-        const abilityGold = curr.abilitiesEstimate?.gold ?? 0;
-        const xpGold = curr.xpEstimateAbilities?.gold ?? 0;
+    const totalGoldAbilities = (mergedGoalEstimates as IGoalEstimate[]).reduce((acc, current) => {
+        const abilityGold = current.abilitiesEstimate?.gold ?? 0;
+        const xpGold = current.xpEstimateAbilities?.gold ?? 0;
         return acc + abilityGold + xpGold;
     }, 0);
     const hasSync = !!userInfo.tacticusApiKey;
