@@ -21,6 +21,14 @@ export class MowLookupService {
             [Rarity.Legendary]: 0,
             [Rarity.Mythic]: 0,
         };
+        const orbs: Record<Rarity, number> = {
+            [Rarity.Common]: 0,
+            [Rarity.Uncommon]: 0,
+            [Rarity.Rare]: 0,
+            [Rarity.Epic]: 0,
+            [Rarity.Legendary]: 0,
+            [Rarity.Mythic]: 0,
+        };
         const forgeBadges: Record<Rarity, number> = {
             [Rarity.Common]: 0,
             [Rarity.Uncommon]: 0,
@@ -32,6 +40,7 @@ export class MowLookupService {
         for (const material of materials) {
             badges[material.rarity] += material.badges;
             forgeBadges[material.rarity] += material.forgeBadges;
+            orbs[material.rarity] += material.orbs;
         }
 
         return {
@@ -40,6 +49,7 @@ export class MowLookupService {
             gold,
             badges,
             forgeBadges,
+            orbs,
         };
     }
 
