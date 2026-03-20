@@ -119,10 +119,8 @@ export class CampaignsService {
             const reward = this.getReward(battle);
             const config = campaignConfigs[battle.campaignType as CampaignType];
             const recipe = recipeDataByName[reward];
-            if (!recipe) {
-                if (reward.length > 0 && !reward.startsWith('shards_') && !reward.startsWith('mythicShards_')) {
-                    console.warn('no recipe found', reward, battle);
-                }
+            if (!recipe && reward.length > 0 && !reward.startsWith('shards_') && !reward.startsWith('mythicShards_')) {
+                console.warn('no recipe found', reward, battle);
             }
             let dropRate = 0;
             const guaranteed = battle.rewards.guaranteed.find(x => x.id == reward);
@@ -252,52 +250,42 @@ export class CampaignsService {
             return false;
         }
 
-        if (enemiesTypes?.length) {
-            if (!location.enemiesTypes.some(enemyType => enemiesTypes.includes(enemyType))) {
-                return false;
-            }
+        if (enemiesTypes?.length && !location.enemiesTypes.some(enemyType => enemiesTypes.includes(enemyType))) {
+            return false;
         }
 
-        if (slotsCount && slotsCount.length > 0) {
-            if (!slotsCount.includes(location.slots ?? 5)) {
-                return false;
-            }
+        if (slotsCount && slotsCount.length > 0 && !slotsCount.includes(location.slots ?? 5)) {
+            return false;
         }
 
-        if (upgradesRarity.length > 0 && materialRarity != undefined) {
-            if (!upgradesRarity.includes(materialRarity)) {
-                return false;
-            }
+        if (upgradesRarity.length > 0 && materialRarity != undefined && !upgradesRarity.includes(materialRarity)) {
+            return false;
         }
 
-        if (campaignTypes.length > 0) {
-            if (!campaignTypes.includes(location.campaignType)) {
-                return false;
-            }
+        if (campaignTypes.length > 0 && !campaignTypes.includes(location.campaignType)) {
+            return false;
         }
 
-        if (alliesAlliance.length > 0) {
-            if (!alliesAlliance.includes(location.alliesAlliance)) {
-                return false;
-            }
+        if (alliesAlliance.length > 0 && !alliesAlliance.includes(location.alliesAlliance)) {
+            return false;
         }
 
-        if (alliesFactions.length > 0) {
-            if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
-                return false;
-            }
+        if (alliesFactions.length > 0 && !location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
+            return false;
         }
 
-        if (enemiesAlliance.length > 0) {
-            if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
-                return false;
-            }
+        if (
+            enemiesAlliance.length > 0 &&
+            !location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))
+        ) {
+            return false;
         }
 
-        if (enemiesFactions.length > 0) {
-            if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
-                return false;
-            }
+        if (
+            enemiesFactions.length > 0 &&
+            !location.enemiesFactions.some(faction => enemiesFactions.includes(faction))
+        ) {
+            return false;
         }
 
         return true;
