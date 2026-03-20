@@ -160,10 +160,10 @@ export class ShardsService {
 
         const result: ICharacterShardsEstimate[] = [];
 
-        for (let index_ = 0; index_ < materials.length; index_++) {
-            const material = materials[index_];
+        for (let materialIndex = 0; materialIndex < materials.length; materialIndex++) {
+            const material = materials[materialIndex];
             const previousShardsTokens = sum(
-                result.filter((_, index) => index < index_).map(x => x.onslaughtTokensTotal)
+                result.filter((_, index) => index < materialIndex).map(x => x.onslaughtTokensTotal)
             );
             const unlockedLocations = material.possibleLocations.filter(location => {
                 const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign);

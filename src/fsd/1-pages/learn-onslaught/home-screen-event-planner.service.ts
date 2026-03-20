@@ -202,7 +202,7 @@ export class HomeScreenEventPlannerService {
                 track === OnslaughtTrackId.Imperial ? imperial : track === OnslaughtTrackId.Xenos ? xenos : chaos;
 
             if (nextBattle === undefined) continue;
-            for (let index_ = 0; index_ < preEventTokensToUse + duringEventTokensToUse; ++index_) {
+            for (let tokenIndex = 0; tokenIndex < preEventTokensToUse + duringEventTokensToUse; ++tokenIndex) {
                 const zoneData = onslaughtData[nextBattle.track].sectors[nextBattle.sector].killzones[
                     nextBattle.zone
                 ] as OnslaughtKillzone;
@@ -210,7 +210,7 @@ export class HomeScreenEventPlannerService {
                 nextBattle = this.getBattleAfter(onslaughtData, nextBattle.track, nextBattle.sector, nextBattle.zone);
                 if (!nextBattle) break;
                 enemies.push(zoneData.totalEnemyCount);
-                rollingTotal.push(enemies[index_] + (rollingTotal[index_ - 1] || 0));
+                rollingTotal.push(enemies[tokenIndex] + (rollingTotal[tokenIndex - 1] || 0));
             }
         }
 
@@ -316,13 +316,13 @@ export class HomeScreenEventPlannerService {
                 track === OnslaughtTrackId.Imperial ? imperial : track === OnslaughtTrackId.Xenos ? xenos : chaos;
 
             if (nextBattle === undefined) continue;
-            for (let index_ = 0; index_ < preEventTokensToUse + duringEventTokensToUse; ++index_) {
+            for (let tokenIndex = 0; tokenIndex < preEventTokensToUse + duringEventTokensToUse; ++tokenIndex) {
                 const zoneData = onslaughtData[nextBattle.track].sectors[nextBattle.sector].killzones[
                     nextBattle.zone
                 ] as OnslaughtKillzone;
                 if (!zoneData) break;
                 enemies.push(zoneData.totalEnemyCount);
-                rollingTotal.push(enemies[index_] + (rollingTotal[index_ - 1] || 0));
+                rollingTotal.push(enemies[tokenIndex] + (rollingTotal[tokenIndex - 1] || 0));
                 nextBattle = this.getBattleAfter(onslaughtData, nextBattle.track, nextBattle.sector, nextBattle.zone);
                 if (!nextBattle) break;
             }

@@ -19,8 +19,8 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
 
     const shuffleArray = (array: any[]): void => {
         for (let index = array.length - 1; index > 0; index--) {
-            const index_ = Math.floor(Math.random() * (index + 1));
-            [array[index], array[index_]] = [array[index_], array[index]];
+            const randomIndex = Math.floor(Math.random() * (index + 1));
+            [array[index], array[randomIndex]] = [array[randomIndex], array[index]];
         }
     };
 

@@ -181,8 +181,8 @@ export class RosterSnapshotsService {
             );
         }
         let currentSnapshot = rosterSnapshots.base!;
-        for (let index_ = 0; index_ <= index; index_++) {
-            const diff = rosterSnapshots.diffs[index_];
+        for (let snapshotIndex = 0; snapshotIndex <= index; snapshotIndex++) {
+            const diff = rosterSnapshots.diffs[snapshotIndex];
             if (!diff) {
                 throw new Error('Index out of bounds.');
             }
