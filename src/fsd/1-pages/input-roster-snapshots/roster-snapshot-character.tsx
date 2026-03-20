@@ -143,9 +143,7 @@ export const RosterSnapshotCharacter = ({
             return <div style={{ width: equipmentHeight, height: equipmentHeight }} />;
         }
 
-        const imageUrl = getImageUrl(
-            `snowprint_assets/equipment/ui_icon_itemtype_${type?.substring(2).toLowerCase()}.png`
-        );
+        const imageUrl = getImageUrl(`snowprint_assets/equipment/ui_icon_itemtype_${type?.slice(2).toLowerCase()}.png`);
 
         return (
             <div className="relative" style={{ width: equipmentHeight, height: equipmentHeight }}>
