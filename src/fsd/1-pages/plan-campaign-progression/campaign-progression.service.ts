@@ -510,7 +510,7 @@ export class CampaignsProgressionService {
     ): ICampaignBattleComposed | undefined {
         if (farmData === undefined) return undefined;
         if (battle.campaignType != CampaignType.Elite) return undefined;
-        const baseCampaign = battle.campaign.substring(0, battle.campaign.length - 6);
+        const baseCampaign = battle.campaign.slice(0, Math.max(0, battle.campaign.length - 6));
         let result: ICampaignBattleComposed | undefined = undefined;
         for (const x of farmData.unfarmableLocations) {
             if (x.campaign == baseCampaign && this.getReward(x) == this.getReward(battle)) result = x;

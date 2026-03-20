@@ -149,7 +149,7 @@ export const HomeScreenEvent = () => {
         const upgrade = UpgradesService.getUpgrade(reward);
         if (!upgrade) return reward;
         if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-            const char = CharactersService.getUnit(reward.substring(reward.indexOf('_') + 1));
+            const char = CharactersService.getUnit(reward.slice(Math.max(0, reward.indexOf('_') + 1)));
             if (char) {
                 return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />;
             }

@@ -24,12 +24,12 @@ interface WaveDisplayProps {
 // Extracted Logic: Resolve string to data object
 const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
     const colon = enemyString.indexOf(':');
-    const id = colon !== -1 ? enemyString.substring(0, colon) : enemyString;
+    const id = colon !== -1 ? enemyString.slice(0, Math.max(0, colon)) : enemyString;
 
     // Calculate index
     let progressionIndex = 0;
     if (colon !== -1) {
-        const pString = enemyString.substring(colon + 1);
+        const pString = enemyString.slice(Math.max(0, colon + 1));
         const pInt = parseInt(pString, 10);
         progressionIndex = isNaN(pInt) ? 0 : pInt;
     }
