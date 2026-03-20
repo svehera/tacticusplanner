@@ -68,7 +68,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                 rarity: +rarity,
                 items: map(
                     groupBy(
-                        items.filter(x => !x.craftable).filter(x => x.material.indexOf('Coming soon') === -1),
+                        items.filter(x => !x.craftable).filter(x => !x.material.includes('Coming soon')),
                         'alphabet'
                     ),
                     (subItems, letter) => ({

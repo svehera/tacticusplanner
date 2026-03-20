@@ -499,7 +499,7 @@ export const MasterTable = () => {
                         }>
                         {LegendaryEventService.getUnfinishedEvents().map(x => (
                             <MenuItem key={x.id} value={x.id}>
-                                <Checkbox checked={activeLegendaryEvents.indexOf(x.id) > -1} />
+                                <Checkbox checked={activeLegendaryEvents.includes(x.id)} />
                                 <ListItemIcon>
                                     <UnitShardIcon
                                         icon={CharactersService.resolveCharacter(x.unitSnowprintId).roundIcon}
@@ -514,7 +514,7 @@ export const MasterTable = () => {
 
                         {CharactersService.inactiveLres.map(x => (
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
-                                <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
+                                <Checkbox checked={activeLegendaryEvents.includes(x.lre!.id)} />
                                 <ListItemIcon>
                                     <UnitShardIcon icon={x.roundIcon} height={30} />
                                 </ListItemIcon>
