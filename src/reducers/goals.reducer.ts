@@ -57,7 +57,8 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             }
             // Create a new array instead of mutating the existing state with splice
             const newState = [...state];
-            newState.splice(action.goal.priority - 1, 0, action.goal);
+            const targetIndex = Math.max(0, Math.min(action.goal.priority - 1, newState.length));
+            newState.splice(targetIndex, 0, action.goal);
 
             // Return a new array with re-indexed priorities to ensure reactivity
             return newState.map((x, index) => ({
@@ -76,6 +77,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const existingGoalIndex = state.findIndex(x => x.id === updatedGoal.goalId);
 
             if (existingGoalIndex < 0) return state;
+            const existingGoal = state[existingGoalIndex];
 
             const newGoalData = GoalsService.convertToGenericGoal(updatedGoal);
             if (!newGoalData) return state;
@@ -88,9 +90,9 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const targetIndex = Math.max(0, Math.min(updatedGoal.priority - 1, filteredState.length));
 
             filteredState.splice(targetIndex, 0, {
+                ...existingGoal,
                 ...newGoalData,
                 id: updatedGoal.goalId,
-                priority: updatedGoal.priority,
             });
 
             // 3. Re-index 1..N based on the new physical order
