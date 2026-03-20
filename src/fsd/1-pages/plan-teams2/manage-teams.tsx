@@ -337,12 +337,12 @@ export const ManageTeams = () => {
             team.horde = hordeModeSelected ? true : undefined;
             team.notes = notes;
             team.flexIndex = flexIndex;
-            const currentTeams_ = [...teams];
-            currentTeams_.forEach(t => {
+            const editingTeams = [...teams];
+            editingTeams.forEach(t => {
                 if (t.name !== editingTeam.name) return;
                 t = team;
             });
-            dispatch.teams2({ type: 'Set', value: cloneDeep(currentTeams_) });
+            dispatch.teams2({ type: 'Set', value: cloneDeep(editingTeams) });
         } else {
             const newTeam: ITeam2 = {
                 name: teamName.trim(),
