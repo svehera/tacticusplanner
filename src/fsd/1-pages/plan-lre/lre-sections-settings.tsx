@@ -69,9 +69,8 @@ export const LreSectionsSettings: React.FC<Props> = ({ lreViewSettings, save }) 
         }
     }, []);
 
-    return !isMobile ? (
-        <div className="flex-box gap5 wrap">{lreSectionOptions.map(renderOption)}</div>
-    ) : (
+    if (!isMobile) return <div className="flex-box gap5 wrap">{lreSectionOptions.map(renderOption)}</div>;
+    return (
         <FormControl className="pl-4">
             <RadioGroup
                 row

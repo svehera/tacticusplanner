@@ -34,9 +34,9 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
                                     return (
                                         <span key={index}>
                                             Guaranteed: {reward.id}{' '}
-                                            {reward.min !== reward.max
-                                                ? reward.min + ' - ' + reward.max
-                                                : ': ' + reward.min}
+                                            {reward.min === reward.max
+                                                ? ': ' + reward.min
+                                                : reward.min + ' - ' + reward.max}
                                         </span>
                                     );
                                 })}

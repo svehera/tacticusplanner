@@ -367,7 +367,7 @@ export const ManageTeams = () => {
     const onAddChar = (snowprintId: string) => {
         const flex = flexIndex ?? selectedChars.length;
         setSelectedChars([...selectedChars.slice(0, flex), snowprintId, ...selectedChars.slice(flex)]);
-        setFlexIndex(flexIndex !== undefined ? flexIndex + 1 : undefined);
+        setFlexIndex(flexIndex === undefined ? undefined : flexIndex + 1);
     };
 
     const onAddMow = (snowprintId: string) => {

@@ -135,15 +135,15 @@ export class PersonalDataLocalStorage {
         } else {
             // no version (convert v1 to v2)
             const v1StoredData = localStorage.getItem(this.v1personalDataStorageKey);
-            if (!v1StoredData) {
-                result = defaultData;
-            } else {
+            if (v1StoredData) {
                 try {
                     const v1Data: IPersonalData | IPersonalData2 = JSON.parse(v1StoredData);
                     result = convertData(v1Data);
                 } catch {
                     result = defaultData;
                 }
+            } else {
+                result = defaultData;
             }
         }
         return result;
@@ -165,15 +165,12 @@ export class PersonalDataLocalStorage {
 
     restoreData(): IPersonalData2 | null {
         const backup = localStorage.getItem(this.backupKey);
-        if (!backup) {
+        if (!backup) return null;
+        try {
+            const data: IPersonalData | IPersonalData2 = JSON.parse(backup);
+            return convertData(data);
+        } catch {
             return null;
-        } else {
-            try {
-                const data: IPersonalData | IPersonalData2 = JSON.parse(backup);
-                return convertData(data);
-            } catch {
-                return null;
-            }
         }
     }
 

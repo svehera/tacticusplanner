@@ -539,7 +539,7 @@ export class UpgradesService {
         >
     ): { upgradesRaids: IUpgradesRaidsDay[]; remainingMats: Record<string, ICombinedUpgrade> } {
         const returnValue: IUpgradesRaidsDay[] = [];
-        let onslaughtTokens = settings.onslaughtTokensToday !== undefined ? settings.onslaughtTokensToday : 1;
+        let onslaughtTokens = settings.onslaughtTokensToday === undefined ? 1 : settings.onslaughtTokensToday;
         let remainingMats: Record<string, ICombinedUpgrade> = {};
 
         for (const [id, upgrade] of Object.entries(combinedBaseMaterials)) {
@@ -977,31 +977,7 @@ export class UpgradesService {
             energySpent: raidsToPerform * loc.energyCost,
             isShardsLocation: upgradeId.startsWith('shards_') || upgradeId.startsWith('mythicShards_'),
         };
-        if (existingRaid !== undefined) {
-            if (existingRaidLoc) {
-                existingRaidLoc.raidsAlreadyPerformed = raidsAlreadyDone;
-                existingRaidLoc.raidsToPerform += raidLoc.raidsToPerform;
-                existingRaidLoc.farmedItems += raidLoc.farmedItems;
-                existingRaidLoc.energySpent += raidLoc.energySpent;
-            } else {
-                existingRaid.raidLocations.push(raidLoc);
-            }
-            existingRaid.energyTotal += raidLoc.energySpent;
-            existingRaid.raidsTotal += raidLoc.raidsToPerform;
-            const relatedCharacters = options?.goal ? [options.goal.unitId] : mat.relatedCharacters;
-            const relatedGoals = options?.goal ? [options.goal.goalId] : mat.relatedGoals;
-            existingRaid.relatedCharacters = uniq([...existingRaid.relatedCharacters, ...relatedCharacters]);
-            existingRaid.relatedGoals = uniq([...existingRaid.relatedGoals, ...relatedGoals]);
-            if (options?.goal) {
-                if (!existingRaid.countByGoalId) {
-                    existingRaid.countByGoalId = {
-                        [options.goal.goalId]: mat.countByGoalId[options.goal.goalId] ?? 0,
-                    };
-                }
-            } else if (!existingRaid.countByGoalId) {
-                existingRaid.countByGoalId = { ...mat.countByGoalId };
-            }
-        } else {
+        if (existingRaid === undefined) {
             const relatedCharacters = options?.goal ? [options.goal.unitId] : mat.relatedCharacters;
             const relatedGoals = options?.goal ? [options.goal.goalId] : mat.relatedGoals;
             const requiredCount = options?.goal
@@ -1037,6 +1013,30 @@ export class UpgradesService {
                 stat: mat.stat,
                 countByGoalId,
             } as IUpgradeRaid);
+        } else {
+            if (existingRaidLoc) {
+                existingRaidLoc.raidsAlreadyPerformed = raidsAlreadyDone;
+                existingRaidLoc.raidsToPerform += raidLoc.raidsToPerform;
+                existingRaidLoc.farmedItems += raidLoc.farmedItems;
+                existingRaidLoc.energySpent += raidLoc.energySpent;
+            } else {
+                existingRaid.raidLocations.push(raidLoc);
+            }
+            existingRaid.energyTotal += raidLoc.energySpent;
+            existingRaid.raidsTotal += raidLoc.raidsToPerform;
+            const relatedCharacters = options?.goal ? [options.goal.unitId] : mat.relatedCharacters;
+            const relatedGoals = options?.goal ? [options.goal.goalId] : mat.relatedGoals;
+            existingRaid.relatedCharacters = uniq([...existingRaid.relatedCharacters, ...relatedCharacters]);
+            existingRaid.relatedGoals = uniq([...existingRaid.relatedGoals, ...relatedGoals]);
+            if (options?.goal) {
+                if (!existingRaid.countByGoalId) {
+                    existingRaid.countByGoalId = {
+                        [options.goal.goalId]: mat.countByGoalId[options.goal.goalId] ?? 0,
+                    };
+                }
+            } else if (!existingRaid.countByGoalId) {
+                existingRaid.countByGoalId = { ...mat.countByGoalId };
+            }
         }
         inventory[upgradeId] = (inventory[upgradeId] ?? 0) + toAdd;
         return energy - raidsToPerform * loc.energyCost;

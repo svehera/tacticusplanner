@@ -228,16 +228,12 @@ export const LearnCharacters = () => {
                 return filter.traits.every(label => {
                     const key = getTraitStringFromLabel(label);
                     if (!key) return false;
-                    if (key !== 'Mechanical') {
-                        const includes = nodeTraits.includes(key);
-                        return includes;
-                    } else {
-                        const includesMech = nodeTraits.includes('Mechanical');
-                        const includesLiving = nodeTraits.includes('LivingMetal');
-                        const result = includesMech || includesLiving;
+                    if (key !== 'Mechanical') return nodeTraits.includes(key);
+                    const includesMech = nodeTraits.includes('Mechanical');
+                    const includesLiving = nodeTraits.includes('LivingMetal');
+                    const result = includesMech || includesLiving;
 
-                        return result;
-                    }
+                    return result;
                 });
             };
 

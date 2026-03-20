@@ -74,7 +74,11 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
                 </div>
 
                 {/* Ranged Profile (Conditional) */}
-                {npc.rangeDamage !== undefined ? (
+                {npc.rangeDamage === undefined ? (
+                    <div className="flex items-center justify-center rounded-lg border border-dashed border-gray-300 p-4 dark:border-slate-700">
+                        <span className="text-sm text-gray-400">No Ranged Attack</span>
+                    </div>
+                ) : (
                     <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-slate-700 dark:bg-slate-800/50">
                         <div className="flex items-center gap-4">
                             {/* Relative Container to stack Number on top of Icon */}
@@ -96,10 +100,6 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
                                 <span>{npc.rangeHits!}</span>
                             </div>
                         </div>
-                    </div>
-                ) : (
-                    <div className="flex items-center justify-center rounded-lg border border-dashed border-gray-300 p-4 dark:border-slate-700">
-                        <span className="text-sm text-gray-400">No Ranged Attack</span>
                     </div>
                 )}
             </div>

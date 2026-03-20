@@ -72,7 +72,7 @@ export const Resources = () => {
     ) => {
         const clickableClass = onClick ? 'cursor-pointer transition-all duration-150' : '';
         const hoverClass = onClick ? 'hover:scale-105 hover:bg-gray-700/50' : '';
-        const disabledClass = !isEnabled ? 'grayscale opacity-40' : '';
+        const disabledClass = isEnabled ? '' : 'grayscale opacity-40';
 
         return (
             <div

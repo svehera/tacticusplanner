@@ -188,19 +188,19 @@ export class UpgradesService {
                 moreToExpand = true;
                 break;
             }
-            if (!expandedRecipeData[recipeItem.id].crafted) {
-                // Simple ingredient, just add it.
-                this.addIngredientsToExpandedRecipe(expandedRecipe, {
-                    material: recipeItem.id,
-                    count: recipeItem.count,
-                });
-            } else {
+            if (expandedRecipeData[recipeItem.id].crafted) {
                 for (const [material, count] of Object.entries(expandedRecipeData[recipeItem.id].expandedRecipe)) {
                     this.addIngredientsToExpandedRecipe(expandedRecipe, {
                         material: material,
                         count: recipeItem.count * count,
                     });
                 }
+            } else {
+                // Simple ingredient, just add it.
+                this.addIngredientsToExpandedRecipe(expandedRecipe, {
+                    material: recipeItem.id,
+                    count: recipeItem.count,
+                });
             }
         }
         if (moreToExpand) return null;
@@ -217,10 +217,7 @@ export class UpgradesService {
         const inventoryUpdate: Record<string, number> = {};
 
         const processUpgrade = (upgrade: IBaseUpgrade | ICraftedUpgrade, count: number): void => {
-            if (!upgrade.crafted) {
-                // Base upgrade, simply decrement
-                inventoryUpdate[upgrade.id] = (inventoryUpdate[upgrade.id] ?? 0) + count;
-            } else {
+            if (upgrade.crafted) {
                 // Crafted upgrade
                 const availableCount = inventory[upgrade.id] ?? 0;
 
@@ -244,6 +241,9 @@ export class UpgradesService {
                         processUpgrade(upgradeData, recipeItem.count * remainingCount);
                     }
                 }
+            } else {
+                // Base upgrade, simply decrement
+                inventoryUpdate[upgrade.id] = (inventoryUpdate[upgrade.id] ?? 0) + count;
             }
         };
 
@@ -502,24 +502,8 @@ export class UpgradesService {
                     rarity: RarityMapper.stringToNumber[RarityString.Common],
                 };
                 return item;
-            } else if (!upgrade.recipe?.length) {
-                const item: IMaterialRecipeIngredientFull = {
-                    id: materialId,
-                    snowprintId: upgrade.snowprintId,
-                    label: upgrade?.label ?? upgrade?.material ?? materialId,
-                    count,
-                    rarity: RarityMapper.stringToNumber[upgrade?.rarity as RarityString],
-                    stat: upgrade?.stat ?? '',
-                    locations: locations,
-                    craftable: upgrade?.craftable,
-                    locationsComposed: locations.map(x => CampaignsService.campaignsComposed[x]),
-                    iconPath: upgrade?.icon ?? '',
-                    characters: [],
-                    priority: 0,
-                };
-                allMaterials.push(item);
-                return item;
-            } else {
+            }
+            if (upgrade.recipe?.length)
                 return {
                     id: materialId,
                     snowprintId: upgrade.snowprintId,
@@ -535,23 +519,28 @@ export class UpgradesService {
                     characters: [],
                     priority: 0,
                 };
-            }
+
+            const item: IMaterialRecipeIngredientFull = {
+                id: materialId,
+                snowprintId: upgrade.snowprintId,
+                label: upgrade?.label ?? upgrade?.material ?? materialId,
+                count,
+                rarity: RarityMapper.stringToNumber[upgrade?.rarity as RarityString],
+                stat: upgrade?.stat ?? '',
+                locations: locations,
+                craftable: upgrade?.craftable,
+                locationsComposed: locations.map(x => CampaignsService.campaignsComposed[x]),
+                iconPath: upgrade?.icon ?? '',
+                characters: [],
+                priority: 0,
+            };
+            allMaterials.push(item);
+            return item;
         };
 
         for (const upgradeName of upgrades) {
             const upgrade = recipeDataByName[upgradeName];
-            if (!upgrade.craftable) {
-                result[upgradeName] = {
-                    id: upgrade.material,
-                    snowprintId: upgrade.snowprintId,
-                    label: upgrade.label ?? upgrade.material,
-                    stat: upgrade.stat,
-                    rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
-                    craftable: upgrade.craftable,
-                    allMaterials: [getRecipe(upgrade.snowprintId, 1, [])],
-                    iconPath: upgrade.icon ?? '',
-                };
-            } else {
+            if (upgrade.craftable) {
                 const allMaterials: IMaterialRecipeIngredientFull[] = [];
                 result[upgradeName] = {
                     id: upgrade.material,
@@ -582,6 +571,17 @@ export class UpgradesService {
                     characters: [],
                     priority: 0,
                 }));
+            } else {
+                result[upgradeName] = {
+                    id: upgrade.material,
+                    snowprintId: upgrade.snowprintId,
+                    label: upgrade.label ?? upgrade.material,
+                    stat: upgrade.stat,
+                    rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
+                    craftable: upgrade.craftable,
+                    allMaterials: [getRecipe(upgrade.snowprintId, 1, [])],
+                    iconPath: upgrade.icon ?? '',
+                };
             }
         }
 

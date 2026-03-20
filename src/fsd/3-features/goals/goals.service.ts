@@ -185,9 +185,7 @@ export class GoalsService {
             );
             if (!blockedEntry) {
                 estimate.blocked = false;
-            } else if (!isGoalPriority) {
-                estimate.blocked = true;
-            } else {
+            } else if (isGoalPriority) {
                 const available = blockedEntry.acquiredCount ?? 0;
                 const allGoals = [...shardsGoals, ...upgradeRankOrMowGoals];
                 const goalPriorityMap = new Map(allGoals.map(g => [g.goalId, g.priority]));
@@ -207,6 +205,8 @@ export class GoalsService {
                 }, 0);
 
                 estimate.blocked = isGoalPriority && available < requiredForHigher + requiredForThisGoal;
+            } else {
+                estimate.blocked = true;
             }
             estimate.completed =
                 !estimate.blocked && estimate.included && estimate.oTokensTotal === 0 && estimate.energyTotal === 0;
