@@ -405,15 +405,12 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             const timeReloading = now - tokenStatus.reloadStart;
             const cooldown = millisecondsPerToken - timeReloading;
             const hoursCooldown = Math.round(cooldown / HOUR);
-            if (tokenStatus.count > 0) {
-                return (
-                    <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
-                        {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''}, {hoursCooldown}h cooldown
-                    </span>
-                );
-            } else {
-                return <span className="text-sm">no token, {hoursCooldown}h cooldown</span>;
-            }
+            if (tokenStatus.count === 0) return <span className="text-sm">no token, {hoursCooldown}h cooldown</span>;
+            return (
+                <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
+                    {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''}, {hoursCooldown}h cooldown
+                </span>
+            );
         }
     };
 
@@ -444,11 +441,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 const timeReloading = Date.now() - tokenStatus.reloadStart;
                 const cooldown = millisecondsPerToken - timeReloading;
                 const hoursCooldown = Math.round(cooldown / HOUR);
-                if (tokenStatus.count > 0) {
-                    return `${tokenStatus.count} token${tokenStatus.count > 1 ? 's' : ''}, ${hoursCooldown}h cooldown`;
-                } else {
-                    return `no token, ${hoursCooldown}h cooldown`;
-                }
+                if (tokenStatus.count === 0) return `no token, ${hoursCooldown}h cooldown`;
+                return `${tokenStatus.count} token${tokenStatus.count > 1 ? 's' : ''}, ${hoursCooldown}h cooldown`;
             },
             sortable: true,
             comparator: (tokenStatus1: TokenStatus, tokenStatus2: TokenStatus) => {
@@ -461,11 +455,9 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             },
             width: 120,
             tooltipValueGetter: (parameter: ITooltipParams) => {
-                if (parameter.data.tokenStatus.exact) {
-                    return 'Token estimation should be exact unless tokens were lost or restored';
-                } else {
-                    return 'Token estimation is pessimistic by up to 12 hours';
-                }
+                return parameter.data.tokenStatus.exact
+                    ? 'Token estimation should be exact unless tokens were lost or restored'
+                    : 'Token estimation is pessimistic by up to 12 hours';
             },
         },
         {

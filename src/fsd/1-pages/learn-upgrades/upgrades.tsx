@@ -154,27 +154,22 @@ export const Upgrades = () => {
                         headerName: 'Locations',
                         cellRenderer: (params: ICellRendererParams<IBaseUpgrade>) => {
                             const { data } = params;
-                            if (!data || !data.locations) {
-                                return <span>Unknown</span>;
-                            } else {
-                                return (
-                                    <div className="flex-box gap5 wrap">
-                                        {data.locations.map(location => {
-                                            if (!location) {
-                                                return <></>;
-                                            }
-                                            return (
-                                                <CampaignLocation
-                                                    key={location.id}
-                                                    location={location}
-                                                    short={true}
-                                                    unlocked={true}
-                                                />
-                                            );
-                                        })}
-                                    </div>
-                                );
-                            }
+                            if (!data || !data.locations) return <span>Unknown</span>;
+                            return (
+                                <div className="flex-box gap5 wrap">
+                                    {data.locations.map(location => {
+                                        if (!location) return <></>;
+                                        return (
+                                            <CampaignLocation
+                                                key={location.id}
+                                                location={location}
+                                                short={true}
+                                                unlocked={true}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                            );
                         },
                         minWidth: 150,
                     },

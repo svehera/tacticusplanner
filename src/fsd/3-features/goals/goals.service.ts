@@ -127,13 +127,10 @@ export class GoalsService {
                         0
                     );
                     const goalRequired = raid.countByGoalId?.[goal.goalId] ?? 0;
-                    if (totalRequired > 0 && goalRequired > 0) {
-                        estimate.energyTotal += Math.round(raid.energyTotal * (goalRequired / totalRequired));
-                    } else {
-                        estimate.energyTotal += Math.round(
-                            raid.energyTotal / Math.max(1, raid.relatedCharacters.length)
-                        );
-                    }
+                    estimate.energyTotal +=
+                        totalRequired > 0 && goalRequired > 0
+                            ? Math.round(raid.energyTotal * (goalRequired / totalRequired))
+                            : Math.round(raid.energyTotal / Math.max(1, raid.relatedCharacters.length));
                 }
                 if (raidedToday) {
                     ++estimate.daysTotal;
