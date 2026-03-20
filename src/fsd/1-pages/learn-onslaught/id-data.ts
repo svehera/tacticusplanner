@@ -30,8 +30,8 @@ export const romanToNumber = (roman: string): number => {
 };
 
 /** Utility to convert Numbers to Roman Numerals */
-export const numberToRoman = (number_: number): string => {
-    if (number_ < 1 || number_ > 1000) return '';
+export const numberToRoman = (toConvert: number): string => {
+    if (toConvert < 1 || toConvert > 1000) return '';
 
     const romanNumerals: [number, string][] = [
         [1000, 'M'],
@@ -51,9 +51,9 @@ export const numberToRoman = (number_: number): string => {
 
     let result = '';
     for (const [value, symbol] of romanNumerals) {
-        while (number_ >= value) {
+        while (toConvert >= value) {
             result += symbol;
-            number_ -= value;
+            toConvert -= value;
         }
     }
     return result;
