@@ -136,11 +136,11 @@ export class RankLookupService {
         const ownedCount = ownedUpgrades[material.snowprintId] ?? 0;
         const craftedCount = craftedBasedUpgrades[material.snowprintId] ?? 0;
         const neededCount = material.count - craftedCount;
-        material.count = neededCount > 0 ? neededCount : 0;
+        material.count = Math.max(neededCount, 0);
         const leftCount = ownedCount >= material.count ? 0 : material.count - ownedCount;
         if (updateInventory) {
             const updatedCount = ownedCount - material.count;
-            ownedUpgrades[material.snowprintId] = updatedCount > 0 ? updatedCount : 0;
+            ownedUpgrades[material.snowprintId] = Math.max(updatedCount, 0);
             craftedBasedUpgrades[material.snowprintId] = neededCount > 0 ? 0 : Math.abs(neededCount);
         }
 

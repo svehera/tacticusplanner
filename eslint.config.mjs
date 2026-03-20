@@ -42,6 +42,7 @@ export default defineConfig([
         languageOptions: { globals: globals.builtin },
         plugins: { unicorn: eslintPluginUnicorn },
         rules: {
+            'unicorn/prefer-math-min-max': 'error',
             'unicorn/no-array-for-each': 'error',
             'unicorn/explicit-length-check': 'error',
             'unicorn/no-useless-fallback-in-spread': 'error',

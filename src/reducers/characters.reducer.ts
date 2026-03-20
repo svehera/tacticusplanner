@@ -75,16 +75,15 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
             if (existingChar) {
                 const rankRarity = rankToRarity[existingChar.rank];
                 const rarityStars = rarityToStars[existingChar.rarity];
-                const updatedLevel =
-                    updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 55 ? 55 : updatedCharacter.level;
+                const updatedLevel = updatedCharacter.level < 0 ? 0 : Math.min(updatedCharacter.level, 55);
 
                 const updatedCharacterData = {
                     ...existingChar,
                     rank: updatedCharacter.rank,
-                    rarity: updatedCharacter.rarity <= rankRarity ? rankRarity : updatedCharacter.rarity,
+                    rarity: Math.max(updatedCharacter.rarity, rankRarity),
                     bias: updatedCharacter.bias,
                     upgrades: updatedCharacter.upgrades,
-                    stars: updatedCharacter.stars <= rarityStars ? rarityStars : updatedCharacter.stars,
+                    stars: Math.max(updatedCharacter.stars, rarityStars),
                     xp: updatedCharacter.xp,
                     shards: updatedCharacter.shards,
                     equipment: updatedCharacter.equipment,
