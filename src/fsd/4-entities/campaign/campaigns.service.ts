@@ -140,14 +140,14 @@ export class CampaignsService {
             allies.factions = allies.factions.filter(isString);
             if (enemies.factions.length === 0) {
                 console.warn(
-                    'no enemy factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured. ',
+                    'no enemy factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured.',
                     battle.campaign,
                     battle
                 );
             }
             if (allies.factions.length === 0) {
                 console.warn(
-                    'no ally factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured. ',
+                    'no ally factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured.',
                     battle.campaign,
                     battle
                 );
