@@ -18,7 +18,7 @@ import {
 
 export class CharactersAbilitiesService {
     private static abilitiesLvlUpRaw = mutableCopy(abilitiesLvlUpJson) satisfies ICharacterAbilityLevelRaw[];
-    // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract staitc methods
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract static methods
     private static abilitiesLvlUp: ICharacterAbilityLevel[] = this.abilitiesLvlUpRaw.map(x => ({
         ...x,
         rarity: this.getRarityFromLevel(x.lvl + 1),

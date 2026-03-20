@@ -112,7 +112,7 @@ interface GoalPriorityLocationsState {
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
-    // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract staitc methods
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract static methods
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
 
     private static readonly goalPriorityByIdCache = new WeakMap<
@@ -664,7 +664,7 @@ export class UpgradesService {
         const hse = settings.preferences.farmPreferences?.homeScreenEvent;
         if (hse === undefined || hse === IDailyRaidsHomeScreenEvent.none) return;
 
-        // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract staitc methods
+        // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract static methods
         const hsePointsPerUnit = (campaignType: CampaignType): number => {
             if (campaignType === CampaignType.Elite) return 5;
             return 3;
