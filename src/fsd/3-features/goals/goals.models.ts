@@ -8,6 +8,8 @@ import {
     IDailyRaidsPreferences,
 } from 'src/models/interfaces';
 
+import { Rarity } from '@/fsd/5-shared/model';
+
 import { IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import { IUnitShards } from '@/fsd/4-entities/character/model';
 import {
@@ -19,9 +21,20 @@ import {
 } from '@/fsd/4-entities/goal';
 import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
-import { ICharacterAbilitiesMaterialsTotal, IXpEstimate } from '@/fsd/3-features/characters/characters.models';
+import {
+    ICharacterAbilitiesMaterialsTotal,
+    ICharacterAscendOrbsTotal,
+    IXpEstimate,
+} from '@/fsd/3-features/characters/characters.models';
 
-import { IMowMaterialsTotal } from '@/fsd/1-pages/learn-mow/lookup.models';
+export interface IMowMaterialsTotal {
+    components: number;
+    salvage: number;
+    gold: number;
+    badges: Record<Rarity, number>;
+    forgeBadges: Record<Rarity, number>;
+    orbs: Record<Rarity, number>;
+}
 
 export type CharacterRaidGoalSelect =
     | ICharacterUpgradeRankGoal
@@ -85,6 +98,7 @@ export interface IGoalEstimate {
     xpEstimateAbilities?: IXpEstimate;
     mowEstimate?: IMowMaterialsTotal;
     abilitiesEstimate?: ICharacterAbilitiesMaterialsTotal;
+    orbsEstimate?: ICharacterAscendOrbsTotal;
     xpBooksApplied?: number;
     xpBooksRequired?: number;
 
@@ -92,6 +106,9 @@ export interface IGoalEstimate {
     completed?: boolean;
     /** If the goal is currently blocked and cannot be completed (though you might be able to progress). */
     blocked?: boolean;
+
+    /** Set if the goal is selected to be included in raiding. False otherwise. */
+    included?: boolean;
 }
 
 export interface IEstimatedAscensionSettings {

@@ -2,8 +2,7 @@
 import InputLabel from '@mui/material/InputLabel';
 
 import { Rank, rankToString } from '@/fsd/5-shared/model';
-
-import { RankIcon } from './rank.icon';
+import { RankIcon } from '@/fsd/5-shared/ui/icons';
 
 export const RankSelect = ({
     rankValues,

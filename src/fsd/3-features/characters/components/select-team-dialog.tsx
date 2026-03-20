@@ -55,28 +55,28 @@ export const SelectTeamDialog: React.FC<Props> = ({
     const [teamName, setTeamName] = useState(defaultTeamName);
 
     const handleCharacterSelect = (character: IUnit) => {
-        setLineup(curr => {
-            if (curr.some(x => x.id === character.id)) {
-                return curr.filter(x => x.id !== character.id);
+        setLineup(current => {
+            if (current.some(x => x.id === character.id)) {
+                return current.filter(x => x.id !== character.id);
             } else {
-                if (curr.length === size) {
-                    return curr;
+                if (current.length === size) {
+                    return current;
                 }
 
                 const newChar = characters.find(x => x.id === character.id);
 
                 if (newChar) {
-                    return [...curr, newChar];
+                    return [...current, newChar];
                 }
 
-                return curr;
+                return current;
             }
         });
     };
 
     const currentTeam = useMemo(() => {
-        return Array.from({ length: size }, (_, i) => {
-            const char = lineup[i];
+        return Array.from({ length: size }, (_, index) => {
+            const char = lineup[index];
 
             if (char) {
                 return (
@@ -105,7 +105,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
 
             return (
                 <RosterSnapshotCharacter
-                    key={fallbackCharacter.name + i}
+                    key={fallbackCharacter.name + index}
                     char={RosterSnapshotsService.snapshotCharacter(fallbackCharacter)}
                     charData={fallbackCharacter}
                     showShards={RosterSnapshotShowVariableSettings.Never}

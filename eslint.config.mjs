@@ -12,6 +12,7 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 
@@ -23,12 +24,45 @@ const compat = new FlatCompat({
     allConfig: js.configs.all,
 });
 
-const FS_LAYERS = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
-
-const REVERSED_FS_LAYERS = [...FS_LAYERS].reverse();
+// Order from bottom to top (things earlier in the array cannot import things later in the array)
+const FS_LAYERS = ['shared', 'entities', 'features', 'widgets', 'pages', 'app'];
 
 export default defineConfig([
-    globalIgnores(['dist', 'build', 'node_modules', 'package-lock.json']),
+    globalIgnores([
+        'dist',
+        'build',
+        'node_modules',
+        'package-lock.json',
+        'vite-env.d.ts',
+        '**/analytics__google-analytics.d.ts',
+    ]),
+    // eslintPluginUnicorn.configs.recommended,
+    {
+        // Temporary config to enable & autofix rules one-at-a-time
+        languageOptions: { globals: globals.builtin },
+        plugins: { unicorn: eslintPluginUnicorn },
+        rules: {
+            'unicorn/prevent-abbreviations': [
+                'error',
+                {
+                    allowList: {
+                        // Allow variable names used within React
+                        Props: true,
+                        props: true,
+                        params: true,
+                        searchParams: true,
+                    },
+                    replacements: {
+                        // Some of the default replacements aren't always correct for TP code
+                        // This disables automatic replacement for them by listing the multiple alternatives
+                        req: { request: true, requirement: true },
+                        mod: { module: true, mode: true, modifier: true },
+                        e: { event: true, error: true },
+                    },
+                },
+            ],
+        },
+    },
     ...compat.extends(
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -113,7 +147,7 @@ export default defineConfig([
 
                     // experimental features
                     'newlines-between': 'always',
-                    pathGroups: REVERSED_FS_LAYERS.map(layer => ({
+                    pathGroups: FS_LAYERS.map(layer => ({
                         pattern: `**/?(*)${layer}{,/**}`,
                         group: 'internal',
                         position: 'after',

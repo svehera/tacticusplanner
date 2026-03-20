@@ -1,0 +1,431 @@
+﻿import { ArrowForward, Info } from '@mui/icons-material';
+import InfoIcon from '@mui/icons-material/Info';
+import { FormControlLabel, Popover, Switch } from '@mui/material';
+import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import { orderBy } from 'lodash';
+import React, { useContext, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
+
+import { getEnumValues } from '@/fsd/5-shared/lib';
+import { Rarity, Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { MiscIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CampaignLocation } from '@/fsd/4-entities/campaign';
+import { RankSelect, ICharacter2 } from '@/fsd/4-entities/character';
+import { UnitsAutocomplete } from '@/fsd/4-entities/unit';
+import {
+    IMaterialFull,
+    IMaterialRecipeIngredientFull,
+    UpgradeImage,
+    IMaterialEstimated2,
+} from '@/fsd/4-entities/upgrade';
+
+import { RankLookupService } from './rank-lookup.service';
+
+export const RankLookup = () => {
+    const { characters, campaignsProgress } = useContext(StoreContext);
+    const [searchParams, setSearchParameters] = useSearchParams();
+
+    const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
+    const [character, setCharacter] = useState<ICharacter2 | null>(() => {
+        const queryParametersCharacter = searchParams.get('character');
+
+        return characters.find(x => x.name === queryParametersCharacter) ?? characters[0];
+    });
+
+    const [rankStart, setRankStart] = useState<Rank>(() => {
+        const queryParametersRank = searchParams.get('rankStart');
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        return queryParametersRank ? (Rank[queryParametersRank] ?? Rank.Stone1) : Rank.Stone1;
+    });
+    const [rankEnd, setRankEnd] = useState<Rank>(() => {
+        const queryParametersRank = searchParams.get('rankEnd');
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        return queryParametersRank ? (Rank[queryParametersRank] ?? Rank.Stone2) : Rank.Stone2;
+    });
+    const [rankPoint5, setRankPoint5] = useState<boolean>(() => {
+        const queryParametersRankPoint5 = searchParams.get('rankPoint5');
+
+        return !!queryParametersRankPoint5 && queryParametersRankPoint5 === 'true';
+    });
+
+    const [anchorElement2, setAnchorElement2] = React.useState<HTMLElement | null>(null);
+    const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull | null>(null);
+
+    /**
+     * Holds the set of uncraftable upgrade materials needed to rank up this
+     * character.
+     */
+    const upgrades = useMemo<IMaterialFull[]>(() => {
+        if (!character) {
+            return [];
+        }
+
+        return RankLookupService.getUpgradeMaterialsToRankUp({
+            unitId: character.snowprintId ?? '',
+            unitName: character.id,
+            rankStart,
+            rankEnd,
+            appliedUpgrades: [],
+            rankPoint5,
+            rankStartPoint5: false,
+            upgradesRarity: [],
+        });
+    }, [character?.id, rankStart, rankEnd, rankPoint5]);
+
+    const message = (function () {
+        if (!character) {
+            return 'Select character';
+        }
+
+        return 'Upgrades:';
+    })();
+
+    const groupByRanks = useMemo(() => {
+        const result: Array<{
+            rank1: Rank;
+            rank2: Rank;
+            materials: IMaterialFull[];
+        }> = [];
+
+        let currentRank = rankStart < Rank.Stone1 ? Rank.Stone1 : rankStart;
+        const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Adamantine2 ? Rank.Adamantine1 : rankEnd;
+        const upgradesCopy = upgrades.slice();
+
+        while (currentRank !== endRank) {
+            const rankUpgrades = upgradesCopy.splice(0, 6);
+            result.push({ rank1: currentRank, rank2: currentRank + 1, materials: rankUpgrades });
+            currentRank++;
+        }
+
+        if (rankPoint5 && upgradesCopy.length) {
+            result.push({
+                rank1: endRank,
+                rank2: endRank,
+                materials: upgradesCopy,
+            });
+        }
+
+        return result;
+    }, [upgrades, rankStart]);
+
+    const totalMaterials = useMemo<IMaterialEstimated2[]>(() => {
+        return orderBy(RankLookupService.getAllMaterials(campaignsProgress, {}, upgrades), ['rarity'], ['desc']);
+    }, [upgrades]);
+
+    const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>, depth = 0) => (
+        <ul className={depth > 0 ? 'pl-4' : undefined}>
+            {materials.map(item => (
+                <li key={item.id}>
+                    <div className="flex items-center gap-[5px]">
+                        <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
+                        <UpgradeImage
+                            material={item.label}
+                            iconPath={item.iconPath}
+                            rarity={RarityMapper.rarityToRarityString(item.rarity)}
+                            size={30}
+                        />{' '}
+                        - <span className="font-bold">{item.count}</span>
+                    </div>
+                    {item.recipe?.length ? renderUpgradesMaterials(item.recipe, depth + 1) : undefined}
+                </li>
+            ))}
+        </ul>
+    );
+
+    const [columnDefs] = useState<Array<ColDef<IMaterialEstimated2>>>([
+        {
+            headerName: '#',
+            colId: 'rowNumber',
+            valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+            maxWidth: 50,
+        },
+        {
+            headerName: 'Material',
+            cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
+                const { data } = params;
+                if (data) {
+                    return (
+                        <UpgradeImage
+                            material={data.label}
+                            iconPath={data.iconPath}
+                            rarity={RarityMapper.rarityToRarityString(data.rarity)}
+                        />
+                    );
+                }
+            },
+            equals: () => true,
+            sortable: false,
+            width: 80,
+        },
+        {
+            headerName: 'Name',
+            cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
+                const { data } = params;
+                if (data) return data.label;
+            },
+            equals: () => true,
+            sortable: false,
+            width: 80,
+        },
+        {
+            field: 'count',
+            maxWidth: 75,
+        },
+        {
+            field: 'rarity',
+            maxWidth: 120,
+            valueFormatter: (params: ValueFormatterParams<IMaterialEstimated2>) => Rarity[params.data?.rarity ?? 0],
+            cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
+        },
+        {
+            headerName: 'Locations',
+            minWidth: 300,
+            flex: 1,
+            cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
+                const { data } = params;
+                if (data) {
+                    return (
+                        <div className="flex-box wrap gap-[5px]">
+                            {data.possibleLocations.map(location => (
+                                <CampaignLocation
+                                    key={location.id}
+                                    location={location}
+                                    short={true}
+                                    unlocked={data.unlockedLocations.includes(location.id)}
+                                />
+                            ))}
+                        </div>
+                    );
+                }
+            },
+        },
+    ]);
+
+    const updateRankStart = (value: number) => {
+        setRankStart(value);
+
+        setSearchParameters(current => {
+            current.set('rankStart', Rank[value]);
+            return current;
+        });
+    };
+
+    const updateRankEnd = (value: number) => {
+        setRankEnd(value);
+
+        setSearchParameters(current => {
+            current.set('rankEnd', Rank[value]);
+            return current;
+        });
+    };
+
+    const updateRankPoint5 = (value: boolean) => {
+        setRankPoint5(value);
+
+        setSearchParameters(current => {
+            current.set('rankPoint5', value + '');
+            return current;
+        });
+    };
+
+    const renderMaterials = (materials: IMaterialFull[]) => {
+        const healthUpgrades: IMaterialFull[] = materials.filter(x => x.stat === 'Health');
+        const damageUpgrades: IMaterialFull[] = materials.filter(x => x.stat === 'Damage');
+        const armourUpgrades: IMaterialFull[] = materials.filter(x => x.stat === 'Armour');
+
+        const handleRecipeClick = (target: HTMLElement, material: IMaterialFull) => {
+            setAnchorElement2(target);
+            setMaterialRecipe(material);
+        };
+
+        return (
+            <div className="flex">
+                <div className="flex-box column gap5">
+                    <MiscIcon icon={'health'} height={30} />
+                    {healthUpgrades.map((x, index) => {
+                        return (
+                            <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
+                                <UpgradeImage
+                                    material={x.label}
+                                    iconPath={x.iconPath}
+                                    rarity={RarityMapper.rarityToRarityString(x.rarity)}
+                                />
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className="flex-box column gap5">
+                    <MiscIcon icon={'damage'} height={30} />
+                    {damageUpgrades.map((x, index) => (
+                        <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
+                            <UpgradeImage
+                                material={x.label}
+                                iconPath={x.iconPath}
+                                rarity={RarityMapper.rarityToRarityString(x.rarity)}
+                            />
+                        </div>
+                    ))}
+                </div>
+                <div className="flex-box column gap5">
+                    <MiscIcon icon={'armour'} height={30} />
+                    {armourUpgrades.map((x, index) => (
+                        <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
+                            <UpgradeImage
+                                material={x.label}
+                                iconPath={x.iconPath}
+                                rarity={RarityMapper.rarityToRarityString(x.rarity)}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    };
+
+    return (
+        <div>
+            <div className="flex flex-wrap items-center gap-5">
+                <UnitsAutocomplete
+                    label="Characters"
+                    className="max-w-[300px]"
+                    unit={character}
+                    options={characters}
+                    onUnitChange={value => {
+                        setCharacter(value);
+
+                        setSearchParameters(current => {
+                            if (value) {
+                                current.set('character', value.name);
+                            } else {
+                                current.delete('character');
+                            }
+
+                            return current;
+                        });
+                    }}
+                />
+
+                <div className="w-50">
+                    <RankSelect
+                        label={'Rank Start'}
+                        rankValues={rankEntries.slice(0, rankEntries.length - 1)}
+                        value={rankStart}
+                        valueChanges={value => {
+                            updateRankStart(value);
+                            if (rankEnd <= value) {
+                                updateRankEnd(value + 1);
+                            }
+                        }}
+                    />
+                </div>
+                <div className="flex flex-wrap items-center gap-5">
+                    <div className="w-50">
+                        <RankSelect
+                            label={'Rank End'}
+                            rankValues={rankEntries.slice(1)}
+                            value={rankEnd}
+                            valueChanges={value => {
+                                updateRankEnd(value);
+                                if (rankStart >= value) {
+                                    updateRankStart(value - 1);
+                                }
+                            }}
+                        />
+                    </div>
+                    <div className="flex-box">
+                        <FormControlLabel
+                            label="Point Five"
+                            control={
+                                <Switch
+                                    checked={rankPoint5}
+                                    onChange={value => updateRankPoint5(value.target.checked)}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                            }
+                        />
+                        <AccessibleTooltip
+                            title={
+                                'When you reach a target upgrade rank, you are immediately able to apply one or more upgrades.\r\nIf you toggle on this switch then the top row of upgrades will be included in your daily raids plan.'
+                            }>
+                            <Info color="primary" />
+                        </AccessibleTooltip>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div className="ag-theme-material h-[800px] w-full">
+                    <AgGridReact
+                        modules={[AllCommunityModule]}
+                        theme={themeBalham}
+                        suppressCellFocus={true}
+                        defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true, autoHeight: true }}
+                        rowHeight={60}
+                        rowBuffer={3}
+                        columnDefs={columnDefs}
+                        rowData={totalMaterials}
+                    />
+                </div>
+
+                <h3>{message}</h3>
+                <div className="flex-box gap5">
+                    <InfoIcon color="primary" />
+                    <span>Click on the upgrade to view recipe</span>
+                </div>
+                <div className="flex flex-wrap gap-5">
+                    {groupByRanks.map((x, index) => (
+                        <div key={index}>
+                            <div className="flex justify-center gap-[3px]">
+                                <RankIcon rank={x.rank1} /> <ArrowForward />
+                                <RankIcon
+                                    rank={x.rank2}
+                                    rankPoint5={x.rank1 === rankEnd && x.rank2 === rankEnd && rankPoint5}
+                                />
+                            </div>
+                            {renderMaterials(x.materials)}
+                        </div>
+                    ))}
+                    <Popover
+                        open={!!materialRecipe}
+                        anchorEl={anchorElement2}
+                        onClose={() => setMaterialRecipe(null)}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}>
+                        {materialRecipe && (
+                            <div className="m-5 w-[300px]">
+                                <div className="flex items-center gap-[5px]">
+                                    <MiscIcon icon={materialRecipe.stat.toLowerCase() as string} />
+                                    <span className={Rarity[materialRecipe.rarity]?.toLowerCase()}>
+                                        {Rarity[materialRecipe.rarity]}
+                                    </span>{' '}
+                                    -{' '}
+                                    <UpgradeImage
+                                        material={materialRecipe.label}
+                                        iconPath={materialRecipe.iconPath}
+                                        rarity={RarityMapper.rarityToRarityString(materialRecipe.rarity)}
+                                        size={30}
+                                    />
+                                </div>
+                                {materialRecipe.recipe?.length
+                                    ? renderUpgradesMaterials(materialRecipe.recipe)
+                                    : undefined}
+                            </div>
+                        )}
+                    </Popover>
+                </div>
+            </div>
+        </div>
+    );
+};

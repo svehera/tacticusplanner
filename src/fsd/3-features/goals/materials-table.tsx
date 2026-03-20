@@ -4,18 +4,18 @@ import {
     ColDef,
     ColGroupDef,
     ICellRendererParams,
-    ValueFormatterParams,
     CellEditingStoppedEvent,
     themeBalham,
     GridReadyEvent,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
@@ -30,10 +30,6 @@ interface Props {
     updateMaterialQuantity: (materialId: string, quantity: number) => void;
     onGridReady: () => void;
     inventory: Record<string, number>;
-    /**
-     * If set, tells the grid to scroll to the first material used by this character. If the
-     * character does not need any materials, does not scroll the grid.
-     */
     scrollToCharSnowprintId?: string;
     alreadyUsedMaterials?: ICharacterUpgradeEstimate[];
 }
@@ -43,6 +39,47 @@ interface IRaidMaterialRow extends ICharacterUpgradeEstimate {
     remainingAfter: number;
 }
 
+enum MaterialType {
+    Shard,
+    MythicShard,
+    Regular,
+}
+
+/**
+ * Single source of truth for material identification and formatting
+ */
+const getMaterialMetadata = (id: string, rarity?: number | string) => {
+    const isShard = id.startsWith('shards_');
+    const isMythicShard = id.startsWith('mythicShards_');
+
+    let type = MaterialType.Regular;
+    if (isShard) type = MaterialType.Shard;
+    else if (isMythicShard) type = MaterialType.MythicShard;
+
+    let rarityString: string;
+    if (type === MaterialType.Shard) rarityString = 'Shard';
+    else if (type === MaterialType.MythicShard) rarityString = 'Mythic Shard';
+    else rarityString = typeof rarity === 'number' ? RarityMapper.rarityToRarityString(rarity as Rarity) : 'Unknown';
+
+    return {
+        type,
+        // Cast this to RarityString to satisfy strict component props
+        rarityStr: rarityString as RarityString,
+        className: rarityString.toLowerCase().replace(' ', '-'),
+    };
+};
+
+const MaterialIcon: React.FC<{ data: IRaidMaterialRow; typeOnly?: boolean }> = ({ data, typeOnly }) => {
+    const { type, rarityStr } = getMaterialMetadata(data.id, data.rarity);
+
+    if (type === MaterialType.Shard) return <UnitShardIcon icon={data.iconPath} mythic={false} />;
+    if (type === MaterialType.MythicShard) return <UnitShardIcon icon={data.iconPath} mythic={true} />;
+
+    if (typeOnly) return <RarityIcon rarity={data.rarity as Rarity} />;
+
+    return <UpgradeImage material={data.label} iconPath={data.iconPath} rarity={rarityStr} />;
+};
+
 export const MaterialsTable: React.FC<Props> = ({
     rows,
     updateMaterialQuantity,
@@ -51,31 +88,18 @@ export const MaterialsTable: React.FC<Props> = ({
     scrollToCharSnowprintId,
     alreadyUsedMaterials,
 }) => {
-    const upgradeRarityClassName = (rarity: Rarity | 'Shard' | 'Mythic Shard' | undefined): string => {
-        const shardVal = (rarity ?? 'Unknown').toString();
-        if (['Shard', 'Mythic Shard', 'Unknown'].includes(shardVal)) {
-            return shardVal;
-        }
-        if (typeof rarity === 'number') {
-            return RarityMapper.rarityToRarityString(rarity);
-        }
-        return RarityMapper.stringToRarityString(shardVal) ?? 'Unknown';
-    };
-
     const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {
         const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
+        let normalized = 'Unknown';
 
         if (typeof rarity === 'number') {
-            const normalized = RarityMapper.rarityToRarityString(rarity as Rarity);
-            return order.indexOf(normalized) === -1 ? order.length - 1 : order.indexOf(normalized);
+            normalized = RarityMapper.rarityToRarityString(rarity as Rarity);
+        } else if (typeof rarity === 'string') {
+            normalized = RarityMapper.stringToRarityString(rarity) ?? rarity;
         }
 
-        if (typeof rarity === 'string') {
-            const normalized = RarityMapper.stringToRarityString(rarity) ?? rarity;
-            return order.indexOf(normalized) === -1 ? order.length - 1 : order.indexOf(normalized);
-        }
-
-        return order.length - 1;
+        const index = order.indexOf(normalized);
+        return index === -1 ? order.length - 1 : index;
     };
 
     const columnDefs: Array<ColDef<IRaidMaterialRow> | ColGroupDef<IRaidMaterialRow>> = [
@@ -91,27 +115,9 @@ export const MaterialsTable: React.FC<Props> = ({
                 },
                 {
                     headerName: 'Icon',
-                    cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) => {
-                        const { data } = params;
-                        if (data) {
-                            if (data.id.startsWith('shards_')) {
-                                return <UnitShardIcon icon={data.iconPath} mythic={false} />;
-                            } else if (data.id.startsWith('mythicShards_')) {
-                                return <UnitShardIcon icon={data.iconPath} mythic={true} />;
-                            } else {
-                                return (
-                                    <UpgradeImage
-                                        material={data.label}
-                                        iconPath={data.iconPath}
-                                        rarity={RarityMapper.rarityToRarityString(data.rarity as Rarity)}
-                                    />
-                                );
-                            }
-                        }
-                    },
-                    valueFormatter: () => {
-                        return '';
-                    },
+                    cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) =>
+                        params.data ? <MaterialIcon data={params.data} /> : null,
+                    valueFormatter: () => '',
                     equals: () => true,
                     sortable: false,
                     width: 80,
@@ -125,13 +131,14 @@ export const MaterialsTable: React.FC<Props> = ({
                     field: 'rarity',
                     maxWidth: 120,
                     columnGroupShow: 'open',
-                    valueFormatter: (params: ValueFormatterParams<IRaidMaterialRow>) => {
-                        return upgradeRarityClassName(params.data?.rarity);
-                    },
-                    cellClass: params => upgradeRarityClassName(params.data?.rarity),
-                    comparator: (valueA, valueB) => {
-                        return getRaritySortKey(valueA) - getRaritySortKey(valueB);
-                    },
+                    cellStyle: { textAlign: 'center' },
+                    cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) =>
+                        params.data ? <MaterialIcon data={params.data} typeOnly /> : null,
+                    tooltipValueGetter: params =>
+                        params.data ? getMaterialMetadata(params.data.id, params.data.rarity).rarityStr : '',
+                    comparator: (valueA, valueB) => getRaritySortKey(valueA) - getRaritySortKey(valueB),
+                    cellClass: params =>
+                        params.data ? getMaterialMetadata(params.data.id, params.data.rarity).className : 'unknown',
                 },
                 {
                     columnGroupShow: 'open',
@@ -142,38 +149,30 @@ export const MaterialsTable: React.FC<Props> = ({
                 },
             ],
         },
+        // ... (rest of the columns remain the same)
         {
             field: 'requiredCount',
             headerName: 'Goal',
             maxWidth: 75,
         },
         {
-            valueGetter: params => {
-                return params.data?.inventoryAfter ?? 0;
-            },
+            valueGetter: params => params.data?.inventoryAfter ?? 0,
             valueSetter: event => {
                 updateMaterialQuantity(event.data.snowprintId, event.newValue);
                 return true;
             },
             headerName: 'Inventory (after higher-priority goals)',
             editable: true,
-            cellEditorPopup: false,
             cellDataType: 'number',
             cellEditor: 'agNumberCellEditor',
-            cellEditorParams: {
-                min: 0,
-                max: 1000,
-                precision: 0,
-            },
+            cellEditorParams: { min: 0, max: 1000, precision: 0 },
         },
         {
             headerName: 'Remaining',
             maxWidth: 90,
             valueGetter: params => {
                 const { data } = params;
-                if (data) {
-                    return Math.max(0, data.requiredCount - (data.inventoryAfter ?? 0));
-                }
+                return data ? Math.max(0, data.requiredCount - (data.inventoryAfter ?? 0)) : 0;
             },
         },
         {
@@ -185,7 +184,8 @@ export const MaterialsTable: React.FC<Props> = ({
                     columnGroupShow: 'closed',
                     maxWidth: isMobile ? 125 : 300,
                     cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        const { daysTotal, energyTotal, raidsTotal } = props.data!;
+                        if (!props.data) return null;
+                        const { daysTotal, energyTotal, raidsTotal } = props.data;
                         return (
                             <ul className="m-0 ps-5">
                                 <li>{daysTotal} - days</li>
@@ -195,24 +195,9 @@ export const MaterialsTable: React.FC<Props> = ({
                         );
                     },
                 },
-                {
-                    headerName: 'Days',
-                    field: 'daysTotal',
-                    columnGroupShow: 'open',
-                    maxWidth: 90,
-                },
-                {
-                    field: 'energyTotal',
-                    headerName: 'Energy',
-                    columnGroupShow: 'open',
-                    maxWidth: 90,
-                },
-                {
-                    headerName: 'Raids',
-                    field: 'raidsTotal',
-                    columnGroupShow: 'open',
-                    maxWidth: 90,
-                },
+                { headerName: 'Days', field: 'daysTotal', columnGroupShow: 'open', maxWidth: 90 },
+                { field: 'energyTotal', headerName: 'Energy', columnGroupShow: 'open', maxWidth: 90 },
+                { headerName: 'Raids', field: 'raidsTotal', columnGroupShow: 'open', maxWidth: 90 },
             ],
         },
         {
@@ -220,9 +205,7 @@ export const MaterialsTable: React.FC<Props> = ({
             children: [
                 {
                     columnGroupShow: 'closed',
-                    valueGetter: params => {
-                        return params.data?.locations.map(x => x.id) ?? [];
-                    },
+                    valueGetter: params => params.data?.locations.map(x => x.id) ?? [],
                     cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                         const locations: ICampaignBattleComposed[] = props.data?.locations ?? [];
                         const usedLocations = locations.filter(x => x.isSuggested).length;
@@ -241,80 +224,45 @@ export const MaterialsTable: React.FC<Props> = ({
                 {
                     columnGroupShow: 'open',
                     headerName: 'Used',
-                    valueGetter: params => {
-                        return params.data?.locations.filter(x => x.isSuggested).map(x => x.id) ?? [];
-                    },
-                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        const { data } = params;
-                        if (data) {
-                            return (
-                                <div className="flex-box gap5 wrap">
-                                    {data.locations
-                                        .filter(x => x.isSuggested)
-                                        .map(location => (
-                                            <CampaignLocation
-                                                key={location.id}
-                                                location={location}
-                                                short={true}
-                                                unlocked={true}
-                                            />
-                                        ))}
-                                </div>
-                            );
-                        }
-                    },
+                    valueGetter: params => params.data?.locations.filter(x => x.isSuggested).map(x => x.id) ?? [],
+                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => (
+                        <div className="flex-box gap5 wrap">
+                            {params.data?.locations
+                                .filter(x => x.isSuggested)
+                                .map(loc => (
+                                    <CampaignLocation key={loc.id} location={loc} short unlocked />
+                                ))}
+                        </div>
+                    ),
                 },
                 {
                     headerName: 'Locked',
                     columnGroupShow: 'open',
-                    valueGetter: params => {
-                        return params.data?.locations.filter(x => !x.isUnlocked).map(x => x.id) ?? [];
-                    },
-                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        const { data } = params;
-                        if (data) {
-                            return (
-                                <div className="flex-box gap5 wrap">
-                                    {data.locations
-                                        .filter(x => !x.isUnlocked)
-                                        .map(location => (
-                                            <CampaignLocation
-                                                key={location.id}
-                                                location={location}
-                                                short={true}
-                                                unlocked={false}
-                                            />
-                                        ))}
-                                </div>
-                            );
-                        }
-                    },
+                    valueGetter: params => params.data?.locations.filter(x => !x.isUnlocked).map(x => x.id) ?? [],
+                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => (
+                        <div className="flex-box gap5 wrap">
+                            {params.data?.locations
+                                .filter(x => !x.isUnlocked)
+                                .map(loc => (
+                                    <CampaignLocation key={loc.id} location={loc} short unlocked={false} />
+                                ))}
+                        </div>
+                    ),
                 },
                 {
                     headerName: 'Other',
                     columnGroupShow: 'open',
-                    valueGetter: params => {
-                        return params.data?.locations.filter(x => !x.isSuggested && x.isUnlocked).map(x => x.id) ?? [];
-                    },
-                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        const { data } = params;
-                        if (data) {
-                            return (
-                                <div className="flex-box gap5 wrap">
-                                    {data.locations
-                                        .filter(x => !x.isSuggested && x.isUnlocked)
-                                        .map(location => (
-                                            <CampaignLocation
-                                                key={location.id}
-                                                location={location}
-                                                short={true}
-                                                unlocked={true}
-                                            />
-                                        ))}
-                                </div>
-                            );
-                        }
-                    },
+                    valueGetter: params =>
+                        params.data?.locations.filter(x => !x.isSuggested && x.isUnlocked).map(x => x.id) ?? [],
+                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => (
+                        <div className="flex-box gap5 wrap">
+                            {params.data?.locations
+                                .filter(x => !x.isSuggested && x.isUnlocked)
+                                .map(loc => (
+                                    <CampaignLocation key={loc.id} location={loc} short unlocked />
+                                ))}
+                        </div>
+                    ),
                 },
             ],
         },
@@ -325,57 +273,44 @@ export const MaterialsTable: React.FC<Props> = ({
             updateMaterialQuantity(event.data.snowprintId, event.newValue);
         }
     };
-    // Compute rolling inventory consumption by higher-priority goals
+
     const processedRows = useMemo(() => {
-        // Map from material snowprintId to running inventory count
         const inventoryTracker: Record<string, number> = { ...inventory };
-        // Remove any inventory consumed by already-completed, but not applied, goals (e.g. you got
-        // an LRE homey prefarmed to D3 but haven't unlocked the unit yet).
         if (alreadyUsedMaterials) {
             for (const used of alreadyUsedMaterials) {
-                if (used.snowprintId && typeof used.requiredCount === 'number') {
+                if (used.snowprintId) {
                     inventoryTracker[used.snowprintId] = Math.max(
                         0,
-                        (inventoryTracker[used.snowprintId] ?? 0) - used.requiredCount
+                        (inventoryTracker[used.snowprintId] ?? 0) - (used.requiredCount ?? 0)
                     );
                 }
             }
         }
-        // Array to hold processed rows with adjusted inventory and remaining inventory.
         return rows.map(row => {
             const currentInventory = inventoryTracker[row.snowprintId] ?? 0;
             const remaining = Math.max(0, row.requiredCount - currentInventory);
-            // Update inventory tracker for next rows (simulate consumption)
             inventoryTracker[row.snowprintId] = Math.max(0, currentInventory - row.requiredCount);
-            return {
-                ...row,
-                inventoryAfter: currentInventory,
-                remainingAfter: remaining,
-            };
+            return { ...row, inventoryAfter: currentInventory, remainingAfter: remaining };
         }) as IRaidMaterialRow[];
     }, [rows, inventory, alreadyUsedMaterials]);
 
-    const onGridReadyInternal = (params: GridReadyEvent) => {
-        if (!params.api) return;
-        if (scrollToCharSnowprintId === undefined) return;
-        let name: string = CharactersService.resolveCharacter(scrollToCharSnowprintId)?.name ?? '';
-        if (name.length === 0) {
-            const mow = MowsService.resolveToStatic(scrollToCharSnowprintId);
-            name = mow?.name ?? '';
-        }
-        if (name.length === 0) {
-            console.error('Character or MOW not found for snowprintId:', scrollToCharSnowprintId);
-            onGridReady();
-            return;
-        }
-        // Find the first row that uses this character as a material
+    const gridApiReference = useRef<GridReadyEvent['api'] | null>(null);
+
+    const scrollToChar = (api: GridReadyEvent['api'], snowprintId: string) => {
+        const char = CharactersService.resolveCharacter(snowprintId);
+        const name = char?.name ?? MowsService.resolveToStatic(snowprintId)?.name ?? '';
+        if (!name) return;
         const targetIndex = processedRows.findIndex(row => row.relatedCharacters?.includes(name));
         if (targetIndex !== -1) {
-            const rowNode = params.api.getDisplayedRowAtIndex(targetIndex);
-            if (rowNode) {
-                params.api.ensureIndexVisible(rowNode.rowIndex ?? 0, 'top');
-                params.api.setColumnGroupOpened('upgrade', true);
-            }
+            api.ensureIndexVisible(targetIndex, 'top');
+            api.setColumnGroupOpened('upgrade', true);
+        }
+    };
+
+    const onGridReadyInternal = (params: GridReadyEvent) => {
+        gridApiReference.current = params.api;
+        if (scrollToCharSnowprintId) {
+            scrollToChar(params.api, scrollToCharSnowprintId);
         }
         onGridReady();
     };
@@ -385,14 +320,9 @@ export const MaterialsTable: React.FC<Props> = ({
             modules={[AllCommunityModule]}
             theme={themeBalham}
             onCellEditingStopped={saveChanges}
-            suppressChangeDetection={true}
-            singleClickEdit={true}
-            defaultColDef={{
-                suppressMovable: true,
-                sortable: true,
-                wrapText: true,
-                autoHeight: true,
-            }}
+            suppressChangeDetection
+            singleClickEdit
+            defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true, autoHeight: true }}
             columnDefs={columnDefs}
             rowData={processedRows}
             onGridReady={onGridReadyInternal}

@@ -4,9 +4,9 @@ import React, { useMemo, useState } from 'react';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { RarityStars, Rarity, RarityMapper, Rank, rankToString } from '@/fsd/5-shared/model';
-import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon, StarsIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
-import { ICharacter2, RankIcon } from '@/fsd/4-entities/character';
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
 
 import { CharacterUpgrades } from './character-upgrades';

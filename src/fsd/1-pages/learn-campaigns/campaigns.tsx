@@ -26,7 +26,7 @@ import { CampaignBattleCard } from './campaign-battle-card';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
 export const Campaigns = () => {
-    const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
+    const gridReference = useRef<AgGridReact<ICampaignBattleComposed>>(null);
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -211,7 +211,7 @@ export const Campaigns = () => {
 
     const [campaign, setCampaign] = useQueryState(
         'campaign',
-        initQueryParam => initQueryParam ?? Campaign.I,
+        initQueryParameter => initQueryParameter ?? Campaign.I,
         value => value.toString()
     );
 
@@ -280,7 +280,7 @@ export const Campaigns = () => {
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}
-                        ref={gridRef}
+                        ref={gridReference}
                         suppressCellFocus={true}
                         defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
                         columnDefs={isMobile ? mobileColumnDefs : columnDefs}

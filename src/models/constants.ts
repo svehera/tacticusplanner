@@ -139,11 +139,15 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     [Campaign.TE]: 0,
     [Campaign.TEC]: 0,
 
-    // T'au Empire campaign event
     [Campaign.TAS]: 0,
     [Campaign.TASC]: 0,
     [Campaign.TAE]: 0,
     [Campaign.TAEC]: 0,
+
+    [Campaign.ASS]: 0,
+    [Campaign.ASSC]: 0,
+    [Campaign.ASE]: 0,
+    [Campaign.ASEC]: 0,
 };
 
 const defaultGWLayout: IGWLayoutZone[] = [
@@ -264,6 +268,7 @@ export const defaultData: IPersonalData2 = {
     mows: [],
     teams: [],
     teams2: [],
+    warDefense2: {},
     warOffense2: { deployedCharacters: [], deployedMows: [] },
     characters: [
         {
@@ -374,16 +379,16 @@ export const defaultData: IPersonalData2 = {
             },
         ],
         teams: [
-            ...Array.from({ length: 5 }, (_, i) => ({
+            ...Array.from({ length: 5 }, (_, index) => ({
                 id: v4(),
-                name: `Team ${i + 1}`,
+                name: `Team ${index + 1}`,
                 type: GuildWarTeamType.Defense,
                 rarityCap: Rarity.Legendary,
                 lineup: [],
             })),
-            ...Array.from({ length: 10 }, (_, i) => ({
+            ...Array.from({ length: 10 }, (_, index) => ({
                 id: v4(),
-                name: `Team ${i + 1}`,
+                name: `Team ${index + 1}`,
                 type: GuildWarTeamType.Offense,
                 rarityCap: Rarity.Legendary,
                 lineup: [],
@@ -422,6 +427,9 @@ export const defaultData: IPersonalData2 = {
 
         // Additional Sources
         additionalBooksPerWeek: 0,
+
+        // Calculation Preferences
+        defaultBookToUse: Rarity.Legendary,
     },
     xpUse: {
         useCommon: true,

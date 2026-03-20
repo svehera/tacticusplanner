@@ -89,11 +89,11 @@ export class LETrack implements ILegendaryEventTrack {
                 onlyUnlocked ? x.rank > Rank.Locked : true
             );
 
-            for (let i = 0; i < ordered.length; i++) {
-                const uniqChar = ordered[i];
+            for (let index = 0; index < ordered.length; index++) {
+                const uniqChar = ordered[index];
                 this.unitsRestrictions.forEach(x => {
                     result2[x.name] ??= [];
-                    result2[x.name][i] = result[x.name].find(x => x.name === uniqChar.name);
+                    result2[x.name][index] = result[x.name].find(x => x.name === uniqChar.name);
                 });
             }
             return result2;

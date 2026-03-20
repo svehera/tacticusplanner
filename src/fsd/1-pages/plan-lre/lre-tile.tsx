@@ -5,9 +5,9 @@ import React, { useContext, useMemo } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Trait, Rank, Rarity } from '@/fsd/5-shared/model';
-import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { TraitImage, pooEmoji, RarityIcon, starEmoji, UnitShardIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterBias, CharactersService, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
+import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { EquipmentIcon, EquipmentService } from '@/fsd/4-entities/equipment';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal, PersonalGoalType } from '@/fsd/4-entities/goal';
 
@@ -72,11 +72,11 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
         });
         // Just in case a tactician has a stale goal lying around, make sure we
         // don't display a rank lower than the current character's rank.
-        const ret = Math.max(
+        const returnValue = Math.max(
             character.rank,
             Math.min(maxCommonRank, maxUncommonRank, maxRareRank, maxEpicRank, maxLegendaryRank)
         );
-        return ret;
+        return returnValue;
     }, [viewPreferences, upgradeRankOrMowGoals, character]);
 
     // Determine the rarity icon to display based on the goal rank and current
@@ -114,7 +114,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
 
     return (
         <div
-            className={'flex-box gap10 full-width gap-x-2.5' + rankBackgroundCssClass}
+            className={'flex-box gap10 full-width gap-x-2.5 ' + rankBackgroundCssClass}
             onClick={() => onClick(character)}>
             {showShardIcon && (
                 <UnitShardIcon

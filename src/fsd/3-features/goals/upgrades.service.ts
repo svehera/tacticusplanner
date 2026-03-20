@@ -1,9 +1,14 @@
 ﻿/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { cloneDeep, orderBy, sum, uniq, uniqBy } from 'lodash';
+import { orderBy, sum, uniq, uniqBy } from 'lodash';
 
 import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
-import { IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent, IEstimatedRanksSettings } from 'src/models/interfaces';
+import {
+    IDailyRaidsFarmOrder,
+    IDailyRaidsHomeScreenEvent,
+    IEstimatedRanksSettings,
+    IGameModeTokensState,
+} from 'src/models/interfaces';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
@@ -95,16 +100,143 @@ interface TaggedLocation {
     hsePoints?: number;
 }
 
+type TaggedLocationMetadata = Omit<TaggedLocation, 'loc'>;
+
+interface GoalPriorityLocationsState {
+    locs: ICampaignBattleComposed[];
+    upgradeIds: Set<string>;
+    sortedLocs?: ICampaignBattleComposed[];
+    lastInventoryByUpgrade?: Map<string, number>;
+}
+
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
+
+    private static readonly goalPriorityByIdCache = new WeakMap<
+        ReadonlyArray<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
+        Map<string, number>
+    >();
+
+    private static readonly taggedLocationMetadataCache = new Map<
+        | Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
+        | undefined,
+        Map<string, TaggedLocationMetadata>
+    >();
+
+    private static getGoalPriorityById(
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
+    ): Map<string, number> {
+        const cached = this.goalPriorityByIdCache.get(goals);
+        if (cached) {
+            return cached;
+        }
+        const map = new Map(goals.map(goal => [goal.goalId, goal.priority]));
+        this.goalPriorityByIdCache.set(goals, map);
+        return map;
+    }
+
+    private static getTaggedLocationMetadataCache(
+        cache:
+            | Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
+            | undefined
+    ): Map<string, TaggedLocationMetadata> {
+        if (!cache) {
+            return new Map<string, TaggedLocationMetadata>();
+        }
+        const cached = this.taggedLocationMetadataCache.get(cache);
+        if (cached) {
+            return cached;
+        }
+        const map = new Map<string, TaggedLocationMetadata>();
+        this.taggedLocationMetadataCache.set(cache, map);
+        return map;
+    }
+
+    private static precomputeHigherPriorityNeeds(
+        combinedBaseMaterials: Record<string, ICombinedUpgrade>,
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
+        cache: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
+    ): void {
+        const goalPriorityById = this.getGoalPriorityById(goals);
+
+        for (const [upgradeId, mat] of Object.entries(combinedBaseMaterials)) {
+            const countsByGoalId = mat.countByGoalId;
+            const totalByPriority = new Map<number, number>();
+
+            for (const [goalId, count] of Object.entries(countsByGoalId)) {
+                const priority = goalPriorityById.get(goalId);
+                if (priority === undefined) {
+                    continue;
+                }
+                totalByPriority.set(priority, (totalByPriority.get(priority) ?? 0) + count);
+            }
+
+            if (totalByPriority.size === 0) {
+                continue;
+            }
+
+            const priorities = [...totalByPriority.keys()].sort((a, b) => a - b);
+            const higherNeedsByPriority = new Map<number, number>();
+            let cumulative = 0;
+            for (const priority of priorities) {
+                higherNeedsByPriority.set(priority, cumulative);
+                cumulative += totalByPriority.get(priority) ?? 0;
+            }
+
+            for (const goalId of Object.keys(countsByGoalId)) {
+                const priority = goalPriorityById.get(goalId);
+                if (priority === undefined) {
+                    continue;
+                }
+                const neededByHigherPriorityGoals = higherNeedsByPriority.get(priority) ?? 0;
+                cache.set(`hpg:${upgradeId}|${goalId}`, {
+                    neededByHigherPriorityGoals,
+                    stillNeededForGoal: 0,
+                    totalRemaining: 0,
+                });
+            }
+        }
+    }
+
+    public static computeOnslaughtTokensToday(gameModeTokens: IGameModeTokensState): number {
+        const currentTokens = gameModeTokens.tokens?.onslaught?.current ?? 0;
+        const nextTokenInSeconds = gameModeTokens.tokens?.onslaught?.nextTokenInSeconds ?? Infinity;
+        const regenInSeconds = gameModeTokens.tokens?.onslaught?.regenDelayInSeconds ?? Infinity;
+        const maxTokens = gameModeTokens.tokens?.onslaught?.max ?? 3;
+        const now = new Date();
+        const endOfUtcDay = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59, 999);
+
+        const secondsLeftToday = Math.max(0, (endOfUtcDay - now.getTime()) / 1000);
+
+        const safeRegenInSeconds = Number.isFinite(regenInSeconds) && regenInSeconds > 0 ? regenInSeconds : Infinity;
+
+        const firstTokenInSeconds =
+            currentTokens >= maxTokens
+                ? safeRegenInSeconds
+                : Number.isFinite(nextTokenInSeconds) && nextTokenInSeconds >= 0
+                  ? nextTokenInSeconds
+                  : Infinity;
+
+        if (!Number.isFinite(firstTokenInSeconds) || !Number.isFinite(safeRegenInSeconds)) {
+            return currentTokens;
+        }
+
+        const regeneratedToday =
+            secondsLeftToday < firstTokenInSeconds
+                ? 0
+                : 1 + Math.floor((secondsLeftToday - firstTokenInSeconds) / safeRegenInSeconds);
+
+        return currentTokens + regeneratedToday;
+    }
 
     public static canonicalizeInventoryUpgrades(
         inventoryUpgrades: Record<string, number>,
         chars: ICharacter2[],
         mows: IMow2[]
     ): Record<string, number> {
+        /*
         const ret: Record<string, number> = Object.fromEntries(
             Object.entries(inventoryUpgrades).map(([key, value]) => {
                 return [
@@ -115,15 +247,30 @@ export class UpgradesService {
                 ];
             })
         );
+        */
+
+        const materialToIdMap: Record<string, string> = {};
+        for (const recipe of Object.values(recipeDataByName)) {
+            if (recipe.material) {
+                materialToIdMap[recipe.material] = recipe.snowprintId;
+            }
+        }
+
+        const returnValue: Record<string, number> = {};
+        for (const [key, value] of Object.entries(inventoryUpgrades)) {
+            const finalKey = recipeDataByName[key] ? key : (materialToIdMap[key] ?? key);
+            returnValue[finalKey] = value;
+        }
+
         chars.forEach(char => {
-            ret['shards_' + char.snowprintId!] = char.shards;
-            ret['mythicShards_' + char.snowprintId!] = char.mythicShards;
+            returnValue['shards_' + char.snowprintId!] = char.shards;
+            returnValue['mythicShards_' + char.snowprintId!] = char.mythicShards;
         });
         mows.forEach(mow => {
-            ret['shards_' + mow.snowprintId!] = mow.shards;
-            ret['mythicShards_' + mow.snowprintId!] = mow.mythicShards;
+            returnValue['shards_' + mow.snowprintId!] = mow.shards;
+            returnValue['mythicShards_' + mow.snowprintId!] = mow.mythicShards;
         });
-        return ret;
+        return returnValue;
     }
 
     static getUpgradesEstimatedDays(
@@ -132,7 +279,8 @@ export class UpgradesService {
         mows: IMow2[],
         ...goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
     ): IEstimatedUpgrades {
-        const inventoryUpgrades = this.canonicalizeInventoryUpgrades(cloneDeep(settings.upgrades), chars, mows);
+        performance.mark('getUpgradesEstimatedDays-start');
+        const inventoryUpgrades = this.canonicalizeInventoryUpgrades(settings.upgrades, chars, mows);
 
         const unitsUpgrades = this.getUpgrades(inventoryUpgrades, chars, mows, goals);
 
@@ -140,33 +288,48 @@ export class UpgradesService {
 
         this.populateLocationsData(combinedBaseMaterials, settings);
 
+        // Cache for expensive per-goal remaining computations keyed by
+        // `${upgradeId}|${inventoryCount}|${goalId ?? 'total'}`.
+        const remainingNeededCache = new Map<
+            string,
+            {
+                neededByHigherPriorityGoals: number;
+                stillNeededForGoal: number;
+                totalRemaining: number;
+            }
+        >();
+
+        this.precomputeHigherPriorityNeeds(combinedBaseMaterials, goals, remainingNeededCache);
+
         const { upgradesRaids, remainingMats } = this.generateDailyRaidsList(
             settings,
             chars,
+            mows,
             goals,
             combinedBaseMaterials,
-            inventoryUpgrades
+            inventoryUpgrades,
+            remainingNeededCache
         );
 
         const blockedMats = Object.values(remainingMats).map(x => x.id);
         const finishedMats = Object.entries(combinedBaseMaterials).filter(
-            ([_, val]) => val.id && (inventoryUpgrades[val.id] ?? 0) >= val.requiredCount
+            ([_, value]) => value.id && (inventoryUpgrades[value.id] ?? 0) >= value.requiredCount
         );
         const blockedIds = new Set(blockedMats);
-        const finishedIds = new Set(finishedMats.map(([_, val]) => val.id));
+        const finishedIds = new Set(finishedMats.map(([_, value]) => value.id));
         const inProgressMats = Object.entries(combinedBaseMaterials).filter(
-            ([_, val]) => !!val.id && !blockedIds.has(val.id) && !finishedIds.has(val.id)
+            ([_, value]) => !!value.id && !blockedIds.has(value.id) && !finishedIds.has(value.id)
         );
 
         const mergedInProgress = inProgressMats.reduce(
-            (acc, [id, upgrade]) => {
-                const existing = acc[id];
+            (accumulator, [id, upgrade]) => {
+                const existing = accumulator[id];
                 if (existing) {
                     existing.locations = uniqBy([...existing.locations, ...upgrade.locations], 'id');
                 } else {
-                    acc[id] = cloneDeep(upgrade);
+                    accumulator[id] = this.cloneCombinedUpgrade(upgrade);
                 }
-                return acc;
+                return accumulator;
             },
             {} as Record<string, ICombinedUpgrade>
         );
@@ -180,18 +343,18 @@ export class UpgradesService {
 
         const isGoalPriority = settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.goalPriority;
         const goalPriorityEstimates = isGoalPriority
-            ? this.getGoalPriorityEstimates(combinedBaseMaterials, inventoryUpgrades, goals, chars)
+            ? this.getGoalPriorityEstimates(combinedBaseMaterials, inventoryUpgrades, goals, chars, mows)
             : undefined;
 
         const finishedMaterials = isGoalPriority
             ? goalPriorityEstimates!.filter(x => x.isFinished && !x.isBlocked)
             : this.getTotalEstimates(
                   Object.entries(combinedBaseMaterials)
-                      .filter(([_, val]) => val.id && (inventoryUpgrades[val.id] ?? 0) >= val.requiredCount)
+                      .filter(([_, value]) => value.id && (inventoryUpgrades[value.id] ?? 0) >= value.requiredCount)
                       .reduce(
-                          (acc, [id, upgrade]) => {
-                              acc[id] = cloneDeep(upgrade);
-                              return acc;
+                          (accumulator, [id, upgrade]) => {
+                              accumulator[id] = this.cloneCombinedUpgrade(upgrade);
+                              return accumulator;
                           },
                           {} as Record<string, ICombinedUpgrade>
                       ),
@@ -213,6 +376,12 @@ export class UpgradesService {
         const freeEnergyDays = upgradesRaids.filter(x => settings.dailyEnergy - x.energyTotal > 60).length;
 
         const relatedUpgrades = uniq(unitsUpgrades.flatMap(ranksUpgrade => ranksUpgrade.relatedUpgrades));
+        performance.mark('getUpgradesEstimatedDays-end');
+        performance.measure(
+            'getUpgradesEstimatedDays',
+            'getUpgradesEstimatedDays-start',
+            'getUpgradesEstimatedDays-end'
+        );
 
         return {
             upgradesRaids,
@@ -230,12 +399,28 @@ export class UpgradesService {
     }
 
     /**
+     * @returns the difference in raids on the first day between the two estimates. This is a
+     * simple diff that just removes raids in highEnergyRaids that are also in lowEnergyRaids
+     * and return a new IUpgradeRaid array. If we happen to have any battles that are present
+     * but not completely exploited in lowEnergyRaids, but are exploited in highEnergyRaids,
+     * those raids will most likely be removed from highEnergyRaids.
+     */
+    public static getDayRaidsDifference(
+        highEnergyRaids: IUpgradesRaidsDay,
+        lowEnergyRaids: IUpgradesRaidsDay
+    ): IUpgradeRaid[] {
+        const lowRaidIds = new Set(lowEnergyRaids.raids.map(raid => raid.id));
+        return highEnergyRaids.raids.filter(raid => !lowRaidIds.has(raid.id));
+    }
+
+    /**
      * @returns whether we can use energy or onslaught tokens to farm this particular
      * material, given the suggestibility of any/all of its locations.
      */
     public static canRaidMaterial(
         mat: ICombinedUpgrade,
         characters: ICharacter2[],
+        mows: IMow2[],
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
     ): boolean {
         if (!mat.id.startsWith('shards_') && !mat.id.startsWith('mythicShards_')) {
@@ -248,13 +433,18 @@ export class UpgradesService {
                 return false;
             } else if (
                 mat.id.startsWith('shards_') &&
-                !this.canOnslaughtCharacterForRegularShards(goal?.unitId, characters, goal as ICharacterAscendGoal)
+                !this.canOnslaughtCharacterForRegularShards(
+                    goal?.unitId,
+                    characters,
+                    mows,
+                    goal as ICharacterAscendGoal
+                )
             ) {
                 // We have an ascension goal requiring regular shards, but we can't farm them with onslaught, so the goal is blocked.
                 return false;
             } else if (
                 mat.id.startsWith('mythicShards_') &&
-                !this.canOnslaughtCharacterForMythicShards(goal?.unitId, characters, goal as ICharacterAscendGoal)
+                !this.canOnslaughtCharacterForMythicShards(goal?.unitId, characters, mows, goal as ICharacterAscendGoal)
             ) {
                 // We have an ascension goal requiring mythic shards, but we can't farm them with onslaught, so the goal is blocked.
                 return false;
@@ -320,6 +510,17 @@ export class UpgradesService {
         };
     }
 
+    /** cloneDeep is super expensive, so instead we manually clone the necessary properties. */
+    private static cloneCombinedUpgrade(upgrade: ICombinedUpgrade): ICombinedUpgrade {
+        return {
+            ...upgrade,
+            countByGoalId: { ...upgrade.countByGoalId },
+            relatedCharacters: [...upgrade.relatedCharacters],
+            relatedGoals: [...upgrade.relatedGoals],
+            locations: [...upgrade.locations.map(x => ({ ...x }))],
+        };
+    }
+
     /*
      * @returns An array of `IUpgradesRaidsDay`, where each object represents a single day's
      * raiding plan. Returns an empty array if daily energy is too low to perform any raids.
@@ -327,14 +528,23 @@ export class UpgradesService {
     public static generateDailyRaidsList(
         settings: IEstimatedRanksSettings,
         characters: ICharacter2[],
+        mows: IMow2[],
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
-        inventoryUpgrades: Record<string, number>
+        inventoryUpgrades: Record<string, number>,
+        remainingNeededCache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        >
     ): { upgradesRaids: IUpgradesRaidsDay[]; remainingMats: Record<string, ICombinedUpgrade> } {
-        const ret: IUpgradesRaidsDay[] = [];
-        let onslaughtTokens = settings.onslaughtTokensToday ?? 1;
-        const remainingMats = cloneDeep(combinedBaseMaterials);
-        const inventory = cloneDeep(inventoryUpgrades);
+        const returnValue: IUpgradesRaidsDay[] = [];
+        let onslaughtTokens = settings.onslaughtTokensToday !== undefined ? settings.onslaughtTokensToday : 1;
+        let remainingMats: Record<string, ICombinedUpgrade> = {};
+
+        for (const [id, upgrade] of Object.entries(combinedBaseMaterials)) {
+            remainingMats[id] = this.cloneCombinedUpgrade(upgrade);
+        }
+        const inventory = { ...inventoryUpgrades };
 
         let day = this.createRaidsForExistingInventory(remainingMats, inventory);
         this.handleFirstDayCompletedRaids(day, settings, combinedBaseMaterials);
@@ -342,26 +552,25 @@ export class UpgradesService {
         let days = 0;
         const MAX_DAYS = 1000;
         const blockedMats: Record<string, ICombinedUpgrade> = {};
-        cloneDeep(Object.keys(remainingMats)).forEach(upgradeId => {
-            const mat = remainingMats[upgradeId];
-            if (mat.requiredCount <= 0) {
-                delete remainingMats[upgradeId];
-                return;
+        const newRemainignMats: Record<string, ICombinedUpgrade> = {};
+        for (const key in remainingMats) {
+            const mat = remainingMats[key];
+            if (mat.requiredCount <= 0) continue;
+            if (!this.canRaidMaterial(mat, characters, mows, goals)) {
+                blockedMats[key] = mat;
+                continue;
             }
-            if (!this.canRaidMaterial(mat, characters, goals)) {
-                blockedMats[upgradeId] = mat;
-                // Delete upgrade materials we cannot farm.
-                delete remainingMats[upgradeId];
-            }
-        });
+            newRemainignMats[key] = mat;
+        }
+        remainingMats = newRemainignMats;
+
+        const precomputedGoalLocations = this.precomputeGoalPriorityLocations(settings, goals, remainingMats);
 
         while (Object.entries(remainingMats).length > 0 && days++ < MAX_DAYS) {
-            // regenerate 1 token every 18 hours, or 3 every two days.
-            onslaughtTokens = Math.max(1, Math.min(2, 3 - onslaughtTokens));
-
             this.addOnslaughtsForDay(
                 day,
                 characters,
+                mows,
                 onslaughtTokens,
                 goals.filter(goal => goal.type === PersonalGoalType.Ascend),
                 remainingMats,
@@ -376,13 +585,15 @@ export class UpgradesService {
                 day,
                 settings,
                 energy,
-                this.sortLocationsForRaiding(locs, goals, remainingMats, inventory, settings),
+                locs,
                 remainingMats,
                 inventory,
-                goals
+                goals,
+                remainingNeededCache,
+                precomputedGoalLocations
             );
-            this.postProcessRaidsForHse(day, settings, goals, remainingMats, inventory);
-            const upgradeIds = cloneDeep(Object.keys(remainingMats));
+            this.postProcessRaidsForHse(day, settings, goals, remainingMats, inventory, remainingNeededCache);
+            const upgradeIds = [...Object.keys(remainingMats)];
             for (const upgradeId of upgradeIds) {
                 const mat = remainingMats[upgradeId];
                 if (inventory[upgradeId] === undefined) continue;
@@ -408,20 +619,22 @@ export class UpgradesService {
             }, 0);
             energy = settings.dailyEnergy;
             if (day.raids.length === 0) break;
-            ret.push(day);
+            returnValue.push(day);
             day = {
                 energyTotal: 0,
                 raidsTotal: 0,
                 onslaughtTokens,
                 raids: [],
             };
+            // regenerate 1 token every 18 hours, or 3 every two days.
+            onslaughtTokens = Math.max(1, Math.min(2, 3 - onslaughtTokens));
         }
 
         Object.keys(blockedMats).forEach(upgradeId => {
             remainingMats[upgradeId] = blockedMats[upgradeId];
         });
 
-        ret.forEach(day => {
+        returnValue.forEach(day => {
             day.raids.forEach(raid => {
                 raid.raidLocations.forEach(loc => {
                     loc.energySpent = (loc.raidsAlreadyPerformed + loc.raidsToPerform) * loc.energyCost;
@@ -433,7 +646,7 @@ export class UpgradesService {
             day.raidsTotal = sum(day.raids.map(raid => raid.raidsTotal));
         });
 
-        return { upgradesRaids: ret, remainingMats };
+        return { upgradesRaids: returnValue, remainingMats };
     }
 
     public static postProcessRaidsForHse(
@@ -441,7 +654,11 @@ export class UpgradesService {
         settings: IEstimatedRanksSettings,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
-        inventory: Record<string, number>
+        inventory: Record<string, number>,
+        remainingNeededCache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        >
     ): void {
         const hse = settings.preferences.farmPreferences?.homeScreenEvent;
         if (hse === undefined || hse === IDailyRaidsHomeScreenEvent.none) return;
@@ -496,7 +713,14 @@ export class UpgradesService {
         }
 
         const allLocs = splitRaids.flatMap(raid => raid.raidLocations);
-        const sortedLocs = this.sortLocationsForRaiding(allLocs, goals, combinedBaseMaterials, inventory, settings);
+        const sortedLocs = this.sortLocationsForRaiding(
+            allLocs,
+            goals,
+            combinedBaseMaterials,
+            inventory,
+            settings,
+            remainingNeededCache
+        );
         const locIndex = new Map(sortedLocs.map((loc, index) => [loc.id, index]));
 
         day.raids = orderBy(
@@ -509,6 +733,34 @@ export class UpgradesService {
         );
         day.energyTotal = sum(day.raids.map(raid => raid.energyTotal));
         day.raidsTotal = sum(day.raids.map(raid => raid.raidsTotal));
+    }
+
+    private static precomputeGoalPriorityLocations(
+        settings: IEstimatedRanksSettings,
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
+        remainingMats: Record<string, ICombinedUpgrade>
+    ): Map<string, GoalPriorityLocationsState> | undefined {
+        if (settings.preferences.farmPreferences?.order !== IDailyRaidsFarmOrder.goalPriority) {
+            return undefined;
+        }
+
+        const sortedGoals = orderBy(goals, ['priority'], ['asc']);
+        const allSuggestedLocs = Object.values(remainingMats)
+            .flatMap(mat => mat.locations)
+            .filter(loc => loc.isSuggested);
+        const result = new Map<string, GoalPriorityLocationsState>();
+
+        for (const goal of sortedGoals) {
+            const upgradeIds = new Set(
+                Object.entries(remainingMats)
+                    .filter(([_, mat]) => mat.relatedGoals.includes(goal.goalId))
+                    .map(([upgradeId]) => upgradeId)
+            );
+            const locsForGoal = allSuggestedLocs.filter(loc => upgradeIds.has(loc.rewards.potential[0].id));
+            result.set(goal.goalId, { locs: locsForGoal, upgradeIds });
+        }
+
+        return result;
     }
 
     /**
@@ -533,33 +785,129 @@ export class UpgradesService {
         locs: ICampaignBattleComposed[],
         remainingMats: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
-        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
+        remainingNeededCache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        > = new Map(),
+        goalPriorityLocationsByGoal?: Map<string, GoalPriorityLocationsState>
     ): void {
         const minEnergy = locs.reduce((min, loc) => Math.min(min, loc.energyCost), Infinity);
         const maxEnergy = locs.reduce((max, loc) => Math.max(max, loc.energyCost), -Infinity);
         if (settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials) {
-            for (const loc of locs) {
+            for (const loc of this.sortLocationsForRaiding(
+                locs,
+                goals,
+                remainingMats,
+                inventory,
+                settings,
+                remainingNeededCache
+            )) {
                 if (energy < minEnergy) break;
-                energy = this.raidLocation(day, energy, inventory, loc, remainingMats, goals, undefined);
+                energy = this.raidLocation(
+                    day,
+                    energy,
+                    inventory,
+                    loc,
+                    remainingMats,
+                    goals,
+                    undefined,
+                    undefined,
+                    remainingNeededCache
+                );
             }
             if (energy < maxEnergy) locs = locs.filter(loc => loc.energyCost <= energy);
             return;
         } else {
             const sortedGoals = orderBy(goals, ['priority'], ['asc']);
             for (const goal of sortedGoals) {
-                const matsForGoal = Object.entries(remainingMats).filter(([_, mat]) =>
-                    mat.relatedGoals.includes(goal.goalId)
-                );
-                const locsForGoal = locs.filter(loc =>
-                    loc.rewards.potential.some(reward => matsForGoal.some(([_, mat]) => mat.id === reward.id))
-                );
-                for (const loc of locsForGoal) {
+                const precomputedState = goalPriorityLocationsByGoal?.get(goal.goalId);
+                const matsForGoalIds =
+                    precomputedState?.upgradeIds ??
+                    new Set(
+                        Object.entries(remainingMats)
+                            .filter(([_, mat]) => mat.relatedGoals.includes(goal.goalId))
+                            .map(([upgradeId]) => upgradeId)
+                    );
+                const candidateLocs = (
+                    precomputedState?.locs ??
+                    locs.filter(loc => loc.rewards.potential.some(reward => matsForGoalIds.has(reward.id)))
+                ).filter(loc => {
+                    const upgradeId = loc.rewards.potential[0].id;
+                    if (!matsForGoalIds.has(upgradeId)) {
+                        return false;
+                    }
+                    const mat = remainingMats[upgradeId];
+                    if (!mat) {
+                        return false;
+                    }
+                    const { stillNeededForGoal } = this.getRemainingNeededForGoal(
+                        upgradeId,
+                        mat,
+                        inventory,
+                        goals,
+                        goal.goalId,
+                        remainingNeededCache
+                    );
+                    return stillNeededForGoal > 0;
+                });
+
+                let sortedCandidateLocs: ICampaignBattleComposed[];
+
+                if (precomputedState) {
+                    precomputedState.locs = candidateLocs;
+                    const needsResort =
+                        !precomputedState.sortedLocs ||
+                        [...precomputedState.upgradeIds].some(
+                            upgradeId =>
+                                (precomputedState.lastInventoryByUpgrade?.get(upgradeId) ?? 0) !==
+                                (inventory[upgradeId] ?? 0)
+                        );
+
+                    if (needsResort) {
+                        sortedCandidateLocs = this.sortLocationsForRaiding(
+                            candidateLocs,
+                            goals,
+                            remainingMats,
+                            inventory,
+                            settings,
+                            remainingNeededCache
+                        );
+                        precomputedState.sortedLocs = sortedCandidateLocs;
+                        precomputedState.lastInventoryByUpgrade = new Map(
+                            [...precomputedState.upgradeIds].map(upgradeId => [upgradeId, inventory[upgradeId] ?? 0])
+                        );
+                    } else {
+                        const candidateIds = new Set(candidateLocs.map(loc => loc.id));
+                        const previousSorted = precomputedState.sortedLocs ?? [];
+                        sortedCandidateLocs = previousSorted.filter(loc => candidateIds.has(loc.id));
+                        precomputedState.sortedLocs = sortedCandidateLocs;
+                    }
+                } else {
+                    sortedCandidateLocs = this.sortLocationsForRaiding(
+                        candidateLocs,
+                        goals,
+                        remainingMats,
+                        inventory,
+                        settings,
+                        remainingNeededCache
+                    );
+                }
+
+                for (const loc of sortedCandidateLocs) {
                     if (energy < minEnergy) break;
                     const raidKey = `${loc.rewards.potential[0].id}::${goal.goalId}`;
-                    energy = this.raidLocation(day, energy, inventory, loc, remainingMats, goals, goal.goalId, {
-                        raidKey,
-                        goal: { goalId: goal.goalId, unitId: goal.unitId },
-                    });
+                    energy = this.raidLocation(
+                        day,
+                        energy,
+                        inventory,
+                        loc,
+                        remainingMats,
+                        goals,
+                        goal.goalId,
+                        { raidKey, goal: { goalId: goal.goalId, unitId: goal.unitId } },
+                        remainingNeededCache
+                    );
                 }
                 if (energy < maxEnergy) locs = locs.filter(loc => loc.energyCost <= energy);
             }
@@ -576,6 +924,8 @@ export class UpgradesService {
      * @param needed - Remaining materials needed for this location's material.
      * @param mat - Combined upgrade info for this material.
      * @param upgradeId - The material ID to update.
+     * @param goals - Active goals used for priority-based planning.
+     * @param goalId - The specific goal ID being targeted, if any.
      * @returns The remaining energy after raiding this location.
      */
     public static addRaidForLocation(
@@ -586,7 +936,13 @@ export class UpgradesService {
         needed: number,
         mat: ICombinedUpgrade,
         upgradeId: string,
-        options?: { raidKey?: string; goal?: { goalId: string; unitId: string } }
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
+        goalId: string | undefined,
+        options: { raidKey?: string; goal?: { goalId: string; unitId: string } } | undefined,
+        remainingNeededCache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        >
     ): number {
         const raidKey = options?.raidKey ?? upgradeId;
         const existingRaid = day.raids.find(raid => raid.id === raidKey);
@@ -647,13 +1003,18 @@ export class UpgradesService {
             const countByGoalId = options?.goal
                 ? { [options.goal.goalId]: mat.countByGoalId[options.goal.goalId] ?? 0 }
                 : { ...mat.countByGoalId };
+            const inInventory = inventory[upgradeId] ?? 0;
+            const acquiredCount =
+                inInventory -
+                this.getRemainingNeededForGoal(upgradeId, mat, inventory, goals, goalId, remainingNeededCache)
+                    .neededByHigherPriorityGoals;
             day.raids.push({
                 raidLocations: [raidLoc],
                 energyTotal: raidLoc.energySpent,
                 energyLeft: energy - raidLoc.energySpent,
                 daysTotal: -1,
                 raidsTotal: raidLoc.raidsToPerform,
-                acquiredCount: Math.floor(inventory[upgradeId] ?? 0),
+                acquiredCount: Math.max(0, acquiredCount),
                 requiredCount,
                 relatedCharacters,
                 relatedGoals,
@@ -694,7 +1055,11 @@ export class UpgradesService {
         remainingMats: Record<string, ICombinedUpgrade>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         goalId: string | undefined,
-        options?: { raidKey?: string; goal?: { goalId: string; unitId: string } }
+        options: { raidKey?: string; goal?: { goalId: string; unitId: string } } | undefined,
+        remainingNeededCache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        > = new Map()
     ): number {
         if (energy < loc.energyCost) return energy;
         const upgradeId = loc.rewards.potential[0].id;
@@ -709,13 +1074,26 @@ export class UpgradesService {
                 mat,
                 inventory,
                 goals,
-                goalId
+                goalId,
+                remainingNeededCache
             );
             if (stillNeededForGoal <= 0) return energy;
             if (neededByHigherPriorityGoals + (mat.countByGoalId[goalId] ?? 0) <= (inventory[upgradeId] ?? 0)) {
                 return energy;
             }
-            return this.addRaidForLocation(day, energy, inventory, loc, stillNeededForGoal, mat, upgradeId, options);
+            return this.addRaidForLocation(
+                day,
+                energy,
+                inventory,
+                loc,
+                stillNeededForGoal,
+                mat,
+                upgradeId,
+                goals,
+                goalId,
+                options,
+                remainingNeededCache
+            );
         }
         if (mat.requiredCount <= (inventory[upgradeId] ?? 0)) {
             return energy;
@@ -725,10 +1103,23 @@ export class UpgradesService {
             mat,
             inventory,
             goals,
-            undefined
+            undefined,
+            remainingNeededCache
         ).totalRemaining;
         if (remainingNeeded <= 0) return energy;
-        return this.addRaidForLocation(day, energy, inventory, loc, remainingNeeded, mat, upgradeId, options);
+        return this.addRaidForLocation(
+            day,
+            energy,
+            inventory,
+            loc,
+            remainingNeeded,
+            mat,
+            upgradeId,
+            goals,
+            undefined,
+            options,
+            remainingNeededCache
+        );
     }
 
     /**
@@ -746,31 +1137,59 @@ export class UpgradesService {
         mat: ICombinedUpgrade,
         inventory: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
-        goalId: string | undefined
+        goalId: string | undefined,
+        cache?: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
     ): { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number } {
-        const totalNeeded = mat.requiredCount;
         const available = inventory[upgradeId] ?? 0;
-        const totalRemaining = Math.max(totalNeeded - available, 0);
+        const totalRemaining = Math.max(mat.requiredCount - available, 0);
+
         if (!goalId) {
-            return {
+            const cacheKey = `total:${upgradeId}|${available}`;
+            const fullyCached = cache?.get(cacheKey);
+            if (fullyCached) return fullyCached;
+
+            const returnValue = {
                 neededByHigherPriorityGoals: 0,
                 stillNeededForGoal: totalRemaining,
                 totalRemaining,
             };
+            if (cache) cache.set(cacheKey, returnValue);
+            return returnValue;
         }
-        const currentGoal = goals.find(g => g.goalId === goalId);
-        const currentPriority = currentGoal?.priority ?? Number.POSITIVE_INFINITY;
-        const neededByHigherPriorityGoals = Object.entries(mat.countByGoalId)
-            .filter(([otherGoalId, _]) => {
-                const otherGoal = goals.find(g => g.goalId === otherGoalId);
-                return otherGoal !== undefined && otherGoal.priority < currentPriority;
-            })
-            .reduce((acc, [_, count]) => acc + count, 0);
+
+        // neededByHigherPriorityGoals depends only on goal priorities and mat.countByGoalId,
+        // NOT on current inventory.  The original cache key encoded inventory, so this value
+        // was recomputed from scratch on every single inventory change during raid simulation —
+        // the pathological O(goals²) case seen in the profiler.
+        // Fix: cache it under an inventory-free key so it is computed only once per
+        // (upgradeId, goalId) pair for the entire planning pass.
+        const hpgKey = `hpg:${upgradeId}|${goalId}`;
+        let neededByHigherPriorityGoals = cache?.get(hpgKey)?.neededByHigherPriorityGoals;
+        if (neededByHigherPriorityGoals === undefined) {
+            const currentPriority = this.getGoalPriorityById(goals).get(goalId) ?? Number.POSITIVE_INFINITY;
+            const priorityByGoalId = this.getGoalPriorityById(goals);
+            let total = 0;
+            for (const [otherGoalId, count] of Object.entries(mat.countByGoalId)) {
+                const otherPriority = priorityByGoalId.get(otherGoalId);
+                if (otherPriority !== undefined && otherPriority < currentPriority) {
+                    total += count;
+                }
+            }
+            neededByHigherPriorityGoals = total;
+            if (cache) cache.set(hpgKey, { neededByHigherPriorityGoals, stillNeededForGoal: 0, totalRemaining: 0 });
+        }
+
+        const cacheKey = `goal:${upgradeId}|${goalId}|${available}`;
+        const fullyCached = cache?.get(cacheKey);
+        if (fullyCached) return fullyCached;
+
         const stillNeededForGoal = Math.max(
             (mat.countByGoalId[goalId] ?? 0) - Math.max(available - neededByHigherPriorityGoals, 0),
             0
         );
-        return { neededByHigherPriorityGoals, stillNeededForGoal, totalRemaining };
+        const result = { neededByHigherPriorityGoals, stillNeededForGoal, totalRemaining };
+        if (cache) cache.set(cacheKey, result);
+        return result;
     }
 
     /**
@@ -783,19 +1202,37 @@ export class UpgradesService {
         upgradeId: string,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
-        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
+        cache?: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
     ): string | undefined {
         const mat = combinedBaseMaterials[upgradeId];
         if (!mat) return undefined;
-        const eligibleGoals = mat.relatedGoals
-            .map(goalId => goals.find(goal => goal.goalId === goalId))
-            .filter(goal => goal !== undefined)
-            .filter(
-                goal =>
-                    this.getRemainingNeededForGoal(upgradeId, mat, inventory, goals, goal.goalId).stillNeededForGoal > 0
-            );
-        const highestPriorityGoal = orderBy(eligibleGoals, ['priority'], ['asc'])[0];
-        return highestPriorityGoal?.goalId;
+        const priorityByGoalId = this.getGoalPriorityById(goals);
+        let selectedGoalId: string | undefined;
+        let selectedPriority = Number.POSITIVE_INFINITY;
+
+        for (const candidateGoalId of mat.relatedGoals) {
+            const priority = priorityByGoalId.get(candidateGoalId);
+            if (priority === undefined || priority >= selectedPriority) {
+                continue;
+            }
+
+            const stillNeededForGoal = this.getRemainingNeededForGoal(
+                upgradeId,
+                mat,
+                inventory,
+                goals,
+                candidateGoalId,
+                cache
+            ).stillNeededForGoal;
+
+            if (stillNeededForGoal > 0) {
+                selectedGoalId = candidateGoalId;
+                selectedPriority = priority;
+            }
+        }
+
+        return selectedGoalId;
     }
 
     /**
@@ -809,7 +1246,11 @@ export class UpgradesService {
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
-        highestPriorityGoalId: string | undefined
+        highestPriorityGoalId: string | undefined,
+        cache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        > = new Map()
     ): number {
         if (!combinedBaseMaterials[upgradeId]) return 0;
         const remaining = this.getRemainingNeededForGoal(
@@ -817,14 +1258,15 @@ export class UpgradesService {
             combinedBaseMaterials[upgradeId],
             inventory,
             goals,
-            highestPriorityGoalId
+            highestPriorityGoalId,
+            cache
         );
         const totalMatsNeeded = highestPriorityGoalId ? remaining.stillNeededForGoal : remaining.totalRemaining;
         const matsPerDay = combinedBaseMaterials[upgradeId].locations
             .filter(loc => loc.isSuggested)
             .map(loc => loc.energyPerDay / loc.energyPerItem)
-            .reduce((acc, x) => acc + x, 0);
-        return Math.ceil(totalMatsNeeded / matsPerDay);
+            .reduce((accumulator, x) => accumulator + x, 0);
+        return totalMatsNeeded / matsPerDay;
     }
 
     /**
@@ -838,16 +1280,38 @@ export class UpgradesService {
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
-        settings: IEstimatedRanksSettings
+        settings: IEstimatedRanksSettings,
+        cache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        > = new Map()
     ): Array<TaggedLocation> {
         // Give everything a two-part priority. The first part is priority. If we're ordering by
         // goal priority, it's simply the priority of the most urgent goal to which this maps. If
         // we're ordering by total materials, then all materials will have the same priority (zero).
-        return cloneDeep(locs).map(loc => {
+        const tagByUpgradeId = new Map<string, TaggedLocationMetadata>();
+        const cachedMetadataByKey = this.getTaggedLocationMetadataCache(cache);
+        const priorityByGoalId = this.getGoalPriorityById(goals);
+        const isTotalMaterialsOrder =
+            settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials;
+
+        return locs.map(loc => {
             const upgradeId = loc.rewards.potential[0].id;
-            if (settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials) {
-                return {
-                    loc,
+            const cachedTag = tagByUpgradeId.get(upgradeId);
+            if (cachedTag) {
+                return { loc, ...cachedTag };
+            }
+
+            const available = inventory[upgradeId] ?? 0;
+            const tagCacheKey = `${isTotalMaterialsOrder ? 'total' : 'goal'}:${upgradeId}|${available}`;
+            const cachedMetadata = cachedMetadataByKey.get(tagCacheKey);
+            if (cachedMetadata) {
+                tagByUpgradeId.set(upgradeId, cachedMetadata);
+                return { loc, ...cachedMetadata };
+            }
+
+            if (isTotalMaterialsOrder) {
+                const tag = {
                     priority: undefined,
                     highestPriorityGoalId: undefined,
                     daysToComplete: this.calculateDaysToCompleteMaterial(
@@ -855,31 +1319,37 @@ export class UpgradesService {
                         combinedBaseMaterials,
                         inventory,
                         goals,
-                        undefined
+                        undefined,
+                        cache
                     ),
                 };
+                tagByUpgradeId.set(upgradeId, tag);
+                cachedMetadataByKey.set(tagCacheKey, tag);
+                return { loc, ...tag };
             }
+
             const highestPriorityGoalId = this.getHighestPriorityGoalIdNeedingMaterial(
                 upgradeId,
                 combinedBaseMaterials,
                 inventory,
-                goals
+                goals,
+                cache
             );
-            const highestPriorityGoal = highestPriorityGoalId
-                ? goals.find(goal => goal.goalId === highestPriorityGoalId)
-                : undefined;
-            return {
-                loc,
-                priority: highestPriorityGoal?.priority ?? 0,
+            const tag = {
+                priority: highestPriorityGoalId ? (priorityByGoalId.get(highestPriorityGoalId) ?? 0) : 0,
                 highestPriorityGoalId,
                 daysToComplete: this.calculateDaysToCompleteMaterial(
                     upgradeId,
                     combinedBaseMaterials,
                     inventory,
                     goals,
-                    highestPriorityGoalId
+                    highestPriorityGoalId,
+                    cache
                 ),
             };
+            tagByUpgradeId.set(upgradeId, tag);
+            cachedMetadataByKey.set(tagCacheKey, tag);
+            return { loc, ...tag };
         });
     }
 
@@ -892,19 +1362,32 @@ export class UpgradesService {
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
-        settings: IEstimatedRanksSettings
+        settings: IEstimatedRanksSettings,
+        cache: Map<
+            string,
+            { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
+        > = new Map()
     ): ICampaignBattleComposed[] {
-        let taggedLocs = orderBy(
-            this.tagLocationsWithGoalPriorityAndDaysToCompletion(
-                locs,
-                goals,
-                combinedBaseMaterials,
-                inventory,
-                settings
-            ),
-            ['priority', 'daysToComplete'],
-            ['asc', 'desc']
-        );
+        let taggedLocs = this.tagLocationsWithGoalPriorityAndDaysToCompletion(
+            locs,
+            goals,
+            combinedBaseMaterials,
+            inventory,
+            settings,
+            cache
+        ).sort((a, b) => {
+            // Sort by priority ascending (undefined treated as Infinity), then daysToComplete descending
+            const aPriority = a.priority === undefined ? Number.POSITIVE_INFINITY : a.priority;
+            const bPriority = b.priority === undefined ? Number.POSITIVE_INFINITY : b.priority;
+            if (aPriority !== bPriority) {
+                return aPriority - bPriority;
+            }
+            // daysToComplete descending
+            if (a.daysToComplete !== b.daysToComplete) {
+                return b.daysToComplete - a.daysToComplete;
+            }
+            return 0;
+        });
         if (
             settings.preferences.farmPreferences?.homeScreenEvent === undefined ||
             settings.preferences.farmPreferences?.homeScreenEvent === IDailyRaidsHomeScreenEvent.none
@@ -968,15 +1451,15 @@ export class UpgradesService {
     public static canOnslaughtCharacterForRegularShards(
         unitId: string,
         chars: ICharacter2[],
+        mows: IMow2[],
         goal: ICharacterAscendGoal
     ): boolean {
         const char = chars.find(char => unitId === char.snowprintId);
-        return (
-            char !== undefined &&
-            char.rank !== Rank.Locked &&
-            char.stars < RarityStars.OneBlueStar &&
-            goal.onslaughtShards > 0
-        );
+        if (char !== undefined) {
+            return char.rank !== Rank.Locked && char.stars < RarityStars.OneBlueStar && goal.onslaughtShards > 0;
+        }
+        const mow = mows.find(mow => unitId === mow.snowprintId);
+        return mow !== undefined && mow.stars < RarityStars.OneBlueStar && goal.onslaughtShards > 0 && mow.unlocked;
     }
 
     /**
@@ -986,24 +1469,26 @@ export class UpgradesService {
     public static canOnslaughtCharacterForMythicShards(
         unitId: string,
         chars: ICharacter2[],
+        mows: IMow2[],
         goal: ICharacterAscendGoal
     ): boolean {
         const char = chars.find(char => unitId === char.snowprintId);
+        if (char !== undefined) {
+            return char.rank !== Rank.Locked && char.stars >= RarityStars.OneBlueStar && goal.onslaughtMythicShards > 0;
+        }
+        const mow = mows.find(mow => unitId === mow.snowprintId);
         return (
-            char !== undefined &&
-            char.rank !== Rank.Locked &&
-            char.stars >= RarityStars.OneBlueStar &&
-            goal.onslaughtMythicShards > 0
+            mow !== undefined && mow.stars >= RarityStars.OneBlueStar && goal.onslaughtMythicShards > 0 && mow.unlocked
         );
     }
 
     /** Used in reduce statements to select the most urgent goal (numerically lowest priority). */
     private static reduceGoalsByPriority(
-        acc: ICharacterAscendGoal | undefined,
+        accumulator: ICharacterAscendGoal | undefined,
         goal: ICharacterAscendGoal
     ): ICharacterAscendGoal | undefined {
-        if (acc === undefined || goal.priority < acc.priority) acc = goal;
-        return acc;
+        if (accumulator === undefined || goal.priority < accumulator.priority) accumulator = goal;
+        return accumulator;
     }
 
     /**
@@ -1013,16 +1498,17 @@ export class UpgradesService {
     public static getOnslaughtTokensForGoal(
         inventory: Record<string, number>,
         characters: ICharacter2[],
+        mows: IMow2[],
         goal: ICharacterAscendGoal
     ): number {
-        const shardData = this.getShardsForGoal(characters, [] as IMow2[], goal);
-        const tokensForRegularShards = this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal)
+        const shardData = this.getShardsForGoal(characters, mows, goal);
+        const tokensForRegularShards = this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal)
             ? Math.ceil(
                   Math.max(0, shardData.totalIncrementalShardsNeeded - (inventory['shards_' + goal.unitId] ?? 0)) /
                       goal.onslaughtShards
               )
             : 0;
-        const tokensForMythicShards = this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, goal)
+        const tokensForMythicShards = this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal)
             ? Math.ceil(
                   Math.max(
                       0,
@@ -1040,20 +1526,21 @@ export class UpgradesService {
     public static findHighestPriorityOnslaughtGoal(
         inventory: Record<string, number>,
         characters: ICharacter2[],
+        mows: IMow2[],
         goals: ICharacterAscendGoal[]
     ): ICharacterAscendGoal | undefined {
         const shardGoal = goals
-            .filter(goal => this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal))
-            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, goal) > 0)
+            .filter(goal => this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal))
+            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, mows, goal) > 0)
             .reduce(
-                (acc, goal) => this.reduceGoalsByPriority(acc, goal),
+                (accumulator, goal) => this.reduceGoalsByPriority(accumulator, goal),
                 undefined as ICharacterAscendGoal | undefined
             );
         const mythicShardGoal = goals
-            .filter(goal => this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, goal))
-            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, goal) > 0)
+            .filter(goal => this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal))
+            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, mows, goal) > 0)
             .reduce(
-                (acc, goal) => this.reduceGoalsByPriority(acc, goal),
+                (accumulator, goal) => this.reduceGoalsByPriority(accumulator, goal),
                 undefined as ICharacterAscendGoal | undefined
             );
         const order = [shardGoal, mythicShardGoal].filter(x => x !== undefined).sort((a, b) => a.priority - b.priority);
@@ -1069,6 +1556,7 @@ export class UpgradesService {
     public static findLongestOnslaughtGoal(
         inventory: Record<string, number>,
         characters: ICharacter2[],
+        mows: IMow2[],
         goals: ICharacterAscendGoal[]
     ): ICharacterAscendGoal | undefined {
         // First filter out any goals that need either type of shard but don't allow onslaught for
@@ -1076,7 +1564,7 @@ export class UpgradesService {
         return goals
             .map(goal => ({
                 goal,
-                tokens: this.getOnslaughtTokensForGoal(inventory, characters, goal),
+                tokens: this.getOnslaughtTokensForGoal(inventory, characters, mows, goal),
             }))
             .filter(x => x.tokens > 0)
             .sort((a, b) => b.tokens - a.tokens)[0]?.goal;
@@ -1144,6 +1632,7 @@ export class UpgradesService {
     public static addOnslaughtsForDay(
         day: IUpgradesRaidsDay,
         characters: ICharacter2[],
+        mows: IMow2[],
         onslaughtTokens: number,
         goals: Array<ICharacterAscendGoal>,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
@@ -1154,18 +1643,20 @@ export class UpgradesService {
         const relatedGoals: Record<string, ICharacterAscendGoal[]> = {};
         if (goals.length === 0) return;
         let index = 0;
-        const originalInventory = cloneDeep(inventory);
+        // The original number of shards we had inventory. We use this instead of cloning the
+        // entire inventory, which could be huge.
+        const originalShards: Record<string, number> = {};
         while (onslaughtTokens > 0) {
             let goal = undefined;
             if (settings.preferences.farmPreferences.order === IDailyRaidsFarmOrder.totalMaterials) {
-                goal = this.findLongestOnslaughtGoal(inventory, characters, goals);
+                goal = this.findLongestOnslaughtGoal(inventory, characters, mows, goals);
             } else {
-                goal = this.findHighestPriorityOnslaughtGoal(inventory, characters, goals);
+                goal = this.findHighestPriorityOnslaughtGoal(inventory, characters, mows, goals);
             }
             if (goal === undefined) break;
             let upgradeId = '';
             let shards = 0;
-            if (this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, goal)) {
+            if (this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal)) {
                 upgradeId = 'shards_' + goal.unitId;
                 shards = goal.onslaughtShards;
             } else {
@@ -1179,6 +1670,9 @@ export class UpgradesService {
                 this.createOnslaughtLocation(upgradeId, Math.floor(shards + fractional), 'Shard', ++index)
             );
             relatedGoals[upgradeId] = [...(relatedGoals[upgradeId] ?? []), goal];
+            if (!(upgradeId in originalShards)) {
+                originalShards[upgradeId] = inventory[upgradeId] ?? 0;
+            }
             inventory[upgradeId] = (inventory[upgradeId] ?? 0) + shards;
             day.onslaughtTokens++;
             onslaughtTokens--;
@@ -1191,7 +1685,7 @@ export class UpgradesService {
                 energyLeft: 0,
                 daysTotal: 0,
                 raidsTotal: 0,
-                acquiredCount: Math.floor(originalInventory[upgradeId] ?? 0),
+                acquiredCount: Math.floor(originalShards[upgradeId] ?? 0),
                 requiredCount: Math.ceil(combinedBaseMaterials[upgradeId]?.requiredCount ?? 0),
                 countByGoalId: { ...(combinedBaseMaterials[upgradeId]?.countByGoalId ?? {}) },
                 relatedCharacters: uniq(relatedGoals[upgradeId]?.map(goal => goal.unitId) ?? []),
@@ -1224,14 +1718,14 @@ export class UpgradesService {
 
         const raidsByMaterial = Object.entries(
             settings.completedLocations.reduce(
-                (acc, loc) => {
+                (accumulator, loc) => {
                     const reward = CampaignsService.getRepeatableReward(loc.rewards);
                     if (reward.length === 0) {
-                        acc['no-reward-' + nonRewardRaidIndex++] = [loc];
+                        accumulator['no-reward-' + nonRewardRaidIndex++] = [loc];
                     } else {
-                        acc[reward] = [...(acc[reward] ?? []), loc];
+                        accumulator[reward] = [...(accumulator[reward] ?? []), loc];
                     }
-                    return acc;
+                    return accumulator;
                 },
                 {} as Record<string, IItemRaidLocation[]>
             )
@@ -1243,7 +1737,7 @@ export class UpgradesService {
             const acquired = settings.upgrades[reward] ?? 0;
             const required = combinedBaseMaterials[reward]?.requiredCount ?? 0;
             const upgrade = FsdUpgradesService.getUpgrade(reward);
-            const newLocations = cloneDeep(locations);
+            const newLocations = locations.map(loc => ({ ...loc }));
             const raid: IUpgradeRaid = {
                 id: `first-day-${reward}-${raidIndex++}`,
                 snowprintId: reward,
@@ -1486,7 +1980,7 @@ export class UpgradesService {
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>
     ): IUnitUpgrade[] {
         const result: IUnitUpgrade[] = [];
-        const clonedUpgrades = cloneDeep(inventoryUpgrades);
+        const clonedUpgrades = { ...inventoryUpgrades };
         for (const goal of goals) {
             const upgradeRanks =
                 (() => {
@@ -1626,7 +2120,8 @@ export class UpgradesService {
         upgrades: Record<string, ICombinedUpgrade>,
         inventoryUpgrades: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
-        chars: ICharacter2[]
+        chars: ICharacter2[],
+        mows: IMow2[]
     ): ICharacterUpgradeEstimate[] {
         const sortedGoals = orderBy(goals, ['priority'], ['asc']);
         const goalPriorityMap = new Map(sortedGoals.map(goal => [goal.goalId, goal.priority]));
@@ -1658,9 +2153,9 @@ export class UpgradesService {
                     if (
                         ascendGoal &&
                         ((this.isShard(upgradeId) &&
-                            this.canOnslaughtCharacterForRegularShards(ascendGoal.unitId, chars, ascendGoal)) ||
+                            this.canOnslaughtCharacterForRegularShards(ascendGoal.unitId, chars, mows, ascendGoal)) ||
                             (this.isMythicShard(upgradeId) &&
-                                this.canOnslaughtCharacterForMythicShards(ascendGoal.unitId, chars, ascendGoal)))
+                                this.canOnslaughtCharacterForMythicShards(ascendGoal.unitId, chars, mows, ascendGoal)))
                     ) {
                         estimate.isBlocked = false;
                     }
@@ -1819,7 +2314,7 @@ export class UpgradesService {
      * @returns the mapping from the campaign number to the canonical node number. The node number
      * is directly provided by snowprint, so extremis node numbers come out as e.g. 13 instead of 2.
      */
-    private static mapNodeNumber(campaign: Campaign, nodeNumber: number): number {
+    public static mapNodeNumber(campaign: Campaign, nodeNumber: number): number {
         switch (campaign) {
             case Campaign.AMSC:
             case Campaign.AMEC:
@@ -1845,50 +2340,50 @@ export class UpgradesService {
 
     /** @returns the number of non-summon enemies you'll face in the battle. */
     private static getNonSummonEnemyCount(battle: ICampaignBattleComposed): number {
-        let ret = 0;
+        let returnValue = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
             if (npc && !npc.traits.includes('Summon')) {
-                ret += enemy.count;
+                returnValue += enemy.count;
             }
         }
-        return ret;
+        return returnValue;
     }
 
     /** @returns the number of non-summon tyranids you'll face in the battle. */
     private static getNonSummonTyranidCount(battle: ICampaignBattleComposed): number {
-        let ret = 0;
+        let returnValue = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
             if (npc && npc.faction === 'Tyranids' && !npc.traits.includes('Summon')) {
-                ret += enemy.count;
+                returnValue += enemy.count;
             }
         }
-        return ret;
+        return returnValue;
     }
 
     /** @returns the number of non-summon chaos enemies you'll face in the battle. */
     private static getNonSummonChaosEnemyCount(battle: ICampaignBattleComposed): number {
-        let ret = 0;
+        let returnValue = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
             if (npc && npc.alliance === Alliance.Chaos && !npc.traits.includes('Summon')) {
-                ret += enemy.count;
+                returnValue += enemy.count;
             }
         }
-        return ret;
+        return returnValue;
     }
 
     /** @returns the number of non-summon chaos enemies you'll face in the battle. */
     private static getNonSummonMechanicalEnemyCount(battle: ICampaignBattleComposed): number {
-        let ret = 0;
+        let returnValue = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
             if (npc && npc.traits.includes('Mechanical') && !npc.traits.includes('Summon')) {
-                ret += enemy.count;
+                returnValue += enemy.count;
             }
         }
-        return ret;
+        return returnValue;
     }
 
     /**
@@ -1914,14 +2409,14 @@ export class UpgradesService {
     ): void {
         const completedLocations = settings.completedLocations;
         // get locations of the selected Campaign Event if there are any
-        const currCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
+        const currentCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
         for (const upgradeId in upgrades) {
             const combinedUpgrade = upgrades[upgradeId];
 
             for (const location of combinedUpgrade.locations) {
                 const campaignProgress = settings.campaignsProgress[location.campaign];
                 const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign as Campaign);
-                const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
+                const isCampaignEventLocationAvailable = currentCampaignEventLocations.includes(location.campaign);
 
                 location.isUnlocked = this.mapNodeNumber(location.campaign, location.nodeNumber) <= campaignProgress;
                 location.isPassFilter =

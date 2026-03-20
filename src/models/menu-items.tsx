@@ -1,4 +1,5 @@
 ﻿import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
@@ -27,8 +28,11 @@ import { insightsMenuItem } from '@/fsd/1-pages/insights/insights.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
+import { cesMenuItem } from '@/fsd/1-pages/plan-ces/ces.menu-item';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
+import { questsMenuItem } from '@/fsd/1-pages/plan-quests/quests.menu-item';
 import { teams2MenuItem } from '@/fsd/1-pages/plan-teams2/teams2.menu-item';
+import { warDefense2MenuItem } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.menu-item';
 import { warOffense2MenuItem } from '@/fsd/1-pages/plan-war-offense2/war-offense2.menu-item';
 import { teamsMenuItem } from '@/fsd/1-pages/teams/teams.menu-item';
 import { wyoMenuItem } from '@/fsd/1-pages/who-you-own/who-you-own.menu-item';
@@ -68,6 +72,7 @@ export const menuItemById = {
     campaignProgression: campaignProgressionMenuItem,
     rosterSnapshots: rosterSnapshotsMenuItem,
     teams2: teams2MenuItem,
+    warDefense2: warDefense2MenuItem,
     warOffense2: warOffense2MenuItem,
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
@@ -83,6 +88,8 @@ export const menuItemById = {
     guides: guidesMenuItem,
     xpIncome: xpIncomeMenuItem,
     onslaught: new MenuItemTP('Onslaught', <MilitaryTechIcon />, '/learn/onslaught?track=Imperial'),
+    quests: questsMenuItem,
+    ces: cesMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -99,29 +106,37 @@ export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
     menuItemById['teams2'],
-    menuItemById['teams'],
     new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
-        menuItemById['defense'],
-        menuItemById['offense'],
+        menuItemById['warDefense2'],
         menuItemById['warOffense2'],
         menuItemById['zones'],
     ]),
     new MenuItemTP('LRE', <TableChartIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
     new MenuItemTP('LRE Archive', <TableChartIcon />, '', '', '', inactiveLreMenuItems),
     menuItemById['campaignProgression'],
+    menuItemById['quests'],
+    menuItemById['ces'],
+    new MenuItemTP('To Be Deleted', <DeleteForeverIcon />, '', '', '', [
+        menuItemById['teams'],
+        menuItemById['defense'],
+        menuItemById['offense'],
+    ]),
 ];
 
 export const planSubMenu: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
     menuItemById['teams2'],
-    menuItemById['teams'],
-    menuItemById['defense'],
-    menuItemById['offense'],
+    menuItemById['warDefense2'],
     menuItemById['warOffense2'],
     menuItemById['zones'],
     menuItemById['leMasterTable'],
+    menuItemById['quests'],
     ...activeLreMenuItems,
+    menuItemById['campaignProgression'],
+    menuItemById['teams'],
+    menuItemById['defense'],
+    menuItemById['offense'],
 ];
 
 export const learnSubMenuMobile: MenuItemTP[] = [

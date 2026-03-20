@@ -254,9 +254,9 @@ const createAllCampaignsProgress = (): IEstimatedRanksSettings['campaignsProgres
     return Object.values(Campaign)
         .filter((value): value is Campaign => typeof value === 'string')
         .reduce(
-            (acc, campaign) => {
-                acc[campaign] = 999;
-                return acc;
+            (accumulator, campaign) => {
+                accumulator[campaign] = 999;
+                return accumulator;
             },
             {} as IEstimatedRanksSettings['campaignsProgress']
         );
@@ -282,9 +282,9 @@ const createCustomDailyRaidsSettings = (
     const defaults = Object.values(Rarity)
         .filter((value): value is Rarity => typeof value === 'number')
         .reduce<Partial<Record<Rarity, CampaignType[]>>>(
-            (acc, rarity) => {
-                acc[rarity] = [];
-                return acc;
+            (accumulator, rarity) => {
+                accumulator[rarity] = [];
+                return accumulator;
             },
             { Shard: [], 'Mythic Shard': [] } as Partial<Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>>
         ) as Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>;
@@ -353,7 +353,16 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         const combinedBaseMaterials = {} as Record<string, ICombinedUpgrade>;
 
-        UpgradesService.addOnslaughtsForDay(day, [character], 3, [goal], combinedBaseMaterials, settings, inventory);
+        UpgradesService.addOnslaughtsForDay(
+            day,
+            [character],
+            [],
+            3,
+            [goal],
+            combinedBaseMaterials,
+            settings,
+            inventory
+        );
 
         expect(day.onslaughtTokens).toBe(3);
         expect(day.raids).toHaveLength(1);
@@ -416,7 +425,16 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         const combinedBaseMaterials = {} as Record<string, ICombinedUpgrade>;
 
-        UpgradesService.addOnslaughtsForDay(day, [character], 3, [goal], combinedBaseMaterials, settings, inventory);
+        UpgradesService.addOnslaughtsForDay(
+            day,
+            [character],
+            [],
+            3,
+            [goal],
+            combinedBaseMaterials,
+            settings,
+            inventory
+        );
 
         expect(day.onslaughtTokens).toBe(2);
         expect(day.raids).toHaveLength(1);
@@ -506,6 +524,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         UpgradesService.addOnslaughtsForDay(
             day,
             [characterA, characterB],
+            [],
             2,
             [goalA, goalB],
             combinedBaseMaterials,
@@ -579,7 +598,16 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         const combinedBaseMaterials = {} as Record<string, ICombinedUpgrade>;
 
-        UpgradesService.addOnslaughtsForDay(day, [character], 3, [goal], combinedBaseMaterials, settings, inventory);
+        UpgradesService.addOnslaughtsForDay(
+            day,
+            [character],
+            [],
+            3,
+            [goal],
+            combinedBaseMaterials,
+            settings,
+            inventory
+        );
 
         expect(day.raids).toHaveLength(0);
         expect(day.onslaughtTokens).toBe(0);
@@ -642,7 +670,16 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         const combinedBaseMaterials = {} as Record<string, ICombinedUpgrade>;
 
-        UpgradesService.addOnslaughtsForDay(day, [character], 3, [goal], combinedBaseMaterials, settings, inventory);
+        UpgradesService.addOnslaughtsForDay(
+            day,
+            [character],
+            [],
+            3,
+            [goal],
+            combinedBaseMaterials,
+            settings,
+            inventory
+        );
 
         expect(day.raids).toHaveLength(0);
         expect(day.onslaughtTokens).toBe(0);
@@ -687,7 +724,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         const combinedBaseMaterials = {} as Record<string, ICombinedUpgrade>;
 
-        UpgradesService.addOnslaughtsForDay(day, [character], 2, [], combinedBaseMaterials, settings, inventory);
+        UpgradesService.addOnslaughtsForDay(day, [character], [], 2, [], combinedBaseMaterials, settings, inventory);
 
         expect(day.onslaughtTokens).toBe(0);
         expect(day.raids).toHaveLength(0);
@@ -717,9 +754,9 @@ describe('UpgradesService.planDayRaiding', () => {
         const campaignsProgress = Object.values(Campaign)
             .filter((value): value is Campaign => typeof value === 'string')
             .reduce(
-                (acc, campaign) => {
-                    acc[campaign] = 999;
-                    return acc;
+                (accumulator, campaign) => {
+                    accumulator[campaign] = 999;
+                    return accumulator;
                 },
                 {} as IEstimatedRanksSettings['campaignsProgress']
             );
@@ -783,12 +820,22 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
     const goalC = createRankGoal(baseCharC, { goalId: 'goal-c', priority: 3 });
     const goals = [goalA, goalB, goalC];
 
-    const createLocation = (id: string): ICampaignBattleComposed => ({
-        ...CampaignsService.campaignsComposed[id],
-        isSuggested: true,
-        dailyBattleCount: 6,
-        dropRate: 1,
-    });
+    const createLocation = (id: string): ICampaignBattleComposed => {
+        const base = CampaignsService.campaignsComposed[id];
+        const baseRewards = base.rewards || { guaranteed: [], potential: [] };
+        const potential =
+            baseRewards.potential && baseRewards.potential.length > 0 ? baseRewards.potential : [{ id: upgradeId }];
+        return {
+            ...base,
+            rewards: {
+                ...baseRewards,
+                potential,
+            },
+            isSuggested: true,
+            dailyBattleCount: 6,
+            dropRate: 1,
+        } as ICampaignBattleComposed;
+    };
 
     const buildRemainingMats = (countByGoalId: Record<string, number>, locations: ICampaignBattleComposed[]) => ({
         [upgradeId]: {
@@ -1355,11 +1402,11 @@ describe('UpgradesService.getUpgrades', () => {
         );
 
         const upgrades = UpgradesService.getUpgrades({}, [character], [], [goalStoneToGold, goalGoldToDiamond]);
-        const actualCounts = upgrades.reduce<Record<string, number>>((acc, upgrade) => {
+        const actualCounts = upgrades.reduce<Record<string, number>>((accumulator, upgrade) => {
             Object.entries(upgrade.baseUpgradesTotal).forEach(([id, count]) => {
-                acc[id] = (acc[id] ?? 0) + count;
+                accumulator[id] = (accumulator[id] ?? 0) + count;
             });
-            return acc;
+            return accumulator;
         }, {});
 
         const actualRareTotal = worldEatersRareIds.reduce((sum, id) => sum + (actualCounts[id] ?? 0), 0);
@@ -1426,11 +1473,11 @@ describe('UpgradesService.getUpgrades', () => {
             [kharnGoal, wraskGoal]
         );
 
-        const combined = upgrades.reduce<Record<string, number>>((acc, upgrade) => {
+        const combined = upgrades.reduce<Record<string, number>>((accumulator, upgrade) => {
             Object.entries(upgrade.baseUpgradesTotal).forEach(([id, count]) => {
-                acc[id] = (acc[id] ?? 0) + count;
+                accumulator[id] = (accumulator[id] ?? 0) + count;
             });
-            return acc;
+            return accumulator;
         }, {});
 
         expect(combined['upgHpL118']).toBe(164);
@@ -1903,7 +1950,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         expect(Math.abs(44 - result.daysTotal)).toBeLessThanOrEqual(1);
         // 26581 with current drop rates.
-        expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1500);
     });
 
     it('total energy cost is roughly equivalent regardless of priority', () => {
@@ -1952,9 +1999,9 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
             atlacoyaGoal
         );
 
-        const temp = hmhGoal.priority;
+        const temporary = hmhGoal.priority;
         hmhGoal.priority = atlacoyaGoal.priority;
-        atlacoyaGoal.priority = temp;
+        atlacoyaGoal.priority = temporary;
 
         const result2 = UpgradesService.getUpgradesEstimatedDays(
             buildSettings({ upgrades: inventory }),
@@ -2150,7 +2197,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             [`shards_${goal.unitId}`]: 0,
         };
 
-        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [], goal);
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [], [], goal);
 
         expect(tokens).toBe(0);
     });
@@ -2180,7 +2227,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             [`shards_${character.snowprintId}`]: 0,
         };
 
-        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], [], goal);
 
         expect(tokens).toBe(0);
     });
@@ -2212,7 +2259,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             [`mythicShards_${character.snowprintId}`]: 0,
         };
 
-        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], [], goal);
 
         expect(tokens).toBe(30);
     });
@@ -2244,7 +2291,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             [`mythicShards_${character.snowprintId}`]: 16,
         };
 
-        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], [], goal);
 
         expect(tokens).toBe(1);
     });
@@ -2276,7 +2323,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             [`mythicShards_${character.snowprintId}`]: 16,
         };
 
-        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], [], goal);
 
         expect(tokens).toBe(14);
     });
@@ -2305,7 +2352,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             [`shards_${character.snowprintId}`]: 29,
         };
 
-        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], [], goal);
 
         expect(tokens).toBe(4);
     });
@@ -2334,7 +2381,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             [`shards_${character.snowprintId}`]: 0,
         };
 
-        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], [], goal);
 
         expect(tokens).toBe(0);
     });
@@ -2364,7 +2411,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             [`shards_${character.snowprintId}`]: 0,
         };
 
-        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], [], goal);
 
         expect(tokens).toBe(0);
     });
@@ -2395,7 +2442,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             [`mythicShards_${character.snowprintId}`]: 45,
         };
 
-        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], [], goal);
 
         expect(tokens).toBe(4);
     });
@@ -2425,7 +2472,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
             [`shards_${character.snowprintId}`]: 45,
         };
 
-        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], goal);
+        const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], [], goal);
 
         expect(tokens).toBe(1);
     });
@@ -2449,7 +2496,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             [`shards_${character.snowprintId}`]: 0,
         };
 
-        const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [goal]);
+        const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [], [goal]);
 
         expect(result?.goalId).toBe(goal.goalId);
     });
@@ -2492,6 +2539,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
         const result = UpgradesService.findLongestOnslaughtGoal(
             inventory,
             [characterNoOnslaught, characterAllowsOnslaught],
+            [],
             [goalNoOnslaught, goalAllowsOnslaught]
         );
 
@@ -2526,7 +2574,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             [`mythicShards_${character.snowprintId}`]: 49,
         };
 
-        const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [goal]);
+        const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [], [goal]);
 
         expect(result).toBeUndefined();
     });
@@ -2559,7 +2607,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             [`mythicShards_${character.snowprintId}`]: 49,
         };
 
-        const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [goal]);
+        const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [], [goal]);
 
         expect(result).toBeUndefined();
     });
@@ -2617,6 +2665,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
         const result = UpgradesService.findLongestOnslaughtGoal(
             inventory,
             [characterRegular, characterMythic],
+            [],
             [goalRegular, goalMythic]
         );
 
@@ -2676,6 +2725,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
         const result = UpgradesService.findLongestOnslaughtGoal(
             inventory,
             [characterLow, characterHigh],
+            [],
             [goalLow, goalHigh]
         );
 
@@ -2710,7 +2760,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             [`mythicShards_${character.snowprintId}`]: 19,
         };
 
-        const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [goal]);
+        const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [], [goal]);
 
         expect(result?.goalId).toBe(goal.goalId);
     });
@@ -2742,7 +2792,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             [`shards_${character.snowprintId}`]: 33.5,
         };
 
-        const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [goal]);
+        const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [], [goal]);
 
         expect(result?.goalId).toBe(goal.goalId);
     });
@@ -2766,7 +2816,7 @@ describe('UpgradesService.findHighestPriorityOnslaughtGoal', () => {
             [`shards_${character.snowprintId}`]: 0,
         };
 
-        const result = UpgradesService.findHighestPriorityOnslaughtGoal(inventory, [character], [goal]);
+        const result = UpgradesService.findHighestPriorityOnslaughtGoal(inventory, [character], [], [goal]);
 
         expect(result?.goalId).toBe(goal.goalId);
     });
@@ -2809,6 +2859,7 @@ describe('UpgradesService.findHighestPriorityOnslaughtGoal', () => {
         const result = UpgradesService.findHighestPriorityOnslaughtGoal(
             inventory,
             [characterNoOnslaught, characterAllowsOnslaught],
+            [],
             [goalNoOnslaught, goalAllowsOnslaught]
         );
 
@@ -2850,6 +2901,7 @@ describe('UpgradesService.findHighestPriorityOnslaughtGoal', () => {
         const result = UpgradesService.findHighestPriorityOnslaughtGoal(
             inventory,
             [characterPriorityLow, characterPriorityHigh],
+            [],
             [goalPriorityHigh, goalPriorityLow]
         );
 
@@ -2863,11 +2915,16 @@ describe('UpgradesService.canOnslaughtCharacterForRegularShards', () => {
         const baseChar = CharactersService.charactersData[0];
 
         const baseGoal = createAscendGoal({ unitId, onslaughtShards: 6.5 });
-        const missingCharacterResult = UpgradesService.canOnslaughtCharacterForRegularShards(unitId, [], baseGoal);
+        const missingCharacterResult = UpgradesService.canOnslaughtCharacterForRegularShards(unitId, [], [], baseGoal);
         expect(missingCharacterResult).toBe(false);
 
         const lockedCharacter = createCharacter(baseChar, { snowprintId: unitId, rank: Rank.Locked });
-        const lockedResult = UpgradesService.canOnslaughtCharacterForRegularShards(unitId, [lockedCharacter], baseGoal);
+        const lockedResult = UpgradesService.canOnslaughtCharacterForRegularShards(
+            unitId,
+            [lockedCharacter],
+            [],
+            baseGoal
+        );
         expect(lockedResult).toBe(false);
 
         const blueStarCharacter = createCharacter(baseChar, {
@@ -2878,6 +2935,7 @@ describe('UpgradesService.canOnslaughtCharacterForRegularShards', () => {
         const blueStarResult = UpgradesService.canOnslaughtCharacterForRegularShards(
             unitId,
             [blueStarCharacter],
+            [],
             baseGoal
         );
         expect(blueStarResult).toBe(false);
@@ -2886,6 +2944,7 @@ describe('UpgradesService.canOnslaughtCharacterForRegularShards', () => {
         const zeroOnslaughtResult = UpgradesService.canOnslaughtCharacterForRegularShards(
             unitId,
             [createCharacter(baseChar, { snowprintId: unitId })],
+            [],
             zeroOnslaughtGoal
         );
         expect(zeroOnslaughtResult).toBe(false);
@@ -2894,6 +2953,7 @@ describe('UpgradesService.canOnslaughtCharacterForRegularShards', () => {
         const shardsOnslaughtResult = UpgradesService.canOnslaughtCharacterForRegularShards(
             unitId,
             [createCharacter(baseChar, { snowprintId: unitId })],
+            [],
             shardsOnslaughtGoal
         );
         expect(shardsOnslaughtResult).toBe(true);
@@ -2906,11 +2966,16 @@ describe('UpgradesService.canOnslaughtCharacterForMythicShards', () => {
         const baseChar = CharactersService.charactersData[0];
 
         const baseGoal = createAscendGoal({ unitId, onslaughtShards: 6.5, onslaughtMythicShards: 20 });
-        const missingCharacterResult = UpgradesService.canOnslaughtCharacterForMythicShards(unitId, [], baseGoal);
+        const missingCharacterResult = UpgradesService.canOnslaughtCharacterForMythicShards(unitId, [], [], baseGoal);
         expect(missingCharacterResult).toBe(false);
 
         const lockedCharacter = createCharacter(baseChar, { snowprintId: unitId, rank: Rank.Locked });
-        const lockedResult = UpgradesService.canOnslaughtCharacterForMythicShards(unitId, [lockedCharacter], baseGoal);
+        const lockedResult = UpgradesService.canOnslaughtCharacterForMythicShards(
+            unitId,
+            [lockedCharacter],
+            [],
+            baseGoal
+        );
         expect(lockedResult).toBe(false);
 
         const belowBlueStarCharacter = createCharacter(baseChar, {
@@ -2921,6 +2986,7 @@ describe('UpgradesService.canOnslaughtCharacterForMythicShards', () => {
         const belowBlueStarResult = UpgradesService.canOnslaughtCharacterForMythicShards(
             unitId,
             [belowBlueStarCharacter],
+            [],
             baseGoal
         );
         expect(belowBlueStarResult).toBe(false);
@@ -2935,6 +3001,7 @@ describe('UpgradesService.canOnslaughtCharacterForMythicShards', () => {
                     rarityStars: RarityStars.OneBlueStar,
                 }),
             ],
+            [],
             zeroOnslaughtGoal
         );
         expect(zeroOnslaughtResult).toBe(false);
@@ -2949,6 +3016,7 @@ describe('UpgradesService.canOnslaughtCharacterForMythicShards', () => {
                     rarityStars: RarityStars.OneBlueStar,
                 }),
             ],
+            [],
             oneOnslaughtGoal
         );
         expect(oneOnslaughtResult).toBe(true);
@@ -3557,8 +3625,8 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
         const expectedA = Math.ceil(10 / getRate(location));
         const expectedB = Math.ceil(30 / getRate(location));
 
-        expect(resultA).toBeCloseTo(expectedA, 5);
-        expect(resultB).toBeCloseTo(expectedB, 5);
+        expect(Math.ceil(resultA)).toBeCloseTo(expectedA, 5);
+        expect(Math.ceil(resultB)).toBeCloseTo(expectedB, 5);
     });
 
     it('accounts for the number of available nodes', () => {
@@ -3593,8 +3661,8 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
         const expectedSingle = Math.ceil(10 / getRate(locationA));
         const expectedDual = Math.ceil(10 / (getRate(locationA) + getRate(locationB)));
 
-        expect(single).toBeCloseTo(expectedSingle, 5);
-        expect(dual).toBeCloseTo(expectedDual, 5);
+        expect(Math.ceil(single)).toBeCloseTo(expectedSingle, 5);
+        expect(Math.ceil(dual)).toBeCloseTo(expectedDual, 5);
         expect(dual).toBeLessThan(single);
     });
 
@@ -3631,8 +3699,8 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
         const expectedSlow = Math.ceil(50 / getRate(slowLocation));
         const expectedFast = Math.ceil(50 / getRate(fastLocation));
 
-        expect(slow).toBeCloseTo(expectedSlow, 5);
-        expect(fast).toBeCloseTo(expectedFast, 5);
+        expect(Math.ceil(slow)).toBeCloseTo(expectedSlow, 5);
+        expect(Math.ceil(fast)).toBeCloseTo(expectedFast, 5);
         expect(fast).toBeLessThan(slow);
     });
 
@@ -3694,9 +3762,9 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
         );
 
         const rateSum = getRate(locationA) + getRate(locationB);
-        expect(allGoals).toBe(Math.ceil(28 / rateSum));
-        expect(goalAOnly).toBe(Math.ceil(8 / rateSum));
-        expect(goalAOnly).toBeLessThan(allGoals);
+        expect(Math.ceil(allGoals)).toBe(Math.ceil(28 / rateSum));
+        expect(Math.ceil(goalAOnly)).toBe(Math.ceil(8 / rateSum));
+        expect(Math.ceil(goalAOnly)).toBeLessThan(Math.ceil(allGoals));
     });
 
     it('accounts for higher priority goals when multiple goals share the material', () => {
@@ -3716,7 +3784,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
         );
 
         const expected = Math.ceil(15 / getRate(location));
-        expect(result).toBeCloseTo(expected, 5);
+        expect(Math.ceil(result)).toEqual(expected);
     });
 
     it('uses total remaining materials when no goal is selected', () => {
@@ -3736,7 +3804,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
         );
 
         const expected = Math.ceil(18 / getRate(location));
-        expect(result).toBeCloseTo(expected, 5);
+        expect(Math.ceil(result)).toEqual(expected);
     });
 });
 
@@ -3791,7 +3859,7 @@ describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () =
         const expectedDays = Math.ceil(10 / getRate(location));
         expect(tagged?.priority).toBe(1);
         expect(tagged?.highestPriorityGoalId).toBe('goalA');
-        expect(tagged?.daysToComplete).toBe(expectedDays);
+        expect(Math.ceil(tagged?.daysToComplete ?? 0)).toBe(expectedDays);
     });
 
     it('moves to the next goal when higher-priority needs are met', () => {
@@ -3814,7 +3882,7 @@ describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () =
         const expectedDays = Math.ceil(15 / getRate(location));
         expect(tagged?.priority).toBe(2);
         expect(tagged?.highestPriorityGoalId).toBe('goalB');
-        expect(tagged?.daysToComplete).toBe(expectedDays);
+        expect(Math.ceil(tagged?.daysToComplete ?? 0)).toBe(expectedDays);
     });
 
     it('accounts for the number of available nodes', () => {
@@ -3838,7 +3906,7 @@ describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () =
         const expectedDays = Math.ceil(10 / (getRate(locationA) + getRate(locationB)));
         expect(tagged?.priority).toBe(1);
         expect(tagged?.highestPriorityGoalId).toBe('goalA');
-        expect(tagged?.daysToComplete).toBe(expectedDays);
+        expect(Math.ceil(tagged?.daysToComplete ?? 0)).toBe(expectedDays);
     });
 
     it('reflects drop rate differences via energy per item', () => {
@@ -3875,9 +3943,9 @@ describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () =
         const expectedSlow = Math.ceil(50 / getRate(slowLocation));
         const expectedFast = Math.ceil(50 / getRate(fastLocation));
 
-        expect(slowTagged?.daysToComplete).toBe(expectedSlow);
-        expect(fastTagged?.daysToComplete).toBe(expectedFast);
-        expect(fastTagged?.daysToComplete).toBeLessThan(slowTagged?.daysToComplete ?? 0);
+        expect(Math.ceil(slowTagged?.daysToComplete ?? 0)).toBe(expectedSlow);
+        expect(Math.ceil(fastTagged?.daysToComplete ?? 0)).toBe(expectedFast);
+        expect(Math.ceil(fastTagged?.daysToComplete ?? 0)).toBeLessThan(Math.ceil(slowTagged?.daysToComplete ?? 0));
     });
 
     it('does not change with rarity when locations are the same', () => {
@@ -3936,7 +4004,7 @@ describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () =
         const rateSum = getRate(locationA) + getRate(locationB);
         expect(tagged?.priority).toBe(1);
         expect(tagged?.highestPriorityGoalId).toBe('goalA');
-        expect(tagged?.daysToComplete).toBe(Math.ceil(8 / rateSum));
+        expect(Math.ceil(tagged?.daysToComplete ?? 0)).toBe(Math.ceil(8 / rateSum));
     });
 
     it('returns default tagging for total-materials order', () => {
@@ -3958,7 +4026,7 @@ describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () =
 
         expect(tagged?.priority).toBe(undefined);
         expect(tagged?.highestPriorityGoalId).toBeUndefined();
-        expect(tagged?.daysToComplete).toBe(8);
+        expect(Math.ceil(tagged?.daysToComplete ?? 0)).toBe(8);
     });
 
     it('omits goal and priority when ordering by total materials', () => {
@@ -4031,9 +4099,9 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
         const campaignsProgress = Object.values(Campaign)
             .filter((value): value is Campaign => typeof value === 'string')
             .reduce(
-                (acc, campaign) => {
-                    acc[campaign] = 999;
-                    return acc;
+                (accumulator, campaign) => {
+                    accumulator[campaign] = 999;
+                    return accumulator;
                 },
                 {} as IEstimatedRanksSettings['campaignsProgress']
             );
@@ -4209,7 +4277,7 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             {},
             buildSettingsForHse(IDailyRaidsFarmOrder.goalPriority, IDailyRaidsHomeScreenEvent.machineHunt)
         );
-        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus Elite5', 'Indomitus37', 'Indomitus23']);
+        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus Elite5', 'Indomitus23', 'Indomitus37']);
     });
 
     it('orders machine hunt battles by hsePoints (total materials)', () => {

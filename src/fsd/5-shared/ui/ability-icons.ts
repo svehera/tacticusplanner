@@ -158,6 +158,7 @@ import InfernalCannonIcon from '@/assets/images/snowprint_assets/abilities/ui_ic
 import InfernalPactsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_InfernalPacts.png';
 import InspiredToGreatnessIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_InspiredToGreatness.png';
 import InvocationOfMachineVengeanceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_InvocationOfMachineVengeance.png';
+import IronkinSteeljackIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_IronkinSteeljack.png';
 import ItItchesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ItItches.png';
 import ItsGonnaBlowIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ItsGonnaBlow.png';
 import JakhalStimmsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_JakhalStimms.png';
@@ -227,10 +228,12 @@ import PowerUp_ResurrectIcon from '@/assets/images/snowprint_assets/abilities/ui
 import PoxwalkersIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Poxwalkers.png';
 import PreCalibratedPurgeSolutionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PreCalibratedPurgeSolution.png';
 import PrecisionShotIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PrecisionShot.png';
+import PredictiveGuidanceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PredictiveGuidance.png';
 import PrehensilePincerTailIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PrehensilePincerTail.png';
 import PsychicFortressIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PsychicFortress.png';
 import PsychicMaelstromIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PsychicMaelstrom.png';
 import PsychicStalkIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PsychicStalk.png';
+import PurgeResponseIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PurgeResponse.png';
 import PyreblasterIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Pyreblaster.png';
 import RadBombardmentIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RadBombardment.png';
 import RadSaturationIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RadSaturation.png';
@@ -499,6 +502,7 @@ export const abilityIcons: Record<string, IconData> = {
     InfernalPacts: { file: InfernalPactsIcon, name: 'Infernal Pacts' },
     InspiredToGreatness: { file: InspiredToGreatnessIcon, name: 'Inspired to Greatness' },
     InvocationOfMachineVengeance: { file: InvocationOfMachineVengeanceIcon, name: 'Invocation of Machine Vengeance' },
+    IronkinSteeljack: { file: IronkinSteeljackIcon, name: 'Ironkin Steeljack' },
     ItItches: { file: ItItchesIcon, name: 'It Itches!' },
     ItsGonnaBlow: { file: ItsGonnaBlowIcon, name: 'It’s Gonna Blow' },
     JakhalStimms: { file: JakhalStimmsIcon, name: 'Jakhal Stimms' },
@@ -568,10 +572,12 @@ export const abilityIcons: Record<string, IconData> = {
     Poxwalkers: { file: PoxwalkersIcon, name: 'Poxwalkers' },
     PreCalibratedPurgeSolution: { file: PreCalibratedPurgeSolutionIcon, name: 'Pre-Calibrated Purge Solution' },
     PrecisionShot: { file: PrecisionShotIcon, name: 'Precision Shot' },
+    PredictiveGuidance: { file: PredictiveGuidanceIcon, name: 'Predictive Guidance' },
     PrehensilePincerTail: { file: PrehensilePincerTailIcon, name: 'Prehensile Pincer Tail' },
     PsychicFortress: { file: PsychicFortressIcon, name: 'Psychic Fortress' },
     PsychicMaelstrom: { file: PsychicMaelstromIcon, name: 'Psychic Maelstrom' },
     PsychicStalk: { file: PsychicStalkIcon, name: 'Psychic Stalk' },
+    PurgeResponse: { file: PurgeResponseIcon, name: 'Purge Response' },
     Pyreblaster: { file: PyreblasterIcon, name: 'Pyreblaster' },
     RadBombardment: { file: RadBombardmentIcon, name: 'Rad-Bombardment' },
     RadSaturation: { file: RadSaturationIcon, name: 'Rad-Saturation' },

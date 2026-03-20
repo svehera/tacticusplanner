@@ -28,10 +28,22 @@ const equipmentTypeMapping = {
 
 export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
+    static readonly charactersBySnowprintId: Record<string, ICharacterData> = Object.fromEntries(
+        this.charactersData.map(char => [char.snowprintId!, char])
+    );
+    static readonly charactersById: Record<string, ICharacterData> = Object.fromEntries(
+        this.charactersData.map(char => [char.id, char])
+    );
+    static readonly charactersByShortName: Record<string, ICharacterData> = Object.fromEntries(
+        this.charactersData.map(char => [char.shortName.toLowerCase(), char])
+    );
+    static readonly charactersByFullName: Record<string, ICharacterData> = Object.fromEntries(
+        this.charactersData.map(char => [char.fullName.toLowerCase(), char])
+    );
 
     static readonly lreCharacters: ICharacterData[] = LegendaryEventService.getLegendaryEvents()
         .map(lre => {
-            const character = this.charactersData.find(unit => unit.snowprintId === lre.unitSnowprintId);
+            const character = this.charactersBySnowprintId[lre.unitSnowprintId];
             if (character) return { ...character, lre: this.toILreCharacterStaticData(lre) };
             return character;
         })
@@ -57,12 +69,15 @@ export class CharactersService {
     }
 
     /**
-     * @param id The unit ID of the character or MoW.
+     * @param id The unit ID of the character.
      * @returns An ICharacterData representation, or null.
      */
     public static getUnit(id: string): ICharacterData | undefined {
-        return this.charactersData.find(
-            x => x.id === id || x.snowprintId === id || x.fullName === id || x.shortName === id
+        return (
+            this.charactersBySnowprintId[id] ||
+            this.charactersById[id] ||
+            this.charactersByShortName[id.toLowerCase()] ||
+            this.charactersByFullName[id.toLowerCase()]
         );
     }
 
@@ -73,13 +88,13 @@ export class CharactersService {
      * @returns The converted DamageType.
      */
     private static convertSnowprintDamageProfile(rawData: string): DamageType {
-        const ret: DamageType = DamageType[rawData as keyof typeof DamageType] || DamageType.Physical;
+        const returnValue: DamageType = DamageType[rawData as keyof typeof DamageType] || DamageType.Physical;
         if (rawData === 'DirectDamage') return DamageType.Direct;
         if (rawData === 'Gauss') return DamageType.Molecular;
-        if (ret == DamageType.Physical && rawData !== 'Physical') {
+        if (returnValue == DamageType.Physical && rawData !== 'Physical') {
             console.warn(`Unknown damage profile: ${rawData}`);
         }
-        return ret;
+        return returnValue;
     }
 
     private static convertUnitData(rawData: UnitDataRaw): ICharacterData {
@@ -178,10 +193,10 @@ export class CharactersService {
     }
 
     public static resolveCharacter(identifier: string): ICharacterData {
-        const ret = CharactersService.charactersData.find(
+        const returnValue = CharactersService.charactersData.find(
             x => x.snowprintId! == CharactersService.canonicalName(identifier)
         );
-        return ret!;
+        return returnValue!;
     }
 
     /**

@@ -56,4 +56,7 @@ export interface XpIncomeState {
 
     /** Additional books per week from unlisted sources */
     additionalBooksPerWeek: number;
+
+    /** Rarity of XP Books to use for calculations */
+    defaultBookToUse: Rarity;
 }

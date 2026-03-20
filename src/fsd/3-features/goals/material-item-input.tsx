@@ -13,17 +13,16 @@ import { UpgradesService } from './upgrades.service';
 
 interface Props {
     upgradeRaid: IUpgradeRaid;
+    isExhausted?: boolean;
 }
 
-export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid }) => {
-    const isAllRaidsCompleted =
-        upgradeRaid.acquiredCount >= upgradeRaid.requiredCount ||
-        upgradeRaid.raidLocations.every(location => location.raidsToPerform === 0);
+export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = false }) => {
     const isShard = UpgradesService.isShard(upgradeRaid.id);
     const isMythicShard = UpgradesService.isMythicShard(upgradeRaid.id);
+    const canStillFarm = !isExhausted;
 
     return (
-        <div className="flex-box between" style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
+        <div className="flex-box between" style={{ opacity: canStillFarm ? 1 : 0.5 }}>
             <div className="flex-box column">
                 {isShard && <UnitShardIcon icon={upgradeRaid.iconPath} mythic={false} />}
 
@@ -56,7 +55,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid }) => {
                     />
                 )}
                 <span>
-                    {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}
+                    {Math.floor(upgradeRaid.acquiredCount)}/{upgradeRaid.requiredCount}
                 </span>
             </div>
             <ul className="w-full ps-[15px]">

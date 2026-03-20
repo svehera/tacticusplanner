@@ -12,9 +12,9 @@ import {
     RarityMapper,
     getLabelFromTraitString,
 } from '@/fsd/5-shared/model';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
-import { ICharacter2, RankIcon, CharacterTitle } from '@/fsd/4-entities/character';
+import { ICharacter2, CharacterTitle } from '@/fsd/4-entities/character';
 import { StatCell, DamageCell, StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 export const useCharacters = () => {

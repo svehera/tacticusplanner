@@ -35,9 +35,9 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank } from '@/fsd/5-shared/model';
-import { UnitShardIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { UnitShardIcon, RarityIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService, CharacterTitle, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
+import { CharactersService, CharacterTitle, ICharacter2 } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { getLre, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
@@ -67,7 +67,7 @@ export const MasterTable = () => {
         value => value
     );
 
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
     const getSelectedChars = (eventId: LegendaryEventEnum) => {
         const teams = getSelectedTeams(eventId);
@@ -85,7 +85,7 @@ export const MasterTable = () => {
     };
 
     const selectedCharsRows: ITableRow[] = useMemo(() => {
-        const temp: Array<{
+        const temporary: Array<{
             character: ICharacter2;
             characterId: string;
             eventId: LegendaryEventEnum;
@@ -148,10 +148,10 @@ export const MasterTable = () => {
                         (gamma[x.snowprintId!]?.slots ?? 0),
                 }));
 
-            temp.push(...eventCharacters);
+            temporary.push(...eventCharacters);
         });
 
-        const grouped = groupBy(temp, 'characterId');
+        const grouped = groupBy(temporary, 'characterId');
 
         return map(grouped, items => {
             const charData = {
@@ -253,7 +253,7 @@ export const MasterTable = () => {
         selectedCharsRows.length ? CharactersSelection.Selected : CharactersSelection.All
     );
 
-    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
+    const columnDefinitions: Array<ColDef | ColGroupDef> = useMemo(() => {
         return [
             {
                 headerName: 'Character',
@@ -361,7 +361,7 @@ export const MasterTable = () => {
     }, [selection, activeLegendaryEvents]);
 
     const rows = useMemo<ITableRow[]>(() => {
-        const temp: Array<{
+        const temporary: Array<{
             character: ICharacter2;
             characterId: string;
             eventId: LegendaryEventEnum;
@@ -395,9 +395,9 @@ export const MasterTable = () => {
                     slots: x.legendaryEvents[legendaryEvent.id].totalSlots,
                 }));
 
-            temp.push(...eventCharacters);
+            temporary.push(...eventCharacters);
         });
-        const grouped = groupBy(temp, 'characterId');
+        const grouped = groupBy(temporary, 'characterId');
 
         return map(grouped, items => {
             const charData = {
@@ -532,17 +532,17 @@ export const MasterTable = () => {
             </div>
             <div className="ag-theme-material h-[calc(100vh-150px)] w-full">
                 <AgGridReact
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
-                    columnDefs={columnsDef}
+                    columnDefs={columnDefinitions}
                     defaultColDef={{
                         suppressMovable: true,
                     }}
-                    onSortChanged={() => gridRef.current?.api?.refreshCells()}
-                    onFilterChanged={() => gridRef.current?.api?.refreshCells()}></AgGridReact>
+                    onSortChanged={() => gridReference.current?.api?.refreshCells()}
+                    onFilterChanged={() => gridReference.current?.api?.refreshCells()}></AgGridReact>
             </div>
         </div>
     );

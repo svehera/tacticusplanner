@@ -19,7 +19,7 @@ export type Prettify<T> = { [K in keyof T]: T[K] } & {};
  * @example Object.keys({ a: 1, b: 2 }) // string[]
  * @example constObjectKeys({ a: 1, b: 2 }) // ('a' | 'b')[]
  * */
-export const constObjectKeys = <Obj extends object>(obj: Obj) => Object.keys(obj) as (keyof Obj)[];
+export const constObjectKeys = <Object_ extends object>(object: Object_) => Object.keys(object) as (keyof Object_)[];
 
 /**
  * Utility type to get _all_ the possible keys from a const array of object types
@@ -47,7 +47,7 @@ type UnionToKeys<T extends readonly object[]> = {
  * @example type PlainB = typeof sampleData[number]['b']; // any
  * @example type PropB = GetPropType<typeof sampleData, 'b'>; // 2 | undefined
  */
-type GetPropType<T extends readonly any[], K extends PropertyKey> = T[number] extends infer U
+type GetPropertyType<T extends readonly any[], K extends PropertyKey> = T[number] extends infer U
     ? U extends any
         ? K extends keyof U
             ? U[K]
@@ -67,7 +67,8 @@ type GetPropType<T extends readonly any[], K extends PropertyKey> = T[number] ex
  * @example const valueX = safeGet(sampleData[1], 'x'); // value: undefined; TypeScript Error
  */
 export function createSafeGetter<T extends readonly object[]>() {
-    return <Obj extends T[number], Key extends UnionToKeys<T>>(obj: Obj, key: Key) => obj[key] as GetPropType<T, Key>;
+    return <Object_ extends T[number], Key extends UnionToKeys<T>>(object: Object_, key: Key) =>
+        object[key] as GetPropertyType<T, Key>;
 }
 
 /**
@@ -87,6 +88,6 @@ type DeepMutable<T> = Prettify<{
  * @example const mutableObj = mutableCopy(readonlyObj);
  * @example mutableObj.b.c = 3; // No TypeScript error
  */
-export function mutableCopy<T extends object | readonly object[]>(obj: T): DeepMutable<T> {
-    return JSON.parse(JSON.stringify(obj)) as DeepMutable<T>;
+export function mutableCopy<T extends object | readonly object[]>(object: T): DeepMutable<T> {
+    return JSON.parse(JSON.stringify(object)) as DeepMutable<T>;
 }

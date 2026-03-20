@@ -5,11 +5,12 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
-import { guildReducer } from 'src/reducers/guildReducer';
-import { guildWarReducer } from 'src/reducers/guildWarReducer';
+import { guildReducer } from '@/reducers/guild-reducer';
+import { guildWarReducer } from '@/reducers/guild-war-reducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
 import { teams2Reducer } from 'src/reducers/teams2.reducer';
+import { warDefense2Reducer } from 'src/reducers/war-defense2.reducer';
 import { warOffense2Reducer } from 'src/reducers/war-offense2.reducer';
 
 import { IErrorResponse } from '@/fsd/5-shared/api';
@@ -23,7 +24,7 @@ import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
 import { campaignsProgressReducer } from './campaigns-progress.reducer';
 import { charactersReducer } from './characters.reducer';
 import { dailyRaidsPreferencesReducer } from './daily-raids-settings.reducer';
-import { dailyRaidsReducer } from './dailyRaids.reducer';
+import { dailyRaidsReducer } from './daily-raids.reducer';
 import { goalsReducer } from './goals.reducer';
 import { inventoryReducer } from './inventory.reducer';
 import { leProgressReducer } from './le-progress.reducer';
@@ -63,6 +64,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         gameModeTokensActionReducer,
         globalState.gameModeTokens
     );
+    const [warDefense2, dispatchWarDefense2] = React.useReducer(warDefense2Reducer, globalState.warDefense2);
     const [warOffense2, dispatchWarOffense2] = React.useReducer(warOffense2Reducer, globalState.warOffense2);
     const [viewPreferences, dispatchViewPreferences] = React.useReducer(
         viewPreferencesReducer,
@@ -123,6 +125,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             mows: wrapDispatch(dispatchMows),
             teams: wrapDispatch(dispatchTeams),
             teams2: wrapDispatch(dispatchTeams2),
+            warDefense2: wrapDispatch(dispatchWarDefense2),
             warOffense2: wrapDispatch(dispatchWarOffense2),
             goals: wrapDispatch(dispatchGoals),
             viewPreferences: wrapDispatch(dispatchViewPreferences),
@@ -148,6 +151,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 dispatchGoals({ type: 'Set', value: data.goals });
                 dispatchTeams({ type: 'Set', value: data.teams });
                 dispatchTeams2({ type: 'Set', value: data.teams2 });
+                dispatchWarDefense2({ type: 'Set', value: data.warDefense2 });
                 dispatchWarOffense2({ type: 'Set', value: data.warOffense2 });
                 dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
                 dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
@@ -194,6 +198,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchGuild,
             dispatchTeams,
             dispatchTeams2,
+            dispatchWarDefense2,
             dispatchWarOffense2,
             dispatchXpIncome,
             dispatchXpUse,
@@ -213,6 +218,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             mows,
             teams,
             teams2,
+            warDefense2,
             warOffense2,
             viewPreferences,
             autoTeamsPreferences,
@@ -253,13 +259,13 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                             localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
                             enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
                         })
-                        .catch((err: AxiosError<IErrorResponse>) => {
-                            if (err.code === 'ERR_CANCELED') {
+                        .catch((error: AxiosError<IErrorResponse>) => {
+                            if (error.code === 'ERR_CANCELED') {
                                 return;
                             }
-                            if (err.response?.status === 401) {
+                            if (error.response?.status === 401) {
                                 enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else if (err.response?.status === 409) {
+                            } else if (error.response?.status === 409) {
                                 enqueueSnackbar(
                                     'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
                                     { variant: 'error' }
@@ -340,10 +346,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
                 const hasDataConflict = localModifiedDateTicks !== serverModifiedDateTicks;
 
-                const shouldAcceptServerData =
-                    !isFirstLogin && (isFreshData || modifiedDate < serverLastModified || hasDataConflict);
-                const shouldPushLocalData =
-                    !isFreshData && !hasDataConflict && (isFirstLogin || modifiedDate > serverLastModified);
+                const localIsOlder = !!modifiedDate && modifiedDate < serverLastModified;
+                const localIsNewer = !!modifiedDate && modifiedDate > serverLastModified;
+
+                const shouldAcceptServerData = !isFirstLogin && (isFreshData || localIsOlder);
+                const shouldPushLocalData = !isFreshData && (isFirstLogin || localIsNewer || hasDataConflict);
 
                 localStorage.setItem('TP-ModifiedDateTicks', serverModifiedDateTicks);
 
@@ -377,11 +384,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                             localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
                             return enqueueSnackbar('Pushed local data to server.', { variant: 'info' });
                         })
-                        .catch((err: AxiosError<IErrorResponse>) => {
-                            if (err.response?.status === 401) {
+                        .catch((error: AxiosError<IErrorResponse>) => {
+                            if (error.response?.status === 401) {
                                 logout();
                                 enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else if (err.response?.status === 409) {
+                            } else if (error.response?.status === 409) {
                                 enqueueSnackbar(
                                     'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
                                     { variant: 'error' }
@@ -394,12 +401,12 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         });
                 }
             })
-            .catch((err: AxiosError<IErrorResponse>) => {
-                if (err.response?.status === 401) {
+            .catch((error: AxiosError<IErrorResponse>) => {
+                if (error.response?.status === 401) {
                     logout();
                     enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
                 } else {
-                    console.error(err);
+                    console.error(error);
                     enqueueSnackbar('Failed to fetch data from server. Try again later', { variant: 'error' });
                 }
             });

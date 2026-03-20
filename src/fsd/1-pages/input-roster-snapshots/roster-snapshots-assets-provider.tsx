@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import useImage from 'use-image';
 
 import { getImageUrl } from '@/fsd/5-shared/ui';
-import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
+import { starsIcons, tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import { AssetContext } from './roster-snapshots-assets-context';
 

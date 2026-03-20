@@ -6,10 +6,10 @@ import { getImageUrl } from '@/shared-logic/functions';
 
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
 import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
-import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
-import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
+import { MiscIcon, RarityIcon, StarsIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
-import { CharactersService, RankIcon } from '@/fsd/4-entities/character';
+import { CharactersService } from '@/fsd/4-entities/character';
 import { EquipmentService, IEquipment } from '@/fsd/4-entities/equipment';
 import { MowsService } from '@/fsd/4-entities/mow';
 
@@ -260,10 +260,10 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
 
         return (
             <div className="flex items-center justify-start gap-4">
-                {slots.map((slot, i) => {
+                {slots.map((slot, index) => {
                     const changed = slot.before !== slot.after || slot.beforeLevel !== slot.afterLevel;
                     return (
-                        <div key={i} className="flex items-center gap-0">
+                        <div key={index} className="flex items-center gap-0">
                             {renderItem(slot.before, slot.beforeLevel, slot.type)}
                             <ArrowForward style={{ opacity: changed ? 1 : 0 }} fontSize="inherit" />
                             <div style={{ opacity: changed ? 1 : 0 }}>

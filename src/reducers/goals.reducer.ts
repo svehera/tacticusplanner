@@ -9,6 +9,11 @@ export type GoalsAction =
           goal: CharacterRaidGoalSelect;
       }
     | {
+          type: 'Swap';
+          goalId: string;
+          neighborId: string;
+      }
+    | {
           type: 'Add';
           goal: IPersonalGoal;
       }
@@ -30,11 +35,30 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
         case 'Set': {
             return action.value;
         }
+        case 'Swap': {
+            const { goalId, neighborId } = action;
+            const newState = [...state].sort((a, b) => a.priority - b.priority);
+
+            const indexA = newState.findIndex(x => x.id === goalId);
+            const indexB = newState.findIndex(x => x.id === neighborId);
+
+            if (indexA !== -1 && indexB !== -1) {
+                // Swap them in the array
+                [newState[indexA], newState[indexB]] = [newState[indexB], newState[indexA]];
+
+                // Re-index priorities 1..N
+                return newState.map((g, index) => ({ ...g, priority: index + 1 }));
+            }
+            return state;
+        }
         case 'Add': {
             if (state.find(x => x.id === action.goal.id)) {
                 return state;
             }
             state.splice(action.goal.priority - 1, 0, action.goal);
+            state.forEach((x, index) => {
+                x.priority = index + 1;
+            });
             return [...state];
         }
         case 'Delete': {
@@ -45,28 +69,44 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
         }
         case 'Update': {
             const updatedGoal = action.goal;
-            const newGoal = GoalsService.convertToGenericGoal(updatedGoal);
-            const updatedGoalIndex = state.findIndex(x => x.id === updatedGoal.goalId);
+            const existingGoalIndex = state.findIndex(x => x.id === updatedGoal.goalId);
 
-            if (updatedGoalIndex < 0 || !newGoal) {
+            if (existingGoalIndex < 0) {
                 return state;
             }
 
-            state.splice(updatedGoalIndex, 1);
-            state.splice(updatedGoal.priority - 1, 0, newGoal);
+            const existingGoal = state[existingGoalIndex];
+            const newGoalData = GoalsService.convertToGenericGoal(updatedGoal);
 
-            return state.map((x, index) => ({ ...x, priority: index + 1 }));
+            if (!newGoalData) {
+                return state;
+            }
+
+            // Merge incoming data but EXPLICITLY preserve the current state's priority.
+            // This prevents stale priority data from the UI from undoing a 'Swap' action.
+            const mergedGoal: IPersonalGoal = {
+                ...newGoalData,
+                priority: existingGoal.priority,
+            };
+
+            const newState = [...state];
+
+            // Replace the goal at its current index without moving it.
+            newState[existingGoalIndex] = mergedGoal;
+
+            // Re-index priorities 1..N to prevent gaps or duplicates.
+            return newState.map((g, index) => ({ ...g, priority: index + 1 }));
         }
         case 'UpdateDailyRaids': {
             const { value } = action;
 
-            return state.map(currGoal => {
-                const newGoal = value.find(x => x.goalId === currGoal.id);
+            return state.map(currentGoal => {
+                const newGoal = value.find(x => x.goalId === currentGoal.id);
                 if (newGoal) {
-                    return { ...currGoal, dailyRaids: newGoal.include };
+                    return { ...currentGoal, dailyRaids: newGoal.include };
                 }
 
-                return currGoal;
+                return currentGoal;
             });
         }
         default: {

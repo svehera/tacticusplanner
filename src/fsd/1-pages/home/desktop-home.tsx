@@ -20,7 +20,7 @@ import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from
 
 import TokenAvailability from '@/fsd/1-pages/game-mode-tokens';
 
-import { useBmcWidget } from './useBmcWidget';
+import { useBmcWidget } from './use-bmc-widget';
 
 function formatMonthAndDay(date: Date): string {
     const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
@@ -94,7 +94,7 @@ export const DesktopHome = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_20260202.png'),
+        current: getImageUrl('calendar/calendar_137.webp'),
     };
 
     const topPriorityGoal = goals[0];

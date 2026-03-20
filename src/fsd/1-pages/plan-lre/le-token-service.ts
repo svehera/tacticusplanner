@@ -102,8 +102,9 @@ export class LeTokenService {
         const premiums = [premiumPurchasedFirstEvent, premiumPurchasedSecondEvent, premiumPurchasedThirdEvent];
         const startStage = this.getEventStartTimeMillis(event) > nowMillis ? event.eventStage - 1 : event.eventStage;
         return (
-            premiums.filter((_, index) => index >= startStage).reduce((acc, val) => acc + (val ? 1 : 0), 0) *
-            PREMIUM_TOKENS_PER_EVENT
+            premiums
+                .filter((_, index) => index >= startStage)
+                .reduce((accumulator, value) => accumulator + (value ? 1 : 0), 0) * PREMIUM_TOKENS_PER_EVENT
         );
     }
 

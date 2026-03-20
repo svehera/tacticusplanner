@@ -49,6 +49,10 @@ export enum Campaign {
     DGSC = 'Death Guard Standard Challenge',
     DGE = 'Death Guard Extremis',
     DGEC = 'Death Guard Extremis Challenge',
+    ASS = 'Adepta Sororitas Standard',
+    ASSC = 'Adepta Sororitas Standard Challenge',
+    ASE = 'Adepta Sororitas Extremis',
+    ASEC = 'Adepta Sororitas Extremis Challenge',
     Onslaught = 'Onslaught',
 }
 
@@ -112,6 +116,11 @@ export enum CampaignGroupType {
      * Campaign Event: T'au Empire storyline.
      */
     tauCE = "T'au Empire",
+
+    /**
+     * Campaign Event: Adepta Sororitas storyline.
+     */
+    sistersCE = 'Adepta Sororitas',
 }
 
 /**

@@ -167,13 +167,13 @@ export const CampaignProgression = () => {
      * called for incomplete campaigns.
      */
     function getCampaignProgress(campaign: string): any {
-        let ret = <>Completed</>;
+        let returnValue = <>Completed</>;
         Object.entries(campaignsProgress).forEach(([key, value]) => {
             if (key == campaign) {
-                ret = <div>Last Completed Battle: {value}</div>;
+                returnValue = <div>Last Completed Battle: {value}</div>;
             }
         });
-        return ret;
+        return returnValue;
     }
 
     return (

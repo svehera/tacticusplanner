@@ -140,6 +140,8 @@
         --rank-diamond3: #6fa8dc;
 
         --rank-adamantine1: #d9886c;
+        --rank-adamantine2: #c97a5c;
+        --rank-adamantine3: #b06b4b;
     }
 
     .dark {
@@ -359,6 +361,12 @@ code {
 
 .adamantine1 {
     background-color: var(--rank-adamantine1);
+}
+.adamantine2 {
+    background-color: var(--rank-adamantine2);
+}
+.adamantine3 {
+    background-color: var(--rank-adamantine3);
 }
 
 .ag-theme-material {

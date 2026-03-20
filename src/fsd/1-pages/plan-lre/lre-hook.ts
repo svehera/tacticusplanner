@@ -21,9 +21,9 @@ export const useLre = () => {
 
     const [legendaryEventId] = useQueryState<LegendaryEventEnum>(
         'character',
-        initQueryParam =>
-            initQueryParam
-                ? (LegendaryEventEnum[initQueryParam as keyof typeof LegendaryEventEnum] as LegendaryEventEnum)
+        initQueryParameter =>
+            initQueryParameter
+                ? (LegendaryEventEnum[initQueryParameter as keyof typeof LegendaryEventEnum] as LegendaryEventEnum)
                 : LegendaryEventEnum.Mephiston,
         value => LegendaryEventEnum[value]
     );
@@ -56,7 +56,7 @@ export const useLre = () => {
             : mapDefaultToPage(leSettings.defaultPageWhenEventNotActive);
     const [section, setSection] = useQueryState<LreSection>(
         'section',
-        initQueryParam => (initQueryParam ? +initQueryParam : getDefaultPage()),
+        initQueryParameter => (initQueryParameter ? +initQueryParameter : getDefaultPage()),
         value => value.toString()
     );
 
