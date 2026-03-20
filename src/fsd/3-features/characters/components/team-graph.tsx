@@ -19,6 +19,8 @@ interface Props {
     units: IUnit[];
 }
 
+const sortByPower = (a: { x: string; y: number }, b: { x: string; y: number }) => b.y - a.y;
+
 export const TeamGraph: React.FC<Props> = ({ units }) => {
     const [open, setOpen] = React.useState(false);
 
@@ -44,7 +46,6 @@ export const TeamGraph: React.FC<Props> = ({ units }) => {
         teamAbilityData.push({ x: character.name, y: abilityPower });
     });
 
-    const sortByPower = (a: { x: string; y: number }, b: { x: string; y: number }) => b.y - a.y;
     teamPowerData.sort(sortByPower);
     teamAttributeData.sort((a, b) => {
         const aIndex = teamPowerData.findIndex(item => item.x === a.x);

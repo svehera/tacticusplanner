@@ -32,6 +32,10 @@ interface Props {
     deleteTeam: (teamId: string) => void;
 }
 
+const getRowStyle = (params: RowClassParams): RowStyle => {
+    return params.node.rowIndex && params.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
+};
+
 export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoals, editTeam, deleteTeam, track }) => {
     const { viewPreferences } = useContext(StoreContext);
     const gridReference = useRef<AgGridReact>(null);
@@ -107,10 +111,6 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
     useEffect(() => {
         gridReference.current?.api?.sizeColumnsToFit();
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, viewPreferences.hideCompleted]);
-
-    const getRowStyle = (params: RowClassParams): RowStyle => {
-        return params.node.rowIndex && params.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
-    };
 
     return (
         <div

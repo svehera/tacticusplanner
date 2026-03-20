@@ -114,6 +114,18 @@ const CharacterLine = ({ name, critDamage, damageMods, onDamageModsChange }: Cha
     );
 };
 
+const applyMortyTrait = (damage: number, totalHits: number): number[] => {
+    const hits: number[] = [];
+    for (let index = 0; index < totalHits; ++index) {
+        let hitDamage = damage;
+        for (let hit = 3; hit <= index; ++hit) {
+            hitDamage *= MORTY_TRAIT_DEBUFF;
+        }
+        hits.push(hitDamage);
+    }
+    return hits;
+};
+
 export const NerdMath = () => {
     const [kariyanActiveState, setKariyanActiveState] = useState<DamageMods>({
         enabled: true,
@@ -262,18 +274,6 @@ export const NerdMath = () => {
         const damageViaPierce = preArmorDamage * pierce;
         const damageViaArmor = preArmorDamage - bossArmor;
         return Math.max(damageViaPierce, damageViaArmor);
-    };
-
-    const applyMortyTrait = (damage: number, totalHits: number): number[] => {
-        const hits: number[] = [];
-        for (let index = 0; index < totalHits; ++index) {
-            let hitDamage = damage;
-            for (let hit = 3; hit <= index; ++hit) {
-                hitDamage *= MORTY_TRAIT_DEBUFF;
-            }
-            hits.push(hitDamage);
-        }
-        return hits;
     };
 
     const calculatePreModifierDamage = (

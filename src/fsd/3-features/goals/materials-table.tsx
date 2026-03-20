@@ -80,6 +80,20 @@ const MaterialIcon: React.FC<{ data: IRaidMaterialRow; typeOnly?: boolean }> = (
     return <UpgradeImage material={data.label} iconPath={data.iconPath} rarity={rarityStr} />;
 };
 
+const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {
+    const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
+    let normalized = 'Unknown';
+
+    if (typeof rarity === 'number') {
+        normalized = RarityMapper.rarityToRarityString(rarity as Rarity);
+    } else if (typeof rarity === 'string') {
+        normalized = RarityMapper.stringToRarityString(rarity) ?? rarity;
+    }
+
+    const index = order.indexOf(normalized);
+    return index === -1 ? order.length - 1 : index;
+};
+
 export const MaterialsTable: React.FC<Props> = ({
     rows,
     updateMaterialQuantity,
@@ -88,20 +102,6 @@ export const MaterialsTable: React.FC<Props> = ({
     scrollToCharSnowprintId,
     alreadyUsedMaterials,
 }) => {
-    const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {
-        const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
-        let normalized = 'Unknown';
-
-        if (typeof rarity === 'number') {
-            normalized = RarityMapper.rarityToRarityString(rarity as Rarity);
-        } else if (typeof rarity === 'string') {
-            normalized = RarityMapper.stringToRarityString(rarity) ?? rarity;
-        }
-
-        const index = order.indexOf(normalized);
-        return index === -1 ? order.length - 1 : index;
-    };
-
     const columnDefs: Array<ColDef<IRaidMaterialRow> | ColGroupDef<IRaidMaterialRow>> = [
         {
             headerName: 'Upgrade',

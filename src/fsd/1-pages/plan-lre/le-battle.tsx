@@ -21,40 +21,40 @@ interface WaveDisplayProps {
     onEnemyClick: (data: ResolvedEnemyData) => void;
 }
 
+// Extracted Logic: Resolve string to data object
+const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
+    const colon = enemyString.indexOf(':');
+    const id = colon !== -1 ? enemyString.substring(0, colon) : enemyString;
+
+    // Calculate index
+    let progressionIndex = 0;
+    if (colon !== -1) {
+        const pString = enemyString.substring(colon + 1);
+        const pInt = parseInt(pString, 10);
+        progressionIndex = isNaN(pInt) ? 0 : pInt;
+    }
+
+    // Adjust for 0-based array (Your logic used -1, keeping that consistency)
+    const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
+
+    console.log('Resolving enemy:', enemyString, 'to id:', id, 'at index:', arrayIndex);
+    const npc = NpcService.getNpcById(id);
+
+    console.log('Resolved NPC:', npc);
+
+    if (!npc || arrayIndex >= npc.stats.length) return null;
+
+    return {
+        id,
+        npc,
+        stats: npc.stats[arrayIndex],
+    };
+};
+
 // Helper component to render a single wave's enemies
 const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick }) => {
     // Determine if enemies are present. Use a simple text placeholder for enemy rendering.
     const hasEnemies = wave.enemies.length > 0;
-
-    // Extracted Logic: Resolve string to data object
-    const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
-        const colon = enemyString.indexOf(':');
-        const id = colon !== -1 ? enemyString.substring(0, colon) : enemyString;
-
-        // Calculate index
-        let progressionIndex = 0;
-        if (colon !== -1) {
-            const pString = enemyString.substring(colon + 1);
-            const pInt = parseInt(pString, 10);
-            progressionIndex = isNaN(pInt) ? 0 : pInt;
-        }
-
-        // Adjust for 0-based array (Your logic used -1, keeping that consistency)
-        const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
-
-        console.log('Resolving enemy:', enemyString, 'to id:', id, 'at index:', arrayIndex);
-        const npc = NpcService.getNpcById(id);
-
-        console.log('Resolved NPC:', npc);
-
-        if (!npc || arrayIndex >= npc.stats.length) return null;
-
-        return {
-            id,
-            npc,
-            stats: npc.stats[arrayIndex],
-        };
-    };
 
     const renderEnemies = (enemies: string[]) => (
         <div className="flex flex-wrap items-start gap-x-3 gap-y-6">

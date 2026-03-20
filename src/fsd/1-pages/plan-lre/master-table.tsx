@@ -46,6 +46,14 @@ import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-e
 import { ILreProgressModel } from './lre.models';
 import { LreService } from './lre.service';
 
+const passesNameFilter = (filter: string, character: ICharacter2) => {
+    if (!filter) return true;
+    return (
+        character.name.toLowerCase().includes(filter.toLowerCase()) ||
+        ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
+    );
+};
+
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
         LegendaryEventService.getUnfinishedEvents().map(x => x.id)
@@ -73,14 +81,6 @@ export const MasterTable = () => {
         const teams = getSelectedTeams(eventId);
         return uniq(
             teams.flatMap(t => t.charSnowprintIds ?? t.charactersIds ?? []).map(x => CharactersService.canonicalName(x))
-        );
-    };
-
-    const passesNameFilter = (filter: string, character: ICharacter2) => {
-        if (!filter) return true;
-        return (
-            character.name.toLowerCase().includes(filter.toLowerCase()) ||
-            ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
         );
     };
 

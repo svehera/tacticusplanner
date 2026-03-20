@@ -293,27 +293,27 @@ function migrateLreTeams(
     return teamsByEvent;
 }
 
+const resolve = (char: string) => CharactersService.canonicalName(char);
+// Helper function to compare two arrays for equality
+function areArraysEqual(array1: string[], array2: string[]): boolean {
+    return array1.length === array2.length && array1.every(char => array2.includes(char));
+}
+
+function doTeamsMatch(team1: string[], team2: string[]) {
+    return areArraysEqual(
+        team1.map(id => CharactersService.canonicalName(id)),
+        team2.map(id => CharactersService.canonicalName(id))
+    );
+}
+
 function populateTeams(data: ILegendaryEventSelectedTeams) {
     const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
     const teams: ILreTeam[] = [];
-
-    // Helper function to compare two arrays for equality
-    function areArraysEqual(array1: string[], array2: string[]): boolean {
-        return array1.length === array2.length && array1.every(char => array2.includes(char));
-    }
-
-    function doTeamsMatch(team1: string[], team2: string[]) {
-        return areArraysEqual(
-            team1.map(id => CharactersService.canonicalName(id)),
-            team2.map(id => CharactersService.canonicalName(id))
-        );
-    }
 
     sections.forEach(section => {
         const selectedTeams: SelectedTeams = data[section];
 
         Object.entries(selectedTeams).forEach(([restriction, charSnowprintIds]) => {
-            const resolve = (char: string) => CharactersService.canonicalName(char);
             // Check if there's already a team with the same set of characters
             const existingTeam = teams.find(
                 team =>

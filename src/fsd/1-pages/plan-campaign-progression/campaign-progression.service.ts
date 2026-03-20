@@ -56,6 +56,19 @@ const factionCampaigns = Object.fromEntries(
 
 const campaignFactions = Object.fromEntries(CampaignsService.allCampaigns.map(c => [c.id, alliedFactions(c.faction)]));
 
+const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
+    const rarityMap = {
+        [Rarity.Common]: 0,
+        [Rarity.Uncommon]: 1,
+        [Rarity.Rare]: 2,
+        [Rarity.Epic]: 3,
+        [Rarity.Legendary]: 4,
+        [Rarity.Mythic]: 5,
+        Shard: 6,
+        'Mythic Shard': 7,
+    };
+    return rarityMap[rarity];
+};
 export class CampaignsProgressionService {
     /**
      * Computes the cost per goal and associates each character with the campaigns
@@ -294,19 +307,7 @@ export class CampaignsProgressionService {
             }
             materialReqs.materials = newMaterials;
         }
-        const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
-            const rarityMap = {
-                [Rarity.Common]: 0,
-                [Rarity.Uncommon]: 1,
-                [Rarity.Rare]: 2,
-                [Rarity.Epic]: 3,
-                [Rarity.Legendary]: 4,
-                [Rarity.Mythic]: 5,
-                Shard: 6,
-                'Mythic Shard': 7,
-            };
-            return rarityMap[rarity];
-        };
+
         const sortedMaterials: string[] = Object.keys(materialReqs.materials).sort(
             (a, b) =>
                 mapRarity(UpgradesService.recipeExpandedUpgradeData[b].rarity) -

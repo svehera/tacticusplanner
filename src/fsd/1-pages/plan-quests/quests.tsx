@@ -27,6 +27,14 @@ interface ResolvedEnemyData {
     stats: INpcStats; // The specific stats for this level
 }
 
+const getUpgradeRarity = (upgradeId: string): RarityString => {
+    const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
+    if (!upgrade || upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
+        return RarityMapper.rarityToRarityString(Rarity.Common);
+    }
+    return RarityMapper.rarityToRarityString(upgrade.rarity as unknown as Rarity);
+};
+
 export const Quests = () => {
     const {
         characters: unresolvedCharacters,
@@ -76,14 +84,6 @@ export const Quests = () => {
         setExpandedTiers(previous => ({ ...previous, [tierIndex]: !previous[tierIndex] }));
     const toggleBattle = (battleKey: string) =>
         setExpandedBattles(previous => ({ ...previous, [battleKey]: !previous[battleKey] }));
-
-    const getUpgradeRarity = (upgradeId: string): RarityString => {
-        const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
-        if (!upgrade || upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-            return RarityMapper.rarityToRarityString(Rarity.Common);
-        }
-        return RarityMapper.rarityToRarityString(upgrade.rarity as unknown as Rarity);
-    };
 
     const unitsNeedingUpgrade = (
         upgradeId: string

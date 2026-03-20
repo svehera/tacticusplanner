@@ -42,6 +42,7 @@ export default defineConfig([
         languageOptions: { globals: globals.builtin },
         plugins: { unicorn: eslintPluginUnicorn },
         rules: {
+            'unicorn/consistent-function-scoping': 'error',
             'unicorn/prevent-abbreviations': [
                 'error',
                 {

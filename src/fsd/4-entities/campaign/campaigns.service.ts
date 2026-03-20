@@ -19,13 +19,17 @@ import {
     IRewards,
 } from './model';
 
+const isString = (v: unknown): v is string => typeof v === 'string';
+
 export class CampaignsService {
     public static readonly rawBattleData = battleData;
     public static readonly allCampaigns = campaignsList;
     public static readonly standardCampaigns = campaignsList.filter(
+        // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract staitc methods
         campaign => campaign.releaseType === CampaignReleaseType.standard
     );
     public static readonly campaignEvents = campaignsList.filter(
+        // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract staitc methods
         campaign => campaign.releaseType === CampaignReleaseType.event
     );
     /** Holds a mapping from battle ID (e.g. SHE31) to an ICampaignBattleComposed representing the battle. */
@@ -132,7 +136,6 @@ export class CampaignsService {
             const energyPerItem = parseFloat((1 / (dropRate / battle.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
-            const isString = (v: unknown): v is string => typeof v === 'string';
             enemies.factions = enemies.factions.filter(isString);
             allies.factions = allies.factions.filter(isString);
             if (enemies.factions.length === 0) {
