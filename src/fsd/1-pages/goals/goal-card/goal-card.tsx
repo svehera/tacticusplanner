@@ -94,7 +94,7 @@ export const GoalCard: React.FC<Props> = ({
     return (
         <Card
             variant="outlined"
-            className={`flex w-[350px] flex-col min-h-[200px]${isGoalCompleted ? 'bg-(--success)!' : ''}`}
+            className={`flex min-h-[200px] w-[350px] flex-col ${isGoalCompleted ? 'bg-(--success)!' : ''}`}
             style={{ background: bgColor }}>
             {/* Header: 3-column grid — [icon + #n] | name+date | actions */}
             <div className="grid min-h-[83px] grid-cols-[auto_1fr_auto] gap-x-2 gap-y-0 px-3 pt-3 pb-2">
