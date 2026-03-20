@@ -815,11 +815,10 @@ export class TokenEstimationService {
         const lastClaimedChestIndex = progress.syncedProgress.currentClaimedChestIndex;
 
         // Determine the total currency, since forced progress only gives us the current incremental currency.
-        if (lastClaimedChestIndex >= 0 && lastClaimedChestIndex < chestMilestones.length) {
-            totalCurrency = chestMilestones[lastClaimedChestIndex].totalNeededCurrency + currentCurrency;
-        } else {
-            totalCurrency = currentCurrency;
-        }
+        totalCurrency =
+            lastClaimedChestIndex >= 0 && lastClaimedChestIndex < chestMilestones.length
+                ? chestMilestones[lastClaimedChestIndex].totalNeededCurrency + currentCurrency
+                : currentCurrency;
 
         // Determine if we hit any new ascension milestones.
         let starIndex = 0;
@@ -897,11 +896,7 @@ export class TokenEstimationService {
                 return 'Blue 1★';
             }
             case RarityStars.OneBlueStar: {
-                if (currentRarity === Rarity.Legendary) {
-                    return 'Mythic 1★';
-                } else {
-                    return 'Blue 2★';
-                }
+                return currentRarity === Rarity.Legendary ? 'Mythic 1★' : 'Blue 2★';
             }
             case RarityStars.TwoBlueStars: {
                 return 'Full Clear';

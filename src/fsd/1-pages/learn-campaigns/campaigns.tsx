@@ -182,21 +182,7 @@ export const Campaigns = () => {
                     return <></>;
                 }
                 const battle = params.data;
-                if (battle.detailedEnemyTypes && battle.detailedEnemyTypes.length > 0) {
-                    return (
-                        <center>
-                            <div className="relative">
-                                <CampaignBattleEnemies
-                                    keyPrefix="table"
-                                    battleId={battle.id}
-                                    enemies={battle.rawEnemyTypes ?? []}
-                                    scale={0.2}
-                                    onEnemyClick={() => {}}
-                                />
-                            </div>
-                        </center>
-                    );
-                } else {
+                if (!battle.detailedEnemyTypes?.length)
                     return (
                         <ul className="m-0 pl-5">
                             {(params.value as string[]).map(x => (
@@ -204,7 +190,19 @@ export const Campaigns = () => {
                             ))}
                         </ul>
                     );
-                }
+                return (
+                    <center>
+                        <div className="relative">
+                            <CampaignBattleEnemies
+                                keyPrefix="table"
+                                battleId={battle.id}
+                                enemies={battle.rawEnemyTypes ?? []}
+                                scale={0.2}
+                                onEnemyClick={() => {}}
+                            />
+                        </div>
+                    </center>
+                );
             },
         },
     ]);

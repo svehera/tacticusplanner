@@ -156,11 +156,9 @@ export class CharactersService {
     }
 
     private static getAbilitiesLevel(unit: IUnit): number {
-        if (isCharacter(unit)) {
-            return unit.activeAbilityLevel + unit.passiveAbilityLevel;
-        } else {
-            return unit.primaryAbilityLevel + unit.secondaryAbilityLevel;
-        }
+        return isCharacter(unit)
+            ? unit.activeAbilityLevel + unit.passiveAbilityLevel
+            : unit.primaryAbilityLevel + unit.secondaryAbilityLevel;
     }
 
     /**

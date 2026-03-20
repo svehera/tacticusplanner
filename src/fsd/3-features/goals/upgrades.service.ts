@@ -1660,11 +1660,10 @@ export class UpgradesService {
         const originalShards: Record<string, number> = {};
         while (onslaughtTokens > 0) {
             let goal = undefined;
-            if (settings.preferences.farmPreferences.order === IDailyRaidsFarmOrder.totalMaterials) {
-                goal = this.findLongestOnslaughtGoal(inventory, characters, mows, goals);
-            } else {
-                goal = this.findHighestPriorityOnslaughtGoal(inventory, characters, mows, goals);
-            }
+            goal =
+                settings.preferences.farmPreferences.order === IDailyRaidsFarmOrder.totalMaterials
+                    ? this.findLongestOnslaughtGoal(inventory, characters, mows, goals)
+                    : this.findHighestPriorityOnslaughtGoal(inventory, characters, mows, goals);
             if (goal === undefined) break;
             let upgradeId = '';
             let shards = 0;
