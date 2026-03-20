@@ -71,7 +71,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const updatedGoal = action.goal;
             const existingGoalIndex = state.findIndex(x => x.id === updatedGoal.goalId);
 
-            if (existingGoalIndex < 0) {
+            if (existingGoalIndex === -1) {
                 return state;
             }
 

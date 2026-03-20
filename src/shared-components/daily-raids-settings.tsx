@@ -100,7 +100,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
     const [dailyEnergy, setDailyEnergy] = React.useState(() => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
-        return index >= 0 ? index : 2; // Default to 50 BS refresh if not found.
+        return index === -1 ? 2 : index; // Default to 50 BS refresh if not found.
     });
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
