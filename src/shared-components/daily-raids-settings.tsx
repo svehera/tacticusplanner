@@ -221,7 +221,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 name="controlled-radio-buttons-group"
                                 value={dailyRaidsPreferencesForm.farmPreferences.order}
                                 onChange={change =>
-                                    updatePreferences(parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder)
+                                    updatePreferences(
+                                        Number.parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder
+                                    )
                                 }>
                                 <FormControlLabel
                                     value={IDailyRaidsFarmOrder.totalMaterials}

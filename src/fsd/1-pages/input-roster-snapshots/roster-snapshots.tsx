@@ -695,7 +695,7 @@ export const RosterSnapshots = () => {
                             value={leftIndex}
                             className="rounded border bg-gray-700 p-1"
                             onChange={event => {
-                                const newLeftIndex = parseInt(event.target.value, 10);
+                                const newLeftIndex = Number.parseInt(event.target.value, 10);
                                 setLeftIndex(newLeftIndex);
                                 if (rightIndex <= newLeftIndex) {
                                     setRightIndex(newLeftIndex + 1);
@@ -717,7 +717,7 @@ export const RosterSnapshots = () => {
                             value={rightIndex}
                             className="rounded border bg-gray-700 p-1"
                             onChange={event => {
-                                setRightIndex(parseInt(event.target.value, 10));
+                                setRightIndex(Number.parseInt(event.target.value, 10));
                             }}>
                             {liveSnapshotIndices
                                 .filter((_, index) => index > leftIndex)

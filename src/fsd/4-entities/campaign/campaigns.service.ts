@@ -129,9 +129,9 @@ export class CampaignsService {
             if (potential) {
                 dropRate += potential.effective_rate;
             }
-            dropRate = dropRate.toFixed(3) === 'NaN' ? 0 : parseFloat(dropRate.toFixed(3));
+            dropRate = dropRate.toFixed(3) === 'NaN' ? 0 : Number.parseFloat(dropRate.toFixed(3));
 
-            const energyPerItem = parseFloat((1 / (dropRate / battle.energyCost)).toFixed(2));
+            const energyPerItem = Number.parseFloat((1 / (dropRate / battle.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
             enemies.factions = enemies.factions.filter(isString);
@@ -301,7 +301,7 @@ export class CampaignsService {
 
         const itemsPerEnergy = dropRate / config.energyCost;
 
-        return parseFloat(itemsPerEnergy.toFixed(3));
+        return Number.parseFloat(itemsPerEnergy.toFixed(3));
     }
 
     /**
