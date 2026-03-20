@@ -13,7 +13,7 @@ export const leSettingsReducer = (_: ILegendaryEventSettings, action: LeSettings
             return action.value;
         }
         default: {
-            throw new Error();
+            throw new Error(`Unexpected action.type received in reducer: ${action.value}`);
         }
     }
 };

@@ -26,7 +26,8 @@ export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
         }
 
         default: {
-            throw new Error();
+            // @ts-expect-error TS says this should never be reached but we want the error if it does
+            throw new Error(`Unexpected action.type received in reducer: ${action.value}`);
         }
     }
 };
