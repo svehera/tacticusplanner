@@ -231,10 +231,10 @@ export interface ICharacterUpgradeEstimate extends IBaseUpgrade {
     isFinished: boolean;
 }
 
-export type {
-    ICharacterAscendGoal,
-    ICharacterRaidGoalSelectBase,
-    ICharacterUnlockGoal,
-    ICharacterUpgradeMow,
-    ICharacterUpgradeRankGoal,
-};
+export {
+    type ICharacterAscendGoal,
+    type ICharacterRaidGoalSelectBase,
+    type ICharacterUpgradeMow,
+    type ICharacterUnlockGoal,
+    type ICharacterUpgradeRankGoal,
+} from '@/fsd/4-entities/goal';
