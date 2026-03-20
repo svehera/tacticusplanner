@@ -1699,7 +1699,7 @@ export class UpgradesService {
                 raidsTotal: 0,
                 acquiredCount: Math.floor(originalShards[upgradeId] ?? 0),
                 requiredCount: Math.ceil(combinedBaseMaterials[upgradeId]?.requiredCount ?? 0),
-                countByGoalId: { ...(combinedBaseMaterials[upgradeId]?.countByGoalId ?? {}) },
+                countByGoalId: { ...combinedBaseMaterials[upgradeId]?.countByGoalId },
                 relatedCharacters: uniq(relatedGoals[upgradeId]?.map(goal => goal.unitId) ?? []),
                 relatedGoals: uniq((relatedGoals[upgradeId] ?? []).map(goal => goal.goalId)),
                 isBlocked: false,
