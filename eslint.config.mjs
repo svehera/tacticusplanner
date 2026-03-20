@@ -52,6 +52,13 @@ export default defineConfig([
                         params: true,
                         searchParams: true,
                     },
+                    replacements: {
+                        // Some of the default replacements aren't always correct for TP code
+                        // This disables automatic replacement for them by listing the multiple alternatives
+                        req: { request: true, requirement: true },
+                        mod: { module: true, mode: true, modifier: true },
+                        e: { event: true, error: true },
+                    },
                 },
             ],
         },
