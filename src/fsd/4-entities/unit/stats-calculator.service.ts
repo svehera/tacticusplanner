@@ -43,8 +43,8 @@ export class StatsCalculatorService {
         let count: number = 0;
         if (unit.rank == Rank.Adamantine1 || typeof characterUpgrades === 'undefined') return 0;
         const upgrades = characterUpgrades[rankToString(unit.rank)];
-        if (unit.upgrades.findIndex(u => u === upgrades[firstUpgradeIndex]) != -1) ++count;
-        if (unit.upgrades.findIndex(u => u === upgrades[secondUpgradeIndex]) != -1) ++count;
+        if (unit.upgrades.some(u => u === upgrades[firstUpgradeIndex])) ++count;
+        if (unit.upgrades.some(u => u === upgrades[secondUpgradeIndex])) ++count;
         return count;
     }
 

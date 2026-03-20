@@ -42,6 +42,7 @@ export default defineConfig([
         languageOptions: { globals: globals.builtin },
         plugins: { unicorn: eslintPluginUnicorn },
         rules: {
+            'unicorn/prefer-array-some': 'error',
             'unicorn/prefer-number-properties': 'error',
             'unicorn/prefer-export-from': 'error',
             'unicorn/no-lonely-if': 'error',
