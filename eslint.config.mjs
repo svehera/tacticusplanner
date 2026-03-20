@@ -42,6 +42,7 @@ export default defineConfig([
         languageOptions: { globals: globals.builtin },
         plugins: { unicorn: eslintPluginUnicorn },
         rules: {
+            'unicorn/prefer-logical-operator-over-ternary': 'error',
             'unicorn/prefer-includes': 'error',
             'unicorn/prefer-ternary': 'error',
             'unicorn/prefer-array-index-of': 'error',
