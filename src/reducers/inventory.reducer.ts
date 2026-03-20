@@ -50,7 +50,7 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
             for (const upgrade of action.upgrades) {
                 const currentValue = newUpgrades[upgrade.id] ?? 0;
                 const result = currentValue - upgrade.count;
-                newUpgrades[upgrade.id] = result >= 0 ? result : 0;
+                newUpgrades[upgrade.id] = Math.max(result, 0);
             }
 
             return { ...state, upgrades: newUpgrades };

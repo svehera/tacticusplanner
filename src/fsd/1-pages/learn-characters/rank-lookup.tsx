@@ -97,7 +97,7 @@ export const RankLookup = () => {
             materials: IMaterialFull[];
         }> = [];
 
-        let currentRank = rankStart < Rank.Stone1 ? Rank.Stone1 : rankStart;
+        let currentRank = Math.max(rankStart, Rank.Stone1);
         const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Adamantine2 ? Rank.Adamantine1 : rankEnd;
         const upgradesCopy = upgrades.slice();
 
