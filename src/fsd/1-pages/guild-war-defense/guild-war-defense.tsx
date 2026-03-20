@@ -273,7 +273,7 @@ const TeamCard: React.FC<{
                 <Button size="small" onClick={onEdit}>
                     Edit
                 </Button>
-                <Conditional condition={!!team.lineup.length}>
+                <Conditional condition={team.lineup.length > 0}>
                     <Button size="small" color="error" onClick={onClear}>
                         Clear
                     </Button>

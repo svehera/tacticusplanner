@@ -107,7 +107,7 @@ export const RankLookup = () => {
             currentRank++;
         }
 
-        if (rankPoint5 && upgradesCopy.length) {
+        if (rankPoint5 && upgradesCopy.length > 0) {
             result.push({
                 rank1: endRank,
                 rank2: endRank,

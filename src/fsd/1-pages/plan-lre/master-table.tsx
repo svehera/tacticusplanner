@@ -250,7 +250,7 @@ export const MasterTable = () => {
     }, [filter, activeLegendaryEvents, pointsCalculation, resolvedCharacters, leProgress, leSelectedTeams]);
 
     const [selection, setSelection] = useState<CharactersSelection>(
-        selectedCharsRows.length ? CharactersSelection.Selected : CharactersSelection.All
+        selectedCharsRows.length > 0 ? CharactersSelection.Selected : CharactersSelection.All
     );
 
     const columnDefinitions: Array<ColDef | ColGroupDef> = useMemo(() => {

@@ -58,7 +58,7 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
     }, []);
 
     useEffect(() => {
-        if (!sliderMode || !contributorsList.length) {
+        if (!sliderMode || contributorsList.length === 0) {
             return;
         }
         setTimeout(() => {

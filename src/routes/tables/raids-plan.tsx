@@ -212,7 +212,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 </FlexBox>
             </AccordionSummary>
             <AccordionDetails>
-                {!!estimatedRanks.relatedUpgrades.length && (
+                {estimatedRanks.relatedUpgrades.length > 0 && (
                     <Accordion
                         TransitionProps={{ unmountOnExit: !grid1Loaded }}
                         expanded={expandedPanels.related}
@@ -228,7 +228,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         </AccordionDetails>
                     </Accordion>
                 )}
-                {!!estimatedRanks.inProgressMaterials.length && (
+                {estimatedRanks.inProgressMaterials.length > 0 && (
                     <Accordion
                         ref={inProgressReference}
                         expanded={expandedPanels.inProgress}
@@ -277,7 +277,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         </AccordionDetails>
                     </Accordion>
                 )}
-                {!!estimatedRanks.finishedMaterials.length && (
+                {estimatedRanks.finishedMaterials.length > 0 && (
                     <Accordion
                         TransitionProps={{ unmountOnExit: !grid3Loaded }}
                         expanded={expandedPanels.finished}
@@ -321,7 +321,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         </AccordionDetails>
                     </Accordion>
                 )}
-                {!!estimatedRanks.blockedMaterials.length && (
+                {estimatedRanks.blockedMaterials.length > 0 && (
                     <Accordion
                         TransitionProps={{ unmountOnExit: !grid2Loaded }}
                         expanded={expandedPanels.blocked}
@@ -378,7 +378,7 @@ export const RaidsPlan: React.FC<Props> = ({
                     </Accordion>
                 )}
 
-                {!!estimatedRanks.upgradesRaids.length && (
+                {estimatedRanks.upgradesRaids.length > 0 && (
                     <Accordion
                         TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}
                         expanded={expandedPanels.raids}

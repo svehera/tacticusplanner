@@ -691,7 +691,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
     // Calculate summary statistics
     const calculateStats = () => {
-        if (!raidData || !filteredEntries.length) return null;
+        if (!raidData || filteredEntries.length === 0) return null;
 
         // Total damage dealt across all entries
         const totalDamage = filteredEntries.reduce((sum, entry) => sum + entry.damageDealt, 0);

@@ -48,7 +48,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     );
 
     const [selection, setSelection] = useState<CharactersSelection>(
-        selectedChars.length ? CharactersSelection.Selected : CharactersSelection.All
+        selectedChars.length > 0 ? CharactersSelection.Selected : CharactersSelection.All
     );
     const [filter, setFilter] = useState('');
 

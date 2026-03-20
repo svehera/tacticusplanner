@@ -92,7 +92,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             findAndRemoveItem(newUpgrades, value);
         }
 
-        if (!newUpgrades.length) {
+        if (newUpgrades.length === 0) {
             setUpdateInventory(false);
         }
 
@@ -222,7 +222,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             <FormControlLabel
                 control={
                     <Checkbox
-                        disabled={!inventoryUpgrades.length}
+                        disabled={inventoryUpgrades.length === 0}
                         checked={updateInventory}
                         onChange={event => setUpdateInventory(event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}

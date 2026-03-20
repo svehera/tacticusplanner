@@ -213,14 +213,14 @@ export const LearnCharacters = () => {
     const doesExternalFilterPass = useCallback(
         (node: IRowNode<ICharacter2>) => {
             const doesDamageTypeFilterPass = () => {
-                if (!filter.damageTypes.length) {
+                if (filter.damageTypes.length === 0) {
                     return true;
                 }
                 return filter.damageTypes.every(type => node.data?.damageTypes.all.includes(type));
             };
 
             const doesTraitsFilterPass = () => {
-                if (!filter.traits.length) {
+                if (filter.traits.length === 0) {
                     return true;
                 }
 
@@ -242,7 +242,7 @@ export const LearnCharacters = () => {
             };
 
             const doesAllianceFilterPass = () => {
-                if (!filter.alliance.length) {
+                if (filter.alliance.length === 0) {
                     return true;
                 }
                 return filter.alliance.some(alliance => node.data?.alliance.includes(alliance));

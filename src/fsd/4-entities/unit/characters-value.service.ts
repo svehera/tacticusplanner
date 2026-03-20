@@ -49,7 +49,7 @@ export class CharactersValueService {
                 })
                 .filter(x => !!x);
 
-            if (!rankUpgrades.length) {
+            if (rankUpgrades.length === 0) {
                 continue;
             }
 

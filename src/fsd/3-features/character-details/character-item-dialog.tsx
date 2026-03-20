@@ -34,7 +34,7 @@ export const CharacterItemDialog: React.FC<Props> = props => {
     const dispatch = useContext(DispatchContext);
     const saveChanges = () => {
         dispatch.characters({ type: 'Update', character });
-        if (inventoryUpdate.length) {
+        if (inventoryUpdate.length > 0) {
             dispatch.inventory({
                 type: 'DecrementUpgradeQuantity',
                 upgrades: inventoryUpdate.map(x => ({ id: x.id, count: x.count })),

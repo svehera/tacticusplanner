@@ -100,10 +100,10 @@ export const CampaignProgression = () => {
         let filtered: Array<
             ICharacterAscendGoal | ICharacterUnlockGoal | ICharacterUpgradeRankGoal | ICharacterUpgradeMow
         > = upgradeRankOrMowGoals.filter(goal => goal.goalId == goalId);
-        if (filtered.length == 0) {
+        if (filtered.length === 0) {
             filtered = shardsGoals.filter(goal => goal.goalId == goalId);
         }
-        if (filtered.length == 0) {
+        if (filtered.length === 0) {
             console.warn('goalId not found { ' + goalId + ' ' + upgradeRankOrMowGoals.length + ' }');
             return undefined;
         }

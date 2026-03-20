@@ -90,7 +90,7 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
 
     const handleTrackChange = (value: string[]) => {
         setTracks(value);
-        if (value.length) {
+        if (value.length > 0) {
             updateSelection([character, character + section, ...value]);
         } else {
             updateSelection([]);
@@ -129,7 +129,7 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
                     minWidth={150}
                 />
             </div>
-            {!!allowedUnits.length && <span>Available characters - {allowedUnits.length}</span>}
+            {allowedUnits.length > 0 && <span>Available characters - {allowedUnits.length}</span>}
         </>
     );
 };

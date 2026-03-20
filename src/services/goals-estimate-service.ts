@@ -8,7 +8,7 @@ export interface IGoalEstimateAggregate {
 
 export class GoalsEstimateService {
     public getAggregatedGoalEstimate(estimates: IGoalEstimate[]): IGoalEstimateAggregate | undefined {
-        if (!estimates.length) {
+        if (estimates.length === 0) {
             return undefined;
         }
 

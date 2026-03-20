@@ -264,7 +264,7 @@ export const CEs = () => {
                 });
             }
 
-            if (!materials.length) {
+            if (materials.length === 0) {
                 continue;
             }
 

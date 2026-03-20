@@ -213,7 +213,7 @@ export class GoalsService {
             result.push(estimate);
         });
 
-        if (upgradeAbilities.length) {
+        if (upgradeAbilities.length > 0) {
             for (const goal of upgradeAbilities) {
                 const targetLevel = Math.max(goal.activeEnd, goal.passiveEnd);
                 const currentXp = this.currentCharacterXp(

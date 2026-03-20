@@ -61,7 +61,7 @@ export class CharacterUpgradesService {
             });
         }
 
-        if (rankLookup.appliedUpgrades.length && upgradeRanks.length) {
+        if (rankLookup.appliedUpgrades.length > 0 && upgradeRanks.length > 0) {
             const currentRank = upgradeRanks[0];
             currentRank.upgrades = currentRank.upgrades.filter(
                 upgrade => upgrade && !rankLookup.appliedUpgrades.includes(upgrade)

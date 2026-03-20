@@ -305,21 +305,21 @@ export const Guides: React.FC = () => {
 
         return (
             <div>
-                {!!rejectedTeams.length && (
+                {rejectedTeams.length > 0 && (
                     <>
                         <h3>Rejected</h3>
                         <div className="flex-box gap20 start wrap">{renderTeams(rejectedTeams)}</div>
                     </>
                 )}
 
-                {!!pendingTeams.length && (
+                {pendingTeams.length > 0 && (
                     <>
                         <h3>Pending</h3>
                         <div className="flex-box gap20 start wrap">{renderTeams(pendingTeams)}</div>
                     </>
                 )}
 
-                {!!approvedTeams.length && (
+                {approvedTeams.length > 0 && (
                     <>
                         <h3>Approved</h3>
                         <div className="flex-box gap20 start wrap">{renderTeams(approvedTeams)}</div>

@@ -124,15 +124,15 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
 
     const disableContinue = (function () {
         if (activeStep === 1) {
-            return !selectedSubModes.length || unitsFiltered.length < 5;
+            return selectedSubModes.length === 0 || unitsFiltered.length < 5;
         }
 
         if (activeStep === 2) {
-            if (!teamName.length || !intro.length || !guide.length) {
+            if (teamName.length === 0 || intro.length === 0 || guide.length === 0) {
                 return true;
             }
 
-            if (teamSlots.some(x => x.slotType !== SlotType.none && !x.unitIds.length)) {
+            if (teamSlots.some(x => x.slotType !== SlotType.none && x.unitIds.length === 0)) {
                 return true;
             }
         }

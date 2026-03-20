@@ -90,7 +90,7 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
                         x.type === state.teams[existingTeamIndex].type &&
                         x.lineup.some(character => lineup.includes(character))
                 );
-                if (sameCharacterTeams.length) {
+                if (sameCharacterTeams.length > 0) {
                     for (const team of sameCharacterTeams) {
                         team.lineup = team.lineup.filter(character => !lineup.includes(character));
                     }

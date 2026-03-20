@@ -2233,7 +2233,7 @@ export class UpgradesService {
             raidsTotal: 0,
             energyTotal: 0,
             energyLeft: 0,
-            isBlocked: !selectedLocations.length && leftCount > 0,
+            isBlocked: selectedLocations.length === 0 && leftCount > 0,
             isFinished: leftCount === 0,
             crafted: false,
             stat: upgrade.stat,
@@ -2542,7 +2542,7 @@ export class UpgradesService {
                 // For each crafted upgrade, expand into either base materials or nested crafted upgrades.
                 if (craftedUpgradeData) {
                     // If this crafted upgrade has no crafted subcomponents, expand directly to base upgrades.
-                    if (!craftedUpgradeData.craftedUpgrades.length) {
+                    if (craftedUpgradeData.craftedUpgrades.length === 0) {
                         for (const baseUpgrade of craftedUpgradeData.baseUpgrades) {
                             addBaseUpgrade(baseUpgrade.id, baseUpgrade.count * craftedUpgradeCount);
                         }

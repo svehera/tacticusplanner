@@ -123,7 +123,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                         />
                     ))}
                 </div>
-                {selectedTeams.length ? (
+                {selectedTeams.length > 0 ? (
                     <>
                         <h3>Selected Teams ({selectedTeams.length})</h3>
                         <div className="flex-box wrap">

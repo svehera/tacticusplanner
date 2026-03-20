@@ -98,7 +98,11 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
 
                 if (editedSlot.slotType === SlotType.core) {
                     const nextSlot = current.find(x => x.slotNumber === editSlotData.slotNumber + 1);
-                    if (nextSlot && !nextSlot.unitIds.filter(x => !!x).length && nextSlot.slotType !== SlotType.none) {
+                    if (
+                        nextSlot &&
+                        nextSlot.unitIds.filter(x => !!x).length === 0 &&
+                        nextSlot.slotType !== SlotType.none
+                    ) {
                         setEditSlotData({
                             index: 0,
                             slotNumber: editSlotData.slotNumber + 1,
@@ -119,7 +123,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
                         const nextSlot = current.find(x => x.slotNumber === editSlotData.slotNumber + 1);
                         if (
                             nextSlot &&
-                            !nextSlot.unitIds.filter(x => !!x).length &&
+                            nextSlot.unitIds.filter(x => !!x).length === 0 &&
                             nextSlot.slotType !== SlotType.none
                         ) {
                             setEditSlotData({

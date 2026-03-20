@@ -284,7 +284,7 @@ export class CampaignsProgressionService {
                 for (const upgradeMaterialId of unitUpgrade.upgrades) {
                     const expandedRecipe: IRecipeExpandedUpgrade =
                         UpgradesService.recipeExpandedUpgradeData[upgradeMaterialId];
-                    if (Object.entries(expandedRecipe.expandedRecipe).length == 0) {
+                    if (Object.entries(expandedRecipe.expandedRecipe).length === 0) {
                         this.addToMaterials(materialReqs, expandedRecipe.id, 1);
                     } else {
                         for (const [material, count] of Object.entries(expandedRecipe.expandedRecipe)) {

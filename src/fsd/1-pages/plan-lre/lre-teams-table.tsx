@@ -236,7 +236,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                         </a>
                     </div>
                 </div>
-                {!!restrictions.length && (
+                {restrictions.length > 0 && (
                     <Button size="small" onClick={clearSelection}>
                         Clear selection
                     </Button>
@@ -262,7 +262,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                     onGridReady={useFitGridOnWindowResize(gridReference)}
                     onCellClicked={addNewTeam}></AgGridReact>
             </div>
-            {selectedTeams.length ? (
+            {selectedTeams.length > 0 ? (
                 <>
                     <h3>Selected Teams ({selectedTeams.length})</h3>
                     <SelectedTeamsTable

@@ -206,7 +206,7 @@ export class ShardsService {
                 );
             }
 
-            const isBlocked = !raidsLocations.length;
+            const isBlocked = raidsLocations.length === 0;
             const shardsLeft =
                 material.requiredMythicCount > 0
                     ? material.requiredMythicCount - material.acquiredMythicCount

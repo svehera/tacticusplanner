@@ -266,7 +266,7 @@ export const Campaigns = () => {
                     }
                 />
 
-                {!!threeSlotsNodes.length && (
+                {threeSlotsNodes.length > 0 && (
                     <div className="flex-box gap10 wrap">
                         <span className="font-bold"> 3 Slots nodes:</span>
                         {threeSlotsNodes.map(x => (

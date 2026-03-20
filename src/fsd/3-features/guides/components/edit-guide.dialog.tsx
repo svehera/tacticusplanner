@@ -56,11 +56,11 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
     };
 
     const disableContinue = (function () {
-        if (!teamName.length || !intro.length || !guideText.length) {
+        if (teamName.length === 0 || intro.length === 0 || guideText.length === 0) {
             return true;
         }
 
-        return teamSlots.some(x => x.slotType !== SlotType.none && !x.unitIds.length);
+        return teamSlots.some(x => x.slotType !== SlotType.none && x.unitIds.length === 0);
     })();
 
     return (

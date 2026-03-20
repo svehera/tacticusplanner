@@ -101,7 +101,7 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
 
     const handleTrackChange = (value: string[]) => {
         setTracks(value);
-        if (value.length) {
+        if (value.length > 0) {
             updateSelection(value);
         } else {
             updateSelection([legendaryEvent + section]);
