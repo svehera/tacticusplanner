@@ -1,5 +1,4 @@
-﻿import { getEnumValues, getCompletionRateColor } from '@/fsd/5-shared/lib';
-import { Rarity, Rank } from '@/fsd/5-shared/model';
+﻿import { Rarity, Rank } from '@/fsd/5-shared/model';
 
 import { rankToLevel } from '../models/constants';
 import { ICharacter2 } from '../models/interfaces';
@@ -68,4 +67,5 @@ function getDaySuffix(day: number) {
 }
 
 // Re-export from shared lib
-export { getEnumValues, getCompletionRateColor };
+
+export { getEnumValues, getCompletionRateColor } from '@/fsd/5-shared/lib';

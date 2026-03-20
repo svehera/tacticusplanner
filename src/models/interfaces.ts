@@ -15,13 +15,7 @@ import { TeamsAction } from 'src/reducers/teams.reducer';
 import { TacticusTokens } from '@/fsd/5-shared/lib/tacticus-api';
 import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
-import {
-    ICampaignsProgress,
-    ICampaignsFilters,
-    CampaignGroupType,
-    CampaignType,
-    ICampaignBattleComposed,
-} from '@/fsd/4-entities/campaign';
+import { ICampaignsProgress, ICampaignsFilters, CampaignGroupType, CampaignType } from '@/fsd/4-entities/campaign';
 import { CharacterBias, ICharacter2 } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 import { IMow, IMow2, IMowDatabase } from '@/fsd/4-entities/mow';
@@ -407,14 +401,18 @@ export enum LegendaryEventDefaultPage {
 }
 
 // Re-export types from FSD entities
-export type {
-    ICampaignsProgress,
-    ICampaignsFilters,
-    ICampaignBattleComposed,
-    ICharacter2,
-    ILreTeam,
-    ILegendaryEventSelectedRequirements,
-    IAutoTeamsPreferences,
-};
 
 export type { IViewPreferences } from '@/fsd/3-features/view-settings';
+
+export {
+    type ICampaignsProgress,
+    type ICampaignBattleComposed,
+    type ICampaignsFilters,
+} from '@/fsd/4-entities/campaign';
+
+export {
+    type ILreTeam,
+    type IAutoTeamsPreferences,
+    type ILegendaryEventSelectedRequirements,
+} from '@/fsd/3-features/lre';
+export { type ICharacter2 } from '@/fsd/4-entities/character';
