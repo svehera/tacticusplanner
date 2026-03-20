@@ -55,11 +55,15 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             if (state.find(x => x.id === action.goal.id)) {
                 return state;
             }
-            state.splice(action.goal.priority - 1, 0, action.goal);
-            state.forEach((x, index) => {
-                x.priority = index + 1;
-            });
-            return [...state];
+            // Create a new array instead of mutating the existing state with splice
+            const newState = [...state];
+            newState.splice(action.goal.priority - 1, 0, action.goal);
+
+            // Return a new array with re-indexed priorities to ensure reactivity
+            return newState.map((x, index) => ({
+                ...x,
+                priority: index + 1,
+            }));
         }
         case 'Delete': {
             return state.filter(x => x.id !== action.goalId).map((x, index) => ({ ...x, priority: index + 1 }));
@@ -71,31 +75,29 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const updatedGoal = action.goal;
             const existingGoalIndex = state.findIndex(x => x.id === updatedGoal.goalId);
 
-            if (existingGoalIndex < 0) {
-                return state;
-            }
+            if (existingGoalIndex < 0) return state;
 
-            const existingGoal = state[existingGoalIndex];
             const newGoalData = GoalsService.convertToGenericGoal(updatedGoal);
+            if (!newGoalData) return state;
 
-            if (!newGoalData) {
-                return state;
-            }
+            // 1. Remove the goal from its current position
+            const filteredState = state.filter(x => x.id !== updatedGoal.goalId);
 
-            // Merge incoming data but EXPLICITLY preserve the current state's priority.
-            // This prevents stale priority data from the UI from undoing a 'Swap' action.
-            const mergedGoal: IPersonalGoal = {
+            // 2. Insert the updated goal into the EXACT requested slot (Priority - 1)
+            // We use Math.min/max to ensure we stay within array bounds
+            const targetIndex = Math.max(0, Math.min(updatedGoal.priority - 1, filteredState.length));
+
+            filteredState.splice(targetIndex, 0, {
                 ...newGoalData,
-                priority: existingGoal.priority,
-            };
+                id: updatedGoal.goalId,
+                priority: updatedGoal.priority,
+            });
 
-            const newState = [...state];
-
-            // Replace the goal at its current index without moving it.
-            newState[existingGoalIndex] = mergedGoal;
-
-            // Re-index priorities 1..N to prevent gaps or duplicates.
-            return newState.map((g, i) => ({ ...g, priority: i + 1 }));
+            // 3. Re-index 1..N based on the new physical order
+            return filteredState.map((g, i) => ({
+                ...g,
+                priority: i + 1,
+            }));
         }
         case 'UpdateDailyRaids': {
             const { value } = action;
