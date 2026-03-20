@@ -141,9 +141,9 @@ export class CharactersService {
                         if (unit.numberOfUnlocked) {
                             return unit.numberOfUnlocked;
                         } else {
-                            return !isUnlocked(unit)
-                                ? Math.ceil((unit.shards / charsUnlockShards[unit.rarity]) * 100)
-                                : units.filter(x => this.haveSameFaction(x, unit) && isUnlocked(x)).length;
+                            return isUnlocked(unit)
+                                ? units.filter(x => this.haveSameFaction(x, unit) && isUnlocked(x)).length
+                                : Math.ceil((unit.shards / charsUnlockShards[unit.rarity]) * 100);
                         }
                     },
                     ['asc']

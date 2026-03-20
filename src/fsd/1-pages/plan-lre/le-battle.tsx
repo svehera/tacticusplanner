@@ -24,7 +24,7 @@ interface WaveDisplayProps {
 // Extracted Logic: Resolve string to data object
 const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
     const colon = enemyString.indexOf(':');
-    const id = colon !== -1 ? enemyString.slice(0, Math.max(0, colon)) : enemyString;
+    const id = colon === -1 ? enemyString : enemyString.slice(0, Math.max(0, colon));
 
     // Calculate index
     let progressionIndex = 0;

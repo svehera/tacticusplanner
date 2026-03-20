@@ -123,7 +123,9 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                 for (const battle of completedBattles) {
                     const campaignKey = campaignShortId + String(battle.battleIndex + 1).padStart(2, '0');
                     const campaignComposed = CampaignsService.campaignsComposed[campaignKey];
-                    if (campaignComposed !== undefined) {
+                    if (campaignComposed === undefined) {
+                        console.warn(`Campaign composed data not found for key: ${campaignKey}`);
+                    } else {
                         // Ensure we don't duplicate an existing location entry for this campaign
                         const existingIndex = raidedLocations.findIndex(x => x.id === campaignComposed.id);
                         if (existingIndex !== -1) {
@@ -138,8 +140,6 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                             isShardsLocation: false,
                             isCompleted: battle.attemptsLeft < battle.attemptsUsed,
                         });
-                    } else {
-                        console.warn(`Campaign composed data not found for key: ${campaignKey}`);
                     }
                 }
             }

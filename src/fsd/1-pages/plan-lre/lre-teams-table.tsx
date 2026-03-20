@@ -196,8 +196,8 @@ export const LreTeamsTable: React.FC<Props> = ({
 
         // Sort `columns` by using the order from `columnIds`, keeping unspecified columns in original order
         columns.sort((a, b) => {
-            const orderA = columnOrder[a.field!] !== undefined ? columnOrder[a.field!] : Infinity;
-            const orderB = columnOrder[b.field!] !== undefined ? columnOrder[b.field!] : Infinity;
+            const orderA = columnOrder[a.field!] === undefined ? Infinity : columnOrder[a.field!];
+            const orderB = columnOrder[b.field!] === undefined ? Infinity : columnOrder[b.field!];
             return orderA - orderB;
         });
 

@@ -418,16 +418,16 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
         const timerId = setInterval(() => {
             const lastBackup = localStore.getBackupDate();
-            if (!lastBackup) {
-                const localData = GlobalState.toStore(globalState);
-                localStore.storeBackup(localData);
-            } else {
+            if (lastBackup) {
                 const now = new Date();
                 const timeDifference = now.getTime() - lastBackup.getTime();
                 if (timeDifference > oneDay) {
                     const localData = GlobalState.toStore(globalState);
                     localStore.storeBackup(localData);
                 }
+            } else {
+                const localData = GlobalState.toStore(globalState);
+                localStore.storeBackup(localData);
             }
         }, sixtySeconds);
 
