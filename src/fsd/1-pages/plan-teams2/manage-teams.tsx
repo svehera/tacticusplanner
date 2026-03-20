@@ -464,7 +464,7 @@ export const ManageTeams = () => {
                         value={selectedTeamType ?? ''}
                         onChange={event => {
                             const value = event.target.value as TeamTypeKey | '';
-                            setSelectedTeamType(value ? value : undefined);
+                            setSelectedTeamType(value || undefined);
                         }}>
                         <option value="">All</option>
                         <option value="warOffense">War Offense</option>
