@@ -128,18 +128,24 @@ export class RosterSnapshotsService {
 
     private static getMinimumStarsForRarity(rarity: Rarity): RarityStars {
         switch (rarity) {
-            case Rarity.Common:
+            case Rarity.Common: {
                 return RarityStars.None;
-            case Rarity.Uncommon:
+            }
+            case Rarity.Uncommon: {
                 return RarityStars.TwoStars;
-            case Rarity.Rare:
+            }
+            case Rarity.Rare: {
                 return RarityStars.FourStars;
-            case Rarity.Epic:
+            }
+            case Rarity.Epic: {
                 return RarityStars.RedOneStar;
-            case Rarity.Legendary:
+            }
+            case Rarity.Legendary: {
                 return RarityStars.RedThreeStars;
-            case Rarity.Mythic:
+            }
+            case Rarity.Mythic: {
                 return RarityStars.OneBlueStar;
+            }
         }
         return RarityStars.None;
     }

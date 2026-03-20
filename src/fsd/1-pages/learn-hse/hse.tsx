@@ -171,16 +171,21 @@ export const HomeScreenEvent = () => {
 
     const rowData = useMemo(() => {
         switch (selectedEvent) {
-            case IDailyRaidsHomeScreenEvent.machineHunt:
+            case IDailyRaidsHomeScreenEvent.machineHunt: {
                 return bestMachineHunt;
-            case IDailyRaidsHomeScreenEvent.purgeOrder:
+            }
+            case IDailyRaidsHomeScreenEvent.purgeOrder: {
                 return bestPurgeOrder;
-            case IDailyRaidsHomeScreenEvent.trainingRush:
+            }
+            case IDailyRaidsHomeScreenEvent.trainingRush: {
                 return bestTrainingRush;
-            case IDailyRaidsHomeScreenEvent.warpSurge:
+            }
+            case IDailyRaidsHomeScreenEvent.warpSurge: {
                 return bestWarpSurge;
-            default:
+            }
+            default: {
                 return [];
+            }
         }
     }, [selectedEvent, bestMachineHunt, bestPurgeOrder, bestWarpSurge, bestTrainingRush]);
 

@@ -489,19 +489,26 @@ function getMaterialSortWeight(materialId: string): number {
     const material = FsdUpgradesService.getUpgradeMaterial(materialId);
     const rarity = (material?.rarity ?? 'Common').toLowerCase();
     switch (rarity) {
-        case 'mythic':
+        case 'mythic': {
             return 2;
-        case 'legendary':
+        }
+        case 'legendary': {
             return 3;
-        case 'epic':
+        }
+        case 'epic': {
             return 4;
-        case 'rare':
+        }
+        case 'rare': {
             return 5;
-        case 'uncommon':
+        }
+        case 'uncommon': {
             return 6;
-        case 'common':
+        }
+        case 'common': {
             return 7;
-        default:
+        }
+        default: {
             return 99;
+        }
     }
 }

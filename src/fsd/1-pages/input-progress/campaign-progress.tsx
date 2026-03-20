@@ -24,17 +24,22 @@ interface Props {
 const getMaxNodes = (difficulty: CampaignDifficulty) => {
     switch (difficulty) {
         case CampaignDifficulty.standard:
-        case CampaignDifficulty.mirror:
+        case CampaignDifficulty.mirror: {
             return 75;
-        case CampaignDifficulty.elite:
+        }
+        case CampaignDifficulty.elite: {
             return 40;
+        }
         case CampaignDifficulty.eventStandard:
-        case CampaignDifficulty.eventExtremis:
+        case CampaignDifficulty.eventExtremis: {
             return 30;
-        case CampaignDifficulty.eventChallenge:
+        }
+        case CampaignDifficulty.eventChallenge: {
             return 3;
-        default:
+        }
+        default: {
             return 0;
+        }
     }
 };
 
@@ -42,10 +47,12 @@ const getMaxNodes = (difficulty: CampaignDifficulty) => {
 const getColor = (difficulty: CampaignDifficulty) => {
     switch (difficulty) {
         case CampaignDifficulty.elite:
-        case CampaignDifficulty.eventExtremis:
+        case CampaignDifficulty.eventExtremis: {
             return 'secondary';
-        default:
+        }
+        default: {
             return 'primary';
+        }
     }
 };
 

@@ -38,12 +38,15 @@ const alliedFactions = (factionId: FactionId) => {
     const faction = factions.find(f => f.snowprintId === factionId);
     if (!faction) throw new Error(`Unknown faction ID: ${factionId}`);
     switch (faction.alliance) {
-        case 'Imperial':
+        case 'Imperial': {
             return imperialFactions;
-        case 'Chaos':
+        }
+        case 'Chaos': {
             return chaosFactions;
-        case 'Xenos':
+        }
+        case 'Xenos': {
             return [faction];
+        }
     }
 };
 
@@ -410,20 +413,27 @@ export class CampaignsProgressionService {
      */
     public static getEnergyCost(type: CampaignType): number {
         switch (type) {
-            case CampaignType.Normal:
+            case CampaignType.Normal: {
                 return 6;
-            case CampaignType.Mirror:
+            }
+            case CampaignType.Mirror: {
                 return 6;
-            case CampaignType.Early:
+            }
+            case CampaignType.Early: {
                 return 5;
-            case CampaignType.SuperEarly:
+            }
+            case CampaignType.SuperEarly: {
                 return 3;
-            case CampaignType.Elite:
+            }
+            case CampaignType.Elite: {
                 return 10;
-            case CampaignType.Standard:
+            }
+            case CampaignType.Standard: {
                 return 6;
-            case CampaignType.Extremis:
+            }
+            case CampaignType.Extremis: {
                 return 6;
+            }
         }
         return -1;
     }

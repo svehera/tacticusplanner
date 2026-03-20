@@ -25,53 +25,74 @@ export const CharactersViewControls = ({
 
     const orderToString = (order: CharactersOrderBy): string => {
         switch (order) {
-            case CharactersOrderBy.FactionValue:
+            case CharactersOrderBy.FactionValue: {
                 return 'By Faction BS Value';
-            case CharactersOrderBy.FactionPower:
+            }
+            case CharactersOrderBy.FactionPower: {
                 return 'By Faction Power';
-            case CharactersOrderBy.CharacterValue:
+            }
+            case CharactersOrderBy.CharacterValue: {
                 return 'By Character BS Value';
-            case CharactersOrderBy.CharacterPower:
+            }
+            case CharactersOrderBy.CharacterPower: {
                 return 'By Character Power';
-            case CharactersOrderBy.AbilitiesLevel:
+            }
+            case CharactersOrderBy.AbilitiesLevel: {
                 return 'By Abilities Level';
-            case CharactersOrderBy.Rank:
+            }
+            case CharactersOrderBy.Rank: {
                 return 'By Rank';
-            case CharactersOrderBy.Rarity:
+            }
+            case CharactersOrderBy.Rarity: {
                 return 'By Rarity';
-            case CharactersOrderBy.Faction:
+            }
+            case CharactersOrderBy.Faction: {
                 return 'By Faction';
-            case CharactersOrderBy.UnlockPercentage:
+            }
+            case CharactersOrderBy.UnlockPercentage: {
                 return 'By Unlock Percentage';
-            case CharactersOrderBy.Shards:
+            }
+            case CharactersOrderBy.Shards: {
                 return 'By Shards';
-            default:
+            }
+            default: {
                 return '';
+            }
         }
     };
 
     const filterToString = (filter: CharactersFilterBy): string => {
         switch (filter) {
-            case CharactersFilterBy.NeedToAscend:
+            case CharactersFilterBy.NeedToAscend: {
                 return 'Need to Ascend';
-            case CharactersFilterBy.CanAscend:
+            }
+            case CharactersFilterBy.CanAscend: {
                 return 'Can Ascend';
-            case CharactersFilterBy.NeedToLevel:
+            }
+            case CharactersFilterBy.NeedToLevel: {
                 return 'Need to Level';
-            case CharactersFilterBy.BlueStarReady:
+            }
+            case CharactersFilterBy.BlueStarReady: {
                 return 'Ready to Blue Star';
-            case CharactersFilterBy.Chaos:
+            }
+            case CharactersFilterBy.Chaos: {
                 return 'Chaos Alliance';
-            case CharactersFilterBy.Imperial:
+            }
+            case CharactersFilterBy.Imperial: {
                 return 'Imperial Alliance';
-            case CharactersFilterBy.Xenos:
+            }
+            case CharactersFilterBy.Xenos: {
                 return 'Xenos Alliance';
-            case CharactersFilterBy.MoW:
+            }
+            case CharactersFilterBy.MoW: {
                 return 'MoW only';
-            case CharactersFilterBy.None:
+            }
+            case CharactersFilterBy.None: {
                 return 'None';
-            default:
+            }
+            default: {
                 return '';
+            }
         }
     };
 

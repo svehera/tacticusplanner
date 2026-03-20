@@ -884,22 +884,28 @@ export class TokenEstimationService {
 
     private static getNextGoal(currentRarity: Rarity, currentStars: RarityStars): string {
         switch (currentStars) {
-            case RarityStars.None:
+            case RarityStars.None: {
                 return 'Unlock';
-            case RarityStars.RedThreeStars:
+            }
+            case RarityStars.RedThreeStars: {
                 return 'Red 4★';
-            case RarityStars.RedFourStars:
+            }
+            case RarityStars.RedFourStars: {
                 return 'Red 5★';
-            case RarityStars.RedFiveStars:
+            }
+            case RarityStars.RedFiveStars: {
                 return 'Blue 1★';
-            case RarityStars.OneBlueStar:
+            }
+            case RarityStars.OneBlueStar: {
                 if (currentRarity === Rarity.Legendary) {
                     return 'Mythic 1★';
                 } else {
                     return 'Blue 2★';
                 }
-            case RarityStars.TwoBlueStars:
+            }
+            case RarityStars.TwoBlueStars: {
                 return 'Full Clear';
+            }
         }
         return '(unknown)';
     }

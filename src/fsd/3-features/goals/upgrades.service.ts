@@ -672,18 +672,23 @@ export class UpgradesService {
 
         const getHsePoints = (loc: ICampaignBattleComposed): number => {
             switch (hse) {
-                case IDailyRaidsHomeScreenEvent.purgeOrder:
+                case IDailyRaidsHomeScreenEvent.purgeOrder: {
                     return (this.getNonSummonTyranidCount(loc) * hsePointsPerUnit(loc.campaignType)) / loc.energyCost;
-                case IDailyRaidsHomeScreenEvent.warpSurge:
+                }
+                case IDailyRaidsHomeScreenEvent.warpSurge: {
                     return (
                         (this.getNonSummonChaosEnemyCount(loc) * hsePointsPerUnit(loc.campaignType)) / loc.energyCost
                     );
-                case IDailyRaidsHomeScreenEvent.machineHunt:
+                }
+                case IDailyRaidsHomeScreenEvent.machineHunt: {
                     return this.getNonSummonMechanicalEnemyCount(loc) / loc.energyCost;
-                case IDailyRaidsHomeScreenEvent.trainingRush:
+                }
+                case IDailyRaidsHomeScreenEvent.trainingRush: {
                     return (this.getNonSummonEnemyCount(loc) * hsePointsPerUnit(loc.campaignType)) / loc.energyCost;
-                default:
+                }
+                default: {
                     return 0;
+                }
             }
         };
 
@@ -1407,7 +1412,7 @@ export class UpgradesService {
                     : ['priority', 'hsePoints', 'daysToComplete'];
             const orderingDirections = ['desc', 'asc', 'desc'] as const;
             switch (settings.preferences.farmPreferences.homeScreenEvent) {
-                case IDailyRaidsHomeScreenEvent.purgeOrder:
+                case IDailyRaidsHomeScreenEvent.purgeOrder: {
                     taggedLocs = taggedLocs.map(x => ({
                         ...x,
                         hsePoints:
@@ -1415,7 +1420,8 @@ export class UpgradesService {
                             x.loc.energyCost,
                     }));
                     break;
-                case IDailyRaidsHomeScreenEvent.warpSurge:
+                }
+                case IDailyRaidsHomeScreenEvent.warpSurge: {
                     taggedLocs = taggedLocs.map(x => ({
                         ...x,
                         hsePoints:
@@ -1423,14 +1429,16 @@ export class UpgradesService {
                             x.loc.energyCost,
                     }));
                     break;
-                case IDailyRaidsHomeScreenEvent.machineHunt:
+                }
+                case IDailyRaidsHomeScreenEvent.machineHunt: {
                     // Machine hunt is old and as of 1.36, doesn't differentiate between elite and non-elite raiding.
                     taggedLocs = taggedLocs.map(x => ({
                         ...x,
                         hsePoints: this.getNonSummonMechanicalEnemyCount(x.loc) / x.loc.energyCost,
                     }));
                     break;
-                case IDailyRaidsHomeScreenEvent.trainingRush:
+                }
+                case IDailyRaidsHomeScreenEvent.trainingRush: {
                     taggedLocs = taggedLocs.map(x => ({
                         ...x,
                         hsePoints:
@@ -1438,8 +1446,10 @@ export class UpgradesService {
                             x.loc.energyCost,
                     }));
                     break;
-                default:
+                }
+                default: {
                     break;
+                }
             }
             return orderBy(taggedLocs, orderingFields, orderingDirections).map(x => x.loc);
         }
@@ -1987,21 +1997,26 @@ export class UpgradesService {
             const upgradeRanks =
                 (() => {
                     switch (goal.type) {
-                        case PersonalGoalType.UpgradeRank:
+                        case PersonalGoalType.UpgradeRank: {
                             return CharacterUpgradesService.getCharacterUpgradeRank(goal);
-                        case PersonalGoalType.MowAbilities:
+                        }
+                        case PersonalGoalType.MowAbilities: {
                             return this.getMowUpgradeRank(goal);
-                        default:
+                        }
+                        default: {
                             return undefined;
+                        }
                     }
                 })()?.filter(x => x != undefined) ?? [];
             const upgradeShards = (() => {
                 switch (goal.type) {
                     case PersonalGoalType.Ascend:
-                    case PersonalGoalType.Unlock:
+                    case PersonalGoalType.Unlock: {
                         return this.getShardsForGoal(chars, mows, goal);
-                    default:
+                    }
+                    default: {
                         return undefined;
+                    }
                 }
             })();
             const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(
@@ -2325,7 +2340,7 @@ export class UpgradesService {
             case Campaign.TAEC:
             case Campaign.TASC:
             case Campaign.DGEC:
-            case Campaign.DGSC:
+            case Campaign.DGSC: {
                 if (nodeNumber === 3) {
                     nodeNumber = 1;
                 } else if (nodeNumber === 13) {
@@ -2334,8 +2349,10 @@ export class UpgradesService {
                     nodeNumber = 3;
                 }
                 break;
-            default:
+            }
+            default: {
                 break;
+            }
         }
         return nodeNumber;
     }

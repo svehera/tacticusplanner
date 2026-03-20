@@ -22,18 +22,24 @@ const resolveEquipment = (equipment: string | undefined): string => {
         return 'None';
     }
     switch (equipment) {
-        case 'I_Crit':
+        case 'I_Crit': {
             return 'Crit';
-        case 'I_Block':
+        }
+        case 'I_Block': {
             return 'Block';
-        case 'I_Booster_Crit':
+        }
+        case 'I_Booster_Crit': {
             return 'Crit Booster';
-        case 'I_Booster_Block':
+        }
+        case 'I_Booster_Block': {
             return 'Block Booster';
-        case 'I_Defensive':
+        }
+        case 'I_Defensive': {
             return 'Defensive';
-        default:
+        }
+        default: {
             return equipment;
+        }
     }
 };
 

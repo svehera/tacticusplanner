@@ -46,14 +46,18 @@ export class TacticusIntegrationService {
 
     public static getAllianceFromString(allianceString: string): Alliance | undefined {
         switch (allianceString.toLowerCase()) {
-            case 'imperial':
+            case 'imperial': {
                 return Alliance.Imperial;
-            case 'xenos':
+            }
+            case 'xenos': {
                 return Alliance.Xenos;
-            case 'chaos':
+            }
+            case 'chaos': {
                 return Alliance.Chaos;
-            default:
+            }
+            default: {
                 return undefined;
+            }
         }
     }
 

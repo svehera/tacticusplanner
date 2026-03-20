@@ -42,16 +42,21 @@ const getRequirementStatus = (requirement: ILreBattleRequirementsProgress): Requ
 // NotCleared (0) → Cleared (1) → MaybeClear (2) → StopHere (3) → NotCleared (0)
 const getNextStatus = (currentStatus: RequirementStatus): RequirementStatus => {
     switch (currentStatus) {
-        case RequirementStatus.NotCleared:
+        case RequirementStatus.NotCleared: {
             return RequirementStatus.Cleared;
-        case RequirementStatus.Cleared:
+        }
+        case RequirementStatus.Cleared: {
             return RequirementStatus.MaybeClear;
-        case RequirementStatus.MaybeClear:
+        }
+        case RequirementStatus.MaybeClear: {
             return RequirementStatus.StopHere;
-        case RequirementStatus.StopHere:
+        }
+        case RequirementStatus.StopHere: {
             return RequirementStatus.NotCleared;
-        default:
+        }
+        default: {
             return RequirementStatus.NotCleared;
+        }
     }
 };
 

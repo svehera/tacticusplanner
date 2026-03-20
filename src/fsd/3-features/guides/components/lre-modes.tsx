@@ -41,7 +41,7 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
     const lre = getLre(character);
     const lreTracks = useMemo<IMenuOption[]>(() => {
         switch (section) {
-            case '_alpha':
+            case '_alpha': {
                 return [
                     ...lre.alpha.unitsRestrictions.map((r, index) => ({
                         value: character + '_alpha_' + index,
@@ -49,7 +49,8 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
                         selected: false,
                     })),
                 ];
-            case '_beta':
+            }
+            case '_beta': {
                 return [
                     ...lre.beta.unitsRestrictions.map((r, index) => ({
                         value: character + '_beta_' + index,
@@ -57,8 +58,9 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
                         selected: false,
                     })),
                 ];
+            }
 
-            case '_gamma':
+            case '_gamma': {
                 return [
                     ...lre.gamma.unitsRestrictions.map((r, index) => ({
                         value: character + '_gamma_' + index,
@@ -66,9 +68,11 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
                         selected: false,
                     })),
                 ];
+            }
 
-            default:
+            default: {
                 return [];
+            }
         }
     }, [section, character]);
 

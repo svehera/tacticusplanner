@@ -13,10 +13,12 @@ import { CharacterUpgrades } from './character-upgrades';
 
 const rarityStarsToString = (rarity: RarityStars): string => {
     switch (rarity) {
-        case RarityStars.None:
+        case RarityStars.None: {
             return 'None';
-        default:
+        }
+        default: {
             return '';
+        }
     }
 };
 
