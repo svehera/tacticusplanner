@@ -7,7 +7,7 @@ import { mutableCopy } from '@/fsd/5-shared/lib';
 import { IXpEstimate, IXpLevel } from '@/fsd/3-features/characters/characters.models';
 
 export class CharactersXpService {
-    static readonly legendaryTomeXp = 12500 as const;
+    static readonly legendaryTomeXp = 12_500 as const;
     static readonly legendaryTomeApplyCost = 500 as const;
     static xpLevelThresholds = mutableCopy(xpData.xpLevelThresholds) satisfies IXpLevel[];
 

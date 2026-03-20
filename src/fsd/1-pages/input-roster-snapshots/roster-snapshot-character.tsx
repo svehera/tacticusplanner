@@ -27,7 +27,7 @@ function getRank(rank: number): Rank {
 function formatShardCount(count: number): string {
     if (count < 0) return '0';
     if (count < 1000) return count.toString();
-    if (count < 10000) return `${Math.floor(count / 1000)}k`;
+    if (count < 10_000) return `${Math.floor(count / 1000)}k`;
     return '>10k';
 }
 

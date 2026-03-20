@@ -94,9 +94,9 @@ export const TeamGraph: React.FC<Props> = ({ units }) => {
                                 type: 'linear',
                                 reverse: false,
                                 min: -2500,
-                                max: 40000,
+                                max: 40_000,
                             }}
-                            gridYValues={[851, 2212, 5097, 11194, 23758, 40000]}
+                            gridYValues={[851, 2212, 5097, 11_194, 23_758, 40_000]}
                             useMesh={true}
                             animate={false}
                         />

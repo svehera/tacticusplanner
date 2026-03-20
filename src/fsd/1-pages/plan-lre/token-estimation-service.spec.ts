@@ -95,12 +95,12 @@ describe('TokenEstimationService', () => {
             expect(milestonesAndPoints[index1].stars).toBe(3);
             expect(milestonesAndPoints[index1].round).toBe(3);
 
-            const index2 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(13000);
+            const index2 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(13_000);
             expect(index2).not.toBe(-1);
             expect(milestonesAndPoints[index2].stars).toBe(3);
             expect(milestonesAndPoints[index2].round).toBe(1);
 
-            const index3 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(20000);
+            const index3 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(20_000);
             expect(index3).not.toBe(-1);
             expect(milestonesAndPoints[index3].stars).toBe(6);
         });

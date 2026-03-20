@@ -277,7 +277,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                             }
                         });
                 },
-                isMobile ? 1000 : 10000
+                isMobile ? 1000 : 10_000
             );
             setSaveTimeoutId(timeoutId);
             setAbortController(controller);

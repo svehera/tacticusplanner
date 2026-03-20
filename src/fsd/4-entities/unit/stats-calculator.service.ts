@@ -94,9 +94,9 @@ export class StatsCalculatorService {
         const rankValue = StatsCalculatorService.getRankForComputation(rank);
         const d3Value = StatsCalculatorService.getRankForComputation(Rank.Diamond3);
         if (rank < Rank.Adamantine1) {
-            return Math.pow(1.25205, rankValue);
+            return Math.pow(1.252_05, rankValue);
         }
-        return Math.pow(1.25205, d3Value) * Math.pow(1.1091, rankValue - d3Value);
+        return Math.pow(1.252_05, d3Value) * Math.pow(1.1091, rankValue - d3Value);
     }
 
     /**

@@ -9,7 +9,7 @@ export class CharactersPowerService {
             return 0;
         }
 
-        const abilityWeight = 500000 / 41274;
+        const abilityWeight = 500_000 / 41_274;
         if (isCharacter(unit)) {
             const abilityPower =
                 abilityWeight *
@@ -43,7 +43,7 @@ export class CharactersPowerService {
             (1 / 9) *
             (CharactersPowerService.getRankCoeff(unit.rank + 1) - CharactersPowerService.getRankCoeff(unit.rank));
 
-        const attributesWeight = 3000000 / 9326;
+        const attributesWeight = 3_000_000 / 9326;
         const attributePower =
             attributesWeight *
             CharactersPowerService.getStarsCoeff(unit, unit.stars) *
