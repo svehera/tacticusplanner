@@ -70,7 +70,7 @@ export class GoalService {
                 }
             } else if (goalsColorCoding === 'Guild Raid Season') {
                 const daysPerRaidSeason = 14;
-                const raidSeasonStart = 1764738000000; // Arbitrary start of a past season (in milliseconds)
+                const raidSeasonStart = 1_764_738_000_000; // Arbitrary start of a past season (in milliseconds)
 
                 const nextDate = new Date();
                 nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1); // Subtracting 1 day from daysLeft is common for 'time remaining'

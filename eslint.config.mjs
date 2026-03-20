@@ -42,6 +42,7 @@ export default defineConfig([
         languageOptions: { globals: globals.builtin },
         plugins: { unicorn: eslintPluginUnicorn },
         rules: {
+            'unicorn/numeric-separators-style': 'error',
             'unicorn/no-negated-condition': 'error',
             'unicorn/prefer-string-slice': 'error',
             'unicorn/prefer-math-min-max': 'error',

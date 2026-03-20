@@ -148,7 +148,7 @@ export const DailyRaids = () => {
     const infiniteEstimatedRanks: IEstimatedUpgrades = useMemo(() => {
         return UpgradesService.getUpgradesEstimatedDays(
             {
-                dailyEnergy: 88888888,
+                dailyEnergy: 88_888_888,
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,

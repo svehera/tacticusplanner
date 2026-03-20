@@ -1664,7 +1664,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         expect(result.daysTotal).toBe(25);
         // 15504 with current drop rates.
-        expect(Math.abs(15500 - result.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(15_500 - result.energyTotal)).toBeLessThan(1000);
     });
 
     it('estimates Helbrecht Stone I to Diamond III needs 108 faction legendaries', () => {
@@ -1876,7 +1876,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         );
 
         expect(Math.abs(22 - withInventory.daysTotal)).toBeLessThanOrEqual(1);
-        expect(Math.abs(12500 - withInventory.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(12_500 - withInventory.energyTotal)).toBeLessThan(1000);
     });
 
     it('adds Atlacoya after Helbrecht and prioritizes Helbrecht materials first', () => {
@@ -1926,7 +1926,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         );
 
         expect(Math.abs(44 - result.daysTotal)).toBeLessThanOrEqual(1);
-        expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(26_500 - result.energyTotal)).toBeLessThan(1000);
     });
 
     it('prioritizes Atlacoya when its goal is more urgent than Helbrecht', () => {
@@ -1977,7 +1977,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         expect(Math.abs(44 - result.daysTotal)).toBeLessThanOrEqual(1);
         // 26581 with current drop rates.
-        expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1500);
+        expect(Math.abs(26_500 - result.energyTotal)).toBeLessThan(1500);
     });
 
     it('total energy cost is roughly equivalent regardless of priority', () => {

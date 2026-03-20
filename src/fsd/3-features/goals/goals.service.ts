@@ -749,7 +749,7 @@ export class GoalsService {
         if (xpIncomeState.manualBooksPerDay > 0) {
             const booksToAccrue = Math.ceil(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
             newAccrual = this.processGoalAccrual(booksToAccrue, xpBooksAccrual, xpIncomeState.manualBooksPerDay);
-            goal.xpDaysLeft = Math.ceil((newAccrual.accruedDate.getTime() - today.getTime()) / 86400000);
+            goal.xpDaysLeft = Math.ceil((newAccrual.accruedDate.getTime() - today.getTime()) / 86_400_000);
         }
 
         return { xpNeeded, newXpBooksAccrual: newAccrual };
