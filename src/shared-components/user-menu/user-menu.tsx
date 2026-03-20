@@ -39,7 +39,7 @@ export const UserMenu = () => {
     const popupManager = usePopupManager();
     const { isAuthenticated, logout, username, userInfo } = useAuth();
     const [showAdminTools, setShowAdminTools] = useState(false);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputReference = useRef<HTMLInputElement>(null);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
@@ -86,9 +86,9 @@ export const UserMenu = () => {
         if (file) {
             const reader = new FileReader();
 
-            reader.onload = (e: ProgressEvent<FileReader>) => {
+            reader.onload = (event: ProgressEvent<FileReader>) => {
                 try {
-                    const content = e.target?.result as string;
+                    const content = event.target?.result as string;
                     const personalData: IPersonalData2 = convertData(JSON.parse(content));
                     personalData.modifiedDate = new Date();
 
@@ -153,16 +153,16 @@ export const UserMenu = () => {
 
     function stringToColor(string: string) {
         let hash = 0;
-        let i;
+        let index;
 
-        for (i = 0; i < string.length; i += 1) {
-            hash = string.charCodeAt(i) + ((hash << 5) - hash);
+        for (index = 0; index < string.length; index += 1) {
+            hash = string.charCodeAt(index) + ((hash << 5) - hash);
         }
 
         let color = '#';
 
-        for (i = 0; i < 3; i += 1) {
-            const value = (hash >> (i * 8)) & 0xff;
+        for (index = 0; index < 3; index += 1) {
+            const value = (hash >> (index * 8)) & 0xff;
             color += `00${value.toString(16)}`.slice(-2);
         }
 
@@ -191,7 +191,7 @@ export const UserMenu = () => {
 
     return (
         <Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
-            <input ref={inputRef} className="hidden" type="file" accept=".json" onChange={handleFileUpload} />
+            <input ref={inputReference} className="hidden" type="file" accept=".json" onChange={handleFileUpload} />
             <div className="flex items-center">
                 <span className="text-base font-bold">Hi, {username}</span>
                 <IconButton
@@ -250,7 +250,7 @@ export const UserMenu = () => {
                     </MenuItem>
                 )}
 
-                <MenuItem onClick={() => inputRef.current?.click()}>
+                <MenuItem onClick={() => inputReference.current?.click()}>
                     <ListItemIcon>
                         <UploadIcon />
                     </ListItemIcon>

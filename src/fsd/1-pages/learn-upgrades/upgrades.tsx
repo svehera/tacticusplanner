@@ -37,7 +37,7 @@ interface IUpgradesTableRow {
 
 export const Upgrades = () => {
     const selectionOptions: Selection[] = ['Base Upgrades', 'Craftable'];
-    const gridRef = useRef<AgGridReact<IUpgradesTableRow>>(null);
+    const gridReference = useRef<AgGridReact<IUpgradesTableRow>>(null);
 
     const [nameFilter, setNameFilter] = useState<string>('');
     const [showCharacters, setShowCharacters] = useState<boolean>(false);
@@ -329,14 +329,14 @@ export const Upgrades = () => {
             <div className="ag-theme-material h-[calc(100vh-220px)] w-full">
                 <AgGridReact
                     key={selection}
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
-                    onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
+                    onGridReady={useFitGridOnWindowResize(gridReference)}></AgGridReact>
             </div>
         </div>
     );

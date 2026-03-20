@@ -52,12 +52,12 @@ export const LreTeamsTable: React.FC<Props> = ({
     editTeam,
     restrictions,
 }) => {
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const defaultColumnDef: ColDef & { section: LreTrackId } = {
+    const defaultColumnDefinition: ColDef & { section: LreTrackId } = {
         resizable: true,
         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
             const character = props.value;
@@ -117,7 +117,7 @@ export const LreTeamsTable: React.FC<Props> = ({
     }, [selectedTeams]);
 
     useEffect(() => {
-        gridRef.current?.api?.sizeColumnsToFit();
+        gridReference.current?.api?.sizeColumnsToFit();
     }, [
         viewPreferences.showAlpha,
         viewPreferences.showBeta,
@@ -251,15 +251,15 @@ export const LreTeamsTable: React.FC<Props> = ({
                 <AgGridReact
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
-                    ref={gridRef}
-                    defaultColDef={defaultColumnDef}
+                    ref={gridReference}
+                    defaultColDef={defaultColumnDefinition}
                     columnDefs={columnsDefs}
                     components={components}
                     rowData={rows}
                     headerHeight={90}
                     rowHeight={35}
                     getRowStyle={getRowStyle}
-                    onGridReady={useFitGridOnWindowResize(gridRef)}
+                    onGridReady={useFitGridOnWindowResize(gridReference)}
                     onCellClicked={addNewTeam}></AgGridReact>
             </div>
             {selectedTeams.length ? (

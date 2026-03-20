@@ -50,19 +50,19 @@ export class GoalService {
                 const nextDate = new Date();
                 nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
                 const kStartDates = LegendaryEventService.getLegendaryEventStartDates();
-                for (let i: number = 0; i < kStartDates.length && i < kBgColors.length - 1; ++i) {
-                    if (nextDate < kStartDates[i]) {
-                        return GoalService.getColorString(kBgColors[i]);
+                for (let index: number = 0; index < kStartDates.length && index < kBgColors.length - 1; ++index) {
+                    if (nextDate < kStartDates[index]) {
+                        return GoalService.getColorString(kBgColors[index]);
                     }
                     if (
                         nextDate <
-                        new Date(kStartDates[i].getTime() + LegendaryEventService.getLegendaryEventDurationMillis())
+                        new Date(kStartDates[index].getTime() + LegendaryEventService.getLegendaryEventDurationMillis())
                     ) {
                         return GoalService.getColorString(
                             GoalService.interpolateColor(
-                                kBgColors[i],
-                                kBgColors[i + 1],
-                                (nextDate.getTime() - kStartDates[i].getTime()) /
+                                kBgColors[index],
+                                kBgColors[index + 1],
+                                (nextDate.getTime() - kStartDates[index].getTime()) /
                                     LegendaryEventService.getLegendaryEventDurationMillis()
                             )
                         );

@@ -117,7 +117,7 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                         <Input
                             id="username-input"
                             onChange={event =>
-                                setResetPasswordForm(curr => ({ ...curr, username: event.target.value }))
+                                setResetPasswordForm(current => ({ ...current, username: event.target.value }))
                             }
                         />
                     </FormControl>
@@ -126,7 +126,7 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                         <Input
                             id="password-input"
                             onChange={event =>
-                                setResetPasswordForm(curr => ({ ...curr, password: event.target.value }))
+                                setResetPasswordForm(current => ({ ...current, password: event.target.value }))
                             }
                         />
                     </FormControl>
@@ -139,14 +139,16 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                         <InputLabel htmlFor="username-input">Username</InputLabel>
                         <Input
                             id="username-input"
-                            onChange={event => setChangeRoleForm(curr => ({ ...curr, username: event.target.value }))}
+                            onChange={event =>
+                                setChangeRoleForm(current => ({ ...current, username: event.target.value }))
+                            }
                         />
                     </FormControl>
                     <FormControl required fullWidth variant={'standard'}>
                         <InputLabel htmlFor="password-input">Role (0 - User, 1 - Moderator, 2 - Admin)</InputLabel>
                         <Input
                             id="password-input"
-                            onChange={event => setChangeRoleForm(curr => ({ ...curr, role: event.target.value }))}
+                            onChange={event => setChangeRoleForm(current => ({ ...current, role: event.target.value }))}
                         />
                     </FormControl>
                     <Button onClick={changeUserRole}>Update role</Button>

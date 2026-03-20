@@ -70,9 +70,9 @@ export const LreAddTeam: React.FC<Props> = ({
 
     const handleChange = (checked: boolean, name: string) => {
         if (checked) {
-            setRestrictions(curr => [...curr, name]);
+            setRestrictions(current => [...current, name]);
         } else {
-            setRestrictions(curr => curr.filter(r => r !== name));
+            setRestrictions(current => current.filter(r => r !== name));
         }
     };
 
@@ -92,10 +92,10 @@ export const LreAddTeam: React.FC<Props> = ({
         if (selectedTeam.includes(character) || selectedTeam.length === 5) {
             return;
         }
-        setSelectedTeam(curr => [...curr, character]);
+        setSelectedTeam(current => [...current, character]);
     };
     const removeCharacter = (character: ICharacter2) => {
-        setSelectedTeam(curr => curr.filter(c => c.id !== character.id));
+        setSelectedTeam(current => current.filter(c => c.id !== character.id));
     };
 
     const updateSelectedTrack = (value: string[]) => {

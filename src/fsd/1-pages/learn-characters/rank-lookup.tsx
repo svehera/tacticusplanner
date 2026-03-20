@@ -29,36 +29,36 @@ import { RankLookupService } from './rank-lookup.service';
 
 export const RankLookup = () => {
     const { characters, campaignsProgress } = useContext(StoreContext);
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParameters] = useSearchParams();
 
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
     const [character, setCharacter] = useState<ICharacter2 | null>(() => {
-        const queryParamsCharacter = searchParams.get('character');
+        const queryParametersCharacter = searchParams.get('character');
 
-        return characters.find(x => x.name === queryParamsCharacter) ?? characters[0];
+        return characters.find(x => x.name === queryParametersCharacter) ?? characters[0];
     });
 
     const [rankStart, setRankStart] = useState<Rank>(() => {
-        const queryParamsRank = searchParams.get('rankStart');
+        const queryParametersRank = searchParams.get('rankStart');
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        return queryParamsRank ? (Rank[queryParamsRank] ?? Rank.Stone1) : Rank.Stone1;
+        return queryParametersRank ? (Rank[queryParametersRank] ?? Rank.Stone1) : Rank.Stone1;
     });
     const [rankEnd, setRankEnd] = useState<Rank>(() => {
-        const queryParamsRank = searchParams.get('rankEnd');
+        const queryParametersRank = searchParams.get('rankEnd');
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        return queryParamsRank ? (Rank[queryParamsRank] ?? Rank.Stone2) : Rank.Stone2;
+        return queryParametersRank ? (Rank[queryParametersRank] ?? Rank.Stone2) : Rank.Stone2;
     });
     const [rankPoint5, setRankPoint5] = useState<boolean>(() => {
-        const queryParamsRankPoint5 = searchParams.get('rankPoint5');
+        const queryParametersRankPoint5 = searchParams.get('rankPoint5');
 
-        return !!queryParamsRankPoint5 && queryParamsRankPoint5 === 'true';
+        return !!queryParametersRankPoint5 && queryParametersRankPoint5 === 'true';
     });
 
-    const [anchorEl2, setAnchorEl2] = React.useState<HTMLElement | null>(null);
+    const [anchorElement2, setAnchorElement2] = React.useState<HTMLElement | null>(null);
     const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull | null>(null);
 
     /**
@@ -97,14 +97,14 @@ export const RankLookup = () => {
             materials: IMaterialFull[];
         }> = [];
 
-        let currRank = rankStart < Rank.Stone1 ? Rank.Stone1 : rankStart;
+        let currentRank = rankStart < Rank.Stone1 ? Rank.Stone1 : rankStart;
         const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Adamantine2 ? Rank.Adamantine1 : rankEnd;
         const upgradesCopy = upgrades.slice();
 
-        while (currRank !== endRank) {
+        while (currentRank !== endRank) {
             const rankUpgrades = upgradesCopy.splice(0, 6);
-            result.push({ rank1: currRank, rank2: currRank + 1, materials: rankUpgrades });
-            currRank++;
+            result.push({ rank1: currentRank, rank2: currentRank + 1, materials: rankUpgrades });
+            currentRank++;
         }
 
         if (rankPoint5 && upgradesCopy.length) {
@@ -214,27 +214,27 @@ export const RankLookup = () => {
     const updateRankStart = (value: number) => {
         setRankStart(value);
 
-        setSearchParams(curr => {
-            curr.set('rankStart', Rank[value]);
-            return curr;
+        setSearchParameters(current => {
+            current.set('rankStart', Rank[value]);
+            return current;
         });
     };
 
     const updateRankEnd = (value: number) => {
         setRankEnd(value);
 
-        setSearchParams(curr => {
-            curr.set('rankEnd', Rank[value]);
-            return curr;
+        setSearchParameters(current => {
+            current.set('rankEnd', Rank[value]);
+            return current;
         });
     };
 
     const updateRankPoint5 = (value: boolean) => {
         setRankPoint5(value);
 
-        setSearchParams(curr => {
-            curr.set('rankPoint5', value + '');
-            return curr;
+        setSearchParameters(current => {
+            current.set('rankPoint5', value + '');
+            return current;
         });
     };
 
@@ -244,7 +244,7 @@ export const RankLookup = () => {
         const armourUpgrades: IMaterialFull[] = materials.filter(x => x.stat === 'Armour');
 
         const handleRecipeClick = (target: HTMLElement, material: IMaterialFull) => {
-            setAnchorEl2(target);
+            setAnchorElement2(target);
             setMaterialRecipe(material);
         };
 
@@ -303,14 +303,14 @@ export const RankLookup = () => {
                     onUnitChange={value => {
                         setCharacter(value);
 
-                        setSearchParams(curr => {
+                        setSearchParameters(current => {
                             if (value) {
-                                curr.set('character', value.name);
+                                current.set('character', value.name);
                             } else {
-                                curr.delete('character');
+                                current.delete('character');
                             }
 
-                            return curr;
+                            return current;
                         });
                     }}
                 />
@@ -397,7 +397,7 @@ export const RankLookup = () => {
                     ))}
                     <Popover
                         open={!!materialRecipe}
-                        anchorEl={anchorEl2}
+                        anchorEl={anchorElement2}
                         onClose={() => setMaterialRecipe(null)}
                         anchorOrigin={{
                             vertical: 'bottom',

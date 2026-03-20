@@ -58,7 +58,7 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
 
     const updateSelectedGuildBosses = (values: string[]) => {
         const nonGuildBossValues = selectedSubModes.filter(
-            mod => !guildRaidBosses.some(option => option.value === mod)
+            mode => !guildRaidBosses.some(option => option.value === mode)
         );
 
         setSelectedSubModes([...nonGuildBossValues, ...values]);
@@ -66,7 +66,7 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
 
     const updateSelectedGuildPrimes = (values: string[]) => {
         const nonGuildPrimeValues = selectedSubModes.filter(
-            mod => !guildRaidPrimes.some(option => option.value === mod)
+            mode => !guildRaidPrimes.some(option => option.value === mode)
         );
 
         setSelectedSubModes([...nonGuildPrimeValues, ...values]);

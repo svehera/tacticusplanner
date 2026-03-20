@@ -35,8 +35,8 @@ interface Props {
     updateInventoryAny: () => void;
 }
 
-type RefElem = HTMLDivElement | null;
-type RefMap = { [key: string]: RefElem };
+type ReferenceElement = HTMLDivElement | null;
+type ReferenceMap = { [key: string]: ReferenceElement };
 
 export const RaidsPlan: React.FC<Props> = ({
     estimatedRanks,
@@ -66,13 +66,13 @@ export const RaidsPlan: React.FC<Props> = ({
     }));
 
     const togglePanel = (key: keyof typeof expandedPanels) => (_: any, isExpanded: boolean) =>
-        setExpandedPanels(prev => ({ ...prev, [key]: isExpanded }));
+        setExpandedPanels(previous => ({ ...previous, [key]: isExpanded }));
 
-    const itemRefs = useRef<RefMap>({});
-    const inProgressRef = useRef<HTMLDivElement>(null);
-    const setCardRef = useCallback(
-        (id: number) => (element: RefElem) => {
-            itemRefs.current[id] = element;
+    const itemReferences = useRef<ReferenceMap>({});
+    const inProgressReference = useRef<HTMLDivElement>(null);
+    const setCardReference = useCallback(
+        (id: number) => (element: ReferenceElement) => {
+            itemReferences.current[id] = element;
         },
         []
     );
@@ -106,21 +106,21 @@ export const RaidsPlan: React.FC<Props> = ({
         if (scrollToCharSnowprintId === undefined) return;
         if (!Object.keys(characterToMaterialMap).includes(scrollToCharSnowprintId)) return;
         if (viewPreferences.raidsTableView) {
-            inProgressRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            inProgressReference.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             return;
         }
-        const targetElement = itemRefs.current[characterToMaterialMap[scrollToCharSnowprintId]];
+        const targetElement = itemReferences.current[characterToMaterialMap[scrollToCharSnowprintId]];
         if (targetElement) {
             targetElement.scrollIntoView({
                 behavior: 'smooth',
                 block: 'center',
             });
         }
-    }, [itemRefs, scrollToCharSnowprintId, characterToMaterialMap, viewPreferences.raidsTableView]);
+    }, [itemReferences, scrollToCharSnowprintId, characterToMaterialMap, viewPreferences.raidsTableView]);
 
     useEffect(() => {
         if (scrollToCharSnowprintId !== undefined) {
-            setExpandedPanels(prev => ({ ...prev, inProgress: true }));
+            setExpandedPanels(previous => ({ ...previous, inProgress: true }));
         }
     }, [scrollToCharSnowprintId]);
 
@@ -188,9 +188,9 @@ export const RaidsPlan: React.FC<Props> = ({
                                         event.stopPropagation();
                                         updateView(event.target.checked);
                                     }}
-                                    onClick={e => e.stopPropagation()}
-                                    onFocus={e => e.stopPropagation()}
-                                    onMouseDown={e => e.stopPropagation()}
+                                    onClick={event => event.stopPropagation()}
+                                    onFocus={event => event.stopPropagation()}
+                                    onMouseDown={event => event.stopPropagation()}
                                 />
                             }
                             label={
@@ -230,7 +230,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 )}
                 {!!estimatedRanks.inProgressMaterials.length && (
                     <Accordion
-                        ref={inProgressRef}
+                        ref={inProgressReference}
                         expanded={expandedPanels.inProgress}
                         onChange={togglePanel('inProgress')}
                         TransitionProps={{ unmountOnExit: !grid1Loaded }}>
@@ -257,7 +257,10 @@ export const RaidsPlan: React.FC<Props> = ({
                                     <div className="flex max-h-[600px] w-full flex-wrap gap-x-4 gap-y-4 overflow-y-auto p-2">
                                         {estimatedRanks.inProgressMaterials.length > 0 &&
                                             estimatedRanks.inProgressMaterials.map((material, index) => (
-                                                <div className="item-raids w-64" key={index} ref={setCardRef(index)}>
+                                                <div
+                                                    className="item-raids w-64"
+                                                    key={index}
+                                                    ref={setCardReference(index)}>
                                                     <RaidUpgradeMaterialCard
                                                         index={index}
                                                         upgradeMaterialSnowprintId={material.id}

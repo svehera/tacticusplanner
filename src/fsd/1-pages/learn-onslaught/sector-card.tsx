@@ -7,7 +7,7 @@ import powerIcon from '@/assets/images/icons/power.png';
 
 import { BadgeImage } from '@/fsd/5-shared/ui/icons';
 
-import { KillzoneList } from './KillzoneList';
+import { KillzoneList } from './killzone-list';
 import type { OnslaughtBadgeAlliance, OnslaughtSector } from './types';
 
 export function SectorCard({
@@ -27,7 +27,7 @@ export function SectorCard({
         <details
             className="group w-full overflow-hidden rounded border bg-stone-100 shadow-sm transition-shadow hover:shadow-xl dark:bg-stone-900"
             open={isOpen}
-            onToggle={e => setOpen(e.currentTarget.open)}>
+            onToggle={event => setOpen(event.currentTarget.open)}>
             <summary
                 className={clsx(
                     'flex w-full cursor-pointer items-center justify-between bg-linear-to-r px-2 text-stone-200 select-none',

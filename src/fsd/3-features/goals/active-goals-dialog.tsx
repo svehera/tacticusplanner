@@ -32,11 +32,11 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
     // Sync currentGoalsSelect with goals prop when goals change while dialog is open
     useEffect(() => {
         if (openGoals) {
-            setCurrentGoalsSelect(prevGoals =>
+            setCurrentGoalsSelect(previousGoals =>
                 goals.map(goal => {
-                    const prevGoal = prevGoals.find(g => g.goalId === goal.goalId);
+                    const previousGoal = previousGoals.find(g => g.goalId === goal.goalId);
                     // Preserve include state if goal exists, otherwise use the new goal's include value
-                    return prevGoal ? { ...goal, include: prevGoal.include } : goal;
+                    return previousGoal ? { ...goal, include: previousGoal.include } : goal;
                 })
             );
         }

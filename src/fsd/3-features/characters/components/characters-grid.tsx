@@ -1,7 +1,7 @@
 ﻿/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 /* eslint-disable no-restricted-imports */
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { UnitType } from '@/fsd/5-shared/model';
@@ -16,7 +16,7 @@ import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/ros
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';
 import { CharactersViewContext } from '../characters-view.context';
 
-const CharactersGridFn = ({
+export const CharactersGrid = ({
     characters,
     blockedCharacters = [],
     onAvailableCharacterClick,
@@ -125,5 +125,3 @@ const CharactersGridFn = ({
         </div>
     );
 };
-
-export const CharactersGrid = React.memo(CharactersGridFn);

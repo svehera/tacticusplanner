@@ -14,7 +14,7 @@ export const useDebouncedState = <T extends XpIncomeState[K], K extends keyof Xp
 ): [T, (newValue: T) => void] => {
     const dispatch = useContext(DispatchContext);
     const [localValue, setLocalValue] = useState<T>(initialValue);
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const timeoutReference = useRef<NodeJS.Timeout | null>(null);
 
     // Sync local state if the global state changes externally
     useEffect(() => {
@@ -27,11 +27,11 @@ export const useDebouncedState = <T extends XpIncomeState[K], K extends keyof Xp
             return;
         }
 
-        if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current);
+        if (timeoutReference.current) {
+            clearTimeout(timeoutReference.current);
         }
 
-        timeoutRef.current = setTimeout(() => {
+        timeoutReference.current = setTimeout(() => {
             dispatch.xpIncome({
                 type: 'SaveXpIncomeState',
                 value: {
@@ -42,8 +42,8 @@ export const useDebouncedState = <T extends XpIncomeState[K], K extends keyof Xp
         }, delay);
 
         return () => {
-            if (timeoutRef.current) {
-                clearTimeout(timeoutRef.current);
+            if (timeoutReference.current) {
+                clearTimeout(timeoutReference.current);
             }
         };
     }, [localValue, globalState, dispatch, key, delay]);

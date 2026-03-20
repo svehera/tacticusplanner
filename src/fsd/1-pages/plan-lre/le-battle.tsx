@@ -27,22 +27,22 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
     const hasEnemies = wave.enemies.length > 0;
 
     // Extracted Logic: Resolve string to data object
-    const resolveEnemy = (enemyStr: string): ResolvedEnemyData | null => {
-        const colon = enemyStr.indexOf(':');
-        const id = colon !== -1 ? enemyStr.substring(0, colon) : enemyStr;
+    const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
+        const colon = enemyString.indexOf(':');
+        const id = colon !== -1 ? enemyString.substring(0, colon) : enemyString;
 
         // Calculate index
         let progressionIndex = 0;
         if (colon !== -1) {
-            const pStr = enemyStr.substring(colon + 1);
-            const pInt = parseInt(pStr, 10);
+            const pString = enemyString.substring(colon + 1);
+            const pInt = parseInt(pString, 10);
             progressionIndex = isNaN(pInt) ? 0 : pInt;
         }
 
         // Adjust for 0-based array (Your logic used -1, keeping that consistency)
         const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
 
-        console.log('Resolving enemy:', enemyStr, 'to id:', id, 'at index:', arrayIndex);
+        console.log('Resolving enemy:', enemyString, 'to id:', id, 'at index:', arrayIndex);
         const npc = NpcService.getNpcById(id);
 
         console.log('Resolved NPC:', npc);
@@ -58,22 +58,22 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
 
     const renderEnemies = (enemies: string[]) => (
         <div className="flex flex-wrap items-start gap-x-3 gap-y-6">
-            {enemies.map((enemyStr, idx) => {
-                const data = resolveEnemy(enemyStr);
+            {enemies.map((enemyString, index) => {
+                const data = resolveEnemy(enemyString);
 
                 // Fallback for bad data
                 if (!data) {
-                    console.error('could not resolve enemy data for string:', enemyStr);
+                    console.error('could not resolve enemy data for string:', enemyString);
                     return (
-                        <div key={idx} className="text-xs text-red-500">
-                            Error: {enemyStr}
+                        <div key={index} className="text-xs text-red-500">
+                            Error: {enemyString}
                         </div>
                     );
                 }
 
                 return (
                     <button
-                        key={idx}
+                        key={index}
                         onClick={() => onEnemyClick(data)} // Trigger the modal
                         className="relative h-[75px] w-[60px] cursor-pointer rounded transition-all hover:brightness-110 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         style={{ transform: 'scale(0.3)', transformOrigin: 'top left' }}
@@ -154,7 +154,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                 </div>
                 <div className="mb-4">
                     <button
-                        onClick={() => setIsMapVisible(prev => !prev)}
+                        onClick={() => setIsMapVisible(previous => !previous)}
                         className="mb-2 rounded px-2 py-1 text-sm font-semibold text-blue-600 hover:underline focus:ring-2 focus:ring-blue-500 focus:outline-none dark:text-blue-400">
                         {isMapVisible ? 'Hide Map' : 'Show Map'}
                     </button>

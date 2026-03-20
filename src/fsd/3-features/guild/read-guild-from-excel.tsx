@@ -14,7 +14,7 @@ interface Props {
 
 export const ImportGuildExcel: React.FC<Props> = ({ onImport }) => {
     const [open, setOpen] = React.useState(false);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputReference = useRef<HTMLInputElement>(null);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -84,7 +84,7 @@ export const ImportGuildExcel: React.FC<Props> = ({ onImport }) => {
                         <li>Download the spreadsheet in the XLSX format</li>
                         <li>Chose downloaded file in the file picker below</li>
                     </ol>
-                    <input ref={inputRef} type="file" accept=".xlsx" onChange={handleFileUpload} />
+                    <input ref={inputReference} type="file" accept=".xlsx" onChange={handleFileUpload} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Close</Button>

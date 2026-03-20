@@ -1,5 +1,5 @@
-export const getEnumValues = (enumObj: any): number[] => {
-    return Object.keys(enumObj)
-        .filter(key => typeof enumObj[key] === 'number')
-        .map(key => enumObj[key]);
+export const getEnumValues = (enumObject: any): number[] => {
+    return Object.keys(enumObject)
+        .filter(key => typeof enumObject[key] === 'number')
+        .map(key => enumObject[key]);
 };

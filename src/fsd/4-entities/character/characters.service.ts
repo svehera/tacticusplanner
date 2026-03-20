@@ -88,13 +88,13 @@ export class CharactersService {
      * @returns The converted DamageType.
      */
     private static convertSnowprintDamageProfile(rawData: string): DamageType {
-        const ret: DamageType = DamageType[rawData as keyof typeof DamageType] || DamageType.Physical;
+        const returnValue: DamageType = DamageType[rawData as keyof typeof DamageType] || DamageType.Physical;
         if (rawData === 'DirectDamage') return DamageType.Direct;
         if (rawData === 'Gauss') return DamageType.Molecular;
-        if (ret == DamageType.Physical && rawData !== 'Physical') {
+        if (returnValue == DamageType.Physical && rawData !== 'Physical') {
             console.warn(`Unknown damage profile: ${rawData}`);
         }
-        return ret;
+        return returnValue;
     }
 
     private static convertUnitData(rawData: UnitDataRaw): ICharacterData {
@@ -193,10 +193,10 @@ export class CharactersService {
     }
 
     public static resolveCharacter(identifier: string): ICharacterData {
-        const ret = CharactersService.charactersData.find(
+        const returnValue = CharactersService.charactersData.find(
             x => x.snowprintId! == CharactersService.canonicalName(identifier)
         );
-        return ret!;
+        return returnValue!;
     }
 
     /**

@@ -39,10 +39,10 @@ type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 const Header = ({ className, ...props }: DialogHeaderProps) => {
-    const headerRef = useRef<HTMLHeadingElement>(null);
+    const headerReference = useRef<HTMLHeadingElement>(null);
 
     useEffect(() => {
-        const header = headerRef.current;
+        const header = headerReference.current;
         if (!header) {
             return;
         }
@@ -58,7 +58,7 @@ const Header = ({ className, ...props }: DialogHeaderProps) => {
     }, []);
 
     return (
-        <div data-slot="dialog-header" ref={headerRef} className={header({ className })}>
+        <div data-slot="dialog-header" ref={headerReference} className={header({ className })}>
             {props.title && <Title>{props.title}</Title>}
             {props.description && <Description>{props.description}</Description>}
             {!props.title && typeof props.children === 'string' ? <Title {...props} /> : props.children}
@@ -98,10 +98,10 @@ const Body = ({ className, ref, ...props }: DialogBodyProps) => (
 
 type DialogFooterProps = React.ComponentProps<'div'>;
 const Footer = ({ className, ...props }: DialogFooterProps) => {
-    const footerRef = useRef<HTMLDivElement>(null);
+    const footerReference = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const footer = footerRef.current;
+        const footer = footerReference.current;
 
         if (!footer) {
             return;
@@ -118,7 +118,7 @@ const Footer = ({ className, ...props }: DialogFooterProps) => {
             observer.unobserve(footer);
         };
     }, []);
-    return <div ref={footerRef} data-slot="dialog-footer" className={footer({ className })} {...props} />;
+    return <div ref={footerReference} data-slot="dialog-footer" className={footer({ className })} {...props} />;
 };
 
 const Close = ({ className, appearance = 'outline', ref, ...props }: ButtonProps) => {
@@ -132,16 +132,16 @@ interface CloseButtonIndicatorProps extends ButtonProps {
 
 const CloseIndicator = ({ className, ...props }: CloseButtonIndicatorProps) => {
     const isMobile = useMediaQuery('(max-width: 600px)');
-    const buttonRef = useRef<HTMLButtonElement>(null);
+    const buttonReference = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
-        if (isMobile && buttonRef.current) {
-            buttonRef.current.focus();
+        if (isMobile && buttonReference.current) {
+            buttonReference.current.focus();
         }
     }, [isMobile]);
     return props.isDismissable ? (
         <ButtonPrimitive
-            ref={buttonRef}
+            ref={buttonReference}
             {...(isMobile ? { autoFocus: true } : {})}
             aria-label="Close"
             slot="close"
