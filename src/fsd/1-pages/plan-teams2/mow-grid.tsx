@@ -13,13 +13,13 @@ import { Teams2Service } from './teams2.service';
 
 interface Props {
     mows: IMow2[];
-    sizeMod: number;
+    zoom: number;
     onMowSelect: (id: string) => void;
     showHeader: boolean;
     deployedFlexUnitIds?: string[];
 }
 
-export const MowGrid: React.FC<Props> = ({ mows, sizeMod, onMowSelect, showHeader, deployedFlexUnitIds }: Props) => {
+export const MowGrid: React.FC<Props> = ({ mows, zoom, onMowSelect, showHeader, deployedFlexUnitIds }: Props) => {
     return (
         <div>
             {showHeader && (
@@ -30,7 +30,7 @@ export const MowGrid: React.FC<Props> = ({ mows, sizeMod, onMowSelect, showHeade
             )}
             <div className="flex flex-wrap gap-4">
                 {mows.map(mow => (
-                    <div key={mow.snowprintId!} className="relative" style={{ zoom: sizeMod }}>
+                    <div key={mow.snowprintId!} className="relative" style={{ zoom }}>
                         <div
                             onClick={() => onMowSelect(mow.snowprintId!)}
                             className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"

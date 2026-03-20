@@ -19,9 +19,9 @@ import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 import { ThemeSwitch } from '@/fsd/3-features/theme-switch';
 import { WhatsNewDialog } from 'src/fsd/3-features/whats-new';
 
-import { AddToHomeScreen } from './addToHomeScreen';
+import { AddToHomeScreen } from './add-to-home-screen';
 import { DesktopHome } from './desktop-home';
-import { usePwaInstall } from './usePwaInstall';
+import { usePwaInstall } from './use-pwa-install';
 
 export const MobileHome = () => {
     const dispatch = useContext(DispatchContext);

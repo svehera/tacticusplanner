@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 interface XpGoalProgressBarProps {
     applied: number;
@@ -33,8 +33,8 @@ export const XpGoalProgressBar: React.FC<XpGoalProgressBarProps> = ({
                         {displayValue}
                     </span>
                 </div>
-                <div className="flex h-[18px] w-[18px] items-center justify-center">
-                    <MiscIcon icon={bookIconName} height={18} width={15} />
+                <div className="flex items-center justify-center">
+                    <MiscIcon icon={bookIconName} className="!h-[1.5em] !w-auto" />
                 </div>
             </div>
         </AccessibleTooltip>

@@ -2,16 +2,16 @@ import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { IEquipment } from '@/fsd/4-entities/equipment';
 
-export type RosterSnapshotsImageProp = [HTMLImageElement | undefined, 'loaded' | 'loading' | 'failed'];
+export type RosterSnapshotsImageProperty = [HTMLImageElement | undefined, 'loaded' | 'loading' | 'failed'];
 
 // Define the shape of your assets
 export interface RosterSnapshotAssets {
-    charFrames: RosterSnapshotsImageProp[];
-    mowFrames: RosterSnapshotsImageProp[];
-    ranks: RosterSnapshotsImageProp[];
-    stars: RosterSnapshotsImageProp[];
-    shardIcon: RosterSnapshotsImageProp;
-    mythicShardIcon: RosterSnapshotsImageProp;
+    charFrames: RosterSnapshotsImageProperty[];
+    mowFrames: RosterSnapshotsImageProperty[];
+    ranks: RosterSnapshotsImageProperty[];
+    stars: RosterSnapshotsImageProperty[];
+    shardIcon: RosterSnapshotsImageProperty;
+    mythicShardIcon: RosterSnapshotsImageProperty;
 }
 
 export interface ISnapshotCharacter {

@@ -5,7 +5,7 @@ import { numberToThousandsString } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance } from '@/fsd/5-shared/model';
 import { BadgeImage, ForgeBadgeImage, MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { IMowMaterialsTotal } from './lookup.models';
+import { IMowMaterialsTotal } from '@/fsd/3-features/goals';
 
 interface Props {
     total: IMowMaterialsTotal;

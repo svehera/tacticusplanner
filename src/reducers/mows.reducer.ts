@@ -6,13 +6,13 @@ import { Rarity, RarityStars } from '@/fsd/5-shared/model/enums';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
-import { IMow, IMow2, IMowDb } from '@/fsd/3-features/characters/characters.models';
+import { IMow, IMow2, IMowDatabase } from '@/fsd/3-features/characters/characters.models';
 import { TacticusIntegrationService } from '@/fsd/3-features/tacticus-integration/tacticus-integration.service';
 
 export type MowsAction =
     | {
           type: 'Update';
-          mow: IMowDb;
+          mow: IMowDatabase;
       }
     | {
           type: 'UpdateAbilities';

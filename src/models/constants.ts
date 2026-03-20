@@ -379,16 +379,16 @@ export const defaultData: IPersonalData2 = {
             },
         ],
         teams: [
-            ...Array.from({ length: 5 }, (_, i) => ({
+            ...Array.from({ length: 5 }, (_, index) => ({
                 id: v4(),
-                name: `Team ${i + 1}`,
+                name: `Team ${index + 1}`,
                 type: GuildWarTeamType.Defense,
                 rarityCap: Rarity.Legendary,
                 lineup: [],
             })),
-            ...Array.from({ length: 10 }, (_, i) => ({
+            ...Array.from({ length: 10 }, (_, index) => ({
                 id: v4(),
-                name: `Team ${i + 1}`,
+                name: `Team ${index + 1}`,
                 type: GuildWarTeamType.Offense,
                 rarityCap: Rarity.Legendary,
                 lineup: [],

@@ -27,7 +27,7 @@ interface HseBattle {
 }
 
 export const HomeScreenEvent = () => {
-    const gridRef = useRef<AgGridReact<HseBattle>>(null);
+    const gridReference = useRef<AgGridReact<HseBattle>>(null);
     const [campaignsToConsider, setCampaignsToConsider] = useState<Campaign[]>(() => {
         return CampaignsService.allCampaigns.map(x => x.id);
     });
@@ -88,9 +88,9 @@ export const HomeScreenEvent = () => {
                             reward: getReward(battle.rewards),
                             dropChance: battle.dropRate,
                         };
-                        const arr = pointsPerEnergy[details.pointsPerEnergy] || [];
-                        arr.push(details);
-                        pointsPerEnergy[details.pointsPerEnergy] = arr;
+                        const array = pointsPerEnergy[details.pointsPerEnergy] || [];
+                        array.push(details);
+                        pointsPerEnergy[details.pointsPerEnergy] = array;
                     }
                 });
             });
@@ -212,8 +212,8 @@ export const HomeScreenEvent = () => {
                 if (!hunt) return null;
                 const rowIndex = params.node.rowIndex ?? 0;
                 let cumulativeGears = 0;
-                for (let i = 0; i <= rowIndex; i++) {
-                    const data = params.api.getDisplayedRowAtIndex(i)?.data;
+                for (let index = 0; index <= rowIndex; index++) {
+                    const data = params.api.getDisplayedRowAtIndex(index)?.data;
                     if (data) {
                         cumulativeGears += data.points * data.battle.dailyBattleCount;
                     }
@@ -244,8 +244,8 @@ export const HomeScreenEvent = () => {
                 if (!hunt) return null;
                 const rowIndex = params.node.rowIndex ?? 0;
                 let cumulativeEnergy = 0;
-                for (let i = 0; i <= rowIndex; i++) {
-                    const data = params.api.getDisplayedRowAtIndex(i)?.data;
+                for (let index = 0; index <= rowIndex; index++) {
+                    const data = params.api.getDisplayedRowAtIndex(index)?.data;
                     if (data) {
                         cumulativeEnergy += data.energyCost * data.battle.dailyBattleCount;
                     }
@@ -292,7 +292,7 @@ export const HomeScreenEvent = () => {
                             name="events"
                             id="event-select"
                             value={selectedEvent}
-                            onChange={e => setSelectedEvent(e.target.value as IDailyRaidsHomeScreenEvent)}
+                            onChange={event => setSelectedEvent(event.target.value as IDailyRaidsHomeScreenEvent)}
                             size="small"
                             className="rounded-md bg-slate-700">
                             <MenuItem value={IDailyRaidsHomeScreenEvent.purgeOrder}>Purge Order</MenuItem>
@@ -308,10 +308,10 @@ export const HomeScreenEvent = () => {
                             id="campaign-select"
                             multiple
                             value={campaignsToConsider}
-                            onChange={e => {
+                            onChange={event => {
                                 const {
                                     target: { value },
-                                } = e;
+                                } = event;
                                 setCampaignsToConsider(
                                     // On autofill we get a stringified value.
                                     (typeof value === 'string' ? value.split(',') : value).map(id => id as Campaign)
@@ -333,7 +333,7 @@ export const HomeScreenEvent = () => {
                             type="checkbox"
                             id="ignore-early-indom"
                             checked={includeRewardlessBattles}
-                            onChange={e => setIncludeRewardlessBattles(e.target.checked)}
+                            onChange={event => setIncludeRewardlessBattles(event.target.checked)}
                         />
                         <label htmlFor="ignore-early-indom">Include battles with no rewards</label>
                     </div>
@@ -343,7 +343,7 @@ export const HomeScreenEvent = () => {
                 <AgGridReact
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
-                    ref={gridRef}
+                    ref={gridReference}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
                     columnDefs={columnDefs}

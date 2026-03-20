@@ -54,10 +54,10 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
         if (selectedTeam.includes(character) || selectedTeam.length === 5) {
             return;
         }
-        setSelectedTeam(curr => [...curr, character]);
+        setSelectedTeam(current => [...current, character]);
     };
     const removeCharacter = (character: ICharacter2) => {
-        setSelectedTeam(curr => curr.filter(c => c.id !== character.id));
+        setSelectedTeam(current => current.filter(c => c.id !== character.id));
     };
 
     const clearAll = () => {

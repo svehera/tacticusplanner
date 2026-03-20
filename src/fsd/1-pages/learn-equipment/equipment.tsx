@@ -11,7 +11,7 @@ import { EquipmentIcon, EquipmentService, EquipmentTypeIcon, IEquipment } from '
 import { EquipmentBoost } from '@/fsd/4-entities/equipment/ui/equipment-boost';
 
 export const Equipment = () => {
-    const gridRef = useRef<AgGridReact<IEquipment>>(null);
+    const gridReference = useRef<AgGridReact<IEquipment>>(null);
     const [nameFilter, setNameFilter] = useState<string>('');
     const [showCharacters, setShowCharacters] = useState<boolean>(false);
     const rows = useMemo(
@@ -87,10 +87,10 @@ export const Equipment = () => {
                 minWidth: 100,
                 flex: 1,
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    const ret = [];
+                    const returnValue = [];
                     const equipment: IEquipment = params.data!;
                     for (let index = 0; index < equipment.levels.length; ++index) {
-                        ret.push(
+                        returnValue.push(
                             <div key={`${params.data?.id}-${index}`}>
                                 <table>
                                     <tbody>
@@ -110,7 +110,7 @@ export const Equipment = () => {
                             </div>
                         );
                     }
-                    return <div>{ret}</div>;
+                    return <div>{returnValue}</div>;
                 },
             },
             {
@@ -179,7 +179,7 @@ export const Equipment = () => {
                 className="ag-theme-material"
                 style={{ height: 'calc(100vh - 12rem)', minHeight: '400px', width: '100%' }}>
                 <AgGridReact
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     suppressCellFocus={true}

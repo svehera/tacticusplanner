@@ -19,20 +19,20 @@ export const makeApiCall = <TResponse, TRequestBody = any>(
             const data = response?.data;
 
             return { data, error: null };
-        } catch (err: any) {
-            console.error(err);
-            const error = err as Error | AxiosError<IErrorResponse>;
+        } catch (error: any) {
+            console.error(error);
+            const castError = error as Error | AxiosError<IErrorResponse>;
             // replace here with your own error handling
-            if (axios.isAxiosError(error)) {
-                if (error.code === AxiosError.ERR_CANCELED) {
+            if (axios.isAxiosError(castError)) {
+                if (castError.code === AxiosError.ERR_CANCELED) {
                     console.info('Request was canceled');
                     return { data: null, error: null };
                 }
-                error.message = error?.response?.data?.message || error.message;
-                return { data: null, error };
+                castError.message = castError?.response?.data?.message || castError.message;
+                return { data: null, error: castError };
             } else {
-                console.error(`Unexpected error during API call`, error);
-                return { data: null, error: error.message };
+                console.error(`Unexpected error during API call`, castError);
+                return { data: null, error: castError.message };
             }
         }
     };

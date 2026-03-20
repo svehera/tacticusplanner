@@ -126,7 +126,7 @@ export class CampaignsProgressionService {
     private static deduplicateNodesToBeat(
         nodes: Map<string, ICampaignBattleComposed[]>
     ): Map<string, ICampaignBattleComposed[]> {
-        const ret = new Map<string, ICampaignBattleComposed[]>();
+        const returnValue = new Map<string, ICampaignBattleComposed[]>();
         for (const [campaign, battles] of nodes.entries()) {
             const newBattles: ICampaignBattleComposed[] = [];
             const used: Set<number> = new Set<number>();
@@ -135,9 +135,9 @@ export class CampaignsProgressionService {
                 newBattles.push(battle);
                 used.add(battle.nodeNumber);
             }
-            ret.set(campaign, newBattles);
+            returnValue.set(campaign, newBattles);
         }
-        return ret;
+        return returnValue;
     }
 
     /**

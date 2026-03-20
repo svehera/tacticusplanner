@@ -15,12 +15,12 @@ interface Props {
 
 export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType, maxScore, onChange }) => {
     const [showDropdown, setShowDropdown] = useState(false);
-    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+    const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null);
     const [scoreInput, setScoreInput] = useState<string>(String(score || ''));
     const [pendingStatus, setPendingStatus] = useState<RequirementStatus | null>(null);
     const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
-    const dropdownRef = useRef<HTMLDivElement>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null);
+    const dropdownReference = useRef<HTMLDivElement>(null);
+    const buttonReference = useRef<HTMLButtonElement>(null);
 
     const scoreLabel = scoreType === 'killScore' ? 'Kill Score' : 'High Score';
 
@@ -31,7 +31,7 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
         if (newStatus === RequirementStatus.PartiallyCleared) {
             // Store the pending status and show popover
             setPendingStatus(newStatus);
-            setAnchorEl(dropdownRef.current);
+            setAnchorElement(dropdownReference.current);
             return;
         }
 
@@ -40,9 +40,9 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
     };
 
     const toggleDropdown = () => {
-        if (!showDropdown && buttonRef.current) {
+        if (!showDropdown && buttonReference.current) {
             // Calculate if dropdown should open upwards or downwards
-            const buttonRect = buttonRef.current.getBoundingClientRect();
+            const buttonRect = buttonReference.current.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
             const spaceBelow = viewportHeight - buttonRect.bottom;
             const spaceAbove = buttonRect.top;
@@ -61,7 +61,7 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
     // Click outside to close dropdown
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+            if (dropdownReference.current && !dropdownReference.current.contains(event.target as Node)) {
                 setShowDropdown(false);
             }
         };
@@ -83,13 +83,13 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
             onChange(RequirementStatus.PartiallyCleared, cappedScore);
         }
         setPendingStatus(null);
-        setAnchorEl(null);
+        setAnchorElement(null);
     };
 
     const handlePopoverClose = () => {
         // If they cancel, don't change the status
         setPendingStatus(null);
-        setAnchorEl(null);
+        setAnchorElement(null);
         setScoreInput(String(score || ''));
     };
 
@@ -115,9 +115,9 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
 
     return (
         <>
-            <div className="relative inline-block" ref={dropdownRef}>
+            <div className="relative inline-block" ref={dropdownReference}>
                 <button
-                    ref={buttonRef}
+                    ref={buttonReference}
                     onClick={toggleDropdown}
                     className="size-8 rounded border-2 p-1 text-center text-sm font-bold md:size-10 md:p-1.5 md:text-base"
                     style={{
@@ -155,8 +155,8 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
             </div>
 
             <Popover
-                open={Boolean(anchorEl)}
-                anchorEl={anchorEl}
+                open={Boolean(anchorElement)}
+                anchorEl={anchorElement}
                 onClose={handlePopoverClose}
                 anchorOrigin={{
                     vertical: 'bottom',
@@ -176,9 +176,9 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
                         type="number"
                         label={scoreLabel}
                         value={scoreInput}
-                        onChange={e => setScoreInput(e.target.value)}
-                        onKeyDown={e => {
-                            if (e.key === 'Enter') {
+                        onChange={event => setScoreInput(event.target.value)}
+                        onKeyDown={({ key }) => {
+                            if (key === 'Enter') {
                                 handleScoreSubmit();
                             }
                         }}

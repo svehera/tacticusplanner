@@ -39,18 +39,18 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
         originalRank: rank,
     });
 
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement | null>(null);
     const [updateInventory, setUpdateInventory] = React.useState<boolean>(true);
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorElement(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorElement(null);
     };
 
-    const open = Boolean(anchorEl);
+    const open = Boolean(anchorElement);
 
     const possibleUpgrades: Array<IBaseUpgrade | ICraftedUpgrade> = useMemo(() => {
         const [rankUpgrades] = CharacterUpgradesService.getCharacterUpgradeRank({
@@ -235,7 +235,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             </Button>
             <Popover
                 open={open}
-                anchorEl={anchorEl}
+                anchorEl={anchorElement}
                 onClose={handleClose}
                 anchorOrigin={{
                     vertical: 'bottom',

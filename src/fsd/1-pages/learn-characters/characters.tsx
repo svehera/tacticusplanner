@@ -31,7 +31,7 @@ import { CharactersService, ICharacter2, RankSelect } from '@/fsd/4-entities/cha
 import { useCharacters } from './characters-column-defs';
 
 export const LearnCharacters = () => {
-    const gridRef = useRef<AgGridReact<ICharacter2>>(null);
+    const gridReference = useRef<AgGridReact<ICharacter2>>(null);
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
@@ -101,7 +101,7 @@ export const LearnCharacters = () => {
     }, []);
 
     const handleFilterChange = (name: keyof Filter, value: string | boolean | number | string[]) => {
-        setFilter(prev => ({ ...prev, [name]: value }));
+        setFilter(previous => ({ ...previous, [name]: value }));
         const params = new URLSearchParams(searchParams);
         if (Array.isArray(value)) {
             params.delete(name);
@@ -114,7 +114,7 @@ export const LearnCharacters = () => {
         navigate({ search: params.toString() }, { replace: true });
     };
 
-    const defaultColDef: ColDef<ICharacter2> = {
+    const defaultColDefinition: ColDef<ICharacter2> = {
         sortable: true,
         resizable: true,
         autoHeight: true,
@@ -311,10 +311,10 @@ export const LearnCharacters = () => {
     );
 
     const refreshRowNumberColumn = useCallback(() => {
-        const columns = [gridRef.current?.api.getColumn('rowNumber') ?? ''];
-        gridRef.current?.api.refreshCells({ columns });
+        const columns = [gridReference.current?.api.getColumn('rowNumber') ?? ''];
+        gridReference.current?.api.refreshCells({ columns });
 
-        const displayedRowCount = gridRef.current?.api.getDisplayedRowCount();
+        const displayedRowCount = gridReference.current?.api.getDisplayedRowCount();
         setRowCount(displayedRowCount ?? 0);
     }, []);
 
@@ -555,11 +555,11 @@ export const LearnCharacters = () => {
             </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
                 <AgGridReact
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     suppressCellFocus={true}
-                    defaultColDef={defaultColDef}
+                    defaultColDef={defaultColDefinition}
                     columnDefs={columnDefs}
                     rowData={rows}
                     onSortChanged={refreshRowNumberColumn}

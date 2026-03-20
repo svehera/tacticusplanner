@@ -115,19 +115,19 @@ export const CEs = () => {
     ]);
 
     const neededByMaterial = useMemo(() => {
-        const ret = new Map<string, MaterialNeedInfo>();
+        const returnValue = new Map<string, MaterialNeedInfo>();
         for (const mat of [...upgradesEstimates.inProgressMaterials, ...upgradesEstimates.blockedMaterials]) {
             const needed = Math.max(0, (mat.requiredCount ?? 0) - (mat.acquiredCount ?? 0));
             if (needed > 0) {
-                const existing = ret.get(mat.id) ?? { needed: 0, relatedGoalIds: new Set<string>() };
+                const existing = returnValue.get(mat.id) ?? { needed: 0, relatedGoalIds: new Set<string>() };
                 existing.needed += needed;
                 for (const goalId of mat.relatedGoals ?? []) {
                     existing.relatedGoalIds.add(goalId);
                 }
-                ret.set(mat.id, existing);
+                returnValue.set(mat.id, existing);
             }
         }
-        return ret;
+        return returnValue;
     }, [upgradesEstimates.inProgressMaterials, upgradesEstimates.blockedMaterials]);
 
     const goalUnitById = useMemo(() => {
@@ -273,8 +273,11 @@ export const CEs = () => {
                 [x => x.estimatedEnergy, x => x.needed, x => getMaterialSortWeight(x.materialId)],
                 ['desc', 'desc', 'asc']
             );
-            const totalNeededMaterials = orderedMaterials.reduce((acc, x) => acc + x.needed, 0);
-            const totalEstimatedEnergy = orderedMaterials.reduce((acc, x) => acc + x.estimatedEnergy, 0);
+            const totalNeededMaterials = orderedMaterials.reduce((accumulator, x) => accumulator + x.needed, 0);
+            const totalEstimatedEnergy = orderedMaterials.reduce(
+                (accumulator, x) => accumulator + x.estimatedEnergy,
+                0
+            );
             const efficiency = totalEstimatedEnergy > 0 ? totalNeededMaterials / totalEstimatedEnergy : 0;
 
             plans.push({

@@ -5,7 +5,7 @@ import { Rank } from '@/fsd/5-shared/model';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
-import { IMowDb } from '@/fsd/3-features/characters/characters.models';
+import { IMowDatabase } from '@/fsd/3-features/characters/characters.models';
 import { getLre } from '@/fsd/3-features/lre';
 import {
     ILreProgressDto,
@@ -77,7 +77,7 @@ export class PersonalDataLocalStorage {
                     ...(this.getItem<IViewPreferences>('viewPreferences') ?? {}),
                 },
                 characters: this.getItem<IPersonalCharacterData2[]>('characters') ?? defaultData.characters,
-                mows: this.getItem<IMowDb[]>('mows') ?? defaultData.mows,
+                mows: this.getItem<IMowDatabase[]>('mows') ?? defaultData.mows,
                 teams: this.getItem<IPersonalTeam[]>('teams') ?? defaultData.teams,
                 teams2: this.getItem<ITeam2[]>('teams2') ?? defaultData.teams2,
                 warDefense2: this.getItem<WarDefense2State>('warDefense2') ?? defaultData.warDefense2,
@@ -298,8 +298,8 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
     const teams: ILreTeam[] = [];
 
     // Helper function to compare two arrays for equality
-    function areArraysEqual(arr1: string[], arr2: string[]): boolean {
-        return arr1.length === arr2.length && arr1.every(char => arr2.includes(char));
+    function areArraysEqual(array1: string[], array2: string[]): boolean {
+        return array1.length === array2.length && array1.every(char => array2.includes(char));
     }
 
     function doTeamsMatch(team1: string[], team2: string[]) {

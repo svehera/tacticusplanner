@@ -9,7 +9,7 @@ import {
     GridReadyEvent,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
@@ -56,16 +56,16 @@ const getMaterialMetadata = (id: string, rarity?: number | string) => {
     if (isShard) type = MaterialType.Shard;
     else if (isMythicShard) type = MaterialType.MythicShard;
 
-    let rarityStr: string;
-    if (type === MaterialType.Shard) rarityStr = 'Shard';
-    else if (type === MaterialType.MythicShard) rarityStr = 'Mythic Shard';
-    else rarityStr = typeof rarity === 'number' ? RarityMapper.rarityToRarityString(rarity as Rarity) : 'Unknown';
+    let rarityString: string;
+    if (type === MaterialType.Shard) rarityString = 'Shard';
+    else if (type === MaterialType.MythicShard) rarityString = 'Mythic Shard';
+    else rarityString = typeof rarity === 'number' ? RarityMapper.rarityToRarityString(rarity as Rarity) : 'Unknown';
 
     return {
         type,
         // Cast this to RarityString to satisfy strict component props
-        rarityStr: rarityStr as RarityString,
-        className: rarityStr.toLowerCase().replace(' ', '-'),
+        rarityStr: rarityString as RarityString,
+        className: rarityString.toLowerCase().replace(' ', '-'),
     };
 };
 
@@ -294,20 +294,23 @@ export const MaterialsTable: React.FC<Props> = ({
         }) as IRaidMaterialRow[];
     }, [rows, inventory, alreadyUsedMaterials]);
 
-    const onGridReadyInternal = (params: GridReadyEvent) => {
-        if (!params.api || !scrollToCharSnowprintId) return;
-        const char = CharactersService.resolveCharacter(scrollToCharSnowprintId);
-        const name = char?.name ?? MowsService.resolveToStatic(scrollToCharSnowprintId)?.name ?? '';
+    const gridApiReference = useRef<GridReadyEvent['api'] | null>(null);
 
-        if (!name) {
-            onGridReady();
-            return;
-        }
-
+    const scrollToChar = (api: GridReadyEvent['api'], snowprintId: string) => {
+        const char = CharactersService.resolveCharacter(snowprintId);
+        const name = char?.name ?? MowsService.resolveToStatic(snowprintId)?.name ?? '';
+        if (!name) return;
         const targetIndex = processedRows.findIndex(row => row.relatedCharacters?.includes(name));
         if (targetIndex !== -1) {
-            params.api.ensureIndexVisible(targetIndex, 'top');
-            params.api.setColumnGroupOpened('upgrade', true);
+            api.ensureIndexVisible(targetIndex, 'top');
+            api.setColumnGroupOpened('upgrade', true);
+        }
+    };
+
+    const onGridReadyInternal = (params: GridReadyEvent) => {
+        gridApiReference.current = params.api;
+        if (scrollToCharSnowprintId) {
+            scrollToChar(params.api, scrollToCharSnowprintId);
         }
         onGridReady();
     };

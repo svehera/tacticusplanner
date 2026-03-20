@@ -14,7 +14,7 @@ interface Props {
     resetUpgrades: () => void;
 }
 
-const InventoryControlsFn: React.FC<Props> = ({ resetUpgrades, nameFilter, setNameFilter }) => {
+export const InventoryControls: React.FC<Props> = ({ resetUpgrades, nameFilter, setNameFilter }) => {
     const [nameFilterRaw, setNameFilterRaw] = useState<string>('');
 
     return (
@@ -54,4 +54,3 @@ const InventoryControlsFn: React.FC<Props> = ({ resetUpgrades, nameFilter, setNa
         </div>
     );
 };
-export const InventoryControls = React.memo(InventoryControlsFn);

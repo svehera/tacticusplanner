@@ -56,9 +56,9 @@ export const WhoYouOwn = () => {
     const sharedUser = searchParams.get('username');
     const shareToken = searchParams.get('shareToken');
 
-    const hasShareParams = !!sharedUser && !!shareToken;
+    const hasShareParameters = !!sharedUser && !!shareToken;
 
-    if (hasShareParams) {
+    if (hasShareParameters) {
         navigate((isMobile ? '/mobile' : '') + `/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
         return <></>;
     }

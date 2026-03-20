@@ -34,7 +34,7 @@ export const AppThemeProvider: FC<PropsWithChildren> = ({ children }) => {
     // System theme detection
     useEffect(() => {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const handler = (e: MediaQueryListEvent) => setDeviceIsDarkMode(e.matches);
+        const handler = (event: MediaQueryListEvent) => setDeviceIsDarkMode(event.matches);
         mediaQuery.addEventListener('change', handler);
         return () => mediaQuery.removeEventListener('change', handler);
     }, []);
