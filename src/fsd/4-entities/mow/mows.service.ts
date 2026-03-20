@@ -113,7 +113,7 @@ export class MowsService {
         });
         // If the user's server data is missing any MoWs, merge them in as locked units.
         for (const staticMow of mows2Data.mows) {
-            if (!returnValue.find(x => x.snowprintId === staticMow.snowprintId)) {
+            if (!returnValue.some(x => x.snowprintId === staticMow.snowprintId)) {
                 returnValue.push({
                     ...staticMow,
                     id: staticMow.snowprintId,
