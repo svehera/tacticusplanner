@@ -42,6 +42,7 @@ export default defineConfig([
         languageOptions: { globals: globals.builtin },
         plugins: { unicorn: eslintPluginUnicorn },
         rules: {
+            'unicorn/no-zero-fractions': 'error',
             'unicorn/consistent-existence-index-check': 'error',
             'unicorn/numeric-separators-style': 'error',
             'unicorn/no-negated-condition': 'error',
