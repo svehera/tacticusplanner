@@ -156,8 +156,8 @@ export const LreAddTeam: React.FC<Props> = ({
                                 // allow empty or numeric input only
                                 if (/^\d*$/.test(v)) {
                                     setExpectedBattleClearsInput(v);
-                                    const parsed = parseInt(v, 10);
-                                    if (!isNaN(parsed)) {
+                                    const parsed = Number.parseInt(v, 10);
+                                    if (!Number.isNaN(parsed)) {
                                         setExpectedBattleClears(clampExpectedBattles(parsed));
                                     }
                                 }
@@ -168,8 +168,8 @@ export const LreAddTeam: React.FC<Props> = ({
                                     const clamped = clampExpectedBattles(expectedBattleClears);
                                     setExpectedBattleClearsInput(clamped.toString());
                                 } else {
-                                    const parsed = parseInt(expectedBattleClearsInput, 10);
-                                    const final = isNaN(parsed) ? expectedBattleClears : parsed;
+                                    const parsed = Number.parseInt(expectedBattleClearsInput, 10);
+                                    const final = Number.isNaN(parsed) ? expectedBattleClears : parsed;
                                     const clamped = clampExpectedBattles(final);
                                     setExpectedBattleClears(clamped);
                                     setExpectedBattleClearsInput(clamped.toString());
