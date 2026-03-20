@@ -129,7 +129,9 @@ export const WarOffense2 = () => {
     };
 
     const startNewWar = () => {
-        if (window.confirm('This will reset all units to undeployed and cannot be undone. Do you want to proceed?')) {
+        if (
+            globalThis.confirm('This will reset all units to undeployed and cannot be undone. Do you want to proceed?')
+        ) {
             setDeployedCharacters([]);
             setDeployedMows([]);
             setStagedChars([]);

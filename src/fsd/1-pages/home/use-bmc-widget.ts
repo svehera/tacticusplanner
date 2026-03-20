@@ -26,7 +26,7 @@ export const useBmcWidget = () => {
         //Call window on load to show the image
         script.onload = function () {
             requestAnimationFrame(() => {
-                window.dispatchEvent(new Event('DOMContentLoaded'));
+                globalThis.dispatchEvent(new Event('DOMContentLoaded'));
             });
         };
 

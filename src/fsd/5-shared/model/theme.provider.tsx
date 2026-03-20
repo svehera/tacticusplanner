@@ -7,12 +7,12 @@ const LOCAL_STORAGE_KEY = 'tp-theme';
 
 export const AppThemeProvider: FC<PropsWithChildren> = ({ children }) => {
     const [deviceIsDarkMode, setDeviceIsDarkMode] = useState(
-        () => window.matchMedia('(prefers-color-scheme: dark)').matches
+        () => globalThis.matchMedia('(prefers-color-scheme: dark)').matches
     );
     const userThemePreference = useSyncExternalStore(
         callback => {
-            window.addEventListener('storage', callback);
-            return () => window.removeEventListener('storage', callback);
+            globalThis.addEventListener('storage', callback);
+            return () => globalThis.removeEventListener('storage', callback);
         },
         () => {
             const stored = localStorage.getItem(LOCAL_STORAGE_KEY) as Theme;
@@ -22,7 +22,7 @@ export const AppThemeProvider: FC<PropsWithChildren> = ({ children }) => {
     const setUserThemePreference = (theme: Theme) => {
         localStorage.setItem(LOCAL_STORAGE_KEY, theme);
         // Native storage event only fires in other tabs/windows.
-        window.dispatchEvent(new Event('storage'));
+        globalThis.dispatchEvent(new Event('storage'));
     };
     const isDarkMode =
         {
@@ -33,7 +33,7 @@ export const AppThemeProvider: FC<PropsWithChildren> = ({ children }) => {
 
     // System theme detection
     useEffect(() => {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const mediaQuery = globalThis.matchMedia('(prefers-color-scheme: dark)');
         const handler = (event: MediaQueryListEvent) => setDeviceIsDarkMode(event.matches);
         mediaQuery.addEventListener('change', handler);
         return () => mediaQuery.removeEventListener('change', handler);

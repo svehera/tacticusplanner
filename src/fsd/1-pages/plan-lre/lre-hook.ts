@@ -64,7 +64,7 @@ export const useLre = () => {
     );
 
     useEffect(() => {
-        const url = new URL(window.location.href);
+        const url = new URL(globalThis.location.href);
         if (!url.searchParams.has('section')) {
             setSection(getDefaultPage());
         }
