@@ -69,20 +69,20 @@ const RarityStringSchema = z.enum(['Common', 'Uncommon', 'Rare', 'Epic', 'Legend
 
 const GuaranteedRewardSchema = z
     .templateLiteral(['wavesXp:', z.int().positive()])
-    .transform(str => Number(str.replace(/^wavesXp:/, '')));
+    .transform(xpString => Number(xpString.replace(/^wavesXp:/, '')));
 
 const OneTimeRewardSchema = z
     .union([
         z.templateLiteral(['abilityToken', RarityStringSchema, '_', AllianceSchema]),
         z.templateLiteral(['abilityToken', RarityStringSchema, '_', AllianceSchema, ':', z.int().positive()]),
     ])
-    .transform(str => {
-        const [rarityString, rest] = str.replace(/^abilityToken/, '').split('_');
-        const [alliance, countStr] = rest.split(':');
+    .transform(tokenString => {
+        const [rarityString, rest] = tokenString.replace(/^abilityToken/, '').split('_');
+        const [alliance, countString] = rest.split(':');
         return {
             rarityString: RarityStringSchema.parse(rarityString),
             alliance: AllianceSchema.parse(alliance),
-            count: countStr ? Number(countStr) : 1,
+            count: countString ? Number(countString) : 1,
         };
     });
 
@@ -172,12 +172,12 @@ const TrackSchema = z
         tiers: z
             .array(SectorSchema)
             .nonempty()
-            .superRefine((sectors, ctx) => {
+            .superRefine((sectors, context) => {
                 let currentExpectedBattleNr = 1;
-                for (let i = 0; i < sectors.length; i++) {
-                    for (const { battleNr } of sectors[i].killzones) {
+                for (let index = 0; index < sectors.length; index++) {
+                    for (const { battleNr } of sectors[index].killzones) {
                         if (battleNr !== currentExpectedBattleNr)
-                            ctx.addIssue({
+                            context.addIssue({
                                 code: 'invalid_value',
                                 message: `battleNr is expected to be ${currentExpectedBattleNr}`,
                                 input: battleNr,
@@ -202,9 +202,9 @@ const TrackSchema = z
                         ...sector.killzones.map(({ badgeCountsByRarity }) => {
                             // Iterate from highest rarity to lowest
                             // Do not use `.reverse()` since that alters the indexes
-                            for (let i = RarityStringSchema.options.length - 1; i >= 0; i--) {
-                                const rarity = RarityStringSchema.options[i];
-                                if (badgeCountsByRarity[rarity] > 0) return i;
+                            for (let index = RarityStringSchema.options.length - 1; index >= 0; index--) {
+                                const rarity = RarityStringSchema.options[index];
+                                if (badgeCountsByRarity[rarity] > 0) return index;
                             }
                             return 0;
                         })

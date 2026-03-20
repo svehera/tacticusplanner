@@ -323,14 +323,14 @@ export const RosterSnapshotCharacter = ({
         return <CircularBadge val={level} x={centerX} y={yPos} />;
     };
 
-    const getStarSrc = () => (Array.isArray(starIcon) ? starIcon[0]?.src : starIcon) ?? '';
+    const getStarUrl = () => (Array.isArray(starIcon) ? starIcon[0]?.src : starIcon) ?? '';
 
     const grayscaleClass = (isDisabled ?? false) ? 'grayscale' : '';
 
     const renderWings = () => {
         return (
             <img
-                src={getStarSrc()}
+                src={getStarUrl()}
                 className={`absolute ${grayscaleClass}`}
                 style={{ left: 3, top: 2, width: 90, height: starSize, zIndex: 11 }}
             />
@@ -345,7 +345,7 @@ export const RosterSnapshotCharacter = ({
             return (
                 <img
                     key={`char-star-${index}`}
-                    src={getStarSrc()}
+                    src={getStarUrl()}
                     className="absolute"
                     style={{
                         left: startX + index * blueStarWidth - overlap * index,
@@ -387,7 +387,7 @@ export const RosterSnapshotCharacter = ({
             return (
                 <img
                     key={`char-star-${index}`}
-                    src={getStarSrc()}
+                    src={getStarUrl()}
                     className="absolute"
                     style={{
                         left: startX + offset,

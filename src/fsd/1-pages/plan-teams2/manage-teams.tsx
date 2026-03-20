@@ -337,12 +337,12 @@ export const ManageTeams = () => {
             team.horde = hordeModeSelected ? true : undefined;
             team.notes = notes;
             team.flexIndex = flexIndex;
-            const curTeams = [...teams];
-            curTeams.forEach(t => {
+            const currentTeams_ = [...teams];
+            currentTeams_.forEach(t => {
                 if (t.name !== editingTeam.name) return;
                 t = team;
             });
-            dispatch.teams2({ type: 'Set', value: cloneDeep(curTeams) });
+            dispatch.teams2({ type: 'Set', value: cloneDeep(currentTeams_) });
         } else {
             const newTeam: ITeam2 = {
                 name: teamName.trim(),
@@ -462,8 +462,8 @@ export const ManageTeams = () => {
                     <select
                         className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-blue-900/40"
                         value={selectedTeamType ?? ''}
-                        onChange={e => {
-                            const value = e.target.value as TeamTypeKey | '';
+                        onChange={event => {
+                            const value = event.target.value as TeamTypeKey | '';
                             setSelectedTeamType(value ? value : undefined);
                         }}>
                         <option value="">All</option>
@@ -528,7 +528,7 @@ export const ManageTeams = () => {
                                     <select
                                         className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-blue-900/40"
                                         value={selectedLegacyTeamName}
-                                        onChange={e => setSelectedLegacyTeamName(e.target.value)}>
+                                        onChange={event => setSelectedLegacyTeamName(event.target.value)}>
                                         {legacyTeams.map(t => (
                                             <option key={t.name} value={t.name}>
                                                 {t.name}

@@ -136,9 +136,9 @@ export const AddTeamDialog: React.FC<Props> = ({
     }, []);
 
     const resizeGrids = useCallback(
-        (e: MouseEvent) => {
+        (event: MouseEvent) => {
             if (isDragging) {
-                const newWidth = window.innerWidth - e.clientX;
+                const newWidth = window.innerWidth - event.clientX;
                 if (newWidth > 200 && newWidth < window.innerWidth * 0.5) {
                     setMowWidth(newWidth);
                 }
@@ -293,7 +293,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             <input
                                 type="text"
                                 value={teamName}
-                                onChange={e => onTeamNameChanged(e.target.value)}
+                                onChange={event => onTeamNameChanged(event.target.value)}
                                 placeholder="Enter team name..."
                                 className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 transition-all outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-[#0f172a] dark:text-white"
                             />
@@ -371,7 +371,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             <textarea
                                 placeholder="Add notes..."
                                 value={notes}
-                                onChange={e => onNotesChanged(e.target.value)}
+                                onChange={event => onNotesChanged(event.target.value)}
                                 className="min-h-[80px] w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 transition-all outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-[#0f172a] dark:text-white"
                             />
                         </div>

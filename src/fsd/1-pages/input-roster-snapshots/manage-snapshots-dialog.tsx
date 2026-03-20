@@ -90,7 +90,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                 ? [{ name: rosterSnapshots.base.name, index: -1 }]
                 : []),
             ...rosterSnapshots.diffs
-                .map((d, i) => ({ name: d.name, index: i, deleted: d.deletedDateMillisUtc !== undefined }))
+                .map((d, index) => ({ name: d.name, index, deleted: d.deletedDateMillisUtc !== undefined }))
                 .filter(d => !d.deleted),
         ],
         [rosterSnapshots]
@@ -102,7 +102,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                 ? [{ name: rosterSnapshots.base.name, index: -1 }]
                 : []),
             ...rosterSnapshots.diffs
-                .map((d, i) => ({ name: d.name, index: i, deleted: d.deletedDateMillisUtc !== undefined }))
+                .map((d, index) => ({ name: d.name, index, deleted: d.deletedDateMillisUtc !== undefined }))
                 .filter(d => d.deleted),
         ],
         [rosterSnapshots]
@@ -160,8 +160,8 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                                 <Select
                                     label="Show Shards"
                                     value={showShards}
-                                    onChange={e =>
-                                        onShowShardsChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    onChange={event =>
+                                        onShowShardsChange(event.target.value as RosterSnapshotShowVariableSettings)
                                     }>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.WhenNonZero}>
@@ -175,8 +175,8 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                                 <Select
                                     label="Diff Shards"
                                     value={showShardDiffs}
-                                    onChange={e =>
-                                        onShowShardDiffsChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    onChange={event =>
+                                        onShowShardDiffsChange(event.target.value as RosterSnapshotShowVariableSettings)
                                     }>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Never}>No</MenuItem>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Yes</MenuItem>
@@ -191,8 +191,10 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                                 <Select
                                     label="Show Mythic Shards"
                                     value={showMythicShards}
-                                    onChange={e =>
-                                        onShowMythicShardsChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    onChange={event =>
+                                        onShowMythicShardsChange(
+                                            event.target.value as RosterSnapshotShowVariableSettings
+                                        )
                                     }>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.WhenNonZero}>
@@ -206,9 +208,9 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                                 <Select
                                     label="Diff Mythic Shards"
                                     value={showMythicShardsDiffs}
-                                    onChange={e =>
+                                    onChange={event =>
                                         onShowMythicShardsDiffsChange(
-                                            e.target.value as RosterSnapshotShowVariableSettings
+                                            event.target.value as RosterSnapshotShowVariableSettings
                                         )
                                     }>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Never}>No</MenuItem>
@@ -224,8 +226,8 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                                 <Select
                                     label="Show XP Level"
                                     value={showXpLevel}
-                                    onChange={e =>
-                                        onShowXpLevelChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    onChange={event =>
+                                        onShowXpLevelChange(event.target.value as RosterSnapshotShowVariableSettings)
                                     }>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Always</MenuItem>
@@ -236,8 +238,10 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                                 <Select
                                     label="Diff XP Level"
                                     value={showXpLevelDiffs}
-                                    onChange={e =>
-                                        onShowXpLevelDiffsChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    onChange={event =>
+                                        onShowXpLevelDiffsChange(
+                                            event.target.value as RosterSnapshotShowVariableSettings
+                                        )
                                     }>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Never}>No</MenuItem>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Yes</MenuItem>
@@ -252,8 +256,8 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                                 <Select
                                     label="Show Equipment"
                                     value={showEquipment}
-                                    onChange={e =>
-                                        onShowEquipmentChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    onChange={event =>
+                                        onShowEquipmentChange(event.target.value as RosterSnapshotShowVariableSettings)
                                     }>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Never}>Never</MenuItem>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Always</MenuItem>
@@ -264,8 +268,10 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                                 <Select
                                     label="Diff Equipment"
                                     value={showEquipmentDiffs}
-                                    onChange={e =>
-                                        onShowEquipmentDiffsChange(e.target.value as RosterSnapshotShowVariableSettings)
+                                    onChange={event =>
+                                        onShowEquipmentDiffsChange(
+                                            event.target.value as RosterSnapshotShowVariableSettings
+                                        )
                                     }>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Never}>No</MenuItem>
                                     <MenuItem value={RosterSnapshotShowVariableSettings.Always}>Yes</MenuItem>
@@ -279,7 +285,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                             <Select
                                 label="Diff Style"
                                 value={diffStyle}
-                                onChange={e => onDiffStyleChange(e.target.value as RosterSnapshotDiffStyle)}>
+                                onChange={event => onDiffStyleChange(event.target.value as RosterSnapshotDiffStyle)}>
                                 <MenuItem value={RosterSnapshotDiffStyle.SideBySide}>Side by Side</MenuItem>
                                 <MenuItem value={RosterSnapshotDiffStyle.Detailed}>Detailed</MenuItem>
                             </Select>
@@ -296,7 +302,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                         <Select
                             value={selectedIndex}
                             label="Select Snapshot"
-                            onChange={e => setSelectedIndex(Number(e.target.value))}>
+                            onChange={event => setSelectedIndex(Number(event.target.value))}>
                             {allLiveSnapshots.map(s => (
                                 <MenuItem key={s.index} value={s.index}>
                                     {s.name}
@@ -314,7 +320,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                             value={allLiveSnapshots.length === 0 ? '' : editName}
                             error={!!error}
                             helperText={error}
-                            onChange={e => setEditName(e.target.value)}
+                            onChange={event => setEditName(event.target.value)}
                         />
                         <Button
                             variant="contained"
@@ -332,7 +338,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                             <Select
                                 value={selectedDeletedIndex}
                                 label="Restore Deleted Snapshot"
-                                onChange={e => setSelectedDeletedIndex(Number(e.target.value))}>
+                                onChange={event => setSelectedDeletedIndex(Number(event.target.value))}>
                                 {allDeletedSnapshots.map(s => (
                                     <MenuItem key={s.index} value={s.index}>
                                         {s.name}

@@ -4,9 +4,9 @@ import factionsData from 'src/data/factions.json';
 import { FactionId } from '../model';
 
 export const factionLookup = factionsData.reduce(
-    (acc, faction) => {
-        acc[faction.snowprintId] = faction;
-        return acc;
+    (accumulator, faction) => {
+        accumulator[faction.snowprintId] = faction;
+        return accumulator;
     },
     {} as { [key in FactionId]: (typeof factionsData)[number] }
 );

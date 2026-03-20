@@ -9,7 +9,7 @@ interface Props {
     frameIcon?: keyof typeof tacticusIcons;
 }
 
-export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>((props, ref) => {
+export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>((props, reference) => {
     const imagePath = props.icon.includes('snowprint_assets/')
         ? props.icon // Use full snowprint path as-is
         : props.icon; // Prepend portraits/resized/ for simple filenames
@@ -26,19 +26,19 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
         return (
             <img
                 {...rest}
-                ref={ref}
+                ref={reference}
                 loading="lazy"
                 className="pointer-events-none"
                 src={imageUrl}
                 width={60}
                 height={80}
                 alt={props.icon}
-                onError={e => {
+                onError={error => {
                     console.error('❌ Failed to load image:', {
                         icon: props.icon,
                         imagePath: imagePath,
                         resolvedUrl: imageUrl,
-                        error: e,
+                        error,
                     });
                 }}
                 onLoad={() => {}}
@@ -49,7 +49,7 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
     return (
         <div {...rest} style={{ position: 'relative', width: 64, height: 84 }}>
             <img
-                ref={ref}
+                ref={reference}
                 loading="lazy"
                 className="pointer-events-none"
                 src={imageUrl}
@@ -57,12 +57,12 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
                 height={80}
                 alt={props.icon}
                 style={{ position: 'absolute', top: 2, left: 2 }}
-                onError={e => {
+                onError={error => {
                     console.error('❌ Failed to load image:', {
                         icon: props.icon,
                         imagePath: imagePath,
                         resolvedUrl: imageUrl,
-                        error: e,
+                        error,
                     });
                 }}
                 onLoad={() => {}}

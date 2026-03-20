@@ -87,16 +87,16 @@ function getDisplay(
         );
     }
     let base = RosterSnapshotsService.fixSnapshot(rosterSnapshots.base);
-    for (let i = 0; i <= leftIndex; i++) {
+    for (let index = 0; index <= leftIndex; index++) {
         base = RosterSnapshotsService.fixSnapshot(
-            RosterSnapshotsService.resolveSnapshotDiff(base, rosterSnapshots.diffs[i])
+            RosterSnapshotsService.resolveSnapshotDiff(base, rosterSnapshots.diffs[index])
         );
     }
     let compare: IRosterSnapshot = base;
     if (rightIndex < rosterSnapshots.diffs.length) {
-        for (let i = leftIndex + 1; i <= rightIndex; i++) {
+        for (let index = leftIndex + 1; index <= rightIndex; index++) {
             compare = RosterSnapshotsService.fixSnapshot(
-                RosterSnapshotsService.resolveSnapshotDiff(compare, rosterSnapshots.diffs[i])
+                RosterSnapshotsService.resolveSnapshotDiff(compare, rosterSnapshots.diffs[index])
             );
         }
     } else {

@@ -91,7 +91,7 @@ export const WarDefense2 = () => {
                         <Select
                             size="small"
                             value={warDefense2.zoneLevel ?? 0}
-                            onChange={e => handleZoneIndexChange(Number(e.target.value))}
+                            onChange={event => handleZoneIndexChange(Number(event.target.value))}
                             renderValue={value => {
                                 const z = ZONES[Number(value)];
                                 return (
@@ -124,23 +124,23 @@ export const WarDefense2 = () => {
                 </div>
                 <div>
                     <div className="flex flex-wrap items-center justify-center gap-4">
-                        {[0, 1, 2, 3, 4].map(i => (
+                        {[0, 1, 2, 3, 4].map(index => (
                             <DeploymentZone
-                                key={`war-defense-team-${i}`}
+                                key={`war-defense-team-${index}`}
                                 rarityCap={
-                                    i < 2
+                                    index < 2
                                         ? ZONES[warDefense2.zoneLevel ?? 0].twoSlotRarity
                                         : ZONES[warDefense2.zoneLevel ?? 0].threeSlotRarity
                                 }
                                 teams={teams2.filter(t => t.warDefense)}
                                 disabledTeamNames={teams2
                                     .filter(t => t.warDefense)
-                                    .filter(t => t.name !== selectedTeams[i] && selectedTeams.includes(t.name))
+                                    .filter(t => t.name !== selectedTeams[index] && selectedTeams.includes(t.name))
                                     .map(t => t.name)}
-                                team={teams2.find(t => t.name === selectedTeams[i])}
+                                team={teams2.find(t => t.name === selectedTeams[index])}
                                 chars={resolvedChars}
                                 mows={resolvedMows}
-                                onSelectTeam={(teamName: string) => handleSelectedTeam(i, teamName)}
+                                onSelectTeam={(teamName: string) => handleSelectedTeam(index, teamName)}
                                 zoom={zoom}
                             />
                         ))}

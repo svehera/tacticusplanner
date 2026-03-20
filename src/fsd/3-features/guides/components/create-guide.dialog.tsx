@@ -92,7 +92,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
         setIsOpenSelectDialog(false);
     };
 
-    const updateSelectedMod = (values: string[]) => {
+    const updateSelectedMode = (values: string[]) => {
         if (values[0] !== gameMode) {
             setGameMode(values[0] as GameMode);
             setSelectedSubModes([]);
@@ -115,11 +115,11 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
             });
             // onClose();
         }
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
+        setActiveStep(previousActiveStep => previousActiveStep + 1);
     };
 
     const handleBack = () => {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
+        setActiveStep(previousActiveStep => previousActiveStep - 1);
     };
 
     const disableContinue = (function () {
@@ -141,15 +141,15 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
     })();
 
     useEffect(() => {
-        setTeamSlots(prev => {
+        setTeamSlots(previous => {
             const includeMowSlot = [GameMode.guildRaids, GameMode.guildWar, GameMode.tournamentArena].includes(
                 gameMode
             );
-            const hasMowSlot = prev.some(slot => slot.unitType === UnitType.mow);
+            const hasMowSlot = previous.some(slot => slot.unitType === UnitType.mow);
 
             if (includeMowSlot && !hasMowSlot) {
                 return [
-                    ...prev,
+                    ...previous,
                     {
                         slotNumber: 6,
                         unitType: UnitType.mow,
@@ -160,10 +160,10 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
             }
 
             if (!includeMowSlot && hasMowSlot) {
-                return prev.filter(slot => slot.unitType !== UnitType.mow);
+                return previous.filter(slot => slot.unitType !== UnitType.mow);
             }
 
-            return prev;
+            return previous;
         });
     }, [gameMode]);
 
@@ -192,7 +192,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                             selected={[gameMode]}
                             options={gameModesForGuides}
                             multiple={false}
-                            optionsChange={updateSelectedMod}
+                            optionsChange={updateSelectedMode}
                         />
                     </>
                 )}

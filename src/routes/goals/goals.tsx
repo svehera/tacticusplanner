@@ -202,11 +202,11 @@ export const Goals = () => {
         xpIncome
     );
 
-    const estimatesByGoalId = adjustedGoalsEstimates.goalEstimates.reduce((acc, estimate) => {
-        const group = acc.get(estimate.goalId) || [];
+    const estimatesByGoalId = adjustedGoalsEstimates.goalEstimates.reduce((accumulator, estimate) => {
+        const group = accumulator.get(estimate.goalId) || [];
         group.push(estimate);
-        acc.set(estimate.goalId, group);
-        return acc;
+        accumulator.set(estimate.goalId, group);
+        return accumulator;
     }, new Map<string, IGoalEstimate[]>());
 
     const mergedGoalEstimates: IGoalEstimate[] = Array.from(estimatesByGoalId.values()).map(group => {
@@ -217,17 +217,17 @@ export const Goals = () => {
         if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
             const aggregated = GoalsEstimateFunction.getAggregatedGoalEstimate(group) as Partial<IGoalEstimate>;
 
-            const merged = group.reduce((acc, current) => ({
-                ...acc,
+            const merged = group.reduce((accumulator, current) => ({
+                ...accumulator,
                 ...current,
                 // Preserve/merge specific per-row fields across the group
-                mowEstimate: acc.mowEstimate || current.mowEstimate,
-                xpEstimate: acc.xpEstimate || current.xpEstimate,
-                abilitiesEstimate: acc.abilitiesEstimate || current.abilitiesEstimate,
-                xpEstimateAbilities: acc.xpEstimateAbilities || current.xpEstimateAbilities,
-                completed: acc.completed || current.completed,
-                blocked: acc.blocked || current.blocked,
-                included: acc.included || current.included,
+                mowEstimate: accumulator.mowEstimate || current.mowEstimate,
+                xpEstimate: accumulator.xpEstimate || current.xpEstimate,
+                abilitiesEstimate: accumulator.abilitiesEstimate || current.abilitiesEstimate,
+                xpEstimateAbilities: accumulator.xpEstimateAbilities || current.xpEstimateAbilities,
+                completed: accumulator.completed || current.completed,
+                blocked: accumulator.blocked || current.blocked,
+                included: accumulator.included || current.included,
             }));
 
             return {
@@ -241,10 +241,10 @@ export const Goals = () => {
         return first;
     });
 
-    const totalGoldAbilities = (mergedGoalEstimates as IGoalEstimate[]).reduce((acc, current) => {
+    const totalGoldAbilities = (mergedGoalEstimates as IGoalEstimate[]).reduce((accumulator, current) => {
         const abilityGold = current.abilitiesEstimate?.gold ?? 0;
         const xpGold = current.xpEstimateAbilities?.gold ?? 0;
-        return acc + abilityGold + xpGold;
+        return accumulator + abilityGold + xpGold;
     }, 0);
     const hasSync = !!userInfo.tacticusApiKey;
 

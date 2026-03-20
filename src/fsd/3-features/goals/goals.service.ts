@@ -63,28 +63,31 @@ export class GoalsService {
     ): IXpLevel {
         const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
         const character = characters.find(c => c.snowprintId! === characterId);
-        const ret: IXpLevel = { currentLevel: Math.max(character?.level ?? 1, 1), xpAtLevel: character?.xp ?? 0 };
+        const returnValue: IXpLevel = {
+            currentLevel: Math.max(character?.level ?? 1, 1),
+            xpAtLevel: character?.xp ?? 0,
+        };
         for (const goal of priorGoals) {
             if (goal.type === PersonalGoalType.UpgradeRank) {
                 const upgradeGoal = goal as ICharacterUpgradeRankGoal;
                 const targetLevel = rankToLevel[(upgradeGoal.rankEnd ?? Rank.Stone2) as Rank];
-                if (targetLevel > ret.currentLevel) {
-                    ret.currentLevel = targetLevel;
-                    ret.xpAtLevel = 0;
-                    ret.xpFromPriorGoalApplied = true;
+                if (targetLevel > returnValue.currentLevel) {
+                    returnValue.currentLevel = targetLevel;
+                    returnValue.xpAtLevel = 0;
+                    returnValue.xpFromPriorGoalApplied = true;
                 }
             } else if (goal.type === PersonalGoalType.CharacterAbilities) {
                 const abilityGoal = goal as ICharacterUpgradeAbilities;
                 const targetLevel = Math.max(abilityGoal.activeEnd, abilityGoal.passiveEnd);
-                if (targetLevel > ret.currentLevel) {
-                    ret.currentLevel = targetLevel;
-                    ret.xpAtLevel = 0;
-                    ret.xpFromPriorGoalApplied = true;
+                if (targetLevel > returnValue.currentLevel) {
+                    returnValue.currentLevel = targetLevel;
+                    returnValue.xpAtLevel = 0;
+                    returnValue.xpFromPriorGoalApplied = true;
                 }
             }
         }
 
-        return ret;
+        return returnValue;
     }
 
     public static buildGoalEstimates(
@@ -647,8 +650,8 @@ export class GoalsService {
             return;
         }
 
-        for (const [rarityStr, rawCount] of Object.entries(items)) {
-            const rarity = Number(rarityStr) as Rarity;
+        for (const [rarityString, rawCount] of Object.entries(items)) {
+            const rarity = Number(rarityString) as Rarity;
             if (neededItems[alliance]?.[rarity] === undefined) {
                 neededItems[alliance][rarity] = 0;
             }
@@ -678,8 +681,8 @@ export class GoalsService {
         if (!goalMowEstimate) {
             return;
         }
-        for (const [rarityStr, count] of Object.entries(goalMowEstimate.forgeBadges)) {
-            const rarity = Number(rarityStr) as Rarity;
+        for (const [rarityString, count] of Object.entries(goalMowEstimate.forgeBadges)) {
+            const rarity = Number(rarityString) as Rarity;
             goalMowEstimate.forgeBadges[rarity] = this._adjustItemCount(
                 count ?? 0,
                 () => heldForgeBadges[rarity] ?? 0,

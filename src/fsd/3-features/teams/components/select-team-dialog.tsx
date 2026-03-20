@@ -42,8 +42,8 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
     const [lineup, setLineup] = useState(team);
     const [mow, setMow] = useState(activeMow);
     const [quickFilter, setQuickFilter] = useDebounceValue('', 300);
-    const [orderByVar, setOrderByVar] = useState<OrderBy>('power');
-    const [filterByVar, setFilterByVar] = useState<FilterBy>('none');
+    const [orderByVariable, setOrderByVariable] = useState<OrderBy>('power');
+    const [filterByVariable, setFilterByVariable] = useState<FilterBy>('none');
 
     const cancel = () => onClose(team, activeMow);
     const select = () => onClose(lineup, mow);
@@ -86,7 +86,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
                 ? units
                 : units.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()));
 
-            switch (filterByVar) {
+            switch (filterByVariable) {
                 case 'xenos':
                     return nameFiltered.filter(x => x.alliance === Alliance.Xenos);
                 case 'chaos':
@@ -103,7 +103,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
 
         const filtered = filterUnits();
 
-        switch (orderByVar) {
+        switch (orderByVariable) {
             case 'rank':
                 return orderBy(filtered, ['rank'], ['desc']);
             case 'power':
@@ -112,7 +112,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
             default:
                 return filtered;
         }
-    }, [units, quickFilter, orderByVar, filterByVar]);
+    }, [units, quickFilter, orderByVariable, filterByVariable]);
 
     const orderByOptions: IMenuOption[] = [
         {
@@ -161,11 +161,11 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
     ];
 
     const changeOrder = (value: string[]): void => {
-        setOrderByVar(value[0] as OrderBy);
+        setOrderByVariable(value[0] as OrderBy);
     };
 
     const changeFilter = (value: string[]): void => {
-        setFilterByVar(value[0] as FilterBy);
+        setFilterByVariable(value[0] as FilterBy);
     };
 
     return (

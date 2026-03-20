@@ -11,24 +11,24 @@ export class CharactersXpService {
     static readonly legendaryTomeApplyCost = 500 as const;
     static xpLevelThresholds = mutableCopy(xpData.xpLevelThresholds) satisfies IXpLevel[];
 
-    static getLegendaryTomesCount(currLevel: number, currXp: number, targetLevel: number): IXpEstimate | null {
+    static getLegendaryTomesCount(currentLevel: number, currentXp: number, targetLevel: number): IXpEstimate | null {
         if (
-            currLevel === this.xpLevelThresholds.length ||
+            currentLevel === this.xpLevelThresholds.length ||
             targetLevel > this.xpLevelThresholds.length ||
             targetLevel < 2 ||
-            currLevel >= targetLevel
+            currentLevel >= targetLevel
         ) {
             return null;
         }
 
-        const currentLevelTotalXp = this.xpLevelThresholds.find(x => x.level === currLevel - 1);
+        const currentLevelTotalXp = this.xpLevelThresholds.find(x => x.level === currentLevel - 1);
         const targetLevelTotalXp = this.xpLevelThresholds.find(x => x.level === targetLevel - 1);
 
         if (!currentLevelTotalXp || !targetLevelTotalXp) {
             return null;
         }
 
-        const xpLeft = targetLevelTotalXp.totalXp - currentLevelTotalXp.totalXp - currXp;
+        const xpLeft = targetLevelTotalXp.totalXp - currentLevelTotalXp.totalXp - currentXp;
 
         if (xpLeft <= 0) {
             return null;
@@ -39,7 +39,7 @@ export class CharactersXpService {
         return {
             xpLeft,
             legendaryBooks,
-            currentLevel: currLevel,
+            currentLevel: currentLevel,
             targetLevel: targetLevel,
             gold: legendaryBooks * this.legendaryTomeApplyCost,
         };

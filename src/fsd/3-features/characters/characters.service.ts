@@ -172,9 +172,9 @@ export class CharactersService {
         const factionCharacters = groupBy(units, 'faction');
 
         // Derive relevant faction data in one pass
-        const result: IFaction[] = factionsData.reduce((acc: IFaction[], faction) => {
+        const result: IFaction[] = factionsData.reduce((accumulator: IFaction[], faction) => {
             const characters = factionCharacters[faction.snowprintId];
-            if (!characters) return acc;
+            if (!characters) return accumulator;
 
             let bsValue = 0,
                 power = 0,
@@ -189,14 +189,14 @@ export class CharactersService {
                 if (isUnlocked(char)) unlockedCharacters++;
             });
 
-            acc.push({
+            accumulator.push({
                 ...faction,
                 units: characters,
                 bsValue,
                 power,
                 unlockedCharacters,
             });
-            return acc;
+            return accumulator;
         }, []);
 
         // Determine sort key based on the order parameter

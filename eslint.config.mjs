@@ -36,7 +36,26 @@ export default defineConfig([
         'vite-env.d.ts',
         '**/analytics__google-analytics.d.ts',
     ]),
-    eslintPluginUnicorn.configs.recommended,
+    // eslintPluginUnicorn.configs.recommended,
+    {
+        // Temporary config to enable & autofix rules one-at-a-time
+        languageOptions: { globals: globals.builtin },
+        plugins: { unicorn: eslintPluginUnicorn },
+        rules: {
+            'unicorn/prevent-abbreviations': [
+                'error',
+                {
+                    allowList: {
+                        // Allow variable names used within React
+                        Props: true,
+                        props: true,
+                        params: true,
+                        searchParams: true,
+                    },
+                },
+            ],
+        },
+    },
     ...compat.extends(
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -96,19 +115,6 @@ export default defineConfig([
         },
 
         rules: {
-            'unicorn/prevent-abbreviations': [
-                'error',
-                {
-                    allowList: {
-                        // Allow variable names used within React
-                        Props: true,
-                        props: true,
-                        params: true,
-                        searchParams: true,
-                        inputRef: true,
-                    },
-                },
-            ],
             'object-curly-spacing': ['error', 'always'],
             '@typescript-eslint/no-explicit-any': ['warn'],
             '@typescript-eslint/no-unused-vars': [

@@ -56,16 +56,16 @@ const getMaterialMetadata = (id: string, rarity?: number | string) => {
     if (isShard) type = MaterialType.Shard;
     else if (isMythicShard) type = MaterialType.MythicShard;
 
-    let rarityStr: string;
-    if (type === MaterialType.Shard) rarityStr = 'Shard';
-    else if (type === MaterialType.MythicShard) rarityStr = 'Mythic Shard';
-    else rarityStr = typeof rarity === 'number' ? RarityMapper.rarityToRarityString(rarity as Rarity) : 'Unknown';
+    let rarityString: string;
+    if (type === MaterialType.Shard) rarityString = 'Shard';
+    else if (type === MaterialType.MythicShard) rarityString = 'Mythic Shard';
+    else rarityString = typeof rarity === 'number' ? RarityMapper.rarityToRarityString(rarity as Rarity) : 'Unknown';
 
     return {
         type,
         // Cast this to RarityString to satisfy strict component props
-        rarityStr: rarityStr as RarityString,
-        className: rarityStr.toLowerCase().replace(' ', '-'),
+        rarityStr: rarityString as RarityString,
+        className: rarityString.toLowerCase().replace(' ', '-'),
     };
 };
 

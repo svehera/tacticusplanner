@@ -10,15 +10,15 @@ import { HomeScreenEventPlanner } from './home-screen-event-planner';
 import { SectorCard } from './sector-card';
 
 export const Onslaught = () => {
-    const [queryParams, setQueryParams] = useSearchParams({ track: 'Imperial' });
+    const [queryParameters, setQueryParameters] = useSearchParams({ track: 'Imperial' });
 
-    const activeTrack = queryParams.get('track');
+    const activeTrack = queryParameters.get('track');
     const trackData = onslaughtData.find(track => track !== undefined && track.alliance === activeTrack);
     useLayoutEffect(() => {
         if (trackData) return; // if the track is valid, no need to update the URL
         if (activeTrack === 'HSE') return; // if the user has selected the HSE planner, no need to update the URL
-        setQueryParams(new URLSearchParams({ track: 'HSE' }));
-    }, [queryParams, setQueryParams, trackData]);
+        setQueryParameters(new URLSearchParams({ track: 'HSE' }));
+    }, [queryParameters, setQueryParameters, trackData]);
 
     const { sectors, badgeAlliance } = trackData ?? { sectors: undefined, badgeAlliance: undefined };
 
@@ -26,7 +26,7 @@ export const Onslaught = () => {
         <div className="mx-auto flex w-full max-w-2xl flex-col gap-4">
             <Tabs
                 value={activeTrack}
-                onChange={(_, value) => setQueryParams({ track: value })}
+                onChange={(_, value) => setQueryParameters({ track: value })}
                 variant="scrollable"
                 scrollButtons="auto"
                 className="sticky top-0 border-b border-stone-200 bg-(--bg) pb-0.5 dark:border-stone-700"

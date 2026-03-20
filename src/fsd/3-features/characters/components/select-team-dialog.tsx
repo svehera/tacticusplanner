@@ -75,8 +75,8 @@ export const SelectTeamDialog: React.FC<Props> = ({
     };
 
     const currentTeam = useMemo(() => {
-        return Array.from({ length: size }, (_, i) => {
-            const char = lineup[i];
+        return Array.from({ length: size }, (_, index) => {
+            const char = lineup[index];
 
             if (char) {
                 return (
@@ -105,7 +105,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
 
             return (
                 <RosterSnapshotCharacter
-                    key={fallbackCharacter.name + i}
+                    key={fallbackCharacter.name + index}
                     char={RosterSnapshotsService.snapshotCharacter(fallbackCharacter)}
                     charData={fallbackCharacter}
                     showShards={RosterSnapshotShowVariableSettings.Never}

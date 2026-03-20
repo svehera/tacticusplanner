@@ -39,7 +39,7 @@ type FilterBy = 'none' | 'xenos' | 'chaos' | 'imperial';
 export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => {
     const [lineup, setLineup] = useState(cloneDeep(slots));
     const [quickFilter, setQuickFilter] = useDebounceValue('', 300);
-    const [filterByVar, setFilterByVar] = useState<FilterBy>('none');
+    const [filterByVariable, setFilterByVariable] = useState<FilterBy>('none');
     const [editSlotData, setEditSlotData] = useState<{ slotNumber: number; index: number }>({
         slotNumber: 1,
         index: 0,
@@ -144,7 +144,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
                 ? typeFiltered
                 : typeFiltered.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()));
 
-            switch (filterByVar) {
+            switch (filterByVariable) {
                 case 'xenos':
                     return nameFiltered.filter(x => x.alliance === Alliance.Xenos);
                 case 'chaos':
@@ -158,7 +158,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
         };
 
         return filterUnits();
-    }, [units, quickFilter, filterByVar, editSlotData.slotNumber]);
+    }, [units, quickFilter, filterByVariable, editSlotData.slotNumber]);
 
     const filterByOptions: IMenuOption[] = [
         {
@@ -184,7 +184,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
     ];
 
     const changeFilter = (value: string[]): void => {
-        setFilterByVar(value[0] as FilterBy);
+        setFilterByVariable(value[0] as FilterBy);
     };
 
     const handleTeamUnitClick = (slotNumber: number, index: number) => {

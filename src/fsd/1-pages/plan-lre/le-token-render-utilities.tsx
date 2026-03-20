@@ -7,7 +7,7 @@ import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
 // eslint-disable-next-line boundaries/element-types
 import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
 import { LreTrackId } from '@/fsd/4-entities/lre';
-import { LreReqImage } from '@/fsd/4-entities/lre/lre-req-image';
+import { LreRequirementImage } from '@/fsd/4-entities/lre/lre-requirement-image';
 
 import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
@@ -36,7 +36,7 @@ export const renderRestrictions = (
     sizePx?: number
 ) => (
     <div className="flex items-center gap-1">
-        {restricts.map((restrict, i) => {
+        {restricts.map((restrict, index) => {
             if (restrict.id === LrePointsCategoryId.killScore || restrict.id === LrePointsCategoryId.highScore) {
                 return <span key={`${track}-${battleNumber}-${restrict.id}`} />;
             }
@@ -51,7 +51,7 @@ export const renderRestrictions = (
 
             return (
                 <div
-                    key={`${restrict.id}-${i}`}
+                    key={`${restrict.id}-${index}`}
                     style={{
                         borderWidth: '2px',
                         borderStyle: 'solid',
@@ -59,7 +59,7 @@ export const renderRestrictions = (
                         borderRadius: '4px',
                         padding: '2px',
                     }}>
-                    <LreReqImage
+                    <LreRequirementImage
                         iconId={restrict.iconId}
                         tooltip={`${restrict.name} - ${restrict.pointsPerBattle}`}
                         sizePx={sizePx ?? 25}
@@ -72,11 +72,11 @@ export const renderRestrictions = (
 
 export const renderTeam = (team: string[], sizePx?: number) => (
     <div className="flex flex-row flex-nowrap justify-center -space-x-1">
-        {team.map((snowprintId: string, i) => {
+        {team.map((snowprintId: string, index) => {
             const unit = CharactersService.getUnit(snowprintId);
             return (
                 <UnitShardIcon
-                    key={snowprintId + i}
+                    key={snowprintId + index}
                     icon={unit?.roundIcon ?? ''}
                     height={sizePx ?? 25}
                     tooltip={unit?.name ?? snowprintId}

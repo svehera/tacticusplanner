@@ -12,7 +12,7 @@ import { getCompletionRateColor } from '@/fsd/5-shared/lib';
 import { AccessibleTooltip, ConfirmationDialog } from '@/fsd/5-shared/ui';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
-import { LegendaryEventEnum, LreReqImage, LreTrackId } from '@/fsd/4-entities/lre';
+import { LegendaryEventEnum, LreRequirementImage, LreTrackId } from '@/fsd/4-entities/lre';
 
 import { RequirementStatus, ILreTeam } from '@/fsd/3-features/lre';
 import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
@@ -30,7 +30,7 @@ interface Props {
         model: ILreProgressModel,
         trackId: LreTrackId,
         battleIndex: number,
-        reqId: string,
+        requirementId: string,
         status: RequirementStatus,
         forceOverwrite?: boolean
     ) => ILreProgressModel;
@@ -72,14 +72,14 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
     const currentPoints = sum(
         track.battles
             .flatMap(x => x.requirementsProgress)
-            .map(req => LreRequirementStatusService.getRequirementPoints(req))
+            .map(requirement => LreRequirementStatusService.getRequirementPoints(requirement))
     );
 
-    const getReqProgress = (reqId: string) => {
+    const getRequirementProgress = (requirement: string) => {
         return track.battles
             .flatMap(x => x.requirementsProgress)
             .filter(x => {
-                if (x.id !== reqId) return false;
+                if (x.id !== requirement) return false;
                 if (x.status !== undefined) {
                     return x.status === RequirementStatus.Cleared;
                 }
@@ -87,33 +87,35 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
             }).length;
     };
 
-    const getReqProgressPoints = (reqId: string) => {
+    const getRequirementProgressPoints = (requirement: string) => {
         return sum(
             track.battles
                 .flatMap(x => x.requirementsProgress)
-                .filter(x => x.id === reqId)
-                .map(req => LreRequirementStatusService.getRequirementPoints(req))
+                .filter(x => x.id === requirement)
+                .map(requirement => LreRequirementStatusService.getRequirementPoints(requirement))
         );
     };
 
     const completionPercentage = Math.round((currentPoints / track.totalPoints) * 100);
 
-    const getRestrictionTooltip = (req: ILreRequirements) => {
+    const getRestrictionTooltip = (requirement: ILreRequirements) => {
         if (
-            req.id === LrePointsCategoryId.defeatAll ||
-            req.id === LrePointsCategoryId.killScore ||
-            req.id === LrePointsCategoryId.highScore
+            requirement.id === LrePointsCategoryId.defeatAll ||
+            requirement.id === LrePointsCategoryId.killScore ||
+            requirement.id === LrePointsCategoryId.highScore
         ) {
-            return req.name;
+            return requirement.name;
         }
-        return `${req.name} - ${req.pointsPerBattle}`;
+        return `${requirement.name} - ${requirement.pointsPerBattle}`;
     };
 
     const handleToggle = () => {
         if (
             track.battles.some(battle =>
                 battle.requirementsProgress.some(
-                    req => req.status === RequirementStatus.MaybeClear || req.status === RequirementStatus.StopHere
+                    requirement =>
+                        requirement.status === RequirementStatus.MaybeClear ||
+                        requirement.status === RequirementStatus.StopHere
                 )
             )
         ) {
@@ -140,7 +142,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
 
     const setAll = () => {
         const completedBattles = track.battles
-            .map(battle => battle.requirementsProgress.filter(req => req.completed).length)
+            .map(battle => battle.requirementsProgress.filter(requirement => requirement.completed).length)
             .reduce((a, b) => a + b, 0);
         const status =
             completedBattles === track.requirements.length * track.battles.length
@@ -149,8 +151,8 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
 
         let leModel = model;
         track.battles.forEach(battle => {
-            battle.requirementsProgress.forEach(req => {
-                leModel = createNewModel(leModel, track.trackId, battle.battleIndex, req.id, status);
+            battle.requirementsProgress.forEach(requirement => {
+                leModel = createNewModel(leModel, track.trackId, battle.battleIndex, requirement.id, status);
             });
         });
         updateDto(leModel);
@@ -162,24 +164,27 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                 {completionPercentage}% {track.trackName}
             </h3>
             <div className="start gap5 box-border flex flex-col">
-                {track.requirements.map(req => (
-                    <div key={req.id} className="flex-box gap5">
+                {track.requirements.map(requirement => (
+                    <div key={requirement.id} className="flex-box gap5">
                         <div
                             className="h-[15px] w-[15px] rounded-[50px]"
                             style={{
-                                backgroundColor: getCompletionRateColor(getReqProgress(req.id), track.battles.length),
+                                backgroundColor: getCompletionRateColor(
+                                    getRequirementProgress(requirement.id),
+                                    track.battles.length
+                                ),
                             }}
                         />
                         <span className="min-w-[50px] font-bold">
-                            {getReqProgress(req.id)}/{track.battles.length}
+                            {getRequirementProgress(requirement.id)}/{track.battles.length}
                         </span>
 
                         <span className="min-w-20 font-bold">
-                            {getReqProgressPoints(req.id)}/{req.totalPoints}
+                            {getRequirementProgressPoints(requirement.id)}/{requirement.totalPoints}
                         </span>
-                        <LreReqImage iconId={req.iconId} />
-                        <span className="min-w-[25px] p-1 md:p-1.5">{req.pointsPerBattle || 'x'}</span>
-                        <span>{req.name}</span>
+                        <LreRequirementImage iconId={requirement.iconId} />
+                        <span className="min-w-[25px] p-1 md:p-1.5">{requirement.pointsPerBattle || 'x'}</span>
+                        <span>{requirement.name}</span>
                     </div>
                 ))}
             </div>
@@ -221,13 +226,13 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                     const firstRestrictionIndex = LreRequirementStatusService.getFirstRestrictionIndex(
                                         track.requirements
                                     );
-                                    return track.requirements.map((req, index) => (
+                                    return track.requirements.map((requirement, index) => (
                                         <div
-                                            key={req.id}
+                                            key={requirement.id}
                                             className={`flex items-center justify-center ${index === firstRestrictionIndex ? 'ml-4' : ''}`}>
-                                            <LreReqImage
-                                                iconId={req.iconId}
-                                                tooltip={getRestrictionTooltip(req)}
+                                            <LreRequirementImage
+                                                iconId={requirement.iconId}
+                                                tooltip={getRestrictionTooltip(requirement)}
                                                 sizePx={isMobile ? 25 : 30}
                                             />
                                         </div>
@@ -241,8 +246,10 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                 battle={battle}
                                 maxKillPoints={track.battlesPoints[battle.battleIndex]}
                                 projectedRestrictions={projectedRestrictions.get(battle.battleIndex) ?? new Set()}
-                                setState={(req, status) =>
-                                    updateDto(createNewModel(model, track.trackId, battle.battleIndex, req.id, status))
+                                setState={(requirement, status) =>
+                                    updateDto(
+                                        createNewModel(model, track.trackId, battle.battleIndex, requirement.id, status)
+                                    )
                                 }
                             />
                         ))}

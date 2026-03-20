@@ -108,7 +108,7 @@ export class HomeScreenEventPlannerService {
         const enemies: number[] = [];
         const rollingTotal: number[] = [];
 
-        for (let i = 0; i < preEventTokens + duringEventTokens; ++i) {
+        for (let index = 0; index < preEventTokens + duringEventTokens; ++index) {
             const zoneData = onslaughtData[nextBattle.track].sectors[nextBattle.sector].killzones[
                 nextBattle.zone
             ] as OnslaughtKillzone;
@@ -116,22 +116,22 @@ export class HomeScreenEventPlannerService {
             enemies.push(zoneData.totalEnemyCount);
             nextBattle = this.getBattleAfter(onslaughtData, nextBattle.track, nextBattle.sector, nextBattle.zone);
             if (!nextBattle) break;
-            rollingTotal.push(enemies[i] + (rollingTotal[i - 1] || 0));
+            rollingTotal.push(enemies[index] + (rollingTotal[index - 1] || 0));
         }
 
         let bestEndingIndex = 0;
         let bestSum = 0;
-        for (let i = 0; i < rollingTotal.length; ++i) {
-            if (i < duringEventTokens) {
-                if (rollingTotal[i] > bestSum) {
-                    bestSum = rollingTotal[i];
-                    bestEndingIndex = i;
+        for (let index = 0; index < rollingTotal.length; ++index) {
+            if (index < duringEventTokens) {
+                if (rollingTotal[index] > bestSum) {
+                    bestSum = rollingTotal[index];
+                    bestEndingIndex = index;
                 }
             }
-            const currentSum = rollingTotal[i] - rollingTotal[i - duringEventTokens];
+            const currentSum = rollingTotal[index] - rollingTotal[index - duringEventTokens];
             if (currentSum > bestSum) {
                 bestSum = currentSum;
-                bestEndingIndex = i;
+                bestEndingIndex = index;
             }
         }
 
@@ -202,7 +202,7 @@ export class HomeScreenEventPlannerService {
                 track === OnslaughtTrackId.Imperial ? imperial : track === OnslaughtTrackId.Xenos ? xenos : chaos;
 
             if (nextBattle === undefined) continue;
-            for (let i = 0; i < preEventTokensToUse + duringEventTokensToUse; ++i) {
+            for (let index_ = 0; index_ < preEventTokensToUse + duringEventTokensToUse; ++index_) {
                 const zoneData = onslaughtData[nextBattle.track].sectors[nextBattle.sector].killzones[
                     nextBattle.zone
                 ] as OnslaughtKillzone;
@@ -210,7 +210,7 @@ export class HomeScreenEventPlannerService {
                 nextBattle = this.getBattleAfter(onslaughtData, nextBattle.track, nextBattle.sector, nextBattle.zone);
                 if (!nextBattle) break;
                 enemies.push(zoneData.totalEnemyCount);
-                rollingTotal.push(enemies[i] + (rollingTotal[i - 1] || 0));
+                rollingTotal.push(enemies[index_] + (rollingTotal[index_ - 1] || 0));
             }
         }
 
@@ -316,13 +316,13 @@ export class HomeScreenEventPlannerService {
                 track === OnslaughtTrackId.Imperial ? imperial : track === OnslaughtTrackId.Xenos ? xenos : chaos;
 
             if (nextBattle === undefined) continue;
-            for (let i = 0; i < preEventTokensToUse + duringEventTokensToUse; ++i) {
+            for (let index_ = 0; index_ < preEventTokensToUse + duringEventTokensToUse; ++index_) {
                 const zoneData = onslaughtData[nextBattle.track].sectors[nextBattle.sector].killzones[
                     nextBattle.zone
                 ] as OnslaughtKillzone;
                 if (!zoneData) break;
                 enemies.push(zoneData.totalEnemyCount);
-                rollingTotal.push(enemies[i] + (rollingTotal[i - 1] || 0));
+                rollingTotal.push(enemies[index_] + (rollingTotal[index_ - 1] || 0));
                 nextBattle = this.getBattleAfter(onslaughtData, nextBattle.track, nextBattle.sector, nextBattle.zone);
                 if (!nextBattle) break;
             }
@@ -442,11 +442,11 @@ export class HomeScreenEventPlannerService {
             sector,
             zone,
         };
-        for (let i = 0; i < preEventTokens; ++i) {
+        for (let index = 0; index < preEventTokens; ++index) {
             nextBattle = this.getBattleAfter(onslaughtData, nextBattle.track, nextBattle.sector, nextBattle.zone);
             if (!nextBattle) return 0;
         }
-        for (let i = 0; i < duringEventTokens; ++i) {
+        for (let index = 0; index < duringEventTokens; ++index) {
             const zoneData = onslaughtData[nextBattle.track].sectors[nextBattle.sector].killzones[
                 nextBattle.zone
             ] as OnslaughtKillzone;

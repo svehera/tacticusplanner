@@ -14,7 +14,7 @@ import { StoreContext } from 'src/reducers/store.provider';
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
 import { LoaderWithText } from '@/fsd/5-shared/ui';
-import { SearchParamsStateContext } from '@/fsd/5-shared/ui/contexts';
+import { SearchParametersStateContext } from '@/fsd/5-shared/ui/contexts';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
@@ -43,12 +43,12 @@ import {
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GuidesGroup, GuidesStatus } from '@/fsd/3-features/guides/guides.enums';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { ICreateGuide, IGetGuidesQueryParams, IGuide, IGuideFilter } from '@/fsd/3-features/guides/guides.models';
+import { ICreateGuide, IGetGuidesQueryParameters, IGuide, IGuideFilter } from '@/fsd/3-features/guides/guides.models';
 
 export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);
     const { userInfo, isAuthenticated } = useAuth();
-    const [_, setSearchParams] = useContext(SearchParamsStateContext);
+    const [_, setSearchParameters] = useContext(SearchParametersStateContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
@@ -58,42 +58,42 @@ export const Guides: React.FC = () => {
 
     const [activeTab, setActiveTab] = useQueryState<number>(
         'activeTab',
-        activeTabParam => (activeTabParam ? +activeTabParam : 0),
+        activeTabParameter => (activeTabParameter ? +activeTabParameter : 0),
         activeTab => activeTab.toString()
     );
 
     const [viewTeamId, setViewTeamId] = useQueryState<number | null>(
         'guideId',
-        teamIdParam => (teamIdParam ? +teamIdParam : null),
+        teamIdParameter => (teamIdParameter ? +teamIdParameter : null),
         teamId => (teamId ? teamId.toString() : '')
     );
 
-    const [primaryModFilter] = useQueryState<string | undefined>(
+    const [primaryModeFilter] = useQueryState<string | undefined>(
         'primaryModes',
-        filterParam => filterParam ?? undefined,
-        queryParam => queryParam
+        filterParameter => filterParameter ?? undefined,
+        queryParameter => queryParameter
     );
 
     const [createdByFilter] = useQueryState<string | undefined>(
         'createdBy',
-        filterParam => filterParam ?? undefined,
-        queryParam => queryParam
+        filterParameter => filterParameter ?? undefined,
+        queryParameter => queryParameter
     );
 
-    const [subModFilter] = useQueryState<string[] | undefined>(
+    const [subModeFilter] = useQueryState<string[] | undefined>(
         'subModes',
-        filterParam => filterParam?.split(',') ?? undefined,
-        queryParam => queryParam?.join(',')
+        filterParameter => filterParameter?.split(',') ?? undefined,
+        queryParameter => queryParameter?.join(',')
     );
 
     const [unitIdsFilter] = useQueryState<string[] | undefined>(
         'unitIds',
-        filterParam => filterParam?.split(',') ?? undefined,
-        queryParam => queryParam?.join(',')
+        filterParameter => filterParameter?.split(',') ?? undefined,
+        queryParameter => queryParameter?.join(',')
     );
 
     const [teams, setTeams] = useState<IGuide[]>([]);
-    const [nextQueryParams, setNextQueryParams] = useState<string | null>(null);
+    const [nextQueryParameters, setNextQueryParameters] = useState<string | null>(null);
     const [total, setTotal] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -101,15 +101,15 @@ export const Guides: React.FC = () => {
     const [editGuide, setEditGuide] = useState<IGuide | null>(null);
     const [moderateTeam, setModerateTeam] = useState<GuidesStatus>(GuidesStatus.approved);
     const [guidesFilter, setGuidesFilter] = useState<IGuideFilter>({
-        primaryMod: primaryModFilter as any,
-        subMods: subModFilter,
+        primaryMode: primaryModeFilter as any,
+        subModes: subModeFilter,
         createdBy: createdByFilter,
         unitIds: unitIdsFilter,
     });
 
     const filtersCount = useMemo(() => {
         let result = 0;
-        if (guidesFilter.primaryMod) {
+        if (guidesFilter.primaryMode) {
             result++;
         }
 
@@ -117,7 +117,7 @@ export const Guides: React.FC = () => {
             result++;
         }
 
-        result += guidesFilter.subMods?.length ?? 0;
+        result += guidesFilter.subModes?.length ?? 0;
         result += guidesFilter.unitIds?.length ?? 0;
 
         return result;
@@ -125,35 +125,35 @@ export const Guides: React.FC = () => {
 
     // Prevent overlapping loads (which can result in duplicate data/appends under StrictMode)
     // and implement replace-on-first-page + dedupe-on-append to avoid duplicate key warnings.
-    const loadTeams = async (queryParams: IGetGuidesQueryParams) => {
+    const loadTeams = async (queryParameters: IGetGuidesQueryParameters) => {
         if (loading) {
             return;
         }
         setLoading(true);
         try {
-            for (const queryParamsKey in queryParams) {
-                const value = queryParams[queryParamsKey as keyof IGetGuidesQueryParams];
+            for (const queryParametersKey in queryParameters) {
+                const value = queryParameters[queryParametersKey as keyof IGetGuidesQueryParameters];
                 if (!value) {
-                    delete queryParams[queryParamsKey as keyof IGetGuidesQueryParams];
+                    delete queryParameters[queryParametersKey as keyof IGetGuidesQueryParameters];
                 }
             }
 
-            const params = new URLSearchParams(queryParams as Record<string, string>).toString();
+            const params = new URLSearchParams(queryParameters as Record<string, string>).toString();
             const { data: response } = await getTeamsApi(params);
             if (response) {
                 // Replace results on page 1 to avoid duplicating initial items (e.g., StrictMode double-effects)
-                if (queryParams.page === 1) {
+                if (queryParameters.page === 1) {
                     setTeams(response.teams);
                 } else {
                     // On subsequent pages, append while deduplicating by teamId
-                    setTeams(prevTeams => {
+                    setTeams(previousTeams => {
                         const map = new Map<number, IGuide>();
-                        prevTeams.forEach(t => map.set(t.teamId, t));
+                        previousTeams.forEach(t => map.set(t.teamId, t));
                         response.teams.forEach(t => map.set(t.teamId, t));
                         return Array.from(map.values());
                     });
                 }
-                setNextQueryParams(response.next);
+                setNextQueryParameters(response.next);
                 setTotal(response.total);
             }
         } catch (error) {
@@ -165,20 +165,20 @@ export const Guides: React.FC = () => {
 
     // Paginated load: append but dedupe by teamId to avoid duplicate React keys
     const loadNextTeams = async () => {
-        if (!nextQueryParams || loading) {
+        if (!nextQueryParameters || loading) {
             return;
         }
         setLoading(true);
         try {
-            const { data: response } = await getTeamsApi(nextQueryParams);
+            const { data: response } = await getTeamsApi(nextQueryParameters);
             if (response) {
-                setTeams(prev => {
+                setTeams(previous => {
                     const map = new Map<number, IGuide>();
-                    prev.forEach(t => map.set(t.teamId, t));
+                    previous.forEach(t => map.set(t.teamId, t));
                     response.teams.forEach(t => map.set(t.teamId, t));
                     return Array.from(map.values());
                 });
-                setNextQueryParams(response.next);
+                setNextQueryParameters(response.next);
             }
         } catch (error) {
             console.error('Error loading teams:', error);
@@ -318,7 +318,7 @@ export const Guides: React.FC = () => {
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setTeams([]);
-        setNextQueryParams(null);
+        setNextQueryParameters(null);
         setTotal(0);
         setActiveTab(newValue);
     };
@@ -396,29 +396,29 @@ export const Guides: React.FC = () => {
         setShowFilters(false);
         handleApplyFilters({
             createdBy: undefined,
-            primaryMod: undefined,
-            subMods: undefined,
+            primaryMode: undefined,
+            subModes: undefined,
             unitIds: undefined,
         });
     };
 
     const handleApplyFilters = (filter: IGuideFilter) => {
         setTeams([]);
-        setNextQueryParams(null);
+        setNextQueryParameters(null);
         setGuidesFilter(filter);
 
-        setSearchParams(
+        setSearchParameters(
             current => {
                 const next = new URLSearchParams(current);
 
-                if (filter.subMods) {
-                    next.set('subModes', filter.subMods.join(','));
+                if (filter.subModes) {
+                    next.set('subModes', filter.subModes.join(','));
                 } else {
                     next.delete('subModes');
                 }
 
-                if (filter.primaryMod) {
-                    next.set('primaryModes', filter.primaryMod);
+                if (filter.primaryMode) {
+                    next.set('primaryModes', filter.primaryMode);
                 } else {
                     next.delete('primaryModes');
                 }
@@ -444,27 +444,27 @@ export const Guides: React.FC = () => {
             page: 1,
             pageSize: 20,
             group: activeTab,
-            primaryModes: filter.primaryMod,
-            subModes: filter.subMods,
+            primaryModes: filter.primaryMode,
+            subModes: filter.subModes,
             unitIds: filter.unitIds,
             createdBy: filter.createdBy,
         });
     };
 
     useEffect(() => {
-        const initialQueryParams: IGetGuidesQueryParams = {
+        const initialQueryParameters: IGetGuidesQueryParameters = {
             page: 1,
             pageSize: 20,
             group: activeTab,
             guideId: viewTeamId || undefined,
-            primaryModes: primaryModFilter,
-            subModes: subModFilter,
+            primaryModes: primaryModeFilter,
+            subModes: subModeFilter,
             unitIds: unitIdsFilter,
             createdBy: createdByFilter,
         };
         // Only clear guideId if it exists to avoid unnecessary query param writes
         // that could drop activeTab and cause the UI to jump back to All
-        loadTeams(initialQueryParams).then(() => {
+        loadTeams(initialQueryParameters).then(() => {
             if (viewTeamId !== null) {
                 setViewTeamId(null);
             }

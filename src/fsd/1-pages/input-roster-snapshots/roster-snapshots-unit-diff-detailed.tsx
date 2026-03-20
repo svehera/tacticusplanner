@@ -260,10 +260,10 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
 
         return (
             <div className="flex items-center justify-start gap-4">
-                {slots.map((slot, i) => {
+                {slots.map((slot, index) => {
                     const changed = slot.before !== slot.after || slot.beforeLevel !== slot.afterLevel;
                     return (
-                        <div key={i} className="flex items-center gap-0">
+                        <div key={index} className="flex items-center gap-0">
                             {renderItem(slot.before, slot.beforeLevel, slot.type)}
                             <ArrowForward style={{ opacity: changed ? 1 : 0 }} fontSize="inherit" />
                             <div style={{ opacity: changed ? 1 : 0 }}>
