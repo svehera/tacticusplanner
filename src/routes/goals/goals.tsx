@@ -19,7 +19,6 @@ import DailyRaidsSettings from '@/shared-components/daily-raids-settings';
 import { goalsLimit } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
@@ -41,6 +40,8 @@ import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/g
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+
+import { GoalCard } from '@/fsd/1-pages/goals/goal-card';
 
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
@@ -401,8 +402,14 @@ export const Goals = () => {
                                         key={goal.goalId}
                                         goal={goal}
                                         goalEstimate={finalEstimate} // Use the consolidated estimate
-                                        bookRarity={goal.rarity}
+                                        bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        onToggleInclude={() =>
+                                            dispatch.goals({
+                                                type: 'UpdateDailyRaids',
+                                                value: [{ goalId: goal.goalId, include: !goal.include }],
+                                            })
+                                        }
                                         // Use finalEstimate for consistent color coding
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
@@ -454,6 +461,12 @@ export const Goals = () => {
                                         goalEstimate={estimate}
                                         bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        onToggleInclude={() =>
+                                            dispatch.goals({
+                                                type: 'UpdateDailyRaids',
+                                                value: [{ goalId: goal.goalId, include: !goal.include }],
+                                            })
+                                        }
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
                                             estimate
@@ -495,6 +508,12 @@ export const Goals = () => {
                                         mows={resolvedMows as IMow2[]}
                                         bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        onToggleInclude={() =>
+                                            dispatch.goals({
+                                                type: 'UpdateDailyRaids',
+                                                value: [{ goalId: goal.goalId, include: !goal.include }],
+                                            })
+                                        }
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
                                             finalEstimate

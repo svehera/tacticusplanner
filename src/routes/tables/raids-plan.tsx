@@ -59,7 +59,7 @@ export const RaidsPlan: React.FC<Props> = ({
 
     const [expandedPanels, setExpandedPanels] = useState(() => ({
         related: false,
-        inProgress: false,
+        inProgress: scrollToCharSnowprintId !== undefined,
         finished: false,
         blocked: false,
         raids: true,
@@ -69,6 +69,7 @@ export const RaidsPlan: React.FC<Props> = ({
         setExpandedPanels(previous => ({ ...previous, [key]: isExpanded }));
 
     const itemReferences = useRef<ReferenceMap>({});
+    const inProgressReference = useRef<HTMLDivElement>(null);
     const setCardReference = useCallback(
         (id: number) => (element: ReferenceElement) => {
             itemReferences.current[id] = element;
@@ -104,15 +105,24 @@ export const RaidsPlan: React.FC<Props> = ({
     const scrollToTarget = useCallback(() => {
         if (scrollToCharSnowprintId === undefined) return;
         if (!Object.keys(characterToMaterialMap).includes(scrollToCharSnowprintId)) return;
+        if (viewPreferences.raidsTableView) {
+            inProgressReference.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+        }
         const targetElement = itemReferences.current[characterToMaterialMap[scrollToCharSnowprintId]];
         if (targetElement) {
-            // 3. Call the native DOM method: scrollIntoView
             targetElement.scrollIntoView({
-                behavior: 'smooth', // Makes the scroll transition smooth
-                block: 'center', // Aligns the element to the vertical center of the container
+                behavior: 'smooth',
+                block: 'center',
             });
         }
-    }, [itemReferences, scrollToCharSnowprintId]);
+    }, [itemReferences, scrollToCharSnowprintId, characterToMaterialMap, viewPreferences.raidsTableView]);
+
+    useEffect(() => {
+        if (scrollToCharSnowprintId !== undefined) {
+            setExpandedPanels(previous => ({ ...previous, inProgress: true }));
+        }
+    }, [scrollToCharSnowprintId]);
 
     useEffect(() => {
         if (scrollToCharSnowprintId) {
@@ -220,6 +230,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 )}
                 {!!estimatedRanks.inProgressMaterials.length && (
                     <Accordion
+                        ref={inProgressReference}
                         expanded={expandedPanels.inProgress}
                         onChange={togglePanel('inProgress')}
                         TransitionProps={{ unmountOnExit: !grid1Loaded }}>
