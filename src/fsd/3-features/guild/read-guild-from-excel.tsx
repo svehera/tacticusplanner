@@ -52,7 +52,7 @@ export const ImportGuildExcel: React.FC<Props> = ({ onImport }) => {
                     onImport(rows);
                     enqueueSnackbar('Import successful', { variant: 'success' });
                 } else if (rows.length === 0 && errors.length > 0) {
-                    enqueueSnackbar('Import failed. Error parsing Excel gile.', { variant: 'error' });
+                    enqueueSnackbar('Import failed. Error parsing Excel file.', { variant: 'error' });
                 }
                 handleClose();
             });

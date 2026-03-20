@@ -10,7 +10,7 @@ export const warOffense2Reducer = (_state: WarOffense2State, action: WarOffense2
             return action.value;
         }
         default: {
-            throw new Error(`Unexpected action.type received in reducer: ${action.value}`);
+            throw new Error(`Unexpected action.type received in reducer: ${action.type}`);
         }
     }
 };
