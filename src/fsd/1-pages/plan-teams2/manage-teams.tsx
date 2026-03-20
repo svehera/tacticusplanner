@@ -75,15 +75,15 @@ const sanitizeWarDefenseSelection = (
     let nextFlexIndex = currentFlexIndex ?? currentSelectedChars.length;
     const nextSelectedChars: string[] = [];
 
-    currentSelectedChars.forEach((charId, index) => {
+    for (const [index, charId] of currentSelectedChars.entries()) {
         if (blockedCoreCharIds.has(charId)) {
             if (index < nextFlexIndex) {
                 nextFlexIndex -= 1;
             }
-            return;
+            continue;
         }
         nextSelectedChars.push(charId);
-    });
+    }
 
     const normalizedFlexIndex = Math.max(0, nextFlexIndex);
     return {
@@ -338,10 +338,10 @@ export const ManageTeams = () => {
             team.notes = notes;
             team.flexIndex = flexIndex;
             const editingTeams = [...teams];
-            editingTeams.forEach(t => {
-                if (t.name !== editingTeam.name) return;
+            for (let t of editingTeams) {
+                if (t.name !== editingTeam.name) continue;
                 t = team;
-            });
+            }
             dispatch.teams2({ type: 'Set', value: cloneDeep(editingTeams) });
         } else {
             const newTeam: ITeam2 = {

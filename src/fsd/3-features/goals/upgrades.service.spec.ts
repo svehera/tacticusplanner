@@ -162,26 +162,26 @@ const buildBaseUpgradeCounts = (
         }
     };
 
-    upgradeIds.forEach(upgradeId => {
+    for (const upgradeId of upgradeIds) {
         const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
-        if (!upgrade) return;
+        if (!upgrade) continue;
         if (upgrade.crafted) {
             const expanded = FsdUpgradesService.recipeExpandedUpgradeData[upgrade.snowprintId];
-            Object.entries(expanded.expandedRecipe).forEach(([baseId, count]) => {
+            for (const [baseId, count] of Object.entries(expanded.expandedRecipe)) {
                 addBaseUpgrade(baseId, count);
-            });
-            return;
+            }
+            continue;
         }
         addBaseUpgrade(upgradeId, 1);
-    });
+    }
 
     if (rarityFilter && rarityFilter.length > 0) {
-        Object.keys(counts).forEach(upgradeId => {
+        for (const upgradeId of Object.keys(counts)) {
             const upgrade = FsdUpgradesService.baseUpgradesData[upgradeId];
             if (upgrade && !rarityFilter.includes(upgrade.rarity as Rarity)) {
                 delete counts[upgradeId];
             }
-        });
+        }
     }
 
     return counts;
@@ -1429,9 +1429,9 @@ describe('UpgradesService.getUpgrades', () => {
 
         const upgrades = UpgradesService.getUpgrades({}, [character], [], [goalStoneToGold, goalGoldToDiamond]);
         const actualCounts = upgrades.reduce<Record<string, number>>((accumulator, upgrade) => {
-            Object.entries(upgrade.baseUpgradesTotal).forEach(([id, count]) => {
+            for (const [id, count] of Object.entries(upgrade.baseUpgradesTotal)) {
                 accumulator[id] = (accumulator[id] ?? 0) + count;
-            });
+            }
             return accumulator;
         }, {});
 
@@ -1500,9 +1500,9 @@ describe('UpgradesService.getUpgrades', () => {
         );
 
         const combined = upgrades.reduce<Record<string, number>>((accumulator, upgrade) => {
-            Object.entries(upgrade.baseUpgradesTotal).forEach(([id, count]) => {
+            for (const [id, count] of Object.entries(upgrade.baseUpgradesTotal)) {
                 accumulator[id] = (accumulator[id] ?? 0) + count;
-            });
+            }
             return accumulator;
         }, {});
 
@@ -2131,14 +2131,14 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
             locations: getRewardLocations(rewardId),
         }));
 
-        rewardLocations.forEach(({ rewardId: _, locations }) => {
+        for (const { rewardId: _, locations } of rewardLocations) {
             expect(locations.length).toBeGreaterThan(0);
             expect(
                 locations.some(
                     loc => loc.campaignType === CampaignType.Elite || loc.campaignType === CampaignType.Mirror
                 )
             ).toBe(true);
-        });
+        }
 
         const completedLocations = rewardLocations.flatMap(({ locations }) =>
             locations.map(location => createCompletedLocation(location))

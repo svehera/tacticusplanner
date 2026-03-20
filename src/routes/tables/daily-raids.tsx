@@ -27,14 +27,14 @@ function addShardsToUpgrades(
     mows: IUnit[]
 ): Record<string, number> {
     const newUpgrades = cloneDeep(upgrades);
-    characters.forEach(char => {
+    for (const char of characters) {
         newUpgrades['shards_' + char.snowprintId] = char.shards;
         newUpgrades['mythicShards_' + char.snowprintId] = char.mythicShards;
-    });
-    mows.forEach(mow => {
+    }
+    for (const mow of mows) {
         newUpgrades['shards_' + mow.snowprintId] = mow.shards;
         newUpgrades['mythicShards_' + mow.snowprintId] = mow.mythicShards;
-    });
+    }
     return newUpgrades;
 }
 

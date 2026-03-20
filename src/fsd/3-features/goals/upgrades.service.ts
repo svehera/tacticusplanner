@@ -263,14 +263,14 @@ export class UpgradesService {
             returnValue[finalKey] = value;
         }
 
-        chars.forEach(char => {
+        for (const char of chars) {
             returnValue['shards_' + char.snowprintId!] = char.shards;
             returnValue['mythicShards_' + char.snowprintId!] = char.mythicShards;
-        });
-        mows.forEach(mow => {
+        }
+        for (const mow of mows) {
             returnValue['shards_' + mow.snowprintId!] = mow.shards;
             returnValue['mythicShards_' + mow.snowprintId!] = mow.mythicShards;
-        });
+        }
         return returnValue;
     }
 
@@ -365,10 +365,10 @@ export class UpgradesService {
         const inProgressMaterials = isGoalPriority
             ? goalPriorityEstimates!.filter(x => !x.isFinished && !x.isBlocked)
             : this.getTotalEstimates(mergedInProgress, inventoryUpgrades).map(x => {
-                  x.locations.forEach(loc => {
+                  for (const loc of x.locations) {
                       const inProgressLoc = combinedBaseMaterials[x.id].locations.find(l => l.id === loc.id);
                       if (inProgressLoc) loc.isSuggested = inProgressLoc.isSuggested;
-                  });
+                  }
                   return x;
               });
 
@@ -463,7 +463,7 @@ export class UpgradesService {
         existingInventory: Record<string, number>
     ): IUpgradesRaidsDay {
         const raids: IUpgradeRaid[] = [];
-        Object.entries(combinedBaseMaterials).forEach(([upgradeId, mat]) => {
+        for (const [upgradeId, mat] of Object.entries(combinedBaseMaterials)) {
             const raid: IUpgradeRaid = {
                 id: 'inventory_in_stock-' + upgradeId,
                 snowprintId: upgradeId,
@@ -501,7 +501,7 @@ export class UpgradesService {
                 }
                 raids.push(raid);
             }
-        });
+        }
 
         return {
             raids,
@@ -602,19 +602,19 @@ export class UpgradesService {
                     delete remainingMats[upgradeId];
                 }
             }
-            day.raids.forEach(raid => {
+            for (const raid of day.raids) {
                 raid.relatedCharacters = raid.relatedCharacters.map(
                     charId => CharactersService.resolveCharacter(charId)?.name ?? charId
                 );
-                raid.raidLocations.forEach(loc => {
+                for (const loc of raid.raidLocations) {
                     loc.energySpent = loc.raidsToPerform * loc.energyCost;
-                });
+                }
                 raid.energyTotal = raid.raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
-            });
+            }
             day.energyTotal = day.raids.reduce((sum, raid) => {
-                raid.raidLocations.forEach(loc => {
+                for (const loc of raid.raidLocations) {
                     loc.energySpent = loc.raidsToPerform * loc.energyCost;
-                });
+                }
                 const raidEnergy = raid.raidLocations.reduce((raidSum, loc) => raidSum + loc.energySpent, 0);
                 return sum + raidEnergy;
             }, 0);
@@ -631,21 +631,21 @@ export class UpgradesService {
             onslaughtTokens = Math.max(1, Math.min(2, 3 - onslaughtTokens));
         }
 
-        Object.keys(blockedMats).forEach(upgradeId => {
+        for (const upgradeId of Object.keys(blockedMats)) {
             remainingMats[upgradeId] = blockedMats[upgradeId];
-        });
+        }
 
-        returnValue.forEach(day => {
-            day.raids.forEach(raid => {
-                raid.raidLocations.forEach(loc => {
+        for (const day of returnValue) {
+            for (const raid of day.raids) {
+                for (const loc of raid.raidLocations) {
                     loc.energySpent = (loc.raidsAlreadyPerformed + loc.raidsToPerform) * loc.energyCost;
-                });
+                }
                 raid.energyTotal = raid.raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
                 raid.raidsTotal = sum(raid.raidLocations.map(loc => loc.raidsToPerform + loc.raidsAlreadyPerformed));
-            });
+            }
             day.energyTotal = day.raids.reduce((sum, raid) => sum + raid.energyTotal, 0);
             day.raidsTotal = sum(day.raids.map(raid => raid.raidsTotal));
-        });
+        }
 
         return { upgradesRaids: returnValue, remainingMats };
     }
@@ -695,15 +695,15 @@ export class UpgradesService {
         const splitRaids: IUpgradeRaid[] = [];
         for (const raid of day.raids) {
             const grouped = new Map<number, IItemRaidLocation[]>();
-            raid.raidLocations.forEach(loc => {
+            for (const loc of raid.raidLocations) {
                 const points = getHsePoints(loc);
                 const key = Number.isFinite(points) ? points : 0;
                 const list = grouped.get(key) ?? [];
                 list.push(loc);
                 grouped.set(key, list);
-            });
+            }
 
-            grouped.forEach(raidLocations => {
+            for (const raidLocations of grouped) {
                 const energyTotal = raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
                 const raidsTotal = raidLocations.reduce(
                     (sum, loc) => sum + loc.raidsToPerform + loc.raidsAlreadyPerformed,
@@ -716,7 +716,7 @@ export class UpgradesService {
                     energyTotal,
                     raidsTotal,
                 });
-            });
+            }
         }
 
         const allLocs = splitRaids.flatMap(raid => raid.raidLocations);
@@ -1690,7 +1690,7 @@ export class UpgradesService {
             onslaughtTokens--;
         }
 
-        Object.entries(onslaughts).forEach(([upgradeId, raids]) => {
+        for (const [upgradeId, raids] of Object.entries(onslaughts)) {
             day.raids.push({
                 raidLocations: raids,
                 energyTotal: 0,
@@ -1713,7 +1713,7 @@ export class UpgradesService {
                 crafted: false,
                 stat: 'Shard',
             });
-        });
+        }
     }
 
     /**
@@ -1745,7 +1745,7 @@ export class UpgradesService {
 
         let raidIndex = 0;
         const raids: IUpgradeRaid[] = [];
-        raidsByMaterial.forEach(([reward, locations]) => {
+        for (const [reward, locations] of raidsByMaterial) {
             const acquired = settings.upgrades[reward] ?? 0;
             const required = combinedBaseMaterials[reward]?.requiredCount ?? 0;
             const upgrade = FsdUpgradesService.getUpgrade(reward);
@@ -1775,7 +1775,7 @@ export class UpgradesService {
 
             raids.push(raid);
             energySpent += sum(newLocations.map(loc => loc.energySpent));
-        });
+        }
         day.raids = raids.concat(day.raids);
         day.energyTotal += energySpent;
         day.raidsTotal += sum(raids.map(raid => raid.raidsTotal));
@@ -2464,11 +2464,11 @@ export class UpgradesService {
                 const minEnergyPerItem = Math.min(
                     ...combinedUpgrade.locations.filter(x => x.isSuggested).map(x => x.energyPerItem)
                 );
-                combinedUpgrade.locations.forEach(location => {
+                for (const location of combinedUpgrade.locations) {
                     if (location.energyPerItem > minEnergyPerItem) {
                         location.isSuggested = false;
                     }
-                });
+                }
             } else if (
                 settings.preferences.farmStrategy === DailyRaidsStrategy.custom &&
                 settings.preferences.customSettings
@@ -2486,7 +2486,7 @@ export class UpgradesService {
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
                 const ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
 
-                ignoredLocations.forEach(location => (location.isSuggested = false));
+                for (const location of ignoredLocations) location.isSuggested = false;
             }
 
             combinedUpgrade.locations = orderBy(

@@ -310,10 +310,10 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
     const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
     const teams: ILreTeam[] = [];
 
-    sections.forEach(section => {
+    for (const section of sections) {
         const selectedTeams: SelectedTeams = data[section];
 
-        Object.entries(selectedTeams).forEach(([restriction, charSnowprintIds]) => {
+        for (const [restriction, charSnowprintIds] of Object.entries(selectedTeams)) {
             // Check if there's already a team with the same set of characters
             const existingTeam = teams.find(
                 team =>
@@ -339,8 +339,8 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
                 };
                 teams.push(team);
             }
-        });
-    });
+        }
+    }
 
     data.teams = teams; // Populate the teams field
 }
@@ -362,9 +362,9 @@ function populateProgress(data: ILreProgressDto) {
     const killPointsIndex = 0;
     const highScoreAndDefeatAllIndex = 1;
 
-    sections.forEach(section => {
+    for (const section of sections) {
         const { battles } = data[section] ?? { battles: [] };
-        battles.forEach((battle, index) => {
+        for (const [index, battle] of battles.entries()) {
             const requirements: ILreRequirementsProgressDto[] = lre[section].unitsRestrictions.map(
                 (restriction, restrictionIndex) => ({
                     id: restriction.name,
@@ -392,8 +392,8 @@ function populateProgress(data: ILreProgressDto) {
                 battleIndex: index,
                 requirements: requirements,
             });
-        });
-    });
+        }
+    }
 
     data.battlesProgress = battlesProgress; // Populate the teams field
 }

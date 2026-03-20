@@ -58,43 +58,43 @@ export const HomeScreenEvent = () => {
     ): HseBattle[] => {
         const pointsPerEnergy: Record<number, HseBattle[]> = {};
 
-        Object.entries(CampaignsService.campaignsGrouped)
-            .filter(([campaignId]) => campaigns.includes(campaignId as Campaign))
-            .forEach(([, battles]) => {
-                battles.forEach(battle => {
-                    let points =
-                        battle.detailedEnemyTypes
-                            ?.filter(x => {
-                                const npc = NpcService.getNpcById(x.id);
-                                if (!npc) {
-                                    console.warn('battle ', battle.id, ' has undefined npc ', x);
-                                    return false;
-                                }
-                                return !npc.traits.includes('Summon') && enemyFilter(npc);
-                            })
-                            .map(x => x.count)
-                            .reduce((a, b) => a + b, 0) ?? 0;
+        for (const [, battles] of Object.entries(CampaignsService.campaignsGrouped).filter(([campaignId]) =>
+            campaigns.includes(campaignId as Campaign)
+        )) {
+            for (const battle of battles) {
+                let points =
+                    battle.detailedEnemyTypes
+                        ?.filter(x => {
+                            const npc = NpcService.getNpcById(x.id);
+                            if (!npc) {
+                                console.warn('battle ', battle.id, ' has undefined npc ', x);
+                                return false;
+                            }
+                            return !npc.traits.includes('Summon') && enemyFilter(npc);
+                        })
+                        .map(x => x.count)
+                        .reduce((a, b) => a + b, 0) ?? 0;
 
-                    if (applyEliteCampaignMultiplier) {
-                        points *= battle.campaignType === CampaignType.Elite ? 5 : 3;
-                    }
+                if (applyEliteCampaignMultiplier) {
+                    points *= battle.campaignType === CampaignType.Elite ? 5 : 3;
+                }
 
-                    if (points > 0 && (includeRewardlessBattles || getReward(battle.rewards) !== '')) {
-                        const details: HseBattle = {
-                            id: battle.id,
-                            battle: battle,
-                            energyCost: battle.energyCost,
-                            points: points,
-                            pointsPerEnergy: points / battle.energyCost,
-                            reward: getReward(battle.rewards),
-                            dropChance: battle.dropRate,
-                        };
-                        const array = pointsPerEnergy[details.pointsPerEnergy] || [];
-                        array.push(details);
-                        pointsPerEnergy[details.pointsPerEnergy] = array;
-                    }
-                });
-            });
+                if (points > 0 && (includeRewardlessBattles || getReward(battle.rewards) !== '')) {
+                    const details: HseBattle = {
+                        id: battle.id,
+                        battle: battle,
+                        energyCost: battle.energyCost,
+                        points: points,
+                        pointsPerEnergy: points / battle.energyCost,
+                        reward: getReward(battle.rewards),
+                        dropChance: battle.dropRate,
+                    };
+                    const array = pointsPerEnergy[details.pointsPerEnergy] || [];
+                    array.push(details);
+                    pointsPerEnergy[details.pointsPerEnergy] = array;
+                }
+            }
+        }
 
         return Object.values(pointsPerEnergy)
             .flat()

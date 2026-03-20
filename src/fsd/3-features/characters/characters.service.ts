@@ -196,7 +196,7 @@ export class CharactersService {
             let bsValue = 0,
                 power = 0,
                 unlockedCharacters = 0;
-            characters.forEach(char => {
+            for (const char of characters) {
                 if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue) {
                     bsValue += CharactersValueService.getCharacterValue(char);
                 }
@@ -204,7 +204,7 @@ export class CharactersService {
                     power += CharactersPowerService.getCharacterPower(char);
                 }
                 if (isUnlocked(char)) unlockedCharacters++;
-            });
+            }
 
             accumulator.push({
                 ...faction,

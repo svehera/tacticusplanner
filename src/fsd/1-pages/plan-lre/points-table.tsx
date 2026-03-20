@@ -248,12 +248,12 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         x => CharactersService.resolveCharacter(x)?.snowprintId ?? x
                     );
                 }
-                chars.forEach(character => {
+                for (const character of chars) {
                     if (!result[character]) {
                         result[character] = [];
                     }
                     result[character] = uniq([...result[character], ...team.restrictionsIds]);
-                });
+                }
             }
             return result;
         }

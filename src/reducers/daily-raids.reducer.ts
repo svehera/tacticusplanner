@@ -63,12 +63,12 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             const getOrderedKeysForBaseCampaign = (baseCampaignName: string): string[] => {
                 const ordered: string[] = [];
                 // Preserve insertion order from raw battle data
-                Object.entries(CampaignsService.rawBattleData).forEach(([shortKey, battle]) => {
+                for (const [shortKey, battle] of Object.entries(CampaignsService.rawBattleData)) {
                     const name = String(battle.campaign ?? '');
                     if (name.trim().toLowerCase().startsWith(baseCampaignName.trim().toLowerCase())) {
                         ordered.push(shortKey);
                     }
-                });
+                }
                 return ordered;
             };
 

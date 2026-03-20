@@ -107,9 +107,9 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
             const { rarityCaps } = action;
             const defenseTeams = state.teams.filter(x => x.type === GuildWarTeamType.Defense);
 
-            defenseTeams.forEach((team, index) => {
+            for (const [index, team] of defenseTeams.entries()) {
                 team.rarityCap = rarityCaps[index] ?? Rarity.Legendary;
-            });
+            }
 
             return { ...state, teams: [...state.teams] };
         }
@@ -179,11 +179,11 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
 
                 if (zone) {
                     zone.players = players;
-                    layout.zones.forEach((zone, index) => {
+                    for (const [index, zone] of layout.zones.entries()) {
                         if (index !== zoneIndex) {
                             zone.players = zone.players.filter(player => !players.includes(player));
                         }
-                    });
+                    }
                     return {
                         ...state,
                         layouts: [...state.layouts],

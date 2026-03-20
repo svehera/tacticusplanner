@@ -326,7 +326,7 @@ export class LeProgressService {
                     `Current Model: ${currentModel.eventName} (${currentModel.eventId}).`
             );
         }
-        lanes.forEach(lane => {
+        for (const lane of lanes) {
             const externalTrack = externalData.lanes.find(x => x.id === lane.id);
             if (externalTrack === undefined) {
                 throw new Error('Unsupported Legendary Event data: Could not find ' + lane.displayName + ' Track.');
@@ -354,10 +354,10 @@ export class LeProgressService {
                 );
             }
             const errorStrings: string[] = [];
-            externalTrack.battleConfigs.forEach(externalBattleConfig => {
-                externalBattleConfig.objectives.forEach(externalObjective => {
+            for (const externalBattleConfig of externalTrack.battleConfigs) {
+                for (const externalObjective of externalBattleConfig.objectives) {
                     // Acing objectives are called something different in the planner.
-                    if (externalObjective.objectiveType === 'Acing') return;
+                    if (externalObjective.objectiveType === 'Acing') continue;
                     const requirement = lane.track.unitsRestrictions.find(
                         x =>
                             x.objectiveTarget === externalObjective.objectiveTarget &&
@@ -376,26 +376,26 @@ export class LeProgressService {
                                 `External (${externalObjective.score}) vs Planner (${requirement.points}).`
                         );
                     }
-                });
-            });
-            externalTrack.progress.forEach(progress => {
+                }
+            }
+            for (const progress of externalTrack.progress) {
                 if (progress.objectivesCleared.length > 6) {
                     errorStrings.push(
                         `Unsupported Legendary Event data: More than 6 objectives cleared in a single battle in ` +
                             `${lane.displayName} Track. Expected at most the clear score (Acing) and five restrictions.`
                     );
                 }
-                progress.objectivesCleared.forEach(objectiveCleared => {
+                for (const objectiveCleared of progress.objectivesCleared) {
                     if (objectiveCleared < 0 || objectiveCleared > 5) {
                         errorStrings.push('Invalid index in objectivesCleared: ' + objectiveCleared);
                     }
-                });
-            });
+                }
+            }
             if (errorStrings.length > 0) {
                 console.error(errorStrings.join('\n'));
                 throw new Error(errorStrings.join('\n'));
             }
-        });
+        }
         if (externalData.currentCurrency < 0) {
             throw new Error('Invalid current currency in Legendary Event data: ' + externalData.currentCurrency);
         }
@@ -460,8 +460,8 @@ export class LeProgressService {
         // model.
         const restrictionIndexMap: Record<number, number> = {};
 
-        externalTrack.battleConfigs[0].objectives.forEach((objective, index) => {
-            if (objective.objectiveType === 'Acing') return;
+        for (const [index, objective] of externalTrack.battleConfigs[0].objectives.entries()) {
+            if (objective.objectiveType === 'Acing') continue;
             const requirement = eventTrack.unitsRestrictions.find(
                 x => x.objectiveTarget === objective.objectiveTarget && x.objectiveType === objective.objectiveType
             );
@@ -478,14 +478,14 @@ export class LeProgressService {
                 );
             }
             restrictionIndexMap[index] = requirementIndex;
-        });
+        }
 
         const returnValue = cloneDeep(track);
 
-        returnValue.battles.forEach(battle => {
+        for (const battle of returnValue.battles) {
             battle.completed = false;
             battle.totalPoints = 0;
-            battle.requirementsProgress.forEach(requirementProgress => {
+            for (const requirementProgress of battle.requirementsProgress) {
                 requirementProgress.completed = false;
                 requirementProgress.highScore = undefined;
                 requirementProgress.killScore = undefined;
@@ -496,10 +496,10 @@ export class LeProgressService {
                 ) {
                     requirementProgress.status = RequirementStatus.NotCleared;
                 }
-            });
-        });
+            }
+        }
 
-        externalTrack.progress.forEach((progress, battleIndex) => {
+        for (const [battleIndex, progress] of externalTrack.progress.entries()) {
             const battle = returnValue.battles.find(b => b.battleIndex === battleIndex);
             if (battle === undefined) {
                 throw new Error('Cannot find battle index ' + battleIndex + ' in track ' + eventTrack.name);
@@ -508,24 +508,24 @@ export class LeProgressService {
             // Handle case where no objectives are cleared - only sync partial scores
             if (progress.objectivesCleared.length === 0) {
                 this.syncPartialScores(battle, progress.encounterPoints, progress.highScore);
-                return;
+                continue;
             }
 
             // Handle case where all 6 objectives are cleared
             if (progress.objectivesCleared.length === 6) {
                 battle.completed = true;
                 battle.totalPoints = sum(battle.requirementsProgress.map(requirement => requirement.points));
-                battle.requirementsProgress.forEach(requirementProgress => {
+                for (const requirementProgress of battle.requirementsProgress) {
                     requirementProgress.completed = true;
                     requirementProgress.blocked = false;
                     requirementProgress.status = RequirementStatus.Cleared;
-                });
-                return;
+                }
+                continue;
             }
 
             // Handle case where defeatAll is cleared
             if (progress.objectivesCleared.includes(0)) {
-                ['_defeatAll', '_killPoints', '_highScore'].forEach(requirementId => {
+                for (const requirementId of ['_defeatAll', '_killPoints', '_highScore']) {
                     const requirementProgress = battle.requirementsProgress.find(x => x.id === requirementId)!;
                     requirementProgress.completed = true;
                     requirementProgress.blocked = false;
@@ -533,13 +533,13 @@ export class LeProgressService {
                     requirementProgress.killScore = undefined;
                     requirementProgress.highScore = undefined;
                     battle.totalPoints += requirementProgress.points;
-                });
+                }
             } else {
                 // If defeatAll not cleared, sync partial scores
                 this.syncPartialScores(battle, progress.encounterPoints, progress.highScore);
             }
-            progress.objectivesCleared.forEach(objectiveIndex => {
-                if (objectiveIndex === 0) return; // Handled above
+            for (const objectiveIndex of progress.objectivesCleared) {
+                if (objectiveIndex === 0) continue; // Handled above
                 const requirementIndex = restrictionIndexMap[objectiveIndex];
                 const requirementProgress = battle.requirementsProgress[requirementIndex];
                 if (requirementProgress === undefined) {
@@ -553,8 +553,8 @@ export class LeProgressService {
                 requirementProgress.blocked = false;
                 requirementProgress.status = RequirementStatus.Cleared;
                 battle.totalPoints += requirementProgress.points;
-            });
-        });
+            }
+        }
 
         return returnValue;
     }

@@ -97,9 +97,9 @@ export class CampaignsProgressionService {
     ): void {
         for (const goal of goals) {
             const goalData: GoalData = this.computeGoalCost(goal, campaignProgress, inventoryUpgrades);
-            goalData.unfarmableLocations.forEach(x => {
+            for (const x of goalData.unfarmableLocations) {
                 nodesToBeat.get(x.campaign)?.push(x);
-            });
+            }
             const unit = CharactersService.getUnit(goal.unitId);
             if (!unit) {
                 console.error("Couldn't find unit '" + goal.unitId + "'.");
@@ -107,16 +107,16 @@ export class CampaignsProgressionService {
             }
             // If this unit can participate in campaigns, add the farm data to the
             // campaign results.
-            factionCampaigns[unit.faction].forEach(campaign => {
+            for (const campaign of factionCampaigns[unit.faction]) {
                 if (!result.data.get(campaign.id)) {
                     console.error("no campaign data for '" + campaign.id + "'.");
-                    return;
+                    continue;
                 }
                 result.data.get(campaign.id)?.goalCost.set(goal.goalId, goalData.totalEnergy);
-            });
+            }
 
             // Sum up all the materials across all goals.
-            goalData.farmData.forEach((data, material) => {
+            for (const [material, data] of goalData.farmData.entries()) {
                 if (result.materialFarmData.has(material)) {
                     const existingData = result.materialFarmData.get(material)!;
                     existingData.count += data.count;
@@ -128,11 +128,11 @@ export class CampaignsProgressionService {
                     result.charactersNeedingMaterials.set(material, []);
                 }
                 result.charactersNeedingMaterials.get(material)?.push(goal.unitId);
-            });
+            }
         }
-        result.charactersNeedingMaterials.forEach((units, material) => {
+        for (const [material, units] of result.charactersNeedingMaterials.entries()) {
             result.charactersNeedingMaterials.set(material, uniq(units.sort()));
-        });
+        }
     }
 
     /**
@@ -322,12 +322,12 @@ export class CampaignsProgressionService {
             result.canFarm = result.canFarm && farmData.canFarm;
             result.totalEnergy = result.totalEnergy + farmData.totalEnergy;
             result.farmData.set(materialId, farmData);
-            farmData.farmableLocations.forEach(x => {
+            for (const x of farmData.farmableLocations) {
                 result.farmableLocations.push(x);
-            });
-            farmData.unfarmableLocations.forEach(x => {
+            }
+            for (const x of farmData.unfarmableLocations) {
                 result.unfarmableLocations.push(x);
-            });
+            }
         }
 
         return result;
@@ -390,12 +390,12 @@ export class CampaignsProgressionService {
             unfarmableLocations: this.getUnfarmableLocations(materialId, campaignProgress),
         };
         let bestBattle: ICampaignBattleComposed | undefined = undefined;
-        result.farmableLocations.forEach(battle => {
+        for (const battle of result.farmableLocations) {
             if (!bestBattle) {
                 bestBattle = battle;
                 result.campaignType = battle.campaignType;
                 result.totalEnergy = this.getCostToFarmMaterial(battle, count);
-                return;
+                continue;
             }
             const energyCost = this.getCostToFarmMaterial(battle, count);
             if (energyCost < result.totalEnergy) {
@@ -403,7 +403,7 @@ export class CampaignsProgressionService {
                 result.campaignType = battle.campaignType;
                 result.totalEnergy = energyCost;
             }
-        });
+        }
         return result;
     }
 
@@ -464,14 +464,14 @@ export class CampaignsProgressionService {
     ): ICampaignBattleComposed[] {
         const result: ICampaignBattleComposed[] = [];
 
-        Object.entries(CampaignsService.campaignsComposed).forEach(([_, battle]) => {
+        for (const [_, battle] of Object.entries(CampaignsService.campaignsComposed)) {
             if (
                 this.getReward(battle) === materialId &&
                 CampaignsService.hasCompletedBattle(battle, campaignProgress)
             ) {
                 result.push(battle);
             }
-        });
+        }
 
         return result;
     }
@@ -512,9 +512,9 @@ export class CampaignsProgressionService {
         if (battle.campaignType != CampaignType.Elite) return undefined;
         const baseCampaign = battle.campaign.substring(0, battle.campaign.length - 6);
         let result: ICampaignBattleComposed | undefined = undefined;
-        farmData.unfarmableLocations.forEach(x => {
+        for (const x of farmData.unfarmableLocations) {
             if (x.campaign == baseCampaign && this.getReward(x) == this.getReward(battle)) result = x;
-        });
+        }
         return result;
     }
 }

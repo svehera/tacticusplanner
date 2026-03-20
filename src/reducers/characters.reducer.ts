@@ -163,12 +163,12 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                         const mythicShards = tacticusUnit.mythicShards ?? char.mythicShards;
 
                         const equipment: IPersonalCharacterDataEquipment[] = [];
-                        tacticusUnit.items.forEach(equip => {
+                        for (const equip of tacticusUnit.items) {
                             const equipmentData = EquipmentService.convertTacticusEquipmentData(equip);
                             if (equipmentData) {
                                 equipment.push({ id: equipmentData.id, level: equip.level });
                             }
-                        });
+                        }
 
                         return {
                             ...char,
