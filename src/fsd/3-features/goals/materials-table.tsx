@@ -294,7 +294,7 @@ export const MaterialsTable: React.FC<Props> = ({
         }) as IRaidMaterialRow[];
     }, [rows, inventory, alreadyUsedMaterials]);
 
-    const gridApiRef = useRef<GridReadyEvent['api'] | null>(null);
+    const gridApiReference = useRef<GridReadyEvent['api'] | null>(null);
 
     const scrollToChar = (api: GridReadyEvent['api'], snowprintId: string) => {
         const char = CharactersService.resolveCharacter(snowprintId);
@@ -308,7 +308,7 @@ export const MaterialsTable: React.FC<Props> = ({
     };
 
     const onGridReadyInternal = (params: GridReadyEvent) => {
-        gridApiRef.current = params.api;
+        gridApiReference.current = params.api;
         if (scrollToCharSnowprintId) {
             scrollToChar(params.api, scrollToCharSnowprintId);
         }
