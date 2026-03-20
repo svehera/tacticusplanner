@@ -12,7 +12,7 @@ const localStorageMock = {
 };
 
 // 2. Attach it to BOTH the global (Node) and window (JSDOM) scopes
-global.localStorage = localStorageMock as any;
-if (typeof window !== 'undefined') {
-    window.localStorage = localStorageMock as any;
+globalThis.localStorage = localStorageMock as any;
+if (typeof globalThis.window !== 'undefined') {
+    globalThis.localStorage = localStorageMock as any;
 }

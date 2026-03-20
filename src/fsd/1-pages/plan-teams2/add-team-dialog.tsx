@@ -149,15 +149,15 @@ export const AddTeamDialog: React.FC<Props> = ({
 
     useEffect(() => {
         if (isDragging) {
-            window.addEventListener('mousemove', resizeGrids);
-            window.addEventListener('mouseup', stopResizing);
+            globalThis.addEventListener('mousemove', resizeGrids);
+            globalThis.addEventListener('mouseup', stopResizing);
             document.body.style.cursor = 'col-resize';
         } else {
             document.body.style.cursor = 'default';
         }
         return () => {
-            window.removeEventListener('mousemove', resizeGrids);
-            window.removeEventListener('mouseup', stopResizing);
+            globalThis.removeEventListener('mousemove', resizeGrids);
+            globalThis.removeEventListener('mouseup', stopResizing);
         };
     }, [isDragging, resizeGrids, stopResizing]);
 

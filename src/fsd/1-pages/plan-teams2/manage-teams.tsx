@@ -320,7 +320,9 @@ export const ManageTeams = () => {
     };
 
     const onDelete = (team: ITeam2) => {
-        if (window.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)) {
+        if (
+            globalThis.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)
+        ) {
             dispatch.teams2({ type: 'Set', value: teams.filter(t => t.name !== team.name) });
         }
     };

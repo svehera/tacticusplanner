@@ -19,7 +19,9 @@ export const usePwaInstall = () => {
 
         try {
             // @ts-expect-error window.navigator.standalone is available only in Safari
-            setIsInstalled(window.matchMedia('(display-mode: standalone)').matches || !!window.navigator.standalone);
+            setIsInstalled(
+                globalThis.matchMedia('(display-mode: standalone)').matches || !!globalThis.navigator.standalone
+            );
         } catch (error) {
             console.log(error);
         }
