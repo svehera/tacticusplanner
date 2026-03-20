@@ -25,6 +25,9 @@ interface Props {
 /** Renders the body of an UpgradeRank goal card, showing rank range, upgrade rarities, and energy/XP estimates. */
 export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, calendarDate, bookRarity }) => {
     const { xpEstimate } = goalEstimate;
+    const xpIncomeNotSet =
+        goalEstimate.xpDaysLeft === undefined &&
+        (goalEstimate.xpBooksApplied ?? 0) < (goalEstimate.xpBooksRequired ?? 0);
 
     return (
         <div className="flex flex-col gap-2">
@@ -56,16 +59,12 @@ export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, calen
                 <div className="flex-box wrap gap-2">
                     <AccessibleTooltip
                         title={
-                            goalEstimate.xpDaysLeft === undefined
-                                ? 'XP Income not set / No XP needed for this goal'
-                                : `${Math.ceil(goalEstimate.xpDaysLeft)} days. Estimated date ${getEstimatedDate(goalEstimate.xpDaysLeft)}`
+                            xpIncomeNotSet
+                                ? 'XP Income not set'
+                                : `${Math.ceil(goalEstimate.xpDaysLeft ?? 0)} days. Estimated date ${getEstimatedDate(goalEstimate.xpDaysLeft ?? 0)}`
                         }>
                         <div className="flex-box gap-[3px]">
-                            <CalendarMonthIcon
-                                sx={{
-                                    color: goalEstimate.xpDaysLeft === undefined ? 'error.main' : 'inherit',
-                                }}
-                            />
+                            <CalendarMonthIcon className={xpIncomeNotSet ? 'text-danger' : ''} />
                             {Math.ceil(goalEstimate.xpDaysLeft ?? 0)}
                         </div>
                     </AccessibleTooltip>
@@ -79,7 +78,7 @@ export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, calen
                 </div>
             )}
 
-            {goalEstimate.xpDaysLeft === undefined && xpEstimate && <XpTotal {...xpEstimate} />}
+            {xpIncomeNotSet && xpEstimate && <XpTotal {...xpEstimate} />}
         </div>
     );
 };

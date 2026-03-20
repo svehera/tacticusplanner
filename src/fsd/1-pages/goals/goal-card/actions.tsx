@@ -11,19 +11,20 @@ interface Props {
     menuItemSelect?: (item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => void;
 }
 
+/** Renders the action buttons and status indicators (completion, blocked) for a goal card. */
 export const GoalCardActions: React.FC<Props> = ({ goalEstimate, menuItemSelect }) => (
     <div className="flex items-center">
         {!!goalEstimate.completed && !goalEstimate.blocked && (
             <AccessibleTooltip title="Goal is completed in current estimation.">
                 <span className="flex-box gap-[3px]" tabIndex={0}>
-                    <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                    <CheckCircle fontSize="small" className="text-success" />
                 </span>
             </AccessibleTooltip>
         )}
         {!!goalEstimate.blocked && (
             <AccessibleTooltip title="Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.">
                 <span className="flex-box gap-[3px]" tabIndex={0}>
-                    <Block fontSize="small" sx={{ color: 'error.main' }} />
+                    <Block fontSize="small" className="text-danger" />
                 </span>
             </AccessibleTooltip>
         )}

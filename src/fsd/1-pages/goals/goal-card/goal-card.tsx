@@ -94,18 +94,10 @@ export const GoalCard: React.FC<Props> = ({
     return (
         <Card
             variant="outlined"
-            className={isGoalCompleted ? 'bg-(--success)!' : ''}
-            sx={{
-                width: 350,
-                minHeight: 200,
-                display: 'flex',
-                flexDirection: 'column',
-                background: bgColor,
-            }}>
+            className={`flex min-h-[200px] w-[350px] flex-col ${isGoalCompleted ? 'bg-(--success)!' : ''}`}
+            style={{ background: bgColor }}>
             {/* Header: 3-column grid — [icon + #n] | name+date | actions */}
-            <div
-                className="grid px-3 pt-3 pb-2"
-                style={{ gridTemplateColumns: 'auto 1fr auto', gap: '0 8px', minHeight: 83 }}>
+            <div className="grid min-h-[83px] grid-cols-[auto_1fr_auto] gap-x-2 gap-y-0 px-3 pt-3 pb-2">
                 <div className="flex items-center gap-1 self-start">
                     <span className="text-[1.4rem] leading-none font-medium">#{goal.priority}</span>
                     <UnitShardIcon icon={goal.unitRoundIcon} height={40} />
@@ -118,14 +110,14 @@ export const GoalCard: React.FC<Props> = ({
                     <GoalCardActions goalEstimate={goalEstimate} menuItemSelect={menuItemSelect} />
                 </div>
             </div>
-            <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', pt: 1, '&:last-child': { pb: 2 } }}>
+            <CardContent className="flex flex-1 flex-col pt-2 pb-3!">
                 <div className="flex-1">
                     {renderBody()}
                     {goal.notes && <p className="mt-2 text-sm opacity-70">{goal.notes}</p>}
                 </div>
                 {hasFooter && (
                     <>
-                        <Divider sx={{ mt: 1.5, mb: 1 }} />
+                        <Divider className="mt-3! mb-2!" />
                         <div className="flex items-center justify-between gap-2">
                             {onToggleInclude && (
                                 <Button
