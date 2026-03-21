@@ -810,15 +810,11 @@ export class TokenEstimationService {
         }
         const totalPoints = progress.syncedProgress.currentPoints;
         const currentCurrency = progress.syncedProgress.currentCurrency;
-        let totalCurrency = 0;
         let currentShards = progress.syncedProgress.currentShards;
         const lastClaimedChestIndex = progress.syncedProgress.currentClaimedChestIndex;
 
         // Determine the total currency, since forced progress only gives us the current incremental currency.
-        totalCurrency =
-            lastClaimedChestIndex >= 0 && lastClaimedChestIndex < chestMilestones.length
-                ? chestMilestones[lastClaimedChestIndex].totalNeededCurrency + currentCurrency
-                : currentCurrency;
+        const totalCurrency = currentCurrency + (chestMilestones[lastClaimedChestIndex]?.totalNeededCurrency ?? 0);
 
         // Determine if we hit any new ascension milestones.
         let starIndex = 0;
