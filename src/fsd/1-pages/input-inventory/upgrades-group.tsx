@@ -10,7 +10,7 @@ interface Props {
     dataUpdate: (upgradeId: string, value: number) => void;
 }
 
-const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, dataUpdate }) => {
+export const UpgradesGroup: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, dataUpdate }) => {
     return (
         <section>
             <article>
@@ -97,5 +97,3 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
         </section>
     );
 };
-
-export const UpgradesGroup = React.memo(UpgradesGroupFn);

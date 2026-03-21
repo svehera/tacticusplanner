@@ -32,11 +32,15 @@ interface Props {
     deleteTeam: (teamId: string) => void;
 }
 
+const getRowStyle = (params: RowClassParams): RowStyle => {
+    return params.node.rowIndex && params.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
+};
+
 export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoals, editTeam, deleteTeam, track }) => {
     const { viewPreferences } = useContext(StoreContext);
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
-    const defaultColumnDef: ColDef<ITableRow> = {
+    const defaultColumnDefinition: ColDef<ITableRow> = {
         headerClass: 'center-header-text',
         resizable: true,
         sortable: false,
@@ -70,10 +74,10 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
             });
 
             let result = 1;
-            let currTeamId = teamIds.shift();
-            while (currTeamId && currTeamId === teamIds[0]) {
+            let currentTeamId = teamIds.shift();
+            while (currentTeamId && currentTeamId === teamIds[0]) {
                 result++;
-                currTeamId = teamIds.shift();
+                currentTeamId = teamIds.shift();
             }
 
             return result;
@@ -105,12 +109,8 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
     };
 
     useEffect(() => {
-        gridRef.current?.api?.sizeColumnsToFit();
+        gridReference.current?.api?.sizeColumnsToFit();
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, viewPreferences.hideCompleted]);
-
-    const getRowStyle = (params: RowClassParams): RowStyle => {
-        return params.node.rowIndex && params.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
-    };
 
     return (
         <div
@@ -119,14 +119,14 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}
-                ref={gridRef}
+                ref={gridReference}
                 rowData={rows}
                 rowHeight={35}
                 getRowStyle={getRowStyle}
-                defaultColDef={defaultColumnDef}
+                defaultColDef={defaultColumnDefinition}
                 columnDefs={columnsDefs}
                 onCellClicked={handleCellCLick}
-                onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
+                onGridReady={useFitGridOnWindowResize(gridReference)}></AgGridReact>
         </div>
     );
 };

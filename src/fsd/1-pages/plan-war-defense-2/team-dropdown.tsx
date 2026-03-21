@@ -27,12 +27,12 @@ export const TeamDropdown: React.FC<Props> = ({
     selectedTeamName,
     onSelect,
 }) => {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
 
-    const open = Boolean(anchorEl);
+    const open = Boolean(anchorElement);
 
-    const handleOpen = (e: React.MouseEvent<HTMLElement>) => setAnchorEl(e.currentTarget);
-    const handleClose = () => setAnchorEl(null);
+    const handleOpen = (event: React.MouseEvent<HTMLElement>) => setAnchorElement(event.currentTarget);
+    const handleClose = () => setAnchorElement(null);
 
     const handleSelect = (teamName: string) => {
         onSelect(teamName);
@@ -93,7 +93,7 @@ export const TeamDropdown: React.FC<Props> = ({
             <Button variant="text" onClick={handleOpen}>
                 {selectedTeamName ?? 'SELECT A TEAM'}
             </Button>
-            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+            <Menu anchorEl={anchorElement} open={open} onClose={handleClose}>
                 <MenuItem
                     onClick={() => {
                         onSelect(undefined as unknown as string);

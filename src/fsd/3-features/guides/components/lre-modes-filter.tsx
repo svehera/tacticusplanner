@@ -38,7 +38,7 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
         }
 
         switch (section) {
-            case '_alpha':
+            case '_alpha': {
                 return [
                     ...lre.alpha.unitsRestrictions.map((r, index) => ({
                         value: legendaryEvent + '_alpha_' + index,
@@ -46,7 +46,8 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
                         selected: false,
                     })),
                 ];
-            case '_beta':
+            }
+            case '_beta': {
                 return [
                     ...lre.beta.unitsRestrictions.map((r, index) => ({
                         value: legendaryEvent + '_beta_' + index,
@@ -54,8 +55,9 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
                         selected: false,
                     })),
                 ];
+            }
 
-            case '_gamma':
+            case '_gamma': {
                 return [
                     ...lre.gamma.unitsRestrictions.map((r, index) => ({
                         value: legendaryEvent + '_gamma_' + index,
@@ -63,9 +65,11 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
                         selected: false,
                     })),
                 ];
+            }
 
-            default:
+            default: {
                 return [];
+            }
         }
     }, [section, legendaryEvent]);
 
@@ -97,7 +101,7 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
 
     const handleTrackChange = (value: string[]) => {
         setTracks(value);
-        if (value.length) {
+        if (value.length > 0) {
             updateSelection(value);
         } else {
             updateSelection([legendaryEvent + section]);

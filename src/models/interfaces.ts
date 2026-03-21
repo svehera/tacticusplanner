@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 
 import { GameModeTokensAction } from '@/reducers/game-mode-tokens-reducer';
+import { GuildAction } from '@/reducers/guild-reducer';
+import { GuildWarAction } from '@/reducers/guild-war-reducer';
 import { LeSettingsAction } from '@/reducers/le-settings.reducer';
 import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
 import { Teams2Action } from '@/reducers/teams2.reducer';
 import { WarDefense2Action } from '@/reducers/war-defense2.reducer';
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
 import { XpUseAction } from '@/reducers/xp-use-reducer';
-import { GuildAction } from 'src/reducers/guildReducer';
-import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { MowsAction } from 'src/reducers/mows.reducer';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 
@@ -24,7 +24,7 @@ import {
 } from '@/fsd/4-entities/campaign';
 import { CharacterBias, ICharacter2 } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
-import { IMow, IMow2, IMowDb } from '@/fsd/4-entities/mow';
+import { IMow, IMow2, IMowDatabase } from '@/fsd/4-entities/mow';
 
 import { IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
 import { IGWLayout, IGWTeam } from '@/fsd/3-features/guild-war/guild-war.models';
@@ -44,7 +44,7 @@ import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.redu
 import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
 import { CharactersAction } from '../reducers/characters.reducer';
 import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
-import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
+import { DailyRaidsAction } from '../reducers/daily-raids.reducer';
 import { GoalsAction } from '../reducers/goals.reducer';
 import { InventoryAction } from '../reducers/inventory.reducer';
 import { LeProgressAction } from '../reducers/le-progress.reducer';
@@ -147,7 +147,7 @@ export interface IPersonalData2 {
     dailyRaidsPreferences: IDailyRaidsPreferences;
     selectedTeamOrder: ISelectedTeamsOrdering;
     characters: Partial<IPersonalCharacterData2>[];
-    mows: IMowDb[];
+    mows: IMowDatabase[];
     goals: IPersonalGoal[];
     teams: IPersonalTeam[];
     teams2: ITeam2[];

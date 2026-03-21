@@ -26,7 +26,7 @@ interface Props {
     showPreviousUnit?: () => void;
 }
 
-const CharacterItemDialogFn: React.FC<Props> = props => {
+export const CharacterItemDialog: React.FC<Props> = props => {
     const { viewPreferences } = useContext(StoreContext);
     const [character, setCharacter] = useState(() => ({ ...props.character }));
     const [inventoryUpdate, setInventoryUpdate] = useState<IUpgradeRecipe[]>([]);
@@ -34,7 +34,7 @@ const CharacterItemDialogFn: React.FC<Props> = props => {
     const dispatch = useContext(DispatchContext);
     const saveChanges = () => {
         dispatch.characters({ type: 'Update', character });
-        if (inventoryUpdate.length) {
+        if (inventoryUpdate.length > 0) {
             dispatch.inventory({
                 type: 'DecrementUpgradeQuantity',
                 upgrades: inventoryUpdate.map(x => ({ id: x.id, count: x.count })),
@@ -114,5 +114,3 @@ const CharacterItemDialogFn: React.FC<Props> = props => {
         </Dialog>
     );
 };
-
-export const CharacterItemDialog = React.memo(CharacterItemDialogFn);

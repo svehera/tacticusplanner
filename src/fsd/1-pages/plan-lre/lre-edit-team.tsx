@@ -54,10 +54,10 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
         if (selectedTeam.includes(character) || selectedTeam.length === 5) {
             return;
         }
-        setSelectedTeam(curr => [...curr, character]);
+        setSelectedTeam(current => [...current, character]);
     };
     const removeCharacter = (character: ICharacter2) => {
-        setSelectedTeam(curr => curr.filter(c => c.id !== character.id));
+        setSelectedTeam(current => current.filter(c => c.id !== character.id));
     };
 
     const clearAll = () => {
@@ -71,8 +71,8 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
     const isValid = () => {
         const availableCharacters = gridTeam.map(x => x.id);
         return (
-            selectedTeam.length !== 0 &&
-            !!teamName.length &&
+            selectedTeam.length > 0 &&
+            teamName.length > 0 &&
             selectedTeam.every(character => availableCharacters.includes(character.id))
         );
     };
@@ -136,18 +136,18 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                     ))}
                 </div>
 
-                <div className="flex-box full-width wrap start space-between">
+                <div className="flex-box full-width wrap space-between start">
                     <div className="min-w-[400px]">
                         <div className="flex-box gap20 space-between">
                             <h3>Selected Team ({selectedTeam.length}/5)</h3>
-                            {!!selectedTeam.length && (
+                            {selectedTeam.length > 0 && (
                                 <Button variant="text" onClick={clearAll}>
                                     Clear all
                                 </Button>
                             )}
                         </div>
-                        <div className="flex-box column start pointer gap-[3px]">
-                            {selectedTeam.length ? (
+                        <div className="flex-box column pointer start gap-[3px]">
+                            {selectedTeam.length > 0 ? (
                                 selectedTeam.map(character => (
                                     <div
                                         key={character.id}

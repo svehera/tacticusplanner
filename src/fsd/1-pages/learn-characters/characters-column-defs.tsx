@@ -17,30 +17,36 @@ import { RarityIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 import { ICharacter2, CharacterTitle } from '@/fsd/4-entities/character';
 import { StatCell, DamageCell, StatsCalculatorService } from '@/fsd/4-entities/unit';
 
+const resolveEquipment = (equipment: string | undefined): string => {
+    if (!equipment) {
+        return 'None';
+    }
+    switch (equipment) {
+        case 'I_Crit': {
+            return 'Crit';
+        }
+        case 'I_Block': {
+            return 'Block';
+        }
+        case 'I_Booster_Crit': {
+            return 'Crit Booster';
+        }
+        case 'I_Booster_Block': {
+            return 'Block Booster';
+        }
+        case 'I_Defensive': {
+            return 'Defensive';
+        }
+        default: {
+            return equipment;
+        }
+    }
+};
+
 export const useCharacters = () => {
     const [targetRarity, setTargetRarity] = useState<Rarity>(Rarity.Legendary);
     const [targetStars, setTargetStars] = useState<RarityStars>(RarityStars.MythicWings);
     const [targetRank, setTargetRank] = useState<Rank>(Rank.Adamantine1);
-
-    const resolveEquipment = (equipment: string | undefined): string => {
-        if (!equipment) {
-            return 'None';
-        }
-        switch (equipment) {
-            case 'I_Crit':
-                return 'Crit';
-            case 'I_Block':
-                return 'Block';
-            case 'I_Booster_Crit':
-                return 'Crit Booster';
-            case 'I_Booster_Block':
-                return 'Block Booster';
-            case 'I_Defensive':
-                return 'Defensive';
-            default:
-                return equipment;
-        }
-    };
 
     const minStarsMap: Map<Rarity, RarityStars> = new Map([
         [Rarity.Common, RarityStars.None],

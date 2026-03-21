@@ -60,7 +60,7 @@ export const IncursionModes: React.FC<Props> = ({ selectedModes, updateSelection
                     minWidth={150}
                 />
             </div>
-            {!!allowedUnits.length && <span>Available characters - {allowedUnits.length}</span>}
+            {allowedUnits.length > 0 && <span>Available characters - {allowedUnits.length}</span>}
         </>
     );
 };

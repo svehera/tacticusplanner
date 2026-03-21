@@ -5,7 +5,7 @@ import { getImageUrl } from 'src/shared-logic/functions';
 import { RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
-import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import { ICharacterData } from '@/fsd/4-entities/character';
 import { IEquipment } from '@/fsd/4-entities/equipment/model';
@@ -323,14 +323,14 @@ export const RosterSnapshotCharacter = ({
         return <CircularBadge val={level} x={centerX} y={yPos} />;
     };
 
-    const getStarSrc = () => (Array.isArray(starIcon) ? starIcon[0]?.src : starIcon) ?? '';
+    const getStarUrl = () => (Array.isArray(starIcon) ? starIcon[0]?.src : starIcon) ?? '';
 
     const grayscaleClass = (isDisabled ?? false) ? 'grayscale' : '';
 
     const renderWings = () => {
         return (
             <img
-                src={getStarSrc()}
+                src={getStarUrl()}
                 className={`absolute ${grayscaleClass}`}
                 style={{ left: 3, top: 2, width: 90, height: starSize, zIndex: 11 }}
             />
@@ -345,7 +345,7 @@ export const RosterSnapshotCharacter = ({
             return (
                 <img
                     key={`char-star-${index}`}
-                    src={getStarSrc()}
+                    src={getStarUrl()}
                     className="absolute"
                     style={{
                         left: startX + index * blueStarWidth - overlap * index,
@@ -387,7 +387,7 @@ export const RosterSnapshotCharacter = ({
             return (
                 <img
                     key={`char-star-${index}`}
-                    src={getStarSrc()}
+                    src={getStarUrl()}
                     className="absolute"
                     style={{
                         left: startX + offset,

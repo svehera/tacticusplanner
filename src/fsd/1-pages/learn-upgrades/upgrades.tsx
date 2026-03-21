@@ -35,9 +35,19 @@ interface IUpgradesTableRow {
     craftable: boolean;
 }
 
+/**
+ * @returns If the material is a craftable upgrade, returns all the unique
+ * materials needed to craft it. Otherwise just returns the material.
+ */
+const expandMaterial = (material: string): string[] => {
+    const upgrade = UpgradesService.recipeExpandedUpgradeData[material];
+    if (!upgrade) return [material];
+    return Object.keys(upgrade.expandedRecipe);
+};
+
 export const Upgrades = () => {
     const selectionOptions: Selection[] = ['Base Upgrades', 'Craftable'];
-    const gridRef = useRef<AgGridReact<IUpgradesTableRow>>(null);
+    const gridReference = useRef<AgGridReact<IUpgradesTableRow>>(null);
 
     const [nameFilter, setNameFilter] = useState<string>('');
     const [showCharacters, setShowCharacters] = useState<boolean>(false);
@@ -184,16 +194,6 @@ export const Upgrades = () => {
         }
     }, [selection, showCharacters]);
 
-    /**
-     * @returns If the material is a craftable upgrade, returns all the unique
-     * materials needed to craft it. Otherwise just returns the material.
-     */
-    const expandMaterial = (material: string): string[] => {
-        const upgrade = UpgradesService.recipeExpandedUpgradeData[material];
-        if (!upgrade) return [material];
-        return Object.keys(upgrade.expandedRecipe);
-    };
-
     const rowsData = useMemo(() => {
         const upgradesLocations = CampaignsService.getUpgradesLocations();
         const upgrades = Object.values(UpgradesService.recipeDataByName);
@@ -329,14 +329,14 @@ export const Upgrades = () => {
             <div className="ag-theme-material h-[calc(100vh-220px)] w-full">
                 <AgGridReact
                     key={selection}
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
-                    onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
+                    onGridReady={useFitGridOnWindowResize(gridReference)}></AgGridReact>
             </div>
         </div>
     );

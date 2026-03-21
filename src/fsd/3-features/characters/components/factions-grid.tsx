@@ -1,10 +1,8 @@
-﻿import React from 'react';
-
-import { IFaction, IUnit } from '../characters.models';
+﻿import { IFaction, IUnit } from '../characters.models';
 
 import { FactionsTile } from './faction-tile';
 
-const FactionsGridFn = ({
+export const FactionsGrid = ({
     factions,
     onCharacterClick,
 }: {
@@ -19,5 +17,3 @@ const FactionsGridFn = ({
         </div>
     );
 };
-
-export const FactionsGrid = React.memo(FactionsGridFn);

@@ -76,10 +76,10 @@ export const UnitsAutocomplete = <T extends IUnit>({
             open={openAutocomplete}
             onFocus={() => handleAutocompleteChange(true)}
             onBlur={() => handleAutocompleteChange(false)}
-            filterOptions={(opts, state) => {
+            filterOptions={(filterOptions, state) => {
                 const q = state.inputValue?.toLowerCase?.().trim() ?? '';
-                if (!q) return opts;
-                return opts.filter(x => {
+                if (!q) return filterOptions;
+                return filterOptions.filter(x => {
                     const short = 'shortName' in x ? ((x as any).shortName?.toLowerCase?.() ?? '') : '';
                     const normal = x.name?.toLowerCase?.() ?? '';
                     const full = 'fullName' in x ? (x.fullName?.toLowerCase?.() ?? '') : '';

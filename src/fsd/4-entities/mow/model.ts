@@ -50,7 +50,7 @@ export interface IMowsAndUpgradeCosts {
     upgradeCosts: IMowUpgradeCosts[];
 }
 
-export interface IMowDb {
+export interface IMowDatabase {
     id: string;
     unlocked: boolean;
     rarity: Rarity;
@@ -61,13 +61,13 @@ export interface IMowDb {
     mythicShards: number;
 }
 
-export interface IMow extends IMowStatic, IMowDb, DynamicProps {
+export interface IMow extends IMowStatic, IMowDatabase, DynamicProps {
     portraitIcon: string;
     badgeIcon: string;
     unitType: UnitType.mow;
 }
 
-export interface IMow2 extends IMowStatic2, IMowDb, DynamicProps {
+export interface IMow2 extends IMowStatic2, IMowDatabase, DynamicProps {
     unitType: UnitType.mow;
 }
 

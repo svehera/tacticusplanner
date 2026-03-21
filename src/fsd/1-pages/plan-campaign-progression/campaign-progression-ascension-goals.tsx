@@ -21,7 +21,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
         const filtered: Array<ICharacterAscendGoal | ICharacterUnlockGoal> = goals.filter(
             goal => goal.goalId == goalId
         );
-        if (filtered.length == 0) return undefined;
+        if (filtered.length === 0) return undefined;
         if (filtered.length > 1) {
             console.warn('multiple goals with ID ' + goalId + ' found.');
         }

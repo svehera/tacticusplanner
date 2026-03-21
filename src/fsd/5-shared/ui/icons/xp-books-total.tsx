@@ -25,9 +25,9 @@ export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
             [Rarity.Mythic]: 0,
         };
         let remaining = xp;
-        for (let i = 0; i < XP_BOOK_ORDER.length; i++) {
-            const rarity = XP_BOOK_ORDER[i];
-            const isLast = i === XP_BOOK_ORDER.length - 1;
+        for (let index = 0; index < XP_BOOK_ORDER.length; index++) {
+            const rarity = XP_BOOK_ORDER[index];
+            const isLast = index === XP_BOOK_ORDER.length - 1;
             books[rarity] = isLast
                 ? Math.ceil(remaining / XP_BOOK_VALUE[rarity])
                 : Math.floor(remaining / XP_BOOK_VALUE[rarity]);

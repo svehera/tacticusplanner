@@ -1,4 +1,4 @@
-import { BadgeRewards } from './BadgeRewards';
+import { BadgeRewards } from './badge-rewards';
 import type { OnslaughtBadgeAlliance, OnslaughtKillzone } from './types';
 
 export function KillzoneList({

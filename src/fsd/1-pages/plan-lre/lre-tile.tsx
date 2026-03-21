@@ -72,11 +72,11 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
         });
         // Just in case a tactician has a stale goal lying around, make sure we
         // don't display a rank lower than the current character's rank.
-        const ret = Math.max(
+        const returnValue = Math.max(
             character.rank,
             Math.min(maxCommonRank, maxUncommonRank, maxRareRank, maxEpicRank, maxLegendaryRank)
         );
-        return ret;
+        return returnValue;
     }, [viewPreferences, upgradeRankOrMowGoals, character]);
 
     // Determine the rarity icon to display based on the goal rank and current
