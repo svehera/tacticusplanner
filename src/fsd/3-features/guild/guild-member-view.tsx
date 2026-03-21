@@ -19,7 +19,7 @@ export const GuildMemberView: React.FC<Props> = ({ index, member }) => {
     const hasInGameInfo = member.inGameName && member.userId;
 
     return (
-        <FlexBox gap={5} style={{ minWidth: !isMobile ? 450 : 'unset' }}>
+        <FlexBox gap={5} style={{ minWidth: isMobile ? 'unset' : 450 }}>
             <span>{index + 1}.</span>
             {hasShareLink && (
                 <IconButton

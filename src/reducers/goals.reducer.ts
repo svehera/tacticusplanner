@@ -52,13 +52,13 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             return state;
         }
         case 'Add': {
-            if (state.find(x => x.id === action.goal.id)) {
+            if (state.some(x => x.id === action.goal.id)) {
                 return state;
             }
             state.splice(action.goal.priority - 1, 0, action.goal);
-            state.forEach((x, index) => {
+            for (const [index, x] of state.entries()) {
                 x.priority = index + 1;
-            });
+            }
             return [...state];
         }
         case 'Delete': {
@@ -71,7 +71,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const updatedGoal = action.goal;
             const existingGoalIndex = state.findIndex(x => x.id === updatedGoal.goalId);
 
-            if (existingGoalIndex < 0) {
+            if (existingGoalIndex === -1) {
                 return state;
             }
 

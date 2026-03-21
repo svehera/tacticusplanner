@@ -2,15 +2,15 @@
     let backgroundColor: string;
     if (value <= 5 && value > 4.5) {
         backgroundColor = '#01BE64';
-    } else if (value >= 4.0) {
+    } else if (value >= 4) {
         backgroundColor = '#7ED857';
     } else if (value >= 3.5) {
         backgroundColor = '#CBFC80';
-    } else if (value >= 3.0) {
+    } else if (value >= 3) {
         backgroundColor = '#F1D153';
     } else if (value >= 2.5) {
         backgroundColor = '#FFBD59';
-    } else if (value >= 2.0) {
+    } else if (value >= 2) {
         backgroundColor = '#FE904E';
     } else if (value >= 1.5) {
         backgroundColor = '#F05152';

@@ -23,7 +23,7 @@ const updateTokenState =
     (setText: React.Dispatch<React.SetStateAction<string>>, setValue: React.Dispatch<React.SetStateAction<number>>) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
         const raw = event.target.value;
-        const value = parseInt(raw.trim(), 10);
+        const value = Number.parseInt(raw.trim(), 10);
         setText(raw);
         if (!Number.isNaN(value) && value >= 0) {
             setValue(value);
@@ -143,10 +143,12 @@ export const HomeScreenEventPlanner = () => {
                         {[OnslaughtTrackId.Imperial, OnslaughtTrackId.Xenos, OnslaughtTrackId.Chaos].map(rawTrack => {
                             const track: OnslaughtTrackId = rawTrack as OnslaughtTrackId;
                             const trackData = onslaughtData[track];
-                            const availableSectors = Object.keys(trackData.sectors).map(key => parseInt(key, 10));
+                            const availableSectors = Object.keys(trackData.sectors).map(key =>
+                                Number.parseInt(key, 10)
+                            );
                             const currentSector = selections[track].sector;
                             const availableZones = Object.keys(trackData.sectors[currentSector].killzones).map(key =>
-                                parseInt(key, 10)
+                                Number.parseInt(key, 10)
                             );
 
                             return (
@@ -165,7 +167,7 @@ export const HomeScreenEventPlanner = () => {
                                             filterOptions={(options, { inputValue }) => {
                                                 const search = inputValue.toLowerCase().replace('sector ', '').trim();
                                                 const searchAsNumberFromRoman = romanToNumber(search.toUpperCase()) - 1;
-                                                const searchAsDirectNumber = parseInt(search, 10) - 1;
+                                                const searchAsDirectNumber = Number.parseInt(search, 10) - 1;
 
                                                 return options.filter(opt => {
                                                     const romanString = numberToRoman(opt + 1).toLowerCase();
@@ -192,7 +194,7 @@ export const HomeScreenEventPlanner = () => {
                                                 const greekIndex = GREEK_ZONES.findIndex(
                                                     g => g.toLowerCase() === search
                                                 );
-                                                const directIndex = parseInt(search, 10) - 1;
+                                                const directIndex = Number.parseInt(search, 10) - 1;
 
                                                 return options.filter(opt => {
                                                     const name = GREEK_ZONES[opt]?.toLowerCase() || '';

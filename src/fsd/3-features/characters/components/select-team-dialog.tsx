@@ -148,7 +148,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
                     value={{
                         ...charactersViewContext,
                         getOpacity: character =>
-                            lineup.some(x => x.id === character.id) || blockedCharacters.some(x => x === character.name)
+                            lineup.some(x => x.id === character.id) || blockedCharacters.includes(character.name)
                                 ? 0.5
                                 : 1,
                     }}>

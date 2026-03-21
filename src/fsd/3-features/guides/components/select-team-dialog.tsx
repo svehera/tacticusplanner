@@ -144,9 +144,9 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
             const typeFiltered: IUnit[] =
                 editSlotData.slotNumber === 6 ? units.filter(isMow) : units.filter(isCharacter);
 
-            const nameFiltered = !quickFilter
-                ? typeFiltered
-                : typeFiltered.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()));
+            const nameFiltered = quickFilter
+                ? typeFiltered.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()))
+                : typeFiltered;
 
             switch (filterByVariable) {
                 case 'xenos': {

@@ -12,7 +12,11 @@ import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 function isValidLreDate(date: unknown): date is string {
     return (
-        date !== null && typeof date === 'string' && date !== 'TBA' && date !== '' && !isNaN(new Date(date).getTime())
+        date !== null &&
+        typeof date === 'string' &&
+        date !== 'TBA' &&
+        date !== '' &&
+        !Number.isNaN(new Date(date).getTime())
     );
 }
 

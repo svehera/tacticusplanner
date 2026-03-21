@@ -61,8 +61,8 @@ export const LegendaryEvent = ({
                 const character = resolvedCharacters.find(x => x.snowprintId === id);
                 if (!character) {
                     console.warn(
-                        'unknown character. if you have imported teams from a pre-mythic ',
-                        'instance of the planner, please remove the unit from the team and ',
+                        'unknown character. if you have imported teams from a pre-mythic',
+                        'instance of the planner, please remove the unit from the team and',
                         'add it back.',
                         id,
                         character

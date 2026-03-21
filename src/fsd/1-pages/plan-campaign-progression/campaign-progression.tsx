@@ -168,11 +168,11 @@ export const CampaignProgression = () => {
      */
     function getCampaignProgress(campaign: string): any {
         let returnValue = <>Completed</>;
-        Object.entries(campaignsProgress).forEach(([key, value]) => {
+        for (const [key, value] of Object.entries(campaignsProgress)) {
             if (key == campaign) {
                 returnValue = <div>Last Completed Battle: {value}</div>;
             }
-        });
+        }
         return returnValue;
     }
 

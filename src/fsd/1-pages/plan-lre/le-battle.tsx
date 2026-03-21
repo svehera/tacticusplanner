@@ -24,14 +24,14 @@ interface WaveDisplayProps {
 // Extracted Logic: Resolve string to data object
 const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
     const colon = enemyString.indexOf(':');
-    const id = colon !== -1 ? enemyString.substring(0, colon) : enemyString;
+    const id = colon === -1 ? enemyString : enemyString.slice(0, Math.max(0, colon));
 
     // Calculate index
     let progressionIndex = 0;
     if (colon !== -1) {
-        const pString = enemyString.substring(colon + 1);
-        const pInt = parseInt(pString, 10);
-        progressionIndex = isNaN(pInt) ? 0 : pInt;
+        const pString = enemyString.slice(Math.max(0, colon + 1));
+        const pInt = Number.parseInt(pString, 10);
+        progressionIndex = Number.isNaN(pInt) ? 0 : pInt;
     }
 
     // Adjust for 0-based array (Your logic used -1, keeping that consistency)

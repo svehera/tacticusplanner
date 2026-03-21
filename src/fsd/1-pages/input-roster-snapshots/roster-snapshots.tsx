@@ -136,12 +136,12 @@ function getDisplay(
     const baseChars = base.chars;
     const compareChars = compare.chars;
 
-    compareChars.forEach(compareChar => {
+    for (const compareChar of compareChars) {
         const baseChar = baseChars.find(c => c.id === compareChar.id);
         const diffChar = diff.charDiffs.find(c => c.id === compareChar.id);
         const fullChar = chars.find(c => c.snowprintId === compareChar.id);
 
-        if (fullChar === undefined) return;
+        if (fullChar === undefined) continue;
 
         if (diffChar !== undefined && baseChar !== undefined) {
             const beforeChar = {
@@ -181,17 +181,17 @@ function getDisplay(
             const power = CharactersPowerService.getCharacterPower({ ...fullChar, ...compareChar, id: fullChar.id });
             nonDiffChars.push({ ...fullChar, ...compareChar, power });
         }
-    });
+    }
 
     const baseMows = base.mows;
     const compareMows = compare.mows;
 
-    compareMows.forEach(compareMow => {
+    for (const compareMow of compareMows) {
         const baseMow = baseMows.find(m => m.id === compareMow.id);
         const diffMow = diff.mowDiffs.find(m => m.id === compareMow.id);
         const fullMow = mows.find(m => m.snowprintId === compareMow.id);
 
-        if (!fullMow) return;
+        if (!fullMow) continue;
 
         if (diffMow && baseMow) {
             const beforeMow = { ...fullMow, ...baseMow, id: fullMow.id };
@@ -210,7 +210,7 @@ function getDisplay(
             const power = CharactersPowerService.getCharacterPower({ ...fullMow, ...compareMow });
             nonDiffMows.push({ ...fullMow, ...compareMow, power });
         }
-    });
+    }
 
     const diffUnits = orderBy([...diffChars, ...diffMows], 'powerDiff', 'desc');
     const nonDiffUnits = orderBy([...nonDiffChars, ...nonDiffMows], 'power', 'desc');
@@ -409,17 +409,17 @@ export const RosterSnapshots = () => {
             }
             const resolved: IRosterSnapshot[] = [];
             resolved.push(rosterSnapshots.base);
-            rosterSnapshots.diffs.forEach(diff => {
+            for (const diff of rosterSnapshots.diffs) {
                 resolved.push(RosterSnapshotsService.resolveSnapshotDiff(resolved[resolved.length - 1], diff));
-            });
+            }
             resolved.push(snapshot);
 
             const newSnapshots: IRosterSnapshotsState = {
                 base: resolved[0],
                 diffs: [],
             };
-            resolved.forEach((snap, index) => {
-                if (index == 0) return;
+            for (const [index, snap] of resolved.entries()) {
+                if (index == 0) continue;
                 newSnapshots.diffs.push(
                     RosterSnapshotsService.diffSnapshots(
                         resolved[index - 1],
@@ -430,7 +430,7 @@ export const RosterSnapshots = () => {
                         /*diffEquipment=*/ true
                     )
                 );
-            });
+            }
             if (newSnapshots.diffs.length > RosterSnapshotsService.MAX_SNAPSHOTS - 1) {
                 newSnapshots.diffs.splice(0, newSnapshots.diffs.length - (RosterSnapshotsService.MAX_SNAPSHOTS - 1));
             }
@@ -470,9 +470,9 @@ export const RosterSnapshots = () => {
         if (state.base) {
             state.base.deletedDateMillisUtc = timeMillis;
         }
-        state.diffs.forEach(diff => {
+        for (const diff of state.diffs) {
             diff.deletedDateMillisUtc = timeMillis;
-        });
+        }
 
         dispatch.rosterSnapshots({
             type: 'Set',
@@ -515,19 +515,19 @@ export const RosterSnapshots = () => {
         if (current.deletedDateMillisUtc === undefined) {
             snapshots.push(current);
         }
-        rosterSnapshots.diffs.forEach(diff => {
+        for (const diff of rosterSnapshots.diffs) {
             current = RosterSnapshotsService.resolveSnapshotDiff(current, diff);
             if (current.deletedDateMillisUtc === undefined) {
                 snapshots.push(current);
             }
-        });
+        }
 
         const state: IRosterSnapshotsState = {
             base: snapshots.length > 0 ? snapshots[0] : undefined,
             diffs: [],
         };
-        snapshots.forEach((snap, index) => {
-            if (index == 0) return;
+        for (const [index, snap] of snapshots.entries()) {
+            if (index == 0) continue;
             state.diffs.push(
                 RosterSnapshotsService.diffSnapshots(
                     snapshots[index - 1],
@@ -538,7 +538,7 @@ export const RosterSnapshots = () => {
                     /*diffEquipment=*/ true
                 )
             );
-        });
+        }
         dispatch.rosterSnapshots({ type: 'Set', value: state });
     };
 
@@ -695,7 +695,7 @@ export const RosterSnapshots = () => {
                             value={leftIndex}
                             className="rounded border bg-gray-700 p-1"
                             onChange={event => {
-                                const newLeftIndex = parseInt(event.target.value, 10);
+                                const newLeftIndex = Number.parseInt(event.target.value, 10);
                                 setLeftIndex(newLeftIndex);
                                 if (rightIndex <= newLeftIndex) {
                                     setRightIndex(newLeftIndex + 1);
@@ -717,7 +717,7 @@ export const RosterSnapshots = () => {
                             value={rightIndex}
                             className="rounded border bg-gray-700 p-1"
                             onChange={event => {
-                                setRightIndex(parseInt(event.target.value, 10));
+                                setRightIndex(Number.parseInt(event.target.value, 10));
                             }}>
                             {liveSnapshotIndices
                                 .filter((_, index) => index > leftIndex)

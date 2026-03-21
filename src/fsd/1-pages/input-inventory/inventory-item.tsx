@@ -19,7 +19,7 @@ export const InventoryItem: React.FC<Props> = ({ data, showIncDec, dataUpdate })
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, upgradeId: string) => {
         const value = event.target.value === '' ? 0 : Number(event.target.value);
-        const result = value > 1000 ? 1000 : value;
+        const result = Math.min(value, 1000);
         dataUpdate(upgradeId, result);
         setAmount(event.target.value === '' ? '' : Number(event.target.value));
     };

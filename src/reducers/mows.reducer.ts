@@ -52,7 +52,7 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
             state[existingMowIndex] = {
                 ...existingMow,
                 ...mow,
-                stars: mow.stars <= rarityStars ? rarityStars : mow.stars,
+                stars: Math.max(mow.stars, rarityStars),
             };
 
             return [...state];

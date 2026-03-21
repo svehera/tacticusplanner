@@ -200,7 +200,7 @@ export const XpIncome: React.FC = () => {
                                 min="1"
                                 max="15"
                                 value={raidLoops}
-                                onChange={event => setRaidLoops(parseInt(event.target.value))}
+                                onChange={event => setRaidLoops(Number.parseInt(event.target.value))}
                                 className="mt-1 w-full accent-orange-500"
                             />
                             <p className="mt-3">
@@ -212,7 +212,7 @@ export const XpIncome: React.FC = () => {
                                 min="0"
                                 max="5"
                                 value={extraBossesAfterLoop}
-                                onChange={event => setExtraBossesAfterLoop(parseInt(event.target.value))}
+                                onChange={event => setExtraBossesAfterLoop(Number.parseInt(event.target.value))}
                                 className="mt-1 w-full accent-orange-500"
                             />
                         </>
@@ -222,7 +222,7 @@ export const XpIncome: React.FC = () => {
                             <select
                                 value={clearRarity}
                                 onChange={event =>
-                                    dispatchUpdate('clearRarity', parseInt(event.target.value, 10) as Rarity)
+                                    dispatchUpdate('clearRarity', Number.parseInt(event.target.value, 10) as Rarity)
                                 }
                                 className="rounded-md border border-gray-300 bg-white p-2 dark:border-gray-500 dark:bg-gray-600 dark:text-white">
                                 {[Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic].map(rarity => (
@@ -239,7 +239,7 @@ export const XpIncome: React.FC = () => {
                                 min="0"
                                 max="5"
                                 value={additionalBosses}
-                                onChange={event => setAdditionalBosses(parseInt(event.target.value))}
+                                onChange={event => setAdditionalBosses(Number.parseInt(event.target.value))}
                                 className="mt-1 w-full accent-green-500"
                             />
                         </>
@@ -415,7 +415,7 @@ export const XpIncome: React.FC = () => {
                                     max={kEliteEnergyMax}
                                     step={kEliteEnergyPerRaid}
                                     value={eliteEnergyPerDay}
-                                    onChange={event => setEliteEnergyPerDay(parseInt(event.target.value))}
+                                    onChange={event => setEliteEnergyPerDay(Number.parseInt(event.target.value))}
                                     className="mt-1 w-full accent-yellow-500"
                                 />
                                 <span className="w-12 text-right font-bold">{eliteEnergyPerDay}</span>
@@ -436,7 +436,7 @@ export const XpIncome: React.FC = () => {
                                     max={kNonEliteEnergyMax}
                                     step={kNonEliteEnergyPerRaid}
                                     value={nonEliteEnergyPerDay}
-                                    onChange={event => setNonEliteEnergyPerDay(parseInt(event.target.value))}
+                                    onChange={event => setNonEliteEnergyPerDay(Number.parseInt(event.target.value))}
                                     className="mt-1 w-full accent-yellow-500"
                                 />
                                 <span className="w-12 text-right font-bold">{nonEliteEnergyPerDay}</span>

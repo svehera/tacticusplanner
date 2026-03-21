@@ -195,7 +195,7 @@ export class GlobalState implements IGlobalState {
 
             return result;
         }) as Array<IMow | IMow2>;
-        mows2Data.mows.forEach(staticMow => {
+        for (const staticMow of mows2Data.mows) {
             if (
                 returnValue.some(
                     x =>
@@ -203,7 +203,7 @@ export class GlobalState implements IGlobalState {
                         ('snowprintId' in x && x.snowprintId === staticMow.snowprintId)
                 )
             )
-                return;
+                continue;
             const databaseMow = databaseMows?.find(c => c.id === staticMow.snowprintId);
 
             const result: IMow2 = {
@@ -232,7 +232,7 @@ export class GlobalState implements IGlobalState {
             } as IMow2);
 
             returnValue.push(result);
-        });
+        }
         return returnValue;
     }
 

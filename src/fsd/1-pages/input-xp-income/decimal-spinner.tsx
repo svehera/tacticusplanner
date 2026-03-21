@@ -10,8 +10,8 @@ interface DecimalSpinnerProps {
 export const DecimalSpinner: React.FC<DecimalSpinnerProps> = ({ value, onChange, label }) => {
     const [stringValue, setStringValue] = React.useState(value.toFixed(2));
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const numericValue = parseFloat(event.target.value);
-        if (!isNaN(numericValue)) {
+        const numericValue = Number.parseFloat(event.target.value);
+        if (!Number.isNaN(numericValue)) {
             onChange(numericValue);
             setStringValue(event.target.value);
         } else if (event.target.value === '') {
