@@ -8,6 +8,8 @@ import {
     IDailyRaidsPreferences,
 } from 'src/models/interfaces';
 
+import { Rarity } from '@/fsd/5-shared/model';
+
 import { IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import { IUnitShards } from '@/fsd/4-entities/character/model';
 import {
@@ -25,7 +27,14 @@ import {
     IXpEstimate,
 } from '@/fsd/3-features/characters/characters.models';
 
-import { IMowMaterialsTotal } from '@/fsd/1-pages/learn-mow/lookup.models';
+export interface IMowMaterialsTotal {
+    components: number;
+    salvage: number;
+    gold: number;
+    badges: Record<Rarity, number>;
+    forgeBadges: Record<Rarity, number>;
+    orbs: Record<Rarity, number>;
+}
 
 export type CharacterRaidGoalSelect =
     | ICharacterUpgradeRankGoal

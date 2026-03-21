@@ -412,6 +412,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             <MenuItem value={CampaignGroupType.deathGuardCE} className="flex-box gap10">
                                 <span>Death Guard</span>
                             </MenuItem>
+                            <MenuItem value={CampaignGroupType.sistersCE} className="flex-box gap10">
+                                <span>Adepta Sororitas</span>
+                            </MenuItem>
                         </Select>
                         <FormHelperText>
                             Select your current Campaign Event to make it available for raids suggestions

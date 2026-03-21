@@ -65,6 +65,8 @@ export class CampaignMapperService {
             result.baseCampaignEventId = isStandard ? Campaign.TAS : isExtremis ? Campaign.TAE : undefined;
         } else if (id === 'eventcampaign4') {
             result.baseCampaignEventId = isStandard ? Campaign.DGS : isExtremis ? Campaign.DGE : undefined;
+        } else if (id === 'eventcampaign5') {
+            result.baseCampaignEventId = isStandard ? Campaign.ASS : isExtremis ? Campaign.ASE : undefined;
         } else {
             // in case we get a new campaign event id we don't know about yet
             result.baseCampaignEventId = undefined;
