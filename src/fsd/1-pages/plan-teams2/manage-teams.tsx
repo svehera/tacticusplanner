@@ -383,7 +383,7 @@ export const ManageTeams = () => {
         let flex = flexIndex ?? selectedChars.length;
         let newChars: string[] = [...selectedChars.slice(0, index), ...selectedChars.slice(index + 1)];
         if (index < flex) {
-            newChars = [...newChars, char.snowprintId!];
+            newChars = [...newChars, char.snowprintId];
             --flex;
         }
         setSelectedChars(newChars);

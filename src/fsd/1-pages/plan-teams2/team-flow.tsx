@@ -51,7 +51,7 @@ export const TeamFlow: React.FC<Props> = ({
                             showTooltip={false}
                             char={Teams2Service.convertCharacter(char!)}
                             charData={char}
-                            isDisabled={disabledUnits?.includes(char.snowprintId!)}
+                            isDisabled={disabledUnits?.includes(char.snowprintId)}
                         />
                     </div>
                 ))}
@@ -73,7 +73,7 @@ export const TeamFlow: React.FC<Props> = ({
                                     showTooltip={false}
                                     char={Teams2Service.convertCharacter(char!)}
                                     charData={char}
-                                    isDisabled={disabledUnits?.includes(char.snowprintId!)}
+                                    isDisabled={disabledUnits?.includes(char.snowprintId)}
                                 />
                             </div>
                         ))}
@@ -95,7 +95,7 @@ export const TeamFlow: React.FC<Props> = ({
                                     showShards={RosterSnapshotShowVariableSettings.Never}
                                     showXpLevel={RosterSnapshotShowVariableSettings.Never}
                                     showAbilities={
-                                        disabledUnits?.includes(mow.snowprintId!)
+                                        disabledUnits?.includes(mow.snowprintId)
                                             ? RosterSnapshotShowVariableSettings.Never
                                             : RosterSnapshotShowVariableSettings.Always
                                     }
@@ -103,7 +103,7 @@ export const TeamFlow: React.FC<Props> = ({
                                     showTooltip={false}
                                     mow={Teams2Service.convertMow(mow)}
                                     mowData={mow}
-                                    isDisabled={disabledUnits?.includes(mow.snowprintId!)}
+                                    isDisabled={disabledUnits?.includes(mow.snowprintId)}
                                 />
                             </div>
                         ))}

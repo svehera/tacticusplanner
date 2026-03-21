@@ -22,6 +22,7 @@ interface Props {
 
 export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMowGoals, onClick = () => {} }) => {
     const { viewPreferences } = useContext(StoreContext);
+    console.log('character: ', character);
 
     // We use the current goals of the tactician, as well as the current state
     // of the character, to determine which rank to show. We also take into

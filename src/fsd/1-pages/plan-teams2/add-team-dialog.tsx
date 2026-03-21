@@ -171,8 +171,8 @@ export const AddTeamDialog: React.FC<Props> = ({
     );
 
     const filteredChars = chars
-        .filter(c => !selectedChars.includes(c.snowprintId!))
-        .filter(c => !warDefense || !warDefenseBlockedCoreCharIdsSet.has(c.snowprintId!))
+        .filter(c => !selectedChars.includes(c.snowprintId))
+        .filter(c => !warDefense || !warDefenseBlockedCoreCharIdsSet.has(c.snowprintId))
         .filter(c =>
             Teams2Service.passesCharacterFilter(
                 c,
@@ -195,7 +195,7 @@ export const AddTeamDialog: React.FC<Props> = ({
         .map(a => Teams2Service.capCharacterAtRarity(a, rarityCap));
 
     const filteredMows = mows
-        .filter(mow => !selectedMows.includes(mow.snowprintId!))
+        .filter(mow => !selectedMows.includes(mow.snowprintId))
         .filter(mow => Teams2Service.passesMowFilter(mow, allowLockedUnits, minRarity, maxRarity, factions, searchText))
         .sort((a, b) => {
             const powerA = Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);

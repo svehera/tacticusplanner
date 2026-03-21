@@ -81,7 +81,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
             if (char) {
                 return (
                     <div
-                        key={char.snowprintId!}
+                        key={char.snowprintId}
                         onClick={() => handleCharacterSelect(char)}
                         className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
                         title={`Select ${char.name || 'Unit'}`}>

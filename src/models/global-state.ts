@@ -108,7 +108,7 @@ export class GlobalState implements IGlobalState {
     ): Array<ICharacter2> {
         return CharactersService.charactersData.map(staticData => {
             const personalCharData = chars.find(c => {
-                return CharactersService.canonicalName(c.name!) === staticData.snowprintId!;
+                return CharactersService.canonicalName(c.name!) === staticData.snowprintId;
             });
             const rank = personalCharData?.rank ?? Rank.Locked;
             const rankLevel = rankToLevel[rank as Rank];
@@ -123,7 +123,7 @@ export class GlobalState implements IGlobalState {
                 : [];
 
             const combinedData: IPersonalCharacterData2 = {
-                name: staticData.snowprintId!,
+                name: staticData.snowprintId,
                 rank: rank,
                 rarity: rarity,
                 bias: personalCharData?.bias ?? CharacterBias.None,

@@ -62,7 +62,7 @@ export class GoalsService {
         characters: ICharacter2[]
     ): IXpLevel {
         const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
-        const character = characters.find(c => c.snowprintId! === characterId);
+        const character = characters.find(c => c.snowprintId === characterId);
         const returnValue: IXpLevel = {
             currentLevel: Math.max(character?.level ?? 1, 1),
             xpAtLevel: character?.xp ?? 0,
@@ -326,7 +326,7 @@ export class GoalsService {
                 priority: g.priority,
                 goalId: g.id,
                 include: g.dailyRaids,
-                unitId: unit.snowprintId!,
+                unitId: unit.snowprintId,
                 unitName: unit.name,
                 unitIcon: unit.icon,
                 unitRoundIcon: unit.roundIcon,
@@ -375,7 +375,7 @@ export class GoalsService {
                 priority: g.priority,
                 goalId: g.id,
                 include: g.dailyRaids,
-                unitId: unit.snowprintId!,
+                unitId: unit.snowprintId,
                 unitName: unit.shortName,
                 unitIcon: unit.icon,
                 unitRoundIcon: unit.roundIcon,

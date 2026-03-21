@@ -338,8 +338,8 @@ export class UpgradesService {
         });
 
         CharactersService.charactersData.forEach(char => {
-            const shards = 'shards_' + char.snowprintId!;
-            const mythicShards = 'mythicShards_' + char.snowprintId!;
+            const shards = 'shards_' + char.snowprintId;
+            const mythicShards = 'mythicShards_' + char.snowprintId;
             for (const shard of [shards, mythicShards]) {
                 if (!result[shard]) {
                     result[shard] = {
@@ -359,8 +359,8 @@ export class UpgradesService {
         });
 
         mows2Data.mows.forEach(mow => {
-            const shards = 'shards_' + mow.snowprintId!;
-            const mythicShards = 'mythicShards_' + mow.snowprintId!;
+            const shards = 'shards_' + mow.snowprintId;
+            const mythicShards = 'mythicShards_' + mow.snowprintId;
             for (const shard of [shards, mythicShards]) {
                 if (!result[shard]) {
                     result[shard] = {

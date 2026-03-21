@@ -245,7 +245,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
                 })) ?? defaultData.characters,
             goals: v1Data.goals ?? defaultData.goals,
             selectedTeamOrder: v1Data.selectedTeamOrder ?? defaultData.selectedTeamOrder,
-            leTeams: v1Data.legendaryEvents3 ?? defaultData.leTeams,
+            leTeams: migrateLreTeams(v1Data.legendaryEvents3 ?? defaultData.leTeams),
             leProgress: v1Data.legendaryEventsProgress ?? defaultData.leProgress,
             leSelectedRequirements: v1Data.legendaryEventSelectedRequirements ?? defaultData.leSelectedRequirements,
             leSettings: defaultData.leSettings,
@@ -325,6 +325,7 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
 
             if (existingTeam) {
                 // If found, combine the restriction with the existing team's restrictions
+                delete existingTeam.characters; // Remove characters field if it exists
                 if (!existingTeam.restrictionsIds.includes(restriction)) {
                     existingTeam.restrictionsIds.push(restriction);
                 }
