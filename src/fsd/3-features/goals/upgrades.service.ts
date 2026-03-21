@@ -703,7 +703,7 @@ export class UpgradesService {
                 grouped.set(key, list);
             }
 
-            for (const raidLocations of grouped) {
+            for (const [_, raidLocations] of grouped) {
                 const energyTotal = raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
                 const raidsTotal = raidLocations.reduce(
                     (sum, loc) => sum + loc.raidsToPerform + loc.raidsAlreadyPerformed,
