@@ -98,21 +98,21 @@ export class LreService {
                 const flexPointsCategories = [LrePointsCategoryId.killScore, LrePointsCategoryId.highScore];
                 const battleProgress = trackBattlesDto.find(x => x.battleIndex === index);
 
-                const requirementsProgress: ILreBattleRequirementsProgress[] = requirements.map(req => {
-                    const reqProgress = battleProgress?.requirements.find(x => x.id === req.id);
+                const requirementsProgress: ILreBattleRequirementsProgress[] = requirements.map(requirement => {
+                    const requirementProgress = battleProgress?.requirements.find(x => x.id === requirement.id);
 
                     return {
-                        id: req.id,
-                        iconId: req.iconId,
-                        name: req.name,
-                        points: flexPointsCategories.includes(req.id as LrePointsCategoryId)
+                        id: requirement.id,
+                        iconId: requirement.iconId,
+                        name: requirement.name,
+                        points: flexPointsCategories.includes(requirement.id as LrePointsCategoryId)
                             ? points
-                            : req.pointsPerBattle,
-                        completed: reqProgress?.state === ProgressState.completed,
-                        blocked: reqProgress?.state === ProgressState.blocked,
-                        status: reqProgress?.status, // Load new status field
-                        killScore: reqProgress?.scoredPoints, // Load kill score from scoredPoints
-                        highScore: reqProgress?.highScoredPoints, // Load high score from highScoredPoints
+                            : requirement.pointsPerBattle,
+                        completed: requirementProgress?.state === ProgressState.completed,
+                        blocked: requirementProgress?.state === ProgressState.blocked,
+                        status: requirementProgress?.status, // Load new status field
+                        killScore: requirementProgress?.scoredPoints, // Load kill score from scoredPoints
+                        highScore: requirementProgress?.highScoredPoints, // Load high score from highScoredPoints
                     };
                 });
                 return {
@@ -123,10 +123,10 @@ export class LreService {
                 } satisfies ILreBattleProgress;
             });
 
-            requirements.forEach(req => {
-                req.completed = battles
+            requirements.forEach(requirement => {
+                requirement.completed = battles
                     .flatMap(x => x.requirementsProgress)
-                    .filter(x => x.id === req.id)
+                    .filter(x => x.id === requirement.id)
                     .every(x => x.completed);
             });
 

@@ -16,6 +16,33 @@ interface Props {
     onEnemyClick: (enemy: ResolvedEnemyData) => void;
 }
 
+// Extracted Logic: Resolve string to data object
+const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
+    const colon = enemyString.indexOf(':');
+    const id = colon !== -1 ? enemyString.substring(0, colon) : enemyString;
+
+    // Calculate index
+    let progressionIndex = 0;
+    if (colon !== -1) {
+        const pString = enemyString.substring(colon + 1);
+        const pInt = parseInt(pString, 10);
+        progressionIndex = isNaN(pInt) ? 0 : pInt;
+    }
+
+    // Adjust for 0-based array (Your logic used -1, keeping that consistency)
+    const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
+
+    const npc = NpcService.getNpcById(id);
+
+    if (!npc || arrayIndex >= npc.stats.length) return null;
+
+    return {
+        id,
+        npc,
+        stats: npc.stats[arrayIndex],
+    };
+};
+
 /**
  * Displays a grid of enemies, similar to what you see in game when you open a
  * campaign-battle dialog.
@@ -29,34 +56,10 @@ interface Props {
  */
 export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, enemies, scale, onEnemyClick }) => {
     // The total number of enemies in this battle.
-    const numEnemies = useMemo(() => enemies.reduce((acc, enemy) => acc + enemy.count, 0), [enemies]);
-
-    // Extracted Logic: Resolve string to data object
-    const resolveEnemy = (enemyStr: string): ResolvedEnemyData | null => {
-        const colon = enemyStr.indexOf(':');
-        const id = colon !== -1 ? enemyStr.substring(0, colon) : enemyStr;
-
-        // Calculate index
-        let progressionIndex = 0;
-        if (colon !== -1) {
-            const pStr = enemyStr.substring(colon + 1);
-            const pInt = parseInt(pStr, 10);
-            progressionIndex = isNaN(pInt) ? 0 : pInt;
-        }
-
-        // Adjust for 0-based array (Your logic used -1, keeping that consistency)
-        const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
-
-        const npc = NpcService.getNpcById(id);
-
-        if (!npc || arrayIndex >= npc.stats.length) return null;
-
-        return {
-            id,
-            npc,
-            stats: npc.stats[arrayIndex],
-        };
-    };
+    const numberEnemies = useMemo(
+        () => enemies.reduce((accumulator, enemy) => accumulator + enemy.count, 0),
+        [enemies]
+    );
 
     // How many enemies we show in each row, based on how many enemies we have
     // in total. Faster than doing the math.
@@ -87,8 +90,8 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
         [8, 8, 7],
         [8, 8, 8],
     ];
-    const columns = useMemo(() => enemiesInCols[numEnemies], [enemiesInCols, numEnemies]);
-    const numRows = useMemo(() => columns.length, columns);
+    const columns = useMemo(() => enemiesInCols[numberEnemies], [enemiesInCols, numberEnemies]);
+    const numberRows = useMemo(() => columns.length, columns);
     const maxPerRow = useMemo(() => Math.max(...columns), [columns]);
     const frameWidth = 202;
     const frameHeight = 267;
@@ -102,7 +105,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
         let top = verticalMargin;
         let enemiesInRow = 0;
         let enemyIndex = 0;
-        const elems: JSX.Element[] = [];
+        const elements: JSX.Element[] = [];
         enemies.forEach(enemy => {
             // Pre-resolve NPC data for the click handler
             const resolved = resolveEnemy(enemy.id);
@@ -111,8 +114,8 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
             const rank = resolved !== null ? resolved.stats.rank : Rank.Stone1;
             const stars = resolved !== null ? resolved.stats.rarityStars : RarityStars.None;
 
-            for (let i = 0; i < enemy.count; i++) {
-                elems.push(
+            for (let index = 0; index < enemy.count; index++) {
+                elements.push(
                     <button
                         key={keyPrefix + battleId + '-' + enemyIndex++ + '-' + enemyId}
                         className="absolute cursor-pointer border-none bg-transparent p-0 transition-all hover:brightness-110 focus:outline-none"
@@ -140,14 +143,14 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
                 }
             }
         });
-        return elems;
+        return elements;
     };
 
     return (
         <div
             style={{
                 width: scale * (frameWidth * maxPerRow + horizontalMargin * (maxPerRow + 1)),
-                height: scale * (frameHeight * numRows + verticalMargin * (numRows + 1)),
+                height: scale * (frameHeight * numberRows + verticalMargin * (numberRows + 1)),
                 position: 'relative',
             }}>
             <div className="absolute" style={{ scale }}>

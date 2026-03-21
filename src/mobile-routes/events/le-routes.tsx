@@ -10,16 +10,13 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacterData } from '@/fsd/4-entities/character/model';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
+function isValidLreDate(date: unknown): date is string {
+    return (
+        date !== null && typeof date === 'string' && date !== 'TBA' && date !== '' && !isNaN(new Date(date).getTime())
+    );
+}
+
 function sortCharsByLreDate(a: ICharacterData, b: ICharacterData) {
-    function isValidLreDate(date: unknown): date is string {
-        return (
-            date !== null &&
-            typeof date === 'string' &&
-            date !== 'TBA' &&
-            date !== '' &&
-            !isNaN(new Date(date).getTime())
-        );
-    }
     const aDate = a.lre?.nextEventDateUtc;
     const bDate = b.lre?.nextEventDateUtc;
 

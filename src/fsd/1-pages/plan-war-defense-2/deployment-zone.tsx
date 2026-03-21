@@ -21,7 +21,7 @@ interface Props {
     mows: IMow2[];
     team: ITeam2 | undefined;
     onSelectTeam: (teamName: string) => void;
-    sizeMod?: number;
+    zoom?: number;
 }
 
 export const DeploymentZone = ({
@@ -32,7 +32,7 @@ export const DeploymentZone = ({
     disabledTeamNames,
     team,
     onSelectTeam,
-    sizeMod = 1,
+    zoom = 1,
 }: Props) => {
     return (
         <div className="flex min-w-[400px] flex-col items-center gap-2 rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800">
@@ -47,7 +47,7 @@ export const DeploymentZone = ({
                     onSelect={onSelectTeam}
                 />
             </div>
-            <div style={{ minHeight: 230 * sizeMod }} className="flex w-full items-center justify-center">
+            <div style={{ minHeight: 230 * zoom }} className="flex w-full items-center justify-center">
                 {team && (
                     <TeamFlow
                         chars={(
@@ -64,7 +64,7 @@ export const DeploymentZone = ({
                         flexIndex={team.flexIndex}
                         onCharClicked={() => {}}
                         onMowClicked={() => {}}
-                        sizeMod={sizeMod}
+                        zoom={zoom}
                         disabledUnits={[]}
                     />
                 )}

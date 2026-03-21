@@ -24,8 +24,8 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
             <div className="mb-1 text-xs tracking-wider text-gray-500 uppercase dark:text-gray-400">{label}</div>
             <div className="flex items-center gap-2">
                 <MiscIcon icon={icon} />
-                {subIcons.map((s: any, i: number) => (
-                    <React.Fragment key={i}>{s}</React.Fragment>
+                {subIcons.map((s: any, index: number) => (
+                    <React.Fragment key={index}>{s}</React.Fragment>
                 ))}
                 <span className="text-xl font-bold text-gray-900 dark:text-white">{value}</span>
             </div>

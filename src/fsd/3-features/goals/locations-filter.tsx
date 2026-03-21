@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
-    const [currFilter, setCurrFilter] = React.useState<ICampaignsFilters>(filter);
+    const [currentFilter, setCurrentFilter] = React.useState<ICampaignsFilters>(filter);
     const [open, setOpen] = React.useState<boolean>(false);
 
     const allFactions = useMemo(
@@ -31,16 +31,16 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
     const enemiesCountOptions = useMemo(() => CampaignsService.getPossibleEnemiesCount().map(x => x.toString()), []);
 
     const filtersCount =
-        +!!filter.enemiesAlliance.length +
-        +!!filter.alliesAlliance.length +
-        +!!filter.alliesFactions.length +
-        +!!filter.enemiesFactions.length +
-        +!!filter.upgradesRarity.length +
+        +(filter.enemiesAlliance.length > 0) +
+        +(filter.alliesAlliance.length > 0) +
+        +(filter.alliesFactions.length > 0) +
+        +(filter.enemiesFactions.length > 0) +
+        +(filter.upgradesRarity.length > 0) +
         +!!filter.slotsCount?.length +
         +!!filter.enemiesTypes?.length +
         +!!filter.enemiesMinCount +
         +!!filter.enemiesMaxCount +
-        +!!filter.campaignTypes.length;
+        +(filter.campaignTypes.length > 0);
 
     const handleClick = () => {
         setOpen(true);
@@ -48,11 +48,11 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
 
     const handleClose = () => {
         setOpen(false);
-        setCurrFilter(filter);
+        setCurrentFilter(filter);
     };
 
     const saveChanges = () => {
-        filtersChange(currFilter);
+        filtersChange(currentFilter);
         setOpen(false);
     };
 
@@ -67,7 +67,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             slotsCount: [],
             enemiesTypes: [],
         });
-        setCurrFilter({
+        setCurrentFilter({
             alliesFactions: [],
             alliesAlliance: [],
             enemiesFactions: [],
@@ -81,31 +81,32 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
     };
 
     const renderUnitsFilter = (type: 'allies' | 'enemies', alliance: Alliance[], factions: FactionId[]) => {
-        const allowedFactions = !alliance.length
-            ? allFactions.map(x => x.faction)
-            : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
+        const allowedFactions =
+            alliance.length === 0
+                ? allFactions.map(x => x.faction)
+                : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
         const selectedFactionNames = factions.map(factionId => factionLookup[factionId]?.name).filter(Boolean);
 
         const allianceFilterChanged = (values: string[]) => {
             if (type === 'allies') {
-                setCurrFilter({ ...currFilter, alliesAlliance: values as Alliance[] });
+                setCurrentFilter({ ...currentFilter, alliesAlliance: values as Alliance[] });
             }
 
             if (type === 'enemies') {
-                setCurrFilter({ ...currFilter, enemiesAlliance: values as Alliance[] });
+                setCurrentFilter({ ...currentFilter, enemiesAlliance: values as Alliance[] });
             }
         };
 
         const factionsFilterChanged = (values: FactionName[]) => {
             const factionIds = values
                 .map(factionName => Object.values(factionLookup).find(f => f.name === factionName)?.snowprintId)
-                .filter((fn): fn is FactionId => !!fn); // Use a type guard to clean up the filter
+                .filter((function_): function_ is FactionId => !!function_); // Use a type guard to clean up the filter
             if (type === 'allies') {
-                setCurrFilter({ ...currFilter, alliesFactions: factionIds });
+                setCurrentFilter({ ...currentFilter, alliesFactions: factionIds });
             }
 
             if (type === 'enemies') {
-                setCurrFilter({ ...currFilter, enemiesFactions: factionIds });
+                setCurrentFilter({ ...currentFilter, enemiesFactions: factionIds });
             }
         };
 
@@ -146,19 +147,19 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                 <DialogTitle>Raids Filters</DialogTitle>
                 <DialogContent>
                     <h5>Allies</h5>
-                    {renderUnitsFilter('allies', currFilter.alliesAlliance, currFilter.alliesFactions)}
+                    {renderUnitsFilter('allies', currentFilter.alliesAlliance, currentFilter.alliesFactions)}
 
                     <h5>Enemies</h5>
-                    {renderUnitsFilter('enemies', currFilter.enemiesAlliance, currFilter.enemiesFactions)}
+                    {renderUnitsFilter('enemies', currentFilter.enemiesAlliance, currentFilter.enemiesFactions)}
 
                     <div className="mt-2.5 flex items-center gap-3">
                         <Autocomplete
                             fullWidth
                             size="small"
-                            value={currFilter.enemiesMinCount?.toString() ?? null}
+                            value={currentFilter.enemiesMinCount?.toString() ?? null}
                             options={enemiesCountOptions}
                             onChange={(_, value) => {
-                                setCurrFilter({ ...currFilter, enemiesMinCount: value ? +value : undefined });
+                                setCurrentFilter({ ...currentFilter, enemiesMinCount: value ? +value : undefined });
                             }}
                             sx={{ minWidth: 150, maxWidth: 300 }}
                             renderInput={params => <TextField {...params} label="Min Enemy" />}
@@ -166,10 +167,10 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                         <Autocomplete
                             fullWidth
                             size="small"
-                            value={currFilter.enemiesMaxCount?.toString() ?? null}
+                            value={currentFilter.enemiesMaxCount?.toString() ?? null}
                             options={enemiesCountOptions}
                             onChange={(_, value) => {
-                                setCurrFilter({ ...currFilter, enemiesMaxCount: value ? +value : undefined });
+                                setCurrentFilter({ ...currentFilter, enemiesMaxCount: value ? +value : undefined });
                             }}
                             sx={{ minWidth: 150, maxWidth: 300 }}
                             renderInput={params => <TextField {...params} label="Max Enemy" />}
@@ -178,10 +179,10 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                         <MultipleSelectCheckmarks
                             size="small"
                             placeholder="Enemy Types"
-                            selectedValues={currFilter.enemiesTypes ?? []}
+                            selectedValues={currentFilter.enemiesTypes ?? []}
                             values={enemiesTypeOptions}
                             selectionChanges={values => {
-                                setCurrFilter({ ...currFilter, enemiesTypes: values });
+                                setCurrentFilter({ ...currentFilter, enemiesTypes: values });
                             }}
                             disableCloseOnSelect={false}
                             minWidth={150}
@@ -194,7 +195,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                             size="small"
                             placeholder="Types"
                             selectedValues={
-                                currFilter.campaignTypes as (
+                                currentFilter.campaignTypes as (
                                     | CampaignType.Early
                                     | CampaignType.Extremis
                                     | CampaignType.Standard
@@ -212,7 +213,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                                 CampaignType.Early,
                             ]}
                             selectionChanges={values => {
-                                setCurrFilter({ ...currFilter, campaignTypes: values as CampaignType[] });
+                                setCurrentFilter({ ...currentFilter, campaignTypes: values as CampaignType[] });
                             }}
                             disableCloseOnSelect={false}
                             minWidth={150}
@@ -223,12 +224,12 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                             placeholder="Slots"
                             // Cast the result of the map to the specific literals
                             selectedValues={
-                                (currFilter.slotsCount?.map(x => x.toString()) ?? []) as ('3' | '4' | '5')[]
+                                (currentFilter.slotsCount?.map(x => x.toString()) ?? []) as ('3' | '4' | '5')[]
                             }
                             values={['3', '4', '5']}
                             selectionChanges={values => {
-                                setCurrFilter({
-                                    ...currFilter,
+                                setCurrentFilter({
+                                    ...currentFilter,
                                     slotsCount: values.map(x => Number(x) as 3 | 4 | 5),
                                 });
                             }}
@@ -241,15 +242,15 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <MultipleSelectCheckmarks
                         size="small"
                         placeholder="Rarity"
-                        selectedValues={currFilter.upgradesRarity.map(x => {
+                        selectedValues={currentFilter.upgradesRarity.map(x => {
                             if (x === 'Shard') return 'Shard';
                             if (x === 'Mythic Shard') return 'Mythic Shard';
                             return RarityMapper.rarityToRarityString(x);
                         })}
                         values={[Object.values(RarityString), 'Shard', 'Mythic Shard'].flat()}
                         selectionChanges={values => {
-                            setCurrFilter({
-                                ...currFilter,
+                            setCurrentFilter({
+                                ...currentFilter,
                                 upgradesRarity: values.map(x => {
                                     if (x === 'Shard') return 'Shard';
                                     if (x === 'Mythic Shard') return 'Mythic Shard';

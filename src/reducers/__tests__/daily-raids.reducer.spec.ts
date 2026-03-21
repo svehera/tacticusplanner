@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { defaultData } from '@/models/constants';
-import { dailyRaidsReducer } from '@/reducers/dailyRaids.reducer';
+import { dailyRaidsReducer } from '@/reducers/daily-raids.reducer';
 
 import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 

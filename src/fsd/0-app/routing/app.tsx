@@ -8,7 +8,7 @@ import { RegisterUserDialog } from 'src/shared-components/user-menu/register-use
 import { initI18n } from '@/fsd/5-shared/i18n';
 import { useAuth, AppThemeProvider } from '@/fsd/5-shared/model';
 import { LoaderWithText } from '@/fsd/5-shared/ui';
-import { SearchParamsStateProvider, useLoader } from '@/fsd/5-shared/ui/contexts';
+import { SearchParametersStateProvider, useLoader } from '@/fsd/5-shared/ui/contexts';
 
 import { currentVersion } from '@/fsd/3-features/whats-new';
 
@@ -71,9 +71,9 @@ export const App = () => {
                 }}
             />
             <LoginUserDialog isOpen={showLoginUser} onClose={() => setShowLoginUser(false)} />
-            <SearchParamsStateProvider>
+            <SearchParametersStateProvider>
                 <Outlet />
-            </SearchParamsStateProvider>
+            </SearchParametersStateProvider>
             <LoaderWithText loading={!!loading} loadingText={loadingText} />
         </AppThemeProvider>
     );

@@ -2,7 +2,7 @@ import { mutableCopy } from '@/fsd/5-shared/lib';
 
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
-import battleData from './newLeBattleData.json';
+import battleData from './new-le-battle-data.json';
 import { TokenDisplay } from './token-estimation-service';
 
 export interface ILeWave {

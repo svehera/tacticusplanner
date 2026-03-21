@@ -157,11 +157,13 @@ export const Lre: React.FC = () => {
 
     const renderTabContent = () => {
         switch (section) {
-            case LreSection.teams:
+            case LreSection.teams: {
                 return <LegendaryEvent legendaryEvent={legendaryEvent} upgradeRankOrMowGoals={upgradeRankOrMowGoals} />;
-            case LreSection.progress:
+            }
+            case LreSection.progress: {
                 return <LeProgress legendaryEvent={legendaryEvent} progress={progress} />;
-            case LreSection.tokenomics:
+            }
+            case LreSection.tokenomics: {
                 return (
                     <LeTokenomics
                         legendaryEvent={legendaryEvent}
@@ -179,14 +181,19 @@ export const Lre: React.FC = () => {
                         updateDto={updateDto}
                     />
                 );
-            case LreSection.battles:
+            }
+            case LreSection.battles: {
                 return battles !== undefined && <LeBattles key="battles" battles={battles} />;
-            case LreSection.leaderboard:
+            }
+            case LreSection.leaderboard: {
                 return <PointsTable legendaryEvent={legendaryEvent} />;
-            case LreSection.settings:
+            }
+            case LreSection.settings: {
                 return <LegendaryEventSettings />;
-            default:
+            }
+            default: {
                 return <div>Default Content</div>;
+            }
         }
     };
 

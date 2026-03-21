@@ -1,7 +1,7 @@
 import { IMowsAndUpgradeCosts, IMowStatic } from '../model';
 
 import mowsJson from './mows.json';
-import mows2Json from './newMowData.json';
+import mows2Json from './new-mow-data.json';
 
 // @ts-expect-error FIXME: Caused by transition to const JSON imports
 export const mowsData = mowsJson as IMowStatic[];

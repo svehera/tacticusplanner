@@ -1,0 +1,1 @@
+export { CharacterAbilitiesTotal } from './components';

@@ -53,7 +53,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                         <div className="flex-box gap-[3px]">
                             <RankIcon rank={goal.rankStart} /> <ArrowForward />
                             <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
-                            {!!goal.upgradesRarity.length && (
+                            {goal.upgradesRarity.length > 0 && (
                                 <div className="flex-box gap-[3px]">
                                     {goal.upgradesRarity.map(x => (
                                         <RarityIcon key={x} rarity={x} />
@@ -85,7 +85,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                             )}
                         </div>
 
-                        {!!goal.upgradesRarity.length && (
+                        {goal.upgradesRarity.length > 0 && (
                             <div className="flex-box gap-[3px]">
                                 {goal.upgradesRarity.map(x => (
                                     <RarityIcon key={x} rarity={x} />

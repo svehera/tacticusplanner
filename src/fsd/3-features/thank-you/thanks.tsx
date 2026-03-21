@@ -10,19 +10,19 @@ import { contentCreators, contributors } from './data';
 import { ThankYouCard } from './thank-you.card';
 import { IContributor, IContentCreator, IYoutubeCreator } from './thank-you.model';
 
+const shuffleArray = (array: any[]): void => {
+    for (let index = array.length - 1; index > 0; index--) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [array[index], array[randomIndex]] = [array[randomIndex], array[index]];
+    }
+};
+
 export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
     const [activeContributorIndex, setActiveContributorIndex] = useState<number>(0);
     const [hide, setHide] = useState<boolean>(false);
     const [contributorsList, setContributorsList] = useState<Array<IContributor | IContentCreator | IYoutubeCreator>>(
         []
     );
-
-    const shuffleArray = (array: any[]): void => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    };
 
     useEffect(() => {
         const api = axios.create({
@@ -58,7 +58,7 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
     }, []);
 
     useEffect(() => {
-        if (!sliderMode || !contributorsList.length) {
+        if (!sliderMode || contributorsList.length === 0) {
             return;
         }
         setTimeout(() => {
@@ -71,10 +71,10 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
                 setHide(true);
             }, 3000);
 
-            setActiveContributorIndex(curr => {
+            setActiveContributorIndex(current => {
                 const increment = isMobile ? 1 : 3;
                 const maxStep = isMobile ? 0 : 2;
-                const nextContributorId = curr + increment;
+                const nextContributorId = current + increment;
 
                 return nextContributorId + maxStep > contributorsList.length - 1 ? 0 : nextContributorId;
             });

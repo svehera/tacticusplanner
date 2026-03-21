@@ -18,31 +18,44 @@ import {
 
 export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
     switch (id) {
-        case LegendaryEventEnum.AunShi:
+        case LegendaryEventEnum.AunShi: {
             return new AunShiLegendaryEvent(characters);
-        case LegendaryEventEnum.Lucius:
+        }
+        case LegendaryEventEnum.Lucius: {
             return new LuciusLegendaryEvent(characters);
-        case LegendaryEventEnum.Trajann:
+        }
+        case LegendaryEventEnum.Trajann: {
             return new TrajannLegendaryEvent(characters);
-        case LegendaryEventEnum.Dante:
+        }
+        case LegendaryEventEnum.Dante: {
             return new DanteLegendaryEvent(characters);
-        case LegendaryEventEnum.Farsight:
+        }
+        case LegendaryEventEnum.Farsight: {
             return new FarsightLegendaryEvent(characters);
-        case LegendaryEventEnum.Kharn:
+        }
+        case LegendaryEventEnum.Kharn: {
             return new KharnLegendaryEvent(characters);
-        case LegendaryEventEnum.Mephiston:
+        }
+        case LegendaryEventEnum.Mephiston: {
             return new MephistonLegendaryEvent(characters);
-        case LegendaryEventEnum.Patermine:
+        }
+        case LegendaryEventEnum.Patermine: {
             return new PatermineLegendaryEvent(characters);
-        case LegendaryEventEnum.Ragnar:
+        }
+        case LegendaryEventEnum.Ragnar: {
             return new RagnarLegendaryEvent(characters);
-        case LegendaryEventEnum.Shadowsun:
+        }
+        case LegendaryEventEnum.Shadowsun: {
             return new ShadowSunLegendaryEvent(characters);
-        case LegendaryEventEnum.Vitruvius:
+        }
+        case LegendaryEventEnum.Vitruvius: {
             return new VitruviusLegendaryEvent(characters);
-        case LegendaryEventEnum.Uthar:
+        }
+        case LegendaryEventEnum.Uthar: {
             return new UtharLegendaryEvent(characters);
-        default:
+        }
+        default: {
             return new ShadowSunLegendaryEvent(characters);
+        }
     }
 };
