@@ -96,10 +96,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             });
 
             // 3. Re-index 1..N based on the new physical order
-            return filteredState.map((g, i) => ({
-                ...g,
-                priority: i + 1,
-            }));
+            return filteredState.map((g, index) => ({ ...g, priority: index + 1 }));
         }
         case 'UpdateDailyRaids': {
             const { value } = action;
