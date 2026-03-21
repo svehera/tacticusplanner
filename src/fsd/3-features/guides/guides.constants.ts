@@ -60,16 +60,21 @@ export const lreCharacters: IMenuOption[] = [
 
 export const getLre = (character: LreCharacter, characters: ICharacter2[] = []): ILegendaryEvent => {
     switch (character) {
-        case LreCharacter.kharn:
+        case LreCharacter.kharn: {
             return new KharnLegendaryEvent(characters);
-        case LreCharacter.mephiston:
+        }
+        case LreCharacter.mephiston: {
             return new MephistonLegendaryEvent(characters);
-        case LreCharacter.vitruvius:
+        }
+        case LreCharacter.vitruvius: {
             return new VitruviusLegendaryEvent(characters);
-        case LreCharacter.patermine:
+        }
+        case LreCharacter.patermine: {
             return new PatermineLegendaryEvent(characters);
-        case LreCharacter.dante:
+        }
+        case LreCharacter.dante: {
             return new DanteLegendaryEvent(characters);
+        }
     }
 };
 

@@ -52,14 +52,18 @@ function getDaySuffix(day: number) {
         return 'th';
     }
     switch (day % 10) {
-        case 1:
+        case 1: {
             return 'st';
-        case 2:
+        }
+        case 2: {
             return 'nd';
-        case 3:
+        }
+        case 3: {
             return 'rd';
-        default:
+        }
+        default: {
             return 'th';
+        }
     }
 }
 

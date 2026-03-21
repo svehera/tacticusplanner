@@ -107,12 +107,13 @@ export class LETrack implements ILegendaryEventTrack {
         onlyUnlocked: boolean,
         restrictions: string[]
     ): Array<ICharacter2> {
-        const allowedChars = !restrictions.length
-            ? this.allowedUnits
-            : intersectionBy(
-                  ...this.unitsRestrictions.filter(x => restrictions.includes(x.name)).map(x => x.units),
-                  'name'
-              );
+        const allowedChars =
+            restrictions.length === 0
+                ? this.allowedUnits
+                : intersectionBy(
+                      ...this.unitsRestrictions.filter(x => restrictions.includes(x.name)).map(x => x.units),
+                      'name'
+                  );
         const sortChars = allowedChars
             .filter(x => (onlyUnlocked ? x.rank > Rank.Locked : true))
             .map(unit => ({

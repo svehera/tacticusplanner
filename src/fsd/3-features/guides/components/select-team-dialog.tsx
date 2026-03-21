@@ -98,7 +98,11 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
 
                 if (editedSlot.slotType === SlotType.core) {
                     const nextSlot = current.find(x => x.slotNumber === editSlotData.slotNumber + 1);
-                    if (nextSlot && !nextSlot.unitIds.filter(x => !!x).length && nextSlot.slotType !== SlotType.none) {
+                    if (
+                        nextSlot &&
+                        nextSlot.unitIds.filter(x => !!x).length === 0 &&
+                        nextSlot.slotType !== SlotType.none
+                    ) {
                         setEditSlotData({
                             index: 0,
                             slotNumber: editSlotData.slotNumber + 1,
@@ -119,7 +123,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
                         const nextSlot = current.find(x => x.slotNumber === editSlotData.slotNumber + 1);
                         if (
                             nextSlot &&
-                            !nextSlot.unitIds.filter(x => !!x).length &&
+                            nextSlot.unitIds.filter(x => !!x).length === 0 &&
                             nextSlot.slotType !== SlotType.none
                         ) {
                             setEditSlotData({
@@ -145,15 +149,19 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
                 : typeFiltered.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()));
 
             switch (filterByVariable) {
-                case 'xenos':
+                case 'xenos': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Xenos);
-                case 'chaos':
+                }
+                case 'chaos': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Chaos);
-                case 'imperial':
+                }
+                case 'imperial': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Imperial);
+                }
                 case 'none':
-                default:
+                default: {
                     return nameFiltered;
+                }
             }
         };
 

@@ -181,7 +181,8 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
             };
         }
         default: {
-            throw new Error();
+            // @ts-expect-error TS says this should never be reached but we want the error if it does
+            throw new Error(`Unexpected action.type received in reducer: ${action.type}`);
         }
     }
 };

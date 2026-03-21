@@ -154,14 +154,14 @@ export const GuildWarOffense = () => {
                             <Button size="small" onClick={() => startEditTeam(currentTeam)}>
                                 Edit
                             </Button>
-                            <Conditional condition={!!currentTeam.lineup.length}>
+                            <Conditional condition={currentTeam.lineup.length > 0}>
                                 <Button size="small" color="error" onClick={() => clearTeam(currentTeam.id)}>
                                     Clear
                                 </Button>
                             </Conditional>
                             <Conditional
                                 condition={
-                                    !!currentTeam.lineup.length &&
+                                    currentTeam.lineup.length > 0 &&
                                     currentTeam.lineup.some(
                                         character => !guildWar.deployedCharacters.includes(character.name)
                                     )
@@ -172,7 +172,7 @@ export const GuildWarOffense = () => {
                             </Conditional>
                             <Conditional
                                 condition={
-                                    !!currentTeam.lineup.length &&
+                                    currentTeam.lineup.length > 0 &&
                                     currentTeam.lineup.every(character =>
                                         guildWar.deployedCharacters.includes(character.name)
                                     )
@@ -236,7 +236,7 @@ export const GuildWarOffense = () => {
             x => x.length
         );
 
-        if (!Object.values(slots).length) {
+        if (Object.values(slots).length === 0) {
             return 'Empty. Add some characters to the teams below';
         }
 
@@ -361,7 +361,9 @@ export const GuildWarOffense = () => {
                             </div>
                         </AccessibleTooltip>
                     </div>
-                    {!!guild.members.length && <ViewGuildOffense guildWarPlayers={guildWarPlayers} loading={loading} />}
+                    {guild.members.length > 0 && (
+                        <ViewGuildOffense guildWarPlayers={guildWarPlayers} loading={loading} />
+                    )}
                     <div className="flex-box gap5">Your teams: {getTeamsSlots}</div>
                     <div className="flex-box gap5">
                         Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}

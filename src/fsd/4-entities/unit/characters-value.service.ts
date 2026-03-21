@@ -49,7 +49,7 @@ export class CharactersValueService {
                 })
                 .filter(x => !!x);
 
-            if (!rankUpgrades.length) {
+            if (rankUpgrades.length === 0) {
                 continue;
             }
 
@@ -121,16 +121,21 @@ export class CharactersValueService {
         const ShardBS = 35;
 
         switch (initialRarity) {
-            case Rarity.Common:
+            case Rarity.Common: {
                 return ShardBS * 40;
-            case Rarity.Uncommon:
+            }
+            case Rarity.Uncommon: {
                 return ShardBS * 80;
-            case Rarity.Rare:
+            }
+            case Rarity.Rare: {
                 return ShardBS * 130;
-            case Rarity.Epic:
+            }
+            case Rarity.Epic: {
                 return ShardBS * 250;
-            case Rarity.Legendary:
+            }
+            case Rarity.Legendary: {
                 return ShardBS * 500;
+            }
         }
 
         console.warn('Initial Rarity unknown');
@@ -141,106 +146,156 @@ export class CharactersValueService {
         const ExpBS = 175 / 12500;
 
         switch (level) {
-            case 1:
+            case 1: {
                 return 0;
-            case 2:
+            }
+            case 2: {
                 return ExpBS * 25;
-            case 3:
+            }
+            case 3: {
                 return ExpBS * 60;
-            case 4:
+            }
+            case 4: {
                 return ExpBS * 120;
-            case 5:
+            }
+            case 5: {
                 return ExpBS * 200;
-            case 6:
+            }
+            case 6: {
                 return ExpBS * 300;
-            case 7:
+            }
+            case 7: {
                 return ExpBS * 420;
-            case 8:
+            }
+            case 8: {
                 return ExpBS * 560;
-            case 9:
+            }
+            case 9: {
                 return ExpBS * 720;
-            case 10:
+            }
+            case 10: {
                 return ExpBS * 900;
-            case 11:
+            }
+            case 11: {
                 return ExpBS * 1100;
-            case 12:
+            }
+            case 12: {
                 return ExpBS * 1350;
-            case 13:
+            }
+            case 13: {
                 return ExpBS * 1650;
-            case 14:
+            }
+            case 14: {
                 return ExpBS * 2000;
-            case 15:
+            }
+            case 15: {
                 return ExpBS * 2400;
-            case 16:
+            }
+            case 16: {
                 return ExpBS * 2850;
-            case 17:
+            }
+            case 17: {
                 return ExpBS * 3350;
-            case 18:
+            }
+            case 18: {
                 return ExpBS * 3950;
-            case 19:
+            }
+            case 19: {
                 return ExpBS * 4700;
-            case 20:
+            }
+            case 20: {
                 return ExpBS * 5600;
-            case 21:
+            }
+            case 21: {
                 return ExpBS * 6700;
-            case 22:
+            }
+            case 22: {
                 return ExpBS * 8100;
-            case 23:
+            }
+            case 23: {
                 return ExpBS * 9900;
-            case 24:
+            }
+            case 24: {
                 return ExpBS * 12200;
-            case 25:
+            }
+            case 25: {
                 return ExpBS * 15200;
-            case 26:
+            }
+            case 26: {
                 return ExpBS * 19200;
-            case 27:
+            }
+            case 27: {
                 return ExpBS * 24700;
-            case 28:
+            }
+            case 28: {
                 return ExpBS * 32200;
-            case 29:
+            }
+            case 29: {
                 return ExpBS * 42200;
-            case 30:
+            }
+            case 30: {
                 return ExpBS * 55200;
-            case 31:
+            }
+            case 31: {
                 return ExpBS * 72200;
-            case 32:
+            }
+            case 32: {
                 return ExpBS * 94200;
-            case 33:
+            }
+            case 33: {
                 return ExpBS * 122200;
-            case 34:
+            }
+            case 34: {
                 return ExpBS * 157200;
-            case 35:
+            }
+            case 35: {
                 return ExpBS * 200200;
-            case 36:
+            }
+            case 36: {
                 return ExpBS * 252200;
-            case 37:
+            }
+            case 37: {
                 return ExpBS * 314200;
-            case 38:
+            }
+            case 38: {
                 return ExpBS * 387200;
-            case 39:
+            }
+            case 39: {
                 return ExpBS * 472200;
-            case 40:
+            }
+            case 40: {
                 return ExpBS * 570200;
-            case 41:
+            }
+            case 41: {
                 return ExpBS * 682200;
-            case 42:
+            }
+            case 42: {
                 return ExpBS * 809200;
-            case 43:
+            }
+            case 43: {
                 return ExpBS * 952200;
-            case 44:
+            }
+            case 44: {
                 return ExpBS * 1112200;
-            case 45:
+            }
+            case 45: {
                 return ExpBS * 1290200;
-            case 46:
+            }
+            case 46: {
                 return ExpBS * 1487200;
-            case 47:
+            }
+            case 47: {
                 return ExpBS * 1704200;
-            case 48:
+            }
+            case 48: {
                 return ExpBS * 1942200;
-            case 49:
+            }
+            case 49: {
                 return ExpBS * 2202200;
-            case 50:
+            }
+            case 50: {
                 return ExpBS * 2485200;
+            }
             default: {
                 console.warn('Level unknown');
                 return 0;
@@ -413,30 +468,42 @@ export class CharactersValueService {
         const LegendaryOrbBS = 2800 / 3;
 
         switch (stars) {
-            case RarityStars.None:
+            case RarityStars.None: {
                 return 0;
-            case RarityStars.OneStar:
+            }
+            case RarityStars.OneStar: {
                 return ShardBS * 10;
-            case RarityStars.TwoStars:
+            }
+            case RarityStars.TwoStars: {
                 return ShardBS * 25;
-            case RarityStars.ThreeStars:
+            }
+            case RarityStars.ThreeStars: {
                 return ShardBS * 40;
-            case RarityStars.FourStars:
+            }
+            case RarityStars.FourStars: {
                 return ShardBS * 55;
-            case RarityStars.FiveStars:
+            }
+            case RarityStars.FiveStars: {
                 return ShardBS * 85;
-            case RarityStars.RedOneStar:
+            }
+            case RarityStars.RedOneStar: {
                 return ShardBS * 125;
-            case RarityStars.RedTwoStars:
+            }
+            case RarityStars.RedTwoStars: {
                 return ShardBS * 190;
-            case RarityStars.RedThreeStars:
+            }
+            case RarityStars.RedThreeStars: {
                 return ShardBS * 275;
-            case RarityStars.RedFourStars:
+            }
+            case RarityStars.RedFourStars: {
                 return ShardBS * 425 + LegendaryOrbBS * 10;
-            case RarityStars.RedFiveStars:
+            }
+            case RarityStars.RedFiveStars: {
                 return ShardBS * 675 + LegendaryOrbBS * 15;
-            case RarityStars.OneBlueStar:
+            }
+            case RarityStars.OneBlueStar: {
                 return ShardBS * 1175 + LegendaryOrbBS * 20;
+            }
             // TODO(mythic): Implement other blue stars and Mythic Wings value
             default: {
                 console.warn('Stars value unknown');
@@ -449,16 +516,21 @@ export class CharactersValueService {
         const ShardBS = 35;
 
         switch (rarity) {
-            case Rarity.Common:
+            case Rarity.Common: {
                 return 0;
-            case Rarity.Uncommon:
+            }
+            case Rarity.Uncommon: {
                 return ShardBS * 25;
-            case Rarity.Rare:
+            }
+            case Rarity.Rare: {
                 return ShardBS * 55;
-            case Rarity.Epic:
+            }
+            case Rarity.Epic: {
                 return ShardBS * 125;
-            case Rarity.Legendary:
+            }
+            case Rarity.Legendary: {
                 return ShardBS * 275;
+            }
             default: {
                 console.warn('Rarity value unknown');
                 return 0;
@@ -476,20 +548,26 @@ export class CharactersValueService {
         const MythicOrbBS = 6720 / 3;
 
         switch (rarity) {
-            case Rarity.Common:
+            case Rarity.Common: {
                 return 0;
-            case Rarity.Uncommon:
+            }
+            case Rarity.Uncommon: {
                 return ShardBS * 15 + UncommonOrbBS * 10;
-            case Rarity.Rare:
+            }
+            case Rarity.Rare: {
                 return ShardBS * 20 + RareOrbBS * 10;
-            case Rarity.Epic:
+            }
+            case Rarity.Epic: {
                 return ShardBS * 50 + EpicOrbBS * 10;
-            case Rarity.Legendary:
+            }
+            case Rarity.Legendary: {
                 return ShardBS * 100 + LegendaryOrbBS * 10;
-            case Rarity.Mythic:
+            }
+            case Rarity.Mythic: {
                 // Mythic values were invented to get a rough idea. I have no idea where the pre-Mythic
                 // value calcs come from, so unable to replicate the same logic here.
                 return ShardBS * 200 + MythicOrbBS * 10;
+            }
             default: {
                 console.warn('Rarity value unknown');
                 return 0;

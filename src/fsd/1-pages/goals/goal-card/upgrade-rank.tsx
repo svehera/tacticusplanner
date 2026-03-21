@@ -34,7 +34,7 @@ export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, calen
             <div className="flex-box gap-[3px]">
                 <RankIcon rank={goal.rankStart} /> <ArrowForward />
                 <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
-                {!!goal.upgradesRarity.length && (
+                {goal.upgradesRarity.length > 0 && (
                     <div className="flex-box gap-[3px]">
                         {goal.upgradesRarity.map(x => (
                             <RarityIcon key={x} rarity={x} />

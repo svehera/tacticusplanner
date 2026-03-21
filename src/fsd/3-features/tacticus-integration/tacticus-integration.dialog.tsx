@@ -20,6 +20,12 @@ interface Props extends DialogProps {
     tacticusGuildApiKey: string;
 }
 
+function buildErrorMessage(error: string | Error | null): string {
+    const baseMessage = 'Failed to update settings';
+    const detail = typeof error === 'string' ? error : error?.message;
+    return detail ? `${baseMessage}: ${detail}` : baseMessage;
+}
+
 export const TacticusIntegrationDialog: React.FC<Props> = ({
     isOpen,
     onClose,
@@ -41,12 +47,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     async function syncWithTacticusApi() {
         onClose();
         await syncWithTacticus();
-    }
-
-    function buildErrorMessage(error: string | Error | null): string {
-        const baseMessage = 'Failed to update settings';
-        const detail = typeof error === 'string' ? error : error?.message;
-        return detail ? `${baseMessage}: ${detail}` : baseMessage;
     }
 
     async function updateApiKey() {

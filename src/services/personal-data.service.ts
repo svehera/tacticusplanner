@@ -66,15 +66,15 @@ export class PersonalDataLocalStorage {
                 seenAppVersion: this.getItem<string>('seenAppVersion') ?? defaultData.seenAppVersion,
                 autoTeamsPreferences: {
                     ...defaultData.autoTeamsPreferences,
-                    ...(this.getItem<IAutoTeamsPreferences>('autoTeamsPreferences') ?? {}),
+                    ...this.getItem<IAutoTeamsPreferences>('autoTeamsPreferences'),
                 },
                 dailyRaidsPreferences: {
                     ...defaultData.dailyRaidsPreferences,
-                    ...(this.getItem<IDailyRaidsPreferences>('dailyRaidsPreferences') ?? {}),
+                    ...this.getItem<IDailyRaidsPreferences>('dailyRaidsPreferences'),
                 },
                 viewPreferences: {
                     ...defaultData.viewPreferences,
-                    ...(this.getItem<IViewPreferences>('viewPreferences') ?? {}),
+                    ...this.getItem<IViewPreferences>('viewPreferences'),
                 },
                 characters: this.getItem<IPersonalCharacterData2[]>('characters') ?? defaultData.characters,
                 mows: this.getItem<IMowDatabase[]>('mows') ?? defaultData.mows,
@@ -97,31 +97,31 @@ export class PersonalDataLocalStorage {
                 leSettings: this.getItem<ILegendaryEventSettings>('leSettings') ?? defaultData.leSettings,
                 campaignsProgress: {
                     ...defaultData.campaignsProgress,
-                    ...(this.getItem<ICampaignsProgress>('campaignsProgress') ?? {}),
+                    ...this.getItem<ICampaignsProgress>('campaignsProgress'),
                 },
                 inventory: {
                     ...defaultData.inventory,
-                    ...(this.getItem<IInventory>('inventory') ?? {}),
+                    ...this.getItem<IInventory>('inventory'),
                 },
                 dailyRaids: {
                     ...defaultData.dailyRaids,
-                    ...(this.getItem<IDailyRaids>('dailyRaids') ?? {}),
+                    ...this.getItem<IDailyRaids>('dailyRaids'),
                 },
                 guildWar: {
                     ...defaultData.guildWar,
-                    ...(this.getItem<IGuildWar>('guildWar') ?? {}),
+                    ...this.getItem<IGuildWar>('guildWar'),
                 },
                 guild: {
                     ...defaultData.guild,
-                    ...(this.getItem<IGuild>('guild') ?? {}),
+                    ...this.getItem<IGuild>('guild'),
                 },
                 xpIncome: {
                     ...defaultData.xpIncome,
-                    ...(this.getItem<XpIncomeState>('xpIncome') ?? {}),
+                    ...this.getItem<XpIncomeState>('xpIncome'),
                 },
                 xpUse: {
                     ...defaultData.xpUse,
-                    ...(this.getItem<XpUseState>('xpUse') ?? {}),
+                    ...this.getItem<XpUseState>('xpUse'),
                 },
                 rosterSnapshots: {
                     ...defaultData.rosterSnapshots,
@@ -230,11 +230,11 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             modifiedDate: v1Data.modifiedDate ? new Date(v1Data.modifiedDate) : defaultData.modifiedDate,
             autoTeamsPreferences: {
                 ...defaultData.autoTeamsPreferences,
-                ...(v1Data.autoTeamsPreferences ?? {}),
+                ...v1Data.autoTeamsPreferences,
             },
             viewPreferences: {
                 ...defaultData.viewPreferences,
-                ...(v1Data.viewPreferences ?? {}),
+                ...v1Data.viewPreferences,
             },
             characters:
                 v1Data.characters.map(x => ({
@@ -275,7 +275,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
         },
         gameModeTokens: {
             ...defaultData.gameModeTokens,
-            ...(v1Data.gameModeTokens ?? {}),
+            ...v1Data.gameModeTokens,
         },
     };
 };
@@ -293,27 +293,27 @@ function migrateLreTeams(
     return teamsByEvent;
 }
 
+const resolve = (char: string) => CharactersService.canonicalName(char);
+// Helper function to compare two arrays for equality
+function areArraysEqual(array1: string[], array2: string[]): boolean {
+    return array1.length === array2.length && array1.every(char => array2.includes(char));
+}
+
+function doTeamsMatch(team1: string[], team2: string[]) {
+    return areArraysEqual(
+        team1.map(id => CharactersService.canonicalName(id)),
+        team2.map(id => CharactersService.canonicalName(id))
+    );
+}
+
 function populateTeams(data: ILegendaryEventSelectedTeams) {
     const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
     const teams: ILreTeam[] = [];
-
-    // Helper function to compare two arrays for equality
-    function areArraysEqual(array1: string[], array2: string[]): boolean {
-        return array1.length === array2.length && array1.every(char => array2.includes(char));
-    }
-
-    function doTeamsMatch(team1: string[], team2: string[]) {
-        return areArraysEqual(
-            team1.map(id => CharactersService.canonicalName(id)),
-            team2.map(id => CharactersService.canonicalName(id))
-        );
-    }
 
     sections.forEach(section => {
         const selectedTeams: SelectedTeams = data[section];
 
         Object.entries(selectedTeams).forEach(([restriction, charSnowprintIds]) => {
-            const resolve = (char: string) => CharactersService.canonicalName(char);
             // Check if there's already a team with the same set of characters
             const existingTeam = teams.find(
                 team =>

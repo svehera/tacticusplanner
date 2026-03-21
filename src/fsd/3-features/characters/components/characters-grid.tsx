@@ -114,7 +114,7 @@ export const CharactersGrid = ({
                 {unlockedCharacters}
             </div>
 
-            <Conditional condition={!!lockedCharacters.length}>
+            <Conditional condition={lockedCharacters.length > 0}>
                 <h4>Locked ({lockedCharacters.length})</h4>
                 <div
                     className="flex flex-wrap [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"

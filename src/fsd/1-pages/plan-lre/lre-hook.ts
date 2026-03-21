@@ -40,12 +40,15 @@ export const useLre = () => {
 
     const mapDefaultToPage = (page: LegendaryEventDefaultPage) => {
         switch (page) {
-            case LegendaryEventDefaultPage.TEAMS:
+            case LegendaryEventDefaultPage.TEAMS: {
                 return LreSection.teams;
-            case LegendaryEventDefaultPage.PROGRESS:
+            }
+            case LegendaryEventDefaultPage.PROGRESS: {
                 return LreSection.progress;
-            case LegendaryEventDefaultPage.TOKENOMICS:
+            }
+            case LegendaryEventDefaultPage.TOKENOMICS: {
                 return LreSection.tokenomics;
+            }
         }
         return LreSection.teams;
     };

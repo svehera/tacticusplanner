@@ -37,6 +37,17 @@ interface Props {
     updateDto: (model: ILreProgressModel) => void;
 }
 
+const getRestrictionTooltip = (requirement: ILreRequirements) => {
+    if (
+        requirement.id === LrePointsCategoryId.defeatAll ||
+        requirement.id === LrePointsCategoryId.killScore ||
+        requirement.id === LrePointsCategoryId.highScore
+    ) {
+        return requirement.name;
+    }
+    return `${requirement.name} - ${requirement.pointsPerBattle}`;
+};
+
 export const LreTrackOverallProgress: React.FC<Props> = ({
     track,
     legendaryEventId: _legendaryEventId,
@@ -97,17 +108,6 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
     };
 
     const completionPercentage = Math.round((currentPoints / track.totalPoints) * 100);
-
-    const getRestrictionTooltip = (requirement: ILreRequirements) => {
-        if (
-            requirement.id === LrePointsCategoryId.defeatAll ||
-            requirement.id === LrePointsCategoryId.killScore ||
-            requirement.id === LrePointsCategoryId.highScore
-        ) {
-            return requirement.name;
-        }
-        return `${requirement.name} - ${requirement.pointsPerBattle}`;
-    };
 
     const handleToggle = () => {
         if (

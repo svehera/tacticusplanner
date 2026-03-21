@@ -16,6 +16,33 @@ interface Props {
     onEnemyClick: (enemy: ResolvedEnemyData) => void;
 }
 
+// Extracted Logic: Resolve string to data object
+const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
+    const colon = enemyString.indexOf(':');
+    const id = colon !== -1 ? enemyString.substring(0, colon) : enemyString;
+
+    // Calculate index
+    let progressionIndex = 0;
+    if (colon !== -1) {
+        const pString = enemyString.substring(colon + 1);
+        const pInt = parseInt(pString, 10);
+        progressionIndex = isNaN(pInt) ? 0 : pInt;
+    }
+
+    // Adjust for 0-based array (Your logic used -1, keeping that consistency)
+    const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
+
+    const npc = NpcService.getNpcById(id);
+
+    if (!npc || arrayIndex >= npc.stats.length) return null;
+
+    return {
+        id,
+        npc,
+        stats: npc.stats[arrayIndex],
+    };
+};
+
 /**
  * Displays a grid of enemies, similar to what you see in game when you open a
  * campaign-battle dialog.
@@ -33,33 +60,6 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
         () => enemies.reduce((accumulator, enemy) => accumulator + enemy.count, 0),
         [enemies]
     );
-
-    // Extracted Logic: Resolve string to data object
-    const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
-        const colon = enemyString.indexOf(':');
-        const id = colon !== -1 ? enemyString.substring(0, colon) : enemyString;
-
-        // Calculate index
-        let progressionIndex = 0;
-        if (colon !== -1) {
-            const pString = enemyString.substring(colon + 1);
-            const pInt = parseInt(pString, 10);
-            progressionIndex = isNaN(pInt) ? 0 : pInt;
-        }
-
-        // Adjust for 0-based array (Your logic used -1, keeping that consistency)
-        const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
-
-        const npc = NpcService.getNpcById(id);
-
-        if (!npc || arrayIndex >= npc.stats.length) return null;
-
-        return {
-            id,
-            npc,
-            stats: npc.stats[arrayIndex],
-        };
-    };
 
     // How many enemies we show in each row, based on how many enemies we have
     // in total. Faster than doing the math.

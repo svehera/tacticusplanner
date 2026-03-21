@@ -42,6 +42,11 @@ export default defineConfig([
         languageOptions: { globals: globals.builtin },
         plugins: { unicorn: eslintPluginUnicorn },
         rules: {
+            'unicorn/explicit-length-check': 'error',
+            'unicorn/no-useless-fallback-in-spread': 'error',
+            'unicorn/error-message': 'error',
+            'unicorn/switch-case-braces': 'error',
+            'unicorn/consistent-function-scoping': 'error',
             'unicorn/prevent-abbreviations': [
                 'error',
                 {

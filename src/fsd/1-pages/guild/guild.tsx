@@ -60,7 +60,7 @@ export const Guild: React.FC = () => {
     };
 
     const importViaLink = (member: IGuildMember) => {
-        const updatedMembers = editedMembers.filter(x => !!x.username.length);
+        const updatedMembers = editedMembers.filter(x => x.username.length > 0);
         if (updatedMembers.length >= 30) {
             return;
         }

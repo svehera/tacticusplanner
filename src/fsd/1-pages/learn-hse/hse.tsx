@@ -26,6 +26,23 @@ interface HseBattle {
     dropChance: number;
 }
 
+/**
+ * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
+ */
+const getReward = (rewards: IRewards): string => {
+    // Elite battles give a guaranteed material, so return that.
+    for (const reward of rewards.guaranteed) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    // Otherwise, return the first potential reward that is not gold.
+    for (const reward of rewards.potential) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    return '';
+};
+
 export const HomeScreenEvent = () => {
     const gridReference = useRef<AgGridReact<HseBattle>>(null);
     const [campaignsToConsider, setCampaignsToConsider] = useState<Campaign[]>(() => {
@@ -33,22 +50,6 @@ export const HomeScreenEvent = () => {
     });
     const [includeRewardlessBattles, setIncludeRewardlessBattles] = useState<boolean>(true);
 
-    /**
-     * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
-     */
-    const getReward = (rewards: IRewards): string => {
-        // Elite battles give a guaranteed material, so return that.
-        for (const reward of rewards.guaranteed) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        // Otherwise, return the first potential reward that is not gold.
-        for (const reward of rewards.potential) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        return '';
-    };
     const calculateBestBattles = (
         campaigns: Campaign[],
         includeRewardlessBattles: boolean,
@@ -170,16 +171,21 @@ export const HomeScreenEvent = () => {
 
     const rowData = useMemo(() => {
         switch (selectedEvent) {
-            case IDailyRaidsHomeScreenEvent.machineHunt:
+            case IDailyRaidsHomeScreenEvent.machineHunt: {
                 return bestMachineHunt;
-            case IDailyRaidsHomeScreenEvent.purgeOrder:
+            }
+            case IDailyRaidsHomeScreenEvent.purgeOrder: {
                 return bestPurgeOrder;
-            case IDailyRaidsHomeScreenEvent.trainingRush:
+            }
+            case IDailyRaidsHomeScreenEvent.trainingRush: {
                 return bestTrainingRush;
-            case IDailyRaidsHomeScreenEvent.warpSurge:
+            }
+            case IDailyRaidsHomeScreenEvent.warpSurge: {
                 return bestWarpSurge;
-            default:
+            }
+            default: {
                 return [];
+            }
         }
     }, [selectedEvent, bestMachineHunt, bestPurgeOrder, bestWarpSurge, bestTrainingRush]);
 

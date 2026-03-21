@@ -31,7 +31,7 @@ export class LegendaryEventService {
                 .map(event => ({ event, startDate: Date.parse(safeGet(event, 'nextEventDateUtc') ?? '') }))
                 .filter(({ startDate }) => Number.isFinite(startDate) && startDate < now)
                 .sort((a, b) => b.startDate - a.startDate);
-            if (pastEvents.length !== 0) {
+            if (pastEvents.length > 0) {
                 startDates.push(new Date(pastEvents[0].startDate));
             } else {
                 const knownStartTimeMillis = 1766880000000; // This was the start of Farsight 1, it's arbitrary.

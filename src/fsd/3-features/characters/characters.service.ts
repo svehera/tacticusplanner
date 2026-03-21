@@ -53,25 +53,34 @@ export class CharactersService {
             : characters;
 
         switch (filterBy) {
-            case CharactersFilterBy.NeedToAscend:
+            case CharactersFilterBy.NeedToAscend: {
                 return filteredCharactersByName.filter(needToAscendCharacter);
-            case CharactersFilterBy.CanAscend:
+            }
+            case CharactersFilterBy.CanAscend: {
                 return filteredCharactersByName.filter(canAscendCharacter);
-            case CharactersFilterBy.NeedToLevel:
+            }
+            case CharactersFilterBy.NeedToLevel: {
                 return filteredCharactersByName.filter(needToLevelCharacter);
-            case CharactersFilterBy.BlueStarReady:
+            }
+            case CharactersFilterBy.BlueStarReady: {
                 return filteredCharactersByName.filter(blueStarReady);
-            case CharactersFilterBy.Chaos:
+            }
+            case CharactersFilterBy.Chaos: {
                 return filteredCharactersByName.filter(filterChaos);
-            case CharactersFilterBy.Imperial:
+            }
+            case CharactersFilterBy.Imperial: {
                 return filteredCharactersByName.filter(filterImperial);
-            case CharactersFilterBy.Xenos:
+            }
+            case CharactersFilterBy.Xenos: {
                 return filteredCharactersByName.filter(filterXenos);
-            case CharactersFilterBy.MoW:
+            }
+            case CharactersFilterBy.MoW: {
                 return filteredCharactersByName.filter(isMow);
+            }
             case CharactersFilterBy.None:
-            default:
+            default: {
                 return filteredCharactersByName;
+            }
         }
     }
 
@@ -85,19 +94,21 @@ export class CharactersService {
 
     static orderUnits(units: IUnit[], charactersOrderBy: CharactersOrderBy): IUnit[] {
         switch (charactersOrderBy) {
-            case CharactersOrderBy.CharacterValue:
+            case CharactersOrderBy.CharacterValue: {
                 return orderBy(
                     units.map(x => ({ ...x, characterValue: CharactersValueService.getCharacterValue(x) })),
                     ['characterValue'],
                     ['desc']
                 );
-            case CharactersOrderBy.CharacterPower:
+            }
+            case CharactersOrderBy.CharacterPower: {
                 return orderBy(
                     units.map(x => ({ ...x, characterPower: CharactersPowerService.getCharacterPower(x) })),
                     ['characterPower'],
                     ['desc']
                 );
-            case CharactersOrderBy.AbilitiesLevel:
+            }
+            case CharactersOrderBy.AbilitiesLevel: {
                 return orderBy(
                     units.map(x => ({
                         ...x,
@@ -106,11 +117,14 @@ export class CharactersService {
                     ['abilitiesLevel'],
                     ['desc']
                 );
-            case CharactersOrderBy.Rank:
+            }
+            case CharactersOrderBy.Rank: {
                 return orderBy(units, unit => (isMow(unit) ? Rank.Locked : unit.rank), ['desc']);
-            case CharactersOrderBy.Rarity:
+            }
+            case CharactersOrderBy.Rarity: {
                 return orderBy(units, ['rarity', 'stars'], ['desc', 'desc']);
-            case CharactersOrderBy.Shards:
+            }
+            case CharactersOrderBy.Shards: {
                 return orderBy(
                     units.map(x => ({
                         ...x,
@@ -119,7 +133,8 @@ export class CharactersService {
                     ['effectiveShards', 'rarity', 'stars'],
                     ['desc', 'desc', 'desc']
                 );
-            case CharactersOrderBy.UnlockPercentage:
+            }
+            case CharactersOrderBy.UnlockPercentage: {
                 return orderBy(
                     units,
                     unit => {
@@ -133,8 +148,10 @@ export class CharactersService {
                     },
                     ['asc']
                 );
-            default:
+            }
+            default: {
                 return units;
+            }
         }
     }
 
@@ -202,17 +219,21 @@ export class CharactersService {
         // Determine sort key based on the order parameter
         let orderByKey: keyof IFaction;
         switch (charactersOrderBy) {
-            case CharactersOrderBy.FactionValue:
+            case CharactersOrderBy.FactionValue: {
                 orderByKey = 'bsValue';
                 break;
-            case CharactersOrderBy.FactionPower:
+            }
+            case CharactersOrderBy.FactionPower: {
                 orderByKey = 'power';
                 break;
-            case CharactersOrderBy.Faction:
+            }
+            case CharactersOrderBy.Faction: {
                 orderByKey = 'unlockedCharacters';
                 break;
-            default:
+            }
+            default: {
                 return result;
+            }
         }
 
         // Sort using native sort
