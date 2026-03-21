@@ -42,9 +42,9 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         value: boolean
     ) => {
         if (Object.hasOwn(viewSettings, setting)) {
-            setViewSettings(curr => ({ ...curr, [setting]: value }));
+            setViewSettings(current => ({ ...current, [setting]: value }));
         } else {
-            setTeamsSettings(curr => ({ ...curr, [setting]: value }));
+            setTeamsSettings(current => ({ ...current, [setting]: value }));
         }
     };
 

@@ -128,18 +128,24 @@ export class RosterSnapshotsService {
 
     private static getMinimumStarsForRarity(rarity: Rarity): RarityStars {
         switch (rarity) {
-            case Rarity.Common:
+            case Rarity.Common: {
                 return RarityStars.None;
-            case Rarity.Uncommon:
+            }
+            case Rarity.Uncommon: {
                 return RarityStars.TwoStars;
-            case Rarity.Rare:
+            }
+            case Rarity.Rare: {
                 return RarityStars.FourStars;
-            case Rarity.Epic:
+            }
+            case Rarity.Epic: {
                 return RarityStars.RedOneStar;
-            case Rarity.Legendary:
+            }
+            case Rarity.Legendary: {
                 return RarityStars.RedThreeStars;
-            case Rarity.Mythic:
+            }
+            case Rarity.Mythic: {
                 return RarityStars.OneBlueStar;
+            }
         }
         return RarityStars.None;
     }
@@ -149,21 +155,21 @@ export class RosterSnapshotsService {
      * sense. This function is a band aid to sanitize those diffs.
      */
     public static fixSnapshot(snapshot: IRosterSnapshot): IRosterSnapshot {
-        const ret = cloneDeep(snapshot);
-        for (const char of ret.chars) {
+        const returnValue = cloneDeep(snapshot);
+        for (const char of returnValue.chars) {
             char.activeAbilityLevel = Math.max(1, char.activeAbilityLevel);
             char.passiveAbilityLevel = Math.max(1, char.passiveAbilityLevel);
             char.xpLevel = Math.max(1, char.xpLevel);
             char.rarity = Math.max(char.rarity, CharactersService.getInitialRarity(char.id) ?? Rarity.Common);
             char.stars = Math.max(char.stars, this.getMinimumStarsForRarity(char.rarity));
         }
-        for (const mow of ret.mows) {
+        for (const mow of returnValue.mows) {
             mow.primaryAbilityLevel = Math.max(1, mow.primaryAbilityLevel);
             mow.secondaryAbilityLevel = Math.max(1, mow.secondaryAbilityLevel);
             mow.rarity = Math.max(mow.rarity, CharactersService.getInitialRarity(mow.id) ?? Rarity.Common);
             mow.stars = Math.max(mow.stars, this.getMinimumStarsForRarity(mow.rarity));
         }
-        return ret;
+        return returnValue;
     }
 
     /**
@@ -181,8 +187,8 @@ export class RosterSnapshotsService {
             );
         }
         let currentSnapshot = rosterSnapshots.base!;
-        for (let i = 0; i <= index; i++) {
-            const diff = rosterSnapshots.diffs[i];
+        for (let snapshotIndex = 0; snapshotIndex <= index; snapshotIndex++) {
+            const diff = rosterSnapshots.diffs[snapshotIndex];
             if (!diff) {
                 throw new Error('Index out of bounds.');
             }
@@ -376,8 +382,8 @@ export class RosterSnapshotsService {
             liveSnapshots.push(rosterSnapshots.base);
         }
         let currentSnapshot = rosterSnapshots.base;
-        for (let i = 0; i < rosterSnapshots.diffs.length; i++) {
-            const diff = rosterSnapshots.diffs[i];
+        for (let index = 0; index < rosterSnapshots.diffs.length; index++) {
+            const diff = rosterSnapshots.diffs[index];
             if (!currentSnapshot) {
                 throw new Error('Base snapshot is undefined.');
             }
@@ -413,10 +419,10 @@ export class RosterSnapshotsService {
         if (rosterSnapshots.base && rosterSnapshots.base.deletedDateMillisUtc === undefined) {
             liveIndices.push(-1);
         }
-        for (let i = 0; i < rosterSnapshots.diffs.length; i++) {
-            const diff = rosterSnapshots.diffs[i];
+        for (let index = 0; index < rosterSnapshots.diffs.length; index++) {
+            const diff = rosterSnapshots.diffs[index];
             if (diff.deletedDateMillisUtc === undefined) {
-                liveIndices.push(i);
+                liveIndices.push(index);
             }
         }
         return liveIndices;
@@ -541,8 +547,8 @@ export class RosterSnapshotsService {
         if (rosterSnapshots.base) {
             allSnapshots.push(rosterSnapshots.base);
             let currentSnapshot = rosterSnapshots.base;
-            for (let i = 0; i < rosterSnapshots.diffs.length; i++) {
-                const diff = rosterSnapshots.diffs[i];
+            for (let index = 0; index < rosterSnapshots.diffs.length; index++) {
+                const diff = rosterSnapshots.diffs[index];
                 currentSnapshot = this.resolveSnapshotDiff(currentSnapshot, diff);
                 allSnapshots.push(currentSnapshot);
             }
@@ -590,16 +596,16 @@ export class RosterSnapshotsService {
         }
         state.base = toKeep[0];
         let current = state.base;
-        for (let i = 1; i < toKeep.length; i++) {
+        for (let index = 1; index < toKeep.length; index++) {
             const diff = this.diffSnapshots(
                 current,
-                toKeep[i],
+                toKeep[index],
                 /*diffShards=*/ true,
                 /*diffMythicShards=*/ true,
                 /*diffXpLevel=*/ true,
                 /*diffEquipment=*/ true
             );
-            current = toKeep[i];
+            current = toKeep[index];
 
             state.diffs.push(diff);
         }

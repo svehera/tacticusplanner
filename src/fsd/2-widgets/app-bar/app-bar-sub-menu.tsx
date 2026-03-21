@@ -51,7 +51,7 @@ const MenuOption: React.FC<{ option: MenuItemTP; onOptionClick: () => void }> = 
     return (
         <ListItemButton
             onClick={() => {
-                if (!option.subMenu.length) {
+                if (option.subMenu.length === 0) {
                     handleOptionClick(option);
                 } else {
                     setOpen(value => !value);
@@ -62,7 +62,7 @@ const MenuOption: React.FC<{ option: MenuItemTP; onOptionClick: () => void }> = 
                 setOpen(false);
             }}>
             <ListItemText primary={option.label} />
-            <Conditional condition={!!option.subMenu.length}>{open ? <ChevronLeft /> : <ChevronRight />}</Conditional>
+            <Conditional condition={option.subMenu.length > 0}>{open ? <ChevronLeft /> : <ChevronRight />}</Conditional>
             <Collapse
                 in={open}
                 timeout="auto"

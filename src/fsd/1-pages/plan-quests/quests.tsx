@@ -13,7 +13,7 @@ import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { INpcData, INpcStats } from '@/fsd/4-entities/npc/model';
 import { NpcPortrait } from '@/fsd/4-entities/npc/npc-portrait';
 import { NpcService } from '@/fsd/4-entities/npc/npc-service';
-import questJson from '@/fsd/4-entities/quests/data/heroQuests.json';
+import questJson from '@/fsd/4-entities/quests/data/hero-quests.json';
 import { IUnit, UnitsAutocomplete } from '@/fsd/4-entities/unit';
 import { UpgradesService as FsdUpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade';
 
@@ -26,6 +26,14 @@ interface ResolvedEnemyData {
     npc: INpcData;
     stats: INpcStats; // The specific stats for this level
 }
+
+const getUpgradeRarity = (upgradeId: string): RarityString => {
+    const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
+    if (!upgrade || upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
+        return RarityMapper.rarityToRarityString(Rarity.Common);
+    }
+    return RarityMapper.rarityToRarityString(upgrade.rarity as unknown as Rarity);
+};
 
 export const Quests = () => {
     const {
@@ -72,17 +80,10 @@ export const Quests = () => {
     );
 
     // Toggles
-    const toggleTier = (tierIndex: number) => setExpandedTiers(prev => ({ ...prev, [tierIndex]: !prev[tierIndex] }));
+    const toggleTier = (tierIndex: number) =>
+        setExpandedTiers(previous => ({ ...previous, [tierIndex]: !previous[tierIndex] }));
     const toggleBattle = (battleKey: string) =>
-        setExpandedBattles(prev => ({ ...prev, [battleKey]: !prev[battleKey] }));
-
-    const getUpgradeRarity = (upgradeId: string): RarityString => {
-        const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
-        if (!upgrade || upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-            return RarityMapper.rarityToRarityString(Rarity.Common);
-        }
-        return RarityMapper.rarityToRarityString(upgrade.rarity as unknown as Rarity);
-    };
+        setExpandedBattles(previous => ({ ...previous, [battleKey]: !previous[battleKey] }));
 
     const unitsNeedingUpgrade = (
         upgradeId: string
@@ -234,19 +235,19 @@ export const Quests = () => {
                                                     <div className="bg-slate-50 px-4 pt-2 pb-4 dark:bg-black/20">
                                                         <div className="flex flex-wrap gap-2 rounded-lg border-2 border-dashed border-slate-200 p-3 dark:border-slate-700">
                                                             <div className="mb-3 flex flex-wrap items-start gap-x-3 gap-y-6">
-                                                                {battle.enemies.map((enemy, idx) => {
+                                                                {battle.enemies.map((enemy, enemyIndex) => {
                                                                     const npc = NpcService.getNpcById(enemy.name);
-                                                                    const index =
+                                                                    const progressionIndex =
                                                                         (enemy.progressionIndex ?? 1) > 0
                                                                             ? (enemy.progressionIndex ?? 1) - 1
                                                                             : 0;
                                                                     if (
                                                                         npc === undefined ||
-                                                                        npc.stats.length <= index
+                                                                        npc.stats.length <= progressionIndex
                                                                     ) {
                                                                         return (
                                                                             <div
-                                                                                key={idx}
+                                                                                key={enemyIndex}
                                                                                 className="text-xs text-red-500">
                                                                                 Error: {enemy.name}
                                                                             </div>
@@ -255,11 +256,11 @@ export const Quests = () => {
                                                                     const data: ResolvedEnemyData = {
                                                                         id: enemy.name,
                                                                         npc,
-                                                                        stats: npc.stats[index],
+                                                                        stats: npc.stats[progressionIndex],
                                                                     };
                                                                     return (
                                                                         <button
-                                                                            key={idx}
+                                                                            key={enemyIndex}
                                                                             onClick={() => {}}
                                                                             className="relative h-[75px] w-[60px] cursor-pointer rounded transition-all hover:brightness-110 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                                                                             style={{

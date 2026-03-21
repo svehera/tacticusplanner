@@ -2,8 +2,8 @@
 
 import { ICreateGuide, IGetGuidesResponse } from './guides.models';
 
-export const getTeamsApi = (queryParams: string) => {
-    return makeApiCall<IGetGuidesResponse>('get', `guides?${queryParams}`);
+export const getTeamsApi = (queryParameters: string) => {
+    return makeApiCall<IGetGuidesResponse>('get', `guides?${queryParameters}`);
 };
 
 export const createTeamApi = (team: ICreateGuide) => {

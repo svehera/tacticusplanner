@@ -254,9 +254,9 @@ const createAllCampaignsProgress = (): IEstimatedRanksSettings['campaignsProgres
     return Object.values(Campaign)
         .filter((value): value is Campaign => typeof value === 'string')
         .reduce(
-            (acc, campaign) => {
-                acc[campaign] = 999;
-                return acc;
+            (accumulator, campaign) => {
+                accumulator[campaign] = 999;
+                return accumulator;
             },
             {} as IEstimatedRanksSettings['campaignsProgress']
         );
@@ -282,9 +282,9 @@ const createCustomDailyRaidsSettings = (
     const defaults = Object.values(Rarity)
         .filter((value): value is Rarity => typeof value === 'number')
         .reduce<Partial<Record<Rarity, CampaignType[]>>>(
-            (acc, rarity) => {
-                acc[rarity] = [];
-                return acc;
+            (accumulator, rarity) => {
+                accumulator[rarity] = [];
+                return accumulator;
             },
             { Shard: [], 'Mythic Shard': [] } as Partial<Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>>
         ) as Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>;
@@ -303,6 +303,48 @@ const getRewardLocations = (rewardId: string): ICampaignBattleComposed[] => {
                 battle.rewards.potential.some(reward => reward.id === rewardId))
     );
 };
+
+const findStone1UncraftableCandidate = () => {
+    for (const [unitId, ranks] of Object.entries(rankUpData)) {
+        const stoneOne = (ranks as Record<string, string[]>)['Stone I'];
+        if (!stoneOne || stoneOne.length === 0) continue;
+        const allUncrafted = stoneOne.every(upgradeId => {
+            const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
+            return upgrade !== undefined && !upgrade.crafted;
+        });
+        const hasDuplicate = new Set(stoneOne).size < stoneOne.length;
+        if (allUncrafted && hasDuplicate) {
+            return { unitId, upgrades: stoneOne };
+        }
+    }
+    return undefined;
+};
+
+const getRate = (location: ICampaignBattleComposed): number => location.energyPerDay / location.energyPerItem;
+
+const buildUpgrade = (locations: ICampaignBattleComposed[]): ICombinedUpgrade => ({
+    ...FsdUpgradesService.baseUpgradesData.upgHpC015,
+    requiredCount: 1,
+    countByGoalId: {},
+    relatedCharacters: [],
+    relatedGoals: [],
+    locations,
+});
+
+const buildSettingsForHse = (
+    order: IDailyRaidsFarmOrder,
+    homeScreenEvent: IDailyRaidsHomeScreenEvent
+): IEstimatedRanksSettings =>
+    createSettings({
+        preferences: {
+            ...createSettings().preferences,
+            farmPreferences: {
+                order,
+                homeScreenEvent,
+            },
+            farmStrategy: DailyRaidsStrategy.leastEnergy,
+        },
+    });
 
 describe('UpgradesService.addOnslaughtsForDay', () => {
     it('adds three onslaught battles for an ascend goal with three tokens', () => {
@@ -754,9 +796,9 @@ describe('UpgradesService.planDayRaiding', () => {
         const campaignsProgress = Object.values(Campaign)
             .filter((value): value is Campaign => typeof value === 'string')
             .reduce(
-                (acc, campaign) => {
-                    acc[campaign] = 999;
-                    return acc;
+                (accumulator, campaign) => {
+                    accumulator[campaign] = 999;
+                    return accumulator;
                 },
                 {} as IEstimatedRanksSettings['campaignsProgress']
             );
@@ -1151,22 +1193,6 @@ describe('UpgradesService.getUpgrades', () => {
     const tyranidsRareIds = ['upgArmR033', 'upgDmgR033', 'upgHpR033'];
     const tyranidsLegendaryIds = ['upgHpL116'];
 
-    const findStone1UncraftableCandidate = () => {
-        for (const [unitId, ranks] of Object.entries(rankUpData)) {
-            const stoneOne = (ranks as Record<string, string[]>)['Stone I'];
-            if (!stoneOne || stoneOne.length === 0) continue;
-            const allUncrafted = stoneOne.every(upgradeId => {
-                const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
-                return upgrade !== undefined && !upgrade.crafted;
-            });
-            const hasDuplicate = new Set(stoneOne).size < stoneOne.length;
-            if (allUncrafted && hasDuplicate) {
-                return { unitId, upgrades: stoneOne };
-            }
-        }
-        return undefined;
-    };
-
     it('counts uncraftable upgrades for a Stone I to Stone II rank-up goal', () => {
         const candidate = findStone1UncraftableCandidate();
         if (!candidate) throw new Error('No candidate with uncraftable Stone I upgrades found.');
@@ -1402,11 +1428,11 @@ describe('UpgradesService.getUpgrades', () => {
         );
 
         const upgrades = UpgradesService.getUpgrades({}, [character], [], [goalStoneToGold, goalGoldToDiamond]);
-        const actualCounts = upgrades.reduce<Record<string, number>>((acc, upgrade) => {
+        const actualCounts = upgrades.reduce<Record<string, number>>((accumulator, upgrade) => {
             Object.entries(upgrade.baseUpgradesTotal).forEach(([id, count]) => {
-                acc[id] = (acc[id] ?? 0) + count;
+                accumulator[id] = (accumulator[id] ?? 0) + count;
             });
-            return acc;
+            return accumulator;
         }, {});
 
         const actualRareTotal = worldEatersRareIds.reduce((sum, id) => sum + (actualCounts[id] ?? 0), 0);
@@ -1473,11 +1499,11 @@ describe('UpgradesService.getUpgrades', () => {
             [kharnGoal, wraskGoal]
         );
 
-        const combined = upgrades.reduce<Record<string, number>>((acc, upgrade) => {
+        const combined = upgrades.reduce<Record<string, number>>((accumulator, upgrade) => {
             Object.entries(upgrade.baseUpgradesTotal).forEach(([id, count]) => {
-                acc[id] = (acc[id] ?? 0) + count;
+                accumulator[id] = (accumulator[id] ?? 0) + count;
             });
-            return acc;
+            return accumulator;
         }, {});
 
         expect(combined['upgHpL118']).toBe(164);
@@ -1528,6 +1554,7 @@ describe('UpgradesService.getUpgrades', () => {
 });
 
 describe('UpgradesService.getUpgradesEstimatedDays', () => {
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- different versions of this in multiple describe blocks
     const buildSettings = (overrides: Partial<IEstimatedRanksSettings> = {}) =>
         createSettings({
             dailyEnergy: 638,
@@ -1999,9 +2026,9 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
             atlacoyaGoal
         );
 
-        const temp = hmhGoal.priority;
+        const temporary = hmhGoal.priority;
         hmhGoal.priority = atlacoyaGoal.priority;
-        atlacoyaGoal.priority = temp;
+        atlacoyaGoal.priority = temporary;
 
         const result2 = UpgradesService.getUpgradesEstimatedDays(
             buildSettings({ upgrades: inventory }),
@@ -2058,6 +2085,7 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
         ) as Record<string, ICombinedUpgrade>;
     };
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- different versions of this in multiple describe blocks
     const buildSettings = (completedLocations: IItemRaidLocation[], upgrades: Record<string, number>) => {
         return {
             completedLocations,
@@ -3417,15 +3445,7 @@ describe('UpgradesService.populateLocationsData', () => {
 });
 
 describe('UpgradesService.populateLocationsData filters', () => {
-    const buildUpgrade = (locations: ICampaignBattleComposed[]): ICombinedUpgrade => ({
-        ...FsdUpgradesService.baseUpgradesData.upgHpC015,
-        requiredCount: 1,
-        countByGoalId: {},
-        relatedCharacters: [],
-        relatedGoals: [],
-        locations,
-    });
-
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- different versions of this in multiple describe blocks
     const buildSettings = (filters: ICampaignsFilters): IEstimatedRanksSettings =>
         createSettings({
             campaignsProgress: {
@@ -3581,7 +3601,6 @@ describe('UpgradesService.populateLocationsData filters', () => {
 });
 
 describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
-    const getRate = (location: ICampaignBattleComposed): number => location.energyPerDay / location.energyPerItem;
     const upgradeId = 'upgHpL118';
 
     const buildCombinedUpgrade = (overrides: Partial<ICombinedUpgrade>): ICombinedUpgrade => ({
@@ -3809,7 +3828,6 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
 });
 
 describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () => {
-    const getRate = (location: ICampaignBattleComposed): number => location.energyPerDay / location.energyPerItem;
     const upgradeId = 'upgHpL118';
 
     const buildCombinedUpgrade = (overrides: Partial<ICombinedUpgrade>): ICombinedUpgrade => ({
@@ -3827,6 +3845,7 @@ describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () =
     const goalB = createRankGoal(baseChar, { goalId: 'goalB', priority: 2 });
     const goals = [goalA, goalB];
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- different versions of this in multiple describe blocks
     const buildSettings = (order: IDailyRaidsFarmOrder): IEstimatedRanksSettings =>
         createSettings({
             preferences: {
@@ -4056,21 +4075,6 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
     const goal = createRankGoal(baseChar, { goalId: 'goal-hse', priority: 1 });
     const goals = [goal];
 
-    const buildSettingsForHse = (
-        order: IDailyRaidsFarmOrder,
-        homeScreenEvent: IDailyRaidsHomeScreenEvent
-    ): IEstimatedRanksSettings =>
-        createSettings({
-            preferences: {
-                ...createSettings().preferences,
-                farmPreferences: {
-                    order,
-                    homeScreenEvent,
-                },
-                farmStrategy: DailyRaidsStrategy.leastEnergy,
-            },
-        });
-
     const buildCombinedUpgradeForLocation = (
         upgradeId: string,
         location: ICampaignBattleComposed
@@ -4099,9 +4103,9 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
         const campaignsProgress = Object.values(Campaign)
             .filter((value): value is Campaign => typeof value === 'string')
             .reduce(
-                (acc, campaign) => {
-                    acc[campaign] = 999;
-                    return acc;
+                (accumulator, campaign) => {
+                    accumulator[campaign] = 999;
+                    return accumulator;
                 },
                 {} as IEstimatedRanksSettings['campaignsProgress']
             );

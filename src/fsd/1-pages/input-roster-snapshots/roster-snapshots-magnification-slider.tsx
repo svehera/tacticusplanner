@@ -2,11 +2,11 @@ import { ZoomIn, ZoomOut } from '@mui/icons-material';
 import { Slider } from '@mui/material';
 
 export const RosterSnapshotsMagnificationSlider = ({
-    sizeMod,
-    setSizeMod,
+    zoom,
+    setZoom,
 }: {
-    sizeMod: number;
-    setSizeMod: (value: number) => void;
+    zoom: number;
+    setZoom: (value: number) => void;
 }) => {
     return (
         <div className="flex items-center gap-2">
@@ -17,9 +17,9 @@ export const RosterSnapshotsMagnificationSlider = ({
                     min={0.25}
                     max={2}
                     step={0.05}
-                    value={sizeMod}
+                    value={zoom}
                     onChange={(_, value) => {
-                        setSizeMod(value as number);
+                        setZoom(value as number);
                     }}
                     valueLabelDisplay="auto"
                     aria-label="unit size"

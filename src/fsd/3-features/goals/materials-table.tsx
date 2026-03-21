@@ -56,16 +56,16 @@ const getMaterialMetadata = (id: string, rarity?: number | string) => {
     if (isShard) type = MaterialType.Shard;
     else if (isMythicShard) type = MaterialType.MythicShard;
 
-    let rarityStr: string;
-    if (type === MaterialType.Shard) rarityStr = 'Shard';
-    else if (type === MaterialType.MythicShard) rarityStr = 'Mythic Shard';
-    else rarityStr = typeof rarity === 'number' ? RarityMapper.rarityToRarityString(rarity as Rarity) : 'Unknown';
+    let rarityString: string;
+    if (type === MaterialType.Shard) rarityString = 'Shard';
+    else if (type === MaterialType.MythicShard) rarityString = 'Mythic Shard';
+    else rarityString = typeof rarity === 'number' ? RarityMapper.rarityToRarityString(rarity as Rarity) : 'Unknown';
 
     return {
         type,
         // Cast this to RarityString to satisfy strict component props
-        rarityStr: rarityStr as RarityString,
-        className: rarityStr.toLowerCase().replace(' ', '-'),
+        rarityStr: rarityString as RarityString,
+        className: rarityString.toLowerCase().replace(' ', '-'),
     };
 };
 
@@ -80,6 +80,20 @@ const MaterialIcon: React.FC<{ data: IRaidMaterialRow; typeOnly?: boolean }> = (
     return <UpgradeImage material={data.label} iconPath={data.iconPath} rarity={rarityStr} />;
 };
 
+const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {
+    const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
+    let normalized = 'Unknown';
+
+    if (typeof rarity === 'number') {
+        normalized = RarityMapper.rarityToRarityString(rarity as Rarity);
+    } else if (typeof rarity === 'string') {
+        normalized = RarityMapper.stringToRarityString(rarity) ?? rarity;
+    }
+
+    const index = order.indexOf(normalized);
+    return index === -1 ? order.length - 1 : index;
+};
+
 export const MaterialsTable: React.FC<Props> = ({
     rows,
     updateMaterialQuantity,
@@ -88,20 +102,6 @@ export const MaterialsTable: React.FC<Props> = ({
     scrollToCharSnowprintId,
     alreadyUsedMaterials,
 }) => {
-    const getRaritySortKey = (rarity: Rarity | RarityString | 'Shard' | 'Mythic Shard' | undefined): number => {
-        const order = ['Shard', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic', 'Mythic Shard', 'Unknown'];
-        let normalized = 'Unknown';
-
-        if (typeof rarity === 'number') {
-            normalized = RarityMapper.rarityToRarityString(rarity as Rarity);
-        } else if (typeof rarity === 'string') {
-            normalized = RarityMapper.stringToRarityString(rarity) ?? rarity;
-        }
-
-        const index = order.indexOf(normalized);
-        return index === -1 ? order.length - 1 : index;
-    };
-
     const columnDefs: Array<ColDef<IRaidMaterialRow> | ColGroupDef<IRaidMaterialRow>> = [
         {
             headerName: 'Upgrade',
@@ -294,7 +294,7 @@ export const MaterialsTable: React.FC<Props> = ({
         }) as IRaidMaterialRow[];
     }, [rows, inventory, alreadyUsedMaterials]);
 
-    const gridApiRef = useRef<GridReadyEvent['api'] | null>(null);
+    const gridApiReference = useRef<GridReadyEvent['api'] | null>(null);
 
     const scrollToChar = (api: GridReadyEvent['api'], snowprintId: string) => {
         const char = CharactersService.resolveCharacter(snowprintId);
@@ -308,7 +308,7 @@ export const MaterialsTable: React.FC<Props> = ({
     };
 
     const onGridReadyInternal = (params: GridReadyEvent) => {
-        gridApiRef.current = params.api;
+        gridApiReference.current = params.api;
         if (scrollToCharSnowprintId) {
             scrollToChar(params.api, scrollToCharSnowprintId);
         }

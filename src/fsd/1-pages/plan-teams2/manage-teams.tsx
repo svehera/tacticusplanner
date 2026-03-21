@@ -133,7 +133,7 @@ export const ManageTeams = () => {
 
     const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
     const [teams, setTeams] = useState<ITeam2[]>([]);
-    const [sizeMod, setSizeMod] = useState(isMobile ? 0.5 : 1);
+    const [zoom, setZoom] = useState(isMobile ? 0.5 : 1);
     const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>(undefined);
 
     useEffect(() => {
@@ -337,12 +337,12 @@ export const ManageTeams = () => {
             team.horde = hordeModeSelected ? true : undefined;
             team.notes = notes;
             team.flexIndex = flexIndex;
-            const curTeams = [...teams];
-            curTeams.forEach(t => {
+            const editingTeams = [...teams];
+            editingTeams.forEach(t => {
                 if (t.name !== editingTeam.name) return;
                 t = team;
             });
-            dispatch.teams2({ type: 'Set', value: cloneDeep(curTeams) });
+            dispatch.teams2({ type: 'Set', value: cloneDeep(editingTeams) });
         } else {
             const newTeam: ITeam2 = {
                 name: teamName.trim(),
@@ -411,8 +411,8 @@ export const ManageTeams = () => {
                 maxRank={maxRank}
                 factions={factions}
                 notes={notes}
-                sizeMod={sizeMod}
-                setSizeMod={setSizeMod}
+                zoom={zoom}
+                setZoom={setZoom}
                 onAddChar={onAddChar}
                 onAddMow={onAddMow}
                 onCharClicked={onCharClicked}
@@ -454,7 +454,7 @@ export const ManageTeams = () => {
     return (
         <Stack spacing={2} className="p-4">
             <div className="flex items-start justify-between gap-4">
-                <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                 <div className="flex items-center gap-2">
                     <label className="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
                         Team Type
@@ -462,8 +462,8 @@ export const ManageTeams = () => {
                     <select
                         className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-blue-900/40"
                         value={selectedTeamType ?? ''}
-                        onChange={e => {
-                            const value = e.target.value as TeamTypeKey | '';
+                        onChange={event => {
+                            const value = event.target.value as TeamTypeKey | '';
                             setSelectedTeamType(value ? value : undefined);
                         }}>
                         <option value="">All</option>
@@ -528,7 +528,7 @@ export const ManageTeams = () => {
                                     <select
                                         className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-blue-900/40"
                                         value={selectedLegacyTeamName}
-                                        onChange={e => setSelectedLegacyTeamName(e.target.value)}>
+                                        onChange={event => setSelectedLegacyTeamName(event.target.value)}>
                                         {legacyTeams.map(t => (
                                             <option key={t.name} value={t.name}>
                                                 {t.name}
@@ -643,7 +643,7 @@ export const ManageTeams = () => {
                                 flexIndex={team.flexIndex}
                                 onCharClicked={() => {}}
                                 onMowClicked={() => {}}
-                                sizeMod={sizeMod}
+                                zoom={zoom}
                                 disabledUnits={[
                                     ...team.chars.map(
                                         char =>

@@ -61,7 +61,7 @@ export const GoalCard: React.FC<Props> = ({
 
     const renderBody = () => {
         switch (goal.type) {
-            case PersonalGoalType.Ascend:
+            case PersonalGoalType.Ascend: {
                 return (
                     <GoalCardAscend
                         goal={goal}
@@ -71,7 +71,8 @@ export const GoalCard: React.FC<Props> = ({
                         mows={mows}
                     />
                 );
-            case PersonalGoalType.UpgradeRank:
+            }
+            case PersonalGoalType.UpgradeRank: {
                 return (
                     <GoalCardUpgradeRank
                         goal={goal}
@@ -80,12 +81,16 @@ export const GoalCard: React.FC<Props> = ({
                         bookRarity={bookRarity}
                     />
                 );
-            case PersonalGoalType.MowAbilities:
+            }
+            case PersonalGoalType.MowAbilities: {
                 return <GoalCardMowAbilities goal={goal} goalEstimate={goalEstimate} calendarDate={calendarDate} />;
-            case PersonalGoalType.CharacterAbilities:
+            }
+            case PersonalGoalType.CharacterAbilities: {
                 return <GoalCardCharacterAbilities goal={goal} goalEstimate={goalEstimate} />;
-            case PersonalGoalType.Unlock:
+            }
+            case PersonalGoalType.Unlock: {
                 return <GoalCardUnlock goal={goal} goalEstimate={goalEstimate} calendarDate={calendarDate} />;
+            }
         }
     };
 

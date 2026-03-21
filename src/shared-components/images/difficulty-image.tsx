@@ -7,10 +7,11 @@ import { Difficulty } from 'src/models/enums';
 export const DifficultyImage = ({ difficulty, withColor = false }: { difficulty: Difficulty; withColor?: boolean }) => {
     if (withColor) {
         switch (difficulty) {
-            case Difficulty.Easy:
+            case Difficulty.Easy: {
                 return <img className="pointer-events-none" src={difficultyImg} height={15} alt="Difficulty Easy" />;
+            }
 
-            case Difficulty.Normal:
+            case Difficulty.Normal: {
                 return (
                     <img
                         className="pointer-events-none"
@@ -19,11 +20,13 @@ export const DifficultyImage = ({ difficulty, withColor = false }: { difficulty:
                         alt="Difficulty Normal"
                     />
                 );
-            case Difficulty.Hard:
+            }
+            case Difficulty.Hard: {
                 return (
                     <img className="pointer-events-none" src={difficultyHardImg} height={15} alt="Difficulty Hard" />
                 );
-            case Difficulty.VeryHard:
+            }
+            case Difficulty.VeryHard: {
                 return (
                     <img
                         className="pointer-events-none"
@@ -32,6 +35,7 @@ export const DifficultyImage = ({ difficulty, withColor = false }: { difficulty:
                         alt="Difficulty Very Hard"
                     />
                 );
+            }
         }
     }
 

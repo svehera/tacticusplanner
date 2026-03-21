@@ -46,6 +46,14 @@ import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-e
 import { ILreProgressModel } from './lre.models';
 import { LreService } from './lre.service';
 
+const passesNameFilter = (filter: string, character: ICharacter2) => {
+    if (!filter) return true;
+    return (
+        character.name.toLowerCase().includes(filter.toLowerCase()) ||
+        ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
+    );
+};
+
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
         LegendaryEventService.getUnfinishedEvents().map(x => x.id)
@@ -67,7 +75,7 @@ export const MasterTable = () => {
         value => value
     );
 
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
     const getSelectedChars = (eventId: LegendaryEventEnum) => {
         const teams = getSelectedTeams(eventId);
@@ -76,16 +84,8 @@ export const MasterTable = () => {
         );
     };
 
-    const passesNameFilter = (filter: string, character: ICharacter2) => {
-        if (!filter) return true;
-        return (
-            character.name.toLowerCase().includes(filter.toLowerCase()) ||
-            ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
-        );
-    };
-
     const selectedCharsRows: ITableRow[] = useMemo(() => {
-        const temp: Array<{
+        const temporary: Array<{
             character: ICharacter2;
             characterId: string;
             eventId: LegendaryEventEnum;
@@ -148,10 +148,10 @@ export const MasterTable = () => {
                         (gamma[x.snowprintId!]?.slots ?? 0),
                 }));
 
-            temp.push(...eventCharacters);
+            temporary.push(...eventCharacters);
         });
 
-        const grouped = groupBy(temp, 'characterId');
+        const grouped = groupBy(temporary, 'characterId');
 
         return map(grouped, items => {
             const charData = {
@@ -250,10 +250,10 @@ export const MasterTable = () => {
     }, [filter, activeLegendaryEvents, pointsCalculation, resolvedCharacters, leProgress, leSelectedTeams]);
 
     const [selection, setSelection] = useState<CharactersSelection>(
-        selectedCharsRows.length ? CharactersSelection.Selected : CharactersSelection.All
+        selectedCharsRows.length > 0 ? CharactersSelection.Selected : CharactersSelection.All
     );
 
-    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
+    const columnDefinitions: Array<ColDef | ColGroupDef> = useMemo(() => {
         return [
             {
                 headerName: 'Character',
@@ -361,7 +361,7 @@ export const MasterTable = () => {
     }, [selection, activeLegendaryEvents]);
 
     const rows = useMemo<ITableRow[]>(() => {
-        const temp: Array<{
+        const temporary: Array<{
             character: ICharacter2;
             characterId: string;
             eventId: LegendaryEventEnum;
@@ -395,9 +395,9 @@ export const MasterTable = () => {
                     slots: x.legendaryEvents[legendaryEvent.id].totalSlots,
                 }));
 
-            temp.push(...eventCharacters);
+            temporary.push(...eventCharacters);
         });
-        const grouped = groupBy(temp, 'characterId');
+        const grouped = groupBy(temporary, 'characterId');
 
         return map(grouped, items => {
             const charData = {
@@ -532,17 +532,17 @@ export const MasterTable = () => {
             </div>
             <div className="ag-theme-material h-[calc(100vh-150px)] w-full">
                 <AgGridReact
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
-                    columnDefs={columnsDef}
+                    columnDefs={columnDefinitions}
                     defaultColDef={{
                         suppressMovable: true,
                     }}
-                    onSortChanged={() => gridRef.current?.api?.refreshCells()}
-                    onFilterChanged={() => gridRef.current?.api?.refreshCells()}></AgGridReact>
+                    onSortChanged={() => gridReference.current?.api?.refreshCells()}
+                    onFilterChanged={() => gridReference.current?.api?.refreshCells()}></AgGridReact>
             </div>
         </div>
     );

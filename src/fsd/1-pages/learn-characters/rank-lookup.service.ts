@@ -49,7 +49,7 @@ export class RankLookupService {
                 }
             }
 
-            if (!rankUpgrades.length) {
+            if (rankUpgrades.length === 0) {
                 continue;
             }
 
@@ -72,9 +72,10 @@ export class RankLookupService {
                         allMaterials: [],
                     };
                 }
-                const allMaterials = character.upgradesRarity.length
-                    ? recipe.allMaterials?.filter(material => character.upgradesRarity.includes(material.rarity))
-                    : recipe.allMaterials;
+                const allMaterials =
+                    character.upgradesRarity.length > 0
+                        ? recipe.allMaterials?.filter(material => character.upgradesRarity.includes(material.rarity))
+                        : recipe.allMaterials;
 
                 for (const allMaterial of allMaterials ?? []) {
                     allMaterial.characters = [];
@@ -178,14 +179,15 @@ export class RankLookupService {
         const dailyEnergy = sum(selectedLocations.map(x => x.dailyBattleCount * x.energyCost));
         const dailyBattles = sum(selectedLocations.map(x => x.dailyBattleCount));
         const locations = selectedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
-        const missingLocationsString = !bestLocations.length
-            ? (material.locationsComposed
-                  ?.filter(x => {
-                      return !bestLocations.some(y => x.campaign === y.campaign && x.nodeNumber === y.nodeNumber);
-                  })
-                  .map(x => x.campaign + ' ' + x.nodeNumber)
-                  .join(', ') ?? '')
-            : lockedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
+        const missingLocationsString =
+            bestLocations.length === 0
+                ? (material.locationsComposed
+                      ?.filter(x => {
+                          return !bestLocations.some(y => x.campaign === y.campaign && x.nodeNumber === y.nodeNumber);
+                      })
+                      .map(x => x.campaign + ' ' + x.nodeNumber)
+                      .join(', ') ?? '')
+                : lockedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
 
         return {
             expectedEnergy,

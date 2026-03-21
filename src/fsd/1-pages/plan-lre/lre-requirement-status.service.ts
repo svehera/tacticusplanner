@@ -22,7 +22,7 @@ export class LreRequirementStatusService {
         tracksProgress: readonly ILreTrackProgress[],
         track: LreTrackId,
         battleNumber: number,
-        reqId: string
+        requirement: string
     ): RequirementStatus {
         const trackProgress = tracksProgress.find(t => t.trackId === track);
         if (!trackProgress) return RequirementStatus.NotCleared;
@@ -30,15 +30,15 @@ export class LreRequirementStatusService {
         const battleProgress = trackProgress.battles.find(b => b.battleIndex === battleNumber);
         if (!battleProgress) return RequirementStatus.NotCleared;
 
-        const reqProgress = battleProgress.requirementsProgress.find(r => r.id === reqId);
-        if (!reqProgress) return RequirementStatus.NotCleared;
+        const requirementProgress = battleProgress.requirementsProgress.find(r => r.id === requirement);
+        if (!requirementProgress) return RequirementStatus.NotCleared;
 
         // Use new status if available, otherwise convert from legacy fields
-        if (reqProgress.status !== undefined) {
-            return reqProgress.status;
+        if (requirementProgress.status !== undefined) {
+            return requirementProgress.status;
         }
-        if (reqProgress.completed) return RequirementStatus.Cleared;
-        if (reqProgress.blocked) return RequirementStatus.StopHere;
+        if (requirementProgress.completed) return RequirementStatus.Cleared;
+        if (requirementProgress.blocked) return RequirementStatus.StopHere;
         return RequirementStatus.NotCleared;
     }
 
@@ -48,7 +48,7 @@ export class LreRequirementStatusService {
      * @param req - The requirement object with status, scores, and points
      * @returns The number of points this requirement contributes
      */
-    public static getRequirementPoints(req: {
+    public static getRequirementPoints(requirement: {
         completed: boolean;
         status?: RequirementStatus | number;
         killScore?: number;
@@ -57,26 +57,26 @@ export class LreRequirementStatusService {
         id: string;
     }): number {
         // Check if new status system is being used
-        if (req.status !== undefined) {
-            const status = req.status as RequirementStatus;
+        if (requirement.status !== undefined) {
+            const status = requirement.status as RequirementStatus;
 
             // Only Cleared and PartiallyCleared contribute points
             if (status === RequirementStatus.Cleared) {
-                return req.points;
+                return requirement.points;
             }
             if (status === RequirementStatus.PartiallyCleared) {
-                if (req.id === LrePointsCategoryId.killScore && req.killScore) {
-                    return req.killScore;
+                if (requirement.id === LrePointsCategoryId.killScore && requirement.killScore) {
+                    return requirement.killScore;
                 }
-                if (req.id === LrePointsCategoryId.highScore && req.highScore) {
-                    return req.highScore;
+                if (requirement.id === LrePointsCategoryId.highScore && requirement.highScore) {
+                    return requirement.highScore;
                 }
             }
             return 0;
         }
 
         // Legacy: use completed flag
-        return req.completed ? req.points : 0;
+        return requirement.completed ? requirement.points : 0;
     }
 
     /**
@@ -85,11 +85,11 @@ export class LreRequirementStatusService {
      * @param reqId - The requirement ID to check
      * @returns True if the requirement is a special requirement
      */
-    public static isSpecialRequirement(reqId: string): boolean {
+    public static isSpecialRequirement(requirement: string): boolean {
         return (
-            reqId === LrePointsCategoryId.killScore ||
-            reqId === LrePointsCategoryId.highScore ||
-            reqId === LrePointsCategoryId.defeatAll
+            requirement === LrePointsCategoryId.killScore ||
+            requirement === LrePointsCategoryId.highScore ||
+            requirement === LrePointsCategoryId.defeatAll
         );
     }
 
@@ -100,7 +100,7 @@ export class LreRequirementStatusService {
      * @returns The index of the first restriction, or -1 if all requirements are special
      */
     public static getFirstRestrictionIndex(requirements: readonly { id: string }[]): number {
-        return requirements.findIndex(req => !this.isSpecialRequirement(req.id));
+        return requirements.findIndex(requirement => !this.isSpecialRequirement(requirement.id));
     }
 
     public static isDefaultObjective(id: string): boolean {

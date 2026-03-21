@@ -39,15 +39,15 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const { goalId, neighborId } = action;
             const newState = [...state].sort((a, b) => a.priority - b.priority);
 
-            const idxA = newState.findIndex(x => x.id === goalId);
-            const idxB = newState.findIndex(x => x.id === neighborId);
+            const indexA = newState.findIndex(x => x.id === goalId);
+            const indexB = newState.findIndex(x => x.id === neighborId);
 
-            if (idxA !== -1 && idxB !== -1) {
+            if (indexA !== -1 && indexB !== -1) {
                 // Swap them in the array
-                [newState[idxA], newState[idxB]] = [newState[idxB], newState[idxA]];
+                [newState[indexA], newState[indexB]] = [newState[indexB], newState[indexA]];
 
                 // Re-index priorities 1..N
-                return newState.map((g, i) => ({ ...g, priority: i + 1 }));
+                return newState.map((g, index) => ({ ...g, priority: index + 1 }));
             }
             return state;
         }
@@ -95,26 +95,24 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
                 id: updatedGoal.goalId,
             });
 
-            // 3. Re-index 1..N based on the new physical order
-            return filteredState.map((g, i) => ({
-                ...g,
-                priority: i + 1,
-            }));
+            // Re-index priorities 1..N to prevent gaps or duplicates.
+            return newState.map((g, index) => ({ ...g, priority: index + 1 }));
         }
         case 'UpdateDailyRaids': {
             const { value } = action;
 
-            return state.map(currGoal => {
-                const newGoal = value.find(x => x.goalId === currGoal.id);
+            return state.map(currentGoal => {
+                const newGoal = value.find(x => x.goalId === currentGoal.id);
                 if (newGoal) {
-                    return { ...currGoal, dailyRaids: newGoal.include };
+                    return { ...currentGoal, dailyRaids: newGoal.include };
                 }
 
-                return currGoal;
+                return currentGoal;
             });
         }
         default: {
-            throw new Error();
+            // @ts-expect-error TS says this should never be reached but we want the error if it does
+            throw new Error(`Unexpected action.type received in reducer: ${action.type}`);
         }
     }
 };

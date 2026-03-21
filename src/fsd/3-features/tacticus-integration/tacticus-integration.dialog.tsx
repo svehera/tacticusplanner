@@ -12,12 +12,18 @@ import { useLoader } from '@/fsd/5-shared/ui/contexts';
 import { TextField } from '@/fsd/5-shared/ui/input';
 import { Modal } from '@/fsd/5-shared/ui/modal';
 
-import { useSyncWithTacticus } from './useSyncWithTacticus';
+import { useSyncWithTacticus } from './use-sync-with-tacticus';
 
 interface Props extends DialogProps {
     tacticusApiKey: string;
     tacticusUserId: string;
     tacticusGuildApiKey: string;
+}
+
+function buildErrorMessage(error: string | Error | null): string {
+    const baseMessage = 'Failed to update settings';
+    const detail = typeof error === 'string' ? error : error?.message;
+    return detail ? `${baseMessage}: ${detail}` : baseMessage;
 }
 
 export const TacticusIntegrationDialog: React.FC<Props> = ({
@@ -43,19 +49,13 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
         await syncWithTacticus();
     }
 
-    function buildErrMsg(error: string | Error | null): string {
-        const baseMsg = 'Failed to update settings';
-        const detail = typeof error === 'string' ? error : error?.message;
-        return detail ? `${baseMsg}: ${detail}` : baseMsg;
-    }
-
     async function updateApiKey() {
         loader.startLoading('Updating settings. Please wait...');
         try {
             const response = await updateTacticusApiKey(apiKey, guildApiKey, userId);
 
             if (!response.data) {
-                enqueueSnackbar(buildErrMsg(response.error), { variant: 'error' });
+                enqueueSnackbar(buildErrorMessage(response.error), { variant: 'error' });
                 return;
             }
 
@@ -74,7 +74,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
             console.error(error);
             const parsedError =
                 typeof error === 'string' || error instanceof Error || error === null ? error : String(error);
-            enqueueSnackbar(buildErrMsg(parsedError), { variant: 'error' });
+            enqueueSnackbar(buildErrorMessage(parsedError), { variant: 'error' });
         } finally {
             loader.endLoading();
         }

@@ -38,7 +38,7 @@ export const GoalCardMowAbilities: React.FC<Props> = ({ goal, goalEstimate, cale
                         </div>
                     )}
                 </div>
-                {!!goal.upgradesRarity.length && (
+                {goal.upgradesRarity.length > 0 && (
                     <div className="flex-box gap-[3px]">
                         <ArrowForward fontSize="small" />
                         {goal.upgradesRarity.map(x => (

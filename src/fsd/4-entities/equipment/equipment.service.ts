@@ -87,18 +87,24 @@ export class EquipmentService {
 
     public static getEquipmentSlotDisplayName(slot: string): string {
         switch (slot) {
-            case 'I_Block':
+            case 'I_Block': {
                 return 'Block';
-            case 'I_Booster_Block':
+            }
+            case 'I_Booster_Block': {
                 return 'Block Booster';
-            case 'I_Crit':
+            }
+            case 'I_Crit': {
                 return 'Crit';
-            case 'I_Booster_Crit':
+            }
+            case 'I_Booster_Crit': {
                 return 'Crit Booster';
-            case 'I_Defensive':
+            }
+            case 'I_Defensive': {
                 return 'Defense';
-            default:
+            }
+            default: {
                 return 'Unknown Slot';
+            }
         }
     }
 }

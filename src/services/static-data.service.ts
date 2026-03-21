@@ -24,34 +24,46 @@ export class StaticDataService {
             case 'AstraMilitarum':
             case 'BlackTemplars':
             case 'SpaceWolves':
-            case 'DarkAngels':
+            case 'DarkAngels': {
                 return 'Pray for the God-Emperor of Mankind';
-            case 'AdeptusMechanicus':
+            }
+            case 'AdeptusMechanicus': {
                 return 'Pray for the Machine God';
-            case 'BlackLegion':
+            }
+            case 'BlackLegion': {
                 return 'Follow the Chaos Undivided';
-            case 'Orks':
+            }
+            case 'Orks': {
                 return 'Believe in the Waaagh!';
-            case 'Necrons':
+            }
+            case 'Necrons': {
                 return "Serve the C'tan";
-            case 'DeathGuard':
+            }
+            case 'DeathGuard': {
                 return 'Pray for the Plague God';
-            case 'Aeldari':
+            }
+            case 'Aeldari': {
                 return 'Follow various Paths';
-            case 'Tau':
+            }
+            case 'Tau': {
                 return 'Pray for Greater Good';
-            case 'ThousandSons':
+            }
+            case 'ThousandSons': {
                 return 'Follow the Architect of Fate';
-            case 'Tyranids':
+            }
+            case 'Tyranids': {
                 return 'Bring more biomass';
-            case 'WorldEaters':
+            }
+            case 'WorldEaters': {
                 return 'More Blood for the Blood God!';
+            }
             case 'Genestealers':
             case 'BloodAngels':
             case 'Custodes':
             case 'EmperorsChildren':
-            case 'LeaguesOfVotann':
+            case 'LeaguesOfVotann': {
                 return '';
+            }
         }
     }
 }

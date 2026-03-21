@@ -25,27 +25,27 @@ import { CampaignBattle } from './campaign-battle';
 import { CampaignBattleCard } from './campaign-battle-card';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
+/**
+ * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
+ */
+const getReward = (rewards: IRewards): string => {
+    // Elite battles give a guaranteed material, so return that.
+    for (const reward of rewards.guaranteed) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    // Otherwise, return the first potential reward that is not gold.
+    for (const reward of rewards.potential) {
+        if (reward.id === 'gold') continue;
+        return reward.id;
+    }
+    return '';
+};
+
 export const Campaigns = () => {
-    const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
+    const gridReference = useRef<AgGridReact<ICampaignBattleComposed>>(null);
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-
-    /**
-     * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
-     */
-    const getReward = (rewards: IRewards): string => {
-        // Elite battles give a guaranteed material, so return that.
-        for (const reward of rewards.guaranteed) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        // Otherwise, return the first potential reward that is not gold.
-        for (const reward of rewards.potential) {
-            if (reward.id === 'gold') continue;
-            return reward.id;
-        }
-        return '';
-    };
 
     const [mobileColumnDefs] = useState<Array<ColDef>>([
         {
@@ -211,7 +211,7 @@ export const Campaigns = () => {
 
     const [campaign, setCampaign] = useQueryState(
         'campaign',
-        initQueryParam => initQueryParam ?? Campaign.I,
+        initQueryParameter => initQueryParameter ?? Campaign.I,
         value => value.toString()
     );
 
@@ -266,7 +266,7 @@ export const Campaigns = () => {
                     }
                 />
 
-                {!!threeSlotsNodes.length && (
+                {threeSlotsNodes.length > 0 && (
                     <div className="flex-box gap10 wrap">
                         <span className="font-bold"> 3 Slots nodes:</span>
                         {threeSlotsNodes.map(x => (
@@ -280,7 +280,7 @@ export const Campaigns = () => {
                     <AgGridReact
                         modules={[AllCommunityModule]}
                         theme={themeBalham}
-                        ref={gridRef}
+                        ref={gridReference}
                         suppressCellFocus={true}
                         defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
                         columnDefs={isMobile ? mobileColumnDefs : columnDefs}

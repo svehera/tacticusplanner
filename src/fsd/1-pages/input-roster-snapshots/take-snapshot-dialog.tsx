@@ -39,7 +39,7 @@ export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProps> = ({
                     fullWidth
                     variant="outlined"
                     value={snapshotName}
-                    onChange={e => setSnapshotName(e.target.value)}
+                    onChange={event => setSnapshotName(event.target.value)}
                     placeholder={`e.g., Guild Raid Setup - ${currentTimestamp}`}
                 />
 
@@ -54,7 +54,7 @@ export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProps> = ({
                 <Tooltip
                     placement="top"
                     title={
-                        snapshotName.trim().length < 1
+                        snapshotName.trim().length === 0
                             ? 'Snapshot name cannot be empty.'
                             : snapshotNames.includes(snapshotName.trim())
                               ? 'Snapshot name must be unique.'
@@ -65,7 +65,7 @@ export const TakeSnapshotDialog: React.FC<TakeSnapshotDialogProps> = ({
                             onClick={() => onSave(snapshotName)}
                             color="primary"
                             variant="contained"
-                            disabled={snapshotName.trim().length < 1 || snapshotNames.includes(snapshotName.trim())}>
+                            disabled={snapshotName.trim().length === 0 || snapshotNames.includes(snapshotName.trim())}>
                             Save Snapshot
                         </Button>
                     </div>

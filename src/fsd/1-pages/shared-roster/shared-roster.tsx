@@ -40,9 +40,9 @@ export const SharedRoster = () => {
     const sharedUser = searchParams.get('username');
     const shareToken = searchParams.get('shareToken');
 
-    const hasValidParams = !!sharedUser && !!shareToken;
+    const hasValidParameters = !!sharedUser && !!shareToken;
 
-    if (!hasValidParams) {
+    if (!hasValidParameters) {
         return <>Invalid page params</>;
     }
 
