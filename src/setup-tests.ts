@@ -11,8 +11,4 @@ const localStorageMock = {
     key: vi.fn(),
 };
 
-// 2. Attach it to BOTH the global (Node) and window (JSDOM) scopes
 globalThis.localStorage = localStorageMock as any;
-if (typeof globalThis.window !== 'undefined') {
-    globalThis.localStorage = localStorageMock as any;
-}
