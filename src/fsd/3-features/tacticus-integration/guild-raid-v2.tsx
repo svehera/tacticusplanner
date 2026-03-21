@@ -712,7 +712,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         // Most active user
         let mostActiveUser = '';
         let mostActiveCount = 0;
-        for (const [user, count] of Object.entries(userParticipation)) {
+        for (const [user, count] of userParticipation) {
             if (count > mostActiveCount) {
                 mostActiveUser = userIdMapper(user);
                 mostActiveCount = count;
