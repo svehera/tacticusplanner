@@ -95,7 +95,11 @@ export class MowsService {
      * @returns The static MoW data from json with the specified snowprint ID.
      */
     public static resolveToStatic(id: string): IMowStatic2 | undefined {
-        return mows2Data.mows.find(x => x.snowprintId === this.resolveId(id));
+        const staticData = mows2Data.mows.find(x => x.snowprintId === this.resolveId(id));
+        if (staticData) {
+            return staticData;
+        }
+        return this.resolveOldIdToStatic(id);
     }
 
     /**
