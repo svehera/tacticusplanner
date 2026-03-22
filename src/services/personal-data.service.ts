@@ -12,6 +12,7 @@ import {
     ILreBattleProgressDto,
     ILreRequirementsProgressDto,
     LrePointsCategoryId,
+    battlesProgressToCompact,
 } from '@/fsd/3-features/lre-progress';
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
@@ -27,6 +28,7 @@ import {
     IAutoTeamsPreferences,
     ICampaignsProgress,
     IDailyRaids,
+    IDailyRaidsStored,
     IDailyRaidsPreferences,
     IInventory,
     ILegendaryEventSelectedRequirements,
@@ -105,7 +107,7 @@ export class PersonalDataLocalStorage {
                 },
                 dailyRaids: {
                     ...defaultData.dailyRaids,
-                    ...this.getItem<IDailyRaids>('dailyRaids'),
+                    ...this.getItem<IDailyRaids | IDailyRaidsStored>('dailyRaids'),
                 },
                 guildWar: {
                     ...defaultData.guildWar,
@@ -269,6 +271,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
 
     return {
         ...v1Data,
+        leTeams: migrateLreTeams(v1Data.leTeams ?? defaultData.leTeams),
         inventory: {
             ...defaultData.inventory,
             ...v1Data.inventory,
@@ -285,8 +288,28 @@ function migrateLreTeams(
 ): LegendaryEventData<ILegendaryEventSelectedTeams> {
     for (const teamsByEventKey in teamsByEvent) {
         const eventTeams = teamsByEvent[teamsByEventKey as unknown as LegendaryEventEnum];
-        if (eventTeams && !eventTeams.teams?.length) {
+        if (!eventTeams) {
+            continue;
+        }
+
+        if (!eventTeams.teams?.length) {
             populateTeams(eventTeams);
+        }
+
+        if (eventTeams.teams?.length) {
+            eventTeams.teams = eventTeams.teams.map(team => {
+                const charSnowprintIds = (
+                    team.charSnowprintIds?.length ? team.charSnowprintIds : (team.charactersIds ?? [])
+                ).map(resolve);
+                const cleanedTeam: ILreTeam = {
+                    ...team,
+                    charSnowprintIds,
+                    charactersIds: [],
+                };
+
+                delete cleanedTeam.characters;
+                return cleanedTeam;
+            });
         }
     }
 
@@ -349,8 +372,17 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
 function migrateLreProgress(progressByEvent: LegendaryEventData<ILreProgressDto>): LegendaryEventData<ILreProgressDto> {
     for (const progressByEventKey in progressByEvent) {
         const eventProgress = progressByEvent[progressByEventKey as unknown as LegendaryEventEnum];
-        if (eventProgress && !eventProgress.battlesProgress?.length) {
+        if (!eventProgress) {
+            continue;
+        }
+
+        if (!eventProgress.battlesProgress?.length && !eventProgress.compactProgress) {
             populateProgress(eventProgress);
+        }
+
+        if (!eventProgress.compactProgress && eventProgress.battlesProgress?.length) {
+            eventProgress.compactProgress = battlesProgressToCompact(eventProgress.battlesProgress);
+            eventProgress.battlesProgress = undefined;
         }
     }
     return progressByEvent;

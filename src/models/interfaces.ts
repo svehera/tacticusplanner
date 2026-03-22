@@ -159,7 +159,7 @@ export interface IPersonalData2 {
     leSettings: ILegendaryEventSettings;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
-    dailyRaids: IDailyRaids;
+    dailyRaids: IDailyRaids | IDailyRaidsStored;
     guildWar: IGuildWar;
     guild: IGuild;
     xpIncome: XpIncomeState;
@@ -204,6 +204,17 @@ export interface IGuildWar {
 export interface IDailyRaids {
     filters: ICampaignsFilters;
     raidedLocations: IItemRaidLocation[];
+    lastRefreshDateUTC: string;
+}
+
+export interface IDailyRaidLocationStored {
+    id: string;
+    raidsAlreadyPerformed: number;
+}
+
+export interface IDailyRaidsStored {
+    filters: ICampaignsFilters;
+    raidedLocations: IDailyRaidLocationStored[];
     lastRefreshDateUTC: string;
 }
 
