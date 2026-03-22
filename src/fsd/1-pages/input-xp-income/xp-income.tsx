@@ -94,7 +94,7 @@ export const XpIncome: React.FC = () => {
                 kBlueStarCharacters
                     .filter(
                         char =>
-                            (resolvedCharacters.find(c => c.snowprintId! === char.id)?.stars ?? RarityStars.None) >=
+                            (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ?? RarityStars.None) >=
                             RarityStars.OneBlueStar
                     )
                     .map(char => char.id),
@@ -277,7 +277,7 @@ export const XpIncome: React.FC = () => {
                         <div className="flex flex-wrap gap-4">
                             {kBlueStarCharacters.map(char => {
                                 const isStarred =
-                                    (resolvedCharacters.find(c => c.snowprintId! === char.id)?.stars ??
+                                    (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ??
                                         RarityStars.None) >= RarityStars.OneBlueStar;
 
                                 return (
@@ -289,7 +289,7 @@ export const XpIncome: React.FC = () => {
                                             <UnitShardIcon
                                                 icon={
                                                     CharactersService.charactersData.find(
-                                                        c => c.snowprintId! === char.id
+                                                        c => c.snowprintId === char.id
                                                     )?.roundIcon ?? ''
                                                 }
                                             />

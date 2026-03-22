@@ -220,7 +220,7 @@ export const Upgrades = () => {
                             .flat()
                             .flatMap(x => [x, expandMaterial(x)].flat());
                         if (allMats.includes(x.snowprintId)) {
-                            const charData = CharactersService.charactersData.find(x => x.snowprintId! === character);
+                            const charData = CharactersService.charactersData.find(x => x.snowprintId === character);
                             const existingChar = characters.find(x => x.id === character);
                             if (existingChar) {
                                 existingChar.ranks.push(stringToRank(rank));

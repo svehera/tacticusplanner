@@ -62,7 +62,7 @@ export class EquipmentService {
                     CharactersService.parseEquipmentType(data.type) || ''
                 )
             )
-            .map(char => char.snowprintId!);
+            .map(char => char.snowprintId);
     }
 
     private static parseEquipmentRarity(rarity: string): Rarity {

@@ -118,34 +118,34 @@ export const MasterTable = () => {
             );
 
             const eventCharacters = legendaryEvent.allowedUnits
-                .filter(x => selectedChars.includes(x.snowprintId!))
+                .filter(x => selectedChars.includes(x.snowprintId))
                 .sort((a, b) => {
                     const aTotal =
-                        (alpha[a.snowprintId!]?.points ?? 0) +
-                        (beta[a.snowprintId!]?.points ?? 0) +
-                        (gamma[a.snowprintId!]?.points ?? 0);
+                        (alpha[a.snowprintId]?.points ?? 0) +
+                        (beta[a.snowprintId]?.points ?? 0) +
+                        (gamma[a.snowprintId]?.points ?? 0);
                     const bTotal =
-                        (alpha[b.snowprintId!]?.points ?? 0) +
-                        (beta[b.snowprintId!]?.points ?? 0) +
-                        (gamma[b.snowprintId!]?.points ?? 0);
+                        (alpha[b.snowprintId]?.points ?? 0) +
+                        (beta[b.snowprintId]?.points ?? 0) +
+                        (gamma[b.snowprintId]?.points ?? 0);
 
                     return bTotal - aTotal;
                 })
                 .filter(x => passesNameFilter(filter, x))
                 .map(x => ({
                     character: x,
-                    characterId: x.snowprintId!,
+                    characterId: x.snowprintId,
                     eventId,
                     // className: Rank[x.rank].toLowerCase(),
                     // tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
                     points:
-                        (alpha[x.snowprintId!]?.points ?? 0) +
-                        (beta[x.snowprintId!]?.points ?? 0) +
-                        (gamma[x.snowprintId!]?.points ?? 0),
+                        (alpha[x.snowprintId]?.points ?? 0) +
+                        (beta[x.snowprintId]?.points ?? 0) +
+                        (gamma[x.snowprintId]?.points ?? 0),
                     slots:
-                        (alpha[x.snowprintId!]?.slots ?? 0) +
-                        (beta[x.snowprintId!]?.slots ?? 0) +
-                        (gamma[x.snowprintId!]?.slots ?? 0),
+                        (alpha[x.snowprintId]?.slots ?? 0) +
+                        (beta[x.snowprintId]?.slots ?? 0) +
+                        (gamma[x.snowprintId]?.slots ?? 0),
                 }));
 
             temporary.push(...eventCharacters);
