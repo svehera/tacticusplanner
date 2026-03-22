@@ -9,6 +9,8 @@ import {
     ILreProgressDto,
     LrePointsCategoryId,
     ProgressState,
+    battlesProgressToCompact,
+    compactToBattlesProgress,
 } from '@/fsd/3-features/lre-progress';
 
 import {
@@ -52,7 +54,10 @@ export class LreService {
             } satisfies ILreOccurrenceProgress;
         });
 
-        const battlesDto = dto?.battlesProgress ?? [];
+        // Prefer the compact format if present, fall back to legacy battlesProgress.
+        const battlesDto = dto?.compactProgress
+            ? compactToBattlesProgress(dto.compactProgress)
+            : (dto?.battlesProgress ?? []);
         const tracksProgress = (['alpha', 'beta', 'gamma'] as const).map(trackId => {
             const track = lre[trackId];
             const trackBattlesDto = battlesDto.filter(x => x.trackId === trackId);
@@ -198,7 +203,7 @@ export class LreService {
             id: model.eventId,
             name: model.eventName,
             notes: model.notes,
-            battlesProgress,
+            compactProgress: battlesProgressToCompact(battlesProgress),
             forceProgress: model.syncedProgress,
             overview: overviewDto,
         };

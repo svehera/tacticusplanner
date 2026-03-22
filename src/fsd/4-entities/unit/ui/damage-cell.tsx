@@ -120,7 +120,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarityStars, numD
                         <td>
                             <div className="bg-cyan-500/50">
                                 {StatsCalculatorService.calculateDamage(
-                                    character.snowprintId!,
+                                    character.snowprintId,
                                     rarityStars,
                                     rank,
                                     numDamageUpgrades
@@ -131,7 +131,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarityStars, numD
                             <div className="bg-cyan-500/25">
                                 {computeDamvarInfArmour(
                                     StatsCalculatorService.calculateDamage(
-                                        character.snowprintId!,
+                                        character.snowprintId,
                                         rarityStars,
                                         rank,
                                         numDamageUpgrades
@@ -152,7 +152,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarityStars, numD
                                     <>N/A</>
                                 ) : (
                                     StatsCalculatorService.calculateDamage(
-                                        character.snowprintId!,
+                                        character.snowprintId,
                                         rarityStars,
                                         rank,
                                         numDamageUpgrades
@@ -164,7 +164,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarityStars, numD
                             <div className="bg-cyan-500/50">
                                 {computeDamvarInfArmour(
                                     StatsCalculatorService.calculateDamage(
-                                        character.snowprintId!,
+                                        character.snowprintId,
                                         rarityStars,
                                         rank,
                                         numDamageUpgrades

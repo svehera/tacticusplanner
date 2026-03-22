@@ -119,7 +119,7 @@ export interface UnitDataRaw {
 export interface ICharacterData {
     unitType: UnitType.character;
     id: string;
-    snowprintId?: string;
+    snowprintId: string;
     alliance: Alliance;
     faction: FactionId;
     name: string;

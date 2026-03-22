@@ -55,7 +55,7 @@ export class StatsCalculatorService {
     static getHealth(unit: ICharacter2 | undefined): number {
         if (unit == null) return 0;
         return this.calculateHealth(
-            unit!.snowprintId!,
+            unit!.snowprintId,
             unit!.stars,
             unit!.rank,
             StatsCalculatorService.countHealthUpgrades(unit)
@@ -69,7 +69,7 @@ export class StatsCalculatorService {
     static getDamage(unit: ICharacter2 | undefined): number {
         if (unit == null) return 0;
         return this.calculateDamage(
-            unit!.snowprintId!,
+            unit!.snowprintId,
             unit!.stars,
             unit!.rank,
             StatsCalculatorService.countDamageUpgrades(unit)
@@ -83,7 +83,7 @@ export class StatsCalculatorService {
     static getArmor(unit: ICharacter2 | undefined): number {
         if (unit == null) return 0;
         return this.calculateArmor(
-            unit!.snowprintId!,
+            unit!.snowprintId,
             unit!.stars,
             unit!.rank,
             StatsCalculatorService.countArmorUpgrades(unit)

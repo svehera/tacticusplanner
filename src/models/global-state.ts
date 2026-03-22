@@ -1,6 +1,6 @@
 ﻿import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
-import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
+import { CampaignsService, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow, IMow2, IMowDatabase, mows2Data, mowsData, MowsService } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
@@ -20,6 +20,7 @@ import { defaultData, rankToLevel, rankToRarity } from './constants';
 import {
     IAutoTeamsPreferences,
     IDailyRaids,
+    IDailyRaidsStored,
     IDailyRaidsPreferences,
     IGlobalState,
     IGuild,
@@ -89,7 +90,7 @@ export class GlobalState implements IGlobalState {
         this.seenAppVersion = personalData.seenAppVersion;
         this.campaignsProgress = personalData.campaignsProgress ?? defaultData.campaignsProgress;
         this.inventory = personalData.inventory ?? defaultData.inventory;
-        this.dailyRaids = personalData.dailyRaids ?? defaultData.dailyRaids;
+        this.dailyRaids = GlobalState.restoreDailyRaids(personalData.dailyRaids);
         this.guildWar = personalData.guildWar ?? defaultData.guildWar;
         this.guild = personalData.guild ?? defaultData.guild;
         this.teams = personalData.teams ?? defaultData.teams;
@@ -108,7 +109,7 @@ export class GlobalState implements IGlobalState {
     ): Array<ICharacter2> {
         return CharactersService.charactersData.map(staticData => {
             const personalCharData = chars.find(c => {
-                return CharactersService.canonicalName(c.name!) === staticData.snowprintId!;
+                return CharactersService.canonicalName(c.name!) === staticData.snowprintId;
             });
             const rank = personalCharData?.rank ?? Rank.Locked;
             const rankLevel = rankToLevel[rank as Rank];
@@ -123,7 +124,7 @@ export class GlobalState implements IGlobalState {
                 : [];
 
             const combinedData: IPersonalCharacterData2 = {
-                name: staticData.snowprintId!,
+                name: staticData.snowprintId,
                 rank: rank,
                 rarity: rarity,
                 bias: personalCharData?.bias ?? CharacterBias.None,
@@ -293,13 +294,43 @@ export class GlobalState implements IGlobalState {
             unlocked: x.unlocked,
         }));
 
+        const leTeamsToStore: LegendaryEventData<ILegendaryEventSelectedTeams> = {};
+        for (const eventId in value.leSelectedTeams) {
+            const eventTeams = value.leSelectedTeams[eventId as unknown as keyof typeof value.leSelectedTeams];
+            if (!eventTeams) {
+                continue;
+            }
+
+            leTeamsToStore[eventId as unknown as keyof LegendaryEventData<ILegendaryEventSelectedTeams>] = {
+                ...eventTeams,
+                teams: (eventTeams.teams ?? []).map(team => {
+                    let teamCharIds: string[] = team.charSnowprintIds ?? [];
+                    if ((team.characters?.length ?? 0) > 0 && (team.charSnowprintIds?.length ?? 0) === 0) {
+                        teamCharIds = team.characters?.map(char => char.snowprintId) ?? [];
+                    } else if (teamCharIds.length === 0 && team.charactersIds !== undefined) {
+                        teamCharIds = team.charactersIds;
+                    }
+                    const charSnowprintIds = teamCharIds.map(id => CharactersService.canonicalName(id));
+
+                    const returnValue = {
+                        ...team,
+                        charSnowprintIds,
+                        charactersIds: [],
+                        characters: undefined,
+                    };
+                    delete returnValue.characters;
+                    return returnValue;
+                }),
+            };
+        }
+
         return {
             schemaVersion: 2,
             modifiedDate: value.modifiedDate,
             seenAppVersion: value.seenAppVersion,
             goals: value.goals,
             selectedTeamOrder: value.selectedTeamOrder,
-            leTeams: value.leSelectedTeams,
+            leTeams: leTeamsToStore,
             leProgress: value.leProgress,
             leSettings: value.leSettings,
             leSelectedRequirements: value.leSelectedRequirements,
@@ -310,7 +341,7 @@ export class GlobalState implements IGlobalState {
             dailyRaidsPreferences: value.dailyRaidsPreferences,
             campaignsProgress: value.campaignsProgress,
             inventory: value.inventory,
-            dailyRaids: value.dailyRaids,
+            dailyRaids: GlobalState.toStoredDailyRaids(value.dailyRaids),
             guildWar: value.guildWar,
             guild: value.guild,
             xpIncome: value.xpIncome,
@@ -321,6 +352,56 @@ export class GlobalState implements IGlobalState {
             teams2: value.teams2,
             warDefense2: value.warDefense2,
             warOffense2: value.warOffense2,
+        };
+    }
+
+    private static toStoredDailyRaids(dailyRaids: IDailyRaids): IDailyRaidsStored {
+        return {
+            ...dailyRaids,
+            raidedLocations: dailyRaids.raidedLocations.map(location => ({
+                id: location.id,
+                raidsAlreadyPerformed: location.raidsAlreadyPerformed,
+                raidsToPerform: location.raidsToPerform,
+            })),
+        };
+    }
+
+    private static restoreDailyRaids(dailyRaids: IDailyRaids | IDailyRaidsStored | undefined): IDailyRaids {
+        if (!dailyRaids) {
+            return defaultData.dailyRaids as IDailyRaids;
+        }
+
+        const byId = new Map(Object.values(CampaignsService.campaignsComposed).map(battle => [battle.id, battle]));
+        const raidedLocations = dailyRaids.raidedLocations
+            .map(location => {
+                if ('campaign' in location) {
+                    return location;
+                }
+
+                const baseBattle = byId.get(location.id);
+                if (!baseBattle) {
+                    return undefined;
+                }
+
+                const raidsAlreadyPerformed = location.raidsAlreadyPerformed ?? 0;
+                const raidsToPerform = location.raidsToPerform ?? 0;
+                const totalRaids = raidsAlreadyPerformed + raidsToPerform;
+                return {
+                    ...baseBattle,
+                    raidsAlreadyPerformed,
+                    raidsToPerform,
+                    energySpent: totalRaids * baseBattle.energyCost,
+                    farmedItems: totalRaids * baseBattle.dropRate,
+                    isShardsLocation: baseBattle.rarity === 'Shard' || baseBattle.rarity === 'Mythic Shard',
+                    isCompleted: raidsAlreadyPerformed >= baseBattle.dailyBattleCount,
+                };
+            })
+            .filter(location => !!location);
+
+        return {
+            ...(defaultData.dailyRaids as IDailyRaids),
+            ...dailyRaids,
+            raidedLocations,
         };
     }
 }

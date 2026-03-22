@@ -79,7 +79,7 @@ export const CampaignProgress: React.FC<Props> = ({
 
     // Filter characters required for the campaign.
     const coreCharacters = useMemo(
-        () => characters.filter(x => campaign.coreCharacters.includes(x.snowprintId!)),
+        () => characters.filter(x => campaign.coreCharacters.includes(x.snowprintId)),
         [characters, campaign]
     );
 

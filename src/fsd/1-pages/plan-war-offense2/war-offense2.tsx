@@ -44,9 +44,9 @@ export const WarOffense2 = () => {
     const mows = MowsService.resolveAllFromStorage(unresolvedMows);
 
     const deployableCharacters = characters
-        .filter(c => !deployedCharacters.includes(c.snowprintId!))
+        .filter(c => !deployedCharacters.includes(c.snowprintId))
         .filter(c => c.rank !== Rank.Locked)
-        .filter(c => !stagedChars.includes(c.snowprintId!))
+        .filter(c => !stagedChars.includes(c.snowprintId))
         .sort((a, b) => {
             if (b.rank !== a.rank) return b.rank - a.rank;
             const powerA = Math.pow(a.activeAbilityLevel ?? 0, 2) + Math.pow(a.passiveAbilityLevel ?? 0, 2);
@@ -56,8 +56,8 @@ export const WarOffense2 = () => {
         });
 
     const deployableMows = mows
-        .filter(m => !deployedMows.includes(m.snowprintId!))
-        .filter(m => !stagedMows.includes(m.snowprintId!))
+        .filter(m => !deployedMows.includes(m.snowprintId))
+        .filter(m => !stagedMows.includes(m.snowprintId))
         .sort((a, b) => b.rarity - a.rarity);
 
     const isTeamDeployable = (team: ITeam2) => {
@@ -74,8 +74,8 @@ export const WarOffense2 = () => {
     const undeployableTeams = teams2.filter(team => !!team.warOffense).filter(team => !isTeamDeployable(team));
 
     const stageChar = (char: ICharacter2) => {
-        if (!stagedChars.includes(char.snowprintId!)) {
-            setStagedChars([...stagedChars, char.snowprintId!]);
+        if (!stagedChars.includes(char.snowprintId)) {
+            setStagedChars([...stagedChars, char.snowprintId]);
         }
     };
 
@@ -84,8 +84,8 @@ export const WarOffense2 = () => {
     };
 
     const stageMow = (mow: IMow2) => {
-        if (!stagedMows.includes(mow.snowprintId!)) {
-            setStagedMows([...stagedMows, mow.snowprintId!]);
+        if (!stagedMows.includes(mow.snowprintId)) {
+            setStagedMows([...stagedMows, mow.snowprintId]);
         }
     };
 
@@ -383,7 +383,7 @@ export const WarOffense2 = () => {
                     <div className="mt-4">
                         <CharacterGrid
                             characters={characters
-                                .filter(char => deployedCharacters.includes(char.snowprintId!))
+                                .filter(char => deployedCharacters.includes(char.snowprintId))
                                 .map(char => Teams2Service.capCharacterAtRarity(char, rarityCap))}
                             onCharacterSelect={() => {}}
                             showHeader={true}
@@ -391,7 +391,7 @@ export const WarOffense2 = () => {
                         />
                         <MowGrid
                             mows={mows
-                                .filter(mow => deployedMows.includes(mow.snowprintId!))
+                                .filter(mow => deployedMows.includes(mow.snowprintId))
                                 .map(mow => Teams2Service.capMowAtRarity(mow, rarityCap))}
                             onMowSelect={() => {}}
                             showHeader={true}

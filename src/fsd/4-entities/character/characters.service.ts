@@ -29,7 +29,7 @@ const equipmentTypeMapping = {
 export class CharactersService {
     static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
     static readonly charactersBySnowprintId: Record<string, ICharacterData> = Object.fromEntries(
-        this.charactersData.map(char => [char.snowprintId!, char])
+        this.charactersData.map(char => [char.snowprintId, char])
     );
     static readonly charactersById: Record<string, ICharacterData> = Object.fromEntries(
         this.charactersData.map(char => [char.id, char])
@@ -66,7 +66,7 @@ export class CharactersService {
 
     public static getLreCharacter(id: LegendaryEventEnum): ICharacterData | undefined {
         return this.lreCharacters.find(unit => {
-            const event = LegendaryEventService.getEventByCharacterSnowprintId(unit.snowprintId!);
+            const event = LegendaryEventService.getEventByCharacterSnowprintId(unit.snowprintId);
             return event?.id === id;
         });
     }
@@ -182,7 +182,7 @@ export class CharactersService {
 
     static canonicalName(identifier: string): string {
         const unit = this.getUnit(identifier);
-        if (unit) return unit.snowprintId!;
+        if (unit) return unit.snowprintId;
         if (identifier === "Sho'Syl") return 'tauMarksman';
         if (identifier === "Re'Vas") return 'tauCrisis';
         if (identifier === 'PoM') return 'tyranParasite';
@@ -197,7 +197,7 @@ export class CharactersService {
 
     public static resolveCharacter(identifier: string): ICharacterData {
         const returnValue = CharactersService.charactersData.find(
-            x => x.snowprintId! == CharactersService.canonicalName(identifier)
+            x => x.snowprintId == CharactersService.canonicalName(identifier)
         );
         return returnValue!;
     }

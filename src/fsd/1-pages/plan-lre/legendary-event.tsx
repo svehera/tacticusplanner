@@ -1,4 +1,4 @@
-﻿import { useContext, useMemo, useState } from 'react';
+﻿import { useContext, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -24,7 +24,7 @@ export const LegendaryEvent = ({
     legendaryEvent: ILegendaryEvent;
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
 }) => {
-    const { viewPreferences, leSelectedTeams, characters } = useContext(StoreContext);
+    const { viewPreferences, leSelectedTeams } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { model: lreProgress } = useLreProgress(legendaryEvent);
 
@@ -32,8 +32,6 @@ export const LegendaryEvent = ({
     const [editTeam, setEditTeam] = useState<ILreTeam | null>(null);
     const [preselectedTrackId, setPreselectedTrackId] = useState<LreTrackId>('alpha');
     const [preselectedRequirements, setPreselectedRequirements] = useState<string[]>([]);
-
-    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     // Compute virtual attributes (not saved in JSON) for display on LRE team cards.
     const selectedTeams = (leSelectedTeams[legendaryEvent.id]?.teams ?? []).map(rawTeam => {
@@ -55,24 +53,6 @@ export const LegendaryEvent = ({
             );
             team.charactersIds = [];
         }
-
-        team.characters = (team.charSnowprintIds ?? team.charactersIds ?? [])
-            .map(id => {
-                const character = resolvedCharacters.find(x => x.snowprintId === id);
-                if (!character) {
-                    console.warn(
-                        'unknown character. if you have imported teams from a pre-mythic ',
-                        'instance of the planner, please remove the unit from the team and ',
-                        'add it back.',
-                        id,
-                        character
-                    );
-                    return undefined;
-                }
-
-                return { ...character, teamId: team.id };
-            })
-            .filter(x => x !== undefined) as ICharacter2[];
         return team;
     });
 
@@ -91,7 +71,7 @@ export const LegendaryEvent = ({
                 name: section,
                 section: section,
                 charactersIds: team.map(x => x.name),
-                charSnowprintIds: team.map(x => x.snowprintId!),
+                charSnowprintIds: team.map(x => x.snowprintId),
                 restrictionsIds: restrictions,
             },
         });

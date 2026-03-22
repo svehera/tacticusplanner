@@ -1,13 +1,19 @@
 import { describe, expect, it } from 'vitest';
 
 import { defaultData } from '@/models/constants';
+import { IDailyRaids } from '@/models/interfaces';
 import { dailyRaidsReducer } from '@/reducers/daily-raids.reducer';
 
 import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 
+const createInitialState = (): IDailyRaids => ({
+    ...(defaultData.dailyRaids as IDailyRaids),
+    raidedLocations: [],
+});
+
 describe('dailyRaids.reducer - Campaign Event mapping', () => {
     it('maps Death Guard Standard and Challenge battles into raidedLocations', () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const deathGuardProgress: TacticusCampaignProgress = {
             id: 'eventCampaign4',
@@ -24,7 +30,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
         const next = dailyRaidsReducer(initialState, {
             type: 'SyncWithTacticus',
             progress: [deathGuardProgress],
-        } as any);
+        });
 
         // Should include base node (DGS01)
         const hasStandard = next.raidedLocations.some(
@@ -40,7 +46,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
     });
 
     it('maps AdMech Standard and Challenge battles', () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'eventCampaign1',
@@ -54,7 +60,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             ],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(
             x => x.campaign === 'Adeptus Mechanicus Standard' && x.nodeNumber === 1
@@ -67,7 +73,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
     });
 
     it('maps AdMech Extremis and Challenge battles', () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'eventCampaign1',
@@ -81,7 +87,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             ],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(
             x => x.campaign === 'Adeptus Mechanicus Extremis' && x.nodeNumber === 1
@@ -94,7 +100,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
     });
 
     it('maps Tyranids Standard and Challenge battles', () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'eventCampaign2',
@@ -108,7 +114,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             ],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(x => x.campaign === 'Tyranids Standard' && x.nodeNumber === 1);
         const hasChallenge = next.raidedLocations.some(
@@ -119,7 +125,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
     });
 
     it('maps Tyranids Extremis and Challenge battles', () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'eventCampaign2',
@@ -133,7 +139,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             ],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(x => x.campaign === 'Tyranids Extremis' && x.nodeNumber === 1);
         const hasChallenge = next.raidedLocations.some(
@@ -144,7 +150,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
     });
 
     it("maps T'au Standard and Challenge battles", () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'eventCampaign3',
@@ -158,7 +164,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             ],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(x => x.campaign === "T'au Empire Standard" && x.nodeNumber === 1);
         const hasChallenge = next.raidedLocations.some(
@@ -169,7 +175,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
     });
 
     it("maps T'au Extremis and Challenge battles", () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'eventCampaign3',
@@ -183,7 +189,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             ],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(x => x.campaign === "T'au Empire Extremis" && x.nodeNumber === 1);
         const hasChallenge = next.raidedLocations.some(
@@ -194,7 +200,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
     });
 
     it('maps Death Guard Extremis and Challenge battles', () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'eventCampaign4',
@@ -208,7 +214,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             ],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(x => x.campaign === 'Death Guard Extremis' && x.nodeNumber === 1);
         const hasChallenge = next.raidedLocations.some(
@@ -219,7 +225,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
     });
 
     it('works for a regular legacy campaign (Indomitus)', () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'campaign1', // maps to Campaign.I (Indomitus)
@@ -229,14 +235,14 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             battles: [{ battleIndex: 5, attemptsLeft: 0, attemptsUsed: 1 }],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(x => x.campaign === 'Indomitus' && x.nodeNumber === 6);
         expect(hasBase).toBe(true);
     });
 
     it('works for a mirror legacy campaign (Indomitus Mirror)', () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'mirror1', // maps to Campaign.IM (Indomitus Mirror)
@@ -246,14 +252,14 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             battles: [{ battleIndex: 5, attemptsLeft: 0, attemptsUsed: 1 }],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(x => x.campaign === 'Indomitus Mirror' && x.nodeNumber === 6);
         expect(hasBase).toBe(true);
     });
 
     it('works for an elite legacy campaign (Indomitus Elite)', () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'elite1', // maps to Campaign.IE (Indomitus Elite)
@@ -263,14 +269,14 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             battles: [{ battleIndex: 5, attemptsLeft: 0, attemptsUsed: 1 }],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(x => x.campaign === 'Indomitus Elite' && x.nodeNumber === 6);
         expect(hasBase).toBe(true);
     });
 
     it('works for a mirror elite legacy campaign (Indomitus Mirror Elite)', () => {
-        const initialState = { ...defaultData.dailyRaids };
+        const initialState = createInitialState();
 
         const progress: TacticusCampaignProgress = {
             id: 'eliteMirror1', // maps to Campaign.IME (Indomitus Mirror Elite)
@@ -280,7 +286,7 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
             battles: [{ battleIndex: 5, attemptsLeft: 0, attemptsUsed: 1 }],
         };
 
-        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] } as any);
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
 
         const hasBase = next.raidedLocations.some(x => x.campaign === 'Indomitus Mirror Elite' && x.nodeNumber === 6);
         expect(hasBase).toBe(true);

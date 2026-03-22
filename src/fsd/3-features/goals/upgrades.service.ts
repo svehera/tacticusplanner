@@ -264,12 +264,12 @@ export class UpgradesService {
         }
 
         chars.forEach(char => {
-            returnValue['shards_' + char.snowprintId!] = char.shards;
-            returnValue['mythicShards_' + char.snowprintId!] = char.mythicShards;
+            returnValue['shards_' + char.snowprintId] = char.shards;
+            returnValue['mythicShards_' + char.snowprintId] = char.mythicShards;
         });
         mows.forEach(mow => {
-            returnValue['shards_' + mow.snowprintId!] = mow.shards;
-            returnValue['mythicShards_' + mow.snowprintId!] = mow.mythicShards;
+            returnValue['shards_' + mow.snowprintId] = mow.shards;
+            returnValue['mythicShards_' + mow.snowprintId] = mow.mythicShards;
         });
         return returnValue;
     }
