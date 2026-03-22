@@ -74,29 +74,30 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
         }
         case 'Update': {
             const updatedGoal = action.goal;
-            const existingGoalIndex = state.findIndex(x => x.id === updatedGoal.goalId);
+            const existingGoal = state.find(x => x.id === updatedGoal.goalId);
 
-            if (existingGoalIndex < 0) return state;
-            const existingGoal = state[existingGoalIndex];
+            if (!existingGoal) {
+                return state;
+            }
 
             const newGoalData = GoalsService.convertToGenericGoal(updatedGoal);
-            if (!newGoalData) return state;
+            if (!newGoalData) {
+                return state;
+            }
 
-            // 1. Remove the goal from its current position
-            const filteredState = state.filter(x => x.id !== updatedGoal.goalId);
-
-            // 2. Insert the updated goal into the EXACT requested slot (Priority - 1)
-            // We use Math.min/max to ensure we stay within array bounds
-            const targetIndex = Math.max(0, Math.min(updatedGoal.priority - 1, filteredState.length));
-
-            filteredState.splice(targetIndex, 0, {
+            const goalWithUpdates = {
                 ...existingGoal,
                 ...newGoalData,
                 id: updatedGoal.goalId,
-            });
+            };
 
-            // 3. Re-index 1..N based on the new physical order
-            return filteredState.map((g, index) => ({ ...g, priority: index + 1 }));
+            const otherGoals = state.filter(x => x.id !== updatedGoal.goalId);
+
+            const targetIndex = Math.max(0, Math.min(updatedGoal.priority - 1, otherGoals.length));
+
+            const finalGoals = [...otherGoals.slice(0, targetIndex), goalWithUpdates, ...otherGoals.slice(targetIndex)];
+
+            return finalGoals.map((g, index) => ({ ...g, priority: index + 1 }));
         }
         case 'UpdateDailyRaids': {
             const { value } = action;
