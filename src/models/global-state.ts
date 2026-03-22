@@ -360,7 +360,8 @@ export class GlobalState implements IGlobalState {
             ...dailyRaids,
             raidedLocations: dailyRaids.raidedLocations.map(location => ({
                 id: location.id,
-                raidsAlreadyPerformed: location.raidsAlreadyPerformed + location.raidsToPerform,
+                raidsAlreadyPerformed: location.raidsAlreadyPerformed,
+                raidsToPerform: location.raidsToPerform,
             })),
         };
     }
@@ -383,12 +384,14 @@ export class GlobalState implements IGlobalState {
                 }
 
                 const raidsAlreadyPerformed = location.raidsAlreadyPerformed ?? 0;
+                const raidsToPerform = location.raidsToPerform ?? 0;
+                const totalRaids = raidsAlreadyPerformed + raidsToPerform;
                 return {
                     ...baseBattle,
                     raidsAlreadyPerformed,
-                    raidsToPerform: 0,
-                    energySpent: raidsAlreadyPerformed * baseBattle.energyCost,
-                    farmedItems: raidsAlreadyPerformed * baseBattle.dropRate,
+                    raidsToPerform,
+                    energySpent: totalRaids * baseBattle.energyCost,
+                    farmedItems: totalRaids * baseBattle.dropRate,
                     isShardsLocation: baseBattle.rarity === 'Shard' || baseBattle.rarity === 'Mythic Shard',
                     isCompleted: raidsAlreadyPerformed >= baseBattle.dailyBattleCount,
                 };

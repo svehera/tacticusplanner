@@ -299,7 +299,11 @@ function migrateLreTeams(
         if (eventTeams.teams?.length) {
             eventTeams.teams = eventTeams.teams.map(team => {
                 const charSnowprintIds = (
-                    team.charSnowprintIds?.length ? team.charSnowprintIds : (team.charactersIds ?? [])
+                    team.charSnowprintIds?.length
+                        ? team.charSnowprintIds
+                        : team.charactersIds?.length
+                          ? team.charactersIds
+                          : (team.characters?.map(character => character.snowprintId) ?? [])
                 ).map(resolve);
                 const cleanedTeam: ILreTeam = {
                     ...team,

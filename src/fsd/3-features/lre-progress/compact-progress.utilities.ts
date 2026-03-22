@@ -66,7 +66,12 @@ export function compactToBattlesProgress(compact: ILreCompactProgressDto): ILreB
                 const highScoredPoints = requirementProgress.highScoredPoints?.[battleIndex];
                 const status = requirementProgress.statuses?.[battleIndex];
 
-                if (state !== ProgressState.none || scoredPoints != null || status != null) {
+                if (
+                    state !== ProgressState.none ||
+                    scoredPoints != null ||
+                    highScoredPoints != null ||
+                    status != null
+                ) {
                     requirements.push({ id: requirementId, state, scoredPoints, highScoredPoints, status });
                 }
             }

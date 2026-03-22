@@ -210,6 +210,7 @@ export interface IDailyRaids {
 export interface IDailyRaidLocationStored {
     id: string;
     raidsAlreadyPerformed: number;
+    raidsToPerform?: number;
 }
 
 export interface IDailyRaidsStored {
