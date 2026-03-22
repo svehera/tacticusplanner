@@ -163,7 +163,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
             <h3>
                 {completionPercentage}% {track.trackName}
             </h3>
-            <div className="start gap5 box-border flex flex-col">
+            <div className="gap5 start box-border flex flex-col">
                 {track.requirements.map(requirement => (
                     <div key={requirement.id} className="flex-box gap5">
                         <div

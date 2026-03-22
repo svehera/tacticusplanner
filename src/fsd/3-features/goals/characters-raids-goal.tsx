@@ -69,7 +69,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
                 return (
                     <div className="flex-box gap5">
-                        <div className="flex-box start column">
+                        <div className="flex-box column start">
                             {hasPrimaryGoal && (
                                 <div className="flex-box gap-[3px]">
                                     <span>P:</span> <b>{goal.primaryStart}</b> <ArrowForward />
