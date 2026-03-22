@@ -9,7 +9,7 @@ export const ThemeSwitch = () => {
     const { userThemePreference, setUserThemePreference } = useTheme();
 
     switch (userThemePreference) {
-        case Theme.Device:
+        case Theme.Device: {
             return (
                 <Tooltip title="Switch to light mode">
                     <IconButton color="inherit" onClick={() => setUserThemePreference(Theme.Light)}>
@@ -17,7 +17,8 @@ export const ThemeSwitch = () => {
                     </IconButton>
                 </Tooltip>
             );
-        case Theme.Light:
+        }
+        case Theme.Light: {
             return (
                 <Tooltip title="Switch to dark mode">
                     <IconButton color="inherit" onClick={() => setUserThemePreference(Theme.Dark)}>
@@ -25,7 +26,8 @@ export const ThemeSwitch = () => {
                     </IconButton>
                 </Tooltip>
             );
-        case Theme.Dark:
+        }
+        case Theme.Dark: {
             return (
                 <Tooltip title="Switch to device default">
                     <IconButton color="inherit" onClick={() => setUserThemePreference(Theme.Device)}>
@@ -33,5 +35,6 @@ export const ThemeSwitch = () => {
                     </IconButton>
                 </Tooltip>
             );
+        }
     }
 };

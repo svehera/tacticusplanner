@@ -18,7 +18,7 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 
-import { ICharacter2 } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
@@ -41,6 +41,10 @@ interface Props {
     restrictions: string[];
 }
 
+const getRowStyle = (params: RowClassParams): RowStyle => {
+    return params.node.rowIndex === 5 ? { borderTop: '5px dashed' } : {};
+};
+
 export const LreTeamsTable: React.FC<Props> = ({
     legendaryEvent,
     track,
@@ -54,8 +58,16 @@ export const LreTeamsTable: React.FC<Props> = ({
 }) => {
     const gridReference = useRef<AgGridReact>(null);
 
-    const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
+    const { viewPreferences, autoTeamsPreferences, characters: unresolvedCharacters } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
+    const resolvedCharacters = useMemo(
+        () => CharactersService.resolveStoredCharacters(unresolvedCharacters),
+        [unresolvedCharacters]
+    );
+    const resolvedCharactersBySnowprintId = useMemo(
+        () => Object.fromEntries(resolvedCharacters.map(character => [character.snowprintId, character])),
+        [resolvedCharacters]
+    );
 
     const defaultColumnDefinition: ColDef & { section: LreTrackId } = {
         resizable: true,
@@ -101,20 +113,22 @@ export const LreTeamsTable: React.FC<Props> = ({
     const rows: Array<ITableRow> = useMemo(() => getRows(suggestedTeams), [suggestedTeams]);
 
     const selectedTeamsRows: Array<ITableRow> = useMemo(() => {
-        const teamRecord: Record<string, Array<ICharacter2 | string>> = {};
+        const teamRecord: Record<string, ICharacter2[]> = {};
 
         selectedTeams.forEach(team => {
             team.restrictionsIds.forEach(id => {
                 const existingCharacters = teamRecord[id] ?? [];
-                const newTeam = Array.from({ length: 5 }, (_, index) => {
-                    return team.characters?.[index] ?? '';
-                });
+                const newTeam = (team.charSnowprintIds ?? [])
+                    .slice(0, 5)
+                    .map(charId => resolvedCharactersBySnowprintId[charId])
+                    .filter((character): character is ICharacter2 => !!character);
+
                 teamRecord[id] = [...existingCharacters, ...newTeam];
             });
         });
 
         return getRows(teamRecord);
-    }, [selectedTeams]);
+    }, [resolvedCharactersBySnowprintId, selectedTeams]);
 
     useEffect(() => {
         gridReference.current?.api?.sizeColumnsToFit();
@@ -134,10 +148,6 @@ export const LreTeamsTable: React.FC<Props> = ({
             restrictionName,
             selected,
         });
-    };
-
-    const getRowStyle = (params: RowClassParams): RowStyle => {
-        return params.node.rowIndex === 5 ? { borderTop: '5px dashed' } : {};
     };
 
     const addNewTeam = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
@@ -198,7 +208,7 @@ export const LreTeamsTable: React.FC<Props> = ({
         return columns;
     }
 
-    function getRows(teams: Record<string, Array<ICharacter2 | string | undefined>>): Array<ITableRow> {
+    function getRows(teams: Record<string, Array<ICharacter2 | undefined>>): Array<ITableRow> {
         const size = Math.max(...Object.values(teams).map(x => x.length));
         const rows: Array<ITableRow> = Array.from({ length: size }, () => ({}));
 
@@ -236,7 +246,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                         </a>
                     </div>
                 </div>
-                {!!restrictions.length && (
+                {restrictions.length > 0 && (
                     <Button size="small" onClick={clearSelection}>
                         Clear selection
                     </Button>
@@ -262,7 +272,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                     onGridReady={useFitGridOnWindowResize(gridReference)}
                     onCellClicked={addNewTeam}></AgGridReact>
             </div>
-            {selectedTeams.length ? (
+            {selectedTeams.length > 0 ? (
                 <>
                     <h3>Selected Teams ({selectedTeams.length})</h3>
                     <SelectedTeamsTable

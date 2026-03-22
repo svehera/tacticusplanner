@@ -19,6 +19,17 @@ import { HomeScreenEventPlannerService } from './home-screen-event-planner.servi
 import { GREEK_ZONES, numberToRoman, ONSLAUGHT_TRACK_NAME, romanToNumber } from './id-data';
 import { OnslaughtSectorKey, OnslaughtTrackId, OnslaughtZoneKey } from './models';
 
+const updateTokenState =
+    (setText: React.Dispatch<React.SetStateAction<string>>, setValue: React.Dispatch<React.SetStateAction<number>>) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+        const raw = event.target.value;
+        const value = parseInt(raw.trim(), 10);
+        setText(raw);
+        if (!Number.isNaN(value) && value >= 0) {
+            setValue(value);
+        }
+    };
+
 export const HomeScreenEventPlanner = () => {
     const [preEventTokens, setPreEventTokens] = useState<number>(0);
     const [duringEventTokens, setDuringEventTokens] = useState<number>(0);
@@ -83,19 +94,6 @@ export const HomeScreenEventPlanner = () => {
         );
         return returnValue;
     }, [selections, preEventTokens, duringEventTokens]);
-    const updateTokenState =
-        (
-            setText: React.Dispatch<React.SetStateAction<string>>,
-            setValue: React.Dispatch<React.SetStateAction<number>>
-        ) =>
-        (event: React.ChangeEvent<HTMLInputElement>) => {
-            const raw = event.target.value;
-            const value = parseInt(raw.trim(), 10);
-            setText(raw);
-            if (!Number.isNaN(value) && value >= 0) {
-                setValue(value);
-            }
-        };
 
     const updatePreEventTokens = updateTokenState(setPreEventTokensText, setPreEventTokens);
     const updateDuringEventTokens = updateTokenState(setDuringEventTokensText, setDuringEventTokens);

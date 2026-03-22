@@ -31,10 +31,10 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
     const [viewSettings, setViewSettings] = useState<ILreViewSettings & ILreTileSettings>(lreViewSettings);
     const [teamsSettings, setTeamsSettings] = useState<IAutoTeamsPreferences>(autoTeamsSettings);
     const [recommendFirst, setRecommendFirst] = useState<string[]>(
-        characters.filter(x => x.bias === CharacterBias.recommendFirst).map(x => x.snowprintId!)
+        characters.filter(x => x.bias === CharacterBias.recommendFirst).map(x => x.snowprintId)
     );
     const [recommendLast, setRecommendLast] = useState<string[]>(
-        characters.filter(x => x.bias === CharacterBias.recommendLast).map(x => x.snowprintId!)
+        characters.filter(x => x.bias === CharacterBias.recommendLast).map(x => x.snowprintId)
     );
 
     const updatePreferences = (
@@ -206,7 +206,7 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                                 chars
                                     .map(x => characters.find(c => c.name === x))
                                     .filter(x => x !== undefined)
-                                    .map(x => x!.snowprintId!)
+                                    .map(x => x!.snowprintId)
                             )
                         }
                     />
@@ -217,9 +217,9 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                         selectionChanges={(chars: string[]) => {
                             setRecommendLast(
                                 chars
-                                    .map(x => characters.find(c => c.name === x || c.snowprintId! == x))
+                                    .map(x => characters.find(c => c.name === x || c.snowprintId == x))
                                     .filter(x => x !== undefined)
-                                    .map(x => x!.snowprintId!)
+                                    .map(x => x!.snowprintId)
                             );
                         }}
                     />

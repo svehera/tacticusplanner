@@ -31,16 +31,16 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
     const enemiesCountOptions = useMemo(() => CampaignsService.getPossibleEnemiesCount().map(x => x.toString()), []);
 
     const filtersCount =
-        +!!filter.enemiesAlliance.length +
-        +!!filter.alliesAlliance.length +
-        +!!filter.alliesFactions.length +
-        +!!filter.enemiesFactions.length +
-        +!!filter.upgradesRarity.length +
+        +(filter.enemiesAlliance.length > 0) +
+        +(filter.alliesAlliance.length > 0) +
+        +(filter.alliesFactions.length > 0) +
+        +(filter.enemiesFactions.length > 0) +
+        +(filter.upgradesRarity.length > 0) +
         +!!filter.slotsCount?.length +
         +!!filter.enemiesTypes?.length +
         +!!filter.enemiesMinCount +
         +!!filter.enemiesMaxCount +
-        +!!filter.campaignTypes.length;
+        +(filter.campaignTypes.length > 0);
 
     const handleClick = () => {
         setOpen(true);
@@ -81,9 +81,10 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
     };
 
     const renderUnitsFilter = (type: 'allies' | 'enemies', alliance: Alliance[], factions: FactionId[]) => {
-        const allowedFactions = !alliance.length
-            ? allFactions.map(x => x.faction)
-            : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
+        const allowedFactions =
+            alliance.length === 0
+                ? allFactions.map(x => x.faction)
+                : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
         const selectedFactionNames = factions.map(factionId => factionLookup[factionId]?.name).filter(Boolean);
 
         const allianceFilterChanged = (values: string[]) => {

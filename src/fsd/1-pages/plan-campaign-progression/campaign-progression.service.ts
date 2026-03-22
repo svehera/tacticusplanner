@@ -38,12 +38,15 @@ const alliedFactions = (factionId: FactionId) => {
     const faction = factions.find(f => f.snowprintId === factionId);
     if (!faction) throw new Error(`Unknown faction ID: ${factionId}`);
     switch (faction.alliance) {
-        case 'Imperial':
+        case 'Imperial': {
             return imperialFactions;
-        case 'Chaos':
+        }
+        case 'Chaos': {
             return chaosFactions;
-        case 'Xenos':
+        }
+        case 'Xenos': {
             return [faction];
+        }
     }
 };
 
@@ -56,6 +59,19 @@ const factionCampaigns = Object.fromEntries(
 
 const campaignFactions = Object.fromEntries(CampaignsService.allCampaigns.map(c => [c.id, alliedFactions(c.faction)]));
 
+const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
+    const rarityMap = {
+        [Rarity.Common]: 0,
+        [Rarity.Uncommon]: 1,
+        [Rarity.Rare]: 2,
+        [Rarity.Epic]: 3,
+        [Rarity.Legendary]: 4,
+        [Rarity.Mythic]: 5,
+        Shard: 6,
+        'Mythic Shard': 7,
+    };
+    return rarityMap[rarity];
+};
 export class CampaignsProgressionService {
     /**
      * Computes the cost per goal and associates each character with the campaigns
@@ -268,7 +284,7 @@ export class CampaignsProgressionService {
                 for (const upgradeMaterialId of unitUpgrade.upgrades) {
                     const expandedRecipe: IRecipeExpandedUpgrade =
                         UpgradesService.recipeExpandedUpgradeData[upgradeMaterialId];
-                    if (Object.entries(expandedRecipe.expandedRecipe).length == 0) {
+                    if (Object.entries(expandedRecipe.expandedRecipe).length === 0) {
                         this.addToMaterials(materialReqs, expandedRecipe.id, 1);
                     } else {
                         for (const [material, count] of Object.entries(expandedRecipe.expandedRecipe)) {
@@ -294,19 +310,7 @@ export class CampaignsProgressionService {
             }
             materialReqs.materials = newMaterials;
         }
-        const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
-            const rarityMap = {
-                [Rarity.Common]: 0,
-                [Rarity.Uncommon]: 1,
-                [Rarity.Rare]: 2,
-                [Rarity.Epic]: 3,
-                [Rarity.Legendary]: 4,
-                [Rarity.Mythic]: 5,
-                Shard: 6,
-                'Mythic Shard': 7,
-            };
-            return rarityMap[rarity];
-        };
+
         const sortedMaterials: string[] = Object.keys(materialReqs.materials).sort(
             (a, b) =>
                 mapRarity(UpgradesService.recipeExpandedUpgradeData[b].rarity) -
@@ -409,20 +413,27 @@ export class CampaignsProgressionService {
      */
     public static getEnergyCost(type: CampaignType): number {
         switch (type) {
-            case CampaignType.Normal:
+            case CampaignType.Normal: {
                 return 6;
-            case CampaignType.Mirror:
+            }
+            case CampaignType.Mirror: {
                 return 6;
-            case CampaignType.Early:
+            }
+            case CampaignType.Early: {
                 return 5;
-            case CampaignType.SuperEarly:
+            }
+            case CampaignType.SuperEarly: {
                 return 3;
-            case CampaignType.Elite:
+            }
+            case CampaignType.Elite: {
                 return 10;
-            case CampaignType.Standard:
+            }
+            case CampaignType.Standard: {
                 return 6;
-            case CampaignType.Extremis:
+            }
+            case CampaignType.Extremis: {
                 return 6;
+            }
         }
         return -1;
     }

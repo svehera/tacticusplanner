@@ -179,7 +179,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
             ret.farmPreferences.trainingRushPreferences = {
                 strategy:
                     ret.farmPreferences.trainingRushPreferences?.strategy ?? ITrainingRushStrategy.maximizeRewards,
-                characterId: unit ? unit.snowprintId! : undefined,
+                characterId: unit ? unit.snowprintId : undefined,
             };
             return ret;
         });

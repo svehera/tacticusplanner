@@ -13,14 +13,18 @@ export const LeBattles: React.FC<Props> = ({ battles }) => {
 
     const battle = useMemo(() => {
         switch (track) {
-            case 'ALPHA':
+            case 'ALPHA': {
                 return battles.alpha.battles[battleIndex];
-            case 'BETA':
+            }
+            case 'BETA': {
                 return battles.beta.battles[battleIndex];
-            case 'GAMMA':
+            }
+            case 'GAMMA': {
                 return battles.gamma.battles[battleIndex];
-            default:
+            }
+            default: {
                 return battles.alpha.battles[battleIndex];
+            }
         }
     }, [track, battleIndex, battles]);
 

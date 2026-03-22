@@ -56,11 +56,11 @@ function getDisplay(
     if (rosterSnapshots.base === undefined) {
         const powerChars = RosterSnapshotsService.createSnapshot("sum'n", Date.now(), chars, mows).chars.map(c => ({
             ...c,
-            power: CharactersPowerService.getCharacterPower(chars.find(char => char.snowprintId! === c.id)!),
+            power: CharactersPowerService.getCharacterPower(chars.find(char => char.snowprintId === c.id)!),
         }));
         const poweredMows = RosterSnapshotsService.createSnapshot("sum'n", Date.now(), chars, mows).mows.map(m => ({
             ...m,
-            power: CharactersPowerService.getCharacterPower(mows.find(mow => mow.snowprintId! === m.id)!),
+            power: CharactersPowerService.getCharacterPower(mows.find(mow => mow.snowprintId === m.id)!),
         }));
 
         const powerUnits = orderBy([...powerChars, ...poweredMows], 'power', 'desc');

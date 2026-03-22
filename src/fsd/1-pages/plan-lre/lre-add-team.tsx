@@ -81,8 +81,7 @@ export const LreAddTeam: React.FC<Props> = ({
             id: '',
             name: teamName,
             section: trackId,
-            characters: selectedTeam,
-            charSnowprintIds: selectedTeam.map(x => x.snowprintId!),
+            charSnowprintIds: selectedTeam.map(x => x.snowprintId),
             expectedBattleClears: expectedBattleClears,
             restrictionsIds: restrictions,
         });
@@ -114,8 +113,8 @@ export const LreAddTeam: React.FC<Props> = ({
     const isValid = () => {
         const availableCharacters = gridTeam.map(x => x.id);
         return (
-            selectedTeam.length !== 0 &&
-            !!teamName.length &&
+            selectedTeam.length > 0 &&
+            teamName.length > 0 &&
             selectedTeam.every(character => availableCharacters.includes(character.id)) &&
             clampExpectedBattles(expectedBattleClears) === expectedBattleClears
         );
@@ -200,14 +199,14 @@ export const LreAddTeam: React.FC<Props> = ({
                     <div className="min-w-[400px]">
                         <div className="flex-box gap20 space-between">
                             <h3>Selected Team ({selectedTeam.length}/5)</h3>
-                            {!!selectedTeam.length && (
+                            {selectedTeam.length > 0 && (
                                 <Button variant="text" onClick={clearAll}>
                                     Clear all
                                 </Button>
                             )}
                         </div>
                         <div className="flex-box column start pointer gap-[3px]">
-                            {selectedTeam.length ? (
+                            {selectedTeam.length > 0 ? (
                                 selectedTeam.map(character => (
                                     <div
                                         key={character.id}

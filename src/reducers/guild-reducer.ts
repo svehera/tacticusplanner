@@ -16,7 +16,7 @@ export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
 
         case 'SaveGuildMembers': {
             const newMembers = action.members
-                .filter(x => !!x.username.length || (!!x.userId?.length && !!x.inGameName?.length))
+                .filter(x => x.username.length > 0 || (!!x.userId?.length && !!x.inGameName?.length))
                 .slice(0, 30)
                 .map((x, index) => ({ ...x, index: index }));
             return {
@@ -26,7 +26,8 @@ export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
         }
 
         default: {
-            throw new Error();
+            // @ts-expect-error TS says this should never be reached but we want the error if it does
+            throw new Error(`Unexpected action.type received in reducer: ${action.type}`);
         }
     }
 };

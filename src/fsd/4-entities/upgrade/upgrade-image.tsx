@@ -29,19 +29,25 @@ export const UpgradeImage = ({
 
     function getFrameUrl(rarity?: RarityString) {
         switch (rarity) {
-            case RarityString.Mythic:
+            case RarityString.Mythic: {
                 return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_mythic.png`);
-            case RarityString.Legendary:
+            }
+            case RarityString.Legendary: {
                 return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_legendary.png`);
-            case RarityString.Epic:
+            }
+            case RarityString.Epic: {
                 return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_epic.png`);
-            case RarityString.Rare:
+            }
+            case RarityString.Rare: {
                 return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_rare.png`);
-            case RarityString.Uncommon:
+            }
+            case RarityString.Uncommon: {
                 return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_uncommon.png`);
+            }
             case RarityString.Common:
-            default:
+            default: {
                 return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_common.png`);
+            }
         }
     }
     const frameImgUrl = getFrameUrl(rarity);

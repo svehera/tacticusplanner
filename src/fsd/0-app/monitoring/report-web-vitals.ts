@@ -18,21 +18,26 @@ const reportWebVitals = (onReport: (metric: MetricWithAttribution) => void) => {
         };
 
         switch (metric.name) {
-            case 'CLS':
+            case 'CLS': {
                 eventParameters.debug_target = metric.attribution.largestShiftTarget ?? '';
                 break;
-            case 'INP':
+            }
+            case 'INP': {
                 eventParameters.debug_target = metric.attribution.interactionTarget;
                 break;
-            case 'LCP':
+            }
+            case 'LCP': {
                 eventParameters.debug_target = metric.attribution.element ?? '';
                 break;
-            case 'TTFB':
+            }
+            case 'TTFB': {
                 eventParameters.debug_target = metric.attribution.navigationEntry?.name ?? '';
                 break;
-            case 'FCP':
+            }
+            case 'FCP': {
                 eventParameters.debug_target = metric.attribution.fcpEntry?.name ?? '';
                 break;
+            }
         }
 
         // Track the metric to Google Analytics via `analytics`

@@ -283,18 +283,24 @@ export class LeProgressService {
     /** Maps a unit's snowprintId to the planner internal ID for legendary events. */
     public static mapEventId(charId: string): LegendaryEventEnum | undefined {
         switch (charId) {
-            case 'bloodDante':
+            case 'bloodDante': {
                 return LegendaryEventEnum.Dante;
-            case 'custoTrajann':
+            }
+            case 'custoTrajann': {
                 return LegendaryEventEnum.Trajann;
-            case 'emperLucius':
+            }
+            case 'emperLucius': {
                 return LegendaryEventEnum.Lucius;
-            case 'tauFarsight':
+            }
+            case 'tauFarsight': {
                 return LegendaryEventEnum.Farsight;
-            case 'votanUthar':
+            }
+            case 'votanUthar': {
                 return LegendaryEventEnum.Uthar;
-            default:
+            }
+            default: {
                 return undefined;
+            }
         }
     }
 

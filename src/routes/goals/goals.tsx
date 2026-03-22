@@ -380,7 +380,7 @@ export const Goals = () => {
                     </AccordionDetails>
                 </Accordion>
             </div>
-            {!!upgradeRankOrMowGoals.length && (
+            {upgradeRankOrMowGoals.length > 0 && (
                 <div>
                     <div className="gap5 mx-0 my-5 flex flex-wrap items-center text-xl">
                         <span>
@@ -434,7 +434,7 @@ export const Goals = () => {
                     )}
                 </div>
             )}
-            {!!shardsGoals.length && (
+            {shardsGoals.length > 0 && (
                 <div>
                     <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>
@@ -488,7 +488,7 @@ export const Goals = () => {
                     )}
                 </div>
             )}
-            {!!upgradeAbilities.length && (
+            {upgradeAbilities.length > 0 && (
                 <div>
                     <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>

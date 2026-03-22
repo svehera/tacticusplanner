@@ -35,6 +35,18 @@ import { CampaignProgressionUnfarmableMaterials } from './campaign-progression-u
 import { CampaignData } from './campaign-progression.models';
 import { CampaignsProgressionService } from './campaign-progression.service';
 
+/**
+ * @returns the row data for the grid that holds the material
+ * requirements related to the campaign.
+ */
+function getCampaignMaterialData(campaignData: CampaignData): any[] {
+    const rowData: any[] = [];
+    for (const savings of campaignData[1].savings) {
+        rowData.push({ savingsData: [{ savings: savings }] });
+    }
+    return rowData;
+}
+
 export const CampaignProgression = () => {
     const dispatch = useContext(DispatchContext);
     const { characters: storeCharacters, mows: storeMows, goals, campaignsProgress } = useContext(StoreContext);
@@ -88,10 +100,10 @@ export const CampaignProgression = () => {
         let filtered: Array<
             ICharacterAscendGoal | ICharacterUnlockGoal | ICharacterUpgradeRankGoal | ICharacterUpgradeMow
         > = upgradeRankOrMowGoals.filter(goal => goal.goalId == goalId);
-        if (filtered.length == 0) {
+        if (filtered.length === 0) {
             filtered = shardsGoals.filter(goal => goal.goalId == goalId);
         }
-        if (filtered.length == 0) {
+        if (filtered.length === 0) {
             console.warn('goalId not found { ' + goalId + ' ' + upgradeRankOrMowGoals.length + ' }');
             return undefined;
         }
@@ -145,18 +157,6 @@ export const CampaignProgression = () => {
             if (goal) {
                 rowData.push({ goalData: [{ goalId: goalId, goalCost: cost }] });
             }
-        }
-        return rowData;
-    }
-
-    /**
-     * @returns the row data for the grid that holds the material
-     * requirements related to the campaign.
-     */
-    function getCampaignMaterialData(campaignData: CampaignData): any[] {
-        const rowData: any[] = [];
-        for (const savings of campaignData[1].savings) {
-            rowData.push({ savingsData: [{ savings: savings }] });
         }
         return rowData;
     }

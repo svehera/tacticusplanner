@@ -49,7 +49,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
                 }
             }
         });
-        if (missingMaterials.size == 0) {
+        if (missingMaterials.size === 0) {
             return <span></span>;
         }
 

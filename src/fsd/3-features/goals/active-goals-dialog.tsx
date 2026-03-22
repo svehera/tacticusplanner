@@ -150,10 +150,10 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                 </DialogTitle>
                 <DialogContent>
                     <div className="flex-box start wrap">
-                        {!!upgradeRankGoals.length && renderGoalsGroup('Upgrade rank', upgradeRankGoals)}
-                        {!!upgradeMowGoals.length && renderGoalsGroup('Upgrade MoW', upgradeMowGoals)}
-                        {!!ascendGoals.length && renderGoalsGroup('Ascend/Promote', ascendGoals)}
-                        {!!unlockGoals.length && renderGoalsGroup('Unlock', unlockGoals)}
+                        {upgradeRankGoals.length > 0 && renderGoalsGroup('Upgrade rank', upgradeRankGoals)}
+                        {upgradeMowGoals.length > 0 && renderGoalsGroup('Upgrade MoW', upgradeMowGoals)}
+                        {ascendGoals.length > 0 && renderGoalsGroup('Ascend/Promote', ascendGoals)}
+                        {unlockGoals.length > 0 && renderGoalsGroup('Unlock', unlockGoals)}
                     </div>
                 </DialogContent>
 

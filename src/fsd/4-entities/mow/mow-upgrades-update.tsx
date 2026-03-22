@@ -39,12 +39,14 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
             (_, index) => originalSecondaryLevel + index + 1
         );
 
-        const primary = primaryLevels.length
-            ? MowsService.getMaterialsList(mowId, mowId, Alliance.Imperial, primaryLevels)
-            : [];
-        const secondary = secondaryLevels.length
-            ? MowsService.getMaterialsList(mowId, mowId, Alliance.Imperial, secondaryLevels)
-            : [];
+        const primary =
+            primaryLevels.length > 0
+                ? MowsService.getMaterialsList(mowId, mowId, Alliance.Imperial, primaryLevels)
+                : [];
+        const secondary =
+            secondaryLevels.length > 0
+                ? MowsService.getMaterialsList(mowId, mowId, Alliance.Imperial, secondaryLevels)
+                : [];
 
         const totalUpgrades = [
             ...primary.flatMap(x => x.primaryUpgrades),
@@ -79,7 +81,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
             <FormControlLabel
                 control={
                     <Checkbox
-                        disabled={!inventoryUpgrades.length}
+                        disabled={inventoryUpgrades.length === 0}
                         checked={updateInventory}
                         onChange={event => {
                             setUpdateInventory(event.target.checked);

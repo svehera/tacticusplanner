@@ -107,7 +107,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                 }
             }
 
-            if (inventoryUpdate.length) {
+            if (inventoryUpdate.length > 0) {
                 dispatch.inventory({
                     type: 'DecrementUpgradeQuantity',
                     upgrades: inventoryUpdate.map(x => ({ id: x.id, count: x.count })),
@@ -144,7 +144,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     // Support for both IDs for characters. Previously we used a short version (i.e. Ragnar, Darkstrider).
     if ([PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit) {
         possibleLocations = StaticDataService.getItemLocations(`shards_${unit.id}`);
-        if (!possibleLocations.length) {
+        if (possibleLocations.length === 0) {
             possibleLocations = StaticDataService.getItemLocations(`shards_${unit.snowprintId}`);
         }
     }

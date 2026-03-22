@@ -35,6 +35,16 @@ interface IUpgradesTableRow {
     craftable: boolean;
 }
 
+/**
+ * @returns If the material is a craftable upgrade, returns all the unique
+ * materials needed to craft it. Otherwise just returns the material.
+ */
+const expandMaterial = (material: string): string[] => {
+    const upgrade = UpgradesService.recipeExpandedUpgradeData[material];
+    if (!upgrade) return [material];
+    return Object.keys(upgrade.expandedRecipe);
+};
+
 export const Upgrades = () => {
     const selectionOptions: Selection[] = ['Base Upgrades', 'Craftable'];
     const gridReference = useRef<AgGridReact<IUpgradesTableRow>>(null);
@@ -184,16 +194,6 @@ export const Upgrades = () => {
         }
     }, [selection, showCharacters]);
 
-    /**
-     * @returns If the material is a craftable upgrade, returns all the unique
-     * materials needed to craft it. Otherwise just returns the material.
-     */
-    const expandMaterial = (material: string): string[] => {
-        const upgrade = UpgradesService.recipeExpandedUpgradeData[material];
-        if (!upgrade) return [material];
-        return Object.keys(upgrade.expandedRecipe);
-    };
-
     const rowsData = useMemo(() => {
         const upgradesLocations = CampaignsService.getUpgradesLocations();
         const upgrades = Object.values(UpgradesService.recipeDataByName);
@@ -220,7 +220,7 @@ export const Upgrades = () => {
                             .flat()
                             .flatMap(x => [x, expandMaterial(x)].flat());
                         if (allMats.includes(x.snowprintId)) {
-                            const charData = CharactersService.charactersData.find(x => x.snowprintId! === character);
+                            const charData = CharactersService.charactersData.find(x => x.snowprintId === character);
                             const existingChar = characters.find(x => x.id === character);
                             if (existingChar) {
                                 existingChar.ranks.push(stringToRank(rank));

@@ -351,7 +351,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const characters = getCharactersNeedingMaterial(
                         CampaignsProgressionService.getReward(savings.battle)
                     );
-                    if (characters.length == 0) return <span></span>;
+                    if (characters.length === 0) return <span></span>;
                     return (
                         <div className="flex-box gap5 wrap" key={CampaignsProgressionService.getReward(savings.battle)}>
                             {characters.map(unitId => {

@@ -45,6 +45,19 @@ import { GuidesGroup, GuidesStatus } from '@/fsd/3-features/guides/guides.enums'
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICreateGuide, IGetGuidesQueryParameters, IGuide, IGuideFilter } from '@/fsd/3-features/guides/guides.models';
 
+const handleShare = (teamId: number) => {
+    const shareRoute = (isMobile ? '/mobile' : '') + `/learn/guides?guideId=${teamId}`;
+    const shareLink = location.origin + shareRoute;
+    navigator.clipboard.writeText(shareLink).then(_ => enqueueSnackbar('Link Copied', { variant: 'success' }));
+};
+
+const handleViewOriginal = (teamId: number | null) => {
+    const route = (isMobile ? '/mobile' : '') + `/learn/guides?guideId=${teamId}`;
+    const link = location.origin + route;
+
+    window.open(link, isMobile ? '_self' : '_blank');
+};
+
 export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);
     const { userInfo, isAuthenticated } = useAuth();
@@ -292,21 +305,21 @@ export const Guides: React.FC = () => {
 
         return (
             <div>
-                {!!rejectedTeams.length && (
+                {rejectedTeams.length > 0 && (
                     <>
                         <h3>Rejected</h3>
                         <div className="flex-box gap20 start wrap">{renderTeams(rejectedTeams)}</div>
                     </>
                 )}
 
-                {!!pendingTeams.length && (
+                {pendingTeams.length > 0 && (
                     <>
                         <h3>Pending</h3>
                         <div className="flex-box gap20 start wrap">{renderTeams(pendingTeams)}</div>
                     </>
                 )}
 
-                {!!approvedTeams.length && (
+                {approvedTeams.length > 0 && (
                     <>
                         <h3>Approved</h3>
                         <div className="flex-box gap20 start wrap">{renderTeams(approvedTeams)}</div>
@@ -373,19 +386,6 @@ export const Guides: React.FC = () => {
         } else {
             removeTeamHonor(teamId);
         }
-    };
-
-    const handleShare = (teamId: number) => {
-        const shareRoute = (isMobile ? '/mobile' : '') + `/learn/guides?guideId=${teamId}`;
-        const shareLink = location.origin + shareRoute;
-        navigator.clipboard.writeText(shareLink).then(_ => enqueueSnackbar('Link Copied', { variant: 'success' }));
-    };
-
-    const handleViewOriginal = (teamId: number | null) => {
-        const route = (isMobile ? '/mobile' : '') + `/learn/guides?guideId=${teamId}`;
-        const link = location.origin + route;
-
-        window.open(link, isMobile ? '_self' : '_blank');
     };
 
     const handleEdit = (guide: IGuide) => {

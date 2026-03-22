@@ -69,7 +69,7 @@ export const SetAscendGoal: React.FC<Props> = ({
 
             {(currentRarity < Rarity.Legendary || currentStars < RarityStars.OneBlueStar) && (
                 <>
-                    {possibleLocations.length !== 0 && (
+                    {possibleLocations.length > 0 && (
                         <>
                             <div className="flex items-center gap-3">
                                 <NumbersInput
@@ -97,7 +97,7 @@ export const SetAscendGoal: React.FC<Props> = ({
 
             {targetRarity >= Rarity.Mythic && (
                 <>
-                    {!!possibleMythicLocations.length && (
+                    {possibleMythicLocations.length > 0 && (
                         <div className="flex items-center gap-3">
                             <div className="w-1/2">
                                 <NumbersInput

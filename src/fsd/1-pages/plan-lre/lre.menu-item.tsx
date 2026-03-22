@@ -8,7 +8,7 @@ const createMenuItem = (character: ICharacterData) =>
     new MenuItemTP(
         character.name,
         <UnitShardIcon icon={character.roundIcon} height={24} />,
-        `/plan/lre?character=${LegendaryEventEnum[LegendaryEventService.getEventByCharacterSnowprintId(character.snowprintId!)!.id]}`
+        `/plan/lre?character=${LegendaryEventEnum[LegendaryEventService.getEventByCharacterSnowprintId(character.snowprintId)!.id]}`
     );
 
 const activeLreChars = CharactersService.lreCharacters.filter(x => !x.lre?.finished);

@@ -112,6 +112,7 @@ interface GoalPriorityLocationsState {
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract static methods
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
 
     private static readonly goalPriorityByIdCache = new WeakMap<
@@ -263,12 +264,12 @@ export class UpgradesService {
         }
 
         chars.forEach(char => {
-            returnValue['shards_' + char.snowprintId!] = char.shards;
-            returnValue['mythicShards_' + char.snowprintId!] = char.mythicShards;
+            returnValue['shards_' + char.snowprintId] = char.shards;
+            returnValue['mythicShards_' + char.snowprintId] = char.mythicShards;
         });
         mows.forEach(mow => {
-            returnValue['shards_' + mow.snowprintId!] = mow.shards;
-            returnValue['mythicShards_' + mow.snowprintId!] = mow.mythicShards;
+            returnValue['shards_' + mow.snowprintId] = mow.shards;
+            returnValue['mythicShards_' + mow.snowprintId] = mow.mythicShards;
         });
         return returnValue;
     }
@@ -663,6 +664,7 @@ export class UpgradesService {
         const hse = settings.preferences.farmPreferences?.homeScreenEvent;
         if (hse === undefined || hse === IDailyRaidsHomeScreenEvent.none) return;
 
+        // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract static methods
         const hsePointsPerUnit = (campaignType: CampaignType): number => {
             if (campaignType === CampaignType.Elite) return 5;
             return 3;
@@ -670,18 +672,23 @@ export class UpgradesService {
 
         const getHsePoints = (loc: ICampaignBattleComposed): number => {
             switch (hse) {
-                case IDailyRaidsHomeScreenEvent.purgeOrder:
+                case IDailyRaidsHomeScreenEvent.purgeOrder: {
                     return (this.getNonSummonTyranidCount(loc) * hsePointsPerUnit(loc.campaignType)) / loc.energyCost;
-                case IDailyRaidsHomeScreenEvent.warpSurge:
+                }
+                case IDailyRaidsHomeScreenEvent.warpSurge: {
                     return (
                         (this.getNonSummonChaosEnemyCount(loc) * hsePointsPerUnit(loc.campaignType)) / loc.energyCost
                     );
-                case IDailyRaidsHomeScreenEvent.machineHunt:
+                }
+                case IDailyRaidsHomeScreenEvent.machineHunt: {
                     return this.getNonSummonMechanicalEnemyCount(loc) / loc.energyCost;
-                case IDailyRaidsHomeScreenEvent.trainingRush:
+                }
+                case IDailyRaidsHomeScreenEvent.trainingRush: {
                     return (this.getNonSummonEnemyCount(loc) * hsePointsPerUnit(loc.campaignType)) / loc.energyCost;
-                default:
+                }
+                default: {
                     return 0;
+                }
             }
         };
 
@@ -1405,7 +1412,7 @@ export class UpgradesService {
                     : ['priority', 'hsePoints', 'daysToComplete'];
             const orderingDirections = ['desc', 'asc', 'desc'] as const;
             switch (settings.preferences.farmPreferences.homeScreenEvent) {
-                case IDailyRaidsHomeScreenEvent.purgeOrder:
+                case IDailyRaidsHomeScreenEvent.purgeOrder: {
                     taggedLocs = taggedLocs.map(x => ({
                         ...x,
                         hsePoints:
@@ -1413,7 +1420,8 @@ export class UpgradesService {
                             x.loc.energyCost,
                     }));
                     break;
-                case IDailyRaidsHomeScreenEvent.warpSurge:
+                }
+                case IDailyRaidsHomeScreenEvent.warpSurge: {
                     taggedLocs = taggedLocs.map(x => ({
                         ...x,
                         hsePoints:
@@ -1421,14 +1429,16 @@ export class UpgradesService {
                             x.loc.energyCost,
                     }));
                     break;
-                case IDailyRaidsHomeScreenEvent.machineHunt:
+                }
+                case IDailyRaidsHomeScreenEvent.machineHunt: {
                     // Machine hunt is old and as of 1.36, doesn't differentiate between elite and non-elite raiding.
                     taggedLocs = taggedLocs.map(x => ({
                         ...x,
                         hsePoints: this.getNonSummonMechanicalEnemyCount(x.loc) / x.loc.energyCost,
                     }));
                     break;
-                case IDailyRaidsHomeScreenEvent.trainingRush:
+                }
+                case IDailyRaidsHomeScreenEvent.trainingRush: {
                     taggedLocs = taggedLocs.map(x => ({
                         ...x,
                         hsePoints:
@@ -1436,8 +1446,10 @@ export class UpgradesService {
                             x.loc.energyCost,
                     }));
                     break;
-                default:
+                }
+                default: {
                     break;
+                }
             }
             return orderBy(taggedLocs, orderingFields, orderingDirections).map(x => x.loc);
         }
@@ -1687,7 +1699,7 @@ export class UpgradesService {
                 raidsTotal: 0,
                 acquiredCount: Math.floor(originalShards[upgradeId] ?? 0),
                 requiredCount: Math.ceil(combinedBaseMaterials[upgradeId]?.requiredCount ?? 0),
-                countByGoalId: { ...(combinedBaseMaterials[upgradeId]?.countByGoalId ?? {}) },
+                countByGoalId: { ...combinedBaseMaterials[upgradeId]?.countByGoalId },
                 relatedCharacters: uniq(relatedGoals[upgradeId]?.map(goal => goal.unitId) ?? []),
                 relatedGoals: uniq((relatedGoals[upgradeId] ?? []).map(goal => goal.goalId)),
                 isBlocked: false,
@@ -1985,21 +1997,26 @@ export class UpgradesService {
             const upgradeRanks =
                 (() => {
                     switch (goal.type) {
-                        case PersonalGoalType.UpgradeRank:
+                        case PersonalGoalType.UpgradeRank: {
                             return CharacterUpgradesService.getCharacterUpgradeRank(goal);
-                        case PersonalGoalType.MowAbilities:
+                        }
+                        case PersonalGoalType.MowAbilities: {
                             return this.getMowUpgradeRank(goal);
-                        default:
+                        }
+                        default: {
                             return undefined;
+                        }
                     }
                 })()?.filter(x => x != undefined) ?? [];
             const upgradeShards = (() => {
                 switch (goal.type) {
                     case PersonalGoalType.Ascend:
-                    case PersonalGoalType.Unlock:
+                    case PersonalGoalType.Unlock: {
                         return this.getShardsForGoal(chars, mows, goal);
-                    default:
+                    }
+                    default: {
                         return undefined;
+                    }
                 }
             })();
             const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(
@@ -2216,7 +2233,7 @@ export class UpgradesService {
             raidsTotal: 0,
             energyTotal: 0,
             energyLeft: 0,
-            isBlocked: !selectedLocations.length && leftCount > 0,
+            isBlocked: selectedLocations.length === 0 && leftCount > 0,
             isFinished: leftCount === 0,
             crafted: false,
             stat: upgrade.stat,
@@ -2323,7 +2340,7 @@ export class UpgradesService {
             case Campaign.TAEC:
             case Campaign.TASC:
             case Campaign.DGEC:
-            case Campaign.DGSC:
+            case Campaign.DGSC: {
                 if (nodeNumber === 3) {
                     nodeNumber = 1;
                 } else if (nodeNumber === 13) {
@@ -2332,8 +2349,10 @@ export class UpgradesService {
                     nodeNumber = 3;
                 }
                 break;
-            default:
+            }
+            default: {
                 break;
+            }
         }
         return nodeNumber;
     }
@@ -2523,7 +2542,7 @@ export class UpgradesService {
                 // For each crafted upgrade, expand into either base materials or nested crafted upgrades.
                 if (craftedUpgradeData) {
                     // If this crafted upgrade has no crafted subcomponents, expand directly to base upgrades.
-                    if (!craftedUpgradeData.craftedUpgrades.length) {
+                    if (craftedUpgradeData.craftedUpgrades.length === 0) {
                         for (const baseUpgrade of craftedUpgradeData.baseUpgrades) {
                             addBaseUpgrade(baseUpgrade.id, baseUpgrade.count * craftedUpgradeCount);
                         }

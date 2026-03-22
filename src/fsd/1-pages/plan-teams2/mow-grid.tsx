@@ -30,13 +30,13 @@ export const MowGrid: React.FC<Props> = ({ mows, zoom, onMowSelect, showHeader, 
             )}
             <div className="flex flex-wrap gap-4">
                 {mows.map(mow => (
-                    <div key={mow.snowprintId!} className="relative" style={{ zoom }}>
+                    <div key={mow.snowprintId} className="relative" style={{ zoom }}>
                         <div
-                            onClick={() => onMowSelect(mow.snowprintId!)}
+                            onClick={() => onMowSelect(mow.snowprintId)}
                             className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"
                             title={`Select ${mow.name || 'Machine of War'}`}>
                             <RosterSnapshotCharacter
-                                key={mow.snowprintId!}
+                                key={mow.snowprintId}
                                 showMythicShards={RosterSnapshotShowVariableSettings.Never}
                                 showShards={RosterSnapshotShowVariableSettings.Never}
                                 showXpLevel={RosterSnapshotShowVariableSettings.Never}
@@ -52,7 +52,7 @@ export const MowGrid: React.FC<Props> = ({ mows, zoom, onMowSelect, showHeader, 
                                 isDisabled={!mow.unlocked}
                             />
                         </div>
-                        {deployedFlexUnitIds?.includes(mow.snowprintId!) && (
+                        {deployedFlexUnitIds?.includes(mow.snowprintId) && (
                             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
                                 <div className="rounded-full bg-slate-950/70 p-1 shadow-lg ring-1 ring-white/20 dark:bg-slate-100/20">
                                     <MiscIcon icon="deployment" width={50} height={50} />

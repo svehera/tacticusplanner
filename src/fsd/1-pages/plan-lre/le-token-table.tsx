@@ -40,6 +40,11 @@ interface Props {
     updateDto: (model: ILreProgressModel) => void;
 }
 
+const getRowClassName = (index: number) => {
+    // Alternate between two sets of colors for striping
+    return index % 2 === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-900';
+};
+
 /**
  * Displays the tokens to be used by the player in optimal order, along with
  * various statistics about each milestone.
@@ -124,11 +129,6 @@ export const LeTokenTable: React.FC<Props> = ({
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
         if (token.battleNumber == null || token.battleNumber < 0) return;
         setRequirementStatus(token, RequirementStatus.StopHere);
-    };
-
-    const getRowClassName = (index: number) => {
-        // Alternate between two sets of colors for striping
-        return index % 2 === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-900';
     };
 
     return (
