@@ -25,7 +25,7 @@ export class RosterSnapshotsService {
     /** @returns a new snapshot view of the character. */
     public static snapshotCharacter(c: ICharacter2): ISnapshotCharacter {
         return {
-            id: c.snowprintId!,
+            id: c.snowprintId,
             rank: c.rank,
             rarity: c.rarity,
             stars: c.stars,

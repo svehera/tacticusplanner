@@ -80,7 +80,7 @@ export const useLre = () => {
     useEffect(() => {
         const lreChar = CharactersService.getLreCharacter(legendaryEventId);
         if (lreChar) {
-            const relatedLre = LegendaryEventService.getEventByCharacterSnowprintId(lreChar!.snowprintId!);
+            const relatedLre = LegendaryEventService.getEventByCharacterSnowprintId(lreChar!.snowprintId);
             const nextDate = relatedLre?.nextEventDate ?? 'TBA';
             setHeaderTitle(
                 !relatedLre || relatedLre.finished

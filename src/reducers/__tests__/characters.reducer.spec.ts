@@ -16,7 +16,7 @@ describe('charactersReducer SyncWithTacticus', () => {
             units: [],
             shards: [
                 {
-                    id: lockedCharacter!.snowprintId!,
+                    id: lockedCharacter!.snowprintId,
                     name: lockedCharacter!.name,
                     amount: 17,
                 },

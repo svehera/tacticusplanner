@@ -213,7 +213,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
         );
 
         return legendaryEvent.allowedUnits
-            .filter(x => selectedChars.includes(x.snowprintId!))
+            .filter(x => selectedChars.includes(x.snowprintId))
             .sort((a, b) => {
                 const aTotal =
                     (alpha[a.name]?.points ?? 0) + (beta[a.name]?.points ?? 0) + (gamma[a.name]?.points ?? 0);

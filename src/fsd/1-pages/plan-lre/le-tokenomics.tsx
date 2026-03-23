@@ -125,7 +125,7 @@ export const LeTokenomics: React.FC<Props> = ({
         Date.now()
     );
 
-    const character = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
+    const character = characters.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
     const rank = character?.rank ?? Rank.Locked;
     const rarity = !!character?.rarity && rank !== Rank.Locked ? character.rarity : Rarity.Legendary;
     const stars = !!character?.stars && rank !== Rank.Locked ? character.stars : RarityStars.None;
@@ -166,7 +166,7 @@ export const LeTokenomics: React.FC<Props> = ({
                                 showTooltip={false}
                                 char={
                                     {
-                                        id: character.snowprintId!,
+                                        id: character.snowprintId,
                                         rank: rank,
                                         rarity: rarity,
                                         stars: stars,
