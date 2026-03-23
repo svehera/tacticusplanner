@@ -289,10 +289,10 @@ export const Guides: React.FC = () => {
         try {
             const { error } = await removeHonorTeamApi(teamId);
             if (error) {
-                console.error('Error while remove team honor ', error);
+                console.error('Error while remove team honor', error);
             }
         } catch (error) {
-            console.error('Error while remove team honor ', error);
+            console.error('Error while remove team honor', error);
         } finally {
             setLoading(false);
         }

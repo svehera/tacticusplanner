@@ -67,7 +67,7 @@ export const HomeScreenEvent = () => {
                         ?.filter(x => {
                             const npc = NpcService.getNpcById(x.id);
                             if (!npc) {
-                                console.warn('battle ', battle.id, ' has undefined npc ', x);
+                                console.warn('battle', battle.id, 'has undefined npc', x);
                                 return false;
                             }
                             return !npc.traits.includes('Summon') && enemyFilter(npc);

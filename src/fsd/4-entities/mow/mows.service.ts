@@ -33,15 +33,15 @@ export class MowsService {
 
             if (index >= mow.primaryAbility.recipes.length || index >= mow.secondaryAbility.recipes.length) {
                 console.error(
-                    'mow: ',
+                    'mow:',
                     mowId,
-                    ' index: ',
+                    'index:',
                     index,
-                    ' actualLevel: ',
+                    'actualLevel:',
                     actualLevel,
-                    ' primarylen: ',
+                    'primarylen:',
                     mow.primaryAbility.recipes.length,
-                    ' secondarylen: ',
+                    'secondarylen:',
                     mow.secondaryAbility.recipes.length
                 );
             }

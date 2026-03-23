@@ -213,7 +213,7 @@ export class CharactersService {
             .map(x => {
                 const staticChar = this.resolveCharacter(x.snowprintId ?? x.name);
                 if (staticChar === undefined) {
-                    console.error('Could not resolve character ', x.snowprintId ?? x.name);
+                    console.error('Could not resolve character', x.snowprintId ?? x.name);
                     return undefined;
                 }
                 return { ...x, ...staticChar };

@@ -887,12 +887,12 @@ export class GoalsService {
             }
         } catch (error) {
             console.error('Error adjusting goal estimates:', error);
-            console.error('goals: ', JSON.stringify(goals));
-            console.error('goalsEstimate: ', JSON.stringify(goalsEstimate));
-            console.error('inventory: ', JSON.stringify(inventory));
-            console.error('xpUseState: ', JSON.stringify(xpUseState));
-            console.error('upgradeRankOrMowGoals: ', JSON.stringify(upgradeRankOrMowGoals));
-            console.error('xpIncomeState: ', JSON.stringify(xpIncomeState));
+            console.error('goals:', JSON.stringify(goals));
+            console.error('goalsEstimate:', JSON.stringify(goalsEstimate));
+            console.error('inventory:', JSON.stringify(inventory));
+            console.error('xpUseState:', JSON.stringify(xpUseState));
+            console.error('upgradeRankOrMowGoals:', JSON.stringify(upgradeRankOrMowGoals));
+            console.error('xpIncomeState:', JSON.stringify(xpIncomeState));
         }
 
         return {

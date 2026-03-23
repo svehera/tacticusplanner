@@ -1072,7 +1072,7 @@ export class UpgradesService {
         const upgradeId = loc.rewards.potential[0].id;
         const mat = remainingMats[upgradeId];
         if (mat === undefined) {
-            console.error('Material ', upgradeId, ' not found for location: ', loc);
+            console.error('Material', upgradeId, 'not found for location:', loc);
             return energy;
         }
         if (goalId) {

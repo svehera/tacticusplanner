@@ -377,7 +377,7 @@ export const ManageTeams = () => {
     const onCharClicked = (char: ICharacter2) => {
         const index = selectedChars.findIndex(id => id === (char.snowprintId ?? ''));
         if (index === -1) {
-            console.error('Clicked character that is not in selectedChars: ', char, selectedChars, index);
+            console.error('Clicked character that is not in selectedChars:', char, selectedChars, index);
             return;
         }
         let flex = flexIndex ?? selectedChars.length;
