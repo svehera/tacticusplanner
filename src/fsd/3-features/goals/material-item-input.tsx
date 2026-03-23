@@ -1,8 +1,9 @@
 ﻿/* eslint-disable import-x/no-internal-modules */
 import { Tooltip } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { ButtonPill } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
 
 import { CompactCampaignLocation } from '@/fsd/4-entities/campaign/compact-campaign-location';
@@ -15,9 +16,11 @@ import { UpgradesService } from './upgrades.service';
 interface Props {
     upgradeRaid: IUpgradeRaid;
     isExhausted?: boolean;
+    maxLocations?: number;
 }
 
-export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = false }) => {
+export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = false, maxLocations = 4 }) => {
+    const [expanded, setExpanded] = useState(false);
     const isShard = UpgradesService.isShard(upgradeRaid.id);
     const isMythicShard = UpgradesService.isMythicShard(upgradeRaid.id);
     const canStillFarm = !isExhausted;
@@ -42,6 +45,12 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = 
             </ul>
         </div>
     );
+
+    // Determine how many badges to show before the +N pill
+    let visibleLocations = maxLocations;
+    if (!expanded && upgradeRaid.raidLocations.length > maxLocations) {
+        visibleLocations = maxLocations - 1;
+    }
 
     return (
         <div className="flex gap-2" style={{ opacity: canStillFarm ? 1 : 0.5 }}>
@@ -69,20 +78,30 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = 
                     <span className="mb-1 truncate text-sm leading-tight font-medium">{upgradeRaid.label}</span>
                 </Tooltip>
                 <div className="text-muted-fg flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs">
-                    {upgradeRaid.raidLocations.map(location => (
-                        <span
-                            key={
-                                'material-item-input-' +
-                                upgradeRaid.relatedGoals.join(',') +
-                                '-' +
-                                upgradeRaid.id +
-                                '-' +
-                                location.id
-                            }
-                            style={{ opacity: location.isCompleted ? 0.5 : 1 }}>
-                            <CompactCampaignLocation location={location} unlocked={true} />
-                        </span>
-                    ))}
+                    {(expanded ? upgradeRaid.raidLocations : upgradeRaid.raidLocations.slice(0, visibleLocations)).map(
+                        location => (
+                            <span
+                                key={
+                                    'material-item-input-' +
+                                    upgradeRaid.relatedGoals.join(',') +
+                                    '-' +
+                                    upgradeRaid.id +
+                                    '-' +
+                                    location.id
+                                }
+                                style={{ opacity: location.isCompleted ? 0.5 : 1 }}>
+                                <CompactCampaignLocation location={location} unlocked={true} />
+                            </span>
+                        )
+                    )}
+                    {upgradeRaid.raidLocations.length > maxLocations && !expanded && (
+                        <ButtonPill onClick={() => setExpanded(true)}>
+                            +{upgradeRaid.raidLocations.length - visibleLocations}
+                        </ButtonPill>
+                    )}
+                    {upgradeRaid.raidLocations.length > maxLocations && expanded && (
+                        <ButtonPill onClick={() => setExpanded(false)}>less</ButtonPill>
+                    )}
                 </div>
             </div>
         </div>

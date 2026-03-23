@@ -37,16 +37,12 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                 <AccordionDetails>
                     <div className="mt-2.5 flex flex-wrap items-start justify-center gap-2">
                         {upgradesRaids.map((raid, index) => (
-                            <div
-                                className="bg-overlay w-[240px] overflow-hidden rounded-lg p-2 shadow-md"
-                                key={raid.id + '-' + index}>
+                            <div className="bg-overlay w-[240px] rounded-lg p-2 shadow-md" key={raid.id + '-' + index}>
                                 <MaterialItemInput upgradeRaid={raid} />
                             </div>
                         ))}
                         {completedRaids.map((raid, index) => (
-                            <div
-                                className="bg-overlay w-[240px] overflow-hidden rounded-lg p-2 shadow-md"
-                                key={raid.id + '-' + index}>
+                            <div className="bg-overlay w-[240px] rounded-lg p-2 shadow-md" key={raid.id + '-' + index}>
                                 <MaterialItemInput
                                     upgradeRaid={{ ...raid, relatedCharacters: [] }}
                                     isExhausted={true}
@@ -65,9 +61,7 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                 <AccordionDetails>
                     <div className="mt-2.5 flex flex-wrap items-start justify-center gap-2">
                         {bonusRaids.map((raid, index) => (
-                            <div
-                                className="bg-overlay w-[240px] overflow-hidden rounded-lg p-2 shadow-md"
-                                key={raid.id + '-' + index}>
+                            <div className="bg-overlay w-[240px] rounded-lg p-2 shadow-md" key={raid.id + '-' + index}>
                                 <MaterialItemInput upgradeRaid={raid} />
                             </div>
                         ))}
