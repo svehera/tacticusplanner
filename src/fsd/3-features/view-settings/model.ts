@@ -37,6 +37,7 @@ export interface IViewPreferences
     myProgressShowCoreCharacters: boolean;
     apiIntegrationSyncOptions: string[];
     tokenomicsTableView: boolean;
+    showBattleInfo: boolean;
 }
 
 interface IWyoViewSettings {

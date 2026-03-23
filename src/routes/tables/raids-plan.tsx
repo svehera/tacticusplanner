@@ -83,16 +83,18 @@ export const RaidsPlan: React.FC<Props> = ({
         dispatch.viewPreferences({ type: 'Update', setting: 'raidsTableView', value: tableView });
     };
 
+    const toggleBattleInfo = (show: boolean): void => {
+        console.log('Toggling battle info to', show, 'current value is', viewPreferences.showBattleInfo);
+        dispatch.viewPreferences({ type: 'Update', setting: 'showBattleInfo', value: show });
+    };
+
     const characterToMaterialMap: CharacterToMaterialIndexMap = useMemo(() => {
         const characterIndexMap: CharacterToMaterialIndexMap = {};
 
         estimatedRanks.inProgressMaterials.forEach((material, materialIndex) => {
-            // Iterate over the related characters for the current material
             material.relatedCharacters.forEach(fullName => {
                 const unit = CharactersService.getUnit(fullName);
                 if (!unit || !unit.snowprintId) return;
-                // Check if this snowprintId has ALREADY been recorded.
-                // If it hasn't, this is the FIRST time we've seen it, so record the index.
                 if (!(unit.snowprintId in characterIndexMap)) {
                     characterIndexMap[unit.snowprintId] = materialIndex;
                 }
@@ -126,15 +128,13 @@ export const RaidsPlan: React.FC<Props> = ({
 
     useEffect(() => {
         if (scrollToCharSnowprintId) {
-            // Use a brief delay to ensure the scrollable parent container and its content
-            // have finished rendering and measurement.
             const timer = setTimeout(() => {
                 scrollToTarget();
             }, 100);
 
-            return () => clearTimeout(timer); // Cleanup timer on unmount
+            return () => clearTimeout(timer);
         }
-    }, [scrollToCharSnowprintId, scrollToTarget]); // Rerun if the ID changes
+    }, [scrollToCharSnowprintId, scrollToTarget]);
 
     useEffect(() => {
         if (estimatedRanks.upgradesRaids.length > 3) {
@@ -180,33 +180,55 @@ export const RaidsPlan: React.FC<Props> = ({
                         <span>
                             <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} />)
                         </span>
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={viewPreferences.raidsTableView}
-                                    onChange={event => {
-                                        event.stopPropagation();
-                                        updateView(event.target.checked);
-                                    }}
-                                    onClick={event => event.stopPropagation()}
-                                    onFocus={event => event.stopPropagation()}
-                                    onMouseDown={event => event.stopPropagation()}
-                                />
-                            }
-                            label={
-                                <div className="flex-box gap5">
-                                    {viewPreferences.raidsTableView ? (
-                                        <div className="flex-box gap5">
-                                            <TableRowsIcon color="primary" /> <span>Table View</span>
-                                        </div>
-                                    ) : (
-                                        <div className="flex-box gap5">
-                                            <GridViewIcon color="primary" /> <span>Cards View</span>
-                                        </div>
-                                    )}
-                                </div>
-                            }
-                        />
+                        <div className="flex flex-wrap items-center">
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={viewPreferences.raidsTableView}
+                                        onChange={event => {
+                                            event.stopPropagation();
+                                            updateView(event.target.checked);
+                                        }}
+                                        onClick={event => event.stopPropagation()}
+                                        onFocus={event => event.stopPropagation()}
+                                        onMouseDown={event => event.stopPropagation()}
+                                    />
+                                }
+                                label={
+                                    <div className="flex-box gap5">
+                                        {viewPreferences.raidsTableView ? (
+                                            <div className="flex-box gap5">
+                                                <TableRowsIcon color="primary" /> <span>Table View</span>
+                                            </div>
+                                        ) : (
+                                            <div className="flex-box gap5">
+                                                <GridViewIcon color="primary" /> <span>Cards View</span>
+                                            </div>
+                                        )}
+                                    </div>
+                                }
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={!!viewPreferences.showBattleInfo}
+                                        onChange={event => {
+                                            event.stopPropagation();
+                                            toggleBattleInfo(event.target.checked);
+                                        }}
+                                        onClick={event => event.stopPropagation()}
+                                        onFocus={event => event.stopPropagation()}
+                                        onMouseDown={event => event.stopPropagation()}
+                                    />
+                                }
+                                label={
+                                    <div className="flex-box gap5">
+                                        <InfoIcon color={viewPreferences.showBattleInfo ? 'primary' : 'disabled'} />
+                                        <span>Battle Info</span>
+                                    </div>
+                                }
+                            />
+                        </div>
                     </div>
                     <span className="italic">{calendarDateTotal}</span>
                 </FlexBox>
@@ -268,6 +290,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                                         desiredQuantity={material.requiredCount}
                                                         relatedCharacterSnowprintIds={material.relatedCharacters}
                                                         locations={material.locations}
+                                                        showBattleInfo={viewPreferences.showBattleInfo}
                                                     />
                                                 </div>
                                             ))}
@@ -311,6 +334,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                                         desiredQuantity={material.requiredCount}
                                                         relatedCharacterSnowprintIds={material.relatedCharacters}
                                                         locations={material.locations}
+                                                        showBattleInfo={viewPreferences.showBattleInfo}
                                                     />
                                                 </div>
                                             ))}
@@ -366,6 +390,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                                             desiredQuantity={material.requiredCount}
                                                             relatedCharacterSnowprintIds={material.relatedCharacters}
                                                             locations={material.locations}
+                                                            showBattleInfo={viewPreferences.showBattleInfo}
                                                         />
                                                     </div>
                                                 ))}

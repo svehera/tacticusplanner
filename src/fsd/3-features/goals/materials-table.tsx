@@ -9,9 +9,10 @@ import {
     GridReadyEvent,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import React, { useMemo, useRef } from 'react';
+import React, { useContext, useMemo, useRef, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { StoreContext } from '@/reducers/store.provider';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
@@ -45,9 +46,6 @@ enum MaterialType {
     Regular,
 }
 
-/**
- * Single source of truth for material identification and formatting
- */
 const getMaterialMetadata = (id: string, rarity?: number | string) => {
     const isShard = id.startsWith('shards_');
     const isMythicShard = id.startsWith('mythicShards_');
@@ -63,7 +61,6 @@ const getMaterialMetadata = (id: string, rarity?: number | string) => {
 
     return {
         type,
-        // Cast this to RarityString to satisfy strict component props
         rarityStr: rarityString as RarityString,
         className: rarityString.toLowerCase().replace(' ', '-'),
     };
@@ -102,171 +99,200 @@ export const MaterialsTable: React.FC<Props> = ({
     scrollToCharSnowprintId,
     alreadyUsedMaterials,
 }) => {
-    const columnDefs: Array<ColDef<IRaidMaterialRow> | ColGroupDef<IRaidMaterialRow>> = [
-        {
-            headerName: 'Upgrade',
-            groupId: 'upgrade',
-            children: [
-                {
-                    headerName: '#',
-                    colId: 'rowNumber',
-                    valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
-                    maxWidth: 50,
-                },
-                {
-                    headerName: 'Icon',
-                    cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) =>
-                        params.data ? <MaterialIcon data={params.data} /> : null,
-                    valueFormatter: () => '',
-                    equals: () => true,
-                    sortable: false,
-                    width: 80,
-                },
-                {
-                    field: 'label',
-                    columnGroupShow: 'open',
-                    maxWidth: isMobile ? 125 : 300,
-                },
-                {
-                    field: 'rarity',
-                    maxWidth: 120,
-                    columnGroupShow: 'open',
-                    cellStyle: { textAlign: 'center' },
-                    cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) =>
-                        params.data ? <MaterialIcon data={params.data} typeOnly /> : null,
-                    tooltipValueGetter: params =>
-                        params.data ? getMaterialMetadata(params.data.id, params.data.rarity).rarityStr : '',
-                    comparator: (valueA, valueB) => getRaritySortKey(valueA) - getRaritySortKey(valueB),
-                    cellClass: params =>
-                        params.data ? getMaterialMetadata(params.data.id, params.data.rarity).className : 'unknown',
-                },
-                {
-                    columnGroupShow: 'open',
-                    field: 'relatedCharacters',
-                    tooltipField: 'relatedCharacters',
-                    headerName: 'Characters',
-                    maxWidth: 120,
-                },
-            ],
-        },
-        // ... (rest of the columns remain the same)
-        {
-            field: 'requiredCount',
-            headerName: 'Goal',
-            maxWidth: 75,
-        },
-        {
-            valueGetter: params => params.data?.inventoryAfter ?? 0,
-            valueSetter: event => {
-                updateMaterialQuantity(event.data.snowprintId, event.newValue);
-                return true;
-            },
-            headerName: 'Inventory (after higher-priority goals)',
-            editable: true,
-            cellDataType: 'number',
-            cellEditor: 'agNumberCellEditor',
-            cellEditorParams: { min: 0, max: 1000, precision: 0 },
-        },
-        {
-            headerName: 'Remaining',
-            maxWidth: 90,
-            valueGetter: params => {
-                const { data } = params;
-                return data ? Math.max(0, data.requiredCount - (data.inventoryAfter ?? 0)) : 0;
-            },
-        },
-        {
-            headerName: 'Estimate',
-            openByDefault: true,
-            children: [
-                {
-                    field: 'daysTotal',
-                    columnGroupShow: 'closed',
-                    maxWidth: isMobile ? 125 : 300,
-                    cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        if (!props.data) return null;
-                        const { daysTotal, energyTotal, raidsTotal } = props.data;
-                        return (
-                            <ul className="m-0 ps-5">
-                                <li>{daysTotal} - days</li>
-                                <li>{energyTotal} - energy</li>
-                                <li>{raidsTotal} - raids</li>
-                            </ul>
-                        );
+    const { viewPreferences } = useContext(StoreContext);
+    useEffect(() => {
+        if (gridApiReference.current) {
+            gridApiReference.current.refreshCells({ force: true });
+        }
+    }, [viewPreferences.showBattleInfo]);
+
+    const columnDefs: Array<ColDef<IRaidMaterialRow> | ColGroupDef<IRaidMaterialRow>> = useMemo(
+        () => [
+            {
+                headerName: 'Upgrade',
+                groupId: 'upgrade',
+                children: [
+                    {
+                        headerName: '#',
+                        colId: 'rowNumber',
+                        valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+                        maxWidth: 50,
                     },
-                },
-                { headerName: 'Days', field: 'daysTotal', columnGroupShow: 'open', maxWidth: 90 },
-                { field: 'energyTotal', headerName: 'Energy', columnGroupShow: 'open', maxWidth: 90 },
-                { headerName: 'Raids', field: 'raidsTotal', columnGroupShow: 'open', maxWidth: 90 },
-            ],
-        },
-        {
-            headerName: 'Locations',
-            children: [
-                {
-                    columnGroupShow: 'closed',
-                    valueGetter: params => params.data?.locations.map(x => x.id) ?? [],
-                    cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        const locations: ICampaignBattleComposed[] = props.data?.locations ?? [];
-                        const usedLocations = locations.filter(x => x.isSuggested).length;
-                        const canBeUsedLocations = locations.filter(x => x.isUnlocked && x.isPassFilter).length;
-                        const lockedLocations = locations.filter(x => !x.isUnlocked).length;
-                        return (
-                            <ul className="m-0 ps-5">
-                                <li>
-                                    {usedLocations}/{canBeUsedLocations} - used
-                                </li>
-                                {lockedLocations > 0 && <li className="text-red-500">{lockedLocations} - locked</li>}
-                            </ul>
-                        );
+                    {
+                        headerName: 'Icon',
+                        cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) =>
+                            params.data ? <MaterialIcon data={params.data} /> : null,
+                        valueFormatter: () => '',
+                        equals: () => true,
+                        sortable: false,
+                        width: 80,
                     },
+                    {
+                        field: 'label',
+                        columnGroupShow: 'open',
+                        maxWidth: isMobile ? 125 : 300,
+                    },
+                    {
+                        field: 'rarity',
+                        maxWidth: 120,
+                        columnGroupShow: 'open',
+                        cellStyle: { textAlign: 'center' },
+                        cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) =>
+                            params.data ? <MaterialIcon data={params.data} typeOnly /> : null,
+                        tooltipValueGetter: params =>
+                            params.data ? getMaterialMetadata(params.data.id, params.data.rarity).rarityStr : '',
+                        comparator: (valueA, valueB) => getRaritySortKey(valueA) - getRaritySortKey(valueB),
+                        cellClass: params =>
+                            params.data ? getMaterialMetadata(params.data.id, params.data.rarity).className : 'unknown',
+                    },
+                    {
+                        columnGroupShow: 'open',
+                        field: 'relatedCharacters',
+                        tooltipField: 'relatedCharacters',
+                        headerName: 'Characters',
+                        maxWidth: 120,
+                    },
+                ],
+            },
+            {
+                field: 'requiredCount',
+                headerName: 'Goal',
+                maxWidth: 75,
+            },
+            {
+                valueGetter: params => params.data?.inventoryAfter ?? 0,
+                valueSetter: event => {
+                    updateMaterialQuantity(event.data.snowprintId, event.newValue);
+                    return true;
                 },
-                {
-                    columnGroupShow: 'open',
-                    headerName: 'Used',
-                    valueGetter: params => params.data?.locations.filter(x => x.isSuggested).map(x => x.id) ?? [],
-                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => (
-                        <div className="flex-box gap5 wrap">
-                            {params.data?.locations
-                                .filter(x => x.isSuggested)
-                                .map(loc => (
-                                    <CampaignLocation key={loc.id} location={loc} short unlocked />
-                                ))}
-                        </div>
-                    ),
+                headerName: 'Inventory (after higher-priority goals)',
+                editable: true,
+                cellDataType: 'number',
+                cellEditor: 'agNumberCellEditor',
+                cellEditorParams: { min: 0, max: 1000, precision: 0 },
+            },
+            {
+                headerName: 'Remaining',
+                maxWidth: 90,
+                valueGetter: params => {
+                    const { data } = params;
+                    return data ? Math.max(0, data.requiredCount - (data.inventoryAfter ?? 0)) : 0;
                 },
-                {
-                    headerName: 'Locked',
-                    columnGroupShow: 'open',
-                    valueGetter: params => params.data?.locations.filter(x => !x.isUnlocked).map(x => x.id) ?? [],
-                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => (
-                        <div className="flex-box gap5 wrap">
-                            {params.data?.locations
-                                .filter(x => !x.isUnlocked)
-                                .map(loc => (
-                                    <CampaignLocation key={loc.id} location={loc} short unlocked={false} />
-                                ))}
-                        </div>
-                    ),
-                },
-                {
-                    headerName: 'Other',
-                    columnGroupShow: 'open',
-                    valueGetter: params =>
-                        params.data?.locations.filter(x => !x.isSuggested && x.isUnlocked).map(x => x.id) ?? [],
-                    cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => (
-                        <div className="flex-box gap5 wrap">
-                            {params.data?.locations
-                                .filter(x => !x.isSuggested && x.isUnlocked)
-                                .map(loc => (
-                                    <CampaignLocation key={loc.id} location={loc} short unlocked />
-                                ))}
-                        </div>
-                    ),
-                },
-            ],
-        },
-    ];
+            },
+            {
+                headerName: 'Estimate',
+                openByDefault: true,
+                children: [
+                    {
+                        field: 'daysTotal',
+                        columnGroupShow: 'closed',
+                        maxWidth: isMobile ? 125 : 300,
+                        cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                            if (!props.data) return null;
+                            const { daysTotal, energyTotal, raidsTotal } = props.data;
+                            return (
+                                <ul className="m-0 ps-5">
+                                    <li>{daysTotal} - days</li>
+                                    <li>{energyTotal} - energy</li>
+                                    <li>{raidsTotal} - raids</li>
+                                </ul>
+                            );
+                        },
+                    },
+                    { headerName: 'Days', field: 'daysTotal', columnGroupShow: 'open', maxWidth: 90 },
+                    { field: 'energyTotal', headerName: 'Energy', columnGroupShow: 'open', maxWidth: 90 },
+                    { headerName: 'Raids', field: 'raidsTotal', columnGroupShow: 'open', maxWidth: 90 },
+                ],
+            },
+            {
+                headerName: 'Locations',
+                children: [
+                    {
+                        columnGroupShow: 'closed',
+                        valueGetter: params => params.data?.locations.map(x => x.id) ?? [],
+                        cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                            const locations: ICampaignBattleComposed[] = props.data?.locations ?? [];
+                            const usedLocations = locations.filter(x => x.isSuggested).length;
+                            const canBeUsedLocations = locations.filter(x => x.isUnlocked && x.isPassFilter).length;
+                            const lockedLocations = locations.filter(x => !x.isUnlocked).length;
+                            return (
+                                <ul className="m-0 ps-5">
+                                    <li>
+                                        {usedLocations}/{canBeUsedLocations} - used
+                                    </li>
+                                    {lockedLocations > 0 && (
+                                        <li className="text-red-500">{lockedLocations} - locked</li>
+                                    )}
+                                </ul>
+                            );
+                        },
+                    },
+                    {
+                        columnGroupShow: 'open',
+                        headerName: 'Used',
+                        valueGetter: params => params.data?.locations.filter(x => x.isSuggested).map(x => x.id) ?? [],
+                        cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => (
+                            <div className="flex-box gap5 wrap">
+                                {params.data?.locations
+                                    .filter(x => x.isSuggested)
+                                    .map(loc => (
+                                        <CampaignLocation
+                                            key={loc.id}
+                                            location={loc}
+                                            short
+                                            unlocked
+                                            showBattleInfo={!!viewPreferences.showBattleInfo}
+                                        />
+                                    ))}
+                            </div>
+                        ),
+                    },
+                    {
+                        headerName: 'Locked',
+                        columnGroupShow: 'open',
+                        valueGetter: params => params.data?.locations.filter(x => !x.isUnlocked).map(x => x.id) ?? [],
+                        cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => (
+                            <div className="flex-box gap5 wrap">
+                                {params.data?.locations
+                                    .filter(x => !x.isUnlocked)
+                                    .map(loc => (
+                                        <CampaignLocation
+                                            key={loc.id}
+                                            location={loc}
+                                            short
+                                            unlocked={false}
+                                            showBattleInfo={!!viewPreferences.showBattleInfo}
+                                        />
+                                    ))}
+                            </div>
+                        ),
+                    },
+                    {
+                        headerName: 'Other',
+                        columnGroupShow: 'open',
+                        valueGetter: params =>
+                            params.data?.locations.filter(x => !x.isSuggested && x.isUnlocked).map(x => x.id) ?? [],
+                        cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => (
+                            <div className="flex-box gap5 wrap">
+                                {params.data?.locations
+                                    .filter(x => !x.isSuggested && x.isUnlocked)
+                                    .map(loc => (
+                                        <CampaignLocation
+                                            key={loc.id}
+                                            location={loc}
+                                            short
+                                            unlocked
+                                            showBattleInfo={!!viewPreferences.showBattleInfo}
+                                        />
+                                    ))}
+                            </div>
+                        ),
+                    },
+                ],
+            },
+        ],
+        [viewPreferences.showBattleInfo, updateMaterialQuantity]
+    );
 
     const saveChanges = (event: CellEditingStoppedEvent<ICharacterUpgradeEstimate>): void => {
         if (event.data && event.newValue !== event.oldValue) {

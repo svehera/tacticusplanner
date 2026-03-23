@@ -256,6 +256,7 @@ export const defaultData: IPersonalData2 = {
         lreTileShowUnitRelic: true,
         myProgressShowCoreCharacters: true,
         tokenomicsTableView: true,
+        showBattleInfo: false,
         apiIntegrationSyncOptions: ['roster', 'inventory', 'campaignProgress', 'raidedLocations'],
     },
     dailyRaidsPreferences: {

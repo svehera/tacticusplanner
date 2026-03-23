@@ -19,6 +19,7 @@ interface Props {
     desiredQuantity: number;
     relatedCharacterSnowprintIds: string[];
     locations: ICampaignBattleComposed[];
+    showBattleInfo?: boolean;
 }
 
 const mapUpgradeRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): Rarity => {
@@ -32,6 +33,7 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
     desiredQuantity,
     relatedCharacterSnowprintIds,
     locations,
+    showBattleInfo,
 }) => {
     const rewardIcon = () => {
         if (UpgradesService.isShard(upgradeMaterialSnowprintId)) {
@@ -126,6 +128,7 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
                                         location={loc}
                                         short={true}
                                         unlocked={loc.isUnlocked ?? false}
+                                        showBattleInfo={showBattleInfo}
                                     />
                                 ))}
                             </>
