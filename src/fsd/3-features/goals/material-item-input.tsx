@@ -46,10 +46,12 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = 
         </div>
     );
 
+    // Clamp maxLocations to a non-negative integer
+    const safeMaxLocations = Math.max(0, Math.floor(Number(maxLocations) || 0));
     // Determine how many badges to show before the +N pill
-    let visibleLocations = maxLocations;
-    if (!expanded && upgradeRaid.raidLocations.length > maxLocations) {
-        visibleLocations = maxLocations - 1;
+    let visibleLocations = safeMaxLocations;
+    if (!expanded && upgradeRaid.raidLocations.length > safeMaxLocations) {
+        visibleLocations = Math.max(0, safeMaxLocations - 1);
     }
 
     return (
@@ -80,7 +82,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = 
                 <div className="text-muted-fg flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs">
                     {(expanded ? upgradeRaid.raidLocations : upgradeRaid.raidLocations.slice(0, visibleLocations)).map(
                         location => (
-                            <span
+                            <div
                                 key={
                                     'material-item-input-' +
                                     upgradeRaid.relatedGoals.join(',') +
@@ -91,15 +93,15 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = 
                                 }
                                 style={{ opacity: location.isCompleted ? 0.5 : 1 }}>
                                 <CompactCampaignLocation location={location} unlocked={true} />
-                            </span>
+                            </div>
                         )
                     )}
-                    {upgradeRaid.raidLocations.length > maxLocations && !expanded && (
+                    {upgradeRaid.raidLocations.length > safeMaxLocations && !expanded && (
                         <ButtonPill onClick={() => setExpanded(true)}>
                             +{upgradeRaid.raidLocations.length - visibleLocations}
                         </ButtonPill>
                     )}
-                    {upgradeRaid.raidLocations.length > maxLocations && expanded && (
+                    {upgradeRaid.raidLocations.length > safeMaxLocations && expanded && (
                         <ButtonPill onClick={() => setExpanded(false)}>less</ButtonPill>
                     )}
                 </div>
