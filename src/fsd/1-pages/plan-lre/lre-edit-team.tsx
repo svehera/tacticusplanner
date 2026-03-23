@@ -184,7 +184,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                                     key={character.id}
                                     onClick={() => addCharacter(character)}
                                     style={{
-                                        opacity: selectedTeam.some(x => x === character.snowprintId) ? 0.3 : 1,
+                                        opacity: selectedTeam.includes(character.snowprintId) ? 0.3 : 1,
                                     }}
                                     className="flex-box gap5 pointer w-[350px]">
                                     <AddIcon />
