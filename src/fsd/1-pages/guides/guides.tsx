@@ -308,21 +308,21 @@ export const Guides: React.FC = () => {
                 {rejectedTeams.length > 0 && (
                     <>
                         <h3>Rejected</h3>
-                        <div className="flex-box gap20 start wrap">{renderTeams(rejectedTeams)}</div>
+                        <div className="flex-box gap20 wrap start">{renderTeams(rejectedTeams)}</div>
                     </>
                 )}
 
                 {pendingTeams.length > 0 && (
                     <>
                         <h3>Pending</h3>
-                        <div className="flex-box gap20 start wrap">{renderTeams(pendingTeams)}</div>
+                        <div className="flex-box gap20 wrap start">{renderTeams(pendingTeams)}</div>
                     </>
                 )}
 
                 {approvedTeams.length > 0 && (
                     <>
                         <h3>Approved</h3>
-                        <div className="flex-box gap20 start wrap">{renderTeams(approvedTeams)}</div>
+                        <div className="flex-box gap20 wrap start">{renderTeams(approvedTeams)}</div>
                     </>
                 )}
             </div>
@@ -487,7 +487,7 @@ export const Guides: React.FC = () => {
 
     const renderTeams = (teamList: IGuide[]) => {
         return (
-            <div className="flex-box gap20 start wrap">
+            <div className="flex-box gap20 wrap start">
                 {teamList.map(team => (
                     <GuideCard
                         key={team.teamId}
@@ -574,7 +574,7 @@ export const Guides: React.FC = () => {
             {activeTab === GuidesGroup.myTeams ? (
                 renderMyTeams(teams)
             ) : (
-                <div className="flex-box gap20 start wrap">{renderTeams(teams)}</div>
+                <div className="flex-box gap20 wrap start">{renderTeams(teams)}</div>
             )}
 
             {!!viewGuide && (
