@@ -35,17 +35,17 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                     </p>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className="mt-2.5 flex flex-wrap items-center justify-center gap-2">
+                    <div className="mt-2.5 flex flex-wrap items-start justify-center gap-2">
                         {upgradesRaids.map((raid, index) => (
                             <div
-                                className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
+                                className="bg-overlay w-[240px] overflow-hidden rounded-lg p-2 shadow-md"
                                 key={raid.id + '-' + index}>
                                 <MaterialItemInput upgradeRaid={raid} />
                             </div>
                         ))}
                         {completedRaids.map((raid, index) => (
                             <div
-                                className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
+                                className="bg-overlay w-[240px] overflow-hidden rounded-lg p-2 shadow-md"
                                 key={raid.id + '-' + index}>
                                 <MaterialItemInput
                                     upgradeRaid={{ ...raid, relatedCharacters: [] }}
@@ -63,10 +63,10 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                     </p>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className="mt-2.5 flex flex-wrap items-center justify-center gap-2">
+                    <div className="mt-2.5 flex flex-wrap items-start justify-center gap-2">
                         {bonusRaids.map((raid, index) => (
                             <div
-                                className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
+                                className="bg-overlay w-[240px] overflow-hidden rounded-lg p-2 shadow-md"
                                 key={raid.id + '-' + index}>
                                 <MaterialItemInput upgradeRaid={raid} />
                             </div>
