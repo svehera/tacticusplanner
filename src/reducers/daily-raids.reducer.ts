@@ -36,7 +36,7 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
         }
         case 'AddCompletedBattle': {
             const battleIndex = state.raidedLocations.findIndex(x => x.id === action.location.id);
-            if (battleIndex >= 0) {
+            if (battleIndex !== -1) {
                 const raidedLocations = [...state.raidedLocations];
                 const finalCount = raidedLocations[battleIndex].raidsToPerform + action.location.raidsToPerform;
                 raidedLocations[battleIndex] = {
