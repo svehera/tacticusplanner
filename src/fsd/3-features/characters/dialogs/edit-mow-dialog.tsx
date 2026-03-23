@@ -59,8 +59,8 @@ export const EditMowDialog: React.FC<Props> = ({
     const rarityEntries: number[] = getEnumValues(Rarity);
 
     const handleInputChange = (name: keyof IMow2, value: boolean | number) => {
-        setEditedMow(curr => ({
-            ...curr,
+        setEditedMow(current => ({
+            ...current,
             [name]: value,
         }));
     };

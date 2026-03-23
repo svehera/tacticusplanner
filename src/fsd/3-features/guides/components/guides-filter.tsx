@@ -33,8 +33,8 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
     const [filtersChanged, setFiltersChanged] = useState<boolean>(false);
 
     const [nameFilter, setNameFilter] = useState<string>(filter.createdBy ?? '');
-    const [gameMode, setGameMode] = useState<GameMode | 'any'>(filter.primaryMod ?? 'any');
-    const [selectedSubModes, setSelectedSubModes] = useState<string[]>(filter.subMods ?? []);
+    const [gameMode, setGameMode] = useState<GameMode | 'any'>(filter.primaryMode ?? 'any');
+    const [selectedSubModes, setSelectedSubModes] = useState<string[]>(filter.subModes ?? []);
     const [selectedUnits, setSelectedUnits] = useState<IUnit[]>(
         (filter.unitIds?.map(x => units.find(unit => unit.id === x)) as IUnit[]) ?? []
     );
@@ -42,14 +42,14 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
     const apply = () => {
         applyFilters({
             createdBy: nameFilter ? nameFilter : undefined,
-            primaryMod: gameMode !== 'any' ? gameMode : undefined,
-            subMods: selectedSubModes.length ? selectedSubModes : undefined,
-            unitIds: selectedUnits.length ? selectedUnits.map(x => x.id) : undefined,
+            primaryMode: gameMode !== 'any' ? gameMode : undefined,
+            subModes: selectedSubModes.length > 0 ? selectedSubModes : undefined,
+            unitIds: selectedUnits.length > 0 ? selectedUnits.map(x => x.id) : undefined,
         });
         setFiltersChanged(false);
     };
 
-    const updateSelectedMod = (values: string[]) => {
+    const updateSelectedMode = (values: string[]) => {
         if (values[0] !== gameMode) {
             setGameMode(values[0] as GameMode);
             setSelectedSubModes([]);
@@ -94,7 +94,7 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
                 selected={[gameMode]}
                 options={[anyOption, ...gameModesForGuides]}
                 multiple={false}
-                optionsChange={updateSelectedMod}
+                optionsChange={updateSelectedMode}
                 minWidth={200}
                 maxWidth={200}
             />

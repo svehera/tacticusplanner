@@ -26,20 +26,20 @@ export const useApi = <TResponse, TRequestBody = any>(
             const data = response?.data;
 
             setData(data);
-        } catch (err: any) {
-            const error = err as Error | AxiosError<IErrorResponse>;
+        } catch (error: any) {
+            const castError = error as Error | AxiosError<IErrorResponse>;
             // replace here with your own error handling
-            if (axios.isAxiosError(error)) {
-                if (error.code === AxiosError.ERR_CANCELED) {
+            if (axios.isAxiosError(castError)) {
+                if (castError.code === AxiosError.ERR_CANCELED) {
                     console.info('Request was canceled');
                     return;
                 }
-                setError(error?.response?.data?.message || error.message);
+                setError(castError?.response?.data?.message || castError.message);
             } else {
-                setError(error.message);
+                setError(castError.message);
             }
 
-            console.error(err);
+            console.error(castError);
         } finally {
             setLoading(false);
         }

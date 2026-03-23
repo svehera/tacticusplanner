@@ -31,7 +31,8 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
         return orderBy(
             Object.values(UpgradesService.recipeDataByName)
                 .filter(
-                    item => item.stat !== 'Shard' && (!itemsFilter.length || itemsFilter.includes(item.snowprintId))
+                    item =>
+                        item.stat !== 'Shard' && (itemsFilter.length === 0 || itemsFilter.includes(item.snowprintId))
                 )
                 .map(x => ({
                     material: x.material,

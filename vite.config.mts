@@ -57,11 +57,11 @@ export default defineConfig({
     test: {
         globals: true,
         environment: 'jsdom',
-        setupFiles: ['./src/setupTests.ts'],
+        setupFiles: ['./src/setup-tests.ts'],
         coverage: {
             provider: 'v8',
             reporter: ['text', 'html'],
-            exclude: ['node_modules/', 'src/setupTests.ts'],
+            exclude: ['node_modules/', 'src/setup-tests.ts'],
         },
     },
 });

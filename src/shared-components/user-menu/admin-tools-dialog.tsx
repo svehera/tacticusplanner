@@ -14,6 +14,34 @@ import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { resetUserPasswordApi, changeUserRoleApi, getUsersApi } from './admin.endpoints';
 import { IGetUser } from './admin.model';
 
+const downloadJson = (username: string, jsonData: string) => {
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+
+    const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+    };
+    const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(new Date());
+
+    link.download = `${username}-data-${formattedDate}.json`;
+    link.click();
+
+    URL.revokeObjectURL(url);
+};
+
+const copyLink = (shareLink: string) => {
+    if (shareLink) {
+        navigator.clipboard.writeText(shareLink).then(() => enqueueSnackbar('Copied', { variant: 'success' }));
+    }
+};
+
 export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [resetPasswordForm, setResetPasswordForm] = useState({
         username: '',
@@ -54,34 +82,6 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
             .catch(() => enqueueSnackbar('Failed to find users', { variant: 'error' }));
     };
 
-    const downloadJson = (username: string, jsonData: string) => {
-        const blob = new Blob([jsonData], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-
-        const link = document.createElement('a');
-        link.href = url;
-
-        const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-        };
-        const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(new Date());
-
-        link.download = `${username}-data-${formattedDate}.json`;
-        link.click();
-
-        URL.revokeObjectURL(url);
-    };
-
-    const copyLink = (shareLink: string) => {
-        if (shareLink) {
-            navigator.clipboard.writeText(shareLink).then(() => enqueueSnackbar('Copied', { variant: 'success' }));
-        }
-    };
-
     const renderUser = (user: IGetUser) => {
         const createdAt = formatDateWithOrdinal(new Date(user.createdDate), true);
         const shareLink = user.shareToken
@@ -117,7 +117,7 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                         <Input
                             id="username-input"
                             onChange={event =>
-                                setResetPasswordForm(curr => ({ ...curr, username: event.target.value }))
+                                setResetPasswordForm(current => ({ ...current, username: event.target.value }))
                             }
                         />
                     </FormControl>
@@ -126,7 +126,7 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                         <Input
                             id="password-input"
                             onChange={event =>
-                                setResetPasswordForm(curr => ({ ...curr, password: event.target.value }))
+                                setResetPasswordForm(current => ({ ...current, password: event.target.value }))
                             }
                         />
                     </FormControl>
@@ -139,19 +139,21 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                         <InputLabel htmlFor="username-input">Username</InputLabel>
                         <Input
                             id="username-input"
-                            onChange={event => setChangeRoleForm(curr => ({ ...curr, username: event.target.value }))}
+                            onChange={event =>
+                                setChangeRoleForm(current => ({ ...current, username: event.target.value }))
+                            }
                         />
                     </FormControl>
                     <FormControl required fullWidth variant={'standard'}>
                         <InputLabel htmlFor="password-input">Role (0 - User, 1 - Moderator, 2 - Admin)</InputLabel>
                         <Input
                             id="password-input"
-                            onChange={event => setChangeRoleForm(curr => ({ ...curr, role: event.target.value }))}
+                            onChange={event => setChangeRoleForm(current => ({ ...current, role: event.target.value }))}
                         />
                     </FormControl>
                     <Button onClick={changeUserRole}>Update role</Button>
                 </Box>
-                {!!usersList.length && <Box>{usersList.map(renderUser)}</Box>}
+                {usersList.length > 0 && <Box>{usersList.map(renderUser)}</Box>}
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => onClose()}>Close</Button>

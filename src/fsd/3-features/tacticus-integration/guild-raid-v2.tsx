@@ -166,10 +166,10 @@ const DateRenderer: React.FC<{ value: number | null | undefined }> = ({ value })
 const UnitIconRenderer: React.FC<{ value: ICharacterData[] | IMowStatic2[] }> = ({ value }) => {
     return (
         <span className="flex h-full items-center gap-1">
-            {value.map((unit, i) => {
+            {value.map((unit, index) => {
                 return (
                     <UnitShardIcon
-                        key={i}
+                        key={index}
                         icon={unit?.roundIcon ?? ''}
                         name={unit?.name ?? ''}
                         height={22}
@@ -460,8 +460,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 return tokenStatus2.reloadStart - tokenStatus1.reloadStart;
             },
             width: 120,
-            tooltipValueGetter: (param: ITooltipParams) => {
-                if (param.data.tokenStatus.exact) {
+            tooltipValueGetter: (parameter: ITooltipParams) => {
+                if (parameter.data.tokenStatus.exact) {
                     return 'Token estimation should be exact unless tokens were lost or restored';
                 } else {
                     return 'Token estimation is pessimistic by up to 12 hours';
@@ -691,7 +691,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
     // Calculate summary statistics
     const calculateStats = () => {
-        if (!raidData || !filteredEntries.length) return null;
+        if (!raidData || filteredEntries.length === 0) return null;
 
         // Total damage dealt across all entries
         const totalDamage = filteredEntries.reduce((sum, entry) => sum + entry.damageDealt, 0);
@@ -740,12 +740,15 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         // Number of available bombs at calculation time
         const availableBombs = summaryData.reduce(
-            (acc, userSummary) => acc + (getTimeUntilNextBomb(userSummary) === 0 ? 1 : 0),
+            (accumulator, userSummary) => accumulator + (getTimeUntilNextBomb(userSummary) === 0 ? 1 : 0),
             0
         );
 
         // Number of available tokens at calculation time
-        const availableTokens = summaryData.reduce((acc, userSummary) => acc + userSummary.tokenStatus.count, 0);
+        const availableTokens = summaryData.reduce(
+            (accumulator, userSummary) => accumulator + userSummary.tokenStatus.count,
+            0
+        );
 
         return {
             totalDamage,

@@ -31,10 +31,10 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
     const [viewSettings, setViewSettings] = useState<ILreViewSettings & ILreTileSettings>(lreViewSettings);
     const [teamsSettings, setTeamsSettings] = useState<IAutoTeamsPreferences>(autoTeamsSettings);
     const [recommendFirst, setRecommendFirst] = useState<string[]>(
-        characters.filter(x => x.bias === CharacterBias.recommendFirst).map(x => x.snowprintId!)
+        characters.filter(x => x.bias === CharacterBias.recommendFirst).map(x => x.snowprintId)
     );
     const [recommendLast, setRecommendLast] = useState<string[]>(
-        characters.filter(x => x.bias === CharacterBias.recommendLast).map(x => x.snowprintId!)
+        characters.filter(x => x.bias === CharacterBias.recommendLast).map(x => x.snowprintId)
     );
 
     const updatePreferences = (
@@ -42,9 +42,9 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         value: boolean
     ) => {
         if (Object.hasOwn(viewSettings, setting)) {
-            setViewSettings(curr => ({ ...curr, [setting]: value }));
+            setViewSettings(current => ({ ...current, [setting]: value }));
         } else {
-            setTeamsSettings(curr => ({ ...curr, [setting]: value }));
+            setTeamsSettings(current => ({ ...current, [setting]: value }));
         }
     };
 
@@ -196,7 +196,7 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                 <Divider orientation="horizontal" />
 
                 <h3>Units bias</h3>
-                <div className="flex-box gap10 start mobile-wrap">
+                <div className="flex-box gap10 mobile-wrap start">
                     <MultipleSelectCheckmarks
                         values={characters.map(x => x.name)}
                         selectedValues={recommendFirst.map(x => characters.find(c => c.snowprintId === x)!.name)}
@@ -206,7 +206,7 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                                 chars
                                     .map(x => characters.find(c => c.name === x))
                                     .filter(x => x !== undefined)
-                                    .map(x => x!.snowprintId!)
+                                    .map(x => x!.snowprintId)
                             )
                         }
                     />
@@ -217,9 +217,9 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                         selectionChanges={(chars: string[]) => {
                             setRecommendLast(
                                 chars
-                                    .map(x => characters.find(c => c.name === x || c.snowprintId! == x))
+                                    .map(x => characters.find(c => c.name === x || c.snowprintId == x))
                                     .filter(x => x !== undefined)
-                                    .map(x => x!.snowprintId!)
+                                    .map(x => x!.snowprintId)
                             );
                         }}
                     />

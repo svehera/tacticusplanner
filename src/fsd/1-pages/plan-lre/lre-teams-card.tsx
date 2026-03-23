@@ -39,7 +39,7 @@ export const LreTeamsCard: React.FC<Props> = ({
     deleteTeam,
     restrictions,
 }) => {
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -50,7 +50,7 @@ export const LreTeamsCard: React.FC<Props> = ({
     );
 
     useEffect(() => {
-        gridRef.current?.api?.sizeColumnsToFit();
+        gridReference.current?.api?.sizeColumnsToFit();
     }, [
         viewPreferences.showAlpha,
         viewPreferences.showBeta,
@@ -123,7 +123,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                         />
                     ))}
                 </div>
-                {selectedTeams.length ? (
+                {selectedTeams.length > 0 ? (
                     <>
                         <h3>Selected Teams ({selectedTeams.length})</h3>
                         <div className="flex-box wrap">

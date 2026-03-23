@@ -25,7 +25,7 @@ import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
-import { renderRestrictions, renderTeam } from './le-token-render-utils';
+import { renderRestrictions, renderTeam } from './le-token-render-utilities';
 import { LeTokenService } from './le-token-service';
 import { LeTokenTable } from './le-token-table';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
@@ -47,7 +47,7 @@ interface Props {
         model: ILreProgressModel,
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
-        reqId: string,
+        requirementId: string,
         status: RequirementStatus,
         forceOverwrite?: boolean
     ) => ILreProgressModel;
@@ -125,7 +125,7 @@ export const LeTokenomics: React.FC<Props> = ({
         Date.now()
     );
 
-    const character = characters.find(c => c.snowprintId! === legendaryEvent.unitSnowprintId);
+    const character = characters.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
     const rank = character?.rank ?? Rank.Locked;
     const rarity = !!character?.rarity && rank !== Rank.Locked ? character.rarity : Rarity.Legendary;
     const stars = !!character?.stars && rank !== Rank.Locked ? character.stars : RarityStars.None;
@@ -166,7 +166,7 @@ export const LeTokenomics: React.FC<Props> = ({
                                 showTooltip={false}
                                 char={
                                     {
-                                        id: character.snowprintId!,
+                                        id: character.snowprintId,
                                         rank: rank,
                                         rarity: rarity,
                                         stars: stars,

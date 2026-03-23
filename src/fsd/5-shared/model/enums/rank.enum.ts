@@ -25,49 +25,71 @@ export enum Rank {
 
 export const rankToString = (rank: Rank): string => {
     switch (rank) {
-        case Rank.Stone1:
+        case Rank.Stone1: {
             return 'Stone I';
-        case Rank.Stone2:
+        }
+        case Rank.Stone2: {
             return 'Stone II';
-        case Rank.Stone3:
+        }
+        case Rank.Stone3: {
             return 'Stone III';
-        case Rank.Iron1:
+        }
+        case Rank.Iron1: {
             return 'Iron I';
-        case Rank.Iron2:
+        }
+        case Rank.Iron2: {
             return 'Iron II';
-        case Rank.Iron3:
+        }
+        case Rank.Iron3: {
             return 'Iron III';
-        case Rank.Bronze1:
+        }
+        case Rank.Bronze1: {
             return 'Bronze I';
-        case Rank.Bronze2:
+        }
+        case Rank.Bronze2: {
             return 'Bronze II';
-        case Rank.Bronze3:
+        }
+        case Rank.Bronze3: {
             return 'Bronze III';
-        case Rank.Silver1:
+        }
+        case Rank.Silver1: {
             return 'Silver I';
-        case Rank.Silver2:
+        }
+        case Rank.Silver2: {
             return 'Silver II';
-        case Rank.Silver3:
+        }
+        case Rank.Silver3: {
             return 'Silver III';
-        case Rank.Gold1:
+        }
+        case Rank.Gold1: {
             return 'Gold I';
-        case Rank.Gold2:
+        }
+        case Rank.Gold2: {
             return 'Gold II';
-        case Rank.Gold3:
+        }
+        case Rank.Gold3: {
             return 'Gold III';
-        case Rank.Diamond1:
+        }
+        case Rank.Diamond1: {
             return 'Diamond I';
-        case Rank.Diamond2:
+        }
+        case Rank.Diamond2: {
             return 'Diamond II';
-        case Rank.Diamond3:
+        }
+        case Rank.Diamond3: {
             return 'Diamond III';
-        case Rank.Adamantine1:
+        }
+        case Rank.Adamantine1: {
             return 'Adamantine I';
-        case Rank.Adamantine2:
+        }
+        case Rank.Adamantine2: {
             return 'Adamantine II';
-        case Rank.Adamantine3:
+        }
+        case Rank.Adamantine3: {
             return 'Adamantine III';
-        default:
+        }
+        default: {
             return '';
+        }
     }
 };

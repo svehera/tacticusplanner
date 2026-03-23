@@ -6,7 +6,7 @@ import { IGuildMember, IInsightsData, IPersonalCharacterData2 } from 'src/models
 import { Rarity } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { IMowDb } from '@/fsd/3-features/characters/characters.models';
+import { IMowDatabase } from '@/fsd/3-features/characters/characters.models';
 
 export interface IGuildInfoRequest {
     members: IGuildMember[];
@@ -15,7 +15,7 @@ export interface IGuildInfoRequest {
 export interface IGuildInsightsResponse {
     guildUsers: string[];
     userData: Array<IPersonalCharacterData2 & IInsightsData>;
-    mows: Array<IMowDb & IInsightsData>;
+    mows: Array<IMowDatabase & IInsightsData>;
 }
 
 export interface IGuildRostersResponse {

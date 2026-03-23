@@ -90,7 +90,7 @@ export const FactionsTile = ({
                     const isCharacter = unit.unitType === UnitType.character;
                     return (
                         <div
-                            key={unit.snowprintId!}
+                            key={unit.snowprintId}
                             onClick={() => onCharacterClick?.(unit)}
                             className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
                             title={`Select ${unit.name || 'Unit'}`}>

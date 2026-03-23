@@ -19,11 +19,11 @@ export const OrbsTotal: React.FC<Props> = ({ orbs, alliance, size = 35, displayO
     return (
         <div className="flex-box gap20">
             {entries.map(([rarity, count]) => {
-                const rarityNum = Number(rarity) as Rarity;
+                const rarityNumber = Number(rarity) as Rarity;
                 return (
-                    <Tooltip key={rarityNum} title={`${RarityMapper.rarityToRarityString(rarityNum)} Orbs`}>
+                    <Tooltip key={rarityNumber} title={`${RarityMapper.rarityToRarityString(rarityNumber)} Orbs`}>
                         <Badge badgeContent={<b>{count}</b>}>
-                            <OrbImage alliance={alliance} rarity={rarityNum} size={size} />
+                            <OrbImage alliance={alliance} rarity={rarityNumber} size={size} />
                         </Badge>
                     </Tooltip>
                 );

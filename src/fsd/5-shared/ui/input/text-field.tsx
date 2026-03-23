@@ -48,7 +48,7 @@ const TextField = ({
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const inputType = isRevealable ? (isPasswordVisible ? 'text' : 'password') : type;
     const handleTogglePasswordVisibility = () => {
-        setIsPasswordVisible(prev => !prev);
+        setIsPasswordVisible(previous => !previous);
     };
     return (
         <TextFieldPrimitive

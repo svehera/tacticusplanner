@@ -5,8 +5,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
-import { guildReducer } from 'src/reducers/guildReducer';
-import { guildWarReducer } from 'src/reducers/guildWarReducer';
+import { guildReducer } from '@/reducers/guild-reducer';
+import { guildWarReducer } from '@/reducers/guild-war-reducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
 import { teams2Reducer } from 'src/reducers/teams2.reducer';
@@ -24,7 +24,7 @@ import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
 import { campaignsProgressReducer } from './campaigns-progress.reducer';
 import { charactersReducer } from './characters.reducer';
 import { dailyRaidsPreferencesReducer } from './daily-raids-settings.reducer';
-import { dailyRaidsReducer } from './dailyRaids.reducer';
+import { dailyRaidsReducer } from './daily-raids.reducer';
 import { goalsReducer } from './goals.reducer';
 import { inventoryReducer } from './inventory.reducer';
 import { leProgressReducer } from './le-progress.reducer';
@@ -259,13 +259,13 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                             localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
                             enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
                         })
-                        .catch((err: AxiosError<IErrorResponse>) => {
-                            if (err.code === 'ERR_CANCELED') {
+                        .catch((error: AxiosError<IErrorResponse>) => {
+                            if (error.code === 'ERR_CANCELED') {
                                 return;
                             }
-                            if (err.response?.status === 401) {
+                            if (error.response?.status === 401) {
                                 enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else if (err.response?.status === 409) {
+                            } else if (error.response?.status === 409) {
                                 enqueueSnackbar(
                                     'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
                                     { variant: 'error' }
@@ -384,11 +384,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                             localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
                             return enqueueSnackbar('Pushed local data to server.', { variant: 'info' });
                         })
-                        .catch((err: AxiosError<IErrorResponse>) => {
-                            if (err.response?.status === 401) {
+                        .catch((error: AxiosError<IErrorResponse>) => {
+                            if (error.response?.status === 401) {
                                 logout();
                                 enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else if (err.response?.status === 409) {
+                            } else if (error.response?.status === 409) {
                                 enqueueSnackbar(
                                     'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
                                     { variant: 'error' }
@@ -401,12 +401,12 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         });
                 }
             })
-            .catch((err: AxiosError<IErrorResponse>) => {
-                if (err.response?.status === 401) {
+            .catch((error: AxiosError<IErrorResponse>) => {
+                if (error.response?.status === 401) {
                     logout();
                     enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
                 } else {
-                    console.error(err);
+                    console.error(error);
                     enqueueSnackbar('Failed to fetch data from server. Try again later', { variant: 'error' });
                 }
             });

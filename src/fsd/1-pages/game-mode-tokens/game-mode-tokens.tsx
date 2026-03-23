@@ -6,7 +6,7 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { TacticusTokens } from '@/fsd/5-shared/lib/tacticus-api';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
-import { tacticusIcons } from '@/fsd/5-shared/ui/icons/iconList';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 const tokenIcons: Record<string, string> = {
     guildRaid: 'guildRaidToken',

@@ -61,7 +61,7 @@ const VersionReleaseNotes = ({ releaseNotes }: { releaseNotes: IVersionReleaseNo
                     date: releaseNotes.date,
                 })}
             </h2>
-            {!releaseNotes.new.length ? undefined : (
+            {releaseNotes.new.length === 0 ? undefined : (
                 <ReleaseNotes
                     subtitle={t('whatsNew.sections.new')}
                     version={releaseNotes.version}
@@ -69,7 +69,7 @@ const VersionReleaseNotes = ({ releaseNotes }: { releaseNotes: IVersionReleaseNo
                 />
             )}
 
-            {!releaseNotes.minor.length ? undefined : (
+            {releaseNotes.minor.length === 0 ? undefined : (
                 <ReleaseNotes
                     subtitle={t('whatsNew.sections.minor')}
                     version={releaseNotes.version}
@@ -77,7 +77,7 @@ const VersionReleaseNotes = ({ releaseNotes }: { releaseNotes: IVersionReleaseNo
                 />
             )}
 
-            {!releaseNotes.bugFixes.length ? undefined : (
+            {releaseNotes.bugFixes.length === 0 ? undefined : (
                 <ReleaseNotes
                     subtitle={t('whatsNew.sections.bugFixes')}
                     version={releaseNotes.version}

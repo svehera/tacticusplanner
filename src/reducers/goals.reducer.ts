@@ -39,15 +39,15 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const { goalId, neighborId } = action;
             const newState = [...state].sort((a, b) => a.priority - b.priority);
 
-            const idxA = newState.findIndex(x => x.id === goalId);
-            const idxB = newState.findIndex(x => x.id === neighborId);
+            const indexA = newState.findIndex(x => x.id === goalId);
+            const indexB = newState.findIndex(x => x.id === neighborId);
 
-            if (idxA !== -1 && idxB !== -1) {
+            if (indexA !== -1 && indexB !== -1) {
                 // Swap them in the array
-                [newState[idxA], newState[idxB]] = [newState[idxB], newState[idxA]];
+                [newState[indexA], newState[indexB]] = [newState[indexB], newState[indexA]];
 
                 // Re-index priorities 1..N
-                return newState.map((g, i) => ({ ...g, priority: i + 1 }));
+                return newState.map((g, index) => ({ ...g, priority: index + 1 }));
             }
             return state;
         }
@@ -55,11 +55,16 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             if (state.find(x => x.id === action.goal.id)) {
                 return state;
             }
-            state.splice(action.goal.priority - 1, 0, action.goal);
-            state.forEach((x, index) => {
-                x.priority = index + 1;
-            });
-            return [...state];
+            // Create a new array instead of mutating the existing state with splice
+            const newState = [...state];
+            const targetIndex = Math.max(0, Math.min(action.goal.priority - 1, newState.length));
+            newState.splice(targetIndex, 0, action.goal);
+
+            // Return a new array with re-indexed priorities to ensure reactivity
+            return newState.map((x, index) => ({
+                ...x,
+                priority: index + 1,
+            }));
         }
         case 'Delete': {
             return state.filter(x => x.id !== action.goalId).map((x, index) => ({ ...x, priority: index + 1 }));
@@ -69,48 +74,46 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
         }
         case 'Update': {
             const updatedGoal = action.goal;
-            const existingGoalIndex = state.findIndex(x => x.id === updatedGoal.goalId);
+            const existingGoal = state.find(x => x.id === updatedGoal.goalId);
 
-            if (existingGoalIndex < 0) {
+            if (!existingGoal) {
                 return state;
             }
 
-            const existingGoal = state[existingGoalIndex];
             const newGoalData = GoalsService.convertToGenericGoal(updatedGoal);
-
             if (!newGoalData) {
                 return state;
             }
 
-            // Merge incoming data but EXPLICITLY preserve the current state's priority.
-            // This prevents stale priority data from the UI from undoing a 'Swap' action.
-            const mergedGoal: IPersonalGoal = {
+            const goalWithUpdates = {
+                ...existingGoal,
                 ...newGoalData,
-                priority: existingGoal.priority,
+                id: updatedGoal.goalId,
             };
 
-            const newState = [...state];
+            const otherGoals = state.filter(x => x.id !== updatedGoal.goalId);
 
-            // Replace the goal at its current index without moving it.
-            newState[existingGoalIndex] = mergedGoal;
+            const targetIndex = Math.max(0, Math.min(updatedGoal.priority - 1, otherGoals.length));
 
-            // Re-index priorities 1..N to prevent gaps or duplicates.
-            return newState.map((g, i) => ({ ...g, priority: i + 1 }));
+            const finalGoals = [...otherGoals.slice(0, targetIndex), goalWithUpdates, ...otherGoals.slice(targetIndex)];
+
+            return finalGoals.map((g, index) => ({ ...g, priority: index + 1 }));
         }
         case 'UpdateDailyRaids': {
             const { value } = action;
 
-            return state.map(currGoal => {
-                const newGoal = value.find(x => x.goalId === currGoal.id);
+            return state.map(currentGoal => {
+                const newGoal = value.find(x => x.goalId === currentGoal.id);
                 if (newGoal) {
-                    return { ...currGoal, dailyRaids: newGoal.include };
+                    return { ...currentGoal, dailyRaids: newGoal.include };
                 }
 
-                return currGoal;
+                return currentGoal;
             });
         }
         default: {
-            throw new Error();
+            // @ts-expect-error TS says this should never be reached but we want the error if it does
+            throw new Error(`Unexpected action.type received in reducer: ${action.type}`);
         }
     }
 };

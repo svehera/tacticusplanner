@@ -19,7 +19,6 @@ import DailyRaidsSettings from '@/shared-components/daily-raids-settings';
 import { goalsLimit } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
@@ -27,7 +26,7 @@ import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Alliance, Rarity, useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
-import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/iconList';
+import { ForgeBadgesTotal, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons/icon-list';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -41,6 +40,8 @@ import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/g
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+
+import { GoalCard } from '@/fsd/1-pages/goals/goal-card';
 
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
@@ -202,11 +203,11 @@ export const Goals = () => {
         xpIncome
     );
 
-    const estimatesByGoalId = adjustedGoalsEstimates.goalEstimates.reduce((acc, estimate) => {
-        const group = acc.get(estimate.goalId) || [];
+    const estimatesByGoalId = adjustedGoalsEstimates.goalEstimates.reduce((accumulator, estimate) => {
+        const group = accumulator.get(estimate.goalId) || [];
         group.push(estimate);
-        acc.set(estimate.goalId, group);
-        return acc;
+        accumulator.set(estimate.goalId, group);
+        return accumulator;
     }, new Map<string, IGoalEstimate[]>());
 
     const mergedGoalEstimates: IGoalEstimate[] = Array.from(estimatesByGoalId.values()).map(group => {
@@ -217,17 +218,17 @@ export const Goals = () => {
         if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
             const aggregated = GoalsEstimateFunction.getAggregatedGoalEstimate(group) as Partial<IGoalEstimate>;
 
-            const merged = group.reduce((acc, curr) => ({
-                ...acc,
-                ...curr,
+            const merged = group.reduce((accumulator, current) => ({
+                ...accumulator,
+                ...current,
                 // Preserve/merge specific per-row fields across the group
-                mowEstimate: acc.mowEstimate || curr.mowEstimate,
-                xpEstimate: acc.xpEstimate || curr.xpEstimate,
-                abilitiesEstimate: acc.abilitiesEstimate || curr.abilitiesEstimate,
-                xpEstimateAbilities: acc.xpEstimateAbilities || curr.xpEstimateAbilities,
-                completed: acc.completed || curr.completed,
-                blocked: acc.blocked || curr.blocked,
-                included: acc.included || curr.included,
+                mowEstimate: accumulator.mowEstimate || current.mowEstimate,
+                xpEstimate: accumulator.xpEstimate || current.xpEstimate,
+                abilitiesEstimate: accumulator.abilitiesEstimate || current.abilitiesEstimate,
+                xpEstimateAbilities: accumulator.xpEstimateAbilities || current.xpEstimateAbilities,
+                completed: accumulator.completed || current.completed,
+                blocked: accumulator.blocked || current.blocked,
+                included: accumulator.included || current.included,
             }));
 
             return {
@@ -241,10 +242,10 @@ export const Goals = () => {
         return first;
     });
 
-    const totalGoldAbilities = (mergedGoalEstimates as IGoalEstimate[]).reduce((acc, curr) => {
-        const abilityGold = curr.abilitiesEstimate?.gold ?? 0;
-        const xpGold = curr.xpEstimateAbilities?.gold ?? 0;
-        return acc + abilityGold + xpGold;
+    const totalGoldAbilities = (mergedGoalEstimates as IGoalEstimate[]).reduce((accumulator, current) => {
+        const abilityGold = current.abilitiesEstimate?.gold ?? 0;
+        const xpGold = current.xpEstimateAbilities?.gold ?? 0;
+        return accumulator + abilityGold + xpGold;
     }, 0);
     const hasSync = !!userInfo.tacticusApiKey;
 
@@ -379,7 +380,7 @@ export const Goals = () => {
                     </AccordionDetails>
                 </Accordion>
             </div>
-            {!!upgradeRankOrMowGoals.length && (
+            {upgradeRankOrMowGoals.length > 0 && (
                 <div>
                     <div className="gap5 mx-0 my-5 flex flex-wrap items-center text-xl">
                         <span>
@@ -401,8 +402,14 @@ export const Goals = () => {
                                         key={goal.goalId}
                                         goal={goal}
                                         goalEstimate={finalEstimate} // Use the consolidated estimate
-                                        bookRarity={goal.rarity}
+                                        bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        onToggleInclude={() =>
+                                            dispatch.goals({
+                                                type: 'UpdateDailyRaids',
+                                                value: [{ goalId: goal.goalId, include: !goal.include }],
+                                            })
+                                        }
                                         // Use finalEstimate for consistent color coding
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
@@ -427,7 +434,7 @@ export const Goals = () => {
                     )}
                 </div>
             )}
-            {!!shardsGoals.length && (
+            {shardsGoals.length > 0 && (
                 <div>
                     <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>
@@ -454,6 +461,12 @@ export const Goals = () => {
                                         goalEstimate={estimate}
                                         bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        onToggleInclude={() =>
+                                            dispatch.goals({
+                                                type: 'UpdateDailyRaids',
+                                                value: [{ goalId: goal.goalId, include: !goal.include }],
+                                            })
+                                        }
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
                                             estimate
@@ -475,7 +488,7 @@ export const Goals = () => {
                     )}
                 </div>
             )}
-            {!!upgradeAbilities.length && (
+            {upgradeAbilities.length > 0 && (
                 <div>
                     <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>
@@ -495,6 +508,12 @@ export const Goals = () => {
                                         mows={resolvedMows as IMow2[]}
                                         bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
                                         menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                        onToggleInclude={() =>
+                                            dispatch.goals({
+                                                type: 'UpdateDailyRaids',
+                                                value: [{ goalId: goal.goalId, include: !goal.include }],
+                                            })
+                                        }
                                         bgColor={GoalService.getBackgroundColor(
                                             viewPreferences.goalColorMode,
                                             finalEstimate

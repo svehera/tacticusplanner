@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) => {
-    const defaultColDef: ColDef<IDirtyDozenChar> = {
+    const defaultColumnDefinition: ColDef<IDirtyDozenChar> = {
         sortable: true,
         resizable: true,
     };
@@ -96,7 +96,7 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
                 modules={[AllCommunityModule]}
                 theme={themeBalham}
                 suppressCellFocus={true}
-                defaultColDef={defaultColDef}
+                defaultColDef={defaultColumnDefinition}
                 columnDefs={columnDefs}
                 rowHeight={35}
                 rowData={rows}></AgGridReact>

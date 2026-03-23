@@ -16,11 +16,11 @@ export const NpcInfo: React.FC = () => {
         return NpcService.npcDataFull
             .map(npc => npc.faction)
             .filter(faction => faction !== undefined)
-            .reduce((acc: FactionId[], faction: FactionId) => {
-                if (!acc.includes(faction)) {
-                    acc.push(faction);
+            .reduce((accumulator: FactionId[], faction: FactionId) => {
+                if (!accumulator.includes(faction)) {
+                    accumulator.push(faction);
                 }
-                return acc;
+                return accumulator;
             }, []);
     }, []);
 

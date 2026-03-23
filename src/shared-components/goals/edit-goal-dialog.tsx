@@ -107,7 +107,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                 }
             }
 
-            if (inventoryUpdate.length) {
+            if (inventoryUpdate.length > 0) {
                 dispatch.inventory({
                     type: 'DecrementUpgradeQuantity',
                     upgrades: inventoryUpdate.map(x => ({ id: x.id, count: x.count })),
@@ -125,7 +125,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     };
 
     const handleAscendGoalChanges = (key: keyof ICharacterAscendGoal, value: number) => {
-        setForm(curr => ({ ...curr, [key]: value }));
+        setForm(current => ({ ...current, [key]: value }));
     };
 
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
@@ -144,7 +144,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     // Support for both IDs for characters. Previously we used a short version (i.e. Ragnar, Darkstrider).
     if ([PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit) {
         possibleLocations = StaticDataService.getItemLocations(`shards_${unit.id}`);
-        if (!possibleLocations.length) {
+        if (possibleLocations.length === 0) {
             possibleLocations = StaticDataService.getItemLocations(`shards_${unit.snowprintId}`);
         }
     }
@@ -182,7 +182,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                     <PrioritySelect
                         value={form.priority}
                         maxValue={goals.length}
-                        valueChange={value => setForm(curr => ({ ...curr, priority: value }))}
+                        valueChange={value => setForm(current => ({ ...current, priority: value }))}
                     />
 
                     {form.type === PersonalGoalType.UpgradeRank && (
@@ -196,8 +196,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     startingRank={form.rankStart}
                                     startingPoint5={form.rankStartPoint5}
                                     onStartChange={(startRank, startRankPoint5) =>
-                                        setForm(curr => ({
-                                            ...curr,
+                                        setForm(current => ({
+                                            ...current,
                                             rankStart: startRank,
                                             rankStartPoint5: startRankPoint5,
                                         }))
@@ -205,15 +205,15 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     rank={form.rankEnd}
                                     point5={form.rankPoint5}
                                     onChange={(targetRank, rankPoint5) =>
-                                        setForm(curr => ({ ...curr, rankEnd: targetRank, rankPoint5 }))
+                                        setForm(current => ({ ...current, rankEnd: targetRank, rankPoint5 }))
                                     }
                                 />
                             </div>
                             <UpgradesRaritySelect
                                 upgradesRarity={form.upgradesRarity ?? []}
                                 upgradesRarityChange={values => {
-                                    setForm(curr => ({
-                                        ...curr,
+                                    setForm(current => ({
+                                        ...current,
                                         upgradesRarity: values,
                                     }));
                                 }}
@@ -231,8 +231,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.primaryStart}
                                     valueChange={primaryStart => {
-                                        setForm(curr => ({
-                                            ...curr,
+                                        setForm(current => ({
+                                            ...current,
                                             primaryStart,
                                         }));
                                     }}
@@ -244,8 +244,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.primaryEnd}
                                     valueChange={primaryEnd => {
-                                        setForm(curr => ({
-                                            ...curr,
+                                        setForm(current => ({
+                                            ...current,
                                             primaryEnd,
                                         }));
                                     }}
@@ -259,8 +259,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.secondaryStart}
                                     valueChange={secondaryStart => {
-                                        setForm(curr => ({
-                                            ...curr,
+                                        setForm(current => ({
+                                            ...current,
                                             secondaryStart,
                                         }));
                                     }}
@@ -272,8 +272,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     max={CharactersAbilitiesService.getMaximumAbilityLevel()}
                                     value={form.secondaryEnd}
                                     valueChange={secondaryEnd => {
-                                        setForm(curr => ({
-                                            ...curr,
+                                        setForm(current => ({
+                                            ...current,
                                             secondaryEnd,
                                         }));
                                     }}
@@ -283,8 +283,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                             <UpgradesRaritySelect
                                 upgradesRarity={form.upgradesRarity ?? []}
                                 upgradesRarityChange={values => {
-                                    setForm(curr => ({
-                                        ...curr,
+                                    setForm(current => ({
+                                        ...current,
                                         upgradesRarity: values,
                                     }));
                                 }}
@@ -319,8 +319,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     min={unit.activeAbilityLevel}
                                     value={form.activeStart}
                                     valueChange={activeStart => {
-                                        setForm(curr => ({
-                                            ...curr,
+                                        setForm(current => ({
+                                            ...current,
                                             activeStart,
                                         }));
                                     }}
@@ -331,8 +331,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     min={unit.activeAbilityLevel}
                                     value={form.activeEnd}
                                     valueChange={activeEnd => {
-                                        setForm(curr => ({
-                                            ...curr,
+                                        setForm(current => ({
+                                            ...current,
                                             activeEnd,
                                         }));
                                     }}
@@ -345,8 +345,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     min={unit.passiveAbilityLevel}
                                     value={form.passiveStart}
                                     valueChange={passiveStart => {
-                                        setForm(curr => ({
-                                            ...curr,
+                                        setForm(current => ({
+                                            ...current,
                                             passiveStart,
                                         }));
                                     }}
@@ -357,8 +357,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     min={unit.passiveAbilityLevel}
                                     value={form.passiveEnd}
                                     valueChange={passiveEnd => {
-                                        setForm(curr => ({
-                                            ...curr,
+                                        setForm(current => ({
+                                            ...current,
                                             passiveEnd,
                                         }));
                                     }}
@@ -372,7 +372,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                             <NumbersInput
                                 title="Owned shards"
                                 value={form.shards}
-                                valueChange={value => setForm(curr => ({ ...curr, shards: value }))}
+                                valueChange={value => setForm(current => ({ ...current, shards: value }))}
                             />
                             <div className="flex flex-wrap gap-2">
                                 {possibleLocations.map(location => (
@@ -391,7 +391,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                             <NumbersInput
                                 title="Owned shards"
                                 value={form.shards}
-                                valueChange={value => setForm(curr => ({ ...curr, shards: value }))}
+                                valueChange={value => setForm(current => ({ ...current, shards: value }))}
                             />
                             <EditAscendGoal
                                 goal={form}
@@ -412,7 +412,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                         multiline
                         helperText="Optional. Max length 200 characters."
                         value={form.notes}
-                        onChange={event => setForm(curr => ({ ...curr, notes: event.target.value.slice(0, 200) }))}
+                        onChange={event =>
+                            setForm(current => ({ ...current, notes: event.target.value.slice(0, 200) }))
+                        }
                     />
                 </Box>
             </DialogContent>

@@ -1,9 +1,9 @@
-export const getCompletionRateColor = (curr: number, total: number): string => {
-    if (!curr) {
+export const getCompletionRateColor = (current: number, total: number): string => {
+    if (!current) {
         return 'white';
     }
 
-    const completionPercentage = (curr / total) * 100;
+    const completionPercentage = (current / total) * 100;
 
     if (completionPercentage === 100) {
         return 'green';

@@ -54,9 +54,9 @@ export enum Trait {
 }
 
 const labelToTraitStringMap: Record<string, string> = Object.entries(Trait).reduce(
-    (acc, [key, value]) => {
-        acc[value] = key;
-        return acc;
+    (accumulator, [key, value]) => {
+        accumulator[value] = key;
+        return accumulator;
     },
     {} as Record<string, string>
 );

@@ -1,7 +1,7 @@
 ﻿import { groupBy, mapValues } from 'lodash';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import guildWarData from 'src/data/guildWar.json';
+import guildWarData from 'src/data/guild-war.json';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { Difficulty } from 'src/models/enums';
 

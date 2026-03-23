@@ -19,13 +19,17 @@ import {
     IRewards,
 } from './model';
 
+const isString = (v: unknown): v is string => typeof v === 'string';
+
 export class CampaignsService {
     public static readonly rawBattleData = battleData;
     public static readonly allCampaigns = campaignsList;
     public static readonly standardCampaigns = campaignsList.filter(
+        // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract static methods
         campaign => campaign.releaseType === CampaignReleaseType.standard
     );
     public static readonly campaignEvents = campaignsList.filter(
+        // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract static methods
         campaign => campaign.releaseType === CampaignReleaseType.event
     );
     /** Holds a mapping from battle ID (e.g. SHE31) to an ICampaignBattleComposed representing the battle. */
@@ -132,7 +136,6 @@ export class CampaignsService {
             const energyPerItem = parseFloat((1 / (dropRate / battle.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
-            const isString = (v: unknown): v is string => typeof v === 'string';
             enemies.factions = enemies.factions.filter(isString);
             allies.factions = allies.factions.filter(isString);
             if (enemies.factions.length === 0) {
@@ -255,43 +258,43 @@ export class CampaignsService {
             }
         }
 
-        if (slotsCount && slotsCount.length) {
+        if (slotsCount && slotsCount.length > 0) {
             if (!slotsCount.includes(location.slots ?? 5)) {
                 return false;
             }
         }
 
-        if (upgradesRarity.length && materialRarity != undefined) {
+        if (upgradesRarity.length > 0 && materialRarity != undefined) {
             if (!upgradesRarity.includes(materialRarity)) {
                 return false;
             }
         }
 
-        if (campaignTypes.length) {
+        if (campaignTypes.length > 0) {
             if (!campaignTypes.includes(location.campaignType)) {
                 return false;
             }
         }
 
-        if (alliesAlliance.length) {
+        if (alliesAlliance.length > 0) {
             if (!alliesAlliance.includes(location.alliesAlliance)) {
                 return false;
             }
         }
 
-        if (alliesFactions.length) {
+        if (alliesFactions.length > 0) {
             if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
                 return false;
             }
         }
 
-        if (enemiesAlliance.length) {
+        if (enemiesAlliance.length > 0) {
             if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
                 return false;
             }
         }
 
-        if (enemiesFactions.length) {
+        if (enemiesFactions.length > 0) {
             if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
                 return false;
             }

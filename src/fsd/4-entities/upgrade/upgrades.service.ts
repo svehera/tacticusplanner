@@ -108,7 +108,7 @@ export class UpgradesService {
         //
         // As of 2025-01-01, it takes three passes (one of which is above) to fully expand all recipe data.
         let passes: number = 0;
-        const kNumExpectedPasses = 9;
+        const kNumberExpectedPasses = 9;
         for (let moreToExpand: boolean = true; moreToExpand; ) {
             ++passes;
             moreToExpand = false;
@@ -116,7 +116,7 @@ export class UpgradesService {
                 const material: ICraftedUpgrade = data[1];
                 const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(material.snowprintId, result);
                 if (!expandedRecipe) {
-                    if (passes >= kNumExpectedPasses) {
+                    if (passes >= kNumberExpectedPasses) {
                         console.error(
                             passes + ": still haven't expanded base ingredient: '" + material.snowprintId + "'"
                         );
@@ -131,7 +131,7 @@ export class UpgradesService {
                 break;
             }
         }
-        if (passes > kNumExpectedPasses) {
+        if (passes > kNumberExpectedPasses) {
             console.warn('New recipe requires more passes, please ask developers to investigate. passes=' + passes);
         }
         return result;
@@ -338,8 +338,8 @@ export class UpgradesService {
         });
 
         CharactersService.charactersData.forEach(char => {
-            const shards = 'shards_' + char.snowprintId!;
-            const mythicShards = 'mythicShards_' + char.snowprintId!;
+            const shards = 'shards_' + char.snowprintId;
+            const mythicShards = 'mythicShards_' + char.snowprintId;
             for (const shard of [shards, mythicShards]) {
                 if (!result[shard]) {
                     result[shard] = {
@@ -359,8 +359,8 @@ export class UpgradesService {
         });
 
         mows2Data.mows.forEach(mow => {
-            const shards = 'shards_' + mow.snowprintId!;
-            const mythicShards = 'mythicShards_' + mow.snowprintId!;
+            const shards = 'shards_' + mow.snowprintId;
+            const mythicShards = 'mythicShards_' + mow.snowprintId;
             for (const shard of [shards, mythicShards]) {
                 if (!result[shard]) {
                     result[shard] = {

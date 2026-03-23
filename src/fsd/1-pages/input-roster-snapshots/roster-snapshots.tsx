@@ -31,7 +31,7 @@ import { RosterSnapshotsUnitDiff } from './roster-snapshots-unit-diff';
 import { TakeSnapshotDialog } from './take-snapshot-dialog';
 
 function getDisplay(
-    sizeMod: number,
+    zoom: number,
     chars: ICharacter2[],
     mows: IMow2[],
     rosterSnapshots: IRosterSnapshotsState,
@@ -56,11 +56,11 @@ function getDisplay(
     if (rosterSnapshots.base === undefined) {
         const powerChars = RosterSnapshotsService.createSnapshot("sum'n", Date.now(), chars, mows).chars.map(c => ({
             ...c,
-            power: CharactersPowerService.getCharacterPower(chars.find(char => char.snowprintId! === c.id)!),
+            power: CharactersPowerService.getCharacterPower(chars.find(char => char.snowprintId === c.id)!),
         }));
         const poweredMows = RosterSnapshotsService.createSnapshot("sum'n", Date.now(), chars, mows).mows.map(m => ({
             ...m,
-            power: CharactersPowerService.getCharacterPower(mows.find(mow => mow.snowprintId! === m.id)!),
+            power: CharactersPowerService.getCharacterPower(mows.find(mow => mow.snowprintId === m.id)!),
         }));
 
         const powerUnits = orderBy([...powerChars, ...poweredMows], 'power', 'desc');
@@ -87,16 +87,16 @@ function getDisplay(
         );
     }
     let base = RosterSnapshotsService.fixSnapshot(rosterSnapshots.base);
-    for (let i = 0; i <= leftIndex; i++) {
+    for (let index = 0; index <= leftIndex; index++) {
         base = RosterSnapshotsService.fixSnapshot(
-            RosterSnapshotsService.resolveSnapshotDiff(base, rosterSnapshots.diffs[i])
+            RosterSnapshotsService.resolveSnapshotDiff(base, rosterSnapshots.diffs[index])
         );
     }
     let compare: IRosterSnapshot = base;
     if (rightIndex < rosterSnapshots.diffs.length) {
-        for (let i = leftIndex + 1; i <= rightIndex; i++) {
+        for (let index = leftIndex + 1; index <= rightIndex; index++) {
             compare = RosterSnapshotsService.fixSnapshot(
-                RosterSnapshotsService.resolveSnapshotDiff(compare, rosterSnapshots.diffs[i])
+                RosterSnapshotsService.resolveSnapshotDiff(compare, rosterSnapshots.diffs[index])
             );
         }
     } else {
@@ -311,11 +311,11 @@ function getDisplay(
     return (
         <>
             <RosterSnapshotsAssetsProvider>
-                <div style={{ zoom: sizeMod }} className="flex flex-wrap gap-5 p-4">
+                <div style={{ zoom }} className="flex flex-wrap gap-5 p-4">
                     {renderedCharDiffs}
                     {renderedMowDiffs}
                 </div>
-                <div style={{ zoom: sizeMod }} className="flex flex-wrap gap-5 p-4">
+                <div style={{ zoom }} className="flex flex-wrap gap-5 p-4">
                     {renderedChars.filter(char => char.props.isEnabled)}
                     {renderedMows.filter(mow => mow.props.isEnabled)}
                     {renderedChars.filter(char => !char.props.isEnabled)}
@@ -365,7 +365,7 @@ export const RosterSnapshots = () => {
     const [showEquipmentDiffsSetting, setShowEquipmentDiffsSetting] = useState<RosterSnapshotShowVariableSettings>(
         viewPreferences.showEquipmentInDiffs
     );
-    const [sizeMod, setSizeMod] = useState<number>(1);
+    const [zoom, setZoom] = useState<number>(1);
 
     useEffect(() => {
         setLiveSnapshotIndices(RosterSnapshotsService.getLiveSnapshotInidices(rosterSnapshots));
@@ -681,7 +681,7 @@ export const RosterSnapshots = () => {
                     <Settings className="mr-1" />
                     {!isMobile && 'Manage'}
                 </Button>
-                <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
             </div>
 
             {liveSnapshotIndices.length > 0 && (
@@ -732,7 +732,7 @@ export const RosterSnapshots = () => {
                 </div>
             )}
             {getDisplay(
-                sizeMod,
+                zoom,
                 chars,
                 mows,
                 rosterSnapshots,
