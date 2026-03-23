@@ -413,15 +413,15 @@ export class TokenEstimationService {
     public static computeAllTokenUsage(tracksProgress: ILreTrackProgress[], teams: ILreTeam[]): TokenUse[] {
         const tokens: TokenUse[] = [];
         const tracks: ILreTrackProgress[] = cloneDeep(tracksProgress);
-        tracks.forEach(track => {
-            track.battles.forEach(battle => {
+        for (const track of tracks) {
+            for (const battle of track.battles) {
                 battle.completed =
                     battle.requirementsProgress.reduce(
                         (sum, requirement) => (sum += requirement.completed ? 1 : 0),
                         0
                     ) === battle.requirementsProgress.length;
-            });
-        });
+            }
+        }
         const resolvedTeams = teams.map(team => ({
             ...team,
             charSnowprintIds: (team.charSnowprintIds ?? team.charactersIds ?? []).map(char =>
@@ -532,7 +532,7 @@ export class TokenEstimationService {
         for (let battleNumber = lowestBattle; battleNumber <= highestBattle; ++battleNumber) {
             const battle = track.battles[track.battles.length - 1 - battleNumber];
             if (battle.completed) continue;
-            teams.forEach(team => {
+            for (const team of teams) {
                 const restrictionsCleared: ILreRequirements[] = this.computeIncrementalRestrictionsCleared(
                     battle,
                     team
@@ -547,7 +547,7 @@ export class TokenEstimationService {
                     nextToken.battleNumber = battleNumber;
                     nextToken.restrictionsCleared = restrictionsCleared;
                 }
-            });
+            }
         }
         return nextToken;
     }

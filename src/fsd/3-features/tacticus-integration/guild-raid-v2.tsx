@@ -597,7 +597,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         const userMap = new Map<string, UserSummary>();
 
-        filteredEntries.forEach(entry => {
+        for (const entry of filteredEntries) {
             if (!userMap.has(entry.userId)) {
                 userMap.set(entry.userId, {
                     userId: entry.userId,
@@ -670,9 +670,9 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             }
 
             // Track top heroes
-            entry.heroDetails.forEach(hero => {
+            for (const hero of entry.heroDetails) {
                 userSummary.topHeroes.set(hero.unitId, (userSummary.topHeroes.get(hero.unitId) || 0) + 1);
-            });
+            }
 
             // Track top machines of war
             if (entry.machineOfWarDetails?.unitId) {
@@ -681,10 +681,10 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                     (userSummary.topMachinesOfWar.get(entry.machineOfWarDetails.unitId) || 0) + 1
                 );
             }
-        });
+        }
 
         // Advance token status to now
-        userMap.values().forEach(userSummary => updateTokenTo(userSummary.tokenStatus, now));
+        for (const userSummary of userMap.values()) updateTokenTo(userSummary.tokenStatus, now);
 
         return Array.from(userMap.values());
     }, [filteredEntries]);
@@ -713,19 +713,19 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         // User participation count
         const userParticipation = new Map();
-        filteredEntries.forEach(entry => {
+        for (const entry of filteredEntries) {
             userParticipation.set(entry.userId, (userParticipation.get(entry.userId) || 0) + 1);
-        });
+        }
 
         // Most active user
         let mostActiveUser = '';
         let mostActiveCount = 0;
-        userParticipation.forEach((count, user: string) => {
+        for (const [user, count] of Object.entries(userParticipation)) {
             if (count > mostActiveCount) {
                 mostActiveUser = userIdMapper(user);
                 mostActiveCount = count;
             }
-        });
+        }
 
         // Highest damage in a single attack
         const highestDamage = filteredEntries.reduce((max, entry) => Math.max(max, entry.damageDealt), 0);

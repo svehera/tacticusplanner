@@ -91,7 +91,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
         [8, 8, 8],
     ];
     const columns = useMemo(() => enemiesInCols[numberEnemies], [enemiesInCols, numberEnemies]);
-    const numberRows = useMemo(() => columns.length, columns);
+    const numberRows = useMemo(() => columns.length, [columns]);
     const maxPerRow = useMemo(() => Math.max(...columns), [columns]);
     const frameWidth = 202;
     const frameHeight = 267;
@@ -106,7 +106,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
         let enemiesInRow = 0;
         let enemyIndex = 0;
         const elements: JSX.Element[] = [];
-        enemies.forEach(enemy => {
+        for (const enemy of enemies) {
             // Pre-resolve NPC data for the click handler
             const resolved = resolveEnemy(enemy.id);
             const enemyId = resolved?.id || enemy.id;
@@ -142,7 +142,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
                     }
                 }
             }
-        });
+        }
         return elements;
     };
 

@@ -101,7 +101,7 @@ export class GoalsService {
     ): IGoalEstimate[] {
         const result: IGoalEstimate[] = [];
 
-        [shardsGoals, upgradeRankOrMowGoals].flat().forEach(goal => {
+        for (const goal of [shardsGoals, upgradeRankOrMowGoals].flat()) {
             const estimate: IGoalEstimate = {
                 goalId: goal.goalId,
                 energyTotal: 0,
@@ -110,15 +110,15 @@ export class GoalsService {
                 daysLeft: 0,
                 xpBooksTotal: 0,
             };
-            estimatedUpgradesTotal.upgradesRaids.forEach((day, index) => {
+            for (const [index, day] of estimatedUpgradesTotal.upgradesRaids.entries()) {
                 let raidedToday = false;
-                day.raids.forEach(raid => {
-                    if (!raid.relatedGoals.includes(goal.goalId)) return;
-                    raid.raidLocations.forEach(location => {
+                for (const raid of day.raids) {
+                    if (!raid.relatedGoals.includes(goal.goalId)) continue;
+                    for (const location of raid.raidLocations) {
                         if (UpgradesService.isOnslaughtLocation(location)) {
                             estimate.oTokensTotal += location.raidsToPerform;
                         }
-                    });
+                    }
                     if (raid.raidLocations.some(location => location.raidsToPerform > 0)) {
                         raidedToday = true;
                     }
@@ -134,12 +134,12 @@ export class GoalsService {
                             raid.energyTotal / Math.max(1, raid.relatedCharacters.length)
                         );
                     }
-                });
+                }
                 if (raidedToday) {
                     ++estimate.daysTotal;
                     estimate.daysLeft = index + 1;
                 }
-            });
+            }
             if (goal.type === PersonalGoalType.UpgradeRank) {
                 const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
                 const currentXp = this.currentCharacterXp(
@@ -211,7 +211,7 @@ export class GoalsService {
             estimate.completed =
                 !estimate.blocked && estimate.included && estimate.oTokensTotal === 0 && estimate.energyTotal === 0;
             result.push(estimate);
-        });
+        }
 
         if (upgradeAbilities.length > 0) {
             for (const goal of upgradeAbilities) {

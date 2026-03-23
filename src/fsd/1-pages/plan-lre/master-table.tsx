@@ -92,7 +92,7 @@ export const MasterTable = () => {
             points: number;
             slots: number;
         }> = [];
-        activeLegendaryEvents.forEach(eventId => {
+        for (const eventId of activeLegendaryEvents) {
             const legendaryEvent = getLre(eventId, resolvedCharacters);
             const legendaryEventProgress = LreService.mapProgressDtoToModel(
                 leProgress[legendaryEvent.id],
@@ -149,7 +149,7 @@ export const MasterTable = () => {
                 }));
 
             temporary.push(...eventCharacters);
-        });
+        }
 
         const grouped = groupBy(temporary, 'characterId');
 
@@ -161,14 +161,14 @@ export const MasterTable = () => {
                 totalPoints: sum(items.map(x => x.points)),
                 totalSlots: sum(items.map(x => x.slots)),
             };
-            items.forEach(item => {
+            for (const item of items) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}points`] = item.points;
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}slots`] = item.slots;
-            });
+            }
 
             return charData;
         }) as any;
@@ -183,12 +183,12 @@ export const MasterTable = () => {
                         x => CharactersService.resolveCharacter(x)?.snowprintId ?? x
                     );
                 }
-                chars.forEach(character => {
+                for (const character of chars) {
                     if (!result[character]) {
                         result[character] = [];
                     }
                     result[character] = uniq([...result[character], ...team.restrictionsIds]);
-                });
+                }
             }
             return result;
         }
@@ -369,7 +369,7 @@ export const MasterTable = () => {
             slots: number;
         }> = [];
 
-        activeLegendaryEvents.forEach(eventId => {
+        for (const eventId of activeLegendaryEvents) {
             const legendaryEvent = getLre(eventId, resolvedCharacters);
             const chars =
                 selection === 'all'
@@ -396,7 +396,7 @@ export const MasterTable = () => {
                 }));
 
             temporary.push(...eventCharacters);
-        });
+        }
         const grouped = groupBy(temporary, 'characterId');
 
         return map(grouped, items => {
@@ -407,14 +407,14 @@ export const MasterTable = () => {
                 totalPoints: sum(items.map(x => x.points)),
                 totalSlots: sum(items.map(x => x.slots)),
             };
-            items.forEach(item => {
+            for (const item of items) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}points`] = item.points;
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}slots`] = item.slots;
-            });
+            }
 
             return charData;
         }) as any;

@@ -161,8 +161,8 @@ export const Guides: React.FC = () => {
                     // On subsequent pages, append while deduplicating by teamId
                     setTeams(previousTeams => {
                         const map = new Map<number, IGuide>();
-                        previousTeams.forEach(t => map.set(t.teamId, t));
-                        response.teams.forEach(t => map.set(t.teamId, t));
+                        for (const t of previousTeams) map.set(t.teamId, t);
+                        for (const t of response.teams) map.set(t.teamId, t);
                         return Array.from(map.values());
                     });
                 }
@@ -187,8 +187,8 @@ export const Guides: React.FC = () => {
             if (response) {
                 setTeams(previous => {
                     const map = new Map<number, IGuide>();
-                    previous.forEach(t => map.set(t.teamId, t));
-                    response.teams.forEach(t => map.set(t.teamId, t));
+                    for (const t of previous) map.set(t.teamId, t);
+                    for (const t of response.teams) map.set(t.teamId, t);
                     return Array.from(map.values());
                 });
                 setNextQueryParameters(response.next);

@@ -115,8 +115,8 @@ export const LreTeamsTable: React.FC<Props> = ({
     const selectedTeamsRows: Array<ITableRow> = useMemo(() => {
         const teamRecord: Record<string, ICharacter2[]> = {};
 
-        selectedTeams.forEach(team => {
-            team.restrictionsIds.forEach(id => {
+        for (const team of selectedTeams) {
+            for (const id of team.restrictionsIds) {
                 const existingCharacters = teamRecord[id] ?? [];
                 const newTeam = (team.charSnowprintIds ?? [])
                     .slice(0, 5)
@@ -124,8 +124,8 @@ export const LreTeamsTable: React.FC<Props> = ({
                     .filter((character): character is ICharacter2 => !!character);
 
                 teamRecord[id] = [...existingCharacters, ...newTeam];
-            });
-        });
+            }
+        }
 
         return getRows(teamRecord);
     }, [resolvedCharactersBySnowprintId, selectedTeams]);
@@ -201,9 +201,9 @@ export const LreTeamsTable: React.FC<Props> = ({
             return orderA - orderB;
         });
 
-        columns.forEach((column, index) => {
+        for (const [index, column] of columns.entries()) {
             column.colSpan = () => (index === 0 ? selectedRequirements.length : 1);
-        });
+        }
 
         return columns;
     }
@@ -212,12 +212,12 @@ export const LreTeamsTable: React.FC<Props> = ({
         const size = Math.max(...Object.values(teams).map(x => x.length));
         const rows: Array<ITableRow> = Array.from({ length: size }, () => ({}));
 
-        rows.forEach((row, index) => {
+        for (const [index, row] of rows.entries()) {
             for (const team in teams) {
                 const char = teams[team][index];
                 row[team] = char ?? '';
             }
-        });
+        }
 
         return rows;
     }

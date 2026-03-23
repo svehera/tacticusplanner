@@ -148,18 +148,18 @@ export class CharactersService {
             unitData.damageTypes.range = CharactersService.convertSnowprintDamageProfile(rawData['Ranged Damage']);
         }
         if (rawData['Active Ability']) {
-            rawData['Active Ability'].forEach(x => {
+            for (const x of rawData['Active Ability']) {
                 const damageType = CharactersService.convertSnowprintDamageProfile(x);
                 unitData.damageTypes.all.push(damageType);
                 unitData.damageTypes.activeAbility.push(damageType);
-            });
+            }
         }
         if (rawData['Passive Ability']) {
-            rawData['Passive Ability'].forEach(x => {
+            for (const x of rawData['Passive Ability']) {
                 const damageType = CharactersService.convertSnowprintDamageProfile(x);
                 unitData.damageTypes.all.push(damageType);
                 unitData.damageTypes.passiveAbility.push(damageType);
-            });
+            }
         }
         unitData.damageTypes.all = uniq(unitData.damageTypes.all);
 

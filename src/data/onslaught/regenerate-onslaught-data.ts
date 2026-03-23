@@ -129,9 +129,9 @@ const KillZoneSchema = z
     })
     .transform(({ battleNr, BoardId, waves }) => {
         const badgeCountsByRarity = { Common: 0, Uncommon: 0, Rare: 0, Epic: 0, Legendary: 0, Mythic: 0 };
-        waves.forEach(({ badges }) => {
+        for (const { badges } of waves) {
             badgeCountsByRarity[badges.rarityString] += badges.count;
-        });
+        }
         return {
             battleNr,
             waves: waves.length,

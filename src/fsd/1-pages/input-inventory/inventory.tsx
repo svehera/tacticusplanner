@@ -109,9 +109,9 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
             dispatch.inventory({
                 type: 'ResetUpgrades',
             });
-            itemsList.forEach(row => {
+            for (const row of itemsList) {
                 row.quantity = 0;
-            });
+            }
         }
     }, [itemsList]);
 
