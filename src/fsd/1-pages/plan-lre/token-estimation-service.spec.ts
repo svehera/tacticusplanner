@@ -43,7 +43,7 @@ function createTrack(id: LreTrackId, numberBattles: number, reqs: ILreRequiremen
         trackId: id,
         trackName: id,
         totalPoints: 0,
-        battlesPoints: Array(numberBattles).fill(0),
+        battlesPoints: Array.from({ length: numberBattles }, () => 0),
         requirements: reqs,
         battles: Array.from({ length: numberBattles }, (_, index) =>
             createBattleProgress(numberBattles - index - 1, reqs)
