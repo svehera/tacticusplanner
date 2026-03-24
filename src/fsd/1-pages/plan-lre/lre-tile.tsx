@@ -46,16 +46,33 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
             // Go through each upgrade-material rarity in the goal and update
             // max ranks accordingly.
             for (const upgrade of goal.upgradesRarity) {
-                if (upgrade === Rarity.Common) {
-                    maxCommonRank = Math.max(maxCommonRank, goal.rankEnd);
-                } else if (upgrade === Rarity.Uncommon) {
-                    maxUncommonRank = Math.max(maxUncommonRank, goal.rankEnd);
-                } else if (upgrade === Rarity.Rare) {
-                    maxRareRank = Math.max(maxRareRank, goal.rankEnd);
-                } else if (upgrade === Rarity.Epic) {
-                    maxEpicRank = Math.max(maxEpicRank, goal.rankEnd);
-                } else if (upgrade === Rarity.Legendary) {
-                    maxLegendaryRank = Math.max(maxLegendaryRank, goal.rankEnd);
+                switch (upgrade) {
+                    case Rarity.Common: {
+                        maxCommonRank = Math.max(maxCommonRank, goal.rankEnd);
+
+                        break;
+                    }
+                    case Rarity.Uncommon: {
+                        maxUncommonRank = Math.max(maxUncommonRank, goal.rankEnd);
+
+                        break;
+                    }
+                    case Rarity.Rare: {
+                        maxRareRank = Math.max(maxRareRank, goal.rankEnd);
+
+                        break;
+                    }
+                    case Rarity.Epic: {
+                        maxEpicRank = Math.max(maxEpicRank, goal.rankEnd);
+
+                        break;
+                    }
+                    case Rarity.Legendary: {
+                        maxLegendaryRank = Math.max(maxLegendaryRank, goal.rankEnd);
+
+                        break;
+                    }
+                    // No default
                 }
             }
 
