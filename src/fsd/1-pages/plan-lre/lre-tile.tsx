@@ -107,7 +107,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
     const showMechanicTrait =
         settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait.Mechanic);
     const showShardIcon = settings.lreTileShowUnitIcon && character.name && character.icon;
-    const showRarity = settings.lreTileShowUnitRarity && typeof rarity !== 'undefined';
+    const showRarity = settings.lreTileShowUnitRarity && rarity !== undefined;
     const characterRelic = character.equipment.find(x => EquipmentService.isRelic(x.id));
     const equipmentRelic = EquipmentService.equipmentData.find(eq => eq.id === characterRelic?.id);
     const showRelic = settings.lreTileShowUnitRelic && equipmentRelic !== undefined;
