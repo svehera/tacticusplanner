@@ -64,7 +64,6 @@ export default defineConfig([
             'unicorn/no-null': 'off',
             'unicorn/no-array-reduce': 'off',
             // autofix-loop-enable
-            'unicorn/no-static-only-class': 'off',
             'unicorn/prefer-code-point': 'off',
             'unicorn/prefer-optional-catch-binding': 'off',
             'unicorn/prefer-blob-reading-methods': 'off',
