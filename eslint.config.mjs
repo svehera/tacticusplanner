@@ -64,7 +64,6 @@ export default defineConfig([
             'unicorn/no-null': 'off',
             'unicorn/no-array-reduce': 'off',
             // autofix-loop-enable
-            'unicorn/prefer-query-selector': 'off',
             'unicorn/prefer-add-event-listener': 'off',
             'unicorn/prefer-at': 'off',
             'unicorn/prefer-spread': 'off',

@@ -36,10 +36,10 @@ export const useBmcWidget = () => {
         return () => {
             isScriptSet = false;
             document.body.removeChild(script);
-            let bmcButton = document.getElementById('bmc-wbtn');
+            let bmcButton = document.querySelector('#bmc-wbtn');
             while (bmcButton) {
                 document.body.removeChild(bmcButton);
-                bmcButton = document.getElementById('bmc-wbtn');
+                bmcButton = document.querySelector('#bmc-wbtn');
             }
         };
     }, []);
