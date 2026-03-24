@@ -30,6 +30,27 @@ import { RosterSnapshotsUnit } from './roster-snapshots-unit';
 import { RosterSnapshotsUnitDiff } from './roster-snapshots-unit-diff';
 import { TakeSnapshotDialog } from './take-snapshot-dialog';
 
+interface CharDiff {
+    before: ICharacter2;
+    after: ICharacter2;
+    powerDiff: number;
+    logPowerDiff: number;
+}
+
+interface MachineOfWarDiff {
+    before: IMow2;
+    after: IMow2;
+    powerDiff: number;
+    logPowerDiff: number;
+}
+
+const isCharDiff = (unit: CharDiff | MachineOfWarDiff): unit is CharDiff => 'rank' in unit.before;
+const isMowDiff = (unit: CharDiff | MachineOfWarDiff): unit is MachineOfWarDiff => !isCharDiff(unit);
+type CharacterType = ICharacter2 & { power: number };
+type MowType = IMow2 & { power: number };
+const isCharacterType = (unit: CharacterType | MowType): unit is CharacterType => 'rank' in unit;
+const isMowType = (unit: CharacterType | MowType): unit is MowType => !isCharacterType(unit);
+
 function getDisplay(
     zoom: number,
     chars: ICharacter2[],
@@ -113,25 +134,11 @@ function getDisplay(
         showEquipmentDiffs !== RosterSnapshotShowVariableSettings.Never
     );
 
-    interface CharDiff {
-        before: ICharacter2;
-        after: ICharacter2;
-        powerDiff: number;
-        logPowerDiff: number;
-    }
-
-    interface MachineOfWarDiff {
-        before: IMow2;
-        after: IMow2;
-        powerDiff: number;
-        logPowerDiff: number;
-    }
-
     const diffChars: Array<CharDiff> = [];
     const diffMows: Array<MachineOfWarDiff> = [];
 
-    const nonDiffChars: Array<ICharacter2 & { power: number }> = [];
-    const nonDiffMows: Array<IMow2 & { power: number }> = [];
+    const nonDiffChars: Array<CharacterType> = [];
+    const nonDiffMows: Array<MowType> = [];
 
     const baseChars = base.chars;
     const compareChars = compare.chars;
@@ -215,14 +222,10 @@ function getDisplay(
     const diffUnits = orderBy([...diffChars, ...diffMows], 'powerDiff', 'desc');
     const nonDiffUnits = orderBy([...nonDiffChars, ...nonDiffMows], 'power', 'desc');
     const diffCache = (() => {
-        const cache = diffUnits.reduce(
-            (cache, unit) => {
-                if ('rank' in unit.before) cache.chars.push(unit as CharDiff);
-                else cache.mows.push(unit as MachineOfWarDiff);
-                return cache;
-            },
-            { chars: [] as CharDiff[], mows: [] as MachineOfWarDiff[] }
-        );
+        const cache = {
+            chars: diffUnits.filter(unit => isCharDiff(unit)),
+            mows: diffUnits.filter(unit => isMowDiff(unit)),
+        };
         return {
             chars: cache.chars.map(c => ({
                 before: RosterSnapshotsService.snapshotCharacter(c.before),
@@ -236,14 +239,10 @@ function getDisplay(
     })();
 
     const nonDiffCache = (() => {
-        const cache = nonDiffUnits.reduce(
-            (cache, unit) => {
-                if ('rank' in unit) cache.chars.push(unit);
-                else cache.mows.push(unit);
-                return cache;
-            },
-            { chars: [] as (ICharacter2 & { power: number })[], mows: [] as (IMow2 & { power: number })[] }
-        );
+        const cache = {
+            chars: nonDiffUnits.filter(unit => isCharacterType(unit)),
+            mows: nonDiffUnits.filter(unit => isMowType(unit)),
+        };
         return {
             chars: cache.chars.map(c => RosterSnapshotsService.snapshotCharacter(c)),
             mows: cache.mows.map(m => RosterSnapshotsService.snapshotMachineOfWar(m)),

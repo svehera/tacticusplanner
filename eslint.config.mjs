@@ -61,7 +61,6 @@ export default defineConfig([
                     },
                 },
             ],
-            'unicorn/no-array-reduce': 'off',
         },
     },
     ...compat.extends(

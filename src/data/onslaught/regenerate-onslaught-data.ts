@@ -136,8 +136,8 @@ const KillZoneSchema = z
             battleNr,
             waves: waves.length,
             boardId: BoardId, // keep for validation but then drop later
-            totalXp: waves.map(w => w.xp).reduce((sum, xp) => sum + xp, 0),
-            totalEnemyCount: waves.map(w => w.enemyCount).reduce((sum, count) => sum + count, 0),
+            totalXp: waves.map(w => w.xp).reduce((sum, xp) => sum + xp),
+            totalEnemyCount: waves.map(w => w.enemyCount).reduce((sum, count) => sum + count),
             badgeAlliance: waves[0].badges.alliance,
             badgeCountsByRarity,
         };
