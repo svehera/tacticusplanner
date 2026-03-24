@@ -174,8 +174,8 @@ const TrackSchema = z
             .nonempty()
             .superRefine((sectors, context) => {
                 let currentExpectedBattleNr = 1;
-                for (let index = 0; index < sectors.length; index++) {
-                    for (const { battleNr } of sectors[index].killzones) {
+                for (const sector of sectors) {
+                    for (const { battleNr } of sector.killzones) {
                         if (battleNr !== currentExpectedBattleNr)
                             context.addIssue({
                                 code: 'invalid_value',

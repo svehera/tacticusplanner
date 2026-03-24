@@ -89,8 +89,7 @@ export class LETrack implements ILegendaryEventTrack {
                 onlyUnlocked ? x.rank > Rank.Locked : true
             );
 
-            for (let index = 0; index < ordered.length; index++) {
-                const uniqChar = ordered[index];
+            for (const [index, uniqChar] of ordered.entries()) {
                 for (const x of this.unitsRestrictions) {
                     result2[x.name] ??= [];
                     result2[x.name][index] = result[x.name].find(x => x.name === uniqChar.name);

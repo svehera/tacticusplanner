@@ -376,10 +376,10 @@ export class TokenEstimationService {
             this.computeHighestAvailableBattle(track)
         );
         const nextBestTokens: TokenUse[] = [];
-        for (let index = 0; index < tracksProgress.length; index++) {
+        for (const [index, element] of tracksProgress.entries()) {
             const token = this.computeNextBestTokenInTrack(
-                tracksProgress[index],
-                teams.filter(x => x.section === tracksProgress[index].trackId),
+                element,
+                teams.filter(x => x.section === element.trackId),
                 lowestAvailableBattles[index],
                 highestAvailableBattles[index]
             );
@@ -714,8 +714,8 @@ export class TokenEstimationService {
      * Returns the next point milestone to be achieved that will award currency.
      */
     private static getNextPointMilestoneIndex(currentPoints: number): number {
-        for (let index = 0; index < pointMilestones.length; ++index) {
-            if (currentPoints < pointMilestones[index].points) return index;
+        for (const [index, pointMilestone] of pointMilestones.entries()) {
+            if (currentPoints < pointMilestone.points) return index;
         }
         return pointMilestones.length;
     }
@@ -732,11 +732,8 @@ export class TokenEstimationService {
      */
     private static getCurrentStarIndex(currentRarity: Rarity, currentStars: RarityStars): number {
         if (currentStars === RarityStars.None) return -1;
-        for (let index = 0; index < ascensionMilestones.length; ++index) {
-            if (
-                currentRarity === ascensionMilestones[index].rarity &&
-                currentStars <= ascensionMilestones[index].stars
-            ) {
+        for (const [index, ascensionMilestone] of ascensionMilestones.entries()) {
+            if (currentRarity === ascensionMilestone.rarity && currentStars <= ascensionMilestone.stars) {
                 return index;
             }
         }
@@ -776,9 +773,9 @@ export class TokenEstimationService {
             return progress.syncedProgress.currentShards;
         }
         let shards = LeProgressService.computeProgress(progress, false).currentChests * this.getShardsPerChest();
-        for (let index = 0; index < ascensionMilestones.length; ++index) {
-            if (ascensionMilestones[index].totalShards > shards) break;
-            shards -= ascensionMilestones[index].incrementalShards;
+        for (const ascensionMilestone of ascensionMilestones) {
+            if (ascensionMilestone.totalShards > shards) break;
+            shards -= ascensionMilestone.incrementalShards;
         }
 
         return shards;
@@ -939,8 +936,7 @@ export class TokenEstimationService {
         let nextStarIndex = this.getCurrentStarIndex(currentProgress.currentRarity, currentProgress.currentStars) + 1;
         const returnValue: TokenDisplay[] = [];
 
-        for (let index = 0; index < tokens.length; ++index) {
-            const token = tokens[index];
+        for (const token of tokens) {
             currentPoints += token.incrementalPoints;
             let achievedPointsMilestone = false;
             let achievedStarMilestone = false;
