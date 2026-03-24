@@ -7,7 +7,8 @@ export type {
 } from './model';
 export { battleData } from './data';
 export { CampaignsService } from './campaigns.service';
-export { Campaign, CampaignType, CampaignGroupType, CampaignDifficulty } from './enums';
+export { Campaign, CampaignType, CampaignGroupType, CampaignDifficulty, campaignDisplayNames } from './enums';
 export { campaignsByGroup, campaignEventsLocations } from './campaigns.constants';
 export { CampaignLocation } from './campaign-location';
+export { CompactCampaignLocation } from './compact-campaign-location';
 export { CampaignImage } from './campaign.icon';
