@@ -56,6 +56,47 @@ export enum Campaign {
     Onslaught = 'Onslaught',
 }
 
+/** Short display names for campaigns. Most match the enum key, except single-letter ones. */
+export const campaignDisplayNames: Record<Campaign, string> = {
+    [Campaign.I]: 'Ind',
+    [Campaign.IE]: 'IE',
+    [Campaign.IM]: 'IM',
+    [Campaign.IME]: 'IME',
+    [Campaign.FoC]: 'FoC',
+    [Campaign.FoCE]: 'FoCE',
+    [Campaign.FoCM]: 'FoCM',
+    [Campaign.FoCME]: 'FoCME',
+    [Campaign.O]: 'Oct',
+    [Campaign.OE]: 'OE',
+    [Campaign.OM]: 'OM',
+    [Campaign.OME]: 'OME',
+    [Campaign.SH]: 'SH',
+    [Campaign.SHE]: 'SHE',
+    [Campaign.SHM]: 'SHM',
+    [Campaign.SHME]: 'SHME',
+    [Campaign.AMS]: 'AMS',
+    [Campaign.AMSC]: 'AMSC',
+    [Campaign.AME]: 'AME',
+    [Campaign.AMEC]: 'AMEC',
+    [Campaign.TS]: 'TS',
+    [Campaign.TSC]: 'TSC',
+    [Campaign.TE]: 'TE',
+    [Campaign.TEC]: 'TEC',
+    [Campaign.TAS]: 'TAS',
+    [Campaign.TASC]: 'TASC',
+    [Campaign.TAE]: 'TAE',
+    [Campaign.TAEC]: 'TAEC',
+    [Campaign.DGS]: 'DGS',
+    [Campaign.DGSC]: 'DGSC',
+    [Campaign.DGE]: 'DGE',
+    [Campaign.DGEC]: 'DGEC',
+    [Campaign.ASS]: 'ASS',
+    [Campaign.ASSC]: 'ASSC',
+    [Campaign.ASE]: 'ASE',
+    [Campaign.ASEC]: 'ASEC',
+    [Campaign.Onslaught]: 'Onslaught',
+};
+
 /**
  * Enum representing the types of campaign releases.
  */
