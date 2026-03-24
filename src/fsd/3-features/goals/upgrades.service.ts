@@ -1256,7 +1256,7 @@ export class UpgradesService {
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal>,
-        highestPriorityGoalId: string | undefined,
+        highestPriorityGoalId?: string,
         cache: Map<
             string,
             { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }
@@ -1665,8 +1665,7 @@ export class UpgradesService {
         // entire inventory, which could be huge.
         const originalShards: Record<string, number> = {};
         while (onslaughtTokens > 0) {
-            let goal = undefined;
-            goal =
+            const goal =
                 settings.preferences.farmPreferences.order === IDailyRaidsFarmOrder.totalMaterials
                     ? this.findLongestOnslaughtGoal(inventory, characters, mows, goals)
                     : this.findHighestPriorityOnslaughtGoal(inventory, characters, mows, goals);
@@ -2011,7 +2010,7 @@ export class UpgradesService {
                             return this.getMowUpgradeRank(goal);
                         }
                         default: {
-                            return undefined;
+                            return;
                         }
                     }
                 })()?.filter(x => x != undefined) ?? [];
@@ -2022,7 +2021,7 @@ export class UpgradesService {
                         return this.getShardsForGoal(chars, mows, goal);
                     }
                     default: {
-                        return undefined;
+                        return;
                     }
                 }
             })();

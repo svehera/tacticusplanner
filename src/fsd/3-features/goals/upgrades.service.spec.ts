@@ -317,7 +317,7 @@ const findStone1UncraftableCandidate = () => {
             return { unitId, upgrades: stoneOne };
         }
     }
-    return undefined;
+    return;
 };
 
 const getRate = (location: ICampaignBattleComposed): number => location.energyPerDay / location.energyPerItem;
@@ -3769,8 +3769,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
             upgradeId,
             { [upgradeId]: combinedUpgrade },
             {},
-            goals,
-            undefined
+            goals
         );
         const goalAOnly = UpgradesService.calculateDaysToCompleteMaterial(
             upgradeId,
@@ -3818,8 +3817,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
             upgradeId,
             { [upgradeId]: combinedUpgrade },
             { [upgradeId]: 12 },
-            goals,
-            undefined
+            goals
         );
 
         const expected = Math.ceil(18 / getRate(location));

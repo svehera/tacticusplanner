@@ -116,7 +116,7 @@ export const Campaigns = () => {
             minWidth: 170,
             cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
                 const { rewards } = params.data ?? {};
-                if (!rewards) return undefined;
+                if (!rewards) return;
                 const reward = getReward(rewards);
                 const upgrade = UpgradesService.getUpgrade(reward);
                 if (!upgrade) return reward;

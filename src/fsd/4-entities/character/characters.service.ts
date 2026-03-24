@@ -214,7 +214,7 @@ export class CharactersService {
                 const staticChar = this.resolveCharacter(x.snowprintId ?? x.name);
                 if (staticChar === undefined) {
                     console.error('Could not resolve character', x.snowprintId ?? x.name);
-                    return undefined;
+                    return;
                 }
                 return { ...x, ...staticChar };
             })

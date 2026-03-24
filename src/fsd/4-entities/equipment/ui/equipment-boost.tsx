@@ -13,8 +13,8 @@ export const EquipmentBoost = ({
     height?: number;
     width?: number;
 }) => {
-    let icon1 = undefined;
-    let icon2 = undefined;
+    let icon1;
+    let icon2;
     let value1 = '';
     let value2 = '';
     if (type === 'I_Crit') {

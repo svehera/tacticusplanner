@@ -129,7 +129,7 @@ describe('TokenEstimationService', () => {
                 charSnowprintIds: ['char1', 'char2', 'char3', 'char4', 'char5'],
                 expectedBattleClears: 2,
             };
-            const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam1, alphaTeam2], undefined);
+            const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam1, alphaTeam2]);
             expect(bestToken.team).toBeDefined();
             expect(bestToken.team?.id ?? '').toBe('team1');
             expect(bestToken.battleNumber).toBe(0);
@@ -151,7 +151,7 @@ describe('TokenEstimationService', () => {
                 charSnowprintIds: ['char1', 'char2', 'char3'],
                 expectedBattleClears: 1,
             };
-            const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam1], undefined);
+            const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam1]);
             expect(bestToken.team).not.toBeDefined();
         });
 
@@ -316,7 +316,7 @@ describe('TokenEstimationService', () => {
                 };
 
                 // Call computeNextToken
-                const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam], undefined);
+                const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam]);
 
                 // Should return a token for the first (lowest index) incomplete battle in alpha
                 expect(bestToken.team).toBeDefined();
@@ -391,7 +391,7 @@ describe('TokenEstimationService', () => {
 
                 // Call computeNextToken
                 const tracks = [alphaTrack, betaTrack, gammaTrack];
-                const bestToken = TokenEstimationService.computeNextToken(tracks, [team1, team2], undefined);
+                const bestToken = TokenEstimationService.computeNextToken(tracks, [team1, team2]);
 
                 expect(bestToken.team).toBeDefined();
                 expect(bestToken.team?.id).toBe(team2.id);

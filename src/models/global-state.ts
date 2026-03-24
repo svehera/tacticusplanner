@@ -380,7 +380,7 @@ export class GlobalState implements IGlobalState {
 
                 const baseBattle = byId.get(location.id);
                 if (!baseBattle) {
-                    return undefined;
+                    return;
                 }
 
                 const raidsAlreadyPerformed = location.raidsAlreadyPerformed ?? 0;

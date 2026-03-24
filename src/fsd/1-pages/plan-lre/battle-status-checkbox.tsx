@@ -36,7 +36,7 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
         }
 
         // Clear score when switching to any other status
-        onChange(newStatus, undefined);
+        onChange(newStatus);
     };
 
     const toggleDropdown = () => {

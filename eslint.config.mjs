@@ -62,7 +62,6 @@ export default defineConfig([
                 },
             ],
             // autofix-loop-enable
-            'unicorn/no-useless-undefined': 'off',
             'unicorn/no-null': 'off',
             'unicorn/no-useless-switch-case': 'off',
             'unicorn/no-array-reduce': 'off',

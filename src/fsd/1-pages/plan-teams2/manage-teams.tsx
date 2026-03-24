@@ -110,18 +110,16 @@ export const ManageTeams = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, setSelectedChars] = useState<string[]>([]);
     const [selectedMows, setSelectedMows] = useState<string[]>([]);
-    const [flexIndex, setFlexIndex] = useState<number | undefined>(undefined);
+    const [flexIndex, setFlexIndex] = useState<number | undefined>();
     const [notes, setNotes] = useState<string>('');
 
     // State for the add/edit dialog.
     const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
     const [editingTeam, setEditingTeam] = useState<ITeam2 | null>(null);
     const [saveAllowed, setSaveAllowed] = useState(false);
-    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>(undefined);
-    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>(undefined);
-    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>(
-        undefined
-    );
+    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>();
+    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>();
+    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>();
     const [warOffenseSelected, setWarOffenseSelected] = useState<boolean>(false);
     const [warDefenseSelected, setWarDefenseSelected] = useState<boolean>(false);
     const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
@@ -134,7 +132,7 @@ export const ManageTeams = () => {
     const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
     const [teams, setTeams] = useState<ITeam2[]>([]);
     const [zoom, setZoom] = useState(isMobile ? 0.5 : 1);
-    const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>(undefined);
+    const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>();
 
     useEffect(() => {
         setTeams(currentTeams);

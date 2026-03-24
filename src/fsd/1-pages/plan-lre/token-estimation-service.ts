@@ -369,7 +369,7 @@ export class TokenEstimationService {
     public static computeNextToken(
         tracksProgress: ILreTrackProgress[],
         teams: ILreTeam[],
-        lastToken: TokenUse | undefined
+        lastToken?: TokenUse
     ): TokenUse {
         const lowestAvailableBattles: number[] = tracksProgress.map(track => this.computeLowestAvailableBattle(track));
         const highestAvailableBattles: number[] = tracksProgress.map(track =>
