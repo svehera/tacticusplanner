@@ -9,5 +9,6 @@ export { LoaderWithText } from './loader-with-text';
 export { AccessibleTooltip } from './tooltip';
 export { bmcLink, discordInvitationLink, isTabletOrMobileMediaQuery } from './constants';
 export { ConfirmationDialog } from './confirmation-dialog';
+export { ButtonPill } from './button-pill';
 
 export * from './selects';

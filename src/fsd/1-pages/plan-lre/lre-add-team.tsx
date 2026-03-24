@@ -195,7 +195,7 @@ export const LreAddTeam: React.FC<Props> = ({
                     ))}
                 </div>
 
-                <div className="flex-box full-width wrap start space-between">
+                <div className="flex-box full-width wrap space-between start">
                     <div className="min-w-[400px]">
                         <div className="flex-box gap20 space-between">
                             <h3>Selected Team ({selectedTeam.length}/5)</h3>
@@ -205,7 +205,7 @@ export const LreAddTeam: React.FC<Props> = ({
                                 </Button>
                             )}
                         </div>
-                        <div className="flex-box column start pointer gap-[3px]">
+                        <div className="flex-box column pointer start gap-[3px]">
                             {selectedTeam.length > 0 ? (
                                 selectedTeam.map(character => (
                                     <div

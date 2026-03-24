@@ -196,7 +196,7 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                 <Divider orientation="horizontal" />
 
                 <h3>Units bias</h3>
-                <div className="flex-box gap10 start mobile-wrap">
+                <div className="flex-box gap10 mobile-wrap start">
                     <MultipleSelectCheckmarks
                         values={characters.map(x => x.name)}
                         selectedValues={recommendFirst.map(x => characters.find(c => c.snowprintId === x)!.name)}

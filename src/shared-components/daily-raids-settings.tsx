@@ -227,7 +227,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     value={IDailyRaidsFarmOrder.totalMaterials}
                                     control={<Radio />}
                                     label={
-                                        <div className="flex-box start gap5">
+                                        <div className="flex-box gap5 start">
                                             By total materials{' '}
                                             <AccessibleTooltip
                                                 title={
@@ -250,7 +250,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     value={IDailyRaidsFarmOrder.goalPriority}
                                     control={<Radio />}
                                     label={
-                                        <div className="flex-box start gap5">
+                                        <div className="flex-box gap5 start">
                                             By goals priority{' '}
                                             <AccessibleTooltip
                                                 title={
