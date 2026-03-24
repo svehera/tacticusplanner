@@ -160,12 +160,9 @@ export const GuildWarOffense = () => {
                                 </Button>
                             </Conditional>
                             <Conditional
-                                condition={
-                                    currentTeam.lineup.length > 0 &&
-                                    currentTeam.lineup.some(
-                                        character => !guildWar.deployedCharacters.includes(character.name)
-                                    )
-                                }>
+                                condition={currentTeam.lineup.some(
+                                    character => !guildWar.deployedCharacters.includes(character.name)
+                                )}>
                                 <Button size="small" onClick={() => deployTeam(currentTeam.lineup.map(x => x.name))}>
                                     Deploy
                                 </Button>
