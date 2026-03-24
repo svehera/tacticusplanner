@@ -27,6 +27,7 @@ import { ILegendaryEvent, ILegendaryEventTrack, ILegendaryEventTrackRequirement,
 import { LreTile } from './lre-tile';
 import { ITableRow } from './lre.models';
 import { SelectedTeamsTable } from './selected-teams-table';
+import { buildSelectedTeamsRows, ISelectedTeamTableCell } from './selected-teams-table.utils';
 import { TrackRequirementCheck } from './track-requirement-check';
 
 interface Props {
@@ -112,23 +113,10 @@ export const LreTeamsTable: React.FC<Props> = ({
 
     const rows: Array<ITableRow> = useMemo(() => getRows(suggestedTeams), [suggestedTeams]);
 
-    const selectedTeamsRows: Array<ITableRow> = useMemo(() => {
-        const teamRecord: Record<string, ICharacter2[]> = {};
-
-        for (const team of selectedTeams) {
-            for (const id of team.restrictionsIds) {
-                const existingCharacters = teamRecord[id] ?? [];
-                const newTeam = (team.charSnowprintIds ?? [])
-                    .slice(0, 5)
-                    .map(charId => resolvedCharactersBySnowprintId[charId])
-                    .filter((character): character is ICharacter2 => !!character);
-
-                teamRecord[id] = [...existingCharacters, ...newTeam];
-            }
-        }
-
-        return getRows(teamRecord);
-    }, [resolvedCharactersBySnowprintId, selectedTeams]);
+    const selectedTeamsRows: Array<ITableRow<ISelectedTeamTableCell | string>> = useMemo(
+        () => buildSelectedTeamsRows(selectedTeams, resolvedCharactersBySnowprintId),
+        [resolvedCharactersBySnowprintId, selectedTeams]
+    );
 
     useEffect(() => {
         gridReference.current?.api?.sizeColumnsToFit();
