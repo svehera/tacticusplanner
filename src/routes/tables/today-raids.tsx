@@ -11,7 +11,7 @@ import { MaterialItemInput } from '@/fsd/3-features/goals/material-item-input';
 interface Props {
     raids: IUpgradeRaid[];
     bonusRaids: IUpgradeRaid[];
-    showBattleInfo?: boolean;
+    showBattleInfo?: boolean; //Adds additional info via optional tooltip
 }
 
 export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids, showBattleInfo }: Props) => {
