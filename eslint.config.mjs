@@ -64,7 +64,6 @@ export default defineConfig([
             'unicorn/no-null': 'off',
             'unicorn/no-array-reduce': 'off',
             // autofix-loop-enable
-            'unicorn/no-empty-file': 'off',
             'unicorn/no-typeof-undefined': 'off',
             'unicorn/prefer-array-find': 'off',
             'unicorn/new-for-builtins': 'off',
