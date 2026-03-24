@@ -318,7 +318,7 @@ export const RankLookup = () => {
                 <div className="w-50">
                     <RankSelect
                         label={'Rank Start'}
-                        rankValues={rankEntries.slice(0, rankEntries.length - 1)}
+                        rankValues={rankEntries.slice(0, -1)}
                         value={rankStart}
                         valueChanges={value => {
                             updateRankStart(value);
