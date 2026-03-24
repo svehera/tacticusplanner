@@ -12,16 +12,16 @@ function getImageDimensions(url: string): Promise<{ width: number; height: numbe
     return new Promise((resolve, reject) => {
         const img = new Image();
 
-        img.onload = () => {
+        img.addEventListener('load', () => {
             resolve({
                 width: img.naturalWidth,
                 height: img.naturalHeight,
             });
-        };
+        });
 
-        img.onerror = error => {
+        img.addEventListener('error', error => {
             reject(new Error(`Failed to load image from URL: ${url}. Error: ${error}`));
-        };
+        });
 
         img.src = url;
     });

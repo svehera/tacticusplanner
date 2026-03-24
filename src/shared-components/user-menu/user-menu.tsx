@@ -115,7 +115,7 @@ export const UserMenu = () => {
         if (file) {
             const reader = new FileReader();
 
-            reader.onload = (event: ProgressEvent<FileReader>) => {
+            reader.addEventListener('load', (event: ProgressEvent<FileReader>) => {
                 try {
                     const content = event.target?.result as string;
                     const personalData: IPersonalData2 = convertData(JSON.parse(content));
@@ -126,7 +126,7 @@ export const UserMenu = () => {
                 } catch (_error) {
                     enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
                 }
-            };
+            });
 
             reader.readAsText(file);
         }

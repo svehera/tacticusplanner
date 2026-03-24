@@ -24,11 +24,11 @@ export const useBmcWidget = () => {
             isMobile ? '' : 'Deploy troopers, Commander! Your support fuels our strategy'
         );
         //Call window on load to show the image
-        script.onload = function () {
+        script.addEventListener('load', function () {
             requestAnimationFrame(() => {
                 globalThis.dispatchEvent(new Event('DOMContentLoaded'));
             });
-        };
+        });
 
         isScriptSet = true;
         document.body.appendChild(script);
