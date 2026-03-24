@@ -64,7 +64,6 @@ export default defineConfig([
             'unicorn/no-null': 'off',
             'unicorn/no-array-reduce': 'off',
             // autofix-loop-enable
-            'unicorn/prefer-node-protocol': 'off',
             'unicorn/no-for-loop': 'off',
             'unicorn/text-encoding-identifier-case': 'off',
             'unicorn/prefer-query-selector': 'off',

@@ -23,7 +23,7 @@
  * is sketchy since Vite has not fully started up yet.
  *  */
 
-import fs from 'fs';
+import fs from 'node:fs';
 
 import { z } from 'zod';
 
