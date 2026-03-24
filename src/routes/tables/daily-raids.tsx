@@ -130,7 +130,8 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
-            ...[...upgradeRankOrMowGoals, ...shardsGoals]
+            ...upgradeRankOrMowGoals,
+            ...shardsGoals
         );
     }, [
         dailyRaidsPreferences.dailyEnergy,
@@ -158,7 +159,8 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
-            ...[...upgradeRankOrMowGoals, ...shardsGoals]
+            ...upgradeRankOrMowGoals,
+            ...shardsGoals
         );
     }, [
         dailyRaidsPreferences.dailyEnergy,

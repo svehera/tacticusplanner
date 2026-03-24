@@ -594,7 +594,7 @@ export class UpgradesService {
                 precomputedGoalLocations
             );
             this.postProcessRaidsForHse(day, settings, goals, remainingMats, inventory, remainingNeededCache);
-            const upgradeIds = [...Object.keys(remainingMats)];
+            const upgradeIds = Object.keys(remainingMats);
             for (const upgradeId of upgradeIds) {
                 const mat = remainingMats[upgradeId];
                 if (inventory[upgradeId] === undefined) continue;
@@ -2482,16 +2482,16 @@ export class UpgradesService {
                 settings.preferences.farmStrategy === DailyRaidsStrategy.custom &&
                 settings.preferences.customSettings
             ) {
-                const locationTypes = new Set([
-                    ...(settings.preferences.customSettings[combinedUpgrade.rarity] ?? [
+                const locationTypes = new Set(
+                    settings.preferences.customSettings[combinedUpgrade.rarity] ?? [
                         CampaignType.Normal,
                         CampaignType.Early,
                         CampaignType.Mirror,
                         CampaignType.Standard,
                         CampaignType.Elite,
                         CampaignType.Extremis,
-                    ]),
-                ]);
+                    ]
+                );
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
                 const ignoredLocations = selectedLocations.filter(x => !locationTypes.has(x.campaignType));
 
