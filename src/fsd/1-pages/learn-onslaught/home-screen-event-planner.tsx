@@ -46,10 +46,12 @@ export const HomeScreenEventPlanner = () => {
 
     const handleToggleTrack = (track: OnslaughtTrackId) => {
         setSelections(previous => {
-            const next = { ...previous };
-            next[track] = {
-                ...previous[track],
-                selected: !previous[track].selected,
+            const next = {
+                ...previous,
+                [track]: {
+                    ...previous[track],
+                    selected: !previous[track].selected,
+                },
             };
             return next;
         });

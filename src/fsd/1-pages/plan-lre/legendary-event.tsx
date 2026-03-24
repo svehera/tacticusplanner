@@ -35,8 +35,7 @@ export const LegendaryEvent = ({
 
     // Compute virtual attributes (not saved in JSON) for display on LRE team cards.
     const selectedTeams = (leSelectedTeams[legendaryEvent.id]?.teams ?? []).map(rawTeam => {
-        const team = { ...rawTeam };
-        team.points = 0;
+        const team = { ...rawTeam, points: 0 };
         for (const id of team.restrictionsIds) {
             team.points += legendaryEvent[team.section].getRestrictionPoints(id);
         }

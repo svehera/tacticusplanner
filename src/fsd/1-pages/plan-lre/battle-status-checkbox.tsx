@@ -100,12 +100,11 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
             { value: RequirementStatus.Cleared, label: STATUS_LABELS[RequirementStatus.Cleared] },
             { value: RequirementStatus.MaybeClear, label: STATUS_LABELS[RequirementStatus.MaybeClear] },
             { value: RequirementStatus.StopHere, label: STATUS_LABELS[RequirementStatus.StopHere] },
+            {
+                value: RequirementStatus.PartiallyCleared,
+                label: score ? `${score}` : STATUS_LABELS[RequirementStatus.PartiallyCleared],
+            },
         ];
-
-        options.push({
-            value: RequirementStatus.PartiallyCleared,
-            label: score ? `${score}` : STATUS_LABELS[RequirementStatus.PartiallyCleared],
-        });
 
         return options;
     };

@@ -53,18 +53,19 @@ export class UpgradesService {
      * in the result, but its expandedRecipe field is empty.
      */
     private static expandRecipeData(): IRecipeExpandedUpgradeData {
-        const result: IRecipeExpandedUpgradeData = {};
-
-        result['gold'] = {
-            id: 'gold',
-            snowprintId: 'gold',
-            label: 'Gold',
-            rarity: Rarity.Common,
-            iconPath: 'gold',
-            expandedRecipe: {},
-            crafted: false,
-            stat: 'Gold',
+        const result: IRecipeExpandedUpgradeData = {
+            ['gold']: {
+                id: 'gold',
+                snowprintId: 'gold',
+                label: 'Gold',
+                rarity: Rarity.Common,
+                iconPath: 'gold',
+                expandedRecipe: {},
+                crafted: false,
+                stat: 'Gold',
+            },
         };
+
         // First fill in all of the base upgrades.
         for (const upgrade of Object.entries(UpgradesService.baseUpgradesData)) {
             const baseUpgrade = upgrade[1];
