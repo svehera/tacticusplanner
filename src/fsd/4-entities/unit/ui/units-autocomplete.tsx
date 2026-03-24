@@ -16,6 +16,17 @@ interface Props<T extends IUnit> {
     className?: string;
 }
 
+const normalizeSearchText = (text: string | undefined | null): string =>
+    (text ?? '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim();
+
+const hasShortName = (unit: IUnit): unit is IUnit & { shortName: string } => 'shortName' in unit;
+
+const hasFullName = (unit: IUnit): unit is IUnit & { fullName: string } => 'fullName' in unit;
+
 export const UnitsAutocomplete = <T extends IUnit>({
     options,
     unit,
@@ -47,12 +58,12 @@ export const UnitsAutocomplete = <T extends IUnit>({
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
         const key = event.key;
         if (key === 'Enter') {
-            const value = (event.target as HTMLInputElement).value ?? '';
+            const value = normalizeSearchText((event.target as HTMLInputElement).value);
             const char = options.find(
                 x =>
-                    x.name.toLowerCase().includes(value.toLowerCase()) ||
-                    ('shortName' in x ? (x as any).shortName.toLowerCase().includes(value.toLowerCase()) : false) ||
-                    ('fullName' in x ? x.fullName.toLowerCase().includes(value.toLowerCase()) : false)
+                    normalizeSearchText(x.name).includes(value) ||
+                    (hasShortName(x) ? normalizeSearchText(x.shortName).includes(value) : false) ||
+                    (hasFullName(x) ? normalizeSearchText(x.fullName).includes(value) : false)
             );
             if (char) {
                 updateValue(char);
@@ -77,12 +88,12 @@ export const UnitsAutocomplete = <T extends IUnit>({
             onFocus={() => handleAutocompleteChange(true)}
             onBlur={() => handleAutocompleteChange(false)}
             filterOptions={(filterOptions, state) => {
-                const q = state.inputValue?.toLowerCase?.().trim() ?? '';
+                const q = normalizeSearchText(state.inputValue);
                 if (!q) return filterOptions;
                 return filterOptions.filter(x => {
-                    const short = 'shortName' in x ? ((x as any).shortName?.toLowerCase?.() ?? '') : '';
-                    const normal = x.name?.toLowerCase?.() ?? '';
-                    const full = 'fullName' in x ? (x.fullName?.toLowerCase?.() ?? '') : '';
+                    const short = hasShortName(x) ? normalizeSearchText(x.shortName) : '';
+                    const normal = normalizeSearchText(x.name);
+                    const full = hasFullName(x) ? normalizeSearchText(x.fullName) : '';
                     return full.includes(q) || normal.includes(q) || short.includes(q);
                 });
             }}
