@@ -64,7 +64,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
                 <AccordionDetails>
                     <table key="missing_materials">
                         <tbody>
-                            {Array.from(missingMaterials.values()).map(material => {
+                            {[...missingMaterials.values()].map(material => {
                                 return renderMissingMaterial(material);
                             })}
                         </tbody>

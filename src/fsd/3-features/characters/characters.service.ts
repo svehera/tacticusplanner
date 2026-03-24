@@ -440,7 +440,7 @@ export class CharactersService {
             }
         }
 
-        const sorted = Array.from(rarities).toSorted((a, b) => a - b);
+        const sorted = [...rarities].toSorted((a, b) => a - b);
 
         const index = sorted.indexOf(current);
 

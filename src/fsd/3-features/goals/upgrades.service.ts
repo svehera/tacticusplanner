@@ -1684,7 +1684,8 @@ export class UpgradesService {
             }
 
             const fractional = (inventory[upgradeId] ?? 0) - Math.floor(inventory[upgradeId] ?? 0);
-            onslaughts[upgradeId] = (onslaughts[upgradeId] ?? []).concat(
+            onslaughts[upgradeId] ||= [];
+            onslaughts[upgradeId].push(
                 this.createOnslaughtLocation(upgradeId, Math.floor(shards + fractional), 'Shard', ++index)
             );
             relatedGoals[upgradeId] = [...(relatedGoals[upgradeId] ?? []), goal];
@@ -1784,7 +1785,7 @@ export class UpgradesService {
             raids.push(raid);
             energySpent += sum(newLocations.map(loc => loc.energySpent));
         }
-        day.raids = raids.concat(day.raids);
+        day.raids.unshift(...raids);
         day.energyTotal += energySpent;
         day.raidsTotal += sum(raids.map(raid => raid.raidsTotal));
     }

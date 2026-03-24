@@ -74,7 +74,7 @@ export const mapUserIdToName =
             return existingUser.inGameName || existingUser.username;
         }
 
-        const bytes = userId.replace(/-/g, '').split('');
+        const bytes = [...userId.replace(/-/g, '')];
 
         const adjIndex = Number.parseInt(bytes[0] + bytes[1], 16) % adjectives.length;
         const factionIndex = Number.parseInt(bytes[2] + bytes[3], 16) % factions.length;

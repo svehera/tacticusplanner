@@ -99,7 +99,7 @@ export const RankLookup = () => {
 
         let currentRank = Math.max(rankStart, Rank.Stone1);
         const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Adamantine2 ? Rank.Adamantine1 : rankEnd;
-        const upgradesCopy = upgrades.slice();
+        const upgradesCopy = [...upgrades];
 
         while (currentRank !== endRank) {
             const rankUpgrades = upgradesCopy.splice(0, 6);

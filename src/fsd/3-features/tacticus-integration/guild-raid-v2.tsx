@@ -678,7 +678,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         // Advance token status to now
         for (const userSummary of userMap.values()) updateTokenTo(userSummary.tokenStatus, now);
 
-        return Array.from(userMap.values());
+        return [...userMap.values()];
     }, [filteredEntries]);
 
     // Calculate summary statistics

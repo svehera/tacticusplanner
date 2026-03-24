@@ -161,9 +161,9 @@ export const AddTeamDialog: React.FC<Props> = ({
         };
     }, [isDragging, resizeGrids, stopResizing]);
 
-    const allFactions: FactionId[] = Array.from(
-        new Set<FactionId>([...chars.map(c => c.faction), ...mows.map(m => m.faction)])
-    ).toSorted((a, b) => a.localeCompare(b));
+    const allFactions: FactionId[] = [
+        ...new Set<FactionId>([...chars.map(c => c.faction), ...mows.map(m => m.faction)]),
+    ].toSorted((a, b) => a.localeCompare(b));
 
     const warDefenseBlockedCoreCharIdsSet = useMemo(
         () => new Set(warDefenseBlockedCoreCharIds),

@@ -163,7 +163,7 @@ export const Guides: React.FC = () => {
                         const map = new Map<number, IGuide>();
                         for (const t of previousTeams) map.set(t.teamId, t);
                         for (const t of response.teams) map.set(t.teamId, t);
-                        return Array.from(map.values());
+                        return [...map.values()];
                     });
                 }
                 setNextQueryParameters(response.next);
@@ -189,7 +189,7 @@ export const Guides: React.FC = () => {
                     const map = new Map<number, IGuide>();
                     for (const t of previous) map.set(t.teamId, t);
                     for (const t of response.teams) map.set(t.teamId, t);
-                    return Array.from(map.values());
+                    return [...map.values()];
                 });
                 setNextQueryParameters(response.next);
             }

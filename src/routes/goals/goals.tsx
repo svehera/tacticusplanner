@@ -255,7 +255,7 @@ export const Goals = () => {
         return accumulator;
     }, new Map<string, IGoalEstimate[]>());
 
-    const mergedGoalEstimates: IGoalEstimate[] = Array.from(estimatesByGoalId.values()).map(group => {
+    const mergedGoalEstimates: IGoalEstimate[] = [...estimatesByGoalId.values()].map(group => {
         const first = group[0];
         const goal = allGoals.find(g => g.goalId === first.goalId);
 

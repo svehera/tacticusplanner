@@ -154,7 +154,7 @@ export const ManageTeams = () => {
     );
 
     const warDefenseBlockedCoreCharIds = useMemo(
-        () => Array.from(new Set(otherWarDefenseTeams.flatMap(team => getTeamCoreCharIds(team)))),
+        () => [...new Set(otherWarDefenseTeams.flatMap(team => getTeamCoreCharIds(team)))],
         [otherWarDefenseTeams]
     );
 
@@ -164,19 +164,18 @@ export const ManageTeams = () => {
     );
 
     const warDefenseFlexCharIds = useMemo(
-        () =>
-            Array.from(
-                new Set(
-                    otherWarDefenseTeams
-                        .flatMap(team => getTeamFlexCharIds(team))
-                        .filter(charId => !warDefenseBlockedCoreCharIdsSet.has(charId))
-                )
+        () => [
+            ...new Set(
+                otherWarDefenseTeams
+                    .flatMap(team => getTeamFlexCharIds(team))
+                    .filter(charId => !warDefenseBlockedCoreCharIdsSet.has(charId))
             ),
+        ],
         [otherWarDefenseTeams, warDefenseBlockedCoreCharIdsSet]
     );
 
     const warDefenseFlexMowIds = useMemo(
-        () => Array.from(new Set(otherWarDefenseTeams.flatMap(team => team.mows ?? []))),
+        () => [...new Set(otherWarDefenseTeams.flatMap(team => team.mows ?? []))],
         [otherWarDefenseTeams]
     );
 

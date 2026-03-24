@@ -345,8 +345,8 @@ export const CEs = () => {
     };
 
     const getRelatedUnits = (materialPlan: MaterialPlan): { name: string; icon: string }[] => {
-        return Array.from(
-            new Map(
+        return [
+            ...new Map(
                 materialPlan.relatedGoalIds
                     .map(goalId => goalUnitById.get(goalId))
                     .filter(
@@ -358,8 +358,8 @@ export const CEs = () => {
                         } => !!unit?.icon
                     )
                     .map(unit => [unit.icon, unit])
-            ).values()
-        );
+            ).values(),
+        ];
     };
 
     const renderCampaignSection = (title: string, plans: CampaignPlan[], defaultOpen = true) => {
