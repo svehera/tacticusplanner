@@ -562,10 +562,10 @@ export class TokenEstimationService {
             return [];
         }
         const clearedRestrictions: ILreRequirements[] = [];
-        const completionRequirementIds = ['_killPoints', '_highScore', '_defeatAll'];
+        const completionRequirementIds = new Set(['_killPoints', '_highScore', '_defeatAll']);
         for (const requirement of battle.requirementsProgress) {
             if (requirement.completed) continue;
-            if (team.restrictionsIds.includes(requirement.id) || completionRequirementIds.includes(requirement.id)) {
+            if (team.restrictionsIds.includes(requirement.id) || completionRequirementIds.has(requirement.id)) {
                 clearedRestrictions.push({
                     id: requirement.id,
                     iconId: requirement.iconId,

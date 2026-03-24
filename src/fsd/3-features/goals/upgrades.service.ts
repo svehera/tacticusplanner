@@ -2482,7 +2482,7 @@ export class UpgradesService {
                 settings.preferences.farmStrategy === DailyRaidsStrategy.custom &&
                 settings.preferences.customSettings
             ) {
-                const locationTypes = [
+                const locationTypes = new Set([
                     ...(settings.preferences.customSettings[combinedUpgrade.rarity] ?? [
                         CampaignType.Normal,
                         CampaignType.Early,
@@ -2491,9 +2491,9 @@ export class UpgradesService {
                         CampaignType.Elite,
                         CampaignType.Extremis,
                     ]),
-                ];
+                ]);
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
-                const ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
+                const ignoredLocations = selectedLocations.filter(x => !locationTypes.has(x.campaignType));
 
                 for (const location of ignoredLocations) location.isSuggested = false;
             }
