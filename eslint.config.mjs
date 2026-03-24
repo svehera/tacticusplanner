@@ -64,7 +64,6 @@ export default defineConfig([
             'unicorn/no-null': 'off',
             'unicorn/no-array-reduce': 'off',
             // autofix-loop-enable
-            'unicorn/require-array-join-separator': 'off',
             'unicorn/no-useless-spread': 'off',
             'unicorn/prefer-single-call': 'off',
             'unicorn/prefer-array-flat': 'off',

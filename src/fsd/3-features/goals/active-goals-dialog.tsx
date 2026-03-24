@@ -73,11 +73,11 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
         const currentSelected = currentGoalsSelect
             .filter(x => x.include)
             .map(x => x.goalId)
-            .join();
+            .join(',');
         const initialSelected = goals
             .filter(x => x.include)
             .map(x => x.goalId)
-            .join();
+            .join(',');
         return currentSelected !== initialSelected;
     }, [currentGoalsSelect, goals]);
 
