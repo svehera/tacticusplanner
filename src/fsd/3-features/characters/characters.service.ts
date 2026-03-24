@@ -54,28 +54,28 @@ export class CharactersService {
 
         switch (filterBy) {
             case CharactersFilterBy.NeedToAscend: {
-                return filteredCharactersByName.filter(needToAscendCharacter);
+                return filteredCharactersByName.filter(character => needToAscendCharacter(character));
             }
             case CharactersFilterBy.CanAscend: {
-                return filteredCharactersByName.filter(canAscendCharacter);
+                return filteredCharactersByName.filter(character => canAscendCharacter(character));
             }
             case CharactersFilterBy.NeedToLevel: {
-                return filteredCharactersByName.filter(needToLevelCharacter);
+                return filteredCharactersByName.filter(character => needToLevelCharacter(character));
             }
             case CharactersFilterBy.BlueStarReady: {
-                return filteredCharactersByName.filter(blueStarReady);
+                return filteredCharactersByName.filter(character => blueStarReady(character));
             }
             case CharactersFilterBy.Chaos: {
-                return filteredCharactersByName.filter(filterChaos);
+                return filteredCharactersByName.filter(character => filterChaos(character));
             }
             case CharactersFilterBy.Imperial: {
-                return filteredCharactersByName.filter(filterImperial);
+                return filteredCharactersByName.filter(character => filterImperial(character));
             }
             case CharactersFilterBy.Xenos: {
-                return filteredCharactersByName.filter(filterXenos);
+                return filteredCharactersByName.filter(character => filterXenos(character));
             }
             case CharactersFilterBy.MoW: {
-                return filteredCharactersByName.filter(isMow);
+                return filteredCharactersByName.filter(character => isMow(character));
             }
             case CharactersFilterBy.None: {
                 return filteredCharactersByName;

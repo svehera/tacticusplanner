@@ -91,7 +91,10 @@ export function getLreGuideData(
         .slice(2)
         .map(x => x.replace(character + '_' + section + '_', ''))
         .map(Number);
-    const lre = getLre(character, units.filter(isCharacter));
+    const lre = getLre(
+        character,
+        units.filter(unit => isCharacter(unit))
+    );
     const selectedSections = lre[section].unitsRestrictions.filter((_, index) => restrictionIndexes.includes(index));
 
     const sections = selectedSections.map(x => x.name).join(' & ');

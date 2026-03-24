@@ -68,7 +68,7 @@ export class LegendaryEventService {
     public static getActiveEvent(events?: ILegendaryEventStatic[]): ILegendaryEventStatic | undefined {
         const sevenDaysAgoTs = Date.now() - 7 * DAY_MS;
         const sortedEvents = (events ?? allLegendaryEvents)
-            .filter(isUnfinishedScheduledEvent)
+            .filter(event => isUnfinishedScheduledEvent(event))
             .map(event => ({ event, startDate: Date.parse(event.nextEventDateUtc) }))
             // started in the last 7 days (exclusive) or any future date
             .filter(({ startDate }) => Number.isFinite(startDate) && startDate > sevenDaysAgoTs)

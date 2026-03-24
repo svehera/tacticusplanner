@@ -62,7 +62,10 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
 
     const itemsGrouped = useMemo(() => {
         return map(
-            groupBy(itemsList.filter(filterItem), 'rarity'),
+            groupBy(
+                itemsList.filter(item => filterItem(item)),
+                'rarity'
+            ),
             (items, rarity): IUpgradesGroup => ({
                 label: Rarity[+rarity],
                 rarity: +rarity,

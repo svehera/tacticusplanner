@@ -69,7 +69,7 @@ export const WarOffense2 = () => {
         });
     };
 
-    const teams = teams2.filter(team => !!team.warOffense).filter(isTeamDeployable);
+    const teams = teams2.filter(team => !!team.warOffense).filter(team => isTeamDeployable(team));
 
     const undeployableTeams = teams2.filter(team => !!team.warOffense).filter(team => !isTeamDeployable(team));
 

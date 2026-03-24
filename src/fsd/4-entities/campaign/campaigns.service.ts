@@ -134,8 +134,8 @@ export class CampaignsService {
             const energyPerItem = Number.parseFloat((1 / (dropRate / battle.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
-            enemies.factions = enemies.factions.filter(isString);
-            allies.factions = allies.factions.filter(isString);
+            enemies.factions = enemies.factions.filter(faction => isString(faction));
+            allies.factions = allies.factions.filter(faction => isString(faction));
             if (enemies.factions.length === 0) {
                 console.warn(
                     'no enemy factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured.',

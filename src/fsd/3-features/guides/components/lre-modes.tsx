@@ -34,7 +34,11 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
     });
     const [tracks, setTracks] = useState<string[]>(selectedModes.filter(x => x.includes(character + '_')));
     const { allowedUnits } = useMemo(
-        () => getLreGuideData([character, character + section, ...tracks], units.filter(isCharacter)),
+        () =>
+            getLreGuideData(
+                [character, character + section, ...tracks],
+                units.filter(unit => isCharacter(unit))
+            ),
         [character, section, tracks]
     );
 
