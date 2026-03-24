@@ -158,8 +158,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
                 case 'imperial': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Imperial);
                 }
-                case 'none':
-                default: {
+                case 'none': {
                     return nameFiltered;
                 }
             }

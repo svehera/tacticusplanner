@@ -46,7 +46,7 @@ while true; do
   # Recompute END_LINE as deletion shifts line numbers
   END_LINE=$(grep -n 'autofix-loop-disable' "$CONFIG" | cut -d: -f1)
 
-  npx eslint . --fix
+  npx eslint . --fix --quiet
   npx tsc
   git add -A
   git commit -m "eslint: fix ${RULE}"

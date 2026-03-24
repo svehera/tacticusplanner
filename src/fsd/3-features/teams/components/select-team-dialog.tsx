@@ -99,8 +99,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
                 case 'mows': {
                     return nameFiltered.filter(x => isMow(x));
                 }
-                case 'none':
-                default: {
+                case 'none': {
                     return nameFiltered;
                 }
             }
@@ -115,8 +114,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
             case 'power': {
                 return orderBy(filtered, ['power'], ['desc']);
             }
-            case 'faction':
-            default: {
+            case 'faction': {
                 return filtered;
             }
         }

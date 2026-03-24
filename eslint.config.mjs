@@ -61,10 +61,9 @@ export default defineConfig([
                     },
                 },
             ],
-            // autofix-loop-enable
             'unicorn/no-null': 'off',
-            'unicorn/no-useless-switch-case': 'off',
             'unicorn/no-array-reduce': 'off',
+            // autofix-loop-enable
             'unicorn/no-array-sort': 'off',
             'unicorn/no-array-reverse': 'off',
             'unicorn/no-array-callback-reference': 'off',

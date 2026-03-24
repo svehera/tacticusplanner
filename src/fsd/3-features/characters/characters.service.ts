@@ -77,8 +77,7 @@ export class CharactersService {
             case CharactersFilterBy.MoW: {
                 return filteredCharactersByName.filter(isMow);
             }
-            case CharactersFilterBy.None:
-            default: {
+            case CharactersFilterBy.None: {
                 return filteredCharactersByName;
             }
         }
