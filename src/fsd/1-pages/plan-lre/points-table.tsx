@@ -281,7 +281,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
             let progressByRequirement: Record<string, number> = {};
 
             if (pointsCalculation === PointsCalculation.unearned || pointsCalculation === PointsCalculation.estimated) {
-                const trackProgress = leProgress.tracksProgress.filter(x => x.trackId === track.section)[0];
+                const trackProgress = leProgress.tracksProgress.find(x => x.trackId === track.section);
                 if (trackProgress) {
                     progressByRequirement = LreService.getReqProgressPerTrack(trackProgress);
                 }

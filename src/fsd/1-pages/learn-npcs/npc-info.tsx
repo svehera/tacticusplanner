@@ -30,8 +30,9 @@ export const NpcInfo: React.FC = () => {
 
     const onFactionChange = (newFaction: FactionId) => {
         setFaction(newFaction);
-        const npcs = NpcService.npcDataFull.filter(npc => npc.faction === newFaction);
-        setNpc(npcs[0]);
+        const foundNpc = NpcService.npcDataFull.find(npc => npc.faction === newFaction);
+        if (!foundNpc) return;
+        setNpc(foundNpc);
         setProgressionIndex(0);
     };
 

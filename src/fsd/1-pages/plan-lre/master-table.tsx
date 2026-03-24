@@ -217,7 +217,7 @@ export const MasterTable = () => {
             let progressByRequirement: Record<string, number> = {};
 
             if (pointsCalculation === PointsCalculation.unearned) {
-                const trackProgress = legendaryEventProgress.tracksProgress.filter(x => x.trackId === track.section)[0];
+                const trackProgress = legendaryEventProgress.tracksProgress.find(x => x.trackId === track.section);
                 if (trackProgress) {
                     progressByRequirement = LreService.getReqProgressPerTrack(trackProgress);
                 }
