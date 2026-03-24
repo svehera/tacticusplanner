@@ -253,7 +253,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                 afterLevel: diff.equip2Level ?? char.equip2Level,
                 type: char.equip2?.type ?? base?.equipment3,
             },
-        ].sort(
+        ].toSorted(
             (a, b) =>
                 (order[a.type ?? ''] ?? Number.MAX_SAFE_INTEGER) - (order[b.type ?? ''] ?? Number.MAX_SAFE_INTEGER)
         );

@@ -131,7 +131,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
         setSelectedEnemy(null);
     };
 
-    const sortedWaves = [...battle.waves].sort((a, b) => a.round - b.round);
+    const sortedWaves = battle.waves.toSorted((a, b) => a.round - b.round);
 
     return (
         <>

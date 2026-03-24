@@ -110,9 +110,9 @@ export const Goals = () => {
     );
 
     // Add these sorts to ensure the UI matches the global priority order
-    const sortedShards = [...shardsGoals].sort((a, b) => a.priority - b.priority);
-    const sortedUpgrades = [...upgradeRankOrMowGoals].sort((a, b) => a.priority - b.priority);
-    const sortedAbilities = [...upgradeAbilities].sort((a, b) => a.priority - b.priority);
+    const sortedShards = shardsGoals.toSorted((a, b) => a.priority - b.priority);
+    const sortedUpgrades = upgradeRankOrMowGoals.toSorted((a, b) => a.priority - b.priority);
+    const sortedAbilities = upgradeAbilities.toSorted((a, b) => a.priority - b.priority);
 
     const onslaughtTokensToday = useMemo(
         () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
@@ -182,7 +182,7 @@ export const Goals = () => {
     };
 
     const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => {
-        const currentGoals = [...goals].sort((a, b) => a.priority - b.priority);
+        const currentGoals = goals.toSorted((a, b) => a.priority - b.priority);
         if (item === 'delete' && confirm('Are you sure? The goal will be permanently deleted!')) {
             removeGoal(goalId);
         }

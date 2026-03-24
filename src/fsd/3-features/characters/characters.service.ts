@@ -234,7 +234,7 @@ export class CharactersService {
         }
 
         // Sort using native sort
-        return result.sort((a, b) => b[orderByKey] - a[orderByKey]);
+        return result.toSorted((a, b) => b[orderByKey] - a[orderByKey]);
     }
 
     static capCharacterAtRarity(character: ICharacter2, rarity: Rarity): ICharacter2 {
@@ -440,7 +440,7 @@ export class CharactersService {
             }
         }
 
-        const sorted = Array.from(rarities).sort((a, b) => a - b);
+        const sorted = Array.from(rarities).toSorted((a, b) => a - b);
 
         const index = sorted.indexOf(current);
 
@@ -464,6 +464,6 @@ export class CharactersService {
             }
         }
 
-        return matches.sort((a, b) => a - b)[0] as RarityStars;
+        return matches.toSorted((a, b) => a - b)[0] as RarityStars;
     }
 }

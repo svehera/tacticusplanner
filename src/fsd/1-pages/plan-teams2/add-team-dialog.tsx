@@ -163,7 +163,7 @@ export const AddTeamDialog: React.FC<Props> = ({
 
     const allFactions: FactionId[] = Array.from(
         new Set<FactionId>([...chars.map(c => c.faction), ...mows.map(m => m.faction)])
-    ).sort((a, b) => a.localeCompare(b));
+    ).toSorted((a, b) => a.localeCompare(b));
 
     const warDefenseBlockedCoreCharIdsSet = useMemo(
         () => new Set(warDefenseBlockedCoreCharIds),
@@ -185,7 +185,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                 searchText
             )
         )
-        .sort((a, b) => {
+        .toSorted((a, b) => {
             if (b.rank !== a.rank) return b.rank - a.rank;
             const powerA = Math.pow(a.activeAbilityLevel ?? 0, 2) + Math.pow(a.passiveAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.activeAbilityLevel ?? 0, 2) + Math.pow(b.passiveAbilityLevel ?? 0, 2);
@@ -197,7 +197,7 @@ export const AddTeamDialog: React.FC<Props> = ({
     const filteredMows = mows
         .filter(mow => !selectedMows.includes(mow.snowprintId))
         .filter(mow => Teams2Service.passesMowFilter(mow, allowLockedUnits, minRarity, maxRarity, factions, searchText))
-        .sort((a, b) => {
+        .toSorted((a, b) => {
             const powerA = Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.primaryAbilityLevel ?? 0, 2) + Math.pow(b.secondaryAbilityLevel ?? 0, 2);
             if (powerB !== powerA) return powerB - powerA;

@@ -30,7 +30,7 @@ export class LegendaryEventService {
             const pastEvents = allLegendaryEvents
                 .map(event => ({ event, startDate: Date.parse(safeGet(event, 'nextEventDateUtc') ?? '') }))
                 .filter(({ startDate }) => Number.isFinite(startDate) && startDate < now)
-                .sort((a, b) => b.startDate - a.startDate);
+                .toSorted((a, b) => b.startDate - a.startDate);
             if (pastEvents.length > 0) {
                 startDates.push(new Date(pastEvents[0].startDate));
             } else {
@@ -72,7 +72,7 @@ export class LegendaryEventService {
             .map(event => ({ event, startDate: Date.parse(event.nextEventDateUtc) }))
             // started in the last 7 days (exclusive) or any future date
             .filter(({ startDate }) => Number.isFinite(startDate) && startDate > sevenDaysAgoTs)
-            .sort((a, b) => a.startDate - b.startDate);
+            .toSorted((a, b) => a.startDate - b.startDate);
         return sortedEvents[0]?.event;
     }
 

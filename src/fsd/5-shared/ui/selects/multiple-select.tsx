@@ -34,7 +34,9 @@ export const MultipleSelectCheckmarks = <T extends string>({
             disableCloseOnSelect={disableCloseOnSelect}
             size={size}
             value={selectedValues}
-            options={groupByFirstLetter || sortByAlphabet ? values.sort((a, b) => -b[0].localeCompare(a[0])) : values}
+            options={
+                groupByFirstLetter || sortByAlphabet ? values.toSorted((a, b) => -b[0].localeCompare(a[0])) : values
+            }
             groupBy={groupByFirstLetter ? option => option[0] : undefined}
             onChange={(_, value) => handleChange(value)}
             sx={{ minWidth, maxWidth }}

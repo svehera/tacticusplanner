@@ -290,7 +290,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             }
         }
     };
-    const orderedAllGoals = useMemo(() => [...allGoals].sort((a, b) => a.priority - b.priority), [allGoals]);
+    const orderedAllGoals = useMemo(() => allGoals.toSorted((a, b) => a.priority - b.priority), [allGoals]);
     const columnDefs = useMemo<Array<ColDef<CharacterRaidGoalSelect>>>(() => {
         return [
             {

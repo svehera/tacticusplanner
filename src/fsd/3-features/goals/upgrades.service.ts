@@ -178,7 +178,7 @@ export class UpgradesService {
                 continue;
             }
 
-            const priorities = [...totalByPriority.keys()].sort((a, b) => a - b);
+            const priorities = [...totalByPriority.keys()].toSorted((a, b) => a - b);
             const higherNeedsByPriority = new Map<number, number>();
             let cumulative = 0;
             for (const priority of priorities) {
@@ -1385,7 +1385,7 @@ export class UpgradesService {
             inventory,
             settings,
             cache
-        ).sort((a, b) => {
+        ).toSorted((a, b) => {
             // Sort by priority ascending (undefined treated as Infinity), then daysToComplete descending
             const aPriority = a.priority === undefined ? Number.POSITIVE_INFINITY : a.priority;
             const bPriority = b.priority === undefined ? Number.POSITIVE_INFINITY : b.priority;
@@ -1561,7 +1561,9 @@ export class UpgradesService {
                 (accumulator, goal) => this.reduceGoalsByPriority(accumulator, goal),
                 undefined as ICharacterAscendGoal | undefined
             );
-        const order = [shardGoal, mythicShardGoal].filter(x => x !== undefined).sort((a, b) => a.priority - b.priority);
+        const order = [shardGoal, mythicShardGoal]
+            .filter(x => x !== undefined)
+            .toSorted((a, b) => a.priority - b.priority);
         return order.length === 0 ? undefined : order[0];
     }
 
@@ -1585,7 +1587,7 @@ export class UpgradesService {
                 tokens: this.getOnslaughtTokensForGoal(inventory, characters, mows, goal),
             }))
             .filter(x => x.tokens > 0)
-            .sort((a, b) => b.tokens - a.tokens)[0]?.goal;
+            .toSorted((a, b) => b.tokens - a.tokens)[0]?.goal;
     }
 
     /** Returns our name for a custom onslaught location based on the shards reward. */

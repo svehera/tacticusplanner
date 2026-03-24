@@ -126,15 +126,15 @@ export const LearnCharacters = () => {
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const hitsOptions = uniq(resolvedCharacters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
-        .sort((a, b) => a - b)
+        .toSorted((a, b) => a - b)
         .map(x => x.toString());
 
     const movementOptions = uniq(resolvedCharacters.map(x => x.movement))
-        .sort((a, b) => a - b)
+        .toSorted((a, b) => a - b)
         .map(x => x.toString());
 
     const distanceOptions = uniq(resolvedCharacters.filter(x => !!x.rangeDistance).map(x => x.rangeDistance ?? 1))
-        .sort((a, b) => a - b)
+        .toSorted((a, b) => a - b)
         .map(x => x.toString());
 
     const damageTypesOptions = uniq(resolvedCharacters.flatMap(x => x.damageTypes.all)).map(x => x.toString());
