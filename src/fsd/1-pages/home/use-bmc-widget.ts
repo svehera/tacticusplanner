@@ -28,7 +28,7 @@ export const useBmcWidget = () => {
         });
 
         isScriptSet = true;
-        document.body.appendChild(script);
+        document.body.append(script);
 
         return () => {
             isScriptSet = false;

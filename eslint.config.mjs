@@ -64,7 +64,6 @@ export default defineConfig([
             'unicorn/no-null': 'off',
             'unicorn/no-array-reduce': 'off',
             // autofix-loop-enable
-            'unicorn/prefer-dom-node-append': 'off',
             'unicorn/prefer-dom-node-remove': 'off',
             'unicorn/no-unreadable-iife': 'off',
             'unicorn/prefer-date-now': 'off',
