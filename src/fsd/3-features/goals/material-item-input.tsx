@@ -14,9 +14,10 @@ import { UpgradesService } from './upgrades.service';
 interface Props {
     upgradeRaid: IUpgradeRaid;
     isExhausted?: boolean;
+    showBattleInfo?: boolean;
 }
 
-export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = false }) => {
+export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = false, showBattleInfo }) => {
     const isShard = UpgradesService.isShard(upgradeRaid.id);
     const isMythicShard = UpgradesService.isMythicShard(upgradeRaid.id);
     const canStillFarm = !isExhausted;
@@ -72,7 +73,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = 
                             }
                             className="flex-box between"
                             style={{ opacity: location.isCompleted ? 0.5 : 1 }}>
-                            <CampaignLocation location={location} unlocked={true} />
+                            <CampaignLocation location={location} unlocked={true} showBattleInfo={showBattleInfo} />
                         </li>
                     );
                 })}

@@ -51,6 +51,7 @@ export const DailyRaids = () => {
         campaignsProgress,
         dailyRaidsPreferences,
         inventory,
+        viewPreferences,
     } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
@@ -144,7 +145,7 @@ export const DailyRaids = () => {
         resolvedMows,
         campaignsProgress,
     ]);
-
+    const showBattleInfo = !!viewPreferences.showBattleInfo;
     const infiniteEstimatedRanks: IEstimatedUpgrades = useMemo(() => {
         return UpgradesService.getUpgradesEstimatedDays(
             {
@@ -193,6 +194,7 @@ export const DailyRaids = () => {
                 updateInventory={saveInventoryUpdateChanges}
                 updateInventoryAny={() => setHasChanges(true)}
                 scrollToCharSnowprintId={charSnowprintId ?? undefined}
+                showBattleInfo={showBattleInfo}
             />
 
             {estimatedRanks.upgradesRaids.length > 0 && (
@@ -202,6 +204,7 @@ export const DailyRaids = () => {
                         infiniteEstimatedRanks.upgradesRaids[0],
                         estimatedRanks.upgradesRaids[0]
                     )}
+                    showBattleInfo={showBattleInfo}
                 />
             )}
         </div>

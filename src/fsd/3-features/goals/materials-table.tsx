@@ -45,7 +45,9 @@ enum MaterialType {
     MythicShard,
     Regular,
 }
-
+/**
+ * Single source of truth for material identification and formatting
+ */
 const getMaterialMetadata = (id: string, rarity?: number | string) => {
     const isShard = id.startsWith('shards_');
     const isMythicShard = id.startsWith('mythicShards_');
@@ -61,6 +63,7 @@ const getMaterialMetadata = (id: string, rarity?: number | string) => {
 
     return {
         type,
+        // Cast this to RarityString to satisfy strict component props
         rarityStr: rarityString as RarityString,
         className: rarityString.toLowerCase().replace(' ', '-'),
     };
@@ -151,6 +154,7 @@ export const MaterialsTable: React.FC<Props> = ({
                         tooltipField: 'relatedCharacters',
                         headerName: 'Characters',
                         maxWidth: 120,
+                        valueFormatter: params => params.value?.join(', ') ?? '',
                     },
                 ],
             },
@@ -210,6 +214,7 @@ export const MaterialsTable: React.FC<Props> = ({
                     {
                         columnGroupShow: 'closed',
                         valueGetter: params => params.data?.locations.map(x => x.id) ?? [],
+                        valueFormatter: params => params.value?.join(', ') ?? '',
                         cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                             const locations: ICampaignBattleComposed[] = props.data?.locations ?? [];
                             const usedLocations = locations.filter(x => x.isSuggested).length;
@@ -231,6 +236,7 @@ export const MaterialsTable: React.FC<Props> = ({
                         columnGroupShow: 'open',
                         headerName: 'Used',
                         valueGetter: params => params.data?.locations.filter(x => x.isSuggested).map(x => x.id) ?? [],
+                        valueFormatter: params => params.value?.join(', ') ?? '',
                         cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => (
                             <div className="flex-box gap5 wrap">
                                 {params.data?.locations

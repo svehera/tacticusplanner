@@ -11,9 +11,10 @@ import { MaterialItemInput } from '@/fsd/3-features/goals/material-item-input';
 interface Props {
     raids: IUpgradeRaid[];
     bonusRaids: IUpgradeRaid[];
+    showBattleInfo?: boolean;
 }
 
-export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
+export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids, showBattleInfo }: Props) => {
     const locs = raids.flatMap(raid => raid.raidLocations);
     const energySpent = sum(locs.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
     const raidsCount = sum(locs.map(loc => loc.raidsAlreadyPerformed));
@@ -40,7 +41,7 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                             <div
                                 className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
                                 key={raid.id + '-' + index}>
-                                <MaterialItemInput upgradeRaid={raid} />
+                                <MaterialItemInput upgradeRaid={raid} showBattleInfo={showBattleInfo} />
                             </div>
                         ))}
                         {completedRaids.map((raid, index) => (
@@ -50,6 +51,7 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                                 <MaterialItemInput
                                     upgradeRaid={{ ...raid, relatedCharacters: [] }}
                                     isExhausted={true}
+                                    showBattleInfo={showBattleInfo}
                                 />
                             </div>
                         ))}
@@ -68,7 +70,7 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                             <div
                                 className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
                                 key={raid.id + '-' + index}>
-                                <MaterialItemInput upgradeRaid={raid} />
+                                <MaterialItemInput upgradeRaid={raid} showBattleInfo={showBattleInfo} />
                             </div>
                         ))}
                     </div>

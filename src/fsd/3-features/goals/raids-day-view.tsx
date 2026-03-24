@@ -9,9 +9,10 @@ import { MaterialItemView } from '@/fsd/3-features/goals/material-item-view';
 interface Props {
     day: IUpgradesRaidsDay;
     title: string;
+    showBattleInfo?: boolean;
 }
 
-export const RaidsDayView: React.FC<Props> = ({ day, title }) => {
+export const RaidsDayView: React.FC<Props> = ({ day, title, showBattleInfo }) => {
     return (
         <Card
             variant="outlined"
@@ -34,7 +35,7 @@ export const RaidsDayView: React.FC<Props> = ({ day, title }) => {
                         .map((raid, index) => {
                             return (
                                 <li key={raid.id + index}>
-                                    <MaterialItemView upgradeRaid={raid} />
+                                    <MaterialItemView upgradeRaid={raid} showBattleInfo={showBattleInfo} />
                                 </li>
                             );
                         })}

@@ -33,6 +33,7 @@ interface Props {
     upgrades: Record<string, number>;
     updateInventory: (materialId: string, value: number) => void;
     updateInventoryAny: () => void;
+    showBattleInfo?: boolean;
 }
 
 type ReferenceElement = HTMLDivElement | null;
@@ -44,6 +45,7 @@ export const RaidsPlan: React.FC<Props> = ({
     updateInventoryAny,
     upgrades,
     updateInventory,
+    showBattleInfo,
 }) => {
     const { viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -84,13 +86,13 @@ export const RaidsPlan: React.FC<Props> = ({
     };
 
     const toggleBattleInfo = (show: boolean): void => {
-        console.log('Toggling battle info to', show, 'current value is', viewPreferences.showBattleInfo);
         dispatch.viewPreferences({ type: 'Update', setting: 'showBattleInfo', value: show });
     };
-
+    // Iterate over the related characters for the current material and create a mapping of character snowprint IDs to the index of the material in the inProgressMaterials array
     const characterToMaterialMap: CharacterToMaterialIndexMap = useMemo(() => {
         const characterIndexMap: CharacterToMaterialIndexMap = {};
-
+        // Check if this snowprintId has ALREADY been recorded.
+        // If it hasn't, this is the FIRST time we've seen it, so record the index
         estimatedRanks.inProgressMaterials.forEach((material, materialIndex) => {
             material.relatedCharacters.forEach(fullName => {
                 const unit = CharactersService.getUnit(fullName);
@@ -128,13 +130,15 @@ export const RaidsPlan: React.FC<Props> = ({
 
     useEffect(() => {
         if (scrollToCharSnowprintId) {
+            // Use a brief delay to ensure the scrollable parent container and its content
+            // have finished rendering and measurement.
             const timer = setTimeout(() => {
                 scrollToTarget();
             }, 100);
 
-            return () => clearTimeout(timer);
+            return () => clearTimeout(timer); // Cleanup timer on unmount
         }
-    }, [scrollToCharSnowprintId, scrollToTarget]);
+    }, [scrollToCharSnowprintId, scrollToTarget]); // Rerun if the ID changes
 
     useEffect(() => {
         if (estimatedRanks.upgradesRaids.length > 3) {
@@ -290,7 +294,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                                         desiredQuantity={material.requiredCount}
                                                         relatedCharacterSnowprintIds={material.relatedCharacters}
                                                         locations={material.locations}
-                                                        showBattleInfo={viewPreferences.showBattleInfo}
+                                                        showBattleInfo={!!viewPreferences.showBattleInfo}
                                                     />
                                                 </div>
                                             ))}
@@ -334,7 +338,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                                         desiredQuantity={material.requiredCount}
                                                         relatedCharacterSnowprintIds={material.relatedCharacters}
                                                         locations={material.locations}
-                                                        showBattleInfo={viewPreferences.showBattleInfo}
+                                                        showBattleInfo={!!viewPreferences.showBattleInfo}
                                                     />
                                                 </div>
                                             ))}
@@ -390,7 +394,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                                             desiredQuantity={material.requiredCount}
                                                             relatedCharacterSnowprintIds={material.relatedCharacters}
                                                             locations={material.locations}
-                                                            showBattleInfo={viewPreferences.showBattleInfo}
+                                                            showBattleInfo={!!viewPreferences.showBattleInfo}
                                                         />
                                                     </div>
                                                 ))}
@@ -435,7 +439,14 @@ export const RaidsPlan: React.FC<Props> = ({
                                     {estimatedRanks.upgradesRaids
                                         .slice(upgradesPaging.start, upgradesPaging.end)
                                         .map((day, index) => {
-                                            return <RaidsDayView key={index} day={day} title={'Day ' + (index + 1)} />;
+                                            return (
+                                                <RaidsDayView
+                                                    key={index}
+                                                    day={day}
+                                                    title={'Day ' + (index + 1)}
+                                                    showBattleInfo={showBattleInfo ?? !!viewPreferences.showBattleInfo}
+                                                />
+                                            );
                                         })}
                                     {!upgradesPaging.completed && (
                                         <Button

@@ -63,17 +63,32 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
                             title={
                                 <>
                                     <div>
-                                        Battle: <b>{location.nodeNumber ?? 0}</b>
+                                        Campaign: <b>{location.campaign}</b>
+                                    </div>
+                                    <div>
+                                        Battle: <b>{locationNumber ?? 0}</b>
                                     </div>
                                     <div>
                                         Enemies: <b>{location.enemiesTotal ?? 0}</b>
                                     </div>
                                     <div>
-                                        Factions:{' '}
+                                        Enemy Power: <b>{location.enemyPower ?? 0}</b>
+                                    </div>
+                                    <div>
+                                        Enemy Factions:{' '}
                                         <b>
                                             {Array.isArray(location.enemiesFactions) &&
                                             location.enemiesFactions.length > 0
                                                 ? location.enemiesFactions.join(', ')
+                                                : 'N/A'}
+                                        </b>
+                                    </div>
+                                    <div>
+                                        Playable Factions:{' '}
+                                        <b>
+                                            {Array.isArray(location.alliesFactions) &&
+                                            location.alliesFactions.length > 0
+                                                ? location.alliesFactions.join(', ')
                                                 : 'N/A'}
                                         </b>
                                     </div>

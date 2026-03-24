@@ -10,9 +10,10 @@ import { MaterialItemTitle } from '@/fsd/3-features/goals/material-item-title';
 
 interface Props {
     upgradeRaid: IUpgradeRaid;
+    showBattleInfo?: boolean;
 }
 
-export const MaterialItemView: React.FC<Props> = ({ upgradeRaid }) => {
+export const MaterialItemView: React.FC<Props> = ({ upgradeRaid, showBattleInfo }) => {
     return (
         <div style={{ opacity: upgradeRaid.isBlocked ? 0.5 : 1 }}>
             <MaterialItemTitle upgradeRaid={upgradeRaid} />
@@ -22,7 +23,7 @@ export const MaterialItemView: React.FC<Props> = ({ upgradeRaid }) => {
                         <li
                             key={'material-item-view-' + upgradeRaid.relatedGoals.join(',') + '-' + location.id}
                             className="flex-box gap5 justify-between">
-                            <CampaignLocation location={location} unlocked={true} />
+                            <CampaignLocation location={location} unlocked={true} showBattleInfo={showBattleInfo} />
                         </li>
                     );
                 })}
