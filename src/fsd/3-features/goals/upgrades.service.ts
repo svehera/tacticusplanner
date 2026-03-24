@@ -2055,8 +2055,7 @@ export class UpgradesService {
                     .filter(x => !!x);
                 for (const upgrade of upgrades) {
                     if (upgrade.crafted) {
-                        result.push(...upgrade.baseUpgrades.map(x => x.id));
-                        result.push(...upgrade.craftedUpgrades.map(x => x.id));
+                        result.push(...upgrade.baseUpgrades.map(x => x.id), ...upgrade.craftedUpgrades.map(x => x.id));
                     }
                 }
 
