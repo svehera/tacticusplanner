@@ -32,10 +32,10 @@ export const useBmcWidget = () => {
 
         return () => {
             isScriptSet = false;
-            document.body.removeChild(script);
+            script.remove();
             let bmcButton = document.querySelector('#bmc-wbtn');
             while (bmcButton) {
-                document.body.removeChild(bmcButton);
+                bmcButton.remove();
                 bmcButton = document.querySelector('#bmc-wbtn');
             }
         };
