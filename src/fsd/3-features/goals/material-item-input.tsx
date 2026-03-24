@@ -77,7 +77,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = 
             {/* Right: name + locations */}
             <div className="flex w-full min-w-0 flex-col gap-0.5">
                 <Tooltip title={upgradeRaid.label}>
-                    <span className="mb-1 truncate text-sm leading-tight font-medium">{upgradeRaid.label}</span>
+                    <span className="mb-1 truncate text-xs leading-tight">{upgradeRaid.label}</span>
                 </Tooltip>
                 <div className="text-muted-fg flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs">
                     {(expanded ? upgradeRaid.raidLocations : upgradeRaid.raidLocations.slice(0, visibleLocations)).map(
