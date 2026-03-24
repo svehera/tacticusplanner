@@ -63,8 +63,6 @@ export default defineConfig([
             ],
             'unicorn/no-null': 'off',
             'unicorn/no-array-reduce': 'off',
-            // autofix-loop-enable
-            // autofix-loop-disable
         },
     },
     ...compat.extends(
