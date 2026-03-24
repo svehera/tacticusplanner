@@ -84,7 +84,7 @@ export const RaidsPlan: React.FC<Props> = ({
     const updateView = (tableView: boolean): void => {
         dispatch.viewPreferences({ type: 'Update', setting: 'raidsTableView', value: tableView });
     };
-
+    //Adds toggle to show/hide battle info in the raids plan, which is then passed down to the RaidsDayView and RaidUpgradeMaterialCard components to conditionally render battle info based on the user's preference.
     const toggleBattleInfo = (show: boolean): void => {
         dispatch.viewPreferences({ type: 'Update', setting: 'showBattleInfo', value: show });
     };
