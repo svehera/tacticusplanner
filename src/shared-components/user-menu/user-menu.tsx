@@ -38,7 +38,9 @@ function stringToColor(string: string) {
     let index;
 
     for (index = 0; index < string.length; index += 1) {
-        hash = string.charCodeAt(index) + ((hash << 5) - hash);
+        const character = string.codePointAt(index);
+        if (!character) throw new Error('invalid codePoint');
+        hash = character + ((hash << 5) - hash);
     }
 
     let color = '#';
