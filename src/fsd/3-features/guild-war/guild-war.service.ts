@@ -52,7 +52,7 @@ export class GuildWarService {
 
     public static getTotalRarityCaps(bfLevel: number): Record<Rarity, number> {
         const totalRarity = this.gwData.zones.flatMap(section =>
-            Array.from({ length: section.count }, () => section.rarityCaps[bfLevel].caps).flatMap(x => x)
+            Array.from({ length: section.count }, () => section.rarityCaps[bfLevel].caps).flat()
         );
 
         return mapValues(groupBy(totalRarity), x => x.length * 2) as Record<Rarity, number>;

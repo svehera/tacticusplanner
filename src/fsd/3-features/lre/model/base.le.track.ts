@@ -80,10 +80,7 @@ export class LETrack implements ILegendaryEventTrack {
 
         if (!this.isAutoTeams(settings)) {
             const result2: Record<string, Array<ICharacter2 | undefined>> = {};
-            const uniqChars = uniqBy(
-                Object.values(result).flatMap(x => x),
-                'name'
-            );
+            const uniqChars = uniqBy(Object.values(result).flat(), 'name');
 
             const ordered = orderBy(uniqChars, [settings.orderBy], [settings.direction]).filter(x =>
                 onlyUnlocked ? x.rank > Rank.Locked : true

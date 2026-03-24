@@ -153,6 +153,6 @@ export class MowsService {
             return [];
         }
         const upgrades = key === 'primary' ? mow.primaryAbility : mow.secondaryAbility;
-        return upgrades.recipes.slice(levelStart - 1, levelEnd - 1).flatMap(upgrades => upgrades);
+        return upgrades.recipes.slice(levelStart - 1, levelEnd - 1).flat();
     }
 }
