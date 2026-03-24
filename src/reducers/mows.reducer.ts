@@ -44,8 +44,8 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
             let existingMow = state[existingMowIndex];
 
             if (!existingMow) {
-                state.push({ ...MowsService.resolveToStatic(mow.id), ...mow } as IMow | IMow2);
-                existingMow = state[state.length - 1];
+                existingMow = { ...MowsService.resolveToStatic(mow.id), ...mow } as IMow | IMow2;
+                state.push(existingMow);
             }
             const rarityStars = rarityToStars[mow.rarity];
 

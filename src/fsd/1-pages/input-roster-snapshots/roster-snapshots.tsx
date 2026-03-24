@@ -408,9 +408,11 @@ export const RosterSnapshots = () => {
                 return;
             }
             const resolved: IRosterSnapshot[] = [];
-            resolved.push(rosterSnapshots.base);
+            let latest = rosterSnapshots.base;
+            resolved.push(latest);
             for (const diff of rosterSnapshots.diffs) {
-                resolved.push(RosterSnapshotsService.resolveSnapshotDiff(resolved[resolved.length - 1], diff));
+                latest = RosterSnapshotsService.resolveSnapshotDiff(latest, diff);
+                resolved.push(latest);
             }
             resolved.push(snapshot);
 

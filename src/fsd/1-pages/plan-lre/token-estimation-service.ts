@@ -432,7 +432,7 @@ export class TokenEstimationService {
             const token: TokenUse = this.computeNextToken(
                 tracks,
                 resolvedTeams,
-                tokens.length > 0 ? tokens[tokens.length - 1] : undefined
+                tokens.length > 0 ? tokens.at(-1) : undefined
             );
             if (token.team === undefined) break;
             this.markRestrictionsAsCleared(token, tracks.find(x => x.trackId === token.team!.section)!);

@@ -183,7 +183,8 @@ describe('TokenEstimationService', () => {
 
             // Mark the three default restrictions as completed in the first battle of alpha and beta
             for (const track of [alphaTrack, betaTrack]) {
-                const battle = track.battles[track.battles.length - 1]; // battle 0
+                const battle = track.battles.at(-1); // battle 0
+                if (!battle) throw new Error('missing battle');
                 for (const index of [0, 1, 2]) {
                     battle.requirementsProgress[index].completed = true;
                 }
@@ -209,12 +210,8 @@ describe('TokenEstimationService', () => {
             };
 
             // Mark 'Pierce' as already cleared in alpha battle 0, and 'Power' as already cleared in beta battle 0
-            alphaTrack.battles[alphaTrack.battles.length - 1].requirementsProgress.find(
-                r => r.id === 'Pierce'
-            )!.completed = true;
-            betaTrack.battles[betaTrack.battles.length - 1].requirementsProgress.find(
-                r => r.id === 'Power'
-            )!.completed = true;
+            alphaTrack.battles.at(-1)!.requirementsProgress.find(r => r.id === 'Pierce')!.completed = true;
+            betaTrack.battles.at(-1)!.requirementsProgress.find(r => r.id === 'Power')!.completed = true;
 
             // Simulate that the last token used was team1 in alpha, clearing 'Pierce' in battle 0
             const lastToken = new TokenUse();
@@ -356,7 +353,8 @@ describe('TokenEstimationService', () => {
 
                 // Mark the three default restrictions as completed in battle 0 for all tracks
                 for (const track of [alphaTrack, betaTrack, gammaTrack]) {
-                    const battle = track.battles[track.battles.length - 1]; // battle 0
+                    const battle = track.battles.at(-1); // battle 0
+                    if (!battle) throw new Error('missing battle');
                     for (const index of [0, 1, 2]) {
                         battle.requirementsProgress[index].completed = true;
                     }
@@ -581,7 +579,8 @@ describe('TokenEstimationService', () => {
             };
 
             // Mark all restrictions that the teams could have completed as completed in battle 0
-            const battle0 = track.battles[track.battles.length - 1]; // battle 0
+            const battle0 = track.battles.at(-1); // battle 0
+            if (!battle0) throw new Error('missing battle');
             for (const requirement of battle0.requirementsProgress) {
                 if (
                     team1.restrictionsIds.includes(requirement.id) ||
@@ -594,7 +593,8 @@ describe('TokenEstimationService', () => {
             battle0.completed = battle0.requirementsProgress.every(requirement => requirement.completed);
 
             // In battle 1, leave 'Power' incomplete (no team can clear it), and mark the rest as completed
-            const battle1 = track.battles[track.battles.length - 2]; // battle 1
+            const battle1 = track.battles.at(-2); // battle 1
+            if (!battle1) throw new Error('missing battle');
             for (const requirement of battle1.requirementsProgress) {
                 if (requirement.id !== 'Power') {
                     requirement.completed = true;

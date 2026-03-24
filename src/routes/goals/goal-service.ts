@@ -43,7 +43,9 @@ export class GoalService {
         ];
         if (goalEstimate !== undefined) {
             if (!goalEstimate.daysLeft) {
-                return GoalService.getColorString(kBgColors[kBgColors.length - 1]);
+                const colorObject = kBgColors.at(-1);
+                if (!colorObject) throw new Error('missing colors');
+                return GoalService.getColorString(colorObject);
             }
 
             if (goalsColorCoding === 'Battle Pass Season') {
@@ -94,6 +96,8 @@ export class GoalService {
                 );
             }
         }
-        return GoalService.getColorString(kBgColors[kBgColors.length - 1]);
+        const colorObject = kBgColors.at(-1);
+        if (!colorObject) throw new Error('missing colors');
+        return GoalService.getColorString(colorObject);
     }
 }

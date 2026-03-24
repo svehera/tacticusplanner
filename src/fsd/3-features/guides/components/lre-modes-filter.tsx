@@ -28,7 +28,7 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
     });
 
     const [tracks, setTracks] = useState<string[]>(
-        selectedModes.filter(x => ['0', '1', '2', '3', '4'].includes(x[x.length - 1]))
+        selectedModes.filter(x => ['0', '1', '2', '3', '4'].includes(x.at(-1) ?? ''))
     );
 
     const lre = legendaryEvent === 'any' ? null : getLre(legendaryEvent);

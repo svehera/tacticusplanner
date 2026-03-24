@@ -272,8 +272,9 @@ export class LeProgressService {
                 return chestMilestone.cumulativePoints;
             }
         }
-
-        return model.pointsMilestones[model.pointsMilestones.length - 1].cumulativePoints;
+        const finalCumulativePoints = model.pointsMilestones.at(-1)?.cumulativePoints;
+        if (finalCumulativePoints === undefined) throw new Error('missing cumulative points');
+        return finalCumulativePoints;
     }
 
     private static computeAverageBattles(pointsForNextMilestone: number): string {
