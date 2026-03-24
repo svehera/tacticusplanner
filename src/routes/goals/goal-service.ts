@@ -85,7 +85,7 @@ export class GoalService {
 
                 const nextDateSeasonIndex = Math.max(0, Math.floor(msDifference / msPerRaidSeason));
 
-                const currentMs = new Date().getTime();
+                const currentMs = Date.now();
                 const msDifferenceCurrent = currentMs - raidSeasonStart;
                 const currentSeasonIndex = Math.floor(msDifferenceCurrent / msPerRaidSeason);
 

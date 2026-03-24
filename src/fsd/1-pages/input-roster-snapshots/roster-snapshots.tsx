@@ -396,7 +396,7 @@ export const RosterSnapshots = () => {
 
     const createAndDispatchSnapshot = useCallback(
         (name: string) => {
-            const snapshot = RosterSnapshotsService.createSnapshot(name, new Date().getTime(), chars, mows);
+            const snapshot = RosterSnapshotsService.createSnapshot(name, Date.now(), chars, mows);
             if (rosterSnapshots.base === undefined) {
                 dispatch.rosterSnapshots({
                     type: 'Set',

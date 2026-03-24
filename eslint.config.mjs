@@ -64,7 +64,6 @@ export default defineConfig([
             'unicorn/no-null': 'off',
             'unicorn/no-array-reduce': 'off',
             // autofix-loop-enable
-            'unicorn/prefer-date-now': 'off',
             'unicorn/no-immediate-mutation': 'off',
             'unicorn/prefer-set-has': 'off',
             'unicorn/no-empty-file': 'off',

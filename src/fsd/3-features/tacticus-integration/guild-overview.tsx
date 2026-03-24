@@ -37,7 +37,7 @@ const DateFormatter: React.FC<{ value: string | null | undefined }> = ({ value }
 
     const date = new Date(value);
     const formattedDate = date.toLocaleDateString();
-    const daysAgo = Math.floor((new Date().getTime() - date.getTime()) / (1000 * 3600 * 24));
+    const daysAgo = Math.floor((Date.now() - date.getTime()) / (1000 * 3600 * 24));
 
     return (
         <span>

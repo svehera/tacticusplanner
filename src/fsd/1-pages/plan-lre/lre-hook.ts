@@ -34,7 +34,7 @@ export const useLre = () => {
         if (event.id !== legendaryEventId) return false;
         const startDate = new Date(event.nextEventDateUtc ?? '');
         const endDate = startDate.getTime() + 7 * 24 * 60 * 60 * 1000;
-        const now = new Date().getTime();
+        const now = Date.now();
         return now >= startDate.getTime() && now <= endDate;
     }, [legendaryEventId]);
 
