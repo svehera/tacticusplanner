@@ -61,7 +61,7 @@ export default defineConfig([
                     },
                 },
             ],
-            // Temporary disabling of rules; reenable and fix one-at-a-time
+            // autofix-loop-enable
             'unicorn/no-useless-undefined': 'off',
             'unicorn/no-null': 'off',
             'unicorn/no-useless-switch-case': 'off',
@@ -101,6 +101,7 @@ export default defineConfig([
             'unicorn/prefer-code-point': 'off',
             'unicorn/prefer-optional-catch-binding': 'off',
             'unicorn/prefer-blob-reading-methods': 'off',
+            // autofix-loop-disable
         },
     },
     ...compat.extends(
