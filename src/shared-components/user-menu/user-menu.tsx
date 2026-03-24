@@ -111,26 +111,20 @@ export const UserMenu = () => {
         navigate(url);
     };
 
-    const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
 
         if (file) {
-            const reader = new FileReader();
+            try {
+                const content = await file.text();
+                const personalData: IPersonalData2 = convertData(JSON.parse(content));
+                personalData.modifiedDate = new Date();
 
-            reader.addEventListener('load', (event: ProgressEvent<FileReader>) => {
-                try {
-                    const content = event.target?.result as string;
-                    const personalData: IPersonalData2 = convertData(JSON.parse(content));
-                    personalData.modifiedDate = new Date();
-
-                    dispatch.setStore(new GlobalState(personalData), true, false);
-                    enqueueSnackbar('Import successful', { variant: 'success' });
-                } catch {
-                    enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
-                }
-            });
-
-            reader.readAsText(file);
+                dispatch.setStore(new GlobalState(personalData), true, false);
+                enqueueSnackbar('Import successful', { variant: 'success' });
+            } catch {
+                enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
+            }
         }
     };
 

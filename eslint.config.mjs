@@ -64,7 +64,6 @@ export default defineConfig([
             'unicorn/no-null': 'off',
             'unicorn/no-array-reduce': 'off',
             // autofix-loop-enable
-            'unicorn/prefer-blob-reading-methods': 'off',
             // autofix-loop-disable
         },
     },
