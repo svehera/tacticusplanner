@@ -161,8 +161,8 @@ export const Guides: React.FC = () => {
                     // On subsequent pages, append while deduplicating by teamId
                     setTeams(previousTeams => {
                         const map = new Map<number, IGuide>();
-                        previousTeams.forEach(t => map.set(t.teamId, t));
-                        response.teams.forEach(t => map.set(t.teamId, t));
+                        for (const t of previousTeams) map.set(t.teamId, t);
+                        for (const t of response.teams) map.set(t.teamId, t);
                         return Array.from(map.values());
                     });
                 }
@@ -187,8 +187,8 @@ export const Guides: React.FC = () => {
             if (response) {
                 setTeams(previous => {
                     const map = new Map<number, IGuide>();
-                    previous.forEach(t => map.set(t.teamId, t));
-                    response.teams.forEach(t => map.set(t.teamId, t));
+                    for (const t of previous) map.set(t.teamId, t);
+                    for (const t of response.teams) map.set(t.teamId, t);
                     return Array.from(map.values());
                 });
                 setNextQueryParameters(response.next);
@@ -289,10 +289,10 @@ export const Guides: React.FC = () => {
         try {
             const { error } = await removeHonorTeamApi(teamId);
             if (error) {
-                console.error('Error while remove team honor ', error);
+                console.error('Error while remove team honor', error);
             }
         } catch (error) {
-            console.error('Error while remove team honor ', error);
+            console.error('Error while remove team honor', error);
         } finally {
             setLoading(false);
         }
@@ -308,21 +308,21 @@ export const Guides: React.FC = () => {
                 {rejectedTeams.length > 0 && (
                     <>
                         <h3>Rejected</h3>
-                        <div className="flex-box gap20 start wrap">{renderTeams(rejectedTeams)}</div>
+                        <div className="flex-box gap20 wrap start">{renderTeams(rejectedTeams)}</div>
                     </>
                 )}
 
                 {pendingTeams.length > 0 && (
                     <>
                         <h3>Pending</h3>
-                        <div className="flex-box gap20 start wrap">{renderTeams(pendingTeams)}</div>
+                        <div className="flex-box gap20 wrap start">{renderTeams(pendingTeams)}</div>
                     </>
                 )}
 
                 {approvedTeams.length > 0 && (
                     <>
                         <h3>Approved</h3>
-                        <div className="flex-box gap20 start wrap">{renderTeams(approvedTeams)}</div>
+                        <div className="flex-box gap20 wrap start">{renderTeams(approvedTeams)}</div>
                     </>
                 )}
             </div>
@@ -487,7 +487,7 @@ export const Guides: React.FC = () => {
 
     const renderTeams = (teamList: IGuide[]) => {
         return (
-            <div className="flex-box gap20 start wrap">
+            <div className="flex-box gap20 wrap start">
                 {teamList.map(team => (
                     <GuideCard
                         key={team.teamId}
@@ -574,7 +574,7 @@ export const Guides: React.FC = () => {
             {activeTab === GuidesGroup.myTeams ? (
                 renderMyTeams(teams)
             ) : (
-                <div className="flex-box gap20 start wrap">{renderTeams(teams)}</div>
+                <div className="flex-box gap20 wrap start">{renderTeams(teams)}</div>
             )}
 
             {!!viewGuide && (

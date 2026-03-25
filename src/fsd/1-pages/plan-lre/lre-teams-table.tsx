@@ -27,6 +27,7 @@ import { ILegendaryEvent, ILegendaryEventTrack, ILegendaryEventTrackRequirement,
 import { LreTile } from './lre-tile';
 import { ITableRow } from './lre.models';
 import { SelectedTeamsTable } from './selected-teams-table';
+import { buildSelectedTeamsRows, ISelectedTeamTableCell } from './selected-teams-table.utils';
 import { TrackRequirementCheck } from './track-requirement-check';
 
 interface Props {
@@ -112,23 +113,10 @@ export const LreTeamsTable: React.FC<Props> = ({
 
     const rows: Array<ITableRow> = useMemo(() => getRows(suggestedTeams), [suggestedTeams]);
 
-    const selectedTeamsRows: Array<ITableRow> = useMemo(() => {
-        const teamRecord: Record<string, ICharacter2[]> = {};
-
-        selectedTeams.forEach(team => {
-            team.restrictionsIds.forEach(id => {
-                const existingCharacters = teamRecord[id] ?? [];
-                const newTeam = (team.charSnowprintIds ?? [])
-                    .slice(0, 5)
-                    .map(charId => resolvedCharactersBySnowprintId[charId])
-                    .filter((character): character is ICharacter2 => !!character);
-
-                teamRecord[id] = [...existingCharacters, ...newTeam];
-            });
-        });
-
-        return getRows(teamRecord);
-    }, [resolvedCharactersBySnowprintId, selectedTeams]);
+    const selectedTeamsRows: Array<ITableRow<ISelectedTeamTableCell | string>> = useMemo(
+        () => buildSelectedTeamsRows(selectedTeams, resolvedCharactersBySnowprintId),
+        [resolvedCharactersBySnowprintId, selectedTeams]
+    );
 
     useEffect(() => {
         gridReference.current?.api?.sizeColumnsToFit();
@@ -196,14 +184,14 @@ export const LreTeamsTable: React.FC<Props> = ({
 
         // Sort `columns` by using the order from `columnIds`, keeping unspecified columns in original order
         columns.sort((a, b) => {
-            const orderA = columnOrder[a.field!] !== undefined ? columnOrder[a.field!] : Infinity;
-            const orderB = columnOrder[b.field!] !== undefined ? columnOrder[b.field!] : Infinity;
+            const orderA = columnOrder[a.field!] === undefined ? Infinity : columnOrder[a.field!];
+            const orderB = columnOrder[b.field!] === undefined ? Infinity : columnOrder[b.field!];
             return orderA - orderB;
         });
 
-        columns.forEach((column, index) => {
+        for (const [index, column] of columns.entries()) {
             column.colSpan = () => (index === 0 ? selectedRequirements.length : 1);
-        });
+        }
 
         return columns;
     }
@@ -212,12 +200,12 @@ export const LreTeamsTable: React.FC<Props> = ({
         const size = Math.max(...Object.values(teams).map(x => x.length));
         const rows: Array<ITableRow> = Array.from({ length: size }, () => ({}));
 
-        rows.forEach((row, index) => {
+        for (const [index, row] of rows.entries()) {
             for (const team in teams) {
                 const char = teams[team][index];
                 row[team] = char ?? '';
             }
-        });
+        }
 
         return rows;
     }

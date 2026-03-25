@@ -110,19 +110,17 @@ export class CampaignsService {
      */
     private static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
         const result: Record<string, ICampaignBattleComposed> = {};
-        Object.entries(battleData).forEach(([battleDataKey, battle]) => {
+        for (const [battleDataKey, battle] of Object.entries(battleData)) {
             if (battle.energyCost == 0) {
                 // Indomitus battles 1-5 don't cost anything and can't be raided.
-                return;
+                continue;
             }
 
             const reward = this.getReward(battle);
             const config = campaignConfigs[battle.campaignType as CampaignType];
             const recipe = recipeDataByName[reward];
-            if (!recipe) {
-                if (reward.length > 0 && !reward.startsWith('shards_') && !reward.startsWith('mythicShards_')) {
-                    console.warn('no recipe found', reward, battle);
-                }
+            if (!recipe && reward.length > 0 && !reward.startsWith('shards_') && !reward.startsWith('mythicShards_')) {
+                console.warn('no recipe found', reward, battle);
             }
             let dropRate = 0;
             const guaranteed = battle.rewards.guaranteed.find(x => x.id == reward);
@@ -131,23 +129,23 @@ export class CampaignsService {
             if (potential) {
                 dropRate += potential.effective_rate;
             }
-            dropRate = dropRate.toFixed(3) === 'NaN' ? 0 : parseFloat(dropRate.toFixed(3));
+            dropRate = dropRate.toFixed(3) === 'NaN' ? 0 : Number.parseFloat(dropRate.toFixed(3));
 
-            const energyPerItem = parseFloat((1 / (dropRate / battle.energyCost)).toFixed(2));
+            const energyPerItem = Number.parseFloat((1 / (dropRate / battle.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
             enemies.factions = enemies.factions.filter(isString);
             allies.factions = allies.factions.filter(isString);
             if (enemies.factions.length === 0) {
                 console.warn(
-                    'no enemy factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured. ',
+                    'no enemy factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured.',
                     battle.campaign,
                     battle
                 );
             }
             if (allies.factions.length === 0) {
                 console.warn(
-                    'no ally factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured. ',
+                    'no ally factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured.',
                     battle.campaign,
                     battle
                 );
@@ -190,7 +188,7 @@ export class CampaignsService {
                 detailedEnemyTypes: battle.detailedEnemyTypes ?? [],
                 rawEnemyTypes: battle.rawEnemyTypes ?? [],
             };
-        });
+        }
 
         return result;
     }
@@ -252,52 +250,42 @@ export class CampaignsService {
             return false;
         }
 
-        if (enemiesTypes?.length) {
-            if (!location.enemiesTypes.some(enemyType => enemiesTypes.includes(enemyType))) {
-                return false;
-            }
+        if (enemiesTypes?.length && !location.enemiesTypes.some(enemyType => enemiesTypes.includes(enemyType))) {
+            return false;
         }
 
-        if (slotsCount && slotsCount.length > 0) {
-            if (!slotsCount.includes(location.slots ?? 5)) {
-                return false;
-            }
+        if (slotsCount && slotsCount.length > 0 && !slotsCount.includes(location.slots ?? 5)) {
+            return false;
         }
 
-        if (upgradesRarity.length > 0 && materialRarity != undefined) {
-            if (!upgradesRarity.includes(materialRarity)) {
-                return false;
-            }
+        if (upgradesRarity.length > 0 && materialRarity != undefined && !upgradesRarity.includes(materialRarity)) {
+            return false;
         }
 
-        if (campaignTypes.length > 0) {
-            if (!campaignTypes.includes(location.campaignType)) {
-                return false;
-            }
+        if (campaignTypes.length > 0 && !campaignTypes.includes(location.campaignType)) {
+            return false;
         }
 
-        if (alliesAlliance.length > 0) {
-            if (!alliesAlliance.includes(location.alliesAlliance)) {
-                return false;
-            }
+        if (alliesAlliance.length > 0 && !alliesAlliance.includes(location.alliesAlliance)) {
+            return false;
         }
 
-        if (alliesFactions.length > 0) {
-            if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
-                return false;
-            }
+        if (alliesFactions.length > 0 && !location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
+            return false;
         }
 
-        if (enemiesAlliance.length > 0) {
-            if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
-                return false;
-            }
+        if (
+            enemiesAlliance.length > 0 &&
+            !location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))
+        ) {
+            return false;
         }
 
-        if (enemiesFactions.length > 0) {
-            if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
-                return false;
-            }
+        if (
+            enemiesFactions.length > 0 &&
+            !location.enemiesFactions.some(faction => enemiesFactions.includes(faction))
+        ) {
+            return false;
         }
 
         return true;
@@ -313,7 +301,7 @@ export class CampaignsService {
 
         const itemsPerEnergy = dropRate / config.energyCost;
 
-        return parseFloat(itemsPerEnergy.toFixed(3));
+        return Number.parseFloat(itemsPerEnergy.toFixed(3));
     }
 
     /**

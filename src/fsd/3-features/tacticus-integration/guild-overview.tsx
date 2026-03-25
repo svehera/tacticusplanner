@@ -151,9 +151,9 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
             [TacticusGuildRole.MEMBER]: 0,
         };
 
-        guildData.members.forEach(member => {
+        for (const member of guildData.members) {
             roleCount[member.role]++;
-        });
+        }
 
         // Calculate active members (active in last 7 days)
         const activeMembers = guildData.members.filter(member => {

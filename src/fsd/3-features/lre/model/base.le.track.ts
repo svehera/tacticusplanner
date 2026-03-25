@@ -72,11 +72,11 @@ export class LETrack implements ILegendaryEventTrack {
         const coreSuggestedTeams = this.suggestTeam(settings, onlyUnlocked, restrictions);
         const result: Record<string, ICharacter2[]> = {};
 
-        this.unitsRestrictions.forEach(x => {
+        for (const x of this.unitsRestrictions) {
             result[x.name] = restrictions.includes(x.name)
                 ? [...coreSuggestedTeams]
                 : this.suggestTeam(settings, onlyUnlocked, [x.name]);
-        });
+        }
 
         if (!this.isAutoTeams(settings)) {
             const result2: Record<string, Array<ICharacter2 | undefined>> = {};
@@ -91,10 +91,10 @@ export class LETrack implements ILegendaryEventTrack {
 
             for (let index = 0; index < ordered.length; index++) {
                 const uniqChar = ordered[index];
-                this.unitsRestrictions.forEach(x => {
+                for (const x of this.unitsRestrictions) {
                     result2[x.name] ??= [];
                     result2[x.name][index] = result[x.name].find(x => x.name === uniqChar.name);
-                });
+                }
             }
             return result2;
         }

@@ -108,8 +108,8 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                             // allow empty or numeric input only
                             if (/^\d*$/.test(v)) {
                                 setExpectedBattleClearsInput(v);
-                                const parsed = parseInt(v, 10);
-                                if (!isNaN(parsed)) {
+                                const parsed = Number.parseInt(v, 10);
+                                if (!Number.isNaN(parsed)) {
                                     setExpectedBattleClears(clampExpectedBattles(parsed));
                                 }
                             }
@@ -120,8 +120,8 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                                 const clamped = clampExpectedBattles(expectedBattleClears);
                                 setExpectedBattleClearsInput(clamped.toString());
                             } else {
-                                const parsed = parseInt(expectedBattleClearsInput, 10);
-                                const final = isNaN(parsed) ? expectedBattleClears : parsed;
+                                const parsed = Number.parseInt(expectedBattleClearsInput, 10);
+                                const final = Number.isNaN(parsed) ? expectedBattleClears : parsed;
                                 const clamped = clampExpectedBattles(final);
                                 setExpectedBattleClears(clamped);
                                 setExpectedBattleClearsInput(clamped.toString());
@@ -140,7 +140,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                     ))}
                 </div>
 
-                <div className="flex-box full-width wrap start space-between">
+                <div className="flex-box full-width wrap space-between start">
                     <div className="min-w-[400px]">
                         <div className="flex-box gap20 space-between">
                             <h3>Selected Team ({selectedTeam.length}/5)</h3>
@@ -150,7 +150,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                                 </Button>
                             )}
                         </div>
-                        <div className="flex-box column start pointer gap-[3px]">
+                        <div className="flex-box column pointer start gap-[3px]">
                             {selectedTeam.length > 0 ? (
                                 selectedTeam.map(character => (
                                     <div
@@ -184,7 +184,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                                     key={character.id}
                                     onClick={() => addCharacter(character)}
                                     style={{
-                                        opacity: selectedTeam.some(x => x === character.snowprintId) ? 0.3 : 1,
+                                        opacity: selectedTeam.includes(character.snowprintId) ? 0.3 : 1,
                                     }}
                                     className="flex-box gap5 pointer w-[350px]">
                                     <AddIcon />

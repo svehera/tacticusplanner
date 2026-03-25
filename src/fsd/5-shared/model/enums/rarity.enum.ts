@@ -21,8 +21,8 @@ export const XP_BOOK_VALUE: Record<Rarity, number> = {
     [Rarity.Uncommon]: 100,
     [Rarity.Rare]: 500,
     [Rarity.Epic]: 2500,
-    [Rarity.Legendary]: 12500,
-    [Rarity.Mythic]: 62500,
+    [Rarity.Legendary]: 12_500,
+    [Rarity.Mythic]: 62_500,
 };
 
 export const XP_BOOK_ORDER: Rarity[] = Object.entries(XP_BOOK_VALUE)

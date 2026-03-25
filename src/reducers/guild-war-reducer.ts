@@ -78,7 +78,7 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
             const { teamId, lineup, rarityCap, teamName } = action;
             const existingTeamIndex = state.teams.findIndex(x => x.id === teamId);
 
-            if (existingTeamIndex >= 0) {
+            if (existingTeamIndex !== -1) {
                 state.teams[existingTeamIndex].lineup = lineup;
                 state.teams[existingTeamIndex].rarityCap = rarityCap;
                 if (teamName) {
@@ -107,9 +107,9 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
             const { rarityCaps } = action;
             const defenseTeams = state.teams.filter(x => x.type === GuildWarTeamType.Defense);
 
-            defenseTeams.forEach((team, index) => {
+            for (const [index, team] of defenseTeams.entries()) {
                 team.rarityCap = rarityCaps[index] ?? Rarity.Legendary;
-            });
+            }
 
             return { ...state, teams: [...state.teams] };
         }
@@ -117,7 +117,7 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
             const { teamId } = action;
             const existingTeamIndex = state.teams.findIndex(x => x.id === teamId);
 
-            if (existingTeamIndex >= 0) {
+            if (existingTeamIndex !== -1) {
                 state.teams[existingTeamIndex].lineup = [];
                 return {
                     ...state,
@@ -139,7 +139,7 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
             const { layoutId, bfLevel } = action;
             const existingLayoutIndex = state.layouts.findIndex(x => x.id === layoutId);
 
-            if (existingLayoutIndex >= 0) {
+            if (existingLayoutIndex !== -1) {
                 state.layouts[existingLayoutIndex].bfLevel = bfLevel;
                 return {
                     ...state,
@@ -153,7 +153,7 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
             const { layoutId, zone1Index, zone2Index } = action;
             const existingLayoutIndex = state.layouts.findIndex(x => x.id === layoutId);
 
-            if (existingLayoutIndex >= 0) {
+            if (existingLayoutIndex !== -1) {
                 const layout = state.layouts[existingLayoutIndex];
                 const zone1 = layout.zones[zone1Index];
                 const zone2 = layout.zones[zone2Index];
@@ -173,17 +173,17 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
             const { layoutId, zoneIndex, players } = action;
             const existingLayoutIndex = state.layouts.findIndex(x => x.id === layoutId);
 
-            if (existingLayoutIndex >= 0) {
+            if (existingLayoutIndex !== -1) {
                 const layout = state.layouts[existingLayoutIndex];
                 const zone = layout.zones[zoneIndex];
 
                 if (zone) {
                     zone.players = players;
-                    layout.zones.forEach((zone, index) => {
+                    for (const [index, zone] of layout.zones.entries()) {
                         if (index !== zoneIndex) {
                             zone.players = zone.players.filter(player => !players.includes(player));
                         }
-                    });
+                    }
                     return {
                         ...state,
                         layouts: [...state.layouts],

@@ -22,16 +22,16 @@ export class CampaignMapperService {
     private static getChallengeIndicesForBaseCampaign(baseCampaignName: string): number[] {
         const indices: number[] = [];
         let runningIndex = 0;
-        Object.entries(battleData).forEach(([key, battle]) => {
-            if (!battle.campaign.trim().toLowerCase().startsWith(baseCampaignName.trim().toLowerCase())) return;
+        for (const [key, battle] of Object.entries(battleData)) {
+            if (!battle.campaign.trim().toLowerCase().startsWith(baseCampaignName.trim().toLowerCase())) continue;
             const isChallenge = key.endsWith('B');
             if (isChallenge) {
                 indices.push(runningIndex);
                 runningIndex++;
-                return;
+                continue;
             }
             runningIndex++;
-        });
+        }
         return indices;
     }
     // mapTacticusCampaignToLocal removed; reducer falls back to idToCampaign for legacy campaigns

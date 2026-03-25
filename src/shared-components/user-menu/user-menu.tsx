@@ -164,10 +164,10 @@ export const UserMenu = () => {
     const restoreData = () => {
         const localStorage = new PersonalDataLocalStorage();
         const restoredData = localStorage.restoreData();
-        if (!restoredData) {
-            enqueueSnackbar('No Backup Found', { variant: 'error' });
-        } else {
+        if (restoredData) {
             setShowRestoreBackup(true);
+        } else {
+            enqueueSnackbar('No Backup Found', { variant: 'error' });
         }
     };
 
@@ -216,7 +216,14 @@ export const UserMenu = () => {
                 onClick={userMenuControls.handleClose}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-                {!isAuthenticated ? (
+                {isAuthenticated ? (
+                    <MenuItem onClick={() => logout()}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText>Logout</ListItemText>
+                    </MenuItem>
+                ) : (
                     <div>
                         <MenuItem onClick={() => openLoginForm()}>
                             <ListItemIcon>
@@ -231,13 +238,6 @@ export const UserMenu = () => {
                             <ListItemText>Register</ListItemText>
                         </MenuItem>
                     </div>
-                ) : (
-                    <MenuItem onClick={() => logout()}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText>Logout</ListItemText>
-                    </MenuItem>
                 )}
 
                 <Divider />

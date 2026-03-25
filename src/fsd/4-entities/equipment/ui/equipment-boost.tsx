@@ -55,7 +55,7 @@ export const EquipmentBoost = ({
                             {icon1} {value1}
                         </td>
                         <td>
-                            {icon2 !== undefined ? icon2 : ''} {value2 !== undefined ? value2 : ''}
+                            {icon2 === undefined ? '' : icon2} {value2 === undefined ? '' : value2}
                         </td>
                     </tr>
                 </tbody>

@@ -33,15 +33,15 @@ export class MowsService {
 
             if (index >= mow.primaryAbility.recipes.length || index >= mow.secondaryAbility.recipes.length) {
                 console.error(
-                    'mow: ',
+                    'mow:',
                     mowId,
-                    ' index: ',
+                    'index:',
                     index,
-                    ' actualLevel: ',
+                    'actualLevel:',
                     actualLevel,
-                    ' primarylen: ',
+                    'primarylen:',
                     mow.primaryAbility.recipes.length,
-                    ' secondarylen: ',
+                    'secondarylen:',
                     mow.secondaryAbility.recipes.length
                 );
             }
@@ -95,7 +95,11 @@ export class MowsService {
      * @returns The static MoW data from json with the specified snowprint ID.
      */
     public static resolveToStatic(id: string): IMowStatic2 | undefined {
-        return mows2Data.mows.find(x => x.snowprintId === this.resolveId(id));
+        const staticData = mows2Data.mows.find(x => x.snowprintId === this.resolveId(id));
+        if (staticData) {
+            return staticData;
+        }
+        return this.resolveOldIdToStatic(id);
     }
 
     /**
@@ -108,8 +112,8 @@ export class MowsService {
             return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
         });
         // If the user's server data is missing any MoWs, merge them in as locked units.
-        mows2Data.mows.forEach(staticMow => {
-            if (!returnValue.find(x => x.snowprintId === staticMow.snowprintId)) {
+        for (const staticMow of mows2Data.mows) {
+            if (!returnValue.some(x => x.snowprintId === staticMow.snowprintId)) {
                 returnValue.push({
                     ...staticMow,
                     id: staticMow.snowprintId,
@@ -124,7 +128,7 @@ export class MowsService {
                     unitType: UnitType.mow,
                 } as IMow2);
             }
-        });
+        }
         return returnValue;
     }
 

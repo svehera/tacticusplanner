@@ -115,9 +115,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                                     />
                                 )}{' '}
                                 {inventory[x.id] ?? 0} - {inventoryUpdate[x.id]} ={' '}
-                                {(inventory[x.id] ?? 0) - inventoryUpdate[x.id] < 0
-                                    ? 0
-                                    : (inventory[x.id] ?? 0) - inventoryUpdate[x.id]}
+                                {Math.max((inventory[x.id] ?? 0) - inventoryUpdate[x.id], 0)}
                             </li>
                         ))}
                     </ul>

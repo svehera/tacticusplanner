@@ -100,7 +100,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
     const [dailyEnergy, setDailyEnergy] = React.useState(() => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
-        return index >= 0 ? index : 2; // Default to 50 BS refresh if not found.
+        return index === -1 ? 2 : index; // Default to 50 BS refresh if not found.
     });
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
@@ -221,13 +221,15 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 name="controlled-radio-buttons-group"
                                 value={dailyRaidsPreferencesForm.farmPreferences.order}
                                 onChange={change =>
-                                    updatePreferences(parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder)
+                                    updatePreferences(
+                                        Number.parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder
+                                    )
                                 }>
                                 <FormControlLabel
                                     value={IDailyRaidsFarmOrder.totalMaterials}
                                     control={<Radio />}
                                     label={
-                                        <div className="flex-box start gap5">
+                                        <div className="flex-box gap5 start">
                                             By total materials{' '}
                                             <AccessibleTooltip
                                                 title={
@@ -250,7 +252,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     value={IDailyRaidsFarmOrder.goalPriority}
                                     control={<Radio />}
                                     label={
-                                        <div className="flex-box start gap5">
+                                        <div className="flex-box gap5 start">
                                             By goals priority{' '}
                                             <AccessibleTooltip
                                                 title={

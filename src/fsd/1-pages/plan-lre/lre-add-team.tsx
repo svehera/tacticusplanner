@@ -156,8 +156,8 @@ export const LreAddTeam: React.FC<Props> = ({
                                 // allow empty or numeric input only
                                 if (/^\d*$/.test(v)) {
                                     setExpectedBattleClearsInput(v);
-                                    const parsed = parseInt(v, 10);
-                                    if (!isNaN(parsed)) {
+                                    const parsed = Number.parseInt(v, 10);
+                                    if (!Number.isNaN(parsed)) {
                                         setExpectedBattleClears(clampExpectedBattles(parsed));
                                     }
                                 }
@@ -168,8 +168,8 @@ export const LreAddTeam: React.FC<Props> = ({
                                     const clamped = clampExpectedBattles(expectedBattleClears);
                                     setExpectedBattleClearsInput(clamped.toString());
                                 } else {
-                                    const parsed = parseInt(expectedBattleClearsInput, 10);
-                                    const final = isNaN(parsed) ? expectedBattleClears : parsed;
+                                    const parsed = Number.parseInt(expectedBattleClearsInput, 10);
+                                    const final = Number.isNaN(parsed) ? expectedBattleClears : parsed;
                                     const clamped = clampExpectedBattles(final);
                                     setExpectedBattleClears(clamped);
                                     setExpectedBattleClearsInput(clamped.toString());
@@ -195,7 +195,7 @@ export const LreAddTeam: React.FC<Props> = ({
                     ))}
                 </div>
 
-                <div className="flex-box full-width wrap start space-between">
+                <div className="flex-box full-width wrap space-between start">
                     <div className="min-w-[400px]">
                         <div className="flex-box gap20 space-between">
                             <h3>Selected Team ({selectedTeam.length}/5)</h3>
@@ -205,7 +205,7 @@ export const LreAddTeam: React.FC<Props> = ({
                                 </Button>
                             )}
                         </div>
-                        <div className="flex-box column start pointer gap-[3px]">
+                        <div className="flex-box column pointer start gap-[3px]">
                             {selectedTeam.length > 0 ? (
                                 selectedTeam.map(character => (
                                     <div

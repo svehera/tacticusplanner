@@ -403,8 +403,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                     }
 
                     const { daysLeft, xpDaysLeft } = goalEstimate;
-                    const materialDate = daysLeft !== undefined ? getEstimatedDate(daysLeft) : null;
-                    const xpDate = xpDaysLeft !== undefined ? getEstimatedDate(xpDaysLeft) : null;
+                    const materialDate = daysLeft === undefined ? null : getEstimatedDate(daysLeft);
+                    const xpDate = xpDaysLeft === undefined ? null : getEstimatedDate(xpDaysLeft);
 
                     if (materialDate && xpDate) {
                         return `${materialDate} (XP by ${xpDate})`;
@@ -551,7 +551,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
         [estimate, goalsColorCoding, viewPreferences]
     );
 
-    const baseRowHeight = !rows.some(row => [PersonalGoalType.CharacterAbilities].includes(row.type)) ? 60 : 90;
+    const baseRowHeight = rows.some(row => [PersonalGoalType.CharacterAbilities].includes(row.type)) ? 90 : 60;
 
     return (
         <div

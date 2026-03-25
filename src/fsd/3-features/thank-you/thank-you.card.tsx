@@ -45,7 +45,19 @@ export const ThankYouCard = ({
                                 />
                                 {contributor.name}
                             </Link>
-                        ) : !isYoutubeCreator(contributor) ? (
+                        ) : isYoutubeCreator(contributor) ? (
+                            <>
+                                <img
+                                    loading={'lazy'}
+                                    className="rounded-[50%] [content-visibility:auto]"
+                                    src={contributor.avatarLink}
+                                    height={50}
+                                    width={50}
+                                    alt={contributor.name}
+                                />
+                                {contributor.name}
+                            </>
+                        ) : (
                             <>
                                 {!!contributor.avatarIcon && (
                                     <ContributorImage
@@ -58,27 +70,15 @@ export const ThankYouCard = ({
                                 {!contributor.avatarIcon && <BmcIcon />}
                                 {contributor.name}
                             </>
-                        ) : (
-                            <>
-                                <img
-                                    loading={'lazy'}
-                                    className="rounded-[50%] [content-visibility:auto]"
-                                    src={contributor.avatarLink}
-                                    height={50}
-                                    width={50}
-                                    alt={contributor.name}
-                                />
-                                {contributor.name}
-                            </>
                         )}
                     </div>
                 }
                 subheader={
                     isContentMaker(contributor)
                         ? 'Content creator'
-                        : !isYoutubeCreator(contributor)
-                          ? contributor.type
-                          : ''
+                        : isYoutubeCreator(contributor)
+                          ? ''
+                          : contributor.type
                 }
             />
             <CardContent className="pt-0">
@@ -97,22 +97,7 @@ export const ThankYouCard = ({
                             />
                         </Link>
                     </>
-                ) : !isYoutubeCreator(contributor) ? (
-                    <>
-                        <p>{contributor.thankYou}</p>
-                        {contributor.resourceLink ? (
-                            <React.Fragment>
-                                Check out{' '}
-                                <Link
-                                    to={contributor.resourceLink}
-                                    target={'_blank'}
-                                    onClick={event => event.stopPropagation()}>
-                                    {contributor.resourceDescription}
-                                </Link>
-                            </React.Fragment>
-                        ) : undefined}
-                    </>
-                ) : (
+                ) : isYoutubeCreator(contributor) ? (
                     <>
                         <Link
                             to={`https://www.youtube.com/watch?v=${contributor.youtubeVideoId}`}
@@ -128,6 +113,21 @@ export const ThankYouCard = ({
                                 alt={contributor.name}
                             />
                         </Link>
+                    </>
+                ) : (
+                    <>
+                        <p>{contributor.thankYou}</p>
+                        {contributor.resourceLink ? (
+                            <React.Fragment>
+                                Check out{' '}
+                                <Link
+                                    to={contributor.resourceLink}
+                                    target={'_blank'}
+                                    onClick={event => event.stopPropagation()}>
+                                    {contributor.resourceDescription}
+                                </Link>
+                            </React.Fragment>
+                        ) : undefined}
                     </>
                 )}
             </CardContent>
