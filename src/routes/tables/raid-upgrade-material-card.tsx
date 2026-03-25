@@ -35,18 +35,18 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
 }) => {
     const rewardIcon = () => {
         if (UpgradesService.isShard(upgradeMaterialSnowprintId)) {
-            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(7));
+            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.slice(7));
             if (char) {
                 return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} mythic={false} />;
             }
-            return upgradeMaterialSnowprintId.substring(7);
+            return upgradeMaterialSnowprintId.slice(7);
         }
         if (UpgradesService.isMythicShard(upgradeMaterialSnowprintId)) {
-            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(13));
+            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.slice(13));
             if (char) {
                 return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} mythic={true} />;
             }
-            return upgradeMaterialSnowprintId.substring(13);
+            return upgradeMaterialSnowprintId.slice(13);
         }
         const upgrade = FsdUpgradesService.getUpgrade(upgradeMaterialSnowprintId);
         if (!upgrade) {

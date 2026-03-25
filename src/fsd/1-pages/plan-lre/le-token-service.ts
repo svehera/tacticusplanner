@@ -120,7 +120,7 @@ export class LeTokenService {
     ): number {
         const forcedToken =
             nextTokenMillisUtc !== undefined && nextTokenMillisUtc < this.getEventEndTimeMillis(event) ? 1 : 0;
-        const now = nextTokenMillisUtc !== undefined ? nextTokenMillisUtc : nowMillis;
+        const now = nextTokenMillisUtc === undefined ? nowMillis : nextTokenMillisUtc;
         const millisRemaining = this.getMillisRemainingInIteration(event, now);
         if (now < this.getEventStartTimeMillis(event)) return FREE_TOKENS_PER_EVENT;
         return (

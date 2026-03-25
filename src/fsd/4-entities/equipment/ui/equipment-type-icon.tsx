@@ -12,7 +12,7 @@ export const EquipmentTypeIcon = ({
     tooltip?: boolean;
 }) => {
     const imageUrl = getImageUrl(
-        `snowprint_assets/equipment/ui_icon_itemtype_${equipmentType.substring(2).toLowerCase()}.png`
+        `snowprint_assets/equipment/ui_icon_itemtype_${equipmentType.slice(2).toLowerCase()}.png`
     );
 
     const image = (

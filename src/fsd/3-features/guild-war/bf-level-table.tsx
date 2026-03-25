@@ -47,13 +47,7 @@ export const BfLevelTable = ({ rows }: { rows: IGWZone[] }) => {
                 const rarityCaps = GuildWarService.getRarityCaps(level, data.id);
                 const slots = GuildWarService.getTotalRarityCaps(level);
 
-                return data.id !== 'total' ? (
-                    <FlexBox gap={5}>
-                        {rarityCaps.map((rarity, index) => (
-                            <RarityIcon key={index} rarity={rarity} />
-                        ))}
-                    </FlexBox>
-                ) : (
+                return data.id === 'total' ? (
                     <FlexBox gap={10} className="h-full">
                         {[Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
                             const slotsCount = slots[rarity];
@@ -65,6 +59,12 @@ export const BfLevelTable = ({ rows }: { rows: IGWZone[] }) => {
                                 );
                             }
                         })}
+                    </FlexBox>
+                ) : (
+                    <FlexBox gap={5}>
+                        {rarityCaps.map((rarity, index) => (
+                            <RarityIcon key={index} rarity={rarity} />
+                        ))}
                     </FlexBox>
                 );
             },

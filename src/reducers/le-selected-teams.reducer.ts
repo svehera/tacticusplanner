@@ -73,7 +73,7 @@ export const leSelectedTeamsReducer = (
 
             const currentTeamIndex = legendaryEvent.teams.findIndex(x => x.id === teamId);
 
-            if (currentTeamIndex < 0) {
+            if (currentTeamIndex === -1) {
                 return state;
             }
 

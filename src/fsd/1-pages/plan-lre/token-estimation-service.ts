@@ -83,26 +83,26 @@ export const milestonesAndPoints: readonly MilestoneAndPoints[] = [
     { points: 6000, stars: 3, round: 3, packsPerRound: 1 },
     { points: 6500, stars: 3, round: 2, packsPerRound: 2 },
     { points: 9000, stars: 3, round: 2, packsPerRound: 1 },
-    { points: 10000, stars: 3, round: 1, packsPerRound: 2 },
-    { points: 11000, stars: 3, round: 1, packsPerRound: 1 },
-    { points: 11500, stars: 3, round: 3, packsPerRound: 0 },
-    { points: 12000, stars: 3, round: 2, packsPerRound: 0 },
-    { points: 12500, stars: 3, round: 1, packsPerRound: 0 },
-    { points: 14250, stars: 4, round: 3, packsPerRound: 0 },
-    { points: 14500, stars: 4, round: 2, packsPerRound: 0 },
-    { points: 14750, stars: 4, round: 1, packsPerRound: 0 },
-    { points: 16250, stars: 5, round: 3, packsPerRound: 0 },
-    { points: 16500, stars: 5, round: 1, packsPerRound: 0 },
-    { points: 16750, stars: 6, round: 3, packsPerRound: 1 },
-    { points: 18000, stars: 6, round: 3, packsPerRound: 0 },
-    { points: 18250, stars: 6, round: 1, packsPerRound: 0 },
-    { points: 22000, stars: 7, round: 3, packsPerRound: 2 },
-    { points: 22500, stars: 7, round: 3, packsPerRound: 1 },
-    { points: 23500, stars: 7, round: 1, packsPerRound: 0 },
-    { points: 25500, stars: 8, round: 3, packsPerRound: 2 },
-    { points: 25750, stars: 8, round: 3, packsPerRound: 1 },
-    { points: 26750, stars: 8, round: 2, packsPerRound: 0 },
-    { points: 27000, stars: 8, round: 1, packsPerRound: 0 },
+    { points: 10_000, stars: 3, round: 1, packsPerRound: 2 },
+    { points: 11_000, stars: 3, round: 1, packsPerRound: 1 },
+    { points: 11_500, stars: 3, round: 3, packsPerRound: 0 },
+    { points: 12_000, stars: 3, round: 2, packsPerRound: 0 },
+    { points: 12_500, stars: 3, round: 1, packsPerRound: 0 },
+    { points: 14_250, stars: 4, round: 3, packsPerRound: 0 },
+    { points: 14_500, stars: 4, round: 2, packsPerRound: 0 },
+    { points: 14_750, stars: 4, round: 1, packsPerRound: 0 },
+    { points: 16_250, stars: 5, round: 3, packsPerRound: 0 },
+    { points: 16_500, stars: 5, round: 1, packsPerRound: 0 },
+    { points: 16_750, stars: 6, round: 3, packsPerRound: 1 },
+    { points: 18_000, stars: 6, round: 3, packsPerRound: 0 },
+    { points: 18_250, stars: 6, round: 1, packsPerRound: 0 },
+    { points: 22_000, stars: 7, round: 3, packsPerRound: 2 },
+    { points: 22_500, stars: 7, round: 3, packsPerRound: 1 },
+    { points: 23_500, stars: 7, round: 1, packsPerRound: 0 },
+    { points: 25_500, stars: 8, round: 3, packsPerRound: 2 },
+    { points: 25_750, stars: 8, round: 3, packsPerRound: 1 },
+    { points: 26_750, stars: 8, round: 2, packsPerRound: 0 },
+    { points: 27_000, stars: 8, round: 1, packsPerRound: 0 },
 ];
 
 export interface PointMilestone {
@@ -132,67 +132,67 @@ export const pointMilestones: readonly PointMilestone[] = [
     { points: 8500, currencyPayout: 140 },
     { points: 9000, currencyPayout: 160 },
     { points: 9500, currencyPayout: 180 },
-    { points: 10000, currencyPayout: 200 },
-    { points: 10500, currencyPayout: 220 },
-    { points: 11000, currencyPayout: 240 },
-    { points: 11500, currencyPayout: 260 },
-    { points: 12000, currencyPayout: 280 },
-    { points: 12500, currencyPayout: 300 },
-    { points: 13000, currencyPayout: 310 },
-    { points: 13500, currencyPayout: 320 },
-    { points: 14000, currencyPayout: 330 },
-    { points: 14250, currencyPayout: 340 },
-    { points: 14500, currencyPayout: 350 },
-    { points: 14750, currencyPayout: 355 },
-    { points: 15000, currencyPayout: 360 },
-    { points: 15250, currencyPayout: 365 },
-    { points: 15500, currencyPayout: 370 },
-    { points: 15750, currencyPayout: 380 },
-    { points: 16000, currencyPayout: 390 },
-    { points: 16250, currencyPayout: 400 },
-    { points: 16500, currencyPayout: 410 },
-    { points: 16750, currencyPayout: 420 },
-    { points: 17000, currencyPayout: 430 },
-    { points: 17250, currencyPayout: 440 },
-    { points: 17500, currencyPayout: 450 },
-    { points: 17750, currencyPayout: 460 },
-    { points: 18000, currencyPayout: 470 },
-    { points: 18250, currencyPayout: 480 },
-    { points: 18500, currencyPayout: 490 },
-    { points: 18750, currencyPayout: 500 },
-    { points: 19000, currencyPayout: 510 },
-    { points: 19250, currencyPayout: 520 },
-    { points: 19500, currencyPayout: 530 },
-    { points: 19750, currencyPayout: 540 },
-    { points: 20000, currencyPayout: 550 },
-    { points: 20250, currencyPayout: 560 },
-    { points: 20500, currencyPayout: 570 },
-    { points: 20750, currencyPayout: 580 },
-    { points: 21000, currencyPayout: 590 },
-    { points: 21250, currencyPayout: 600 },
-    { points: 21500, currencyPayout: 605 },
-    { points: 21750, currencyPayout: 610 },
-    { points: 22000, currencyPayout: 615 },
-    { points: 22250, currencyPayout: 620 },
-    { points: 22500, currencyPayout: 625 },
-    { points: 22750, currencyPayout: 630 },
-    { points: 23000, currencyPayout: 635 },
-    { points: 23250, currencyPayout: 640 },
-    { points: 23500, currencyPayout: 645 },
-    { points: 23750, currencyPayout: 650 },
-    { points: 24000, currencyPayout: 655 },
-    { points: 24250, currencyPayout: 660 },
-    { points: 24500, currencyPayout: 665 },
-    { points: 24750, currencyPayout: 670 },
-    { points: 25000, currencyPayout: 675 },
-    { points: 25250, currencyPayout: 680 },
-    { points: 25500, currencyPayout: 685 },
-    { points: 25750, currencyPayout: 690 },
-    { points: 26000, currencyPayout: 695 },
-    { points: 26250, currencyPayout: 700 },
-    { points: 26500, currencyPayout: 705 },
-    { points: 26750, currencyPayout: 710 },
-    { points: 27000, currencyPayout: 715 },
+    { points: 10_000, currencyPayout: 200 },
+    { points: 10_500, currencyPayout: 220 },
+    { points: 11_000, currencyPayout: 240 },
+    { points: 11_500, currencyPayout: 260 },
+    { points: 12_000, currencyPayout: 280 },
+    { points: 12_500, currencyPayout: 300 },
+    { points: 13_000, currencyPayout: 310 },
+    { points: 13_500, currencyPayout: 320 },
+    { points: 14_000, currencyPayout: 330 },
+    { points: 14_250, currencyPayout: 340 },
+    { points: 14_500, currencyPayout: 350 },
+    { points: 14_750, currencyPayout: 355 },
+    { points: 15_000, currencyPayout: 360 },
+    { points: 15_250, currencyPayout: 365 },
+    { points: 15_500, currencyPayout: 370 },
+    { points: 15_750, currencyPayout: 380 },
+    { points: 16_000, currencyPayout: 390 },
+    { points: 16_250, currencyPayout: 400 },
+    { points: 16_500, currencyPayout: 410 },
+    { points: 16_750, currencyPayout: 420 },
+    { points: 17_000, currencyPayout: 430 },
+    { points: 17_250, currencyPayout: 440 },
+    { points: 17_500, currencyPayout: 450 },
+    { points: 17_750, currencyPayout: 460 },
+    { points: 18_000, currencyPayout: 470 },
+    { points: 18_250, currencyPayout: 480 },
+    { points: 18_500, currencyPayout: 490 },
+    { points: 18_750, currencyPayout: 500 },
+    { points: 19_000, currencyPayout: 510 },
+    { points: 19_250, currencyPayout: 520 },
+    { points: 19_500, currencyPayout: 530 },
+    { points: 19_750, currencyPayout: 540 },
+    { points: 20_000, currencyPayout: 550 },
+    { points: 20_250, currencyPayout: 560 },
+    { points: 20_500, currencyPayout: 570 },
+    { points: 20_750, currencyPayout: 580 },
+    { points: 21_000, currencyPayout: 590 },
+    { points: 21_250, currencyPayout: 600 },
+    { points: 21_500, currencyPayout: 605 },
+    { points: 21_750, currencyPayout: 610 },
+    { points: 22_000, currencyPayout: 615 },
+    { points: 22_250, currencyPayout: 620 },
+    { points: 22_500, currencyPayout: 625 },
+    { points: 22_750, currencyPayout: 630 },
+    { points: 23_000, currencyPayout: 635 },
+    { points: 23_250, currencyPayout: 640 },
+    { points: 23_500, currencyPayout: 645 },
+    { points: 23_750, currencyPayout: 650 },
+    { points: 24_000, currencyPayout: 655 },
+    { points: 24_250, currencyPayout: 660 },
+    { points: 24_500, currencyPayout: 665 },
+    { points: 24_750, currencyPayout: 670 },
+    { points: 25_000, currencyPayout: 675 },
+    { points: 25_250, currencyPayout: 680 },
+    { points: 25_500, currencyPayout: 685 },
+    { points: 25_750, currencyPayout: 690 },
+    { points: 26_000, currencyPayout: 695 },
+    { points: 26_250, currencyPayout: 700 },
+    { points: 26_500, currencyPayout: 705 },
+    { points: 26_750, currencyPayout: 710 },
+    { points: 27_000, currencyPayout: 715 },
 ];
 interface ShardMilestone {
     shards: PositiveInteger<number>;
@@ -234,26 +234,26 @@ export const chestMilestones: readonly ShardMilestone[] = [
     { shards: 750, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 8850 },
     { shards: 775, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 9250 },
     { shards: 800, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 9650 },
-    { shards: 825, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10050 },
-    { shards: 850, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10450 },
-    { shards: 875, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10850 },
-    { shards: 900, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 11250 },
-    { shards: 925, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 12050 },
-    { shards: 950, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 12950 },
-    { shards: 975, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 13950 },
-    { shards: 1000, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 15050 },
-    { shards: 1025, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 16250 },
-    { shards: 1050, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 17550 },
-    { shards: 1075, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 18950 },
-    { shards: 1100, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 20450 },
-    { shards: 1125, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 21950 },
-    { shards: 1150, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 23450 },
-    { shards: 1175, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 24950 },
-    { shards: 1200, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 26450 },
-    { shards: 1225, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 27950 },
-    { shards: 1250, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 29450 },
-    { shards: 1275, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 30950 },
-    { shards: 1300, rarity: Rarity.Mythic, stars: RarityStars.TwoBlueStars, totalNeededCurrency: 32450 },
+    { shards: 825, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10_050 },
+    { shards: 850, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10_450 },
+    { shards: 875, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10_850 },
+    { shards: 900, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 11_250 },
+    { shards: 925, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 12_050 },
+    { shards: 950, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 12_950 },
+    { shards: 975, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 13_950 },
+    { shards: 1000, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 15_050 },
+    { shards: 1025, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 16_250 },
+    { shards: 1050, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 17_550 },
+    { shards: 1075, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 18_950 },
+    { shards: 1100, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 20_450 },
+    { shards: 1125, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 21_950 },
+    { shards: 1150, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 23_450 },
+    { shards: 1175, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 24_950 },
+    { shards: 1200, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 26_450 },
+    { shards: 1225, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 27_950 },
+    { shards: 1250, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 29_450 },
+    { shards: 1275, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 30_950 },
+    { shards: 1300, rarity: Rarity.Mythic, stars: RarityStars.TwoBlueStars, totalNeededCurrency: 32_450 },
 ];
 
 export interface StarMilestone {
@@ -413,15 +413,15 @@ export class TokenEstimationService {
     public static computeAllTokenUsage(tracksProgress: ILreTrackProgress[], teams: ILreTeam[]): TokenUse[] {
         const tokens: TokenUse[] = [];
         const tracks: ILreTrackProgress[] = cloneDeep(tracksProgress);
-        tracks.forEach(track => {
-            track.battles.forEach(battle => {
+        for (const track of tracks) {
+            for (const battle of track.battles) {
                 battle.completed =
                     battle.requirementsProgress.reduce(
                         (sum, requirement) => (sum += requirement.completed ? 1 : 0),
                         0
                     ) === battle.requirementsProgress.length;
-            });
-        });
+            }
+        }
         const resolvedTeams = teams.map(team => ({
             ...team,
             charSnowprintIds: (team.charSnowprintIds ?? team.charactersIds ?? []).map(char =>
@@ -532,7 +532,7 @@ export class TokenEstimationService {
         for (let battleNumber = lowestBattle; battleNumber <= highestBattle; ++battleNumber) {
             const battle = track.battles[track.battles.length - 1 - battleNumber];
             if (battle.completed) continue;
-            teams.forEach(team => {
+            for (const team of teams) {
                 const restrictionsCleared: ILreRequirements[] = this.computeIncrementalRestrictionsCleared(
                     battle,
                     team
@@ -547,7 +547,7 @@ export class TokenEstimationService {
                     nextToken.battleNumber = battleNumber;
                     nextToken.restrictionsCleared = restrictionsCleared;
                 }
-            });
+            }
         }
         return nextToken;
     }
@@ -801,7 +801,7 @@ export class TokenEstimationService {
                 currentRarity: Rarity.Legendary,
                 currentStars: RarityStars.None,
                 currentShards: 0,
-                addlPointsForNextMilestone: 13000,
+                addlPointsForNextMilestone: 13_000,
                 addlCurrencyForNextMilestone: 3350,
                 addlShardsForNextMilestone: 400,
                 currentClaimedChestIndex: -1,
@@ -810,16 +810,11 @@ export class TokenEstimationService {
         }
         const totalPoints = progress.syncedProgress.currentPoints;
         const currentCurrency = progress.syncedProgress.currentCurrency;
-        let totalCurrency = 0;
         let currentShards = progress.syncedProgress.currentShards;
         const lastClaimedChestIndex = progress.syncedProgress.currentClaimedChestIndex;
 
         // Determine the total currency, since forced progress only gives us the current incremental currency.
-        if (lastClaimedChestIndex >= 0 && lastClaimedChestIndex < chestMilestones.length) {
-            totalCurrency = chestMilestones[lastClaimedChestIndex].totalNeededCurrency + currentCurrency;
-        } else {
-            totalCurrency = currentCurrency;
-        }
+        const totalCurrency = currentCurrency + (chestMilestones[lastClaimedChestIndex]?.totalNeededCurrency ?? 0);
 
         // Determine if we hit any new ascension milestones.
         let starIndex = 0;
@@ -851,7 +846,7 @@ export class TokenEstimationService {
             const neededChestIndex = lastClaimedChestIndex + addlChests;
             if (neededChestIndex >= chestMilestones.length) {
                 addlCurrencyForNextMilestone = Infinity;
-                addlPointsForNextMilestone = 27000 - totalPoints;
+                addlPointsForNextMilestone = 27_000 - totalPoints;
             } else {
                 addlCurrencyForNextMilestone = chestMilestones[neededChestIndex].totalNeededCurrency - totalCurrency;
                 addlPointsForNextMilestone =
@@ -897,11 +892,7 @@ export class TokenEstimationService {
                 return 'Blue 1★';
             }
             case RarityStars.OneBlueStar: {
-                if (currentRarity === Rarity.Legendary) {
-                    return 'Mythic 1★';
-                } else {
-                    return 'Blue 2★';
-                }
+                return currentRarity === Rarity.Legendary ? 'Mythic 1★' : 'Blue 2★';
             }
             case RarityStars.TwoBlueStars: {
                 return 'Full Clear';

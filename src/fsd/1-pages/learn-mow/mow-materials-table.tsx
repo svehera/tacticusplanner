@@ -84,7 +84,9 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                                     const upgrade = UpgradesService.getUpgrade(x.id);
                                     if (!upgrade) return <></>;
                                     if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-                                        const char = CharactersService.getUnit(x.id.substring(x.id.indexOf('_') + 1));
+                                        const char = CharactersService.getUnit(
+                                            x.id.slice(Math.max(0, x.id.indexOf('_') + 1))
+                                        );
                                         if (char) {
                                             return (
                                                 <UnitShardIcon
@@ -136,7 +138,9 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                                     const upgrade = UpgradesService.getUpgrade(x.id);
                                     if (!upgrade) return <></>;
                                     if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-                                        const char = CharactersService.getUnit(x.id.substring(x.id.indexOf('_') + 1));
+                                        const char = CharactersService.getUnit(
+                                            x.id.slice(Math.max(0, x.id.indexOf('_') + 1))
+                                        );
                                         if (char) {
                                             return (
                                                 <UnitShardIcon

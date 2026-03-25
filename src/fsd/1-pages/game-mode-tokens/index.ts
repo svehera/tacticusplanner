@@ -1,3 +1,1 @@
-import { TokenAvailability } from './game-mode-tokens';
-
-export default TokenAvailability;
+export { TokenAvailability as default } from './game-mode-tokens';

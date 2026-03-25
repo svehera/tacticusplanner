@@ -349,7 +349,11 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                 )}
             </DialogContent>
             <DialogActions className="flex-box between">
-                {activeStep !== lastStep + 1 ? (
+                {activeStep === lastStep + 1 ? (
+                    <>
+                        <Button onClick={onClose}>Close</Button>
+                    </>
+                ) : (
                     <>
                         <Button onClick={onClose}>Cancel</Button>
                         <div>
@@ -364,10 +368,6 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                                 {activeStep === lastStep ? 'Add' : 'Continue'}
                             </Button>
                         </div>
-                    </>
-                ) : (
-                    <>
-                        <Button onClick={onClose}>Close</Button>
                     </>
                 )}
             </DialogActions>

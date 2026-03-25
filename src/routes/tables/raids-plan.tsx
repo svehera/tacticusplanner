@@ -86,18 +86,18 @@ export const RaidsPlan: React.FC<Props> = ({
     const characterToMaterialMap: CharacterToMaterialIndexMap = useMemo(() => {
         const characterIndexMap: CharacterToMaterialIndexMap = {};
 
-        estimatedRanks.inProgressMaterials.forEach((material, materialIndex) => {
+        for (const [materialIndex, material] of estimatedRanks.inProgressMaterials.entries()) {
             // Iterate over the related characters for the current material
-            material.relatedCharacters.forEach(fullName => {
+            for (const fullName of material.relatedCharacters) {
                 const unit = CharactersService.getUnit(fullName);
-                if (!unit || !unit.snowprintId) return;
+                if (!unit || !unit.snowprintId) continue;
                 // Check if this snowprintId has ALREADY been recorded.
                 // If it hasn't, this is the FIRST time we've seen it, so record the index.
                 if (!(unit.snowprintId in characterIndexMap)) {
                     characterIndexMap[unit.snowprintId] = materialIndex;
                 }
-            });
-        });
+            }
+        }
 
         return characterIndexMap;
     }, [estimatedRanks.inProgressMaterials]);

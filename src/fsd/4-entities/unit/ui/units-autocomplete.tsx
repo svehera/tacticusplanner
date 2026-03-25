@@ -19,7 +19,7 @@ interface Props<T extends IUnit> {
 const normalizeSearchText = (text: string | undefined | null): string =>
     (text ?? '')
         .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[\u0300-\u036F]/g, '')
         .toLowerCase()
         .trim();
 

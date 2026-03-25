@@ -30,7 +30,7 @@ const computePierce = (damageType: DamageType) => {
             return 0.15;
         }
         case DamageType.Direct: {
-            return 1.0;
+            return 1;
         }
         case DamageType.Energy: {
             return 0.3;
@@ -75,7 +75,7 @@ const computePierce = (damageType: DamageType) => {
             return 0.2;
         }
         case DamageType.Psychic: {
-            return 1.0;
+            return 1;
         }
         case DamageType.Toxic: {
             return 0.7;

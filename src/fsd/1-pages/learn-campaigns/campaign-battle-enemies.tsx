@@ -19,14 +19,14 @@ interface Props {
 // Extracted Logic: Resolve string to data object
 const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
     const colon = enemyString.indexOf(':');
-    const id = colon !== -1 ? enemyString.substring(0, colon) : enemyString;
+    const id = colon === -1 ? enemyString : enemyString.slice(0, Math.max(0, colon));
 
     // Calculate index
     let progressionIndex = 0;
     if (colon !== -1) {
-        const pString = enemyString.substring(colon + 1);
-        const pInt = parseInt(pString, 10);
-        progressionIndex = isNaN(pInt) ? 0 : pInt;
+        const pString = enemyString.slice(Math.max(0, colon + 1));
+        const pInt = Number.parseInt(pString, 10);
+        progressionIndex = Number.isNaN(pInt) ? 0 : pInt;
     }
 
     // Adjust for 0-based array (Your logic used -1, keeping that consistency)
@@ -106,13 +106,13 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
         let enemiesInRow = 0;
         let enemyIndex = 0;
         const elements: JSX.Element[] = [];
-        enemies.forEach(enemy => {
+        for (const enemy of enemies) {
             // Pre-resolve NPC data for the click handler
             const resolved = resolveEnemy(enemy.id);
             const enemyId = resolved?.id || enemy.id;
             const npc = NpcService.getNpcById(enemyId);
-            const rank = resolved !== null ? resolved.stats.rank : Rank.Stone1;
-            const stars = resolved !== null ? resolved.stats.rarityStars : RarityStars.None;
+            const rank = resolved === null ? Rank.Stone1 : resolved.stats.rank;
+            const stars = resolved === null ? RarityStars.None : resolved.stats.rarityStars;
 
             for (let index = 0; index < enemy.count; index++) {
                 elements.push(
@@ -125,7 +125,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
                             onEnemyClick({
                                 id: enemyId,
                                 npc,
-                                stats: resolved !== null ? resolved.stats : npc.stats[0],
+                                stats: resolved === null ? npc.stats[0] : resolved.stats,
                             })
                         }>
                         <NpcPortrait id={enemyId} rank={rank} stars={stars} />
@@ -142,7 +142,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
                     }
                 }
             }
-        });
+        }
         return elements;
     };
 

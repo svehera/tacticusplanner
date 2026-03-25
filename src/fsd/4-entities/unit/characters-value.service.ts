@@ -143,7 +143,7 @@ export class CharactersValueService {
     }
 
     public static getExperienceValue(level: number): number {
-        const ExpBS = 175 / 12500;
+        const ExpBS = 175 / 12_500;
 
         switch (level) {
             case 1: {
@@ -216,85 +216,85 @@ export class CharactersValueService {
                 return ExpBS * 9900;
             }
             case 24: {
-                return ExpBS * 12200;
+                return ExpBS * 12_200;
             }
             case 25: {
-                return ExpBS * 15200;
+                return ExpBS * 15_200;
             }
             case 26: {
-                return ExpBS * 19200;
+                return ExpBS * 19_200;
             }
             case 27: {
-                return ExpBS * 24700;
+                return ExpBS * 24_700;
             }
             case 28: {
-                return ExpBS * 32200;
+                return ExpBS * 32_200;
             }
             case 29: {
-                return ExpBS * 42200;
+                return ExpBS * 42_200;
             }
             case 30: {
-                return ExpBS * 55200;
+                return ExpBS * 55_200;
             }
             case 31: {
-                return ExpBS * 72200;
+                return ExpBS * 72_200;
             }
             case 32: {
-                return ExpBS * 94200;
+                return ExpBS * 94_200;
             }
             case 33: {
-                return ExpBS * 122200;
+                return ExpBS * 122_200;
             }
             case 34: {
-                return ExpBS * 157200;
+                return ExpBS * 157_200;
             }
             case 35: {
-                return ExpBS * 200200;
+                return ExpBS * 200_200;
             }
             case 36: {
-                return ExpBS * 252200;
+                return ExpBS * 252_200;
             }
             case 37: {
-                return ExpBS * 314200;
+                return ExpBS * 314_200;
             }
             case 38: {
-                return ExpBS * 387200;
+                return ExpBS * 387_200;
             }
             case 39: {
-                return ExpBS * 472200;
+                return ExpBS * 472_200;
             }
             case 40: {
-                return ExpBS * 570200;
+                return ExpBS * 570_200;
             }
             case 41: {
-                return ExpBS * 682200;
+                return ExpBS * 682_200;
             }
             case 42: {
-                return ExpBS * 809200;
+                return ExpBS * 809_200;
             }
             case 43: {
-                return ExpBS * 952200;
+                return ExpBS * 952_200;
             }
             case 44: {
-                return ExpBS * 1112200;
+                return ExpBS * 1_112_200;
             }
             case 45: {
-                return ExpBS * 1290200;
+                return ExpBS * 1_290_200;
             }
             case 46: {
-                return ExpBS * 1487200;
+                return ExpBS * 1_487_200;
             }
             case 47: {
-                return ExpBS * 1704200;
+                return ExpBS * 1_704_200;
             }
             case 48: {
-                return ExpBS * 1942200;
+                return ExpBS * 1_942_200;
             }
             case 49: {
-                return ExpBS * 2202200;
+                return ExpBS * 2_202_200;
             }
             case 50: {
-                return ExpBS * 2485200;
+                return ExpBS * 2_485_200;
             }
             default: {
                 console.warn('Level unknown');
@@ -304,7 +304,7 @@ export class CharactersValueService {
     }
 
     public static getAbilityValue(level: number): number {
-        const CoinBS = 780 / 60000;
+        const CoinBS = 780 / 60_000;
         const CommonBadgeBS = 70 / 5;
         const UncommonBadgeBS = 30;
         const RareBadgeBS = 60;
@@ -410,55 +410,55 @@ export class CharactersValueService {
             tally += EpicBadgeBS * 3 + CoinBS * 9500;
         }
         if (level >= 34) {
-            tally += EpicBadgeBS * 4 + CoinBS * 10000;
+            tally += EpicBadgeBS * 4 + CoinBS * 10_000;
         }
         if (level >= 35) {
-            tally += EpicBadgeBS * 5 + CoinBS * 11000;
+            tally += EpicBadgeBS * 5 + CoinBS * 11_000;
         }
         if (level >= 36) {
-            tally += LegendaryBadgeBS * 1 + CoinBS * 12000;
+            tally += LegendaryBadgeBS * 1 + CoinBS * 12_000;
         }
         if (level >= 37) {
-            tally += LegendaryBadgeBS * 1 + CoinBS * 13000;
+            tally += LegendaryBadgeBS * 1 + CoinBS * 13_000;
         }
         if (level >= 38) {
-            tally += LegendaryBadgeBS * 1 + CoinBS * 14000;
+            tally += LegendaryBadgeBS * 1 + CoinBS * 14_000;
         }
         if (level >= 39) {
-            tally += LegendaryBadgeBS * 2 + CoinBS * 15000;
+            tally += LegendaryBadgeBS * 2 + CoinBS * 15_000;
         }
         if (level >= 40) {
-            tally += LegendaryBadgeBS * 2 + CoinBS * 16000;
+            tally += LegendaryBadgeBS * 2 + CoinBS * 16_000;
         }
         if (level >= 41) {
-            tally += LegendaryBadgeBS * 2 + CoinBS * 18000;
+            tally += LegendaryBadgeBS * 2 + CoinBS * 18_000;
         }
         if (level >= 42) {
-            tally += LegendaryBadgeBS * 3 + CoinBS * 20000;
+            tally += LegendaryBadgeBS * 3 + CoinBS * 20_000;
         }
         if (level >= 43) {
-            tally += LegendaryBadgeBS * 3 + CoinBS * 22500;
+            tally += LegendaryBadgeBS * 3 + CoinBS * 22_500;
         }
         if (level >= 44) {
-            tally += LegendaryBadgeBS * 4 + CoinBS * 25000;
+            tally += LegendaryBadgeBS * 4 + CoinBS * 25_000;
         }
         if (level >= 45) {
-            tally += LegendaryBadgeBS * 5 + CoinBS * 30000;
+            tally += LegendaryBadgeBS * 5 + CoinBS * 30_000;
         }
         if (level >= 46) {
-            tally += LegendaryBadgeBS * 6 + CoinBS * 40000;
+            tally += LegendaryBadgeBS * 6 + CoinBS * 40_000;
         }
         if (level >= 47) {
-            tally += LegendaryBadgeBS * 7 + CoinBS * 50000;
+            tally += LegendaryBadgeBS * 7 + CoinBS * 50_000;
         }
         if (level >= 48) {
-            tally += LegendaryBadgeBS * 8 + CoinBS * 75000;
+            tally += LegendaryBadgeBS * 8 + CoinBS * 75_000;
         }
         if (level >= 49) {
-            tally += LegendaryBadgeBS * 9 + CoinBS * 100000;
+            tally += LegendaryBadgeBS * 9 + CoinBS * 100_000;
         }
         if (level >= 50) {
-            tally += LegendaryBadgeBS * 10 + CoinBS * 250000;
+            tally += LegendaryBadgeBS * 10 + CoinBS * 250_000;
         }
         return tally;
     }
