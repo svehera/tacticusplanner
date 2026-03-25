@@ -75,15 +75,15 @@ const sanitizeWarDefenseSelection = (
     let nextFlexIndex = currentFlexIndex ?? currentSelectedChars.length;
     const nextSelectedChars: string[] = [];
 
-    currentSelectedChars.forEach((charId, index) => {
+    for (const [index, charId] of currentSelectedChars.entries()) {
         if (blockedCoreCharIds.has(charId)) {
             if (index < nextFlexIndex) {
                 nextFlexIndex -= 1;
             }
-            return;
+            continue;
         }
         nextSelectedChars.push(charId);
-    });
+    }
 
     const normalizedFlexIndex = Math.max(0, nextFlexIndex);
     return {
@@ -320,7 +320,9 @@ export const ManageTeams = () => {
     };
 
     const onDelete = (team: ITeam2) => {
-        if (window.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)) {
+        if (
+            globalThis.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)
+        ) {
             dispatch.teams2({ type: 'Set', value: teams.filter(t => t.name !== team.name) });
         }
     };
@@ -338,10 +340,10 @@ export const ManageTeams = () => {
             team.notes = notes;
             team.flexIndex = flexIndex;
             const editingTeams = [...teams];
-            editingTeams.forEach(t => {
-                if (t.name !== editingTeam.name) return;
+            for (let t of editingTeams) {
+                if (t.name !== editingTeam.name) continue;
                 t = team;
-            });
+            }
             dispatch.teams2({ type: 'Set', value: cloneDeep(editingTeams) });
         } else {
             const newTeam: ITeam2 = {
@@ -367,7 +369,7 @@ export const ManageTeams = () => {
     const onAddChar = (snowprintId: string) => {
         const flex = flexIndex ?? selectedChars.length;
         setSelectedChars([...selectedChars.slice(0, flex), snowprintId, ...selectedChars.slice(flex)]);
-        setFlexIndex(flexIndex !== undefined ? flexIndex + 1 : undefined);
+        setFlexIndex(flexIndex === undefined ? undefined : flexIndex + 1);
     };
 
     const onAddMow = (snowprintId: string) => {
@@ -375,9 +377,9 @@ export const ManageTeams = () => {
     };
 
     const onCharClicked = (char: ICharacter2) => {
-        const index = selectedChars.findIndex(id => id === (char.snowprintId ?? ''));
+        const index = selectedChars.indexOf(char.snowprintId ?? '');
         if (index === -1) {
-            console.error('Clicked character that is not in selectedChars: ', char, selectedChars, index);
+            console.error('Clicked character that is not in selectedChars:', char, selectedChars, index);
             return;
         }
         let flex = flexIndex ?? selectedChars.length;
@@ -464,7 +466,7 @@ export const ManageTeams = () => {
                         value={selectedTeamType ?? ''}
                         onChange={event => {
                             const value = event.target.value as TeamTypeKey | '';
-                            setSelectedTeamType(value ? value : undefined);
+                            setSelectedTeamType(value || undefined);
                         }}>
                         <option value="">All</option>
                         <option value="warOffense">War Offense</option>

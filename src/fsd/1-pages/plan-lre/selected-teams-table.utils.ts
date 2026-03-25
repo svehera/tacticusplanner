@@ -16,7 +16,7 @@ export function buildSelectedTeamsRows(
 ): Array<ITableRow<ISelectedTeamTableCell | string>> {
     const teamRecord: Record<string, ISelectedTeamTableCell[]> = {};
 
-    teams.forEach(team => {
+    for (const team of teams) {
         const newTeam = (team.charSnowprintIds ?? [])
             .slice(0, 5)
             .map(charId => charactersBySnowprintId[charId])
@@ -26,20 +26,20 @@ export function buildSelectedTeamsRows(
                 teamId: team.id,
             }));
 
-        team.restrictionsIds.forEach(id => {
+        for (const id of team.restrictionsIds) {
             const existingCharacters = teamRecord[id] ?? [];
             teamRecord[id] = [...existingCharacters, ...newTeam];
-        });
-    });
+        }
+    }
 
     const size = Math.max(0, ...Object.values(teamRecord).map(x => x.length));
     const rows: Array<ITableRow<ISelectedTeamTableCell | string>> = Array.from({ length: size }, () => ({}));
 
-    rows.forEach((row, index) => {
+    for (const [index, row] of rows.entries()) {
         for (const team in teamRecord) {
             row[team] = teamRecord[team][index] ?? '';
         }
-    });
+    }
 
     return rows;
 }

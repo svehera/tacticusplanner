@@ -58,43 +58,43 @@ export const HomeScreenEvent = () => {
     ): HseBattle[] => {
         const pointsPerEnergy: Record<number, HseBattle[]> = {};
 
-        Object.entries(CampaignsService.campaignsGrouped)
-            .filter(([campaignId]) => campaigns.includes(campaignId as Campaign))
-            .forEach(([, battles]) => {
-                battles.forEach(battle => {
-                    let points =
-                        battle.detailedEnemyTypes
-                            ?.filter(x => {
-                                const npc = NpcService.getNpcById(x.id);
-                                if (!npc) {
-                                    console.warn('battle ', battle.id, ' has undefined npc ', x);
-                                    return false;
-                                }
-                                return !npc.traits.includes('Summon') && enemyFilter(npc);
-                            })
-                            .map(x => x.count)
-                            .reduce((a, b) => a + b, 0) ?? 0;
+        for (const [, battles] of Object.entries(CampaignsService.campaignsGrouped).filter(([campaignId]) =>
+            campaigns.includes(campaignId as Campaign)
+        )) {
+            for (const battle of battles) {
+                let points =
+                    battle.detailedEnemyTypes
+                        ?.filter(x => {
+                            const npc = NpcService.getNpcById(x.id);
+                            if (!npc) {
+                                console.warn('battle', battle.id, 'has undefined npc', x);
+                                return false;
+                            }
+                            return !npc.traits.includes('Summon') && enemyFilter(npc);
+                        })
+                        .map(x => x.count)
+                        .reduce((a, b) => a + b, 0) ?? 0;
 
-                    if (applyEliteCampaignMultiplier) {
-                        points *= battle.campaignType === CampaignType.Elite ? 5 : 3;
-                    }
+                if (applyEliteCampaignMultiplier) {
+                    points *= battle.campaignType === CampaignType.Elite ? 5 : 3;
+                }
 
-                    if (points > 0 && (includeRewardlessBattles || getReward(battle.rewards) !== '')) {
-                        const details: HseBattle = {
-                            id: battle.id,
-                            battle: battle,
-                            energyCost: battle.energyCost,
-                            points: points,
-                            pointsPerEnergy: points / battle.energyCost,
-                            reward: getReward(battle.rewards),
-                            dropChance: battle.dropRate,
-                        };
-                        const array = pointsPerEnergy[details.pointsPerEnergy] || [];
-                        array.push(details);
-                        pointsPerEnergy[details.pointsPerEnergy] = array;
-                    }
-                });
-            });
+                if (points > 0 && (includeRewardlessBattles || getReward(battle.rewards) !== '')) {
+                    const details: HseBattle = {
+                        id: battle.id,
+                        battle: battle,
+                        energyCost: battle.energyCost,
+                        points: points,
+                        pointsPerEnergy: points / battle.energyCost,
+                        reward: getReward(battle.rewards),
+                        dropChance: battle.dropRate,
+                    };
+                    const array = pointsPerEnergy[details.pointsPerEnergy] || [];
+                    array.push(details);
+                    pointsPerEnergy[details.pointsPerEnergy] = array;
+                }
+            }
+        }
 
         return Object.values(pointsPerEnergy)
             .flat()
@@ -149,7 +149,7 @@ export const HomeScreenEvent = () => {
         const upgrade = UpgradesService.getUpgrade(reward);
         if (!upgrade) return reward;
         if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-            const char = CharactersService.getUnit(reward.substring(reward.indexOf('_') + 1));
+            const char = CharactersService.getUnit(reward.slice(Math.max(0, reward.indexOf('_') + 1)));
             if (char) {
                 return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />;
             }

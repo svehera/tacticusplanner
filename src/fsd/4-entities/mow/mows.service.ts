@@ -33,15 +33,15 @@ export class MowsService {
 
             if (index >= mow.primaryAbility.recipes.length || index >= mow.secondaryAbility.recipes.length) {
                 console.error(
-                    'mow: ',
+                    'mow:',
                     mowId,
-                    ' index: ',
+                    'index:',
                     index,
-                    ' actualLevel: ',
+                    'actualLevel:',
                     actualLevel,
-                    ' primarylen: ',
+                    'primarylen:',
                     mow.primaryAbility.recipes.length,
-                    ' secondarylen: ',
+                    'secondarylen:',
                     mow.secondaryAbility.recipes.length
                 );
             }
@@ -112,8 +112,8 @@ export class MowsService {
             return { ...MowsService.resolveToStatic(mow.tacticusId), ...mow } as IMow2;
         });
         // If the user's server data is missing any MoWs, merge them in as locked units.
-        mows2Data.mows.forEach(staticMow => {
-            if (!returnValue.find(x => x.snowprintId === staticMow.snowprintId)) {
+        for (const staticMow of mows2Data.mows) {
+            if (!returnValue.some(x => x.snowprintId === staticMow.snowprintId)) {
                 returnValue.push({
                     ...staticMow,
                     id: staticMow.snowprintId,
@@ -128,7 +128,7 @@ export class MowsService {
                     unitType: UnitType.mow,
                 } as IMow2);
             }
-        });
+        }
         return returnValue;
     }
 

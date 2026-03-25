@@ -97,8 +97,8 @@ export const FactionsTile = ({
                             <RosterSnapshotCharacter
                                 char={isCharacter ? RosterSnapshotsService.snapshotCharacter(unit) : undefined}
                                 charData={isCharacter ? unit : undefined}
-                                mow={!isCharacter ? RosterSnapshotsService.snapshotMachineOfWar(unit) : undefined}
-                                mowData={!isCharacter ? unit : undefined}
+                                mow={isCharacter ? undefined : RosterSnapshotsService.snapshotMachineOfWar(unit)}
+                                mowData={isCharacter ? undefined : unit}
                                 showShards={
                                     viewContext.showCharacterLevel
                                         ? RosterSnapshotShowVariableSettings.Always

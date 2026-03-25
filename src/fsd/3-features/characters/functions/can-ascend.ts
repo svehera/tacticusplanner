@@ -19,9 +19,7 @@ export const canAscendCharacter = (unit: IUnit) => {
     const neededShards = (totalShardsForNextRarity.shards ?? 0) - (totalShardsCurrent.shards ?? 0);
     const neededMythicShards = (totalShardsForNextRarity.mythicShards ?? 0) - (totalShardsCurrent.mythicShards ?? 0);
 
-    if (unit.rarity === Rarity.Legendary) {
-        return neededShards - unit.shards <= 0 && neededMythicShards - unit.mythicShards <= 0;
-    } else {
-        return neededShards - unit.shards <= 0;
-    }
+    return unit.rarity === Rarity.Legendary
+        ? neededShards - unit.shards <= 0 && neededMythicShards - unit.mythicShards <= 0
+        : neededShards - unit.shards <= 0;
 };

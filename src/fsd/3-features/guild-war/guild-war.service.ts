@@ -72,7 +72,7 @@ export class GuildWarService {
                 for (const bfLevel in rawSection.difficulty) {
                     const difficulty = rawSection.difficulty[bfLevel];
                     const caps = rawData.rarityCaps[difficulty].map(x => this.shortRarityStringToEnum[x]);
-                    rarityCaps[parseInt(bfLevel)] = {
+                    rarityCaps[Number.parseInt(bfLevel)] = {
                         difficulty: difficulty,
                         caps: caps,
                     };

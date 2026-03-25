@@ -73,9 +73,9 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
         const goal = getGoal(goalId);
         let rankEnd: number = 1;
         if (!goal) return 1;
-        Object.entries(goal).forEach(([key, value]) => {
+        for (const [key, value] of Object.entries(goal)) {
             if (key == 'rankEnd') rankEnd = value as number;
-        });
+        }
         return rankEnd;
     }
 

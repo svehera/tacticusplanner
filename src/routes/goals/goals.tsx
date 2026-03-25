@@ -136,10 +136,8 @@ export const Goals = () => {
 
     const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => {
         const currentGoals = [...goals].sort((a, b) => a.priority - b.priority);
-        if (item === 'delete') {
-            if (confirm('Are you sure? The goal will be permanently deleted!')) {
-                removeGoal(goalId);
-            }
+        if (item === 'delete' && confirm('Are you sure? The goal will be permanently deleted!')) {
+            removeGoal(goalId);
         }
 
         if (item === 'edit') {

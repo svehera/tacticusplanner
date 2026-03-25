@@ -76,8 +76,8 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
     }, [showDropdown]);
 
     const handleScoreSubmit = () => {
-        const parsedScore = parseInt(scoreInput);
-        if (!isNaN(parsedScore) && parsedScore >= 0) {
+        const parsedScore = Number.parseInt(scoreInput);
+        if (!Number.isNaN(parsedScore) && parsedScore >= 0) {
             // Cap the score at maxScore
             const cappedScore = Math.min(parsedScore, maxScore);
             onChange(RequirementStatus.PartiallyCleared, cappedScore);

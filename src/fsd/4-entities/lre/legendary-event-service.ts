@@ -34,7 +34,7 @@ export class LegendaryEventService {
             if (pastEvents.length > 0) {
                 startDates.push(new Date(pastEvents[0].startDate));
             } else {
-                const knownStartTimeMillis = 1766880000000; // This was the start of Farsight 1, it's arbitrary.
+                const knownStartTimeMillis = 1_766_880_000_000; // This was the start of Farsight 1, it's arbitrary.
 
                 const now = Date.now();
                 for (let index = 0; ; ++index) {
