@@ -63,7 +63,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
 
     // How many enemies we show in each row, based on how many enemies we have
     // in total. Faster than doing the math.
-    const enemiesInCols = [
+    const enemiesInRows = [
         [0],
         [1],
         [2],
@@ -90,8 +90,8 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
         [8, 8, 7],
         [8, 8, 8],
     ];
-    const columns = useMemo(() => enemiesInCols[numberEnemies], [enemiesInCols, numberEnemies]);
-    const numberRows = useMemo(() => columns.length, columns);
+    const columns = useMemo(() => enemiesInRows[numberEnemies], [enemiesInRows, numberEnemies]);
+    const numberRows = useMemo(() => columns.length, [columns]);
     const maxPerRow = useMemo(() => Math.max(...columns), [columns]);
     const frameWidth = 202;
     const frameHeight = 267;
