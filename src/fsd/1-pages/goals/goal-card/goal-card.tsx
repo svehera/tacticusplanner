@@ -1,5 +1,4 @@
 ﻿import { CheckCircle, FilterListOff } from '@mui/icons-material';
-import { Card, CardContent, Divider } from '@mui/material';
 import Button from '@mui/material/Button';
 import React, { useMemo } from 'react';
 
@@ -11,7 +10,7 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { PersonalGoalType } from '@/fsd/4-entities/goal';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
-import { CharacterRaidGoalSelect, GoalsService, IGoalEstimate } from '@/fsd/3-features/goals';
+import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals';
 
 import { GoalCardActions } from './actions';
 import { GoalCardAscend } from './ascend';
@@ -55,8 +54,6 @@ export const GoalCard: React.FC<Props> = ({
         energyTotal: 0,
         xpBooksTotal: 0,
     };
-    const completionEstimate: IGoalEstimate = passed ?? { ...goalEstimate, energyTotal: Number.POSITIVE_INFINITY };
-    const isGoalCompleted = GoalsService.isGoalCompleted(goal, completionEstimate);
     const calendarDate = useMemo(() => (passed ? getEstimatedDate(passed.daysLeft) : null), [passed]);
 
     const renderBody = () => {
@@ -95,40 +92,55 @@ export const GoalCard: React.FC<Props> = ({
     };
 
     const hasFooter = !!onToggleInclude || showRaidsButton(goal);
+    const cardBackgroundStyle =
+        bgColor === 'rgba(0, 0, 0, 0)'
+            ? { backgroundColor: 'var(--overlay)' }
+            : {
+                  backgroundColor: 'var(--overlay)',
+                  backgroundImage: `linear-gradient(${bgColor}, ${bgColor})`,
+              };
 
     return (
-        <Card
-            variant="outlined"
-            className={`flex min-h-[200px] w-[350px] flex-col ${isGoalCompleted ? 'bg-(--success)!' : ''}`}
-            style={{ background: bgColor }}>
+        <div
+            className="flex min-h-[200px] w-[350px] flex-col overflow-hidden rounded-xl border border-(--border) text-(--fg) shadow-sm transition-colors"
+            style={cardBackgroundStyle}>
             {/* Header: 3-column grid — [icon + #n] | name+date | actions */}
-            <div className="grid min-h-[83px] grid-cols-[auto_1fr_auto] gap-x-2 gap-y-0 px-3 pt-3 pb-2">
+            <div className="grid min-h-[83px] grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0 border-b border-(--border) px-4 pt-3 pb-2">
                 <div className="flex items-center gap-1 self-start">
-                    <span className="text-[1.4rem] leading-none font-medium">#{goal.priority}</span>
+                    <span className="text-[1.35rem] leading-none font-semibold text-(--muted-fg)">
+                        #{goal.priority}
+                    </span>
                     <UnitShardIcon icon={goal.unitRoundIcon} height={40} />
                 </div>
                 <div className="flex min-w-0 flex-col flex-wrap justify-start">
-                    <span className="text-[1.05rem] leading-snug font-medium">{goal.unitName ?? goal.unitId}</span>
-                    {calendarDate && <span className="text-xs opacity-60">{calendarDate}</span>}
+                    <span className="text-[1.05rem] leading-snug font-semibold text-(--fg)">
+                        {goal.unitName ?? goal.unitId}
+                    </span>
+                    {calendarDate && <span className="text-xs text-(--muted-fg)">{calendarDate}</span>}
                 </div>
                 <div className="self-start">
                     <GoalCardActions goalEstimate={goalEstimate} menuItemSelect={menuItemSelect} />
                 </div>
             </div>
-            <CardContent className="flex flex-1 flex-col pt-2 pb-3!">
+            <div className="flex flex-1 flex-col px-4 pt-3 pb-3 text-sm">
                 <div className="flex-1">
                     {renderBody()}
-                    {goal.notes && <p className="mt-2 text-sm opacity-70">{goal.notes}</p>}
+                    {goal.notes && <p className="mt-2 text-sm text-(--muted-fg)">{goal.notes}</p>}
                 </div>
                 {hasFooter && (
                     <>
-                        <Divider className="mt-3! mb-2!" />
+                        <div className="mt-3 mb-2 border-t border-(--border)" />
                         <div className="flex items-center justify-between gap-2">
                             {onToggleInclude && (
                                 <Button
                                     size="small"
                                     variant="outlined"
-                                    color={goal.include ? 'success' : 'error'}
+                                    className={
+                                        'rounded-full bg-(--secondary) px-3 ' +
+                                        (goal.include
+                                            ? '!border-green-700/50 !text-green-700 hover:!bg-green-500/10 dark:!border-green-400/50 dark:!text-green-400'
+                                            : '!border-red-700/50 !text-red-700 hover:!bg-red-500/10 dark:!border-red-400/50 dark:!text-red-400')
+                                    }
                                     startIcon={
                                         goal.include ? (
                                             <CheckCircle fontSize="small" />
@@ -144,7 +156,7 @@ export const GoalCard: React.FC<Props> = ({
                         </div>
                     </>
                 )}
-            </CardContent>
-        </Card>
+            </div>
+        </div>
     );
 };

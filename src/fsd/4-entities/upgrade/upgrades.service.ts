@@ -314,14 +314,15 @@ export class UpgradesService {
 
         for (const upgradeId of Object.keys(upgradeLocationsShort)) {
             if (!upgradeId.startsWith('shards_') && !upgradeId.startsWith('mythicShards_')) continue;
-            const charId = upgradeId.split('_')[1];
-            const char = CharactersService.charactersData.find(c => c.snowprintId === charId);
+            const unitId = upgradeId.split('_')[1];
+            const char = CharactersService.charactersData.find(c => c.snowprintId === unitId);
+            const mow = mows2Data.mows.find(m => m.snowprintId === unitId);
             result[upgradeId] = {
                 id: upgradeId,
                 snowprintId: upgradeId,
                 label: upgradeId.startsWith('shards_')
-                    ? 'Shards for ' + (char?.name ?? charId)
-                    : 'Mythic Shards for ' + (char?.name ?? charId),
+                    ? 'Shards for ' + (char?.name ?? mow?.name ?? unitId)
+                    : 'Mythic Shards for ' + (char?.name ?? mow?.name ?? unitId),
                 rarity: upgradeId.startsWith('shards_') ? 'Shard' : 'Mythic Shard',
                 locations:
                     orderBy(
@@ -331,7 +332,7 @@ export class UpgradesService {
                         ['dropRate', 'nodeNumber'],
                         ['desc', 'desc']
                     ) ?? [],
-                iconPath: char?.roundIcon ?? '',
+                iconPath: char?.roundIcon ?? mow?.roundIcon ?? '',
                 crafted: false,
                 stat: 'Shard',
             };
