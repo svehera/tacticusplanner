@@ -36,16 +36,15 @@ export default defineConfig([
         'vite-env.d.ts',
         '**/analytics__google-analytics.d.ts',
     ]),
-    eslintPluginUnicorn.configs.recommended,
     {
-        // Temporary config to enable & autofix rules one-at-a-time
-        languageOptions: { globals: globals.builtin },
-        plugins: { unicorn: eslintPluginUnicorn },
+        ...eslintPluginUnicorn.configs.recommended,
         rules: {
+            ...eslintPluginUnicorn.configs.recommended.rules,
             'unicorn/prevent-abbreviations': [
                 'error',
                 {
                     allowList: {
+                        utils: true,
                         // Allow variable names used within React
                         Props: true,
                         props: true,
