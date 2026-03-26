@@ -18,7 +18,7 @@ import { CampaignsService, CampaignType, Campaign, ICampaignBattleComposed } fro
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import { CharactersService, CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import { ICharacter2, IUnitShards } from '@/fsd/4-entities/character/model';
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { IMow2, mows2Data, MowsService } from '@/fsd/4-entities/mow';
 import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 import {
     IBaseUpgrade,
@@ -604,7 +604,10 @@ export class UpgradesService {
             }
             for (const raid of day.raids) {
                 raid.relatedCharacters = raid.relatedCharacters.map(
-                    charId => CharactersService.resolveCharacter(charId)?.name ?? charId
+                    charId =>
+                        CharactersService.resolveCharacter(charId)?.name ??
+                        mows2Data.mows.find(mow => mow.snowprintId === charId)?.name ??
+                        charId
                 );
                 for (const loc of raid.raidLocations) {
                     loc.energySpent = loc.raidsToPerform * loc.energyCost;
@@ -1690,6 +1693,7 @@ export class UpgradesService {
         }
 
         for (const [upgradeId, raids] of Object.entries(onslaughts)) {
+            const mat = combinedBaseMaterials[upgradeId];
             day.raids.push({
                 raidLocations: raids,
                 energyTotal: 0,
@@ -1697,17 +1701,18 @@ export class UpgradesService {
                 daysTotal: 0,
                 raidsTotal: 0,
                 acquiredCount: Math.floor(originalShards[upgradeId] ?? 0),
-                requiredCount: Math.ceil(combinedBaseMaterials[upgradeId]?.requiredCount ?? 0),
-                countByGoalId: { ...combinedBaseMaterials[upgradeId]?.countByGoalId },
+                requiredCount: Math.ceil(mat?.requiredCount ?? 0),
+                countByGoalId: { ...mat?.countByGoalId },
                 relatedCharacters: uniq(relatedGoals[upgradeId]?.map(goal => goal.unitId) ?? []),
                 relatedGoals: uniq((relatedGoals[upgradeId] ?? []).map(goal => goal.goalId)),
                 isBlocked: false,
                 isFinished: false,
                 id: upgradeId,
                 snowprintId: upgradeId,
-                label: 'Onslaught',
-                rarity: 'Shard',
-                iconPath: FsdUpgradesService.getUpgrade(raids[0].rewards.potential[0].id)?.iconPath ?? '',
+                label: mat?.label ?? upgradeId,
+                rarity: mat?.rarity ?? (upgradeId.startsWith('shards_') ? 'Shard' : 'Mythic Shard'),
+                iconPath:
+                    mat?.iconPath ?? FsdUpgradesService.getUpgrade(raids[0].rewards.potential[0].id)?.iconPath ?? '',
                 locations: raids,
                 crafted: false,
                 stat: 'Shard',

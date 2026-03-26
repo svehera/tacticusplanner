@@ -14,13 +14,13 @@ interface Props {
 export const GoalEstimateRow: React.FC<Props> = ({ daysLeft, calendarDate, energyTotal }) => (
     <>
         <AccessibleTooltip title={`${daysLeft} days. Estimated date ${calendarDate ?? ''}`}>
-            <div className="flex-box gap-[3px]">
+            <div className="flex-box gap-[3px] text-(--muted-fg)">
                 <CalendarMonthIcon /> {daysLeft}
             </div>
         </AccessibleTooltip>
         {energyTotal !== undefined && (
             <AccessibleTooltip title={`${energyTotal} energy`}>
-                <div className="flex-box gap-[3px]">
+                <div className="flex-box gap-[3px] text-(--muted-fg)">
                     <MiscIcon icon={'energy'} height={18} width={15} /> {energyTotal}
                 </div>
             </AccessibleTooltip>

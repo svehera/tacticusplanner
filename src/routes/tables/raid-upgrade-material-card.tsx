@@ -36,15 +36,21 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
     const rewardIcon = () => {
         if (UpgradesService.isShard(upgradeMaterialSnowprintId)) {
             const char = CharactersService.getUnit(upgradeMaterialSnowprintId.slice(7));
+            const mow = mows2Data.mows.find(m => m.snowprintId === upgradeMaterialSnowprintId.slice(7));
             if (char) {
                 return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} mythic={false} />;
+            } else if (mow) {
+                return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={mow.roundIcon} mythic={false} />;
             }
             return upgradeMaterialSnowprintId.slice(7);
         }
         if (UpgradesService.isMythicShard(upgradeMaterialSnowprintId)) {
             const char = CharactersService.getUnit(upgradeMaterialSnowprintId.slice(13));
+            const mow = mows2Data.mows.find(m => m.snowprintId === upgradeMaterialSnowprintId.slice(13));
             if (char) {
                 return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} mythic={true} />;
+            } else if (mow) {
+                return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={mow.roundIcon} mythic={true} />;
             }
             return upgradeMaterialSnowprintId.slice(13);
         }
@@ -118,7 +124,7 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
                         return (
                             <>
                                 <h4 className="mb-1 w-full text-xs font-semibold text-gray-400 uppercase">
-                                    {suggested.length > 0 ? 'Suggested Raids' : 'Blocked Raids'}
+                                    {suggested.length > 0 ? 'Suggested Locations' : 'Blocked Locations'}
                                 </h4>
                                 {displayLocations.map(loc => (
                                     <CampaignLocation

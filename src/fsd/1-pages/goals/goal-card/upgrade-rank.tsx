@@ -63,8 +63,8 @@ export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, calen
                                 ? 'XP Income not set'
                                 : `${Math.ceil(goalEstimate.xpDaysLeft ?? 0)} days. Estimated date ${getEstimatedDate(goalEstimate.xpDaysLeft ?? 0)}`
                         }>
-                        <div className="flex-box gap-[3px]">
-                            <CalendarMonthIcon className={xpIncomeNotSet ? 'text-danger' : ''} />
+                        <div className="flex-box gap-[3px] text-(--muted-fg)">
+                            <CalendarMonthIcon />
                             {Math.ceil(goalEstimate.xpDaysLeft ?? 0)}
                         </div>
                     </AccessibleTooltip>

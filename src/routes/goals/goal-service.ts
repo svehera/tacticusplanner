@@ -35,11 +35,11 @@ export class GoalService {
             });
         }
         const kBgColors: IGoalColor[] = [
-            { r: 0, g: 255, b: 0, a: 0.25 },
-            { r: 255, g: 255, b: 0, a: 0.25 },
-            { r: 255, g: 0, b: 0, a: 0.25 },
-            { r: 0, g: 0, b: 0, a: 0.25 },
-            { r: 0, g: 0, b: 0, a: 0.25 },
+            { r: 0, g: 255, b: 0, a: 0.12 },
+            { r: 255, g: 255, b: 0, a: 0.12 },
+            { r: 255, g: 0, b: 0, a: 0.12 },
+            { r: 0, g: 0, b: 0, a: 0.08 },
+            { r: 0, g: 0, b: 0, a: 0.08 },
         ];
         if (goalEstimate !== undefined) {
             if (!goalEstimate.daysLeft) {
