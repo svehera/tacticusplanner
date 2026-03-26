@@ -1,4 +1,4 @@
-import {
+﻿import {
     Delete as DeleteIcon,
     ExpandMore as ExpandMoreIcon,
     GridView as GridViewIcon,
@@ -38,13 +38,30 @@ import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
 import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
-import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
 import { GoalCard } from '@/fsd/1-pages/goals/goal-card';
 
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
+
+const isShardRewardId = (rewardId: string | undefined): boolean =>
+    rewardId !== undefined && (UpgradesService.isShard(rewardId) || UpgradesService.isMythicShard(rewardId));
+
+const locationHasShardReward = (rewardIds: Array<{ id: string }>): boolean =>
+    rewardIds.some(reward => isShardRewardId(reward.id));
+
+const trimCompactFraction = (n: number): string => n.toFixed(1).replace(/\.0$/, '');
+
+const formatCompactValue = (value: number): string => {
+    const abs = Math.abs(value);
+
+    if (abs < 1e3) return numberToThousandsString(value);
+    if (abs < 1e6) return `${trimCompactFraction(value / 1e3)}k`;
+    if (abs < 1e9) return `${trimCompactFraction(value / 1e6)}M`;
+    if (abs < 1e12) return `${trimCompactFraction(value / 1e9)}B`;
+    return `${trimCompactFraction(value / 1e12)}T`;
+};
 
 export const Goals = () => {
     const {
@@ -70,6 +87,7 @@ export const Goals = () => {
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
     const [openSettings, setOpenSettings] = useState<boolean>(false);
+    const [resourcesExpanded, setResourcesExpanded] = useState(false);
 
     const updateColorCodingMode = useCallback(
         (newMode: GoalColorMode) => {
@@ -96,15 +114,6 @@ export const Goals = () => {
     const sortedUpgrades = [...upgradeRankOrMowGoals].sort((a, b) => a.priority - b.priority);
     const sortedAbilities = [...upgradeAbilities].sort((a, b) => a.priority - b.priority);
 
-    const estimatedShardsTotal = ShardsService.getShardsEstimatedDays(
-        {
-            campaignsProgress: campaignsProgress,
-            preferences: dailyRaidsPreferences,
-            raidedLocations: [],
-        },
-        ...shardsGoals
-    );
-
     const onslaughtTokensToday = useMemo(
         () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
         [gameModeTokens]
@@ -125,6 +134,44 @@ export const Goals = () => {
         resolvedMows,
         ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
     );
+
+    const shardRaidSummary = useMemo(() => {
+        const daysWithShardRaids = estimatedUpgradesTotal.upgradesRaids
+            .map((day, index) => ({
+                index,
+                hasShardRaid: day.raids.some(raid =>
+                    raid.raidLocations.some(location => locationHasShardReward(location.rewards.potential))
+                ),
+            }))
+            .filter(day => day.hasShardRaid);
+
+        const daysTotal =
+            daysWithShardRaids.length === 0
+                ? 0
+                : daysWithShardRaids[daysWithShardRaids.length - 1].index - daysWithShardRaids[0].index + 1;
+
+        const energyTotal = estimatedUpgradesTotal.upgradesRaids.reduce(
+            (total, day) =>
+                total +
+                day.raids.reduce(
+                    (dayTotal, raid) =>
+                        dayTotal +
+                        raid.raidLocations.reduce(
+                            (locationTotal, location) =>
+                                locationTotal +
+                                (locationHasShardReward(location.rewards.potential) ? location.energySpent : 0),
+                            0
+                        ),
+                    0
+                ),
+            0
+        );
+
+        return {
+            daysTotal,
+            energyTotal,
+        };
+    }, [estimatedUpgradesTotal.upgradesRaids]);
 
     const removeGoal = (goalId: string): void => {
         dispatch.goals({ type: 'Delete', goalId });
@@ -240,6 +287,16 @@ export const Goals = () => {
         return first;
     });
 
+    const shardOnslaughtTokensTotal = useMemo(
+        () =>
+            sortedShards.reduce(
+                (total, goal) =>
+                    total + (mergedGoalEstimates.find(estimate => estimate.goalId === goal.goalId)?.oTokensTotal ?? 0),
+                0
+            ),
+        [sortedShards, mergedGoalEstimates]
+    );
+
     const totalGoldAbilities = (mergedGoalEstimates as IGoalEstimate[]).reduce((accumulator, current) => {
         const abilityGold = current.abilitiesEstimate?.gold ?? 0;
         const xpGold = current.xpEstimateAbilities?.gold ?? 0;
@@ -318,61 +375,118 @@ export const Goals = () => {
                     onToggle={updateColorCodingMode}
                 />
             </div>
-            <div className="flex-box gap20 my-2 w-[350px]">
+            <div className="my-2 w-full max-w-[1100px]">
                 <Accordion
-                    defaultExpanded={false}
-                    className="border border-(--border) bg-transparent px-2 shadow-none hover:bg-(--secondary)">
+                    expanded={resourcesExpanded}
+                    onChange={(_, expanded) => setResourcesExpanded(expanded)}
+                    className={`overflow-hidden rounded-xl border border-(--border) bg-transparent shadow-none transition-colors ${resourcesExpanded ? 'ring-1 ring-black/5 dark:ring-white/10' : 'hover:bg-(--secondary)/40'}`}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="min-h-0 rounded-lg bg-transparent p-0"
+                        sx={{
+                            minHeight: '42px !important',
+                            '& .MuiAccordionSummary-content': {
+                                margin: '6px 0 !important',
+                            },
+                        }}
+                        className="bg-transparent px-4 py-0"
                         aria-controls="resources-content"
                         id="resources-header">
-                        <span className="text-base font-semibold text-(--fg)">Total Resources Missing</span>
+                        <div className="flex w-full flex-wrap items-center gap-2 pr-2">
+                            <span className="text-sm font-semibold text-(--fg)">Total Resources Missing</span>
+                            <span className="ml-auto flex flex-wrap items-center gap-2">
+                                <span className="rounded-full border border-(--border) bg-(--secondary) px-2 py-0.5 text-xs text-(--fg)">
+                                    <span className="font-medium">Energy:</span>{' '}
+                                    <span>{numberToThousandsString(estimatedUpgradesTotal.energyTotal)}</span>
+                                </span>
+                                <span className="rounded-full border border-(--border) bg-(--secondary) px-2 py-0.5 text-xs text-(--fg)">
+                                    <span className="font-medium">XP:</span>{' '}
+                                    <span>{formatCompactValue(adjustedGoalsEstimates.neededXp)}</span>
+                                </span>
+                            </span>
+                        </div>
                     </AccordionSummary>
 
-                    <AccordionDetails className="bg-transparent p-0">
-                        <div className="mt-2 flex flex-col gap-y-2 rounded-lg border border-(--border) bg-(--overlay) p-2">
-                            <div className="flex items-center justify-start gap-x-4 rounded-md border border-(--border) bg-(--secondary) p-2">
-                                <MiscIcon icon={'energy'} height={35} width={35} />{' '}
-                                <b className="text-lg text-(--fg)">{estimatedUpgradesTotal.energyTotal}</b>
+                    <AccordionDetails className="bg-transparent px-4 pt-0 pb-4">
+                        <div className="grid grid-cols-1 gap-3">
+                            <div className="grid grid-cols-1 gap-3 xl:grid-cols-[300px_1fr]">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                        Energy
+                                    </div>
+                                    <div className="flex items-center gap-x-4 rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                        <MiscIcon icon={'energy'} height={35} width={35} />
+                                        <b className="text-2xl text-(--fg)">{estimatedUpgradesTotal.energyTotal}</b>
+                                    </div>
+                                </div>
+
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                        XP Books
+                                    </div>
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                        <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
+                                    </div>
+                                </div>
                             </div>
 
-                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
-                                <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
-                            </div>
+                            <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                        Badges
+                                    </div>
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                        {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
+                                            <div key={alliance} className="flex-box mb-2 last:mb-0">
+                                                <BadgesTotal
+                                                    badges={adjustedGoalsEstimates.neededBadges[alliance]}
+                                                    alliance={alliance}
+                                                    size={'medium'}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
 
-                            <div className="flex flex-col gap-y-2 rounded-md border border-(--border) bg-(--secondary) p-2">
-                                {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
-                                    <div key={alliance} className="flex-box">
-                                        <BadgesTotal
-                                            badges={adjustedGoalsEstimates.neededBadges[alliance]}
-                                            alliance={alliance}
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                        Orbs
+                                    </div>
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                        {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
+                                            <div key={alliance} className="flex-box mb-2 last:mb-0">
+                                                <OrbsTotal
+                                                    orbs={adjustedGoalsEstimates.neededOrbs[alliance]}
+                                                    alliance={alliance}
+                                                    size={35}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                        Forge Badges
+                                    </div>
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                        <ForgeBadgesTotal
+                                            badges={adjustedGoalsEstimates.neededForgeBadges}
                                             size={'medium'}
                                         />
                                     </div>
-                                ))}
-                            </div>
-                            <div className="flex flex-col gap-y-2 rounded-md border border-(--border) bg-(--secondary) p-2">
-                                {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
-                                    <div key={alliance} className="flex-box">
-                                        <OrbsTotal
-                                            orbs={adjustedGoalsEstimates.neededOrbs[alliance]}
-                                            alliance={alliance}
-                                            size={35}
+                                </div>
+
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                        MoW Components
+                                    </div>
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                        <MoWComponentsTotal
+                                            components={adjustedGoalsEstimates.neededComponents}
+                                            size={'medium'}
                                         />
                                     </div>
-                                ))}
-                            </div>
-
-                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
-                                <ForgeBadgesTotal badges={adjustedGoalsEstimates.neededForgeBadges} size={'medium'} />
-                            </div>
-
-                            <div className="rounded-md border border-(--border) bg-(--secondary) p-2">
-                                <MoWComponentsTotal
-                                    components={adjustedGoalsEstimates.neededComponents}
-                                    size={'medium'}
-                                />
+                                </div>
                             </div>
                         </div>
                     </AccordionDetails>
@@ -385,7 +499,7 @@ export const Goals = () => {
                             Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
                         </span>
                         <span>
-                            <b>{estimatedUpgradesTotal.energyTotal}</b>{' '}
+                            <b>{estimatedUpgradesTotal.energyTotal - shardRaidSummary.energyTotal}</b>{' '}
                             <MiscIcon icon={'energy'} height={15} width={15} />)
                         </span>
                     </div>
@@ -436,14 +550,13 @@ export const Goals = () => {
                 <div>
                     <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
                         <span>
-                            Ascend/Promote/Unlock (<b>{estimatedShardsTotal.daysTotal}</b> Days |
+                            Ascend/Promote/Unlock (<b>{shardRaidSummary.daysTotal}</b> Days |
                         </span>
                         <span>
-                            <b>{estimatedShardsTotal.energyTotal}</b>{' '}
-                            <MiscIcon icon={'energy'} height={15} width={15} /> |
+                            <b>{shardRaidSummary.energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} /> |
                         </span>
                         <span>
-                            <b>{estimatedShardsTotal.onslaughtTokens}</b> Tokens)
+                            <b>{shardOnslaughtTokensTotal}</b> Tokens)
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (

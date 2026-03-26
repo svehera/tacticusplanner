@@ -34,6 +34,8 @@ export interface IViewPreferences
     goalColorMode: GoalColorMode;
     campaignsTableView: boolean;
     raidsTableView: boolean;
+    includeExhaustedBattlesInHse: boolean;
+    showHseWarning: boolean;
     myProgressShowCoreCharacters: boolean;
     apiIntegrationSyncOptions: string[];
     tokenomicsTableView: boolean;

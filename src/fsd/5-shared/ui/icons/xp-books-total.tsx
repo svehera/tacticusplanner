@@ -36,17 +36,19 @@ export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
         return books;
     }, [xp]);
     return (
-        <div className="flex-box gap20">
+        <div className="flex-box gap24">
             {[...XP_BOOK_ORDER].reverse().map(rarity => {
                 const booksCount = xpBooks[rarity];
                 const bookName = Rarity[rarity].toLowerCase() + 'Book';
                 return (
                     booksCount > 0 && (
-                        <Tooltip key={rarity} title={`${RarityMapper.rarityToRarityString(rarity)} XP Books`}>
-                            <Badge badgeContent={<b>{booksCount}</b>}>
-                                <MiscIcon icon={bookName} width={sizePx} height={sizePx} />
-                            </Badge>
-                        </Tooltip>
+                        <div key={rarity} className="px-1.5">
+                            <Tooltip title={`${RarityMapper.rarityToRarityString(rarity)} XP Books`}>
+                                <Badge badgeContent={<b>{booksCount}</b>}>
+                                    <MiscIcon icon={bookName} width={sizePx} height={sizePx} />
+                                </Badge>
+                            </Tooltip>
+                        </div>
                     )
                 );
             })}

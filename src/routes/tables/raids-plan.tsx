@@ -160,7 +160,20 @@ export const RaidsPlan: React.FC<Props> = ({
     }, [estimatedRanks.upgradesRaids.length]);
 
     const daysTotal = estimatedRanks.daysTotal;
-    const energyTotal = estimatedRanks.energyTotal;
+
+    const energyTotal = useMemo(() => {
+        const todayRaids = estimatedRanks.upgradesRaids[0]?.raids ?? [];
+        const energyAlreadySpentToday = todayRaids.reduce((total, raid) => {
+            const locationSpent = raid.raidLocations.reduce(
+                (locationTotal, location) => locationTotal + location.raidsAlreadyPerformed * location.energyCost,
+                0
+            );
+
+            return total + locationSpent;
+        }, 0);
+
+        return Math.max(0, estimatedRanks.energyTotal - energyAlreadySpentToday);
+    }, [estimatedRanks.energyTotal, estimatedRanks.upgradesRaids]);
 
     const calendarDateTotal: string = useMemo(() => {
         const nextDate = new Date();
@@ -394,8 +407,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                         <MiscIcon icon={'energy'} height={15} width={15} /> Days |
                                     </span>
                                     <span>
-                                        <b>{estimatedRanks.energyTotal}</b>{' '}
-                                        <MiscIcon icon={'energy'} height={15} width={15} /> |
+                                        <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} /> |
                                     </span>
                                     <span>
                                         <b>{estimatedRanks.raidsTotal}</b> Raids)
