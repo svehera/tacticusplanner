@@ -52,6 +52,7 @@ export const HomeScreenEvent = () => {
     });
     const [includeRewardlessBattles, setIncludeRewardlessBattles] = useState<boolean>(true);
     const includeExhaustedBattles = viewPreferences.includeExhaustedBattlesInHse ?? true;
+    const showHseWarning = viewPreferences.showHseWarning ?? true;
 
     const exhaustedBattleIds = useMemo(() => {
         return new Set(
@@ -327,13 +328,30 @@ export const HomeScreenEvent = () => {
 
     return (
         <div>
-            <div>
-                <h1>
-                    This page is informational only. You most likely want the Daily Raids page instead, where you can go
-                    to settings and tell it to optimize for whichever home-screen event is ongoing, so you make progress
-                    on the event without derailing your goals.
-                </h1>
-            </div>
+            {showHseWarning && (
+                <div className="mb-2 rounded-md border border-red-500/60 bg-red-500/10 px-3 py-2 text-red-100">
+                    <div className="flex items-start justify-between gap-3">
+                        <h1 className="m-0 text-base leading-relaxed font-semibold">
+                            This page is informational only. You most likely want the Daily Raids page instead, where
+                            you can go to settings and tell it to optimize for whichever home-screen event is ongoing,
+                            so you make progress on the event without derailing your goals.
+                        </h1>
+                        <button
+                            type="button"
+                            aria-label="Dismiss warning permanently"
+                            className="rounded px-2 py-0.5 text-red-200 hover:bg-red-500/20 hover:text-red-100"
+                            onClick={() =>
+                                dispatch.viewPreferences({
+                                    type: 'Update',
+                                    setting: 'showHseWarning',
+                                    value: false,
+                                })
+                            }>
+                            ×
+                        </button>
+                    </div>
+                </div>
+            )}
             <div>
                 <div className="m-2 flex flex-wrap items-center gap-4">
                     <div className="flex items-center gap-2">

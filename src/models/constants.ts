@@ -243,6 +243,7 @@ export const defaultData: IPersonalData2 = {
         goalColorMode: 'None',
         raidsTableView: false,
         includeExhaustedBattlesInHse: true,
+        showHseWarning: true,
         lreGridView: false,
         lreGoalsPreview: false,
         lreTileShowUnitIcon: true,
