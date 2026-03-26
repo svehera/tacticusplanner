@@ -1,16 +1,16 @@
+/* eslint-disable import-x/no-internal-modules */
 import { MenuItem, Select } from '@mui/material';
 import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { useMemo, useRef, useState } from 'react';
+import { useContext, useMemo, useRef, useState } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { ICampaignBattleComposed, IDailyRaidsHomeScreenEvent } from '@/models/interfaces';
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { Campaign, CampaignImage, CampaignLocation, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
-// eslint-disable-next-line import-x/no-internal-modules
 import { IRewards } from '@/fsd/4-entities/campaign/model';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { NpcService } from '@/fsd/4-entities/npc';
@@ -44,15 +44,27 @@ const getReward = (rewards: IRewards): string => {
 };
 
 export const HomeScreenEvent = () => {
+    const { dailyRaids, viewPreferences } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
     const gridReference = useRef<AgGridReact<HseBattle>>(null);
     const [campaignsToConsider, setCampaignsToConsider] = useState<Campaign[]>(() => {
         return CampaignsService.allCampaigns.map(x => x.id);
     });
     const [includeRewardlessBattles, setIncludeRewardlessBattles] = useState<boolean>(true);
+    const includeExhaustedBattles = viewPreferences.includeExhaustedBattlesInHse ?? true;
+
+    const exhaustedBattleIds = useMemo(() => {
+        return new Set(
+            dailyRaids.raidedLocations
+                .filter(location => location.raidsAlreadyPerformed >= location.dailyBattleCount)
+                .map(location => location.id)
+        );
+    }, [dailyRaids.raidedLocations]);
 
     const calculateBestBattles = (
         campaigns: Campaign[],
         includeRewardlessBattles: boolean,
+        includeExhaustedBattles: boolean,
         enemyFilter: (npc: ReturnType<typeof NpcService.getNpcById>) => boolean,
         applyEliteCampaignMultiplier: boolean
     ): HseBattle[] => {
@@ -62,6 +74,10 @@ export const HomeScreenEvent = () => {
             campaigns.includes(campaignId as Campaign)
         )) {
             for (const battle of battles) {
+                if (!includeExhaustedBattles && exhaustedBattleIds.has(battle.id)) {
+                    continue;
+                }
+
                 let points =
                     battle.detailedEnemyTypes
                         ?.filter(x => {
@@ -107,10 +123,17 @@ export const HomeScreenEvent = () => {
             calculateBestBattles(
                 campaignsToConsider,
                 includeRewardlessBattles,
+                includeExhaustedBattles,
                 npc => npc?.traits.includes('Mechanical') ?? false,
                 /*applyEliteCampaignMultiplier=*/ false
             ),
-        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+        [
+            calculateBestBattles,
+            campaignsToConsider,
+            includeRewardlessBattles,
+            includeExhaustedBattles,
+            exhaustedBattleIds,
+        ]
     );
 
     const bestPurgeOrder = useMemo(
@@ -118,10 +141,17 @@ export const HomeScreenEvent = () => {
             calculateBestBattles(
                 campaignsToConsider,
                 includeRewardlessBattles,
+                includeExhaustedBattles,
                 npc => npc?.faction === 'Tyranids',
                 /*applyEliteCampaignMultiplier=*/ true
             ),
-        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+        [
+            calculateBestBattles,
+            campaignsToConsider,
+            includeRewardlessBattles,
+            includeExhaustedBattles,
+            exhaustedBattleIds,
+        ]
     );
 
     const bestTrainingRush = useMemo(
@@ -129,20 +159,34 @@ export const HomeScreenEvent = () => {
             calculateBestBattles(
                 campaignsToConsider,
                 includeRewardlessBattles,
+                includeExhaustedBattles,
                 () => true,
                 /*applyEliteCampaignMultiplier=*/ true
             ),
-        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+        [
+            calculateBestBattles,
+            campaignsToConsider,
+            includeRewardlessBattles,
+            includeExhaustedBattles,
+            exhaustedBattleIds,
+        ]
     );
     const bestWarpSurge = useMemo(
         () =>
             calculateBestBattles(
                 campaignsToConsider,
                 includeRewardlessBattles,
+                includeExhaustedBattles,
                 npc => npc?.alliance === 'Chaos',
                 /*applyEliteCampaignMultiplier=*/ true
             ),
-        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+        [
+            calculateBestBattles,
+            campaignsToConsider,
+            includeRewardlessBattles,
+            includeExhaustedBattles,
+            exhaustedBattleIds,
+        ]
     );
 
     const rewardIcon = (reward: string) => {
@@ -342,6 +386,21 @@ export const HomeScreenEvent = () => {
                             onChange={event => setIncludeRewardlessBattles(event.target.checked)}
                         />
                         <label htmlFor="ignore-early-indom">Include battles with no rewards</label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <input
+                            type="checkbox"
+                            id="include-exhausted-battles"
+                            checked={includeExhaustedBattles}
+                            onChange={event =>
+                                dispatch.viewPreferences({
+                                    type: 'Update',
+                                    setting: 'includeExhaustedBattlesInHse',
+                                    value: event.target.checked,
+                                })
+                            }
+                        />
+                        <label htmlFor="include-exhausted-battles">Include exhausted battles</label>
                     </div>
                 </div>
             </div>
