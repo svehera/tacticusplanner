@@ -38,7 +38,7 @@ export const RankSelect2 = ({
                         leave="transition ease-in duration-100"
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0">
-                        <Listbox.Options className="absolute z-50 mt-2 w-full overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-xl dark:border-slate-700 dark:bg-[#161b22]">
+                        <Listbox.Options className="absolute z-50 mt-2 max-h-[min(60vh,24rem)] w-full overflow-y-auto overscroll-contain rounded-lg border border-slate-200 bg-white py-1 shadow-xl dark:border-slate-700 dark:bg-[#161b22]">
                             {rankValues.map(rank => (
                                 <Listbox.Option
                                     key={rank}

@@ -16,6 +16,7 @@ interface Props {
     disabledUnits?: string[]; // List of character snowprintIds that should be shown as disabled
     flexIndex?: number;
     zoom?: number;
+    showEquipment?: RosterSnapshotShowVariableSettings;
     onCharClicked: (char: ICharacter2) => void;
     onMowClicked: (mow: IMow2) => void;
 }
@@ -26,6 +27,7 @@ export const TeamFlow: React.FC<Props> = ({
     disabledUnits,
     flexIndex,
     zoom = 1,
+    showEquipment = RosterSnapshotShowVariableSettings.Always,
     onCharClicked,
     onMowClicked,
 }: Props) => {
@@ -47,7 +49,7 @@ export const TeamFlow: React.FC<Props> = ({
                             showShards={RosterSnapshotShowVariableSettings.Never}
                             showXpLevel={RosterSnapshotShowVariableSettings.Never}
                             showAbilities={RosterSnapshotShowVariableSettings.Always}
-                            showEquipment={RosterSnapshotShowVariableSettings.Always}
+                            showEquipment={showEquipment}
                             showTooltip={false}
                             char={Teams2Service.convertCharacter(char!)}
                             charData={char}
@@ -69,7 +71,7 @@ export const TeamFlow: React.FC<Props> = ({
                                     showShards={RosterSnapshotShowVariableSettings.Never}
                                     showXpLevel={RosterSnapshotShowVariableSettings.Never}
                                     showAbilities={RosterSnapshotShowVariableSettings.Always}
-                                    showEquipment={RosterSnapshotShowVariableSettings.Always}
+                                    showEquipment={showEquipment}
                                     showTooltip={false}
                                     char={Teams2Service.convertCharacter(char!)}
                                     charData={char}

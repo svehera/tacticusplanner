@@ -27,6 +27,7 @@ import { xpIncomeMenuItem } from '@/fsd/1-pages/input-xp-income/xp-income.menu-i
 import { insightsMenuItem } from '@/fsd/1-pages/insights/insights.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
+import { bulkGoalCreatorMenuItem } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.menu-item';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { cesMenuItem } from '@/fsd/1-pages/plan-ces/ces.menu-item';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
@@ -67,6 +68,7 @@ export const menuItemById = {
     mowLookup: mowLookupMenuItem,
     campaigns: new MenuItemTP('Campaigns', <FormatListNumberedIcon />, '/learn/campaigns'),
     hses: new MenuItemTP('Home-Screen Events', <FormatListNumberedIcon />, '/plan/hse'),
+    bulkGoalCreator: bulkGoalCreatorMenuItem,
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
     campaignProgression: campaignProgressionMenuItem,
@@ -117,6 +119,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['quests'],
     menuItemById['ces'],
     menuItemById['hses'],
+    menuItemById['bulkGoalCreator'],
     new MenuItemTP('To Be Deleted', <DeleteForeverIcon />, '', '', '', [
         menuItemById['teams'],
         menuItemById['defense'],
@@ -136,6 +139,7 @@ export const planSubMenu: MenuItemTP[] = [
     ...activeLreMenuItems,
     menuItemById['campaignProgression'],
     menuItemById['hses'],
+    menuItemById['bulkGoalCreator'],
     menuItemById['teams'],
     menuItemById['defense'],
     menuItemById['offense'],

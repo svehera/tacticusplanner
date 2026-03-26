@@ -15,6 +15,7 @@ import { xpIncomeLazyRoute } from '@/fsd/1-pages/input-xp-income/xp-income.route
 import { insightsLazyRoute } from '@/fsd/1-pages/insights/insights.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
+import { bulkGoalCreatorRoute } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.route';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { cesRoute } from '@/fsd/1-pages/plan-ces/ces.route';
 import { lreLazyRoute } from '@/fsd/1-pages/plan-lre';
@@ -59,6 +60,7 @@ export const globalPlanRoutes: RouteObject[] = [
             return { Component: DailyRaids };
         },
     },
+    bulkGoalCreatorRoute,
     teams2Route,
     warDefense2Route,
     warOffense2Route,
