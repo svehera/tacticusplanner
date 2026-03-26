@@ -101,7 +101,7 @@ export const TeamFlow: React.FC<Props> = ({
                                             ? RosterSnapshotShowVariableSettings.Never
                                             : RosterSnapshotShowVariableSettings.Always
                                     }
-                                    showEquipment={showEquipment}
+                                    showEquipment={RosterSnapshotShowVariableSettings.Always}
                                     showTooltip={false}
                                     mow={Teams2Service.convertMow(mow)}
                                     mowData={mow}
