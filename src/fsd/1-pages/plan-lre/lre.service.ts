@@ -27,9 +27,9 @@ export class LreService {
         const completedReqs = trackProgress.battles.flatMap(x => x.requirementsProgress).filter(x => x.completed);
         const result: Record<string, number> = {};
 
-        trackProgress.requirements.forEach(requirement => {
+        for (const requirement of trackProgress.requirements) {
             result[requirement.id] = completedReqs.filter(x => x.id === requirement.id).length;
-        });
+        }
 
         return result;
     };
@@ -128,12 +128,12 @@ export class LreService {
                 } satisfies ILreBattleProgress;
             });
 
-            requirements.forEach(requirement => {
+            for (const requirement of requirements) {
                 requirement.completed = battles
                     .flatMap(x => x.requirementsProgress)
                     .filter(x => x.id === requirement.id)
                     .every(x => x.completed);
-            });
+            }
 
             const requirementsTotalPoints = sum(requirements.map(x => x.pointsPerBattle));
             const totalPoints = sum(

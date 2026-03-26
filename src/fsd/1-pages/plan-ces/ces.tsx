@@ -322,8 +322,8 @@ export const CEs = () => {
                 <UnitShardIcon
                     mythic={false}
                     icon={
-                        chars.find(char => char.snowprintId === material.substring(7))?.roundIcon ??
-                        mows.find(mow => mow.snowprintId === material.substring(7))?.roundIcon ??
+                        chars.find(char => char.snowprintId === material.slice(7))?.roundIcon ??
+                        mows.find(mow => mow.snowprintId === material.slice(7))?.roundIcon ??
                         ''
                     }
                 />
@@ -333,8 +333,8 @@ export const CEs = () => {
                 <UnitShardIcon
                     mythic={true}
                     icon={
-                        chars.find(char => char.snowprintId === material.substring(13))?.roundIcon ??
-                        mows.find(mow => mow.snowprintId === material.substring(13))?.roundIcon ??
+                        chars.find(char => char.snowprintId === material.slice(13))?.roundIcon ??
+                        mows.find(mow => mow.snowprintId === material.slice(13))?.roundIcon ??
                         ''
                     }
                 />

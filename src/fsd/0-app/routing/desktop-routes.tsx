@@ -77,6 +77,13 @@ export const globalPlanRoutes: RouteObject[] = [
     campaignProgressionLazyRoute,
     questsRoute,
     cesRoute,
+    {
+        path: 'plan/hse',
+        async lazy() {
+            const { HomeScreenEvent } = await import('@/fsd/1-pages/plan-hse/hse');
+            return { Component: HomeScreenEvent };
+        },
+    },
 ];
 
 export const globalLearnRoutes: RouteObject[] = [
@@ -127,13 +134,6 @@ export const globalLearnRoutes: RouteObject[] = [
         async lazy() {
             const { Campaigns } = await import('@/fsd/1-pages/learn-campaigns/campaigns');
             return { Component: Campaigns };
-        },
-    },
-    {
-        path: 'learn/hse',
-        async lazy() {
-            const { HomeScreenEvent } = await import('@/fsd/1-pages/learn-hse/hse');
-            return { Component: HomeScreenEvent };
         },
     },
     dirtyDozenLazyRoute,

@@ -60,21 +60,19 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
     const projectedRestrictions = useMemo(() => {
         const battleRestrictions = new Map<number, Set<string>>();
 
-        teams
-            .filter(team => team.section === track.trackId)
-            .forEach(team => {
-                const clears = team.expectedBattleClears ?? 0;
-                // For each battle this team is expected to clear
-                for (let battleIndex = 0; battleIndex < clears && battleIndex < track.battles.length; battleIndex++) {
-                    if (!battleRestrictions.has(battleIndex)) {
-                        battleRestrictions.set(battleIndex, new Set());
-                    }
-                    // Add all restrictions this team can clear
-                    team.restrictionsIds.forEach(restrictionId => {
-                        battleRestrictions.get(battleIndex)!.add(restrictionId);
-                    });
+        for (const team of teams.filter(team => team.section === track.trackId)) {
+            const clears = team.expectedBattleClears ?? 0;
+            // For each battle this team is expected to clear
+            for (let battleIndex = 0; battleIndex < clears && battleIndex < track.battles.length; battleIndex++) {
+                if (!battleRestrictions.has(battleIndex)) {
+                    battleRestrictions.set(battleIndex, new Set());
                 }
-            });
+                // Add all restrictions this team can clear
+                for (const restrictionId of team.restrictionsIds) {
+                    battleRestrictions.get(battleIndex)!.add(restrictionId);
+                }
+            }
+        }
 
         return battleRestrictions;
     }, [teams, track.trackId, track.battles.length]);
@@ -150,11 +148,11 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                 : RequirementStatus.Cleared;
 
         let leModel = model;
-        track.battles.forEach(battle => {
-            battle.requirementsProgress.forEach(requirement => {
+        for (const battle of track.battles) {
+            for (const requirement of battle.requirementsProgress) {
                 leModel = createNewModel(leModel, track.trackId, battle.battleIndex, requirement.id, status);
-            });
-        });
+            }
+        }
         updateDto(leModel);
     };
 

@@ -30,7 +30,7 @@ export const RosterSnapshotsUnitDiff: React.FC<Props> = ({
     mow,
     diff,
 }: Props) => {
-    if (diffStyle === RosterSnapshotDiffStyle.SideBySide) {
+    if (diffStyle === RosterSnapshotDiffStyle.SideBySide)
         return (
             <RosterSnapshotsUnitDiffSideBySide
                 showShards={showShards}
@@ -44,18 +44,16 @@ export const RosterSnapshotsUnitDiff: React.FC<Props> = ({
                 diff={diff}
             />
         );
-    } else {
-        return (
-            <RosterSnapshotsUnitDiffDetailed
-                showShards={showShards}
-                showMythicShards={showMythicShards}
-                showXpLevel={showXpLevel}
-                showAbilities={showAbilities}
-                showEquipment={showEquipment}
-                char={char}
-                mow={mow}
-                diff={diff}
-            />
-        );
-    }
+    return (
+        <RosterSnapshotsUnitDiffDetailed
+            showShards={showShards}
+            showMythicShards={showMythicShards}
+            showXpLevel={showXpLevel}
+            showAbilities={showAbilities}
+            showEquipment={showEquipment}
+            char={char}
+            mow={mow}
+            diff={diff}
+        />
+    );
 };

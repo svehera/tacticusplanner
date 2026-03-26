@@ -39,10 +39,10 @@ export class UpgradesService {
     private static createMaterialByLabelLookup(): Record<string, string> {
         const result: Record<string, string> = {};
 
-        Object.entries(this.recipeExpandedUpgradeData).forEach(([, upgradeData]) => {
+        for (const [, upgradeData] of Object.entries(this.recipeExpandedUpgradeData)) {
             result[upgradeData.label] = upgradeData.id;
             result[upgradeData.id] = upgradeData.id;
-        });
+        }
 
         return result;
     }
@@ -66,7 +66,7 @@ export class UpgradesService {
             stat: 'Gold',
         };
         // First fill in all of the base upgrades.
-        Object.entries(UpgradesService.baseUpgradesData).forEach(upgrade => {
+        for (const upgrade of Object.entries(UpgradesService.baseUpgradesData)) {
             const baseUpgrade = upgrade[1];
             result[baseUpgrade.snowprintId] = {
                 id: baseUpgrade.id,
@@ -78,7 +78,7 @@ export class UpgradesService {
                 crafted: false,
                 stat: baseUpgrade.stat,
             };
-        });
+        }
 
         // Now fill in all of the craftable upgrades that only have base upgrade materials.
         for (const key in UpgradesService.craftedUpgradesData) {
@@ -88,9 +88,9 @@ export class UpgradesService {
                 continue;
             }
             const expandedRecipe: Record<string, number> = {};
-            craftedUpgrade.recipe.forEach(recipeItem => {
+            for (const recipeItem of craftedUpgrade.recipe) {
                 expandedRecipe[recipeItem.id] = recipeItem.count;
-            });
+            }
             result[craftedUpgrade.snowprintId] = {
                 id: craftedUpgrade.id,
                 snowprintId: craftedUpgrade.snowprintId,
@@ -112,7 +112,7 @@ export class UpgradesService {
         for (let moreToExpand: boolean = true; moreToExpand; ) {
             ++passes;
             moreToExpand = false;
-            Object.entries(UpgradesService.craftedUpgradesData).forEach(data => {
+            for (const data of Object.entries(UpgradesService.craftedUpgradesData)) {
                 const material: ICraftedUpgrade = data[1];
                 const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(material.snowprintId, result);
                 if (!expandedRecipe) {
@@ -122,10 +122,10 @@ export class UpgradesService {
                         );
                     }
                     moreToExpand = true;
-                    return;
+                    continue;
                 }
                 result[material.snowprintId] = expandedRecipe;
-            });
+            }
             if (passes > 10) {
                 console.error('Infinite loop in expandRecipeData');
                 break;
@@ -188,19 +188,19 @@ export class UpgradesService {
                 moreToExpand = true;
                 break;
             }
-            if (!expandedRecipeData[recipeItem.id].crafted) {
-                // Simple ingredient, just add it.
-                this.addIngredientsToExpandedRecipe(expandedRecipe, {
-                    material: recipeItem.id,
-                    count: recipeItem.count,
-                });
-            } else {
+            if (expandedRecipeData[recipeItem.id].crafted) {
                 for (const [material, count] of Object.entries(expandedRecipeData[recipeItem.id].expandedRecipe)) {
                     this.addIngredientsToExpandedRecipe(expandedRecipe, {
                         material: material,
                         count: recipeItem.count * count,
                     });
                 }
+            } else {
+                // Simple ingredient, just add it.
+                this.addIngredientsToExpandedRecipe(expandedRecipe, {
+                    material: recipeItem.id,
+                    count: recipeItem.count,
+                });
             }
         }
         if (moreToExpand) return null;
@@ -217,10 +217,7 @@ export class UpgradesService {
         const inventoryUpdate: Record<string, number> = {};
 
         const processUpgrade = (upgrade: IBaseUpgrade | ICraftedUpgrade, count: number): void => {
-            if (!upgrade.crafted) {
-                // Base upgrade, simply decrement
-                inventoryUpdate[upgrade.id] = (inventoryUpdate[upgrade.id] ?? 0) + count;
-            } else {
+            if (upgrade.crafted) {
                 // Crafted upgrade
                 const availableCount = inventory[upgrade.id] ?? 0;
 
@@ -244,12 +241,15 @@ export class UpgradesService {
                         processUpgrade(upgradeData, recipeItem.count * remainingCount);
                     }
                 }
+            } else {
+                // Base upgrade, simply decrement
+                inventoryUpdate[upgrade.id] = (inventoryUpdate[upgrade.id] ?? 0) + count;
             }
         };
 
-        upgrades.forEach(upgrade => {
+        for (const upgrade of upgrades) {
             processUpgrade(upgrade, 1);
-        });
+        }
 
         // Filter out items with 0 count in the inventoryUpdate
         const filteredInventoryUpdate: Record<string, number> = Object.fromEntries(
@@ -312,16 +312,17 @@ export class UpgradesService {
             };
         }
 
-        Object.keys(upgradeLocationsShort).forEach(upgradeId => {
-            if (!upgradeId.startsWith('shards_') && !upgradeId.startsWith('mythicShards_')) return;
-            const charId = upgradeId.split('_')[1];
-            const char = CharactersService.charactersData.find(c => c.snowprintId === charId);
+        for (const upgradeId of Object.keys(upgradeLocationsShort)) {
+            if (!upgradeId.startsWith('shards_') && !upgradeId.startsWith('mythicShards_')) continue;
+            const unitId = upgradeId.split('_')[1];
+            const char = CharactersService.charactersData.find(c => c.snowprintId === unitId);
+            const mow = mows2Data.mows.find(m => m.snowprintId === unitId);
             result[upgradeId] = {
                 id: upgradeId,
                 snowprintId: upgradeId,
                 label: upgradeId.startsWith('shards_')
-                    ? 'Shards for ' + (char?.name ?? charId)
-                    : 'Mythic Shards for ' + (char?.name ?? charId),
+                    ? 'Shards for ' + (char?.name ?? mow?.name ?? unitId)
+                    : 'Mythic Shards for ' + (char?.name ?? mow?.name ?? unitId),
                 rarity: upgradeId.startsWith('shards_') ? 'Shard' : 'Mythic Shard',
                 locations:
                     orderBy(
@@ -331,13 +332,13 @@ export class UpgradesService {
                         ['dropRate', 'nodeNumber'],
                         ['desc', 'desc']
                     ) ?? [],
-                iconPath: char?.roundIcon ?? '',
+                iconPath: char?.roundIcon ?? mow?.roundIcon ?? '',
                 crafted: false,
                 stat: 'Shard',
             };
-        });
+        }
 
-        CharactersService.charactersData.forEach(char => {
+        for (const char of CharactersService.charactersData) {
             const shards = 'shards_' + char.snowprintId;
             const mythicShards = 'mythicShards_' + char.snowprintId;
             for (const shard of [shards, mythicShards]) {
@@ -356,9 +357,9 @@ export class UpgradesService {
                     };
                 }
             }
-        });
+        }
 
-        mows2Data.mows.forEach(mow => {
+        for (const mow of mows2Data.mows) {
             const shards = 'shards_' + mow.snowprintId;
             const mythicShards = 'mythicShards_' + mow.snowprintId;
             for (const shard of [shards, mythicShards]) {
@@ -377,7 +378,7 @@ export class UpgradesService {
                     };
                 }
             }
-        });
+        }
 
         return result;
     }
@@ -502,24 +503,8 @@ export class UpgradesService {
                     rarity: RarityMapper.stringToNumber[RarityString.Common],
                 };
                 return item;
-            } else if (!upgrade.recipe?.length) {
-                const item: IMaterialRecipeIngredientFull = {
-                    id: materialId,
-                    snowprintId: upgrade.snowprintId,
-                    label: upgrade?.label ?? upgrade?.material ?? materialId,
-                    count,
-                    rarity: RarityMapper.stringToNumber[upgrade?.rarity as RarityString],
-                    stat: upgrade?.stat ?? '',
-                    locations: locations,
-                    craftable: upgrade?.craftable,
-                    locationsComposed: locations.map(x => CampaignsService.campaignsComposed[x]),
-                    iconPath: upgrade?.icon ?? '',
-                    characters: [],
-                    priority: 0,
-                };
-                allMaterials.push(item);
-                return item;
-            } else {
+            }
+            if (upgrade.recipe?.length)
                 return {
                     id: materialId,
                     snowprintId: upgrade.snowprintId,
@@ -535,23 +520,28 @@ export class UpgradesService {
                     characters: [],
                     priority: 0,
                 };
-            }
+
+            const item: IMaterialRecipeIngredientFull = {
+                id: materialId,
+                snowprintId: upgrade.snowprintId,
+                label: upgrade?.label ?? upgrade?.material ?? materialId,
+                count,
+                rarity: RarityMapper.stringToNumber[upgrade?.rarity as RarityString],
+                stat: upgrade?.stat ?? '',
+                locations: locations,
+                craftable: upgrade?.craftable,
+                locationsComposed: locations.map(x => CampaignsService.campaignsComposed[x]),
+                iconPath: upgrade?.icon ?? '',
+                characters: [],
+                priority: 0,
+            };
+            allMaterials.push(item);
+            return item;
         };
 
         for (const upgradeName of upgrades) {
             const upgrade = recipeDataByName[upgradeName];
-            if (!upgrade.craftable) {
-                result[upgradeName] = {
-                    id: upgrade.material,
-                    snowprintId: upgrade.snowprintId,
-                    label: upgrade.label ?? upgrade.material,
-                    stat: upgrade.stat,
-                    rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
-                    craftable: upgrade.craftable,
-                    allMaterials: [getRecipe(upgrade.snowprintId, 1, [])],
-                    iconPath: upgrade.icon ?? '',
-                };
-            } else {
+            if (upgrade.craftable) {
                 const allMaterials: IMaterialRecipeIngredientFull[] = [];
                 result[upgradeName] = {
                     id: upgrade.material,
@@ -582,6 +572,17 @@ export class UpgradesService {
                     characters: [],
                     priority: 0,
                 }));
+            } else {
+                result[upgradeName] = {
+                    id: upgrade.material,
+                    snowprintId: upgrade.snowprintId,
+                    label: upgrade.label ?? upgrade.material,
+                    stat: upgrade.stat,
+                    rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
+                    craftable: upgrade.craftable,
+                    allMaterials: [getRecipe(upgrade.snowprintId, 1, [])],
+                    iconPath: upgrade.icon ?? '',
+                };
             }
         }
 
@@ -639,10 +640,10 @@ export class UpgradesService {
             upgrades.flatMap(x => {
                 const result = x.allMaterials ?? [];
                 if (x.character) {
-                    result.forEach(material => {
+                    for (const material of result) {
                         material.priority = x.priority ?? 0;
                         material.characters = [...material.characters, x.character!];
-                    });
+                    }
                 }
                 return result;
             }),

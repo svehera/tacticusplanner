@@ -223,11 +223,11 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
     };
 
     const handleToggleAll = () => {
-        battle.requirementsProgress.forEach(requirement => {
+        for (const requirement of battle.requirementsProgress) {
             // Use handleStatusChange to properly set status and clear killScore
             const newStatus = allCompleted ? RequirementStatus.NotCleared : RequirementStatus.Cleared;
             handleStatusChange(requirement, newStatus, undefined, true); // Force overwrite when toggling
-        });
+        }
     };
 
     return (

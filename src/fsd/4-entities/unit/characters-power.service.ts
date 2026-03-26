@@ -9,7 +9,7 @@ export class CharactersPowerService {
             return 0;
         }
 
-        const abilityWeight = 500000 / 41274;
+        const abilityWeight = 500_000 / 41_274;
         if (isCharacter(unit)) {
             const abilityPower =
                 abilityWeight *
@@ -43,7 +43,7 @@ export class CharactersPowerService {
             (1 / 9) *
             (CharactersPowerService.getRankCoeff(unit.rank + 1) - CharactersPowerService.getRankCoeff(unit.rank));
 
-        const attributesWeight = 3000000 / 9326;
+        const attributesWeight = 3_000_000 / 9326;
         const attributePower =
             attributesWeight *
             CharactersPowerService.getStarsCoeff(unit, unit.stars) *
@@ -74,7 +74,7 @@ export class CharactersPowerService {
             return 17.3 * (level - 44) + 125.5;
         } else {
             // Mythic values estimated via AI, unsure of source of original values
-            return 35.0 * (level - 50) + 229.3;
+            return 35 * (level - 50) + 229.3;
         }
     }
 
@@ -83,7 +83,7 @@ export class CharactersPowerService {
             switch (rarity) {
                 case Rarity.Common:
                 default: {
-                    return 1.0;
+                    return 1;
                 }
                 case Rarity.Uncommon: {
                     return 1.2;
@@ -98,14 +98,14 @@ export class CharactersPowerService {
                     return 1.8;
                 }
                 case Rarity.Mythic: {
-                    return 2.0;
+                    return 2;
                 }
             }
         } else if (isMow(unit)) {
             switch (rarity) {
                 case Rarity.Common:
                 default: {
-                    return 0.0;
+                    return 0;
                 }
                 case Rarity.Uncommon: {
                     return 0.05;
@@ -131,7 +131,7 @@ export class CharactersPowerService {
     public static getRankCoeff(rank: Rank): number {
         switch (rank) {
             case Rank.Stone1: {
-                return 1.0;
+                return 1;
             }
             case Rank.Stone2: {
                 return 1.25;
@@ -232,7 +232,7 @@ export class CharactersPowerService {
                     return 1.9;
                 }
                 case RarityStars.RedFiveStars: {
-                    return 2.0;
+                    return 2;
                 }
                 case RarityStars.OneBlueStar: {
                     return 2.1;
@@ -248,7 +248,7 @@ export class CharactersPowerService {
                 }
                 case RarityStars.None:
                 default: {
-                    return 1.0;
+                    return 1;
                 }
             }
         } else if (isMow(unit)) {
@@ -298,7 +298,7 @@ export class CharactersPowerService {
 
                 case RarityStars.None:
                 default: {
-                    return 0.0;
+                    return 0;
                 }
             }
         }

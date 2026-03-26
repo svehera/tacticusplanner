@@ -97,11 +97,19 @@ export const RaidsPlan: React.FC<Props> = ({
             material.relatedCharacters.forEach(fullName => {
                 const unit = CharactersService.getUnit(fullName);
                 if (!unit || !unit.snowprintId) return;
+
+        for (const [materialIndex, material] of estimatedRanks.inProgressMaterials.entries()) {
+            // Iterate over the related characters for the current material
+            for (const fullName of material.relatedCharacters) {
+                const unit = CharactersService.getUnit(fullName);
+                if (!unit || !unit.snowprintId) continue;
+                // Check if this snowprintId has ALREADY been recorded.
+                // If it hasn't, this is the FIRST time we've seen it, so record the index.
                 if (!(unit.snowprintId in characterIndexMap)) {
                     characterIndexMap[unit.snowprintId] = materialIndex;
                 }
-            });
-        });
+            }
+        }
 
         return characterIndexMap;
     }, [estimatedRanks.inProgressMaterials]);
@@ -164,7 +172,20 @@ export const RaidsPlan: React.FC<Props> = ({
     }, [estimatedRanks.upgradesRaids.length]);
 
     const daysTotal = estimatedRanks.daysTotal;
-    const energyTotal = estimatedRanks.energyTotal;
+
+    const energyTotal = useMemo(() => {
+        const todayRaids = estimatedRanks.upgradesRaids[0]?.raids ?? [];
+        const energyAlreadySpentToday = todayRaids.reduce((total, raid) => {
+            const locationSpent = raid.raidLocations.reduce(
+                (locationTotal, location) => locationTotal + location.raidsAlreadyPerformed * location.energyCost,
+                0
+            );
+
+            return total + locationSpent;
+        }, 0);
+
+        return Math.max(0, estimatedRanks.energyTotal - energyAlreadySpentToday);
+    }, [estimatedRanks.energyTotal, estimatedRanks.upgradesRaids]);
 
     const calendarDateTotal: string = useMemo(() => {
         const nextDate = new Date();
@@ -423,8 +444,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                         <MiscIcon icon={'energy'} height={15} width={15} /> Days |
                                     </span>
                                     <span>
-                                        <b>{estimatedRanks.energyTotal}</b>{' '}
-                                        <MiscIcon icon={'energy'} height={15} width={15} /> |
+                                        <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} /> |
                                     </span>
                                     <span>
                                         <b>{estimatedRanks.raidsTotal}</b> Raids)

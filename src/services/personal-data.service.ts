@@ -137,15 +137,15 @@ export class PersonalDataLocalStorage {
         } else {
             // no version (convert v1 to v2)
             const v1StoredData = localStorage.getItem(this.v1personalDataStorageKey);
-            if (!v1StoredData) {
-                result = defaultData;
-            } else {
+            if (v1StoredData) {
                 try {
                     const v1Data: IPersonalData | IPersonalData2 = JSON.parse(v1StoredData);
                     result = convertData(v1Data);
                 } catch {
                     result = defaultData;
                 }
+            } else {
+                result = defaultData;
             }
         }
         return result;
@@ -167,15 +167,12 @@ export class PersonalDataLocalStorage {
 
     restoreData(): IPersonalData2 | null {
         const backup = localStorage.getItem(this.backupKey);
-        if (!backup) {
+        if (!backup) return null;
+        try {
+            const data: IPersonalData | IPersonalData2 = JSON.parse(backup);
+            return convertData(data);
+        } catch {
             return null;
-        } else {
-            try {
-                const data: IPersonalData | IPersonalData2 = JSON.parse(backup);
-                return convertData(data);
-            } catch {
-                return null;
-            }
         }
     }
 
@@ -337,10 +334,10 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
     const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
     const teams: ILreTeam[] = [];
 
-    sections.forEach(section => {
+    for (const section of sections) {
         const selectedTeams: SelectedTeams = data[section];
 
-        Object.entries(selectedTeams).forEach(([restriction, charSnowprintIds]) => {
+        for (const [restriction, charSnowprintIds] of Object.entries(selectedTeams)) {
             // Check if there's already a team with the same set of characters
             const existingTeam = teams.find(
                 team =>
@@ -367,8 +364,8 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
                 };
                 teams.push(team);
             }
-        });
-    });
+        }
+    }
 
     data.teams = teams; // Populate the teams field
 }
@@ -399,9 +396,9 @@ function populateProgress(data: ILreProgressDto) {
     const killPointsIndex = 0;
     const highScoreAndDefeatAllIndex = 1;
 
-    sections.forEach(section => {
+    for (const section of sections) {
         const { battles } = data[section] ?? { battles: [] };
-        battles.forEach((battle, index) => {
+        for (const [index, battle] of battles.entries()) {
             const requirements: ILreRequirementsProgressDto[] = lre[section].unitsRestrictions.map(
                 (restriction, restrictionIndex) => ({
                     id: restriction.name,
@@ -429,8 +426,8 @@ function populateProgress(data: ILreProgressDto) {
                 battleIndex: index,
                 requirements: requirements,
             });
-        });
-    });
+        }
+    }
 
     data.battlesProgress = battlesProgress; // Populate the teams field
 }

@@ -80,7 +80,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     }
 
     protected populateLEPoints(characters: ICharacter2[]): void {
-        characters.forEach(character => {
+        for (const character of characters) {
             const alphaPoints = this.alpha.getCharacterPoints(character);
             const betaPoints = this.beta.getCharacterPoints(character);
             const gammaPoints = this.gamma.getCharacterPoints(character);
@@ -99,6 +99,6 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
                 totalPoints: sum([alphaPoints, betaPoints, gammaPoints]),
                 totalSlots: sum([alphaSlots, betaSlots, gammaSlots]),
             };
-        });
+        }
     }
 }

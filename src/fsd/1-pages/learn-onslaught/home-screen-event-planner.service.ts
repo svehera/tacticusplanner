@@ -122,11 +122,9 @@ export class HomeScreenEventPlannerService {
         let bestEndingIndex = 0;
         let bestSum = 0;
         for (let index = 0; index < rollingTotal.length; ++index) {
-            if (index < duringEventTokens) {
-                if (rollingTotal[index] > bestSum) {
-                    bestSum = rollingTotal[index];
-                    bestEndingIndex = index;
-                }
+            if (index < duringEventTokens && rollingTotal[index] > bestSum) {
+                bestSum = rollingTotal[index];
+                bestEndingIndex = index;
             }
             const currentSum = rollingTotal[index] - rollingTotal[index - duringEventTokens];
             if (currentSum > bestSum) {

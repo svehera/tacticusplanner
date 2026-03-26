@@ -141,9 +141,9 @@ export class CharactersService {
                         if (unit.numberOfUnlocked) {
                             return unit.numberOfUnlocked;
                         } else {
-                            return !isUnlocked(unit)
-                                ? Math.ceil((unit.shards / charsUnlockShards[unit.rarity]) * 100)
-                                : units.filter(x => this.haveSameFaction(x, unit) && isUnlocked(x)).length;
+                            return isUnlocked(unit)
+                                ? units.filter(x => this.haveSameFaction(x, unit) && isUnlocked(x)).length
+                                : Math.ceil((unit.shards / charsUnlockShards[unit.rarity]) * 100);
                         }
                     },
                     ['asc']
@@ -156,11 +156,9 @@ export class CharactersService {
     }
 
     private static getAbilitiesLevel(unit: IUnit): number {
-        if (isCharacter(unit)) {
-            return unit.activeAbilityLevel + unit.passiveAbilityLevel;
-        } else {
-            return unit.primaryAbilityLevel + unit.secondaryAbilityLevel;
-        }
+        return isCharacter(unit)
+            ? unit.activeAbilityLevel + unit.passiveAbilityLevel
+            : unit.primaryAbilityLevel + unit.secondaryAbilityLevel;
     }
 
     /**
@@ -196,7 +194,7 @@ export class CharactersService {
             let bsValue = 0,
                 power = 0,
                 unlockedCharacters = 0;
-            characters.forEach(char => {
+            for (const char of characters) {
                 if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue) {
                     bsValue += CharactersValueService.getCharacterValue(char);
                 }
@@ -204,7 +202,7 @@ export class CharactersService {
                     power += CharactersPowerService.getCharacterPower(char);
                 }
                 if (isUnlocked(char)) unlockedCharacters++;
-            });
+            }
 
             accumulator.push({
                 ...faction,

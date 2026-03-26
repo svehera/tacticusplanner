@@ -69,10 +69,10 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
 
         if (isMow(unit)) {
             if (mow && mow.id) {
-                if (mow.id !== unit.id) {
-                    setMow(unit);
-                } else {
+                if (mow.id === unit.id) {
                     setMow(null);
+                } else {
+                    setMow(unit);
                 }
             } else {
                 setMow(unit);
@@ -82,9 +82,9 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
 
     const filteredUnits = useMemo(() => {
         const filterUnits = () => {
-            const nameFiltered = !quickFilter
-                ? units
-                : units.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()));
+            const nameFiltered = quickFilter
+                ? units.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()))
+                : units;
 
             switch (filterByVariable) {
                 case 'xenos': {

@@ -52,7 +52,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             return state;
         }
         case 'Add': {
-            if (state.find(x => x.id === action.goal.id)) {
+            if (state.some(x => x.id === action.goal.id)) {
                 return state;
             }
             // Create a new array instead of mutating the existing state with splice

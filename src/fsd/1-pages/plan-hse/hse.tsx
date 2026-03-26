@@ -1,16 +1,16 @@
+/* eslint-disable import-x/no-internal-modules */
 import { MenuItem, Select } from '@mui/material';
 import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { useMemo, useRef, useState } from 'react';
+import { useContext, useMemo, useRef, useState } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { ICampaignBattleComposed, IDailyRaidsHomeScreenEvent } from '@/models/interfaces';
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { Campaign, CampaignImage, CampaignLocation, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
-// eslint-disable-next-line import-x/no-internal-modules
 import { IRewards } from '@/fsd/4-entities/campaign/model';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { NpcService } from '@/fsd/4-entities/npc';
@@ -44,57 +44,74 @@ const getReward = (rewards: IRewards): string => {
 };
 
 export const HomeScreenEvent = () => {
+    const { dailyRaids, viewPreferences } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
     const gridReference = useRef<AgGridReact<HseBattle>>(null);
     const [campaignsToConsider, setCampaignsToConsider] = useState<Campaign[]>(() => {
         return CampaignsService.allCampaigns.map(x => x.id);
     });
     const [includeRewardlessBattles, setIncludeRewardlessBattles] = useState<boolean>(true);
+    const includeExhaustedBattles = viewPreferences.includeExhaustedBattlesInHse ?? true;
+    const showHseWarning = viewPreferences.showHseWarning ?? true;
+
+    const exhaustedBattleIds = useMemo(() => {
+        return new Set(
+            dailyRaids.raidedLocations
+                .filter(location => location.raidsAlreadyPerformed >= location.dailyBattleCount)
+                .map(location => location.id)
+        );
+    }, [dailyRaids.raidedLocations]);
 
     const calculateBestBattles = (
         campaigns: Campaign[],
         includeRewardlessBattles: boolean,
+        includeExhaustedBattles: boolean,
         enemyFilter: (npc: ReturnType<typeof NpcService.getNpcById>) => boolean,
         applyEliteCampaignMultiplier: boolean
     ): HseBattle[] => {
         const pointsPerEnergy: Record<number, HseBattle[]> = {};
 
-        Object.entries(CampaignsService.campaignsGrouped)
-            .filter(([campaignId]) => campaigns.includes(campaignId as Campaign))
-            .forEach(([, battles]) => {
-                battles.forEach(battle => {
-                    let points =
-                        battle.detailedEnemyTypes
-                            ?.filter(x => {
-                                const npc = NpcService.getNpcById(x.id);
-                                if (!npc) {
-                                    console.warn('battle ', battle.id, ' has undefined npc ', x);
-                                    return false;
-                                }
-                                return !npc.traits.includes('Summon') && enemyFilter(npc);
-                            })
-                            .map(x => x.count)
-                            .reduce((a, b) => a + b, 0) ?? 0;
+        for (const [, battles] of Object.entries(CampaignsService.campaignsGrouped).filter(([campaignId]) =>
+            campaigns.includes(campaignId as Campaign)
+        )) {
+            for (const battle of battles) {
+                if (!includeExhaustedBattles && exhaustedBattleIds.has(battle.id)) {
+                    continue;
+                }
 
-                    if (applyEliteCampaignMultiplier) {
-                        points *= battle.campaignType === CampaignType.Elite ? 5 : 3;
-                    }
+                let points =
+                    battle.detailedEnemyTypes
+                        ?.filter(x => {
+                            const npc = NpcService.getNpcById(x.id);
+                            if (!npc) {
+                                console.warn('battle', battle.id, 'has undefined npc', x);
+                                return false;
+                            }
+                            return !npc.traits.includes('Summon') && enemyFilter(npc);
+                        })
+                        .map(x => x.count)
+                        .reduce((a, b) => a + b, 0) ?? 0;
 
-                    if (points > 0 && (includeRewardlessBattles || getReward(battle.rewards) !== '')) {
-                        const details: HseBattle = {
-                            id: battle.id,
-                            battle: battle,
-                            energyCost: battle.energyCost,
-                            points: points,
-                            pointsPerEnergy: points / battle.energyCost,
-                            reward: getReward(battle.rewards),
-                            dropChance: battle.dropRate,
-                        };
-                        const array = pointsPerEnergy[details.pointsPerEnergy] || [];
-                        array.push(details);
-                        pointsPerEnergy[details.pointsPerEnergy] = array;
-                    }
-                });
-            });
+                if (applyEliteCampaignMultiplier) {
+                    points *= battle.campaignType === CampaignType.Elite ? 5 : 3;
+                }
+
+                if (points > 0 && (includeRewardlessBattles || getReward(battle.rewards) !== '')) {
+                    const details: HseBattle = {
+                        id: battle.id,
+                        battle: battle,
+                        energyCost: battle.energyCost,
+                        points: points,
+                        pointsPerEnergy: points / battle.energyCost,
+                        reward: getReward(battle.rewards),
+                        dropChance: battle.dropRate,
+                    };
+                    const array = pointsPerEnergy[details.pointsPerEnergy] || [];
+                    array.push(details);
+                    pointsPerEnergy[details.pointsPerEnergy] = array;
+                }
+            }
+        }
 
         return Object.values(pointsPerEnergy)
             .flat()
@@ -107,10 +124,17 @@ export const HomeScreenEvent = () => {
             calculateBestBattles(
                 campaignsToConsider,
                 includeRewardlessBattles,
+                includeExhaustedBattles,
                 npc => npc?.traits.includes('Mechanical') ?? false,
                 /*applyEliteCampaignMultiplier=*/ false
             ),
-        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+        [
+            calculateBestBattles,
+            campaignsToConsider,
+            includeRewardlessBattles,
+            includeExhaustedBattles,
+            exhaustedBattleIds,
+        ]
     );
 
     const bestPurgeOrder = useMemo(
@@ -118,10 +142,17 @@ export const HomeScreenEvent = () => {
             calculateBestBattles(
                 campaignsToConsider,
                 includeRewardlessBattles,
+                includeExhaustedBattles,
                 npc => npc?.faction === 'Tyranids',
                 /*applyEliteCampaignMultiplier=*/ true
             ),
-        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+        [
+            calculateBestBattles,
+            campaignsToConsider,
+            includeRewardlessBattles,
+            includeExhaustedBattles,
+            exhaustedBattleIds,
+        ]
     );
 
     const bestTrainingRush = useMemo(
@@ -129,27 +160,41 @@ export const HomeScreenEvent = () => {
             calculateBestBattles(
                 campaignsToConsider,
                 includeRewardlessBattles,
+                includeExhaustedBattles,
                 () => true,
                 /*applyEliteCampaignMultiplier=*/ true
             ),
-        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+        [
+            calculateBestBattles,
+            campaignsToConsider,
+            includeRewardlessBattles,
+            includeExhaustedBattles,
+            exhaustedBattleIds,
+        ]
     );
     const bestWarpSurge = useMemo(
         () =>
             calculateBestBattles(
                 campaignsToConsider,
                 includeRewardlessBattles,
+                includeExhaustedBattles,
                 npc => npc?.alliance === 'Chaos',
                 /*applyEliteCampaignMultiplier=*/ true
             ),
-        [calculateBestBattles, campaignsToConsider, includeRewardlessBattles]
+        [
+            calculateBestBattles,
+            campaignsToConsider,
+            includeRewardlessBattles,
+            includeExhaustedBattles,
+            exhaustedBattleIds,
+        ]
     );
 
     const rewardIcon = (reward: string) => {
         const upgrade = UpgradesService.getUpgrade(reward);
         if (!upgrade) return reward;
         if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-            const char = CharactersService.getUnit(reward.substring(reward.indexOf('_') + 1));
+            const char = CharactersService.getUnit(reward.slice(Math.max(0, reward.indexOf('_') + 1)));
             if (char) {
                 return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />;
             }
@@ -283,13 +328,30 @@ export const HomeScreenEvent = () => {
 
     return (
         <div>
-            <div>
-                <h1>
-                    This page is informational only. You most likely want the Daily Raids page instead, where you can go
-                    to settings and tell it to optimize for whichever home-screen event is ongoing, so you make progress
-                    on the event without derailing your goals.
-                </h1>
-            </div>
+            {showHseWarning && (
+                <div className="mb-2 rounded-md border border-red-500/60 bg-red-500/10 px-3 py-2 text-red-100">
+                    <div className="flex items-start justify-between gap-3">
+                        <h1 className="m-0 text-base leading-relaxed font-semibold">
+                            This page is informational only. You most likely want the Daily Raids page instead, where
+                            you can go to settings and tell it to optimize for whichever home-screen event is ongoing,
+                            so you make progress on the event without derailing your goals.
+                        </h1>
+                        <button
+                            type="button"
+                            aria-label="Dismiss warning permanently"
+                            className="rounded px-2 py-0.5 text-red-200 hover:bg-red-500/20 hover:text-red-100"
+                            onClick={() =>
+                                dispatch.viewPreferences({
+                                    type: 'Update',
+                                    setting: 'showHseWarning',
+                                    value: false,
+                                })
+                            }>
+                            ×
+                        </button>
+                    </div>
+                </div>
+            )}
             <div>
                 <div className="m-2 flex flex-wrap items-center gap-4">
                     <div className="flex items-center gap-2">
@@ -342,6 +404,21 @@ export const HomeScreenEvent = () => {
                             onChange={event => setIncludeRewardlessBattles(event.target.checked)}
                         />
                         <label htmlFor="ignore-early-indom">Include battles with no rewards</label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <input
+                            type="checkbox"
+                            id="include-exhausted-battles"
+                            checked={includeExhaustedBattles}
+                            onChange={event =>
+                                dispatch.viewPreferences({
+                                    type: 'Update',
+                                    setting: 'includeExhaustedBattlesInHse',
+                                    value: event.target.checked,
+                                })
+                            }
+                        />
+                        <label htmlFor="include-exhausted-battles">Include exhausted battles</label>
                     </div>
                 </div>
             </div>

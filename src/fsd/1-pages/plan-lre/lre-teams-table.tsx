@@ -184,14 +184,14 @@ export const LreTeamsTable: React.FC<Props> = ({
 
         // Sort `columns` by using the order from `columnIds`, keeping unspecified columns in original order
         columns.sort((a, b) => {
-            const orderA = columnOrder[a.field!] !== undefined ? columnOrder[a.field!] : Infinity;
-            const orderB = columnOrder[b.field!] !== undefined ? columnOrder[b.field!] : Infinity;
+            const orderA = columnOrder[a.field!] === undefined ? Infinity : columnOrder[a.field!];
+            const orderB = columnOrder[b.field!] === undefined ? Infinity : columnOrder[b.field!];
             return orderA - orderB;
         });
 
-        columns.forEach((column, index) => {
+        for (const [index, column] of columns.entries()) {
             column.colSpan = () => (index === 0 ? selectedRequirements.length : 1);
-        });
+        }
 
         return columns;
     }
@@ -200,12 +200,12 @@ export const LreTeamsTable: React.FC<Props> = ({
         const size = Math.max(...Object.values(teams).map(x => x.length));
         const rows: Array<ITableRow> = Array.from({ length: size }, () => ({}));
 
-        rows.forEach((row, index) => {
+        for (const [index, row] of rows.entries()) {
             for (const team in teams) {
                 const char = teams[team][index];
                 row[team] = char ?? '';
             }
-        });
+        }
 
         return rows;
     }

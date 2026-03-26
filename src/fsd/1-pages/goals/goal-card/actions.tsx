@@ -13,7 +13,7 @@ interface Props {
 
 /** Renders the action buttons and status indicators (completion, blocked) for a goal card. */
 export const GoalCardActions: React.FC<Props> = ({ goalEstimate, menuItemSelect }) => (
-    <div className="flex items-center">
+    <div className="flex items-center gap-0.5 text-(--muted-fg)">
         {!!goalEstimate.completed && !goalEstimate.blocked && (
             <AccessibleTooltip title="Goal is completed in current estimation.">
                 <span className="flex-box gap-[3px]" tabIndex={0}>
@@ -30,16 +30,32 @@ export const GoalCardActions: React.FC<Props> = ({ goalEstimate, menuItemSelect 
         )}
         {menuItemSelect && (
             <>
-                <IconButton size="small" aria-label="Increase Goal Priority" onClick={() => menuItemSelect('moveUp')}>
+                <IconButton
+                    size="small"
+                    className="text-(--muted-fg)"
+                    aria-label="Increase Goal Priority"
+                    onClick={() => menuItemSelect('moveUp')}>
                     <ArrowUpward fontSize="small" />
                 </IconButton>
-                <IconButton size="small" aria-label="Decrease Goal Priority" onClick={() => menuItemSelect('moveDown')}>
+                <IconButton
+                    size="small"
+                    className="text-(--muted-fg)"
+                    aria-label="Decrease Goal Priority"
+                    onClick={() => menuItemSelect('moveDown')}>
                     <ArrowDownward fontSize="small" />
                 </IconButton>
-                <IconButton size="small" aria-label="Edit Goal" onClick={() => menuItemSelect('edit')}>
+                <IconButton
+                    size="small"
+                    className="text-(--muted-fg)"
+                    aria-label="Edit Goal"
+                    onClick={() => menuItemSelect('edit')}>
                     <Edit fontSize="small" />
                 </IconButton>
-                <IconButton size="small" aria-label="Delete Goal" onClick={() => menuItemSelect('delete')}>
+                <IconButton
+                    size="small"
+                    className="text-(--muted-fg)"
+                    aria-label="Delete Goal"
+                    onClick={() => menuItemSelect('delete')}>
                     <DeleteForever fontSize="small" />
                 </IconButton>
             </>

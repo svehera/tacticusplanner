@@ -234,7 +234,7 @@ export const Lre: React.FC = () => {
                             <Switch checked={viewPreferences.lreGoalsPreview} />
                         </div>
                         <div className="flex-box" onClick={toggleView}>
-                            <TableRowsIcon color={!viewPreferences.lreGridView ? 'primary' : 'disabled'} />
+                            <TableRowsIcon color={viewPreferences.lreGridView ? 'disabled' : 'primary'} />
                             <Switch checked={viewPreferences.lreGridView} />
                             <GridViewIcon color={viewPreferences.lreGridView ? 'primary' : 'disabled'} />
                         </div>

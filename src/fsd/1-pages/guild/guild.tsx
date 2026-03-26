@@ -42,16 +42,16 @@ export const Guild: React.FC = () => {
 
     const handleFieldChange = (index: number) => (field: keyof IGuildMember, value: string) => {
         const existingUserIndex = editedMembers.findIndex(x => x.index === index);
-        if (existingUserIndex >= 0) {
+        if (existingUserIndex === -1) {
+            const newMember: IGuildMember = { username: '', shareToken: '', index, [field]: value };
+            setEditedMembers([...editedMembers, newMember]);
+        } else {
             const updatedMembers = [...editedMembers];
             updatedMembers[existingUserIndex] = {
                 ...updatedMembers[existingUserIndex],
                 [field]: value,
             };
             setEditedMembers(updatedMembers);
-        } else {
-            const newMember: IGuildMember = { username: '', shareToken: '', index, [field]: value };
-            setEditedMembers([...editedMembers, newMember]);
         }
     };
 
