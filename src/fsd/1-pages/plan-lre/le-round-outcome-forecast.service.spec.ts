@@ -4,11 +4,7 @@ import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 
-import {
-    computeLeRoundForecasts,
-    createInitialLeForecastRoundConfig,
-    getLegendaryEventRoundStatuses,
-} from './le-round-outcome-forecast.service';
+import { LeRoundOutcomeForecastService } from './le-round-outcome-forecast.service';
 import { ILreProgressModel } from './lre.models';
 import { EventProgress } from './token-estimation-service';
 
@@ -106,7 +102,12 @@ describe('le-round-outcome-forecast.service', () => {
     it('marks prior rounds finished and current upcoming round correctly before the next event starts', () => {
         const event = createLegendaryEvent({ eventStage: 3, nextEventDateUtc: '2026-04-12T00:00:00.000Z' });
 
-        expect(getLegendaryEventRoundStatuses(event, new Date('2026-04-01T00:00:00.000Z').getTime())).toEqual([
+        expect(
+            LeRoundOutcomeForecastService.getLegendaryEventRoundStatuses(
+                event,
+                new Date('2026-04-01T00:00:00.000Z').getTime()
+            )
+        ).toEqual([
             { round: 1, status: 'finished' },
             { round: 2, status: 'finished' },
             { round: 3, status: 'upcoming' },
@@ -117,7 +118,7 @@ describe('le-round-outcome-forecast.service', () => {
         const event = createLegendaryEvent();
         const model = createModel();
         const progress = createProgress();
-        const roundConfigs = createInitialLeForecastRoundConfig(
+        const roundConfigs = LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(
             model,
             event,
             new Date('2026-04-01T00:00:00.000Z').getTime()
@@ -134,7 +135,7 @@ describe('le-round-outcome-forecast.service', () => {
                 : config
         );
 
-        const [round1, round2, round3] = computeLeRoundForecasts({
+        const [round1, round2, round3] = LeRoundOutcomeForecastService.computeLeRoundForecasts({
             legendaryEvent: event,
             model,
             currentProgress: progress,
@@ -162,7 +163,7 @@ describe('le-round-outcome-forecast.service', () => {
         const event = createLegendaryEvent();
         const model = createModel();
         const progress = createOhSoCloseProgress();
-        const roundConfigs = createInitialLeForecastRoundConfig(
+        const roundConfigs = LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(
             model,
             event,
             new Date('2026-04-01T00:00:00.000Z').getTime()
@@ -175,7 +176,7 @@ describe('le-round-outcome-forecast.service', () => {
                 : config
         );
 
-        const round3 = computeLeRoundForecasts({
+        const round3 = LeRoundOutcomeForecastService.computeLeRoundForecasts({
             legendaryEvent: event,
             model,
             currentProgress: progress,

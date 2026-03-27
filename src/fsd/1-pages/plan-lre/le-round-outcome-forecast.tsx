@@ -6,11 +6,7 @@ import { NumberInput } from '@/fsd/5-shared/ui/input';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 
-import {
-    computeLeRoundForecasts,
-    createInitialLeForecastRoundConfig,
-    getLegendaryEventRoundStatuses,
-} from './le-round-outcome-forecast.service';
+import { LeRoundOutcomeForecastService } from './le-round-outcome-forecast.service';
 import { LeTokenService } from './le-token-service';
 import { ILreProgressModel } from './lre.models';
 import { EventProgress } from './token-estimation-service';
@@ -58,21 +54,23 @@ const getRarityLabel = (rarity: Rarity) => (rarity === Rarity.Mythic ? 'Mythic' 
 export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenIncrements }: Props) => {
     const nowMillis = Date.now();
     const [roundConfigs, setRoundConfigs] = useState(() =>
-        createInitialLeForecastRoundConfig(model, legendaryEvent, nowMillis)
+        LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(model, legendaryEvent, nowMillis)
     );
 
     useEffect(() => {
-        setRoundConfigs(createInitialLeForecastRoundConfig(model, legendaryEvent, Date.now()));
+        setRoundConfigs(
+            LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(model, legendaryEvent, Date.now())
+        );
     }, [legendaryEvent, model.occurrenceProgress, model.syncedProgress?.hasPremiumPayout]);
 
     const statuses = useMemo(
-        () => getLegendaryEventRoundStatuses(legendaryEvent, nowMillis),
+        () => LeRoundOutcomeForecastService.getLegendaryEventRoundStatuses(legendaryEvent, nowMillis),
         [legendaryEvent, nowMillis]
     );
 
     const forecasts = useMemo(
         () =>
-            computeLeRoundForecasts({
+            LeRoundOutcomeForecastService.computeLeRoundForecasts({
                 legendaryEvent,
                 model,
                 currentProgress: progress,
