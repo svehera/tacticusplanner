@@ -7,6 +7,7 @@ interface Props {
     value: number;
     valueChange: (v: number) => void;
     fullWidth?: boolean;
+    disabled?: boolean;
     max?: number;
     min?: number;
     step?: number;
@@ -18,6 +19,7 @@ export const NumberInput: React.FC<Props> = ({
     value,
     valueChange,
     fullWidth = false,
+    disabled = false,
     max = 60,
     min = 1,
     step = 1,
@@ -29,6 +31,7 @@ export const NumberInput: React.FC<Props> = ({
         <FormControl fullWidth={fullWidth} style={style}>
             <InputLabel>{label}</InputLabel>
             <Input
+                disabled={disabled}
                 value={inputValue}
                 onChange={event => {
                     setInputValue(event.target.value);
