@@ -52,6 +52,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const isSaveInFlightReference = useRef(false);
     const queuedStoreValueReference = useRef<IPersonalData2 | undefined>(undefined);
     const modifiedDateTicksReference = useRef(localStorage.getItem('TP-ModifiedDateTicks') ?? '');
+    const serverViewPreferencesReference = useRef(globalState.viewPreferences);
 
     const [modifiedDate, setModifiedDate] = useState(globalState.modifiedDate);
     const [seenAppVersion, setSeenAppVersion] = useState<string | undefined>(globalState.seenAppVersion);
@@ -109,6 +110,19 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
     }, []);
 
+    const toServerComparable = useCallback((value: IPersonalData2) => {
+        const { viewPreferences: _viewPreferences, modifiedDate: _modifiedDate, ...rest } = value;
+        return rest;
+    }, []);
+
+    const buildServerPayload = useCallback(
+        (value: IPersonalData2): IPersonalData2 => ({
+            ...value,
+            viewPreferences: serverViewPreferencesReference.current,
+        }),
+        []
+    );
+
     const syncModifiedDateTicksFromServer = useCallback(async () => {
         try {
             const response = await getUserDataApi();
@@ -132,8 +146,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
             isSaveInFlightReference.current = true;
             const currentModifiedDateTicks = modifiedDateTicksReference.current;
+            const payloadForServer = buildServerPayload(storeValue);
 
-            setUserDataApi(storeValue, currentModifiedDateTicks)
+            setUserDataApi(payloadForServer, currentModifiedDateTicks)
                 .then(({ data }) => {
                     const { modifiedDateTicks } = data;
                     setModifiedDateTicks(modifiedDateTicks);
@@ -177,7 +192,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     }
                 });
         },
-        [logout, setModifiedDateTicks, syncModifiedDateTicksFromServer]
+        [buildServerPayload, logout, setModifiedDateTicks, syncModifiedDateTicksFromServer]
     );
 
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
@@ -313,12 +328,14 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             gameModeTokens,
         };
         const storeValue = GlobalState.toStore(newValue);
+        const previousStoreValue = GlobalState.toStore(globalState);
+        const hasServerSyncChanges = !isEqual(toServerComparable(previousStoreValue), toServerComparable(storeValue));
 
         setGlobalState(newValue);
         localStore.setData(storeValue);
         setModified(false);
 
-        if (isAuthenticated) {
+        if (isAuthenticated && hasServerSyncChanges) {
             clearTimeout(saveTimeoutReference.current);
             saveTimeoutReference.current = setTimeout(() => {
                 pushDataToServer(storeValue, 'success');
@@ -345,11 +362,13 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         mows,
         localStore,
         pushDataToServer,
+        globalState,
         rosterSnapshots,
         seenAppVersion,
         selectedTeamOrder,
         teams,
         teams2,
+        toServerComparable,
         viewPreferences,
         warDefense2,
         warOffense2,
@@ -410,6 +429,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 const serverLastModified = new Date(lastModifiedDate);
                 const isFirstLogin = !data;
                 const isFreshData = !modifiedDate;
+                const serverData = data ? convertData(data) : undefined;
                 setUser(username, shareToken);
                 setUserInfo({
                     role,
@@ -421,6 +441,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     tacticusGuildApiKey,
                     tacticusUserId,
                 });
+
+                if (serverData) {
+                    serverViewPreferencesReference.current = serverData.viewPreferences;
+                }
+
                 const localModifiedDateTicks = modifiedDateTicksReference.current;
 
                 const hasDataConflict = localModifiedDateTicks !== serverModifiedDateTicks;
@@ -428,22 +453,30 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 const localIsOlder = !!modifiedDate && modifiedDate < serverLastModified;
                 const localIsNewer = !!modifiedDate && modifiedDate > serverLastModified;
 
+                const localData = GlobalState.toStore(globalState);
+                const hasServerSyncChanges = serverData
+                    ? !isEqual(toServerComparable(localData), toServerComparable(serverData))
+                    : true;
+
                 const shouldAcceptServerData = !isFirstLogin && (isFreshData || localIsOlder);
-                const shouldPushLocalData = !isFreshData && (isFirstLogin || localIsNewer || hasDataConflict);
+                const shouldPushLocalData =
+                    !isFreshData && (isFirstLogin || localIsNewer || hasDataConflict) && hasServerSyncChanges;
 
                 setModifiedDateTicks(serverModifiedDateTicks);
 
                 if (shouldAcceptServerData) {
-                    const serverData = convertData(data);
-                    const localData = GlobalState.toStore(globalState);
+                    if (!serverData) {
+                        return;
+                    }
 
-                    const isDataEqual = isEqual(
-                        { ...localData, modifiedDate: undefined },
-                        { ...serverData, modifiedDate: undefined }
-                    );
+                    const isDataEqual = isEqual(toServerComparable(localData), toServerComparable(serverData));
 
                     if (!isDataEqual) {
-                        const newState = new GlobalState(serverData);
+                        const mergedServerData: IPersonalData2 = {
+                            ...serverData,
+                            viewPreferences: localData.viewPreferences,
+                        };
+                        const newState = new GlobalState(mergedServerData);
                         dispatch.setStore(newState, false, false);
                         localStore.setData(GlobalState.toStore(newState));
                         if (hasDataConflict && modifiedDate && modifiedDate > serverLastModified) {
@@ -458,7 +491,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     localStore.setData({ modifiedDate: serverLastModified });
                 } else if (shouldPushLocalData) {
                     clearTimeout(saveTimeoutReference.current);
-                    pushDataToServer(GlobalState.toStore(globalState), 'info');
+                    pushDataToServer(localData, 'info');
                 }
             })
             .catch((error: AxiosError<IErrorResponse>) => {
@@ -482,6 +515,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         setModifiedDateTicks,
         setUser,
         setUserInfo,
+        toServerComparable,
     ]);
 
     useEffect(() => {
