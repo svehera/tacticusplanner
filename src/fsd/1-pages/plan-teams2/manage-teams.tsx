@@ -13,7 +13,7 @@ import {
 } from '@mui/icons-material';
 import { IconButton, Tooltip, Paper, Stack, Chip, ButtonBase, Typography } from '@mui/material';
 import type { ChipProps } from '@mui/material';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, uniq } from 'lodash';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
@@ -154,7 +154,7 @@ export const ManageTeams = () => {
     );
 
     const warDefenseBlockedCoreCharIds = useMemo(
-        () => [...new Set(otherWarDefenseTeams.flatMap(team => getTeamCoreCharIds(team)))],
+        () => uniq(otherWarDefenseTeams.flatMap(team => getTeamCoreCharIds(team))),
         [otherWarDefenseTeams]
     );
 
@@ -164,18 +164,17 @@ export const ManageTeams = () => {
     );
 
     const warDefenseFlexCharIds = useMemo(
-        () => [
-            ...new Set(
+        () =>
+            uniq(
                 otherWarDefenseTeams
                     .flatMap(team => getTeamFlexCharIds(team))
                     .filter(charId => !warDefenseBlockedCoreCharIdsSet.has(charId))
             ),
-        ],
         [otherWarDefenseTeams, warDefenseBlockedCoreCharIdsSet]
     );
 
     const warDefenseFlexMowIds = useMemo(
-        () => [...new Set(otherWarDefenseTeams.flatMap(team => team.mows ?? []))],
+        () => uniq(otherWarDefenseTeams.flatMap(team => team.mows ?? [])),
         [otherWarDefenseTeams]
     );
 
