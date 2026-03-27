@@ -1,6 +1,6 @@
 ﻿/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { cloneDeep, orderBy } from 'lodash';
+import { cloneDeep, orderBy, sum } from 'lodash';
 
 import { rankToLevel, rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
@@ -187,19 +187,19 @@ export class GoalsService {
                 const allGoals = [...shardsGoals, ...upgradeRankOrMowGoals];
                 const goalPriorityMap = new Map(allGoals.map(g => [g.goalId, g.priority]));
 
-                const requiredForThisGoal = estimatedUpgradesTotal.characters.reduce((sum, unit) => {
-                    if (unit.goalId !== goal.goalId) return sum;
-                    return sum + (unit.baseUpgradesTotal[blockedEntry.id] ?? 0);
-                }, 0);
+                const requiredForThisGoal = sum(
+                    estimatedUpgradesTotal.characters
+                        .filter(unit => unit.goalId === goal.goalId)
+                        .map(unit => unit.baseUpgradesTotal[blockedEntry.id] ?? 0)
+                );
 
-                const requiredForHigher = estimatedUpgradesTotal.characters.reduce((sum, unit) => {
+                let requiredForHigher = 0;
+                for (const unit of estimatedUpgradesTotal.characters) {
                     const pr = goalPriorityMap.get(unit.goalId);
-                    if (pr === undefined) return sum;
-                    if (pr < (goal.priority ?? Number.POSITIVE_INFINITY)) {
-                        return sum + (unit.baseUpgradesTotal[blockedEntry.id] ?? 0);
-                    }
-                    return sum;
-                }, 0);
+                    if (pr === undefined) continue;
+                    if (pr >= (goal.priority ?? Number.POSITIVE_INFINITY)) continue;
+                    requiredForHigher += unit.baseUpgradesTotal[blockedEntry.id] ?? 0;
+                }
 
                 estimate.blocked = isGoalPriority && available < requiredForHigher + requiredForThisGoal;
             } else {

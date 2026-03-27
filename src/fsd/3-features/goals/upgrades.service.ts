@@ -1,6 +1,6 @@
 ﻿/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { orderBy, sum, uniq, uniqBy } from 'lodash';
+import { minBy, orderBy, sum, uniq, uniqBy } from 'lodash';
 
 import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
 import {
@@ -322,18 +322,12 @@ export class UpgradesService {
             ([_, value]) => !!value.id && !blockedIds.has(value.id) && !finishedIds.has(value.id)
         );
 
-        const mergedInProgress = inProgressMats.reduce(
-            (accumulator, [id, upgrade]) => {
-                const existing = accumulator[id];
-                if (existing) {
-                    existing.locations = uniqBy([...existing.locations, ...upgrade.locations], 'id');
-                } else {
-                    accumulator[id] = this.cloneCombinedUpgrade(upgrade);
-                }
-                return accumulator;
-            },
-            {} as Record<string, ICombinedUpgrade>
-        );
+        const mergedInProgress = {} as Record<string, ICombinedUpgrade>;
+        for (const [id, upgrade] of inProgressMats) {
+            mergedInProgress[id] ||= this.cloneCombinedUpgrade(upgrade);
+            mergedInProgress[id].locations.push(...upgrade.locations);
+            mergedInProgress[id].locations = uniqBy(mergedInProgress[id].locations, 'id');
+        }
 
         const blockedMaterials = this.getTotalEstimates(remainingMats, inventoryUpgrades).map(x => {
             return {
@@ -350,15 +344,11 @@ export class UpgradesService {
         const finishedMaterials = isGoalPriority
             ? goalPriorityEstimates!.filter(x => x.isFinished && !x.isBlocked)
             : this.getTotalEstimates(
-                  Object.entries(combinedBaseMaterials)
-                      .filter(([_, value]) => value.id && (inventoryUpgrades[value.id] ?? 0) >= value.requiredCount)
-                      .reduce(
-                          (accumulator, [id, upgrade]) => {
-                              accumulator[id] = this.cloneCombinedUpgrade(upgrade);
-                              return accumulator;
-                          },
-                          {} as Record<string, ICombinedUpgrade>
-                      ),
+                  Object.fromEntries(
+                      Object.entries(combinedBaseMaterials)
+                          .filter(([_, value]) => value.id && (inventoryUpgrades[value.id] ?? 0) >= value.requiredCount)
+                          .map(([id, upgrade]) => [id, this.cloneCombinedUpgrade(upgrade)])
+                  ),
                   inventoryUpgrades
               );
 
@@ -614,13 +604,9 @@ export class UpgradesService {
                 }
                 raid.energyTotal = raid.raidLocations.reduce((sum, loc) => sum + loc.energySpent, 0);
             }
-            day.energyTotal = day.raids.reduce((sum, raid) => {
-                for (const loc of raid.raidLocations) {
-                    loc.energySpent = loc.raidsToPerform * loc.energyCost;
-                }
-                const raidEnergy = raid.raidLocations.reduce((raidSum, loc) => raidSum + loc.energySpent, 0);
-                return sum + raidEnergy;
-            }, 0);
+            for (const raid of day.raids)
+                for (const loc of raid.raidLocations) loc.energySpent = loc.raidsToPerform * loc.energyCost;
+            day.energyTotal = sum(day.raids.flatMap(raid => raid.locations.map(location => location.energyCost)));
             energy = settings.dailyEnergy;
             if (day.raids.length === 0) break;
             returnValue.push(day);
@@ -802,8 +788,8 @@ export class UpgradesService {
         > = new Map(),
         goalPriorityLocationsByGoal?: Map<string, GoalPriorityLocationsState>
     ): void {
-        const minEnergy = locs.reduce((min, loc) => Math.min(min, loc.energyCost), Infinity);
-        const maxEnergy = locs.reduce((max, loc) => Math.max(max, loc.energyCost), -Infinity);
+        const minEnergy = Math.min(Infinity, ...locs.map(loc => loc.energyCost));
+        const maxEnergy = Math.max(-Infinity, ...locs.map(loc => loc.energyCost));
         if (settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials) {
             for (const loc of this.sortLocationsForRaiding(
                 locs,
@@ -1500,15 +1486,6 @@ export class UpgradesService {
         );
     }
 
-    /** Used in reduce statements to select the most urgent goal (numerically lowest priority). */
-    private static reduceGoalsByPriority(
-        accumulator: ICharacterAscendGoal | undefined,
-        goal: ICharacterAscendGoal
-    ): ICharacterAscendGoal | undefined {
-        if (accumulator === undefined || goal.priority < accumulator.priority) accumulator = goal;
-        return accumulator;
-    }
-
     /**
      * Computes the number of onslaught tokens needed to collect the required shards and mythic
      * shards for a goal.
@@ -1547,20 +1524,18 @@ export class UpgradesService {
         mows: IMow2[],
         goals: ICharacterAscendGoal[]
     ): ICharacterAscendGoal | undefined {
-        const shardGoal = goals
-            .filter(goal => this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal))
-            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, mows, goal) > 0)
-            .reduce(
-                (accumulator, goal) => this.reduceGoalsByPriority(accumulator, goal),
-                undefined as ICharacterAscendGoal | undefined
-            );
-        const mythicShardGoal = goals
-            .filter(goal => this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal))
-            .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, mows, goal) > 0)
-            .reduce(
-                (accumulator, goal) => this.reduceGoalsByPriority(accumulator, goal),
-                undefined as ICharacterAscendGoal | undefined
-            );
+        const shardGoal = minBy(
+            goals
+                .filter(goal => this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal))
+                .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, mows, goal) > 0),
+            'priority'
+        );
+        const mythicShardGoal = minBy(
+            goals
+                .filter(goal => this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal))
+                .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, mows, goal) > 0),
+            'priority'
+        );
         const order = [shardGoal, mythicShardGoal]
             .filter(x => x !== undefined)
             .toSorted((a, b) => a.priority - b.priority);
@@ -1737,24 +1712,18 @@ export class UpgradesService {
         let energySpent = 0;
         let nonRewardRaidIndex = 0;
 
-        const raidsByMaterial = Object.entries(
-            settings.completedLocations.reduce(
-                (accumulator, loc) => {
-                    const reward = CampaignsService.getRepeatableReward(loc.rewards);
-                    if (reward.length === 0) {
-                        accumulator['no-reward-' + nonRewardRaidIndex++] = [loc];
-                    } else {
-                        accumulator[reward] = [...(accumulator[reward] ?? []), loc];
-                    }
-                    return accumulator;
-                },
-                {} as Record<string, IItemRaidLocation[]>
-            )
-        );
+        const raidsByMaterial = {} as Record<string, IItemRaidLocation[]>;
+
+        for (const loc of settings.completedLocations) {
+            const reward = CampaignsService.getRepeatableReward(loc.rewards);
+            const key = reward.length === 0 ? 'no-reward-' + nonRewardRaidIndex++ : reward;
+            raidsByMaterial[key] ||= [];
+            raidsByMaterial[key].push(loc);
+        }
 
         let raidIndex = 0;
         const raids: IUpgradeRaid[] = [];
-        for (const [reward, locations] of raidsByMaterial) {
+        for (const [reward, locations] of Object.entries(raidsByMaterial)) {
             const acquired = settings.upgrades[reward] ?? 0;
             const required = combinedBaseMaterials[reward]?.requiredCount ?? 0;
             const upgrade = FsdUpgradesService.getUpgrade(reward);

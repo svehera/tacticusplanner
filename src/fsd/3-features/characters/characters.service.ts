@@ -186,32 +186,26 @@ export class CharactersService {
         const factionCharacters = groupBy(units, 'faction');
 
         // Derive relevant faction data in one pass
-        const result: IFaction[] = factionsData.reduce((accumulator: IFaction[], faction) => {
-            const characters = factionCharacters[faction.snowprintId];
-            if (!characters) return accumulator;
+        const result: IFaction[] = factionsData
+            .map(faction => {
+                const units = factionCharacters[faction.snowprintId];
+                if (!units) return;
 
-            let bsValue = 0,
-                power = 0,
-                unlockedCharacters = 0;
-            for (const char of characters) {
-                if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue) {
-                    bsValue += CharactersValueService.getCharacterValue(char);
-                }
-                if (includePower || charactersOrderBy === CharactersOrderBy.FactionPower) {
-                    power += CharactersPowerService.getCharacterPower(char);
-                }
-                if (isUnlocked(char)) unlockedCharacters++;
-            }
-
-            accumulator.push({
-                ...faction,
-                units: characters,
-                bsValue,
-                power,
-                unlockedCharacters,
-            });
-            return accumulator;
-        }, []);
+                return {
+                    ...faction,
+                    units,
+                    bsValue:
+                        includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue
+                            ? sum(units.map(character => CharactersValueService.getCharacterValue(character)))
+                            : 0,
+                    power:
+                        includePower || charactersOrderBy === CharactersOrderBy.FactionPower
+                            ? sum(units.map(character => CharactersPowerService.getCharacterPower(character)))
+                            : 0,
+                    unlockedCharacters: units.filter(character => isUnlocked(character)).length,
+                };
+            })
+            .filter(faction => faction !== undefined);
 
         // Determine sort key based on the order parameter
         let orderByKey: keyof IFaction;

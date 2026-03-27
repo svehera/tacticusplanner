@@ -8,7 +8,7 @@
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, sum } from 'lodash';
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
@@ -248,12 +248,12 @@ export const Goals = () => {
         xpIncome
     );
 
-    const estimatesByGoalId = adjustedGoalsEstimates.goalEstimates.reduce((accumulator, estimate) => {
-        const group = accumulator.get(estimate.goalId) || [];
+    const estimatesByGoalId = new Map<string, IGoalEstimate[]>();
+    for (const estimate of adjustedGoalsEstimates.goalEstimates) {
+        const group = estimatesByGoalId.get(estimate.goalId) || [];
         group.push(estimate);
-        accumulator.set(estimate.goalId, group);
-        return accumulator;
-    }, new Map<string, IGoalEstimate[]>());
+        estimatesByGoalId.set(estimate.goalId, group);
+    }
 
     const mergedGoalEstimates: IGoalEstimate[] = [...estimatesByGoalId.values()].map(group => {
         const first = group[0];
@@ -263,18 +263,19 @@ export const Goals = () => {
         if (goal && (goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities)) {
             const aggregated = GoalsEstimateFunction.getAggregatedGoalEstimate(group) as Partial<IGoalEstimate>;
 
-            const merged = group.reduce((accumulator, current) => ({
-                ...accumulator,
-                ...current,
-                // Preserve/merge specific per-row fields across the group
-                mowEstimate: accumulator.mowEstimate || current.mowEstimate,
-                xpEstimate: accumulator.xpEstimate || current.xpEstimate,
-                abilitiesEstimate: accumulator.abilitiesEstimate || current.abilitiesEstimate,
-                xpEstimateAbilities: accumulator.xpEstimateAbilities || current.xpEstimateAbilities,
-                completed: accumulator.completed || current.completed,
-                blocked: accumulator.blocked || current.blocked,
-                included: accumulator.included || current.included,
-            }));
+            const merged = group[0];
+            for (const current of group) {
+                Object.assign(merged, current, {
+                    // Preserve/merge specific per-row fields across the group
+                    mowEstimate: merged.mowEstimate || current.mowEstimate,
+                    xpEstimate: merged.xpEstimate || current.xpEstimate,
+                    abilitiesEstimate: merged.abilitiesEstimate || current.abilitiesEstimate,
+                    xpEstimateAbilities: merged.xpEstimateAbilities || current.xpEstimateAbilities,
+                    completed: merged.completed || current.completed,
+                    blocked: merged.blocked || current.blocked,
+                    included: merged.included || current.included,
+                });
+            }
 
             return {
                 ...merged,
@@ -289,19 +290,17 @@ export const Goals = () => {
 
     const shardOnslaughtTokensTotal = useMemo(
         () =>
-            sortedShards.reduce(
-                (total, goal) =>
-                    total + (mergedGoalEstimates.find(estimate => estimate.goalId === goal.goalId)?.oTokensTotal ?? 0),
-                0
+            sum(
+                sortedShards.map(
+                    goal => mergedGoalEstimates.find(estimate => estimate.goalId === goal.goalId)?.oTokensTotal ?? 0
+                )
             ),
         [sortedShards, mergedGoalEstimates]
     );
 
-    const totalGoldAbilities = (mergedGoalEstimates as IGoalEstimate[]).reduce((accumulator, current) => {
-        const abilityGold = current.abilitiesEstimate?.gold ?? 0;
-        const xpGold = current.xpEstimateAbilities?.gold ?? 0;
-        return accumulator + abilityGold + xpGold;
-    }, 0);
+    const totalGoldAbilities =
+        sum(mergedGoalEstimates.map(estimate => estimate.abilitiesEstimate?.gold ?? 0)) +
+        sum(mergedGoalEstimates.map(estimate => estimate.xpEstimateAbilities?.gold ?? 0));
     const hasSync = !!userInfo.tacticusApiKey;
 
     const onDeleteAll = () => {

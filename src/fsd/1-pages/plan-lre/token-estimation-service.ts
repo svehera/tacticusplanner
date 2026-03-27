@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep, sum } from 'lodash';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { ILreTeam } from '@/models/interfaces';
@@ -389,20 +389,22 @@ export class TokenEstimationService {
             // No tokens available, return a token with no team and no battle.
             return new TokenUse();
         }
-        // Find the token with the highest points, and if there is a tie, the lowest
-        // (real) battle number.
-        return nextBestTokens.reduce((best, current) => {
-            if (best === undefined) return current;
-            if (current === undefined) return best;
-            if (current.incrementalPoints > best.incrementalPoints) return current;
-            if (current.incrementalPoints < best.incrementalPoints) return best;
-            if (this.isTokenNextBattleWithTeam(current, lastToken)) return current;
-            if (this.isTokenNextBattleWithTeam(best, lastToken)) return best;
-            if (this.getTrack(current) < this.getTrack(best)) return current;
-            if (this.getTrack(current) > this.getTrack(best)) return best;
-            if (current.battleNumber > best.battleNumber) return current;
-            return best;
-        }, nextBestTokens[0]);
+
+        let best = nextBestTokens[0];
+        for (const current of nextBestTokens) {
+            // Priority 1) prefer the token with the highest number of points
+            if (current.incrementalPoints > best.incrementalPoints) best = current;
+            else if (current.incrementalPoints < best.incrementalPoints) continue;
+            // Priority 2) keep going with the current team
+            else if (this.isTokenNextBattleWithTeam(current, lastToken)) best = current;
+            else if (this.isTokenNextBattleWithTeam(best, lastToken)) continue;
+            // Priority 3) prefer the earlier track
+            else if (this.getTrack(current) < this.getTrack(best)) best = current;
+            else if (this.getTrack(current) > this.getTrack(best)) continue;
+            // Priority 4) prefer the earlier battle number
+            else if (current.battleNumber > best.battleNumber) best = current;
+        }
+        return best;
     }
 
     /**
@@ -415,11 +417,7 @@ export class TokenEstimationService {
         const tracks: ILreTrackProgress[] = cloneDeep(tracksProgress);
         for (const track of tracks) {
             for (const battle of track.battles) {
-                battle.completed =
-                    battle.requirementsProgress.reduce(
-                        (sum, requirement) => (sum += requirement.completed ? 1 : 0),
-                        0
-                    ) === battle.requirementsProgress.length;
+                battle.completed = battle.requirementsProgress.every(requirement => requirement.completed);
             }
         }
         const resolvedTeams = teams.map(team => ({
@@ -463,14 +461,13 @@ export class TokenEstimationService {
 
     /** @returns the current points earned in this track, accounting for partial killScore and highScore inputs. */
     public static computeCurrentPointsInTrack(track: ILreTrackProgress): number {
-        return track.battles.reduce((sum, battle) => {
-            const battlePoints = battle.requirementsProgress
-                .map(requirement => LreRequirementStatusService.getRequirementPoints(requirement))
-                .reduce((innerSum, points) => {
-                    return innerSum + points;
-                }, 0);
-            return sum + battlePoints;
-        }, 0);
+        return sum(
+            track.battles.flatMap(battle =>
+                battle.requirementsProgress.map(requirement =>
+                    LreRequirementStatusService.getRequirementPoints(requirement)
+                )
+            )
+        );
     }
 
     /**

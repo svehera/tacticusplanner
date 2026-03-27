@@ -174,12 +174,8 @@ export const LreTeamsTable: React.FC<Props> = ({
         }));
 
         // Create a lookup table to get the order from `columnIds`
-        const columnOrder: Record<string, number> = selectedRequirements.reduce(
-            (order, id, index) => {
-                order[id] = index;
-                return order;
-            },
-            {} as Record<string, number>
+        const columnOrder: Record<string, number> = Object.fromEntries(
+            selectedRequirements.map((id, index) => [id, index])
         );
 
         // Sort `columns` by using the order from `columnIds`, keeping unspecified columns in original order
