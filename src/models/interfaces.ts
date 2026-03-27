@@ -42,7 +42,6 @@ import { DailyRaidsAction } from '../reducers/daily-raids.reducer';
 import { GoalsAction } from '../reducers/goals.reducer';
 import { InventoryAction } from '../reducers/inventory.reducer';
 import { LeProgressAction } from '../reducers/le-progress.reducer';
-import { LeSelectedRequirementsAction } from '../reducers/le-selected-requirements.reducer';
 import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
 import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
 import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
@@ -90,7 +89,6 @@ export interface IGlobalState {
     selectedTeamOrder: ISelectedTeamsOrdering;
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
-    leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     leSettings: ILegendaryEventSettings;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
@@ -114,7 +112,6 @@ export interface IDispatchContext {
     dailyRaidsPreferences: React.Dispatch<DailyRaidsPreferencesAction>;
     autoTeamsPreferences: React.Dispatch<AutoTeamsPreferencesAction>;
     selectedTeamOrder: React.Dispatch<SelectedTeamsOrderingAction>;
-    leSelectedRequirements: React.Dispatch<LeSelectedRequirementsAction>;
     leSelectedTeams: React.Dispatch<LeSelectedTeamsAction>;
     leProgress: React.Dispatch<LeProgressAction>;
     leSettings: React.Dispatch<LeSettingsAction>;
@@ -149,7 +146,6 @@ export interface IPersonalData2 {
     warOffense2: WarOffense2State;
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILreProgressDto>;
-    leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     leSettings: ILegendaryEventSettings;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
@@ -239,6 +235,7 @@ interface ILegendaryEventData {
 export enum IDailyRaidsFarmOrder {
     goalPriority,
     totalMaterials,
+    homeScreenEvent,
 }
 
 export enum IDailyRaidsHomeScreenEvent {

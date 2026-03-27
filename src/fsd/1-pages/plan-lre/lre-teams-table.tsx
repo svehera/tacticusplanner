@@ -40,6 +40,13 @@ interface Props {
     progress: Record<string, number>;
     editTeam: (team: ILreTeam) => void;
     restrictions: string[];
+    updateRestrictionSelection: (
+        eventId: ILegendaryEventTrack['eventId'],
+        section: LreTrackId,
+        restrictionName: string,
+        selected: boolean
+    ) => void;
+    clearSectionSelection: (eventId: ILegendaryEventTrack['eventId'], section: LreTrackId) => void;
 }
 
 const getRowStyle = (params: RowClassParams): RowStyle => {
@@ -56,6 +63,8 @@ export const LreTeamsTable: React.FC<Props> = ({
     autoAddTeam,
     editTeam,
     restrictions,
+    updateRestrictionSelection,
+    clearSectionSelection,
 }) => {
     const gridReference = useRef<AgGridReact>(null);
 
@@ -123,13 +132,7 @@ export const LreTeamsTable: React.FC<Props> = ({
     }, [track.eventId]);
 
     const handleChange = (selected: boolean, restrictionName: string) => {
-        dispatch.leSelectedRequirements({
-            type: 'Update',
-            eventId: track.eventId,
-            section: track.section,
-            restrictionName,
-            selected,
-        });
+        updateRestrictionSelection(track.eventId, track.section, restrictionName, selected);
     };
 
     const addNewTeam = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
@@ -205,11 +208,7 @@ export const LreTeamsTable: React.FC<Props> = ({
     }
 
     const clearSelection = () => {
-        dispatch.leSelectedRequirements({
-            type: 'ClearAll',
-            eventId: track.eventId,
-            section: track.section,
-        });
+        clearSectionSelection(track.eventId, track.section);
     };
 
     const deleteTeam = (teamId: string) => {

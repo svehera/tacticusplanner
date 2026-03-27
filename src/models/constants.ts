@@ -337,7 +337,6 @@ export const defaultData: IPersonalData2 = {
     },
     leTeams: {},
     leProgress: {},
-    leSelectedRequirements: {},
     leSettings: {
         defaultPageForActiveEvent: LegendaryEventDefaultPage.TOKENOMICS,
         defaultPageWhenEventNotActive: LegendaryEventDefaultPage.TEAMS,

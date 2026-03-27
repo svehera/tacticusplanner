@@ -31,7 +31,6 @@ import {
     IDailyRaidsStored,
     IDailyRaidsPreferences,
     IInventory,
-    ILegendaryEventSelectedRequirements,
     ILegendaryEventSelectedTeams,
     IPersonalCharacterData2,
     IPersonalData,
@@ -93,9 +92,6 @@ export class PersonalDataLocalStorage {
                 leProgress: migrateLreProgress(
                     this.getItem<LegendaryEventData<ILreProgressDto>>('leProgress') ?? defaultData.leProgress
                 ),
-                leSelectedRequirements:
-                    this.getItem<LegendaryEventData<ILegendaryEventSelectedRequirements>>('leSelectedRequirements') ??
-                    defaultData.leSelectedRequirements,
                 leSettings: this.getItem<ILegendaryEventSettings>('leSettings') ?? defaultData.leSettings,
                 campaignsProgress: {
                     ...defaultData.campaignsProgress,
@@ -246,7 +242,6 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             selectedTeamOrder: v1Data.selectedTeamOrder ?? defaultData.selectedTeamOrder,
             leTeams: migrateLreTeams(v1Data.legendaryEvents3 ?? defaultData.leTeams),
             leProgress: v1Data.legendaryEventsProgress ?? defaultData.leProgress,
-            leSelectedRequirements: v1Data.legendaryEventSelectedRequirements ?? defaultData.leSelectedRequirements,
             leSettings: defaultData.leSettings,
             campaignsProgress: defaultData.campaignsProgress,
             dailyRaidsPreferences: defaultData.dailyRaidsPreferences,
