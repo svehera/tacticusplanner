@@ -350,10 +350,8 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                         forecast.shardsNeededForNextMilestone / model.shardsPerChest
                                                     );
 
-                                                    const currentClaimedChestIndex = cumulativeChestCosts.reduce(
-                                                        (index, cost, costIndex) =>
-                                                            cost <= forecast.endingCurrency ? costIndex : index,
-                                                        -1
+                                                    const currentClaimedChestIndex = cumulativeChestCosts.findLastIndex(
+                                                        cost => cost <= forecast.endingCurrency
                                                     );
 
                                                     const targetChestCost =

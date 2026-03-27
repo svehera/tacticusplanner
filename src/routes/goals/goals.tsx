@@ -145,10 +145,10 @@ export const Goals = () => {
             }))
             .filter(day => day.hasShardRaid);
 
+        const lastEntry = daysWithShardRaids.at(-1);
+        const firstEntry = daysWithShardRaids[0];
         const daysTotal =
-            daysWithShardRaids.length === 0
-                ? 0
-                : daysWithShardRaids[daysWithShardRaids.length - 1].index - daysWithShardRaids[0].index + 1;
+            lastEntry === undefined || firstEntry === undefined ? 0 : lastEntry.index - firstEntry.index + 1;
 
         const energyTotal = estimatedUpgradesTotal.upgradesRaids.reduce(
             (total, day) =>
