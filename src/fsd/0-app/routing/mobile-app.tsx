@@ -29,7 +29,8 @@ const MobileApp = () => {
 
     const title = useMemo(() => {
         const routeSections = location.pathname.split('/');
-        const menuItemId = routeSections[routeSections.length - 1];
+        const menuItemId = routeSections.at(-1);
+        if (!menuItemId) throw new Error('missing route section');
         if (Object.hasOwn(menuItemById, menuItemId) && value !== 0) {
             return menuItemById[menuItemId as keyof typeof menuItemById].title;
         } else if (menuItemId === 'lre') {

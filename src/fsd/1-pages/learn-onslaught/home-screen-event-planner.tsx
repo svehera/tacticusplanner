@@ -46,10 +46,12 @@ export const HomeScreenEventPlanner = () => {
 
     const handleToggleTrack = (track: OnslaughtTrackId) => {
         setSelections(previous => {
-            const next = { ...previous };
-            next[track] = {
-                ...previous[track],
-                selected: !previous[track].selected,
+            const next = {
+                ...previous,
+                [track]: {
+                    ...previous[track],
+                    selected: !previous[track].selected,
+                },
             };
             return next;
         });
@@ -62,9 +64,11 @@ export const HomeScreenEventPlanner = () => {
         }));
     };
 
-    const selectedTracks = Object.entries(selections)
-        .filter(([_, { selected }]) => selected)
-        .map(([track]) => track as OnslaughtTrackId);
+    const selectedTracks = new Set(
+        Object.entries(selections)
+            .filter(([_, { selected }]) => selected)
+            .map(([track]) => track as OnslaughtTrackId)
+    );
 
     const tokens = useMemo(() => {
         const returnValue = HomeScreenEventPlannerService.calculateHsePlan(
@@ -85,9 +89,9 @@ export const HomeScreenEventPlanner = () => {
                 zone: selections[OnslaughtTrackId.Chaos]?.zone ?? 0,
             },
             {
-                [OnslaughtTrackId.Imperial]: selectedTracks.includes(OnslaughtTrackId.Imperial),
-                [OnslaughtTrackId.Xenos]: selectedTracks.includes(OnslaughtTrackId.Xenos),
-                [OnslaughtTrackId.Chaos]: selectedTracks.includes(OnslaughtTrackId.Chaos),
+                [OnslaughtTrackId.Imperial]: selectedTracks.has(OnslaughtTrackId.Imperial),
+                [OnslaughtTrackId.Xenos]: selectedTracks.has(OnslaughtTrackId.Xenos),
+                [OnslaughtTrackId.Chaos]: selectedTracks.has(OnslaughtTrackId.Chaos),
             },
             preEventTokens,
             duringEventTokens

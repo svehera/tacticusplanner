@@ -125,6 +125,7 @@ export const Quests = () => {
             {/* Header / Selector */}
             <div className="flex flex-wrap items-center justify-between gap-4 rounded-lg bg-slate-100 p-4 dark:bg-slate-800">
                 <UnitsAutocomplete<IUnit>
+                    // eslint-disable-next-line unicorn/no-null -- autocomplete requires null
                     unit={char ?? null}
                     label="Active Quest"
                     options={questJson

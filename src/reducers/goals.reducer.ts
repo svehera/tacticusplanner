@@ -37,7 +37,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
         }
         case 'Swap': {
             const { goalId, neighborId } = action;
-            const newState = [...state].sort((a, b) => a.priority - b.priority);
+            const newState = state.toSorted((a, b) => a.priority - b.priority);
 
             const indexA = newState.findIndex(x => x.id === goalId);
             const indexB = newState.findIndex(x => x.id === neighborId);

@@ -26,13 +26,13 @@ export function battlesProgressToCompact(battlesProgress: ILreBattleProgressDto[
             const compRequirement: ILreCompactRequirementProgressDto = (track[requirement.id] ??= { states: [] });
             compRequirement.states[battle.battleIndex] = requirement.state;
 
-            if (requirement.scoredPoints != null) {
+            if (requirement.scoredPoints != undefined) {
                 (compRequirement.scoredPoints ??= {})[battle.battleIndex] = requirement.scoredPoints;
             }
-            if (requirement.highScoredPoints != null) {
+            if (requirement.highScoredPoints != undefined) {
                 (compRequirement.highScoredPoints ??= {})[battle.battleIndex] = requirement.highScoredPoints;
             }
-            if (requirement.status != null) {
+            if (requirement.status != undefined) {
                 (compRequirement.statuses ??= {})[battle.battleIndex] = requirement.status;
             }
         }
@@ -68,9 +68,9 @@ export function compactToBattlesProgress(compact: ILreCompactProgressDto): ILreB
 
                 if (
                     state !== ProgressState.none ||
-                    scoredPoints != null ||
-                    highScoredPoints != null ||
-                    status != null
+                    scoredPoints != undefined ||
+                    highScoredPoints != undefined ||
+                    status != undefined
                 ) {
                     requirements.push({ id: requirementId, state, scoredPoints, highScoredPoints, status });
                 }

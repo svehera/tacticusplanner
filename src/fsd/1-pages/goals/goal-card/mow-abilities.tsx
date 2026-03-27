@@ -12,7 +12,7 @@ import { GoalEstimateRow } from './estimate-row';
 interface Props {
     goal: ICharacterUpgradeMow;
     goalEstimate: IGoalEstimate;
-    calendarDate: string | null;
+    calendarDate?: string;
 }
 
 /** Renders the body of a MowAbilities goal card, showing primary/secondary ability progress and material costs. */

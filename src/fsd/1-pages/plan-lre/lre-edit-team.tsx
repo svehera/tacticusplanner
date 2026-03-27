@@ -73,11 +73,11 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
     };
 
     const isValid = () => {
-        const availableCharacters = gridTeam.map(x => x.snowprintId);
+        const availableCharacters = new Set(gridTeam.map(x => x.snowprintId));
         return (
             selectedTeam.length > 0 &&
             teamName.length > 0 &&
-            selectedTeam.every(character => availableCharacters.includes(character))
+            selectedTeam.every(character => availableCharacters.has(character))
         );
     };
 

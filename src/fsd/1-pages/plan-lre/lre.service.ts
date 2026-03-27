@@ -100,7 +100,7 @@ export class LreService {
             ];
 
             const battles = track.battlesPoints.map((points, index) => {
-                const flexPointsCategories = [LrePointsCategoryId.killScore, LrePointsCategoryId.highScore];
+                const flexPointsCategories = new Set([LrePointsCategoryId.killScore, LrePointsCategoryId.highScore]);
                 const battleProgress = trackBattlesDto.find(x => x.battleIndex === index);
 
                 const requirementsProgress: ILreBattleRequirementsProgress[] = requirements.map(requirement => {
@@ -110,7 +110,7 @@ export class LreService {
                         id: requirement.id,
                         iconId: requirement.iconId,
                         name: requirement.name,
-                        points: flexPointsCategories.includes(requirement.id as LrePointsCategoryId)
+                        points: flexPointsCategories.has(requirement.id as LrePointsCategoryId)
                             ? points
                             : requirement.pointsPerBattle,
                         completed: requirementProgress?.state === ProgressState.completed,

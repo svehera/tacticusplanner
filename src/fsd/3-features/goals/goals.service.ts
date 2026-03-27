@@ -1,6 +1,6 @@
 ﻿/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { cloneDeep, orderBy } from 'lodash';
+import { cloneDeep, orderBy, sum } from 'lodash';
 
 import { rankToLevel, rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
@@ -187,19 +187,19 @@ export class GoalsService {
                 const allGoals = [...shardsGoals, ...upgradeRankOrMowGoals];
                 const goalPriorityMap = new Map(allGoals.map(g => [g.goalId, g.priority]));
 
-                const requiredForThisGoal = estimatedUpgradesTotal.characters.reduce((sum, unit) => {
-                    if (unit.goalId !== goal.goalId) return sum;
-                    return sum + (unit.baseUpgradesTotal[blockedEntry.id] ?? 0);
-                }, 0);
+                const requiredForThisGoal = sum(
+                    estimatedUpgradesTotal.characters
+                        .filter(unit => unit.goalId === goal.goalId)
+                        .map(unit => unit.baseUpgradesTotal[blockedEntry.id] ?? 0)
+                );
 
-                const requiredForHigher = estimatedUpgradesTotal.characters.reduce((sum, unit) => {
+                let requiredForHigher = 0;
+                for (const unit of estimatedUpgradesTotal.characters) {
                     const pr = goalPriorityMap.get(unit.goalId);
-                    if (pr === undefined) return sum;
-                    if (pr < (goal.priority ?? Number.POSITIVE_INFINITY)) {
-                        return sum + (unit.baseUpgradesTotal[blockedEntry.id] ?? 0);
-                    }
-                    return sum;
-                }, 0);
+                    if (pr === undefined) continue;
+                    if (pr >= (goal.priority ?? Number.POSITIVE_INFINITY)) continue;
+                    requiredForHigher += unit.baseUpgradesTotal[blockedEntry.id] ?? 0;
+                }
 
                 estimate.blocked = isGoalPriority && available < requiredForHigher + requiredForThisGoal;
             } else {
@@ -281,7 +281,7 @@ export class GoalsService {
                     !relatedCharacter
                 ) {
                     console.warn('Goal not applicable for character or mow:', g);
-                    return null;
+                    return;
                 }
                 return this.convertToTypedGoal(g, relatedCharacter);
             })
@@ -313,9 +313,9 @@ export class GoalsService {
             ascendGoals,
         };
     }
-    static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): CharacterRaidGoalSelect | null {
+    static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): CharacterRaidGoalSelect | undefined {
         if (!unit) {
-            return null;
+            return;
         }
 
         if (isMow(unit)) {
@@ -446,10 +446,10 @@ export class GoalsService {
             }
         }
 
-        return null;
+        return;
     }
 
-    static convertToGenericGoal(goal: CharacterRaidGoalSelect): IPersonalGoal | null {
+    static convertToGenericGoal(goal: CharacterRaidGoalSelect): IPersonalGoal | undefined {
         const base: IPersonalGoal = {
             id: goal.goalId,
             type: goal.type,
@@ -502,7 +502,7 @@ export class GoalsService {
                 };
             }
             default: {
-                return null;
+                return;
             }
         }
     }
@@ -600,7 +600,7 @@ export class GoalsService {
         }
 
         if (xpNeeded > 0) {
-            for (const rarity of [...XP_BOOK_ORDER].reverse()) {
+            for (const rarity of XP_BOOK_ORDER.toReversed()) {
                 while (xpNeeded > 0 && heldBooks[rarity] > 0) {
                     xpNeeded = Math.max(0, xpNeeded - XP_BOOK_VALUE[rarity]);
                     heldBooks[rarity] -= 1;

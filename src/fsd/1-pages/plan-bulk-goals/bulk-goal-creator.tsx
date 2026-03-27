@@ -14,10 +14,10 @@ import { v4 } from 'uuid';
 import { goalsLimit, rankToRarity, rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
+import { filterMap } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { RankIcon, RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { ICharacter2 } from '@/fsd/4-entities/character';
 import { CharactersService as FsdCharactersService } from '@/fsd/4-entities/character/characters.service';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
@@ -37,7 +37,7 @@ import {
 } from './bulk-goal-creator.service';
 
 const createBulkUnitEntry = () => ({
-    unit: null,
+    unit: undefined,
     rank: Rank.Stone1,
     rarity: Rarity.Common,
     stars: 1,
@@ -51,11 +51,11 @@ const createBulkUnitEntry = () => ({
 
 const rankValues = Object.values(Rank)
     .filter((rank): rank is Rank => typeof rank === 'number')
-    .sort((first, second) => first - second);
+    .toSorted((first, second) => first - second);
 
 const allStarValues = Object.values(RarityStars)
     .filter((s): s is RarityStars => typeof s === 'number')
-    .sort((a, b) => a - b);
+    .toSorted((a, b) => a - b);
 
 type GoalInsertPriorityMode = 'highest' | 'lowest';
 
@@ -71,7 +71,7 @@ const abilityMaxByRarity: Record<Rarity, number> = {
 };
 
 const enforceMinimums = (entry: {
-    unit: IUnit | null;
+    unit: IUnit | undefined;
     rank: Rank;
     rarity: Rarity;
     stars: number;
@@ -97,7 +97,7 @@ const enforceMinimums = (entry: {
     };
 };
 
-const getBulkUnitEntryFromUnit = (unit: IUnit | null) => {
+const getBulkUnitEntryFromUnit = (unit: IUnit | undefined) => {
     if (!unit) {
         return createBulkUnitEntry();
     }
@@ -132,7 +132,7 @@ export const BulkGoalCreator = () => {
 
     const [bulkUnits, setBulkUnits] = useState<
         Array<{
-            unit: IUnit | null;
+            unit: IUnit | undefined;
             rank: Rank;
             rarity: Rarity;
             stars: number;
@@ -204,13 +204,13 @@ export const BulkGoalCreator = () => {
         });
     }, []);
 
-    const bulkTeamCharacters = useMemo(() => {
-        return bulkUnits
-            .map(entry => {
-                if (!entry.unit || !('snowprintId' in entry.unit)) return null;
+    const bulkTeamCharacters = useMemo(
+        () =>
+            filterMap(bulkUnits, entry => {
+                if (!entry.unit || !('snowprintId' in entry.unit)) return;
                 const unit = entry.unit;
                 const char = resolvedCharacters.find(c => c.snowprintId === unit.snowprintId);
-                if (!char) return null;
+                if (!char) return;
                 return {
                     ...char,
                     rank: entry.rank,
@@ -219,9 +219,9 @@ export const BulkGoalCreator = () => {
                     activeAbilityLevel: entry.activeAbilityLevel,
                     passiveAbilityLevel: entry.passiveAbilityLevel,
                 };
-            })
-            .filter((c): c is ICharacter2 => c !== null);
-    }, [bulkUnits, resolvedCharacters]);
+            }),
+        [bulkUnits, resolvedCharacters]
+    );
 
     const goalSummaryRows = useMemo(() => {
         const rows: Array<{
@@ -391,7 +391,7 @@ export const BulkGoalCreator = () => {
         [bulkUnits, goalOrder]
     );
 
-    const currentLowestPriority = useMemo(() => goals.reduce((max, goal) => Math.max(max, goal.priority), 0), [goals]);
+    const currentLowestPriority = Math.max(0, ...goals.map(goal => goal.priority));
 
     const wouldExceedGoalsLimit = goals.length + plannedGoals.length > goalsLimit;
 

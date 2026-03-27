@@ -22,8 +22,9 @@ export const LeTokenMilestoneCardGrid = ({ milestonesToList, emptyMessage, isMis
     ) : (
         <div className="flex w-full flex-wrap justify-center gap-3">
             {milestonesToList.map((milestone, index) => {
-                const isFinalMilestone =
-                    milestone.points >= milestonesAndPoints[milestonesAndPoints.length - 1]?.points;
+                const finalMilestonePoints = milestonesAndPoints.at(-1)?.points;
+                if (finalMilestonePoints === undefined) throw new Error('missing milestones and points');
+                const isFinalMilestone = milestone.points >= finalMilestonePoints;
 
                 return (
                     <div key={index} className={`${baseCardClasses} ${variantClasses}`}>

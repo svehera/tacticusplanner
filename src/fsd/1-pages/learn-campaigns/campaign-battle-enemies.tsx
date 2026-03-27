@@ -17,7 +17,7 @@ interface Props {
 }
 
 // Extracted Logic: Resolve string to data object
-const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
+const resolveEnemy = (enemyString: string): ResolvedEnemyData | undefined => {
     const colon = enemyString.indexOf(':');
     const id = colon === -1 ? enemyString : enemyString.slice(0, Math.max(0, colon));
 
@@ -34,7 +34,7 @@ const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
 
     const npc = NpcService.getNpcById(id);
 
-    if (!npc || arrayIndex >= npc.stats.length) return null;
+    if (!npc || arrayIndex >= npc.stats.length) return;
 
     return {
         id,
@@ -111,8 +111,8 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
             const resolved = resolveEnemy(enemy.id);
             const enemyId = resolved?.id || enemy.id;
             const npc = NpcService.getNpcById(enemyId);
-            const rank = resolved === null ? Rank.Stone1 : resolved.stats.rank;
-            const stars = resolved === null ? RarityStars.None : resolved.stats.rarityStars;
+            const rank = resolved?.stats?.rank ?? Rank.Stone1;
+            const stars = resolved?.stats?.rarityStars ?? RarityStars.None;
 
             for (let index = 0; index < enemy.count; index++) {
                 elements.push(
@@ -125,7 +125,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ keyPrefix, battleId, en
                             onEnemyClick({
                                 id: enemyId,
                                 npc,
-                                stats: resolved === null ? npc.stats[0] : resolved.stats,
+                                stats: resolved?.stats ?? npc.stats[0],
                             })
                         }>
                         <NpcPortrait id={enemyId} rank={rank} stars={stars} />

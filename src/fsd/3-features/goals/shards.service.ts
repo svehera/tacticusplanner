@@ -160,8 +160,7 @@ export class ShardsService {
 
         const result: ICharacterShardsEstimate[] = [];
 
-        for (let materialIndex = 0; materialIndex < materials.length; materialIndex++) {
-            const material = materials[materialIndex];
+        for (const [materialIndex, material] of materials.entries()) {
             const previousShardsTokens = sum(
                 result.filter((_, index) => index < materialIndex).map(x => x.onslaughtTokensTotal)
             );

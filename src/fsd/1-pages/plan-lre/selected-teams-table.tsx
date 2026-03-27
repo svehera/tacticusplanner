@@ -51,16 +51,15 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
         suppressMovable: true,
         wrapHeaderText: true,
         cellRenderer: (props: ICellRendererParams<ISelectedTeamTableCell>) => {
-            const character = isSelectedTeamCell(props.value) ? props.value.character : null;
-            if (character) {
-                return (
-                    <LreTile
-                        character={character}
-                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
-                        settings={viewPreferences}
-                    />
-                );
-            }
+            const character = isSelectedTeamCell(props.value) ? props.value.character : undefined;
+            if (!character) return;
+            return (
+                <LreTile
+                    character={character}
+                    upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                    settings={viewPreferences}
+                />
+            );
         },
         colSpan: params => {
             const indexOfCurrentCol = track.unitsRestrictions.findIndex(x => x.name === params.colDef.field);

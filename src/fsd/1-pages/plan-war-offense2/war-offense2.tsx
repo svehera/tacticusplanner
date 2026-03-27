@@ -47,7 +47,7 @@ export const WarOffense2 = () => {
         .filter(c => !deployedCharacters.includes(c.snowprintId))
         .filter(c => c.rank !== Rank.Locked)
         .filter(c => !stagedChars.includes(c.snowprintId))
-        .sort((a, b) => {
+        .toSorted((a, b) => {
             if (b.rank !== a.rank) return b.rank - a.rank;
             const powerA = Math.pow(a.activeAbilityLevel ?? 0, 2) + Math.pow(a.passiveAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.activeAbilityLevel ?? 0, 2) + Math.pow(b.passiveAbilityLevel ?? 0, 2);
@@ -58,7 +58,7 @@ export const WarOffense2 = () => {
     const deployableMows = mows
         .filter(m => !deployedMows.includes(m.snowprintId))
         .filter(m => !stagedMows.includes(m.snowprintId))
-        .sort((a, b) => b.rarity - a.rarity);
+        .toSorted((a, b) => b.rarity - a.rarity);
 
     const isTeamDeployable = (team: ITeam2) => {
         return team.chars.every((charId, index) => {
@@ -69,7 +69,7 @@ export const WarOffense2 = () => {
         });
     };
 
-    const teams = teams2.filter(team => !!team.warOffense).filter(isTeamDeployable);
+    const teams = teams2.filter(team => !!team.warOffense).filter(team => isTeamDeployable(team));
 
     const undeployableTeams = teams2.filter(team => !!team.warOffense).filter(team => !isTeamDeployable(team));
 

@@ -41,7 +41,7 @@ export class StatsCalculatorService {
         if (unit == undefined) return 0;
         const characterUpgrades = rankUpData[unit.id];
         let count: number = 0;
-        if (unit.rank == Rank.Adamantine1 || typeof characterUpgrades === 'undefined') return 0;
+        if (unit.rank == Rank.Adamantine1 || characterUpgrades === undefined) return 0;
         const upgrades = characterUpgrades[rankToString(unit.rank)];
         if (unit.upgrades.includes(upgrades[firstUpgradeIndex])) ++count;
         if (unit.upgrades.includes(upgrades[secondUpgradeIndex])) ++count;
@@ -53,7 +53,7 @@ export class StatsCalculatorService {
      *          and equipment. -1 if the unit can't be found.
      */
     static getHealth(unit: ICharacter2 | undefined): number {
-        if (unit == null) return 0;
+        if (unit == undefined) return 0;
         return this.calculateHealth(
             unit!.snowprintId,
             unit!.stars,
@@ -67,7 +67,7 @@ export class StatsCalculatorService {
      *          and equipment. -1 if the unit can't be found.
      */
     static getDamage(unit: ICharacter2 | undefined): number {
-        if (unit == null) return 0;
+        if (unit == undefined) return 0;
         return this.calculateDamage(
             unit!.snowprintId,
             unit!.stars,
@@ -81,7 +81,7 @@ export class StatsCalculatorService {
      *          and equipment. -1 if the unit can't be found.
      */
     static getArmor(unit: ICharacter2 | undefined): number {
-        if (unit == null) return 0;
+        if (unit == undefined) return 0;
         return this.calculateArmor(
             unit!.snowprintId,
             unit!.stars,

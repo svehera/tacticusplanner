@@ -6,5 +6,5 @@ export const numberToThousandsString = (value: number): string => {
 };
 
 export const numberToThousandsStringOld = (value: number): string => {
-    return value.toLocaleString().replace(/,/g, ' ');
+    return value.toLocaleString().replaceAll(',', ' ');
 };

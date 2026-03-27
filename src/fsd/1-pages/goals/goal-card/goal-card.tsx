@@ -54,7 +54,7 @@ export const GoalCard: React.FC<Props> = ({
         energyTotal: 0,
         xpBooksTotal: 0,
     };
-    const calendarDate = useMemo(() => (passed ? getEstimatedDate(passed.daysLeft) : null), [passed]);
+    const calendarDate = useMemo(() => (passed ? getEstimatedDate(passed.daysLeft) : undefined), [passed]);
 
     const renderBody = () => {
         switch (goal.type) {

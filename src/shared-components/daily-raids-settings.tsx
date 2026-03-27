@@ -106,11 +106,11 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
     );
     /*
-    const [character, setCharacter] = useState<ICharacter2 | null>(() => {
+    const [character, setCharacter] = useState<ICharacter2>(() => {
         return (
             characters.find(
                 x => x.snowprintId === dailyRaidsPreferencesForm.farmPreferences.trainingRushPreferences?.characterId
-            ) || null
+            )
         );
     });*/
 
@@ -172,7 +172,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         });
     }
 
-    function saveTrainingRushUnitChanges(unit: ICharacter2 | null): void {
+    function saveTrainingRushUnitChanges(unit: ICharacter2 | undefined): void {
         setCharacter(unit);
         setDailyRaidsPreferencesForm(current => {
             const ret = { ...current };

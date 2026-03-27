@@ -202,7 +202,7 @@ describe('OrbAscensionCalculator', () => {
              *  Simulate a break in the path
              */
             if (rarity === Rarity.Rare && stars === RarityStars.RedOneStar) {
-                return undefined;
+                return;
             }
 
             /**
@@ -215,10 +215,10 @@ describe('OrbAscensionCalculator', () => {
             const step = (OrbAscensionCalculator as any).UPGRADE_PATH[key];
 
             if (!step) {
-                return undefined;
+                return;
             }
             if (step.nextRarity === rarity && step.nextStars === stars) {
-                return undefined;
+                return;
             }
             return step;
         });

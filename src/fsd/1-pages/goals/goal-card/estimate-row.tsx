@@ -6,7 +6,7 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 interface Props {
     daysLeft: number;
-    calendarDate: string | null;
+    calendarDate?: string;
     energyTotal?: number;
 }
 

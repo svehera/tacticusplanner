@@ -578,9 +578,10 @@ export const NerdMath = () => {
             (damageMods.highGround ? HIGH_GROUND_BUFF_PERCENTAGE : 1) *
             CRUSHING_STRIKE_BUFF *
             (damageMods.atlacoyaBuff ? ATLACOYA_BUFF : 1);
-        const hits = [damagePerHit * mods, damageMods.bossBuff ? damagePerHit * mods * BOSS_HITS_BUFF : null].filter(
-            (x): x is number => x !== null
-        );
+        const hits = [
+            damagePerHit * mods,
+            damageMods.bossBuff ? damagePerHit * mods * BOSS_HITS_BUFF : undefined,
+        ].filter((x): x is number => Number.isFinite(x));
         if (damageMods.hmhActiveBuff || damageMods.hmhPassiveBuff) {
             const newDamageMods = { ...damageMods, hmhActiveBuff: false, hmhPassiveBuff: false };
             const hits2 = laviscusMelee(newDamageMods, allOtherCharacterAttacks);
@@ -611,16 +612,16 @@ export const NerdMath = () => {
 
     const allAttacksExceptLaviscusMelee: Attack[] =
         [
-            kariyanActiveState.enabled ? kariyanActive(kariyanActiveState) : null,
-            kariyanPassiveState.enabled ? kariyanPassive(kariyanPassiveState, 5) : null,
-            trajannMeleeState.enabled ? trajannMelee(trajannMeleeState) : null,
-            bossMeleeState.enabled ? bossMelee(bossMeleeState) : null,
-            bossPassiveState.enabled ? bossPassive(bossPassiveState) : null,
-            hmhMeleeState.enabled ? hmhMelee(hmhMeleeState) : null,
-            hmhRangeState.enabled ? hmhRange(hmhRangeState) : null,
-            atlacoyaActiveState.enabled ? atlacoyaActive(atlacoyaActiveState) : null,
-            laviscusActiveState.enabled ? laviscusActive(laviscusActiveState) : null,
-        ].filter((attack): attack is Attack => attack !== null) ?? [];
+            kariyanActiveState.enabled ? kariyanActive(kariyanActiveState) : undefined,
+            kariyanPassiveState.enabled ? kariyanPassive(kariyanPassiveState, 5) : undefined,
+            trajannMeleeState.enabled ? trajannMelee(trajannMeleeState) : undefined,
+            bossMeleeState.enabled ? bossMelee(bossMeleeState) : undefined,
+            bossPassiveState.enabled ? bossPassive(bossPassiveState) : undefined,
+            hmhMeleeState.enabled ? hmhMelee(hmhMeleeState) : undefined,
+            hmhRangeState.enabled ? hmhRange(hmhRangeState) : undefined,
+            atlacoyaActiveState.enabled ? atlacoyaActive(atlacoyaActiveState) : undefined,
+            laviscusActiveState.enabled ? laviscusActive(laviscusActiveState) : undefined,
+        ].filter((attack): attack is Attack => attack !== undefined) ?? [];
     const outrage = allAttacksExceptLaviscusMelee.map(array => Math.max(...array.hits)).reduce((a, b) => a + b, 0);
     const allAttacks =
         [
@@ -630,8 +631,8 @@ export const NerdMath = () => {
                       laviscusMeleeState,
                       allAttacksExceptLaviscusMelee.map(a => a.hits)
                   )
-                : null,
-        ].filter((attack): attack is Attack => attack !== null) ?? [];
+                : undefined,
+        ].filter((attack): attack is Attack => attack !== undefined) ?? [];
 
     const setToMaxHmh = () => {
         setKariyanActiveState({

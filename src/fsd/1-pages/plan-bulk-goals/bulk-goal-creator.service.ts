@@ -12,7 +12,7 @@ export type IncrementalGoalMode = 'milestones' | 'full' | 'macro';
 export type GoalOrder = 'character' | 'type';
 
 export type BulkUnitEntry = {
-    unit: IUnit | null;
+    unit: IUnit | undefined;
     rank: Rank;
     rarity: Rarity;
     stars: number;
@@ -36,7 +36,7 @@ const CATEGORY_ORDER: Record<GoalCategory, number> = { Unlock: 0, Ascend: 1, Ran
 
 const rankValues = Object.values(Rank)
     .filter((rank): rank is Rank => typeof rank === 'number')
-    .sort((first, second) => first - second);
+    .toSorted((first, second) => first - second);
 
 const D2_5: RankStep = { rank: Rank.Diamond2, point5: true };
 
@@ -56,8 +56,7 @@ const getIncrementalBreakpoints = (mode: IncrementalGoalMode): RankStep[] => {
                 { rank: Rank.Adamantine3, point5: false },
             ];
         }
-        case 'milestones':
-        default: {
+        case 'milestones': {
             return [
                 { rank: Rank.Bronze1, point5: false },
                 { rank: Rank.Silver1, point5: false },

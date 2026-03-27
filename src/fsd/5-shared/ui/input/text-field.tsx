@@ -84,7 +84,7 @@ const TextField = ({
                             ) : (
                                 suffix
                             )
-                        ) : null}
+                        ) : undefined}
                     </FieldGroup>
                     {description && <Description>{description}</Description>}
                     <FieldError>{errorMessage}</FieldError>

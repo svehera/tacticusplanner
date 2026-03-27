@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep, sum } from 'lodash';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { ILreTeam } from '@/models/interfaces';
@@ -369,17 +369,17 @@ export class TokenEstimationService {
     public static computeNextToken(
         tracksProgress: ILreTrackProgress[],
         teams: ILreTeam[],
-        lastToken: TokenUse | undefined
+        lastToken?: TokenUse
     ): TokenUse {
         const lowestAvailableBattles: number[] = tracksProgress.map(track => this.computeLowestAvailableBattle(track));
         const highestAvailableBattles: number[] = tracksProgress.map(track =>
             this.computeHighestAvailableBattle(track)
         );
         const nextBestTokens: TokenUse[] = [];
-        for (let index = 0; index < tracksProgress.length; index++) {
+        for (const [index, element] of tracksProgress.entries()) {
             const token = this.computeNextBestTokenInTrack(
-                tracksProgress[index],
-                teams.filter(x => x.section === tracksProgress[index].trackId),
+                element,
+                teams.filter(x => x.section === element.trackId),
                 lowestAvailableBattles[index],
                 highestAvailableBattles[index]
             );
@@ -389,20 +389,22 @@ export class TokenEstimationService {
             // No tokens available, return a token with no team and no battle.
             return new TokenUse();
         }
-        // Find the token with the highest points, and if there is a tie, the lowest
-        // (real) battle number.
-        return nextBestTokens.reduce((best, current) => {
-            if (best === undefined) return current;
-            if (current === undefined) return best;
-            if (current.incrementalPoints > best.incrementalPoints) return current;
-            if (current.incrementalPoints < best.incrementalPoints) return best;
-            if (this.isTokenNextBattleWithTeam(current, lastToken)) return current;
-            if (this.isTokenNextBattleWithTeam(best, lastToken)) return best;
-            if (this.getTrack(current) < this.getTrack(best)) return current;
-            if (this.getTrack(current) > this.getTrack(best)) return best;
-            if (current.battleNumber > best.battleNumber) return current;
-            return best;
-        }, nextBestTokens[0]);
+
+        let best = nextBestTokens[0];
+        for (const current of nextBestTokens) {
+            // Priority 1) prefer the token with the highest number of points
+            if (current.incrementalPoints > best.incrementalPoints) best = current;
+            else if (current.incrementalPoints < best.incrementalPoints) continue;
+            // Priority 2) keep going with the current team
+            else if (this.isTokenNextBattleWithTeam(current, lastToken)) best = current;
+            else if (this.isTokenNextBattleWithTeam(best, lastToken)) continue;
+            // Priority 3) prefer the earlier track
+            else if (this.getTrack(current) < this.getTrack(best)) best = current;
+            else if (this.getTrack(current) > this.getTrack(best)) continue;
+            // Priority 4) prefer the earlier battle number
+            else if (current.battleNumber > best.battleNumber) best = current;
+        }
+        return best;
     }
 
     /**
@@ -415,11 +417,7 @@ export class TokenEstimationService {
         const tracks: ILreTrackProgress[] = cloneDeep(tracksProgress);
         for (const track of tracks) {
             for (const battle of track.battles) {
-                battle.completed =
-                    battle.requirementsProgress.reduce(
-                        (sum, requirement) => (sum += requirement.completed ? 1 : 0),
-                        0
-                    ) === battle.requirementsProgress.length;
+                battle.completed = battle.requirementsProgress.every(requirement => requirement.completed);
             }
         }
         const resolvedTeams = teams.map(team => ({
@@ -432,7 +430,7 @@ export class TokenEstimationService {
             const token: TokenUse = this.computeNextToken(
                 tracks,
                 resolvedTeams,
-                tokens.length > 0 ? tokens[tokens.length - 1] : undefined
+                tokens.length > 0 ? tokens.at(-1) : undefined
             );
             if (token.team === undefined) break;
             this.markRestrictionsAsCleared(token, tracks.find(x => x.trackId === token.team!.section)!);
@@ -463,14 +461,13 @@ export class TokenEstimationService {
 
     /** @returns the current points earned in this track, accounting for partial killScore and highScore inputs. */
     public static computeCurrentPointsInTrack(track: ILreTrackProgress): number {
-        return track.battles.reduce((sum, battle) => {
-            const battlePoints = battle.requirementsProgress
-                .map(requirement => LreRequirementStatusService.getRequirementPoints(requirement))
-                .reduce((innerSum, points) => {
-                    return innerSum + points;
-                }, 0);
-            return sum + battlePoints;
-        }, 0);
+        return sum(
+            track.battles.flatMap(battle =>
+                battle.requirementsProgress.map(requirement =>
+                    LreRequirementStatusService.getRequirementPoints(requirement)
+                )
+            )
+        );
     }
 
     /**
@@ -562,10 +559,10 @@ export class TokenEstimationService {
             return [];
         }
         const clearedRestrictions: ILreRequirements[] = [];
-        const completionRequirementIds = ['_killPoints', '_highScore', '_defeatAll'];
+        const completionRequirementIds = new Set(['_killPoints', '_highScore', '_defeatAll']);
         for (const requirement of battle.requirementsProgress) {
             if (requirement.completed) continue;
-            if (team.restrictionsIds.includes(requirement.id) || completionRequirementIds.includes(requirement.id)) {
+            if (team.restrictionsIds.includes(requirement.id) || completionRequirementIds.has(requirement.id)) {
                 clearedRestrictions.push({
                     id: requirement.id,
                     iconId: requirement.iconId,
@@ -714,8 +711,8 @@ export class TokenEstimationService {
      * Returns the next point milestone to be achieved that will award currency.
      */
     private static getNextPointMilestoneIndex(currentPoints: number): number {
-        for (let index = 0; index < pointMilestones.length; ++index) {
-            if (currentPoints < pointMilestones[index].points) return index;
+        for (const [index, pointMilestone] of pointMilestones.entries()) {
+            if (currentPoints < pointMilestone.points) return index;
         }
         return pointMilestones.length;
     }
@@ -732,11 +729,8 @@ export class TokenEstimationService {
      */
     private static getCurrentStarIndex(currentRarity: Rarity, currentStars: RarityStars): number {
         if (currentStars === RarityStars.None) return -1;
-        for (let index = 0; index < ascensionMilestones.length; ++index) {
-            if (
-                currentRarity === ascensionMilestones[index].rarity &&
-                currentStars <= ascensionMilestones[index].stars
-            ) {
+        for (const [index, ascensionMilestone] of ascensionMilestones.entries()) {
+            if (currentRarity === ascensionMilestone.rarity && currentStars <= ascensionMilestone.stars) {
                 return index;
             }
         }
@@ -776,9 +770,9 @@ export class TokenEstimationService {
             return progress.syncedProgress.currentShards;
         }
         let shards = LeProgressService.computeProgress(progress, false).currentChests * this.getShardsPerChest();
-        for (let index = 0; index < ascensionMilestones.length; ++index) {
-            if (ascensionMilestones[index].totalShards > shards) break;
-            shards -= ascensionMilestones[index].incrementalShards;
+        for (const ascensionMilestone of ascensionMilestones) {
+            if (ascensionMilestone.totalShards > shards) break;
+            shards -= ascensionMilestone.incrementalShards;
         }
 
         return shards;
@@ -939,8 +933,7 @@ export class TokenEstimationService {
         let nextStarIndex = this.getCurrentStarIndex(currentProgress.currentRarity, currentProgress.currentStars) + 1;
         const returnValue: TokenDisplay[] = [];
 
-        for (let index = 0; index < tokens.length; ++index) {
-            const token = tokens[index];
+        for (const token of tokens) {
             currentPoints += token.incrementalPoints;
             let achievedPointsMilestone = false;
             let achievedStarMilestone = false;

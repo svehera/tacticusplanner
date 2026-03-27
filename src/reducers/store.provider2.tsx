@@ -55,7 +55,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const serverViewPreferencesReference = useRef(globalState.viewPreferences);
 
     const [modifiedDate, setModifiedDate] = useState(globalState.modifiedDate);
-    const [seenAppVersion, setSeenAppVersion] = useState<string | undefined | null>(globalState.seenAppVersion);
+    const [seenAppVersion, setSeenAppVersion] = useState<string | undefined>(globalState.seenAppVersion);
 
     const [characters, dispatchCharacters] = useReducer(charactersReducer, globalState.characters);
     const [mows, dispatchMows] = useReducer(mowsReducer, globalState.mows);
