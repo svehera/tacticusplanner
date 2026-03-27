@@ -3,7 +3,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Button from '@mui/material/Button';
-import { sum } from 'lodash';
+import { cloneDeep, sum } from 'lodash';
 import { Grid2x2Check, Info } from 'lucide-react';
 import React, { useState, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -147,7 +147,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                 ? RequirementStatus.NotCleared
                 : RequirementStatus.Cleared;
 
-        let leModel = model;
+        let leModel = cloneDeep(model);
         for (const battle of track.battles) {
             for (const requirement of battle.requirementsProgress) {
                 leModel = createNewModel(leModel, track.trackId, battle.battleIndex, requirement.id, status);
@@ -246,7 +246,13 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                 projectedRestrictions={projectedRestrictions.get(battle.battleIndex) ?? new Set()}
                                 setState={(requirement, status) =>
                                     updateDto(
-                                        createNewModel(model, track.trackId, battle.battleIndex, requirement.id, status)
+                                        createNewModel(
+                                            { ...model, syncedProgress: undefined },
+                                            track.trackId,
+                                            battle.battleIndex,
+                                            requirement.id,
+                                            status
+                                        )
                                     )
                                 }
                             />
