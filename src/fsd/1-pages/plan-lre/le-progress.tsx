@@ -159,7 +159,7 @@ export const LeProgress = ({
 
                     <AccordionDetails>
                         <div className="mb-3 rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-400">
-                            Brought to you buy cpunerd (Kharnage) (DUG-38-VAT) and BennTheHuman (WOW-90-OFT).
+                            Brought to you by cpunerd (Kharnage) (DUG-38-VAT) and BennTheHuman (WOW-90-OFT).
                         </div>
                         <LeRoundOutcomeForecast
                             legendaryEvent={legendaryEvent}

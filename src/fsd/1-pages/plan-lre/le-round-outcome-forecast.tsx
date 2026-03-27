@@ -6,6 +6,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Rank, RarityStars } from '@/fsd/5-shared/model';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -81,6 +82,7 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
         () => LeRoundOutcomeForecastService.getLegendaryEventRoundStatuses(legendaryEvent, nowMillis),
         [legendaryEvent, nowMillis]
     );
+    statuses[1].status = 'active'; // Force round 2 to active for testing purposes
 
     const forecasts = useMemo(
         () =>
@@ -94,6 +96,9 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
             }),
         [legendaryEvent, model, progress, roundConfigs, tokenIncrements, nowMillis]
     );
+
+    const ascensionMilestones = useMemo(() => LeRoundOutcomeForecastService.getAscensionMilestones(model), [model]);
+    const cumulativeChestCosts = useMemo(() => LeRoundOutcomeForecastService.getCumulativeChestCosts(model), [model]);
 
     const characterData = CharactersService.resolveCharacter(legendaryEvent.unitSnowprintId);
     const resolvedCharacter = chars.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
@@ -125,15 +130,11 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                     in this forecast stay at zero.
                 </div>
             )}
-            {isEventActive && (
-                <div className="rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-400">
-                    Event in Progress, Mission Status Synced
-                </div>
-            )}
             <div className="grid gap-4 lg:grid-cols-3">
                 {forecasts.map(forecast => {
                     const config = roundConfigs.find(item => item.round === forecast.round)!;
                     const status = statuses.find(item => item.round === forecast.round)?.status ?? 'future';
+                    const isRoundActive = status === 'active';
                     const currentOccurrence = model.occurrenceProgress.find(
                         item => item.eventOccurrence === forecast.round
                     );
@@ -161,33 +162,49 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                             ) : (
                                 <>
                                     <div className="grid gap-4">
-                                        <NumberInput
-                                            fullWidth
-                                            label={`Free missions ${config.freeMissions}/10`}
-                                            value={config.freeMissions}
-                                            valueChange={freeMissions =>
-                                                updateRoundConfig(forecast.round, { freeMissions })
-                                            }
-                                            disabled={isEventActive}
-                                            min={freeMissionMin}
-                                            max={10}
-                                        />
-                                        <FormControlLabel
-                                            label="Buy bonus delivery"
-                                            control={
-                                                <Switch
-                                                    checked={config.buyBonusDelivery}
-                                                    disabled={bonusDeliveryLocked}
-                                                    onChange={(_, buyBonusDelivery) =>
-                                                        updateRoundConfig(forecast.round, {
-                                                            buyBonusDelivery,
-                                                            paidMissions: buyBonusDelivery ? config.paidMissions : 0,
-                                                        })
+                                        {isRoundActive && (
+                                            <div className="rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-400">
+                                                Event in Progress, Mission Status Synced
+                                            </div>
+                                        )}
+                                        {!isRoundActive && (
+                                            <>
+                                                <NumberInput
+                                                    fullWidth
+                                                    label={`Free missions ${config.freeMissions}/10`}
+                                                    value={config.freeMissions}
+                                                    valueChange={freeMissions =>
+                                                        updateRoundConfig(forecast.round, { freeMissions })
+                                                    }
+                                                    disabled={isRoundActive}
+                                                    min={freeMissionMin}
+                                                    max={10}
+                                                />
+                                                <FormControlLabel
+                                                    label="Buy bonus delivery"
+                                                    control={
+                                                        <Switch
+                                                            checked={config.buyBonusDelivery}
+                                                            disabled={bonusDeliveryLocked}
+                                                            onChange={(_, buyBonusDelivery) =>
+                                                                updateRoundConfig(forecast.round, {
+                                                                    buyBonusDelivery,
+                                                                    paidMissions: buyBonusDelivery
+                                                                        ? config.paidMissions
+                                                                        : 0,
+                                                                })
+                                                            }
+                                                        />
                                                     }
                                                 />
-                                            }
-                                        />
-                                        {config.buyBonusDelivery && (
+                                            </>
+                                        )}
+                                        {config.buyBonusDelivery && isRoundActive && (
+                                            <div className="rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-400">
+                                                Event in Progress, Mission Status Synced
+                                            </div>
+                                        )}
+                                        {config.buyBonusDelivery && !isRoundActive && (
                                             <NumberInput
                                                 fullWidth
                                                 label={`Paid missions ${config.paidMissions}/10`}
@@ -195,23 +212,30 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                 valueChange={paidMissions =>
                                                     updateRoundConfig(forecast.round, { paidMissions })
                                                 }
-                                                disabled={isEventActive}
+                                                disabled={isRoundActive}
                                                 min={paidMissionMin}
                                                 max={10}
                                             />
                                         )}
-                                        <FormControlLabel
-                                            label="Buy 300 currency bundle"
-                                            control={
-                                                <Switch
-                                                    checked={config.buyCurrencyBundle}
-                                                    disabled={bundleLocked}
-                                                    onChange={(_, buyCurrencyBundle) =>
-                                                        updateRoundConfig(forecast.round, { buyCurrencyBundle })
-                                                    }
-                                                />
-                                            }
-                                        />
+                                        {!isRoundActive && (
+                                            <FormControlLabel
+                                                label="Buy 300 currency bundle"
+                                                control={
+                                                    <Switch
+                                                        checked={config.buyCurrencyBundle}
+                                                        disabled={bundleLocked}
+                                                        onChange={(_, buyCurrencyBundle) =>
+                                                            updateRoundConfig(forecast.round, { buyCurrencyBundle })
+                                                        }
+                                                    />
+                                                }
+                                            />
+                                        )}
+                                        {isRoundActive && (
+                                            <div className="rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-400">
+                                                Event in Progress, Extra Currency Synced
+                                            </div>
+                                        )}
                                         {forecast.ohSoCloseEligible && (
                                             <FormControlLabel
                                                 label={`Buy Oh, So Close! shards (${forecast.ohSoCloseShardCost})`}
@@ -295,14 +319,87 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                 </span>
                                             </div>
                                             <div className="text-xs text-gray-500 dark:text-gray-400">
-                                                toward {forecast.nextMilestone}
+                                                {(() => {
+                                                    const nextChestCost = cumulativeChestCosts.find(
+                                                        cost => cost > forecast.endingCurrency
+                                                    );
+
+                                                    if (nextChestCost === undefined) {
+                                                        return <span>Chest: Full Clear</span>;
+                                                    }
+
+                                                    return (
+                                                        <span>
+                                                            Currency for Next Chest: {forecast.endingCurrency} /{' '}
+                                                            {nextChestCost} ({nextChestCost - forecast.endingCurrency}{' '}
+                                                            needed)
+                                                        </span>
+                                                    );
+                                                })()}
+                                            </div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                                                {(() => {
+                                                    if (forecast.shardsNeededForNextMilestone <= 0) {
+                                                        return <span>Currency for Next Shard Milestone: 0 needed</span>;
+                                                    }
+
+                                                    if (model.shardsPerChest <= 0) {
+                                                        return <span>Currency for Next Shard Milestone: N/A</span>;
+                                                    }
+
+                                                    const additionalChestsNeeded = Math.ceil(
+                                                        forecast.shardsNeededForNextMilestone / model.shardsPerChest
+                                                    );
+
+                                                    const currentClaimedChestIndex = cumulativeChestCosts.reduce(
+                                                        (index, cost, costIndex) =>
+                                                            cost <= forecast.endingCurrency ? costIndex : index,
+                                                        -1
+                                                    );
+
+                                                    const targetChestCost =
+                                                        cumulativeChestCosts[
+                                                            currentClaimedChestIndex + additionalChestsNeeded
+                                                        ];
+
+                                                    if (targetChestCost === undefined) {
+                                                        return (
+                                                            <span>Currency for Next Shard Milestone: Full Clear</span>
+                                                        );
+                                                    }
+
+                                                    return (
+                                                        <span>
+                                                            Currency for Next Shard Milestone: {forecast.endingCurrency}{' '}
+                                                            / {targetChestCost} (
+                                                            {targetChestCost - forecast.endingCurrency} needed)
+                                                        </span>
+                                                    );
+                                                })()}
+                                            </div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                                                {(() => {
+                                                    const nextMilestone = ascensionMilestones.find(
+                                                        milestone => milestone.label === forecast.nextMilestone
+                                                    );
+                                                    if (!nextMilestone) {
+                                                        return <span>Full Clear</span>;
+                                                    }
+
+                                                    return (
+                                                        <span className="inline-flex items-center gap-1">
+                                                            <span>toward</span>
+                                                            <StarsIcon stars={nextMilestone.stars} />
+                                                        </span>
+                                                    );
+                                                })()}
                                             </div>
                                         </div>
                                         {forecast.boughtOhSoCloseShards > 0 && (
                                             <div>Oh, So Close! shards bought: {forecast.boughtOhSoCloseShards}</div>
                                         )}
                                         {!forecast.ohSoCloseEligible && forecast.shardsNeededForNextMilestone > 0 && (
-                                            <div className="text-gray-600 dark:text-gray-400">
+                                            <div className="flex justify-center text-gray-600 dark:text-gray-400">
                                                 Not close enough for &quot;Oh, So Close!&quot; shards this round.
                                             </div>
                                         )}
