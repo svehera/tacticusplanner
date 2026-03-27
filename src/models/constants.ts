@@ -212,11 +212,7 @@ export const defaultData: IPersonalData2 = {
         ignoreRecommendedFirst: false,
     },
     viewPreferences: {
-        showAlpha: true,
-        showBeta: true,
-        showGamma: true,
         onlyUnlocked: false,
-        hideCompleted: false,
         craftableItemsInInventory: false,
         wyoFilter: CharactersFilterBy.None,
         wyoOrder: CharactersOrderBy.Faction,

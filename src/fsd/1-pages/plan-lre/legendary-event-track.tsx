@@ -43,13 +43,6 @@ export const LegendaryEventTrack: React.FC<Props> = ({
 }) => {
     const { viewPreferences, leSelectedRequirements } = useContext(StoreContext);
 
-    if (viewPreferences.hideCompleted) {
-        for (const restriction of track.unitsRestrictions) {
-            // eslint-disable-next-line react-compiler/react-compiler -- TODO: refactor this
-            restriction.hide = progress[restriction.name] === legendaryEvent.battlesCount;
-        }
-    }
-
     const restrictions = useMemo(() => {
         const event: ILegendaryEventSelectedRequirements = leSelectedRequirements[track.eventId] ?? {
             id: track.eventId,
