@@ -9,10 +9,10 @@ export const useApi = <TResponse, TRequestBody = any>(
     url: string,
     body?: TRequestBody,
     deps?: Array<any>
-): { loading: boolean; error: string | null; data: TResponse | null } => {
+): { loading: boolean; error: string | undefined; data: TResponse | undefined } => {
     const [loading, setLoading] = useState<boolean>(false);
-    const [data, setData] = useState<TResponse | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [data, setData] = useState<TResponse>();
+    const [error, setError] = useState<string>();
     const fetchData = async () => {
         try {
             setLoading(true);

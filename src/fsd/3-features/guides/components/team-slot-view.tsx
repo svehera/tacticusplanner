@@ -43,7 +43,7 @@ export const TeamSlotView: React.FC<Props> = ({ slot, units, expanded = false })
     return (
         <div>
             {expanded ? (
-                <div className="flex-box column gap5">{slot.unitIds.map(renderPortrait)}</div>
+                <div className="flex-box column gap5">{slot.unitIds.map(unitId => renderPortrait(unitId))}</div>
             ) : (
                 <Badge badgeContent={`+ ${slot.unitIds.length - 1}`} color="warning" invisible={hideBadge}>
                     {renderPortrait(slot.unitIds[0])}

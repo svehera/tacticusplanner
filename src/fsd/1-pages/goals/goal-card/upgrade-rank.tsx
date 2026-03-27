@@ -18,7 +18,7 @@ import { GoalEstimateRow } from './estimate-row';
 interface Props {
     goal: ICharacterUpgradeRankGoal;
     goalEstimate: IGoalEstimate;
-    calendarDate: string | null;
+    calendarDate?: string;
     bookRarity: Rarity;
 }
 

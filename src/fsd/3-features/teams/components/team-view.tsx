@@ -19,7 +19,7 @@ interface Props {
     characters: (ICharacter2 | undefined)[];
     onClick?: (unit: IUnit) => void;
     onEmptyClick?: (isMow: boolean) => void;
-    mow?: IMow2 | null;
+    mow?: IMow2;
     withMow?: boolean;
 }
 

@@ -385,14 +385,14 @@ export const campaignsByGroup: Record<string, Campaign[]> = mapValues(groupBy(ca
     value.map(x => x.id)
 );
 
-const campaignEvents: CampaignGroupType[] = [
+const campaignEvents: Set<CampaignGroupType> = new Set([
     CampaignGroupType.adMechCE,
     CampaignGroupType.tyranidCE,
     CampaignGroupType.tauCE,
     CampaignGroupType.deathGuardCE,
     CampaignGroupType.sistersCE,
-];
+]);
 
 export const campaignEventsLocations: Campaign[] = campaignsList
-    .filter(x => campaignEvents.includes(x.groupType))
+    .filter(x => campaignEvents.has(x.groupType))
     .map(x => x.id);

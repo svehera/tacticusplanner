@@ -119,7 +119,7 @@ export const MasterTable = () => {
 
             const eventCharacters = legendaryEvent.allowedUnits
                 .filter(x => selectedChars.includes(x.snowprintId))
-                .sort((a, b) => {
+                .toSorted((a, b) => {
                     const aTotal =
                         (alpha[a.snowprintId]?.points ?? 0) +
                         (beta[a.snowprintId]?.points ?? 0) +
@@ -217,7 +217,7 @@ export const MasterTable = () => {
             let progressByRequirement: Record<string, number> = {};
 
             if (pointsCalculation === PointsCalculation.unearned) {
-                const trackProgress = legendaryEventProgress.tracksProgress.filter(x => x.trackId === track.section)[0];
+                const trackProgress = legendaryEventProgress.tracksProgress.find(x => x.trackId === track.section);
                 if (trackProgress) {
                     progressByRequirement = LreService.getReqProgressPerTrack(trackProgress);
                 }
@@ -378,7 +378,7 @@ export const MasterTable = () => {
                       ? legendaryEvent.allowedUnits.filter(x => x.rank > Rank.Locked)
                       : [];
             const eventCharacters = chars
-                .sort(
+                .toSorted(
                     (a, b) =>
                         b.legendaryEvents[legendaryEvent.id].totalPoints -
                         a.legendaryEvents[legendaryEvent.id].totalPoints

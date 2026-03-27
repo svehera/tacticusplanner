@@ -46,10 +46,10 @@ export const WhoYouOwn = () => {
         filterBy: viewPreferences.wyoFilter,
         orderBy: viewPreferences.wyoOrder,
     });
-    const [nameFilter, setNameFilter] = useState<string | null>(null);
-    const [editedCharacter, setEditedCharacter] = useState<ICharacter2 | null>(null);
+    const [nameFilter, setNameFilter] = useState<string>();
+    const [editedCharacter, setEditedCharacter] = useState<ICharacter2>();
     const [editedInventory, setEditedInventory] = useState<Record<string, number>>({});
-    const [editedMow, setEditedMow] = useState<IMow2 | null>(null);
+    const [editedMow, setEditedMow] = useState<IMow2>();
 
     const [searchParams] = useSearchParams();
 
@@ -117,12 +117,12 @@ export const WhoYouOwn = () => {
     const startEditUnit = useCallback((unit: IUnit): void => {
         if (unit.unitType === UnitType.character) {
             setEditedCharacter(unit);
-            setEditedMow(null);
+            setEditedMow(undefined);
         }
 
         if (unit.unitType === UnitType.mow) {
             setEditedMow(unit);
-            setEditedCharacter(null);
+            setEditedCharacter(undefined);
         }
     }, []);
 
@@ -139,8 +139,8 @@ export const WhoYouOwn = () => {
     };
 
     const endEditUnit = useCallback((): void => {
-        setEditedCharacter(null);
-        setEditedMow(null);
+        setEditedCharacter(undefined);
+        setEditedMow(undefined);
     }, []);
 
     return (

@@ -251,15 +251,11 @@ const createSettings = (overrides: Partial<IEstimatedRanksSettings> = {}): IEsti
 });
 
 const createAllCampaignsProgress = (): IEstimatedRanksSettings['campaignsProgress'] => {
-    return Object.values(Campaign)
-        .filter((value): value is Campaign => typeof value === 'string')
-        .reduce(
-            (accumulator, campaign) => {
-                accumulator[campaign] = 999;
-                return accumulator;
-            },
-            {} as IEstimatedRanksSettings['campaignsProgress']
-        );
+    return Object.fromEntries(
+        Object.values(Campaign)
+            .filter((value): value is Campaign => typeof value === 'string')
+            .map(campaign => [campaign, 999])
+    ) as IEstimatedRanksSettings['campaignsProgress'];
 };
 
 const createFilters = (overrides: Partial<ICampaignsFilters> = {}): ICampaignsFilters => ({
@@ -279,18 +275,13 @@ const createFilters = (overrides: Partial<ICampaignsFilters> = {}): ICampaignsFi
 const createCustomDailyRaidsSettings = (
     overrides: Partial<ICustomDailyRaidsSettings> = {}
 ): ICustomDailyRaidsSettings => {
-    const defaults = Object.values(Rarity)
-        .filter((value): value is Rarity => typeof value === 'number')
-        .reduce<Partial<Record<Rarity, CampaignType[]>>>(
-            (accumulator, rarity) => {
-                accumulator[rarity] = [];
-                return accumulator;
-            },
-            { Shard: [], 'Mythic Shard': [] } as Partial<Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>>
-        ) as Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>;
-
     return {
-        ...defaults,
+        Shard: [],
+        'Mythic Shard': [],
+        ...(Object.fromEntries(Object.values(Rarity).map(rarity => [rarity, [] as CampaignType[]])) as Record<
+            Rarity,
+            CampaignType[]
+        >),
         ...overrides,
     };
 };
@@ -317,7 +308,7 @@ const findStone1UncraftableCandidate = () => {
             return { unitId, upgrades: stoneOne };
         }
     }
-    return undefined;
+    return;
 };
 
 const getRate = (location: ICampaignBattleComposed): number => location.energyPerDay / location.energyPerItem;
@@ -793,15 +784,11 @@ describe('UpgradesService.planDayRaiding', () => {
             rankEnd: Rank.Diamond3,
         });
 
-        const campaignsProgress = Object.values(Campaign)
-            .filter((value): value is Campaign => typeof value === 'string')
-            .reduce(
-                (accumulator, campaign) => {
-                    accumulator[campaign] = 999;
-                    return accumulator;
-                },
-                {} as IEstimatedRanksSettings['campaignsProgress']
-            );
+        const campaignsProgress = Object.fromEntries(
+            Object.values(Campaign)
+                .filter((value): value is Campaign => typeof value === 'string')
+                .map(campaign => [campaign, 999])
+        ) as IEstimatedRanksSettings['campaignsProgress'];
 
         const inventory: Record<string, number> = {};
         const settings = createSettings({
@@ -1428,12 +1415,13 @@ describe('UpgradesService.getUpgrades', () => {
         );
 
         const upgrades = UpgradesService.getUpgrades({}, [character], [], [goalStoneToGold, goalGoldToDiamond]);
-        const actualCounts = upgrades.reduce<Record<string, number>>((accumulator, upgrade) => {
+        const actualCounts = {} as Record<string, number>;
+        for (const upgrade of upgrades) {
             for (const [id, count] of Object.entries(upgrade.baseUpgradesTotal)) {
-                accumulator[id] = (accumulator[id] ?? 0) + count;
+                actualCounts[id] ||= 0;
+                actualCounts[id] += count;
             }
-            return accumulator;
-        }, {});
+        }
 
         const actualRareTotal = worldEatersRareIds.reduce((sum, id) => sum + (actualCounts[id] ?? 0), 0);
         const actualLegendaryTotal = worldEatersLegendaryIds.reduce((sum, id) => sum + (actualCounts[id] ?? 0), 0);
@@ -1499,12 +1487,13 @@ describe('UpgradesService.getUpgrades', () => {
             [kharnGoal, wraskGoal]
         );
 
-        const combined = upgrades.reduce<Record<string, number>>((accumulator, upgrade) => {
+        const combined = {} as Record<string, number>;
+        for (const upgrade of upgrades) {
             for (const [id, count] of Object.entries(upgrade.baseUpgradesTotal)) {
-                accumulator[id] = (accumulator[id] ?? 0) + count;
+                combined[id] ||= 0;
+                combined[id] += count;
             }
-            return accumulator;
-        }, {});
+        }
 
         expect(combined['upgHpL118']).toBe(164);
     });
@@ -3769,8 +3758,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
             upgradeId,
             { [upgradeId]: combinedUpgrade },
             {},
-            goals,
-            undefined
+            goals
         );
         const goalAOnly = UpgradesService.calculateDaysToCompleteMaterial(
             upgradeId,
@@ -3818,8 +3806,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
             upgradeId,
             { [upgradeId]: combinedUpgrade },
             { [upgradeId]: 12 },
-            goals,
-            undefined
+            goals
         );
 
         const expected = Math.ceil(18 / getRate(location));
@@ -4100,15 +4087,11 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             rankEnd: Rank.Diamond3,
         });
 
-        const campaignsProgress = Object.values(Campaign)
-            .filter((value): value is Campaign => typeof value === 'string')
-            .reduce(
-                (accumulator, campaign) => {
-                    accumulator[campaign] = 999;
-                    return accumulator;
-                },
-                {} as IEstimatedRanksSettings['campaignsProgress']
-            );
+        const campaignsProgress = Object.fromEntries(
+            Object.values(Campaign)
+                .filter((value): value is Campaign => typeof value === 'string')
+                .map(campaign => [campaign, 999])
+        ) as IEstimatedRanksSettings['campaignsProgress'];
 
         const inventory: Record<string, number> = {};
         const settings = createSettings({

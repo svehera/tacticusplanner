@@ -1,5 +1,6 @@
 import { uniq } from 'lodash';
 
+import { arrayToKeyedObject } from '@/fsd/5-shared/lib';
 import {
     UnitType,
     RarityMapper,
@@ -27,13 +28,12 @@ const equipmentTypeMapping = {
 } as const;
 
 export class CharactersService {
-    static readonly charactersData: ICharacterData[] = charactersData.map(this.convertUnitData);
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+    static readonly charactersData: ICharacterData[] = charactersData.map(character => this.convertUnitData(character));
     static readonly charactersBySnowprintId: Record<string, ICharacterData> = Object.fromEntries(
         this.charactersData.map(char => [char.snowprintId, char])
     );
-    static readonly charactersById: Record<string, ICharacterData> = Object.fromEntries(
-        this.charactersData.map(char => [char.id, char])
-    );
+    static readonly charactersById = arrayToKeyedObject(this.charactersData, 'id');
     static readonly charactersByShortName: Record<string, ICharacterData> = Object.fromEntries(
         this.charactersData.map(char => [char.shortName.toLowerCase(), char])
     );
@@ -73,7 +73,7 @@ export class CharactersService {
 
     /**
      * @param id The unit ID of the character.
-     * @returns An ICharacterData representation, or null.
+     * @returns An ICharacterData representation, or undefined.
      */
     public static getUnit(id: string): ICharacterData | undefined {
         return (
@@ -214,7 +214,7 @@ export class CharactersService {
                 const staticChar = this.resolveCharacter(x.snowprintId ?? x.name);
                 if (staticChar === undefined) {
                     console.error('Could not resolve character', x.snowprintId ?? x.name);
-                    return undefined;
+                    return;
                 }
                 return { ...x, ...staticChar };
             })

@@ -94,7 +94,7 @@ export const LeTokenTable: React.FC<Props> = ({
 
     const setRequirementStatus = (token: TokenDisplay, status: RequirementStatus) => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
+        if (token.battleNumber == undefined || token.battleNumber < 0) return;
 
         const hasRestrictions = token.restricts.some(r => !LreRequirementStatusService.isDefaultObjective(r.id));
         // Mark the restrictions included in this token as completed
@@ -121,13 +121,13 @@ export const LeTokenTable: React.FC<Props> = ({
 
     const onMaybeBattle = (token: TokenDisplay) => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
+        if (token.battleNumber == undefined || token.battleNumber < 0) return;
         setRequirementStatus(token, RequirementStatus.MaybeClear);
     };
 
     const onStopBattle = (token: TokenDisplay) => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
+        if (token.battleNumber == undefined || token.battleNumber < 0) return;
         setRequirementStatus(token, RequirementStatus.StopHere);
     };
 

@@ -111,7 +111,7 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
                     <div className="flex flex-wrap gap-3 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-slate-700 dark:bg-slate-800">
                         {npc.traits.map(trait => {
                             const icon = NpcService.getTraitIcon(trait);
-                            if (!icon) return null;
+                            if (!icon) return;
                             return (
                                 <div key={trait} className="group relative">
                                     <img

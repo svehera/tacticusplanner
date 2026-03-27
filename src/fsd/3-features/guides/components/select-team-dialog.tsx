@@ -142,7 +142,9 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
     const filteredUnits = useMemo(() => {
         const filterUnits = () => {
             const typeFiltered: IUnit[] =
-                editSlotData.slotNumber === 6 ? units.filter(isMow) : units.filter(isCharacter);
+                editSlotData.slotNumber === 6
+                    ? units.filter(unit => isMow(unit))
+                    : units.filter(unit => isCharacter(unit));
 
             const nameFiltered = quickFilter
                 ? typeFiltered.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()))
@@ -158,8 +160,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
                 case 'imperial': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Imperial);
                 }
-                case 'none':
-                default: {
+                case 'none': {
                     return nameFiltered;
                 }
             }

@@ -89,5 +89,5 @@ type DeepMutable<T> = Prettify<{
  * @example mutableObj.b.c = 3; // No TypeScript error
  */
 export function mutableCopy<T extends object | readonly object[]>(object: T): DeepMutable<T> {
-    return JSON.parse(JSON.stringify(object)) as DeepMutable<T>;
+    return structuredClone(object) as DeepMutable<T>;
 }

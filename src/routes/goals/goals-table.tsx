@@ -290,7 +290,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             }
         }
     };
-    const orderedAllGoals = useMemo(() => [...allGoals].sort((a, b) => a.priority - b.priority), [allGoals]);
+    const orderedAllGoals = useMemo(() => allGoals.toSorted((a, b) => a.priority - b.priority), [allGoals]);
     const columnDefs = useMemo<Array<ColDef<CharacterRaidGoalSelect>>>(() => {
         return [
             {
@@ -403,8 +403,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                     }
 
                     const { daysLeft, xpDaysLeft } = goalEstimate;
-                    const materialDate = daysLeft === undefined ? null : getEstimatedDate(daysLeft);
-                    const xpDate = xpDaysLeft === undefined ? null : getEstimatedDate(xpDaysLeft);
+                    const materialDate = daysLeft === undefined ? undefined : getEstimatedDate(daysLeft);
+                    const xpDate = xpDaysLeft === undefined ? undefined : getEstimatedDate(xpDaysLeft);
 
                     if (materialDate && xpDate) {
                         return `${materialDate} (XP by ${xpDate})`;
@@ -419,7 +419,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
                     // Remove early guard !goalEstimate.daysLeft to allow XP-only rendering
-                    if (!goalEstimate) return null;
+                    if (!goalEstimate) return;
 
                     const { daysLeft, xpDaysLeft } = goalEstimate;
 

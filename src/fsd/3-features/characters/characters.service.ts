@@ -7,6 +7,7 @@ import { charsUnlockShards, charsProgression } from 'src/models/constants';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalCharacterData2, ICharProgression } from 'src/models/interfaces';
 
+import { filterMap } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, UnitType, RarityStars } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
@@ -43,7 +44,7 @@ import { needToAscendCharacter } from './functions/need-to-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
 
 export class CharactersService {
-    static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
+    static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter?: string): IUnit[] {
         const filteredCharactersByName = nameFilter
             ? characters.filter(
                   x =>
@@ -54,31 +55,30 @@ export class CharactersService {
 
         switch (filterBy) {
             case CharactersFilterBy.NeedToAscend: {
-                return filteredCharactersByName.filter(needToAscendCharacter);
+                return filteredCharactersByName.filter(character => needToAscendCharacter(character));
             }
             case CharactersFilterBy.CanAscend: {
-                return filteredCharactersByName.filter(canAscendCharacter);
+                return filteredCharactersByName.filter(character => canAscendCharacter(character));
             }
             case CharactersFilterBy.NeedToLevel: {
-                return filteredCharactersByName.filter(needToLevelCharacter);
+                return filteredCharactersByName.filter(character => needToLevelCharacter(character));
             }
             case CharactersFilterBy.BlueStarReady: {
-                return filteredCharactersByName.filter(blueStarReady);
+                return filteredCharactersByName.filter(character => blueStarReady(character));
             }
             case CharactersFilterBy.Chaos: {
-                return filteredCharactersByName.filter(filterChaos);
+                return filteredCharactersByName.filter(character => filterChaos(character));
             }
             case CharactersFilterBy.Imperial: {
-                return filteredCharactersByName.filter(filterImperial);
+                return filteredCharactersByName.filter(character => filterImperial(character));
             }
             case CharactersFilterBy.Xenos: {
-                return filteredCharactersByName.filter(filterXenos);
+                return filteredCharactersByName.filter(character => filterXenos(character));
             }
             case CharactersFilterBy.MoW: {
-                return filteredCharactersByName.filter(isMow);
+                return filteredCharactersByName.filter(character => isMow(character));
             }
-            case CharactersFilterBy.None:
-            default: {
+            case CharactersFilterBy.None: {
                 return filteredCharactersByName;
             }
         }
@@ -187,32 +187,24 @@ export class CharactersService {
         const factionCharacters = groupBy(units, 'faction');
 
         // Derive relevant faction data in one pass
-        const result: IFaction[] = factionsData.reduce((accumulator: IFaction[], faction) => {
-            const characters = factionCharacters[faction.snowprintId];
-            if (!characters) return accumulator;
+        const result = filterMap(factionsData, faction => {
+            const units = factionCharacters[faction.snowprintId];
+            if (!units) return;
 
-            let bsValue = 0,
-                power = 0,
-                unlockedCharacters = 0;
-            for (const char of characters) {
-                if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue) {
-                    bsValue += CharactersValueService.getCharacterValue(char);
-                }
-                if (includePower || charactersOrderBy === CharactersOrderBy.FactionPower) {
-                    power += CharactersPowerService.getCharacterPower(char);
-                }
-                if (isUnlocked(char)) unlockedCharacters++;
-            }
-
-            accumulator.push({
+            return {
                 ...faction,
-                units: characters,
-                bsValue,
-                power,
-                unlockedCharacters,
-            });
-            return accumulator;
-        }, []);
+                units,
+                bsValue:
+                    includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue
+                        ? sum(units.map(character => CharactersValueService.getCharacterValue(character)))
+                        : 0,
+                power:
+                    includePower || charactersOrderBy === CharactersOrderBy.FactionPower
+                        ? sum(units.map(character => CharactersPowerService.getCharacterPower(character)))
+                        : 0,
+                unlockedCharacters: units.filter(character => isUnlocked(character)).length,
+            };
+        });
 
         // Determine sort key based on the order parameter
         let orderByKey: keyof IFaction;
@@ -235,7 +227,7 @@ export class CharactersService {
         }
 
         // Sort using native sort
-        return result.sort((a, b) => b[orderByKey] - a[orderByKey]);
+        return result.toSorted((a, b) => b[orderByKey] - a[orderByKey]);
     }
 
     static capCharacterAtRarity(character: ICharacter2, rarity: Rarity): ICharacter2 {
@@ -441,7 +433,7 @@ export class CharactersService {
             }
         }
 
-        const sorted = Array.from(rarities).sort((a, b) => a - b);
+        const sorted = [...rarities].toSorted((a, b) => a - b);
 
         const index = sorted.indexOf(current);
 
@@ -465,6 +457,6 @@ export class CharactersService {
             }
         }
 
-        return matches.sort((a, b) => a - b)[0] as RarityStars;
+        return matches.toSorted((a, b) => a - b)[0] as RarityStars;
     }
 }

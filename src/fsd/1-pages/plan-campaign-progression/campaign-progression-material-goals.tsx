@@ -28,7 +28,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
      * one instance of `material`.
      */
     function getCharactersNeedingMaterial(material: string): string[] {
-        return Array.from(progression.charactersNeedingMaterials.get(material) ?? []);
+        return [...(progression.charactersNeedingMaterials.get(material) ?? [])];
     }
 
     /** @returns the quantity of this upgrade material that our goals require. */

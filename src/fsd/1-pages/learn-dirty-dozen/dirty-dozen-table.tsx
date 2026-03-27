@@ -31,7 +31,7 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
                 return <Score value={value ?? 0} />;
             },
             headerClass: '[&_.ag-header-cell-text]:w-full [&_.ag-header-cell-text]:text-center',
-            sortingOrder: ['desc', null],
+            sortingOrder: ['desc', undefined],
         } as ColDef<IDirtyDozenChar>;
     };
 

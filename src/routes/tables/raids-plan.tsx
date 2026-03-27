@@ -8,6 +8,7 @@ import PendingIcon from '@mui/icons-material/Pending';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
+import { sum } from 'lodash';
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
@@ -163,14 +164,11 @@ export const RaidsPlan: React.FC<Props> = ({
 
     const energyTotal = useMemo(() => {
         const todayRaids = estimatedRanks.upgradesRaids[0]?.raids ?? [];
-        const energyAlreadySpentToday = todayRaids.reduce((total, raid) => {
-            const locationSpent = raid.raidLocations.reduce(
-                (locationTotal, location) => locationTotal + location.raidsAlreadyPerformed * location.energyCost,
-                0
-            );
-
-            return total + locationSpent;
-        }, 0);
+        const energyAlreadySpentToday = sum(
+            todayRaids.map(raid =>
+                sum(raid.raidLocations.map(location => location.raidsAlreadyPerformed * location.energyCost))
+            )
+        );
 
         return Math.max(0, estimatedRanks.energyTotal - energyAlreadySpentToday);
     }, [estimatedRanks.energyTotal, estimatedRanks.upgradesRaids]);

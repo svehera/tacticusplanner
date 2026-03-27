@@ -111,11 +111,11 @@ export const LreAddTeam: React.FC<Props> = ({
     };
 
     const isValid = () => {
-        const availableCharacters = gridTeam.map(x => x.id);
+        const availableCharacters = new Set(gridTeam.map(x => x.id));
         return (
             selectedTeam.length > 0 &&
             teamName.length > 0 &&
-            selectedTeam.every(character => availableCharacters.includes(character.id)) &&
+            selectedTeam.every(character => availableCharacters.has(character.id)) &&
             clampExpectedBattles(expectedBattleClears) === expectedBattleClears
         );
     };

@@ -34,11 +34,11 @@ const createNewModel = (
 
     const requirementProgress = battleProgress.requirementsProgress[requirementProgressIndex];
 
-    const autoCompleteReqs = [
+    const autoCompleteReqs = new Set([
         LrePointsCategoryId.defeatAll,
         LrePointsCategoryId.killScore,
         LrePointsCategoryId.highScore,
-    ];
+    ]);
 
     let updatedRequirementProgress: ILreBattleRequirementsProgress;
     let updatedRequirementsProgress = [...battleProgress.requirementsProgress];
@@ -62,9 +62,9 @@ const createNewModel = (
         };
 
         // If marking a non-auto requirement (restriction) as complete, auto-complete defeatAll, killScore, and highScore
-        if (!autoCompleteReqs.includes(requirementProgress.id as LrePointsCategoryId)) {
+        if (!autoCompleteReqs.has(requirementProgress.id as LrePointsCategoryId)) {
             updatedRequirementsProgress = updatedRequirementsProgress.map(requirement =>
-                autoCompleteReqs.includes(requirement.id as LrePointsCategoryId)
+                autoCompleteReqs.has(requirement.id as LrePointsCategoryId)
                     ? {
                           ...requirement,
                           completed: true,
@@ -79,7 +79,7 @@ const createNewModel = (
         // If marking defeatAll as complete, also mark killScore and highScore as complete (but leave restrictions as-is)
         else if (requirementProgress.id === LrePointsCategoryId.defeatAll) {
             updatedRequirementsProgress = updatedRequirementsProgress.map(requirement =>
-                autoCompleteReqs.includes(requirement.id as LrePointsCategoryId)
+                autoCompleteReqs.has(requirement.id as LrePointsCategoryId)
                     ? {
                           ...requirement,
                           completed: true,

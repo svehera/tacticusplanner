@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prevent-abbreviations */
 import { ICharacter2 } from '@/fsd/4-entities/character';
 
 import { ILreTeam } from '@/fsd/3-features/lre';

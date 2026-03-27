@@ -53,12 +53,8 @@ export enum Trait {
     WeaverOfFate = 'Weaver of Fates',
 }
 
-const labelToTraitStringMap: Record<string, string> = Object.entries(Trait).reduce(
-    (accumulator, [key, value]) => {
-        accumulator[value] = key;
-        return accumulator;
-    },
-    {} as Record<string, string>
+const labelToTraitStringMap: Record<string, string> = Object.fromEntries(
+    Object.entries(Trait).map(([key, value]) => [value, key])
 );
 
 export function getTraitStringFromLabel(label: string): string | undefined {

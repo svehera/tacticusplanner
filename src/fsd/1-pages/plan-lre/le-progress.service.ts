@@ -49,7 +49,7 @@ export class LeProgressService {
     public static computeProgress(model: ILreProgressModel, useP2P: boolean): LeProgress {
         const totalPoints = model.syncedProgress?.currentPoints ?? sum(model.tracksProgress.map(x => x.totalPoints));
         const totalCurrency = sum(model.pointsMilestones.map(x => x.engramPayout));
-        const currentPoints = sum(model.tracksProgress.map(this.computeCurrentPoints));
+        const currentPoints = sum(model.tracksProgress.map(track => this.computeCurrentPoints(track)));
 
         const premiumMissions = useP2P ? sum(model.occurrenceProgress.map(x => x.premiumMissionsProgress)) : 0;
 
@@ -272,8 +272,9 @@ export class LeProgressService {
                 return chestMilestone.cumulativePoints;
             }
         }
-
-        return model.pointsMilestones[model.pointsMilestones.length - 1].cumulativePoints;
+        const finalCumulativePoints = model.pointsMilestones.at(-1)?.cumulativePoints;
+        if (finalCumulativePoints === undefined) throw new Error('missing cumulative points');
+        return finalCumulativePoints;
     }
 
     private static computeAverageBattles(pointsForNextMilestone: number): string {

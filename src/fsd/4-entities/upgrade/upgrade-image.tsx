@@ -44,8 +44,7 @@ export const UpgradeImage = ({
             case RarityString.Uncommon: {
                 return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_uncommon.png`);
             }
-            case RarityString.Common:
-            default: {
+            case RarityString.Common: {
                 return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_common.png`);
             }
         }

@@ -18,7 +18,8 @@ interface Props {
 export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange }) => {
     const [mow, setMow] = useQueryState<IMow2 | null>(
         'mow',
-        mowQueryParameter => mows.find(x => x.snowprintId === mowQueryParameter) ?? inputs.mow,
+        // eslint-disable-next-line unicorn/no-null -- autocomplete requires null
+        mowQueryParameter => mows.find(x => x.snowprintId === mowQueryParameter) ?? inputs.mow ?? null,
         mow => mow?.name
     );
 
@@ -52,7 +53,7 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
 
     useEffect(() => {
         inputsChange({
-            mow,
+            mow: mow ?? undefined,
             primaryAbilityStart,
             primaryAbilityEnd,
             secondaryAbilityStart,
@@ -63,7 +64,8 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
     return (
         <div className="flex-box gap20 wrap">
             {mow && <UnitShardIcon icon={mow.roundIcon} />}
-            <UnitsAutocomplete className="max-w-[250px]" unit={mow} options={mows} onUnitChange={setMow} />
+            {/* eslint-disable-next-line unicorn/no-null -- autocomplete requires null */}
+            <UnitsAutocomplete className="max-w-[250px]" unit={mow ?? null} options={mows} onUnitChange={setMow} />
             <div className="flex-box gap15 p10">
                 <span>Primary:</span>
 

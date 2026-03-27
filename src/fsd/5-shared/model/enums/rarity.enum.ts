@@ -26,5 +26,5 @@ export const XP_BOOK_VALUE: Record<Rarity, number> = {
 };
 
 export const XP_BOOK_ORDER: Rarity[] = Object.entries(XP_BOOK_VALUE)
-    .sort(([, a], [, b]) => b - a)
+    .toSorted(([, a], [, b]) => b - a)
     .map(([key]) => Number(key) as Rarity);

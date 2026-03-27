@@ -18,7 +18,7 @@ import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 type IncrementalGoalMode = 'milestones' | 'full' | 'macro';
 
 type BulkUnitEntry = {
-    unit: IUnit | null;
+    unit: IUnit | undefined;
     rank: Rank;
     rarity: Rarity;
     stars: number;
@@ -40,7 +40,7 @@ interface Props {
     onMoveUp: () => void;
     onMoveDown: () => void;
     onDelete: () => void;
-    onUnitChange: (unit: IUnit | null) => void;
+    onUnitChange: (unit: IUnit | undefined) => void;
     onUnlockMowChange: (checked: boolean) => void;
     onPreFarmLegendaryMythicChange: (checked: boolean) => void;
     onUseIncrementalGoalsChange: (checked: boolean) => void;
@@ -74,7 +74,7 @@ export const BulkGoalCreatorUnitCard = ({
     onPassiveAbilityLevelChange,
 }: Props) => {
     const showPreFarmOption =
-        ((entry.unit === null || 'rank' in entry.unit) && entry.rank >= Rank.Silver2) ||
+        ((entry.unit === undefined || 'rank' in entry.unit) && entry.rank >= Rank.Silver2) ||
         (!!entry.unit && !('rank' in entry.unit) && (entry.activeAbilityLevel > 26 || entry.passiveAbilityLevel > 26));
 
     return (
@@ -94,7 +94,12 @@ export const BulkGoalCreatorUnitCard = ({
                     <DeleteForever fontSize="small" />
                 </IconButton>
             </div>
-            <UnitsAutocomplete unit={entry.unit} options={options} onUnitChange={onUnitChange} />
+            <UnitsAutocomplete
+                // eslint-disable-next-line unicorn/no-null -- autocomplete requires null
+                unit={entry.unit ?? null}
+                options={options}
+                onUnitChange={argument => onUnitChange(argument ?? undefined)}
+            />
             {'unlocked' in (entry.unit ?? {}) && !(entry.unit as { unlocked?: boolean }).unlocked && (
                 <FormControlLabel
                     control={
@@ -107,7 +112,7 @@ export const BulkGoalCreatorUnitCard = ({
                 />
             )}
             <div className="flex flex-wrap items-center gap-2">
-                {showPreFarmOption ? (
+                {showPreFarmOption && (
                     <FormControlLabel
                         control={
                             <Checkbox
@@ -124,7 +129,7 @@ export const BulkGoalCreatorUnitCard = ({
                             </span>
                         }
                     />
-                ) : null}
+                )}
                 <FormControlLabel
                     control={
                         <Checkbox
@@ -189,7 +194,7 @@ export const BulkGoalCreatorUnitCard = ({
                 value={entry.rarity}
                 valueChanges={onRarityChange}
             />
-            {(entry.unit === null || 'rank' in entry.unit) && (
+            {(entry.unit === undefined || 'rank' in entry.unit) && (
                 <RankSelect2
                     label="Rank"
                     rankValues={rankValues.filter(r => r <= (rarityToMaxRank[entry.rarity] ?? Rank.Adamantine3))}

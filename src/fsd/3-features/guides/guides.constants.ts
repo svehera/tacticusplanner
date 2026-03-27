@@ -87,12 +87,17 @@ export function getLreGuideData(
 } {
     const character = subModes[0] as LreCharacter;
     const section = subModes[1].replace(character + '_', '') as 'alpha' | 'beta' | 'gamma';
-    const restrictionIndexes = subModes
-        .slice(2)
-        .map(x => x.replace(character + '_' + section + '_', ''))
-        .map(Number);
-    const lre = getLre(character, units.filter(isCharacter));
-    const selectedSections = lre[section].unitsRestrictions.filter((_, index) => restrictionIndexes.includes(index));
+    const restrictionIndexes = new Set(
+        subModes
+            .slice(2)
+            .map(x => x.replace(character + '_' + section + '_', ''))
+            .map(Number)
+    );
+    const lre = getLre(
+        character,
+        units.filter(unit => isCharacter(unit))
+    );
+    const selectedSections = lre[section].unitsRestrictions.filter((_, index) => restrictionIndexes.has(index));
 
     const sections = selectedSections.map(x => x.name).join(' & ');
     return {

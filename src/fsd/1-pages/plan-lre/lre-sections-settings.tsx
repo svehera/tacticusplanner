@@ -77,7 +77,8 @@ export const LreSectionsSettings: React.FC<Props> = ({ sectionVisibility, save }
         }
     }, [sectionVisibility.showAlpha, sectionVisibility.showBeta, sectionVisibility.showGamma]);
 
-    if (!isMobile) return <div className="flex-box gap5 wrap">{lreSectionOptions.map(renderOption)}</div>;
+    if (!isMobile)
+        return <div className="flex-box gap5 wrap">{lreSectionOptions.map(option => renderOption(option))}</div>;
     return (
         <FormControl className="pl-4">
             <RadioGroup

@@ -3,7 +3,7 @@ import { vi } from 'vitest';
 
 // 1. Create a dummy storage object
 const localStorageMock = {
-    getItem: vi.fn(() => null),
+    getItem: vi.fn(() => {}),
     setItem: vi.fn(),
     removeItem: vi.fn(),
     clear: vi.fn(),

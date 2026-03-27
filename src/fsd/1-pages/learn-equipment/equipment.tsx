@@ -58,7 +58,7 @@ export const Equipment = () => {
                 headerName: 'Rarity',
                 width: 60,
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    return typeof params.data?.rarity !== 'undefined' && <RarityIcon rarity={params.data?.rarity} />;
+                    return params.data?.rarity !== undefined && <RarityIcon rarity={params.data?.rarity} />;
                 },
             },
             {

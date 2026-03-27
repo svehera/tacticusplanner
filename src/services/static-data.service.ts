@@ -3,8 +3,8 @@
 import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
-export class StaticDataService {
-    static getItemLocations = (itemId: string): ICampaignBattleComposed[] => {
+export const StaticDataService = {
+    getItemLocations: (itemId: string): ICampaignBattleComposed[] => {
         const possibleLocations: ICampaignBattleComposed[] = [];
         const recipeData = UpgradesService.recipeDataFull[itemId];
         if (recipeData) {
@@ -15,9 +15,9 @@ export class StaticDataService {
         }
 
         return possibleLocations;
-    };
+    },
 
-    static getFactionPray(faction: FactionId): string {
+    getFactionPray(faction: FactionId): string {
         switch (faction) {
             case 'Ultramarines':
             case 'Sisterhood':
@@ -65,5 +65,5 @@ export class StaticDataService {
                 return '';
             }
         }
-    }
-}
+    },
+};

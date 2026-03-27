@@ -214,7 +214,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
 
         return legendaryEvent.allowedUnits
             .filter(x => selectedChars.includes(x.snowprintId))
-            .sort((a, b) => {
+            .toSorted((a, b) => {
                 const aTotal =
                     (alpha[a.name]?.points ?? 0) + (beta[a.name]?.points ?? 0) + (gamma[a.name]?.points ?? 0);
                 const bTotal =
@@ -281,7 +281,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
             let progressByRequirement: Record<string, number> = {};
 
             if (pointsCalculation === PointsCalculation.unearned || pointsCalculation === PointsCalculation.estimated) {
-                const trackProgress = leProgress.tracksProgress.filter(x => x.trackId === track.section)[0];
+                const trackProgress = leProgress.tracksProgress.find(x => x.trackId === track.section);
                 if (trackProgress) {
                     progressByRequirement = LreService.getReqProgressPerTrack(trackProgress);
                 }
@@ -347,7 +347,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                   : [];
 
         return chars
-            .sort(
+            .toSorted(
                 (a, b) =>
                     b.legendaryEvents[legendaryEvent.id].totalPoints - a.legendaryEvents[legendaryEvent.id].totalPoints
             )

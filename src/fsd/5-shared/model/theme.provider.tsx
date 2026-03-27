@@ -43,10 +43,10 @@ export const AppThemeProvider: FC<PropsWithChildren> = ({ children }) => {
     useEffect(() => {
         if (isDarkMode) {
             document.documentElement.classList.add('dark');
-            document.documentElement.setAttribute('data-ag-theme-mode', 'dark');
+            document.documentElement.dataset.agThemeMode = 'dark';
         } else {
             document.documentElement.classList.remove('dark');
-            document.documentElement.removeAttribute('data-ag-theme-mode');
+            delete document.documentElement.dataset.agThemeMode;
         }
     }, [isDarkMode]);
 

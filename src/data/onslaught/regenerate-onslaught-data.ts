@@ -23,7 +23,7 @@
  * is sketchy since Vite has not fully started up yet.
  *  */
 
-import fs from 'fs';
+import fs from 'node:fs';
 
 import { z } from 'zod';
 
@@ -136,8 +136,8 @@ const KillZoneSchema = z
             battleNr,
             waves: waves.length,
             boardId: BoardId, // keep for validation but then drop later
-            totalXp: waves.map(w => w.xp).reduce((sum, xp) => sum + xp, 0),
-            totalEnemyCount: waves.map(w => w.enemyCount).reduce((sum, count) => sum + count, 0),
+            totalXp: waves.map(w => w.xp).reduce((sum, xp) => sum + xp),
+            totalEnemyCount: waves.map(w => w.enemyCount).reduce((sum, count) => sum + count),
             badgeAlliance: waves[0].badges.alliance,
             badgeCountsByRarity,
         };
@@ -174,8 +174,8 @@ const TrackSchema = z
             .nonempty()
             .superRefine((sectors, context) => {
                 let currentExpectedBattleNr = 1;
-                for (let index = 0; index < sectors.length; index++) {
-                    for (const { battleNr } of sectors[index].killzones) {
+                for (const sector of sectors) {
+                    for (const { battleNr } of sector.killzones) {
                         if (battleNr !== currentExpectedBattleNr)
                             context.addIssue({
                                 code: 'invalid_value',
@@ -230,7 +230,7 @@ const DataSchema = z
 // ----------- Stage 7: Executing and write to file -----------
 export const main = () => {
     // Note: reading here instead of importing so that importing from this file doesn't cause Vite to try to load the entire raw JSON into memory during startup
-    const rawData = JSON.parse(fs.readFileSync(import.meta.dirname + '/raw-data.json', 'utf-8'));
+    const rawData = JSON.parse(fs.readFileSync(import.meta.dirname + '/raw-data.json', 'utf8'));
     const parsedData = DataSchema.parse(rawData);
-    fs.writeFileSync(import.meta.dirname + '/data.generated.json', JSON.stringify(parsedData, null, 4) + '\n');
+    fs.writeFileSync(import.meta.dirname + '/data.generated.json', JSON.stringify(parsedData, undefined, 4) + '\n');
 };

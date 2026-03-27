@@ -43,7 +43,9 @@ export class GoalService {
         ];
         if (goalEstimate !== undefined) {
             if (!goalEstimate.daysLeft) {
-                return GoalService.getColorString(kBgColors[kBgColors.length - 1]);
+                const colorObject = kBgColors.at(-1);
+                if (!colorObject) throw new Error('missing colors');
+                return GoalService.getColorString(colorObject);
             }
 
             if (goalsColorCoding === 'Battle Pass Season') {
@@ -83,7 +85,7 @@ export class GoalService {
 
                 const nextDateSeasonIndex = Math.max(0, Math.floor(msDifference / msPerRaidSeason));
 
-                const currentMs = new Date().getTime();
+                const currentMs = Date.now();
                 const msDifferenceCurrent = currentMs - raidSeasonStart;
                 const currentSeasonIndex = Math.floor(msDifferenceCurrent / msPerRaidSeason);
 
@@ -94,6 +96,8 @@ export class GoalService {
                 );
             }
         }
-        return GoalService.getColorString(kBgColors[kBgColors.length - 1]);
+        const colorObject = kBgColors.at(-1);
+        if (!colorObject) throw new Error('missing colors');
+        return GoalService.getColorString(colorObject);
     }
 }

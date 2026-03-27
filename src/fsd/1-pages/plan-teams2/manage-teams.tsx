@@ -13,7 +13,7 @@ import {
 } from '@mui/icons-material';
 import { IconButton, Tooltip, Paper, Stack, Chip, ButtonBase, Typography } from '@mui/material';
 import type { ChipProps } from '@mui/material';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, uniq } from 'lodash';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
@@ -110,18 +110,16 @@ export const ManageTeams = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, setSelectedChars] = useState<string[]>([]);
     const [selectedMows, setSelectedMows] = useState<string[]>([]);
-    const [flexIndex, setFlexIndex] = useState<number | undefined>(undefined);
+    const [flexIndex, setFlexIndex] = useState<number | undefined>();
     const [notes, setNotes] = useState<string>('');
 
     // State for the add/edit dialog.
     const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
-    const [editingTeam, setEditingTeam] = useState<ITeam2 | null>(null);
+    const [editingTeam, setEditingTeam] = useState<ITeam2>();
     const [saveAllowed, setSaveAllowed] = useState(false);
-    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>(undefined);
-    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>(undefined);
-    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>(
-        undefined
-    );
+    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>();
+    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>();
+    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>();
     const [warOffenseSelected, setWarOffenseSelected] = useState<boolean>(false);
     const [warDefenseSelected, setWarDefenseSelected] = useState<boolean>(false);
     const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
@@ -134,7 +132,7 @@ export const ManageTeams = () => {
     const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
     const [teams, setTeams] = useState<ITeam2[]>([]);
     const [zoom, setZoom] = useState(isMobile ? 0.5 : 1);
-    const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>(undefined);
+    const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>();
 
     useEffect(() => {
         setTeams(currentTeams);
@@ -156,7 +154,7 @@ export const ManageTeams = () => {
     );
 
     const warDefenseBlockedCoreCharIds = useMemo(
-        () => Array.from(new Set(otherWarDefenseTeams.flatMap(getTeamCoreCharIds))),
+        () => uniq(otherWarDefenseTeams.flatMap(team => getTeamCoreCharIds(team))),
         [otherWarDefenseTeams]
     );
 
@@ -167,18 +165,16 @@ export const ManageTeams = () => {
 
     const warDefenseFlexCharIds = useMemo(
         () =>
-            Array.from(
-                new Set(
-                    otherWarDefenseTeams
-                        .flatMap(getTeamFlexCharIds)
-                        .filter(charId => !warDefenseBlockedCoreCharIdsSet.has(charId))
-                )
+            uniq(
+                otherWarDefenseTeams
+                    .flatMap(team => getTeamFlexCharIds(team))
+                    .filter(charId => !warDefenseBlockedCoreCharIdsSet.has(charId))
             ),
         [otherWarDefenseTeams, warDefenseBlockedCoreCharIdsSet]
     );
 
     const warDefenseFlexMowIds = useMemo(
-        () => Array.from(new Set(otherWarDefenseTeams.flatMap(team => team.mows ?? []))),
+        () => uniq(otherWarDefenseTeams.flatMap(team => team.mows ?? [])),
         [otherWarDefenseTeams]
     );
 
@@ -280,7 +276,7 @@ export const ManageTeams = () => {
         setImportDialogOpen(true);
     };
 
-    const onImportGo = (team: IPersonalTeam | null) => {
+    const onImportGo = (team: IPersonalTeam | undefined) => {
         setImportDialogOpen(false);
         if (!team) return;
         setSelectedChars(
@@ -547,8 +543,7 @@ export const ManageTeams = () => {
                                         <button
                                             className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-green-700"
                                             onClick={() => {
-                                                const team =
-                                                    legacyTeams.find(t => t.name === selectedLegacyTeamName) ?? null;
+                                                const team = legacyTeams.find(t => t.name === selectedLegacyTeamName);
                                                 onImportGo(team);
                                                 setImportDialogOpen(false);
                                             }}>

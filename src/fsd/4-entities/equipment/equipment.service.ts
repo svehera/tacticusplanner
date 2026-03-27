@@ -41,11 +41,11 @@ export class EquipmentService {
         });
     }
 
-    public static convertTacticusEquipmentData(tacticusData: TacticusEquipment): IEquipment | null {
+    public static convertTacticusEquipmentData(tacticusData: TacticusEquipment): IEquipment | undefined {
         const equipment = this.equipmentData.find(eq => eq.id === tacticusData.id);
         if (!equipment) {
             console.error("Couldn't find equipment data for ID: " + tacticusData.id);
-            return null;
+            return;
         }
         return {
             ...equipment,

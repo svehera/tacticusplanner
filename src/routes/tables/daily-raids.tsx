@@ -69,10 +69,12 @@ export const DailyRaids = () => {
 
     const location = useLocation();
     const [searchParams] = useSearchParams();
-    const [charSnowprintId, setCharSnowprintId] = useState<string | null>(searchParams.get('charSnowprintId'));
+    const [charSnowprintId, setCharSnowprintId] = useState<string | undefined>(
+        searchParams.get('charSnowprintId') ?? undefined
+    );
 
     useEffect(() => {
-        setCharSnowprintId(searchParams.get('charSnowprintId'));
+        setCharSnowprintId(searchParams.get('charSnowprintId') ?? undefined);
     }, [location]);
 
     const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
@@ -130,7 +132,8 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
-            ...[...upgradeRankOrMowGoals, ...shardsGoals]
+            ...upgradeRankOrMowGoals,
+            ...shardsGoals
         );
     }, [
         dailyRaidsPreferences.dailyEnergy,
@@ -158,7 +161,8 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
-            ...[...upgradeRankOrMowGoals, ...shardsGoals]
+            ...upgradeRankOrMowGoals,
+            ...shardsGoals
         );
     }, [
         dailyRaidsPreferences.dailyEnergy,
