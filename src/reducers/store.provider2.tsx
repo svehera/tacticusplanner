@@ -1,7 +1,7 @@
 ﻿import { AxiosError } from 'axios';
 import { isEqual } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
@@ -17,7 +17,7 @@ import { IErrorResponse } from '@/fsd/5-shared/api';
 import { useAuth } from '@/fsd/5-shared/model';
 
 import { GlobalState } from '../models/global-state';
-import { IDispatchContext, IGlobalState } from '../models/interfaces';
+import { IDispatchContext, IGlobalState, IPersonalData2 } from '../models/interfaces';
 import { convertData, PersonalDataLocalStorage } from '../services';
 
 import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
@@ -49,64 +49,129 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     });
 
     const [modified, setModified] = useState(false);
-    const [saveTimeoutId, setSaveTimeoutId] = useState<NodeJS.Timeout>();
-    const [abortController, setAbortController] = useState<AbortController>();
+    const saveTimeoutReference = useRef<NodeJS.Timeout | undefined>(undefined);
+    const isSaveInFlightReference = useRef(false);
+    const queuedStoreValueReference = useRef<IPersonalData2 | undefined>(undefined);
+    const modifiedDateTicksReference = useRef(localStorage.getItem('TP-ModifiedDateTicks') ?? '');
 
     const [modifiedDate, setModifiedDate] = useState(globalState.modifiedDate);
     const [seenAppVersion, setSeenAppVersion] = useState<string | undefined | null>(globalState.seenAppVersion);
 
-    const [characters, dispatchCharacters] = React.useReducer(charactersReducer, globalState.characters);
-    const [mows, dispatchMows] = React.useReducer(mowsReducer, globalState.mows);
-    const [goals, dispatchGoals] = React.useReducer(goalsReducer, globalState.goals);
-    const [teams, dispatchTeams] = React.useReducer(teamsReducer, globalState.teams);
-    const [teams2, dispatchTeams2] = React.useReducer(teams2Reducer, globalState.teams2);
-    const [gameModeTokens, dispatchGameModeTokens] = React.useReducer(
+    const [characters, dispatchCharacters] = useReducer(charactersReducer, globalState.characters);
+    const [mows, dispatchMows] = useReducer(mowsReducer, globalState.mows);
+    const [goals, dispatchGoals] = useReducer(goalsReducer, globalState.goals);
+    const [teams, dispatchTeams] = useReducer(teamsReducer, globalState.teams);
+    const [teams2, dispatchTeams2] = useReducer(teams2Reducer, globalState.teams2);
+    const [gameModeTokens, dispatchGameModeTokens] = useReducer(
         gameModeTokensActionReducer,
         globalState.gameModeTokens
     );
-    const [warDefense2, dispatchWarDefense2] = React.useReducer(warDefense2Reducer, globalState.warDefense2);
-    const [warOffense2, dispatchWarOffense2] = React.useReducer(warOffense2Reducer, globalState.warOffense2);
-    const [viewPreferences, dispatchViewPreferences] = React.useReducer(
-        viewPreferencesReducer,
-        globalState.viewPreferences
-    );
-    const [dailyRaidsPreferences, dispatchDailyRaidsPreferences] = React.useReducer(
+    const [warDefense2, dispatchWarDefense2] = useReducer(warDefense2Reducer, globalState.warDefense2);
+    const [warOffense2, dispatchWarOffense2] = useReducer(warOffense2Reducer, globalState.warOffense2);
+    const [viewPreferences, dispatchViewPreferences] = useReducer(viewPreferencesReducer, globalState.viewPreferences);
+    const [dailyRaidsPreferences, dispatchDailyRaidsPreferences] = useReducer(
         dailyRaidsPreferencesReducer,
         globalState.dailyRaidsPreferences
     );
-    const [autoTeamsPreferences, dispatchAutoTeamsPreferences] = React.useReducer(
+    const [autoTeamsPreferences, dispatchAutoTeamsPreferences] = useReducer(
         autoTeamsPreferencesReducer,
         globalState.autoTeamsPreferences
     );
-    const [selectedTeamOrder, dispatchSelectedTeamsOrder] = React.useReducer(
+    const [selectedTeamOrder, dispatchSelectedTeamsOrder] = useReducer(
         selectedTeamsOrderReducer,
         globalState.selectedTeamOrder
     );
-    const [leSelectedRequirements, dispatchLeSelectedRequirements] = React.useReducer(
+    const [leSelectedRequirements, dispatchLeSelectedRequirements] = useReducer(
         leSelectedRequirementsReducer,
         globalState.leSelectedRequirements
     );
-    const [leSelectedTeams, dispatchLeSelectedTeams] = React.useReducer(
-        leSelectedTeamsReducer,
-        globalState.leSelectedTeams
-    );
-    const [leProgress, dispatchLeProgress] = React.useReducer(leProgressReducer, globalState.leProgress);
-    const [leSettings, dispatchLeSettings] = React.useReducer(leSettingsReducer, globalState.leSettings);
+    const [leSelectedTeams, dispatchLeSelectedTeams] = useReducer(leSelectedTeamsReducer, globalState.leSelectedTeams);
+    const [leProgress, dispatchLeProgress] = useReducer(leProgressReducer, globalState.leProgress);
+    const [leSettings, dispatchLeSettings] = useReducer(leSettingsReducer, globalState.leSettings);
 
-    const [campaignsProgress, dispatchCampaignsProgress] = React.useReducer(
+    const [campaignsProgress, dispatchCampaignsProgress] = useReducer(
         campaignsProgressReducer,
         globalState.campaignsProgress
     );
 
-    const [inventory, dispatchInventory] = React.useReducer(inventoryReducer, globalState.inventory);
-    const [dailyRaids, dispatchDailyRaids] = React.useReducer(dailyRaidsReducer, globalState.dailyRaids);
-    const [guildWar, dispatchGuildWar] = React.useReducer(guildWarReducer, globalState.guildWar);
-    const [guild, dispatchGuild] = React.useReducer(guildReducer, globalState.guild);
-    const [xpUse, dispatchXpUse] = React.useReducer(xpUseActionReducer, globalState.xpUse);
-    const [xpIncome, dispatchXpIncome] = React.useReducer(xpIncomeActionReducer, globalState.xpIncome);
-    const [rosterSnapshots, dispatchRosterSnapshots] = React.useReducer(
+    const [inventory, dispatchInventory] = useReducer(inventoryReducer, globalState.inventory);
+    const [dailyRaids, dispatchDailyRaids] = useReducer(dailyRaidsReducer, globalState.dailyRaids);
+    const [guildWar, dispatchGuildWar] = useReducer(guildWarReducer, globalState.guildWar);
+    const [guild, dispatchGuild] = useReducer(guildReducer, globalState.guild);
+    const [xpUse, dispatchXpUse] = useReducer(xpUseActionReducer, globalState.xpUse);
+    const [xpIncome, dispatchXpIncome] = useReducer(xpIncomeActionReducer, globalState.xpIncome);
+    const [rosterSnapshots, dispatchRosterSnapshots] = useReducer(
         rosterSnapshotsActionReducer,
         globalState.rosterSnapshots
+    );
+
+    const setModifiedDateTicks = useCallback((modifiedDateTicks: string) => {
+        modifiedDateTicksReference.current = modifiedDateTicks;
+        localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
+    }, []);
+
+    const syncModifiedDateTicksFromServer = useCallback(async () => {
+        try {
+            const response = await getUserDataApi();
+            if (!response.data) {
+                return;
+            }
+
+            const { modifiedDateTicks: serverModifiedDateTicks } = response.data;
+            setModifiedDateTicks(serverModifiedDateTicks);
+        } catch {
+            // Best effort. Keep local ticks as-is if refresh fails.
+        }
+    }, [setModifiedDateTicks]);
+
+    const pushDataToServer = useCallback(
+        (storeValue: IPersonalData2, successVariant: 'success' | 'info' = 'success') => {
+            if (isSaveInFlightReference.current) {
+                queuedStoreValueReference.current = storeValue;
+                return;
+            }
+
+            isSaveInFlightReference.current = true;
+            const currentModifiedDateTicks = modifiedDateTicksReference.current;
+
+            setUserDataApi(storeValue, currentModifiedDateTicks)
+                .then(({ data }) => {
+                    const { modifiedDateTicks } = data;
+                    setModifiedDateTicks(modifiedDateTicks);
+                    enqueueSnackbar('Pushed local data to server.', { variant: successVariant });
+                })
+                .catch((error: AxiosError<IErrorResponse>) => {
+                    if (error.code === 'ERR_CANCELED') {
+                        void syncModifiedDateTicksFromServer();
+                        return;
+                    }
+
+                    if (error.response?.status === 401) {
+                        logout();
+                        enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
+                    } else if (error.response?.status === 409) {
+                        enqueueSnackbar(
+                            'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
+                            { variant: 'error' }
+                        );
+                    } else {
+                        enqueueSnackbar('Failed to push data to server. Please do manual back-up.', {
+                            variant: 'error',
+                        });
+                    }
+                })
+                .finally(() => {
+                    isSaveInFlightReference.current = false;
+
+                    const queuedStoreValue = queuedStoreValueReference.current;
+                    queuedStoreValueReference.current = undefined;
+
+                    if (queuedStoreValue) {
+                        pushDataToServer(queuedStoreValue, 'success');
+                    }
+                });
+        },
+        [logout, setModifiedDateTicks, syncModifiedDateTicksFromServer]
     );
 
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
@@ -248,41 +313,52 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         setModified(false);
 
         if (isAuthenticated) {
-            abortController?.abort();
-            clearTimeout(saveTimeoutId);
-            const controller = new AbortController();
-            const timeoutId = setTimeout(
+            clearTimeout(saveTimeoutReference.current);
+            saveTimeoutReference.current = setTimeout(
                 () => {
-                    setUserDataApi(storeValue, controller.signal)
-                        .then(({ data }) => {
-                            const { modifiedDateTicks } = data;
-                            localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
-                            enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
-                        })
-                        .catch((error: AxiosError<IErrorResponse>) => {
-                            if (error.code === 'ERR_CANCELED') {
-                                return;
-                            }
-                            if (error.response?.status === 401) {
-                                enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else if (error.response?.status === 409) {
-                                enqueueSnackbar(
-                                    'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
-                                    { variant: 'error' }
-                                );
-                            } else {
-                                enqueueSnackbar('Failed to push data to server. Please do manual back-up.', {
-                                    variant: 'error',
-                                });
-                            }
-                        });
+                    pushDataToServer(storeValue, 'success');
                 },
                 isMobile ? 1000 : 10_000
             );
-            setSaveTimeoutId(timeoutId);
-            setAbortController(controller);
         }
-    }, [modified]);
+    }, [
+        autoTeamsPreferences,
+        campaignsProgress,
+        characters,
+        dailyRaids,
+        dailyRaidsPreferences,
+        gameModeTokens,
+        goals,
+        guild,
+        guildWar,
+        inventory,
+        isAuthenticated,
+        leProgress,
+        leSelectedRequirements,
+        leSelectedTeams,
+        leSettings,
+        modified,
+        modifiedDate,
+        mows,
+        localStore,
+        pushDataToServer,
+        rosterSnapshots,
+        seenAppVersion,
+        selectedTeamOrder,
+        teams,
+        teams2,
+        viewPreferences,
+        warDefense2,
+        warOffense2,
+        xpIncome,
+        xpUse,
+    ]);
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(saveTimeoutReference.current);
+        };
+    }, []);
 
     function doDailyRefresh(lastRefreshDateUTC: string): void {
         const currentDate = new Date();
@@ -342,7 +418,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     tacticusGuildApiKey,
                     tacticusUserId,
                 });
-                const localModifiedDateTicks = localStorage.getItem('TP-ModifiedDateTicks');
+                const localModifiedDateTicks = modifiedDateTicksReference.current;
 
                 const hasDataConflict = localModifiedDateTicks !== serverModifiedDateTicks;
 
@@ -352,7 +428,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 const shouldAcceptServerData = !isFirstLogin && (isFreshData || localIsOlder);
                 const shouldPushLocalData = !isFreshData && (isFirstLogin || localIsNewer || hasDataConflict);
 
-                localStorage.setItem('TP-ModifiedDateTicks', serverModifiedDateTicks);
+                setModifiedDateTicks(serverModifiedDateTicks);
 
                 if (shouldAcceptServerData) {
                     const serverData = convertData(data);
@@ -378,27 +454,8 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     setModifiedDate(serverLastModified);
                     localStore.setData({ modifiedDate: serverLastModified });
                 } else if (shouldPushLocalData) {
-                    setUserDataApi(GlobalState.toStore(globalState))
-                        .then(({ data }) => {
-                            const { modifiedDateTicks } = data;
-                            localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
-                            return enqueueSnackbar('Pushed local data to server.', { variant: 'info' });
-                        })
-                        .catch((error: AxiosError<IErrorResponse>) => {
-                            if (error.response?.status === 401) {
-                                logout();
-                                enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else if (error.response?.status === 409) {
-                                enqueueSnackbar(
-                                    'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
-                                    { variant: 'error' }
-                                );
-                            } else {
-                                enqueueSnackbar('Failed to push data to server. Please do manual back-up.', {
-                                    variant: 'error',
-                                });
-                            }
-                        });
+                    clearTimeout(saveTimeoutReference.current);
+                    pushDataToServer(GlobalState.toStore(globalState), 'info');
                 }
             })
             .catch((error: AxiosError<IErrorResponse>) => {
@@ -410,7 +467,19 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     enqueueSnackbar('Failed to fetch data from server. Try again later', { variant: 'error' });
                 }
             });
-    }, [isAuthenticated]);
+    }, [
+        dailyRaids.lastRefreshDateUTC,
+        dispatch,
+        globalState,
+        isAuthenticated,
+        localStore,
+        logout,
+        modifiedDate,
+        pushDataToServer,
+        setModifiedDateTicks,
+        setUser,
+        setUserInfo,
+    ]);
 
     useEffect(() => {
         const sixtySeconds = 1000 * 60;
