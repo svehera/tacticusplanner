@@ -1,7 +1,6 @@
 import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardContent, CardHeader } from '@mui/material';
-import { AgGridReact } from 'ag-grid-react';
-import React, { useContext, useEffect, useMemo, useRef } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
@@ -39,8 +38,6 @@ export const LreTeamsCard: React.FC<Props> = ({
     deleteTeam,
     restrictions,
 }) => {
-    const gridReference = useRef<AgGridReact>(null);
-
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -48,16 +45,6 @@ export const LreTeamsCard: React.FC<Props> = ({
         () => track.suggestTeam(autoTeamsPreferences, viewPreferences.onlyUnlocked, restrictions),
         [autoTeamsPreferences, restrictions, viewPreferences.onlyUnlocked]
     );
-
-    useEffect(() => {
-        gridReference.current?.api?.sizeColumnsToFit();
-    }, [
-        viewPreferences.showAlpha,
-        viewPreferences.showBeta,
-        viewPreferences.showGamma,
-        track.eventId,
-        viewPreferences.hideCompleted,
-    ]);
 
     const handleChange = (selected: boolean, restrictionName: string) => {
         dispatch.leSelectedRequirements({

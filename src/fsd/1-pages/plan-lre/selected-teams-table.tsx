@@ -116,7 +116,7 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
 
     useEffect(() => {
         gridReference.current?.api?.sizeColumnsToFit();
-    }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, viewPreferences.hideCompleted]);
+    }, []);
 
     return (
         <div

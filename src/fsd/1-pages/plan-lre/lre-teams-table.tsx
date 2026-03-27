@@ -120,13 +120,7 @@ export const LreTeamsTable: React.FC<Props> = ({
 
     useEffect(() => {
         gridReference.current?.api?.sizeColumnsToFit();
-    }, [
-        viewPreferences.showAlpha,
-        viewPreferences.showBeta,
-        viewPreferences.showGamma,
-        track.eventId,
-        viewPreferences.hideCompleted,
-    ]);
+    }, [track.eventId]);
 
     const handleChange = (selected: boolean, restrictionName: string) => {
         dispatch.leSelectedRequirements({

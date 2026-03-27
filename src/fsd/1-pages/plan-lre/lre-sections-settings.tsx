@@ -1,40 +1,46 @@
 ﻿import { FormControl, FormControlLabel, Radio, RadioGroup, Switch } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { ILreViewSettings, IViewOption } from '@/fsd/3-features/view-settings';
+import { IViewOption } from '@/fsd/3-features/view-settings';
 
-interface Props {
-    lreViewSettings: ILreViewSettings;
-    save: (setting: keyof ILreViewSettings, value: boolean) => void;
+export interface ILreSectionVisibilitySettings {
+    showAlpha: boolean;
+    showBeta: boolean;
+    showGamma: boolean;
 }
 
-export const LreSectionsSettings: React.FC<Props> = ({ lreViewSettings, save }) => {
-    const [value, setValue] = React.useState<keyof ILreViewSettings>('showAlpha');
+interface Props {
+    sectionVisibility: ILreSectionVisibilitySettings;
+    save: (setting: keyof ILreSectionVisibilitySettings, value: boolean) => void;
+}
 
-    const lreSectionOptions: IViewOption<ILreViewSettings>[] = [
+export const LreSectionsSettings: React.FC<Props> = ({ sectionVisibility, save }) => {
+    const [value, setValue] = useState<keyof ILreSectionVisibilitySettings>('showAlpha');
+
+    const lreSectionOptions: IViewOption<ILreSectionVisibilitySettings>[] = [
         {
             label: 'Alpha',
             key: 'showAlpha',
-            value: lreViewSettings.showAlpha,
-            disabled: lreViewSettings.showAlpha && !lreViewSettings.showBeta && !lreViewSettings.showGamma,
+            value: sectionVisibility.showAlpha,
+            disabled: sectionVisibility.showAlpha && !sectionVisibility.showBeta && !sectionVisibility.showGamma,
         },
         {
             label: 'Beta',
             key: 'showBeta',
-            value: lreViewSettings.showBeta,
-            disabled: lreViewSettings.showBeta && !lreViewSettings.showAlpha && !lreViewSettings.showGamma,
+            value: sectionVisibility.showBeta,
+            disabled: sectionVisibility.showBeta && !sectionVisibility.showAlpha && !sectionVisibility.showGamma,
         },
         {
             label: 'Gamma',
             key: 'showGamma',
-            value: lreViewSettings.showGamma,
-            disabled: lreViewSettings.showGamma && !lreViewSettings.showAlpha && !lreViewSettings.showBeta,
+            value: sectionVisibility.showGamma,
+            disabled: sectionVisibility.showGamma && !sectionVisibility.showAlpha && !sectionVisibility.showBeta,
         },
     ];
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const sectionValue = (event.target as HTMLInputElement).value as keyof ILreViewSettings;
+        const sectionValue = (event.target as HTMLInputElement).value as keyof ILreSectionVisibilitySettings;
         setValue(sectionValue);
         save(sectionValue, true);
         const otherOptions = lreSectionOptions.filter(x => x.key !== sectionValue);
@@ -43,7 +49,7 @@ export const LreSectionsSettings: React.FC<Props> = ({ lreViewSettings, save }) 
         }
     };
 
-    const renderOption = (option: IViewOption<ILreViewSettings>) => {
+    const renderOption = (option: IViewOption<ILreSectionVisibilitySettings>) => {
         return (
             <div key={option.key}>
                 <FormControlLabel
@@ -62,12 +68,14 @@ export const LreSectionsSettings: React.FC<Props> = ({ lreViewSettings, save }) 
     };
 
     useEffect(() => {
-        if (isMobile) {
-            save('showAlpha', true);
-            save('showBeta', false);
-            save('showGamma', false);
+        if (sectionVisibility.showAlpha) {
+            setValue('showAlpha');
+        } else if (sectionVisibility.showBeta) {
+            setValue('showBeta');
+        } else if (sectionVisibility.showGamma) {
+            setValue('showGamma');
         }
-    }, []);
+    }, [sectionVisibility.showAlpha, sectionVisibility.showBeta, sectionVisibility.showGamma]);
 
     if (!isMobile) return <div className="flex-box gap5 wrap">{lreSectionOptions.map(renderOption)}</div>;
     return (

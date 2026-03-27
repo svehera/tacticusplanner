@@ -60,13 +60,6 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
             value: viewSettings.onlyUnlocked,
             disabled: false,
         },
-        {
-            label: 'Exclude completed tracks',
-            tooltip: 'Exclude tracks where you have completed all battles',
-            key: 'hideCompleted',
-            value: viewSettings.hideCompleted,
-            disabled: false,
-        },
     ];
 
     const lreAutoTeamsOptions: IViewOption<IAutoTeamsPreferences>[] = [

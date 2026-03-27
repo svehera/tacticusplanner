@@ -15,16 +15,19 @@ import { useLreProgress } from './le-progress.hooks';
 import { LegendaryEventTrack } from './legendary-event-track';
 import { LreAddTeam } from './lre-add-team';
 import { LreEditTeam } from './lre-edit-team';
+import { ILreSectionVisibilitySettings } from './lre-sections-settings';
 import { LreService } from './lre.service';
 
 export const LegendaryEvent = ({
     legendaryEvent,
     upgradeRankOrMowGoals,
+    sectionVisibility,
 }: {
     legendaryEvent: ILegendaryEvent;
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
+    sectionVisibility: ILreSectionVisibilitySettings;
 }) => {
-    const { viewPreferences, leSelectedTeams } = useContext(StoreContext);
+    const { leSelectedTeams } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { model: lreProgress } = useLreProgress(legendaryEvent);
 
@@ -108,7 +111,7 @@ export const LegendaryEvent = ({
     return (
         <div>
             <div className="mb-2.5 flex gap-[15px]" style={{ flexWrap: isMobile ? 'wrap' : 'nowrap' }}>
-                {viewPreferences.showAlpha && (
+                {sectionVisibility.showAlpha && (
                     <LegendaryEventTrack
                         legendaryEvent={legendaryEvent}
                         track={legendaryEvent.alpha}
@@ -123,7 +126,7 @@ export const LegendaryEvent = ({
                         )}
                     />
                 )}
-                {viewPreferences.showBeta && (
+                {sectionVisibility.showBeta && (
                     <LegendaryEventTrack
                         legendaryEvent={legendaryEvent}
                         track={legendaryEvent.beta}
@@ -138,7 +141,7 @@ export const LegendaryEvent = ({
                         )}
                     />
                 )}
-                {viewPreferences.showGamma && (
+                {sectionVisibility.showGamma && (
                     <LegendaryEventTrack
                         legendaryEvent={legendaryEvent}
                         track={legendaryEvent.gamma}

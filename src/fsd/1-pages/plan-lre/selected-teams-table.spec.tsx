@@ -110,12 +110,7 @@ const renderTable = (rows: Array<Record<string, ISelectedTeamTableCell | string>
         <StoreContext.Provider
             value={
                 {
-                    viewPreferences: {
-                        showAlpha: true,
-                        showBeta: true,
-                        showGamma: true,
-                        hideCompleted: false,
-                    },
+                    viewPreferences: {},
                 } as unknown as React.ContextType<typeof StoreContext>
             }>
             <SelectedTeamsTable
