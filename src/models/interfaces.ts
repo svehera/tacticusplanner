@@ -239,7 +239,6 @@ interface ILegendaryEventData {
 export enum IDailyRaidsFarmOrder {
     goalPriority,
     totalMaterials,
-    homeScreenEvent,
 }
 
 export enum IDailyRaidsHomeScreenEvent {
