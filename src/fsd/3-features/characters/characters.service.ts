@@ -41,6 +41,7 @@ import { filterXenos } from './functions/filter-by-xenos';
 import { needToAscendCharacter } from './functions/need-to-ascend';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { needToLevelCharacter } from './functions/need-to-level';
+import { filterMap } from '@/fsd/5-shared/lib';
 
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter?: string): IUnit[] {
@@ -186,26 +187,24 @@ export class CharactersService {
         const factionCharacters = groupBy(units, 'faction');
 
         // Derive relevant faction data in one pass
-        const result: IFaction[] = factionsData
-            .map(faction => {
-                const units = factionCharacters[faction.snowprintId];
-                if (!units) return;
+        const result = filterMap(factionsData, faction => {
+            const units = factionCharacters[faction.snowprintId];
+            if (!units) return;
 
-                return {
-                    ...faction,
-                    units,
-                    bsValue:
-                        includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue
-                            ? sum(units.map(character => CharactersValueService.getCharacterValue(character)))
-                            : 0,
-                    power:
-                        includePower || charactersOrderBy === CharactersOrderBy.FactionPower
-                            ? sum(units.map(character => CharactersPowerService.getCharacterPower(character)))
-                            : 0,
-                    unlockedCharacters: units.filter(character => isUnlocked(character)).length,
-                };
-            })
-            .filter(faction => faction !== undefined);
+            return {
+                ...faction,
+                units,
+                bsValue:
+                    includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue
+                        ? sum(units.map(character => CharactersValueService.getCharacterValue(character)))
+                        : 0,
+                power:
+                    includePower || charactersOrderBy === CharactersOrderBy.FactionPower
+                        ? sum(units.map(character => CharactersPowerService.getCharacterPower(character)))
+                        : 0,
+                unlockedCharacters: units.filter(character => isUnlocked(character)).length,
+            };
+        });
 
         // Determine sort key based on the order parameter
         let orderByKey: keyof IFaction;

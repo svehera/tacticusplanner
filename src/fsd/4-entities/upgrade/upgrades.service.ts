@@ -54,7 +54,7 @@ export class UpgradesService {
      */
     private static expandRecipeData(): IRecipeExpandedUpgradeData {
         const result: IRecipeExpandedUpgradeData = {
-            ['gold']: {
+            gold: {
                 id: 'gold',
                 snowprintId: 'gold',
                 label: 'Gold',

@@ -1,3 +1,7 @@
+/**
+ * Maps over an array and filters out any `undefined` results in a single pass.
+ * Useful as a combined alternative to chaining `.map().filter()`.
+ */
 export const filterMap = <Element, Output>(
     array: readonly Element[],
     mapFunction: (element: Element, index: number, array: readonly Element[]) => Output | undefined
@@ -10,6 +14,10 @@ export const filterMap = <Element, Output>(
     return results;
 };
 
+/**
+ * Converts an array into an object keyed by the specified property.
+ * If multiple elements share the same key value, the last one wins.
+ */
 export const arrayToKeyedObject = <T extends Record<K, PropertyKey>, K extends keyof T>(
     array: readonly T[],
     key: K
