@@ -13,16 +13,21 @@ import {
 // Helper function to convert role enum to readable string
 const getRoleLabel = (role: TacticusGuildRole): string => {
     switch (role) {
-        case TacticusGuildRole.LEADER:
+        case TacticusGuildRole.LEADER: {
             return 'Leader';
-        case TacticusGuildRole.CO_LEADER:
+        }
+        case TacticusGuildRole.CO_LEADER: {
             return 'Co-Leader';
-        case TacticusGuildRole.OFFICER:
+        }
+        case TacticusGuildRole.OFFICER: {
             return 'Officer';
-        case TacticusGuildRole.MEMBER:
+        }
+        case TacticusGuildRole.MEMBER: {
             return 'Member';
-        default:
+        }
+        default: {
             return 'Unknown';
+        }
     }
 };
 
@@ -47,22 +52,26 @@ const RoleRenderer: React.FC<{ value: TacticusGuildRole }> = ({ value }) => {
     let textColor = 'text-gray-800';
 
     switch (value) {
-        case TacticusGuildRole.LEADER:
+        case TacticusGuildRole.LEADER: {
             bgColor = 'bg-red-100';
             textColor = 'text-red-800';
             break;
-        case TacticusGuildRole.CO_LEADER:
+        }
+        case TacticusGuildRole.CO_LEADER: {
             bgColor = 'bg-orange-100';
             textColor = 'text-orange-800';
             break;
-        case TacticusGuildRole.OFFICER:
+        }
+        case TacticusGuildRole.OFFICER: {
             bgColor = 'bg-blue-100';
             textColor = 'text-blue-800';
             break;
-        case TacticusGuildRole.MEMBER:
+        }
+        case TacticusGuildRole.MEMBER: {
             bgColor = 'bg-green-100';
             textColor = 'text-green-800';
             break;
+        }
     }
 
     return (
@@ -142,9 +151,9 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
             [TacticusGuildRole.MEMBER]: 0,
         };
 
-        guildData.members.forEach(member => {
+        for (const member of guildData.members) {
             roleCount[member.role]++;
-        });
+        }
 
         // Calculate active members (active in last 7 days)
         const activeMembers = guildData.members.filter(member => {

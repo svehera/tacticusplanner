@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import 'react-medium-image-zoom/dist/styles.css';
 import './index.css';
 
-import reportWebVitals from './monitoring/reportWebVitals';
+import reportWebVitals from './monitoring/report-web-vitals';
 import { FirstPartyProviders } from './providers/first-party.providers';
 import { ThirdPartyProviders } from './providers/third-party.providers';
 

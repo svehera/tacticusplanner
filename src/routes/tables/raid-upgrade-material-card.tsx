@@ -21,6 +21,11 @@ interface Props {
     locations: ICampaignBattleComposed[];
 }
 
+const mapUpgradeRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): Rarity => {
+    if (typeof rarity === 'number') return rarity;
+    throw new Error(`Unsupported upgrade rarity: ${rarity}`);
+};
+
 export const RaidUpgradeMaterialCard: React.FC<Props> = ({
     upgradeMaterialSnowprintId,
     currentQuantity,
@@ -28,24 +33,26 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
     relatedCharacterSnowprintIds,
     locations,
 }) => {
-    const mapUpgradeRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): Rarity => {
-        if (typeof rarity === 'number') return rarity;
-        throw new Error(`Unsupported upgrade rarity: ${rarity}`);
-    };
     const rewardIcon = () => {
         if (UpgradesService.isShard(upgradeMaterialSnowprintId)) {
-            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(7));
+            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.slice(7));
+            const mow = mows2Data.mows.find(m => m.snowprintId === upgradeMaterialSnowprintId.slice(7));
             if (char) {
                 return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} mythic={false} />;
+            } else if (mow) {
+                return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={mow.roundIcon} mythic={false} />;
             }
-            return upgradeMaterialSnowprintId.substring(7);
+            return upgradeMaterialSnowprintId.slice(7);
         }
         if (UpgradesService.isMythicShard(upgradeMaterialSnowprintId)) {
-            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.substring(13));
+            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.slice(13));
+            const mow = mows2Data.mows.find(m => m.snowprintId === upgradeMaterialSnowprintId.slice(13));
             if (char) {
                 return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} mythic={true} />;
+            } else if (mow) {
+                return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={mow.roundIcon} mythic={true} />;
             }
-            return upgradeMaterialSnowprintId.substring(13);
+            return upgradeMaterialSnowprintId.slice(13);
         }
         const upgrade = FsdUpgradesService.getUpgrade(upgradeMaterialSnowprintId);
         if (!upgrade) {
@@ -117,7 +124,7 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
                         return (
                             <>
                                 <h4 className="mb-1 w-full text-xs font-semibold text-gray-400 uppercase">
-                                    {suggested.length > 0 ? 'Suggested Raids' : 'Blocked Raids'}
+                                    {suggested.length > 0 ? 'Suggested Locations' : 'Blocked Locations'}
                                 </h4>
                                 {displayLocations.map(loc => (
                                     <CampaignLocation

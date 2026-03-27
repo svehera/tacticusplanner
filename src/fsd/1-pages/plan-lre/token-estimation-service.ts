@@ -83,26 +83,26 @@ export const milestonesAndPoints: readonly MilestoneAndPoints[] = [
     { points: 6000, stars: 3, round: 3, packsPerRound: 1 },
     { points: 6500, stars: 3, round: 2, packsPerRound: 2 },
     { points: 9000, stars: 3, round: 2, packsPerRound: 1 },
-    { points: 10000, stars: 3, round: 1, packsPerRound: 2 },
-    { points: 11000, stars: 3, round: 1, packsPerRound: 1 },
-    { points: 11500, stars: 3, round: 3, packsPerRound: 0 },
-    { points: 12000, stars: 3, round: 2, packsPerRound: 0 },
-    { points: 12500, stars: 3, round: 1, packsPerRound: 0 },
-    { points: 14250, stars: 4, round: 3, packsPerRound: 0 },
-    { points: 14500, stars: 4, round: 2, packsPerRound: 0 },
-    { points: 14750, stars: 4, round: 1, packsPerRound: 0 },
-    { points: 16250, stars: 5, round: 3, packsPerRound: 0 },
-    { points: 16500, stars: 5, round: 1, packsPerRound: 0 },
-    { points: 16750, stars: 6, round: 3, packsPerRound: 1 },
-    { points: 18000, stars: 6, round: 3, packsPerRound: 0 },
-    { points: 18250, stars: 6, round: 1, packsPerRound: 0 },
-    { points: 22000, stars: 7, round: 3, packsPerRound: 2 },
-    { points: 22500, stars: 7, round: 3, packsPerRound: 1 },
-    { points: 23500, stars: 7, round: 1, packsPerRound: 0 },
-    { points: 25500, stars: 8, round: 3, packsPerRound: 2 },
-    { points: 25750, stars: 8, round: 3, packsPerRound: 1 },
-    { points: 26750, stars: 8, round: 2, packsPerRound: 0 },
-    { points: 27000, stars: 8, round: 1, packsPerRound: 0 },
+    { points: 10_000, stars: 3, round: 1, packsPerRound: 2 },
+    { points: 11_000, stars: 3, round: 1, packsPerRound: 1 },
+    { points: 11_500, stars: 3, round: 3, packsPerRound: 0 },
+    { points: 12_000, stars: 3, round: 2, packsPerRound: 0 },
+    { points: 12_500, stars: 3, round: 1, packsPerRound: 0 },
+    { points: 14_250, stars: 4, round: 3, packsPerRound: 0 },
+    { points: 14_500, stars: 4, round: 2, packsPerRound: 0 },
+    { points: 14_750, stars: 4, round: 1, packsPerRound: 0 },
+    { points: 16_250, stars: 5, round: 3, packsPerRound: 0 },
+    { points: 16_500, stars: 5, round: 1, packsPerRound: 0 },
+    { points: 16_750, stars: 6, round: 3, packsPerRound: 1 },
+    { points: 18_000, stars: 6, round: 3, packsPerRound: 0 },
+    { points: 18_250, stars: 6, round: 1, packsPerRound: 0 },
+    { points: 22_000, stars: 7, round: 3, packsPerRound: 2 },
+    { points: 22_500, stars: 7, round: 3, packsPerRound: 1 },
+    { points: 23_500, stars: 7, round: 1, packsPerRound: 0 },
+    { points: 25_500, stars: 8, round: 3, packsPerRound: 2 },
+    { points: 25_750, stars: 8, round: 3, packsPerRound: 1 },
+    { points: 26_750, stars: 8, round: 2, packsPerRound: 0 },
+    { points: 27_000, stars: 8, round: 1, packsPerRound: 0 },
 ];
 
 export interface PointMilestone {
@@ -132,67 +132,67 @@ export const pointMilestones: readonly PointMilestone[] = [
     { points: 8500, currencyPayout: 140 },
     { points: 9000, currencyPayout: 160 },
     { points: 9500, currencyPayout: 180 },
-    { points: 10000, currencyPayout: 200 },
-    { points: 10500, currencyPayout: 220 },
-    { points: 11000, currencyPayout: 240 },
-    { points: 11500, currencyPayout: 260 },
-    { points: 12000, currencyPayout: 280 },
-    { points: 12500, currencyPayout: 300 },
-    { points: 13000, currencyPayout: 310 },
-    { points: 13500, currencyPayout: 320 },
-    { points: 14000, currencyPayout: 330 },
-    { points: 14250, currencyPayout: 340 },
-    { points: 14500, currencyPayout: 350 },
-    { points: 14750, currencyPayout: 355 },
-    { points: 15000, currencyPayout: 360 },
-    { points: 15250, currencyPayout: 365 },
-    { points: 15500, currencyPayout: 370 },
-    { points: 15750, currencyPayout: 380 },
-    { points: 16000, currencyPayout: 390 },
-    { points: 16250, currencyPayout: 400 },
-    { points: 16500, currencyPayout: 410 },
-    { points: 16750, currencyPayout: 420 },
-    { points: 17000, currencyPayout: 430 },
-    { points: 17250, currencyPayout: 440 },
-    { points: 17500, currencyPayout: 450 },
-    { points: 17750, currencyPayout: 460 },
-    { points: 18000, currencyPayout: 470 },
-    { points: 18250, currencyPayout: 480 },
-    { points: 18500, currencyPayout: 490 },
-    { points: 18750, currencyPayout: 500 },
-    { points: 19000, currencyPayout: 510 },
-    { points: 19250, currencyPayout: 520 },
-    { points: 19500, currencyPayout: 530 },
-    { points: 19750, currencyPayout: 540 },
-    { points: 20000, currencyPayout: 550 },
-    { points: 20250, currencyPayout: 560 },
-    { points: 20500, currencyPayout: 570 },
-    { points: 20750, currencyPayout: 580 },
-    { points: 21000, currencyPayout: 590 },
-    { points: 21250, currencyPayout: 600 },
-    { points: 21500, currencyPayout: 605 },
-    { points: 21750, currencyPayout: 610 },
-    { points: 22000, currencyPayout: 615 },
-    { points: 22250, currencyPayout: 620 },
-    { points: 22500, currencyPayout: 625 },
-    { points: 22750, currencyPayout: 630 },
-    { points: 23000, currencyPayout: 635 },
-    { points: 23250, currencyPayout: 640 },
-    { points: 23500, currencyPayout: 645 },
-    { points: 23750, currencyPayout: 650 },
-    { points: 24000, currencyPayout: 655 },
-    { points: 24250, currencyPayout: 660 },
-    { points: 24500, currencyPayout: 665 },
-    { points: 24750, currencyPayout: 670 },
-    { points: 25000, currencyPayout: 675 },
-    { points: 25250, currencyPayout: 680 },
-    { points: 25500, currencyPayout: 685 },
-    { points: 25750, currencyPayout: 690 },
-    { points: 26000, currencyPayout: 695 },
-    { points: 26250, currencyPayout: 700 },
-    { points: 26500, currencyPayout: 705 },
-    { points: 26750, currencyPayout: 710 },
-    { points: 27000, currencyPayout: 715 },
+    { points: 10_000, currencyPayout: 200 },
+    { points: 10_500, currencyPayout: 220 },
+    { points: 11_000, currencyPayout: 240 },
+    { points: 11_500, currencyPayout: 260 },
+    { points: 12_000, currencyPayout: 280 },
+    { points: 12_500, currencyPayout: 300 },
+    { points: 13_000, currencyPayout: 310 },
+    { points: 13_500, currencyPayout: 320 },
+    { points: 14_000, currencyPayout: 330 },
+    { points: 14_250, currencyPayout: 340 },
+    { points: 14_500, currencyPayout: 350 },
+    { points: 14_750, currencyPayout: 355 },
+    { points: 15_000, currencyPayout: 360 },
+    { points: 15_250, currencyPayout: 365 },
+    { points: 15_500, currencyPayout: 370 },
+    { points: 15_750, currencyPayout: 380 },
+    { points: 16_000, currencyPayout: 390 },
+    { points: 16_250, currencyPayout: 400 },
+    { points: 16_500, currencyPayout: 410 },
+    { points: 16_750, currencyPayout: 420 },
+    { points: 17_000, currencyPayout: 430 },
+    { points: 17_250, currencyPayout: 440 },
+    { points: 17_500, currencyPayout: 450 },
+    { points: 17_750, currencyPayout: 460 },
+    { points: 18_000, currencyPayout: 470 },
+    { points: 18_250, currencyPayout: 480 },
+    { points: 18_500, currencyPayout: 490 },
+    { points: 18_750, currencyPayout: 500 },
+    { points: 19_000, currencyPayout: 510 },
+    { points: 19_250, currencyPayout: 520 },
+    { points: 19_500, currencyPayout: 530 },
+    { points: 19_750, currencyPayout: 540 },
+    { points: 20_000, currencyPayout: 550 },
+    { points: 20_250, currencyPayout: 560 },
+    { points: 20_500, currencyPayout: 570 },
+    { points: 20_750, currencyPayout: 580 },
+    { points: 21_000, currencyPayout: 590 },
+    { points: 21_250, currencyPayout: 600 },
+    { points: 21_500, currencyPayout: 605 },
+    { points: 21_750, currencyPayout: 610 },
+    { points: 22_000, currencyPayout: 615 },
+    { points: 22_250, currencyPayout: 620 },
+    { points: 22_500, currencyPayout: 625 },
+    { points: 22_750, currencyPayout: 630 },
+    { points: 23_000, currencyPayout: 635 },
+    { points: 23_250, currencyPayout: 640 },
+    { points: 23_500, currencyPayout: 645 },
+    { points: 23_750, currencyPayout: 650 },
+    { points: 24_000, currencyPayout: 655 },
+    { points: 24_250, currencyPayout: 660 },
+    { points: 24_500, currencyPayout: 665 },
+    { points: 24_750, currencyPayout: 670 },
+    { points: 25_000, currencyPayout: 675 },
+    { points: 25_250, currencyPayout: 680 },
+    { points: 25_500, currencyPayout: 685 },
+    { points: 25_750, currencyPayout: 690 },
+    { points: 26_000, currencyPayout: 695 },
+    { points: 26_250, currencyPayout: 700 },
+    { points: 26_500, currencyPayout: 705 },
+    { points: 26_750, currencyPayout: 710 },
+    { points: 27_000, currencyPayout: 715 },
 ];
 interface ShardMilestone {
     shards: PositiveInteger<number>;
@@ -234,26 +234,26 @@ export const chestMilestones: readonly ShardMilestone[] = [
     { shards: 750, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 8850 },
     { shards: 775, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 9250 },
     { shards: 800, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 9650 },
-    { shards: 825, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10050 },
-    { shards: 850, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10450 },
-    { shards: 875, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10850 },
-    { shards: 900, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 11250 },
-    { shards: 925, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 12050 },
-    { shards: 950, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 12950 },
-    { shards: 975, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 13950 },
-    { shards: 1000, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 15050 },
-    { shards: 1025, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 16250 },
-    { shards: 1050, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 17550 },
-    { shards: 1075, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 18950 },
-    { shards: 1100, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 20450 },
-    { shards: 1125, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 21950 },
-    { shards: 1150, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 23450 },
-    { shards: 1175, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 24950 },
-    { shards: 1200, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 26450 },
-    { shards: 1225, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 27950 },
-    { shards: 1250, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 29450 },
-    { shards: 1275, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 30950 },
-    { shards: 1300, rarity: Rarity.Mythic, stars: RarityStars.TwoBlueStars, totalNeededCurrency: 32450 },
+    { shards: 825, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10_050 },
+    { shards: 850, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10_450 },
+    { shards: 875, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars, totalNeededCurrency: 10_850 },
+    { shards: 900, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 11_250 },
+    { shards: 925, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 12_050 },
+    { shards: 950, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 12_950 },
+    { shards: 975, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 13_950 },
+    { shards: 1000, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 15_050 },
+    { shards: 1025, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 16_250 },
+    { shards: 1050, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 17_550 },
+    { shards: 1075, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 18_950 },
+    { shards: 1100, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 20_450 },
+    { shards: 1125, rarity: Rarity.Legendary, stars: RarityStars.OneBlueStar, totalNeededCurrency: 21_950 },
+    { shards: 1150, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 23_450 },
+    { shards: 1175, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 24_950 },
+    { shards: 1200, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 26_450 },
+    { shards: 1225, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 27_950 },
+    { shards: 1250, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 29_450 },
+    { shards: 1275, rarity: Rarity.Mythic, stars: RarityStars.OneBlueStar, totalNeededCurrency: 30_950 },
+    { shards: 1300, rarity: Rarity.Mythic, stars: RarityStars.TwoBlueStars, totalNeededCurrency: 32_450 },
 ];
 
 export interface StarMilestone {
@@ -353,9 +353,9 @@ export class TokenEstimationService {
      * points. If no milestone has been achieved, returns -1.
      */
     public static getFurthestCurrencyMilestoneAchieved(currentPoints: number): number {
-        for (let i = milestonesAndPoints.length - 1; i >= 0; --i) {
-            if (currentPoints >= milestonesAndPoints[i].points) {
-                return i;
+        for (let index = milestonesAndPoints.length - 1; index >= 0; --index) {
+            if (currentPoints >= milestonesAndPoints[index].points) {
+                return index;
             }
         }
         return -1;
@@ -376,12 +376,12 @@ export class TokenEstimationService {
             this.computeHighestAvailableBattle(track)
         );
         const nextBestTokens: TokenUse[] = [];
-        for (let i = 0; i < tracksProgress.length; i++) {
+        for (let index = 0; index < tracksProgress.length; index++) {
             const token = this.computeNextBestTokenInTrack(
-                tracksProgress[i],
-                teams.filter(x => x.section === tracksProgress[i].trackId),
-                lowestAvailableBattles[i],
-                highestAvailableBattles[i]
+                tracksProgress[index],
+                teams.filter(x => x.section === tracksProgress[index].trackId),
+                lowestAvailableBattles[index],
+                highestAvailableBattles[index]
             );
             if (token !== undefined) nextBestTokens.push(token);
         }
@@ -413,13 +413,15 @@ export class TokenEstimationService {
     public static computeAllTokenUsage(tracksProgress: ILreTrackProgress[], teams: ILreTeam[]): TokenUse[] {
         const tokens: TokenUse[] = [];
         const tracks: ILreTrackProgress[] = cloneDeep(tracksProgress);
-        tracks.forEach(track => {
-            track.battles.forEach(battle => {
+        for (const track of tracks) {
+            for (const battle of track.battles) {
                 battle.completed =
-                    battle.requirementsProgress.reduce((sum, req) => (sum += req.completed ? 1 : 0), 0) ===
-                    battle.requirementsProgress.length;
-            });
-        });
+                    battle.requirementsProgress.reduce(
+                        (sum, requirement) => (sum += requirement.completed ? 1 : 0),
+                        0
+                    ) === battle.requirementsProgress.length;
+            }
+        }
         const resolvedTeams = teams.map(team => ({
             ...team,
             charSnowprintIds: (team.charSnowprintIds ?? team.charactersIds ?? []).map(char =>
@@ -451,7 +453,7 @@ export class TokenEstimationService {
             return;
         }
         for (const restriction of token.restrictionsCleared) {
-            const requirement = battle.requirementsProgress.find(req => req.id === restriction.id);
+            const requirement = battle.requirementsProgress.find(requirement => requirement.id === restriction.id);
             if (requirement === undefined) {
                 continue;
             }
@@ -463,7 +465,7 @@ export class TokenEstimationService {
     public static computeCurrentPointsInTrack(track: ILreTrackProgress): number {
         return track.battles.reduce((sum, battle) => {
             const battlePoints = battle.requirementsProgress
-                .map(req => LreRequirementStatusService.getRequirementPoints(req))
+                .map(requirement => LreRequirementStatusService.getRequirementPoints(requirement))
                 .reduce((innerSum, points) => {
                     return innerSum + points;
                 }, 0);
@@ -477,8 +479,8 @@ export class TokenEstimationService {
      * track is battle 0.
      */
     static computeLowestAvailableBattle(track: ILreTrackProgress): number {
-        for (let i = 0; i < track.battles.length; ++i) {
-            if (!track.battles[track.battles.length - i - 1].completed) return i;
+        for (let index = 0; index < track.battles.length; ++index) {
+            if (!track.battles[track.battles.length - index - 1].completed) return index;
         }
         return -1;
     }
@@ -494,21 +496,21 @@ export class TokenEstimationService {
         if (track.battles.every(battle => battle.completed)) return -1;
 
         // Find the first battle where we don't have the kill points requirement completed.
-        for (let i = 0; i < track.battles.length; ++i) {
-            const req = track.battles[track.battles.length - 1 - i].requirementsProgress.find(
-                req => req.id === killPointsId
+        for (let index = 0; index < track.battles.length; ++index) {
+            const requirement = track.battles[track.battles.length - 1 - index].requirementsProgress.find(
+                r => r.id === killPointsId
             );
-            if (req === undefined) {
+            if (requirement === undefined) {
                 console.error("couldn't find a kill-points requirement");
                 return -1;
             }
-            if (!req.completed) return i;
+            if (!requirement.completed) return index;
         }
 
         // We can play every battle, but we haven't completed every battle.
         // Work backwards to find the first battle we have not completed.
-        for (let i = track.battles.length - 1; i >= 0; --i) {
-            if (!track.battles[track.battles.length - 1 - i].completed) return i;
+        for (let index = track.battles.length - 1; index >= 0; --index) {
+            if (!track.battles[track.battles.length - 1 - index].completed) return index;
         }
         return -1;
     }
@@ -530,7 +532,7 @@ export class TokenEstimationService {
         for (let battleNumber = lowestBattle; battleNumber <= highestBattle; ++battleNumber) {
             const battle = track.battles[track.battles.length - 1 - battleNumber];
             if (battle.completed) continue;
-            teams.forEach(team => {
+            for (const team of teams) {
                 const restrictionsCleared: ILreRequirements[] = this.computeIncrementalRestrictionsCleared(
                     battle,
                     team
@@ -545,7 +547,7 @@ export class TokenEstimationService {
                     nextToken.battleNumber = battleNumber;
                     nextToken.restrictionsCleared = restrictionsCleared;
                 }
-            });
+            }
         }
         return nextToken;
     }
@@ -610,9 +612,9 @@ export class TokenEstimationService {
         let minimum: number = 6;
         const foundRestrictions: string[] = [];
         const currentTeams: string[] = [];
-        for (let i = 0; i < teams.length; i++) {
+        for (let index = 0; index < teams.length; index++) {
             const newMin = this.computeMinimumTokensForBattle(
-                teams.slice(i),
+                teams.slice(index),
                 0,
                 restrictions,
                 foundRestrictions,
@@ -674,10 +676,10 @@ export class TokenEstimationService {
         if (foundRestrictions.length === restrictions.length) {
             return currentTokens;
         }
-        for (let i = 1; i < teams.length; i++) {
+        for (let index = 1; index < teams.length; index++) {
             // See if we can use the next team to satisfy the remaining restrictions.
             const newMin = this.computeMinimumTokensForBattle(
-                teams.slice(i),
+                teams.slice(index),
                 currentTokens,
                 restrictions,
                 foundRestrictions,
@@ -712,8 +714,8 @@ export class TokenEstimationService {
      * Returns the next point milestone to be achieved that will award currency.
      */
     private static getNextPointMilestoneIndex(currentPoints: number): number {
-        for (let i = 0; i < pointMilestones.length; ++i) {
-            if (currentPoints < pointMilestones[i].points) return i;
+        for (let index = 0; index < pointMilestones.length; ++index) {
+            if (currentPoints < pointMilestones[index].points) return index;
         }
         return pointMilestones.length;
     }
@@ -730,9 +732,12 @@ export class TokenEstimationService {
      */
     private static getCurrentStarIndex(currentRarity: Rarity, currentStars: RarityStars): number {
         if (currentStars === RarityStars.None) return -1;
-        for (let i = 0; i < ascensionMilestones.length; ++i) {
-            if (currentRarity === ascensionMilestones[i].rarity && currentStars <= ascensionMilestones[i].stars) {
-                return i;
+        for (let index = 0; index < ascensionMilestones.length; ++index) {
+            if (
+                currentRarity === ascensionMilestones[index].rarity &&
+                currentStars <= ascensionMilestones[index].stars
+            ) {
+                return index;
             }
         }
         return ascensionMilestones.length;
@@ -771,9 +776,9 @@ export class TokenEstimationService {
             return progress.syncedProgress.currentShards;
         }
         let shards = LeProgressService.computeProgress(progress, false).currentChests * this.getShardsPerChest();
-        for (let i = 0; i < ascensionMilestones.length; ++i) {
-            if (ascensionMilestones[i].totalShards > shards) break;
-            shards -= ascensionMilestones[i].incrementalShards;
+        for (let index = 0; index < ascensionMilestones.length; ++index) {
+            if (ascensionMilestones[index].totalShards > shards) break;
+            shards -= ascensionMilestones[index].incrementalShards;
         }
 
         return shards;
@@ -796,7 +801,7 @@ export class TokenEstimationService {
                 currentRarity: Rarity.Legendary,
                 currentStars: RarityStars.None,
                 currentShards: 0,
-                addlPointsForNextMilestone: 13000,
+                addlPointsForNextMilestone: 13_000,
                 addlCurrencyForNextMilestone: 3350,
                 addlShardsForNextMilestone: 400,
                 currentClaimedChestIndex: -1,
@@ -805,16 +810,11 @@ export class TokenEstimationService {
         }
         const totalPoints = progress.syncedProgress.currentPoints;
         const currentCurrency = progress.syncedProgress.currentCurrency;
-        let totalCurrency = 0;
         let currentShards = progress.syncedProgress.currentShards;
         const lastClaimedChestIndex = progress.syncedProgress.currentClaimedChestIndex;
 
         // Determine the total currency, since forced progress only gives us the current incremental currency.
-        if (lastClaimedChestIndex >= 0 && lastClaimedChestIndex < chestMilestones.length) {
-            totalCurrency = chestMilestones[lastClaimedChestIndex].totalNeededCurrency + currentCurrency;
-        } else {
-            totalCurrency = currentCurrency;
-        }
+        const totalCurrency = currentCurrency + (chestMilestones[lastClaimedChestIndex]?.totalNeededCurrency ?? 0);
 
         // Determine if we hit any new ascension milestones.
         let starIndex = 0;
@@ -846,7 +846,7 @@ export class TokenEstimationService {
             const neededChestIndex = lastClaimedChestIndex + addlChests;
             if (neededChestIndex >= chestMilestones.length) {
                 addlCurrencyForNextMilestone = Infinity;
-                addlPointsForNextMilestone = 27000 - totalPoints;
+                addlPointsForNextMilestone = 27_000 - totalPoints;
             } else {
                 addlCurrencyForNextMilestone = chestMilestones[neededChestIndex].totalNeededCurrency - totalCurrency;
                 addlPointsForNextMilestone =
@@ -879,22 +879,24 @@ export class TokenEstimationService {
 
     private static getNextGoal(currentRarity: Rarity, currentStars: RarityStars): string {
         switch (currentStars) {
-            case RarityStars.None:
+            case RarityStars.None: {
                 return 'Unlock';
-            case RarityStars.RedThreeStars:
+            }
+            case RarityStars.RedThreeStars: {
                 return 'Red 4★';
-            case RarityStars.RedFourStars:
+            }
+            case RarityStars.RedFourStars: {
                 return 'Red 5★';
-            case RarityStars.RedFiveStars:
+            }
+            case RarityStars.RedFiveStars: {
                 return 'Blue 1★';
-            case RarityStars.OneBlueStar:
-                if (currentRarity === Rarity.Legendary) {
-                    return 'Mythic 1★';
-                } else {
-                    return 'Blue 2★';
-                }
-            case RarityStars.TwoBlueStars:
+            }
+            case RarityStars.OneBlueStar: {
+                return currentRarity === Rarity.Legendary ? 'Mythic 1★' : 'Blue 2★';
+            }
+            case RarityStars.TwoBlueStars: {
                 return 'Full Clear';
+            }
         }
         return '(unknown)';
     }
@@ -935,10 +937,10 @@ export class TokenEstimationService {
         let lastClaimedChestIndex = currentProgress.currentClaimedChestIndex;
         let nextPointMilestoneIndex = this.getNextPointMilestoneIndex(currentProgress.totalPoints);
         let nextStarIndex = this.getCurrentStarIndex(currentProgress.currentRarity, currentProgress.currentStars) + 1;
-        const ret: TokenDisplay[] = [];
+        const returnValue: TokenDisplay[] = [];
 
-        for (let i = 0; i < tokens.length; ++i) {
-            const token = tokens[i];
+        for (let index = 0; index < tokens.length; ++index) {
+            const token = tokens[index];
             currentPoints += token.incrementalPoints;
             let achievedPointsMilestone = false;
             let achievedStarMilestone = false;
@@ -985,7 +987,7 @@ export class TokenEstimationService {
                 nextStarIndex < ascensionMilestones.length
                     ? ascensionMilestones[nextStarIndex].incrementalShards - currentShards
                     : 0;
-            ret.push({
+            returnValue.push({
                 team: chars,
                 restricts: token.restrictionsCleared,
                 battleNumber: token.battleNumber,
@@ -999,6 +1001,6 @@ export class TokenEstimationService {
                 achievedStarMilestone: achievedStarMilestone,
             });
         }
-        return ret;
+        return returnValue;
     }
 }

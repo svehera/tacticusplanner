@@ -48,13 +48,13 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     );
 
     const [selection, setSelection] = useState<CharactersSelection>(
-        selectedChars.length ? CharactersSelection.Selected : CharactersSelection.All
+        selectedChars.length > 0 ? CharactersSelection.Selected : CharactersSelection.All
     );
     const [filter, setFilter] = useState('');
 
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
-    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
+    const columnDefinitions: Array<ColDef | ColGroupDef> = useMemo(() => {
         return [
             {
                 headerName: 'Character',
@@ -213,7 +213,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
         );
 
         return legendaryEvent.allowedUnits
-            .filter(x => selectedChars.includes(x.snowprintId!))
+            .filter(x => selectedChars.includes(x.snowprintId))
             .sort((a, b) => {
                 const aTotal =
                     (alpha[a.name]?.points ?? 0) + (beta[a.name]?.points ?? 0) + (gamma[a.name]?.points ?? 0);
@@ -248,12 +248,12 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         x => CharactersService.resolveCharacter(x)?.snowprintId ?? x
                     );
                 }
-                chars.forEach(character => {
+                for (const character of chars) {
                     if (!result[character]) {
                         result[character] = [];
                     }
                     result[character] = uniq([...result[character], ...team.restrictionsIds]);
-                });
+                }
             }
             return result;
         }
@@ -385,7 +385,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                     size="small"
                     variant={'contained'}
                     onClick={() => {
-                        const gridApi = gridRef.current?.api;
+                        const gridApi = gridReference.current?.api;
                         if (gridApi) {
                             const csv = gridApi.getDataAsCsv({
                                 columnKeys: ['name', 'rarity', 'rank', 'totalPoints'],
@@ -462,12 +462,12 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 <AgGridReact
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
-                    ref={gridRef}
+                    ref={gridReference}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
-                    columnDefs={columnsDef}
-                    onSortChanged={() => gridRef.current?.api?.refreshCells()}
-                    onFilterChanged={() => gridRef.current?.api?.refreshCells()}></AgGridReact>
+                    columnDefs={columnDefinitions}
+                    onSortChanged={() => gridReference.current?.api?.refreshCells()}
+                    onFilterChanged={() => gridReference.current?.api?.refreshCells()}></AgGridReact>
             </div>
         </div>
     );

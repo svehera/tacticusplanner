@@ -23,25 +23,31 @@ export const UpgradeImage = ({
     const height = size ?? 50;
     const imagePath = iconPath || material.toLowerCase() + '.png';
     const image = getImageUrl(imagePath);
-    const frameImageDir = 'snowprint_assets/frames';
-    const bgImgUrl = getImageUrl(`${frameImageDir}/ui_underlay_upgrades.png`);
+    const frameImageDirectory = 'snowprint_assets/frames';
+    const bgImgUrl = getImageUrl(`${frameImageDirectory}/ui_underlay_upgrades.png`);
     const upgradeHeightRatio = 0.78;
 
     function getFrameUrl(rarity?: RarityString) {
         switch (rarity) {
-            case RarityString.Mythic:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_mythic.png`);
-            case RarityString.Legendary:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_legendary.png`);
-            case RarityString.Epic:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_epic.png`);
-            case RarityString.Rare:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_rare.png`);
-            case RarityString.Uncommon:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_uncommon.png`);
+            case RarityString.Mythic: {
+                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_mythic.png`);
+            }
+            case RarityString.Legendary: {
+                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_legendary.png`);
+            }
+            case RarityString.Epic: {
+                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_epic.png`);
+            }
+            case RarityString.Rare: {
+                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_rare.png`);
+            }
+            case RarityString.Uncommon: {
+                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_uncommon.png`);
+            }
             case RarityString.Common:
-            default:
-                return getImageUrl(`${frameImageDir}/ui_frame_upgrades_common.png`);
+            default: {
+                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_common.png`);
+            }
         }
     }
     const frameImgUrl = getFrameUrl(rarity);
@@ -79,7 +85,9 @@ export const UpgradeImage = ({
     return (
         <AccessibleTooltip title={tooltipText}>
             <div style={{ width, height }} className={'upgrade'}>
-                {!imgError ? (
+                {imgError ? (
+                    <div style={imageMissingStyles}>{material}</div>
+                ) : (
                     <div className="relative mx-auto my-0 block" style={{ width, height }}>
                         <img style={centeredImageStackStyles} src={bgImgUrl} alt={`${rarity} upgrade`} />
                         <img
@@ -97,8 +105,6 @@ export const UpgradeImage = ({
                         />
                         <img loading={'lazy'} style={centeredImageStackStyles} src={frameImgUrl} />
                     </div>
-                ) : (
-                    <div style={imageMissingStyles}>{material}</div>
                 )}
             </div>
         </AccessibleTooltip>

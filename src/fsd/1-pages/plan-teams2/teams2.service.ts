@@ -74,7 +74,7 @@ export class Teams2Service {
 
     public static convertCharacter(charData: ICharacter2): ISnapshotCharacter {
         return {
-            id: charData.snowprintId!,
+            id: charData.snowprintId,
             activeAbilityLevel: charData.activeAbilityLevel ?? 0,
             passiveAbilityLevel: charData.passiveAbilityLevel ?? 0,
             rarity: charData.rarity,
@@ -94,7 +94,7 @@ export class Teams2Service {
 
     public static convertMow(mowData: IMow2): ISnapshotMachineOfWar {
         return {
-            id: mowData.snowprintId!,
+            id: mowData.snowprintId,
             primaryAbilityLevel: mowData.primaryAbilityLevel ?? 0,
             secondaryAbilityLevel: mowData.secondaryAbilityLevel ?? 0,
             rarity: mowData.rarity,
@@ -127,7 +127,7 @@ export class Teams2Service {
             if (
                 !m.name.toLowerCase().includes(lowerSearch) &&
                 !m.id.toLowerCase().includes(lowerSearch) &&
-                !m.snowprintId!.toLowerCase().includes(lowerSearch)
+                !m.snowprintId.toLowerCase().includes(lowerSearch)
             ) {
                 return false;
             }

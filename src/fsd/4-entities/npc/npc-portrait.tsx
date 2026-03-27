@@ -72,10 +72,10 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
         let left = frameWidth / 2 - fifthStarSize / 2 - starSize * 2 + overlap * 2;
         const sizeDiff = fifthStarSize - starSize;
         const starImages = [];
-        for (let i = 0; i < 5; i++) {
-            const size = i == 2 ? fifthStarSize : starSize;
-            const topDiff = i == 2 ? -sizeDiff : 0;
-            starImages.push(getStarImage(star, left, top + topDiff, size, size, 5 - Math.abs(2 - i)));
+        for (let index = 0; index < 5; index++) {
+            const size = index == 2 ? fifthStarSize : starSize;
+            const topDiff = index == 2 ? -sizeDiff : 0;
+            starImages.push(getStarImage(star, left, top + topDiff, size, size, 5 - Math.abs(2 - index)));
             left += size - overlap;
         }
         return <>{starImages}</>;
@@ -84,30 +84,30 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
     const getStars = () => {
         if (stars === RarityStars.None) return <></>;
         if (stars === RarityStars.MythicWings) return getMythicWings();
-        let numStars = stars as number;
+        let numberStars = stars as number;
         let star = goldStar;
         const overlap = 15;
         const starTop = -25;
-        if (numStars > 5) {
-            numStars -= 5;
+        if (numberStars > 5) {
+            numberStars -= 5;
             star = redStar;
         }
-        if (numStars > 5) {
-            numStars -= 5;
+        if (numberStars > 5) {
+            numberStars -= 5;
             star = blueStar;
         }
-        if (numStars == 5) {
+        if (numberStars == 5) {
             return get5Stars(star, starTop, overlap);
         }
-        if (numStars > 5) {
+        if (numberStars > 5) {
             star = blueStar;
-            numStars -= 5;
+            numberStars -= 5;
         }
-        const totalWidth = starSize * numStars - overlap * (numStars - 1);
+        const totalWidth = starSize * numberStars - overlap * (numberStars - 1);
         let left = frameWidth / 2 - totalWidth / 2;
-        let z = 3 + numStars;
+        let z = 3 + numberStars;
         const starImages = [];
-        for (let i = 0; i < numStars; i++) {
+        for (let index = 0; index < numberStars; index++) {
             starImages.push(getStarImage(star, left, starTop, starSize, starSize, z));
             left += starSize - overlap;
             --z;

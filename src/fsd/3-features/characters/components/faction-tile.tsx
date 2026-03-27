@@ -90,15 +90,15 @@ export const FactionsTile = ({
                     const isCharacter = unit.unitType === UnitType.character;
                     return (
                         <div
-                            key={unit.snowprintId!}
+                            key={unit.snowprintId}
                             onClick={() => onCharacterClick?.(unit)}
                             className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
                             title={`Select ${unit.name || 'Unit'}`}>
                             <RosterSnapshotCharacter
                                 char={isCharacter ? RosterSnapshotsService.snapshotCharacter(unit) : undefined}
                                 charData={isCharacter ? unit : undefined}
-                                mow={!isCharacter ? RosterSnapshotsService.snapshotMachineOfWar(unit) : undefined}
-                                mowData={!isCharacter ? unit : undefined}
+                                mow={isCharacter ? undefined : RosterSnapshotsService.snapshotMachineOfWar(unit)}
+                                mowData={isCharacter ? undefined : unit}
                                 showShards={
                                     viewContext.showCharacterLevel
                                         ? RosterSnapshotShowVariableSettings.Always

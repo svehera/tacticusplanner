@@ -153,24 +153,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
-                    if (!savings.canFarmPrior) {
-                        let tooltipText: string = '';
-                        const battle = CampaignsProgressionService.getBattleFromBaseCampaignWithSameReward(
-                            savings.battle,
-                            progression.materialFarmData.get(CampaignsProgressionService.getReward(savings.battle))
-                        );
-                        if (battle != undefined) {
-                            tooltipText =
-                                'Currently unfarmable, but will be unlocked in ' +
-                                battle.id +
-                                ' before reaching this battle.';
-                        }
-                        return (
-                            <Tooltip title={tooltipText}>
-                                <span>Unlocks{battle === undefined ? '' : '*'}</span>
-                            </Tooltip>
-                        );
-                    } else {
+                    if (savings.canFarmPrior)
                         return (
                             <Tooltip
                                 title={getSavingsTooltipText(CampaignsProgressionService.getReward(savings.battle))}>
@@ -179,7 +162,23 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                                 </span>
                             </Tooltip>
                         );
+
+                    let tooltipText: string = '';
+                    const battle = CampaignsProgressionService.getBattleFromBaseCampaignWithSameReward(
+                        savings.battle,
+                        progression.materialFarmData.get(CampaignsProgressionService.getReward(savings.battle))
+                    );
+                    if (battle != undefined) {
+                        tooltipText =
+                            'Currently unfarmable, but will be unlocked in ' +
+                            battle.id +
+                            ' before reaching this battle.';
                     }
+                    return (
+                        <Tooltip title={tooltipText}>
+                            <span>Unlocks{battle === undefined ? '' : '*'}</span>
+                        </Tooltip>
+                    );
                 },
             },
             {
@@ -294,24 +293,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
-                    if (!savings.canFarmPrior) {
-                        let tooltipText: string = '';
-                        const battle = CampaignsProgressionService.getBattleFromBaseCampaignWithSameReward(
-                            savings.battle,
-                            progression.materialFarmData.get(CampaignsProgressionService.getReward(savings.battle))
-                        );
-                        if (battle != undefined) {
-                            tooltipText =
-                                'Currently unfarmable, but will be unlocked in ' +
-                                battle.id +
-                                ' before reaching this battle.';
-                        }
-                        return (
-                            <Tooltip title={tooltipText}>
-                                <span>Unlocks the material{battle === undefined ? '' : '*'}</span>
-                            </Tooltip>
-                        );
-                    } else {
+                    if (savings.canFarmPrior)
                         return (
                             <Tooltip
                                 title={getSavingsTooltipText(CampaignsProgressionService.getReward(savings.battle))}>
@@ -320,7 +302,22 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                                 </span>
                             </Tooltip>
                         );
+                    let tooltipText: string = '';
+                    const battle = CampaignsProgressionService.getBattleFromBaseCampaignWithSameReward(
+                        savings.battle,
+                        progression.materialFarmData.get(CampaignsProgressionService.getReward(savings.battle))
+                    );
+                    if (battle != undefined) {
+                        tooltipText =
+                            'Currently unfarmable, but will be unlocked in ' +
+                            battle.id +
+                            ' before reaching this battle.';
                     }
+                    return (
+                        <Tooltip title={tooltipText}>
+                            <span>Unlocks the material{battle === undefined ? '' : '*'}</span>
+                        </Tooltip>
+                    );
                 },
             },
             {
@@ -351,7 +348,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const characters = getCharactersNeedingMaterial(
                         CampaignsProgressionService.getReward(savings.battle)
                     );
-                    if (characters.length == 0) return <span></span>;
+                    if (characters.length === 0) return <span></span>;
                     return (
                         <div className="flex-box gap5 wrap" key={CampaignsProgressionService.getReward(savings.battle)}>
                             {characters.map(unitId => {

@@ -100,7 +100,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
     const [dailyEnergy, setDailyEnergy] = React.useState(() => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
-        return index >= 0 ? index : 2; // Default to 50 BS refresh if not found.
+        return index === -1 ? 2 : index; // Default to 50 BS refresh if not found.
     });
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
@@ -120,9 +120,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     }, [dailyRaidsPreferences]);
 
     const updatePreferences = useCallback((value: IDailyRaidsFarmOrder) => {
-        setDailyRaidsPreferencesForm(curr => ({
-            ...curr,
-            farmPreferences: { ...curr.farmPreferences, order: value },
+        setDailyRaidsPreferencesForm(current => ({
+            ...current,
+            farmPreferences: { ...current.farmPreferences, order: value },
         }));
     }, []);
 
@@ -130,7 +130,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         if (typeof value === 'number') {
             const scaledValue = energyMarks[value]?.value || 288; // Adjust the index and default
             setDailyEnergy(value);
-            setDailyRaidsPreferencesForm(curr => ({ ...curr, dailyEnergy: scaledValue }));
+            setDailyRaidsPreferencesForm(current => ({ ...current, dailyEnergy: scaledValue }));
         }
     };
 
@@ -145,25 +145,25 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     }
 
     function saveCampaignEventChanges(event: SelectChangeEvent<CampaignGroupType | 'none'>): void {
-        setDailyRaidsPreferencesForm(curr => ({
-            ...curr,
+        setDailyRaidsPreferencesForm(current => ({
+            ...current,
             campaignEvent: event.target.value as CampaignGroupType | 'none',
         }));
     }
 
     function saveHomeScreenEventChanges(event: SelectChangeEvent<IDailyRaidsHomeScreenEvent>): void {
-        setDailyRaidsPreferencesForm(curr => ({
-            ...curr,
+        setDailyRaidsPreferencesForm(current => ({
+            ...current,
             farmPreferences: {
-                ...curr.farmPreferences,
+                ...current.farmPreferences,
                 homeScreenEvent: event.target.value as IDailyRaidsHomeScreenEvent,
             },
         }));
     }
     /*
     function saveTrainingRushStrategyChanges(event: SelectChangeEvent<ITrainingRushStrategy>): void {
-        setDailyRaidsPreferencesForm(curr => {
-            const ret = { ...curr };
+        setDailyRaidsPreferencesForm(current => {
+            const ret = { ...current };
             ret.farmPreferences.trainingRushPreferences = {
                 ...ret.farmPreferences.trainingRushPreferences,
                 strategy: event.target.value as ITrainingRushStrategy,
@@ -174,12 +174,12 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
 
     function saveTrainingRushUnitChanges(unit: ICharacter2 | null): void {
         setCharacter(unit);
-        setDailyRaidsPreferencesForm(curr => {
-            const ret = { ...curr };
+        setDailyRaidsPreferencesForm(current => {
+            const ret = { ...current };
             ret.farmPreferences.trainingRushPreferences = {
                 strategy:
                     ret.farmPreferences.trainingRushPreferences?.strategy ?? ITrainingRushStrategy.maximizeRewards,
-                characterId: unit ? unit.snowprintId! : undefined,
+                characterId: unit ? unit.snowprintId : undefined,
             };
             return ret;
         });
@@ -221,13 +221,15 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 name="controlled-radio-buttons-group"
                                 value={dailyRaidsPreferencesForm.farmPreferences.order}
                                 onChange={change =>
-                                    updatePreferences(parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder)
+                                    updatePreferences(
+                                        Number.parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder
+                                    )
                                 }>
                                 <FormControlLabel
                                     value={IDailyRaidsFarmOrder.totalMaterials}
                                     control={<Radio />}
                                     label={
-                                        <div className="flex-box start gap5">
+                                        <div className="flex-box gap5 start">
                                             By total materials{' '}
                                             <AccessibleTooltip
                                                 title={
@@ -250,7 +252,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                     value={IDailyRaidsFarmOrder.goalPriority}
                                     control={<Radio />}
                                     label={
-                                        <div className="flex-box start gap5">
+                                        <div className="flex-box gap5 start">
                                             By goals priority{' '}
                                             <AccessibleTooltip
                                                 title={
@@ -356,7 +358,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 value={dailyRaidsPreferencesForm.farmStrategy}
                                 onChange={change => {
                                     const value = +change.target.value as DailyRaidsStrategy;
-                                    setDailyRaidsPreferencesForm(curr => ({ ...curr, farmStrategy: value }));
+                                    setDailyRaidsPreferencesForm(current => ({ ...current, farmStrategy: value }));
                                 }}>
                                 <FormControlLabel
                                     value={DailyRaidsStrategy.leastEnergy}
@@ -385,7 +387,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 settings={customLocationsSettings}
                                 settingsChange={value => {
                                     setCustomLocationsSettings(value);
-                                    setDailyRaidsPreferencesForm(curr => ({ ...curr, customSettings: value }));
+                                    setDailyRaidsPreferencesForm(current => ({ ...current, customSettings: value }));
                                 }}
                             />
                         )}
@@ -411,6 +413,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             </MenuItem>
                             <MenuItem value={CampaignGroupType.deathGuardCE} className="flex-box gap10">
                                 <span>Death Guard</span>
+                            </MenuItem>
+                            <MenuItem value={CampaignGroupType.sistersCE} className="flex-box gap10">
+                                <span>Adepta Sororitas</span>
                             </MenuItem>
                         </Select>
                         <FormHelperText>

@@ -10,8 +10,8 @@ export const SupportSection: React.FC = () => {
             await navigator.clipboard.writeText(referralCode);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
-        } catch (err) {
-            console.error('Failed to copy text: ', err);
+        } catch (error) {
+            console.error('Failed to copy text:', error);
         }
     };
 

@@ -1,0 +1,41 @@
+﻿import axios, { AxiosError, AxiosResponse, Method } from 'axios';
+
+import API from './api';
+import { IErrorResponse } from './api.models';
+
+export const makeApiCall = <TResponse, TRequestBody = any>(
+    method: Method,
+    url: string,
+    body?: TRequestBody
+): Promise<{ data: TResponse | null; error: AxiosError<IErrorResponse> | string | null }> => {
+    const fetchData = async () => {
+        try {
+            const response = await API<TResponse, AxiosResponse<TResponse>, TRequestBody>({
+                url: url,
+                method: method,
+                data: body,
+            });
+
+            const data = response?.data;
+
+            return { data, error: null };
+        } catch (error: any) {
+            console.error(error);
+            const castError = error as Error | AxiosError<IErrorResponse>;
+            // replace here with your own error handling
+            if (axios.isAxiosError(castError)) {
+                if (castError.code === AxiosError.ERR_CANCELED) {
+                    console.info('Request was canceled');
+                    return { data: null, error: null };
+                }
+                castError.message = castError?.response?.data?.message || castError.message;
+                return { data: null, error: castError };
+            } else {
+                console.error(`Unexpected error during API call`, castError);
+                return { data: null, error: castError.message };
+            }
+        }
+    };
+
+    return fetchData();
+};

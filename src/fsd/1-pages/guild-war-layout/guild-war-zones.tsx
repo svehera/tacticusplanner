@@ -83,7 +83,7 @@ export const GuildWarZones = () => {
             return;
         }
 
-        if (!swapZones.length) {
+        if (swapZones.length === 0) {
             setSwapZones([zoneIndex]);
             return;
         }
@@ -236,7 +236,7 @@ export const GuildWarZones = () => {
                         {editZonesMode ? 'Stop editing' : 'Edit war zones'}
                     </Button>
                 </Tooltip>
-                {!!guildWarPlayers.length && (
+                {guildWarPlayers.length > 0 && (
                     <>
                         <ViewGuild guildWarPlayers={guildWarPlayers} />
                         <AccessibleTooltip

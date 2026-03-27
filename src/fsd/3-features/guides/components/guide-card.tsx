@@ -138,7 +138,7 @@ export const GuideCard: React.FC<Props> = ({
     return (
         <Card
             sx={{
-                maxWidth: !fullView ? 425 : 'unset',
+                maxWidth: fullView ? 'unset' : 425,
                 minWidth: isMobile ? 'unset' : 425,
                 overflow: 'auto',
                 zoom: isMobile ? '90%' : '100%',

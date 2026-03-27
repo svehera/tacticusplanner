@@ -43,8 +43,8 @@ export class StatsCalculatorService {
         let count: number = 0;
         if (unit.rank == Rank.Adamantine1 || typeof characterUpgrades === 'undefined') return 0;
         const upgrades = characterUpgrades[rankToString(unit.rank)];
-        if (unit.upgrades.findIndex(u => u === upgrades[firstUpgradeIndex]) != -1) ++count;
-        if (unit.upgrades.findIndex(u => u === upgrades[secondUpgradeIndex]) != -1) ++count;
+        if (unit.upgrades.includes(upgrades[firstUpgradeIndex])) ++count;
+        if (unit.upgrades.includes(upgrades[secondUpgradeIndex])) ++count;
         return count;
     }
 
@@ -55,7 +55,7 @@ export class StatsCalculatorService {
     static getHealth(unit: ICharacter2 | undefined): number {
         if (unit == null) return 0;
         return this.calculateHealth(
-            unit!.snowprintId!,
+            unit!.snowprintId,
             unit!.stars,
             unit!.rank,
             StatsCalculatorService.countHealthUpgrades(unit)
@@ -69,7 +69,7 @@ export class StatsCalculatorService {
     static getDamage(unit: ICharacter2 | undefined): number {
         if (unit == null) return 0;
         return this.calculateDamage(
-            unit!.snowprintId!,
+            unit!.snowprintId,
             unit!.stars,
             unit!.rank,
             StatsCalculatorService.countDamageUpgrades(unit)
@@ -83,7 +83,7 @@ export class StatsCalculatorService {
     static getArmor(unit: ICharacter2 | undefined): number {
         if (unit == null) return 0;
         return this.calculateArmor(
-            unit!.snowprintId!,
+            unit!.snowprintId,
             unit!.stars,
             unit!.rank,
             StatsCalculatorService.countArmorUpgrades(unit)
@@ -94,9 +94,9 @@ export class StatsCalculatorService {
         const rankValue = StatsCalculatorService.getRankForComputation(rank);
         const d3Value = StatsCalculatorService.getRankForComputation(Rank.Diamond3);
         if (rank < Rank.Adamantine1) {
-            return Math.pow(1.25205, rankValue);
+            return Math.pow(1.252_05, rankValue);
         }
-        return Math.pow(1.25205, d3Value) * Math.pow(1.1091, rankValue - d3Value);
+        return Math.pow(1.252_05, d3Value) * Math.pow(1.1091, rankValue - d3Value);
     }
 
     /**
@@ -111,11 +111,11 @@ export class StatsCalculatorService {
         baseStat: number,
         rarityStars: RarityStars,
         rank: Rank,
-        numAppliedUpgrades: number
+        numberAppliedUpgrades: number
     ): number {
         return Math.floor(
             baseStat * this.getRankCoefficient(rank) * (1 + 0.1 * (rarityStars as number)) +
-                baseStat * this.getRankCoefficient(rank - 1) * numAppliedUpgrades
+                baseStat * this.getRankCoefficient(rank - 1) * numberAppliedUpgrades
         );
     }
 
@@ -123,26 +123,36 @@ export class StatsCalculatorService {
      * @returns the calculated health for the given unit at the given rarity
      *          and rank. -1 if the unit can't be found.
      */
-    static calculateHealth(unitId: string, rarityStars: RarityStars, rank: Rank, numAppliedUpgrades: number): number {
+    static calculateHealth(
+        unitId: string,
+        rarityStars: RarityStars,
+        rank: Rank,
+        numberAppliedUpgrades: number
+    ): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
-        return StatsCalculatorService.calculateStat(unit?.health ?? -1, rarityStars, rank, numAppliedUpgrades);
+        return StatsCalculatorService.calculateStat(unit?.health ?? -1, rarityStars, rank, numberAppliedUpgrades);
     }
 
     /**
      * @returns the calculated damage for the given unit at the given rarity
      *          and rank. -1 if the unit can't be found.
      */
-    static calculateDamage(unitId: string, rarityStars: RarityStars, rank: Rank, numAppliedUpgrades: number): number {
+    static calculateDamage(
+        unitId: string,
+        rarityStars: RarityStars,
+        rank: Rank,
+        numberAppliedUpgrades: number
+    ): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
-        return StatsCalculatorService.calculateStat(unit?.damage ?? -1, rarityStars, rank, numAppliedUpgrades);
+        return StatsCalculatorService.calculateStat(unit?.damage ?? -1, rarityStars, rank, numberAppliedUpgrades);
     }
 
     /**
      * @returns the calculated armor for the given unit at the given rarity
      *          and rank. -1 if the unit can't be found.
      */
-    static calculateArmor(unitId: string, rarityStars: RarityStars, rank: Rank, numAppliedUpgrades: number): number {
+    static calculateArmor(unitId: string, rarityStars: RarityStars, rank: Rank, numberAppliedUpgrades: number): number {
         const unit = CharactersService.charactersData.find(u => u.snowprintId === unitId);
-        return StatsCalculatorService.calculateStat(unit?.armour ?? -1, rarityStars, rank, numAppliedUpgrades);
+        return StatsCalculatorService.calculateStat(unit?.armour ?? -1, rarityStars, rank, numberAppliedUpgrades);
     }
 }

@@ -50,7 +50,7 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
             for (const upgrade of action.upgrades) {
                 const currentValue = newUpgrades[upgrade.id] ?? 0;
                 const result = currentValue - upgrade.count;
-                newUpgrades[upgrade.id] = result >= 0 ? result : 0;
+                newUpgrades[upgrade.id] = Math.max(result, 0);
             }
 
             return { ...state, upgrades: newUpgrades };
@@ -113,48 +113,48 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
             const orbs = cloneDeep(badges);
             const forgeBadges = createEmptyRarityRecord();
             const components = { [Alliance.Imperial]: 0, [Alliance.Xenos]: 0, [Alliance.Chaos]: 0 };
-            xpBooks.forEach(book => {
+            for (const book of xpBooks) {
                 books[RarityMapper.stringToRarity(book.rarity) ?? Rarity.Common] = book.amount;
-            });
-            Imperial.forEach(badge => {
+            }
+            for (const badge of Imperial) {
                 badges[Alliance.Imperial][RarityMapper.stringToRarity(badge.rarity) ?? Rarity.Common] = badge.amount;
-            });
-            Xenos.forEach(badge => {
+            }
+            for (const badge of Xenos) {
                 badges[Alliance.Xenos][RarityMapper.stringToRarity(badge.rarity) ?? Rarity.Common] = badge.amount;
-            });
-            Chaos.forEach(badge => {
+            }
+            for (const badge of Chaos) {
                 badges[Alliance.Chaos][RarityMapper.stringToRarity(badge.rarity) ?? Rarity.Common] = badge.amount;
-            });
+            }
 
-            syncOrbs.Imperial.forEach(orb => {
+            for (const orb of syncOrbs.Imperial) {
                 const rarity = RarityMapper.stringToRarity(orb.rarity) ?? Rarity.Common;
                 if (!orbs[Alliance.Imperial][rarity]) {
                     orbs[Alliance.Imperial][rarity] = 0;
                 }
                 orbs[Alliance.Imperial][rarity] += orb.amount;
-            });
-            syncOrbs.Xenos.forEach(orb => {
+            }
+            for (const orb of syncOrbs.Xenos) {
                 const rarity = RarityMapper.stringToRarity(orb.rarity) ?? Rarity.Common;
                 if (!orbs[Alliance.Xenos][rarity]) {
                     orbs[Alliance.Xenos][rarity] = 0;
                 }
                 orbs[Alliance.Xenos][rarity] += orb.amount;
-            });
-            syncOrbs.Chaos.forEach(orb => {
+            }
+            for (const orb of syncOrbs.Chaos) {
                 const rarity = RarityMapper.stringToRarity(orb.rarity) ?? Rarity.Common;
                 if (!orbs[Alliance.Chaos][rarity]) {
                     orbs[Alliance.Chaos][rarity] = 0;
                 }
                 orbs[Alliance.Chaos][rarity] += orb.amount;
-            });
-            syncForgeBadges.forEach(badge => {
+            }
+            for (const badge of syncForgeBadges) {
                 const rarity = RarityMapper.stringToRarity(badge.rarity) ?? Rarity.Common;
                 if (!forgeBadges[rarity]) {
                     forgeBadges[rarity] = 0;
                 }
                 forgeBadges[rarity] += badge.amount;
-            });
-            syncComponents.forEach(component => {
+            }
+            for (const component of syncComponents) {
                 const alliance = TacticusIntegrationService.getAllianceFromString(component.grandAlliance);
                 if (alliance !== undefined) {
                     if (!components[alliance]) {
@@ -162,7 +162,7 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
                     }
                     components[alliance] += component.amount;
                 }
-            });
+            }
 
             for (const upgrade of upgrades) {
                 const upgradeId: string | null = TacticusIntegrationService.getUpgradeId(upgrade);
@@ -181,7 +181,8 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
             };
         }
         default: {
-            throw new Error();
+            // @ts-expect-error TS says this should never be reached but we want the error if it does
+            throw new Error(`Unexpected action.type received in reducer: ${action.type}`);
         }
     }
 };

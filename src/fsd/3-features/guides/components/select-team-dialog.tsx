@@ -39,7 +39,7 @@ type FilterBy = 'none' | 'xenos' | 'chaos' | 'imperial';
 export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => {
     const [lineup, setLineup] = useState(cloneDeep(slots));
     const [quickFilter, setQuickFilter] = useDebounceValue('', 300);
-    const [filterByVar, setFilterByVar] = useState<FilterBy>('none');
+    const [filterByVariable, setFilterByVariable] = useState<FilterBy>('none');
     const [editSlotData, setEditSlotData] = useState<{ slotNumber: number; index: number }>({
         slotNumber: 1,
         index: 0,
@@ -51,10 +51,10 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
     const selectedUnits = useMemo(() => lineup.flatMap(slot => slot.unitIds), [lineup]);
 
     const handleSlotTypeChange = (slotNumber: number, slotType: SlotType) => {
-        setLineup(curr => {
-            const editedSlot = curr.find(x => x.slotNumber === slotNumber);
+        setLineup(current => {
+            const editedSlot = current.find(x => x.slotNumber === slotNumber);
             if (!editedSlot) {
-                return curr;
+                return current;
             }
 
             editedSlot.slotType = slotType;
@@ -69,7 +69,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
                 }
             }
 
-            return [...curr];
+            return [...current];
         });
     };
 
@@ -77,28 +77,32 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
         const isSelected = selectedUnits.includes(unit.id);
 
         if (isSelected) {
-            setLineup(curr => {
-                const editedSlot = curr.find(x => x.slotNumber === editSlotData.slotNumber);
+            setLineup(current => {
+                const editedSlot = current.find(x => x.slotNumber === editSlotData.slotNumber);
                 if (!editedSlot) {
-                    return curr;
+                    return current;
                 }
 
                 delete editedSlot.unitIds[editSlotData.index];
 
-                return [...curr];
+                return [...current];
             });
         } else {
-            setLineup(curr => {
-                const editedSlot = curr.find(x => x.slotNumber === editSlotData.slotNumber);
+            setLineup(current => {
+                const editedSlot = current.find(x => x.slotNumber === editSlotData.slotNumber);
                 if (!editedSlot) {
-                    return curr;
+                    return current;
                 }
 
                 editedSlot.unitIds[editSlotData.index] = unit.id;
 
                 if (editedSlot.slotType === SlotType.core) {
-                    const nextSlot = curr.find(x => x.slotNumber === editSlotData.slotNumber + 1);
-                    if (nextSlot && !nextSlot.unitIds.filter(x => !!x).length && nextSlot.slotType !== SlotType.none) {
+                    const nextSlot = current.find(x => x.slotNumber === editSlotData.slotNumber + 1);
+                    if (
+                        nextSlot &&
+                        nextSlot.unitIds.filter(x => !!x).length === 0 &&
+                        nextSlot.slotType !== SlotType.none
+                    ) {
                         setEditSlotData({
                             index: 0,
                             slotNumber: editSlotData.slotNumber + 1,
@@ -116,10 +120,10 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
                     }
 
                     if (editSlotData.index === 2) {
-                        const nextSlot = curr.find(x => x.slotNumber === editSlotData.slotNumber + 1);
+                        const nextSlot = current.find(x => x.slotNumber === editSlotData.slotNumber + 1);
                         if (
                             nextSlot &&
-                            !nextSlot.unitIds.filter(x => !!x).length &&
+                            nextSlot.unitIds.filter(x => !!x).length === 0 &&
                             nextSlot.slotType !== SlotType.none
                         ) {
                             setEditSlotData({
@@ -130,7 +134,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
                     }
                 }
 
-                return [...curr];
+                return [...current];
             });
         }
     };
@@ -140,25 +144,29 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
             const typeFiltered: IUnit[] =
                 editSlotData.slotNumber === 6 ? units.filter(isMow) : units.filter(isCharacter);
 
-            const nameFiltered = !quickFilter
-                ? typeFiltered
-                : typeFiltered.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()));
+            const nameFiltered = quickFilter
+                ? typeFiltered.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()))
+                : typeFiltered;
 
-            switch (filterByVar) {
-                case 'xenos':
+            switch (filterByVariable) {
+                case 'xenos': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Xenos);
-                case 'chaos':
+                }
+                case 'chaos': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Chaos);
-                case 'imperial':
+                }
+                case 'imperial': {
                     return nameFiltered.filter(x => x.alliance === Alliance.Imperial);
+                }
                 case 'none':
-                default:
+                default: {
                     return nameFiltered;
+                }
             }
         };
 
         return filterUnits();
-    }, [units, quickFilter, filterByVar, editSlotData.slotNumber]);
+    }, [units, quickFilter, filterByVariable, editSlotData.slotNumber]);
 
     const filterByOptions: IMenuOption[] = [
         {
@@ -184,7 +192,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
     ];
 
     const changeFilter = (value: string[]): void => {
-        setFilterByVar(value[0] as FilterBy);
+        setFilterByVariable(value[0] as FilterBy);
     };
 
     const handleTeamUnitClick = (slotNumber: number, index: number) => {
@@ -193,15 +201,15 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
             const slot = lineup.find(x => x.slotNumber === slotNumber);
             const isOccupiedSlot = !!slot && !!slot.unitIds[index]?.length;
             if (isOccupiedSlot) {
-                setLineup(curr => {
-                    const editedSlot = curr.find(x => x.slotNumber === slotNumber);
+                setLineup(current => {
+                    const editedSlot = current.find(x => x.slotNumber === slotNumber);
                     if (!editedSlot) {
-                        return curr;
+                        return current;
                     }
 
                     delete editedSlot.unitIds[index];
 
-                    return [...curr];
+                    return [...current];
                 });
             }
         } else {

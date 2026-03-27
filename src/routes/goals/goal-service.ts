@@ -35,11 +35,11 @@ export class GoalService {
             });
         }
         const kBgColors: IGoalColor[] = [
-            { r: 0, g: 255, b: 0, a: 0.25 },
-            { r: 255, g: 255, b: 0, a: 0.25 },
-            { r: 255, g: 0, b: 0, a: 0.25 },
-            { r: 0, g: 0, b: 0, a: 0.25 },
-            { r: 0, g: 0, b: 0, a: 0.25 },
+            { r: 0, g: 255, b: 0, a: 0.12 },
+            { r: 255, g: 255, b: 0, a: 0.12 },
+            { r: 255, g: 0, b: 0, a: 0.12 },
+            { r: 0, g: 0, b: 0, a: 0.08 },
+            { r: 0, g: 0, b: 0, a: 0.08 },
         ];
         if (goalEstimate !== undefined) {
             if (!goalEstimate.daysLeft) {
@@ -50,19 +50,19 @@ export class GoalService {
                 const nextDate = new Date();
                 nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
                 const kStartDates = LegendaryEventService.getLegendaryEventStartDates();
-                for (let i: number = 0; i < kStartDates.length && i < kBgColors.length - 1; ++i) {
-                    if (nextDate < kStartDates[i]) {
-                        return GoalService.getColorString(kBgColors[i]);
+                for (let index: number = 0; index < kStartDates.length && index < kBgColors.length - 1; ++index) {
+                    if (nextDate < kStartDates[index]) {
+                        return GoalService.getColorString(kBgColors[index]);
                     }
                     if (
                         nextDate <
-                        new Date(kStartDates[i].getTime() + LegendaryEventService.getLegendaryEventDurationMillis())
+                        new Date(kStartDates[index].getTime() + LegendaryEventService.getLegendaryEventDurationMillis())
                     ) {
                         return GoalService.getColorString(
                             GoalService.interpolateColor(
-                                kBgColors[i],
-                                kBgColors[i + 1],
-                                (nextDate.getTime() - kStartDates[i].getTime()) /
+                                kBgColors[index],
+                                kBgColors[index + 1],
+                                (nextDate.getTime() - kStartDates[index].getTime()) /
                                     LegendaryEventService.getLegendaryEventDurationMillis()
                             )
                         );
@@ -70,7 +70,7 @@ export class GoalService {
                 }
             } else if (goalsColorCoding === 'Guild Raid Season') {
                 const daysPerRaidSeason = 14;
-                const raidSeasonStart = 1764738000000; // Arbitrary start of a past season (in milliseconds)
+                const raidSeasonStart = 1_764_738_000_000; // Arbitrary start of a past season (in milliseconds)
 
                 const nextDate = new Date();
                 nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1); // Subtracting 1 day from daysLeft is common for 'time remaining'

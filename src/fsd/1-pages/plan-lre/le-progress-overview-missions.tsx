@@ -14,12 +14,15 @@ interface Props {
 export const LeProgressOverviewMissions: React.FC<Props> = ({ showP2P, occurrence, progressChange }) => {
     const getEventName = () => {
         switch (occurrence.eventOccurrence) {
-            case 1:
+            case 1: {
                 return 'First event';
-            case 2:
+            }
+            case 2: {
                 return 'Second event';
-            case 3:
+            }
+            case 3: {
                 return 'Third event';
+            }
         }
     };
     return (

@@ -20,6 +20,42 @@ interface Props {
     changeProgress: (value: number) => void; // Callback to update progress externally.
 }
 
+// Get the maximum number of nodes based on the campaign difficulty.
+const getMaxNodes = (difficulty: CampaignDifficulty) => {
+    switch (difficulty) {
+        case CampaignDifficulty.standard:
+        case CampaignDifficulty.mirror: {
+            return 75;
+        }
+        case CampaignDifficulty.elite: {
+            return 40;
+        }
+        case CampaignDifficulty.eventStandard:
+        case CampaignDifficulty.eventExtremis: {
+            return 30;
+        }
+        case CampaignDifficulty.eventChallenge: {
+            return 3;
+        }
+        default: {
+            return 0;
+        }
+    }
+};
+
+//  Get the color based on the campaign difficulty.
+const getColor = (difficulty: CampaignDifficulty) => {
+    switch (difficulty) {
+        case CampaignDifficulty.elite:
+        case CampaignDifficulty.eventExtremis: {
+            return 'secondary';
+        }
+        default: {
+            return 'primary';
+        }
+    }
+};
+
 /**
  * CampaignProgress Component
  * Displays the progress of a campaign using a slider and input,
@@ -31,53 +67,24 @@ export const CampaignProgress: React.FC<Props> = ({
     changeProgress,
     characters,
 }) => {
-    const [currProgress, setCurrProgress] = useState(initialProgress);
+    const [currentProgress, setCurrentProgress] = useState(initialProgress);
     const debounceProgressChange = useDebounceCallback(changeProgress, 500);
 
     useEffect(() => {
-        setCurrProgress(initialProgress);
+        setCurrentProgress(initialProgress);
     }, [initialProgress]);
-
-    // Get the maximum number of nodes based on the campaign difficulty.
-    const getMaxNodes = (difficulty: CampaignDifficulty) => {
-        switch (difficulty) {
-            case CampaignDifficulty.standard:
-            case CampaignDifficulty.mirror:
-                return 75;
-            case CampaignDifficulty.elite:
-                return 40;
-            case CampaignDifficulty.eventStandard:
-            case CampaignDifficulty.eventExtremis:
-                return 30;
-            case CampaignDifficulty.eventChallenge:
-                return 3;
-            default:
-                return 0;
-        }
-    };
-
-    //  Get the color based on the campaign difficulty.
-    const getColor = (difficulty: CampaignDifficulty) => {
-        switch (difficulty) {
-            case CampaignDifficulty.elite:
-            case CampaignDifficulty.eventExtremis:
-                return 'secondary';
-            default:
-                return 'primary';
-        }
-    };
 
     const max = useMemo(() => getMaxNodes(campaign.difficulty), [campaign.difficulty]);
     const color = useMemo(() => getColor(campaign.difficulty), [campaign.difficulty]);
 
     // Filter characters required for the campaign.
     const coreCharacters = useMemo(
-        () => characters.filter(x => campaign.coreCharacters.includes(x.snowprintId!)),
+        () => characters.filter(x => campaign.coreCharacters.includes(x.snowprintId)),
         [characters, campaign]
     );
 
     const updateProgress = (value: number): void => {
-        setCurrProgress(value);
+        setCurrentProgress(value);
         debounceProgressChange(value);
     };
 
@@ -93,15 +100,15 @@ export const CampaignProgress: React.FC<Props> = ({
      * Handle blur events for the input field to ensure the progress value is within bounds.
      */
     const handleBlur = () => {
-        if (currProgress < 0) {
+        if (currentProgress < 0) {
             updateProgress(0);
-        } else if (currProgress > max) {
+        } else if (currentProgress > max) {
             updateProgress(max);
         }
     };
 
     return (
-        <Box sx={{ width: 310, opacity: currProgress === max ? 0.5 : 1 }}>
+        <Box sx={{ width: 310, opacity: currentProgress === max ? 0.5 : 1 }}>
             <Typography id="input-slider" gutterBottom>
                 <CampaignImage campaign={campaign.id} /> <span className="inline-block">{campaign.displayName}</span>
             </Typography>
@@ -111,14 +118,14 @@ export const CampaignProgress: React.FC<Props> = ({
                         min={0}
                         max={max}
                         color={color}
-                        value={currProgress}
+                        value={currentProgress}
                         onChange={handleSliderChange}
                         aria-labelledby="input-slider"
                     />
                 </Grid>
                 <Grid item>
                     <Input
-                        value={currProgress}
+                        value={currentProgress}
                         size="small"
                         onChange={handleInputChange}
                         onFocus={event => event.target.select()}

@@ -8,13 +8,13 @@ const createMenuItem = (character: ICharacterData) =>
     new MenuItemTP(
         character.name,
         <UnitShardIcon icon={character.roundIcon} height={24} />,
-        `/plan/lre?character=${LegendaryEventEnum[LegendaryEventService.getEventByCharacterSnowprintId(character.snowprintId!)!.id]}`
+        `/plan/lre?character=${LegendaryEventEnum[LegendaryEventService.getEventByCharacterSnowprintId(character.snowprintId)!.id]}`
     );
 
 const activeLreChars = CharactersService.lreCharacters.filter(x => !x.lre?.finished);
 
-function utcStringToMilliseconds(utcStr?: string): number {
-    return utcStr ? Date.parse(utcStr) : Number.POSITIVE_INFINITY;
+function utcStringToMilliseconds(utcString?: string): number {
+    return utcString ? Date.parse(utcString) : Number.POSITIVE_INFINITY;
 }
 
 activeLreChars.sort(

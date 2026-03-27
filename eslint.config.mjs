@@ -12,6 +12,7 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 
@@ -23,12 +24,85 @@ const compat = new FlatCompat({
     allConfig: js.configs.all,
 });
 
-const FS_LAYERS = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
-
-const REVERSED_FS_LAYERS = [...FS_LAYERS].reverse();
+// Order from bottom to top (things earlier in the array cannot import things later in the array)
+const FS_LAYERS = ['shared', 'entities', 'features', 'widgets', 'pages', 'app'];
 
 export default defineConfig([
-    globalIgnores(['dist', 'build', 'node_modules', 'package-lock.json']),
+    globalIgnores([
+        'dist',
+        'build',
+        'node_modules',
+        'package-lock.json',
+        'vite-env.d.ts',
+        '**/analytics__google-analytics.d.ts',
+    ]),
+    eslintPluginUnicorn.configs.recommended,
+    {
+        // Temporary config to enable & autofix rules one-at-a-time
+        languageOptions: { globals: globals.builtin },
+        plugins: { unicorn: eslintPluginUnicorn },
+        rules: {
+            'unicorn/prevent-abbreviations': [
+                'error',
+                {
+                    allowList: {
+                        // Allow variable names used within React
+                        Props: true,
+                        props: true,
+                        params: true,
+                        searchParams: true,
+                    },
+                    replacements: {
+                        // Some of the default replacements aren't always correct for TP code
+                        // This disables automatic replacement for them by listing the multiple alternatives
+                        req: { request: true, requirement: true },
+                        mod: { module: true, mode: true, modifier: true },
+                        e: { event: true, error: true },
+                    },
+                },
+            ],
+            // Temporary disabling of rules; reenable and fix one-at-a-time
+            'unicorn/no-useless-undefined': 'off',
+            'unicorn/no-null': 'off',
+            'unicorn/no-useless-switch-case': 'off',
+            'unicorn/no-array-reduce': 'off',
+            'unicorn/no-array-sort': 'off',
+            'unicorn/no-array-reverse': 'off',
+            'unicorn/no-array-callback-reference': 'off',
+            'unicorn/no-array-join-separator': 'off',
+            'unicorn/prefer-node-protocol': 'off',
+            'unicorn/no-for-loop': 'off',
+            'unicorn/text-encoding-identifier-case': 'off',
+            'unicorn/prefer-query-selector': 'off',
+            'unicorn/prefer-add-event-listener': 'off',
+            'unicorn/prefer-at': 'off',
+            'unicorn/prefer-spread': 'off',
+            'unicorn/no-useless-length-check': 'off',
+            'unicorn/prefer-dom-node-dataset': 'off',
+            'unicorn/prefer-dom-node-append': 'off',
+            'unicorn/prefer-dom-node-remove': 'off',
+            'unicorn/no-unreadable-iife': 'off',
+            'unicorn/prefer-date-now': 'off',
+            'unicorn/no-immediate-mutation': 'off',
+            'unicorn/prefer-set-has': 'off',
+            'unicorn/no-empty-file': 'off',
+            'unicorn/no-typeof-undefined': 'off',
+            'unicorn/prefer-array-find': 'off',
+            'unicorn/new-for-builtins': 'off',
+            'unicorn/prefer-switch': 'off',
+            'unicorn/require-array-join-separator': 'off',
+            'unicorn/no-useless-spread': 'off',
+            'unicorn/prefer-single-call': 'off',
+            'unicorn/prefer-array-flat': 'off',
+            'unicorn/prefer-string-replace-all': 'off',
+            'unicorn/prefer-negative-index': 'off',
+            'unicorn/prefer-structured-clone': 'off',
+            'unicorn/no-static-only-class': 'off',
+            'unicorn/prefer-code-point': 'off',
+            'unicorn/prefer-optional-catch-binding': 'off',
+            'unicorn/prefer-blob-reading-methods': 'off',
+        },
+    },
     ...compat.extends(
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -113,7 +187,7 @@ export default defineConfig([
 
                     // experimental features
                     'newlines-between': 'always',
-                    pathGroups: REVERSED_FS_LAYERS.map(layer => ({
+                    pathGroups: FS_LAYERS.map(layer => ({
                         pattern: `**/?(*)${layer}{,/**}`,
                         group: 'internal',
                         position: 'after',

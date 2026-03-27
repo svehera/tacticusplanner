@@ -25,9 +25,9 @@ export class TacticusIntegrationService {
         // We count down from rarest to most-common, so any progressionIndex values higher than maxSupportedIndex
         // will be clamped to the rarest we currently support. This is relevant to the 2025 staged rollout of Mythic
         // rarity, which adds a new rarity with 4 new ranks (but only 1 rank was released initially)
-        for (let i = rarityThresholds.length - 1; i >= 0; i--) {
-            if (clampedIndex >= rarityThresholds[i]) {
-                rarity = i as Rarity;
+        for (let index = rarityThresholds.length - 1; index >= 0; index--) {
+            if (clampedIndex >= rarityThresholds[index]) {
+                rarity = index as Rarity;
                 break;
             }
         }
@@ -39,21 +39,25 @@ export class TacticusIntegrationService {
 
     static convertXp(xp: number, xpLevel: number): number {
         const xpLevelThresholds = mutableCopy(xpData.xpLevelThresholds) satisfies IXpLevel[];
-        const currLevel = xpLevelThresholds[xpLevel - 1];
+        const currentLevel = xpLevelThresholds[xpLevel - 1];
 
-        return xp - currLevel.totalXp;
+        return xp - currentLevel.totalXp;
     }
 
-    public static getAllianceFromString(allianceStr: string): Alliance | undefined {
-        switch (allianceStr.toLowerCase()) {
-            case 'imperial':
+    public static getAllianceFromString(allianceString: string): Alliance | undefined {
+        switch (allianceString.toLowerCase()) {
+            case 'imperial': {
                 return Alliance.Imperial;
-            case 'xenos':
+            }
+            case 'xenos': {
                 return Alliance.Xenos;
-            case 'chaos':
+            }
+            case 'chaos': {
                 return Alliance.Chaos;
-            default:
+            }
+            default: {
                 return undefined;
+            }
         }
     }
 

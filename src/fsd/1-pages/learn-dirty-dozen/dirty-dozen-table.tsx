@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) => {
-    const defaultColDef: ColDef<IDirtyDozenChar> = {
+    const defaultColumnDefinition: ColDef<IDirtyDozenChar> = {
         sortable: true,
         resizable: true,
     };
@@ -48,11 +48,8 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
                 const characterId = props.data?.Name ?? '';
                 const character = characters.find(char => CharactersService.matchesAnyCharacterId(characterId, char));
-                if (character) {
-                    return <CharacterTitle character={character} imageSize={30} hideRarity hideRank />;
-                } else {
-                    return characterId;
-                }
+                if (!character) return characterId;
+                return <CharacterTitle character={character} imageSize={30} hideRarity hideRank />;
             },
         },
         {
@@ -96,7 +93,7 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
                 modules={[AllCommunityModule]}
                 theme={themeBalham}
                 suppressCellFocus={true}
-                defaultColDef={defaultColDef}
+                defaultColDef={defaultColumnDefinition}
                 columnDefs={columnDefs}
                 rowHeight={35}
                 rowData={rows}></AgGridReact>

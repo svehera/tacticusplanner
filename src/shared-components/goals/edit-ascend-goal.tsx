@@ -70,7 +70,7 @@ export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, possi
 
             {(goal.rarityStart < Rarity.Mythic || goal.starsStart < RarityStars.OneBlueStar) && (
                 <>
-                    {possibleLocations.length !== 0 && (
+                    {possibleLocations.length > 0 && (
                         <div className="flex gap-3">
                             <div className="w-1/2">
                                 <NumbersInput
@@ -98,7 +98,7 @@ export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, possi
 
             {goal.rarityEnd >= Rarity.Mythic && (
                 <>
-                    {!!possibleMythicLocations.length && (
+                    {possibleMythicLocations.length > 0 && (
                         <div className="flex gap-3">
                             <div className="w-1/2">
                                 <NumbersInput
@@ -111,7 +111,7 @@ export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, possi
                         </div>
                     )}
 
-                    {!possibleMythicLocations.length && (
+                    {possibleMythicLocations.length === 0 && (
                         <div className="flex-box gap10 full-width">
                             <NumbersInput
                                 title="Mythic Shards per onslaught"

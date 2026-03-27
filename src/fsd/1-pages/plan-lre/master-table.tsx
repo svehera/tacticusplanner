@@ -46,6 +46,14 @@ import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-e
 import { ILreProgressModel } from './lre.models';
 import { LreService } from './lre.service';
 
+const passesNameFilter = (filter: string, character: ICharacter2) => {
+    if (!filter) return true;
+    return (
+        character.name.toLowerCase().includes(filter.toLowerCase()) ||
+        ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
+    );
+};
+
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
         LegendaryEventService.getUnfinishedEvents().map(x => x.id)
@@ -67,7 +75,7 @@ export const MasterTable = () => {
         value => value
     );
 
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
     const getSelectedChars = (eventId: LegendaryEventEnum) => {
         const teams = getSelectedTeams(eventId);
@@ -76,23 +84,15 @@ export const MasterTable = () => {
         );
     };
 
-    const passesNameFilter = (filter: string, character: ICharacter2) => {
-        if (!filter) return true;
-        return (
-            character.name.toLowerCase().includes(filter.toLowerCase()) ||
-            ('shortName' in character && character.shortName.toLowerCase().includes(filter.toLowerCase()))
-        );
-    };
-
     const selectedCharsRows: ITableRow[] = useMemo(() => {
-        const temp: Array<{
+        const temporary: Array<{
             character: ICharacter2;
             characterId: string;
             eventId: LegendaryEventEnum;
             points: number;
             slots: number;
         }> = [];
-        activeLegendaryEvents.forEach(eventId => {
+        for (const eventId of activeLegendaryEvents) {
             const legendaryEvent = getLre(eventId, resolvedCharacters);
             const legendaryEventProgress = LreService.mapProgressDtoToModel(
                 leProgress[legendaryEvent.id],
@@ -118,40 +118,40 @@ export const MasterTable = () => {
             );
 
             const eventCharacters = legendaryEvent.allowedUnits
-                .filter(x => selectedChars.includes(x.snowprintId!))
+                .filter(x => selectedChars.includes(x.snowprintId))
                 .sort((a, b) => {
                     const aTotal =
-                        (alpha[a.snowprintId!]?.points ?? 0) +
-                        (beta[a.snowprintId!]?.points ?? 0) +
-                        (gamma[a.snowprintId!]?.points ?? 0);
+                        (alpha[a.snowprintId]?.points ?? 0) +
+                        (beta[a.snowprintId]?.points ?? 0) +
+                        (gamma[a.snowprintId]?.points ?? 0);
                     const bTotal =
-                        (alpha[b.snowprintId!]?.points ?? 0) +
-                        (beta[b.snowprintId!]?.points ?? 0) +
-                        (gamma[b.snowprintId!]?.points ?? 0);
+                        (alpha[b.snowprintId]?.points ?? 0) +
+                        (beta[b.snowprintId]?.points ?? 0) +
+                        (gamma[b.snowprintId]?.points ?? 0);
 
                     return bTotal - aTotal;
                 })
                 .filter(x => passesNameFilter(filter, x))
                 .map(x => ({
                     character: x,
-                    characterId: x.snowprintId!,
+                    characterId: x.snowprintId,
                     eventId,
                     // className: Rank[x.rank].toLowerCase(),
                     // tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
                     points:
-                        (alpha[x.snowprintId!]?.points ?? 0) +
-                        (beta[x.snowprintId!]?.points ?? 0) +
-                        (gamma[x.snowprintId!]?.points ?? 0),
+                        (alpha[x.snowprintId]?.points ?? 0) +
+                        (beta[x.snowprintId]?.points ?? 0) +
+                        (gamma[x.snowprintId]?.points ?? 0),
                     slots:
-                        (alpha[x.snowprintId!]?.slots ?? 0) +
-                        (beta[x.snowprintId!]?.slots ?? 0) +
-                        (gamma[x.snowprintId!]?.slots ?? 0),
+                        (alpha[x.snowprintId]?.slots ?? 0) +
+                        (beta[x.snowprintId]?.slots ?? 0) +
+                        (gamma[x.snowprintId]?.slots ?? 0),
                 }));
 
-            temp.push(...eventCharacters);
-        });
+            temporary.push(...eventCharacters);
+        }
 
-        const grouped = groupBy(temp, 'characterId');
+        const grouped = groupBy(temporary, 'characterId');
 
         return map(grouped, items => {
             const charData = {
@@ -161,14 +161,14 @@ export const MasterTable = () => {
                 totalPoints: sum(items.map(x => x.points)),
                 totalSlots: sum(items.map(x => x.slots)),
             };
-            items.forEach(item => {
+            for (const item of items) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}points`] = item.points;
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}slots`] = item.slots;
-            });
+            }
 
             return charData;
         }) as any;
@@ -183,12 +183,12 @@ export const MasterTable = () => {
                         x => CharactersService.resolveCharacter(x)?.snowprintId ?? x
                     );
                 }
-                chars.forEach(character => {
+                for (const character of chars) {
                     if (!result[character]) {
                         result[character] = [];
                     }
                     result[character] = uniq([...result[character], ...team.restrictionsIds]);
-                });
+                }
             }
             return result;
         }
@@ -250,10 +250,10 @@ export const MasterTable = () => {
     }, [filter, activeLegendaryEvents, pointsCalculation, resolvedCharacters, leProgress, leSelectedTeams]);
 
     const [selection, setSelection] = useState<CharactersSelection>(
-        selectedCharsRows.length ? CharactersSelection.Selected : CharactersSelection.All
+        selectedCharsRows.length > 0 ? CharactersSelection.Selected : CharactersSelection.All
     );
 
-    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
+    const columnDefinitions: Array<ColDef | ColGroupDef> = useMemo(() => {
         return [
             {
                 headerName: 'Character',
@@ -361,7 +361,7 @@ export const MasterTable = () => {
     }, [selection, activeLegendaryEvents]);
 
     const rows = useMemo<ITableRow[]>(() => {
-        const temp: Array<{
+        const temporary: Array<{
             character: ICharacter2;
             characterId: string;
             eventId: LegendaryEventEnum;
@@ -369,7 +369,7 @@ export const MasterTable = () => {
             slots: number;
         }> = [];
 
-        activeLegendaryEvents.forEach(eventId => {
+        for (const eventId of activeLegendaryEvents) {
             const legendaryEvent = getLre(eventId, resolvedCharacters);
             const chars =
                 selection === 'all'
@@ -395,9 +395,9 @@ export const MasterTable = () => {
                     slots: x.legendaryEvents[legendaryEvent.id].totalSlots,
                 }));
 
-            temp.push(...eventCharacters);
-        });
-        const grouped = groupBy(temp, 'characterId');
+            temporary.push(...eventCharacters);
+        }
+        const grouped = groupBy(temporary, 'characterId');
 
         return map(grouped, items => {
             const charData = {
@@ -407,14 +407,14 @@ export const MasterTable = () => {
                 totalPoints: sum(items.map(x => x.points)),
                 totalSlots: sum(items.map(x => x.slots)),
             };
-            items.forEach(item => {
+            for (const item of items) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}points`] = item.points;
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 charData[`${item.eventId}slots`] = item.slots;
-            });
+            }
 
             return charData;
         }) as any;
@@ -499,7 +499,7 @@ export const MasterTable = () => {
                         }>
                         {LegendaryEventService.getUnfinishedEvents().map(x => (
                             <MenuItem key={x.id} value={x.id}>
-                                <Checkbox checked={activeLegendaryEvents.indexOf(x.id) > -1} />
+                                <Checkbox checked={activeLegendaryEvents.includes(x.id)} />
                                 <ListItemIcon>
                                     <UnitShardIcon
                                         icon={CharactersService.resolveCharacter(x.unitSnowprintId).roundIcon}
@@ -514,7 +514,7 @@ export const MasterTable = () => {
 
                         {CharactersService.inactiveLres.map(x => (
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
-                                <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
+                                <Checkbox checked={activeLegendaryEvents.includes(x.lre!.id)} />
                                 <ListItemIcon>
                                     <UnitShardIcon icon={x.roundIcon} height={30} />
                                 </ListItemIcon>
@@ -532,17 +532,17 @@ export const MasterTable = () => {
             </div>
             <div className="ag-theme-material h-[calc(100vh-150px)] w-full">
                 <AgGridReact
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
-                    columnDefs={columnsDef}
+                    columnDefs={columnDefinitions}
                     defaultColDef={{
                         suppressMovable: true,
                     }}
-                    onSortChanged={() => gridRef.current?.api?.refreshCells()}
-                    onFilterChanged={() => gridRef.current?.api?.refreshCells()}></AgGridReact>
+                    onSortChanged={() => gridReference.current?.api?.refreshCells()}
+                    onFilterChanged={() => gridReference.current?.api?.refreshCells()}></AgGridReact>
             </div>
         </div>
     );

@@ -35,9 +35,19 @@ interface IUpgradesTableRow {
     craftable: boolean;
 }
 
+/**
+ * @returns If the material is a craftable upgrade, returns all the unique
+ * materials needed to craft it. Otherwise just returns the material.
+ */
+const expandMaterial = (material: string): string[] => {
+    const upgrade = UpgradesService.recipeExpandedUpgradeData[material];
+    if (!upgrade) return [material];
+    return Object.keys(upgrade.expandedRecipe);
+};
+
 export const Upgrades = () => {
     const selectionOptions: Selection[] = ['Base Upgrades', 'Craftable'];
-    const gridRef = useRef<AgGridReact<IUpgradesTableRow>>(null);
+    const gridReference = useRef<AgGridReact<IUpgradesTableRow>>(null);
 
     const [nameFilter, setNameFilter] = useState<string>('');
     const [showCharacters, setShowCharacters] = useState<boolean>(false);
@@ -144,27 +154,22 @@ export const Upgrades = () => {
                         headerName: 'Locations',
                         cellRenderer: (params: ICellRendererParams<IBaseUpgrade>) => {
                             const { data } = params;
-                            if (!data || !data.locations) {
-                                return <span>Unknown</span>;
-                            } else {
-                                return (
-                                    <div className="flex-box gap5 wrap">
-                                        {data.locations.map(location => {
-                                            if (!location) {
-                                                return <></>;
-                                            }
-                                            return (
-                                                <CampaignLocation
-                                                    key={location.id}
-                                                    location={location}
-                                                    short={true}
-                                                    unlocked={true}
-                                                />
-                                            );
-                                        })}
-                                    </div>
-                                );
-                            }
+                            if (!data || !data.locations) return <span>Unknown</span>;
+                            return (
+                                <div className="flex-box gap5 wrap">
+                                    {data.locations.map(location => {
+                                        if (!location) return <></>;
+                                        return (
+                                            <CampaignLocation
+                                                key={location.id}
+                                                location={location}
+                                                short={true}
+                                                unlocked={true}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                            );
                         },
                         minWidth: 150,
                     },
@@ -183,16 +188,6 @@ export const Upgrades = () => {
             }
         }
     }, [selection, showCharacters]);
-
-    /**
-     * @returns If the material is a craftable upgrade, returns all the unique
-     * materials needed to craft it. Otherwise just returns the material.
-     */
-    const expandMaterial = (material: string): string[] => {
-        const upgrade = UpgradesService.recipeExpandedUpgradeData[material];
-        if (!upgrade) return [material];
-        return Object.keys(upgrade.expandedRecipe);
-    };
 
     const rowsData = useMemo(() => {
         const upgradesLocations = CampaignsService.getUpgradesLocations();
@@ -220,7 +215,7 @@ export const Upgrades = () => {
                             .flat()
                             .flatMap(x => [x, expandMaterial(x)].flat());
                         if (allMats.includes(x.snowprintId)) {
-                            const charData = CharactersService.charactersData.find(x => x.snowprintId! === character);
+                            const charData = CharactersService.charactersData.find(x => x.snowprintId === character);
                             const existingChar = characters.find(x => x.id === character);
                             if (existingChar) {
                                 existingChar.ranks.push(stringToRank(rank));
@@ -329,14 +324,14 @@ export const Upgrades = () => {
             <div className="ag-theme-material h-[calc(100vh-220px)] w-full">
                 <AgGridReact
                     key={selection}
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
-                    onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
+                    onGridReady={useFitGridOnWindowResize(gridReference)}></AgGridReact>
             </div>
         </div>
     );

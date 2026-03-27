@@ -5,13 +5,14 @@ import { Rank } from '@/fsd/5-shared/model';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
-import { IMowDb } from '@/fsd/3-features/characters/characters.models';
+import { IMowDatabase } from '@/fsd/3-features/characters/characters.models';
 import { getLre } from '@/fsd/3-features/lre';
 import {
     ILreProgressDto,
     ILreBattleProgressDto,
     ILreRequirementsProgressDto,
     LrePointsCategoryId,
+    battlesProgressToCompact,
 } from '@/fsd/3-features/lre-progress';
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
@@ -27,6 +28,7 @@ import {
     IAutoTeamsPreferences,
     ICampaignsProgress,
     IDailyRaids,
+    IDailyRaidsStored,
     IDailyRaidsPreferences,
     IInventory,
     ILegendaryEventSelectedRequirements,
@@ -66,18 +68,18 @@ export class PersonalDataLocalStorage {
                 seenAppVersion: this.getItem<string>('seenAppVersion') ?? defaultData.seenAppVersion,
                 autoTeamsPreferences: {
                     ...defaultData.autoTeamsPreferences,
-                    ...(this.getItem<IAutoTeamsPreferences>('autoTeamsPreferences') ?? {}),
+                    ...this.getItem<IAutoTeamsPreferences>('autoTeamsPreferences'),
                 },
                 dailyRaidsPreferences: {
                     ...defaultData.dailyRaidsPreferences,
-                    ...(this.getItem<IDailyRaidsPreferences>('dailyRaidsPreferences') ?? {}),
+                    ...this.getItem<IDailyRaidsPreferences>('dailyRaidsPreferences'),
                 },
                 viewPreferences: {
                     ...defaultData.viewPreferences,
-                    ...(this.getItem<IViewPreferences>('viewPreferences') ?? {}),
+                    ...this.getItem<IViewPreferences>('viewPreferences'),
                 },
                 characters: this.getItem<IPersonalCharacterData2[]>('characters') ?? defaultData.characters,
-                mows: this.getItem<IMowDb[]>('mows') ?? defaultData.mows,
+                mows: this.getItem<IMowDatabase[]>('mows') ?? defaultData.mows,
                 teams: this.getItem<IPersonalTeam[]>('teams') ?? defaultData.teams,
                 teams2: this.getItem<ITeam2[]>('teams2') ?? defaultData.teams2,
                 warDefense2: this.getItem<WarDefense2State>('warDefense2') ?? defaultData.warDefense2,
@@ -97,31 +99,31 @@ export class PersonalDataLocalStorage {
                 leSettings: this.getItem<ILegendaryEventSettings>('leSettings') ?? defaultData.leSettings,
                 campaignsProgress: {
                     ...defaultData.campaignsProgress,
-                    ...(this.getItem<ICampaignsProgress>('campaignsProgress') ?? {}),
+                    ...this.getItem<ICampaignsProgress>('campaignsProgress'),
                 },
                 inventory: {
                     ...defaultData.inventory,
-                    ...(this.getItem<IInventory>('inventory') ?? {}),
+                    ...this.getItem<IInventory>('inventory'),
                 },
                 dailyRaids: {
                     ...defaultData.dailyRaids,
-                    ...(this.getItem<IDailyRaids>('dailyRaids') ?? {}),
+                    ...this.getItem<IDailyRaids | IDailyRaidsStored>('dailyRaids'),
                 },
                 guildWar: {
                     ...defaultData.guildWar,
-                    ...(this.getItem<IGuildWar>('guildWar') ?? {}),
+                    ...this.getItem<IGuildWar>('guildWar'),
                 },
                 guild: {
                     ...defaultData.guild,
-                    ...(this.getItem<IGuild>('guild') ?? {}),
+                    ...this.getItem<IGuild>('guild'),
                 },
                 xpIncome: {
                     ...defaultData.xpIncome,
-                    ...(this.getItem<XpIncomeState>('xpIncome') ?? {}),
+                    ...this.getItem<XpIncomeState>('xpIncome'),
                 },
                 xpUse: {
                     ...defaultData.xpUse,
-                    ...(this.getItem<XpUseState>('xpUse') ?? {}),
+                    ...this.getItem<XpUseState>('xpUse'),
                 },
                 rosterSnapshots: {
                     ...defaultData.rosterSnapshots,
@@ -135,15 +137,15 @@ export class PersonalDataLocalStorage {
         } else {
             // no version (convert v1 to v2)
             const v1StoredData = localStorage.getItem(this.v1personalDataStorageKey);
-            if (!v1StoredData) {
-                result = defaultData;
-            } else {
+            if (v1StoredData) {
                 try {
                     const v1Data: IPersonalData | IPersonalData2 = JSON.parse(v1StoredData);
                     result = convertData(v1Data);
                 } catch {
                     result = defaultData;
                 }
+            } else {
+                result = defaultData;
             }
         }
         return result;
@@ -165,15 +167,12 @@ export class PersonalDataLocalStorage {
 
     restoreData(): IPersonalData2 | null {
         const backup = localStorage.getItem(this.backupKey);
-        if (!backup) {
+        if (!backup) return null;
+        try {
+            const data: IPersonalData | IPersonalData2 = JSON.parse(backup);
+            return convertData(data);
+        } catch {
             return null;
-        } else {
-            try {
-                const data: IPersonalData | IPersonalData2 = JSON.parse(backup);
-                return convertData(data);
-            } catch {
-                return null;
-            }
         }
     }
 
@@ -230,11 +229,11 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             modifiedDate: v1Data.modifiedDate ? new Date(v1Data.modifiedDate) : defaultData.modifiedDate,
             autoTeamsPreferences: {
                 ...defaultData.autoTeamsPreferences,
-                ...(v1Data.autoTeamsPreferences ?? {}),
+                ...v1Data.autoTeamsPreferences,
             },
             viewPreferences: {
                 ...defaultData.viewPreferences,
-                ...(v1Data.viewPreferences ?? {}),
+                ...v1Data.viewPreferences,
             },
             characters:
                 v1Data.characters.map(x => ({
@@ -245,7 +244,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
                 })) ?? defaultData.characters,
             goals: v1Data.goals ?? defaultData.goals,
             selectedTeamOrder: v1Data.selectedTeamOrder ?? defaultData.selectedTeamOrder,
-            leTeams: v1Data.legendaryEvents3 ?? defaultData.leTeams,
+            leTeams: migrateLreTeams(v1Data.legendaryEvents3 ?? defaultData.leTeams),
             leProgress: v1Data.legendaryEventsProgress ?? defaultData.leProgress,
             leSelectedRequirements: v1Data.legendaryEventSelectedRequirements ?? defaultData.leSelectedRequirements,
             leSettings: defaultData.leSettings,
@@ -269,13 +268,14 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
 
     return {
         ...v1Data,
+        leTeams: migrateLreTeams(v1Data.leTeams ?? defaultData.leTeams),
         inventory: {
             ...defaultData.inventory,
             ...v1Data.inventory,
         },
         gameModeTokens: {
             ...defaultData.gameModeTokens,
-            ...(v1Data.gameModeTokens ?? {}),
+            ...v1Data.gameModeTokens,
         },
     };
 };
@@ -285,35 +285,59 @@ function migrateLreTeams(
 ): LegendaryEventData<ILegendaryEventSelectedTeams> {
     for (const teamsByEventKey in teamsByEvent) {
         const eventTeams = teamsByEvent[teamsByEventKey as unknown as LegendaryEventEnum];
-        if (eventTeams && !eventTeams.teams?.length) {
+        if (!eventTeams) {
+            continue;
+        }
+
+        if (!eventTeams.teams?.length) {
             populateTeams(eventTeams);
+        }
+
+        if (eventTeams.teams?.length) {
+            eventTeams.teams = eventTeams.teams.map(team => {
+                const charSnowprintIds = (
+                    team.charSnowprintIds?.length
+                        ? team.charSnowprintIds
+                        : team.charactersIds?.length
+                          ? team.charactersIds
+                          : (team.characters?.map(character => character.snowprintId) ?? [])
+                ).map(resolve);
+                const cleanedTeam: ILreTeam = {
+                    ...team,
+                    charSnowprintIds,
+                    charactersIds: [],
+                };
+
+                delete cleanedTeam.characters;
+                return cleanedTeam;
+            });
         }
     }
 
     return teamsByEvent;
 }
 
+const resolve = (char: string) => CharactersService.canonicalName(char);
+// Helper function to compare two arrays for equality
+function areArraysEqual(array1: string[], array2: string[]): boolean {
+    return array1.length === array2.length && array1.every(char => array2.includes(char));
+}
+
+function doTeamsMatch(team1: string[], team2: string[]) {
+    return areArraysEqual(
+        team1.map(id => CharactersService.canonicalName(id)),
+        team2.map(id => CharactersService.canonicalName(id))
+    );
+}
+
 function populateTeams(data: ILegendaryEventSelectedTeams) {
     const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
     const teams: ILreTeam[] = [];
 
-    // Helper function to compare two arrays for equality
-    function areArraysEqual(arr1: string[], arr2: string[]): boolean {
-        return arr1.length === arr2.length && arr1.every(char => arr2.includes(char));
-    }
-
-    function doTeamsMatch(team1: string[], team2: string[]) {
-        return areArraysEqual(
-            team1.map(id => CharactersService.canonicalName(id)),
-            team2.map(id => CharactersService.canonicalName(id))
-        );
-    }
-
-    sections.forEach(section => {
+    for (const section of sections) {
         const selectedTeams: SelectedTeams = data[section];
 
-        Object.entries(selectedTeams).forEach(([restriction, charSnowprintIds]) => {
-            const resolve = (char: string) => CharactersService.canonicalName(char);
+        for (const [restriction, charSnowprintIds] of Object.entries(selectedTeams)) {
             // Check if there's already a team with the same set of characters
             const existingTeam = teams.find(
                 team =>
@@ -325,6 +349,7 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
 
             if (existingTeam) {
                 // If found, combine the restriction with the existing team's restrictions
+                delete existingTeam.characters; // Remove characters field if it exists
                 if (!existingTeam.restrictionsIds.includes(restriction)) {
                     existingTeam.restrictionsIds.push(restriction);
                 }
@@ -339,8 +364,8 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
                 };
                 teams.push(team);
             }
-        });
-    });
+        }
+    }
 
     data.teams = teams; // Populate the teams field
 }
@@ -348,8 +373,17 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
 function migrateLreProgress(progressByEvent: LegendaryEventData<ILreProgressDto>): LegendaryEventData<ILreProgressDto> {
     for (const progressByEventKey in progressByEvent) {
         const eventProgress = progressByEvent[progressByEventKey as unknown as LegendaryEventEnum];
-        if (eventProgress && !eventProgress.battlesProgress?.length) {
+        if (!eventProgress) {
+            continue;
+        }
+
+        if (!eventProgress.battlesProgress?.length && !eventProgress.compactProgress) {
             populateProgress(eventProgress);
+        }
+
+        if (!eventProgress.compactProgress && eventProgress.battlesProgress?.length) {
+            eventProgress.compactProgress = battlesProgressToCompact(eventProgress.battlesProgress);
+            eventProgress.battlesProgress = undefined;
         }
     }
     return progressByEvent;
@@ -362,9 +396,9 @@ function populateProgress(data: ILreProgressDto) {
     const killPointsIndex = 0;
     const highScoreAndDefeatAllIndex = 1;
 
-    sections.forEach(section => {
+    for (const section of sections) {
         const { battles } = data[section] ?? { battles: [] };
-        battles.forEach((battle, index) => {
+        for (const [index, battle] of battles.entries()) {
             const requirements: ILreRequirementsProgressDto[] = lre[section].unitsRestrictions.map(
                 (restriction, restrictionIndex) => ({
                     id: restriction.name,
@@ -392,8 +426,8 @@ function populateProgress(data: ILreProgressDto) {
                 battleIndex: index,
                 requirements: requirements,
             });
-        });
-    });
+        }
+    }
 
     data.battlesProgress = battlesProgress; // Populate the teams field
 }

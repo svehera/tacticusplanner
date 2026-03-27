@@ -6,7 +6,7 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Alliance, Rarity, RarityMapper, useAuth } from '@/fsd/5-shared/model';
 import { BadgeImage } from '@/fsd/5-shared/ui/icons/badge-image';
-import { OrbIcon } from '@/fsd/5-shared/ui/icons/iconList';
+import { OrbIcon } from '@/fsd/5-shared/ui/icons/icon-list';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button/sync-button';
 
@@ -72,7 +72,7 @@ export const Resources = () => {
     ) => {
         const clickableClass = onClick ? 'cursor-pointer transition-all duration-150' : '';
         const hoverClass = onClick ? 'hover:scale-105 hover:bg-gray-700/50' : '';
-        const disabledClass = !isEnabled ? 'grayscale opacity-40' : '';
+        const disabledClass = isEnabled ? '' : 'grayscale opacity-40';
 
         return (
             <div

@@ -16,34 +16,42 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 
-import { ICharacter2 } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 
 import { ILegendaryEventTrack, ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
 import { ITableRow } from './lre.models';
+import { ISelectedTeamTableCell } from './selected-teams-table.utils';
 
 interface Props {
     track: ILegendaryEventTrack;
-    rows: ITableRow[];
+    rows: ITableRow<ISelectedTeamTableCell | string>[];
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
     editTeam: (teamId: string) => void;
     deleteTeam: (teamId: string) => void;
 }
 
+const isSelectedTeamCell = (value: unknown): value is ISelectedTeamTableCell => {
+    return !!value && typeof value === 'object' && 'character' in value && 'teamId' in value;
+};
+
+const getRowStyle = (params: RowClassParams): RowStyle => {
+    return params.node.rowIndex && params.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
+};
+
 export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoals, editTeam, deleteTeam, track }) => {
     const { viewPreferences } = useContext(StoreContext);
-    const gridRef = useRef<AgGridReact>(null);
+    const gridReference = useRef<AgGridReact>(null);
 
-    const defaultColumnDef: ColDef<ITableRow> = {
+    const defaultColumnDefinition: ColDef<ITableRow<ISelectedTeamTableCell | string>> = {
         headerClass: 'center-header-text',
         resizable: true,
         sortable: false,
         suppressMovable: true,
         wrapHeaderText: true,
-        cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-            const character = props.value;
+        cellRenderer: (props: ICellRendererParams<ISelectedTeamTableCell>) => {
+            const character = isSelectedTeamCell(props.value) ? props.value.character : null;
             if (character) {
                 return (
                     <LreTile
@@ -63,17 +71,17 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
 
             const teamIds = restOfRestrictions.map(restriction => {
                 const value = params.data?.[restriction];
-                if (typeof value === 'object') {
+                if (isSelectedTeamCell(value)) {
                     return value.teamId ?? '';
                 }
                 return '';
             });
 
             let result = 1;
-            let currTeamId = teamIds.shift();
-            while (currTeamId && currTeamId === teamIds[0]) {
+            let currentTeamId = teamIds.shift();
+            while (currentTeamId && currentTeamId === teamIds[0]) {
                 result++;
-                currTeamId = teamIds.shift();
+                currentTeamId = teamIds.shift();
             }
 
             return result;
@@ -92,8 +100,10 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
         }));
     }
 
-    const handleCellCLick = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
-        const value = cellClicked.value?.teamId;
+    const handleCellClick = (
+        cellClicked: CellClickedEvent<ITableRow<ISelectedTeamTableCell | string>, ISelectedTeamTableCell>
+    ) => {
+        const value = isSelectedTeamCell(cellClicked.value) ? cellClicked.value.teamId : '';
 
         if (value) {
             if ((cellClicked.event as MouseEvent).shiftKey) {
@@ -105,12 +115,8 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
     };
 
     useEffect(() => {
-        gridRef.current?.api?.sizeColumnsToFit();
+        gridReference.current?.api?.sizeColumnsToFit();
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, viewPreferences.hideCompleted]);
-
-    const getRowStyle = (params: RowClassParams): RowStyle => {
-        return params.node.rowIndex && params.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
-    };
 
     return (
         <div
@@ -119,14 +125,14 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
             <AgGridReact
                 modules={[AllCommunityModule]}
                 theme={themeBalham}
-                ref={gridRef}
+                ref={gridReference}
                 rowData={rows}
                 rowHeight={35}
                 getRowStyle={getRowStyle}
-                defaultColDef={defaultColumnDef}
+                defaultColDef={defaultColumnDefinition}
                 columnDefs={columnsDefs}
-                onCellClicked={handleCellCLick}
-                onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
+                onCellClicked={handleCellClick}
+                onGridReady={useFitGridOnWindowResize(gridReference)}></AgGridReact>
         </div>
     );
 };

@@ -6,13 +6,13 @@ import { Rarity, RarityStars } from '@/fsd/5-shared/model/enums';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
-import { IMow, IMow2, IMowDb } from '@/fsd/3-features/characters/characters.models';
+import { IMow, IMow2, IMowDatabase } from '@/fsd/3-features/characters/characters.models';
 import { TacticusIntegrationService } from '@/fsd/3-features/tacticus-integration/tacticus-integration.service';
 
 export type MowsAction =
     | {
           type: 'Update';
-          mow: IMowDb;
+          mow: IMowDatabase;
       }
     | {
           type: 'UpdateAbilities';
@@ -52,7 +52,7 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
             state[existingMowIndex] = {
                 ...existingMow,
                 ...mow,
-                stars: mow.stars <= rarityStars ? rarityStars : mow.stars,
+                stars: Math.max(mow.stars, rarityStars),
             };
 
             return [...state];
@@ -115,7 +115,8 @@ export const mowsReducer = (state: Array<IMow | IMow2>, action: MowsAction) => {
             return [...state];
         }
         default: {
-            throw new Error();
+            // @ts-expect-error TS says this should never be reached but we want the error if it does
+            throw new Error(`Unexpected action.type received in reducer: ${action.type}`);
         }
     }
 };

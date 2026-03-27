@@ -27,7 +27,9 @@ import { xpIncomeMenuItem } from '@/fsd/1-pages/input-xp-income/xp-income.menu-i
 import { insightsMenuItem } from '@/fsd/1-pages/insights/insights.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
+import { bulkGoalCreatorMenuItem } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.menu-item';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
+import { cesMenuItem } from '@/fsd/1-pages/plan-ces/ces.menu-item';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
 import { questsMenuItem } from '@/fsd/1-pages/plan-quests/quests.menu-item';
 import { teams2MenuItem } from '@/fsd/1-pages/plan-teams2/teams2.menu-item';
@@ -65,7 +67,8 @@ export const menuItemById = {
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
     mowLookup: mowLookupMenuItem,
     campaigns: new MenuItemTP('Campaigns', <FormatListNumberedIcon />, '/learn/campaigns'),
-    hses: new MenuItemTP('Home-Screen Events', <FormatListNumberedIcon />, '/learn/hse'),
+    hses: new MenuItemTP('Home-Screen Events', <FormatListNumberedIcon />, '/plan/hse'),
+    bulkGoalCreator: bulkGoalCreatorMenuItem,
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
     campaignProgression: campaignProgressionMenuItem,
@@ -88,6 +91,7 @@ export const menuItemById = {
     xpIncome: xpIncomeMenuItem,
     onslaught: new MenuItemTP('Onslaught', <MilitaryTechIcon />, '/learn/onslaught?track=Imperial'),
     quests: questsMenuItem,
+    ces: cesMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -113,6 +117,9 @@ export const planSubMenuWeb: MenuItemTP[] = [
     new MenuItemTP('LRE Archive', <TableChartIcon />, '', '', '', inactiveLreMenuItems),
     menuItemById['campaignProgression'],
     menuItemById['quests'],
+    menuItemById['ces'],
+    menuItemById['hses'],
+    menuItemById['bulkGoalCreator'],
     new MenuItemTP('To Be Deleted', <DeleteForeverIcon />, '', '', '', [
         menuItemById['teams'],
         menuItemById['defense'],
@@ -130,6 +137,9 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['leMasterTable'],
     menuItemById['quests'],
     ...activeLreMenuItems,
+    menuItemById['campaignProgression'],
+    menuItemById['hses'],
+    menuItemById['bulkGoalCreator'],
     menuItemById['teams'],
     menuItemById['defense'],
     menuItemById['offense'],
@@ -144,7 +154,6 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['rankLookup'],
     menuItemById['mowLookup'],
     menuItemById['campaigns'],
-    menuItemById['hses'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildApi'],
@@ -161,7 +170,6 @@ export const learnSubMenu: MenuItemTP[] = [
         menuItemById['upgrades'],
         menuItemById['learnEquipment'],
         menuItemById['campaigns'],
-        menuItemById['hses'],
         menuItemById['onslaught'],
     ]),
     menuItemById['guides'],

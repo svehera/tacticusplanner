@@ -13,7 +13,7 @@ export const gameModeTokensActionReducer = (
             return {
                 ...state,
                 tokens: {
-                    ...(state.tokens ?? {}),
+                    ...state.tokens,
                     ...action.gameModeTokens,
                     lastSetAtSecondsUtc: Math.floor(Date.now() / 1000),
                 },
