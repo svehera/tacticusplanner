@@ -3,7 +3,7 @@
 import { RarityString } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 
-import { UpgradesService } from './upgrades.service';
+import { recipeDataByName } from './data';
 
 export const UpgradeImage = ({
     material,
@@ -79,7 +79,7 @@ export const UpgradeImage = ({
         if (tooltip) {
             return tooltip;
         }
-        return UpgradesService.getUpgradeMaterial(material)?.material ?? material;
+        return recipeDataByName[material]?.material ?? material;
     }, [material, tooltip]);
 
     return (

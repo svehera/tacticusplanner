@@ -1413,7 +1413,10 @@ export class UpgradesService {
                 settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials
                     ? ['hsePoints', 'daysToComplete']
                     : ['priority', 'hsePoints', 'daysToComplete'];
-            const orderingDirections = ['desc', 'asc', 'desc'] as const;
+            const orderingDirections =
+                settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials
+                    ? (['desc', 'desc'] as const)
+                    : (['asc', 'desc', 'desc'] as const);
             switch (settings.preferences.farmPreferences.homeScreenEvent) {
                 case IDailyRaidsHomeScreenEvent.purgeOrder: {
                     taggedLocs = taggedLocs.map(x => ({
