@@ -600,7 +600,7 @@ export class GoalsService {
         }
 
         if (xpNeeded > 0) {
-            for (const rarity of [...XP_BOOK_ORDER].reverse()) {
+            for (const rarity of XP_BOOK_ORDER.toReversed()) {
                 while (xpNeeded > 0 && heldBooks[rarity] > 0) {
                     xpNeeded = Math.max(0, xpNeeded - XP_BOOK_VALUE[rarity]);
                     heldBooks[rarity] -= 1;

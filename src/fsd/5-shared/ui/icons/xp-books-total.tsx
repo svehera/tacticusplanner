@@ -37,7 +37,7 @@ export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
     }, [xp]);
     return (
         <div className="flex-box gap24">
-            {[...XP_BOOK_ORDER].reverse().map(rarity => {
+            {XP_BOOK_ORDER.toReversed().map(rarity => {
                 const booksCount = xpBooks[rarity];
                 const bookName = Rarity[rarity].toLowerCase() + 'Book';
                 return (

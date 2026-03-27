@@ -20,7 +20,7 @@ export function KillzoneList({
                 </tr>
             </thead>
             <tbody>
-                {[...killzones].reverse().map(killzone => (
+                {killzones.toReversed().map(killzone => (
                     <tr
                         key={killzone.name}
                         className="border-t border-stone-300 text-center sm:text-left dark:border-stone-700">

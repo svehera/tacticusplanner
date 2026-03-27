@@ -89,7 +89,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                 itemsAll: items.filter(x => !x.craftable),
                 itemsAllCrafted: items.filter(x => x.craftable),
             })
-        ).reverse();
+        ).toReversed();
     }, [itemsList, filterItem]);
 
     const update = useCallback((upgradeId: string, value: number) => {
