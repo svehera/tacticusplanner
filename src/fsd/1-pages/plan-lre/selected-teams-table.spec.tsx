@@ -17,7 +17,7 @@ interface IMockGridColumn {
         value: unknown;
         data: Record<string, unknown>;
         colDef: IMockGridColumn;
-    }) => React.JSX.Element | null;
+    }) => React.JSX.Element | undefined;
 }
 
 interface IMockGridProps {

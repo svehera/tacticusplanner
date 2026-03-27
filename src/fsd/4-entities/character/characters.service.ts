@@ -1,5 +1,6 @@
 import { uniq } from 'lodash';
 
+import { arrayToKeyedObject } from '@/fsd/5-shared/lib';
 import {
     UnitType,
     RarityMapper,
@@ -32,9 +33,7 @@ export class CharactersService {
     static readonly charactersBySnowprintId: Record<string, ICharacterData> = Object.fromEntries(
         this.charactersData.map(char => [char.snowprintId, char])
     );
-    static readonly charactersById: Record<string, ICharacterData> = Object.fromEntries(
-        this.charactersData.map(char => [char.id, char])
-    );
+    static readonly charactersById = arrayToKeyedObject(this.charactersData, 'id');
     static readonly charactersByShortName: Record<string, ICharacterData> = Object.fromEntries(
         this.charactersData.map(char => [char.shortName.toLowerCase(), char])
     );

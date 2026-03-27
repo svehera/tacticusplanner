@@ -16,7 +16,7 @@ import { isMobile } from 'react-device-detect';
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
+import { arrayToKeyedObject, useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
@@ -66,7 +66,7 @@ export const LreTeamsTable: React.FC<Props> = ({
         [unresolvedCharacters]
     );
     const resolvedCharactersBySnowprintId = useMemo(
-        () => Object.fromEntries(resolvedCharacters.map(character => [character.snowprintId, character])),
+        () => arrayToKeyedObject(resolvedCharacters, 'snowprintId'),
         [resolvedCharacters]
     );
 

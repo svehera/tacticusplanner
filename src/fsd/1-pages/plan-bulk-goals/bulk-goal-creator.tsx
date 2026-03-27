@@ -14,6 +14,7 @@ import { v4 } from 'uuid';
 import { goalsLimit, rankToRarity, rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
+import { filterMap } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { RankIcon, RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -205,22 +206,20 @@ export const BulkGoalCreator = () => {
 
     const bulkTeamCharacters = useMemo(
         () =>
-            bulkUnits
-                .map(entry => {
-                    if (!entry.unit || !('snowprintId' in entry.unit)) return;
-                    const unit = entry.unit;
-                    const char = resolvedCharacters.find(c => c.snowprintId === unit.snowprintId);
-                    if (!char) return;
-                    return {
-                        ...char,
-                        rank: entry.rank,
-                        rarity: entry.rarity,
-                        stars: entry.stars,
-                        activeAbilityLevel: entry.activeAbilityLevel,
-                        passiveAbilityLevel: entry.passiveAbilityLevel,
-                    };
-                })
-                .filter(entry => entry !== undefined),
+            filterMap(bulkUnits, entry => {
+                if (!entry.unit || !('snowprintId' in entry.unit)) return;
+                const unit = entry.unit;
+                const char = resolvedCharacters.find(c => c.snowprintId === unit.snowprintId);
+                if (!char) return;
+                return {
+                    ...char,
+                    rank: entry.rank,
+                    rarity: entry.rarity,
+                    stars: entry.stars,
+                    activeAbilityLevel: entry.activeAbilityLevel,
+                    passiveAbilityLevel: entry.passiveAbilityLevel,
+                };
+            }),
         [bulkUnits, resolvedCharacters]
     );
 

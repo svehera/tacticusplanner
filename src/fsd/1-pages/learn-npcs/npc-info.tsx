@@ -1,5 +1,7 @@
+import { uniq } from 'lodash';
 import React, { useMemo, useState } from 'react';
 
+import { filterMap } from '@/fsd/5-shared/lib';
 import { FactionId } from '@/fsd/5-shared/model';
 
 import { FactionSelect } from '@/fsd/4-entities/faction';
@@ -12,11 +14,7 @@ export const NpcInfo: React.FC = () => {
     const [npc, setNpc] = useState<INpcData>(NpcService.npcDataFull.find(npc => npc.faction === faction)!);
     const [progressionIndex, setProgressionIndex] = useState<number>(0);
 
-    const factions = useMemo(() => {
-        const rawFactions = NpcService.npcDataFull.map(npc => npc.faction).filter(faction => faction !== undefined);
-        const uniqueFactions = new Set(rawFactions);
-        return [...uniqueFactions];
-    }, []);
+    const factions = useMemo(() => uniq(filterMap(NpcService.npcDataFull, npc => npc.faction)), []);
 
     const npcs = useMemo(() => {
         return NpcService.npcDataFull.filter(npc => npc.faction === faction);
