@@ -2,7 +2,6 @@
 import { isEqual } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
-import { isMobile } from 'react-device-detect';
 
 import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
 import { guildReducer } from '@/reducers/guild-reducer';
@@ -138,7 +137,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 .then(({ data }) => {
                     const { modifiedDateTicks } = data;
                     setModifiedDateTicks(modifiedDateTicks);
-                    enqueueSnackbar('Pushed local data to server.', { variant: successVariant });
                 })
                 .catch((error: AxiosError<IErrorResponse>) => {
                     if (error.code === 'ERR_CANCELED') {
@@ -148,16 +146,22 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
                     if (error.response?.status === 401) {
                         logout();
+                        queuedStoreValueReference.current = undefined;
                         enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
                     } else if (error.response?.status === 409) {
+                        queuedStoreValueReference.current = undefined;
                         enqueueSnackbar(
                             'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
                             { variant: 'error' }
                         );
                     } else {
-                        enqueueSnackbar('Failed to push data to server. Please do manual back-up.', {
-                            variant: 'error',
-                        });
+                        queuedStoreValueReference.current = undefined;
+                        enqueueSnackbar(
+                            'Failed to push data to server. Please export JSON, refresh, wait for server data, then import JSON.',
+                            {
+                                variant: 'error',
+                            }
+                        );
                     }
                 })
                 .finally(() => {
@@ -167,7 +171,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     queuedStoreValueReference.current = undefined;
 
                     if (queuedStoreValue) {
-                        pushDataToServer(queuedStoreValue, 'success');
+                        pushDataToServer(queuedStoreValue, successVariant);
+                    } else {
+                        enqueueSnackbar('Pushed local data to server.', { variant: successVariant });
                     }
                 });
         },
@@ -314,12 +320,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
         if (isAuthenticated) {
             clearTimeout(saveTimeoutReference.current);
-            saveTimeoutReference.current = setTimeout(
-                () => {
-                    pushDataToServer(storeValue, 'success');
-                },
-                isMobile ? 1000 : 10_000
-            );
+            saveTimeoutReference.current = setTimeout(() => {
+                pushDataToServer(storeValue, 'success');
+            }, 100);
         }
     }, [
         autoTeamsPreferences,
