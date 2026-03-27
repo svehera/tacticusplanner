@@ -739,7 +739,7 @@ export class UpgradesService {
                 raid => (raid.raidLocations.every(loc => loc.raidsAlreadyPerformed === loc.dailyBattleCount) ? 1 : 0),
                 raid => Math.min(...raid.raidLocations.map(loc => locIndex.get(loc.id) ?? Number.POSITIVE_INFINITY)),
             ],
-            ['desc', 'asc']
+            ['asc', 'asc']
         );
         day.energyTotal = sum(day.raids.map(raid => raid.energyTotal));
         day.raidsTotal = sum(day.raids.map(raid => raid.raidsTotal));
@@ -1413,7 +1413,10 @@ export class UpgradesService {
                 settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials
                     ? ['hsePoints', 'daysToComplete']
                     : ['priority', 'hsePoints', 'daysToComplete'];
-            const orderingDirections = ['desc', 'asc', 'desc'] as const;
+            const orderingDirections =
+                settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials
+                    ? (['desc', 'desc'] as const)
+                    : (['asc', 'desc', 'desc'] as const);
             switch (settings.preferences.farmPreferences.homeScreenEvent) {
                 case IDailyRaidsHomeScreenEvent.purgeOrder: {
                     taggedLocs = taggedLocs.map(x => ({
