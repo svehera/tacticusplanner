@@ -739,7 +739,7 @@ export class UpgradesService {
                 raid => (raid.raidLocations.every(loc => loc.raidsAlreadyPerformed === loc.dailyBattleCount) ? 1 : 0),
                 raid => Math.min(...raid.raidLocations.map(loc => locIndex.get(loc.id) ?? Number.POSITIVE_INFINITY)),
             ],
-            ['desc', 'asc']
+            ['asc', 'asc']
         );
         day.energyTotal = sum(day.raids.map(raid => raid.energyTotal));
         day.raidsTotal = sum(day.raids.map(raid => raid.raidsTotal));

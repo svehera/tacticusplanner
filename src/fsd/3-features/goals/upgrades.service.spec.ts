@@ -4174,7 +4174,7 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             buildSettingsForHse(IDailyRaidsFarmOrder.goalPriority, IDailyRaidsHomeScreenEvent.purgeOrder)
         );
 
-        expect(sorted.map(loc => loc.id)).toEqual(['Octarius36', 'Octarius40', 'Octarius Mirror Elite30']);
+        expect(sorted.map(loc => loc.id)).toEqual(['Octarius Mirror Elite30', 'Octarius40', 'Octarius36']);
     });
 
     it('orders purge order battles by hsePoints (total materials)', () => {
@@ -4228,7 +4228,7 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             buildSettingsForHse(IDailyRaidsFarmOrder.goalPriority, IDailyRaidsHomeScreenEvent.warpSurge)
         );
 
-        expect(sorted.map(loc => loc.id)).toEqual(['Saim-Hann Elite39', 'Saim-Hann10', 'Fall of Cadia Mirror Elite39']);
+        expect(sorted.map(loc => loc.id)).toEqual(['Fall of Cadia Mirror Elite39', 'Saim-Hann10', 'Saim-Hann Elite39']);
     });
 
     it('orders warp surge battles by hsePoints (total materials)', () => {
@@ -4281,7 +4281,7 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             {},
             buildSettingsForHse(IDailyRaidsFarmOrder.goalPriority, IDailyRaidsHomeScreenEvent.machineHunt)
         );
-        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus Elite5', 'Indomitus23', 'Indomitus37']);
+        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus23', 'Indomitus37', 'Indomitus Elite5']);
     });
 
     it('orders machine hunt battles by hsePoints (total materials)', () => {
@@ -4305,6 +4305,6 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             buildSettingsForHse(IDailyRaidsFarmOrder.totalMaterials, IDailyRaidsHomeScreenEvent.machineHunt)
         );
 
-        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus37', 'Indomitus23', 'Indomitus Elite5']);
+        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus23', 'Indomitus37', 'Indomitus Elite5']);
     });
 });
