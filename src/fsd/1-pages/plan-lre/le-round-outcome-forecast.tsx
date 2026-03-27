@@ -82,7 +82,6 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
         () => LeRoundOutcomeForecastService.getLegendaryEventRoundStatuses(legendaryEvent, nowMillis),
         [legendaryEvent, nowMillis]
     );
-    statuses[1].status = 'active'; // Force round 2 to active for testing purposes
 
     const forecasts = useMemo(
         () =>
