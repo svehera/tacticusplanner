@@ -7,6 +7,7 @@ import { charsUnlockShards, charsProgression } from 'src/models/constants';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalCharacterData2, ICharProgression } from 'src/models/interfaces';
 
+import { filterMap } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, UnitType, RarityStars } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
@@ -41,7 +42,6 @@ import { filterXenos } from './functions/filter-by-xenos';
 import { needToAscendCharacter } from './functions/need-to-ascend';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { needToLevelCharacter } from './functions/need-to-level';
-import { filterMap } from '@/fsd/5-shared/lib';
 
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter?: string): IUnit[] {

@@ -1,5 +1,6 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
+import { uniq } from 'lodash';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
@@ -17,7 +18,6 @@ import { MowGrid } from './mow-grid';
 import { TeamFlow } from './team-flow';
 import { Teams2Service } from './teams2.service';
 import { UnitFilter } from './unit-filter';
-import { uniq } from 'lodash';
 
 interface Props {
     chars: ICharacter2[];
