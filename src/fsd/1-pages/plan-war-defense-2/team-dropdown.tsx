@@ -27,12 +27,12 @@ export const TeamDropdown: React.FC<Props> = ({
     selectedTeamName,
     onSelect,
 }) => {
-    const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+    const [anchorElement, setAnchorElement] = useState<HTMLElement>();
 
     const open = Boolean(anchorElement);
 
     const handleOpen = (event: React.MouseEvent<HTMLElement>) => setAnchorElement(event.currentTarget);
-    const handleClose = () => setAnchorElement(null);
+    const handleClose = () => setAnchorElement(undefined);
 
     const handleSelect = (teamName: string) => {
         onSelect(teamName);

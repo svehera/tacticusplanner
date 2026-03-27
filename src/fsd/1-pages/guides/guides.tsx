@@ -51,7 +51,7 @@ const handleShare = (teamId: number) => {
     navigator.clipboard.writeText(shareLink).then(_ => enqueueSnackbar('Link Copied', { variant: 'success' }));
 };
 
-const handleViewOriginal = (teamId: number | null) => {
+const handleViewOriginal = (teamId: number | undefined) => {
     const route = (isMobile ? '/mobile' : '') + `/learn/guides?guideId=${teamId}`;
     const link = location.origin + route;
 
@@ -75,9 +75,9 @@ export const Guides: React.FC = () => {
         activeTab => activeTab.toString()
     );
 
-    const [viewTeamId, setViewTeamId] = useQueryState<number | null>(
+    const [viewTeamId, setViewTeamId] = useQueryState<number | undefined>(
         'guideId',
-        teamIdParameter => (teamIdParameter ? +teamIdParameter : null),
+        teamIdParameter => (teamIdParameter ? +teamIdParameter : undefined),
         teamId => (teamId ? teamId.toString() : '')
     );
 
@@ -106,12 +106,12 @@ export const Guides: React.FC = () => {
     );
 
     const [teams, setTeams] = useState<IGuide[]>([]);
-    const [nextQueryParameters, setNextQueryParameters] = useState<string | null>(null);
+    const [nextQueryParameters, setNextQueryParameters] = useState<string>();
     const [total, setTotal] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const [viewGuide, setViewGuide] = useState<IGuide | null>(null);
-    const [editGuide, setEditGuide] = useState<IGuide | null>(null);
+    const [viewGuide, setViewGuide] = useState<IGuide>();
+    const [editGuide, setEditGuide] = useState<IGuide>();
     const [moderateTeam, setModerateTeam] = useState<GuidesStatus>(GuidesStatus.approved);
     const [guidesFilter, setGuidesFilter] = useState<IGuideFilter>({
         primaryMode: primaryModeFilter as any,
@@ -166,7 +166,7 @@ export const Guides: React.FC = () => {
                         return [...map.values()];
                     });
                 }
-                setNextQueryParameters(response.next);
+                setNextQueryParameters(response.next ?? undefined);
                 setTotal(response.total);
             }
         } catch (error) {
@@ -191,7 +191,7 @@ export const Guides: React.FC = () => {
                     for (const t of response.teams) map.set(t.teamId, t);
                     return [...map.values()];
                 });
-                setNextQueryParameters(response.next);
+                setNextQueryParameters(response.next ?? undefined);
             }
         } catch (error) {
             console.error('Error loading teams:', error);
@@ -331,7 +331,7 @@ export const Guides: React.FC = () => {
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setTeams([]);
-        setNextQueryParameters(null);
+        setNextQueryParameters(undefined);
         setTotal(0);
         setActiveTab(newValue);
     };
@@ -340,7 +340,7 @@ export const Guides: React.FC = () => {
         setModerateTeam(status);
         if (status === GuidesStatus.approved) {
             approveTeam(teamId);
-            setViewGuide(null);
+            setViewGuide(undefined);
             setTeams(currentTeams => {
                 if (activeTab === GuidesGroup.pending) {
                     return currentTeams.filter(x => x.teamId !== teamId);
@@ -358,7 +358,7 @@ export const Guides: React.FC = () => {
     const handleTeamReject = (teamId: number, reason: string) => {
         setModerateTeam(GuidesStatus.approved);
         rejectTeam(teamId, reason);
-        setViewGuide(null);
+        setViewGuide(undefined);
         setTeams(currentTeams => {
             if (activeTab === GuidesGroup.pending) {
                 return currentTeams.filter(x => x.teamId !== teamId);
@@ -404,7 +404,7 @@ export const Guides: React.FC = () => {
 
     const handleApplyFilters = (filter: IGuideFilter) => {
         setTeams([]);
-        setNextQueryParameters(null);
+        setNextQueryParameters(undefined);
         setGuidesFilter(filter);
 
         setSearchParameters(
@@ -465,8 +465,8 @@ export const Guides: React.FC = () => {
         // Only clear guideId if it exists to avoid unnecessary query param writes
         // that could drop activeTab and cause the UI to jump back to All
         loadTeams(initialQueryParameters).then(() => {
-            if (viewTeamId !== null) {
-                setViewTeamId(null);
+            if (viewTeamId) {
+                setViewTeamId(undefined);
             }
         });
     }, [activeTab]);
@@ -582,7 +582,7 @@ export const Guides: React.FC = () => {
                     team={viewGuide}
                     units={[...characters, ...resolvedMows]}
                     moderate={status => handleTeamModeration(viewGuide!.teamId, status)}
-                    onClose={() => setViewGuide(null)}
+                    onClose={() => setViewGuide(undefined)}
                     onShare={() => handleShare(viewGuide.teamId)}
                     onViewOriginal={() => handleViewOriginal(viewGuide.originalTeamId)}
                     onEdit={() => handleEdit(viewGuide)}
@@ -595,7 +595,7 @@ export const Guides: React.FC = () => {
                     guide={editGuide}
                     units={[...characters, ...resolvedMows]}
                     saveGuide={updated => updateGuide(editGuide?.teamId, updated)}
-                    onClose={() => setEditGuide(null)}
+                    onClose={() => setEditGuide(undefined)}
                 />
             )}
 

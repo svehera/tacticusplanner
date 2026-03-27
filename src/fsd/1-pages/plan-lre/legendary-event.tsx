@@ -29,7 +29,7 @@ export const LegendaryEvent = ({
     const { model: lreProgress } = useLreProgress(legendaryEvent);
 
     const [showAddTeam, setShowAddTeam] = useState(false);
-    const [editTeam, setEditTeam] = useState<ILreTeam | null>(null);
+    const [editTeam, setEditTeam] = useState<ILreTeam>();
     const [preselectedTrackId, setPreselectedTrackId] = useState<LreTrackId>('alpha');
     const [preselectedRequirements, setPreselectedRequirements] = useState<string[]>([]);
 
@@ -90,7 +90,7 @@ export const LegendaryEvent = ({
             charSnowprintIds: team.charSnowprintIds ?? [],
             expectedBattleClears: team.expectedBattleClears,
         });
-        setEditTeam(null);
+        setEditTeam(undefined);
     };
 
     const deleteTeam = (teamId: string) => {
@@ -100,7 +100,7 @@ export const LegendaryEvent = ({
                 eventId: legendaryEvent.id,
                 teamId,
             });
-            setEditTeam(null);
+            setEditTeam(undefined);
         }
     };
 
@@ -168,7 +168,7 @@ export const LegendaryEvent = ({
                     lre={legendaryEvent}
                     team={editTeam}
                     upgradeRankOrMowGoals={upgradeRankOrMowGoals}
-                    onClose={() => setEditTeam(null)}
+                    onClose={() => setEditTeam(undefined)}
                     saveTeam={saveLreTeam}
                     deleteTeam={deleteTeam}
                 />

@@ -88,7 +88,7 @@ export const TeamGraph: React.FC<Props> = ({ units }) => {
                                 left: 40,
                             }}
                             enableGridX={false}
-                            axisBottom={null}
+                            axisBottom={undefined}
                             enableGridY={true}
                             yScale={{
                                 type: 'linear',

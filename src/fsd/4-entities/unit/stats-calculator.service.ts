@@ -53,7 +53,7 @@ export class StatsCalculatorService {
      *          and equipment. -1 if the unit can't be found.
      */
     static getHealth(unit: ICharacter2 | undefined): number {
-        if (unit == null) return 0;
+        if (unit == undefined) return 0;
         return this.calculateHealth(
             unit!.snowprintId,
             unit!.stars,
@@ -67,7 +67,7 @@ export class StatsCalculatorService {
      *          and equipment. -1 if the unit can't be found.
      */
     static getDamage(unit: ICharacter2 | undefined): number {
-        if (unit == null) return 0;
+        if (unit == undefined) return 0;
         return this.calculateDamage(
             unit!.snowprintId,
             unit!.stars,
@@ -81,7 +81,7 @@ export class StatsCalculatorService {
      *          and equipment. -1 if the unit can't be found.
      */
     static getArmor(unit: ICharacter2 | undefined): number {
-        if (unit == null) return 0;
+        if (unit == undefined) return 0;
         return this.calculateArmor(
             unit!.snowprintId,
             unit!.stars,

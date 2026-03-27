@@ -17,7 +17,7 @@ import { GoalEstimateRow } from './estimate-row';
 interface Props {
     goal: ICharacterAscendGoal;
     goalEstimate: IGoalEstimate;
-    calendarDate: string | null;
+    calendarDate: string | undefined;
     characters: ICharacter2[];
     mows: IMow2[];
 }

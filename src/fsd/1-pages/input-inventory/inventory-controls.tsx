@@ -42,7 +42,7 @@ export const InventoryControls: React.FC<Props> = ({ resetUpgrades, nameFilter, 
                                     <ClearIcon />
                                 </IconButton>
                             </InputAdornment>
-                        ) : null
+                        ) : undefined
                     }
                     label="Quick Filter"
                 />

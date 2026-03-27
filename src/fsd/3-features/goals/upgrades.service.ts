@@ -2615,7 +2615,7 @@ export class UpgradesService {
         return baseUpgradesTotal;
     }
 
-    static findUpgrade(upgrade: TacticusUpgrade): string | null {
+    static findUpgrade(upgrade: TacticusUpgrade): string | undefined {
         const byName = FsdUpgradesService.recipeDataByName[upgrade.name];
         if (byName) {
             return byName.material;
@@ -2626,7 +2626,7 @@ export class UpgradesService {
             return byTacticusId.material;
         }
 
-        return null;
+        return;
     }
 
     private static composeByTacticusId(): Record<string, IMaterial> {

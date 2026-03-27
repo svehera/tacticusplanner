@@ -41,7 +41,7 @@ import {
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
-    readonly seenAppVersion?: string | null;
+    readonly seenAppVersion?: string;
 
     readonly autoTeamsPreferences: IAutoTeamsPreferences;
     readonly characters: Array<ICharacter2>;

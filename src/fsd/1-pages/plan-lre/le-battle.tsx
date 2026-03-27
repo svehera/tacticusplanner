@@ -22,7 +22,7 @@ interface WaveDisplayProps {
 }
 
 // Extracted Logic: Resolve string to data object
-const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
+const resolveEnemy = (enemyString: string): ResolvedEnemyData | undefined => {
     const colon = enemyString.indexOf(':');
     const id = colon === -1 ? enemyString : enemyString.slice(0, Math.max(0, colon));
 
@@ -42,7 +42,7 @@ const resolveEnemy = (enemyString: string): ResolvedEnemyData | null => {
 
     console.log('Resolved NPC:', npc);
 
-    if (!npc || arrayIndex >= npc.stats.length) return null;
+    if (!npc || arrayIndex >= npc.stats.length) return;
 
     return {
         id,
@@ -117,7 +117,7 @@ interface LeBattleProps {
 }
 
 export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
-    const [selectedEnemy, setSelectedEnemy] = React.useState<ResolvedEnemyData | null>(null);
+    const [selectedEnemy, setSelectedEnemy] = React.useState<ResolvedEnemyData>();
 
     const [isMapVisible, setIsMapVisible] = React.useState<boolean>(false);
 
@@ -128,7 +128,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
 
     // Handler to close modal
     const handleCloseModal = () => {
-        setSelectedEnemy(null);
+        setSelectedEnemy(undefined);
     };
 
     const sortedWaves = battle.waves.toSorted((a, b) => a.round - b.round);
@@ -192,8 +192,8 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
             <NpcDetailModal
                 isOpen={!!selectedEnemy}
                 onClose={handleCloseModal}
-                npc={selectedEnemy?.npc || null}
-                stats={selectedEnemy?.stats || null}
+                npc={selectedEnemy?.npc}
+                stats={selectedEnemy?.stats}
             />
         </>
     );

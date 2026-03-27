@@ -61,7 +61,6 @@ export default defineConfig([
                     },
                 },
             ],
-            'unicorn/no-null': 'off',
             'unicorn/no-array-reduce': 'off',
         },
     },

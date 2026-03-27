@@ -115,7 +115,7 @@ export const ManageTeams = () => {
 
     // State for the add/edit dialog.
     const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
-    const [editingTeam, setEditingTeam] = useState<ITeam2 | null>(null);
+    const [editingTeam, setEditingTeam] = useState<ITeam2>();
     const [saveAllowed, setSaveAllowed] = useState(false);
     const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>();
     const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>();
@@ -277,7 +277,7 @@ export const ManageTeams = () => {
         setImportDialogOpen(true);
     };
 
-    const onImportGo = (team: IPersonalTeam | null) => {
+    const onImportGo = (team: IPersonalTeam | undefined) => {
         setImportDialogOpen(false);
         if (!team) return;
         setSelectedChars(
@@ -544,8 +544,7 @@ export const ManageTeams = () => {
                                         <button
                                             className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-green-700"
                                             onClick={() => {
-                                                const team =
-                                                    legacyTeams.find(t => t.name === selectedLegacyTeamName) ?? null;
+                                                const team = legacyTeams.find(t => t.name === selectedLegacyTeamName);
                                                 onImportGo(team);
                                                 setImportDialogOpen(false);
                                             }}>

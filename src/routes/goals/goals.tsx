@@ -84,7 +84,7 @@ export const Goals = () => {
         () => CharactersService.resolveStoredCharacters(unresolvedCharacters),
         [unresolvedCharacters]
     );
-    const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
+    const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect>();
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
     const [openSettings, setOpenSettings] = useState<boolean>(false);
     const [resourcesExpanded, setResourcesExpanded] = useState(false);
@@ -652,7 +652,7 @@ export const Goals = () => {
                     goal={editGoal}
                     unit={editUnit}
                     onClose={() => {
-                        setEditGoal(null);
+                        setEditGoal(undefined);
                     }}
                 />
             )}

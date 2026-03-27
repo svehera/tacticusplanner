@@ -9,14 +9,14 @@ import wyoInfo from 'src/assets/images/wyo_info.png';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 export const InfoBox = () => {
-    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement>();
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
         setAnchorElement(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorElement(null);
+        setAnchorElement(undefined);
     };
 
     const open = Boolean(anchorElement);

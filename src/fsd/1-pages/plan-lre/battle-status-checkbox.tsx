@@ -15,9 +15,9 @@ interface Props {
 
 export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType, maxScore, onChange }) => {
     const [showDropdown, setShowDropdown] = useState(false);
-    const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null);
+    const [anchorElement, setAnchorElement] = useState<HTMLElement>();
     const [scoreInput, setScoreInput] = useState<string>(String(score || ''));
-    const [pendingStatus, setPendingStatus] = useState<RequirementStatus | null>(null);
+    const [pendingStatus, setPendingStatus] = useState<RequirementStatus>();
     const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
     const dropdownReference = useRef<HTMLDivElement>(null);
     const buttonReference = useRef<HTMLButtonElement>(null);
@@ -31,7 +31,7 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
         if (newStatus === RequirementStatus.PartiallyCleared) {
             // Store the pending status and show popover
             setPendingStatus(newStatus);
-            setAnchorElement(dropdownReference.current);
+            setAnchorElement(dropdownReference.current ?? undefined);
             return;
         }
 
@@ -82,14 +82,14 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
             const cappedScore = Math.min(parsedScore, maxScore);
             onChange(RequirementStatus.PartiallyCleared, cappedScore);
         }
-        setPendingStatus(null);
-        setAnchorElement(null);
+        setPendingStatus(undefined);
+        setAnchorElement(undefined);
     };
 
     const handlePopoverClose = () => {
         // If they cancel, don't change the status
-        setPendingStatus(null);
-        setAnchorElement(null);
+        setPendingStatus(undefined);
+        setAnchorElement(undefined);
         setScoreInput(String(score || ''));
     };
 

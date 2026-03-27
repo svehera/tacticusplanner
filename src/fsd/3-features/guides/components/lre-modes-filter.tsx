@@ -31,7 +31,7 @@ export const LreModesFilter: React.FC<Props> = ({ selectedModes, updateSelection
         selectedModes.filter(x => ['0', '1', '2', '3', '4'].includes(x.at(-1) ?? ''))
     );
 
-    const lre = legendaryEvent === 'any' ? null : getLre(legendaryEvent);
+    const lre = legendaryEvent === 'any' ? undefined : getLre(legendaryEvent);
     const lreTracks = useMemo<IMenuOption[]>(() => {
         if (!lre) {
             return [];

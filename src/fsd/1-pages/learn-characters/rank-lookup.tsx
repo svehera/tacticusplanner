@@ -32,7 +32,7 @@ export const RankLookup = () => {
     const [searchParams, setSearchParameters] = useSearchParams();
 
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
-    const [character, setCharacter] = useState<ICharacter2 | null>(() => {
+    const [character, setCharacter] = useState<ICharacter2 | undefined>(() => {
         const queryParametersCharacter = searchParams.get('character');
 
         return characters.find(x => x.name === queryParametersCharacter) ?? characters[0];
@@ -58,8 +58,8 @@ export const RankLookup = () => {
         return !!queryParametersRankPoint5 && queryParametersRankPoint5 === 'true';
     });
 
-    const [anchorElement2, setAnchorElement2] = React.useState<HTMLElement | null>(null);
-    const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull | null>(null);
+    const [anchorElement2, setAnchorElement2] = React.useState<HTMLElement>();
+    const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull>();
 
     /**
      * Holds the set of uncraftable upgrade materials needed to rank up this
@@ -298,10 +298,11 @@ export const RankLookup = () => {
                 <UnitsAutocomplete
                     label="Characters"
                     className="max-w-[300px]"
-                    unit={character}
+                    // eslint-disable-next-line unicorn/no-null -- autocomplete requires null
+                    unit={character ?? null}
                     options={characters}
                     onUnitChange={value => {
-                        setCharacter(value);
+                        setCharacter(value ?? undefined);
 
                         setSearchParameters(current => {
                             if (value) {
@@ -398,7 +399,7 @@ export const RankLookup = () => {
                     <Popover
                         open={!!materialRecipe}
                         anchorEl={anchorElement2}
-                        onClose={() => setMaterialRecipe(null)}
+                        onClose={() => setMaterialRecipe(undefined)}
                         anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'left',

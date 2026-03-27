@@ -6,11 +6,11 @@ type NullableString = string | null | undefined;
 
 export const useQueryState = <T>(
     queryParameter: string,
-    stringToValue: (v: string | null) => T,
+    stringToValue: (v: string | undefined) => T,
     valueToString: (v: T) => NullableString
 ): [T, (value: T) => void] => {
     const [searchParams, setSearchParameters] = useContext(SearchParametersStateContext);
-    const queryParameterValue = searchParams.get(queryParameter);
+    const queryParameterValue = searchParams.get(queryParameter) ?? undefined;
     const initialState = stringToValue(queryParameterValue);
 
     const [value, setValue] = useState<T>(initialState);
@@ -40,7 +40,7 @@ export const useQueryState = <T>(
     );
 
     useEffect(() => {
-        const queryParameterValueNew = searchParams.get(queryParameter);
+        const queryParameterValueNew = searchParams.get(queryParameter) ?? undefined;
         setValue(stringToValue(queryParameterValueNew));
     }, [searchParams]);
 

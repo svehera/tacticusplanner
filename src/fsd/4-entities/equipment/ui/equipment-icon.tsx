@@ -75,9 +75,9 @@ export const EquipmentIcon = ({
     const [equipIsLoading, setEquipIsLoading] = useState<boolean>(true);
     const [frameIsLoading, setFrameIsLoading] = useState<boolean>(true);
     const [relicIsLoading, setRelicIsLoading] = useState<boolean>(true);
-    const [equipError, setEquipError] = useState<Error | null>(null);
-    const [frameError, setFrameError] = useState<Error | null>(null);
-    const [relicError, setRelicError] = useState<Error | null>(null);
+    const [equipError, setEquipError] = useState<Error>();
+    const [frameError, setFrameError] = useState<Error>();
+    const [relicError, setRelicError] = useState<Error>();
 
     const frameKey = (RarityMapper.rarityToRarityString(equipment.rarity).toLocaleLowerCase() +
         'EquipmentFrame') as keyof typeof tacticusIcons;
@@ -89,7 +89,7 @@ export const EquipmentIcon = ({
         if (!equipment.icon) return;
 
         setEquipIsLoading(true);
-        setEquipError(null);
+        setEquipError(undefined);
         setEquipSize({ width: 0, height: 0 });
 
         getImageDimensions(getImageUrl(equipment.icon))

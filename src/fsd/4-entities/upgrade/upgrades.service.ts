@@ -115,7 +115,10 @@ export class UpgradesService {
             moreToExpand = false;
             for (const data of Object.entries(UpgradesService.craftedUpgradesData)) {
                 const material: ICraftedUpgrade = data[1];
-                const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(material.snowprintId, result);
+                const expandedRecipe: IRecipeExpandedUpgrade | undefined = this.expandRecipe(
+                    material.snowprintId,
+                    result
+                );
                 if (!expandedRecipe) {
                     if (passes >= kNumberExpectedPasses) {
                         console.error(
@@ -160,17 +163,17 @@ export class UpgradesService {
      * using the results in expandedRecipeData.
      * @param key The ID of the upgrade material to expand.
      * @param expandedRecipeData The existing materials we have already expanded.
-     * @returns the expanded data, or null if the recipe cannot be expanded
+     * @returns the expanded data, or undefined if the recipe cannot be expanded
      *          because one or more ingredients have yet to be expanded.
      */
     private static expandRecipe(
         key: string,
         expandedRecipeData: IRecipeExpandedUpgradeData
-    ): IRecipeExpandedUpgrade | null {
+    ): IRecipeExpandedUpgrade | undefined {
         const upgrade = UpgradesService.craftedUpgradesData[key];
         if (!upgrade) {
             console.trace("null upgrade: '" + key + "'");
-            return null;
+            return;
         }
         const expandedRecipe: IRecipeExpandedUpgrade = {
             snowprintId: upgrade.snowprintId,
@@ -204,7 +207,7 @@ export class UpgradesService {
                 });
             }
         }
-        if (moreToExpand) return null;
+        if (moreToExpand) return;
         return expandedRecipe;
     }
 

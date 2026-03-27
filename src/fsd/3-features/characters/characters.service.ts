@@ -43,7 +43,7 @@ import { needToAscendCharacter } from './functions/need-to-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
 
 export class CharactersService {
-    static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
+    static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter?: string): IUnit[] {
         const filteredCharactersByName = nameFilter
             ? characters.filter(
                   x =>
