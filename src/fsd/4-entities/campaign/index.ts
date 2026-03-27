@@ -11,4 +11,5 @@ export { Campaign, CampaignType, CampaignGroupType, CampaignDifficulty, campaign
 export { campaignsByGroup, campaignEventsLocations } from './campaigns.constants';
 export { CampaignLocation } from './campaign-location';
 export { CompactCampaignLocation } from './compact-campaign-location';
+export { CampaignBattleEnemies } from './campaign-battle-enemies';
 export { CampaignImage } from './campaign.icon';
