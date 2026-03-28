@@ -57,12 +57,12 @@ const Component: React.FC<Props> = ({
           : upgradeMaterialSnowprintId;
 
     const resolvedUnit = useMemo(() => {
-        if (!isShard && !isMythicShard) return undefined;
+        if (!isShard && !isMythicShard) return;
         return resolveUnit(materialId);
     }, [materialId, isShard, isMythicShard]);
 
     const upgrade = useMemo(() => {
-        if (isShard || isMythicShard) return undefined;
+        if (isShard || isMythicShard) return;
         return FsdUpgradesService.getUpgrade(upgradeMaterialSnowprintId);
     }, [upgradeMaterialSnowprintId, isShard, isMythicShard]);
 
