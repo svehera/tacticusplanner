@@ -23,7 +23,6 @@ interface Props {
     maxLocations?: number;
 }
 
-// 🔥 O(1) lookup
 const mowMap = new Map(mows2Data.mows.map(m => [m.snowprintId, m]));
 
 const mapUpgradeRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): Rarity => {
