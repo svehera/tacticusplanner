@@ -63,35 +63,6 @@ enum SaveTeamMode {
 
 type TeamTypeKey = 'warOffense' | 'warDefense' | 'raid' | 'ta' | 'horde';
 
-const getTeamCoreCharIds = (team: ITeam2) => team.chars.slice(0, team.flexIndex ?? team.chars.length);
-
-const getTeamFlexCharIds = (team: ITeam2) => team.chars.slice(team.flexIndex ?? team.chars.length);
-
-const sanitizeWarDefenseSelection = (
-    currentSelectedChars: string[],
-    currentFlexIndex: number | undefined,
-    blockedCoreCharIds: ReadonlySet<string>
-) => {
-    let nextFlexIndex = currentFlexIndex ?? currentSelectedChars.length;
-    const nextSelectedChars: string[] = [];
-
-    for (const [index, charId] of currentSelectedChars.entries()) {
-        if (blockedCoreCharIds.has(charId)) {
-            if (index < nextFlexIndex) {
-                nextFlexIndex -= 1;
-            }
-            continue;
-        }
-        nextSelectedChars.push(charId);
-    }
-
-    const normalizedFlexIndex = Math.max(0, nextFlexIndex);
-    return {
-        selectedChars: nextSelectedChars,
-        flexIndex: normalizedFlexIndex >= nextSelectedChars.length ? undefined : normalizedFlexIndex,
-    };
-};
-
 export const ManageTeams = () => {
     const {
         characters: unresolvedCharacters,
@@ -143,56 +114,38 @@ export const ManageTeams = () => {
         setResolvedMows(MowsService.resolveAllFromStorage(unresolvedMows));
     }, [unresolvedCharacters, unresolvedMows]);
 
-    const otherWarDefenseTeams = useMemo(
+    const otherTeamsInSelectedModes = useMemo(
         () =>
             teams.filter(
                 team =>
-                    !!team.warDefense &&
+                    ((warOffenseSelected && !!team.warOffense) ||
+                        (warDefenseSelected && !!team.warDefense) ||
+                        (guildRaidSelected && !!team.raid) ||
+                        (tournamentArenaSelected && !!team.ta) ||
+                        (hordeModeSelected && !!team.horde)) &&
                     !(saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam && team.name === editingTeam.name)
             ),
-        [teams, saveTeamMode, editingTeam]
+        [
+            teams,
+            saveTeamMode,
+            editingTeam,
+            warOffenseSelected,
+            warDefenseSelected,
+            guildRaidSelected,
+            tournamentArenaSelected,
+            hordeModeSelected,
+        ]
     );
 
-    const warDefenseBlockedCoreCharIds = useMemo(
-        () => uniq(otherWarDefenseTeams.flatMap(team => getTeamCoreCharIds(team))),
-        [otherWarDefenseTeams]
+    const deployedCharIds = useMemo(
+        () => uniq(otherTeamsInSelectedModes.flatMap(team => team.chars)),
+        [otherTeamsInSelectedModes]
     );
 
-    const warDefenseBlockedCoreCharIdsSet = useMemo(
-        () => new Set(warDefenseBlockedCoreCharIds),
-        [warDefenseBlockedCoreCharIds]
+    const deployedMowIds = useMemo(
+        () => uniq(otherTeamsInSelectedModes.flatMap(team => team.mows ?? [])),
+        [otherTeamsInSelectedModes]
     );
-
-    const warDefenseFlexCharIds = useMemo(
-        () =>
-            uniq(
-                otherWarDefenseTeams
-                    .flatMap(team => getTeamFlexCharIds(team))
-                    .filter(charId => !warDefenseBlockedCoreCharIdsSet.has(charId))
-            ),
-        [otherWarDefenseTeams, warDefenseBlockedCoreCharIdsSet]
-    );
-
-    const warDefenseFlexMowIds = useMemo(
-        () => uniq(otherWarDefenseTeams.flatMap(team => team.mows ?? [])),
-        [otherWarDefenseTeams]
-    );
-
-    useEffect(() => {
-        if (!warDefenseSelected) {
-            return;
-        }
-
-        const sanitized = sanitizeWarDefenseSelection(selectedChars, flexIndex, warDefenseBlockedCoreCharIdsSet);
-        if (
-            sanitized.flexIndex !== flexIndex ||
-            sanitized.selectedChars.length !== selectedChars.length ||
-            sanitized.selectedChars.some((charId, index) => charId !== selectedChars[index])
-        ) {
-            setSelectedChars(sanitized.selectedChars);
-            setFlexIndex(sanitized.flexIndex);
-        }
-    }, [warDefenseSelected, selectedChars, flexIndex, warDefenseBlockedCoreCharIdsSet]);
 
     useEffect(() => {
         let teamSizeRestrictedModesEnabled = true;
@@ -423,9 +376,8 @@ export const ManageTeams = () => {
                 onMaxRankChange={setMaxRank}
                 onFactionsChange={setFactions}
                 onRarityCapChanged={setRarityCap}
-                warDefenseBlockedCoreCharIds={warDefenseBlockedCoreCharIds}
-                warDefenseFlexCharIds={warDefenseFlexCharIds}
-                warDefenseFlexMowIds={warDefenseFlexMowIds}
+                deployedCharIds={deployedCharIds}
+                deployedMowIds={deployedMowIds}
                 saveAllowed={saveAllowed}
                 saveDisallowedMessage={saveDisallowedMessage}
                 warDisallowedMessage={warDisallowedMessage}
