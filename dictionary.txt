@@ -29,7 +29,9 @@ arjac
 arjac's
 arkarzar
 arvanes
+ASEC
 asmodai
+ASSC
 astartes
 athenaean
 atlacoya
@@ -121,6 +123,8 @@ defences
 defensor
 demetrian
 devine
+DGEC
+DGSC
 diagonalplane
 dishonoured
 dismissable

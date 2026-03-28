@@ -142,7 +142,7 @@ export const CompactCampaignLocation: React.FC<Props> = ({ location, unlocked })
                 <button
                     type="button"
                     onClick={() => setOpenDetails(true)}
-                    className="border-muted-fg/40 inline-flex cursor-pointer items-center gap-1 rounded-full border bg-transparent px-1.5 py-0.5"
+                    className="border-muted-fg/40 inline-flex w-21 cursor-pointer items-center gap-1 rounded-full border bg-transparent px-1.5 py-0.5"
                     style={{
                         opacity: unlocked ? 1 : 0.5,
                     }}>
@@ -166,7 +166,7 @@ export const CompactCampaignLocation: React.FC<Props> = ({ location, unlocked })
                         <CloseIcon fontSize="small" />
                     </IconButton>
                 </DialogTitle>
-                <DialogContent className="!pt-2 !pb-3">
+                <DialogContent className="pt-2! pb-3!">
                     <div className="flex justify-center">
                         <CampaignBattleCardPreview battle={location} />
                     </div>
