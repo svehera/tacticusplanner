@@ -13,7 +13,7 @@ export function buildSelectedTeamsRows(
     teams: ILreTeam[],
     charactersBySnowprintId: Record<string, ICharacter2>
 ): Array<ITableRow<ISelectedTeamTableCell | string>> {
-    const teamRecord: Record<string, ISelectedTeamTableCell[]> = {};
+    const teamRecord: Record<string, Array<ISelectedTeamTableCell | undefined>> = {};
 
     for (const team of teams) {
         const newTeam = (team.charSnowprintIds ?? [])
@@ -25,9 +25,27 @@ export function buildSelectedTeamsRows(
                 teamId: team.id,
             }));
 
-        for (const id of team.restrictionsIds) {
-            const existingCharacters = teamRecord[id] ?? [];
-            teamRecord[id] = [...existingCharacters, ...newTeam];
+        if (team.restrictionsIds.length === 0 || newTeam.length === 0) {
+            continue;
+        }
+
+        const startIndex = Math.max(
+            0,
+            ...team.restrictionsIds.map(restrictionId => (teamRecord[restrictionId] ?? []).length)
+        );
+
+        for (const restrictionId of team.restrictionsIds) {
+            const column = teamRecord[restrictionId] ?? [];
+
+            while (column.length < startIndex) {
+                column.push(undefined);
+            }
+
+            for (const [index, entry] of newTeam.entries()) {
+                column[startIndex + index] = entry;
+            }
+
+            teamRecord[restrictionId] = column;
         }
     }
 
@@ -36,7 +54,8 @@ export function buildSelectedTeamsRows(
 
     for (const [index, row] of rows.entries()) {
         for (const team in teamRecord) {
-            row[team] = teamRecord[team][index] ?? '';
+            const entry = teamRecord[team][index];
+            row[team] = entry ?? '';
         }
     }
 

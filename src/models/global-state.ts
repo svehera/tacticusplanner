@@ -27,7 +27,6 @@ import {
     IGuildWar,
     IInsightsData,
     IInventory,
-    ILegendaryEventSelectedRequirements,
     ILegendaryEventSelectedTeams,
     ILegendaryEventSettings,
     IPersonalCharacterData2,
@@ -35,8 +34,8 @@ import {
     IPersonalGoal,
     ISelectedTeamsOrdering,
     IViewPreferences,
-    LegendaryEventData,
     IGameModeTokensState,
+    LegendaryEventData,
 } from './interfaces';
 
 export class GlobalState implements IGlobalState {
@@ -48,7 +47,6 @@ export class GlobalState implements IGlobalState {
     readonly viewPreferences: IViewPreferences;
     readonly dailyRaidsPreferences: IDailyRaidsPreferences;
     readonly selectedTeamOrder: ISelectedTeamsOrdering;
-    readonly leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     readonly goals: IPersonalGoal[];
     readonly teams: IPersonalTeam[];
     readonly teams2: ITeam2[];
@@ -73,7 +71,6 @@ export class GlobalState implements IGlobalState {
         this.dailyRaidsPreferences = personalData.dailyRaidsPreferences ?? defaultData.dailyRaidsPreferences;
 
         this.selectedTeamOrder = personalData.selectedTeamOrder;
-        this.leSelectedRequirements = personalData.leSelectedRequirements;
         this.leSelectedTeams = personalData.leTeams;
         this.leProgress = personalData.leProgress;
         this.leSettings = personalData.leSettings;
@@ -333,7 +330,6 @@ export class GlobalState implements IGlobalState {
             leTeams: leTeamsToStore,
             leProgress: value.leProgress,
             leSettings: value.leSettings,
-            leSelectedRequirements: value.leSelectedRequirements,
             characters: charactersToStore,
             mows: mowsToDatabase,
             autoTeamsPreferences: value.autoTeamsPreferences,

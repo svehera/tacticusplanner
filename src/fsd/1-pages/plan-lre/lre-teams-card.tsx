@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader } from '@mui/material';
 import React, { useContext, useMemo } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { DispatchContext, StoreContext } from '@/reducers/store.provider';
+import { StoreContext } from '@/reducers/store.provider';
 
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
@@ -25,6 +25,12 @@ interface Props {
     editTeam: (team: ILreTeam) => void;
     deleteTeam: (teamId: string) => void;
     restrictions: string[];
+    updateRestrictionSelection: (
+        eventId: ILegendaryEventTrack['eventId'],
+        section: LreTrackId,
+        restrictionName: string,
+        selected: boolean
+    ) => void;
 }
 
 export const LreTeamsCard: React.FC<Props> = ({
@@ -37,9 +43,9 @@ export const LreTeamsCard: React.FC<Props> = ({
     editTeam,
     deleteTeam,
     restrictions,
+    updateRestrictionSelection,
 }) => {
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
-    const dispatch = useContext(DispatchContext);
 
     const gridTeam = useMemo(
         () => track.suggestTeam(autoTeamsPreferences, viewPreferences.onlyUnlocked, restrictions),
@@ -47,13 +53,7 @@ export const LreTeamsCard: React.FC<Props> = ({
     );
 
     const handleChange = (selected: boolean, restrictionName: string) => {
-        dispatch.leSelectedRequirements({
-            type: 'Update',
-            eventId: track.eventId,
-            section: track.section,
-            restrictionName,
-            selected,
-        });
+        updateRestrictionSelection(track.eventId, track.section, restrictionName, selected);
     };
 
     const addTeam = () => {
