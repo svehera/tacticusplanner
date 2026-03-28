@@ -94,7 +94,7 @@ export const LegendaryEvent = ({
         setSelectedRequirementsByEvent(current => {
             const eventRequirements = current[eventId] ?? createDefaultSelectedRequirements(eventId);
             const currentSection = eventRequirements[section];
-            const clearedSection = Object.fromEntries(Object.keys(currentSection).map(key => [key, false]));
+            const clearedSection = Object.fromEntries(Object.keys(currentSection ?? {}).map(key => [key, false]));
 
             return {
                 ...current,

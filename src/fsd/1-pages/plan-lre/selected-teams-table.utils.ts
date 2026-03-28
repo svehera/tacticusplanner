@@ -55,7 +55,7 @@ export function buildSelectedTeamsRows(
     for (const [index, row] of rows.entries()) {
         for (const team in teamRecord) {
             const entry = teamRecord[team][index];
-            row[team] = entry?.teamId ? entry : '';
+            row[team] = entry ?? '';
         }
     }
 
