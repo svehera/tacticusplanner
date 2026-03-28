@@ -441,7 +441,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                                 variant: 'warning',
                             });
                         }
-                        enqueueSnackbar('Synced with latest server data.', { variant: 'info' });
+                        enqueueSnackbar('Synced with latest server data.', {
+                            key: 'synced-with-latest-server-data',
+                            variant: 'info',
+                            preventDuplicate: true,
+                        });
                     }
 
                     setModifiedDate(serverLastModified);
