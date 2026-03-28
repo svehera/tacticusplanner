@@ -18,7 +18,7 @@ const Component: React.FC<Props> = ({ locations, maxLocations = 4 }) => {
         return suggested.length > 0 ? suggested : locations;
     }, [locations]);
 
-    const safeMaxLocations = useMemo(() => Math.max(0, Math.floor(Number(maxLocations) || 0)), [maxLocations]);
+    const safeMaxLocations = useMemo(() => Math.max(1, Math.floor(Number(maxLocations) || 1)), [maxLocations]);
 
     const visibleLocations = expanded
         ? displayLocations.length
