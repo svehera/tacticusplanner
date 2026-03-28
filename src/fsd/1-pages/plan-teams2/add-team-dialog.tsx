@@ -1,7 +1,7 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import { uniq } from 'lodash';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
 
@@ -48,9 +48,8 @@ interface Props {
     onMaxRankChange: (rank: Rank) => void;
     onFactionsChange: (factions: FactionId[]) => void;
     onRarityCapChanged: (rarity: Rarity) => void;
-    warDefenseBlockedCoreCharIds: string[];
-    warDefenseFlexCharIds: string[];
-    warDefenseFlexMowIds: string[];
+    deployedCharIds: string[];
+    deployedMowIds: string[];
 
     saveAllowed: boolean;
     saveDisallowedMessage: string | undefined;
@@ -101,9 +100,8 @@ export const AddTeamDialog: React.FC<Props> = ({
     onMaxRankChange,
     onFactionsChange,
     onRarityCapChanged,
-    warDefenseBlockedCoreCharIds,
-    warDefenseFlexCharIds,
-    warDefenseFlexMowIds,
+    deployedCharIds,
+    deployedMowIds,
     onCancel,
     onSave,
 
@@ -166,14 +164,8 @@ export const AddTeamDialog: React.FC<Props> = ({
         (a, b) => a.localeCompare(b)
     );
 
-    const warDefenseBlockedCoreCharIdsSet = useMemo(
-        () => new Set(warDefenseBlockedCoreCharIds),
-        [warDefenseBlockedCoreCharIds]
-    );
-
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId))
-        .filter(c => !warDefense || !warDefenseBlockedCoreCharIdsSet.has(c.snowprintId))
         .filter(c =>
             Teams2Service.passesCharacterFilter(
                 c,
@@ -428,7 +420,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             onCharacterSelect={onAddChar}
                             showHeader={true}
                             zoom={zoom}
-                            deployedFlexUnitIds={warDefense ? warDefenseFlexCharIds : undefined}
+                            deployedUnitIds={deployedCharIds}
                         />
                     </div>
 
@@ -458,7 +450,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             onMowSelect={onAddMow}
                             showHeader={true}
                             zoom={zoom}
-                            deployedFlexUnitIds={warDefense ? warDefenseFlexMowIds : undefined}
+                            deployedUnitIds={deployedMowIds}
                         />
                     </div>
                 </div>
