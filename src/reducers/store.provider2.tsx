@@ -419,7 +419,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 const localIsNewer = !!modifiedDate && modifiedDate > serverLastModified;
 
                 const shouldAcceptServerData = !isFirstLogin && (isFreshData || localIsOlder);
-                const shouldPushLocalData = !isFreshData && (isFirstLogin || localIsNewer || hasDataConflict);
+                const shouldPushLocalData = !isFreshData && !hasDataConflict && (isFirstLogin || localIsNewer);
 
                 setModifiedDateTicks(serverModifiedDateTicks);
 
