@@ -2,28 +2,33 @@ import AddAPhoto from '@mui/icons-material/AddAPhoto';
 import Settings from '@mui/icons-material/Settings';
 import { Button, Tooltip } from '@mui/material';
 import { cloneDeep, orderBy } from 'lodash';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Rank } from '@/fsd/5-shared/model';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum, LegendaryEventService, LreTrackId } from '@/fsd/4-entities/lre';
 // eslint-disable-next-line import-x/order
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 
+import { getLre, ILreTeam } from '@/fsd/3-features/lre';
 // eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { ManageSnapshotsDialog } from './manage-snapshots-dialog';
 import { IRosterSnapshot, IRosterSnapshotsState } from './models';
+import { RosterFilterDropdown } from './roster-filter-dropdown';
 import { RosterSnapshotsAssetsProvider } from './roster-snapshots-assets-provider';
+import { RosterSnapshotsGroupedDisplay, RosterSnapshotsGroupedSection } from './roster-snapshots-grouped-display';
 import { RosterSnapshotsMagnificationSlider } from './roster-snapshots-magnification-slider';
 import { RosterSnapshotsService } from './roster-snapshots-service';
 import { RosterSnapshotsUnit } from './roster-snapshots-unit';
@@ -51,6 +56,274 @@ type MowType = IMow2 & { power: number };
 const isCharacterType = (unit: CharacterType | MowType): unit is CharacterType => 'rank' in unit;
 const isMowType = (unit: CharacterType | MowType): unit is MowType => !isCharacterType(unit);
 
+type TeamCategoryKey = 'warOffense' | 'warDefense' | 'raid' | 'ta' | 'horde';
+
+const TEAM_CATEGORY_OPTIONS: Array<{ key: TeamCategoryKey; label: string; token: string }> = [
+    { key: 'warOffense', label: 'All Guild War Offense Teams', token: '__all-war-offense__' },
+    { key: 'warDefense', label: 'All Guild War Defense Teams', token: '__all-war-defense__' },
+    { key: 'raid', label: 'All Raid Teams', token: '__all-raid__' },
+    { key: 'ta', label: 'All Tournament Arena Teams', token: '__all-ta__' },
+    { key: 'horde', label: 'All Horde Teams', token: '__all-horde__' },
+];
+
+interface TeamDisplaySpec {
+    id: string;
+    title: string;
+    chars: string[];
+    mows: string[];
+    hideInnerTitle?: boolean;
+}
+
+interface TeamDisplaySection {
+    id: string;
+    title: string;
+    sections?: TeamDisplaySection[];
+    teams?: TeamDisplaySpec[];
+}
+
+function getDisplayByTeamSections(
+    zoom: number,
+    chars: ICharacter2[],
+    mows: IMow2[],
+    rosterSnapshots: IRosterSnapshotsState,
+    left: number,
+    right: number,
+    diffStyle: RosterSnapshotDiffStyle,
+    showShards: RosterSnapshotShowVariableSettings,
+    showMythicShards: RosterSnapshotShowVariableSettings,
+    showXpLevel: RosterSnapshotShowVariableSettings,
+    showEquipment: RosterSnapshotShowVariableSettings,
+    showShardDiffs: RosterSnapshotShowVariableSettings,
+    showMythicShardsDiffs: RosterSnapshotShowVariableSettings,
+    showXpLevelDiffs: RosterSnapshotShowVariableSettings,
+    showEquipmentDiffs: RosterSnapshotShowVariableSettings,
+    teamSections: TeamDisplaySection[]
+) {
+    if (rosterSnapshots.base === undefined) {
+        return getDisplay(
+            zoom,
+            chars,
+            mows,
+            rosterSnapshots,
+            left,
+            right,
+            diffStyle,
+            showShards,
+            showMythicShards,
+            showXpLevel,
+            showEquipment,
+            showShardDiffs,
+            showMythicShardsDiffs,
+            showXpLevelDiffs,
+            showEquipmentDiffs,
+            new Set<string>()
+        );
+    }
+
+    let leftIndex = left;
+    let rightIndex = right;
+    if (leftIndex < -1) leftIndex = -1;
+    if (leftIndex > rosterSnapshots.diffs.length - 1) leftIndex = rosterSnapshots.diffs.length - 1;
+    if (rightIndex <= leftIndex) rightIndex = leftIndex + 1;
+    if (rightIndex > rosterSnapshots.diffs.length) rightIndex = rosterSnapshots.diffs.length;
+
+    let base = RosterSnapshotsService.fixSnapshot(rosterSnapshots.base);
+    for (let index = 0; index <= leftIndex; index++) {
+        base = RosterSnapshotsService.fixSnapshot(
+            RosterSnapshotsService.resolveSnapshotDiff(base, rosterSnapshots.diffs[index])
+        );
+    }
+
+    let compare: IRosterSnapshot = base;
+    if (rightIndex < rosterSnapshots.diffs.length) {
+        for (let index = leftIndex + 1; index <= rightIndex; index++) {
+            compare = RosterSnapshotsService.fixSnapshot(
+                RosterSnapshotsService.resolveSnapshotDiff(compare, rosterSnapshots.diffs[index])
+            );
+        }
+    } else {
+        compare = RosterSnapshotsService.fixSnapshot(
+            RosterSnapshotsService.createSnapshot('Current Roster', Date.now(), chars, mows)
+        );
+    }
+
+    const diff = RosterSnapshotsService.diffSnapshots(
+        base,
+        compare,
+        showShardDiffs !== RosterSnapshotShowVariableSettings.Never,
+        showMythicShardsDiffs !== RosterSnapshotShowVariableSettings.Never,
+        showXpLevelDiffs !== RosterSnapshotShowVariableSettings.Never,
+        showEquipmentDiffs !== RosterSnapshotShowVariableSettings.Never
+    );
+
+    const staticCharById = new Map(chars.map(char => [char.snowprintId, char]));
+    const staticMowById = new Map(mows.map(mow => [mow.snowprintId, mow]));
+    const baseCharById = new Map(base.chars.map(char => [char.id, char]));
+    const compareCharById = new Map(compare.chars.map(char => [char.id, char]));
+    const diffCharById = new Map(diff.charDiffs.map(charDiff => [charDiff.id, charDiff]));
+    const baseMowById = new Map(base.mows.map(mow => [mow.id, mow]));
+    const compareMowById = new Map(compare.mows.map(mow => [mow.id, mow]));
+    const diffMowById = new Map(diff.mowDiffs.map(mowDiff => [mowDiff.id, mowDiff]));
+
+    const toFullChar = (charId: string, source: 'base' | 'compare') => {
+        const staticChar = staticCharById.get(charId);
+        const snapshotChar = source === 'base' ? baseCharById.get(charId) : compareCharById.get(charId);
+        if (!staticChar || !snapshotChar) {
+            return;
+        }
+
+        return {
+            ...staticChar,
+            ...snapshotChar,
+            id: staticChar.id,
+            level: snapshotChar.xpLevel,
+            equipment: [
+                { id: snapshotChar.equip0?.id ?? '', level: snapshotChar.equip0Level ?? 0 },
+                { id: snapshotChar.equip1?.id ?? '', level: snapshotChar.equip1Level ?? 0 },
+                { id: snapshotChar.equip2?.id ?? '', level: snapshotChar.equip2Level ?? 0 },
+            ],
+        };
+    };
+
+    const toFullMow = (mowId: string, source: 'base' | 'compare') => {
+        const staticMow = staticMowById.get(mowId);
+        const snapshotMow = source === 'base' ? baseMowById.get(mowId) : compareMowById.get(mowId);
+        if (!staticMow || !snapshotMow) {
+            return;
+        }
+
+        return {
+            ...staticMow,
+            ...snapshotMow,
+            id: staticMow.id,
+            unlocked: !snapshotMow.locked,
+        };
+    };
+
+    const renderTeam = (team: TeamDisplaySpec) => {
+        const diffItems: ReactNode[] = [];
+        const unitItems: ReactNode[] = [];
+        const uniqueChars = [...new Set(team.chars)];
+        const uniqueMows = [...new Set(team.mows)];
+
+        for (const charId of uniqueChars) {
+            const afterChar = toFullChar(charId, 'compare');
+            if (!afterChar) {
+                continue;
+            }
+
+            const beforeChar = toFullChar(charId, 'base');
+            const hasDiff = diffCharById.has(charId) && !!beforeChar;
+
+            if (hasDiff && beforeChar) {
+                diffItems.push(
+                    <RosterSnapshotsUnitDiff
+                        key={`${team.id}-diff-char-${charId}`}
+                        diffStyle={diffStyle}
+                        showShards={showShards}
+                        showMythicShards={showMythicShards}
+                        showXpLevel={showXpLevel}
+                        showEquipment={showEquipment}
+                        showAbilities={RosterSnapshotShowVariableSettings.Always}
+                        showTooltip={true}
+                        char={RosterSnapshotsService.snapshotCharacter(beforeChar)}
+                        diff={RosterSnapshotsService.diffChar(beforeChar, afterChar)}
+                    />
+                );
+                continue;
+            }
+
+            unitItems.push(
+                <RosterSnapshotsUnit
+                    key={`${team.id}-char-${charId}`}
+                    showShards={showShards}
+                    showMythicShards={showMythicShards}
+                    showXpLevel={showXpLevel}
+                    showAbilities={RosterSnapshotShowVariableSettings.Always}
+                    showEquipment={showEquipment}
+                    showTooltip={true}
+                    char={RosterSnapshotsService.snapshotCharacter(afterChar)}
+                    isEnabled={afterChar.rank !== Rank.Locked}
+                />
+            );
+        }
+
+        for (const mowId of uniqueMows) {
+            const afterMow = toFullMow(mowId, 'compare');
+            if (!afterMow) {
+                continue;
+            }
+
+            const beforeMow = toFullMow(mowId, 'base');
+            const hasDiff = diffMowById.has(mowId) && !!beforeMow;
+
+            if (hasDiff && beforeMow) {
+                diffItems.push(
+                    <RosterSnapshotsUnitDiff
+                        key={`${team.id}-diff-mow-${mowId}`}
+                        diffStyle={diffStyle}
+                        showShards={showShards}
+                        showMythicShards={showMythicShards}
+                        showXpLevel={showXpLevel}
+                        showEquipment={showEquipment}
+                        showAbilities={RosterSnapshotShowVariableSettings.Always}
+                        showTooltip={true}
+                        mow={RosterSnapshotsService.snapshotMachineOfWar(beforeMow)}
+                        diff={RosterSnapshotsService.diffMow(beforeMow, afterMow)}
+                    />
+                );
+                continue;
+            }
+
+            unitItems.push(
+                <RosterSnapshotsUnit
+                    key={`${team.id}-mow-${mowId}`}
+                    showShards={showShards}
+                    showMythicShards={showMythicShards}
+                    showXpLevel={showXpLevel}
+                    showAbilities={RosterSnapshotShowVariableSettings.Always}
+                    showEquipment={showEquipment}
+                    showTooltip={true}
+                    mow={RosterSnapshotsService.snapshotMachineOfWar(afterMow)}
+                    isEnabled={afterMow.unlocked}
+                />
+            );
+        }
+
+        return {
+            id: team.id,
+            title: team.title,
+            hideTitle: team.hideInnerTitle,
+            diffItems,
+            unitItems,
+        };
+    };
+
+    const renderSection = (section: TeamDisplaySection): RosterSnapshotsGroupedSection => {
+        return {
+            id: section.id,
+            title: section.title,
+            teams: section.teams?.map(team => renderTeam(team)),
+            sections: section.sections?.map(subsection => ({
+                id: subsection.id,
+                title: subsection.title,
+                teams: subsection.teams?.map(team => renderTeam(team)),
+                sections: subsection.sections?.map(subsubsection => ({
+                    id: subsubsection.id,
+                    title: subsubsection.title,
+                    teams: subsubsection.teams?.map(team => renderTeam(team)),
+                })),
+            })),
+        };
+    };
+
+    return (
+        <RosterSnapshotsAssetsProvider>
+            <RosterSnapshotsGroupedDisplay zoom={zoom} sections={teamSections.map(section => renderSection(section))} />
+        </RosterSnapshotsAssetsProvider>
+    );
+}
+
 function getDisplay(
     zoom: number,
     chars: ICharacter2[],
@@ -66,8 +339,11 @@ function getDisplay(
     showShardDiffs: RosterSnapshotShowVariableSettings,
     showMythicShardsDiffs: RosterSnapshotShowVariableSettings,
     showXpLevelDiffs: RosterSnapshotShowVariableSettings,
-    showEquipmentDiffs: RosterSnapshotShowVariableSettings
+    showEquipmentDiffs: RosterSnapshotShowVariableSettings,
+    includedUnitIds: Set<string>
 ) {
+    const hasUnitFilter = includedUnitIds.size > 0;
+
     let leftIndex = left;
     let rightIndex = right;
     if (leftIndex < -1) leftIndex = -1;
@@ -84,7 +360,9 @@ function getDisplay(
             power: CharactersPowerService.getCharacterPower(mows.find(mow => mow.snowprintId === m.id)!),
         }));
 
-        const powerUnits = orderBy([...powerChars, ...poweredMows], 'power', 'desc');
+        const powerUnits = orderBy([...powerChars, ...poweredMows], 'power', 'desc').filter(
+            unit => !hasUnitFilter || includedUnitIds.has(unit.id)
+        );
         return (
             <div className="flex flex-wrap gap-5 p-4">
                 {powerUnits.map(unit => (
@@ -144,6 +422,10 @@ function getDisplay(
     const compareChars = compare.chars;
 
     for (const compareChar of compareChars) {
+        if (hasUnitFilter && !includedUnitIds.has(compareChar.id)) {
+            continue;
+        }
+
         const baseChar = baseChars.find(c => c.id === compareChar.id);
         const diffChar = diff.charDiffs.find(c => c.id === compareChar.id);
         const fullChar = chars.find(c => c.snowprintId === compareChar.id);
@@ -194,6 +476,10 @@ function getDisplay(
     const compareMows = compare.mows;
 
     for (const compareMow of compareMows) {
+        if (hasUnitFilter && !includedUnitIds.has(compareMow.id)) {
+            continue;
+        }
+
         const baseMow = baseMows.find(m => m.id === compareMow.id);
         const diffMow = diff.mowDiffs.find(m => m.id === compareMow.id);
         const fullMow = mows.find(m => m.snowprintId === compareMow.id);
@@ -326,7 +612,14 @@ function getDisplay(
 }
 
 export const RosterSnapshots = () => {
-    const { characters, mows: unresolvedMows, rosterSnapshots, viewPreferences } = useContext(StoreContext);
+    const {
+        characters,
+        mows: unresolvedMows,
+        rosterSnapshots,
+        viewPreferences,
+        teams2,
+        leSelectedTeams,
+    } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const chars = CharactersService.resolveStoredCharacters(characters);
     const mows = MowsService.resolveAllFromStorage(unresolvedMows);
@@ -364,7 +657,402 @@ export const RosterSnapshots = () => {
     const [showEquipmentDiffsSetting, setShowEquipmentDiffsSetting] = useState<RosterSnapshotShowVariableSettings>(
         viewPreferences.showEquipmentInDiffs
     );
+    const [selectedManualTeamNames, setSelectedManualTeamNames] = useState<string[]>([]);
+    const [selectedCategoryTokens, setSelectedCategoryTokens] = useState<string[]>([]);
+    const [selectedLeOptionTokens, setSelectedLeOptionTokens] = useState<string[]>([]);
     const [zoom, setZoom] = useState<number>(1);
+
+    const teamsByCategory = useMemo(() => {
+        return TEAM_CATEGORY_OPTIONS.map(option => ({
+            ...option,
+            teamNames: teams2.filter(team => Boolean(team[option.key])).map(team => team.name),
+        }));
+    }, [teams2]);
+
+    const categorySelectionState = useMemo(() => {
+        const selectedTokens = new Set(selectedCategoryTokens);
+        return teamsByCategory.map(category => ({
+            ...category,
+            isSelected: selectedTokens.has(category.token),
+        }));
+    }, [selectedCategoryTokens, teamsByCategory]);
+
+    const selectedTeamNames = useMemo(() => {
+        const selected = new Set(selectedManualTeamNames);
+
+        for (const category of categorySelectionState) {
+            if (!category.isSelected) {
+                continue;
+            }
+
+            for (const teamName of category.teamNames) {
+                selected.add(teamName);
+            }
+        }
+
+        return [...selected];
+    }, [selectedManualTeamNames, categorySelectionState]);
+
+    const leSelectionGroups = useMemo(() => {
+        type TrackOption = 'all' | LreTrackId;
+        const tracks: Array<{ key: TrackOption; label: string }> = [
+            { key: 'all', label: 'All' },
+            { key: 'alpha', label: 'Alpha' },
+            { key: 'beta', label: 'Beta' },
+            { key: 'gamma', label: 'Gamma' },
+        ];
+
+        const unfinishedEvents = LegendaryEventService.getUnfinishedEvents();
+
+        return unfinishedEvents.map(event => {
+            const eventTeams: ILreTeam[] = leSelectedTeams[event.id as LegendaryEventEnum]?.teams ?? [];
+            const eventCharacter = CharactersService.charactersData.find(x => x.snowprintId === event.unitSnowprintId);
+            const eventName = eventCharacter?.shortName || eventCharacter?.name || event.name;
+
+            const getTeamUnitIds = (track: TrackOption) => {
+                const matchingTeams: ILreTeam[] =
+                    track === 'all' ? eventTeams : eventTeams.filter(team => team.section === (track as LreTrackId));
+
+                const allIds: string[] = matchingTeams.flatMap(
+                    team => team.charSnowprintIds ?? team.charactersIds ?? []
+                );
+                return [...new Set(allIds)];
+            };
+
+            const trackOptions = tracks.map(track => {
+                return {
+                    token: `__le-${event.id}-${track.key}__`,
+                    key: track.key,
+                    label: track.label,
+                    unitIds: getTeamUnitIds(track.key),
+                };
+            });
+
+            return {
+                id: event.id,
+                eventEnum: event.id as LegendaryEventEnum,
+                label: `LE ${eventName}`,
+                icon: eventCharacter?.roundIcon ?? '',
+                tracks: trackOptions,
+            };
+        });
+    }, [leSelectedTeams]);
+
+    const leSelectionOptions = useMemo(() => {
+        return leSelectionGroups.flatMap(group => group.tracks);
+    }, [leSelectionGroups]);
+
+    const selectedLeOptions = useMemo(() => {
+        const selectedLeTokens = new Set(selectedLeOptionTokens);
+        return leSelectionOptions.filter(option => selectedLeTokens.has(option.token));
+    }, [leSelectionOptions, selectedLeOptionTokens]);
+
+    const selectedFilterCount = useMemo(() => {
+        const selectedTeamTypeCount = categorySelectionState.filter(category => category.isSelected).length;
+        return selectedManualTeamNames.length + selectedTeamTypeCount + selectedLeOptionTokens.length;
+    }, [selectedManualTeamNames, categorySelectionState, selectedLeOptionTokens]);
+
+    const selectedTeamNamesSet = useMemo(() => new Set(selectedTeamNames), [selectedTeamNames]);
+    const selectedLeTokensSet = useMemo(() => new Set(selectedLeOptionTokens), [selectedLeOptionTokens]);
+
+    const teamFilterOptions = useMemo(
+        () =>
+            teams2.map(team => ({
+                name: team.name,
+                isSelected: selectedTeamNamesSet.has(team.name),
+            })),
+        [teams2, selectedTeamNamesSet]
+    );
+
+    const teamTypeFilterOptions = useMemo(
+        () =>
+            categorySelectionState.map(category => ({
+                token: category.token,
+                label: category.label,
+                isSelected: category.isSelected,
+                disabled: category.teamNames.length === 0,
+            })),
+        [categorySelectionState]
+    );
+
+    const legendaryEventFilterOptions = useMemo(
+        () =>
+            leSelectionGroups.map(group => ({
+                id: group.id,
+                label: group.label,
+                icon: group.icon,
+                tracks: group.tracks.map(track => ({
+                    token: track.token,
+                    label: track.label,
+                    isSelected: selectedLeTokensSet.has(track.token),
+                    disabled: track.unitIds.length === 0,
+                })),
+            })),
+        [leSelectionGroups, selectedLeTokensSet]
+    );
+
+    const rosterFilterSummaryLabel = selectedFilterCount === 0 ? 'All Units' : `${selectedFilterCount} selected`;
+
+    const selectedUnitIds = useMemo(() => {
+        const selectedTeamUnitIds = teams2
+            .filter(team => selectedTeamNames.includes(team.name))
+            .flatMap(team => [...team.chars, ...(team.mows ?? [])]);
+        const selectedLeUnitIds = selectedLeOptions.flatMap(option => option.unitIds);
+        const allSelectedUnitIds = [...selectedTeamUnitIds, ...selectedLeUnitIds];
+
+        if (allSelectedUnitIds.length === 0) {
+            return new Set<string>();
+        }
+
+        return new Set<string>(allSelectedUnitIds);
+    }, [selectedTeamNames, selectedLeOptions, teams2]);
+
+    const renderTeamMemberIcons = (teamName: string) => {
+        const team = teams2.find(x => x.name === teamName);
+        if (!team) {
+            return;
+        }
+
+        const flexIndex = team.flexIndex ?? team.chars.length;
+        const core = team.chars.slice(0, flexIndex);
+        const flex = team.chars.slice(flexIndex);
+        const mowsInTeam = team.mows ?? [];
+
+        return (
+            <div className="flex items-center gap-1">
+                {core.map(id => {
+                    const character = chars.find(x => x.snowprintId === id);
+                    const mow = mows.find(x => x.snowprintId === id);
+                    const icon = character?.roundIcon ?? mow?.roundIcon ?? '';
+
+                    return (
+                        <UnitShardIcon key={`${team.name}-core-${id}`} name={id} icon={icon} height={24} width={24} />
+                    );
+                })}
+                {flex.length > 0 && <div className="mx-0.5" />}
+                {flex.map(id => {
+                    const character = chars.find(x => x.snowprintId === id);
+                    const mow = mows.find(x => x.snowprintId === id);
+                    const icon = character?.roundIcon ?? mow?.roundIcon ?? '';
+
+                    return (
+                        <UnitShardIcon key={`${team.name}-flex-${id}`} name={id} icon={icon} height={24} width={24} />
+                    );
+                })}
+                {mowsInTeam.length > 0 && <div className="mx-0.5" />}
+                {mowsInTeam.map(id => {
+                    const character = chars.find(x => x.snowprintId === id);
+                    const mow = mows.find(x => x.snowprintId === id);
+                    const icon = character?.roundIcon ?? mow?.roundIcon ?? '';
+
+                    return (
+                        <UnitShardIcon key={`${team.name}-mow-${id}`} name={id} icon={icon} height={24} width={24} />
+                    );
+                })}
+            </div>
+        );
+    };
+
+    const toggleTeam = (teamName: string) => {
+        setSelectedManualTeamNames(current => {
+            const next = new Set(current);
+            if (next.has(teamName)) {
+                next.delete(teamName);
+            } else {
+                next.add(teamName);
+            }
+
+            return [...next];
+        });
+    };
+
+    const toggleTeamType = (token: string) => {
+        const category = categorySelectionState.find(x => x.token === token);
+        if (!category || category.teamNames.length === 0) {
+            return;
+        }
+
+        setSelectedCategoryTokens(current => {
+            const next = new Set(current);
+            if (next.has(token)) {
+                next.delete(token);
+            } else {
+                next.add(token);
+            }
+
+            return [...next];
+        });
+    };
+
+    const toggleLegendaryTrack = (token: string) => {
+        setSelectedLeOptionTokens(current => {
+            const next = new Set(current);
+            if (next.has(token)) {
+                next.delete(token);
+            } else {
+                next.add(token);
+            }
+
+            return [...next];
+        });
+    };
+
+    const selectedTeamSections = useMemo(() => {
+        const teamsByName = new Map(teams2.map(team => [team.name, team]));
+
+        const toTeamSpecFromTeams2 = (teamName: string): TeamDisplaySpec | undefined => {
+            const team = teamsByName.get(teamName);
+            if (!team) {
+                return;
+            }
+
+            return {
+                id: `teams2-${team.name}`,
+                title: team.name,
+                chars: team.chars,
+                mows: team.mows ?? [],
+            };
+        };
+
+        const toFriendlyCategoryTitle = (label: string) => {
+            return label.startsWith('All ') ? label.slice(4) : label;
+        };
+
+        const getRestrictionNamesForTeam = (
+            eventId: LegendaryEventEnum,
+            track: LreTrackId,
+            restrictionIds: string[]
+        ) => {
+            const lre = getLre(eventId, chars);
+            const trackData = lre[track];
+            const restrictionMap = new Map(
+                trackData.unitsRestrictions
+                    .filter(restriction => restriction.id)
+                    .map(restriction => [restriction.id as string, restriction.name])
+            );
+
+            return restrictionIds.map(id => restrictionMap.get(id) ?? id);
+        };
+
+        const toTrackLabel = (track: 'all' | LreTrackId) => {
+            if (track === 'all') {
+                return 'All';
+            }
+
+            return `${track.charAt(0).toUpperCase()}${track.slice(1)}`;
+        };
+
+        const toLreTeamSpec = (eventId: LegendaryEventEnum, leTeam: ILreTeam, prefix: string): TeamDisplaySpec => {
+            const restrictionNames = getRestrictionNamesForTeam(eventId, leTeam.section, leTeam.restrictionsIds);
+            const restrictionsText = restrictionNames.length > 0 ? restrictionNames.join(' + ') : 'No Restrictions';
+            const trackText = toTrackLabel(leTeam.section);
+            return {
+                id: `${prefix}-${leTeam.id}`,
+                title: `${trackText} - ${restrictionsText}`,
+                chars: leTeam.charSnowprintIds ?? leTeam.charactersIds ?? [],
+                mows: [],
+                hideInnerTitle: true,
+            };
+        };
+
+        const manualSections: TeamDisplaySection[] = selectedManualTeamNames
+            .map(teamName => toTeamSpecFromTeams2(teamName))
+            .filter(team => !!team)
+            .map(team => ({
+                id: `manual-${team.id}`,
+                title: team.title,
+                teams: [team],
+            }));
+
+        const allTypeSections: TeamDisplaySection[] = categorySelectionState
+            .filter(category => category.isSelected)
+            .map(category => {
+                const teamSubsections: TeamDisplaySection[] = category.teamNames
+                    .map(teamName => toTeamSpecFromTeams2(teamName))
+                    .filter(team => !!team)
+                    .map(team => ({
+                        id: `all-${category.key}-${team.id}`,
+                        title: team.title,
+                        teams: [team],
+                    }));
+
+                return {
+                    id: `all-${category.key}`,
+                    title: toFriendlyCategoryTitle(category.label),
+                    sections: teamSubsections,
+                };
+            });
+
+        const leSections: TeamDisplaySection[] = leSelectionGroups
+            .map(group => {
+                const selectedTracks = group.tracks.filter(track => selectedLeTokensSet.has(track.token));
+                if (selectedTracks.length === 0) {
+                    return;
+                }
+
+                const eventTeams = leSelectedTeams[group.eventEnum]?.teams ?? [];
+                const getTeamsForTrack = (trackKey: 'all' | LreTrackId) => {
+                    if (trackKey === 'all') {
+                        return eventTeams;
+                    }
+
+                    return eventTeams.filter(team => team.section === trackKey);
+                };
+
+                if (selectedTracks.length === 1) {
+                    const selectedTrack = selectedTracks[0];
+                    const teamsForTrack = getTeamsForTrack(selectedTrack.key);
+
+                    const teamSubsections: TeamDisplaySection[] = teamsForTrack.map(team => ({
+                        id: `le-${group.id}-${selectedTrack.key}-${team.id}`,
+                        title: toLreTeamSpec(group.eventEnum, team, `le-${group.id}-${selectedTrack.key}`).title,
+                        teams: [toLreTeamSpec(group.eventEnum, team, `le-${group.id}-${selectedTrack.key}`)],
+                    }));
+
+                    return {
+                        id: `le-${group.id}-${selectedTrack.key}`,
+                        title:
+                            selectedTrack.key === 'all'
+                                ? group.label
+                                : `${group.label} ${toTrackLabel(selectedTrack.key)}`,
+                        sections: teamSubsections,
+                    };
+                }
+
+                const trackSections: TeamDisplaySection[] = selectedTracks.map(track => {
+                    const teamsForTrack = getTeamsForTrack(track.key);
+
+                    const teamSubsections: TeamDisplaySection[] = teamsForTrack.map(team => ({
+                        id: `le-${group.id}-${track.key}-${team.id}`,
+                        title: toLreTeamSpec(group.eventEnum, team, `le-${group.id}-${track.key}`).title,
+                        teams: [toLreTeamSpec(group.eventEnum, team, `le-${group.id}-${track.key}`)],
+                    }));
+
+                    return {
+                        id: `le-${group.id}-track-${track.key}`,
+                        title: toTrackLabel(track.key),
+                        sections: teamSubsections,
+                    };
+                });
+
+                return {
+                    id: `le-${group.id}`,
+                    title: group.label,
+                    sections: trackSections,
+                };
+            })
+            .filter(section => !!section);
+
+        return [...manualSections, ...allTypeSections, ...leSections];
+    }, [
+        teams2,
+        selectedManualTeamNames,
+        categorySelectionState,
+        leSelectionGroups,
+        selectedLeTokensSet,
+        leSelectedTeams,
+        chars,
+    ]);
 
     useEffect(() => {
         setLiveSnapshotIndices(RosterSnapshotsService.getLiveSnapshotInidices(rosterSnapshots));
@@ -663,9 +1351,8 @@ export const RosterSnapshots = () => {
                     onDone={handleManageDone}
                 />
             </div>
-            <div className="justify-begin flex border-b border-gray-600 p-2">
+            <div className="justify-begin flex gap-2 border-b border-gray-600 p-2">
                 <SyncButton showText={!isMobile} />
-                <div className="w-1" />
                 <Tooltip title={getTakeSnapshotTitle()}>
                     <Button
                         size="small"
@@ -677,11 +1364,22 @@ export const RosterSnapshots = () => {
                         {!isMobile && 'Take Snapshot'}
                     </Button>
                 </Tooltip>
-                <div className="w-1" />
                 <Button size="small" variant="contained" color="primary" onClick={openManage}>
                     <Settings className="mr-1" />
                     {!isMobile && 'Manage'}
                 </Button>
+                <div className="ml-2">
+                    <RosterFilterDropdown
+                        summaryLabel={rosterFilterSummaryLabel}
+                        teams={teamFilterOptions}
+                        teamTypes={teamTypeFilterOptions}
+                        legendaryEvents={legendaryEventFilterOptions}
+                        renderTeamIcons={renderTeamMemberIcons}
+                        onToggleTeam={toggleTeam}
+                        onToggleTeamType={toggleTeamType}
+                        onToggleLegendaryTrack={toggleLegendaryTrack}
+                    />
+                </div>
                 <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
             </div>
 
@@ -732,23 +1430,43 @@ export const RosterSnapshots = () => {
                     </div>
                 </div>
             )}
-            {getDisplay(
-                zoom,
-                chars,
-                mows,
-                rosterSnapshots,
-                liveSnapshotIndices[leftIndex],
-                liveSnapshotIndices[rightIndex],
-                diffStyleSetting,
-                showShardsSetting,
-                showMythicShardsSetting,
-                showXpLevelSetting,
-                showEquipmentSetting,
-                showShardDiffsSetting,
-                showMythicShardsDiffsSetting,
-                showXpLevelDiffsSetting,
-                showEquipmentDiffsSetting
-            )}
+            {selectedTeamSections.length > 0
+                ? getDisplayByTeamSections(
+                      zoom,
+                      chars,
+                      mows,
+                      rosterSnapshots,
+                      liveSnapshotIndices[leftIndex],
+                      liveSnapshotIndices[rightIndex],
+                      diffStyleSetting,
+                      showShardsSetting,
+                      showMythicShardsSetting,
+                      showXpLevelSetting,
+                      showEquipmentSetting,
+                      showShardDiffsSetting,
+                      showMythicShardsDiffsSetting,
+                      showXpLevelDiffsSetting,
+                      showEquipmentDiffsSetting,
+                      selectedTeamSections
+                  )
+                : getDisplay(
+                      zoom,
+                      chars,
+                      mows,
+                      rosterSnapshots,
+                      liveSnapshotIndices[leftIndex],
+                      liveSnapshotIndices[rightIndex],
+                      diffStyleSetting,
+                      showShardsSetting,
+                      showMythicShardsSetting,
+                      showXpLevelSetting,
+                      showEquipmentSetting,
+                      showShardDiffsSetting,
+                      showMythicShardsDiffsSetting,
+                      showXpLevelDiffsSetting,
+                      showEquipmentDiffsSetting,
+                      selectedUnitIds
+                  )}
         </div>
     );
 };
