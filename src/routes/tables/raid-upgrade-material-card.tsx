@@ -37,7 +37,7 @@ const resolveUnit = (id: string) => {
     const mow = mowMap.get(id);
     if (mow) return { name: mow.name, icon: mow.roundIcon };
 
-    return null;
+    return;
 };
 
 const Component: React.FC<Props> = ({
@@ -57,12 +57,12 @@ const Component: React.FC<Props> = ({
           : upgradeMaterialSnowprintId;
 
     const resolvedUnit = useMemo(() => {
-        if (!isShard && !isMythicShard) return null;
+        if (!isShard && !isMythicShard) return undefined;
         return resolveUnit(materialId);
     }, [materialId, isShard, isMythicShard]);
 
     const upgrade = useMemo(() => {
-        if (isShard || isMythicShard) return null;
+        if (isShard || isMythicShard) return undefined;
         return FsdUpgradesService.getUpgrade(upgradeMaterialSnowprintId);
     }, [upgradeMaterialSnowprintId, isShard, isMythicShard]);
 
