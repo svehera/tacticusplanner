@@ -318,8 +318,8 @@ export const WarOffense2 = () => {
                                         className="text-blue-600 group-hover:text-white"
                                         sx={{ fontSize: 20 }}
                                     />
-                                    <span className="text-[10px] font-bold tracking-tighter text-blue-600 uppercase group-hover:text-white">
-                                        Go
+                                    <span className="text-[10px] font-bold tracking-tighter text-green-600 uppercase group-hover:text-white">
+                                        Deploy
                                     </span>
                                 </button>
 
