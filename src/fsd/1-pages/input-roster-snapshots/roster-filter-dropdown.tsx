@@ -169,8 +169,10 @@ export const RosterFilterDropdown = ({
                                                     disableRipple
                                                 />
                                             </ListItemIcon>
-                                            <ListItemText primary={team.name} />
-                                            {renderTeamIcons(team.name)}
+                                            <div className="flex w-full flex-col">
+                                                <ListItemText primary={team.name} />
+                                                <div className="mt-1">{renderTeamIcons(team.name)}</div>
+                                            </div>
                                         </MenuItem>
                                     ))}
 
