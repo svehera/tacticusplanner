@@ -41,11 +41,7 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                             <div className="w-70" key={raid.id + '-' + index}>
                                 <RaidUpgradeMaterialCard
                                     index={index}
-                                    upgradeMaterialSnowprintId={raid.snowprintId}
-                                    currentQuantity={raid.acquiredCount}
-                                    desiredQuantity={raid.requiredCount}
-                                    relatedCharacterSnowprintIds={raid.relatedCharacters}
-                                    locations={raid.raidLocations}
+                                    upgradeEstimate={raid}
                                     showRelatedCharacters={false}
                                     showAdditionalInfo={false}
                                 />
@@ -55,11 +51,7 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                             <div className="w-70" key={raid.id + '-' + index}>
                                 <RaidUpgradeMaterialCard
                                     index={index}
-                                    upgradeMaterialSnowprintId={raid.snowprintId}
-                                    currentQuantity={raid.acquiredCount}
-                                    desiredQuantity={raid.requiredCount}
-                                    relatedCharacterSnowprintIds={[]}
-                                    locations={raid.raidLocations}
+                                    upgradeEstimate={raid}
                                     showRelatedCharacters={false}
                                     showAdditionalInfo={false}
                                 />
@@ -80,11 +72,7 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                             <div className="w-70" key={raid.id + '-' + index}>
                                 <RaidUpgradeMaterialCard
                                     index={index}
-                                    upgradeMaterialSnowprintId={raid.snowprintId}
-                                    currentQuantity={raid.acquiredCount}
-                                    desiredQuantity={raid.requiredCount}
-                                    relatedCharacterSnowprintIds={raid.relatedCharacters}
-                                    locations={raid.raidLocations}
+                                    upgradeEstimate={raid}
                                     showRelatedCharacters={false}
                                     showAdditionalInfo={false}
                                 />

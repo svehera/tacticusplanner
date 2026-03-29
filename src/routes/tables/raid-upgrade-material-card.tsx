@@ -1,32 +1,26 @@
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import React, { useMemo, Suspense } from 'react';
+import Info from '@mui/icons-material/Info';
+import React, { useMemo, Suspense, lazy, useState, memo } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign/@x/upgrade';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { mows2Data } from '@/fsd/4-entities/mow';
-import { UpgradeImage, UpgradesService as FsdUpgradesService } from '@/fsd/4-entities/upgrade';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
-import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
-const MaterialEstimatesRow = React.lazy(() => import('./material-estimates-row'));
+const MaterialEstimatesRow = lazy(() => import('./material-estimates-row'));
+
 import { RaidLocations } from './raid-locations';
 
 interface Props {
     index: number;
-    upgradeMaterialSnowprintId: string;
-    currentQuantity: number;
-    desiredQuantity: number;
-    relatedCharacterSnowprintIds: string[];
     showRelatedCharacters?: boolean;
     showAdditionalInfo?: boolean;
-    locations: ICampaignBattleComposed[];
     maxLocations?: number;
-    estimate?: ICharacterUpgradeEstimate;
+    upgradeEstimate: ICharacterUpgradeEstimate;
 }
 
 const mowMap = new Map(mows2Data.mows.map(m => [m.snowprintId, m]));
@@ -44,36 +38,26 @@ const resolveUnit = (id: string) => {
 };
 
 const Component: React.FC<Props> = ({
-    upgradeMaterialSnowprintId,
-    currentQuantity,
-    desiredQuantity,
-    locations,
-    relatedCharacterSnowprintIds,
     showRelatedCharacters = true,
     showAdditionalInfo = true,
     maxLocations = 4,
-    estimate,
+    upgradeEstimate,
 }) => {
-    const [showEstimates, setShowEstimates] = React.useState(false);
+    const [showEstimates, setShowEstimates] = useState(false);
     const handleInfoClick = () => setShowEstimates(v => !v);
-    const isShard = UpgradesService.isShard(upgradeMaterialSnowprintId);
-    const isMythicShard = UpgradesService.isMythicShard(upgradeMaterialSnowprintId);
+    const isShard = upgradeEstimate.rarity === 'Shard';
+    const isMythicShard = upgradeEstimate.rarity === 'Mythic Shard';
 
     const materialId = isShard
-        ? upgradeMaterialSnowprintId.slice(7)
+        ? upgradeEstimate.snowprintId.slice(7)
         : isMythicShard
-          ? upgradeMaterialSnowprintId.slice(13)
-          : upgradeMaterialSnowprintId;
+          ? upgradeEstimate.snowprintId.slice(13)
+          : upgradeEstimate.snowprintId;
 
     const resolvedUnit = useMemo(() => {
         if (!isShard && !isMythicShard) return;
         return resolveUnit(materialId);
     }, [materialId, isShard, isMythicShard]);
-
-    const upgrade = useMemo(() => {
-        if (isShard || isMythicShard) return;
-        return FsdUpgradesService.getUpgrade(upgradeMaterialSnowprintId);
-    }, [upgradeMaterialSnowprintId, isShard, isMythicShard]);
 
     const name = useMemo(() => {
         if (isShard || isMythicShard) {
@@ -81,31 +65,50 @@ const Component: React.FC<Props> = ({
             return isMythicShard ? `${base} (Mythic)` : base;
         }
 
-        return upgrade?.label;
-    }, [isShard, isMythicShard, resolvedUnit, materialId, upgrade]);
+        return upgradeEstimate.label;
+    }, [isShard, isMythicShard, resolvedUnit, materialId]);
+
+    const iconTooltipContent = (
+        <div>
+            {upgradeEstimate.label}
+            <ul className="ps-[15px]">
+                {upgradeEstimate.relatedCharacters.map(x => (
+                    <li
+                        key={
+                            'material-item-input-' +
+                            upgradeEstimate.id +
+                            '-' +
+                            upgradeEstimate.locations.map(loc => loc.id).join(',') +
+                            '-' +
+                            x
+                        }>
+                        {x}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 
     const icon = useMemo(() => {
         if (isShard || isMythicShard) {
             if (resolvedUnit) {
                 return (
-                    <UnitShardIcon name={upgradeMaterialSnowprintId} icon={resolvedUnit.icon} mythic={isMythicShard} />
+                    <UnitShardIcon name={upgradeEstimate.snowprintId} icon={resolvedUnit.icon} mythic={isMythicShard} />
                 );
             }
             return materialId;
         }
-
-        if (!upgrade) return upgradeMaterialSnowprintId;
-
         return (
             <UpgradeImage
-                material={upgrade.label}
-                iconPath={upgrade.iconPath}
-                rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(upgrade.rarity))}
+                material={upgradeEstimate.label}
+                iconPath={upgradeEstimate.iconPath}
+                rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(upgradeEstimate.rarity))}
+                tooltip={iconTooltipContent}
             />
         );
-    }, [isShard, isMythicShard, resolvedUnit, upgrade, materialId, upgradeMaterialSnowprintId]);
+    }, [isShard, isMythicShard, resolvedUnit, materialId, upgradeEstimate.snowprintId]);
 
-    const isSufficient = currentQuantity >= desiredQuantity;
+    const isSufficient = upgradeEstimate.acquiredCount >= upgradeEstimate.requiredCount;
     const characterIconHeight = 24;
 
     return (
@@ -116,7 +119,7 @@ const Component: React.FC<Props> = ({
                     <div className="mt-2 flex h-10 w-10 items-center justify-center">{icon}</div>
                     <span
                         className={`mt-1 py-0.5 text-sm font-bold ${isSufficient ? 'text-green-400' : 'text-red-400'}`}>
-                        {Math.floor(currentQuantity)}/{desiredQuantity}
+                        {Math.floor(upgradeEstimate.acquiredCount)}/{upgradeEstimate.requiredCount}
                     </span>
                 </div>
 
@@ -124,7 +127,7 @@ const Component: React.FC<Props> = ({
                 <div className="flex h-full min-w-0 flex-1 flex-col justify-start gap-1 pl-2">
                     <div className="flex items-center justify-between gap-1">
                         <h4 className="mb-0 truncate text-xs font-normal text-gray-200">
-                            {name ?? upgradeMaterialSnowprintId}
+                            {name ?? upgradeEstimate.snowprintId}
                         </h4>
                         {showAdditionalInfo && (
                             <button
@@ -133,17 +136,13 @@ const Component: React.FC<Props> = ({
                                 onClick={handleInfoClick}
                                 aria-label="Show estimates info"
                                 style={{ lineHeight: 0 }}>
-                                <InfoOutlinedIcon
-                                    fontSize="small"
-                                    className="align-middle text-blue-400"
-                                    sx={{ fontSize: 16 }}
-                                />
+                                <Info fontSize="small" className="size-4 align-middle text-blue-400" />
                             </button>
                         )}
                     </div>
                     {showRelatedCharacters && (
                         <div className="flex min-h-7 flex-row items-center gap-1">
-                            {relatedCharacterSnowprintIds.map(id => (
+                            {upgradeEstimate.relatedCharacters.map(id => (
                                 <UnitShardIcon
                                     key={id}
                                     icon={
@@ -158,15 +157,15 @@ const Component: React.FC<Props> = ({
                         </div>
                     )}
                     <div className="flex flex-1 items-start">
-                        <RaidLocations locations={locations} maxLocations={maxLocations} />
+                        <RaidLocations locations={upgradeEstimate.locations} maxLocations={maxLocations} />
                     </div>
                 </div>
             </div>
             {/* Estimates row at the bottom of the card */}
-            {showAdditionalInfo && showEstimates && estimate && (
+            {showAdditionalInfo && showEstimates && (
                 <div className="mt-2">
                     <Suspense fallback={undefined}>
-                        <MaterialEstimatesRow estimate={estimate} />
+                        <MaterialEstimatesRow estimate={upgradeEstimate} />
                     </Suspense>
                 </div>
             )}
@@ -174,12 +173,11 @@ const Component: React.FC<Props> = ({
     );
 };
 
-export const RaidUpgradeMaterialCard = React.memo(Component, (previous, next) => {
+export const RaidUpgradeMaterialCard = memo(Component, (previous, next) => {
     return (
-        previous.upgradeMaterialSnowprintId === next.upgradeMaterialSnowprintId &&
-        previous.currentQuantity === next.currentQuantity &&
-        previous.desiredQuantity === next.desiredQuantity &&
+        previous.upgradeEstimate === next.upgradeEstimate &&
         previous.maxLocations === next.maxLocations &&
-        previous.locations === next.locations
+        previous.showAdditionalInfo === next.showAdditionalInfo &&
+        previous.showRelatedCharacters === next.showRelatedCharacters
     );
 });
