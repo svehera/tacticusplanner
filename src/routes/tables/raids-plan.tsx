@@ -268,17 +268,11 @@ export const RaidsPlan: React.FC<Props> = ({
                                     <div className="flex max-h-[600px] w-full flex-wrap gap-x-4 gap-y-4 overflow-y-auto p-2">
                                         {estimatedRanks.inProgressMaterials.length > 0 &&
                                             estimatedRanks.inProgressMaterials.map((material, index) => (
-                                                <div
-                                                    className="item-raids w-64"
-                                                    key={index}
-                                                    ref={setCardReference(index)}>
+                                                <div key={index} ref={setCardReference(index)}>
                                                     <RaidUpgradeMaterialCard
+                                                        key={index}
                                                         index={index}
-                                                        upgradeMaterialSnowprintId={material.id}
-                                                        currentQuantity={material.acquiredCount}
-                                                        desiredQuantity={material.requiredCount}
-                                                        relatedCharacterSnowprintIds={material.relatedCharacters}
-                                                        locations={material.locations}
+                                                        upgradeEstimate={material}
                                                     />
                                                 </div>
                                             ))}
@@ -314,16 +308,12 @@ export const RaidsPlan: React.FC<Props> = ({
                                     <div className="flex max-h-[600px] w-full flex-wrap gap-1 p-2">
                                         <div className="flex flex-wrap gap-x-4 gap-y-4">
                                             {estimatedRanks.finishedMaterials.map((material, index) => (
-                                                <div className="item-raids w-64" key={index}>
-                                                    <RaidUpgradeMaterialCard
-                                                        index={index}
-                                                        upgradeMaterialSnowprintId={material.id}
-                                                        currentQuantity={material.acquiredCount}
-                                                        desiredQuantity={material.requiredCount}
-                                                        relatedCharacterSnowprintIds={material.relatedCharacters}
-                                                        locations={material.locations}
-                                                    />
-                                                </div>
+                                                <RaidUpgradeMaterialCard
+                                                    key={index}
+                                                    index={index}
+                                                    upgradeEstimate={material}
+                                                    showAdditionalInfo={false}
+                                                />
                                             ))}
                                         </div>
                                     </div>
@@ -355,7 +345,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                     items listed in the table below
                                 </div>
 
-                                <div className="flex-grow">
+                                <div className="grow">
                                     {viewPreferences.raidsTableView === true ? (
                                         <div className="ag-theme-material flex h-[600px] w-full flex-col">
                                             <MaterialsTable
@@ -369,16 +359,12 @@ export const RaidsPlan: React.FC<Props> = ({
                                         <div className="flex max-h-[600px] w-full flex-wrap gap-1 overflow-y-scroll p-2">
                                             <div className="flex flex-wrap gap-x-4 gap-y-4">
                                                 {estimatedRanks.blockedMaterials.map((material, index) => (
-                                                    <div className="item-raids w-64" key={index}>
-                                                        <RaidUpgradeMaterialCard
-                                                            index={index}
-                                                            upgradeMaterialSnowprintId={material.id}
-                                                            currentQuantity={material.acquiredCount}
-                                                            desiredQuantity={material.requiredCount}
-                                                            relatedCharacterSnowprintIds={material.relatedCharacters}
-                                                            locations={material.locations}
-                                                        />
-                                                    </div>
+                                                    <RaidUpgradeMaterialCard
+                                                        key={index}
+                                                        index={index}
+                                                        upgradeEstimate={material}
+                                                        showAdditionalInfo={false}
+                                                    />
                                                 ))}
                                             </div>
                                         </div>

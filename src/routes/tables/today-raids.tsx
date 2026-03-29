@@ -3,10 +3,11 @@ import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { sum } from 'lodash';
 import { isMobile } from 'react-device-detect';
 
+import { RaidUpgradeMaterialCard } from '@/routes/tables/raid-upgrade-material-card';
+
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
-import { MaterialItemInput } from '@/fsd/3-features/goals/material-item-input';
 
 interface Props {
     raids: IUpgradeRaid[];
@@ -37,17 +38,22 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                 <AccordionDetails>
                     <div className="mt-2.5 flex flex-wrap items-start justify-center gap-2">
                         {upgradesRaids.map((raid, index) => (
-                            <div className="bg-overlay w-[240px] rounded-lg p-2 shadow-md" key={raid.id + '-' + index}>
-                                <MaterialItemInput upgradeRaid={raid} />
-                            </div>
+                            <RaidUpgradeMaterialCard
+                                key={raid.id + '-' + index}
+                                index={index}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={false}
+                                showAdditionalInfo={false}
+                            />
                         ))}
                         {completedRaids.map((raid, index) => (
-                            <div className="bg-overlay w-[240px] rounded-lg p-2 shadow-md" key={raid.id + '-' + index}>
-                                <MaterialItemInput
-                                    upgradeRaid={{ ...raid, relatedCharacters: [] }}
-                                    isExhausted={true}
-                                />
-                            </div>
+                            <RaidUpgradeMaterialCard
+                                key={raid.id + '-' + index}
+                                index={index}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={false}
+                                showAdditionalInfo={false}
+                            />
                         ))}
                     </div>
                 </AccordionDetails>
@@ -61,9 +67,13 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                 <AccordionDetails>
                     <div className="mt-2.5 flex flex-wrap items-start justify-center gap-2">
                         {bonusRaids.map((raid, index) => (
-                            <div className="bg-overlay w-[240px] rounded-lg p-2 shadow-md" key={raid.id + '-' + index}>
-                                <MaterialItemInput upgradeRaid={raid} />
-                            </div>
+                            <RaidUpgradeMaterialCard
+                                key={raid.id + '-' + index}
+                                index={index}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={false}
+                                showAdditionalInfo={false}
+                            />
                         ))}
                     </div>
                 </AccordionDetails>

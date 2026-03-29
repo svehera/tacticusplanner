@@ -6,7 +6,7 @@ import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { ButtonPill } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
 
-import { CompactCampaignLocation } from '@/fsd/4-entities/campaign/compact-campaign-location';
+import { ChipCampaignLocation } from '@/fsd/4-entities/campaign/chip-campaign-location';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
@@ -92,7 +92,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, isExhausted = 
                                     location.id
                                 }
                                 style={{ opacity: location.isCompleted ? 0.5 : 1 }}>
-                                <CompactCampaignLocation location={location} unlocked={true} />
+                                <ChipCampaignLocation location={location} unlocked={true} />
                             </div>
                         )
                     )}

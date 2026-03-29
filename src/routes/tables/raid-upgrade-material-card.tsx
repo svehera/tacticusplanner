@@ -1,107 +1,143 @@
-import React from 'react';
+import React, { useMemo, Suspense, lazy, memo } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign/@x/upgrade';
-import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { mows2Data } from '@/fsd/4-entities/mow';
-import { UpgradeImage, UpgradesService as FsdUpgradesService } from '@/fsd/4-entities/upgrade';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
-import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
+
+const MaterialEstimatesRow = lazy(() => import('./material-estimates-row'));
+
+import { RaidLocations } from './raid-locations';
 
 interface Props {
     index: number;
-    upgradeMaterialSnowprintId: string;
-    currentQuantity: number;
-    desiredQuantity: number;
-    relatedCharacterSnowprintIds: string[];
-    locations: ICampaignBattleComposed[];
+    showRelatedCharacters?: boolean;
+    showAdditionalInfo?: boolean;
+    maxLocations?: number;
+    upgradeEstimate: ICharacterUpgradeEstimate;
+    widthClass?: string;
+    compactRaidLocations?: boolean;
 }
 
+const mowMap = new Map(mows2Data.mows.map(m => [m.snowprintId, m]));
+
 const mapUpgradeRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): Rarity => {
-    if (typeof rarity === 'number') return rarity;
-    throw new Error(`Unsupported upgrade rarity: ${rarity}`);
+    return typeof rarity === 'number' ? rarity : Rarity.Common;
 };
 
-export const RaidUpgradeMaterialCard: React.FC<Props> = ({
-    upgradeMaterialSnowprintId,
-    currentQuantity,
-    desiredQuantity,
-    relatedCharacterSnowprintIds,
-    locations,
+const resolveUnit = (id: string) => {
+    const char = CharactersService.getUnit(id);
+    if (char) return { name: char.name, icon: char.roundIcon };
+    const mow = mowMap.get(id);
+    if (mow) return { name: mow.name, icon: mow.roundIcon };
+    return;
+};
+
+const Component: React.FC<Props> = ({
+    showRelatedCharacters = true,
+    showAdditionalInfo = true,
+    maxLocations,
+    upgradeEstimate,
+    widthClass = 'w-67',
+    compactRaidLocations = true,
 }) => {
-    const rewardIcon = () => {
-        if (UpgradesService.isShard(upgradeMaterialSnowprintId)) {
-            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.slice(7));
-            const mow = mows2Data.mows.find(m => m.snowprintId === upgradeMaterialSnowprintId.slice(7));
-            if (char) {
-                return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} mythic={false} />;
-            } else if (mow) {
-                return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={mow.roundIcon} mythic={false} />;
-            }
-            return upgradeMaterialSnowprintId.slice(7);
-        }
-        if (UpgradesService.isMythicShard(upgradeMaterialSnowprintId)) {
-            const char = CharactersService.getUnit(upgradeMaterialSnowprintId.slice(13));
-            const mow = mows2Data.mows.find(m => m.snowprintId === upgradeMaterialSnowprintId.slice(13));
-            if (char) {
-                return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={char.roundIcon} mythic={true} />;
-            } else if (mow) {
-                return <UnitShardIcon name={upgradeMaterialSnowprintId} icon={mow.roundIcon} mythic={true} />;
-            }
-            return upgradeMaterialSnowprintId.slice(13);
-        }
-        const upgrade = FsdUpgradesService.getUpgrade(upgradeMaterialSnowprintId);
-        if (!upgrade) {
-            return upgradeMaterialSnowprintId;
+    const isShard = upgradeEstimate.rarity === 'Shard';
+    const isMythicShard = upgradeEstimate.rarity === 'Mythic Shard';
+
+    const materialId = isShard
+        ? upgradeEstimate.snowprintId.slice(7)
+        : isMythicShard
+          ? upgradeEstimate.snowprintId.slice(13)
+          : upgradeEstimate.snowprintId;
+
+    const resolvedUnit = useMemo(() => {
+        if (!isShard && !isMythicShard) return;
+        return resolveUnit(materialId);
+    }, [materialId, isShard, isMythicShard]);
+
+    const name = useMemo(() => {
+        if (isShard || isMythicShard) {
+            const base = resolvedUnit?.name ?? materialId;
+            return isMythicShard ? `${base} (Mythic)` : base;
         }
 
+        return upgradeEstimate.label;
+    }, [isShard, isMythicShard, resolvedUnit, materialId]);
+
+    const iconTooltipContent = (
+        <div>
+            {upgradeEstimate.label}
+            <ul className="ps-[15px]">
+                {upgradeEstimate.relatedCharacters.map(x => (
+                    <li
+                        key={
+                            'material-item-input-' +
+                            upgradeEstimate.id +
+                            '-' +
+                            upgradeEstimate.locations.map(loc => loc.id).join(',') +
+                            '-' +
+                            x
+                        }>
+                        {x}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+
+    const icon = useMemo(() => {
+        if (isShard || isMythicShard) {
+            if (resolvedUnit) {
+                return (
+                    <UnitShardIcon name={upgradeEstimate.snowprintId} icon={resolvedUnit.icon} mythic={isMythicShard} />
+                );
+            }
+            return materialId;
+        }
         return (
             <UpgradeImage
-                material={upgrade.label}
-                iconPath={upgrade.iconPath}
-                rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(upgrade.rarity))}
+                material={upgradeEstimate.label}
+                iconPath={upgradeEstimate.iconPath}
+                rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(upgradeEstimate.rarity))}
+                tooltip={iconTooltipContent}
             />
         );
-    };
+    }, [isShard, isMythicShard, resolvedUnit, materialId, upgradeEstimate.snowprintId]);
 
-    const neededQuantity = desiredQuantity - currentQuantity;
-    const isSufficient = neededQuantity <= 0;
-    const characterIconHeight = 28;
+    const isSufficient = upgradeEstimate.acquiredCount >= upgradeEstimate.requiredCount;
+    const flooredAcquiredCount = Math.min(Math.floor(upgradeEstimate.acquiredCount), upgradeEstimate.requiredCount);
+    const characterIconHeight = 24;
 
     return (
-        <div className="flex w-full max-w-[400px] flex-col gap-3 rounded-md border border-gray-700 bg-gray-900 p-3 shadow-lg">
-            <div className="grid grid-cols-[auto_1fr] gap-3">
-                <div className="flex flex-col items-center justify-start pt-1">
-                    {rewardIcon()}
-
-                    <span className={`mt-1 text-sm font-bold ${isSufficient ? 'text-green-400' : 'text-red-400'}`}>
-                        {currentQuantity}/{desiredQuantity}
-                    </span>
-
-                    <span className="text-xs text-gray-400">
-                        {isSufficient ? 'Completed' : `${neededQuantity} Missing`}
+        <div
+            className={`flex flex-col justify-between rounded-lg border border-gray-700 bg-gray-900 p-3 shadow-lg ${widthClass}`.trim()}>
+            <div className="flex w-full flex-row items-start!">
+                {/* Left: Icon, quantity */}
+                <div className="flex h-full w-14 shrink-0 flex-col items-center justify-start gap-1">
+                    <div className="mt-2 flex h-10 w-10 items-center justify-center">{icon}</div>
+                    <span
+                        className={`mt-1 py-0.5 text-sm font-bold ${isSufficient ? 'text-green-400' : 'text-red-400'}`}>
+                        {flooredAcquiredCount}/{upgradeEstimate.requiredCount}
                     </span>
                 </div>
 
-                <div className="flex flex-col">
-                    <h4 className="mb-1 border-b border-gray-700 pb-1 text-xs font-semibold text-gray-400 uppercase">
-                        Upgrading Characters
-                    </h4>
-                    <div className="flex max-h-[84px] flex-wrap gap-1 overflow-y-auto pr-1">
-                        {relatedCharacterSnowprintIds.map(id => (
-                            <div
-                                key={id}
-                                className="h-[28px] w-[28px] overflow-hidden rounded-full border border-gray-600"
-                                title={
-                                    CharactersService.getUnit(id)?.name ??
-                                    mows2Data.mows.find(m => id === m.name)?.name ??
-                                    id
-                                }>
+                {/* Right: Content */}
+                <div className="flex h-full min-w-0 flex-1 flex-col justify-start gap-2 pl-2">
+                    <div className="flex items-center justify-between gap-1">
+                        <h4 className="mb-0 truncate text-xs font-normal text-gray-200">
+                            {name ?? upgradeEstimate.snowprintId}
+                        </h4>
+                    </div>
+                    {showRelatedCharacters && (
+                        <div className="flex min-h-7 flex-row items-center gap-1">
+                            {upgradeEstimate.relatedCharacters.map(id => (
                                 <UnitShardIcon
+                                    key={id}
                                     icon={
                                         CharactersService.getUnit(id)?.roundIcon ??
                                         mows2Data.mows.find(m => id === m.name)?.roundIcon ??
@@ -110,35 +146,35 @@ export const RaidUpgradeMaterialCard: React.FC<Props> = ({
                                     height={characterIconHeight}
                                     width={characterIconHeight}
                                 />
-                            </div>
-                        ))}
+                            ))}
+                        </div>
+                    )}
+                    <div className="flex flex-1 items-start">
+                        <RaidLocations
+                            locations={upgradeEstimate.locations}
+                            maxLocations={maxLocations}
+                            compactRaidLocations={compactRaidLocations}
+                        />
                     </div>
                 </div>
             </div>
-
-            <div className="border-t border-gray-800 pt-2">
-                <div className="flex flex-wrap gap-2">
-                    {(() => {
-                        const suggested = locations.filter(x => x.isSuggested && x.isUnlocked);
-                        const displayLocations = suggested.length > 0 ? suggested : locations;
-                        return (
-                            <>
-                                <h4 className="mb-1 w-full text-xs font-semibold text-gray-400 uppercase">
-                                    {suggested.length > 0 ? 'Suggested Locations' : 'Blocked Locations'}
-                                </h4>
-                                {displayLocations.map(loc => (
-                                    <CampaignLocation
-                                        key={loc.id}
-                                        location={loc}
-                                        short={true}
-                                        unlocked={loc.isUnlocked ?? false}
-                                    />
-                                ))}
-                            </>
-                        );
-                    })()}
+            {/* Estimates row at the bottom of the card */}
+            {showAdditionalInfo && (
+                <div className="mt-2">
+                    <Suspense fallback={undefined}>
+                        <MaterialEstimatesRow estimate={upgradeEstimate} />
+                    </Suspense>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
+
+export const RaidUpgradeMaterialCard = memo(Component, (previous, next) => {
+    return (
+        previous.upgradeEstimate === next.upgradeEstimate &&
+        previous.maxLocations === next.maxLocations &&
+        previous.showAdditionalInfo === next.showAdditionalInfo &&
+        previous.showRelatedCharacters === next.showRelatedCharacters
+    );
+});
