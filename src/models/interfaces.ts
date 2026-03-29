@@ -99,6 +99,12 @@ export interface IGlobalState {
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
+
+    /**
+     * Local-only version marker for in-memory and localStorage state.
+     * Not persisted to backend. Used to prevent stale rehydration after sync/reset.
+     */
+    __localVersion?: number;
 }
 
 export interface IDispatchContext {

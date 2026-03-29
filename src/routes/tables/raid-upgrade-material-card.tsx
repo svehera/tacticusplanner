@@ -23,6 +23,7 @@ interface Props {
     widthClass?: string;
     compactRaidLocations?: boolean;
     showPlannedRaidLocationsOnly?: boolean;
+    tooltipRelatedCharactersOnly?: boolean;
 }
 
 const mowMap = new Map(mows2Data.mows.map(m => [m.snowprintId, m]));
@@ -37,6 +38,20 @@ const resolveUnit = (id: string) => {
     const mow = mowMap.get(id);
     if (mow) return { name: mow.name, icon: mow.roundIcon };
     return;
+};
+
+const getRelatedUnitDisplayName = (idOrName: string) => {
+    const char = CharactersService.getUnit(idOrName);
+    if (char) {
+        return char.shortName || char.name;
+    }
+
+    const mow = mows2Data.mows.find(x => x.snowprintId === idOrName || x.name === idOrName);
+    if (mow) {
+        return mow.name;
+    }
+
+    return idOrName;
 };
 
 const hasRaidLocations = (
@@ -56,6 +71,7 @@ const Component: React.FC<Props> = ({
     widthClass = 'w-67',
     compactRaidLocations = true,
     showPlannedRaidLocationsOnly = false,
+    tooltipRelatedCharactersOnly = false,
 }) => {
     const isShard = upgradeEstimate.rarity === 'Shard';
     const isMythicShard = upgradeEstimate.rarity === 'Mythic Shard';
@@ -88,6 +104,10 @@ const Component: React.FC<Props> = ({
         return upgradeEstimate.locations;
     }, [showPlannedRaidLocationsOnly, upgradeEstimate]);
 
+    const relatedUnitTooltipNames = useMemo(() => {
+        return [...new Set(upgradeEstimate.relatedCharacters.map(idOrName => getRelatedUnitDisplayName(idOrName)))];
+    }, [upgradeEstimate.relatedCharacters]);
+
     const hasSuggestedRaidsRemaining = useMemo(() => {
         if (hasRaidLocations(upgradeEstimate)) {
             return upgradeEstimate.raidLocations.some(loc => loc.raidsToPerform > 0);
@@ -100,9 +120,9 @@ const Component: React.FC<Props> = ({
 
     const iconTooltipContent = (
         <div>
-            {upgradeEstimate.label}
+            {!tooltipRelatedCharactersOnly && upgradeEstimate.label}
             <ul className="ps-[15px]">
-                {upgradeEstimate.relatedCharacters.map(x => (
+                {relatedUnitTooltipNames.map(nameItem => (
                     <li
                         key={
                             'material-item-input-' +
@@ -110,9 +130,9 @@ const Component: React.FC<Props> = ({
                             '-' +
                             displayedLocations.map(loc => loc.id).join(',') +
                             '-' +
-                            x
+                            nameItem
                         }>
-                        {x}
+                        {nameItem}
                     </li>
                 ))}
             </ul>
@@ -220,6 +240,7 @@ export const RaidUpgradeMaterialCard = memo(Component, (previous, next) => {
         previous.maxLocations === next.maxLocations &&
         previous.showAdditionalInfo === next.showAdditionalInfo &&
         previous.showRelatedCharacters === next.showRelatedCharacters &&
-        previous.showPlannedRaidLocationsOnly === next.showPlannedRaidLocationsOnly
+        previous.showPlannedRaidLocationsOnly === next.showPlannedRaidLocationsOnly &&
+        previous.tooltipRelatedCharactersOnly === next.tooltipRelatedCharactersOnly
     );
 });

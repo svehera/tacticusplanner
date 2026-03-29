@@ -1132,6 +1132,32 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         const countsB = Object.fromEntries(raidB.raidLocations.map(loc => [loc.id, loc.raidsToPerform]));
         expect(countsB[locIME04.id]).toBe(1);
     });
+
+    it('does not convert planned raids into raidsAlreadyPerformed when sharing a location across goals', () => {
+        const locOE05 = createLocation('OE05');
+        const remainingMats = buildRemainingMats({ [goalA.goalId]: 2, [goalB.goalId]: 2 }, [locOE05]);
+        const inventory: Record<string, number> = {};
+        const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
+
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId, {
+            raidKey: `${upgradeId}::${goalA.goalId}`,
+            goal: { goalId: goalA.goalId, unitId: goalA.unitId },
+        });
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalB.goalId, {
+            raidKey: `${upgradeId}::${goalB.goalId}`,
+            goal: { goalId: goalB.goalId, unitId: goalB.unitId },
+        });
+
+        const raidA = day.raids.find(r => r.id === `${upgradeId}::${goalA.goalId}`)!;
+        const raidB = day.raids.find(r => r.id === `${upgradeId}::${goalB.goalId}`)!;
+
+        expect(raidA.raidLocations).toHaveLength(1);
+        expect(raidB.raidLocations).toHaveLength(1);
+        expect(raidA.raidLocations[0].raidsToPerform).toBe(2);
+        expect(raidB.raidLocations[0].raidsToPerform).toBe(2);
+        expect(raidA.raidLocations[0].raidsAlreadyPerformed).toBe(0);
+        expect(raidB.raidLocations[0].raidsAlreadyPerformed).toBe(0);
+    });
 });
 
 describe('UpgradesService.canonicalizeInventoryUpgrades', () => {

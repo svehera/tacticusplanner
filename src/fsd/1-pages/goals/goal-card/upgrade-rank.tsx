@@ -32,7 +32,7 @@ export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, calen
     return (
         <div className="flex flex-col gap-2">
             <div className="flex-box gap-[3px]">
-                <RankIcon rank={goal.rankStart} /> <ArrowForward />
+                <RankIcon rank={goal.rankStart} rankPoint5={goal.rankStartPoint5} /> <ArrowForward />
                 <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                 {goal.upgradesRarity.length > 0 && (
                     <div className="flex-box gap-[3px]">
