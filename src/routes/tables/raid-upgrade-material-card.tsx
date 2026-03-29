@@ -8,7 +8,7 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { mows2Data } from '@/fsd/4-entities/mow';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
-import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
+import { ICharacterUpgradeEstimate, IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
 
 const MaterialEstimatesRow = lazy(() => import('./material-estimates-row'));
 
@@ -22,6 +22,7 @@ interface Props {
     upgradeEstimate: ICharacterUpgradeEstimate;
     widthClass?: string;
     compactRaidLocations?: boolean;
+    showPlannedRaidLocationsOnly?: boolean;
 }
 
 const mowMap = new Map(mows2Data.mows.map(m => [m.snowprintId, m]));
@@ -38,6 +39,15 @@ const resolveUnit = (id: string) => {
     return;
 };
 
+const hasRaidLocations = (
+    estimate: ICharacterUpgradeEstimate
+): estimate is ICharacterUpgradeEstimate & { raidLocations: IItemRaidLocation[] } => {
+    return (
+        'raidLocations' in estimate &&
+        Array.isArray((estimate as { raidLocations?: IItemRaidLocation[] }).raidLocations)
+    );
+};
+
 const Component: React.FC<Props> = ({
     showRelatedCharacters = true,
     showAdditionalInfo = true,
@@ -45,6 +55,7 @@ const Component: React.FC<Props> = ({
     upgradeEstimate,
     widthClass = 'w-67',
     compactRaidLocations = true,
+    showPlannedRaidLocationsOnly = false,
 }) => {
     const isShard = upgradeEstimate.rarity === 'Shard';
     const isMythicShard = upgradeEstimate.rarity === 'Mythic Shard';
@@ -69,6 +80,24 @@ const Component: React.FC<Props> = ({
         return upgradeEstimate.label;
     }, [isShard, isMythicShard, resolvedUnit, materialId]);
 
+    const displayedLocations = useMemo(() => {
+        if (showPlannedRaidLocationsOnly && hasRaidLocations(upgradeEstimate)) {
+            return upgradeEstimate.raidLocations;
+        }
+
+        return upgradeEstimate.locations;
+    }, [showPlannedRaidLocationsOnly, upgradeEstimate]);
+
+    const hasSuggestedRaidsRemaining = useMemo(() => {
+        if (hasRaidLocations(upgradeEstimate)) {
+            return upgradeEstimate.raidLocations.some(loc => loc.raidsToPerform > 0);
+        }
+
+        return displayedLocations.some(loc => loc.isSuggested && (loc.isUnlocked ?? true));
+    }, [upgradeEstimate, displayedLocations]);
+
+    const noSuggestedRaidsRemaining = !hasSuggestedRaidsRemaining;
+
     const iconTooltipContent = (
         <div>
             {upgradeEstimate.label}
@@ -79,7 +108,7 @@ const Component: React.FC<Props> = ({
                             'material-item-input-' +
                             upgradeEstimate.id +
                             '-' +
-                            upgradeEstimate.locations.map(loc => loc.id).join(',') +
+                            displayedLocations.map(loc => loc.id).join(',') +
                             '-' +
                             x
                         }>
@@ -118,10 +147,19 @@ const Component: React.FC<Props> = ({
             className={`flex flex-col justify-between rounded-lg border border-gray-700 bg-gray-900 p-3 shadow-lg ${widthClass}`.trim()}>
             <div className="flex w-full flex-row items-start!">
                 {/* Left: Icon, quantity */}
-                <div className="flex h-full w-14 shrink-0 flex-col items-center justify-start gap-1">
+                <div
+                    className={`flex h-full w-14 shrink-0 flex-col items-center justify-start gap-1 ${
+                        noSuggestedRaidsRemaining ? 'opacity-70' : ''
+                    }`}>
                     <div className="mt-2 flex h-10 w-10 items-center justify-center">{icon}</div>
                     <span
-                        className={`mt-1 py-0.5 text-sm font-bold ${isSufficient ? 'text-green-400' : 'text-red-400'}`}>
+                        className={`mt-1 py-0.5 text-sm font-bold ${
+                            noSuggestedRaidsRemaining
+                                ? 'text-gray-400'
+                                : isSufficient
+                                  ? 'text-green-400'
+                                  : 'text-red-400'
+                        }`}>
                         {flooredAcquiredCount}/{upgradeEstimate.requiredCount}
                     </span>
                 </div>
@@ -129,12 +167,18 @@ const Component: React.FC<Props> = ({
                 {/* Right: Content */}
                 <div className="flex h-full min-w-0 flex-1 flex-col justify-start gap-2 pl-2">
                     <div className="flex items-center justify-between gap-1">
-                        <h4 className="mb-0 truncate text-xs font-normal text-gray-200">
+                        <h4
+                            className={`mb-0 truncate text-xs font-normal ${
+                                noSuggestedRaidsRemaining ? 'text-gray-500' : 'text-gray-200'
+                            }`}>
                             {name ?? upgradeEstimate.snowprintId}
                         </h4>
                     </div>
                     {showRelatedCharacters && (
-                        <div className="flex min-h-7 flex-row items-center gap-1">
+                        <div
+                            className={`flex min-h-7 flex-row items-center gap-1 ${
+                                noSuggestedRaidsRemaining ? 'opacity-70' : ''
+                            }`}>
                             {upgradeEstimate.relatedCharacters.map(id => (
                                 <UnitShardIcon
                                     key={id}
@@ -149,9 +193,9 @@ const Component: React.FC<Props> = ({
                             ))}
                         </div>
                     )}
-                    <div className="flex flex-1 items-start">
+                    <div className={`flex flex-1 items-start ${noSuggestedRaidsRemaining ? 'opacity-75' : ''}`}>
                         <RaidLocations
-                            locations={upgradeEstimate.locations}
+                            locations={displayedLocations}
                             maxLocations={maxLocations}
                             compactRaidLocations={compactRaidLocations}
                         />
@@ -175,6 +219,7 @@ export const RaidUpgradeMaterialCard = memo(Component, (previous, next) => {
         previous.upgradeEstimate === next.upgradeEstimate &&
         previous.maxLocations === next.maxLocations &&
         previous.showAdditionalInfo === next.showAdditionalInfo &&
-        previous.showRelatedCharacters === next.showRelatedCharacters
+        previous.showRelatedCharacters === next.showRelatedCharacters &&
+        previous.showPlannedRaidLocationsOnly === next.showPlannedRaidLocationsOnly
     );
 });
