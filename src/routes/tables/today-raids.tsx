@@ -44,7 +44,6 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                                 upgradeEstimate={raid}
                                 showRelatedCharacters={false}
                                 showAdditionalInfo={false}
-                                compactRaidLocations={false}
                             />
                         ))}
                         {completedRaids.map((raid, index) => (
@@ -54,7 +53,6 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                                 upgradeEstimate={raid}
                                 showRelatedCharacters={false}
                                 showAdditionalInfo={false}
-                                compactRaidLocations={false}
                             />
                         ))}
                     </div>
