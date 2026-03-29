@@ -271,7 +271,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                         {estimatedRanks.inProgressMaterials.length > 0 &&
                                             estimatedRanks.inProgressMaterials.map((material, index) => (
                                                 <div
-                                                    className="item-raids w-64"
+                                                    className="item-raids w-70"
                                                     key={index}
                                                     ref={setCardReference(index)}>
                                                     <RaidUpgradeMaterialCard
@@ -281,6 +281,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                                         desiredQuantity={material.requiredCount}
                                                         relatedCharacterSnowprintIds={material.relatedCharacters}
                                                         locations={material.locations}
+                                                        estimate={material}
                                                     />
                                                 </div>
                                             ))}
@@ -316,7 +317,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                     <div className="flex max-h-[600px] w-full flex-wrap gap-1 p-2">
                                         <div className="flex flex-wrap gap-x-4 gap-y-4">
                                             {estimatedRanks.finishedMaterials.map((material, index) => (
-                                                <div className="item-raids w-64" key={index}>
+                                                <div className="item-raids w-70" key={index}>
                                                     <RaidUpgradeMaterialCard
                                                         index={index}
                                                         upgradeMaterialSnowprintId={material.id}
@@ -371,7 +372,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                         <div className="flex max-h-[600px] w-full flex-wrap gap-1 overflow-y-scroll p-2">
                                             <div className="flex flex-wrap gap-x-4 gap-y-4">
                                                 {estimatedRanks.blockedMaterials.map((material, index) => (
-                                                    <div className="item-raids w-64" key={index}>
+                                                    <div className="item-raids w-70" key={index}>
                                                         <RaidUpgradeMaterialCard
                                                             index={index}
                                                             upgradeMaterialSnowprintId={material.id}
@@ -379,6 +380,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                                             desiredQuantity={material.requiredCount}
                                                             relatedCharacterSnowprintIds={material.relatedCharacters}
                                                             locations={material.locations}
+                                                            showAdditionalInfo={false}
                                                         />
                                                     </div>
                                                 ))}
