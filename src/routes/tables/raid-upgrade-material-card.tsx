@@ -110,6 +110,7 @@ const Component: React.FC<Props> = ({
     }, [isShard, isMythicShard, resolvedUnit, materialId, upgradeEstimate.snowprintId]);
 
     const isSufficient = upgradeEstimate.acquiredCount >= upgradeEstimate.requiredCount;
+    const flooredAcquiredCount = Math.min(Math.floor(upgradeEstimate.acquiredCount), upgradeEstimate.requiredCount);
     const characterIconHeight = 24;
 
     return (
@@ -121,7 +122,7 @@ const Component: React.FC<Props> = ({
                     <div className="mt-2 flex h-10 w-10 items-center justify-center">{icon}</div>
                     <span
                         className={`mt-1 py-0.5 text-sm font-bold ${isSufficient ? 'text-green-400' : 'text-red-400'}`}>
-                        {Math.floor(upgradeEstimate.acquiredCount)}/{upgradeEstimate.requiredCount}
+                        {flooredAcquiredCount}/{upgradeEstimate.requiredCount}
                     </span>
                 </div>
 
