@@ -165,7 +165,7 @@ const Component: React.FC<Props> = ({
             {/* Estimates row at the bottom of the card */}
             {showAdditionalInfo && showEstimates && estimate && (
                 <div className="mt-2">
-                    <Suspense fallback={null}>
+                    <Suspense fallback={undefined}>
                         <MaterialEstimatesRow estimate={estimate} />
                     </Suspense>
                 </div>
