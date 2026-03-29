@@ -1,24 +1,33 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback, memo } from 'react';
 
 import { ButtonPill } from '@/fsd/5-shared/ui';
 
 import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign/@x/upgrade';
-import { CompactCampaignLocation } from '@/fsd/4-entities/campaign/compact-campaign-location';
+import { ChipCampaignLocation } from '@/fsd/4-entities/campaign/chip-campaign-location';
 
 interface Props {
     locations: ICampaignBattleComposed[];
     maxLocations?: number;
+    compactRaidLocations?: boolean;
 }
 
-const Component: React.FC<Props> = ({ locations, maxLocations = 4 }) => {
+const Component: React.FC<Props> = ({ locations, maxLocations, compactRaidLocations = true }) => {
     const [expanded, setExpanded] = useState(false);
+
+    const effectiveMaxLocations = useMemo(() => {
+        if (typeof maxLocations === 'number') return maxLocations;
+        return compactRaidLocations ? 4 : 2;
+    }, [maxLocations, compactRaidLocations]);
 
     const displayLocations = useMemo(() => {
         const suggested = locations.filter(x => x.isSuggested && x.isUnlocked);
         return suggested.length > 0 ? suggested : locations;
     }, [locations]);
 
-    const safeMaxLocations = useMemo(() => Math.max(1, Math.floor(Number(maxLocations) || 1)), [maxLocations]);
+    const safeMaxLocations = useMemo(
+        () => Math.max(1, Math.floor(Number(effectiveMaxLocations) || 1)),
+        [effectiveMaxLocations]
+    );
 
     const visibleLocations = expanded
         ? displayLocations.length
@@ -36,18 +45,33 @@ const Component: React.FC<Props> = ({ locations, maxLocations = 4 }) => {
     return (
         <div className="text-muted-fg flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
             {visibleLocationList.map(loc => (
-                <CompactCampaignLocation key={loc.id} location={loc} unlocked={loc.isUnlocked ?? false} />
+                <ChipCampaignLocation
+                    key={loc.id}
+                    location={loc}
+                    unlocked={loc.isUnlocked ?? false}
+                    compact={compactRaidLocations}
+                />
             ))}
 
             {displayLocations.length > safeMaxLocations && !expanded && (
-                <ButtonPill onClick={expand}>+{displayLocations.length - visibleLocations} more</ButtonPill>
+                <ButtonPill onClick={expand} compact={compactRaidLocations}>
+                    +{displayLocations.length - visibleLocations} more
+                </ButtonPill>
             )}
 
-            {displayLocations.length > safeMaxLocations && expanded && <ButtonPill onClick={collapse}>less</ButtonPill>}
+            {displayLocations.length > safeMaxLocations && expanded && (
+                <ButtonPill onClick={collapse} compact={compactRaidLocations}>
+                    less
+                </ButtonPill>
+            )}
         </div>
     );
 };
 
-export const RaidLocations = React.memo(Component, (previous, next) => {
-    return previous.maxLocations === next.maxLocations && previous.locations === next.locations;
+export const RaidLocations = memo(Component, (previous, next) => {
+    return (
+        previous.maxLocations === next.maxLocations &&
+        previous.locations === next.locations &&
+        previous.compactRaidLocations === next.compactRaidLocations
+    );
 });

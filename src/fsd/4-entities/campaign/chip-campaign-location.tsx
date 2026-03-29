@@ -15,6 +15,8 @@ import { ICampaignBattleComposed } from './model';
 interface Props {
     location: ICampaignBattleComposed;
     unlocked: boolean;
+    compact?: boolean;
+    widthClass?: string;
 }
 
 interface CampaignBattleCardPreviewProps {
@@ -108,7 +110,7 @@ const CampaignBattleCardPreview: React.FC<CampaignBattleCardPreviewProps> = ({ b
     );
 };
 
-export const CompactCampaignLocation: React.FC<Props> = ({ location, unlocked }) => {
+export const ChipCampaignLocation: React.FC<Props> = ({ location, unlocked, compact = true, widthClass }) => {
     const [openDetails, setOpenDetails] = useState(false);
 
     const locationNumber = useMemo(() => {
@@ -134,6 +136,10 @@ export const CompactCampaignLocation: React.FC<Props> = ({ location, unlocked })
     const campaignShort = campaignDisplayNames[location.campaign] ?? location.campaign;
     const fullLocationName = `Battle ${locationNumber} - ${location.campaign}`;
 
+    const locationText = compact ? campaignShort : location.campaign;
+    const setWidthClass = widthClass ?? (compact ? 'w-[84px]' : 'w-[178px]');
+    const isOnslaught = location.campaign === Campaign.Onslaught;
+
     return location === undefined ? (
         <span>undefined</span>
     ) : (
@@ -142,14 +148,15 @@ export const CompactCampaignLocation: React.FC<Props> = ({ location, unlocked })
                 <button
                     type="button"
                     onClick={() => setOpenDetails(true)}
-                    className="border-muted-fg/40 inline-flex w-[84px] cursor-pointer items-center gap-1 rounded-full border bg-transparent px-1.5 py-0.5"
+                    className={`border-muted-fg/40 inline-flex cursor-pointer items-center gap-1 rounded-full border bg-transparent px-2 py-0.5 ${setWidthClass}`.trim()}
                     style={{
                         opacity: unlocked ? 1 : 0.5,
                     }}>
                     <CampaignImage campaign={location.campaign} size={18} showTooltip={false} />
-                    <span className="text-secondary-fg text-[10px] leading-none">
-                        {campaignShort} {locationNumber}
-                    </span>
+                    <div className="text-secondary-fg w-full flex-row justify-between text-[10px] leading-none">
+                        <span>{locationText}</span>
+                        {!isOnslaught && <span>{locationNumber}</span>}
+                    </div>
                 </button>
             </Tooltip>
 

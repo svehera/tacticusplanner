@@ -20,6 +20,8 @@ interface Props {
     showAdditionalInfo?: boolean;
     maxLocations?: number;
     upgradeEstimate: ICharacterUpgradeEstimate;
+    widthClass?: string;
+    compactRaidLocations?: boolean;
 }
 
 const mowMap = new Map(mows2Data.mows.map(m => [m.snowprintId, m]));
@@ -39,8 +41,10 @@ const resolveUnit = (id: string) => {
 const Component: React.FC<Props> = ({
     showRelatedCharacters = true,
     showAdditionalInfo = true,
-    maxLocations = 4,
+    maxLocations,
     upgradeEstimate,
+    widthClass = 'w-67',
+    compactRaidLocations = true,
 }) => {
     const isShard = upgradeEstimate.rarity === 'Shard';
     const isMythicShard = upgradeEstimate.rarity === 'Mythic Shard';
@@ -109,7 +113,8 @@ const Component: React.FC<Props> = ({
     const characterIconHeight = 24;
 
     return (
-        <div className="flex h-full flex-col justify-between rounded-lg border border-gray-700 bg-gray-900 p-3 shadow-lg">
+        <div
+            className={`flex flex-col justify-between rounded-lg border border-gray-700 bg-gray-900 p-3 shadow-lg ${widthClass}`.trim()}>
             <div className="flex w-full flex-row items-start!">
                 {/* Left: Icon, quantity */}
                 <div className="flex h-full w-14 shrink-0 flex-col items-center justify-start gap-1">
@@ -144,7 +149,11 @@ const Component: React.FC<Props> = ({
                         </div>
                     )}
                     <div className="flex flex-1 items-start">
-                        <RaidLocations locations={upgradeEstimate.locations} maxLocations={maxLocations} />
+                        <RaidLocations
+                            locations={upgradeEstimate.locations}
+                            maxLocations={maxLocations}
+                            compactRaidLocations={compactRaidLocations}
+                        />
                     </div>
                 </div>
             </div>
