@@ -14,6 +14,8 @@ interface Props {
     bonusRaids: IUpgradeRaid[];
 }
 
+const isShardRaid = (raid: IUpgradeRaid) => raid.rarity === 'Shard' || raid.rarity === 'Mythic Shard';
+
 export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
     const locs = raids.flatMap(raid => raid.raidLocations);
     const energySpent = sum(locs.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
@@ -25,6 +27,8 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
     const upgradesRaids = raids
         .filter(raid => raid.raidLocations.length > 0)
         .filter(raid => raid.raidLocations.some(loc => loc.raidsToPerform > 0));
+    const completedMaterialRaids = completedRaids.filter(raid => !isShardRaid(raid));
+    const completedShardRaids = completedRaids.filter(raid => isShardRaid(raid));
 
     return (
         <>
@@ -44,15 +48,27 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                                 upgradeEstimate={raid}
                                 showRelatedCharacters={false}
                                 showAdditionalInfo={false}
+                                showPlannedRaidLocationsOnly={true}
                             />
                         ))}
-                        {completedRaids.map((raid, index) => (
+                        {completedMaterialRaids.map((raid, index) => (
                             <RaidUpgradeMaterialCard
                                 key={raid.id + '-' + index}
                                 index={index}
                                 upgradeEstimate={raid}
                                 showRelatedCharacters={false}
                                 showAdditionalInfo={false}
+                                showPlannedRaidLocationsOnly={true}
+                            />
+                        ))}
+                        {completedShardRaids.map((raid, index) => (
+                            <RaidUpgradeMaterialCard
+                                key={raid.id + '-' + index}
+                                index={index}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={false}
+                                showAdditionalInfo={false}
+                                showPlannedRaidLocationsOnly={true}
                             />
                         ))}
                     </div>
@@ -73,6 +89,7 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                                 upgradeEstimate={raid}
                                 showRelatedCharacters={false}
                                 showAdditionalInfo={false}
+                                showPlannedRaidLocationsOnly={true}
                             />
                         ))}
                     </div>
