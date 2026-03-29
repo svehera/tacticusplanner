@@ -78,6 +78,7 @@ import mythicOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascens
 import rareOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascension_orbs_rare.png';
 import uncommonOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascension_orbs_uncommon.png';
 import xenosOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascension_orbs_xenos.png';
+import raidTicket from '@/assets/images/snowprint_assets/resources/ui_icon_raid_ticket.png';
 import chaosComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_chaos.png';
 import imperialComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_imperial.png';
 import xenosComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_xenos.png';
@@ -445,5 +446,9 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     leShard: {
         file: leShard,
         label: 'Legendary-Event Shard',
+    },
+    raidTicket: {
+        file: raidTicket,
+        label: 'Raid Ticket',
     },
 };
