@@ -270,10 +270,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                     <div className="flex max-h-[600px] w-full flex-wrap gap-x-4 gap-y-4 overflow-y-auto p-2">
                                         {estimatedRanks.inProgressMaterials.length > 0 &&
                                             estimatedRanks.inProgressMaterials.map((material, index) => (
-                                                <div
-                                                    className="item-raids w-70"
-                                                    key={index}
-                                                    ref={setCardReference(index)}>
+                                                <div className="w-70" key={index} ref={setCardReference(index)}>
                                                     <RaidUpgradeMaterialCard
                                                         index={index}
                                                         upgradeMaterialSnowprintId={material.id}
@@ -317,7 +314,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                     <div className="flex max-h-[600px] w-full flex-wrap gap-1 p-2">
                                         <div className="flex flex-wrap gap-x-4 gap-y-4">
                                             {estimatedRanks.finishedMaterials.map((material, index) => (
-                                                <div className="item-raids w-70" key={index}>
+                                                <div className="w-70" key={index}>
                                                     <RaidUpgradeMaterialCard
                                                         index={index}
                                                         upgradeMaterialSnowprintId={material.id}
@@ -372,7 +369,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                         <div className="flex max-h-[600px] w-full flex-wrap gap-1 overflow-y-scroll p-2">
                                             <div className="flex flex-wrap gap-x-4 gap-y-4">
                                                 {estimatedRanks.blockedMaterials.map((material, index) => (
-                                                    <div className="item-raids w-70" key={index}>
+                                                    <div className="w-70" key={index}>
                                                         <RaidUpgradeMaterialCard
                                                             index={index}
                                                             upgradeMaterialSnowprintId={material.id}

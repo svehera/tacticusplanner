@@ -110,13 +110,13 @@ const Component: React.FC<Props> = ({
 
     return (
         <div className="flex h-full flex-col rounded-lg border border-gray-700 bg-gray-900 p-3 shadow-lg">
-            <div className="flex w-full flex-row">
+            <div className="flex w-full flex-row items-start!">
                 {/* Left: Icon, quantity */}
                 <div className="flex h-full w-14 shrink-0 flex-col items-center justify-start gap-1">
                     <div className="mt-2 flex h-10 w-10 items-center justify-center">{icon}</div>
                     <span
                         className={`mt-1 py-0.5 text-sm font-bold ${isSufficient ? 'text-green-400' : 'text-red-400'}`}>
-                        {currentQuantity}/{desiredQuantity}
+                        {Math.floor(currentQuantity)}/{desiredQuantity}
                     </span>
                 </div>
 
