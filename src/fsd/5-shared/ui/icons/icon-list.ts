@@ -12,7 +12,6 @@ import hitsIcon from '@/assets/images/icons/hits.webp';
 import meleeIcon from '@/assets/images/icons/melee.png';
 import mowIcon from '@/assets/images/icons/mow.png';
 import powerIcon from '@/assets/images/icons/power.png';
-import raidToken from '@/assets/images/icons/raidToken.png';
 import rangedIcon from '@/assets/images/icons/ranged.png';
 import redStar from '@/assets/images/icons/red star small.png';
 import goldStar from '@/assets/images/icons/star small.png';
@@ -90,10 +89,6 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     hits: {
         file: hitsIcon,
         label: 'Hits',
-    },
-    raidToken: {
-        file: raidToken,
-        label: 'Raid Token',
     },
     survivalCurrencyHalloween2025: snowprintIcons.eventCurrencyHalloween2025Icon,
     checkmark: snowprintIcons.checkmark,
@@ -181,6 +176,7 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     mythicShard: snowprintIcons.mythicShard,
     movement: snowprintIcons.movement,
     leShard: snowprintIcons.leShard,
+    raidTicket: snowprintIcons.raidTicket,
 };
 
 export const starsIcons = {
