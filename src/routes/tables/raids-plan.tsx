@@ -314,6 +314,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                                     key={index}
                                                     index={index}
                                                     upgradeEstimate={material}
+                                                    showAdditionalInfo={false}
                                                 />
                                             ))}
                                         </div>
