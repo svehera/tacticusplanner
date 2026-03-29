@@ -278,22 +278,22 @@ export const ManageTeams = () => {
 
     const onSave = () => {
         if (saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam) {
-            const team: ITeam2 = teams.find(t => t.name === editingTeam?.name)!;
-            team.chars = selectedChars;
-            if (selectedMows.length > 0) team.mows = selectedMows;
-            team.warOffense = warOffenseSelected ? true : undefined;
-            team.warDefense = warDefenseSelected ? true : undefined;
-            team.raid = guildRaidSelected ? true : undefined;
-            team.ta = tournamentArenaSelected ? true : undefined;
-            team.horde = hordeModeSelected ? true : undefined;
-            team.notes = notes;
-            team.flexIndex = flexIndex;
-            const editingTeams = [...teams];
-            for (let t of editingTeams) {
-                if (t.name !== editingTeam.name) continue;
-                t = team;
-            }
-            dispatch.teams2({ type: 'Set', value: cloneDeep(editingTeams) });
+            const updatedTeam: ITeam2 = {
+                ...editingTeam,
+                name: teamName.trim(),
+                chars: selectedChars,
+                mows: selectedMows.length > 0 ? selectedMows : undefined,
+                warOffense: warOffenseSelected ? true : undefined,
+                warDefense: warDefenseSelected ? true : undefined,
+                raid: guildRaidSelected ? true : undefined,
+                ta: tournamentArenaSelected ? true : undefined,
+                horde: hordeModeSelected ? true : undefined,
+                notes,
+                flexIndex,
+            };
+
+            const updatedTeams = teams.map(team => (team.name === editingTeam.name ? updatedTeam : team));
+            dispatch.teams2({ type: 'Set', value: cloneDeep(updatedTeams) });
         } else {
             const newTeam: ITeam2 = {
                 name: teamName.trim(),
