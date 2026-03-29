@@ -154,7 +154,7 @@ export const ChipCampaignLocation: React.FC<Props> = ({ location, unlocked, comp
                     }}>
                     <CampaignImage campaign={location.campaign} size={18} showTooltip={false} />
                     <div className="text-secondary-fg w-full flex-row justify-between text-[10px] leading-none">
-                        <span>{locationText}</span>
+                        <span className="truncate">{locationText}</span>
                         {!isOnslaught && <span>{locationNumber}</span>}
                     </div>
                 </button>
