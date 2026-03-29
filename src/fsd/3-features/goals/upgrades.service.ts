@@ -943,15 +943,31 @@ export class UpgradesService {
         const raidKey = options?.raidKey ?? upgradeId;
         const existingRaid = day.raids.find(raid => raid.id === raidKey);
         const existingRaidLoc = existingRaid?.raidLocations.find(raidLoc => raidLoc.id === loc.id);
-        const totalRaidsForLocation = day.raids
+        const allRaidEntriesForLocation = day.raids
             .flatMap(raid => raid.raidLocations)
-            .filter(raidLoc => raidLoc.id === loc.id)
-            .reduce((sum, raidLoc) => sum + raidLoc.raidsAlreadyPerformed + raidLoc.raidsToPerform, 0);
-        const raidsAlreadyDone = existingRaidLoc
-            ? Math.max(totalRaidsForLocation - (existingRaidLoc.raidsToPerform ?? 0), 0)
-            : totalRaidsForLocation;
+            .filter(raidLoc => raidLoc.id === loc.id);
+
+        // Tracks actual completed attempts (from persisted completed locations / sync),
+        // never planned attempts from this run.
+        let raidsAlreadyDone = 0;
+        for (const raidLoc of allRaidEntriesForLocation) {
+            raidsAlreadyDone = Math.max(raidsAlreadyDone, raidLoc.raidsAlreadyPerformed);
+        }
+
+        // Tracks planned attempts so we don't overbook a node beyond dailyBattleCount.
+        let plannedRaidsForLocation = 0;
+        for (const raidLoc of allRaidEntriesForLocation) {
+            plannedRaidsForLocation += raidLoc.raidsToPerform ?? 0;
+        }
+        const plannedRaidsExcludingCurrent = existingRaidLoc
+            ? Math.max(plannedRaidsForLocation - (existingRaidLoc.raidsToPerform ?? 0), 0)
+            : plannedRaidsForLocation;
+
         const remainingAttempts = Math.max(
-            Math.min(loc.dailyBattleCount - raidsAlreadyDone, Math.floor(energy / loc.energyCost)),
+            Math.min(
+                loc.dailyBattleCount - raidsAlreadyDone - plannedRaidsExcludingCurrent,
+                Math.floor(energy / loc.energyCost)
+            ),
             0
         );
         const raidsNeeded = Math.ceil(needed / loc.dropRate);
@@ -2080,9 +2096,8 @@ export class UpgradesService {
         if (char?.shortName) return char.shortName;
         const mow2 = MowsService.resolveToStatic(id);
         if (mow2) {
-            // Prefer legacy shortName if available, else use new static name
             const mowLegacy = MowsService.resolveOldIdToStatic(id);
-            const legacyShort = (mowLegacy as any)?.shortName as string | undefined;
+            const legacyShort = mowLegacy?.name as string | undefined;
             return legacyShort ?? mow2.name;
         }
         return id;

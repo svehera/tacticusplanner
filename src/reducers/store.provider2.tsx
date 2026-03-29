@@ -37,13 +37,22 @@ import { viewPreferencesReducer } from './view-settings.reducer';
 import { xpIncomeActionReducer } from './xp-income-reducer';
 import { xpUseActionReducer } from './xp-use-reducer';
 
+// --- Local-only version marker for in-memory/localStorage state (never sent to backend)
+const LOCAL_VERSION_KEY = 'TP-LocalVersion';
+function getLocalVersion(): number {
+    const v = localStorage.getItem(LOCAL_VERSION_KEY);
+    return v ? Number.parseInt(v, 10) : 0;
+}
+
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const { isAuthenticated, setUser, setUserInfo, logout } = useAuth();
     const localStore = useMemo(() => new PersonalDataLocalStorage(), []);
 
+    // Track local-only version for in-memory/localStorage state
+    const [localVersion, setLocalVersion] = useState(() => getLocalVersion());
     const [globalState, setGlobalState] = useState(() => {
         const data = localStore.getData();
-        return new GlobalState(data);
+        return { ...new GlobalState(data), __localVersion: getLocalVersion() };
     });
 
     const [modified, setModified] = useState(false);
@@ -211,39 +220,45 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             rosterSnapshots: wrapDispatch(dispatchRosterSnapshots),
             gameModeTokens: wrapDispatch(dispatchGameModeTokens),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
-                dispatchCharacters({ type: 'Set', value: data.characters });
-                dispatchMows({ type: 'Set', value: data.mows });
-                dispatchGoals({ type: 'Set', value: data.goals });
-                dispatchTeams({ type: 'Set', value: data.teams });
-                dispatchTeams2({ type: 'Set', value: data.teams2 });
-                dispatchWarDefense2({ type: 'Set', value: data.warDefense2 });
-                dispatchWarOffense2({ type: 'Set', value: data.warOffense2 });
-                dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
-                dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
-                dispatchAutoTeamsPreferences({ type: 'Set', value: data.autoTeamsPreferences });
-                dispatchSelectedTeamsOrder({ type: 'Set', value: data.selectedTeamOrder });
-                dispatchLeSelectedTeams({ type: 'Set', value: data.leSelectedTeams });
-                dispatchLeProgress({ type: 'Set', value: data.leProgress });
-                dispatchLeSettings({ type: 'Set', value: data.leSettings });
-                dispatchCampaignsProgress({ type: 'Set', value: data.campaignsProgress });
-                dispatchInventory({ type: 'Set', value: data.inventory });
-                dispatchDailyRaids({ type: 'Set', value: data.dailyRaids });
-                dispatchGuildWar({ type: 'Set', value: data.guildWar });
-                dispatchGuild({ type: 'Set', value: data.guild });
-                dispatchXpIncome({ type: 'Set', value: data.xpIncome });
-                dispatchXpUse({ type: 'Set', value: data.xpUse });
-                dispatchRosterSnapshots({ type: 'Set', value: data.rosterSnapshots });
-                dispatchGameModeTokens({ type: 'Set', value: data.gameModeTokens });
-
-                if (modified) {
-                    setModified(true);
-                    setModifiedDate(data.modifiedDate);
-                }
-
-                if (reset) {
-                    setModifiedDate(undefined);
-                }
-                setGlobalState(data);
+                // Only update if incoming version is newer
+                setGlobalState(current => {
+                    const incomingVersion = data.__localVersion ?? 0;
+                    const currentVersion = current.__localVersion ?? 0;
+                    if (incomingVersion > currentVersion) {
+                        dispatchCharacters({ type: 'Set', value: data.characters });
+                        dispatchMows({ type: 'Set', value: data.mows });
+                        dispatchGoals({ type: 'Set', value: data.goals });
+                        dispatchTeams({ type: 'Set', value: data.teams });
+                        dispatchTeams2({ type: 'Set', value: data.teams2 });
+                        dispatchWarDefense2({ type: 'Set', value: data.warDefense2 });
+                        dispatchWarOffense2({ type: 'Set', value: data.warOffense2 });
+                        dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
+                        dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
+                        dispatchAutoTeamsPreferences({ type: 'Set', value: data.autoTeamsPreferences });
+                        dispatchSelectedTeamsOrder({ type: 'Set', value: data.selectedTeamOrder });
+                        dispatchLeSelectedTeams({ type: 'Set', value: data.leSelectedTeams });
+                        dispatchLeProgress({ type: 'Set', value: data.leProgress });
+                        dispatchLeSettings({ type: 'Set', value: data.leSettings });
+                        dispatchCampaignsProgress({ type: 'Set', value: data.campaignsProgress });
+                        dispatchInventory({ type: 'Set', value: data.inventory });
+                        dispatchDailyRaids({ type: 'Set', value: data.dailyRaids });
+                        dispatchGuildWar({ type: 'Set', value: data.guildWar });
+                        dispatchGuild({ type: 'Set', value: data.guild });
+                        dispatchXpIncome({ type: 'Set', value: data.xpIncome });
+                        dispatchXpUse({ type: 'Set', value: data.xpUse });
+                        dispatchRosterSnapshots({ type: 'Set', value: data.rosterSnapshots });
+                        dispatchGameModeTokens({ type: 'Set', value: data.gameModeTokens });
+                        if (modified) {
+                            setModified(true);
+                            setModifiedDate(data.modifiedDate);
+                        }
+                        if (reset) {
+                            setModifiedDate(undefined);
+                        }
+                        return { ...data, __localVersion: incomingVersion };
+                    }
+                    return current;
+                });
             },
             seenAppVersion: wrapDispatch(setSeenAppVersion),
         }),
@@ -268,6 +283,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchRosterSnapshots,
             dispatchGameModeTokens,
             setGlobalState,
+            localVersion,
         ]
     );
 
@@ -275,7 +291,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         if (!modified) {
             return;
         }
-
+        // Increment and persist localVersion on every state change
+        const nextVersion = localVersion + 1;
+        localStorage.setItem(LOCAL_VERSION_KEY, nextVersion.toString());
+        setLocalVersion(nextVersion);
         const newValue: IGlobalState = {
             characters,
             mows,
@@ -302,13 +321,12 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpUse,
             rosterSnapshots,
             gameModeTokens,
+            __localVersion: nextVersion,
         };
         const storeValue = GlobalState.toStore(newValue);
-
-        setGlobalState(newValue);
+        setGlobalState({ ...newValue, __localVersion: nextVersion });
         localStore.setData(storeValue);
         setModified(false);
-
         if (isAuthenticated) {
             clearTimeout(saveTimeoutReference.current);
             saveTimeoutReference.current = setTimeout(() => {
@@ -345,6 +363,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         warOffense2,
         xpIncome,
         xpUse,
+        localVersion,
     ]);
 
     useEffect(() => {
