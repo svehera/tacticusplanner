@@ -358,7 +358,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                     items listed in the table below
                                 </div>
 
-                                <div className="flex-grow">
+                                <div className="grow">
                                     {viewPreferences.raidsTableView === true ? (
                                         <div className="ag-theme-material flex h-[600px] w-full flex-col">
                                             <MaterialsTable
