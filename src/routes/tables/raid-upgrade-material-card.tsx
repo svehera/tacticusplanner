@@ -1,5 +1,4 @@
-import Info from '@mui/icons-material/Info';
-import React, { useMemo, Suspense, lazy, useState, memo } from 'react';
+import React, { useMemo, Suspense, lazy, memo } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
@@ -43,8 +42,6 @@ const Component: React.FC<Props> = ({
     maxLocations = 4,
     upgradeEstimate,
 }) => {
-    const [showEstimates, setShowEstimates] = useState(false);
-    const handleInfoClick = () => setShowEstimates(v => !v);
     const isShard = upgradeEstimate.rarity === 'Shard';
     const isMythicShard = upgradeEstimate.rarity === 'Mythic Shard';
 
@@ -112,7 +109,7 @@ const Component: React.FC<Props> = ({
     const characterIconHeight = 24;
 
     return (
-        <div className="flex h-full flex-col rounded-lg border border-gray-700 bg-gray-900 p-3 shadow-lg">
+        <div className="flex h-full flex-col justify-between rounded-lg border border-gray-700 bg-gray-900 p-3 shadow-lg">
             <div className="flex w-full flex-row items-start!">
                 {/* Left: Icon, quantity */}
                 <div className="flex h-full w-14 shrink-0 flex-col items-center justify-start gap-1">
@@ -124,21 +121,11 @@ const Component: React.FC<Props> = ({
                 </div>
 
                 {/* Right: Content */}
-                <div className="flex h-full min-w-0 flex-1 flex-col justify-start gap-1 pl-2">
+                <div className="flex h-full min-w-0 flex-1 flex-col justify-start gap-2 pl-2">
                     <div className="flex items-center justify-between gap-1">
                         <h4 className="mb-0 truncate text-xs font-normal text-gray-200">
                             {name ?? upgradeEstimate.snowprintId}
                         </h4>
-                        {showAdditionalInfo && (
-                            <button
-                                type="button"
-                                className="flex items-center justify-center rounded-full p-0.5 hover:bg-gray-700 focus:outline-none"
-                                onClick={handleInfoClick}
-                                aria-label="Show estimates info"
-                                style={{ lineHeight: 0 }}>
-                                <Info fontSize="small" className="size-4 align-middle text-blue-400" />
-                            </button>
-                        )}
                     </div>
                     {showRelatedCharacters && (
                         <div className="flex min-h-7 flex-row items-center gap-1">
@@ -162,7 +149,7 @@ const Component: React.FC<Props> = ({
                 </div>
             </div>
             {/* Estimates row at the bottom of the card */}
-            {showAdditionalInfo && showEstimates && (
+            {showAdditionalInfo && (
                 <div className="mt-2">
                     <Suspense fallback={undefined}>
                         <MaterialEstimatesRow estimate={upgradeEstimate} />

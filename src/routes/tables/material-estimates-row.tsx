@@ -35,7 +35,7 @@ const MaterialEstimatesRow: React.FC<MaterialEstimatesRowProps> = ({ estimate })
             </AccessibleTooltip>
             <AccessibleTooltip title="Total raids required">
                 <span className="inline-flex items-center gap-1 whitespace-nowrap">
-                    <MiscIcon icon="guildRaidToken" width={iconSize} height={iconSize} className="opacity-80" />
+                    <MiscIcon icon="raidToken" width={iconSize} height={iconSize} className="opacity-80" />
                     <span className="text-xs font-medium text-gray-700 dark:text-gray-300">{estimate.raidsTotal}</span>
                 </span>
             </AccessibleTooltip>
