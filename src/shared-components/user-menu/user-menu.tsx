@@ -120,7 +120,17 @@ export const UserMenu = () => {
                 const personalData: IPersonalData2 = convertData(JSON.parse(content));
                 personalData.modifiedDate = new Date();
 
-                dispatch.setStore(new GlobalState(personalData), true, false);
+                // When we import JSON, we need to bump the local version to ensure
+                // we pick it up. It should always be considered the freshest data, and
+                // definitely fresher than what we have in the backend.
+                dispatch.setStore(
+                    {
+                        ...new GlobalState(personalData),
+                        __localVersion: store.__localVersion ? store.__localVersion + 1 : 1,
+                    },
+                    /*modified=*/ true,
+                    /*reset=*/ false
+                );
                 enqueueSnackbar('Import successful', { variant: 'success' });
             } catch {
                 enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
