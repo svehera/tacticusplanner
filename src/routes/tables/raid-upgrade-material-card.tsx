@@ -174,7 +174,7 @@ const Component: React.FC<Props> = ({
                     <div className="mt-2 flex h-10 w-10 items-center justify-center">{icon}</div>
                     <span
                         className={`mt-1 py-0.5 text-sm font-bold ${
-                            noSuggestedRaidsRemaining
+                            noSuggestedRaidsRemaining || showPlannedRaidLocationsOnly
                                 ? 'text-gray-400'
                                 : isSufficient
                                   ? 'text-green-400'
