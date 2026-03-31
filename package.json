@@ -16,7 +16,7 @@
         "ag-grid-community": "^33.3.2",
         "ag-grid-react": "^33.3.2",
         "analytics": "^0.8.19",
-        "axios": "^1.13.2",
+        "axios": "1.13.2",
         "clsx": "^2.1.1",
         "i18next": "^24.2.3",
         "immer": "^11.1.3",
