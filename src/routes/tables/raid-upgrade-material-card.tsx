@@ -176,9 +176,11 @@ const Component: React.FC<Props> = ({
                         className={`mt-1 py-0.5 text-sm font-bold ${
                             noSuggestedRaidsRemaining
                                 ? 'text-gray-400'
-                                : isSufficient
-                                  ? 'text-green-400'
-                                  : 'text-red-400'
+                                : showPlannedRaidLocationsOnly
+                                  ? 'text-gray-200'
+                                  : isSufficient
+                                    ? 'text-green-400'
+                                    : 'text-red-400'
                         }`}>
                         {flooredAcquiredCount}/{upgradeEstimate.requiredCount}
                     </span>
@@ -189,7 +191,7 @@ const Component: React.FC<Props> = ({
                     <div className="flex items-center justify-between gap-1">
                         <h4
                             className={`mb-0 truncate text-xs font-normal ${
-                                noSuggestedRaidsRemaining ? 'text-gray-500' : 'text-gray-200'
+                                noSuggestedRaidsRemaining ? 'text-gray-400' : 'text-gray-200'
                             }`}>
                             {name ?? upgradeEstimate.snowprintId}
                         </h4>
