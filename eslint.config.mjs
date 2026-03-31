@@ -1,8 +1,10 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import convexPlugin from '@convex-dev/eslint-plugin';
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
+import queryPlugin from '@tanstack/eslint-plugin-query';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import { defineConfig, globalIgnores } from 'eslint/config';
@@ -62,6 +64,8 @@ export default defineConfig([
             ],
         },
     },
+    ...convexPlugin.configs.recommended,
+    ...queryPlugin.configs['flat/recommended'],
     ...compat.extends(
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
