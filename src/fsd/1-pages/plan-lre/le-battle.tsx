@@ -37,10 +37,7 @@ const resolveEnemy = (enemyString: string): ResolvedEnemyData | undefined => {
     // Adjust for 0-based array (Your logic used -1, keeping that consistency)
     const arrayIndex = progressionIndex > 0 ? progressionIndex - 1 : 0;
 
-    console.log('Resolving enemy:', enemyString, 'to id:', id, 'at index:', arrayIndex);
     const npc = NpcService.getNpcById(id);
-
-    console.log('Resolved NPC:', npc);
 
     if (!npc || arrayIndex >= npc.stats.length) return;
 
@@ -163,12 +160,12 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                             <img
                                 src={
                                     new URL(
-                                        `../../../assets/images/snowprint_assets/le_maps/${battle.mapId}_Visual.jpg`,
+                                        `../../../assets/images/snowprint_assets/le_maps/${battle.mapId}.jpg`,
                                         import.meta.url
                                     ).href
                                 }
                                 alt={`Map for Battle ${battle.number}`}
-                                className="h-auto w-full object-cover"
+                                className="h-auto w-[512px] object-cover"
                             />
                         </div>
                     )}
