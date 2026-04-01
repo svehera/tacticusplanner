@@ -1,4 +1,5 @@
-﻿import AddIcon from '@mui/icons-material/Add';
+﻿import { useUser } from '@clerk/clerk-react';
+import AddIcon from '@mui/icons-material/Add';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { Badge, Fab, Tab, Tabs } from '@mui/material';
@@ -60,7 +61,8 @@ const handleViewOriginal = (teamId: number | undefined) => {
 
 export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);
-    const { userInfo, isAuthenticated } = useAuth();
+    const { userInfo } = useAuth();
+    const { isSignedIn } = useUser();
     const [_, setSearchParameters] = useContext(SearchParametersStateContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
@@ -508,7 +510,7 @@ export const Guides: React.FC = () => {
         <div>
             <div className="flex-box gap10">
                 <Fab
-                    disabled={!isAuthenticated}
+                    disabled={!isSignedIn}
                     variant="extended"
                     size="small"
                     color="primary"
@@ -557,8 +559,8 @@ export const Guides: React.FC = () => {
                 scrollButtons="auto"
                 aria-label="scrollable auto tabs example">
                 <Tab label="All" />
-                <Tab label="Honored" disabled={!isAuthenticated} />
-                <Tab label="My Teams" disabled={!isAuthenticated} />
+                <Tab label="Honored" disabled={!isSignedIn} />
+                <Tab label="My Teams" disabled={!isSignedIn} />
                 {isModerator && <Tab label="Pending" />}
                 {isModerator && <Tab label="Rejected" />}
             </Tabs>

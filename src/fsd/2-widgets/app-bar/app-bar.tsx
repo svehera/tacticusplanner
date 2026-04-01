@@ -29,8 +29,6 @@ import {
     planSubMenuWeb,
     // eslint-disable-next-line import-x/no-internal-modules
 } from '@/models/menu-items'; // TODO refactor for FSD
-// eslint-disable-next-line import-x/no-internal-modules
-import { UserMenu } from '@/shared-components/user-menu/user-menu'; // TODO refactor for FSD
 
 import {
     FlexBox,

@@ -1,85 +1,44 @@
-﻿import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
-import DownloadIcon from '@mui/icons-material/Download';
+﻿import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from '@clerk/clerk-react';
+import { convexQuery } from '@convex-dev/react-query';
+import { Computer as ComputerIcon, Smartphone as PhoneIcon, Settings } from '@mui/icons-material';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
-import RegisterIcon from '@mui/icons-material/PersonAdd';
-import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SyncIcon from '@mui/icons-material/Sync';
 import UploadIcon from '@mui/icons-material/Upload';
-import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
+import { Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import Box from '@mui/material/Box';
 import ListItemText from '@mui/material/ListItemText';
+import { useQuery } from '@tanstack/react-query';
 import { enqueueSnackbar } from 'notistack';
 import { ChangeEvent, useContext, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { usePopupManager } from 'react-popup-manager';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { api } from '@/convex-api';
 import { GlobalState } from 'src/models/global-state';
 import { IPersonalData2 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { convertData, PersonalDataLocalStorage } from 'src/services';
+import { convertData } from 'src/services';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
 
-import { useAuth, UserRole } from '@/fsd/5-shared/model';
 import { usePopUpControls } from '@/fsd/5-shared/ui';
 
 import { TacticusIntegrationDialog } from '@/fsd/3-features/tacticus-integration/tacticus-integration.dialog';
-
-import { LoginUserDialog } from './login-user-dialog';
-import { OverrideDataDialog } from './override-data-dialog';
-import { RegisterUserDialog } from './register-user-dialog';
-import { RestoreBackupDialog } from './restore-backup-dialog';
-
-function stringToColor(string: string) {
-    let hash = 0;
-    let index;
-
-    for (index = 0; index < string.length; index += 1) {
-        const character = string.codePointAt(index);
-        if (!character) throw new Error('invalid codePoint');
-        hash = character + ((hash << 5) - hash);
-    }
-
-    let color = '#';
-
-    for (index = 0; index < 3; index += 1) {
-        const value = (hash >> (index * 8)) & 0xff;
-        color += `00${value.toString(16)}`.slice(-2);
-    }
-
-    return color;
-}
-
-function stringAvatar(name: string) {
-    return {
-        sx: {
-            width: 32,
-            height: 32,
-            bgcolor: stringToColor(name),
-        },
-        children: `${name.slice(0, 2)}`,
-    };
-}
 
 export const UserMenu = () => {
     const store = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const popupManager = usePopupManager();
-    const { isAuthenticated, logout, username, userInfo } = useAuth();
     const [showAdminTools, setShowAdminTools] = useState(false);
     const inputReference = useRef<HTMLInputElement>(null);
-    const [showRegisterUser, setShowRegisterUser] = useState(false);
-    const [showLoginUser, setShowLoginUser] = useState(false);
-    const [showRestoreBackup, setShowRestoreBackup] = useState(false);
-    const [showOverrideDataWarning, setShowOverrideDataWarning] = useState(false);
     const userMenuControls = usePopUpControls();
     const navigate = useNavigate();
     const location = useLocation();
     const isDesktopView = !location.pathname.includes('mobile');
-    const hasRejectedGuides = userInfo.rejectedTeamsCount > 0;
+    const { isSignedIn } = useUser();
+    const { data } = useQuery(convexQuery(api.legacy_data.getLegacyData));
+    const hasRejectedGuides = data && data.rejectedTeamsCount > 0;
 
     const navigateToDesktopView = () => {
         localStorage.setItem('preferredView', 'desktop');
@@ -94,7 +53,7 @@ export const UserMenu = () => {
     const navigateToReviewTeams = () => {
         let tabId = 2;
 
-        if (userInfo.pendingTeamsCount > 0) {
+        if (data?.pendingTeamsCount) {
             tabId = 3;
         }
 
@@ -138,59 +97,11 @@ export const UserMenu = () => {
         }
     };
 
-    const downloadJson = () => {
-        const data = GlobalState.toStore(store);
-        const jsonData = JSON.stringify(data, undefined, 2);
-
-        const blob = new Blob([jsonData], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-
-        const link = document.createElement('a');
-        link.href = url;
-        const dateTimestamp =
-            typeof data.modifiedDate === 'string' ? data.modifiedDate : data.modifiedDate?.toISOString();
-        const date = new Date(dateTimestamp ?? '');
-
-        const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-        };
-        const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(date);
-        const realUsername = isAuthenticated ? username : (localStorage.getItem('userOld') ?? username);
-
-        link.download = `${realUsername}-data-${formattedDate}.json`;
-        link.click();
-
-        URL.revokeObjectURL(url);
-    };
-
-    const restoreData = () => {
-        const localStorage = new PersonalDataLocalStorage();
-        const restoredData = localStorage.restoreData();
-        if (restoredData) {
-            setShowRestoreBackup(true);
-        } else {
-            enqueueSnackbar('No Backup Found', { variant: 'error' });
-        }
-    };
-
-    const openLoginForm = () => {
-        const hasAnyChanges = !!store.modifiedDate;
-        if (hasAnyChanges) {
-            setShowOverrideDataWarning(true);
-        } else {
-            setShowLoginUser(true);
-        }
-    };
-
     function syncWithTacticus(): void {
         popupManager.open(TacticusIntegrationDialog, {
-            tacticusApiKey: userInfo.tacticusApiKey,
-            tacticusUserId: userInfo.tacticusUserId,
-            tacticusGuildApiKey: userInfo.tacticusGuildApiKey,
+            tacticusApiKey: data?.tacticusApiKey ?? '',
+            tacticusUserId: data?.tacticusUserId ?? '',
+            tacticusGuildApiKey: data?.tacticusGuildApiKey ?? '',
             onClose: () => {},
         });
     }
@@ -199,7 +110,6 @@ export const UserMenu = () => {
         <Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
             <input ref={inputReference} className="hidden" type="file" accept=".json" onChange={handleFileUpload} />
             <div className="flex items-center">
-                <span className="text-base font-bold">Hi, {username}</span>
                 <IconButton
                     onClick={userMenuControls.handleClick}
                     size="small"
@@ -207,12 +117,14 @@ export const UserMenu = () => {
                     aria-controls={userMenuControls.open ? 'account-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={userMenuControls.open ? 'true' : undefined}>
-                    {isAuthenticated ? (
-                        <Avatar {...stringAvatar(username)}></Avatar>
-                    ) : (
-                        <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
-                    )}
+                    <Settings />
                 </IconButton>
+                <SignedIn>
+                    <UserButton />
+                </SignedIn>
+                <SignedOut>
+                    <SignInButton />
+                </SignedOut>
             </div>
             <Menu
                 anchorEl={userMenuControls.anchorEl}
@@ -222,32 +134,7 @@ export const UserMenu = () => {
                 onClick={userMenuControls.handleClose}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-                {isAuthenticated ? (
-                    <MenuItem onClick={() => logout()}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText>Logout</ListItemText>
-                    </MenuItem>
-                ) : (
-                    <div>
-                        <MenuItem onClick={() => openLoginForm()}>
-                            <ListItemIcon>
-                                <LoginIcon />
-                            </ListItemIcon>
-                            <ListItemText>Login</ListItemText>
-                        </MenuItem>
-                        <MenuItem onClick={() => setShowRegisterUser(true)}>
-                            <ListItemIcon>
-                                <RegisterIcon />
-                            </ListItemIcon>
-                            <ListItemText>Register</ListItemText>
-                        </MenuItem>
-                    </div>
-                )}
-
-                <Divider />
-                {isAuthenticated && (
+                {isSignedIn && (
                     <MenuItem onClick={syncWithTacticus}>
                         <ListItemIcon>
                             <SyncIcon />
@@ -261,19 +148,6 @@ export const UserMenu = () => {
                         <UploadIcon />
                     </ListItemIcon>
                     <ListItemText>Import JSON</ListItemText>
-                </MenuItem>
-                <MenuItem onClick={() => downloadJson()}>
-                    <ListItemIcon>
-                        <DownloadIcon />
-                    </ListItemIcon>
-                    <ListItemText>Export JSON</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem onClick={() => restoreData()}>
-                    <ListItemIcon>
-                        <SettingsBackupRestoreIcon />
-                    </ListItemIcon>
-                    <ListItemText>Restore Backup</ListItemText>
                 </MenuItem>
 
                 <Divider />
@@ -295,7 +169,7 @@ export const UserMenu = () => {
 
                 <Divider />
 
-                {[UserRole.admin, UserRole.moderator].includes(userInfo.role) && (
+                {data?.role && ['admin', 'moderator'].includes(data.role) && (
                     <MenuItem onClick={() => setShowAdminTools(true)}>
                         <ListItemIcon>
                             <SupervisorAccountIcon />
@@ -308,35 +182,17 @@ export const UserMenu = () => {
                     <ListItemIcon>
                         <GroupWorkIcon />
                     </ListItemIcon>
-                    {userInfo.rejectedTeamsCount > 0 ? (
-                        <Badge badgeContent={userInfo.rejectedTeamsCount} color="error">
+                    {data && data.rejectedTeamsCount > 0 ? (
+                        <Badge badgeContent={data.rejectedTeamsCount} color="error">
                             <ListItemText>Review guides</ListItemText>
                         </Badge>
                     ) : (
-                        <Badge badgeContent={userInfo.pendingTeamsCount} color="warning">
+                        <Badge badgeContent={0} color="warning">
                             <ListItemText>Review guides</ListItemText>
                         </Badge>
                     )}
                 </MenuItem>
             </Menu>
-            <RegisterUserDialog
-                isOpen={showRegisterUser}
-                onClose={success => {
-                    setShowRegisterUser(false);
-                    setShowLoginUser(success);
-                }}
-            />
-            <LoginUserDialog isOpen={showLoginUser} onClose={() => setShowLoginUser(false)} />
-            <RestoreBackupDialog isOpen={showRestoreBackup} onClose={() => setShowRestoreBackup(false)} />
-            <OverrideDataDialog
-                isOpen={showOverrideDataWarning}
-                onClose={(proceed: boolean) => {
-                    setShowOverrideDataWarning(false);
-                    if (proceed) {
-                        setShowLoginUser(true);
-                    }
-                }}
-            />
             <AdminToolsDialog
                 isOpen={showAdminTools}
                 onClose={() => {

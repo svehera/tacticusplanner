@@ -1,9 +1,11 @@
-﻿import React, { useContext } from 'react';
+﻿import { SignIn, useAuth } from '@clerk/clerk-react';
+import { convexQuery } from '@convex-dev/react-query';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
 
+import { api } from '@/convex-api';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { StoreContext } from '@/reducers/store.provider';
-
-import { useAuth } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { TacticusGuildVisualization } from '@/fsd/3-features/tacticus-integration/guild-overview';
@@ -14,13 +16,18 @@ import { mapUserIdToName } from '@/fsd/3-features/tacticus-integration/user-id-m
 
 export const GuildApi: React.FC = () => {
     const { guild } = useContext(StoreContext);
-    const { userInfo } = useAuth();
+    const { isSignedIn } = useAuth();
+    const query = useQuery(convexQuery(api.legacy_data.getLegacyData));
     const guildMembers = [...guild.members];
 
-    if (!guildMembers.some(x => x.userId == userInfo.tacticusUserId)) {
+    if (!isSignedIn) return <SignIn />;
+    if (query.isPending) return 'Loading...';
+    if (query.isError) return 'Error Loading Data';
+
+    if (!guildMembers.some(x => x.userId == query.data.tacticusUserId)) {
         guildMembers.push({
-            userId: userInfo.tacticusUserId,
-            username: userInfo.username,
+            userId: query.data.tacticusUserId,
+            username: query.data.username ?? '',
             shareToken: '',
             index: -1,
         });
